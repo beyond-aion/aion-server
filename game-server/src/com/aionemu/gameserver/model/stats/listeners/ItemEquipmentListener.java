@@ -2,17 +2,12 @@ package com.aionemu.gameserver.model.stats.listeners;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
 
-import org.slf4j.LoggerFactory;
-
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.enchants.TemperingEffect;
-import com.aionemu.gameserver.model.enchants.TemperingStat;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.IdianStone;
@@ -60,7 +55,6 @@ public class ItemEquipmentListener {
 		if (item.getBuffSkill() != 0) {
 			SkillTemplate buffSkill = DataManager.SKILL_DATA.getSkillTemplate(item.getBuffSkill());
 			SkillLearnService.learnTemporarySkill(owner, item.getBuffSkill(), 1);
-			Map<Integer, Long> coolDowns = new HashMap<>();
 			long currTime = System.currentTimeMillis();
 			long oldCooldown = owner.getSkillCoolDown(buffSkill.getCooldownId());
 			long newCooldown;
@@ -69,33 +63,18 @@ public class ItemEquipmentListener {
 			else
 				newCooldown = currTime + 15000;
 			owner.setSkillCoolDown(buffSkill.getCooldownId(), newCooldown);
-			coolDowns.put(buffSkill.getCooldownId(), newCooldown);
-			PacketSendUtility.sendPacket(owner, new SM_SKILL_COOLDOWN(coolDowns));
+			PacketSendUtility.sendPacket(owner, new SM_SKILL_COOLDOWN(buffSkill.getSkillId(), newCooldown));
 		}
 		forEachBonusStats(bonusStats -> bonusStats.applyEffect(owner), item.getBonusStatsEffect(), item.getFusionedItemBonusStatsEffect());
 		if (item.getConditioningInfo() != null) {
 			owner.getObserveController().addObserver(item.getConditioningInfo());
 			item.getConditioningInfo().setPlayer(owner);
 		}
-		int enchantLevel = item.getEnchantLevel();
-		int temperingLevel = item.getTempering();
-		if (enchantLevel > 0)
-			EnchantService.applyEnchantEffect(item, owner, enchantLevel);
-		if (temperingLevel > 0) {
-			if (item.getItemTemplate().getItemGroup() == ItemGroup.PLUME) {
-				item.setTemperingEffect(new TemperingEffect(owner, item));
-			} else {
-				Map<Integer, List<TemperingStat>> tempering = DataManager.TEMPERING_DATA.getTemplates(itemTemplate);
-				if (tempering != null) {
-					List<TemperingStat> temperingStats = tempering.get(temperingLevel);
-					if (temperingStats != null)
-						item.setTemperingEffect(new TemperingEffect(owner, temperingStats));
-					else
-						LoggerFactory.getLogger(ItemEquipmentListener.class)
-							.warn("Missing tempering effect info for item " + itemTemplate.getTemplateId() + " on +" + temperingLevel);
-				}
-			}
-		}
+		if (item.getEnchantLevel() > 0)
+			EnchantService.applyEnchantEffect(item, owner, item.getEnchantLevel());
+		if (item.getTempering() > 0)
+			TemperingEffect.apply(owner, item);
+		owner.getGameStats().updateArmorMasteryStats(owner.getEquipment().getEquippedItems());
 	}
 
 	private static void forEachBonusStats(Consumer<RandomBonusEffect> action, RandomBonusEffect... bonusStatsEffects) {
@@ -138,6 +117,7 @@ public class ItemEquipmentListener {
 		}
 		if (item.getBuffSkill() != 0)
 			SkillLearnService.removeSkill(owner, item.getBuffSkill());
+		owner.getGameStats().updateArmorMasteryStats(owner.getEquipment().getEquippedItems());
 	}
 
 	private static void addWeaponStats(Item item, CreatureGameStats<?> cgs) {

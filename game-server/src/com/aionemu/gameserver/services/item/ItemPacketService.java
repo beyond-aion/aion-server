@@ -1,18 +1,12 @@
 package com.aionemu.gameserver.services.item;
 
 import java.util.Collections;
+import java.util.Objects;
 
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.storage.StorageType;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_CUBE_UPDATE;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_DELETE_ITEM;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_DELETE_WAREHOUSE_ITEM;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_INVENTORY_ADD_ITEM;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_INVENTORY_UPDATE_ITEM;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_LEGION_EDIT;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_WAREHOUSE_ADD_ITEM;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_WAREHOUSE_UPDATE_ITEM;
+import com.aionemu.gameserver.network.aion.serverpackets.*;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
@@ -30,7 +24,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class ItemPacketService {
 
-	public static enum ItemUpdateType {
+	public enum ItemUpdateType {
 		EQUIP_UNEQUIP(-1, false), // internal usage only
 		CHARGE(-2, false), // internal usage only
 		POLISH_CHARGE(-3, false), // internal usage only
@@ -61,7 +55,7 @@ public class ItemPacketService {
 		private final int mask;
 		private final boolean sendable;
 
-		private ItemUpdateType(int mask, boolean sendable) {
+		ItemUpdateType(int mask, boolean sendable) {
 			this.mask = mask;
 			this.sendable = sendable;
 		}
@@ -77,16 +71,12 @@ public class ItemPacketService {
 		public static ItemUpdateType getKinahUpdateTypeFromAddType(ItemAddType itemAddType, boolean isIncrease) {
 			if (!isIncrease)
 				return ItemUpdateType.DEC_KINAH_BUY;
-			switch (itemAddType) {
-				case BUY:
-					return ItemUpdateType.INC_KINAH_SELL;
-				case ITEM_COLLECT:
-					return ItemUpdateType.INC_KINAH_COLLECT;
-				case QUEST_WORK_ITEM:
-					return ItemUpdateType.INC_KINAH_QUEST;
-				default:
-					return ItemUpdateType.INC_KINAH_MERGE;
-			}
+			return switch (itemAddType) {
+				case BUY -> ItemUpdateType.INC_KINAH_SELL;
+				case ITEM_COLLECT -> ItemUpdateType.INC_KINAH_COLLECT;
+				case QUEST_WORK_ITEM -> ItemUpdateType.INC_KINAH_QUEST;
+				default -> ItemUpdateType.INC_KINAH_MERGE;
+			};
 		}
 	}
 
@@ -112,7 +102,7 @@ public class ItemPacketService {
 
 		private final int mask;
 
-		private ItemAddType(int mask) {
+		ItemAddType(int mask) {
 			this.mask = mask;
 		}
 
@@ -121,8 +111,8 @@ public class ItemPacketService {
 		}
 	}
 
-	public static enum ItemDeleteType {
-		QUEST_REWARD(0),
+	public enum ItemDeleteType {
+		DEFAULT(0),
 		SPLIT(0x04),
 		MOVE(0x14),
 		DISCARD(0x15),
@@ -136,7 +126,7 @@ public class ItemPacketService {
 
 		private final int mask;
 
-		private ItemDeleteType(int mask) {
+		ItemDeleteType(int mask) {
 			this.mask = mask;
 		}
 
@@ -144,46 +134,37 @@ public class ItemPacketService {
 			return mask;
 		}
 
-		public static final ItemDeleteType fromUpdateType(ItemUpdateType updateType) {
-			switch (updateType) {
-				case DEC_ITEM_SPLIT:
-					return SPLIT;
-				case DEC_ITEM_USE:
-					return USE;
-				case DEC_ITEM_SPLIT_MOVE:
-					return MOVE;
-				default:
-					return QUEST_REWARD;
-			}
+		public static ItemDeleteType fromUpdateType(ItemUpdateType updateType) {
+			return switch (updateType) {
+				case DEC_ITEM_SPLIT -> SPLIT;
+				case DEC_ITEM_USE -> USE;
+				case DEC_ITEM_SPLIT_MOVE -> MOVE;
+				default -> DEFAULT;
+			};
 		}
 
 		public static ItemDeleteType fromQuestStatus(QuestStatus questStatus) {
-			switch (questStatus) {
-				case START:
-					return QUEST_START;
-				case REWARD:
-					return QUEST_REWARD;
-				case COMPLETE:
-					return QUEST_COMPLETE;
-				default:
-					return QUEST_REWARD;
-			}
+			return switch (questStatus) {
+				case START -> QUEST_START;
+				case COMPLETE -> QUEST_COMPLETE;
+				default -> DEFAULT;
+			};
 		}
 	}
 
-	public static final void updateItemAfterInfoChange(Player player, Item item) {
+	public static void updateItemAfterInfoChange(Player player, Item item) {
 		PacketSendUtility.sendPacket(player, new SM_INVENTORY_UPDATE_ITEM(player, item));
 	}
 
-	public static final void updateItemAfterInfoChange(Player player, Item item, ItemUpdateType updateType) {
+	public static void updateItemAfterInfoChange(Player player, Item item, ItemUpdateType updateType) {
 		PacketSendUtility.sendPacket(player, new SM_INVENTORY_UPDATE_ITEM(player, item, updateType));
 	}
 
-	public static final void updateItemAfterEquip(Player player, Item item) {
+	public static void updateItemAfterEquip(Player player, Item item) {
 		PacketSendUtility.sendPacket(player, new SM_INVENTORY_UPDATE_ITEM(player, item, ItemUpdateType.EQUIP_UNEQUIP));
 	}
 
-	public static final void sendItemPacket(Player player, StorageType storageType, Item item, ItemUpdateType updateType) {
+	public static void sendItemPacket(Player player, StorageType storageType, Item item, ItemUpdateType updateType) {
 		if (item.getItemCount() <= 0 && !item.getItemTemplate().isKinah()) {
 			sendItemDeletePacket(player, storageType, item, ItemDeleteType.fromUpdateType(updateType));
 		} else {
@@ -194,13 +175,11 @@ public class ItemPacketService {
 	/**
 	 * Item will be deleted from UI slot
 	 */
-	public static final void sendItemDeletePacket(Player player, StorageType storageType, Item item, ItemDeleteType deleteType) {
-		switch (storageType) {
-			case CUBE:
-				PacketSendUtility.sendPacket(player, new SM_DELETE_ITEM(item.getObjectId(), deleteType));
-				break;
-			default:
-				PacketSendUtility.sendPacket(player, new SM_DELETE_WAREHOUSE_ITEM(storageType.getId(), item.getObjectId(), deleteType));
+	public static void sendItemDeletePacket(Player player, StorageType storageType, Item item, ItemDeleteType deleteType) {
+		if (Objects.requireNonNull(storageType) == StorageType.CUBE) {
+			PacketSendUtility.sendPacket(player, new SM_DELETE_ITEM(item.getObjectId(), deleteType));
+		} else {
+			PacketSendUtility.sendPacket(player, new SM_DELETE_WAREHOUSE_ITEM(storageType.getId(), item.getObjectId(), deleteType));
 		}
 		PacketSendUtility.sendPacket(player, SM_CUBE_UPDATE.cubeSize(storageType, player));
 	}
@@ -209,7 +188,7 @@ public class ItemPacketService {
 	 * Item will be updated in UI slot (stacked items)
 	 */
 	@SuppressWarnings("fallthrough")
-	public static final void sendItemUpdatePacket(Player player, StorageType storageType, Item item, ItemUpdateType updateType) {
+	public static void sendItemUpdatePacket(Player player, StorageType storageType, Item item, ItemUpdateType updateType) {
 		switch (storageType) {
 			case CUBE:
 				PacketSendUtility.sendPacket(player, new SM_INVENTORY_UPDATE_ITEM(player, item, updateType));
@@ -224,7 +203,7 @@ public class ItemPacketService {
 		}
 	}
 
-	public static final void sendStorageUpdatePacket(Player player, StorageType storageType, Item item) {
+	public static void sendStorageUpdatePacket(Player player, StorageType storageType, Item item) {
 		sendStorageUpdatePacket(player, storageType, item, ItemAddType.ITEM_COLLECT);
 	}
 
@@ -232,7 +211,7 @@ public class ItemPacketService {
 	 * New item will be displayed in storage
 	 */
 	@SuppressWarnings("fallthrough")
-	public static final void sendStorageUpdatePacket(Player player, StorageType storageType, Item item, ItemAddType addType) {
+	public static void sendStorageUpdatePacket(Player player, StorageType storageType, Item item, ItemAddType addType) {
 		switch (storageType) {
 			case CUBE:
 				PacketSendUtility.sendPacket(player, new SM_INVENTORY_ADD_ITEM(Collections.singletonList(item), player, addType));
@@ -248,4 +227,9 @@ public class ItemPacketService {
 		PacketSendUtility.sendPacket(player, SM_CUBE_UPDATE.cubeSize(storageType, player));
 	}
 
+	public static void sendItemUnlockPacket(Player player, Item item) {
+		StorageType storageType = StorageType.getStorageTypeById(item.getItemLocation());
+		if (storageType != null)
+			sendStorageUpdatePacket(player, storageType, item, ItemAddType.ALL_SLOT);
+	}
 }

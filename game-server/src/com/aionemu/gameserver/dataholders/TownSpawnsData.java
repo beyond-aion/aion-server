@@ -1,7 +1,9 @@
 package com.aionemu.gameserver.dataholders;
 
-import java.util.*;
-import java.util.stream.Stream;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlElement;
@@ -24,21 +26,13 @@ public class TownSpawnsData {
 
 	@XmlTransient
 	private final Map<Integer, TownSpawnMap> spawnMapsData = new HashMap<>();
-	private Set<Integer> allNpcIds;
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
-		allNpcIds = new HashSet<>();
-		for (TownSpawnMap map : spawnMap) {
-			Stream<Spawn> spawns = map.getTownSpawns().stream().flatMap(ts -> ts.getTownLevels().stream().flatMap(tl -> tl.getSpawns().stream()));
-			allNpcIds.addAll(spawns.map(Spawn::getNpcId).toList());
+		for (TownSpawnMap map : spawnMap)
 			spawnMapsData.put(map.getMapId(), map);
-		}
 		spawnMap = null;
 	}
 
-	/**
-	 * @return
-	 */
 	public int getSpawnsCount() {
 		int counter = 0;
 		for (TownSpawnMap spawnMap : spawnMapsData.values())
@@ -48,11 +42,6 @@ public class TownSpawnsData {
 		return counter;
 	}
 
-	/**
-	 * @param townId
-	 * @param townLevel
-	 * @return
-	 */
 	public List<Spawn> getSpawns(int townId, int townLevel) {
 		for (TownSpawnMap spawnMap : spawnMapsData.values()) {
 			if (spawnMap.getTownSpawn(townId) != null) {
@@ -70,11 +59,11 @@ public class TownSpawnsData {
 		return 0;
 	}
 
-	/**
-	 * @param npcId
-	 * @return True, if the given npc appears in any of the spawn templates (town level 1-5)
-	 */
-	public boolean containsAnySpawnForNpc(int npcId) {
-		return allNpcIds.contains(npcId);
+	public void addAllNpcIdsToSet(Set<Integer> npcIds) {
+		spawnMapsData.values().stream()
+			.flatMap(map-> map.getTownSpawns().stream())
+			.flatMap(ts -> ts.getTownLevels().stream().flatMap(tl -> tl.getSpawns().stream()))
+			.map(Spawn::getNpcId)
+			.forEach(npcIds::add);
 	}
 }

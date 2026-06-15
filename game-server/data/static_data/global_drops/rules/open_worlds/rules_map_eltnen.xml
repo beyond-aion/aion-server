@@ -1555,4 +1555,26 @@
 			<gd_item id="188053952" /><!-- Elite Legionnaire Armor Box -->
 		</gd_items>
 	</gd_rule>
+	<gd_rule rule_name="Golden Lepharist Insignia" chance="40">
+		<gd_maps>
+			<gd_map map_id="210020000" /><!-- Eltnen -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="211012" /><!-- lepharist assaulter -->
+			<gd_npc npc_id="211021" /><!-- lepharist assaulter -->
+			<gd_npc npc_id="211013" /><!-- lepharist defender -->
+			<gd_npc npc_id="211022" /><!-- lepharist defender -->
+			<gd_npc npc_id="211023" /><!-- assassin -->
+			<gd_npc npc_id="211027" /><!-- assassin -->
+			<gd_npc npc_id="211024" /><!-- lepharist healer -->
+			<gd_npc npc_id="211028" /><!-- lepharist healer -->
+			<gd_npc npc_id="211025" /><!-- sorcerer -->
+			<gd_npc npc_id="211029" /><!-- sorcerer -->
+			<gd_npc npc_id="211030" /><!-- lepharist footsoldier -->
+			<gd_npc npc_id="211031" /><!-- lepharist defense commander-->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="186000046" /><!-- Golden Lepharist Insignia -->
+		</gd_items>
+	</gd_rule>
 </global_rules>

@@ -4,7 +4,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.instancescore.PvPArenaScore;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_AUTO_GROUP;
 import com.aionemu.gameserver.services.AutoGroupService;
-import com.aionemu.gameserver.services.autogroup.AutoGroupUtility;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
@@ -25,22 +24,14 @@ public class AutoPvPFFAInstance extends AutoInstance {
 	}
 
 	@Override
-	public AGQuestion addLookingForParty(LookingForParty lookingForParty) {
-		super.writeLock();
-		try {
-			if (isRegistrationDisabled(lookingForParty) || lookingForParty.getMemberObjectIds().size() > 1
-				|| registeredAGPlayers.size() >= getMaxPlayers()) {
-				return AGQuestion.FAILED;
-			}
-
-			AGPlayer agp = AutoGroupUtility.getNewAutoGroupPlayer(lookingForParty.getLeaderObjId());
-			if (agp == null)
-				return AGQuestion.FAILED;
-			registeredAGPlayers.put(lookingForParty.getLeaderObjId(), agp);
-			return instance == null && registeredAGPlayers.size() == getMaxPlayers() ? AGQuestion.READY : AGQuestion.ADDED;
-		} finally {
-			super.writeUnlock();
+	public synchronized AGQuestion addLookingForParty(LookingForParty lookingForParty) {
+		if (isRegistrationDisabled(lookingForParty) || lookingForParty.getMembers().size() > 1
+			|| registeredAGPlayers.size() >= getMaxPlayers()) {
+			return AGQuestion.FAILED;
 		}
+
+		registeredAGPlayers.putAll(lookingForParty.getMembers());
+		return instance == null && registeredAGPlayers.size() == getMaxPlayers() ? AGQuestion.READY : AGQuestion.ADDED;
 	}
 
 	@Override

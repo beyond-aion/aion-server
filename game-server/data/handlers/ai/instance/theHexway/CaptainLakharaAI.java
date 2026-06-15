@@ -25,7 +25,7 @@ public class CaptainLakharaAI extends SummonerAI {
 	@Override
 	protected void handleIndividualSpawnedSummons(Percentage percent) {
 		getOwner().clearQueuedSkills();
-		getOwner().queueSkill(17497, 65);
+		getOwner().queueSkill(17497, 65, 0);
 		cancelDespawnTask();
 		percent.getSummons().forEach(this::summonNpcWithSmoke);
 		despawnTask = ThreadPoolManager.getInstance().schedule(() -> percent.getSummons().forEach(group -> despawnNpc(group.getNpcId())), 25000);

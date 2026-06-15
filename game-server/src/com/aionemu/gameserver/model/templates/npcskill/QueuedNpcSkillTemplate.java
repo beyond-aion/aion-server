@@ -6,7 +6,11 @@ package com.aionemu.gameserver.model.templates.npcskill;
 public class QueuedNpcSkillTemplate extends NpcSkillTemplate {
 
 	public QueuedNpcSkillTemplate(int id, int lv) {
-		this(id, lv, 0, NpcSkillTargetAttribute.MOST_HATED);
+		this(id, lv, -1);
+	}
+
+	public QueuedNpcSkillTemplate(int id, int lv, int nextSkillTime) {
+		this(id, lv, nextSkillTime, NpcSkillTargetAttribute.MOST_HATED);
 	}
 
 	public QueuedNpcSkillTemplate(int id, int lv, int nextSkillTime, NpcSkillTargetAttribute npcSkillTargetAttribute) {

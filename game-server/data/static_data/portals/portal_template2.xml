@@ -1113,7 +1113,7 @@
 	<portal_use npc_id="880118">
 		<portal_path loc_id="4000511" />
 	</portal_use>
-	
+
 	<!-- Custom -->
 	<portal_use npc_id="730588">
 		<portal_path loc_id="1100106" race="ELYOS" />
@@ -1626,40 +1626,40 @@
 		</portal_path>
 	</portal_dialog>
 	<!-- Cygnea -->
-	<portal_dialog npc_id="805170">
+	<portal_dialog npc_id="805170" teleport_dialog_id="10">
 		<portal_path dialog="104" loc_id="21007062" />
 	</portal_dialog>
-	<portal_dialog npc_id="805172">
+	<portal_dialog npc_id="805172" teleport_dialog_id="10">
 		<portal_path dialog="104" loc_id="21007062" />
 	</portal_dialog>
-	<portal_dialog npc_id="805173">
+	<portal_dialog npc_id="805173" teleport_dialog_id="10">
 		<portal_path dialog="104" loc_id="21007061" />
 	</portal_dialog>
-	<portal_dialog npc_id="805171">
+	<portal_dialog npc_id="805171" teleport_dialog_id="10">
 		<portal_path dialog="104" loc_id="21007061" />
 	</portal_dialog>
-	<portal_dialog npc_id="805166">
+	<portal_dialog npc_id="805166" teleport_dialog_id="10">
 		<portal_path dialog="104" loc_id="21007052" />
 	</portal_dialog>
-	<portal_dialog npc_id="805168">
+	<portal_dialog npc_id="805168" teleport_dialog_id="10">
 		<portal_path dialog="104" loc_id="21007052" />
 	</portal_dialog>
-	<portal_dialog npc_id="805169">
+	<portal_dialog npc_id="805169" teleport_dialog_id="10">
 		<portal_path dialog="104" loc_id="21007051" />
 	</portal_dialog>
-	<portal_dialog npc_id="805167">
+	<portal_dialog npc_id="805167" teleport_dialog_id="10">
 		<portal_path dialog="104" loc_id="21007051" />
 	</portal_dialog>
-	<portal_dialog npc_id="805162">
+	<portal_dialog npc_id="805162" teleport_dialog_id="10">
 		<portal_path dialog="104" loc_id="21007042" />
 	</portal_dialog>
-	<portal_dialog npc_id="805164">
+	<portal_dialog npc_id="805164" teleport_dialog_id="10">
 		<portal_path dialog="104" loc_id="21007042" />
 	</portal_dialog>
-	<portal_dialog npc_id="805163">
+	<portal_dialog npc_id="805163" teleport_dialog_id="10">
 		<portal_path dialog="104" loc_id="21007041" />
 	</portal_dialog>
-	<portal_dialog npc_id="805165">
+	<portal_dialog npc_id="805165" teleport_dialog_id="10">
 		<portal_path dialog="104" loc_id="21007041" />
 	</portal_dialog>
 	<!-- Cygnea to Abyss -->
@@ -1669,40 +1669,40 @@
 		</portal_path>
 	</portal_dialog>
 	<!-- Enshar -->
-	<portal_dialog npc_id="805184">
+	<portal_dialog npc_id="805184" teleport_dialog_id="10">
 		<portal_path dialog="104" loc_id="22008032" />
 	</portal_dialog>
-	<portal_dialog npc_id="805182">
+	<portal_dialog npc_id="805182" teleport_dialog_id="10">
 		<portal_path dialog="104" loc_id="22008032" />
 	</portal_dialog>
-	<portal_dialog npc_id="805185">
+	<portal_dialog npc_id="805185" teleport_dialog_id="10">
 		<portal_path dialog="104" loc_id="22008031" />
 	</portal_dialog>
-	<portal_dialog npc_id="805183">
+	<portal_dialog npc_id="805183" teleport_dialog_id="10">
 		<portal_path dialog="104" loc_id="22008031" />
 	</portal_dialog>
-	<portal_dialog npc_id="805180">
+	<portal_dialog npc_id="805180" teleport_dialog_id="10">
 		<portal_path dialog="104" loc_id="22008022" />
 	</portal_dialog>
-	<portal_dialog npc_id="805178">
+	<portal_dialog npc_id="805178" teleport_dialog_id="10">
 		<portal_path dialog="104" loc_id="22008022" />
 	</portal_dialog>
-	<portal_dialog npc_id="805179">
+	<portal_dialog npc_id="805179" teleport_dialog_id="10">
 		<portal_path dialog="104" loc_id="22008021" />
 	</portal_dialog>
-	<portal_dialog npc_id="805181">
+	<portal_dialog npc_id="805181" teleport_dialog_id="10">
 		<portal_path dialog="104" loc_id="22008021" />
 	</portal_dialog>
-	<portal_dialog npc_id="805176">
+	<portal_dialog npc_id="805176" teleport_dialog_id="10">
 		<portal_path dialog="104" loc_id="22008012" />
 	</portal_dialog>
-	<portal_dialog npc_id="805174">
+	<portal_dialog npc_id="805174" teleport_dialog_id="10">
 		<portal_path dialog="104" loc_id="22008012" />
 	</portal_dialog>
-	<portal_dialog npc_id="805175">
+	<portal_dialog npc_id="805175" teleport_dialog_id="10">
 		<portal_path dialog="104" loc_id="22008011" />
 	</portal_dialog>
-	<portal_dialog npc_id="805177">
+	<portal_dialog npc_id="805177" teleport_dialog_id="10">
 		<portal_path dialog="104" loc_id="22008011" />
 	</portal_dialog>
 	<!-- Enshar to Abyss -->

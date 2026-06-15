@@ -10,6 +10,7 @@ import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.QuestTemplate;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
@@ -17,8 +18,10 @@ import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.services.ClassChangeService;
+import com.aionemu.gameserver.services.DialogService;
 import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.audit.AuditLogger;
 
 /**
  * @author KKnD , orz, avol, Pad
@@ -105,6 +108,17 @@ public class CM_DIALOG_SELECT extends AionClientPacket {
 		}
 
 		if (player.getKnownList().getObject(targetObjectId) instanceof Creature target) {
+			if (target instanceof Npc npc) {
+				boolean isFunctionDialog = DataManager.NPC_DATA.isFunctionDialog(dialogActionId);
+				if (isFunctionDialog && !npc.getObjectTemplate().supportsAction(dialogActionId)) {
+					AuditLogger.log(player, "tried to use unsupported dialog action " + dialogActionName + " on " + npc);
+					return;
+				}
+				if ((isFunctionDialog || dialogActionId < SELECT1) && !DialogService.isInteractionAllowed(player, npc)) {
+					AuditLogger.log(player, "tried to illegally use dialog action " + dialogActionName + " on " + npc);
+					return;
+				}
+			}
 			target.getController().onDialogSelect(dialogActionId, lastPage, player, questId, extendedRewardIndex);
 		}
 	}

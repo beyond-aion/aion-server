@@ -8,10 +8,8 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.item.ItemService;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
@@ -144,23 +142,22 @@ public class AbyssalSplinterInstance extends GeneralInstanceHandler {
 				if (player.getRace() == Race.ELYOS && player.getInventory().getFirstItemByItemId(182209803) == null)
 					ItemService.addItem(player, 182209803, 1);
 				break;
-			case 701593: // Artifact of Protection (Hard Mode)
+			case 701593: { // Artifact of Protection (Hard Mode)
 				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDAbRe_Core_NmdDH_Wakeup());
 				spawn(216960, 329.70886f, 733.8744f, 197.60938f, (byte) 0);
+				int artifactOfProtection = player.getRace() == Race.ELYOS ? 700857 : 700858; // for quest 30255 / 30355
+				spawn(artifactOfProtection, 326.1821f, 766.9640f, 202.1832f, (byte) 100, 79);
 				npc.getController().die();
 				break;
+			}
 			case 700856: // Artifact of Protection (Easy Mode)
 				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDAbRe_Core_NmdD_Wakeup());
 				spawn(216952, 329.70886f, 733.8744f, 197.60938f, (byte) 0);
+				int artifactOfProtection = player.getRace() == Race.ELYOS ? 700857 : 700858; // for quest 30255 / 30355
+				spawn(artifactOfProtection, 326.1821f, 766.9640f, 202.1832f, (byte) 100, 79);
 				npc.getController().die();
 				break;
 		}
-	}
-
-	@Override
-	public boolean onDie(final Player player, Creature lastAttacker) {
-		PacketSendUtility.sendPacket(player, new SM_DIE(player, 8));
-		return true;
 	}
 
 	private void spawnPazuzuFragment() {

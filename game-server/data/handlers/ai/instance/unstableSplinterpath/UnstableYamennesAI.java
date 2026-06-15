@@ -40,8 +40,7 @@ public class UnstableYamennesAI extends AggressiveNpcAI {
 	}
 
 	private void startTasks() {
-		enrageTask = ThreadPoolManager.getInstance()
-			.schedule(() -> getOwner().queueSkill(19098, 55), 600000);
+		enrageTask = ThreadPoolManager.getInstance().schedule(() -> getOwner().queueSkill(19098, 55, 0), 600000);
 		portalTask = ThreadPoolManager.getInstance().schedule(() -> spawnPortals(false), 60000);
 	}
 

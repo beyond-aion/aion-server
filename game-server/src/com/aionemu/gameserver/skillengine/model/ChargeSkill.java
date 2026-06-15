@@ -1,8 +1,8 @@
 package com.aionemu.gameserver.skillengine.model;
 
+import com.aionemu.gameserver.configs.main.SecurityConfig;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.skillengine.properties.Properties.CastState;
 
 /**
@@ -10,12 +10,18 @@ import com.aionemu.gameserver.skillengine.properties.Properties.CastState;
  */
 public class ChargeSkill extends Skill {
 
-	public ChargeSkill(SkillTemplate skillTemplate, Player effector, int skillLevel, Creature firstTarget, ItemTemplate itemTemplate) {
-		super(skillTemplate, effector, skillLevel, firstTarget, null);
+	private final int motionId;
+
+	public ChargeSkill(SkillTemplate skillTemplate, Creature effector, int skillLevel, int motionId, Skill startSkill) {
+		super(skillTemplate, effector, skillLevel, startSkill.getFirstTarget(), null);
+		this.motionId = motionId;
+		setClientHitTime(startSkill.getHitTime());
+		setCastStartTime(startSkill.getCastStartTime());
+		setCastSpeedForAnimationBoostAndChargeSkills(startSkill.getCastSpeedForAnimationBoostAndChargeSkills());
 	}
 
-	@Override
-	public void calculateAndSetCastDuration() {
+	public int getMotionId() {
+		return motionId;
 	}
 
 	@Override
@@ -28,16 +34,11 @@ public class ChargeSkill extends Skill {
 		effector.getObserveController().notifyStartSkillCastObservers(this);
 		effector.setCasting(this);
 		effector.getObserveController().attach(moveListener);
+		// motion boost state from the charge starting time must not get lost
+		if (effector instanceof Player player && player.isHitTimeBoosted(getCastStartTime()))
+			player.setHitTimeBoost(System.currentTimeMillis() + 100, player.getHitTimeBoostCastSpeed());
+		updateHitTime(SecurityConfig.CHECK_ANIMATIONS);
 		endCast();
 		return true;
-	}
-
-	@Override
-	protected void endCast() {
-		super.endCast();
-		if (effector instanceof Player player) {
-			float temporaryAdjustmentFactor = 0.8f; // TODO remove after fixing motion validation (see 1dabdd7)
-			player.setNextSkillUse(System.currentTimeMillis() + (long) (getAnimationTime() * temporaryAdjustmentFactor));
-		}
 	}
 }

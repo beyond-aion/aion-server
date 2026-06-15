@@ -4,12 +4,10 @@ import static com.aionemu.gameserver.model.DialogAction.*;
 
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author VladimirZ
@@ -58,25 +56,25 @@ public class _2600HumongousMalek extends AbstractQuestHandler {
 		if (targetId == 798119) {
 			switch (env.getDialogActionId()) {
 				case QUEST_SELECT:
-					if (var == 0)
-						return sendQuestDialog(env, 1352);
-					return false;
-				case SETPRO1:
 					if (var == 0) {
-						giveQuestItem(env, 182204528, 1);
-						qs.setQuestVarById(0, var + 1);
-						updateQuestStatus(env);
-						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-						return true;
-
+						return sendQuestDialog(env, 1352);
+					} else if (var == 1) {
+						if (player.getInventory().getItemCountByItemId(182204528) > 0) {
+							return sendQuestDialog(env, 1693);
+						} else {
+							giveQuestItem(env, 182204528, 1);
+							return sendQuestDialog(env, 1779);
+						}
 					}
 					return false;
+				case SETPRO1:
+					return defaultCloseDialog(env, 0, 1, 182204528, 1);
 			}
 		} else if (targetId == 700512) {
 			switch (env.getDialogActionId()) {
 				case USE_OBJECT:
 					if (var == 1) {
-						if (player.getInventory().getItemCountByItemId(182204528) == 1) {
+						if (player.getInventory().getItemCountByItemId(182204528) > 0) {
 							removeQuestItem(env, 182204528, 1);
 							spawnForFiveMinutes(215383, player.getWorldMapInstance(), (float) 1140.78, (float) 432.85, (float) 341.0825, (byte) 0);
 							return true;
@@ -87,18 +85,13 @@ public class _2600HumongousMalek extends AbstractQuestHandler {
 		} else if (targetId == 204734) {
 			switch (env.getDialogActionId()) {
 				case QUEST_SELECT:
-					if (var == 1)
+					if ((var == 1) && (player.getInventory().getItemCountByItemId(182204529) > 0)) {
 						return sendQuestDialog(env, 2375);
-					return false;
-				case SELECT_QUEST_REWARD:
-					if (var == 1) {
-						removeQuestItem(env, 182204529, 1);
-						qs.setQuestVarById(0, var + 1);
-						qs.setStatus(QuestStatus.REWARD);
-						updateQuestStatus(env);
-						return sendQuestDialog(env, 5);
+					} else {
+						return sendQuestDialog(env, 2716);
 					}
-					return false;
+				case SELECT_QUEST_REWARD:
+					return removeQuestItem(env, 182204529, 1) && defaultCloseDialog(env, 1, 1, true, true);
 			}
 		}
 		return false;

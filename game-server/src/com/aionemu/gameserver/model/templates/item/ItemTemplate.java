@@ -123,7 +123,7 @@ public class ItemTemplate extends VisibleObjectTemplate {
 	@XmlElement(name = "improve")
 	private Improvement improvement;
 	@XmlElement(name = "uselimits")
-	private ItemUseLimits useLimits = new ItemUseLimits();
+	private ItemUseLimits useLimits;
 	@XmlElement(name = "inventory")
 	private ExtraInventory extraInventory;
 	@XmlElement(name = "idian")
@@ -134,6 +134,7 @@ public class ItemTemplate extends VisibleObjectTemplate {
 	private ExceedEnchantSkillSetType exceedEnchantSkill;
 
 	private static final WeaponStats emptyWeaponStats = new WeaponStats();
+	private static final ItemUseLimits emptyUseLimits = new ItemUseLimits();
 
 	@XmlID
 	@XmlAttribute(name = "id", required = true)
@@ -144,6 +145,8 @@ public class ItemTemplate extends VisibleObjectTemplate {
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		if (weaponStats == null)
 			weaponStats = emptyWeaponStats;
+		if (useLimits == null)
+			useLimits = emptyUseLimits;
 
 		// check if it can be randomized
 		if (getItemSlot() == 0)
@@ -372,6 +375,12 @@ public class ItemTemplate extends VisibleObjectTemplate {
 		if (!isWeapon())
 			return false;
 		return getItemSubType() == ItemSubType.TWO_HAND;
+	}
+	
+	public boolean isOneHandWeapon() {
+		if (!isWeapon())
+			return false;
+		return getItemSubType() == ItemSubType.ONE_HAND;
 	}
 
 	public int getTempExchangeTime() {

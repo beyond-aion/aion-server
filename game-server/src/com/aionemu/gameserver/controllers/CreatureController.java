@@ -30,7 +30,6 @@ import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.items.GodStone;
-import com.aionemu.gameserver.model.items.ItemSlot;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.item.GodstoneInfo;
 import com.aionemu.gameserver.model.templates.item.ItemAttackType;
@@ -43,12 +42,14 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SKILL_CANCEL;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.item.ItemPacketService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
+import com.aionemu.gameserver.skillengine.condition.SkillChargeCondition;
 import com.aionemu.gameserver.skillengine.model.*;
 import com.aionemu.gameserver.skillengine.model.Skill.SkillMethod;
 import com.aionemu.gameserver.skillengine.properties.Properties.CastState;
 import com.aionemu.gameserver.taskmanager.tasks.MovementNotifyTask;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.utils.stats.CalculationType;
 import com.aionemu.gameserver.world.geo.GeoService;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
@@ -75,8 +76,8 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	@Override
 	public void notKnow(VisibleObject object) {
 		super.notKnow(object);
-		if (object instanceof Creature)
-			getOwner().getAggroList().remove((Creature) object);
+		if (object instanceof Creature creature)
+			getOwner().getAggroList().remove(creature);
 	}
 
 	/**
@@ -148,10 +149,9 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 
 	/**
 	 * Perform tasks on Creature death.<br>
-	 * Should ONLY be called from {@link com.aionemu.gameserver.model.stats.container.CreatureLifeStats#reduceHp(TYPE, int, int, LOG, Creature, boolean)
-	 * reduceHp()} to avoid duplicate death events.
+	 * Should ONLY be called from {@link com.aionemu.gameserver.model.stats.container.CreatureLifeStats} to avoid duplicate death events.
 	 */
-	public void onDie(Creature lastAttacker, boolean sendDiePacket) {
+	public void onDie(Creature lastAttacker) {
 		getOwner().getMoveController().abortMove();
 		getOwner().setCasting(null);
 		getOwner().getEffectController().removeAllEffects();
@@ -163,6 +163,10 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 		getOwner().getObserveController().notifyDeathObservers(lastAttacker);
 		PacketSendUtility.broadcastPacketAndReceive(getOwner(),
 			new SM_EMOTION(getOwner(), EmotionType.DIE, 0, getOwner().equals(lastAttacker) ? 0 : lastAttacker.getObjectId()));
+		getOwner().getKnownList().forEachObject(o -> {
+			if (o instanceof Creature creature)
+				creature.getAggroList().stopHating(getOwner());
+		});
 	}
 
 	/**
@@ -222,7 +226,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 
 		// notify all NPC's around that creature is attacking me
 		getOwner().getKnownList().forEachNpc(npc -> npc.getAi().onCreatureEvent(AIEventType.CREATURE_NEEDS_SUPPORT, getOwner()));
-		getOwner().getLifeStats().reduceHp(type, damage, effect == null ? 0 : effect.getSkillId(), logId, attacker, true);
+		getOwner().getLifeStats().reduceHp(type, damage, effect == null ? 0 : effect.getSkillId(), logId, attacker);
 		getOwner().incrementAttackedCount();
 
 		if (!getOwner().isDead() && attacker instanceof Player player) {
@@ -296,7 +300,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 		List<AttackResult> attackResult;
 
 		CalculationType[] calculationTypes = new CalculationType[] { CalculationType.APPLY_POWER_SHARD_DAMAGE, CalculationType.REMOVE_POWER_SHARD };
-		if (getOwner() instanceof Player p && p.getEquipment().hasDualWeaponEquipped(ItemSlot.LEFT_HAND))
+		if (getOwner() instanceof Player p && p.getEquipment().isDualWeaponEquipped())
 			calculationTypes = ArrayUtils.add(calculationTypes, CalculationType.DUAL_WIELD);
 		if (getOwner().getAttackType() == ItemAttackType.PHYSICAL)
 			attackResult = AttackUtil.calculatePhysAttackResult(getOwner(), target, calculationTypes);
@@ -316,9 +320,9 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 			damage += result.getDamage();
 		}
 
-		AttackStatus firstAttackStatus = AttackStatus.getBaseStatus(attackResult.get(0).getAttackStatus());
+		AttackStatus firstAttackStatus = AttackStatus.getBaseStatus(attackResult.getFirst().getAttackStatus());
 		Effect criticalEffect = null;
-		if (getOwner() instanceof Player player && firstAttackStatus == AttackStatus.CRITICAL && !target.getEffectController().isUnderShield() && Rnd.chance() < 10) {
+		if (getOwner() instanceof Player player && firstAttackStatus == AttackStatus.CRITICAL && Rnd.chance() < 10) {
 			criticalEffect = SkillEngine.getInstance().createCriticalEffect(player, target, 0);
 			if (criticalEffect != null && (criticalEffect.getEffectResult() == EffectResult.DODGE || criticalEffect.getEffectResult() == EffectResult.RESIST))
 				criticalEffect = null;
@@ -418,11 +422,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	}
 
 	public boolean die(TYPE type, LOG log, Creature lastAttacker) {
-		return getOwner().getLifeStats().reduceHp(type, Integer.MAX_VALUE, 0, log, lastAttacker, true) == 0;
-	}
-
-	public boolean die(TYPE type, LOG log, Creature lastAttacker, boolean sendDiePacket) {
-		return getOwner().getLifeStats().reduceHp(type, Integer.MAX_VALUE, 0, log, lastAttacker, sendDiePacket) == 0;
+		return getOwner().getLifeStats().reduceHp(type, Integer.MAX_VALUE, 0, log, lastAttacker) == 0;
 	}
 
 	/**
@@ -448,17 +448,29 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 		return false;
 	}
 
-	public boolean useChargeSkill(int skillId, int skillLevel, int time, int animationTime, VisibleObject firstTarget) {
+	public boolean useChargeSkill(Skill startSkill, long chargeTimeMillis) {
+		SkillChargeCondition chargeCondition = startSkill.getSkillTemplate().getSkillChargeCondition();
+		ChargeSkillEntry chargeSkill = chargeCondition == null ? null : DataManager.SKILL_CHARGE_DATA.getChargedSkillEntry(chargeCondition.getValue());
+		if (chargeSkill == null || chargeTimeMillis < chargeSkill.getMinTime() * startSkill.getCastSpeedForAnimationBoostAndChargeSkills()) {
+			if (getOwner() instanceof Player player)
+				AuditLogger.log(player, "tried to use charge skill " + startSkill.getSkillId() + " after " + chargeTimeMillis);
+			return false;
+		}
 		try {
-			Player creature = (Player) getOwner();
-			ChargeSkill skill = SkillEngine.getInstance().getChargeSkill(creature, skillId, skillLevel, firstTarget);
-			if (skill != null) {
-				skill.setHitTime(time);
-				skill.setAnimationTime(animationTime);
-				return skill.useSkill();
+			int index = 0, chargeTimeSum = 0;
+			for (ChargedSkill skill : chargeSkill.getSkills()) {
+				chargeTimeSum += (int) (skill.getTime() * startSkill.getCastSpeedForAnimationBoostAndChargeSkills());
+				if (chargeTimeSum >= chargeTimeMillis || ++index == chargeSkill.getSkills().size() - 1)
+					break;
 			}
+			int skillId = chargeSkill.getSkills().get(index).getId();
+			ChargeSkill skill = SkillEngine.getInstance().getChargeSkill(getOwner(), skillId, startSkill.getSkillLevel(), index + 1, startSkill);
+			if (skill != null)
+				return skill.useSkill();
 		} catch (Exception ex) {
-			log.error("Exception during skill use: " + skillId, ex);
+			log.error("Could not use charge skill " + startSkill.getSkillId() + " with charge time " + chargeTimeMillis, ex);
+		} finally {
+			startSkill.cancelCast();
 		}
 		return false;
 	}
@@ -469,10 +481,10 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 		if (castingSkill != null) {
 			castingSkill.cancelCast();
 			creature.setCasting(null);
-			if (creature instanceof Npc) {
-				creature.getAi().setSubStateIfNot(AISubState.NONE);
-				((Npc) creature).getGameStats().setLastSkill(null);
-			}
+		}
+		if (creature instanceof Npc npc) {
+			creature.getAi().setSubStateIfNot(AISubState.NONE);
+			npc.getGameStats().setLastSkill(null);
 		}
 		return castingSkill;
 	}

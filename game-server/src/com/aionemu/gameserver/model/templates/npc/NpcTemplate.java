@@ -73,9 +73,6 @@ public class NpcTemplate extends CreatureTemplate {
 	@XmlAttribute(name = "cast_speed")
 	private int castSpeed = 1000;
 
-	@XmlAttribute(name = "mevent")
-	private int mobileEvent;
-
 	@XmlAttribute(name = "flag_type")
 	private int flagType;
 
@@ -122,11 +119,8 @@ public class NpcTemplate extends CreatureTemplate {
 	protected void afterUnmarshal(Unmarshaller u, Object parent) {
 		if (level > 1 && !"noaction".equals(ai) && getAbyssNpcType().equals(AbyssNpcType.TELEPORTER)) // TODO: reparse npc_template
 			ai = "siege_teleporter";
-	}
-
-	public void internAiName() {
 		if (ai != null)
-			ai = ai.intern(); // intern to save RAM, since most npcs use same ai names
+			ai = ai.intern();
 	}
 
 	@Override
@@ -223,10 +217,6 @@ public class NpcTemplate extends CreatureTemplate {
 
 	public int getAttackSpeed() {
 		return attackSpeed;
-	}
-
-	public int getMobileEvent() {
-		return mobileEvent;
 	}
 
 	public int getFlagType() {

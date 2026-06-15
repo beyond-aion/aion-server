@@ -87,8 +87,4 @@ public class SiegeDAO {
 		return true;
 	}
 
-	public static void updateLocation(SiegeLocation siegeLocation) {
-		updateSiegeLocation(siegeLocation);
-	}
-
 }

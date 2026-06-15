@@ -1,65 +1,45 @@
 package com.aionemu.gameserver.model.team.legion;
 
+import com.aionemu.gameserver.model.PlayerClass;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
+
 /**
  * @author Simple
  */
 public class LegionMember {
 
-	private int objectId = 0;
-	protected Legion legion = null;
-	protected String nickname = "";
-	protected String selfIntro = "";
-	protected int challengeScore;
-	protected LegionRank rank = LegionRank.VOLUNTEER;
+	private final int objectId;
+	private final Legion legion;
+	private LegionRank rank = LegionRank.VOLUNTEER;
+	private String nickname = "";
+	private String selfIntro = "";
+	private int challengeScore;
+	// --- below are cached player fields (not in legion_members table) ---
+	private String name;
+	private PlayerClass playerClass;
+	private int level;
+	private int worldId;
+	private int lastOnlineEpochSeconds;
+	private boolean online = false;
 
-	/**
-	 * If player is defined later on this constructor is called
-	 */
-	public LegionMember(int objectId) {
+	public LegionMember(int objectId, Legion legion) {
 		this.objectId = objectId;
-	}
-
-	/**
-	 * This constructor is called when a legion is created
-	 */
-	public LegionMember(int objectId, Legion legion, LegionRank rank) {
-		this.setObjectId(objectId);
-		this.setLegion(legion);
-		this.setRank(rank);
-	}
-
-	/**
-	 * This constructor is called when a LegionMemberEx is called
-	 */
-	public LegionMember() {
-	}
-
-	/**
-	 * @param legion
-	 *          the legion to set
-	 */
-	public void setLegion(Legion legion) {
 		this.legion = legion;
 	}
 
-	/**
-	 * @return the legion
-	 */
+	public int getObjectId() {
+		return objectId;
+	}
+
 	public Legion getLegion() {
 		return legion;
 	}
 
-	/**
-	 * @param rank
-	 *          the rank to set
-	 */
 	public void setRank(LegionRank rank) {
 		this.rank = rank;
 	}
 
-	/**
-	 * @return the rank
-	 */
 	public LegionRank getRank() {
 		return rank;
 	}
@@ -68,91 +48,78 @@ public class LegionMember {
 		return rank == LegionRank.BRIGADE_GENERAL;
 	}
 
-	/**
-	 * @param nickname
-	 *          the nickname to set
-	 */
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
 
-	/**
-	 * @return the nickname
-	 */
 	public String getNickname() {
 		return nickname;
 	}
 
-	/**
-	 * @param selfIntro
-	 *          the selfIntro to set
-	 */
 	public void setSelfIntro(String selfIntro) {
 		this.selfIntro = selfIntro;
 	}
 
-	/**
-	 * @return the selfIntro
-	 */
 	public String getSelfIntro() {
 		return selfIntro;
 	}
 
-	/**
-	 * @return the challengeScore
-	 */
 	public int getChallengeScore() {
 		return challengeScore;
 	}
 
-	/**
-	 * @param challengeScore
-	 *          the challengeScore to set
-	 */
 	public void setChallengeScore(int challengeScore) {
 		this.challengeScore = challengeScore;
 	}
 
-	/**
-	 * @param amount
-	 */
 	public void increaseChallengeScore(int amount) {
 		this.challengeScore += amount;
 	}
 
-	/**
-	 * @param objectId
-	 *          the objectId to set
-	 */
-	public void setObjectId(int objectId) {
-		this.objectId = objectId;
+	public void setPlayerData(Player player) {
+		setPlayerData(player.getCommonData());
 	}
 
-	/**
-	 * @return the objectId
-	 */
-	public int getObjectId() {
-		return objectId;
+	public void setPlayerData(PlayerCommonData playerCommonData) {
+		name = playerCommonData.getName();
+		playerClass = playerCommonData.getPlayerClass();
+		level = playerCommonData.getLevel();
+		worldId = playerCommonData.getMapId();
+		lastOnlineEpochSeconds = playerCommonData.getLastOnline() == null ? 0 : (int) (playerCommonData.getLastOnline().getTime() / 1000);
+		online = playerCommonData.isOnline();
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public PlayerClass getPlayerClass() {
+		return playerClass;
+	}
+
+	public int getLevel() {
+		return level;
+	}
+
+	public int getWorldId() {
+		return worldId;
+	}
+
+	public int getLastOnlineEpochSeconds() {
+		return lastOnlineEpochSeconds;
+	}
+
+	public boolean isOnline() {
+		return online;
 	}
 
 	public boolean hasRights(LegionPermissionsMask permissions) {
-		int legionarPermission = 0;
-		switch (this.getRank()) {
-			case BRIGADE_GENERAL:
-				return true;
-			case DEPUTY:
-				legionarPermission = legion.getDeputyPermission();
-				break;
-			case CENTURION:
-				legionarPermission = legion.getCenturionPermission();
-				break;
-			case LEGIONARY:
-				legionarPermission = legion.getLegionaryPermission();
-				break;
-			case VOLUNTEER:
-				legionarPermission = legion.getVolunteerPermission();
-				break;
-		}
-		return permissions.can(legionarPermission);
+		return switch (rank) {
+			case BRIGADE_GENERAL -> true;
+			case DEPUTY -> permissions.can(legion.getDeputyPermission());
+			case CENTURION -> permissions.can(legion.getCenturionPermission());
+			case LEGIONARY -> permissions.can(legion.getLegionaryPermission());
+			case VOLUNTEER -> permissions.can(legion.getVolunteerPermission());
+		};
 	}
 }

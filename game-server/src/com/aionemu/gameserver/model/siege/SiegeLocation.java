@@ -31,7 +31,6 @@ public class SiegeLocation implements ZoneHandler {
 	private int legionId;
 	private boolean vulnerable;
 	private int nextState;
-	private List<SiegeShield> shields;
 	private boolean isUnderShield;
 	private boolean canTeleport = true;
 	private int occupiedCount;
@@ -152,14 +151,6 @@ public class SiegeLocation implements ZoneHandler {
 
 	public void setUnderShield(boolean value) {
 		this.isUnderShield = value;
-		if (shields != null) {
-			for (SiegeShield shield : shields)
-				shield.setEnabled(value);
-		}
-	}
-
-	public void setShields(List<SiegeShield> shields) {
-		this.shields = shields;
 	}
 
 	public boolean isCanTeleport(Player player) {

@@ -19,36 +19,19 @@ public class LifeStatsRestoreService {
 
 	/**
 	 * HP and MP restoring task
-	 * 
-	 * @param creature
-	 * @return Future<?>
 	 */
 	public Future<?> scheduleRestoreTask(CreatureLifeStats<? extends Creature> lifeStats) {
 		return ThreadPoolManager.getInstance().scheduleAtFixedRate(new HpMpRestoreTask(lifeStats), 1700, DEFAULT_DELAY);
 	}
 
-	/**
-	 * HP restoring task
-	 * 
-	 * @param lifeStats
-	 * @return
-	 */
 	public Future<?> scheduleHpRestoreTask(CreatureLifeStats<? extends Creature> lifeStats) {
 		return ThreadPoolManager.getInstance().scheduleAtFixedRate(new HpRestoreTask(lifeStats), 1700, DEFAULT_DELAY);
 	}
 
-	/**
-	 * @param lifeStats
-	 * @return
-	 */
-	public Future<?> scheduleFpReduceTask(final PlayerLifeStats lifeStats, long delay) {
-		return ThreadPoolManager.getInstance().scheduleAtFixedRate(new FpReduceTask(lifeStats), delay, 1000);
+	public Future<?> scheduleFpReduceTask(PlayerLifeStats lifeStats) {
+		return ThreadPoolManager.getInstance().scheduleAtFixedRate(new FpReduceTask(lifeStats), 1000, 1000);
 	}
 
-	/**
-	 * @param lifeStats
-	 * @return
-	 */
 	public Future<?> scheduleFpRestoreTask(PlayerLifeStats lifeStats) {
 		return ThreadPoolManager.getInstance().scheduleAtFixedRate(new FpRestoreTask(lifeStats), 3000, DEFAULT_DELAY);
 	}

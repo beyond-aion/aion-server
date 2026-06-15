@@ -11,13 +11,12 @@ import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.Persistable;
-import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.L10n;
 import com.aionemu.gameserver.model.templates.spawns.Spawn;
 import com.aionemu.gameserver.model.templates.spawns.SpawnGroup;
 import com.aionemu.gameserver.model.templates.spawns.SpawnSpotTemplate;
-import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
+import com.aionemu.gameserver.model.templates.spawns.housing.TownSpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_TOWNS_LIST;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -136,11 +135,8 @@ public class Town implements Persistable, L10n {
 		for (Spawn spawn : newSpawns) {
 			SpawnGroup spawnGroup = new SpawnGroup(worldId, spawn);
 			for (SpawnSpotTemplate sst : spawn.getSpawnSpotTemplates()) {
-				VisibleObject object = SpawnEngine.spawnObject(new SpawnTemplate(spawnGroup, sst), 1);
-				if (object instanceof Npc) {
-					((Npc) object).setTownId(this.id);
-					spawnedNpcs.add((Npc) object);
-				}
+				Npc object = (Npc) SpawnEngine.spawnObject(new TownSpawnTemplate(spawnGroup, sst, id), 1);
+				spawnedNpcs.add(object);
 			}
 		}
 	}

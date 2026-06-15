@@ -2,7 +2,6 @@ package com.aionemu.commons.scripting.impl;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.ref.Cleaner;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,52 +27,22 @@ import com.aionemu.commons.scripting.impl.javacompiler.ScriptCompilerImpl;
  */
 public class ScriptContextImpl implements ScriptContext {
 
-	/**
-	 * logger for this class
-	 */
 	private static final Logger log = LoggerFactory.getLogger(ScriptContextImpl.class);
-	private final static Cleaner CLEANER = Cleaner.create();
 
 	/**
 	 * Root directories of this script context. It and it's subdirectories will be scanned for .java files.
 	 */
 	private final File[] directories;
 
-	private final CleanableState state;
+	/**
+	 * Result of compilation of script context
+	 */
+	private CompilationResult compilationResult;
 
-	private static class CleanableState implements Runnable {
-
-		/**
-		 * Result of compilation of script context
-		 */
-		private CompilationResult compilationResult;
-
-		/**
-		 * Classlistener for this script context
-		 */
-		private ClassListener classListener;
-
-		@Override
-		public void run() {
-			if (compilationResult != null) {
-				log.error("Finalization of initialized ScriptContext. Forcing context shutdown.");
-				shutdown();
-			}
-		}
-
-		private synchronized void shutdown() {
-			if (compilationResult == null) {
-				log.error("Shutdown of not initialized script context", new Exception());
-				return;
-			}
-			getClassListener().preUnload(compilationResult.getCompiledClasses());
-			compilationResult = null;
-		}
-
-		private ClassListener getClassListener() {
-			return classListener;
-		}
-	}
+	/**
+	 * Classlistener for this script context
+	 */
+	private ClassListener classListener;
 
 	/**
 	 * Creates new scriptcontext with given root file
@@ -89,13 +58,11 @@ public class ScriptContextImpl implements ScriptContext {
 		if (directories.length == 0 || !Stream.of(directories).allMatch(File::isDirectory))
 			throw new IllegalArgumentException("Invalid directories given: " + Arrays.toString(directories));
 		this.directories = directories;
-		this.state = new CleanableState();
-		CLEANER.register(this, this.state);
 	}
 
 	@Override
 	public synchronized void init() {
-		if (state.compilationResult != null) {
+		if (compilationResult != null) {
 			log.error("Init request on initialized ScriptContext");
 			return;
 		}
@@ -105,27 +72,26 @@ public class ScriptContextImpl implements ScriptContext {
 		if (CommonsConfig.SCRIPT_COMPILER_CACHING)
 			scriptCompiler.setClasses(ScriptCompilerCache.findValidCachedClassFiles(sourceFiles));
 		try {
-			state.compilationResult = scriptCompiler.compile(sourceFiles);
+			compilationResult = scriptCompiler.compile(sourceFiles);
 		} catch (ClassFormatError e) {
 			if (!CommonsConfig.SCRIPT_COMPILER_CACHING)
 				throw e;
 			log.warn("Couldn't load cached classes from " + ScriptCompilerCache.CACHE_DIR + ", refreshing files in cache...", e);
 			ScriptCompilerCache.invalidate(sourceFiles = findFiles());
 			scriptCompiler.setClasses(Collections.emptyMap());
-			state.compilationResult = scriptCompiler.compile(sourceFiles);
+			compilationResult = scriptCompiler.compile(sourceFiles);
 		}
 		if (CommonsConfig.SCRIPT_COMPILER_CACHING)
-			ScriptCompilerCache.cacheClasses(state.compilationResult.getBinaryClasses());
+			ScriptCompilerCache.cacheClasses(compilationResult.getBinaryClasses());
 
-		getClassListener().postLoad(state.compilationResult.getCompiledClasses());
+		getClassListener().postLoad(compilationResult.getCompiledClasses());
 	}
 
 	private List<File> findFiles() {
 		List<File> files = new ArrayList<>();
 		for (File dir : directories) {
-			try {
-				Files.find(dir.toPath(), Integer.MAX_VALUE, (path, attrs) -> attrs.isRegularFile() && path.toString().endsWith(".java"))
-					.forEach(path -> files.add(path.toFile()));
+			try (var paths = Files.find(dir.toPath(), Integer.MAX_VALUE, (path, attrs) -> attrs.isRegularFile() && path.toString().endsWith(".java"))) {
+				paths.forEach(path -> files.add(path.toFile()));
 			} catch (IOException e) {
 				throw new RuntimeException("Error scanning " + dir, e);
 			}
@@ -135,7 +101,12 @@ public class ScriptContextImpl implements ScriptContext {
 
 	@Override
 	public synchronized void shutdown() {
-		state.shutdown();
+		if (compilationResult == null) {
+			log.error("Shutdown of not initialized script context", new Exception());
+			return;
+		}
+		getClassListener().preUnload(compilationResult.getCompiledClasses());
+		compilationResult = null;
 	}
 
 	@Override
@@ -146,22 +117,22 @@ public class ScriptContextImpl implements ScriptContext {
 
 	@Override
 	public CompilationResult getCompilationResult() {
-		return state.compilationResult;
+		return compilationResult;
 	}
 
 	@Override
 	public synchronized boolean isInitialized() {
-		return state.compilationResult != null;
+		return compilationResult != null;
 	}
 
 	@Override
 	public void setClassListener(ClassListener cl) {
-		state.classListener = cl;
+		classListener = cl;
 	}
 
 	@Override
 	public ClassListener getClassListener() {
-		return state.getClassListener();
+		return classListener;
 	}
 
 	@Override

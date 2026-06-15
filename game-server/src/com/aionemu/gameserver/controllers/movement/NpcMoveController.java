@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.controllers.movement;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -13,12 +14,14 @@ import com.aionemu.gameserver.ai.handler.TargetEventHandler;
 import com.aionemu.gameserver.ai.manager.WalkManager;
 import com.aionemu.gameserver.configs.main.GeoDataConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.geoEngine.collision.IgnoreProperties;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.geometry.Point3D;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
+import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.templates.walker.RouteStep;
 import com.aionemu.gameserver.model.templates.walker.WalkerTemplate;
 import com.aionemu.gameserver.model.templates.walker.WalkerTemplate.LoopType;
@@ -28,7 +31,6 @@ import com.aionemu.gameserver.spawnengine.WalkerFormator;
 import com.aionemu.gameserver.spawnengine.WalkerGroup;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
-import com.aionemu.gameserver.utils.collections.LastUsedCache;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.geo.GeoService;
 
@@ -39,20 +41,20 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 
 	private static final Logger log = LoggerFactory.getLogger(NpcMoveController.class);
 	private static final float MOVE_OFFSET = 0.05f;
+	private static final int MAX_GEO_POINT_DISTANCE = 5;
 
 	private Destination destination = Destination.TARGET_OBJECT;
 
 	private float pointX;
 	private float pointY;
 	private float pointZ;
+	private boolean nextPointFromGeo;
 	private boolean isStop;
 
-	private LastUsedCache<Byte, Point3D> lastSteps = null;
-	private byte stepSequenceNr = 0;
+	private LinkedList<Point3D> lastSteps;
 
 	private WalkerTemplate walkerTemplate;
 	private RouteStep currentStep;
-	private float cachedTargetZ;
 
 	public NpcMoveController(Npc owner) {
 		super(owner);
@@ -117,9 +119,6 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 		}
 	}
 
-	/**
-	 * @return if destination reached
-	 */
 	@Override
 	public void moveToDestination() {
 		if (owner.getAi().isLogging()) {
@@ -138,27 +137,26 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 				updateLastMove();
 			}
 			return;
-		} else if (started.compareAndSet(false, true)) {
+		}
+		if (started.compareAndSet(false, true)) {
 			updateLastMove();
 			setAndSendStartMove(owner);
-		}
-
-		if (!started.get()) {
-			if (owner.getAi().isLogging()) {
-				AILogger.moveinfo(owner, "moveToDestination not started");
-			}
 		}
 
 		switch (destination) {
 			case TARGET_OBJECT:
 				VisibleObject target = owner.getTarget();// todo no target
-				if (!(target instanceof Creature))
+				if (target == null)
 					return;
 				if (!PositionUtil.isInRange(target, pointX, pointY, pointZ, MOVE_CHECK_OFFSET)) {
-					Creature creature = (Creature) target;
-					pointX = target.getX();
-					pointY = target.getY();
-					pointZ = getTargetZ(creature);
+					if (GeoDataConfig.GEO_NPC_MOVE && !owner.isInFlyingState() && target instanceof Creature creature && (nextPointFromGeo || (nextPointFromGeo = !isOnGround(creature)))) {
+						if (trySetValidGeoPoint(target.getX(), target.getY()) && nextPointFromGeo)
+							nextPointFromGeo = !isOnGround(creature);
+					} else {
+						pointX = target.getX();
+						pointY = target.getY();
+						pointZ = target.getZ();
+					}
 				}
 				moveToLocation(pointX, pointY, pointZ);
 				break;
@@ -170,41 +168,51 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 		updateLastMove();
 	}
 
-	/**
-	 * @param creature
-	 * @return
-	 */
-	private float getTargetZ(Creature creature) {
-		float targetZ = creature.getZ();
-		if (GeoDataConfig.GEO_NPC_MOVE && creature.isInFlyingState() && !owner.isInFlyingState()) {
-			if (owner.getGameStats().checkGeoNeedUpdate()) {
-				float lowestZ = Math.min(creature.getZ(), owner.getZ());
-				float geoZ = GeoService.getInstance().getZ(creature, creature.getZ() + 2, lowestZ - 5);
-				if (!Float.isNaN(geoZ))
-					cachedTargetZ = geoZ;
-				else
-					cachedTargetZ = lowestZ;
-			}
-			targetZ = cachedTargetZ;
-		}
-		return targetZ;
+	private boolean isOnGround(Creature creature) {
+		return !creature.isFlying() && !creature.getMoveController().isJumping() && (creature.getMoveController().getMovementMask() & MovementMask.FALL) == 0;
 	}
 
 	/**
-	 * @param targetX
-	 * @param targetY
-	 * @param targetZ
-	 * @return
+	 * Sets pointX, pointY and pointZ to valid geo coordinates near or at given position. Tries to detect and stop at cliffs or steep hills.
+	 *
+	 * @return True if new geo point was set, false if old one was kept (either because it's still valid or needs to be rechecked at the next interval).
 	 */
-	protected void moveToLocation(float targetX, float targetY, float targetZ) {
+	private boolean trySetValidGeoPoint(float targetX, float targetY) {
+		if (pointX == 0 && pointY == 0 && pointZ == 0) {
+			pointX = owner.getX();
+			pointY = owner.getY();
+			pointZ = owner.getZ();
+			owner.getGameStats().setNextGeoZUpdate(0);
+		}
+		long nowMillis = System.currentTimeMillis();
+		if (nowMillis < owner.getGameStats().getNextGeoZUpdate())
+			return false;
+		float distance2D = (float) PositionUtil.getDistance(pointX, pointY, targetX, targetY);
+		if (distance2D < MOVE_CHECK_OFFSET)
+			return false; // no need to recalculate
+		if (distance2D > MAX_GEO_POINT_DISTANCE) {
+			double angleRadians = Math.toRadians(PositionUtil.calculateAngleFrom(pointX, pointY, targetX, targetY));
+			targetX = pointX + (float) (Math.cos(angleRadians) * MAX_GEO_POINT_DISTANCE);
+			targetY = pointY + (float) (Math.sin(angleRadians) * MAX_GEO_POINT_DISTANCE);
+			distance2D = MAX_GEO_POINT_DISTANCE;
+		}
+		float maxZDiff = distance2D + MOVE_CHECK_OFFSET;
+		float geoZ = GeoService.getInstance().getZ(owner.getWorldId(), targetX, targetY, pointZ + maxZDiff, pointZ - maxZDiff, owner.getInstanceId());
+		if (Float.isNaN(geoZ)) {
+			owner.getGameStats().setNextGeoZUpdate(nowMillis + 1000);
+			return false;
+		}
+		pointX = targetX;
+		pointY = targetY;
+		pointZ = geoZ;
+		owner.getGameStats().setNextGeoZUpdate(nowMillis + 500);
+		return true;
+	}
+
+	private void moveToLocation(float targetX, float targetY, float targetZ) {
 		float ownerX = owner.getX();
 		float ownerY = owner.getY();
 		float ownerZ = owner.getZ();
-		boolean directionChanged = targetX != targetDestX || targetY != targetDestY || targetZ != targetDestZ;
-
-		if (directionChanged) {
-			heading = (byte) (Math.toDegrees(Math.atan2(targetY - ownerY, targetX - ownerX)) / 3);
-		}
 
 		if (owner.getAi().isLogging()) {
 			AILogger.moveinfo(owner, "OLD targetDestX: " + targetDestX + " targetDestY: " + targetDestY + " targetDestZ " + targetDestZ);
@@ -215,7 +223,14 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 			targetX = owner.getSpawn().getX();
 			targetY = owner.getSpawn().getY();
 			targetZ = owner.getSpawn().getZ();
+			clearBackSteps();
+		} else if (owner.getAi().getState() == AIState.FIGHT || owner.getAi().getState() == AIState.FOLLOWING) {
+			tryStoreStep(targetX, targetY, targetZ);
 		}
+
+		boolean destinationChanged = targetX != targetDestX || targetY != targetDestY || targetZ != targetDestZ;
+		if (targetX != targetDestX || targetY != targetDestY)
+			heading = PositionUtil.getHeadingTowards(ownerX, ownerY, targetX, targetY);
 
 		targetDestX = targetX;
 		targetDestY = targetY;
@@ -259,7 +274,7 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 				float geoZ = GeoService.getInstance().getZ(owner.getWorldId(), newX, newY, newZ + 2, Math.min(newZ, ownerZ) - 2, owner.getInstanceId());
 				if (!Float.isNaN(geoZ)) {
 					if (Math.abs(newZ - geoZ) > 1)
-						directionChanged = true;
+						destinationChanged = true;
 					newZ = geoZ;
 					boolean isXYDestinationReached = PositionUtil.getDistance(newX, newY, pointX, pointY) < MOVE_OFFSET;
 					if (isXYDestinationReached && !PositionUtil.isInRange(newX, newY, newZ, pointX, pointY, pointZ, MOVE_OFFSET))
@@ -274,8 +289,8 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 
 		World.getInstance().updatePosition(owner, newX, newY, newZ, heading, false);
 
-		byte newMask = getMoveMask(directionChanged);
-		if (movementMask != newMask || directionChanged) {
+		byte newMask = getMoveMask(destinationChanged);
+		if (movementMask != newMask || destinationChanged) {
 			if (movementMask != newMask) {
 				if (owner.getAi().isLogging()) {
 					AILogger.moveinfo(owner, "oldMask=" + movementMask + " newMask=" + newMask);
@@ -329,6 +344,7 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 		pointX = 0;
 		pointY = 0;
 		pointZ = 0;
+		nextPointFromGeo = false;
 	}
 
 	public WalkerTemplate getWalkerTemplate() {
@@ -344,7 +360,7 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 		Point2D dest = null;
 		if (owner.getWalkerGroup() != null) {
 			dest = WalkerGroup.getLinePoint(new Point2D(currentStep.getX(), currentStep.getY()), new Point2D(step.getX(), step.getY()),
-				owner.getWalkerGroupShift());
+				owner.getWalkerGroup().getClusterData(owner));
 			this.pointZ = currentStep.getZ();
 			owner.getWalkerGroup().setStep(owner, step.getStepIndex());
 		} else {
@@ -410,52 +426,42 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 		return isStop;
 	}
 
-	/**
-	 * @return
-	 */
-	public boolean isFollowingTarget() {
-		return destination == Destination.TARGET_OBJECT;
-	}
-
-	public synchronized void storeStep() {
-		if (owner.getAi().getState() == AIState.RETURNING)
-			return;
+	private synchronized void tryStoreStep(float x, float y, float z) {
 		if (lastSteps == null)
-			lastSteps = new LastUsedCache<>(10);
-		Point3D currentStep = new Point3D(owner.getX(), owner.getY(), owner.getZ());
-		if (owner.getAi().isLogging()) {
-			AILogger.moveinfo(owner, "store back step: X=" + owner.getX() + " Y=" + owner.getY() + " Z=" + owner.getZ());
+			lastSteps = new LinkedList<>();
+		Point3D lastStep = lastSteps.isEmpty() ? null : lastSteps.getLast();
+		if (lastStep == null || !PositionUtil.isInRange(lastStep.getX(), lastStep.getY(), lastStep.getZ(), x, y, z, 10)) {
+			if (owner.getAi().isLogging()) {
+				AILogger.moveinfo(owner, "store back step: X=" + owner.getX() + " Y=" + owner.getY() + " Z=" + owner.getZ());
+			}
+			lastSteps.add(new Point3D(x, y, z));
+			if (lastSteps.size() > 10)
+				lastSteps.removeFirst();
 		}
-		if (stepSequenceNr == 0 || PositionUtil.getDistance(lastSteps.get(stepSequenceNr), currentStep) >= 10)
-			lastSteps.put(++stepSequenceNr, currentStep);
 	}
 
-	public synchronized Point3D recallPreviousStep() {
-		if (lastSteps == null)
-			lastSteps = new LastUsedCache<>(10);
-
-		Point3D result = stepSequenceNr == 0 ? null : lastSteps.get(stepSequenceNr--);
-
-		if (result == null) {
+	public synchronized void returnToLastStepOrSpawn() {
+		SpawnTemplate spawn = owner.getSpawn();
+		Point3D step = lastSteps == null || lastSteps.isEmpty() ? null : lastSteps.removeLast();
+		if (step != null && !lastSteps.isEmpty() && PositionUtil.isInRange(owner, step.getX(), step.getY(), step.getZ(), 2))
+			step = lastSteps.removeLast();
+		if (step == null || GeoService.getInstance().canSee(owner, spawn.getX(), spawn.getY(), spawn.getZ(), IgnoreProperties.ANY_RACE)) {
+			targetDestX = spawn.getX();
+			targetDestY = spawn.getY();
+			targetDestZ = spawn.getZ();
 			if (owner.getAi().isLogging())
 				AILogger.moveinfo(owner, "recall back step: spawn point");
-			targetDestX = owner.getSpawn().getX();
-			targetDestY = owner.getSpawn().getY();
-			targetDestZ = owner.getSpawn().getZ();
-			result = new Point3D(targetDestX, targetDestY, targetDestZ);
 		} else {
+			targetDestX = step.getX();
+			targetDestY = step.getY();
+			targetDestZ = step.getZ();
 			if (owner.getAi().isLogging())
-				AILogger.moveinfo(owner, "recall back step: X=" + result.getX() + " Y=" + result.getY() + " Z=" + result.getZ());
-			targetDestX = result.getX();
-			targetDestY = result.getY();
-			targetDestZ = result.getZ();
+				AILogger.moveinfo(owner, "recall back step: X=" + step.getX() + " Y=" + step.getY() + " Z=" + step.getZ());
 		}
-
-		return result;
+		moveToPoint(targetDestX, targetDestY, targetDestZ);
 	}
 
 	public synchronized void clearBackSteps() {
-		stepSequenceNr = 0;
 		lastSteps = null;
 		movementMask = MovementMask.IMMEDIATE;
 	}

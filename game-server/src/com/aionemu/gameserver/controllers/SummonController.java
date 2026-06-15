@@ -104,6 +104,12 @@ public class SummonController extends CreatureController<Summon> {
 	}
 
 	@Override
+	public void onTargetChanged(VisibleObject oldTarget, VisibleObject newTarget) {
+		super.onTargetChanged(oldTarget, newTarget);
+		getOwner().clearSkillOrders();
+	}
+
+	@Override
 	public void onDespawn() {
 		if (getOwner().getMode() == SummonMode.RELEASE)
 			getOwner().getEffectController().removeAllEffects();
@@ -111,8 +117,8 @@ public class SummonController extends CreatureController<Summon> {
 	}
 
 	@Override
-	public void onDie(Creature lastAttacker, boolean sendDiePacket) {
-		super.onDie(lastAttacker, sendDiePacket);
+	public void onDie(Creature lastAttacker) {
+		super.onDie(lastAttacker);
 		SummonsService.release(getOwner(), UnsummonType.UNSPECIFIED);
 	}
 

@@ -28,7 +28,8 @@ public class StanceObserver extends ActionObserver {
 
 	@Override
 	public void startSkillCast(Skill skill) {
-		if (!skill.getSkillTemplate().getStack().startsWith("ITEM_")) // pots and scrolls don't stop stance
+		String stack = skill.getSkillTemplate().getStack();
+		if (!stack.startsWith("ITEM_") && !stack.startsWith("REMEDY_") && !stack.startsWith("POTION_")) // pots and scrolls don't stop stance
 			player.getController().stopStance();
 	}
 

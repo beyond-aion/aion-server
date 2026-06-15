@@ -22,7 +22,6 @@ public class _1647DressingUpForBollvig extends AbstractQuestHandler {
 		qe.registerQuestNpc(790019).addOnQuestStart(questId);
 		qe.registerQuestNpc(790019).addOnTalkEvent(questId);
 		qe.registerQuestNpc(700272).addOnTalkEvent(questId);
-		qe.registerOnMovieEndQuest(199, questId);
 	}
 
 	@Override
@@ -71,18 +70,13 @@ public class _1647DressingUpForBollvig extends AbstractQuestHandler {
 	}
 
 	@Override
-	public boolean onMovieEndEvent(QuestEnv env, int movieId) {
-		Player player = env.getPlayer();
-		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
-			if (movieId == 199) {
-				spawnForFiveMinutesInFrontOf(204635, player, 2);
-				spawnForFiveMinutes(204635, player.getWorldMapInstance(), player.getX() + 2, player.getY() - 2, player.getZ(), (byte) 0);
-				spawnForFiveMinutes(204635, player.getWorldMapInstance(), player.getX() - 2, player.getY() + 2, player.getZ(), (byte) 0);
-				return true;
-			}
+	public void onMovieEndEvent(QuestEnv env, int movieId) {
+		if (movieId == 199) {
+			Player player = env.getPlayer();
+			spawnForFiveMinutesInFrontOf(204635, player, 2);
+			spawnForFiveMinutes(204635, player.getWorldMapInstance(), player.getX() + 2, player.getY() - 2, player.getZ(), (byte) 0);
+			spawnForFiveMinutes(204635, player.getWorldMapInstance(), player.getX() - 2, player.getY() + 2, player.getZ(), (byte) 0);
 		}
-		return false;
 	}
 
 }

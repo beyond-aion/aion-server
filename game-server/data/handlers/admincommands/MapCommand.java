@@ -6,7 +6,6 @@ import com.aionemu.gameserver.ai.AIState;
 import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.taskmanager.tasks.MovementNotifyTask;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 
 /**
@@ -19,8 +18,8 @@ public class MapCommand extends AdminCommand {
 
 		// @formatter:off
 		setSyntaxInfo(
-			"<freeze|unfreeze> - (Un)freezes all npcs on this map instance.",
-			"<stats> - Shows peak movement broadcast counts for all maps."
+			"freeze - Freezes all NPCs on this map instance.",
+			"unfreeze - Unfreezes all NPCs on this map instance."
 		);
 		// @formatter:on
 	}
@@ -41,9 +40,6 @@ public class MapCommand extends AdminCommand {
 		} else if ("unfreeze".equalsIgnoreCase(params[0])) {
 			admin.getPosition().getWorldMapInstance().forEachNpc(npc -> npc.getAi().onGeneralEvent(AIEventType.UNFREEZE));
 			sendInfo(admin, "World map is unfrozen!");
-		} else if ("stats".equalsIgnoreCase(params[0])) {
-			for (String line : MovementNotifyTask.getInstance().dumpBroadcastStats())
-				sendInfo(admin, line);
 		}
 	}
 }

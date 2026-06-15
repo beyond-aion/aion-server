@@ -24,7 +24,6 @@ import com.aionemu.gameserver.model.instance.instancescore.InstanceScore;
 import com.aionemu.gameserver.model.instance.instancescore.PvpInstanceScore;
 import com.aionemu.gameserver.model.instance.playerreward.PvpInstancePlayerReward;
 import com.aionemu.gameserver.network.aion.instanceinfo.DredgionScoreWriter;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_SCORE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.QuestEngine;
@@ -134,7 +133,7 @@ public class DredgionInstance extends GeneralInstanceHandler {
 	private void distributeRewards(Player player, PvpInstancePlayerReward reward) {
 		QuestEnv env = new QuestEnv(null, player, 0);
 		QuestEngine.getInstance().onDredgionReward(env);
-		AbyssPointsService.addAp(player, (int) Rates.AP_DREDGION.calcResult(player, reward.getBaseAp() + reward.getBonusAp()));
+		AbyssPointsService.addAp(player, Rates.AP_DREDGION.calcResult(player, reward.getBaseAp() + reward.getBonusAp()));
 		if (reward.getReward1ItemId() > 0)
 			ItemService.addItem(player, reward.getReward1ItemId(), reward.getReward1Count() + reward.getReward1BonusCount(), true);
 		if (reward.getReward2ItemId() > 0)
@@ -164,7 +163,6 @@ public class DredgionInstance extends GeneralInstanceHandler {
 	@SuppressWarnings("lossy-conversions")
 	@Override
 	public boolean onDie(Player player, Creature lastAttacker) {
-		PacketSendUtility.sendPacket(player, new SM_DIE(player.canUseRebirthRevive(), false, 0, 8));
 		int points = 60;
 		if (lastAttacker instanceof Player killer && killer.getRace() != player.getRace()) {
 			if (killer.getRace() != instanceScore.getRaceWithHighestPoints())
@@ -249,8 +247,10 @@ public class DredgionInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void onDie(Npc npc) {
-		int hpGauge = npc.getObjectTemplate().getHpGauge();
 		Player mostPlayerDamage = npc.getAggroList().getMostPlayerDamage();
+		if (mostPlayerDamage == null)
+			return;
+		int hpGauge = npc.getObjectTemplate().getHpGauge();
 		if (hpGauge <= 5) {
 			updateScore(mostPlayerDamage, npc, 12, false);
 		} else if (hpGauge <= 9) {

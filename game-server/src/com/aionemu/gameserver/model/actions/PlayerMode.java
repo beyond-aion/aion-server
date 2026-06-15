@@ -5,6 +5,5 @@ package com.aionemu.gameserver.model.actions;
  */
 public enum PlayerMode {
 	RIDE,
-	IN_ROLL,
-	WINDSTREAM;
+	IN_ROLL
 }

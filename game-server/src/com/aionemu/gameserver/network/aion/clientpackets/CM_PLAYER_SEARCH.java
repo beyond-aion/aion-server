@@ -75,7 +75,7 @@ public class CM_PLAYER_SEARCH extends AionClientPacket {
 				continue;
 			if (maxLevel != 0xFF && player.getLevel() > maxLevel)
 				continue;
-			if (classMask > 0 && (player.getPlayerClass().getMask() & classMask) == 0)
+			if (classMask > 0 && (1 << player.getPlayerClass().getClassId() & classMask) == 0)
 				continue;
 			if (region > 0 && player.getWorldId() != region)
 				continue;

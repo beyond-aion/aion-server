@@ -8,9 +8,6 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.commons.scripting.ScriptManager;
 import com.aionemu.commons.scripting.classlistener.AggregatedClassListener;
 import com.aionemu.commons.scripting.classlistener.OnClassLoadUnloadListener;
-import com.aionemu.commons.scripting.classlistener.ScheduledTaskClassListener;
-import com.aionemu.gameserver.GameServerError;
-import com.aionemu.gameserver.configs.main.GeoDataConfig;
 import com.aionemu.gameserver.configs.main.WorldConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.dataholders.ZoneData;
@@ -18,7 +15,6 @@ import com.aionemu.gameserver.geoEngine.scene.Spatial;
 import com.aionemu.gameserver.model.GameEngine;
 import com.aionemu.gameserver.model.geometry.*;
 import com.aionemu.gameserver.model.siege.SiegeLocation;
-import com.aionemu.gameserver.model.siege.SiegeShield;
 import com.aionemu.gameserver.model.templates.materials.MaterialTemplate;
 import com.aionemu.gameserver.model.templates.world.WorldMapTemplate;
 import com.aionemu.gameserver.model.templates.zone.MaterialZoneTemplate;
@@ -35,38 +31,22 @@ import com.aionemu.gameserver.world.zone.handler.*;
 public final class ZoneService implements GameEngine {
 
 	private static final Logger log = LoggerFactory.getLogger(ZoneService.class);
-	private ScriptManager scriptManager = new ScriptManager();
-	private Map<ZoneName, Class<? extends ZoneHandler>> zoneHandlers = new HashMap<>();
-	private Map<ZoneName, ZoneHandler> collidableHandlers = new HashMap<>();
-	private Map<Integer, List<ZoneInfo>> zoneByMapIdMap = DataManager.ZONE_DATA.getZones();
+	private final Map<ZoneName, Class<? extends ZoneHandler>> zoneHandlers = new HashMap<>();
+	private final Map<ZoneName, ZoneHandler> collidableHandlers = new HashMap<>();
+	private final Map<Integer, List<ZoneInfo>> zoneByMapIdMap = DataManager.ZONE_DATA.getZones();
 
 	private ZoneService() {
 	}
 
 	@Override
-	public void load() {
-		log.info("Zone engine load started");
-
+	public void init() {
+		ScriptManager scriptManager = new ScriptManager();
 		AggregatedClassListener acl = new AggregatedClassListener();
 		acl.addClassListener(new OnClassLoadUnloadListener());
-		acl.addClassListener(new ScheduledTaskClassListener());
 		acl.addClassListener(new ZoneHandlerClassListener());
 		scriptManager.setGlobalClassListener(acl);
-
-		try {
-			scriptManager.load(WorldConfig.ZONE_HANDLER_DIRECTORY);
-			log.info("Loaded " + zoneHandlers.size() + " zone handlers.");
-		} catch (Exception e) {
-			throw new GameServerError("Can't initialize instance handlers.", e);
-		}
-	}
-
-	@Override
-	public void shutdown() {
-		log.info("Zone engine shutdown started");
-		scriptManager.shutdown();
-		zoneHandlers.clear();
-		log.info("Zone engine shutdown complete");
+		scriptManager.load(WorldConfig.ZONE_HANDLER_DIRECTORY);
+		log.info("Loaded " + zoneHandlers.size() + " zone handlers.");
 	}
 
 	public ZoneHandler getNewZoneHandler(ZoneName zoneName) {
@@ -125,13 +105,15 @@ public final class ZoneService implements GameEngine {
 				case FLY:
 					instance = new FlyZoneInstance(mapId, area);
 					break;
+				case NO_FLY:
+					instance = new NoFlyZoneInstance(mapId, area);
+					break;
 				case FORT:
 					instance = new SiegeZoneInstance(mapId, area);
 					SiegeLocation siege = DataManager.SIEGE_LOCATION_DATA.getSiegeLocations().get(area.getZoneTemplate().getSiegeId().get(0));
 					if (siege != null) {
 						siege.addZone((SiegeZoneInstance) instance);
-						if (GeoDataConfig.GEO_SHIELDS_ENABLE)
-							ShieldService.getInstance().attachShield(siege);
+						ShieldService.getInstance().attachShield(siege);
 					}
 					break;
 				case ARTIFACT:
@@ -216,10 +198,8 @@ public final class ZoneService implements GameEngine {
 		ZoneHandler handler = collidableHandlers.get(zoneName);
 		if (handler == null) {
 			if (geometry.getMaterialId() == 11) {
-				if (GeoDataConfig.GEO_SHIELDS_ENABLE) {
-					handler = new SiegeShield(geometry);
-					ShieldService.getInstance().registerShield(worldId, (SiegeShield) handler);
-				} else
+				handler = ShieldService.getInstance().tryRegisterShield(worldId, geometry);
+				if (handler == null)
 					return;
 			} else {
 				MaterialTemplate template = DataManager.MATERIAL_DATA.getTemplate(geometry.getMaterialId());

@@ -30,18 +30,13 @@ public class SkillData {
 	@XmlTransient
 	private final Map<String, List<SkillTemplate>> skillTemplatesByStack = new LinkedHashMap<>();
 
-	@XmlTransient
-	private final Map<Integer, List<Integer>> skillIdsByCooldownId = new HashMap<>();
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		skillTemplateById.clear();
 		skillTemplatesByGroup.clear();
 		skillTemplatesByStack.clear();
-		skillIdsByCooldownId.clear();
 		for (SkillTemplate skillTemplate : skillTemplates) {
 			int skillId = skillTemplate.getSkillId();
-			int cooldownId = skillTemplate.getCooldownId();
 			skillTemplateById.put(skillId, skillTemplate);
-			skillIdsByCooldownId.computeIfAbsent(cooldownId, k -> new ArrayList<>()).add(skillId);
 			if (skillTemplate.getGroup() != null)
 				skillTemplatesByGroup.computeIfAbsent(skillTemplate.getGroup(), k -> new ArrayList<>()).add(skillTemplate);
 			if (skillTemplate.getStack() != null)
@@ -76,10 +71,6 @@ public class SkillData {
 
 	public Collection<SkillTemplate> getSkillTemplates() {
 		return skillTemplateById.values();
-	}
-
-	public List<Integer> getSkillsForCooldownId(int cooldownId) {
-		return skillIdsByCooldownId.get(cooldownId);
 	}
 
 	public void validateMotions() {

@@ -3,6 +3,7 @@ package com.aionemu.gameserver.services;
 import java.time.DayOfWeek;
 import java.time.ZonedDateTime;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.BinaryOperator;
 
 import org.slf4j.Logger;
@@ -18,7 +19,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.model.house.HouseBids;
-import com.aionemu.gameserver.model.house.HouseDoorState;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_RECEIVE_BIDS;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.mail.AuctionResult;
@@ -35,19 +35,20 @@ public class HousingBidService {
 
 	private static final Logger log = LoggerFactory.getLogger("HOUSE_AUCTION_LOG");
 	private static final HousingBidService instance = new HousingBidService();
-	private Map<Integer, HouseBids> bids;
+	private final Map<Integer, HouseBids> bids = new ConcurrentHashMap<>();
 
 	private HousingBidService() {
-		bids = HouseBidsDAO.loadBids();
+		Set<Integer> deletedPlayerIds = HouseBidsDAO.loadBids(bids);
+		deletedPlayerIds.forEach(this::disableBids);
 		setBidInfoToHouses();
 		log.info("Loaded bids for " + bids.size() + " houses");
 	}
 
 	private void setBidInfoToHouses() {
 		HousingService.getInstance().getCustomHouses().forEach(house -> {
-			house.setBids(getBidInfo(house));
+			house.setBids(getBidInfo(house), true);
 			if (house.getBids() != null && house.isInactive())
-				log.warn(house + " is for auction but inactive. ");
+				log.warn(house + " is for auction but inactive.");
 		});
 	}
 
@@ -78,11 +79,7 @@ public class HousingBidService {
 			bids.remove(house.getObjectId(), houseBids);
 			return false;
 		}
-		house.setBids(houseBids);
-		if (house.getOwnerId() == 0) {
-			house.setDoorState(HouseDoorState.OPEN);
-			house.save();
-		}
+		house.setBids(houseBids, true);
 		house.getController().updateSign();
 		house.getController().updateAppearance();
 		return true;
@@ -205,7 +202,7 @@ public class HousingBidService {
 		if (!HouseBidsDAO.deleteHouseBids(houseObjectId) || (bids = this.bids.remove(houseObjectId)) == null)
 			return false;
 		House house = HousingService.getInstance().findHouse(houseObjectId);
-		house.setBids(null);
+		house.setBids(null, false);
 		int sellerId = house.getOwnerId();
 		PlayerCommonData sellerPcd = sellerId == 0 ? null : PlayerService.getOrLoadPlayerCommonData(sellerId);
 		HouseBids.Bid highestBid = bids.getHighestBid();
@@ -216,7 +213,7 @@ public class HousingBidService {
 
 			House inactiveHouse = sellerId == 0 ? null : HousingService.getInstance().findInactiveHouse(sellerId);
 			if (inactiveHouse != null && inactiveHouse.secondsUntilGraceEnd() == 0) {
-				house.getController().changeOwner(0); // inactive house will also be activated automatically by this
+				HousingService.getInstance().changeOwner(house, 0); // inactive house will also be activated automatically by this
 				result = AuctionResult.GRACE_FAIL;
 				time = System.currentTimeMillis();
 				compensation = (long) (bids.getInitialOffer().getKinah() * HousingConfig.AUCTION_GRACE_END_REFUND_PERCENT);
@@ -251,8 +248,8 @@ public class HousingBidService {
 
 			House studio = HousingService.getInstance().getPlayerStudio(buyerPcd.getPlayerObjId());
 			if (studio != null)
-				studio.getController().changeOwner(0);
-			house.getController().changeOwner(buyerPcd.getPlayerObjId());
+				HousingService.getInstance().changeOwner(studio, 0);
+			HousingService.getInstance().changeOwner(house, buyerPcd.getPlayerObjId());
 
 			AuctionResult result = AuctionResult.WIN_BID;
 			long time = System.currentTimeMillis();
@@ -292,7 +289,7 @@ public class HousingBidService {
 		for (House house : HousingService.getInstance().getCustomHouses()) {
 			if (house.isInactive() && house.secondsUntilGraceEnd() == 0) {
 				House oldHouse = HousingService.getInstance().findActiveHouse(house.getOwnerId());
-				oldHouse.getController().changeOwner(0);
+				HousingService.getInstance().changeOwner(oldHouse, 0);
 				PlayerCommonData pcd = PlayerService.getOrLoadPlayerCommonData(house.getOwnerId());
 				if (pcd.isOnline())
 					PacketSendUtility.sendPacket(pcd.getPlayer(),
@@ -327,11 +324,9 @@ public class HousingBidService {
 	}
 
 	public void disableBids(int playerObjId) {
-		bids.values().forEach(b -> {
-			synchronized (b) {
-				HouseBidsDAO.deleteOrDisableBids(playerObjId, b.deleteOrDisableBids(playerObjId));
-			}
-		});
+		List<HouseBids.Bid> deletedBids = new ArrayList<>();
+		bids.values().forEach(b -> deletedBids.addAll(b.deleteOrDisableBids(playerObjId)));
+		HouseBidsDAO.deleteOrDisableBids(playerObjId, deletedBids);
 	}
 
 	public HouseBids.Bid findLastBid(Player player) {
@@ -353,11 +348,7 @@ public class HousingBidService {
 			return false;
 
 		HouseBidsDAO.deleteHouseBids(house.getObjectId());
-		house.setBids(null);
-		if (house.getOwnerId() == 0) {
-			house.setDoorState(null);
-			house.save();
-		}
+		house.setBids(null, true);
 		house.getController().updateSign();
 		house.getController().updateAppearance();
 

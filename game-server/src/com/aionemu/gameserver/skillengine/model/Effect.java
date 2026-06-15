@@ -6,14 +6,15 @@ import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.commons.utils.Rnd;
+import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.controllers.attack.AggroList;
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
+import com.aionemu.gameserver.controllers.effect.CumulativeResistType;
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.AttackCalcObserver;
 import com.aionemu.gameserver.controllers.observer.ObserverType;
 import com.aionemu.gameserver.model.SkillElement;
 import com.aionemu.gameserver.model.gameobjects.Creature;
-import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.calc.StatOwner;
@@ -22,7 +23,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SKILL_ACTIVATION;
 import com.aionemu.gameserver.services.event.Event;
 import com.aionemu.gameserver.skillengine.SkillEngine;
-import com.aionemu.gameserver.skillengine.condition.Conditions;
 import com.aionemu.gameserver.skillengine.effect.*;
 import com.aionemu.gameserver.skillengine.model.EffectReserved.ResourceType;
 import com.aionemu.gameserver.skillengine.periodicaction.PeriodicAction;
@@ -141,7 +141,7 @@ public class Effect implements StatOwner {
 		this.duration = duration;
 		this.forceType = forceType;
 		this.isSubEffect = isSubEffect;
-		this.power = initializePower();
+		this.power = skillTemplate.getReqDispelCount();
 	}
 
 	/**
@@ -154,8 +154,7 @@ public class Effect implements StatOwner {
 		this.skillLevel = skillLevel;
 		this.duration = duration;
 		this.forceType = forceType;
-
-		this.power = initializePower();
+		this.power = skillTemplate.getReqDispelCount();
 	}
 
 	public void setWorldPosition(int worldId, int instanceId, float x, float y, float z) {
@@ -317,12 +316,12 @@ public class Effect implements StatOwner {
 			if (value <= 0) {
 				value = 0;
 				// effected is about to die
-				if (!effected.isDead()) {
-					effected.getLifeStats().setIsAboutToDie();
+				if (!effected.isDead())
 					effected.getLifeStats().setKillingBlow(er.getValue());
-				}
+				effectedHp = 0;
+			} else {
+				effectedHp = Math.max(1, (int) (100f * value / effected.getLifeStats().getMaxHp()));
 			}
-			effectedHp = (int) (100f * value / effected.getLifeStats().getMaxHp());
 		}
 		synchronized (reservedEffects) {
 			reservedEffects.add(er);
@@ -355,6 +354,8 @@ public class Effect implements StatOwner {
 	}
 
 	public void setShieldDefense(int shieldDefense) {
+		if ((shieldDefense & ShieldType.SKILL_REFLECTOR.getId()) != 0 && getSkillSubType() != SkillSubType.ATTACK && getSkillSubType() != SkillSubType.DEBUFF)
+			shieldDefense &= ~ShieldType.SKILL_REFLECTOR.getId(); // disable SKILL_REFLECTOR bit (only attack type effects can reflect whole effects)
 		this.shieldDefense = shieldDefense;
 	}
 
@@ -473,16 +474,8 @@ public class Effect implements StatOwner {
 		if (skillTemplate.getEffects() == null)
 			return;
 
-		if (effected != null) {
-			for (EffectTemplate template : getEffectTemplates()) {
-				if (effected.getEffectController().isConflicting(this, template)) {
-					if (!isPassive() && getTargetSlot() != SkillTargetSlot.DEBUFF) {
-						setEffectResult(EffectResult.CONFLICT);
-						break;
-					}
-				}
-			}
-		}
+		if (effected != null && effected.getEffectController().isConflicting(this))
+			setEffectResult(EffectResult.CONFLICT);
 		if (effectResult != EffectResult.CONFLICT) {
 			for (EffectTemplate template : getEffectTemplates()) {
 				template.calculate(this);
@@ -498,7 +491,7 @@ public class Effect implements StatOwner {
 					template.calculateSubEffect(this);
 				}
 			}
-			if (effector instanceof Player p && getAttackStatus() == AttackStatus.CRITICAL && !getEffected().getEffectController().isUnderShield() && getSubEffect() == null && !isPeriodic() && Rnd.chance() < 10) {
+			if (effector instanceof Player p && getAttackStatus() == AttackStatus.CRITICAL && getSubEffect() == null && !isPeriodic() && Rnd.chance() < 10) {
 				Effect criticalEffect = SkillEngine.getInstance().createCriticalEffect(p, getEffected(), skillTemplate.getSkillId());
 				if (criticalEffect != null && criticalEffect.getEffectResult() != EffectResult.DODGE && criticalEffect.getEffectResult() != EffectResult.RESIST) {
 					applyCriticalEffect = true;
@@ -594,7 +587,7 @@ public class Effect implements StatOwner {
 				effected.getKnownList().forEachObject(visibleObject -> {
 					if (visibleObject instanceof Creature) {
 						AggroList al = ((Creature) visibleObject).getAggroList();
-						if (al.isHating(effector))
+						if (al.isHating(effector) || al.isHating(effected))
 							al.addHate(effector, effectHate);
 					}
 				});
@@ -626,9 +619,9 @@ public class Effect implements StatOwner {
 
 			schedulePeriodicActions();
 
-			for (EffectTemplate template : successEffects.values()) {
-				template.startEffect(this);
-				addEquipmentObserver();
+			if (!successEffects.isEmpty()) {
+				for (EffectTemplate template : successEffects.values())
+					template.startEffect(this);
 				addCancelOnDmgObserver();
 			}
 
@@ -852,57 +845,43 @@ public class Effect implements StatOwner {
 	private int calculateEffectsDuration() {
 		long duration = calculateTemplateDuration();
 
-		// adjust with pvp duration (not sure why some self target skills have pvp duration o.O idk how to handle that)
-		if (getEffected() instanceof Player) {
-			if (skillTemplate.getPvpDuration() != 0 && !effector.equals(effected))
+		if (getEffected() instanceof Player effectedPlayer) {
+			boolean isEffectorPlayer = (CustomConfig.COUNT_SUMMON_EFFECTS_FOR_CUMULATIVE_RESIST ? effector.getMaster() : effector) instanceof Player;
+			if (isEffectorPlayer) {
+				duration = applyCumulativeResistDurationMultiplier(duration, effectedPlayer);
+			}
+			if (skillTemplate.getPvpDuration() != 0 && !effector.equals(effected)) {
 				duration = duration * skillTemplate.getPvpDuration() / 100;
-			if (getEffector().getMaster() instanceof Player) {
-				for (EffectTemplate et : successEffects.values()) {
-					if (et instanceof ParalyzeEffect && ((Player) getEffected()).validateCumulativeParalyzeResistExpirationTime()) {
-						duration = (long) (duration * getCumulativeResistDurationMultiplierFor(((Player) getEffected()).getParalyzeCount()) / 100f);
-						break;
-					} else if (et instanceof FearEffect && ((Player) getEffected()).validateCumulativeFearResistExpirationTime()) {
-						duration = (long) (duration * getCumulativeResistDurationMultiplierFor(((Player) getEffected()).getFearCount()) / 100f);
-						break;
-					} else if (et instanceof SleepEffect && ((Player) getEffected()).validateCumulativeSleepResistExpirationTime()) {
-						duration = (long) (duration * getCumulativeResistDurationMultiplierFor(((Player) getEffected()).getSleepCount()) / 100f);
-						break;
-					}
-				}
 			}
 		}
-
 		return (int) Math.min(Integer.MAX_VALUE, duration);
 	}
 
 	private long calculateTemplateDuration() {
-		long longestTemplateDuration = 0;
-		// iterate skill's effects until we can calculate a duration time, which is valid for all of them
+		// retail sets the first effect duration > 0 as the skill duration, ignoring longer durations of other effects (see 620 Armor of Attrition)
 		for (EffectTemplate et : successEffects.values()) {
 			long effectDuration = et.getDuration2() + ((long) et.getDuration1()) * getSkillLevel(); // some event skills would produce an int overflow
-			if (et.getRandomTime() > 0)
-				effectDuration -= Rnd.get(0, et.getRandomTime());
-			if (effectDuration > longestTemplateDuration)
-				longestTemplateDuration = effectDuration;
+			if (effectDuration > 0) {
+				if (et.getRandomTime() > 0)
+					effectDuration -= Rnd.get(0, et.getRandomTime());
+				return effectDuration;
+			}
 		}
-		return longestTemplateDuration;
+		return 0;
 	}
 
-	private int getCumulativeResistDurationMultiplierFor(int resistCount) {
-		switch (resistCount) {
-			case 0:
-			case 1:
-			case 2:
-				return 100;
-			case 3:
-				return 90;
-			case 4:
-				return 85;
-			case 5:
-				return 80;
-			default:
-				return 1;
+	private long applyCumulativeResistDurationMultiplier(long duration, Player effected) {
+		for (EffectTemplate et : successEffects.values()) {
+			CumulativeResistType cumulativeResistType = switch (et) {
+				case FearEffect _ -> CumulativeResistType.FEAR;
+				case ParalyzeEffect _ -> CumulativeResistType.PARALYZE;
+				case SleepEffect _ -> CumulativeResistType.SLEEP;
+				default -> null;
+			};
+			if (cumulativeResistType != null && !et.isNoResist())
+				return effected.getEffectController().calculateAndApplyCumulativeResistDuration(cumulativeResistType, duration);
 		}
+		return duration;
 	}
 
 	public boolean isDeityAvatar() {
@@ -988,31 +967,6 @@ public class Effect implements StatOwner {
 		return this.subEffectAbortedBySubConditions;
 	}
 
-	/**
-	 * Check all in use equipment conditions
-	 * 
-	 * @return true if all conditions have been satisfied
-	 */
-	private boolean useEquipmentConditionsCheck() {
-		Conditions useEquipConditions = skillTemplate.getUseEquipmentconditions();
-		return useEquipConditions == null || useEquipConditions.validate(this);
-	}
-
-	private void addEquipmentObserver() {
-		// If skill has use equipment conditions, observe for unequip event and remove effect if event occurs
-		if (getSkillTemplate().getUseEquipmentconditions() != null && !getSkillTemplate().getUseEquipmentconditions().getConditions().isEmpty()) {
-			addObserver(getEffected(), new ActionObserver(ObserverType.UNEQUIP) {
-
-				@Override
-				public void unequip(Item item, Player owner) {
-					if (!useEquipmentConditionsCheck()) {
-						endEffect();
-					}
-				}
-			});
-		}
-	}
-
 	private void addCancelOnDmgObserver() {
 		if (isCancelOnDmg()) {
 			Creature effected = getEffected();
@@ -1050,68 +1004,6 @@ public class Effect implements StatOwner {
 		}
 		if (hasStatModifiers)
 			getEffected().getGameStats().endEffect(this);
-	}
-
-	private int initializePower() {
-		// tweak for pet order spirit substitution and bodyguard
-		if (skillTemplate.getActivationAttribute().equals(ActivationAttribute.MAINTAIN)) {
-			return 30;
-		} else if (skillTemplate.getActivationAttribute().equals(ActivationAttribute.TOGGLE)) {
-			return 100;
-		}
-		switch (skillTemplate.getName()) {
-			case "Explosion of Wrath": // Tahabata fear
-			case "Soul Petrify": // Tahabata paralyse
-			case "Protective Shield":
-				return 30;
-			case "Surkana Aetheric Field":
-				return 60;
-			case "Sap Damage":
-			case "Resistance":
-			case "Weeping Curtain":
-			case "Submissive Strike":
-			case "Spinning Smash":
-			case "Conqueror's Strike":
-			case "Weaken":
-			case "Canyonguard's Target":
-			case "Relic Explosion":
-			case "Ide Shielding":
-				return 255;
-
-		}
-		if (skillTemplate.getGroup() != null) {
-			switch (skillTemplate.getGroup()) {
-				case "PR_GODSVOICE":// Word of Destruction I
-				case "RA_SILENTARROW":
-					return 20;
-				case "WA_STEADINESS":// Unwavering Devotion
-				case "KN_IRONBODY":// Iron Skin
-				case "KN_INVINSIBLEPROTECT": // Empyrean Providence
-				case "FI_CRUSADE": // Nezekans Blessing
-				case "FI_BERSERK": // Zikels Threat
-				case "KN_PURIFYWING":// Prayer of Freedom
-				case "EL_ORDER_SACRIFICE":// Spirit Substitution
-				case "EL_ETERNALSHIELD": // Spirit Preserve
-				case "CH_IMPROVEDBODY": // Elemental Screen
-				case "WI_GAINMANA": // Gain Mana
-				case "RA_SHOCKARROW":// Shock Arrow
-				case "RA_ROOTARROW":
-				case "FI_ANKLEGRAB":// Ankle Snare
-				case "WI_COUNTERMAGIC":// Curse Of Weakness
-				case "PR_PAINLINKS":// Chain of Suffering
-				case "CH_ETERNALSEAL": // Stilling Word
-				case "EL_DECAYINGWING":
-				case "AS_VENOMSTAB":
-				case "CH_SOAREDROCK":
-					return 30;
-				case "EL_PLAGUESWAM":// Cursecloud
-				case "BA_SONGOFBRAVE":
-					return 40; // need 2 cleric dispels or potions
-				case "RI_MAGNETICFIELD":
-					return 255;
-			}
-		}
-		return 10;
 	}
 
 	public int getPower() {
@@ -1229,6 +1121,10 @@ public class Effect implements StatOwner {
 
 	public void setMpShieldSkillId(int mpShieldSkillId) {
 		this.mpShieldSkillId = mpShieldSkillId;
+	}
+
+	public Set<EffectType> getPossibleConflictEffectTypes() {
+		return skillTemplate.getEffects() == null ? Collections.emptySet() : skillTemplate.getEffects().getPossibleConflictEffectTypes();
 	}
 
 	public static class ForceType {

@@ -22,7 +22,20 @@ public class AhserionGate extends AhserionConstructAI {
 	}
 
 	private void useBuff() {
-		SkillEngine.getInstance().applyEffectDirectly(21515, getNpcId() - 277227, getOwner(), getOwner(), null, ForceType.DEFAULT);
+		SkillEngine.getInstance().applyEffectDirectly(21515, getSkillLevel(), getOwner(), getOwner(), null, ForceType.DEFAULT);
 		getOwner().setTarget(null);
+	}
+
+	/**
+	 * Each level corresponds to 30s buff time.
+	 * Retail values: extracted from npcs_abyss_monsters.xml
+	 */
+	private int getSkillLevel() {
+		return switch (getNpcId()) {
+			case 277229 -> 40; // Hangar Barricade
+			case 277230 -> 50; // Ahserion's Flight Barrier
+			case 277231 -> 60; // Bulwark Shield
+			default -> 0;
+		};
 	}
 }

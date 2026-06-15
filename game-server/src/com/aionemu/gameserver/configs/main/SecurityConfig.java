@@ -1,9 +1,11 @@
 package com.aionemu.gameserver.configs.main;
 
+import java.util.Set;
+
 import com.aionemu.commons.configuration.Property;
 
 public class SecurityConfig {
-	
+
 	@Property(key = "gameserver.security.aion.bin.check", defaultValue = "false")
 	public static boolean AION_BIN_CHECK;
 
@@ -25,17 +27,11 @@ public class SecurityConfig {
 	@Property(key = "gameserver.security.antihack.punish", defaultValue = "0")
 	public static int PUNISH;
 
-	@Property(key = "gameserver.security.noanimation", defaultValue = "false")
-	public static boolean NO_ANIMATION;
-
-	@Property(key = "gameserver.security.noanimation.kick", defaultValue = "false")
-	public static boolean NO_ANIMATION_KICK;
-
-	@Property(key = "gameserver.security.noanimation.value", defaultValue = "0.1")
-	public static float NO_ANIMATION_VALUE;
-
-	@Property(key = "gameserver.security.motion.time.enable", defaultValue = "true")
-	public static boolean MOTION_TIME;
+	/**
+	 * Check for no-animation hacks (prevents premature skill executions and logs suspicious players to audit log)
+	 */
+	@Property(key = "gameserver.security.check_animations", defaultValue = "true")
+	public static boolean CHECK_ANIMATIONS;
 
 	@Property(key = "gameserver.security.captcha.enable", defaultValue = "false")
 	public static boolean CAPTCHA_ENABLE;
@@ -76,9 +72,25 @@ public class SecurityConfig {
 	@Property(key = "gameserver.security.survey.delay.minute", defaultValue = "20")
 	public static int SURVEY_DELAY;
 
+	/**
+	 * Restriction mode for multi-clienting:<br>
+	 * NONE - Players are allowed to log in multiple accounts per computer<br>
+	 * FULL - Players are allowed to log in one account per computer<br>
+	 * SAME_FACTION - Players are allowed to log in multiple accounts per computer, but only log in characters of the same faction<br>
+	 */
 	@Property(key = "gameserver.security.multi_clienting.restriction_mode", defaultValue = "NONE")
 	public static MultiClientingRestrictionMode MULTI_CLIENTING_RESTRICTION_MODE;
 
+	/**
+	 * Comma separated list of MAC addresses that are allowed to log in regardless of the configured restrictions.
+	 */
+	@Property(key = "gameserver.security.multi_clienting.ignored_mac_addresses", defaultValue = "")
+	public static Set<String> MULTI_CLIENTING_IGNORED_MAC_ADDRESSES;
+
+	/**
+	 * If multi-clienting is restricted to the same faction, logging in characters of one faction will be denied until all characters of the opposite
+	 * faction have been offline for the specified amount of time.
+	 */
 	@Property(key = "gameserver.security.multi_clienting.faction_switch_cooldown_minutes", defaultValue = "20")
 	public static int MULTI_CLIENTING_FACTION_SWITCH_COOLDOWN_MINUTES;
 

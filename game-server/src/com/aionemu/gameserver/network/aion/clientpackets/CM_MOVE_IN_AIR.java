@@ -2,7 +2,6 @@ package com.aionemu.gameserver.network.aion.clientpackets;
 
 import java.util.Set;
 
-import com.aionemu.gameserver.model.actions.PlayerMode;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
@@ -49,16 +48,14 @@ public class CM_MOVE_IN_AIR extends AionClientPacket {
 		if (!player.isInState(CreatureState.FLYING))
 			return;
 
-		if (player.isUsingFlyTeleport()) {
-			player.setFlightDistance(distance);
-		} else if (player.isInPlayerMode(PlayerMode.WINDSTREAM)) {
-			player.windstreamPath.distance = distance;
-		}
+		if (player.getFlightPath() != null)
+			player.getFlightPath().setDistance(distance);
 
 		if (player.isProtectionActive())
 			player.getController().stopProtectionActiveTask();
 
 		World.getInstance().updatePosition(player, x, y, z, heading);
 		player.getMoveController().onMoveFromClient();
+		player.getController().onMove();
 	}
 }

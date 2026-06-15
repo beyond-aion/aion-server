@@ -16,5 +16,6 @@ public class ChangeRace extends AdminCommand {
 	public void execute(Player admin, String... params) {
 		admin.getCommonData().setRace(admin.getOppositeRace());
 		admin.getController().onChangedPlayerAttributes();
+		admin.getController().updateNearbyQuests();
 	}
 }

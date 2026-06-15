@@ -3,16 +3,13 @@ package instance.crucible;
 import java.util.List;
 
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
-import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.StageType;
 import com.aionemu.gameserver.model.instance.instancescore.InstanceScore;
 import com.aionemu.gameserver.model.instance.playerreward.CruciblePlayerReward;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.services.player.PlayerReviveService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
@@ -65,12 +62,6 @@ public class CrucibleInstance extends GeneralInstanceHandler {
 		return player.isInsideZone(zone);
 	}
 
-	@Override
-	public boolean onDie(Player player, Creature lastAttacker) {
-		PacketSendUtility.sendPacket(player, new SM_DIE(false, false, 0, 8));
-		return true;
-	}
-
 	protected void teleport(Player player, float x, float y, float z, byte h) {
 		TeleportService.teleportTo(player, instance, x, y, z, h);
 	}
@@ -91,5 +82,15 @@ public class CrucibleInstance extends GeneralInstanceHandler {
 	public void onInstanceDestroy() {
 		isInstanceDestroyed = true;
 		instanceScore.clear();
+	}
+
+	@Override
+	public boolean allowSelfReviveBySkill() {
+		return false;
+	}
+
+	@Override
+	public boolean allowSelfReviveByItem() {
+		return false;
 	}
 }

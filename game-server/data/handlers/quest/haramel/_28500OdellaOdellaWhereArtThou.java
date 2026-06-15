@@ -23,7 +23,6 @@ public class _28500OdellaOdellaWhereArtThou extends AbstractQuestHandler {
 		int[] npcs = { 203560, 203649, 730306, 730307, 799522 };
 		qe.registerQuestNpc(203560).addOnQuestStart(questId);
 		qe.registerOnEnterZone(ZoneName.get("DF1A_SENSORYAREA_Q28500_206151_3_220030000"), questId);
-		qe.registerOnMovieEndQuest(217, questId);
 		for (int npc : npcs) {
 			qe.registerQuestNpc(npc).addOnTalkEvent(questId);
 		}
@@ -120,21 +119,8 @@ public class _28500OdellaOdellaWhereArtThou extends AbstractQuestHandler {
 	}
 
 	@Override
-	public boolean onMovieEndEvent(QuestEnv env, int movieId) {
-		Player player = env.getPlayer();
-
-		if (player == null) {
-			return false;
-		}
-
-		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			int var = qs.getQuestVarById(0);
-			if (var == 3) {
-				changeQuestStep(env, 3, 3, true); // reward
-				return true;
-			}
-		}
-		return false;
+	public void onMovieEndEvent(QuestEnv env, int movieId) {
+		if (movieId == 217)
+			changeQuestStep(env, 3, 3, true); // reward
 	}
 }

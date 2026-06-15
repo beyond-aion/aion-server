@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.model.templates.spawns;
 
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 
 /**
@@ -34,14 +35,14 @@ public class SpawnSpotTemplate {
 	@XmlAttribute(name = "walker_index")
 	private Integer walkerIdx;
 
-	@XmlAttribute(name = "fly")
-	private Integer fly = 0;
-
 	@XmlAttribute(name = "anchor")
 	private String anchor;
 
 	@XmlAttribute(name = "state")
 	private Integer state = 0;
+
+	@XmlAttribute(name = "aerial_spawn")
+	private Boolean aerialSpawn;
 
 	@XmlElement(name = "temporary_spawn")
 	private TemporarySpawn temporaySpawn;
@@ -57,12 +58,12 @@ public class SpawnSpotTemplate {
 	void beforeMarshal(Marshaller marshaller) {
 		if (ZERO.equals(staticId))
 			staticId = null;
-		if (ZERO.equals(fly))
-			fly = null;
 		if (ZERO.equals(randomWalk))
 			randomWalk = null;
 		if (ZERO.equals(state))
 			state = null;
+		if (Boolean.FALSE.equals(aerialSpawn))
+			aerialSpawn = null;
 		if (ZERO.equals(walkerIdx))
 			walkerIdx = null;
 	}
@@ -70,14 +71,19 @@ public class SpawnSpotTemplate {
 	void afterMarshal(Marshaller marshaller) {
 		if (staticId == null)
 			staticId = 0;
-		if (fly == null)
-			fly = 0;
 		if (randomWalk == null)
 			randomWalk = 0;
 		if (state == null)
 			state = 0;
+		if (aerialSpawn == null)
+			aerialSpawn = false;
 		if (walkerIdx == null)
 			walkerIdx = 0;
+	}
+
+	void afterUnmarshal(Unmarshaller u, Object parent) {
+		if (ai != null)
+			ai = ai.intern();
 	}
 
 	public SpawnSpotTemplate(float x, float y, float z, byte h, int randomWalk, String walkerId, Integer walkerIndex) {
@@ -131,10 +137,6 @@ public class SpawnSpotTemplate {
 		return randomWalk;
 	}
 
-	public int getFly() {
-		return fly;
-	}
-
 	public String getAnchor() {
 		return anchor;
 	}
@@ -147,6 +149,10 @@ public class SpawnSpotTemplate {
 		if (state == null)
 			return 0;
 		return state;
+	}
+
+	public boolean isAerialSpawn() {
+		return aerialSpawn != null && aerialSpawn;
 	}
 
 	public TemporarySpawn getTemporarySpawn() {

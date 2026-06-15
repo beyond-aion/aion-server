@@ -80,8 +80,7 @@ public class ReportToMany extends AbstractTemplateQuestHandler {
 					case QUEST_ACCEPT:
 					case QUEST_ACCEPT_1:
 					case QUEST_ACCEPT_SIMPLE:
-						QuestService.startQuest(env);
-						return closeDialogWindow(env);
+						return sendQuestStartDialog(env);
 					case QUEST_SELECT:
 						return sendQuestDialog(env, startDialogId != 0 ? startDialogId : isDataDriven ? 4762 : 1011);
 					default:

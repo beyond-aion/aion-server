@@ -201,10 +201,6 @@ public class EnchantService {
 			if (targetItem.isAmplified()) {
 				currentEnchant = maxEnchant;
 				targetItem.setAmplified(false);
-				if (targetItem.getBuffSkill() != 0) {
-					SkillLearnService.removeSkill(player, targetItem.getBuffSkill());
-					targetItem.setBuffSkill(0);
-				}
 			} else if ((currentEnchant > 10 && maxEnchant > 10)) {
 				currentEnchant = 10;
 			} else if (currentEnchant > 0) {
@@ -215,40 +211,10 @@ public class EnchantService {
 		if (targetItem.isAmplified())
 			maxEnchant = 255;
 
-		targetItem.setEnchantLevel(Math.min(currentEnchant, maxEnchant));
-		int enchantLevel = targetItem.getEnchantLevel();
-
-		if (targetItem.getEnchantEffect() != null) {
-			targetItem.getEnchantEffect().endEffect(player);
-			targetItem.setEnchantEffect(null);
-		}
-
-		if (enchantLevel >= 20) {
-			int buffId = getEquipBuff(targetItem);
-			int oldBuffId = targetItem.getBuffSkill();
-			if (buffId != oldBuffId) {
-				targetItem.setBuffSkill(buffId);
-				if (targetItem.isEquipped()) {
-					if (oldBuffId != 0)
-						SkillLearnService.removeSkill(player, oldBuffId);
-					SkillLearnService.learnTemporarySkill(player, buffId, 1);
-				}
-			}
-			// targetItem.setPackCount(targetItem.getPackCount() + 1);
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EXCEED_SKILL_ENCHANT(targetItem.getL10n(), enchantLevel,
-				DataManager.SKILL_DATA.getSkillTemplate(buffId).getL10n()));
-		}
-
-		if (targetItem.isEquipped()) {
-			player.getGameStats().updateStatsVisually();
-			if (enchantLevel > 0)
-				applyEnchantEffect(targetItem, player, enchantLevel);
-		}
-
-		ItemPacketService.updateItemAfterInfoChange(player, targetItem, ItemUpdateType.STATS_CHANGE);
+		setEnchantLevel(player, targetItem, Math.min(currentEnchant, maxEnchant));
 
 		if (success)
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ENCHANT_ITEM_SUCCEED_NEW(targetItem.getL10n(), enchantLevel));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ENCHANT_ITEM_SUCCEED_NEW(targetItem.getL10n(), targetItem.getEnchantLevel()));
 		else {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ENCHANT_ITEM_FAILED(targetItem.getL10n()));
 			if (targetItem.getItemTemplate().getEnchantType() > 0) {
@@ -261,12 +227,41 @@ public class EnchantService {
 				targetItem.removeRemainingTuningCountIfPossible();
 			}
 		}
-		if (targetItem.getPersistentState() != PersistentState.DELETED) {
-			if (targetItem.isEquipped())
-				player.getEquipment().setPersistentState(PersistentState.UPDATE_REQUIRED);
-			else
-				player.getInventory().setPersistentState(PersistentState.UPDATE_REQUIRED);
+	}
+
+	public static void setEnchantLevel(Player player, Item item, int enchantLevel) {
+		item.setEnchantLevel(enchantLevel);
+		int oldBuffId = item.getBuffSkill();
+		int newBuffId = 0;
+		if (enchantLevel >= 20)
+			newBuffId = getEquipBuff(item);
+		if (newBuffId != oldBuffId) {
+			item.setBuffSkill(newBuffId);
+			if (item.isEquipped()) {
+				if (oldBuffId != 0)
+					SkillLearnService.removeSkill(player, oldBuffId);
+				if (newBuffId != 0)
+					SkillLearnService.learnTemporarySkill(player, newBuffId, 1);
+			}
 		}
+		if (newBuffId != 0)
+			PacketSendUtility.sendPacket(player,
+				SM_SYSTEM_MESSAGE.STR_MSG_EXCEED_SKILL_ENCHANT(item.getL10n(), enchantLevel, DataManager.SKILL_DATA.getSkillTemplate(newBuffId).getL10n()));
+		if (item.getEnchantEffect() != null) {
+			item.getEnchantEffect().endEffect(player);
+			item.setEnchantEffect(null);
+		}
+		if (item.isEquipped()) {
+			player.getGameStats().updateStatsVisually();
+			if (enchantLevel > 0)
+				applyEnchantEffect(item, player, enchantLevel);
+		}
+
+		ItemPacketService.updateItemAfterInfoChange(player, item, ItemUpdateType.STATS_CHANGE);
+		if (item.isEquipped())
+			player.getEquipment().setPersistentState(PersistentState.UPDATE_REQUIRED);
+		else
+			player.getInventory().setPersistentState(PersistentState.UPDATE_REQUIRED);
 	}
 
 	public static void applyEnchantEffect(Item targetItem, Player owner, int enchantLevel) {
@@ -287,6 +282,8 @@ public class EnchantService {
 			for (int i = 0; i <= enchantLevel - maxTemplateLevel; i++)
 				stats.addAll(limitlessBoni);
 		}
+		if (targetItem.getEnchantEffect() != null)
+			targetItem.getEnchantEffect().endEffect(owner);
 		targetItem.setEnchantEffect(new EnchantEffect(targetItem, owner, stats));
 	}
 
@@ -419,359 +416,125 @@ public class EnchantService {
 	}
 
 	public static int getEquipBuff(Item item) {
-		int[] skills;
-		switch (item.getItemTemplate().getExceedEnchantSkill()) {
-			case RANK1_SET1_MAGICAL_GLOVES:
-				skills = new int[] { 13042, 13046, 13055 };
-				break;
-			case RANK1_SET1_MAGICAL_PANTS:
-				skills = new int[] { 13071, 13075, 13078 };
-				break;
-			case RANK1_SET1_MAGICAL_SHOES:
-				skills = new int[] { 13108, 13118, 13121 };
-				break;
-			case RANK1_SET1_MAGICAL_SHOULDER:
-				skills = new int[] { 13104, 13097, 13098 };
-				break;
-			case RANK1_SET1_MAGICAL_TORSO:
-				skills = new int[] { 13128, 13132, 13144 };
-				break;
-			case RANK1_SET1_MAGICAL_WEAPON:
-				skills = new int[] { 13011, 13012, 13027 };
-				break;
-			case RANK1_SET1_PHYSICAL_GLOVES:
-				skills = new int[] { 13042, 13046, 13055 };
-				break;
-			case RANK1_SET1_PHYSICAL_PANTS:
-				skills = new int[] { 13071, 13075, 13078 };
-				break;
-			case RANK1_SET1_PHYSICAL_SHOES:
-				skills = new int[] { 13108, 13118, 13121 };
-				break;
-			case RANK1_SET1_PHYSICAL_SHOULDER:
-				skills = new int[] { 13104, 13097, 13098 };
-				break;
-			case RANK1_SET1_PHYSICAL_TORSO:
-				skills = new int[] { 13128, 13132, 13144 };
-				break;
-			case RANK1_SET1_PHYSICAL_WEAPON:
-				skills = new int[] { 13011, 13012, 13027 };
-				break;
-			case RANK1_SET2_MAGICAL_GLOVES:
-				skills = new int[] { 13046, 13058, 13056 };
-				break;
-			case RANK1_SET2_MAGICAL_PANTS:
-				skills = new int[] { 13075, 13061, 13067 };
-				break;
-			case RANK1_SET2_MAGICAL_SHOES:
-				skills = new int[] { 13121, 13114, 13119 };
-				break;
-			case RANK1_SET2_MAGICAL_SHOULDER:
-				skills = new int[] { 13104, 13094, 13192 };
-				break;
-			case RANK1_SET2_MAGICAL_TORSO:
-				skills = new int[] { 13144, 13135, 13133 };
-				break;
-			case RANK1_SET2_MAGICAL_WEAPON:
-				skills = new int[] { 13029, 13003, 13023 };
-				break;
-			case RANK1_SET2_PHYSICAL_GLOVES:
-				skills = new int[] { 13046, 13058, 13056 };
-				break;
-			case RANK1_SET2_PHYSICAL_PANTS:
-				skills = new int[] { 13075, 13064, 13069 };
-				break;
-			case RANK1_SET2_PHYSICAL_SHOES:
-				skills = new int[] { 13121, 13114, 13119 };
-				break;
-			case RANK1_SET2_PHYSICAL_SHOULDER:
-				skills = new int[] { 13104, 13094, 13192 };
-				break;
-			case RANK1_SET2_PHYSICAL_TORSO:
-				skills = new int[] { 13144, 13135, 13133 };
-				break;
-			case RANK1_SET2_PHYSICAL_WEAPON:
-				skills = new int[] { 13029, 13006, 13023 };
-				break;
-			case RANK1_SET3_MAGICAL_WEAPON:
-				skills = new int[] { 13031, 13022, 13026 };
-				break;
-			case RANK1_SET3_PHYSICAL_WEAPON:
-				skills = new int[] { 13031, 13022, 13026 };
-				break;
-			case RANK2_SET1_MAGICAL_GLOVES:
-				skills = new int[] { 13050, 13047, 13057 };
-				break;
-			case RANK2_SET1_MAGICAL_PANTS:
-				skills = new int[] { 13072, 13075, 13068 };
-				break;
-			case RANK2_SET1_MAGICAL_SHOES:
-				skills = new int[] { 13125, 13122, 13120 };
-				break;
-			case RANK2_SET1_MAGICAL_SHOULDER:
-				skills = new int[] { 13088, 13105, 13193 };
-				break;
-			case RANK2_SET1_MAGICAL_TORSO:
-				skills = new int[] { 13139, 13145, 13134 };
-				break;
-			case RANK2_SET1_MAGICAL_WEAPON:
-				skills = new int[] { 13008, 13010, 13024 };
-				break;
-			case RANK2_SET1_PHYSICAL_GLOVES:
-				skills = new int[] { 13050, 13047, 13057 };
-				break;
-			case RANK2_SET1_PHYSICAL_PANTS:
-				skills = new int[] { 13072, 13075, 13070 };
-				break;
-			case RANK2_SET1_PHYSICAL_SHOES:
-				skills = new int[] { 13125, 13122, 13120 };
-				break;
-			case RANK2_SET1_PHYSICAL_SHOULDER:
-				skills = new int[] { 13091, 13105, 13193 };
-				break;
-			case RANK2_SET1_PHYSICAL_TORSO:
-				skills = new int[] { 13139, 13145, 13134 };
-				break;
-			case RANK2_SET2_MAGICAL_WEAPON:
-				skills = new int[] { 13010, 13032, 13004 };
-				break;
-			case RANK2_SET2_PHYSICAL_GLOVES:
-				skills = new int[] { 13050, 13043, 13059 };
-				break;
-			case RANK2_SET2_PHYSICAL_PANTS:
-				skills = new int[] { 13072, 13078, 13065 };
-				break;
-			case RANK2_SET2_PHYSICAL_SHOES:
-				skills = new int[] { 13125, 13109, 13115 };
-				break;
-			case RANK2_SET2_PHYSICAL_SHOULDER:
-				skills = new int[] { 13091, 13099, 13095 };
-				break;
-			case RANK2_SET2_PHYSICAL_TORSO:
-				skills = new int[] { 13139, 13129, 13136 };
-				break;
-			case RANK2_SET2_PHYSICAL_WEAPON:
-				skills = new int[] { 13010, 13032, 13007 };
-				break;
-			case RANK2_SET1_PHYSICAL_WEAPON:
-				skills = new int[] { 13008, 13010, 13024 };
-				break;
-			case RANK2_SET3_MAGICAL_WEAPON:
-				skills = new int[] { 13008, 13013, 13030 };
-				break;
-			case RANK2_SET3_PHYSICAL_WEAPON:
-				skills = new int[] { 13008, 13013, 13030 };
-				break;
-			case RANK3_SET1_MAGICAL_GLOVES:
-				skills = new int[] { 13038, 13051, 13060 };
-				break;
-			case RANK3_SET1_MAGICAL_PANTS:
-				skills = new int[] { 13080, 13073, 13063 };
-				break;
-			case RANK3_SET1_MAGICAL_SHOES:
-				skills = new int[] { 13112, 13126, 13116 };
-				break;
-			case RANK3_SET1_MAGICAL_SHOULDER:
-				skills = new int[] { 13082, 13089, 13096 };
-				break;
-			case RANK3_SET1_MAGICAL_TORSO:
-				skills = new int[] { 13142, 13140, 13137 };
-				break;
-			case RANK3_SET1_MAGICAL_WEAPON:
-				skills = new int[] { 13034, 13018, 13009 };
-				break;
-			case RANK3_SET1_PHYSICAL_GLOVES:
-				skills = new int[] { 13040, 13051, 13060 };
-				break;
-			case RANK3_SET1_PHYSICAL_PANTS:
-				skills = new int[] { 13080, 13073, 13066 };
-				break;
-			case RANK3_SET1_PHYSICAL_SHOES:
-				skills = new int[] { 13112, 13126, 13116 };
-				break;
-			case RANK3_SET1_PHYSICAL_SHOULDER:
-				skills = new int[] { 13084, 13092, 13096 };
-				break;
-			case RANK3_SET1_PHYSICAL_TORSO:
-				skills = new int[] { 13142, 13140, 13137 };
-				break;
-			case RANK3_SET1_PHYSICAL_WEAPON:
-				skills = new int[] { 13036, 13020, 13009 };
-				break;
-			case RANK3_SET2_MAGICAL_GLOVES:
-				skills = new int[] { 13038, 13048, 13044 };
-				break;
-			case RANK3_SET2_MAGICAL_PANTS:
-				skills = new int[] { 13080, 13076, 13079 };
-				break;
-			case RANK3_SET2_MAGICAL_SHOES:
-				skills = new int[] { 13112, 13123, 13110 };
-				break;
-			case RANK3_SET2_MAGICAL_SHOULDER:
-				skills = new int[] { 13082, 13106, 13100 };
-				break;
-			case RANK3_SET2_MAGICAL_TORSO:
-				skills = new int[] { 13142, 13146, 13130 };
-				break;
-			case RANK3_SET2_MAGICAL_WEAPON:
-				skills = new int[] { 13034, 13014, 13025 };
-				break;
-			case RANK3_SET2_PHYSICAL_GLOVES:
-				skills = new int[] { 13040, 13048, 13044 };
-				break;
-			case RANK3_SET2_PHYSICAL_PANTS:
-				skills = new int[] { 13080, 13076, 13079 };
-				break;
-			case RANK3_SET2_PHYSICAL_SHOES:
-				skills = new int[] { 13112, 13123, 13110 };
-				break;
-			case RANK3_SET2_PHYSICAL_SHOULDER:
-				skills = new int[] { 13084, 13106, 13100 };
-				break;
-			case RANK3_SET2_PHYSICAL_TORSO:
-				skills = new int[] { 13142, 13146, 13130 };
-				break;
-			case RANK3_SET2_PHYSICAL_WEAPON:
-				skills = new int[] { 13036, 13014, 13025 };
-				break;
-			case RANK3_SET3_MAGICAL_WEAPON:
-				skills = new int[] { 13018, 13014, 13033 };
-				break;
-			case RANK3_SET3_PHYSICAL_WEAPON:
-				skills = new int[] { 13020, 13014, 13033 };
-				break;
-			case RANK2_SET2_MAGICAL_GLOVES:
-				skills = new int[] { 13050, 13043, 13059 };
-				break;
-			case RANK2_SET2_MAGICAL_PANTS:
-				skills = new int[] { 13072, 13078, 13062 };
-				break;
-			case RANK2_SET2_MAGICAL_SHOES:
-				skills = new int[] { 13125, 13109, 13115 };
-				break;
-			case RANK2_SET2_MAGICAL_SHOULDER:
-				skills = new int[] { 13088, 13099, 13095 };
-				break;
-			case RANK2_SET2_MAGICAL_TORSO:
-				skills = new int[] { 13139, 13129, 13136 };
-				break;
-			case RANK4_SET1_MAGICAL_GLOVES:
-				skills = new int[] { 13053, 13039, 13045 };
-				break;
-			case RANK4_SET1_MAGICAL_PANTS:
-				skills = new int[] { 13077, 13081, 13079 };
-				break;
-			case RANK4_SET1_MAGICAL_SHOES:
-				skills = new int[] { 13117, 13113, 13111 };
-				break;
-			case RANK4_SET1_MAGICAL_SHOULDER:
-				skills = new int[] { 13086, 13083, 13101 };
-				break;
-			case RANK4_SET1_MAGICAL_TORSO:
-				skills = new int[] { 13138, 13143, 13131 };
-				break;
-			case RANK4_SET1_MAGICAL_WEAPON:
-				skills = new int[] { 13015, 13028, 13017 };
-				break;
-			case RANK4_SET1_PHYSICAL_GLOVES:
-				skills = new int[] { 13054, 13041, 13045 };
-				break;
-			case RANK4_SET1_PHYSICAL_PANTS:
-				skills = new int[] { 13077, 13081, 13079 };
-				break;
-			case RANK4_SET1_PHYSICAL_SHOES:
-				skills = new int[] { 13117, 13113, 13111 };
-				break;
-			case RANK4_SET1_PHYSICAL_SHOULDER:
-				skills = new int[] { 13087, 13085, 13101 };
-				break;
-			case RANK4_SET1_PHYSICAL_TORSO:
-				skills = new int[] { 13138, 13143, 13131 };
-				break;
-			case RANK4_SET1_PHYSICAL_WEAPON:
-				skills = new int[] { 13016, 13028, 13017 };
-				break;
-			case RANK4_SET2_MAGICAL_GLOVES:
-				skills = new int[] { 13053, 13052, 13049 };
-				break;
-			case RANK4_SET2_MAGICAL_PANTS:
-				skills = new int[] { 13077, 13074, 13076 };
-				break;
-			case RANK4_SET2_MAGICAL_SHOES:
-				skills = new int[] { 13117, 13127, 13124 };
-				break;
-			case RANK4_SET2_MAGICAL_SHOULDER:
-				skills = new int[] { 13086, 13090, 13107 };
-				break;
-			case RANK4_SET2_MAGICAL_TORSO:
-				skills = new int[] { 13138, 13141, 13147 };
-				break;
-			case RANK4_SET2_MAGICAL_WEAPON:
-				skills = new int[] { 13019, 13017, 13005 };
-				break;
-			case RANK4_SET2_PHYSICAL_GLOVES:
-				skills = new int[] { 13054, 13052, 13049 };
-				break;
-			case RANK4_SET2_PHYSICAL_PANTS:
-				skills = new int[] { 13077, 13074, 13076 };
-				break;
-			case RANK4_SET2_PHYSICAL_SHOES:
-				skills = new int[] { 13117, 13127, 13124 };
-				break;
-			case RANK4_SET2_PHYSICAL_SHOULDER:
-				skills = new int[] { 13087, 13093, 13107 };
-				break;
-			case RANK4_SET2_PHYSICAL_TORSO:
-				skills = new int[] { 13138, 13141, 13147 };
-				break;
-			case RANK4_SET2_PHYSICAL_WEAPON:
-				skills = new int[] { 13021, 13017, 13005 };
-				break;
-			case RANK4_SET3_MAGICAL_WEAPON:
-				skills = new int[] { 13035, 13001, 13005 };
-				break;
-			case RANK4_SET3_PHYSICAL_WEAPON:
-				skills = new int[] { 13037, 13001, 13005 };
-				break;
-			case RANK5_SET1_MAGICAL_TORSO:
-				skills = new int[] { 13235, 13236, 13238 };
-				break;
-			case RANK5_SET1_MAGICAL_GLOVES:
-				skills = new int[] { 13248, 13253, 13251 };
-				break;
-			case RANK5_SET1_MAGICAL_PANTS:
-				skills = new int[] { 13241, 13079, 13240 };
-				break;
-			case RANK5_SET1_MAGICAL_SHOULDER:
-				skills = new int[] { 13269, 13279, 13247 };
-				break;
-			case RANK5_SET1_MAGICAL_SHOES:
-				skills = new int[] { 13245, 13266, 13246 };
-				break;
-			case RANK5_SET1_PHYSICAL_TORSO:
-				skills = new int[] { 13235, 13236, 13238 };
-				break;
-			case RANK5_SET1_PHYSICAL_GLOVES:
-				skills = new int[] { 13251, 13249, 13248 };
-				break;
-			case RANK5_SET1_PHYSICAL_SHOULDER:
-				skills = new int[] { 13270, 13247, 13269 };
-				break;
-			case RANK5_SET1_PHYSICAL_PANTS:
-				skills = new int[] { 13241, 13079, 13240 };
-				break;
-			case RANK5_SET1_PHYSICAL_SHOES:
-				skills = new int[] { 13245, 13244, 13266 };
-				break;
-			case RANK5_SET1_MAGICAL_WEAPON:
-				skills = new int[] { 13228, 13234, 13231 };
-				break;
-			case RANK5_SET1_PHYSICAL_WEAPON:
-				skills = new int[] { 13229, 13234, 13231 };
-				break;
-			default:
-				throw new UnsupportedOperationException("Unhandled breakthrough skill type " + item.getItemTemplate().getExceedEnchantSkill());
-		}
+		int[] skills = switch (item.getItemTemplate().getExceedEnchantSkill()) {
+			case RANK1_SET1_MAGICAL_GLOVES -> new int[] { 13042, 13046, 13055 };
+			case RANK1_SET1_MAGICAL_PANTS -> new int[] { 13071, 13075, 13078 };
+			case RANK1_SET1_MAGICAL_SHOES -> new int[] { 13108, 13118, 13121 };
+			case RANK1_SET1_MAGICAL_SHOULDER -> new int[] { 13104, 13097, 13098 };
+			case RANK1_SET1_MAGICAL_TORSO -> new int[] { 13128, 13132, 13144 };
+			case RANK1_SET1_MAGICAL_WEAPON -> new int[] { 13011, 13012, 13027 };
+			case RANK1_SET1_PHYSICAL_GLOVES -> new int[] { 13042, 13046, 13055 };
+			case RANK1_SET1_PHYSICAL_PANTS -> new int[] { 13071, 13075, 13078 };
+			case RANK1_SET1_PHYSICAL_SHOES -> new int[] { 13108, 13118, 13121 };
+			case RANK1_SET1_PHYSICAL_SHOULDER -> new int[] { 13104, 13097, 13098 };
+			case RANK1_SET1_PHYSICAL_TORSO -> new int[] { 13128, 13132, 13144 };
+			case RANK1_SET1_PHYSICAL_WEAPON -> new int[] { 13011, 13012, 13027 };
+			case RANK1_SET2_MAGICAL_GLOVES -> new int[] { 13046, 13058, 13056 };
+			case RANK1_SET2_MAGICAL_PANTS -> new int[] { 13075, 13061, 13067 };
+			case RANK1_SET2_MAGICAL_SHOES -> new int[] { 13121, 13114, 13119 };
+			case RANK1_SET2_MAGICAL_SHOULDER -> new int[] { 13104, 13094, 13192 };
+			case RANK1_SET2_MAGICAL_TORSO -> new int[] { 13144, 13135, 13133 };
+			case RANK1_SET2_MAGICAL_WEAPON -> new int[] { 13029, 13003, 13023 };
+			case RANK1_SET2_PHYSICAL_GLOVES -> new int[] { 13046, 13058, 13056 };
+			case RANK1_SET2_PHYSICAL_PANTS -> new int[] { 13075, 13064, 13069 };
+			case RANK1_SET2_PHYSICAL_SHOES -> new int[] { 13121, 13114, 13119 };
+			case RANK1_SET2_PHYSICAL_SHOULDER -> new int[] { 13104, 13094, 13192 };
+			case RANK1_SET2_PHYSICAL_TORSO -> new int[] { 13144, 13135, 13133 };
+			case RANK1_SET2_PHYSICAL_WEAPON -> new int[] { 13029, 13006, 13023 };
+			case RANK1_SET3_MAGICAL_WEAPON -> new int[] { 13031, 13022, 13026 };
+			case RANK1_SET3_PHYSICAL_WEAPON -> new int[] { 13031, 13022, 13026 };
+			case RANK2_SET1_MAGICAL_GLOVES -> new int[] { 13050, 13047, 13057 };
+			case RANK2_SET1_MAGICAL_PANTS -> new int[] { 13072, 13075, 13068 };
+			case RANK2_SET1_MAGICAL_SHOES -> new int[] { 13125, 13122, 13120 };
+			case RANK2_SET1_MAGICAL_SHOULDER -> new int[] { 13088, 13105, 13193 };
+			case RANK2_SET1_MAGICAL_TORSO -> new int[] { 13139, 13145, 13134 };
+			case RANK2_SET1_MAGICAL_WEAPON -> new int[] { 13008, 13010, 13024 };
+			case RANK2_SET1_PHYSICAL_GLOVES -> new int[] { 13050, 13047, 13057 };
+			case RANK2_SET1_PHYSICAL_PANTS -> new int[] { 13072, 13075, 13070 };
+			case RANK2_SET1_PHYSICAL_SHOES -> new int[] { 13125, 13122, 13120 };
+			case RANK2_SET1_PHYSICAL_SHOULDER -> new int[] { 13091, 13105, 13193 };
+			case RANK2_SET1_PHYSICAL_TORSO -> new int[] { 13139, 13145, 13134 };
+			case RANK2_SET2_MAGICAL_WEAPON -> new int[] { 13010, 13032, 13004 };
+			case RANK2_SET2_PHYSICAL_GLOVES -> new int[] { 13050, 13043, 13059 };
+			case RANK2_SET2_PHYSICAL_PANTS -> new int[] { 13072, 13078, 13065 };
+			case RANK2_SET2_PHYSICAL_SHOES -> new int[] { 13125, 13109, 13115 };
+			case RANK2_SET2_PHYSICAL_SHOULDER -> new int[] { 13091, 13099, 13095 };
+			case RANK2_SET2_PHYSICAL_TORSO -> new int[] { 13139, 13129, 13136 };
+			case RANK2_SET2_PHYSICAL_WEAPON -> new int[] { 13010, 13032, 13007 };
+			case RANK2_SET1_PHYSICAL_WEAPON -> new int[] { 13008, 13010, 13024 };
+			case RANK2_SET3_MAGICAL_WEAPON -> new int[] { 13008, 13013, 13030 };
+			case RANK2_SET3_PHYSICAL_WEAPON -> new int[] { 13008, 13013, 13030 };
+			case RANK3_SET1_MAGICAL_GLOVES -> new int[] { 13038, 13051, 13060 };
+			case RANK3_SET1_MAGICAL_PANTS -> new int[] { 13080, 13073, 13063 };
+			case RANK3_SET1_MAGICAL_SHOES -> new int[] { 13112, 13126, 13116 };
+			case RANK3_SET1_MAGICAL_SHOULDER -> new int[] { 13082, 13089, 13096 };
+			case RANK3_SET1_MAGICAL_TORSO -> new int[] { 13142, 13140, 13137 };
+			case RANK3_SET1_MAGICAL_WEAPON -> new int[] { 13034, 13018, 13009 };
+			case RANK3_SET1_PHYSICAL_GLOVES -> new int[] { 13040, 13051, 13060 };
+			case RANK3_SET1_PHYSICAL_PANTS -> new int[] { 13080, 13073, 13066 };
+			case RANK3_SET1_PHYSICAL_SHOES -> new int[] { 13112, 13126, 13116 };
+			case RANK3_SET1_PHYSICAL_SHOULDER -> new int[] { 13084, 13092, 13096 };
+			case RANK3_SET1_PHYSICAL_TORSO -> new int[] { 13142, 13140, 13137 };
+			case RANK3_SET1_PHYSICAL_WEAPON -> new int[] { 13036, 13020, 13009 };
+			case RANK3_SET2_MAGICAL_GLOVES -> new int[] { 13038, 13048, 13044 };
+			case RANK3_SET2_MAGICAL_PANTS -> new int[] { 13080, 13076, 13079 };
+			case RANK3_SET2_MAGICAL_SHOES -> new int[] { 13112, 13123, 13110 };
+			case RANK3_SET2_MAGICAL_SHOULDER -> new int[] { 13082, 13106, 13100 };
+			case RANK3_SET2_MAGICAL_TORSO -> new int[] { 13142, 13146, 13130 };
+			case RANK3_SET2_MAGICAL_WEAPON -> new int[] { 13034, 13014, 13025 };
+			case RANK3_SET2_PHYSICAL_GLOVES -> new int[] { 13040, 13048, 13044 };
+			case RANK3_SET2_PHYSICAL_PANTS -> new int[] { 13080, 13076, 13079 };
+			case RANK3_SET2_PHYSICAL_SHOES -> new int[] { 13112, 13123, 13110 };
+			case RANK3_SET2_PHYSICAL_SHOULDER -> new int[] { 13084, 13106, 13100 };
+			case RANK3_SET2_PHYSICAL_TORSO -> new int[] { 13142, 13146, 13130 };
+			case RANK3_SET2_PHYSICAL_WEAPON -> new int[] { 13036, 13014, 13025 };
+			case RANK3_SET3_MAGICAL_WEAPON -> new int[] { 13018, 13014, 13033 };
+			case RANK3_SET3_PHYSICAL_WEAPON -> new int[] { 13020, 13014, 13033 };
+			case RANK2_SET2_MAGICAL_GLOVES -> new int[] { 13050, 13043, 13059 };
+			case RANK2_SET2_MAGICAL_PANTS -> new int[] { 13072, 13078, 13062 };
+			case RANK2_SET2_MAGICAL_SHOES -> new int[] { 13125, 13109, 13115 };
+			case RANK2_SET2_MAGICAL_SHOULDER -> new int[] { 13088, 13099, 13095 };
+			case RANK2_SET2_MAGICAL_TORSO -> new int[] { 13139, 13129, 13136 };
+			case RANK4_SET1_MAGICAL_GLOVES -> new int[] { 13053, 13039, 13045 };
+			case RANK4_SET1_MAGICAL_PANTS -> new int[] { 13077, 13081, 13079 };
+			case RANK4_SET1_MAGICAL_SHOES -> new int[] { 13117, 13113, 13111 };
+			case RANK4_SET1_MAGICAL_SHOULDER -> new int[] { 13086, 13083, 13101 };
+			case RANK4_SET1_MAGICAL_TORSO -> new int[] { 13138, 13143, 13131 };
+			case RANK4_SET1_MAGICAL_WEAPON -> new int[] { 13015, 13028, 13017 };
+			case RANK4_SET1_PHYSICAL_GLOVES -> new int[] { 13054, 13041, 13045 };
+			case RANK4_SET1_PHYSICAL_PANTS -> new int[] { 13077, 13081, 13079 };
+			case RANK4_SET1_PHYSICAL_SHOES -> new int[] { 13117, 13113, 13111 };
+			case RANK4_SET1_PHYSICAL_SHOULDER -> new int[] { 13087, 13085, 13101 };
+			case RANK4_SET1_PHYSICAL_TORSO -> new int[] { 13138, 13143, 13131 };
+			case RANK4_SET1_PHYSICAL_WEAPON -> new int[] { 13016, 13028, 13017 };
+			case RANK4_SET2_MAGICAL_GLOVES -> new int[] { 13053, 13052, 13049 };
+			case RANK4_SET2_MAGICAL_PANTS -> new int[] { 13077, 13074, 13076 };
+			case RANK4_SET2_MAGICAL_SHOES -> new int[] { 13117, 13127, 13124 };
+			case RANK4_SET2_MAGICAL_SHOULDER -> new int[] { 13086, 13090, 13107 };
+			case RANK4_SET2_MAGICAL_TORSO -> new int[] { 13138, 13141, 13147 };
+			case RANK4_SET2_MAGICAL_WEAPON -> new int[] { 13019, 13017, 13005 };
+			case RANK4_SET2_PHYSICAL_GLOVES -> new int[] { 13054, 13052, 13049 };
+			case RANK4_SET2_PHYSICAL_PANTS -> new int[] { 13077, 13074, 13076 };
+			case RANK4_SET2_PHYSICAL_SHOES -> new int[] { 13117, 13127, 13124 };
+			case RANK4_SET2_PHYSICAL_SHOULDER -> new int[] { 13087, 13093, 13107 };
+			case RANK4_SET2_PHYSICAL_TORSO -> new int[] { 13138, 13141, 13147 };
+			case RANK4_SET2_PHYSICAL_WEAPON -> new int[] { 13021, 13017, 13005 };
+			case RANK4_SET3_MAGICAL_WEAPON -> new int[] { 13035, 13001, 13005 };
+			case RANK4_SET3_PHYSICAL_WEAPON -> new int[] { 13037, 13001, 13005 };
+			case RANK5_SET1_MAGICAL_TORSO -> new int[] { 13235, 13236, 13238 };
+			case RANK5_SET1_MAGICAL_GLOVES -> new int[] { 13248, 13253, 13251 };
+			case RANK5_SET1_MAGICAL_PANTS -> new int[] { 13241, 13079, 13240 };
+			case RANK5_SET1_MAGICAL_SHOULDER -> new int[] { 13269, 13279, 13247 };
+			case RANK5_SET1_MAGICAL_SHOES -> new int[] { 13245, 13266, 13246 };
+			case RANK5_SET1_PHYSICAL_TORSO -> new int[] { 13235, 13236, 13238 };
+			case RANK5_SET1_PHYSICAL_GLOVES -> new int[] { 13251, 13249, 13248 };
+			case RANK5_SET1_PHYSICAL_SHOULDER -> new int[] { 13270, 13247, 13269 };
+			case RANK5_SET1_PHYSICAL_PANTS -> new int[] { 13241, 13079, 13240 };
+			case RANK5_SET1_PHYSICAL_SHOES -> new int[] { 13245, 13244, 13266 };
+			case RANK5_SET1_MAGICAL_WEAPON -> new int[] { 13228, 13234, 13231 };
+			case RANK5_SET1_PHYSICAL_WEAPON -> new int[] { 13229, 13234, 13231 };
+			case null -> new int[] {0};
+		};
 		return Rnd.get(skills);
 	}
 

@@ -251,4 +251,11 @@ public enum WorldMapType {
 		WorldMapType worldMapType = of(worldName);
 		return worldMapType == null ? 0 : worldMapType.getId();
 	}
+
+	public static boolean isPanesterraMap(int id) {
+		return switch (getWorld(id)) {
+			case BELUS, TRANSIDIUM_ANNEX, ASPIDA, ATANATOS, DISILLON -> true;
+			case null, default -> false;
+		};
+	}
 }

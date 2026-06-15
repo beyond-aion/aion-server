@@ -22,7 +22,6 @@ import ai.ActionItemNpcAI;
 public class DramataPortalAI extends ActionItemNpcAI {
 
 	private WorldPosition targetLocation;
-	private long spawnTime;
 
 	public DramataPortalAI(Npc owner) {
 		super(owner);
@@ -31,7 +30,6 @@ public class DramataPortalAI extends ActionItemNpcAI {
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();
-		spawnTime = System.currentTimeMillis();
 		switch (getPosition().getMapId()) {
 			case 110070000:
 				PacketSendUtility.broadcastToWorld(new SM_MESSAGE(getOwner(),
@@ -57,7 +55,7 @@ public class DramataPortalAI extends ActionItemNpcAI {
 				SM_SYSTEM_MESSAGE.STR_CANNOT_USE_DIRECT_PORTAL_LEVEL_LIMIT_COMMON(getOwner().getObjectTemplate().getL10n()));
 			return;
 		}
-		long timeDelta = System.currentTimeMillis() - spawnTime;
+		long timeDelta = getOwner().getMillisSinceSpawn();
 		if (timeDelta < TimeUnit.MINUTES.toMillis(10)) {
 			long approxMin = 10 - timeDelta / 1000 / 60;
 			PacketSendUtility.sendMessage(player,

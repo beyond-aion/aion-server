@@ -4,6 +4,7 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.model.EmotionType;
+import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Kisk;
 import com.aionemu.gameserver.model.gameobjects.player.CustomPlayerState;
@@ -13,16 +14,18 @@ import com.aionemu.gameserver.model.team.common.legacy.GroupEvent;
 import com.aionemu.gameserver.model.team.common.legacy.PlayerAllianceEvent;
 import com.aionemu.gameserver.model.team.group.PlayerGroupService;
 import com.aionemu.gameserver.model.templates.item.ItemUseLimits;
-import com.aionemu.gameserver.model.vortex.VortexLocation;
 import com.aionemu.gameserver.network.aion.serverpackets.*;
 import com.aionemu.gameserver.services.VortexService;
-import com.aionemu.gameserver.services.panesterra.ahserion.AhserionRaid;
+import com.aionemu.gameserver.services.panesterra.PanesterraService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
+import com.aionemu.gameserver.services.vortex.DimensionalVortex;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldMap;
+import com.aionemu.gameserver.world.WorldMapType;
 import com.aionemu.gameserver.world.WorldPosition;
 
 /**
@@ -32,7 +35,6 @@ public class PlayerReviveService {
 
 	public static void duelRevive(Player player) {
 		revive(player, 30, 30, false, 0);
-		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.RESURRECT), true);
 		player.getGameStats().updateStatsAndSpeedVisually();
 		player.unsetResPosState();
 	}
@@ -43,7 +45,6 @@ public class PlayerReviveService {
 			return;
 		}
 		revive(player, 35, 35, true, player.getResurrectionSkill());
-		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.RESURRECT), true);
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME());
 		// if player was flying before res, start flying
 		if (player.getIsFlyingBeforeDeath()) {
@@ -82,7 +83,6 @@ public class PlayerReviveService {
 		}
 
 		revive(player, rebirthResurrectPercent, rebirthResurrectPercent, soulSickness, rebirthSkillId);
-		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.RESURRECT), true);
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME());
 		// if player was flying before res, start flying
 		if (player.getIsFlyingBeforeDeath()) {
@@ -113,11 +113,13 @@ public class PlayerReviveService {
 			TeleportService.teleportToPrison(player);
 		} else if (player.isInCustomState(CustomPlayerState.EVENT_MODE)) {
 			TeleportService.teleportToEvent(player);
-		} else if (player.getWorldId() != 400030000 || !AhserionRaid.getInstance().teleportToTeamStartPosition(player)) {
+		} else if (WorldMapType.getWorld(player.getWorldId()) == WorldMapType.BELUS) {
+			PanesterraService.getInstance().reviveInEventLocation(player);
+		} else if (!PanesterraService.getInstance().teleportToStartPosition(player)) {
 			WorldPosition resPos = null;
-			for (VortexLocation loc : VortexService.getInstance().getVortexLocations().values()) {
-				if (loc.isInsideActiveVotrex(player) && player.getRace().equals(loc.getInvadersRace())) {
-					resPos = loc.getResurrectionPoint();
+			for (DimensionalVortex<?> vortex : VortexService.getInstance().getActiveInvasions().values()) {
+				if (player.getRace() == vortex.getVortexLocation().getInvadersRace() && vortex.getVortexLocation().isInsideLocation(player)) {
+					resPos = vortex.getVortexLocation().getResurrectionPoint();
 					break;
 				}
 			}
@@ -186,10 +188,8 @@ public class PlayerReviveService {
 
 	public static void revive(Player player, int hpPercent, int mpPercent, boolean setSoulSickness, int resurrectionSkill) {
 		player.getKnownList().forEachPlayer(p -> {
-			if (player.equals(p.getTarget())) {
+			if (player.equals(p.getTarget()))
 				p.setTarget(null);
-				PacketSendUtility.sendPacket(p, new SM_TARGET_SELECTED(null));
-			}
 		});
 		boolean isNoResurrectPenalty = player.getEffectController().hasAbnormalEffect(Effect::isNoResurrectPenalty);
 		player.setPlayerResActivate(false);
@@ -197,7 +197,6 @@ public class PlayerReviveService {
 		player.getLifeStats().setCurrentMpPercent(isNoResurrectPenalty ? 100 : mpPercent);
 		if (player.getCommonData().getDp() > 0 && !isNoResurrectPenalty)
 			player.getCommonData().setDp(0);
-		player.getLifeStats().triggerRestoreOnRevive();
 		if (!isNoResurrectPenalty && setSoulSickness) {
 			player.getController().updateSoulSickness(resurrectionSkill);
 		}
@@ -210,6 +209,7 @@ public class PlayerReviveService {
 		if (player.isInAlliance()) {
 			PlayerAllianceService.updateAlliance(player, PlayerAllianceEvent.MOVEMENT);
 		}
+		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.RESURRECT), true);
 	}
 
 	public static void itemSelfRevive(Player player) {
@@ -228,12 +228,10 @@ public class PlayerReviveService {
 			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), item.getObjectId(), item.getItemTemplate().getTemplateId()), true);
 		if (!player.getInventory().decreaseByObjectId(item.getObjectId(), 1)) {
 			AuditLogger.log(player, "tried to use selfres without having the required selfres stone");
-			player.getController().sendDie();
 			return;
 		}
 		// Tombstone Self-Rez retail verified 15%
 		revive(player, 15, 15, true, player.getResurrectionSkill());
-		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.RESURRECT), true);
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME());
 		// if player was flying before res, start flying
 		if (player.getIsFlyingBeforeDeath()) {
@@ -249,4 +247,15 @@ public class PlayerReviveService {
 
 	}
 
+	public static void scheduleReviveAtBase(Player player, int delayMillis, int skillId) {
+		player.getController().addTask(TaskId.TELEPORT, ThreadPoolManager.getInstance().schedule(() -> {
+			player.getController().getAndRemoveTask(TaskId.TELEPORT); // remove manually as it won't get removed automatically
+			if (player.isInInstance())
+				PlayerReviveService.instanceRevive(player, skillId);
+			else if (player.getKisk() != null)
+				PlayerReviveService.kiskRevive(player, skillId);
+			else
+				PlayerReviveService.bindRevive(player, skillId);
+		}, delayMillis));
+	}
 }

@@ -123,8 +123,9 @@ public class DropRegistrationService {
 		Player looter = null;
 		DropNpc dropNpc = new DropNpc(npcObjId);
 		// Distributing drops to players
-		if (player.isInGroup() || player.isInAlliance()) {
-			LootGroupRules lootGroupRules = player.getLootGroupRules();
+		var lootingTeam = player.getCurrentTeam();
+		if (lootingTeam != null) {
+			LootGroupRules lootGroupRules = lootingTeam.getLootGroupRules();
 
 			switch (lootGroupRules.getLootRule()) {
 				case ROUNDROBIN:
@@ -154,7 +155,7 @@ public class DropRegistrationService {
 					break;
 			}
 			dropNpc.setInRangePlayers(groupMembers);
-			dropNpc.setGroupSize(groupMembers.size());
+			dropNpc.setLootingTeam(lootingTeam);
 		} else {
 			allowedLooters.add(player);
 		}

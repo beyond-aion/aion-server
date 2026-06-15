@@ -66,8 +66,8 @@ public class House extends VisibleObject implements Persistable {
 		this.address = address;
 		this.building = building;
 		setKnownlist(new PlayerAwareKnownList(this));
+		resetDoorState();
 		setPersistentState(PersistentState.UPDATED);
-		GeoService.getInstance().setHouseDoorState(address.getMapId(), instanceId, address.getId(), getDoorState());
 	}
 
 	@Override
@@ -134,25 +134,33 @@ public class House extends VisibleObject implements Persistable {
 
 	public int getPermissionsForDB() {
 		int permissions = showOwnerName ? 1 : 0;
-		if (doorState != null)
-			permissions |= doorState.getId() << 8;
+		permissions |= doorState.getId() << 8;
 		return permissions;
 	}
 
 	public void setPermissionsFromDB(int permissions) {
 		showOwnerName = (permissions & 0xFF) == 1;
 		doorState = HouseDoorState.get((byte) (permissions >> 8));
+		if (doorState == null)
+			resetDoorState();
 	}
 
 	public HouseDoorState getDoorState() {
-		return doorState == null ? ownerId == 0 || inactive ? HouseDoorState.CLOSED : HouseDoorState.OPEN : doorState;
+		return doorState;
 	}
 
-	public void setDoorState(HouseDoorState doorState) {
+	public boolean resetDoorState() {
+		return setDoorState(inactive || ownerId == 0 && bids == null ? HouseDoorState.CLOSED : HouseDoorState.OPEN);
+	}
+
+	public boolean setDoorState(HouseDoorState doorState) {
+		if (this.doorState == doorState)
+			return false;
 		this.doorState = doorState;
 		setPersistentState(PersistentState.UPDATE_REQUIRED);
 		if (getPosition() != null && isSpawned())
 			GeoService.getInstance().setHouseDoorState(address.getMapId(), getInstanceId(), address.getId(), getDoorState());
+		return true;
 	}
 
 	/**
@@ -199,8 +207,10 @@ public class House extends VisibleObject implements Persistable {
 		return bids;
 	}
 
-	public void setBids(HouseBids bids) {
+	public void setBids(HouseBids bids, boolean resetDoorStateOfUnoccupiedHouse) {
 		this.bids = bids;
+		if (resetDoorStateOfUnoccupiedHouse && ownerId == 0 && resetDoorState())
+			save();
 	}
 
 	public Npc getButler() {

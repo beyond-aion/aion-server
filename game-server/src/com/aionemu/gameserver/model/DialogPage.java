@@ -1,5 +1,13 @@
 package com.aionemu.gameserver.model;
 
+import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.templates.npc.TalkInfo;
+import com.aionemu.gameserver.model.templates.quest.QuestNpc;
+import com.aionemu.gameserver.questEngine.QuestEngine;
+import com.aionemu.gameserver.services.DialogService;
+import com.aionemu.gameserver.services.QuestService;
+
 /**
  * @author Rolandas, Neon
  */
@@ -50,14 +58,14 @@ public enum DialogPage {
 	ITEM_UPGRADE(DialogAction.ITEM_UPGRADE, 52),
 	OPEN_STIGMA_ENCHANT(DialogAction.OPEN_STIGMA_ENCHANT, 53);
 
-	private int id;
-	private int dialogActionId;
+	private final int id;
+	private final int dialogActionId;
 
-	private DialogPage(int id) {
-		this.id = id;
+	DialogPage(int id) {
+		this(0, id);
 	}
 
-	private DialogPage(int dialogActionId, int id) {
+	DialogPage(int dialogActionId, int id) {
 		this.id = id;
 		this.dialogActionId = dialogActionId;
 	}
@@ -100,5 +108,86 @@ public enum DialogPage {
 			}
 		}
 		return DialogPage.NULL;
+	}
+
+	public static int getStartPageId(Npc npc, Player player) {
+		TalkInfo talkInfo = npc.getObjectTemplate().getTalkInfo();
+		if (talkInfo == null || !talkInfo.isDialogNpc() && talkInfo.getFuncDialogIds() == null)
+			return 0; // HTML_PAGE_NULL (npc has no conversation or function dialog)
+		if (!DialogService.isInteractionAllowed(player, npc))
+			return 1011; // HTML_PAGE_SELECT1 (npc will say you are not allowed to use their function)
+		boolean isFunctionalNpc = talkInfo.getFuncDialogIds() != null;
+		if (isFunctionalNpc || hasQuestInteraction(player, npc))
+			return 10; // HTML_PAGE_SELECT_QUEST (npc will offer their function or quests)
+		if (player.getCommonData().isDaeva() && hasAlternativeDialogAfterAscension(npc))
+			return 1352; // HTML_PAGE_SELECT2
+		return 1011; // HTML_PAGE_SELECT1 (default dialog)
+	}
+
+	private static boolean hasAlternativeDialogAfterAscension(Npc npc) {
+		//@formatter:off
+		return switch (npc.getNpcId()) {
+			case
+			// Poeta
+			203049, // elpis
+			203050, // kales
+			203058, // asteros
+			203059, // polinia
+			203060, // mune
+			203066, // toleo
+			203072, // feira
+			203074, // pranoa
+			203075, // namus
+			203079, // melpone
+			730007, // tree_move_noah
+			790001, // pernos
+			// Ishalgen
+			203500, // ask
+			203501, // guheitun
+			203502, // vanar
+			203503, // gurt
+			203504, // vandarnt
+			203507, // galar
+			203511, // huggin
+			203516, // ulgorn
+			203517, // tobu
+			203518, // boromer
+			203519, // nobekk
+			203522, // kaindal
+			203523, // glifko
+			203524, // megin
+			203525, // sraht
+			203531, // negi
+			203532, // df_fisher
+			203533, // motgar
+			203534, // davi
+			203535, // kard
+			203539, // derot
+			203540, // mijou
+			203541, // lidun
+			203543, // alfrigh
+			203544, // devalin
+			203546, // skuld
+			203547, // erre
+			203548, // djuefene
+			203549, // tanmarn
+			203550, // muninn
+			203552, // nostla
+			203589, // npc_moomoobong
+			203590, // lycan_messenger
+			790002, // verdandi
+			790003 // urd
+				-> true;
+			default -> false;
+		};
+		//@formatter:on
+	}
+
+	private static boolean hasQuestInteraction(Player player, Npc npc) {
+		QuestNpc questNpc = QuestEngine.getInstance().getQuestNpc(npc.getNpcId());
+		if (questNpc == null)
+			return false;
+		return questNpc.getOnQuestStart().stream().anyMatch(startableQuest -> QuestService.checkStartConditions(player, startableQuest, false))
+			|| player.getQuestStateList().getUncompletedQuests().stream().anyMatch(activeQuest -> questNpc.getOnTalkEvent().contains(activeQuest.getQuestId()));
 	}
 }

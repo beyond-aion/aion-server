@@ -8,7 +8,7 @@ import com.aionemu.gameserver.model.templates.flyring.FlyRingTemplate;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
 import com.aionemu.gameserver.world.World;
-import com.aionemu.gameserver.world.knownlist.SphereKnownList;
+import com.aionemu.gameserver.world.knownlist.PlayerAwareKnownList;
 
 /**
  * @author xavier
@@ -28,7 +28,7 @@ public class FlyRing extends VisibleObject {
 		Vector3f p2 = new Vector3f(template.getP1().getX(), template.getP1().getY(), template.getP1().getZ());
 		Vector3f p3 = new Vector3f(template.getP2().getX(), template.getP2().getY(), template.getP2().getZ());
 		this.plane = new Plane3D(p1, p2, p3);
-		setKnownlist(new SphereKnownList(this, template.getRadius() * 2));
+		setKnownlist(new PlayerAwareKnownList(this));
 	}
 
 	public boolean isCrossed(Vector3f oldPosition, Vector3f newPosition) {

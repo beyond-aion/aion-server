@@ -14,13 +14,11 @@ import com.aionemu.gameserver.model.account.Account;
 import com.aionemu.gameserver.model.account.AccountTime;
 import com.aionemu.gameserver.model.account.CharacterBanInfo;
 import com.aionemu.gameserver.model.account.PlayerAccountData;
-import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerAppearance;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
+import com.aionemu.gameserver.model.items.storage.PlayerStorage;
 import com.aionemu.gameserver.model.items.storage.Storage;
 import com.aionemu.gameserver.model.items.storage.StorageType;
-import com.aionemu.gameserver.model.team.legion.LegionMember;
-import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.player.PlayerService;
 
 /**
@@ -32,11 +30,8 @@ public class AccountService {
 
 	private static final Logger log = LoggerFactory.getLogger(AccountService.class);
 
-	/**
-	 * Returns {@link Account} object that has given id.
-	 */
 	public static Account getAccount(int accountId, String accountName, long creationDate, AccountTime accountTime, byte accessLevel, byte membership,
-		long toll, String allowedHddSerial) {
+			String allowedHddSerial) {
 		log.debug("[AS] request for account: " + accountId);
 
 		Account account = loadAccount(accountId);
@@ -45,7 +40,6 @@ public class AccountService {
 		account.setAccountTime(accountTime);
 		account.setAccessLevel(accessLevel);
 		account.setMembership(membership);
-		account.setToll(toll);
 		account.setAllowedHddSerial(allowedHddSerial);
 		removeDeletedCharacters(account);
 		return account;
@@ -56,8 +50,7 @@ public class AccountService {
 	 */
 	public static void removeDeletedCharacters(Account account) {
 		/* Removes chars that should be removed */
-		Iterator<PlayerAccountData> it = account.iterator();
-		while (it.hasNext()) {
+		for (Iterator<PlayerAccountData> it = account.iterator(); it.hasNext(); ) {
 			PlayerAccountData pad = it.next();
 			Race race = pad.getPlayerCommonData().getRace();
 			long deletionTime = pad.getDeletionDate() == null ? 0 : pad.getDeletionDate().getTime();
@@ -70,11 +63,12 @@ public class AccountService {
 						GameServer.updateRatio(pad.getPlayerCommonData().getRace(), -1);
 					}
 				}
+				if (account.isEmpty()) {
+					InventoryDAO.deleteAccountWH(account.getId());
+					account.setAccountWarehouse(loadAccountWarehouse(account));
+					break;
+				}
 			}
-		}
-		if (account.isEmpty()) {
-			InventoryDAO.deleteAccountWH(account.getId());
-			loadAccountWarehouse(account);
 		}
 	}
 
@@ -91,18 +85,17 @@ public class AccountService {
 		PlayerCommonData playerCommonData = PlayerDAO.loadPlayerCommonData(playerId);
 		CharacterBanInfo cbi = PlayerPunishmentsDAO.getCharBanInfo(playerId);
 		PlayerAppearance appereance = PlayerAppearanceDAO.load(playerId);
-		LegionMember legionMember = LegionMemberDAO.loadLegionMember(playerId);
 		// Load only equipment and its stones to display on character selection screen
-		List<Item> equipment = InventoryDAO.loadEquipment(playerId);
-
-		PlayerAccountData playerAccData = new PlayerAccountData(playerCommonData, appereance, cbi, equipment, legionMember);
+		List<PlayerAccountData.VisibleItem> equipment = InventoryDAO.loadVisibleEquipment(playerId);
+		PlayerAccountData playerAccData = new PlayerAccountData(playerCommonData, appereance, cbi, equipment);
 		PlayerDAO.setCreationDeletionTime(playerAccData);
 		return playerAccData;
 	}
 
 	public static Storage loadAccountWarehouse(Account account) {
-		Storage wh = InventoryDAO.loadStorage(account.getId(), StorageType.ACCOUNT_WAREHOUSE);
-		ItemService.loadItemStones(wh.getItems());
+		Storage wh = new PlayerStorage(null, StorageType.ACCOUNT_WAREHOUSE);
+		InventoryDAO.loadStorage(account.getId(), wh);
+		ItemStoneListDAO.load(wh.getItems());
 		return wh;
 	}
 }

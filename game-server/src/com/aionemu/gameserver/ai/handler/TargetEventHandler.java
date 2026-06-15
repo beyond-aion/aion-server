@@ -29,8 +29,6 @@ public class TargetEventHandler {
 			case FIGHT:
 				npcAI.getOwner().getMoveController().abortMove();
 				AttackManager.scheduleNextAttack(npcAI);
-				if (npcAI.getOwner().getMoveController().isFollowingTarget())
-					npcAI.getOwner().getMoveController().storeStep();
 				break;
 			case RETURNING:
 				npcAI.getOwner().getMoveController().abortMove();
@@ -45,7 +43,6 @@ public class TargetEventHandler {
 			case CONFUSE:
 			case FEAR:
 				npcAI.getOwner().getMoveController().abortMove();
-				npcAI.getOwner().getMoveController().storeStep();
 				break;
 			case WALKING:
 				WalkManager.targetReached(npcAI);

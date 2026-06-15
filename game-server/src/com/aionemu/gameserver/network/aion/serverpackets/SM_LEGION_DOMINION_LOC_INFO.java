@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
 import com.aionemu.gameserver.model.legionDominion.LegionDominionLocation;
+import com.aionemu.gameserver.model.team.legion.Legion;
 import com.aionemu.gameserver.model.team.legion.LegionEmblem;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
@@ -14,24 +15,19 @@ public class SM_LEGION_DOMINION_LOC_INFO extends AionServerPacket {
 
 	@Override
 	protected void writeImpl(AionConnection con) {
-		writeH(6);
+		writeH(LegionDominionService.getInstance().getLegionDominions().size());
 		for (LegionDominionLocation loc : LegionDominionService.getInstance().getLegionDominions()) {
-			int legionId = loc.getLegionId();
-			String name = "";
-			LegionEmblem emblem = new LegionEmblem();
-			if (legionId != 0 && LegionService.getInstance().getLegion(legionId) != null) {
-				emblem = LegionService.getInstance().getLegion(legionId).getLegionEmblem();
-				name = LegionService.getInstance().getLegion(legionId).getName();
-			}
+			Legion legion = loc.getLegionId() == 0 ? null : LegionService.getInstance().getLegion(loc.getLegionId());
+			LegionEmblem emblem = legion == null ? new LegionEmblem() : legion.getLegionEmblem();
 			writeD(loc.getLocationId());
-			writeD(legionId);
+			writeD(loc.getLegionId());
 			writeC(emblem.getEmblemId());
 			writeC(emblem.getEmblemType().getValue());
 			writeC(emblem.getColor_a());
 			writeC(emblem.getColor_r());
 			writeC(emblem.getColor_g());
 			writeC(emblem.getColor_b());
-			writeS(name);
+			writeS(legion == null ? null : legion.getName());
 		}
 	}
 }

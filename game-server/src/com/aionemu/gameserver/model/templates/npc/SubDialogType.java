@@ -5,12 +5,11 @@ package com.aionemu.gameserver.model.templates.npc;
  */
 public enum SubDialogType {
 
-	ALL_ALLOWED,
 	FORT_CAPTURE, // Allow when fort was captured
 	SKILL_ID, // Allow when player skill is present
 	ITEM_ID, // Allow when item in the inventory exists
-	RETURN, // Arena return ?
-	PCBANG, // Allow when some event is active
+	RETURN, // Allow when Abbey Return Stone is in inventory to access Wisplight/Fatebound Abbey
+	PCBANG, // Allow when connected from an internet cafe
 	PAID_USER, // Allow for players with certain membership
 	NEWBIE, // Allow for new players
 	ABYSSRANK,

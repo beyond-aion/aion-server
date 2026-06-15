@@ -1,5 +1,7 @@
 package com.aionemu.commons.configuration.transformers;
 
+import java.util.Map;
+
 import com.aionemu.commons.configuration.TransformationTypeInfo;
 
 /**
@@ -9,10 +11,21 @@ import com.aionemu.commons.configuration.TransformationTypeInfo;
  */
 public class NumberTransformer extends PropertyTransformer<Number> {
 
-	/**
-	 * Shared instance of this transformer. It's thread-safe so no need of multiple instances
-	 */
-	public static final NumberTransformer SHARED_INSTANCE = new NumberTransformer();
+	// @formatter:off
+	private static final Map<Class<?>, Class<?>> primitiveWrappers = Map.of(
+		byte.class, Byte.class,
+		short.class, Short.class,
+		int.class, Integer.class,
+		long.class, Long.class,
+		float.class, Float.class,
+		double.class, Double.class
+	);
+	// @formatter:on
+
+	@Override
+	public boolean matches(Class<?> targetType) {
+		return Number.class.isAssignableFrom(toWrapper(targetType));
+	}
 
 	@Override
 	protected Number parseObject(String value, TransformationTypeInfo typeInfo) {
@@ -33,20 +46,6 @@ public class NumberTransformer extends PropertyTransformer<Number> {
 	}
 
 	public static Class<?> toWrapper(Class<?> clazz) {
-		if (clazz.isPrimitive()) {
-			if (clazz == Long.TYPE)
-				return Long.class;
-			if (clazz == Integer.TYPE)
-				return Integer.class;
-			if (clazz == Short.TYPE)
-				return Short.class;
-			if (clazz == Byte.TYPE)
-				return Byte.class;
-			if (clazz == Double.TYPE)
-				return Double.class;
-			if (clazz == Float.TYPE)
-				return Float.class;
-		}
-		return clazz;
+		return clazz.isPrimitive() ? primitiveWrappers.getOrDefault(clazz, clazz) : clazz;
 	}
 }

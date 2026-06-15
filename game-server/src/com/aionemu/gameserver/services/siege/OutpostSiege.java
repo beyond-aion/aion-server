@@ -1,17 +1,18 @@
 package com.aionemu.gameserver.services.siege;
 
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.Map;
 
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
 import com.aionemu.gameserver.model.siege.OutpostLocation;
 import com.aionemu.gameserver.model.siege.SiegeModType;
 import com.aionemu.gameserver.model.siege.SiegeRace;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.mail.SiegeResult;
+import com.aionemu.gameserver.services.player.PlayerService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
@@ -39,13 +40,12 @@ public class OutpostSiege extends Siege<OutpostLocation> {
 
 	@Override
 	protected void onSiegeFinish() {
-		unregisterSiegeBossListeners();
 		getSiegeLocation().setVulnerable(false);
 		despawnSiegeNpcs();
 
 		if (isBossKilled()) {
 			onAgentDefeated();
-			sendRewardsToParticipants(getSiegeCounter().getWinnerRaceCounter(), SiegeResult.OCCUPY);
+			sendRewardsToParticipants(getWinnerRaceCounter(), SiegeResult.OCCUPY);
 			sendRewardsToParticipants(getSiegeCounter().getRaceCounter(getSiegeLocationId() == 2111 ? SiegeRace.ELYOS : SiegeRace.ASMODIANS),
 				SiegeResult.FAIL);
 		} else {
@@ -59,26 +59,15 @@ public class OutpostSiege extends Siege<OutpostLocation> {
 	}
 
 	private void onAgentDefeated() {
-		SiegeRaceCounter winnerCounter = getSiegeCounter().getWinnerRaceCounter();
+		SiegeRaceCounter winnerCounter = getWinnerRaceCounter();
 		Map<Integer, Long> topPlayerDamages = winnerCounter.getPlayerDamageCounter();
 		if (!topPlayerDamages.isEmpty()) {
-			Player topOnlinePlayer = null;
-			for (Iterator<Integer> iter = topPlayerDamages.keySet().iterator(); iter.hasNext();) {
-				Integer topPlayerId = topPlayerDamages.keySet().iterator().next();
-				topOnlinePlayer = World.getInstance().getPlayer(topPlayerId);
-				if (topOnlinePlayer != null)
-					break;
-			}
-
-			String playerName = "";
-			String legionName = "";
-			if (topOnlinePlayer != null) { // Should never happens - otherwise the message will be empty
-				playerName = topOnlinePlayer.getName();
-				if (topOnlinePlayer.isLegionMember())
-					legionName = topOnlinePlayer.getLegion().getName();
-			}
-			PacketSendUtility.broadcastToWorld(getSiegeLocationId() == 2111 ? SM_SYSTEM_MESSAGE.STR_FIELDABYSS_LIGHTBOSS_KILLED(playerName, legionName)
-				: SM_SYSTEM_MESSAGE.STR_FIELDABYSS_DARKBOSS_KILLED(playerName, legionName));
+			Integer topPlayerId = topPlayerDamages.keySet().iterator().next();
+			PlayerCommonData pcd = PlayerService.getOrLoadPlayerCommonData(topPlayerId);
+			String playerName = pcd.getName();
+			String playerRace = pcd.getRace().getL10n();
+			PacketSendUtility.broadcastToWorld(getSiegeLocationId() == 2111 ? SM_SYSTEM_MESSAGE.STR_FIELDABYSS_LIGHTBOSS_KILLED(playerName, playerRace)
+				: SM_SYSTEM_MESSAGE.STR_FIELDABYSS_DARKBOSS_KILLED(playerName, playerRace));
 			Race winnerRace = winnerCounter.getSiegeRace() == SiegeRace.ELYOS ? Race.ELYOS : Race.ASMODIANS;
 
 			World.getInstance().forEachPlayer(p -> {

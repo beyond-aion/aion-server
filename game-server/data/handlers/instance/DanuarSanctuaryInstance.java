@@ -6,10 +6,8 @@ import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
-import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.player.PlayerReviveService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
@@ -101,12 +99,5 @@ public class DanuarSanctuaryInstance extends GeneralInstanceHandler {
 		 * 235626 Virulent Ukahim
 		 */
 		spawn((235624 + Rnd.get(0, 2)), 1056.6105f, 694.0836f, 282.04f, (byte) 30);
-	}
-
-	@Override
-	public boolean onDie(final Player player, Creature lastAttacker) {
-		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_COMBAT_MY_DEATH());
-		PacketSendUtility.sendPacket(player, new SM_DIE(player, 8));
-		return true;
 	}
 }

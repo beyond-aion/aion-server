@@ -1,0 +1,3748 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../spawns.xsd">
+	<spawn_map map_id="400020000">
+		<!-- Belani Fort -->
+		<base_spawn id="4201">
+			<occupier_template occupier="PEACE">
+				<!-- Belani Base -->
+				<spawn npc_id="802693" handler="FLAG">
+					<spot x="187.29445" y="200.62192" z="1511.9462" h="5" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="BELUS">
+				<!-- Belani Base -->
+				<spawn npc_id="802672" handler="FLAG">
+					<spot x="187.29445" y="200.62192" z="1490.0648" h="5" />
+				</spawn>
+				<!-- Belani Warcaptain -->
+				<spawn npc_id="277576" handler="BOSS">
+					<spot x="167.23325" y="196.70714" z="1490.8463" h="5" />
+				</spawn>
+				<!-- Belani Master Healer -->
+				<spawn npc_id="277616" respawn_time="180" handler="SENTINEL">
+					<spot x="220.6717" y="210.91374" z="1489.4637" />
+				</spawn>
+				<!-- Belani Infantry -->
+				<spawn npc_id="277636" respawn_time="180" handler="SENTINEL">
+					<spot x="199.51418" y="184.28403" z="1489.6569" />
+					<spot x="190.31686" y="229.65575" z="1489.5284" h="5" />
+				</spawn>
+				<!-- Belani Patrol -->
+				<spawn npc_id="277656" respawn_time="180" handler="SENTINEL">
+					<spot x="187.84206" y="164.08556" z="1490.7446" h="90" />
+				</spawn>
+				<!-- Belani Slayer -->
+				<spawn npc_id="277676" respawn_time="180" handler="SENTINEL">
+					<spot x="139.7992" y="209.21414" z="1498.8141" h="5" />
+				</spawn>
+				<!-- Belani Recon Grunt -->
+				<spawn npc_id="277700" respawn_time="1500" handler="OUTRIDER">
+					<spot x="206.1017" y="92.400154" z="1540.0428" h="15" />
+					<spot x="204.18375" y="106.04543" z="1540.2244" h="30" />
+					<spot x="182.80238" y="107.70291" z="1540.578" h="60" />
+					<spot x="214.6966" y="98.54934" z="1540.3019" h="30" />
+				</spawn>
+				<!-- Belani Recon Lookout -->
+				<spawn npc_id="277724" respawn_time="1500" handler="OUTRIDER">
+					<spot x="201.10844" y="121.06506" z="1540.5361" h="45" />
+					<spot x="224.38606" y="113.17119" z="1540.2938" h="15" />
+				</spawn>
+				<!-- Belani Recon Cutthroat -->
+				<spawn npc_id="277748" respawn_time="1500" handler="OUTRIDER">
+					<spot x="194.5091" y="98.26744" z="1539.8466" h="30" />
+				</spawn>
+				<!-- Belani Recon War Subjugator -->
+				<spawn npc_id="277770" respawn_time="600" handler="ATTACKER">
+					<spot x="240.77638" y="167.62961" z="1482.2649" h="40" />
+				</spawn>
+				<!-- Belani Aegis -->
+				<spawn npc_id="277771" respawn_time="600" handler="ATTACKER">
+					<spot x="240.77638" y="167.62961" z="1482.2649" h="40" />
+				</spawn>
+				<!-- Teleporter -->
+				<spawn npc_id="731466" respawn_time="180" handler="MERCHANT">
+					<spot x="211.37541" y="172.4435" z="1489.6643" h="50" />
+				</spawn>
+				<!-- Belani Security -->
+				<spawn npc_id="802476" respawn_time="180" handler="SENTINEL">
+					<spot x="183.88545" y="208.37279" z="1490.2275" h="5" />
+				</spawn>
+				<!-- Belani General Goods Merchant -->
+				<spawn npc_id="804204" respawn_time="180" handler="MERCHANT">
+					<spot x="198.83856" y="212.93652" z="1489.274" />
+				</spawn>
+				<!-- Belani Special Buyer -->
+				<spawn npc_id="804206" respawn_time="180" handler="MERCHANT">
+					<spot x="213.0377" y="222.63692" z="1489.019" h="77" />
+				</spawn>
+				<!-- Belani Warehouse Manager -->
+				<spawn npc_id="804207" respawn_time="180" handler="MERCHANT">
+					<spot x="217.54051" y="183.7946" z="1489.5781" h="50" />
+				</spawn>
+				<!-- Belani Recon Grunt -->
+				<spawn npc_id="880492" respawn_time="1500" handler="OUTRIDER">
+					<spot x="96.41001" y="272.4259" z="1539.81" h="60" />
+					<spot x="135.32431" y="259.68433" z="1540.0564" h="5" />
+					<spot x="139.54819" y="276.65384" z="1540.1053" />
+					<spot x="114.2187" y="275.34464" z="1540.2544" h="5" />
+				</spawn>
+				<!-- Belsal Recon Lookout -->
+				<spawn npc_id="880796" respawn_time="1500" handler="OUTRIDER">
+					<spot x="130.03802" y="295.2478" z="1540.0767" h="15" />
+					<spot x="101.16" y="257.45197" z="1546.5269" h="15" />
+				</spawn>
+				<!-- Belsal Recon Cutthroat -->
+				<spawn npc_id="880800" respawn_time="1500" handler="OUTRIDER">
+					<spot x="120.11485" y="264.6994" z="1540.6259" h="5" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="ASPIDA">
+				<!-- Belani Base -->
+				<spawn npc_id="802677" handler="FLAG">
+					<spot x="187.29445" y="200.62192" z="1490.0648" h="5" />
+				</spawn>
+				<!-- Belani Warcaptain -->
+				<spawn npc_id="277577" handler="BOSS">
+					<spot x="167.23325" y="196.70714" z="1490.8463" h="5" />
+				</spawn>
+				<!-- Belani Master Healer -->
+				<spawn npc_id="277617" respawn_time="180" handler="SENTINEL">
+					<spot x="220.6717" y="210.91374" z="1489.4637" />
+				</spawn>
+				<!-- Belani Infantry -->
+				<spawn npc_id="277637" respawn_time="180" handler="SENTINEL">
+					<spot x="199.51418" y="184.28403" z="1489.6569" />
+					<spot x="190.31686" y="229.65575" z="1489.5284" h="5" />
+				</spawn>
+				<!-- Belani Patrol -->
+				<spawn npc_id="277657" respawn_time="180" handler="SENTINEL">
+					<spot x="187.84206" y="164.08556" z="1490.7446" h="90" />
+				</spawn>
+				<!-- Belani Slayer -->
+				<spawn npc_id="277677" respawn_time="180" handler="SENTINEL">
+					<spot x="139.7992" y="209.21414" z="1498.8141" h="5" />
+				</spawn>
+				<!-- Belani Scout Infantry -->
+				<spawn npc_id="277696" respawn_time="1500" handler="OUTRIDER">
+					<spot x="206.1017" y="92.400154" z="1540.0428" h="15" />
+					<spot x="204.18375" y="106.04543" z="1540.2244" h="30" />
+					<spot x="96.41001" y="272.4259" z="1539.8099" h="60" />
+					<spot x="135.32431" y="259.68433" z="1540.0564" h="5" />
+					<spot x="139.54819" y="276.65384" z="1540.1053" />
+					<spot x="182.80238" y="107.70291" z="1540.578" h="60" />
+					<spot x="214.6966" y="98.54934" z="1540.3019" h="30" />
+					<spot x="114.2187" y="275.34464" z="1540.2544" h="5" />
+				</spawn>
+				<!-- Belani Scout Patrol -->
+				<spawn npc_id="277720" respawn_time="1500" handler="OUTRIDER">
+					<spot x="130.03802" y="295.2478" z="1539.8369" h="15" />
+					<spot x="201.10844" y="121.06506" z="1540.5361" h="45" />
+					<spot x="101.16" y="257.45197" z="1546.527" h="15" />
+					<spot x="224.38606" y="113.17119" z="1540.2938" h="15" />
+				</spawn>
+				<!-- Belani Scout Slayer -->
+				<spawn npc_id="277744" respawn_time="1500" handler="OUTRIDER">
+					<spot x="120.11485" y="264.6994" z="1540.6259" h="5" />
+					<spot x="120.11485" y="264.6994" z="1540.6259" h="5" />
+					<spot x="194.5091" y="98.26744" z="1539.8466" h="30" />
+				</spawn>
+				<!-- Belani Recon War Subjugator -->
+				<spawn npc_id="277770" respawn_time="600" handler="ATTACKER">
+					<spot x="240.77638" y="167.62961" z="1482.2649" h="40" />
+				</spawn>
+				<!-- Belani Aegis -->
+				<spawn npc_id="277771" respawn_time="600" handler="ATTACKER">
+					<spot x="240.77638" y="167.62961" z="1482.2649" h="40" />
+				</spawn>
+				<!-- Teleporter -->
+				<spawn npc_id="731467" respawn_time="180" handler="MERCHANT">
+					<spot x="211.37541" y="172.4435" z="1489.6643" h="50" />
+				</spawn>
+				<!-- Belani Commander -->
+				<spawn npc_id="802477" respawn_time="180" handler="SENTINEL">
+					<spot x="183.88545" y="208.37279" z="1490.2275" h="5" />
+				</spawn>
+				<!-- Beling General Goods Merchant (failed NA translation) -->
+				<spawn npc_id="804220" respawn_time="180" handler="MERCHANT">
+					<spot x="198.83856" y="212.93652" z="1489.274" />
+				</spawn>
+				<!-- Beling Special Buyer (failed NA translation) -->
+				<spawn npc_id="804222" respawn_time="180" handler="MERCHANT">
+					<spot x="213.0377" y="222.63692" z="1489.019" h="77" />
+				</spawn>
+				<!-- Beling Warehouse Manager (failed NA translation) -->
+				<spawn npc_id="804223" respawn_time="180" handler="MERCHANT">
+					<spot x="217.54051" y="183.7946" z="1489.5781" h="50" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="ATANATOS">
+				<!-- Belani Base -->
+				<spawn npc_id="802682" handler="FLAG">
+					<spot x="187.29445" y="200.62192" z="1490.0648" h="5" />
+				</spawn>
+				<!-- Belani Warcaptain -->
+				<spawn npc_id="277578" handler="BOSS">
+					<spot x="167.23325" y="196.70714" z="1490.8463" h="5" />
+				</spawn>
+				<!-- Belani Master Healer -->
+				<spawn npc_id="277618" respawn_time="180" handler="SENTINEL">
+					<spot x="220.6717" y="210.91374" z="1489.4637" />
+				</spawn>
+				<!-- Belani Infantry -->
+				<spawn npc_id="277638" respawn_time="180" handler="SENTINEL">
+					<spot x="199.51418" y="184.28403" z="1489.6569" />
+					<spot x="190.31686" y="229.65575" z="1489.5284" h="5" />
+				</spawn>
+				<!-- Belani Patrol -->
+				<spawn npc_id="277658" respawn_time="180" handler="SENTINEL">
+					<spot x="187.84206" y="164.08556" z="1490.7446" h="90" />
+				</spawn>
+				<!-- Belani Slayer -->
+				<spawn npc_id="277678" respawn_time="180" handler="SENTINEL">
+					<spot x="139.7992" y="209.21414" z="1498.8141" h="5" />
+				</spawn>
+				<!-- Belani Scout Infantry -->
+				<spawn npc_id="277696" respawn_time="1500" handler="OUTRIDER">
+					<spot x="206.1017" y="92.400154" z="1540.0428" h="15" />
+					<spot x="204.18375" y="106.04543" z="1540.2244" h="30" />
+					<spot x="96.41001" y="272.4259" z="1539.8099" h="60" />
+					<spot x="135.32431" y="259.68433" z="1540.0564" h="5" />
+					<spot x="139.54819" y="276.65384" z="1540.1053" />
+					<spot x="182.80238" y="107.70291" z="1540.578" h="60" />
+					<spot x="214.6966" y="98.54934" z="1540.3019" h="30" />
+					<spot x="114.2187" y="275.34464" z="1540.2544" h="5" />
+				</spawn>
+				<!-- Belani Scout Patrol -->
+				<spawn npc_id="277720" respawn_time="1500" handler="OUTRIDER">
+					<spot x="130.03802" y="295.2478" z="1539.8369" h="15" />
+					<spot x="201.10844" y="121.06506" z="1540.5361" h="45" />
+					<spot x="101.16" y="257.45197" z="1546.527" h="15" />
+					<spot x="224.38606" y="113.17119" z="1540.2938" h="15" />
+				</spawn>
+				<!-- Belani Scout Slayer -->
+				<spawn npc_id="277744" respawn_time="1500" handler="OUTRIDER">
+					<spot x="120.11485" y="264.6994" z="1540.6259" h="5" />
+					<spot x="120.11485" y="264.6994" z="1540.6259" h="5" />
+					<spot x="194.5091" y="98.26744" z="1539.8466" h="30" />
+				</spawn>
+				<!-- Belani Recon War Subjugator -->
+				<spawn npc_id="277770" respawn_time="600" handler="ATTACKER">
+					<spot x="240.77638" y="167.62961" z="1482.2649" h="40" />
+				</spawn>
+				<!-- Belani Aegis -->
+				<spawn npc_id="277771" respawn_time="600" handler="ATTACKER">
+					<spot x="240.77638" y="167.62961" z="1482.2649" h="40" />
+				</spawn>
+				<!-- Teleporter -->
+				<spawn npc_id="731468" respawn_time="180" handler="MERCHANT">
+					<spot x="211.37541" y="172.4435" z="1489.6643" h="50" />
+				</spawn>
+				<!-- Belani Vanguard -->
+				<spawn npc_id="802478" respawn_time="180" handler="SENTINEL">
+					<spot x="183.88545" y="208.37279" z="1490.2275" h="5" />
+				</spawn>
+				<!-- Beling General Goods Merchant (failed NA translation) -->
+				<spawn npc_id="804236" respawn_time="180" handler="MERCHANT">
+					<spot x="198.83856" y="212.93652" z="1489.274" />
+				</spawn>
+				<!-- Beling Special Buyer (failed NA translation) -->
+				<spawn npc_id="804238" respawn_time="180" handler="MERCHANT">
+					<spot x="213.0377" y="222.63692" z="1489.019" h="77" />
+				</spawn>
+				<!-- Beling Warehouse Manager (failed NA translation) -->
+				<spawn npc_id="804239" respawn_time="180" handler="MERCHANT">
+					<spot x="217.54051" y="183.7946" z="1489.5781" h="50" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="DISILLON">
+				<!-- Belani Base -->
+				<spawn npc_id="802687" handler="FLAG">
+					<spot x="187.29445" y="200.62192" z="1490.0648" h="5" />
+				</spawn>
+				<!-- Belani Warcaptain -->
+				<spawn npc_id="277579" handler="BOSS">
+					<spot x="167.23325" y="196.70714" z="1490.8463" h="5" />
+				</spawn>
+				<!-- Belani Master Healer -->
+				<spawn npc_id="277619" respawn_time="180" handler="SENTINEL">
+					<spot x="220.6717" y="210.91374" z="1489.4637" />
+				</spawn>
+				<!-- Belani Infantry -->
+				<spawn npc_id="277639" respawn_time="180" handler="SENTINEL">
+					<spot x="199.51418" y="184.28403" z="1489.6569" />
+					<spot x="190.31686" y="229.65575" z="1489.5284" h="5" />
+				</spawn>
+				<!-- Belani Patrol -->
+				<spawn npc_id="277659" respawn_time="180" handler="SENTINEL">
+					<spot x="187.84206" y="164.08556" z="1490.7446" h="90" />
+				</spawn>
+				<!-- Belani Slayer -->
+				<spawn npc_id="277679" respawn_time="180" handler="SENTINEL">
+					<spot x="139.7992" y="209.21414" z="1498.8141" h="5" />
+				</spawn>
+				<!-- Belani Scout Infantry -->
+				<spawn npc_id="277696" respawn_time="1500" handler="OUTRIDER">
+					<spot x="206.1017" y="92.400154" z="1540.0428" h="15" />
+					<spot x="204.18375" y="106.04543" z="1540.2244" h="30" />
+					<spot x="96.41001" y="272.4259" z="1539.8099" h="60" />
+					<spot x="135.32431" y="259.68433" z="1540.0564" h="5" />
+					<spot x="139.54819" y="276.65384" z="1540.1053" />
+					<spot x="182.80238" y="107.70291" z="1540.578" h="60" />
+					<spot x="214.6966" y="98.54934" z="1540.3019" h="30" />
+					<spot x="114.2187" y="275.34464" z="1540.2544" h="5" />
+				</spawn>
+				<!-- Belani Scout Patrol -->
+				<spawn npc_id="277720" respawn_time="1500" handler="OUTRIDER">
+					<spot x="130.03802" y="295.2478" z="1539.8369" h="15" />
+					<spot x="201.10844" y="121.06506" z="1540.5361" h="45" />
+					<spot x="101.16" y="257.45197" z="1546.527" h="15" />
+					<spot x="224.38606" y="113.17119" z="1540.2938" h="15" />
+				</spawn>
+				<!-- Belani Scout Slayer -->
+				<spawn npc_id="277744" respawn_time="1500" handler="OUTRIDER">
+					<spot x="120.11485" y="264.6994" z="1540.6259" h="5" />
+					<spot x="120.11485" y="264.6994" z="1540.6259" h="5" />
+					<spot x="194.5091" y="98.26744" z="1539.8466" h="30" />
+				</spawn>
+				<!-- Belani Recon War Subjugator -->
+				<spawn npc_id="277770" respawn_time="600" handler="ATTACKER">
+					<spot x="240.77638" y="167.62961" z="1482.2649" h="40" />
+				</spawn>
+				<!-- Belani Aegis -->
+				<spawn npc_id="277771" respawn_time="600" handler="ATTACKER">
+					<spot x="240.77638" y="167.62961" z="1482.2649" h="40" />
+				</spawn>
+				<!-- Teleporter -->
+				<spawn npc_id="731469" respawn_time="180" handler="MERCHANT">
+					<spot x="211.37541" y="172.4435" z="1489.6643" h="50" />
+				</spawn>
+				<!-- Belani Emissary -->
+				<spawn npc_id="802476" respawn_time="180" handler="SENTINEL">
+					<spot x="183.88545" y="208.37279" z="1490.2275" h="5" />
+				</spawn>
+				<!-- Beling General Goods Merchant -->
+				<spawn npc_id="804252" respawn_time="180" handler="MERCHANT">
+					<spot x="198.83856" y="212.93652" z="1489.274" />
+				</spawn>
+				<!-- Beling Special Buyer -->
+				<spawn npc_id="804254" respawn_time="180" handler="MERCHANT">
+					<spot x="213.0377" y="222.63692" z="1489.019" h="77" />
+				</spawn>
+				<!-- Beling Warehouse Manager -->
+				<spawn npc_id="804255" respawn_time="180" handler="MERCHANT">
+					<spot x="217.54051" y="183.7946" z="1489.5781" h="50" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="BALAUR">
+				<!-- Belani Base -->
+				<spawn npc_id="802692" handler="FLAG">
+					<spot x="187.29445" y="200.62192" z="1490.0648" h="5" />
+				</spawn>
+				<!-- Belani Dreadcaptain -->
+				<spawn npc_id="277580" handler="BOSS">
+					<spot x="167.23325" y="196.70714" z="1490.8463" h="5" />
+				</spawn>
+				<!-- Belani Hidestitcher -->
+				<spawn npc_id="277620" respawn_time="180" handler="SENTINEL">
+					<spot x="220.6717" y="210.91374" z="1489.4637" />
+				</spawn>
+				<!-- Belani Grunt -->
+				<spawn npc_id="277640" respawn_time="180" handler="SENTINEL">
+					<spot x="198.83856" y="212.93652" z="1489.274" />
+					<spot x="211.37541" y="172.4435" z="1492.2649" h="50" />
+					<spot x="199.51418" y="184.28403" z="1489.6643" />
+					<spot x="190.31686" y="229.65575" z="1489.5294" h="5" />
+				</spawn>
+				<!-- Belani Lookout -->
+				<spawn npc_id="277660" respawn_time="180" handler="SENTINEL">
+					<spot x="187.84206" y="164.08556" z="1490.7446" h="90" />
+				</spawn>
+				<!-- Belani Cutthroat -->
+				<spawn npc_id="277680" respawn_time="180" handler="SENTINEL">
+					<spot x="139.7992" y="209.21414" z="1498.8141" h="5" />
+				</spawn>
+				<!-- Belani Scout Infantry -->
+				<spawn npc_id="277696" respawn_time="1500" handler="OUTRIDER">
+					<spot x="96.41001" y="272.4259" z="1539.8099" h="60" />
+					<spot x="135.32431" y="259.68433" z="1540.0564" h="5" />
+					<spot x="139.54819" y="276.65384" z="1540.1053" />
+					<spot x="114.2187" y="275.34464" z="1540.2544" h="5" />
+				</spawn>
+				<!-- Belani Recon Contender -->
+				<spawn npc_id="277701" respawn_time="1500" handler="OUTRIDER">
+					<spot x="206.1017" y="92.400154" z="1540.0428" h="15" />
+					<spot x="204.18375" y="106.04543" z="1540.2244" h="30" />
+					<spot x="182.80238" y="107.70291" z="1540.578" h="60" />
+					<spot x="214.6966" y="98.54934" z="1540.3019" h="30" />
+				</spawn>
+				<!-- Belani Scout Patrol -->
+				<spawn npc_id="277720" respawn_time="1500" handler="OUTRIDER">
+					<spot x="130.03802" y="295.2478" z="1539.8369" h="15" />
+					<spot x="101.16" y="257.45197" z="1546.527" h="15" />
+				</spawn>
+				<!-- Belani Recon Searcher -->
+				<spawn npc_id="277725" respawn_time="1500" handler="OUTRIDER">
+					<spot x="201.10844" y="121.06506" z="1540.5361" h="45" />
+					<spot x="224.38606" y="113.17119" z="1540.2938" h="15" />
+				</spawn>
+				<!-- Belani Scout Slayer -->
+				<spawn npc_id="277744" respawn_time="1500" handler="OUTRIDER">
+					<spot x="120.11485" y="264.6994" z="1540.6259" h="5" />
+					<spot x="120.11485" y="264.6994" z="1540.6259" h="5" />
+				</spawn>
+				<!-- Belani Recon Scoundrel -->
+				<spawn npc_id="277749" respawn_time="1500" handler="OUTRIDER">
+					<spot x="194.5091" y="98.26744" z="1539.8466" h="30" />
+				</spawn>
+			</occupier_template>
+		</base_spawn>
+		<!-- Belfarth Fort -->
+		<base_spawn id="4202">
+			<occupier_template occupier="PEACE">
+				<!-- Belfarth Base -->
+				<spawn npc_id="802715" handler="FLAG">
+					<spot x="202.76358" y="1861.6301" z="1511.9462" h="5" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="BELUS">
+				<!-- Belfarth Base -->
+				<spawn npc_id="802694" handler="FLAG">
+					<spot x="202.76358" y="1861.6301" z="1490.086" h="5" />
+				</spawn>
+				<!-- Belfarth Warcaptain -->
+				<spawn npc_id="880132" handler="BOSS">
+					<spot x="199.31255" y="1880.6362" z="1490.848" h="95" />
+				</spawn>
+				<!-- Belfarth Recon War Subjugator -->
+				<spawn npc_id="880750" handler="ATTACKER"><!-- respawn_time="600" -->
+					<spot x="170.49382" y="1808.5787" z="1482.4191" h="15" />
+				</spawn>
+				<!-- Belfarth Aegis -->
+				<spawn npc_id="880751" handler="ATTACKER"><!-- respawn_time="600" -->
+					<spot x="170.49382" y="1808.5787" z="1482.4191" h="15" />
+				</spawn>
+				<!-- Teleporter -->
+				<spawn npc_id="731470" respawn_time="180" handler="MERCHANT">
+					<spot x="174.94292" y="1837.6" z="1489.6575" h="15" />
+				</spawn>
+				<!-- Belfarth Security -->
+				<spawn npc_id="802480" respawn_time="180" handler="SENTINEL">
+					<spot x="210.25887" y="1863.6201" z="1490.217" h="90" />
+				</spawn>
+				<!-- Belfarth General Goods Merchant -->
+				<spawn npc_id="804208" respawn_time="180" handler="MERCHANT">
+					<spot x="217.32347" y="1846.3193" z="1489.1941" h="50" />
+				</spawn>
+				<!-- Belfarth Special Crafting Materials Merchant -->
+				<spawn npc_id="804209" respawn_time="180" handler="MERCHANT">
+					<spot x="230.19624" y="1842.1769" z="1489.0238" h="50" />
+				</spawn>
+				<!-- Belfarth Warehouse Manager -->
+				<spawn npc_id="804211" respawn_time="180" handler="MERCHANT">
+					<spot x="186.78061" y="1829.8837" z="1489.5087" h="15" />
+				</spawn>
+				<!-- Belfarth Master Healer -->
+				<spawn npc_id="880252" respawn_time="180" handler="SENTINEL">
+					<spot x="213.11519" y="1826.7137" z="1489.4883" h="95" />
+				</spawn>
+				<!-- Belfarth Infantry -->
+				<spawn npc_id="880312" respawn_time="180" handler="SENTINEL">
+					<spot x="187.29" y="1847.4557" z="1489.651" h="95" />
+					<spot x="231.15938" y="1857.8909" z="1489.6509" h="95" />
+				</spawn>
+				<!-- Belfarth Patrol -->
+				<spawn npc_id="880372" respawn_time="180" handler="SENTINEL">
+					<spot x="167.26079" y="1859.8962" z="1490.8102" h="60" />
+				</spawn>
+				<!-- Belfarth Recon Grunt -->
+				<spawn npc_id="880500" respawn_time="1500" handler="OUTRIDER">
+					<spot x="75.79493" y="1861.8832" z="1540.0498" h="100" />
+					<spot x="91.01097" y="1844.2489" z="1540.227" h="30" />
+					<spot x="90.21257" y="1858.6078" z="1540.2634" h="75" />
+					<spot x="54.246887" y="1871.7272" z="1550.421" h="95" />
+				</spawn>
+				<!-- Belfarth Recon Grunt -->
+				<spawn npc_id="880502" respawn_time="1500" handler="OUTRIDER">
+					<spot x="267.34665" y="1925.433" z="1540.526" h="95" />
+					<spot x="260.47308" y="1913.3535" z="1540.3396" h="75" />
+					<spot x="277.56583" y="1949.7112" z="1539.8099" h="30" />
+					<spot x="270.8432" y="1899.0343" z="1539.9489" h="90" />
+				</spawn>
+				<!-- Belfarth Recon Lookout -->
+				<spawn npc_id="880584" respawn_time="1500" handler="OUTRIDER">
+					<spot x="92.65868" y="1885.3538" z="1540.7372" h="15" />
+					<spot x="103.74496" y="1867.2085" z="1540.7812" h="105" />
+				</spawn>
+				<!-- Belfarth Recon Lookout -->
+				<spawn npc_id="880586" respawn_time="1500" handler="OUTRIDER">
+					<spot x="301.16867" y="1922.2839" z="1539.3406" />
+					<spot x="243.91173" y="1946.6663" z="1547.6945" h="105" />
+				</spawn>
+				<!-- Belfarth Cutthroat -->
+				<spawn npc_id="880668" respawn_time="1500" handler="OUTRIDER">
+					<spot x="83.59733" y="1872.681" z="1540.0662" />
+				</spawn>
+				<!-- Belfarth Cutthroat -->
+				<spawn npc_id="880670" respawn_time="1500" handler="OUTRIDER">
+					<spot x="286.07758" y="1912.9412" z="1540.3208" h="95" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="ASPIDA">
+				<!-- Belfarth Base -->
+				<spawn npc_id="802699" handler="FLAG">
+					<spot x="202.76358" y="1861.6301" z="1490.086" h="5" />
+				</spawn>
+				<!-- Belfarth Warcaptain -->
+				<spawn npc_id="880133" handler="BOSS">
+					<spot x="199.31255" y="1880.6362" z="1490.848" h="95" />
+				</spawn>
+				<!-- Belfarth Recon War Subjugator -->
+				<spawn npc_id="880750" handler="ATTACKER"><!-- respawn_time="600" -->
+					<spot x="170.49382" y="1808.5787" z="1482.4191" h="15" />
+				</spawn>
+				<!-- Belfarth Aegis -->
+				<spawn npc_id="880751" handler="ATTACKER"><!-- respawn_time="600" -->
+					<spot x="170.49382" y="1808.5787" z="1482.4191" h="15" />
+				</spawn>
+				<!-- Teleporter -->
+				<spawn npc_id="731471" respawn_time="180" handler="MERCHANT">
+					<spot x="174.94292" y="1837.6" z="1489.6575" h="15" />
+				</spawn>
+				<!-- Belfarth Commander -->
+				<spawn npc_id="802481" respawn_time="180" handler="SENTINEL">
+					<spot x="210.25887" y="1863.6201" z="1490.217" h="90" />
+				</spawn>
+				<!-- Belfarth General Goods Merchant -->
+				<spawn npc_id="804224" respawn_time="180" handler="MERCHANT">
+					<spot x="217.32347" y="1846.3193" z="1489.1941" h="50" />
+				</spawn>
+				<!-- Belfarth Crafting Materials Merchant -->
+				<spawn npc_id="804225" respawn_time="180" handler="MERCHANT">
+					<spot x="230.19624" y="1842.1769" z="1489.0238" h="50" />
+				</spawn>
+				<!-- Belfarth Warehouse Manager -->
+				<spawn npc_id="804227" respawn_time="180" handler="MERCHANT">
+					<spot x="186.78061" y="1829.8837" z="1489.5087" h="15" />
+				</spawn>
+				<!-- Belfarth Master Healer -->
+				<spawn npc_id="880253" respawn_time="180" handler="SENTINEL">
+					<spot x="213.11519" y="1826.7137" z="1489.4883" h="95" />
+				</spawn>
+				<!-- Belfarth Infantry -->
+				<spawn npc_id="880313" respawn_time="180" handler="SENTINEL">
+					<spot x="187.29" y="1847.4557" z="1489.651" h="95" />
+					<spot x="231.15938" y="1857.8909" z="1489.6509" h="95" />
+				</spawn>
+				<!-- Belfarth Patrol -->
+				<spawn npc_id="880373" respawn_time="180" handler="SENTINEL">
+					<spot x="167.26079" y="1859.8962" z="1490.8102" h="60" />
+				</spawn>
+				<!-- Belfarth Scout Infantry -->
+				<spawn npc_id="880496" respawn_time="1500" handler="OUTRIDER">
+					<spot x="75.79493" y="1861.8832" z="1540.0498" h="100" />
+					<spot x="91.01097" y="1844.2489" z="1540.227" h="30" />
+					<spot x="267.34665" y="1925.433" z="1540.526" h="95" />
+					<spot x="90.21257" y="1858.6078" z="1540.2634" h="75" />
+					<spot x="54.246887" y="1871.7272" z="1550.421" h="95" />
+					<spot x="260.47308" y="1913.3535" z="1540.3396" h="75" />
+					<spot x="277.56583" y="1949.7112" z="1539.8099" h="30" />
+					<spot x="270.8432" y="1899.0343" z="1539.9489" h="90" />
+				</spawn>
+				<!-- Belfarth Scout Patrol -->
+				<spawn npc_id="880580" respawn_time="1500" handler="OUTRIDER">
+					<spot x="301.16867" y="1922.2839" z="1539.3406" />
+					<spot x="92.65868" y="1885.3538" z="1540.7372" h="15" />
+					<spot x="103.74496" y="1867.2085" z="1540.7812" h="105" />
+					<spot x="243.91173" y="1946.6663" z="1547.6945" h="105" />
+				</spawn>
+				<!-- Belfarth Slayer -->
+				<spawn npc_id="880664" respawn_time="1500" handler="OUTRIDER">
+					<spot x="286.07758" y="1912.9412" z="1540.3208" h="95" />
+					<spot x="83.59733" y="1872.681" z="1540.0662" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="ATANATOS">
+				<!-- Belfarth Base -->
+				<spawn npc_id="802704" handler="FLAG">
+					<spot x="202.76358" y="1861.6301" z="1490.086" h="5" />
+				</spawn>
+				<!-- Belfarth Warcaptain -->
+				<spawn npc_id="880134" handler="BOSS">
+					<spot x="199.31255" y="1880.6362" z="1490.848" h="95" />
+				</spawn>
+				<!-- Belfarth Recon War Subjugator -->
+				<spawn npc_id="880750" handler="ATTACKER"><!-- respawn_time="600" -->
+					<spot x="170.49382" y="1808.5787" z="1482.4191" h="15" />
+				</spawn>
+				<!-- Belfarth Aegis -->
+				<spawn npc_id="880751" handler="ATTACKER"><!-- respawn_time="600" -->
+					<spot x="170.49382" y="1808.5787" z="1482.4191" h="15" />
+				</spawn>
+				<!-- Teleporter -->
+				<spawn npc_id="731472" respawn_time="180" handler="MERCHANT">
+					<spot x="174.94292" y="1837.6" z="1489.6575" h="15" />
+				</spawn>
+				<!-- Belfarth Vanguard -->
+				<spawn npc_id="802482" respawn_time="180" handler="SENTINEL">
+					<spot x="210.25887" y="1863.6201" z="1490.217" h="90" />
+				</spawn>
+				<!-- Belfarth General Goods Merchant -->
+				<spawn npc_id="804240" respawn_time="180" handler="MERCHANT">
+					<spot x="217.32347" y="1846.3193" z="1489.1941" h="50" />
+				</spawn>
+				<!-- Belfarth Crafting Materials Merchant -->
+				<spawn npc_id="804241" respawn_time="180" handler="MERCHANT">
+					<spot x="230.19624" y="1842.1769" z="1489.0238" h="50" />
+				</spawn>
+				<!-- Belfarth Warehouse Manager -->
+				<spawn npc_id="804243" respawn_time="180" handler="MERCHANT">
+					<spot x="186.78061" y="1829.8837" z="1489.5087" h="15" />
+				</spawn>
+				<!-- Belfarth Master Healer -->
+				<spawn npc_id="880254" respawn_time="180" handler="SENTINEL">
+					<spot x="213.11519" y="1826.7137" z="1489.4883" h="95" />
+				</spawn>
+				<!-- Belfarth Infantry -->
+				<spawn npc_id="880314" respawn_time="180" handler="SENTINEL">
+					<spot x="187.29" y="1847.4557" z="1489.651" h="95" />
+					<spot x="231.15938" y="1857.8909" z="1489.6509" h="95" />
+				</spawn>
+				<!-- Belfarth Patrol -->
+				<spawn npc_id="880374" respawn_time="180" handler="SENTINEL">
+					<spot x="167.26079" y="1859.8962" z="1490.8102" h="60" />
+				</spawn>
+				<!-- Belfarth Scout Infantry -->
+				<spawn npc_id="880496" respawn_time="1500" handler="OUTRIDER">
+					<spot x="75.79493" y="1861.8832" z="1540.0498" h="100" />
+					<spot x="91.01097" y="1844.2489" z="1540.227" h="30" />
+					<spot x="267.34665" y="1925.433" z="1540.526" h="95" />
+					<spot x="90.21257" y="1858.6078" z="1540.2634" h="75" />
+					<spot x="54.246887" y="1871.7272" z="1550.421" h="95" />
+					<spot x="260.47308" y="1913.3535" z="1540.3396" h="75" />
+					<spot x="277.56583" y="1949.7112" z="1539.8099" h="30" />
+					<spot x="270.8432" y="1899.0343" z="1539.9489" h="90" />
+				</spawn>
+				<!-- Belfarth Scout Patrol -->
+				<spawn npc_id="880580" respawn_time="1500" handler="OUTRIDER">
+					<spot x="301.16867" y="1922.2839" z="1539.3406" />
+					<spot x="92.65868" y="1885.3538" z="1540.7372" h="15" />
+					<spot x="103.74496" y="1867.2085" z="1540.7812" h="105" />
+					<spot x="243.91173" y="1946.6663" z="1547.6945" h="105" />
+				</spawn>
+				<!-- Belfarth Slayer -->
+				<spawn npc_id="880664" respawn_time="1500" handler="OUTRIDER">
+					<spot x="286.07758" y="1912.9412" z="1540.3208" h="95" />
+					<spot x="83.59733" y="1872.681" z="1540.0662" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="DISILLON">
+				<!-- Belfarth Base -->
+				<spawn npc_id="802709" handler="FLAG">
+					<spot x="202.76358" y="1861.6301" z="1490.086" h="5" />
+				</spawn>
+				<!-- Belfarth Warcaptain -->
+				<spawn npc_id="880135" handler="BOSS">
+					<spot x="199.31255" y="1880.6362" z="1490.848" h="95" />
+				</spawn>
+				<!-- Belfarth Recon War Subjugator -->
+				<spawn npc_id="880750" handler="ATTACKER"><!-- respawn_time="600" -->
+					<spot x="170.49382" y="1808.5787" z="1482.4191" h="15" />
+				</spawn>
+				<!-- Belfarth Aegis -->
+				<spawn npc_id="880751" handler="ATTACKER"><!-- respawn_time="600" -->
+					<spot x="170.49382" y="1808.5787" z="1482.4191" h="15" />
+				</spawn>
+				<!-- Teleporter -->
+				<spawn npc_id="731473" respawn_time="180" handler="MERCHANT">
+					<spot x="174.94292" y="1837.6" z="1489.6575" h="15" />
+				</spawn>
+				<!-- Belfarth Emissary -->
+				<spawn npc_id="802483" respawn_time="180" handler="SENTINEL">
+					<spot x="210.25887" y="1863.6201" z="1490.217" h="90" />
+				</spawn>
+				<!-- Belfarth General Goods Merchant -->
+				<spawn npc_id="804256" respawn_time="180" handler="MERCHANT">
+					<spot x="217.32347" y="1846.3193" z="1489.1941" h="50" />
+				</spawn>
+				<!-- Belfarth Crafting Materials Merchant -->
+				<spawn npc_id="804257" respawn_time="180" handler="MERCHANT">
+					<spot x="230.19624" y="1842.1769" z="1489.0238" h="50" />
+				</spawn>
+				<!-- Belfarth Warehouse Manager -->
+				<spawn npc_id="804259" respawn_time="180" handler="MERCHANT">
+					<spot x="186.78061" y="1829.8837" z="1489.5087" h="15" />
+				</spawn>
+				<!-- Belfarth Master Healer -->
+				<spawn npc_id="880255" respawn_time="180" handler="SENTINEL">
+					<spot x="213.11519" y="1826.7137" z="1489.4883" h="95" />
+				</spawn>
+				<!-- Belfarth Infantry -->
+				<spawn npc_id="880315" respawn_time="180" handler="SENTINEL">
+					<spot x="187.29" y="1847.4557" z="1489.651" h="95" />
+					<spot x="231.15938" y="1857.8909" z="1489.6509" h="95" />
+				</spawn>
+				<!-- Belfarth Patrol -->
+				<spawn npc_id="880375" respawn_time="180" handler="SENTINEL">
+					<spot x="167.26079" y="1859.8962" z="1490.8102" h="60" />
+				</spawn>
+				<!-- Belfarth Scout Infantry -->
+				<spawn npc_id="880496" respawn_time="1500" handler="OUTRIDER">
+					<spot x="75.79493" y="1861.8832" z="1540.0498" h="100" />
+					<spot x="91.01097" y="1844.2489" z="1540.227" h="30" />
+					<spot x="267.34665" y="1925.433" z="1540.526" h="95" />
+					<spot x="90.21257" y="1858.6078" z="1540.2634" h="75" />
+					<spot x="54.246887" y="1871.7272" z="1550.421" h="95" />
+					<spot x="260.47308" y="1913.3535" z="1540.3396" h="75" />
+					<spot x="277.56583" y="1949.7112" z="1539.8099" h="30" />
+					<spot x="270.8432" y="1899.0343" z="1539.9489" h="90" />
+				</spawn>
+				<!-- Belfarth Scout Patrol -->
+				<spawn npc_id="880580" respawn_time="1500" handler="OUTRIDER">
+					<spot x="301.16867" y="1922.2839" z="1539.3406" />
+					<spot x="92.65868" y="1885.3538" z="1540.7372" h="15" />
+					<spot x="103.74496" y="1867.2085" z="1540.7812" h="105" />
+					<spot x="243.91173" y="1946.6663" z="1547.6945" h="105" />
+				</spawn>
+				<!-- Belfarth Slayer -->
+				<spawn npc_id="880664" respawn_time="1500" handler="OUTRIDER">
+					<spot x="286.07758" y="1912.9412" z="1540.3208" h="95" />
+					<spot x="83.59733" y="1872.681" z="1540.0662" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="BALAUR">
+				<!-- Belfarth Base -->
+				<spawn npc_id="802714" handler="FLAG">
+					<spot x="202.76358" y="1861.6301" z="1490.086" h="5" />
+				</spawn>
+				<!-- Belfarth Dreadcaptain -->
+				<spawn npc_id="880136" handler="BOSS">
+					<spot x="199.31255" y="1880.6362" z="1490.848" h="95" />
+				</spawn>
+				<!-- Belfarth Hidestitcher -->
+				<spawn npc_id="880256" respawn_time="180" handler="SENTINEL">
+					<spot x="213.11519" y="1826.7137" z="1489.4883" h="95" />
+				</spawn>
+				<!-- Belfarth Grunt -->
+				<spawn npc_id="880316" respawn_time="180" handler="SENTINEL">
+					<spot x="187.29" y="1847.4557" z="1489.651" h="95" />
+					<spot x="231.15938" y="1857.8909" z="1489.6509" h="95" />
+					<spot x="217.32347" y="1846.3193" z="1489.1941" h="50" />
+					<spot x="174.94292" y="1837.6" z="1489.6575" h="15" />
+				</spawn>
+				<!-- Belfarth Lookout -->
+				<spawn npc_id="880376" respawn_time="180" handler="SENTINEL">
+					<spot x="167.26079" y="1859.8962" z="1490.8102" h="60" />
+				</spawn>
+				<!-- Belfarth Scout Infantry -->
+				<spawn npc_id="880496" respawn_time="1500" handler="OUTRIDER">
+					<spot x="267.34665" y="1925.433" z="1540.526" h="95" />
+					<spot x="260.47308" y="1913.3535" z="1540.3396" h="75" />
+					<spot x="277.56583" y="1949.7112" z="1539.8099" h="30" />
+					<spot x="270.8432" y="1899.0343" z="1539.9489" h="90" />
+				</spawn>
+				<!-- Belfarth Recon Contender -->
+				<spawn npc_id="880501" respawn_time="1500" handler="OUTRIDER">
+					<spot x="75.79493" y="1861.8832" z="1540.0498" h="100" />
+					<spot x="91.01097" y="1844.2489" z="1540.227" h="30" />
+					<spot x="90.21257" y="1858.6078" z="1540.2634" h="75" />
+					<spot x="54.246887" y="1871.7272" z="1550.421" h="95" />
+				</spawn>
+				<!-- Belfarth Scout Patrol -->
+				<spawn npc_id="880580" respawn_time="1500" handler="OUTRIDER">
+					<spot x="301.16867" y="1922.2839" z="1539.3406" />
+					<spot x="243.91173" y="1946.6663" z="1547.6945" h="105" />
+				</spawn>
+				<!-- Belfarth Recon Searcher -->
+				<spawn npc_id="880585" respawn_time="1500" handler="OUTRIDER">
+					<spot x="92.65868" y="1885.3538" z="1540.7372" h="15" />
+					<spot x="103.74496" y="1867.2085" z="1540.7812" h="105" />
+				</spawn>
+				<!-- Belfarth Slayer -->
+				<spawn npc_id="880664" respawn_time="1500" handler="OUTRIDER">
+					<spot x="286.07758" y="1912.9412" z="1540.3208" h="95" />
+				</spawn>
+				<!-- Belfarth Scoundrel -->
+				<spawn npc_id="880669" respawn_time="1500" handler="OUTRIDER">
+					<spot x="83.59733" y="1872.681" z="1540.0662" />
+				</spawn>
+			</occupier_template>
+		</base_spawn>
+		<!-- Beling Fort -->
+		<base_spawn id="4203">
+			<occupier_template occupier="PEACE">
+				<!-- Beling Base -->
+				<spawn npc_id="802737" handler="FLAG">
+					<spot x="1865.5791" y="1842.6656" z="1511.9462" h="5" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="BELUS">
+				<!-- Beling Base -->
+				<spawn npc_id="802716" handler="FLAG">
+					<spot x="1865.5791" y="1842.6656" z="1490.0587" h="5" />
+				</spawn>
+				<!-- Beling Warcaptain -->
+				<spawn npc_id="880152" handler="BOSS">
+					<spot x="1885.893" y="1846.35" z="1490.848" h="65" />
+				</spawn>
+				<!-- Beling Recon War Subjugator -->
+				<spawn npc_id="880766" handler="ATTACKER"><!-- respawn_time="600" -->
+					<spot x="1808.9133" y="1869.3268" z="1482.776" h="105" />
+				</spawn>
+				<!-- Beling Aegis -->
+				<spawn npc_id="880767" handler="ATTACKER"><!-- respawn_time="600" -->
+					<spot x="1808.9133" y="1869.3268" z="1482.776" h="105" />
+				</spawn>
+				<!-- Teleporter -->
+				<spawn npc_id="731474" respawn_time="180" handler="MERCHANT">
+					<spot x="1843.1382" y="1870.92" z="1489.7024" h="110" />
+				</spawn>
+				<!-- Beling Security -->
+				<spawn npc_id="802484" respawn_time="180" handler="SENTINEL">
+					<spot x="1869.1464" y="1834.6943" z="1490.2268" h="65" />
+				</spawn>
+				<!-- Beling General Goods Merchant -->
+				<spawn npc_id="804212" respawn_time="180" handler="MERCHANT">
+					<spot x="1851.8331" y="1829.5564" z="1489.2068" h="25" />
+				</spawn>
+				<!-- Beling Special Buyer -->
+				<spawn npc_id="804214" respawn_time="180" handler="MERCHANT">
+					<spot x="1838.799" y="1820.1323" z="1489.0945" h="25" />
+				</spawn>
+				<!-- Beling Warehouse Manager -->
+				<spawn npc_id="804215" respawn_time="180" handler="MERCHANT">
+					<spot x="1834.7109" y="1856.0095" z="1489.4929" h="110" />
+				</spawn>
+				<!-- Beling Master Healer -->
+				<spawn npc_id="880272" respawn_time="180" handler="SENTINEL">
+					<spot x="1831.7709" y="1830.1262" z="1489.4679" h="65" />
+				</spawn>
+				<!-- Beling Infantry -->
+				<spawn npc_id="880332" respawn_time="180" handler="SENTINEL">
+					<spot x="1863.5276" y="1811.9592" z="1489.341" h="65" />
+					<spot x="1851.0238" y="1857.2169" z="1489.6384" h="65" />
+				</spawn>
+				<!-- Beling Patrol -->
+				<spawn npc_id="880392" respawn_time="180" handler="SENTINEL">
+					<spot x="1863.5819" y="1877.4076" z="1490.7229" h="30" />
+				</spawn>
+				<!-- Beling Slayer -->
+				<spawn npc_id="880452" respawn_time="180" handler="SENTINEL">
+					<spot x="1913.2847" y="1830.7395" z="1499.2355" h="65" />
+				</spawn>
+				<!-- Beling Recon Grunt -->
+				<spawn npc_id="880528" respawn_time="1500" handler="OUTRIDER">
+					<spot x="1823.787" y="1940.5125" z="1540.1025" />
+					<spot x="1851.4915" y="1976.6191" z="1550.5674" h="65" />
+					<spot x="1842.6235" y="1955.71" z="1540.0258" h="75" />
+					<spot x="1862.5881" y="1936.2734" z="1540.6049" />
+				</spawn>
+				<!-- Beling Recon Grunt -->
+				<spawn npc_id="880530" respawn_time="1500" handler="OUTRIDER">
+					<spot x="1931.0415" y="1778.4033" z="1540.4524" h="75" />
+					<spot x="1934.6342" y="1807.0475" z="1550.6193" h="65" />
+					<spot x="1920.029" y="1770.1013" z="1540.0189" h="65" />
+					<spot x="1950.2023" y="1770.3517" z="1540.0505" />
+				</spawn>
+				<!-- Beling Recon Lookout -->
+				<spawn npc_id="880612" respawn_time="1500" handler="OUTRIDER">
+					<spot x="1832.2104" y="1951.6462" z="1540.4225" h="30" />
+					<spot x="1831.3774" y="1925.1661" z="1539.966" h="75" />
+				</spawn>
+				<!-- Beling Recon Lookout -->
+				<spawn npc_id="880614" respawn_time="1500" handler="OUTRIDER">
+					<spot x="1915.4764" y="1787.5587" z="1540.2373" h="30" />
+					<spot x="1905.0149" y="1773.4865" z="1540.2368" h="65" />
+				</spawn>
+				<!-- Beling Recon Cutthroat -->
+				<spawn npc_id="880696" respawn_time="1500" handler="OUTRIDER">
+					<spot x="1841.5109" y="1934.3367" z="1540.2844" h="90" />
+				</spawn>
+				<!-- Beling Recon Cutthroat -->
+				<spawn npc_id="880698" respawn_time="1500" handler="OUTRIDER">
+					<spot x="1919.4418" y="1749.0223" z="1540.0277" h="75" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="ASPIDA">
+				<!-- Beling Base -->
+				<spawn npc_id="802721" handler="FLAG">
+					<spot x="1865.5791" y="1842.6656" z="1490.0587" h="5" />
+				</spawn>
+				<!-- Beling Warcaptain -->
+				<spawn npc_id="880153" handler="BOSS">
+					<spot x="1885.893" y="1846.35" z="1490.848" h="65" />
+				</spawn>
+				<!-- Beling Recon War Subjugator -->
+				<spawn npc_id="880766" handler="ATTACKER"><!-- respawn_time="600" -->
+					<spot x="1808.9133" y="1869.3268" z="1482.776" h="105" />
+				</spawn>
+				<!-- Beling Aegis -->
+				<spawn npc_id="880767" handler="ATTACKER"><!-- respawn_time="600" -->
+					<spot x="1808.9133" y="1869.3268" z="1482.776" h="105" />
+				</spawn>
+				<!-- Teleporter -->
+				<spawn npc_id="731475" respawn_time="180" handler="MERCHANT">
+					<spot x="1843.1382" y="1870.92" z="1489.7024" h="110" />
+				</spawn>
+				<!-- Beling Commander -->
+				<spawn npc_id="802485" respawn_time="180" handler="SENTINEL">
+					<spot x="1869.1464" y="1834.6943" z="1490.2268" h="65" />
+				</spawn>
+				<!-- Beling General Goods Merchant -->
+				<spawn npc_id="804228" respawn_time="180" handler="MERCHANT">
+					<spot x="1851.8331" y="1829.5564" z="1489.2068" h="25" />
+				</spawn>
+				<!-- Beling Special Buyer -->
+				<spawn npc_id="804230" respawn_time="180" handler="MERCHANT">
+					<spot x="1838.799" y="1820.1323" z="1489.0945" h="25" />
+				</spawn>
+				<!-- Beling Warehouse Manager -->
+				<spawn npc_id="804231" respawn_time="180" handler="MERCHANT">
+					<spot x="1834.7109" y="1856.0095" z="1489.4929" h="110" />
+				</spawn>
+				<!-- Beling Master Healer -->
+				<spawn npc_id="880273" respawn_time="180" handler="SENTINEL">
+					<spot x="1831.7709" y="1830.1262" z="1489.4679" h="65" />
+				</spawn>
+				<!-- Beling Infantry -->
+				<spawn npc_id="880333" respawn_time="180" handler="SENTINEL">
+					<spot x="1863.5276" y="1811.9592" z="1489.341" h="65" />
+					<spot x="1851.0238" y="1857.2169" z="1489.6384" h="65" />
+				</spawn>
+				<!-- Beling Patrol -->
+				<spawn npc_id="880393" respawn_time="180" handler="SENTINEL">
+					<spot x="1863.5819" y="1877.4076" z="1490.7229" h="30" />
+				</spawn>
+				<!-- Beling Slayer -->
+				<spawn npc_id="880453" respawn_time="180" handler="SENTINEL">
+					<spot x="1913.2847" y="1830.7395" z="1499.2355" h="65" />
+				</spawn>
+				<!-- Beling Scout Infantry -->
+				<spawn npc_id="880524" respawn_time="1500" handler="OUTRIDER">
+					<spot x="1823.787" y="1940.5125" z="1540.1025" />
+					<spot x="1931.0415" y="1778.4033" z="1540.4524" h="75" />
+					<spot x="1851.4915" y="1976.6191" z="1550.5674" h="65" />
+					<spot x="1934.6342" y="1807.0475" z="1550.6193" h="65" />
+					<spot x="1920.029" y="1770.1013" z="1540.0189" h="65" />
+					<spot x="1842.6235" y="1955.71" z="1540.0258" h="75" />
+					<spot x="1950.2023" y="1770.3517" z="1540.0505" />
+					<spot x="1862.5881" y="1936.2734" z="1540.6049" />
+				</spawn>
+				<!-- Beling Scout Patrol -->
+				<spawn npc_id="880608" respawn_time="1500" handler="OUTRIDER">
+					<spot x="1832.2104" y="1951.6462" z="1540.4225" h="30" />
+					<spot x="1831.3774" y="1925.1661" z="1539.966" h="75" />
+					<spot x="1915.4764" y="1787.5587" z="1540.2373" h="30" />
+					<spot x="1905.0149" y="1773.4865" z="1540.2368" h="65" />
+				</spawn>
+				<!-- Beling Scout Slayer -->
+				<spawn npc_id="880692" respawn_time="1500" handler="OUTRIDER">
+					<spot x="1919.4418" y="1749.0223" z="1540.0277" h="75" />
+					<spot x="1841.5109" y="1934.3367" z="1540.2844" h="90" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="ATANATOS">
+				<!-- Beling Base -->
+				<spawn npc_id="802726" handler="FLAG">
+					<spot x="1865.5791" y="1842.6656" z="1490.0587" h="5" />
+				</spawn>
+				<!-- Beling Warcaptain -->
+				<spawn npc_id="880154" handler="BOSS">
+					<spot x="1885.893" y="1846.35" z="1490.848" h="65" />
+				</spawn>
+				<!-- Beling Recon War Subjugator -->
+				<spawn npc_id="880766" handler="ATTACKER"><!-- respawn_time="600" -->
+					<spot x="1808.9133" y="1869.3268" z="1482.776" h="105" />
+				</spawn>
+				<!-- Beling Aegis -->
+				<spawn npc_id="880767" handler="ATTACKER"><!-- respawn_time="600" -->
+					<spot x="1808.9133" y="1869.3268" z="1482.776" h="105" />
+				</spawn>
+				<!-- Teleporter -->
+				<spawn npc_id="731476" respawn_time="180" handler="MERCHANT">
+					<spot x="1843.1382" y="1870.92" z="1489.7024" h="110" />
+				</spawn>
+				<!-- Beling Vanguard -->
+				<spawn npc_id="802486" respawn_time="180" handler="SENTINEL">
+					<spot x="1869.1464" y="1834.6943" z="1490.2268" h="65" />
+				</spawn>
+				<!-- Beling General Goods Merchant -->
+				<spawn npc_id="804244" respawn_time="180" handler="MERCHANT">
+					<spot x="1851.8331" y="1829.5564" z="1489.2068" h="25" />
+				</spawn>
+				<!-- Beling Special Buyer -->
+				<spawn npc_id="804246" respawn_time="180" handler="MERCHANT">
+					<spot x="1838.799" y="1820.1323" z="1489.0945" h="25" />
+				</spawn>
+				<!-- Beling Warehouse Manager -->
+				<spawn npc_id="804247" respawn_time="180" handler="MERCHANT">
+					<spot x="1834.7109" y="1856.0095" z="1489.4929" h="110" />
+				</spawn>
+				<!-- Beling Master Healer -->
+				<spawn npc_id="880274" respawn_time="180" handler="SENTINEL">
+					<spot x="1831.7709" y="1830.1262" z="1489.4679" h="65" />
+				</spawn>
+				<!-- Beling Infantry -->
+				<spawn npc_id="880334" respawn_time="180" handler="SENTINEL">
+					<spot x="1863.5276" y="1811.9592" z="1489.341" h="65" />
+					<spot x="1851.0238" y="1857.2169" z="1489.6384" h="65" />
+				</spawn>
+				<!-- Beling Patrol -->
+				<spawn npc_id="880394" respawn_time="180" handler="SENTINEL">
+					<spot x="1863.5819" y="1877.4076" z="1490.7229" h="30" />
+				</spawn>
+				<!-- Beling Slayer -->
+				<spawn npc_id="880454" respawn_time="180" handler="SENTINEL">
+					<spot x="1913.2847" y="1830.7395" z="1499.2355" h="65" />
+				</spawn>
+				<!-- Beling Scout Infantry -->
+				<spawn npc_id="880524" respawn_time="1500" handler="OUTRIDER">
+					<spot x="1823.787" y="1940.5125" z="1540.1025" />
+					<spot x="1931.0415" y="1778.4033" z="1540.4524" h="75" />
+					<spot x="1851.4915" y="1976.6191" z="1550.5674" h="65" />
+					<spot x="1934.6342" y="1807.0475" z="1550.6193" h="65" />
+					<spot x="1920.029" y="1770.1013" z="1540.0189" h="65" />
+					<spot x="1842.6235" y="1955.71" z="1540.0258" h="75" />
+					<spot x="1950.2023" y="1770.3517" z="1540.0505" />
+					<spot x="1862.5881" y="1936.2734" z="1540.6049" />
+				</spawn>
+				<!-- Beling Scout Patrol -->
+				<spawn npc_id="880608" respawn_time="1500" handler="OUTRIDER">
+					<spot x="1832.2104" y="1951.6462" z="1540.4225" h="30" />
+					<spot x="1831.3774" y="1925.1661" z="1539.966" h="75" />
+					<spot x="1915.4764" y="1787.5587" z="1540.2373" h="30" />
+					<spot x="1905.0149" y="1773.4865" z="1540.2368" h="65" />
+				</spawn>
+				<!-- Beling Scout Slayer -->
+				<spawn npc_id="880692" respawn_time="1500" handler="OUTRIDER">
+					<spot x="1919.4418" y="1749.0223" z="1540.0277" h="75" />
+					<spot x="1841.5109" y="1934.3367" z="1540.2844" h="90" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="DISILLON">
+				<!-- Beling Base -->
+				<spawn npc_id="802731" handler="FLAG">
+					<spot x="1865.5791" y="1842.6656" z="1490.0587" h="5" />
+				</spawn>
+				<!-- Beling Warcaptain -->
+				<spawn npc_id="880155" handler="BOSS">
+					<spot x="1885.893" y="1846.35" z="1490.848" h="65" />
+				</spawn>
+				<!-- Beling Recon War Subjugator -->
+				<spawn npc_id="880766" handler="ATTACKER"><!-- respawn_time="600" -->
+					<spot x="1808.9133" y="1869.3268" z="1482.776" h="105" />
+				</spawn>
+				<!-- Beling Aegis -->
+				<spawn npc_id="880767" handler="ATTACKER"><!-- respawn_time="600" -->
+					<spot x="1808.9133" y="1869.3268" z="1482.776" h="105" />
+				</spawn>
+				<!-- Teleporter -->
+				<spawn npc_id="731477" respawn_time="180" handler="MERCHANT">
+					<spot x="1843.1382" y="1870.92" z="1489.7024" h="110" />
+				</spawn>
+				<!-- Beling Emissary -->
+				<spawn npc_id="802487" respawn_time="180" handler="SENTINEL">
+					<spot x="1869.1464" y="1834.6943" z="1490.2268" h="65" />
+				</spawn>
+				<!-- Beling General Goods Merchant -->
+				<spawn npc_id="804260" respawn_time="180" handler="MERCHANT">
+					<spot x="1851.8331" y="1829.5564" z="1489.2068" h="25" />
+				</spawn>
+				<!-- Beling Special Buyer -->
+				<spawn npc_id="804262" respawn_time="180" handler="MERCHANT">
+					<spot x="1838.799" y="1820.1323" z="1489.0945" h="25" />
+				</spawn>
+				<!-- Beling Warehouse Manager -->
+				<spawn npc_id="804263" respawn_time="180" handler="MERCHANT">
+					<spot x="1834.7109" y="1856.0095" z="1489.4929" h="110" />
+				</spawn>
+				<!-- Beling Master Healer -->
+				<spawn npc_id="880275" respawn_time="180" handler="SENTINEL">
+					<spot x="1831.7709" y="1830.1262" z="1489.4679" h="65" />
+				</spawn>
+				<!-- Beling Infantry -->
+				<spawn npc_id="880335" respawn_time="180" handler="SENTINEL">
+					<spot x="1863.5276" y="1811.9592" z="1489.341" h="65" />
+					<spot x="1851.0238" y="1857.2169" z="1489.6384" h="65" />
+				</spawn>
+				<!-- Beling Patrol -->
+				<spawn npc_id="880395" respawn_time="180" handler="SENTINEL">
+					<spot x="1863.5819" y="1877.4076" z="1490.7229" h="30" />
+				</spawn>
+				<!-- Beling Slayer -->
+				<spawn npc_id="880455" respawn_time="180" handler="SENTINEL">
+					<spot x="1913.2847" y="1830.7395" z="1499.2355" h="65" />
+				</spawn>
+				<!-- Beling Scout Infantry -->
+				<spawn npc_id="880524" respawn_time="1500" handler="OUTRIDER">
+					<spot x="1823.787" y="1940.5125" z="1540.1025" />
+					<spot x="1931.0415" y="1778.4033" z="1540.4524" h="75" />
+					<spot x="1851.4915" y="1976.6191" z="1550.5674" h="65" />
+					<spot x="1934.6342" y="1807.0475" z="1550.6193" h="65" />
+					<spot x="1920.029" y="1770.1013" z="1540.0189" h="65" />
+					<spot x="1842.6235" y="1955.71" z="1540.0258" h="75" />
+					<spot x="1950.2023" y="1770.3517" z="1540.0505" />
+					<spot x="1862.5881" y="1936.2734" z="1540.6049" />
+				</spawn>
+				<!-- Beling Scout Patrol -->
+				<spawn npc_id="880608" respawn_time="1500" handler="OUTRIDER">
+					<spot x="1832.2104" y="1951.6462" z="1540.4225" h="30" />
+					<spot x="1831.3774" y="1925.1661" z="1539.966" h="75" />
+					<spot x="1915.4764" y="1787.5587" z="1540.2373" h="30" />
+					<spot x="1905.0149" y="1773.4865" z="1540.2368" h="65" />
+				</spawn>
+				<!-- Beling Scout Slayer -->
+				<spawn npc_id="880692" respawn_time="1500" handler="OUTRIDER">
+					<spot x="1919.4418" y="1749.0223" z="1540.0277" h="75" />
+					<spot x="1841.5109" y="1934.3367" z="1540.2844" h="90" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="BALAUR">
+				<!-- Beling Base -->
+				<spawn npc_id="802736" handler="FLAG">
+					<spot x="1865.5791" y="1842.6656" z="1490.0587" h="5" />
+				</spawn>
+				<!-- Beling Dreadcaptain -->
+				<spawn npc_id="880156" handler="BOSS">
+					<spot x="1885.893" y="1846.35" z="1490.848" h="65" />
+				</spawn>
+				<!-- Beling Hidestitcher -->
+				<spawn npc_id="880276" respawn_time="180" handler="SENTINEL">
+					<spot x="1831.7709" y="1830.1262" z="1489.4679" h="65" />
+				</spawn>
+				<!-- Beling Grunt -->
+				<spawn npc_id="880336" respawn_time="180" handler="SENTINEL">
+					<spot x="1843.1382" y="1870.92" z="1489.7024" h="110" />
+					<spot x="1863.5276" y="1811.9592" z="1489.341" h="65" />
+					<spot x="1851.0238" y="1857.2169" z="1489.6384" h="65" />
+					<spot x="1851.8331" y="1829.5564" z="1489.2068" h="25" />
+				</spawn>
+				<!-- Beling Lookout -->
+				<spawn npc_id="880396" respawn_time="180" handler="SENTINEL">
+					<spot x="1863.5819" y="1877.4076" z="1490.7229" h="30" />
+				</spawn>
+				<!-- Beling Cutthroat -->
+				<spawn npc_id="880456" respawn_time="180" handler="SENTINEL">
+					<spot x="1913.2847" y="1830.7395" z="1499.2355" h="65" />
+				</spawn>
+				<!-- Beling Scout Infantry -->
+				<spawn npc_id="880524" respawn_time="1500" handler="OUTRIDER">
+					<spot x="1931.0415" y="1778.4033" z="1540.4524" h="75" />
+					<spot x="1934.6342" y="1807.0475" z="1550.6193" h="65" />
+					<spot x="1920.029" y="1770.1013" z="1540.0189" h="65" />
+					<spot x="1950.2023" y="1770.3517" z="1540.0505" />
+				</spawn>
+				<!-- Beling Recon Contender -->
+				<spawn npc_id="880529" respawn_time="1500" handler="OUTRIDER">
+					<spot x="1823.787" y="1940.5125" z="1540.1025" />
+					<spot x="1851.4915" y="1976.6191" z="1550.5674" h="65" />
+					<spot x="1842.6235" y="1955.71" z="1540.0258" h="75" />
+					<spot x="1862.5881" y="1936.2734" z="1540.6049" />
+				</spawn>
+				<!-- Beling Scout Patrol -->
+				<spawn npc_id="880608" respawn_time="1500" handler="OUTRIDER">
+					<spot x="1915.4764" y="1787.5587" z="1540.2373" h="30" />
+					<spot x="1905.0149" y="1773.4865" z="1540.2368" h="65" />
+				</spawn>
+				<!-- Beling Recon Searcher -->
+				<spawn npc_id="880613" respawn_time="1500" handler="OUTRIDER">
+					<spot x="1832.2104" y="1951.6462" z="1540.4225" h="30" />
+					<spot x="1831.3774" y="1925.1661" z="1539.966" h="75" />
+				</spawn>
+				<!-- Beling Scout Slayer -->
+				<spawn npc_id="880692" respawn_time="1500" handler="OUTRIDER">
+					<spot x="1919.4418" y="1749.0223" z="1540.0277" h="75" />
+				</spawn>
+				<!-- Beling Recon Scoundrel -->
+				<spawn npc_id="880697" respawn_time="1500" handler="OUTRIDER">
+					<spot x="1841.5109" y="1934.3367" z="1540.2844" h="90" />
+				</spawn>
+			</occupier_template>
+		</base_spawn>
+		<!-- Belsal Fort -->
+		<base_spawn id="4204">
+			<occupier_template occupier="PEACE">
+				<!-- Belsal Base -->
+				<spawn npc_id="802759" handler="FLAG">
+					<spot x="1847.9998" y="181.83011" z="1511.9462" h="5" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="BELUS">
+				<!-- Belsal Base -->
+				<spawn npc_id="802738" handler="FLAG">
+					<spot x="1847.9998" y="181.83011" z="1490.252" h="5" />
+				</spawn>
+				<!-- Belsal Warcaptain -->
+				<spawn npc_id="880172" handler="BOSS">
+					<spot x="1853.547" y="162.32275" z="1490.8513" h="35" />
+				</spawn>
+				<!-- Belsal Recon War Subjugator -->
+				<spawn npc_id="880782" handler="ATTACKER">
+					<spot x="1875.1499" y="238.59486" z="1482.5685" h="75" />
+				</spawn>
+				<!-- Belsal Aegis -->
+				<spawn npc_id="880783" handler="ATTACKER">
+					<spot x="1875.1499" y="238.59486" z="1482.5685" h="75" />
+				</spawn>
+				<!-- Teleporter -->
+				<spawn npc_id="731478" respawn_time="180" handler="MERCHANT">
+					<spot x="1878.305" y="203.80057" z="1489.7198" h="75" />
+				</spawn>
+				<!-- Belsal Security -->
+				<spawn npc_id="802488" respawn_time="180" handler="SENTINEL">
+					<spot x="1841.9337" y="179.30136" z="1490.231" h="35" />
+				</spawn>
+				<!-- Belsal General Goods Merchant -->
+				<spawn npc_id="804216" respawn_time="180" handler="MERCHANT">
+					<spot x="1835.0762" y="195.08134" z="1489.2267" h="110" />
+				</spawn>
+				<!-- Belsal Crafting Materials Merchant -->
+				<spawn npc_id="804217" respawn_time="180" handler="MERCHANT">
+					<spot x="1822.7236" y="200.83818" z="1489.0239" h="110" />
+				</spawn>
+				<!-- Belsal Warehouse Manager -->
+				<spawn npc_id="804219" respawn_time="180" handler="MERCHANT">
+					<spot x="1864.4572" y="212.54231" z="1489.4635" h="75" />
+				</spawn>
+				<!-- Belsal Master Healer -->
+				<spawn npc_id="880292" respawn_time="180" handler="SENTINEL">
+					<spot x="1838.711" y="215.92963" z="1489.458" h="35" />
+				</spawn>
+				<!-- Belsal Infantry -->
+				<spawn npc_id="880352" respawn_time="180" handler="SENTINEL">
+					<spot x="1819.3062" y="183.87518" z="1489.3503" h="35" />
+					<spot x="1863.3949" y="195.89198" z="1489.6188" h="35" />
+				</spawn>
+				<!-- Belsal Patrol -->
+				<spawn npc_id="880412" respawn_time="180" handler="SENTINEL">
+					<spot x="1885.5715" y="182.28981" z="1490.7776" />
+				</spawn>
+				<!-- Belsal Slayer -->
+				<spawn npc_id="880472" respawn_time="180" handler="SENTINEL">
+					<spot x="1838.7194" y="134.3813" z="1499.0878" h="35" />
+				</spawn>
+				<!-- Belsal Recon Grunt -->
+				<spawn npc_id="880556" respawn_time="1500" handler="OUTRIDER">
+					<spot x="1952.7473" y="201.61769" z="1540.0754" h="45" />
+					<spot x="1948.8801" y="213.66576" z="1540.4374" h="60" />
+					<spot x="1946.3701" y="178.04361" z="1543.807" h="60" />
+					<spot x="1933.76" y="199.05174" z="1540.3734" h="90" />
+				</spawn>
+				<!-- Belsal Recon Grunt -->
+				<spawn npc_id="880558" respawn_time="1500" handler="OUTRIDER">
+					<spot x="1790.1605" y="130.5398" z="1540.0347" h="35" />
+					<spot x="1775.7356" y="93.439995" z="1540.0538" h="90" />
+					<spot x="1750.6107" y="124.8867" z="1539.7463" h="50" />
+					<spot x="1785.8007" y="113.75755" z="1540.515" h="35" />
+				</spawn>
+				<!-- Belsal Recon Lookout -->
+				<spawn npc_id="880640" respawn_time="1500" handler="OUTRIDER">
+					<spot x="1921.8646" y="211.00885" z="1539.9874" h="45" />
+					<spot x="1934.5308" y="179.20877" z="1540.6708" h="75" />
+				</spawn>
+				<!-- Belsal Recon Lookout -->
+				<spawn npc_id="880642" respawn_time="1500" handler="OUTRIDER">
+					<spot x="1775.7905" y="137.17075" z="1540.1155" h="30" />
+					<spot x="1791.9321" y="94.60113" z="1546.4495" h="45" />
+				</spawn>
+				<!-- Belsal Recon Cutthroat -->
+				<spawn npc_id="880724" respawn_time="1500" handler="OUTRIDER">
+					<spot x="1932.5425" y="219.02953" z="1540.3271" h="60" />
+				</spawn>
+				<!-- Belsal Recon Cutthroat -->
+				<spawn npc_id="880726" respawn_time="1500" handler="OUTRIDER">
+					<spot x="1763.17" y="115.84776" z="1540.3066" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="ASPIDA">
+				<!-- Belsal Base -->
+				<spawn npc_id="802743" handler="FLAG">
+					<spot x="1847.9998" y="181.83011" z="1490.252" h="5" />
+				</spawn>
+				<!-- Belsal Warcaptain -->
+				<spawn npc_id="880173" handler="BOSS">
+					<spot x="1853.547" y="162.32275" z="1490.8513" h="35" />
+				</spawn>
+				<!-- Belsal Recon War Subjugator -->
+				<spawn npc_id="880782" handler="ATTACKER">
+					<spot x="1875.1499" y="238.59486" z="1482.5685" h="75" />
+				</spawn>
+				<!-- Belsal Aegis -->
+				<spawn npc_id="880783" handler="ATTACKER">
+					<spot x="1875.1499" y="238.59486" z="1482.5685" h="75" />
+				</spawn>
+				<!-- Teleporter -->
+				<spawn npc_id="731478" respawn_time="180" handler="MERCHANT">
+					<spot x="1878.305" y="203.80057" z="1489.7198" h="75" />
+				</spawn>
+				<!-- Belsal Commander -->
+				<spawn npc_id="802489" respawn_time="180" handler="SENTINEL">
+					<spot x="1841.9337" y="179.30136" z="1490.231" h="35" />
+				</spawn>
+				<!-- Belsal General Goods Merchant -->
+				<spawn npc_id="804232" respawn_time="180" handler="MERCHANT">
+					<spot x="1835.0762" y="195.08134" z="1489.2267" h="110" />
+				</spawn>
+				<!-- Belsal Crafting Materials Merchant -->
+				<spawn npc_id="804233" respawn_time="180" handler="MERCHANT">
+					<spot x="1822.7236" y="200.83818" z="1489.0239" h="110" />
+				</spawn>
+				<!-- Belsal Warehouse Manager -->
+				<spawn npc_id="804235" respawn_time="180" handler="MERCHANT">
+					<spot x="1864.4572" y="212.54231" z="1489.4635" h="75" />
+				</spawn>
+				<!-- Belsal Master Healer -->
+				<spawn npc_id="880293" respawn_time="180" handler="SENTINEL">
+					<spot x="1838.711" y="215.92963" z="1489.458" h="35" />
+				</spawn>
+				<!-- Belsal Infantry -->
+				<spawn npc_id="880353" respawn_time="180" handler="SENTINEL">
+					<spot x="1819.3062" y="183.87518" z="1489.3503" h="35" />
+					<spot x="1863.3949" y="195.89198" z="1489.6188" h="35" />
+				</spawn>
+				<!-- Belsal Patrol -->
+				<spawn npc_id="880413" respawn_time="180" handler="SENTINEL">
+					<spot x="1885.5715" y="182.28981" z="1490.7776" />
+				</spawn>
+				<!-- Belsal Slayer -->
+				<spawn npc_id="880473" respawn_time="180" handler="SENTINEL">
+					<spot x="1838.7194" y="134.3813" z="1499.0878" h="35" />
+				</spawn>
+				<!-- Belsal Scout Infantry -->
+				<spawn npc_id="880552" respawn_time="1500" handler="OUTRIDER">
+					<spot x="1790.1605" y="130.5398" z="1540.0347" h="35" />
+					<spot x="1952.7473" y="201.61769" z="1540.0754" h="45" />
+					<spot x="1948.8801" y="213.66576" z="1540.4374" h="60" />
+					<spot x="1775.7356" y="93.439995" z="1540.0538" h="90" />
+					<spot x="1750.6107" y="124.8867" z="1539.7463" h="50" />
+					<spot x="1785.8007" y="113.75755" z="1540.515" h="35" />
+					<spot x="1946.3701" y="178.04361" z="1543.807" h="60" />
+					<spot x="1933.76" y="199.05174" z="1540.3734" h="90" />
+				</spawn>
+				<!-- Belsal Scout Patrol -->
+				<spawn npc_id="880636" respawn_time="1500" handler="OUTRIDER">
+					<spot x="1921.8646" y="211.00885" z="1539.9874" h="45" />
+					<spot x="1775.7905" y="137.17075" z="1540.1155" h="30" />
+					<spot x="1791.9321" y="94.60113" z="1546.4495" h="45" />
+					<spot x="1934.5308" y="179.20877" z="1540.6708" h="75" />
+				</spawn>
+				<!-- Belsal Scout Slayer -->
+				<spawn npc_id="880720" respawn_time="1500" handler="OUTRIDER">
+					<spot x="1763.17" y="115.84776" z="1540.3066" />
+					<spot x="1932.5425" y="219.02953" z="1540.3271" h="60" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="ATANATOS">
+				<!-- Belsal Base -->
+				<spawn npc_id="802748" handler="FLAG">
+					<spot x="1847.9998" y="181.83011" z="1490.252" h="5" />
+				</spawn>
+				<!-- Belsal Warcaptain -->
+				<spawn npc_id="880174" handler="BOSS">
+					<spot x="1853.547" y="162.32275" z="1490.8513" h="35" />
+				</spawn>
+				<!-- Belsal Recon War Subjugator -->
+				<spawn npc_id="880782" handler="ATTACKER">
+					<spot x="1875.1499" y="238.59486" z="1482.5685" h="75" />
+				</spawn>
+				<!-- Belsal Aegis -->
+				<spawn npc_id="880783" handler="ATTACKER">
+					<spot x="1875.1499" y="238.59486" z="1482.5685" h="75" />
+				</spawn>
+				<!-- Teleporter -->
+				<spawn npc_id="731479" respawn_time="180" handler="MERCHANT">
+					<spot x="1878.305" y="203.80057" z="1489.7198" h="75" />
+				</spawn>
+				<!-- Belsal Vanguard -->
+				<spawn npc_id="802490" respawn_time="180" handler="SENTINEL">
+					<spot x="1841.9337" y="179.30136" z="1490.231" h="35" />
+				</spawn>
+				<!-- Belsal General Goods Merchant -->
+				<spawn npc_id="804248" respawn_time="180" handler="MERCHANT">
+					<spot x="1835.0762" y="195.08134" z="1489.2267" h="110" />
+				</spawn>
+				<!-- Belsal Crafting Materials Merchant -->
+				<spawn npc_id="804249" respawn_time="180" handler="MERCHANT">
+					<spot x="1822.7236" y="200.83818" z="1489.0239" h="110" />
+				</spawn>
+				<!-- Belsal Warehouse Manager -->
+				<spawn npc_id="804251" respawn_time="180" handler="MERCHANT">
+					<spot x="1864.4572" y="212.54231" z="1489.4635" h="75" />
+				</spawn>
+				<!-- Belsal Master Healer -->
+				<spawn npc_id="880294" respawn_time="180" handler="SENTINEL">
+					<spot x="1838.711" y="215.92963" z="1489.458" h="35" />
+				</spawn>
+				<!-- Belsal Infantry -->
+				<spawn npc_id="880354" respawn_time="180" handler="SENTINEL">
+					<spot x="1819.3062" y="183.87518" z="1489.3503" h="35" />
+					<spot x="1863.3949" y="195.89198" z="1489.6188" h="35" />
+				</spawn>
+				<!-- Belsal Patrol -->
+				<spawn npc_id="880414" respawn_time="180" handler="SENTINEL">
+					<spot x="1885.5715" y="182.28981" z="1490.7776" />
+				</spawn>
+				<!-- Belsal Slayer -->
+				<spawn npc_id="880474" respawn_time="180" handler="SENTINEL">
+					<spot x="1838.7194" y="134.3813" z="1499.0878" h="35" />
+				</spawn>
+				<!-- Belsal Scout Infantry -->
+				<spawn npc_id="880552" respawn_time="1500" handler="OUTRIDER">
+					<spot x="1790.1605" y="130.5398" z="1540.0347" h="35" />
+					<spot x="1952.7473" y="201.61769" z="1540.0754" h="45" />
+					<spot x="1948.8801" y="213.66576" z="1540.4374" h="60" />
+					<spot x="1775.7356" y="93.439995" z="1540.0538" h="90" />
+					<spot x="1750.6107" y="124.8867" z="1539.7463" h="50" />
+					<spot x="1785.8007" y="113.75755" z="1540.515" h="35" />
+					<spot x="1946.3701" y="178.04361" z="1543.807" h="60" />
+					<spot x="1933.76" y="199.05174" z="1540.3734" h="90" />
+				</spawn>
+				<!-- Belsal Scout Patrol -->
+				<spawn npc_id="880636" respawn_time="1500" handler="OUTRIDER">
+					<spot x="1921.8646" y="211.00885" z="1539.9874" h="45" />
+					<spot x="1775.7905" y="137.17075" z="1540.1155" h="30" />
+					<spot x="1791.9321" y="94.60113" z="1546.4495" h="45" />
+					<spot x="1934.5308" y="179.20877" z="1540.6708" h="75" />
+				</spawn>
+				<!-- Belsal Scout Slayer -->
+				<spawn npc_id="880720" respawn_time="1500" handler="OUTRIDER">
+					<spot x="1763.17" y="115.84776" z="1540.3066" />
+					<spot x="1932.5425" y="219.02953" z="1540.3271" h="60" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="DISILLON">
+				<!-- Belsal Base -->
+				<spawn npc_id="802753" handler="FLAG">
+					<spot x="1847.9998" y="181.83011" z="1490.252" h="5" />
+				</spawn>
+				<!-- Belsal Warcaptain -->
+				<spawn npc_id="880175" handler="BOSS">
+					<spot x="1853.547" y="162.32275" z="1490.8513" h="35" />
+				</spawn>
+				<!-- Belsal Recon War Subjugator -->
+				<spawn npc_id="880782" handler="ATTACKER">
+					<spot x="1875.1499" y="238.59486" z="1482.5685" h="75" />
+				</spawn>
+				<!-- Belsal Aegis -->
+				<spawn npc_id="880783" handler="ATTACKER">
+					<spot x="1875.1499" y="238.59486" z="1482.5685" h="75" />
+				</spawn>
+				<!-- Teleporter -->
+				<spawn npc_id="731480" respawn_time="180" handler="MERCHANT">
+					<spot x="1878.305" y="203.80057" z="1489.7198" h="75" />
+				</spawn>
+				<!-- Belsal Emissary -->
+				<spawn npc_id="802491" respawn_time="180" handler="SENTINEL">
+					<spot x="1841.9337" y="179.30136" z="1490.231" h="35" />
+				</spawn>
+				<!-- Belsal General Goods Merchant -->
+				<spawn npc_id="804264" respawn_time="180" handler="MERCHANT">
+					<spot x="1835.0762" y="195.08134" z="1489.2267" h="110" />
+				</spawn>
+				<!-- Belsal Crafting Materials Merchant -->
+				<spawn npc_id="804265" respawn_time="180" handler="MERCHANT">
+					<spot x="1822.7236" y="200.83818" z="1489.0239" h="110" />
+				</spawn>
+				<!-- Belsal Warehouse Manager -->
+				<spawn npc_id="804267" respawn_time="180" handler="MERCHANT">
+					<spot x="1864.4572" y="212.54231" z="1489.4635" h="75" />
+				</spawn>
+				<!-- Belsal Master Healer -->
+				<spawn npc_id="880295" respawn_time="180" handler="SENTINEL">
+					<spot x="1838.711" y="215.92963" z="1489.458" h="35" />
+				</spawn>
+				<!-- Belsal Infantry -->
+				<spawn npc_id="880355" respawn_time="180" handler="SENTINEL">
+					<spot x="1819.3062" y="183.87518" z="1489.3503" h="35" />
+					<spot x="1863.3949" y="195.89198" z="1489.6188" h="35" />
+				</spawn>
+				<!-- Belsal Patrol -->
+				<spawn npc_id="880415" respawn_time="180" handler="SENTINEL">
+					<spot x="1885.5715" y="182.28981" z="1490.7776" />
+				</spawn>
+				<!-- Belsal Slayer -->
+				<spawn npc_id="880475" respawn_time="180" handler="SENTINEL">
+					<spot x="1838.7194" y="134.3813" z="1499.0878" h="35" />
+				</spawn>
+				<!-- Belsal Scout Infantry -->
+				<spawn npc_id="880552" respawn_time="1500" handler="OUTRIDER">
+					<spot x="1790.1605" y="130.5398" z="1540.0347" h="35" />
+					<spot x="1952.7473" y="201.61769" z="1540.0754" h="45" />
+					<spot x="1948.8801" y="213.66576" z="1540.4374" h="60" />
+					<spot x="1775.7356" y="93.439995" z="1540.0538" h="90" />
+					<spot x="1750.6107" y="124.8867" z="1539.7463" h="50" />
+					<spot x="1785.8007" y="113.75755" z="1540.515" h="35" />
+					<spot x="1946.3701" y="178.04361" z="1543.807" h="60" />
+					<spot x="1933.76" y="199.05174" z="1540.3734" h="90" />
+				</spawn>
+				<!-- Belsal Scout Patrol -->
+				<spawn npc_id="880636" respawn_time="1500" handler="OUTRIDER">
+					<spot x="1921.8646" y="211.00885" z="1539.9874" h="45" />
+					<spot x="1775.7905" y="137.17075" z="1540.1155" h="30" />
+					<spot x="1791.9321" y="94.60113" z="1546.4495" h="45" />
+					<spot x="1934.5308" y="179.20877" z="1540.6708" h="75" />
+				</spawn>
+				<!-- Belsal Scout Slayer -->
+				<spawn npc_id="880720" respawn_time="1500" handler="OUTRIDER">
+					<spot x="1763.17" y="115.84776" z="1540.3066" />
+					<spot x="1932.5425" y="219.02953" z="1540.3271" h="60" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="BALAUR">
+				<!-- Belsal Base -->
+				<spawn npc_id="802758" handler="FLAG">
+					<spot x="1847.9998" y="181.83011" z="1490.252" h="5" />
+				</spawn>
+				<!-- Belsal Dreadcaptain -->
+				<spawn npc_id="880176" handler="BOSS">
+					<spot x="1853.547" y="162.32275" z="1490.8513" h="35" />
+				</spawn>
+				<!-- Belsal Hidestitcher -->
+				<spawn npc_id="880296" respawn_time="180" handler="SENTINEL">
+					<spot x="1838.711" y="215.92963" z="1489.458" h="35" />
+				</spawn>
+				<!-- Belsal Grunt -->
+				<spawn npc_id="880356" respawn_time="180" handler="SENTINEL">
+					<spot x="1835.0762" y="195.08134" z="1489.2267" h="110" />
+					<spot x="1819.3062" y="183.87518" z="1489.3503" h="35" />
+					<spot x="1878.305" y="203.80057" z="1489.7198" h="75" />
+					<spot x="1863.3949" y="195.89198" z="1489.6188" h="35" />
+				</spawn>
+				<!-- Belsal Lookout -->
+				<spawn npc_id="880416" respawn_time="180" handler="SENTINEL">
+					<spot x="1885.5715" y="182.28981" z="1490.7776" />
+				</spawn>
+				<!-- Belsal Cutthroat -->
+				<spawn npc_id="880476" respawn_time="180" handler="SENTINEL">
+					<spot x="1838.7194" y="134.3813" z="1499.0878" h="35" />
+				</spawn>
+				<!-- Belsal Scout Infantry -->
+				<spawn npc_id="880552" respawn_time="1500" handler="OUTRIDER">
+					<spot x="1790.1605" y="130.5398" z="1540.0347" h="35" />
+					<spot x="1775.7356" y="93.439995" z="1540.0538" h="90" />
+					<spot x="1750.6107" y="124.8867" z="1539.7463" h="50" />
+					<spot x="1785.8007" y="113.75755" z="1540.515" h="35" />
+				</spawn>
+				<!-- Belsal Recon Contender -->
+				<spawn npc_id="880557" respawn_time="1500" handler="OUTRIDER">
+					<spot x="1952.7473" y="201.61769" z="1540.0754" h="45" />
+					<spot x="1948.8801" y="213.66576" z="1540.4374" h="60" />
+					<spot x="1946.3701" y="178.04361" z="1543.807" h="60" />
+					<spot x="1933.76" y="199.05174" z="1540.3734" h="90" />
+				</spawn>
+				<!-- Belsal Scout Patrol -->
+				<spawn npc_id="880636" respawn_time="1500" handler="OUTRIDER">
+					<spot x="1775.7905" y="137.17075" z="1540.1155" h="30" />
+					<spot x="1791.9321" y="94.60113" z="1546.4495" h="45" />
+				</spawn>
+				<!-- Belsal Recon Searcher -->
+				<spawn npc_id="880641" respawn_time="1500" handler="OUTRIDER">
+					<spot x="1921.8646" y="211.00885" z="1539.9874" h="45" />
+					<spot x="1934.5308" y="179.20877" z="1540.6708" h="75" />
+				</spawn>
+				<!-- Belsal Scout Slayer -->
+				<spawn npc_id="880720" respawn_time="1500" handler="OUTRIDER">
+					<spot x="1763.17" y="115.84776" z="1540.3066" />
+				</spawn>
+				<spawn npc_id="880725" respawn_time="1500" handler="OUTRIDER">
+					<spot x="1932.5425" y="219.02953" z="1540.3271" h="60" />
+				</spawn>
+			</occupier_template>
+		</base_spawn>
+		<!-- Ivy Temple -->
+		<base_spawn id="4211">
+			<occupier_template occupier="PEACE">
+				<!-- Ivy Temple -->
+				<spawn npc_id="802957" handler="FLAG">
+					<spot x="571.7128" y="572.41235" z="1550.3589" />
+				</spawn>
+				<!-- Ivy Temple Gate -->
+				<spawn npc_id="882301" respawn_time="295" handler="SENTINEL">
+					<spot x="608.2393" y="609.9498" z="1484.8252" h="15" static_id="37" />
+				</spawn>
+				<!-- Ivy Temple Gate -->
+				<spawn npc_id="882302" respawn_time="295" handler="OUTRIDER"><!-- Simulating spawn delay -->
+					<spot x="600.65375" y="601.7377" z="1484.8252" h="15" static_id="36" />
+				</spawn>
+				<!-- Advance Corridor -->
+				<spawn npc_id="730961" handler="SENTINEL">
+					<spot x="545.4735" y="545.82324" z="1484.7136" h="15" />
+				</spawn>
+				<!-- Belus Escort -->
+				<spawn npc_id="802544" handler="MERCHANT">
+					<spot x="590.4048" y="601.127" z="1484.4587" h="75" />
+				</spawn>
+				<!-- Ivy Temple Soul Healer -->
+				<spawn npc_id="804630" handler="MERCHANT">
+					<spot x="600.04083" y="590.85345" z="1484.4587" h="75" />
+				</spawn>
+				<!-- Temple Warden -->
+				<spawn npc_id="881436" respawn_time="295" handler="SENTINEL">
+					<spot x="573.75854" y="558.896" z="1483.0238" h="45" />
+					<spot x="558.74945" y="573.12067" z="1483.0253" h="110" />
+				</spawn>
+				<!-- Temple Deadeye -->
+				<spawn npc_id="881437" respawn_time="295" handler="SENTINEL">
+					<spot x="572.5075" y="587.1641" z="1483.0348" h="93" />
+					<spot x="585.7589" y="573.2072" z="1483.0242" h="50" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="IVY_TEMPLE">
+				<!-- Ivy Temple -->
+				<spawn npc_id="802937" handler="FLAG">
+					<spot x="571.7128" y="572.41235" z="1545.3778" />
+				</spawn>
+				<!-- Ivy Soul Anchor -->
+				<spawn npc_id="277461" handler="BOSS">
+					<spot x="550.0978" y="550.09894" z="1459.9421" static_id="314" />
+				</spawn>
+				<!-- Ivy Temple Gate -->
+				<spawn npc_id="277904" handler="SENTINEL">
+					<spot x="599.91724" y="600.9048" z="1484.8252" h="15" static_id="35" />
+				</spawn>
+				<!-- Ivy Temple Gate -->
+				<spawn npc_id="277484" handler="SENTINEL">
+					<spot x="608.2393" y="609.9498" z="1484.8252" h="15" static_id="37" />
+				</spawn>
+				<!-- Ivy Temple Gate -->
+				<spawn npc_id="277485" handler="OUTRIDER"><!-- Simulating spawn delay -->
+					<spot x="600.65375" y="601.7377" z="1484.8252" h="15" static_id="36" />
+				</spawn>
+				<!-- Advance Corridor -->
+				<spawn npc_id="730962" handler="SENTINEL">
+					<spot x="545.4735" y="545.82324" z="1484.7136" h="15" />
+				</spawn>
+				<!-- Belus Escort -->
+				<spawn npc_id="802544" handler="MERCHANT">
+					<spot x="590.4048" y="601.127" z="1484.4587" h="75" />
+				</spawn>
+				<!-- Ivy Temple Soul Healer -->
+				<spawn npc_id="804630" handler="MERCHANT">
+					<spot x="600.04083" y="590.85345" z="1484.4587" h="75" />
+				</spawn>
+				<!-- Temple Warden -->
+				<spawn npc_id="881436" respawn_time="295" handler="SENTINEL">
+					<spot x="573.75854" y="558.896" z="1483.0238" h="45" />
+					<spot x="558.74945" y="573.12067" z="1483.0253" h="110" />
+				</spawn>
+				<!-- Temple Deadeye -->
+				<spawn npc_id="881437" respawn_time="295" handler="SENTINEL">
+					<spot x="572.5075" y="587.1641" z="1483.0348" h="93" />
+					<spot x="585.7589" y="573.2072" z="1483.0242" h="50" />
+				</spawn>
+			</occupier_template>
+		</base_spawn>
+		<!-- Highland Temple -->
+		<base_spawn id="4212">
+			<occupier_template occupier="PEACE">
+				<!-- Highland Temple -->
+				<spawn npc_id="802979" handler="FLAG">
+					<spot x="571.8113" y="1476.5089" z="1549.9562" />
+				</spawn>
+				<!-- Highland Temple Gate -->
+				<spawn npc_id="882303" respawn_time="295" handler="SENTINEL">
+					<spot x="607.82227" y="1441.8359" z="1484.8252" h="105" static_id="26" />
+				</spawn>
+				<!-- Highland Temple Gate -->
+				<spawn npc_id="882304" respawn_time="295" handler="OUTRIDER"><!-- Simulating spawn delay -->
+					<spot x="602.1867" y="1446.1992" z="1484.8252" h="105" static_id="25" />
+				</spawn>
+				<!-- Advance Corridor -->
+				<spawn npc_id="730961" handler="SENTINEL">
+					<spot x="545.69525" y="1502.716" z="1484.7136" h="104" />
+				</spawn>
+				<!-- Belus Escort -->
+				<spawn npc_id="804080" handler="MERCHANT">
+					<spot x="600.72736" y="1457.6572" z="1484.4587" h="45" />
+				</spawn>
+				<!-- Highland Temple Soul Healer -->
+				<spawn npc_id="804631" handler="MERCHANT">
+					<spot x="591.128" y="1448.0906" z="1484.4587" h="45" />
+				</spawn>
+				<!-- Temple Warden -->
+				<spawn npc_id="881438" respawn_time="295" handler="SENTINEL">
+					<spot x="558.8048" y="1473.844" z="1483.0238" h="15" />
+					<spot x="574.34186" y="1488.7703" z="1483.0247" h="75" />
+				</spawn>
+				<!-- Temple Deadeye -->
+				<spawn npc_id="881439" respawn_time="295" handler="SENTINEL">
+					<spot x="572.42224" y="1462.0079" z="1483.024" h="20" />
+					<spot x="586.356" y="1475.8771" z="1483.0269" h="60" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="HIGHLAND_TEMPLE">
+				<!-- Highland Temple -->
+				<spawn npc_id="802960" handler="FLAG">
+					<spot x="571.8113" y="1476.5089" z="1545.3778" />
+				</spawn>
+				<!-- Highland Soul Anchor -->
+				<spawn npc_id="277462" handler="BOSS">
+					<spot x="550.0609" y="1497.9641" z="1459.9294" static_id="132" />
+				</spawn>
+				<!-- Highland Temple Gate -->
+				<spawn npc_id="277905" handler="SENTINEL">
+					<spot x="600.84094" y="1447.6357" z="1484.8252" h="105" static_id="23" />
+				</spawn>
+				<!-- Highland Temple Gate -->
+				<spawn npc_id="277486" handler="SENTINEL">
+					<spot x="607.82227" y="1441.8359" z="1484.8252" h="105" static_id="26" />
+				</spawn>
+				<!-- Highland Temple Gate -->
+				<spawn npc_id="277487" handler="OUTRIDER"><!-- Simulating spawn delay -->
+					<spot x="602.1867" y="1446.1992" z="1484.8252" h="105" static_id="25" />
+				</spawn>
+				<!-- Advance Corridor -->
+				<spawn npc_id="730962" handler="SENTINEL">
+					<spot x="545.69525" y="1502.716" z="1484.7136" h="104" />
+				</spawn>
+				<!-- Belus Escort -->
+				<spawn npc_id="804080" handler="MERCHANT">
+					<spot x="600.72736" y="1457.6572" z="1484.4587" h="45" />
+				</spawn>
+				<!-- Highland Temple Soul Healer -->
+				<spawn npc_id="804631" handler="MERCHANT">
+					<spot x="591.128" y="1448.0906" z="1484.4587" h="45" />
+				</spawn>
+				<!-- Temple Warden -->
+				<spawn npc_id="881438" respawn_time="295" handler="SENTINEL">
+					<spot x="558.8048" y="1473.844" z="1483.0238" h="15" />
+					<spot x="574.34186" y="1488.7703" z="1483.0247" h="75" />
+				</spawn>
+				<!-- Temple Deadeye -->
+				<spawn npc_id="881439" respawn_time="295" handler="SENTINEL">
+					<spot x="572.42224" y="1462.0079" z="1483.024" h="20" />
+					<spot x="586.356" y="1475.8771" z="1483.0269" h="60" />
+				</spawn>
+			</occupier_template>
+		</base_spawn>
+		<!-- Alpine Temple -->
+		<base_spawn id="4213">
+			<occupier_template occupier="PEACE">
+				<!-- Alpine Temple -->
+				<spawn npc_id="803001" handler="FLAG">
+					<spot x="1475.8936" y="1475.8771" z="1548.5024" />
+				</spawn>
+				<!-- Alpine Temple Gate -->
+				<spawn npc_id="882305" respawn_time="295" handler="SENTINEL">
+					<spot x="1442.0223" y="1440.1606" z="1484.8252" h="105" static_id="31" />
+				</spawn>
+				<!-- Alpine Temple Gate -->
+				<spawn npc_id="882306" respawn_time="295" handler="OUTRIDER"><!-- Simulating spawn delay -->
+					<spot x="1446.1393" y="1445.3716" z="1484.8252" h="105" static_id="32" />
+				</spawn>
+				<!-- Advance Corridor -->
+				<spawn npc_id="730961" handler="SENTINEL">
+					<spot x="1502.4491" y="1502.18" z="1484.7136" h="74" />
+				</spawn>
+				<!-- Belus Escort -->
+				<spawn npc_id="804081" handler="MERCHANT">
+					<spot x="1457.7161" y="1447.0042" z="1484.4587" h="15" />
+				</spawn>
+				<!-- Alpine Temple Soul Healer -->
+				<spawn npc_id="804632" handler="MERCHANT">
+					<spot x="1447.7919" y="1456.8607" z="1484.4587" h="17" />
+				</spawn>
+				<!-- Temple Warden -->
+				<spawn npc_id="881440" respawn_time="295" handler="SENTINEL">
+					<spot x="1474.1376" y="1489.4703" z="1483.0237" h="110" />
+					<spot x="1489.3674" y="1474.1178" z="1483.0255" h="50" />
+				</spawn>
+				<!-- Temple Deadeye -->
+				<spawn npc_id="881441" respawn_time="295" handler="SENTINEL">
+					<spot x="1461.7418" y="1474.9557" z="1483.024" />
+					<spot x="1475.9578" y="1461.1794" z="1483.0315" h="30" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="ALPINE_TEMPLE">
+				<!-- Alpine Temple -->
+				<spawn npc_id="802983" handler="FLAG">
+					<spot x="1475.8936" y="1475.8771" z="1545.3778" />
+				</spawn>
+				<!-- Alpine Soul Anchor -->
+				<spawn npc_id="277463" handler="BOSS">
+					<spot x="1497.9731" y="1498.0005" z="1459.9203" static_id="133" />
+				</spawn>
+				<!-- Alpine Temple Gate -->
+				<spawn npc_id="277906" handler="SENTINEL">
+					<spot x="1448.095" y="1447.3663" z="1484.6527" h="105" static_id="34" />
+				</spawn>
+				<!-- Alpine Temple Gate -->
+				<spawn npc_id="277488" handler="SENTINEL">
+					<spot x="1442.0223" y="1440.1606" z="1484.8252" h="105" static_id="31" />
+				</spawn>
+				<!-- Alpine Temple Gate -->
+				<spawn npc_id="277489" handler="OUTRIDER"><!-- Simulating spawn delay -->
+					<spot x="1446.1393" y="1445.3716" z="1484.8252" h="105" static_id="32" />
+				</spawn>
+				<!-- Advance Corridor -->
+				<spawn npc_id="730962" handler="SENTINEL">
+					<spot x="1502.4491" y="1502.18" z="1484.7136" h="74" />
+				</spawn>
+				<!-- Belus Escort -->
+				<spawn npc_id="804081" handler="MERCHANT">
+					<spot x="1457.7161" y="1447.0042" z="1484.4587" h="15" />
+				</spawn>
+				<!-- Alpine Temple Soul Healer -->
+				<spawn npc_id="804632" handler="MERCHANT">
+					<spot x="1447.7919" y="1456.8607" z="1484.4587" h="17" />
+				</spawn>
+				<!-- Temple Warden -->
+				<spawn npc_id="881440" respawn_time="295" handler="SENTINEL">
+					<spot x="1474.1376" y="1489.4703" z="1483.0237" h="110" />
+					<spot x="1489.3674" y="1474.1178" z="1483.0255" h="50" />
+				</spawn>
+				<!-- Temple Deadeye -->
+				<spawn npc_id="881441" respawn_time="295" handler="SENTINEL">
+					<spot x="1461.7418" y="1474.9557" z="1483.024" />
+					<spot x="1475.9578" y="1461.1794" z="1483.0315" h="30" />
+				</spawn>
+			</occupier_template>
+		</base_spawn>
+		<!-- Granweir Temple -->
+		<base_spawn id="4214">
+			<occupier_template occupier="PEACE">
+				<!-- Granweir Temple -->
+				<spawn npc_id="803023" handler="FLAG">
+					<spot x="1475.5448" y="571.87085" z="1548.6063" />
+				</spawn>
+				<!-- Granweir Temple Gate -->
+				<spawn npc_id="882307" respawn_time="295" handler="SENTINEL">
+					<spot x="1440.2896" y="605.9902" z="1484.8252" h="105" static_id="30" />
+				</spawn>
+				<!-- Granweir Temple Gate -->
+				<spawn npc_id="882308" respawn_time="295" handler="OUTRIDER"><!-- Simulating spawn delay -->
+					<spot x="1445.8972" y="601.0955" z="1484.8252" h="105" static_id="29" />
+				</spawn>
+				<!-- Advance Corridor -->
+				<spawn npc_id="730961" handler="SENTINEL">
+					<spot x="1502.1637" y="545.07416" z="1484.7136" h="44" />
+				</spawn>
+				<!-- Belus Escort -->
+				<spawn npc_id="804082" handler="MERCHANT">
+					<spot x="1447.6598" y="590.31384" z="1484.4587" h="105" />
+				</spawn>
+				<!-- Grandweir Temple Soul Healer -->
+				<spawn npc_id="804633" handler="MERCHANT">
+					<spot x="1457.1781" y="599.4744" z="1484.4587" h="105" />
+				</spawn>
+				<!-- Temple Warden -->
+				<spawn npc_id="881442" respawn_time="295" handler="SENTINEL">
+					<spot x="1475.337" y="557.4006" z="1483.0273" h="10" />
+					<spot x="1489.0874" y="573.35864" z="1483.0239" h="75" />
+				</spawn>
+				<!-- Temple Deadeye -->
+				<spawn npc_id="881443" respawn_time="295" handler="SENTINEL">
+					<spot x="1460.9896" y="572.04663" z="1483.0333" h="10" />
+					<spot x="1475.2551" y="585.9504" z="1483.024" h="95" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="GRANDWEIR_TEMPLE">
+				<!-- Granweir Temple -->
+				<spawn npc_id="803006" handler="FLAG">
+					<spot x="1475.5448" y="571.87085" z="1545.3778" />
+				</spawn>
+				<!-- Grandweir Soul Anchor -->
+				<spawn npc_id="277464" handler="BOSS"><!-- Simulating spawn delay -->
+					<spot x="1498.0608" y="549.96686" z="1459.9052" static_id="251" />
+				</spawn>
+				<!-- Granweir Temple Gate -->
+				<spawn npc_id="277907" handler="SENTINEL">
+					<spot x="1446.8257" y="599.9594" z="1484.8252" h="105" static_id="27" />
+				</spawn>
+				<!-- Granweir Temple Gate -->
+				<spawn npc_id="277490" handler="SENTINEL">
+					<spot x="1440.2896" y="605.9902" z="1484.8252" h="105" static_id="30" />
+				</spawn>
+				<!-- Granweir Temple Gate -->
+				<spawn npc_id="277491" handler="OUTRIDER"><!-- Simulating spawn delay -->
+					<spot x="1445.8972" y="601.0955" z="1484.8252" h="105" static_id="29" />
+				</spawn>
+				<!-- Advance Corridor -->
+				<spawn npc_id="730962" handler="SENTINEL">
+					<spot x="1502.1637" y="545.07416" z="1484.7136" h="44" />
+				</spawn>
+				<!-- Belus Escort -->
+				<spawn npc_id="804082" handler="MERCHANT">
+					<spot x="1447.6598" y="590.31384" z="1484.4587" h="105" />
+				</spawn>
+				<!-- Grandweir Temple Soul Healer -->
+				<spawn npc_id="804633" handler="MERCHANT">
+					<spot x="1457.1781" y="599.4744" z="1484.4587" h="105" />
+				</spawn>
+				<!-- Temple Warden -->
+				<spawn npc_id="881442" respawn_time="295" handler="SENTINEL">
+					<spot x="1475.337" y="557.4006" z="1483.0273" h="10" />
+					<spot x="1489.0874" y="573.35864" z="1483.0239" h="75" />
+				</spawn>
+				<!-- Temple Deadeye -->
+				<spawn npc_id="881443" respawn_time="295" handler="SENTINEL">
+					<spot x="1460.9896" y="572.04663" z="1483.0333" h="10" />
+					<spot x="1475.2551" y="585.9504" z="1483.024" h="95" />
+				</spawn>
+			</occupier_template>
+		</base_spawn>
+		<!-- Mirage Dance NW -->
+		<base_spawn id="4221">
+			<occupier_template occupier="PEACE">
+				<!-- Mirage Dance -->
+				<spawn npc_id="802781" handler="FLAG">
+					<spot x="720.18115" y="900.0184" z="1534.3507" h="5" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="BELUS">
+				<!-- Mirage Dance -->
+				<spawn npc_id="802760" handler="FLAG">
+					<spot x="720.18115" y="900.0184" z="1534.3507" h="5" />
+				</spawn>
+				<!-- Artifact Protector -->
+				<spawn npc_id="277804" handler="BOSS">
+					<spot x="726.77234" y="900.057" z="1534.3214" />
+				</spawn>
+				<!-- Mirage Dance (Artifact Core) -->
+				<spawn npc_id="730981" respawn_time="480" handler="OUTRIDER">
+					<spot x="720.36755" y="899.87036" z="1534.3513" static_id="18" />
+				</spawn>
+				<!-- Artifact Warcaptain -->
+				<spawn npc_id="277784" respawn_time="900" handler="SENTINEL">
+					<spot x="725.24536" y="905.02106" z="1533.8483" />
+					<spot x="714.6149" y="894.7475" z="1533.8483" />
+				</spawn>
+				<!-- Artifact Warmage -->
+				<spawn npc_id="277789" respawn_time="900" handler="SENTINEL">
+					<spot x="715.00116" y="904.92834" z="1533.8483" />
+					<spot x="724.8165" y="894.4583" z="1533.8483" />
+				</spawn>
+				<!-- Artifact Master Tracker -->
+				<spawn npc_id="277794" respawn_time="900" handler="SENTINEL">
+					<spot x="706.96265" y="909.1894" z="1533.8483" />
+					<spot x="707.3295" y="889.2428" z="1533.8483" />
+					<spot x="732.9513" y="889.89966" z="1533.8483" />
+					<spot x="729.217" y="913.3757" z="1533.8483" />
+				</spawn>
+				<!-- Artifact Master Physician -->
+				<spawn npc_id="277799" respawn_time="900" handler="SENTINEL">
+					<spot x="733.77" y="908.49695" z="1533.8483" />
+					<spot x="711.7461" y="913.6957" z="1533.8483" />
+					<spot x="712.35425" y="885.3976" z="1533.8483" />
+					<spot x="727.82776" y="885.2817" z="1533.8483" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="IVY_TEMPLE">
+				<!-- Mirage Dance -->
+				<spawn npc_id="802761" handler="FLAG">
+					<spot x="720.18115" y="900.0184" z="1534.3507" h="5" />
+				</spawn>
+				<!-- Artifact Protector -->
+				<spawn npc_id="277805" handler="BOSS">
+					<spot x="726.77234" y="900.057" z="1534.3214" />
+				</spawn>
+				<!-- Mirage Dance (Artifact Core) -->
+				<spawn npc_id="731029" respawn_time="480" handler="OUTRIDER">
+					<spot x="720.36755" y="899.87036" z="1534.3513" static_id="18" />
+				</spawn>
+				<!-- Artifact Warcaptain -->
+				<spawn npc_id="277785" respawn_time="900" handler="SENTINEL">
+					<spot x="725.24536" y="905.02106" z="1533.8483" />
+					<spot x="714.6149" y="894.7475" z="1533.8483" />
+				</spawn>
+				<!-- Artifact Warmage -->
+				<spawn npc_id="277790" respawn_time="900" handler="SENTINEL">
+					<spot x="715.00116" y="904.92834" z="1533.8483" />
+					<spot x="724.8165" y="894.4583" z="1533.8483" />
+				</spawn>
+				<!-- Artifact Master Tracker -->
+				<spawn npc_id="277795" respawn_time="900" handler="SENTINEL">
+					<spot x="706.96265" y="909.1894" z="1533.8483" />
+					<spot x="707.3295" y="889.2428" z="1533.8483" />
+					<spot x="732.9513" y="889.89966" z="1533.8483" />
+					<spot x="729.217" y="913.3757" z="1533.8483" />
+				</spawn>
+				<!-- Artifact Master Physician -->
+				<spawn npc_id="277800" respawn_time="900" handler="SENTINEL">
+					<spot x="733.77" y="908.49695" z="1533.8483" />
+					<spot x="711.7461" y="913.6957" z="1533.8483" />
+					<spot x="712.35425" y="885.3976" z="1533.8483" />
+					<spot x="727.82776" y="885.2817" z="1533.8483" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="HIGHLAND_TEMPLE">
+				<!-- Mirage Dance -->
+				<spawn npc_id="802762" handler="FLAG">
+					<spot x="720.18115" y="900.0184" z="1534.3507" h="5" />
+				</spawn>
+				<!-- Artifact Protector -->
+				<spawn npc_id="277806" handler="BOSS">
+					<spot x="726.77234" y="900.057" z="1534.3214" />
+				</spawn>
+				<!-- Mirage Dance (Artifact Core) -->
+				<spawn npc_id="731061" respawn_time="480" handler="OUTRIDER">
+					<spot x="720.36755" y="899.87036" z="1534.3513" static_id="18" />
+				</spawn>
+				<!-- Artifact Warcaptain -->
+				<spawn npc_id="277786" respawn_time="900" handler="SENTINEL">
+					<spot x="725.24536" y="905.02106" z="1533.8483" />
+					<spot x="714.6149" y="894.7475" z="1533.8483" />
+				</spawn>
+				<!-- Artifact Warmage -->
+				<spawn npc_id="277791" respawn_time="900" handler="SENTINEL">
+					<spot x="715.00116" y="904.92834" z="1533.8483" />
+					<spot x="724.8165" y="894.4583" z="1533.8483" />
+				</spawn>
+				<!-- Artifact Master Tracker -->
+				<spawn npc_id="277796" respawn_time="900" handler="SENTINEL">
+					<spot x="706.96265" y="909.1894" z="1533.8483" />
+					<spot x="707.3295" y="889.2428" z="1533.8483" />
+					<spot x="732.9513" y="889.89966" z="1533.8483" />
+					<spot x="729.217" y="913.3757" z="1533.8483" />
+				</spawn>
+				<!-- Artifact Master Physician -->
+				<spawn npc_id="277801" respawn_time="900" handler="SENTINEL">
+					<spot x="733.77" y="908.49695" z="1533.8483" />
+					<spot x="711.7461" y="913.6957" z="1533.8483" />
+					<spot x="712.35425" y="885.3976" z="1533.8483" />
+					<spot x="727.82776" y="885.2817" z="1533.8483" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="ALPINE_TEMPLE">
+				<!-- Mirage Dance -->
+				<spawn npc_id="802763" handler="FLAG">
+					<spot x="720.18115" y="900.0184" z="1534.3507" h="5" />
+				</spawn>
+				<!-- Artifact Protector -->
+				<spawn npc_id="277807" handler="BOSS">
+					<spot x="726.77234" y="900.057" z="1534.3214" />
+				</spawn>
+				<!-- Mirage Dance (Artifact Core) -->
+				<spawn npc_id="731093" respawn_time="480" handler="OUTRIDER">
+					<spot x="720.36755" y="899.87036" z="1534.3513" static_id="18" />
+				</spawn>
+				<!-- Artifact Warcaptain -->
+				<spawn npc_id="277787" respawn_time="900" handler="SENTINEL">
+					<spot x="725.24536" y="905.02106" z="1533.8483" />
+					<spot x="714.6149" y="894.7475" z="1533.8483" />
+				</spawn>
+				<!-- Artifact Warmage -->
+				<spawn npc_id="277792" respawn_time="900" handler="SENTINEL">
+					<spot x="715.00116" y="904.92834" z="1533.8483" />
+					<spot x="724.8165" y="894.4583" z="1533.8483" />
+				</spawn>
+				<!-- Artifact Master Tracker -->
+				<spawn npc_id="277797" respawn_time="900" handler="SENTINEL">
+					<spot x="706.96265" y="909.1894" z="1533.8483" />
+					<spot x="707.3295" y="889.2428" z="1533.8483" />
+					<spot x="732.9513" y="889.89966" z="1533.8483" />
+					<spot x="729.217" y="913.3757" z="1533.8483" />
+				</spawn>
+				<!-- Artifact Master Physician -->
+				<spawn npc_id="277802" respawn_time="900" handler="SENTINEL">
+					<spot x="733.77" y="908.49695" z="1533.8483" />
+					<spot x="711.7461" y="913.6957" z="1533.8483" />
+					<spot x="712.35425" y="885.3976" z="1533.8483" />
+					<spot x="727.82776" y="885.2817" z="1533.8483" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="GRANDWEIR_TEMPLE">
+				<!-- Mirage Dance -->
+				<spawn npc_id="802764" handler="FLAG">
+					<spot x="720.18115" y="900.0184" z="1534.3507" h="5" />
+				</spawn>
+				<!-- Artifact Protector -->
+				<spawn npc_id="277808" handler="BOSS">
+					<spot x="726.77234" y="900.057" z="1534.3214" />
+				</spawn>
+				<!-- Mirage Dance (Artifact Core) -->
+				<spawn npc_id="731125" respawn_time="480" handler="OUTRIDER">
+					<spot x="720.36755" y="899.87036" z="1534.3513" static_id="18" />
+				</spawn>
+				<!-- Artifact Warcaptain -->
+				<spawn npc_id="277788" respawn_time="900" handler="SENTINEL">
+					<spot x="725.24536" y="905.02106" z="1533.8483" />
+					<spot x="714.6149" y="894.7475" z="1533.8483" />
+				</spawn>
+				<!-- Artifact Warmage -->
+				<spawn npc_id="277793" respawn_time="900" handler="SENTINEL">
+					<spot x="715.00116" y="904.92834" z="1533.8483" />
+					<spot x="724.8165" y="894.4583" z="1533.8483" />
+				</spawn>
+				<!-- Artifact Master Tracker -->
+				<spawn npc_id="277798" respawn_time="900" handler="SENTINEL">
+					<spot x="706.96265" y="909.1894" z="1533.8483" />
+					<spot x="707.3295" y="889.2428" z="1533.8483" />
+					<spot x="732.9513" y="889.89966" z="1533.8483" />
+					<spot x="729.217" y="913.3757" z="1533.8483" />
+				</spawn>
+				<!-- Artifact Master Physician -->
+				<spawn npc_id="277803" respawn_time="900" handler="SENTINEL">
+					<spot x="733.77" y="908.49695" z="1533.8483" />
+					<spot x="711.7461" y="913.6957" z="1533.8483" />
+					<spot x="712.35425" y="885.3976" z="1533.8483" />
+					<spot x="727.82776" y="885.2817" z="1533.8483" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="BALAUR">
+				<!-- Mirage Dance -->
+				<spawn npc_id="802780" handler="FLAG">
+					<spot x="720.18115" y="900.0184" z="1534.3507" h="5" />
+				</spawn>
+				<!-- Ahserion Artifact Protector -->
+				<spawn npc_id="277813" handler="BOSS">
+					<spot x="726.77234" y="900.057" z="1534.3214" />
+				</spawn>
+				<!-- Ahserion Artifact Dreadcaptain -->
+				<spawn npc_id="277809" respawn_time="900" handler="SENTINEL">
+					<spot x="725.24536" y="905.02106" z="1533.8483" />
+					<spot x="714.6149" y="894.7475" z="1533.8483" />
+				</spawn>
+				<!-- Ahserion Artifact Augurur -->
+				<spawn npc_id="277810" respawn_time="900" handler="SENTINEL">
+					<spot x="715.00116" y="904.92834" z="1533.8483" />
+					<spot x="724.8165" y="894.4583" z="1533.8483" />
+				</spawn>
+				<!-- Ahserion Artifact Triaris -->
+				<spawn npc_id="277811" respawn_time="900" handler="SENTINEL">
+					<spot x="706.96265" y="909.1894" z="1533.8483" />
+					<spot x="707.3295" y="889.2428" z="1533.8483" />
+					<spot x="732.9513" y="889.89966" z="1533.8483" />
+					<spot x="729.217" y="913.3757" z="1533.8483" />
+				</spawn>
+				<!-- Ahserion Artifact Master Medic -->
+				<spawn npc_id="277812" respawn_time="900" handler="SENTINEL">
+					<spot x="733.77" y="908.49695" z="1533.8483" />
+					<spot x="711.7461" y="913.6957" z="1533.8483" />
+					<spot x="712.35425" y="885.3976" z="1533.8483" />
+					<spot x="727.82776" y="885.2817" z="1533.8483" />
+				</spawn>
+			</occupier_template>
+		</base_spawn>
+		<!-- Chaos Wind NW -->
+		<base_spawn id="4222">
+			<occupier_template occupier="PEACE">
+				<!-- Chaos Wind -->
+				<spawn npc_id="802803" handler="FLAG">
+					<spot x="626.42804" y="811.01306" z="1494.4083" h="5" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="BELUS">
+				<!-- Chaos Wind -->
+				<spawn npc_id="802782" handler="FLAG">
+					<spot x="626.42804" y="811.01306" z="1494.4083" h="5" />
+				</spawn>
+				<!-- Artifact Protector -->
+				<spawn npc_id="277980" handler="BOSS">
+					<spot x="633.0981" y="810.98334" z="1494.3813" />
+				</spawn>
+				<!-- Chaos Wind (Artifact Core) -->
+				<spawn npc_id="730982" handler="OUTRIDER">
+					<spot x="626.5959" y="810.9828" z="1494.4105" static_id="21" />
+				</spawn>
+				<!-- Artifact Warcaptain -->
+				<spawn npc_id="277784" respawn_time="900" handler="SENTINEL">
+					<spot x="632.0031" y="816.0581" z="1493.91" />
+					<spot x="620.93243" y="805.6962" z="1493.91" />
+				</spawn>
+				<!-- Artifact Warmage -->
+				<spawn npc_id="277789" respawn_time="900" handler="SENTINEL">
+					<spot x="631.6632" y="805.35486" z="1493.91" />
+					<spot x="621.59216" y="816.4008" z="1493.91" />
+				</spawn>
+				<!-- Artifact Master Tracker -->
+				<spawn npc_id="277794" respawn_time="900" handler="SENTINEL">
+					<spot x="612.3264" y="820.9676" z="1493.91" />
+					<spot x="639.2332" y="800.38" z="1493.91" />
+					<spot x="611.354" y="802.3615" z="1493.91" />
+					<spot x="636.17535" y="824.2768" z="1493.91" />
+				</spawn>
+				<!-- Artifact Master Physician -->
+				<spawn npc_id="277799" respawn_time="900" handler="SENTINEL">
+					<spot x="633.2581" y="796.857" z="1493.91" />
+					<spot x="617.8752" y="826.3913" z="1493.91" />
+					<spot x="616.8514" y="797.18097" z="1493.91" />
+					<spot x="640.2845" y="819.30994" z="1493.91" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="IVY_TEMPLE">
+				<!-- Chaos Wind -->
+				<spawn npc_id="802783" handler="FLAG">
+					<spot x="626.42804" y="811.01306" z="1494.4083" h="5" />
+				</spawn>
+				<!-- Artifact Protector -->
+				<spawn npc_id="277981" handler="BOSS">
+					<spot x="633.0981" y="810.98334" z="1494.3813" />
+				</spawn>
+				<!-- Chaos Wind (Artifact Core) -->
+				<spawn npc_id="731030" handler="OUTRIDER">
+					<spot x="626.5959" y="810.9828" z="1494.4105" static_id="21" />
+				</spawn>
+				<!-- Artifact Warcaptain -->
+				<spawn npc_id="277785" respawn_time="900" handler="SENTINEL">
+					<spot x="632.0031" y="816.0581" z="1493.91" />
+					<spot x="620.93243" y="805.6962" z="1493.91" />
+				</spawn>
+				<!-- Artifact Warmage -->
+				<spawn npc_id="277790" respawn_time="900" handler="SENTINEL">
+					<spot x="631.6632" y="805.35486" z="1493.91" />
+					<spot x="621.59216" y="816.4008" z="1493.91" />
+				</spawn>
+				<!-- Artifact Master Tracker -->
+				<spawn npc_id="277795" respawn_time="900" handler="SENTINEL">
+					<spot x="612.3264" y="820.9676" z="1493.91" />
+					<spot x="639.2332" y="800.38" z="1493.91" />
+					<spot x="611.354" y="802.3615" z="1493.91" />
+					<spot x="636.17535" y="824.2768" z="1493.91" />
+				</spawn>
+				<!-- Artifact Master Physician -->
+				<spawn npc_id="277800" respawn_time="900" handler="SENTINEL">
+					<spot x="633.2581" y="796.857" z="1493.91" />
+					<spot x="617.8752" y="826.3913" z="1493.91" />
+					<spot x="616.8514" y="797.18097" z="1493.91" />
+					<spot x="640.2845" y="819.30994" z="1493.91" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="HIGHLAND_TEMPLE">
+				<!-- Chaos Wind -->
+				<spawn npc_id="802784" handler="FLAG">
+					<spot x="626.42804" y="811.01306" z="1494.4083" h="5" />
+				</spawn>
+				<!-- Artifact Protector -->
+				<spawn npc_id="277982" handler="BOSS">
+					<spot x="633.0981" y="810.98334" z="1494.3813" />
+				</spawn>
+				<!-- Chaos Wind (Artifact Core) -->
+				<spawn npc_id="731062" handler="OUTRIDER">
+					<spot x="626.5959" y="810.9828" z="1494.4105" static_id="21" />
+				</spawn>
+				<!-- Artifact Warcaptain -->
+				<spawn npc_id="277786" respawn_time="900" handler="SENTINEL">
+					<spot x="632.0031" y="816.0581" z="1493.91" />
+					<spot x="620.93243" y="805.6962" z="1493.91" />
+				</spawn>
+				<!-- Artifact Warmage -->
+				<spawn npc_id="277791" respawn_time="900" handler="SENTINEL">
+					<spot x="631.6632" y="805.35486" z="1493.91" />
+					<spot x="621.59216" y="816.4008" z="1493.91" />
+				</spawn>
+				<!-- Artifact Master Tracker -->
+				<spawn npc_id="277796" respawn_time="900" handler="SENTINEL">
+					<spot x="612.3264" y="820.9676" z="1493.91" />
+					<spot x="639.2332" y="800.38" z="1493.91" />
+					<spot x="611.354" y="802.3615" z="1493.91" />
+					<spot x="636.17535" y="824.2768" z="1493.91" />
+				</spawn>
+				<!-- Artifact Master Physician -->
+				<spawn npc_id="277801" respawn_time="900" handler="SENTINEL">
+					<spot x="633.2581" y="796.857" z="1493.91" />
+					<spot x="617.8752" y="826.3913" z="1493.91" />
+					<spot x="616.8514" y="797.18097" z="1493.91" />
+					<spot x="640.2845" y="819.30994" z="1493.91" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="ALPINE_TEMPLE">
+				<!-- Chaos Wind -->
+				<spawn npc_id="802785" handler="FLAG">
+					<spot x="626.42804" y="811.01306" z="1494.4083" h="5" />
+				</spawn>
+				<!-- Artifact Protector -->
+				<spawn npc_id="277983" handler="BOSS">
+					<spot x="633.0981" y="810.98334" z="1494.3813" />
+				</spawn>
+				<!-- Chaos Wind (Artifact Core) -->
+				<spawn npc_id="731094" handler="OUTRIDER">
+					<spot x="626.5959" y="810.9828" z="1494.4105" static_id="21" />
+				</spawn>
+				<!-- Artifact Warcaptain -->
+				<spawn npc_id="277787" respawn_time="900" handler="SENTINEL">
+					<spot x="632.0031" y="816.0581" z="1493.91" />
+					<spot x="620.93243" y="805.6962" z="1493.91" />
+				</spawn>
+				<!-- Artifact Warmage -->
+				<spawn npc_id="277792" respawn_time="900" handler="SENTINEL">
+					<spot x="631.6632" y="805.35486" z="1493.91" />
+					<spot x="621.59216" y="816.4008" z="1493.91" />
+				</spawn>
+				<!-- Artifact Master Tracker -->
+				<spawn npc_id="277797" respawn_time="900" handler="SENTINEL">
+					<spot x="612.3264" y="820.9676" z="1493.91" />
+					<spot x="639.2332" y="800.38" z="1493.91" />
+					<spot x="611.354" y="802.3615" z="1493.91" />
+					<spot x="636.17535" y="824.2768" z="1493.91" />
+				</spawn>
+				<!-- Artifact Master Physician -->
+				<spawn npc_id="277802" respawn_time="900" handler="SENTINEL">
+					<spot x="633.2581" y="796.857" z="1493.91" />
+					<spot x="617.8752" y="826.3913" z="1493.91" />
+					<spot x="616.8514" y="797.18097" z="1493.91" />
+					<spot x="640.2845" y="819.30994" z="1493.91" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="GRANDWEIR_TEMPLE">
+				<!-- Chaos Wind -->
+				<spawn npc_id="802786" handler="FLAG">
+					<spot x="626.42804" y="811.01306" z="1494.4083" h="5" />
+				</spawn>
+				<!-- Artifact Protector -->
+				<spawn npc_id="277984" handler="BOSS">
+					<spot x="633.0981" y="810.98334" z="1494.3813" />
+				</spawn>
+				<!-- Chaos Wind (Artifact Core) -->
+				<spawn npc_id="731126" handler="OUTRIDER">
+					<spot x="626.5959" y="810.9828" z="1494.4105" static_id="21" />
+				</spawn>
+				<!-- Artifact Warcaptain -->
+				<spawn npc_id="277788" respawn_time="900" handler="SENTINEL">
+					<spot x="632.0031" y="816.0581" z="1493.91" />
+					<spot x="620.93243" y="805.6962" z="1493.91" />
+				</spawn>
+				<!-- Artifact Warmage -->
+				<spawn npc_id="277793" respawn_time="900" handler="SENTINEL">
+					<spot x="631.6632" y="805.35486" z="1493.91" />
+					<spot x="621.59216" y="816.4008" z="1493.91" />
+				</spawn>
+				<!-- Artifact Master Tracker -->
+				<spawn npc_id="277798" respawn_time="900" handler="SENTINEL">
+					<spot x="612.3264" y="820.9676" z="1493.91" />
+					<spot x="639.2332" y="800.38" z="1493.91" />
+					<spot x="611.354" y="802.3615" z="1493.91" />
+					<spot x="636.17535" y="824.2768" z="1493.91" />
+				</spawn>
+				<!-- Artifact Master Physician -->
+				<spawn npc_id="277803" respawn_time="900" handler="SENTINEL">
+					<spot x="633.2581" y="796.857" z="1493.91" />
+					<spot x="617.8752" y="826.3913" z="1493.91" />
+					<spot x="616.8514" y="797.18097" z="1493.91" />
+					<spot x="640.2845" y="819.30994" z="1493.91" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="BALAUR">
+				<!-- Chaos Wind -->
+				<spawn npc_id="802802" handler="FLAG">
+					<spot x="626.42804" y="811.01306" z="1494.4083" h="5" />
+				</spawn>
+				<!-- Ahserion Artifact Protector -->
+				<spawn npc_id="880060" handler="BOSS">
+					<spot x="633.0981" y="810.98334" z="1494.3813" />
+				</spawn>
+				<!-- Ahserion Artifact Dreadcaptain -->
+				<spawn npc_id="277809" respawn_time="900" handler="SENTINEL">
+					<spot x="632.0031" y="816.0581" z="1493.91" />
+					<spot x="620.93243" y="805.6962" z="1493.91" />
+				</spawn>
+				<!-- Ahserion Artifact Augurur -->
+				<spawn npc_id="277810" respawn_time="900" handler="SENTINEL">
+					<spot x="631.6632" y="805.35486" z="1493.91" />
+					<spot x="621.59216" y="816.4008" z="1493.91" />
+				</spawn>
+				<!-- Ahserion Artifact Triaris -->
+				<spawn npc_id="277811" respawn_time="900" handler="SENTINEL">
+					<spot x="612.3264" y="820.9676" z="1493.91" />
+					<spot x="639.2332" y="800.38" z="1493.91" />
+					<spot x="611.354" y="802.3615" z="1493.91" />
+					<spot x="636.17535" y="824.2768" z="1493.91" />
+				</spawn>
+				<!-- Ahserion Artifact Master Medic -->
+				<spawn npc_id="277812" respawn_time="900" handler="SENTINEL">
+					<spot x="633.2581" y="796.857" z="1493.91" />
+					<spot x="617.8752" y="826.3913" z="1493.91" />
+					<spot x="616.8514" y="797.18097" z="1493.91" />
+					<spot x="640.2845" y="819.30994" z="1493.91" />
+				</spawn>
+			</occupier_template>
+		</base_spawn>
+		<!-- Mirage Dance NE -->
+		<base_spawn id="4223">
+			<occupier_template occupier="PEACE">
+				<!-- Mirage Dance -->
+				<spawn npc_id="802825" handler="FLAG">
+					<spot x="899.94653" y="1327.8076" z="1534.3492" h="5" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="BELUS">
+				<!-- Mirage Dance -->
+				<spawn npc_id="802804" handler="FLAG">
+					<spot x="899.94653" y="1327.8076" z="1534.3492" h="5" />
+				</spawn>
+				<!-- Artifact Protector -->
+				<spawn npc_id="277920" handler="BOSS">
+					<spot x="906.53357" y="1327.7368" z="1534.3214" />
+				</spawn>
+				<!-- Mirage Dance (Artifact Core) -->
+				<spawn npc_id="730983" handler="OUTRIDER">
+					<spot x="899.97534" y="1327.6642" z="1534.3491" static_id="20" />
+				</spawn>
+				<!-- Artifact Warcaptain -->
+				<spawn npc_id="277784" respawn_time="900" handler="SENTINEL">
+					<spot x="905.27814" y="1333.397" z="1533.8483" />
+					<spot x="894.352" y="1322.3683" z="1533.8483" />
+				</spawn>
+				<!-- Artifact Warmage -->
+				<spawn npc_id="277789" respawn_time="900" handler="SENTINEL">
+					<spot x="894.67316" y="1332.6179" z="1533.8483" />
+					<spot x="904.9313" y="1322.0592" z="1533.8483" />
+				</spawn>
+				<!-- Artifact Master Tracker -->
+				<spawn npc_id="277794" respawn_time="900" handler="SENTINEL">
+					<spot x="886.15594" y="1317.926" z="1533.8483" />
+					<spot x="886.2894" y="1336.3331" z="1533.8483" />
+					<spot x="909.31464" y="1342.0981" z="1533.8483" />
+					<spot x="912.4662" y="1317.5427" z="1533.8483" />
+				</spawn>
+				<!-- Artifact Master Physician -->
+				<spawn npc_id="277799" respawn_time="900" handler="SENTINEL">
+					<spot x="890.80286" y="1313.2778" z="1533.8483" />
+					<spot x="890.42084" y="1341.1611" z="1533.8483" />
+					<spot x="906.86896" y="1313.6726" z="1533.8483" />
+					<spot x="913.3582" y="1337.6903" z="1533.8483" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="IVY_TEMPLE">
+				<!-- Mirage Dance -->
+				<spawn npc_id="802805" handler="FLAG">
+					<spot x="899.94653" y="1327.8076" z="1534.3492" h="5" />
+				</spawn>
+				<!-- Artifact Protector -->
+				<spawn npc_id="277921" handler="BOSS">
+					<spot x="906.53357" y="1327.7368" z="1534.3214" />
+				</spawn>
+				<!-- Mirage Dance (Artifact Core) -->
+				<spawn npc_id="731031" handler="OUTRIDER">
+					<spot x="899.97534" y="1327.6642" z="1534.3491" static_id="20" />
+				</spawn>
+				<!-- Artifact Warcaptain -->
+				<spawn npc_id="277785" respawn_time="900" handler="SENTINEL">
+					<spot x="905.27814" y="1333.397" z="1533.8483" />
+					<spot x="894.352" y="1322.3683" z="1533.8483" />
+				</spawn>
+				<!-- Artifact Warmage -->
+				<spawn npc_id="277790" respawn_time="900" handler="SENTINEL">
+					<spot x="894.67316" y="1332.6179" z="1533.8483" />
+					<spot x="904.9313" y="1322.0592" z="1533.8483" />
+				</spawn>
+				<!-- Artifact Master Tracker -->
+				<spawn npc_id="277795" respawn_time="900" handler="SENTINEL">
+					<spot x="886.15594" y="1317.926" z="1533.8483" />
+					<spot x="886.2894" y="1336.3331" z="1533.8483" />
+					<spot x="909.31464" y="1342.0981" z="1533.8483" />
+					<spot x="912.4662" y="1317.5427" z="1533.8483" />
+				</spawn>
+				<!-- Artifact Master Physician -->
+				<spawn npc_id="277800" respawn_time="900" handler="SENTINEL">
+					<spot x="890.80286" y="1313.2778" z="1533.8483" />
+					<spot x="890.42084" y="1341.1611" z="1533.8483" />
+					<spot x="906.86896" y="1313.6726" z="1533.8483" />
+					<spot x="913.3582" y="1337.6903" z="1533.8483" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="HIGHLAND_TEMPLE">
+				<!-- Mirage Dance -->
+				<spawn npc_id="802806" handler="FLAG">
+					<spot x="899.94653" y="1327.8076" z="1534.3492" h="5" />
+				</spawn>
+				<!-- Artifact Protector -->
+				<spawn npc_id="277922" handler="BOSS">
+					<spot x="906.53357" y="1327.7368" z="1534.3214" />
+				</spawn>
+				<!-- Mirage Dance (Artifact Core) -->
+				<spawn npc_id="731063" handler="OUTRIDER">
+					<spot x="899.97534" y="1327.6642" z="1534.3491" static_id="20" />
+				</spawn>
+				<!-- Artifact Warcaptain -->
+				<spawn npc_id="277786" respawn_time="900" handler="SENTINEL">
+					<spot x="905.27814" y="1333.397" z="1533.8483" />
+					<spot x="894.352" y="1322.3683" z="1533.8483" />
+				</spawn>
+				<!-- Artifact Warmage -->
+				<spawn npc_id="277791" respawn_time="900" handler="SENTINEL">
+					<spot x="894.67316" y="1332.6179" z="1533.8483" />
+					<spot x="904.9313" y="1322.0592" z="1533.8483" />
+				</spawn>
+				<!-- Artifact Master Tracker -->
+				<spawn npc_id="277796" respawn_time="900" handler="SENTINEL">
+					<spot x="886.15594" y="1317.926" z="1533.8483" />
+					<spot x="886.2894" y="1336.3331" z="1533.8483" />
+					<spot x="909.31464" y="1342.0981" z="1533.8483" />
+					<spot x="912.4662" y="1317.5427" z="1533.8483" />
+				</spawn>
+				<!-- Artifact Master Physician -->
+				<spawn npc_id="277801" respawn_time="900" handler="SENTINEL">
+					<spot x="890.80286" y="1313.2778" z="1533.8483" />
+					<spot x="890.42084" y="1341.1611" z="1533.8483" />
+					<spot x="906.86896" y="1313.6726" z="1533.8483" />
+					<spot x="913.3582" y="1337.6903" z="1533.8483" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="ALPINE_TEMPLE">
+				<!-- Mirage Dance -->
+				<spawn npc_id="802807" handler="FLAG">
+					<spot x="899.94653" y="1327.8076" z="1534.3492" h="5" />
+				</spawn>
+				<!-- Artifact Protector -->
+				<spawn npc_id="277923" handler="BOSS">
+					<spot x="906.53357" y="1327.7368" z="1534.3214" />
+				</spawn>
+				<!-- Mirage Dance (Artifact Core) -->
+				<spawn npc_id="731095" handler="OUTRIDER">
+					<spot x="899.97534" y="1327.6642" z="1534.3491" static_id="20" />
+				</spawn>
+				<!-- Artifact Warcaptain -->
+				<spawn npc_id="277787" respawn_time="900" handler="SENTINEL">
+					<spot x="905.27814" y="1333.397" z="1533.8483" />
+					<spot x="894.352" y="1322.3683" z="1533.8483" />
+				</spawn>
+				<!-- Artifact Warmage -->
+				<spawn npc_id="277792" respawn_time="900" handler="SENTINEL">
+					<spot x="894.67316" y="1332.6179" z="1533.8483" />
+					<spot x="904.9313" y="1322.0592" z="1533.8483" />
+				</spawn>
+				<!-- Artifact Master Tracker -->
+				<spawn npc_id="277797" respawn_time="900" handler="SENTINEL">
+					<spot x="886.15594" y="1317.926" z="1533.8483" />
+					<spot x="886.2894" y="1336.3331" z="1533.8483" />
+					<spot x="909.31464" y="1342.0981" z="1533.8483" />
+					<spot x="912.4662" y="1317.5427" z="1533.8483" />
+				</spawn>
+				<!-- Artifact Master Physician -->
+				<spawn npc_id="277802" respawn_time="900" handler="SENTINEL">
+					<spot x="890.80286" y="1313.2778" z="1533.8483" />
+					<spot x="890.42084" y="1341.1611" z="1533.8483" />
+					<spot x="906.86896" y="1313.6726" z="1533.8483" />
+					<spot x="913.3582" y="1337.6903" z="1533.8483" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="GRANDWEIR_TEMPLE">
+				<!-- Mirage Dance -->
+				<spawn npc_id="802808" handler="FLAG">
+					<spot x="899.94653" y="1327.8076" z="1534.3492" h="5" />
+				</spawn>
+				<!-- Artifact Protector -->
+				<spawn npc_id="277924" handler="BOSS">
+					<spot x="906.53357" y="1327.7368" z="1534.3214" />
+				</spawn>
+				<!-- Mirage Dance (Artifact Core) -->
+				<spawn npc_id="731127" handler="OUTRIDER">
+					<spot x="899.97534" y="1327.6642" z="1534.3491" static_id="20" />
+				</spawn>
+				<!-- Artifact Warcaptain -->
+				<spawn npc_id="277788" respawn_time="900" handler="SENTINEL">
+					<spot x="905.27814" y="1333.397" z="1533.8483" />
+					<spot x="894.352" y="1322.3683" z="1533.8483" />
+				</spawn>
+				<!-- Artifact Warmage -->
+				<spawn npc_id="277793" respawn_time="900" handler="SENTINEL">
+					<spot x="894.67316" y="1332.6179" z="1533.8483" />
+					<spot x="904.9313" y="1322.0592" z="1533.8483" />
+				</spawn>
+				<!-- Artifact Master Tracker -->
+				<spawn npc_id="277798" respawn_time="900" handler="SENTINEL">
+					<spot x="886.15594" y="1317.926" z="1533.8483" />
+					<spot x="886.2894" y="1336.3331" z="1533.8483" />
+					<spot x="909.31464" y="1342.0981" z="1533.8483" />
+					<spot x="912.4662" y="1317.5427" z="1533.8483" />
+				</spawn>
+				<!-- Artifact Master Physician -->
+				<spawn npc_id="277803" respawn_time="900" handler="SENTINEL">
+					<spot x="890.80286" y="1313.2778" z="1533.8483" />
+					<spot x="890.42084" y="1341.1611" z="1533.8483" />
+					<spot x="906.86896" y="1313.6726" z="1533.8483" />
+					<spot x="913.3582" y="1337.6903" z="1533.8483" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="BALAUR">
+				<!-- Mirage Dance -->
+				<spawn npc_id="802824" handler="FLAG">
+					<spot x="899.94653" y="1327.8076" z="1534.3492" h="5" />
+				</spawn>
+				<!-- Ahserion Artifact Protector -->
+				<spawn npc_id="880061" handler="BOSS">
+					<spot x="906.53357" y="1327.7368" z="1534.3214" />
+				</spawn>
+				<!-- Ahserion Artifact Dreadcaptain -->
+				<spawn npc_id="277809" respawn_time="900" handler="SENTINEL">
+					<spot x="905.27814" y="1333.397" z="1533.8483" />
+					<spot x="894.352" y="1322.3683" z="1533.8483" />
+				</spawn>
+				<!-- Ahserion Artifact Augurur -->
+				<spawn npc_id="277810" respawn_time="900" handler="SENTINEL">
+					<spot x="894.67316" y="1332.6179" z="1533.8483" />
+					<spot x="904.9313" y="1322.0592" z="1533.8483" />
+				</spawn>
+				<!-- Ahserion Artifact Triaris -->
+				<spawn npc_id="277811" respawn_time="900" handler="SENTINEL">
+					<spot x="886.15594" y="1317.926" z="1533.8483" />
+					<spot x="886.2894" y="1336.3331" z="1533.8483" />
+					<spot x="909.31464" y="1342.0981" z="1533.8483" />
+					<spot x="912.4662" y="1317.5427" z="1533.8483" />
+				</spawn>
+				<!-- Ahserion Artifact Master Medic -->
+				<spawn npc_id="277812" respawn_time="900" handler="SENTINEL">
+					<spot x="890.80286" y="1313.2778" z="1533.8483" />
+					<spot x="890.42084" y="1341.1611" z="1533.8483" />
+					<spot x="906.86896" y="1313.6726" z="1533.8483" />
+					<spot x="913.3582" y="1337.6903" z="1533.8483" />
+				</spawn>
+			</occupier_template>
+		</base_spawn>
+		<!-- Chaos Wind NE -->
+		<base_spawn id="4224">
+			<occupier_template occupier="PEACE">
+				<!-- Chaos Wind -->
+				<spawn npc_id="802847" handler="FLAG">
+					<spot x="810.86053" y="1421.7698" z="1494.4103" h="5" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="BELUS">
+				<!-- Chaos Wind -->
+				<spawn npc_id="802826" handler="FLAG">
+					<spot x="810.86053" y="1421.7698" z="1494.4103" h="5" />
+				</spawn>
+				<!-- Artifact Protector -->
+				<spawn npc_id="277985" handler="BOSS">
+					<spot x="817.6342" y="1421.8595" z="1494.3813" />
+				</spawn>
+				<!-- Chaos Wind (Artifact Core) -->
+				<spawn npc_id="730984" handler="OUTRIDER">
+					<spot x="810.9698" y="1421.7153" z="1494.4093" static_id="24" />
+				</spawn>
+				<!-- Artifact Warcaptain -->
+				<spawn npc_id="277784" respawn_time="900" handler="SENTINEL">
+					<spot x="816.08997" y="1427.4153" z="1493.91" />
+					<spot x="805.65466" y="1416.4222" z="1493.91" />
+				</spawn>
+				<!-- Artifact Warmage -->
+				<spawn npc_id="277789" respawn_time="900" handler="SENTINEL">
+					<spot x="816.00165" y="1416.0999" z="1493.91" />
+					<spot x="806.0722" y="1427.7678" z="1493.91" />
+				</spawn>
+				<!-- Artifact Master Tracker -->
+				<spawn npc_id="277794" respawn_time="900" handler="SENTINEL">
+					<spot x="797.6521" y="1410.5752" z="1493.91" />
+					<spot x="796.3082" y="1430.8856" z="1493.91" />
+					<spot x="819.83215" y="1436.3705" z="1493.91" />
+					<spot x="824.7511" y="1411.5084" z="1493.91" />
+				</spawn>
+				<!-- Artifact Master Physician -->
+				<spawn npc_id="277799" respawn_time="900" handler="SENTINEL">
+					<spot x="819.3605" y="1406.9028" z="1493.91" />
+					<spot x="825.18933" y="1432.1724" z="1493.91" />
+					<spot x="802.81836" y="1406.1584" z="1493.91" />
+					<spot x="801.45514" y="1436.9174" z="1493.91" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="IVY_TEMPLE">
+				<!-- Chaos Wind -->
+				<spawn npc_id="802827" handler="FLAG">
+					<spot x="810.86053" y="1421.7698" z="1494.4103" h="5" />
+				</spawn>
+				<!-- Artifact Protector -->
+				<spawn npc_id="277986" handler="BOSS">
+					<spot x="817.6342" y="1421.8595" z="1494.3813" />
+				</spawn>
+				<!-- Chaos Wind (Artifact Core) -->
+				<spawn npc_id="731032" handler="OUTRIDER">
+					<spot x="810.9698" y="1421.7153" z="1494.4093" static_id="24" />
+				</spawn>
+				<!-- Artifact Warcaptain -->
+				<spawn npc_id="277785" respawn_time="900" handler="SENTINEL">
+					<spot x="816.08997" y="1427.4153" z="1493.91" />
+					<spot x="805.65466" y="1416.4222" z="1493.91" />
+				</spawn>
+				<!-- Artifact Warmage -->
+				<spawn npc_id="277790" respawn_time="900" handler="SENTINEL">
+					<spot x="816.00165" y="1416.0999" z="1493.91" />
+					<spot x="806.0722" y="1427.7678" z="1493.91" />
+				</spawn>
+				<!-- Artifact Master Tracker -->
+				<spawn npc_id="277795" respawn_time="900" handler="SENTINEL">
+					<spot x="797.6521" y="1410.5752" z="1493.91" />
+					<spot x="796.3082" y="1430.8856" z="1493.91" />
+					<spot x="819.83215" y="1436.3705" z="1493.91" />
+					<spot x="824.7511" y="1411.5084" z="1493.91" />
+				</spawn>
+				<!-- Artifact Master Physician -->
+				<spawn npc_id="277800" respawn_time="900" handler="SENTINEL">
+					<spot x="819.3605" y="1406.9028" z="1493.91" />
+					<spot x="825.18933" y="1432.1724" z="1493.91" />
+					<spot x="802.81836" y="1406.1584" z="1493.91" />
+					<spot x="801.45514" y="1436.9174" z="1493.91" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="HIGHLAND_TEMPLE">
+				<!-- Chaos Wind -->
+				<spawn npc_id="802828" handler="FLAG">
+					<spot x="810.86053" y="1421.7698" z="1494.4103" h="5" />
+				</spawn>
+				<!-- Artifact Protector -->
+				<spawn npc_id="277987" handler="BOSS">
+					<spot x="817.6342" y="1421.8595" z="1494.3813" />
+				</spawn>
+				<!-- Chaos Wind (Artifact Core) -->
+				<spawn npc_id="731064" handler="OUTRIDER">
+					<spot x="810.9698" y="1421.7153" z="1494.4093" static_id="24" />
+				</spawn>
+				<!-- Artifact Warcaptain -->
+				<spawn npc_id="277786" respawn_time="900" handler="SENTINEL">
+					<spot x="816.08997" y="1427.4153" z="1493.91" />
+					<spot x="805.65466" y="1416.4222" z="1493.91" />
+				</spawn>
+				<!-- Artifact Warmage -->
+				<spawn npc_id="277791" respawn_time="900" handler="SENTINEL">
+					<spot x="816.00165" y="1416.0999" z="1493.91" />
+					<spot x="806.0722" y="1427.7678" z="1493.91" />
+				</spawn>
+				<!-- Artifact Master Tracker -->
+				<spawn npc_id="277796" respawn_time="900" handler="SENTINEL">
+					<spot x="797.6521" y="1410.5752" z="1493.91" />
+					<spot x="796.3082" y="1430.8856" z="1493.91" />
+					<spot x="819.83215" y="1436.3705" z="1493.91" />
+					<spot x="824.7511" y="1411.5084" z="1493.91" />
+				</spawn>
+				<!-- Artifact Master Physician -->
+				<spawn npc_id="277801" respawn_time="900" handler="SENTINEL">
+					<spot x="819.3605" y="1406.9028" z="1493.91" />
+					<spot x="825.18933" y="1432.1724" z="1493.91" />
+					<spot x="802.81836" y="1406.1584" z="1493.91" />
+					<spot x="801.45514" y="1436.9174" z="1493.91" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="ALPINE_TEMPLE">
+				<!-- Chaos Wind -->
+				<spawn npc_id="802829" handler="FLAG">
+					<spot x="810.86053" y="1421.7698" z="1494.4103" h="5" />
+				</spawn>
+				<!-- Artifact Protector -->
+				<spawn npc_id="277988" handler="BOSS">
+					<spot x="817.6342" y="1421.8595" z="1494.3813" />
+				</spawn>
+				<!-- Chaos Wind (Artifact Core) -->
+				<spawn npc_id="731096" handler="OUTRIDER">
+					<spot x="810.9698" y="1421.7153" z="1494.4093" static_id="24" />
+				</spawn>
+				<!-- Artifact Warcaptain -->
+				<spawn npc_id="277787" respawn_time="900" handler="SENTINEL">
+					<spot x="816.08997" y="1427.4153" z="1493.91" />
+					<spot x="805.65466" y="1416.4222" z="1493.91" />
+				</spawn>
+				<!-- Artifact Warmage -->
+				<spawn npc_id="277792" respawn_time="900" handler="SENTINEL">
+					<spot x="816.00165" y="1416.0999" z="1493.91" />
+					<spot x="806.0722" y="1427.7678" z="1493.91" />
+				</spawn>
+				<!-- Artifact Master Tracker -->
+				<spawn npc_id="277797" respawn_time="900" handler="SENTINEL">
+					<spot x="797.6521" y="1410.5752" z="1493.91" />
+					<spot x="796.3082" y="1430.8856" z="1493.91" />
+					<spot x="819.83215" y="1436.3705" z="1493.91" />
+					<spot x="824.7511" y="1411.5084" z="1493.91" />
+				</spawn>
+				<!-- Artifact Master Physician -->
+				<spawn npc_id="277802" respawn_time="900" handler="SENTINEL">
+					<spot x="819.3605" y="1406.9028" z="1493.91" />
+					<spot x="825.18933" y="1432.1724" z="1493.91" />
+					<spot x="802.81836" y="1406.1584" z="1493.91" />
+					<spot x="801.45514" y="1436.9174" z="1493.91" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="GRANDWEIR_TEMPLE">
+				<!-- Chaos Wind -->
+				<spawn npc_id="802830" handler="FLAG">
+					<spot x="810.86053" y="1421.7698" z="1494.4103" h="5" />
+				</spawn>
+				<!-- Artifact Protector -->
+				<spawn npc_id="277989" handler="BOSS">
+					<spot x="817.6342" y="1421.8595" z="1494.3813" />
+				</spawn>
+				<!-- Chaos Wind (Artifact Core) -->
+				<spawn npc_id="731128" handler="OUTRIDER">
+					<spot x="810.9698" y="1421.7153" z="1494.4093" static_id="24" />
+				</spawn>
+				<!-- Artifact Warcaptain -->
+				<spawn npc_id="277788" respawn_time="900" handler="SENTINEL">
+					<spot x="816.08997" y="1427.4153" z="1493.91" />
+					<spot x="805.65466" y="1416.4222" z="1493.91" />
+				</spawn>
+				<!-- Artifact Warmage -->
+				<spawn npc_id="277793" respawn_time="900" handler="SENTINEL">
+					<spot x="816.00165" y="1416.0999" z="1493.91" />
+					<spot x="806.0722" y="1427.7678" z="1493.91" />
+				</spawn>
+				<!-- Artifact Master Tracker -->
+				<spawn npc_id="277798" respawn_time="900" handler="SENTINEL">
+					<spot x="797.6521" y="1410.5752" z="1493.91" />
+					<spot x="796.3082" y="1430.8856" z="1493.91" />
+					<spot x="819.83215" y="1436.3705" z="1493.91" />
+					<spot x="824.7511" y="1411.5084" z="1493.91" />
+				</spawn>
+				<!-- Artifact Master Physician -->
+				<spawn npc_id="277803" respawn_time="900" handler="SENTINEL">
+					<spot x="819.3605" y="1406.9028" z="1493.91" />
+					<spot x="825.18933" y="1432.1724" z="1493.91" />
+					<spot x="802.81836" y="1406.1584" z="1493.91" />
+					<spot x="801.45514" y="1436.9174" z="1493.91" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="BALAUR">
+				<!-- Chaos Wind -->
+				<spawn npc_id="802846" handler="FLAG">
+					<spot x="810.86053" y="1421.7698" z="1494.4103" h="5" />
+				</spawn>
+				<!-- Ahserion Artifact Protector -->
+				<spawn npc_id="880062" handler="BOSS">
+					<spot x="817.6342" y="1421.8595" z="1494.3813" />
+				</spawn>
+				<!-- Ahserion Artifact Dreadcaptain -->
+				<spawn npc_id="277809" respawn_time="900" handler="SENTINEL">
+					<spot x="816.08997" y="1427.4153" z="1493.91" />
+					<spot x="805.65466" y="1416.4222" z="1493.91" />
+				</spawn>
+				<!-- Ahserion Artifact Augurur -->
+				<spawn npc_id="277810" respawn_time="900" handler="SENTINEL">
+					<spot x="816.00165" y="1416.0999" z="1493.91" />
+					<spot x="806.0722" y="1427.7678" z="1493.91" />
+				</spawn>
+				<!-- Ahserion Artifact Triaris -->
+				<spawn npc_id="277811" respawn_time="900" handler="SENTINEL">
+					<spot x="797.6521" y="1410.5752" z="1493.91" />
+					<spot x="796.3082" y="1430.8856" z="1493.91" />
+					<spot x="819.83215" y="1436.3705" z="1493.91" />
+					<spot x="824.7511" y="1411.5084" z="1493.91" />
+				</spawn>
+				<!-- Ahserion Artifact Master Medic -->
+				<spawn npc_id="277812" respawn_time="900" handler="SENTINEL">
+					<spot x="819.3605" y="1406.9028" z="1493.91" />
+					<spot x="825.18933" y="1432.1724" z="1493.91" />
+					<spot x="802.81836" y="1406.1584" z="1493.91" />
+					<spot x="801.45514" y="1436.9174" z="1493.91" />
+				</spawn>
+			</occupier_template>
+		</base_spawn>
+		<!-- Mirage Dance SE -->
+		<base_spawn id="4225">
+			<occupier_template occupier="PEACE">
+				<!-- Mirage Dance -->
+				<spawn npc_id="802869" handler="FLAG">
+					<spot x="1327.7218" y="1148.1047" z="1534.3483" h="5" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="BELUS">
+				<!-- Mirage Dance -->
+				<spawn npc_id="802848" handler="FLAG">
+					<spot x="1327.7218" y="1148.1047" z="1534.3483" h="5" />
+				</spawn>
+				<!-- Artifact Protector -->
+				<spawn npc_id="277925" handler="BOSS">
+					<spot x="1334.2969" y="1148.1317" z="1534.3214" />
+				</spawn>
+				<!-- Mirage Dance (Artifact Core) -->
+				<spawn npc_id="730985" handler="OUTRIDER">
+					<spot x="1327.6244" y="1148.1573" z="1534.35" static_id="16" />
+				</spawn>
+				<!-- Artifact Warcaptain -->
+				<spawn npc_id="277784" respawn_time="900" handler="SENTINEL">
+					<spot x="1332.7441" y="1153.8083" z="1533.8483" />
+					<spot x="1322.4503" y="1142.771" z="1533.8483" />
+				</spawn>
+				<!-- Artifact Warmage -->
+				<spawn npc_id="277789" respawn_time="900" handler="SENTINEL">
+					<spot x="1322.3806" y="1153.4772" z="1533.8483" />
+					<spot x="1332.5347" y="1142.2665" z="1533.8483" />
+				</spawn>
+				<!-- Artifact Master Tracker -->
+				<spawn npc_id="277794" respawn_time="900" handler="SENTINEL">
+					<spot x="1339.9305" y="1136.8715" z="1533.8483" />
+					<spot x="1313.3655" y="1158.5271" z="1533.8483" />
+					<spot x="1336.4766" y="1163.3774" z="1533.8483" />
+					<spot x="1314.24" y="1137.9338" z="1533.8483" />
+				</spawn>
+				<!-- Artifact Master Physician -->
+				<spawn npc_id="277799" respawn_time="900" handler="SENTINEL">
+					<spot x="1341.6884" y="1157.4773" z="1533.8483" />
+					<spot x="1333.7744" y="1132.89" z="1533.8483" />
+					<spot x="1319.6201" y="1132.5718" z="1533.8483" />
+					<spot x="1318.6486" y="1163.0532" z="1533.8483" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="IVY_TEMPLE">
+				<!-- Mirage Dance -->
+				<spawn npc_id="802849" handler="FLAG">
+					<spot x="1327.7218" y="1148.1047" z="1534.3483" h="5" />
+				</spawn>
+				<!-- Artifact Protector -->
+				<spawn npc_id="277926" handler="BOSS">
+					<spot x="1334.2969" y="1148.1317" z="1534.3214" />
+				</spawn>
+				<!-- Mirage Dance (Artifact Core) -->
+				<spawn npc_id="731033" handler="OUTRIDER">
+					<spot x="1327.6244" y="1148.1573" z="1534.35" static_id="16" />
+				</spawn>
+				<!-- Artifact Warcaptain -->
+				<spawn npc_id="277785" respawn_time="900" handler="SENTINEL">
+					<spot x="1332.7441" y="1153.8083" z="1533.8483" />
+					<spot x="1322.4503" y="1142.771" z="1533.8483" />
+				</spawn>
+				<!-- Artifact Warmage -->
+				<spawn npc_id="277790" respawn_time="900" handler="SENTINEL">
+					<spot x="1322.3806" y="1153.4772" z="1533.8483" />
+					<spot x="1332.5347" y="1142.2665" z="1533.8483" />
+				</spawn>
+				<!-- Artifact Master Tracker -->
+				<spawn npc_id="277795" respawn_time="900" handler="SENTINEL">
+					<spot x="1339.9305" y="1136.8715" z="1533.8483" />
+					<spot x="1313.3655" y="1158.5271" z="1533.8483" />
+					<spot x="1336.4766" y="1163.3774" z="1533.8483" />
+					<spot x="1314.24" y="1137.9338" z="1533.8483" />
+				</spawn>
+				<!-- Artifact Master Physician -->
+				<spawn npc_id="277800" respawn_time="900" handler="SENTINEL">
+					<spot x="1341.6884" y="1157.4773" z="1533.8483" />
+					<spot x="1333.7744" y="1132.89" z="1533.8483" />
+					<spot x="1319.6201" y="1132.5718" z="1533.8483" />
+					<spot x="1318.6486" y="1163.0532" z="1533.8483" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="HIGHLAND_TEMPLE">
+				<!-- Mirage Dance -->
+				<spawn npc_id="802850" handler="FLAG">
+					<spot x="1327.7218" y="1148.1047" z="1534.3483" h="5" />
+				</spawn>
+				<!-- Artifact Protector -->
+				<spawn npc_id="277927" handler="BOSS">
+					<spot x="1334.2969" y="1148.1317" z="1534.3214" />
+				</spawn>
+				<!-- Mirage Dance (Artifact Core) -->
+				<spawn npc_id="731065" handler="OUTRIDER">
+					<spot x="1327.6244" y="1148.1573" z="1534.35" static_id="16" />
+				</spawn>
+				<!-- Artifact Warcaptain -->
+				<spawn npc_id="277786" respawn_time="900" handler="SENTINEL">
+					<spot x="1332.7441" y="1153.8083" z="1533.8483" />
+					<spot x="1322.4503" y="1142.771" z="1533.8483" />
+				</spawn>
+				<!-- Artifact Warmage -->
+				<spawn npc_id="277791" respawn_time="900" handler="SENTINEL">
+					<spot x="1322.3806" y="1153.4772" z="1533.8483" />
+					<spot x="1332.5347" y="1142.2665" z="1533.8483" />
+				</spawn>
+				<!-- Artifact Master Tracker -->
+				<spawn npc_id="277796" respawn_time="900" handler="SENTINEL">
+					<spot x="1339.9305" y="1136.8715" z="1533.8483" />
+					<spot x="1313.3655" y="1158.5271" z="1533.8483" />
+					<spot x="1336.4766" y="1163.3774" z="1533.8483" />
+					<spot x="1314.24" y="1137.9338" z="1533.8483" />
+				</spawn>
+				<!-- Artifact Master Physician -->
+				<spawn npc_id="277801" respawn_time="900" handler="SENTINEL">
+					<spot x="1341.6884" y="1157.4773" z="1533.8483" />
+					<spot x="1333.7744" y="1132.89" z="1533.8483" />
+					<spot x="1319.6201" y="1132.5718" z="1533.8483" />
+					<spot x="1318.6486" y="1163.0532" z="1533.8483" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="ALPINE_TEMPLE">
+				<!-- Mirage Dance -->
+				<spawn npc_id="802851" handler="FLAG">
+					<spot x="1327.7218" y="1148.1047" z="1534.3483" h="5" />
+				</spawn>
+				<!-- Artifact Protector -->
+				<spawn npc_id="277928" handler="BOSS">
+					<spot x="1334.2969" y="1148.1317" z="1534.3214" />
+				</spawn>
+				<!-- Mirage Dance (Artifact Core) -->
+				<spawn npc_id="731097" handler="OUTRIDER">
+					<spot x="1327.6244" y="1148.1573" z="1534.35" static_id="16" />
+				</spawn>
+				<!-- Artifact Warcaptain -->
+				<spawn npc_id="277787" respawn_time="900" handler="SENTINEL">
+					<spot x="1332.7441" y="1153.8083" z="1533.8483" />
+					<spot x="1322.4503" y="1142.771" z="1533.8483" />
+				</spawn>
+				<!-- Artifact Warmage -->
+				<spawn npc_id="277792" respawn_time="900" handler="SENTINEL">
+					<spot x="1322.3806" y="1153.4772" z="1533.8483" />
+					<spot x="1332.5347" y="1142.2665" z="1533.8483" />
+				</spawn>
+				<!-- Artifact Master Tracker -->
+				<spawn npc_id="277797" respawn_time="900" handler="SENTINEL">
+					<spot x="1339.9305" y="1136.8715" z="1533.8483" />
+					<spot x="1313.3655" y="1158.5271" z="1533.8483" />
+					<spot x="1336.4766" y="1163.3774" z="1533.8483" />
+					<spot x="1314.24" y="1137.9338" z="1533.8483" />
+				</spawn>
+				<!-- Artifact Master Physician -->
+				<spawn npc_id="277802" respawn_time="900" handler="SENTINEL">
+					<spot x="1341.6884" y="1157.4773" z="1533.8483" />
+					<spot x="1333.7744" y="1132.89" z="1533.8483" />
+					<spot x="1319.6201" y="1132.5718" z="1533.8483" />
+					<spot x="1318.6486" y="1163.0532" z="1533.8483" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="GRANDWEIR_TEMPLE">
+				<!-- Mirage Dance -->
+				<spawn npc_id="802852" handler="FLAG">
+					<spot x="1327.7218" y="1148.1047" z="1534.3483" h="5" />
+				</spawn>
+				<!-- Artifact Protector -->
+				<spawn npc_id="277929" handler="BOSS">
+					<spot x="1334.2969" y="1148.1317" z="1534.3214" />
+				</spawn>
+				<!-- Mirage Dance (Artifact Core) -->
+				<spawn npc_id="731129" handler="OUTRIDER">
+					<spot x="1327.6244" y="1148.1573" z="1534.35" static_id="16" />
+				</spawn>
+				<!-- Artifact Warcaptain -->
+				<spawn npc_id="277788" respawn_time="900" handler="SENTINEL">
+					<spot x="1332.7441" y="1153.8083" z="1533.8483" />
+					<spot x="1322.4503" y="1142.771" z="1533.8483" />
+				</spawn>
+				<!-- Artifact Warmage -->
+				<spawn npc_id="277793" respawn_time="900" handler="SENTINEL">
+					<spot x="1322.3806" y="1153.4772" z="1533.8483" />
+					<spot x="1332.5347" y="1142.2665" z="1533.8483" />
+				</spawn>
+				<!-- Artifact Master Tracker -->
+				<spawn npc_id="277798" respawn_time="900" handler="SENTINEL">
+					<spot x="1339.9305" y="1136.8715" z="1533.8483" />
+					<spot x="1313.3655" y="1158.5271" z="1533.8483" />
+					<spot x="1336.4766" y="1163.3774" z="1533.8483" />
+					<spot x="1314.24" y="1137.9338" z="1533.8483" />
+				</spawn>
+				<!-- Artifact Master Physician -->
+				<spawn npc_id="277803" respawn_time="900" handler="SENTINEL">
+					<spot x="1341.6884" y="1157.4773" z="1533.8483" />
+					<spot x="1333.7744" y="1132.89" z="1533.8483" />
+					<spot x="1319.6201" y="1132.5718" z="1533.8483" />
+					<spot x="1318.6486" y="1163.0532" z="1533.8483" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="BALAUR">
+				<!-- Mirage Dance -->
+				<spawn npc_id="802868" handler="FLAG">
+					<spot x="1327.7218" y="1148.1047" z="1534.3483" h="5" />
+				</spawn>
+				<!-- Ahserion Artifact Protector -->
+				<spawn npc_id="880063" handler="BOSS">
+					<spot x="1334.2969" y="1148.1317" z="1534.3214" />
+				</spawn>
+				<!-- Ahserion Artifact Dreadcaptain -->
+				<spawn npc_id="277809" respawn_time="900" handler="SENTINEL">
+					<spot x="1332.7441" y="1153.8083" z="1533.8483" />
+					<spot x="1322.4503" y="1142.771" z="1533.8483" />
+				</spawn>
+				<!-- Ahserion Artifact Augurur -->
+				<spawn npc_id="277810" respawn_time="900" handler="SENTINEL">
+					<spot x="1322.3806" y="1153.4772" z="1533.8483" />
+					<spot x="1332.5347" y="1142.2665" z="1533.8483" />
+				</spawn>
+				<!-- Ahserion Artifact Triaris -->
+				<spawn npc_id="277811" respawn_time="900" handler="SENTINEL">
+					<spot x="1339.9305" y="1136.8715" z="1533.8483" />
+					<spot x="1313.3655" y="1158.5271" z="1533.8483" />
+					<spot x="1336.4766" y="1163.3774" z="1533.8483" />
+					<spot x="1314.24" y="1137.9338" z="1533.8483" />
+				</spawn>
+				<!-- Ahserion Artifact Master Medic -->
+				<spawn npc_id="277812" respawn_time="900" handler="SENTINEL">
+					<spot x="1341.6884" y="1157.4773" z="1533.8483" />
+					<spot x="1333.7744" y="1132.89" z="1533.8483" />
+					<spot x="1319.6201" y="1132.5718" z="1533.8483" />
+					<spot x="1318.6486" y="1163.0532" z="1533.8483" />
+				</spawn>
+			</occupier_template>
+		</base_spawn>
+		<!-- Chaos Wind SE -->
+		<base_spawn id="4226">
+			<occupier_template occupier="PEACE">
+				<!-- Chaos Wind -->
+				<spawn npc_id="802891" handler="FLAG">
+					<spot x="1421.2836" y="1236.8899" z="1494.4105" h="5" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="BELUS">
+				<!-- Chaos Wind -->
+				<spawn npc_id="802870" handler="FLAG">
+					<spot x="1421.2836" y="1236.8899" z="1494.4105" h="5" />
+				</spawn>
+				<!-- Artifact Protector -->
+				<spawn npc_id="277990" handler="BOSS">
+					<spot x="1428.175" y="1236.887" z="1494.3813" />
+				</spawn>
+				<!-- Chaos Wind (Artifact Core) -->
+				<spawn npc_id="730986" handler="OUTRIDER">
+					<spot x="1421.2515" y="1236.8108" z="1494.4104" static_id="15" />
+				</spawn>
+				<!-- Artifact Warcaptain -->
+				<spawn npc_id="277784" respawn_time="900" handler="SENTINEL">
+					<spot x="1416.366" y="1231.2994" z="1493.91" />
+					<spot x="1426.4552" y="1242.7084" z="1493.91" />
+				</spawn>
+				<!-- Artifact Warmage -->
+				<spawn npc_id="277789" respawn_time="900" handler="SENTINEL">
+					<spot x="1426.3589" y="1231.3127" z="1493.91" />
+					<spot x="1416.2704" y="1242.1404" z="1493.91" />
+				</spawn>
+				<!-- Artifact Master Tracker -->
+				<spawn npc_id="277794" respawn_time="900" handler="SENTINEL">
+					<spot x="1434.6315" y="1225.9023" z="1493.91" />
+					<spot x="1407.275" y="1247.0945" z="1493.91" />
+					<spot x="1430.2007" y="1251.8328" z="1493.91" />
+					<spot x="1408.3939" y="1225.0857" z="1493.91" />
+				</spawn>
+				<!-- Artifact Master Physician -->
+				<spawn npc_id="277799" respawn_time="900" handler="SENTINEL">
+					<spot x="1411.7833" y="1251.9994" z="1493.91" />
+					<spot x="1413.9224" y="1220.9252" z="1493.91" />
+					<spot x="1435.677" y="1246.7876" z="1493.91" />
+					<spot x="1429.14" y="1221.8665" z="1493.91" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="IVY_TEMPLE">
+				<!-- Chaos Wind -->
+				<spawn npc_id="802871" handler="FLAG">
+					<spot x="1421.2836" y="1236.8899" z="1494.4105" h="5" />
+				</spawn>
+				<!-- Artifact Protector -->
+				<spawn npc_id="277991" handler="BOSS">
+					<spot x="1428.175" y="1236.887" z="1494.3813" />
+				</spawn>
+				<!-- Chaos Wind (Artifact Core) -->
+				<spawn npc_id="731034" handler="OUTRIDER">
+					<spot x="1421.2515" y="1236.8108" z="1494.4104" static_id="15" />
+				</spawn>
+				<!-- Artifact Warcaptain -->
+				<spawn npc_id="277785" respawn_time="900" handler="SENTINEL">
+					<spot x="1416.366" y="1231.2994" z="1493.91" />
+					<spot x="1426.4552" y="1242.7084" z="1493.91" />
+				</spawn>
+				<!-- Artifact Warmage -->
+				<spawn npc_id="277790" respawn_time="900" handler="SENTINEL">
+					<spot x="1426.3589" y="1231.3127" z="1493.91" />
+					<spot x="1416.2704" y="1242.1404" z="1493.91" />
+				</spawn>
+				<!-- Artifact Master Tracker -->
+				<spawn npc_id="277795" respawn_time="900" handler="SENTINEL">
+					<spot x="1434.6315" y="1225.9023" z="1493.91" />
+					<spot x="1407.275" y="1247.0945" z="1493.91" />
+					<spot x="1430.2007" y="1251.8328" z="1493.91" />
+					<spot x="1408.3939" y="1225.0857" z="1493.91" />
+				</spawn>
+				<!-- Artifact Master Physician -->
+				<spawn npc_id="277800" respawn_time="900" handler="SENTINEL">
+					<spot x="1411.7833" y="1251.9994" z="1493.91" />
+					<spot x="1413.9224" y="1220.9252" z="1493.91" />
+					<spot x="1435.677" y="1246.7876" z="1493.91" />
+					<spot x="1429.14" y="1221.8665" z="1493.91" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="HIGHLAND_TEMPLE">
+				<!-- Chaos Wind -->
+				<spawn npc_id="802872" handler="FLAG">
+					<spot x="1421.2836" y="1236.8899" z="1494.4105" h="5" />
+				</spawn>
+				<!-- Artifact Protector -->
+				<spawn npc_id="277992" handler="BOSS">
+					<spot x="1428.175" y="1236.887" z="1494.3813" />
+				</spawn>
+				<!-- Chaos Wind (Artifact Core) -->
+				<spawn npc_id="731066" handler="OUTRIDER">
+					<spot x="1421.2515" y="1236.8108" z="1494.4104" static_id="15" />
+				</spawn>
+				<!-- Artifact Warcaptain -->
+				<spawn npc_id="277786" respawn_time="900" handler="SENTINEL">
+					<spot x="1416.366" y="1231.2994" z="1493.91" />
+					<spot x="1426.4552" y="1242.7084" z="1493.91" />
+				</spawn>
+				<!-- Artifact Warmage -->
+				<spawn npc_id="277791" respawn_time="900" handler="SENTINEL">
+					<spot x="1426.3589" y="1231.3127" z="1493.91" />
+					<spot x="1416.2704" y="1242.1404" z="1493.91" />
+				</spawn>
+				<!-- Artifact Master Tracker -->
+				<spawn npc_id="277796" respawn_time="900" handler="SENTINEL">
+					<spot x="1434.6315" y="1225.9023" z="1493.91" />
+					<spot x="1407.275" y="1247.0945" z="1493.91" />
+					<spot x="1430.2007" y="1251.8328" z="1493.91" />
+					<spot x="1408.3939" y="1225.0857" z="1493.91" />
+				</spawn>
+				<!-- Artifact Master Physician -->
+				<spawn npc_id="277801" respawn_time="900" handler="SENTINEL">
+					<spot x="1411.7833" y="1251.9994" z="1493.91" />
+					<spot x="1413.9224" y="1220.9252" z="1493.91" />
+					<spot x="1435.677" y="1246.7876" z="1493.91" />
+					<spot x="1429.14" y="1221.8665" z="1493.91" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="ALPINE_TEMPLE">
+				<!-- Chaos Wind -->
+				<spawn npc_id="802873" handler="FLAG">
+					<spot x="1421.2836" y="1236.8899" z="1494.4105" h="5" />
+				</spawn>
+				<!-- Artifact Protector -->
+				<spawn npc_id="277993" handler="BOSS">
+					<spot x="1428.175" y="1236.887" z="1494.3813" />
+				</spawn>
+				<!-- Chaos Wind (Artifact Core) -->
+				<spawn npc_id="731098" handler="OUTRIDER">
+					<spot x="1421.2515" y="1236.8108" z="1494.4104" static_id="15" />
+				</spawn>
+				<!-- Artifact Warcaptain -->
+				<spawn npc_id="277787" respawn_time="900" handler="SENTINEL">
+					<spot x="1416.366" y="1231.2994" z="1493.91" />
+					<spot x="1426.4552" y="1242.7084" z="1493.91" />
+				</spawn>
+				<!-- Artifact Warmage -->
+				<spawn npc_id="277792" respawn_time="900" handler="SENTINEL">
+					<spot x="1426.3589" y="1231.3127" z="1493.91" />
+					<spot x="1416.2704" y="1242.1404" z="1493.91" />
+				</spawn>
+				<!-- Artifact Master Tracker -->
+				<spawn npc_id="277797" respawn_time="900" handler="SENTINEL">
+					<spot x="1434.6315" y="1225.9023" z="1493.91" />
+					<spot x="1407.275" y="1247.0945" z="1493.91" />
+					<spot x="1430.2007" y="1251.8328" z="1493.91" />
+					<spot x="1408.3939" y="1225.0857" z="1493.91" />
+				</spawn>
+				<!-- Artifact Master Physician -->
+				<spawn npc_id="277802" respawn_time="900" handler="SENTINEL">
+					<spot x="1411.7833" y="1251.9994" z="1493.91" />
+					<spot x="1413.9224" y="1220.9252" z="1493.91" />
+					<spot x="1435.677" y="1246.7876" z="1493.91" />
+					<spot x="1429.14" y="1221.8665" z="1493.91" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="GRANDWEIR_TEMPLE">
+				<!-- Chaos Wind -->
+				<spawn npc_id="802874" handler="FLAG">
+					<spot x="1421.2836" y="1236.8899" z="1494.4105" h="5" />
+				</spawn>
+				<!-- Artifact Protector -->
+				<spawn npc_id="277994" handler="BOSS">
+					<spot x="1428.175" y="1236.887" z="1494.3813" />
+				</spawn>
+				<!-- Chaos Wind (Artifact Core) -->
+				<spawn npc_id="731130" handler="OUTRIDER">
+					<spot x="1421.2515" y="1236.8108" z="1494.4104" static_id="15" />
+				</spawn>
+				<!-- Artifact Warcaptain -->
+				<spawn npc_id="277788" respawn_time="900" handler="SENTINEL">
+					<spot x="1416.366" y="1231.2994" z="1493.91" />
+					<spot x="1426.4552" y="1242.7084" z="1493.91" />
+				</spawn>
+				<!-- Artifact Warmage -->
+				<spawn npc_id="277793" respawn_time="900" handler="SENTINEL">
+					<spot x="1426.3589" y="1231.3127" z="1493.91" />
+					<spot x="1416.2704" y="1242.1404" z="1493.91" />
+				</spawn>
+				<!-- Artifact Master Tracker -->
+				<spawn npc_id="277798" respawn_time="900" handler="SENTINEL">
+					<spot x="1434.6315" y="1225.9023" z="1493.91" />
+					<spot x="1407.275" y="1247.0945" z="1493.91" />
+					<spot x="1430.2007" y="1251.8328" z="1493.91" />
+					<spot x="1408.3939" y="1225.0857" z="1493.91" />
+				</spawn>
+				<!-- Artifact Master Physician -->
+				<spawn npc_id="277803" respawn_time="900" handler="SENTINEL">
+					<spot x="1411.7833" y="1251.9994" z="1493.91" />
+					<spot x="1413.9224" y="1220.9252" z="1493.91" />
+					<spot x="1435.677" y="1246.7876" z="1493.91" />
+					<spot x="1429.14" y="1221.8665" z="1493.91" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="BALAUR">
+				<!-- Chaos Wind -->
+				<spawn npc_id="802890" handler="FLAG">
+					<spot x="1421.2836" y="1236.8899" z="1494.4105" h="5" />
+				</spawn>
+				<!-- Ahserion Artifact Protector -->
+				<spawn npc_id="880064" handler="BOSS">
+					<spot x="1428.175" y="1236.887" z="1494.3813" />
+				</spawn>
+				<!-- Ahserion Artifact Dreadcaptain -->
+				<spawn npc_id="277809" respawn_time="900" handler="SENTINEL">
+					<spot x="1416.366" y="1231.2994" z="1493.91" />
+					<spot x="1426.4552" y="1242.7084" z="1493.91" />
+				</spawn>
+				<!-- Ahserion Artifact Augurur -->
+				<spawn npc_id="277810" respawn_time="900" handler="SENTINEL">
+					<spot x="1426.3589" y="1231.3127" z="1493.91" />
+					<spot x="1416.2704" y="1242.1404" z="1493.91" />
+				</spawn>
+				<!-- Ahserion Artifact Triaris -->
+				<spawn npc_id="277811" respawn_time="900" handler="SENTINEL">
+					<spot x="1434.6315" y="1225.9023" z="1493.91" />
+					<spot x="1407.275" y="1247.0945" z="1493.91" />
+					<spot x="1430.2007" y="1251.8328" z="1493.91" />
+					<spot x="1408.3939" y="1225.0857" z="1493.91" />
+				</spawn>
+				<!-- Ahserion Artifact Master Medic -->
+				<spawn npc_id="277812" respawn_time="900" handler="SENTINEL">
+					<spot x="1411.7833" y="1251.9994" z="1493.91" />
+					<spot x="1413.9224" y="1220.9252" z="1493.91" />
+					<spot x="1435.677" y="1246.7876" z="1493.91" />
+					<spot x="1429.14" y="1221.8665" z="1493.91" />
+				</spawn>
+			</occupier_template>
+		</base_spawn>
+		<!-- Mirage Dance SW -->
+		<base_spawn id="4227">
+			<occupier_template occupier="PEACE">
+				<!-- Mirage Dance -->
+				<spawn npc_id="802913" handler="FLAG">
+					<spot x="1147.7898" y="720.5032" z="1534.349" h="5" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="BELUS">
+				<!-- Mirage Dance -->
+				<spawn npc_id="802892" handler="FLAG">
+					<spot x="1147.7898" y="720.5032" z="1534.349" h="5" />
+				</spawn>
+				<!-- Artifact Protector -->
+				<spawn npc_id="277930" handler="BOSS">
+					<spot x="1154.3522" y="720.61804" z="1534.3214" />
+				</spawn>
+				<!-- Mirage Dance (Artifact Core) -->
+				<spawn npc_id="730987" handler="OUTRIDER">
+					<spot x="1147.8323" y="720.4091" z="1534.3485" static_id="22" />
+				</spawn>
+				<!-- Artifact Warcaptain -->
+				<spawn npc_id="277784" respawn_time="900" handler="SENTINEL">
+					<spot x="1152.9065" y="725.8461" z="1533.8483" />
+					<spot x="1142.3563" y="715.262" z="1533.8483" />
+				</spawn>
+				<!-- Artifact Warmage -->
+				<spawn npc_id="277789" respawn_time="900" handler="SENTINEL">
+					<spot x="1142.694" y="725.81226" z="1533.8483" />
+					<spot x="1152.6805" y="715.0458" z="1533.8483" />
+				</spawn>
+				<!-- Artifact Master Tracker -->
+				<spawn npc_id="277794" respawn_time="900" handler="SENTINEL">
+					<spot x="1133.4171" y="711.21704" z="1533.8483" />
+					<spot x="1157.2905" y="734.76953" z="1533.8483" />
+					<spot x="1133.2675" y="728.8004" z="1533.8483" />
+					<spot x="1160.4918" y="708.9753" z="1533.8483" />
+				</spawn>
+				<!-- Artifact Master Physician -->
+				<spawn npc_id="277799" respawn_time="900" handler="SENTINEL">
+					<spot x="1139.412" y="734.8884" z="1533.8483" />
+					<spot x="1154.062" y="705.0267" z="1533.8483" />
+					<spot x="1139.0751" y="705.49255" z="1533.8483" />
+					<spot x="1161.9756" y="729.04456" z="1533.8483" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="IVY_TEMPLE">
+				<!-- Mirage Dance -->
+				<spawn npc_id="802893" handler="FLAG">
+					<spot x="1147.7898" y="720.5032" z="1534.349" h="5" />
+				</spawn>
+				<!-- Artifact Protector -->
+				<spawn npc_id="277931" handler="BOSS">
+					<spot x="1154.3522" y="720.61804" z="1534.3214" />
+				</spawn>
+				<!-- Mirage Dance (Artifact Core) -->
+				<spawn npc_id="731035" handler="OUTRIDER">
+					<spot x="1147.8323" y="720.4091" z="1534.3485" static_id="22" />
+				</spawn>
+				<!-- Artifact Warcaptain -->
+				<spawn npc_id="277785" respawn_time="900" handler="SENTINEL">
+					<spot x="1152.9065" y="725.8461" z="1533.8483" />
+					<spot x="1142.3563" y="715.262" z="1533.8483" />
+				</spawn>
+				<!-- Artifact Warmage -->
+				<spawn npc_id="277790" respawn_time="900" handler="SENTINEL">
+					<spot x="1142.694" y="725.81226" z="1533.8483" />
+					<spot x="1152.6805" y="715.0458" z="1533.8483" />
+				</spawn>
+				<!-- Artifact Master Tracker -->
+				<spawn npc_id="277795" respawn_time="900" handler="SENTINEL">
+					<spot x="1133.4171" y="711.21704" z="1533.8483" />
+					<spot x="1157.2905" y="734.76953" z="1533.8483" />
+					<spot x="1133.2675" y="728.8004" z="1533.8483" />
+					<spot x="1160.4918" y="708.9753" z="1533.8483" />
+				</spawn>
+				<!-- Artifact Master Physician -->
+				<spawn npc_id="277800" respawn_time="900" handler="SENTINEL">
+					<spot x="1139.412" y="734.8884" z="1533.8483" />
+					<spot x="1154.062" y="705.0267" z="1533.8483" />
+					<spot x="1139.0751" y="705.49255" z="1533.8483" />
+					<spot x="1161.9756" y="729.04456" z="1533.8483" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="HIGHLAND_TEMPLE">
+				<!-- Mirage Dance -->
+				<spawn npc_id="802894" handler="FLAG">
+					<spot x="1147.7898" y="720.5032" z="1534.349" h="5" />
+				</spawn>
+				<!-- Artifact Protector -->
+				<spawn npc_id="277932" handler="BOSS">
+					<spot x="1154.3522" y="720.61804" z="1534.3214" />
+				</spawn>
+				<!-- Mirage Dance (Artifact Core) -->
+				<spawn npc_id="731067" handler="OUTRIDER">
+					<spot x="1147.8323" y="720.4091" z="1534.3485" static_id="22" />
+				</spawn>
+				<!-- Artifact Warcaptain -->
+				<spawn npc_id="277786" respawn_time="900" handler="SENTINEL">
+					<spot x="1152.9065" y="725.8461" z="1533.8483" />
+					<spot x="1142.3563" y="715.262" z="1533.8483" />
+				</spawn>
+				<!-- Artifact Warmage -->
+				<spawn npc_id="277791" respawn_time="900" handler="SENTINEL">
+					<spot x="1142.694" y="725.81226" z="1533.8483" />
+					<spot x="1152.6805" y="715.0458" z="1533.8483" />
+				</spawn>
+				<!-- Artifact Master Tracker -->
+				<spawn npc_id="277796" respawn_time="900" handler="SENTINEL">
+					<spot x="1133.4171" y="711.21704" z="1533.8483" />
+					<spot x="1157.2905" y="734.76953" z="1533.8483" />
+					<spot x="1133.2675" y="728.8004" z="1533.8483" />
+					<spot x="1160.4918" y="708.9753" z="1533.8483" />
+				</spawn>
+				<!-- Artifact Master Physician -->
+				<spawn npc_id="277801" respawn_time="900" handler="SENTINEL">
+					<spot x="1139.412" y="734.8884" z="1533.8483" />
+					<spot x="1154.062" y="705.0267" z="1533.8483" />
+					<spot x="1139.0751" y="705.49255" z="1533.8483" />
+					<spot x="1161.9756" y="729.04456" z="1533.8483" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="ALPINE_TEMPLE">
+				<!-- Mirage Dance -->
+				<spawn npc_id="802895" handler="FLAG">
+					<spot x="1147.7898" y="720.5032" z="1534.349" h="5" />
+				</spawn>
+				<!-- Artifact Protector -->
+				<spawn npc_id="277933" handler="BOSS">
+					<spot x="1154.3522" y="720.61804" z="1534.3214" />
+				</spawn>
+				<!-- Mirage Dance (Artifact Core) -->
+				<spawn npc_id="731099" handler="OUTRIDER">
+					<spot x="1147.8323" y="720.4091" z="1534.3485" static_id="22" />
+				</spawn>
+				<!-- Artifact Warcaptain -->
+				<spawn npc_id="277787" respawn_time="900" handler="SENTINEL">
+					<spot x="1152.9065" y="725.8461" z="1533.8483" />
+					<spot x="1142.3563" y="715.262" z="1533.8483" />
+				</spawn>
+				<!-- Artifact Warmage -->
+				<spawn npc_id="277792" respawn_time="900" handler="SENTINEL">
+					<spot x="1142.694" y="725.81226" z="1533.8483" />
+					<spot x="1152.6805" y="715.0458" z="1533.8483" />
+				</spawn>
+				<!-- Artifact Master Tracker -->
+				<spawn npc_id="277797" respawn_time="900" handler="SENTINEL">
+					<spot x="1133.4171" y="711.21704" z="1533.8483" />
+					<spot x="1157.2905" y="734.76953" z="1533.8483" />
+					<spot x="1133.2675" y="728.8004" z="1533.8483" />
+					<spot x="1160.4918" y="708.9753" z="1533.8483" />
+				</spawn>
+				<!-- Artifact Master Physician -->
+				<spawn npc_id="277802" respawn_time="900" handler="SENTINEL">
+					<spot x="1139.412" y="734.8884" z="1533.8483" />
+					<spot x="1154.062" y="705.0267" z="1533.8483" />
+					<spot x="1139.0751" y="705.49255" z="1533.8483" />
+					<spot x="1161.9756" y="729.04456" z="1533.8483" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="GRANDWEIR_TEMPLE">
+				<!-- Mirage Dance -->
+				<spawn npc_id="802896" handler="FLAG">
+					<spot x="1147.7898" y="720.5032" z="1534.349" h="5" />
+				</spawn>
+				<!-- Artifact Protector -->
+				<spawn npc_id="277934" handler="BOSS">
+					<spot x="1154.3522" y="720.61804" z="1534.3214" />
+				</spawn>
+				<!-- Mirage Dance (Artifact Core) -->
+				<spawn npc_id="731131" handler="OUTRIDER">
+					<spot x="1147.8323" y="720.4091" z="1534.3485" static_id="22" />
+				</spawn>
+				<!-- Artifact Warcaptain -->
+				<spawn npc_id="277788" respawn_time="900" handler="SENTINEL">
+					<spot x="1152.9065" y="725.8461" z="1533.8483" />
+					<spot x="1142.3563" y="715.262" z="1533.8483" />
+				</spawn>
+				<!-- Artifact Warmage -->
+				<spawn npc_id="277793" respawn_time="900" handler="SENTINEL">
+					<spot x="1142.694" y="725.81226" z="1533.8483" />
+					<spot x="1152.6805" y="715.0458" z="1533.8483" />
+				</spawn>
+				<!-- Artifact Master Tracker -->
+				<spawn npc_id="277798" respawn_time="900" handler="SENTINEL">
+					<spot x="1133.4171" y="711.21704" z="1533.8483" />
+					<spot x="1157.2905" y="734.76953" z="1533.8483" />
+					<spot x="1133.2675" y="728.8004" z="1533.8483" />
+					<spot x="1160.4918" y="708.9753" z="1533.8483" />
+				</spawn>
+				<!-- Artifact Master Physician -->
+				<spawn npc_id="277803" respawn_time="900" handler="SENTINEL">
+					<spot x="1139.412" y="734.8884" z="1533.8483" />
+					<spot x="1154.062" y="705.0267" z="1533.8483" />
+					<spot x="1139.0751" y="705.49255" z="1533.8483" />
+					<spot x="1161.9756" y="729.04456" z="1533.8483" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="BALAUR">
+				<!-- Mirage Dance -->
+				<spawn npc_id="802912" handler="FLAG">
+					<spot x="1147.7898" y="720.5032" z="1534.349" h="5" />
+				</spawn>
+				<!-- Ahserion Artifact Protector -->
+				<spawn npc_id="880065" handler="BOSS">
+					<spot x="1154.3522" y="720.61804" z="1534.3214" />
+				</spawn>
+				<!-- Ahserion Artifact Dreadcaptain -->
+				<spawn npc_id="277809" respawn_time="900" handler="SENTINEL">
+					<spot x="1152.9065" y="725.8461" z="1533.8483" />
+					<spot x="1142.3563" y="715.262" z="1533.8483" />
+				</spawn>
+				<!-- Ahserion Artifact Augurur -->
+				<spawn npc_id="277810" respawn_time="900" handler="SENTINEL">
+					<spot x="1142.694" y="725.81226" z="1533.8483" />
+					<spot x="1152.6805" y="715.0458" z="1533.8483" />
+				</spawn>
+				<!-- Ahserion Artifact Triaris -->
+				<spawn npc_id="277811" respawn_time="900" handler="SENTINEL">
+					<spot x="1133.4171" y="711.21704" z="1533.8483" />
+					<spot x="1157.2905" y="734.76953" z="1533.8483" />
+					<spot x="1133.2675" y="728.8004" z="1533.8483" />
+					<spot x="1160.4918" y="708.9753" z="1533.8483" />
+				</spawn>
+				<!-- Ahserion Artifact Master Medic -->
+				<spawn npc_id="277812" respawn_time="900" handler="SENTINEL">
+					<spot x="1139.412" y="734.8884" z="1533.8483" />
+					<spot x="1154.062" y="705.0267" z="1533.8483" />
+					<spot x="1139.0751" y="705.49255" z="1533.8483" />
+					<spot x="1161.9756" y="729.04456" z="1533.8483" />
+				</spawn>
+			</occupier_template>
+		</base_spawn>
+		<!-- Chaos Wind SW -->
+		<base_spawn id="4228">
+			<occupier_template occupier="PEACE">
+				<!-- Chaos Wind -->
+				<spawn npc_id="802935" handler="FLAG">
+					<spot x="1236.9615" y="626.565" z="1494.4088" h="5" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="BELUS">
+				<!-- Chaos Wind -->
+				<spawn npc_id="802914" handler="FLAG">
+					<spot x="1236.9615" y="626.565" z="1494.4088" h="5" />
+				</spawn>
+				<!-- Artifact Protector -->
+				<spawn npc_id="277995" handler="BOSS">
+					<spot x="1243.3698" y="626.53394" z="1494.3818" />
+				</spawn>
+				<!-- Chaos Wind (Artifact Core) -->
+				<spawn npc_id="730988" handler="OUTRIDER">
+					<spot x="1236.876" y="626.5385" z="1494.4098" static_id="17" />
+				</spawn>
+				<!-- Artifact Warcaptain -->
+				<spawn npc_id="277784" respawn_time="900">
+					<spot x="1241.9839" y="631.52386" z="1493.91" />
+					<spot x="1231.758" y="621.50037" z="1493.91" />
+				</spawn>
+				<!-- Artifact Warmage -->
+				<spawn npc_id="277789" respawn_time="900">
+					<spot x="1231.8429" y="631.5716" z="1493.91" />
+					<spot x="1241.4307" y="621.1669" z="1493.91" />
+				</spawn>
+				<!-- Artifact Master Tracker -->
+				<spawn npc_id="277794" respawn_time="900">
+					<spot x="1221.8391" y="635.07947" z="1493.91" />
+					<spot x="1249.9957" y="616.7238" z="1493.91" />
+					<spot x="1245.4916" y="640.50854" z="1493.91" />
+					<spot x="1221.7985" y="615.40625" z="1493.91" />
+				</spawn>
+				<!-- Artifact Master Physician -->
+				<spawn npc_id="277799" respawn_time="900">
+					<spot x="1244.8472" y="611.90405" z="1493.91" />
+					<spot x="1250.405" y="635.61255" z="1493.91" />
+					<spot x="1226.4987" y="640.9197" z="1493.91" />
+					<spot x="1227.2834" y="610.5632" z="1493.91" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="IVY_TEMPLE">
+				<!-- Chaos Wind -->
+				<spawn npc_id="802915" handler="FLAG">
+					<spot x="1236.9615" y="626.565" z="1494.4088" h="5" />
+				</spawn>
+				<!-- Artifact Protector -->
+				<spawn npc_id="277996" handler="BOSS">
+					<spot x="1243.3698" y="626.53394" z="1494.3818" />
+				</spawn>
+				<!-- Chaos Wind (Artifact Core) -->
+				<spawn npc_id="731036" handler="OUTRIDER">
+					<spot x="1236.876" y="626.5385" z="1494.4098" static_id="17" />
+				</spawn>
+				<!-- Artifact Warcaptain -->
+				<spawn npc_id="277785" respawn_time="900">
+					<spot x="1241.9839" y="631.52386" z="1493.91" />
+					<spot x="1231.758" y="621.50037" z="1493.91" />
+				</spawn>
+				<!-- Artifact Warmage -->
+				<spawn npc_id="277790" respawn_time="900">
+					<spot x="1231.8429" y="631.5716" z="1493.91" />
+					<spot x="1241.4307" y="621.1669" z="1493.91" />
+				</spawn>
+				<!-- Artifact Master Tracker -->
+				<spawn npc_id="277795" respawn_time="900">
+					<spot x="1221.8391" y="635.07947" z="1493.91" />
+					<spot x="1249.9957" y="616.7238" z="1493.91" />
+					<spot x="1245.4916" y="640.50854" z="1493.91" />
+					<spot x="1221.7985" y="615.40625" z="1493.91" />
+				</spawn>
+				<!-- Artifact Master Physician -->
+				<spawn npc_id="277800" respawn_time="900">
+					<spot x="1244.8472" y="611.90405" z="1493.91" />
+					<spot x="1250.405" y="635.61255" z="1493.91" />
+					<spot x="1226.4987" y="640.9197" z="1493.91" />
+					<spot x="1227.2834" y="610.5632" z="1493.91" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="HIGHLAND_TEMPLE">
+				<!-- Chaos Wind -->
+				<spawn npc_id="802916" handler="FLAG">
+					<spot x="1236.9615" y="626.565" z="1494.4088" h="5" />
+				</spawn>
+				<!-- Artifact Protector -->
+				<spawn npc_id="277997" handler="BOSS">
+					<spot x="1243.3698" y="626.53394" z="1494.3818" />
+				</spawn>
+				<!-- Chaos Wind (Artifact Core) -->
+				<spawn npc_id="731068" handler="OUTRIDER">
+					<spot x="1236.876" y="626.5385" z="1494.4098" static_id="17" />
+				</spawn>
+				<!-- Artifact Warcaptain -->
+				<spawn npc_id="277786" respawn_time="900">
+					<spot x="1241.9839" y="631.52386" z="1493.91" />
+					<spot x="1231.758" y="621.50037" z="1493.91" />
+				</spawn>
+				<!-- Artifact Warmage -->
+				<spawn npc_id="277791" respawn_time="900">
+					<spot x="1231.8429" y="631.5716" z="1493.91" />
+					<spot x="1241.4307" y="621.1669" z="1493.91" />
+				</spawn>
+				<!-- Artifact Master Tracker -->
+				<spawn npc_id="277796" respawn_time="900">
+					<spot x="1221.8391" y="635.07947" z="1493.91" />
+					<spot x="1249.9957" y="616.7238" z="1493.91" />
+					<spot x="1245.4916" y="640.50854" z="1493.91" />
+					<spot x="1221.7985" y="615.40625" z="1493.91" />
+				</spawn>
+				<!-- Artifact Master Physician -->
+				<spawn npc_id="277801" respawn_time="900">
+					<spot x="1244.8472" y="611.90405" z="1493.91" />
+					<spot x="1250.405" y="635.61255" z="1493.91" />
+					<spot x="1226.4987" y="640.9197" z="1493.91" />
+					<spot x="1227.2834" y="610.5632" z="1493.91" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="ALPINE_TEMPLE">
+				<!-- Chaos Wind -->
+				<spawn npc_id="802917" handler="FLAG">
+					<spot x="1236.9615" y="626.565" z="1494.4088" h="5" />
+				</spawn>
+				<!-- Artifact Protector -->
+				<spawn npc_id="277998" handler="BOSS">
+					<spot x="1243.3698" y="626.53394" z="1494.3818" />
+				</spawn>
+				<!-- Chaos Wind (Artifact Core) -->
+				<spawn npc_id="731100" handler="OUTRIDER">
+					<spot x="1236.876" y="626.5385" z="1494.4098" static_id="17" />
+				</spawn>
+				<!-- Artifact Warcaptain -->
+				<spawn npc_id="277787" respawn_time="900">
+					<spot x="1241.9839" y="631.52386" z="1493.91" />
+					<spot x="1231.758" y="621.50037" z="1493.91" />
+				</spawn>
+				<!-- Artifact Warmage -->
+				<spawn npc_id="277792" respawn_time="900">
+					<spot x="1231.8429" y="631.5716" z="1493.91" />
+					<spot x="1241.4307" y="621.1669" z="1493.91" />
+				</spawn>
+				<!-- Artifact Master Tracker -->
+				<spawn npc_id="277797" respawn_time="900">
+					<spot x="1221.8391" y="635.07947" z="1493.91" />
+					<spot x="1249.9957" y="616.7238" z="1493.91" />
+					<spot x="1245.4916" y="640.50854" z="1493.91" />
+					<spot x="1221.7985" y="615.40625" z="1493.91" />
+				</spawn>
+				<!-- Artifact Master Physician -->
+				<spawn npc_id="277802" respawn_time="900">
+					<spot x="1244.8472" y="611.90405" z="1493.91" />
+					<spot x="1250.405" y="635.61255" z="1493.91" />
+					<spot x="1226.4987" y="640.9197" z="1493.91" />
+					<spot x="1227.2834" y="610.5632" z="1493.91" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="GRANDWEIR_TEMPLE">
+				<!-- Chaos Wind -->
+				<spawn npc_id="802918" handler="FLAG">
+					<spot x="1236.9615" y="626.565" z="1494.4088" h="5" />
+				</spawn>
+				<!-- Artifact Protector -->
+				<spawn npc_id="277999" handler="BOSS">
+					<spot x="1243.3698" y="626.53394" z="1494.3818" />
+				</spawn>
+				<!-- Chaos Wind (Artifact Core) -->
+				<spawn npc_id="731132" handler="OUTRIDER">
+					<spot x="1236.876" y="626.5385" z="1494.4098" static_id="17" />
+				</spawn>
+				<!-- Artifact Warcaptain -->
+				<spawn npc_id="277788" respawn_time="900">
+					<spot x="1241.9839" y="631.52386" z="1493.91" />
+					<spot x="1231.758" y="621.50037" z="1493.91" />
+				</spawn>
+				<!-- Artifact Warmage -->
+				<spawn npc_id="277793" respawn_time="900">
+					<spot x="1231.8429" y="631.5716" z="1493.91" />
+					<spot x="1241.4307" y="621.1669" z="1493.91" />
+				</spawn>
+				<!-- Artifact Master Tracker -->
+				<spawn npc_id="277798" respawn_time="900">
+					<spot x="1221.8391" y="635.07947" z="1493.91" />
+					<spot x="1249.9957" y="616.7238" z="1493.91" />
+					<spot x="1245.4916" y="640.50854" z="1493.91" />
+					<spot x="1221.7985" y="615.40625" z="1493.91" />
+				</spawn>
+				<!-- Artifact Master Physician -->
+				<spawn npc_id="277803" respawn_time="900">
+					<spot x="1244.8472" y="611.90405" z="1493.91" />
+					<spot x="1250.405" y="635.61255" z="1493.91" />
+					<spot x="1226.4987" y="640.9197" z="1493.91" />
+					<spot x="1227.2834" y="610.5632" z="1493.91" />
+				</spawn>
+			</occupier_template>
+			<occupier_template occupier="BALAUR">
+				<!-- Chaos Wind -->
+				<spawn npc_id="802934" handler="FLAG">
+					<spot x="1236.9615" y="626.565" z="1494.4088" h="5" />
+				</spawn>
+				<!-- Ahserion Artifact Protector -->
+				<spawn npc_id="880066" handler="BOSS">
+					<spot x="1243.3698" y="626.53394" z="1494.3818" />
+				</spawn>
+				<!-- Ahserion Artifact Dreadcaptain -->
+				<spawn npc_id="277809" respawn_time="900" handler="SENTINEL">
+					<spot x="1241.9839" y="631.52386" z="1493.91" />
+					<spot x="1231.758" y="621.50037" z="1493.91" />
+				</spawn>
+				<!-- Ahserion Artifact Augurur -->
+				<spawn npc_id="277810" respawn_time="900" handler="SENTINEL">
+					<spot x="1231.8429" y="631.5716" z="1493.91" />
+					<spot x="1241.4307" y="621.1669" z="1493.91" />
+				</spawn>
+				<!-- Ahserion Artifact Triaris -->
+				<spawn npc_id="277811" respawn_time="900" handler="SENTINEL">
+					<spot x="1221.8391" y="635.07947" z="1493.91" />
+					<spot x="1249.9957" y="616.7238" z="1493.91" />
+					<spot x="1245.4916" y="640.50854" z="1493.91" />
+					<spot x="1221.7985" y="615.40625" z="1493.91" />
+				</spawn>
+				<!-- Ahserion Artifact Master Medic -->
+				<spawn npc_id="277812" respawn_time="900" handler="SENTINEL">
+					<spot x="1244.8472" y="611.90405" z="1493.91" />
+					<spot x="1250.405" y="635.61255" z="1493.91" />
+					<spot x="1226.4987" y="640.9197" z="1493.91" />
+					<spot x="1227.2834" y="610.5632" z="1493.91" />
+				</spawn>
+			</occupier_template>
+		</base_spawn>
+	</spawn_map>
+</spawns>

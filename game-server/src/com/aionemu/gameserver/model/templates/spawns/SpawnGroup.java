@@ -1,14 +1,11 @@
 package com.aionemu.gameserver.model.templates.spawns;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.taskmanager.AbstractLockManager;
 import com.aionemu.commons.utils.Rnd;
-import com.aionemu.gameserver.model.Race;
+import com.aionemu.gameserver.model.base.BaseOccupier;
 import com.aionemu.gameserver.model.siege.SiegeModType;
 import com.aionemu.gameserver.model.siege.SiegeRace;
 import com.aionemu.gameserver.model.templates.event.EventTemplate;
@@ -24,49 +21,43 @@ import com.aionemu.gameserver.spawnengine.SpawnHandlerType;
 /**
  * @author xTz, Rolandas
  */
-public class SpawnGroup extends AbstractLockManager {
+public class SpawnGroup {
 
-	private int worldId;
-	private int npcId;
-	private int pool;
-	private byte difficultId;
-	private TemporarySpawn temporarySpawn;
-	private int respawnTime;
-	private SpawnHandlerType handlerType;
-	private List<SpawnTemplate> spots;
-	private HashMap<Integer, HashMap<SpawnTemplate, Boolean>> poolUsedTemplates;
-	private EventTemplate eventTemplate;
+	private final int worldId;
+	private final int npcId;
+	private final int pool;
+	private final int respawnTime;
+	private final byte difficultId;
+	private final SpawnHandlerType handlerType;
+	private final TemporarySpawn temporarySpawn;
+	private final List<SpawnTemplate> spots;
+	private final Map<Integer, Set<SpawnTemplate>> poolUsedTemplates;
+	private final EventTemplate eventTemplate;
 
-	public SpawnGroup(int worldId, int npcId, int respawnTime) {
-		this.worldId = worldId;
-		this.npcId = npcId;
-		this.respawnTime = respawnTime;
-		this.spots = new ArrayList<>(1);
+	public SpawnGroup(int worldId, int npcId, int respawnTime, EventTemplate eventTemplate) {
+		this(worldId, npcId, 0, respawnTime, (byte) 0, null, null, new ArrayList<>(1), eventTemplate);
 	}
 
 	public SpawnGroup(int worldId, Spawn spawn) {
-		this.worldId = worldId;
-		initializing(spawn);
+		this(worldId, spawn, new ArrayList<>(spawn.getSpawnSpotTemplates().size()));
 		for (SpawnSpotTemplate template : spawn.getSpawnSpotTemplates()) {
 			SpawnTemplate spawnTemplate = new SpawnTemplate(this, template);
 			spots.add(spawnTemplate);
 		}
 	}
 
-	public SpawnGroup(int worldId, Spawn spawn, int id, Race race) {
-		this.worldId = worldId;
-		initializing(spawn);
+	public SpawnGroup(int worldId, Spawn spawn, int id, BaseOccupier occupier) {
+		this(worldId, spawn, new ArrayList<>(spawn.getSpawnSpotTemplates().size()));
 		for (SpawnSpotTemplate template : spawn.getSpawnSpotTemplates()) {
 			BaseSpawnTemplate spawnTemplate = new BaseSpawnTemplate(this, template);
 			spawnTemplate.setId(id);
-			spawnTemplate.setBaseRace(race);
+			spawnTemplate.setOccupier(occupier);
 			spots.add(spawnTemplate);
 		}
 	}
 
 	public SpawnGroup(int worldId, Spawn spawn, int id) {
-		this.worldId = worldId;
-		initializing(spawn);
+		this(worldId, spawn, new ArrayList<>(spawn.getSpawnSpotTemplates().size()));
 		for (SpawnSpotTemplate template : spawn.getSpawnSpotTemplates()) {
 			RiftSpawnTemplate spawnTemplate = new RiftSpawnTemplate(this, template);
 			spawnTemplate.setId(id);
@@ -75,8 +66,7 @@ public class SpawnGroup extends AbstractLockManager {
 	}
 
 	public SpawnGroup(int worldId, Spawn spawn, int id, VortexStateType type) {
-		this.worldId = worldId;
-		initializing(spawn);
+		this(worldId, spawn, new ArrayList<>(spawn.getSpawnSpotTemplates().size()));
 		for (SpawnSpotTemplate template : spawn.getSpawnSpotTemplates()) {
 			VortexSpawnTemplate spawnTemplate = new VortexSpawnTemplate(this, template);
 			spawnTemplate.setId(id);
@@ -86,8 +76,7 @@ public class SpawnGroup extends AbstractLockManager {
 	}
 
 	public SpawnGroup(int worldId, Spawn spawn, int siegeId, SiegeRace race, SiegeModType mod) {
-		this.worldId = worldId;
-		initializing(spawn);
+		this(worldId, spawn, new ArrayList<>(spawn.getSpawnSpotTemplates().size()));
 		for (SpawnSpotTemplate template : spawn.getSpawnSpotTemplates()) {
 			SiegeSpawnTemplate spawnTemplate = new SiegeSpawnTemplate(siegeId, race, mod, this, template);
 			spots.add(spawnTemplate);
@@ -98,8 +87,7 @@ public class SpawnGroup extends AbstractLockManager {
 	 * For Ahserion's Flight
 	 */
 	public SpawnGroup(int worldId, Spawn spawn, int stage, PanesterraFaction faction) {
-		this.worldId = worldId;
-		initializing(spawn);
+		this(worldId, spawn, new ArrayList<>(spawn.getSpawnSpotTemplates().size()));
 		for (SpawnSpotTemplate template : spawn.getSpawnSpotTemplates()) {
 			AhserionsFlightSpawnTemplate ahserionTemplate = new AhserionsFlightSpawnTemplate(this, template);
 			ahserionTemplate.setStage(stage);
@@ -108,18 +96,22 @@ public class SpawnGroup extends AbstractLockManager {
 		}
 	}
 
-	private void initializing(Spawn spawn) {
-		temporarySpawn = spawn.getTemporarySpawn();
-		respawnTime = spawn.getRespawnTime();
-		pool = spawn.getPool();
-		npcId = spawn.getNpcId();
-		handlerType = spawn.getSpawnHandlerType();
-		difficultId = spawn.getDifficultId();
-		if (hasPool())
-			poolUsedTemplates = new HashMap<>();
-		spots = new ArrayList<>(spawn.getSpawnSpotTemplates().size());
-		if (spawn.isEventSpawn())
-			eventTemplate = spawn.getEventTemplate();
+	private SpawnGroup(int worldId, Spawn spawn, List<SpawnTemplate> spots) {
+		this(worldId, spawn.getNpcId(), spawn.getPool(), spawn.getRespawnTime(), spawn.getDifficultId(), spawn.getSpawnHandlerType(), spawn.getTemporarySpawn(), spots, spawn.getEventTemplate());
+	}
+
+	private SpawnGroup(int worldId, int npcId, int pool, int respawnTime, byte difficultId, SpawnHandlerType handlerType, TemporarySpawn temporarySpawn,
+		List<SpawnTemplate> spots, EventTemplate eventTemplate) {
+		this.worldId = worldId;
+		this.npcId = npcId;
+		this.pool = pool;
+		this.respawnTime = respawnTime;
+		this.difficultId = difficultId;
+		this.handlerType = handlerType;
+		this.temporarySpawn = temporarySpawn;
+		this.spots = spots;
+		this.poolUsedTemplates = hasPool() ? new HashMap<>() : Collections.emptyMap();
+		this.eventTemplate = eventTemplate;
 	}
 
 	public List<SpawnTemplate> getSpawnTemplates() {
@@ -127,11 +119,8 @@ public class SpawnGroup extends AbstractLockManager {
 	}
 
 	public void addSpawnTemplate(SpawnTemplate spawnTemplate) {
-		super.writeLock();
-		try {
+		synchronized (spots) {
 			spots.add(spawnTemplate);
-		} finally {
-			super.writeUnlock();
 		}
 	}
 
@@ -171,71 +160,31 @@ public class SpawnGroup extends AbstractLockManager {
 		return handlerType;
 	}
 
-	public SpawnTemplate getRndTemplate(int instanceId) {
-		final List<SpawnTemplate> allTemplates = spots;
-		List<SpawnTemplate> templates = new ArrayList<>();
-		super.readLock();
-		try {
-			for (SpawnTemplate template : allTemplates) {
-				if (!isTemplateUsed(instanceId, template)) {
-					templates.add(template);
-				}
+	public SpawnTemplate reserveRandomFreePoolSpot(int instanceId) {
+		synchronized (poolUsedTemplates) {
+			Set<SpawnTemplate> occupiedSpots = poolUsedTemplates.computeIfAbsent(instanceId, _ -> new HashSet<>(pool));
+			SpawnTemplate freeSpot = Rnd.get(spots.stream().filter(spot -> !occupiedSpots.contains(spot)).toList());
+			if (freeSpot == null) {
+				LoggerFactory.getLogger(SpawnGroup.class).warn("All spots are used, could not get random spot for npcId: " + npcId + ", worldId: " + worldId);
+				return null;
 			}
-		} finally {
-			super.readUnlock();
-		}
-		if (templates.isEmpty()) {
-			LoggerFactory.getLogger(SpawnGroup.class).warn("All spots are used, could not get random spot for npcId: " + npcId + ", worldId: " + worldId);
-			return null;
-		}
-		SpawnTemplate spawnTemplate = Rnd.get(templates);
-		setTemplateUse(instanceId, spawnTemplate, true);
-		return spawnTemplate;
-	}
-
-	public void setTemplateUse(int instanceId, SpawnTemplate template, boolean isUsed) {
-		super.writeLock();
-		try {
-			HashMap<SpawnTemplate, Boolean> states = poolUsedTemplates.get(instanceId);
-			if (states == null) {
-				states = new HashMap<>();
-				poolUsedTemplates.put(instanceId, states);
-			}
-			states.put(template, isUsed);
-		} finally {
-			super.writeUnlock();
+			occupiedSpots.add(freeSpot);
+			return freeSpot;
 		}
 	}
 
-	public boolean isTemplateUsed(int instanceId, SpawnTemplate template) {
-		super.readLock();
-		try {
-			HashMap<SpawnTemplate, Boolean> states = poolUsedTemplates.get(instanceId);
-			if (states == null)
-				return false;
-			Boolean state = states.get(template);
-			if (state == null)
-				return false;
-			return state;
-		} finally {
-			super.readUnlock();
+	public void resetPoolSpot(int instanceId, SpawnTemplate template) {
+		synchronized (poolUsedTemplates) {
+			poolUsedTemplates.getOrDefault(instanceId, Collections.emptySet()).remove(template);
 		}
 	}
 
 	/**
 	 * Call it before each randomization to unset all template use.
 	 */
-	public void resetTemplates(int instanceId) {
-		HashMap<SpawnTemplate, Boolean> states = poolUsedTemplates.get(instanceId);
-		if (states == null)
-			return;
-		super.writeLock();
-		try {
-			for (SpawnTemplate template : states.keySet()) {
-				states.put(template, false);
-			}
-		} finally {
-			super.writeUnlock();
+	public void resetPoolSpots(int instanceId) {
+		synchronized (poolUsedTemplates) {
+			poolUsedTemplates.getOrDefault(instanceId, Collections.emptySet()).clear();
 		}
 	}
 

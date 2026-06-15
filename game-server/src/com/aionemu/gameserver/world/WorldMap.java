@@ -5,7 +5,10 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Consumer;
 
+import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
+import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.templates.world.WorldMapTemplate;
 import com.aionemu.gameserver.world.zone.ZoneAttributes;
 
@@ -16,9 +19,9 @@ import com.aionemu.gameserver.world.zone.ZoneAttributes;
  */
 public class WorldMap implements Iterable<WorldMapInstance> {
 
-	private WorldMapTemplate worldMapTemplate;
-	private AtomicInteger nextInstanceId = new AtomicInteger(0);
-	private Map<Integer, WorldMapInstance> instances = new ConcurrentHashMap<>();
+	private final WorldMapTemplate worldMapTemplate;
+	private final AtomicInteger nextInstanceId = new AtomicInteger();
+	private final Map<Integer, WorldMapInstance> instances = new ConcurrentHashMap<>();
 	private int worldOptions;
 
 	public WorldMap(WorldMapTemplate worldMapTemplate) {
@@ -26,7 +29,10 @@ public class WorldMap implements Iterable<WorldMapInstance> {
 		this.worldOptions = worldMapTemplate.getFlags();
 
 		for (int i = 1; i <= getInstanceCount(); i++) {
-			WorldMapInstanceFactory.createWorldMapInstance(this, 0);
+			if (isInstanceType()) // default instances are inaccessible but its handler methods are sometimes called via MainWorldMapInstance, e.g. on relog
+				WorldMapInstanceFactory.createWorldMapInstance(this, 0, GeneralInstanceHandler::new, 0);
+			else
+				WorldMapInstanceFactory.createWorldMapInstance(this, 0);
 		}
 	}
 
@@ -201,5 +207,9 @@ public class WorldMap implements Iterable<WorldMapInstance> {
 	 */
 	public Collection<Integer> getAvailableInstanceIds() {
 		return instances.keySet();
+	}
+
+	public void forEachObject(Consumer<VisibleObject> consumer) {
+		instances.values().forEach(instance -> instance.forEachObject(consumer));
 	}
 }

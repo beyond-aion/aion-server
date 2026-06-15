@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../spawns.xsd">
 	<spawn_map map_id="600090000">
-		<base_spawn id="6090"> 
-			<simple_race race="ELYOS">
+		<base_spawn id="6090">
+			<occupier_template occupier="ELYOS">
 				<!-- Stonereach Outpost(LDF5Fortress_v01_Flag_L) -->
 				<spawn npc_id="802365" handler="FLAG" respawn_time="295">
 					<spot x="243.81123" y="1167.27368" z="130.49934"/>
@@ -71,7 +71,7 @@
 					<spot x="648.08160" y="1368.96216" z="150.53748" h="60"/>
 					<spot x="608.21680" y="1369.91785" z="150.53748"/>
 				</spawn>
-				
+
 				<!-- Stonereach Outpost Chariot Depot(LDF5Fortress2_v01_Flag_L) -->
 				<spawn npc_id="802371" handler="MERCHANT" respawn_time="295">
 					<spot x="630.99011" y="1355.65759" z="150.41344"/>
@@ -104,8 +104,8 @@
 				<spawn npc_id="804524" handler="MERCHANT" respawn_time="295">
 					<spot x="242.672" y="1180.908" z="131.1318" static_id="202" />
 				</spawn>
-			</simple_race>
-			<simple_race race="ASMODIANS">
+			</occupier_template>
+			<occupier_template occupier="ASMODIANS">
 				<!-- Stonereach Outpost(LDF5Fortress_v01_Flag_D) -->
 				<spawn npc_id="802366" handler="FLAG" respawn_time="295">
 					<spot x="243.81123" y="1167.27368" z="130.49934"/>
@@ -204,8 +204,8 @@
 				<spawn npc_id="804525" handler="MERCHANT" respawn_time="295">
 					<spot x="242.672" y="1180.908" z="131.1318" static_id="202" />
 				</spawn>
-			</simple_race>
-			<simple_race race="NPC">
+			</occupier_template>
+			<occupier_template occupier="BALAUR">
 				<!-- Stonereach Outpost(LDF5Fortress_v01_Flag_Dr) -->
 				<spawn npc_id="802367" handler="FLAG" respawn_time="295">
 					<spot x="243.81123" y="1167.27368" z="130.49934"/>
@@ -281,10 +281,10 @@
 				<spawn npc_id="802373" handler="SENTINEL" respawn_time="295">
 					<spot x="630.99011" y="1355.65759" z="150.41344"/>
 				</spawn>
-			</simple_race>
-		</base_spawn>	
-		<base_spawn id="6091"> 
-			<simple_race race="ELYOS">
+			</occupier_template>
+		</base_spawn>
+		<base_spawn id="6091">
+			<occupier_template occupier="ELYOS">
 				<!-- Flamecrest Outpost(LDF5Fortress_v02_Flag_L) -->
 				<spawn npc_id="802368" handler="FLAG" respawn_time="295">
 					<spot x="1361.70569" y="1123.09595" z="185.23705"/>
@@ -376,8 +376,8 @@
 				<spawn npc_id="804526" handler="MERCHANT" respawn_time="295">
 					<spot x="1356.727" y="1109.768" z="186.9119" h="50" static_id="19" />
 				</spawn>
-			</simple_race>
-			<simple_race race="ASMODIANS">
+			</occupier_template>
+			<occupier_template occupier="ASMODIANS">
 				<!-- Flamecrest Outpost(LDF5Fortress_v02_Flag_D) -->
 				<spawn npc_id="802369" handler="FLAG" respawn_time="295">
 					<spot x="1361.70569" y="1123.09595" z="185.23705"/>
@@ -472,8 +472,8 @@
 				<spawn npc_id="804527" handler="MERCHANT" respawn_time="295">
 					<spot x="1356.727" y="1109.768" z="186.9119" h="50" static_id="19" />
 				</spawn>
-			</simple_race>
-			<simple_race race="NPC">
+			</occupier_template>
+			<occupier_template occupier="BALAUR">
 				<!-- Flamecrest Outpost(LDF5Fortress_v02_Flag_Dr) -->
 				<spawn npc_id="802370" handler="FLAG" respawn_time="295">
 					<spot x="1361.70569" y="1123.09595" z="185.23705"/>
@@ -545,7 +545,7 @@
 				<spawn npc_id="802376" handler="SENTINEL" respawn_time="295">
 					<spot x="932.84442" y="1228.99438" z="143.70779"/>
 				</spawn>
-			</simple_race>
+			</occupier_template>
 		</base_spawn>
 		</spawn_map>
 </spawns>

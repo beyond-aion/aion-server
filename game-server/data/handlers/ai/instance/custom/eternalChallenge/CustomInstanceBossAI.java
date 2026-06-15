@@ -35,7 +35,6 @@ import com.aionemu.gameserver.skillengine.condition.DpCondition;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.Skill;
-import com.aionemu.gameserver.skillengine.model.Skill.SkillMethod;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.skillengine.model.SkillType;
 import com.aionemu.gameserver.skillengine.properties.Properties.CastState;
@@ -205,7 +204,7 @@ public class CustomInstanceBossAI extends GeneralNpcAI {
 				if (isDPskill || !skillI.canUseSkill(CastState.CAST_START)
 					|| (skillI.getSkillTemplate().getType() == SkillType.MAGICAL && getEffectController().isAbnormalSet(AbnormalState.SILENCE))
 					|| (skillI.getSkillTemplate().getType() == SkillType.PHYSICAL && getEffectController().isAbnormalSet(AbnormalState.BIND))
-					|| skillI.getSkillMethod() == SkillMethod.CHARGE || skillI.isPointSkill()
+					|| skillI.getSkillTemplate().isCharge() || skillI.isPointSkill()
 					|| (cdID != -1 && getOwner().getSkillCoolDown(cdID) > System.currentTimeMillis()))
 					output.set(i, -1d); // -1 = minimum probability
 			}
@@ -253,10 +252,10 @@ public class CustomInstanceBossAI extends GeneralNpcAI {
 	private void adaptStats(Player player) {
 		PlayerGameStats pgs = player.getGameStats();
 		List<StatSetFunction> functions = new ArrayList<>();
-		functions.add(new StatSetFunction(StatEnum.EARTH_RESISTANCE, pgs.getMagicalDefenseFor(SkillElement.EARTH)));
-		functions.add(new StatSetFunction(StatEnum.FIRE_RESISTANCE, pgs.getMagicalDefenseFor(SkillElement.FIRE)));
-		functions.add(new StatSetFunction(StatEnum.WATER_RESISTANCE, pgs.getMagicalDefenseFor(SkillElement.WATER)));
-		functions.add(new StatSetFunction(StatEnum.WIND_RESISTANCE, pgs.getMagicalDefenseFor(SkillElement.WIND)));
+		functions.add(new StatSetFunction(StatEnum.EARTH_RESISTANCE, pgs.getElementalDefenseFor(SkillElement.EARTH)));
+		functions.add(new StatSetFunction(StatEnum.FIRE_RESISTANCE, pgs.getElementalDefenseFor(SkillElement.FIRE)));
+		functions.add(new StatSetFunction(StatEnum.WATER_RESISTANCE, pgs.getElementalDefenseFor(SkillElement.WATER)));
+		functions.add(new StatSetFunction(StatEnum.WIND_RESISTANCE, pgs.getElementalDefenseFor(SkillElement.WIND)));
 		functions.add(new StatSetFunction(StatEnum.ABNORMAL_RESISTANCE_ALL, pgs.getAbnormalResistance().getCurrent()));
 		functions.add(new StatSetFunction(StatEnum.ACCURACY, pgs.getAccuracy().getCurrent()));
 		functions.add(new StatSetFunction(StatEnum.AGILITY, pgs.getAgility().getCurrent()));

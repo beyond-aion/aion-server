@@ -14,7 +14,7 @@ public class SM_HDDBAN_CONTROL extends LsServerPacket {
 	private long time;
 
 	public SM_HDDBAN_CONTROL(BanAction action, String address, long time) {
-		super(14);
+		super(10);
 		this.action = action;
 		this.serial = address;
 		this.time = time;

@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.services.autogroup;
 
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.autogroup.AGPlayer;
 import com.aionemu.gameserver.model.autogroup.AutoGroupType;
 import com.aionemu.gameserver.model.autogroup.LookingForParty;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -79,7 +78,7 @@ public class AutoGroupUtility {
 	}
 
 	public static void sendSuccessfulRegistration(LookingForParty lfp, String leaderName, AutoGroupType agt, int maskId) {
-		for (int objectId : lfp.getMemberObjectIds()) {
+		for (int objectId : lfp.getMembers().keySet()) {
 			Player player = World.getInstance().getPlayer(objectId);
 			if (player != null) {
 				if (agt.isPeriodicInstance())
@@ -102,10 +101,5 @@ public class AutoGroupUtility {
 
 	public static boolean hasCoolDown(Player player, int worldId) {
 		return player.getPortalCooldownList().isPortalUseDisabled(worldId);
-	}
-
-	public static AGPlayer getNewAutoGroupPlayer(int objectId) {
-		Player player = World.getInstance().getPlayer(objectId);
-		return player != null ? new AGPlayer(player) : null;
 	}
 }

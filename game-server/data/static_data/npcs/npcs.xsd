@@ -134,7 +134,6 @@
 	</xs:simpleType>
 	<xs:simpleType name="SubDialogType">
 		<xs:restriction base="xs:string">
-			<xs:enumeration value="ALL_ALLOWED"/>
 			<xs:enumeration value="FORT_CAPTURE"/>
 			<xs:enumeration value="SKILL_ID"/>
 			<xs:enumeration value="ITEM_ID"/>
@@ -148,7 +147,7 @@
 			<xs:enumeration value="LEVEL"/>
 			<xs:enumeration value="LEVEL_LOW"/>
 			<xs:enumeration value="LEVEL_HIGH"/>
-			<xs:enumeration value="LEGION_DOMINION_NPC"/>	
+			<xs:enumeration value="LEGION_DOMINION_NPC"/>
 			<xs:enumeration value="TARGET_LEGION_DOMINION"/>
 			<xs:enumeration value="PACK_3"/>
 			<xs:enumeration value="PACK_4"/>

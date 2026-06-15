@@ -1077,6 +1077,7 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 
 	@Override
 	public void onLeaveInstance(Player player) {
+		super.onLeaveInstance(player);
 		CruciblePlayerReward reward = getPlayerReward(player.getObjectId());
 		if (reward != null)
 			reward.setPlayerLeave();

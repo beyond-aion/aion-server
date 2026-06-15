@@ -26,7 +26,10 @@ public class MPShieldEffect extends ShieldEffect {
 		AttackShieldObserver asObserver = new AttackShieldObserver(hitValueWithDelta, valueWithDelta, percent, effect, hitType, getType(), hitTypeProb,
 			mpValue);
 		effect.addObserver(effect.getEffected(), asObserver);
-		effect.getEffected().getEffectController().setUnderShield(true);
+	}
+
+	@Override
+	public void endEffect(Effect effect) {
 	}
 
 	@Override

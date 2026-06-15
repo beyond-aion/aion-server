@@ -26,7 +26,10 @@ public class ConvertHealEffect extends ShieldEffect {
 			hitTypeProb, 0, 0, type, 0);
 
 		effect.addObserver(effect.getEffected(), asObserver);
-		effect.getEffected().getEffectController().setUnderShield(true);
+	}
+
+	@Override
+	public void endEffect(Effect effect) {
 	}
 
 	@Override

@@ -99,20 +99,11 @@ public class SkillEngine {
 		return new Skill(template, creature, skillLevel, target, itemTemplate);
 	}
 
-	public ChargeSkill getChargeSkill(Player creature, int skillId, int skillLevel, VisibleObject firstTarget) {
-		return getChargeSkill(creature, skillId, skillLevel, firstTarget, null);
-	}
-
-	public ChargeSkill getChargeSkill(Player creature, int skillId, int skillLevel, VisibleObject firstTarget, ItemTemplate itemTemplate) {
+	public ChargeSkill getChargeSkill(Creature creature, int skillId, int skillLevel, int motionId, Skill startSkill) {
 		SkillTemplate template = DataManager.SKILL_DATA.getSkillTemplate(skillId);
-
 		if (template == null)
 			return null;
-
-		Creature target = null;
-		if (firstTarget instanceof Creature)
-			target = (Creature) firstTarget;
-		return new ChargeSkill(template, creature, skillLevel, target, itemTemplate);
+		return new ChargeSkill(template, creature, skillLevel, motionId, startSkill);
 	}
 
 	public PenaltySkill getPenaltySkill(Creature effector, int skillId, int skillLevel) {
@@ -122,7 +113,6 @@ public class SkillEngine {
 
 		return new PenaltySkill(template, effector, skillLevel);
 	}
-
 
 	public static SkillEngine getInstance() {
 		return skillEngine;
@@ -198,13 +188,15 @@ public class SkillEngine {
 	}
 
 	public Effect createCriticalEffect(Player attacker, Creature target, int skillId) {
+		if (target.getEffectController().isUnderNormalShield())
+			return null;
 		if (skillId != 0) {
 			SkillTemplate skillTemplate = DataManager.SKILL_DATA.getSkillTemplate(skillId);
 			if (skillTemplate.getType() == SkillType.MAGICAL) // magical skills do not stun
 				return null;
-			if (skillTemplate.hasAnyEffect(true, EffectType.PULLED, EffectType.STUMBLE, EffectType.STAGGER, EffectType.STUN,
-					EffectType.BACKDASH, EffectType.DASH, EffectType.MOVEBEHIND, EffectType.RANDOMMOVELOC, EffectType.RECALLINSTANT)
-					|| !skillTemplate.hasAnyEffect(EffectType.SKILLATKDRAININSTANT, EffectType.SKILLATTACKINSTANT))
+			if (skillTemplate.hasAnyEffect(true, EffectType.PULLED, EffectType.STUMBLE, EffectType.STAGGER, EffectType.STUN, EffectType.BACKDASH,
+				EffectType.DASH, EffectType.MOVEBEHIND, EffectType.RANDOMMOVELOC, EffectType.RECALLINSTANT)
+				|| !skillTemplate.hasAnyEffect(EffectType.SKILLATKDRAININSTANT, EffectType.SKILLATTACKINSTANT))
 				return null;
 		}
 

@@ -35663,9 +35663,7 @@
 		<npc_skill id="21527" lv="1" prob="25" cd="40000" />
 		<npc_skill id="21533" lv="1" prob="25" cd="40000" />
 		<npc_skill id="21529" lv="1" prob="40" max_hp="50" next_chain_id="1" next_skill_time="0" cd="120000" target="RANDOM" />
-		<npc_skill id="21530" lv="1" prob="100" chain_id="1" next_skill_time="10000" target="NONE">
-			<cond cond_type="SELECT_TARGET_AFFECTED_BY_SKILL" skill_id="21529" />
-		</npc_skill>
+		<npc_skill id="21530" lv="1" prob="100" chain_id="1" next_skill_time="10000" target="NONE" />
 		<npc_skill id="21531" lv="1" prob="70" min_hp="50" next_chain_id="2" next_skill_time="0" cd="40000" />
 		<npc_skill id="21532" lv="1" chain_id="2" prob="100" cd="10000" next_skill_time="10000" />
 
@@ -35913,14 +35911,10 @@
 		<npc_skill id="19135" lv="65" prob="25" />
 	</npc_skills>
 	<npc_skills npc_ids="237174">
-		<npc_skill id="19140" lv="85" prob="75" />
-		<npc_skill id="19148" lv="1" prob="55" />
-		<npc_skill id="19150" lv="90" prob="55" />
-		<npc_skill id="19155" lv="150" prob="55" />
-		<npc_skill id="19156" lv="250" prob="55" />
-		<npc_skill id="19160" lv="1" prob="55" />
-		<npc_skill id="19289" lv="65" prob="65" />
-		<npc_skill id="22717" lv="65" prob="75" />
+		<npc_skill id="22717" lv="65" prob="75" /><!-- High-speed Freeze -->
+		<npc_skill id="19009" lv="60" prob="100" /><!-- Wide Area Pull -->
+		<npc_skill id="19155" lv="60" prob="100" /><!-- Aether Storm -->
+		<npc_skill id="19134" lv="60" prob="100" cd="10000" /><!-- Arcane Thunderbolt -->
 	</npc_skills>
 	<npc_skills npc_ids="251001">
 		<npc_skill id="17829" lv="42" prob="25" />
@@ -62671,9 +62665,7 @@
 		<npc_skill id="21713" lv="65" prob="80" cd="25000" />
 		<npc_skill id="21714" lv="65" prob="80" cd="25000" />
 		<npc_skill id="21715" lv="65" prob="80" max_hp="50" prio="1" next_chain_id="1" next_skill_time="0" cd="30000" target="RANDOM" />
-		<npc_skill id="21716" lv="65" prob="100" chain_id="1" next_skill_time="7000" cd="20000" target="NONE">
-			<cond cond_type="SELECT_TARGET_AFFECTED_BY_SKILL" skill_id="21715" />
-		</npc_skill>
+		<npc_skill id="21716" lv="65" prob="100" chain_id="1" next_skill_time="7000" cd="20000" target="NONE" />
 		<npc_skill id="21717" lv="65" prob="80" cd="25000" />
 	</npc_skills>
 	<!-- Prime Benoid (sandworm) -->
@@ -63198,10 +63190,8 @@
 		<npc_skill id="21753" lv="65" prob="100" chain_id="3" next_chain_id="4" next_skill_time="9000" cd="20000" max_hp="75" />
 		<npc_skill id="21754" lv="65" prob="100" chain_id="4" next_skill_time="9000" cd="20000" max_hp="50" />
 		<npc_skill id="21758" lv="65" prob="60" cd="40000" />
-		<npc_skill id="21756" lv="65" prob="60" next_chain_id="1" next_skill_time="0" max_hp="25" cd="30000" target="RANDOM_EXCEPT_MOST_HATED" />
-		<npc_skill id="21757" lv="65" prob="100" chain_id="1" next_skill_time="8000" target="NONE">
-			<cond cond_type="SELECT_TARGET_AFFECTED_BY_SKILL" skill_id="21756" range="50" />
-		</npc_skill>
+		<npc_skill id="21756" lv="65" prob="60" next_chain_id="1" next_skill_time="0" max_hp="25" cd="30000" target="RANDOM_EXCEPT_CURRENT_TARGET" />
+		<npc_skill id="21757" lv="65" prob="100" chain_id="1" next_skill_time="8000" target="NONE" />
 		<npc_skill id="21759" lv="65" prob="60" cd="20000" max_hp="35" />
 		<!-- this skill spawns 855262, who use 21760 and despawn. -->
 		<npc_skill id="21755" lv="65" prob="70" cd="30000" max_hp="70">

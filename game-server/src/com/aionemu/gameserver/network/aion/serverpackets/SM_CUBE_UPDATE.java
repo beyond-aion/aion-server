@@ -45,7 +45,7 @@ public class SM_CUBE_UPDATE extends AionServerPacket {
 				break;
 			case LEGION_WAREHOUSE:
 				itemsCount = player.getLegion().getLegionWarehouse().size();
-				npcExpands = player.getLegion().getWarehouseLevel();
+				npcExpands = player.getLegion().getWarehouseExpansions();
 				break;
 		}
 

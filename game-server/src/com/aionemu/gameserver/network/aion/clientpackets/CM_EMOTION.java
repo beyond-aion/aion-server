@@ -154,11 +154,11 @@ public class CM_EMOTION extends AionClientPacket {
 				player.unsetState(CreatureState.RESTING);
 				break;
 			case CHAIR_SIT:
-				if (!player.isInState(CreatureState.WEAPON_EQUIPPED))
-					player.setState(CreatureState.CHAIR);
+				player.setState(CreatureState.CHAIR, true);
 				break;
 			case CHAIR_UP:
-				player.unsetState(CreatureState.CHAIR);
+				if (player.isInState(CreatureState.CHAIR))
+					player.setState(CreatureState.ACTIVE, true);
 				break;
 			case LAND_FLYTELEPORT:
 				player.getController().onFlyTeleportEnd();
@@ -207,7 +207,7 @@ public class CM_EMOTION extends AionClientPacket {
 					return;
 				}
 				player.setSprintMode(true);
-				player.getLifeStats().triggerFpReduceByCost(player.ride.getCostFp());
+				player.getLifeStats().triggerFpReduce();
 				break;
 			case END_SPRINT:
 				if (!player.isInPlayerMode(PlayerMode.RIDE) || !player.ride.canSprint() || !player.isInSprintMode()) {

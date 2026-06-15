@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.controllers.observer;
 
-import java.util.concurrent.atomic.AtomicBoolean;
-
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -14,7 +12,7 @@ import com.aionemu.gameserver.skillengine.model.Skill;
  */
 public class ActionObserver {
 
-	private AtomicBoolean used;
+	private boolean oneTimeUse = false;
 
 	private final ObserverType observerType;
 
@@ -23,11 +21,17 @@ public class ActionObserver {
 	}
 
 	public void makeOneTimeUse() {
-		used = new AtomicBoolean(false);
+		oneTimeUse = true;
 	}
 
-	public boolean tryUse() {
-		return used.compareAndSet(false, true);
+	public boolean isOneTimeUse() {
+		return oneTimeUse;
+	}
+
+	/**
+	 * Called when the observer was removed and no longer receives events
+	 */
+	public void onRemoved() {
 	}
 
 	public ObserverType getObserverType() {
@@ -62,7 +66,7 @@ public class ActionObserver {
 	public void boostSkillCost(Skill skill) {
 	}
 
-	public void died(Creature creature) {
+	public void died(Creature lastAttacker) {
 	}
 
 	public void dotattacked(Creature creature, Effect dotEffect) {

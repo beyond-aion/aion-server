@@ -13,9 +13,9 @@ public class NpcKnownList extends CreatureAwareKnownList {
 	}
 
 	@Override
-	public void doUpdate() {
+	public void update() {
 		if (owner.getPosition().isMapRegionActive())
-			super.doUpdate();
+			super.update();
 		else
 			clear(ObjectDeleteAnimation.FADE_OUT);
 	}

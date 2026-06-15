@@ -19,8 +19,6 @@ import com.aionemu.gameserver.model.templates.item.ItemAttackType;
 import com.aionemu.gameserver.model.templates.item.enums.ItemGroup;
 import com.aionemu.gameserver.model.templates.item.enums.ItemSubType;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_TARGET_SELECTED;
-import com.aionemu.gameserver.skillengine.change.Func;
 import com.aionemu.gameserver.skillengine.effect.*;
 import com.aionemu.gameserver.skillengine.effect.modifier.ActionModifier;
 import com.aionemu.gameserver.skillengine.model.Effect;
@@ -28,7 +26,6 @@ import com.aionemu.gameserver.skillengine.model.EffectReserved;
 import com.aionemu.gameserver.skillengine.model.EffectReserved.ResourceType;
 import com.aionemu.gameserver.skillengine.model.HitType;
 import com.aionemu.gameserver.skillengine.model.SkillType;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.stats.CalculationType;
 import com.aionemu.gameserver.utils.stats.StatFunctions;
 
@@ -65,6 +62,7 @@ public class AttackUtil {
 		float reduceRatio = 0;
 		switch (AttackStatus.getBaseStatus(status)) {
 			case DODGE:
+			case RESIST:
 				return;
 			case BLOCK:
 				if (attacked instanceof Player p) {
@@ -111,10 +109,16 @@ public class AttackUtil {
 		if (maxListIndex < attackResultList.size()) // should never happen but log just in case
 			LoggerFactory.getLogger(AttackUtil.class).warn("attackResultList has more elements than expected (" + attackResultList.size() + ")");
 		for (int i = 0; i < maxListIndex; i++) {
-			StatEnum defenseStat = element == SkillElement.NONE ? StatEnum.PHYSICAL_DEFENSE : StatEnum.MAGICAL_DEFEND;
-			float def = attacked.getGameStats().getPDef().getBonus() + StatFunctions.getMovementModifier(attacked, defenseStat,
-				defenseStat == StatEnum.PHYSICAL_DEFENSE ? attacked.getGameStats().getPDef().getBase() : attacked.getGameStats().getMDef().getBase());
-			float damage = (StatFunctions.adjustDamageByMovementModifier(attacker,attackResultList.get(i).getDamage()) - (def/10)) * (i == 0 ? mainMultiplier : offMultiplier);
+			float damageMultiplier = i == 0 ? mainMultiplier : offMultiplier;
+			boolean isPhysical = element == SkillElement.NONE;
+			StatEnum attackStat = isPhysical ? StatEnum.PHYSICAL_ATTACK : StatEnum.MAGICAL_ATTACK;
+			StatEnum defenseStat = isPhysical ? StatEnum.PHYSICAL_DEFENSE : StatEnum.MAGICAL_DEFEND;
+			float defenseBase = isPhysical ? attacked.getGameStats().getPDef().getBase() : attacked.getGameStats().getMDef().getBase();
+			float defenseBonus = isPhysical ? attacked.getGameStats().getPDef().getBonus() : attacked.getGameStats().getMDef().getBonus();
+			float defense = StatFunctions.adjustStatByMovementModifier(attacked, defenseStat, defenseBase) + defenseBonus;
+			float damage = attackResultList.get(i).getDamage() - (defense / 10);
+			damage *= damageMultiplier;
+			damage = StatFunctions.adjustStatByMovementModifier(attacker, attackStat, damage);
 			if (reduceRatio > 0) {
 				float dmgToReduce = damage - (damage * reduceRatio);
 				if (dmgToReduce > reduceMax) {
@@ -219,28 +223,21 @@ public class AttackUtil {
 		};
 	}
 
-	public static void calculateSkillResult(Effect effect, int skillDamage, EffectTemplate template, boolean ignoreShield) {
+	public static void calculateSkillResult(Effect effect, int skillDamage, DamageEffect template, boolean ignoreShield) {
 		Creature effector = effect.getEffector();
 		Creature effected = effect.getEffected();
 		// define values
 		ActionModifier modifier = template.getActionModifiers(effect);
 		SkillElement element = template.getElement();
-		Func func = template instanceof DamageEffect damageEffect ? damageEffect.getMode() : Func.ADD;
 		int randomDamageType = template instanceof SkillAttackInstantEffect skillAttackInstantEffect ? skillAttackInstantEffect.getRnddmg() : 0;
-		int critAddDmg = template.getCritAddDmg2() + template.getCritAddDmg1() * effect.getSkillLevel();
 		boolean useTemplateDmg = isUseTemplateDmg(effect, template);
 		boolean send = !(template instanceof DelayedSpellAttackInstantEffect) && !(template instanceof ProcAtkInstantEffect);
 		boolean shouldIncreaseByOneTimeBoost = !(template instanceof ProcAtkInstantEffect);
 
-		AttackStatus status;
-		switch (element) {
-			case NONE:
-				status = calculatePhysicalStatus(effector, effected, template, effect.getSkillLevel());
-				break;
-			default:
-				status = calculateMagicalStatus(effector, effected, template.getCritProbMod2(), true, effect.getSkillTemplate().isMcritApplied());
-				break;
-		}
+		AttackStatus status = switch (element) {
+			case NONE -> calculatePhysicalStatus(effector, effected, template, effect.getSkillLevel());
+			default -> calculateMagicalStatus(effector, effected, template.getCritProbMod2(), true, effect.getSkillTemplate().isMcritApplied());
+		};
 
 		int baseAttack = 0;
 		float bonus = 0;
@@ -248,7 +245,7 @@ public class AttackUtil {
 		List<AttackResult> weaponAttack = new ArrayList<>();
 		float damage = 0;
 		CalculationType[] calculationTypes = new CalculationType[] { CalculationType.SKILL };
-		if (effector instanceof Player p && p.getEquipment().hasDualWeaponEquipped(ItemSlot.LEFT_HAND))
+		if (effector instanceof Player p && p.getEquipment().isDualWeaponEquipped())
 			calculationTypes = ArrayUtils.add(calculationTypes, CalculationType.DUAL_WIELD);
 		if (!useTemplateDmg) {
 			if (effector instanceof SummonedObject && !(effector instanceof Servant)) {
@@ -289,11 +286,9 @@ public class AttackUtil {
 			damage += res.getExactDamage();
 		}
 		// add skill damage
-		if (func != null) {
-			switch (func) {
-				case ADD -> damage += skillDamage;
-				case PERCENT -> damage += baseAttack * skillDamage / 100f;
-			}
+		switch (template.getMode()) {
+			case ADD -> damage += skillDamage;
+			case PERCENT -> damage += baseAttack * skillDamage / 100f;
 		}
 
 		// add bonus damage
@@ -308,35 +303,35 @@ public class AttackUtil {
 			}
 		}
 
+		boolean isPhysical = element == SkillElement.NONE;
 		if (!useTemplateDmg) {
 			float damageMultiplier;
-			switch (element) {
-				case NONE -> {
-					damageMultiplier = effector.getObserveController().getBasePhysicalDamageMultiplier(true);
-					damage += bonus;
-				}
-				default -> {
-					damageMultiplier = shouldIncreaseByOneTimeBoost ? effector.getObserveController().getBaseMagicalDamageMultiplier() : 1f;
-					damage = StatFunctions.calculateMagicalSkillDamage(effector, effected, damage, (int) bonus, element, true, true);
-				}
+			if (isPhysical) {
+				damageMultiplier = effector.getObserveController().getBasePhysicalDamageMultiplier(true);
+				damage += bonus;
+			} else {
+				damageMultiplier = shouldIncreaseByOneTimeBoost ? effector.getObserveController().getBaseMagicalDamageMultiplier() : 1f;
+				damage = StatFunctions.calculateMagicalSkillDamage(effector, effected, damage, (int) bonus, template, true, true);
 			}
-			damage = StatFunctions.adjustDamageByMovementModifier(effector, damage);
+			if (template.shouldApplyAttackerMovementModifier()) {
+				damage = StatFunctions.adjustStatByMovementModifier(effector, isPhysical ? StatEnum.PHYSICAL_ATTACK : StatEnum.MAGICAL_ATTACK, damage);
+			}
 			damage *= damageMultiplier;
 		}
 
 		if (randomDamageType > 0)
 			damage = randomizeDamage(randomDamageType, damage);
 
-		damage = switch (status) {
-			case CRITICAL_BLOCK, CRITICAL_PARRY, CRITICAL -> calculateWeaponCritical(element, effected, damage, getWeaponGroup(effector, true), critAddDmg, element == SkillElement.NONE ?
-						StatEnum.PHYSICAL_CRITICAL_DAMAGE_REDUCE : StatEnum.MAGICAL_CRITICAL_DAMAGE_REDUCE, true);
-			default -> damage;
-		};
+		if (status.isCritical()) {
+			int critAddDmg = template.calculateCritAddDmg(effect);
+			StatEnum stat = element == SkillElement.NONE ? StatEnum.PHYSICAL_CRITICAL_DAMAGE_REDUCE : StatEnum.MAGICAL_CRITICAL_DAMAGE_REDUCE;
+			damage = calculateWeaponCritical(element, effected, damage, getWeaponGroup(effector, true), critAddDmg, stat, true);
+		}
 
-		if (element == SkillElement.NONE) {
-			float def = effected.getGameStats().getPDef().getBonus() + StatFunctions.getMovementModifier(effected, StatEnum.PHYSICAL_DEFENSE,
+		if (isPhysical) {
+			float def = effected.getGameStats().getPDef().getBonus() + StatFunctions.adjustStatByMovementModifier(effected, StatEnum.PHYSICAL_DEFENSE,
 					effected.getGameStats().getPDef().getBase());
-			damage -= def/10;
+			damage -= def / 10;
 		}
 
 		switch (AttackStatus.getBaseStatus(status)) {
@@ -348,7 +343,7 @@ public class AttackUtil {
 			damage = effector.getAi().modifyOwnerDamage(damage, effected, effect);
 		}
 
-		if (effect.getSkill() != null && effect.getSkill().getEffectedList().size() > 1 && template instanceof DamageEffect damageEffect && damageEffect.isShared()) {
+		if (effect.getSkill() != null && effect.getSkill().getEffectedList().size() > 1 && template.isShared()) {
 			damage /= effect.getSkill().getEffectedList().size();
 		}
 		damage = StatFunctions.adjustDamageByPvpOrPveModifiers(effector, effected, damage, effect.getPvpDamage(), useTemplateDmg, element);
@@ -396,36 +391,37 @@ public class AttackUtil {
 	}
 
 	private static float randomizeDamage(int randomDamageType, float damage) {
-		switch (randomDamageType) {
-			case 1:
-					switch (Rnd.get(1, 3)) {
-							case 1 -> damage *= 0.5f;
-							case 2 -> damage *= 1.5f;
-					}
-				break;
-			case 2:
-				if (Rnd.chance() < 70)
-					damage *= 0.6f;
-				else
-					damage *= 2;
-				break;
-			case 3:
-					switch (Rnd.get(1, 3)) {
-							case 1 -> damage *= 1.15f;
-							case 2 -> damage *= 1.25f;
-					}
-				break;
-			case 4:
-				damage *= (Rnd.get(25, 100) * 0.02f);
-				break;
-			case 6:
-				if (Rnd.chance() < 30)
-					damage *= 2;
-				break;
-			default:
-				throw new IllegalArgumentException("Unhandled random damage type rnddmg=\"" + randomDamageType + "\"");
-		}
-		return damage;
+		float multiplier = switch (randomDamageType) {
+			case 1 -> {
+				int roll = Rnd.get(0, 19);
+				yield roll <= 6  ? 0.5f :
+					roll <= 12 ? 1.0f :
+						1.5f;
+			}
+
+			case 2 ->
+				Rnd.chance() < 70.0f ? 0.6f : 2.0f;
+
+			case 3 -> {
+				int roll = Rnd.get(0, 19);
+				yield roll <= 6  ? 0.9f :
+					roll <= 12 ? 1.0f :
+						1.1f;
+			}
+
+			case 6 ->
+				Rnd.chance() < 70.0f ? 1.0f : 2.0f;
+
+			case 4, 5, 7, 8, 9, 10 ->
+				1.0f;
+
+			default ->
+				throw new IllegalArgumentException(
+					"Unhandled random damage type rnddmg=\"" + randomDamageType + "\""
+				);
+		};
+
+		return damage * multiplier;
 	}
 
 	private static void calculateEffectResult(Effect effect, Creature effected, int damage, AttackStatus status, HitType hitType, boolean ignoreShield,
@@ -468,8 +464,7 @@ public class AttackUtil {
 		return attackResultList;
 	}
 
-	public static int calculateMagicalOverTimeSkillResult(Effect effect, float skillDamage, SkillElement element, int position, boolean useMagicBoost,
-														  int criticalProb, int critAddDmg) {
+	public static int calculateMagicalOverTimeSkillResult(Effect effect, float skillDamage, EffectTemplate template, boolean useMagicBoost) {
 		Creature effector = effect.getEffector();
 		Creature effected = effect.getEffected();
 		float damage;
@@ -477,22 +472,20 @@ public class AttackUtil {
 		if (effector instanceof Trap) {
 			damage = skillDamage;
 		} else {
-			// TODO is damage multiplier used on dot?
 			float damageMultiplier = effector.getObserveController().getBaseMagicalDamageMultiplier();
-			damage = StatFunctions.calculateMagicalSkillDamage(effector, effected, skillDamage, 0, element, useMagicBoost, false);
+			damage = StatFunctions.calculateMagicalSkillDamage(effector, effected, skillDamage, 0, template, useMagicBoost, false);
 			damage = damage * damageMultiplier;
 
 			AttackStatus status = effect.getAttackStatus();
 			// calculate attack status only if it has not been forced already
-			if (status == AttackStatus.NORMALHIT && position == 1)
-				status = calculateMagicalStatus(effector, effected, criticalProb, true, effect.getSkillTemplate().isMcritApplied());
-			switch (status) {
-				case CRITICAL:
-					damage = calculateWeaponCritical(element, effected, damage, getWeaponGroup(effector, true), critAddDmg,
-						StatEnum.MAGICAL_CRITICAL_DAMAGE_REDUCE, true);
-					break;
+			if (status == AttackStatus.NORMALHIT && template.getPosition() == 1)
+				status = calculateMagicalStatus(effector, effected, template.getCritProbMod2(), true, effect.getSkillTemplate().isMcritApplied());
+			if (status == AttackStatus.CRITICAL) {
+				int critAddDmg = template.calculateCritAddDmg(effect);
+				damage = calculateWeaponCritical(template.getElement(), effected, damage, getWeaponGroup(effector, true), critAddDmg,
+					StatEnum.MAGICAL_CRITICAL_DAMAGE_REDUCE, true);
 			}
-			damage = StatFunctions.adjustDamageByPvpOrPveModifiers(effector, effected, damage, effect.getPvpDamage(), false, element);
+			damage = StatFunctions.adjustDamageByPvpOrPveModifiers(effector, effected, damage, effect.getPvpDamage(), false, template.getElement());
 		}
 
 		if (damage < 1)
@@ -558,7 +551,7 @@ public class AttackUtil {
 	public static void cancelCastOn(Creature target) {
 		target.getKnownList().forEachObject(visibleObject -> {
 			if (visibleObject instanceof Creature creature && visibleObject.getTarget() == target) {
-					if (creature.getCastingSkill() != null && creature.getCastingSkill().getFirstTarget().equals(target))
+				if (creature.getCastingSkill() != null && creature.getCastingSkill().getFirstTarget().equals(target))
 					creature.getController().cancelCurrentSkill(null);
 			}
 		});
@@ -575,12 +568,8 @@ public class AttackUtil {
 
 	public static void removeTargetFrom(Creature object, boolean validateSee) {
 		object.getKnownList().forEachPlayer(player -> {
-			if (player.getTarget() == object) {
-				if (!validateSee || !player.canSee(object)) {
-					player.setTarget(null);
-					PacketSendUtility.sendPacket(player, new SM_TARGET_SELECTED(null));
-				}
-			}
+			if (player.getTarget() == object && (!validateSee || !player.canSee(object)))
+				player.setTarget(null);
 		});
 	}
 

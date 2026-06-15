@@ -23,6 +23,12 @@ import com.aionemu.gameserver.utils.chathandlers.ConsoleCommand;
 import com.aionemu.gameserver.utils.xml.JAXBUtil;
 
 /**
+ * Sent in the following cases:<br>
+ * - Spawning npcs from the npc tab in the GM Panel (Shift + F1)<br>
+ * - Adding items from the item tab in the GM Panel (Shift + F1)<br>
+ * - Pressing Ctrl + Shift + Alt while clicking on an item if the console has been activated via "\con_disable_console 0" from the command tab of the
+ *   GM Panel (Shift + F1). Left-clicking allows to choose how many items to add, right-clicking always adds one.<br>
+ * 
  * @author ginho1, Neon
  */
 public class Wish extends ConsoleCommand {

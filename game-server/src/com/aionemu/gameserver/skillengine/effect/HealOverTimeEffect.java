@@ -44,7 +44,7 @@ public abstract class HealOverTimeEffect extends AbstractOverTimeEffect implemen
 		if (healType == HealType.HP && effect.getItemTemplate() == null)
 			possibleHealValue = effected.getGameStats().getStat(StatEnum.HEAL_SKILL_DEBOOST, possibleHealValue).getCurrent();
 
-		int healValue = maxCurValue - currentValue < possibleHealValue ? (maxCurValue - currentValue) : possibleHealValue;
+		int healValue = Math.min(maxCurValue - currentValue, possibleHealValue);
 
 		if (healValue <= 0)
 			return;

@@ -77,8 +77,7 @@ public class ActionItemNpcAI extends NpcAI {
 	}
 
 	protected void handleUseItemFinish(Player player) {
-		if (getOwner().isInInstance())
-			AIActions.handleUseItemFinish(this, player);
+		AIActions.handleUseItemFinish(this, player);
 	}
 
 	protected int getTalkDelayInMs() {

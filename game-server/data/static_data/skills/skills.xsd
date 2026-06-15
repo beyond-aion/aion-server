@@ -16,7 +16,6 @@
 			<xs:element name="startconditions" type="Conditions" minOccurs="0" maxOccurs="1" />
 			<xs:element name="useconditions" type="Conditions" minOccurs="0" maxOccurs="1" />
 			<xs:element name="endconditions" type="Conditions" minOccurs="0" maxOccurs="1" />
-			<xs:element name="useequipmentconditions" type="Conditions" minOccurs="0" maxOccurs="1" />
 			<xs:element name="effects" type="Effects" minOccurs="0" maxOccurs="1" />
 			<xs:element name="actions" type="Actions" minOccurs="0" maxOccurs="1" />
 			<xs:element name="periodicactions" type="PeriodicActions" minOccurs="0" maxOccurs="1" />
@@ -40,6 +39,7 @@
 		<xs:attribute name="tslot_level" type="xs:int" default="0" />
 		<xs:attribute name="dispel_category" type="DispelCategoryType" default="NONE" />
 		<xs:attribute name="req_dispel_level" type="xs:int" />
+		<xs:attribute name="req_dispel_count" type="xs:int" />
 		<xs:attribute name="activation" type="activationAttribute" use="required" />
 		<xs:attribute name="stigma" type="StigmaType" />
 		<xs:attribute name="ammospeed" type="xs:int" />

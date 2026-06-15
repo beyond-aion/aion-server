@@ -40,7 +40,7 @@ public class Rename extends AdminCommand {
 		String oldName = params.length == 1 ? null : Util.convertName(params[0]);
 		String newName = Util.convertName(params.length == 1 ? params[0] : params[1]);
 		Player renamed = params.length == 1 && admin.getTarget() instanceof Player player ? player : World.getInstance().getPlayer(oldName);
-		PlayerCommonData renamedCommonData = renamed == null ? PlayerDAO.loadPlayerCommonDataByName(oldName) : renamed.getCommonData();
+		PlayerCommonData renamedCommonData = renamed == null ? PlayerService.getOrLoadPlayerCommonData(oldName) : renamed.getCommonData();
 
 		if (renamedCommonData == null) {
 			PacketSendUtility.sendPacket(admin, oldName == null ? SM_SYSTEM_MESSAGE.STR_INVALID_TARGET() : SM_SYSTEM_MESSAGE.STR_NO_USER_NAMED(oldName));

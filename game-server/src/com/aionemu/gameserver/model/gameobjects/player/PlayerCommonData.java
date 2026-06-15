@@ -19,7 +19,6 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.stats.XPLossEnum;
 import com.aionemu.gameserver.world.World;
-import com.aionemu.gameserver.world.WorldPosition;
 
 /**
  * This class is holding base information about player, that may be used even when player itself is not online.
@@ -40,7 +39,9 @@ public class PlayerCommonData extends CreatureTemplate {
 	private Timestamp lastOnline;
 	private boolean online;
 	private String note;
-	private WorldPosition position;
+	private int mapId;
+	private float x, y, z;
+	private byte heading;
 	private int questExpands = 0;
 	private int npcExpands = 0;
 	private int itemExpands = 0;
@@ -349,8 +350,44 @@ public class PlayerCommonData extends CreatureTemplate {
 		this.gender = gender;
 	}
 
-	public WorldPosition getPosition() {
-		return position;
+	public int getMapId() {
+		return mapId;
+	}
+
+	public void setMapId(int mapId) {
+		this.mapId = mapId;
+	}
+
+	public float getX() {
+		return x;
+	}
+
+	public void setX(float x) {
+		this.x = x;
+	}
+
+	public float getY() {
+		return y;
+	}
+
+	public void setY(float y) {
+		this.y = y;
+	}
+
+	public float getZ() {
+		return z;
+	}
+
+	public void setZ(float z) {
+		this.z = z;
+	}
+
+	public byte getHeading() {
+		return heading;
+	}
+
+	public void setHeading(byte heading) {
+		this.heading = heading;
 	}
 
 	/**
@@ -406,21 +443,13 @@ public class PlayerCommonData extends CreatureTemplate {
 		this.bonusTitleId = bonusTitleId;
 	}
 
-	public void setPosition(WorldPosition position) {
-		this.position = position;
-		setWorldOwnerId(position.getMapRegion() == null ? 0 : position.getWorldMapInstance().getOwnerId());
-	}
-
 	/**
 	 * Gets the corresponding Player for this common data. Returns null if the player is not online
 	 * 
 	 * @return Player or null
 	 */
 	public Player getPlayer() {
-		if (online && getPosition() != null) {
-			return World.getInstance().getPlayer(playerObjId);
-		}
-		return null;
+		return online ? World.getInstance().getPlayer(playerObjId) : null;
 	}
 
 	public void addDp(int dp) {

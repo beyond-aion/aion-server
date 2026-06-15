@@ -1,11 +1,7 @@
 package com.aionemu.gameserver.services.siege;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.EnumMap;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-
-import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -14,7 +10,7 @@ import com.aionemu.gameserver.model.siege.SiegeRace;
 
 public class SiegeCounter {
 
-	private final Map<SiegeRace, SiegeRaceCounter> siegeRaceCounters = new ConcurrentHashMap<>();
+	private final Map<SiegeRace, SiegeRaceCounter> siegeRaceCounters = new EnumMap<>(SiegeRace.class);
 
 	public SiegeCounter() {
 		siegeRaceCounters.put(SiegeRace.ELYOS, new SiegeRaceCounter(SiegeRace.ELYOS));
@@ -26,25 +22,12 @@ public class SiegeCounter {
 		SiegeRace siegeRace;
 		if (creature instanceof Player)
 			siegeRace = SiegeRace.getByRace(creature.getRace());
-		else if (creature instanceof SiegeNpc) {
-			siegeRace = ((SiegeNpc) creature).getSiegeRace();
-			if (siegeRace == null) {
-				LoggerFactory.getLogger(SiegeCounter.class).warn("Missing siegeRace for " + creature);
-				return;
-			}
-		} else
+		else if (creature instanceof SiegeNpc siegeNpc)
+			siegeRace = siegeNpc.getSiegeRace();
+		else
 			return;
 
 		siegeRaceCounters.get(siegeRace).addPoints(creature, damage);
-	}
-
-	/**
-	 * Clear all damage progress (on siege protector reset)
-	 */
-	public void clearDamageCounters() {
-		getRaceCounter(SiegeRace.ELYOS).clearDamages();
-		getRaceCounter(SiegeRace.ASMODIANS).clearDamages();
-		getRaceCounter(SiegeRace.BALAUR).clearDamages();
 	}
 
 	public void addAbyssPoints(Player player, int ap) {
@@ -61,14 +44,10 @@ public class SiegeCounter {
 	}
 
 	/**
-	 * Returns list of siege race counters sorted by total damage done to siege boss. Sorted in descending order.
-	 *
-	 * @return all siege race damage counters sorted by descending order
+	 * @return Counter with the highest total damage done to siege boss or fallbackRace, if no damage was done
 	 */
-	public SiegeRaceCounter getWinnerRaceCounter() {
-		List<SiegeRaceCounter> list = new ArrayList<>(siegeRaceCounters.values());
-		list.sort(null);
-		return list.get(0);
+	public SiegeRaceCounter getWinnerRaceCounter(SiegeRace fallbackRace) {
+		return siegeRaceCounters.values().stream().filter(c -> c.getTotalDamage() > 0).sorted().findFirst().orElseGet(() -> getRaceCounter(fallbackRace));
 	}
 
 }

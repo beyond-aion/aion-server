@@ -26,7 +26,6 @@ import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.services.*;
 import com.aionemu.gameserver.services.conquerorAndProtectorSystem.ConquerorAndProtectorService;
-import com.aionemu.gameserver.services.drop.DropService;
 import com.aionemu.gameserver.services.findgroup.FindGroupService;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.summons.SummonsService;
@@ -85,15 +84,12 @@ public class PlayerLeaveWorldService {
 		ExchangeService.getInstance().cancelExchange(player);
 		RepurchaseService.getInstance().removeRepurchaseItems(player);
 		if (AutoGroupConfig.AUTO_GROUP_ENABLE)
-			AutoGroupService.getInstance().onPlayerLogOut(player);
+			AutoGroupService.getInstance().onLogout(player);
 		ConquerorAndProtectorService.getInstance().onLeaveMap(player);
 		MultiClientingService.onLeaveWorld(player);
-		InstanceService.onLogOut(player);
+		InstanceService.onLogout(player);
 		GMService.getInstance().onPlayerLogout(player);
 		KiskService.getInstance().onLogout(player);
-
-		if (player.isLooting())
-			DropService.getInstance().closeDropList(player, player.getLootingNpcOid());
 
 		if (player.isDead()) {
 			if (player.isInInstance() || player.getWorldId() == 400030000)
@@ -103,7 +99,7 @@ public class PlayerLeaveWorldService {
 		} else if (DuelService.getInstance().isDueling(player)) {
 			DuelService.getInstance().loseDuel(player);
 		}
-		// store current effects
+		player.getEffectController().removeNonStorableEffectsForLogout();
 		PlayerEffectsDAO.storePlayerEffects(player);
 		PlayerCooldownsDAO.storePlayerCooldowns(player);
 		ItemCooldownsDAO.storeItemCooldowns(player);
@@ -128,14 +124,17 @@ public class PlayerLeaveWorldService {
 		if (player.getCraftingTask() != null)
 			player.getCraftingTask().stop();
 
-		if (player.isLegionMember())
-			LegionService.getInstance().onLogout(player);
-
 		QuestEngine.getInstance().onLogOut(new QuestEnv(null, player, 0));
 		Timestamp lastOnline = new Timestamp(System.currentTimeMillis());
 		player.getController().delete();
 		player.getCommonData().setOnline(false);
 		player.getCommonData().setLastOnline(lastOnline);
+		if (player.isLegionMember()) // must be called after setOnline and setLastOnline
+			LegionService.getInstance().onLogout(player);
+		player.getCommonData().setX(player.getX());
+		player.getCommonData().setY(player.getY());
+		player.getCommonData().setZ(player.getZ());
+		player.getCommonData().setHeading(player.getHeading());
 
 		ChatServer.getInstance().sendPlayerLogout(player);
 

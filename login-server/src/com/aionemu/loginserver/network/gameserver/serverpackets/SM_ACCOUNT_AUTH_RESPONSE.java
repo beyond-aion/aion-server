@@ -12,9 +12,6 @@ import com.aionemu.loginserver.network.gameserver.GsServerPacket;
  */
 public class SM_ACCOUNT_AUTH_RESPONSE extends GsServerPacket {
 
-	/**
-	 * Account id
-	 */
 	private final int accountId;
 
 	/**
@@ -22,9 +19,6 @@ public class SM_ACCOUNT_AUTH_RESPONSE extends GsServerPacket {
 	 */
 	private final boolean ok;
 
-	/**
-	 * account name
-	 */
 	private final String accountName;
 
 	/**
@@ -33,10 +27,9 @@ public class SM_ACCOUNT_AUTH_RESPONSE extends GsServerPacket {
 	private final long creationDate;
 
 	private final byte accessLevel, membership;
-	private final long toll;
 	private final String allowedHddSerial;
 
-	public SM_ACCOUNT_AUTH_RESPONSE(int accountId, boolean ok, String accountName, long creationDate, byte accessLevel, byte membership, long toll,
+	public SM_ACCOUNT_AUTH_RESPONSE(int accountId, boolean ok, String accountName, long creationDate, byte accessLevel, byte membership,
 		String allowedHddSerial) {
 		this.accountId = accountId;
 		this.ok = ok;
@@ -44,7 +37,6 @@ public class SM_ACCOUNT_AUTH_RESPONSE extends GsServerPacket {
 		this.creationDate = creationDate;
 		this.accessLevel = accessLevel;
 		this.membership = membership;
-		this.toll = toll;
 		this.allowedHddSerial = allowedHddSerial;
 	}
 
@@ -57,14 +49,11 @@ public class SM_ACCOUNT_AUTH_RESPONSE extends GsServerPacket {
 		if (ok) {
 			writeS(accountName);
 			writeQ(creationDate);
-
 			AccountTime accountTime = con.getGameServerInfo().getAccountFromGameServer(accountId).getAccountTime();
-
 			writeQ(accountTime.getAccumulatedOnlineTime());
 			writeQ(accountTime.getAccumulatedRestTime());
 			writeC(accessLevel);
 			writeC(membership);
-			writeQ(toll);
 			writeS(allowedHddSerial);
 		}
 	}

@@ -6,11 +6,11 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.controllers.attack.AggroInfo;
+import com.aionemu.gameserver.controllers.attack.AggroTarget;
 import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -18,7 +18,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.item.ItemAttackType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.skillengine.SkillEngine;
-import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -44,8 +43,8 @@ public class SealGuardianAI extends AggressiveNoLootNpcAI {
 	}
 
 	private Player getLastAttacker() {
-		AggroInfo lastAttacker = getAggroList().getFinalDamageList(false).stream()
-			.filter(ai -> ai.getAttacker() instanceof Player && !((Player) ai.getAttacker()).isDead())
+		AggroInfo lastAttacker = getAggroList().stream()
+			.filter(ai -> ai.getAttacker() instanceof Player player && !player.isDead())
 			.max(Comparator.comparingLong(AggroInfo::getLastInteractionTime)).orElse(null);
 		return lastAttacker != null ? (Player) lastAttacker.getAttacker() : null;
 	}
@@ -67,15 +66,7 @@ public class SealGuardianAI extends AggressiveNoLootNpcAI {
 	@Override
 	public void onEndUseSkill(SkillTemplate skillTemplate, int skillLevel) {
 		if (skillTemplate.getSkillId() == 21882)
-			addHateToRandomTarget();
-	}
-
-	private void addHateToRandomTarget() {
-		List<AggroInfo> attackingPlayers = getAggroList().getList().stream().filter(ai -> ai.getAttacker() instanceof Player player && !player.isDead())
-			.toList();
-		AggroInfo aggroInfo = Rnd.get(attackingPlayers);
-		if (aggroInfo != null)
-			aggroInfo.addHate(10000);
+			getAggroList().addHate(getAggroList().getTarget(AggroTarget.RANDOM), 10000);
 	}
 
 	@Override

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../spawns.xsd">
 	<spawn_map map_id="600100000">
-		<base_spawn id="6101"> 
-			<simple_race race="ELYOS">
+		<base_spawn id="6101">
+			<occupier_template occupier="ELYOS">
 				<!-- West Picket -->
 				<spawn npc_id="832125" handler="FLAG">
 					<spot x="812.6415" y="629.9872" z="276.5" h="60"/>
@@ -47,14 +47,14 @@
 				<spawn npc_id="805275" handler="MERCHANT" respawn_time="295">
 					<spot x="818.6" y="625.5" z="276.5" h="25"/>
 				</spawn>
-				
+
 				<!-- Guardian Warrior -->
 				<spawn npc_id="235185" handler="GUARDIAN" respawn_time="295">
 					<spot x="808.46967" y="628.8037" z="276.50000" h="18"/>
 					<spot x="811.68740" y="625.0928" z="276.50000" h="15"/>
 					<spot x="821.15765" y="638.2538" z="275.82358" h="22"/>
 				</spawn>
-				
+
 				<!-- Tomul Brawler FI -->
 				<spawn npc_id="235370" handler="OUTRIDER" respawn_time="295">
 					<spot x="734.33020" y="667.7600" z="265.66064"/>
@@ -88,8 +88,8 @@
 					<spot x="778.36237" y="644.4059" z="276.65860" h="4"/>
 					<spot x="892.13370" y="576.2812" z="275.05273" h="51"/>
 				</spawn>
-			</simple_race>
-			<simple_race race="ASMODIANS">
+			</occupier_template>
+			<occupier_template occupier="ASMODIANS">
 				<!-- West Picket -->
 				<spawn npc_id="832146" handler="FLAG">
 					<spot x="812.6415" y="629.9872" z="276.5" h="60"/>
@@ -134,14 +134,14 @@
 				<spawn npc_id="805288" handler="MERCHANT" respawn_time="295">
 					<spot x="818.6" y="625.5" z="276.5" h="25"/>
 				</spawn>
-				
+
 				<!-- Archon Aggressor -->
 				<spawn npc_id="235197" handler="GUARDIAN" respawn_time="295">
 					<spot x="808.46967" y="628.8037" z="276.50000" h="18"/>
 					<spot x="811.68740" y="625.0928" z="276.50000" h="15"/>
 					<spot x="821.15765" y="638.2538" z="275.82358" h="22"/>
 				</spawn>
-				
+
 				<!-- Denku Feralclaw FI -->
 				<spawn npc_id="235374" handler="OUTRIDER" respawn_time="295">
 					<spot x="734.33020" y="667.7600" z="265.66064"/>
@@ -175,8 +175,8 @@
 					<spot x="778.36237" y="644.4059" z="276.65860" h="4"/>
 					<spot x="892.13370" y="576.2812" z="275.05273" h="51"/>
 				</spawn>
-			</simple_race>
-			<simple_race race="NPC">
+			</occupier_template>
+			<occupier_template occupier="BALAUR">
 				<!-- West Picket -->
 				<spawn npc_id="832167" handler="FLAG">
 					<spot x="812.6415" y="629.9872" z="276.5" h="60"/>
@@ -213,10 +213,10 @@
 				<spawn npc_id="235177" handler="SENTINEL" respawn_time="295">
 					<spot x="818.9313" y="625.6445" z="276.5" h="21"/>
 				</spawn>
-			</simple_race>
-		</base_spawn>	
-		<base_spawn id="6102"> 
-			<simple_race race="ELYOS">
+			</occupier_template>
+		</base_spawn>
+		<base_spawn id="6102">
+			<occupier_template occupier="ELYOS">
 				<!-- North Picket -->
 				<spawn npc_id="832132" handler="FLAG">
 					<spot x="536.7863" y="584.1077" z="265.375" h="67"/>
@@ -261,14 +261,14 @@
 				<spawn npc_id="805269" handler="MERCHANT" respawn_time="295">
 					<spot x="534.2" y="587.5" z="265.38" h="90"/>
 				</spawn>
-				
+
 				<!-- Guardian Warrior -->
 				<spawn npc_id="235185" handler="GUARDIAN" respawn_time="295">
 					<spot x="532.72703" y="587.6887" z="265.37500" h="72"/>
 					<spot x="538.30530" y="579.3853" z="265.37500" h="68"/>
 					<spot x="531.55597" y="580.9642" z="265.15750" h="66"/>
 				</spawn>
-				
+
 				<!-- Tomul Brawler FI -->
 				<spawn npc_id="235346" handler="OUTRIDER" respawn_time="295">
 					<spot x="556.63116" y="638.9667" z="257.27515"/>
@@ -302,8 +302,8 @@
 					<spot x="510.72870" y="561.4935" z="263.10350"/>
 					<spot x="468.31170" y="677.2840" z="256.52530"/>
 				</spawn>
-			</simple_race>
-			<simple_race race="ASMODIANS">
+			</occupier_template>
+			<occupier_template occupier="ASMODIANS">
 				<!-- North Picket -->
 				<spawn npc_id="832153" handler="FLAG">
 					<spot x="536.7863" y="584.1077" z="265.375" h="59"/>
@@ -344,14 +344,14 @@
 				<spawn npc_id="805282" handler="MERCHANT" respawn_time="295">
 					<spot x="534.2" y="587.5" z="265.38" h="90"/>
 				</spawn>
-				
+
 				<!-- Archon Aggressor -->
 				<spawn npc_id="235197" handler="GUARDIAN" respawn_time="295">
 					<spot x="532.72703" y="587.6887" z="265.37500" h="72"/>
 					<spot x="538.30530" y="579.3853" z="265.37500" h="68"/>
 					<spot x="531.55597" y="580.9642" z="265.15750" h="66"/>
 				</spawn>
-				
+
 				<!-- Denku Feralclaw FI -->
 				<spawn npc_id="235350" handler="OUTRIDER" respawn_time="295">
 					<spot x="556.63116" y="638.9667" z="257.27515"/>
@@ -386,8 +386,8 @@
 					<spot x="518.95000" y="662.9000" z="256.30624"/>
 					<spot x="468.31170" y="677.2840" z="256.52530"/>
 				</spawn>
-			</simple_race>
-			<simple_race race="NPC">
+			</occupier_template>
+			<occupier_template occupier="BALAUR">
 				<!-- North Picket -->
 				<spawn npc_id="832817" handler="FLAG">
 					<spot x="536.7863" y="584.1077" z="265.375" h="59"/>
@@ -416,10 +416,10 @@
 				<spawn npc_id="235176" handler="SENTINEL" respawn_time="295">
 					<spot x="534.3674" y="598.6465" z="265.2039" h="45"/>
 				</spawn>
-			</simple_race>
+			</occupier_template>
 		</base_spawn>
 		<base_spawn id="6103">
-			<simple_race race="ELYOS">
+			<occupier_template occupier="ELYOS">
 				<!-- North Outpost -->
 				<spawn npc_id="832122" handler="FLAG">
 					<spot x="376.5099" y="999.5588" z="248.375" h="76"/>
@@ -472,13 +472,13 @@
 				<spawn npc_id="805271" handler="MERCHANT" respawn_time="295">
 					<spot x="368.1" y="996.5" z="248.54" h="94"/>
 				</spawn>
-				
+
 				<!-- Guardian Warrior -->
 				<spawn npc_id="235185" handler="GUARDIAN" respawn_time="295">
 					<spot x="368.44275" y="973.3098" z="247.35953" h="83"/>
 					<spot x="375.20093" y="995.0147" z="248.37500" h="86"/>
 				</spawn>
-				
+
 				<!-- Tomul Brawler FI -->
 				<spawn npc_id="235346" handler="OUTRIDER" respawn_time="295">
 					<spot x="560.98040" y="788.3868" z="260.12500"/>
@@ -518,8 +518,8 @@
 					<spot x="217.54270" y="961.0384" z="236.73450" h="4"/>
 					<spot x="239.64930" y="996.7948" z="235.90650" h="78"/>
 				</spawn>
-			</simple_race>
-			<simple_race race="ASMODIANS">
+			</occupier_template>
+			<occupier_template occupier="ASMODIANS">
 				<!-- North Outpost -->
 				<spawn npc_id="832143" handler="FLAG">
 					<spot x="376.5099" y="999.5588" z="248.375" h="83"/>
@@ -572,13 +572,13 @@
 				<spawn npc_id="805284" handler="MERCHANT" respawn_time="295">
 					<spot x="368.1" y="996.5" z="248.54" h="94"/>
 				</spawn>
-				
+
 				<!-- Archon Aggressor -->
 				<spawn npc_id="235197" handler="GUARDIAN" respawn_time="295">
 					<spot x="368.44275" y="973.3098" z="247.35953" h="83"/>
 					<spot x="375.20093" y="995.0147" z="248.37500" h="86"/>
 				</spawn>
-				
+
 				<!-- Denku Feralclaw FI -->
 				<spawn npc_id="235350" handler="OUTRIDER" respawn_time="295">
 					<spot x="560.98040" y="788.3868" z="260.12500"/>
@@ -618,8 +618,8 @@
 					<spot x="217.54270" y="961.0384" z="236.73450" h="4"/>
 					<spot x="239.64930" y="996.7948" z="235.90650" h="78"/>
 				</spawn>
-			</simple_race>
-			<simple_race race="NPC">
+			</occupier_template>
+			<occupier_template occupier="BALAUR">
 				<!-- North Outpost -->
 				<spawn npc_id="832164" handler="FLAG">
 					<spot x="376.5099" y="999.5588" z="248.375" h="86"/>
@@ -656,10 +656,10 @@
 				<spawn npc_id="235177" handler="SENTINEL" respawn_time="295">
 					<spot x="367.876" y="997.3941" z="248.5871" h="110"/>
 				</spawn>
-			</simple_race>
+			</occupier_template>
 		</base_spawn>
-		<base_spawn id="6104"> 
-			<simple_race race="ELYOS">
+		<base_spawn id="6104">
+			<occupier_template occupier="ELYOS">
 				<!-- North Relay -->
 				<spawn npc_id="832120" handler="FLAG">
 					<spot x="504.9452" y="1172.947" z="276.4341" h="60"/>
@@ -723,7 +723,7 @@
 				<spawn npc_id="805270" handler="MERCHANT" respawn_time="295">
 					<spot x="510.3" y="1189.5" z="276.26" h="57"/>
 				</spawn>
-				
+
 				<!-- Guardian Elite Warrior -->
 				<spawn npc_id="235191" handler="GUARDIAN" respawn_time="295">
 					<spot x="524.46606" y="1178.9868" z="277.49347" h="57"/>
@@ -732,7 +732,7 @@
 					<spot x="518.97050" y="1121.3885" z="276.45950" h="91"/>
 					<spot x="531.05810" y="1223.0763" z="276.75000" h="34"/>
 				</spawn>
-				
+
 				<!-- Tomul Brawler FI -->
 				<spawn npc_id="235346" handler="OUTRIDER" respawn_time="295">
 					<spot x="532.70667" y="1084.3915" z="269.88727" h="84"/>
@@ -766,8 +766,8 @@
 					<spot x="545.60004" y="1057.0535" z="267.80670" h="55"/>
 					<spot x="447.55322" y="1350.4801" z="266.34930" h="110"/>
 				</spawn>
-			</simple_race>
-			<simple_race race="ASMODIANS">
+			</occupier_template>
+			<occupier_template occupier="ASMODIANS">
 				<!-- North Relay -->
 				<spawn npc_id="832141" handler="FLAG">
 					<spot x="504.9452" y="1172.947" z="276.4341" h="60"/>
@@ -831,7 +831,7 @@
 				<spawn npc_id="805283" handler="MERCHANT" respawn_time="295">
 					<spot x="510.3" y="1189.5" z="276.26" h="57"/>
 				</spawn>
-				
+
 				<!-- Archon Elite Aggressor -->
 				<spawn npc_id="235203" handler="GUARDIAN" respawn_time="295">
 					<spot x="524.46606" y="1178.9868" z="277.49347" h="57"/>
@@ -840,7 +840,7 @@
 					<spot x="518.97050" y="1121.3885" z="276.45950" h="91"/>
 					<spot x="531.05810" y="1223.0763" z="276.75000" h="34"/>
 				</spawn>
-				
+
 				<!-- Denku Feralclaw FI -->
 				<spawn npc_id="235350" handler="OUTRIDER" respawn_time="295">
 					<spot x="532.70667" y="1084.3915" z="269.88727" h="84"/>
@@ -874,8 +874,8 @@
 					<spot x="545.60004" y="1057.0535" z="267.80670" h="55"/>
 					<spot x="447.55322" y="1350.4801" z="266.34930" h="110"/>
 				</spawn>
-			</simple_race>
-			<simple_race race="NPC">
+			</occupier_template>
+			<occupier_template occupier="BALAUR">
 				<!-- North Relay -->
 				<spawn npc_id="832162" handler="FLAG">
 					<spot x="504.9452" y="1172.947" z="276.4341" h="60"/>
@@ -915,10 +915,10 @@
 					<spot x="552.9031" y="1137.024" z="276.6391" h="32"/>
 					<spot x="567.941" y="1205.081" z="276.875" h="21"/>
 				</spawn>
-			</simple_race>
+			</occupier_template>
 		</base_spawn>
-		<base_spawn id="6105"> 
-			<simple_race race="ELYOS">
+		<base_spawn id="6105">
+			<occupier_template occupier="ELYOS">
 				<!-- East Outpost -->
 				<spawn npc_id="832123" handler="FLAG">
 					<spot x="888.9178" y="1862.12" z="229.5" h="60"/>
@@ -967,14 +967,14 @@
 				<spawn npc_id="805274" handler="MERCHANT" respawn_time="295">
 					<spot x="882.6" y="1865.9" z="229.62" h="86"/>
 				</spawn>
-				
+
 				<!-- Guardian Warrior -->
 				<spawn npc_id="235185" handler="GUARDIAN" respawn_time="295">
 					<spot x="882.55060" y="1857.3875" z="229.62500" h="66"/>
 					<spot x="883.42400" y="1854.6995" z="229.00000" h="75"/>
 					<spot x="869.21590" y="1875.7251" z="230.03920" h="74"/>
 				</spawn>
-				
+
 				<!-- Tomul Brawler FI -->
 				<spawn npc_id="235354" handler="OUTRIDER" respawn_time="295">
 					<spot x="683.30786" y="1912.1003" z="228.29475" h="111"/>
@@ -1008,8 +1008,8 @@
 					<spot x="865.89325" y="1815.6484" z="224.4157"/>
 					<spot x="950.91670" y="1793.2540" z="228.79360" h="47"/>
 				</spawn>
-			</simple_race>
-			<simple_race race="ASMODIANS">
+			</occupier_template>
+			<occupier_template occupier="ASMODIANS">
 				<!-- East Outpost -->
 				<spawn npc_id="832144" handler="FLAG">
 					<spot x="888.9178" y="1862.12" z="229.5" h="60"/>
@@ -1058,14 +1058,14 @@
 				<spawn npc_id="805287" handler="MERCHANT" respawn_time="295">
 					<spot x="882.6" y="1865.9" z="229.62" h="86"/>
 				</spawn>
-				
+
 				<!-- Archon Aggressor -->
 				<spawn npc_id="235197" handler="GUARDIAN" respawn_time="295">
 					<spot x="882.55060" y="1857.3875" z="229.62500" h="66"/>
 					<spot x="883.42400" y="1854.6995" z="229.00000" h="75"/>
 					<spot x="869.21590" y="1875.7251" z="230.03920" h="74"/>
 				</spawn>
-				
+
 				<!-- Denku Feralclaw FI -->
 				<spawn npc_id="235358" handler="OUTRIDER" respawn_time="295">
 					<spot x="683.30786" y="1912.1003" z="228.29475" h="111"/>
@@ -1099,8 +1099,8 @@
 					<spot x="865.89325" y="1815.6484" z="224.4157"/>
 					<spot x="950.91670" y="1793.2540" z="228.79360" h="47"/>
 				</spawn>
-			</simple_race>
-			<simple_race race="NPC">
+			</occupier_template>
+			<occupier_template occupier="BALAUR">
 				<!-- East Outpost -->
 				<spawn npc_id="832165" handler="FLAG">
 					<spot x="888.9178" y="1862.12" z="229.5" h="60"/>
@@ -1137,10 +1137,10 @@
 				<spawn npc_id="235177" handler="SENTINEL" respawn_time="295">
 					<spot x="882.3273" y="1865.985" z="229.6233" h="75"/>
 				</spawn>
-			</simple_race>
+			</occupier_template>
 		</base_spawn>
-		<base_spawn id="6106"> 
-			<simple_race race="ELYOS">
+		<base_spawn id="6106">
+			<occupier_template occupier="ELYOS">
 				<!-- East Relay -->
 				<spawn npc_id="832124" handler="FLAG">
 					<spot x="543.0682" y="1554.889" z="234.5953" h="53"/>
@@ -1193,14 +1193,14 @@
 				<spawn npc_id="805273" handler="MERCHANT" respawn_time="295">
 					<spot x="551.5" y="1556.6" z="234.5" h="37"/>
 				</spawn>
-				
+
 				<!-- Guardian Warrior -->
 				<spawn npc_id="235185" handler="GUARDIAN" respawn_time="295">
 					<spot x="543.83670" y="1562.9122" z="234.50000" h="27"/>
 					<spot x="546.47400" y="1556.1049" z="234.50000" h="23"/>
 					<spot x="541.02246" y="1557.6246" z="234.58456" h="24"/>
 				</spawn>
-				
+
 				<!-- Tomul Brawler FI -->
 				<spawn npc_id="235354" handler="OUTRIDER" respawn_time="295">
 					<spot x="508.76038" y="1617.2233" z="232.17355" h="39"/>
@@ -1233,8 +1233,8 @@
 					<spot x="472.17110" y="1583.0676" z="238.42258" h="27"/>
 					<spot x="392.85684" y="1557.6539" z="239.00374" h="29"/>
 				</spawn>
-			</simple_race>
-			<simple_race race="ASMODIANS">
+			</occupier_template>
+			<occupier_template occupier="ASMODIANS">
 				<!-- East Relay -->
 				<spawn npc_id="832145" handler="FLAG">
 					<spot x="543.0682" y="1554.889" z="234.5953" h="53"/>
@@ -1287,14 +1287,14 @@
 				<spawn npc_id="805286" handler="MERCHANT" respawn_time="295">
 					<spot x="551.5" y="1556.6" z="234.5" h="37"/>
 				</spawn>
-				
+
 				<!-- Archon Aggressor -->
 				<spawn npc_id="235197" handler="GUARDIAN" respawn_time="295">
 					<spot x="543.83670" y="1562.9122" z="234.50000" h="27"/>
 					<spot x="546.47400" y="1556.1049" z="234.50000" h="23"/>
 					<spot x="541.02246" y="1557.6246" z="234.58456" h="24"/>
 				</spawn>
-				
+
 				<!-- Denku Feralclaw FI -->
 				<spawn npc_id="235358" handler="OUTRIDER" respawn_time="295">
 					<spot x="508.76038" y="1617.2233" z="232.17355" h="39"/>
@@ -1327,8 +1327,8 @@
 					<spot x="472.17110" y="1583.0676" z="238.42258" h="27"/>
 					<spot x="392.85684" y="1557.6539" z="239.00374" h="29"/>
 				</spawn>
-			</simple_race>
-			<simple_race race="NPC">
+			</occupier_template>
+			<occupier_template occupier="BALAUR">
 				<!-- East Relay -->
 				<spawn npc_id="832166" handler="FLAG">
 					<spot x="543.0682" y="1554.889" z="234.5953" h="53"/>
@@ -1365,10 +1365,10 @@
 				<spawn npc_id="235177" handler="SENTINEL" respawn_time="295">
 					<spot x="551.2578" y="1557.063" z="234.5" h="45"/>
 				</spawn>
-			</simple_race>
+			</occupier_template>
 		</base_spawn>
-		<base_spawn id="6107"> 
-			<simple_race race="ELYOS">
+		<base_spawn id="6107">
+			<occupier_template occupier="ELYOS">
 				<!-- South Outpost -->
 				<spawn npc_id="832126" handler="FLAG">
 					<spot x="1901.161" y="813.1022" z="237.875" h="60"/>
@@ -1421,7 +1421,7 @@
 				<spawn npc_id="805279" handler="MERCHANT" respawn_time="295">
 					<spot x="1901.1" y="820.7" z="237.88" h="71"/>
 				</spawn>
-				
+
 				<!-- Tomul Brawler FI -->
 				<spawn npc_id="235362" handler="OUTRIDER" respawn_time="295">
 					<spot x="1856.4932" y="772.5425" z="233.93973" h="62"/>
@@ -1454,8 +1454,8 @@
 					<spot x="1952.0940" y="772.2167" z="241.27530" h="50"/>
 					<spot x="1898.6489" y="715.7853" z="236.04358" h="63"/>
 				</spawn>
-			</simple_race>
-			<simple_race race="ASMODIANS">
+			</occupier_template>
+			<occupier_template occupier="ASMODIANS">
 				<!-- South Outpost -->
 				<spawn npc_id="832147" handler="FLAG">
 					<spot x="1901.161" y="813.1022" z="237.875" h="60"/>
@@ -1508,7 +1508,7 @@
 				<spawn npc_id="805293" handler="MERCHANT" respawn_time="295">
 					<spot x="1901.1" y="820.7" z="237.88" h="71"/>
 				</spawn>
-				
+
 				<!-- Denku Feralclaw FI -->
 				<spawn npc_id="235366" handler="OUTRIDER" respawn_time="295">
 					<spot x="1856.4932" y="772.5425" z="233.93973" h="62"/>
@@ -1541,8 +1541,8 @@
 					<spot x="1952.0940" y="772.2167" z="241.27530" h="50"/>
 					<spot x="1898.6489" y="715.7853" z="236.04358" h="63"/>
 				</spawn>
-			</simple_race>
-			<simple_race race="NPC">
+			</occupier_template>
+			<occupier_template occupier="BALAUR">
 				<!-- South Outpost -->
 				<spawn npc_id="832168" handler="FLAG">
 					<spot x="1901.161" y="813.1022" z="237.875" h="60"/>
@@ -1579,10 +1579,10 @@
 				<spawn npc_id="235177" handler="SENTINEL" respawn_time="295">
 					<spot x="1900.889" y="821.1229" z="237.875" h="75"/>
 				</spawn>
-			</simple_race>
+			</occupier_template>
 		</base_spawn>
-		<base_spawn id="6108"> 
-			<simple_race race="ELYOS">
+		<base_spawn id="6108">
+			<occupier_template occupier="ELYOS">
 				<!-- South Relay -->
 				<spawn npc_id="832121" handler="FLAG">
 					<spot x="1423.318" y="851.3027" z="257.6964" h="41"/>
@@ -1649,7 +1649,7 @@
 				<spawn npc_id="805280" handler="MERCHANT" respawn_time="295">
 					<spot x="1411.4" y="838.0" z="258.17" h="117"/>
 				</spawn>
-				
+
 				<!-- Guardian Elite Warrior -->
 				<spawn npc_id="235191" handler="GUARDIAN" respawn_time="295">
 					<spot x="1454.2717" y="848.28700" z="258.19363"/>
@@ -1658,7 +1658,7 @@
 					<spot x="1396.9653" y="846.70135" z="259.54037"/>
 					<spot x="1397.5420" y="859.61670" z="256.54037" h="114"/>
 				</spawn>
-				
+
 				<!-- Tomul Brawler -->
 				<spawn npc_id="235362" handler="OUTRIDER" respawn_time="295">
 					<spot x="1386.7148" y="948.02374" z="259.95828"/>
@@ -1692,8 +1692,8 @@
 					<spot x="1394.5336" y="729.19320" z="255.59247"/>
 					<spot x="1331.8644" y="770.92914" z="256.75000"/>
 				</spawn>
-			</simple_race>
-			<simple_race race="ASMODIANS">
+			</occupier_template>
+			<occupier_template occupier="ASMODIANS">
 				<!-- South Relay -->
 				<spawn npc_id="832142" handler="FLAG">
 					<spot x="1423.318" y="851.3027" z="257.6964" h="41"/>
@@ -1760,7 +1760,7 @@
 				<spawn npc_id="805292" handler="MERCHANT" respawn_time="295">
 					<spot x="1411.4" y="838.0" z="258.17" h="117"/>
 				</spawn>
-				
+
 				<!-- Archon Elite Aggressor -->
 				<spawn npc_id="235203" handler="GUARDIAN" respawn_time="295">
 					<spot x="1454.2717" y="848.28700" z="258.19363"/>
@@ -1769,7 +1769,7 @@
 					<spot x="1396.9653" y="846.70135" z="259.54037"/>
 					<spot x="1397.5420" y="859.61670" z="256.54037" h="114"/>
 				</spawn>
-				
+
 				<!-- Denku Feralclaw -->
 				<spawn npc_id="235366" handler="OUTRIDER" respawn_time="295">
 					<spot x="1386.7148" y="948.02374" z="259.95828"/>
@@ -1803,8 +1803,8 @@
 					<spot x="1394.5336" y="729.19320" z="255.59247"/>
 					<spot x="1331.8644" y="770.92914" z="256.75000"/>
 				</spawn>
-			</simple_race>
-			<simple_race race="NPC">
+			</occupier_template>
+			<occupier_template occupier="BALAUR">
 				<!-- South Relay -->
 				<spawn npc_id="832163" handler="FLAG">
 					<spot x="1423.318" y="851.3027" z="257.6964" h="41"/>
@@ -1847,10 +1847,10 @@
 				<spawn npc_id="235183" handler="SENTINEL" respawn_time="295">
 					<spot x="1429.018" y="886.0143" z="258.1891" h="75"/>
 				</spawn>
-			</simple_race>
+			</occupier_template>
 		</base_spawn>
-		<base_spawn id="6109"> 
-			<simple_race race="ELYOS">
+		<base_spawn id="6109">
+			<occupier_template occupier="ELYOS">
 				<!-- South Picket -->
 				<spawn npc_id="832138" handler="FLAG">
 					<spot x="1626.625" y="1558.153" z="247.7596" h="67"/>
@@ -1891,14 +1891,14 @@
 				<spawn npc_id="805278" handler="MERCHANT" respawn_time="295">
 					<spot x="1630.8" y="1556.1" z="247.76" h="81"/>
 				</spawn>
-				
+
 				<!-- Guardian Warrior -->
 				<spawn npc_id="235185" handler="GUARDIAN" respawn_time="295">
 					<spot x="1623.9749" y="1558.1313" z="247.63164" h="80"/>
 					<spot x="1628.7726" y="1556.1554" z="247.75000" h="84"/>
 					<spot x="1619.6826" y="1542.5748" z="246.90718" h="82"/>
 				</spawn>
-				
+
 				<!-- Tomul Brawler FI -->
 				<spawn npc_id="235362" handler="OUTRIDER" respawn_time="295">
 					<spot x="1702.3453" y="1342.5762" z="278.13885" h="30"/>
@@ -1931,8 +1931,8 @@
 					<spot x="1472.1111" y="1527.2914" z="260.03120" h="100"/>
 					<spot x="1598.5886" y="1437.2911" z="263.18820" h="43"/>
 				</spawn>
-			</simple_race>
-			<simple_race race="ASMODIANS">
+			</occupier_template>
+			<occupier_template occupier="ASMODIANS">
 				<!-- South Picket -->
 				<spawn npc_id="832159" handler="FLAG">
 					<spot x="1626.625" y="1558.153" z="247.7596" h="67"/>
@@ -1977,14 +1977,14 @@
 				<spawn npc_id="805291" handler="MERCHANT" respawn_time="295">
 					<spot x="1630.8" y="1556.1" z="247.76" h="81"/>
 				</spawn>
-				
+
 				<!-- Archon Aggressor -->
 				<spawn npc_id="235197" handler="GUARDIAN" respawn_time="295">
 					<spot x="1623.9749" y="1558.1313" z="247.63164" h="80"/>
 					<spot x="1628.7726" y="1556.1554" z="247.75000" h="84"/>
 					<spot x="1619.6826" y="1542.5748" z="246.90718" h="82"/>
 				</spawn>
-				
+
 				<!-- Denku Feralclaw FI -->
 				<spawn npc_id="235366" handler="OUTRIDER" respawn_time="295">
 					<spot x="1702.3453" y="1342.5762" z="278.13885" h="30"/>
@@ -2017,8 +2017,8 @@
 					<spot x="1472.1111" y="1527.2914" z="260.03120" h="100"/>
 					<spot x="1598.5886" y="1437.2911" z="263.18820" h="43"/>
 				</spawn>
-			</simple_race>
-			<simple_race race="NPC">
+			</occupier_template>
+			<occupier_template occupier="BALAUR">
 				<!-- South Picket -->
 				<spawn npc_id="832818" handler="FLAG">
 					<spot x="1626.625" y="1558.153" z="247.7596" h="67"/>
@@ -2047,10 +2047,10 @@
 				<spawn npc_id="235176" handler="SENTINEL" respawn_time="295">
 					<spot x="1615.343" y="1567.871" z="247.5785" h="51"/>
 				</spawn>
-			</simple_race>
+			</occupier_template>
 		</base_spawn>
-		<base_spawn id="6110"> 
-			<simple_race race="ELYOS">
+		<base_spawn id="6110">
+			<occupier_template occupier="ELYOS">
 				<!-- West Outpost -->
 				<spawn npc_id="832127" handler="FLAG">
 					<spot x="1168.28" y="247.8889" z="239.125" h="60"/>
@@ -2099,14 +2099,14 @@
 				<spawn npc_id="805277" handler="MERCHANT" respawn_time="295">
 					<spot x="1173.1" y="242.2" z="239.13" h="20"/>
 				</spawn>
-				
+
 				<!-- Guardian Warrior -->
 				<spawn npc_id="235185" handler="GUARDIAN" respawn_time="295">
 					<spot x="1166.3292" y="242.78578" z="239.12500" h="14"/>
 					<spot x="1162.9684" y="247.02573" z="239.12500" h="12"/>
 					<spot x="1175.1481" y="254.59254" z="239.19675" h="12"/>
 				</spawn>
-				
+
 				<!-- Tomul Brawler FI -->
 				<spawn npc_id="235370" handler="OUTRIDER" respawn_time="295">
 					<spot x="1338.2106" y="334.18472" z="248.58713" h="99"/>
@@ -2139,8 +2139,8 @@
 					<spot x="1202.1434" y="247.5662" z="235.22289"/>
 					<spot x="1125.0198" y="241.7787" z="236.54990" h="4"/>
 				</spawn>
-			</simple_race>
-			<simple_race race="ASMODIANS">
+			</occupier_template>
+			<occupier_template occupier="ASMODIANS">
 				<!-- West Outpost -->
 				<spawn npc_id="832148" handler="FLAG">
 					<spot x="1168.28" y="247.8889" z="239.125" h="11"/>
@@ -2193,14 +2193,14 @@
 				<spawn npc_id="805290" handler="MERCHANT" respawn_time="295">
 					<spot x="1173.1" y="242.2" z="239.13" h="20"/>
 				</spawn>
-				
+
 				<!-- Archon Aggressor -->
 				<spawn npc_id="235197" handler="GUARDIAN" respawn_time="295">
 					<spot x="1166.3292" y="242.78578" z="239.12500" h="14"/>
 					<spot x="1162.9684" y="247.02573" z="239.12500" h="12"/>
 					<spot x="1175.1481" y="254.59254" z="239.19675" h="12"/>
 				</spawn>
-				
+
 				<!-- Denku Feralclaw FI -->
 				<spawn npc_id="235374" handler="OUTRIDER" respawn_time="295">
 					<spot x="1338.2106" y="334.18472" z="248.58713" h="99"/>
@@ -2233,8 +2233,8 @@
 					<spot x="1202.1434" y="247.5662" z="235.22289"/>
 					<spot x="1125.0198" y="241.7787" z="236.54990" h="4"/>
 				</spawn>
-			</simple_race>
-			<simple_race race="NPC">
+			</occupier_template>
+			<occupier_template occupier="BALAUR">
 				<!-- West Outpost -->
 				<spawn npc_id="832169" handler="FLAG">
 					<spot x="1168.28" y="247.8889" z="239.125" h="60"/>
@@ -2271,10 +2271,10 @@
 				<spawn npc_id="235177" handler="SENTINEL" respawn_time="295">
 					<spot x="1172.821" y="242.3675" z="239.125" h="103"/>
 				</spawn>
-			</simple_race>
+			</occupier_template>
 		</base_spawn>
-		<base_spawn id="6111"> 
-			<simple_race race="ELYOS">
+		<base_spawn id="6111">
+			<occupier_template occupier="ELYOS">
 				<!-- West Relay -->
 				<spawn npc_id="832128" handler="FLAG">
 					<spot x="1668.446" y="238.5397" z="251.625" h="60"/>
@@ -2327,14 +2327,14 @@
 				<spawn npc_id="805276" handler="MERCHANT" respawn_time="295">
 					<spot x="1673.9" y="246.2" z="251.63" h="67"/>
 				</spawn>
-				
+
 				<!-- Guardian Warrior -->
 				<spawn npc_id="235185" handler="GUARDIAN" respawn_time="295">
 					<spot x="1677.2604" y="236.03287" z="251.75000" h="30"/>
 					<spot x="1677.4882" y="240.89839" z="251.75000" h="59"/>
 					<spot x="1664.0388" y="239.21550" z="251.62500" h="59"/>
 				</spawn>
-				
+
 				<!-- Tomul Brawler FI -->
 				<spawn npc_id="235370" handler="OUTRIDER" respawn_time="295">
 					<spot x="1552.8849" y="256.50507" z="260.45404"/>
@@ -2367,8 +2367,8 @@
 					<spot x="1713.4889" y="244.18462" z="255.00609" h="57"/>
 					<spot x="1584.8948" y="333.81113" z="253.81908" h="114"/>
 				</spawn>
-			</simple_race>
-			<simple_race race="ASMODIANS">
+			</occupier_template>
+			<occupier_template occupier="ASMODIANS">
 				<!-- West Relay -->
 				<spawn npc_id="832149" handler="FLAG">
 					<spot x="1668.446" y="238.5397" z="251.625" h="60"/>
@@ -2421,14 +2421,14 @@
 				<spawn npc_id="805289" handler="MERCHANT" respawn_time="295">
 					<spot x="1673.9" y="246.2" z="251.63" h="67"/>
 				</spawn>
-				
+
 				<!-- Archon Aggressor -->
 				<spawn npc_id="235197" handler="GUARDIAN" respawn_time="295">
 					<spot x="1677.2604" y="236.03287" z="251.75000" h="30"/>
 					<spot x="1677.4882" y="240.89839" z="251.75000" h="59"/>
 					<spot x="1664.0388" y="239.21550" z="251.62500" h="59"/>
 				</spawn>
-				
+
 				<!-- Denku Feralclaw FI -->
 				<spawn npc_id="235374" handler="OUTRIDER" respawn_time="295">
 					<spot x="1552.8849" y="256.50507" z="260.45404"/>
@@ -2461,8 +2461,8 @@
 					<spot x="1713.4889" y="244.18462" z="255.00609" h="57"/>
 					<spot x="1584.8948" y="333.81113" z="253.81908" h="114"/>
 				</spawn>
-			</simple_race>
-			<simple_race race="NPC">
+			</occupier_template>
+			<occupier_template occupier="BALAUR">
 				<!-- West Relay -->
 				<spawn npc_id="832170" handler="FLAG">
 					<spot x="1668.446" y="238.5397" z="251.625" h="60"/>
@@ -2499,10 +2499,10 @@
 				<spawn npc_id="235177" handler="SENTINEL" respawn_time="295">
 					<spot x="1674.649" y="246.2789" z="251.625" h="66"/>
 				</spawn>
-			</simple_race>
+			</occupier_template>
 		</base_spawn>
-		<base_spawn id="6112"> 
-			<simple_race race="ELYOS">
+		<base_spawn id="6112">
+			<occupier_template occupier="ELYOS">
 				<!-- East Picket -->
 				<spawn npc_id="832129" handler="FLAG">
 					<spot x="1258.119" y="1437.25" z="275" h="5"/>
@@ -2551,14 +2551,14 @@
 				<spawn npc_id="805272" handler="MERCHANT" respawn_time="295">
 					<spot x="1263.0" y="1427.0" z="274.75" h="13"/>
 				</spawn>
-				
+
 				<!-- Guardian Warrior -->
 				<spawn npc_id="235185" handler="GUARDIAN" respawn_time="295">
 					<spot x="1277.3534" y="1438.9331" z="274.00850" h="4"/>
 					<spot x="1255.6794" y="1431.9313" z="275.00430" h="5"/>
 					<spot x="1251.2692" y="1438.2194" z="275.13870" h="8"/>
 				</spawn>
-				
+
 				<!-- Tomul Brawler FI -->
 				<spawn npc_id="235354" handler="OUTRIDER" respawn_time="295">
 					<spot x="1153.6527" y="1537.5183" z="268.48950" h="109"/>
@@ -2594,8 +2594,8 @@
 					<spot x="1342.5810" y="1479.6690" z="263.01560" h="42"/>
 					<spot x="1404.0896" y="1448.1461" z="266.97113" h="47"/>
 				</spawn>
-			</simple_race>
-			<simple_race race="ASMODIANS">
+			</occupier_template>
+			<occupier_template occupier="ASMODIANS">
 				<!-- East Picket -->
 				<spawn npc_id="832150" handler="FLAG">
 					<spot x="1258.119" y="1437.25" z="275" h="5"/>
@@ -2644,14 +2644,14 @@
 				<spawn npc_id="805285" handler="MERCHANT" respawn_time="295">
 					<spot x="1263.0" y="1427.0" z="274.75" h="13"/>
 				</spawn>
-				
+
 				<!-- Archon Aggressor -->
 				<spawn npc_id="235197" handler="GUARDIAN" respawn_time="295">
 					<spot x="1277.3534" y="1438.9331" z="274.00850" h="4"/>
 					<spot x="1255.6794" y="1431.9313" z="275.00430" h="5"/>
 					<spot x="1251.2692" y="1438.2194" z="275.13870" h="8"/>
 				</spawn>
-				
+
 				<!-- Denku Feralclaw FI -->
 				<spawn npc_id="235358" handler="OUTRIDER" respawn_time="295">
 					<spot x="1153.6527" y="1537.5183" z="268.48950" h="109"/>
@@ -2687,8 +2687,8 @@
 					<spot x="1342.5810" y="1479.6690" z="263.01560" h="42"/>
 					<spot x="1404.0896" y="1448.1461" z="266.97113" h="47"/>
 				</spawn>
-			</simple_race>
-			<simple_race race="NPC">
+			</occupier_template>
+			<occupier_template occupier="BALAUR">
 				<!-- East Picket -->
 				<spawn npc_id="832171" handler="FLAG">
 					<spot x="1258.119" y="1437.25" z="275" h="5"/>
@@ -2725,10 +2725,10 @@
 				<spawn npc_id="235177" handler="SENTINEL" respawn_time="295">
 					<spot x="1262.599" y="1426.434" z="274.75" h="15"/>
 				</spawn>
-			</simple_race>
+			</occupier_template>
 		</base_spawn>
-		<base_spawn id="6113"> 
-			<simple_race race="ELYOS">
+		<base_spawn id="6113">
+			<occupier_template occupier="ELYOS">
 				<!-- Dragon Lord's Shrine -->
 				<spawn npc_id="832119" handler="FLAG">
 					<spot x="932.3712" y="1051.291" z="334.2469" h="60"/>
@@ -2836,7 +2836,7 @@
 				</spawn>
 				<!-- Tomul Cutthroat -->
 				<spawn npc_id="235379" handler="OUTRIDER" respawn_time="295">
-					<spot x="828.8974" y="1053.9001" z="332.55643"/>	
+					<spot x="828.8974" y="1053.9001" z="332.55643"/>
 					<spot x="842.3781" y="1083.1769" z="335.75270"/>
 					<spot x="899.5434" y="1143.8344" z="331.97638"/>
 					<spot x="944.2136" y="1124.7611" z="332.23666" h="37"/>
@@ -2872,8 +2872,8 @@
 					<spot x="985.2102" y="907.10583" z="324.90146" h="53"/>
 					<spot x="824.0280" y="1013.4136" z="329.87674"/>
 				</spawn>
-			</simple_race>
-			<simple_race race="ASMODIANS">
+			</occupier_template>
+			<occupier_template occupier="ASMODIANS">
 				<!-- Dragon Lord's Shrine -->
 				<spawn npc_id="832140" handler="FLAG">
 					<spot x="932.3712" y="1051.291" z="334.2469" h="60"/>
@@ -2966,7 +2966,7 @@
 				<spawn npc_id="731460" handler="MERCHANT" respawn_time="295">
 					<spot x="943.09155" y="1034.9174" z="334.29272" static_id="959" />
 				</spawn>
-				
+
 				<!-- Denku Feralclaw -->
 				<spawn npc_id="235382" handler="OUTRIDER" respawn_time="295">
 					<spot x="822.5720" y="1034.7391" z="330.67120"/>
@@ -2982,7 +2982,7 @@
 				</spawn>
 				<!-- Denku Fang -->
 				<spawn npc_id="235383" handler="OUTRIDER" respawn_time="295">
-					<spot x="828.8974" y="1053.9001" z="332.55643"/>	
+					<spot x="828.8974" y="1053.9001" z="332.55643"/>
 					<spot x="842.3781" y="1083.1769" z="335.75270"/>
 					<spot x="899.5434" y="1143.8344" z="331.97638"/>
 					<spot x="944.2136" y="1124.7611" z="332.23666" h="37"/>
@@ -3018,8 +3018,8 @@
 					<spot x="985.2102" y="907.10583" z="324.90146" h="53"/>
 					<spot x="824.0280" y="1013.4136" z="329.87674"/>
 				</spawn>
-			</simple_race>
-			<simple_race race="NPC">
+			</occupier_template>
+			<occupier_template occupier="BALAUR">
 				<!-- Dragon Lord's Shrine -->
 				<spawn npc_id="832161" handler="FLAG">
 					<spot x="932.3712" y="1051.291" z="334.2469" h="60"/>
@@ -3064,7 +3064,7 @@
 				<spawn npc_id="235183" handler="SENTINEL" respawn_time="295">
 					<spot x="943.4745" y="1052.504" z="334.2469" h="45"/>
 				</spawn>
-			</simple_race>
+			</occupier_template>
 		</base_spawn>
 	</spawn_map>
 </spawns>

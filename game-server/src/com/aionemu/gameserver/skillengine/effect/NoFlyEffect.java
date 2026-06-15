@@ -17,9 +17,7 @@ public class NoFlyEffect extends EffectTemplate {
 
 	@Override
 	public void calculate(Effect effect) {
-		// Affects only players (for now as we dont have flying Npc's)
-		if (effect.getEffected() instanceof Player)
-			super.calculate(effect, StatEnum.NOFLY_RESISTANCE, null);
+		super.calculate(effect, StatEnum.NOFLY_RESISTANCE, null);
 	}
 
 	@Override
@@ -28,9 +26,18 @@ public class NoFlyEffect extends EffectTemplate {
 	}
 
 	@Override
-	public void startEffect(Effect effect) {
-		((Player) effect.getEffected()).getFlyController().endFly(true);
+	protected boolean isDodgedOrResisted(Effect effect, StatEnum statEnum) {
+		if (effect.getEffected().getEffectController().isInAnyAbnormalState(AbnormalState.INVULNERABLE_WING)) {
+			return true;
+		}
+		return super.isDodgedOrResisted(effect, statEnum);
+	}
 
+	@Override
+	public void startEffect(Effect effect) {
+		if (effect.getEffected() instanceof Player player) {
+			player.getFlyController().endFly(true);
+		}
 		effect.setAbnormal(AbnormalState.NOFLY);
 		effect.getEffected().getEffectController().setAbnormal(AbnormalState.NOFLY);
 	}

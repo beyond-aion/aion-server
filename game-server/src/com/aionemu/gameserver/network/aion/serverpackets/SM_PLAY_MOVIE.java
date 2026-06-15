@@ -9,35 +9,28 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
  */
 public class SM_PLAY_MOVIE extends AionServerPacket {
 
-	private int type = 1; // if 1: CutSceneMovies else CutScenes
-	private int movieId = 0;
-	private int id = 0; // id scene ?
-	private int restrictionId;
-	private int objectId;
+	private final boolean isMovie;
+	private final int objectId;
+	private final int questId;
+	private final int cutsceneId;
+	private final boolean canSkip;
 
-	public SM_PLAY_MOVIE(int type, int movieId) {
-		this.type = type;
-		this.movieId = movieId;
-	}
-
-	public SM_PLAY_MOVIE(int type, int id, int movieId, int restrictionId) {
-		this(type, movieId);
-		this.id = id;
-		this.restrictionId = restrictionId;
-	}
-
-	public SM_PLAY_MOVIE(int type, int id, int movieId, int restrictionId, int objectId) {
-		this(type, id, movieId, restrictionId);
+	public SM_PLAY_MOVIE(boolean isCutsceneMovie, int objectId, int questId, int cutsceneId, boolean canSkip) {
+		this.isMovie = isCutsceneMovie;
 		this.objectId = objectId;
+		this.questId = questId;
+		this.cutsceneId = cutsceneId;
+		this.canSkip = canSkip;
 	}
 
 	@Override
 	protected void writeImpl(AionConnection con) {
 		con.getActivePlayer().setCustomState(CustomPlayerState.WATCHING_CUTSCENE);
-		writeC(type);
+		writeC(isMovie ? 1 : 0); // if 1: CutSceneMovies else CutScenes
 		writeD(objectId);
-		writeD(id);
-		writeH(movieId);
-		writeD(restrictionId); // 16777216 (leftmost byte = 1) disables the ability to abort the video
+		writeD(questId);
+		writeD(cutsceneId);
+		writeC(0); // unknown
+		writeC(canSkip ? 0 : 1);
 	}
 }

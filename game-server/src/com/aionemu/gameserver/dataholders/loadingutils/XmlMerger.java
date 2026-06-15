@@ -4,6 +4,7 @@ import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.file.Files;
+import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -22,6 +23,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.xml.XmlUtil;
 import com.sun.xml.bind.v2.util.ByteArrayOutputStreamEx;
@@ -81,6 +83,8 @@ public class XmlMerger {
 	 * If this option is enabled you import the directory, and all its subdirectories. Default is 'true'.
 	 */
 	private static final QName qNameRecursiveImport = new QName("recursiveImport");
+
+	private static final Map<Integer, String> COUNTRY_REGION = Map.of(1, "usa", 2, "europe", 4, "japan", 5, "china", 6, "taiwan", 7, "russia");
 
 	private final File sourceFile;
 	private final File destFile;
@@ -201,6 +205,7 @@ public class XmlMerger {
 	 */
 	private void processImportElement(XMLStreamReader reader, XMLStreamWriter writer, Metadata metadata) throws XMLStreamException, IOException {
 		File file = new File(sourceFile.getParent(), getAttributeValue(reader, qNameFile, null));
+		file = applyCountryOverride(file);
 
 		if (!file.exists())
 			throw new FileNotFoundException("Missing file to import:" + file.getPath());
@@ -218,6 +223,21 @@ public class XmlMerger {
 			}
 			writer.writeEndElement();
 		}
+	}
+
+	/**
+	 * Returns the region specific variant of the imported file if it exists and matches the configured country code, otherwise the file itself.
+	 */
+	private static File applyCountryOverride(File file) {
+		String region = COUNTRY_REGION.get(GSConfig.SERVER_COUNTRY_CODE);
+		if (region == null)
+			return file;
+		String name = file.getName();
+		int dot = name.lastIndexOf('.');
+		String base = dot < 0 ? name : name.substring(0, dot);
+		String ext = dot < 0 ? "" : name.substring(dot);
+		File override = new File(file.getParentFile(), base + '_' + region + ext);
+		return override.isFile() ? override : file;
 	}
 
 	/**
@@ -349,6 +369,7 @@ public class XmlMerger {
 				throw new SAXParseException("Attribute 'file' is missing", locator);
 
 			File file = new File(basedir, value);
+			file = applyCountryOverride(file);
 
 			if (!file.exists())
 				throw new SAXParseException("Imported file not found. file=" + file.getPath(), locator);

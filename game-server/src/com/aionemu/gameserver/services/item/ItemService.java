@@ -7,7 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.configs.main.LoggingConfig;
-import com.aionemu.gameserver.dao.ItemStoneListDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Equipment;
@@ -31,12 +30,6 @@ public class ItemService {
 
 	public static final ItemUpdatePredicate DEFAULT_UPDATE_PREDICATE = new ItemUpdatePredicate(ItemAddType.ITEM_COLLECT,
 		ItemUpdateType.INC_ITEM_COLLECT);
-
-	public static void loadItemStones(Collection<Item> itemList) {
-		if (itemList != null && itemList.size() > 0) {
-			ItemStoneListDAO.load(itemList);
-		}
-	}
 
 	public static long addItem(Player player, int itemId, long count, boolean allowInventoryOverflow) {
 		return addItem(player, itemId, count, null, allowInventoryOverflow, DEFAULT_UPDATE_PREDICATE);

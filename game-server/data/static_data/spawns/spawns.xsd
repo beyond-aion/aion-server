@@ -31,16 +31,16 @@
 	</xs:complexType>
 	<xs:complexType name="BaseSpawn">
 		<xs:sequence>
-			<xs:element name="simple_race" type="SimpleRaceTemplate" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="occupier_template" type="BaseOccupierTemplate" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 		<xs:attribute name="id" type="xs:int"/>
 		<xs:attribute name="world" type="xs:int"/>
 	</xs:complexType>
-	<xs:complexType name="SimpleRaceTemplate">
+	<xs:complexType name="BaseOccupierTemplate">
 		<xs:sequence>
 			<xs:element name="spawn" type="Spawn" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
-		<xs:attribute name="race" type="Race" use="required" />
+		<xs:attribute name="occupier" type="BaseOccupier" use="required" />
 	</xs:complexType>
 	<xs:complexType name="RiftSpawn">
 		<xs:sequence>
@@ -98,7 +98,7 @@
 		<xs:sequence>
 			<xs:element name="siege_mod" type="SiegeModTemplate" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
-		<xs:attribute name="race" type="SiegeRaceType"/>
+		<xs:attribute name="race" type="SiegeRaceType" use="required"/>
 	</xs:complexType>
 	<xs:complexType name="SiegeModTemplate">
 		<xs:sequence>
@@ -106,19 +106,19 @@
 		</xs:sequence>
 		<xs:attribute name="mod" type="SiegeModType"/>
 	</xs:complexType>
-	<xs:complexType name="MercenarySpawn">		
+	<xs:complexType name="MercenarySpawn">
 		<xs:sequence>
 			<xs:element name="mercenary_race" type="MercenaryRace" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 		<xs:attribute name="siege_id" type="xs:int"/>
 	</xs:complexType>
-	<xs:complexType name="MercenaryRace">		
+	<xs:complexType name="MercenaryRace">
 		<xs:sequence>
 			<xs:element name="mercenary_zone" type="MercenaryZone" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 		<xs:attribute name="race" type="Race"/>
 	</xs:complexType>
-	<xs:complexType name="MercenaryZone">		
+	<xs:complexType name="MercenaryZone">
 		<xs:sequence>
 			<xs:element name="spawn" type="Spawn" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
@@ -130,10 +130,10 @@
 			<xs:element name="spot" type="SpawnSpotTemplate" minOccurs="1" maxOccurs="unbounded"/>
 		</xs:sequence>
 		<xs:attribute name="npc_id" type="xs:int" use="required"/>
-		<xs:attribute name="pool" type="xs:int" use="optional"/>
+		<xs:attribute name="pool" type="xs:int"/>
 		<xs:attribute name="respawn_time" type="xs:int"/>
 		<xs:attribute name="handler" type="SpawnHandlerType"/>
-		<xs:attribute name="custom" type="xs:boolean" use="optional" default="false"/>
+		<xs:attribute name="custom" type="xs:boolean" default="false"/>
 		<xs:attribute name="difficult_id" type="xs:byte"/>
 	</xs:complexType>
 	<xs:complexType name="SpawnSpotTemplate">
@@ -143,14 +143,15 @@
 		<xs:attribute name="x" type="xs:float"/>
 		<xs:attribute name="y" type="xs:float"/>
 		<xs:attribute name="z" type="xs:float"/>
-		<xs:attribute name="h" type="HeadingType" use="optional" default="0"/>
-		<xs:attribute name="static_id" type="xs:int" use="optional" default="0"/>
-		<xs:attribute name="random_walk" type="xs:int" use="optional" default="0"/>
+		<xs:attribute name="h" type="HeadingType" default="0"/>
+		<xs:attribute name="static_id" type="xs:int" default="0"/>
+		<xs:attribute name="random_walk" type="xs:int" default="0"/>
 		<xs:attribute name="walker_id" type="xs:string"/>
-		<xs:attribute name="walker_index" type="xs:int" use="optional" default="0"/>
-		<xs:attribute name="fly" type="xs:int" use="optional" default="0"/>
+		<xs:attribute name="walker_index" type="xs:int" default="0"/>
+		<xs:attribute name="fly" type="xs:int" default="0"/>
 		<xs:attribute name="anchor" type="xs:string"/>
-		<xs:attribute name="state" type="xs:int" use="optional" default="0"/>
+		<xs:attribute name="state" type="xs:int" default="0"/>
+		<xs:attribute name="aerial_spawn" type="xs:boolean"/>
 		<xs:attribute name="ai" type="xs:string"/>
 	</xs:complexType>
 	<xs:complexType name="TemporarySpawn">
@@ -198,7 +199,7 @@
 			<xs:enumeration value="BOSS"/>
 			<xs:enumeration value="FLAG"/>
 			<xs:enumeration value="GUARDIAN"/>
-			<xs:enumeration value="MERCHANT"/>			
+			<xs:enumeration value="MERCHANT"/>
 			<xs:enumeration value="OUTRIDER"/>
 			<xs:enumeration value="OUTRIDER_ENHANCED"/>
 			<xs:enumeration value="RIFT"/>

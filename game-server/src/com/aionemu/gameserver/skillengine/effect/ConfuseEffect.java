@@ -19,7 +19,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_TARGET_IMMOBILIZE;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_POSITION;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
@@ -75,7 +75,7 @@ public class ConfuseEffect extends EffectTemplate {
 	public void endEffect(Effect effect) {
 		effect.getEffected().getEffectController().unsetAbnormal(AbnormalState.CONFUSE);
 		effect.getEffected().getMoveController().abortMove();
-		PacketSendUtility.broadcastPacketAndReceive(effect.getEffected(), new SM_TARGET_IMMOBILIZE(effect.getEffected()));
+		PacketSendUtility.broadcastPacketAndReceive(effect.getEffected(), new SM_POSITION(effect.getEffected()));
 
 		if (effect.getEffected() instanceof Npc) {
 			effect.getEffected().getAi().setStateIfNot(AIState.IDLE);

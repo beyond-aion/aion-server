@@ -7,10 +7,9 @@ import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.ai.handler.*;
 import com.aionemu.gameserver.ai.manager.SkillAttackManager;
-import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.controllers.attack.AggroTarget;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.skill.NpcSkillEntry;
 
@@ -101,30 +100,26 @@ public class GeneralNpcAI extends NpcAI {
 
 	@Override
 	public void handleCreatureDetected(Creature creature) {
-		if (getOwner().isInInstance())
-			getOwner().getPosition().getWorldMapInstance().getInstanceHandler().onCreatureDetected(getOwner(), creature);
+		getOwner().getPosition().getWorldMapInstance().getInstanceHandler().onCreatureDetected(getOwner(), creature);
 	}
 
 	@Override
 	protected boolean canHandleEvent(AIEventType eventType) {
 		switch (eventType) {
 			case CREATURE_NEEDS_SUPPORT:
-				return (getState() == AIState.IDLE || getState() == AIState.WALKING) && DataManager.TRIBE_RELATIONS_DATA.hasSupportRelations(
-					getOwner().getTribe());
+				return getState() == AIState.IDLE || getState() == AIState.WALKING;
 		}
 		return super.canHandleEvent(eventType);
 	}
 
 	@Override
 	public AttackIntention chooseAttackIntention() {
-		VisibleObject currentTarget = getTarget();
-		Creature mostHated = getAggroList().getMostHated();
-
-		if (mostHated == null || mostHated.isDead())
-			return AttackIntention.FINISH_ATTACK;
-
-		if (currentTarget == null)
+		if (!(getTarget() instanceof Creature target) || !getAggroList().isHating(target)) {
+			Creature mostHated = getAggroList().getTarget(AggroTarget.MOST_HATED);
+			if (mostHated == null)
+				return AttackIntention.FINISH_ATTACK;
 			onCreatureEvent(AIEventType.TARGET_CHANGED, mostHated);
+		}
 
 		if (chooseSkillAttack(getOwner().getObjectTemplate().getAttackRange() == 0))
 			return AttackIntention.SKILL_ATTACK;
@@ -136,8 +131,7 @@ public class GeneralNpcAI extends NpcAI {
 		NpcSkillEntry skill = alwaysRandomSkill ? getOwner().getSkillList().getRandomSkill() : SkillAttackManager.chooseNextSkill(this);
 		if (skill != null) {
 			getOwner().getGameStats().setLastSkill(skill);
-			if (skill.equals(getOwner().getQueuedSkills().peek()))
-				getOwner().getQueuedSkills().poll();
+			getOwner().removeNextQueuedSkill(skill);
 			return true;
 		}
 		return false;

@@ -1,7 +1,8 @@
 package com.aionemu.gameserver.dao;
 
 import java.sql.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +20,7 @@ import com.aionemu.gameserver.model.account.PlayerAccountData;
 import com.aionemu.gameserver.model.gameobjects.player.Mailbox;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
-import com.aionemu.gameserver.world.World;
+import com.aionemu.gameserver.model.team.legion.LegionRank;
 
 /**
  * Class that is responsible for storing/loading player data
@@ -91,11 +92,11 @@ public class PlayerDAO {
 			stmt.setString(2, player.getName());
 			stmt.setInt(3, accountId);
 			stmt.setString(4, accountName);
-			stmt.setFloat(5, player.getPosition().getX());
-			stmt.setFloat(6, player.getPosition().getY());
-			stmt.setFloat(7, player.getPosition().getZ());
-			stmt.setInt(8, player.getPosition().getHeading());
-			stmt.setInt(9, player.getPosition().getMapId());
+			stmt.setFloat(5, player.getCommonData().getX());
+			stmt.setFloat(6, player.getCommonData().getY());
+			stmt.setFloat(7, player.getCommonData().getZ());
+			stmt.setInt(8, player.getCommonData().getHeading());
+			stmt.setInt(9, player.getCommonData().getMapId());
 			stmt.setString(10, player.getGender().toString());
 			stmt.setString(11, player.getRace().toString());
 			stmt.setString(12, player.getPlayerClass().toString());
@@ -113,10 +114,6 @@ public class PlayerDAO {
 	}
 
 	public static PlayerCommonData loadPlayerCommonDataByName(String name) {
-		Player player = World.getInstance().getPlayer(name);
-		if (player != null) {
-			return player.getCommonData();
-		}
 		int playerObjId = 0;
 
 		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement("SELECT id FROM players WHERE name = ?")) {
@@ -161,12 +158,11 @@ public class PlayerDAO {
 					cd.setDp(resultSet.getInt("dp"));
 					cd.setDeathCount(resultSet.getInt("soul_sickness"));
 					cd.setCurrentReposeEnergy(resultSet.getLong("reposte_energy"));
-					float x = resultSet.getFloat("x");
-					float y = resultSet.getFloat("y");
-					float z = resultSet.getFloat("z");
-					byte heading = resultSet.getByte("heading");
-					int worldId = resultSet.getInt("world_id");
-					cd.setPosition(World.getInstance().createPosition(worldId, x, y, z, heading, 0));
+					cd.setX(resultSet.getFloat("x"));
+					cd.setY(resultSet.getFloat("y"));
+					cd.setZ(resultSet.getFloat("z"));
+					cd.setHeading(resultSet.getByte("heading"));
+					cd.setMapId(resultSet.getInt("world_id"));
 					cd.setWorldOwnerId(resultSet.getInt("world_owner"));
 					cd.setMentorFlagTime(resultSet.getInt("mentor_flag_time"));
 					cd.setLastTransferTime(resultSet.getLong("last_transfer_time"));
@@ -442,32 +438,27 @@ public class PlayerDAO {
 		}
 	}
 
-	public static Set<Integer> getInactiveAccounts(int daysOfInactivity) {
-		String SELECT_QUERY = "SELECT account_id FROM players WHERE UNIX_TIMESTAMP(CURDATE())-UNIX_TIMESTAMP(last_online) > ? * 24 * 60 * 60";
-
-		Map<Integer, Integer> inactiveCharsByAccId = new HashMap<>();
-
-		DB.select(SELECT_QUERY, new ParamReadStH() {
-
-			@Override
-			public void setParams(PreparedStatement stmt) throws SQLException {
-				stmt.setInt(1, daysOfInactivity);
+	public static List<PlayerAndLegionInfo> getPlayersOnInactiveAccounts(long maxExp, int daysOfAccountInactivity) {
+		List<PlayerAndLegionInfo> players = new ArrayList<>();
+		//noinspection InconsistentTextBlockIndent
+		try (Connection con = DatabaseFactory.getConnection();
+				 PreparedStatement stmt = con.prepareStatement("""
+					 SELECT p.id, p.name, m.legion_id, m.rank
+					 FROM players p
+					 LEFT JOIN legion_members m ON p.id = m.player_id
+					 WHERE p.exp <= ? AND p.account_id IN (SELECT account_id FROM players GROUP BY account_id HAVING MAX(last_online) < NOW() - INTERVAL ? DAY)
+					 """)) {
+			stmt.setLong(1, maxExp);
+			stmt.setInt(2, daysOfAccountInactivity);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				String legionRank = rs.getString("rank");
+				players.add(new PlayerAndLegionInfo(rs.getInt("id"), rs.getString("name"), rs.getInt("legion_id"), legionRank == null ? null : LegionRank.valueOf(legionRank)));
 			}
-
-			@Override
-			public void handleRead(ResultSet rset) throws SQLException {
-				while (rset.next()) {
-					int accountId = rset.getInt("account_id");
-					// number of inactive chars on account
-					inactiveCharsByAccId.merge(accountId, 1, Integer::sum);
-				}
-			}
-		});
-
-		// exclude accounts with at least one active char on account
-		inactiveCharsByAccId.entrySet().removeIf(entry -> entry.getValue() < getCharacterCountOnAccount(entry.getKey()));
-
-		return inactiveCharsByAccId.keySet();
+		} catch (SQLException e) {
+			log.error("Couldn't get inactive players", e);
+		}
+		return players;
 	}
 
 	public static void setPlayerLastTransferTime(int playerId, long time) {
@@ -508,4 +499,5 @@ public class PlayerDAO {
 		}
 	}
 
+	public record PlayerAndLegionInfo(int playerId, String name, int legionId, LegionRank legionRank) {}
 }

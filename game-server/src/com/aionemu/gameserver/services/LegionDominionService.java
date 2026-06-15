@@ -26,7 +26,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_LEGION_DOMINION_RANK
 import com.aionemu.gameserver.network.aion.serverpackets.SM_LEGION_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.mail.SystemMailService;
-import com.aionemu.gameserver.services.player.PlayerService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.time.ServerTime;
@@ -92,7 +91,7 @@ public class LegionDominionService {
 			int previousOccupyingLegionId = loc.getLegionId();
 			if (previousOccupyingLegionId != 0) {
 				Legion legion = LegionService.getInstance().getLegion(previousOccupyingLegionId);
-				updateLegionOccupation(legion, loc.getLocationId(), false);
+				updateLegionOccupation(legion, loc, false);
 			}
 
 			// find winner of stonespear reach challenge
@@ -122,7 +121,7 @@ public class LegionDominionService {
 						int occupiedId = 0;
 						if (winner != null && legion.getLegionId() == newOccupyingLegionId)
 							occupiedId = loc.getLocationId();
-						updateLegionOccupation(legion, loc.getLocationId(), occupiedId > 0);
+						updateLegionOccupation(legion, loc, occupiedId > 0);
 					}
 				}
 				LegionDominionDAO.delete(info);
@@ -138,7 +137,7 @@ public class LegionDominionService {
 					continue;
 				List<LegionDominionReward> legionRewards = dominionRewards.get(i+1);
 				if (!legionRewards.isEmpty()) {
-					String playerName = PlayerService.getPlayerName(legion.getBrigadeGeneral());
+					String playerName = legion.getBrigadeGeneral().getName();
 					for (LegionDominionReward reward : legionRewards) {
 						// TODO send proper system (most likely $$GD_REWARD_MAIL) mail
 						SystemMailService.sendMail("Legion Dominion", playerName, "Reward Mail", "", reward.getItemId(), reward.getCount(),
@@ -153,14 +152,14 @@ public class LegionDominionService {
 		PacketSendUtility.broadcastToWorld(new SM_LEGION_DOMINION_LOC_INFO());
 	}
 
-	private void updateLegionOccupation(Legion legion, int territorialId, boolean shouldOccupy) {
+	private void updateLegionOccupation(Legion legion, LegionDominionLocation location, boolean shouldOccupy) {
 		if (legion == null)
 			return;
-		legion.setOccupiedLegionDominion(shouldOccupy ? territorialId : 0);
-		legion.setLastLegionDominion(territorialId);
+		legion.setOccupiedLegionDominion(shouldOccupy ? location.getLocationId() : 0);
+		legion.setLastLegionDominion(location.getLocationId());
 		legion.setCurrentLegionDominion(0);
 		LegionDAO.storeLegion(legion);
-		PacketSendUtility.broadcastToLegion(legion, new SM_LEGION_DOMINION_RANK(territorialId));
+		PacketSendUtility.broadcastToLegion(legion, new SM_LEGION_DOMINION_RANK(location, legion));
 		PacketSendUtility.broadcastToLegion(legion, new SM_LEGION_INFO(legion));
 	}
 

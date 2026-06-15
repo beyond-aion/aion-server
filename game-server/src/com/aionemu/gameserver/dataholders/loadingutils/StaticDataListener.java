@@ -29,7 +29,7 @@ public class StaticDataListener extends Unmarshaller.Listener {
 	public static void registerForAsyncExecutionOrRun(Unmarshaller u, Runnable task) {
 		StaticData staticData = get(u);
 		if (staticData != null) {
-			staticData.addAfterUnmarshalTask(ThreadPoolManager.getInstance().submit(task));
+			staticData.addAfterUnmarshalTask(ThreadPoolManager.getInstance().submitLongRunning(task));
 		} else {
 			task.run();
 		}

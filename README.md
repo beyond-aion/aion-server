@@ -1,7 +1,7 @@
 ![Aion 4.8 Banner](https://github.com/beyond-aion/aion-server/assets/1169307/494205be-399a-4e2e-8435-1f0774d92262)
 <div align="center">
 
-  ![](https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Fgithub.com%2Fbeyond-aion%2Faion-server%2Fraw%2F4.8%2Fgame-server%2Fpom.xml&query=%2F*%5Blocal-name()%3D%22project%22%5D%2F*%5Blocal-name()%3D%22build%22%5D%2F*%5Blocal-name()%3D%22plugins%22%5D%2F*%5Blocal-name()%3D%22plugin%22%5D%5B*%5Blocal-name()%3D%22artifactId%22%5D%2Ftext()%20%3D%20'maven-compiler-plugin'%5D%2F*%5Blocal-name()%3D%22configuration%22%5D%2F*%5Blocal-name()%3D%22release%22%5D%2Ftext()&label=Java%20version)
+  ![](https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Fgithub.com%2Fbeyond-aion%2Faion-server%2Fraw%2F4.8%2Fpom.xml&query=%2F%2A%5Blocal-name%28%29%3D%22project%22%5D%2F%2A%5Blocal-name%28%29%3D%22properties%22%5D%2F%2A%5Blocal-name%28%29%3D%22maven.compiler.release%22%5D%2Ftext%28%29&label=Java%20version)
   [![](https://img.shields.io/github/contributors-anon/beyond-aion/aion-server)](https://htmlpreview.github.io/?https://gist.github.com/neon-dev/ce9729bcacaac31f78771b8521512d0a/raw/contributors.html&repo=beyond-aion/aion-server&title=Beyond%20Aion%20Server%20Contributors)
   ![](https://img.shields.io/github/repo-size/beyond-aion/aion-server)
 
@@ -43,6 +43,7 @@ The following is a very incomplete list of some notable things we have worked on
 - Fixed the event engine and added new features like automatic buffs or config overrides
 - Removed, merged or reworked many chat commands, implemented descriptions, common error handling and a permission aware `.help` command
 - Implemented true invisibility against anti hide hacks
+- Fixed motion validation to combat no-animation hacks
 - Fixed many stat and skill related issues with players and NPCs
 - Implemented more AI handler events and controls like queueing of skills
 - Fixed countless core bugs of various severities, like wrong chance calculations, login problems or even client crashes

@@ -8,10 +8,10 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.gameserver.configs.main.SecurityConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.dataholders.PlayerInitialData;
+import com.aionemu.gameserver.model.CreatureType;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.TaskId;
-import com.aionemu.gameserver.model.TribeClass;
 import com.aionemu.gameserver.model.actions.PlayerMode;
 import com.aionemu.gameserver.model.animations.ArrivalAnimation;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
@@ -37,6 +37,7 @@ import com.aionemu.gameserver.model.templates.teleport.TeleportType;
 import com.aionemu.gameserver.model.templates.teleport.TeleporterTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.*;
 import com.aionemu.gameserver.services.DuelService;
+import com.aionemu.gameserver.services.LegionService;
 import com.aionemu.gameserver.services.PrivateStoreService;
 import com.aionemu.gameserver.services.SiegeService;
 import com.aionemu.gameserver.services.conquerorAndProtectorSystem.ConquerorAndProtectorService;
@@ -63,35 +64,29 @@ public class TeleportService {
 	private static double[] eventPosAsmodians;
 	private static double[] eventPosElyos;
 
-	/**
-	 * Performs flight teleportation
-	 */
-	public static void teleport(TeleporterTemplate template, int locId, Player player, Npc npc, TeleportAnimation animation) {
-		TribeClass tribe = npc.getTribe();
-		Race race = player.getRace();
-		if (tribe.equals(TribeClass.FIELD_OBJECT_LIGHT) && race.equals(Race.ASMODIANS)
-			|| (tribe.equals(TribeClass.FIELD_OBJECT_DARK) && race.equals(Race.ELYOS))) {
+	public static void teleportToFirstTeleportLocation(Player player, Npc teleporter, TeleportAnimation animation) {
+		TeleporterTemplate teleporterTemplate = validateTeleporterAndGetTemplate(player, teleporter);
+		if (teleporterTemplate == null)
 			return;
-		}
+		teleport(player, teleporterTemplate.getTeleLocIdData().getTelelocations().getFirst(), animation);
+	}
 
-		TeleportLocation location = template.getTeleLocIdData() == null ? null : template.getTeleLocIdData().getTeleportLocation(locId);
-		if (location == null) {
-			log.warn("Missing location in npc_teleporter.xml for locId {} (npc {})", locId, npc.getNpcId());
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_NO_ROUTE());
-			return;
-		}
-
-		TelelocationTemplate locationTemplate = DataManager.TELELOCATION_DATA.getTelelocationTemplate(locId);
+	public static void teleport(Player player, TeleportLocation location, TeleportAnimation animation) {
+		TelelocationTemplate locationTemplate = DataManager.TELELOCATION_DATA.getTelelocationTemplate(location.getLocId());
 		if (locationTemplate == null) {
-			log.warn("Missing teleloc_template in teleport_location.xml with locId {}", locId);
+			log.warn("Missing teleloc_template in teleport_location.xml with locId {}", location.getLocId());
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_NO_ROUTE());
 			return;
 		}
 
 		// TODO: remove teleportation route if it's enemy fortress (1221, 1231, 1241)
-		int id = SiegeService.getInstance().getSiegeIdByLocId(locId);
+		int id = SiegeService.getInstance().getSiegeIdByLocId(location.getLocId());
 		if (id > 0 && !SiegeService.getInstance().getSiegeLocation(id).isCanTeleport(player)) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_NO_ROUTE());
+			return;
+		}
+		if (location.getRequiredQuest() != 0 && !player.isCompleteQuest(location.getRequiredQuest())) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_NEED_FINISH_QUEST());
 			return;
 		}
 
@@ -137,6 +132,30 @@ public class TeleportService {
 			sendLoc(player, mapId, instanceId, locationTemplate.getX(), locationTemplate.getY(), locationTemplate.getZ(),
 				(byte) locationTemplate.getHeading(), animation);
 		}
+	}
+
+	public static TeleporterTemplate validateTeleporterAndGetTemplate(Player player, Npc teleporter) {
+		TeleporterTemplate template = DataManager.TELEPORTER_DATA.getTeleporterTemplateByNpcId(teleporter.getNpcId());
+		if (template == null) {
+			AuditLogger.log(player, "tried to use invalid teleporter " + teleporter + " (no teleporter data) at " + player.getPosition());
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_WRONG_NPC());
+			return null;
+		}
+		CreatureType creatureType = teleporter.getType(player);
+		if (creatureType != CreatureType.FRIEND && creatureType != CreatureType.SUPPORT) {
+			AuditLogger.log(player, "tried to use invalid teleporter " + teleporter + " (wrong race) at " + player.getPosition());
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_WRONG_NPC());
+			return null;
+		}
+		if (!PositionUtil.isInTalkRange(player, teleporter)) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_FAR_FROM_NPC());
+			return null;
+		}
+		if (player.isInFlyingState()) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_USE_AIRPORT_WHEN_FLYING());
+			return null;
+		}
+		return template;
 	}
 
 	private static boolean checkKinahForTransportation(TeleportLocation location, Player player) {
@@ -220,9 +239,8 @@ public class TeleportService {
 		player.setPortAnimation(ArrivalAnimation.LANDING);
 		PacketSendUtility.sendPacket(player, new SM_PLAYER_INFO(player));
 
-		if (player.isLegionMember()) {
-			PacketSendUtility.broadcastToLegion(player.getLegion(), new SM_LEGION_UPDATE_MEMBER(player, 0, ""));
-		}
+		if (player.isLegionMember() && player.getLegionMember().getWorldId() != worldId)
+			LegionService.getInstance().updateMemberInfo(player);
 	}
 
 	public static void teleportTo(Player player, int worldId, float x, float y, float z) {
@@ -260,7 +278,6 @@ public class TeleportService {
 	public static void teleportTo(final Player player, final int worldId, final int instanceId, final float x, final float y, final float z,
 		final byte heading, TeleportAnimation animation) {
 		if (player.isDead()) {
-			PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.RESURRECT), true);
 			PlayerReviveService.revive(player, 20, 20, true, 0);
 		} else if (DuelService.getInstance().isDueling(player)) {
 			DuelService.getInstance().loseDuel(player);
@@ -269,14 +286,8 @@ public class TeleportService {
 	}
 
 	public static void showMap(Player player, Npc npc) {
-		TeleporterTemplate template = DataManager.TELEPORTER_DATA.getTeleporterTemplateByNpcId(npc.getNpcId());
-		if (template == null)
-			log.warn("No teleport id found for " + npc);
-		else if (player.isInFlyingState())
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_USE_AIRPORT_WHEN_FLYING());
-		else if (player.isEnemyFrom(npc))
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_WRONG_NPC());
-		else
+		TeleporterTemplate template = validateTeleporterAndGetTemplate(player, npc);
+		if (template != null)
 			PacketSendUtility.sendPacket(player, new SM_TELEPORT_MAP(npc.getObjectId(), template.getTeleportId()));
 	}
 
@@ -517,8 +528,8 @@ public class TeleportService {
 				if (DataManager.WORLD_MAPS_DATA.getTemplate(worldId).isInstance() && !WorldMapType.getWorld(worldId).isPersonal())
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_DUNGEON_OPENED_FOR_SELF(worldId));
 			}
-			if (player.isLegionMember())
-				PacketSendUtility.broadcastToLegion(player.getLegion(), new SM_LEGION_UPDATE_MEMBER(player, 0, ""));
+			if (player.isLegionMember() && player.getLegionMember().getWorldId() != worldId)
+				LegionService.getInstance().updateMemberInfo(player);
 		}
 
 	}

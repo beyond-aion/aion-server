@@ -37,17 +37,17 @@ public class InfinityShardInstance extends GeneralInstanceHandler {
 	public void onDie(Npc npc) {
 		super.onDie(npc);
 		switch (npc.getNpcId()) {
-			case 231083:
-				instance.getNpc(231074).getEffectController().removeEffect(21371);
+			case 231083: // Hyperion Defense Elite Assassin
+				removeIdeAethericFieldEffect(231074); // Ide Forcefield Generator
 				break;
-			case 231087:
-				instance.getNpc(231078).getEffectController().removeEffect(21371);
+			case 231087: // Hyperion Defense Elite Magus
+				removeIdeAethericFieldEffect(231078); // Ide Forcefield Generator
 				break;
-			case 231079:
-				instance.getNpc(231082).getEffectController().removeEffect(21371);
+			case 231079: // Hyperion Defense Elite Assassin
+				removeIdeAethericFieldEffect(231082); // Ide Forcefield Generator
 				break;
-			case 231075:
-				instance.getNpc(231086).getEffectController().removeEffect(21371);
+			case 231075: // Agent Kabalash
+				removeIdeAethericFieldEffect(231086); // Ide Forcefield Generator
 				break;
 			case 231074:
 			case 231078:
@@ -70,6 +70,12 @@ public class InfinityShardInstance extends GeneralInstanceHandler {
 				// rewardGP();
 				break;
 		}
+	}
+
+	private void removeIdeAethericFieldEffect(int npcId) {
+		Npc npc = instance.getNpc(npcId);
+		if (npc != null)
+			npc.getEffectController().removeEffect(21371);
 	}
 
 	@Override
@@ -190,8 +196,8 @@ public class InfinityShardInstance extends GeneralInstanceHandler {
 	}
 
 	@Override
-	public void onPlayerLogOut(Player player) {
-		super.onPlayerLogOut(player);
+	public void onPlayerLogout(Player player) {
+		super.onPlayerLogout(player);
 		if (player.isDead()) {
 			TeleportService.moveToBindLocation(player);
 		}

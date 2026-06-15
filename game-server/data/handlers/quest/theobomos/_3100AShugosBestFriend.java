@@ -4,12 +4,10 @@ import static com.aionemu.gameserver.model.DialogAction.*;
 
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Balthazar
@@ -42,8 +40,8 @@ public class _3100AShugosBestFriend extends AbstractQuestHandler {
 				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
+					case ASK_QUEST_ACCEPT:
 					case QUEST_ACCEPT_1:
-					case QUEST_ACCEPT_SIMPLE:
 						return sendQuestStartDialog(env, 182208072, 1);
 				}
 			}
@@ -63,12 +61,7 @@ public class _3100AShugosBestFriend extends AbstractQuestHandler {
 							return false;
 						}
 						case SETPRO1: {
-							removeQuestItem(env, 182208072, 1);
-							qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
-							qs.setStatus(QuestStatus.REWARD);
-							updateQuestStatus(env);
-							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-							return true;
+							return defaultCloseDialog(env, 0, 1, true,false, 0, 0, 182208072, 1);
 						}
 					}
 			}

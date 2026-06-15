@@ -6,14 +6,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.gameobjects.Creature;
-import com.aionemu.gameserver.model.gameobjects.Gatherable;
-import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.VisibleObject;
+import com.aionemu.gameserver.model.gameobjects.*;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.StageList;
 import com.aionemu.gameserver.model.instance.StageType;
 import com.aionemu.gameserver.model.instance.instancescore.InstanceScore;
+import com.aionemu.gameserver.model.items.storage.Storage;
 import com.aionemu.gameserver.model.templates.npc.NpcRating;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -22,6 +20,7 @@ import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
+import com.aionemu.gameserver.world.WorldType;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
@@ -51,7 +50,7 @@ public class GeneralInstanceHandler implements InstanceHandler {
 	}
 
 	@Override
-	public void onPlayerLogOut(Player player) {
+	public void onPlayerLogout(Player player) {
 	}
 
 	@Override
@@ -64,6 +63,8 @@ public class GeneralInstanceHandler implements InstanceHandler {
 
 	@Override
 	public void onLeaveInstance(Player player) {
+		player.getEffectController().removeInstanceEffects();
+		removeInstanceItems(player);
 	}
 
 	@Override
@@ -123,11 +124,6 @@ public class GeneralInstanceHandler implements InstanceHandler {
 	 */
 	protected void sendMsg(SM_SYSTEM_MESSAGE msg, int delay) {
 		PacketSendUtility.broadcastToMap(instance, msg, delay);
-	}
-
-	@Override
-	public float getInstanceExpMultiplier() {
-		return instance != null && instance.getParent().isInstanceType() ? 1.5f : 1.25f; // instance maps * 1.5, world maps * 1.25
 	}
 
 	@Override
@@ -250,8 +246,47 @@ public class GeneralInstanceHandler implements InstanceHandler {
 	}
 
 	@Override
-	public float getInstanceApMultiplier() {
+	public float getExpMultiplier() {
+		return instance.getParent().isInstanceType() ? 1.5f : 1.25f; // on retail, instances reward more exp than regular world maps
+	}
+
+	@Override
+	public float getApMultiplier() {
 		return 1f;
 	}
 
+	@Override
+	public boolean allowSelfReviveBySkill() {
+		return true; // see skill_prohibit_set_id in client /data/world/worldid.xml + data/skills/client_skill_prohibit.xml
+	}
+
+	@Override
+	public boolean allowSelfReviveByItem() {
+		return true;
+	}
+
+	@Override
+	public boolean allowKiskRevive() {
+		return !instance.getTemplate().isInstance();
+	}
+
+	@Override
+	public boolean allowInstanceRevive() {
+		return instance.getTemplate().isInstance() && getClass() != GeneralInstanceHandler.class || instance.getTemplate().getWorldType() == WorldType.PANESTERRA;
+	}
+
+	protected boolean isRestrictedToInstance(Item item) {
+		return item.getItemTemplate().isItemRestrictedToWorld(instance.getMapId());
+	}
+
+	private void removeInstanceItems(Player player) {
+		for (Item item : player.getInventory().getItems())
+			if (isRestrictedToInstance(item))
+				player.getInventory().decreaseByObjectId(item.getObjectId(), item.getItemCount());
+		for (Storage storage : player.getPetBags()) {
+			for (Item item : storage.getItems())
+				if (isRestrictedToInstance(item))
+					storage.decreaseByObjectId(item.getObjectId(), item.getItemCount());
+		}
+	}
 }

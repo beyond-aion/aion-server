@@ -18,9 +18,9 @@ import com.aionemu.gameserver.skillengine.model.Skill;
 public class ChainCondition extends Condition {
 
 	@XmlAttribute(name = "selfcount")
-	private int selfCount;
+	private int selfCount = 1;
 	@XmlAttribute(name = "precount")
-	private int preCount;
+	private int preCount = 1;
 	@XmlAttribute(name = "category")
 	private String category;
 	@XmlAttribute(name = "precategory")
@@ -30,8 +30,8 @@ public class ChainCondition extends Condition {
 
 	@Override
 	public boolean validate(Skill env) {
-		if (env.getEffector() instanceof Player) {
-			ChainSkills chain = ((Player) env.getEffector()).getChainSkills();
+		if (env.getEffector() instanceof Player player) {
+			ChainSkills chain =  player.getChainSkills();
 			ChainSkill currentSkill = chain.getCurrentChainSkill();
 
 			if (shouldReset(chain, env))
@@ -49,7 +49,6 @@ public class ChainCondition extends Condition {
 
 		env.setChainCategory(category);
 		env.setChainUsageDuration(time);
-		env.setIsMultiCast(selfCount > 1);
 		return true;
 	}
 

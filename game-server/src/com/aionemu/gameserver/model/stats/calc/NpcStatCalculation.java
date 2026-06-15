@@ -30,7 +30,7 @@ public class NpcStatCalculation {
 			case PARRY -> level * 40f;
 			case PHYSICAL_CRITICAL_RESIST -> (level - 50) * 2.5f;
 			case MAGICAL_CRITICAL_RESIST -> (level - 50) * 1.1f;
-			case ABNORMAL_RESISTANCE_ALL -> 100f;
+			case STUNLIKE_RESISTANCE -> 100f;
 			default -> throw new IllegalArgumentException("Stat calculation for " + stat + " is not implemented");
 		};
 	}
@@ -39,7 +39,7 @@ public class NpcStatCalculation {
 		return switch (rating) {
 			case JUNK, NORMAL -> switch (stat) {
 					case MAGICAL_ATTACK -> 0.4f;
-					case ABNORMAL_RESISTANCE_ALL -> 0f;
+					case STUNLIKE_RESISTANCE -> 0f;
 					default -> 1f;
 				};
 			case ELITE -> switch (stat) {
@@ -51,7 +51,7 @@ public class NpcStatCalculation {
 					case PARRY -> 1.025f;
 					case PHYSICAL_CRITICAL_RESIST -> 9f;
 					case MAGICAL_CRITICAL_RESIST -> 8.5f;
-					case ABNORMAL_RESISTANCE_ALL -> 5f;
+					case STUNLIKE_RESISTANCE -> 5f;
 					default -> 1f;
 				};
 			case HERO -> switch (stat) {
@@ -62,7 +62,7 @@ public class NpcStatCalculation {
 					case MAGICAL_DEFEND, PHYSICAL_DEFENSE -> 1.5f;
 					case PARRY -> 1.07f;
 					case PHYSICAL_CRITICAL_RESIST, MAGICAL_CRITICAL_RESIST -> 13.5f;
-					case ABNORMAL_RESISTANCE_ALL -> 20f;
+					case STUNLIKE_RESISTANCE -> 20f;
 					default -> 1f;
 				};
 			case LEGENDARY -> switch (stat) {
@@ -72,7 +72,7 @@ public class NpcStatCalculation {
 					case MAGICAL_ACCURACY -> 1.47f;
 					case MAGICAL_ATTACK, PARRY, PHYSICAL_ACCURACY -> 1.1f;
 					case PHYSICAL_CRITICAL_RESIST, MAGICAL_CRITICAL_RESIST -> 13.5f;
-					case ABNORMAL_RESISTANCE_ALL -> 20f;
+					case STUNLIKE_RESISTANCE -> 20f;
 					default -> 1f;
 				};
 		};
@@ -81,7 +81,7 @@ public class NpcStatCalculation {
 	private static float getRankModifier(StatEnum stat, NpcRank rank) {
 		return switch (rank) {
 			case NOVICE -> switch (stat) {
-					case ABNORMAL_RESISTANCE_ALL -> 0.2f;
+					case STUNLIKE_RESISTANCE -> 0.2f;
 					default -> 1f;
 				};
 			case DISCIPLINED -> switch (stat) {
@@ -90,7 +90,7 @@ public class NpcStatCalculation {
 					case MAGICAL_DEFEND, PHYSICAL_DEFENSE -> 1.1f;
 					case MAGICAL_ATTACK -> 1.45f;
 					case PARRY -> 1.05f;
-					case ABNORMAL_RESISTANCE_ALL -> 0.4f;
+					case STUNLIKE_RESISTANCE -> 0.4f;
 					default -> 1f;
 				};
 			case SEASONED -> switch (stat) {
@@ -101,7 +101,7 @@ public class NpcStatCalculation {
 					case PARRY -> 1.1f;
 					case PHYSICAL_ACCURACY, MAGICAL_ACCURACY -> 1.01f;
 					case PHYSICAL_CRITICAL_RESIST -> 1.4f;
-					case ABNORMAL_RESISTANCE_ALL -> 0.6f;
+					case STUNLIKE_RESISTANCE -> 0.6f;
 					default -> 1f;
 				};
 			case EXPERT -> switch (stat) {
@@ -117,7 +117,7 @@ public class NpcStatCalculation {
 				};
 			case VETERAN -> switch (stat) {
 					case PHYSICAL_ATTACK, MAGICAL_ATTACK -> 1.7f;
-					case MAGICAL_DEFEND, PHYSICAL_DEFENSE, ABNORMAL_RESISTANCE_ALL -> 1.4f;
+					case MAGICAL_DEFEND, PHYSICAL_DEFENSE, STUNLIKE_RESISTANCE -> 1.4f;
 					case MAGICAL_RESIST -> 1.05f;
 					case PARRY -> 1.12f;
 					case PHYSICAL_ACCURACY, MAGICAL_ACCURACY -> 1.03f;
@@ -129,7 +129,7 @@ public class NpcStatCalculation {
 					case PHYSICAL_ATTACK -> 1.85f;
 					case MAGICAL_DEFEND, PHYSICAL_DEFENSE -> 1.5f;
 					case MAGICAL_RESIST -> 1.06f;
-					case MAGICAL_ATTACK, ABNORMAL_RESISTANCE_ALL -> 1.7f;
+					case MAGICAL_ATTACK, STUNLIKE_RESISTANCE -> 1.7f;
 					case PARRY -> 1.12f;
 					case PHYSICAL_ACCURACY, MAGICAL_ACCURACY -> 1.04f;
 					case PHYSICAL_CRITICAL_RESIST -> 1.8f;

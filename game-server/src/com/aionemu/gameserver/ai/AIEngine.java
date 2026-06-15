@@ -16,7 +16,6 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.commons.scripting.ScriptManager;
 import com.aionemu.commons.scripting.classlistener.AggregatedClassListener;
 import com.aionemu.commons.scripting.classlistener.OnClassLoadUnloadListener;
-import com.aionemu.commons.scripting.classlistener.ScheduledTaskClassListener;
 import com.aionemu.gameserver.GameServerError;
 import com.aionemu.gameserver.configs.main.AIConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -30,42 +29,27 @@ import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 public class AIEngine implements GameEngine {
 
 	private static final Logger log = LoggerFactory.getLogger(AIEngine.class);
-	private ScriptManager scriptManager = new ScriptManager();
-	private Map<String, Class<? extends AbstractAI<? extends Creature>>> aiHandlers = new HashMap<>();
+	private final ScriptManager scriptManager = new ScriptManager();
+	private final Map<String, Class<? extends AbstractAI<? extends Creature>>> aiHandlers = new HashMap<>();
 
 	private AIEngine() {
 	}
 
 	@Override
-	public void load() {
-		log.info("AI engine load started");
-
+	public void init() {
 		AggregatedClassListener acl = new AggregatedClassListener();
 		acl.addClassListener(new OnClassLoadUnloadListener());
-		acl.addClassListener(new ScheduledTaskClassListener());
 		acl.addClassListener(new AIHandlerClassListener());
 		scriptManager.setGlobalClassListener(acl);
-
-		try {
-			scriptManager.load(AIConfig.HANDLER_DIRECTORY);
-			validateScripts();
-			log.info("Loaded " + aiHandlers.size() + " ai handlers.");
-		} catch (Exception e) {
-			throw new GameServerError("Can't initialize ai handlers.", e);
-		}
+		scriptManager.load(AIConfig.HANDLER_DIRECTORY);
+		validateScripts();
+		log.info("Loaded " + aiHandlers.size() + " AI handlers.");
 	}
 
 	public void reload() {
-		shutdown();
-		load();
-	}
-
-	@Override
-	public void shutdown() {
-		log.info("AI engine shutdown started");
 		scriptManager.shutdown();
 		aiHandlers.clear();
-		log.info("AI engine shutdown complete");
+		init();
 	}
 
 	public void registerAI(Class<AbstractAI<? extends Creature>> aiClass) {

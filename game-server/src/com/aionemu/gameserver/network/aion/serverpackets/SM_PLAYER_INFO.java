@@ -1,6 +1,8 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
-import com.aionemu.gameserver.model.actions.PlayerMode;
+import com.aionemu.gameserver.controllers.movement.MovementMask;
+import com.aionemu.gameserver.controllers.movement.PlayerMoveController;
+import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.model.gameobjects.player.CustomPlayerState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerAppearance;
@@ -59,7 +61,10 @@ public class SM_PLAYER_INFO extends AbstractPlayerInfoPacket {
 		writeH(player.getState());
 
 		writeD(0);
-		writeD(0);
+		boolean someState = false;
+		writeD(someState ? 1 : 0);
+		if (someState)
+			writeB(new byte[13]); // TODO find out what this data controls
 
 		writeC(player.getHeading());
 
@@ -82,9 +87,7 @@ public class SM_PLAYER_INFO extends AbstractPlayerInfoPacket {
 		} else {
 			writeB(new byte[12]);
 		}
-		int maxHp = player.getLifeStats().getMaxHp();
-		int currHp = player.getLifeStats().getCurrentHp();
-		writeC(100 * currHp / maxHp);// %hp
+		writeC(player.getLifeStats().getHpPercentage());
 		writeH(pcd.getDp());// current dp
 		writeC(0x00);// unk (0x00)
 
@@ -162,7 +165,8 @@ public class SM_PLAYER_INFO extends AbstractPlayerInfoPacket {
 		writeF(playerAppearance.getHeight());
 		writeF(0.25f); // scale
 		writeF(2.0f); // gravity or slide surface o_O
-		writeF(player.getGameStats().getMovementSpeedFloat()); // move speed
+		float movementSpeed = player.getGameStats().getMovementSpeedFloat();
+		writeF(movementSpeed);
 
 		Stat2 attackSpeed = player.getGameStats().getAttackSpeed();
 		writeH(attackSpeed.getBase());
@@ -171,22 +175,29 @@ public class SM_PLAYER_INFO extends AbstractPlayerInfoPacket {
 
 		writeS(player.hasStore() ? player.getStore().getStoreMessage() : ""); // private store message
 
-		// Movement
-		writeF(0);
-		writeF(0);
-		writeF(0);
+		PlayerMoveController pmc = player.getMoveController();
+		byte movementMask = pmc.getMovementMask();
+		if ((pmc.movementMask & MovementMask.ABSOLUTE) == MovementMask.ABSOLUTE) {
+			// calculate the vector, as click to move and target coords are not supported here
+			Vector3f vector = new Vector3f(pmc.getTargetX2() - player.getX(), pmc.getTargetY2() - player.getY(),
+				pmc.getTargetZ2() - player.getZ()).normalizeLocal().multLocal(movementSpeed);
+			writeF(vector.getX());
+			writeF(vector.getY());
+			writeF(vector.getZ());
+			movementMask &= ~MovementMask.ABSOLUTE;
+		} else {
+			writeF(pmc.vectorX);
+			writeF(pmc.vectorY);
+			writeF(pmc.vectorZ);
+		}
+		writeF(player.getX());
+		writeF(player.getY());
+		writeF(player.getZ());
+		writeC(movementMask);
 
-		writeF(player.getX());// x
-		writeF(player.getY());// y
-		writeF(player.getZ());// z
-		writeC(0x00); // move type
-
-		if (player.isUsingFlyTeleport()) {
-			writeD(player.getFlightTeleportId());
-			writeD(player.getFlightDistance());
-		} else if (player.isInPlayerMode(PlayerMode.WINDSTREAM)) {
-			writeD(player.windstreamPath.teleportId);
-			writeD(player.windstreamPath.distance);
+		if (player.isUsingFlightTransporterOrWindstream()) {
+			writeD(player.getFlightPath().getId());
+			writeD(player.getFlightPath().getDistance());
 		}
 		writeC(player.getVisualState()); // visualState
 		writeS(player.getCommonData().getNote()); // note show in right down windows if your target on player

@@ -5,6 +5,7 @@ import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.model.DialogPage;
+import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -25,7 +26,7 @@ public class KromedesMagasAI extends NpcAI {
 	public boolean onDialogSelect(Player player, int dialogActionId, int questId, int extendedRewardIndex) {
 		if (dialogActionId == SETPRO1) {
 			if (player.getInventory().getItemCountByItemId(185000109) > 0) {
-				PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(0, 454));
+				PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(false, 0, player.getRace() == Race.ELYOS ? 18602 : 28602, 454, true));
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0));
 			} else
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), DialogPage.NO_RIGHT.id()));

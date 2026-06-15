@@ -27,7 +27,6 @@ public class _14016AGateAgape extends AbstractQuestHandler {
 		qe.registerOnEnterWorld(questId);
 		qe.registerOnDie(questId);
 		qe.registerQuestNpc(233873).addOnKillEvent(questId);
-		qe.registerOnMovieEndQuest(153, questId);
 		for (int npcId : npcs) {
 			qe.registerQuestNpc(npcId).addOnTalkEvent(questId);
 		}
@@ -130,18 +129,16 @@ public class _14016AGateAgape extends AbstractQuestHandler {
 	}
 
 	@Override
-	public boolean onMovieEndEvent(QuestEnv env, int movieId) {
+	public void onMovieEndEvent(QuestEnv env, int movieId) {
+		if (movieId != 153)
+			return;
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			if (movieId == 153) {
-				qs.setRewardGroup(0);
-				changeQuestStep(env, 2, 2, true); // reward
-				TeleportService.teleportTo(env.getPlayer(), 210030000, 2683.2085f, 1068.8977f, 199.375f);
-				return true;
-			}
+			qs.setRewardGroup(0);
+			changeQuestStep(env, 2, 2, true); // reward
+			TeleportService.teleportTo(player, 210030000, 2683.2085f, 1068.8977f, 199.375f);
 		}
-		return false;
 	}
 
 	@Override

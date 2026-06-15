@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.services;
 
+import java.sql.Timestamp;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
@@ -18,8 +19,10 @@ import com.aionemu.gameserver.model.gameobjects.Letter;
 import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.house.House;
+import com.aionemu.gameserver.model.templates.housing.Building;
 import com.aionemu.gameserver.model.templates.housing.BuildingType;
 import com.aionemu.gameserver.model.templates.housing.HouseAddress;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_HOUSE_ACQUIRE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_HOUSE_OWNER_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.model.QuestState;
@@ -29,7 +32,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldPosition;
-import com.aionemu.gameserver.world.geo.GeoService;
 
 /**
  * @author Rolandas, Neon
@@ -64,7 +66,7 @@ public class HousingService {
 			// houses table has no player_id foreign key because houses need to stay in DB even on player deletion (to keep bidding possible for example)
 			if (house.getOwnerId() > 0 && !playerIds.contains(house.getOwnerId())) {
 				log.warn("Player with ID " + house.getOwnerId() + " got deleted from DB, revoking house ownership for house " + house.getAddress().getId());
-				house.getController().changeOwner(0);
+				changeOwner(house, 0);
 			}
 		});
 	}
@@ -84,6 +86,63 @@ public class HousingService {
 			List<House> housesSortedByAcquireDate = houses.sorted(Comparator.comparing(House::getAcquiredTime)).collect(Collectors.toList());
 			for (int i = 0; i < housesSortedByAcquireDate.size(); i++)
 				housesSortedByAcquireDate.get(i).setInactive(i != 0); // first house (oldest) should be active, rest inactive
+		}
+	}
+
+	public void changeOwner(House house, int newOwnerId) {
+		int oldOwnerId = house.getOwnerId();
+		if (oldOwnerId == newOwnerId)
+			return;
+
+		synchronized (house) {
+			boolean newOwnerHasAnotherHouse = newOwnerId != 0 && customHouses.values().stream().anyMatch(h -> h.getOwnerId() == newOwnerId);
+			house.resetRegistry();
+			house.getPlayerScripts().removeAll();
+			house.setOwnerId(newOwnerId);
+			if (newOwnerId == 0 && removeStudio(house)) {
+				HousesDAO.deleteHouse(oldOwnerId);
+				notifyAboutOwnerChange(oldOwnerId, house.getAddress().getId(), false);
+				return;
+			}
+			house.setInactive(newOwnerHasAnotherHouse);
+			house.resetDoorState();
+			house.setShowOwnerName(true);
+			house.setSignNotice(null);
+			house.setAcquiredTime(newOwnerId == 0 ? null : new Timestamp(System.currentTimeMillis()));
+			house.setNextPay(null);
+
+			Building defaultBuilding = house.getLand().getDefaultBuilding();
+			if (defaultBuilding != house.getBuilding())
+				switchHouseBuilding(house, defaultBuilding.getId());
+			else // in else clause because building switch also saves the house
+				house.save();
+		}
+		House newHouseOfOldOwner = findInactiveHouse(oldOwnerId); // other house of seller that should get activated
+		if (newHouseOfOldOwner != null && newHouseOfOldOwner.getPosition() != null && newHouseOfOldOwner.isSpawned()) {
+			newHouseOfOldOwner.setInactive(false);
+			newHouseOfOldOwner.reloadHouseRegistry();
+			newHouseOfOldOwner.getController().updateSign();
+			newHouseOfOldOwner.getController().updateAppearance();
+		}
+		notifyAboutOwnerChange(oldOwnerId, house.getAddress().getId(), false);
+		notifyAboutOwnerChange(newOwnerId, house.getAddress().getId(), true);
+		if (house.getPosition() != null && house.isSpawned()) {
+			house.getController().updateHouseSpawns();
+			house.getController().kickVisitors(null, true, true);
+		}
+	}
+
+	private void notifyAboutOwnerChange(int ownerId, int addressId, boolean isNewOwner) {
+		if (ownerId == 0)
+			return;
+		Player player = World.getInstance().getPlayer(ownerId);
+		if (player != null) {
+			player.resetHouses();
+			if (!isNewOwner)
+				PacketSendUtility.sendPacket(player, new SM_HOUSE_ACQUIRE(player.getObjectId(), addressId, false));
+			PacketSendUtility.sendPacket(player, new SM_HOUSE_OWNER_INFO(player));
+			if (isNewOwner)
+				PacketSendUtility.sendPacket(player, new SM_HOUSE_ACQUIRE(player.getObjectId(), addressId, true));
 		}
 	}
 
@@ -108,7 +167,6 @@ public class HousingService {
 				instance.getInstanceId());
 			customHouse.setPosition(position);
 			SpawnEngine.bringIntoWorld(customHouse);
-			GeoService.getInstance().setHouseDoorState(address.getMapId(), instance.getInstanceId(), address.getId(), customHouse.getDoorState());
 			spawnedCounter++;
 		}
 		if (spawnedCounter > 0) {
@@ -124,7 +182,6 @@ public class HousingService {
 			HouseAddress addr = studio.getAddress();
 			studio.setPosition(World.getInstance().createPosition(addr.getMapId(), addr.getX(), addr.getY(), addr.getZ(), (byte) 0, instanceId));
 			SpawnEngine.bringIntoWorld(studio);
-			GeoService.getInstance().setHouseDoorState(addr.getMapId(), instanceId, addr.getId(), studio.getDoorState());
 		}
 	}
 
@@ -198,7 +255,7 @@ public class HousingService {
 		House studio = new House(address, 0);
 		studios.put(player.getObjectId(), studio);
 		studio.setPersistentState(PersistentState.NEW);
-		studio.getController().changeOwner(player.getObjectId());
+		changeOwner(studio, player.getObjectId());
 
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_INS_OWN_SUCCESS());
 	}
@@ -247,10 +304,8 @@ public class HousingService {
 	}
 
 	public void onPlayerDeleted(int playerObjId) {
-		findPlayerHouses(playerObjId).forEach(house -> {
-			HousingBidService.getInstance().disableBids(playerObjId);
-			house.getController().changeOwner(0);
-		});
+		HousingBidService.getInstance().disableBids(playerObjId);
+		findPlayerHouses(playerObjId).forEach(house -> changeOwner(house, 0));
 	}
 
 	public void onPlayerLogin(Player player) {

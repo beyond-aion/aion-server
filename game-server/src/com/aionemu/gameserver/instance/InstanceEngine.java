@@ -9,8 +9,6 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.commons.scripting.ScriptManager;
 import com.aionemu.commons.scripting.classlistener.AggregatedClassListener;
 import com.aionemu.commons.scripting.classlistener.OnClassLoadUnloadListener;
-import com.aionemu.commons.scripting.classlistener.ScheduledTaskClassListener;
-import com.aionemu.gameserver.GameServerError;
 import com.aionemu.gameserver.configs.main.InstanceConfig;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceHandler;
@@ -24,33 +22,17 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 public class InstanceEngine implements GameEngine {
 
 	private static final Logger log = LoggerFactory.getLogger(InstanceEngine.class);
-	private ScriptManager scriptManager = new ScriptManager();
-	private Map<Integer, Class<? extends InstanceHandler>> instanceHandlers = new HashMap<>();
+	private final Map<Integer, Class<? extends InstanceHandler>> instanceHandlers = new HashMap<>();
 
 	@Override
-	public void load() {
-		log.info("Instance engine load started");
-
+	public void init() {
+		ScriptManager scriptManager = new ScriptManager();
 		AggregatedClassListener acl = new AggregatedClassListener();
 		acl.addClassListener(new OnClassLoadUnloadListener());
-		acl.addClassListener(new ScheduledTaskClassListener());
 		acl.addClassListener(new InstanceHandlerClassListener());
 		scriptManager.setGlobalClassListener(acl);
-
-		try {
-			scriptManager.load(InstanceConfig.HANDLER_DIRECTORY);
-			log.info("Loaded " + instanceHandlers.size() + " instance handlers.");
-		} catch (Exception e) {
-			throw new GameServerError("Can't initialize instance handlers.", e);
-		}
-	}
-
-	@Override
-	public void shutdown() {
-		log.info("Instance engine shutdown started");
-		scriptManager.shutdown();
-		instanceHandlers.clear();
-		log.info("Instance engine shutdown complete");
+		scriptManager.load(InstanceConfig.HANDLER_DIRECTORY);
+		log.info("Loaded " + instanceHandlers.size() + " instance handlers.");
 	}
 
 	public InstanceHandler getNewInstanceHandler(WorldMapInstance instance) {

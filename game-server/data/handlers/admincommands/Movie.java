@@ -12,19 +12,23 @@ public class Movie extends AdminCommand {
 
 	public Movie() {
 		super("movie");
+
+		// @formatter:off
+		setSyntaxInfo(
+			"<cutsceneId> - Plays the given cutscene (correct rendering depends on your current map)",
+			"m <movieId> - Plays the given movie cutscene"
+		);
+		// @formatter:on
 	}
 
 	@Override
 	public void execute(Player player, String... params) {
-		if (params.length < 1) {
-			info(player, null);
-		} else {
-			PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(Integer.parseInt(params[0]), Integer.parseInt(params[1])));
+		if (params.length == 0) {
+			sendInfo(player);
+			return;
 		}
-	}
-
-	@Override
-	public void info(Player player, String message) {
-		PacketSendUtility.sendMessage(player, "//movie <type> <id>");
+		boolean isCutsceneMovie = "m".equalsIgnoreCase(params[0]);
+		int cutsceneId = Integer.parseInt(params[isCutsceneMovie ? 1 : 0]);
+		PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(isCutsceneMovie, 0, 0, cutsceneId, true));
 	}
 }

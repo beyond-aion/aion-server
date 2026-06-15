@@ -49,50 +49,40 @@ public class _1484ChiyorinrinerksRequest extends AbstractQuestHandler {
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1352);
 				else if (env.getDialogActionId() == SETPRO1) {
-					qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
-					updateQuestStatus(env);
-					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-					return true;
-				} else
-					return sendQuestStartDialog(env);
+					changeQuestStep(env, 0, 1);
+					giveQuestItem(env, workItems.getFirst().getItemId(), workItems.getFirst().getCount());
+					return closeDialogWindow(env);
+				}
 			}
 		} else if (targetId == 204048) {
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 1) {
 				if (env.getDialogActionId() == QUEST_SELECT)
-					return sendQuestDialog(env, 1352);
-				else if (env.getDialogActionId() == SETPRO1) {
-					qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
-					updateQuestStatus(env);
-					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 1693));
-					return true;
-				} else
-					return sendQuestStartDialog(env);
+					return sendQuestDialog(env, 1693);
+				else if (env.getDialogActionId() == SETPRO2) {
+					changeQuestStep(env, 1, 2);
+					giveQuestItem(env, workItems.get(1).getItemId(), workItems.get(1).getCount());
+					return closeDialogWindow(env);
+				}
 			}
 		} else if (targetId == 204011) {
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 2) {
 				if (env.getDialogActionId() == QUEST_SELECT)
-					return sendQuestDialog(env, 1352);
-				else if (env.getDialogActionId() == SETPRO1) {
-					qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
-					updateQuestStatus(env);
-					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 1693));
-					return true;
-				} else
-					return sendQuestStartDialog(env);
+					return sendQuestDialog(env, 2034);
+				else if (env.getDialogActionId() == SETPRO3) {
+					changeQuestStep(env, 2, 3);
+					giveQuestItem(env, workItems.getLast().getItemId(), workItems.getLast().getCount());
+					return closeDialogWindow(env);
+				}
 			}
 		} else if (targetId == 798126) {
 			if (qs != null) {
 				if (env.getDialogActionId() == QUEST_SELECT && qs.getStatus() == QuestStatus.START)
 					return sendQuestDialog(env, 2375);
-				else if (env.getDialogActionId() == SELECT_QUEST_REWARD && qs.getStatus() != QuestStatus.COMPLETE) {
-					qs.setQuestVar(3);
-					qs.setStatus(QuestStatus.REWARD);
-					updateQuestStatus(env);
-					return sendQuestEndDialog(env);
-				} else
-					return sendQuestEndDialog(env);
+				else if (env.getDialogActionId() == SELECT_QUEST_REWARD && qs.getStatus() != QuestStatus.COMPLETE)
+					changeQuestStep(env, 3, 4, true);
+				return sendQuestEndDialog(env);
 			}
 		}
-		return false;
+		return super.onDialogEvent(env);
 	}
 }

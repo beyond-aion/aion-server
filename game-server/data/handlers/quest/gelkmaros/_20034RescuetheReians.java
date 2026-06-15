@@ -42,7 +42,6 @@ public class _20034RescuetheReians extends AbstractQuestHandler {
 		qe.registerOnLogOut(questId);
 		qe.registerOnLevelChanged(questId);
 		qe.registerQuestNpc(216592).addOnKillEvent(questId);
-		qe.registerOnMovieEndQuest(442, questId);
 		qe.registerOnEnterWorld(questId);
 		qe.registerOnQuestCompleted(questId);
 		for (int npc : npcs) {
@@ -246,17 +245,9 @@ public class _20034RescuetheReians extends AbstractQuestHandler {
 	}
 
 	@Override
-	public boolean onMovieEndEvent(QuestEnv env, int movieId) {
-		if (movieId != 442) {
-			return false;
-		}
-		Player player = env.getPlayer();
-		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs == null || qs.getStatus() != QuestStatus.START || qs.getQuestVars().getQuestVars() != 4) {
-			return false;
-		}
-		spawnForFiveMinutes(216592, player.getWorldMapInstance(), (float) 561.8763, (float) 192.25128, (float) 135.88919, (byte) 30);
-		return true;
+	public void onMovieEndEvent(QuestEnv env, int movieId) {
+		if (movieId == 442)
+			spawnForFiveMinutes(216592, env.getPlayer().getWorldMapInstance(), (float) 561.8763, (float) 192.25128, (float) 135.88919, (byte) 30);
 	}
 
 	@Override

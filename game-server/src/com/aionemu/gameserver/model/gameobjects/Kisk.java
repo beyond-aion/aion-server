@@ -35,7 +35,6 @@ public class Kisk extends SummonedObject<Player> {
 	private final KiskStatsTemplate kiskStatsTemplate;
 
 	private int remainingResurrections;
-	private long kiskSpawnTime;
 
 	private final Set<Integer> kiskMemberIds;
 
@@ -45,7 +44,6 @@ public class Kisk extends SummonedObject<Player> {
 			: getObjectTemplate().getKiskStatsTemplate();
 		this.kiskMemberIds = ConcurrentHashMap.newKeySet();
 		this.remainingResurrections = this.kiskStatsTemplate.getMaxResurrects();
-		this.kiskSpawnTime = System.currentTimeMillis() / 1000;
 		this.legionId = owner.getLegion() == null ? 0 : owner.getLegion().getLegionId();
 		this.ownerRace = owner.getRace();
 		setCreatorId(owner.getObjectId());
@@ -126,7 +124,7 @@ public class Kisk extends SummonedObject<Player> {
 	public int getRemainingLifetime() {
 		if (isDead())
 			return 0;
-		long timeElapsed = (System.currentTimeMillis() / 1000) - kiskSpawnTime;
+		long timeElapsed = getMillisSinceSpawn() / 1000;
 		int timeRemaining = (int) (KISK_LIFETIME_IN_SEC - timeElapsed);
 		return Math.max(timeRemaining, 0);
 	}

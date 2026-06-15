@@ -114,18 +114,6 @@ public class LegionDominionLocation {
 		}
 	}
 
-	public List<LegionDominionParticipantInfo> getSortedTop25Participants(LegionDominionParticipantInfo curLegion) {
-		List<LegionDominionParticipantInfo> info = getLegionRanking(false);
-		if (info.isEmpty())
-			return Collections.emptyList();
-		info = info.subList(0,  Math.min(25, info.size()));
-		if (!info.contains(curLegion)) {
-			info.remove(info.size() -1);
-			info.add(info.size() , curLegion);
-		}
-		return info;
-	}
-
 	public LegionDominionParticipantInfo getParticipantInfo(int legionId) {
 		return participantInfo.get(legionId);
 	}
@@ -134,7 +122,7 @@ public class LegionDominionLocation {
 		for (LegionDominionParticipantInfo info : participantInfo.values()) {
 			Legion legion = LegionService.getInstance().getLegion(info.getLegionId());
 			if (legion != null)
-				PacketSendUtility.broadcastToLegion(legion, new SM_LEGION_DOMINION_RANK(getLocationId()));
+				PacketSendUtility.broadcastToLegion(legion, new SM_LEGION_DOMINION_RANK(this, legion));
 		}
 	}
 

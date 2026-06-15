@@ -120,6 +120,6 @@ public class DeadLockDetector implements Runnable {
 	}
 
 	public static Thread start(Duration checkInterval, Runnable actionOnDeadlock) {
-		return Thread.ofVirtual().name("DeadLockDetector").start(new DeadLockDetector(checkInterval, actionOnDeadlock));
+		return Thread.ofPlatform().name("DeadLockDetector").start(new DeadLockDetector(checkInterval, actionOnDeadlock));
 	}
 }

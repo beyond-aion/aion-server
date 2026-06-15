@@ -7,7 +7,7 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 
 import com.aionemu.gameserver.model.Gender;
-import com.aionemu.gameserver.model.Race;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.item.enums.ItemGroup;
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -26,7 +26,7 @@ public class MotionTime {
 	private List<Times> robot;
 
 	@XmlAttribute(required = true)
-	private String name; // TODO enum
+	private String name;
 
 	public String getName() {
 		return name;
@@ -47,25 +47,18 @@ public class MotionTime {
 	@XmlTransient
 	HashMap<Integer, Times> robotTimes = new HashMap<>();
 
-	/**
-	 * @param name
-	 *          the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public Times getTimesFor(Race race, Gender gender, WeaponTypeWrapper weapons, boolean robot, int id) {
+	public Times getTimesFor(Player player, int id) {
+		WeaponTypeWrapper weapons = player.isInRobotMode() ? null : new WeaponTypeWrapper(player.getEquipment().getMainHandWeaponType(), player.getEquipment().getOffHandWeaponType());
 		for (int i = id; i > 0; i--) {
-			if (robot) {
+			if (player.isInRobotMode()) {
 				if (robotTimes.get(i) != null) {
 					return robotTimes.get(i);
 				}
 			} else {
 				HashMap<Integer, Times> times = null;
-				switch (race) {
+				switch (player.getRace()) {
 					case ASMODIANS:
-						if (gender == Gender.FEMALE) {
+						if (player.getGender() == Gender.FEMALE) {
 							times = asmodianFemaleTimeForWeaponType.get(weapons);
 
 						} else {
@@ -73,7 +66,7 @@ public class MotionTime {
 						}
 						break;
 					case ELYOS:
-						if (gender == Gender.FEMALE) {
+						if (player.getGender() == Gender.FEMALE) {
 							times = elyosFemaleTimeForWeaponType.get(weapons);
 
 						} else {
@@ -137,9 +130,9 @@ public class MotionTime {
 					break;
 				case "2weapon":
 					wrapper = new WeaponTypeWrapper(ItemGroup.DAGGER, ItemGroup.DAGGER);
-					map.computeIfAbsent(new WeaponTypeWrapper(ItemGroup.DAGGER, ItemGroup.SWORD), k -> new HashMap<>()).put(t.getId(), t);
-					map.computeIfAbsent(new WeaponTypeWrapper(ItemGroup.SWORD, ItemGroup.DAGGER), k -> new HashMap<>()).put(t.getId(), t);
 					map.computeIfAbsent(new WeaponTypeWrapper(ItemGroup.SWORD, ItemGroup.SWORD), k -> new HashMap<>()).put(t.getId(), t);
+					map.computeIfAbsent(new WeaponTypeWrapper(ItemGroup.MACE, ItemGroup.MACE), k -> new HashMap<>()).put(t.getId(), t);
+					// other combinations don't need to be added, as the WeaponTypeWrapper constructor already limits them
 					break;
 				case "noweapon":
 					wrapper = new WeaponTypeWrapper(null, null);

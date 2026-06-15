@@ -2,6 +2,9 @@ package com.aionemu.gameserver.skillengine.task;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.configs.main.CraftConfig;
+import com.aionemu.gameserver.controllers.observer.ActionObserver;
+import com.aionemu.gameserver.controllers.observer.ObserverType;
+import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Gatherable;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.Rates;
@@ -10,6 +13,8 @@ import com.aionemu.gameserver.model.templates.gather.Material;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_GATHER_ANIMATION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_GATHER_UPDATE;
 import com.aionemu.gameserver.services.item.ItemService;
+import com.aionemu.gameserver.skillengine.model.Effect;
+import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -17,14 +22,16 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class GatheringTask extends AbstractCraftTask {
 
-	private GatherableTemplate template;
-	private Material material;
+	private final GatherableTemplate template;
+	private final ActionObserver gathererObserver;
+	private final Material material;
 	private int showBarDelay;
 	private int executionSpeed;
 
 	public GatheringTask(Player requester, Gatherable gatherable, Material material, int skillLvlDiff) {
 		super(requester, gatherable, skillLvlDiff);
 		this.template = gatherable.getObjectTemplate();
+		this.gathererObserver = createGathererObserver();
 		this.material = material;
 		this.delay = Rnd.get(200, 600);
 		int gatherInterval = 2500 - (skillLvlDiff * 60);
@@ -39,11 +46,13 @@ public class GatheringTask extends AbstractCraftTask {
 
 	@Override
 	protected void onInteractionFinish() {
+		requester.getObserveController().removeObserver(gathererObserver);
 		((Gatherable) responder).getController().completeInteraction();
 	}
 
 	@Override
 	protected void onInteractionStart() {
+		requester.getObserveController().attach(gathererObserver);
 		PacketSendUtility.sendPacket(requester, new SM_GATHER_UPDATE(template, material, fullBarValue, fullBarValue, 0, 0, 0));
 		PacketSendUtility.sendPacket(requester, new SM_GATHER_UPDATE(template, material, 0, 0, 1, 0, 0));
 		// TODO: missing packet for initial failure/success
@@ -70,9 +79,7 @@ public class GatheringTask extends AbstractCraftTask {
 		if (template.getEraseValue() > 0)
 			requester.getInventory().decreaseByItemId(template.getRequiredItemId(), template.getEraseValue());
 		ItemService.addItem(requester, material.getItemId(), Rates.GATHERING_COUNT.calcResult(requester, 1));
-		if (requester.isInInstance()) {
-			requester.getPosition().getWorldMapInstance().getInstanceHandler().onGather(requester, (Gatherable) responder);
-		}
+		requester.getPosition().getWorldMapInstance().getInstanceHandler().onGather(requester, (Gatherable) responder);
 		((Gatherable) responder).getController().rewardPlayer(requester);
 		return true;
 	}
@@ -121,5 +128,38 @@ public class GatheringTask extends AbstractCraftTask {
 		int speed = 900 - (skillLvlDiff * 30);
 		executionSpeed = speed < 300 ? 300 : speed;
 		showBarDelay = Math.max(500, 1200 - (skillLvlDiff * 30));
+	}
+
+	public int getGathererId() {
+		return requester.getObjectId();
+	}
+
+	private ActionObserver createGathererObserver() {
+		return new ActionObserver(ObserverType.ALL) {
+			@Override
+			public void startSkillCast(Skill skill) {
+				abort();
+			}
+
+			@Override
+			public void attack(Creature creature, int skillId) {
+				abort();
+			}
+
+			@Override
+			public void attacked(Creature creature, int skillId) {
+				abort();
+			}
+
+			@Override
+			public void moved() {
+				abort();
+			}
+
+			@Override
+			public void dotattacked(Creature creature, Effect dotEffect) {
+				abort();
+			}
+		};
 	}
 }

@@ -6,7 +6,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.HpPhases;
-import com.aionemu.gameserver.controllers.attack.AggroInfo;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -85,29 +84,20 @@ public class KingConsierdAI extends AggressiveNpcAI implements HpPhases.PhaseHan
 	private void executeSkillTask() {
 		if (isDead()) {
 			cancelTasks();
-		} else {
-			getOwner().queueSkill(17951, 29);
-			ThreadPoolManager.getInstance().schedule(() -> {
-				dropAggro();
-				if (getLifeStats().getHpPercentage() <= 50)
-					spawnBabyConsierd();
-				ThreadPoolManager.getInstance().schedule(() -> getOwner().queueSkill(17952, 29), 2000);
-			}, 3500);
+			return;
 		}
+		getOwner().queueSkill(17951, 29);
+		ThreadPoolManager.getInstance().schedule(() -> {
+			if (getLifeStats().getHpPercentage() <= 50)
+				spawnBabyConsierd();
+			ThreadPoolManager.getInstance().schedule(() -> getOwner().queueSkill(17952, 29), 2000);
+		}, 3500);
 	}
 
 	private void spawnBabyConsierd() {
 		var position = getPosition();
 		spawn(282378, position.getX(), position.getY(), position.getZ(), position.getHeading());
 		spawn(282378, position.getX(), position.getY(), position.getZ(), position.getHeading());
-	}
-
-	private void dropAggro() {
-		if (getTarget() instanceof Creature hated && getAggroList().isHating(hated)) {
-			AggroInfo ai = getAggroList().getAggroInfo(hated);
-			ai.setHate(ai.getHate() / 2);
-			think();
-		}
 	}
 
 	private void cancelTasks() {

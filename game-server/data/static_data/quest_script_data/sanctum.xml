@@ -101,7 +101,7 @@
 			3905 [XML] To Catch a Dragon
 			3906 [XML] Destruction and Rebirth
 			3907 [XML] Fire and Ice
-			3908 [XML] To Master the Dragon
+			3908 [SCRIPT] To Master the Dragon
 			3909 [XML] Guide of Life
 			3910 [XML] Meaning of Life
 			3911 [XML] Teachings of Life
@@ -318,7 +318,7 @@
 			80547 [XML] [Event/Daily] Spread the Joy
 		[END] SUMMARY
 	-->
-	
+
 	<!-- REPORTING QUESTS -->
 	<report_to id="1950" start_npc_ids="203755" end_npc_ids="204424"/>
 	<report_to id="1951" start_npc_ids="203788" end_npc_ids="278510"/>
@@ -363,112 +363,28 @@
 		<npc_infos npc_ids="203812"/>
 	</report_to_many>
 	<report_to_many id="3201" start_npc_ids="798318">
-	    <npc_infos npc_ids="279009"/>
+		<npc_infos npc_ids="279009"/>
 		<npc_infos npc_ids="203852"/>
 	</report_to_many>
 	<report_to_many id="3914" start_item_id="182206084">
 		<npc_infos npc_ids="203752"/>
 		<npc_infos npc_ids="203384"/>
 	</report_to_many>
+	<report_to_many id="3972" start_npc_ids="203893">
+		<npc_infos npc_ids="798949"/>
+		<npc_infos npc_ids="203893"/>
+	</report_to_many>
+	<report_to_many id="3973" start_npc_ids="203893">
+		<npc_infos npc_ids="203792"/>
+		<npc_infos npc_ids="203793"/>
+		<npc_infos npc_ids="798391"/>
+		<npc_infos npc_ids="798949"/>
+	</report_to_many>
 	<report_to_many id="18225" start_npc_ids="205471">
-	    <npc_infos npc_ids="205309"/>
+		<npc_infos npc_ids="205309"/>
 		<npc_infos npc_ids="205315"/>
 	</report_to_many>
-	<xml_quest id="3972" start_npc_ids="203893">
-		<on_talk_event ids="798949">
-			<var value="0">
-				<npc id="798949">
-					<dialog id="31">
-						<operations>
-							<npc_dialog id="1352"/>
-						</operations>
-					</dialog>
-					<dialog id="1353">
-						<operations>
-							<npc_dialog id="1353"/>
-							<set_quest_var var_id="0" value="1"/>
-						</operations>
-					</dialog>
-					<dialog id="10000"/>
-				</npc>
-			</var>
-			<var value="1">
-				<npc id="203893">
-					<dialog id="31">
-						<operations>
-							<npc_dialog id="2375"/>
-						</operations>
-					</dialog>
-					<dialog id="1009">
-						<operations override="false">
-							<set_quest_status status="REWARD"/>
-						</operations>
-					</dialog>
-				</npc>
-			</var>
-		</on_talk_event>
-	</xml_quest>
-	<xml_quest id="3973" start_npc_ids="203893" end_npc_ids="798949">
-		<on_talk_event ids="203792 203793 798391 798949">
-			<var value="0">
-				<npc id="203792">
-					<dialog id="31">
-						<operations>
-							<npc_dialog id="1352"/>
-						</operations>
-					</dialog>
-					<dialog id="10000">
-						<operations>
-							<set_quest_var var_id="0" value="1"/>
-						</operations>
-					</dialog>
-				</npc>
-			</var>
-			<var value="1">
-				<npc id="203793">
-					<dialog id="31">
-						<operations>
-							<npc_dialog id="1693"/>
-						</operations>
-					</dialog>
-					<dialog id="10001">
-						<operations>
-							<set_quest_var var_id="0" value="2"/>
-						</operations>
-					</dialog>
-				</npc>
-			</var>
-			<var value="2">
-				<npc id="798391">
-					<dialog id="31">
-						<operations>
-							<npc_dialog id="2034"/>
-						</operations>
-					</dialog>
-					<dialog id="10002">
-						<operations>
-							<set_quest_var var_id="0" value="3"/>
-						</operations>
-					</dialog>
-				</npc>
-			</var>
-			<var value="3">
-				<npc id="798949">
-					<dialog id="31">
-						<operations>
-							<npc_dialog id="2375"/>
-						</operations>
-					</dialog>
-					<dialog id="1009">
-						<operations override="false">
-							<set_quest_status status="REWARD"/>
-						</operations>
-					</dialog>
-				</npc>
-			</var>
-		</on_talk_event>
-	</xml_quest>
-	
+
 	<!-- SKILL USE -->
 	<skill_use id="3909" start_npc_ids="203761" end_npc_ids="203707">
 		<skill end_var="10" ids="9912"/><!-- Elemental Stone of Resurrection -->
@@ -512,7 +428,7 @@
 	<skill_use id="19075" start_npc_ids="801215">
 		<skill end_var="10" ids="4469"/><!-- Bard: Symphony of Destruction -->
 	</skill_use>
-	
+
 	<!-- COLLECTING QUESTS -->
 	<item_collecting id="1902" start_npc_ids="203788"/>
 	<item_collecting id="1903" start_npc_ids="203790"/>
@@ -538,7 +454,6 @@
 	<item_collecting id="3905" start_npc_ids="798316"/>
 	<item_collecting id="3906" start_npc_ids="798316"/>
 	<item_collecting id="3907" start_npc_ids="798316"/>
-	<item_collecting id="3908" start_npc_ids="798316"/>
 	<item_collecting id="3915" start_npc_ids="203384"/>
 	<item_collecting id="3916" start_npc_ids="203384"/>
 	<item_collecting id="3918" start_npc_ids="798357"/>
@@ -620,7 +535,7 @@
 	<item_collecting id="80542" start_npc_ids="831991"/>
 	<item_collecting id="80543" start_npc_ids="831991"/>
 	<item_collecting id="80544" start_npc_ids="831991"/>
-	
+
 	<!-- CRAFTING REWARDS -->
 	<crafting_rewards id="3943" start_npc_id="203788" end_npc_id="203700" skill_id="40002" level_reward="400"/>
 	<crafting_rewards id="3946" start_npc_id="203790" end_npc_id="203700" skill_id="40003" level_reward="400"/>
@@ -643,7 +558,7 @@
 	<crafting_rewards id="19039" start_npc_id="203784" end_npc_id="798600" movie="112" skill_id="40001" level_reward="500"/>
 	<crafting_rewards id="19033" start_npc_id="203786" end_npc_id="798600" movie="113" skill_id="40007" level_reward="500"/>
 	<crafting_rewards id="19058" start_npc_id="798450" end_npc_id="798600" movie="116" skill_id="40010" level_reward="500"/>
-	
+
 	<!-- HUNTING QUESTS -->
 	<monster_hunt id="1939" start_npc_ids="203703"/>
 	<monster_hunt id="3213" start_npc_ids="203735"/>
@@ -652,7 +567,7 @@
 	<monster_hunt id="3979" start_npc_ids="798322"/>
 	<monster_hunt id="80010" start_npc_ids="799767"/>
 	<monster_hunt id="80011" start_npc_ids="799767"/>
-	
+
 	<!-- ITEM ORDERS QUESTS -->
 	<item_order id="1965" end_npc_id="278555"/>
 	<item_order id="1966" end_npc_id="278555"/>

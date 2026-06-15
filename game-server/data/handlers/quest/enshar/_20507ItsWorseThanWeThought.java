@@ -39,7 +39,6 @@ public class _20507ItsWorseThanWeThought extends AbstractQuestHandler {
 		qe.registerOnEnterZone(ZoneName.get("DF5_SENSORYAREA_Q20507A_206377_9_220080000"), questId); // Uncharted Cave zone
 		qe.registerOnQuestCompleted(questId);
 		qe.registerOnLevelChanged(questId);
-		qe.registerOnMovieEndQuest(864, questId);
 	}
 
 	@Override
@@ -148,20 +147,11 @@ public class _20507ItsWorseThanWeThought extends AbstractQuestHandler {
 	}
 
 	@Override
-	public boolean onMovieEndEvent(QuestEnv env, int movieId) {
+	public void onMovieEndEvent(QuestEnv env, int movieId) {
+		if (movieId != 864)
+			return;
 		Player player = env.getPlayer();
-		if (player == null) {
-			return false;
-		}
-
-		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
-			float xPlayer = player.getPosition().getX();
-			float yPlayer = player.getPosition().getY();
-			float zPlayer = player.getPosition().getZ();
-			spawnForFiveMinutes(219954, player.getWorldMapInstance(), xPlayer + 3, yPlayer + 1, zPlayer, (byte) 60);
-			spawnForFiveMinutes(219955, player.getWorldMapInstance(), xPlayer + 2, yPlayer + 3, zPlayer, (byte) 73);
-		}
-		return true;
+		spawnForFiveMinutes(219954, player.getWorldMapInstance(), player.getX() + 3, player.getY() + 1, player.getZ(), (byte) 60);
+		spawnForFiveMinutes(219955, player.getWorldMapInstance(), player.getX() + 2, player.getY() + 3, player.getZ(), (byte) 73);
 	}
 }

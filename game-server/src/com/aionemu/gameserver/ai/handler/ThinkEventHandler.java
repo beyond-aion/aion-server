@@ -5,9 +5,14 @@ import com.aionemu.gameserver.ai.AIState;
 import com.aionemu.gameserver.ai.AISubState;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.event.AIEventType;
+import com.aionemu.gameserver.ai.manager.AttackManager;
 import com.aionemu.gameserver.ai.manager.WalkManager;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_HEADING_UPDATE;
+import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * @author ATracer
@@ -19,8 +24,8 @@ public class ThinkEventHandler {
 			AILogger.info(npcAI, "can't think in dead state");
 			return;
 		}
-		if (!npcAI.tryLockThink()) {
-			AILogger.info(npcAI, "can't acquire think lock");
+		if (!npcAI.setThinking()) {
+			AILogger.info(npcAI, "skipped onThink because AI is already thinking");
 			return;
 		}
 		try {
@@ -40,7 +45,7 @@ public class ThinkEventHandler {
 					break;
 			}
 		} finally {
-			npcAI.unlockThink();
+			npcAI.unsetThinking();
 		}
 	}
 
@@ -69,15 +74,13 @@ public class ThinkEventHandler {
 
 	public static void thinkAttack(NpcAI npcAI) {
 		Npc npc = npcAI.getOwner();
-		Creature mostHated = npc.getAggroList().getMostHated();
-		if (mostHated != null && !mostHated.isDead()) {
-			npcAI.onCreatureEvent(AIEventType.TARGET_CHANGED, mostHated);
+		if (npc.getTarget() instanceof Creature target && npc.getAggroList().isHating(target)) {
+			AttackManager.scheduleNextAttack(npcAI);
 		} else {
 			npcAI.setSubStateIfNot(AISubState.NONE);
 			npc.clearQueuedSkills();
 			npc.getGameStats().setLastSkill(null);
 			npc.getGameStats().resetFightStats();
-			npc.getMoveController().recallPreviousStep();
 			npcAI.onGeneralEvent(AIEventType.ATTACK_FINISH);
 			npcAI.onGeneralEvent(npc.isAtSpawnLocation() ? AIEventType.BACK_HOME : AIEventType.NOT_AT_HOME);
 		}
@@ -86,5 +89,18 @@ public class ThinkEventHandler {
 	public static void thinkIdle(NpcAI npcAI) {
 		if (npcAI.isMoveSupported() && npcAI.getOwner().isWalker())
 			WalkManager.startWalking(npcAI);
+		else if (shouldResetHeading(npcAI)) {
+			ThreadPoolManager.getInstance().schedule(() -> {
+				if (shouldResetHeading(npcAI)) {
+					npcAI.getPosition().setH(npcAI.getOwner().getSpawn().getHeading());
+					PacketSendUtility.broadcastPacket(npcAI.getOwner(), new SM_HEADING_UPDATE(npcAI.getOwner()));
+				}
+			}, 500);
+		}
+	}
+
+	private static boolean shouldResetHeading(NpcAI npcAI) {
+		SpawnTemplate spawn = npcAI.getOwner().getSpawn();
+		return npcAI.getTarget() == null && spawn != null && !npcAI.getOwner().getMoveController().isInMove() && npcAI.getPosition().getHeading() != spawn.getHeading() && npcAI.getOwner().isAtSpawnLocation();
 	}
 }

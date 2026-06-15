@@ -11,7 +11,8 @@ import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.configs.main.EventsConfig;
 import com.aionemu.gameserver.configs.main.GroupConfig;
 import com.aionemu.gameserver.configs.main.LoggingConfig;
-import com.aionemu.gameserver.controllers.attack.AggroInfo;
+import com.aionemu.gameserver.controllers.attack.DamageInfo;
+import com.aionemu.gameserver.controllers.attack.DamageList;
 import com.aionemu.gameserver.controllers.attack.KillCounter;
 import com.aionemu.gameserver.custom.pvpmap.PvpMapService;
 import com.aionemu.gameserver.dao.HeadhuntingDAO;
@@ -19,13 +20,12 @@ import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.event.Headhunter;
 import com.aionemu.gameserver.model.gameobjects.AionObject;
+import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.Rates;
 import com.aionemu.gameserver.model.team.TeamMember;
 import com.aionemu.gameserver.model.team.TemporaryPlayerTeam;
-import com.aionemu.gameserver.model.team.alliance.PlayerAlliance;
-import com.aionemu.gameserver.model.team.group.PlayerGroup;
 import com.aionemu.gameserver.model.templates.bounty.BountyTemplate;
 import com.aionemu.gameserver.model.templates.bounty.BountyType;
 import com.aionemu.gameserver.model.templates.bounty.KillBountyTemplate;
@@ -97,11 +97,9 @@ public class PvpService {
 	}
 
 	public void doReward(Player victim, float apWinMulti) {
-		Player winner = victim.getAggroList().getMostPlayerDamage();
-
-		int totalDamage = victim.getAggroList().getTotalDamage();
-
-		if (totalDamage == 0 || winner == null) {
+		DamageList damageList = victim.getAggroList().getFinalDamageList();
+		DamageInfo<Creature> mostDamage = damageList.getMostDamage();
+		if (mostDamage == null || !(mostDamage.getAttacker() instanceof Player winner)) {
 			PacketSendUtility.sendPacket(victim, SM_SYSTEM_MESSAGE.STR_MSG_COMBAT_MY_DEATH());
 			TemporaryPlayerTeam<?> team = victim.getCurrentTeam();
 			if (team != null)
@@ -140,21 +138,20 @@ public class PvpService {
 
 		// track how much of the total damage actually generated AP (ignoring Duels, Arena, NPCs), so the victim loses his AP based on that fraction
 		int apRelevantDamage = 0;
+		int totalDamage = damageList.getTotalDamage();
 
 		// Distribute AP to groups and players that had damage.
-		for (AggroInfo aggro : victim.getAggroList().getFinalDamageList(true)) {
+		for (DamageInfo<AionObject> damageInfo : damageList.toTeamDamages().getCreatureOrTeamDamages()) {
 			Collection<Player> teamMembers = new ArrayList<>();
-			AionObject attacker = aggro.getAttacker();
-			if (attacker instanceof Player && ((Player) attacker).getRace() != victim.getRace())
-				teamMembers.add((Player) attacker);
-			else if (attacker instanceof PlayerGroup && ((PlayerGroup) attacker).getLeaderObject().getRace() != victim.getRace())
-				teamMembers = ((PlayerGroup) attacker).getMembers();
-			else if (attacker instanceof PlayerAlliance && ((PlayerAlliance) attacker).getLeaderObject().getRace() != victim.getRace())
-				teamMembers = ((PlayerAlliance) attacker).getMembers();
+			AionObject attacker = damageInfo.getAttacker();
+			if (attacker instanceof Player player && player.getRace() != victim.getRace())
+				teamMembers.add(player);
+			else if (attacker instanceof TemporaryPlayerTeam<?> team && team.getLeaderObject().getRace() != victim.getRace())
+				teamMembers = team.getMembers();
 
 			// Add damage last, so we don't include damage from same race. (Duels, Arena)
-			if (rewardPlayerTeam(teamMembers, victim, totalDamage, aggro, apWinMulti))
-				apRelevantDamage += aggro.getDamage();
+			if (rewardPlayerTeam(teamMembers, victim, damageInfo.getDamage(), totalDamage, apWinMulti))
+				apRelevantDamage += damageInfo.getDamage();
 		}
 
 		// Apply lost AP to defeated player
@@ -214,7 +211,7 @@ public class PvpService {
 		}
 	}
 
-	private boolean rewardPlayerTeam(Collection<Player> teamMember, Player victim, int totalDamage, AggroInfo info, float apWinMulti) {
+	private boolean rewardPlayerTeam(Collection<Player> teamMember, Player victim, int damage, int totalDamage, float apWinMulti) {
 		List<Player> players = new ArrayList<>();
 		int maxRank = 1;
 		int maxLevel = 0;
@@ -235,7 +232,7 @@ public class PvpService {
 		float baseApReward = StatFunctions.calculatePvpApGained(victim, maxRank, maxLevel) * apWinMulti;
 		int baseXpReward = StatFunctions.calculatePvpXpGained(victim, maxRank, maxLevel);
 		int baseDpReward = StatFunctions.calculatePvpDpGained(victim, maxRank, maxLevel);
-		float groupDamagePercentage = (float) info.getDamage() / totalDamage;
+		float groupDamagePercentage = (float) damage / totalDamage;
 		int apRewardPerMember = Math.round(baseApReward * groupDamagePercentage / players.size());
 		int xpRewardPerMember = Math.round(baseXpReward * groupDamagePercentage / players.size());
 		int dpRewardPerMember = Math.round(baseDpReward * groupDamagePercentage / players.size());
@@ -245,18 +242,13 @@ public class PvpService {
 			int memberXpGain = 1;
 			int memberDpGain = 1;
 			if (KillCounter.addKillFor(member.getObjectId(), victim.getObjectId()) < CustomConfig.MAX_DAILY_PVP_KILLS) {
-				if (apRewardPerMember > 0) {
-					try {
-						memberApGain = Math.toIntExact(Rates.AP_PVP.calcResult(member, apRewardPerMember));
-					} catch (ArithmeticException ae) {
-						log.error("Attempt to add a massive amount of ap to player " + member.getName() + " that overflows Integer.MAX_VALUE!");
-					}
-				}
+				if (apRewardPerMember > 0)
+					memberApGain = Rates.AP_PVP.calcResult(member, apRewardPerMember);
 				if (xpRewardPerMember > 0)
 					memberXpGain = xpRewardPerMember; // rates are applied in addExp()
 				if (dpRewardPerMember > 0) {
 					memberDpGain = StatFunctions.adjustPvpDpGained(dpRewardPerMember, victim.getLevel(), member.getLevel());
-					memberDpGain = (int) Rates.DP_PVP.calcResult(member, memberDpGain);
+					memberDpGain = Rates.DP_PVP.calcResult(member, memberDpGain);
 				}
 
 			}

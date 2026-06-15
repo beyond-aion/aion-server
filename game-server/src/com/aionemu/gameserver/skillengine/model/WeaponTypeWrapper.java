@@ -21,6 +21,10 @@ public class WeaponTypeWrapper implements Comparable<WeaponTypeWrapper> {
 					this.mainHand = ItemGroup.SWORD;
 					this.offHand = ItemGroup.SWORD;
 					break;
+				case MACE:
+					this.mainHand = ItemGroup.MACE;
+					this.offHand = ItemGroup.MACE;
+					break;
 				case TOOLHOES:
 					this.mainHand = ItemGroup.TOOLHOES;
 					this.offHand = ItemGroup.TOOLHOES;

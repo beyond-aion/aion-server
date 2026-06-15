@@ -7,8 +7,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Item;
@@ -85,7 +83,7 @@ public class Buy extends PlayerCommand {
 			int amount = idMap.getValue().get("amount");
 			int digitsToPad = 4 - cost.length();
 			if (digitsToPad > 0)
-				cost = StringUtils.repeat(' ', digitsToPad * 2) + cost;
+				cost = " ".repeat(digitsToPad * 2) + cost;
 
 			if (amount == 1)
 				itemString = cost + "   ";

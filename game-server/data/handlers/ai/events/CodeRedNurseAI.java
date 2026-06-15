@@ -50,13 +50,14 @@ public class CodeRedNurseAI extends GeneralNpcAI {
 			return true;
 		}
 		if (dialogActionId == SETPRO1) {
-			int skillId = 0;
-			switch (getNpcId()) {
-				case 831435, 831441 -> skillId = 21280; // Jorpine / Hylian (MON-THU)
-				case 831436, 831442 -> skillId = 21281; // Yennu / Rordah (MON-THU)
-				case 831437, 831443 -> skillId = 21283; // Dalloren / Mazka (FRI-SUN)
-				case 831518, 831524 -> skillId = 21309; // Dalliea / Desha (FRI-SUN)
-			}
+			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 0));
+			int skillId = switch (getNpcId()) {
+				case 831435, 831441 -> 21280; // Jorpine / Hylian (MON-THU)
+				case 831436, 831442 -> 21281; // Yennu / Rordah (MON-THU)
+				case 831437, 831443 -> 21283; // Dalloren / Mazka (FRI-SUN)
+				case 831518, 831524 -> 21309; // Dalliea / Desha (FRI-SUN)
+				default -> 0;
+			};
 			if (skillId != 0)
 				SkillEngine.getInstance().getSkill(getOwner(), skillId, 1, player).useWithoutPropSkill();
 		} else if (dialogActionId == QUEST_SELECT && questId != 0) {

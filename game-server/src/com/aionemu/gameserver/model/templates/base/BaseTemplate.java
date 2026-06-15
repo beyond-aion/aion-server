@@ -6,6 +6,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.model.base.BaseColorType;
+import com.aionemu.gameserver.model.base.BaseOccupier;
 import com.aionemu.gameserver.model.base.BaseType;
 
 /**
@@ -23,6 +24,8 @@ public class BaseTemplate {
 	protected BaseType type;
 	@XmlAttribute(name = "color")
 	protected BaseColorType color;
+	@XmlAttribute(name = "default_occupier")
+	protected BaseOccupier defaultOccupier = BaseOccupier.BALAUR;
 
 
 	public int getId() {
@@ -39,5 +42,9 @@ public class BaseTemplate {
 
 	public BaseColorType getColor() {
 		return color;
+	}
+
+	public BaseOccupier getDefaultOccupier() {
+		return defaultOccupier;
 	}
 }

@@ -9,7 +9,7 @@ import com.aionemu.gameserver.model.templates.walker.WalkerTemplate;
  * 
  * @author vlog, Rolandas
  */
-public class ClusteredNpc {
+public class ClusteredNpc extends WalkerGroupShift {
 
 	private Npc npc;
 	private int instance;
@@ -18,6 +18,7 @@ public class ClusteredNpc {
 	private float y;
 
 	public ClusteredNpc(Npc npc, int instance, WalkerTemplate walkTemplate) {
+		super(0, 0);
 		this.npc = npc;
 		this.instance = instance;
 		this.walkTemplate = walkTemplate;
@@ -43,7 +44,6 @@ public class ClusteredNpc {
 	}
 
 	public void setNpc(Npc npc, RouteStep step) {
-		npc.setWalkerGroupShift(this.npc.getWalkerGroupShift());
 		this.npc = npc;
 		this.x = step.getX();
 		this.y = step.getY();

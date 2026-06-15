@@ -6,8 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicLong;
 
 import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.configs.main.SecurityConfig;
@@ -40,12 +38,8 @@ import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureVisualState;
 import com.aionemu.gameserver.model.gameobjects.state.FlyState;
 import com.aionemu.gameserver.model.house.House;
-import com.aionemu.gameserver.model.ingameshop.InGameShop;
 import com.aionemu.gameserver.model.items.ItemCooldown;
-import com.aionemu.gameserver.model.items.storage.IStorage;
-import com.aionemu.gameserver.model.items.storage.LegionStorageProxy;
-import com.aionemu.gameserver.model.items.storage.Storage;
-import com.aionemu.gameserver.model.items.storage.StorageType;
+import com.aionemu.gameserver.model.items.storage.*;
 import com.aionemu.gameserver.model.skill.PlayerSkillList;
 import com.aionemu.gameserver.model.stats.container.PlayerGameStats;
 import com.aionemu.gameserver.model.stats.container.PlayerLifeStats;
@@ -53,15 +47,15 @@ import com.aionemu.gameserver.model.team.TeamMember;
 import com.aionemu.gameserver.model.team.TemporaryPlayerTeam;
 import com.aionemu.gameserver.model.team.alliance.PlayerAlliance;
 import com.aionemu.gameserver.model.team.alliance.PlayerAllianceGroup;
-import com.aionemu.gameserver.model.team.common.legacy.LootGroupRules;
 import com.aionemu.gameserver.model.team.group.PlayerGroup;
 import com.aionemu.gameserver.model.team.legion.Legion;
 import com.aionemu.gameserver.model.team.legion.LegionMember;
+import com.aionemu.gameserver.model.templates.flypath.FlightPath;
 import com.aionemu.gameserver.model.templates.flypath.FlyPathEntry;
 import com.aionemu.gameserver.model.templates.item.ItemAttackType;
 import com.aionemu.gameserver.model.templates.item.ItemUseLimits;
+import com.aionemu.gameserver.model.templates.npc.NpcTemplateType;
 import com.aionemu.gameserver.model.templates.ride.RideInfo;
-import com.aionemu.gameserver.model.templates.windstreams.WindstreamPath;
 import com.aionemu.gameserver.model.templates.zone.ZoneType;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_STATS_INFO;
@@ -71,12 +65,15 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.DuelService;
 import com.aionemu.gameserver.services.ExchangeService;
 import com.aionemu.gameserver.services.HousingService;
+import com.aionemu.gameserver.services.panesterra.ahserion.PanesterraFaction;
 import com.aionemu.gameserver.skillengine.condition.ChainCondition;
 import com.aionemu.gameserver.skillengine.effect.RebirthEffect;
 import com.aionemu.gameserver.skillengine.model.ChainSkills;
+import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.skillengine.task.CraftingTask;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.world.WorldMapType;
 import com.aionemu.gameserver.world.WorldPosition;
 
 /**
@@ -88,8 +85,6 @@ public class Player extends Creature {
 
 	public volatile RideInfo ride;
 	public volatile InRoll inRoll;
-	public volatile WindstreamPath windstreamPath;
-	public InGameShop inGameShop;
 	private final PlayerAccountData playerAccountData;
 	private final Account playerAccount;
 	private LegionMember legionMember;
@@ -108,11 +103,12 @@ public class Player extends Creature {
 
 	private ResponseRequester requester;
 	private boolean lookingForGroup = false;
-	private Storage inventory;
-	private Storage[] petBag = new Storage[StorageType.PET_BAG_MAX - StorageType.PET_BAG_MIN + 1];
-	private Storage[] cabinets = new Storage[StorageType.HOUSE_WH_MAX - StorageType.HOUSE_WH_MIN + 1];
-	private Storage regularWarehouse;
-	private Equipment equipment;
+	private final Equipment equipment;
+	private final Storage inventory;
+	private final Storage regularWarehouse;
+	private final Storage[] petBags = new Storage[StorageType.PET_BAG_MAX - StorageType.PET_BAG_MIN + 1];
+	private final Storage[] cabinets = new Storage[StorageType.HOUSE_WH_MAX - StorageType.HOUSE_WH_MIN + 1];
+	private Item usingItem;
 
 	private final AbsoluteStatOwner absStatsHolder;
 	private PlayerSettings playerSettings;
@@ -126,8 +122,7 @@ public class Player extends Creature {
 	private int flyState = 0;
 	private FlyController flyController;
 	private CraftingTask craftingTask;
-	private int flightTeleportId;
-	private int flightDistance;
+	private FlightPath flightPath;
 	private Summon summon;
 	private Pet pet;
 	private Kisk kisk;
@@ -149,8 +144,11 @@ public class Player extends Creature {
 	private final Cooldowns craftCooldowns;
 	private final Cooldowns houseObjectCooldowns;
 	private long nextSkillUse;
+	private SkillTemplate lastSkill;
+	private long hitTimeBoostExpireTimeMillis;
+	private float hitTimeBoostCastSpeed;
 	private ChainSkills chainSkills;
-	private Map<AttackStatus, Long> lastCounterSkill = new HashMap<>();
+	private final Map<AttackStatus, Long> lastCounterSkill = new HashMap<>();
 
 	private long prisonEndTimeMillis = 0;
 	private long gatherRestrictionMillis;
@@ -189,19 +187,24 @@ public class Player extends Creature {
 	private int robotId;
 	private boolean isInFfaTeamMode;
 	private int customStates;
-
-	private AtomicInteger fearCount = new AtomicInteger(), sleepCount = new AtomicInteger(), paralyzeCount = new AtomicInteger();
-	private AtomicLong cumulativeFearResistExpirationTime = new AtomicLong(), cumulativeSleepResistExpirationTime = new AtomicLong(), cumulativeParalyzeResistExpirationTime = new AtomicLong();
+	private PanesterraFaction panesterraFaction;
 
 	public Player(PlayerAccountData playerAccountData, Account account) {
 		super(playerAccountData.getPlayerCommonData().getPlayerObjId(), new PlayerController(), null, playerAccountData.getPlayerCommonData(),
-			playerAccountData.getPlayerCommonData().getPosition(), false);
+			null, false);
 		this.playerAccountData = playerAccountData;
 		this.playerAccount = account;
 
 		this.requester = new ResponseRequester(this);
 		this.questStateList = new QuestStateList();
 		this.titleList = new TitleList();
+		this.equipment = new Equipment(this);
+		this.inventory = new PlayerStorage(this, StorageType.CUBE);
+		this.regularWarehouse = new PlayerStorage(this, StorageType.REGULAR_WAREHOUSE);
+		for (int i = 0; i < petBags.length; i++)
+			petBags[i] = new PlayerStorage(this, StorageType.getStorageTypeById(StorageType.PET_BAG_MIN + i));
+		for (int i = 0; i < cabinets.length; i++)
+			cabinets[i] = new PlayerStorage(this, StorageType.getStorageTypeById(StorageType.HOUSE_WH_MIN + i));
 		this.portalCooldownList = new PortalCooldownList(this);
 		this.craftCooldowns = new Cooldowns();
 		this.houseObjectCooldowns = new Cooldowns();
@@ -211,7 +214,6 @@ public class Player extends Creature {
 
 		setGameStats(new PlayerGameStats(this));
 		setLifeStats(new PlayerLifeStats(this));
-		inGameShop = new InGameShop();
 		absStatsHolder = new AbsoluteStatOwner(this, 0);
 	}
 
@@ -324,7 +326,7 @@ public class Player extends Creature {
 	}
 
 	/**
-	 * Sets whether or not this player is looking for a group
+	 * Sets whether this player is looking for a group
 	 * 
 	 * @param lookingForGroup
 	 */
@@ -461,8 +463,12 @@ public class Player extends Creature {
 		return equipment;
 	}
 
-	public void setEquipment(Equipment equipment) {
-		this.equipment = equipment;
+	public Item getUsingItem() {
+		return usingItem;
+	}
+
+	public void setUsingItem(Item usingItem) {
+		this.usingItem = usingItem;
 	}
 
 	/**
@@ -503,27 +509,7 @@ public class Player extends Creature {
 		this.recipeList = recipeList;
 	}
 
-	/**
-	 * @param storage
-	 *          the storage to set (should be set right after player object is created)
-	 */
-	public void setStorage(Storage storage) {
-		if (storage.getStorageType() == StorageType.CUBE)
-			inventory = storage;
-		else if (storage.getStorageType().getId() >= StorageType.PET_BAG_MIN && storage.getStorageType().getId() <= StorageType.PET_BAG_MAX)
-			petBag[storage.getStorageType().getId() - StorageType.PET_BAG_MIN] = storage;
-		else if (storage.getStorageType().getId() >= StorageType.HOUSE_WH_MIN && storage.getStorageType().getId() <= StorageType.HOUSE_WH_MAX)
-			cabinets[storage.getStorageType().getId() - StorageType.HOUSE_WH_MIN] = storage;
-		else if (storage.getStorageType() == StorageType.REGULAR_WAREHOUSE)
-			regularWarehouse = storage;
-		storage.setOwner(this);
-	}
-
-	/**
-	 * @param storageType
-	 * @return
-	 */
-	public IStorage getStorage(int storageType) {
+	public Storage getStorage(int storageType) {
 		if (storageType == StorageType.CUBE.getId())
 			return inventory;
 
@@ -537,7 +523,7 @@ public class Player extends Creature {
 			return new LegionStorageProxy(getLegion().getLegionWarehouse(), this);
 
 		if (storageType >= StorageType.PET_BAG_MIN && storageType <= StorageType.PET_BAG_MAX)
-			return petBag[storageType - StorageType.PET_BAG_MIN];
+			return petBags[storageType - StorageType.PET_BAG_MIN];
 
 		if (storageType >= StorageType.HOUSE_WH_MIN && storageType <= StorageType.HOUSE_WH_MAX)
 			return cabinets[storageType - StorageType.HOUSE_WH_MIN];
@@ -545,8 +531,12 @@ public class Player extends Creature {
 		return null;
 	}
 
-	public Storage[] getPetBag() {
-		return petBag;
+	public Storage[] getPetBags() {
+		return petBags;
+	}
+
+	public Storage[] getCabinets() {
+		return cabinets;
 	}
 
 	/**
@@ -574,29 +564,15 @@ public class Player extends Creature {
 		return dirtyItems;
 	}
 
-	/**
-	 * //TODO probably need to optimize here
-	 * 
-	 * @return
-	 */
 	public List<Item> getAllItems() {
 		List<Item> items = new ArrayList<>();
 		items.addAll(inventory.getItemsWithKinah());
 		items.addAll(regularWarehouse.getItemsWithKinah());
 		items.addAll(playerAccount.getAccountWarehouse().getItemsWithKinah());
-
-		for (int petBagId = StorageType.PET_BAG_MIN; petBagId <= StorageType.PET_BAG_MAX; petBagId++) {
-			IStorage petBag = getStorage(petBagId);
-			if (petBag != null)
-				items.addAll(petBag.getItemsWithKinah());
-		}
-
-		for (int houseWhId = StorageType.HOUSE_WH_MIN; houseWhId <= StorageType.HOUSE_WH_MAX; houseWhId++) {
-			IStorage cabinet = getStorage(houseWhId);
-			if (cabinet != null)
-				items.addAll(cabinet.getItemsWithKinah());
-		}
-
+		for (Storage petBag : petBags)
+			items.addAll(petBag.getItemsWithKinah());
+		for (Storage cabinet : cabinets)
+			items.addAll(cabinet.getItemsWithKinah());
 		items.addAll(getEquipment().getEquippedItems());
 		return items;
 	}
@@ -690,9 +666,7 @@ public class Player extends Creature {
 	 * @return true if a player has a store opened
 	 */
 	public boolean hasStore() {
-		if (getStore() != null)
-			return true;
-		return false;
+		return getStore() != null;
 	}
 
 	/**
@@ -832,65 +806,40 @@ public class Player extends Creature {
 		this.flyController = flyController;
 	}
 
-	/**
-	 * @param craftingTask
-	 */
 	public void setCraftingTask(CraftingTask craftingTask) {
 		this.craftingTask = craftingTask;
 	}
 
-	/**
-	 * @return
-	 */
 	public CraftingTask getCraftingTask() {
 		return craftingTask;
 	}
 
-	/**
-	 * @param flightTeleportId
-	 */
 	public void setFlightTeleportId(int flightTeleportId) {
-		this.flightTeleportId = flightTeleportId;
+		setFlightPath(new FlightPath(FlightPath.Type.FLIGHT_TRANSPORTER, flightTeleportId, 0));
 	}
 
-	/**
-	 * @return flightTeleportId
-	 */
-	public int getFlightTeleportId() {
-		return flightTeleportId;
+	public void setFlightPath(FlightPath flightPath) {
+		this.flightPath = flightPath;
 	}
 
-	/**
-	 * @param flightDistance
-	 */
-	public void setFlightDistance(int flightDistance) {
-		this.flightDistance = flightDistance;
-
+	public boolean isUsingFlightPath(FlightPath.Type type) {
+		return flightPath != null && flightPath.getType() == type && isInState(CreatureState.FLYING);
 	}
 
-	/**
-	 * @param path
-	 */
+	public boolean isUsingFlightTransporterOrWindstream() {
+		return flightPath != null && isInState(CreatureState.FLYING);
+	}
+
+	public FlightPath getFlightPath() {
+		return flightPath;
+	}
+
 	public void setCurrentFlypath(FlyPathEntry path) {
 		this.flyLocationId = path;
 		if (path != null)
 			this.flyStartTime = System.currentTimeMillis();
 		else
 			this.flyStartTime = 0;
-	}
-
-	/**
-	 * @return flightDistance
-	 */
-	public int getFlightDistance() {
-		return flightDistance;
-	}
-
-	/**
-	 * @return
-	 */
-	public boolean isUsingFlyTeleport() {
-		return isInState(CreatureState.FLYING) && flightTeleportId != 0;
 	}
 
 	/**
@@ -915,12 +864,10 @@ public class Player extends Creature {
 
 	@Override
 	public boolean isEnemyFrom(Npc enemy) {
-		switch (enemy.getType(this)) {
-			case AGGRESSIVE:
-			case ATTACKABLE:
-				return true;
-		}
-		return false;
+		return switch (enemy.getType(this)) {
+			case AGGRESSIVE, ATTACKABLE -> true;
+			default -> false;
+		};
 	}
 
 	/**
@@ -937,16 +884,16 @@ public class Player extends Creature {
 		if (equals(enemy))
 			return false;
 		if (isInCustomState(CustomPlayerState.ENEMY_OF_ALL_PLAYERS) || enemy.isInCustomState(CustomPlayerState.ENEMY_OF_ALL_PLAYERS)) {
-			return !isInFfaTeamMode() || !enemy.isInFfaTeamMode() || !isInSameTeam(enemy);
+			return !isInFfaTeamMode || !enemy.isInFfaTeamMode() || !isInSameTeam(enemy);
 		}
 		return canPvP(enemy) || isDueling(enemy);
 	}
 
 	public boolean isAggroIconTo(Player enemy) {
 		if (isInCustomState(CustomPlayerState.ENEMY_OF_ALL_PLAYERS) || enemy.isInCustomState(CustomPlayerState.ENEMY_OF_ALL_PLAYERS)) {
-			return !isInFfaTeamMode() || !enemy.isInFfaTeamMode() || !isInSameTeam(enemy);
+			return !isInFfaTeamMode || !enemy.isInFfaTeamMode() || !isInSameTeam(enemy);
 		}
-		return enemy.getRace() != getRace();
+		return isHostileInPanesterra(enemy) || enemy.getRace() != getRace();
 	}
 
 	public void setInFfaTeamMode(boolean isInFfaTeamMode) {
@@ -957,9 +904,16 @@ public class Player extends Creature {
 		return isInFfaTeamMode;
 	}
 
+	private boolean isHostileInPanesterra(Player enemy) {
+		if (panesterraFaction != null && WorldMapType.isPanesterraMap(getWorldId())) {
+			return panesterraFaction != enemy.getPanesterraFaction();
+		}
+		return false;
+	}
+
 	private boolean canPvP(Player enemy) {
 		int worldId = enemy.getWorldId();
-		if (!enemy.getRace().equals(getRace())) {
+		if (enemy.getRace() != getRace() || isHostileInPanesterra(enemy)) {
 			return isInsidePvPZone() && enemy.isInsidePvPZone();
 		} else if (worldId == 110010000 || worldId == 120010000 || isInInstance()) {
 			return isInsideZoneType(ZoneType.PVP) && enemy.isInsideZoneType(ZoneType.PVP) && !isInSameTeam(enemy);
@@ -967,8 +921,8 @@ public class Player extends Creature {
 		return false;
 	}
 
-	public boolean isDueling(Player player) {
-		return DuelService.getInstance().isDueling(player, this);
+	public boolean isDueling(Creature creature) {
+		return creature.getMaster() instanceof Player master && DuelService.getInstance().isDueling(master, this);
 	}
 
 	public boolean isInSameTeam(Player player) {
@@ -978,20 +932,16 @@ public class Player extends Creature {
 
 	@Override
 	public boolean canSee(VisibleObject object) {
-		if (object instanceof Pet && !equals(((Pet) object).getMaster()) && !getKnownList().sees(((Pet) object).getMaster()))
-			return false; // pet spawn packet must be sent after owner's
-
 		if (super.canSee(object))
 			return true;
 
-		if (object instanceof Creature) {
-			if (((Creature) object).getMaster() instanceof Player) { // player or a summon's master
-				Player player = (Player) ((Creature) object).getMaster();
+		if (object instanceof Creature creature) {
+			if (creature.getMaster() instanceof Player player) { // player or a summon's master
 				if (isInSameTeam(player) && !isDueling(player))
 					return true;
 			}
-			if (object instanceof Kisk && ((Kisk) object).getOwnerRace() == getRace()) // invisible kisks can be seen from players of the same race
-				return true;
+			// invisible kisks can be seen from players of the same race
+			return object instanceof Kisk && ((Kisk) object).getOwnerRace() == getRace();
 		}
 
 		return false;
@@ -1015,19 +965,20 @@ public class Player extends Creature {
 		return getTribe();
 	}
 
-	/**
-	 * @return the summon
-	 */
 	public Summon getSummon() {
 		return summon;
 	}
 
-	/**
-	 * @param summon
-	 *          the summon to set
-	 */
 	public void setSummon(Summon summon) {
 		this.summon = summon;
+	}
+
+	public Creature getSummonOrMercenary(int objectId) {
+		if (summon != null && summon.getObjectId() == objectId)
+			return summon;
+		if (getKnownList().getObject(objectId) instanceof Npc npc && npc.getCreatorId() == getObjectId() && npc.getNpcTemplateType() == NpcTemplateType.MERCENARY)
+			return npc;
+		return null;
 	}
 
 	/**
@@ -1067,11 +1018,6 @@ public class Player extends Creature {
 		return itemCoolDowns;
 	}
 
-	/**
-	 * @param delayId
-	 * @param time
-	 * @param useDelay
-	 */
 	public void addItemCoolDown(int delayId, long time, int useDelay) {
 		itemCoolDowns.put(delayId, new ItemCooldown(time, useDelay));
 	}
@@ -1201,6 +1147,35 @@ public class Player extends Creature {
 		this.nextSkillUse = nextSkillUse;
 	}
 
+	@Override
+	public void setCasting(Skill castingSkill) {
+		Skill lastSkill = getCastingSkill();
+		super.setCasting(castingSkill);
+		if (lastSkill != null)
+			this.lastSkill = lastSkill.getSkillTemplate();
+	}
+
+	public SkillTemplate getLastSkill() {
+		return lastSkill;
+	}
+
+	public boolean isHitTimeBoosted() {
+		return isHitTimeBoosted(System.currentTimeMillis());
+	}
+
+	public boolean isHitTimeBoosted(long timeMillis) {
+		return timeMillis <= hitTimeBoostExpireTimeMillis;
+	}
+
+	public float getHitTimeBoostCastSpeed() {
+		return hitTimeBoostCastSpeed;
+	}
+
+	public void setHitTimeBoost(long expireTimeMillis, float castSpeed) {
+		hitTimeBoostExpireTimeMillis = expireTimeMillis;
+		hitTimeBoostCastSpeed = castSpeed;
+	}
+
 	/**
 	 * chain skills
 	 */
@@ -1238,7 +1213,7 @@ public class Player extends Creature {
 	}
 
 	/**
-	 * @param the
+	 * @param value
 	 *          Resurrection Positional State to set
 	 */
 	public void setResPosState(boolean value) {
@@ -1246,7 +1221,7 @@ public class Player extends Creature {
 	}
 
 	/**
-	 * @param the
+	 * @param value
 	 *          Resurrection Positional X value to set
 	 */
 	public void setResPosX(float value) {
@@ -1261,7 +1236,7 @@ public class Player extends Creature {
 	}
 
 	/**
-	 * @param the
+	 * @param value
 	 *          Resurrection Positional Y value to set
 	 */
 	public void setResPosY(float value) {
@@ -1276,7 +1251,7 @@ public class Player extends Creature {
 	}
 
 	/**
-	 * @param the
+	 * @param value
 	 *          Resurrection Positional Z value to set
 	 */
 	public void setResPosZ(float value) {
@@ -1291,14 +1266,10 @@ public class Player extends Creature {
 	}
 
 	public boolean isInSiegeWorld() {
-		switch (getWorldId()) {
-			case 210050000:
-			case 220070000:
-			case 400010000:
-				return true;
-			default:
-				return false;
-		}
+		return switch (getWorldId()) {
+			case 210050000, 220070000, 400010000 -> true;
+			default -> false;
+		};
 	}
 
 	public boolean hasPermission(byte perm) {
@@ -1421,8 +1392,7 @@ public class Player extends Creature {
 
 	/**
 	 * Stone Use Order determined by highest inventory slot. :( If player has two types, wrong one might be used.
-	 * 
-	 * @param player
+	 *
 	 * @return selfRezItem
 	 */
 	public Item getSelfRezStone() {
@@ -1438,7 +1408,6 @@ public class Player extends Creature {
 	}
 
 	/**
-	 * @param stoneItemId
 	 * @return stoneItem or null
 	 */
 	private Item getReviveStone(int stoneId) {
@@ -1464,19 +1433,6 @@ public class Player extends Creature {
 			setResPosY(0);
 			setResPosZ(0);
 		}
-	}
-
-	public LootGroupRules getLootGroupRules() {
-		if (isInGroup()) {
-			return getPlayerGroup().getLootGroupRules();
-		}
-		if (isInLeague()) {
-			return getPlayerAlliance().getLeague().getLootGroupRules();
-		}
-		if (isInAlliance()) {
-			return getPlayerAlliance().getLootGroupRules();
-		}
-		return null;
 	}
 
 	public boolean isLooting() {
@@ -1637,14 +1593,15 @@ public class Player extends Creature {
 	}
 
 	@Override
-	public WorldPosition getPosition() {
-		return getCommonData().getPosition();
-	}
-
-	@Override
 	public void setPosition(WorldPosition position) {
+		super.setPosition(position);
 		getMoveController().resetLastPositionFromClient(); // if we don't reset it, material collision handlers (such as shields) affect you on teleport
-		getCommonData().setPosition(position);
+		getCommonData().setMapId(position.getMapId());
+		getCommonData().setX(position.getX());
+		getCommonData().setY(position.getY());
+		getCommonData().setZ(position.getZ());
+		getCommonData().setHeading(position.getHeading());
+		getCommonData().setWorldOwnerId(position.getMapRegion() == null ? 0 : position.getWorldMapInstance().getOwnerId());
 	}
 
 	public int getRobotId() {
@@ -1685,69 +1642,11 @@ public class Player extends Creature {
 		return (customStates & state.getMask()) == state.getMask();
 	}
 
-	public void incrementFearCountAndUpdateExpirationTime(long duration) {
-		fearCount.incrementAndGet();
-		cumulativeFearResistExpirationTime.set(System.currentTimeMillis() + duration + 1000); // +1s to compensate for hittime and differences between retail
+	public PanesterraFaction getPanesterraFaction() {
+		return panesterraFaction;
 	}
 
-	public void incrementSleepCountAndUpdateExpirationTime(long duration) {
-		sleepCount.incrementAndGet();
-		cumulativeSleepResistExpirationTime.set(System.currentTimeMillis() + duration + 1000); // +1s to compensate for hittime and differences between retail
-	}
-
-	public void incrementParalyzeCountAndUpdateExpirationTime(long duration) {
-		paralyzeCount.incrementAndGet();
-		cumulativeParalyzeResistExpirationTime.set(System.currentTimeMillis() + duration + 1000); // +1s to compensate for hittime and differences between retail
-	}
-
-	public int getFearCount() {
-		return fearCount.get();
-	}
-
-	public int getSleepCount() {
-		return sleepCount.get();
-	}
-
-	public int getParalyzeCount() {
-		return paralyzeCount.get();
-	}
-
-	public void resetFearCount() {
-		fearCount.set(0);
-		cumulativeFearResistExpirationTime.set(0);
-	}
-
-	public void resetSleepCount() {
-		sleepCount.set(0);
-		cumulativeSleepResistExpirationTime.set(0);
-	}
-
-	public void resetParalyzeCount() {
-		paralyzeCount.set(0);
-		cumulativeParalyzeResistExpirationTime.set(0);
-	}
-
-	public boolean validateCumulativeFearResistExpirationTime() {
-		if (System.currentTimeMillis() > cumulativeFearResistExpirationTime.get()) {
-			resetFearCount();
-			return false;
-		}
-		return true;
-	}
-
-	public boolean validateCumulativeSleepResistExpirationTime() {
-		if (System.currentTimeMillis() > cumulativeSleepResistExpirationTime.get()) {
-			resetSleepCount();
-			return false;
-		}
-		return true;
-	}
-
-	public boolean validateCumulativeParalyzeResistExpirationTime() {
-		if (System.currentTimeMillis() > cumulativeParalyzeResistExpirationTime.get()) {
-			resetParalyzeCount();
-			return false;
-		}
-		return true;
+	public void setPanesterraFaction(PanesterraFaction panesterraFaction) {
+		this.panesterraFaction = panesterraFaction;
 	}
 }

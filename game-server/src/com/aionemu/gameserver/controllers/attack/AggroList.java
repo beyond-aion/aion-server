@@ -1,31 +1,27 @@
 package com.aionemu.gameserver.controllers.attack;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Comparator;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Future;
+import java.util.stream.Stream;
 
+import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.events.AbstractEventSource;
-import com.aionemu.gameserver.events.Listenable;
-import com.aionemu.gameserver.model.Race;
-import com.aionemu.gameserver.model.gameobjects.AionObject;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.SummonedObject;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.team.group.PlayerGroup;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.skillengine.model.HopType;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.utils.annotations.AnnotatedMethod;
 import com.aionemu.gameserver.utils.stats.StatFunctions;
+import com.aionemu.gameserver.world.geo.GeoService;
 
 /**
  * @author ATracer, KKnD
  */
-public class AggroList extends AbstractEventSource<AddDamageEvent> {
+public class AggroList {
 
 	protected final Creature owner;
 	private final ConcurrentHashMap<Integer, AggroInfo> aggroList = new ConcurrentHashMap<>();
@@ -37,11 +33,7 @@ public class AggroList extends AbstractEventSource<AddDamageEvent> {
 
 	/**
 	 * Only add damage from enemies. (Verify this includes summons, traps, pets, and excludes fall damage.)
-	 *
-	 * @param attacker
-	 * @param damage
 	 */
-	@Listenable
 	public void addDamage(Creature attacker, int damage, boolean notifyAttack, HopType hopType) {
 		if (!isAware(attacker))
 			return;
@@ -51,30 +43,12 @@ public class AggroList extends AbstractEventSource<AddDamageEvent> {
 		} else if (hateReductionTask == null) {
 			startHateReductionTask();
 		}
-
-		AddDamageEvent evObj = null;
-		if (hasSubscribers()) {
-			evObj = new AddDamageEvent(this, attacker, damage);
-			if (!super.fireBeforeEvent(evObj))
-				evObj = null;
-		}
-
-		AggroInfo ai = getAggroInfo(attacker);
-		ai.addDamage(damage);
-
-
-		// for now we add hate equal to each damage received, additionally effectHate will be broadcast to all hating creatures
-		boolean isNewInAggroList = ai.getHate() == 0;
-		if (notifyAttack && hopType == HopType.DAMAGE) {
+		int hate = 0;
+		if (notifyAttack && hopType == HopType.DAMAGE && damage > 0) {
 			//damage caused by auto attacks and skills with HopType.DAMAGE is multiplied by 10 and added as hate on retail
-			ai.addHate(damage > 0 ? StatFunctions.calculateHate(attacker, damage * 10) : damage);
-		} else {
-			ai.addHate(1);
+			hate = StatFunctions.calculateHate(attacker, damage * 10);
 		}
-		owner.getController().onAddHate(attacker, isNewInAggroList);
-
-		if (evObj != null)
-			super.fireAfterEvent(evObj);
+		addDamageAndHate(attacker, damage, hate);
 	}
 
 	/**
@@ -87,156 +61,38 @@ public class AggroList extends AbstractEventSource<AddDamageEvent> {
 			return;
 		if (hate < 0 && !aggroList.containsKey(creature.getObjectId()))
 			return;
+		addDamageAndHate(creature, 0, hate);
+	}
 
-		AggroInfo ai = getAggroInfo(creature);
+	private void addDamageAndHate(Creature creature, int damage, int hate) {
+		AggroInfo ai = aggroList.computeIfAbsent(creature.getObjectId(), _ -> new AggroInfo(creature));
 		boolean isNewInAggroList = ai.getHate() == 0;
+		ai.addDamage(damage);
 		ai.addHate(hate);
 		owner.getController().onAddHate(creature, isNewInAggroList);
 	}
 
 	private boolean shouldAddHateToMaster(Creature creature) {
 		// ice sheet, threatening wave, etc. generate hate for their master. taunting spirit does not!
-		return creature instanceof SummonedObject<?> && !isTauntingSpirit((SummonedObject<?>) creature);
+		return creature instanceof SummonedObject<?> summonedObject && !isTauntingSpirit(summonedObject);
 	}
 
 	private boolean isTauntingSpirit(SummonedObject<?> npc) {
-		switch (npc.getNpcId()) {
-			case 833403:
-			case 833404:
-			case 833478:
-			case 833479:
-			case 833480:
-			case 833481:
-				return true; // spawned by Summon Vexing Energy
-		}
-		return false;
+		return switch (npc.getNpcId()) {
+			case 833403, 833404, 833478, 833479, 833480, 833481 -> true; // spawned by Summon Vexing Energy
+			default -> false;
+		};
 	}
 
 	/**
-	 * @return player/group/alliance with most damage.
-	 */
-	public AionObject getMostDamage() {
-		AionObject mostDamage = null;
-		int maxDamage = 0;
-
-		for (AggroInfo ai : getFinalDamageList(true)) {
-			if (ai.getAttacker() == null || owner.equals(ai.getAttacker()))
-				continue;
-
-			if (ai.getDamage() > maxDamage) {
-				mostDamage = ai.getAttacker();
-				maxDamage = ai.getDamage();
-			}
-		}
-
-		return mostDamage;
-	}
-
-	public Race getPlayerWinnerRace() {
-		AionObject winner = getMostDamage();
-		if (winner instanceof PlayerGroup) {
-			return ((PlayerGroup) winner).getRace();
-		} else if (winner instanceof Player)
-			return ((Player) winner).getRace();
-		return null;
-	}
-
-	/**
-	 * @return player with most damage
+	 * @return player with most damage, if no other creatures like NPCs dealt more damage
 	 */
 	public Player getMostPlayerDamage() {
-		if (aggroList.isEmpty())
-			return null;
-
-		Player mostDamage = null;
-		int maxDamage = 0;
-
 		// Use final damage list to get pet damage as well.
-		for (AggroInfo ai : this.getFinalDamageList(false)) {
-			if (ai.getDamage() > maxDamage && ai.getAttacker() instanceof Player) {
-				mostDamage = (Player) ai.getAttacker();
-				maxDamage = ai.getDamage();
-			}
-		}
-
-		return mostDamage;
+		DamageInfo<Creature> mostDamage = getFinalDamageList().getMostDamage();
+		return mostDamage != null && mostDamage.getAttacker() instanceof Player player ? player : null;
 	}
 
-	/**
-	 * @return player with most damage
-	 */
-	public Player getMostPlayerDamageOfMembers(Collection<Player> team, int highestLevel) {
-		if (aggroList.isEmpty())
-			return null;
-
-		Player mostDamage = null;
-		int maxDamage = 0;
-
-		// Use final damage list to get pet damage as well.
-		for (AggroInfo ai : this.getFinalDamageList(false)) {
-			if (!(ai.getAttacker() instanceof Player)) {
-				continue;
-			}
-
-			if (!team.contains(ai.getAttacker())) {
-				continue;
-			}
-
-			if (ai.getDamage() > maxDamage) {
-
-				mostDamage = (Player) ai.getAttacker();
-				maxDamage = ai.getDamage();
-			}
-		}
-
-		if (mostDamage != null && mostDamage.isMentor()) {
-			for (Player member : team) {
-				if (member.getLevel() == highestLevel)
-					mostDamage = member;
-			}
-		}
-
-		return mostDamage;
-	}
-
-	/**
-	 * @return most hated creature
-	 */
-	public Creature getMostHated() {
-		if (aggroList.isEmpty())
-			return null;
-
-		Creature mostHated = null;
-		int maxHate = 0;
-
-		for (ConcurrentHashMap.Entry<Integer, AggroInfo> e : aggroList.entrySet()) {
-			AggroInfo ai = e.getValue();
-			if (ai == null)
-				continue;
-
-			// aggroList will never contain anything but creatures
-			Creature attacker = (Creature) ai.getAttacker();
-
-			if (attacker.isDead() || !attacker.isSpawned()) {
-				if (!attacker.getMaster().equals(attacker)) { // remove creature from aggro list and transfer its damages to master
-					remove(attacker);
-					return getMostHated(); // re-evaluate so we don't skip the summon's master
-				} else
-					ai.setHate(0);
-			}
-
-			if (ai.getHate() > maxHate && owner.canSee(attacker)) { // skip invisible attackers
-				mostHated = attacker;
-				maxHate = ai.getHate();
-			}
-		}
-
-		return mostHated;
-	}
-
-	/**
-	 * @param creature
-	 */
 	public void stopHating(VisibleObject creature) {
 		AggroInfo aggroInfo = aggroList.get(creature.getObjectId());
 		if (aggroInfo != null)
@@ -244,33 +100,32 @@ public class AggroList extends AbstractEventSource<AddDamageEvent> {
 	}
 
 	/**
-	 * Remove creature from aggro list, transfer its damages to the master
-	 *
-	 * @param creature
+	 * Remove creature from aggro list and transfer its damages to the master
 	 */
 	public void remove(Creature creature) {
+		remove(creature, true);
+	}
+
+	public void remove(Creature creature, boolean transferDamagesToMaster) {
 		AggroInfo aggroInfo = aggroList.remove(creature.getObjectId());
-		if (aggroInfo != null)
+		if (transferDamagesToMaster && aggroInfo != null)
 			transferDamagesToMaster(aggroInfo);
 	}
 
 	private void transferDamagesToMaster(AggroInfo aggroInfo) {
-		Creature master = ((Creature) aggroInfo.getAttacker()).getMaster();
-		if (!master.equals(aggroInfo.getAttacker())) {
-			aggroList.compute(master.getObjectId(), (key, masterAggroInfo) -> {
-				if (masterAggroInfo == null) {
-					masterAggroInfo = new AggroInfo(master);
-					masterAggroInfo.setHate(1);
-				}
-				masterAggroInfo.addDamage(aggroInfo.getDamage());
-				return masterAggroInfo;
-			});
-		}
+		Creature master = aggroInfo.getAttacker().getMaster();
+		if (master.equals(aggroInfo.getAttacker()) || !isAware(master))
+			return;
+		aggroList.compute(master.getObjectId(), (_, masterAggroInfo) -> {
+			if (masterAggroInfo == null) {
+				masterAggroInfo = new AggroInfo(master);
+				masterAggroInfo.setHate(1);
+			}
+			masterAggroInfo.addDamage(aggroInfo.getDamage());
+			return masterAggroInfo;
+		});
 	}
 
-	/**
-	 * Clear aggroList
-	 */
 	public void clear() {
 		synchronized (this) {
 			if (hateReductionTask != null) {
@@ -281,107 +136,68 @@ public class AggroList extends AbstractEventSource<AddDamageEvent> {
 		aggroList.clear();
 	}
 
-	/**
-	 * @param creature
-	 * @return aggroInfo
-	 */
-	public AggroInfo getAggroInfo(Creature creature) {
-		AggroInfo ai = aggroList.get(creature.getObjectId());
-		if (ai == null) {
-			ai = new AggroInfo(creature);
-			AggroInfo oldAi = aggroList.putIfAbsent(creature.getObjectId(), ai);
-			if (oldAi != null)
-				return oldAi;
-		}
-		return ai;
-	}
-
-	/**
-	 * @param creature
-	 * @return boolean
-	 */
 	public boolean isHating(Creature creature) {
-		return aggroList.containsKey(creature.getObjectId());
+		AggroInfo aggroInfo = aggroList.get(creature.getObjectId());
+		return aggroInfo != null && aggroInfo.getHate() > 0;
+	}
+
+	public int getHate(Creature creature) {
+		AggroInfo aggroInfo = aggroList.get(creature.getObjectId());
+		return aggroInfo != null ? aggroInfo.getHate() : 0;
+	}
+
+	public Stream<AggroInfo> stream() {
+		return aggroList.values().stream();
 	}
 
 	/**
-	 * @return aggro list
+	 * @return a living creature with no obstacle between it and the owner
 	 */
-	public Collection<AggroInfo> getList() {
-		return aggroList.values();
+	public Creature getTarget(AggroTarget targetType) {
+		return getTarget(targetType, Integer.MAX_VALUE);
 	}
 
 	/**
-	 * @return total damage
+	 * @return a living creature that is within the given range with no obstacle between it and the owner
 	 */
-	public int getTotalDamage() {
-		int totalDamage = 0;
-		for (AggroInfo ai : aggroList.values()) {
-			totalDamage += ai.getDamage();
-		}
-		return totalDamage;
+	public Creature getTarget(AggroTarget targetType, float range) {
+		Stream<AggroInfo> stream = streamValidTargetInfo(range);
+		return switch (targetType) {
+			case RANDOM -> Rnd.get(stream.map(AggroInfo::getAttacker).toList());
+			case RANDOM_EXCEPT_CURRENT_TARGET -> Rnd.get(stream.map(AggroInfo::getAttacker).filter(c -> !c.equals(owner.getTarget())).toList());
+			case MOST_HATED -> stream.max(Comparator.comparingInt(AggroInfo::getHate)).map(AggroInfo::getAttacker).orElse(null);
+			case SECOND_MOST_HATED -> stream.sorted(Comparator.comparingInt(AggroInfo::getHate).reversed()).limit(2).reduce((_, b) -> b).map(AggroInfo::getAttacker).orElse(null);
+			case THIRD_MOST_HATED -> stream.sorted(Comparator.comparingInt(AggroInfo::getHate).reversed()).limit(3).reduce((_, b) -> b).map(AggroInfo::getAttacker).orElse(null);
+		};
 	}
 
 	/**
-	 * Used to get a list of AggroInfo with npc and player/group/alliance damages combined.
-	 *
-	 * @return finalDamageList
+	 * @return living creatures that are within the given range with no obstacle between them and the owner
 	 */
-	public Collection<AggroInfo> getFinalDamageList(boolean mergeGroupDamage) {
-		Map<Integer, AggroInfo> list = new HashMap<>();
+	public Stream<Creature> streamValidTargets(float range) {
+		return streamValidTargetInfo(range).map(AggroInfo::getAttacker);
+	}
 
-		for (AggroInfo ai : aggroList.values()) {
-			// Get master only to control damage.
-			Creature creature = ((Creature) ai.getAttacker()).getMaster();
+	private Stream<AggroInfo> streamValidTargetInfo(float range) {
+		return stream()
+			.filter(ai -> ai.getHate() > 0 && !ai.getAttacker().isDead() && !ai.getAttacker().getLifeStats().isAboutToDie()
+				&& owner.getKnownList().sees(ai.getAttacker())
+				&& (range == Integer.MAX_VALUE || PositionUtil.isInRange(owner, ai.getAttacker(), range, false))
+				&& GeoService.getInstance().canSee(owner, ai.getAttacker()));
+	}
 
-			// Don't include damage from creatures outside the known list.
-			if (creature == null || !owner.getKnownList().knows(creature)) {
-				continue;
-			}
-
-			if (mergeGroupDamage) {
-				AionObject source;
-
-				if (creature instanceof Player && ((Player) creature).isInTeam()) {
-					source = ((Player) creature).getCurrentTeam();
-				} else {
-					source = creature;
-				}
-
-				if (list.containsKey(source.getObjectId())) {
-					list.get(source.getObjectId()).addDamage(ai.getDamage());
-				} else {
-					AggroInfo aggro = new AggroInfo(source);
-					aggro.setDamage(ai.getDamage());
-					list.put(source.getObjectId(), aggro);
-				}
-			} else if (list.containsKey(creature.getObjectId())) {
-				// Summon or other assistance
-				list.get(creature.getObjectId()).addDamage(ai.getDamage());
-			} else {
-				// Create a separate object so we don't taint current list.
-				AggroInfo aggro = new AggroInfo(creature);
-				aggro.addDamage(ai.getDamage());
-				list.put(creature.getObjectId(), aggro);
-			}
-		}
-
-		return list.values();
+	/**
+	 * Damages of summons and summoned objects are added to those of their masters.
+	 * 
+	 * @return list of DamageInfo with npc and player damages
+	 */
+	public DamageList getFinalDamageList() {
+		return new DamageList(aggroList.values(), owner);
 	}
 
 	protected boolean isAware(Creature creature) {
-		return creature != null && !creature.equals(owner) && !owner.getEffectController().isAbnormalSet(AbnormalState.SANCTUARY)
-			&& (isHating(creature) || creature.isEnemy(owner) || DataManager.TRIBE_RELATIONS_DATA.isHostileRelation(owner.getTribe(), creature.getTribe()));
-	}
-
-	@Override
-	protected boolean addListenable(AnnotatedMethod annotatedMethod) {
-		return annotatedMethod.getAnnotation(Listenable.class) != null;
-	}
-
-	@Override
-	protected boolean canHaveEventNotifications(AddDamageEvent event) {
-		return event.getDamage() > 0;
+		return creature != null && owner.getKnownList().knows(creature) && !owner.getEffectController().isAbnormalSet(AbnormalState.SANCTUARY)
+			&& (aggroList.containsKey(creature.getObjectId()) || creature.isEnemy(owner) || DataManager.TRIBE_RELATIONS_DATA.isHostileRelation(owner.getTribe(), creature.getTribe()));
 	}
 
 	private void startHateReductionTask() {

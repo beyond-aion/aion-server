@@ -87,7 +87,7 @@ public class SM_VERSION_CHECK extends AionServerPacket {
 		writeC(0x00); // 0
 		writeC((characterLimitCount * LoginServer.getInstance().getGameServerCount() * 0x10) | (limitFactionMode * 4) | GSConfig.CHARACTER_CREATION_MODE); // ServerFlag
 		writeD((int) (System.currentTimeMillis() / 1000)); // PacketGenTimeOnServ (current UTC time in seconds)
-		writeH(350); // skillPacketDelay
+		writeH(GSConfig.MIN_SKILL_CAST_INTERVAL_MILLIS); // skillPacketDelay
 		writeC(1); // enableClientPet (always 1)
 		writeC(10); // minSendMailLevel (now 5 on official)
 		writeC(1); // minReceiveWhisperLevel (now 15 on official)

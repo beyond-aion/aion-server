@@ -5,7 +5,7 @@ TITLE Aion Emu - Chat Server
 
 :START
 CLS
-JAVA -Xms72m -Xmx72m -XX:+UseNUMA -DconsoleEncoding=CP850 -cp "libs/*" com.aionemu.chatserver.ChatServer
+JAVA -Xms72m -Xmx72m -XX:+UseNUMA -XX:+UseCompactObjectHeaders -DconsoleEncoding=CP850 -cp "libs/*" com.aionemu.chatserver.ChatServer
 IF %ERRORLEVEL% EQU 0 GOTO END
 IF %ERRORLEVEL% EQU 2 GOTO START
 ECHO.

@@ -139,18 +139,12 @@ public abstract class Storage implements IStorage {
 			return 0;
 
 		ItemDeleteType deleteType = questStatus != null ? ItemDeleteType.fromQuestStatus(questStatus) : ItemDeleteType.fromUpdateType(updateType);
-//		long oldCount = item.getItemCount();
 		long leftCount = item.decreaseItemCount(count);
-//		long removedCount = oldCount - leftCount;
 		boolean isKinah = item.getItemTemplate().isKinah();
 		if (item.getItemCount() <= 0 && !isKinah)
 			delete(item, deleteType, actor);
 		else
 			ItemPacketService.sendItemPacket(actor, storageType, item, updateType);
-
-//		if (LoggingConfig.LOG_ITEM && !isKinah && removedCount > 0)
-//			if (item.getItemId() < 160000000 || item.getItemId() >= 165000000) // exclude potions, food, scrolls and other unimportant consumables from logging
-//				log.info("Item: " +  item.getItemId() + " [" + item.getItemName()+ "] deleted from player " + actor.getName() + " (count: " + removedCount + ") (deletion type: " + deleteType + ")");
 
 		setPersistentState(PersistentState.UPDATE_REQUIRED);
 		return leftCount;
@@ -229,10 +223,10 @@ public abstract class Storage implements IStorage {
 	}
 
 	/**
-	 * Delete item from storage and mark for DB update. UNKNOWN delete type
+	 * Delete item from storage and mark for DB update
 	 */
 	Item delete(Item item, Player actor) {
-		return delete(item, ItemDeleteType.QUEST_REWARD, actor);
+		return delete(item, ItemDeleteType.DEFAULT, actor);
 	}
 
 	/**
@@ -244,9 +238,10 @@ public abstract class Storage implements IStorage {
 			deletedItems.add(item);
 			setPersistentState(PersistentState.UPDATE_REQUIRED);
 			ItemPacketService.sendItemDeletePacket(actor, StorageType.getStorageTypeById(item.getItemLocation()), item, deleteType);
-			if (LoggingConfig.LOG_ITEM && !item.getItemTemplate().isKinah() && item.getItemCount() > 0)
-				if (item.getItemId() < 160000000 || item.getItemId() >= 165000000) // exclude potions, food, scrolls and other unimportant consumables from logging
-					log.info("Item: " +  item.getItemId() + " [" + item.getItemName()+ "] deleted from player " + actor.getName() + " (count: " + item.getItemCount() + ") (deletion type: " + deleteType + ")");
+			if (LoggingConfig.LOG_ITEM && !item.getItemTemplate().isKinah() && item.getItemCount() > 0) {
+				String name = (item.getEnchantLevel() > 0 ? "+" + item.getEnchantLevel() + " " : "") + item.getItemName();
+				log.info("Deleted " +  item.getItemId() + " " + name + " from " + actor + " (count: " + item.getItemCount() + ") (deletion type: " + deleteType + ")");
+			}
 			QuestEngine.getInstance().onItemRemoved(actor, item.getItemId());
 			return item;
 		}
@@ -371,8 +366,8 @@ public abstract class Storage implements IStorage {
 		return this.itemStorage.getFreeSlots();
 	}
 
-	public boolean setLimit(int limit) {
-		return this.itemStorage.setLimit(limit);
+	public void setLimit(int limit) {
+		itemStorage.setLimit(limit);
 	}
 
 	@Override

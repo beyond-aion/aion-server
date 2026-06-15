@@ -1,7 +1,10 @@
 package com.aionemu.gameserver.dao;
 
 import java.sql.*;
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import org.slf4j.Logger;
@@ -19,7 +22,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Mailbox;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 import com.aionemu.gameserver.model.items.storage.StorageType;
-import com.aionemu.gameserver.services.item.ItemService;
 
 /**
  * @author kosyachok
@@ -66,8 +68,8 @@ public class MailDAO {
 
 			if (attachedItemObjId > 0) {
 				if (mailboxItems == null) { // lazy initialization to minimize DB io
-					mailboxItems = loadMailboxItems(player.getObjectId());
-					ItemService.loadItemStones(mailboxItems);
+					mailboxItems = InventoryDAO.loadItems(player.getObjectId(), StorageType.MAILBOX);
+					ItemStoneListDAO.load(mailboxItems);
 				}
 				for (Item item : mailboxItems)
 					if (item.getObjectId() == attachedItemObjId)
@@ -97,58 +99,6 @@ public class MailDAO {
 			log.error("Could not read mail for player: " + playerId + " from DB: " + e.getMessage(), e);
 		}
 		return false;
-	}
-
-	private static List<Item> loadMailboxItems(int playerId) {
-		List<Item> mailboxItems = new ArrayList<>();
-
-		DB.select("SELECT * FROM inventory WHERE `item_owner` = ? AND `item_location` = 127", new ParamReadStH() {
-
-			@Override
-			public void setParams(PreparedStatement stmt) throws SQLException {
-				stmt.setInt(1, playerId);
-			}
-
-			@Override
-			public void handleRead(ResultSet rset) throws SQLException {
-				while (rset.next()) {
-					int itemUniqueId = rset.getInt("item_unique_id");
-					int itemId = rset.getInt("item_id");
-					long itemCount = rset.getLong("item_count");
-					Integer itemColor = (Integer) rset.getObject("item_color"); // accepts null (which means not dyed)
-					int colorExpireTime = rset.getInt("color_expires");
-					String itemCreator = rset.getString("item_creator");
-					int expireTime = rset.getInt("expire_time");
-					int activationCount = rset.getInt("activation_count");
-					int isEquiped = rset.getInt("is_equipped");
-					int isSoulBound = rset.getInt("is_soul_bound");
-					int slot = rset.getInt("slot");
-					int enchant = rset.getInt("enchant");
-					int enchantBonus = rset.getInt("enchant_bonus");
-					int itemSkin = rset.getInt("item_skin");
-					int fusionedItem = rset.getInt("fusioned_item");
-					int optionalSocket = rset.getInt("optional_socket");
-					int optionalFusionSocket = rset.getInt("optional_fusion_socket");
-					int charge = rset.getInt("charge");
-					int tuneCount = rset.getInt("tune_count");
-					int bonusStatsId = rset.getInt("rnd_bonus");
-					int fusionedItemBonusStatsId = rset.getInt("fusion_rnd_bonus");
-					int tempering = rset.getInt("tempering");
-					int packCount = rset.getInt("pack_count");
-					int isAmplified = rset.getInt("is_amplified");
-					int buffSkill = rset.getInt("buff_skill");
-					int rndPlumeBonusValue = rset.getInt("rnd_plume_bonus");
-
-					Item item = new Item(itemUniqueId, itemId, itemCount, itemColor, colorExpireTime, itemCreator, expireTime, activationCount, isEquiped == 1,
-						isSoulBound == 1, slot, StorageType.MAILBOX.getId(), enchant, enchantBonus, itemSkin, fusionedItem, optionalSocket, optionalFusionSocket,
-						charge, tuneCount, bonusStatsId, fusionedItemBonusStatsId, tempering, packCount, isAmplified == 1, buffSkill, rndPlumeBonusValue);
-					item.setPersistentState(PersistentState.UPDATED);
-					mailboxItems.add(item);
-				}
-			}
-		});
-
-		return mailboxItems;
 	}
 
 	public static void storeMailbox(Player player) {

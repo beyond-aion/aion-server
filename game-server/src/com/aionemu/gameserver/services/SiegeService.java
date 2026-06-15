@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.services;
 
-import java.text.ParseException;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -11,7 +10,6 @@ import org.quartz.CronExpression;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.services.CronService;
 import com.aionemu.gameserver.configs.main.SiegeConfig;
 import com.aionemu.gameserver.configs.schedule.SiegeSchedules;
 import com.aionemu.gameserver.dao.SiegeDAO;
@@ -27,6 +25,9 @@ import com.aionemu.gameserver.model.templates.spawns.SpawnGroup;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.siegespawns.SiegeSpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.*;
+import com.aionemu.gameserver.services.cron.CronExpressions;
+import com.aionemu.gameserver.services.cron.CronService;
+import com.aionemu.gameserver.services.panesterra.PanesterraService;
 import com.aionemu.gameserver.services.siege.*;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -35,8 +36,8 @@ import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldType;
 
 /**
- * 3.0 siege update (https://docs.google.com/document/d/1HVOw8-w9AlRp4ci0ei4iAzNaSKzAHj_xORu-qIQJFmc/edit#)
- * 
+ * 3.0 siege update (<a href="https://docs.google.com/document/d/1HVOw8-w9AlRp4ci0ei4iAzNaSKzAHj_xORu-qIQJFmc/edit#">3.0 Siege Docs</a>)
+ *
  * @author SoulKeeper, Source, Neon, Estrayl
  */
 public class SiegeService {
@@ -44,24 +45,16 @@ public class SiegeService {
 	private static final Logger log = LoggerFactory.getLogger("SIEGE_LOG");
 
 	/**
-	 * We should broadcast fortress status every hour Actually only influence packet must be sent, but that doesn't matter
+	 * We should broadcast fortress status every hour Actually only an influence packet must be sent, but that doesn't matter
 	 */
-	private static final CronExpression SIEGE_LOCATION_STATUS_BROADCAST_SCHEDULE;
-
-	static {
-		try {
-			SIEGE_LOCATION_STATUS_BROADCAST_SCHEDULE = new CronExpression("0 0 * ? * *");
-		} catch (ParseException e) {
-			throw new ExceptionInInitializerError(e);
-		}
-	}
+	private static final CronExpression SIEGE_LOCATION_STATUS_BROADCAST_SCHEDULE = CronExpressions.getOrCreate("0 0 * ? * *");
 
 	/**
 	 * Singleton that is loaded on the class initialization. Guys, we really do not SingletonHolder classes
 	 */
 	private static final SiegeService instance = new SiegeService();
 	/**
-	 * Map that holds fortressId to Siege. We can easily know what fortresses is under siege ATM :)
+	 * Map that holds fortressId to Siege. We can easily know what fortresses are under siege ATM :)
 	 */
 	private final Map<Integer, Siege<? extends SiegeLocation>> activeSieges = new ConcurrentHashMap<>();
 
@@ -134,9 +127,9 @@ public class SiegeService {
 		// Schedule fortresses sieges protector spawn
 		for (SiegeSchedules.Fortress f : siegeSchedules.getFortresses()) {
 			for (String siegeTime : f.getSiegeTimes()) {
-				String preparationCron = getPreparationCronString(siegeTime);
+				String preparationCron = getPreparationCronString(siegeTime, f.getId());
 				CronService.getInstance().schedule(new SiegeStartRunnable(f.getId()), preparationCron);
-				log.debug("Scheduled siege of fortressID " + f.getId() + " based on cron expression: " + preparationCron);
+				log.debug("Scheduled siege of fortressID {} based on cron expression: {}", f.getId(), preparationCron);
 			}
 		}
 
@@ -144,7 +137,7 @@ public class SiegeService {
 		for (SiegeSchedules.AgentFight a : siegeSchedules.getAgentFights()) {
 			for (String siegeTime : a.getSiegeTimes()) {
 				CronService.getInstance().schedule(new SiegeStartRunnable(a.getId()), siegeTime);
-				log.debug("Scheduled agent fight based on cron expression: " + siegeTime);
+				log.debug("Scheduled agent fight based on cron expression: {}", siegeTime);
 			}
 		}
 
@@ -154,7 +147,7 @@ public class SiegeService {
 				log.debug("Starting siege of artifact #" + artifact.getLocationId());
 				startSiege(artifact.getLocationId());
 			} else {
-				log.debug("Artifact #" + artifact.getLocationId() + " siege was not started, it belongs to fortress");
+				log.debug("Artifact #{} siege was not started, it belongs to fortress", artifact.getLocationId());
 			}
 		}
 
@@ -176,7 +169,7 @@ public class SiegeService {
 					PacketSendUtility.sendPacket(player, new SM_FORTRESS_INFO(fortress.getLocationId(), true));
 			});
 		}, SIEGE_LOCATION_STATUS_BROADCAST_SCHEDULE);
-		log.debug("Broadcasting Siege Location status based on expression: " + SIEGE_LOCATION_STATUS_BROADCAST_SCHEDULE);
+		log.debug("Broadcasting Siege Location status based on expression: {}", SIEGE_LOCATION_STATUS_BROADCAST_SCHEDULE);
 	}
 
 	public void checkSiegeStart(final int locationId) {
@@ -187,14 +180,18 @@ public class SiegeService {
 	}
 
 	private void startPreparations(final int locationId) {
-		log.debug("Starting preparations of siege Location:" + locationId);
+		log.debug("Starting preparations of siege Location:{}", locationId);
 		FortressLocation loc = getFortress(locationId);
 		// Set siege start timer..
 		ThreadPoolManager.getInstance().schedule(() -> startSiege(locationId), 300 * 1000);
 		if (loc.getTemplate().getMaxOccupyCount() > 0 && loc.getOccupiedCount() >= loc.getTemplate().getMaxOccupyCount()
 			&& !loc.getRace().equals(SiegeRace.BALAUR)) {
-			log.debug("Resetting fortress to balaur control due to exceeded occupy count! locId:" + locationId);
+			log.debug("Resetting fortress to balaur control due to exceeded occupy count! locId:{}", locationId);
 			resetSiegeLocation(loc);
+		}
+		// TODO:
+		if (locationId > 10000) { // Panesterra
+			PanesterraService.getInstance().prepareFortressSiege(loc);
 		}
 	}
 
@@ -217,15 +214,15 @@ public class SiegeService {
 			return;
 
 		// schedule siege end
-		ThreadPoolManager.getInstance().schedule(() -> stopSiege(siegeLocationId), siege.getSiegeLocation().getSiegeDuration() * 1000);
+		ThreadPoolManager.getInstance().schedule(() -> stopSiege(siegeLocationId), siege.getSiegeLocation().getSiegeDuration() * 1000L);
 	}
 
 	public synchronized void stopSiege(int siegeLocationId) {
-		log.debug("Stopping siege of siege location: " + siegeLocationId);
+		log.debug("Stopping siege of siege location: {}", siegeLocationId);
 
 		Siege<? extends SiegeLocation> siege = activeSieges.remove(siegeLocationId);
 		if (siege == null) {
-			log.debug("Siege of siege location " + siegeLocationId + " is not in progress, it was captured earlier?");
+			log.debug("Siege of siege location {} is not in progress, it was captured earlier?", siegeLocationId);
 			return;
 		}
 		if (siege.isFinished())
@@ -353,7 +350,7 @@ public class SiegeService {
 		long endTime = siege.getStartTime() / 1000 + siege.getSiegeLocation().getSiegeDuration();
 		int secondsLeft = (int) (endTime - System.currentTimeMillis() / 1000);
 
-		return secondsLeft > 0 ? secondsLeft : 0;
+		return Math.max(secondsLeft, 0);
 	}
 
 	public Siege<? extends SiegeLocation> getSiege(SiegeLocation loc) {
@@ -453,7 +450,7 @@ public class SiegeService {
 		for (SiegeLocation loc : getSiegeLocations().values()) {
 			if (loc.getLegionId() == legionId) {
 				loc.setLegionId(0);
-				break;
+				SiegeDAO.updateSiegeLocation(loc);
 			}
 		}
 	}
@@ -681,7 +678,7 @@ public class SiegeService {
 	}
 
 	/**
-	 * Checks if the player is in RVR event list, if not the player is added.
+	 * Checks if the player is in an RVR event list, if not the player is added.
 	 */
 	public void checkRvrEventPlayer(Player player) {
 		if (player != null && !rvrEventPlayers.contains(player))
@@ -692,15 +689,17 @@ public class SiegeService {
 		rvrEventPlayers = new HashSet<>();
 	}
 
-	/*
-	 * modifies cron string to 5 minutes earlier to allow preparation methods
+	/**
+	 * Modifies to original cron expression to add additional time for preparations.
+	 * Five minutes for regular fortress sieges.
+	 * Ten minutes for Panesterra fortress sieges.
 	 */
-	private String getPreparationCronString(String siegeTime) {
+	private String getPreparationCronString(String siegeTime, int fortressId) {
 		try {
 			String[] cronParts = siegeTime.split(" ");
 			byte minutes = Byte.parseByte(cronParts[1]);
 			byte hours = Byte.parseByte(cronParts[2]);
-			minutes -= 5;
+			minutes -= (byte) (fortressId < 10000 ? 5 : 10);
 			if (minutes < 0) {
 				minutes += 60;
 				hours -= 1;

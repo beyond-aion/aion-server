@@ -45,8 +45,6 @@ public class _2947FollowingThrough extends AbstractQuestHandler {
 		qe.registerOnQuestCompleted(questId);
 		qe.registerOnQuestTimerEnd(questId);
 		qe.registerOnEnterWorld(questId);
-		qe.registerOnMovieEndQuest(167, questId);
-		qe.registerOnMovieEndQuest(168, questId);
 		for (int npc : npcs) {
 			qe.registerQuestNpc(npc).addOnTalkEvent(questId);
 		}
@@ -237,19 +235,12 @@ public class _2947FollowingThrough extends AbstractQuestHandler {
 	}
 
 	@Override
-	public boolean onMovieEndEvent(QuestEnv env, int movieId) {
-		Player player = env.getPlayer();
-		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			if (movieId == 168) {
-				TeleportService.teleportTo(player, 120010000, 1006.1f, 1526, 222.2f, (byte) 90);
-				return true;
-			} else if (movieId == 167) {
-				QuestService.questTimerStart(env, 240);
-				return true;
-			}
+	public void onMovieEndEvent(QuestEnv env, int movieId) {
+		if (movieId == 168) {
+			TeleportService.teleportTo(env.getPlayer(), 120010000, 1006.1f, 1526, 222.2f, (byte) 90);
+		} else if (movieId == 167) {
+			QuestService.questTimerStart(env, 240);
 		}
-		return false;
 	}
 
 	@Override

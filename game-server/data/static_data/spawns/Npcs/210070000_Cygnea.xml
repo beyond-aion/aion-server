@@ -2978,10 +2978,6 @@
 		<spawn npc_id="805086" respawn_time="295">
 			<spot x="1189.04187" y="1628.97986" z="466.06375" h="90" />
 		</spawn>
-		<!-- jormungand bridge of chance gatekeeper -->
-		<spawn npc_id="833003" respawn_time="295">
-			<spot x="2790.42529" y="2993.70190" z="275.02658" h="60" />
-		</spawn>
 		<!-- jovan -->
 		<spawn npc_id="805062" respawn_time="295">
 			<spot x="1161.30212" y="2941.51489" z="291.37500" h="75" />

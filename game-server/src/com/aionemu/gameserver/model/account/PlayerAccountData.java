@@ -1,13 +1,14 @@
 package com.aionemu.gameserver.model.account;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerAppearance;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
-import com.aionemu.gameserver.model.team.legion.Legion;
-import com.aionemu.gameserver.model.team.legion.LegionMember;
+import com.aionemu.gameserver.model.items.ItemSlot;
 import com.aionemu.gameserver.model.templates.BoundRadius;
 
 /**
@@ -23,22 +24,19 @@ public class PlayerAccountData {
 	private final PlayerCommonData playerCommonData;
 	private PlayerAppearance appearance;
 	private CharacterBanInfo cbi;
-	private List<Item> equipment;
+	private List<VisibleItem> visibleItems;
 	private Timestamp creationDate;
 	private Timestamp deletionDate;
-	private LegionMember legionMember;
 
 	public PlayerAccountData(PlayerCommonData playerCommonData, PlayerAppearance appearance) {
-		this(playerCommonData, appearance, null, null, null);
+		this(playerCommonData, appearance, null, Collections.emptyList());
 	}
 
-	public PlayerAccountData(PlayerCommonData playerCommonData, PlayerAppearance appearance, CharacterBanInfo cbi, List<Item> equipment,
-		LegionMember legionMember) {
+	public PlayerAccountData(PlayerCommonData playerCommonData, PlayerAppearance appearance, CharacterBanInfo cbi, List<VisibleItem> visibleItems) {
 		this.playerCommonData = playerCommonData;
 		this.appearance = appearance;
 		this.cbi = cbi;
-		this.equipment = equipment;
-		this.legionMember = legionMember;
+		this.visibleItems = visibleItems;
 		updateBoundingRadius();
 	}
 
@@ -101,41 +99,23 @@ public class PlayerAccountData {
 		playerCommonData.setBoundingRadius(new BoundRadius(0.25f, 0.25f, appearance.getBoundHeight()));
 	}
 
-	/**
-	 * @param timestamp
-	 */
 	public void setCreationDate(Timestamp creationDate) {
 		this.creationDate = creationDate;
 	}
 
-	/**
-	 * @return the legionMember
-	 */
-	public Legion getLegion() {
-		return legionMember.getLegion();
+	public List<VisibleItem> getVisibleItems() {
+		return visibleItems;
 	}
 
-	/**
-	 * Returns true if player is a legion member
-	 * 
-	 * @return true or false
-	 */
-	public boolean isLegionMember() {
-		return legionMember != null;
+	public void setVisibleItems(List<Item> equipment) {
+		List<VisibleItem> items = new ArrayList<>();
+		for (Item item : equipment) {
+			byte slotType = ItemSlot.getEquipmentSlotType(item.getEquipmentSlot());
+			if (slotType != 0)
+				items.add(new VisibleItem(slotType, item.getItemSkinTemplate().getTemplateId(), item.getGodStoneId(), item.getItemColor()));
+		}
+		this.visibleItems = items;
 	}
 
-	/**
-	 * @return the equipment
-	 */
-	public List<Item> getEquipment() {
-		return equipment;
-	}
-
-	/**
-	 * @param equipment
-	 *          the equipment to set
-	 */
-	public void setEquipment(List<Item> equipment) {
-		this.equipment = equipment;
-	}
+	public record VisibleItem(byte slotType, int itemId, int godStoneId, Integer color) {}
 }

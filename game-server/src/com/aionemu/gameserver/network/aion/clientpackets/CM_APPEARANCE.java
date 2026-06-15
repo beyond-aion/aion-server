@@ -7,7 +7,7 @@ import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.legion.Legion;
-import com.aionemu.gameserver.model.team.legion.LegionHistoryType;
+import com.aionemu.gameserver.model.team.legion.LegionHistoryAction;
 import com.aionemu.gameserver.model.templates.item.actions.AbstractItemAction;
 import com.aionemu.gameserver.model.templates.item.actions.CosmeticItemAction;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
@@ -90,8 +90,8 @@ public class CM_APPEARANCE extends AionClientPacket {
 	public static void onPlayerNameChanged(Player player, String oldName) {
 		World.getInstance().updateCachedPlayerName(oldName, player);
 		if (player.isLegionMember()) {
-			LegionService.getInstance().updateCachedPlayerName(oldName, player);
-			LegionService.getInstance().addHistory(player.getLegion(), oldName, LegionHistoryType.CHARACTER_RENAME, 0, player.getName());
+			LegionService.getInstance().addHistory(player.getLegion(), oldName, LegionHistoryAction.CHARACTER_RENAME, player.getName());
+			player.getLegionMember().setPlayerData(player); // no need to broadcast SM_LEGION_UPDATE_MEMBER here, since SM_RENAME already handles it
 		}
 		PacketSendUtility.broadcastToWorld(new SM_RENAME(player, oldName)); // broadcast to world to update all friendlists, housing npcs, etc.
 	}

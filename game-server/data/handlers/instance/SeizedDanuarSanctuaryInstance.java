@@ -7,10 +7,8 @@ import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
-import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.player.PlayerReviveService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
@@ -134,12 +132,5 @@ public class SeizedDanuarSanctuaryInstance extends GeneralInstanceHandler {
 			spawn(233128, 1103.7655f, 440.8195f, 284.6165f, (byte) 70);
 			spawn(233128, 954.9696f, 910.779f, 299.523f, (byte) 110);
 		}
-	}
-
-	@Override
-	public boolean onDie(final Player player, Creature lastAttacker) {
-		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_COMBAT_MY_DEATH());
-		PacketSendUtility.sendPacket(player, new SM_DIE(player, 8));
-		return true;
 	}
 }

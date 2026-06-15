@@ -1,13 +1,12 @@
 package com.aionemu.gameserver.spawnengine;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
-import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.templates.event.EventTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnGroup;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
-import com.aionemu.gameserver.model.templates.spawns.TemporarySpawn;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
@@ -27,8 +26,6 @@ public class TemporarySpawnEngine {
 		List<VisibleObject> remainingObjects = new ArrayList<>(spawnedObjects.size());
 		spawnedObjects.forEach(object -> {
 			if (object.getSpawn().getTemporarySpawn().canDespawn()) {
-				if (object instanceof Npc npc && !npc.isDead() && object.getSpawn().hasPool())
-					object.getSpawn().setUse(npc.getInstanceId(), false);
 				object.getController().deleteIfAliveOrCancelRespawn();
 			} else {
 				remainingObjects.add(object);
@@ -38,25 +35,30 @@ public class TemporarySpawnEngine {
 	}
 
 	private static void spawn() {
+		Map<SpawnGroup, List<VisibleObject>> spawnedBySpawnGroup = spawnedObjects.stream().collect(Collectors.groupingBy(o -> o.getSpawn().getGroup()));
 		spawnGroups.forEach((spawn, instanceIds) -> {
 			if (instanceIds.isEmpty())
 				return;
+			List<VisibleObject> spawned = spawnedBySpawnGroup.getOrDefault(spawn, Collections.emptyList());
 			if (spawn.hasPool()) {
-				TemporarySpawn temporarySpawn = spawn.getTemporarySpawn();
-				if (temporarySpawn.canSpawn()) {
-					for (Integer instanceId : instanceIds) {
-						spawn.resetTemplates(instanceId);
-						for (int pool = 0; pool < spawn.getPool(); pool++) {
-							SpawnTemplate template = spawn.getRndTemplate(instanceId);
-							SpawnEngine.spawnObject(template, instanceId);
-						}
+				if (!spawn.getTemporarySpawn().canSpawn())
+					return;
+				Set<Integer> spawnableInstanceIds = new HashSet<>(instanceIds);
+				spawned.forEach(o -> spawnableInstanceIds.remove(o.getInstanceId()));
+				for (Integer instanceId : spawnableInstanceIds) {
+					spawn.resetPoolSpots(instanceId);
+					for (int pool = 0; pool < spawn.getPool(); pool++) {
+						SpawnTemplate template = spawn.reserveRandomFreePoolSpot(instanceId);
+						SpawnEngine.spawnObject(template, instanceId);
 					}
 				}
 			} else {
 				for (SpawnTemplate template : spawn.getSpawnTemplates()) {
-					TemporarySpawn temporarySpawn = template.getTemporarySpawn();
-					if (temporarySpawn.canSpawn())
-						instanceIds.forEach(instanceId -> SpawnEngine.spawnObject(template, instanceId));
+					if (!template.getTemporarySpawn().canSpawn())
+						continue;
+					Set<Integer> spawnableInstanceIds = new HashSet<>(instanceIds);
+					spawned.stream().filter(o -> o.getSpawn().equals(template)).forEach(o -> spawnableInstanceIds.remove(o.getInstanceId()));
+					spawnableInstanceIds.forEach(instanceId -> SpawnEngine.spawnObject(template, instanceId));
 				}
 			}
 		});

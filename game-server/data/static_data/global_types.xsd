@@ -757,7 +757,6 @@
 			<xs:enumeration value="ARTIST" />
 			<xs:enumeration value="BARD" />
 			<xs:enumeration value="RIDER" />
-			<xs:enumeration value="ALL" />
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="Race">
@@ -1265,6 +1264,34 @@
 			<xs:enumeration value="EPIC" />
 			<xs:enumeration value="MYTHIC" />
 			<xs:enumeration value="JUNK" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BaseOccupier">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="ELYOS"/>
+			<xs:enumeration value="ASMODIANS"/>
+			<xs:enumeration value="BALAUR"/>
+			<xs:enumeration value="BELUS"/>
+			<xs:enumeration value="IVY_TEMPLE"/>
+			<xs:enumeration value="HIGHLAND_TEMPLE"/>
+			<xs:enumeration value="ALPINE_TEMPLE"/>
+			<xs:enumeration value="GRANDWEIR_TEMPLE"/>
+			<xs:enumeration value="ASPIDA"/>
+			<xs:enumeration value="NOERREN_TEMPLE"/>
+			<xs:enumeration value="BOREALIS_TEMPLE"/>
+			<xs:enumeration value="MYRKREN_TEMPLE"/>
+			<xs:enumeration value="GLUMVEILEN_TEMPLE"/>
+			<xs:enumeration value="ATANATOS"/>
+			<xs:enumeration value="MEMORIA_TEMPLE"/>
+			<xs:enumeration value="SYBILLINE_TEMPLE"/>
+			<xs:enumeration value="AUSTERITY_TEMPLE"/>
+			<xs:enumeration value="SERENITY_TEMPLE"/>
+			<xs:enumeration value="DISILLON"/>
+			<xs:enumeration value="NECROLUCE_TEMPLE"/>
+			<xs:enumeration value="ESMERAUDUS_TEMPLE"/>
+			<xs:enumeration value="VOLTAIC_TEMPLE"/>
+			<xs:enumeration value="ILLUMINATUS_TEMPLE"/>
+			<xs:enumeration value="PEACE"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="IntListType">

@@ -6,7 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.model.EmotionType;
-import com.aionemu.gameserver.model.gameobjects.Summon;
+import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
@@ -38,29 +38,28 @@ public class CM_SUMMON_EMOTION extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
-		EmotionType emotionType = EmotionType.getEmotionTypeById(emotionTypeId);
-
-		Summon summon = player.getSummon();
-		if (summon == null) // commonly due to lags when the pet dies
+		Creature summonOrMercenary = player.getSummonOrMercenary(objId);
+		if (summonOrMercenary == null) // commonly due to lags when the pet dies
 			return;
 
+		EmotionType emotionType = EmotionType.getEmotionTypeById(emotionTypeId);
 		switch (emotionType) {
 			case FLY:
 			case LAND:
-				PacketSendUtility.broadcastPacket(summon, new SM_EMOTION(summon, EmotionType.CHANGE_SPEED));
-				PacketSendUtility.broadcastPacket(summon, new SM_EMOTION(summon, emotionType));
+				PacketSendUtility.broadcastPacket(summonOrMercenary, new SM_EMOTION(summonOrMercenary, EmotionType.CHANGE_SPEED));
+				PacketSendUtility.broadcastPacket(summonOrMercenary, new SM_EMOTION(summonOrMercenary, emotionType));
 				break;
 			case JUMP:
 			case SUMMON_STOP_JUMP:
-				PacketSendUtility.broadcastPacket(summon, new SM_EMOTION(summon, emotionType));
+				PacketSendUtility.broadcastPacket(summonOrMercenary, new SM_EMOTION(summonOrMercenary, emotionType));
 				break;
 			case ATTACKMODE_IN_MOVE: // start attacking
-				summon.setState(CreatureState.WEAPON_EQUIPPED);
-				PacketSendUtility.broadcastPacket(summon, new SM_EMOTION(summon, emotionType));
+				summonOrMercenary.setState(CreatureState.WEAPON_EQUIPPED);
+				PacketSendUtility.broadcastPacket(summonOrMercenary, new SM_EMOTION(summonOrMercenary, emotionType));
 				break;
 			case NEUTRALMODE_IN_MOVE: // stop attacking
-				summon.unsetState(CreatureState.WEAPON_EQUIPPED);
-				PacketSendUtility.broadcastPacket(summon, new SM_EMOTION(summon, emotionType));
+				summonOrMercenary.unsetState(CreatureState.WEAPON_EQUIPPED);
+				PacketSendUtility.broadcastPacket(summonOrMercenary, new SM_EMOTION(summonOrMercenary, emotionType));
 				break;
 			case NONE:
 				if (emotionTypeId != EmotionType.NONE.getTypeId())

@@ -6,6 +6,7 @@ import com.aionemu.gameserver.model.DialogPage;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
+import com.aionemu.gameserver.services.player.PlayerMailboxState;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -20,8 +21,8 @@ public class PostboxAI extends NpcAI {
 
 	@Override
 	protected void handleDialogStart(Player player) {
+		player.getMailbox().mailBoxState = PlayerMailboxState.REGULAR;
 		PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), DialogPage.MAIL.id()));
-		// player.getMailbox().sendMailList(false);
 	}
 
 	@Override

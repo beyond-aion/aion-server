@@ -26,7 +26,7 @@ public class BonusPackService {
 		rewards.put(186000242, 15); // Ceramium Medal
 		rewards.put(186000130, 6500); // Crucible Insignia
 		rewards.put(186000051, 5); // Major Ancient Crown
-		rewards.put(166000195, 15); // Epsilon Enchantment Stone
+		rewards.put(166020003, 15); // [Event] Omega Enchantment Stone
 
 		rewards.put(186000236, 250); // Blood Mark
 		rewards.put(186000237, 4500); // Ancient Coin

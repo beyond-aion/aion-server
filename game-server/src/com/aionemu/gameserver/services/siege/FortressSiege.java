@@ -23,7 +23,7 @@ import com.aionemu.gameserver.model.siege.FortressLocation;
 import com.aionemu.gameserver.model.siege.SiegeModType;
 import com.aionemu.gameserver.model.siege.SiegeRace;
 import com.aionemu.gameserver.model.team.legion.Legion;
-import com.aionemu.gameserver.model.team.legion.LegionHistoryType;
+import com.aionemu.gameserver.model.team.legion.LegionHistoryAction;
 import com.aionemu.gameserver.model.templates.npc.AbyssNpcType;
 import com.aionemu.gameserver.model.templates.npc.NpcRating;
 import com.aionemu.gameserver.model.templates.siegelocation.SiegeLegionReward;
@@ -132,17 +132,13 @@ public class FortressSiege extends Siege<FortressLocation> {
 			SiegeRace oldRace = getSiegeLocation().getRace();
 			int oldLegionId = getSiegeLocation().getLegionId();
 			if (isBossKilled()) {
-				SiegeRaceCounter winner = getSiegeCounter().getWinnerRaceCounter();
+				SiegeRaceCounter winner = getWinnerRaceCounter();
 				log.info(this + ": Siege finished. Old race: " + oldRace + ", legion ID: " + oldLegionId + " -> New race: " + winner.getSiegeRace()
 					+ ", legion ID: " + (winner.getWinnerLegionId() == null ? 0 : winner.getWinnerLegionId()));
 			} else {
 				log.info(this + ": Siege finished. No winner found. Race: " + oldRace + ", legion ID: " + oldLegionId);
 			}
 		}
-
-		// Unregister siege boss listeners
-		// cleanup :)
-		unregisterSiegeBossListeners();
 
 		// despawn protectors and make fortress invulnerable
 		SiegeService.getInstance().deSpawnNpcs(getSiegeLocationId());
@@ -192,7 +188,7 @@ public class FortressSiege extends Siege<FortressLocation> {
 	}
 
 	private void onCapture() {
-		SiegeRaceCounter winner = getSiegeCounter().getWinnerRaceCounter();
+		SiegeRaceCounter winner = getWinnerRaceCounter();
 		SiegeRace winnerRace = winner.getSiegeRace();
 		SiegeRace oldRace = getSiegeLocation().getRace();
 		Legion oldLegion = oldLegionId == 0 ? null : LegionService.getInstance().getLegion(oldLegionId);
@@ -341,7 +337,7 @@ public class FortressSiege extends Siege<FortressLocation> {
 			return;
 		try {
 			Set<Integer> participatedLegionMembers = new HashSet<>(src.getPlayerAbyssPoints().keySet());
-			participatedLegionMembers.retainAll(legion.getLegionMembers());
+			participatedLegionMembers.retainAll(legion.getMemberIds());
 
 			if (participatedLegionMembers.isEmpty()) {
 				if (LoggingConfig.LOG_SIEGE)
@@ -349,7 +345,7 @@ public class FortressSiege extends Siege<FortressLocation> {
 			} else {
 				int gp = Math.min(Math.round(legionGp / (float) participatedLegionMembers.size()), SiegeConfig.LEGION_GP_CAP_PER_MEMBER);
 				for (int participant : participatedLegionMembers)
-					GloryPointsService.increaseGpBy(participant, gp);
+					GloryPointsService.addGp(participant, gp);
 				if (LoggingConfig.LOG_SIEGE)
 					log.info(this + ": Distributed " + gp + " GP each, to the following members of " + legion + ": " + participatedLegionMembers);
 			}
@@ -365,12 +361,12 @@ public class FortressSiege extends Siege<FortressLocation> {
 		try {
 			long totalKinah = 0;
 			int nonKinahItems = 0;
-			PlayerCommonData brigadeGeneral = PlayerService.getOrLoadPlayerCommonData(legion.getBrigadeGeneral());
+			PlayerCommonData brigadeGeneral = PlayerService.getOrLoadPlayerCommonData(legion.getBrigadeGeneral().getObjectId());
 			for (SiegeLegionReward item : legionRewards) {
 				if (item.getItemId() == ItemId.KINAH) {
 					long kinah = isBossKilled() ? item.getItemCount() : Math.round(item.getItemCount() * 0.7f);
 					legion.getLegionWarehouse().increaseKinah(kinah);
-					LegionService.getInstance().addRewardHistory(legion, kinah, isBossKilled() ? LegionHistoryType.OCCUPATION : LegionHistoryType.DEFENSE,
+					LegionService.getInstance().addRewardHistory(legion, kinah, isBossKilled() ? LegionHistoryAction.OCCUPATION : LegionHistoryAction.DEFENSE,
 						getSiegeLocationId());
 					totalKinah += kinah;
 				} else {

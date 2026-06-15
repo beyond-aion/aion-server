@@ -21,7 +21,7 @@ public class _30355TheProtectorsMadness extends AbstractQuestHandler {
 	public void register() {
 		qe.registerQuestNpc(260265).addOnQuestStart(questId);
 		qe.registerQuestNpc(260265).addOnTalkEvent(questId);
-		qe.registerQuestNpc(700856).addOnTalkEvent(questId);
+		qe.registerQuestNpc(700858).addOnTalkEvent(questId);
 		qe.registerQuestNpc(278001).addOnTalkEvent(questId);
 		qe.registerQuestNpc(216952).addOnKillEvent(questId);
 		qe.registerQuestNpc(216960).addOnKillEvent(questId);
@@ -44,7 +44,7 @@ public class _30355TheProtectorsMadness extends AbstractQuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
-			if (targetId == 700856) { // Artifact of Protection
+			if (targetId == 700858) { // Artifact of Protection
 				switch (dialogActionId) {
 					case USE_OBJECT:
 						if (var == 1) {

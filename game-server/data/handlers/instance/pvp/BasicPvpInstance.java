@@ -19,7 +19,6 @@ import com.aionemu.gameserver.model.instance.instancescore.PvpInstanceScore;
 import com.aionemu.gameserver.model.instance.playerreward.PvpInstancePlayerReward;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.network.aion.instanceinfo.PvpInstanceScoreWriter;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_SCORE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.abyss.AbyssPointsService;
@@ -92,10 +91,10 @@ public class BasicPvpInstance extends GeneralInstanceHandler {
 	protected void distributeRewards(Player player, PvpInstancePlayerReward reward) {
 		PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(instance.getMapId(),
 			new PvpInstanceScoreWriter(instanceScore, InstanceScoreType.SHOW_REWARD, player.getObjectId(), 0), getTime()));
-		AbyssPointsService.addAp(player, (int) Rates.AP_DREDGION.calcResult(player, reward.getBaseAp() + reward.getBonusAp()));
+		AbyssPointsService.addAp(player, Rates.AP_DREDGION.calcResult(player, reward.getBaseAp() + reward.getBonusAp()));
 		int gpToAdd = reward.getBaseGp() + reward.getBonusGp();
 		if (gpToAdd > 0)
-			GloryPointsService.increaseGpBy(player.getObjectId(), gpToAdd);
+			GloryPointsService.addGp(player.getObjectId(), Rates.GP.calcResult(player, gpToAdd));
 		if (reward.getReward1ItemId() > 0)
 			ItemService.addItem(player, reward.getReward1ItemId(), reward.getReward1Count() + reward.getReward1BonusCount(), true);
 		if (reward.getReward2ItemId() > 0)
@@ -116,6 +115,7 @@ public class BasicPvpInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void onLeaveInstance(Player player) {
+		super.onLeaveInstance(player);
 		PvpInstancePlayerReward reward = instanceScore.getPlayerReward(player.getObjectId());
 		if (reward != null && instanceScore.getInstanceProgressionType() != InstanceProgressionType.END_PROGRESS)
 			instanceScore.removePlayerReward(reward);
@@ -128,7 +128,6 @@ public class BasicPvpInstance extends GeneralInstanceHandler {
 	public boolean onDie(Player victim, Creature lastAttacker) {
 		sendPacket(new SM_INSTANCE_SCORE(instance.getMapId(),
 			new PvpInstanceScoreWriter(instanceScore, InstanceScoreType.UPDATE_PLAYER_BUFF_STATUS, victim.getObjectId(), 60), getTime()));
-		PacketSendUtility.sendPacket(victim, new SM_DIE(victim.canUseRebirthRevive(), false, 0, 8));
 		if (lastAttacker instanceof Player killer && killer.getRace() != victim.getRace()) {
 			int killPoints = 200;
 			if (instanceScore.isStartProgress() && getTime() <= 600000 && victim.getRace() != instanceScore.getRaceWithHighestPoints())
@@ -156,26 +155,14 @@ public class BasicPvpInstance extends GeneralInstanceHandler {
 	}
 
 	@Override
-	public void onPlayerLogin(Player player) {
-		sendPacket(new SM_INSTANCE_SCORE(instance.getMapId(),
-			new PvpInstanceScoreWriter(instanceScore, InstanceScoreType.INIT_PLAYER, player.getObjectId(), 0), getTime()));
-		sendPacket(new SM_INSTANCE_SCORE(instance.getMapId(),
-			new PvpInstanceScoreWriter(instanceScore, InstanceScoreType.UPDATE_INSTANCE_BUFFS_AND_SCORE, instance.getPlayersInside()), getTime()));
-	}
-
-	@Override
-	public void onPlayerLogOut(Player player) {
-		if (player.isDead())
-			onReviveEvent(player);
-	}
-
-	@Override
 	public void onEnterInstance(Player player) {
 		if (!instanceScore.containsPlayer(player.getObjectId()))
 			instanceScore.addPlayerReward(new PvpInstancePlayerReward(player.getObjectId(), player.getRace()));
 
 		sendPacket(new SM_INSTANCE_SCORE(instance.getMapId(),
 			new PvpInstanceScoreWriter(instanceScore, InstanceScoreType.INIT_PLAYER, player.getObjectId(), 0), getTime()));
+		sendPacket(new SM_INSTANCE_SCORE(instance.getMapId(),
+			new PvpInstanceScoreWriter(instanceScore, InstanceScoreType.UPDATE_INSTANCE_BUFFS_AND_SCORE, instance.getPlayersInside()), getTime()));
 		sendPacket(new SM_INSTANCE_SCORE(instance.getMapId(),
 			new PvpInstanceScoreWriter(instanceScore, InstanceScoreType.UPDATE_PLAYER_BUFF_STATUS, player.getObjectId(), 0), getTime()));
 	}

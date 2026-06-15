@@ -46,7 +46,6 @@ public class Invasion extends DimensionalVortex<VortexLocation> {
 	@Override
 	public void stopInvasion() {
 		getVortexLocation().setActiveVortex(null);
-		unregisterSiegeBossListeners();
 		for (Kisk kisk : new ArrayList<>(getVortexLocation().getInvadersKisks().values())) {
 			kisk.getController().die();
 		}

@@ -132,11 +132,10 @@ public class HouseCommand extends AdminCommand {
 
 	private void acquireHouse(Player admin, House house) {
 		VisibleObject creature = admin.getTarget();
-		if (!(creature instanceof Player)) {
+		if (!(creature instanceof Player target)) {
 			PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_INVALID_TARGET());
 			return;
 		}
-		Player target = (Player) creature;
 
 		if (house.getOwnerId() == target.getObjectId()) {
 			sendInfo(admin, target.getName() + " already owns that house.");
@@ -148,8 +147,8 @@ public class HouseCommand extends AdminCommand {
 		}
 		House studio = HousingService.getInstance().getPlayerStudio(target.getObjectId());
 		if (studio != null)
-			studio.getController().changeOwner(0);
-		house.getController().changeOwner(target.getObjectId());
+			HousingService.getInstance().changeOwner(studio, 0);
+		HousingService.getInstance().changeOwner(house, target.getObjectId());
 		sendInfo(admin, "House " + house.getName() + " is now owned by " + target.getName());
 	}
 
@@ -159,7 +158,7 @@ public class HouseCommand extends AdminCommand {
 			sendInfo(admin, "House has no owner.");
 			return;
 		}
-		house.getController().changeOwner(0);
+		HousingService.getInstance().changeOwner(house, 0);
 		sendInfo(admin, "Ownership of house " + house.getAddress().getId() + " was revoked from " + PlayerService.getPlayerName(ownerId));
 	}
 

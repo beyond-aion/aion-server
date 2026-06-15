@@ -1,10 +1,11 @@
 package com.aionemu.gameserver.services;
 
-import java.util.*;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
-import com.aionemu.commons.services.CronService;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.configs.schedule.RiftSchedule;
@@ -15,6 +16,7 @@ import com.aionemu.gameserver.model.templates.rift.OpenRift;
 import com.aionemu.gameserver.model.templates.spawns.SpawnGroup;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.riftspawns.RiftSpawnTemplate;
+import com.aionemu.gameserver.services.cron.CronService;
 import com.aionemu.gameserver.services.rift.RiftInformer;
 import com.aionemu.gameserver.services.rift.RiftManager;
 import com.aionemu.gameserver.services.rift.RiftOpenRunnable;
@@ -28,8 +30,7 @@ public class RiftService {
 
 	private RiftSchedule schedule;
 	private Map<Integer, RiftLocation> locations;
-	private Map<Integer, RiftLocation> activeRifts = new LinkedHashMap<>();
-	private final Lock closing = new ReentrantLock();
+	private final Map<Integer, RiftLocation> activeRifts = new ConcurrentHashMap<>();
 
 	public void initRiftLocations() {
 		if (CustomConfig.RIFT_ENABLED) {
@@ -159,6 +160,8 @@ public class RiftService {
 	}
 
 	public void openRifts(RiftLocation location, boolean isWithGuards) {
+		if (activeRifts.putIfAbsent(location.getId(), location) != null)
+			return;
 		location.setOpened(true);
 
 		// Spawn NPC guards
@@ -174,10 +177,11 @@ public class RiftService {
 
 		// Spawn rifts
 		RiftManager.getInstance().spawnRift(location, isWithGuards);
-		activeRifts.put(location.getId(), location);
 	}
 
 	public void closeRift(RiftLocation location) {
+		if (!activeRifts.remove(location.getId(), location))
+			return;
 		location.setOpened(false);
 
 		// Despawn rift NPCs and cancel their respawns
@@ -201,19 +205,11 @@ public class RiftService {
 		return activeRifts.containsKey(riftId);
 	}
 
-	public void closeRifts(boolean forceClose) {
-		closing.lock();
-		try {
-			List<Integer> riftsToRemove = new ArrayList<>();
-			for (RiftLocation rift : activeRifts.values()) {
-				if (forceClose || rift.isAutoCloseable()) {
-					closeRift(rift);
-					riftsToRemove.add(rift.getId());
-				}
+	public void closeAutoCloseableRifts(int worldId) {
+		for (RiftLocation rift : activeRifts.values()) {
+			if (rift.isAutoCloseable() && rift.getWorldId() == worldId) {
+				closeRift(rift);
 			}
-			riftsToRemove.forEach(riftId -> activeRifts.remove(riftId));
-		} finally {
-			closing.unlock();
 		}
 	}
 

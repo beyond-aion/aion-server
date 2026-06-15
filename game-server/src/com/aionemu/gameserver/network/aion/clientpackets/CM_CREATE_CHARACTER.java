@@ -1,15 +1,12 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
 import java.sql.Timestamp;
-import java.util.List;
 import java.util.Set;
 
 import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.configs.main.MembershipConfig;
-import com.aionemu.gameserver.dao.InventoryDAO;
 import com.aionemu.gameserver.model.account.Account;
 import com.aionemu.gameserver.model.account.PlayerAccountData;
-import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
@@ -70,8 +67,7 @@ public class CM_CREATE_CHARACTER extends AbstractCharacterEditPacket {
 			sendPacket(new SM_CREATE_CHARACTER(null, SM_CREATE_CHARACTER.RESPONSE_DB_ERROR));
 			IDFactory.getInstance().releaseId(playerCommonData.getPlayerObjId());
 		} else {
-			List<Item> equipment = InventoryDAO.loadEquipment(player.getObjectId());
-			accPlData.setEquipment(equipment);
+			accPlData.setVisibleItems(player.getEquipment().getEquippedForAppearance());
 			accPlData.setCreationDate(new Timestamp(System.currentTimeMillis()));
 			PlayerService.storeCreationTime(player.getObjectId(), accPlData.getCreationDate());
 

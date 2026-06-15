@@ -13,14 +13,12 @@ import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.Race;
-import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.geometry.Point3D;
 import com.aionemu.gameserver.model.instance.InstanceProgressionType;
 import com.aionemu.gameserver.model.instance.instancescore.NormalScore;
 import com.aionemu.gameserver.network.aion.instanceinfo.EternalBastionScoreWriter;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_SCORE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.abyss.AbyssPointsService;
@@ -130,6 +128,7 @@ public class EternalBastionInstance extends GeneralInstanceHandler {
 				PacketSendUtility.broadcastToMap(npc, SM_SYSTEM_MESSAGE.STR_MSG_IDLDF5b_TD_AddWave_02());
 				spawnWithDelay(231164, 667.350f, 281.046f, 225.698f, (byte) 33, 30000); // Pashid Assault Pod
 				spawnWithDelay(231165, 721.498f, 358.172f, 230.940f, (byte) 0, 30000);
+				break;
 			case 231181: // Pashid Army Barricade
 				addPoints(npc, 266);
 				break;
@@ -795,12 +794,6 @@ public class EternalBastionInstance extends GeneralInstanceHandler {
 	@Override
 	public void onInstanceDestroy() {
 		cancelTasks();
-	}
-
-	@Override
-	public boolean onDie(final Player player, Creature lastAttacker) {
-		PacketSendUtility.sendPacket(player, new SM_DIE(player, 8));
-		return true;
 	}
 
 	@Override

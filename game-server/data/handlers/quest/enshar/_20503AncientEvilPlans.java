@@ -34,7 +34,6 @@ public class _20503AncientEvilPlans extends AbstractQuestHandler {
 			qe.registerQuestNpc(npc).addOnTalkEvent(questId);
 		}
 		qe.registerOnEnterZone(ZoneName.get("DF5_SENSORYAREA_Q20503A_206394_8_220080000"), questId); // Aetheric Field Stone Findspot zone
-		qe.registerOnMovieEndQuest(862, questId);
 		qe.registerOnQuestCompleted(questId);
 		qe.registerOnLevelChanged(questId);
 	}
@@ -139,22 +138,13 @@ public class _20503AncientEvilPlans extends AbstractQuestHandler {
 	}
 
 	@Override
-	public boolean onMovieEndEvent(QuestEnv env, int movieId) {
+	public void onMovieEndEvent(QuestEnv env, int movieId) {
+		if (movieId != 862)
+			return;
 		Player player = env.getPlayer();
-		if (player == null) {
-			return false;
-		}
-
-		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
-			float xPlayer = player.getPosition().getX();
-			float yPlayer = player.getPosition().getY();
-			float zPlayer = player.getPosition().getZ();
-			spawnTemporarily(805221, player.getWorldMapInstance(), xPlayer, yPlayer + 3, zPlayer, (byte) 0, 2); // Egzen
-			spawnTemporarily(804859, player.getWorldMapInstance(), xPlayer + 1, yPlayer + 1, zPlayer, (byte) 20, 2); // Archon Shadowthrash
-			spawnTemporarily(804860, player.getWorldMapInstance(), xPlayer + 3, yPlayer + 1, zPlayer, (byte) 60, 2); // Archon Shadowthrash
-			spawnTemporarily(804861, player.getWorldMapInstance(), xPlayer + 2, yPlayer + 3, zPlayer, (byte) 73, 2); // Archon Shadowthrash
-		}
-		return true;
+		spawnTemporarily(805221, player.getWorldMapInstance(), player.getX(), player.getY() + 3, player.getZ(), (byte) 0, 2); // Egzen
+		spawnTemporarily(804859, player.getWorldMapInstance(), player.getX() + 1, player.getY() + 1, player.getZ(), (byte) 20, 2); // Archon Shadowthrash
+		spawnTemporarily(804860, player.getWorldMapInstance(), player.getX() + 3, player.getY() + 1, player.getZ(), (byte) 60, 2); // Archon Shadowthrash
+		spawnTemporarily(804861, player.getWorldMapInstance(), player.getX() + 2, player.getY() + 3, player.getZ(), (byte) 73, 2); // Archon Shadowthrash
 	}
 }

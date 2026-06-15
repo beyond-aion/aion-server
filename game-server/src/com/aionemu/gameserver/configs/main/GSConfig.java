@@ -8,10 +8,9 @@ import com.aionemu.commons.configuration.Property;
 public class GSConfig {
 
 	/**
-	 * Gameserver
+	 * Server country code (the client checks it against its cc start parameter)<br>
+	 * 0=KR, 1=NA, 2=EU, 4=JP, 5=CN, 6=TW, 7=RU, 99=Region free (allows any client, but client will limit character names to 10 characters)
 	 */
-
-	/* Server Country Code */
 	@Property(key = "gameserver.country.code", defaultValue = "99")
 	public static int SERVER_COUNTRY_CODE;
 
@@ -65,6 +64,12 @@ public class GSConfig {
 
 	@Property(key = "gameserver.character.reentry.time", defaultValue = "20")
 	public static int CHARACTER_REENTRY_TIME;
+
+	/**
+	 * Minimum time in milliseconds between two skill casts. The game client will enforce wait times accordingly.
+	 */
+	@Property(key = "gameserver.min_skill_cast_interval_millis", defaultValue = "350")
+	public static int MIN_SKILL_CAST_INTERVAL_MILLIS;
 
 	@Property(key = "gameserver.item_wrap_limit", defaultValue = "0")
 	public static int ITEM_WRAP_LIMIT;

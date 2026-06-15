@@ -19,7 +19,7 @@ public class DiedEventHandler {
 
 		npcAI.setStateIfNot(AIState.DIED);
 		npcAI.setSubStateIfNot(AISubState.NONE);
-		npcAI.getOwner().getController().loseAggro(false);
+		npcAI.getOwner().setTarget(null);
 	}
 
 }

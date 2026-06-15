@@ -9,6 +9,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.TeamType;
 import com.aionemu.gameserver.model.team.TemporaryPlayerTeam;
+import com.aionemu.gameserver.model.team.common.legacy.LootGroupRules;
 import com.aionemu.gameserver.model.team.league.League;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
 
@@ -134,5 +135,10 @@ public class PlayerAlliance extends TemporaryPlayerTeam<PlayerAllianceMember> {
 
 	public TeamType getTeamType() {
 		return type;
+	}
+
+	@Override
+	public LootGroupRules getLootGroupRules() {
+		return league == null ? super.getLootGroupRules() : league.getLootGroupRules();
 	}
 }

@@ -18,10 +18,10 @@ import com.aionemu.commons.configuration.TransformationTypeInfo;
  */
 public class EnumTransformer extends PropertyTransformer<Enum<?>> {
 
-	/**
-	 * Shared instance of this transformer. It's thread-safe so no need of multiple instances
-	 */
-	public static final EnumTransformer SHARED_INSTANCE = new EnumTransformer();
+	@Override
+	public boolean matches(Class<?> targetType) {
+		return targetType.isEnum();
+	}
 
 	@Override
 	@SuppressWarnings({ "unchecked", "rawtypes" })

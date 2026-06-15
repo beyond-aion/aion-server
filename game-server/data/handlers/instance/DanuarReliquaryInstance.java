@@ -151,8 +151,8 @@ public class DanuarReliquaryInstance extends GeneralInstanceHandler {
 	}
 
 	@Override
-	public void onPlayerLogOut(Player player) {
-		super.onPlayerLogOut(player);
+	public void onPlayerLogout(Player player) {
+		super.onPlayerLogout(player);
 		if (player.isDead())
 			TeleportService.moveToBindLocation(player);
 	}

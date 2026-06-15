@@ -4,7 +4,6 @@ import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.commons.utils.Rnd;
-import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -70,7 +69,7 @@ public class OrissanAI extends AggressiveNoLootNpcAI {
 					spawnFrigidCrystals();
 					task = ThreadPoolManager.getInstance().schedule(() -> {
 						getOwner().clearQueuedSkills();
-						getOwner().queueSkill(21632, 1); // Frigid Blast
+						getOwner().queueSkill(21632, 1, 0); // Frigid Blast
 						getOwner().queueSkill(21633, 1, 8000); // Ice Explosion
 					}, 10000);
 				}
@@ -79,15 +78,9 @@ public class OrissanAI extends AggressiveNoLootNpcAI {
 	}
 
 	private void attackIcingCrystal() {
-		Npc servant = null;
-		for (VisibleObject vo : getKnownList().getKnownObjects().values()) {
-			if (vo instanceof Npc && ((Npc) vo).getNpcId() == 855700 && !((Npc) vo).isDead() && !((Creature) vo).getLifeStats().isAboutToDie()) {
-				servant = (Npc) vo;
-				break;
-			}
-		}
+		VisibleObject servant = getKnownList().findObject(o -> o.get() instanceof Npc npc && npc.getNpcId() == 855700 && !npc.isDead() && !npc.getLifeStats().isAboutToDie());
 		if (servant != null) {
-			AIActions.targetCreature(this, servant);
+			getOwner().setTarget(servant);
 			SkillEngine.getInstance().getSkill(getOwner(), 21637, 67, servant).useSkill();
 		} else {
 			getOwner().getEffectController().unsetAbnormal(AbnormalState.SANCTUARY);

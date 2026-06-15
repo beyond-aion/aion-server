@@ -23,7 +23,6 @@ public class _18500BigKinah extends AbstractQuestHandler {
 		int[] npcs = { 203106, 203166, 730304, 730305, 799522, 206150 };
 		qe.registerQuestNpc(203106).addOnQuestStart(questId);
 		qe.registerOnEnterZone(ZoneName.get("LF1A_SENSORYAREA_Q18500_206150_3_210030000"), questId); // Haramel Entrance Zone
-		qe.registerOnMovieEndQuest(175, questId);
 		for (int npc : npcs) {
 			qe.registerQuestNpc(npc).addOnTalkEvent(questId);
 		}
@@ -119,21 +118,8 @@ public class _18500BigKinah extends AbstractQuestHandler {
 	}
 
 	@Override
-	public boolean onMovieEndEvent(QuestEnv env, int movieId) {
-		Player player = env.getPlayer();
-
-		if (player == null) {
-			return false;
-		}
-
-		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			int var = qs.getQuestVarById(0);
-			if (var == 3) {
-				changeQuestStep(env, 3, 3, true); // reward
-				return true;
-			}
-		}
-		return false;
+	public void onMovieEndEvent(QuestEnv env, int movieId) {
+		if (movieId == 175)
+			changeQuestStep(env, 3, 3, true); // reward
 	}
 }

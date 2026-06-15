@@ -15,10 +15,6 @@ public class RiftSpawnTemplate extends SpawnTemplate {
 		super(spawnGroup, spot);
 	}
 
-	public RiftSpawnTemplate(SpawnGroup spawnGroup, float x, float y, float z, byte heading, int randWalk, String walkerId, int staticId, int fly) {
-		super(spawnGroup, x, y, z, heading, randWalk, walkerId, staticId, fly);
-	}
-
 	public int getId() {
 		return id;
 	}

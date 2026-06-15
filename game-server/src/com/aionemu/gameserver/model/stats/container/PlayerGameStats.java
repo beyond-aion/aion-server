@@ -26,7 +26,7 @@ import com.aionemu.gameserver.utils.stats.CalculationType;
  */
 public class PlayerGameStats extends CreatureGameStats<Player> {
 
-	private int cachedSpeed;
+	private StatsTemplate statsTemplate;
 	private int cachedAttackSpeed;
 	private int maxDamageChance;
 	private float minDamageRatio;
@@ -34,6 +34,7 @@ public class PlayerGameStats extends CreatureGameStats<Player> {
 
 	public PlayerGameStats(Player owner) {
 		super(owner);
+		updateStatsTemplate();
 	}
 
 	@Override
@@ -51,19 +52,26 @@ public class PlayerGameStats extends CreatureGameStats<Player> {
 		updateStatInfo();
 	}
 
-	private void checkSpeedStats() {
-		int current = getMovementSpeed().getCurrent();
+	@Override
+	protected boolean checkSpeedStats() {
+		boolean speedChanged = super.checkSpeedStats();
 		int currentAttackSpeed = getAttackSpeed().getCurrent();
-		if (current != cachedSpeed || currentAttackSpeed != cachedAttackSpeed) {
-			updateSpeedInfo();
-			cachedSpeed = current;
+		if (currentAttackSpeed != cachedAttackSpeed) {
+			if (!speedChanged) // prevent double packet broadcast (super.checkSpeedStats() already broadcasts on true)
+				updateSpeedInfo();
 			cachedAttackSpeed = currentAttackSpeed;
+			return true;
 		}
+		return speedChanged;
 	}
 
 	@Override
 	public StatsTemplate getStatsTemplate() {
-		return owner.getPlayerClass().getStatsTemplateFor(owner.getLevel());
+		return statsTemplate;
+	}
+
+	public void updateStatsTemplate() {
+		this.statsTemplate = owner.getPlayerClass().createStatsTemplate(owner.getLevel());
 	}
 
 	public Stat2 getMaxDp() {

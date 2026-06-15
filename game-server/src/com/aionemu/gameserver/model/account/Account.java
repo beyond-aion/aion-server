@@ -204,16 +204,6 @@ public class Account implements Iterable<PlayerAccountData> {
 		}
 	}
 
-	private long tollCount;
-
-	public void setToll(long toll) {
-		tollCount = toll;
-	}
-
-	public long getToll() {
-		return tollCount;
-	}
-
 	public String getAllowedHddSerial() {
 		return allowedHddSerial;
 	}

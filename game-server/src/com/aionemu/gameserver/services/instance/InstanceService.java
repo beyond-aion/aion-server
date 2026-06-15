@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.services.instance;
 
 import java.util.function.Function;
-import java.util.function.Predicate;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,14 +11,11 @@ import com.aionemu.gameserver.configs.main.MembershipConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.instance.InstanceEngine;
 import com.aionemu.gameserver.instance.handlers.InstanceHandler;
-import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.house.House;
-import com.aionemu.gameserver.model.items.storage.Storage;
 import com.aionemu.gameserver.model.team.GeneralTeam;
 import com.aionemu.gameserver.model.templates.housing.BuildingType;
-import com.aionemu.gameserver.model.templates.world.WorldMapTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.AutoGroupService;
 import com.aionemu.gameserver.services.event.Event;
@@ -95,7 +91,7 @@ public class InstanceService {
 
 		map.removeWorldMapInstance(instanceId);
 
-		log.info("Destroying instance:" + worldId + " " + instanceId);
+		log.info("Destroying " + instance);
 
 		TemporarySpawnEngine.onInstanceDestroy(instance); // first unregister all temporary spawns, then despawn mobs
 		for (VisibleObject obj : instance) {
@@ -139,7 +135,7 @@ public class InstanceService {
 	}
 
 	private static WorldMapInstance getOrCreatePersonalInstance(int worldId, int ownerId) {
-		if (ownerId == 0)
+		if (ownerId == 0 || !WorldMapType.getWorld(worldId).isPersonal())
 			return null;
 
 		for (WorldMapInstance instance : World.getInstance().getWorldMap(worldId)) {
@@ -149,59 +145,15 @@ public class InstanceService {
 		return getNextAvailableInstance(worldId, ownerId, (byte) 0, 0, true);
 	}
 
-	public static WorldMapInstance getBeginnerInstance(int worldId, int registeredId) {
-		WorldMapInstance instance = getRegisteredInstance(worldId, registeredId);
-		if (instance == null)
-			return null;
-		return instance.isBeginnerInstance() ? instance : null;
-	}
-
-	private static int getLastRegisteredId(Player player) {
-		int lookupId;
-		boolean isPersonal = WorldMapType.getWorld(player.getWorldId()).isPersonal();
-		if (player.isInGroup()) {
-			lookupId = player.getPlayerGroup().getTeamId();
-		} else if (player.isInAlliance()) {
-			lookupId = player.getPlayerAlliance().getTeamId();
-			if (player.isInLeague()) {
-				lookupId = player.getPlayerAlliance().getLeague().getObjectId();
-			}
-		} else if (isPersonal && player.getCommonData().getWorldOwnerId() != 0) {
-			lookupId = player.getCommonData().getWorldOwnerId();
-		} else {
-			lookupId = player.getObjectId();
-		}
-		return lookupId;
-	}
-
 	public static void onPlayerLogin(Player player) {
 		int worldId = player.getWorldId();
-		int lookupId = getLastRegisteredId(player);
-		WorldMapTemplate worldTemplate = DataManager.WORLD_MAPS_DATA.getTemplate(worldId);
-		if (worldTemplate.isInstance()) {
-			boolean isPersonal = WorldMapType.getWorld(player.getWorldId()).isPersonal();
-			WorldMapInstance registeredInstance = isPersonal ? getOrCreatePersonalInstance(worldId, lookupId) : getRegisteredInstance(worldId, lookupId);
-
-			if (registeredInstance != null) {
-				if (registeredInstance.isFull()) {
-					moveToExitPoint(player);
-					return;
-				}
-				World.getInstance().setPosition(player, worldId, registeredInstance.getInstanceId(), player.getX(), player.getY(), player.getZ(),
-					player.getHeading());
-				registeredInstance.getInstanceHandler().onPlayerLogin(player);
-				return;
-			}
-
+		int ownerId = player.getCommonData().getWorldOwnerId();
+		WorldMapInstance instance = ownerId != 0 ? getOrCreatePersonalInstance(worldId, ownerId) : getRegisteredInstance(worldId, player.getObjectId());
+		if (instance == null && player.getWorldMapInstance().getTemplate().isInstance() || instance != null && instance.isFull())
 			moveToExitPoint(player);
-		} else {
-			WorldMapInstance beginnerInstance = getBeginnerInstance(worldId, lookupId);
-			if (beginnerInstance != null) {
-				// set to correct twin instanceId, not to #1
-				World.getInstance().setPosition(player, worldId, beginnerInstance.getInstanceId(), player.getX(), player.getY(), player.getZ(),
-					player.getHeading());
-			}
-		}
+		else if (instance != null) // set to correct instanceId (default on login is 1)
+			World.getInstance().setPosition(player, worldId, instance.getInstanceId(), player.getX(), player.getY(), player.getZ(), player.getHeading());
+		player.getWorldMapInstance().getInstanceHandler().onPlayerLogin(player);
 	}
 
 	public static void moveToExitPoint(Player player) {
@@ -245,49 +197,29 @@ public class InstanceService {
 		}
 	}
 
-	public static void onLogOut(Player player) {
-		player.getPosition().getWorldMapInstance().getInstanceHandler().onPlayerLogOut(player);
+	public static void onLogout(Player player) {
+		player.getPosition().getWorldMapInstance().getInstanceHandler().onPlayerLogout(player);
 	}
 
 	public static void onEnterInstance(Player player) {
 		player.getPosition().getWorldMapInstance().getInstanceHandler().onEnterInstance(player);
 		AutoGroupService.getInstance().onEnterInstance(player);
-		removeRestrictedItemsFromInventoryAndStorage(player,
-			item -> item.getItemTemplate().hasWorldRestrictions() && !item.getItemTemplate().isItemRestrictedToWorld(player.getWorldId()));
 	}
 
 	public static void onLeaveInstance(Player player) {
-		WorldMapInstance registeredInstance = getRegisteredInstance(player.getWorldId(), getLastRegisteredId(player));
-		if (registeredInstance != null) { // don't get instance via player.getPosition since he maybe isn't registered with it anymore (login after dc)
-			registeredInstance.getInstanceHandler().onLeaveInstance(player);
-			if (!registeredInstance.isPersonal()) {
-				if (registeredInstance.getMaxPlayers() == 1) // solo instance
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_LEAVE_INSTANCE(getDestroyDelaySeconds(registeredInstance) / 60));
-				else if (registeredInstance.getRegisteredTeam() != null && registeredInstance.getRegisteredTeam().getMembers().isEmpty())
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_LEAVE_INSTANCE_PARTY(0));
-				else if (registeredInstance.getPlayersInside().size() <= 1)
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_LEAVE_INSTANCE_PARTY(getDestroyDelaySeconds(registeredInstance) / 60));
-			}
+		WorldMapInstance instance = player.getWorldMapInstance();
+		instance.getInstanceHandler().onLeaveInstance(player);
+		if (instance.getRegisteredCount() > 0) {
+			if (instance.getMaxPlayers() == 1) // solo instance
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_LEAVE_INSTANCE(getDestroyDelaySeconds(instance) / 60));
+			else if (instance.getRegisteredTeam() != null && instance.getRegisteredTeam().getMembers().isEmpty())
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_LEAVE_INSTANCE_PARTY(0));
+			else if (instance.getPlayersInside().size() <= 1)
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_LEAVE_INSTANCE_PARTY(getDestroyDelaySeconds(instance) / 60));
 		}
-		removeRestrictedItemsFromInventoryAndStorage(player, item -> item.getItemTemplate().isItemRestrictedToWorld(player.getWorldId()));
 
 		if (AutoGroupConfig.AUTO_GROUP_ENABLE)
 			AutoGroupService.getInstance().onLeaveInstance(player);
-	}
-
-	private static void removeRestrictedItemsFromInventoryAndStorage(Player player, Predicate<Item> conditionForItemRemoval) {
-		if (conditionForItemRemoval == null)
-			return;
-		for (Item item : player.getInventory().getItems())
-			if (conditionForItemRemoval.test(item))
-				player.getInventory().decreaseByObjectId(item.getObjectId(), item.getItemCount());
-		for (Storage storage : player.getPetBag()) {
-			if (storage == null)
-				continue;
-			for (Item item : storage.getItems())
-				if (conditionForItemRemoval.test(item))
-					storage.decreaseByObjectId(item.getObjectId(), item.getItemCount());
-		}
 	}
 
 	public static void onEnterZone(Player player, ZoneInstance zone) {

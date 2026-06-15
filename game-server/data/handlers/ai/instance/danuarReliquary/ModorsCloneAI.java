@@ -3,7 +3,6 @@ package ai.instance.danuarReliquary;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
@@ -63,16 +62,14 @@ public class ModorsCloneAI extends AggressiveNoLootNpcAI {
 				break;
 		}
 		if (getNpcId() == 284383 || getNpcId() == 855244) {
-			for (VisibleObject obj : getOwner().getKnownList().getKnownObjects().values()) {
-				if (obj instanceof Npc && !((Npc) obj).isDead() && (((Npc) obj).getNpcId() == 855245 || ((Npc) obj).getNpcId() == 284384)) {
-					VisibleObject target = obj.getTarget();
-					if (target instanceof Creature && ((Creature) target).isDead()) {
-						target = getTarget();
-						obj.setTarget(target);
+			getKnownList().forEachNpc(npc -> {
+				if (!npc.isDead() && (npc.getNpcId() == 284384 || npc.getNpcId() == 855245)) {
+					if (npc.getTarget() instanceof Creature target && target.isDead()) {
+						npc.setTarget(getTarget());
 					}
-					SkillEngine.getInstance().getSkill(((Npc) obj), skillTemplate.getSkillId(), skillLevel, target).useWithoutPropSkill();
+					SkillEngine.getInstance().getSkill(npc, skillTemplate.getSkillId(), skillLevel, npc.getTarget()).useWithoutPropSkill();
 				}
-			}
+			});
 		}
 		modifier = 0.2f;
 	}

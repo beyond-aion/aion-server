@@ -71,7 +71,8 @@ public abstract class TemporaryPlayerTeam<TM extends TeamMember<Player>> extends
 		return filterMembers(Predicates.Players.ONLINE);
 	}
 
-	public final LootGroupRules getLootGroupRules() {
+	@Override
+	public LootGroupRules getLootGroupRules() {
 		return lootGroupRules;
 	}
 

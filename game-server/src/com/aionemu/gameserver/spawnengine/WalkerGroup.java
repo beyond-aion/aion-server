@@ -9,7 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.ai.AILogger;
-import com.aionemu.gameserver.ai.AIState;
 import com.aionemu.gameserver.ai.AISubState;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.manager.WalkManager;
@@ -35,7 +34,7 @@ public class WalkerGroup {
 	private boolean isSpawned;
 
 	public WalkerGroup(List<ClusteredNpc> members) {
-		this.members = members.stream().sorted(Comparator.comparing(ClusteredNpc::getWalkerIndex, Comparator.nullsLast(Comparator.naturalOrder())))
+		this.members = members.stream().sorted(Comparator.comparing(ClusteredNpc::getWalkerIndex, Comparator.nullsLast(Comparator.naturalOrder())).reversed())
 			.collect(Collectors.toList());
 		memberSteps = new int[members.size()];
 		walkerXpos = members.get(0).getX();
@@ -61,11 +60,12 @@ public class WalkerGroup {
 				for (int i = 0; i < members.size(); i++, distance += WalkerGroupShift.DISTANCE) {
 					WalkerGroupShift shift = new WalkerGroupShift(distance, 0);
 					Point2D loc = getLinePoint(origin, destination, shift);
-					members.get(i).setX(loc.getX());
-					members.get(i).setY(loc.getY());
-					Npc member = members.get(i).getNpc();
+					ClusteredNpc clusteredNpc = members.get(i);
+					clusteredNpc.set(shift);
+					clusteredNpc.setX(loc.getX());
+					clusteredNpc.setY(loc.getY());
+					Npc member = clusteredNpc.getNpc();
 					member.setWalkerGroup(this);
-					member.setWalkerGroupShift(shift);
 					// distance += npc.getObjectTemplate().getBoundRadius().getSide();
 				}
 			} else if (rows.length != 0) {
@@ -90,17 +90,15 @@ public class WalkerGroup {
 						WalkerGroupShift shift = new WalkerGroupShift(sagittalDist, coronalDist);
 						Point2D loc = getLinePoint(origin, destination, shift);
 						ClusteredNpc cnpc = members.get(index++);
+						cnpc.set(shift);
 						cnpc.setX(loc.getX());
 						cnpc.setY(loc.getY());
 						cnpc.getNpc().setWalkerGroup(this);
-						cnpc.getNpc().setWalkerGroupShift(shift);
 					}
 					if (i < rows.length - 1)
 						coronalDist += rowDistances[i];
 				}
 			}
-		} else if (getWalkType() == WalkerGroupType.CIRCLE) {
-			// TODO: if needed
 		} else if (getWalkType() == WalkerGroupType.POINT) {
 			log.warn("No formation specified for walk cluster " + members.get(0).getWalkTemplate().getRouteId());
 		}
@@ -213,15 +211,12 @@ public class WalkerGroup {
 
 			for (int i = 0; i < members.size(); i++) {
 				ClusteredNpc snpc = members.get(i);
-				if ((memberSteps[i] == groupStep) && !allArrived) {
-					npcAI.getOwner().getMoveController().abortMove();
-					npcAI.setStateIfNot(AIState.WALKING);
-					npcAI.setSubStateIfNot(AISubState.WALK_WAIT_GROUP);
-					continue;
+				if (!snpc.getNpc().isDead() && snpc.getNpc().getAi().getSubState() == AISubState.WALK_WAIT_GROUP) {
+					if (memberSteps[i] == groupStep && !allArrived)
+						snpc.getNpc().getMoveController().abortMove();
+					else
+						WalkManager.targetReached((NpcAI) (snpc.getNpc().getAi()));
 				}
-				npcAI = (NpcAI) (snpc.getNpc().getAi());
-				if (npcAI.getSubState() == AISubState.WALK_WAIT_GROUP)
-					WalkManager.targetReached(npcAI);
 			}
 		}
 	}

@@ -68,7 +68,7 @@ public class TiamatWeakenedDragonAI extends AggressiveNpcAI implements HpPhases.
 	private void offerAtrocityEvent() {
 		if (!isDead() && hasAggro.get()) {
 			if (getLifeStats().getHpPercentage() <= 50)
-				getOwner().queueSkill(20921, 1);
+				getOwner().queueSkill(20921, 1, 0);
 			getOwner().queueSkill(calculateAtrocitySkillId(), 1);
 		}
 	}

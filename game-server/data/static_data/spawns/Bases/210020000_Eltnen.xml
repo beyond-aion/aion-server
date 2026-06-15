@@ -2,7 +2,7 @@
 <spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../spawns.xsd">
 	<spawn_map map_id="210020000">
 		<base_spawn id="2120"> <!-- Kaidan Watchpost -->
-			<simple_race race="ELYOS">
+			<occupier_template occupier="ELYOS">
 				<!-- Elyos Territory -->
 				<spawn npc_id="701799" handler="FLAG">
 					<spot x="1811.875" y="1101.75" z="435.2568" h="15"/>
@@ -34,8 +34,8 @@
 				<spawn npc_id="801162" handler="MERCHANT" respawn_time="295">
 					<spot x="1801.5" y="1104.25" z="436.375"/>
 				</spawn>
-			</simple_race>
-			<simple_race race="ASMODIANS">
+			</occupier_template>
+			<occupier_template occupier="ASMODIANS">
 				<!-- Asmodian Territory -->
 				<spawn npc_id="701800" handler="FLAG">
 					<spot x="1811.875" y="1101.75" z="435.2568" h="15"/>
@@ -67,8 +67,8 @@
 				<spawn npc_id="801165" handler="MERCHANT" respawn_time="295">
 					<spot x="1801.5" y="1104.25" z="436.375"/>
 				</spawn>
-			</simple_race>
-			<simple_race race="NPC">
+			</occupier_template>
+			<occupier_template occupier="BALAUR">
 				<!-- Krall Territory -->
 				<spawn npc_id="701797" handler="FLAG">
 					<spot x="1811.875" y="1101.75" z="435.2568" h="15"/>
@@ -92,10 +92,10 @@
 					<spot x="1831.75" y="1090.875" z="433.9434" h="105"/>
 					<spot x="1798.75" y="1120" z="432.6875" h="45"/>
 				</spawn>
-			</simple_race>
-		  </base_spawn>	
+			</occupier_template>
+		  </base_spawn>
 		<base_spawn id="2121"> <!-- Eracus Outpost -->
-			<simple_race race="ELYOS">
+			<occupier_template occupier="ELYOS">
 				<!-- Elyos Territory -->
 				<spawn npc_id="701799" handler="FLAG">
 					<spot x="1010.0192" y="664.5961" z="309.7885" h="30"/>
@@ -127,8 +127,8 @@
 				<spawn npc_id="801158" handler="MERCHANT" respawn_time="295">
 					<spot x="1010.125" y="660.5" z="310.75" h="30"/>
 				</spawn>
-			</simple_race>
-			<simple_race race="ASMODIANS">
+			</occupier_template>
+			<occupier_template occupier="ASMODIANS">
 				<!-- Asmodian Territory -->
 				<spawn npc_id="701800" handler="FLAG">
 					<spot x="1010.0192" y="664.5961" z="309.7885" h="30"/>
@@ -160,8 +160,8 @@
 				<spawn npc_id="801161" handler="MERCHANT" respawn_time="295">
 					<spot x="1010.125" y="660.5" z="310.75" h="30"/>
 				</spawn>
-			</simple_race>
-			<simple_race race="NPC">
+			</occupier_template>
+			<occupier_template occupier="BALAUR">
 				<!-- Lepharist Territory -->
 				<spawn npc_id="701796" handler="FLAG">
 					<spot x="1010.0192" y="664.5961" z="309.7885" h="30"/>
@@ -185,7 +185,7 @@
 					<spot x="1012.8298" y="676.36615" z="306.99368" h="30"/>
 					<spot x="1017.625" y="674.875" z="306.99368" h="30"/>
 				</spawn>
-			</simple_race>
+			</occupier_template>
 		</base_spawn>
 	</spawn_map>
 </spawns>

@@ -2,34 +2,28 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.aionemu</groupId>
+
+	<parent>
+		<groupId>com.aionemu</groupId>
+		<artifactId>aion-server</artifactId>
+		<version>4.8-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+
 	<artifactId>chat-server</artifactId>
-	<version>4.8-SNAPSHOT</version>
 	<name>Aion Chat Server</name>
 	<packaging>jar</packaging>
+
 	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.test.skip>true</maven.test.skip>
+		<maven.install.skip>true</maven.install.skip>
 	</properties>
+
 	<build>
 		<sourceDirectory>src</sourceDirectory>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.13.0</version>
-				<configuration>
-					<release>21</release>
-					<compilerArgs>
-						<arg>-Xlint:all,-preview,-this-escape</arg>
-					</compilerArgs>
-					<showWarnings>true</showWarnings>
-					<debug>true</debug>
-				</configuration>
-			</plugin>
-			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
-				<version>3.7.1</version>
 				<configuration>
 					<descriptors>
 						<descriptor>assembly.xml</descriptor>
@@ -45,58 +39,6 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin>
-			<plugin>
-				<groupId>io.github.git-commit-id</groupId>
-				<artifactId>git-commit-id-maven-plugin</artifactId>
-				<version>8.0.2</version>
-				<configuration>
-					<includeOnlyProperties>
-						<includeOnlyProperty>^git.branch$</includeOnlyProperty>
-						<includeOnlyProperty>^git.commit.id.abbrev$</includeOnlyProperty>
-						<includeOnlyProperty>^git.dirty$</includeOnlyProperty>
-					</includeOnlyProperties>
-					<replacementProperties>
-						<replacementProperty>
-							<property>git.dirty</property>
-							<token>true</token>
-							<value>-DIRTY</value>
-						</replacementProperty>
-						<replacementProperty>
-							<property>git.dirty</property>
-							<token>false</token>
-							<value />
-						</replacementProperty>
-					</replacementProperties>
-					<failOnNoGitDirectory>false</failOnNoGitDirectory>
-				</configuration>
-				<executions>
-					<execution>
-						<phase>initialize</phase>
-						<goals>
-							<goal>revision</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<artifactId>maven-jar-plugin</artifactId>
-				<version>3.4.1</version>
-				<configuration>
-					<archive>
-						<manifestEntries>
-							<POMVersion>${project.version}</POMVersion>
-							<Revision>${git.commit.id.abbrev}${git.dirty}</Revision>
-							<Branch>${git.branch}</Branch>
-							<Date>${maven.build.timestamp}</Date>
-						</manifestEntries>
-					</archive>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>3.2.5</version>
 			</plugin>
 		</plugins>
 	</build>
@@ -114,7 +56,6 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-antrun-plugin</artifactId>
-						<version>3.1.0</version>
 						<executions>
 							<execution>
 								<phase>package</phase>
@@ -136,7 +77,7 @@
 							<dependency>
 								<groupId>org.apache.ant</groupId>
 								<artifactId>ant-jsch</artifactId>
-								<version>1.10.14</version>
+								<version>1.10.15</version>
 							</dependency>
 						</dependencies>
 					</plugin>
@@ -148,7 +89,6 @@
 		<dependency>
 			<groupId>com.aionemu</groupId>
 			<artifactId>commons</artifactId>
-			<version>2.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>io.netty</groupId>

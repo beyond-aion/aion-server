@@ -29,7 +29,7 @@ public class AttackShieldObserver extends AttackCalcObserver {
 	private final int hit;
 	private final boolean hitPercent;
 	private int totalHit;
-	private boolean totalHitPercent;
+	private final boolean totalHitPercent;
 	private final int probability;
 	private final int minRadius;
 	private final int maxRadius;
@@ -59,7 +59,7 @@ public class AttackShieldObserver extends AttackCalcObserver {
 		this.probability = probability;
 		this.minRadius = minRadius; // only for reflector
 		this.maxRadius = maxRadius; // for reflector / protect
-		this.healType = healType; // only for convertheal
+		this.healType = healType; // only for ConvertHeal
 		this.mpValue = mpValue;
 	}
 
@@ -90,20 +90,20 @@ public class AttackShieldObserver extends AttackCalcObserver {
 			if (shieldType == ShieldType.NORMAL || shieldType == ShieldType.MPSHIELD) {
 				int damage = attackResult.getDamage();
 
-				int absorbedDamage = 0;
+				int absorbedDamage;
 				if (hitPercent)
 					absorbedDamage = damage * hit / 100;
 				else
-					absorbedDamage = damage >= hit ? hit : damage;
+					absorbedDamage = Math.min(damage, hit);
 
-				absorbedDamage = absorbedDamage >= totalHit ? totalHit : absorbedDamage;
+				absorbedDamage = Math.min(absorbedDamage, totalHit);
 				totalHit -= absorbedDamage;
 
 				if (absorbedDamage > 0)
 					attackResult.setShieldType(shieldType.getId());
 				attackResult.setDamage(damage - absorbedDamage);
 
-				// dont launch subeffect if damage is fully absorbed
+				// don't launch sub effect if damage is fully absorbed
 				if (absorbedDamage >= damage && !isPunchShield(attackerEffect))
 					attackResult.setLaunchSubEffect(false);
 
@@ -191,7 +191,7 @@ public class AttackShieldObserver extends AttackCalcObserver {
 					totalHitPercentSet = true;
 				}
 
-				absorbedDamage = absorbedDamage >= totalHit ? totalHit : absorbedDamage;
+				absorbedDamage = Math.min(absorbedDamage, totalHit);
 				totalHit -= absorbedDamage;
 
 				attackResult.setDamage(damage - absorbedDamage);

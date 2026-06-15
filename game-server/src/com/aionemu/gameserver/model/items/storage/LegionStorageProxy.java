@@ -196,8 +196,8 @@ public class LegionStorageProxy extends Storage {
 	}
 
 	@Override
-	public boolean setLimit(int limit) {
-		return storage.setLimit(limit);
+	public void setLimit(int limit) {
+		storage.setLimit(limit);
 	}
 
 	@Override

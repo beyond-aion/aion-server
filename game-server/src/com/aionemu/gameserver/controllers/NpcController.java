@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.controllers;
 
-import java.util.Collection;
 import java.util.Set;
 
 import org.slf4j.Logger;
@@ -10,11 +9,12 @@ import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.ai.handler.ShoutEventHandler;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
-import com.aionemu.gameserver.controllers.attack.AggroInfo;
-import com.aionemu.gameserver.controllers.attack.AggroList;
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
+import com.aionemu.gameserver.controllers.attack.DamageInfo;
+import com.aionemu.gameserver.controllers.attack.TeamDamageList;
 import com.aionemu.gameserver.custom.pvpmap.PvpMapHandler;
 import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.instance.handlers.InstanceHandler;
 import com.aionemu.gameserver.model.animations.ObjectDeleteAnimation;
 import com.aionemu.gameserver.model.drop.DropItem;
 import com.aionemu.gameserver.model.gameobjects.*;
@@ -25,13 +25,13 @@ import com.aionemu.gameserver.model.team.TemporaryPlayerTeam;
 import com.aionemu.gameserver.model.team.common.service.PlayerTeamDistributionService;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_LOOKATOBJECT;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PET;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.services.DialogService;
 import com.aionemu.gameserver.services.RespawnService;
-import com.aionemu.gameserver.services.SiegeService;
 import com.aionemu.gameserver.services.abyss.AbyssPointsService;
 import com.aionemu.gameserver.services.drop.DropRegistrationService;
 import com.aionemu.gameserver.services.drop.DropService;
@@ -42,6 +42,7 @@ import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.taskmanager.tasks.MoveTaskManager;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.stats.StatFunctions;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.geo.GeoService;
@@ -73,24 +74,41 @@ public class NpcController extends CreatureController<Npc> {
 	}
 
 	@Override
+	public void onTargetChanged(VisibleObject oldTarget, VisibleObject newTarget) {
+		super.onTargetChanged(oldTarget, newTarget);
+		getOwner().clearAttackedCount();
+		getOwner().getGameStats().renewLastChangeTargetTime();
+		if (!getOwner().isDead()) {
+			if (newTarget == null && getOwner().getObjectTemplate().getTalkInfo() != null) {
+				ThreadPoolManager.getInstance().schedule(() -> {
+					if (getOwner().getTarget() == null)
+						getOwner().getAi().think(); // resume walking or reset heading
+				}, 750);
+			} else {
+				if (newTarget != null && !getOwner().equals(newTarget))
+					getOwner().getPosition().setH(PositionUtil.getHeadingTowards(getOwner(), newTarget));
+				PacketSendUtility.broadcastPacket(getOwner(), new SM_LOOKATOBJECT(getOwner()));
+			}
+		}
+	}
+
+	@Override
 	public void onBeforeSpawn() {
 		super.onBeforeSpawn();
 		Npc owner = getOwner();
 
-		// set state from npc templates
-		if (owner.getObjectTemplate().getState() > 0)
+		if (owner.getSpawn().getState() > 0)
+			owner.setState(owner.getSpawn().getState());
+		else if (owner.getObjectTemplate().getState() > 0)
 			owner.setState(owner.getObjectTemplate().getState());
-		else
+		else {
 			owner.setState(CreatureState.WALK_MODE);
+			if (owner.getSpawn().isAerialSpawn())
+				owner.setState(CreatureState.FLYING);
+		}
 
 		owner.getLifeStats().setCurrentHpPercent(100);
 		owner.getAi().onGeneralEvent(AIEventType.BEFORE_SPAWNED);
-
-		if (owner.getSpawn().getState() > 0) {
-			owner.setState(owner.getSpawn().getState());
-		} else if (owner.getSpawn().canFly()) {
-			owner.setState(CreatureState.FLYING);
-		}
 	}
 
 	@Override
@@ -104,6 +122,8 @@ public class NpcController extends CreatureController<Npc> {
 		Npc owner = getOwner();
 		cancelCurrentSkill(null);
 		owner.getEffectController().removeAllEffects();
+		if (owner.getSpawn().hasPool() && !owner.isDead())
+			owner.getSpawn().resetPoolSpot(owner.getInstanceId());
 		DropService.getInstance().unregisterDrop(owner);
 		owner.getPosition().getWorldMapInstance().getInstanceHandler().onDespawn(owner);
 		owner.getAi().onGeneralEvent(AIEventType.DESPAWNED);
@@ -112,17 +132,18 @@ public class NpcController extends CreatureController<Npc> {
 	}
 
 	@Override
-	public void onDie(Creature lastAttacker, boolean sendDiePacket) {
+	public void onDie(Creature lastAttacker) {
 		Npc owner = getOwner();
 		if (owner.getSpawn().hasPool())
-			owner.getSpawn().setUse(owner.getInstanceId(), false);
+			owner.getSpawn().resetPoolSpot(owner.getInstanceId());
+
+		if (owner.getAi().ask(AIQuestion.ALLOW_RESPAWN))
+			RespawnService.scheduleRespawn(getOwner()); // schedule respawn before onDie events are fired, so handlers can cancel the respawn task if needed
 
 		boolean allowDecay = true;
-		boolean allowRespawn = true;
 		boolean shouldLoot = true;
 		try {
 			allowDecay = owner.getAi().ask(AIQuestion.ALLOW_DECAY);
-			allowRespawn = owner.getAi().ask(AIQuestion.ALLOW_RESPAWN);
 			shouldLoot = owner.getAi().ask(AIQuestion.REWARD_LOOT);
 			if (owner.getAi().ask(AIQuestion.REWARD_AP_XP_DP_LOOT))
 				doReward();
@@ -132,10 +153,7 @@ public class NpcController extends CreatureController<Npc> {
 			log.error("onDie() exception for " + owner + ":", e);
 		}
 
-		super.onDie(lastAttacker, sendDiePacket);
-
-		if (allowRespawn && SiegeService.getInstance().isRespawnAllowed(owner))
-			RespawnService.scheduleRespawn(getOwner());
+		super.onDie(lastAttacker);
 
 		if (allowDecay) {
 			if (shouldLoot)
@@ -180,39 +198,19 @@ public class NpcController extends CreatureController<Npc> {
 	@Override
 	public void doReward() {
 		super.doReward();
-		AggroList list = getOwner().getAggroList();
-		Collection<AggroInfo> finalList = list.getFinalDamageList(true);
-		AionObject winner = list.getMostDamage();
-
-		if (winner == null) {
+		TeamDamageList finalList = getOwner().getAggroList().getFinalDamageList().toTeamDamages();
+		DamageInfo<AionObject> mostDamage = finalList.getMostDamage();
+		AionObject winner = mostDamage == null ? null : mostDamage.getAttacker();
+		if (winner == null)
 			return;
-		}
 
-		float totalDmg = 0;
-		for (AggroInfo info : finalList) {
-			totalDmg += info.getDamage();
-		}
-
-		if (totalDmg <= 0) {
-			log.warn("WARN total damage to " + getOwner().getName() + " is " + totalDmg + " reward process was skiped!");
-			return;
-		}
-
-		float instanceApMultiplier = 1f;
-		if (getOwner().isInInstance()) {
-			instanceApMultiplier = getOwner().getPosition().getWorldMapInstance().getInstanceHandler().getInstanceApMultiplier();
-		}
-		for (AggroInfo info : finalList) {
+		InstanceHandler instanceHandler = getOwner().getPosition().getWorldMapInstance().getInstanceHandler();
+		float apMultiplier = instanceHandler.getApMultiplier();
+		for (DamageInfo<AionObject> info : finalList.getCreatureOrTeamDamages()) {
 			AionObject attacker = info.getAttacker();
-
-			if (attacker instanceof Npc) // don't reward npcs or summons
-				continue;
-
-			float percentage = info.getDamage() / totalDmg;
+			float percentage = info.getDamage() / (float) finalList.getTotalDamage();
 			if (attacker instanceof TemporaryPlayerTeam<?> tmpPlayerTeam) {
-				PlayerTeamDistributionService.doReward(tmpPlayerTeam, percentage, getOwner(), winner);
-			} else if (attacker instanceof Player player && player.isInGroup()) {
-				PlayerTeamDistributionService.doReward(player.getPlayerGroup(), percentage, getOwner(), winner);
+				PlayerTeamDistributionService.doReward(tmpPlayerTeam, percentage, getOwner(), winner, finalList);
 			} else if (attacker instanceof Player player) {
 				if (!player.isDead()) {
 					// Reward init
@@ -224,12 +222,9 @@ public class NpcController extends CreatureController<Npc> {
 					rewardXp *= percentage;
 					rewardDp *= percentage;
 					rewardAp *= percentage;
-					rewardAp *= instanceApMultiplier;
+					rewardAp *= apMultiplier;
 
-					boolean shouldNotifyQuestEngine = true; // do not include pvp map
-					if (getOwner().getPosition() != null && getOwner().getPosition().getWorldMapInstance() != null
-						&& getOwner().getPosition().getWorldMapInstance().getInstanceHandler() instanceof PvpMapHandler)
-						shouldNotifyQuestEngine = false;
+					boolean shouldNotifyQuestEngine = !(instanceHandler instanceof PvpMapHandler); // do not include pvp map
 					if (shouldNotifyQuestEngine)
 						QuestEngine.getInstance().onKill(new QuestEnv(getOwner(), player, 0));
 					EventService.getInstance().onPveKill(player, getOwner());
@@ -266,9 +261,8 @@ public class NpcController extends CreatureController<Npc> {
 	}
 
 	@Override
-	public void onDialogSelect(int dialogActionId, int prevDialogId, final Player player, int questId, int extendedRewardIndex) {
-		QuestEnv env = new QuestEnv(getOwner(), player, questId, dialogActionId);
-		if (!PositionUtil.isInTalkRange(player, getOwner()) && !QuestEngine.getInstance().onDialog(env))
+	public void onDialogSelect(int dialogActionId, int prevDialogId, Player player, int questId, int extendedRewardIndex) {
+		if (!PositionUtil.isInTalkRange(player, getOwner()))
 			return;
 		if (!getOwner().getAi().onDialogSelect(player, dialogActionId, questId, extendedRewardIndex)) {
 			DialogService.onDialogSelect(dialogActionId, player, getOwner(), questId, extendedRewardIndex);

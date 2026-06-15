@@ -365,6 +365,22 @@
 			<gd_item id="100100524"/><!-- Ursanafi's Warhammer -->
 		</gd_items>
 	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Legend)" chance="100">
+		<gd_maps>
+			<gd_map map_id="210040000"/><!-- Heiron -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="212008"/><!-- Akairun of Medeus -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100000583"/><!-- Akairun's Sword -->
+			<gd_item id="100100448"/><!-- Akairun's Warhammer -->
+			<gd_item id="100200556"/><!-- Akairun's Dagger -->
+			<gd_item id="101800492"/><!-- Akairun's Pistol -->
+			<gd_item id="102100475"/><!-- Akairun's Cipher-Blade -->
+			<gd_item id="115000727"/><!-- Akairun's Shield -->
+		</gd_items>
+	</gd_rule>
 	<gd_rule rule_name="Named Weapon (Legend)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
@@ -391,6 +407,21 @@
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="100500445"/><!-- Medeus' Heart -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Unique)" chance="100">
+		<gd_maps>
+			<gd_map map_id="210040000"/><!-- Heiron -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="212008"/><!-- Akairun of Medeus -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100900441"/><!-- Fatal Sword -->
+			<gd_item id="101300431"/><!-- Fatal Spear -->
+			<gd_item id="101500447"/><!-- Fatal Stave -->
+			<gd_item id="101700461"/><!-- Fatal Bow -->
+			<gd_item id="101900478"/><!-- Fatal Aethercannon -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Weapon (Unique)" chance="30">
@@ -1162,6 +1193,18 @@
 			<gd_item id="122000795"/><!-- Medeus' Ring -->
 		</gd_items>
 	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Legend)" chance="100">
+		<gd_maps>
+			<gd_map map_id="210040000"/><!-- Heiron -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="212008"/><!-- Akairun of Medeus -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="120000745"/><!-- Akairun's Sapphire Earrings -->
+			<gd_item id="120000746"/><!-- Akairun's Diamond Earrings -->
+		</gd_items>
+	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Legend)" chance="66">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
@@ -1364,6 +1407,20 @@
 			<gd_item id="125001565"/><!-- Viper's Mask -->
 		</gd_items>
 	</gd_rule>
+	<gd_rule rule_name="Named Headband (Legend)" chance="100">
+		<gd_maps>
+			<gd_map map_id="210040000"/><!-- Heiron -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="212008"/><!-- Akairun of Medeus -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="125001575"/><!-- Akairun's Headband -->
+			<gd_item id="125001576"/><!-- Akairun's Hat -->
+			<gd_item id="125001577"/><!-- Akairun's Chain Helm -->
+			<gd_item id="125001578"/><!-- Akairun's Helm -->
+		</gd_items>
+	</gd_rule>
 	<gd_rule rule_name="Named Headband (Legend)" chance="33">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
@@ -1526,6 +1583,30 @@
 			<gd_item id="152012031"/><!-- Sentinel's Branch -->
 		</gd_items>
 	</gd_rule>
+	<gd_rule rule_name="Named Material" chance="100">
+		<gd_maps>
+			<gd_map map_id="210040000"/><!-- Heiron -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="212008"/><!-- Akairun of Medeus -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="152012033"/><!-- Akairun's Horn -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Design" chance="0.5">
+		<gd_maps>
+			<gd_map map_id="210040000"/><!-- Heiron -->
+		</gd_maps>
+		<gd_zones>
+			<gd_zone zone="LF3_LIMITAREA_E1_2_210040000"/>
+			<gd_zone zone="THE_STORM_CIRCLE_210040000"/>
+		</gd_zones>
+		<gd_items>
+			<gd_item id="152200194"/><!-- Design: Akairun's Spear -->
+			<gd_item id="152200508"/><!-- Design: Akairun's Helm -->
+		</gd_items>
+	</gd_rule>
 	<gd_rule rule_name="Named Material" chance="50">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
@@ -1608,7 +1689,7 @@
 		</gd_zones>
 		<gd_npc_groups>
 			<gd_npc_group group="LEPHAR" />
-		</gd_npc_groups>		
+		</gd_npc_groups>
 		<gd_items>
 			<gd_item id="182201744" /><!-- Mapping the Revolutionaries -->
 		</gd_items>

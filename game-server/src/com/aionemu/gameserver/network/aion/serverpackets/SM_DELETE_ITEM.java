@@ -12,7 +12,7 @@ public class SM_DELETE_ITEM extends AionServerPacket {
 	private final ItemDeleteType deleteType;
 
 	public SM_DELETE_ITEM(int itemObjectId) {
-		this(itemObjectId, ItemDeleteType.QUEST_REWARD);
+		this(itemObjectId, ItemDeleteType.DEFAULT);
 	}
 
 	public SM_DELETE_ITEM(int itemObjectId, ItemDeleteType deleteType) {

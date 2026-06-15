@@ -7,10 +7,10 @@ import com.aionemu.commons.configuration.TransformationTypeInfo;
  */
 public class CharTransformer extends PropertyTransformer<Character> {
 
-	/**
-	 * Shared instance of this transformer. It's thread-safe so no need of multiple instances
-	 */
-	public static final CharTransformer SHARED_INSTANCE = new CharTransformer();
+	@Override
+	public boolean matches(Class<?> targetType) {
+		return targetType == char.class;
+	}
 
 	@Override
 	protected Character parseObject(String value, TransformationTypeInfo typeInfo) {

@@ -4212,8 +4212,8 @@
 	<decomposable item_id="188050713" /><!-- Butter Candy Box -->
 	<decomposable item_id="188050714"><!-- Chocolate Candy Box -->
 		<items>
-			<item id="160010109" min_count="3" race="ELYOS"/><!-- Enamored Tiger Form Candy -->
-			<item id="160010110" min_count="3" race="ASMODIANS"/><!-- Enamored Tiger Form Candy -->
+			<item id="160010109" min_count="3" race="ELYOS" /><!-- Enamored Tiger Form Candy -->
+			<item id="160010110" min_count="3" race="ASMODIANS" /><!-- Enamored Tiger Form Candy -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050715" /><!-- Honey Candy Box -->
@@ -10515,7 +10515,7 @@
 			<item id="161000003" /><!-- Reviving Elemental Stone -->
 		</items>
 		<items>
-			<item id="169000010" min_count="100"/><!-- Power Shard: +40 -->
+			<item id="169000010" min_count="100" /><!-- Power Shard: +40 -->
 		</items>
 		<items>
 			<item id="169620009" /><!-- [Event] Witch's Night -->
@@ -10594,31 +10594,31 @@
 	</decomposable>
 	<decomposable item_id="188051338"><!-- [Event] Case of Harvest Revel Ale -->
 		<items>
-			<item id="160005026" min_count="5"/><!-- [Event] Pumpkin Jelly -->
+			<item id="160005026" min_count="5" /><!-- [Event] Pumpkin Jelly -->
 		</items>
 		<items>
-			<item id="160005027" min_count="5"/><!-- [Event] Ale Jelly -->
+			<item id="160005027" min_count="5" /><!-- [Event] Ale Jelly -->
 		</items>
 		<items>
-			<item id="160010147" min_count="5"/><!-- [Event] Creamy Pumpkin Ale -->
+			<item id="160010147" min_count="5" /><!-- [Event] Creamy Pumpkin Ale -->
 		</items>
 		<items>
-			<item id="160010148" min_count="5"/><!-- [Event] Dry Pumpkin Ale -->
+			<item id="160010148" min_count="5" /><!-- [Event] Dry Pumpkin Ale -->
 		</items>
 		<items>
-			<item id="160010149" min_count="5"/><!-- [Event] Cool Creamy Pumpkin Ale -->
+			<item id="160010149" min_count="5" /><!-- [Event] Cool Creamy Pumpkin Ale -->
 		</items>
 		<items>
-			<item id="160010150" min_count="5"/><!-- [Event] Cool Dry Pumpkin Ale -->
+			<item id="160010150" min_count="5" /><!-- [Event] Cool Dry Pumpkin Ale -->
 		</items>
 		<items>
-			<item id="160010151" min_count="5"/><!-- [Event] Warm Pumpkin Ale -->
+			<item id="160010151" min_count="5" /><!-- [Event] Warm Pumpkin Ale -->
 		</items>
 		<items>
-			<item id="160010152" min_count="5"/><!-- [Event] Warm Creamy Pumpkin Ale -->
+			<item id="160010152" min_count="5" /><!-- [Event] Warm Creamy Pumpkin Ale -->
 		</items>
 		<items>
-			<item id="160010153" min_count="5"/><!-- [Event] Warm Dry Pumpkin Ale -->
+			<item id="160010153" min_count="5" /><!-- [Event] Warm Dry Pumpkin Ale -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051339"><!-- [Event] Potcrab's Love -->
@@ -10849,15 +10849,96 @@
 	<decomposable item_id="188051357" /><!-- Decent bundle of Fossilized Golden Saam -->
 	<decomposable item_id="188051358" /><!-- Big bundle of Fossilized Golden Saam -->
 	<decomposable item_id="188051359" /><!-- Large bundle of Fossilized Golden Saam -->
-	<decomposable item_id="188051360" /><!-- Red Cap Kobushka's Bundle -->
-	<decomposable item_id="188051361" /><!-- Red Cap Kobushka's Zesty Cache -->
-	<decomposable item_id="188051362" /><!-- Red Cap Kobushka's Mystery Cache -->
-	<decomposable item_id="188051363" /><!-- Red Cap Kobushka's Green Cache -->
-	<decomposable item_id="188051364" /><!-- Red Cap Kobushka's Red Cache -->
-	<decomposable item_id="188051365" /><!-- Red Cap Kobushka's Yellow Cache -->
-	<decomposable item_id="188051366" /><!-- Red Cap Kobushka's Copious Cache -->
-	<decomposable item_id="188051367" /><!-- Red Cap Kobushka's Capacious Cache -->
-	<decomposable item_id="188051368" /><!-- Red Cap Kobushka's Colossal Cache -->
+	<decomposable item_id="188051360"><!-- Red Cap Kobushka's Bundle -->
+		<items>
+			<item id="188051361" /><!-- Red Cap Kobushka's Zesty Cache -->
+		</items>
+		<items>
+			<item id="188051362" /><!-- Red Cap Kobushka's Mystery Cache -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188051361"><!-- Red Cap Kobushka's Zesty Cache -->
+		<items chance="40.0">
+			<item id="188051363" /><!-- Red Cap Kobushka's Green Cache -->
+		</items>
+		<items chance="40.0">
+			<item id="188051364" /><!-- Red Cap Kobushka's Red Cache -->
+		</items>
+		<items chance="20.0">
+			<item id="188051365" /><!-- Red Cap Kobushka's Yellow Cache -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188051362"><!-- Red Cap Kobushka's Mystery Cache -->
+		<items chance="62.0">
+			<item id="188051366" /><!-- Red Cap Kobushka's Copious Cache -->
+		</items>
+		<items chance="37.0">
+			<item id="188051367" /><!-- Red Cap Kobushka's Capacious Cache -->
+		</items>
+		<items chance="1.0">
+			<item id="188051368" /><!-- Red Cap Kobushka's Colossal Cache -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188051363"><!-- Red Cap Kobushka's Green Cache -->
+		<items>
+			<item id="162000016" min_count="5" /><!-- Major Life Serum -->
+		</items>
+		<items>
+			<item id="162000021" min_count="5" /><!-- Major Mana Serum -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188051364"><!-- Red Cap Kobushka's Red Cache -->
+		<items>
+			<item id="164000073" min_count="5" /><!-- Greater Courage Scroll -->
+		</items>
+		<items>
+			<item id="164000076" min_count="5" /><!-- Greater Running Scroll -->
+		</items>
+		<items>
+			<item id="164000134" min_count="5" /><!-- Greater Awakening Scroll -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188051365"><!-- Red Cap Kobushka's Yellow Cache -->
+		<items>
+			<item id="162000077" min_count="5" /><!-- Fine Life Serum -->
+		</items>
+		<items>
+			<item id="162000078" min_count="5" /><!-- Fine Mana Serum -->
+		</items>
+		<items>
+			<item id="164000073" min_count="5" /><!-- Greater Courage Scroll -->
+		</items>
+		<items>
+			<item id="164000076" min_count="5" /><!-- Greater Running Scroll -->
+		</items>
+		<items>
+			<item id="164000134" min_count="5" /><!-- Greater Awakening Scroll -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188051366"><!-- Red Cap Kobushka's Copious Cache -->
+		<items>
+			<item id="166000075" min_count="5" /><!-- L75 Enchantment Stone -->
+		</items>
+		<items>
+			<item id="186000147" min_count="2" /><!-- Mithril Medal -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188051367"><!-- Red Cap Kobushka's Capacious Cache -->
+		<items>
+			<item id="166020000" min_count="1" /><!-- Omega Enchantment Stone -->
+		</items>
+		<items>
+			<item id="186000236" min_count="2" /><!-- Blood Mark -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188051368"><!-- Red Cap Kobushka's Colossal Cache -->
+		<items>
+			<item id="166020000" min_count="2" /><!-- Omega Enchantment Stone -->
+		</items>
+		<items>
+			<item id="186000242" min_count="3" /><!-- Ceramium Medal -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188051369" /><!-- Menotios' Cache of Arms -->
 	<decomposable item_id="188051370" /><!-- Red Cap Kobushka's Premium Cache -->
 	<decomposable item_id="188051371" /><!-- Enchanted Heart Box -->
@@ -11159,8 +11240,19 @@
 	<decomposable item_id="188051435" /><!-- Romantically Yours Package -->
 	<decomposable item_id="188051436" /><!-- Total Makeover Kit -->
 	<decomposable item_id="188051437" /><!-- Bridal Makeup Bundle -->
-	<decomposable item_id="188051438" /><!-- Rainbow Dye Pack II -->
 	<decomposable item_id="188051439" /><!-- Silver Medal Box -->
+	<decomposable item_id="188051438"><!-- Rainbow Dye Pack II -->
+		<items>
+			<item id="169220033" /><!-- Dye: True Red -->
+			<item id="169220034" /><!-- Dye: Hot Orange -->
+			<item id="169220035" /><!-- Dye: Hot Pink -->
+			<item id="169220036" /><!-- Dye: Rich Purple -->
+			<item id="169220037" /><!-- Dye: Olive Green -->
+			<item id="169220038" /><!-- Dye: Green Tea -->
+			<item id="169220039" /><!-- Dye: Mustard -->
+			<item id="169220040" /><!-- Dye: True Blue -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188051440" /><!-- Gold Medal Box -->
 	<decomposable item_id="188051441" /><!-- Platinum Medal Box -->
 	<decomposable item_id="188051442" /><!-- Pouch of Scrolls -->
@@ -11476,7 +11568,20 @@
 	<decomposable item_id="188051509" /><!-- Magic Manastone Bundle -->
 	<decomposable item_id="188051510" /><!-- Defense Manastone Bundle -->
 	<decomposable item_id="188051511" /><!-- Greater Divine Remedy Bundle -->
-	<decomposable item_id="188051512" /><!-- Major Divine Remedy Bundle -->
+	<decomposable item_id="188051512"><!-- Major Divine Remedy Bundle -->
+		<items>
+			<item id="161000003" min_count="3" /><!-- Reviving Elemental Stone -->
+		</items>
+		<items>
+			<item id="162000137" min_count="10" /><!-- Sublime Life Serum -->
+		</items>
+		<items>
+			<item id="162000139" min_count="10" /><!-- Sublime Mana Serum -->
+		</items>
+		<items>
+			<item id="162000141" min_count="10" /><!-- Sublime Wind Serum -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188051513" /><!-- Tough Scroll Bundle -->
 	<decomposable item_id="188051514" /><!-- Tough Greater Scroll Bundle -->
 	<decomposable item_id="188051515" /><!-- Smart Scroll Bundle -->
@@ -12778,19 +12883,19 @@
 	<decomposable item_id="188051600" /><!-- [Event] Everlasting Enchantment Stone Box -->
 	<decomposable item_id="188051601"><!-- Construction Flux Bundle -->
 		<items chance="30.0">
-			<item id="152011092" max_count="5"/><!-- Minor Construction Flux -->
+			<item id="152011092" max_count="5" /><!-- Minor Construction Flux -->
 		</items>
 		<items chance="25.0">
-			<item id="152011093" max_count="4"/><!-- Lesser Construction Flux -->
+			<item id="152011093" max_count="4" /><!-- Lesser Construction Flux -->
 		</items>
 		<items chance="25.0">
-			<item id="152011094" max_count="3"/><!-- Construction Flux -->
+			<item id="152011094" max_count="3" /><!-- Construction Flux -->
 		</items>
 		<items chance="12.5">
-			<item id="152011095" max_count="2"/><!-- Greater Construction Flux -->
+			<item id="152011095" max_count="2" /><!-- Greater Construction Flux -->
 		</items>
 		<items chance="7.5">
-			<item id="152011096"/><!-- Major Construction Flux -->
+			<item id="152011096" /><!-- Major Construction Flux -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051602"><!-- Lesser Enchantment Stone Bundle -->
@@ -13316,7 +13421,107 @@
 	<decomposable item_id="188051645" /><!-- Mithril Medal Chest -->
 	<decomposable item_id="188051646" /><!-- Lukeshunerk's Package -->
 	<decomposable item_id="188051647" /><!-- Lukeshunerk's Emergency Supplies -->
-	<decomposable item_id="188051648" /><!-- Lukeshunerk's Divination Chest -->
+	<decomposable item_id="188051648"><!-- Lukeshunerk's Divination Chest -->
+		<items chance="2.71">
+			<item id="169620017" /><!-- [Favorable Luck] Face of Unflinching Will -->
+		</items>
+		<items chance="2.71">
+			<item id="169620018" /><!-- [Favorable Luck] Face of Indomitable Spirit -->
+		</items>
+		<items chance="2.71">
+			<item id="169620019" /><!-- [Favorable Luck] Face of a Blessing in Disguise -->
+		</items>
+		<items chance="2.71">
+			<item id="169620020" /><!-- [Favorable Luck] Face of Just Outcomes -->
+		</items>
+		<items chance="2.71">
+			<item id="169620021" /><!-- [Favorable Luck] Face of a Relentless Momentum -->
+		</items>
+		<items chance="2.71">
+			<item id="169620022" /><!-- [Favorable Luck] Face of Circumspection -->
+		</items>
+		<items chance="2.71">
+			<item id="169620023" /><!-- [Favorable Luck] Face of Courteous Listening -->
+		</items>
+		<items chance="2.71">
+			<item id="169620024" /><!-- [Favorable Luck] Face of Indefatigable Wanderlust -->
+		</items>
+		<items chance="2.71">
+			<item id="169620025" /><!-- [Favorable Luck] Face of Breezy Sailing -->
+		</items>
+		<items chance="2.71">
+			<item id="169620026" /><!-- [Favorable Luck] Face of Broad-mindedness -->
+		</items>
+		<items chance="2.71">
+			<item id="169620027" /><!-- [Favorable Luck] Face of Ambiguity -->
+		</items>
+		<items chance="2.71">
+			<item id="169620028" /><!-- [Favorable Luck] Face of Natural Flow -->
+		</items>
+		<items chance="2.71">
+			<item id="169620029" /><!-- [Favorable Luck] Face of Complete Overhaul -->
+		</items>
+		<items chance="2.71">
+			<item id="169620030" /><!-- [Favorable Luck] Face of Spring Burgeoning -->
+		</items>
+		<items chance="2.71">
+			<item id="169620031" /><!-- [Favorable Luck] Face of Serendipity -->
+		</items>
+		<items chance="2.71">
+			<item id="169620032" /><!-- [Favorable Luck] Face of Third Time Lucky -->
+		</items>
+		<items chance="2.71">
+			<item id="169620033" /><!-- [Favorable Luck] Face of a Humble Sage -->
+		</items>
+		<items chance="2.71">
+			<item id="169620034" /><!-- [Favorable Luck] Face of Gung-ho Spirit -->
+		</items>
+		<items chance="2.71">
+			<item id="169620035" /><!-- [Favorable Luck] Face of Beautiful Flower Petals -->
+		</items>
+		<items chance="2.71">
+			<item id="169620036" /><!-- [Favorable Luck] Face of Magnanimity -->
+		</items>
+		<items chance="2.71">
+			<item id="169620037" /><!-- [Favorable Luck] Face of Inseparable Relationship -->
+		</items>
+		<items chance="2.71">
+			<item id="169620038" /><!-- [Favorable Luck] Face of Seeking a Pie in the Sky -->
+		</items>
+		<items chance="2.71">
+			<item id="169620039" /><!-- [Favorable Luck] Face of a Matchless Warrior -->
+		</items>
+		<items chance="2.71">
+			<item id="169620040" /><!-- [Favorable Luck] Face of Confusing Directions -->
+		</items>
+		<items chance="4.99">
+			<item id="169620041" /><!-- [Excellent Luck] Face of Easy Prosperity -->
+		</items>
+		<items chance="4.98">
+			<item id="169620042" /><!-- [Excellent Luck] Face of Flowers Added to Embroidery -->
+		</items>
+		<items chance="4.98">
+			<item id="169620043" /><!-- [Excellent Luck] Face of an Honorable Return -->
+		</items>
+		<items chance="4.98">
+			<item id="169620044" /><!-- [Excellent Luck] Face of Serving Two Ends -->
+		</items>
+		<items chance="4.98">
+			<item id="169620045" /><!-- [Excellent Luck] Face of Rapid Advance -->
+		</items>
+		<items chance="2.51">
+			<item id="169610076" /><!-- [Title Card] Daeva in a Predicament– 1-day pass -->
+		</items>
+		<items chance="2.51">
+			<item id="169610077" /><!-- [Title Card] Wracked Daeva – 1-day pass -->
+		</items>
+		<items chance="2.51">
+			<item id="169610078" /><!-- [Title Card] Devil-may-care Daeva – 1-day pass -->
+		</items>
+		<items chance="2.51">
+			<item id="169610079" /><!-- [Title Card] Cast-away Daeva – 1-day pass -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188051649"><!-- [Event] White Tiger Jade Crate -->
 		<items>
 			<item id="160010011" race="ELYOS" /><!-- [Event] Valiant Tiger Candy -->
@@ -14790,25 +14995,25 @@
 			<item id="186000096" /><!-- Platinum Medal -->
 		</items>
 	</decomposable>
-<decomposable item_id="188051845"><!-- Radiant Supply Box -->
-	<items chance="60.0">
-		<item id="162000023" min_count="3" /><!-- Greater Healing Potion -->
-		<item id="162000069" min_count="3" /><!-- Major Divine Life Serum -->
-		<item id="162000070" min_count="3" /><!-- Major Divine Mana Serum -->
-	</items>
-	<items chance="36.4">
-		<item id="162000023" min_count="3" /><!-- Greater Healing Potion -->
-		<item id="162000069" min_count="3" /><!-- Major Divine Life Serum -->
-		<item id="162000070" min_count="3" /><!-- Major Divine Mana Serum -->
-		<item id="186000096" /><!-- Platinum Medal -->
-	</items>
-	<items chance="3.6">
-		<item id="162000023" min_count="3" /><!-- Greater Healing Potion -->
-		<item id="162000069" min_count="3" /><!-- Major Divine Life Serum -->
-		<item id="162000070" min_count="3" /><!-- Major Divine Mana Serum -->
-		<item id="186000147" /><!-- Mithril Medal -->
-	</items>
-</decomposable>
+	<decomposable item_id="188051845"><!-- Radiant Supply Box -->
+		<items chance="60.0">
+			<item id="162000023" min_count="3" /><!-- Greater Healing Potion -->
+			<item id="162000069" min_count="3" /><!-- Major Divine Life Serum -->
+			<item id="162000070" min_count="3" /><!-- Major Divine Mana Serum -->
+		</items>
+		<items chance="36.4">
+			<item id="162000023" min_count="3" /><!-- Greater Healing Potion -->
+			<item id="162000069" min_count="3" /><!-- Major Divine Life Serum -->
+			<item id="162000070" min_count="3" /><!-- Major Divine Mana Serum -->
+			<item id="186000096" /><!-- Platinum Medal -->
+		</items>
+		<items chance="3.6">
+			<item id="162000023" min_count="3" /><!-- Greater Healing Potion -->
+			<item id="162000069" min_count="3" /><!-- Major Divine Life Serum -->
+			<item id="162000070" min_count="3" /><!-- Major Divine Mana Serum -->
+			<item id="186000147" /><!-- Mithril Medal -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188051846"><!-- [Event] Alchemical Transformation Formula Bundle for Guardian's Necklace -->
 		<items chance="25.0">
 			<item id="152230351" /><!-- [Event] Alchemical Transformation Formula for Archon Centurion's Garnet Necklace -->
@@ -15374,40 +15579,40 @@
 	<decomposable item_id="188051870" /><!-- [Event] Heavy Scroll Bundle -->
 	<decomposable item_id="188051871" selectable="true"><!-- [Harvest Revel] Display Furniture Shopping Bag -->
 		<items>
-			<item id="170000048"/><!-- Harvest Revel Festival Shelf -->
-			<item id="170120034"/><!-- Harvest Revel Bed -->
-			<item id="170130053"/><!-- Harvest Revel Couch -->
-			<item id="170150001"/><!-- Harvest Revel Pumpkin Lighting -->
-			<item id="170150002"/><!-- Harvest Revel Wall Lighting -->
-			<item id="170160011"/><!-- Harvest Revel Partition -->
-			<item id="170200025"/><!-- Harvest Revel Rug -->
-			<item id="170410030"/><!-- Harvest Revel Chair -->
-			<item id="170420037"/><!-- Harvest Revel Ornament Pile -->
+			<item id="170000048" /><!-- Harvest Revel Festival Shelf -->
+			<item id="170120034" /><!-- Harvest Revel Bed -->
+			<item id="170130053" /><!-- Harvest Revel Couch -->
+			<item id="170150001" /><!-- Harvest Revel Pumpkin Lighting -->
+			<item id="170150002" /><!-- Harvest Revel Wall Lighting -->
+			<item id="170160011" /><!-- Harvest Revel Partition -->
+			<item id="170200025" /><!-- Harvest Revel Rug -->
+			<item id="170410030" /><!-- Harvest Revel Chair -->
+			<item id="170420037" /><!-- Harvest Revel Ornament Pile -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051872" selectable="true"><!-- [Harvest Revel] Functional Furniture Shopping Bag -->
 		<items>
-			<item id="170420035"/><!-- Harvest Revel Banquet Table -->
-			<item id="170100024"/><!-- Harvest Revel Log Cabinet -->
-			<item id="170100023"/><!-- Pumpkin-decorated Cabinet -->
-			<item id="170190054"/><!-- Pumpkin-decorated Tree -->
+			<item id="170420035" /><!-- Harvest Revel Banquet Table -->
+			<item id="170100024" /><!-- Harvest Revel Log Cabinet -->
+			<item id="170100023" /><!-- Pumpkin-decorated Cabinet -->
+			<item id="170190054" /><!-- Pumpkin-decorated Tree -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051873" selectable="true"><!-- [Harvest Revel] Decorative Furniture Shopping Bag -->
 		<items>
-			<item id="171110052"/><!-- Pumpkin Wallpaper -->
-			<item id="171130032"/><!-- Star-patterned Floor -->
+			<item id="171110052" /><!-- Pumpkin Wallpaper -->
+			<item id="171130032" /><!-- Star-patterned Floor -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051874"><!-- Harvest Revel Furniture Set Box -->
 		<items chance="50">
-			<item id="188051871"/><!-- [Harvest Revel] Display Furniture Shopping Bag -->
+			<item id="188051871" /><!-- [Harvest Revel] Display Furniture Shopping Bag -->
 		</items>
 		<items chance="40">
-			<item id="188051872"/><!-- [Harvest Revel] Functional Furniture Shopping Bag -->
+			<item id="188051872" /><!-- [Harvest Revel] Functional Furniture Shopping Bag -->
 		</items>
 		<items chance="10">
-			<item id="188051873"/><!-- [Harvest Revel] Decorative Furniture Shopping Bag -->
+			<item id="188051873" /><!-- [Harvest Revel] Decorative Furniture Shopping Bag -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051875"><!-- [Solorius] Display Furniture Pack -->
@@ -15447,7 +15652,7 @@
 			<item id="170190053" /><!-- Red Ribbon-decorated Tree -->
 		</items>
 		<items>
-			<item id="170190054" /><!-- Solorius Banquet Table -->
+			<item id="170420034" /><!-- Solorius Banquet Table -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051877"><!-- [Solorius] Decorative Furniture Pack -->
@@ -15690,9 +15895,21 @@
 	<decomposable item_id="188051903" /><!-- [Event] Box of Blood Crusade Marks -->
 	<decomposable item_id="188051904" /><!-- [Event] Box of Charlirunerk's Daemons Marks -->
 	<decomposable item_id="188051905" /><!-- [Event] Box of The Circle Marks -->
-	<decomposable item_id="188051906" /><!-- Tea of Repose - 100% Recovery (10-Pack) -->
-	<decomposable item_id="188051907" /><!-- Tea of Repose - 50% Recovery (10-Pack) -->
-	<decomposable item_id="188051908" /><!-- Tea of Repose - 20% Recovery (10-Pack) -->
+	<decomposable item_id="188051906"><!-- Tea of Repose - 100% Recovery (10-Pack) -->
+		<items>
+			<item id="162001013" min_count="10" /><!-- Tea of Repose -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188051907"><!-- Tea of Repose - 50% Recovery (10-Pack) -->
+		<items>
+			<item id="162001012" min_count="10" /><!-- Tea of Repose -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188051908"><!-- Tea of Repose - 20% Recovery (10-Pack) -->
+		<items>
+			<item id="162001014" min_count="10" /><!-- Tea of Repose -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188051909" /><!-- [Event] Large First Place Beer Case -->
 	<decomposable item_id="188051910" /><!-- [Event] Large Second Place Beer Case -->
 	<decomposable item_id="188051911" /><!-- [Event] Large Third Place Beer Case -->
@@ -16504,24 +16721,24 @@
 	</decomposable>
 	<decomposable item_id="188052049"><!-- Eastern Functional Furniture Pack -->
 		<items>
-			<item id="170420038"/><!-- Eastern Banquet -->
+			<item id="170420038" /><!-- Eastern Banquet -->
 		</items>
 		<items>
-			<item id="170100025"/><!-- Eastern Butterfly Cabinet -->
+			<item id="170100025" /><!-- Eastern Butterfly Cabinet -->
 		</items>
 		<items>
-			<item id="170100026"/><!-- Eastern Four Seasons Cabinet -->
+			<item id="170100026" /><!-- Eastern Four Seasons Cabinet -->
 		</items>
 		<items>
-			<item id="170190076"/><!-- Eastern Thourak Guestbloom -->
+			<item id="170190076" /><!-- Eastern Thourak Guestbloom -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052050"><!-- Eastern Furniture Set Pack -->
 		<items>
-			<item id="188052048"/><!-- Eastern Display Furniture Pack -->
+			<item id="188052048" /><!-- Eastern Display Furniture Pack -->
 		</items>
 		<items>
-			<item id="188052049"/><!-- Eastern Functional Furniture Pack -->
+			<item id="188052049" /><!-- Eastern Functional Furniture Pack -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052051" /><!-- Lesser Blessing Box of Growth I -->
@@ -16730,19 +16947,19 @@
 	<decomposable item_id="188052074" /><!-- [Event] Raksha Weapon Box -->
 	<decomposable item_id="188052075" selectable="true"><!-- [Event] Tahabata Weapon Box -->
 		<items>
-			<item id="100001408"/><!-- Tahabata's Sword -->
-			<item id="100101085"/><!-- Tahabata's Warhammer -->
-			<item id="100201247"/><!-- Tahabata's Dagger -->
-			<item id="100501093"/><!-- Tahabata's Jewel -->
-			<item id="100601149"/><!-- Tahabata's Tome -->
-			<item id="100901101"/><!-- Tahabata's Greatsword -->
-			<item id="101301038"/><!-- Tahabata's Spear -->
-			<item id="101501119"/><!-- Tahabata's Staff -->
-			<item id="101701130"/><!-- Tahabata's Longbow -->
-			<item id="101800575"/><!-- Tahabata's Pistol -->
-			<item id="101900571"/><!-- Tahabata's Aethercannon -->
-			<item id="102000601"/><!-- Tahabata's Harp -->
-			<item id="102100522"/><!-- Tahabata's Cipher-Blade -->
+			<item id="100001408" /><!-- Tahabata's Sword -->
+			<item id="100101085" /><!-- Tahabata's Warhammer -->
+			<item id="100201247" /><!-- Tahabata's Dagger -->
+			<item id="100501093" /><!-- Tahabata's Jewel -->
+			<item id="100601149" /><!-- Tahabata's Tome -->
+			<item id="100901101" /><!-- Tahabata's Greatsword -->
+			<item id="101301038" /><!-- Tahabata's Spear -->
+			<item id="101501119" /><!-- Tahabata's Staff -->
+			<item id="101701130" /><!-- Tahabata's Longbow -->
+			<item id="101800575" /><!-- Tahabata's Pistol -->
+			<item id="101900571" /><!-- Tahabata's Aethercannon -->
+			<item id="102000601" /><!-- Tahabata's Harp -->
+			<item id="102100522" /><!-- Tahabata's Cipher-Blade -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052076"><!-- [Event] Bundle of Kahrun Symbols -->
@@ -18700,7 +18917,7 @@
 			<item id="168310018" /><!-- Major Blessed Augment: Level 2 -->
 		</items>
 		<items chance="1">
-			<item id="165020021" /><!-- Noble Armor Wrapping Scroll (Mythic/Lv. 65 and lower) -->
+			<item id="165020020" /><!-- Noble Weapon Wrapping Scroll (Mythic/Lv. 65 and lower) -->
 		</items>
 		<items chance="2">
 			<item id="165020014" /><!-- Weapon Wrapping Scroll (Eternal/Lv. 65 and lower) -->
@@ -21095,94 +21312,94 @@
 	</decomposable>
 	<decomposable item_id="188052515"><!-- Animal Set Box -->
 		<items>
-			<item id="188052516"/><!-- Cute Cat Set -->
+			<item id="188052516" /><!-- Cute Cat Set -->
 		</items>
 		<items>
-			<item id="188052517"/><!-- Cute Rabbit Set -->
+			<item id="188052517" /><!-- Cute Rabbit Set -->
 		</items>
 		<items>
-			<item id="188052518"/><!-- Cute Raccoon Set -->
+			<item id="188052518" /><!-- Cute Raccoon Set -->
 		</items>
 		<items>
-			<item id="188052519"/><!-- Lazy Cat Set -->
+			<item id="188052519" /><!-- Lazy Cat Set -->
 		</items>
 		<items>
-			<item id="188052520"/><!-- Lovely Pink Cat Set -->
+			<item id="188052520" /><!-- Lovely Pink Cat Set -->
 		</items>
 		<items>
-			<item id="188052521"/><!-- Classy Gray Cat Set -->
+			<item id="188052521" /><!-- Classy Gray Cat Set -->
 		</items>
 		<items>
-			<item id="188052522"/><!-- Lovely Pink Rabbit Set -->
+			<item id="188052522" /><!-- Lovely Pink Rabbit Set -->
 		</items>
 		<items>
-			<item id="188052523"/><!-- Classy Gray Rabbit Set -->
+			<item id="188052523" /><!-- Classy Gray Rabbit Set -->
 		</items>
 		<items>
-			<item id="188052524"/><!-- Lovely Pink Raccoon Set -->
+			<item id="188052524" /><!-- Lovely Pink Raccoon Set -->
 		</items>
 		<items>
-			<item id="188052525"/><!-- Classy Gray Raccoon Set -->
+			<item id="188052525" /><!-- Classy Gray Raccoon Set -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052516"><!-- Cute Cat Set -->
 		<items>
-			<item id="110900396"/><!-- Cat Suit -->
-			<item id="125045117"/><!-- Cute Cat Hat -->
+			<item id="110900396" /><!-- Cat Suit -->
+			<item id="125045117" /><!-- Cute Cat Hat -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052517"><!-- Cute Rabbit Set -->
 		<items>
-			<item id="110900397"/><!-- Rabbit Suit -->
-			<item id="125045118"/><!-- Cute Rabbit Hat -->
+			<item id="110900397" /><!-- Rabbit Suit -->
+			<item id="125045118" /><!-- Cute Rabbit Hat -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052518"><!-- Cute Raccoon Set -->
 		<items>
-			<item id="110900398"/><!-- Raccoon Suit -->
-			<item id="125045119"/><!-- Cute Raccoon Hat -->
+			<item id="110900398" /><!-- Raccoon Suit -->
+			<item id="125045119" /><!-- Cute Raccoon Hat -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052519"><!-- Lazy Cat Set -->
 		<items>
-			<item id="110900396"/><!-- Cat Suit -->
-			<item id="125045135"/><!-- Lazy Cat Hat -->
+			<item id="110900396" /><!-- Cat Suit -->
+			<item id="125045135" /><!-- Lazy Cat Hat -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052520"><!-- Lovely Pink Cat Set -->
 		<items>
-			<item id="110900421"/><!-- Lovely Pink Cat Suit -->
-			<item id="125045136"/><!-- Lovely Pink Cat Hat -->
+			<item id="110900421" /><!-- Lovely Pink Cat Suit -->
+			<item id="125045136" /><!-- Lovely Pink Cat Hat -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052521"><!-- Classy Gray Cat Set -->
 		<items>
-			<item id="110900422"/><!-- Classy Gray Cat Suit -->
-			<item id="125045137"/><!-- Classy Gray Cat Hat -->
+			<item id="110900422" /><!-- Classy Gray Cat Suit -->
+			<item id="125045137" /><!-- Classy Gray Cat Hat -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052522"><!-- Lovely Pink Rabbit Set -->
 		<items>
-			<item id="110900423"/><!-- Lovely Pink Rabbit Suit -->
-			<item id="125045138"/><!-- Lovely Pink Rabbit Hat -->
+			<item id="110900423" /><!-- Lovely Pink Rabbit Suit -->
+			<item id="125045138" /><!-- Lovely Pink Rabbit Hat -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052523"><!-- Classy Gray Rabbit Set -->
 		<items>
-			<item id="110900424"/><!-- Classy Gray Rabbit Suit -->
-			<item id="125045139"/><!-- Classy Gray Rabbit Hat -->
+			<item id="110900424" /><!-- Classy Gray Rabbit Suit -->
+			<item id="125045139" /><!-- Classy Gray Rabbit Hat -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052524"><!-- Lovely Pink Raccoon Set -->
 		<items>
-			<item id="110900425"/><!-- Lovely Pink Raccoon Suit -->
-			<item id="125045140"/><!-- Lovely Pink Raccoon Hat -->
+			<item id="110900425" /><!-- Lovely Pink Raccoon Suit -->
+			<item id="125045140" /><!-- Lovely Pink Raccoon Hat -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052525"><!-- Classy Gray Raccoon Set -->
 		<items>
-			<item id="110900426"/><!-- Classy Gray Raccoon Suit -->
-			<item id="125045141"/><!-- Classy Gray Raccoon Hat -->
+			<item id="110900426" /><!-- Classy Gray Raccoon Suit -->
+			<item id="125045141" /><!-- Classy Gray Raccoon Hat -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052526"><!-- Mysterious Green Sack -->
@@ -21967,22 +22184,22 @@
 	</decomposable>
 	<decomposable item_id="188052561"><!-- [Event] Consumables Bundle -->
 		<items>
-			<item id="162000066" min_count="3"/><!-- Recovery Crystal -->
+			<item id="162000066" min_count="3" /><!-- Recovery Crystal -->
 		</items>
 		<items>
-			<item id="164002167" min_count="5"/><!-- Drana Coffee -->
+			<item id="164002167" min_count="5" /><!-- Drana Coffee -->
 		</items>
 		<items>
-			<item id="164002168" min_count="3"/><!-- [Event] Spicy Drana Steak -->
+			<item id="164002168" min_count="3" /><!-- [Event] Spicy Drana Steak -->
 		</items>
 		<items>
-			<item id="164002169" min_count="3"/><!-- [Event] Tasty Drana Steak -->
+			<item id="164002169" min_count="3" /><!-- [Event] Tasty Drana Steak -->
 		</items>
 		<items>
-			<item id="166100008" min_count="75"/><!-- Greater Supplements (Eternal) -->
+			<item id="166100008" min_count="75" /><!-- Greater Supplements (Eternal) -->
 		</items>
 		<items>
-			<item id="169000010" min_count="500"/><!-- Power Shard: +40 -->
+			<item id="169000010" min_count="500" /><!-- Power Shard: +40 -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052562"><!-- [Event] Scroll Bundle -->
@@ -22338,22 +22555,22 @@
 	</decomposable>
 	<decomposable item_id="188052589"><!-- [Event] Consumables Bundle -->
 		<items>
-			<item id="162000066" min_count="3"/><!-- Recovery Crystal -->
+			<item id="162000066" min_count="3" /><!-- Recovery Crystal -->
 		</items>
 		<items>
-			<item id="164002167" min_count="5"/><!-- Drana Coffee -->
+			<item id="164002167" min_count="5" /><!-- Drana Coffee -->
 		</items>
 		<items>
-			<item id="164002168" min_count="3"/><!-- [Event] Spicy Drana Steak -->
+			<item id="164002168" min_count="3" /><!-- [Event] Spicy Drana Steak -->
 		</items>
 		<items>
-			<item id="164002169" min_count="3"/><!-- [Event] Tasty Drana Steak -->
+			<item id="164002169" min_count="3" /><!-- [Event] Tasty Drana Steak -->
 		</items>
 		<items>
-			<item id="166100008" min_count="75"/><!-- Greater Supplements (Eternal) -->
+			<item id="166100008" min_count="75" /><!-- Greater Supplements (Eternal) -->
 		</items>
 		<items>
-			<item id="169000010" min_count="500"/><!-- Power Shard: +40 -->
+			<item id="169000010" min_count="500" /><!-- Power Shard: +40 -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052590"><!-- Cuperine Ceramium Piece Case -->
@@ -23392,53 +23609,56 @@
 	<decomposable item_id="188052623" /><!-- [Event] Romantic Dye Box -->
 	<decomposable item_id="188052624" /><!-- [Event] Dramata's Bone Wing Box -->
 	<decomposable item_id="188052625"><!-- [Event] Ice-hot Box -->
-		<items chance="10">
-			<item id="162000107" min_count="10" /><!-- Saam King's Herbs -->
+		<items chance="13">
+			<item id="162000107" min_count="5" max_count="10" /><!-- Saam King's Herbs -->
 		</items>
-		<items chance="10">
+		<items chance="13">
 			<item id="186000238" min_count="50" /><!-- Conqueror's Mark -->
 		</items>
-		<items chance="10">
+		<items chance="13">
 			<item id="186000237" min_count="75" /><!-- Ancient Coin -->
 		</items>
-		<items chance="10">
-			<item id="186000130" min_count="500" /><!-- Crucible Insignia -->
+		<items chance="13">
+			<item id="186000409" min_count="5" max_count="15" /><!-- Daeva's Respite Coin -->
 		</items>
-		<items chance="7">
+		<items chance="8">
 			<item id="186000243" min_count="3" /><!-- Fragmented Ceramium -->
 		</items>
-		<items chance="7">
-			<item id="186000399" min_count="25" /><!-- Honorable Conqueror's Mark -->
+		<items chance="8">
+			<item id="186000399" min_count="10" max_count="25" /><!-- Honorable Conqueror's Mark -->
 		</items>
-		<items chance="7">
+		<items chance="8">
 			<item id="188054198" /><!-- Greater Scroll Bundle -->
 		</items>
-		<items chance="7">
-			<item id="188054035" /><!-- [Club] Full Furniture Bundle -->
+		<items chance="5">
+			<item id="166020000" min_count="3" /><!-- Omega Enchantment Stone -->
 		</items>
 		<items chance="5">
-			<item id="166020000" min_count="5" /><!-- Omega Enchantment Stone -->
+			<item id="166030005" min_count="3" /><!-- Tempering Solution -->
 		</items>
 		<items chance="5">
-			<item id="166030005" min_count="5" /><!-- Tempering Solution -->
+			<item id="166500002" min_count="2" /><!-- Amplification Stone -->
 		</items>
-		<items chance="5">
-			<item id="188053113" min_count="3" /><!-- Ahserion's Flight Ancient Manastone Bundle -->
+		<items chance="2">
+			<item id="188053295" /><!-- Empyrean Plume Chest -->
 		</items>
-		<items chance="4">
-			<item id="169629003" /><!-- Shiny Vinna -->
+		<items chance="2">
+			<item id="188053614" /><!-- Illusion Godstone Bundle -->
 		</items>
-		<items chance="4">
-			<item id="169650000" /><!-- Plastic Surgery Ticket -->
-		</items>
-		<items chance="3">
+		<items chance="2">
 			<item id="188053006" /><!-- [Event] Hyperion's Mythic Armor Chest -->
 		</items>
-		<items chance="3">
+		<items chance="2">
 			<item id="188053007" /><!-- [Event] Hyperion's Mythic Weapon Chest -->
 		</items>
-		<items chance="3">
-			<item id="188053004" /><!-- [Event] Dragon Lord's Weapon Chest -->
+		<items chance="0.5">
+			<item id="187000121" /><!-- Hyperion Wings -->
+		</items>
+		<items chance="0.4">
+			<item id="190070017" /><!-- Sidekick Akumu Summoning Lamp -->
+		</items>
+		<items chance="0.1">
+			<item id="165020020" /><!-- Noble Weapon Wrapping Scroll (Mythic/Lv. 65 and lower) -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052626"><!-- [Event] Cocktail Shaker -->
@@ -24613,8 +24833,16 @@
 			<item id="186000232" min_count="10" race="ASMODIANS" /><!-- Ceramium Coin -->
 		</items>
 	</decomposable>
-	<decomposable item_id="188052701" /><!-- [Event] Cinder-Spout Firecracker -->
-	<decomposable item_id="188052702" /><!-- [Event] Flame Pillar Firecracker -->
+	<decomposable item_id="188052701"><!-- [Event] Cinder-Spout Firecracker -->
+		<items>
+			<item id="164002218" min_count="3" /><!-- Cinder-Spout Firecracker -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188052702"><!-- [Event] Flame Pillar Firecracker -->
+		<items>
+			<item id="164002219" min_count="3" /><!-- Flame Pillar Firecracker -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188052703"><!-- [Event] Fabled Godstone Bundle -->
 		<items>
 			<item id="168000117" /><!-- Godstone: Meslamtaeda's Greed -->
@@ -24950,16 +25178,16 @@
 	<decomposable item_id="188052708" /><!-- [Event] Joyful Essence Bundle -->
 	<decomposable item_id="188052709"><!-- [Event] Fleeting Chromanimbus Container (15 days) -->
 		<items>
-			<item id="190100076"/><!-- Rosenimbus (15 days) -->
+			<item id="190100076" /><!-- Rosenimbus (15 days) -->
 		</items>
 		<items>
-			<item id="190100082"/><!-- Goldenimbus (15 days) -->
+			<item id="190100082" /><!-- Goldenimbus (15 days) -->
 		</items>
 		<items>
-			<item id="190100088"/><!-- Ceruleanimbus (15 days) -->
+			<item id="190100088" /><!-- Ceruleanimbus (15 days) -->
 		</items>
 		<items>
-			<item id="190100094"/><!-- Crimsonimbus (15 days) -->
+			<item id="190100094" /><!-- Crimsonimbus (15 days) -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052710" /><!-- [Event] Everlasting Chromanimbus Container -->
@@ -24973,8 +25201,30 @@
 	<decomposable item_id="188052713" /><!-- [Event] Gold Coin Box -->
 	<decomposable item_id="188052714" /><!-- [Event] Ailu Candy Bundle -->
 	<decomposable item_id="188052715"><!-- [Event] Summoning Stone Letter -->
-		<items>
-			<item id="164002192" /><!-- Summoning Stone: Trade Broker (Personal) -->
+		<items chance="17">
+			<item id="164002188" /><!-- Summoning Stone: Stigma Master (Personal) -->
+		</items>
+		<items chance="17">
+			<item id="164002190" /><!-- Summoning Stone: Courier (Personal) -->
+		</items>
+		<items chance="17">
+			<item id="164002192" race="ELYOS" /><!-- Summoning Stone: Trade Broker (Personal) -->
+			<item id="164002194" race="ASMODIANS" /><!-- Summoning Stone: Trade Broker (Personal) -->
+		</items>
+		<items chance="17">
+			<item id="164002196" race="ELYOS" /><!-- Summoning Stone: General Goods Merchant (Personal) -->
+			<item id="164002198" race="ASMODIANS" /><!-- Summoning Stone: General Goods Merchant (Personal) -->
+		</items>
+		<items chance="17">
+			<item id="164002200" /><!-- Summoning Stone: Warehouse Manager (Personal) -->
+		</items>
+		<items chance="8">
+			<item id="164002202" race="ELYOS" /><!-- Summoning Stone: Ancient Goblet Administrator (Personal) -->
+			<item id="164002204" race="ASMODIANS" /><!-- Summoning Stone: Ancient Goblet Administrator (Personal) -->
+		</items>
+		<items chance="7">
+			<item id="164002206" race="ELYOS" /><!-- Summoning Stone: Ancient Crown Administrator (Personal) -->
+			<item id="164002208" race="ASMODIANS" /><!-- Summoning Stone: Ancient Crown Administrator (Personal) -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052716"><!-- [Event] Lucky Scroll Pouch -->
@@ -25191,8 +25441,41 @@
 			<random_item type="MANASTONE_LEGEND_GRADE_50" />
 		</items>
 	</decomposable>
-	<decomposable item_id="188052740" /><!-- [Event] Brilliant Ancient Manastone Bundle -->
-	<decomposable item_id="188052741" /><!-- [Event] Brilliant Composite Manastone Bundle -->
+	<decomposable item_id="188052740" selectable="true"><!-- [Event] Brilliant Ancient Manastone Bundle -->
+		<items>
+			<item id="167020056" /><!-- Ancient Manastone: Accuracy +33 -->
+			<item id="167020058" /><!-- Ancient Manastone: Parry +33 -->
+			<item id="167020059" /><!-- Ancient Manastone: Block +33 -->
+			<item id="167020060" /><!-- Ancient Manastone: Physical Critical Resistance +22 -->
+			<item id="167020061" /><!-- Ancient Manastone: Magical Critical Resistance +9 -->
+			<item id="167020062" /><!-- Ancient Manastone: Physical Defense +80 -->
+			<item id="167020063" /><!-- Ancient Manastone: Attack +7 -->
+			<item id="167020064" /><!-- Ancient Manastone: Magical Accuracy +20 -->
+			<item id="167020065" /><!-- Ancient Manastone: Magic Boost +32 -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188052741" selectable="true"><!-- [Event] Brilliant Composite Manastone Bundle -->
+		<items>
+			<item id="167000682" /> <!-- Manastone: Attack +5 / HP +47 -->
+			<item id="167000684" /> <!-- Manastone: Attack +5 / Accuracy +13 -->
+			<item id="167000688" /> <!-- Manastone: Crit Strike +17 / HP +47 -->
+			<item id="167000690" /> <!-- Manastone: Crit Strike +17 / Attack +2 -->
+			<item id="167000691" /> <!-- Manastone: Crit Strike +17 / Accuracy +13 -->
+			<item id="167000694" /> <!-- Manastone: Crit Strike +17 / Block +13 -->
+			<item id="167000695" /> <!-- Manastone: Crit Strike +17 / Resist Magic +7 -->
+			<item id="167000696" /> <!-- Manastone: Crit Strike +17 / Magical Accuracy +7 -->
+			<item id="167000697" /> <!-- Manastone: Magic Boost +27 / HP +47 -->
+			<item id="167000704" /> <!-- Manastone: Magic Boost +27 / Resist Magic +7 -->
+			<item id="167000705" /> <!-- Manastone: Magic Boost +27 / Magical Accuracy +7 -->
+			<item id="167000708" /> <!-- Manastone: Magical Accuracy +14 / Magic Boost +13 -->
+			<item id="167000713" /> <!-- Manastone: Magical Accuracy +14 / Crit Strike +8 -->
+			<item id="167000714" /> <!-- Manastone: Magical Accuracy +14 / Resist Magic +7 -->
+			<item id="167000749" /> <!-- Manastone: Attack +5 / Crit Strike +8 -->
+			<item id="167000750" /> <!-- Manastone: Attack +5 / Resist Magic +7 -->
+			<item id="167000751" /> <!-- Manastone: Attack +5 / Magical Accuracy +7 -->
+			<item id="167000877" /> <!-- Manastone: Magical Accuracy +14 / Attack +2 -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188052742"><!-- Fortress Supplies -->
 		<items>
 			<item id="186000242" /><!-- Ceramium Medal -->
@@ -25329,13 +25612,13 @@
 	</decomposable>
 	<decomposable item_id="188052761" selectable="true"><!-- [Event] Bonus Entry Scroll Bundle -->
 		<items>
-			<item id="188600260"/><!-- [Event] Danuar Reliquary Bonus Entry Scroll -->
-			<item id="188600261"/><!-- [Event] Infinity Shard Bonus Entry Scroll -->
-			<item id="188600262"/><!-- [Event] Danuar Sanctuary Bonus Entry Scroll -->
-			<item id="188600263"/><!-- [Event] Ophidan Bridge Bonus Entry Scroll -->
-			<item id="188600264"/><!-- [Event] The Eternal Bastion Bonus Entry Scroll -->
-			<item id="188600265"/><!-- [Event] Sauro Supply Base Bonus Entry Scroll -->
-			<item id="188600331"/><!-- Occupied Rentus Base Bonus Entry Scroll -->
+			<item id="188600260" /><!-- [Event] Danuar Reliquary Bonus Entry Scroll -->
+			<item id="188600261" /><!-- [Event] Infinity Shard Bonus Entry Scroll -->
+			<item id="188600262" /><!-- [Event] Danuar Sanctuary Bonus Entry Scroll -->
+			<item id="188600263" /><!-- [Event] Ophidan Bridge Bonus Entry Scroll -->
+			<item id="188600264" /><!-- [Event] The Eternal Bastion Bonus Entry Scroll -->
+			<item id="188600265" /><!-- [Event] Sauro Supply Base Bonus Entry Scroll -->
+			<item id="188600331" /><!-- Occupied Rentus Base Bonus Entry Scroll -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052762"><!-- Krotan Siege Reward Chest -->
@@ -26406,16 +26689,16 @@
 			<item id="121001450" player_classes="TEMPLAR GLADIATOR ASSASSIN RANGER CHANTER" /><!-- Trillirunerk's Combat Necklace -->
 		</items>
 		<items chance="2">
-			<item id="120015046" player_classes="SORCERER SPIRIT_MASTER BARD GUNNER RIDER CLERIC"/><!-- Trillirunerk's Magic Earrings -->
+			<item id="120015046" player_classes="SORCERER SPIRIT_MASTER BARD GUNNER RIDER CLERIC" /><!-- Trillirunerk's Magic Earrings -->
 			<item id="120015047" player_classes="TEMPLAR GLADIATOR ASSASSIN RANGER CHANTER" /><!-- Trillirunerk's Combat Earrings -->
 		</items>
 		<items chance="2">
 			<item id="122001730" player_classes="TEMPLAR GLADIATOR ASSASSIN RANGER CHANTER" /><!-- Trillirunerk's Combat Ring -->
-			<item id="122001731" player_classes="SORCERER SPIRIT_MASTER BARD GUNNER RIDER CLERIC"/><!-- Trillirunerk's Magic Ring -->
+			<item id="122001731" player_classes="SORCERER SPIRIT_MASTER BARD GUNNER RIDER CLERIC" /><!-- Trillirunerk's Magic Ring -->
 		</items>
 		<items chance="2">
 			<item id="123001493" player_classes="TEMPLAR GLADIATOR ASSASSIN RANGER CHANTER" /><!-- Noble Emperor Trillirunerk's Belt -->
-			<item id="123001494" player_classes="SORCERER SPIRIT_MASTER BARD GUNNER RIDER CLERIC"/><!-- Noble Emperor Trillirunerk's Waistband -->
+			<item id="123001494" player_classes="SORCERER SPIRIT_MASTER BARD GUNNER RIDER CLERIC" /><!-- Noble Emperor Trillirunerk's Waistband -->
 		</items>
 		<items chance="2">
 			<item id="125004324" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Trillirunerk's Headband -->
@@ -26428,16 +26711,16 @@
 	<decomposable item_id="188052938" /><!-- Iron Wall Warfront Medal Bundle -->
 	<decomposable item_id="188052939"><!-- [Event] Fleeting Chromanimbus Container (15 days) -->
 		<items>
-			<item id="190100076"/><!-- Rosenimbus (15 days) -->
+			<item id="190100076" /><!-- Rosenimbus (15 days) -->
 		</items>
 		<items>
-			<item id="190100082"/><!-- Goldenimbus (15 days) -->
+			<item id="190100082" /><!-- Goldenimbus (15 days) -->
 		</items>
 		<items>
-			<item id="190100088"/><!-- Ceruleanimbus (15 days) -->
+			<item id="190100088" /><!-- Ceruleanimbus (15 days) -->
 		</items>
 		<items>
-			<item id="190100094"/><!-- Crimsonimbus (15 days) -->
+			<item id="190100094" /><!-- Crimsonimbus (15 days) -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052940" /><!-- [Event] Coin Bundle -->
@@ -26892,6 +27175,9 @@
 			<item id="188051879" /><!-- Solorius Furniture Set Box -->
 		</items>
 		<items>
+			<item id="188053610" min_count="2" /><!-- [Event] Level 70 Composite Manastone Bundle -->
+		</items>
+		<items>
 			<item id="166500002" min_count="2" /><!-- Amplification Stone -->
 		</items>
 		<items>
@@ -26920,6 +27206,9 @@
 	</decomposable>
 	<decomposable item_id="188052999"><!-- [Event] Brilliant Ice Prism -->
 		<items>
+			<item id="188053728" /><!-- Beritra's Equipment Box -->
+		</items>
+		<items>
 			<item id="188053618" /><!-- Honorable Elim's Idian Bundle -->
 		</items>
 		<items>
@@ -26937,10 +27226,10 @@
 	</decomposable>
 	<decomposable item_id="188053000"><!-- [Event] Assured Greater Felicitous Socketing Box -->
 		<items>
-			<item id="166150018"/><!-- Assured Greater Felicitous Socketing (Eternal) -->
+			<item id="166150018" /><!-- Assured Greater Felicitous Socketing (Eternal) -->
 		</items>
 		<items>
-			<item id="166150019"/><!-- Assured Greater Felicitous Socketing (Mythic) -->
+			<item id="166150019" /><!-- Assured Greater Felicitous Socketing (Mythic) -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188053001"><!-- [Event] Fabled Godstone Bundle -->
@@ -27256,61 +27545,61 @@
 	</decomposable>
 	<decomposable item_id="188053009"><!-- Letter Collector's Greater Bundle -->
 		<items chance="70">
-			<item id="188053783"/><!-- Stigma Sack -->
-			<random_item type="MANASTONE_RARE_GRADE_70"/>
+			<item id="188053783" /><!-- Stigma Sack -->
+			<random_item type="MANASTONE_RARE_GRADE_70" />
 		</items>
 		<items chance="20">
-			<item id="188053000"/><!-- [Event] Assured Greater Felicitous Socketing Box -->
-			<random_item type="ANCIENTITEMS"/>
+			<item id="188053000" /><!-- [Event] Assured Greater Felicitous Socketing Box -->
+			<random_item type="ANCIENTITEMS" />
 		</items>
 		<items chance="5">
-			<item id="188053666"/><!-- [Event] Ceramium Medal Box -->
-			<random_item type="MANASTONE_LEGEND_GRADE_60"/>
+			<item id="188053666" /><!-- [Event] Ceramium Medal Box -->
+			<random_item type="MANASTONE_LEGEND_GRADE_60" />
 		</items>
 		<items chance="2.5">
-			<item id="188053666"/><!-- [Event] Ceramium Medal Box -->
-			<item id="188053618"/><!-- Honorable Elim's Idian Bundle -->
+			<item id="188053666" /><!-- [Event] Ceramium Medal Box -->
+			<item id="188053618" /><!-- Honorable Elim's Idian Bundle -->
 		</items>
 		<items chance="2.5">
-			<item id="188054035"/><!-- [Club] Full Furniture Bundle -->
-			<item id="188052939"/><!-- [Event] Fleeting Chromanimbus Container (15 days) -->
+			<item id="188054035" /><!-- [Club] Full Furniture Bundle -->
+			<item id="188052939" /><!-- [Event] Fleeting Chromanimbus Container (15 days) -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188053010"><!-- Letter Collector's Bundle -->
 		<items chance="70">
-			<item id="188053617"/><!-- Noble Tidal Idian Bundle -->
-			<item id="186000146" min_count="15"/><!-- Guestpetal -->
+			<item id="188053617" /><!-- Noble Tidal Idian Bundle -->
+			<item id="186000146" min_count="15" /><!-- Guestpetal -->
 		</items>
 		<items chance="25">
-			<item id="188053667"/><!-- [Event] Mithril Medal Box -->
-			<item id="188051736"/><!-- Dye Petal Bundle -->
+			<item id="188053667" /><!-- [Event] Mithril Medal Box -->
+			<item id="188051736" /><!-- Dye Petal Bundle -->
 		</items>
 		<items chance="2.5">
-			<item id="188052050"/><!-- Eastern Furniture Set Pack -->
-			<item id="170195021" race="ASMODIANS"/><!-- [Employment Contract] General Goods Merchant -->
-			<item id="170190022" race="ELYOS"/><!-- [Employment Contract] General Goods Merchant -->
+			<item id="188052050" /><!-- Eastern Furniture Set Pack -->
+			<item id="170195021" race="ASMODIANS" /><!-- [Employment Contract] General Goods Merchant -->
+			<item id="170190022" race="ELYOS" /><!-- [Employment Contract] General Goods Merchant -->
 		</items>
 		<items chance="2.5">
-			<item id="188052050"/><!-- Eastern Furniture Set Pack -->
-			<item id="170195022" race="ASMODIANS"/><!-- [Employment Contract] Warehouse Manager -->
-			<item id="170190023" race="ELYOS"/><!-- [Employment Contract] Warehouse Manager -->
+			<item id="188052050" /><!-- Eastern Furniture Set Pack -->
+			<item id="170195022" race="ASMODIANS" /><!-- [Employment Contract] Warehouse Manager -->
+			<item id="170190023" race="ELYOS" /><!-- [Employment Contract] Warehouse Manager -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188053011"><!-- Letter Collector's Lesser Bundle -->
 		<items chance="45">
-			<item id="188052164"/><!-- Furniture Paint Bundle -->
-			<item id="186000146" min_count="10"/><!-- Guestpetal -->
+			<item id="188052164" /><!-- Furniture Paint Bundle -->
+			<item id="186000146" min_count="10" /><!-- Guestpetal -->
 		</items>
 		<items chance="45">
-			<item id="188052719"/><!-- [Event] Dye Bundle -->
-			<item id="186000146" min_count="10"/><!-- Guestpetal -->
+			<item id="188052719" /><!-- [Event] Dye Bundle -->
+			<item id="186000146" min_count="10" /><!-- Guestpetal -->
 		</items>
 		<items chance="5">
-			<item id="188051564"/><!-- Housing Accessory Bundle -->
-			<item id="188051601"/><!-- Construction Flux Bundle -->
+			<item id="188051564" /><!-- Housing Accessory Bundle -->
+			<item id="188051601" /><!-- Construction Flux Bundle -->
 		</items>
 		<items chance="5">
-			<item id="188052515"/><!-- Animal Set Box -->
+			<item id="188052515" /><!-- Animal Set Box -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188053012"><!-- Blood Mark Enchantment Chest -->
@@ -27335,7 +27624,14 @@
 	<decomposable item_id="188053020" /><!-- Archon Scroll Bundle -->
 	<decomposable item_id="188053021" /><!-- Guardian Summoning Scroll Bundle -->
 	<decomposable item_id="188053022" /><!-- Archon Summoning Scroll Bundle -->
-	<decomposable item_id="188053023" /><!-- Special Medal Chest -->
+	<decomposable item_id="188053023"><!-- Special Medal Chest -->
+		<items chance="30.0">
+			<item id="186000242" /><!-- Ceramium Medal -->
+		</items>
+		<items chance="70.0">
+			<item id="186000147" /><!-- Mithril Medal -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188053024" /><!-- Infused Idian Shugo Box: Physical Attack -->
 	<decomposable item_id="188053025" /><!-- Infused Idian Shugo Box: Magical Attack -->
 	<decomposable item_id="188053026" /><!-- Infused Idian Shugo Box: Block -->
@@ -27487,17 +27783,110 @@
 	<decomposable item_id="188053066" /><!-- Daru Cipher-Blade Box -->
 	<decomposable item_id="188053067" /><!-- Ailu Cipher-Blade Box -->
 	<decomposable item_id="188053068" /><!-- Elite Greater Composite Manastone Chest -->
-	<decomposable item_id="188053069" /><!-- Dazzling Daevanion Box -->
-	<decomposable item_id="188053070" /><!-- Dazzling Daevanion Chain Bundle -->
-	<decomposable item_id="188053071" /><!-- Dazzling Daevanion Chain Bundle -->
-	<decomposable item_id="188053072" /><!-- Dazzling Daevanion Plate Bundle -->
-	<decomposable item_id="188053073" /><!-- Dazzling Daevanion Plate Bundle -->
-	<decomposable item_id="188053074" /><!-- Dazzling Daevanion Leather Bundle -->
-	<decomposable item_id="188053075" /><!-- Dazzling Daevanion Leather Bundle -->
-	<decomposable item_id="188053076" /><!-- Dazzling Daevanion Magic Leather Bundle -->
-	<decomposable item_id="188053077" /><!-- Dazzling Daevanion Magic Leather Bundle -->
-	<decomposable item_id="188053078" /><!-- Dazzling Daevanion Cloth Bundle -->
-	<decomposable item_id="188053079" /><!-- Dazzling Daevanion Cloth Bundle -->
+	<decomposable item_id="188053069"><!-- Dazzling Daevanion Box -->
+		<items>
+			<item id="188053070" race="ELYOS" player_classes="CLERIC CHANTER RIDER" /><!-- Dazzling Daevanion Chain Bundle -->
+			<item id="188053071" race="ASMODIANS" player_classes="CLERIC CHANTER RIDER" /><!-- Dazzling Daevanion Chain Bundle -->
+			<item id="188053072" race="ELYOS" player_classes="TEMPLAR GLADIATOR" /><!-- Dazzling Daevanion Plate Bundle -->
+			<item id="188053073" race="ASMODIANS" player_classes="TEMPLAR GLADIATOR" /><!-- Dazzling Daevanion Plate Bundle -->
+			<item id="188053074" race="ELYOS" player_classes="ASSASSIN RANGER" /><!-- Dazzling Daevanion Leather Bundle -->
+			<item id="188053075" race="ASMODIANS" player_classes="ASSASSIN RANGER" /><!-- Dazzling Daevanion Leather Bundle -->
+			<item id="188053076" race="ELYOS" player_classes="GUNNER" /><!-- Dazzling Daevanion Magic Leather Bundle -->
+			<item id="188053077" race="ASMODIANS" player_classes="GUNNER" /><!-- Dazzling Daevanion Magic Leather Bundle -->
+			<item id="188053078" race="ELYOS" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Dazzling Daevanion Cloth Bundle -->
+			<item id="188053079" race="ASMODIANS" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Dazzling Daevanion Cloth Bundle -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188053070"><!-- Dazzling Daevanion Chain Bundle -->
+		<items>
+			<item id="110551086" /><!-- Dazzling Daevanion Hauberk -->
+			<item id="113501663" /><!-- Dazzling Daevanion Chausses -->
+			<item id="114501673" /><!-- Dazzling Daevanion Brogans -->
+			<item id="112501584" /><!-- Dazzling Daevanion Spaulders -->
+			<item id="111501645" /><!-- Dazzling Daevanion Handguards -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188053071"><!-- Dazzling Daevanion Chain Bundle -->
+		<items>
+			<item id="110551087" /><!-- Dazzling Daevanion Hauberk -->
+			<item id="113501664" /><!-- Dazzling Daevanion Chausses -->
+			<item id="114501674" /><!-- Dazzling Daevanion Brogans -->
+			<item id="112501585" /><!-- Dazzling Daevanion Spaulders -->
+			<item id="111501646" /><!-- Dazzling Daevanion Handguards -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188053072"><!-- Dazzling Daevanion Plate Bundle -->
+		<items>
+			<item id="110601551" /><!-- Dazzling Daevanion Breastplate -->
+			<item id="113601497" /><!-- Dazzling Daevanion Greaves -->
+			<item id="114601504" /><!-- Dazzling Daevanion Sabatons -->
+			<item id="112601496" /><!-- Dazzling Daevanion Shoulderplates -->
+			<item id="111601514" /><!-- Dazzling Daevanion Gauntlets -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188053073"><!-- Dazzling Daevanion Plate Bundle -->
+		<items>
+			<item id="110601552" /><!-- Dazzling Daevanion Breastplate -->
+			<item id="113601498" /><!-- Dazzling Daevanion Greaves -->
+			<item id="114601505" /><!-- Dazzling Daevanion Sabatons -->
+			<item id="112601497" /><!-- Dazzling Daevanion Shoulderplates -->
+			<item id="111601515" /><!-- Dazzling Daevanion Gauntlets -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188053074"><!-- Dazzling Daevanion Leather Bundle -->
+		<items>
+			<item id="110301755" /><!-- Dazzling Daevanion Jerkin -->
+			<item id="113301724" /><!-- Dazzling Daevanion Breeches -->
+			<item id="114301761" /><!-- Dazzling Daevanion Boots -->
+			<item id="112301632" /><!-- Dazzling Daevanion Shoulderguards -->
+			<item id="111301693" /><!-- Dazzling Daevanion Vambrace -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188053075"><!-- Dazzling Daevanion Leather Bundle -->
+		<items>
+			<item id="110301756" /><!-- Dazzling Daevanion Jerkin -->
+			<item id="113301725" /><!-- Dazzling Daevanion Breeches -->
+			<item id="114301762" /><!-- Dazzling Daevanion Boots -->
+			<item id="112301633" /><!-- Dazzling Daevanion Shoulderguards -->
+			<item id="111301694" /><!-- Dazzling Daevanion Vambrace -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188053076"><!-- Dazzling Daevanion Magic Leather Bundle -->
+		<items>
+			<item id="110301753" /><!-- Dazzling Daevanion Mystic Jerkin -->
+			<item id="113301722" /><!-- Dazzling Daevanion Mystic Breeches -->
+			<item id="114301759" /><!-- Dazzling Daevanion Mystic Boots -->
+			<item id="112301630" /><!-- Dazzling Daevanion Mystic Shoulderguards -->
+			<item id="111301691" /><!-- Dazzling Daevanion Mystic Vambrace -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188053077"><!-- Dazzling Daevanion Magic Leather Bundle -->
+		<items>
+			<item id="110301754" /><!-- Dazzling Daevanion Mystic Jerkin -->
+			<item id="113301723" /><!-- Dazzling Daevanion Mystic Breeches -->
+			<item id="114301760" /><!-- Dazzling Daevanion Mystic Boots -->
+			<item id="112301631" /><!-- Dazzling Daevanion Mystic Shoulderguards -->
+			<item id="111301692" /><!-- Dazzling Daevanion Mystic Vambrace -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188053078"><!-- Dazzling Daevanion Cloth Bundle -->
+		<items>
+			<item id="110101756" /><!-- Dazzling Daevanion Tunic -->
+			<item id="113101593" /><!-- Dazzling Daevanion Leggings -->
+			<item id="114101627" /><!-- Dazzling Daevanion Shoes -->
+			<item id="112101531" /><!-- Dazzling Daevanion Pauldrons -->
+			<item id="111101581" /><!-- Dazzling Daevanion Gloves -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188053079"><!-- Dazzling Daevanion Cloth Bundle -->
+		<items>
+			<item id="110101757" /><!-- Dazzling Daevanion Tunic -->
+			<item id="113101594" /><!-- Dazzling Daevanion Leggings -->
+			<item id="114101628" /><!-- Dazzling Daevanion Shoes -->
+			<item id="112101532" /><!-- Dazzling Daevanion Pauldrons -->
+			<item id="111101582" /><!-- Dazzling Daevanion Gloves -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188053080" /><!-- Test Low Grade Manastone Bundle -->
 	<decomposable item_id="188053081" /><!-- Test Middle Grade Manastone Bundle -->
 	<decomposable item_id="188053082" /><!-- Test High Grade Manastone Bundle -->
@@ -27570,22 +27959,22 @@
 	</decomposable>
 	<decomposable item_id="188053091"><!-- Modor's Curiosity Box -->
 		<items chance="50.0">
-			<item id="188053628"/> <!-- Pallasite Bundle -->
-			<item id="188052388"/> <!-- Modor's Equipment Box -->
+			<item id="188053628" /> <!-- Pallasite Bundle -->
+			<item id="188052388" /> <!-- Modor's Equipment Box -->
 		</items>
 		<items chance="30.0">
-			<item id="125004076" player_classes="TEMPLAR"/> <!-- Pure Lunatic Modor's Templar Helm -->
-			<item id="125004077" player_classes="GLADIATOR"/> <!-- Pure Lunatic Modor's Gladiator Helm" -->
-			<item id="125004078" player_classes="CHANTER"/> <!-- Pure Lunatic Modor's Chanter Chain Helm -->
-			<item id="125004079" player_classes="CLERIC"/> <!-- Pure Lunatic Modor's Cleric Chain Helm -->
-			<item id="125004080" player_classes="RIDER"/> <!-- Pure Lunatic Modor's Aethertech Chain Helm -->
-			<item id="125004081" player_classes="ASSASSIN RANGER"/> <!-- Pure Lunatic Modor's Hat -->
-			<item id="125004082" player_classes="GUNNER"/> <!-- Pure Lunatic Modor's Gunslinger Headpiece -->
-			<item id="125004083" player_classes="SORCERER SPIRIT_MASTER"/> <!-- Pure Lunatic Modor's Hat -->
-			<item id="125004084" player_classes="BARD"/> <!-- Pure Lunatic Modor's Songweaver Headband -->
+			<item id="125004076" player_classes="TEMPLAR" /> <!-- Pure Lunatic Modor's Templar Helm -->
+			<item id="125004077" player_classes="GLADIATOR" /> <!-- Pure Lunatic Modor's Gladiator Helm" -->
+			<item id="125004078" player_classes="CHANTER" /> <!-- Pure Lunatic Modor's Chanter Chain Helm -->
+			<item id="125004079" player_classes="CLERIC" /> <!-- Pure Lunatic Modor's Cleric Chain Helm -->
+			<item id="125004080" player_classes="RIDER" /> <!-- Pure Lunatic Modor's Aethertech Chain Helm -->
+			<item id="125004081" player_classes="ASSASSIN RANGER" /> <!-- Pure Lunatic Modor's Hat -->
+			<item id="125004082" player_classes="GUNNER" /> <!-- Pure Lunatic Modor's Gunslinger Headpiece -->
+			<item id="125004083" player_classes="SORCERER SPIRIT_MASTER" /> <!-- Pure Lunatic Modor's Hat -->
+			<item id="125004084" player_classes="BARD" /> <!-- Pure Lunatic Modor's Songweaver Headband -->
 		</items>
 		<items chance="20.0">
-			<item id="188053099"/> <!-- Pure Modor's Equipment Crux Box -->
+			<item id="188053099" /> <!-- Pure Modor's Equipment Crux Box -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188053092"><!-- Danuar Reliquary Expedition's Artifacts -->
@@ -27980,13 +28369,13 @@
 		</items>
 	</decomposable>
 	<decomposable item_id="188053109"><!-- Ahserion's Equipment Box -->
-		<items>
+		<items chance="10">
 			<item id="188053106" /><!-- Ahserion's Weapon Box -->
 		</items>
-		<items>
+		<items chance="50">
 			<item id="188053107" /><!-- Ahserion's Armor Box -->
 		</items>
-		<items>
+		<items chance="40">
 			<item id="188053108" /><!-- Ahserion's Accessory Box -->
 		</items>
 	</decomposable>
@@ -28254,17 +28643,17 @@
 			<item id="100501187" player_classes="SPIRIT_MASTER" /><!-- Lunatic Modor's Orb -->
 		</items>
 		<items>
-			<item id="101301135" player_classes="GLADIATOR"  /><!-- Lunatic Modor's Polearm -->
-			<item id="100201355" player_classes="RANGER"  /><!-- Lunatic Modor's Dagger -->
-			<item id="102100820" player_classes="RIDER"  /><!-- Lunatic Modor's Cipher-Blade -->
-			<item id="100901207" player_classes="TEMPLAR"  /><!-- Lunatic Modor's Greatsword -->
-			<item id="101501232" player_classes="CLERIC"  /><!-- Lunatic Modor's Cane -->
-			<item id="101501217" player_classes="CHANTER"  /><!-- Lunatic Modor's Staff -->
-			<item id="100201355" player_classes="ASSASSIN"  /><!-- Lunatic Modor's Dagger -->
-			<item id="102001044" player_classes="BARD"  /><!-- Lunatic Modor's Harp -->
-			<item id="101801018" player_classes="GUNNER"  /><!-- Lunatic Modor's Pistol -->
-			<item id="100501187" player_classes="SORCERER"  /><!-- Lunatic Modor's Orb -->
-			<item id="100601276" player_classes="SPIRIT_MASTER"  /><!-- Lunatic Modor's Spellbook -->
+			<item id="101301135" player_classes="GLADIATOR" /><!-- Lunatic Modor's Polearm -->
+			<item id="100201355" player_classes="RANGER" /><!-- Lunatic Modor's Dagger -->
+			<item id="102100820" player_classes="RIDER" /><!-- Lunatic Modor's Cipher-Blade -->
+			<item id="100901207" player_classes="TEMPLAR" /><!-- Lunatic Modor's Greatsword -->
+			<item id="101501232" player_classes="CLERIC" /><!-- Lunatic Modor's Cane -->
+			<item id="101501217" player_classes="CHANTER" /><!-- Lunatic Modor's Staff -->
+			<item id="100201355" player_classes="ASSASSIN" /><!-- Lunatic Modor's Dagger -->
+			<item id="102001044" player_classes="BARD" /><!-- Lunatic Modor's Harp -->
+			<item id="101801018" player_classes="GUNNER" /><!-- Lunatic Modor's Pistol -->
+			<item id="100501187" player_classes="SORCERER" /><!-- Lunatic Modor's Orb -->
+			<item id="100601276" player_classes="SPIRIT_MASTER" /><!-- Lunatic Modor's Spellbook -->
 		</items>
 		<items>
 			<item id="101701237" player_classes="GLADIATOR" /><!-- Lunatic Modor's Bow -->
@@ -29255,17 +29644,17 @@
 		<items chance="0.125">
 			<item id="188053618" /><!-- Honorable Elim's Idian Bundle -->
 		</items>
-		<items chance="6.5">
-			<item id="166500002" min_count="3" /><!-- Amplification Stone -->
+		<items chance="5.5">
+			<item id="166500002" min_count="5" /><!-- Amplification Stone -->
 		</items>
-		<items chance="6.5">
-			<item id="166020000" min_count="3" /><!-- Omega Enchantment Stone -->
+		<items chance="5.5">
+			<item id="166020000" min_count="5" /><!-- Omega Enchantment Stone -->
 		</items>
 		<items chance="2.5">
 			<item id="188053610" min_count="3" /><!-- [Event] Level 70 Composite Manastone Bundle -->
 		</items>
-		<items chance="0.1">
-			<item id="188052075" /><!-- [Event] Tahabata Weapon Box -->
+		<items chance="2">
+			<item id="188052827" /><!-- Dynatoum's Equipment Chest -->
 		</items>
 		<items chance="1">
 			<item id="166200010" /><!-- Mythic Armor Tuning Scroll -->
@@ -29273,11 +29662,8 @@
 		<items chance="1">
 			<item id="166200009" /><!-- Mythic Weapon Tuning Scroll -->
 		</items>
-		<items chance="0.1">
-			<item id="190100139" /><!-- Sleek Hovercycle -->
-		</items>
-		<items chance="0.05">
-			<item id="187060177" /><!-- Aether Glider -->
+		<items chance="0.35">
+			<item id="188053206" /><!-- [Event] Stormwing's Eternal Armor Chest -->
 		</items>
 		<items chance="0.025">
 			<item id="165020015" /><!-- Armor Wrapping Scroll (Eternal/Lv. 65 and lower) -->
@@ -29468,46 +29854,45 @@
 	<decomposable item_id="188053211" /><!-- [Event] Sauro Commander's Weapon Box -->
 	<decomposable item_id="188053212"><!-- [Event] Dragon Lord's Mythic Weapon Chest -->
 		<items>
-			<item id="115001475" /><!-- Dragon Lord's Agony -->
+			<item id="100501092" player_classes="SORCERER SPIRIT_MASTER" /><!-- Dragon Lord's Arrogance (Orb) -->
+			<item id="100001407" player_classes="ASSASSIN RANGER" /><!-- Dragon Lord's Wrath (Sword) -->
+			<item id="100101104" player_classes="CLERIC CHANTER" /><!-- Dragon Lord's Delight (Mace) -->
+			<item id="100001407" player_classes="TEMPLAR GLADIATOR" /><!-- Dragon Lord's Wrath (Sword) -->
+			<item id="102000882" player_classes="BARD" /><!-- Dragon Lord's Passion (Harp) -->
+			<item id="101800850" player_classes="GUNNER" /><!-- Dragon Lord's Resolve (Pistol) -->
+			<item id="102100742" player_classes="RIDER" /><!-- Dragon Lord's Passage (Cipher-Blade) -->
 		</items>
 		<items>
-			<item id="100501092" /><!-- Dragon Lord's Arrogance -->
+			<item id="100501092" player_classes="SORCERER SPIRIT_MASTER" /><!-- Dragon Lord's Arrogance (Orb) -->
+			<item id="100201246" player_classes="ASSASSIN RANGER" /><!-- Dragon Lord's Murderous Intent (Dagger) -->
+			<item id="100101104" player_classes="CLERIC" /><!-- Dragon Lord's Delight (Mace) -->
+			<item id="101501118" player_classes="CHANTER"/><!-- Dragon Lord's Pride (Staff) -->
+			<item id="100001407" player_classes="TEMPLAR" /><!-- Dragon Lord's Wrath (Sword) -->
+			<item id="100201246" player_classes="GLADIATOR" /><!-- Dragon Lord's Murderous Intent (Dagger) -->
+			<item id="102000882" player_classes="BARD" /><!-- Dragon Lord's Passion (Harp) -->
+			<item id="101800850" player_classes="GUNNER" /><!-- Dragon Lord's Resolve (Pistol) -->
+			<item id="102100742" player_classes="RIDER" /><!-- Dragon Lord's Passage (Cipher-Blade) -->
 		</items>
 		<items>
-			<item id="101900848" /><!-- Dragon Lord's Courage -->
+			<item id="100601148" player_classes="SORCERER SPIRIT_MASTER" /><!-- Dragon Lord's Distrust (Spellbook) -->
+			<item id="100201246" player_classes="ASSASSIN" /><!-- Dragon Lord's Murderous Intent (Dagger) -->
+			<item id="101701129" player_classes="RANGER"/><!-- Dragon Lord's Envy (Bow) -->
+			<item id="100101104" player_classes="CLERIC" /><!-- Dragon Lord's Delight (Mace) -->
+			<item id="101501118" player_classes="CHANTER"/><!-- Dragon Lord's Pride (Staff) -->
+			<item id="100901100" player_classes="TEMPLAR GLADIATOR" /><!-- Dragon Lord's Hatred (Greatsword) -->
+			<item id="102000882" player_classes="BARD" /><!-- Dragon Lord's Passion (Harp) -->
+			<item id="101900848" player_classes="GUNNER" /><!-- Dragon Lord's Courage (Cannon) -->
+			<item id="102100742" player_classes="RIDER" /><!-- Dragon Lord's Passage (Cipher-Blade) -->
 		</items>
 		<items>
-			<item id="100101104" /><!-- Dragon Lord's Delight -->
-		</items>
-		<items>
-			<item id="100601148" /><!-- Dragon Lord's Distrust -->
-		</items>
-		<items>
-			<item id="101701129" /><!-- Dragon Lord's Envy -->
-		</items>
-		<items>
-			<item id="101301037" /><!-- Dragon Lord's Greed -->
-		</items>
-		<items>
-			<item id="100901100" /><!-- Dragon Lord's Hatred -->
-		</items>
-		<items>
-			<item id="102100742" /><!-- Dragon Lord's Passage -->
-		</items>
-		<items>
-			<item id="102000882" /><!-- Dragon Lord's Passion -->
-		</items>
-		<items>
-			<item id="101501118" /><!-- Dragon Lord's Pride -->
-		</items>
-		<items>
-			<item id="101800850" /><!-- Dragon Lord's Resolve -->
-		</items>
-		<items>
-			<item id="115001459" /><!-- Dragon Lord's Sigh -->
-		</items>
-		<items>
-			<item id="100001407" /><!-- Dragon Lord's Wrath -->
+			<item id="100601148" player_classes="SORCERER SPIRIT_MASTER" /><!-- Dragon Lord's Distrust (Spellbook) -->
+			<item id="101701129" player_classes="ASSASSIN RANGER" /><!-- Dragon Lord's Envy (Bow) -->
+			<item id="101501118" player_classes="CLERIC CHANTER" /><!-- Dragon Lord's Pride (Staff) -->
+			<item id="100901100" player_classes="TEMPLAR" /><!-- Dragon Lord's Hatred (Greatsword) -->
+			<item id="101301037" player_classes="GLADIATOR" /><!-- Dragon Lord's Greed (Polearm) -->
+			<item id="102000882" player_classes="BARD" /><!-- Dragon Lord's Passion (Harp) -->
+			<item id="101900848" player_classes="GUNNER" /><!-- Dragon Lord's Courage (Cannon) -->
+			<item id="101800850" player_classes="RIDER" /><!-- Dragon Lord's Resolve (Pistol) -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188053213" /><!-- [Event] Remodeled Danuar Weapon Chest -->
@@ -31534,7 +31919,71 @@
 		</items>
 	</decomposable>
 	<decomposable item_id="188053541" /><!-- [Event] Fragrant Fruit Box -->
-	<decomposable item_id="188053542" /><!-- [Event] Hirinerk's Gift -->
+	<decomposable item_id="188053542"><!-- [Event] Hirinerk's Gift -->
+		<items chance="13.75">
+			<item id="162000124" min_count="15" /><!-- Superior Recovery Serum -->
+		</items>
+		<items chance="9.5">
+			<item id="186000237" min_count="40" /><!-- Ancient Coin -->
+		</items>
+		<items chance="13.75">
+			<item id="186000238" min_count="50" /><!-- Conqueror's Mark -->
+		</items>
+		<items chance="12.5">
+			<item id="188053453" min_count="3" /><!-- [Event] Scroll Bundle -->
+		</items>
+		<items chance="5.25">
+			<item id="162000141" min_count="5" /><!-- Sublime Wind Serum -->
+		</items>
+		<items chance="13.75">
+			<item id="162000107" min_count="3" /><!-- Saam King's Herbs -->
+		</items>
+		<items chance="1.25">
+			<item id="169620067" /><!-- AP Boost Charm II - 50% -->
+		</items>
+		<items chance="2.5">
+			<item id="188053624" min_count="5" /><!-- Return Scroll Bundle -->
+		</items>
+		<items chance="0.8">
+			<item id="164002238" /><!-- Instant Return Scroll -->
+		</items>
+		<items chance="2.5">
+			<item id="186000051" min_count="4" /><!-- Major Ancient Crown -->
+		</items>
+		<items chance="2.5">
+			<item id="188052914" min_count="3" /><!-- [Event] Dandy Form Candy Box -->
+		</items>
+		<items chance="3.25">
+			<item id="166030005" min_count="5" /><!-- Tempering Solution -->
+		</items>
+		<items chance="0.75">
+			<item id="188053295" /><!-- Empyrean Plume Chest -->
+		</items>
+		<items chance="0.125">
+			<item id="188053618" /><!-- Honorable Elim's Idian Bundle -->
+		</items>
+		<items chance="6.5">
+			<item id="166500002" min_count="3" /><!-- Amplification Stone -->
+		</items>
+		<items chance="6.5">
+			<item id="166020000" min_count="3" max_count="10" /><!-- Omega Enchantment Stone -->
+		</items>
+		<items chance="2.5">
+			<item id="188053610" min_count="3" /><!-- [Event] Level 70 Composite Manastone Bundle -->
+		</items>
+		<items chance="0.1">
+			<item id="188052075" /><!-- [Event] Tahabata Weapon Box -->
+		</items>
+		<items chance="1">
+			<item id="166200010" /><!-- Mythic Armor Tuning Scroll -->
+		</items>
+		<items chance="1">
+			<item id="166200009" /><!-- Mythic Weapon Tuning Scroll -->
+		</items>
+		<items chance="0.05">
+			<item id="165020015" /><!-- Armor Wrapping Scroll (Eternal/Lv. 65 and lower) -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188053543" /><!-- Shu-Ghost's Egg and Aether Cherry Box -->
 	<decomposable item_id="188053544" /><!-- Pinkybell's Egg and Aether Cherry Box -->
 	<decomposable item_id="188053545" /><!-- Royal Kitter's Egg and Aether Cherry Box -->
@@ -31808,28 +32257,28 @@
 	</decomposable>
 	<decomposable item_id="188053617"><!-- Noble Tidal Idian Bundle -->
 		<items>
-			<item id="166050023"/><!-- Noble Tidal Idian: Physical Attack -->
+			<item id="166050023" /><!-- Noble Tidal Idian: Physical Attack -->
 		</items>
 		<items>
-			<item id="166050024"/><!-- Noble Tidal Idian: Magical Attack -->
+			<item id="166050024" /><!-- Noble Tidal Idian: Magical Attack -->
 		</items>
 		<items>
-			<item id="166050025"/><!-- Noble Tidal Idian: Physical Defense -->
+			<item id="166050025" /><!-- Noble Tidal Idian: Physical Defense -->
 		</items>
 		<items>
-			<item id="166050026"/><!-- Noble Tidal Idian: Magical Defense -->
+			<item id="166050026" /><!-- Noble Tidal Idian: Magical Defense -->
 		</items>
 		<items>
-			<item id="166050027"/><!-- Noble Tidal Idian: Assistance -->
+			<item id="166050027" /><!-- Noble Tidal Idian: Assistance -->
 		</items>
 		<items>
-			<item id="166050028"/><!-- Noble Tidal Idian: Resistance -->
+			<item id="166050028" /><!-- Noble Tidal Idian: Resistance -->
 		</items>
 		<items>
-			<item id="166050029"/><!-- Noble Tidal Idian: Physical/Magical Attack -->
+			<item id="166050029" /><!-- Noble Tidal Idian: Physical/Magical Attack -->
 		</items>
 		<items>
-			<item id="166050030"/><!-- Noble Tidal Idian: Physical/Magical Defense -->
+			<item id="166050030" /><!-- Noble Tidal Idian: Physical/Magical Defense -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188053618"><!-- Honorable Elim's Idian Bundle -->
@@ -32162,21 +32611,126 @@
 	</decomposable>
 	<decomposable item_id="188053666"><!-- [Event] Ceramium Medal Box -->
 		<items>
-			<item id="186000242" max_count="3"/><!-- Ceramium Medal -->
+			<item id="186000242" max_count="3" /><!-- Ceramium Medal -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188053667"><!-- [Event] Mithril Medal Box -->
 		<items>
-			<item id="186000147" min_count="4"/><!-- Mithril Medal -->
+			<item id="186000147" min_count="4" /><!-- Mithril Medal -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188053668" /><!-- [Event] Sonatine's Friendship Box -->
 	<decomposable item_id="188053669" /><!-- [Event] Ascension Supply Box -->
 	<decomposable item_id="188053670" /><!-- [Event] Weapon Box of the Distorted Balaur Lord -->
-	<decomposable item_id="188053671" /><!-- [Event] Pallasite Material Box -->
-	<decomposable item_id="188053672" /><!-- [Event] Rainbow Gift -->
-	<decomposable item_id="188053673" /><!-- [Event] Coiled Gift -->
-	<decomposable item_id="188053674" /><!-- [Event] Chromatic Gift -->
+	<decomposable item_id="188053671"><!-- [Event] Pallasite Material Box -->
+		<items>
+			<item id="169405338" /><!-- Pallasite Ore -->
+		</items>
+		<items>
+			<item id="169405339" /><!-- Pallasite Crystal -->
+		</items>
+		<items>
+			<item id="169405340" /><!-- Pallasite Powder -->
+		</items>
+		<items>
+			<item id="169405341" /><!-- Pallasite Refined Water -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188053672" selectable="true"><!-- [Event] Rainbow Gift -->
+		<items>
+			<item id="110900490" /><!-- Revelers Spotted Snake Costume (1 day) -->
+			<item id="110900495" /><!-- Revelers Rainbow Snake Costume (1 day) -->
+			<item id="110900500" /><!-- Revelers Turquoise Snake Costume (1 day) -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188053673"><!-- [Event] Coiled Gift -->
+		<items>
+			<item id="188100257" /><!-- [Event] Blue Scale -->
+		</items>
+		<items>
+			<item id="188100258" /><!-- [Event] Yellow Scale -->
+		</items>
+		<items>
+			<item id="188100259" /><!-- [Event] Red Scale -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188053674"><!-- [Event] Chromatic Gift -->
+		<items chance="25">
+			<item id="186000409" min_count="5" max_count="15" /><!-- Daeva's Respite Coin -->
+		</items>
+		<items chance="20">
+			<item id="160010208" min_count="5" /><!-- [Event] Sweet Chocolate -->
+		</items>
+		<items chance="6">
+			<item id="169220002" /><!-- Dye: True White -->
+		</items>
+		<items chance="6">
+			<item id="169220003" /><!-- Dye: True Black -->
+		</items>
+		<items chance="6">
+			<item id="188051438" /><!-- Rainbow Dye Pack II -->
+		</items>
+		<items chance="5">
+			<item id="188052761" /><!-- [Event] Bonus Entry Scroll Bundle -->
+		</items>
+		<items chance="5">
+			<item id="188053783" /><!-- Stigma Sack -->
+		</items>
+		<items chance="5">
+			<item id="188052715" /><!-- [Event] Summoning Stone Letter -->
+		</items>
+		<items chance="5">
+			<item id="166030005" /><!-- Tempering Solution -->
+		</items>
+		<items chance="5">
+			<item id="188052741" /><!-- [Event] Brilliant Composite Manastone Bundle -->
+		</items>
+		<items chance="2.5">
+			<item id="188052740" /><!-- [Event] Brilliant Ancient Manastone Bundle -->
+		</items>
+		<items chance="2">
+			<item id="169620111" /><!-- [Event] Rapturous Gathering Boost -->
+		</items>
+		<items chance="2">
+			<item id="169620112" /><!-- [Event] Rapturous Crafting Boost -->
+		</items>
+		<items chance="1">
+			<item id="188053321" /><!-- [Event] Empyrean Plume Chest -->
+		</items>
+		<items chance="0.5">
+			<item id="110900441" /><!-- Spotted Snake Costume -->
+		</items>
+		<items chance="0.5">
+			<item id="110900442" /><!-- Rainbow Snake Costume -->
+		</items>
+		<items chance="0.5">
+			<item id="110900443" /><!-- Turquoise Snake Costume -->
+		</items>
+		<items chance="0.5">
+			<item id="171130013" /><!-- Rainbow Field Wallpaper -->
+		</items>
+		<items chance="0.5">
+			<item id="171130015" /><!-- Rainbow Sky Wallpaper -->
+		</items>
+		<items chance="0.5">
+			<item id="169405391" player_classes="GLADIATOR TEMPLAR ASSASSIN RANGER" /><!-- Upgraded Distorted Sword of the Fierce Battle Prototype -->
+			<item id="186000409" player_classes="SORCERER SPIRIT_MASTER CLERIC CHANTER RIDER GUNNER BARD" min_count="100" /><!-- Daeva's Respite Coin -->
+		</items>
+		<items chance="0.5">
+			<item id="169405392" player_classes="TEMPLAR CLERIC CHANTER" /><!-- Upgraded Distorted Mace of the Fierce Battle Prototype -->
+			<item id="169405393" player_classes="GLADIATOR ASSASSIN RANGER" /><!-- Upgraded Distorted Dagger of the Fierce Battle Prototype -->
+			<item id="186000409" player_classes="SORCERER SPIRIT_MASTER RIDER GUNNER BARD" min_count="100" /><!-- Daeva's Respite Coin -->
+		</items>
+		<items chance="0.5">
+			<item id="169405394" player_classes="GLADIATOR TEMPLAR" /><!-- Upgraded Distorted Greatsword of the Fierce Battle Prototype -->
+			<item id="186000409" player_classes="ASSASSIN RANGER SORCERER SPIRIT_MASTER CLERIC CHANTER RIDER GUNNER BARD" min_count="100" /><!-- Daeva's Respite Coin -->
+		</items>
+		<items chance="0.5">
+			<item id="169405395" player_classes="GLADIATOR" /><!-- Upgraded Distorted Polearm of the Fierce Battle Prototype -->
+			<item id="169405396" player_classes="CLERIC CHANTER" /><!-- Upgraded Distorted Staff of the Fierce Battle Prototype -->
+			<item id="186000409" player_classes="TEMPLAR ASSASSIN RANGER SORCERER SPIRIT_MASTER RIDER GUNNER BARD" min_count="100" /><!-- Daeva's Respite Coin -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188053675" /><!-- Blood Mark Box -->
 	<decomposable item_id="188053676" /><!-- Shining Blood Mark Box -->
 	<decomposable item_id="188053677" /><!-- [Event] Presto's Friendship Box -->
@@ -35419,15 +35973,15 @@
 		</items>
 		<items chance="3">
 			<item id="121001330" player_classes="TEMPLAR GLADIATOR ASSASSIN RANGER CHANTER" /><!-- Vanquisher's Flame Necklace -->
-			<item id="121001330" player_classes="SORCERER SPIRIT_MASTER CLERIC GUNNER BARD RIDER" /><!-- Vanquisher's Freezing Necklace -->
+			<item id="121001331" player_classes="SORCERER SPIRIT_MASTER CLERIC GUNNER BARD RIDER" /><!-- Vanquisher's Freezing Necklace -->
 		</items>
 		<items chance="3">
 			<item id="122001599" player_classes="TEMPLAR GLADIATOR ASSASSIN RANGER CHANTER" /><!-- Vanquisher's Flame Ring -->
-			<item id="122001599" player_classes="SORCERER SPIRIT_MASTER CLERIC GUNNER BARD RIDER" /><!-- Vanquisher's Freezing Ring -->
+			<item id="122001600" player_classes="SORCERER SPIRIT_MASTER CLERIC GUNNER BARD RIDER" /><!-- Vanquisher's Freezing Ring -->
 		</items>
 		<items chance="3">
 			<item id="123001359" player_classes="TEMPLAR GLADIATOR ASSASSIN RANGER CHANTER" /><!-- Vanquisher's Flame Belt -->
-			<item id="123001359" player_classes="SORCERER SPIRIT_MASTER CLERIC GUNNER BARD RIDER" /><!-- Vanquisher's Freezing Belt -->
+			<item id="123001360" player_classes="SORCERER SPIRIT_MASTER CLERIC GUNNER BARD RIDER" /><!-- Vanquisher's Freezing Belt -->
 		</items>
 		<items chance="3">
 			<item id="100001794" player_classes="GLADIATOR TEMPLAR ASSASSIN RANGER" /><!-- Conqueror's Honorable Sword -->
@@ -35585,24 +36139,24 @@
 	</decomposable>
 	<decomposable item_id="188053906"><!-- Kind Shugo Transformation Candy Box -->
 		<items>
-			<item id="160010103" race="ELYOS"/><!-- Kind Shugo Form Candy -->
-			<item id="160010104" race="ASMODIANS"/><!-- Kind Shugo Form Candy -->
+			<item id="160010103" race="ELYOS" /><!-- Kind Shugo Form Candy -->
+			<item id="160010104" race="ASMODIANS" /><!-- Kind Shugo Form Candy -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188053909"><!-- Large Ascension Water Box -->
 		<items>
-			<item id="166030005" min_count="5"/><!-- Tempering Solution -->
+			<item id="166030005" min_count="5" /><!-- Tempering Solution -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188053910"><!-- Multiple Option Tuning Scroll Box for Mythic Class - Weapon -->
 		<items>
-			<item id="166200013" min_count="5"/><!-- Enduring Mythic Weapon Tuning Scroll -->
+			<item id="166200013" min_count="5" /><!-- Enduring Mythic Weapon Tuning Scroll -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188053911"><!-- Steampunk Wings Box -->
 		<items>
-			<item id="187060174"/><!-- Metaspanner Steampunk Wings -->
-			<item id="187060175"/><!-- Blackgear Steampunk Wings -->
+			<item id="187060174" /><!-- Metaspanner Steampunk Wings -->
+			<item id="187060175" /><!-- Blackgear Steampunk Wings -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188053912" /><!-- Noble Enchantment Stone Bundle -->
@@ -35615,7 +36169,7 @@
 	</decomposable>
 	<decomposable item_id="188053916"><!-- Guestpetal Bundle -->
 		<items>
-			<item id="186000146"/><!-- Guestpetal -->
+			<item id="186000146" /><!-- Guestpetal -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188053917" /><!-- Gentle Shugo Enchantment Stone Box -->
@@ -35761,10 +36315,152 @@
 	</decomposable>
 	<decomposable item_id="188053953" /><!-- Special Legionnaire Armor Box -->
 	<decomposable item_id="188053954" /><!-- Legionnaire Armor Box -->
-	<decomposable item_id="188053955" /><!-- [Event] Ice Sculptor's Box -->
-	<decomposable item_id="188053956" /><!-- [Event] Talented Ice Sculptor's Box -->
-	<decomposable item_id="188053957" /><!-- [Event] Enheartened Ice Sculptor's Box -->
-	<decomposable item_id="188053958" /><!-- [Event] Soulful Ice Sculptor's Box -->
+	<decomposable item_id="188053955"><!-- [Event] Ice Sculptor's Box -->
+		<items chance="1.0">
+			<item id="169650003" /><!-- [Special] Plastic Surgery Ticket -->
+		</items>
+		<items chance="1.0">
+			<item id="188052073" /><!-- [Event] Ancient Spirit's Wing Box -->
+		</items>
+		<items chance="0.5">
+			<item id="188053005" /><!-- [Event] Hyperion's Wing Chest -->
+		</items>
+		<items chance="0.5">
+			<item id="188052319" /><!-- [Event] Dragon Lord's Wing Box -->
+		</items>
+		<items chance="1.0">
+			<item id="188054038" /><!-- Wave Song Armor Box -->
+		</items>
+		<items chance="1.0">
+			<item id="188054039" /><!-- Sea Feast Armor Box -->
+		</items>
+		<items chance="15.0">
+			<item id="188052632" /><!-- [Event] Superior Manastone Bundle -->
+		</items>
+		<items chance="20.0">
+			<item id="188053644" /><!-- [Event] Small Ancient Coin Bundle -->
+		</items>
+		<items chance="20.0">
+			<item id="188052693" /><!-- [Event] Saam King's Herbs Bundle -->
+		</items>
+		<items chance="20.0">
+			<item id="188052716" /><!-- [Event] Lucky Scroll Pouch -->
+		</items>
+		<items chance="20.0">
+			<item id="161000003" /><!-- Reviving Elemental Stone -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188053956"><!-- [Event] Talented Ice Sculptor's Box -->
+		<items chance="5.0">
+			<item id="188053784" /><!-- Stigma Bundle -->
+		</items>
+		<items chance="5.0">
+			<item id="188053206" /><!-- [Event] Stormwing's Eternal Armor Chest -->
+		</items>
+		<items chance="5.0">
+			<item id="188053208" /><!-- [Event] Tiamat Guard's Eternal Armor Chest -->
+		</items>
+		<items chance="1.0">
+			<item id="188053005" /><!-- [Event] Hyperion's Wing Chest -->
+		</items>
+		<items chance="1.0">
+			<item id="188052319" /><!-- [Event] Dragon Lord's Wing Box -->
+		</items>
+		<items chance="2.0">
+			<item id="188054038" /><!-- Wave Song Armor Box -->
+		</items>
+		<items chance="2.0">
+			<item id="188054039" /><!-- Sea Feast Armor Box -->
+		</items>
+		<items chance="15.0">
+			<item id="188053610" /><!-- [Event] Level 70 Composite Manastone Bundle -->
+		</items>
+		<items chance="5.0">
+			<item id="169200006" /><!-- Dye: True White -->
+		</items>
+		<items chance="5.0">
+			<item id="169200007" /><!-- Dye: True Black -->
+		</items>
+		<items chance="20.0">
+			<item id="188053663" /><!-- [Event] Blood Mark Box -->
+		</items>
+		<items chance="24.0">
+			<item id="188053644" /><!-- [Event] Small Ancient Coin Bundle -->
+		</items>
+		<items chance="10.0">
+			<item id="188052716" /><!-- [Event] Lucky Scroll Pouch -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188053957"><!-- [Event] Enheartened Ice Sculptor's Box -->
+		<items chance="2.0">
+			<item id="188053785" /><!-- Greater Stigma Bundle -->
+		</items>
+		<items chance="2.0">
+			<item id="188052559" /><!-- Assured Greater Felicitous Socketing Box (Eternal) -->
+		</items>
+		<items chance="2.0">
+			<item id="187060091" /><!-- Shining Light's Wings -->
+		</items>
+		<items chance="2.0">
+			<item id="187060094" /><!-- Splendid Light's Wings -->
+		</items>
+		<items chance="5.0">
+			<item id="188053295" /><!-- Empyrean Plume Chest -->
+		</items>
+		<items chance="10.0">
+			<item id="169405339" /><!-- Pallasite Crystal -->
+		</items>
+		<items chance="2.0">
+			<item id="188053005" /><!-- [Event] Hyperion's Wing Chest -->
+		</items>
+		<items chance="2.0">
+			<item id="188052319" /><!-- [Event] Dragon Lord's Wing Box -->
+		</items>
+		<items chance="4.0">
+			<item id="188054038" /><!-- Wave Song Armor Box -->
+		</items>
+		<items chance="4.0">
+			<item id="188054039" /><!-- Sea Feast Armor Box -->
+		</items>
+		<items chance="15.0">
+			<item id="188053663" min_count="3" /><!-- [Event] Blood Mark Box -->
+		</items>
+		<items chance="20.0">
+			<item id="188053663" min_count="2" /><!-- [Event] Blood Mark Box -->
+		</items>
+		<items chance="30.0">
+			<item id="188053663" /><!-- [Event] Blood Mark Box -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188053958"><!-- [Event] Soulful Ice Sculptor's Box -->
+		<items chance="1.0">
+			<item id="188053212" /><!-- [Event] Dragon Lord's Mythic Weapon Chest -->
+		</items>
+		<items chance="15.0">
+			<item id="166500002" /><!-- Amplification Stone -->
+		</items>
+		<items chance="10.0">
+			<item id="188051577" /><!-- Packaged Sharptooth -->
+		</items>
+		<items chance="15.0">
+			<item id="188052560" /><!-- Assured Greater Felicitous Socketing Box (Mythic) -->
+		</items>
+		<items chance="15.0">
+			<item id="188053786" /><!-- Major Stigma Bundle -->
+		</items>
+		<items chance="10.0">
+			<item id="188053005" /><!-- [Event] Hyperion's Wing Chest -->
+		</items>
+		<items chance="10.0">
+			<item id="188052319" /><!-- [Event] Dragon Lord's Wing Box -->
+		</items>
+		<items chance="12.0">
+			<item id="188054038" /><!-- Wave Song Armor Box -->
+		</items>
+		<items chance="12.0">
+			<item id="188054039" /><!-- Sea Feast Armor Box -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188053959"><!-- [Camping] Display Furniture Bag -->
 		<items>
 			<item id="170115027" /><!-- Camping Essentials -->
@@ -35928,15 +36624,24 @@
 	<decomposable item_id="188054011" /><!-- Lockbox Key Pouch -->
 	<decomposable item_id="188054013" selectable="true"><!-- [Event] Companion Box -->
 		<items>
-			<item id="184002082" race="ELYOS"/><!-- [Event] Elyos Group Companion Kisk Summoning Stone -->
-			<item id="184002083" race="ELYOS"/><!-- [Event] Elyos Force Companion Kisk Summoning Stone -->
-			<item id="184002084" race="ELYOS"/><!-- [Event] Elyos Legion Companion Kisk Summoning Stone -->
-			<item id="184002085" race="ASMODIANS"/><!-- [Event] Asmodian Group Companion Kisk Summoning Stone -->
-			<item id="184002086" race="ASMODIANS"/><!-- [Event] Asmodian Force Companion Kisk Summoning Stone -->
-			<item id="184002087" race="ASMODIANS"/><!-- [Event] Asmodian Legion Companion Kisk Summoning Stone -->
+			<item id="184002082" race="ELYOS" /><!-- [Event] Elyos Group Companion Kisk Summoning Stone -->
+			<item id="184002083" race="ELYOS" /><!-- [Event] Elyos Force Companion Kisk Summoning Stone -->
+			<item id="184002084" race="ELYOS" /><!-- [Event] Elyos Legion Companion Kisk Summoning Stone -->
+			<item id="184002085" race="ASMODIANS" /><!-- [Event] Asmodian Group Companion Kisk Summoning Stone -->
+			<item id="184002086" race="ASMODIANS" /><!-- [Event] Asmodian Force Companion Kisk Summoning Stone -->
+			<item id="184002087" race="ASMODIANS" /><!-- [Event] Asmodian Legion Companion Kisk Summoning Stone -->
 		</items>
 	</decomposable>
-	<decomposable item_id="188054014" /><!-- [Event] Lunahare Kisk Box -->
+	<decomposable item_id="188054014"><!-- [Event] Lunahare Kisk Box -->
+		<items>
+			<item id="184002098" race="ELYOS" /><!-- [Event] Group Lunahare Kisk Summoning Stone -->
+			<item id="184002100" race="ASMODIANS" /><!-- [Event] Group Lunahare Kisk Summoning Stone -->
+		</items>
+		<items>
+			<item id="184002099" race="ELYOS" /><!-- [Event] Alliance Lunahare Kisk Summoning Stone -->
+			<item id="184002101" race="ASMODIANS" /><!-- [Event] Alliance Lunahare Kisk Summoning Stone -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188054015" /><!-- Group Companion Kisk Box -->
 	<decomposable item_id="188054016" /><!-- Alliance Companion Kisk Box -->
 	<decomposable item_id="188054017" /><!-- Legion Companion Kisk Box -->
@@ -35992,25 +36697,22 @@
 		</items>
 	</decomposable>
 	<decomposable item_id="188054029"><!-- [Event] Blooming Gift -->
-		<items chance="2.5">
+		<items chance="3">
 			<item id="188053915" /><!-- [Event] Aether Bloom Bouquet -->
 		</items>
-		<items chance="2.5">
-			<item id="110900949" /><!-- Breezy Summer Outfit -->
+		<items chance="3">
+			<item id="190100115" /><!-- Lightning Steed -->
 		</items>
-		<items chance="2.5">
+		<items chance="3">
 			<item id="169600038" /><!-- [Emotion Card] Scatter Petals -->
 		</items>
-		<items chance="2.5">
-			<item id="188053903" /><!-- Honorable Equipment of Conquest Box -->
+		<items chance="3">
+			<item id="188054238" /><!-- Iron Wall Armor Box -->
 		</items>
-		<items chance="2.5">
-			<item id="188053033" /><!-- Kunax's Equipment Box -->
+		<items chance="3">
+			<item id="188053695" min_count="3" /><!-- High Grade Crafting Material Box of Conquest -->
 		</items>
-		<items chance="2.5">
-			<item id="168310018" /><!-- Major Blessed Augment: Level 2 -->
-		</items>
-		<items chance="10.0">
+		<items chance="10">
 			<item id="188053610" /><!-- [Event] Level 70 Composite Manastone Bundle -->
 		</items>
 		<items chance="12.5">
@@ -36101,10 +36803,178 @@
 			<item id="188054031" /><!-- [Club] Functional Furniture Bundle -->
 		</items>
 	</decomposable>
-	<decomposable item_id="188054036" /><!-- [Event] Frozen Ice Festival Box -->
-	<decomposable item_id="188054037" /><!-- [Event] Engraved Ice Festival Box -->
-	<decomposable item_id="188054038" /><!-- Wave Song Armor Box -->
-	<decomposable item_id="188054039" /><!-- Sea Feast Armor Box -->
+	<decomposable item_id="188054036"><!-- [Event] Frozen Ice Festival Box -->
+		<items>
+			<item id="188053212" /><!-- [Event] Dragon Lord's Mythic Weapon Chest -->
+			<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+		</items>
+		<items>
+			<item id="169650003" /><!-- [Special] Plastic Surgery Ticket -->
+			<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+		</items>
+		<items>
+			<item id="188052319" /><!-- [Event] Dragon Lord's Wing Box -->
+			<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+		</items>
+		<items>
+			<item id="166500002" /><!-- Amplification Stone -->
+			<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+		</items>
+		<items>
+			<item id="188052560" /><!-- Assured Greater Felicitous Socketing Box (Mythic) -->
+			<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+		</items>
+		<items>
+			<item id="188052559" /><!-- Assured Greater Felicitous Socketing Box (Eternal) -->
+			<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+		</items>
+		<items>
+			<item id="188052073" /><!-- [Event] Ancient Spirit's Wing Box -->
+			<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+		</items>
+		<items>
+			<item id="188053786" /><!-- Major Stigma Bundle -->
+			<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+		</items>
+		<items>
+			<item id="187060091" /><!-- Shining Light's Wings -->
+			<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+		</items>
+		<items>
+			<item id="187060094" /><!-- Splendid Light's Wings -->
+			<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+		</items>
+		<items>
+			<item id="188053785" /><!-- Greater Stigma Bundle -->
+			<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+		</items>
+		<items>
+			<item id="188054038" /><!-- Wave Song Armor Box -->
+			<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+		</items>
+		<items>
+			<item id="188054039" /><!-- Sea Feast Armor Box -->
+			<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+		</items>
+		<items>
+			<item id="188053206" /><!-- [Event] Stormwing's Eternal Armor Chest -->
+			<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+		</items>
+		<items>
+			<item id="188053784" /><!-- Stigma Bundle -->
+			<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+		</items>
+		<items>
+			<item id="188053208" /><!-- [Event] Tiamat Guard's Eternal Armor Chest -->
+			<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+		</items>
+		<items>
+			<item id="188053324" /><!-- Levinshor Alliance Noble Ancient Manastone Box -->
+			<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+		</items>
+		<items>
+			<item id="169405339" /><!-- Pallasite Crystal -->
+			<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+		</items>
+		<items>
+			<item id="188053295" /><!-- Empyrean Plume Chest -->
+			<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+		</items>
+		<items>
+			<item id="188052693" /><!-- [Event] Saam King's Herbs Bundle -->
+			<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+		</items>
+		<items>
+			<item id="188052716" /><!-- [Event] Lucky Scroll Pouch -->
+			<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+		</items>
+		<items>
+			<item id="188053663" /><!-- [Event] Blood Mark Box -->
+			<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+		</items>
+		<items>
+			<item id="188053644" /><!-- [Event] Small Ancient Coin Bundle -->
+			<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+		</items>
+		<items>
+			<item id="161000003" /><!-- Reviving Elemental Stone -->
+			<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188054037"><!-- [Event] Engraved Ice Festival Box -->
+		<items chance="1">
+			<item id="188053212" /><!-- [Event] Dragon Lord's Mythic Weapon Chest -->
+		</items>
+		<items chance="4">
+			<item id="188052560" /><!-- Greater Felicitous Socketing Box (Mythic) -->
+		</items>
+		<items chance="5">
+			<item id="188053663" min_count="3" /><!-- [Event] Blood Mark Box -->
+		</items>
+		<items chance="10">
+			<item id="188053663" /><!-- [Event] Blood Mark Box -->
+		</items>
+		<items chance="20">
+			<item id="166020000" min_count="3" /><!-- Omega Enchantment Stone -->
+		</items>
+		<items chance="20">
+			<item id="166030005" min_count="2" /><!-- Tempering Solution -->
+		</items>
+		<items chance="20">
+			<item id="166500002" min_count="3" /><!-- Amplification Stone -->
+		</items>
+		<items chance="20">
+			<item id="188053786" /><!-- Major Stigma Bundle -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188054038" selectable="true"><!-- Wave Song Armor Box -->
+		<items>
+			<item id="110101909" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Wave Song Tunic Skin -->
+			<item id="111101724" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Wave Song Gloves Skin -->
+			<item id="114101769" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Wave Song Shoes Skin -->
+			<item id="113101736" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Wave Song Leggings Skin -->
+			<item id="112101671" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Wave Song Pauldrons Skin -->
+			<item id="110301903" player_classes="ASSASSIN RANGER GUNNER" /><!-- Wave Song Jerkin Skin -->
+			<item id="111301841" player_classes="ASSASSIN RANGER GUNNER" /><!-- Wave Song Vambraces Skin -->
+			<item id="114301909" player_classes="ASSASSIN RANGER GUNNER" /><!-- Wave Song Boots Skin -->
+			<item id="113301873" player_classes="ASSASSIN RANGER GUNNER" /><!-- Wave Song Breeches Skin -->
+			<item id="112301780" player_classes="ASSASSIN RANGER GUNNER" /><!-- Wave Song Shoulderguards Skin -->
+			<item id="110551239" player_classes="CLERIC CHANTER RIDER" /><!-- Wave Song Hauberk Skin -->
+			<item id="111501798" player_classes="CLERIC CHANTER RIDER" /><!-- Wave Song Handguards Skin -->
+			<item id="114501826" player_classes="CLERIC CHANTER RIDER" /><!-- Wave Song Brogans Skin -->
+			<item id="113501818" player_classes="CLERIC CHANTER RIDER" /><!-- Wave Song Chausses Skin -->
+			<item id="112501735" player_classes="CLERIC CHANTER RIDER" /><!-- Wave Song Spaulders Skin -->
+			<item id="110601700" player_classes="GLADIATOR TEMPLAR" /><!-- Wave Song Breastplate Skin -->
+			<item id="111601663" player_classes="GLADIATOR TEMPLAR" /><!-- Wave Song Gauntlets Skin -->
+			<item id="114601653" player_classes="GLADIATOR TEMPLAR" /><!-- Wave Song Sabatons Skin -->
+			<item id="113601647" player_classes="GLADIATOR TEMPLAR" /><!-- Wave Song Greaves Skin -->
+			<item id="112601645" player_classes="GLADIATOR TEMPLAR" /><!-- Wave Song Shoulderplates Skin -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188054039" selectable="true"><!-- Sea Feast Armor Box -->
+		<items>
+			<item id="110101910" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Sea Feast Tunic Skin -->
+			<item id="111101725" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Sea Feast Gloves Skin -->
+			<item id="114101770" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Sea Feast Shoes Skin -->
+			<item id="113101737" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Sea Feast Leggings Skin -->
+			<item id="112101672" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Sea Feast Pauldrons Skin -->
+			<item id="110301904" player_classes="ASSASSIN RANGER GUNNER" /><!-- Sea Feast Jerkin Skin -->
+			<item id="111301842" player_classes="ASSASSIN RANGER GUNNER" /><!-- Sea Feast Vambraces Skin -->
+			<item id="114301910" player_classes="ASSASSIN RANGER GUNNER" /><!-- Sea Feast Boots Skin -->
+			<item id="113301874" player_classes="ASSASSIN RANGER GUNNER" /><!-- Sea Feast Breeches Skin -->
+			<item id="112301781" player_classes="ASSASSIN RANGER GUNNER" /><!-- Sea Feast Shoulderguards Skin -->
+			<item id="110551240" player_classes="CLERIC CHANTER RIDER" /><!-- Sea Feast Hauberk Skin -->
+			<item id="111501799" player_classes="CLERIC CHANTER RIDER" /><!-- Sea Feast Handguards Skin -->
+			<item id="114501827" player_classes="CLERIC CHANTER RIDER" /><!-- Sea Feast Brogans Skin -->
+			<item id="113501819" player_classes="CLERIC CHANTER RIDER" /><!-- Sea Feast Chausses Skin -->
+			<item id="112501736" player_classes="CLERIC CHANTER RIDER" /><!-- Sea Feast Spaulders Skin -->
+			<item id="110601701" player_classes="GLADIATOR TEMPLAR" /><!-- Sea Feast Breastplate Skin -->
+			<item id="111601664" player_classes="GLADIATOR TEMPLAR" /><!-- Sea Feast Gauntlets Skin -->
+			<item id="114601654" player_classes="GLADIATOR TEMPLAR" /><!-- Sea Feast Sabatons Skin -->
+			<item id="113601648" player_classes="GLADIATOR TEMPLAR" /><!-- Sea Feast Greaves Skin -->
+			<item id="112601646" player_classes="GLADIATOR TEMPLAR" /><!-- Sea Feast Shoulderplates Skin -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188054074" /><!-- Aion Member Daily Gift -->
 	<decomposable item_id="188054075" /><!-- [Black Star] Esoteric Document -->
 	<decomposable item_id="188054076" /><!-- [Blackstar] Manastone Bundle -->
@@ -36133,9 +37003,60 @@
 	<decomposable item_id="188054108" /><!-- Afterburner Bundle -->
 	<decomposable item_id="188054109" /><!-- Aether Cherry Bundle -->
 	<decomposable item_id="188054110" /><!-- Mega Coin Bundle -->
-	<decomposable item_id="188054111" /><!-- [Event] Ice Queen's Goods Box -->
-	<decomposable item_id="188054112" /><!-- Wave Song Armor Box -->
-	<decomposable item_id="188054113" /><!-- Sea Feast Armor Box -->
+	<decomposable item_id="188054111"><!-- [Event] Ice Queen's Goods Box -->
+		<items>
+			<item id="188054036" min_count="4" /><!-- [Event] Frozen Ice Festival Box -->
+			<item id="186000242" /><!-- Ceramium Medal -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188054112" selectable="true"><!-- Wave Song Armor Box -->
+		<items>
+			<item id="110101909" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Wave Song Tunic Skin -->
+			<item id="111101724" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Wave Song Gloves Skin -->
+			<item id="114101769" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Wave Song Shoes Skin -->
+			<item id="113101736" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Wave Song Leggings Skin -->
+			<item id="112101671" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Wave Song Pauldrons Skin -->
+			<item id="110301903" player_classes="ASSASSIN RANGER GUNNER" /><!-- Wave Song Jerkin Skin -->
+			<item id="111301841" player_classes="ASSASSIN RANGER GUNNER" /><!-- Wave Song Vambraces Skin -->
+			<item id="114301909" player_classes="ASSASSIN RANGER GUNNER" /><!-- Wave Song Boots Skin -->
+			<item id="113301873" player_classes="ASSASSIN RANGER GUNNER" /><!-- Wave Song Breeches Skin -->
+			<item id="112301780" player_classes="ASSASSIN RANGER GUNNER" /><!-- Wave Song Shoulderguards Skin -->
+			<item id="110551239" player_classes="CLERIC CHANTER RIDER" /><!-- Wave Song Hauberk Skin -->
+			<item id="111501798" player_classes="CLERIC CHANTER RIDER" /><!-- Wave Song Handguards Skin -->
+			<item id="114501826" player_classes="CLERIC CHANTER RIDER" /><!-- Wave Song Brogans Skin -->
+			<item id="113501818" player_classes="CLERIC CHANTER RIDER" /><!-- Wave Song Chausses Skin -->
+			<item id="112501735" player_classes="CLERIC CHANTER RIDER" /><!-- Wave Song Spaulders Skin -->
+			<item id="110601700" player_classes="GLADIATOR TEMPLAR" /><!-- Wave Song Breastplate Skin -->
+			<item id="111601663" player_classes="GLADIATOR TEMPLAR" /><!-- Wave Song Gauntlets Skin -->
+			<item id="114601653" player_classes="GLADIATOR TEMPLAR" /><!-- Wave Song Sabatons Skin -->
+			<item id="113601647" player_classes="GLADIATOR TEMPLAR" /><!-- Wave Song Greaves Skin -->
+			<item id="112601645" player_classes="GLADIATOR TEMPLAR" /><!-- Wave Song Shoulderplates Skin -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188054113" selectable="true"><!-- Sea Feast Armor Box -->
+		<items>
+			<item id="110101910" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Sea Feast Tunic Skin -->
+			<item id="111101725" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Sea Feast Gloves Skin -->
+			<item id="114101770" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Sea Feast Shoes Skin -->
+			<item id="113101737" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Sea Feast Leggings Skin -->
+			<item id="112101672" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Sea Feast Pauldrons Skin -->
+			<item id="110301904" player_classes="ASSASSIN RANGER GUNNER" /><!-- Sea Feast Jerkin Skin -->
+			<item id="111301842" player_classes="ASSASSIN RANGER GUNNER" /><!-- Sea Feast Vambraces Skin -->
+			<item id="114301910" player_classes="ASSASSIN RANGER GUNNER" /><!-- Sea Feast Boots Skin -->
+			<item id="113301874" player_classes="ASSASSIN RANGER GUNNER" /><!-- Sea Feast Breeches Skin -->
+			<item id="112301781" player_classes="ASSASSIN RANGER GUNNER" /><!-- Sea Feast Shoulderguards Skin -->
+			<item id="110551240" player_classes="CLERIC CHANTER RIDER" /><!-- Sea Feast Hauberk Skin -->
+			<item id="111501799" player_classes="CLERIC CHANTER RIDER" /><!-- Sea Feast Handguards Skin -->
+			<item id="114501827" player_classes="CLERIC CHANTER RIDER" /><!-- Sea Feast Brogans Skin -->
+			<item id="113501819" player_classes="CLERIC CHANTER RIDER" /><!-- Sea Feast Chausses Skin -->
+			<item id="112501736" player_classes="CLERIC CHANTER RIDER" /><!-- Sea Feast Spaulders Skin -->
+			<item id="110601701" player_classes="GLADIATOR TEMPLAR" /><!-- Sea Feast Breastplate Skin -->
+			<item id="111601664" player_classes="GLADIATOR TEMPLAR" /><!-- Sea Feast Gauntlets Skin -->
+			<item id="114601654" player_classes="GLADIATOR TEMPLAR" /><!-- Sea Feast Sabatons Skin -->
+			<item id="113601648" player_classes="GLADIATOR TEMPLAR" /><!-- Sea Feast Greaves Skin -->
+			<item id="112601646" player_classes="GLADIATOR TEMPLAR" /><!-- Sea Feast Shoulderplates Skin -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188054169" /><!-- Lucky Gift Box -->
 	<decomposable item_id="188054170" /><!-- Lucky Happiness Box -->
 	<decomposable item_id="188054171" /><!-- Lucky Mysterious Box -->
@@ -36143,11 +37064,11 @@
 	<decomposable item_id="188054197" /><!-- Enhanced Hyperion's Weapon Box -->
 	<decomposable item_id="188054198" selectable="true"><!-- Greater Scroll Bundle -->
 		<items>
-			<item id="164002116" min_count="25"/><!-- [Event] Rx: Accelerox -->
-			<item id="164002117" min_count="25"/><!-- [Event] Rx: Blitzopan -->
-			<item id="164002118" min_count="25"/><!-- [Event] Rx: Castafodin -->
-			<item id="164002119" min_count="25"/><!-- [Event] Rx: Critozyne -->
-			<item id="164002120" min_count="25"/><!-- [Event] Rx: Mojocycline -->
+			<item id="164002116" min_count="25" /><!-- [Event] Rx: Accelerox -->
+			<item id="164002117" min_count="25" /><!-- [Event] Rx: Blitzopan -->
+			<item id="164002118" min_count="25" /><!-- [Event] Rx: Castafodin -->
+			<item id="164002119" min_count="25" /><!-- [Event] Rx: Critozyne -->
+			<item id="164002120" min_count="25" /><!-- [Event] Rx: Mojocycline -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188054237" /><!-- Iron Wall Weapon Box -->
@@ -36163,7 +37084,7 @@
 	<decomposable item_id="188054240"><!-- Iron Wall Cloth Armor Box -->
 		<items>
 			<item id="110101686" player_classes="SORCERER SPIRIT_MASTER ASSASSIN RANGER GUNNER GLADIATOR TEMPLAR RIDER"/><!-- Bastion Defender Firm Tunic -->
-			<item id="110101688" player_classes="BARD CLERIC CHANTER"/><!-- Bastion Protector Firm Tunic -->
+			<item id="110101688" player_classes="BARD CLERIC CHANTER" /><!-- Bastion Protector Firm Tunic -->
 		</items>
 		<items>
 			<item id="111101518" player_classes="SORCERER SPIRIT_MASTER ASSASSIN RANGER GUNNER GLADIATOR TEMPLAR RIDER" /><!-- Bastion Defender Firm Gloves -->

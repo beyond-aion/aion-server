@@ -231,33 +231,6 @@ public class LegionConfig {
 	@Property(key = "gameserver.legion.inviteotherfaction", defaultValue = "false")
 	public static boolean LEGION_INVITEOTHERFACTION;
 
-	/**
-	 * LWH slots
-	 */
-	@Property(key = "gameserver.legion.warehouse.level1.slots", defaultValue = "24")
-	public static int LWH_LEVEL1_SLOTS;
-
-	@Property(key = "gameserver.legion.warehouse.level2.slots", defaultValue = "32")
-	public static int LWH_LEVEL2_SLOTS;
-
-	@Property(key = "gameserver.legion.warehouse.level3.slots", defaultValue = "40")
-	public static int LWH_LEVEL3_SLOTS;
-
-	@Property(key = "gameserver.legion.warehouse.level4.slots", defaultValue = "48")
-	public static int LWH_LEVEL4_SLOTS;
-
-	@Property(key = "gameserver.legion.warehouse.level5.slots", defaultValue = "56")
-	public static int LWH_LEVEL5_SLOTS;
-
-	@Property(key = "gameserver.legion.warehouse.level6.slots", defaultValue = "64")
-	public static int LWH_LEVEL6_SLOTS;
-
-	@Property(key = "gameserver.legion.warehouse.level7.slots", defaultValue = "72")
-	public static int LWH_LEVEL7_SLOTS;
-
-	@Property(key = "gameserver.legion.warehouse.level8.slots", defaultValue = "80")
-	public static int LWH_LEVEL8_SLOTS;
-
 	@Property(key = "gameserver.legion.task.requirement.enable", defaultValue = "true")
 	public static boolean ENABLE_GUILD_TASK_REQ;
 

@@ -3,7 +3,6 @@ package com.aionemu.commons.configuration.transformers;
 import java.lang.reflect.Modifier;
 import java.util.*;
 
-import com.aionemu.commons.configuration.PropertyTransformerFactory;
 import com.aionemu.commons.configuration.TransformationTypeInfo;
 
 /**
@@ -22,7 +21,10 @@ import com.aionemu.commons.configuration.TransformationTypeInfo;
  */
 public class CollectionTransformer extends CommaSeparatedValueTransformer<Collection<?>> {
 
-	public static final CollectionTransformer SHARED_INSTANCE = new CollectionTransformer();
+	@Override
+	public boolean matches(Class<?> targetType) {
+		return Collection.class.isAssignableFrom(targetType);
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -43,7 +45,7 @@ public class CollectionTransformer extends CommaSeparatedValueTransformer<Collec
 
 		if (!values.isEmpty()) {
 			TransformationTypeInfo innerType = typeInfo.getGenericType(0);
-			PropertyTransformer<?> pt = PropertyTransformerFactory.getTransformer(innerType.getType());
+			PropertyTransformer<?> pt = PropertyTransformers.get(innerType.getType());
 			for (String val : values)
 				collection.add(pt.transform(val, innerType));
 		}

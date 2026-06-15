@@ -27,7 +27,6 @@ public class _14046PiecingTheMemory extends AbstractQuestHandler {
 		qe.registerOnQuestCompleted(questId);
 		qe.registerOnLevelChanged(questId);
 		qe.registerOnEnterWorld(questId);
-		qe.registerOnMovieEndQuest(170, questId);
 		for (int npc_id : npc_ids)
 			qe.registerQuestNpc(npc_id).addOnTalkEvent(questId);
 	}
@@ -144,13 +143,11 @@ public class _14046PiecingTheMemory extends AbstractQuestHandler {
 	}
 
 	@Override
-	public boolean onMovieEndEvent(QuestEnv env, int movieId) {
-		TeleportService.teleportTo(env.getPlayer(), 110010000, 2014f, 1493f, 581.1387f, (byte) 92, TeleportAnimation.FADE_OUT_BEAM);
-		final QuestState qs = env.getPlayer().getQuestStateList().getQuestState(questId);
-		if (qs == null || qs.getStatus() != QuestStatus.START)
-			return false;
-		changeQuestStep(env, 4, 5);
-		return true;
+	public void onMovieEndEvent(QuestEnv env, int movieId) {
+		if (movieId == 170) {
+			changeQuestStep(env, 4, 5);
+			TeleportService.teleportTo(env.getPlayer(), 110010000, 2014f, 1493f, 581.1387f, (byte) 92, TeleportAnimation.FADE_OUT_BEAM);
+		}
 	}
 
 }

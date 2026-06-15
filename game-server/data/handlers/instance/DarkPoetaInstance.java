@@ -16,7 +16,6 @@ import com.aionemu.gameserver.model.instance.InstanceProgressionType;
 import com.aionemu.gameserver.model.instance.instancescore.DarkPoetaScore;
 import com.aionemu.gameserver.model.team.TemporaryPlayerTeam;
 import com.aionemu.gameserver.network.aion.instanceinfo.DarkPoetaScoreWriter;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_SCORE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.teleport.TeleportService;
@@ -283,12 +282,6 @@ public class DarkPoetaInstance extends GeneralInstanceHandler {
 	public void onGather(Player player, Gatherable gatherable) {
 		instanceReward.addGather();
 		sendPacket(null, 1);
-	}
-
-	@Override
-	public boolean onDie(final Player player, Creature lastAttacker) {
-		PacketSendUtility.sendPacket(player, new SM_DIE(player, 8));
-		return true;
 	}
 
 	@Override

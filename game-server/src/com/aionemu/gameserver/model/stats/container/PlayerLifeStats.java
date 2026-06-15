@@ -1,10 +1,9 @@
 package com.aionemu.gameserver.model.stats.container;
 
 import java.util.concurrent.Future;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.locks.ReentrantLock;
 
 import com.aionemu.gameserver.configs.administration.AdminConfig;
+import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.zone.ZoneType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
@@ -21,9 +20,9 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class PlayerLifeStats extends CreatureLifeStats<Player> {
 
-	private final ReentrantLock fpLock = new ReentrantLock();
-	private AtomicInteger flightReducePeriod = new AtomicInteger(2);
-	private AtomicInteger flightReduceValue = new AtomicInteger(1);
+	private final Object fpLock = new Object();
+	private int flightReducePeriod = 2;
+	private int flightReduceValue = 1;
 	private int currentFp;
 	private Future<?> flyRestoreTask;
 	private Future<?> flyReduceTask;
@@ -34,44 +33,34 @@ public class PlayerLifeStats extends CreatureLifeStats<Player> {
 	}
 
 	@Override
-	protected void onIncreaseHp(TYPE type, int value, int skillId, LOG log) {
+	protected void onHpChanged(int previousHp, int newHp, Creature effector) {
 		if (isFullyRestoredHp()) // FIXME: Temp Fix: Reset aggro list when hp is full
 			owner.getAggroList().clear();
-		super.onIncreaseHp(type, value, skillId, log);
+		if (owner.isSpawned()) {
+			sendHpPacketUpdate();
+			sendGroupPacketUpdate();
+			if (previousHp == 0 || newHp < previousHp)
+				triggerRestoreTask();
+			if (previousHp == 0)
+				triggerFpRestore();
+		}
+		super.onHpChanged(previousHp, newHp, effector);
 	}
 
 	@Override
-	protected void onReduceHp(TYPE type, int value, int skillId, LOG log) {
-		super.onReduceHp(type, value, skillId, log);
-		if (value > 0)
-			triggerRestoreTask();
-	}
-
-	@Override
-	protected void onHpChanged() {
-		super.onHpChanged();
-		sendHpPacketUpdate();
-		sendGroupPacketUpdate();
-	}
-
-	@Override
-	protected void onReduceMp(TYPE type, int value, int skillId, LOG log) {
-		super.onReduceMp(type, value, skillId, log);
-		if (value > 0)
-			triggerRestoreTask();
-	}
-
-	@Override
-	protected void onMpChanged() {
-		super.onMpChanged();
-		sendMpPacketUpdate();
-		sendGroupPacketUpdate();
+	protected void onMpChanged(int previousMp, int newMp) {
+		super.onMpChanged(previousMp, newMp);
+		if (owner.isSpawned()) {
+			sendMpPacketUpdate();
+			sendGroupPacketUpdate();
+			if (newMp < previousMp)
+				triggerRestoreTask();
+		}
 	}
 
 	private void sendGroupPacketUpdate() {
-		if (owner.isInTeam() && !TeamStatUpdater.getInstance().hasTask(owner)) {
-			TeamStatUpdater.getInstance().startTask(owner);
-		}
+		if (owner.isInTeam())
+			TeamStatUpdater.getInstance().add(owner);
 	}
 
 	@Override
@@ -104,11 +93,11 @@ public class PlayerLifeStats extends CreatureLifeStats<Player> {
 	}
 
 	private void sendHpPacketUpdate() {
-		PacketSendUtility.sendPacket(owner, new SM_STATUPDATE_HP(currentHp, getMaxHp()));
+		PacketSendUtility.sendPacket(owner, new SM_STATUPDATE_HP(getCurrentHp(), getMaxHp()));
 	}
 
 	private void sendMpPacketUpdate() {
-		PacketSendUtility.sendPacket(owner, new SM_STATUPDATE_MP(currentMp, getMaxMp()));
+		PacketSendUtility.sendPacket(owner, new SM_STATUPDATE_MP(getCurrentMp(), getMaxMp()));
 	}
 
 	/**
@@ -138,9 +127,7 @@ public class PlayerLifeStats extends CreatureLifeStats<Player> {
 	 * @return
 	 */
 	public int increaseFp(TYPE type, int value, int skillId, LOG log) {
-		fpLock.lock();
-
-		try {
+		synchronized (fpLock) {
 			if (isDead()) {
 				return 0;
 			}
@@ -153,8 +140,6 @@ public class PlayerLifeStats extends CreatureLifeStats<Player> {
 				this.currentFp = newFp;
 				onIncreaseFp(type, value, skillId, log);
 			}
-		} finally {
-			fpLock.unlock();
 		}
 
 		return currentFp;
@@ -167,8 +152,7 @@ public class PlayerLifeStats extends CreatureLifeStats<Player> {
 	 * @return Current flight points
 	 */
 	public int reduceFp(TYPE type, int value, int skillId, LOG log) {
-		fpLock.lock();
-		try {
+		synchronized (fpLock) {
 			int newFp = this.currentFp - value;
 
 			if (newFp < 0) {
@@ -177,8 +161,6 @@ public class PlayerLifeStats extends CreatureLifeStats<Player> {
 			}
 
 			this.currentFp = newFp;
-		} finally {
-			fpLock.unlock();
 		}
 
 		onReduceFp(type, value, skillId, log);
@@ -187,16 +169,13 @@ public class PlayerLifeStats extends CreatureLifeStats<Player> {
 	}
 
 	public int setCurrentFp(int value) {
-		fpLock.lock();
-		try {
+		synchronized (fpLock) {
 			int newFp = value;
 
 			if (newFp < 0)
 				newFp = 0;
 
 			this.currentFp = newFp;
-		} finally {
-			fpLock.unlock();
 		}
 
 		onReduceFp(null, value, 0, null);
@@ -234,74 +213,49 @@ public class PlayerLifeStats extends CreatureLifeStats<Player> {
 	}
 
 	public void triggerFpRestore() {
-		cancelFpReduce();
-		restoreLock.lock();
-		try {
-			if (flyRestoreTask == null && !isDead && !isFlyTimeFullyRestored()) {
+		synchronized (restoreLock) {
+			cancelFpReduce();
+			if (flyRestoreTask == null && !isDead() && !isFlyTimeFullyRestored()) {
 				flyRestoreTask = LifeStatsRestoreService.getInstance().scheduleFpRestoreTask(this);
 			}
-		} finally {
-			restoreLock.unlock();
 		}
 	}
 
 	public void cancelFpRestore() {
-		restoreLock.lock();
-		try {
+		synchronized (restoreLock) {
 			if (flyRestoreTask != null && !flyRestoreTask.isCancelled()) {
 				flyRestoreTask.cancel(false);
 				flyRestoreTask = null;
 			}
-		} finally {
-			restoreLock.unlock();
 		}
 	}
 
-	public void triggerFpReduceByCost(Integer costFp) {
-		triggerFpReduce(costFp);
-	}
-
 	public void triggerFpReduce() {
-		triggerFpReduce(null);
-	}
-
-	private void triggerFpReduce(Integer costFp) {
-		cancelFpRestore();
-		restoreLock.lock();
-		try {
-			if (!owner.hasAccess(AdminConfig.UNLIMITED_FLIGHT_TIME) && !isDead) {
-				if (costFp != null) {
-					flightReduceValue.set(costFp);
-					flightReducePeriod.set(1);
-				} else if (owner.isInsideZoneType(ZoneType.FLY)) {
-					flightReduceValue.set(1);
-					flightReducePeriod.set(owner.isInGlidingState() ? 2 : 1);
-				} else {
-					flightReduceValue.set(2);
-					flightReducePeriod.set(1);
-				}
-				if (flyReduceTask == null) {
-					if (costFp != null) {
-						flyReduceTask = LifeStatsRestoreService.getInstance().scheduleFpReduceTask(this, 500);
-					} else {
-						flyReduceTask = LifeStatsRestoreService.getInstance().scheduleFpReduceTask(this, 1000);
-					}
-				}
+		if (owner.hasAccess(AdminConfig.UNLIMITED_FLIGHT_TIME) || isDead())
+			return;
+		synchronized (restoreLock) {
+			if (owner.isInSprintMode()) {
+				flightReduceValue = owner.ride.getCostFp();
+				flightReducePeriod = 1;
+			} else if (owner.isFlying()) {
+				boolean isInFlyArea = owner.isInsideZoneType(ZoneType.FLY) && !owner.isInsideZoneType(ZoneType.NO_FLY);
+				flightReduceValue = isInFlyArea ? 1 : 2;
+				flightReducePeriod = isInFlyArea && owner.isInGlidingState() ? 2 : 1;
+			} else {
+				return;
 			}
-		} finally {
-			restoreLock.unlock();
+			cancelFpRestore();
+			if (flyReduceTask == null && !isDead())
+				flyReduceTask = LifeStatsRestoreService.getInstance().scheduleFpReduceTask(this);
 		}
 	}
 
 	public void cancelFpReduce() {
-		restoreLock.lock();
-		try {
+		synchronized (restoreLock) {
 			if (flyReduceTask != null && !flyReduceTask.isCancelled()) {
 				flyReduceTask.cancel(false);
 				flyReduceTask = null;
 			}
-		} finally {
-			restoreLock.unlock();
 		}
 	}
 
@@ -316,16 +270,11 @@ public class PlayerLifeStats extends CreatureLifeStats<Player> {
 		cancelFpRestore();
 	}
 
-	public void triggerRestoreOnRevive() {
-		this.triggerRestoreTask();
-		triggerFpRestore();
-	}
-
 	public int getFlightReducePeriod() {
-		return flightReducePeriod.get();
+		return flightReducePeriod;
 	}
 
 	public int getFlightReduceValue() {
-		return flightReduceValue.get();
+		return flightReduceValue;
 	}
 }

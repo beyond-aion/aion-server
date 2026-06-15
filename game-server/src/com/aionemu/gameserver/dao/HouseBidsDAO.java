@@ -4,9 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,14 +22,14 @@ public class HouseBidsDAO {
 
 	private static final Logger log = LoggerFactory.getLogger(HouseBidsDAO.class);
 
-	public static final String LOAD_QUERY = "SELECT * FROM `house_bids` ORDER BY `bid`, `bid_time`";
+	public static final String LOAD_QUERY = "SELECT b.*, IF(b.player_id = p.id, 1, 0) playerExists FROM `house_bids` b LEFT JOIN `players` p ON p.id = b.player_id ORDER BY `bid`, `bid_time`";
 	public static final String INSERT_QUERY = "INSERT INTO `house_bids` (`player_id`, `house_id`, `bid`, `bid_time`) VALUES (?, ?, ?, ?)";
 	public static final String DELETE_QUERY = "DELETE FROM `house_bids` WHERE `house_id` = ?";
 	public static final String DELETE_SINGLE_BID_QUERY = "DELETE FROM `house_bids` WHERE `player_id` = ? AND `house_id` = ? AND `bid` = ?";
 	public static final String DISABLE_QUERY = "UPDATE `house_bids` SET `player_id` = 0 WHERE `player_id` = ?";
 
-	public static Map<Integer, HouseBids> loadBids() {
-		Map<Integer, HouseBids> allBids = new ConcurrentHashMap<>();
+	public static Set<Integer> loadBids(Map<Integer, HouseBids> bidsById) {
+		Set<Integer> deletedPlayerIds = new HashSet<>();
 		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(LOAD_QUERY)) {
 			try (ResultSet rset = stmt.executeQuery()) {
 				while (rset.next()) {
@@ -36,16 +37,20 @@ public class HouseBidsDAO {
 					int houseId = rset.getInt("house_id");
 					long bidOffer = rset.getLong("bid");
 					Timestamp time = rset.getTimestamp("bid_time");
-					if (playerId == 0)
-						allBids.putIfAbsent(houseId, new HouseBids(houseId, bidOffer, time.getTime()));
-					else
-						allBids.get(houseId).bid(playerId, bidOffer, time.getTime());
+					HouseBids houseBids = bidsById.get(houseId);
+					if (houseBids == null)
+						bidsById.put(houseId, new HouseBids(houseId, bidOffer, time.getTime()));
+					else {
+						houseBids.bid(playerId, bidOffer, time.getTime());
+						if (playerId != 0 && !rset.getBoolean("playerExists"))
+							deletedPlayerIds.add(playerId);
+					}
 				}
 			}
 		} catch (Exception e) {
 			log.error("Cannot read house bids", e);
 		}
-		return allBids;
+		return deletedPlayerIds;
 	}
 
 	public static boolean addBid(HouseBids.Bid bid) {

@@ -6,19 +6,18 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
+import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.flyring.FlyRing;
-import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.geometry.Point3D;
-import com.aionemu.gameserver.model.items.storage.Storage;
 import com.aionemu.gameserver.model.summons.SummonMode;
 import com.aionemu.gameserver.model.summons.UnsummonType;
 import com.aionemu.gameserver.model.templates.flyring.FlyRingTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAY_MOVIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.model.QuestState;
@@ -48,41 +47,32 @@ public class TalocsHollowInstance extends GeneralInstanceHandler {
 		addItems(player);
 	}
 
-	@Override
-	public void onLeaveInstance(Player player) {
-		removeItems(player);
-		player.getEffectController().removeEffect(10251);
-		player.getEffectController().removeEffect(10252);
-	}
-
 	private void addItems(Player player) {
 		QuestState qs1 = player.getQuestStateList().getQuestState(10032);
 		QuestState qs2 = player.getQuestStateList().getQuestState(20032);
 		if ((qs1 != null && qs1.getStatus() == QuestStatus.START) || (qs2 != null && qs2.getStatus() == QuestStatus.START))
 			return;
-		switch (player.getRace()) {
-			case ELYOS:
-				ItemService.addItem(player, 160001286, 1);
-				ItemService.addItem(player, 164000099, 1);
-				break;
-			case ASMODIANS:
-				ItemService.addItem(player, 160001287, 1);
-				ItemService.addItem(player, 164000099, 1);
-				break;
-		}
+		addMissingItems(player, 164000099); // Taloc's Tears
+		addMissingItems(player, player.getRace() == Race.ELYOS ? 160001286 : 160001287); // Taloc Fruit
 	}
 
-	private void removeItems(Player player) {
-		int[] items = new int[] { 164000099, // Taloc's Tears
-			164000137, // Shishir's Powerstone
-			164000138, // Gellmar's Wardstone
-			164000139, // Neith's Sleepstone
-			185000088, // Shishir's Corrosive Fluid
-			185000108 // Dorkin's Pocket Knife
-		};
-		Storage storage = player.getInventory();
-		for (int item : items)
-			storage.decreaseByItemId(item, storage.getItemCountByItemId(item));
+	private void addMissingItems(Player player, int itemId) {
+		if (player.getInventory().getFirstItemByItemId(itemId) == null)
+			ItemService.addItem(player, itemId, 1);
+	}
+
+	@Override
+	protected boolean isRestrictedToInstance(Item item) {
+		switch (item.getItemId()) {
+			case 164000099: // Taloc's Tears
+			case 164000137: // Shishir's Powerstone
+			case 164000138: // Gellmar's Wardstone
+			case 164000139: // Neith's Sleepstone
+			case 185000088: // Shishir's Corrosive Fluid
+			case 185000108: // Dorkin's Pocket Knife
+				return true;
+		}
+		return super.isRestrictedToInstance(item);
 	}
 
 	@Override
@@ -122,7 +112,7 @@ public class TalocsHollowInstance extends GeneralInstanceHandler {
 						if (summon != null) {
 							if (summon.getNpcId() == 799500 || summon.getNpcId() == 799501) {
 								SummonsService.doMode(SummonMode.RELEASE, summon, UnsummonType.UNSPECIFIED);
-								PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(0, 435));
+								PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(false, 0, 0, 435, true));
 							}
 						}
 					});
@@ -136,7 +126,7 @@ public class TalocsHollowInstance extends GeneralInstanceHandler {
 			case 215488: // celestius
 				Player player = npc.getAggroList().getMostPlayerDamage();
 				if (player != null)
-					PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(0, 10021, 437, 0));
+					PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(false, 0, 10021, 437, true));
 				Npc contaminatedFragment = getNpc(700740);
 				if (contaminatedFragment != null) {
 					SpawnTemplate fragmentTemplate = contaminatedFragment.getSpawn();
@@ -165,14 +155,8 @@ public class TalocsHollowInstance extends GeneralInstanceHandler {
 	private void sendMovie(Player player, int movie) {
 		if (!movies.contains(movie)) {
 			movies.add(movie);
-			PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(0, movie));
+			PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(false, 0, 0, movie, true));
 		}
-	}
-
-	@Override
-	public void onPlayerLogOut(Player player) {
-		player.getEffectController().removeEffect(10251);
-		player.getEffectController().removeEffect(10252);
 	}
 
 	@Override
@@ -199,12 +183,6 @@ public class TalocsHollowInstance extends GeneralInstanceHandler {
 			sendMovie(player, 464);
 		}
 		return false;
-	}
-
-	@Override
-	public boolean onDie(final Player player, Creature lastAttacker) {
-		PacketSendUtility.sendPacket(player, new SM_DIE(player, 8));
-		return true;
 	}
 
 	@Override

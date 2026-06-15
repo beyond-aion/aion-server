@@ -34,12 +34,6 @@ public class SleepEffect extends EffectTemplate {
 		if (effected instanceof Player player) {
 			player.getFlyController().onStopGliding();
 			player.getMoveController().abortMove();
-			if (effect.getEffector().getMaster() instanceof Player) {
-				long duration = getDuration2() + ((long) getDuration1()) * effect.getSkillLevel();
-				if (getRandomTime() > 0 )
-					duration -= getRandomTime()/2;
-				player.incrementSleepCountAndUpdateExpirationTime(duration);
-			}
 		}
 		effect.setAbnormal(AbnormalState.SLEEP);
 		effected.getEffectController().setAbnormal(AbnormalState.SLEEP);

@@ -28,8 +28,8 @@ public class AggressiveNpcAI extends GeneralNpcAI {
 	}
 
 	@Override
-	protected boolean handleGuardAgainstAttacker(Creature attacker) {
-		return AggroEventHandler.onGuardAgainstAttacker(this, attacker);
+	protected boolean handleCreatureNeedsSupportByGuard(Creature creature) {
+		return AggroEventHandler.onCreatureNeedsSupportByGuard(this, creature);
 	}
 
 }

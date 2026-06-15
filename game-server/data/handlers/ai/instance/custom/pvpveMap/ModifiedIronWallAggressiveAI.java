@@ -1,27 +1,21 @@
 package ai.instance.custom.pvpveMap;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.HpPhases;
 import com.aionemu.gameserver.ai.handler.ReturningEventHandler;
+import com.aionemu.gameserver.controllers.attack.AggroTarget;
 import com.aionemu.gameserver.custom.pvpmap.PvpMapService;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_FORCED_MOVE;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
-import com.aionemu.gameserver.world.WorldPosition;
-import com.aionemu.gameserver.world.geo.GeoService;
 
 import ai.AggressiveNpcAI;
 
@@ -119,10 +113,10 @@ public class ModifiedIronWallAggressiveAI extends AggressiveNpcAI implements HpP
 			switch (skillTemplate.getSkillId()) {
 				case 21165:
 					ThreadPoolManager.getInstance().schedule(() -> {
-						WorldPosition pos = getRandomTargetPosition();
-						if (pos == null)
+						Creature randomTarget = getAggroList().getTarget(AggroTarget.RANDOM, 26);
+						if (randomTarget == null)
 							return;
-						World.getInstance().updatePosition(getOwner(), pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
+						World.getInstance().updatePosition(getOwner(), randomTarget.getX(), randomTarget.getY(), randomTarget.getZ(), randomTarget.getHeading());
 						PacketSendUtility.broadcastPacketAndReceive(getOwner(), new SM_FORCED_MOVE(getOwner(), getOwner()));
 						ThreadPoolManager.getInstance()
 							.schedule(() -> getOwner().queueSkill(21171, 1, 6000), 500);
@@ -151,23 +145,6 @@ public class ModifiedIronWallAggressiveAI extends AggressiveNpcAI implements HpP
 		} else {
 			super.handleNotAtHome();
 		}
-	}
-
-	private WorldPosition getRandomTargetPosition() {
-		List<Player> knownPlayers = new ArrayList<>();
-		WorldPosition pos = null;
-		for (Player p : getOwner().getKnownList().getKnownPlayers().values()) {
-			if (p.isDead() || p.getLifeStats().isAboutToDie())
-				continue;
-			if (getOwner().canSee(p) && PositionUtil.isInRange(getOwner(), p, 26) && GeoService.getInstance().canSee(getOwner(), p)) {
-				knownPlayers.add(p);
-			}
-
-		}
-		if (!knownPlayers.isEmpty()) {
-			pos = Rnd.get(knownPlayers).getPosition();
-		}
-		return pos;
 	}
 
 	private float getRandomDmg(float damage, float minMultiplier, float maxMultiplier) {

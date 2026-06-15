@@ -91,6 +91,9 @@ public abstract class VisibleObjectController<T extends VisibleObject> {
 			RespawnService.cancelRespawn(getOwner());
 	}
 
+	public void onTargetChanged(VisibleObject oldTarget, VisibleObject newTarget) {
+	}
+
 	/**
 	 * Called before object is placed into world
 	 */

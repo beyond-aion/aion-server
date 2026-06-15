@@ -29,7 +29,7 @@
 		<xs:attribute name="min_count" type="xs:int" use="optional" default="1" />
 		<xs:attribute name="max_count" type="xs:int" use="optional" default="0" />
 		<xs:attribute name="race" type="Race" use="optional" default="PC_ALL" />
-		<xs:attribute name="player_classes" type="ListPlayerClass" use="optional" default="ALL" />
+		<xs:attribute name="player_classes" type="ListPlayerClass" use="optional" />
 	</xs:complexType>
 	<xs:complexType name="ResultedItemsCollection">
 		<xs:sequence>

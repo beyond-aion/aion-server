@@ -7,41 +7,36 @@ import com.aionemu.gameserver.model.legionDominion.LegionDominionParticipantInfo
 import com.aionemu.gameserver.model.team.legion.Legion;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
-import com.aionemu.gameserver.services.LegionDominionService;
 
 /**
  * @author Yeats
- *
  */
 public class SM_LEGION_DOMINION_RANK extends AionServerPacket {
 
-	private int id;
-	
-	public SM_LEGION_DOMINION_RANK(int id) {
-		this.id = id;
+	private final LegionDominionLocation loc;
+	private final int rank;
+	private final List<LegionDominionParticipantInfo> topParticipants;
+
+	public SM_LEGION_DOMINION_RANK(LegionDominionLocation loc, Legion legion) {
+		this.loc = loc;
+		List<LegionDominionParticipantInfo> ranking = loc.getLegionRanking(false);
+		LegionDominionParticipantInfo participant = legion == null ? null : loc.getParticipantInfo(legion.getLegionId());
+		rank = participant == null ? 0 : ranking.indexOf(participant) + 1;
+		topParticipants = ranking.size() > 25 ? ranking.subList(0,  25) : ranking;
+		if (rank > topParticipants.size()) // if the ranked legion is not top-ranked, the last entry must be the ranked one
+			topParticipants.set(topParticipants.size() - 1, ranking.get(rank - 1));
 	}
-	
+
 	@Override
 	protected void writeImpl(AionConnection con) {
-		LegionDominionLocation loc = LegionDominionService.getInstance().getLegionDominionLoc(id);
-		if (loc != null) {
-			writeD(id);
-			Legion legion = con.getActivePlayer().getLegion();
-			if (legion != null && loc.getParticipantInfo().containsKey(legion.getLegionId()) && loc.getParticipantInfo().get(legion.getLegionId()).getPoints() > 0) {
-				LegionDominionParticipantInfo curLegion = loc.getParticipantInfo().get(legion.getLegionId());
-				List<LegionDominionParticipantInfo> pInfo = loc.getSortedTop25Participants(curLegion);
-				writeC(pInfo.indexOf(curLegion) + 1);
-				writeH(loc.getParticipantInfo().size());
-				for (LegionDominionParticipantInfo info : pInfo) {
-					writeD(info.getPoints());
-					writeD(info.getTime());
-					writeQ(info.getDate());
-					writeS(info.getLegionName());
-				}
-			} else {
-				writeC(0);
-				writeH(0);
-			}
+		writeD(loc.getLocationId());
+		writeC(rank);
+		writeH(topParticipants.size());
+		for (LegionDominionParticipantInfo participant : topParticipants) {
+			writeD(participant.getPoints());
+			writeD(participant.getTime());
+			writeQ(participant.getDate());
+			writeS(participant.getLegionName());
 		}
 	}
 }

@@ -68,6 +68,12 @@ public class NetworkConfig {
 	public static int NIO_READ_WRITE_THREADS;
 
 	/**
+	 * Allows values > 1 for nio.threads. Only for development/debugging - the game server is not thread-safe!
+	 */
+	@Property(key = "gameserver.network.nio.threads.unsafe.allow", defaultValue = "false")
+	public static boolean NIO_READ_WRITE_THREADS_UNSAFE_ALLOW;
+
+	/**
 	 * Number of minimum threads that will be used to execute aion client packets.
 	 */
 	@Property(key = "gameserver.network.packet.processor.threads.min", defaultValue = "4")

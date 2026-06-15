@@ -2,13 +2,9 @@ package com.aionemu.gameserver.model.templates.spawns.basespawns;
 
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
-import com.aionemu.gameserver.model.Race;
+import com.aionemu.gameserver.model.base.BaseOccupier;
 import com.aionemu.gameserver.model.templates.spawns.Spawn;
 
 /**
@@ -22,8 +18,8 @@ public class BaseSpawn {
 	private int id;
 	@XmlAttribute(name = "world")
 	private int world;
-	@XmlElement(name = "simple_race")
-	private List<SimpleRaceTemplate> simpleRaceTemplates;
+	@XmlElement(name = "occupier_template")
+	private List<BaseOccupierTemplate> baseOccupierTemplates;
 
 	public int getId() {
 		return id;
@@ -33,19 +29,19 @@ public class BaseSpawn {
 		return world;
 	}
 
-	public List<SimpleRaceTemplate> getBaseRaceTemplates() {
-		return simpleRaceTemplates;
+	public List<BaseOccupierTemplate> getOccupierTemplates() {
+		return baseOccupierTemplates;
 	}
 
 	@XmlAccessorType(XmlAccessType.FIELD)
-	@XmlType(name = "BaseRaceTemplate")
-	public static class SimpleRaceTemplate {
+	@XmlType(name = "BaseOccupierTemplate")
+	public static class BaseOccupierTemplate {
 
-		@XmlAttribute(name = "race")
-		private Race race;
+		@XmlAttribute(name = "occupier")
+		private BaseOccupier occupier;
 
-		public Race getBaseRace() {
-			return race;
+		public BaseOccupier getOccupier() {
+			return occupier;
 		}
 
 		@XmlElement(name = "spawn")

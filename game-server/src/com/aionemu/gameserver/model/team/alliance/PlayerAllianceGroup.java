@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.model.team.alliance;
 
 import com.aionemu.gameserver.model.team.TemporaryPlayerTeam;
+import com.aionemu.gameserver.model.team.common.legacy.LootGroupRules;
 
 /**
  * @author ATracer
@@ -47,4 +48,8 @@ public class PlayerAllianceGroup extends TemporaryPlayerTeam<PlayerAllianceMembe
 		return alliance;
 	}
 
+	@Override
+	public LootGroupRules getLootGroupRules() {
+		return alliance.getLootGroupRules();
+	}
 }

@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.model.templates.item.actions;
 
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -102,8 +103,7 @@ public class ToyPetSpawnAction extends AbstractItemAction {
 			final Kisk kisk = VisibleObjectSpawner.spawnKisk(spawn, instanceId, player);
 			final int objOwnerId = player.getObjectId();
 			// Schedule Despawn Action
-			Future<?> task = ThreadPoolManager.getInstance().schedule(() -> kisk.getController().delete(), 7200000);
-			// Fixed 2 hours 2 * 60 * 60 * 1000
+			Future<?> task = ThreadPoolManager.getInstance().schedule(() -> kisk.getController().delete(), kisk.getRemainingLifetime(), TimeUnit.SECONDS);
 			kisk.getController().addTask(TaskId.DESPAWN, task);
 
 			// ShowFinalAction

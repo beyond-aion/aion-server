@@ -47,7 +47,10 @@ public class CM_HOUSE_SETTINGS extends AionClientPacket {
 		}
 		HouseDoorState doorState = HouseDoorState.get(this.doorState);
 		House house = player.getActiveHouse();
-		house.setDoorState(doorState);
+		if (doorState == null)
+			LoggerFactory.getLogger(getClass()).warn("{} sent unknown door state {} for {}", player, this.doorState, house);
+		else
+			house.setDoorState(doorState);
 		house.setShowOwnerName(showOwnerName);
 		house.setSignNotice(signNotice);
 
@@ -62,8 +65,6 @@ public class CM_HOUSE_SETTINGS extends AionClientPacket {
 		} else if (doorState == HouseDoorState.CLOSED) {
 			house.getController().kickVisitors(player, true, false);
 			sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_ORDER_CLOSE_DOOR_ALL());
-		} else {
-			LoggerFactory.getLogger(HouseDoorState.class).warn("Unhandled house door state " + doorState + " (" + this.doorState + ")");
 		}
 	}
 

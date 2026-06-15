@@ -27,10 +27,9 @@ public final class ThreadPoolManager implements Executor {
 	private final ThreadPoolExecutor longRunningPool;
 
 	private ThreadPoolManager() {
-		int instantPoolSize = ThreadConfig.BASE_THREAD_POOL_SIZE == 0 ? Runtime.getRuntime().availableProcessors() : ThreadConfig.BASE_THREAD_POOL_SIZE;
-		int scheduledPoolSize = ThreadConfig.SCHEDULED_THREAD_POOL_SIZE == 0 ? Runtime.getRuntime().availableProcessors() * 4 : ThreadConfig.SCHEDULED_THREAD_POOL_SIZE;
-		// common ForkJoin (for .parallelStream() calls) uses the calling thread too, so we need to subtract 1 to use exactly the number of threads desired
-		System.setProperty("java.util.concurrent.ForkJoinPool.common.parallelism", String.valueOf(instantPoolSize - 1));
+		int availableProcessors = Runtime.getRuntime().availableProcessors();
+		int instantPoolSize = Math.max(4, ThreadConfig.BASE_THREAD_POOL_SIZE == 0 ? availableProcessors : ThreadConfig.BASE_THREAD_POOL_SIZE);
+		int scheduledPoolSize = Math.max(4, ThreadConfig.SCHEDULED_THREAD_POOL_SIZE == 0 ? availableProcessors : ThreadConfig.SCHEDULED_THREAD_POOL_SIZE);
 
 		DeadLockDetector.start(Duration.ofMinutes(1), () -> System.exit(ExitCode.RESTART));
 		instantPool = new ThreadPoolExecutor(instantPoolSize, instantPoolSize, 0, TimeUnit.SECONDS, new ArrayBlockingQueue<>(100000),
@@ -41,54 +40,43 @@ public final class ThreadPoolManager implements Executor {
 		scheduledPool = new ScheduledThreadPoolExecutor(scheduledPoolSize);
 		scheduledPool.setRejectedExecutionHandler(new AionRejectedExecutionHandler());
 		scheduledPool.prestartAllCoreThreads();
+		scheduledPool.setExecuteExistingDelayedTasksAfterShutdownPolicy(false);
 
 		longRunningPool = (ThreadPoolExecutor) Executors.newCachedThreadPool();
-		longRunningPool.setRejectedExecutionHandler(new AionRejectedExecutionHandler());
-		longRunningPool.prestartAllCoreThreads();
-
-		Thread maintainThread = Thread.ofVirtual().name("ThreadPool Purge Task").unstarted(this::purge);
-		scheduleAtFixedRate(maintainThread, 150000, 150000);
 
 		log.info("ThreadPoolManager: Initialized with " + instantPool.getPoolSize() + " instant, " + scheduledPool.getPoolSize() + " scheduler and "
-			+ longRunningPool.getPoolSize() + " long running thread(s).");
+			+ longRunningPool.getPoolSize() + " long running threads");
 	}
 
-	public final ScheduledFuture<?> schedule(Runnable r, long delay, TimeUnit unit) {
+	public ScheduledFuture<?> schedule(Runnable r, long delay, TimeUnit unit) {
 		r = new RunnableWrapper(r, ThreadConfig.MAXIMUM_RUNTIME_IN_MILLISEC_WITHOUT_WARNING, true);
 		return scheduledPool.schedule(r, delay, unit);
 	}
 
-	public final ScheduledFuture<?> schedule(Runnable r, long delay) {
+	public ScheduledFuture<?> schedule(Runnable r, long delay) {
 		return schedule(r, delay, TimeUnit.MILLISECONDS);
 	}
 
-	public final ScheduledFuture<?> scheduleAtFixedRate(Runnable r, long delay, long period) {
+	public ScheduledFuture<?> scheduleAtFixedRate(Runnable r, long delay, long period) {
 		r = new RunnableWrapper(r, ThreadConfig.MAXIMUM_RUNTIME_IN_MILLISEC_WITHOUT_WARNING, true);
 		return scheduledPool.scheduleAtFixedRate(r, delay, period, TimeUnit.MILLISECONDS);
 	}
 
 	@Override
-	public final void execute(Runnable r) {
+	public void execute(Runnable r) {
 		instantPool.execute(new RunnableWrapper(r, ThreadConfig.MAXIMUM_RUNTIME_IN_MILLISEC_WITHOUT_WARNING, true));
 	}
 
-	public final void executeLongRunning(Runnable r) {
+	public void executeLongRunning(Runnable r) {
 		longRunningPool.execute(new RunnableWrapper(r));
 	}
 
-	public final Future<?> submit(Runnable r) {
+	public Future<?> submit(Runnable r) {
 		return instantPool.submit(new RunnableWrapper(r, ThreadConfig.MAXIMUM_RUNTIME_IN_MILLISEC_WITHOUT_WARNING, false));
 	}
 
-	public final Future<?> submitLongRunning(Runnable r) {
+	public Future<?> submitLongRunning(Runnable r) {
 		return longRunningPool.submit(new RunnableWrapper(r, Long.MAX_VALUE, false));
-	}
-
-	public void purge() {
-		scheduledPool.purge();
-		instantPool.purge();
-		longRunningPool.purge();
-		// workStealingPool is already maintaining needed threads
 	}
 
 	/**
@@ -98,7 +86,7 @@ public final class ThreadPoolManager implements Executor {
 		final long begin = System.currentTimeMillis();
 
 		log.info("ThreadPoolManager: Shutting down.");
-		log.info("\t... executing " + getTaskCount(scheduledPool) + " scheduled tasks.");
+		log.info("\t... executing " + scheduledPool.getActiveCount() + "/" + getTaskCount(scheduledPool) + " scheduled tasks.");
 		log.info("\t... executing " + getTaskCount(instantPool) + " instant tasks.");
 		log.info("\t... executing " + getTaskCount(longRunningPool) + " long running tasks.");
 
@@ -109,11 +97,6 @@ public final class ThreadPoolManager implements Executor {
 		boolean success = false;
 		try {
 			success = awaitTermination(5000);
-
-			scheduledPool.setExecuteExistingDelayedTasksAfterShutdownPolicy(false);
-			scheduledPool.setContinueExistingPeriodicTasksAfterShutdownPolicy(false);
-
-			success |= awaitTermination(10000);
 		} catch (InterruptedException ignored) {
 		}
 
@@ -171,13 +154,13 @@ public final class ThreadPoolManager implements Executor {
 		final long begin = System.currentTimeMillis();
 
 		while (System.currentTimeMillis() - begin < timeoutInMillisec) {
-			if (!scheduledPool.awaitTermination(10, TimeUnit.MILLISECONDS) && scheduledPool.getActiveCount() > 0)
+			if (!scheduledPool.awaitTermination(10, TimeUnit.MILLISECONDS))
 				continue;
 
-			if (!instantPool.awaitTermination(10, TimeUnit.MILLISECONDS) && instantPool.getActiveCount() > 0)
+			if (!instantPool.awaitTermination(10, TimeUnit.MILLISECONDS))
 				continue;
 
-			if (!longRunningPool.awaitTermination(10, TimeUnit.MILLISECONDS) && longRunningPool.getActiveCount() > 0)
+			if (!longRunningPool.awaitTermination(10, TimeUnit.MILLISECONDS))
 				continue;
 
 			return true;

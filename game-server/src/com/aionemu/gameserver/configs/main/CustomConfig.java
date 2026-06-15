@@ -168,6 +168,12 @@ public class CustomConfig {
 	public static boolean ENABLE_KILL_REWARD;
 
 	/**
+	 * Keep buffs when getting killed in Sanctum's Coliseum or Pandaemonium's Triniel Coliseum
+	 */
+	@Property(key = "gameserver.coliseum.keep_buffs", defaultValue = "false")
+	public static boolean KEEP_BUFFS_IN_COLISEUM;
+
+	/**
 	 * Enable one kisk restriction
 	 */
 	@Property(key = "gameserver.kisk.restriction.enable", defaultValue = "true")
@@ -232,6 +238,12 @@ public class CustomConfig {
 	public static int CHARACTER_DELETION_TIME_MINUTES;
 
 	/**
+	 * Don't consume potions when already at full HP/MP
+	 */
+	@Property(key = "gameserver.items.ignore_potions_at_full_health", defaultValue = "false")
+	public static boolean IGNORE_POTIONS_AT_FULL_HEALTH;
+
+	/**
 	 * Custom Reward Packages
 	 */
 	@Property(key = "gameserver.custom.starter_kit.enable", defaultValue = "false")
@@ -255,6 +267,12 @@ public class CustomConfig {
 	@Property(key = "gameserver.rates.godstone.activation.rate", defaultValue = "1.0")
 	public static float GODSTONE_ACTIVATION_RATE;
 
-	@Property(key = "gameserver.rates.godstone.evaluation.cooldown_millis", defaultValue = "500")
+	@Property(key = "gameserver.rates.godstone.evaluation.cooldown_millis", defaultValue = "750")
 	public static int GODSTONE_EVALUATION_COOLDOWN_MILLIS;
+
+	/**
+	 * Count summon-applied abnormal effects for cumulative resist.
+	 */
+	@Property(key = "gameserver.pvp.cumulative_resist.count_summon_effects", defaultValue = "false")
+	public static boolean COUNT_SUMMON_EFFECTS_FOR_CUMULATIVE_RESIST;
 }

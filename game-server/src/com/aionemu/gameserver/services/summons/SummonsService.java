@@ -1,11 +1,11 @@
 package com.aionemu.gameserver.services.summons;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.Future;
 
 import com.aionemu.gameserver.controllers.attack.AggroList;
+import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -15,6 +15,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.summons.SummonMode;
 import com.aionemu.gameserver.model.summons.UnsummonType;
 import com.aionemu.gameserver.network.aion.serverpackets.*;
+import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.spawnengine.VisibleObjectSpawner;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -81,8 +82,9 @@ public class SummonsService {
 				case COMMAND:
 				case DISTANCE:
 				case UNSPECIFIED:
-					// reset cooldown for summoning skill
-					master.resetSkillCoolDown(summon.getSummonedBySkillId());
+					SkillTemplate summoningSkill = DataManager.SKILL_DATA.getSkillTemplate(summon.getSummonedBySkillId());
+					if (summoningSkill != null && summoningSkill.getCooldown() > 0)
+						master.setSkillCoolDown(summoningSkill.getCooldownId(), summoningSkill.getCooldown() * 100 + System.currentTimeMillis());
 
 					if (unsummonType == UnsummonType.DISTANCE)
 						PacketSendUtility.sendPacket(master, SM_SYSTEM_MESSAGE.STR_SKILL_SUMMON_UNSUMMON_BY_TOO_DISTANCE());
@@ -127,13 +129,12 @@ public class SummonsService {
 			}
 		}
 
-		private List<AggroList> findSummonOnlyHaters(Summon owner) {
-			Collection<VisibleObject> npcsKnownByMaster = owner.getMaster().getKnownList().getKnownObjects().values();
+		private List<AggroList> findSummonOnlyHaters(Summon summon) {
 			List<AggroList> aggroLists = new ArrayList<>();
-			npcsKnownByMaster.forEach(object -> {
-				if (object instanceof Creature) {
-					AggroList aggroList = ((Creature) object).getAggroList();
-					if (aggroList.isHating(owner) && !aggroList.isHating(owner.getMaster()))
+			summon.getMaster().getKnownList().forEachObject(object -> {
+				if (object instanceof Creature creature) {
+					AggroList aggroList = creature.getAggroList();
+					if (aggroList.isHating(summon) && !aggroList.isHating(summon.getMaster()))
 						aggroLists.add(aggroList);
 				}
 			});

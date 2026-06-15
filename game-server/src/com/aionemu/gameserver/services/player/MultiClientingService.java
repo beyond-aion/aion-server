@@ -22,7 +22,7 @@ public class MultiClientingService {
 	private static final Map<Integer, AccountSession> sessionsByAccountId = new ConcurrentHashMap<>();
 
 	public static boolean tryEnterWorld(Player player, AionConnection con) {
-		if (SecurityConfig.MULTI_CLIENTING_RESTRICTION_MODE == MultiClientingRestrictionMode.FULL) {
+		if (SecurityConfig.MULTI_CLIENTING_RESTRICTION_MODE == MultiClientingRestrictionMode.FULL && !SecurityConfig.MULTI_CLIENTING_IGNORED_MAC_ADDRESSES.contains(con.getMacAddress())) {
 			String mac = con.getMacAddress();
 			String hdd = con.getHddSerial();
 			String ip = con.getIP();
@@ -58,10 +58,12 @@ public class MultiClientingService {
 	}
 
 	public static Integer checkForFactionSwitchCooldownTime(Race race, AionConnection con) {
+		if (SecurityConfig.MULTI_CLIENTING_IGNORED_MAC_ADDRESSES.contains(con.getMacAddress()))
+			return null;
 		Race oppositeRace = race == Race.ELYOS ? Race.ASMODIANS : Race.ELYOS;
 		long minLastOnlineMillis = System.currentTimeMillis() - Duration.ofMinutes(SecurityConfig.MULTI_CLIENTING_FACTION_SWITCH_COOLDOWN_MINUTES).toMillis();
 		return sessionsByAccountId.values().stream()
-			.filter(s -> s.wasPlayingOnSameIpOrMac(oppositeRace, minLastOnlineMillis, con))
+			.filter(s -> !s.isIgnored() && s.wasPlayingOnSameIpOrMac(oppositeRace, minLastOnlineMillis, con))
 			.findAny()
 			.map(s -> s.accountId)
 			.orElse(null);
@@ -75,6 +77,10 @@ public class MultiClientingService {
 
 		public AccountSession(int accountId) {
 			this.accountId = accountId;
+		}
+
+		synchronized boolean isIgnored() {
+			return !identifiers.isEmpty() && SecurityConfig.MULTI_CLIENTING_IGNORED_MAC_ADDRESSES.contains(identifiers.getFirst().mac);
 		}
 
 		synchronized void putIdentifiers(AionConnection connection) {

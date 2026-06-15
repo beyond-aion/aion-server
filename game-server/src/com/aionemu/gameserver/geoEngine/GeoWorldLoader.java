@@ -39,13 +39,12 @@ public class GeoWorldLoader {
 	private static final Logger log = LoggerFactory.getLogger(GeoWorldLoader.class);
 	private static final Path GEO_DIR = Path.of("data/geo/");
 
-	public static void load(Collection<GeoMap> maps) throws InterruptedException {
-		Thread terrainThread = Thread.ofVirtual().name("terrain").start(() -> loadTerrains(maps));
+	public static void load(Collection<GeoMap> maps) {
+		loadTerrains(maps);
 		load(maps, loadMeshes());
-		terrainThread.join();
 		// preload mesh collision data for responsive initial collision checks and predictable memory usage
 		ThreadPoolManager.getInstance()
-			.execute(() -> maps.parallelStream().flatMap(m -> m.getGeometries().map(Geometry::getMesh)).distinct().forEach(Mesh::createCollisionData));
+			.executeLongRunning(() -> maps.parallelStream().flatMap(m -> m.getGeometries().map(Geometry::getMesh)).distinct().forEach(Mesh::createCollisionData));
 	}
 
 	/**
@@ -54,8 +53,8 @@ public class GeoWorldLoader {
 	 */
 	private static void loadTerrains(Collection<GeoMap> maps) {
 		Map<GeoMap, Terrain> terrainByMap = new ConcurrentHashMap<>();
-		try {
-			Files.find(GEO_DIR, 1, (p, attr) -> attr.isRegularFile() && p.toString().toLowerCase().endsWith(".png")).parallel().forEach(path -> {
+		try (var paths = Files.find(GEO_DIR, 1, (p, attr) -> attr.isRegularFile() && p.toString().toLowerCase().endsWith(".png"))) {
+			paths.parallel().forEach(path -> {
 				BufferedImage image = null;
 				Set<String> mapIds = Stream.of(path.getFileName().toString().split(",")).collect(Collectors.toSet());
 				for (GeoMap map : maps) {
@@ -128,15 +127,15 @@ public class GeoWorldLoader {
 
 					int vertices = geo.getShort() & 0xFFFF;
 					int verticesBytes = vertices * 3 * 4; // 3 floats per vertex (x, y, z), 4 bytes each
-					m.setBuffer(VertexBuffer.Type.Position, 3, geo.slice(geo.position(), verticesBytes).asFloatBuffer());
+					m.setVertices(geo.slice(geo.position(), verticesBytes).asFloatBuffer());
 					geo.position(geo.position() + verticesBytes);
 
 					int faces = geo.getShort() & 0xFFFF;
 					byte indexSize = geo.get();
 					int facesBytes = faces * 3 * indexSize; // 3 vertex indices per face, `indexSize` bytes each
 					switch (indexSize) {
-						case 1 -> m.setBuffer(VertexBuffer.Type.Index, 3, geo.slice(geo.position(), facesBytes));
-						case 2 -> m.setBuffer(VertexBuffer.Type.Index, 3, geo.slice(geo.position(), facesBytes).asShortBuffer());
+						case 1 -> m.setIndices(geo.slice(geo.position(), facesBytes));
+						case 2 -> m.setIndices(geo.slice(geo.position(), facesBytes).asShortBuffer());
 						default -> throw new IOException("Index size " + indexSize + " is not supported");
 					}
 					geo.position(geo.position() + facesBytes);

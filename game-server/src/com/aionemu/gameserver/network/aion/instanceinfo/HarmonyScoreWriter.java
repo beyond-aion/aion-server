@@ -46,7 +46,7 @@ public class HarmonyScoreWriter extends InstanceScoreWriter<HarmonyArenaScore> {
 				}
 
 				writeD(buf, harmonyGroupReward.getOwnerId());
-				writeS(buf, harmonyGroupReward.getAGPlayer(playerObjId).getName(), 52); // playerName
+				writeS(buf, harmonyGroupReward.getAGPlayer(playerObjId).name(), 52); // playerName
 				writeD(buf, harmonyGroupReward.getGrpObjectId()); // groupObj
 				writeD(buf, playerObjId); // memberObj
 				break;

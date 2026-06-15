@@ -12,7 +12,6 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -233,13 +232,8 @@ public class TiamatStrongHoldInstance extends GeneralInstanceHandler {
 				spawn(800433, 725.93f, 1319.9f, 490.7f, (byte) 61);
 			}
 		} else if (zone.getAreaTemplate().getZoneName() == ZoneName.get("GLORIOUS_NEXUS_300510000")) {
-			player.getEffectController().removeEffect(2784);
+			player.getEffectController().removeEffect(300);
 		}
-	}
-
-	@Override
-	public void onLeaveInstance(Player player) {
-		player.getEffectController().removeEffect(2784);
 	}
 
 	@Override
@@ -259,12 +253,6 @@ public class TiamatStrongHoldInstance extends GeneralInstanceHandler {
 	@Override
 	public void onInstanceDestroy() {
 		isInstanceDestroyed = true;
-	}
-
-	@Override
-	public boolean onDie(final Player player, Creature lastAttacker) {
-		PacketSendUtility.sendPacket(player, new SM_DIE(player, 8));
-		return true;
 	}
 
 	@Override

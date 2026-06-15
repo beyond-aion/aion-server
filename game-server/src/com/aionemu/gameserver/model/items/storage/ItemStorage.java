@@ -15,16 +15,13 @@ public class ItemStorage {
 
 	public static final long FIRST_AVAILABLE_SLOT = 65535L;
 
-	private Map<Integer, Item> items;
-	private int limit;
-	private int specialLimit;
+	private final Map<Integer, Item> items = new ConcurrentHashMap<>();
 	private final StorageType storageType;
+	private int limit;
 
 	public ItemStorage(StorageType storageType) {
-		this.limit = storageType.getLimit();
-		this.specialLimit = storageType.getSpecialLimit();
 		this.storageType = storageType;
-		this.items = new ConcurrentHashMap<>();
+		this.limit = storageType.getLimit();
 	}
 
 	public List<Item> getItems() {
@@ -35,13 +32,8 @@ public class ItemStorage {
 		return limit;
 	}
 
-	public boolean setLimit(int limit) {
-		if (getCubeItems().size() > limit) {
-			return false;
-		}
-
+	public void setLimit(int limit) {
 		this.limit = limit;
-		return true;
 	}
 
 	public int getRowLength() {
@@ -119,7 +111,7 @@ public class ItemStorage {
 	}
 
 	public boolean isFullSpecialCube() {
-		return getSpecialCubeItems().size() >= specialLimit;
+		return getSpecialCubeItems().size() >= storageType.getSpecialLimit();
 	}
 
 	public List<Item> getSpecialCubeItems() {
@@ -135,7 +127,7 @@ public class ItemStorage {
 	}
 
 	public int getSpecialCubeFreeSlots() {
-		return specialLimit - getSpecialCubeItems().size();
+		return storageType.getSpecialLimit() - getSpecialCubeItems().size();
 	}
 
 	public int size() {

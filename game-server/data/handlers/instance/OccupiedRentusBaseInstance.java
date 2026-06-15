@@ -12,7 +12,6 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.teleport.TeleportService;
@@ -111,16 +110,6 @@ public class OccupiedRentusBaseInstance extends GeneralInstanceHandler {
 	}
 
 	@Override
-	public void onLeaveInstance(Player player) {
-		player.getEffectController().removeEffect(player.getRace() == Race.ELYOS ? 21805 : 21806);
-	}
-
-	@Override
-	public void onPlayerLogOut(Player player) {
-		player.getEffectController().removeEffect(player.getRace() == Race.ELYOS ? 21805 : 21806);
-	}
-
-	@Override
 	public void handleUseItemFinish(Player player, Npc npc) {
 		switch (npc.getNpcId()) {
 			case 702677:
@@ -173,12 +162,6 @@ public class OccupiedRentusBaseInstance extends GeneralInstanceHandler {
 
 	private boolean isDeadNpc(int npcId) {
 		return (getNpc(npcId) == null || getNpc(npcId).isDead());
-	}
-
-	@Override
-	public boolean onDie(final Player player, Creature lastAttacker) {
-		PacketSendUtility.sendPacket(player, new SM_DIE(player, 8));
-		return true;
 	}
 
 	@Override

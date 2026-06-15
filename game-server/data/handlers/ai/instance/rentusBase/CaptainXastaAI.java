@@ -11,6 +11,7 @@ import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.ai.manager.EmoteManager;
 import com.aionemu.gameserver.ai.manager.WalkManager;
+import com.aionemu.gameserver.controllers.attack.AggroTarget;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -112,10 +113,9 @@ public class CaptainXastaAI extends AggressiveNpcAI {
 			public void run() {
 				if (!isDead()) {
 					canThink = true;
-					Creature creature = getAggroList().getMostHated();
-					if (creature == null || creature.isDead() || !getOwner().canSee(creature)) {
+					Creature creature = getAggroList().getTarget(AggroTarget.MOST_HATED);
+					if (creature == null) {
 						setStateIfNot(AIState.FIGHT);
-						getMoveController().recallPreviousStep();
 						getMoveController().abortMove();
 						onGeneralEvent(AIEventType.ATTACK_FINISH);
 						onGeneralEvent(AIEventType.BACK_HOME);
@@ -124,7 +124,6 @@ public class CaptainXastaAI extends AggressiveNpcAI {
 						getOwner().setTarget(creature);
 						getOwner().getGameStats().renewLastAttackTime();
 						getOwner().getGameStats().renewLastAttackedTime();
-						getOwner().getGameStats().renewLastChangeTargetTime();
 						getOwner().getGameStats().renewLastSkillTime();
 						setStateIfNot(AIState.FIGHT);
 						handleMoveValidate();

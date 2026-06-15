@@ -11,33 +11,32 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
  */
 public class SM_CASTSPELL extends AionServerPacket {
 
-	private Creature effector;
+	private final Creature effector;
 	private final int spellId;
 	private final int level;
 	private final int targetType;
-	private final int duration;
+	private final int targetObjectId;
+	private final int castDuration;
 	private final float castSpeed;
-	private final boolean isMagical;
-
-	private int targetObjectId;
+	private final boolean allowAnimationBoostByCastSpeed;
 
 	private float x;
 	private float y;
 	private float z;
 
-	public SM_CASTSPELL(Creature effector, int spellId, int level, int targetType, int targetObjectId, int duration, float castSpeed, boolean isMagical) {
+	public SM_CASTSPELL(Creature effector, int spellId, int level, int targetType, int targetObjectId, int castDuration, float castSpeed, boolean allowAnimationBoostByCastSpeed) {
 		this.effector = effector;
 		this.spellId = spellId;
 		this.level = level;
 		this.targetType = targetType;
 		this.targetObjectId = targetObjectId;
-		this.duration = duration;
+		this.castDuration = castDuration;
 		this.castSpeed = castSpeed;
-		this.isMagical = isMagical;
+		this.allowAnimationBoostByCastSpeed = allowAnimationBoostByCastSpeed;
 	}
 
-	public SM_CASTSPELL(Creature effector, int spellId, int level, int targetType, float x, float y, float z, int duration, float castSpeed, boolean isMagical) {
-		this(effector, spellId, level, targetType, 0, duration, castSpeed, isMagical);
+	public SM_CASTSPELL(Creature effector, int spellId, int level, int targetType, float x, float y, float z, int castDuration, float castSpeed, boolean allowAnimationBoostByCastSpeed) {
+		this(effector, spellId, level, targetType, 0, castDuration, castSpeed, allowAnimationBoostByCastSpeed);
 		this.x = x;
 		this.y = y;
 		this.z = z;
@@ -45,11 +44,9 @@ public class SM_CASTSPELL extends AionServerPacket {
 
 	@Override
 	protected void writeImpl(AionConnection con) {
-
 		writeD(effector.getObjectId());
 		writeH(spellId);
 		writeC(level);
-
 		writeC(targetType);
 		switch (targetType) {
 			case 0:
@@ -75,10 +72,9 @@ public class SM_CASTSPELL extends AionServerPacket {
 				writeD(0);// unk7
 				writeD(0);// unk8
 		}
-
-		writeH(duration);
+		writeH(castDuration);
 		writeC(0x00);// unk
-		writeF(castSpeed); // cast speed
-		writeC(isMagical ? 1 : 0); //affects animation time
+		writeF(castSpeed);
+		writeC(allowAnimationBoostByCastSpeed ? 1 : 0); // affects animation time of the next skill based on castSpeed (valid range: 0.5f - 1f)
 	}
 }

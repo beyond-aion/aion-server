@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.model.base;
 
-import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.templates.base.BaseTemplate;
 
 /**
@@ -10,12 +9,12 @@ public class BaseLocation {
 
 	protected BaseTemplate template;
 	protected BaseType type;
-	protected Race race;
+	protected BaseOccupier occupier;
 
 	public BaseLocation(BaseTemplate template) {
 		this.template = template;
 		this.type = template.getType();
-		this.race = Race.NPC;
+		this.occupier = template.getDefaultOccupier();
 	}
 
 	public int getId() {
@@ -25,17 +24,20 @@ public class BaseLocation {
 	public int getWorldId() {
 		return template.getWorldId();
 	}
-	
+
 	public BaseType getType() {
 		return type;
 	}
 
-	public Race getRace() {
-		return race;
+	public BaseOccupier getOccupier() {
+		return occupier;
 	}
 
-	public void setRace(Race race) {
-		this.race = race;
+	public void setOccupier(BaseOccupier occupier) {
+		this.occupier = occupier;
 	}
 
+	public BaseTemplate getTemplate() {
+		return template;
+	}
 }

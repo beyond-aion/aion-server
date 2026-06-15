@@ -26,17 +26,16 @@ public class LsClientPacketFactory {
 	static {
 		try {
 			packets.put(0x00, new PacketInfo<>(CM_GS_AUTH_RESPONSE.class, State.CONNECTED));
-			packets.put(0x01, new PacketInfo<>(CM_ACOUNT_AUTH_RESPONSE.class, State.AUTHED));
+			packets.put(0x01, new PacketInfo<>(CM_ACCOUNT_AUTH_RESPONSE.class, State.AUTHED));
 			packets.put(0x02, new PacketInfo<>(CM_REQUEST_KICK_ACCOUNT.class, State.AUTHED));
 			packets.put(0x03, new PacketInfo<>(CM_ACCOUNT_RECONNECT_KEY.class, State.AUTHED));
 			packets.put(0x04, new PacketInfo<>(CM_LS_CONTROL_RESPONSE.class, State.AUTHED));
 			packets.put(0x05, new PacketInfo<>(CM_BAN_RESPONSE.class, State.AUTHED));
 			packets.put(0x08, new PacketInfo<>(CM_GS_CHARACTER_RESPONSE.class, State.AUTHED));
 			packets.put(0x09, new PacketInfo<>(CM_MACBAN_LIST.class, State.AUTHED));
-			packets.put(0x0A, new PacketInfo<>(CM_PREMIUM_RESPONSE.class, State.AUTHED));
+			packets.put(0x0A, new PacketInfo<>(CM_HDD_BANLIST.class, State.AUTHED));
 			packets.put(0x0B, new PacketInfo<>(CM_LS_PING.class, State.AUTHED));
 			packets.put(0x0C, new PacketInfo<>(CM_PTRANSFER_RESPONSE.class, State.AUTHED));
-			packets.put(0x0D, new PacketInfo<>(CM_HDD_BANLIST.class, State.AUTHED));
 		} catch (NoSuchMethodException e) { // should never happen
 			throw new ExceptionInInitializerError(e);
 		}

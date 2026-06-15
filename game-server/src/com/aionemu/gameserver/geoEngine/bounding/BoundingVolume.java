@@ -55,7 +55,6 @@ public abstract class BoundingVolume implements Collidable {
 	}
 
 	Vector3f center = new Vector3f();
-	protected boolean isTreeCollidable;
 
 	public BoundingVolume() {
 	}
@@ -121,14 +120,6 @@ public abstract class BoundingVolume implements Collidable {
 		center = newCenter;
 	}
 
-	public void setTreeCollidable(boolean isTreeCollidable) {
-		this.isTreeCollidable = isTreeCollidable;
-	}
-
-	public boolean isTreeCollidable() {
-		return isTreeCollidable;
-	}
-
 	/**
 	 * Find the distance from the center of this Bounding Volume to the given point.
 	 * 
@@ -178,15 +169,6 @@ public abstract class BoundingVolume implements Collidable {
 	 * @return true if this volume is intersected by a given ray.
 	 */
 	public abstract boolean intersects(Ray ray);
-
-	/**
-	 * determines if this bounding volume and a given bounding sphere are intersecting.
-	 * 
-	 * @param bs
-	 *          the bounding sphere to test against.
-	 * @return true if this volume intersects the given bounding sphere.
-	 */
-	public abstract boolean intersectsSphere(BoundingSphere bs);
 
 	/**
 	 * determines if this bounding volume and a given bounding box are intersecting.

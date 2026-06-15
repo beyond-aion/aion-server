@@ -13,7 +13,10 @@ import com.aionemu.commons.configuration.TransformationTypeInfo;
  */
 public class ClassTransformer extends PropertyTransformer<Class<?>> {
 
-	public static final ClassTransformer SHARED_INSTANCE = new ClassTransformer();
+	@Override
+	public boolean matches(Class<?> targetType) {
+		return targetType == Class.class;
+	}
 
 	@Override
 	protected Class<?> parseObject(String value, TransformationTypeInfo typeInfo) throws Exception {

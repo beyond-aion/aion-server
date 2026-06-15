@@ -1,11 +1,11 @@
 package com.aionemu.gameserver.services.panesterra.ahserion;
 
-import java.util.Collections;
-import java.util.EnumMap;
+import static com.aionemu.gameserver.services.panesterra.ahserion.PanesterraFaction.*;
+
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.function.Consumer;
 
 import org.slf4j.LoggerFactory;
 
@@ -22,6 +22,7 @@ import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.panesterra.AhserionsFlightSpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.mail.SystemMailService;
+import com.aionemu.gameserver.services.panesterra.PanesterraService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -36,7 +37,7 @@ import com.aionemu.gameserver.world.WorldPosition;
  */
 public class AhserionRaid {
 
-	private final Map<PanesterraFaction, PanesterraTeam> panesterraTeams = Collections.synchronizedMap(new EnumMap<>(PanesterraFaction.class));
+	private final List<PanesterraFaction> factions = List.of(BELUS, ASPIDA, ATANATOS, DISILLON);
 	private final AtomicBoolean isStarted = new AtomicBoolean();
 	private PanesterraTeam winner;
 	private Future<?> progressTask;
@@ -47,7 +48,6 @@ public class AhserionRaid {
 
 	public void start() {
 		if (isStarted.compareAndSet(false, true)) {
-			spawnAdvanceCorridorsAndInitTeams();
 			spawnRaid();
 			startInstanceTimer();
 		}
@@ -58,13 +58,6 @@ public class AhserionRaid {
 			return;
 		winner = null;
 		cancelProgressTask();
-		if (!panesterraTeams.isEmpty()) {
-			for (PanesterraTeam team : panesterraTeams.values()) {
-				team.setIsEliminated(true);
-				team.moveTeamMembersToFortressPosition();
-			}
-			panesterraTeams.clear();
-		}
 		cleanUp();
 	}
 
@@ -129,10 +122,10 @@ public class AhserionRaid {
 						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_GAB1_SUB_ALARM_11());
 						break;
 					case 60:
-						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_GAB1_SUB_ALARM_12());
-						for (PanesterraFaction faction : PanesterraFaction.values())
-							if (panesterraTeams.containsKey(faction) && !panesterraTeams.get(faction).isEliminated())
-								spawnStage(4, faction);
+						forEachTeam(team -> {
+							if (!team.isEliminated())
+								spawnStage(4, team.getFaction());
+						});
 						break;
 					case 130:
 						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_GAB1_SUB_ALARM_13());
@@ -141,7 +134,10 @@ public class AhserionRaid {
 						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_GAB1_SUB_ALARM_14());
 						break;
 					case 150:
-						panesterraTeams.values().stream().filter(team -> !team.isEliminated()).forEach(team -> sendConsolationReward(team));
+						forEachTeam(team -> {
+							if (!team.isEliminated())
+								sendConsolationReward(team);
+						});
 						stop();
 						break;
 				}
@@ -150,7 +146,7 @@ public class AhserionRaid {
 	}
 
 	private void checkForIllegalMovement() {
-		panesterraTeams.values().forEach(team -> {
+		forEachTeam(team -> {
 			WorldPosition startPosition = team.getStartPosition();
 			team.forEachMember(player -> {
 				if (player.getPosition().getMapId() == 400030000
@@ -162,58 +158,45 @@ public class AhserionRaid {
 		});
 	}
 
-	/**
-	 * Currently hard coded due to hard coded tribe relations
-	 * TODO: Implement more flexibility for fortress occupation
-	 */
-	private void spawnAdvanceCorridorsAndInitTeams() {
-		PanesterraFaction elyos = PanesterraFaction.ATANATOS;
-		PanesterraFaction asmodians = PanesterraFaction.DISILLON;
-		panesterraTeams.put(elyos, new PanesterraTeam(elyos));
-		panesterraTeams.put(asmodians, new PanesterraTeam(asmodians));
-		SpawnEngine.spawnObject(SpawnEngine.newSingleTimeSpawn(110070000, 802223, 485.692f, 401.079f, 127.789f, (byte) 0), 1);
-		SpawnEngine.spawnObject(SpawnEngine.newSingleTimeSpawn(120080000, 802225, 400.772f, 231.517f, 93.113f, (byte) 30), 1);
-	}
-
 	private void spawnRaid() {
 		// spawn Barricades & Tank Fleets
-		spawnStage(0, PanesterraFaction.BALAUR);
-		spawnStage(180, PanesterraFaction.BALAUR);
-		spawnStage(181, PanesterraFaction.BALAUR);
-		spawnStage(182, PanesterraFaction.BALAUR);
-		spawnStage(183, PanesterraFaction.BALAUR);
+		spawnStage(0, BALAUR);
+		spawnStage(180, BALAUR);
+		spawnStage(181, BALAUR);
+		spawnStage(182, BALAUR);
+		spawnStage(183, BALAUR);
 
 		// spawn flags & cannons for all registered teams
-		for (PanesterraFaction faction : panesterraTeams.keySet()) {
-			if (faction != null)
-				spawnStage(0, faction);
-			spawnStage(1, faction);
-		}
+		forEachTeam(team -> {
+			spawnStage(0, team.getFaction());
+			spawnStage(1, team.getFaction());
+		});
 
 		// spawn white flags for not existing teams
-		if (!panesterraTeams.containsKey(PanesterraFaction.BELUS)) {
+		if (PanesterraService.getInstance().getTeam(BELUS) == null) {
 			SpawnTemplate template = SpawnEngine.newSingleTimeSpawn(400030000, 804106, 282.73f, 289.1f, 687.38f, (byte) 1);
 			SpawnEngine.spawnObject(template, 1);
 		}
-		if (!panesterraTeams.containsKey(PanesterraFaction.ASPIDA)) {
+		if (PanesterraService.getInstance().getTeam(ASPIDA) == null) {
 			SpawnTemplate template = SpawnEngine.newSingleTimeSpawn(400030000, 804108, 282.49f, 739.62f, 689.66f, (byte) 1);
 			SpawnEngine.spawnObject(template, 1);
 		}
-		if (!panesterraTeams.containsKey(PanesterraFaction.ATANATOS)) {
+		if (PanesterraService.getInstance().getTeam(ATANATOS) == null) {
 			SpawnTemplate template = SpawnEngine.newSingleTimeSpawn(400030000, 804110, 734.06f, 740.75f, 681.16f, (byte) 1);
 			SpawnEngine.spawnObject(template, 1);
 		}
-		if (!panesterraTeams.containsKey(PanesterraFaction.DISILLON)) {
+		if (PanesterraService.getInstance().getTeam(DISILLON) == null) {
 			SpawnTemplate template = SpawnEngine.newSingleTimeSpawn(400030000, 804112, 738.58f, 286.02f, 680.71f, (byte) 1);
 			SpawnEngine.spawnObject(template, 1);
 		}
 	}
 
 	public void spawnStage(int stage, PanesterraFaction faction) {
-		if (faction != PanesterraFaction.BALAUR && (panesterraTeams.get(faction) == null || panesterraTeams.get(faction).isEliminated()))
+		PanesterraTeam team = PanesterraService.getInstance().getTeam(faction);
+		if (faction != BALAUR && (team == null || team.isEliminated()))
 			return;
 
-		List<SpawnGroup> ahserionSpawns = DataManager.SPAWNS_DATA.getAhserionSpawnByTeamId(faction.getId());
+		List<SpawnGroup> ahserionSpawns = DataManager.SPAWNS_DATA.getAhserionSpawnByTeamId(faction.ordinal());
 		if (ahserionSpawns == null)
 			return;
 
@@ -237,29 +220,26 @@ public class AhserionRaid {
 
 		switch (npcId) {
 			case 297306 -> {
-				eliminatedFaction = PanesterraFaction.BELUS;
+				eliminatedFaction = BELUS;
 				template = SpawnEngine.newSingleTimeSpawn(400030000, 804106, 282.73f, 289.1f, 687.38f, (byte) 1);
 			}
 			case 297307 -> {
-				eliminatedFaction = PanesterraFaction.ASPIDA;
+				eliminatedFaction = ASPIDA;
 				template = SpawnEngine.newSingleTimeSpawn(400030000, 804108, 282.49f, 739.62f, 689.66f, (byte) 1);
 			}
 			case 297308 -> {
-				eliminatedFaction = PanesterraFaction.ATANATOS;
+				eliminatedFaction = ATANATOS;
 				template = SpawnEngine.newSingleTimeSpawn(400030000, 804110, 734.06f, 740.75f, 681.16f, (byte) 1);
 			}
 			case 297309 -> {
-				eliminatedFaction = PanesterraFaction.DISILLON;
+				eliminatedFaction = DISILLON;
 				template = SpawnEngine.newSingleTimeSpawn(400030000, 804112, 738.58f, 286.02f, 680.71f, (byte) 1);
 			}
 		}
 
-		PanesterraTeam eliminatedTeam = panesterraTeams.remove(eliminatedFaction);
-		if (eliminatedTeam != null) {
-			eliminatedTeam.setIsEliminated(true);
-			eliminatedTeam.moveTeamMembersToFortressPosition();
+		PanesterraTeam eliminatedTeam = PanesterraService.getInstance().handleTeamElimination(eliminatedFaction);
+		if (eliminatedTeam != null)
 			sendConsolationReward(eliminatedTeam);
-		}
 		deleteNpcs(eliminatedFaction, npcId + 1);
 		SpawnEngine.spawnObject(template, 1);
 	}
@@ -271,7 +251,7 @@ public class AhserionRaid {
 	}
 
 	public void handleBossKilled(Npc ahserion, PanesterraFaction winnerFaction) {
-		winner = panesterraTeams.get(winnerFaction);
+		winner = PanesterraService.getInstance().getTeam(winnerFaction);
 		if (winner == null || winner.isEliminated()) {
 			// something went wrong, remove all players from the map
 			LoggerFactory.getLogger(AhserionRaid.class).warn("Ahserion got killed but winnerTeam is missing or eliminated. Skipping rewards.");
@@ -279,14 +259,13 @@ public class AhserionRaid {
 			return;
 		}
 		cancelProgressTask();
-		for (PanesterraFaction faction : panesterraTeams.keySet()) {
-			if (faction != null && faction != winnerFaction) {
-				panesterraTeams.get(faction).setIsEliminated(true);
-				panesterraTeams.get(faction).moveTeamMembersToFortressPosition();
-			}
-		}
+		factions.forEach(faction -> {
+			if (faction != winnerFaction)
+				PanesterraService.getInstance().handleTeamElimination(faction);
+		});
+
 		ahserion.getPosition().getWorldMapInstance().forEachNpc(npc -> npc.getController().deleteIfAliveOrCancelRespawn());
-		SpawnEngine.spawnObject(SpawnEngine.newSingleTimeSpawn(400030000, 804680 + winnerFaction.getId(), 509.239f, 513.011f, 675.089f, (byte) 48), 1); // Pasha
+		spawnStage(10, winnerFaction); // Quest Npc "Pasha"
 		ThreadPoolManager.getInstance().schedule(this::stop, 900000); // 15min
 	}
 
@@ -305,50 +284,17 @@ public class AhserionRaid {
 		});
 	}
 
+	public void forEachTeam(Consumer<PanesterraTeam> consumer) {
+		for (PanesterraFaction faction : factions) {
+			PanesterraTeam team = PanesterraService.getInstance().getTeam(faction);
+			if (team != null)
+				consumer.accept(team);
+		}
+	}
+
 	private void cancelProgressTask() {
 		if (progressTask != null && !progressTask.isCancelled())
 			progressTask.cancel(true);
-	}
-
-	public PanesterraTeam getPanesterraFactionTeam(Player player) {
-		for (PanesterraTeam faction : panesterraTeams.values()) {
-			if (faction.isTeamMember(player.getObjectId()))
-				return faction;
-		}
-		return null;
-	}
-
-	public boolean teleportToTeamStartPosition(Player player) {
-		PanesterraTeam team = getPanesterraFactionTeam(player);
-		if (team != null && !team.isEliminated() && team.getStartPosition() != null) {
-			TeleportService.teleportTo(player, team.getStartPosition());
-			return true;
-		}
-		return false;
-	}
-
-	/**
-	 * Validates players position
-	 */
-	public void onPlayerLogin(Player player) {
-		if (player.isStaff() || player.getPosition().getMapId() != 400030000)
-			return;
-		PanesterraTeam team = getPanesterraFactionTeam(player);
-		if (team == null)
-			TeleportService.moveToBindLocation(player);
-		else if (team.isEliminated())
-			TeleportService.teleportTo(player, team.getFortressPosition());
-	}
-
-	public int getTeamMemberCountByFaction(PanesterraFaction faction) {
-		PanesterraTeam team = panesterraTeams.get(faction);
-		if (team != null)
-			return team.getMemberCount();
-		return 0;
-	}
-
-	public PanesterraTeam getFactionTeam(PanesterraFaction faction) {
-		return panesterraTeams.get(faction);
 	}
 
 	public boolean isStarted() {

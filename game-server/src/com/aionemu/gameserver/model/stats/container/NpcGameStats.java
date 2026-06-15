@@ -3,7 +3,6 @@ package com.aionemu.gameserver.model.stats.container;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AILogger;
 import com.aionemu.gameserver.ai.AISubState;
-import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
@@ -11,9 +10,7 @@ import com.aionemu.gameserver.model.skill.NpcSkillEntry;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.model.templates.npc.AbyssNpcType;
 import com.aionemu.gameserver.model.templates.stats.StatsTemplate;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.skillengine.model.Effect;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.stats.CalculationType;
 
@@ -26,12 +23,9 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 	private long lastAttackedTime = 0;
 	private long nextAttackTime = 0;
 	private long lastSkillTime = 0;
-	private long nextSkillDelay = 0;
+	private int nextSkillDelay = 0;
 	private NpcSkillEntry lastSkill = null;
 	private long fightStartingTime = 0;
-	private int cachedState;
-	private AISubState cachedSubState;
-	private Stat2 cachedSpeedStat;
 	private long nextGeoZUpdate;
 	private long lastChangeTarget = 0;
 
@@ -43,16 +37,6 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 	protected void onStatsChange(Effect effect) {
 		super.onStatsChange(effect);
 		checkSpeedStats();
-	}
-
-	private void checkSpeedStats() {
-		Stat2 oldSpeed = cachedSpeedStat;
-		cachedSpeedStat = null;
-		Stat2 newSpeed = getMovementSpeed();
-		cachedSpeedStat = newSpeed;
-		if (oldSpeed == null || oldSpeed.getCurrent() != newSpeed.getCurrent()) {
-			updateSpeedInfo();
-		}
 	}
 
 	@Override
@@ -74,11 +58,6 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 
 	@Override
 	public Stat2 getMovementSpeed() {
-		int currentState = owner.getState();
-		AISubState currentSubState = owner.getAi().getSubState();
-		if (cachedSpeedStat != null && cachedState == currentState && cachedSubState == currentSubState) {
-			return cachedSpeedStat;
-		}
 		Stat2 newSpeedStat;
 		if (owner.isInState(CreatureState.WEAPON_EQUIPPED)) {
 			float speed;
@@ -98,9 +77,6 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 			float multiplier = owner.isFlying() ? 1.3f : 1.0f;
 			newSpeedStat = getStat(StatEnum.SPEED, Math.round(getStatsTemplate().getRunSpeed() * multiplier * 1000));
 		}
-		cachedState = currentState;
-		cachedSubState = currentSubState;
-		cachedSpeedStat = newSpeedStat;
 		return newSpeedStat;
 	}
 
@@ -218,11 +194,6 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 
 	public NpcSkillEntry getLastSkill() {
 		return lastSkill;
-	}
-
-	@Override
-	public void updateSpeedInfo() {
-		PacketSendUtility.broadcastPacket(owner, new SM_EMOTION(owner, EmotionType.CHANGE_SPEED, 0, 0));
 	}
 
 	public final long getNextGeoZUpdate() {

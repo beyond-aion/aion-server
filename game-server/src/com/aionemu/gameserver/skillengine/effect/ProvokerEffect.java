@@ -14,6 +14,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.model.Effect;
+import com.aionemu.gameserver.skillengine.model.HitType;
 import com.aionemu.gameserver.skillengine.model.ProvokeTarget;
 import com.aionemu.gameserver.skillengine.model.SkillType;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -39,16 +40,26 @@ public class ProvokerEffect extends ShieldEffect {
 	@Override
 	public void startEffect(Effect effect) {
 		Creature effector = effect.getEffector();
-		effect.addObserver(effect.getEffected(), new ActionObserver(ObserverType.ATTACK) {
+		ObserverType observerType = hitType == HitType.NMLATK || hitType == HitType.BACKATK ? ObserverType.ATTACK : ObserverType.ATTACKED;
+		effect.addObserver(effect.getEffected(), new ActionObserver(observerType) {
 
 			@Override
 			public void attack(Creature attacked, int attackSkillId) {
-				if (shouldApply(effector, attacked, attackSkillId)) {
+				tryApplyEffect(attacked, attackSkillId, effector);
+			}
+
+			@Override
+			public void attacked(Creature attacker, int attackSkillId) {
+				tryApplyEffect(attacker, attackSkillId, effector);
+			}
+
+			private void tryApplyEffect(Creature target, int attackSkillId, Creature effector) {
+				if (shouldApply(effector, target, attackSkillId)) {
 					if (effector instanceof Player player) {
 						PacketSendUtility.sendPacket(player,
-								SM_SYSTEM_MESSAGE.STR_SKILL_PROC_EFFECT_OCCURRED(DataManager.SKILL_DATA.getSkillTemplate(skillId).getL10n()));
+							SM_SYSTEM_MESSAGE.STR_SKILL_PROC_EFFECT_OCCURRED(DataManager.SKILL_DATA.getSkillTemplate(skillId).getL10n()));
 					}
-					SkillEngine.getInstance().applyEffectDirectly(skillId, effector, getProvokeTarget(effector, attacked));
+					SkillEngine.getInstance().applyEffectDirectly(skillId, effector, getProvokeTarget(effector, target));
 				}
 			}
 		});

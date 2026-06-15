@@ -5,12 +5,12 @@ import java.util.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.services.CronService;
 import com.aionemu.gameserver.configs.main.RankingConfig;
 import com.aionemu.gameserver.dao.AbyssRankDAO;
 import com.aionemu.gameserver.dao.AbyssRankDAO.RankingListPlayerGp;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.services.cron.CronService;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
 import com.aionemu.gameserver.world.World;
@@ -134,7 +134,7 @@ public class AbyssRankUpdateService {
 		}
 		for (Player p : World.getInstance().getAllPlayers()) {
 			if (p.getAbyssRank().getRank().getGpLossPerDay() > 0) {
-				GloryPointsService.decreaseGpBy(p.getObjectId(), p.getAbyssRank().getRank().getGpLossPerDay());
+				GloryPointsService.addGp(p.getObjectId(), -p.getAbyssRank().getRank().getGpLossPerDay());
 			}
 		}
 	}

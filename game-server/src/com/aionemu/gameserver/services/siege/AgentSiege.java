@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.Race;
+import com.aionemu.gameserver.model.base.BaseOccupier;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
 import com.aionemu.gameserver.model.siege.AgentLocation;
@@ -32,24 +33,12 @@ import com.aionemu.gameserver.world.zone.ZoneName;
  */
 public class AgentSiege extends Siege<AgentLocation> {
 
-	private final AgentDeathListener veilleDeathListener = new AgentDeathListener(this);
-	private final AgentDeathListener mastaDeathListener = new AgentDeathListener(this);
-	private final SiegeBossDoAddDamageListener veilleDoAddDamageListener = new SiegeBossDoAddDamageListener(this);
-	private final SiegeBossDoAddDamageListener mastaDoAddDamageListener = new SiegeBossDoAddDamageListener(this);
 	private byte startProgress = 1;
 	private SiegeNpc masta, veille;
 	private SiegeRace winner;
 
-	/**
-	 * Set race for both deathListeners with opposite race.
-	 * This will handle better siege end, later.
-	 * 
-	 * @param siegeLocation
-	 */
 	public AgentSiege(AgentLocation siegeLocation) {
 		super(siegeLocation);
-		veilleDeathListener.setRace(SiegeRace.ASMODIANS);
-		mastaDeathListener.setRace(SiegeRace.ELYOS);
 	}
 
 	@Override
@@ -78,12 +67,11 @@ public class AgentSiege extends Siege<AgentLocation> {
 	protected void onSiegeFinish() {
 		PacketSendUtility.broadcastToWorld(SM_SYSTEM_MESSAGE.STR_MSG_LDF4_ADVANCE_GODELITE_TIME_03());
 		getSiegeLocation().setVulnerable(false);
-		removeListeners();
 		despawnSiegeNpcs();
 		if (winner == null)
 			return;
-		Race winnerRace = winner == SiegeRace.ELYOS ? Race.ELYOS : Race.ASMODIANS;
-		BaseService.getInstance().capture(6113, winnerRace);
+		BaseOccupier winnerType = winner == SiegeRace.ELYOS ? BaseOccupier.ELYOS : BaseOccupier.ASMODIANS;
+		BaseService.getInstance().capture(6113, winnerType);
 		SiegeRace looser = winner == SiegeRace.ELYOS ? SiegeRace.ASMODIANS : SiegeRace.ELYOS;
 		sendRewardsToParticipants(getSiegeCounter().getRaceCounter(winner), SiegeResult.OCCUPY);
 		sendRewardsToParticipants(getSiegeCounter().getRaceCounter(looser), SiegeResult.FAIL);
@@ -120,7 +108,6 @@ public class AgentSiege extends Siege<AgentLocation> {
 				}
 			}
 		}
-		registerListeners();
 	}
 
 	public void despawnSiegeNpcs() {
@@ -135,35 +122,16 @@ public class AgentSiege extends Siege<AgentLocation> {
 		switch (target.getRace()) {
 			case GHENCHMAN_LIGHT:
 				if (veille != null)
-					throw new SiegeException("Tried to init veille twice!");
+					throw new SiegeException("Tried to init Veille twice!");
 				veille = target;
 				break;
 			case GHENCHMAN_DARK:
 				if (masta != null)
-					throw new SiegeException("Tried to init masta twice!");
+					throw new SiegeException("Tried to init Mastarius twice!");
 				masta = target;
 				break;
 			default:
 				throw new SiegeException("Tried to init a npc with not supported TemplateType " + target.getNpcTemplateType() + " for agent fight!");
-		}
-	}
-
-	private void registerListeners() {
-		veille.getAggroList().addEventListener(veilleDoAddDamageListener);
-		veille.getAi().addEventListener(veilleDeathListener);
-
-		masta.getAggroList().addEventListener(mastaDoAddDamageListener);
-		masta.getAi().addEventListener(mastaDeathListener);
-	}
-
-	private void removeListeners() {
-		if (veille != null) {
-			veille.getAggroList().removeEventListener(veilleDoAddDamageListener);
-			veille.getAi().removeEventListener(veilleDeathListener);
-		}
-		if (masta != null) {
-			masta.getAggroList().removeEventListener(mastaDoAddDamageListener);
-			masta.getAi().removeEventListener(mastaDeathListener);
 		}
 	}
 

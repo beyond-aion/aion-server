@@ -43,7 +43,7 @@ public class PrivateStoreService {
 			store.addItemToSell(tradePSItem.getItemObjId(), tradePSItem);
 		}
 		player.setStore(store);
-		player.setState(CreatureState.PRIVATE_SHOP);
+		player.setState(CreatureState.PRIVATE_SHOP, true);
 		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.OPEN_PRIVATESHOP, 0, 0), true);
 	}
 
@@ -64,7 +64,7 @@ public class PrivateStoreService {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_OPEN_STORE_DURING_CRAFTING()); // name "crafting" is NC fail, msg is correct
 			return false;
 		}
-		if (player.isInPlayerMode(PlayerMode.RIDE)) {
+		if (player.isInPlayerMode(PlayerMode.RIDE) || player.isInRobotMode()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PERSONAL_SHOP_RESTRICTION_RIDE());
 			return false;
 		}
@@ -74,7 +74,7 @@ public class PrivateStoreService {
 		}
 		if (player.isDead())
 			return false;
-		if (player.getState() != CreatureState.ACTIVE.getId())
+		if (player.isInState(CreatureState.CHAIR))
 			return false;
 		if (player.getStore() != null)
 			return false;

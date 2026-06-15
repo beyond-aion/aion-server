@@ -8,6 +8,8 @@ import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.configs.main.DropConfig;
 import com.aionemu.gameserver.configs.main.GroupConfig;
+import com.aionemu.gameserver.controllers.attack.DamageInfo;
+import com.aionemu.gameserver.controllers.attack.TeamDamageList;
 import com.aionemu.gameserver.model.gameobjects.AionObject;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -30,11 +32,7 @@ public class PlayerTeamDistributionService {
 	 * This method will send a reward if a player is in a team
 	 */
 	@SuppressWarnings("lossy-conversions")
-	public static void doReward(TemporaryPlayerTeam<?> team, float damagePercent, Npc owner, AionObject winner) {
-		if (team == null || owner == null) {
-			return;
-		}
-
+	public static void doReward(TemporaryPlayerTeam<?> team, float damagePercent, Npc owner, AionObject winner, TeamDamageList teamDamageList) {
 		// Find team's members and determine highest level
 		boolean disableRangeChecks = DropConfig.DISABLE_RANGE_CHECK_MAPS.contains(owner.getPosition().getMapId());
 		PlayerTeamRewardStats filteredStats = new PlayerTeamRewardStats(owner, disableRangeChecks);
@@ -51,11 +49,7 @@ public class PlayerTeamDistributionService {
 
 		long expReward = StatFunctions.calculateExperienceReward(filteredStats.highestLevel, owner);
 
-		float instanceApMultiplier = 1f;
-		if (owner.isInInstance()) {
-			instanceApMultiplier = owner.getPosition().getWorldMapInstance().getInstanceHandler().getInstanceApMultiplier();
-		}
-
+		float instanceApMultiplier = owner.getPosition().getWorldMapInstance().getInstanceHandler().getApMultiplier();
 		for (Player member : filteredStats.players) {
 			// dead players shouldn't receive AP/EP/DP
 			if (member.isDead())
@@ -90,11 +84,17 @@ public class PlayerTeamDistributionService {
 		}
 		if (owner.getAi().ask(AIQuestion.REWARD_LOOT)) {
 			// Give Drop
-			Player mostDamagePlayer = owner.getAggroList().getMostPlayerDamageOfMembers(team.getMembers(), filteredStats.highestLevel);
-			if (mostDamagePlayer == null) {
+			DamageInfo<Player> mostDamageMember = teamDamageList.getMostDamageByTeam(team);
+			if (mostDamageMember == null) {
 				return;
 			}
-
+			Player mostDamagePlayer = mostDamageMember.getAttacker();
+			if (mostDamagePlayer.isMentor()) {
+				for (Player member : team.getMembers()) {
+					if (member.getLevel() == filteredStats.highestLevel)
+						mostDamagePlayer = member;
+				}
+			}
 			if (winner.equals(team) && (filteredStats.mentorCount == 0 || !owner.getAi().getName().equals("chest"))) {
 				DropRegistrationService.getInstance().registerDrop(owner, mostDamagePlayer, filteredStats.highestLevel, filteredStats.players);
 			}

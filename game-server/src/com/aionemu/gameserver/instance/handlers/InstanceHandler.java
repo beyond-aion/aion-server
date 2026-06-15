@@ -32,7 +32,7 @@ public interface InstanceHandler {
 
 	void onPlayerLogin(Player player);
 
-	void onPlayerLogOut(Player player);
+	void onPlayerLogout(Player player);
 
 	void onEnterInstance(Player player);
 
@@ -96,7 +96,12 @@ public interface InstanceHandler {
 
 	boolean canEnter(Player player);
 
-	float getInstanceExpMultiplier();
+	float getExpMultiplier();
 
-	float getInstanceApMultiplier();
+	float getApMultiplier();
+
+	boolean allowSelfReviveBySkill();
+	boolean allowSelfReviveByItem();
+	boolean allowKiskRevive();
+	boolean allowInstanceRevive();
 }

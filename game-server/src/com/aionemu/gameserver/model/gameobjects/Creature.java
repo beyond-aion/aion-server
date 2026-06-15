@@ -50,16 +50,13 @@ public abstract class Creature extends VisibleObject {
 	private int seeState = CreatureSeeState.NORMAL.getId();
 	private Skill castingSkill;
 	private Map<Integer, Long> skillCoolDowns;
-	private Map<Integer, Long> skillCoolDownsBase;
 	private ObserveController observeController;
-	private final TransformModel transformModel;
+	private TransformModel transformModel;
 	private final AggroList aggroList;
-	private Item usingItem;
 	private final byte[] zoneTypes = new byte[ZoneType.values().length];
 	private int skillNumber;
 	private int attackedCount;
 	private long spawnTime = System.currentTimeMillis();
-	private TribeClass tribe = TribeClass.GENERAL;
 
 	public Creature(int objId, CreatureController<? extends Creature> controller, SpawnTemplate spawnTemplate, CreatureTemplate objectTemplate,
 		WorldPosition position, boolean autoReleaseObjectId) {
@@ -69,7 +66,6 @@ public abstract class Creature extends VisibleObject {
 			aiName = SpawnTemplate.NO_AI.equals(spawnTemplate.getAiName()) ? null : spawnTemplate.getAiName();
 		this.ai = AIEngine.getInstance().newAI(aiName, this);
 		this.observeController = new ObserveController();
-		this.transformModel = new TransformModel(this);
 		this.aggroList = createAggroList();
 	}
 
@@ -81,59 +77,33 @@ public abstract class Creature extends VisibleObject {
 		return new AggroList(this);
 	}
 
-	/**
-	 * Return CreatureController of this Creature object.
-	 * 
-	 * @return CreatureController.
-	 */
 	@Override
 	public CreatureController<? extends Creature> getController() {
 		return (CreatureController<?>) super.getController();
 	}
 
-	/**
-	 * @return the lifeStats
-	 */
 	public CreatureLifeStats<? extends Creature> getLifeStats() {
 		return lifeStats;
 	}
 
-	/**
-	 * @param lifeStats
-	 *          the lifeStats to set
-	 */
 	public void setLifeStats(CreatureLifeStats<? extends Creature> lifeStats) {
 		this.lifeStats = lifeStats;
 	}
 
-	/**
-	 * @return the gameStats
-	 */
 	public CreatureGameStats<? extends Creature> getGameStats() {
 		return gameStats;
 	}
 
-	/**
-	 * @param gameStats
-	 *          the gameStats to set
-	 */
 	public void setGameStats(CreatureGameStats<? extends Creature> gameStats) {
 		this.gameStats = gameStats;
 	}
 
 	public abstract byte getLevel();
 
-	/**
-	 * @return the effectController
-	 */
 	public EffectController getEffectController() {
 		return effectController;
 	}
 
-	/**
-	 * @param effectController
-	 *          the effectController to set
-	 */
 	public void setEffectController(EffectController effectController) {
 		this.effectController = effectController;
 	}
@@ -153,19 +123,12 @@ public abstract class Creature extends VisibleObject {
 		return false;
 	}
 
-	/**
-	 * Is creature casting some skill
-	 * 
-	 * @return
-	 */
 	public boolean isCasting() {
 		return castingSkill != null;
 	}
 
 	/**
 	 * Set current casting skill or null when skill ends
-	 * 
-	 * @param castingSkill
 	 */
 	public void setCasting(Skill castingSkill) {
 		if (castingSkill != null)
@@ -173,20 +136,10 @@ public abstract class Creature extends VisibleObject {
 		this.castingSkill = castingSkill;
 	}
 
-	/**
-	 * Current casting skill id
-	 * 
-	 * @return
-	 */
 	public int getCastingSkillId() {
 		return castingSkill != null ? castingSkill.getSkillTemplate().getSkillId() : 0;
 	}
 
-	/**
-	 * Current casting skill
-	 * 
-	 * @return
-	 */
 	public Skill getCastingSkill() {
 		return castingSkill;
 	}
@@ -212,45 +165,7 @@ public abstract class Creature extends VisibleObject {
 	}
 
 	/**
-	 * Is using item
-	 * 
-	 * @return
-	 */
-	public boolean isUsingItem() {
-		return usingItem != null;
-	}
-
-	/**
-	 * Set using item
-	 * 
-	 * @param usingItem
-	 */
-	public void setUsingItem(Item usingItem) {
-		this.usingItem = usingItem;
-	}
-
-	/**
-	 * get Using ItemId
-	 * 
-	 * @return
-	 */
-	public int getUsingItemId() {
-		return usingItem != null ? usingItem.getItemTemplate().getTemplateId() : 0;
-	}
-
-	/**
-	 * Using Item
-	 * 
-	 * @return
-	 */
-	public Item getUsingItem() {
-		return usingItem;
-	}
-
-	/**
 	 * All abnormal effects are checked that disable movements
-	 * 
-	 * @return
 	 */
 	public boolean canPerformMove() {
 		return (!(getEffectController().isInAnyAbnormalState(AbnormalState.CANT_MOVE_STATE) && isSpawned() && canUseSkillInMove()));
@@ -269,17 +184,12 @@ public abstract class Creature extends VisibleObject {
 
 	/**
 	 * All abnormal effects are checked that disable attack
-	 * 
-	 * @return
 	 */
 	public boolean canAttack() {
 		return (!getEffectController().isInAnyAbnormalState(AbnormalState.CANT_ATTACK_STATE) && !isCasting() && !isInState(CreatureState.RESTING)
 			&& !isInState(CreatureState.PRIVATE_SHOP));
 	}
 
-	/**
-	 * @return state
-	 */
 	public int getState() {
 		return state;
 	}
@@ -320,17 +230,10 @@ public abstract class Creature extends VisibleObject {
 			return (this.state & state.getId()) == state.getId();
 	}
 
-	/**
-	 * @return visualState
-	 */
 	public int getVisualState() {
 		return visualState;
 	}
 
-	/**
-	 * @param visualState
-	 *          the visualState to set
-	 */
 	public void setVisualState(CreatureVisualState visualState) {
 		this.visualState |= visualState.getId();
 	}
@@ -347,17 +250,10 @@ public abstract class Creature extends VisibleObject {
 		return visualState != CreatureVisualState.VISIBLE.getId() && visualState != CreatureVisualState.BLINKING.getId();
 	}
 
-	/**
-	 * @return seeState
-	 */
 	public int getSeeState() {
 		return seeState;
 	}
 
-	/**
-	 * @param seeState
-	 *          the seeState to set
-	 */
 	public void setSeeState(CreatureSeeState seeState) {
 		this.seeState |= seeState.getId();
 	}
@@ -375,10 +271,9 @@ public abstract class Creature extends VisibleObject {
 		return false;
 	}
 
-	/**
-	 * @return the transformModel
-	 */
 	public TransformModel getTransformModel() {
+		if (transformModel == null)
+			transformModel = new TransformModel(this);
 		return transformModel;
 	}
 
@@ -387,62 +282,35 @@ public abstract class Creature extends VisibleObject {
 	}
 
 	public boolean isTransformed() {
-		return getTransformModel().isActive();
+		return transformModel != null && getTransformModel().isActive();
 	}
 
-	/**
-	 * @return the aggroList
-	 */
 	public final AggroList getAggroList() {
 		return aggroList;
 	}
 
-	/**
-	 * @return the observeController
-	 */
 	public ObserveController getObserveController() {
 		return observeController;
 	}
 
-	/**
-	 * Double dispatch like method
-	 * 
-	 * @param creature
-	 * @return
-	 */
 	public boolean isEnemy(Creature creature) {
 		return creature.isEnemyFrom(this);
 	}
 
-	/**
-	 * @param creature
-	 */
 	public boolean isEnemyFrom(Creature creature) {
 		return false;
 	}
 
-	/**
-	 * @param player
-	 * @return
-	 */
 	public boolean isEnemyFrom(Player player) {
 		return false;
 	}
 
-	/**
-	 * @param npc
-	 * @return
-	 */
 	public boolean isEnemyFrom(Npc npc) {
 		return false;
 	}
 
 	public TribeClass getTribe() {
-		return tribe;
-	}
-
-	public void setTribe(TribeClass tribe) {
-		this.tribe = tribe;
+		return TribeClass.GENERAL;
 	}
 
 	public TribeClass getBaseTribe() {
@@ -456,6 +324,9 @@ public abstract class Creature extends VisibleObject {
 			if (visualStateExcludingBlinking <= getSeeState())
 				return true;
 			return equals(creature.getMaster()); // traps, summons, etc. should always be visible to the master
+		} else if (object instanceof Pet pet) {
+			// we must prevent sending the pet's spawn packet to others before the master's, as this causes the pet to stay invisible
+			return equals(pet.getMaster()) || canSee(pet.getMaster()) && getKnownList().sees(pet.getMaster());
 		}
 		return super.canSee(object);
 	}
@@ -490,12 +361,7 @@ public abstract class Creature extends VisibleObject {
 		return getMaster();
 	}
 
-	/**
-	 * @param template
-	 * @return
-	 */
 	public boolean isSkillDisabled(SkillTemplate template) {
-
 		if (skillCoolDowns == null)
 			return false;
 
@@ -509,90 +375,30 @@ public abstract class Creature extends VisibleObject {
 			removeSkillCoolDown(cooldownId);
 			return false;
 		}
-
-		/*
-		 * Some shared cooldown skills have independent and different cooldown they must not be blocked
-		 */
-		if (skillCoolDownsBase != null && skillCoolDownsBase.get(cooldownId) != null) {
-			if ((template.getDuration() + template.getCooldown() * 100 + skillCoolDownsBase.get(cooldownId)) < System.currentTimeMillis())
-				return false;
-		}
 		return true;
 	}
 
-	/**
-	 * @param cooldownId
-	 * @return
-	 */
 	public long getSkillCoolDown(int cooldownId) {
-		if (skillCoolDowns == null || !skillCoolDowns.containsKey(cooldownId))
-			return 0;
-
-		return skillCoolDowns.get(cooldownId);
+		return skillCoolDowns == null ? 0L : skillCoolDowns.getOrDefault(cooldownId, 0L);
 	}
 
-	/**
-	 * @param cooldownId
-	 * @param time
-	 */
 	public void setSkillCoolDown(int cooldownId, long time) {
-
 		if (cooldownId == 0) {
 			return;
 		}
-
 		if (skillCoolDowns == null)
 			skillCoolDowns = new ConcurrentHashMap<>();
 		skillCoolDowns.put(cooldownId, time);
 	}
 
-	/**
-	 * @return the skillCoolDowns
-	 */
 	public Map<Integer, Long> getSkillCoolDowns() {
 		return skillCoolDowns;
 	}
 
-	/**
-	 * @param cooldownId
-	 */
 	public void removeSkillCoolDown(int cooldownId) {
 		if (skillCoolDowns == null)
 			return;
 		skillCoolDowns.remove(cooldownId);
-		if (skillCoolDownsBase != null)
-			skillCoolDownsBase.remove(cooldownId);
-	}
-
-	/**
-	 * This function saves the currentMillis of skill that generated the cooldown of an entire cooldownGroup
-	 * 
-	 * @param cooldownId
-	 * @param baseTime
-	 */
-	public void setSkillCoolDownBase(int cooldownId, long baseTime) {
-
-		if (cooldownId == 0) {
-			return;
-		}
-
-		if (skillCoolDownsBase == null)
-			skillCoolDownsBase = new ConcurrentHashMap<>();
-		skillCoolDownsBase.put(cooldownId, baseTime);
-	}
-
-	/**
-	 * completly sets cooldown for given skillId, used for summon skills
-	 * 
-	 * @param skillId
-	 */
-	public void resetSkillCoolDown(int skillId) {
-		SkillTemplate st = DataManager.SKILL_DATA.getSkillTemplate(skillId);
-
-		if (st != null && st.getCooldown() > 0) {
-			setSkillCoolDown(st.getCooldownId(), st.getCooldown() * 100 + System.currentTimeMillis());
-			setSkillCoolDownBase(st.getCooldownId(), System.currentTimeMillis());
-		}
 	}
 
 	/**
@@ -693,8 +499,12 @@ public abstract class Creature extends VisibleObject {
 		return template.getCooldown();
 	}
 
+	public long getMillisSinceSpawn() {
+		return System.currentTimeMillis() - spawnTime;
+	}
+
 	public boolean isNewSpawn() {
-		return System.currentTimeMillis() - spawnTime < 1500;
+		return getMillisSinceSpawn() < 1500;
 	}
 
 	public boolean isRaidMonster() {

@@ -4,14 +4,12 @@ import static com.aionemu.gameserver.model.DialogAction.*;
 
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAY_MOVIE;
 import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.teleport.TeleportService;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
@@ -44,7 +42,6 @@ public class _20031GotoGelkmaros extends AbstractQuestHandler {
 		}
 		qe.registerQuestItem(182215590, questId);
 		qe.registerOnEnterWorld(questId);
-		qe.registerOnMovieEndQuest(551, questId);
 	}
 
 	@Override
@@ -110,7 +107,7 @@ public class _20031GotoGelkmaros extends AbstractQuestHandler {
 						}
 						break;
 					case SELECT6_1:
-						PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(1, 31));
+						playQuestMovie(env, 31, true);
 						return sendQuestDialog(env, 2717);
 					case SETPRO6:
 						return defaultCloseDialog(env, var, var + 1); // 6
@@ -221,22 +218,9 @@ public class _20031GotoGelkmaros extends AbstractQuestHandler {
 	}
 
 	@Override
-	public boolean onMovieEndEvent(QuestEnv env, int movieId) {
-		if (movieId == 551) {
-			Player player = env.getPlayer();
-			QuestState qs = player.getQuestStateList().getQuestState(questId);
-
-			if (qs != null && qs.getStatus() == QuestStatus.START) {
-				int var = qs.getQuestVarById(0);
-				if (var == 3) {
-					qs.setQuestVar(var + 1);
-					updateQuestStatus(env);
-					return true;
-				}
-			}
-			return true;
-		}
-		return false;
+	public void onMovieEndEvent(QuestEnv env, int movieId) {
+		if (movieId == 551)
+			changeQuestStep(env, 3, 4);
 	}
 
 	@Override

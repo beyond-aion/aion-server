@@ -27,14 +27,21 @@ public class SiegeConfig {
 	 */
 	@Property(key = "gameserver.moltenus.time", defaultValue = "0 0 22 ? * SUN")
 	public static CronExpression MOLTENUS_SPAWN_SCHEDULE;
-	/**
-	 * Legendary npc's health multiplier
-	 */
-	@Property(key = "gameserver.siege.health.multiplier", defaultValue = "1")
-	public static float SIEGE_HEALTH_MULTIPLIER;
+
+	@Property(key = "gameserver.siege.health.multiplier.fortress", defaultValue = "1")
+	public static float FORTRESS_PROTECTOR_HEALTH_MULTIPLIER;
+
+	@Property(key = "gameserver.siege.health.multiplier.artifact", defaultValue = "1")
+	public static float ARTIFACT_PROTECTOR_HEALTH_MULTIPLIER;
+
+	@Property(key = "gameserver.siege.health.multiplier.base", defaultValue = "1")
+	public static float BASE_PROTECTOR_HEALTH_MULTIPLIER;
 
 	@Property(key = "gameserver.siege.difficulty.multiplier", defaultValue = "1")
 	public static float SIEGE_DIFFICULTY_MULTIPLIER;
+
+	@Property(key = "gameserver.siege.panesterra.maxplayers", defaultValue = "100")
+	public static int PANESTERRA_MAX_PLAYERS_PER_TEAM;
 
 	@Property(key = "gameserver.siege.panesterra.ahserion.maxplayers", defaultValue = "100")
 	public static int AHSERION_MAX_PLAYERS_PER_TEAM;

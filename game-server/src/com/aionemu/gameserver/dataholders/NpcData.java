@@ -1,9 +1,6 @@
 package com.aionemu.gameserver.dataholders;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
@@ -38,6 +35,9 @@ public class NpcData {
 	@XmlTransient
 	private final Map<Integer, NpcTemplate> npcData = new HashMap<>();
 
+	@XmlTransient
+	private final Set<Integer> functionDialogIds = new HashSet<>();
+
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		StaticDataListener.registerForAsyncExecutionOrRun(u, this::init);
 	}
@@ -45,9 +45,6 @@ public class NpcData {
 	private void init() {
 		for (NpcTemplate npc : npcs) {
 			npcData.put(npc.getTemplateId(), npc);
-			npc.internAiName();
-			if (npc.getTribe() != null && !npc.getTribe().isUsed())
-				npc.getTribe().setUsed(true);
 			if (npc.getFuncDialogIds() != null) {
 				for (Integer dialogActionId : npc.getFuncDialogIds()) {
 					if (DialogAction.nameOf(dialogActionId) == null)
@@ -87,9 +84,10 @@ public class NpcData {
 						strikeResist = 700;
 					template.setStrikeResist(strikeResist);
 				}
-				if (template.getAbnormalResistance() == 0)
-					template.setAbnormalResistance(NpcStatCalculation.calculateStat(StatEnum.ABNORMAL_RESISTANCE_ALL, rating, rank, level));
+				template.setStunLikeResistance(NpcStatCalculation.calculateStat(StatEnum.STUNLIKE_RESISTANCE, rating, rank, level));
 			}
+			if (npc.getFuncDialogIds() != null)
+				functionDialogIds.addAll(npc.getFuncDialogIds());
 		}
 		npcs = null;
 	}
@@ -98,21 +96,15 @@ public class NpcData {
 		return npcData.size();
 	}
 
-	/**
-	 * /** Returns an {@link NpcTemplate} object with given id.
-	 * 
-	 * @param id
-	 *          id of NPC
-	 * @return NpcTemplate object containing data about NPC with that id.
-	 */
 	public NpcTemplate getNpcTemplate(int id) {
 		return npcData.get(id);
 	}
 
-	/**
-	 * @return the npcData
-	 */
 	public Collection<NpcTemplate> getNpcData() {
 		return npcData.values();
+	}
+
+	public boolean isFunctionDialog(int functionDialogId) {
+		return functionDialogIds.contains(functionDialogId);
 	}
 }

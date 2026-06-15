@@ -23,7 +23,6 @@ public class _1170HeadlessStoneStatue extends AbstractQuestHandler {
 		qe.registerQuestNpc(730000).addOnQuestStart(questId);
 		qe.registerQuestNpc(730000).addOnTalkEvent(questId);
 		qe.registerQuestNpc(700033).addOnTalkEvent(questId);
-		qe.registerOnMovieEndQuest(16, questId);
 		qe.registerOnGetItem(182200504, questId);
 	}
 
@@ -73,15 +72,8 @@ public class _1170HeadlessStoneStatue extends AbstractQuestHandler {
 	}
 
 	@Override
-	public boolean onMovieEndEvent(QuestEnv env, int movieId) {
-		Player player = env.getPlayer();
-		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
-			if (movieId == 16) {
-				removeQuestItem(env, 182200504, 1);
-				return QuestService.finishQuest(env);
-			}
-		}
-		return false;
+	public void onMovieEndEvent(QuestEnv env, int movieId) {
+		if (movieId == 16)
+			QuestService.finishQuest(env);
 	}
 }

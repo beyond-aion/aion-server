@@ -1,6 +1,7 @@
 package admincommands;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -41,10 +42,10 @@ public class RemoveCd extends AdminCommand {
 		if (target instanceof Player player) {
 			if (params.length == 0) {
 				if (player.getSkillCoolDowns() != null) {
-					long currentTime = System.currentTimeMillis();
-					for (Entry<Integer, Long> en : player.getSkillCoolDowns().entrySet())
-						player.setSkillCoolDown(en.getKey(), currentTime);
-					PacketSendUtility.sendPacket(player, new SM_SKILL_COOLDOWN(player.getSkillCoolDowns()));
+					long nowMillis = System.currentTimeMillis();
+					List<Integer> cooldownIds = player.getSkillCoolDowns().entrySet().stream().filter(e -> e.getValue() > nowMillis).map(Entry::getKey).toList();
+					PacketSendUtility.sendPacket(player, new SM_SKILL_COOLDOWN(player, cooldownIds));
+					player.getSkillCoolDowns().clear();
 				}
 
 				Map<Integer, ItemCooldown> dummyCds = new HashMap<>(); // 4.8 client ignores reuseTime <= currentTime, but sending old cds + useDelay 0 works

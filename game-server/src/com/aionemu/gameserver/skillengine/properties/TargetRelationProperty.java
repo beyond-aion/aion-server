@@ -36,11 +36,10 @@ public class TargetRelationProperty {
 			case MYPARTY:
 				for (Iterator<Creature> iter = result.getTargets().iterator(); iter.hasNext();) {
 					Creature target = iter.next();
-
-					if (effector.getMaster() instanceof Player sourcePlayer && target instanceof Player targetPlayer) {
-						if (isBuffAllowed(effector, targetPlayer)) {
-							if (targetPlayer.equals(sourcePlayer))
-								continue;
+					if (effector.getMaster() instanceof Player sourcePlayer && isBuffAllowed(effector, target)) {
+						if (target.getMaster().equals(sourcePlayer))
+							continue;
+						if (target.getMaster() instanceof Player targetPlayer) {
 							int teamId = sourcePlayer.getCurrentTeamId();
 							if (teamId > 0 && teamId == targetPlayer.getCurrentTeamId() && !sourcePlayer.isEnemy(targetPlayer))
 								continue;

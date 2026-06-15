@@ -40,10 +40,10 @@
 	<rewards min_level="8">
 		<item item_id="164002167" normal_count="5" frenzy_count="10" />
 		<item item_id="188051709" normal_count="1" frenzy_count="1" />
-		<item item_id="166200010" normal_count="2" frenzy_count="2" />
-		<item item_id="188052830" normal_count="1" frenzy_count="1" />
+		<item item_id="166200009" normal_count="1" frenzy_count="2" /><!-- Scroll of Weapon Re-identification (mythical) -->
+		<item item_id="188053120" normal_count="1" frenzy_count="1" /><!-- Danuar Reliquary Loot [Weapon]-->
 		<item item_id="188051710" normal_count="0" frenzy_count="1" />
 		<item item_id="188053610" normal_count="0" frenzy_count="5" />
-		<item item_id="188053100" normal_count="0" frenzy_count="1" />
+		<item item_id="188053099" normal_count="0" frenzy_count="1" /><!-- Grendal's Enhanced Designs Chest -->
 	</rewards>
 </arcadelist>

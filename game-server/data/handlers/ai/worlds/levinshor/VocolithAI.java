@@ -8,6 +8,7 @@ import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.controllers.observer.ItemUseObserver;
+import com.aionemu.gameserver.model.DialogPage;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -65,7 +66,8 @@ public class VocolithAI extends GeneralNpcAI {
 		if (dialogActionId == SETPRO1) {
 			if (player.getInventory().getItemCountByItemId(185000216) == 0) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_LDF4_ADVANCE_FNAMED_FAIL());
-				return false;
+				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), DialogPage.NO_RIGHT.id()));
+				return true;
 			} else if (used.compareAndSet(false, true)) {
 				handleUsed(player);
 			}

@@ -68,7 +68,7 @@ public class BrigadeGeneralVashartiAI extends AggressiveNpcAI implements HpPhase
 	private void handleEnrageEvent() {
 		getOwner().clearQueuedSkills();
 		getOwner().queueSkill(19962, 1, 15000); // Purple Flame Weapon
-		getOwner().queueSkill(19907, 1); // Chastise
+		getOwner().queueSkill(19907, 1, 0); // Chastise
 	}
 
 	private void handleSeaOfFireEvent() {
@@ -99,7 +99,7 @@ public class BrigadeGeneralVashartiAI extends AggressiveNpcAI implements HpPhase
 	public void onEndUseSkill(SkillTemplate skillTemplate, int skillLevel) {
 		switch (skillTemplate.getSkillId()) {
 			case 19907: // repeat until reset
-				getOwner().queueSkill(19907, 1); // Chastise
+				getOwner().queueSkill(19907, 1, 0); // Chastise
 				break;
 			case 20530:
 			case 20531:

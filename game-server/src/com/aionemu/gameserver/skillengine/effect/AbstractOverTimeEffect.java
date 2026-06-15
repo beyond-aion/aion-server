@@ -40,13 +40,8 @@ public abstract class AbstractOverTimeEffect extends EffectTemplate {
 		this.startEffect(effect, null);
 	}
 
-	public void startEffect(final Effect effect, AbnormalState abnormal) {
-		final Creature effected = effect.getEffected();
-		// Some skills have a duration2 of 2000 and a checktime of 1000. (e.g. Ripple of Purification)
-		// On retail these skills are only applied once (instead of 2x).
-		// We add 300ms to the waitingTime to prevent them from being applied twice.
-		long waitingTime = 300 + (checktime > getDuration2() ? checktime - getDuration2() : checktime);
-
+	public void startEffect(Effect effect, AbnormalState abnormal) {
+		Creature effected = effect.getEffected();
 		if (abnormal != null) {
 			effect.setAbnormal(abnormal);
 			effected.getEffectController().setAbnormal(abnormal);
@@ -54,7 +49,10 @@ public abstract class AbstractOverTimeEffect extends EffectTemplate {
 		// TODO figure out what to do with such cases
 		if (checktime == 0)
 			return;
-		Future<?> task = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> onPeriodicAction(effect), waitingTime, checktime);
+		// Some skills have an effective duration of 2000 (see getDuration2) and a checktime of 1000 (e.g. Ripple of Purification).
+		// On retail, these skills are applied once instead of twice, so we slightly increase the initialDelay to prevent this from happening.
+		long initialDelay = 300 + checktime;
+		Future<?> task = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> onPeriodicAction(effect), initialDelay, checktime);
 		effect.setPeriodicTask(task, position);
 	}
 

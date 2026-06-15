@@ -9,14 +9,14 @@ import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.services.panesterra.PanesterraService;
 import com.aionemu.gameserver.services.panesterra.ahserion.AhserionRaid;
 import com.aionemu.gameserver.services.panesterra.ahserion.PanesterraFaction;
 import com.aionemu.gameserver.services.panesterra.ahserion.PanesterraTeam;
 import com.aionemu.gameserver.skillengine.SkillEngine;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 import ai.ActionItemNpcAI;
-
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * @author Estrayl
@@ -57,7 +57,7 @@ public class AhserionMountableTankAI extends ActionItemNpcAI {
 
 	private boolean canUseTank(Player player) {
 		if (AhserionRaid.getInstance().isStarted()) {
-			PanesterraTeam team = AhserionRaid.getInstance().getPanesterraFactionTeam(player);
+			PanesterraTeam team = PanesterraService.getInstance().getTeam(player);
 			return team != null && team.getFaction() == ownerFaction;
 		}
 		return false;

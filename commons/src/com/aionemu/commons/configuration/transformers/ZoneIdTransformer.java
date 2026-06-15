@@ -9,10 +9,10 @@ import com.aionemu.commons.configuration.TransformationTypeInfo;
  */
 public class ZoneIdTransformer extends PropertyTransformer<ZoneId> {
 
-	/**
-	 * Shared instance of this transformer, it's thread safe so no need to create multiple instances
-	 */
-	public static final ZoneIdTransformer SHARED_INSTANCE = new ZoneIdTransformer();
+	@Override
+	public boolean matches(Class<?> targetType) {
+		return ZoneId.class.isAssignableFrom(targetType);
+	}
 
 	@Override
 	protected ZoneId parseObject(String value, TransformationTypeInfo typeInfo) {

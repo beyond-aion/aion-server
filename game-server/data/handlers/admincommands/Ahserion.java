@@ -1,7 +1,7 @@
 package admincommands;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.services.panesterra.ahserion.AhserionRaid;
+import com.aionemu.gameserver.services.panesterra.PanesterraService;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 
 /**
@@ -28,17 +28,17 @@ public class Ahserion extends AdminCommand {
 		}
 
 		if (params[0].equalsIgnoreCase("start")) {
-			if (AhserionRaid.getInstance().isStarted()) {
+			if (PanesterraService.getInstance().isAhserionRaidStarted()) {
 				sendInfo(admin, "Ahserion's Flight is already running.");
 			} else {
-				AhserionRaid.getInstance().start();
+				PanesterraService.getInstance().startAhserionRaid();
 				sendInfo(admin, "Started Ahserion's Flight.");
 			}
 		} else if (params[0].equalsIgnoreCase("stop")) {
-			if (!AhserionRaid.getInstance().isStarted()) {
+			if (!PanesterraService.getInstance().isAhserionRaidStarted()) {
 				sendInfo(admin, "Ahserion's Flight is not running.");
 			} else {
-				AhserionRaid.getInstance().stop();
+				PanesterraService.getInstance().stopAhserionRaid();
 				sendInfo(admin, "Stopped Ahserion's Flight.");
 			}
 		}

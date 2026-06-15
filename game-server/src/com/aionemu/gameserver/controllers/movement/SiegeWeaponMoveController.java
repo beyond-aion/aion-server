@@ -60,23 +60,14 @@ public class SiegeWeaponMoveController extends SummonMoveController {
 		MoveTaskManager.getInstance().removeCreature(owner);
 	}
 
-	/**
-	 * @param targetX
-	 * @param targetY
-	 * @param targetZ
-	 * @param offset
-	 * @return
-	 */
 	protected void moveToLocation(float targetX, float targetY, float targetZ) {
-		boolean directionChanged;
+		boolean destinationChanged = targetX != targetDestX || targetY != targetDestY || targetZ != targetDestZ;
 		float ownerX = owner.getX();
 		float ownerY = owner.getY();
 		float ownerZ = owner.getZ();
 
-		directionChanged = targetX != targetDestX || targetY != targetDestY || targetZ != targetDestZ;
-
-		if (directionChanged) {
-			heading = (byte) (Math.toDegrees(Math.atan2(targetY - ownerY, targetX - ownerX)) / 3);
+		if (targetX != targetDestX || targetY != targetDestY) {
+			heading = PositionUtil.getHeadingTowards(ownerX, ownerY, targetX, targetY);
 		}
 
 		targetDestX = targetX;
@@ -101,8 +92,8 @@ public class SiegeWeaponMoveController extends SummonMoveController {
 		float newY = (targetDestY - ownerY) * distFraction + ownerY;
 		float newZ = (targetDestZ - ownerZ) * distFraction + ownerZ;
 		World.getInstance().updatePosition(owner, newX, newY, newZ, heading, true);
-		if (directionChanged) {
-			movementMask = -32;
+		if (destinationChanged) {
+			movementMask = MovementMask.NPC_STARTMOVE;
 			PacketSendUtility.broadcastPacket(owner, new SM_MOVE(owner));
 		}
 	}

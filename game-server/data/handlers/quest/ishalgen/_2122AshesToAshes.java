@@ -9,7 +9,6 @@ import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.QuestService;
 
 /**
  * @author Cheatkiller
@@ -40,8 +39,9 @@ public class _2122AshesToAshes extends AbstractQuestHandler {
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 0) {
-				if (dialogActionId == QUEST_ACCEPT_1) {
-					QuestService.startQuest(env);
+				if (env.getDialogActionId() == QUEST_ACCEPT_1) {
+					return sendQuestStartDialog(env);
+				} else if (env.getDialogActionId() == QUEST_REFUSE_1) {
 					return closeDialogWindow(env);
 				}
 			}

@@ -26,7 +26,7 @@ public class ItemSplitService {
 	/**
 	 * Move part of stack into different slot
 	 */
-	public static final void splitItem(Player player, int itemObjId, int destinationObjId, long splitAmount, short slotNum, byte sourceStorageType,
+	public static void splitItem(Player player, int itemObjId, int destinationObjId, long splitAmount, short slotNum, byte sourceStorageType,
 		byte destinationStorageType) {
 		if (splitAmount <= 0) {
 			return;
@@ -55,9 +55,9 @@ public class ItemSplitService {
 		}
 
 		if (sourceStorageType != destinationStorageType
-			&& (ItemRestrictionService.isItemRestrictedTo(player, sourceItem, destinationStorageType) || ItemRestrictionService.isItemRestrictedFrom(
-				player, sourceItem, sourceStorageType))) {
-			sendStorageUpdatePacket(player, StorageType.getStorageTypeById(sourceStorageType), sourceItem);
+			&& (ItemRestrictionService.isItemRestrictedTo(player, sourceItem, destStorage.getStorageType()) || ItemRestrictionService.isItemRestrictedFrom(
+				player, sourceItem, sourceStorage.getStorageType()))) {
+			sendStorageUpdatePacket(player, sourceStorage.getStorageType(), sourceItem);
 			return;
 		}
 
@@ -68,6 +68,10 @@ public class ItemSplitService {
 		}
 
 		if (targetItem == null) {
+			if (destStorage.isFull()) {
+				PacketSendUtility.sendPacket(player, destStorage.getStorageIsFullMessage());
+				return;
+			}
 			long oldItemCount = sourceItem.getItemCount() - splitAmount;
 			if (sourceItem.getItemCount() < splitAmount || oldItemCount == 0) {
 				return;
@@ -136,7 +140,7 @@ public class ItemSplitService {
 		}
 	}
 
-	private static final void updateKinahCount(IStorage source, long splitAmount, IStorage destination) {
+	private static void updateKinahCount(IStorage source, long splitAmount, IStorage destination) {
 		source.decreaseKinah(splitAmount, ItemUpdateType.DEC_ITEM_SPLIT);
 		destination.increaseKinah(splitAmount, ItemUpdateType.INC_KINAH_MERGE);
 	}

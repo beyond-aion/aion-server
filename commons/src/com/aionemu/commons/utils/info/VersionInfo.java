@@ -3,8 +3,9 @@ package com.aionemu.commons.utils.info;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.lang.reflect.ClassFileFormatVersion;
 import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.nio.file.Path;
 import java.nio.file.attribute.FileTime;
 import java.time.Instant;
 import java.time.ZoneId;
@@ -31,7 +32,7 @@ public class VersionInfo {
 	private String revision;
 	private String branch;
 	private Instant buildDate;
-	private int classFileVersion;
+	private ClassFileFormatVersion classFileVersion;
 
 	/**
 	 * Constructs a VersionInfo object holding the version information of the specified classes JAR or directory
@@ -40,7 +41,7 @@ public class VersionInfo {
 		try {
 			File sourceFile = new File(c.getProtectionDomain().getCodeSource().getLocation().toURI());
 			if (sourceFile.isDirectory()) { // when application is run from IDE
-				source = Paths.get("").toAbsolutePath().relativize(sourceFile.toPath()).toString();
+				source = Path.of("").toAbsolutePath().relativize(sourceFile.toPath()).toString();
 				File latestFile = findLatestFile(sourceFile);
 				buildDate = Instant.ofEpochMilli(latestFile.lastModified());
 				classFileVersion = ClassUtils.readClassFileVersion(new FileInputStream(latestFile), latestFile.getPath());
@@ -62,14 +63,15 @@ public class VersionInfo {
 
 	private File findLatestFile(File sourceFile) throws IOException {
 		AtomicReference<FileTime> latestChange = new AtomicReference<>();
-		return Files.find(sourceFile.toPath(), Integer.MAX_VALUE, (filePath, fileAttr) -> {
+		try (var paths = Files.find(sourceFile.toPath(), Integer.MAX_VALUE, (filePath, fileAttr) -> {
 			FileTime lastModified = fileAttr.lastModifiedTime();
 			return fileAttr.isRegularFile() && filePath.toString().endsWith(".class")
 				&& latestChange.updateAndGet(t -> t == null || lastModified.compareTo(t) > 0 ? lastModified : t) == lastModified;
-		})
-			.reduce((first, second) -> second) // due to the file matcher the last element will be the latest, so no need to call .max()
-			.get()
-			.toFile();
+		})) {
+			return paths.reduce((_, second) -> second) // due to the file matcher, the last element will be the latest (faster than .max())
+				.map(Path::toFile)
+				.orElse(null);
+		}
 	}
 
 	public String getSource() {
@@ -88,20 +90,17 @@ public class VersionInfo {
 		return buildDate;
 	}
 
-	public int getClassFileVersion() {
+	public ClassFileFormatVersion getClassFileVersion() {
 		return classFileVersion;
-	}
-
-	public int getClassFileJavaVersion() {
-		// assuming each new major Java version increases the class file version by 1, we can calculate the target Java version of the class file
-		return Runtime.version().feature() - (int) Float.parseFloat(System.getProperty("java.class.version")) + classFileVersion;
 	}
 
 	public String getBuildInfo(ZoneId timeZoneId) {
 		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm").withZone(timeZoneId);
-		String rev = revision == null ? null : revision + (branch == null ? "" : " (" + branch + ')');
-		String buildDateAndJavaVersion = "built on " + dateTimeFormatter.format(buildDate) + " for Java " + getClassFileJavaVersion();
-		return (rev == null ? "" : "revision " + rev + " ") + buildDateAndJavaVersion;
+		String buildInfo = revision == null ? "" : "revision " + revision + (branch == null ? " " : " (" + branch + ") ");
+		buildInfo += "built on " + dateTimeFormatter.format(buildDate);
+		if (classFileVersion != null)
+			buildInfo += " for Java " + classFileVersion.runtimeVersion().feature();
+		return buildInfo;
 	}
 
 	@Override

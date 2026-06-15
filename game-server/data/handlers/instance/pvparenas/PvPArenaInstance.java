@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.concurrent.Future;
 
 import com.aionemu.commons.utils.Rnd;
-import com.aionemu.gameserver.controllers.attack.AggroInfo;
+import com.aionemu.gameserver.controllers.attack.DamageInfo;
+import com.aionemu.gameserver.controllers.attack.DamageList;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
-import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.autogroup.AGPlayer;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -25,8 +25,6 @@ import com.aionemu.gameserver.model.team.TemporaryPlayerTeam;
 import com.aionemu.gameserver.model.templates.rewards.ArenaRewardItem;
 import com.aionemu.gameserver.model.templates.rewards.RewardItem;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -130,8 +128,6 @@ public abstract class PvPArenaInstance extends GeneralInstanceHandler {
 
 	@Override
 	public boolean onDie(Player victim, Creature lastAttacker) {
-		PacketSendUtility.sendPacket(victim, new SM_DIE(false, false, 0, 8));
-
 		PvPArenaPlayerReward victimReward = getStatReward(victim);
 		PvPArenaPlayerReward winnerReward = null;
 		if (lastAttacker != victim && lastAttacker instanceof Player winner) {
@@ -158,18 +154,19 @@ public abstract class PvPArenaInstance extends GeneralInstanceHandler {
 		calculateAndUpdatePoints(npc, points);
 	}
 
+	@SuppressWarnings("unchecked")
 	private void calculateAndUpdatePoints(Creature victim, int points) {
 		if (!instanceScore.isStartProgress())
 			return;
 
-		int totalDamage = victim.getAggroList().getTotalDamage();
-		for (AggroInfo aggroInfo : victim.getAggroList().getFinalDamageList(shouldMergeGroupDamage())) {
-			if (aggroInfo.getDamage() == 0)
-				continue;
-			int rewardPoints = points * aggroInfo.getDamage() / totalDamage;
-			if (aggroInfo.getAttacker() instanceof Creature && ((Creature) aggroInfo.getAttacker()).getMaster() instanceof Player attacker) {
+		DamageList damageList = victim.getAggroList().getFinalDamageList();
+		int totalDamage = damageList.getTotalDamage();
+		Collection<DamageInfo<?>> damages = (Collection<DamageInfo<?>>) (shouldMergeGroupDamage() ? damageList.toTeamDamages().getCreatureOrTeamDamages() : damageList.getCreatureDamages());
+		for (DamageInfo<?> damageInfo : damages) {
+			int rewardPoints = points * damageInfo.getDamage() / totalDamage;
+			if (damageInfo.getAttacker() instanceof Player attacker) {
 				updatePoints(getStatReward(attacker), attacker, victim, rewardPoints);
-			} else if (aggroInfo.getAttacker() instanceof TemporaryPlayerTeam<?> team) {
+			} else if (damageInfo.getAttacker() instanceof TemporaryPlayerTeam<?> team) {
 				Player leader = team.getLeaderObject();
 				updatePoints(getStatReward(leader), leader, victim, rewardPoints);
 				team.getOnlineMembers().stream().filter(p -> !p.equals(leader)).forEach(p -> sendSystemMsg(p, victim, rewardPoints));
@@ -333,7 +330,6 @@ public abstract class PvPArenaInstance extends GeneralInstanceHandler {
 		ThreadPoolManager.getInstance().schedule(() -> {
 			for (Player player : instance.getPlayersInside()) {
 				if (player.isDead()) {
-					PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.RESURRECT), true);
 					PlayerReviveService.revive(player, 100, 100, false, 0);
 					player.getGameStats().updateStatsAndSpeedVisually();
 				}
@@ -345,33 +341,24 @@ public abstract class PvPArenaInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void onEnterInstance(Player player) {
-		int objectId = player.getObjectId();
 		if (instanceScore.regPlayerReward(player)) {
-			instanceScore.setRndPosition(objectId);
+			instanceScore.setRndPosition(player.getObjectId());
 		} else {
 			instanceScore.portToPosition(player);
+			getPlayerSpecificReward(player).updateBonusTime();
 		}
 		sendEntryPacket(player);
 	}
 
 	@Override
-	public void onPlayerLogin(Player player) {
-		getPlayerSpecificReward(player).updateBonusTime();
-		sendEntryPacket(player);
-	}
-
-	@Override
-	public void onPlayerLogOut(Player player) {
-		getPlayerSpecificReward(player).updateLogOutTime();
+	public void onPlayerLogout(Player player) {
+		getPlayerSpecificReward(player).updateLogoutTime();
 	}
 
 	private void clearDebuffs(Player player) {
 		for (Effect ef : player.getEffectController().getAbnormalEffects()) {
 			switch (ef.getSkillTemplate().getDispelCategory()) {
-				case DEBUFF, DEBUFF_MENTAL, DEBUFF_PHYSICAL, ALL -> {
-					ef.endEffect();
-					player.getEffectController().clearEffect(ef);
-				}
+				case DEBUFF, DEBUFF_MENTAL, DEBUFF_PHYSICAL, ALL -> ef.endEffect();
 			}
 		}
 	}
@@ -397,6 +384,7 @@ public abstract class PvPArenaInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void onLeaveInstance(Player player) {
+		super.onLeaveInstance(player);
 		clearDebuffs(player);
 		PvPArenaPlayerReward playerReward = getPlayerSpecificReward(player);
 		if (playerReward != null) {
@@ -579,8 +567,8 @@ public abstract class PvPArenaInstance extends GeneralInstanceHandler {
 		int size = associatedPlayers.size();
 
 		for (AGPlayer agPlayer : associatedPlayers) {
-			PvPArenaPlayerReward apr = instanceScore.getPlayerReward(agPlayer.getObjectId());
-			Player player = instance.getPlayer(agPlayer.getObjectId());
+			PvPArenaPlayerReward apr = instanceScore.getPlayerReward(agPlayer.objectId());
+			Player player = instance.getPlayer(agPlayer.objectId());
 			if (apr == null || player == null)
 				continue;
 
@@ -615,7 +603,7 @@ public abstract class PvPArenaInstance extends GeneralInstanceHandler {
 
 				ArenaRewardItem gpReward = reward.getGp();
 				if (gpReward.getTotalCount() > 0)
-					GloryPointsService.increaseGpBy(player.getObjectId(), gpReward.getTotalCount(), false, true);
+					GloryPointsService.addGp(player.getObjectId(), gpReward.getTotalCount());
 
 				ArenaRewardItem courageInsigniaReward = reward.getCourageInsignia();
 				if (courageInsigniaReward.getTotalCount() > 0)
@@ -664,6 +652,15 @@ public abstract class PvPArenaInstance extends GeneralInstanceHandler {
 	protected void sendPacket(Player receiver, InstanceScoreType scoreType) {
 	}
 
-	protected record BaseRewards(int ap, int gp, int crucibleInsignia, int courageInsignia) {
+	@Override
+	public boolean allowSelfReviveBySkill() {
+		return false;
 	}
+
+	@Override
+	public boolean allowSelfReviveByItem() {
+		return false;
+	}
+
+	protected record BaseRewards(int ap, int gp, int crucibleInsignia, int courageInsignia) {}
 }

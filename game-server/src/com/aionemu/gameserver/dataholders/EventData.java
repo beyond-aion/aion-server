@@ -1,8 +1,8 @@
 package com.aionemu.gameserver.dataholders;
 
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import javax.xml.bind.Unmarshaller;
@@ -18,16 +18,12 @@ public class EventData {
 	@XmlElement(name = "event")
 	private List<EventTemplate> events;
 
-	@XmlTransient
-	private Set<Integer> allNpcIds = new HashSet<>();
-
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		if (events == null)
 			events = Collections.emptyList();
-		allNpcIds.clear();
 		for (EventTemplate ev : events) {
-			if (ev.getSpawns() != null)
-				allNpcIds.addAll(ev.getSpawns().getAllNpcIds());
+			if (ev.getEndDate() != null && ev.getStartDate() != null && !ev.getStartDate().isBefore(ev.getEndDate()))
+				throw new IllegalArgumentException("Event \"" + ev.getName() + "\" has an invalid start or end date: start date must be before end date");
 		}
 	}
 
@@ -44,11 +40,7 @@ public class EventData {
 		afterUnmarshal(null, null);
 	}
 
-	/**
-	 * @param npcId
-	 * @return True, if the given npc appears in any of the spawn templates (town level 1-5)
-	 */
-	public boolean containsAnySpawnForNpc(int npcId) {
-		return allNpcIds.contains(npcId);
+	public void addAllNpcIdsToSet(Set<Integer> npcIds) {
+		events.stream().map(EventTemplate::getSpawns).filter(Objects::nonNull).forEach(spawns -> spawns.addAllNpcIdsToSet(npcIds));
 	}
 }

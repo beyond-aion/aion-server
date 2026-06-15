@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.HpPhases;
+import com.aionemu.gameserver.controllers.attack.AggroTarget;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 
@@ -106,9 +107,10 @@ public class RuthlessJabaraki extends IDSweep_Bosses implements HpPhases.PhaseHa
 	}
 
 	private void startHate() {
+		Creature mostHated = getAggroList().getTarget(AggroTarget.MOST_HATED);
 		for (Npc npc : spawnedAdds) {
 			if (npc != null && !npc.isDead()) {
-				npc.getAggroList().addHate(getOwner().getAggroList().getMostHated(), 1);
+				npc.getAggroList().addHate(mostHated, 1);
 			}
 		}
 	}

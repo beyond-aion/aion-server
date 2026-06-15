@@ -28,7 +28,6 @@
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="POINT" />
 			<xs:enumeration value="SQUARE" />
-			<xs:enumeration value="CIRCLE" />
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="LoopType">

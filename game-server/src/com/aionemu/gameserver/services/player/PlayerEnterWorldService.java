@@ -35,6 +35,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Macros;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 import com.aionemu.gameserver.model.house.House;
+import com.aionemu.gameserver.model.house.PlayerScript;
 import com.aionemu.gameserver.model.items.storage.IStorage;
 import com.aionemu.gameserver.model.items.storage.Storage;
 import com.aionemu.gameserver.model.items.storage.StorageType;
@@ -57,7 +58,8 @@ import com.aionemu.gameserver.services.craft.RelinquishCraftStatus;
 import com.aionemu.gameserver.services.event.EventService;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.mail.MailService;
-import com.aionemu.gameserver.services.panesterra.ahserion.AhserionRaid;
+import com.aionemu.gameserver.services.panesterra.PanesterraService;
+import com.aionemu.gameserver.services.reward.AdventService;
 import com.aionemu.gameserver.services.reward.VeteranRewardService;
 import com.aionemu.gameserver.services.teleport.BindPointTeleportService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
@@ -100,16 +102,25 @@ public final class PlayerEnterWorldService {
 			return;
 		}
 
-		if (pcd.isOnline()) { // character should soon leave the world (due to previous client crash)
-			if (PlayerDAO.isOnline(objectId)) {
+		if (PlayerDAO.isOnline(objectId)) { // char is still leaving the world and not saved yet (fast reentry from plastic surgery screen or packet hack)
+			client.sendPacket(new SM_ENTER_WORLD_CHECK(Msg.REENTRY_TIME));
+			return;
+		}
+		Integer onlinePlayerId = account.getPlayerAccDataList().stream()
+			.filter(p -> p.getPlayerCommonData().isOnline())
+			.findAny()
+			.map(p -> p.getPlayerCommonData().getPlayerObjId())
+			.orElse(null);
+		if (onlinePlayerId != null) { // a char was online during acc login (double login or client crash), so reload pcd, appearance and acc warehouse
+			if (PlayerDAO.isOnline(onlinePlayerId)) { // the found char is still leaving the world, so the acc wh might still be outdated
 				client.sendPacket(new SM_ENTER_WORLD_CHECK(Msg.REENTRY_TIME));
 				return;
-			} else { // reload pcd, appearance, acc warehouse, ... since char was saved after acc logged in (delayed kick)
-				playerAccData = AccountService.loadPlayerAccountData(objectId);
-				pcd = playerAccData.getPlayerCommonData();
-				account.addPlayerAccountData(playerAccData);
-				account.setAccountWarehouse(AccountService.loadAccountWarehouse(account));
 			}
+			playerAccData = AccountService.loadPlayerAccountData(onlinePlayerId);
+			if (onlinePlayerId == objectId)
+				pcd = playerAccData.getPlayerCommonData(); // refresh lastOnline for reentry time validation
+			account.addPlayerAccountData(playerAccData);
+			account.setAccountWarehouse(AccountService.loadAccountWarehouse(account));
 		}
 
 		if (World.getInstance().isInWorld(objectId)) {
@@ -185,7 +196,7 @@ public final class PlayerEnterWorldService {
 
 		World.getInstance().storeObject(player);
 
-		// change players position if he isn't allowed to spawn in the current zone
+		// change player position if he isn't allowed to spawn in the current zone
 		if (validateFortressZone(player)) // only check vortex zone if fortress check was ok (otherwise, the player is already set to bind point)
 			validateVortexZone(player);
 
@@ -204,6 +215,7 @@ public final class PlayerEnterWorldService {
 				pcd.setDp(0);
 		}
 
+		client.sendPacket(new SM_HOUSE_SCRIPTS(0, PlayerScript.LUA_SANDBOX_FIX)); // client executes this immediately (scary, right?!)
 		client.sendPacket(new SM_UNK_3_5_1());
 		StigmaService.onPlayerLogin(player);
 		client.sendPacket(new SM_ENTER_WORLD_CHECK());
@@ -217,7 +229,7 @@ public final class PlayerEnterWorldService {
 			SM_SKILL_LIST.STATIC_BODY_SIZE, SkillEntryWriter.DYNAMIC_BODY_PART_SIZE_CALCULATOR);
 		skillEntrySplitList.forEach(part -> PacketSendUtility.sendPacket(player, new SM_SKILL_LIST(part)));
 		if (player.getSkillCoolDowns() != null)
-			client.sendPacket(new SM_SKILL_COOLDOWN(player.getSkillCoolDowns(), true));
+			client.sendPacket(new SM_SKILL_COOLDOWN(player, player.getSkillCoolDowns(), false));
 
 		if (!player.getItemCoolDowns().isEmpty())
 			client.sendPacket(new SM_ITEM_COOLDOWN(player.getItemCoolDowns()));
@@ -229,7 +241,7 @@ public final class PlayerEnterWorldService {
 			player.getTitleList().setBonusTitle(pcd.getBonusTitleId());
 		}
 		client.sendPacket(new SM_MOTION(player.getMotions().getMotions().values()));
-		client.sendPacket(new SM_AFTER_TIME_CHECK_4_7_5());// it is also send after enter world check
+		client.sendPacket(new SM_AFTER_TIME_CHECK_4_7_5());// it is also sent after enter world check
 
 		byte[] uiSettings = player.getPlayerSettings().getUiSettings();
 		byte[] shortcuts = player.getPlayerSettings().getShortcuts();
@@ -252,7 +264,7 @@ public final class PlayerEnterWorldService {
 		TeleportService.sendObeliskBindPoint(player);
 		TeleportService.sendKiskBindPoint(player);
 
-		AhserionRaid.getInstance().onPlayerLogin(player);
+		PanesterraService.getInstance().onEnterPanesterra(player);
 
 		// ----------------------------- Retail sequence -----------------------------
 		client.sendPacket(new SM_PLAYER_SPAWN(player));
@@ -309,6 +321,7 @@ public final class PlayerEnterWorldService {
 			ClassChangeService.showClassChangeDialog(player);
 
 		GMService.getInstance().onPlayerLogin(player);
+		BookmarkDAO.loadBookmarks(player.getObjectId()).forEach(bookmark -> PacketSendUtility.sendPacket(player, new SM_GM_BOOKMARK_ADD(bookmark)));
 
 		if (player.getAbyssRank().getRank().getId() >= AbyssRankEnum.STAR1_OFFICER.getId()) {
 			client.sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_GLORY_POINT_LOSE_COMMON());
@@ -321,6 +334,8 @@ public final class PlayerEnterWorldService {
 
 		if (HTMLConfig.ENABLE_HTML_WELCOME)
 			HTMLService.showHTML(player, HTMLCache.getInstance().getHTML("welcome.xhtml"));
+
+		AdventService.getInstance().onLogin(player);
 
 		player.getNpcFactions().sendDailyQuest();
 
@@ -372,7 +387,8 @@ public final class PlayerEnterWorldService {
 	@SuppressWarnings("lossy-conversions")
 	private static void updateEnergyOfRepose(Player player, long secondsOffline) {
 		player.getCommonData().updateMaxRepose();
-		if (player.getCommonData().isReadyForReposeEnergy() && secondsOffline > 4 * 3600) { // more than 4 hours offline: start counting Repose Energy addition
+		if (player.getCommonData().isReadyForReposeEnergy() && secondsOffline > 4 * 3600) { // more than 4 hours offline: start counting Repose Energy
+																																												// addition
 			double hours = secondsOffline / 3600d;
 			// 48 hours offline = 100% Repose Energy (~1% each 30mins source: http://forums.na.aiononline.com/na/showthread.php?t=105940)
 			long addReposeEnergy = Math.round((hours / 48) * player.getCommonData().getMaxReposeEnergy());

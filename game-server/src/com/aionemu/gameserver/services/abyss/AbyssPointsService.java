@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
-import com.aionemu.gameserver.model.gameobjects.player.AbyssRank;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ABYSS_RANK;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ABYSS_RANK_UPDATE;
@@ -29,36 +28,22 @@ public class AbyssPointsService {
 		SiegeService.getInstance().onAbyssPointsAdded(player, obj, value);
 	}
 
-	public static void addAp(Player player, int value) {
+	public static void addAp(Player player, int amount) {
 		if (player == null)
 			return;
 
-		// Notify player of AP gained (This should happen before setAp happens.)
-		if (value > 0)
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_COMBAT_MY_ABYSS_POINT_GAIN(value));
-		else
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_USE_ABYSSPOINT(value * -1));
+		int oldAp = player.getAbyssRank().getAp();
+		AbyssRankEnum oldAbyssRank = player.getAbyssRank().getRank();
+		player.getAbyssRank().addAp(amount);
+		int added = player.getAbyssRank().getAp() - oldAp;
 
-		// Set the new AP value
-		setAp(player, value);
-
-		// Add Abyss Points to Legion
-		if (player.isLegionMember() && value > 0) {
-			player.getLegion().addContributionPoints(value);
+		SM_SYSTEM_MESSAGE msg = amount >= 0 ? SM_SYSTEM_MESSAGE.STR_MSG_COMBAT_MY_ABYSS_POINT_GAIN(added) : SM_SYSTEM_MESSAGE.STR_MSG_USE_ABYSSPOINT(-added);
+		PacketSendUtility.sendPacket(player, msg);
+		onRankChanged(player, added != 0, oldAbyssRank != player.getAbyssRank().getRank(), null);
+		if (player.isLegionMember() && added > 0) {
+			player.getLegion().addContributionPoints(added);
 			PacketSendUtility.broadcastToLegion(player.getLegion(), new SM_LEGION_EDIT(0x03, player.getLegion()));
 		}
-	}
-
-	public static void setAp(Player player, int value) {
-		if (player == null)
-			return;
-
-		AbyssRank rank = player.getAbyssRank();
-
-		AbyssRankEnum oldAbyssRank = rank.getRank();
-		rank.addAp(value);
-
-		onRankChanged(player, value != 0, oldAbyssRank != rank.getRank(), null);
 	}
 
 	public static void onRankChanged(Player player, boolean abyssPointChanged, boolean abyssRankChanged, Integer newRankingListPosition) {

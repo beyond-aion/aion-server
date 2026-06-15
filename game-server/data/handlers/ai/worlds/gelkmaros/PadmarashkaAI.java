@@ -1,16 +1,14 @@
 package ai.worlds.gelkmaros;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.HpPhases;
-import com.aionemu.gameserver.controllers.observer.ActionObserver;
-import com.aionemu.gameserver.controllers.observer.ObserverType;
+import com.aionemu.gameserver.controllers.observer.DeathObserver;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.model.Effect;
@@ -26,7 +24,7 @@ import ai.AggressiveNpcAI;
 public class PadmarashkaAI extends AggressiveNpcAI implements HpPhases.PhaseHandler {
 
 	private final HpPhases hpPhases = new HpPhases(33, 5);
-	private AtomicInteger deadProtectors = new AtomicInteger();
+	private final AtomicInteger deadProtectors = new AtomicInteger();
 
 	public PadmarashkaAI(Npc owner) {
 		super(owner);
@@ -37,6 +35,14 @@ public class PadmarashkaAI extends AggressiveNpcAI implements HpPhases.PhaseHand
 		super.handleSpawned();
 		ThreadPoolManager.getInstance().schedule(() -> SkillEngine.getInstance().applyEffectDirectly(19186, getOwner(), getOwner()), 3000);
 		spawnShieldNpcs();
+	}
+
+	@Override
+	public void modifyOwnerStat(Stat2 stat) {
+		switch (stat.getStat()) { 	// Tweak for 12p (600 s | 3000 dps)
+			case MAXHP -> stat.setBase(20_880_000);
+			case PHYSICAL_ATTACK -> stat.setBase(2200);
+		}
 	}
 
 	private void spawnShieldNpcs() {
@@ -80,20 +86,17 @@ public class PadmarashkaAI extends AggressiveNpcAI implements HpPhases.PhaseHand
 	protected void handleBackHome() {
 		super.handleBackHome();
 		hpPhases.reset();
-		despawnNpcs(Arrays.asList(281936));
+		despawnNpcs(281936);
 	}
 
 	@Override
 	protected void handleDespawned() {
-		despawnNpcs(Arrays.asList(281938, 281939, 281940, 281941, 281936));
+		despawnNpcs(281938, 281939, 281940, 281941, 281936);
 		super.handleDespawned();
 	}
 
-	private void despawnNpcs(List<Integer> npcIds) {
-		getKnownList().getKnownObjects().values().forEach(o -> {
-			if (o instanceof Npc && npcIds.contains(((Npc) o).getNpcId()))
-				o.getController().delete();
-		});
+	private void despawnNpcs(int... npcIds) {
+		getOwner().getWorldMapInstance().getNpcs(npcIds).forEach(npc -> npc.getController().delete());
 	}
 
 	private void handleObservedNpcDied(Npc npc) {
@@ -110,12 +113,6 @@ public class PadmarashkaAI extends AggressiveNpcAI implements HpPhases.PhaseHand
 
 	private void spawnAndObserveNpc(int npcId, float x, float y, float z, byte h) {
 		Npc npc = (Npc) spawn(npcId, x, y, z, h);
-		npc.getObserveController().addObserver(new ActionObserver(ObserverType.DEATH) {
-
-			@Override
-			public void died(Creature creature) {
-				handleObservedNpcDied(npc);
-			}
-		});
+		npc.getObserveController().attach(new DeathObserver(_ -> handleObservedNpcDied(npc)));
 	}
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.configs.main.EventsConfig;
+import com.aionemu.gameserver.configs.main.MembershipConfig;
 import com.aionemu.gameserver.configs.main.NameConfig;
 import com.aionemu.gameserver.controllers.FlyController;
 import com.aionemu.gameserver.controllers.effect.PlayerEffectController;
@@ -18,28 +19,24 @@ import com.aionemu.gameserver.model.account.Account;
 import com.aionemu.gameserver.model.account.PlayerAccountData;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
-import com.aionemu.gameserver.model.gameobjects.player.Equipment;
 import com.aionemu.gameserver.model.gameobjects.player.Mailbox;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.model.items.ItemSlot;
-import com.aionemu.gameserver.model.items.storage.PlayerStorage;
 import com.aionemu.gameserver.model.items.storage.Storage;
-import com.aionemu.gameserver.model.items.storage.StorageType;
 import com.aionemu.gameserver.model.skill.PlayerSkillList;
 import com.aionemu.gameserver.model.stats.calc.functions.PlayerStatFunctions;
 import com.aionemu.gameserver.model.team.legion.LegionMember;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
+import com.aionemu.gameserver.model.templates.item.actions.EmotionLearnAction;
 import com.aionemu.gameserver.services.BrokerService;
 import com.aionemu.gameserver.services.HousingService;
 import com.aionemu.gameserver.services.LegionService;
 import com.aionemu.gameserver.services.PunishmentService.PunishmentType;
 import com.aionemu.gameserver.services.SkillLearnService;
 import com.aionemu.gameserver.services.item.ItemFactory;
-import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.world.World;
-import com.aionemu.gameserver.world.WorldPosition;
 import com.aionemu.gameserver.world.knownlist.KnownList;
 
 /**
@@ -102,18 +99,15 @@ public class PlayerService {
 			HeadhuntingDAO.storeHeadhunter(player.getObjectId());
 	}
 
-	/**
-	 * Returns the player with given objId (if such player exists)
-	 *
-	 * @param playerObjId
-	 * @param account
-	 * @return Player
-	 */
 	public static Player getPlayer(int playerObjId, Account account) {
 		// Player common data and appearance should be already loaded in account
 		PlayerAccountData playerAccountData = account.getPlayerAccountData(playerObjId);
+		PlayerCommonData pcd = playerAccountData.getPlayerCommonData();
 		Player player = new Player(playerAccountData, account);
-		LegionMember legionMember = LegionService.getInstance().getLegionMember(player.getObjectId());
+		int oldOwnerId = pcd.getWorldOwnerId();
+		player.setPosition(World.getInstance().createPosition(pcd.getMapId(), pcd.getX(), pcd.getY(), pcd.getZ(), pcd.getHeading(), 0));
+		pcd.setWorldOwnerId(oldOwnerId);
+		LegionMember legionMember = LegionService.getInstance().getLegionMember(pcd);
 		if (legionMember != null) {
 			player.setLegionMember(legionMember);
 		}
@@ -137,32 +131,21 @@ public class PlayerService {
 		player.setRecipeList(PlayerRecipesDAO.load(player.getObjectId()));
 
 		account.getAccountWarehouse().setOwner(player);
-		Storage inventory = InventoryDAO.loadStorage(playerObjId, StorageType.CUBE);
-		ItemService.loadItemStones(inventory.getItems());
-		player.setStorage(inventory);
+		InventoryDAO.loadStorage(playerObjId, player.getInventory());
+		ItemStoneListDAO.load(player.getInventory().getItems());
+		ItemStoneListDAO.load(player.getEquipment().getEquippedItemsWithoutStigma());
 
-		Equipment equipment = InventoryDAO.loadEquipment(player);
-		ItemService.loadItemStones(equipment.getEquippedItemsWithoutStigma());
-		player.setEquipment(equipment);
+		InventoryDAO.loadStorage(playerObjId, player.getWarehouse());
+		ItemStoneListDAO.load(player.getWarehouse().getItems());
 
-		for (int petBagId = StorageType.PET_BAG_MIN; petBagId <= StorageType.PET_BAG_MAX; petBagId++) {
-			Storage petBag = InventoryDAO.loadStorage(playerObjId, StorageType.getStorageTypeById(petBagId));
-			ItemService.loadItemStones(petBag.getItems());
-			player.setStorage(petBag);
+		for (Storage petBag : player.getPetBags()) {
+			InventoryDAO.loadStorage(playerObjId, petBag);
+			ItemStoneListDAO.load(petBag.getItems());
 		}
-
-		for (int houseWhId = StorageType.HOUSE_WH_MIN; houseWhId <= StorageType.HOUSE_WH_MAX; houseWhId++) {
-			StorageType whType = StorageType.getStorageTypeById(houseWhId);
-			if (whType != null) {
-				Storage cabinet = InventoryDAO.loadStorage(playerObjId, StorageType.getStorageTypeById(houseWhId));
-				ItemService.loadItemStones(cabinet.getItems());
-				player.setStorage(cabinet);
-			}
+		for (Storage cabinet : player.getCabinets()) {
+			InventoryDAO.loadStorage(playerObjId, cabinet);
+			ItemStoneListDAO.load(cabinet.getItems());
 		}
-
-		Storage warehouse = InventoryDAO.loadStorage(playerObjId, StorageType.REGULAR_WAREHOUSE);
-		ItemService.loadItemStones(warehouse.getItems());
-		player.setStorage(warehouse);
 
 		// Apply equipment stats (items and manastones were loaded in account)
 		player.getEquipment().onLoadApplyEquipmentStats();
@@ -186,6 +169,10 @@ public class PlayerService {
 
 		PlayerLifeStatsDAO.loadPlayerLifeStat(player);
 		PlayerEmotionListDAO.loadEmotions(player);
+		if (player.hasPermission(MembershipConfig.EMOTIONS_ALL)) {
+			for (int emotionId : EmotionLearnAction.getLearnableEmotionIds())
+				player.getEmotions().add(emotionId, 0, false);
+		}
 
 		return player;
 	}
@@ -202,8 +189,11 @@ public class PlayerService {
 		PlayerInitialData playerInitialData = DataManager.PLAYER_INITIAL_DATA;
 		LocationData ld = playerInitialData.getSpawnLocation(playerCommonData.getRace());
 
-		WorldPosition position = World.getInstance().createPosition(ld.getMapId(), ld.getX(), ld.getY(), ld.getZ(), ld.getHeading(), 0);
-		playerCommonData.setPosition(position);
+		playerCommonData.setMapId(ld.getMapId());
+		playerCommonData.setX(ld.getX());
+		playerCommonData.setY(ld.getY());
+		playerCommonData.setZ(ld.getZ());
+		playerCommonData.setHeading(ld.getHeading());
 
 		Player newPlayer = new Player(playerAccountData, account);
 
@@ -213,11 +203,6 @@ public class PlayerService {
 
 		// Starting items
 		PlayerCreationData playerCreationData = playerInitialData.getPlayerCreationData(playerCommonData.getPlayerClass());
-		Storage playerInventory = new PlayerStorage(StorageType.CUBE);
-		newPlayer.setStorage(playerInventory);
-		newPlayer.setStorage(new PlayerStorage(StorageType.REGULAR_WAREHOUSE));
-
-		Equipment equipment = new Equipment(newPlayer);
 		if (playerCreationData != null) { // player transfer
 			List<ItemType> items = playerCreationData.getItems();
 			for (ItemType itemType : items) {
@@ -231,22 +216,19 @@ public class PlayerService {
 				// Make sure you will not put into xml file more items than possible to equip.
 				ItemTemplate itemTemplate = item.getItemTemplate();
 
-				if ((itemTemplate.isArmor() || itemTemplate.isWeapon()) && !(equipment.isSlotEquipped(itemTemplate.getItemSlot()))) {
+				if ((itemTemplate.isArmor() || itemTemplate.isWeapon()) && !newPlayer.getEquipment().isSlotEquipped(itemTemplate.getItemSlot())) {
 					item.setEquipped(true);
 					ItemSlot itemSlot = ItemSlot.getSlotFor(itemTemplate.getItemSlot());
 					item.setEquipmentSlot(itemSlot.getSlotIdMask());
-					equipment.onLoadHandler(item);
-				} else {
-					playerInventory.onLoadHandler(item);
 				}
+				newPlayer.getInventory().onLoadHandler(item);
 			}
 		}
-		newPlayer.setEquipment(equipment);
 		newPlayer.setMailbox(new Mailbox(newPlayer));
 
 		// Mark inventory and equipment as UPDATE_REQUIRED to be saved during character creation
-		playerInventory.setPersistentState(PersistentState.UPDATE_REQUIRED);
-		equipment.setPersistentState(PersistentState.UPDATE_REQUIRED);
+		newPlayer.getInventory().setPersistentState(PersistentState.UPDATE_REQUIRED);
+		newPlayer.getEquipment().setPersistentState(PersistentState.UPDATE_REQUIRED);
 		return newPlayer;
 	}
 
@@ -254,6 +236,13 @@ public class PlayerService {
 		Player player = World.getInstance().getPlayer(playerObjId);
 		if (player == null)
 			return PlayerDAO.loadPlayerCommonData(playerObjId);
+		return player.getCommonData();
+	}
+
+	public static PlayerCommonData getOrLoadPlayerCommonData(String name) {
+		Player player = World.getInstance().getPlayer(name);
+		if (player == null)
+			return PlayerDAO.loadPlayerCommonDataByName(name);
 		return player.getCommonData();
 	}
 
@@ -299,26 +288,16 @@ public class PlayerService {
 	 *          id of player to delete from db
 	 */
 	public static void deletePlayerFromDB(int playerId) {
-		InventoryDAO.deletePlayerItems(playerId);
-		PlayerDAO.deletePlayer(playerId);
-		HousingService.getInstance().onPlayerDeleted(playerId);
-		BrokerService.getInstance().onPlayerDeleted(playerId);
+		deletePlayerFromDB(playerId, true);
 	}
 
-	/**
-	 * Completely removes player from database
-	 *
-	 * @param accountId
-	 *          id of account to delete player on
-	 * @param maxExp
-	 *          maximum allowed character experience points (level) for deletion
-	 * @return number of deleted chars
-	 */
-	public static int deleteAccountsCharsFromDB(int accountId, long maxExp) {
-		List<Integer> charIds = PlayerDAO.getPlayerOidsOnAccount(accountId, maxExp);
-		for (int playerId : charIds)
-			deletePlayerFromDB(playerId);
-		return charIds.size();
+	public static void deletePlayerFromDB(int playerId, boolean notifyServices) {
+		InventoryDAO.deletePlayerOrLegionItems(playerId);
+		PlayerDAO.deletePlayer(playerId);
+		if (notifyServices) {
+			HousingService.getInstance().onPlayerDeleted(playerId);
+			BrokerService.getInstance().onPlayerDeleted(playerId);
+		}
 	}
 
 	/**

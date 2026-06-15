@@ -9,12 +9,14 @@ import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.ChatUtil;
+import com.aionemu.gameserver.utils.audit.AuditLogger;
 
 /**
  * @author alexa026, rhys2002
  */
 public class CM_CASTSPELL extends AionClientPacket {
 
+	private final long receiveTime = System.currentTimeMillis();
 	private int spellid;
 	// 0 - obj id, 1 - point location, 2 - unk, 3 - object not in sight(skill 1606)? 4 - unk
 	private int targetType;
@@ -92,13 +94,15 @@ public class CM_CASTSPELL extends AionClientPacket {
 
 		if (player.isProtectionActive())
 			player.getController().stopProtectionActiveTask();
-		if (player.isUsingItem())
-			player.getController().cancelUseItem();
+		player.getController().cancelUseItem();
 
-		long currentTime = System.currentTimeMillis();
-		if (player.getNextSkillUse() > currentTime) {
-			sendPacket(SM_SYSTEM_MESSAGE.STR_SKILL_NOT_READY());
-			return;
+		if (player.getNextSkillUse() > receiveTime) {
+			int lastSkillId = player.getLastSkill().getSkillId(); // lastSkill cannot be null, as nextSkillUse is zero on the first cast
+			AuditLogger.log(player, "tried to use skill " + spellid + " " + (player.getNextSkillUse() - receiveTime) + " ms too early. Previous skill: " + lastSkillId);
+			if (player.getNextSkillUse() > System.currentTimeMillis()) {
+				sendPacket(SM_SYSTEM_MESSAGE.STR_SKILL_NOT_READY());
+				return;
+			}
 		}
 
 		player.getController().useSkill(template, targetType, x, y, z, hitTime, level);

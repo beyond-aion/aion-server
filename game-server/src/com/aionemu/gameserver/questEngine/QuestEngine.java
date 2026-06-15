@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.questEngine;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 import org.quartz.JobDetail;
 import org.slf4j.Logger;
@@ -10,9 +9,6 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.commons.scripting.ScriptManager;
 import com.aionemu.commons.scripting.classlistener.AggregatedClassListener;
 import com.aionemu.commons.scripting.classlistener.OnClassLoadUnloadListener;
-import com.aionemu.commons.scripting.classlistener.ScheduledTaskClassListener;
-import com.aionemu.commons.services.CronService;
-import com.aionemu.gameserver.GameServerError;
 import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.GameEngine;
@@ -21,7 +17,6 @@ import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.QuestTemplate;
-import com.aionemu.gameserver.model.templates.factions.NpcFactionTemplate;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 import com.aionemu.gameserver.model.templates.quest.*;
 import com.aionemu.gameserver.model.templates.rewards.BonusType;
@@ -36,8 +31,10 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
+import com.aionemu.gameserver.services.cron.CronService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.collections.DynamicServerPacketBodySplitList;
 import com.aionemu.gameserver.utils.collections.SplitList;
 import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
@@ -50,46 +47,43 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 public class QuestEngine implements GameEngine {
 
 	private static final Logger log = LoggerFactory.getLogger(QuestEngine.class);
-	private ScriptManager scriptManager = new ScriptManager();
+	private final ScriptManager scriptManager = new ScriptManager();
 	private JobDetail messageTask;
-	private Map<Integer, AbstractQuestHandler> questHandlers = new HashMap<>();
-	private Map<Integer, QuestNpc> questNpcs = new HashMap<>();
-	private Map<Integer, List<Integer>> questItemRelated = new HashMap<>();
-	private List<Integer> questHouseItems = new ArrayList<>();
-	private Map<Integer, List<Integer>> questItems = new HashMap<>();
-	private List<Integer> questOnCompleted = new ArrayList<>();
-	private Map<Race, List<Integer>> questOnLevelUp = new EnumMap<>(Race.class);
-	private List<Integer> questOnDie = new ArrayList<>();
-	private List<Integer> questOnLogOut = new ArrayList<>();
-	private List<Integer> questOnEnterWorld = new ArrayList<>();
-	private Map<ZoneName, List<Integer>> questOnEnterZone = new HashMap<>();
-	private Map<ZoneName, List<Integer>> questOnLeaveZone = new HashMap<>();
-	private Map<String, List<Integer>> questOnPassFlyingRings = new HashMap<>();
-	private Map<Integer, List<Integer>> questOnMovieEnd = new HashMap<>();
-	private List<Integer> questOnTimerEnd = new ArrayList<>();
-	private List<Integer> onInvisibleTimerEnd = new ArrayList<>();
-	private Map<AbyssRankEnum, List<Integer>> questOnKillRanked = new EnumMap<>(AbyssRankEnum.class);
-	private Map<Integer, List<Integer>> questOnKillInWorld = new HashMap<>();
-	private Map<Integer, List<Integer>> questOnUseSkill = new HashMap<>();
-	private Map<Integer, Integer> questOnFailCraft = new HashMap<>();
-	private Map<Integer, List<Integer>> questOnEquipItem = new HashMap<>();
-	private Map<Integer, List<Integer>> questCanAct = new HashMap<>();
-	private List<Integer> questOnDredgionReward = new ArrayList<>();
-	private Map<BonusType, List<Integer>> questOnBonusApply = new EnumMap<>(BonusType.class);
-	private List<Integer> questUpdateItems = new ArrayList<>();
-	private List<Integer> reachTarget = new ArrayList<>();
-	private List<Integer> lostTarget = new ArrayList<>();
-	private List<Integer> questOnEnterWindStream = new ArrayList<>();
-	private List<Integer> questRideAction = new ArrayList<>();
-	private Map<String, List<Integer>> questOnKillInZone = new HashMap<>();
+	private final Map<Integer, AbstractQuestHandler> questHandlers = new HashMap<>();
+	private final Map<Integer, QuestNpc> questNpcs = new HashMap<>();
+	private final Map<Integer, List<Integer>> questItemRelated = new HashMap<>();
+	private final List<Integer> questHouseItems = new ArrayList<>();
+	private final Map<Integer, List<Integer>> questItems = new HashMap<>();
+	private final List<Integer> questOnCompleted = new ArrayList<>();
+	private final Map<Race, List<Integer>> questOnLevelUp = new EnumMap<>(Race.class);
+	private final List<Integer> questOnDie = new ArrayList<>();
+	private final List<Integer> questOnLogOut = new ArrayList<>();
+	private final List<Integer> questOnEnterWorld = new ArrayList<>();
+	private final Map<ZoneName, List<Integer>> questOnEnterZone = new HashMap<>();
+	private final Map<ZoneName, List<Integer>> questOnLeaveZone = new HashMap<>();
+	private final Map<String, List<Integer>> questOnPassFlyingRings = new HashMap<>();
+	private final List<Integer> questOnTimerEnd = new ArrayList<>();
+	private final List<Integer> onInvisibleTimerEnd = new ArrayList<>();
+	private final Map<AbyssRankEnum, List<Integer>> questOnKillRanked = new EnumMap<>(AbyssRankEnum.class);
+	private final Map<Integer, List<Integer>> questOnKillInWorld = new HashMap<>();
+	private final Map<Integer, List<Integer>> questOnUseSkill = new HashMap<>();
+	private final Map<Integer, Integer> questOnFailCraft = new HashMap<>();
+	private final Map<Integer, List<Integer>> questOnEquipItem = new HashMap<>();
+	private final Map<Integer, List<Integer>> questCanAct = new HashMap<>();
+	private final List<Integer> questOnDredgionReward = new ArrayList<>();
+	private final Map<BonusType, List<Integer>> questOnBonusApply = new EnumMap<>(BonusType.class);
+	private final List<Integer> questUpdateItems = new ArrayList<>();
+	private final List<Integer> reachTarget = new ArrayList<>();
+	private final List<Integer> lostTarget = new ArrayList<>();
+	private final List<Integer> questOnEnterWindStream = new ArrayList<>();
+	private final List<Integer> questRideAction = new ArrayList<>();
+	private final Map<String, List<Integer>> questOnKillInZone = new HashMap<>();
 
 	private QuestEngine() {
 	}
 
 	@Override
-	public void load() {
-		log.info("Quest engine load started");
-
+	public void init() {
 		for (QuestTemplate data : DataManager.QUEST_DATA.getQuestTemplates()) {
 			for (QuestDrop drop : data.getQuestDrop()) {
 				drop.setQuestId(data.getId());
@@ -102,38 +96,23 @@ public class QuestEngine implements GameEngine {
 				}
 			}
 		}
-
 		AggregatedClassListener acl = new AggregatedClassListener();
 		acl.addClassListener(new OnClassLoadUnloadListener());
-		acl.addClassListener(new ScheduledTaskClassListener());
 		acl.addClassListener(new QuestHandlerLoader());
 		scriptManager.setGlobalClassListener(acl);
-
-		try {
-			scriptManager.load(GSConfig.QUEST_HANDLER_DIRECTORY);
-			for (XMLQuest xmlQuest : DataManager.XML_QUESTS.getAllQuests())
-				xmlQuest.register(this);
-			log.info("Loaded " + questHandlers.size() + " quest handlers.");
-			if (GSConfig.ANALYZE_QUESTHANDLERS)
-				analyzeQuestHandlers();
-		} catch (Exception e) {
-			throw new GameServerError("Can't initialize quest handlers.", e);
-		}
-
+		scriptManager.load(GSConfig.QUEST_HANDLER_DIRECTORY);
+		for (XMLQuest xmlQuest : DataManager.XML_QUESTS.getAllQuests())
+			xmlQuest.register(this);
+		log.info("Loaded " + questHandlers.size() + " quest handlers.");
+		if (GSConfig.ANALYZE_QUESTHANDLERS)
+			ThreadPoolManager.getInstance().executeLongRunning(() -> QuestSpawnAnalyzer.run(questHandlers.values(), questNpcs.values(), true));
 		addMessageSendingTask();
 	}
 
 	public void reload() {
-		shutdown();
-		load();
-	}
-
-	@Override
-	public void shutdown() {
-		log.info("Quest engine shutdown started");
 		scriptManager.shutdown();
 		clear();
-		log.info("Quest engine shutdown complete");
+		init();
 	}
 
 	public void clear() {
@@ -150,7 +129,6 @@ public class QuestEngine implements GameEngine {
 		questOnLogOut.clear();
 		questOnEnterZone.clear();
 		questOnLeaveZone.clear();
-		questOnMovieEnd.clear();
 		questOnTimerEnd.clear();
 		onInvisibleTimerEnd.clear();
 		questOnPassFlyingRings.clear();
@@ -523,23 +501,14 @@ public class QuestEngine implements GameEngine {
 		return true;
 	}
 
-	public boolean onMovieEnd(QuestEnv env, int movieId) {
+	public void onMovieEnd(QuestEnv env, int movieId) {
 		try {
-			List<Integer> questIds = questOnMovieEnd.get(movieId);
-			if (questIds != null) {
-				for (int questId : questIds) {
-					AbstractQuestHandler questHandler = getQuestHandlerByQuestId(questId);
-					if (questHandler != null) {
-						env.setQuestId(questId);
-						if (questHandler.onMovieEndEvent(env, movieId))
-							return true;
-					}
-				}
-			}
+			AbstractQuestHandler questHandler = getQuestHandlerByQuestId(env.getQuestId());
+			if (questHandler != null)
+				questHandler.onMovieEndEvent(env, movieId);
 		} catch (Exception ex) {
 			log.error("QE: exception in onMovieEnd", ex);
 		}
-		return false;
 	}
 
 	public void onQuestTimerEnd(QuestEnv env) {
@@ -836,10 +805,6 @@ public class QuestEngine implements GameEngine {
 		questOnPassFlyingRings.computeIfAbsent(flyingRing, k -> new ArrayList<>()).add(questId);
 	}
 
-	public void registerOnMovieEndQuest(int movieId, int questId) {
-		questOnMovieEnd.computeIfAbsent(movieId, k -> new ArrayList<>()).add(questId);
-	}
-
 	public void registerOnQuestTimerEnd(int questId) {
 		if (!questOnTimerEnd.contains(questId))
 			questOnTimerEnd.add(questId);
@@ -943,70 +908,12 @@ public class QuestEngine implements GameEngine {
 		QuestService.addQuestDrop(hsd.getNpcId(), hsd);
 	}
 
-	private void analyzeQuestHandlers() {
-		boolean ignoreEventQuests = true;
-		log.info("Analyzing quest handlers (ignoreEventQuests=" + ignoreEventQuests + ")...");
-		Set<Integer> unobtainableQuests = new HashSet<>();
-		Set<Integer> factionIds = new HashSet<>();
-		for (NpcFactionTemplate nft : DataManager.NPC_FACTIONS_DATA.getNpcFactionsData()) {
-			if (nft.getNpcIds() == null || nft.getNpcIds().stream().anyMatch(this::existsSpawnData))
-				factionIds.add(nft.getId());
-		}
-		for (AbstractQuestHandler qh : questHandlers.values()) {
-			QuestTemplate qt = DataManager.QUEST_DATA.getQuestById(qh.getQuestId());
-			if (qt.getMinlevelPermitted() == 99 || qt.getNpcFactionId() > 0 && !factionIds.contains(qt.getNpcFactionId()))
-				unobtainableQuests.add(qh.getQuestId()); // players can still have these quests from before an update
-		}
-		Map<String, String> missingSpawnsByQuests = new LinkedHashMap<>();
-		questNpcs.forEach((npcId, npc) -> {
-			if (!existsSpawnData(npcId)) { // if the npc doesn't appear in any spawn template (world, instance, base, siege, temporary, event, ...)
-				Set<Integer> questIds = npc.findAllRegisteredQuestIds();
-				if (ignoreEventQuests && questIds.stream().allMatch(id -> id >= 80000))
-					return;
-				if (questIds.stream().allMatch(id -> unobtainableQuests.contains(id) || existsSpawnDataForAnyAlternativeNpc(id, npcId)))
-					return; // don't log unobtainable quests or if alternative npcs appear in spawn data (many quests support outdated + current npcs)
-				missingSpawnsByQuests.compute(questIds.stream().sorted().map(String::valueOf).collect(Collectors.joining(", ")),
-					(k, npcIds) -> npcIds == null ? String.valueOf(npcId) : npcIds + '/' + npcId);
-			}
-		});
-		if (missingSpawnsByQuests.isEmpty())
-			log.info("Quest handler analysis finished without errors!");
-		else
-			log.warn("Missing quest npc spawns:{}", missingSpawnsByQuests.entrySet().stream()
-				.map(e -> "\n\tNpc " + e.getValue() + " (quests: " + e.getKey() + ")").collect(Collectors.joining()));
-	}
-
-	private boolean existsSpawnData(int npcId) {
-		if (DataManager.SPAWNS_DATA.containsAnySpawnForNpc(npcId))
-			return true;
-		if (DataManager.TOWN_SPAWNS_DATA.containsAnySpawnForNpc(npcId))
-			return true;
-		if (DataManager.EVENT_DATA.containsAnySpawnForNpc(npcId))
-			return true;
-		return false;
-	}
-
-	/**
-	 * @param questId
-	 * @param npcId
-	 * @return True, if alternative npc ids, which are valid for this quest, appear in spawn templates (e.g. mobs for quest kills or talk npcs)
-	 */
-	private boolean existsSpawnDataForAnyAlternativeNpc(int questId, int npcId) {
-		XMLQuest quest = DataManager.XML_QUESTS.getQuest(questId);
-		if (quest == null)
-			return true; // no way to get alternative npcs from non-xml based handlers, so assume the quest spawns work (lol)
-		Set<Integer> alternativeNpcs = quest.getAlternativeNpcs(npcId);
-		if (alternativeNpcs == null)
-			return false;
-		return alternativeNpcs.stream().anyMatch(this::existsSpawnData);
-	}
-
 	private void addMessageSendingTask() {
 		messageTask = CronService.getInstance().schedule(() -> {
 			World.getInstance().forEachPlayer(player -> {
 				boolean daily = false, weekly = false;
 				for (QuestState qs : player.getQuestStateList().getCompletedQuests()) {
-					if (qs.canRepeat()) {
+					if (qs.isStartable()) {
 						QuestTemplate template = DataManager.QUEST_DATA.getQuestById(qs.getQuestId());
 						if (!daily && template.isDaily())
 							daily = true;

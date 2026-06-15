@@ -31,12 +31,9 @@ public class SiegeRaceCounter implements Comparable<SiegeRaceCounter> {
 	}
 
 	public void addPoints(Creature creature, int damage) {
-
 		addTotalDamage(damage);
-
-		if (creature instanceof Player) {
-			addPlayerDamage((Player) creature, damage);
-		}
+		if (creature instanceof Player player)
+			addPlayerDamage(player, damage);
 	}
 
 	public void addTotalDamage(int damage) {
@@ -49,11 +46,6 @@ public class SiegeRaceCounter implements Comparable<SiegeRaceCounter> {
 
 	public void addAbyssPoints(Player player, int abyssPoints) {
 		addToCounter(player.getObjectId(), abyssPoints, playerAPCounter);
-	}
-
-	public void clearDamages() {
-		totalDamage.set(0);
-		playerDamageCounter.clear();
 	}
 
 	protected <K> void addToCounter(K key, int value, Map<K, AtomicLong> counterMap) {

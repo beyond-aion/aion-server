@@ -5,14 +5,12 @@ import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAY_MOVIE;
 import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * Talk with Aegir (204301). Meet Taisan (204403). Pass through Morheim Abyss Gate and talk with Kargate (204423). Protect Kargate from the Balaur:
@@ -145,7 +143,7 @@ public class _24026AHandfromEachSide extends AbstractQuestHandler {
 					QuestService.questTimerEnd(env);
 					if (kargateIsAlive(env)) {
 						changeQuestStep(env, 3, 4);
-						PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(0, 158));
+						playQuestMovie(env, 158);
 					} else {
 						changeQuestStep(env, 3, 2);
 						spawn(204432, player, 272.83f, 176.81f, 204.35f, (byte) 0);
@@ -168,7 +166,7 @@ public class _24026AHandfromEachSide extends AbstractQuestHandler {
 			deleteBalaur(env);
 			if (kargateIsAlive(env)) {
 				changeQuestStep(env, 3, 4);
-				PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(0, 158));
+				playQuestMovie(env, 158);
 			} else {
 				changeQuestStep(env, 3, 2);
 				spawn(204432, player, 272.83f, 176.81f, 204.35f, (byte) 0);

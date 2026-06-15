@@ -78,7 +78,7 @@ public class ServantNpcAI extends GeneralNpcAI {
 				if ((template.getType() != SkillType.MAGICAL || !getOwner().getEffectController().isAbnormalSet(AbnormalState.SILENCE))
 					&& (template.getType() != SkillType.PHYSICAL || !getOwner().getEffectController().isAbnormalSet(AbnormalState.BIND))
 					&& (!getOwner().getEffectController().isInAnyAbnormalState(AbnormalState.CANT_ATTACK_STATE))
-					&& (!getOwner().getTransformModel().isActive() || getOwner().getTransformModel().getBanUseSkills() != 1)) {
+					&& (!getOwner().isTransformed() || getOwner().getTransformModel().getBanUseSkills() != 1)) {
 					SkillEngine.getInstance().getSkill(getOwner(), skill.getSkillId(), skill.getSkillLevel(), getOwner().getTarget()).useSkill();
 				}
 			}

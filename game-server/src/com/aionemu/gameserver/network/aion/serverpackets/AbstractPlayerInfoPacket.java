@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.aionemu.gameserver.configs.main.SecurityConfig;
@@ -12,9 +11,11 @@ import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerAppearance;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 import com.aionemu.gameserver.model.items.ItemSlot;
+import com.aionemu.gameserver.model.team.legion.LegionMember;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.services.BrokerService;
+import com.aionemu.gameserver.services.LegionService;
 import com.aionemu.gameserver.services.player.MultiClientingService;
 
 /**
@@ -30,16 +31,9 @@ public abstract class AbstractPlayerInfoPacket extends AionServerPacket {
 	protected void writePlayerInfo(PlayerAccountData accPlData, AionConnection con) {
 		PlayerCommonData pcd = accPlData.getPlayerCommonData();
 		int playerId = pcd.getPlayerObjId();
+		LegionMember legionMember = LegionService.getInstance().getLegionMember(pcd);
 		PlayerAppearance playerAppearance = accPlData.getAppearance();
 		CharacterBanInfo cbi = getCharBanInfo(accPlData, con);
-
-		List<Item> itemList = new ArrayList<>(16);
-		for (Item item : accPlData.getEquipment()) {
-			if (itemList.size() == 16)
-				break;
-			if (ItemSlot.isVisible(item.getEquipmentSlot()))
-				itemList.add(item);
-		}
 
 		writeD(playerId);
 		writeS(pcd.getName(), CHARNAME_MAX_LENGTH);
@@ -106,24 +100,24 @@ public abstract class AbstractPlayerInfoPacket extends AionServerPacket {
 		writeC(0x00); // sometimes 0x04 (4) for all chars, else 0
 		writeF(playerAppearance.getHeight());
 		writeD(pcd.getTemplateId());
-		writeD(pcd.getPosition().getMapId());// mapid for preloading map
-		writeF(pcd.getPosition().getX());
-		writeF(pcd.getPosition().getY());
-		writeF(pcd.getPosition().getZ());
-		writeD(pcd.getPosition().getHeading());
+		writeD(pcd.getMapId()); // mapid for preloading map
+		writeF(pcd.getX());
+		writeF(pcd.getY());
+		writeF(pcd.getZ());
+		writeD(pcd.getHeading());
 		writeH(pcd.getLevel());
 		writeH(0); // unk 2.5
 		writeD(pcd.getTitleId());
-		writeD(accPlData.isLegionMember() ? accPlData.getLegion().getLegionId() : 0);
-		writeS(accPlData.isLegionMember() ? accPlData.getLegion().getName() : null, 40);
-		writeH(accPlData.isLegionMember() ? 1 : 0);
+		writeD(legionMember != null ? legionMember.getLegion().getLegionId() : 0);
+		writeS(legionMember != null ? legionMember.getLegion().getName() : null, 40);
+		writeH(legionMember != null ? 1 : 0);
 		writeD(pcd.getLastOnlineEpochSeconds());
 		for (int i = 0; i < 16; i++) { // 16 items is always expected by the client...
-			Item item = i < itemList.size() ? itemList.get(i) : null;
-			writeC(item == null ? 0 : ItemSlot.getEquipmentSlotType(item.getEquipmentSlot())); // 0 = not visible, 1 = default (right-hand) slot, 2 = secondary (left-hand) slot
-			writeD(item == null ? 0 : item.getItemSkinTemplate().getTemplateId());
-			writeD(item == null ? 0 : item.getGodStoneId());
-			writeDyeInfo(item == null ? null : item.getItemColor());
+			PlayerAccountData.VisibleItem item = i < accPlData.getVisibleItems().size() ? accPlData.getVisibleItems().get(i) : null;
+			writeC(item == null ? 0 : item.slotType()); // 0 = not visible, 1 = default (right-hand) slot, 2 = secondary (left-hand) slot
+			writeD(item == null ? 0 : item.itemId());
+			writeD(item == null ? 0 : item.godStoneId());
+			writeDyeInfo(item == null ? null : item.color());
 		}
 		writeD(0);
 		writeD(0);
@@ -172,12 +166,12 @@ public abstract class AbstractPlayerInfoPacket extends AionServerPacket {
 
 	private CharacterBanInfo getCharBanInfo(PlayerAccountData playerAccountData, AionConnection con) {
 		CharacterBanInfo cbi = playerAccountData.getCharBanInfo();
-		if (cbi != null && cbi.getEnd() > System.currentTimeMillis() / 1000)
+		long nowSeconds = System.currentTimeMillis() / 1000;
+		if (cbi != null && nowSeconds >= cbi.getEnd())
 			cbi = null;
 		if (cbi == null && SecurityConfig.MULTI_CLIENTING_RESTRICTION_MODE == SecurityConfig.MultiClientingRestrictionMode.SAME_FACTION) {
 			int cdMinutes = SecurityConfig.MULTI_CLIENTING_FACTION_SWITCH_COOLDOWN_MINUTES;
 			if (cdMinutes > 0 && MultiClientingService.checkForFactionSwitchCooldownTime(playerAccountData.getPlayerCommonData().getRace(), con) != null) {
-				long nowSeconds = System.currentTimeMillis() / 1000;
 				int durationSeconds = 61; // client will send CM_CHARACTER_LIST after this duration to update the ban info (<61s corrupts the ban info)
 				cbi = new CharacterBanInfo(nowSeconds, durationSeconds, "\n\n\n\uE026 " + cdMinutes + " minute cooldown between switching factions\n\n\n\n\n\n\n");
 			}

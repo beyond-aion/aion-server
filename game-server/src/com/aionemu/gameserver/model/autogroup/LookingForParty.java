@@ -1,7 +1,8 @@
 package com.aionemu.gameserver.model.autogroup;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import com.aionemu.gameserver.model.Race;
@@ -12,7 +13,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
  */
 public class LookingForParty implements Comparable<LookingForParty> {
 
-	private final List<Integer> memberObjectIds;
+	private final Map<Integer, AGPlayer> members;
 	private final EntryRequestType ert;
 	private final Race race;
 	private final long registrationTime = System.currentTimeMillis();
@@ -21,25 +22,31 @@ public class LookingForParty implements Comparable<LookingForParty> {
 	private int leaderObjId;
 
 	public LookingForParty(Player player, EntryRequestType ert, int maskId) {
-		this.memberObjectIds = player.isInTeam()
-			? player.getCurrentTeam().getOnlineMembers().stream().map(Player::getObjectId).collect(Collectors.toList())
-			: new ArrayList<>(List.of(player.getObjectId()));
+		this.members = createMembers(player);
 		this.ert = ert;
 		this.race = player.getRace();
 		this.maskId = maskId;
 		this.leaderObjId = player.getObjectId();
 	}
 
-	public List<Integer> getMemberObjectIds() {
-		return memberObjectIds;
+	private Map<Integer, AGPlayer> createMembers(Player player) {
+		if (player.isInTeam()) {
+			return player.getCurrentTeam().getOnlineMembers().stream().map(AGPlayer::new)
+				.collect(Collectors.toMap(AGPlayer::objectId, Function.identity()));
+		}
+		return new HashMap<>(Map.of(player.getObjectId(), new AGPlayer(player)));
+	}
+
+	public Map<Integer, AGPlayer> getMembers() {
+		return members;
 	}
 
 	public boolean isMember(int objectId) {
-		return memberObjectIds.contains(objectId);
+		return members.get(objectId) != null;
 	}
 
 	public void unregisterMember(Integer objectId) {
-		memberObjectIds.remove(objectId);
+		members.remove(objectId);
 	}
 
 	public EntryRequestType getEntryRequestType() {
@@ -83,10 +90,10 @@ public class LookingForParty implements Comparable<LookingForParty> {
 		if (ert != lfp.ert)
 			return lfp.ert.ordinal() - ert.ordinal();
 
-		int memberDiff = lfp.memberObjectIds.size() - memberObjectIds.size();
+		int memberDiff = lfp.getMembers().size() - members.size();
 		if (memberDiff != 0)
 			return memberDiff;
 
-		return (int) (registrationTime - lfp.registrationTime);
+		return (int) (registrationTime - lfp.getRegistrationTime());
 	}
 }

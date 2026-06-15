@@ -29,6 +29,7 @@ import com.aionemu.gameserver.restrictions.PlayerRestrictions;
 import com.aionemu.gameserver.services.abyss.AbyssPointsService;
 import com.aionemu.gameserver.services.item.ItemFactory;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemAddType;
+import com.aionemu.gameserver.services.item.ItemPacketService.ItemDeleteType;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.item.ItemService.ItemUpdatePredicate;
@@ -82,7 +83,7 @@ public class TradeService {
 		}
 
 		if (!validateBuyItems(npc, tradeList, player)) {
-			PacketSendUtility.sendMessage(player, "Some items are not allowed to be sold from this NPC.");
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_BUY_SELL_USER_BUY_FAILED());
 			return false;
 		}
 
@@ -146,7 +147,8 @@ public class TradeService {
 
 		// 7. finally add items and update sell limits
 		for (TradeItem tradeItem : tradeList.getTradeItems()) {
-			long notAddedCount = ItemService.addItem(player, tradeItem.getItemId(), tradeItem.getCount(), false,
+			// allow inventory overflow because player can get deranked during purchase, possibly reducing the number of free inventory slots
+			ItemService.addItem(player, tradeItem.getItemId(), tradeItem.getCount(), true,
 				new ItemUpdatePredicate(ItemAddType.BUY, ItemUpdateType.INC_ITEM_BUY));
 
 			LimitedItem item = LimitedItemTradeService.getInstance().getLimitedItem(tradeItem.getItemId(), npc.getNpcId());
@@ -155,12 +157,6 @@ public class TradeService {
 					item.setBuyCount(player.getObjectId(), item.getBuyCount(player.getObjectId()) + (int) tradeItem.getCount());
 				if (item.getDefaultSellLimit() > 0)
 					item.setSellLimit(item.getSellLimit() - (int) tradeItem.getCount());
-			}
-
-			if (notAddedCount != 0) {
-				log.error(String.format("ItemService couldn't add all items (%d/%d) on buy: %d %d", notAddedCount, tradeItem.getCount(), player.getObjectId(),
-					tradeItem.getItemId()));
-				return false;
 			}
 		}
 
@@ -229,12 +225,12 @@ public class TradeService {
 				break;
 
 			long realReward = sellReward * count;
-			Item repurchaseItem = null;
+			Item repurchaseItem;
 			if (item.getItemCount() - count < 0) {
 				AuditLogger.log(player, "tried to sell more items to npc than he has");
 				return false;
 			} else if (item.getItemCount() - count == 0) {
-				inventory.delete(item); // need to be here to avoid exploit by sending packet with many items with same unique ids
+				inventory.delete(item, ItemDeleteType.SELL); // need to be here to avoid exploit by sending packet with many items with same unique ids
 				repurchaseItem = item;
 			} else if (item.getItemCount() - count > 0) {
 				repurchaseItem = ItemFactory.newItem(item.getItemId(), count);

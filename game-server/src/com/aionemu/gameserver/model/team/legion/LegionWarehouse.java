@@ -18,11 +18,13 @@ import com.aionemu.gameserver.world.World;
  */
 public class LegionWarehouse extends Storage {
 
+	private static final int DEFAULT_ROWS = 3; // hardcoded, as the client doesn't allow to change it
+	private static final int SLOTS_PER_ROW = 8;
 	private final AtomicInteger currentUser = new AtomicInteger();
 
 	public LegionWarehouse(Legion legion) {
 		super(StorageType.LEGION_WAREHOUSE);
-		this.setLimit(legion.getWarehouseSlots());
+		updateLimit(legion.getWarehouseExpansions());
 	}
 
 	/**
@@ -152,4 +154,15 @@ public class LegionWarehouse extends Storage {
 		return currentUser.get();
 	}
 
+	@Override
+	public void setLimit(int limit) {
+		throw new UnsupportedOperationException("Slot limit is controlled by the expansion level, use updateLimit() instead");
+	}
+
+	public void updateLimit(int warehouseExpansions) {
+		if (warehouseExpansions < 0)
+			throw new IllegalArgumentException();
+		int rows = DEFAULT_ROWS + warehouseExpansions;
+		super.setLimit(rows * SLOTS_PER_ROW);
+	}
 }

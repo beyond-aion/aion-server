@@ -35,7 +35,6 @@ public class _28602IntotheUnknown extends AbstractQuestHandler {
 			qe.registerQuestNpc(npc_id).addOnTalkEvent(questId);
 		qe.registerQuestNpc(205234).addOnQuestStart(questId);
 		qe.registerQuestNpc(217005).addOnKillEvent(questId); // Shadow Judge Kaliga
-		qe.registerOnMovieEndQuest(454, questId);
 	}
 
 	@Override
@@ -79,15 +78,9 @@ public class _28602IntotheUnknown extends AbstractQuestHandler {
 	}
 
 	@Override
-	public boolean onMovieEndEvent(QuestEnv env, int movieId) {
-		if (movieId != 454)
-			return false;
-		Player player = env.getPlayer();
-		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs == null || qs.getStatus() != QuestStatus.START)
-			return false;
-		changeQuestStep(env, 1, 2);
-		return true;
+	public void onMovieEndEvent(QuestEnv env, int movieId) {
+		if (movieId == 454)
+			changeQuestStep(env, 1, 2);
 	}
 
 	@Override

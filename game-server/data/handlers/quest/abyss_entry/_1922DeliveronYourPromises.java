@@ -28,8 +28,6 @@ public class _1922DeliveronYourPromises extends AbstractQuestHandler {
 		qe.registerOnQuestCompleted(questId);
 		qe.registerOnQuestTimerEnd(questId);
 		qe.registerOnEnterWorld(questId);
-		qe.registerOnMovieEndQuest(165, questId);
-		qe.registerOnMovieEndQuest(166, questId);
 		qe.registerQuestNpc(203830).addOnTalkEvent(questId);
 		qe.registerQuestNpc(203901).addOnTalkEvent(questId);
 		qe.registerQuestNpc(203764).addOnTalkEvent(questId);
@@ -183,19 +181,12 @@ public class _1922DeliveronYourPromises extends AbstractQuestHandler {
 	}
 
 	@Override
-	public boolean onMovieEndEvent(QuestEnv env, int movieId) {
-		Player player = env.getPlayer();
-		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			if (movieId == 166) {
-				TeleportService.teleportTo(player, 110010000, 1466.036f, 1337.2749f, 566.41583f, (byte) 86);
-				return true;
-			} else if (movieId == 165) {
-				QuestService.questTimerStart(env, 240);
-				return true;
-			}
+	public void onMovieEndEvent(QuestEnv env, int movieId) {
+		if (movieId == 166) {
+			TeleportService.teleportTo(env.getPlayer(), 110010000, 1466.036f, 1337.2749f, 566.41583f, (byte) 86);
+		} else if (movieId == 165) {
+			QuestService.questTimerStart(env, 240);
 		}
-		return false;
 	}
 
 	@Override

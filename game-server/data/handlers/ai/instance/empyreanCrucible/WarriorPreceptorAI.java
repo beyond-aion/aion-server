@@ -69,7 +69,7 @@ public class WarriorPreceptorAI extends AggressiveNpcAI {
 
 	private void startSkillEvent() {
 		PacketSendUtility.broadcastMessage(getOwner(), 1500207);
-		getOwner().queueSkill(19595, 15, 6000, NpcSkillTargetAttribute.RANDOM);
-		getOwner().queueSkill(19596, 15);
+		getOwner().queueSkill(19595, 10, 6000, NpcSkillTargetAttribute.RANDOM); // Divine Grasp II
+		getOwner().queueSkill(19596, 15); // Wrathful Wave II
 	}
 }

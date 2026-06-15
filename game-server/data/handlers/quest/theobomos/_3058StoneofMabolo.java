@@ -4,13 +4,9 @@ import static com.aionemu.gameserver.model.DialogAction.*;
 
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
-import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.QuestService;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Leunam
@@ -37,60 +33,39 @@ public class _3058StoneofMabolo extends AbstractQuestHandler {
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 
 		if (qs == null || qs.isStartable()) {
-			if (env.getDialogActionId() == QUEST_ACCEPT_1) {
-				QuestService.startQuest(env);
-				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 0));
-				return true;
-			} else
-				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 0));
+			if (env.getDialogActionId() == ASK_QUEST_ACCEPT) {
+				return sendQuestDialog(env, 4);
+			} else if (env.getDialogActionId() == QUEST_ACCEPT_1) {
+				return sendQuestStartDialog(env);
+			} else if (env.getDialogActionId() == QUEST_REFUSE_1) {
+				return closeDialogWindow(env);
+			}
 		}
 		if (qs == null)
 			return false;
 
-		int var = qs.getQuestVarById(0);
-		if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 798213) {
-				if (env.getDialogActionId() == USE_OBJECT)
-					return sendQuestDialog(env, 2375);
-				else if (env.getDialogActionId() == SELECT_QUEST_REWARD)
-					return sendQuestDialog(env, 5);
-				else
-					return sendQuestEndDialog(env);
-			}
-		} else if (qs.getStatus() != QuestStatus.START) {
-			return false;
-		}
 		if (targetId == 798189) {
 			switch (env.getDialogActionId()) {
 				case QUEST_SELECT:
-					if (var == 0)
-						return sendQuestDialog(env, 1352);
-					return false;
+					return sendQuestDialog(env, 1352);
 				case SETPRO1:
-					if (var == 0) {
-						qs.setQuestVarById(0, var + 1);
-						updateQuestStatus(env);
-						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-						return true;
-					}
-					return false;
+					return defaultCloseDialog(env, 0, 1);
 			}
 		} else if (targetId == 203701) {
 			switch (env.getDialogActionId()) {
 				case QUEST_SELECT:
-					if (var == 1)
-						return sendQuestDialog(env, 1693);
-					return false;
+					return sendQuestDialog(env, 1693);
 				case SETPRO2:
-					if (var == 1) {
-						qs.setQuestVarById(0, var + 1);
-						qs.setStatus(QuestStatus.REWARD);
-						updateQuestStatus(env);
-						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-						return true;
-					}
-					return false;
+					return defaultCloseDialog(env, 1, 2);
 			}
+		} else if (targetId == 798213) {
+			switch (env.getDialogActionId()) {
+				case QUEST_SELECT:
+					return sendQuestDialog(env, 2375);
+				case SELECT_QUEST_REWARD:
+					changeQuestStep(env, 2, 2, true);
+			}
+			return sendQuestEndDialog(env);
 		}
 		return false;
 	}

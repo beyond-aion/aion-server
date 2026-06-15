@@ -9,7 +9,9 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
+import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.controllers.attack.AttackResult;
+import com.aionemu.gameserver.controllers.effect.CumulativeResistType;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.SkillElement;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -180,6 +182,14 @@ public abstract class EffectTemplate {
 		return preEffects;
 	}
 
+	public boolean isNoResist() {
+		return noResist;
+	}
+
+	void setNoResist(boolean noResist) {
+		this.noResist = noResist;
+	}
+
 	/**
 	 * @return the critProbMod2
 	 */
@@ -260,6 +270,10 @@ public abstract class EffectTemplate {
 		return value + delta * effect.getSkillLevel();
 	}
 
+	public int calculateCritAddDmg(Effect effect) {
+		return critAddDmg2 + critAddDmg1 * effect.getSkillLevel();
+	}
+
 	/**
 	 * Calculate effect result
 	 *
@@ -292,105 +306,58 @@ public abstract class EffectTemplate {
 			return false;
 		}
 
-		// dont check for forced effect
-		if (effect.isForcedEffect()) {
-			this.addSuccessEffect(effect, spellStatus);
-			calculateDamage(effect);
-			return true;
-		}
-
-		// check conditions
-		if (!effectConditionsCheck(effect))
-			return false;
-
-		if (firstEffectCheck(effect, statEnum, spellStatus, element)) {
-			addSuccessEffect(effect, spellStatus);
-			calculateDamage(effect);
-			return true;
-		} else if (nextEffectCheck(effect, spellStatus, statEnum)) {
-			addSuccessEffect(effect, spellStatus);
-			calculateDamage(effect);
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	private boolean firstEffectCheck(Effect effect, StatEnum statEnum, SpellStatus spellStatus, SkillElement element) {
-		if (getPosition() == 1) {
-			// check effectresistrate
-			if (!calculateEffectResistRate(effect, statEnum)) {
+		if (!effect.isForcedEffect()) {
+			if (!validateEffectConditions(effect))
+				return false;
+			if (!validatePreEffects(effect))
+				return false;
+			if (isDodgedOrResisted(effect, statEnum)) {
+				if (getPosition() != 1 && !(effect.effectInPos(1) instanceof DamageEffect))
+					effect.getSuccessEffects().clear();
 				return false;
 			}
-			if (!noResist && !isCannotMiss()) {
-				if (isDodgedOrResisted(effect)) {
+		}
+		addSuccessEffect(effect, spellStatus);
+		calculateDamage(effect);
+		return true;
+	}
+
+	private boolean validateEffectConditions(Effect effect) {
+		return effectConditions == null || effectConditions.validate(effect);
+	}
+
+	private boolean validatePreEffects(Effect effect) {
+		if (getPreEffects() != null) {
+			for (int position : getPreEffects()) {
+				if (!effect.isInSuccessEffects(position))
 					return false;
-				}
 			}
-			return true;
+			if (Rnd.chance() >= getPreEffectProb())
+				return false;
 		}
-		return false;
+		return true;
 	}
 
-	private boolean nextEffectCheck(Effect effect, SpellStatus spellStatus, StatEnum statEnum) {
-		EffectTemplate firstEffect = effect.effectInPos(1);
-		if (getPosition() > 1) {
-			if (Rnd.chance() < getPreEffectProb()) {
-				int[] positions = getPreEffects();
-				if (positions != null) {
-					for (int pos : positions) {
-						if (!effect.isInSuccessEffects(pos)) {
-							return false;
-						}
-					}
-				}
-				if (!noResist && !isCannotMiss()) {
-					if (!calculateEffectResistRate(effect, statEnum) || isDodgedOrResisted(effect)) {
-						if (!(firstEffect instanceof DamageEffect)) {
-							effect.getSuccessEffects().remove(firstEffect);
-						}
-						return false;
-					}
-				}
-				return true;
-			}
-		}
-		return false;
+	protected boolean isDodgedOrResisted(Effect effect, StatEnum statEnum) {
+		return !isNoResist() && (!checkEffectResistRate(effect, statEnum) || !checkDodgeOrResistRate(effect));
 	}
 
-	private boolean isCannotMiss() {
-		return this instanceof SkillAttackInstantEffect && ((SkillAttackInstantEffect) this).isCannotmiss();
-	}
-
-	private boolean isDodgedOrResisted(Effect effect) {
-		// check for BOOST_RESIST
-		int boostResist = 0;
-		switch (effect.getSkillTemplate().getSubType()) {
-			case DEBUFF:
-				boostResist = effect.getEffector().getGameStats().getStat(StatEnum.BOOST_RESIST_DEBUFF, 0).getCurrent();
-				break;
-		}
-		int accMod = accMod2 + accMod1 * effect.getSkillLevel() + effect.getAccModBoost() + boostResist;
-		switch (element) {
-			case NONE:
-				return StatFunctions.checkIsDodgedHit(effect.getEffector(), effect.getEffected(), accMod);
-			default:
-				return Rnd.get(1, 1000) <= StatFunctions.calculateMagicalResistRate(effect.getEffector(), effect.getEffected(), accMod, element);
-		}
+	/**
+	 * @return true = no dodge/resist, false = dodged/resisted
+	 */
+	private boolean checkDodgeOrResistRate(Effect effect) {
+		int accuracyModifier = accMod2 + accMod1 * effect.getSkillLevel() + effect.getAccModBoost();
+		if (effect.getSkillTemplate().getSubType() == SkillSubType.DEBUFF)
+			accuracyModifier += effect.getEffector().getGameStats().getStat(StatEnum.BOOST_RESIST_DEBUFF, 0).getCurrent();
+		if (element == SkillElement.NONE)
+			return !StatFunctions.checkIsDodgedHit(effect.getEffector(), effect.getEffected(), accuracyModifier);
+		return Rnd.get(1, 1000) > StatFunctions.calculateMagicalResistRate(effect.getEffector(), effect.getEffected(), accuracyModifier, element);
 	}
 
 	private void addSuccessEffect(Effect effect, SpellStatus spellStatus) {
 		effect.addSuccessEffect(this);
 		if (spellStatus != null)
 			effect.setSpellStatus(spellStatus);
-	}
-
-	/**
-	 * Check all condition statuses for effect template
-	 */
-	private boolean effectConditionsCheck(Effect effect) {
-		Conditions effectConditions = getEffectConditions();
-		return effectConditions == null || effectConditions.validate(effect);
 	}
 
 	/**
@@ -516,7 +483,7 @@ public abstract class EffectTemplate {
 	 * @return true = no resist, false = resisted
 	 */
 	@SuppressWarnings("lossy-conversions")
-	public boolean calculateEffectResistRate(Effect effect, StatEnum statEnum) {
+	public boolean checkEffectResistRate(Effect effect, StatEnum statEnum) {
 		if (statEnum == null)
 			return true;
 
@@ -526,25 +493,9 @@ public abstract class EffectTemplate {
 		if (effected == null || effected.getGameStats() == null || effector == null || effector.getGameStats() == null)
 			return false;
 
-		// calculate cumulative resist chance for fear, sleep and paralyze if effector & effected are players
-		if (effector.getMaster() instanceof Player && effected instanceof Player) {
-			if (statEnum == StatEnum.FEAR_RESISTANCE && ((Player) effected).getFearCount() >= 3
-				&& ((Player) effected).validateCumulativeFearResistExpirationTime()) {
-				if (Rnd.get(1, 1000) <= getCumulativeResistChanceFor(((Player) effected).getFearCount())) {
-					return false;
-				}
-			} else if (statEnum == StatEnum.SLEEP_RESISTANCE && ((Player) effected).getSleepCount() >= 3
-				&& ((Player) effected).validateCumulativeSleepResistExpirationTime()) {
-				if (Rnd.get(1, 1000) <= getCumulativeResistChanceFor(((Player) effected).getSleepCount())) {
-					return false;
-				}
-			} else if (statEnum == StatEnum.PARALYZE_RESISTANCE && ((Player) effected).getParalyzeCount() >= 3
-				&& ((Player) effected).validateCumulativeParalyzeResistExpirationTime()) {
-				if (Rnd.get(1, 1000) <= getCumulativeResistChanceFor(((Player) effected).getParalyzeCount())) {
-					return false;
-				}
-			}
-		}
+		// Stun like effects cannot be applied as long as a shield is active
+		if (isProtectedByShield(effected, statEnum))
+			return false;
 
 		int effectPower = 1000;
 
@@ -552,7 +503,12 @@ public abstract class EffectTemplate {
 			effectPower -= effected.getGameStats().getAbnormalResistance().getCurrent();
 
 		// effect resistance
-		effectPower -= effected.getGameStats().getStat(statEnum, 0).getCurrent();
+		effectPower -= effected.getGameStats().getResistance(statEnum).getCurrent();
+
+		// calculate cumulative resist chance for fear, sleep and paralyze if effector and effected are players
+		boolean isEffectorPlayer = (CustomConfig.COUNT_SUMMON_EFFECTS_FOR_CUMULATIVE_RESIST ? effector.getMaster() : effector) instanceof Player;
+		if (isEffectorPlayer && effected instanceof Player player)
+			effectPower -= player.getEffectController().getCumulativeResistance(CumulativeResistType.get(statEnum));
 
 		// penetration
 		StatEnum penetrationStat = this.getPenetrationStat(statEnum);
@@ -560,15 +516,12 @@ public abstract class EffectTemplate {
 			effectPower += effector.getGameStats().getStat(penetrationStat, 0).getCurrent();
 
 		// resist mod
-		if (effector.isPvpTarget(effected)) { // pvp
+		if (effectPower > 0 && effector.isPvpTarget(effected)) { // pvp
 			int lvlDiff = effected.getLevel() - effector.getLevel();
 			if (lvlDiff > 4) {
 				float reductionRate = 0.1f * (lvlDiff - 4); // see https://forums.aiononline.com/topic/25-arena-of-discipline-entries/?page=2#elComment_2213
 				effectPower *= Math.max(1 - reductionRate, 0.1f);
 			}
-		} else if (effected instanceof Npc) { // resist mod PvE
-			int hpGaugeMod = ((Npc) effected).getObjectTemplate().getRank().ordinal();
-			effectPower -= hpGaugeMod * 100;
 		}
 		return Rnd.get(1, 1000) <= effectPower;
 	}
@@ -596,6 +549,13 @@ public abstract class EffectTemplate {
 		};
 	}
 
+	private boolean isProtectedByShield(Creature effected, StatEnum stat) {
+		return switch (stat) {
+			case STUMBLE_RESISTANCE, OPENAERIAL_RESISTANCE, SPIN_RESISTANCE, STAGGER_RESISTANCE -> effected.getEffectController().isUnderNormalShield();
+			default -> false;
+		};
+	}
+
 	private StatEnum getPenetrationStat(StatEnum statEnum) {
 		StatEnum toReturn = null;
 		try {
@@ -604,14 +564,5 @@ public abstract class EffectTemplate {
 			LoggerFactory.getLogger(EffectTemplate.class).warn("Missing statenum penetration for " + statEnum.toString());
 		}
 		return toReturn;
-	}
-
-	private int getCumulativeResistChanceFor(int resistCount) {
-		return switch (resistCount) {
-			case 0, 1, 2 -> 0;
-			case 3 -> 200;
-			case 4 -> 400;
-			default -> 1000;
-		};
 	}
 }

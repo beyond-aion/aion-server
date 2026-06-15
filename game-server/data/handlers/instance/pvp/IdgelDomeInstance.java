@@ -116,7 +116,7 @@ public class IdgelDomeInstance extends BasicPvpInstance {
 	public void onDie(Npc npc) {
 		super.onDie(npc);
 		Player player = npc.getAggroList().getMostPlayerDamage(); // Checked with retail, maybe the player making the last hit gets the points
-		if (player == null)
+		if (player == null || instanceScore.getInstanceProgressionType() != InstanceProgressionType.START_PROGRESS)
 			return;
 
 		int points = 0;

@@ -20,7 +20,7 @@ public class RiftOpenRunnable implements Runnable {
 	public void run() {
 		RiftService.getInstance().prepareRiftOpening(worldId, guards);
 		// Scheduled rifts close
-		ThreadPoolManager.getInstance().schedule(() -> RiftService.getInstance().closeRifts(false),
+		ThreadPoolManager.getInstance().schedule(() -> RiftService.getInstance().closeAutoCloseableRifts(worldId),
 			RiftService.getInstance().getDuration() * 3540 * 1000);
 		// Broadcast rift spawn on map
 		RiftInformer.sendRiftsInfo(worldId);

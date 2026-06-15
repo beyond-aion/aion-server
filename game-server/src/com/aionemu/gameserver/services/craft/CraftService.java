@@ -54,7 +54,7 @@ public class CraftService {
 		int skillLvl = recipetemplate.getSkillpoint();
 		int xpReward = (int) ((0.008 * (skillLvl + 100) * (skillLvl + 100) + 60));
 		xpReward = xpReward + (xpReward * bonus / 100); // bonus
-		int gainedCraftXp = (int) Rates.SKILL_XP_CRAFTING.calcResult(player, xpReward);
+		int gainedCraftXp = Rates.SKILL_XP_CRAFTING.calcResult(player, xpReward);
 		StatEnum boostStat = StatEnum.getModifier(skillId);
 		if (boostStat != null) // there is no boost for morphing (40009)
 			gainedCraftXp *= player.getGameStats().getStat(boostStat, 100).getCurrent() / 100f;

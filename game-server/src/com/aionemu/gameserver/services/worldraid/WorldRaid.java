@@ -3,6 +3,7 @@ package com.aionemu.gameserver.services.worldraid;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.slf4j.Logger;
@@ -10,6 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.configs.main.EventsConfig;
+import com.aionemu.gameserver.controllers.observer.DeathObserver;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.templates.worldraid.MarkerSpot;
@@ -32,14 +34,12 @@ public class WorldRaid {
 	private final WorldRaidLocation raidLocation;
 	private final boolean useSpecialSpawnMsg;
 	private final boolean sendMessages;
-	private final WorldRaidDeathListener deathListener = new WorldRaidDeathListener(this);
 	private final AtomicBoolean isFinished = new AtomicBoolean();
 	private final AtomicBoolean isStarted = new AtomicBoolean();
-	private boolean isBossKilled;
 	private WorldRaidNpc randomBossTemplate;
 	private Npc boss, flag, vortex;
 	private List<Npc> locationMarkers = new ArrayList<>();
-	private Future<?> despawnTask, preparationTask;
+	private Future<?> stopRaidTask, preparationTask;
 
 	public WorldRaid(WorldRaidLocation raidLocation, boolean useSpecialSpawnMsg, boolean sendMessages) {
 		this.raidLocation = raidLocation;
@@ -102,64 +102,53 @@ public class WorldRaid {
 	}
 
 	private void onWorldRaidFinish() {
-		removeBossDeathListener();
-		despawnNpcs(flag, vortex);
+		despawnNpcs(flag, vortex, boss);
 		despawnNpcs(locationMarkers);
-		if (isBossKilled()) {
-			// STR_MSG_WORLDRAID_MESSAGE_DIE_01-06
-			if (randomBossTemplate.getDeathMsgId() != null)
-				broadcastMessage(new SM_SYSTEM_MESSAGE(randomBossTemplate.getDeathMsgId()), true);
-			cancelDespawn();
-		} else {
-			despawnNpcs(boss);
-		}
 	}
 
 	private void scheduleBossDespawn() {
-		despawnTask = ThreadPoolManager.getInstance().schedule(() -> {
-			if (!boss.isDead())
-				WorldRaidService.getInstance().stopRaid(getLocationId());
-		}, 3600 * 1000);
+		stopRaidTask = ThreadPoolManager.getInstance().schedule(() -> WorldRaidService.getInstance().stopRaid(getLocationId()), 1, TimeUnit.HOURS);
 	}
 
-	private void cancelDespawn() {
-		if (despawnTask != null && !despawnTask.isCancelled())
-			despawnTask.cancel(true);
+	private void cancelStopRaidTask() {
+		if (stopRaidTask != null && !stopRaidTask.isCancelled()) {
+			stopRaidTask.cancel(false);
+			stopRaidTask = null;
+		}
 	}
 
 	private void despawnNpcs(Npc... npcs) {
 		for (Npc npc : npcs)
-			if (npc != null && !npc.isDead())
-				npc.getController().delete();
+			npc.getController().deleteIfAliveOrCancelRespawn();
 	}
 
 	private void despawnNpcs(List<Npc> npcs) {
 		for (Npc npc : npcs)
-			if (npc != null && !npc.isDead())
-				npc.getController().delete();
+			npc.getController().deleteIfAliveOrCancelRespawn();
 	}
 
 	private void spawnAndInitRandomBoss() {
 		randomBossTemplate = Rnd.get(raidLocation.getNpcPool());
 		SpawnTemplate bossTemplate = SpawnEngine.newSingleTimeSpawn(raidLocation.getMapId(), randomBossTemplate.getNpcId(), raidLocation.getX(),
-			raidLocation.getY(), raidLocation.getZ(), raidLocation.getH(), 0, "world_raid_aggressive");
+			raidLocation.getY(), raidLocation.getZ(), raidLocation.getH(), null, "world_raid_aggressive");
 		Npc bossNpc = (Npc) SpawnEngine.spawnObject(bossTemplate, 1);
 		if (bossNpc == null) {
 			log.warn("Cannot initialize world raid boss with ID " + randomBossTemplate.getNpcId() + ". No boss was spawned.");
 			return;
 		}
 		boss = bossNpc;
-		registerBossDeathListener();
+		registerDeathObserver(boss);
 	}
 
-	private void registerBossDeathListener() {
-		if (boss != null)
-			boss.getAi().addEventListener(deathListener);
-	}
-
-	private void removeBossDeathListener() {
-		if (boss != null)
-			boss.getAi().removeEventListener(deathListener);
+	private void registerDeathObserver(Npc npc) {
+		npc.getObserveController().attach(new DeathObserver(_ -> {
+			if (isFinished())
+				return;
+			if (randomBossTemplate.getDeathMsgId() != null) // STR_MSG_WORLDRAID_MESSAGE_DIE_01-06
+				broadcastMessage(new SM_SYSTEM_MESSAGE(randomBossTemplate.getDeathMsgId()), true);
+			cancelStopRaidTask();
+			WorldRaidService.getInstance().stopRaid(getLocationId());
+		}));
 	}
 
 	private void spawnAndInitMapFlag() {
@@ -193,14 +182,6 @@ public class WorldRaid {
 
 	public int getLocationId() {
 		return raidLocation.getLocationId();
-	}
-
-	public boolean isBossKilled() {
-		return isBossKilled;
-	}
-
-	public void setBossKilled(boolean bossKilled) {
-		this.isBossKilled = bossKilled;
 	}
 
 	public boolean isFinished() {

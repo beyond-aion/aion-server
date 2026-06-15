@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.dao.InventoryDAO;
+import com.aionemu.gameserver.dao.ItemStoneListDAO;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.*;
 import com.aionemu.gameserver.model.gameobjects.player.emotion.Emotion;
@@ -26,7 +27,6 @@ import com.aionemu.gameserver.model.skill.PlayerSkillList;
 import com.aionemu.gameserver.network.loginserver.LoginServerConnection;
 import com.aionemu.gameserver.network.loginserver.LsServerPacket;
 import com.aionemu.gameserver.questEngine.model.QuestState;
-import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.transfers.TransferablePlayer;
 
 /**
@@ -168,10 +168,10 @@ public class SM_PTRANSFER_CONTROL extends LsServerPacket {
 			case ITEMS_INFORMATION:
 				writeD(this.taskId);
 				// inventory
-				List<Item> inv = InventoryDAO.loadStorageDirect(this.player.getObjectId(), StorageType.CUBE);
-				inv.addAll(InventoryDAO.loadStorageDirect(this.player.getObjectId(), StorageType.REGULAR_WAREHOUSE));
+				List<Item> inv = InventoryDAO.loadItems(player.getObjectId(), StorageType.CUBE);
+				inv.addAll(InventoryDAO.loadItems(player.getObjectId(), StorageType.REGULAR_WAREHOUSE));
+				ItemStoneListDAO.load(inv);
 				writeD(inv.size());
-				ItemService.loadItemStones(inv);
 				for (Item item : inv) {
 					writeD(item.getObjectId());
 					writeD(item.getItemId());

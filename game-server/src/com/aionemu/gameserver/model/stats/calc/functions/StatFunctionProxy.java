@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.model.stats.calc.functions;
 
-import java.util.Objects;
-
 import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.model.stats.calc.StatOwner;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
@@ -22,23 +20,6 @@ public class StatFunctionProxy implements IStatFunction, Comparable<IStatFunctio
 
 	public IStatFunction getProxiedFunction() {
 		return proxiedFunction;
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(owner, proxiedFunction);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		StatFunctionProxy other = (StatFunctionProxy) obj;
-		return Objects.equals(owner, other.owner) && proxiedFunction.equals(other.proxiedFunction);
 	}
 
 	@Override

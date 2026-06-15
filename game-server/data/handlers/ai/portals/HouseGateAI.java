@@ -32,12 +32,11 @@ public class HouseGateAI extends NpcAI {
 	@Override
 	protected void handleDialogStart(Player player) {
 		final int creatorId = getCreatorId();
-		// Only group member and creator may use gate
-		if (!player.equals(getCreator())) {
-			if (player.getCurrentGroup() == null || !player.getCurrentGroup().hasMember(creatorId)) {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_HOUSING_TELEPORT_CANT_USE());
-				return;
-			}
+		boolean isCreatorOrFriend = player.equals(getCreator()) || player.getFriendList().getFriend(creatorId) != null
+			|| player.isInGroup() && player.getCurrentGroup().hasMember(creatorId);
+		if (!isCreatorOrFriend) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_HOUSING_TELEPORT_CANT_USE());
+			return;
 		}
 
 		House house = HousingService.getInstance().findActiveHouse(creatorId);

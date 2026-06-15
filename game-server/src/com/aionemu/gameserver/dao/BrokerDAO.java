@@ -25,7 +25,8 @@ public class BrokerDAO {
 	public static List<BrokerItem> loadBroker() {
 		List<BrokerItem> brokerItems = new ArrayList<>();
 
-		List<Item> items = getBrokerItems();
+		List<Item> items = InventoryDAO.loadBrokerItems();
+		ItemStoneListDAO.load(items);
 
 		DB.select("SELECT * FROM broker", new ReadStH() {
 
@@ -41,12 +42,9 @@ public class BrokerDAO {
 					BrokerRace itemBrokerRace = BrokerRace.valueOf(rset.getString("broker_race"));
 					Timestamp expireTime = rset.getTimestamp("expire_time");
 					Timestamp settleTime = rset.getTimestamp("settle_time");
-					int sold = rset.getInt("is_sold");
-					int settled = rset.getInt("is_settled");
-					boolean splittingAvailable = rset.getInt("splitting_available") == 1 ? true : false;
-
-					boolean isSold = sold == 1;
-					boolean isSettled = settled == 1;
+					boolean isSold = rset.getBoolean("is_sold");
+					boolean isSettled = rset.getBoolean("is_settled");
+					boolean splittingAvailable = rset.getBoolean("splitting_available");
 
 					Item item = null;
 					if (!isSold)
@@ -59,50 +57,6 @@ public class BrokerDAO {
 
 					brokerItems.add(new BrokerItem(item, itemId, itemPointer, itemCount, itemCreator, price, sellerId, itemBrokerRace, isSold,
 						isSettled, expireTime, settleTime, splittingAvailable));
-				}
-			}
-		});
-
-		return brokerItems;
-	}
-
-	private static List<Item> getBrokerItems() {
-		List<Item> brokerItems = new ArrayList<>();
-
-		DB.select("SELECT * FROM inventory WHERE `item_location` = 126", new ReadStH() {
-
-			@Override
-			public void handleRead(ResultSet rset) throws SQLException {
-				while (rset.next()) {
-					int itemUniqueId = rset.getInt("item_unique_id");
-					int itemId = rset.getInt("item_id");
-					long itemCount = rset.getLong("item_count");
-					Integer itemColor = (Integer) rset.getObject("item_color");
-					int colorExpireTime = rset.getInt("color_expires");
-					String itemCreator = rset.getString("item_creator");
-					int expireTime = rset.getInt("expire_time");
-					int activationCount = rset.getInt("activation_count");
-					long slot = rset.getLong("slot");
-					int location = rset.getInt("item_location");
-					int enchant = rset.getInt("enchant");
-					int enchantBonus = rset.getInt("enchant_bonus");
-					int itemSkin = rset.getInt("item_skin");
-					int fusionedItem = rset.getInt("fusioned_item");
-					int optionalSocket = rset.getInt("optional_socket");
-					int optionalFusionSocket = rset.getInt("optional_fusion_socket");
-					int charge = rset.getInt("charge");
-					int tuneCount = rset.getInt("tune_count");
-					int bonusStatsId = rset.getInt("rnd_bonus");
-					int fusionedItemBonusStatsId = rset.getInt("fusion_rnd_bonus");
-					int tempering = rset.getInt("tempering");
-					int packCount = rset.getInt("pack_count");
-					int isAmplified = rset.getInt("is_amplified");
-					int buffSkill = rset.getInt("buff_skill");
-					int rndPlumeBonusValue = rset.getInt("rnd_plume_bonus");
-
-					brokerItems.add(new Item(itemUniqueId, itemId, itemCount, itemColor, colorExpireTime, itemCreator, expireTime, activationCount, false,
-						false, slot, location, enchant, enchantBonus, itemSkin, fusionedItem, optionalSocket, optionalFusionSocket, charge, tuneCount,
-						bonusStatsId, fusionedItemBonusStatsId, tempering, packCount, isAmplified == 1, buffSkill, rndPlumeBonusValue));
 				}
 			}
 		});

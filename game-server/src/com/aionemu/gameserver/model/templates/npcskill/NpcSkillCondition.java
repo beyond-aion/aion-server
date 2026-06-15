@@ -11,9 +11,6 @@ import javax.xml.bind.annotation.XmlType;
 public enum NpcSkillCondition {
 
 	NONE,
-	SELECT_RANDOM_ENEMY,
-	SELECT_RANDOM_ENEMY_EXCEPT_MOST_HATED,
-	SELECT_TARGET_AFFECTED_BY_SKILL,
 	HELP_FRIEND,
 	TARGET_IS_IN_ANY_STUN,
 	TARGET_IS_IN_RANGE,
@@ -34,13 +31,5 @@ public enum NpcSkillCondition {
 	TARGET_HAS_CARVED_SIGNET_LEVEL_III,
 	TARGET_HAS_CARVED_SIGNET_LEVEL_IV,
 	TARGET_HAS_CARVED_SIGNET_LEVEL_V,
-	NPC_IS_ALIVE;
-
-	public String value() {
-		return name();
-	}
-
-	public static NpcSkillCondition fromValue(String s) {
-		return valueOf(s);
-	}
+	NPC_IS_ALIVE
 }

@@ -1,9 +1,8 @@
 package com.aionemu.gameserver.services;
 
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +19,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.*;
 import com.aionemu.gameserver.restrictions.PlayerRestrictions;
 import com.aionemu.gameserver.services.item.ItemFactory;
 import com.aionemu.gameserver.services.item.ItemPacketService;
-import com.aionemu.gameserver.taskmanager.AbstractFIFOPeriodicTaskManager;
 import com.aionemu.gameserver.taskmanager.tasks.TemporaryTradeTimeTask;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
@@ -33,27 +31,15 @@ public class ExchangeService {
 
 	private static final Logger log = LoggerFactory.getLogger("EXCHANGE_LOG");
 
-	private Map<Integer, Exchange> exchanges = new HashMap<>();
+	private final Map<Integer, Exchange> exchanges = new ConcurrentHashMap<>();
 
-	private ExchangePeriodicTaskManager saveManager;
-
-	private final int DELAY_EXCHANGE_SAVE = 5000;
-
-	public static final ExchangeService getInstance() {
+	public static ExchangeService getInstance() {
 		return SingletonHolder.instance;
 	}
 
-	/**
-	 * Default constructor
-	 */
 	private ExchangeService() {
-		saveManager = new ExchangePeriodicTaskManager(DELAY_EXCHANGE_SAVE);
 	}
 
-	/**
-	 * @param objectId
-	 * @param objectId2
-	 */
 	public void registerExchange(Player player1, Player player2) {
 		if (!validateParticipants(player1, player2))
 			return;
@@ -65,10 +51,6 @@ public class ExchangeService {
 		PacketSendUtility.sendPacket(player1, new SM_EXCHANGE_REQUEST(player2.getName()));
 	}
 
-	/**
-	 * @param player1
-	 * @param player2
-	 */
 	private boolean validateParticipants(Player player1, Player player2) {
 		return PlayerRestrictions.canTrade(player1) && PlayerRestrictions.canTrade(player2);
 	}
@@ -78,18 +60,10 @@ public class ExchangeService {
 		return exchange != null ? exchange.getTargetPlayer() : null;
 	}
 
-	/**
-	 * @param player
-	 * @return Exchange
-	 */
 	private Exchange getCurrentExchange(Player player) {
 		return exchanges.get(player.getObjectId());
 	}
 
-	/**
-	 * @param player
-	 * @return Exchange
-	 */
 	public Exchange getCurrentParnterExchange(Player player) {
 		Player partner = getCurrentParter(player);
 		return partner != null ? getCurrentExchange(partner) : null;
@@ -99,10 +73,6 @@ public class ExchangeService {
 		return getCurrentExchange(player) != null;
 	}
 
-	/**
-	 * @param activePlayer
-	 * @param itemCount
-	 */
 	public void addKinah(Player activePlayer, long itemCount) {
 		Exchange currentExchange = getCurrentExchange(activePlayer);
 		if (currentExchange == null || currentExchange.isLocked())
@@ -200,9 +170,6 @@ public class ExchangeService {
 		PacketSendUtility.sendPacket(partner, new SM_EXCHANGE_ADD_ITEM(1, exchangeItem.getItem(), partner));
 	}
 
-	/**
-	 * @param activePlayer
-	 */
 	public void lockExchange(Player activePlayer) {
 		Exchange exchange = getCurrentExchange(activePlayer);
 		if (exchange != null) {
@@ -212,9 +179,6 @@ public class ExchangeService {
 		}
 	}
 
-	/**
-	 * @param activePlayer
-	 */
 	public void cancelExchange(Player activePlayer) {
 		Player currentPartner = getCurrentParter(activePlayer);
 		returnItems(activePlayer);
@@ -249,9 +213,6 @@ public class ExchangeService {
 		}
 	}
 
-	/**
-	 * @param activePlayer
-	 */
 	public void confirmExchange(Player activePlayer) {
 		if (activePlayer == null || !activePlayer.isOnline())
 			return;
@@ -271,10 +232,6 @@ public class ExchangeService {
 		}
 	}
 
-	/**
-	 * @param activePlayer
-	 * @param currentPartner
-	 */
 	private void performTrade(Player activePlayer, Player currentPartner) {
 		Exchange exchange1 = getCurrentExchange(activePlayer);
 		Exchange exchange2 = getCurrentExchange(currentPartner);
@@ -299,17 +256,13 @@ public class ExchangeService {
 
 		putItemToInventory(activePlayer, currentPartner, exchange1, exchange2);
 		putItemToInventory(currentPartner, activePlayer, exchange2, exchange1);
-
-		saveManager.add(new ExchangeOpSaveTask(exchange1.getActiveplayer().getObjectId(), exchange2.getActiveplayer().getObjectId(), exchange1
-			.getItemsToUpdate(), exchange2.getItemsToUpdate()));
+		InventoryDAO.store(exchange1.getActiveplayer());
+		InventoryDAO.store(exchange2.getActiveplayer());
 
 		cleanUpExchanges(false, activePlayer, currentPartner);
 	}
 
 	private void cleanUpExchanges(boolean releaseIds, Player... players) {
-		if (players.length == 0)
-			return;
-
 		for (Player player : players) {
 			if (player == null)
 				continue;
@@ -324,10 +277,6 @@ public class ExchangeService {
 		}
 	}
 
-	/**
-	 * @param player
-	 * @param exchange
-	 */
 	private boolean removeItemsFromInventory(Player player, Exchange exchange) {
 		Storage inventory = player.getInventory();
 
@@ -343,7 +292,6 @@ public class ExchangeService {
 
 			if (itemCount < itemInInventory.getItemCount()) {
 				inventory.decreaseItemCount(itemInInventory, itemCount);
-				exchange.addItemToUpdate(itemInInventory);
 			} else {
 				// remove from source inventory only
 				inventory.remove(itemInInventory);
@@ -355,17 +303,9 @@ public class ExchangeService {
 				PacketSendUtility.sendPacket(player, new SM_DELETE_ITEM(itemInInventory.getObjectId()));
 			}
 		}
-		if (!player.getInventory().tryDecreaseKinah(exchange.getKinahCount()))
-			return false;
-		exchange.addItemToUpdate(player.getInventory().getKinahItem());
-		return true;
+		return player.getInventory().tryDecreaseKinah(exchange.getKinahCount());
 	}
 
-	/**
-	 * @param activePlayer
-	 * @param currentPartner
-	 * @return
-	 */
 	private boolean validateExchange(Player activePlayer, Player currentPartner) {
 		Exchange exchange1 = getCurrentExchange(activePlayer);
 		Exchange exchange2 = getCurrentExchange(currentPartner);
@@ -393,7 +333,6 @@ public class ExchangeService {
 			if (itemToPut.getPackCount() > 0) // unpack
 				itemToPut.setPackCount(itemToPut.getPackCount() * -1);
 			partner.getInventory().add(itemToPut, ItemPacketService.ItemAddType.PLAYER_EXCHANGE_GET);
-			exchange2.addItemToUpdate(itemToPut);
 			if (LoggingConfig.LOG_PLAYER_EXCHANGE)
 				log.info("Player " + giver.getName() + " exchanged item " + itemToPut.getItemId() + " [" + itemToPut.getItemName() + "] (count: "
 					+ itemToPut.getItemCount() + ") with player " + partner.getName());
@@ -401,65 +340,8 @@ public class ExchangeService {
 		long kinahToExchange = exchange1.getKinahCount();
 		if (kinahToExchange > 0) {
 			partner.getInventory().increaseKinah(kinahToExchange);
-			exchange2.addItemToUpdate(partner.getInventory().getKinahItem());
 			if (LoggingConfig.LOG_PLAYER_EXCHANGE)
 				log.info("Player " + giver.getName() + " exchanged " + kinahToExchange + " Kinah with player " + partner.getName());
-		}
-	}
-
-	/**
-	 * Frequent running save task
-	 */
-	public static final class ExchangePeriodicTaskManager extends AbstractFIFOPeriodicTaskManager<ExchangeOpSaveTask> {
-
-		private static final String CALLED_METHOD_NAME = "exchangeOperation()";
-
-		/**
-		 * @param period
-		 */
-		public ExchangePeriodicTaskManager(int period) {
-			super(period);
-		}
-
-		@Override
-		protected void callTask(ExchangeOpSaveTask task) {
-			task.run();
-		}
-
-		@Override
-		protected String getCalledMethodName() {
-			return CALLED_METHOD_NAME;
-		}
-
-	}
-
-	/**
-	 * This class is used for storing all items in one shot after any exchange operation
-	 */
-	public static final class ExchangeOpSaveTask implements Runnable {
-
-		private int player1Id;
-		private int player2Id;
-		private List<Item> player1Items;
-		private List<Item> player2Items;
-
-		/**
-		 * @param player1Id
-		 * @param player2Id
-		 * @param player1Items
-		 * @param player2Items
-		 */
-		public ExchangeOpSaveTask(int player1Id, int player2Id, List<Item> player1Items, List<Item> player2Items) {
-			this.player1Id = player1Id;
-			this.player2Id = player2Id;
-			this.player1Items = player1Items;
-			this.player2Items = player2Items;
-		}
-
-		@Override
-		public void run() {
-			InventoryDAO.store(player1Items, player1Id);
-			InventoryDAO.store(player2Items, player2Id);
 		}
 	}
 

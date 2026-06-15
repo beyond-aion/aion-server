@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.services.toypet;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -21,7 +20,10 @@ import com.aionemu.gameserver.model.templates.item.actions.AbstractItemAction;
 import com.aionemu.gameserver.model.templates.item.actions.SkillUseAction;
 import com.aionemu.gameserver.model.templates.pet.*;
 import com.aionemu.gameserver.model.trade.TradeList;
-import com.aionemu.gameserver.network.aion.serverpackets.*;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_PET;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.TradeService;
 import com.aionemu.gameserver.services.item.ItemPacketService;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
@@ -98,7 +100,7 @@ public class PetService {
 
 			if (foodType == null) {
 				// non eatable item
-				PacketSendUtility.sendPacket(player, new SM_INVENTORY_ADD_ITEM(Collections.singletonList(item), player, ItemPacketService.ItemAddType.ALL_SLOT));
+				ItemPacketService.sendItemUnlockPacket(player, item);
 				PacketSendUtility.sendPacket(player, new SM_PET(5, 0, 0, pet));
 				PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.END_FEEDING, 0, player.getObjectId()));
 				PacketSendUtility.sendPacket(player,
@@ -223,12 +225,10 @@ public class PetService {
 				AuditLogger.log(pet.getMaster(), "tried to enable auto-loot on non-looting " + pet);
 				return;
 			}
-			if (pet.getMaster().isInTeam()) {
-				LootRuleType lootType = pet.getMaster().getLootGroupRules().getLootRule();
-				if (lootType == LootRuleType.FREEFORALL) {
-					PacketSendUtility.sendPacket(pet.getMaster(), SM_SYSTEM_MESSAGE.STR_MSG_LOOTING_PET_MESSAGE03());
-					return;
-				}
+			var team = pet.getMaster().getCurrentTeam();
+			if (team != null && team.getLootGroupRules().getLootRule() == LootRuleType.FREEFORALL) {
+				PacketSendUtility.sendPacket(pet.getMaster(), SM_SYSTEM_MESSAGE.STR_MSG_LOOTING_PET_MESSAGE03());
+				return;
 			}
 			PacketSendUtility.sendPacket(pet.getMaster(), SM_SYSTEM_MESSAGE.STR_MSG_LOOTING_PET_MESSAGE01());
 		}

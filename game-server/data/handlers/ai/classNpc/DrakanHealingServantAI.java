@@ -33,6 +33,8 @@ public class DrakanHealingServantAI extends NpcAI {
 	}
 
 	private void heal() {
+		if (isDead() || !getPosition().isSpawned())
+			return;
 		Future<?> task = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> getOwner().getController().useSkill(20520), 1000, 6000);
 		getOwner().getController().addTask(TaskId.SKILL_USE, task);
 	}

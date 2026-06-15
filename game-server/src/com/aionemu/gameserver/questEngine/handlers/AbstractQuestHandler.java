@@ -91,14 +91,7 @@ public abstract class AbstractQuestHandler {
 	public abstract void register();
 
 	public boolean onDialogEvent(QuestEnv env) {
-		int dialogActionId = env.getDialogActionId();
-		if (dialogActionId >= SELECT1 && dialogActionId <= SELECT15_4_4_4_4) {
-			// simple "next page" event (action ID = next dialog page ID), but there are some quests where this default behavior does not apply (e.g.
-			// 4074)
-			sendDialogPacket(env, dialogActionId, questId);
-			return true;
-		}
-		switch (dialogActionId) {
+		switch (env.getDialogActionId()) {
 			case ASK_QUEST_ACCEPT: // show quest accept dialog (coming from pre-conversation)
 				sendDialogPacket(env, DialogPage.ASK_QUEST_ACCEPT_WINDOW.id(), questId);
 				return true;
@@ -193,8 +186,7 @@ public abstract class AbstractQuestHandler {
 		return false;
 	}
 
-	public boolean onMovieEndEvent(QuestEnv env, int movieId) {
-		return false;
+	public void onMovieEndEvent(QuestEnv env, int movieId) {
 	}
 
 	public boolean onQuestTimerEndEvent(QuestEnv env) {
@@ -303,16 +295,16 @@ public abstract class AbstractQuestHandler {
 			player.getController().updateNearbyQuests();
 	}
 
-	public void changeQuestStep(QuestEnv env, int oldStep, int newStep) {
-		changeQuestStep(env, oldStep, newStep, false, oldStep > 0x3F || newStep > 0x3F ? -1 : 0);
+	public boolean changeQuestStep(QuestEnv env, int oldStep, int newStep) {
+		return changeQuestStep(env, oldStep, newStep, false, oldStep > 0x3F || newStep > 0x3F ? -1 : 0);
 	}
 
-	public void changeQuestStep(QuestEnv env, int step, int nextStep, boolean reward) {
-		changeQuestStep(env, step, nextStep, reward, 0);
+	public boolean changeQuestStep(QuestEnv env, int step, int nextStep, boolean reward) {
+		return changeQuestStep(env, step, nextStep, reward, 0);
 	}
 
 	/** Change the quest step to the next step or set quest status to reward */
-	public void changeQuestStep(QuestEnv env, int step, int nextStep, boolean reward, int varNum) {
+	public boolean changeQuestStep(QuestEnv env, int step, int nextStep, boolean reward, int varNum) {
 		QuestState qs = env.getPlayer().getQuestStateList().getQuestState(questId);
 		if (qs != null && (varNum == -1 ? qs.getQuestVars().getQuestVars() == step : qs.getQuestVarById(varNum) == step)) {
 			if (nextStep != step) { // quest can be rolled back if nextStep < step
@@ -329,7 +321,9 @@ public abstract class AbstractQuestHandler {
 					qs.setStatus(QuestStatus.REWARD);
 				updateQuestStatus(env);
 			}
+			return true;
 		}
+		return false;
 	}
 
 	/** Send dialog to the player */
@@ -467,6 +461,7 @@ public abstract class AbstractQuestHandler {
 				case SET_SUCCEED: // report to pre-end npc (another npc is actually responsible for rewarding, so close this window)
 					return closeDialogWindow(env);
 				case USE_OBJECT: // start talking to npc
+				case QUEST_SELECT: // start talking to npc
 				case SELECT_QUEST_REWARD: // report to end npc
 				case CHECK_USER_HAS_QUEST_ITEM: // report to end npc with collect item checks
 				case CHECK_USER_HAS_QUEST_ITEM_SIMPLE: // report to end npc with collect item checks
@@ -498,6 +493,10 @@ public abstract class AbstractQuestHandler {
 
 	public boolean defaultCloseDialog(QuestEnv env, int step, int nextStep, boolean reward, boolean sameNpc) {
 		return defaultCloseDialog(env, step, nextStep, reward, sameNpc, 0, 0, 0, 0);
+	}
+
+	public boolean defaultCloseDialog(QuestEnv env, int step, int nextStep, boolean reward, boolean sameNpc, QuestItems questItemToAdd) {
+		return defaultCloseDialog(env, step, nextStep, reward, sameNpc, questItemToAdd.getItemId(), questItemToAdd.getCount(), 0, 0);
 	}
 
 	public boolean defaultCloseDialog(QuestEnv env, int step, int nextStep, int giveItemId, long giveItemCount, int removeItemId,
@@ -659,10 +658,13 @@ public abstract class AbstractQuestHandler {
 		return false;
 	}
 
-	/** Play movie with given ID */
-	public boolean playQuestMovie(QuestEnv env, int MovieId) {
-		Player player = env.getPlayer();
-		PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(0, MovieId));
+	public boolean playQuestMovie(QuestEnv env, int movieId) {
+		return playQuestMovie(env, movieId, false);
+	}
+
+	public boolean playQuestMovie(QuestEnv env, int cutsceneId, boolean isCutsceneMovie) {
+		int targetObjectId = env.getVisibleObject() == null ? 0 : env.getVisibleObject().getObjectId();
+		PacketSendUtility.sendPacket(env.getPlayer(), new SM_PLAY_MOVIE(isCutsceneMovie, targetObjectId, env.getQuestId(), cutsceneId, true));
 		return false;
 	}
 

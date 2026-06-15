@@ -4,6 +4,7 @@ import java.io.DataInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.ClassFileFormatVersion;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashSet;
@@ -165,7 +166,7 @@ public class ClassUtils {
 		return result;
 	}
 
-	public static int readClassFileVersion(InputStream classFileInputStream, String fileName) throws IOException {
+	public static ClassFileFormatVersion readClassFileVersion(InputStream classFileInputStream, String fileName) throws IOException {
 		try (DataInputStream input = new DataInputStream(classFileInputStream)) {
 			// The first 4 bytes of a .class file are 0xCAFEBABE and are "used to identify file as conforming to the class file format"
 			String firstFourBytes = Integer.toHexString(input.readUnsignedShort()) + Integer.toHexString(input.readUnsignedShort());
@@ -174,7 +175,7 @@ public class ClassUtils {
 			}
 			int minorVersion = input.readUnsignedShort();
 			int majorVersion = input.readUnsignedShort();
-			return majorVersion;
+			return ClassFileFormatVersion.fromMajor(majorVersion);
 		}
 	}
 }

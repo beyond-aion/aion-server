@@ -9,10 +9,6 @@ public class PenaltySkill extends Skill {
     }
 
     @Override
-    public void calculateAndSetCastDuration() {
-    }
-
-    @Override
     public boolean useSkill() {
         super.useWithoutPropSkill();
         return true;

@@ -19,6 +19,7 @@ public class WaveAttackerAI extends AggressiveNoLootNpcAI {
 
 	@Override
 	public void handleCreatureDetected(Creature creature) {
+		super.handleCreatureDetected(creature);
 		if (creature.getTribe().equals(TribeClass.IDSEAL_PCGUARD)) {
 			for (Npc npc : getOwner().getPosition().getWorldMapInstance().getNpcs(236248))
 				getOwner().getAggroList().addHate(npc, 10000);

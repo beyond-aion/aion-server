@@ -12,7 +12,6 @@ import com.aionemu.gameserver.configs.main.AutoGroupConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.DialogPage;
-import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.autogroup.AutoGroupType;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.PetAction;
@@ -24,9 +23,6 @@ import com.aionemu.gameserver.model.siege.FortressLocation;
 import com.aionemu.gameserver.model.team.alliance.PlayerAlliance;
 import com.aionemu.gameserver.model.templates.goods.GoodsList;
 import com.aionemu.gameserver.model.templates.npc.TalkInfo;
-import com.aionemu.gameserver.model.templates.portal.PortalPath;
-import com.aionemu.gameserver.model.templates.teleport.TeleportLocation;
-import com.aionemu.gameserver.model.templates.teleport.TeleporterTemplate;
 import com.aionemu.gameserver.model.templates.tradelist.TradeListTemplate;
 import com.aionemu.gameserver.model.templates.tradelist.TradeListTemplate.TradeTab;
 import com.aionemu.gameserver.model.templates.zone.ZoneClassName;
@@ -34,18 +30,17 @@ import com.aionemu.gameserver.model.templates.zone.ZoneTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.*;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
+import com.aionemu.gameserver.services.abyss.AbyssRankingCache;
 import com.aionemu.gameserver.services.craft.CraftSkillUpdateService;
 import com.aionemu.gameserver.services.craft.RelinquishCraftStatus;
 import com.aionemu.gameserver.services.instance.PeriodicInstanceManager;
 import com.aionemu.gameserver.services.item.ItemChargeService;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
 import com.aionemu.gameserver.services.player.PlayerMailboxState;
-import com.aionemu.gameserver.services.teleport.PortalService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.services.trade.PricesService;
 import com.aionemu.gameserver.skillengine.model.DispelSlotType;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
@@ -64,13 +59,6 @@ public class DialogService {
 
 			if (npc.getObjectTemplate().supportsAction(DialogAction.OPEN_LEGION_WAREHOUSE) && player.isLegionMember())
 				player.getLegion().getLegionWarehouse().unsetInUse(player.getObjectId());
-
-			ThreadPoolManager.getInstance().schedule(() -> {
-				if (npc.getTarget() == null && !npc.getMoveController().isInMove()) {
-					npc.getPosition().setH(npc.getSpawn().getHeading());
-					PacketSendUtility.broadcastPacket(npc, new SM_HEADING_UPDATE(npc));
-				}
-			}, 1200);
 		}
 
 		Mailbox mailbox = player.getMailbox();
@@ -78,9 +66,7 @@ public class DialogService {
 			mailbox.mailBoxState = PlayerMailboxState.CLOSED;
 	}
 
-	public static void onDialogSelect(int dialogActionId, final Player player, Npc npc, int questId, int extendedRewardIndex) {
-		QuestEnv env = new QuestEnv(npc, player, questId, dialogActionId);
-		env.setExtendedRewardIndex(extendedRewardIndex);
+	public static void onDialogSelect(int dialogActionId, Player player, Npc npc, int questId, int extendedRewardIndex) {
 		int targetObjectId = npc.getObjectId();
 
 		if (questId == 0) {
@@ -129,7 +115,6 @@ public class DialogService {
 				case CHARGE_ITEM_SINGLE: // condition an individual item
 				case CHARGE_ITEM_SINGLE2: // augmenting an individual item
 				case TOWN_CHALLENGE: // town improvement
-					// Custom Feature: Quests can be done in any village
 					sendDialogWindow(dialogActionId, player, npc);
 					break;
 				case DISPERSE_LEGION: // disband legion
@@ -285,39 +270,24 @@ public class DialogService {
 				case HOUSING_RECREATE_PERSONAL_INS: // recreate personal house instance (studio)
 					HousingService.getInstance().recreatePlayerStudio(player);
 					break;
-				case SETPRO1:
-				case SETPRO2:
-				case SETPRO3:
-				case TELEPORT_SIMPLE:
-					if (QuestEngine.getInstance().onDialog(env)) { // remove this shit after assigning AI portal_dialog
-						return;
-					}
-					PortalPath portalPath = DataManager.PORTAL2_DATA.getPortalDialogPath(npc.getNpcId(), dialogActionId, player);
-					if (portalPath != null) {
-						PortalService.port(portalPath, player, npc);
-					} else {
-						TeleporterTemplate template = DataManager.TELEPORTER_DATA.getTeleporterTemplateByNpcId(npc.getNpcId());
-						if (template != null) {
-							TeleportLocation loc = template.getTeleLocIdData().getTelelocations().get(0);
-							if (loc != null)
-								TeleportService.teleport(template, loc.getLocId(), player, npc,
-									npc.getAi().getName().equals("general") ? TeleportAnimation.JUMP_IN : TeleportAnimation.FADE_OUT_BEAM);
-						}
-					}
-					break;
 				default:
-					if (QuestEngine.getInstance().onDialog(env))
-						return;
-					// action id = next page id
-					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(targetObjectId, dialogActionId));
+					handleQuestDialogueOrSendNextPage(dialogActionId, player, npc, questId, extendedRewardIndex);
 					break;
 			}
 		} else {
+			handleQuestDialogueOrSendNextPage(dialogActionId, player, npc, questId, extendedRewardIndex);
+		}
+	}
+
+	private static void handleQuestDialogueOrSendNextPage(int dialogActionId, Player player, Npc npc, int questId, int extendedRewardIndex) {
+		if (questId != 0 || dialogActionId == USE_OBJECT || dialogActionId == EXCHANGE_COIN) {
+			QuestEnv env = new QuestEnv(npc, player, questId, dialogActionId);
+			env.setExtendedRewardIndex(extendedRewardIndex);
 			if (QuestEngine.getInstance().onDialog(env))
 				return;
-			// action id = next page id
-			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(targetObjectId, dialogActionId, questId));
 		}
+		// action id = next page id
+		PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npc.getObjectId(), dialogActionId, questId));
 	}
 
 	private static void sendDialogWindow(int dialogActionId, final Player player, Npc npc) {
@@ -343,11 +313,9 @@ public class DialogService {
 
 	private static boolean isSubDialogRestricted(Player player, Npc npc) {
 		TalkInfo talkInfo = npc.getObjectTemplate().getTalkInfo();
-		if (talkInfo == null)
+		if (talkInfo == null || talkInfo.getSubDialogType() == null)
 			return false;
 		switch (talkInfo.getSubDialogType()) {
-			case ALL_ALLOWED:
-				return false;
 			case FORT_CAPTURE:
 				if (player.getLegion() == null)
 					return true;
@@ -376,10 +344,14 @@ public class DialogService {
 				return player.getSkillList().getSkillEntry(talkInfo.getSubDialogValue()) == null;
 			case ITEM_ID:
 				return player.getInventory().getItemCountByItemId(talkInfo.getSubDialogValue()) == 0;
+			case RETURN:
+				return player.getInventory().getItemCountByItemId(164000335) == 0; // Abbey Return Stone (30 days)
 			case ABYSSRANK:
 				if (player.isStaff())
 					return false;
 				return player.getAbyssRank().getRank().getId() < talkInfo.getSubDialogValue();
+			case ABYSSRANKING:
+				return AbyssRankingCache.getInstance().getRankingListPosition(player) > talkInfo.getSubDialogValue();
 			case TARGET_LEGION_DOMINION:
 				if (LegionDominionService.getInstance().isInCalculationTime())
 					return true;
@@ -392,8 +364,15 @@ public class DialogService {
 					return player.getLegion().getOccupiedLegionDominion() != talkInfo.getSubDialogValue();
 				}
 				return true;
+			case LEVEL:
+				return player.getLevel() != talkInfo.getSubDialogValue();
+			case LEVEL_LOW:
+				return player.getLevel() > talkInfo.getSubDialogValue();
+			case LEVEL_HIGH:
+				return player.getLevel() < talkInfo.getSubDialogValue();
 			default:
-				return false;
+				log.warn("Unhandled subdialog type " + talkInfo.getSubDialogType() + " for npc: " + npc.getNpcId());
+				return true;
 		}
 	}
 }

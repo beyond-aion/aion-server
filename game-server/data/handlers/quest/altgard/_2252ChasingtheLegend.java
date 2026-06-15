@@ -4,6 +4,7 @@ import static com.aionemu.gameserver.model.DialogAction.*;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -74,11 +75,7 @@ public class _2252ChasingtheLegend extends AbstractQuestHandler {
 			if (targetId == questStep1NpcId) {
 				switch (dialogActionId) {
 					case USE_OBJECT:
-						final Npc npc = (Npc) player.getTarget();
-						if (npc == null)
-							return false;
-
-						if (player.getKnownList().findObject(questKillNpc1Id) != null || player.getKnownList().findObject(questKillNpc1Id) != null)
+						if (!player.getWorldMapInstance().getNpcs(questKillNpc1Id, questKillNpc2Id).isEmpty())
 							return false;
 
 						if (var == 0 && checkItemExistence(env, questActionItemId, 1, true)) {
@@ -86,6 +83,7 @@ public class _2252ChasingtheLegend extends AbstractQuestHandler {
 							int chance = 95; // Chance to spawn biggest reward mob
 							int spawnTime = 3; // 3 min of spawn
 							int questSpawnedNpcId = Rnd.chance() < chance ? questKillNpc1Id : questKillNpc2Id;
+							VisibleObject npc = env.getVisibleObject();
 							Npc questMob = (Npc) spawnTemporarily(questSpawnedNpcId, npc.getWorldMapInstance(), npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), spawnTime); // Minushan's Spirit or Minushan's Drakie
 							PacketSendUtility.broadcastMessage(questMob, 1100630, 500);
 							// TODO: set not usable icon to questStep1NpcId while mob is spawned, setting usable icon after mob is despawned

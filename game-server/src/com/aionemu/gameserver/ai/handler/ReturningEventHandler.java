@@ -10,7 +10,6 @@ import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.ai.manager.EmoteManager;
 import com.aionemu.gameserver.ai.manager.WalkManager;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.geometry.Point3D;
 import com.aionemu.gameserver.model.skill.NpcSkillEntry;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.model.DispelSlotType;
@@ -38,8 +37,7 @@ public class ReturningEventHandler {
 			EmoteManager.emoteStartReturning(npc);
 			if (npc.isPathWalker() && WalkManager.startWalking(npcAI))
 				return;
-			Point3D prevStep = npc.getMoveController().recallPreviousStep();
-			npc.getMoveController().moveToPoint(prevStep.getX(), prevStep.getY(), prevStep.getZ());
+			npc.getMoveController().returnToLastStepOrSpawn();
 		}
 	}
 

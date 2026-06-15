@@ -8,7 +8,7 @@ import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_TARGET_IMMOBILIZE;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_POSITION;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.SpellStatus;
 import com.aionemu.gameserver.skillengine.model.SubEffectType;
@@ -54,7 +54,7 @@ public class SimpleRootEffect extends EffectTemplate {
 		if (effect.isSubEffect()) {
 			World.getInstance().updatePosition(effected, effect.getTargetX(), effect.getTargetY(), effect.getTargetZ(), effected.getHeading(), false);
 			if (!(effected instanceof Player))
-				PacketSendUtility.broadcastPacket(effected, new SM_TARGET_IMMOBILIZE(effected));
+				PacketSendUtility.broadcastPacket(effected, new SM_POSITION(effected));
 		}
 		effect.getEffected().getEffectController().setAbnormal(AbnormalState.SIMPLE_MOVE_BACK);
 		effect.setAbnormal(AbnormalState.SIMPLE_MOVE_BACK);

@@ -6,10 +6,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
-import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAY_MOVIE;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
@@ -70,13 +68,7 @@ public class PadmarashkasCaveInstance extends GeneralInstanceHandler {
 	@Override
 	public void onEnterZone(Player player, ZoneInstance zone) {
 		if (zone.getAreaTemplate().getZoneName() == ZoneName.get("PADMARASHKAS_NEST_320150000") && moviePlayed.compareAndSet(false, true))
-			PacketSendUtility.broadcastToMap(instance, new SM_PLAY_MOVIE(0, 488));
-	}
-
-	@Override
-	public boolean onDie(final Player player, Creature lastAttacker) {
-		PacketSendUtility.sendPacket(player, new SM_DIE(player, 8));
-		return true;
+			PacketSendUtility.broadcastToMap(instance, new SM_PLAY_MOVIE(false, 0, 0, 488, true));
 	}
 
 	@Override

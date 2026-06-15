@@ -1,5 +1,6 @@
 package instance;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Future;
@@ -14,15 +15,16 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.services.player.PlayerReviveService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
+import com.aionemu.gameserver.world.WorldPosition;
 
 /**
  * @author bobobear, Luzien, Estrayl
@@ -30,13 +32,27 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 @InstanceID(300520000)
 public class DragonLordsRefugeInstance extends GeneralInstanceHandler {
 
-	protected AtomicInteger raceId = new AtomicInteger(10);
-	protected AtomicInteger incarnationKills = new AtomicInteger();
-	protected AtomicInteger progress = new AtomicInteger();
+	private final List<WorldPosition> respawnLocations = new ArrayList<>();
+	protected final AtomicInteger raceId = new AtomicInteger(10);
+	protected final AtomicInteger incarnationKills = new AtomicInteger();
+	protected final AtomicInteger progress = new AtomicInteger();
 	protected Future<?> failTask;
 
 	public DragonLordsRefugeInstance(WorldMapInstance instance) {
 		super(instance);
+		// Retail positions
+		respawnLocations.add(new WorldPosition(300520000, 493.72f, 507.67f, 240.5f, (byte) 0));
+		respawnLocations.add(new WorldPosition(300520000, 497.52f, 526.03f, 240.5f, (byte) 0));
+		respawnLocations.add(new WorldPosition(300520000, 513.02f, 524.57f, 240.5f, (byte) 0));
+		respawnLocations.add(new WorldPosition(300520000, 499.57f, 510.19f, 240.5f, (byte) 0));
+		respawnLocations.add(new WorldPosition(300520000, 513.22f, 508.36f, 240.5f, (byte) 0));
+		respawnLocations.add(new WorldPosition(300520000, 505.05f, 525.03f, 240.5f, (byte) 0));
+		respawnLocations.add(new WorldPosition(300520000, 498.65f, 519.93f, 240.5f, (byte) 0));
+		respawnLocations.add(new WorldPosition(300520000, 511.44f, 515.36f, 240.5f, (byte) 0));
+		respawnLocations.add(new WorldPosition(300520000, 495.27f, 517.07f, 240.5f, (byte) 0));
+		respawnLocations.add(new WorldPosition(300520000, 492.62f, 525.37f, 240.5f, (byte) 0));
+		respawnLocations.add(new WorldPosition(300520000, 507.56f, 520.36f, 240.5f, (byte) 0));
+		respawnLocations.add(new WorldPosition(300520000, 508.20f, 506.85f, 240.5f, (byte) 0));
 	}
 
 	@Override
@@ -315,20 +331,18 @@ public class DragonLordsRefugeInstance extends GeneralInstanceHandler {
 	}
 
 	@Override
-	public void onPlayerLogOut(Player player) {
-		if (player.isDead())
-			TeleportService.teleportTo(player, instance.getStartPos());
-	}
-
-	@Override
-	public boolean onDie(Player player, Creature lastAttacker) {
-		PacketSendUtility.sendPacket(player, new SM_DIE(player, 8));
-		return true;
-	}
-
-	@Override
 	public void onInstanceDestroy() {
 		if (failTask != null && !failTask.isCancelled())
 			failTask.cancel(true);
+	}
+
+	@Override
+	public boolean onReviveEvent(Player player) {
+		PlayerReviveService.revive(player, 25, 25, true, 0);
+		player.getGameStats().updateStatsAndSpeedVisually();
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME());
+		WorldPosition p = Rnd.get(respawnLocations);
+		TeleportService.teleportTo(player, instance, p.getX(), p.getY(), p.getZ(), p.getHeading());
+		return true;
 	}
 }

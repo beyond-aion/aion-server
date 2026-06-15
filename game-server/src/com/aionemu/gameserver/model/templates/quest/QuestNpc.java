@@ -1,9 +1,7 @@
 package com.aionemu.gameserver.model.templates.quest;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -113,9 +111,10 @@ public class QuestNpc {
 	/**
 	 * @return A set of all quest ids which have been registered from quest handlers for this quest npc
 	 */
-	public Set<Integer> findAllRegisteredQuestIds() {
-		Stream<Integer> questIds = Stream.of(onQuestStart, onTalkEvent, onAtDistanceEvent, onAddAggroListEvent, onAttackEvent, onKillEvent)
-			.flatMap(c -> c.stream());
-		return questIds.collect(Collectors.toSet());
+	public Set<Integer> findAllRegisteredQuestIds(Predicate<Integer> questIdFilter) {
+		return Stream.of(onQuestStart, onTalkEvent, onAtDistanceEvent, onAddAggroListEvent, onAttackEvent, onKillEvent)
+			.flatMap(Collection::stream)
+			.filter(questIdFilter)
+			.collect(Collectors.toSet());
 	}
 }

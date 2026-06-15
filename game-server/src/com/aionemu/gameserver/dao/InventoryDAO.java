@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
@@ -12,12 +13,13 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.commons.utils.GenericValidator;
+import com.aionemu.gameserver.model.account.PlayerAccountData;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Persistable;
 import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
-import com.aionemu.gameserver.model.gameobjects.player.Equipment;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.items.storage.PlayerStorage;
+import com.aionemu.gameserver.model.items.ItemSlot;
+import com.aionemu.gameserver.model.items.ItemStone;
 import com.aionemu.gameserver.model.items.storage.Storage;
 import com.aionemu.gameserver.model.items.storage.StorageType;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
@@ -29,7 +31,9 @@ public class InventoryDAO {
 
 	private static final Logger log = LoggerFactory.getLogger(InventoryDAO.class);
 
-	public static final String SELECT_QUERY = "SELECT * FROM `inventory` WHERE `item_owner`=? AND `item_location`=? AND `is_equipped`=?";
+	public static final String SELECT_QUERY = "SELECT * FROM `inventory` WHERE `item_owner`=? AND `item_location`=?";
+	public static final String SELECT_ALL_QUERY = "SELECT * FROM `inventory` WHERE `item_location`=?";
+	public static final String SELECT_EQUIPPED_QUERY = "SELECT i.item_skin, i.slot, i.item_color, s.item_id godstone_item_id FROM inventory i LEFT JOIN item_stones s ON s.item_unique_id = i.item_unique_id AND s.slot = 0 AND s.category = ? WHERE i.item_owner = ? AND i.item_location = ? AND i.is_equipped = 1";
 	public static final String INSERT_QUERY = "INSERT INTO `inventory` (`item_unique_id`, `item_id`, `item_count`, `item_color`, `color_expires`, `item_creator`, `expire_time`, `activation_count`, `item_owner`, `is_equipped`, is_soul_bound, `slot`, `item_location`, `enchant`, `enchant_bonus`, `item_skin`, `fusioned_item`, `optional_socket`, `optional_fusion_socket`, `charge`, `tune_count`, `rnd_bonus`, `fusion_rnd_bonus`, `tempering`, `pack_count`, `is_amplified`, `buff_skill`, `rnd_plume_bonus`) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	public static final String UPDATE_QUERY = "UPDATE inventory SET item_count=?, item_color=?, color_expires=?, item_creator=?, expire_time=?, activation_count=?, item_owner=?, is_equipped=?, is_soul_bound=?, slot=?, item_location=?, enchant=?, enchant_bonus=?, item_skin=?, fusioned_item=?, optional_socket=?, optional_fusion_socket=?, charge=?, tune_count=?, rnd_bonus=?, fusion_rnd_bonus=?, tempering=?, pack_count=?, is_amplified=?, buff_skill=?, rnd_plume_bonus=? WHERE item_unique_id=?";
 	public static final String DELETE_QUERY = "DELETE FROM inventory WHERE item_unique_id=?";
@@ -37,89 +41,66 @@ public class InventoryDAO {
 	public static final String SELECT_ACCOUNT_QUERY = "SELECT `account_id` FROM `players` WHERE `id`=?";
 	public static final String SELECT_LEGION_QUERY = "SELECT `legion_id` FROM `legion_members` WHERE `player_id`=?";
 	public static final String DELETE_ACCOUNT_WH = "DELETE FROM inventory WHERE item_owner=? AND item_location=2";
-	public static final String SELECT_QUERY2 = "SELECT * FROM `inventory` WHERE `item_owner`=? AND `item_location`=?";
 
-	public static Storage loadStorage(int ownerId, StorageType storageType) {
-		Storage inventory = new PlayerStorage(storageType);
-		int storage = storageType.getId();
-		int equipped = 0;
-		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
-			stmt.setInt(1, ownerId);
-			stmt.setInt(2, storage);
-			stmt.setInt(3, equipped);
-			try (ResultSet rset = stmt.executeQuery()) {
-				while (rset.next()) {
-					Item item = constructItem(storage, rset);
-					item.setPersistentState(PersistentState.UPDATED);
-					if (item.getItemTemplate() == null) {
-						log.error(ownerId + "loaded error item, itemUniqueId is: " + item.getObjectId());
-					} else {
-						inventory.onLoadHandler(item);
-					}
-				}
-			}
-		} catch (Exception e) {
-			log.error("Could not restore " + storageType + " data for owner: " + ownerId + " from DB: " + e.getMessage(), e);
-		}
-		return inventory;
+	public static void loadStorage(int ownerId, Storage storage) {
+		loadItems(ownerId, storage.getStorageType(), storage::onLoadHandler);
 	}
 
-	public static List<Item> loadStorageDirect(int ownerId, StorageType storageType) {
-		List<Item> list = new ArrayList<>();
-		int storage = storageType.getId();
-		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY2)) {
-			stmt.setInt(1, ownerId);
-			stmt.setInt(2, storage);
-			try (ResultSet rset = stmt.executeQuery()) {
-				while (rset.next()) {
-					list.add(constructItem(storage, rset));
-				}
-			}
-		} catch (Exception e) {
-			log.error("Could not restore " + storageType + " data for owner: " + ownerId + " from DB: " + e.getMessage(), e);
-		}
-		return list;
-	}
-
-	public static Equipment loadEquipment(Player player) {
-		Equipment equipment = new Equipment(player);
-		int storage = 0;
-		int equipped = 1;
-
-		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
-			stmt.setInt(1, player.getObjectId());
-			stmt.setInt(2, storage);
-			stmt.setInt(3, equipped);
-			try (ResultSet rset = stmt.executeQuery()) {
-				while (rset.next()) {
-					Item item = constructItem(storage, rset);
-					item.setPersistentState(PersistentState.UPDATED);
-					equipment.onLoadHandler(item);
-				}
-			}
-		} catch (Exception e) {
-			log.error("Could not restore Equipment data for player: " + player.getObjectId() + " from DB: " + e.getMessage(), e);
-		}
-		return equipment;
-	}
-
-	public static List<Item> loadEquipment(int playerId) {
+	public static List<Item> loadItems(int ownerId, StorageType storageType) {
 		List<Item> items = new ArrayList<>();
-		int storage = 0;
-		int equipped = 1;
+		loadItems(ownerId, storageType, items::add);
+		return items;
+	}
 
+	private static void loadItems(int ownerId, StorageType storageType, Consumer<Item> itemConsumer) {
 		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
-			stmt.setInt(1, playerId);
-			stmt.setInt(2, storage);
-			stmt.setInt(3, equipped);
-			try (ResultSet rset = stmt.executeQuery()) {
-				while (rset.next()) {
-					Item item = constructItem(storage, rset);
-					items.add(item);
-				}
+			stmt.setInt(1, ownerId);
+			stmt.setInt(2, storageType.getId());
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				Item item = constructItem(storageType.getId(), rs);
+				item.setPersistentState(PersistentState.UPDATED);
+				itemConsumer.accept(item);
 			}
 		} catch (Exception e) {
-			log.error("Could not restore Equipment data for player: " + playerId + " from DB: " + e.getMessage(), e);
+			log.error("Could not load " + storageType + " items of owner " + ownerId, e);
+		}
+	}
+
+	public static List<Item> loadBrokerItems() {
+		List<Item> items = new ArrayList<>();
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_ALL_QUERY)) {
+			stmt.setInt(1, StorageType.BROKER.getId());
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				Item item = constructItem(StorageType.BROKER.getId(), rs);
+				item.setPersistentState(PersistentState.UPDATED);
+				items.add(item);
+			}
+		} catch (Exception e) {
+			log.error("Could not load broker items", e);
+		}
+		return items;
+	}
+
+	public static List<PlayerAccountData.VisibleItem> loadVisibleEquipment(int ownerId) {
+		List<PlayerAccountData.VisibleItem> items = new ArrayList<>();
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_EQUIPPED_QUERY)) {
+			stmt.setInt(1, ItemStone.ItemStoneType.GODSTONE.ordinal());
+			stmt.setInt(2, ownerId);
+			stmt.setInt(3, StorageType.CUBE.getId());
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				byte slotType = ItemSlot.getEquipmentSlotType(rs.getLong("slot"));
+				if (slotType == 0)
+					continue; // skip equipment like rings and secondary weapons, as they are not visible and AbstractPlayerInfoPacket supports only 16 items
+				int itemSkinId = rs.getInt("item_skin");
+				int godStoneItemId = rs.getInt("godstone_item_id");
+				Integer itemColor = (Integer) rs.getObject("item_color");
+				items.add(new PlayerAccountData.VisibleItem(slotType, itemSkinId, godStoneItemId, itemColor));
+			}
+		} catch (Exception e) {
+			log.error("Could not load equipped items of owner " + ownerId, e);
 		}
 		return items;
 	}
@@ -392,12 +373,12 @@ public class InventoryDAO {
 	/**
 	 * Since inventory is not using FK - need to clean items
 	 */
-	public static boolean deletePlayerItems(int playerId) {
+	public static boolean deletePlayerOrLegionItems(int playerOrLegionId) {
 		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(DELETE_CLEAN_QUERY)) {
-			stmt.setInt(1, playerId);
+			stmt.setInt(1, playerOrLegionId);
 			stmt.execute();
 		} catch (Exception e) {
-			log.error("Error deleting all player items. PlayerObjId: " + playerId, e);
+			log.error("Error deleting all player or legion items. playerOrLegionId: " + playerOrLegionId, e);
 			return false;
 		}
 		return true;

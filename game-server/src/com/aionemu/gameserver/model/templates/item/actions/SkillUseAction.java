@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
+import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -49,6 +50,10 @@ public class SkillUseAction extends AbstractItemAction {
 
 	@Override
 	public boolean canAct(Player player, Item parentItem, Item targetItem, Object... params) {
+		if (mapid != 0 && player.getWorldId() != mapid) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CAN_NOT_USE_ITEM_IN_CURRENT_POSITION());
+			return false;
+		}
 		Skill skill = SkillEngine.getInstance().getSkill(player, skillid, level, player.getTarget(), parentItem.getItemTemplate());
 		if (skill == null)
 			return false;
@@ -67,7 +72,7 @@ public class SkillUseAction extends AbstractItemAction {
 		}
 		if (!skill.canUseSkill(CastState.CAST_START)) // also initializes effectedList for isIneffectiveHealSkill check down below
 			return false;
-		if (isIneffectiveHealSkill(effects, skill.getEffectedList())) { // convenience feature: block using ineffective heals
+		if (CustomConfig.IGNORE_POTIONS_AT_FULL_HEALTH && isIneffectiveHealSkill(effects, skill.getEffectedList())) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_NOTHING_HAPPEN());
 			return false;
 		}

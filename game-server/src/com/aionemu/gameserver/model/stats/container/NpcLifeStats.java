@@ -8,22 +8,16 @@ import com.aionemu.gameserver.services.LifeStatsRestoreService;
  */
 public class NpcLifeStats extends CreatureLifeStats<Npc> {
 
-	/**
-	 * @param owner
-	 */
 	public NpcLifeStats(Npc owner) {
 		super(owner, owner.getGameStats().getMaxHp().getCurrent(), owner.getGameStats().getMaxMp().getCurrent());
 	}
 
 	@Override
 	public void triggerRestoreTask() {
-		restoreLock.lock();
-		try {
-			if (lifeRestoreTask == null && !isDead) {
+		synchronized (restoreLock) {
+			if (lifeRestoreTask == null && !isDead()) {
 				this.lifeRestoreTask = LifeStatsRestoreService.getInstance().scheduleHpRestoreTask(this);
 			}
-		} finally {
-			restoreLock.unlock();
 		}
 	}
 }

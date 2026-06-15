@@ -219,31 +219,28 @@ public final class QuestService {
 
 	private static void giveReward(QuestEnv env, Rewards rewards) {
 		Player player = env.getPlayer();
-		if (rewards.getGold() != null)
-			player.getInventory().increaseKinah(Rates.QUEST_KINAH.calcResult(player, rewards.getGold()), ItemUpdateType.INC_KINAH_QUEST);
-		if (rewards.getExp() != null) {
+		if (rewards.getKinah() != 0)
+			player.getInventory().increaseKinah(Rates.QUEST_KINAH.calcResult(player, rewards.getKinah()), ItemUpdateType.INC_KINAH_QUEST);
+		if (rewards.getExp() != 0) {
 			NpcTemplate npcTemplate = DataManager.NPC_DATA.getNpcTemplate(env.getTargetId());
 			player.getCommonData().addExp(rewards.getExp(), Rates.XP_QUEST, npcTemplate != null ? npcTemplate.getL10n() : null);
 		}
-		if (rewards.getTitle() != null)
+		if (rewards.getTitle() != 0)
 			player.getTitleList().addTitle(rewards.getTitle(), true, 0);
-		if (rewards.getAp() != null) {
+		if (rewards.getAp() != 0) {
 			int ap = rewards.getAp();
-			if (DataManager.QUEST_DATA.getQuestById(env.getQuestId()).getCategory() != QuestCategory.NON_COUNT) // don't multiply with quest rates for relic
-																																																					// exchanges
-				ap = (int) Rates.AP_QUEST.calcResult(player, ap);
+			if (DataManager.QUEST_DATA.getQuestById(env.getQuestId()).getCategory() != QuestCategory.NON_COUNT) // don't multiply with quest rates for relic exchanges
+				ap = Rates.AP_QUEST.calcResult(player, ap);
 			AbyssPointsService.addAp(player, ap);
 		}
-		if (rewards.getDp() != null)
+		if (rewards.getDp() != 0)
 			player.getCommonData().addDp(rewards.getDp());
-		if (rewards.getGp() != null)
-			GloryPointsService.modifyGpBy(player.getObjectId(), rewards.getGp());
-		if (rewards.getExtendInventory() != null) {
-			if (rewards.getExtendInventory() == 1)
-				CubeExpandService.questExpand(player);
-			else if (rewards.getExtendInventory() == 2)
-				WarehouseService.expand(player, false);
-		}
+		if (rewards.getGp() != 0)
+			GloryPointsService.addGp(player.getObjectId(), Rates.GP.calcResult(player, rewards.getGp()));
+		if (rewards.getExtendInventory() == 1)
+			CubeExpandService.questExpand(player);
+		else if (rewards.getExtendInventory() == 2)
+			WarehouseService.expand(player, false);
 	}
 
 	private static Timestamp calculateRepeatDate(Player player, QuestTemplate template) {
@@ -699,16 +696,7 @@ public final class QuestService {
 						dItem = regQuestDropItem(drop, index++, 0);
 						dropItems.add(dItem);
 					}
-					for (Player p : pls) {
-						if (dItem != null) {
-							dItem.setPlayerObjId(p.getObjectId());
-						}
-						dropNpc.setAllowedLooter(p);
-						if (player.getPlayerGroup().getLootGroupRules().getLootRule() != LootRuleType.FREEFORALL) {
-							PacketSendUtility.sendPacket(p, new SM_LOOT_STATUS(npc.getObjectId(), Status.LOOT_ENABLE));
-						}
-					}
-					pls.clear();
+					allowLooting(pls, dropNpc, dItem);
 				}
 			} else if (players != null && player.isInAlliance()) {
 				List<Player> pls = new ArrayList<>();
@@ -733,16 +721,7 @@ public final class QuestService {
 						dItem = regQuestDropItem(drop, index++, 0);
 						dropItems.add(dItem);
 					}
-					for (Player p : pls) {
-						if (dItem != null) {
-							dItem.setPlayerObjId(p.getObjectId());
-						}
-						dropNpc.setAllowedLooter(p);
-						if (player.getPlayerAlliance().getLootGroupRules().getLootRule() != LootRuleType.FREEFORALL) {
-							PacketSendUtility.sendPacket(p, new SM_LOOT_STATUS(npc.getObjectId(), Status.LOOT_ENABLE));
-						}
-					}
-					pls.clear();
+					allowLooting(pls, dropNpc, dItem);
 				}
 			} else {
 				if (isQuestDrop(player, drop)) {
@@ -751,6 +730,17 @@ public final class QuestService {
 			}
 		}
 		return index;
+	}
+
+	private static void allowLooting(List<Player> players, DropNpc dropNpc, DropItem dropItem) {
+		for (Player player : players) {
+			if (dropItem != null)
+				dropItem.setPlayerObjId(player.getObjectId());
+			dropNpc.setAllowedLooter(player);
+			if (dropNpc.getLootGroupRules() != null && dropNpc.getLootGroupRules().getLootRule() != LootRuleType.FREEFORALL) {
+				PacketSendUtility.sendPacket(player, new SM_LOOT_STATUS(dropNpc.getObjectId(), Status.LOOT_ENABLE));
+			}
+		}
 	}
 
 	private static DropItem regQuestDropItem(QuestDrop drop, int index, Integer winner) {

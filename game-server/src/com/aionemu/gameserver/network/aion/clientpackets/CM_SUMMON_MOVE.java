@@ -2,9 +2,11 @@ package com.aionemu.gameserver.network.aion.clientpackets;
 
 import java.util.Set;
 
+import com.aionemu.gameserver.controllers.effect.EffectController;
+import com.aionemu.gameserver.controllers.movement.CreatureMoveController;
 import com.aionemu.gameserver.controllers.movement.MovementMask;
 import com.aionemu.gameserver.controllers.movement.SummonMoveController;
-import com.aionemu.gameserver.model.gameobjects.Summon;
+import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
@@ -18,6 +20,7 @@ import com.aionemu.gameserver.world.World;
  */
 public class CM_SUMMON_MOVE extends AionClientPacket {
 
+	private int objectId;
 	private byte type;
 	private byte heading;
 	private float x, y, z, x2, y2, z2, vehicleX, vehicleY, vehicleZ;
@@ -30,15 +33,12 @@ public class CM_SUMMON_MOVE extends AionClientPacket {
 
 	@Override
 	protected void readImpl() {
-		readD(); // object id
-
+		objectId = readD();
 		x = readF();
 		y = readF();
 		z = readF();
-
 		heading = readC();
 		type = readC();
-
 		if ((type & MovementMask.POSITION) == MovementMask.POSITION && (type & MovementMask.MANUAL) == MovementMask.MANUAL) {
 			if ((type & MovementMask.ABSOLUTE) == 0) {
 				// this type is sent when the summon is in move and it receives or resists movement restricting effects, like stun, stagger, etc.
@@ -64,39 +64,40 @@ public class CM_SUMMON_MOVE extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
-		Summon summon = player.getSummon();
-		if (summon == null || !summon.isSpawned())
+		Creature summonOrMercenary = player.getSummonOrMercenary(objectId);
+		if (summonOrMercenary == null || !summonOrMercenary.isSpawned())
 			return;
-		if (summon.getEffectController().isInAnyAbnormalState(AbnormalState.CANT_MOVE_STATE) || summon.getEffectController().isUnderFear() || summon.getEffectController().isConfused())
+		EffectController effectController = summonOrMercenary.getEffectController();
+		if (effectController.isInAnyAbnormalState(AbnormalState.CANT_MOVE_STATE) || effectController.isUnderFear() || effectController.isConfused())
 			return;
-		SummonMoveController m = summon.getMoveController();
+		CreatureMoveController<? extends Creature> m = summonOrMercenary.getMoveController();
 		m.movementMask = type;
 
-		if ((type & MovementMask.GLIDE) == MovementMask.GLIDE) {
-			m.glideFlag = glideFlag;
+		if (m instanceof SummonMoveController smc && (type & MovementMask.GLIDE) == MovementMask.GLIDE) {
+			smc.glideFlag = glideFlag;
 		}
 
 		if (type == MovementMask.IMMEDIATE) {
-			summon.getController().onStopMove();
+			summonOrMercenary.getController().onStopMove();
 		} else if ((type & MovementMask.POSITION) == MovementMask.POSITION && (type & MovementMask.MANUAL) == MovementMask.MANUAL) {
 			if ((type & MovementMask.ABSOLUTE) == 0) // skip position update since the server has already set the correct position for stun or resist
 				return;
-			summon.getMoveController().setNewDirection(x2, y2, z2, heading);
-			summon.getController().onStartMove();
+			summonOrMercenary.getMoveController().setNewDirection(x2, y2, z2, heading);
+			summonOrMercenary.getController().onStartMove();
 		} else
-			summon.getController().onMove();
+			summonOrMercenary.getController().onMove();
 
-		if ((type & MovementMask.VEHICLE) == MovementMask.VEHICLE) {
-			m.unk1 = unk1;
-			m.unk2 = unk2;
-			m.vehicleX = vehicleX;
-			m.vehicleY = vehicleY;
-			m.vehicleZ = vehicleZ;
+		if (m instanceof SummonMoveController smc && (type & MovementMask.VEHICLE) == MovementMask.VEHICLE) {
+			smc.unk1 = unk1;
+			smc.unk2 = unk2;
+			smc.vehicleX = vehicleX;
+			smc.vehicleY = vehicleY;
+			smc.vehicleZ = vehicleZ;
 		}
-		World.getInstance().updatePosition(summon, x, y, z, heading);
+		World.getInstance().updatePosition(summonOrMercenary, x, y, z, heading);
 		m.updateLastMove();
 
 		if ((type & MovementMask.POSITION) == MovementMask.POSITION || type == MovementMask.IMMEDIATE)
-			PacketSendUtility.broadcastPacket(summon, new SM_MOVE(summon));
+			PacketSendUtility.broadcastToSightedPlayers(summonOrMercenary, new SM_MOVE(summonOrMercenary));
 	}
 }

@@ -1,10 +1,13 @@
 package com.aionemu.gameserver.model.account;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.aionemu.gameserver.utils.time.ServerTime;
+
 /**
- * @author ViAl
+ * @author ViAl, SVDNESS
  */
 public class PassportsList {
 
@@ -39,5 +42,12 @@ public class PassportsList {
 
 	public List<Passport> getAllPassports() {
 		return passports;
+	}
+
+	public boolean hasPassportForDay(int passportId, LocalDate attendDay) {
+		return passports.stream()
+			.filter(pp -> pp.getId() == passportId)
+			.map(pp -> ServerTime.atDate(pp.getArriveDate()).toLocalDate())
+			.anyMatch(attendDay::equals);
 	}
 }

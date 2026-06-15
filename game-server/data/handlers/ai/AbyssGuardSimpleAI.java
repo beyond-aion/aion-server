@@ -44,7 +44,7 @@ public class AbyssGuardSimpleAI extends AggressiveNpcAI {
 	}
 
 	@Override
-	protected boolean handleGuardAgainstAttacker(Creature attacker) {
+	protected boolean handleCreatureNeedsSupportByGuard(Creature creature) {
 		return false;
 	}
 
@@ -69,12 +69,7 @@ public class AbyssGuardSimpleAI extends AggressiveNpcAI {
 		if (!owner.getPosition().isMapRegionActive())
 			return;
 
-		if (PositionUtil.isInRange(owner, npc, owner.getAggroRange())) {
-			if (GeoService.getInstance().canSee(owner, npc)) {
-				if (!isInState(AIState.RETURNING))
-					getOwner().getMoveController().storeStep();
-				onCreatureEvent(AIEventType.CREATURE_AGGRO, npc);
-			}
-		}
+		if (PositionUtil.isInRange(owner, npc, owner.getAggroRange()) && GeoService.getInstance().canSee(owner, npc))
+			onCreatureEvent(AIEventType.CREATURE_AGGRO, npc);
 	}
 }

@@ -57,7 +57,7 @@ public class XmlDataLoader {
 	}
 
 	private static Future<?> validateAsync(XmlMerger.MergeResult mergeResult) {
-		return ThreadPoolManager.getInstance().submit(() -> {
+		return ThreadPoolManager.getInstance().submitLongRunning(() -> {
 			log.info("Validating " + mergeResult.getFile() + " in background...");
 			try {
 				if (!mergeResult.waitUntilFileIsWritten()) {

@@ -167,9 +167,9 @@ public class DropService {
 
 			RespawnService.scheduleDecayTask(npc, dropNpc.getRemaingDecayTime());
 
-			LootGroupRules lootGrouRules = player.getLootGroupRules();
-			if (lootGrouRules != null && dropNpc.getInRangePlayers().size() > 1 && dropNpc.getAllowedLooters().size() == 1) {
-				LootRuleType lrt = lootGrouRules.getLootRule();
+			LootGroupRules lootGroupRules = dropNpc.getLootGroupRules();
+			if (lootGroupRules != null && dropNpc.getInRangePlayers().size() > 1 && dropNpc.getAllowedLooters().size() == 1) {
+				LootRuleType lrt = lootGroupRules.getLootRule();
 				if (lrt != LootRuleType.FREEFORALL) {
 					for (Player member : dropNpc.getInRangePlayers()) {
 						if (member != null)
@@ -191,41 +191,41 @@ public class DropService {
 		if (dropNpc == null) {
 			return false;
 		}
-		LootGroupRules lootGrouRules = player.getLootGroupRules();
-		if (lootGrouRules == null) {
+
+		LootGroupRules lootGroupRules = dropNpc.getLootGroupRules();
+		if (lootGroupRules == null) {
 			return true;
 		}
 
 		int itemId = requestedItem.getDropTemplate().getItemId();
-		ItemQuality quality = DataManager.ITEM_DATA.getItemTemplate(itemId).getItemQuality();
 		if (itemId != ItemId.KINAH) {
-			lootGrouRules = player.getLootGroupRules();
-			if (dropNpc.getGroupSize() > 1) {
-				dropNpc.setDistributionId(lootGrouRules.getAutodistributionId());
-				dropNpc.setDistributionType(lootGrouRules.getQualityRule(quality));
+			if (dropNpc.getInRangePlayers().size() > 1) {
+				ItemQuality quality = DataManager.ITEM_DATA.getItemTemplate(itemId).getItemQuality();
+				dropNpc.setDistributionId(lootGroupRules.getAutodistributionId());
+				dropNpc.setDistributionType(lootGroupRules.getQualityRule(quality));
 			} else
 				dropNpc.setDistributionId(0);
 			if (dropNpc.getDistributionId() > 1 && dropNpc.getDistributionType()) {
-				boolean containDropItem = lootGrouRules.containDropItem(requestedItem);
-				if (lootGrouRules.getItemsToBeDistributed().isEmpty() || containDropItem) {
+				boolean containDropItem = lootGroupRules.containDropItem(requestedItem);
+				if (lootGroupRules.getItemsToBeDistributed().isEmpty() || containDropItem) {
 					dropNpc.setCurrentIndex(requestedItem.getIndex());
 					for (Player member : dropNpc.getInRangePlayers()) {
 						Player finalPlayer = World.getInstance().getPlayer(member.getObjectId());
 						if (finalPlayer != null && finalPlayer.isOnline()) {
 							dropNpc.addPlayerStatus(finalPlayer);
 							finalPlayer.setPlayerMode(PlayerMode.IN_ROLL, new InRoll(npcId, itemId, requestedItem.getIndex(), dropNpc.getDistributionId()));
-							PacketSendUtility.sendPacket(finalPlayer, new SM_GROUP_LOOT(finalPlayer.getCurrentTeamId(), 0, itemId, (int) requestedItem.getCount(),
+							PacketSendUtility.sendPacket(finalPlayer, new SM_GROUP_LOOT(dropNpc.getLootingTeamId(), 0, itemId, (int) requestedItem.getCount(),
 								npcId, dropNpc.getDistributionId(), 1, requestedItem.getIndex()));
 						}
 					}
-					lootGrouRules.setPlayersInRoll(dropNpc.getInRangePlayers(), dropNpc.getDistributionId() == 2 ? 17000 : 32000, requestedItem.getIndex(),
+					lootGroupRules.setPlayersInRoll(dropNpc.getInRangePlayers(), dropNpc.getDistributionId() == 2 ? 17000 : 32000, requestedItem.getIndex(),
 						npcId);
 				} else {
 					PacketSendUtility.sendPacket(player,
 						SM_SYSTEM_MESSAGE.STR_MSG_LOOT_ALREADY_DISTRIBUTING_ITEM(DataManager.ITEM_DATA.getItemTemplate(itemId).getL10n()));
 				}
 				if (!containDropItem) {
-					lootGrouRules.addItemToBeDistributed(requestedItem);
+					lootGroupRules.addItemToBeDistributed(requestedItem);
 				}
 				return false;
 			}
@@ -239,7 +239,7 @@ public class DropService {
 		if (dropNpc == null) {
 			return false;
 		}
-		LootGroupRules lootGroupRules = player.getLootGroupRules();
+		LootGroupRules lootGroupRules = dropNpc.getLootGroupRules();
 		if (lootGroupRules == null) {
 			return true;
 		}
@@ -249,7 +249,7 @@ public class DropService {
 			return true;
 
 		int distId = lootGroupRules.getAutodistributionId();
-		if (dropNpc.getGroupSize() <= 1) {
+		if (dropNpc.getInRangePlayers().size() <= 1) {
 			distId = 0;
 			dropNpc.setDistributionId(distId);
 		}
@@ -309,9 +309,9 @@ public class DropService {
 			}
 		}
 
-		LootGroupRules lootGrouRules = player.getLootGroupRules();
-		if (lootGrouRules != null && !requestedItem.isDistributeItem() && !requestedItem.isFreeForAll()) {
-			if (lootGrouRules.containDropItem(requestedItem)) {
+		LootGroupRules lootGroupRules = dropNpc.getLootGroupRules();
+		if (lootGroupRules != null && !requestedItem.isDistributeItem() && !requestedItem.isFreeForAll()) {
+			if (lootGroupRules.containDropItem(requestedItem)) {
 				if (!autoLoot)
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_LOOT_ALREADY_DISTRIBUTING_ITEM(template.getL10n()));
 				return;
@@ -340,22 +340,21 @@ public class DropService {
 		} else if (!player.isInTeam() && !requestedItem.isItemWonNotCollected() && dropNpc.getDistributionId() == 0) {
 			requestedItem.setCount(ItemService.addItem(player, itemId, requestedItem.getCount()));
 		} else if (!requestedItem.isDistributeItem()) {
-			if (player.isInTeam()) {
-				lootGrouRules = player.getLootGroupRules();
+			if (lootGroupRules != null) {
 				ItemQuality quality = DataManager.ITEM_DATA.getItemTemplate(itemId).getItemQuality();
-				if (lootGrouRules.isMisc(quality)) {
+				if (lootGroupRules.isMisc(quality)) {
 					Collection<Player> members = dropNpc.getInRangePlayers();
 
-					if (members.size() > lootGrouRules.getNrMisc()) {
-						lootGrouRules.setNrMisc(lootGrouRules.getNrMisc() + 1);
+					if (members.size() > lootGroupRules.getNrMisc()) {
+						lootGroupRules.setNrMisc(lootGroupRules.getNrMisc() + 1);
 					} else {
-						lootGrouRules.setNrMisc(1);
+						lootGroupRules.setNrMisc(1);
 					}
 
 					int i = 0;
 					for (Player p : members) {
 						i++;
-						if (i == lootGrouRules.getNrMisc()) {
+						if (i == lootGroupRules.getNrMisc()) {
 							requestedItem.setWinningPlayer(p);
 							break;
 						}
@@ -462,14 +461,13 @@ public class DropService {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PAY_ACCOUNT_ME(highestValue));
 		}
 
-		if (player.isInGroup() || player.isInAlliance())
-			for (Player member : dropNpc.getInRangePlayers())
-				if (member != null && !player.equals(member) && member.isOnline()) {
-					PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_MSG_PAY_ACCOUNT_OTHER(player.getName(), highestValue));
-					long distributeKinah = highestValue / (dropNpc.getGroupSize() - 1);
-					member.getInventory().increaseKinah(distributeKinah);
-					PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_MSG_PAY_DISTRIBUTE(highestValue, dropNpc.getGroupSize() - 1, distributeKinah));
-				}
+		List<Player> onlineMembers = dropNpc.getInRangePlayers().stream().filter(p -> p.isOnline() && !p.equals(player)).toList();
+		for (Player member : onlineMembers) {
+			PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_MSG_PAY_ACCOUNT_OTHER(player.getName(), highestValue));
+			long distributeKinah = highestValue / onlineMembers.size();
+			member.getInventory().increaseKinah(distributeKinah);
+			PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_MSG_PAY_DISTRIBUTE(highestValue, onlineMembers.size(), distributeKinah));
+		}
 	}
 
 	private void winningNormalActions(Player player, DropNpc dropNpc, DropItem requestedItem) {

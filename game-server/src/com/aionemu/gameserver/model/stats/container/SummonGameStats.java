@@ -1,12 +1,10 @@
 package com.aionemu.gameserver.model.stats.container;
 
-import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.model.summons.SummonMode;
 import com.aionemu.gameserver.model.templates.stats.StatsTemplate;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SUMMON_UPDATE;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -16,8 +14,6 @@ import com.aionemu.gameserver.utils.stats.CalculationType;
  * @author ATracer
  */
 public class SummonGameStats extends CreatureGameStats<Summon> {
-
-	private int cachedSpeed;
 
 	public SummonGameStats(Summon owner) {
 		super(owner);
@@ -35,14 +31,6 @@ public class SummonGameStats extends CreatureGameStats<Summon> {
 
 	public void updateStatsVisually() {
 		owner.getGameStats().updateStatInfo();
-	}
-
-	private void checkSpeedStats() {
-		int current = getMovementSpeed().getCurrent();
-		if (current != cachedSpeed) {
-			owner.getGameStats().updateSpeedInfo();
-		}
-		cachedSpeed = current;
 	}
 
 	@Override
@@ -157,10 +145,5 @@ public class SummonGameStats extends CreatureGameStats<Summon> {
 		if (master != null) {
 			PacketSendUtility.sendPacket(master, new SM_SUMMON_UPDATE(owner));
 		}
-	}
-
-	@Override
-	public void updateSpeedInfo() {
-		PacketSendUtility.broadcastPacket(owner, new SM_EMOTION(owner, EmotionType.CHANGE_SPEED, 0, 0));
 	}
 }

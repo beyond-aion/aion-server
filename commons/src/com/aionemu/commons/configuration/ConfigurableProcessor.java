@@ -4,8 +4,8 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.util.Properties;
 import java.util.*;
+import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.configuration.transformers.MapTransformer;
+import com.aionemu.commons.configuration.transformers.PropertyTransformers;
 
 /**
  * This class is designed to process classes and interfaces that have fields marked with {@link Property} annotation
@@ -147,7 +148,7 @@ public class ConfigurableProcessor {
 		Type[] genericTypeArgs = {};
 		if (field.getGenericType() instanceof ParameterizedType)
 			genericTypeArgs = ((ParameterizedType) field.getGenericType()).getActualTypeArguments();
-		return PropertyTransformerFactory.getTransformer(field.getType()).transform(value, field.getType(), genericTypeArgs);
+		return PropertyTransformers.get(field.getType()).transform(value, field.getType(), genericTypeArgs);
 	}
 
 	private static Map<String, String> filterProperties(Pattern pattern, Properties props, Set<String> unusedProperties) {

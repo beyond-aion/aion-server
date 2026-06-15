@@ -10,7 +10,6 @@ import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 import ai.AggressiveNpcAI;
@@ -48,8 +47,7 @@ public class TiamatsIncarnationAI extends AggressiveNpcAI {
 	}
 
 	private List<Player> getNearbyPlayers() {
-		return getKnownList().getKnownPlayers().values().stream().filter(player -> !player.isDead() && PositionUtil.isInRange(player, getOwner(), 30))
-			.collect(Collectors.toList());
+		return getKnownList().streamPlayers().filter(player -> !player.isDead() && isInRange(player, 30)).collect(Collectors.toList());
 	}
 
 	@Override

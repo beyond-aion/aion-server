@@ -36,7 +36,6 @@ public class PlayerConnectedEvent extends AlwaysTrueTeamEvent {
 		}
 		PacketSendUtility.sendPacket(player, new SM_GROUP_INFO(group));
 		PacketSendUtility.sendPacket(player, new SM_GROUP_MEMBER_INFO(group, player, GroupEvent.JOIN));
-		group.sendBrands(player);
 		group.forEach(member -> {
 			if (!player.equals(member)) {
 				PacketSendUtility.sendPacket(member, new SM_GROUP_MEMBER_INFO(group, player, GroupEvent.ENTER));

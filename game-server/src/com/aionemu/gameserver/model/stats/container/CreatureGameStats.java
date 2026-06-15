@@ -8,6 +8,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.commons.lang3.ArrayUtils;
 
+import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.SkillElement;
 import com.aionemu.gameserver.model.enchants.EnchantEffect;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -17,10 +18,13 @@ import com.aionemu.gameserver.model.items.ManaStone;
 import com.aionemu.gameserver.model.items.RandomBonusEffect;
 import com.aionemu.gameserver.model.stats.calc.*;
 import com.aionemu.gameserver.model.stats.calc.functions.IStatFunction;
+import com.aionemu.gameserver.model.stats.calc.functions.StatArmorMasteryFunction;
 import com.aionemu.gameserver.model.stats.calc.functions.StatFunctionProxy;
 import com.aionemu.gameserver.model.templates.itemset.ItemSetTemplate;
 import com.aionemu.gameserver.model.templates.stats.StatsTemplate;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.skillengine.model.Effect;
+import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.stats.CalculationType;
 
 /**
@@ -33,9 +37,8 @@ public abstract class CreatureGameStats<T extends Creature> {
 	protected final T owner;
 	private final Map<StatEnum, List<IStatFunction>> stats = new ConcurrentHashMap<>();
 
-	private long lastGeoUpdate = 0;
 	private int attackCounter = 0;
-	private int cachedMaxHp, cachedMaxMp;
+	private int cachedMaxHp, cachedMaxMp, cachedSpeed;
 
 	protected CreatureGameStats(T owner) {
 		this.owner = owner;
@@ -78,10 +81,8 @@ public abstract class CreatureGameStats<T extends Creature> {
 					statFunctions.add(functionToAdd);
 				} else {
 					synchronized (statFunctions) {
-						if (!statFunctions.contains(functionToAdd)) { // list.contains is plenty fast, as this list never contains many items
-							statFunctions.add(functionToAdd);
-							statFunctions.sort(null);
-						}
+						statFunctions.add(functionToAdd);
+						statFunctions.sort(null);
 					}
 				}
 				return statFunctions;
@@ -273,6 +274,14 @@ public abstract class CreatureGameStats<T extends Creature> {
 		return getStat(StatEnum.ABNORMAL_RESISTANCE_ALL, getStatsTemplate().getAbnormalResistance());
 	}
 
+	public Stat2 getResistance(StatEnum statEnum) {
+		int base = switch (statEnum) {
+			case OPENAERIAL_RESISTANCE, PARALYZE_RESISTANCE, SPIN_RESISTANCE, STAGGER_RESISTANCE, STUMBLE_RESISTANCE, STUN_RESISTANCE -> getStatsTemplate().getStunLikeResistance();
+			default -> 0;
+		};
+		return getStat(statEnum, base);
+	}
+
 	public abstract Stat2 getAttackSpeed();
 
 	public abstract Stat2 getMovementSpeed();
@@ -283,7 +292,7 @@ public abstract class CreatureGameStats<T extends Creature> {
 
 	public abstract Stat2 getMpRegenRate();
 
-	public int getMagicalDefenseFor(SkillElement element) {
+	public int getElementalDefenseFor(SkillElement element) {
 		switch (element) {
 			case EARTH:
 				return getStat(StatEnum.EARTH_RESISTANCE, 0).getCurrent();
@@ -306,6 +315,17 @@ public abstract class CreatureGameStats<T extends Creature> {
 		return getMovementSpeed().getCurrent() / 1000f;
 	}
 
+	public void updateArmorMasteryStats(List<Item> equipment) {
+		stats.values().forEach(statFunctions -> {
+			statFunctions.forEach(statFunction -> {
+				if (statFunction instanceof StatFunctionProxy proxy)
+					statFunction = proxy.getProxiedFunction();
+				if (statFunction instanceof StatArmorMasteryFunction armorMasteryFunction)
+					armorMasteryFunction.updateEquipmentFactor(equipment);
+			});
+		});
+	}
+
 	/**
 	 * Send packet about stats info
 	 */
@@ -316,6 +336,17 @@ public abstract class CreatureGameStats<T extends Creature> {
 	 * Send packet about speed info
 	 */
 	public void updateSpeedInfo() {
+		PacketSendUtility.broadcastPacket(owner, new SM_EMOTION(owner, EmotionType.CHANGE_SPEED));
+	}
+
+	protected boolean checkSpeedStats() {
+		int currentSpeed = getMovementSpeed().getCurrent();
+		if (currentSpeed != cachedSpeed) {
+			updateSpeedInfo();
+			cachedSpeed = currentSpeed;
+			return true;
+		}
+		return false;
 	}
 
 	/**
@@ -328,15 +359,6 @@ public abstract class CreatureGameStats<T extends Creature> {
 		synchronized (statFunctions) {
 				return new ArrayList<>(statFunctions);
 		}
-	}
-
-	public boolean checkGeoNeedUpdate() {
-		long currentTime = System.currentTimeMillis();
-		if (currentTime - lastGeoUpdate > 600) {
-			lastGeoUpdate = currentTime;
-			return true;
-		}
-		return false;
 	}
 
 	/**

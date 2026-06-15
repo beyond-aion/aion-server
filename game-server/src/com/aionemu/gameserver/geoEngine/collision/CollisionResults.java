@@ -44,7 +44,6 @@ public class CollisionResults implements Iterable<CollisionResult> {
 	private final int instanceId;
 	private final boolean onlyFirst;
 	private final IgnoreProperties ignoreProperties;
-	private boolean canSeeCheck;
 	private boolean invalidateSlopingSurface;
 
 	public CollisionResults(byte intentions, int instanceId, IgnoreProperties ignoreProperties) {
@@ -170,14 +169,6 @@ public class CollisionResults implements Iterable<CollisionResult> {
 
 	public IgnoreProperties getIgnoreProperties() {
 		return this.ignoreProperties;
-	}
-
-	public boolean isCanSeeCheck() {
-		return canSeeCheck;
-	}
-
-	public void setCanSeeCheck(boolean canSeeCheck) {
-		this.canSeeCheck = canSeeCheck;
 	}
 
 	public boolean shouldInvalidateSlopingSurface() {

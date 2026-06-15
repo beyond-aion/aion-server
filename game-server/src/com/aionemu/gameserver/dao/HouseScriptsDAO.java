@@ -1,9 +1,9 @@
 package com.aionemu.gameserver.dao;
 
+import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.Arrays;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -70,15 +70,12 @@ public class HouseScriptsDAO {
 	}
 
 	private static boolean addScript(PlayerScripts scripts, int id, String scriptXML) {
-		if (scriptXML == null || scriptXML.length() == 0) {
+		if (scriptXML == null || scriptXML.isEmpty()) {
 			return scripts.set(id, new byte[0], 0, false);
 		} else {
-			byte[] bytes = CompressUtil.compress(scriptXML);
-			int oldLength = bytes.length;
-			bytes = Arrays.copyOf(bytes, bytes.length + 8);
-			for (int i = oldLength; i < bytes.length; i++)
-				bytes[i] = -51; // Add NC shit bytes, without which fails to load :)
-			return scripts.set(id, bytes, scriptXML.length() * 2, false);
+			byte[] bytes = scriptXML.getBytes(StandardCharsets.UTF_16LE);
+			byte[] compressedBytes = CompressUtil.compress(bytes);
+			return scripts.set(id, compressedBytes, bytes.length, false);
 		}
 	}
 

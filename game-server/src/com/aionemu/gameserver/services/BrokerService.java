@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.gameserver.configs.main.LoggingConfig;
 import com.aionemu.gameserver.dao.BrokerDAO;
 import com.aionemu.gameserver.dao.InventoryDAO;
+import com.aionemu.gameserver.dao.ItemStoneListDAO;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.broker.BrokerItemMask;
 import com.aionemu.gameserver.model.broker.BrokerMessages;
@@ -21,6 +22,7 @@ import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
+import com.aionemu.gameserver.model.items.storage.StorageType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_BROKER_SERVICE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DELETE_ITEM;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -113,8 +115,6 @@ public class BrokerService {
 		if (searchItems == null)
 			return;
 
-		int totalSearchItemsCount = searchItems.length;
-
 		getPlayerCache(player).setBrokerSortTypeCache(sortType);
 		getPlayerCache(player).setBrokerStartPageCache(startPage);
 
@@ -131,6 +131,7 @@ public class BrokerService {
 			getPlayerCache(player).setSearchItemsList(null);
 
 		sortBrokerItems(searchItems, sortType);
+		int totalSearchItemsCount = searchItems.length;
 		searchItems = getRequestedPage(searchItems, startPage);
 
 		for (BrokerItem bi : searchItems) {
@@ -140,31 +141,6 @@ public class BrokerService {
 		}
 
 		PacketSendUtility.sendPacket(player, new SM_BROKER_SERVICE(searchItems, totalSearchItemsCount, startPage));
-	}
-
-	public long getLowerPrice(Race race, int itemId) {
-		BrokerItem[] searchItems = null;
-
-		Map<Integer, BrokerItem> brokerItems = getRaceBrokerItems(race);
-		if (brokerItems == null)
-			return 0;
-
-		long lower = 0;
-
-		searchItems = brokerItems.values().toArray(new BrokerItem[brokerItems.values().size()]);
-
-		for (BrokerItem item : searchItems) {
-			if (itemId == item.getItemId()) {
-				if (lower == 0) {
-					lower = item.getPrice() / item.getItemCount();
-				} else {
-					if (lower > item.getPrice())
-						lower = item.getPrice() / item.getItemCount();
-				}
-			}
-		}
-
-		return lower;
 	}
 
 	public long getAveragePrice(Race race, int itemId) {
@@ -187,31 +163,6 @@ public class BrokerService {
 		}
 		average = sum / counter;
 		return average;
-	}
-
-	public long getHigherPrice(Race race, int itemId) {
-		BrokerItem[] searchItems = null;
-
-		Map<Integer, BrokerItem> brokerItems = getRaceBrokerItems(race);
-		if (brokerItems == null)
-			return 0;
-
-		long higher = 0;
-
-		searchItems = brokerItems.values().toArray(new BrokerItem[brokerItems.values().size()]);
-
-		for (BrokerItem item : searchItems) {
-			if (itemId == item.getItemId()) {
-				if (higher == 0) {
-					higher = item.getPrice() / item.getItemCount();
-				} else {
-					if (higher < item.getPrice())
-						higher = item.getPrice() / item.getItemCount();
-				}
-			}
-		}
-
-		return higher;
 	}
 
 	private BrokerItem[] getItemsByMask(Player player, int clientMask, boolean cached) {
@@ -421,8 +372,8 @@ public class BrokerService {
 		if (price <= 0 || count <= 0)
 			return;
 
-		// check max price for 1 item in stack
-		if (price / count > 999999999) {
+		if (count > 1 && price / count > 999_999_999 || price > 99_999_999_999L ) { // retail price limits
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_LIMITED_VENDOR_CANT_OVER_GOLD());
 			return;
 		}
 
@@ -474,7 +425,7 @@ public class BrokerService {
 			PacketSendUtility.sendPacket(player, new SM_DELETE_ITEM(itemToRegister.getObjectId()));
 		}
 
-		itemToRegister.setItemLocation(126);
+		itemToRegister.setItemLocation(StorageType.BROKER.getId());
 
 		BrokerItem newBrokerItem = new BrokerItem(itemToRegister, price, player.getObjectId(), splittingAvailable, brRace);
 
@@ -496,14 +447,15 @@ public class BrokerService {
 
 	public void showSellWindow(Player player, int itemUniqueId) {
 		Item itemToRegister = player.getInventory().getItemByObjId(itemUniqueId);
-
 		if (itemToRegister == null)
 			return;
-
-		Race race = player.getRace();
-
-		PacketSendUtility.sendPacket(player, new SM_BROKER_SERVICE((byte) 0, itemUniqueId, getLowerPrice(race, itemToRegister.getItemId()),
-			getHigherPrice(race, itemToRegister.getItemId())));
+		LongSummaryStatistics priceStats = getRaceBrokerItems(player.getRace()).values().stream()
+			.filter(item -> itemToRegister.getItemId() == item.getItemId())
+			.mapToLong(BrokerItem::getPrice)
+			.summaryStatistics();
+		long lowestPrice = priceStats.getMin() == Long.MAX_VALUE ? 0 : priceStats.getMin();
+		long highestPrice = priceStats.getMax() == Long.MIN_VALUE ? 0 : priceStats.getMax();
+		PacketSendUtility.sendPacket(player, new SM_BROKER_SERVICE((byte) 0, itemUniqueId, lowestPrice, highestPrice));
 	}
 
 	public void showRegisteredItems(Player player) {
@@ -761,8 +713,10 @@ public class BrokerService {
 		@Override
 		public void run() {
 			// first save item for FK consistency
-			if (item != null)
+			if (item != null) {
 				InventoryDAO.store(item, playerId);
+				ItemStoneListDAO.save(List.of(item));
+			}
 			if (brokerItem != null)
 				BrokerDAO.store(brokerItem);
 			if (kinahItem != null)

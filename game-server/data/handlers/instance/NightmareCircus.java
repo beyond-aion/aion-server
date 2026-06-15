@@ -5,14 +5,11 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.manager.WalkManager;
-import com.aionemu.gameserver.controllers.effect.PlayerEffectController;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.Race;
-import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAY_MOVIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.player.PlayerReviveService;
@@ -299,7 +296,7 @@ public class NightmareCircus extends GeneralInstanceHandler {
 				npc.getController().delete();
 				break;
 			case 233467:
-				instance.forEachPlayer(p -> PacketSendUtility.sendPacket(p, new SM_PLAY_MOVIE(0, 984)));
+				PacketSendUtility.broadcastToMap(instance, new SM_PLAY_MOVIE(false, 0, 0, 984, true));
 				deleteAliveNpcs(831740, 831627, 831741, 831718, 831551, 831552, 831553);
 				// Open Cage
 				spawn(831598, 522.3982f, 564.6901f, 199.0337f, (byte) 60, 14);
@@ -348,34 +345,12 @@ public class NightmareCircus extends GeneralInstanceHandler {
 	}
 
 	@Override
-	public boolean onDie(final Player player, Creature lastAttacker) {
-		PacketSendUtility.sendPacket(player, new SM_DIE(false, false, 0, 8));
-		return true;
-	}
-
-	@Override
 	public boolean onReviveEvent(Player player) {
 		PlayerReviveService.revive(player, 25, 25, false, 0);
 		player.getGameStats().updateStatsAndSpeedVisually();
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME());
 		TeleportService.teleportTo(player, instance, 473.54022f, 567.6342f, 201.83635f, (byte) 118);
 		return true;
-	}
-
-	@Override
-	public void onLeaveInstance(Player player) {
-		removeEffects(player);
-	}
-
-	@Override
-	public void onPlayerLogOut(Player player) {
-		removeEffects(player);
-	}
-
-	private void removeEffects(Player player) {
-		PlayerEffectController effectController = player.getEffectController();
-		effectController.removeEffect(player.getRace() == Race.ELYOS ? 21469 : 21471);
-		effectController.removeEffect(player.getRace() == Race.ELYOS ? 21470 : 21472);
 	}
 
 	@Override

@@ -39,59 +39,6 @@ public class TribeRelationsData {
 		return tribe.getBase();
 	}
 
-	public boolean hasAggressiveRelations(TribeClass tribeName) {
-		Tribe tribe = tribeNameMap.get(tribeName);
-		if (tribe == null)
-			return false;
-		Tribe baseTribe = tribe.isBasic() ? tribeNameMap.get(tribe.getBase()) : null;
-		return !tribe.getAggro().isEmpty() || baseTribe != null && !baseTribe.getAggro().isEmpty();
-	}
-
-	public boolean hasHostileRelations(TribeClass tribeName) {
-		Tribe tribe = tribeNameMap.get(tribeName);
-		if (tribe == null)
-			return false;
-		Tribe baseTribe = tribe.isBasic() ? tribeNameMap.get(tribe.getBase()) : null;
-		return !tribe.getHostile().isEmpty() || baseTribe != null && !baseTribe.getHostile().isEmpty();
-	}
-
-	public boolean hasSupportRelations(TribeClass tribeName) {
-		Tribe tribe = tribeNameMap.get(tribeName);
-		if (tribe == null)
-			return false;
-		Tribe baseTribe = tribe.isBasic() ? tribeNameMap.get(tribe.getBase()) : null;
-		return !tribe.getSupport().isEmpty() || baseTribe != null && !baseTribe.getSupport().isEmpty();
-	}
-
-	public boolean hasFriendRelations(TribeClass tribeName) {
-		Tribe tribe = tribeNameMap.get(tribeName);
-		if (tribe == null)
-			return false;
-		Tribe baseTribe = tribe.isBasic() ? tribeNameMap.get(tribe.getBase()) : null;
-		return !tribe.getFriend().isEmpty() || baseTribe != null && !baseTribe.getFriend().isEmpty();
-	}
-
-	public boolean hasNoneRelations(TribeClass tribeName) {
-		Tribe tribe = tribeNameMap.get(tribeName);
-		if (tribe == null)
-			return false;
-		Tribe baseTribe = tribe.isBasic() ? tribeNameMap.get(tribe.getBase()) : null;
-		return !tribe.getNone().isEmpty() || baseTribe != null && !baseTribe.getNone().isEmpty();
-	}
-
-	public boolean hasNeutralRelations(TribeClass tribeName) {
-		Tribe tribe = tribeNameMap.get(tribeName);
-		if (tribe == null)
-			return false;
-		Tribe baseTribe = tribe.isBasic() ? tribeNameMap.get(tribe.getBase()) : null;
-		return !tribe.getNeutral().isEmpty() || baseTribe != null && !baseTribe.getNeutral().isEmpty();
-	}
-
-	/**
-	 * @param tribeName1
-	 * @param tribeName2
-	 * @return
-	 */
 	public boolean isAggressiveRelation(TribeClass tribeName1, TribeClass tribeName2) {
 		Tribe tribe1 = tribeNameMap.get(tribeName1);
 		Tribe tribe2 = tribeNameMap.get(tribeName2);
@@ -172,17 +119,13 @@ public class TribeRelationsData {
 	}
 
 	/**
-	 * @return true if any other tribe supports the tribe in argument
+	 * @return True, if tribeName can support tribeNameAskingForSupport
 	 */
-	public boolean hasAnySupporter(TribeClass tribeName) {
-		Tribe tribe1 = tribeNameMap.get(tribeName);
-		if (tribe1 == null)
+	public boolean canSupport(TribeClass tribeName, TribeClass tribeNameAskingForSupport) {
+		Tribe tribe = tribeNameMap.get(tribeName);
+		Tribe tribeAskingForSupport = tribeNameMap.get(tribeNameAskingForSupport);
+		if (tribe == null || tribeAskingForSupport == null)
 			return false;
-
-		for (TribeClass tribe2 : tribeNameMap.keySet()) {
-			if (isSupportRelation(tribe2, tribeName))
-				return true;
-		}
-		return false;
+		return tribe.getSupport().contains(tribeNameAskingForSupport) || tribe.getSupport().contains(tribeAskingForSupport.getBase());
 	}
 }

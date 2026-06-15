@@ -1,9 +1,10 @@
 package admincommands;
 
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.math.NumberUtils;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Predicate;
 
-import com.aionemu.gameserver.dataholders.DataManager;
+import org.apache.commons.lang3.StringUtils;
+
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
@@ -25,7 +26,7 @@ public class Kill extends AdminCommand {
 		// @formatter:off
 		setSyntaxInfo(
 			" - kills your target (can be NPC or player)",
-			"<all> [neutral|enemy|npcId] - kills all NPCs in the surrounding area (default: all, optional: only neutral/hostile NPCs/specific NPC)",
+			"all [neutral|enemy|npcId] - kills all NPCs in the surrounding area (default: all, optional: only neutral/hostile NPCs/specific NPC)",
 			"<range (in meters)> [neutral|enemy|npcId] - kills NPCs in the specified radius around you (default: all, optional: only neutral/hostile NPCs/specific NPC)"
 		);
 		// @formatter:on
@@ -55,46 +56,38 @@ public class Kill extends AdminCommand {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_INVALID_TARGET());
 			}
 		} else {
-			int count = 0;
-			float range;
-			int npcId = 0;
-
+			Predicate<Creature> filter;
 			if (params[0].equalsIgnoreCase("all")) {
-				range = -1;
+				filter = _ -> true;
 			} else {
-				range = Float.parseFloat(params[0]);
+				float range = Float.parseFloat(params[0]);
 				if (range < 0) {
 					sendInfo(player, "The given range must be larger than 0.");
 					return;
 				}
-				// if input was integer, add 0.999 so it matches the clients displayed target distance (client doesn't round up at .5)
-				if (range == Math.round(range))
-					range += 0.999f;
+				// if input was integer, add 0.999 so it matches the client's displayed target distance (client doesn't round up at .5)
+				float finalRange = range == Math.round(range) ? range + 0.999f : range;
+				filter = creature -> PositionUtil.isInRange(player, creature, finalRange);
 			}
-
-			if (params.length == 2 && NumberUtils.isDigits(params[1])) {
-				npcId = Integer.parseInt(params[1]);
-				if (DataManager.NPC_DATA.getNpcTemplate(npcId) == null) {
-					sendInfo(player, npcId + " isn't a valid npcId.");
-					return;
+			if (params.length == 2) {
+				if (params[1].equalsIgnoreCase("neutral")) {
+					filter = filter.and(creature -> !player.isEnemy(creature));
+				} else if (params[1].equalsIgnoreCase("enemy")) {
+					filter = filter.and(player::isEnemy);
+				} else {
+					int npcId = Integer.parseInt(params[1]);
+					filter = filter.and(creature -> creature.getObjectTemplate().getTemplateId() == npcId);
 				}
 			}
-
-			for (VisibleObject obj : player.getKnownList().getKnownObjects().values()) {
-				// is npc or summon
-				if (obj instanceof Creature creature && !(obj instanceof Player)) {
-					// is in range
-					if (range == -1 || (range > 0 && PositionUtil.isInRange(player, obj, range))) {
-						// is target
-						if (params.length <= 1 || (params[1].equalsIgnoreCase("neutral") && !player.isEnemy(creature))
-							|| (params[1].equalsIgnoreCase("enemy") && player.isEnemy(creature))
-							|| (npcId != 0 && creature.getObjectTemplate().getTemplateId() == npcId)) {
-							if (kill(player, creature))
-								count += 1;
-						}
-					}
-				}
-			}
+			AtomicInteger count = new AtomicInteger();
+			player.getKnownList().stream()
+				.filter(obj -> obj.get() instanceof Creature creature && !(creature instanceof Player))
+				.map(o -> (Creature) o.get())
+				.filter(filter)
+				.forEach(creature -> {
+					if (kill(player, creature))
+						count.incrementAndGet();
+				});
 			sendInfo(player, count + " NPC(s) were killed.");
 		}
 	}

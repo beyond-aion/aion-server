@@ -2,19 +2,22 @@ package ai.worlds.panesterra.ahserionsflight;
 
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import com.aionemu.commons.utils.Rnd;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.configs.main.SiegeConfig;
-import com.aionemu.gameserver.controllers.attack.AggroInfo;
+import com.aionemu.gameserver.controllers.attack.AggroTarget;
+import com.aionemu.gameserver.controllers.attack.DamageInfo;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
+import com.aionemu.gameserver.services.panesterra.PanesterraService;
 import com.aionemu.gameserver.services.panesterra.ahserion.AhserionRaid;
 import com.aionemu.gameserver.services.panesterra.ahserion.PanesterraFaction;
 import com.aionemu.gameserver.services.panesterra.ahserion.PanesterraTeam;
@@ -26,9 +29,6 @@ import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.world.WorldPosition;
 
 import ai.AggressiveNpcAI;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * @author Yeats, Estrayl
@@ -95,7 +95,7 @@ public class AhserionAI extends AggressiveNpcAI {
 
 		// Custom solution to resolve the retail add hate event (switch_target_by_attacker_indicator)
 		if (lv == 57 || lv == 26) {
-			addHateToRandomPlayer();
+			getAggroList().addHate(getAggroList().getTarget(AggroTarget.RANDOM), 100000);
 		}
 	}
 
@@ -121,7 +121,7 @@ public class AhserionAI extends AggressiveNpcAI {
 	private void handleBaseAssault() {
 		if (getOwner().getWorldId() == 400030000 && AhserionRaid.getInstance().isStarted()) {
 			for (PanesterraFaction faction : PanesterraFaction.values()) {
-				PanesterraTeam team = AhserionRaid.getInstance().getFactionTeam(faction);
+				PanesterraTeam team = PanesterraService.getInstance().getTeam(faction);
 				if (team != null && !team.isEliminated())
 					AhserionRaid.getInstance().spawnStage(5, faction);
 			}
@@ -132,16 +132,8 @@ public class AhserionAI extends AggressiveNpcAI {
 	 * Retail: activate_skillarea 21575
 	 */
 	private void handleIdeDestruction() {
-		getKnownList().getKnownPlayers().values().stream().filter(p -> !p.isDead() && PositionUtil.isInRange(p, 509.64f, 513.25f, 675.145f, 45))
+		getKnownList().streamPlayers().filter(p -> !p.isDead() && PositionUtil.isInRange(p, 509.64f, 513.25f, 675.145f, 45))
 			.forEach(p -> SkillEngine.getInstance().getSkill(getOwner(), 21575, 1, p).useWithoutPropSkill());
-	}
-
-	private void addHateToRandomPlayer() {
-		List<AggroInfo> attackingPlayers = getAggroList().getList().stream().filter(ai -> ai.getAttacker() instanceof Player player && !player.isDead())
-			.toList();
-		AggroInfo aggroInfo = Rnd.get(attackingPlayers);
-		if (aggroInfo != null)
-			aggroInfo.addHate(100000);
 	}
 
 	@Override
@@ -150,12 +142,12 @@ public class AhserionAI extends AggressiveNpcAI {
 			Map<PanesterraFaction, Integer> panesterraDamage = new HashMap<>();
 
 			// Only players can attack Ahserion on this map.
-			for (AggroInfo ai : getOwner().getAggroList().getFinalDamageList(false)) {
-				if (ai.getAttacker() instanceof Player) {
-					PanesterraTeam team = AhserionRaid.getInstance().getPanesterraFactionTeam((Player) ai.getAttacker());
+			for (DamageInfo<Creature> damageInfo : getAggroList().getFinalDamageList().getCreatureDamages()) {
+				if (damageInfo.getAttacker() instanceof Player player) {
+					PanesterraTeam team = PanesterraService.getInstance().getTeam(player);
 					if (team != null && !team.isEliminated()) {
 						PanesterraFaction faction = team.getFaction();
-						panesterraDamage.merge(faction, ai.getDamage(), Integer::sum);
+						panesterraDamage.merge(faction, damageInfo.getDamage(), Integer::sum);
 					}
 				}
 			}
@@ -172,7 +164,7 @@ public class AhserionAI extends AggressiveNpcAI {
 		int maxDmg = 0;
 		for (PanesterraFaction faction : PanesterraFaction.values()) {
 			Integer dmg = panesterraDamage.get(faction);
-			if (dmg != null && !AhserionRaid.getInstance().getFactionTeam(faction).isEliminated()) {
+			if (dmg != null && !PanesterraService.getInstance().getTeam(faction).isEliminated()) {
 				if (dmg > maxDmg) {
 					maxDmg = dmg;
 					winner = faction;
@@ -184,7 +176,8 @@ public class AhserionAI extends AggressiveNpcAI {
 
 	private void logMetrics() {
 		long fullFightTime = (System.currentTimeMillis() - getOwner().getGameStats().getFightStartingTime()) / 1000;
-		String damageDealt = getAggroList().getFinalDamageList(false).stream().sorted((Comparator.comparingInt(AggroInfo::getDamage).reversed()))
+		String damageDealt = getAggroList().getFinalDamageList().getCreatureDamages().stream()
+			.sorted(Comparator.comparingInt(DamageInfo<Creature>::getDamage).reversed())
 			.map(ai -> String.format("%s (ID: %d, Dmg: %d)", ai.getAttacker().getName(), ai.getAttacker().getObjectId(), ai.getDamage()))
 			.collect(Collectors.joining(", "));
 

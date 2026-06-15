@@ -51,7 +51,6 @@ public class _2008Ascension extends AbstractQuestHandler {
 		qe.registerQuestNpc(205020).addOnTalkEvent(questId);
 		qe.registerQuestNpc(205040).addOnKillEvent(questId);
 		qe.registerQuestNpc(205041).addOnKillEvent(questId);
-		qe.registerOnMovieEndQuest(152, questId);
 		qe.registerOnEnterWorld(questId);
 		qe.registerOnDie(questId);
 	}

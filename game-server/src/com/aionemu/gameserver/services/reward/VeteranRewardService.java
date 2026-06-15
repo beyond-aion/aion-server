@@ -31,7 +31,7 @@ public final class VeteranRewardService {
 		rewards.get(0).add(new RewardItem(169630007, 1)); // [Expand Card] Expand Cube Ticket (lvl 4)
 		rewards.get(0).add(new RewardItem(169620094, 1)); // Crafting Boost Charm III - 100%
 		rewards.get(0).add(new RewardItem(161001001, 5)); // Revival Stone
-		rewards.get(0).add(new RewardItem(162000124, 50)); // Superior Recovery Serum
+		rewards.get(0).add(new RewardItem(162002030, 50)); // [Event] Premium Restoration Serum
 
 		// month 2
 		rewards.get(1).add(new RewardItem(190020075, 1)); // Flash Bogel Egg
@@ -42,14 +42,14 @@ public final class VeteranRewardService {
 		// month 3
 		rewards.get(2).add(new RewardItem(125040038, 1)); // Devil Horns
 		rewards.get(2).add(new RewardItem(186000199, 100)); // Legion Coin
-		rewards.get(2).add(new RewardItem(166000195, 5)); // Epsilon Enchantment Stone
+		rewards.get(2).add(new RewardItem(166020003, 5)); // [Event] Omega Enchantment Stone
 		rewards.get(2).add(new RewardItem(169620072, 3)); // AP Boost Charm II - 30%
 
 		// month 4
 		rewards.get(3).add(new RewardItem(169640006, 1)); // [Expand Card] Expand Warehouse Ticket (lvl 4)
 		rewards.get(3).add(new RewardItem(186000242, 15)); // Ceramium Medal
 		rewards.get(3).add(new RewardItem(188052719, 5)); // [Event] Dye Bundle
-		rewards.get(3).add(new RewardItem(162000107, 50)); // Saam King's Herbs
+		rewards.get(3).add(new RewardItem(162002018, 50)); // [Event] Wormwood Dish
 
 		// month 5
 		rewards.get(4).add(new RewardItem(166030007, 5)); // [Event] Tempering Solution
@@ -78,10 +78,10 @@ public final class VeteranRewardService {
 		rewards.get(7).add(new RewardItem(186000199, 100)); // Legion Coin
 
 		// month 9
-		rewards.get(8).add(new RewardItem(166000195, 5)); // Epsilon Enchantment Stone
+		rewards.get(8).add(new RewardItem(166020003, 5)); // [Event] Omega Enchantment Stone
 		rewards.get(8).add(new RewardItem(169600087, 1)); // [Emotion Card] 'Bad Girl' Dance
 		rewards.get(8).add(new RewardItem(188052761, 5)); // [Event] Bonus Entry Scroll Bundle
-		rewards.get(8).add(new RewardItem(162000107, 50)); // Saam King's Herbs
+		rewards.get(8).add(new RewardItem(162002018, 50)); // [Event] Wormwood Dish
 
 		// month 10
 		rewards.get(9).add(new RewardItem(169640006, 1)); // [Expand Card] Expand Warehouse Ticket (lvl 4)
@@ -111,12 +111,12 @@ public final class VeteranRewardService {
 		rewards.get(13).add(new RewardItem(166030007, 5)); // [Event] Tempering Solution
 		rewards.get(13).add(new RewardItem(169600063, 1)); // [Emotion Card] Play the Saxophone
 		rewards.get(13).add(new RewardItem(188052761, 5)); // [Event] Bonus Entry Scroll Bundle
-		rewards.get(13).add(new RewardItem(162000107, 50)); // Saam King's Herbs
+		rewards.get(13).add(new RewardItem(162002018, 50)); // [Event] Wormwood Dish
 
 		// month 15
 		rewards.get(14).add(new RewardItem(110900876, 1)); // Nyerkcarrier
 		rewards.get(14).add(new RewardItem(190020156, 1)); // [Event] Medalist Shugo Egg
-		rewards.get(14).add(new RewardItem(166000195, 5)); // Epsilon Enchantment Stone
+		rewards.get(14).add(new RewardItem(166020003, 5)); // [Event] Omega Enchantment Stone
 		rewards.get(14).add(new RewardItem(161001001, 5)); // Revival Stone
 
 		// month 16
@@ -137,7 +137,7 @@ public final class VeteranRewardService {
 		rewards.get(17).add(new RewardItem(187060162, 1)); // Wings of Agony
 		rewards.get(17).add(new RewardItem(168310018, 1)); // Major Blessed Augment: Level 2
 		rewards.get(17).add(new RewardItem(166020003, 5)); // [Event] Omega Enchantment Stone
-		rewards.get(17).add(new RewardItem(162000107, 50)); // Saam King's Herbs
+		rewards.get(17).add(new RewardItem(162002018, 50)); // [Event] Wormwood Dish
 
 		// month 19
 		rewards.get(18).add(new RewardItem(125050026, 1)); // Elcoro Hat
@@ -156,7 +156,7 @@ public final class VeteranRewardService {
 		rewards.get(20).add(new RewardItem(169630007, 1)); // [Expand Card] Expand Cube Ticket (lvl 4)
 		rewards.get(20).add(new RewardItem(169600039, 1)); // [Emotion Card] Chew Bubblegum
 		rewards.get(20).add(new RewardItem(186000238, 150)); // Conqueror's Herb
-		rewards.get(20).add(new RewardItem(162000107, 50)); // Saam King's Herb
+		rewards.get(20).add(new RewardItem(162002018, 50)); // [Event] Wormwood Dish
 
 		// month 22
 		rewards.get(21).add(new RewardItem(169640006, 1)); // [Expand Card] Expand Warehouse Ticket (lvl 4)
@@ -182,14 +182,14 @@ public final class VeteranRewardService {
 		rewards.get(24).add(new RewardItem(169630007, 1)); // [Expand Card] Expand Cube Ticket (lvl 4)
 		rewards.get(24).add(new RewardItem(166030007, 5)); // [Event] Tempering Solution
 		rewards.get(24).add(new RewardItem(169620072, 3)); // AP Boost Charm II - 30%
-		rewards.get(24).add(new RewardItem(162000107, 50)); // Saam King's Herb
+		rewards.get(24).add(new RewardItem(162002018, 50)); // [Event] Wormwood Dish
 
 		// month 26
 		rewards.get(25).add(new RewardItem(169640006, 1)); // [Expand Card] Expand Warehouse Ticket (lvl 4)
 		rewards.get(25).add(new RewardItem(152012593, 3)); // Valor's Heart
 		rewards.get(25).add(new RewardItem(152012590, 3)); // Wind Origin
 		rewards.get(25).add(new RewardItem(161001001, 5)); // Revival Stone
-		rewards.get(25).add(new RewardItem(166000195, 10)); // Epsilon Enchantment Stone
+		rewards.get(25).add(new RewardItem(166020003, 5)); // [Event] Omega Enchantment Stone
 
 		// month 27
 		rewards.get(26).add(new RewardItem(188500014, 1)); // [Motion Card] The Dragon's Set
@@ -208,7 +208,7 @@ public final class VeteranRewardService {
 		rewards.get(28).add(new RewardItem(169600186, 1)); // [Emotion Card] Sing "Good Day"
 		rewards.get(28).add(new RewardItem(166200009, 3)); // Mythic Weapon Tuning Scroll
 		rewards.get(28).add(new RewardItem(166200010, 3)); // Mythic Armor Tuning Scroll
-		rewards.get(28).add(new RewardItem(162000107, 50)); // Saam King's Herb
+		rewards.get(28).add(new RewardItem(162002018, 50)); // [Event] Wormwood Dish
 
 		// month 30
 		rewards.get(29).add(new RewardItem(169610137, 1)); // [Title Card] Aion's Chosen
@@ -218,7 +218,7 @@ public final class VeteranRewardService {
 
 		// month 31
 		rewards.get(30).add(new RewardItem(166030007, 3)); // [Event] Tempering Solution
-		rewards.get(30).add(new RewardItem(166000195, 10)); // Epsilon Enchantment Stone
+		rewards.get(30).add(new RewardItem(166020003, 5)); // [Event] Omega Enchantment Stone
 		rewards.get(30).add(new RewardItem(164002116, 25)); // [Event] Rx: Accelerox
 		rewards.get(30).add(new RewardItem(164002117, 25)); // [Event] Rx: Blitzopan
 		rewards.get(30).add(new RewardItem(164002118, 25)); // [Event] Rx: Castafodin
@@ -232,8 +232,8 @@ public final class VeteranRewardService {
 
 		// month 33
 		rewards.get(32).add(new RewardItem(187060178, 1)); // Aether Glider
-		rewards.get(32).add(new RewardItem(188053295, 1)); // Empyrean Plume Chest
-		rewards.get(32).add(new RewardItem(162000107, 50)); // Saam King's Herb
+		rewards.get(32).add(new RewardItem(166030007, 5)); // [Event] Tempering Solution
+		rewards.get(32).add(new RewardItem(162002018, 50)); // [Event] Wormwood Dish
 		rewards.get(32).add(new RewardItem(161001001, 5)); // Revival Stone
 
 		// month 34
@@ -272,7 +272,7 @@ public final class VeteranRewardService {
 		rewards.get(38).add(new RewardItem(110900695, 1)); // Biker Costume
 		rewards.get(38).add(new RewardItem(166030007, 5)); // [Event] Tempering Solution
 		rewards.get(38).add(new RewardItem(169620072, 3)); // AP Boost Charm II - 30%
-		rewards.get(38).add(new RewardItem(162000107, 50)); // Saam King's Herbs
+		rewards.get(38).add(new RewardItem(162002018, 50)); // [Event] Wormwood Dish
 
 		// month 40
 		rewards.get(39).add(new RewardItem(125045415, 1)); // Biker Hat
@@ -316,7 +316,7 @@ public final class VeteranRewardService {
 		rewards.get(45).add(new RewardItem(170100041, 1)); // Club Speaker Cabinet
 		rewards.get(45).add(new RewardItem(152012586, 2)); // Wind Breath
 		rewards.get(45).add(new RewardItem(152012581, 2)); // Fire Breath
-		rewards.get(45).add(new RewardItem(166000195, 10)); // Epsilon Enchantment Stone
+		rewards.get(45).add(new RewardItem(166020003, 5)); // [Event] Omega Enchantment Stone
 
 		// month 47
 		rewards.get(46).add(new RewardItem(186000242, 15)); // Ceramium Medal
@@ -327,7 +327,7 @@ public final class VeteranRewardService {
 
 		// month 48
 		rewards.get(47).add(new RewardItem(169610158, 1)); // [Title Card] Prestigious Adept
-		rewards.get(47).add(new RewardItem(162000107, 50)); // Saam King's Herbs
+		rewards.get(47).add(new RewardItem(162002018, 50)); // [Event] Wormwood Dish
 		rewards.get(47).add(new RewardItem(166020003, 5)); // [Event] Omega Enchantment Stone
 		rewards.get(47).add(new RewardItem(186000399, 100)); // Honorable Conqueror's Mark
 
@@ -366,7 +366,7 @@ public final class VeteranRewardService {
 
 		// month 54
 		rewards.get(53).add(new RewardItem(169670000, 1)); // Name Change Ticket
-		rewards.get(53).add(new RewardItem(162000107, 50)); // Saam King's Herb
+		rewards.get(53).add(new RewardItem(162002018, 50)); // [Event] Wormwood Dish
 		rewards.get(53).add(new RewardItem(166020003, 5)); // [Event] Omega Enchantment Stone
 		rewards.get(53).add(new RewardItem(164002272, 25)); // [Event] Enduring Greater Raging Wind Scroll
 		rewards.get(53).add(new RewardItem(162000141, 25)); // Sublime Wind Serum
@@ -388,7 +388,7 @@ public final class VeteranRewardService {
 		rewards.get(56).add(new RewardItem(166200009, 3)); // Mythic Weapon Tuning Scroll
 		rewards.get(56).add(new RewardItem(161001001, 5)); // Revival Stone
 		rewards.get(56).add(new RewardItem(166020003, 5)); // [Event] Omega Enchantment Stone
-		rewards.get(56).add(new RewardItem(166000195, 10)); // Epsilon Enchantment Stone
+		rewards.get(56).add(new RewardItem(166100023, 1000)); // [Stamp] High Grade Enchanting Supplement (Mythic)
 
 		// month 58
 		rewards.get(57).add(new RewardItem(190010001, 1)); // Potbelly Inquin Egg
@@ -399,13 +399,13 @@ public final class VeteranRewardService {
 
 		// month 59
 		rewards.get(58).add(new RewardItem(166200010, 3)); // Mythic Armor Tuning Scroll
-		rewards.get(58).add(new RewardItem(166000195, 15)); // Epsilon Enchantment Stone
+		rewards.get(58).add(new RewardItem(166020003, 5)); // [Event] Omega Enchantment Stone
 		rewards.get(58).add(new RewardItem(188052719, 5)); // [Event] Dye Bundle
 		rewards.get(58).add(new RewardItem(166030007, 5)); // [Event] Tempering Solution
 
 		// month 60
 		rewards.get(59).add(new RewardItem(188053996, 1)); // Emperor Trillirunerk's Feather Box
-		rewards.get(59).add(new RewardItem(162000107, 50)); // Saam King's Herb
+		rewards.get(59).add(new RewardItem(162002018, 50)); // [Event] Wormwood Dish
 		rewards.get(59).add(new RewardItem(186000399, 125)); // Honorable Conqueror's Mark
 		rewards.get(59).add(new RewardItem(166150027, 2)); // [Stamp] Greater Felicitous Socketing (Mythic)
 

@@ -144,7 +144,7 @@
 			<gd_item id="188053717" /><!-- Volatile Rift Victory Loot Bundle -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Volatile Bundle" chance="100" member_limit="6">
+	<gd_rule rule_name="Named Volatile Bundle" chance="100" member_limit="3">
 		<gd_npcs>
 			<gd_npc npc_id="235830" /><!-- Mutated Gatorback Skilex -->
 			<gd_npc npc_id="235832" /><!-- Aggressive Coral Corask  -->

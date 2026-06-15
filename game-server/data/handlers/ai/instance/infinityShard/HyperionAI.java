@@ -99,7 +99,7 @@ public class HyperionAI extends AggressiveNpcAI implements HpPhases.PhaseHandler
 			case 45, 30, 17 -> spawnAncientTyrhund(4);
 			case 65, 50, 25, 20 -> {
 				stage++;
-				getOwner().queueSkill(21253, 56);
+				getOwner().queueSkill(21253, 56, 0);
 				getOwner().queueSkill(21244, 56, 5000);
 			}
 			case 40 -> spawnSummons(++stage);
@@ -215,8 +215,8 @@ public class HyperionAI extends AggressiveNpcAI implements HpPhases.PhaseHandler
 	}
 
 	private void queuePowerfulEnergyBlast() {
-		getOwner().queueSkill(21241, 56);
-		getOwner().queueSkill(21241, 56);
+		getOwner().queueSkill(21241, 56, 0);
+		getOwner().queueSkill(21241, 56, 0);
 		getOwner().queueSkill(21241, 56, 8000);
 	}
 

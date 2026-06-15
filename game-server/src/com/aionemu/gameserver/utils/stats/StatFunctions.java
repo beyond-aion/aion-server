@@ -17,15 +17,14 @@ import com.aionemu.gameserver.model.gameobjects.player.Equipment;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.Rates;
 import com.aionemu.gameserver.model.siege.Influence;
-import com.aionemu.gameserver.model.stats.calc.AdditionStat;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.model.stats.calc.StatCapUtil;
-import com.aionemu.gameserver.model.stats.container.CreatureGameStats;
-import com.aionemu.gameserver.model.stats.container.PlayerGameStats;
-import com.aionemu.gameserver.model.stats.container.StatEnum;
+import com.aionemu.gameserver.model.stats.container.*;
 import com.aionemu.gameserver.model.templates.item.WeaponStats;
 import com.aionemu.gameserver.model.templates.item.enums.ItemSubType;
 import com.aionemu.gameserver.model.templates.npc.NpcRating;
+import com.aionemu.gameserver.skillengine.effect.EffectTemplate;
+import com.aionemu.gameserver.skillengine.effect.NoReduceSpellATKInstantEffect;
 import com.aionemu.gameserver.skillengine.model.HitType;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
@@ -51,7 +50,7 @@ public class StatFunctions {
 	public static long calculateExperienceReward(int maxLevelInRange, Npc target) {
 		WorldMapInstance instance = target.getPosition().getWorldMapInstance();
 		int baseXP = calculateBaseExp(target);
-		float mapMulti = instance.getInstanceHandler().getInstanceExpMultiplier(); // map modifier to approach retail exp values
+		float mapMulti = instance.getInstanceHandler().getExpMultiplier(); // map modifier to approach retail exp values
 		if (instance.getParent().isInstanceType() && instance.getMaxPlayers() >= 2 && instance.getMaxPlayers() <= 6) {
 			mapMulti *= instance.getMaxPlayers(); // on retail you get mob EP * max instance member count (only for group instances)
 			mapMulti /= RatesConfig.XP_SOLO_RATES[0]; // custom: divide by regular xp rates, so they will not affect the rewarded XP
@@ -65,7 +64,7 @@ public class StatFunctions {
 	 * @return Experience value identical to the ones seen on aion databases (but seen retail exp rewards are always higher)
 	 */
 	private static int calculateBaseExp(Npc npc) {
-		int maxHp = npc.getObjectTemplate().getStatsTemplate().getMaxHp();
+		int maxHp = npc.getGameStats().getMaxHp().getCurrent();
 		if (maxHp <= 0)
 			return 0;
 		float multiplier;
@@ -105,7 +104,7 @@ public class StatFunctions {
 		// http://www.aionsource.com/forum/mechanic-analysis/42597-character-stats-xp-dp-origin-gerbator-team-july-2009-a.html
 		int baseDP = targetLevel * calculateRatingMultiplier(npcRating);
 		int xpPercentage = XPRewardEnum.xpRewardFrom(targetLevel - playerLevel);
-		return (int) Rates.DP_PVE.calcResult(player, (int) Math.floor(baseDP * xpPercentage / 100f));
+		return Rates.DP_PVE.calcResult(player, (int) Math.floor(baseDP * xpPercentage / 100f));
 	}
 
 	/**
@@ -121,7 +120,7 @@ public class StatFunctions {
 		if (target.getName().equals("flame hoverstone"))
 			apNpcRate = 0.5f;
 
-		return (int) Rates.AP_PVE.calcResult(player, (int) Math.floor(15 * apNpcRate));
+		return Rates.AP_PVE.calcResult(player, (int) Math.floor(15 * apNpcRate));
 	}
 
 	/**
@@ -140,7 +139,7 @@ public class StatFunctions {
 		else if (difference == 3)
 			pointsLost = Math.round(pointsLost * 0.85f);
 
-		return (int) Rates.AP_PVP_LOST.calcResult(defeated, pointsLost);
+		return Rates.AP_PVP_LOST.calcResult(defeated, pointsLost);
 	}
 
 	/**
@@ -264,11 +263,11 @@ public class StatFunctions {
 	}
 
 	/**
-	 * Hate based on BOOST_HATE stat Now used only from skills, probably need to use for regular attack
+	 * Applies BOOST_HATE modifiers from equipment and buffs
 	 */
 	public static int calculateHate(Creature creature, int value) {
-		Stat2 stat = new AdditionStat(StatEnum.BOOST_HATE, value, creature, 0.1f);
-		return creature.getGameStats().getStat(StatEnum.BOOST_HATE, stat).getCurrent();
+		int boostHate = creature.getGameStats().getStat(StatEnum.BOOST_HATE, 100).getCurrent();
+		return (int) ((long) value * (1000 + boostHate) / 1000);
 	}
 
 	public static List<AttackResult> calculateAttackDamage(Creature attacker,
@@ -335,39 +334,76 @@ public class StatFunctions {
 	}
 
 	/**
-	 * elemental resistance, 145 = 10% magical damage reduction (cap at +-1150)
-	 * @return damage reduced by elemental resistance
+	 * Applies elemental defense to incoming damage.
+	 *
+	 * <p>Elemental defense reduces damage linearly using a normalized scale (denominator) that depends on target type and level.</p>
+	 *
+	 * <ul>
+	 *   <li><b>Players:</b> defense is normalized against a level-scaled denominator (base {@code 1300}, increasing by {@code +10} per level above
+	 *   {@code 50}, using {@code min(attackerLevel, defenderLevel)}).</li>
+	 *   <li><b>NPCs and other creatures:</b> defense is normalized against a fixed denominator of {@code 1300}.</li>
+	 * </ul>
+	 *
+	 * <p>Damage reduction formula:</p>
+	 * <pre>
+	 *   finalDamage = damage * (1 - effectiveDefense / denominator)
+	 * </pre>
+	 *
+	 * <p>Example (player(63) vs player(65), or npc(65) vs player(63)):</p>
+	 * <ul>
+	 *   <li>Effective level = {@code min(63, 65) = 63}</li>
+	 *   <li>Denominator = {@code 1300 + (63 - 50) * 10 = 1430}</li>
+	 *   <li>{@code 143} elemental defense reduces damage by {@code 10%}</li>
+	 * </ul>
+	 * <p>The defense value is clamped to its valid stat caps after applying movement and situational modifiers.</p>
+	 *
+	 * @param effector the attacking creature
+	 * @param attacked the target receiving damage
+	 * @param element the elemental type of the damage
+	 * @param damage base damage before elemental defense
+	 * @return damage reduced by elemental defense
 	 */
-	private static float reduceDamageByElementalResistance(Creature attacked, SkillElement element, float damage) {
-		return damage * (1 - getMovementModifier(attacked, SkillElement.getResistanceForElement(element), attacked.getGameStats().getMagicalDefenseFor(element))/ 1450f);
+	private static float reduceDamageByElementalDefense(Creature effector, Creature attacked, SkillElement element, float damage) {
+		float elementalDenominator = getElementalDefenseDenominator(effector, attacked);
+		int rawDefense = attacked.getGameStats().getElementalDefenseFor(element);
+		int adjustedDefense = (int) adjustStatByMovementModifier(attacked, element.getStatForElement(), rawDefense);
+		adjustedDefense = StatCapUtil.clampStatValue(element.getStatForElement(), attacked, adjustedDefense);
+		return damage * (1f - adjustedDefense / elementalDenominator);
 	}
 
+	private static int getElementalDefenseDenominator(Creature effector, Creature attacked) {
+		if (attacked instanceof Player) {
+			int level = Math.min(effector.getLevel(), attacked.getLevel());
+			return StatCapUtil.getElementalDefenseBaseValue() + Math.max(0, level - 50) * 10;
+		}
+		return StatCapUtil.getElementalDefenseBaseValue();
+	}
 
-	public static float calculateMagicalSkillDamage(Creature speller, Creature target, float baseDamage, int bonus, SkillElement element,
+	public static float calculateMagicalSkillDamage(Creature effector, Creature target, float baseDamage, int bonus, EffectTemplate template,
 													boolean useMagicBoost, boolean useKnowledge) {
-		CreatureGameStats<?> sgs = speller.getGameStats();
-		CreatureGameStats<?> tgs = target.getGameStats();
+		float damage = baseDamage;
+		if (!(template instanceof NoReduceSpellATKInstantEffect)) {
+			CreatureGameStats<?> sgs = effector.getGameStats();
+			CreatureGameStats<?> tgs = target.getGameStats();
+			float magicBoost = useMagicBoost ? sgs.getMBoost().getCurrent() : 0;
+			magicBoost -= effector instanceof Trap ? 0 : tgs.getMBResist().getCurrent();
+			magicBoost = (int) Math.max(0, limit(StatEnum.BOOST_MAGICAL_SKILL, magicBoost));
+			float knowledge = useKnowledge ? sgs.getKnowledge().getCurrent() : 100; // this line might be wrong now
+			damage *= (1 + (magicBoost / (knowledge * 10)));
+			damage = sgs.getStat(StatEnum.BOOST_SPELL_ATTACK, (int) damage).getCurrent();
+		}
 
-		float magicBoost = useMagicBoost ? sgs.getMBoost().getCurrent() : 0;
-		magicBoost -= speller instanceof Trap ? 0 : tgs.getMBResist().getCurrent();
-
-		magicBoost = (int) Math.max(0, limit(StatEnum.BOOST_MAGICAL_SKILL, magicBoost));
-		float knowledge = useKnowledge ? sgs.getKnowledge().getCurrent() : 100; // this line might be wrong now
-		float damage = baseDamage * (1 + (magicBoost / (knowledge * 10)));
-
-
-		damage = sgs.getStat(StatEnum.BOOST_SPELL_ATTACK, (int) damage).getCurrent();
 		// add bonus damage
 		damage += bonus;
-		if (element != SkillElement.NONE) {
-			damage = reduceDamageByElementalResistance(target, element, damage);
+		if (template.getElement() != SkillElement.NONE && !(template instanceof NoReduceSpellATKInstantEffect)) {
+			damage = reduceDamageByElementalDefense(effector, target, template.getElement(), damage);
 			// damage is reduced by 100 per 1000 mdef
-			damage -= target.getGameStats().getMDef().getCurrent()/10f;
+			damage -= adjustStatByMovementModifier(target, StatEnum.MAGICAL_DEFEND, target.getGameStats().getMDef().getCurrent()) / 10f;
 		}
 
 		if (damage < 0) {
 			damage = 0;
-		} else if (speller instanceof Npc && !(speller instanceof SummonedObject<?>)) {
+		} else if (effector instanceof Npc && !(effector instanceof SummonedObject<?>)) {
 			int rnd = (int) (damage * 0.08f);
 			damage += Rnd.get(-rnd, rnd);
 		}
@@ -432,47 +468,54 @@ public class StatFunctions {
 	 */
 	public static float adjustDamageByPvpOrPveModifiers(Creature attacker, Creature target, float baseDamage, int pvpDamage, boolean useTemplateDmg,
 		SkillElement element) {
-		float attackBonus = 1;
-		float defenseBonus = 1;
+		int attackBonus = 0;
+		int defenseBonus = 0;
 		float damage = baseDamage;
-		if (attacker.isPvpTarget(target)) {
+		boolean pvpTarget = attacker.isPvpTarget(target);
+		if (pvpTarget) {
 			if (pvpDamage > 0)
 				damage *= pvpDamage * 0.01f;
 			damage *= 0.42f; // PVP modifier 42%, last checked on NA (4.9) 19.03.2016
 			if (!useTemplateDmg) {
+				attackBonus = attacker.getGameStats().getStat(StatEnum.PVP_ATTACK_RATIO, 0).getCurrent();
+				defenseBonus = target.getGameStats().getStat(StatEnum.PVP_DEFEND_RATIO, 0).getCurrent();
 				if (attacker.getRace() != target.getRace() && !attacker.isInInstance())
-					damage *= Influence.getInstance().getPvpRaceBonus(attacker.getRace());
-
-				attackBonus = attacker.getGameStats().getStat(StatEnum.PVP_ATTACK_RATIO, 0).getCurrent() * 0.001f;
-				defenseBonus = target.getGameStats().getStat(StatEnum.PVP_DEFEND_RATIO, 0).getCurrent() * 0.001f;
+					attackBonus += Influence.getInstance().getPvpRaceBonusRatio(attacker.getRace());
 				switch (element) {
 					case NONE:
-						attackBonus += attacker.getGameStats().getStat(StatEnum.PVP_ATTACK_RATIO_PHYSICAL, 0).getCurrent() * 0.001f;
-						defenseBonus += target.getGameStats().getStat(StatEnum.PVP_DEFEND_RATIO_PHYSICAL, 0).getCurrent() * 0.001f;
+						attackBonus += attacker.getGameStats().getStat(StatEnum.PVP_ATTACK_RATIO_PHYSICAL, 0).getCurrent();
+						defenseBonus += target.getGameStats().getStat(StatEnum.PVP_DEFEND_RATIO_PHYSICAL, 0).getCurrent();
 						break;
 					default:
-						attackBonus += attacker.getGameStats().getStat(StatEnum.PVP_ATTACK_RATIO_MAGICAL, 0).getCurrent() * 0.001f;
-						defenseBonus += target.getGameStats().getStat(StatEnum.PVP_DEFEND_RATIO_MAGICAL, 0).getCurrent() * 0.001f;
+						attackBonus += attacker.getGameStats().getStat(StatEnum.PVP_ATTACK_RATIO_MAGICAL, 0).getCurrent();
+						defenseBonus += target.getGameStats().getStat(StatEnum.PVP_DEFEND_RATIO_MAGICAL, 0).getCurrent();
 				}
 			}
 		} else if (!useTemplateDmg) {
-			if (attacker instanceof Player) {
-				int levelDiff = target.getLevel() - attacker.getLevel(); // npcs dmg is not reduced because of the level difference GF (4.9) 23.04.2016
-				damage *= (1f - getNpcLevelDiffMod(levelDiff, 0));
+			if (attacker instanceof Player) { // npcs dmg is not reduced because of the level difference GF (4.9) 23.04.2016
+				damage *= 1f - getNpcLevelDiffMod(target, attacker);
 			}
-			attackBonus = attacker.getGameStats().getStat(StatEnum.PVE_ATTACK_RATIO, 0).getCurrent() * 0.001f;
-			defenseBonus = target.getGameStats().getStat(StatEnum.PVE_DEFEND_RATIO, 0).getCurrent() * 0.001f;
+			attackBonus = attacker.getGameStats().getStat(StatEnum.PVE_ATTACK_RATIO, 0).getCurrent();
+			defenseBonus = target.getGameStats().getStat(StatEnum.PVE_DEFEND_RATIO, 0).getCurrent();
 			switch (element) {
 				case NONE:
-					attackBonus += attacker.getGameStats().getStat(StatEnum.PVE_ATTACK_RATIO_PHYSICAL, 0).getCurrent() * 0.001f;
-					defenseBonus += target.getGameStats().getStat(StatEnum.PVE_DEFEND_RATIO_PHYSICAL, 0).getCurrent() * 0.001f;
+					attackBonus += attacker.getGameStats().getStat(StatEnum.PVE_ATTACK_RATIO_PHYSICAL, 0).getCurrent();
+					defenseBonus += target.getGameStats().getStat(StatEnum.PVE_DEFEND_RATIO_PHYSICAL, 0).getCurrent();
 					break;
 				default:
-					attackBonus += attacker.getGameStats().getStat(StatEnum.PVE_ATTACK_RATIO_MAGICAL, 0).getCurrent() * 0.001f;
-					defenseBonus += target.getGameStats().getStat(StatEnum.PVE_DEFEND_RATIO_MAGICAL, 0).getCurrent() * 0.001f;
+					attackBonus += attacker.getGameStats().getStat(StatEnum.PVE_ATTACK_RATIO_MAGICAL, 0).getCurrent();
+					defenseBonus += target.getGameStats().getStat(StatEnum.PVE_DEFEND_RATIO_MAGICAL, 0).getCurrent();
 			}
 		}
-		return damage + (damage * attackBonus) - (damage * defenseBonus);
+		CombatMode mode = pvpTarget ? CombatMode.PVP : CombatMode.PVE;
+		// PvP/PvE ratio caps are applied after aggregation (retail behavior)
+		attackBonus = StatCapUtil.limitValueForPvpOrPveStat(mode, RatioType.ATTACK, attackBonus);
+		defenseBonus = StatCapUtil.limitValueForPvpOrPveStat(mode, RatioType.DEFENSE, defenseBonus);
+		float multiplier = 1f + (attackBonus - defenseBonus) / 1000f;
+		// Retail behavior: damage multiplier has a minimum cap of 10% (0.1f)
+		multiplier = Math.max(multiplier, 0.1f);
+
+		return damage * multiplier;
 	}
 
 	/**
@@ -488,14 +531,13 @@ public class StatFunctions {
 
 		float accuracy = attacker.getGameStats().getMainHandPAccuracy().getCurrent() + accMod;
 		float dodge = attacked.getGameStats().getEvasion().getBonus()
-			+ getMovementModifier(attacked, StatEnum.EVASION, attacked.getGameStats().getEvasion().getBase());
+			+ adjustStatByMovementModifier(attacked, StatEnum.EVASION, attacked.getGameStats().getEvasion().getBase());
 		float dodgeRate = dodge - accuracy;
 		if (attacked instanceof Npc npc) {
 			// static npcs never dodge
 			if (npc.hasStatic())
 				return false;
-			int levelDiff = attacked.getLevel() - attacker.getLevel();
-			dodgeRate *= 1 + getNpcLevelDiffMod(levelDiff, 0);
+			dodgeRate *= 1 + getNpcLevelDiffMod(attacked, attacker);
 		}
 		return Rnd.nextInt(1000) < limit(StatEnum.EVASION, dodgeRate);
 	}
@@ -510,7 +552,7 @@ public class StatFunctions {
 
 		float accuracy = attacker.getGameStats().getMainHandPAccuracy().getCurrent() + accMod;
 		float parry = attacked.getGameStats().getParry().getBonus()
-			+ getMovementModifier(attacked, StatEnum.PARRY, attacked.getGameStats().getParry().getBase());
+			+ adjustStatByMovementModifier(attacked, StatEnum.PARRY, attacked.getGameStats().getParry().getBase());
 		return Rnd.nextInt(1000) < limit(StatEnum.PARRY, parry - accuracy);
 	}
 
@@ -525,7 +567,7 @@ public class StatFunctions {
 		float accuracy = attacker.getGameStats().getMainHandPAccuracy().getCurrent() + accMod;
 
 		float block = attacked.getGameStats().getBlock().getBonus()
-			+ getMovementModifier(attacked, StatEnum.BLOCK, attacked.getGameStats().getBlock().getBase());
+			+ adjustStatByMovementModifier(attacked, StatEnum.BLOCK, attacked.getGameStats().getBlock().getBase());
 		return Rnd.nextInt(1000) < limit(StatEnum.BLOCK, block - accuracy);
 	}
 
@@ -591,104 +633,56 @@ public class StatFunctions {
 		return fallDamage;
 	}
 
-	public static float getMovementModifier(Creature creature, StatEnum stat, float value) {
-		if (!(creature instanceof Player) || stat == null)
+	public static float adjustStatByMovementModifier(Creature creature, StatEnum stat, float value) {
+		if (!(creature instanceof Player player) || stat == null)
 			return value;
 
-		Player player = (Player) creature;
-		int h = player.getMoveController().getMovementHeading();
-		if (h < 0)
-			return value;
-		// 7 0 1
-		// \ | /
-		// 6- -2
-		// / | \
-		// 5 4 3
-		switch (h) {
-			case 7:
-			case 0:
-			case 1:
+		// https://web.archive.org/web/20170429204823/gameguide.na.aiononline.com/aion/Combat
+		switch (player.getMoveController().getMovementDirection()) {
+			case FORWARD:
 				switch (stat) {
-					case WATER_RESISTANCE:
-					case WIND_RESISTANCE:
-					case FIRE_RESISTANCE:
-					case EARTH_RESISTANCE:
-					case ELEMENTAL_RESISTANCE_DARK:
-					case ELEMENTAL_RESISTANCE_LIGHT:
-					case PHYSICAL_DEFENSE:
-						return value * 0.8f;
+					case PHYSICAL_ATTACK:
+					case MAGICAL_ATTACK:
+						return value * 1.1f; // verified on 4.6 PTS
+					case FIRE_RESISTANCE, EARTH_RESISTANCE, WATER_RESISTANCE, WIND_RESISTANCE, LIGHT_RESISTANCE, DARK_RESISTANCE:
+						return value - 50; // verified on 4.6 PTS
+					case MAGICAL_DEFEND, PHYSICAL_DEFENSE:
+						return value * 0.8f; // verified on 4.6 PTS
 				}
 				break;
-			case 6:
-			case 2:
+			case SIDEWAYS:
 				switch (stat) {
+					case PHYSICAL_ATTACK:
+					case MAGICAL_ATTACK:
+					case SPEED:
+						return value * 0.8f; // verified on 4.6 PTS
 					case EVASION:
 						return value + 300;
-					case SPEED:
-						return value * 0.8f;
 				}
 				break;
-			case 5:
-			case 4:
-			case 3:
+			case BACKWARD:
 				switch (stat) {
+					case PHYSICAL_ATTACK:
+					case MAGICAL_ATTACK:
+						return value * 0.8f; // verified on 4.6 PTS
+					case SPEED:
+						return value * 0.6f; // verified on 4.6 PTS
 					case PARRY:
 					case BLOCK:
 						return value + 500;
-					case SPEED:
-						return value * 0.6f;
 				}
 				break;
 		}
 		return value;
 	}
 
-	public static float adjustDamageByMovementModifier(Creature creature, float value) {
-		if (!(creature instanceof Player))
-			return value;
-		int h = ((Player) creature).getMoveController().getMovementHeading();
-		if (h < 0)
-			return value;
-		switch (h) {
-			case 7:
-			case 0:
-			case 1:
-				value *= 1.1f;
-				break;
-			case 6:
-			case 2:
-				value *= 0.8f; // correct? it's only 30% according to https://web.archive.org/web/20170429204823/gameguide.na.aiononline.com/aion/Combat
-				break;
-			case 5:
-			case 4:
-			case 3:
-				value *= 0.8f; // correct? it's only 30% according to https://web.archive.org/web/20170429204823/gameguide.na.aiononline.com/aion/Combat
-				break;
-		}
-		return value;
-	}
-
-	private static float getNpcLevelDiffMod(int levelDiff, int base) {
-		switch (levelDiff) {
-			case 3:
-				return 0.1f;
-			case 4:
-				return 0.2f;
-			case 5:
-				return 0.3f;
-			case 6:
-				return 0.4f;
-			case 7:
-				return 0.5f;
-			case 8:
-				return 0.6f;
-			case 9:
-				return 0.7f;
-			default:
-				if (levelDiff > 9)
-					return 0.8f;
-		}
-		return base;
+	private static float getNpcLevelDiffMod(Creature target, Creature attacker) {
+		int levelDiff = target.getLevel() - attacker.getLevel();
+		if (levelDiff <= 2)
+			return 0f;
+		if (levelDiff >= 12)
+			return 1f;
+		return (levelDiff - 2) * 0.1f;
 	}
 
 	/**

@@ -9,10 +9,10 @@ import com.aionemu.commons.configuration.TransformationTypeInfo;
  */
 public class TimeZoneTransformer extends PropertyTransformer<TimeZone> {
 
-	/**
-	 * Shared instance of this transformer, it's thread safe so no need to create multiple instances
-	 */
-	public static final TimeZoneTransformer SHARED_INSTANCE = new TimeZoneTransformer();
+	@Override
+	public boolean matches(Class<?> targetType) {
+		return TimeZone.class.isAssignableFrom(targetType);
+	}
 
 	@Override
 	protected TimeZone parseObject(String value, TransformationTypeInfo typeInfo) {

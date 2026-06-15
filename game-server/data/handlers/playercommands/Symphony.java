@@ -16,70 +16,72 @@ import com.aionemu.gameserver.utils.chathandlers.PlayerCommand;
  */
 public class Symphony extends PlayerCommand {
 
-    private static final Logger log = LoggerFactory.getLogger(Symphony.class);
-    private static final int requiredItem = 182007170;
-    private static final int[][] rewards = {
-            // COLLECTION_COUNT, REWARD_ID, REWARD_COUNT
-            { 3, 186000236, 10 }, // Blood Mark
-            { 5, 186000399, 10 }, // Honorable Conqueror's Mark
-            { 15, 166000195, 5 }, // Epsilon Enchantment Stone
-            { 30, 186000055, 5 }, // Major Ancient Goblet
-            { 50, 188053610, 3 }, // [Event] Level 70 Composite Manastone Bundle
-            { 60, 188053295, 1 }, // Empyrean Plume Chest
-            { 75, 188053903, 1 }, // Honorable Equipment of Conquest Box
-            { 80, 166020000, 10 }, // Omega Enchantment Stone
-            { 80, 166500002, 10 }, // Amplification Stone
-            { 80, 166030005, 10 }, // Tempering Solution
-            { 100, 188950015, 2 }, // Special Courier Pass (Eternal/Lv. 61-65)
-            { 250, 187000090, 1 }, // Tiamat's Spectral Wings
-            { 300, 188054238, 1 }, // Iron Wall Armor Box
-    };
+	private static final Logger log = LoggerFactory.getLogger(Symphony.class);
+	private static final int REQUIRED_ITEM_ID = 182007170;
+	private static final int[][] REWARDS = {
+		// COLLECTION_COUNT, REWARD_ID, REWARD_COUNT
+		{ 3, 186000236, 10 }, // Blood Mark
+		{ 5, 186000399, 10 }, // Honorable Conqueror's Mark
+		{ 15, 166000195, 5 }, // Epsilon Enchantment Stone
+		{ 40, 188052388, 1 }, // Modor's Equipment Box
+		{ 50, 188053695, 2 }, // High Grade Crafting Material Box of Conquest
+		{ 50, 188053610, 3 }, // [Event] Level 70 Composite Manastone Bundle
+		{ 60, 188053321, 1 }, // [Event] Empyrean Plume Chest
+		{ 65, 188053903, 1 }, // Honorable Equipment of Conquest Box
+		{ 70, 166020003, 10 }, // [Event] Omega Enchantment Stone
+		{ 70, 166500005, 10 }, // [Event] Amplification Stone
+		{ 70, 166030007, 10 }, // [Event] Tempering Solution
+		{ 100, 188950015, 2 }, // Special Courier Pass (Eternal/Lv. 61-65)
+		{ 150, 188053099, 1 }, // Pure Modor's Equipment Crux Box
+		{ 200, 188054238, 1 }, // Iron Wall Armor Box
+		{ 250, 187000090, 1 }, // Tiamat's Spectral Wings
 
-    public Symphony() {
-        super("symphony", "Exchanges " + ChatUtil.item(requiredItem) + " for prizes.");
+	};
 
-        setSyntaxInfo("Type .symphony <id> to get your reward:",
-                "[1] - (" + rewards[0][0] + " copies): " + rewards[0][2] + "x " + ChatUtil.item(rewards[0][1]),
-                "[2] - (" + rewards[1][0] + " copies): " + rewards[1][2] + "x " + ChatUtil.item(rewards[1][1]),
-                "[3] - (" + rewards[2][0] + " copies): " + rewards[2][2] + "x " + ChatUtil.item(rewards[2][1]),
-                "[4] - (" + rewards[3][0] + " copies): " + rewards[3][2] + "x " + ChatUtil.item(rewards[3][1]),
-                "[5] - (" + rewards[4][0] + " copies): " + rewards[4][2] + "x " + ChatUtil.item(rewards[4][1]),
-                "[6] - (" + rewards[5][0] + " copies): " + rewards[5][2] + "x " + ChatUtil.item(rewards[5][1]),
-                "[7] - (" + rewards[6][0] + " copies): " + rewards[6][2] + "x " + ChatUtil.item(rewards[6][1]),
-                "[8] - (" + rewards[7][0] + " copies): " + rewards[7][2] + "x " + ChatUtil.item(rewards[7][1]),
-                "[9] - (" + rewards[8][0] + " copies): " + rewards[8][2] + "x " + ChatUtil.item(rewards[8][1]),
-                "[10] - (" + rewards[9][0] + " copies): " + rewards[9][2] + "x " + ChatUtil.item(rewards[9][1]),
-                "[11] - (" + rewards[10][0] + " copies): " + rewards[10][2] + "x " + ChatUtil.item(rewards[10][1]),
-                "[12] - (" + rewards[11][0] + " copies): " + rewards[11][2] + "x " + ChatUtil.item(rewards[11][1]),
-                "[13] - (" + rewards[12][0] + " copies): " + rewards[12][2] + "x " + ChatUtil.item(rewards[12][1]));
-    }
+	public Symphony() {
+		super("symphony", "Exchanges " + ChatUtil.item(REQUIRED_ITEM_ID) + " for prizes.");
 
-    @Override
-    public void execute(Player player, String... params) {
-        if (params.length == 0) {
-            sendInfo(player);
-            return;
-        }
+		setSyntaxInfo(buildSyntaxInfo());
+	}
 
-        try {
-            int rewardIndex = Integer.parseInt(params[0]) - 1;
-            if (rewardIndex < 0 || rewardIndex >= rewards.length)
-                throw new IllegalArgumentException();
+	@Override
+	public void execute(Player player, String... params) {
+		if (params.length == 0) {
+			sendInfo(player);
+			return;
+		}
 
-            int cost = rewards[rewardIndex][0];
-            if (player.getInventory().getItemCountByItemId(requiredItem) < cost || !player.getInventory().decreaseByItemId(requiredItem, cost))
-                throw new IllegalArgumentException("You need " + cost + " " + ChatUtil.item(requiredItem) + " for this.");
+		try {
+			int rewardIndex = Integer.parseInt(params[0]) - 1;
+			if (rewardIndex < 0 || rewardIndex >= REWARDS.length)
+				throw new IllegalArgumentException();
 
-            int itemId = rewards[rewardIndex][1];
-            int itemCount = rewards[rewardIndex][2];
+			int cost = REWARDS[rewardIndex][0];
+			if (player.getInventory().getItemCountByItemId(REQUIRED_ITEM_ID) < cost || !player.getInventory().decreaseByItemId(REQUIRED_ITEM_ID, cost))
+				throw new IllegalArgumentException("You need %d %s to buy this.".formatted(cost, ChatUtil.item(REQUIRED_ITEM_ID)));
 
-            long notAddedCount = ItemService.addItem(player, itemId, itemCount, true,
-                    new ItemUpdatePredicate(ItemAddType.DECOMPOSABLE, ItemUpdateType.INC_CASH_ITEM));
-            if (notAddedCount > 0) {
-                log.warn("[Legendary Symphony Event] " + notAddedCount + "x " + itemId + " could not be added to " + player.getName() + "'s inventory.");
-            }
-        } catch (IllegalArgumentException e) {
-            sendInfo(player, e instanceof NumberFormatException ? "Invalid prize." : e.getMessage());
-        }
-    }
+			int itemId = REWARDS[rewardIndex][1];
+			int itemCount = REWARDS[rewardIndex][2];
+
+			long notAddedCount = ItemService.addItem(player, itemId, itemCount, true,
+				new ItemUpdatePredicate(ItemAddType.DECOMPOSABLE, ItemUpdateType.INC_CASH_ITEM));
+			if (notAddedCount > 0) {
+				log.warn("[Legendary Symphony Event] {}x {} could not be added to {}'s inventory.", notAddedCount, itemId, player.getName());
+			}
+		} catch (IllegalArgumentException e) {
+			sendInfo(player, e instanceof NumberFormatException ? "Invalid prize." : e.getMessage());
+		}
+	}
+
+	private String buildSyntaxInfo() {
+		StringBuilder sb = new StringBuilder("Type .symphony <id> to get your reward:\n");
+
+		for (int i = 0; i < REWARDS.length; i++) {
+			int[] reward = REWARDS[i];
+			sb.append("[").append(i + 1).append("] - (").append(reward[0]).append(" copies): ").append(reward[2]).append("x ")
+				.append(ChatUtil.item(reward[1])).append("\n");
+		}
+
+		return sb.toString();
+	}
 }

@@ -2,8 +2,8 @@ package ai.instance.dragonLordsRefuge;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 
 /**
@@ -31,7 +31,7 @@ public class HM_CalindiFlamelordAI extends CalindiFlamelordAI {
 				rndSpawn(856298);
 				break;
 			case 21888:
-				Player target = getRandomTarget();
+				Creature target = getRandomTarget();
 				if (target != null)
 					spawn(856299, target.getX(), target.getY(), target.getZ(), (byte) 0);
 		}

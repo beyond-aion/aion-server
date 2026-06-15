@@ -6,9 +6,9 @@ import com.aionemu.gameserver.services.summons.TrapService;
 public class TrapController extends NpcController {
 
 	@Override
-	public void onDie(Creature lastAttacker, boolean sendDiePacket) {
+	public void onDie(Creature lastAttacker) {
 		TrapService.unregisterTrap(getOwner().getObjectId());
-		super.onDie(lastAttacker, sendDiePacket);
+		super.onDie(lastAttacker);
 	}
 
 	@Override

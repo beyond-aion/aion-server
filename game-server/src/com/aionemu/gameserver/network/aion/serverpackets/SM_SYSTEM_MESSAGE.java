@@ -19892,15 +19892,15 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * %1 of %0 has killed Marchutan's Agent Mastarius.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_FIELDABYSS_DARKBOSS_KILLED(String playerName, String legionName) {
-		return new SM_SYSTEM_MESSAGE(1400323, legionName, playerName);
+	public static SM_SYSTEM_MESSAGE STR_FIELDABYSS_DARKBOSS_KILLED(String playerName, String faction) {
+		return new SM_SYSTEM_MESSAGE(1400323, faction, playerName);
 	}
 
 	/**
 	 * %1 of %0 has killed Kaisinel's Agent Veille.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_FIELDABYSS_LIGHTBOSS_KILLED(String playerName, String legionName) {
-		return new SM_SYSTEM_MESSAGE(1400324, legionName, playerName);
+	public static SM_SYSTEM_MESSAGE STR_FIELDABYSS_LIGHTBOSS_KILLED(String playerName, String faction) {
+		return new SM_SYSTEM_MESSAGE(1400324, faction, playerName);
 	}
 
 	/**
@@ -25270,6 +25270,13 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
+	 * The cabinet is full.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_HOUSING_WAREHOUSE_TOO_MANY_ITEMS_WAREHOUSE() {
+		return new SM_SYSTEM_MESSAGE(1401239);
+	}
+
+	/**
 	 * Only house owners and their friends may enter.
 	 */
 	public static SM_SYSTEM_MESSAGE STR_HOUSING_TELEPORT_CANT_USE() {
@@ -26217,6 +26224,20 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	 */
 	public static SM_SYSTEM_MESSAGE STR_MSG_ENCHANT_ITEM_SUCCEED_NEW(String value0, int num1) {
 		return new SM_SYSTEM_MESSAGE(1401681, value0, num1);
+	}
+
+	/**
+	 * By using %0, you have lost %num1 XP, but received %2.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_EXP_EXTRACTION_USE(String extractionItem, long exp, String rewardItem) {
+		return new SM_SYSTEM_MESSAGE(1401705, extractionItem, exp, rewardItem);
+	}
+
+	/**
+	 * You need more XP to use this item.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_EXP_EXTRACTION_USE_NOT_ENOUGH_EXP() {
+		return new SM_SYSTEM_MESSAGE(1401706);
 	}
 
 	/**
@@ -27268,6 +27289,20 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	public static SM_SYSTEM_MESSAGE STR_MSG_ENCHANT_ITEM_SUCCEEDED_20(String playerName, String value1) {
 		return new SM_SYSTEM_MESSAGE(1402285, playerName, value1);
 	}
+	
+	/**
+	 * Only players ranked in the top 100 can enter.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_TELEPOTER_GAB1_USER03() {
+		return new SM_SYSTEM_MESSAGE(1402291);
+	}
+	
+	/**
+	 * Only players level 65 or over can enter.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_TELEPOTER_GAB1_USER04() {
+		return new SM_SYSTEM_MESSAGE(1402364);
+	}
 
 	/**
 	 * Destroyer Kunax has appeared in the Slaying Arena
@@ -27288,6 +27323,13 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	 */
 	public static SM_SYSTEM_MESSAGE STR_MSG_FORTRESS_RE_FIRESPAWN_B() {
 		return new SM_SYSTEM_MESSAGE(1402369);
+	}
+
+	/**
+	 * Only the commander-in-chief can enter.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_TELEPOTER_GAB1_USER05() {
+		return new SM_SYSTEM_MESSAGE(1402370);
 	}
 
 	/**
@@ -27402,6 +27444,13 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	 */
 	public static SM_SYSTEM_MESSAGE STR_MSG_SVS_DIRECT_PORTAL_OPEN_NOTICE() {
 		return new SM_SYSTEM_MESSAGE(1402418);
+	}
+
+	/**
+	 * Only officers 1-star or higher can enter the fortress.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_TELEPOTER_GAB1_USER07() {
+		return new SM_SYSTEM_MESSAGE(1402420);
 	}
 
 	/**
@@ -27825,6 +27874,13 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
+	 * You can only obtain %1% when you have reached Level %0.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_ATTEND_REWARD_INVALID_LEVEL(int level, String name) {
+		return new SM_SYSTEM_MESSAGE(1402573, level, name);
+	}
+
+	/**
 	 * You obtained %1% from the Equipment Blessing for %0.
 	 */
 	public static SM_SYSTEM_MESSAGE STR_ITEM_UPGRADE_MSG_UPGRADE_SUCCESS(String value0, String value1) {
@@ -27916,9 +27972,9 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
-	 * Atreian Passport
+	 * Today's reward is here.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_MSG_NEW_PASSPORT_AVAIBLE() {
+	public static SM_SYSTEM_MESSAGE STR_ATTEND_MSG_ATTEND_REWARD_GET() {
 		return new SM_SYSTEM_MESSAGE(1402601);
 	}
 
@@ -27927,6 +27983,13 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	 */
 	public static SM_SYSTEM_MESSAGE STR_MSG_IDLDF4_Re_01_secret_room_03() {
 		return new SM_SYSTEM_MESSAGE(1402603);
+	}
+
+	/**
+	 * Because the Reward Box was full, the oldest gift (%0%) has been deleted.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_ATTEND_REWARD_REMOVE_EXCESS(String name) {
+		return new SM_SYSTEM_MESSAGE(1402627, name);
 	}
 
 	/**
@@ -28074,6 +28137,13 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	 */
 	public static SM_SYSTEM_MESSAGE STR_MSG_EXCEED_SKILL_ENCHANT(String value0, int num1, String value2) {
 		return new SM_SYSTEM_MESSAGE(1402662, value0, num1, value2);
+	}
+
+	/**
+	 * The price of the entered item exceeds the maximum amount of Kinah.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_LIMITED_VENDOR_CANT_OVER_GOLD() {
+		return new SM_SYSTEM_MESSAGE(1402666);
 	}
 
 	/**

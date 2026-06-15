@@ -1,684 +1,688 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <siege_locations xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="siege_locations.xsd">
-	<siege_location id="0" type="UNDERPASS" world="210050000"/>
-	<siege_location id="0" type="UNDERPASS" world="220070000"/>
-	<siege_location id="0" type="UNDERPASS" world="600100000"/>
-	<siege_location id="3" type="INDUN" world="210020000"/>
-	<siege_location id="3" type="INDUN" world="220020000"/>
-	<siege_location id="4" type="INDUN" world="210040000"/>
-	<siege_location id="5" type="INDUN" world="220040000"/>
-	<siege_location id="6" type="INDUN" world="220050000"/>
-	<siege_location id="6" type="INDUN" world="210060000"/>
-	<siege_location id="8" type="INDUN" world="220020000"/>
-	<siege_location id="7" type="INDUN" world="220050000"/>
-	<siege_location id="8" type="INDUN" world="220020000"/>
-	<siege_location id="8" type="INDUN" world="210020000"/>
-	<siege_location id="8" type="INDUN" world="400010000"/>
-	<siege_location id="9" type="INDUN" world="220040000"/>
-	<siege_location id="9" type="INDUN" world="210040000"/>
-	<siege_location id="9" type="INDUN" world="400010000"/>
-	<siege_location id="18" type="INDUN" world="120010000"/>
-	<siege_location id="18" type="INDUN" world="110010000"/>
-	<siege_location id="25" type="INDUN" world="210040000"/>
-	<siege_location id="26" type="INDUN" world="210050000"/>
-	<siege_location id="26" type="INDUN" world="220070000"/>
-	<siege_location id="27" type="INDUN" world="210050000"/>
-	<siege_location id="27" type="INDUN" world="220070000"/>
-	<siege_location id="28" type="INDUN" world="600010000"/>
-	<siege_location id="29" type="INDUN" world="210050000"/>
-	<siege_location id="29" type="INDUN" world="220070000"/>
-	<siege_location id="45" type="INDUN" world="220040000"/>
-	<siege_location id="45" type="INDUN" world="210040000"/>
-	<siege_location id="46" type="INDUN" world="210030000"/>
-	<siege_location id="46" type="INDUN" world="220030000"/>
-	<siege_location id="49" type="INDUN" world="210070000"/>
-	<siege_location id="49" type="INDUN" world="220080000"/>
-	<siege_location id="50" type="INDUN" world="220080000"/>
-	<siege_location id="50" type="INDUN" world="210070000"/>
-	<siege_location id="54" type="INDUN" world="110070000"/>
-	<siege_location id="54" type="INDUN" world="120080000"/>
-	<siege_location id="57" type="INDUN" world="110070000"/>
-	<siege_location id="57" type="INDUN" world="120080000"/>
-	<siege_location id="61" type="INDUN" world="110070000"/>
-	<siege_location id="61" type="INDUN" world="120080000"/>
-	<siege_location id="62" type="INDUN" world="120080000"/>
-	<siege_location id="62" type="INDUN" world="110070000"/>
-	<siege_location id="68" type="INDUN" world="220070000"/>
-	<siege_location id="68" type="INDUN" world="210050000"/>
-	<siege_location id="69" type="INDUN" world="110070000"/>
-	<siege_location id="69" type="INDUN" world="120080000"/>
-	<siege_location id="70" type="INDUN" world="120080000"/>
-	<siege_location id="70" type="INDUN" world="110070000"/>
-	<siege_location id="74" type="INDUN" world="120080000"/>
-	<siege_location id="74" type="INDUN" world="110070000"/>
-	<siege_location id="75" type="INDUN" world="120010000"/>
-	<siege_location id="75" type="INDUN" world="110010000"/>
-	<siege_location id="77" type="INDUN" world="220080000"/>
-	<siege_location id="77" type="INDUN" world="210070000"/>
-	<siege_location id="80" type="INDUN" world="210070000"/>
-	<siege_location id="80" type="INDUN" world="220080000"/>
-	<siege_location id="81" type="INDUN" world="210070000"/>
-	<siege_location id="81" type="INDUN" world="220080000"/>
-	<siege_location id="83" type="INDUN" world="600090000"/>
-	<siege_location id="84" type="INDUN" world="120080000"/>
-	<siege_location id="84" type="INDUN" world="110070000"/>
-	<siege_location id="86" type="INDUN" world="120080000"/>
-	<siege_location id="86" type="INDUN" world="110070000"/>
-	<siege_location id="88" type="INDUN" world="210070000"/>
-	<siege_location id="88" type="INDUN" world="220080000"/>
-	<siege_location id="91" type="INDUN" world="600010000"/>
-	<siege_location id="94" type="INDUN" world="600100000"/>
-	<siege_location id="97" type="INDUN" world="120080000"/>
-	<siege_location id="97" type="INDUN" world="110070000"/>
-	<siege_location id="99" type="INDUN" world="600090000"/>
-	<siege_location id="103" type="INDUN" world="600100000"/>
-	<siege_location id="104" type="INDUN" world="220080000"/>
-	<siege_location id="104" type="INDUN" world="210070000"/>
-	<siege_location id="116" type="INDUN" world="600100000"/>
-	<siege_location id="121" type="INDUN" world="600100000"/>
-	<siege_location id="131" type="INDUN" world="600090000"/>
-	<siege_location id="132" type="INDUN" world="600100000"/>
-	<siege_location id="134" type="INDUN" world="220080000"/>
-	<siege_location id="134" type="INDUN" world="210070000"/>
-	<siege_location id="135" type="INDUN" world="220080000"/>
-	<siege_location id="135" type="INDUN" world="210070000"/>
-	<siege_location id="137" type="INDUN" world="210070000"/>
-	<siege_location id="137" type="INDUN" world="220080000"/>
-	<siege_location id="138" type="INDUN" world="220080000"/>
-	<siege_location id="138" type="INDUN" world="210070000"/>
-	<siege_location id="140" type="INDUN" world="220080000"/>
-	<siege_location id="140" type="INDUN" world="210070000"/>
+	<siege_location id="0" type="UNDERPASS" world="210050000" />
+	<siege_location id="0" type="UNDERPASS" world="220070000" />
+	<siege_location id="0" type="UNDERPASS" world="600100000" />
+	<siege_location id="3" type="INDUN" world="210020000" />
+	<siege_location id="3" type="INDUN" world="220020000" />
+	<siege_location id="4" type="INDUN" world="210040000" />
+	<siege_location id="5" type="INDUN" world="220040000" />
+	<siege_location id="6" type="INDUN" world="220050000" />
+	<siege_location id="6" type="INDUN" world="210060000" />
+	<siege_location id="8" type="INDUN" world="220020000" />
+	<siege_location id="7" type="INDUN" world="220050000" />
+	<siege_location id="8" type="INDUN" world="220020000" />
+	<siege_location id="8" type="INDUN" world="210020000" />
+	<siege_location id="8" type="INDUN" world="400010000" />
+	<siege_location id="9" type="INDUN" world="220040000" />
+	<siege_location id="9" type="INDUN" world="210040000" />
+	<siege_location id="9" type="INDUN" world="400010000" />
+	<siege_location id="18" type="INDUN" world="120010000" />
+	<siege_location id="18" type="INDUN" world="110010000" />
+	<siege_location id="25" type="INDUN" world="210040000" />
+	<siege_location id="26" type="INDUN" world="210050000" />
+	<siege_location id="26" type="INDUN" world="220070000" />
+	<siege_location id="27" type="INDUN" world="210050000" />
+	<siege_location id="27" type="INDUN" world="220070000" />
+	<siege_location id="28" type="INDUN" world="600010000" />
+	<siege_location id="29" type="INDUN" world="210050000" />
+	<siege_location id="29" type="INDUN" world="220070000" />
+	<siege_location id="45" type="INDUN" world="220040000" />
+	<siege_location id="45" type="INDUN" world="210040000" />
+	<siege_location id="46" type="INDUN" world="210030000" />
+	<siege_location id="46" type="INDUN" world="220030000" />
+	<siege_location id="49" type="INDUN" world="210070000" />
+	<siege_location id="49" type="INDUN" world="220080000" />
+	<siege_location id="50" type="INDUN" world="220080000" />
+	<siege_location id="50" type="INDUN" world="210070000" />
+	<siege_location id="54" type="INDUN" world="110070000" />
+	<siege_location id="54" type="INDUN" world="120080000" />
+	<siege_location id="57" type="INDUN" world="110070000" />
+	<siege_location id="57" type="INDUN" world="120080000" />
+	<siege_location id="61" type="INDUN" world="110070000" />
+	<siege_location id="61" type="INDUN" world="120080000" />
+	<siege_location id="62" type="INDUN" world="120080000" />
+	<siege_location id="62" type="INDUN" world="110070000" />
+	<siege_location id="68" type="INDUN" world="220070000" />
+	<siege_location id="68" type="INDUN" world="210050000" />
+	<siege_location id="69" type="INDUN" world="110070000" />
+	<siege_location id="69" type="INDUN" world="120080000" />
+	<siege_location id="70" type="INDUN" world="120080000" />
+	<siege_location id="70" type="INDUN" world="110070000" />
+	<siege_location id="74" type="INDUN" world="120080000" />
+	<siege_location id="74" type="INDUN" world="110070000" />
+	<siege_location id="75" type="INDUN" world="120010000" />
+	<siege_location id="75" type="INDUN" world="110010000" />
+	<siege_location id="77" type="INDUN" world="220080000" />
+	<siege_location id="77" type="INDUN" world="210070000" />
+	<siege_location id="80" type="INDUN" world="210070000" />
+	<siege_location id="80" type="INDUN" world="220080000" />
+	<siege_location id="81" type="INDUN" world="210070000" />
+	<siege_location id="81" type="INDUN" world="220080000" />
+	<siege_location id="83" type="INDUN" world="600090000" />
+	<siege_location id="84" type="INDUN" world="120080000" />
+	<siege_location id="84" type="INDUN" world="110070000" />
+	<siege_location id="86" type="INDUN" world="120080000" />
+	<siege_location id="86" type="INDUN" world="110070000" />
+	<siege_location id="88" type="INDUN" world="210070000" />
+	<siege_location id="88" type="INDUN" world="220080000" />
+	<siege_location id="91" type="INDUN" world="600010000" />
+	<siege_location id="94" type="INDUN" world="600100000" />
+	<siege_location id="97" type="INDUN" world="120080000" />
+	<siege_location id="97" type="INDUN" world="110070000" />
+	<siege_location id="99" type="INDUN" world="600090000" />
+	<siege_location id="103" type="INDUN" world="600100000" />
+	<siege_location id="104" type="INDUN" world="220080000" />
+	<siege_location id="104" type="INDUN" world="210070000" />
+	<siege_location id="116" type="INDUN" world="600100000" />
+	<siege_location id="121" type="INDUN" world="600100000" />
+	<siege_location id="131" type="INDUN" world="600090000" />
+	<siege_location id="132" type="INDUN" world="600100000" />
+	<siege_location id="134" type="INDUN" world="220080000" />
+	<siege_location id="134" type="INDUN" world="210070000" />
+	<siege_location id="135" type="INDUN" world="220080000" />
+	<siege_location id="135" type="INDUN" world="210070000" />
+	<siege_location id="137" type="INDUN" world="210070000" />
+	<siege_location id="137" type="INDUN" world="220080000" />
+	<siege_location id="138" type="INDUN" world="220080000" />
+	<siege_location id="138" type="INDUN" world="210070000" />
+	<siege_location id="140" type="INDUN" world="220080000" />
+	<siege_location id="140" type="INDUN" world="210070000" />
 	<siege_location id="1011" type="FORTRESS" world="400010000" name_id="400910" occupy_count="2" legion_gp="1000" siege_duration="3000" influence="10" kinah_rewards="100000000 90000000 80000000 50000000">
-		<artifact_activation item_id="188020000" count="1" skill="12078" cd="7200"/>
-		<siege_reward top="5" item_id="186000242" item_count="4" item_id_defeat="186000243" item_count_defeat="10" gp_win="300" gp_defeat="150"/>
-		<siege_reward top="11" item_id="186000242" item_count="3" gp_win="250" gp_defeat="125"/>
-		<siege_reward top="22" item_id="186000242" item_count="2" gp_win="200" gp_defeat="100"/>
-		<siege_reward top="50" item_id="186000242" item_count="1" gp_win="100" gp_defeat="50"/>
+		<artifact_activation item_id="188020000" count="1" skill="12078" cd="7200" />
+		<siege_reward top="5" item_id="186000242" item_count="4" item_id_defeat="186000243" item_count_defeat="10" gp_win="300" gp_defeat="150" />
+		<siege_reward top="11" item_id="186000242" item_count="3" gp_win="250" gp_defeat="125" />
+		<siege_reward top="22" item_id="186000242" item_count="2" gp_win="200" gp_defeat="100" />
+		<siege_reward top="50" item_id="186000242" item_count="1" gp_win="100" gp_defeat="50" />
 		<legion_reward item_id="182400001" item_count="30000000" />
-		<legion_reward item_id="186000242" item_count="1"/>
-		<legion_reward item_id="188052117" item_count="1"/>
-		<legion_reward item_id="122001663" item_count="1"/>
-		<merc_zone id="1" costs="36" cooldown="900" msg_id="1402451" announce_id="1402448"/>
-		<merc_zone id="2" costs="36" cooldown="900" msg_id="1402452" announce_id="1402449"/>
+		<legion_reward item_id="186000242" item_count="1" />
+		<legion_reward item_id="188052117" item_count="1" />
+		<legion_reward item_id="122001663" item_count="1" />
+		<merc_zone id="1" costs="36" cooldown="900" msg_id="1402451" announce_id="1402448" />
+		<merc_zone id="2" costs="36" cooldown="900" msg_id="1402452" announce_id="1402449" />
 		<assault_data dredgion_id="20" base_budget="4" base_delay="180">
-			<assaulter type="TELEPORT" npc_ids="251406" distance_offset="2"/>
-			<assaulter type="COMMANDER" npc_ids="882272 882273 882274 882275 882276" distance_offset="4"/>
-			<assaulter type="FIGHTER" npc_ids="251390 251393 251395 251398" distance_offset="4"/>
-			<assaulter type="ASSASSIN" npc_ids="251400 251403 251405 251408" distance_offset="4"/>
-			<assaulter type="PRIEST" npc_ids="251410 251413 251415 251418" distance_offset="7"/>
-			<assaulter type="WITCH" npc_ids="251420 251423 251425 251428" distance_offset="14"/>
-			<assaulter type="RANGER" npc_ids="251430 251433 251435 251438" distance_offset="14"/>
-			<assaulter type="GUNNER" npc_ids="251440 251443 251445 251448" distance_offset="14"/>
+			<assaulter type="TELEPORT" npc_ids="251406" distance_offset="2" />
+			<assaulter type="COMMANDER" npc_ids="882272 882273 882274 882275 882276" distance_offset="4" />
+			<assaulter type="FIGHTER" npc_ids="251390 251393 251395 251398" distance_offset="4" />
+			<assaulter type="ASSASSIN" npc_ids="251400 251403 251405 251408" distance_offset="4" />
+			<assaulter type="PRIEST" npc_ids="251410 251413 251415 251418" distance_offset="7" />
+			<assaulter type="WITCH" npc_ids="251420 251423 251425 251428" distance_offset="14" />
+			<assaulter type="RANGER" npc_ids="251430 251433 251435 251438" distance_offset="14" />
+			<assaulter type="GUNNER" npc_ids="251440 251443 251445 251448" distance_offset="14" />
 		</assault_data>
 	</siege_location>
 	<siege_location id="1012" type="ARTIFACT" world="400010000">
-		<artifact_activation item_id="188020002" count="2" skill="12181" repeat_count="5" repeat_interval="4" cd="900"/>
+		<artifact_activation item_id="188020002" count="2" skill="12181" repeat_count="5" repeat_interval="4" cd="900" />
 	</siege_location>
 	<siege_location id="1013" type="ARTIFACT" world="400010000">
-		<artifact_activation item_id="188020000" count="3" skill="12180" repeat_count="5" repeat_interval="4" cd="900"/>
+		<artifact_activation item_id="188020000" count="3" skill="12180" repeat_count="5" repeat_interval="4" cd="900" />
 	</siege_location>
 	<siege_location id="1014" type="ARTIFACT" world="400010000">
-		<artifact_activation item_id="188020000" count="3" skill="12180" repeat_count="5" repeat_interval="4" cd="900"/>
+		<artifact_activation item_id="188020000" count="3" skill="12180" repeat_count="5" repeat_interval="4" cd="900" />
 	</siege_location>
 	<siege_location id="1015" type="ARTIFACT" world="400010000">
-		<artifact_activation item_id="188020000" count="3" skill="12180" repeat_count="5" repeat_interval="4" cd="900"/>
+		<artifact_activation item_id="188020000" count="3" skill="12180" repeat_count="5" repeat_interval="4" cd="900" />
 	</siege_location>
 	<siege_location id="1016" type="ARTIFACT" world="400010000">
-		<artifact_activation item_id="188020000" count="3" skill="12180" repeat_count="5" repeat_interval="4" cd="900"/>
+		<artifact_activation item_id="188020000" count="3" skill="12180" repeat_count="5" repeat_interval="4" cd="900" />
 	</siege_location>
 	<siege_location id="1017" type="ARTIFACT" world="400010000">
-		<artifact_activation item_id="188020002" count="2" skill="12181" repeat_count="5" repeat_interval="4" cd="900"/>
+		<artifact_activation item_id="188020002" count="2" skill="12181" repeat_count="5" repeat_interval="4" cd="900" />
 	</siege_location>
 	<siege_location id="1018" type="ARTIFACT" world="400010000">
-		<artifact_activation item_id="188020002" count="2" skill="12181" repeat_count="5" repeat_interval="4" cd="900"/>
+		<artifact_activation item_id="188020002" count="2" skill="12181" repeat_count="5" repeat_interval="4" cd="900" />
 	</siege_location>
 	<siege_location id="1019" type="ARTIFACT" world="400010000">
-		<artifact_activation item_id="188020002" count="2" skill="12181" repeat_count="5" repeat_interval="4" cd="900"/>
+		<artifact_activation item_id="188020002" count="2" skill="12181" repeat_count="5" repeat_interval="4" cd="900" />
 	</siege_location>
 	<siege_location id="1020" type="ARTIFACT" world="400010000">
-		<artifact_activation item_id="188020000" count="3" skill="12180" repeat_count="5" repeat_interval="4" cd="900"/>
+		<artifact_activation item_id="188020000" count="3" skill="12180" repeat_count="5" repeat_interval="4" cd="900" />
 	</siege_location>
 	<siege_location id="1131" type="FORTRESS" world="400010000" name_id="400911" occupy_count="2" siege_duration="3600" influence="3">
-		<artifact_activation item_id="188020000" count="1" skill="12147" repeat_count="1" repeat_interval="1" cd="3600"/>
+		<artifact_activation item_id="188020000" count="1" skill="12147" repeat_count="1" repeat_interval="1" cd="3600" />
 		<door_repair_data item_id="188030000" count="5" cd="30">
-			<door_repair_stone static_id="199" door_id="53"/>
-			<door_repair_stone static_id="200" door_id="25"/>
+			<door_repair_stone static_id="199" door_id="53" />
+			<door_repair_stone static_id="200" door_id="25" />
 		</door_repair_data>
-		<siege_reward top="12" item_id="186000096" item_count="3"/>
-		<siege_reward top="20" item_id="186000030" item_count="3"/>
-		<siege_reward top="30" item_id="186000030" item_count="2"/>
-		<siege_reward top="40" item_id="186000031" item_count="3"/>
+		<siege_reward top="12" item_id="186000096" item_count="3" />
+		<siege_reward top="20" item_id="186000030" item_count="3" />
+		<siege_reward top="30" item_id="186000030" item_count="2" />
+		<siege_reward top="40" item_id="186000031" item_count="3" />
 		<legion_reward item_id="182400001" item_count="5000000" />
-		<legion_reward item_id="186000096" item_count="3"/>
-		<legion_reward item_id="186000030" item_count="20"/>
-		<legion_reward item_id="186000031" item_count="60"/>
-		<legion_reward item_id="188051893" item_count="1"/>
-		<legion_reward item_id="122001519" item_count="1"/>
+		<legion_reward item_id="186000096" item_count="3" />
+		<legion_reward item_id="186000030" item_count="20" />
+		<legion_reward item_id="186000031" item_count="60" />
+		<legion_reward item_id="188051893" item_count="1" />
+		<legion_reward item_id="122001519" item_count="1" />
 		<assault_data dredgion_id="15" base_budget="3" base_delay="180">
-			<assaulter type="TELEPORT" npc_ids="276793" distance_offset="2"/>
-			<assaulter type="COMMANDER" npc_ids="276647 276648 276649 276650 276651" distance_offset="4"/>
-			<assaulter type="FIGHTER" npc_ids="276717 276718 276719 276720 276721" distance_offset="4"/>
-			<assaulter type="ASSASSIN" npc_ids="276789 276790 276791 276792 276793" distance_offset="4"/>
-			<assaulter type="PRIEST" npc_ids="276784 276785 276786 276787 276788" distance_offset="7"/>
-			<assaulter type="WITCH" npc_ids="276779 276780 276781 276782 276783" distance_offset="14"/>
-			<assaulter type="RANGER" npc_ids="276766 276767 276768 276769 276770" distance_offset="14"/>
+			<assaulter type="TELEPORT" npc_ids="276793" distance_offset="2" />
+			<assaulter type="COMMANDER" npc_ids="276647 276648 276649 276650 276651" distance_offset="4" />
+			<assaulter type="FIGHTER" npc_ids="276717 276718 276719 276720 276721" distance_offset="4" />
+			<assaulter type="ASSASSIN" npc_ids="276789 276790 276791 276792 276793" distance_offset="4" />
+			<assaulter type="PRIEST" npc_ids="276784 276785 276786 276787 276788" distance_offset="7" />
+			<assaulter type="WITCH" npc_ids="276779 276780 276781 276782 276783" distance_offset="14" />
+			<assaulter type="RANGER" npc_ids="276766 276767 276768 276769 276770" distance_offset="14" />
 		</assault_data>
 	</siege_location>
 	<siege_location id="1132" type="FORTRESS" world="400010000" name_id="400912" occupy_count="2" siege_duration="3600" influence="3">
-		<artifact_activation item_id="188020000" count="1" skill="12148" repeat_count="1" repeat_interval="1" cd="3600"/>
+		<artifact_activation item_id="188020000" count="1" skill="12148" repeat_count="1" repeat_interval="1" cd="3600" />
 		<door_repair_data item_id="188030000" count="5" cd="30">
-			<door_repair_stone static_id="202" door_id="6"/>
-			<door_repair_stone static_id="225" door_id="23"/>
+			<door_repair_stone static_id="202" door_id="6" />
+			<door_repair_stone static_id="225" door_id="23" />
 		</door_repair_data>
-		<siege_reward top="12" item_id="186000096" item_count="3"/>
-		<siege_reward top="20" item_id="186000030" item_count="3"/>
-		<siege_reward top="30" item_id="186000030" item_count="2"/>
-		<siege_reward top="40" item_id="186000031" item_count="3"/>
+		<siege_reward top="12" item_id="186000096" item_count="3" />
+		<siege_reward top="20" item_id="186000030" item_count="3" />
+		<siege_reward top="30" item_id="186000030" item_count="2" />
+		<siege_reward top="40" item_id="186000031" item_count="3" />
 		<legion_reward item_id="182400001" item_count="5000000" />
-		<legion_reward item_id="186000096" item_count="3"/>
-		<legion_reward item_id="186000030" item_count="20"/>
-		<legion_reward item_id="186000031" item_count="60"/>
-		<legion_reward item_id="188051893" item_count="1"/>
-		<legion_reward item_id="122001520" item_count="1"/>
+		<legion_reward item_id="186000096" item_count="3" />
+		<legion_reward item_id="186000030" item_count="20" />
+		<legion_reward item_id="186000031" item_count="60" />
+		<legion_reward item_id="188051893" item_count="1" />
+		<legion_reward item_id="122001520" item_count="1" />
 		<assault_data dredgion_id="14" base_budget="3" base_delay="180">
-			<assaulter type="TELEPORT" npc_ids="276793" distance_offset="2"/>
-			<assaulter type="COMMANDER" npc_ids="276647 276648 276649 276650 276651" heading_offset="5" distance_offset="4"/>
-			<assaulter type="FIGHTER" npc_ids="276717 276718 276719 276720 276721" heading_offset="45" distance_offset="4"/>
-			<assaulter type="ASSASSIN" npc_ids="276789 276790 276791 276792 276793" heading_offset="20" distance_offset="4"/>
-			<assaulter type="PRIEST" npc_ids="276784 276785 276786 276787 276788" heading_offset="30" distance_offset="7"/>
-			<assaulter type="WITCH" npc_ids="276779 276780 276781 276782 276783" heading_offset="30" distance_offset="14"/>
-			<assaulter type="RANGER" npc_ids="276766 276767 276768 276769 276770" heading_offset="30" distance_offset="14"/>
+			<assaulter type="TELEPORT" npc_ids="276793" distance_offset="2" />
+			<assaulter type="COMMANDER" npc_ids="276647 276648 276649 276650 276651" heading_offset="5" distance_offset="4" />
+			<assaulter type="FIGHTER" npc_ids="276717 276718 276719 276720 276721" heading_offset="45" distance_offset="4" />
+			<assaulter type="ASSASSIN" npc_ids="276789 276790 276791 276792 276793" heading_offset="20" distance_offset="4" />
+			<assaulter type="PRIEST" npc_ids="276784 276785 276786 276787 276788" heading_offset="30" distance_offset="7" />
+			<assaulter type="WITCH" npc_ids="276779 276780 276781 276782 276783" heading_offset="30" distance_offset="14" />
+			<assaulter type="RANGER" npc_ids="276766 276767 276768 276769 276770" heading_offset="30" distance_offset="14" />
 		</assault_data>
 	</siege_location>
 	<siege_location id="1133" type="ARTIFACT" world="400010000">
-		<artifact_activation item_id="188020000" count="2" skill="12043" repeat_count="1" repeat_interval="1" cd="2700"/>
+		<artifact_activation item_id="188020000" count="2" skill="12043" repeat_count="1" repeat_interval="1" cd="2700" />
 	</siege_location>
 	<siege_location id="1134" type="ARTIFACT" world="400010000">
-		<artifact_activation item_id="188020000" count="2" skill="12043" repeat_count="1" repeat_interval="1" cd="2700"/>
+		<artifact_activation item_id="188020000" count="2" skill="12043" repeat_count="1" repeat_interval="1" cd="2700" />
 	</siege_location>
 	<siege_location id="1135" type="ARTIFACT" world="400010000">
-		<artifact_activation item_id="188020000" count="1" skill="12042" repeat_count="1" repeat_interval="1" cd="900"/>
+		<artifact_activation item_id="188020000" count="1" skill="12042" repeat_count="1" repeat_interval="1" cd="900" />
 	</siege_location>
 	<siege_location id="1141" type="FORTRESS" world="400010000" name_id="400913" occupy_count="2" siege_duration="3600" influence="3">
-		<artifact_activation item_id="188020000" count="1" skill="12149" repeat_count="1" repeat_interval="1" cd="3600"/>
+		<artifact_activation item_id="188020000" count="1" skill="12149" repeat_count="1" repeat_interval="1" cd="3600" />
 		<door_repair_data item_id="188030000" count="5" cd="30">
-			<door_repair_stone static_id="204" door_id="49"/>
-			<door_repair_stone static_id="205" door_id="50"/>
+			<door_repair_stone static_id="204" door_id="49" />
+			<door_repair_stone static_id="205" door_id="50" />
 		</door_repair_data>
-		<siege_reward top="12" item_id="186000096" item_count="3"/>
-		<siege_reward top="20" item_id="186000030" item_count="3"/>
-		<siege_reward top="30" item_id="186000030" item_count="2"/>
-		<siege_reward top="40" item_id="186000031" item_count="3"/>
+		<siege_reward top="12" item_id="186000096" item_count="3" />
+		<siege_reward top="20" item_id="186000030" item_count="3" />
+		<siege_reward top="30" item_id="186000030" item_count="2" />
+		<siege_reward top="40" item_id="186000031" item_count="3" />
 		<legion_reward item_id="182400001" item_count="5000000" />
-		<legion_reward item_id="186000096" item_count="3"/>
-		<legion_reward item_id="186000030" item_count="20"/>
-		<legion_reward item_id="186000031" item_count="60"/>
-		<legion_reward item_id="188051893" item_count="1"/>
-		<legion_reward item_id="122001521" item_count="1"/>
+		<legion_reward item_id="186000096" item_count="3" />
+		<legion_reward item_id="186000030" item_count="20" />
+		<legion_reward item_id="186000031" item_count="60" />
+		<legion_reward item_id="188051893" item_count="1" />
+		<legion_reward item_id="122001521" item_count="1" />
 		<assault_data dredgion_id="12" base_budget="3" base_delay="180">
-			<assaulter type="TELEPORT" npc_ids="276793" distance_offset="2"/>
-			<assaulter type="COMMANDER" npc_ids="276647 276648 276649 276650 276651" heading_offset="5" distance_offset="4"/>
-			<assaulter type="FIGHTER" npc_ids="276717 276718 276719 276720 276721" heading_offset="45" distance_offset="4"/>
-			<assaulter type="ASSASSIN" npc_ids="276789 276790 276791 276792 276793" heading_offset="20" distance_offset="4"/>
-			<assaulter type="PRIEST" npc_ids="276784 276785 276786 276787 276788" heading_offset="30" distance_offset="7"/>
-			<assaulter type="WITCH" npc_ids="276779 276780 276781 276782 276783" heading_offset="30" distance_offset="14"/>
-			<assaulter type="RANGER" npc_ids="276766 276767 276768 276769 276770" heading_offset="30" distance_offset="14"/>
+			<assaulter type="TELEPORT" npc_ids="276793" distance_offset="2" />
+			<assaulter type="COMMANDER" npc_ids="276647 276648 276649 276650 276651" heading_offset="5" distance_offset="4" />
+			<assaulter type="FIGHTER" npc_ids="276717 276718 276719 276720 276721" heading_offset="45" distance_offset="4" />
+			<assaulter type="ASSASSIN" npc_ids="276789 276790 276791 276792 276793" heading_offset="20" distance_offset="4" />
+			<assaulter type="PRIEST" npc_ids="276784 276785 276786 276787 276788" heading_offset="30" distance_offset="7" />
+			<assaulter type="WITCH" npc_ids="276779 276780 276781 276782 276783" heading_offset="30" distance_offset="14" />
+			<assaulter type="RANGER" npc_ids="276766 276767 276768 276769 276770" heading_offset="30" distance_offset="14" />
 		</assault_data>
 	</siege_location>
 	<siege_location id="1142" type="ARTIFACT" world="400010000">
-		<artifact_activation item_id="188020000" count="2" skill="12043" repeat_count="1" repeat_interval="1" cd="2700"/>
+		<artifact_activation item_id="188020000" count="2" skill="12043" repeat_count="1" repeat_interval="1" cd="2700" />
 	</siege_location>
 	<siege_location id="1143" type="ARTIFACT" world="400010000">
-		<artifact_activation item_id="188020000" count="1" skill="12042" repeat_count="1" repeat_interval="1" cd="900"/>
+		<artifact_activation item_id="188020000" count="1" skill="12042" repeat_count="1" repeat_interval="1" cd="900" />
 	</siege_location>
 	<siege_location id="1144" type="ARTIFACT" world="400010000">
-		<artifact_activation item_id="188020000" count="1" skill="12045" repeat_count="1" repeat_interval="1" cd="900"/>
+		<artifact_activation item_id="188020000" count="1" skill="12045" repeat_count="1" repeat_interval="1" cd="900" />
 	</siege_location>
 	<siege_location id="1145" type="ARTIFACT" world="400010000">
-		<artifact_activation item_id="188020000" count="2" skill="12057" repeat_count="1" repeat_interval="1" cd="2700"/>
+		<artifact_activation item_id="188020000" count="2" skill="12057" repeat_count="1" repeat_interval="1" cd="2700" />
 	</siege_location>
 	<siege_location id="1146" type="ARTIFACT" world="400010000">
-		<artifact_activation item_id="188020000" count="2" skill="8387" repeat_count="1" repeat_interval="1" cd="2700"/>
+		<artifact_activation item_id="188020000" count="2" skill="8387" repeat_count="1" repeat_interval="1" cd="2700" />
 	</siege_location>
 	<siege_location id="1211" type="FORTRESS" world="400010000" name_id="400914" occupy_count="2" siege_duration="3600" influence="4">
-		<artifact_activation item_id="188020000" count="1" skill="12150" repeat_count="1" repeat_interval="1" cd="5400"/>
+		<artifact_activation item_id="188020000" count="1" skill="12150" repeat_count="1" repeat_interval="1" cd="5400" />
 		<door_repair_data item_id="188030000" count="5" cd="30">
-			<door_repair_stone static_id="206" door_id="51"/>
-			<door_repair_stone static_id="207" door_id="54"/>
+			<door_repair_stone static_id="206" door_id="51" />
+			<door_repair_stone static_id="207" door_id="54" />
 		</door_repair_data>
-		<siege_reward top="18" item_id="186000096" item_count="3"/>
-		<siege_reward top="30" item_id="186000030" item_count="3"/>
-		<siege_reward top="45" item_id="186000030" item_count="2"/>
-		<siege_reward top="60" item_id="186000031" item_count="3"/>
+		<siege_reward top="18" item_id="186000096" item_count="3" />
+		<siege_reward top="30" item_id="186000030" item_count="3" />
+		<siege_reward top="45" item_id="186000030" item_count="2" />
+		<siege_reward top="60" item_id="186000031" item_count="3" />
 		<legion_reward item_id="182400001" item_count="5000000" />
-		<legion_reward item_id="186000096" item_count="3"/>
-		<legion_reward item_id="186000030" item_count="50"/>
-		<legion_reward item_id="186000031" item_count="70"/>
-		<legion_reward item_id="188051893" item_count="1"/>
-		<legion_reward item_id="122001522" item_count="1"/>
+		<legion_reward item_id="186000096" item_count="3" />
+		<legion_reward item_id="186000030" item_count="50" />
+		<legion_reward item_id="186000031" item_count="70" />
+		<legion_reward item_id="188051893" item_count="1" />
+		<legion_reward item_id="122001522" item_count="1" />
 		<assault_data dredgion_id="18" base_budget="3" base_delay="180">
-			<assaulter type="TELEPORT" npc_ids="276953" distance_offset="2"/>
-			<assaulter type="COMMANDER" npc_ids="276869 276870 276871 276872 276873" heading_offset="5" distance_offset="4"/>
-			<assaulter type="FIGHTER" npc_ids="276989 276990 276991 276992 276993" heading_offset="45" distance_offset="4"/>
-			<assaulter type="ASSASSIN" npc_ids="276949 276950 276951 276952 276953" heading_offset="45" distance_offset="4"/>
-			<assaulter type="PRIEST" npc_ids="277004 277005 277006 277007 277008" heading_offset="20" distance_offset="7"/>
-			<assaulter type="WITCH" npc_ids="276999 277000 277001 277002 277003" heading_offset="30" distance_offset="14"/>
-			<assaulter type="RANGER" npc_ids="276994 276995 276996 276997 276998" heading_offset="30" distance_offset="14"/>
+			<assaulter type="TELEPORT" npc_ids="276953" distance_offset="2" />
+			<assaulter type="COMMANDER" npc_ids="276869 276870 276871 276872 276873" heading_offset="5" distance_offset="4" />
+			<assaulter type="FIGHTER" npc_ids="276989 276990 276991 276992 276993" heading_offset="45" distance_offset="4" />
+			<assaulter type="ASSASSIN" npc_ids="276949 276950 276951 276952 276953" heading_offset="45" distance_offset="4" />
+			<assaulter type="PRIEST" npc_ids="277004 277005 277006 277007 277008" heading_offset="20" distance_offset="7" />
+			<assaulter type="WITCH" npc_ids="276999 277000 277001 277002 277003" heading_offset="30" distance_offset="14" />
+			<assaulter type="RANGER" npc_ids="276994 276995 276996 276997 276998" heading_offset="30" distance_offset="14" />
 		</assault_data>
 	</siege_location>
 	<siege_location id="1212" type="ARTIFACT" world="400010000">
-		<artifact_activation item_id="188020000" count="2" skill="12081" repeat_count="1" repeat_interval="1" cd="2700"/>
+		<artifact_activation item_id="188020000" count="2" skill="12081" repeat_count="1" repeat_interval="1" cd="2700" />
 	</siege_location>
 	<siege_location id="1213" type="ARTIFACT" world="400010000">
-		<artifact_activation item_id="188020000" count="1" skill="12089" repeat_count="6" repeat_interval="9" cd="900"/>
+		<artifact_activation item_id="188020000" count="1" skill="12089" repeat_count="6" repeat_interval="9" cd="900" />
 	</siege_location>
 	<siege_location id="1214" type="ARTIFACT" world="400010000">
-		<artifact_activation item_id="188020000" count="2" skill="12083" repeat_count="1" repeat_interval="1" cd="2700"/>
+		<artifact_activation item_id="188020000" count="2" skill="12083" repeat_count="1" repeat_interval="1" cd="2700" />
 	</siege_location>
 	<siege_location id="1215" type="ARTIFACT" world="400010000">
-		<artifact_activation item_id="188020000" count="1" skill="12082" repeat_count="1" repeat_interval="1" cd="900"/>
+		<artifact_activation item_id="188020000" count="1" skill="12082" repeat_count="1" repeat_interval="1" cd="900" />
 	</siege_location>
 	<siege_location id="1221" type="FORTRESS" world="400010000" name_id="400915" occupy_count="2" legion_gp="1000" siege_duration="3600" influence="9" kinah_rewards="80000000 70000000 60000000 25000000">
-		<artifact_activation item_id="188020000" count="1" skill="12152" cd="5400"/>
+		<artifact_activation item_id="188020000" count="1" skill="12152" cd="5400" />
 		<door_repair_data item_id="188030000" count="5" cd="30">
-			<door_repair_stone static_id="210" door_id="119"/>
-			<door_repair_stone static_id="211" door_id="118"/>
+			<door_repair_stone static_id="210" door_id="119" />
+			<door_repair_stone static_id="211" door_id="118" />
 		</door_repair_data>
-		<siege_reward top="5" item_id="186000242" item_count="3" item_id_defeat="186000243" item_count_defeat="10" gp_win="250" gp_defeat="125"/>
-		<siege_reward top="11" item_id="186000242" item_count="2" gp_win="200" gp_defeat="100"/>
-		<siege_reward top="22" item_id="186000242" item_count="1" gp_win="150" gp_defeat="75"/>
-		<siege_reward top="50" item_id="186000243" item_count="5" gp_win="100" gp_defeat="50"/>
+		<siege_reward top="5" item_id="186000242" item_count="3" item_id_defeat="186000243" item_count_defeat="10" gp_win="250" gp_defeat="125" />
+		<siege_reward top="11" item_id="186000242" item_count="2" gp_win="200" gp_defeat="100" />
+		<siege_reward top="22" item_id="186000242" item_count="1" gp_win="150" gp_defeat="75" />
+		<siege_reward top="50" item_id="186000243" item_count="5" gp_win="100" gp_defeat="50" />
 		<legion_reward item_id="182400001" item_count="15000000" />
-		<legion_reward item_id="188052762" item_count="1"/>
-		<legion_reward item_id="188052114" item_count="1"/>
-		<legion_reward item_id="122001629" item_count="1"/>
-		<merc_zone id="1" costs="4" cooldown="900" msg_id="1402176" announce_id="1402173"/>
-		<merc_zone id="2" costs="4" cooldown="900" msg_id="1402177" announce_id="1402174"/>
-		<merc_zone id="3" costs="12" cooldown="900" msg_id="1402178" announce_id="1402175"/>
+		<legion_reward item_id="188052762" item_count="1" />
+		<legion_reward item_id="188052114" item_count="1" />
+		<legion_reward item_id="122001629" item_count="1" />
+		<merc_zone id="1" costs="4" cooldown="900" msg_id="1402176" announce_id="1402173" />
+		<merc_zone id="2" costs="4" cooldown="900" msg_id="1402177" announce_id="1402174" />
+		<merc_zone id="3" costs="12" cooldown="900" msg_id="1402178" announce_id="1402175" />
 		<assault_data dredgion_id="13" base_budget="3" base_delay="180">
-			<assaulter type="TELEPORT" npc_ids="251406" distance_offset="2"/>
-			<assaulter type="COMMANDER" npc_ids="251383 251384 251385 251386 251387" heading_offset="5" distance_offset="4"/>
-			<assaulter type="FIGHTER" npc_ids="251389 251392 251394 251397" heading_offset="45" distance_offset="4"/>
-			<assaulter type="ASSASSIN" npc_ids="251399 251402 251404 251407" heading_offset="45" distance_offset="4"/>
-			<assaulter type="PRIEST" npc_ids="251409 241412 251414 251417" heading_offset="20" distance_offset="7"/>
-			<assaulter type="WITCH" npc_ids="251419 251422 251424 251427" heading_offset="30" distance_offset="14"/>
-			<assaulter type="RANGER" npc_ids="251429 251432 251434 251437" heading_offset="30" distance_offset="14"/>
-			<assaulter type="GUNNER" npc_ids="251439 251442 251444 251447" heading_offset="30" distance_offset="14"/>
+			<assaulter type="TELEPORT" npc_ids="251406" distance_offset="2" />
+			<assaulter type="COMMANDER" npc_ids="251383 251384 251385 251386 251387" heading_offset="5" distance_offset="4" />
+			<assaulter type="FIGHTER" npc_ids="251389 251392 251394 251397" heading_offset="45" distance_offset="4" />
+			<assaulter type="ASSASSIN" npc_ids="251399 251402 251404 251407" heading_offset="45" distance_offset="4" />
+			<assaulter type="PRIEST" npc_ids="251409 241412 251414 251417" heading_offset="20" distance_offset="7" />
+			<assaulter type="WITCH" npc_ids="251419 251422 251424 251427" heading_offset="30" distance_offset="14" />
+			<assaulter type="RANGER" npc_ids="251429 251432 251434 251437" heading_offset="30" distance_offset="14" />
+			<assaulter type="GUNNER" npc_ids="251439 251442 251444 251447" heading_offset="30" distance_offset="14" />
 		</assault_data>
 	</siege_location>
 	<siege_location id="1222" type="ARTIFACT" world="400010000">
-		<artifact_activation item_id="188020002" count="2" skill="12090" repeat_count="5" repeat_interval="3" cd="2700"/>
+		<artifact_activation item_id="188020002" count="2" skill="12090" repeat_count="5" repeat_interval="3" cd="2700" />
 	</siege_location>
 	<siege_location id="1223" type="ARTIFACT" world="400010000">
-		<artifact_activation item_id="188020002" count="2" skill="12089" repeat_count="6" repeat_interval="9" cd="900"/>
+		<artifact_activation item_id="188020002" count="2" skill="12089" repeat_count="6" repeat_interval="9" cd="900" />
 	</siege_location>
 	<siege_location id="1224" type="ARTIFACT" world="400010000">
-		<artifact_activation item_id="188020002" count="4" skill="12091" repeat_count="5" repeat_interval="3" cd="2700"/>
+		<artifact_activation item_id="188020002" count="4" skill="12091" repeat_count="5" repeat_interval="3" cd="2700" />
 	</siege_location>
 	<siege_location id="1231" type="FORTRESS" world="400010000" name_id="400916" occupy_count="2" legion_gp="1000" siege_duration="3600" influence="9" kinah_rewards="80000000 70000000 60000000 25000000">
-		<artifact_activation item_id="188020000" count="1" skill="12153" cd="5400"/>
+		<artifact_activation item_id="188020000" count="1" skill="12153" cd="5400" />
 		<door_repair_data item_id="188030000" count="5" cd="30">
-			<door_repair_stone static_id="212" door_id="24"/>
-			<door_repair_stone static_id="213" door_id="121"/>
+			<door_repair_stone static_id="212" door_id="24" />
+			<door_repair_stone static_id="213" door_id="121" />
 		</door_repair_data>
-		<siege_reward top="5" item_id="186000242" item_count="3" item_id_defeat="186000243" item_count_defeat="10" gp_win="250" gp_defeat="125"/>
-		<siege_reward top="11" item_id="186000242" item_count="2" gp_win="200" gp_defeat="100"/>
-		<siege_reward top="22" item_id="186000242" item_count="1" gp_win="150" gp_defeat="75"/>
-		<siege_reward top="50" item_id="186000243" item_count="1" gp_win="100" gp_defeat="50"/>
+		<siege_reward top="5" item_id="186000242" item_count="3" item_id_defeat="186000243" item_count_defeat="10" gp_win="250" gp_defeat="125" />
+		<siege_reward top="11" item_id="186000242" item_count="2" gp_win="200" gp_defeat="100" />
+		<siege_reward top="22" item_id="186000242" item_count="1" gp_win="150" gp_defeat="75" />
+		<siege_reward top="50" item_id="186000243" item_count="1" gp_win="100" gp_defeat="50" />
 		<legion_reward item_id="182400001" item_count="15000000" />
-		<legion_reward item_id="188052763" item_count="1"/>
-		<legion_reward item_id="188052115" item_count="1"/>
-		<legion_reward item_id="122001630" item_count="1"/>
-		<merc_zone id="1" costs="4" cooldown="900" msg_id="1402182" announce_id="1402179"/>
-		<merc_zone id="2" costs="4" cooldown="900" msg_id="1402183" announce_id="1402180"/>
-		<merc_zone id="3" costs="8" cooldown="900" msg_id="1402184" announce_id="1402181"/>
+		<legion_reward item_id="188052763" item_count="1" />
+		<legion_reward item_id="188052115" item_count="1" />
+		<legion_reward item_id="122001630" item_count="1" />
+		<merc_zone id="1" costs="4" cooldown="900" msg_id="1402182" announce_id="1402179" />
+		<merc_zone id="2" costs="4" cooldown="900" msg_id="1402183" announce_id="1402180" />
+		<merc_zone id="3" costs="8" cooldown="900" msg_id="1402184" announce_id="1402181" />
 		<assault_data dredgion_id="17" base_budget="3" base_delay="180">
-			<assaulter type="TELEPORT" npc_ids="251406" distance_offset="2"/>
-			<assaulter type="COMMANDER" npc_ids="251383 251384 251385 251386 251387" heading_offset="5" distance_offset="4"/>
-			<assaulter type="FIGHTER" npc_ids="251389 251392 251394 251397" heading_offset="45" distance_offset="4"/>
-			<assaulter type="ASSASSIN" npc_ids="251399 251402 251404 251407" heading_offset="45" distance_offset="4"/>
-			<assaulter type="PRIEST" npc_ids="251409 241412 251414 251417" heading_offset="20" distance_offset="7"/>
-			<assaulter type="WITCH" npc_ids="251419 251422 251424 251427" heading_offset="30" distance_offset="14"/>
-			<assaulter type="RANGER" npc_ids="251429 251432 251434 251437" heading_offset="30" distance_offset="14"/>
-			<assaulter type="GUNNER" npc_ids="251439 251442 251444 251447" heading_offset="30" distance_offset="14"/>
+			<assaulter type="TELEPORT" npc_ids="251406" distance_offset="2" />
+			<assaulter type="COMMANDER" npc_ids="251383 251384 251385 251386 251387" heading_offset="5" distance_offset="4" />
+			<assaulter type="FIGHTER" npc_ids="251389 251392 251394 251397" heading_offset="45" distance_offset="4" />
+			<assaulter type="ASSASSIN" npc_ids="251399 251402 251404 251407" heading_offset="45" distance_offset="4" />
+			<assaulter type="PRIEST" npc_ids="251409 241412 251414 251417" heading_offset="20" distance_offset="7" />
+			<assaulter type="WITCH" npc_ids="251419 251422 251424 251427" heading_offset="30" distance_offset="14" />
+			<assaulter type="RANGER" npc_ids="251429 251432 251434 251437" heading_offset="30" distance_offset="14" />
+			<assaulter type="GUNNER" npc_ids="251439 251442 251444 251447" heading_offset="30" distance_offset="14" />
 		</assault_data>
 	</siege_location>
 	<siege_location id="1232" type="ARTIFACT" world="400010000">
-		<artifact_activation item_id="188020002" count="2" skill="12090" repeat_count="5" repeat_interval="3" cd="2700"/>
+		<artifact_activation item_id="188020002" count="2" skill="12090" repeat_count="5" repeat_interval="3" cd="2700" />
 	</siege_location>
 	<siege_location id="1233" type="ARTIFACT" world="400010000">
-		<artifact_activation item_id="188020002" count="1" skill="12089" repeat_count="6" repeat_interval="9" cd="900"/>
+		<artifact_activation item_id="188020002" count="1" skill="12089" repeat_count="6" repeat_interval="9" cd="900" />
 	</siege_location>
 	<siege_location id="1241" type="FORTRESS" world="400010000" name_id="400917" occupy_count="2" legion_gp="1000" siege_duration="3600" influence="9" kinah_rewards="80000000 70000000 60000000 25000000">
-		<artifact_activation item_id="188020000" count="1" skill="12154" cd="5400"/>
+		<artifact_activation item_id="188020000" count="1" skill="12154" cd="5400" />
 		<door_repair_data item_id="188030000" count="5" cd="30">
-			<door_repair_stone static_id="214" door_id="110"/>
-			<door_repair_stone static_id="215" door_id="19"/>
+			<door_repair_stone static_id="214" door_id="110" />
+			<door_repair_stone static_id="215" door_id="19" />
 		</door_repair_data>
-		<siege_reward top="5" item_id="186000242" item_count="3" item_id_defeat="186000243" item_count_defeat="10" gp_win="250" gp_defeat="125"/>
-		<siege_reward top="11" item_id="186000242" item_count="2" gp_win="200" gp_defeat="100"/>
-		<siege_reward top="22" item_id="186000242" item_count="1" gp_win="150" gp_defeat="75"/>
-		<siege_reward top="50" item_id="186000243" item_count="1" gp_win="100" gp_defeat="50"/>
+		<siege_reward top="5" item_id="186000242" item_count="3" item_id_defeat="186000243" item_count_defeat="10" gp_win="250" gp_defeat="125" />
+		<siege_reward top="11" item_id="186000242" item_count="2" gp_win="200" gp_defeat="100" />
+		<siege_reward top="22" item_id="186000242" item_count="1" gp_win="150" gp_defeat="75" />
+		<siege_reward top="50" item_id="186000243" item_count="1" gp_win="100" gp_defeat="50" />
 		<legion_reward item_id="182400001" item_count="15000000" />
-		<legion_reward item_id="188052764" item_count="1"/>
-		<legion_reward item_id="188052116" item_count="1"/>
-		<legion_reward item_id="122001631" item_count="1"/>
-		<merc_zone id="1" costs="4" cooldown="900" msg_id="1402188" announce_id="1402185"/>
-		<merc_zone id="2" costs="4" cooldown="900" msg_id="1402189" announce_id="1402186"/>
+		<legion_reward item_id="188052764" item_count="1" />
+		<legion_reward item_id="188052116" item_count="1" />
+		<legion_reward item_id="122001631" item_count="1" />
+		<merc_zone id="1" costs="4" cooldown="900" msg_id="1402188" announce_id="1402185" />
+		<merc_zone id="2" costs="4" cooldown="900" msg_id="1402189" announce_id="1402186" />
 		<assault_data dredgion_id="16" base_budget="3" base_delay="180">
-			<assaulter type="TELEPORT" npc_ids="251406" distance_offset="2"/>
-			<assaulter type="COMMANDER" npc_ids="251383 251384 251385 251386 251387" heading_offset="5" distance_offset="4"/>
-			<assaulter type="FIGHTER" npc_ids="251389 251392 251394 251397" heading_offset="45" distance_offset="4"/>
-			<assaulter type="ASSASSIN" npc_ids="251399 251402 251404 251407" heading_offset="45" distance_offset="4"/>
-			<assaulter type="PRIEST" npc_ids="251409 241412 251414 251417" heading_offset="20" distance_offset="7"/>
-			<assaulter type="WITCH" npc_ids="251419 251422 251424 251427" heading_offset="30" distance_offset="14"/>
-			<assaulter type="RANGER" npc_ids="251429 251432 251434 251437" heading_offset="30" distance_offset="14"/>
-			<assaulter type="GUNNER" npc_ids="251439 251442 251444 251447" heading_offset="30" distance_offset="14"/>
+			<assaulter type="TELEPORT" npc_ids="251406" distance_offset="2" />
+			<assaulter type="COMMANDER" npc_ids="251383 251384 251385 251386 251387" heading_offset="5" distance_offset="4" />
+			<assaulter type="FIGHTER" npc_ids="251389 251392 251394 251397" heading_offset="45" distance_offset="4" />
+			<assaulter type="ASSASSIN" npc_ids="251399 251402 251404 251407" heading_offset="45" distance_offset="4" />
+			<assaulter type="PRIEST" npc_ids="251409 241412 251414 251417" heading_offset="20" distance_offset="7" />
+			<assaulter type="WITCH" npc_ids="251419 251422 251424 251427" heading_offset="30" distance_offset="14" />
+			<assaulter type="RANGER" npc_ids="251429 251432 251434 251437" heading_offset="30" distance_offset="14" />
+			<assaulter type="GUNNER" npc_ids="251439 251442 251444 251447" heading_offset="30" distance_offset="14" />
 		</assault_data>
 	</siege_location>
 	<siege_location id="1242" type="ARTIFACT" world="400010000">
-		<artifact_activation item_id="188020002" count="2" skill="12090" repeat_count="5" repeat_interval="3" cd="2700"/>
+		<artifact_activation item_id="188020002" count="2" skill="12090" repeat_count="5" repeat_interval="3" cd="2700" />
 	</siege_location>
 	<siege_location id="1243" type="ARTIFACT" world="400010000">
-		<artifact_activation item_id="188020002" count="2" skill="12089" repeat_count="6" repeat_interval="9" cd="900"/>
+		<artifact_activation item_id="188020002" count="2" skill="12089" repeat_count="6" repeat_interval="9" cd="900" />
 	</siege_location>
 	<siege_location id="1251" type="FORTRESS" world="400010000" name_id="400918" occupy_count="2" siege_duration="3600" influence="4">
-		<artifact_activation item_id="188020000" count="1" skill="12151" repeat_count="1" repeat_interval="1" cd="5400"/>
+		<artifact_activation item_id="188020000" count="1" skill="12151" repeat_count="1" repeat_interval="1" cd="5400" />
 		<door_repair_data item_id="188030000" count="5" cd="30">
-			<door_repair_stone static_id="208" door_id="116"/>
-			<door_repair_stone static_id="209" door_id="111"/>
+			<door_repair_stone static_id="208" door_id="116" />
+			<door_repair_stone static_id="209" door_id="111" />
 		</door_repair_data>
-		<siege_reward top="18" item_id="186000096" item_count="3"/>
-		<siege_reward top="30" item_id="186000030" item_count="3"/>
-		<siege_reward top="45" item_id="186000030" item_count="2"/>
-		<siege_reward top="60" item_id="186000031" item_count="3"/>
+		<siege_reward top="18" item_id="186000096" item_count="3" />
+		<siege_reward top="30" item_id="186000030" item_count="3" />
+		<siege_reward top="45" item_id="186000030" item_count="2" />
+		<siege_reward top="60" item_id="186000031" item_count="3" />
 		<legion_reward item_id="182400001" item_count="5000000" />
-		<legion_reward item_id="186000096" item_count="3"/>
-		<legion_reward item_id="186000030" item_count="50"/>
-		<legion_reward item_id="186000031" item_count="70"/>
-		<legion_reward item_id="188051893" item_count="1"/>
-		<legion_reward item_id="122001522" item_count="1"/>
+		<legion_reward item_id="186000096" item_count="3" />
+		<legion_reward item_id="186000030" item_count="50" />
+		<legion_reward item_id="186000031" item_count="70" />
+		<legion_reward item_id="188051893" item_count="1" />
+		<legion_reward item_id="122001522" item_count="1" />
 		<assault_data dredgion_id="19" base_budget="3" base_delay="180">
-			<assaulter type="TELEPORT" npc_ids="276953" distance_offset="2"/>
-			<assaulter type="COMMANDER" npc_ids="276869 276870 276871 276872 276873" heading_offset="5" distance_offset="4"/>
-			<assaulter type="FIGHTER" npc_ids="276989 276990 276991 276992 276993" heading_offset="45" distance_offset="4"/>
-			<assaulter type="ASSASSIN" npc_ids="276949 276950 276951 276952 276953" heading_offset="45" distance_offset="4"/>
-			<assaulter type="PRIEST" npc_ids="277004 277005 277006 277007 277008" heading_offset="20" distance_offset="7"/>
-			<assaulter type="WITCH" npc_ids="276999 277000 277001 277002 277003" heading_offset="30" distance_offset="14"/>
-			<assaulter type="RANGER" npc_ids="276994 276995 276996 276997 276998" heading_offset="30" distance_offset="14"/>
+			<assaulter type="TELEPORT" npc_ids="276953" distance_offset="2" />
+			<assaulter type="COMMANDER" npc_ids="276869 276870 276871 276872 276873" heading_offset="5" distance_offset="4" />
+			<assaulter type="FIGHTER" npc_ids="276989 276990 276991 276992 276993" heading_offset="45" distance_offset="4" />
+			<assaulter type="ASSASSIN" npc_ids="276949 276950 276951 276952 276953" heading_offset="45" distance_offset="4" />
+			<assaulter type="PRIEST" npc_ids="277004 277005 277006 277007 277008" heading_offset="20" distance_offset="7" />
+			<assaulter type="WITCH" npc_ids="276999 277000 277001 277002 277003" heading_offset="30" distance_offset="14" />
+			<assaulter type="RANGER" npc_ids="276994 276995 276996 276997 276998" heading_offset="30" distance_offset="14" />
 		</assault_data>
 	</siege_location>
 	<siege_location id="1252" type="ARTIFACT" world="400010000">
-		<artifact_activation item_id="188020000" count="1" skill="12087" repeat_count="1" repeat_interval="1" cd="900"/>
+		<artifact_activation item_id="188020000" count="1" skill="12087" repeat_count="1" repeat_interval="1" cd="900" />
 	</siege_location>
 	<siege_location id="1253" type="ARTIFACT" world="400010000">
-		<artifact_activation item_id="188020000" count="1" skill="12088" repeat_count="1" repeat_interval="1" cd="900"/>
+		<artifact_activation item_id="188020000" count="1" skill="12088" repeat_count="1" repeat_interval="1" cd="900" />
 	</siege_location>
 	<siege_location id="1254" type="ARTIFACT" world="400010000">
-		<artifact_activation item_id="188020000" count="2" skill="12086" repeat_count="1" repeat_interval="1" cd="2700"/>
+		<artifact_activation item_id="188020000" count="2" skill="12086" repeat_count="1" repeat_interval="1" cd="2700" />
 	</siege_location>
 	<siege_location id="1401" type="ARTIFACT" world="400010000">
-		<artifact_activation item_id="188020002" count="2" skill="12159" repeat_count="1" repeat_interval="1" cd="2700"/>
+		<artifact_activation item_id="188020002" count="2" skill="12159" repeat_count="1" repeat_interval="1" cd="2700" />
 	</siege_location>
 	<siege_location id="1402" type="ARTIFACT" world="400010000">
-		<artifact_activation item_id="188020002" count="2" skill="12159" repeat_count="1" repeat_interval="1" cd="2700"/>
+		<artifact_activation item_id="188020002" count="2" skill="12159" repeat_count="1" repeat_interval="1" cd="2700" />
 	</siege_location>
 	<siege_location id="1403" type="ARTIFACT" world="400010000">
-		<artifact_activation item_id="188020002" count="2" skill="12159" repeat_count="1" repeat_interval="1" cd="2700"/>
+		<artifact_activation item_id="188020002" count="2" skill="12159" repeat_count="1" repeat_interval="1" cd="2700" />
 	</siege_location>
 	<siege_location id="2011" type="FORTRESS" world="210050000" name_id="401288" occupy_count="2" legion_gp="1000" siege_duration="2400" influence="8" kinah_rewards="50000000 40000000 30000000 10000000">
-		<artifact_activation item_id="188020001" count="3" skill="12155" cd="7200"/>
+		<artifact_activation item_id="188020001" count="3" skill="12155" cd="7200" />
 		<door_repair_data item_id="188030000" count="75" cd="30">
-			<door_repair_stone static_id="478" door_id="380"/>
+			<door_repair_stone static_id="478" door_id="380" />
 		</door_repair_data>
-		<siege_reward top="5" item_id="188053163" item_count="1" item_id_defeat="186000243" item_count_defeat="10" gp_win="200" gp_defeat="100"/>
-		<siege_reward top="11" item_id="188053164" item_count="1" gp_win="175" gp_defeat="90"/>
-		<siege_reward top="22" item_id="188053165" item_count="1" gp_win="150" gp_defeat="75"/>
-		<siege_reward top="50" item_id="188053166" item_count="1" gp_win="100" gp_defeat="50"/>
+		<siege_reward top="5" item_id="188053163" item_count="1" item_id_defeat="186000243" item_count_defeat="10" gp_win="200" gp_defeat="100" />
+		<siege_reward top="11" item_id="188053164" item_count="1" gp_win="175" gp_defeat="90" />
+		<siege_reward top="22" item_id="188053165" item_count="1" gp_win="150" gp_defeat="75" />
+		<siege_reward top="50" item_id="188053166" item_count="1" gp_win="100" gp_defeat="50" />
 		<legion_reward item_id="182400001" item_count="10000000" />
-		<legion_reward item_id="186000242" item_count="1"/>
-		<legion_reward item_id="188052119" item_count="1"/>
-		<legion_reward item_id="188053136" item_count="1"/>
-		<merc_zone id="1" costs="11" cooldown="900" msg_id="1402301" announce_id="1402292"/>
-		<merc_zone id="2" costs="6" cooldown="900" msg_id="1402305" announce_id="1402296"/>
-		<merc_zone id="3" costs="3" cooldown="900" msg_id="1402302" announce_id="1402293"/>
-		<merc_zone id="4" costs="3" cooldown="900" msg_id="1402304" announce_id="1402294"/>
+		<legion_reward item_id="186000242" item_count="1" />
+		<legion_reward item_id="188052119" item_count="1" />
+		<legion_reward item_id="188053136" item_count="1" />
+		<merc_zone id="1" costs="11" cooldown="900" msg_id="1402301" announce_id="1402292" />
+		<merc_zone id="2" costs="6" cooldown="900" msg_id="1402305" announce_id="1402296" />
+		<merc_zone id="3" costs="3" cooldown="900" msg_id="1402302" announce_id="1402293" />
+		<merc_zone id="4" costs="3" cooldown="900" msg_id="1402304" announce_id="1402294" />
 		<assault_data dredgion_id="5" base_budget="3" base_delay="180">
-			<assaulter type="TELEPORT" npc_ids="251406" distance_offset="2"/>
-			<assaulter type="COMMANDER" npc_ids="251383 251384 251385 251386 251387" heading_offset="5" distance_offset="4"/>
-			<assaulter type="FIGHTER" npc_ids="251389 251392 251394 251397" heading_offset="45" distance_offset="4"/>
-			<assaulter type="ASSASSIN" npc_ids="251399 251402 251404 251407" heading_offset="45" distance_offset="4"/>
-			<assaulter type="PRIEST" npc_ids="251409 251412 251414 251417" heading_offset="20" distance_offset="7"/>
-			<assaulter type="WITCH" npc_ids="251419 251422 251424 251427" heading_offset="30" distance_offset="14"/>
-			<assaulter type="RANGER" npc_ids="251429 251432 251434 251437" heading_offset="30" distance_offset="14"/>
-			<assaulter type="GUNNER" npc_ids="251439 251442 251444 251447" heading_offset="30" distance_offset="14"/>
+			<assaulter type="TELEPORT" npc_ids="251406" distance_offset="2" />
+			<assaulter type="COMMANDER" npc_ids="251383 251384 251385 251386 251387" heading_offset="5" distance_offset="4" />
+			<assaulter type="FIGHTER" npc_ids="251389 251392 251394 251397" heading_offset="45" distance_offset="4" />
+			<assaulter type="ASSASSIN" npc_ids="251399 251402 251404 251407" heading_offset="45" distance_offset="4" />
+			<assaulter type="PRIEST" npc_ids="251409 251412 251414 251417" heading_offset="20" distance_offset="7" />
+			<assaulter type="WITCH" npc_ids="251419 251422 251424 251427" heading_offset="30" distance_offset="14" />
+			<assaulter type="RANGER" npc_ids="251429 251432 251434 251437" heading_offset="30" distance_offset="14" />
+			<assaulter type="GUNNER" npc_ids="251439 251442 251444 251447" heading_offset="30" distance_offset="14" />
 		</assault_data>
 	</siege_location>
 	<siege_location id="2012" type="ARTIFACT" world="210050000">
-		<artifact_activation item_id="188020002" count="2" skill="12049" repeat_count="5" repeat_interval="3" cd="1800"/>
+		<artifact_activation item_id="188020002" count="2" skill="12049" repeat_count="5" repeat_interval="3" cd="1800" />
 	</siege_location>
 	<siege_location id="2013" type="ARTIFACT" world="210050000">
-		<artifact_activation item_id="188020002" count="2" skill="12090" repeat_count="5" repeat_interval="3" cd="1800"/>
+		<artifact_activation item_id="188020002" count="2" skill="12090" repeat_count="5" repeat_interval="3" cd="1800" />
 	</siege_location>
 	<siege_location id="2014" type="ARTIFACT" world="210050000">
-		<artifact_activation item_id="188020002" count="2" skill="12159" repeat_count="5" repeat_interval="3" cd="1800"/>
+		<artifact_activation item_id="188020002" count="2" skill="12159" repeat_count="5" repeat_interval="3" cd="1800" />
 	</siege_location>
 	<siege_location id="2021" type="FORTRESS" world="210050000" name_id="401290" occupy_count="2" legion_gp="1000" siege_duration="2400" influence="8" kinah_rewards="50000000 40000000 30000000 10000000">
-		<artifact_activation item_id="188020001" count="2" skill="12156" cd="7200"/>
+		<artifact_activation item_id="188020001" count="2" skill="12156" cd="7200" />
 		<door_repair_data item_id="188030000" count="75" cd="30">
-			<door_repair_stone static_id="383" door_id="374"/>
+			<door_repair_stone static_id="383" door_id="374" />
 		</door_repair_data>
-		<siege_reward top="5" item_id="188053159" item_count="1" item_id_defeat="186000243" item_count_defeat="10" gp_win="200" gp_defeat="100"/>
-		<siege_reward top="11" item_id="188053160" item_count="1" gp_win="175" gp_defeat="90"/>
-		<siege_reward top="22" item_id="188053161" item_count="1" gp_win="150" gp_defeat="75"/>
-		<siege_reward top="50" item_id="188053162" item_count="1" gp_win="100" gp_defeat="50"/>
+		<siege_reward top="5" item_id="188053159" item_count="1" item_id_defeat="186000243" item_count_defeat="10" gp_win="200" gp_defeat="100" />
+		<siege_reward top="11" item_id="188053160" item_count="1" gp_win="175" gp_defeat="90" />
+		<siege_reward top="22" item_id="188053161" item_count="1" gp_win="150" gp_defeat="75" />
+		<siege_reward top="50" item_id="188053162" item_count="1" gp_win="100" gp_defeat="50" />
 		<legion_reward item_id="182400001" item_count="10000000" />
-		<legion_reward item_id="186000242" item_count="1"/>
-		<legion_reward item_id="188052118" item_count="1"/>
-		<legion_reward item_id="188053136" item_count="1"/>
-		<merc_zone id="1" costs="11" cooldown="900" msg_id="1402319" announce_id="1402310"/>
-		<merc_zone id="2" costs="6" cooldown="900" msg_id="1402323" announce_id="1402314"/>
-		<merc_zone id="3" costs="3" cooldown="900" msg_id="1402320" announce_id="1402311"/>
-		<merc_zone id="4" costs="3" cooldown="900" msg_id="1402322" announce_id="1402312"/>
+		<legion_reward item_id="186000242" item_count="1" />
+		<legion_reward item_id="188052118" item_count="1" />
+		<legion_reward item_id="188053136" item_count="1" />
+		<merc_zone id="1" costs="11" cooldown="900" msg_id="1402319" announce_id="1402310" />
+		<merc_zone id="2" costs="6" cooldown="900" msg_id="1402323" announce_id="1402314" />
+		<merc_zone id="3" costs="3" cooldown="900" msg_id="1402320" announce_id="1402311" />
+		<merc_zone id="4" costs="3" cooldown="900" msg_id="1402322" announce_id="1402312" />
 		<assault_data dredgion_id="6" base_budget="3" base_delay="180">
-			<assaulter type="TELEPORT" npc_ids="251406" distance_offset="2"/>
-			<assaulter type="COMMANDER" npc_ids="251383 251384 251385 251386 251387" heading_offset="5" distance_offset="4"/>
-			<assaulter type="FIGHTER" npc_ids="251389 251392 251394 251397" heading_offset="45" distance_offset="4"/>
-			<assaulter type="ASSASSIN" npc_ids="251399 251402 251404 251407" heading_offset="45" distance_offset="4"/>
-			<assaulter type="PRIEST" npc_ids="251409 251412 251414 251417" heading_offset="20" distance_offset="7"/>
-			<assaulter type="WITCH" npc_ids="251419 251422 251424 251427" heading_offset="30" distance_offset="14"/>
-			<assaulter type="RANGER" npc_ids="251429 251432 251434 251437" heading_offset="30" distance_offset="14"/>
-			<assaulter type="GUNNER" npc_ids="251439 251442 251444 251447" heading_offset="30" distance_offset="14"/>
+			<assaulter type="TELEPORT" npc_ids="251406" distance_offset="2" />
+			<assaulter type="COMMANDER" npc_ids="251383 251384 251385 251386 251387" heading_offset="5" distance_offset="4" />
+			<assaulter type="FIGHTER" npc_ids="251389 251392 251394 251397" heading_offset="45" distance_offset="4" />
+			<assaulter type="ASSASSIN" npc_ids="251399 251402 251404 251407" heading_offset="45" distance_offset="4" />
+			<assaulter type="PRIEST" npc_ids="251409 251412 251414 251417" heading_offset="20" distance_offset="7" />
+			<assaulter type="WITCH" npc_ids="251419 251422 251424 251427" heading_offset="30" distance_offset="14" />
+			<assaulter type="RANGER" npc_ids="251429 251432 251434 251437" heading_offset="30" distance_offset="14" />
+			<assaulter type="GUNNER" npc_ids="251439 251442 251444 251447" heading_offset="30" distance_offset="14" />
 		</assault_data>
 	</siege_location>
 	<siege_location id="2022" type="ARTIFACT" world="210050000">
-		<artifact_activation item_id="188020002" count="2" skill="12049" repeat_count="5" repeat_interval="3" cd="1800"/>
+		<artifact_activation item_id="188020002" count="2" skill="12049" repeat_count="5" repeat_interval="3" cd="1800" />
 	</siege_location>
 	<siege_location id="2023" type="ARTIFACT" world="210050000">
-		<artifact_activation item_id="188020002" count="2" skill="12090" repeat_count="5" repeat_interval="3" cd="1800"/>
+		<artifact_activation item_id="188020002" count="2" skill="12090" repeat_count="5" repeat_interval="3" cd="1800" />
 	</siege_location>
 	<siege_location id="2024" type="ARTIFACT" world="210050000">
-		<artifact_activation item_id="188020002" count="2" skill="12159" repeat_count="5" repeat_interval="3" cd="1800"/>
+		<artifact_activation item_id="188020002" count="2" skill="12159" repeat_count="5" repeat_interval="3" cd="1800" />
 	</siege_location>
 	<siege_location id="2111" type="OUTPOST" world="210050000" fortress_dependency="2011 2021" siege_duration="7200" kinah_rewards="400000000 300000000 200000000 100000000">
-		<siege_reward top="5" item_id="188050706" item_count="1" item_id_defeat="186000243" item_count_defeat="10" gp_win="300" gp_defeat="150"/>
-		<siege_reward top="11" item_id="188050707" item_count="1" gp_win="200" gp_defeat="100"/>
-		<siege_reward top="22" item_id="188050708" item_count="1" gp_win="150" gp_defeat="75"/>
-		<siege_reward top="50" item_id="188050709" item_count="1" gp_win="100" gp_defeat="50"/>
+		<siege_reward top="5" item_id="188050706" item_count="1" item_id_defeat="186000243" item_count_defeat="10" gp_win="300" gp_defeat="150" />
+		<siege_reward top="11" item_id="188050707" item_count="1" gp_win="200" gp_defeat="100" />
+		<siege_reward top="22" item_id="188050708" item_count="1" gp_win="150" gp_defeat="75" />
+		<siege_reward top="50" item_id="188050709" item_count="1" gp_win="100" gp_defeat="50" />
 	</siege_location>
 	<siege_location id="3011" type="FORTRESS" world="220070000" name_id="401292" occupy_count="2" legion_gp="1000" siege_duration="2400" influence="8" kinah_rewards="50000000 40000000 30000000 10000000">
-		<artifact_activation item_id="188020001" count="2" skill="12157" cd="7200"/>
+		<artifact_activation item_id="188020001" count="2" skill="12157" cd="7200" />
 		<door_repair_data item_id="188030000" count="75" cd="30">
-			<door_repair_stone static_id="969" door_id="963"/>
+			<door_repair_stone static_id="969" door_id="963" />
 		</door_repair_data>
-		<siege_reward top="5" item_id="188053171" item_count="1" item_id_defeat="186000243" item_count_defeat="10" gp_win="200" gp_defeat="100"/>
-		<siege_reward top="11" item_id="188053172" item_count="1" gp_win="175" gp_defeat="90"/>
-		<siege_reward top="22" item_id="188053173" item_count="1" gp_win="150" gp_defeat="75"/>
-		<siege_reward top="50" item_id="188053174" item_count="1" gp_win="100" gp_defeat="50"/>
+		<siege_reward top="5" item_id="188053171" item_count="1" item_id_defeat="186000243" item_count_defeat="10" gp_win="200" gp_defeat="100" />
+		<siege_reward top="11" item_id="188053172" item_count="1" gp_win="175" gp_defeat="90" />
+		<siege_reward top="22" item_id="188053173" item_count="1" gp_win="150" gp_defeat="75" />
+		<siege_reward top="50" item_id="188053174" item_count="1" gp_win="100" gp_defeat="50" />
 		<legion_reward item_id="182400001" item_count="10000000" />
-		<legion_reward item_id="186000242" item_count="1"/>
-		<legion_reward item_id="188052121" item_count="1"/>
-		<legion_reward item_id="188053136" item_count="1"/>
-		<merc_zone id="1" costs="11" cooldown="900" msg_id="1402337" announce_id="1402328"/>
-		<merc_zone id="2" costs="6" cooldown="900" msg_id="1402341" announce_id="1402332"/>
-		<merc_zone id="3" costs="3" cooldown="900" msg_id="1402338" announce_id="1402329"/>
-		<merc_zone id="4" costs="3" cooldown="900" msg_id="1402339" announce_id="1402330"/>
+		<legion_reward item_id="186000242" item_count="1" />
+		<legion_reward item_id="188052121" item_count="1" />
+		<legion_reward item_id="188053136" item_count="1" />
+		<merc_zone id="1" costs="11" cooldown="900" msg_id="1402337" announce_id="1402328" />
+		<merc_zone id="2" costs="6" cooldown="900" msg_id="1402341" announce_id="1402332" />
+		<merc_zone id="3" costs="3" cooldown="900" msg_id="1402338" announce_id="1402329" />
+		<merc_zone id="4" costs="3" cooldown="900" msg_id="1402339" announce_id="1402330" />
 		<assault_data dredgion_id="11" base_budget="3" base_delay="180">
-			<assaulter type="TELEPORT" npc_ids="251406" distance_offset="2"/>
-			<assaulter type="COMMANDER" npc_ids="251383 251384 251385 251386 251387" heading_offset="5" distance_offset="4"/>
-			<assaulter type="FIGHTER" npc_ids="251389 251392 251394 251397" heading_offset="45" distance_offset="4"/>
-			<assaulter type="ASSASSIN" npc_ids="251399 251402 251404 251407" heading_offset="45" distance_offset="4"/>
-			<assaulter type="PRIEST" npc_ids="251409 251412 251414 251417" heading_offset="20" distance_offset="7"/>
-			<assaulter type="WITCH" npc_ids="251419 251422 251424 251427" heading_offset="30" distance_offset="14"/>
-			<assaulter type="RANGER" npc_ids="251429 251432 251434 251437" heading_offset="30" distance_offset="14"/>
-			<assaulter type="GUNNER" npc_ids="251439 251442 251444 251447" heading_offset="30" distance_offset="14"/>
+			<assaulter type="TELEPORT" npc_ids="251406" distance_offset="2" />
+			<assaulter type="COMMANDER" npc_ids="251383 251384 251385 251386 251387" heading_offset="5" distance_offset="4" />
+			<assaulter type="FIGHTER" npc_ids="251389 251392 251394 251397" heading_offset="45" distance_offset="4" />
+			<assaulter type="ASSASSIN" npc_ids="251399 251402 251404 251407" heading_offset="45" distance_offset="4" />
+			<assaulter type="PRIEST" npc_ids="251409 251412 251414 251417" heading_offset="20" distance_offset="7" />
+			<assaulter type="WITCH" npc_ids="251419 251422 251424 251427" heading_offset="30" distance_offset="14" />
+			<assaulter type="RANGER" npc_ids="251429 251432 251434 251437" heading_offset="30" distance_offset="14" />
+			<assaulter type="GUNNER" npc_ids="251439 251442 251444 251447" heading_offset="30" distance_offset="14" />
 		</assault_data>
 	</siege_location>
 	<siege_location id="3012" type="ARTIFACT" world="220070000">
-		<artifact_activation item_id="188020002" count="2" skill="12049" repeat_count="5" repeat_interval="3" cd="1800"/>
+		<artifact_activation item_id="188020002" count="2" skill="12049" repeat_count="5" repeat_interval="3" cd="1800" />
 	</siege_location>
 	<siege_location id="3013" type="ARTIFACT" world="220070000">
-		<artifact_activation item_id="188020002" count="2" skill="12090" repeat_count="5" repeat_interval="3" cd="1800"/>
+		<artifact_activation item_id="188020002" count="2" skill="12090" repeat_count="5" repeat_interval="3" cd="1800" />
 	</siege_location>
 	<siege_location id="3014" type="ARTIFACT" world="220070000">
-		<artifact_activation item_id="188020002" count="2" skill="12159" repeat_count="5" repeat_interval="3" cd="1800"/>
+		<artifact_activation item_id="188020002" count="2" skill="12159" repeat_count="5" repeat_interval="3" cd="1800" />
 	</siege_location>
 	<siege_location id="3021" type="FORTRESS" world="220070000" name_id="401294" occupy_count="2" legion_gp="1000" siege_duration="2400" influence="8" kinah_rewards="50000000 40000000 30000000 10000000">
-		<artifact_activation item_id="188020001" count="3" skill="12158" cd="7200"/>
+		<artifact_activation item_id="188020001" count="3" skill="12158" cd="7200" />
 		<door_repair_data item_id="188030000" count="75" cd="30">
-			<door_repair_stone static_id="855" door_id="846"/>
+			<door_repair_stone static_id="855" door_id="846" />
 		</door_repair_data>
-		<siege_reward top="5" item_id="188053167" item_count="1" item_id_defeat="186000243" item_count_defeat="10" gp_win="200" gp_defeat="100"/>
-		<siege_reward top="11" item_id="188053168" item_count="1" gp_win="175" gp_defeat="90"/>
-		<siege_reward top="22" item_id="188053169" item_count="1" gp_win="150" gp_defeat="75"/>
-		<siege_reward top="50" item_id="188053170" item_count="1" gp_win="100" gp_defeat="50"/>
+		<siege_reward top="5" item_id="188053167" item_count="1" item_id_defeat="186000243" item_count_defeat="10" gp_win="200" gp_defeat="100" />
+		<siege_reward top="11" item_id="188053168" item_count="1" gp_win="175" gp_defeat="90" />
+		<siege_reward top="22" item_id="188053169" item_count="1" gp_win="150" gp_defeat="75" />
+		<siege_reward top="50" item_id="188053170" item_count="1" gp_win="100" gp_defeat="50" />
 		<legion_reward item_id="182400001" item_count="10000000" />
-		<legion_reward item_id="186000242" item_count="1"/>
-		<legion_reward item_id="188052120" item_count="1"/>
-		<legion_reward item_id="188053136" item_count="1"/>
-		<merc_zone id="1" costs="11" cooldown="900" msg_id="1402355" announce_id="1402346"/>
-		<merc_zone id="2" costs="6" cooldown="900" msg_id="1402359" announce_id="1402350"/>
-		<merc_zone id="3" costs="3" cooldown="900" msg_id="1402356" announce_id="1402347"/>
-		<merc_zone id="4" costs="3" cooldown="900" msg_id="1402358" announce_id="1402348"/>
+		<legion_reward item_id="186000242" item_count="1" />
+		<legion_reward item_id="188052120" item_count="1" />
+		<legion_reward item_id="188053136" item_count="1" />
+		<merc_zone id="1" costs="11" cooldown="900" msg_id="1402355" announce_id="1402346" />
+		<merc_zone id="2" costs="6" cooldown="900" msg_id="1402359" announce_id="1402350" />
+		<merc_zone id="3" costs="3" cooldown="900" msg_id="1402356" announce_id="1402347" />
+		<merc_zone id="4" costs="3" cooldown="900" msg_id="1402358" announce_id="1402348" />
 		<assault_data dredgion_id="10" base_budget="3" base_delay="240">
-			<assaulter type="TELEPORT" npc_ids="251406" distance_offset="2"/>
-			<assaulter type="COMMANDER" npc_ids="251383 251384 251385 251386 251387" heading_offset="5" distance_offset="4"/>
-			<assaulter type="FIGHTER" npc_ids="251389 251392 251394 251397" heading_offset="45" distance_offset="4"/>
-			<assaulter type="ASSASSIN" npc_ids="251399 251402 251404 251407" heading_offset="45" distance_offset="4"/>
-			<assaulter type="PRIEST" npc_ids="251409 251412 251414 251417" heading_offset="20" distance_offset="7"/>
-			<assaulter type="WITCH" npc_ids="251419 251422 251424 251427" heading_offset="30" distance_offset="14"/>
-			<assaulter type="RANGER" npc_ids="251429 251432 251434 251437" heading_offset="30" distance_offset="14"/>
-			<assaulter type="GUNNER" npc_ids="251439 251442 251444 251447" heading_offset="30" distance_offset="14"/>
+			<assaulter type="TELEPORT" npc_ids="251406" distance_offset="2" />
+			<assaulter type="COMMANDER" npc_ids="251383 251384 251385 251386 251387" heading_offset="5" distance_offset="4" />
+			<assaulter type="FIGHTER" npc_ids="251389 251392 251394 251397" heading_offset="45" distance_offset="4" />
+			<assaulter type="ASSASSIN" npc_ids="251399 251402 251404 251407" heading_offset="45" distance_offset="4" />
+			<assaulter type="PRIEST" npc_ids="251409 251412 251414 251417" heading_offset="20" distance_offset="7" />
+			<assaulter type="WITCH" npc_ids="251419 251422 251424 251427" heading_offset="30" distance_offset="14" />
+			<assaulter type="RANGER" npc_ids="251429 251432 251434 251437" heading_offset="30" distance_offset="14" />
+			<assaulter type="GUNNER" npc_ids="251439 251442 251444 251447" heading_offset="30" distance_offset="14" />
 		</assault_data>
 	</siege_location>
 	<siege_location id="3022" type="ARTIFACT" world="220070000">
-		<artifact_activation item_id="188020002" count="2" skill="12049" repeat_count="5" repeat_interval="3" cd="1800"/>
+		<artifact_activation item_id="188020002" count="2" skill="12049" repeat_count="5" repeat_interval="3" cd="1800" />
 	</siege_location>
 	<siege_location id="3023" type="ARTIFACT" world="220070000">
-		<artifact_activation item_id="188020002" count="2" skill="12090" repeat_count="5" repeat_interval="3" cd="1800"/>
+		<artifact_activation item_id="188020002" count="2" skill="12090" repeat_count="5" repeat_interval="3" cd="1800" />
 	</siege_location>
 	<siege_location id="3024" type="ARTIFACT" world="220070000">
-		<artifact_activation item_id="188020002" count="2" skill="12159" repeat_count="5" repeat_interval="3" cd="1800"/>
+		<artifact_activation item_id="188020002" count="2" skill="12159" repeat_count="5" repeat_interval="3" cd="1800" />
 	</siege_location>
 	<siege_location id="3111" type="OUTPOST" world="220070000" fortress_dependency="3011 3021" siege_duration="7200" kinah_rewards="400000000 300000000 200000000 100000000">
-		<siege_reward top="5" item_id="188050702" item_count="1" item_id_defeat="186000243" item_count_defeat="10" gp_win="300" gp_defeat="150"/>
-		<siege_reward top="11" item_id="188050703" item_count="1" gp_win="200" gp_defeat="100"/>
-		<siege_reward top="22" item_id="188050704" item_count="1" gp_win="150" gp_defeat="75"/>
-		<siege_reward top="50" item_id="188050705" item_count="1" gp_win="100" gp_defeat="50"/>
+		<siege_reward top="5" item_id="188050702" item_count="1" item_id_defeat="186000243" item_count_defeat="10" gp_win="300" gp_defeat="150" />
+		<siege_reward top="11" item_id="188050703" item_count="1" gp_win="200" gp_defeat="100" />
+		<siege_reward top="22" item_id="188050704" item_count="1" gp_win="150" gp_defeat="75" />
+		<siege_reward top="50" item_id="188050705" item_count="1" gp_win="100" gp_defeat="50" />
 	</siege_location>
 	<!-- Wealhtheow's Keep -->
 	<siege_location id="7011" type="FORTRESS" world="600090000" name_id="404142" occupy_count="2" legion_gp="1000" siege_duration="3600" influence="14" kinah_rewards="100000000 90000000 80000000 50000000">
-	    <siege_reward top="5" item_id="169610150" item_count="1" item_id_defeat="186000243" item_count_defeat="10" gp_win="0" gp_defeat="200"/>
-		<siege_reward top="11" item_id="169610150" item_count="1" gp_win="0" gp_defeat="150"/>
-		<siege_reward top="22" item_id="169610150" item_count="1" gp_win="0" gp_defeat="100"/>
-		<siege_reward top="50" item_id="169610150" item_count="1" gp_win="0" gp_defeat="50"/>
-		<legion_reward item_id="182400001" item_count="30000000"/>
-		<legion_reward item_id="186000242" item_count="4"/>
-		<legion_reward item_id="182215545" item_count="1"/>
-		<legion_reward item_id="185000215" item_count="1"/>
-		<legion_reward item_id="188053138" item_count="1"/>
-		<legion_reward item_id="188053139" item_count="1"/>
-		<legion_reward item_id="169610149" item_count="1"/>
-		<merc_zone id="1" costs="29" cooldown="900" msg_id="1402494" announce_id="1402487"/>
-		<merc_zone id="2" costs="29" cooldown="900" msg_id="1402495" announce_id="1402488"/>
-		<merc_zone id="3" costs="12" cooldown="900" msg_id="1402492" announce_id="1402485"/>
-		<merc_zone id="4" costs="12" cooldown="900" msg_id="1402493" announce_id="1402486"/>
-		<merc_zone id="5" costs="39" cooldown="900" msg_id="1402496" announce_id="1402489"/>
-		<merc_zone id="6" costs="39" cooldown="900" msg_id="1402497" announce_id="1402490"/>
-		<merc_zone id="7" costs="20" cooldown="900" msg_id="1402498" announce_id="1402491"/>
+		<siege_reward top="5" item_id="169610150" item_count="1" item_id_defeat="186000243" item_count_defeat="10" gp_win="0" gp_defeat="200" />
+		<siege_reward top="11" item_id="169610150" item_count="1" gp_win="0" gp_defeat="150" />
+		<siege_reward top="22" item_id="169610150" item_count="1" gp_win="0" gp_defeat="100" />
+		<siege_reward top="50" item_id="169610150" item_count="1" gp_win="0" gp_defeat="50" />
+		<legion_reward item_id="182400001" item_count="30000000" />
+		<legion_reward item_id="186000242" item_count="4" />
+		<legion_reward item_id="182215545" item_count="1" />
+		<legion_reward item_id="185000215" item_count="1" />
+		<legion_reward item_id="188053138" item_count="1" />
+		<legion_reward item_id="188053139" item_count="1" />
+		<legion_reward item_id="169610149" item_count="1" />
+		<merc_zone id="1" costs="29" cooldown="900" msg_id="1402494" announce_id="1402487" />
+		<merc_zone id="2" costs="29" cooldown="900" msg_id="1402495" announce_id="1402488" />
+		<merc_zone id="3" costs="12" cooldown="900" msg_id="1402492" announce_id="1402485" />
+		<merc_zone id="4" costs="12" cooldown="900" msg_id="1402493" announce_id="1402486" />
+		<merc_zone id="5" costs="39" cooldown="900" msg_id="1402496" announce_id="1402489" />
+		<merc_zone id="6" costs="39" cooldown="900" msg_id="1402497" announce_id="1402490" />
+		<merc_zone id="7" costs="20" cooldown="900" msg_id="1402498" announce_id="1402491" />
 		<assault_data dredgion_id="21" base_budget="4" base_delay="180">
-			<assaulter type="TELEPORT" npc_ids="251406" distance_offset="2"/>
-			<assaulter type="COMMANDER" npc_ids="252133 252134 252135 252136 252137" distance_offset="4"/>
-			<assaulter type="FIGHTER" npc_ids="252118 252119 252121 252122" distance_offset="4"/>
-			<assaulter type="ASSASSIN" npc_ids="251399 251402 251404 251407" distance_offset="4"/>
-			<assaulter type="PRIEST" npc_ids="252123 252124 252126 252127" distance_offset="7"/>
-			<assaulter type="WITCH" npc_ids="252128 252129 252131 252132" distance_offset="14"/>
-			<assaulter type="RANGER" npc_ids="251429 251432 251434 251437" distance_offset="14"/>
-			<assaulter type="GUNNER" npc_ids="251439 251442 251444 251447" distance_offset="14"/>
+			<assaulter type="TELEPORT" npc_ids="251406" distance_offset="2" />
+			<assaulter type="COMMANDER" npc_ids="252133 252134 252135 252136 252137" distance_offset="4" />
+			<assaulter type="FIGHTER" npc_ids="252118 252119 252121 252122" distance_offset="4" />
+			<assaulter type="ASSASSIN" npc_ids="251399 251402 251404 251407" distance_offset="4" />
+			<assaulter type="PRIEST" npc_ids="252123 252124 252126 252127" distance_offset="7" />
+			<assaulter type="WITCH" npc_ids="252128 252129 252131 252132" distance_offset="14" />
+			<assaulter type="RANGER" npc_ids="251429 251432 251434 251437" distance_offset="14" />
+			<assaulter type="GUNNER" npc_ids="251439 251442 251444 251447" distance_offset="14" />
 		</assault_data>
 	</siege_location>
 	<!-- Hero's Fall -->
 	<siege_location id="7012" type="ARTIFACT" world="600090000">
-		<artifact_activation item_id="188020002" count="4" skill="12091" repeat_count="5" repeat_interval="3" cd="900"/>
+		<artifact_activation item_id="188020002" count="4" skill="12091" repeat_count="5" repeat_interval="3" cd="900" />
 	</siege_location>
 	<!-- Ashen Glade -->
 	<siege_location id="7013" type="ARTIFACT" world="600090000">
-		<artifact_activation item_id="188020002" count="2" skill="12182" repeat_count="5" repeat_interval="3" cd="600"/>
+		<artifact_activation item_id="188020002" count="2" skill="12182" repeat_count="5" repeat_interval="3" cd="600" />
 	</siege_location>
 	<!-- Molten Cliffs -->
 	<siege_location id="7014" type="ARTIFACT" world="600090000">
-		<artifact_activation item_id="188020002" count="2" skill="12182" repeat_count="5" repeat_interval="3" cd="600"/>
+		<artifact_activation item_id="188020002" count="2" skill="12182" repeat_count="5" repeat_interval="3" cd="600" />
 	</siege_location>
 	<!-- Agent Fight -->
 	<siege_location id="8011" type="AGENT_FIGHT" world="600100000" siege_duration="4200">
-		<siege_reward top="11" gp_win="300" gp_defeat="100"/>
-		<siege_reward top="20" gp_win="200" gp_defeat="75"/>
-		<siege_reward top="30" gp_win="150" gp_defeat="50"/>
-		<siege_reward top="200" gp_win="100" gp_defeat="50"/>
+		<siege_reward top="11" gp_win="300" gp_defeat="100" />
+		<siege_reward top="20" gp_win="200" gp_defeat="75" />
+		<siege_reward top="30" gp_win="150" gp_defeat="50" />
+		<siege_reward top="200" gp_win="100" gp_defeat="50" />
 	</siege_location>
 	<!-- Panesterra -->
-	<siege_location id="10111" type="FORTRESS" world="400020000" name_id="404158" siege_duration="3600" influence="0">
+	<siege_location id="10111" type="FORTRESS" world="400020000" name_id="404158" occupy_count="1" siege_duration="3600" influence="0">
 		<!-- <door_repair_data item_id="188030000" count="75" cd="30"/> -->
-		<siege_reward top="10" item_id="186000096" item_count="1"/>
-		<siege_reward top="10" item_id="188052121" item_count="1"/>
-		<siege_reward top="20" item_id="186000096" item_count="1"/>
-		<siege_reward top="30" item_id="186000096" item_count="1"/>
-		<siege_reward top="40" item_id="186000096" item_count="1"/>
+		<siege_reward top="10" item_id="186000096" item_count="1" />
+		<siege_reward top="10" item_id="188052121" item_count="1" />
+		<siege_reward top="20" item_id="186000096" item_count="1" />
+		<siege_reward top="30" item_id="186000096" item_count="1" />
+		<siege_reward top="40" item_id="186000096" item_count="1" />
 		<legion_reward item_id="182400001" item_count="15000000" />
-		<legion_reward item_id="188052121" item_count="1"/>
-		<legion_reward item_id="186000096" item_count="50"/>
+		<legion_reward item_id="188052121" item_count="1" />
+		<legion_reward item_id="186000096" item_count="50" />
+		<siege_related_bases ids="4201 4202 4203 4204 4211 4212 4213 4214 4221 4222 4223 4224 4225 4226 4227 4228" />
 	</siege_location>
-	<siege_location id="10211" type="FORTRESS" world="400040000" name_id="404173" siege_duration="3600" influence="0">
+	<siege_location id="10211" type="FORTRESS" world="400040000" name_id="404173" occupy_count="1" siege_duration="3600" influence="0">
 		<!--<door_repair_data item_id="188030000" count="75" cd="30"/> -->
-		<siege_reward top="10" item_id="186000096" item_count="1"/>
-		<siege_reward top="10" item_id="188052121" item_count="1"/>
-		<siege_reward top="20" item_id="186000096" item_count="1"/>
-		<siege_reward top="30" item_id="186000096" item_count="1"/>
-		<siege_reward top="40" item_id="186000096" item_count="1"/>
+		<siege_reward top="10" item_id="186000096" item_count="1" />
+		<siege_reward top="10" item_id="188052121" item_count="1" />
+		<siege_reward top="20" item_id="186000096" item_count="1" />
+		<siege_reward top="30" item_id="186000096" item_count="1" />
+		<siege_reward top="40" item_id="186000096" item_count="1" />
 		<legion_reward item_id="182400001" item_count="15000000" />
-		<legion_reward item_id="188052121" item_count="1"/>
-		<legion_reward item_id="186000096" item_count="50"/>
+		<legion_reward item_id="188052121" item_count="1" />
+		<legion_reward item_id="186000096" item_count="50" />
+		<siege_related_bases ids="4401 4402 4403 4404 4411 4412 4413 4414 4421 4422 4423 4424 4425 4426 4427 4428" />
 	</siege_location>
-	<siege_location id="10311" type="FORTRESS" world="400050000" name_id="404174" siege_duration="3600" influence="0">
+	<siege_location id="10311" type="FORTRESS" world="400050000" name_id="404174" occupy_count="1" siege_duration="3600" influence="0">
 		<!--<door_repair_data item_id="188030000" count="75" cd="30"/> -->
-		<siege_reward top="10" item_id="186000096" item_count="1"/>
-		<siege_reward top="10" item_id="188052121" item_count="1"/>
-		<siege_reward top="20" item_id="186000096" item_count="1"/>
-		<siege_reward top="30" item_id="186000096" item_count="1"/>
-		<siege_reward top="40" item_id="186000096" item_count="1"/>
+		<siege_reward top="10" item_id="186000096" item_count="1" />
+		<siege_reward top="10" item_id="188052121" item_count="1" />
+		<siege_reward top="20" item_id="186000096" item_count="1" />
+		<siege_reward top="30" item_id="186000096" item_count="1" />
+		<siege_reward top="40" item_id="186000096" item_count="1" />
 		<legion_reward item_id="182400001" item_count="15000000" />
-		<legion_reward item_id="188052121" item_count="1"/>
-		<legion_reward item_id="186000096" item_count="50"/>
+		<legion_reward item_id="188052121" item_count="1" />
+		<legion_reward item_id="186000096" item_count="50" />
+		<siege_related_bases ids="4501 4502 4503 4504 4511 4512 4513 4514 4521 4522 4523 4524 4525 4526 4527 4528" />
 	</siege_location>
-	<siege_location id="10411" type="FORTRESS" world="400060000" name_id="404175" siege_duration="3600" influence="0">
+	<siege_location id="10411" type="FORTRESS" world="400060000" name_id="404175" occupy_count="1" siege_duration="3600" influence="0">
 		<!--<door_repair_data item_id="188030000" count="75" cd="30"/> -->
-		<siege_reward top="10" item_id="186000096" item_count="1"/>
-		<siege_reward top="10" item_id="188052121" item_count="1"/>
-		<siege_reward top="20" item_id="186000096" item_count="1"/>
-		<siege_reward top="30" item_id="186000096" item_count="1"/>
-		<siege_reward top="40" item_id="186000096" item_count="1"/>
+		<siege_reward top="10" item_id="186000096" item_count="1" />
+		<siege_reward top="10" item_id="188052121" item_count="1" />
+		<siege_reward top="20" item_id="186000096" item_count="1" />
+		<siege_reward top="30" item_id="186000096" item_count="1" />
+		<siege_reward top="40" item_id="186000096" item_count="1" />
 		<legion_reward item_id="182400001" item_count="15000000" />
-		<legion_reward item_id="188052121" item_count="1"/>
-		<legion_reward item_id="186000096" item_count="50"/>
+		<legion_reward item_id="188052121" item_count="1" />
+		<legion_reward item_id="186000096" item_count="50" />
+		<siege_related_bases ids="4601 4602 4603 4604 4611 4612 4613 4614 4621 4622 4623 4624 4625 4626 4627 4628" />
 	</siege_location>
 </siege_locations>

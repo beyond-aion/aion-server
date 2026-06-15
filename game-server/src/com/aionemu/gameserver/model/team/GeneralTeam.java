@@ -17,6 +17,7 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.AionObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.team.common.legacy.LootGroupRules;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
@@ -198,6 +199,8 @@ public abstract class GeneralTeam<M extends AionObject, TM extends TeamMember<M>
 	public abstract int getMaxMemberCount();
 
 	public abstract List<Player> getOnlineMembers();
+
+	public abstract LootGroupRules getLootGroupRules();
 
 	public abstract void sendPackets(AionServerPacket... packets);
 

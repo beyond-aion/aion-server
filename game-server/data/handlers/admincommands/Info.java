@@ -1,6 +1,7 @@
 package admincommands;
 
-import com.aionemu.gameserver.controllers.attack.AggroInfo;
+import java.util.concurrent.atomic.AtomicInteger;
+
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.SkillElement;
@@ -52,6 +53,7 @@ public class Info extends AdminCommand {
 				Pet pet = player.getPet();
 				sendInfo(admin, (pet != null ? "Pet Id: " + pet.getObjectTemplate().getTemplateId() + ", ObjectId: " + pet.getObjectId() + "\n\t" : "")
 					+ "Town ID: " + TownService.getInstance().getTownResidence(player));
+				sendInfo(admin, "Current Panesterra Faction: %s".formatted(player.getPanesterraFaction()));
 				PlayerGameStats pgs = player.getGameStats();
 				sendInfo(admin,
 					"[Stats]"
@@ -98,12 +100,12 @@ public class Info extends AdminCommand {
 							+ "\n\t\tEvasion: " + pgs.getEvasion().getCurrent()
 							+ "\n\t\tCrit. Strike Resist: " + pgs.getPCR().getCurrent()
 							+ "\n\t\tCrit. Strike Fortitude: " + pgs.getStat(StatEnum.PHYSICAL_CRITICAL_DAMAGE_REDUCE, 0).getCurrent()
-							+ "\n\t\tWind Resist: " + pgs.getMagicalDefenseFor(SkillElement.WIND)
-							+ "\n\t\tWater Resist: " + pgs.getMagicalDefenseFor(SkillElement.WATER)
-							+ "\n\t\tEarth Resist: " + pgs.getMagicalDefenseFor(SkillElement.EARTH)
-							+ "\n\t\tFire Resist: " + pgs.getMagicalDefenseFor(SkillElement.FIRE)
-							+ "\n\t\tDark Resist: " + pgs.getMagicalDefenseFor(SkillElement.DARK)
-							+ "\n\t\tLight Resist: " + pgs.getMagicalDefenseFor(SkillElement.LIGHT)
+							+ "\n\t\tWind Defense: " + pgs.getElementalDefenseFor(SkillElement.WIND)
+							+ "\n\t\tWater Defense: " + pgs.getElementalDefenseFor(SkillElement.WATER)
+							+ "\n\t\tEarth Defense: " + pgs.getElementalDefenseFor(SkillElement.EARTH)
+							+ "\n\t\tFire Defense: " + pgs.getElementalDefenseFor(SkillElement.FIRE)
+							+ "\n\t\tDark Defense: " + pgs.getElementalDefenseFor(SkillElement.DARK)
+							+ "\n\t\tLight Defense: " + pgs.getElementalDefenseFor(SkillElement.LIGHT)
 							+ "\n\t-------------PvP Stats-------------"
 							+ "\n\tPvP attack: " + pgs.getStat(StatEnum.PVP_ATTACK_RATIO, 0).getCurrent() * 0.1f + "%"
 							+ "\n\tPvP p. attack: " + pgs.getStat(StatEnum.PVP_ATTACK_RATIO_PHYSICAL, 0).getCurrent() * 0.1f + "%"
@@ -175,26 +177,24 @@ public class Info extends AdminCommand {
 
 	private String createAggroInfo(Creature creature) {
 		StringBuilder sb = new StringBuilder("[AggroList]");
-		int aDmg = 0, eDmg = 0, tDmg = creature.getAggroList().getTotalDamage();
-		for (AggroInfo ai : creature.getAggroList().getList()) {
+		AtomicInteger aDmg = new AtomicInteger(), eDmg = new AtomicInteger(), tDmg = new AtomicInteger();
+		creature.getAggroList().stream().forEach(ai -> {
 			String name = ai.getAttacker().getName();
-			if (ai.getAttacker() instanceof Creature) {
-				Creature attacker = ((Creature) ai.getAttacker());
-				Creature master = attacker.getMaster();
-				if (master.getRace() == Race.ASMODIANS)
-					aDmg += ai.getDamage();
-				else if (master.getRace() == Race.ELYOS)
-					eDmg += ai.getDamage();
-				if (!master.equals(ai.getAttacker()))
-					name = master.getName() + "'s " + attacker.getObjectTemplate().getL10n();
-			}
+			Creature master = ai.getAttacker().getMaster();
+			tDmg.addAndGet(ai.getDamage());
+			if (master.getRace() == Race.ASMODIANS)
+				aDmg.addAndGet(ai.getDamage());
+			else if (master.getRace() == Race.ELYOS)
+				eDmg.addAndGet(ai.getDamage());
+			if (!master.equals(ai.getAttacker()))
+				name = master.getName() + "'s " + ai.getAttacker().getObjectTemplate().getL10n();
 			sb.append("\n\tName: " + name + ", Dmg: " + ai.getDamage() + ", Hate: " + ai.getHate());
-		}
-		if (tDmg > 0) {
+		});
+		if (tDmg.get() > 0) {
 			sb.append("\n\tTotal Dmg: ").append(tDmg);
 			sb.append("\n\t\t(A) Dmg: ").append(aDmg);
 			sb.append("\n\t\t(E) Dmg: ").append(eDmg);
-			sb.append("\n\t\t(N) Dmg: ").append(tDmg - aDmg - eDmg);
+			sb.append("\n\t\t(N) Dmg: ").append(tDmg.get() - aDmg.get() - eDmg.get());
 		}
 		return sb.toString();
 	}

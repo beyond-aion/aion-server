@@ -4,9 +4,7 @@ import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
-import com.aionemu.gameserver.controllers.observer.ActionObserver;
-import com.aionemu.gameserver.controllers.observer.ObserverType;
-import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.controllers.observer.DeathObserver;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 
 import ai.OneDmgNoActionAI;
@@ -37,13 +35,7 @@ public class DracusBox extends OneDmgNoActionAI {
 		Npc spawn = (Npc) spawn(spawnId, mysteriousCrate.getX(), mysteriousCrate.getY(), mysteriousCrate.getZ(), mysteriousCrate.getHeading());
 		AIActions.deleteOwner(this); // delete the huge box instantly so we can see the spawned mob
 		if (spawn.getNpcId() == DRACUS_ID) {
-			spawn.getObserveController().attach(new ActionObserver(ObserverType.DEATH) {
-
-				@Override
-				public void died(Creature creature) {
-					AIActions.scheduleRespawn(DracusBox.this);
-				}
-			});
+			spawn.getObserveController().attach(new DeathObserver(_ -> AIActions.scheduleRespawn(this)));
 		} else {
 			AIActions.scheduleRespawn(this);
 		}

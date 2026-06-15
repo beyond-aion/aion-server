@@ -23,8 +23,8 @@ public class SiegeSpawnTemplate extends SpawnTemplate {
 	}
 
 	public SiegeSpawnTemplate(int siegeId, SiegeRace siegeRace, SiegeModType siegeModType, SpawnGroup spawnGroup, float x, float y, float z,
-		byte heading, int randWalk, String walkerId, int staticId, int fly) {
-		super(spawnGroup, x, y, z, heading, randWalk, walkerId, staticId, fly);
+		byte heading, int randWalk, String walkerId, int staticId) {
+		super(spawnGroup, x, y, z, heading, randWalk, walkerId, staticId);
 		this.siegeId = siegeId;
 		this.siegeRace = siegeRace;
 		this.siegeModType = siegeModType;

@@ -53,6 +53,8 @@ public class EnchantItemAction extends AbstractItemAction {
 			return false;
 		}
 		if (parentItem.getItemTemplate().getItemGroup() == ItemGroup.ENCHANTMENT) {
+			if (targetItem.getItemTemplate().isNoEnchant())
+				return false;
 			if (targetItem.getItemTemplate().getMaxEnchantLevel() == 0 && !targetItem.getItemTemplate().canExceedEnchant()) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_OPTION_IT_CAN_NOT_BE_GIVEN_OPTION(targetItem.getItemTemplate().getL10n(),
 					parentItem.getItemTemplate().getL10n()));

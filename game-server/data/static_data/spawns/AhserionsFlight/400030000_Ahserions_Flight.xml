@@ -59,6 +59,12 @@
 					<spot x="392.986" y="385.011" z="688.836" h="105" />
 				</spawn>
 			</ahserion_stage_spawn>
+			<ahserion_stage_spawn stage="10">
+				<!-- Pasha -->
+				<spawn npc_id="804749">
+					<spot x="509.239" y="513.011" z="675.089" h="48" />
+				</spawn>
+			</ahserion_stage_spawn>
 			<ahserion_stage_spawn stage="180">
 				<!-- Ahserion Reserve Ignus Engine Controller (West) -->
 				<spawn npc_id="297316">
@@ -200,6 +206,12 @@
 				<!-- Ahserion Troopers Assault Pod -->
 				<spawn npc_id="297352">
 					<spot x="380.512" y="635.297" z="688.836" h="75" />
+				</spawn>
+			</ahserion_stage_spawn>
+			<ahserion_stage_spawn stage="10">
+				<!-- Pasha -->
+				<spawn npc_id="804750">
+					<spot x="509.239" y="513.011" z="675.089" h="48" />
 				</spawn>
 			</ahserion_stage_spawn>
 			<ahserion_stage_spawn stage="180">
@@ -345,6 +357,12 @@
 					<spot x="627.607" y="642.030" z="688.836" h="45" />
 				</spawn>
 			</ahserion_stage_spawn>
+			<ahserion_stage_spawn stage="10">
+				<!-- Pasha -->
+				<spawn npc_id="804751">
+					<spot x="509.239" y="513.011" z="675.089" h="48" />
+				</spawn>
+			</ahserion_stage_spawn>
 			<ahserion_stage_spawn stage="180">
 				<!-- Ahserion Reserve Ignus Engine Controller (West) -->
 				<spawn npc_id="297324">
@@ -486,6 +504,12 @@
 				<!-- Ahserion Troopers Assault Pod -->
 				<spawn npc_id="297352">
 					<spot x="638.299" y="394.689" z="688.836" h="15" />
+				</spawn>
+			</ahserion_stage_spawn>
+			<ahserion_stage_spawn stage="10">
+				<!-- Pasha -->
+				<spawn npc_id="804752">
+					<spot x="509.239" y="513.011" z="675.089" h="48" />
 				</spawn>
 			</ahserion_stage_spawn>
 			<ahserion_stage_spawn stage="180">

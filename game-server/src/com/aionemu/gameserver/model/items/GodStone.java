@@ -37,16 +37,16 @@ public class GodStone extends ItemStone {
 		return activatedCount;
 	}
 
-	@SuppressWarnings("lossy-conversions")
 	public boolean tryActivate(boolean isMainHandWeapon, Creature target) {
 		long now = System.currentTimeMillis();
-		if (now < cooldownExpireTimeMillis.get())
+		if (CustomConfig.GODSTONE_ACTIVATION_RATE <= 0 || now < cooldownExpireTimeMillis.get())
 			return false;
 		cooldownExpireTimeMillis.set(now + CustomConfig.GODSTONE_EVALUATION_COOLDOWN_MILLIS);
 
 		int procProbability = isMainHandWeapon ? godstoneInfo.getProbability() : godstoneInfo.getProbabilityLeft();
-		procProbability *= CustomConfig.GODSTONE_ACTIVATION_RATE;
 		procProbability -= target.getGameStats().getStat(StatEnum.PROC_REDUCE_RATE, 0).getCurrent();
+		if (procProbability > 0)
+			procProbability = Math.max(1, Math.round(procProbability * CustomConfig.GODSTONE_ACTIVATION_RATE));
 
 		return Rnd.get(1, 1000) <= procProbability;
 	}

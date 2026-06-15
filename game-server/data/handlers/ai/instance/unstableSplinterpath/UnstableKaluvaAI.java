@@ -1,11 +1,11 @@
 package ai.instance.unstableSplinterpath;
 
 import com.aionemu.commons.utils.Rnd;
-import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.AIState;
 import com.aionemu.gameserver.ai.manager.EmoteManager;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
+import com.aionemu.gameserver.controllers.attack.AggroTarget;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -50,7 +50,7 @@ public class UnstableKaluvaAI extends AggressiveNpcAI {
 			setStateIfNot(AIState.FOLLOWING);
 			getOwner().setState(CreatureState.ACTIVE, true);
 			PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.CHANGE_SPEED, 0, getObjectId()));
-			AIActions.targetCreature(this, getPosition().getWorldMapInstance().getNpc(egg));
+			getOwner().setTarget(spawner);
 			getMoveController().moveToTargetObject();
 		}
 	}
@@ -66,12 +66,11 @@ public class UnstableKaluvaAI extends AggressiveNpcAI {
 
 			ThreadPoolManager.getInstance().schedule(() -> {
 				canThink = true;
-				Creature creature = getAggroList().getMostHated();
-				if (creature != null && getOwner().canSee(creature) && !creature.isDead()) {
+				Creature creature = getAggroList().getTarget(AggroTarget.MOST_HATED);
+				if (creature != null) {
 					getOwner().setTarget(creature);
 					getOwner().getGameStats().renewLastAttackTime();
 					getOwner().getGameStats().renewLastAttackedTime();
-					getOwner().getGameStats().renewLastChangeTargetTime();
 					getOwner().getGameStats().renewLastSkillTime();
 				}
 				setStateIfNot(AIState.FIGHT);

@@ -10,7 +10,6 @@ import com.aionemu.loginserver.GameServerTable;
 import com.aionemu.loginserver.configs.Config;
 import com.aionemu.loginserver.dao.AccountDAO;
 import com.aionemu.loginserver.dao.AccountTimeDAO;
-import com.aionemu.loginserver.dao.PremiumDAO;
 import com.aionemu.loginserver.model.Account;
 import com.aionemu.loginserver.model.AccountTime;
 import com.aionemu.loginserver.model.ReconnectingAccount;
@@ -79,11 +78,10 @@ public class AccountController {
 			acc.setLastServer(gsi.getId());
 			AccountDAO.updateLastServer(acc.getId(), acc.getLastServer());
 
-			long toll = PremiumDAO.getPoints(acc.getId());
 			// Send response to GameServer
-			gsConnection.sendPacket(new SM_ACCOUNT_AUTH_RESPONSE(key.accountId, true, acc.getName(), acc.getCreationDate().getTime(), acc.getAccessLevel(), acc.getMembership(), toll, acc.getAllowedHddSerial()));
+			gsConnection.sendPacket(new SM_ACCOUNT_AUTH_RESPONSE(key.accountId, true, acc.getName(), acc.getCreationDate().getTime(), acc.getAccessLevel(), acc.getMembership(), acc.getAllowedHddSerial()));
 		} else {
-			gsConnection.sendPacket(new SM_ACCOUNT_AUTH_RESPONSE(key.accountId, false, null, 0, (byte) 0, (byte) 0, 0, null));
+			gsConnection.sendPacket(new SM_ACCOUNT_AUTH_RESPONSE(key.accountId, false, null, 0, (byte) 0, (byte) 0, null));
 		}
 	}
 

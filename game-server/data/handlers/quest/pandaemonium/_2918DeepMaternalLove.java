@@ -10,7 +10,6 @@ import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.QuestService;
 
 /**
  * @author Hellboy
@@ -39,7 +38,8 @@ public class _2918DeepMaternalLove extends AbstractQuestHandler {
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 0) {
 				if (dialogActionId == QUEST_ACCEPT_1) {
-					QuestService.startQuest(env);
+					return sendQuestStartDialog(env);
+				} else if (env.getDialogActionId() == QUEST_REFUSE_1) {
 					return closeDialogWindow(env);
 				}
 			}

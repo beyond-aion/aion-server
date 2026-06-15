@@ -8,7 +8,6 @@ import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
@@ -69,12 +68,12 @@ public class InvincibleShabokanAI extends AggressiveNpcAI {
 
 	private void sinkEvent() {
 		SkillEngine.getInstance().getSkill(getOwner(), 20720, 55, getOwner()).useNoAnimationSkill();
-		for (Player player : getKnownList().getKnownPlayers().values()) {
+		getKnownList().streamVisiblePlayers().forEach(player -> {
 			if (isInRange(player, 30)) {
 				spawn(283083, player.getX(), player.getY(), player.getZ(), (byte) 0);// 4.0
 				spawn(283084, player.getX(), player.getY(), player.getZ(), (byte) 0);// 4.0
 			}
-		}
+		});
 	}
 
 	private void chooseRandomEvent() {

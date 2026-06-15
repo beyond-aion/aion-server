@@ -14,6 +14,11 @@ import com.aionemu.gameserver.utils.chathandlers.ConsoleCommand;
 import com.aionemu.gameserver.utils.xml.JAXBUtil;
 
 /**
+ * Sent in the following cases:<br>
+ * - Clicking "Remove all skills" in the GM Panel (Shift + F1)<br>
+ * - Pressing Ctrl + Shift + Alt while clicking on a skill in the skill search results, or from the player's regular skill list if the console has
+ *   been activated via "\con_disable_console 0" from the command tab of the GM Panel (Shift + F1)<br>
+ *
  * @author ginho1
  */
 public class Deleteskill extends ConsoleCommand {

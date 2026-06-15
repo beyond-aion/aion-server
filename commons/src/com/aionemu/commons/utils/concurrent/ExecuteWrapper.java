@@ -35,12 +35,10 @@ public class ExecuteWrapper implements Executor {
 			if (CommonsConfig.RUNNABLESTATS_ENABLE)
 				RunnableStatsManager.handleStats(runnable.getClass(), durationNanos);
 
-			if (CommonsConfig.EXECUTION_TIME_WARNING_ENABLE) {
-				long durationMillis = TimeUnit.NANOSECONDS.toMillis(durationNanos);
-				if (durationMillis > expectedMaxExecutionTimeMillis) {
-					String name = runnable.getClass().isAnonymousClass() ? runnable.getClass().getName() : runnable.getClass().getSimpleName();
-					log.warn(name + " - execution time: " + durationMillis + "ms");
-				}
+			long durationMillis = TimeUnit.NANOSECONDS.toMillis(durationNanos);
+			if (durationMillis > expectedMaxExecutionTimeMillis) {
+				String name = runnable.getClass().isAnonymousClass() ? runnable.getClass().getName() : runnable.getClass().getSimpleName();
+				log.warn(name + " - execution time: " + durationMillis + "ms");
 			}
 		} catch (Throwable t) {
 			if (catchAndLogThrowables)

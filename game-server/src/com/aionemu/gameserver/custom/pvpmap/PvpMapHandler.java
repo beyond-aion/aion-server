@@ -7,7 +7,6 @@ import java.util.Map;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
-import com.aionemu.commons.services.CronService;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.controllers.NpcController;
@@ -17,7 +16,6 @@ import com.aionemu.gameserver.controllers.observer.ItemUseObserver;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.model.ChatType;
-import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.actions.PlayerMode;
@@ -28,9 +26,12 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.siege.FortressLocation;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
-import com.aionemu.gameserver.network.aion.serverpackets.*;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_BIND_POINT_TELEPORT;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_MESSAGE;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.PvpService;
 import com.aionemu.gameserver.services.SiegeService;
+import com.aionemu.gameserver.services.cron.CronService;
 import com.aionemu.gameserver.services.player.PlayerReviveService;
 import com.aionemu.gameserver.services.teleport.BindPointTeleportService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
@@ -94,7 +95,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 			if (Float.isNaN(z))
 				z = player.getZ() + 0.5f;
 			byte heading = PositionUtil.getHeadingTowards(x, y, player.getX(), player.getY());
-			SpawnTemplate template = SpawnEngine.newSingleTimeSpawn(mapId, 833543, x, y, z, heading, 0, "customcdreset");
+			SpawnTemplate template = SpawnEngine.newSingleTimeSpawn(mapId, 833543, x, y, z, heading, null, "customcdreset");
 			SpawnEngine.spawnObject(template, instance.getInstanceId());
 		}
 	}
@@ -161,7 +162,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 			if (Rnd.chance() < (CustomConfig.PVP_MAP_RANDOM_BOSS_BASE_RATE + bonus)) {
 				int npcId = Rnd.get(RANDOM_BOSS_NPC_IDS);
 				NpcTemplate template = DataManager.NPC_DATA.getNpcTemplate(npcId);
-				SpawnTemplate spawn = SpawnEngine.newSingleTimeSpawn(mapId, npcId, 744.337f, 292.986f, 233.697f, (byte) 43, 0,
+				SpawnTemplate spawn = SpawnEngine.newSingleTimeSpawn(mapId, npcId, 744.337f, 292.986f, 233.697f, (byte) 43, null,
 					"modified_iron_wall_aggressive");
 				Npc npc = new Npc(new NpcController(), spawn, template);
 				npc.setKnownlist(new NpcKnownList(npc));
@@ -265,7 +266,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 
 	private boolean checkState(Player p) {
 		return !p.getController().isInCombat() && !p.getLifeStats().isAboutToDie() && !p.isDead() && !p.isLooting() && !p.isInGlidingState()
-			&& !p.isFlying() && !p.isUsingFlyTeleport() && !p.isInPlayerMode(PlayerMode.WINDSTREAM) && !p.isInPlayerMode(PlayerMode.RIDE) && !p.hasStore()
+			&& !p.isFlying() && !p.isUsingFlightTransporterOrWindstream() && !p.isInPlayerMode(PlayerMode.RIDE) && !p.hasStore()
 			&& p.getCastingSkill() == null && !p.getEffectController().isInAnyAbnormalState(AbnormalState.CANT_ATTACK_STATE)
 			&& !p.getEffectController().isInAnyAbnormalState(AbnormalState.ROOT);
 	}
@@ -301,7 +302,6 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 			}
 			PvpService.getInstance().doReward(player, CustomConfig.PVP_MAP_AP_MULTIPLIER);
 			announceDeath(player);
-			PacketSendUtility.sendPacket(player, new SM_DIE(false, false, 0, 6));
 		}
 		return true;
 	}
@@ -378,17 +378,12 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 
 	@Override
 	public void onLeaveInstance(Player player) {
+		super.onLeaveInstance(player);
 		updateJoinOrLeaveTime(player);
 	}
 
 	@Override
-	public void onPlayerLogin(Player player) {
-		updateJoinOrLeaveTime(player);
-	}
-
-	@Override
-	public void onPlayerLogOut(Player player) {
-		updateJoinOrLeaveTime(player);
+	public void onPlayerLogout(Player player) {
 		removePlayer(player);
 	}
 
@@ -451,7 +446,6 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 	}
 
 	private void revive(Player player) {
-		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.RESURRECT), true);
 		PlayerReviveService.revive(player, 100, 100, false, 0);
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME());
 		player.getGameStats().updateStatsAndSpeedVisually();
@@ -858,7 +852,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 	}
 
 	@Override
-	public float getInstanceApMultiplier() {
+	public float getApMultiplier() {
 		return CustomConfig.PVP_MAP_PVE_AP_MULTIPLIER;
 	}
 }

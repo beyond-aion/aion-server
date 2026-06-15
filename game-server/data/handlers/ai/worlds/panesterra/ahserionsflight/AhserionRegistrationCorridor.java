@@ -12,6 +12,7 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUESTION_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.services.panesterra.PanesterraService;
 import com.aionemu.gameserver.services.panesterra.ahserion.AhserionRaid;
 import com.aionemu.gameserver.services.panesterra.ahserion.PanesterraFaction;
 import com.aionemu.gameserver.services.panesterra.ahserion.PanesterraTeam;
@@ -59,13 +60,14 @@ public class AhserionRegistrationCorridor extends GeneralNpcAI {
 				if (!AhserionRaid.getInstance().isStarted()) {
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_READY_PANGAEA());
 					return;
-				} else if (AhserionRaid.getInstance().getTeamMemberCountByFaction(faction) >= SiegeConfig.AHSERION_MAX_PLAYERS_PER_TEAM) {
+				} else if (PanesterraService.getInstance().getTeamMemberCount(faction) >= SiegeConfig.AHSERION_MAX_PLAYERS_PER_TEAM) {
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_USE_SVS_DIRECT_PORTAL_USE_COUNT_LIMIT());
 					return;
 				}
-				PanesterraTeam team = AhserionRaid.getInstance().getFactionTeam(faction);
+				PanesterraTeam team = PanesterraService.getInstance().getTeam(faction);
 				team.addTeamMemberIfAbsent(player.getObjectId());
 				team.movePlayerToStartPosition(player);
+				player.setPanesterraFaction(team.getFaction());
 			}
 		});
 	}

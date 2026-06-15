@@ -53,7 +53,7 @@ public class PlayerModelEntry implements Persistable {
 		playerIsBound = playerOrBoss.getEffectController().isAbnormalSet(AbnormalState.BIND);
 		playerIsStunned = playerOrBoss.getEffectController().isAbnormalSet(AbnormalState.ANY_STUN);
 		playerIsAetherhold = playerOrBoss.getEffectController().isAbnormalSet(AbnormalState.OPENAERIAL);
-		playerIsShielded = playerOrBoss.getEffectController().isUnderShield();
+		playerIsShielded = playerOrBoss.getEffectController().isUnderNormalShield();
 
 		playerBuffCount = 0;
 		playerDebuffCount = 0;
@@ -80,7 +80,7 @@ public class PlayerModelEntry implements Persistable {
 			targetIsBound = target.getEffectController().isAbnormalSet(AbnormalState.BIND);
 			targetIsStunned = target.getEffectController().isAbnormalSet(AbnormalState.ANY_STUN);
 			targetIsAetherhold = target.getEffectController().isAbnormalSet(AbnormalState.OPENAERIAL);
-			targetIsShielded = target.getEffectController().isUnderShield();
+			targetIsShielded = target.getEffectController().isUnderNormalShield();
 
 			targetBuffCount = 0;
 			targetDebuffCount = 0;

@@ -85,7 +85,7 @@ public class MaintenanceTask extends AbstractCronTask {
 	}
 
 	private void putHouseToAuction(House house, PlayerCommonData owner) {
-		house.getController().changeOwner(0);
+		HousingService.getInstance().changeOwner(house, 0);
 		HousingBidService.getInstance().auction(house, house.getDefaultAuctionPrice());
 		log.info("Auctioned house " + house.getAddress().getId() + " because " + (owner == null ? "owner got deleted." : "maintenance fee was overdue."));
 		if (owner != null && owner.isOnline())

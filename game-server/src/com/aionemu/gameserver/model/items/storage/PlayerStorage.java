@@ -14,11 +14,9 @@ public class PlayerStorage extends Storage {
 
 	private Player actor;
 
-	/**
-	 * @param storageType
-	 */
-	public PlayerStorage(StorageType storageType) {
+	public PlayerStorage(Player owner, StorageType storageType) {
 		super(storageType);
+		this.actor = owner;
 	}
 
 	@Override

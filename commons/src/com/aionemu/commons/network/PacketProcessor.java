@@ -145,7 +145,7 @@ public class PacketProcessor<T extends AConnection<?>> {
 	 * Start Checker Thread. Checker is responsible for increasing / reducing PacketProcessor Thread count based on Runtime needs.
 	 */
 	private void startCheckerThread() {
-		Thread.ofVirtual().name("PacketProcessor:Checker").start(new CheckerTask());
+		Thread.ofPlatform().name("PacketProcessor:Checker").start(new CheckerTask());
 	}
 
 	/**
@@ -160,7 +160,7 @@ public class PacketProcessor<T extends AConnection<?>> {
 		String name = "PacketProcessor:" + threads.size();
 		log.debug("Creating new PacketProcessor Thread: " + name);
 
-		Thread t = Thread.ofVirtual().name(name).unstarted(new PacketProcessorTask());
+		Thread t = Thread.ofPlatform().name(name).unstarted(new PacketProcessorTask());
 		threads.add(t);
 		t.start();
 

@@ -11,7 +11,6 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.configs.main.LoggingConfig;
 import com.aionemu.gameserver.configs.main.SiegeConfig;
-import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
 import com.aionemu.gameserver.model.siege.FortressLocation;
@@ -36,8 +35,6 @@ import com.aionemu.gameserver.world.World;
 public abstract class Siege<SL extends SiegeLocation> {
 
 	private static final Logger log = LoggerFactory.getLogger("SIEGE_LOG");
-	private final SiegeBossDeathListener siegeBossDeathListener = new SiegeBossDeathListener(this);
-	private final SiegeBossDoAddDamageListener siegeBossDoAddDamageListener = new SiegeBossDoAddDamageListener(this);
 	private final AtomicBoolean finished = new AtomicBoolean();
 	private final SiegeCounter siegeCounter = new SiegeCounter();
 	private final SL siegeLocation;
@@ -115,25 +112,13 @@ public abstract class Siege<SL extends SiegeLocation> {
 		return siegeCounter;
 	}
 
+	public SiegeRaceCounter getWinnerRaceCounter() {
+		return siegeCounter.getWinnerRaceCounter(getSiegeLocation().getRace());
+	}
+
 	protected abstract void onSiegeStart();
 
 	protected abstract void onSiegeFinish();
-
-	public void addBossDamage(Creature attacker, int damage) {
-		// We don't have to add damage anymore if siege is finished
-		if (isFinished())
-			return;
-
-		// Just to be sure that attacker exists.
-		// if don't - dunno what to do
-		if (attacker == null)
-			return;
-
-		// Actually we don't care if damage was done from summon.
-		// We should treat all the damage like it was done from the owner
-		attacker = attacker.getMaster();
-		getSiegeCounter().addDamage(attacker, damage);
-	}
 
 	public abstract boolean isEndless();
 
@@ -149,22 +134,6 @@ public abstract class Siege<SL extends SiegeLocation> {
 
 	public long getStartTime() {
 		return startTime;
-	}
-
-	protected void registerSiegeBossListeners() {
-		// Add hate listener - we should know when someone attacked general
-		getBoss().getAggroList().addEventListener(siegeBossDoAddDamageListener);
-
-		// Add die listener - we should stop the siege when general dies
-		getBoss().getAi().addEventListener(siegeBossDeathListener);
-	}
-
-	protected void unregisterSiegeBossListeners() {
-		// Add hate listener - we should know when someone attacked general
-		getBoss().getAggroList().removeEventListener(siegeBossDoAddDamageListener);
-
-		// Add die listener - we should stop the siege when general dies
-		getBoss().getAi().removeEventListener(siegeBossDeathListener);
 	}
 
 	protected void initSiegeBoss() {
@@ -183,7 +152,6 @@ public abstract class Siege<SL extends SiegeLocation> {
 			throw new SiegeException("Siege Boss not found for siege " + getSiegeLocationId());
 
 		setBoss(boss);
-		registerSiegeBossListeners();
 	}
 
 	protected void spawnNpcs(int locationId, SiegeRace race, SiegeModType type) {
@@ -234,7 +202,7 @@ public abstract class Siege<SL extends SiegeLocation> {
 
 					if (gp > 0) {
 						rewardedGpPlayers.add(playerId);
-						GloryPointsService.increaseGpBy(playerId, gp);
+						GloryPointsService.addGp(playerId, gp); // Rates.GP.calcResult() cannot be fairly applied here, because some players could be offline
 					}
 				}
 				if (LoggingConfig.LOG_SIEGE && !rewardedGpPlayers.isEmpty()) {

@@ -14,7 +14,7 @@ public class PlayerAwareKnownList extends KnownList {
 
 	@Override
 	protected final boolean isAwareOf(VisibleObject newObject) {
-		return newObject instanceof Player;
+		return super.isAwareOf(newObject) && newObject instanceof Player;
 	}
 
 }

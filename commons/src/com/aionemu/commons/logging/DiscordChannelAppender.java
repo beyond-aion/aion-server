@@ -83,7 +83,7 @@ public class DiscordChannelAppender<E> extends AppenderBase<E> {
 	@Override
 	protected void append(E eventObject) {
 		String rawMessage = new String(encoder.encode(eventObject));
-		String userName = null;
+		String username = null;
 		String avatarUrl = null;
 		String msg = rawMessage;
 		if (userName_avatarUrl_msg_separator != null && !userName_avatarUrl_msg_separator.isEmpty()) {
@@ -94,15 +94,25 @@ public class DiscordChannelAppender<E> extends AppenderBase<E> {
 				} else if (partCount == 1) {
 					avatarUrl = parts[i].trim();
 				} else if (partCount == 2) {
-					userName = parts[i].trim();
+					username = parts[i].trim();
 				}
 			}
 		}
-		if (userName != null && userName.length() > MAX_USERNAME_LENGTH)
-			userName = userName.substring(0, MAX_USERNAME_LENGTH - 1) + '…';
-		for (String messagePart : createMessageParts(msg)) {
-			sendMessage(messagePart, userName, avatarUrl);
+		if (username != null) {
+				username = replaceForbiddenWord(username, "discord", "Dscrd"); // Discord API rejects usernames containing "discord"
+			if (username.length() > MAX_USERNAME_LENGTH)
+				username = username.substring(0, MAX_USERNAME_LENGTH - 1) + '…';
 		}
+		for (String messagePart : createMessageParts(msg)) {
+			sendMessage(messagePart, username, avatarUrl);
+		}
+	}
+
+	private String replaceForbiddenWord(String username, String forbiddenWord, String replacement) {
+		forbiddenWord = forbiddenWord.toLowerCase();
+		for (int i = username.toLowerCase().lastIndexOf(forbiddenWord); i >= 0; i = username.toLowerCase().lastIndexOf(forbiddenWord, i - 1))
+			username = username.substring(0, i) +  replacement +  username.substring(i + forbiddenWord.length());
+		return username;
 	}
 
 	private List<String> createMessageParts(String msg) {
@@ -172,11 +182,11 @@ public class DiscordChannelAppender<E> extends AppenderBase<E> {
 		return length;
 	}
 
-	private void sendMessage(String msg, String userName, String avatarUrl) {
+	private void sendMessage(String msg, String username, String avatarUrl) {
 		if (isRateLimited())
 			return;
 		try {
-			byte[] json = JSON.toJSONBytes(Map.of("content", msg, "username", userName, "avatar_url", avatarUrl));
+			byte[] json = JSON.toJSONBytes(Map.of("content", msg, "username", username, "avatar_url", avatarUrl));
 			HttpRequest httpRequest = HttpRequest.newBuilder(webhookUri)
 					.headers("User-Agent", "DiscordChannelAppender/1.0")
 					.headers("Content-Type", "application/json")

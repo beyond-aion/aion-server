@@ -7,8 +7,8 @@ import org.quartz.CronExpression;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.services.CronService;
 import com.aionemu.gameserver.dao.ServerVariablesDAO;
+import com.aionemu.gameserver.services.cron.CronService;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**

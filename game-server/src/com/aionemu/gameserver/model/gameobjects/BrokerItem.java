@@ -12,32 +12,23 @@ import com.aionemu.gameserver.model.broker.BrokerRace;
  */
 public class BrokerItem implements Comparable<BrokerItem>, Persistable {
 
-	private Item item;
-	private int itemId;
-	private int itemUniqueId;
+	private final Item item;
+	private final int itemId;
+	private final int itemUniqueId;
 	private long itemCount;
-	private String itemCreator;
-	private long price;
-	private int sellerId;
-	private BrokerRace itemBrokerRace;
+	private final String itemCreator;
+	private final long price;
+	private final int sellerId;
+	private final BrokerRace itemBrokerRace;
 	private boolean isSold, isCanceled;
 	private boolean isSettled;
-	private Timestamp expireTime;
+	private final Timestamp expireTime;
 	private Timestamp settleTime;
-	private boolean splittingAvailable;
+	private final boolean splittingAvailable;
 	private long averagePrice;
 
 	PersistentState state;
 
-	/**
-	 * Used to manually register an item
-	 * 
-	 * @param item
-	 * @param price
-	 * @param sellerId
-	 * @param splittingAvailable
-	 * @param itemBrokerRace
-	 */
 	public BrokerItem(Item item, long price, int sellerId, boolean splittingAvailable, BrokerRace itemBrokerRace) {
 		this.item = item;
 		this.itemId = item.getItemTemplate().getTemplateId();
@@ -51,19 +42,11 @@ public class BrokerItem implements Comparable<BrokerItem>, Persistable {
 		this.isSettled = false;
 		this.splittingAvailable = splittingAvailable;
 		this.expireTime = new Timestamp(System.currentTimeMillis() + TimeUnit.DAYS.toMillis(CustomConfig.BROKER_REGISTRATION_EXPIRATION_DAYS));
+		this.expireTime.setNanos(0); // db queries by this timestamp but doesn't store fractional seconds
 		this.settleTime = new Timestamp(System.currentTimeMillis());
 		this.state = PersistentState.NEW;
 	}
 
-	/**
-	 * Used onDBLoad
-	 * 
-	 * @param item
-	 * @param itemId
-	 * @param price
-	 * @param sellerId
-	 * @param itemBrokerRace
-	 */
 	public BrokerItem(Item item, int itemId, int itemUniqueId, long itemCount, String itemCreator, long price, int sellerId, BrokerRace itemBrokerRace,
 		boolean isSold, boolean isSettled, Timestamp expireTime, Timestamp settleTime, boolean splittingAvailable) {
 		this.item = item;
@@ -74,20 +57,12 @@ public class BrokerItem implements Comparable<BrokerItem>, Persistable {
 		this.price = price;
 		this.sellerId = sellerId;
 		this.itemBrokerRace = itemBrokerRace;
-
-		if (item == null) {
-			this.isSold = true;
-			this.isSettled = true;
-
-		} else {
-			this.isSold = isSold;
-			this.isSettled = isSettled;
-		}
-
+		this.isSold = isSold;
+		this.isSettled = isSettled;
 		this.expireTime = expireTime;
+		this.expireTime.setNanos(0); // db queries by this timestamp but doesn't store fractional seconds
 		this.settleTime = settleTime;
 		this.splittingAvailable = splittingAvailable;
-
 		this.state = PersistentState.NOACTION;
 	}
 
@@ -98,17 +73,6 @@ public class BrokerItem implements Comparable<BrokerItem>, Persistable {
 		return itemCreator == null ? "" : itemCreator;
 	}
 
-	/**
-	 * @param itemCreator
-	 *          the itemCreator to set
-	 */
-	public void setItemCreator(String itemCreator) {
-		this.itemCreator = itemCreator;
-	}
-
-	/**
-	 * @return
-	 */
 	public Item getItem() {
 		return item;
 	}

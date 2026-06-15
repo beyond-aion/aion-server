@@ -67,42 +67,42 @@ public class CustomInstanceDominatorAI extends AggressiveNoLootNpcAI {
 				getOwner().getSkillCoolDowns().clear(); // Make CD rank-dependent, not skill-dependent
 
 			if (challengerRank >= CustomInstanceRankEnum.ANCIENT.getMinRank())
-				getOwner().queueSkill(3539, 65); // Ignite Aether
+				getOwner().queueSkill(3539, 65, 0); // Ignite Aether
 
 			if (challengerRank >= CustomInstanceRankEnum.CERANIUM.getMinRank())
-				getOwner().queueSkill(618, 65); // Ankle Snare
+				getOwner().queueSkill(618, 65, 0); // Ankle Snare
 			else if (challengerRank >= CustomInstanceRankEnum.GOLD.getMinRank())
-				getOwner().queueSkill(1328, 65); // Restraint (^)
+				getOwner().queueSkill(1328, 65, 0); // Restraint (^)
 
 			if (challengerRank >= CustomInstanceRankEnum.ANCIENT_PLUS.getMinRank())
-				getOwner().queueSkill(3775, 65); // Fear
+				getOwner().queueSkill(3775, 65, 0); // Fear
 			else if (challengerRank >= CustomInstanceRankEnum.GOLD.getMinRank())
-				getOwner().queueSkill(1417, 65); // Curse Tree (^)
+				getOwner().queueSkill(1417, 65, 0); // Curse Tree (^)
 
 			// SILVER:
-			getOwner().queueSkill(3581, 65); // Withering Gloom
+			getOwner().queueSkill(3581, 65, 0); // Withering Gloom
 
 			if (challengerRank >= CustomInstanceRankEnum.PLATINUM.getMinRank())
-				getOwner().queueSkill(3574, 65); // Shackle of Vulnerability
+				getOwner().queueSkill(3574, 65, 0); // Shackle of Vulnerability
 			else // SILVER:
-				getOwner().queueSkill(3780, 65); // Root of Enervation (^)
+				getOwner().queueSkill(3780, 65, 0); // Root of Enervation (^)
 
 			if (challengerRank >= CustomInstanceRankEnum.MITHRIL.getMinRank())
 				if (getOwner().getTarget() != null && getOwner().getTarget() instanceof Player
 					&& ((Player) (getOwner().getTarget())).getPlayerClass().isPhysicalClass())
-					getOwner().queueSkill(3571, 65); // Body Root
+					getOwner().queueSkill(3571, 65, 0); // Body Root
 				else
-					getOwner().queueSkill(3572, 65); // Sigil of Silence
+					getOwner().queueSkill(3572, 65, 0); // Sigil of Silence
 
 			if (challengerRank >= CustomInstanceRankEnum.CERANIUM.getMinRank())
 				if (getOwner().getTarget() != null && getOwner().getTarget() instanceof Player
 					&& ((Player) (getOwner().getTarget())).getPlayerClass().isPhysicalClass())
-					getOwner().queueSkill(4135, 65); // Blinding Light
+					getOwner().queueSkill(4135, 65, 0); // Blinding Light
 				else
-					getOwner().queueSkill(1336, 65); // Curse of Weakness
+					getOwner().queueSkill(1336, 65, 0); // Curse of Weakness
 
 			if (challengerRank >= CustomInstanceRankEnum.ANCIENT.getMinRank())
-				getOwner().queueSkill(4490, 65); // Paralysis Resonation
+				getOwner().queueSkill(4490, 65, 0); // Paralysis Resonation
 
 			debuffTask = ThreadPoolManager.getInstance().schedule(this::debuffTarget, 30000 - challengerRank * 1000 / 3); // 30s ... 20s
 		}

@@ -3,7 +3,7 @@ package admincommands;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 import com.aionemu.gameserver.model.team.legion.Legion;
-import com.aionemu.gameserver.model.team.legion.LegionRank;
+import com.aionemu.gameserver.model.team.legion.LegionMember;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.LegionService;
 import com.aionemu.gameserver.services.player.PlayerService;
@@ -27,7 +27,7 @@ public class LegionCommand extends AdminCommand {
 			"kick <player name> - Kicks the player from their legion.",
 			"disband <legion name> - Disbands the legion.",
 			"rename <legion name> <new name> - Changes the legion's name.",
-			"setbg <legion name> <player name> - Changes a legion's brigade general.",
+			"setbg <player name> - Appoints the player as brigade general of their legion.",
 			"setlevel <legion name> <level> - Changes the legion's level.",
 			"setpoints <legion name> <points> - Changes the legion's contributing points."
 		);
@@ -78,17 +78,16 @@ public class LegionCommand extends AdminCommand {
 			sendInfo(player, "Legion name: " + legion.getName());
 			sendInfo(player, "Level: " + legion.getLegionLevel());
 			sendInfo(player, "Contribution points: " + legion.getContributionPoints());
-			sendInfo(player, "Members (" + legion.getLegionMembers().size() + "):");
-			for (int memberId : legion.getLegionMembers()) {
-				PlayerCommonData pcd = PlayerService.getOrLoadPlayerCommonData(memberId);
-				String brigadeGeneralInfo = memberId == legion.getBrigadeGeneral() ? ", brigade general" : "";
-				sendInfo(player, "\t" + pcd.getName() + " (lv " + pcd.getLevel() + " " + pcd.getPlayerClass() + brigadeGeneralInfo + ")");
+			sendInfo(player, "Members (" + legion.getMemberIds().size() + "):");
+			for (LegionMember lm : legion.getMembers()) {
+				String brigadeGeneralInfo = lm.isBrigadeGeneral() ? ", brigade general" : "";
+				sendInfo(player, "\t" + lm.getName() + " (lv " + lm.getLevel() + " " + lm.getPlayerClass() + brigadeGeneralInfo + ")");
 			}
 		} else if (params[0].equalsIgnoreCase("kick")) {
 			Player target = World.getInstance().getPlayer(Util.convertName(params[1]));
 			if (target == null)
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_NO_SUCH_USER(params[1]));
-			else if (target.getLegionMember().getRank() == LegionRank.BRIGADE_GENERAL)
+			else if (target.getLegionMember().isBrigadeGeneral())
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GUILD_BANISH_CAN_BANISH_MASTER());
 			else if (LegionService.getInstance().leaveLegion(target, true)) 
 				sendInfo(player, target.getName() + " was kicked from the legion.");
@@ -103,19 +102,22 @@ public class LegionCommand extends AdminCommand {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GUILD_INVITE_HE_IS_OTHER_GUILD_MEMBER(target.getName()));
 			else if (LegionService.getInstance().addToLegion(legion, target, player))
 				sendInfo(player, target.getName() + " was added to " + legion.getName());
-		} else if (params[0].equalsIgnoreCase("setbg") && params.length >= 3) {
-			Legion legion = getLegion(params[1]);
-			Player target = World.getInstance().getPlayer(Util.convertName(params[2]));
-			if (target == null) {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_NO_SUCH_USER(params[2]));
+		} else if (params[0].equalsIgnoreCase("setbg")) {
+			PlayerCommonData playerCommonData = PlayerService.getOrLoadPlayerCommonData(Util.convertName(params[1]));
+			if (playerCommonData == null) {
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_NO_USER_NAMED(params[1]));
 				return;
 			}
-			if (!legion.isMember(target.getObjectId())) {
-				sendInfo(player, target.getName() + " is not a member of " + legion.getName());
+			LegionMember legionMember = LegionService.getInstance().getLegionMember(playerCommonData);
+			if (legionMember == null) {
+				sendInfo(player, playerCommonData.getName() + " is not a member of any legion.");
 				return;
 			}
-			LegionService.getInstance().appointBrigadeGeneral(target);
-			sendInfo(player, "Legion brigade general changed to " + target.getName() + ".");
+			String legionName = legionMember.getLegion().getName();
+			String previousBrigadeGeneral = legionMember.getLegion().getBrigadeGeneral().getName();
+			LegionService.getInstance().appointBrigadeGeneral(legionMember);
+			String newBrigadeGeneral = legionMember.getLegion().getBrigadeGeneral().getName();
+			sendInfo(player, "The brigade general of legion " + legionName + " was changed from " + previousBrigadeGeneral + " to " + newBrigadeGeneral + ".");
 		} else {
 			sendInfo(player);
 		}

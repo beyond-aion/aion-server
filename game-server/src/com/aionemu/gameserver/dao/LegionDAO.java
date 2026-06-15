@@ -1,6 +1,10 @@
 package com.aionemu.gameserver.dao;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.EnumMap;
+import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,10 +13,9 @@ import com.aionemu.commons.database.DB;
 import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.commons.database.IUStH;
 import com.aionemu.commons.database.ParamReadStH;
-import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
-import com.aionemu.gameserver.model.items.storage.StorageType;
 import com.aionemu.gameserver.model.team.legion.*;
+import com.aionemu.gameserver.model.team.legion.LegionHistoryAction.Type;
 
 /**
  * Class that is responsible for storing/loading legion data
@@ -37,12 +40,10 @@ public class LegionDAO {
 	private static final String INSERT_EMBLEM_QUERY = "INSERT INTO legion_emblems(legion_id, emblem_id, color_a, color_r, color_g, color_b, emblem_type, emblem_data) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String UPDATE_EMBLEM_QUERY = "UPDATE legion_emblems SET emblem_id=?, color_a=?, color_r=?, color_g=?, color_b=?, emblem_type=?, emblem_data=? WHERE legion_id=?";
 	private static final String SELECT_EMBLEM_QUERY = "SELECT * FROM legion_emblems WHERE legion_id=?";
-	/** Storage Queries **/
-	private static final String SELECT_STORAGE_QUERY = "SELECT * FROM `inventory` WHERE `item_owner`=? AND `item_location`=? AND `is_equipped`=?";
 	/** History Queries **/
-	private static final String INSERT_HISTORY_QUERY = "INSERT INTO legion_history(`legion_id`, `date`, `history_type`, `name`, `tab_id`, `description`) VALUES (?, ?, ?, ?, ?, ?)";
-	private static final String SELECT_HISTORY_QUERY = "SELECT * FROM `legion_history` WHERE legion_id=? ORDER BY date ASC;";
-	private static final String CLEAR_LEGION_SIEGE = "UPDATE siege_locations SET legion_id=0 WHERE legion_id=?";
+	private static final String INSERT_HISTORY_QUERY = "INSERT INTO legion_history(`legion_id`, `date`, `history_type`, `name`, `description`) VALUES (?, ?, ?, ?, ?)";
+	private static final String SELECT_HISTORY_QUERY = "SELECT * FROM `legion_history` WHERE legion_id=? ORDER BY date DESC, id DESC";
+	private static final String DELETE_HISTORY_QUERY = "DELETE FROM `legion_history` WHERE id IN (%s)";
 
 	public static boolean isNameUsed(String name) {
 		PreparedStatement s = DB.prepareStatement("SELECT count(id) as cnt FROM legions WHERE ? = legions.name");
@@ -162,14 +163,6 @@ public class LegionDAO {
 			statement.setInt(1, legionId);
 		} catch (SQLException e) {
 			log.error("deleteLegion #1", e);
-		}
-		DB.executeUpdateAndClose(statement);
-
-		statement = DB.prepareStatement(CLEAR_LEGION_SIEGE);
-		try {
-			statement.setInt(1, legionId);
-		} catch (SQLException e) {
-			log.error("deleteLegion #2", e);
 		}
 		DB.executeUpdateAndClose(statement);
 	}
@@ -323,88 +316,55 @@ public class LegionDAO {
 		return legionEmblem;
 	}
 
-	public static LegionWarehouse loadLegionStorage(Legion legion) {
-		LegionWarehouse inventory = new LegionWarehouse(legion);
-		int legionId = legion.getLegionId();
-		int storage = StorageType.LEGION_WAREHOUSE.getId();
-		int equipped = 0;
-
-		DB.select(SELECT_STORAGE_QUERY, new ParamReadStH() {
-
-			@Override
-			public void setParams(PreparedStatement stmt) throws SQLException {
-				stmt.setInt(1, legionId);
-				stmt.setInt(2, storage);
-				stmt.setInt(3, equipped);
-			}
-
-			@Override
-			public void handleRead(ResultSet rset) throws SQLException {
-				while (rset.next()) {
-					int itemUniqueId = rset.getInt("item_unique_id");
-					int itemId = rset.getInt("item_id");
-					long itemCount = rset.getLong("item_count");
-					Integer itemColor = (Integer) rset.getObject("item_color"); // accepts null (which means not dyed)
-					int colorExpireTime = rset.getInt("color_expires");
-					String itemCreator = rset.getString("item_creator");
-					int expireTime = rset.getInt("expire_time");
-					int activationCount = rset.getInt("activation_count");
-					int isEquiped = rset.getInt("is_equipped");
-					int slot = rset.getInt("slot");
-					int enchant = rset.getInt("enchant");
-					int enchantBonus = rset.getInt("enchant_bonus");
-					int itemSkin = rset.getInt("item_skin");
-					int fusionedItem = rset.getInt("fusioned_item");
-					int optionalSocket = rset.getInt("optional_socket");
-					int optionalFusionSocket = rset.getInt("optional_fusion_socket");
-					int charge = rset.getInt("charge");
-					int tuneCount = rset.getInt("tune_count");
-					int bonusStatsId = rset.getInt("rnd_bonus");
-					int fusionedItemBonusStatsId = rset.getInt("fusion_rnd_bonus");
-					int tempering = rset.getInt("tempering");
-					int packCount = rset.getInt("pack_count");
-					int isAmplified = rset.getInt("is_amplified");
-					int buffSkill = rset.getInt("buff_skill");
-					int rndPlumeBonusValue = rset.getInt("rnd_plume_bonus");
-
-					Item item = new Item(itemUniqueId, itemId, itemCount, itemColor, colorExpireTime, itemCreator, expireTime, activationCount, isEquiped == 1,
-						false, slot, storage, enchant, enchantBonus, itemSkin, fusionedItem, optionalSocket, optionalFusionSocket, charge, tuneCount,
-						bonusStatsId, fusionedItemBonusStatsId, tempering, packCount, isAmplified == 1, buffSkill, rndPlumeBonusValue);
-					item.setPersistentState(PersistentState.UPDATED);
-					inventory.onLoadHandler(item);
-				}
-			}
-		});
-		return inventory;
-	}
-
-	public static void loadLegionHistory(Legion legion) {
+	public static void loadHistory(Legion legion) {
+		Map<Type, List<LegionHistoryEntry>> history = new EnumMap<>(Type.class);
+		for (Type type : Type.values())
+			history.put(type, new ArrayList<>());
 		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_HISTORY_QUERY)) {
 			stmt.setInt(1, legion.getLegionId());
 			ResultSet resultSet = stmt.executeQuery();
-			while (resultSet.next())
-				legion.addHistory(new LegionHistory(LegionHistoryType.valueOf(resultSet.getString("history_type")), resultSet.getString("name"),
-					resultSet.getTimestamp("date"), resultSet.getInt("tab_id"), resultSet.getString("description")));
+			while (resultSet.next()) {
+				int id = resultSet.getInt("id");
+				int epochSeconds = (int) (resultSet.getTimestamp("date").getTime() / 1000);
+				LegionHistoryAction action = LegionHistoryAction.valueOf(resultSet.getString("history_type"));
+				String name = resultSet.getString("name");
+				String description = resultSet.getString("description");
+				history.get(action.getType()).add(new LegionHistoryEntry(id, epochSeconds, action, name, description));
+			}
 		} catch (Exception e) {
-			log.error("Error loading legion history of " + legion, e);
+			log.error("Could not load history of legion " + legion, e);
+		}
+		legion.setHistory(history);
+	}
+
+	public static LegionHistoryEntry insertHistory(int legionId, LegionHistoryAction action, String name, String description) {
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(INSERT_HISTORY_QUERY, Statement.RETURN_GENERATED_KEYS)) {
+			long nowMillis = System.currentTimeMillis();
+			stmt.setInt(1, legionId);
+			stmt.setTimestamp(2, new Timestamp(nowMillis));
+			stmt.setString(3, action.toString());
+			stmt.setString(4, name);
+			stmt.setString(5, description);
+			stmt.execute();
+			ResultSet result = stmt.getGeneratedKeys();
+			result.next();
+			return new LegionHistoryEntry(result.getInt(1), (int) (nowMillis / 1000), action, name, description);
+		} catch (Exception e) {
+			log.error("Could not add history entry for legion " + legionId, e);
+			return null;
 		}
 	}
 
-	public static boolean saveNewLegionHistory(int legionId, LegionHistory legionHistory) {
-		boolean success = DB.insertUpdate(INSERT_HISTORY_QUERY, new IUStH() {
-
-			@Override
-			public void handleInsertUpdate(PreparedStatement preparedStatement) throws SQLException {
-				preparedStatement.setInt(1, legionId);
-				preparedStatement.setTimestamp(2, legionHistory.getTime());
-				preparedStatement.setString(3, legionHistory.getLegionHistoryType().toString());
-				preparedStatement.setString(4, legionHistory.getName());
-				preparedStatement.setInt(5, legionHistory.getTabId());
-				preparedStatement.setString(6, legionHistory.getDescription());
-				preparedStatement.execute();
-			}
-		});
-		return success;
+	public static void deleteHistory(int legionId, List<LegionHistoryEntry> entries) {
+		if (entries.isEmpty())
+			return;
+		String placeholders = ",?".repeat(entries.size()).substring(1);
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(DELETE_HISTORY_QUERY.formatted(placeholders))) {
+			for (int i = 0; i < entries.size(); i++)
+				stmt.setInt(i + 1, entries.get(i).id());
+			stmt.executeUpdate();
+		} catch (Exception e) {
+			log.error("Could not delete " + entries.size() + " history entries for legion " + legionId, e);
+		}
 	}
-
 }

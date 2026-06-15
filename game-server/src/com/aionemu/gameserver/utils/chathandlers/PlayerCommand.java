@@ -24,20 +24,16 @@ public abstract class PlayerCommand extends ChatCommand {
 
 	@Override
 	public boolean validateAccess(Player player) {
-		return player.hasPermission(getLevel()) || CommandsAccessService.hasAccess(player.getObjectId(), getAlias());
+		boolean hasAccess = player.hasPermission(getLevel()) || CommandsAccessService.hasAccess(player.getObjectId(), getAliasForLevel());
+		if (!hasAccess && player.isStaff())
+			sendInfo(player, "<You need membership level " + getLevel() + " or higher to use " + getAliasWithPrefix() + ">");
+		return hasAccess;
 	}
 
 	@Override
 	boolean process(Player player, String... params) {
-
-		if (!validateAccess(player)) {
-			if (player.isStaff()) {
-				sendInfo(player, "<You need membership level " + getLevel() + " or higher to use " + getAliasWithPrefix() + ">");
-				return true;
-			}
-			// return false so chat will send entered text (this way you can't guess commands without rights)
-			return false;
-		}
+		if (!validateAccess(player))
+			return player.isStaff(); // return false for regular players, so chat will send entered text (this way you can't guess commands without rights)
 
 		if (!run(player, params))
 			sendInfo(player, "<Error while executing command>");

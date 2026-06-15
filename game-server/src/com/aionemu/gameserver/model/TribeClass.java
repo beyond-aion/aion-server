@@ -39,7 +39,7 @@ public enum TribeClass {
 	ARCHERYBASFELT_ATARGETBASFELT_LF1,
 	ARCHERYBASFELT2_ATARGETBASFELT2_DF1,
 	ARCHERYBASFELT2_ATARGETBASFELT2_LF1,
-	ASIST_D(true),
+	ASIST_D,
 	ATAURIC,
 	ATKDRAKAN,
 	BAT_FAMILY_ELITE,
@@ -97,11 +97,11 @@ public enum TribeClass {
 	DRAMATATIMERA,
 	DRAMATATIMERB,
 	DUMMY,
-	DUMMY_DGUARD(Race.ASMODIANS),
-	DUMMY_LGUARD(Race.ELYOS),
+	DUMMY_DGUARD,
+	DUMMY_LGUARD,
 	DUMMY2,
-	DUMMY2_DGUARD(Race.ASMODIANS),
-	DUMMY2_LGUARD(Race.ELYOS),
+	DUMMY2_DGUARD,
+	DUMMY2_LGUARD,
 	ELEMENTAL_AIR,
 	ELEMENTAL_EARTH,
 	ELEMENTAL_FIRE,
@@ -110,9 +110,9 @@ public enum TribeClass {
 	ENEMY_AGUARD_DARK,
 	ESCORT,
 	ETTIN,
-	F4GUARD_DARK(Race.ASMODIANS),
-	F4GUARD_DRAGON(Race.DRAGON),
-	F4GUARD_LIGHT(Race.ELYOS),
+	F4GUARD_DARK,
+	F4GUARD_DRAGON,
+	F4GUARD_LIGHT,
 	F4RAID,
 	FANATIC,
 	FARMER_HKERUBIM_LF1,
@@ -120,8 +120,8 @@ public enum TribeClass {
 	FIELD_OBJECT_ALL,
 	FIELD_OBJECT_ALL_HOSTILEMONSTER,
 	FIELD_OBJECT_ALL_MONSTER,
-	FIELD_OBJECT_DARK(true),
-	FIELD_OBJECT_LIGHT(true),
+	FIELD_OBJECT_DARK,
+	FIELD_OBJECT_LIGHT,
 	FIREEL1,
 	FIREEL2,
 	FIREEL3,
@@ -136,12 +136,12 @@ public enum TribeClass {
 	FUNGUS,
 	GARGOYLE,
 	GARGOYLE_ELITE,
-	GENERAL(true),
+	GENERAL,
 	GENERAL_ADADR,
-	GENERAL_DARK(true),
+	GENERAL_DARK,
 	GENERAL_DARK_IDLDF4A_INTRO,
 	GENERAL_DARK_LYCAN,
-	GENERAL_DRAGON(true),
+	GENERAL_DRAGON,
 	GENERAL_IDLDF4A_INTRO,
 	GENERAL_KRALL,
 	GENERAL_LDF4A_PUBLIC_YUN,
@@ -159,19 +159,19 @@ public enum TribeClass {
 	GRIFFO,
 	GRIFFON,
 	GSLAVE,
-	GUARD(Race.ELYOS, true),
+	GUARD,
 	GUARD_D1NOATTACK,
-	GUARD_DARK(Race.ASMODIANS, true),
-	GUARD_DARK_ALYCANARATMAN_DF1(Race.ASMODIANS),
-	GUARD_DARKAENEMY(Race.ASMODIANS),
-	GUARD_DARKMA(Race.ASMODIANS),
-	GUARD_DRAGON(Race.DRAGON, true),
-	GUARD_DRAGONMA(Race.DRAGON),
+	GUARD_DARK,
+	GUARD_DARK_ALYCANARATMAN_DF1,
+	GUARD_DARKAENEMY,
+	GUARD_DARKMA,
+	GUARD_DRAGON,
+	GUARD_DRAGONMA,
 	GUARD_FTARGETBASFELT_DF1,
 	GUARD_FTARGETBASFELT_LF1,
-	GUARD_LIGHT_AKERUBIM_LF1(Race.ELYOS),
-	GUARD_LIGHTMA(Race.ELYOS),
-	GUARDDARK_ALEHPAR(Race.ASMODIANS),
+	GUARD_LIGHT_AKERUBIM_LF1,
+	GUARD_LIGHTMA,
+	GUARDDARK_ALEHPAR,
 	GUARDIAN,
 	GURURU_D1,
 	GURURU_DECO,
@@ -407,7 +407,7 @@ public enum TribeClass {
 	MINX,
 	MINX_HKALNIF,
 	MINX_HZAIF,
-	MONSTER(true),
+	MONSTER,
 	MONSTER_FRIENDLY_LDFCHIEF,
 	MONSTER_LDF4A_PUBLIC_LIZARDMAN,
 	MOSBEARBABY,
@@ -436,15 +436,15 @@ public enum TribeClass {
 	NNAGA_SERVANT,
 	NOFIGHT,
 	NONAGRRESSIVEFRIENDLYVRITRA,
-	NONE(true),
-	NPC(true),
+	NONE,
+	NPC,
 	OCTASIDE_AMUTA,
 	OCTASIDEBABY,
 	ORC,
 	PARENTSMONSTER,
-	PC(true),
-	PC_DARK(true),
-	PC_DRAGON(true),
+	PC,
+	PC_DARK,
+	PC_DRAGON,
 	PET,
 	PET_DARK,
 	POLYMORPHFUNGY,
@@ -452,9 +452,9 @@ public enum TribeClass {
 	PREDATOR,
 	PREY,
 	PRETOR_ALEHPAR,
-	PROTECTGUARD_DARK(Race.ASMODIANS),
+	PROTECTGUARD_DARK,
 	PROTECTGUARD_DARK_SIEGEWEAPON,
-	PROTECTGUARD_LIGHT(Race.ELYOS),
+	PROTECTGUARD_LIGHT,
 	PROTECTGUARD_LIGHT_SIEGEWEAPON,
 	QUESTGUARD_DARK,
 	QUESTGUARD_LIGHT,
@@ -524,7 +524,7 @@ public enum TribeClass {
 	TRICON,
 	UNDEADGRADIATOR_DF1,
 	UNDER_01_WAR_VRITRA,
-	USEALL(true),
+	USEALL,
 	USEALL_HOSTILEPC,
 	USEALL_LDF5_TOWER_DA,
 	USEALL_LDF5_TOWER_LI,
@@ -732,58 +732,17 @@ public enum TribeClass {
 	LF5_ITEM,
 	LF5_ITEM_SUM;
 
-	private Race guardRace;
-	private boolean isBasic;
-	private boolean isUsed = false;
+	private final boolean isGuard;
 
-	private TribeClass() {
-	}
-
-	private TribeClass(Race guardRace) {
-		this.guardRace = guardRace;
-	}
-
-	private TribeClass(Race guardRace, boolean isBasic) {
-		this.guardRace = guardRace;
-		this.isBasic = isBasic;
-	}
-
-	private TribeClass(boolean isBasic) {
-		this.isBasic = isBasic;
+	TribeClass() {
+		this.isGuard = name().toUpperCase().contains("GUARD");
 	}
 
 	public boolean isGuard() {
-		return guardRace != null;
-	}
-
-	public boolean isBasicClass() {
-		return isBasic;
-	}
-
-	public boolean isLightGuard() {
-		return guardRace == Race.ELYOS;
-	}
-
-	public boolean isDarkGuard() {
-		return guardRace == Race.ASMODIANS;
-	}
-
-	public boolean isDrakanGuard() {
-		return guardRace == Race.DRAGON;
+		return isGuard;
 	}
 
 	public boolean isPC() {
 		return this == TribeClass.PC || this == TribeClass.PC_DARK;
-	}
-
-	/**
-	 * @return true if tribe is used for any npc
-	 */
-	public boolean isUsed() {
-		return isUsed;
-	}
-
-	public void setUsed(boolean isUsed) {
-		this.isUsed = isUsed;
 	}
 }

@@ -1,22 +1,13 @@
 package com.aionemu.gameserver.skillengine.model;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.templates.L10n;
 import com.aionemu.gameserver.skillengine.action.Actions;
-import com.aionemu.gameserver.skillengine.condition.ChainCondition;
-import com.aionemu.gameserver.skillengine.condition.Condition;
-import com.aionemu.gameserver.skillengine.condition.Conditions;
-import com.aionemu.gameserver.skillengine.condition.HpCondition;
-import com.aionemu.gameserver.skillengine.condition.PlayerMovedCondition;
-import com.aionemu.gameserver.skillengine.condition.RideRobotCondition;
-import com.aionemu.gameserver.skillengine.condition.SkillChargeCondition;
+import com.aionemu.gameserver.skillengine.action.ItemUseAction;
+import com.aionemu.gameserver.skillengine.condition.*;
 import com.aionemu.gameserver.skillengine.effect.EffectTemplate;
 import com.aionemu.gameserver.skillengine.effect.EffectType;
 import com.aionemu.gameserver.skillengine.effect.Effects;
@@ -27,15 +18,13 @@ import com.aionemu.gameserver.skillengine.properties.Properties;
  * @author ATracer, Wakizashi
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "skillTemplate", propOrder = { "properties", "startconditions", "useconditions", "endconditions", "useequipmentconditions", "effects",
-	"actions", "periodicActions", "motion" })
+@XmlType(name = "skillTemplate")
 public class SkillTemplate implements L10n {
 
 	private Properties properties;
 	private Conditions startconditions;
 	private Conditions useconditions;
 	private Conditions endconditions;
-	private Conditions useequipmentconditions;
 	private Effects effects;
 	private Actions actions;
 	@XmlElement(name = "periodicactions")
@@ -70,6 +59,8 @@ public class SkillTemplate implements L10n {
 	private DispelCategoryType dispelCategory = DispelCategoryType.NONE;
 	@XmlAttribute(name = "req_dispel_level")
 	private int reqDispelLevel;
+	@XmlAttribute(name = "req_dispel_count")
+	private int reqDispelCount;
 	@XmlAttribute(name = "activation", required = true)
 	private ActivationAttribute activationAttribute;
 	@XmlAttribute(required = true)
@@ -125,10 +116,6 @@ public class SkillTemplate implements L10n {
 
 	public Conditions getUseconditions() {
 		return useconditions;
-	}
-
-	public Conditions getUseEquipmentconditions() {
-		return useequipmentconditions;
 	}
 
 	public Effects getEffects() {
@@ -194,6 +181,10 @@ public class SkillTemplate implements L10n {
 
 	public int getReqDispelLevel() {
 		return reqDispelLevel;
+	}
+
+	public int getReqDispelCount() {
+		return reqDispelCount;
 	}
 
 	public int getDuration() {
@@ -277,6 +268,16 @@ public class SkillTemplate implements L10n {
 		return stance;
 	}
 
+	public boolean isCastDurationAffectedByCastSpeed() {
+		if (isDeityAvatar())
+			return false;
+		if (hasAnyEffect(EffectType.SLEEP, EffectType.FEAR, EffectType.RETURN, EffectType.ESCAPE))
+			return false; // sleep and fear skills are no longer affected by cast speed since 1.5.0.5
+		if (getActions() != null && getActions().getActions().stream().anyMatch(action -> action instanceof ItemUseAction)) // e.g. Herb Treatment
+			return false;
+		return true;
+	}
+
 	public boolean hasAnyEffect(EffectType... effectTypes) {
 		return hasAnyEffect(false, effectTypes);
 	}
@@ -344,6 +345,11 @@ public class SkillTemplate implements L10n {
 		return noSaveOnLogout;
 	}
 
+	public boolean isMultiCast() {
+		ChainCondition chainCondition = getChainCondition();
+		return chainCondition != null && chainCondition.getAllowedActivations() > 1;
+	}
+
 	public ChainCondition getChainCondition() {
 		if (startconditions != null) {
 			for (Condition cond : startconditions.getConditions()) {
@@ -351,7 +357,6 @@ public class SkillTemplate implements L10n {
 					return (ChainCondition) cond;
 			}
 		}
-
 		return null;
 	}
 

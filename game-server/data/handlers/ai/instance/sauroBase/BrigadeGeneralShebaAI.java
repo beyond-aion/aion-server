@@ -3,7 +3,6 @@ package ai.instance.sauroBase;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -30,13 +29,16 @@ public class BrigadeGeneralShebaAI extends AggressiveNpcAI {
 
 	@Override
 	public void onStartUseSkill(SkillTemplate skillTemplate, int skillLevel) {
+		multiplier = 1f;
 		switch (skillTemplate.getSkillId()) {
 			case 21188:
-				multiplier = 0.55f;
 				PacketSendUtility.broadcastMessage(getOwner(),1500775);
+				multiplier = 0.55f;
 				break;
 			case 21183:
 				PacketSendUtility.broadcastMessage(getOwner(), 1500779);
+				multiplier = 0.55f;
+				break;
 			case 21187:
 			case 21410:
 			case 21425:
@@ -98,12 +100,6 @@ public class BrigadeGeneralShebaAI extends AggressiveNpcAI {
 	}
 
 	private void removeAdds() {
-		for (VisibleObject obj : getKnownList().getKnownObjects().values()) {
-			if (obj instanceof Npc) {
-				if (((Npc) obj).getNpcId() == 284435 || ((Npc) obj).getNpcId() == 284436) {
-					((Npc) obj).getController().delete();
-				}
-			}
-		}
+		getOwner().getWorldMapInstance().getNpcs(284435, 284436).forEach(npc -> npc.getController().delete());
 	}
 }

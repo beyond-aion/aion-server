@@ -38,6 +38,8 @@ public class SiegeLocationTemplate implements L10n {
 	protected List<SiegeMercenaryZone> siegeMercenaryZones;
 	@XmlElement(name = "assault_data")
 	protected AssaultData assaultData;
+	@XmlElement(name = "siege_related_bases")
+	protected SiegeRelatedBases siegeRelatedBases;
 
 	@XmlAttribute(name = "name_id")
 	protected int nameId = 0;
@@ -89,6 +91,10 @@ public class SiegeLocationTemplate implements L10n {
 
 	public AssaultData getAssaultData() {
 		return assaultData;
+	}
+
+	public SiegeRelatedBases getSiegeRelatedBases() {
+		return siegeRelatedBases;
 	}
 
 	@Override

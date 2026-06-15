@@ -14,12 +14,8 @@ import com.aionemu.gameserver.world.World;
  */
 public abstract class PlayableMoveController<T extends Creature> extends CreatureMoveController<T> {
 
-	private static final int MOVEMENT_DIRECTIONS = 8;
-	private static final float ANGLE_DIVISOR = 360f / MOVEMENT_DIRECTIONS; // 45
-	private static final float ANGLE_OFFSET = ANGLE_DIVISOR / 2f; // 22.5
-
 	private boolean sendMovePacket = true;
-	private int movementHeading = -1;
+	private MovementModifierDirection movementModifierDirection = MovementModifierDirection.NONE;
 
 	public float vehicleX;
 	public float vehicleY;
@@ -80,7 +76,7 @@ public abstract class PlayableMoveController<T extends Creature> extends Creatur
 		if (dist < 0.01f)
 			return;
 
-		float currentSpeed = StatFunctions.getMovementModifier(owner, StatEnum.SPEED, owner.getGameStats().getMovementSpeedFloat());
+		float currentSpeed = StatFunctions.adjustStatByMovementModifier(owner, StatEnum.SPEED, owner.getGameStats().getMovementSpeedFloat());
 		long msElapsed = System.currentTimeMillis() - lastMoveUpdate;
 		float futureXYDistPassed = Math.min(currentSpeed * msElapsed / 1000f, dist);
 		float futureZDistPassed = isJumping() ? Math.min(2 * msElapsed / 1000f, dist) : futureXYDistPassed;
@@ -116,29 +112,25 @@ public abstract class PlayableMoveController<T extends Creature> extends Creatur
 		}
 		super.setNewDirection(x, y, z);
 
-		float absoluteMovementAngle = PositionUtil.calculateAngleFrom(owner.getX(), owner.getY(), targetDestX, targetDestY);
-		float relativeMovementAngle = heading * 3 - absoluteMovementAngle;
-		movementHeading = toMovementHeading(relativeMovementAngle);
+		float relativeMovementAngle = PositionUtil.calculateAngleTowards(owner.getX(), owner.getY(), heading, targetDestX, targetDestY);
+		if (relativeMovementAngle >= -67.5 && relativeMovementAngle <= 67.5)
+			movementModifierDirection = MovementModifierDirection.FORWARD;
+		else if (relativeMovementAngle <= -112.5 || relativeMovementAngle >= 112.5)
+			movementModifierDirection = MovementModifierDirection.BACKWARD;
+		else
+			movementModifierDirection = MovementModifierDirection.SIDEWAYS;
 	}
 
-	public int getMovementHeading() {
-		if (!isInMove())
-			return -1;
-		return movementHeading;
+	public MovementModifierDirection getMovementDirection() {
+		if (!isInMove() && System.currentTimeMillis() - lastMoveUpdate > 1000)
+			return MovementModifierDirection.NONE;
+		return movementModifierDirection;
 	}
 
-	/**
-	 * <pre>
-	 *  7  0  1
-	 *   \ | /
-	 * 6 ―   ― 2
-	 *   / | \
-	 *  5  4  3
-	 * </pre>
-	 *
-	 * @return Heading from 0 to 7
-	 */
-	public static int toMovementHeading(float angle) {
-		return (int) (PositionUtil.normalizeAngle(angle + ANGLE_OFFSET) / ANGLE_DIVISOR);
+	public enum MovementModifierDirection {
+		NONE,
+		FORWARD,
+		SIDEWAYS,
+		BACKWARD
 	}
 }

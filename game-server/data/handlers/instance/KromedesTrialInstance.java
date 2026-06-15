@@ -9,12 +9,10 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.Race;
-import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.items.storage.Storage;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAY_MOVIE;
 import com.aionemu.gameserver.services.player.PlayerReviveService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
@@ -46,17 +44,6 @@ public class KromedesTrialInstance extends GeneralInstanceHandler {
 		skillId = player.getRace() == Race.ASMODIANS ? 19270 : 19220;
 		sendMovie(player, 453);
 		SkillEngine.getInstance().applyEffectDirectly(skillId, player, player);
-	}
-
-	@Override
-	public void onPlayerLogOut(Player player) {
-		player.getEffectController().removeEffect(skillId);
-	}
-
-	@Override
-	public void onLeaveInstance(Player player) {
-		player.getEffectController().removeEffect(skillId);
-		removeInstanceItems(player);
 	}
 
 	@Override
@@ -118,12 +105,6 @@ public class KromedesTrialInstance extends GeneralInstanceHandler {
 	}
 
 	@Override
-	public boolean onDie(Player player, Creature lastAttacker) {
-		PacketSendUtility.sendPacket(player, new SM_DIE(player, 8));
-		return true;
-	}
-
-	@Override
 	public boolean onReviveEvent(Player player) {
 		PlayerReviveService.revive(player, 25, 25, true, 0);
 		player.getGameStats().updateStatsAndSpeedVisually();
@@ -163,18 +144,15 @@ public class KromedesTrialInstance extends GeneralInstanceHandler {
 	private void sendMovie(Player player, int movieId) {
 		if (!sentMovies.contains(movieId)) {
 			sentMovies.add(movieId);
-			PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(0, movieId));
+			PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(false, 0, 0, movieId, true));
 		}
 	}
 
-	private void removeInstanceItems(Player player) {
-		int[] items = new int[] { 185000098, // Temple Vault Door Key
-			185000099, // Dungeon Grate Key
-			185000100, // Dungeon Door Key
-			185000109 // Relic Key
+	@Override
+	protected boolean isRestrictedToInstance(Item item) {
+		return switch (item.getItemId()) {
+			case 185000098, 185000099, 185000100, 185000109 -> true; // Temple Vault Door Key, Dungeon Grate Key, Dungeon Door Key, Relic Key
+			default -> super.isRestrictedToInstance(item);
 		};
-		Storage storage = player.getInventory();
-		for (int item : items)
-			storage.decreaseByItemId(item, storage.getItemCountByItemId(item));
 	}
 }

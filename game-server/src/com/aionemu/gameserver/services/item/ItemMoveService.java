@@ -2,8 +2,6 @@ package com.aionemu.gameserver.services.item;
 
 import static com.aionemu.gameserver.services.item.ItemPacketService.*;
 
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,11 +43,11 @@ public class ItemMoveService {
 				moveInSameStorage(sourceStorage, item, slot);
 			return;
 		}
-		if (ItemRestrictionService.isItemRestrictedTo(player, item, destinationStorageType)
-			|| ItemRestrictionService.isItemRestrictedFrom(player, item, sourceStorageType)
+		if (ItemRestrictionService.isItemRestrictedTo(player, item, targetStorage.getStorageType())
+			|| ItemRestrictionService.isItemRestrictedFrom(player, item, sourceStorage.getStorageType())
 			|| player.isTrading()
 			|| GameServer.isShuttingDownSoon()) {
-			sendStorageUpdatePacket(player, StorageType.getStorageTypeById(sourceStorageType), item, ItemAddType.ALL_SLOT);
+			sendItemUnlockPacket(player, item);
 			if (GameServer.isShuttingDownSoon())
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DISABLE("Shutdown Progress"));
 			return;
@@ -60,23 +58,23 @@ public class ItemMoveService {
 		}
 		if (slot == -1) {
 			if (item.getItemTemplate().isStackable()) {
-				List<Item> sameItems = targetStorage.getItemsByItemId(item.getItemId());
-				for (Item sameItem : sameItems) {
-					long itemCount = item.getItemCount();
-					if (itemCount == 0) {
-						break;
+				for (Item targetStack : targetStorage.getItemsByItemId(item.getItemId())) {
+					ItemSplitService.mergeStacks(sourceStorage, targetStorage, item, targetStack, item.getItemCount());
+					if (item.getItemCount() == 0) {
+						return;
 					}
-					// we can merge same stackable items
-					ItemSplitService.mergeStacks(sourceStorage, targetStorage, item, sameItem, itemCount);
 				}
 			}
 		}
-		if (!targetStorage.isFull() && item.getItemCount() > 0) {
-			sourceStorage.remove(item);
-			sendItemDeletePacket(player, StorageType.getStorageTypeById(sourceStorageType), item, ItemDeleteType.MOVE);
-			item.setEquipmentSlot(slot);
-			targetStorage.add(item);
+		if (targetStorage.isFull()) {
+			PacketSendUtility.sendPacket(player, targetStorage.getStorageIsFullMessage());
+			sendItemUnlockPacket(player, item);
+			return;
 		}
+		sourceStorage.remove(item);
+		sendItemDeletePacket(player, sourceStorage.getStorageType(), item, ItemDeleteType.MOVE);
+		item.setEquipmentSlot(slot);
+		targetStorage.add(item);
 	}
 
 	private static void moveInSameStorage(IStorage storage, Item item, short slot) {
@@ -98,14 +96,14 @@ public class ItemMoveService {
 			return;
 
 		// restrictions checks
-		if (ItemRestrictionService.isItemRestrictedFrom(player, sourceItem, sourceStorageType)
-			|| ItemRestrictionService.isItemRestrictedFrom(player, replaceItem, replaceStorageType)
-			|| ItemRestrictionService.isItemRestrictedTo(player, sourceItem, replaceStorageType)
-			|| ItemRestrictionService.isItemRestrictedTo(player, replaceItem, sourceStorageType)
+		if (ItemRestrictionService.isItemRestrictedFrom(player, sourceItem, sourceStorage.getStorageType())
+			|| ItemRestrictionService.isItemRestrictedFrom(player, replaceItem, replaceStorage.getStorageType())
+			|| ItemRestrictionService.isItemRestrictedTo(player, sourceItem, replaceStorage.getStorageType())
+			|| ItemRestrictionService.isItemRestrictedTo(player, replaceItem, sourceStorage.getStorageType())
 			|| player.isTrading() 
 			|| GameServer.isShuttingDownSoon()) {
-			sendStorageUpdatePacket(player, StorageType.getStorageTypeById(sourceStorageType), sourceItem, ItemAddType.ALL_SLOT);
-			sendStorageUpdatePacket(player, StorageType.getStorageTypeById(replaceStorageType), replaceItem, ItemAddType.ALL_SLOT);
+			sendItemUnlockPacket(player, sourceItem);
+			sendItemUnlockPacket(player, replaceItem);
 			if (GameServer.isShuttingDownSoon())
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DISABLE("Shutdown Progress"));
 			return;
@@ -121,8 +119,8 @@ public class ItemMoveService {
 		replaceStorage.remove(replaceItem);
 
 		// correct UI update order is 1)delete items 2) add items
-		sendItemDeletePacket(player, StorageType.getStorageTypeById(sourceStorageType), sourceItem, ItemDeleteType.MOVE);
-		sendItemDeletePacket(player, StorageType.getStorageTypeById(replaceStorageType), replaceItem, ItemDeleteType.MOVE);
+		sendItemDeletePacket(player, sourceStorage.getStorageType(), sourceItem, ItemDeleteType.MOVE);
+		sendItemDeletePacket(player, replaceStorage.getStorageType(), replaceItem, ItemDeleteType.MOVE);
 		sourceStorage.add(replaceItem);
 		replaceStorage.add(sourceItem);
 	}

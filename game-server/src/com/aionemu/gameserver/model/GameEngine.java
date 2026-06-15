@@ -5,13 +5,5 @@ package com.aionemu.gameserver.model;
  */
 public interface GameEngine {
 
-	/**
-	 * Load resources for engine
-	 */
-	void load();
-
-	/**
-	 * Cleanup resources for engine
-	 */
-	void shutdown();
+	void init();
 }

@@ -75,6 +75,7 @@ public class League extends GeneralTeam<PlayerAlliance, LeagueMember> {
 		return getLeaderObject().getLeaderObject();
 	}
 
+	@Override
 	public LootGroupRules getLootGroupRules() {
 		return lootGroupRules;
 	}

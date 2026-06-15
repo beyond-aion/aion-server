@@ -20,6 +20,7 @@
 			<xs:element name="legion_reward" type="SiegeLegionReward" minOccurs="0" maxOccurs="unbounded" />
 			<xs:element name="merc_zone" type="SiegeMercenaryZone" minOccurs="0" maxOccurs="unbounded" />
 			<xs:element name="assault_data" type="AssaultData" minOccurs="0" maxOccurs="1" />
+			<xs:element name="siege_related_bases" type="SiegeRelatedBases" minOccurs="0" />
 		</xs:sequence>
 		<xs:attribute name="id" type="xs:int" use="required" />
 		<xs:attribute name="type" type="SiegeType" use="required" />
@@ -108,5 +109,8 @@
 		<xs:attribute name="npc_ids" type="IntListType" />
 		<xs:attribute name="heading_offset" type="xs:int" />
 		<xs:attribute name="distance_offset" type="xs:int" />
+	</xs:complexType>
+	<xs:complexType name="SiegeRelatedBases">
+		<xs:attribute name="ids" type="IntListType" />
 	</xs:complexType>
 </xs:schema>
