@@ -33,6 +33,7 @@ public class QueenAlukinaAI extends AggressiveNpcAI implements HpPhases.PhaseHan
 	@Override
 	protected void handleDied() {
 		cancelTask();
+		PacketSendUtility.broadcastMessage(getOwner(), 1500231);
 		super.handleDied();
 	}
 
@@ -55,7 +56,7 @@ public class QueenAlukinaAI extends AggressiveNpcAI implements HpPhases.PhaseHan
 		switch (phaseHpPercent) {
 			case 75 -> {
 				getOwner().queueSkill(17900, 41);
-				PacketSendUtility.broadcastMessage(getOwner(), 340487, 10000);
+				PacketSendUtility.broadcastMessage(getOwner(), 1500229);
 				ThreadPoolManager.getInstance().schedule(() -> {
 					if (getLifeStats().getHpPercentage() > 50) {
 						getOwner().queueSkill(17899, 41, 4000);
@@ -68,6 +69,7 @@ public class QueenAlukinaAI extends AggressiveNpcAI implements HpPhases.PhaseHan
 				getOwner().queueSkill(17902, 41);
 			}
 			case 25 -> {
+				PacketSendUtility.broadcastMessage(getOwner(), 1500230);
 				task = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
 					if (isDead()) {
 						cancelTask();

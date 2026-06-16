@@ -28,7 +28,7 @@ public class VanktristAI extends AggressiveNoLootNpcAI implements HpPhases.Phase
 
 	private Future<?> phaseTask;
 
-	private VanktristAI(Npc owner) {
+	public VanktristAI(Npc owner) {
 		super(owner);
 	}
 
@@ -41,12 +41,12 @@ public class VanktristAI extends AggressiveNoLootNpcAI implements HpPhases.Phase
 	@Override
 	public void handleHpPhase(int phaseHpPercent) {
 		switch (phaseHpPercent) {
-			case 100 -> PacketSendUtility.broadcastMessage(getOwner(), 0); // FIXME
+			case 100 -> PacketSendUtility.broadcastMessage(getOwner(), 1500232);
 			case 75 -> {
-				PacketSendUtility.broadcastMessage(getOwner(), 1500210); // STR_CHAT_IDArena_STAGE7_D_R1_Die TODO correct msg
+				PacketSendUtility.broadcastMessage(getOwner(), 1500233);
 				startPhaseTask();
 			}
-			case 50 -> PacketSendUtility.broadcastMessage(getOwner(), 1500211); // STR_CHAT_IDArena_STAGE7_L_R2_Skill1 TODO different msg for L/D
+			case 50 -> PacketSendUtility.broadcastMessage(getOwner(), 1500235);
 		}
 	}
 
@@ -77,10 +77,10 @@ public class VanktristAI extends AggressiveNoLootNpcAI implements HpPhases.Phase
 
 	private List<Player> getAttackablePlayers() {
 		List<Player> players = new ArrayList<>();
-		for (Player player : getKnownList().getKnownPlayers().values()) {
+		getKnownList().forEachPlayer(player -> {
 			if (!player.isDead() && GeoService.getInstance().canSee(getOwner(), player))
 				players.add(player);
-		}
+		});
 		return players;
 	}
 
@@ -105,6 +105,7 @@ public class VanktristAI extends AggressiveNoLootNpcAI implements HpPhases.Phase
 
 	@Override
 	protected void handleDied() {
+		PacketSendUtility.broadcastMessage(getOwner(), 1500237);
 		getPosition().getWorldMapInstance().getNpcs(217804).forEach(npc -> npc.getController().onDelete()); // Weakened Dimensional Vortex
 		cancelPhaseTask();
 		super.handleDied();

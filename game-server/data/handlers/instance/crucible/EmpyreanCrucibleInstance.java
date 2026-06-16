@@ -20,8 +20,8 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_STAGE_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.drop.DropRegistrationService;
 import com.aionemu.gameserver.services.item.ItemService;
+import com.aionemu.gameserver.model.templates.npcskill.NpcSkillTargetAttribute;
 import com.aionemu.gameserver.services.teleport.TeleportService;
-import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
@@ -101,6 +101,32 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 		ThreadPoolManager.getInstance().schedule(
 			() -> instance.forEachPlayer(player -> PacketSendUtility.sendPacket(player, new SM_INSTANCE_STAGE_INFO(2, type.getId(), type.getType()))),
 			time);
+
+		String name = type.name();
+		if (name.contains("ROUND")) {
+			int stageStart = name.indexOf("STAGE_") + 6;
+			int stageEnd = name.indexOf("_ROUND");
+			String stageStr = name.substring(stageStart, stageEnd);
+			String roundStr = name.substring(name.lastIndexOf('_') + 1);
+			int round = Integer.parseInt(roundStr);
+
+			if (round == 1) {
+				ThreadPoolManager.getInstance().schedule(() -> {
+					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_JOIN_ROUND_IDARENA(stageStr, roundStr));
+					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_START_ROUND_IDARENA(roundStr), 2000);
+				}, time);
+			} else {
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_COMPLETE_ROUND_IDARENA(String.valueOf(round - 1)));
+				ThreadPoolManager.getInstance().schedule(() -> {
+					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_JOIN_ROUND_IDARENA(stageStr, roundStr));
+					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_START_ROUND_IDARENA(roundStr), 2000);
+				}, time);
+			}
+		} else if (name.startsWith("PASS_GROUP_STAGE_")) {
+			String stageStr = name.substring("PASS_GROUP_STAGE_".length());
+			sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_COMPLETE_ROUND_IDARENA("5"));
+			sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_COMPLETE_STAGE_IDARENA(stageStr), 2000);
+		}
 	}
 
 	@Override
@@ -164,7 +190,8 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 		switch (npc.getNpcId()) {
 			case 205396, 205405, 217477, 217486, 205399, 205408, 217480, 217489 -> {
 				npc.getController().delete();
-				if (stageType == StageType.START_STAGE_1_ROUND_1 && instance.getNpcs(205396, 205405, 217477, 217486, 205399, 205408, 217480, 217489).isEmpty()) {
+				if (stageType == StageType.START_STAGE_1_ROUND_1
+					&& instance.getNpcs(205396, 205405, 217477, 217486, 205399, 205408, 217480, 217489).isEmpty()) {
 					startStage1Round2();
 				}
 			}
@@ -196,7 +223,6 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 				sp(217756, 345.69318f, 355.56677f, 96.09094f, (byte) 0); // S1_ResurBox1Dark_55_n
 				sp(799568, 345.25f, 349.24f, 96.09097f, (byte) 0); // IDArena_2nd_MC_Start
 				npc.getController().delete();
-				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_COMPLETE_ROUND_IDARENA());
 			}
 			case 217502 -> {
 				npc.getController().delete();
@@ -481,7 +507,7 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 			case 217568 -> {
 				sp(205413, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading()); // S6_NPC_Graveknight_55_Ae
 				npc.getController().delete();
-				if (isDoneStage6Round1 && getNpcs(217568).isEmpty()) {
+				if (stageType == StageType.START_STAGE_6_ROUND_1 && isDoneStage6Round1 && getNpcs(217568).isEmpty()) {
 					setStage(StageType.START_STAGE_6_ROUND_2, 2000);
 					sp(217570, 1629.4642f, 154.8044f, 126f, (byte) 30, 6000); // S6_Zombie_55_Ae
 					sp(217569, 1643.7776f, 161.63562f, 126f, (byte) 46, 6000); // S6_LichEquip_55_Ae
@@ -502,9 +528,10 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 				npc.getController().delete();
 				if (stageType == StageType.START_STAGE_6_ROUND_2 && isDoneStage6Round2 && instance.getNpcs(217569, 217570).isEmpty()) {
 					setStage(StageType.START_STAGE_6_ROUND_3, 2000);
-					sp(217572, 1629.5837f, 138.38435f, 126f, (byte) 30, 9000); // S6_DeathNight_Live_55_Ah
+					sp(217572, 1629.5837f, 138.38435f, 126f, (byte) 90, 6000); // S6_DeathNight_Live_55_Ah
 					sp(217569, 1635.01535f, 150.01535f, 126f, (byte) 45, 6000); // S6_LichEquip_55_Ae
 					sp(217569, 1638.3817f, 152.84074f, 126f, (byte) 45, 6000); // S6_LichEquip_55_Ae
+					sp(217568, 1622.8409f, 173.1985f, 126f, (byte) 90, 6000); // S5_Graveknight_55_Ae
 				}
 			}
 			case 217572 -> {
@@ -517,11 +544,16 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 				setStage(StageType.PASS_GROUP_STAGE_6, 0);
 				sp(217750, 1624.1908f, 155.16148f, 126f, (byte) 0, 8000); // S6_Ghost_55_Ah
 				setStage(StageType.START_BONUS_STAGE_6, 8000);
+				ThreadPoolManager.getInstance().schedule(this::startBonusStage6, 8000);
 			}
 			case 217750 -> sp(205340, 1625.08f, 159.15f, 126f, (byte) 0); // IDArena_6th_MC_End
 			case 217582, 217578 -> {
 				setStage(StageType.START_STAGE_7_ROUND_2, 2000);
-				sp(217579, 1794.81f, 779.53925f, 469.35016f, (byte) 40, 6000); // S7_MasterL_Sc_55_Ah
+				Race race = getRegisteredTeamRace();
+				switch (race) {
+					case ASMODIANS -> sp(217583, "ranger_preceptor", 1794.81f, 779.53925f, 469.35016f, (byte) 40, 6000); // S7_MasterD_Sc_55_Ah
+					case ELYOS -> sp(217579, "ranger_preceptor", 1794.81f, 779.53925f, 469.35016f, (byte) 40, 6000); // S7_MasterL_Sc_55_Ah
+				}
 			}
 			case 217579, 217583 -> {
 				setStage(StageType.START_STAGE_7_ROUND_3, 2000);
@@ -543,8 +575,8 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 				setStage(StageType.START_STAGE_7_ROUND_5, 2000);
 				Race race = getRegisteredTeamRace();
 				switch (race) {
-					case ASMODIANS -> sp(217587, 1773.194f, 796.537f, 469.350f, (byte) 0, 6000); // S7_Stigma_MasterD_Boss_55_Ah
-					case ELYOS -> sp(217586, 1773.194f, 796.537f, 469.350f, (byte) 0, 6000); // S7_Stigma_MasterL_Boss_55_Ah
+					case ASMODIANS -> sp(217587, "stigma_boss_preceptor", 1773.194f, 796.537f, 469.350f, (byte) 0, 6000); // S7_Stigma_MasterD_Boss_55_Ah
+					case ELYOS -> sp(217586, "stigma_boss_preceptor", 1773.194f, 796.537f, 469.350f, (byte) 0, 6000); // S7_Stigma_MasterL_Boss_55_Ah
 				}
 			}
 			case 217586, 217587 -> {
@@ -585,32 +617,38 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 			}
 			case 217596, 217597 -> {
 				Npc counterpart = getNpc(npc.getNpcId() == 217596 ? 217597 : 217596);
-				if (counterpart != null && !counterpart.isDead())
-					SkillEngine.getInstance().getSkill(counterpart, 19624, 10, counterpart).useNoAnimationSkill();
+				if (counterpart != null && !counterpart.isDead()) {
+					counterpart.queueSkill(19624, 10, -1, NpcSkillTargetAttribute.ME);
+					if (counterpart.getNpcId() == 217596) {
+						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDArena_06());
+					} else {
+						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDArena_05());
+					}
+				}
 				npc.getController().delete();
 				if (instance.getNpcs(217596, 217597).isEmpty()) {
 					setStage(StageType.START_STAGE_9_ROUND_4, 2000);
-					sp(217598, 1311.5238f, 1755.2079f, 317.1f, (byte) 97, 2000); // S9_Shellizard_Gi_55_Ah
+					sp(217598, 1323.1051f, 1717.7927f, 317.1f, (byte) 45, 2000); // S9_Shellizard_Gi_55_Ah
 				}
 			}
 			case 217598 -> {
 				npc.getController().delete();
 				setStage(StageType.START_STAGE_9_ROUND_5, 2000);
-				sp(217599, 1304.2659f, 1722.2467f, 316.5f, (byte) 23, 2000); // S9_Chimera_Boss_55_Ah
+				sp(217599, 1304.6428f, 1733.9614f, 316.5f, (byte) 3, 2000); // S9_Chimera_Boss_55_Ah
 			}
 			case 217599 -> {
 				npc.getController().delete();
 				setStage(StageType.PASS_GROUP_STAGE_9, 0);
-				sp(205343, 1304.2659f, 1722.2467f, 316.5f, (byte) 8, 2000); // IDArena_9th_MC_End
+				sp(205343, 1309.6390f, 1732.6423f, 316.5f, (byte) 6, 2000); // IDArena_9th_MC_End
 			}
 			case 217600, 217601, 217602 -> {
 				npc.getController().delete();
 				if (instance.getNpcs(217600, 217601, 217602).isEmpty()) {
 					setStage(StageType.START_STAGE_10_ROUND_2, 2000);
-					sp(217603, 1744.6332f, 1280.0349f, 394.3f, (byte) 9, 2000); // S10_Drakan_Fi_High_55_Ae
-					sp(217604, 1756.2661f, 1305.561f, 394.3f, (byte) 97, 6000); // S10_Drakan_Sc_High_55_Ae
-					sp(217605, 1763.1177f, 1268.2404f, 394.3f, (byte) 22, 10000); // S10_Drakan_Ma_High_55_Ae
-					sp(217606, 1765.2681f, 1306.5621f, 394.3f, (byte) 89, 14000); // S10_Drakan_Cl_High_55_Ae
+					sp(217603, 1778.4673f, 1298.1720f, 394.3f, (byte) 76, 2000); // S10_Drakan_Fi_High_55_Ae
+					sp(217604, 1769.8977f, 1303.9150f, 394.3f, (byte) 76, 6000); // S10_Drakan_Sc_High_55_Ae
+					sp(217605, 1773.2679f, 1302.6469f, 394.3f, (byte) 76, 10000); // S10_Drakan_Ma_High_55_Ae
+					sp(217606, 1777.6821f, 1303.2048f, 394.3f, (byte) 76, 14000); // S10_Drakan_Cl_High_55_Ae
 				}
 			}
 			case 217603, 217604, 217605, 217606 -> {
@@ -619,19 +657,19 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 					setStage(StageType.START_STAGE_10_ROUND_3, 2000);
 					sp(700441, 1742.39f, 1289.59f, 394.237f, (byte) 68, 2000); // BIDLF1_WaterGolem1_Switch3_50_n
 					sp(700441, 1782.32f, 1272.74f, 394.237f, (byte) 94, 2000); // BIDLF1_WaterGolem1_Switch3_50_n
-					sp(217607, 1769.9637f, 1297.393f, 394.237f, (byte) 82, 2000); // S10_WaterGolem_55_Ah
+					sp(217607, 1765.4668f, 1287.6345f, 394.237f, (byte) 76, 2000); // S10_WaterGolem_55_Ah
 				}
 			}
 			case 217607 -> {
 				npc.getController().delete();
 				deleteAliveNpcs(700441);
 				setStage(StageType.START_STAGE_10_ROUND_4, 2000);
-				sp(217608, 1769.9637f, 1297.393f, 394.237f, (byte) 82, 2000); // S10_Dragon_55_Ah
+				sp(217608, 1771.9846f, 1301.1503f, 394.237f, (byte) 76, 2000); // S10_Dragon_55_Ah
 			}
 			case 217608 -> {
 				npc.getController().delete();
 				setStage(StageType.START_STAGE_10_ROUND_5, 2000);
-				sp(217609, 1765.6692f, 1288.092f, 394.3f, (byte) 82, 2000); // SFinal_Immotal_Boss_55_Ah
+				sp(217609, 1767.3652f, 1294.0907f, 394.3f, (byte) 3, 2000); // SFinal_Immotal_Boss_55_Ah
 			}
 			case 217609 -> {
 				npc.getController().delete();
@@ -698,10 +736,29 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 		sp(217747, 347.1144f, 365.875f, 96.09092f, (byte) 60, 93000); // S4_Draky_slow_55_An
 		sp(217747, 345.3226f, 367.7414f, 96.0909f, (byte) 60, 96000); // S4_Draky_slow_55_An
 		sp(217747, 345.4836f, 367.3886f, 96.090904f, (byte) 60, 99000); // S4_Draky_slow_55_An
+		ThreadPoolManager.getInstance().schedule(() -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDArena_S4_Bonus_01()), 72000);
+		ThreadPoolManager.getInstance().schedule(() -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDArena_S4_Bonus_02()), 92000);
+		ThreadPoolManager.getInstance().schedule(() -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDArena_S4_Bonus_03()), 97000);
 		ThreadPoolManager.getInstance().schedule(() -> {
 			deleteAliveNpcs(217745, 217746, 217747, 217748, 217749, 217778);
 			sp(205338, 345.25f, 349.24f, 96.09097f, (byte) 0); // IDArena_4th_MC_End
 		}, 102000);
+	}
+
+	private void startBonusStage6() {
+		ThreadPoolManager.getInstance().schedule(() -> {
+			sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDArena_S6_Bonus_01());
+			ThreadPoolManager.getInstance().schedule(() -> {
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDArena_S6_Bonus_02());
+				ThreadPoolManager.getInstance().schedule(() -> {
+					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDArena_S6_Bonus_03());
+					ThreadPoolManager.getInstance().schedule(() -> {
+						deleteAliveNpcs(217750);
+						sp(205340, 1625.08f, 159.15f, 126f, (byte) 0); // IDArena_6th_MC_End
+					}, 5000);
+				}, 5000);
+			}, 20000);
+		}, 30000);
 	}
 
 	private void startStage4Round4_1() {
@@ -739,14 +796,14 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 
 	private void startStage2Round3() {
 		setStage(StageType.START_STAGE_2_ROUND_3, 2000);
-		sp(Rnd.nextBoolean() ? 217500 : 217509, 332.0035f, 349.55893f, 96.09093f, (byte) 0,
-			6000); // S2_KrallScout_MidBoss_55_Ah, S2_LycanRanger_Named_55_Ah
+		sp(Rnd.nextBoolean() ? 217500 : 217509, 332.0035f, 349.55893f, 96.09093f, (byte) 0, 6000); // S2_KrallScout_MidBoss_55_Ah,
+																									// S2_LycanRanger_Named_55_Ah
 	}
 
 	private void startStage2Round5() {
 		setStage(StageType.START_STAGE_2_ROUND_5, 2000);
-		sp(Rnd.nextBoolean() ? 217510 : 217501, 332.0035f, 349.55893f, 96.09093f, (byte) 0,
-			6000); // S2_LycanWizard_Boss_55_Ah, S2_KrallWarrior_Boss_55_Ah
+		sp(Rnd.nextBoolean() ? 217510 : 217501, 332.0035f, 349.55893f, 96.09093f, (byte) 0, 6000); // S2_LycanWizard_Boss_55_Ah,
+																									// S2_KrallWarrior_Boss_55_Ah
 	}
 
 	private void rewardGroup() {
@@ -812,7 +869,13 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 	}
 
 	private Race getRegisteredTeamRace() {
-		return instance.getRegisteredTeam().getRace();
+		if (instance.getRegisteredTeam() != null) {
+			return instance.getRegisteredTeam().getRace();
+		}
+		if (!instance.getPlayersInside().isEmpty()) {
+			return instance.getPlayersInside().get(0).getRace();
+		}
+		return Race.ELYOS;
 	}
 
 	@Override
@@ -900,14 +963,13 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 			}
 			case START_STAGE_6_ROUND_1 -> {
 				setStage(type, 2000);
-				sp(217568, 1636.7102f, 166.87984f, 126f, (byte) 60, 6000); // S5_Graveknight_55_Ae
-				sp(217568, 1619.4432f, 153.83188f, 126f, (byte) 60, 6000); // S5_Graveknight_55_Ae
-				sp(217568, 1636.6416f, 164.15344f, 126f, (byte) 60, 6000); // S5_Graveknight_55_Ae
+				sp(217568, 1636.7102f, 166.87984f, 126f, (byte) 90, 6000); // S5_Graveknight_55_Ae
+				sp(217568, 1636.6416f, 164.15344f, 126f, (byte) 90, 6000); // S5_Graveknight_55_Ae
+				sp(217568, 1638.7107f, 165.40533f, 126f, (byte) 90, 6000); // S5_Graveknight_55_Ae
+				sp(217568, 1638.6783f, 162.67389f, 126f, (byte) 90, 6000); // S5_Graveknight_55_Ae
 				ThreadPoolManager.getInstance().schedule(() -> {
-					sp(217568, 1638.7107f, 165.40533f, 126f, (byte) 60); // S5_Graveknight_55_Ae
-					sp(217568, 1638.6783f, 162.67389f, 126f, (byte) 60); // S5_Graveknight_55_Ae
 					isDoneStage6Round1 = true;
-				}, 12000);
+				}, 6000);
 			}
 			case START_STAGE_6_ROUND_5 -> setStage(type, 0);
 			case START_STAGE_7_ROUND_1 -> {
@@ -928,9 +990,9 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 			}
 			case START_STAGE_10_ROUND_1 -> {
 				setStage(type, 2000);
-				sp(217600, 1765.1488f, 1305.1216f, 394.3f, (byte) 84, 2000); // S10_Naga_Fi_High_55_Ae
-				sp(217601, 1776.6201f, 1296.9429f, 394.2375f, (byte) 74, 2000); // S10_Naga_Ma_High_55_Ae
-				sp(217602, 1771.5571f, 1302.0781f, 394.3f, (byte) 82, 2000); // S10_Naga_Pr_High_55_Ae
+				sp(217600, 1764.2490f, 1306.2072f, 394.3f, (byte) 76, 2000); // S10_Naga_Fi_High_55_Ae
+				sp(217601, 1775.7012f, 1295.1180f, 394.2375f, (byte) 76, 2000); // S10_Naga_Ma_High_55_Ae
+				sp(217602, 1773.7896f, 1302.5499f, 394.3f, (byte) 76, 2000); // S10_Naga_Pr_High_55_Ae
 			}
 			case START_STAGE_5 -> {
 				stage = 5;
@@ -956,7 +1018,7 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 			case START_STAGE_8 -> {
 				stage = 8;
 				sp(205429, 1780.103f, 1723.458f, 304.039f, (byte) 53); // IDArena_8th_Resurrect_NPC
-				sp(205335, 1776.759f, 1764.705f, 303.695f, (byte) 90); // IDArena_8th_MC_Start				
+				sp(205335, 1776.759f, 1764.705f, 303.695f, (byte) 90); // IDArena_8th_MC_Start
 				teleport(1776.4169f, 1749.9952f, 303.69553f, (byte) 0);
 				setStage(type, 1000);
 			}
@@ -1042,7 +1104,7 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 
 	private void startStage1Round5() {
 		setStage(StageType.START_STAGE_1_ROUND_5, 2000);
-		Race race = instance.getRegisteredTeam().getRace();
+		Race race = getRegisteredTeamRace();
 		switch (race) {
 			case ASMODIANS -> sp(217493, 332.093f, 349.36847f, 96.090935f, (byte) 119, 6000); // S1_TempleD_Fi_Boss_55_Ah
 			case ELYOS -> sp(217484, 332.093f, 349.36847f, 96.090935f, (byte) 119, 6000); // S1_TempleL_Fi_Boss_55_Ah
@@ -1098,10 +1160,31 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 		}, time);
 	}
 
+	private void sp(int npcId, String aiName, float x, float y, float z, byte h, int time) {
+		ThreadPoolManager.getInstance().schedule(() -> {
+			if (!isInstanceDestroyed) {
+				synchronized (npcs) {
+					npcs.add((Npc) spawn(npcId, x, y, z, h, aiName));
+				}
+			}
+		}, time);
+	}
+
 	private Npc sp(int npcId, float x, float y, float z, byte h) {
 		Npc npc = null;
 		if (!isInstanceDestroyed) {
 			npc = (Npc) spawn(npcId, x, y, z, h);
+			synchronized (npcs) {
+				npcs.add(npc);
+			}
+		}
+		return npc;
+	}
+
+	private Npc sp(int npcId, String aiName, float x, float y, float z, byte h) {
+		Npc npc = null;
+		if (!isInstanceDestroyed) {
+			npc = (Npc) spawn(npcId, x, y, z, h, aiName);
 			synchronized (npcs) {
 				npcs.add(npc);
 			}
@@ -1159,7 +1242,7 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 			}
 			case 217753 -> {
 				if (Rnd.chance() < 51) {
-					Race race = instance.getRegisteredTeam().getRace();
+					Race race = getRegisteredTeamRace();
 					itemId = switch (Rnd.get(1, 4)) {
 						case 1 -> 169500935;
 						case 2 -> 169500933;

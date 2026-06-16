@@ -13,15 +13,15 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import ai.AggressiveNpcAI;
 
 /**
- * @author Luzien, w4terbomb
+ * @author w4terbomb
  */
-@AIName("warrior_preceptor")
-public class WarriorPreceptorAI extends AggressiveNpcAI {
+@AIName("ranger_preceptor")
+public class RangerPreceptorAI extends AggressiveNpcAI {
 
-	private AtomicBoolean isHome = new AtomicBoolean(true);
+	private final AtomicBoolean isHome = new AtomicBoolean(true);
 	private Future<?> task;
 
-	public WarriorPreceptorAI(Npc owner) {
+	public RangerPreceptorAI(Npc owner) {
 		super(owner);
 	}
 
@@ -34,7 +34,7 @@ public class WarriorPreceptorAI extends AggressiveNpcAI {
 	@Override
 	protected void handleDied() {
 		cancelTask();
-		int msgId = getNpcId() == 217578 ? 1500208 : 1500210;
+		int msgId = (getNpcId() == 217579) ? 1500212 : 1500214;
 		PacketSendUtility.broadcastMessage(getOwner(), msgId);
 		super.handleDied();
 	}
@@ -49,8 +49,9 @@ public class WarriorPreceptorAI extends AggressiveNpcAI {
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
-		if (isHome.compareAndSet(true, false))
+		if (isHome.compareAndSet(true, false)) {
 			startSkillTask();
+		}
 	}
 
 	private void startSkillTask() {
@@ -60,18 +61,19 @@ public class WarriorPreceptorAI extends AggressiveNpcAI {
 			} else {
 				startSkillEvent();
 			}
-		}, 30000, 30000);
+		}, 10000, 30000);
 	}
 
 	private void cancelTask() {
-		if (task != null && !task.isCancelled())
+		if (task != null && !task.isCancelled()) {
 			task.cancel(true);
+		}
 	}
 
 	private void startSkillEvent() {
-		int msgId = getNpcId() == 217578 ? 1500207 : 1500209;
+		int msgId = (getNpcId() == 217579) ? 1500211 : 1500213;
 		PacketSendUtility.broadcastMessage(getOwner(), msgId);
-		getOwner().queueSkill(19595, 10, 6000, NpcSkillTargetAttribute.RANDOM); // Divine Grasp II
-		getOwner().queueSkill(19596, 15); // Wrathful Wave II
+		getOwner().queueSkill(19601, 15, 2000, NpcSkillTargetAttribute.RANDOM);
+		getOwner().queueSkill(19603, 20);
 	}
 }

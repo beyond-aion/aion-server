@@ -1,11 +1,13 @@
 package ai.instance.empyreanCrucible;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.HpPhases;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.templates.npcskill.NpcSkillTargetAttribute;
-import com.aionemu.gameserver.skillengine.SkillEngine;
+import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldPosition;
 
@@ -19,6 +21,7 @@ public class PriestPreceptorAI extends AggressiveNoLootNpcAI implements HpPhases
 
 	private final HpPhases hpPhases = new HpPhases(75, 25);
 	private final int[] helpers;
+	private final AtomicBoolean isHome = new AtomicBoolean(true);
 
 	public PriestPreceptorAI(Npc owner) {
 		super(owner);
@@ -30,18 +33,21 @@ public class PriestPreceptorAI extends AggressiveNoLootNpcAI implements HpPhases
 
 	protected void handleSpawned() {
 		super.handleSpawned();
-		ThreadPoolManager.getInstance().schedule(() -> SkillEngine.getInstance().getSkill(getOwner(), 19612, 15, getOwner()).useNoAnimationSkill(), 1000);
+		ThreadPoolManager.getInstance().schedule(() -> getOwner().queueSkill(19612, 10, -1, NpcSkillTargetAttribute.ME), 1000);
 	}
 
 	@Override
 	protected void handleDied() {
 		despawnHelpers();
+		int msgId = getNpcId() == 217581 ? 1500220 : 1500222;
+		PacketSendUtility.broadcastMessage(getOwner(), msgId);
 		super.handleDied();
 	}
 
 	@Override
 	protected void handleBackHome() {
 		despawnHelpers();
+		isHome.set(true);
 		super.handleBackHome();
 		hpPhases.reset();
 	}
@@ -49,20 +55,24 @@ public class PriestPreceptorAI extends AggressiveNoLootNpcAI implements HpPhases
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
+		if (isHome.compareAndSet(true, false)) {
+			int msgId = getNpcId() == 217581 ? 1500219 : 1500221;
+			PacketSendUtility.broadcastMessage(getOwner(), msgId);
+		}
 		hpPhases.tryEnterNextPhase(this);
 	}
 
 	@Override
 	public void handleHpPhase(int phaseHpPercent) {
 		switch (phaseHpPercent) {
-			case 75 -> getOwner().queueSkill(19611, 46, -1, NpcSkillTargetAttribute.RANDOM); // Word of Destruction II
+			case 75 -> getOwner().queueSkill(19611, 10, -1, NpcSkillTargetAttribute.RANDOM); // Word of Destruction II
 			case 25 -> startTask();
 		}
 	}
 
 	private void startTask() {
-		getOwner().queueSkill(19610, 46, 2000);
-		getOwner().queueSkill(19614, 46, -1, NpcSkillTargetAttribute.ME);
+		getOwner().queueSkill(19610, 10, 2000);
+		getOwner().queueSkill(19614, 10, -1, NpcSkillTargetAttribute.ME);
 		ThreadPoolManager.getInstance().schedule(() -> {
 			WorldPosition p = getPosition();
 			for (int helperNpcId : helpers)
@@ -71,7 +81,7 @@ public class PriestPreceptorAI extends AggressiveNoLootNpcAI implements HpPhases
 	}
 
 	private void applySoulSickness(Npc npc) {
-		ThreadPoolManager.getInstance().schedule(() -> SkillEngine.getInstance().getSkill(npc, 19594, 4, npc).useNoAnimationSkill(), 1000);
+		ThreadPoolManager.getInstance().schedule(() -> npc.queueSkill(19594, 4, -1, NpcSkillTargetAttribute.ME), 1000);
 	}
 
 	private void despawnHelpers() {

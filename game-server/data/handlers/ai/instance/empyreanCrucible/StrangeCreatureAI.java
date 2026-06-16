@@ -3,7 +3,7 @@ package ai.instance.empyreanCrucible;
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.skillengine.SkillEngine;
+import com.aionemu.gameserver.model.templates.npcskill.NpcSkillTargetAttribute;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
@@ -33,7 +33,7 @@ public class StrangeCreatureAI extends GeneralNpcAI {
 			public void run() {
 				if (!isDead()) {
 					PacketSendUtility.broadcastMessage(getOwner(), 341444);
-					SkillEngine.getInstance().getSkill(getOwner(), 17914, 34, getOwner()).useNoAnimationSkill();
+					getOwner().queueSkill(17914, 34, -1, NpcSkillTargetAttribute.ME);
 				}
 			}
 

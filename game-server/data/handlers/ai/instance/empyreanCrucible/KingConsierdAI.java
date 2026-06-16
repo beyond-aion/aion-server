@@ -2,12 +2,13 @@ package ai.instance.empyreanCrucible;
 
 import java.util.List;
 import java.util.concurrent.Future;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.HpPhases;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 import ai.AggressiveNpcAI;
@@ -18,8 +19,7 @@ import ai.AggressiveNpcAI;
 @AIName("king_consierd")
 public class KingConsierdAI extends AggressiveNpcAI implements HpPhases.PhaseHandler {
 
-	private final HpPhases hpPhases = new HpPhases(75, 25);
-	private final AtomicBoolean isHome = new AtomicBoolean(true);
+	private final HpPhases hpPhases = new HpPhases(100, 75, 25);
 	private Future<?> eventTask;
 	private Future<?> skillTask;
 
@@ -52,10 +52,6 @@ public class KingConsierdAI extends AggressiveNpcAI implements HpPhases.PhaseHan
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
 		hpPhases.tryEnterNextPhase(this);
-		if (isHome.compareAndSet(true, false)) {
-			startBloodThirstTask();
-			scheduleInitialSkills();
-		}
 	}
 
 	private void scheduleInitialSkills() {
@@ -68,13 +64,22 @@ public class KingConsierdAI extends AggressiveNpcAI implements HpPhases.PhaseHan
 	@Override
 	public void handleHpPhase(int phaseHpPercent) {
 		switch (phaseHpPercent) {
+			case 100 -> {
+				startBloodThirstTask();
+				scheduleInitialSkills();
+			}
 			case 75 -> startSkillTask();
 			case 25 -> getOwner().queueSkill(19690, 1);
 		}
 	}
 
 	private void startBloodThirstTask() {
-		eventTask = ThreadPoolManager.getInstance().schedule(() -> getOwner().queueSkill(19624, 10), 180000); // 3min, need confirm
+		eventTask = ThreadPoolManager.getInstance().schedule(() -> {
+			if (!isDead()) {
+				PacketSendUtility.broadcastToMap(getOwner(), SM_SYSTEM_MESSAGE.STR_MSG_IDArena_04());
+				getOwner().queueSkill(19624, 10);
+			}
+		}, 180000);
 	}
 
 	private void startSkillTask() {

@@ -1,10 +1,13 @@
 package ai.instance.empyreanCrucible;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.HpPhases;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.templates.npcskill.NpcSkillTargetAttribute;
+import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldPosition;
 
@@ -17,6 +20,7 @@ import ai.AggressiveNpcAI;
 public class MagePreceptorAI extends AggressiveNpcAI implements HpPhases.PhaseHandler {
 
 	private final HpPhases hpPhases = new HpPhases(75, 50, 25);
+	private final AtomicBoolean isHome = new AtomicBoolean(true);
 
 	public MagePreceptorAI(Npc owner) {
 		super(owner);
@@ -31,12 +35,15 @@ public class MagePreceptorAI extends AggressiveNpcAI implements HpPhases.PhaseHa
 	@Override
 	protected void handleDied() {
 		despawnNpcs();
+		int msgId = getNpcId() == 217580 ? 1500216 : 1500218;
+		PacketSendUtility.broadcastMessage(getOwner(), msgId);
 		super.handleDied();
 	}
 
 	@Override
 	protected void handleBackHome() {
 		despawnNpcs();
+		isHome.set(true);
 		super.handleBackHome();
 		hpPhases.reset();
 	}
@@ -44,6 +51,10 @@ public class MagePreceptorAI extends AggressiveNpcAI implements HpPhases.PhaseHa
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
+		if (isHome.compareAndSet(true, false)) {
+			int msgId = getNpcId() == 217580 ? 1500215 : 1500217;
+			PacketSendUtility.broadcastMessage(getOwner(), msgId);
+		}
 		hpPhases.tryEnterNextPhase(this);
 	}
 

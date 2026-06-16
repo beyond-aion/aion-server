@@ -9,7 +9,6 @@ import com.aionemu.gameserver.ai.HpPhases;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.templates.npcskill.NpcSkillTargetAttribute;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 import ai.AggressiveNpcAI;
@@ -28,12 +27,6 @@ public class RM1337AI extends AggressiveNpcAI implements HpPhases.PhaseHandler {
 	}
 
 	@Override
-	protected void handleSpawned() {
-		super.handleSpawned();
-		PacketSendUtility.broadcastMessage(getOwner(), 1500229, 2000);
-	}
-
-	@Override
 	protected void handleDespawned() {
 		cancelTask();
 		super.handleDespawned();
@@ -42,7 +35,6 @@ public class RM1337AI extends AggressiveNpcAI implements HpPhases.PhaseHandler {
 	@Override
 	protected void handleDied() {
 		cancelTask();
-		PacketSendUtility.broadcastMessage(getOwner(), 1500231);
 		super.handleDied();
 	}
 
@@ -93,7 +85,6 @@ public class RM1337AI extends AggressiveNpcAI implements HpPhases.PhaseHandler {
 				cancelTask();
 			} else {
 				getOwner().getController().cancelCurrentSkill(null);
-				PacketSendUtility.broadcastMessage(getOwner(), 1500230);
 				getOwner().queueSkill(19551, 10);
 				spawnSparks();
 			}
@@ -103,6 +94,7 @@ public class RM1337AI extends AggressiveNpcAI implements HpPhases.PhaseHandler {
 	private void spawnSparks() {
 		ThreadPoolManager.getInstance().schedule(() -> {
 			if (!isDead()) {
+				getOwner().queueSkill(19553, 10);
 				IntStream.range(0, Rnd.get(8, 12)).forEach(i -> rndSpawnInRange(282373, 3, 12));
 			}
 		}, 4000);
