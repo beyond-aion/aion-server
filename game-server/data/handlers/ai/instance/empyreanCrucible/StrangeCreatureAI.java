@@ -33,7 +33,7 @@ public class StrangeCreatureAI extends GeneralNpcAI {
 			public void run() {
 				if (!isDead()) {
 					PacketSendUtility.broadcastMessage(getOwner(), 341444);
-					SkillEngine.getInstance().getSkill(getOwner(), 17914, 34, getOwner()).useNoAnimations();
+					SkillEngine.getInstance().getSkill(getOwner(), 17914, 34, getOwner()).useNoAnimationSkill();
 				}
 			}
 
