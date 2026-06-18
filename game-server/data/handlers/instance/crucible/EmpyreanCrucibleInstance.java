@@ -1105,13 +1105,7 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 	}
 
 	private void sp(int npcId, String aiName, float x, float y, float z, byte h, int time) {
-		ThreadPoolManager.getInstance().schedule(() -> {
-			if (!isInstanceDestroyed) {
-				synchronized (npcs) {
-					npcs.add((Npc) spawn(npcId, x, y, z, h, aiName));
-				}
-			}
-		}, time);
+		ThreadPoolManager.getInstance().schedule(() -> sp(npcId, aiName, x, y, z, h), time);
 	}
 
 	private Npc sp(int npcId, float x, float y, float z, byte h) {
