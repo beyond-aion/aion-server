@@ -1,7 +1,5 @@
 package ai.instance.empyreanCrucible;
 
-import java.util.concurrent.atomic.AtomicBoolean;
-
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.HpPhases;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -19,9 +17,8 @@ import ai.AggressiveNoLootNpcAI;
 @AIName("priest_preceptor")
 public class PriestPreceptorAI extends AggressiveNoLootNpcAI implements HpPhases.PhaseHandler {
 
-	private final HpPhases hpPhases = new HpPhases(75, 25);
+	private final HpPhases hpPhases = new HpPhases(100, 75, 25);
 	private final int[] helpers;
-	private final AtomicBoolean isHome = new AtomicBoolean(true);
 
 	public PriestPreceptorAI(Npc owner) {
 		super(owner);
@@ -47,7 +44,6 @@ public class PriestPreceptorAI extends AggressiveNoLootNpcAI implements HpPhases
 	@Override
 	protected void handleBackHome() {
 		despawnHelpers();
-		isHome.set(true);
 		super.handleBackHome();
 		hpPhases.reset();
 	}
@@ -55,16 +51,16 @@ public class PriestPreceptorAI extends AggressiveNoLootNpcAI implements HpPhases
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
-		if (isHome.compareAndSet(true, false)) {
-			int msgId = getNpcId() == 217581 ? 1500219 : 1500221;
-			PacketSendUtility.broadcastMessage(getOwner(), msgId);
-		}
 		hpPhases.tryEnterNextPhase(this);
 	}
 
 	@Override
 	public void handleHpPhase(int phaseHpPercent) {
 		switch (phaseHpPercent) {
+			case 100 -> {
+				int msgId = getNpcId() == 217581 ? 1500219 : 1500221;
+				PacketSendUtility.broadcastMessage(getOwner(), msgId);
+			}
 			case 75 -> getOwner().queueSkill(19611, 10, -1, NpcSkillTargetAttribute.RANDOM); // Word of Destruction II
 			case 25 -> startTask();
 		}

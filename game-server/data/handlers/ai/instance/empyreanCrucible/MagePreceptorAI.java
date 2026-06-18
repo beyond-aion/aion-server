@@ -1,7 +1,5 @@
 package ai.instance.empyreanCrucible;
 
-import java.util.concurrent.atomic.AtomicBoolean;
-
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.HpPhases;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -19,8 +17,7 @@ import ai.AggressiveNpcAI;
 @AIName("mage_preceptor")
 public class MagePreceptorAI extends AggressiveNpcAI implements HpPhases.PhaseHandler {
 
-	private final HpPhases hpPhases = new HpPhases(75, 50, 25);
-	private final AtomicBoolean isHome = new AtomicBoolean(true);
+	private final HpPhases hpPhases = new HpPhases(100, 75, 50, 25);
 
 	public MagePreceptorAI(Npc owner) {
 		super(owner);
@@ -43,7 +40,6 @@ public class MagePreceptorAI extends AggressiveNpcAI implements HpPhases.PhaseHa
 	@Override
 	protected void handleBackHome() {
 		despawnNpcs();
-		isHome.set(true);
 		super.handleBackHome();
 		hpPhases.reset();
 	}
@@ -51,16 +47,16 @@ public class MagePreceptorAI extends AggressiveNpcAI implements HpPhases.PhaseHa
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
-		if (isHome.compareAndSet(true, false)) {
-			int msgId = getNpcId() == 217580 ? 1500215 : 1500217;
-			PacketSendUtility.broadcastMessage(getOwner(), msgId);
-		}
 		hpPhases.tryEnterNextPhase(this);
 	}
 
 	@Override
 	public void handleHpPhase(int phaseHpPercent) {
 		switch (phaseHpPercent) {
+			case 100 -> {
+				int msgId = getNpcId() == 217580 ? 1500215 : 1500217;
+				PacketSendUtility.broadcastMessage(getOwner(), msgId);
+			}
 			case 75 -> getOwner().queueSkill(19605, 10, -1, NpcSkillTargetAttribute.RANDOM);
 			case 50 -> {
 				getOwner().queueSkill(19606, 10, 3000);

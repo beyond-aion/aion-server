@@ -549,11 +549,8 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 			case 217750 -> sp(205340, 1625.08f, 159.15f, 126f, (byte) 0); // IDArena_6th_MC_End
 			case 217582, 217578 -> {
 				setStage(StageType.START_STAGE_7_ROUND_2, 2000);
-				Race race = getRegisteredTeamRace();
-				switch (race) {
-					case ASMODIANS -> sp(217583, "ranger_preceptor", 1794.81f, 779.53925f, 469.35016f, (byte) 40, 6000); // S7_MasterD_Sc_55_Ah
-					case ELYOS -> sp(217579, "ranger_preceptor", 1794.81f, 779.53925f, 469.35016f, (byte) 40, 6000); // S7_MasterL_Sc_55_Ah
-				}
+				int npcId = getRegisteredTeamRace() == Race.ASMODIANS ? 217583 : 217579; // S7_MasterD_Sc_55_Ah / S7_MasterL_Sc_55_Ah
+				sp(npcId, "ranger_preceptor", 1794.81f, 779.53925f, 469.35016f, (byte) 40, 6000);
 			}
 			case 217579, 217583 -> {
 				setStage(StageType.START_STAGE_7_ROUND_3, 2000);
@@ -573,11 +570,8 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 			}
 			case 217581, 217585 -> {
 				setStage(StageType.START_STAGE_7_ROUND_5, 2000);
-				Race race = getRegisteredTeamRace();
-				switch (race) {
-					case ASMODIANS -> sp(217587, "stigma_boss_preceptor", 1773.194f, 796.537f, 469.350f, (byte) 0, 6000); // S7_Stigma_MasterD_Boss_55_Ah
-					case ELYOS -> sp(217586, "stigma_boss_preceptor", 1773.194f, 796.537f, 469.350f, (byte) 0, 6000); // S7_Stigma_MasterL_Boss_55_Ah
-				}
+				int npcId = getRegisteredTeamRace() == Race.ASMODIANS ? 217587 : 217586; // S7_Stigma_MasterD_Boss_55_Ah / S7_Stigma_MasterL_Boss_55_Ah
+				sp(npcId, "stigma_boss_preceptor", 1773.194f, 796.537f, 469.350f, (byte) 0, 6000);
 			}
 			case 217586, 217587 -> {
 				setStage(StageType.PASS_GROUP_STAGE_7, 0);
@@ -669,7 +663,7 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 			case 217608 -> {
 				npc.getController().delete();
 				setStage(StageType.START_STAGE_10_ROUND_5, 2000);
-				sp(217609, 1767.3652f, 1294.0907f, 394.3f, (byte) 3, 2000); // SFinal_Immotal_Boss_55_Ah
+				sp(217609, "vanktrist", 1767.3652f, 1294.0907f, 394.3f, (byte) 3, 2000); // SFinal_Immotal_Boss_55_Ah
 			}
 			case 217609 -> {
 				npc.getController().delete();
@@ -796,14 +790,14 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 
 	private void startStage2Round3() {
 		setStage(StageType.START_STAGE_2_ROUND_3, 2000);
-		sp(Rnd.nextBoolean() ? 217500 : 217509, 332.0035f, 349.55893f, 96.09093f, (byte) 0, 6000); // S2_KrallScout_MidBoss_55_Ah,
-																									// S2_LycanRanger_Named_55_Ah
+		int npcId = Rnd.nextBoolean() ? 217500 : 217509; // S2_KrallScout_MidBoss_55_Ah / S2_LycanRanger_Named_55_Ah
+		sp(npcId, 332.0035f, 349.55893f, 96.09093f, (byte) 0, 6000);
 	}
 
 	private void startStage2Round5() {
 		setStage(StageType.START_STAGE_2_ROUND_5, 2000);
-		sp(Rnd.nextBoolean() ? 217510 : 217501, 332.0035f, 349.55893f, 96.09093f, (byte) 0, 6000); // S2_LycanWizard_Boss_55_Ah,
-																									// S2_KrallWarrior_Boss_55_Ah
+		int npcId = Rnd.nextBoolean() ? 217510 : 217501; // S2_LycanWizard_Boss_55_Ah / S2_KrallWarrior_Boss_55_Ah
+		sp(npcId, 332.0035f, 349.55893f, 96.09093f, (byte) 0, 6000);
 	}
 
 	private void rewardGroup() {
@@ -1151,13 +1145,7 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 	}
 
 	private void sp(int npcId, float x, float y, float z, byte h, int time) {
-		ThreadPoolManager.getInstance().schedule(() -> {
-			if (!isInstanceDestroyed) {
-				synchronized (npcs) {
-					npcs.add((Npc) spawn(npcId, x, y, z, h));
-				}
-			}
-		}, time);
+		sp(npcId, null, x, y, z, h, time);
 	}
 
 	private void sp(int npcId, String aiName, float x, float y, float z, byte h, int time) {
@@ -1171,14 +1159,7 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 	}
 
 	private Npc sp(int npcId, float x, float y, float z, byte h) {
-		Npc npc = null;
-		if (!isInstanceDestroyed) {
-			npc = (Npc) spawn(npcId, x, y, z, h);
-			synchronized (npcs) {
-				npcs.add(npc);
-			}
-		}
-		return npc;
+		return sp(npcId, null, x, y, z, h);
 	}
 
 	private Npc sp(int npcId, String aiName, float x, float y, float z, byte h) {
