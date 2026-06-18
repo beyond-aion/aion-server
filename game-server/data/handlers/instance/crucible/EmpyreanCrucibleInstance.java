@@ -554,19 +554,13 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 			}
 			case 217579, 217583 -> {
 				setStage(StageType.START_STAGE_7_ROUND_3, 2000);
-				Race race = getRegisteredTeamRace();
-				switch (race) {
-					case ASMODIANS -> sp(217584, 1775.6254f, 811.43225f, 469.35022f, (byte) 100, 6000); // S7_MasterD_Ma_55_Ah
-					case ELYOS -> sp(217580, 1775.6254f, 811.43225f, 469.35022f, (byte) 100, 6000); // S7_MasterL_Ma_55_Ah
-				}
+				int npcId = getRegisteredTeamRace() == Race.ASMODIANS ? 217584 : 217580; // S7_MasterD_Ma_55_Ah / S7_MasterL_Ma_55_Ah
+				sp(npcId, "mage_preceptor", 1775.6254f, 811.43225f, 469.35022f, (byte) 100, 6000);
 			}
 			case 217580, 217584 -> {
 				setStage(StageType.START_STAGE_7_ROUND_4, 2000);
-				Race race = getRegisteredTeamRace();
-				switch (race) {
-					case ASMODIANS -> sp(217585, 1775.716f, 779.630f, 469.564f, (byte) 20, 6000); // S7_MasterD_Pr_55_Ah
-					case ELYOS -> sp(217581, 1775.716f, 779.630f, 469.564f, (byte) 20, 6000); // S7_MasterL_Pr_55_Ah
-				}
+				int npcId = getRegisteredTeamRace() == Race.ASMODIANS ? 217585 : 217581; // S7_MasterD_Pr_55_Ah / S7_MasterL_Pr_55_Ah
+				sp(npcId, "priest_preceptor", 1775.716f, 779.630f, 469.564f, (byte) 20, 6000);
 			}
 			case 217581, 217585 -> {
 				setStage(StageType.START_STAGE_7_ROUND_5, 2000);
@@ -881,20 +875,12 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 				stage = 1;
 				Race race = getRegisteredTeamRace();
 				List<Integer> round = new ArrayList<>();
-				switch (race) {
-					case ASMODIANS -> {
-						round.add(217486);
-						round.add(217489);
-						sp(217486, 327.73657f, 347.96228f, 96.09092f, (byte) 0, 9000); // S1_TempleD_Kn_55_Ae
-						sp(217489, 327.81943f, 350.948f, 96.09093f, (byte) 0, 9000); // S1_TempleD_Wi_55_Ae
-					}
-					case ELYOS -> {
-						round.add(217477);
-						round.add(217480);
-						sp(217477, 327.73657f, 347.96228f, 96.09092f, (byte) 0, 9000); // S1_TempleL_Kn_55_Ae
-						sp(217480, 327.81943f, 350.948f, 96.09093f, (byte) 0, 9000); // S1_TempleL_Wi_55_Ae
-					}
-				}
+				int npcId1 = race == Race.ASMODIANS ? 217486 : 217477; // S1_TempleD_Kn_55_Ae / S1_TempleL_Kn_55_Ae
+				int npcId2 = race == Race.ASMODIANS ? 217489 : 217480; // S1_TempleD_Wi_55_Ae / S1_TempleL_Wi_55_Ae
+				round.add(npcId1);
+				round.add(npcId2);
+				sp(npcId1, 327.73657f, 347.96228f, 96.09092f, (byte) 0, 9000);
+				sp(npcId2, 327.81943f, 350.948f, 96.09093f, (byte) 0, 9000);
 				ThreadPoolManager.getInstance().schedule(() -> {
 					if (!isSpawn(round)) {
 						startStage1Round2();
@@ -968,11 +954,8 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 			case START_STAGE_6_ROUND_5 -> setStage(type, 0);
 			case START_STAGE_7_ROUND_1 -> {
 				setStage(type, 5000);
-				Race race = getRegisteredTeamRace();
-				switch (race) {
-					case ASMODIANS -> sp(217582, 1783.0873f, 796.8426f, 469.35013f, (byte) 0, 6000); // S7_MasterD_Wa_55_Ah
-					case ELYOS -> sp(217578, 1783.0873f, 796.8426f, 469.35013f, (byte) 0, 6000); // S7_MasterL_Wa_55_Ah
-				}
+				int npcId = getRegisteredTeamRace() == Race.ASMODIANS ? 217582 : 217578; // S7_MasterD_Wa_55_Ah / S7_MasterL_Wa_55_Ah
+				sp(npcId, "warrior_preceptor", 1783.0873f, 796.8426f, 469.35013f, (byte) 0, 6000);
 			}
 			case START_STAGE_8_ROUND_1 -> {
 				setStage(type, 2000);
@@ -1035,18 +1018,10 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 
 	private void startStage1Round2() {
 		setStage(StageType.START_STAGE_1_ROUND_2, 2000);
-		Race race = getRegisteredTeamRace();
+		int npcId = getRegisteredTeamRace() == Race.ASMODIANS ? 217492 : 217483; // S1_TempleD_Ch_55_Ae / S1_TempleL_Ch_55_Ae
 		List<Integer> round = new ArrayList<>();
-		switch (race) {
-			case ASMODIANS -> {
-				round.add(217492);
-				sp(217492, 332.7714f, 358.48206f, 96.09092f, (byte) 106, 6000); // S1_TempleD_Ch_55_Ae
-			}
-			case ELYOS -> {
-				round.add(217483);
-				sp(217483, 332.7714f, 358.48206f, 96.09092f, (byte) 106, 6000); // S1_TempleL_Ch_55_Ae
-			}
-		}
+		round.add(npcId);
+		sp(npcId, 332.7714f, 358.48206f, 96.09092f, (byte) 106, 6000);
 		ThreadPoolManager.getInstance().schedule(() -> {
 			if (!isSpawn(round))
 				startStage1Round3();
@@ -1057,17 +1032,9 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 	private void startStage1Round3() {
 		setStage(StageType.START_STAGE_1_ROUND_3, 2000);
 		List<Integer> round = new ArrayList<>();
-		Race race = getRegisteredTeamRace();
-		switch (race) {
-			case ASMODIANS -> {
-				round.add(217487);
-				sp(217487, 334.844f, 339.92618f, 96.09094f, (byte) 106, 6000); // S1_TempleD_As_55_Ae
-			}
-			case ELYOS -> {
-				round.add(217478);
-				sp(217478, 334.844f, 339.92618f, 96.09094f, (byte) 106, 6000); // S1_TempleL_As_55_Ae
-			}
-		}
+		int npcId = getRegisteredTeamRace() == Race.ASMODIANS ? 217487 : 217478; // S1_TempleD_As_55_Ae / S1_TempleL_As_55_Ae
+		round.add(npcId);
+		sp(npcId, 334.844f, 339.92618f, 96.09094f, (byte) 106, 6000);
 		ThreadPoolManager.getInstance().schedule(() -> {
 			if (!isSpawn(round))
 				startStage1Round4();
@@ -1078,17 +1045,9 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 	private void startStage1Round4() {
 		setStage(StageType.START_STAGE_1_ROUND_4, 2000);
 		List<Integer> round = new ArrayList<>();
-		Race race = getRegisteredTeamRace();
-		switch (race) {
-			case ASMODIANS -> {
-				round.add(217491);
-				sp(217491, 341.03156f, 361.04315f, 96.09093f, (byte) 106, 6000); // S1_TempleD_Pr_55_Ae
-			}
-			case ELYOS -> {
-				round.add(217482);
-				sp(217482, 341.03156f, 361.04315f, 96.09093f, (byte) 106, 6000); // S1_TempleL_Pr_55_Ae
-			}
-		}
+		int npcId = getRegisteredTeamRace() == Race.ASMODIANS ? 217491 : 217482; // S1_TempleD_Pr_55_Ae / S1_TempleL_Pr_55_Ae
+		round.add(npcId);
+		sp(npcId, 341.03156f, 361.04315f, 96.09093f, (byte) 106, 6000);
 		ThreadPoolManager.getInstance().schedule(() -> {
 			if (!isSpawn(round))
 				startStage1Round5();
@@ -1098,11 +1057,8 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 
 	private void startStage1Round5() {
 		setStage(StageType.START_STAGE_1_ROUND_5, 2000);
-		Race race = getRegisteredTeamRace();
-		switch (race) {
-			case ASMODIANS -> sp(217493, 332.093f, 349.36847f, 96.090935f, (byte) 119, 6000); // S1_TempleD_Fi_Boss_55_Ah
-			case ELYOS -> sp(217484, 332.093f, 349.36847f, 96.090935f, (byte) 119, 6000); // S1_TempleL_Fi_Boss_55_Ah
-		}
+		int npcId = getRegisteredTeamRace() == Race.ASMODIANS ? 217493 : 217484; // S1_TempleD_Fi_Boss_55_Ah / S1_TempleL_Fi_Boss_55_Ah
+		sp(npcId, 332.093f, 349.36847f, 96.090935f, (byte) 119, 6000);
 	}
 
 	private void teleport(float x, float y, float z, byte h) {
