@@ -40,6 +40,10 @@
 		<xs:attribute name="dispel_category" type="DispelCategoryType" default="NONE" />
 		<xs:attribute name="req_dispel_level" type="xs:int" />
 		<xs:attribute name="req_dispel_count" type="xs:int" />
+		<xs:attribute name="apply_magical_skill_boost_bonus" type="xs:boolean" />
+		<xs:attribute name="apply_magical_critical" type="xs:boolean" />
+		<xs:attribute name="apply_heal_boost_bonus" type="xs:boolean" />
+		<xs:attribute name="apply_casting_time_bonus" type="xs:boolean" />
 		<xs:attribute name="activation" type="activationAttribute" use="required" />
 		<xs:attribute name="stigma" type="StigmaType" />
 		<xs:attribute name="ammospeed" type="xs:int" />

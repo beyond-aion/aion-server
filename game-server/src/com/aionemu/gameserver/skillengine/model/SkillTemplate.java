@@ -61,6 +61,14 @@ public class SkillTemplate implements L10n {
 	private int reqDispelLevel;
 	@XmlAttribute(name = "req_dispel_count")
 	private int reqDispelCount;
+	@XmlAttribute(name = "apply_magical_skill_boost_bonus")
+	private boolean applyMagicalSkillBoostBonus;
+	@XmlAttribute(name = "apply_magical_critical")
+	private boolean applyMagicalCritical;
+	@XmlAttribute(name = "apply_heal_boost_bonus")
+	private boolean applyHealBoostBonus;
+	@XmlAttribute(name = "apply_casting_time_bonus")
+	private boolean applyCastingTimeBonus;
 	@XmlAttribute(name = "activation", required = true)
 	private ActivationAttribute activationAttribute;
 	@XmlAttribute(required = true)
@@ -187,6 +195,21 @@ public class SkillTemplate implements L10n {
 		return reqDispelCount;
 	}
 
+	public boolean isApplyMagicalSkillBoostBonus() {
+		return applyMagicalSkillBoostBonus;
+	}
+
+	public boolean isApplyMagicalCritical() {
+		return applyMagicalCritical;
+	}
+
+	public boolean isApplyHealBoostBonus() {
+		return applyHealBoostBonus;
+	}
+
+	public boolean isApplyCastingTimeBonus() {
+		return applyCastingTimeBonus;
+	}
 	public int getDuration() {
 		return duration;
 	}
