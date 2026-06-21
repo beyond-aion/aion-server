@@ -236,7 +236,7 @@ public class AttackUtil {
 
 		AttackStatus status = switch (element) {
 			case NONE -> calculatePhysicalStatus(effector, effected, template, effect.getSkillLevel());
-			default -> calculateMagicalStatus(effector, effected, template.getCritProbMod2(), true, effect.getSkillTemplate().isMcritApplied());
+			default -> calculateMagicalStatus(effector, effected, template.getCritProbMod2(), true, effect.getSkillTemplate().isApplyMagicalCritical());
 		};
 
 		int baseAttack = 0;
@@ -479,7 +479,7 @@ public class AttackUtil {
 			AttackStatus status = effect.getAttackStatus();
 			// calculate attack status only if it has not been forced already
 			if (status == AttackStatus.NORMALHIT && template.getPosition() == 1)
-				status = calculateMagicalStatus(effector, effected, template.getCritProbMod2(), true, effect.getSkillTemplate().isMcritApplied());
+				status = calculateMagicalStatus(effector, effected, template.getCritProbMod2(), true, effect.getSkillTemplate().isApplyMagicalCritical());
 			if (status == AttackStatus.CRITICAL) {
 				int critAddDmg = template.calculateCritAddDmg(effect);
 				damage = calculateWeaponCritical(template.getElement(), effected, damage, getWeaponGroup(effector, true), critAddDmg,
