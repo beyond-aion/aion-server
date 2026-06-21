@@ -101,7 +101,9 @@ public class SkillLearnService {
 	public static boolean removeSkill(Player player, int skillId) {
 		PlayerSkillEntry skill = player.getSkillList().getSkillEntry(skillId);
 		if (skill != null) {
-			player.getEffectController().removeEffect(skillId);
+			SkillTemplate skillTemplate = DataManager.SKILL_DATA.getSkillTemplate(skillId);
+			if (skillTemplate.isPassive() || skillTemplate.isToggle() || skillTemplate.isDeityAvatar() || skillTemplate.getStack().startsWith("WS_"))
+				player.getEffectController().removeEffect(skillId);
 			player.getSkillList().removeSkill(skillId);
 			PacketSendUtility.sendPacket(player, new SM_SKILL_REMOVE(skill));
 			return true;
