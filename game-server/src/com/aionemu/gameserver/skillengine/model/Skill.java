@@ -343,7 +343,11 @@ public class Skill {
 				int maxCap = (int) (baseCastDuration * 1.5f);
 				yield Math.clamp(castDuration, minCap, maxCap);
 			}
-			case MAGICAL -> Math.max(calculateMagicalCastDuration(), (int) (baseCastDuration * 0.625f));
+			case MAGICAL -> {
+				int normalDuration = calculateMagicalCastDuration();
+				int delta = baseCastDuration - normalDuration;
+				yield baseCastDuration - delta / 2;
+			}
 			default -> baseCastDuration;
 		};
 	}
