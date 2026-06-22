@@ -289,16 +289,6 @@ public class SkillTemplate implements L10n {
 		return stance;
 	}
 
-	public boolean isCastDurationAffectedByCastSpeed() {
-		if (isDeityAvatar())
-			return false;
-		if (hasAnyEffect(EffectType.SLEEP, EffectType.FEAR, EffectType.RETURN, EffectType.ESCAPE))
-			return false; // sleep and fear skills are no longer affected by cast speed since 1.5.0.5
-		if (getActions() != null && getActions().getActions().stream().anyMatch(action -> action instanceof ItemUseAction)) // e.g. Herb Treatment
-			return false;
-		return true;
-	}
-
 	public boolean hasAnyEffect(EffectType... effectTypes) {
 		return hasAnyEffect(false, effectTypes);
 	}

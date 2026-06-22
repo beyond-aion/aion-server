@@ -315,8 +315,7 @@ public class Skill {
 			castDuration = Math.round(baseCastDuration * (npc.getGameStats().getCastSpeed() / 1000f));
 			castSpeedForAnimationBoostAndChargeSkills = 1f;
 		} else if (skillTemplate.isCharge()) {
-			boolean isChargeTimeFixed = updateChargeBaseCastDuration();
-			castDuration = isChargeTimeFixed ? baseCastDuration : calculateChargeCastDuration();
+			castDuration = calculateChargeCastDuration();
 			castSpeedForAnimationBoostAndChargeSkills = (float) castDuration / baseCastDuration;
 		} else {
 			castDuration = calculateCastDuration();
@@ -324,39 +323,38 @@ public class Skill {
 		}
 	}
 
-	private boolean updateChargeBaseCastDuration() {
+	private int calculateChargeCastDuration() {
+		SkillType skillType = SkillType.NONE;
 		// cast/attack speed can affect charge time since 4.8 (https://aionpowerbook.com/powerbook/New_World_Update_-_Skill_Changes#Other_Changes)
-		boolean isChargeTimeFixed = !isCastDurationAffectedByCastSpeed(); // fear and sleep charge skills are excluded, just like with regular casts
 		SkillChargeCondition chargeCondition = skillTemplate.getSkillChargeCondition();
 		if (chargeCondition != null) {
 			int maxCastDuration = 0;
 			ChargeSkillEntry skillCharge = DataManager.SKILL_CHARGE_DATA.getChargedSkillEntry(chargeCondition.getValue());
+			skillType = skillCharge.getChargeTimeBonusType();
 			for (ChargedSkill chargedSkill : skillCharge.getSkills()) {
-				if (!isChargeTimeFixed && !DataManager.SKILL_DATA.getSkillTemplate(chargedSkill.getId()).isCastDurationAffectedByCastSpeed())
-					isChargeTimeFixed = true;
 				maxCastDuration += chargedSkill.getTime();
 			}
 			baseCastDuration = maxCastDuration;
 		}
-		return isChargeTimeFixed;
-	}
-
-	private int calculateChargeCastDuration() {
-		boolean isPhysicalClass = effector instanceof Player player
-			&& (player.getPlayerClass().isPhysicalClass() || player.getPlayerClass() == PlayerClass.RIDER || player.getPlayerClass() == PlayerClass.GUNNER);
 		int castDuration;
-		if (isPhysicalClass) // TODO check if attack speed should also affect magical classes
+		if (skillType == SkillType.PHYSICAL) {
 			castDuration = (int) effector.getGameStats().getPositiveStat(StatEnum.ATTACK_SPEED, baseCastDuration);
-		else
+			int minCap = (int) (baseCastDuration * 0.75f);
+			int maxCap = (int) (baseCastDuration * 1.5f);
+			return Math.clamp(castDuration, minCap, maxCap);
+		} else if (skillType == SkillType.MAGICAL) {
 			castDuration = calculateMagicalCastDuration();
-		return Math.max(castDuration, (int) (baseCastDuration * 0.25f));
+			return Math.max(castDuration, (int) (baseCastDuration * 0.625f));
+		}
+		return baseCastDuration;
 	}
 
 	private int calculateCastDuration() {
-		// ap & cash revival stones, or 2nd+ time of multicast-skill activation
+		//todo remove hardcoded skillId and add casting delay to item_templates.xml
+		//ap & cash revival stones, or 2nd+ time of multicast-skill activation
 		if (getSkillId() == 10802 || getMultiCastCount() > 0)
 			return 0;
-		if (skillTemplate.getType() != SkillType.MAGICAL || !isCastDurationAffectedByCastSpeed())
+		if (!isCastDurationAffectedByCastSpeed())
 			return baseCastDuration;
 		return calculateMagicalCastDuration();
 	}
@@ -976,7 +974,7 @@ public class Skill {
 	}
 
 	private boolean isCastDurationAffectedByCastSpeed() {
-		return skillMethod == SkillMethod.CAST && skillTemplate.isCastDurationAffectedByCastSpeed();
+		return skillMethod == SkillMethod.CAST && skillTemplate.isApplyCastingTimeBonus();
 	}
 
 	public void setChainCategory(String chainCategory) {
