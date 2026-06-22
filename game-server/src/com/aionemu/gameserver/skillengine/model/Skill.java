@@ -336,17 +336,16 @@ public class Skill {
 			}
 			baseCastDuration = maxCastDuration;
 		}
-		int castDuration;
-		if (skillType == SkillType.PHYSICAL) {
-			castDuration = (int) effector.getGameStats().getPositiveStat(StatEnum.ATTACK_SPEED, baseCastDuration);
-			int minCap = (int) (baseCastDuration * 0.75f);
-			int maxCap = (int) (baseCastDuration * 1.5f);
-			return Math.clamp(castDuration, minCap, maxCap);
-		} else if (skillType == SkillType.MAGICAL) {
-			castDuration = calculateMagicalCastDuration();
-			return Math.max(castDuration, (int) (baseCastDuration * 0.625f));
-		}
-		return baseCastDuration;
+		return switch (skillType) {
+			case PHYSICAL -> {
+				int castDuration = (int) effector.getGameStats().getPositiveStat(StatEnum.ATTACK_SPEED, baseCastDuration);
+				int minCap = (int) (baseCastDuration * 0.75f);
+				int maxCap = (int) (baseCastDuration * 1.5f);
+				yield Math.clamp(castDuration, minCap, maxCap);
+			}
+			case MAGICAL -> Math.max(calculateMagicalCastDuration(), (int) (baseCastDuration * 0.625f));
+			default -> baseCastDuration;
+		};
 	}
 
 	private int calculateCastDuration() {
