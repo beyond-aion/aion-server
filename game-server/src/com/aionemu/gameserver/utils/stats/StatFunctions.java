@@ -392,7 +392,7 @@ public class StatFunctions {
 			magicBoost = (int) Math.max(0, limit(StatEnum.BOOST_MAGICAL_SKILL, magicBoost));
 		}
 		int knowledge = useKnowledge ? sgs.getKnowledge().getCurrent() : 100;
-		damage *= (1 + ((float) magicBoost / (knowledge * 10)));
+		damage *= (magicBoost / 1000f) + (knowledge / 100f);
 
 		if (useBoostSpellAttack) {
 			damage = sgs.getStat(StatEnum.BOOST_SPELL_ATTACK, (int) damage).getCurrent();
