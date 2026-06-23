@@ -38,4 +38,21 @@ public class NoReduceSpellATKInstantEffect extends DamageEffect {
 	public boolean shouldApplyAttackerMovementModifier() {
 		return false;
 	}
+
+	@Override
+	public boolean shouldApplyMagicalSkillBoostBonus(Effect effect) {
+		return false;
+	}
+
+	public boolean shouldUseKnowledge() {
+		return false;
+	}
+
+	public boolean shouldUseBoostSpellAttackEffects() {
+		return false;
+	}
+
+	public boolean shouldUseOneTimeBoostSkillAttack() {
+		return false;
+	}
 }

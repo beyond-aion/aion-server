@@ -36,7 +36,8 @@ public class SignetBurstEffect extends DamageEffect {
 			valueWithDelta *= effect.getEffector().getGameStats().getKnowledge().getCurrent() / 100f;
 
 		int effectProb = 0;
-		SignetData signetData = DataManager.SIGNET_DATA_TEMPLATES.getSignetData(SignetEnum.valueOf(signet), signetEffect == null ? 0 : signetEffect.getSkillLevel());
+		SignetData signetData = DataManager.SIGNET_DATA_TEMPLATES.getSignetData(SignetEnum.valueOf(signet),
+			signetEffect == null ? 0 : signetEffect.getSkillLevel());
 		if (signetData != null) {
 			valueWithDelta *= signetData.getDamageMultiplier();
 			effectProb = signetData.getAddEffectProb() * addEffectProbMultiplier;
@@ -65,4 +66,11 @@ public class SignetBurstEffect extends DamageEffect {
 		return signet;
 	}
 
+	public boolean shouldUseBoostSpellAttackEffects() {
+		return false;
+	}
+	
+	public boolean shouldUseOneTimeBoostSkillAttack() {
+		return false;
+	}
 }

@@ -56,4 +56,16 @@ public class DispelBuffCounterAtkEffect extends DamageEffect {
 		effect.getEffected().getEffectController().resetDesignatedDispelEffect(effect);
 		super.endEffect(effect);
 	}
+
+	public boolean shouldUseKnowledge() {
+		return false;
+	}
+
+	public boolean shouldUseBoostSpellAttackEffects() {
+		return false;
+	}
+
+	public boolean shouldUseOneTimeBoostSkillAttack() {
+		return false;
+	}
 }

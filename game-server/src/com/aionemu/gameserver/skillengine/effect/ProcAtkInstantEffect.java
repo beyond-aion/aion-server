@@ -33,4 +33,12 @@ public class ProcAtkInstantEffect extends DamageEffect {
 		else
 			return super.calculateBaseValue(effect);
 	}
+	
+	public boolean shouldUseBoostSpellAttackEffects() {
+		return false;
+	}
+
+	public boolean shouldUseOneTimeBoostSkillAttack() {
+		return false;
+	}
 }

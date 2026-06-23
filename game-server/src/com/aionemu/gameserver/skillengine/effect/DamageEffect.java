@@ -78,4 +78,20 @@ public abstract class DamageEffect extends EffectTemplate {
 	public boolean shouldApplyAttackerMovementModifier() {
 		return true;
 	}
+
+	public boolean shouldApplyMagicalSkillBoostBonus(Effect effect) {
+		return effect.getSkillTemplate().isApplyMagicalSkillBoostBonus();
+	}
+
+	public boolean shouldUseKnowledge() {
+		return true;
+	}
+
+	public boolean shouldUseBoostSpellAttackEffects() {
+		return true;
+	}
+
+	public boolean shouldUseOneTimeBoostSkillAttack() {
+		return true;
+	}
 }

@@ -380,19 +380,23 @@ public class StatFunctions {
 	}
 
 	public static float calculateMagicalSkillDamage(Creature effector, Creature target, float baseDamage, int bonus, EffectTemplate template,
-													boolean useMagicBoost, boolean useKnowledge) {
+													boolean useMagicBoost, boolean useKnowledge, boolean useBoostSpellAttack) {
 		float damage = baseDamage;
-		if (!(template instanceof NoReduceSpellATKInstantEffect)) {
-			CreatureGameStats<?> sgs = effector.getGameStats();
-			CreatureGameStats<?> tgs = target.getGameStats();
-			float magicBoost = useMagicBoost ? sgs.getMBoost().getCurrent() : 0;
-			magicBoost -= effector instanceof Trap ? 0 : tgs.getMBResist().getCurrent();
+		CreatureGameStats<?> sgs = effector.getGameStats();
+		CreatureGameStats<?> tgs = target.getGameStats();
+		int magicBoost = 0;
+
+		if (useMagicBoost) {
+			magicBoost = sgs.getMBoost().getCurrent();
+			magicBoost -= tgs.getMBResist().getCurrent();
 			magicBoost = (int) Math.max(0, limit(StatEnum.BOOST_MAGICAL_SKILL, magicBoost));
-			float knowledge = useKnowledge ? sgs.getKnowledge().getCurrent() : 100; // this line might be wrong now
-			damage *= (1 + (magicBoost / (knowledge * 10)));
+		}
+		int knowledge = useKnowledge ? sgs.getKnowledge().getCurrent() : 100;
+		damage *= (1 + ((float) magicBoost / (knowledge * 10)));
+
+		if (useBoostSpellAttack) {
 			damage = sgs.getStat(StatEnum.BOOST_SPELL_ATTACK, (int) damage).getCurrent();
 		}
-
 		// add bonus damage
 		damage += bonus;
 		if (template.getElement() != SkillElement.NONE && !(template instanceof NoReduceSpellATKInstantEffect)) {

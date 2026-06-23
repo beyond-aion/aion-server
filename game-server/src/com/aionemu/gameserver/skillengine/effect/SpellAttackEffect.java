@@ -22,7 +22,7 @@ public class SpellAttackEffect extends AbstractOverTimeEffect {
 	@Override
 	public void startEffect(Effect effect) {
 		int valueWithDelta = calculateBaseValue(effect);
-		int finalDamage = AttackUtil.calculateMagicalOverTimeSkillResult(effect, valueWithDelta, this, useMagicBoost(effect));
+		int finalDamage = AttackUtil.calculateMagicalOverTimeSkillResult(effect, valueWithDelta, this, effect.getSkillTemplate().isApplyMagicalSkillBoostBonus());
 		effect.setReserveds(new EffectReserved(position, finalDamage, ResourceType.HP, true, false), true);
 		super.startEffect(effect);
 	}
@@ -32,16 +32,5 @@ public class SpellAttackEffect extends AbstractOverTimeEffect {
 		Creature effected = effect.getEffected();
 		effected.getController().onAttack(effect, TYPE.DAMAGE, effect.getReserveds(position).getValue(), false, LOG.SPELLATK, hopType);
 		effected.getObserveController().notifyDotAttackedObservers(effect.getEffector(), effect);
-	}
-
-	/**
-	 * Retail server templates got values like:
-	 * <apply_heal_boost_bonus>0</apply_heal_boost_bonus>
-	 * <apply_magical_skill_boost_bonus>0</apply_magical_skill_boost_bonus>
-	 * <apply_magical_critical>0</apply_magical_critical>
-	 * If we succeeded in parsing the data, these exclusions can be removed.
-	 */
-	private boolean useMagicBoost(Effect effect) {
-		return effect.getSkillId() != 21110; // Shugo Venom
 	}
 }
