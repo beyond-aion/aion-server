@@ -64,7 +64,7 @@ public abstract class AbstractHealEffect extends EffectTemplate implements HealE
 
 	@Override
 	public boolean allowHpHealBoost(Effect effect) {
-		return !percent;
+		return effect.getSkillTemplate().isApplyHealBoostBonus();
 	}
 
 	@Override

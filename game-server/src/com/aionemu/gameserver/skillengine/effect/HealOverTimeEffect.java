@@ -30,7 +30,7 @@ public abstract class HealOverTimeEffect extends AbstractOverTimeEffect implemen
 	}
 
 	public void startEffect(Effect effect, HealType healType) {
-		effect.setReserveds(new EffectReserved(position, calculateHealValue(effect, healType), ResourceType.of(healType), false, false), true);
+		effect.setReserveds(new EffectReserved(position, calculateSnapshotHealValue(effect, healType), ResourceType.of(healType), false, false), true);
 		super.startEffect(effect, null);
 	}
 
@@ -41,13 +41,11 @@ public abstract class HealOverTimeEffect extends AbstractOverTimeEffect implemen
 		int maxCurValue = getMaxStatValue(effect);
 		int possibleHealValue = effect.getReserveds(position).getValue();
 
-		if (healType == HealType.HP && effect.getItemTemplate() == null)
-			possibleHealValue = effected.getGameStats().getStat(StatEnum.HEAL_SKILL_DEBOOST, possibleHealValue).getCurrent();
+		if (healType == HealType.HP) {
+			possibleHealValue = applyHealDeboost(effect, possibleHealValue);
+		}
 
 		int healValue = Math.min(maxCurValue - currentValue, possibleHealValue);
-
-		if (healValue <= 0)
-			return;
 
 		switch (healType) {
 			case HP -> effected.getLifeStats().increaseHp(TYPE.HP, healValue, effect, LOG.HEAL);
@@ -65,12 +63,12 @@ public abstract class HealOverTimeEffect extends AbstractOverTimeEffect implemen
 
 	@Override
 	public boolean allowHpHealBoost(Effect effect) {
-		return !percent && effect.getItemTemplate() == null;
+		return effect.getSkillTemplate().isApplyHealBoostBonus();
 	}
 
 	@Override
 	public boolean allowHpHealSkillDeboost(Effect effect) {
-		return false; // calculated in onPeriodicAction instead
+		return effect.getSkillTemplate().isApplyHealBoostBonus();
 	}
 
 	@Override
