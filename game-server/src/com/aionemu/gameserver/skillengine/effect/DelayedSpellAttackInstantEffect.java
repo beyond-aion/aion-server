@@ -25,8 +25,6 @@ public class DelayedSpellAttackInstantEffect extends DamageEffect {
 	@Override
 	public void applyEffect(Effect effect) {
 		int valueWithDelta = calculateBaseValue(effect);
-		if (element != SkillElement.NONE)
-			valueWithDelta *= effect.getEffector().getGameStats().getKnowledge().getCurrent() / 100;
 
 		AttackUtil.calculateSkillResult(effect, valueWithDelta, this, true); // ignores shields on retail
 		final int finalPosition = this.position;
