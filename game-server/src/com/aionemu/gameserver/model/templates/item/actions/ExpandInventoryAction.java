@@ -27,13 +27,10 @@ public class ExpandInventoryAction extends AbstractItemAction {
 
 	@Override
 	public boolean canAct(Player player, Item parentItem, Item targetItem, Object... params) {
-		switch (storage) {
-			case CUBE:
-				return CubeExpandService.canExpandByTicket(player, level);
-			case WAREHOUSE:
-				return WarehouseService.canExpandByTicket(player, level);
-		}
-		return false;
+		return switch (storage) {
+			case CUBE -> CubeExpandService.canExpandByTicket(player, level);
+			case WAREHOUSE -> WarehouseService.canExpandByTicket(player, level);
+		};
 	}
 
 	@Override

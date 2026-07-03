@@ -96,6 +96,8 @@ public class ItemTemplate extends VisibleObjectTemplate {
 	private int enchantType;
 	@XmlAttribute(name = "max_tampering")
 	private int maxTampering;
+	@XmlAttribute(name = "casting_delay")
+	private int castingDelay;
 	@XmlAttribute(name = "temp_exchange_time")
 	private int temExchangeTime;
 	@XmlAttribute(name = "expire_time")
@@ -281,6 +283,10 @@ public class ItemTemplate extends VisibleObjectTemplate {
 
 	public boolean isStigma() {
 		return stigma != null;
+	}
+
+	public int getCastingDelay() {
+		return castingDelay;
 	}
 
 	/**

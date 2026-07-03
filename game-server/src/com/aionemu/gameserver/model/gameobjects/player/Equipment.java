@@ -8,8 +8,7 @@ import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.gameserver.controllers.observer.ActionObserver;
-import com.aionemu.gameserver.controllers.observer.ObserverType;
+import com.aionemu.gameserver.controllers.observer.ItemUseObserver;
 import com.aionemu.gameserver.dao.InventoryDAO;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.Race;
@@ -731,26 +730,25 @@ public class Equipment implements Persistable {
 				PacketSendUtility.broadcastPacket(responder,
 					new SM_ITEM_USAGE_ANIMATION(responder.getObjectId(), item.getObjectId(), item.getItemId(), 5000, 4), true);
 
-				responder.getController().cancelTask(TaskId.ITEM_USE);
-
-				final ActionObserver moveObserver = new ActionObserver(ObserverType.MOVE) {
+				final ItemUseObserver observer = new ItemUseObserver() {
 
 					@Override
-					public void moved() {
-						responder.getController().cancelTask(TaskId.ITEM_USE);
+					public void abort() {
+						player.getController().cancelUseItem(false);
 						PacketSendUtility.sendPacket(responder, STR_SOUL_BOUND_ITEM_CANCELED(item.getL10n()));
 						PacketSendUtility.broadcastPacket(responder,
 							new SM_ITEM_USAGE_ANIMATION(responder.getObjectId(), item.getObjectId(), item.getItemId(), 0, 8), true);
 					}
 				};
-				responder.getObserveController().attach(moveObserver);
+				
+				responder.getObserveController().attach(observer);
 
 				// item usage animation
 				responder.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 					@Override
 					public void run() {
-						responder.getObserveController().removeObserver(moveObserver);
+						responder.getObserveController().removeObserver(observer);
 
 						PacketSendUtility.broadcastPacket(responder,
 							new SM_ITEM_USAGE_ANIMATION(responder.getObjectId(), item.getObjectId(), item.getItemId(), 0, 6), true);

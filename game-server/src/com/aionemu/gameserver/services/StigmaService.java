@@ -378,7 +378,7 @@ public class StigmaService {
 
 			@Override
 			public void abort() {
-				player.getController().cancelTask(TaskId.ITEM_USE);
+				player.getController().cancelUseItem(false);
 				player.removeItemCoolDown(stigma.getItemTemplate().getUseLimits().getDelayId());
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_CANCELED());
 				PacketSendUtility.broadcastPacket(player,

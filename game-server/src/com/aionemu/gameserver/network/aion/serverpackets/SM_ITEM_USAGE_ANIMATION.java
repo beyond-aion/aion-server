@@ -95,4 +95,9 @@ public class SM_ITEM_USAGE_ANIMATION extends AionServerPacket {
 		writeC(unk2);// unk
 		writeD(unk3);// mb cd?
 	}
+
+	@Override
+	public String toString() {
+		return String.format("//fsc 183 dddddccccd %s %s %s %s %s %s %s %s %s %s", playerObjId, targetObjId, itemObjId, itemId, time, end, unk, unk1, unk2, unk3);
+	}
 }

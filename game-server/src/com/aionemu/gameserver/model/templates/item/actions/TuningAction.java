@@ -63,12 +63,12 @@ public class TuningAction extends AbstractItemAction {
 		int tuningScrollItemId = parentItem.getItemId();
 		int tuningScrollObjectId = parentItem.getObjectId();
 		PacketSendUtility.broadcastPacket(player,
-			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), tuningScrollItemId, 5000, 12, 0), true);
+			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), tuningScrollObjectId, tuningScrollItemId, 5000, 12, 0), true);
 		ItemUseObserver observer = new ItemUseObserver() {
 
 			@Override
 			public void abort() {
-				player.getController().cancelTask(TaskId.ITEM_USE);
+				player.getController().cancelUseItem(false);
 				player.removeItemCoolDown(parentItem.getItemTemplate().getUseLimits().getDelayId());
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ITEM_REIDENTIFY_CANCELED(targetItem.getL10n()));
 				PacketSendUtility.broadcastPacket(player,

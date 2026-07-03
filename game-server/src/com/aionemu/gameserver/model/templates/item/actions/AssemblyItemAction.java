@@ -49,7 +49,7 @@ public class AssemblyItemAction extends AbstractItemAction {
 
 			@Override
 			public void abort() {
-				player.getController().cancelTask(TaskId.ITEM_USE);
+				player.getController().cancelUseItem(false);
 				player.removeItemCoolDown(parentItem.getItemTemplate().getUseLimits().getDelayId());
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_CANCELED());
 				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem
@@ -60,25 +60,18 @@ public class AssemblyItemAction extends AbstractItemAction {
 		};
 
 		player.getObserveController().attach(observer);
-		player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-
-				player.getObserveController().removeObserver(observer);
-				player.getController().cancelTask(TaskId.ITEM_USE);
-				AssemblyItem assemblyItem = getAssemblyItem();
-				for (Integer itemId : assemblyItem.getParts()) {
-					if (!player.getInventory().decreaseByItemId(itemId, 1)) {
-						return;
-					}
+		player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(() -> {
+			player.getObserveController().removeObserver(observer);
+			AssemblyItem assemblyItem = getAssemblyItem();
+			for (Integer itemId : assemblyItem.getParts()) {
+				if (!player.getInventory().decreaseByItemId(itemId, 1)) {
+					return;
 				}
-				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem
-					.getItemTemplate().getTemplateId(), 0, 1, 0), true);
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ASSEMBLY_ITEM_SUCCEEDED());
-				ItemService.addItem(player, assemblyItem.getId(), 1);
 			}
-
+			PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem
+				.getItemTemplate().getTemplateId(), 0, 1, 0), true);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ASSEMBLY_ITEM_SUCCEEDED());
+			ItemService.addItem(player, assemblyItem.getId(), 1);
 		}, 1000));
 
 	}

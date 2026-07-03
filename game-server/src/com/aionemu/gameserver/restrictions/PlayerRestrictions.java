@@ -65,8 +65,14 @@ public class PlayerRestrictions {
 		}
 		// check if is casting to avoid multicast exploit
 		// TODO cancel skill if other is used
-		if (player.isCasting())
-			return false;
+		if (player.isCasting()) {
+			if (player.getCastingSkill().getItemTemplate() == null) {
+				return false;
+			} else {
+				player.getController().cancelCurrentSkill(null);
+			}
+		}
+
 
 		if (!player.canAttack() && !template.hasEvadeEffect()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CAN_NOT_ATTACK_WHILE_IN_ABNORMAL_STATE());

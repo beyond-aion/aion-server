@@ -353,8 +353,11 @@ public class Skill {
 	}
 
 	private int calculateCastDuration() {
-		// ap & cash revival stones, or 2nd+ time of multicast-skill activation
-		if (getSkillId() == 10802 || getMultiCastCount() > 0)
+		if (this.getItemTemplate() != null) {
+			return this.getItemTemplate().getCastingDelay();
+		}
+		//2nd+ time of multicast-skill activation
+		if (getMultiCastCount() > 0)
 			return 0;
 		if (skillTemplate.getType() != SkillType.MAGICAL || !isCastDurationAffectedByCastSpeed())
 			return baseCastDuration;

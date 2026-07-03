@@ -5,6 +5,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
+import com.aionemu.gameserver.controllers.observer.ItemUseObserver;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -38,41 +39,57 @@ public class AnimationAddAction extends AbstractItemAction {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_COLOR_ERROR());
 			return false;
 		}
-
 		return true;
 	}
 
 	@Override
 	public void act(final Player player, final Item parentItem, Item targetItem, Object... params) {
-		player.getController().cancelUseItem();
-		PacketSendUtility.sendPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate()
-			.getTemplateId(), 1000, 0, 0));
-		player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(new Runnable() {
+		int castingDelay = parentItem.getItemTemplate().getCastingDelay();
+		if (castingDelay <= 0) {
+			finishUse(player, parentItem);
+			return;
+		}
+		final ItemUseObserver observer = new ItemUseObserver() {
 
 			@Override
-			public void run() {
-				if (player.getInventory().decreaseItemCount(parentItem, 1) != 0)
-					return;
-				if (idle != null) {
-					addMotion(player, idle);
-				}
-				if (run != null) {
-					addMotion(player, run);
-				}
-				if (jump != null) {
-					addMotion(player, jump);
-				}
-				if (rest != null) {
-					addMotion(player, rest);
-				}
-				if (shop != null) {
-					addMotion(player, shop);
-				}
-				PacketSendUtility.broadcastPacketAndReceive(player,
-					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, 1, 0));
-				PacketSendUtility.broadcastPacket(player, new SM_MOTION(player.getObjectId(), player.getMotions().getActiveMotions()), false);
+			public void abort() {
+				player.getController().cancelUseItem();
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_CANCELED());
+				player.getObserveController().removeObserver(this);
 			}
-		}, 1000));
+
+		};
+
+		player.getObserveController().attach(observer);
+		PacketSendUtility.sendPacket(player,
+			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), castingDelay, 0, 0));
+		player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(() -> {
+			player.getObserveController().removeObserver(observer);
+			finishUse(player, parentItem);
+		}, castingDelay));
+	}
+
+	private void finishUse(Player player, Item parentItem) {
+		if (player.getInventory().decreaseItemCount(parentItem, 1) != 0)
+			return;
+		if (idle != null) {
+			addMotion(player, idle);
+		}
+		if (run != null) {
+			addMotion(player, run);
+		}
+		if (jump != null) {
+			addMotion(player, jump);
+		}
+		if (rest != null) {
+			addMotion(player, rest);
+		}
+		if (shop != null) {
+			addMotion(player, shop);
+		}
+		PacketSendUtility.broadcastPacketAndReceive(player,
+			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, 1, 0));
+		PacketSendUtility.broadcastPacket(player, new SM_MOTION(player.getObjectId(), player.getMotions().getActiveMotions()), false);
 	}
 
 	private void addMotion(Player player, int motionId) {

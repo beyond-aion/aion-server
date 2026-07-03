@@ -44,16 +44,21 @@ public class InstanceTimeClear extends AbstractItemAction {
 
 	@Override
 	public void act(final Player player, final Item parentItem, Item targetItem, Object... params) {
+		int castingDelay = parentItem.getItemTemplate().getCastingDelay();
 		int syncId = (int) params[0];
+		if (castingDelay <= 0) {
+			finishUse(player, parentItem, syncId);
+			return;
+		}
 		PacketSendUtility.broadcastPacketAndReceive(player,
-			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 1000, 0, 0));
+			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), castingDelay, 0, 0));
 
 		final ItemUseObserver observer = new ItemUseObserver() {
 
 			@Override
 			public void abort() {
 				// TODO: abort is invalid. Should we abort all or only the last syncid?
-				player.getController().cancelTask(TaskId.ITEM_USE);
+				player.getController().cancelUseItem(false);
 				player.removeItemCoolDown(parentItem.getItemTemplate().getUseLimits().getDelayId());
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_CANCELED());
 				PacketSendUtility.broadcastPacket(player,
@@ -63,32 +68,30 @@ public class InstanceTimeClear extends AbstractItemAction {
 
 		};
 		player.getObserveController().attach(observer);
-		player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				player.getObserveController().removeObserver(observer);
-				if (parentItem.getActivationCount() > 1) {
-					parentItem.setActivationCount(parentItem.getActivationCount() - 1);
-				} else {
-					player.getInventory().decreaseByObjectId(parentItem.getObjectId(), 1);
-				}
-
-				int worldId = DataManager.INSTANCE_COOLTIME_DATA.getWorldId(syncId);
-				PortalCooldown portalCD = player.getPortalCooldownList().getPortalCooldown(worldId);
-				if (portalCD == null || portalCD.getEnterCount() < 1)
-					return; // don't spam with not needed packets!
-
-				portalCD.decreaseEnterCount();
-				if (portalCD.getEnterCount() < 1)
-					player.getPortalCooldownList().removePortalCooldown(worldId);
-
-				player.getPortalCooldownList().sendEntryInfo(worldId);
-				PacketSendUtility.broadcastPacketAndReceive(player,
-					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, 1, 0));
-			}
-
-		}, 1000));
+		player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(() -> {
+			player.getObserveController().removeObserver(observer);
+			finishUse(player, parentItem, syncId);
+		}, castingDelay));
 	}
 
+	private void finishUse(Player player, Item parentItem, int syncId) {
+		if (parentItem.getActivationCount() > 1) {
+			parentItem.setActivationCount(parentItem.getActivationCount() - 1);
+		} else {
+			player.getInventory().decreaseByObjectId(parentItem.getObjectId(), 1);
+		}
+
+		int worldId = DataManager.INSTANCE_COOLTIME_DATA.getWorldId(syncId);
+		PortalCooldown portalCD = player.getPortalCooldownList().getPortalCooldown(worldId);
+		if (portalCD == null || portalCD.getEnterCount() < 1)
+			return; // don't spam with not needed packets!
+
+		portalCD.decreaseEnterCount();
+		if (portalCD.getEnterCount() < 1)
+			player.getPortalCooldownList().removePortalCooldown(worldId);
+
+		player.getPortalCooldownList().sendEntryInfo(worldId);
+		PacketSendUtility.broadcastPacketAndReceive(player,
+			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, 1, 0));
+	}
 }

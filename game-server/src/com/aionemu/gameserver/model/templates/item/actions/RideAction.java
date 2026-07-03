@@ -70,49 +70,33 @@ public class RideAction extends AbstractItemAction {
 
 	@Override
 	public void act(final Player player, final Item parentItem, Item targetItem, Object... params) {
-		player.getController().cancelUseItem();
 		if (player.isInPlayerMode(PlayerMode.RIDE)) {
 			player.unsetPlayerMode(PlayerMode.RIDE);
 			return;
 		}
-
-		PacketSendUtility.broadcastPacket(player,
-			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 3000, 0, 0), true);
-		final ItemUseObserver observer = new ItemUseObserver() {
-
-			@Override
-			public void abort() {
-				player.getController().cancelTask(TaskId.ITEM_USE);
-				player.removeItemCoolDown(parentItem.getItemTemplate().getUseLimits().getDelayId());
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_CANCELED());
-				PacketSendUtility.broadcastPacket(player,
-					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, 3, 0), true);
-				player.getObserveController().removeObserver(this);
-			}
-
-		};
-
-		player.getObserveController().attach(observer);
-		player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				player.unsetState(CreatureState.ACTIVE);
-				player.setState(CreatureState.RESTING);
-				if (player.isInFlyingState())
-					player.setState(CreatureState.FLOATING_CORPSE);
+		int castingDelay = parentItem.getItemTemplate().getCastingDelay();
+		if (castingDelay <= 0) {
+			finishUse(player, parentItem);
+		} else {
+			PacketSendUtility.broadcastPacket(player,
+				new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), castingDelay, 0, 0), true);
+			final ItemUseObserver observer = new ItemUseObserver() {
+				@Override
+				public void abort() {
+					player.getController().cancelUseItem();
+					player.removeItemCoolDown(parentItem.getItemTemplate().getUseLimits().getDelayId());
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_CANCELED());
+					PacketSendUtility.broadcastPacket(player,
+						new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, 3, 0), true);
+					player.getObserveController().removeObserver(this);
+				}
+			};
+			player.getObserveController().attach(observer);
+			player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(() -> {
 				player.getObserveController().removeObserver(observer);
-				ItemTemplate itemTemplate = parentItem.getItemTemplate();
-				player.setPlayerMode(PlayerMode.RIDE, getRideInfo());
-				PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.CHANGE_SPEED, 0, 0), true);
-				PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.RIDE, 0, getRideInfo().getNpcId()), true);
-				PacketSendUtility.broadcastPacket(player,
-					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, 1, 1), true);
-				player.getController().cancelTask(TaskId.ITEM_USE);
-				QuestEngine.getInstance().rideAction(new QuestEnv(null, player, 0), itemTemplate.getTemplateId());
-			}
-
-		}, 3000));
+				finishUse(player, parentItem);
+			}, castingDelay));
+		}
 
 		ActionObserver rideObserver = new ActionObserver(ObserverType.ABNORMALSETTED) {
 
@@ -125,7 +109,7 @@ public class RideAction extends AbstractItemAction {
 			}
 		};
 		player.getObserveController().addObserver(rideObserver);
-		player.setRideObservers(rideObserver);
+		player.addRideObserver(rideObserver);
 
 		// TODO some mounts have lower chance of dismounting
 		ActionObserver attackedObserver = new ActionObserver(ObserverType.ATTACKED) {
@@ -137,7 +121,7 @@ public class RideAction extends AbstractItemAction {
 			}
 		};
 		player.getObserveController().addObserver(attackedObserver);
-		player.setRideObservers(attackedObserver);
+		player.addRideObserver(attackedObserver);
 
 		ActionObserver dotAttackedObserver = new ActionObserver(ObserverType.DOT_ATTACKED) {
 
@@ -148,7 +132,21 @@ public class RideAction extends AbstractItemAction {
 			}
 		};
 		player.getObserveController().addObserver(dotAttackedObserver);
-		player.setRideObservers(dotAttackedObserver);
+		player.addRideObserver(dotAttackedObserver);
+	}
+
+	private void finishUse(Player player, Item parentItem) {
+		player.unsetState(CreatureState.ACTIVE);
+		player.setState(CreatureState.RESTING);
+		if (player.isInFlyingState())
+			player.setState(CreatureState.FLOATING_CORPSE);
+		ItemTemplate itemTemplate = parentItem.getItemTemplate();
+		player.setPlayerMode(PlayerMode.RIDE, getRideInfo());
+		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.CHANGE_SPEED, 0, 0), true);
+		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.RIDE, 0, getRideInfo().getNpcId()), true);
+		PacketSendUtility.broadcastPacket(player,
+			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, 1, 1), true);
+		QuestEngine.getInstance().rideAction(new QuestEnv(null, player, 0), itemTemplate.getTemplateId());
 	}
 
 	public RideInfo getRideInfo() {

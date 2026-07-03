@@ -23,7 +23,6 @@ public class CraftLearnAction extends AbstractItemAction {
 
 	@Override
 	public void act(Player player, Item parentItem, Item targetItem, Object... params) {
-		player.getController().cancelUseItem();
 		if (player.getInventory().decreaseByObjectId(parentItem.getObjectId(), 1)) {
 			if (RecipeService.addRecipe(player, recipeid, false)) {
 				PacketSendUtility.sendPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate()

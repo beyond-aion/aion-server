@@ -36,14 +36,18 @@ public class ChargeAction extends AbstractItemAction {
 	public void act(final Player player, Item parentItem, Item targetItem, Object... params) {
 		int chargeWay = parentItem.getImprovement().getChargeWay();
 		Collection<Item> conditioningItems = ItemChargeService.filterItemsToCondition(player, null, chargeWay);
-
+		int castingDelay = parentItem.getItemTemplate().getCastingDelay();
+		if (castingDelay <= 0) {
+			finishUse(player, parentItem, conditioningItems);
+			return;
+		}
 		PacketSendUtility.broadcastPacket(player,
-			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 3000, 0, 0), true);
+			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), castingDelay, 0, 0), true);
 		ItemUseObserver observer = new ItemUseObserver() {
 
 			@Override
 			public void abort() {
-				player.getController().cancelTask(TaskId.ITEM_USE);
+				player.getController().cancelUseItem(false);
 				if (chargeWay == 1)
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ITEM_CHARGE_CANCELED());
 				else
@@ -57,12 +61,16 @@ public class ChargeAction extends AbstractItemAction {
 		player.getObserveController().attach(observer);
 		player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(() -> {
 			player.getObserveController().removeObserver(observer);
-			PacketSendUtility.broadcastPacket(player,
-				new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, 1, 0), true);
-			if (!player.getInventory().decreaseByObjectId(parentItem.getObjectId(), 1))
-				return;
-			ItemChargeService.chargeItems(player, conditioningItems, maxChargeLevel, false, false);
-		}, 3000));
+			finishUse(player, parentItem, conditioningItems);
+		}, castingDelay));
+	}
+	
+	private void finishUse(Player player, Item parentItem, Collection<Item> conditioningItems) {
+		PacketSendUtility.broadcastPacket(player,
+			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, 1, 0), true);
+		if (!player.getInventory().decreaseByObjectId(parentItem.getObjectId(), 1))
+			return;
+		ItemChargeService.chargeItems(player, conditioningItems, maxChargeLevel, false, false);
 	}
 
 }

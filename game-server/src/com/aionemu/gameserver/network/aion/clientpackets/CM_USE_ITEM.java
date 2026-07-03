@@ -75,6 +75,9 @@ public class CM_USE_ITEM extends AionClientPacket {
 		if (player.isCasting())
 			player.getController().cancelCurrentSkill(null);
 
+		// notify item use observer
+		player.getObserveController().notifyItemuseObservers(item);
+
 		if (!PlayerRestrictions.canUseItem(player, item))
 			return;
 
@@ -82,7 +85,7 @@ public class CM_USE_ITEM extends AionClientPacket {
 
 		List<AbstractItemAction> itemActions = item.getItemTemplate().getActions() == null ? Collections.emptyList()
 			: item.getItemTemplate().getActions().getItemActions();
-
+		
 		if (itemActions.isEmpty() && result != HandlerResult.SUCCESS) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_IS_NOT_USABLE());
 			return;
@@ -104,7 +107,7 @@ public class CM_USE_ITEM extends AionClientPacket {
 				actions.add(itemAction);
 			}
 		}
-
+		
 		if (actions.isEmpty())
 			return; // notification should be handled in canAct
 
@@ -112,18 +115,14 @@ public class CM_USE_ITEM extends AionClientPacket {
 		if (useDelay > 0)
 			player.addItemCoolDown(item.getItemTemplate().getUseLimits().getDelayId(), System.currentTimeMillis() + useDelay, useDelay / 1000);
 
-		// notify item use observer
-		player.getObserveController().notifyItemuseObservers(item);
+
 
 		for (AbstractItemAction itemAction : actions) {
-			if (itemAction instanceof DyeAction) {
-				itemAction.act(player, item, targetItem, targetHouseObject);
-			} else if (itemAction instanceof MultiReturnAction) {
-				itemAction.act(player, item, targetItem, indexReturn);
-			} else if (itemAction instanceof InstanceTimeClear) {
-				itemAction.act(player, item, targetItem, syncId);
-			} else {
-				itemAction.act(player, item, targetItem);
+			switch (itemAction) {
+				case DyeAction _ -> itemAction.act(player, item, targetItem, targetHouseObject);
+				case MultiReturnAction _ -> itemAction.act(player, item, targetItem, indexReturn);
+				case InstanceTimeClear _ -> itemAction.act(player, item, targetItem, syncId);
+				default -> itemAction.act(player, item, targetItem);
 			}
 		}
 	}

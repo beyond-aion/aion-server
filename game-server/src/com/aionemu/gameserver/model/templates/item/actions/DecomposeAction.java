@@ -37,7 +37,6 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 public class DecomposeAction extends AbstractItemAction {
 
 	private static final Logger log = LoggerFactory.getLogger(DecomposeAction.class);
-	public static final int USAGE_DELAY = 3000;
 	private static Map<Race, int[]> chunkEarth = new HashMap<>();
 	private static Map<Race, int[]> chunkSand = new HashMap<>();
 	private static Map<Race, int[]> premiumOphidanRecipe = new HashMap<>();
@@ -101,8 +100,7 @@ public class DecomposeAction extends AbstractItemAction {
 	public boolean canAct(Player player, Item parentItem, Item targetItem, Object... params) {
 		if (player.isDead() || !player.isSpawned())
 			return false;
-		List<ExtractedItemsCollection> itemsCollections = null;
-		itemsCollections = DataManager.DECOMPOSABLE_ITEMS_DATA.getInfoByItemId(parentItem.getItemId());
+		List<ExtractedItemsCollection> itemsCollections = DataManager.DECOMPOSABLE_ITEMS_DATA.getInfoByItemId(parentItem.getItemId());
 		if (itemsCollections == null || itemsCollections.isEmpty()) {
 			if (DataManager.DECOMPOSABLE_ITEMS_DATA.getSelectableItems(parentItem.getItemId()) != null) // selectable decomposable
 				return true;
@@ -118,7 +116,6 @@ public class DecomposeAction extends AbstractItemAction {
 
 	@Override
 	public void act(final Player player, final Item parentItem, final Item targetItem, Object... params) {
-		player.getController().cancelUseItem();
 		Collection<ResultedItem> selectable = DataManager.DECOMPOSABLE_ITEMS_DATA.getSelectableItems(parentItem.getItemId());
 		if (selectable != null) {
 			selectable.removeIf(item -> !item.isObtainableFor(player));
@@ -129,20 +126,23 @@ public class DecomposeAction extends AbstractItemAction {
 		Collection<ExtractedItemsCollection> levelSuitableItems = filterItemsByLevel(player, itemsCollections);
 		final ExtractedItemsCollection selectedCollection = Chance.selectElement(levelSuitableItems);
 		if (selectedCollection.getRandomItems().isEmpty() && selectedCollection.getItems().stream().noneMatch(i -> i.isObtainableFor(player))) {
-			log.warn(
-				"Empty decomposable " + parentItem.getItemId() + " for " + player + ", class: " + player.getPlayerClass() + ", level: " + player.getLevel());
+			log.warn("Empty decomposable {} for {}, class: {}, level: {}", parentItem.getItemId(), player, player.getPlayerClass(), player.getLevel());
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_FAILED(parentItem.getL10n()));
 			return;
 		}
-
+		int castingDelay = parentItem.getItemTemplate().getCastingDelay();
+		if (castingDelay <= 0) {
+			finishUse(player, parentItem, targetItem, selectedCollection);
+			return;
+		}
 		PacketSendUtility.broadcastPacket(player,
-			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), USAGE_DELAY, 0, 0), true);
+			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), castingDelay, 0, 0), true);
 
 		final ItemUseObserver observer = new ItemUseObserver() {
 
 			@Override
 			public void abort() {
-				player.getController().cancelTask(TaskId.ITEM_USE);
+				player.getController().cancelUseItem(false);
 				player.removeItemCoolDown(parentItem.getItemTemplate().getUseLimits().getDelayId());
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_CANCELED(parentItem.getL10n()));
 				PacketSendUtility.broadcastPacket(player,
@@ -153,218 +153,216 @@ public class DecomposeAction extends AbstractItemAction {
 		};
 
 		player.getObserveController().attach(observer);
-		player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(new Runnable() {
+		player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(() -> {
+			player.getObserveController().removeObserver(observer);
+			finishUse(player, parentItem, targetItem, selectedCollection);
+		}, castingDelay));
+	}
 
-			@Override
-			public void run() {
-				player.getObserveController().removeObserver(observer);
-				boolean validAction = postValidate(player, parentItem);
-				if (validAction) {
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_SUCCEED(parentItem.getL10n()));
-					for (ResultedItem resultItem : selectedCollection.getItems()) {
-						if (resultItem.isObtainableFor(player)) {
-							int count = Rnd.get(resultItem.getMinCount(), resultItem.getMaxCount());
-							ItemService.addItem(player, resultItem.getItemId(), count, true,
-								new ItemUpdatePredicate(ItemAddType.DECOMPOSABLE, ItemUpdateType.INC_ITEM_COLLECT));
-						}
-					}
-					for (RandomItem randomItem : selectedCollection.getRandomItems()) {
-						RandomType randomType = randomItem.getType();
-						if (randomType != null) {
-							int randomId = 0;
-							int i = 0;
-							int itemLvl = parentItem.getItemTemplate().getLevel();
-							switch (randomItem.getType()) {
-								case ENCHANTMENT:
-									do {
-										randomId = 166000191 + Math.round(itemLvl / 100f) + Rnd.nextInt(4);
-										i++;
-										if (i > 50) {
-											randomId = 0;
-											break;
-										}
-									} while (!isValidItemId(randomId));
-									break;
-								case MANASTONE:
-								case MANASTONE_COMMON_GRADE_10:
-								case MANASTONE_COMMON_GRADE_20:
-								case MANASTONE_COMMON_GRADE_30:
-								case MANASTONE_COMMON_GRADE_40:
-								case MANASTONE_COMMON_GRADE_50:
-								case MANASTONE_COMMON_GRADE_60:
-								case MANASTONE_COMMON_GRADE_70:
-								case MANASTONE_RARE_GRADE_10:
-								case MANASTONE_RARE_GRADE_20:
-								case MANASTONE_RARE_GRADE_30:
-								case MANASTONE_RARE_GRADE_40:
-								case MANASTONE_RARE_GRADE_50:
-								case MANASTONE_RARE_GRADE_60:
-								case MANASTONE_RARE_GRADE_70:
-								case MANASTONE_LEGEND_GRADE_10:
-								case MANASTONE_LEGEND_GRADE_20:
-								case MANASTONE_LEGEND_GRADE_30:
-								case MANASTONE_LEGEND_GRADE_40:
-								case MANASTONE_LEGEND_GRADE_50:
-								case MANASTONE_LEGEND_GRADE_60:
-								case MANASTONE_LEGEND_GRADE_70:
-									if (randomType == RandomType.MANASTONE) // stone level near or equal to item level (if 1, near player level)
-										itemLvl = itemLvl % 10 == 0 ? itemLvl : ((int) Math.ceil((itemLvl == 1 ? player.getLevel() : itemLvl) / 10f) * 10);
-									else
-										itemLvl = randomType.getLevel();
-									List<ItemTemplate> stones = DataManager.ITEM_DATA.getManastones(itemLvl);
-									if (stones == null) {
-										log.warn("No lv" + itemLvl + " manastones found for decomposable random type " + randomItem.getType());
-										break;
-									}
-									if (randomType != RandomType.MANASTONE) {
-										final ItemQuality itemQuality;
-										if (randomType.name().contains("RARE"))
-											itemQuality = ItemQuality.RARE;
-										else if (randomType.name().contains("LEGEND"))
-											itemQuality = ItemQuality.LEGEND;
-										else
-											itemQuality = ItemQuality.COMMON;
-										List<ItemTemplate> selectedStones = stones.stream()
-											.filter(t -> t.getItemQuality() == itemQuality && !t.getName().contains(" MP ")).collect(Collectors.toList());
-										randomId = Rnd.get(selectedStones).getTemplateId();
-									} else {
-										List<ItemTemplate> selectedStones = stones.stream()
-											.filter(t -> t.getItemQuality() != ItemQuality.LEGEND && !t.getName().contains(" MP ")).collect(Collectors.toList());
-										randomId = Rnd.get(selectedStones).getTemplateId();
-									}
-									break;
-								case SPECIAL_MANASTONE_RARE_GRADE:
-								case SPECIAL_MANASTONE_LEGEND_GRADE:
-								case SPECIAL_MANASTONE_UNIQUE_GRADE:
-								case SPECIAL_MANASTONE_EPIC_GRADE:
-									List<ItemTemplate> ancientStones = DataManager.ITEM_DATA.getAncientManastones(randomType.getLevel());
-									if (ancientStones == null) {
-										log.warn("No ancient manastones found for decomposable random type " + randomItem.getType());
-										break;
-									}
-									final ItemQuality itemQuality;
-									if (randomType.name().contains("RARE"))
-										itemQuality = ItemQuality.RARE;
-									else if (randomType.name().contains("LEGEND"))
-										itemQuality = ItemQuality.LEGEND;
-									else if (randomType.name().contains("UNIQUE"))
-										itemQuality = ItemQuality.UNIQUE;
-									else if (randomType.name().contains("EPIC"))
-										itemQuality = ItemQuality.EPIC;
-									else
-										itemQuality = ItemQuality.COMMON;
-									List<ItemTemplate> selectedStones = ancientStones.stream()
-										.filter(t -> t.getItemQuality() == itemQuality && !t.getName().contains(" MP ")).collect(Collectors.toList());
-									randomId = Rnd.get(selectedStones).getTemplateId();
-									break;
-								case CHUNK_EARTH:
-									int[] earth = chunkEarth.get(player.getRace());
-									randomId = Rnd.get(earth);
-									break;
-								case CHUNK_SAND:
-									int[] sand = chunkSand.get(player.getRace());
-									randomId = Rnd.get(sand);
-									break;
-								case PREMIUM_OPHIDAN_RECIPE:
-									int[] recipe = premiumOphidanRecipe.get(player.getRace());
-									randomId = Rnd.get(recipe);
-									break;
-								case CHUNK_ROCK:
-									randomId = Rnd.get(chunkRock);
-									break;
-								case CHUNK_GEMSTONE:
-									randomId = Rnd.get(chunkGemstone);
-									break;
-								case SCROLLS:
-									randomId = Rnd.get(scrolls);
-									break;
-								case POTION:
-									randomId = Rnd.get(potion);
-									break;
-								case LESSER_POTIONS:
-									randomId = Rnd.get(lesser_potions);
-									break;
-								case POTION_50:
-									randomId = Rnd.get(potion_50);
-									break;
-								case ILLUSION_GODSTONE:
-									randomId = Rnd.get(illusion_godstones);
-									break;
-								case ANCIENTITEMS:
-									do {
-										randomId = Rnd.get(186000051, 186000066);
-										i++;
-										if (i > 50) {
-											randomId = 0;
-											break;
-										}
-									} while (!isValidItemId(randomId));
-									break;
-								case ANCIENT_CROWN:
-									do {
-										randomId = Rnd.get(186000051, 186000054);
-										i++;
-										if (i > 50) {
-											randomId = 0;
-											break;
-										}
-									} while (!isValidItemId(randomId));
-									break;
-								case ANCIENT_GOBLET:
-									do {
-										randomId = Rnd.get(186000055, 186000058);
-										i++;
-										if (i > 50) {
-											randomId = 0;
-											break;
-										}
-									} while (!isValidItemId(randomId));
-									break;
-								case ANCIENT_SEAL:
-									do {
-										randomId = Rnd.get(186000059, 186000062);
-										i++;
-										if (i > 50) {
-											randomId = 0;
-											break;
-										}
-									} while (!isValidItemId(randomId));
-									break;
-								case ANCIENT_ICON:
-									do {
-										randomId = Rnd.get(186000063, 186000066);
-										i++;
-										if (i > 50) {
-											randomId = 0;
-											break;
-										}
-									} while (!isValidItemId(randomId));
-									break;
-							}
-							if (randomId != 0) {
-								int count = Rnd.get(randomItem.getMinCount(), randomItem.getMaxCount());
-								ItemService.addItem(player, randomId, count, true,
-									new ItemUpdatePredicate(ItemAddType.DECOMPOSABLE, ItemUpdateType.INC_ITEM_COLLECT));
-							}
-						}
-					}
+	private boolean postValidate(Player player, Item parentItem, Item targetItem) {
+		if (!canAct(player, parentItem, targetItem)) {
+			return false;
+		}
+		if (!player.getInventory().decreaseByObjectId(parentItem.getObjectId(), 1)) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_NO_TARGET_ITEM());
+			return false;
+		}
+		return true;
+	}
+
+	private void finishUse(final Player player, Item parentItem, Item targetItem, ExtractedItemsCollection selectedCollection) {
+		boolean validAction = postValidate(player, parentItem, targetItem);
+		if (validAction) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_SUCCEED(parentItem.getL10n()));
+			for (ResultedItem resultItem : selectedCollection.getItems()) {
+				if (resultItem.isObtainableFor(player)) {
+					int count = Rnd.get(resultItem.getMinCount(), resultItem.getMaxCount());
+					ItemService.addItem(player, resultItem.getItemId(), count, true,
+						new ItemUpdatePredicate(ItemAddType.DECOMPOSABLE, ItemUpdateType.INC_ITEM_COLLECT));
 				}
-				PacketSendUtility.broadcastPacket(player,
-					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, validAction ? 1 : 2, 0), true);
 			}
-
-			boolean postValidate(Player player, Item parentItem) {
-				if (!canAct(player, parentItem, targetItem)) {
-					return false;
+			for (RandomItem randomItem : selectedCollection.getRandomItems()) {
+				RandomType randomType = randomItem.getType();
+				if (randomType != null) {
+					int randomId = 0;
+					int i = 0;
+					int itemLvl = parentItem.getItemTemplate().getLevel();
+					switch (randomItem.getType()) {
+						case ENCHANTMENT:
+							do {
+								randomId = 166000191 + Math.round(itemLvl / 100f) + Rnd.nextInt(4);
+								i++;
+								if (i > 50) {
+									randomId = 0;
+									break;
+								}
+							} while (!isValidItemId(randomId));
+							break;
+						case MANASTONE:
+						case MANASTONE_COMMON_GRADE_10:
+						case MANASTONE_COMMON_GRADE_20:
+						case MANASTONE_COMMON_GRADE_30:
+						case MANASTONE_COMMON_GRADE_40:
+						case MANASTONE_COMMON_GRADE_50:
+						case MANASTONE_COMMON_GRADE_60:
+						case MANASTONE_COMMON_GRADE_70:
+						case MANASTONE_RARE_GRADE_10:
+						case MANASTONE_RARE_GRADE_20:
+						case MANASTONE_RARE_GRADE_30:
+						case MANASTONE_RARE_GRADE_40:
+						case MANASTONE_RARE_GRADE_50:
+						case MANASTONE_RARE_GRADE_60:
+						case MANASTONE_RARE_GRADE_70:
+						case MANASTONE_LEGEND_GRADE_10:
+						case MANASTONE_LEGEND_GRADE_20:
+						case MANASTONE_LEGEND_GRADE_30:
+						case MANASTONE_LEGEND_GRADE_40:
+						case MANASTONE_LEGEND_GRADE_50:
+						case MANASTONE_LEGEND_GRADE_60:
+						case MANASTONE_LEGEND_GRADE_70:
+							if (randomType == RandomType.MANASTONE) // stone level near or equal to item level (if 1, near player level)
+								itemLvl = itemLvl % 10 == 0 ? itemLvl : ((int) Math.ceil((itemLvl == 1 ? player.getLevel() : itemLvl) / 10f) * 10);
+							else
+								itemLvl = randomType.getLevel();
+							List<ItemTemplate> stones = DataManager.ITEM_DATA.getManastones(itemLvl);
+							if (stones == null) {
+								log.warn("No lv" + itemLvl + " manastones found for decomposable random type " + randomItem.getType());
+								break;
+							}
+							if (randomType != RandomType.MANASTONE) {
+								final ItemQuality itemQuality;
+								if (randomType.name().contains("RARE"))
+									itemQuality = ItemQuality.RARE;
+								else if (randomType.name().contains("LEGEND"))
+									itemQuality = ItemQuality.LEGEND;
+								else
+									itemQuality = ItemQuality.COMMON;
+								List<ItemTemplate> selectedStones = stones.stream().filter(t -> t.getItemQuality() == itemQuality && !t.getName().contains(" MP "))
+									.collect(Collectors.toList());
+								randomId = Rnd.get(selectedStones).getTemplateId();
+							} else {
+								List<ItemTemplate> selectedStones = stones.stream().filter(
+									t -> t.getItemQuality() != ItemQuality.LEGEND && !t.getName().contains(" MP ")).collect(Collectors.toList());
+								randomId = Rnd.get(selectedStones).getTemplateId();
+							}
+							break;
+						case SPECIAL_MANASTONE_RARE_GRADE:
+						case SPECIAL_MANASTONE_LEGEND_GRADE:
+						case SPECIAL_MANASTONE_UNIQUE_GRADE:
+						case SPECIAL_MANASTONE_EPIC_GRADE:
+							List<ItemTemplate> ancientStones = DataManager.ITEM_DATA.getAncientManastones(randomType.getLevel());
+							if (ancientStones == null) {
+								log.warn("No ancient manastones found for decomposable random type " + randomItem.getType());
+								break;
+							}
+							final ItemQuality itemQuality;
+							if (randomType.name().contains("RARE"))
+								itemQuality = ItemQuality.RARE;
+							else if (randomType.name().contains("LEGEND"))
+								itemQuality = ItemQuality.LEGEND;
+							else if (randomType.name().contains("UNIQUE"))
+								itemQuality = ItemQuality.UNIQUE;
+							else if (randomType.name().contains("EPIC"))
+								itemQuality = ItemQuality.EPIC;
+							else
+								itemQuality = ItemQuality.COMMON;
+							List<ItemTemplate> selectedStones = ancientStones.stream().filter(
+								t -> t.getItemQuality() == itemQuality && !t.getName().contains(" MP ")).collect(Collectors.toList());
+							randomId = Rnd.get(selectedStones).getTemplateId();
+							break;
+						case CHUNK_EARTH:
+							int[] earth = chunkEarth.get(player.getRace());
+							randomId = Rnd.get(earth);
+							break;
+						case CHUNK_SAND:
+							int[] sand = chunkSand.get(player.getRace());
+							randomId = Rnd.get(sand);
+							break;
+						case PREMIUM_OPHIDAN_RECIPE:
+							int[] recipe = premiumOphidanRecipe.get(player.getRace());
+							randomId = Rnd.get(recipe);
+							break;
+						case CHUNK_ROCK:
+							randomId = Rnd.get(chunkRock);
+							break;
+						case CHUNK_GEMSTONE:
+							randomId = Rnd.get(chunkGemstone);
+							break;
+						case SCROLLS:
+							randomId = Rnd.get(scrolls);
+							break;
+						case POTION:
+							randomId = Rnd.get(potion);
+							break;
+						case LESSER_POTIONS:
+							randomId = Rnd.get(lesser_potions);
+							break;
+						case POTION_50:
+							randomId = Rnd.get(potion_50);
+							break;
+						case ILLUSION_GODSTONE:
+							randomId = Rnd.get(illusion_godstones);
+							break;
+						case ANCIENTITEMS:
+							do {
+								randomId = Rnd.get(186000051, 186000066);
+								i++;
+								if (i > 50) {
+									randomId = 0;
+									break;
+								}
+							} while (!isValidItemId(randomId));
+							break;
+						case ANCIENT_CROWN:
+							do {
+								randomId = Rnd.get(186000051, 186000054);
+								i++;
+								if (i > 50) {
+									randomId = 0;
+									break;
+								}
+							} while (!isValidItemId(randomId));
+							break;
+						case ANCIENT_GOBLET:
+							do {
+								randomId = Rnd.get(186000055, 186000058);
+								i++;
+								if (i > 50) {
+									randomId = 0;
+									break;
+								}
+							} while (!isValidItemId(randomId));
+							break;
+						case ANCIENT_SEAL:
+							do {
+								randomId = Rnd.get(186000059, 186000062);
+								i++;
+								if (i > 50) {
+									randomId = 0;
+									break;
+								}
+							} while (!isValidItemId(randomId));
+							break;
+						case ANCIENT_ICON:
+							do {
+								randomId = Rnd.get(186000063, 186000066);
+								i++;
+								if (i > 50) {
+									randomId = 0;
+									break;
+								}
+							} while (!isValidItemId(randomId));
+							break;
+					}
+					if (randomId != 0) {
+						int count = Rnd.get(randomItem.getMinCount(), randomItem.getMaxCount());
+						ItemService.addItem(player, randomId, count, true, new ItemUpdatePredicate(ItemAddType.DECOMPOSABLE, ItemUpdateType.INC_ITEM_COLLECT));
+					}
 				}
-				if (!player.getInventory().decreaseByObjectId(parentItem.getObjectId(), 1)) {
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_NO_TARGET_ITEM());
-					return false;
-				}
-				return true;
 			}
-
-		}, USAGE_DELAY));
+		}
+		PacketSendUtility.broadcastPacket(player,
+			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, validAction ? 1 : 2, 0), true);
 	}
 
 	/**

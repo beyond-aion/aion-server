@@ -1575,7 +1575,7 @@ public class Player extends Creature {
 		this.isInSprintMode = isInSprintMode;
 	}
 
-	public void setRideObservers(ActionObserver observer) {
+	public void addRideObserver(ActionObserver observer) {
 		if (rideObservers == null)
 			rideObservers = new ArrayList<>();
 
