@@ -24,12 +24,10 @@ public class Wishid extends ConsoleCommand {
 			return;
 		}
 
-		VisibleObject target = admin.getTarget();
-		if (target == null || !(target instanceof Player)) {
-			target = admin;
+		Player target = admin;
+		if (admin.getTarget() instanceof Player player) {
+			target = player;
 		}
-
-		final Player player = (Player) target;
 
 		long itemCount;
 		int itemId;
@@ -47,15 +45,15 @@ public class Wishid extends ConsoleCommand {
 			return;
 		}
 
-		if (!AdminService.getInstance().canOperate(admin, player, itemId, "command ///wishid"))
+		if (!AdminService.getInstance().canOperate(admin, target, itemId, "command ///wishid"))
 			return;
 
-		long count = ItemService.addItem(player, itemId, itemCount, true);
+		long count = ItemService.addItem(target, itemId, itemCount, true);
 
 		if (count == 0) {
-			if (admin != player) {
-				PacketSendUtility.sendMessage(admin, "You successfully gave " + itemCount + " x [item:" + itemId + "] to " + player.getName() + ".");
-				PacketSendUtility.sendMessage(player, "You successfully received " + itemCount + " x [item:" + itemId + "] from " + admin.getName() + ".");
+			if (admin != target) {
+				PacketSendUtility.sendMessage(admin, "You successfully gave " + itemCount + " x [item:" + itemId + "] to " + target.getName() + ".");
+				PacketSendUtility.sendMessage(target, "You successfully received " + itemCount + " x [item:" + itemId + "] from " + admin.getName() + ".");
 			} else
 				PacketSendUtility.sendMessage(admin, "You successfully received " + itemCount + " x [item:" + itemId + "]");
 		} else {
