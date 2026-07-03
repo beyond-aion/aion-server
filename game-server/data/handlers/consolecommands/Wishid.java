@@ -24,15 +24,9 @@ public class Wishid extends ConsoleCommand {
 			return;
 		}
 
-		final VisibleObject target = admin.getTarget();
-		if (target == null) {
-			PacketSendUtility.sendMessage(admin, "No target selected.");
-			return;
-		}
-
-		if (!(target instanceof Player)) {
-			PacketSendUtility.sendMessage(admin, "This command can only be used on a player!");
-			return;
+		VisibleObject target = admin.getTarget();
+		if (target == null || !(target instanceof Player)) {
+			target = admin;
 		}
 
 		final Player player = (Player) target;
