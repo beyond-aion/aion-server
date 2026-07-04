@@ -18,16 +18,16 @@ public class OnFlyCondition extends Condition {
 
 	@Override
 	public boolean validate(Skill env) {
-		return env.getEffector().isFlying();
+		return env.getEffector().isInFlyingState();
 	}
 
 	@Override
 	public boolean validate(Stat2 stat, IStatFunction statFunction) {
-		return stat.getOwner().isFlying();
+		return stat.getOwner().isInFlyingState();
 	}
 
 	@Override
 	public boolean validate(Effect effect) {
-		return effect.getEffected().isFlying();
+		return effect.getEffected().isInFlyingState();
 	}
 }
