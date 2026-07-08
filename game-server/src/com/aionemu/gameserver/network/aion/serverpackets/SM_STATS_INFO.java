@@ -76,14 +76,14 @@ public class SM_STATS_INFO extends AionServerPacket {
 		writeC(player.getFlyState());// [fly state]
 		writeC(player.getMoveController().getMovementMask());// [movementMask]
 
-		writeH(pgs.getMainHandPAttack(CalculationType.DISPLAY).getCurrent());// [current main hand attack]
-		writeH(pgs.getOffHandPAttack(CalculationType.DISPLAY).getCurrent());// [current off hand attack]
+		writeH(Math.max(0, pgs.getMainHandPAttack(CalculationType.DISPLAY).getCurrent()));// [current main hand attack]
+		writeH(Math.max(0, pgs.getOffHandPAttack(CalculationType.DISPLAY).getCurrent()));// [current off hand attack]
 
 		writeH(0);// unk 3.0
 
 		writeD(pgs.getPDef().getCurrent());// [current pdef]
-		writeH(pgs.getMainHandMAttack(CalculationType.DISPLAY).getCurrent());// [current magic attack]
-		writeH(pgs.getOffHandMAttack(CalculationType.DISPLAY).getCurrent());// [current off hand magic attack]
+		writeH(Math.max(0, pgs.getMainHandMAttack(CalculationType.DISPLAY).getCurrent()));// [current magic attack]
+		writeH(Math.max(0, pgs.getOffHandMAttack(CalculationType.DISPLAY).getCurrent()));// [current off hand magic attack]
 		writeD(pgs.getMDef().getCurrent()); // [Current magic def]
 		writeH(pgs.getMResist().getCurrent());// [current mres]
 		writeH(0);// unk 3.0
