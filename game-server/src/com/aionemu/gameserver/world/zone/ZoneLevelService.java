@@ -12,7 +12,7 @@ import com.aionemu.gameserver.world.World;
  */
 public class ZoneLevelService {
 
-	private static final long DROWN_PERIOD = 2000;
+	private static final long DROWN_PERIOD = 1000;
 
 	/**
 	 * Check water level (start drowning) and map death level (die)
@@ -44,14 +44,10 @@ public class ZoneLevelService {
 	private static void startDrowning(Player player) {
 		if (player.getController().hasTask(TaskId.DROWN))
 			return;
-		player.getController().addTask(TaskId.DROWN, ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
-
-			@Override
-			public void run() {
-				int value = Math.round(player.getLifeStats().getMaxHp() / 10f);
-				if (player.getLifeStats().reduceHp(TYPE.DROWNING, value, 0, LOG.REGULAR, player) == 0)
-					stopDrowning(player);
-			}
+		player.getController().addTask(TaskId.DROWN, ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
+			int value = player.getLifeStats().getMaxHp() / 20;
+			if (player.getLifeStats().reduceHp(TYPE.DROWNING, value, 0, LOG.REGULAR, player) == 0)
+				stopDrowning(player);
 		}, 0, DROWN_PERIOD));
 	}
 }
