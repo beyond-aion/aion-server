@@ -1,19 +1,27 @@
 package com.aionemu.gameserver.model.gameobjects.player.motion;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.Expirable;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.templates.item.ItemTemplate;
+import com.aionemu.gameserver.model.templates.item.actions.AbstractItemAction;
+import com.aionemu.gameserver.model.templates.item.actions.AnimationAddAction;
+import com.aionemu.gameserver.model.templates.item.actions.ItemActions;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- * @author MrPoke
+ * @author MrPoke, SVDNESS
  */
-public class Motion implements Expirable {
 
+public class Motion implements Expirable {
 	static final Map<Integer, Integer> motionType = new LinkedHashMap<>();
+	private static volatile Map<Integer, Integer> itemNameIdByMotionId;
 
 	static {
 		motionType.put(1, 1);
@@ -44,38 +52,24 @@ public class Motion implements Expirable {
 		motionType.put(26, 3);
 	}
 
-	private int id;
-	private int deletionTime = 0;
-	private boolean active = false;
+	private final int id;
+	private final int deletionTime;
+	private boolean active;
 
-	/**
-	 * @param id
-	 * @param deletionTime
-	 */
 	public Motion(int id, int deletionTime, boolean isActive) {
 		this.id = id;
 		this.deletionTime = deletionTime;
 		this.active = isActive;
 	}
 
-	/**
-	 * @return the id
-	 */
 	public int getId() {
 		return id;
 	}
 
-	/**
-	 * @return the active
-	 */
 	public boolean isActive() {
 		return active;
 	}
 
-	/**
-	 * @param active
-	 *          the active to set
-	 */
 	public void setActive(boolean active) {
 		this.active = active;
 	}
@@ -88,8 +82,41 @@ public class Motion implements Expirable {
 	@Override
 	public void onExpire(Player player) {
 		player.getMotions().remove(id);
-		// TODO motion templates -> parse nameIds for system message, like 600533 for STR_CMOTION_CASH_NINJA_IDLE (Ninja Idle) etc.
-		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DELETE_CASH_CUSTOMANIMATION_BY_TIMEOUT(/* nameId */));
+		int nameId = getItemNameId(id);
+		String motionName = nameId != 0 ? ChatUtil.l10n(nameId) : "";
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DELETE_CASH_CUSTOMANIMATION_BY_TIMEOUT(motionName));
 	}
 
+	private static int getItemNameId(int motionId) {
+		Map<Integer, Integer> map = itemNameIdByMotionId;
+		if (map == null) {
+			synchronized (Motion.class) {
+				map = itemNameIdByMotionId;
+				if (map == null) {
+					map = buildItemNameIdMap();
+					itemNameIdByMotionId = map;
+				}
+			}
+		}
+		Integer nameId = map.get(motionId);
+		return nameId == null ? 0 : nameId;
+	}
+
+	private static Map<Integer, Integer> buildItemNameIdMap() {
+		Map<Integer, Integer> map = new HashMap<>();
+		for (ItemTemplate template : DataManager.ITEM_DATA.getItemTemplates()) {
+			ItemActions actions = template.getActions();
+			if (actions == null) {
+				continue;
+			}
+			for (AbstractItemAction action : actions.getItemActions()) {
+				if (action instanceof AnimationAddAction anim) {
+					for (int mId : anim.getMotionIds()) {
+						map.putIfAbsent(mId, template.getL10nId());
+					}
+				}
+			}
+		}
+		return map;
+	}
 }
