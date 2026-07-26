@@ -7,10 +7,10 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
  */
 public interface Expirable {
 
-	public int getExpireTime();
+	public int expireTime();
 
 	public default int secondsUntilExpiration() {
-		return getExpireTime() == 0 ? 0 : getExpireTime() - (int) (System.currentTimeMillis() / 1000);
+		return expireTime() == 0 ? 0 : expireTime() - (int) (System.currentTimeMillis() / 1000);
 	}
 
 	public default boolean isExpired() {

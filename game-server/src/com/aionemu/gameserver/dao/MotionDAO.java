@@ -47,7 +47,7 @@ public class MotionDAO {
 			stmt.setInt(1, objectId);
 			stmt.setInt(2, motion.getId());
 			stmt.setBoolean(3, motion.isActive());
-			stmt.setInt(4, motion.getExpireTime());
+			stmt.setInt(4, motion.expireTime());
 			stmt.execute();
 		} catch (Exception e) {
 			log.error("Could not store motion for player " + objectId + " from DB: " + e.getMessage(), e);

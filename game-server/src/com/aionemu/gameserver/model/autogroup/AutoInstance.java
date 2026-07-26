@@ -36,7 +36,7 @@ public abstract class AutoInstance implements AutoInstanceHandler {
 			itemCount += item.getItemCount();
 		if (itemCount < requiredCount)
 			return false;
-		items.sort(Comparator.comparingInt(Item::getExpireTime));
+		items.sort(Comparator.comparingInt(Item::expireTime));
 		for (Item item : items) {
 			requiredCount = player.getInventory().decreaseItemCount(item, requiredCount);
 			if (requiredCount == 0)

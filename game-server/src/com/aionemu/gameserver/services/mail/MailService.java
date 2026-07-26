@@ -227,7 +227,7 @@ public class MailService {
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MAIL_TAKE_ALL_CANCEL());
 					return;
 				}
-				if (attachedItem.getExpireTime() != 0 && attachedItem.getExpireTime() <= System.currentTimeMillis() / 1000) {
+				if (attachedItem.expireTime() != 0 && attachedItem.expireTime() <= System.currentTimeMillis() / 1000) {
 					attachedItem.setPersistentState(PersistentState.DELETED);
 					InventoryDAO.store(attachedItem, player);
 				} else {

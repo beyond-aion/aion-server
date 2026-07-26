@@ -43,8 +43,8 @@ public class PlayerEmotionListDAO {
 	public static void insertEmotion(Player player, Emotion emotion) {
 		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(INSERT_QUERY)) {
 			stmt.setInt(1, player.getObjectId());
-			stmt.setInt(2, emotion.getId());
-			stmt.setInt(3, emotion.getExpireTime());
+			stmt.setInt(2, emotion.id());
+			stmt.setInt(3, emotion.expireTime());
 			stmt.execute();
 		} catch (Exception e) {
 			log.error("Could not store emotionId for player " + player.getObjectId() + " from DB: " + e.getMessage(), e);

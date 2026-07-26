@@ -175,7 +175,7 @@ public class PlayerRegisteredItemsDAO {
 
 		try (PreparedStatement stmt = con.prepareStatement(isNew ? INSERT_QUERY : UPDATE_QUERY)) {
 			for (HouseObject<?> obj : objects) {
-				stmt.setObject(1, obj.getExpireTime() > 0 ? obj.getExpireTime() : null, Types.INTEGER);
+				stmt.setObject(1, obj.expireTime() > 0 ? obj.expireTime() : null, Types.INTEGER);
 				stmt.setObject(2, obj.getColor(), Types.INTEGER);
 				stmt.setInt(3, obj.getColorExpireEnd());
 				stmt.setInt(4, obj.getOwnerUsedCount());

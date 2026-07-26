@@ -34,7 +34,7 @@ public class ExpireTimerTask extends AbstractPeriodicTaskManager {
 
 	public void registerExpirables(Collection<? extends Expirable> expirables, Player player) {
 		for (Expirable expirable : expirables) {
-			if (expirable.getExpireTime() > 0)
+			if (expirable.expireTime() > 0)
 				this.expirables.put(expirable, player);
 		}
 	}
@@ -50,7 +50,7 @@ public class ExpireTimerTask extends AbstractPeriodicTaskManager {
 			Map.Entry<Expirable, Player> entry = i.next();
 			Expirable expirable = entry.getKey();
 			Player player = entry.getValue();
-			int remainingSeconds = expirable.getExpireTime() - timeNow;
+			int remainingSeconds = expirable.expireTime() - timeNow;
 			if (remainingSeconds < 0 && expirable.canExpireNow()) {
 				expirable.onExpire(player);
 				i.remove();

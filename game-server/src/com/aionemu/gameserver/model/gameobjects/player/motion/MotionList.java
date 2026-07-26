@@ -47,7 +47,7 @@ public class MotionList {
 	public void add(Motion motion, boolean persist) {
 		if (motions == null)
 			motions = new LinkedHashMap<>();
-		if (motions.containsKey(motion.getId()) && motion.getExpireTime() == 0) {
+		if (motions.containsKey(motion.getId()) && motion.expireTime() == 0) {
 			remove(motion.getId());
 		}
 		motions.put(motion.getId(), motion);

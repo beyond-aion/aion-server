@@ -77,7 +77,7 @@ public abstract class HouseObject<T extends PlaceableHouseObject> extends Visibl
 	}
 
 	@Override
-	public int getExpireTime() {
+	public int expireTime() {
 		return expireEnd;
 	}
 

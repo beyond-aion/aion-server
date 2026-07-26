@@ -52,7 +52,7 @@ public class PlayerTitleListDAO {
 		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(INSERT_QUERY)) {
 			stmt.setInt(1, player.getObjectId());
 			stmt.setInt(2, entry.getId());
-			stmt.setInt(3, entry.getExpireTime());
+			stmt.setInt(3, entry.expireTime());
 			stmt.execute();
 		} catch (Exception e) {
 			log.error("Could not store emotionId for player " + player.getObjectId() + " from DB: " + e.getMessage(), e);

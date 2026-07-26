@@ -179,7 +179,7 @@ public class SM_PTRANSFER_CONTROL extends LsServerPacket {
 					writeD(item.getItemColor() == null ? -1 : item.getItemColor());
 
 					writeS(item.getItemCreator());
-					writeD(item.getExpireTime());
+					writeD(item.expireTime());
 					writeD(item.getActivationCount());
 					writeC(item.isEquipped() ? 1 : 0);
 
@@ -223,7 +223,7 @@ public class SM_PTRANSFER_CONTROL extends LsServerPacket {
 				EmotionList emo = this.player.getEmotions();
 				writeD(emo.getEmotions().size());
 				for (Emotion e : emo.getEmotions()) {
-					writeD(e.getId());
+					writeD(e.id());
 					writeD(e.secondsUntilExpiration());
 				}
 
@@ -231,7 +231,7 @@ public class SM_PTRANSFER_CONTROL extends LsServerPacket {
 				writeD(motions.getMotions().size());
 				for (Motion motion : motions.getMotions().values()) {
 					writeD(motion.getId());
-					writeD(motion.getExpireTime());
+					writeD(motion.expireTime());
 					writeC(motion.isActive() ? 1 : 0);
 				}
 
@@ -259,7 +259,7 @@ public class SM_PTRANSFER_CONTROL extends LsServerPacket {
 					writeD(pet.getDecoration());
 					writeQ(pet.getBirthdayTimestamp() == null ? 0 : pet.getBirthdayTimestamp().getTime());
 					writeS(pet.getName());
-					writeD(pet.getExpireTime()); // 26-08-2013 kid
+					writeD(pet.expireTime()); // 26-08-2013 kid
 				}
 				TitleList titles = this.player.getTitleList();
 				writeD(titles.getTitles().size());

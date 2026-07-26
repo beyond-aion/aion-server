@@ -68,7 +68,7 @@ public class PlayerPetsDAO {
 			stmt.setInt(4, petCommonData.getDecoration());
 			stmt.setString(5, petCommonData.getName());
 			stmt.setTimestamp(6, petCommonData.getDespawnTime());
-			stmt.setInt(7, petCommonData.getExpireTime());
+			stmt.setInt(7, petCommonData.expireTime());
 			stmt.execute();
 		} catch (Exception e) {
 			log.error("Error inserting new pet #" + petCommonData.getObjectId() + ", name: " + petCommonData.getName(), e);

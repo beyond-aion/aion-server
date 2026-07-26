@@ -662,7 +662,7 @@ public class Item extends AionObject implements Expirable, StatOwner, Persistabl
 	 * @return Returns the expireTime.
 	 */
 	@Override
-	public int getExpireTime() {
+	public int expireTime() {
 		return expireTime;
 	}
 

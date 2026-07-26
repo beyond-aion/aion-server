@@ -41,7 +41,7 @@ public class Title implements Expirable {
 	}
 
 	@Override
-	public int getExpireTime() {
+	public int expireTime() {
 		return expireTime;
 	}
 

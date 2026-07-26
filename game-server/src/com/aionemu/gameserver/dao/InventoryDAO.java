@@ -268,7 +268,7 @@ public class InventoryDAO {
 				stmt.setObject(4, item.getItemColor(), Types.INTEGER); // supports inserting null value
 				stmt.setInt(5, item.getColorExpireTime());
 				stmt.setString(6, item.getItemCreator());
-				stmt.setInt(7, item.getExpireTime());
+				stmt.setInt(7, item.expireTime());
 				stmt.setInt(8, item.getActivationCount());
 				stmt.setInt(9, getItemOwnerId(item, playerId, accountId, legionId));
 				stmt.setBoolean(10, item.isEquipped());
@@ -314,7 +314,7 @@ public class InventoryDAO {
 				stmt.setObject(2, item.getItemColor(), Types.INTEGER); // supports inserting null value
 				stmt.setInt(3, item.getColorExpireTime());
 				stmt.setString(4, item.getItemCreator());
-				stmt.setInt(5, item.getExpireTime());
+				stmt.setInt(5, item.expireTime());
 				stmt.setInt(6, item.getActivationCount());
 				stmt.setInt(7, getItemOwnerId(item, playerId, accountId, legionId));
 				stmt.setBoolean(8, item.isEquipped());
