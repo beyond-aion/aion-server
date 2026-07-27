@@ -112,7 +112,7 @@ CREATE TABLE `bookmark` (
   `x` float NOT NULL,
   `y` float NOT NULL,
   `z` float NOT NULL,
-  PRIMARY KEY (`player_id`, `name`)
+  PRIMARY KEY (`player_id`, `name`),
 	CONSTRAINT `bookmark_ibfk_1` FOREIGN KEY (`player_id`) REFERENCES `players` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
