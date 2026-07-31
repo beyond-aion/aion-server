@@ -1,10 +1,12 @@
 package com.aionemu.gameserver.controllers.attack;
 
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.lang3.ArrayUtils;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.utils.Rnd;
@@ -34,14 +36,17 @@ import com.aionemu.gameserver.utils.stats.StatFunctions;
  */
 public class AttackUtil {
 
+	private static final Logger log = LoggerFactory.getLogger(AttackUtil.class);
+
 	/**
 	 * This method calculates the physical attack status and damage in the following order: <br>
 	 * 1. calculate status<br>
 	 * 2. calculate main & off hand damage<br>
 	 * 3. apply stat modifiers<br>
 	 * 4. amplify damage by hit count<br>
-	 * @param attacker Creature attacking
-	 * @param attacked Creature being attacked
+	 *
+	 * @param attacker         Creature attacking
+	 * @param attacked         Creature being attacked
 	 * @param calculationTypes
 	 * @return {@code List<AttackResult>} containing the results for each hand
 	 */
@@ -438,6 +443,7 @@ public class AttackUtil {
 			effect.setProtectorId(attackResult.getProtectorId());
 			effect.setShieldDefense(attackResult.getShieldType());
 		}
+		log.info("Time {}, dmg = {}, status = {}, hit_type = {}", OffsetDateTime.now(), damage, status, hitType);
 		effect.setReserveds(new EffectReserved(position, attackResult.getDamage(), ResourceType.HP, true, send), false);
 		effect.setAttackStatus(attackResult.getAttackStatus());
 		effect.setLaunchSubEffect(attackResult.isLaunchSubEffect());

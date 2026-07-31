@@ -1,9 +1,14 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.time.OffsetDateTime;
 import java.util.Set;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.controllers.movement.GlideFlag;
 import com.aionemu.gameserver.controllers.movement.MovementMask;
+import com.aionemu.gameserver.controllers.movement.MovementModifierState;
 import com.aionemu.gameserver.controllers.movement.PlayerMoveController;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.CustomPlayerState;
@@ -24,6 +29,8 @@ import com.aionemu.gameserver.world.World;
  * @author -Nemesiss-
  */
 public class CM_MOVE extends AionClientPacket {
+
+	private static final Logger log = LoggerFactory.getLogger(CM_MOVE.class);
 
 	private byte type;
 	private byte heading;
@@ -71,15 +78,26 @@ public class CM_MOVE extends AionClientPacket {
 			vehicleY = readF();
 			vehicleZ = readF();
 		}
+		log.info("CM_MOVE time: {}, {}", OffsetDateTime.now(), this);
 	}
 
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
-		if (player.isDead() || player.getEffectController().isUnderFear() || player.getEffectController().isConfused()) // just in case of bad timing
+		if (MovementModifierState.DEBUG) {
+			log.info("MOVEDEBUG packet {}: {}, serverPos={}/{}/{}, serverHeading={}, isInMove={}", player.getName(), this, player.getX(), player.getY(),
+				player.getZ(), player.getHeading(), player.getMoveController().isInMove());
+		}
+		if (player.isDead() || player.getEffectController().isUnderFear() || player.getEffectController().isConfused()) { // just in case of bad timing
+			if (MovementModifierState.DEBUG)
+				log.info("MOVEDEBUG packet {}: IGNORED (dead, feared or confused)", player.getName());
 			return;
-		if (handleBogusPacket(player))
+		}
+		if (handleBogusPacket(player)) {
+			if (MovementModifierState.DEBUG)
+				log.info("MOVEDEBUG packet {}: IGNORED (bogus packet)", player.getName());
 			return;
+		}
 
 		PlayerMoveController m = player.getMoveController();
 		boolean jumping = false;
@@ -106,6 +124,8 @@ public class CM_MOVE extends AionClientPacket {
 						World.getInstance().updatePosition(player, x2, y2, z2, heading);
 						m.onMoveFromClient();
 						PacketSendUtility.broadcastToSightedPlayers(player, new SM_POSITION(player), true);
+						if (MovementModifierState.DEBUG)
+							log.info("MOVEDEBUG packet {}: handled as teleportation mode move", player.getName());
 						return;
 					}
 				} else {
@@ -132,11 +152,16 @@ public class CM_MOVE extends AionClientPacket {
 
 		if (!AntiHackService.canMove(player, x, y, z, type)) {
 			player.getMoveController().setIsJumping(false);
+			if (MovementModifierState.DEBUG)
+				log.info("MOVEDEBUG packet {}: IGNORED (rejected by AntiHackService)", player.getName());
 			return;
 		}
 
-		if (!player.isSpawned()) // should be checked as late as possible, to prevent false warnings from World.updatePosition
+		if (!player.isSpawned()) { // should be checked as late as possible, to prevent false warnings from World.updatePosition
+			if (MovementModifierState.DEBUG)
+				log.info("MOVEDEBUG packet {}: IGNORED (not spawned)", player.getName());
 			return;
+		}
 		if (player.isProtectionActive() && (player.getX() != x || player.getY() != y || player.getZ() > z + 0.5f))
 			player.getController().stopProtectionActiveTask();
 		player.getMoveController().setIsJumping(jumping);
@@ -148,6 +173,8 @@ public class CM_MOVE extends AionClientPacket {
 			|| type == MovementMask.IMMEDIATE)
 			PacketSendUtility.broadcastToSightedPlayers(player, new SM_MOVE(player));
 
+		if (MovementModifierState.DEBUG && (type & MovementMask.FALL) != MovementMask.FALL)
+			log.info("MOVEDEBUG packet {}: not falling anymore (landing check follows)", player.getName());
 		if ((type & MovementMask.FALL) == MovementMask.FALL) {
 			player.getFlyController().onStopGliding();
 			m.updateFalling(z);

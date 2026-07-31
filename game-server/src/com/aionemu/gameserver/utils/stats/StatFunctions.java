@@ -4,12 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.ArrayUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.configs.main.FallDamageConfig;
 import com.aionemu.gameserver.configs.main.RatesConfig;
 import com.aionemu.gameserver.controllers.attack.AttackResult;
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
+import com.aionemu.gameserver.controllers.movement.MovementModifierDirection;
+import com.aionemu.gameserver.controllers.movement.MovementModifierState;
 import com.aionemu.gameserver.controllers.observer.AttackerCriticalStatus;
 import com.aionemu.gameserver.model.SkillElement;
 import com.aionemu.gameserver.model.gameobjects.*;
@@ -39,6 +43,8 @@ import com.aionemu.gameserver.world.WorldMapInstance;
  * @author ATracer, alexa026, Neon
  */
 public class StatFunctions {
+
+	private static final Logger log = LoggerFactory.getLogger(StatFunctions.class);
 
 	/**
 	 * @param maxLevelInRange
@@ -634,11 +640,22 @@ public class StatFunctions {
 	}
 
 	public static float adjustStatByMovementModifier(Creature creature, StatEnum stat, float value) {
-		if (!(creature instanceof Player player) || stat == null)
+		if (!(creature instanceof Player player))
+			return value;
+		MovementModifierDirection movementDirection = player.getMoveController().getMovementDirection();
+		float adjustedValue = adjustStatByMovementModifier(movementDirection, stat, value);
+		if (MovementModifierState.DEBUG && (stat == StatEnum.PHYSICAL_ATTACK || stat == StatEnum.MAGICAL_ATTACK)) {
+			log.info("MOVEDEBUG damage {}: {} {} => {} (direction {})", player.getName(), stat, value, adjustedValue, movementDirection);
+		}
+		return adjustedValue;
+	}
+
+	public static float adjustStatByMovementModifier(MovementModifierDirection movementDirection, StatEnum stat, float value) {
+		if (stat == null)
 			return value;
 
 		// https://web.archive.org/web/20170429204823/gameguide.na.aiononline.com/aion/Combat
-		switch (player.getMoveController().getMovementDirection()) {
+		switch (movementDirection) {
 			case FORWARD:
 				switch (stat) {
 					case PHYSICAL_ATTACK:
