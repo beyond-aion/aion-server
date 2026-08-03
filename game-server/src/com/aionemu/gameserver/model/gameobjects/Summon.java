@@ -2,7 +2,6 @@ package com.aionemu.gameserver.model.gameobjects;
 
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.concurrent.Future;
 
 import com.aionemu.gameserver.controllers.SiegeWeaponController;
 import com.aionemu.gameserver.controllers.SummonController;
@@ -19,6 +18,8 @@ import com.aionemu.gameserver.model.stats.container.SummonGameStats;
 import com.aionemu.gameserver.model.stats.container.SummonLifeStats;
 import com.aionemu.gameserver.model.summons.SkillOrder;
 import com.aionemu.gameserver.model.summons.SummonMode;
+import com.aionemu.gameserver.model.summons.SummonRelease;
+import com.aionemu.gameserver.model.summons.UnsummonType;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplateType;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
@@ -32,7 +33,7 @@ public class Summon extends Creature {
 	private final Player master;
 	private SummonMode mode = SummonMode.GUARD;
 	private final Queue<SkillOrder> skillOrders = new ConcurrentLinkedQueue<>();
-	private Future<?> releaseTask;
+	private SummonRelease pendingRelease;
 	private SkillElement alwaysResistElement = SkillElement.NONE;
 	private int summonedBySkillId, liveTime;
 
@@ -191,14 +192,43 @@ public class Summon extends Creature {
 		this.summonedBySkillId = summonedBySkillId;
 	}
 
-	public void setReleaseTask(Future<?> task) {
-		releaseTask = task;
+	/**
+	 * An instant release supersedes a scheduled one, a release which already started can never be superseded.
+	 *
+	 * @return True if the caller may go on releasing this summon.
+	 */
+	public boolean registerRelease(SummonRelease release) {
+		if (pendingRelease != null) {
+			if (pendingRelease.hasStarted() || !release.getUnsummonType().isInstant())
+				return false;
+			pendingRelease.cancel();
+		}
+		pendingRelease = release;
+		return true;
 	}
 
-	public void cancelReleaseTask() {
-		if (releaseTask != null && !releaseTask.isDone()) {
-			releaseTask.cancel(true);
-		}
+	/**
+	 * @return True if the given release is still the pending one, meaning the caller may go on despawning this summon.
+	 */
+	public boolean startRelease(SummonRelease release) {
+		if (pendingRelease != release)
+			return false;
+		release.markStarted();
+		return true;
+	}
+
+	public void cancelReleaseByMaster() {
+		if (pendingRelease != null && pendingRelease.isCancelableByMaster() && pendingRelease.cancel())
+			pendingRelease = null;
+	}
+
+	public boolean isReleaseUncancelable() {
+		SummonRelease release = pendingRelease;
+		return release != null && !release.isCancelableByMaster();
+	}
+
+	public boolean isBeingReleased() {
+		return pendingRelease != null;
 	}
 
 	public void addSkillOrder(int skillId, int skillLvl, Creature target, int hate, boolean release) {

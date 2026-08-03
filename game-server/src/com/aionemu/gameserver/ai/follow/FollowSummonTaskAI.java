@@ -4,7 +4,6 @@ import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.summons.SummonMode;
 import com.aionemu.gameserver.model.summons.UnsummonType;
 import com.aionemu.gameserver.services.summons.SummonsService;
 import com.aionemu.gameserver.utils.PositionUtil;
@@ -37,7 +36,7 @@ public class FollowSummonTaskAI implements Runnable {
 	@Override
 	public void run() {
 		if (!isInMasterRange()) {
-			SummonsService.doMode(SummonMode.RELEASE, summon, UnsummonType.DISTANCE);
+			SummonsService.release(summon, UnsummonType.DISTANCE);
 			return;
 		}
 		if (!isInTargetRange()) {

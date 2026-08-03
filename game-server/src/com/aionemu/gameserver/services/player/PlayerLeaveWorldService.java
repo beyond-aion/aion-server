@@ -15,7 +15,6 @@ import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.model.gameobjects.player.BindPointPosition;
 import com.aionemu.gameserver.model.gameobjects.player.FriendList;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.summons.SummonMode;
 import com.aionemu.gameserver.model.summons.UnsummonType;
 import com.aionemu.gameserver.model.team.alliance.PlayerAllianceService;
 import com.aionemu.gameserver.model.team.group.PlayerGroupService;
@@ -114,7 +113,7 @@ public class PlayerLeaveWorldService {
 
 		Summon summon = player.getSummon();
 		if (summon != null)
-			SummonsService.doMode(SummonMode.RELEASE, summon, UnsummonType.LOGOUT);
+			SummonsService.release(summon, UnsummonType.LOGOUT);
 		if (player.getPet() != null)
 			player.getPet().getController().delete();
 		if (player.getPostman() != null)

@@ -33,7 +33,6 @@ import com.aionemu.gameserver.model.gameobjects.state.CreatureVisualState;
 import com.aionemu.gameserver.model.gameobjects.state.FlyState;
 import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.model.stats.container.PlayerGameStats;
-import com.aionemu.gameserver.model.summons.SummonMode;
 import com.aionemu.gameserver.model.summons.UnsummonType;
 import com.aionemu.gameserver.model.templates.QuestTemplate;
 import com.aionemu.gameserver.model.templates.flypath.FlightPath;
@@ -290,7 +289,7 @@ public class PlayerController extends CreatureController<Player> {
 		// Release summon
 		Summon summon = player.getSummon();
 		if (summon != null)
-			SummonsService.doMode(SummonMode.RELEASE, summon, UnsummonType.UNSPECIFIED);
+			SummonsService.release(summon, UnsummonType.MASTER_DEATH);
 
 		// setIsFlyingBeforeDead for PlayerReviveService
 		if (player.isInState(CreatureState.FLYING))

@@ -2,7 +2,6 @@ package com.aionemu.gameserver.services.summons;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Future;
 
 import com.aionemu.gameserver.controllers.attack.AggroList;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -13,6 +12,7 @@ import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.summons.SummonMode;
+import com.aionemu.gameserver.model.summons.SummonRelease;
 import com.aionemu.gameserver.model.summons.UnsummonType;
 import com.aionemu.gameserver.network.aion.serverpackets.*;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
@@ -43,37 +43,42 @@ public class SummonsService {
 	}
 
 	/**
-	 * Release summon
+	 * Releases the summon after {@link UnsummonType#getDelayMillis()}, see {@link Summon#registerRelease(SummonRelease)} for competing releases.
 	 */
 	public static final void release(Summon summon, UnsummonType unsummonType) {
-		if (summon.getMode() == SummonMode.RELEASE)
+		SummonRelease release = new SummonRelease(unsummonType);
+		if (!summon.registerRelease(release))
 			return;
 		summon.getController().cancelCurrentSkill(null);
 		summon.setMode(SummonMode.RELEASE);
 		summon.getObserveController().notifySummonReleaseObservers();
-		new ReleaseSummonTask(summon, unsummonType).scheduleOrRun();
+		new ReleaseSummonTask(summon, release).scheduleOrRun();
 	}
 
 	private static class ReleaseSummonTask implements Runnable {
 
 		private final Summon summon;
+		private final SummonRelease release;
 		private final UnsummonType unsummonType;
 		private boolean addedMasterHate;
 
-		public ReleaseSummonTask(Summon owner, UnsummonType unsummonType) {
+		public ReleaseSummonTask(Summon owner, SummonRelease release) {
 			this.summon = owner;
-			this.unsummonType = unsummonType;
+			this.release = release;
+			this.unsummonType = release.getUnsummonType();
 		}
 
 		@Override
 		public void run() {
+			if (!summon.startRelease(release))
+				return;
 			Player master = summon.getMaster();
 			VisibleObject summonObj = World.getInstance().findVisibleObject(summon.getObjectId());
 			// transformed npc via SM_TRANSFORM_IN_SUMMON
-			if (summonObj != null && summonObj instanceof Npc npc)
+			if (summonObj instanceof Npc npc)
 				npc.getController().delete();
 			else
-				summon.getController().delete();
+				summon.getController().delete(); // triggers SummonController.notKnow(master), the resulting DISTANCE release is ignored
 
 			if (summon.equals(master.getSummon()))
 				master.setSummon(null);
@@ -81,7 +86,10 @@ public class SummonsService {
 			switch (unsummonType) {
 				case COMMAND:
 				case DISTANCE:
+				case SUMMON_DEATH:
+				case MASTER_DEATH:
 				case UNSPECIFIED:
+				case PET_ORDER_UNSUMMON_EFFECT:
 					SkillTemplate summoningSkill = DataManager.SKILL_DATA.getSkillTemplate(summon.getSummonedBySkillId());
 					if (summoningSkill != null && summoningSkill.getCooldown() > 0)
 						master.setSkillCoolDown(summoningSkill.getCooldownId(), summoningSkill.getCooldown() * 100 + System.currentTimeMillis());
@@ -101,20 +109,16 @@ public class SummonsService {
 		}
 
 		public void scheduleOrRun() {
-			switch (unsummonType) {
-				case DISTANCE:
-				case LOGOUT:
-					run();
-					break;
-				default:
-					Future<?> releaseTask = ThreadPoolManager.getInstance().schedule(this, 5000);
-					if (unsummonType == UnsummonType.COMMAND) { // make it cancelable if released by master, master hate will be added delayed
-						PacketSendUtility.sendPacket(summon.getMaster(), SM_SYSTEM_MESSAGE.STR_SKILL_SUMMON_UNSUMMON_FOLLOWER(summon.getL10n()));
-						PacketSendUtility.sendPacket(summon.getMaster(), new SM_SUMMON_UPDATE(summon));
-						summon.setReleaseTask(releaseTask);
-					} else
-						scheduleAddMasterHate(summon);
+			if (unsummonType.isInstant()) {
+				run();
+				return;
 			}
+			release.setTask(ThreadPoolManager.getInstance().schedule(this, unsummonType.getDelayMillis()));
+			if (unsummonType.isCancelableByMaster()) { // master hate is added delayed, he may still take the order back
+				PacketSendUtility.sendPacket(summon.getMaster(), SM_SYSTEM_MESSAGE.STR_SKILL_SUMMON_UNSUMMON_FOLLOWER(summon.getL10n()));
+				PacketSendUtility.sendPacket(summon.getMaster(), new SM_SUMMON_UPDATE(summon));
+			} else
+				scheduleAddMasterHate(summon);
 		}
 
 		private void scheduleAddMasterHate(Summon summon) {
@@ -198,8 +202,14 @@ public class SummonsService {
 		if (summon.getMaster() == null)
 			return;
 
-		if (unsummonType == UnsummonType.COMMAND && summonMode != SummonMode.RELEASE)
-			summon.cancelReleaseTask();
+		if (unsummonType == UnsummonType.COMMAND) {
+			if (summon.isReleaseUncancelable())
+				return;
+			if (summonMode == SummonMode.ATTACK && !summon.getController().canAttack(targetObjId))
+				return; // don't cancel a pending release for an order that won't be carried out
+			if (summonMode != SummonMode.RELEASE)
+				summon.cancelReleaseByMaster();
+		}
 
 		switch (summonMode) {
 			case REST:
