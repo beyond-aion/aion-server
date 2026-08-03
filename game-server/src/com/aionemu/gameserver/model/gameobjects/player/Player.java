@@ -736,7 +736,7 @@ public class Player extends Creature {
 	 */
 	@Override
 	public boolean isFlying() {
-		return flyState >= 1;
+		return flyState != 0;
 	}
 
 	/**
