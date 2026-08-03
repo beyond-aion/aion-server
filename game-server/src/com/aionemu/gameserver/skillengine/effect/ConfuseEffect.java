@@ -29,7 +29,6 @@ import com.aionemu.gameserver.world.geo.GeoService;
 /**
  * @author Yeats, SVDNESS
  */
-
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ConfuseEffect")
 public class ConfuseEffect extends EffectTemplate {
@@ -38,7 +37,7 @@ public class ConfuseEffect extends EffectTemplate {
 	public void applyEffect(Effect effect) {
 		Creature effected = effect.getEffected();
 		effected.getEffectController().removeHideEffects();
-		//If the target is gliding, then we remove this condition.
+
 		if (effected instanceof Player && ((Player) effected).isInGlidingState()) {
 			((Player) effected).getFlyController().onStopGliding();
 		}
@@ -66,7 +65,7 @@ public class ConfuseEffect extends EffectTemplate {
 			PacketSendUtility.broadcastPacket((Player) effected, new SM_EMOTION(effected, EmotionType.RUN), true);
 		}
 		if (GeoDataConfig.FEAR_ENABLE) {
-			ScheduledFuture<?> confuseTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new ConfuseTask(effected), 0, 1_000);
+			ScheduledFuture<?> confuseTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new ConfuseTask(effected), 0, 1000);
 			effect.setPeriodicTask(confuseTask, position);
 		}
 	}
@@ -82,7 +81,7 @@ public class ConfuseEffect extends EffectTemplate {
 		}
 	}
 
-	record ConfuseTask (Creature effected) implements Runnable {
+	record ConfuseTask(Creature effected) implements Runnable {
 		//The flee point is farther than the target travels per tick (1 sec):
 		//the target never reaches it between ticks and keeps running smoothly — same as retail behavior.
 		private static final float FLEE_SECONDS = 2.5f;
@@ -94,8 +93,7 @@ public class ConfuseEffect extends EffectTemplate {
 				float maxDistance = effected.getGameStats().getMovementSpeedFloat() * FLEE_SECONDS;
 				Vector3f closestCollision = GeoService.getInstance().findMovementCollision(effected, angle, maxDistance);
 				if (effected instanceof Npc npc) {
-					//Updates destination on the fly (no resetMove): movement stays continuous.
-					npc.getMoveController().retargetPoint(closestCollision.getX(), closestCollision.getY(), closestCollision.getZ());
+					npc.getMoveController().moveToPoint(closestCollision.getX(), closestCollision.getY(), closestCollision.getZ());
 				} else {
 					byte heading = PositionUtil.convertAngleToHeading(angle);
 					effected.getMoveController().setNewDirection(closestCollision.getX(), closestCollision.getY(), closestCollision.getZ(), heading);

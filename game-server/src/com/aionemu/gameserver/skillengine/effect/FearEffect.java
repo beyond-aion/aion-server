@@ -32,10 +32,10 @@ import com.aionemu.gameserver.world.geo.GeoService;
 /**
  * @author Sarynth, SVDNESS
  */
-
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "FearEffect")
 public class FearEffect extends EffectTemplate {
+
 	@XmlAttribute
 	protected int resistchance = 100;
 
@@ -43,7 +43,7 @@ public class FearEffect extends EffectTemplate {
 	public void applyEffect(Effect effect) {
 		Creature effected = effect.getEffected();
 		effected.getEffectController().removeHideEffects();
-		//If the target is gliding, then we remove this condition.
+		// Fear stops gliding
 		if (effected instanceof Player && ((Player) effected).isInGlidingState()) {
 			((Player) effected).getFlyController().onStopGliding();
 		}
@@ -64,24 +64,25 @@ public class FearEffect extends EffectTemplate {
 		effected.getEffectController().setAbnormal(AbnormalState.FEAR);
 		effected.getMoveController().abortMove();
 		if (effected instanceof Npc) {
-			EmoteManager.emoteStartAttacking((Npc) effected, effector); //Set weapon_equipped for faster walk speed.
+			EmoteManager.emoteStartAttacking((Npc) effected, effector); // set weapon_equipped for faster walk speed
 			effected.getAi().setStateIfNot(AIState.FEAR);
 		} else if (effected instanceof Player && effected.isInState(CreatureState.WALK_MODE)) {
 			effected.unsetState(CreatureState.WALK_MODE);
 			PacketSendUtility.broadcastPacket((Player) effected, new SM_EMOTION(effected, EmotionType.RUN), true);
 		}
 		if (GeoDataConfig.FEAR_ENABLE) {
-			ScheduledFuture<?> fearTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new FearTask(effector, effected), 0, 1_000);
+			ScheduledFuture<?> fearTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new FearTask(effector, effected), 0, 1000);
 			effect.setPeriodicTask(fearTask, position);
 		}
-		//Resistchance of fear effect to damage, if value is lower than 100, fear can be interrupted bz damage (example skillId: Terrible howl).
+		// resistchance of fear effect to damage, if value is lower than 100, fear can be interrupted bz damage
+		// example skillId: 540 Terrible howl
 		if (resistchance < 100) {
 			effect.addObserver(effected, new ActionObserver(ObserverType.ATTACKED) {
+
 				@Override
 				public void attacked(Creature creature, int skillId) {
-					if (Rnd.chance() >= resistchance) {
+					if (Rnd.chance() >= resistchance)
 						effected.getEffectController().removeEffect(effect.getSkillId());
-					}
 				}
 			});
 		}
@@ -110,8 +111,7 @@ public class FearEffect extends EffectTemplate {
 				float maxDistance = effected.getGameStats().getMovementSpeedFloat() * FLEE_SECONDS;
 				Vector3f closestCollision = GeoService.getInstance().findMovementCollision(effected, angle, maxDistance);
 				if (effected instanceof Npc npc) {
-					//Updates destination on the fly (no resetMove): movement stays continuous.
-					npc.getMoveController().retargetPoint(closestCollision.getX(), closestCollision.getY(), closestCollision.getZ());
+					npc.getMoveController().moveToPoint(closestCollision.getX(), closestCollision.getY(), closestCollision.getZ());
 				} else {
 					byte moveAwayHeading = PositionUtil.convertAngleToHeading(angle);
 					effected.getMoveController().setNewDirection(closestCollision.getX(), closestCollision.getY(), closestCollision.getZ(), moveAwayHeading);
