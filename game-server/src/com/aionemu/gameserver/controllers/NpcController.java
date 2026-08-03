@@ -80,19 +80,15 @@ public class NpcController extends CreatureController<Npc> {
 		getOwner().getGameStats().renewLastChangeTargetTime();
 		if (!getOwner().isDead()) {
 			if (newTarget == null && getOwner().getObjectTemplate().getTalkInfo() != null) {
-				//This packet must be sent after the dialog is closed; otherwise, other players will still see the player interacting with the NPC.
-				PacketSendUtility.broadcastPacket(getOwner(), new SM_LOOKATOBJECT(getOwner()));
 				ThreadPoolManager.getInstance().schedule(() -> {
-					if (getOwner().getTarget() == null) {
-						getOwner().getAi().think();
-					}
+					if (getOwner().getTarget() == null)
+						getOwner().getAi().think(); // resume walking or reset heading
 				}, 750);
-			} else {
-				if (newTarget != null && !getOwner().equals(newTarget)) {
-					getOwner().getPosition().setH(PositionUtil.getHeadingTowards(getOwner(), newTarget));
-				}
-				PacketSendUtility.broadcastPacket(getOwner(), new SM_LOOKATOBJECT(getOwner()));
+			} else if (newTarget != null && !getOwner().equals(newTarget)) {
+				getOwner().getPosition().setH(PositionUtil.getHeadingTowards(getOwner(), newTarget));
 			}
+			// broadcast NPC's current target and heading
+			PacketSendUtility.broadcastPacket(getOwner(), new SM_LOOKATOBJECT(getOwner()));
 		}
 	}
 
