@@ -157,7 +157,7 @@ public class PlayerGameStats extends CreatureGameStats<Player> {
 		Item mainHandWeapon = equipment.getMainHandWeapon();
 		if (mainHandWeapon != null) {
 			if (mainHandWeapon.getItemTemplate().getAttackType().isMagical())
-				return new AdditionStat(StatEnum.MAIN_HAND_POWER, 0, owner);
+				return new AdditionStat(StatEnum.PHYSICAL_ATTACK, 0, owner);
 			if (ArrayUtils.contains(calculationTypes, CalculationType.DISPLAY)) {
 				base = mainHandWeapon.getItemTemplate().getWeaponStats().getMeanDamage();
 			} else {
@@ -170,7 +170,7 @@ public class PlayerGameStats extends CreatureGameStats<Player> {
 		}
 		Stat2 stat = getStat(StatEnum.PHYSICAL_ATTACK, base, calculationTypes);
 		calculationTypes = ArrayUtils.removeElement(calculationTypes, CalculationType.MAIN_HAND);
-		return getStat(StatEnum.MAIN_HAND_POWER, stat, calculationTypes);
+		return applyStatFunctions(StatEnum.MAIN_HAND_POWER, stat, calculationTypes);
 	}
 
 	public Stat2 getOffHandPAttack(CalculationType... calculationTypes) {
@@ -193,9 +193,9 @@ public class PlayerGameStats extends CreatureGameStats<Player> {
 				stat.setBonusRate(stat.getBonusRate() * getOffHandDamageRatio());
 			}
 			calculationTypes = ArrayUtils.removeElement(calculationTypes, CalculationType.OFF_HAND);
-			return getStat(StatEnum.OFF_HAND_POWER, stat, calculationTypes);
+			return applyStatFunctions(StatEnum.OFF_HAND_POWER, stat, calculationTypes);
 		}
-		return new AdditionStat(StatEnum.OFF_HAND_POWER, 0, owner);
+		return new AdditionStat(StatEnum.PHYSICAL_ATTACK, 0, owner);
 	}
 
 	@Override
@@ -206,14 +206,14 @@ public class PlayerGameStats extends CreatureGameStats<Player> {
 		Item mainHandWeapon = equipment.getMainHandWeapon();
 		if (mainHandWeapon != null) {
 			if (!mainHandWeapon.getItemTemplate().getAttackType().isMagical())
-				return new AdditionStat(StatEnum.MAIN_HAND_POWER, 0, owner);
+				return new AdditionStat(StatEnum.MAGICAL_ATTACK, 0, owner);
 			base = mainHandWeapon.getItemTemplate().getWeaponStats().getMeanDamage();
 			if (ArrayUtils.contains(calculationTypes, CalculationType.APPLY_POWER_SHARD_DAMAGE))
 				base += getPowerShardDamage(true, ArrayUtils.contains(calculationTypes, CalculationType.REMOVE_POWER_SHARD));
 		}
 		Stat2 stat = getStat(StatEnum.MAGICAL_ATTACK, base, calculationTypes);
 		calculationTypes = ArrayUtils.removeElement(calculationTypes, CalculationType.MAIN_HAND);
-		return getStat(StatEnum.MAIN_HAND_POWER, stat, calculationTypes);
+		return applyStatFunctions(StatEnum.MAIN_HAND_POWER, stat, calculationTypes);
 	}
 
 	public Stat2 getOffHandMAttack(CalculationType... calculationTypes) {
@@ -230,9 +230,9 @@ public class PlayerGameStats extends CreatureGameStats<Player> {
 				stat.setBonusRate(stat.getBonusRate() * getOffHandDamageRatio());
 			}
 			calculationTypes = ArrayUtils.removeElement(calculationTypes, CalculationType.OFF_HAND);
-			return getStat(StatEnum.OFF_HAND_POWER, stat, calculationTypes);
+			return applyStatFunctions(StatEnum.OFF_HAND_POWER, stat, calculationTypes);
 		}
-		return new AdditionStat(StatEnum.OFF_HAND_POWER, 0, owner);
+		return new AdditionStat(StatEnum.MAGICAL_ATTACK, 0, owner);
 	}
 
 	@Override
@@ -247,15 +247,15 @@ public class PlayerGameStats extends CreatureGameStats<Player> {
 	}
 
 	public Stat2 getOffHandPCritical() {
-		int base = getStatsTemplate().getPcrit();
 		Equipment equipment = owner.getEquipment();
 		Item offHandWeapon = equipment.getOffHandWeapon();
 		if (offHandWeapon != null && !offHandWeapon.equals(equipment.getMainHandWeapon()) && offHandWeapon.getItemTemplate().isWeapon()
 			&& !offHandWeapon.getItemTemplate().getAttackType().isMagical()) {
+			int base = getStatsTemplate().getPcrit();
 			base += offHandWeapon.getItemTemplate().getWeaponStats().getCritical();
 			return getStat(StatEnum.PHYSICAL_CRITICAL, base);
 		}
-		return new AdditionStat(StatEnum.OFF_HAND_CRITICAL, 0, owner);
+		return new AdditionStat(StatEnum.PHYSICAL_CRITICAL, 0, owner);
 	}
 
 	@Override
@@ -276,7 +276,7 @@ public class PlayerGameStats extends CreatureGameStats<Player> {
 			base += offHandWeapon.getItemTemplate().getWeaponStats().getPhysicalAccuracy();
 			return getStat(StatEnum.PHYSICAL_ACCURACY, base);
 		}
-		return new AdditionStat(StatEnum.OFF_HAND_ACCURACY, 0, owner);
+		return new AdditionStat(StatEnum.PHYSICAL_ACCURACY, 0, owner);
 	}
 
 	@Override

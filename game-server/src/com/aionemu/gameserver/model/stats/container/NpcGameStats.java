@@ -45,8 +45,8 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 	}
 
 	@Override
-	public Stat2 getStat(StatEnum statEnum, Stat2 stat, CalculationType... calculationTypes) {
-		Stat2 s = super.getStat(statEnum, stat, calculationTypes);
+	public Stat2 applyStatFunctions(StatEnum statEnum, Stat2 stat, CalculationType... calculationTypes) {
+		Stat2 s = super.applyStatFunctions(statEnum, stat, calculationTypes);
 		owner.getAi().modifyOwnerStat(s);
 		return s;
 	}
