@@ -12,6 +12,7 @@ import com.aionemu.gameserver.model.templates.item.actions.AbstractItemAction;
 import com.aionemu.gameserver.model.templates.item.actions.DyeAction;
 import com.aionemu.gameserver.model.templates.item.actions.InstanceTimeClear;
 import com.aionemu.gameserver.model.templates.item.actions.MultiReturnAction;
+import com.aionemu.gameserver.model.templates.item.actions.QuestStartAction;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -81,11 +82,13 @@ public class CM_USE_ITEM extends AionClientPacket {
 		if (!PlayerRestrictions.canUseItem(player, item))
 			return;
 
-		HandlerResult result = QuestEngine.getInstance().onItemUseEvent(new QuestEnv(null, player, 0), item);
-
 		List<AbstractItemAction> itemActions = item.getItemTemplate().getActions() == null ? Collections.emptyList()
 			: item.getItemTemplate().getActions().getItemActions();
-		
+
+		// QuestStartAction opens the quest dialog itself (after the casting delay), quest handlers must not open it a second time
+		HandlerResult result = itemActions.stream().anyMatch(a -> a instanceof QuestStartAction) ? HandlerResult.UNKNOWN
+			: QuestEngine.getInstance().onItemUseEvent(new QuestEnv(null, player, 0), item);
+
 		if (itemActions.isEmpty() && result != HandlerResult.SUCCESS) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_IS_NOT_USABLE());
 			return;
@@ -107,7 +110,7 @@ public class CM_USE_ITEM extends AionClientPacket {
 				actions.add(itemAction);
 			}
 		}
-		
+
 		if (actions.isEmpty())
 			return; // notification should be handled in canAct
 

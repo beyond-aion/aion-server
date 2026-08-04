@@ -331,6 +331,12 @@ public class PlayerRestrictions {
 			return false;
 		}
 
+		// Checked before the "no actions" fallback below so a race mismatch reports correctly even without one
+		if (item.getItemTemplate().getRace() != Race.PC_ALL && item.getItemTemplate().getRace() != player.getRace()) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_USE_ITEM_INVALID_RACE());
+			return false;
+		}
+
 		ItemActions itemActions = item.getItemTemplate().getActions();
 		if (itemActions == null || itemActions.getItemActions().isEmpty()) {
 			if (!QuestEngine.getInstance().isRegisteredQuestItem(item.getItemId())) {
@@ -342,11 +348,6 @@ public class PlayerRestrictions {
 		ItemUseLimits limits = item.getItemTemplate().getUseLimits();
 		if (limits.getGenderPermitted() != null && limits.getGenderPermitted() != player.getGender()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_USE_ITEM_INVALID_GENDER());
-			return false;
-		}
-
-		if (item.getItemTemplate().getRace() != Race.PC_ALL && item.getItemTemplate().getRace() != player.getRace()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_USE_ITEM_INVALID_RACE());
 			return false;
 		}
 
