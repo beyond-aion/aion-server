@@ -96,8 +96,11 @@ public class ToyPetSpawnAction extends AbstractItemAction {
 	}
 
 	private void finishUse(Player player, Item parentItem) {
-		if (!canAct(player, parentItem, null))
+		if (!canAct(player, parentItem, null)) {
+			PacketSendUtility.broadcastPacket(player,
+				new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, 2, 0), true);
 			return;
+		}
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_USE_ITEM(parentItem.getL10n()));
 		PacketSendUtility.broadcastPacket(player,
 			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, 1, 1), true);

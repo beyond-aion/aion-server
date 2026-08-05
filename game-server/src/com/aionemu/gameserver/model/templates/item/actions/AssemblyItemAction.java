@@ -68,8 +68,11 @@ public class AssemblyItemAction extends AbstractItemAction {
 			AssemblyItem assemblyItem = getAssemblyItem();
 			Map<Integer, Long> requiredCounts = assemblyItem.getParts().stream().collect(Collectors.groupingBy(id -> id, Collectors.counting()));
 			for (Map.Entry<Integer, Long> requiredCount : requiredCounts.entrySet()) {
-				if (player.getInventory().getItemCountByItemId(requiredCount.getKey()) < requiredCount.getValue())
+				if (player.getInventory().getItemCountByItemId(requiredCount.getKey()) < requiredCount.getValue()) {
+					PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem
+						.getItemTemplate().getTemplateId(), 0, 2, 0), true);
 					return;
+				}
 			}
 			for (Integer itemId : assemblyItem.getParts()) {
 				player.getInventory().decreaseByItemId(itemId, 1);

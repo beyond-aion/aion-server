@@ -151,21 +151,28 @@ public class ApExtractAction extends AbstractItemAction {
 	}
 
 	private void finishUse(Player player, Item parentItem, Item targetItem) {
+		boolean success = extractAp(player, parentItem, targetItem);
+		PacketSendUtility.broadcastPacket(player,
+			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, success ? 1 : 2, 0), true);
+	}
+
+	private boolean extractAp(Player player, Item parentItem, Item targetItem) {
 		if (!canAct(player, parentItem, targetItem))
-			return;
+			return false;
 		Acquisition acquisition = targetItem.getItemTemplate().getAcquisition();
 		if (acquisition == null || acquisition.getRequiredAp() == 0)
-			return;
+			return false;
 		Storage inventory = player.getInventory();
 		if (inventory.getItemByObjId(parentItem.getObjectId()) == null || inventory.getItemByObjId(targetItem.getObjectId()) == null) {
 			AuditLogger.log(player, "possibly using item AP extraction hack");
-			return;
+			return false;
 		}
 		int ap = (int) (acquisition.getRequiredAp() * rate);
 		inventory.decreaseByObjectId(parentItem.getObjectId(), 1);
 		inventory.delete(targetItem);
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_AP_DECOMPOSE_ITEM_SUCCEED(targetItem.getL10n()));
 		AbyssPointsService.addAp(player, ap, SM_SYSTEM_MESSAGE::STR_MSG_AP_DECOMPOSE_ITEM_SUCCEED_AP);
+		return true;
 	}
 
 	public UseTarget getTarget() {
