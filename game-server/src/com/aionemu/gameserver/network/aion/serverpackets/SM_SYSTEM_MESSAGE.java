@@ -26152,8 +26152,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * The level of %0 is below %1. No Abyss Points can be obtained.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_MSG_AP_DECOMPOSE_WRONG_LEVEL(String itemL10n, int levelRequired) {
-		return new SM_SYSTEM_MESSAGE(1401641, itemL10n, levelRequired);
+	public static SM_SYSTEM_MESSAGE STR_MSG_AP_DECOMPOSE_WRONG_LEVEL(String extractItemL10n, String targetItemL10n) {
+		return new SM_SYSTEM_MESSAGE(1401641, extractItemL10n, targetItemL10n);
 	}
 
 	/**
