@@ -5,6 +5,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
+import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Item;
@@ -12,6 +13,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.SkillLearnService;
+import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -51,12 +53,17 @@ public class SkillLearnAction extends AbstractItemAction {
 
 	@Override
 	public void act(Player player, Item parentItem, Item targetItem, Object... params) {
-		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_USE_ITEM(parentItem.getL10n()));
 		PacketSendUtility.broadcastPacket(player,
 			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId()), true);
 
-		// add skill
+		// add skill; SM_SKILL_LIST's embedded messageId alone doesn't show the "you learned" toast for these items, so send it explicitly
 		SkillLearnService.learnSkillBook(player, skillid);
+
+		SkillTemplate skillTemplate = DataManager.SKILL_DATA.getSkillTemplate(skillid);
+		PacketSendUtility.sendPacket(player,
+			SM_SYSTEM_MESSAGE.STR_SKILL_LEARNED_NEW_SKILL(skillTemplate.getL10n(), String.valueOf(skillTemplate.getLvl())));
+
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_USE_ITEM(parentItem.getL10n()));
 
 		// remove book from inventory (assuming its not stackable)
 		Item item = player.getInventory().getItemByObjId(parentItem.getObjectId());

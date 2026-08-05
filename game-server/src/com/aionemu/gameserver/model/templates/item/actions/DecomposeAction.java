@@ -173,7 +173,7 @@ public class DecomposeAction extends AbstractItemAction {
 	private void finishUse(final Player player, Item parentItem, Item targetItem, ExtractedItemsCollection selectedCollection) {
 		boolean validAction = postValidate(player, parentItem, targetItem);
 		if (validAction) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_SUCCEED(parentItem.getL10n()));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_UNCOMPRESS_COMPRESSED_ITEM_SUCCEEDED(parentItem.getL10n()));
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_USE_ITEM(parentItem.getL10n()));
 			for (ResultedItem resultItem : selectedCollection.getItems()) {
 				if (resultItem.isObtainableFor(player)) {

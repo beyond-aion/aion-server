@@ -24,12 +24,13 @@ public class CraftLearnAction extends AbstractItemAction {
 
 	@Override
 	public void act(Player player, Item parentItem, Item targetItem, Object... params) {
-		if (player.getInventory().decreaseByObjectId(parentItem.getObjectId(), 1)) {
-			if (RecipeService.addRecipe(player, recipeid, false)) {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_USE_ITEM(parentItem.getL10n()));
-				PacketSendUtility.sendPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate()
-					.getTemplateId()));
-			}
+		if (!player.getInventory().decreaseByObjectId(parentItem.getObjectId(), 1))
+			return;
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_USE_ITEM(parentItem.getL10n()));
+		// client shows the "you learned" toast from this
+		if (RecipeService.addRecipe(player, recipeid, false)) {
+			PacketSendUtility.sendPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate()
+				.getTemplateId()));
 		}
 	}
 
