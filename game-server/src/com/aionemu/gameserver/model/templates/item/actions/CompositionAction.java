@@ -1,9 +1,5 @@
 package com.aionemu.gameserver.model.templates.item.actions;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
-
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -12,21 +8,12 @@ import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- * Created with IntelliJ IDEA. User: pixfid Date: 7/14/13 Time: 5:18 PM
+ * Handles combining two enchantment stones into one via {@code CM_COMPOSITE_STONES}. Not part of the regular
+ * item-use flow (retail has no server-side marker for this on the combination tool item, the client alone knows to
+ * send this packet for it), so unlike other item actions this isn't XML-bound and isn't invoked through
+ * {@link AbstractItemAction}.
  */
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "CompositionAction")
-public class CompositionAction extends AbstractItemAction {
-
-	@Override
-	public boolean canAct(Player player, Item parentItem, Item targetItem, Object... params) {
-		return false;
-	}
-
-	@Override
-	public void act(Player player, Item parentItem, Item targetItem, Object... params) {
-
-	}
+public class CompositionAction {
 
 	public boolean canAct(Player player, Item tools, Item first, Item second) {
 
