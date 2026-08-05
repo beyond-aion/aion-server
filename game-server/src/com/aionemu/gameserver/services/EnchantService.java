@@ -66,8 +66,8 @@ public class EnchantService {
 		else
 			stoneId = 166000191; // Alpha
 
-		if (inventory.delete(targetItem) != null) {
-			if (inventory.decreaseByObjectId(parentItem.getObjectId(), 1)) {
+		if (inventory.decreaseByObjectId(parentItem.getObjectId(), 1)) {
+			if (inventory.delete(targetItem) != null) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_SUCCEED(targetItem.getL10n()));
 				ItemService.addItem(player, stoneId, itemTemplate.isWeapon() ? Rnd.get(2, 5) : Rnd.get(1, 3));
 			}
@@ -396,10 +396,10 @@ public class EnchantService {
 	}
 
 	public static boolean socketManastoneAct(Player player, Item parentItem, Item targetItem, Item supplementItem, int targetWeapon, boolean result) {
-		// Decrease required supplements
-		player.updateSupplements();
 		if (!player.getInventory().decreaseByObjectId(parentItem.getObjectId(), 1))
 			return false;
+		// Decrease required supplements
+		player.updateSupplements();
 		if (result) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_OPTION_SUCCEED(targetItem.getL10n()));
 

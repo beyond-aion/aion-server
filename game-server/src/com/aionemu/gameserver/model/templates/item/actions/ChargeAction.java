@@ -42,10 +42,9 @@ public class ChargeAction extends AbstractItemAction {
 	@Override
 	public void act(final Player player, Item parentItem, Item targetItem, Object... params) {
 		int chargeWay = parentItem.getImprovement().getChargeWay();
-		Collection<Item> conditioningItems = ItemChargeService.filterItemsToCondition(player, null, chargeWay);
 		int castingDelay = parentItem.getItemTemplate().getCastingDelay();
 		if (castingDelay <= 0) {
-			finishUse(player, parentItem, conditioningItems);
+			finishUse(player, parentItem, chargeWay);
 			return;
 		}
 		PacketSendUtility.broadcastPacket(player,
@@ -68,15 +67,17 @@ public class ChargeAction extends AbstractItemAction {
 		player.getObserveController().attach(observer);
 		player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(() -> {
 			player.getObserveController().removeObserver(observer);
-			finishUse(player, parentItem, conditioningItems);
+			finishUse(player, parentItem, chargeWay);
 		}, castingDelay));
 	}
-	
-	private void finishUse(Player player, Item parentItem, Collection<Item> conditioningItems) {
+
+	private void finishUse(Player player, Item parentItem, int chargeWay) {
 		PacketSendUtility.broadcastPacket(player,
 			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, 1, 0), true);
 		if (!player.getInventory().decreaseByObjectId(parentItem.getObjectId(), 1))
 			return;
+		// re-evaluate at finish time instead of reusing the collection from cast-start, in case equipment changed during the cast
+		Collection<Item> conditioningItems = ItemChargeService.filterItemsToCondition(player, null, chargeWay);
 		ItemChargeService.chargeItems(player, conditioningItems, maxChargeLevel, false, false);
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_USE_ITEM(parentItem.getL10n()));
 	}

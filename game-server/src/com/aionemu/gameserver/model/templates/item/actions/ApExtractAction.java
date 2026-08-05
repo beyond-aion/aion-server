@@ -48,7 +48,7 @@ public class ApExtractAction extends AbstractItemAction {
 			return false;
 		}
 
-		UseTarget type = null;
+		UseTarget type;
 		switch (targetItem.getItemTemplate().getItemGroup()) {
 			case SWORD:
 			case DAGGER:

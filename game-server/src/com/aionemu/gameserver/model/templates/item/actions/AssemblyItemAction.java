@@ -1,5 +1,8 @@
 package com.aionemu.gameserver.model.templates.item.actions;
 
+import java.util.Map;
+import java.util.stream.Collectors;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -63,10 +66,13 @@ public class AssemblyItemAction extends AbstractItemAction {
 		player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(() -> {
 			player.getObserveController().removeObserver(observer);
 			AssemblyItem assemblyItem = getAssemblyItem();
-			for (Integer itemId : assemblyItem.getParts()) {
-				if (!player.getInventory().decreaseByItemId(itemId, 1)) {
+			Map<Integer, Long> requiredCounts = assemblyItem.getParts().stream().collect(Collectors.groupingBy(id -> id, Collectors.counting()));
+			for (Map.Entry<Integer, Long> requiredCount : requiredCounts.entrySet()) {
+				if (player.getInventory().getItemCountByItemId(requiredCount.getKey()) < requiredCount.getValue())
 					return;
-				}
+			}
+			for (Integer itemId : assemblyItem.getParts()) {
+				player.getInventory().decreaseByItemId(itemId, 1);
 			}
 			PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem
 				.getItemTemplate().getTemplateId(), 0, 1, 0), true);

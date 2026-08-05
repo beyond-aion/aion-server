@@ -75,16 +75,16 @@ public class InstanceTimeClear extends AbstractItemAction {
 	}
 
 	private void finishUse(Player player, Item parentItem, int syncId) {
+		int worldId = DataManager.INSTANCE_COOLTIME_DATA.getWorldId(syncId);
+		PortalCooldown portalCD = player.getPortalCooldownList().getPortalCooldown(worldId);
+		if (portalCD == null || portalCD.getEnterCount() < 1)
+			return; // cooldown state changed during the cast, or nothing to clear - don't consume the item for nothing
+
 		if (parentItem.getActivationCount() > 1) {
 			parentItem.setActivationCount(parentItem.getActivationCount() - 1);
 		} else {
 			player.getInventory().decreaseByObjectId(parentItem.getObjectId(), 1);
 		}
-
-		int worldId = DataManager.INSTANCE_COOLTIME_DATA.getWorldId(syncId);
-		PortalCooldown portalCD = player.getPortalCooldownList().getPortalCooldown(worldId);
-		if (portalCD == null || portalCD.getEnterCount() < 1)
-			return; // don't spam with not needed packets!
 
 		portalCD.decreaseEnterCount();
 		if (portalCD.getEnterCount() < 1)
