@@ -29,7 +29,14 @@ public class ChargeAction extends AbstractItemAction {
 
 	@Override
 	public boolean canAct(Player player, Item parentItem, Item targetItem, Object... params) {
-		return !ItemChargeService.filterItemsToCondition(player, null, parentItem.getImprovement().getChargeWay()).isEmpty();
+		int chargeWay = parentItem.getImprovement().getChargeWay();
+		if (!ItemChargeService.filterItemsToCondition(player, null, chargeWay).isEmpty())
+			return true;
+		if (chargeWay == 1)
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ITEM_CHARGE_ALL_FAIL_NO_CHARGEABLE_EQUIPMENT());
+		else
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ITEM_CHARGE2_ALL_FAIL_NO_CHARGEABLE_EQUIPMENT());
+		return false;
 	}
 
 	@Override
@@ -71,6 +78,7 @@ public class ChargeAction extends AbstractItemAction {
 		if (!player.getInventory().decreaseByObjectId(parentItem.getObjectId(), 1))
 			return;
 		ItemChargeService.chargeItems(player, conditioningItems, maxChargeLevel, false, false);
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_USE_ITEM(parentItem.getL10n()));
 	}
 
 }

@@ -136,6 +136,7 @@ public class RideAction extends AbstractItemAction {
 	}
 
 	private void finishUse(Player player, Item parentItem) {
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_USE_ITEM(parentItem.getL10n()));
 		player.unsetState(CreatureState.ACTIVE);
 		player.setState(CreatureState.RESTING);
 		if (player.isInFlyingState())

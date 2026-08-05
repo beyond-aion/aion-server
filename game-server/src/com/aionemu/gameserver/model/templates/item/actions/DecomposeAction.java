@@ -174,6 +174,7 @@ public class DecomposeAction extends AbstractItemAction {
 		boolean validAction = postValidate(player, parentItem, targetItem);
 		if (validAction) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_SUCCEED(parentItem.getL10n()));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_USE_ITEM(parentItem.getL10n()));
 			for (ResultedItem resultItem : selectedCollection.getItems()) {
 				if (resultItem.isObtainableFor(player)) {
 					int count = Rnd.get(resultItem.getMinCount(), resultItem.getMaxCount());

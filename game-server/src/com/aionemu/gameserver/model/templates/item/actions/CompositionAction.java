@@ -7,7 +7,9 @@ import javax.xml.bind.annotation.XmlType;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.item.ItemService;
+import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * Created with IntelliJ IDEA. User: pixfid Date: 7/14/13 Time: 5:18 PM
@@ -48,6 +50,7 @@ public class CompositionAction extends AbstractItemAction {
 		boolean result1 = player.getInventory().decreaseByItemId(first.getItemId(), 1);
 		boolean result2 = player.getInventory().decreaseByItemId(second.getItemId(), 1);
 		if (result && result1 && result2) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMPOUND_SUCCESS(second.getL10n(), first.getL10n()));
 			ItemService.addItem(player, getItemId(calcLevel(first.getItemTemplate().getLevel(), second.getItemTemplate().getLevel())), 1);
 		}
 	}
