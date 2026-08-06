@@ -32,6 +32,7 @@ public class Summon extends Creature {
 
 	private final Player master;
 	private SummonMode mode = SummonMode.GUARD;
+	private SummonMode modeBeforeRelease;
 	private final Queue<SkillOrder> skillOrders = new ConcurrentLinkedQueue<>();
 	private SummonRelease pendingRelease;
 	private SkillElement alwaysResistElement = SkillElement.NONE;
@@ -114,9 +115,19 @@ public class Summon extends Creature {
 		return mode;
 	}
 
+	/**
+	 * @return The mode to report to the master's client, hiding a pending release the master was never told about (see
+	 *         {@link com.aionemu.gameserver.services.summons.SummonsService SummonsService}'s handling of {@link com.aionemu.gameserver.model.summons.UnsummonType#isCancelableByMaster()}).
+	 */
+	public SummonMode getVisibleMode() {
+		return isReleaseUncancelable() ? modeBeforeRelease : mode;
+	}
+
 	public void setMode(SummonMode mode) {
 		if (mode != SummonMode.ATTACK)
 			clearSkillOrders();
+		if (mode == SummonMode.RELEASE && this.mode != SummonMode.RELEASE)
+			modeBeforeRelease = this.mode;
 		this.mode = mode;
 	}
 
