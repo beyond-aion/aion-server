@@ -68,51 +68,55 @@ public class TamperingAction extends AbstractItemAction {
 					return;
 				}
 
+				int maxTemp = targetItem.getItemTemplate().getMaxTampering();
+				if (targetItem.getTempering() >= maxTemp) {
+					PacketSendUtility.broadcastPacketAndReceive(player,
+						new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parntObjectId, parentItemId, 0, 2, 0));
+					return;
+				}
+
 				if (!player.getInventory().decreaseByObjectId(parntObjectId, 1)) {
 					PacketSendUtility.broadcastPacketAndReceive(player,
 						new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parntObjectId, parentItemId, 0, 2, 0));
 					return;
 				}
 
-				int maxTemp = targetItem.getItemTemplate().getMaxTampering();
-				if (targetItem.getTempering() < maxTemp) {
-					float temperingChance = calculateChance(player, targetItem);
-					if (Rnd.chance() < temperingChance) {
-						setTemperingLevel(targetItem, player, targetItem.getTempering() + 1);
-						PacketSendUtility.sendPacket(player,
-							SM_SYSTEM_MESSAGE.STR_MSG_ITEM_AUTHORIZE_SUCCEEDED(targetItem.getL10n(), targetItem.getTempering()));
-						PacketSendUtility.broadcastPacketAndReceive(player,
-							new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parntObjectId, parentItemId, 0, 1, 0));
+				float temperingChance = calculateChance(player, targetItem);
+				if (Rnd.chance() < temperingChance) {
+					setTemperingLevel(targetItem, player, targetItem.getTempering() + 1);
+					PacketSendUtility.sendPacket(player,
+						SM_SYSTEM_MESSAGE.STR_MSG_ITEM_AUTHORIZE_SUCCEEDED(targetItem.getL10n(), targetItem.getTempering()));
+					PacketSendUtility.broadcastPacketAndReceive(player,
+						new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parntObjectId, parentItemId, 0, 1, 0));
 
-						if (CustomConfig.ENABLE_ENCHANT_ANNOUNCE && targetItem.getTempering() == 10) {
-							PacketSendUtility.broadcastToWorld(
-								SM_SYSTEM_MESSAGE.STR_MSG_ITEM_AUTHORIZE_SUCCEEDED_MAX(player.getName(), targetItem.getItemTemplate().getL10n(),
-									targetItem.getTempering()),
-								Predicates.Players.sameRace(player));
-						}
-
-						if (LoggingConfig.LOG_TAMPERING)
-							log.info("Player " + player.getName() + " successfully tampered item " + targetItem.getItemId() + "(" + targetItem.getObjectId()
-								+ ") to level " + targetItem.getTempering());
-					} else {
-						setTemperingLevel(targetItem, player, 0);
-						if (targetItem.getItemTemplate().getItemGroup() == ItemGroup.PLUME) {
-							PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ITEM_AUTHORIZE_FAILED_TSHIRT(targetItem.getL10n()));
-							PacketSendUtility.broadcastPacketAndReceive(player,
-								new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parntObjectId, parentItemId, 0, 2, 0));
-							if (targetItem.isEquipped())
-								player.getEquipment().decreaseEquippedItemCount(targetItem.getObjectId(), 1);
-							else
-								player.getInventory().decreaseByObjectId(targetItem.getObjectId(), 1);
-						} else {
-							PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ITEM_AUTHORIZE_FAILED(targetItem.getL10n()));
-							PacketSendUtility.broadcastPacketAndReceive(player,
-								new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parntObjectId, parentItemId, 0, 2, 0));
-						}
-
-						if (LoggingConfig.LOG_TAMPERING)
-							log.info("Player " + player.getName() + " failed to tamper item " + targetItem.getItemId() + "(" + targetItem.getObjectId() + ").");
+					if (CustomConfig.ENABLE_ENCHANT_ANNOUNCE && targetItem.getTempering() == 10) {
+						PacketSendUtility.broadcastToWorld(
+							SM_SYSTEM_MESSAGE.STR_MSG_ITEM_AUTHORIZE_SUCCEEDED_MAX(player.getName(), targetItem.getItemTemplate().getL10n(),
+								targetItem.getTempering()),
+							Predicates.Players.sameRace(player));
 					}
+
+					if (LoggingConfig.LOG_TAMPERING)
+						log.info("Player {} successfully tampered item {}({}) to level {}", player.getName(), targetItem.getItemId(), targetItem.getObjectId(),
+							targetItem.getTempering());
+				} else {
+					setTemperingLevel(targetItem, player, 0);
+					if (targetItem.getItemTemplate().getItemGroup() == ItemGroup.PLUME) {
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ITEM_AUTHORIZE_FAILED_TSHIRT(targetItem.getL10n()));
+						PacketSendUtility.broadcastPacketAndReceive(player,
+							new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parntObjectId, parentItemId, 0, 2, 0));
+						if (targetItem.isEquipped())
+							player.getEquipment().decreaseEquippedItemCount(targetItem.getObjectId(), 1);
+						else
+							player.getInventory().decreaseByObjectId(targetItem.getObjectId(), 1);
+					} else {
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ITEM_AUTHORIZE_FAILED(targetItem.getL10n()));
+						PacketSendUtility.broadcastPacketAndReceive(player,
+							new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parntObjectId, parentItemId, 0, 2, 0));
+					}
+
+					if (LoggingConfig.LOG_TAMPERING)
+						log.info("Player {} failed to tamper item {}({}).", player.getName(), targetItem.getItemId(), targetItem.getObjectId());
 				}
 			}
 

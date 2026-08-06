@@ -136,6 +136,11 @@ public class RideAction extends AbstractItemAction {
 	}
 
 	private void finishUse(Player player, Item parentItem) {
+		if (!canAct(player, parentItem, null)) {
+			PacketSendUtility.broadcastPacket(player,
+				new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, 3, 0), true);
+			return;
+		}
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_USE_ITEM(parentItem.getL10n()));
 		player.unsetState(CreatureState.ACTIVE);
 		player.setState(CreatureState.RESTING);
