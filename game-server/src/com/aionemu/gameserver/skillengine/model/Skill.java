@@ -353,9 +353,8 @@ public class Skill {
 	}
 
 	private int calculateCastDuration() {
-		if (this.getItemTemplate() != null) {
+		if (this.getItemTemplate() != null)
 			return this.getItemTemplate().getCastingDelay();
-		}
 		//2nd+ time of multicast-skill activation
 		if (getMultiCastCount() > 0)
 			return 0;

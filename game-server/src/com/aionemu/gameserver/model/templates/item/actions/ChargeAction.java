@@ -97,6 +97,12 @@ public class ChargeAction extends AbstractItemAction {
 	}
 
 	private void finishUse(Player player, Item parentItem, Item targetItem) {
+		if (targetItem != null && player.getInventory().getItemByObjId(targetItem.getObjectId()) == null && !targetItem.isEquipped()) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ENCHANT_ITEM_NO_TARGET_ITEM());
+			PacketSendUtility.broadcastPacket(player,
+				new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, 2, 0), true);
+			return;
+		}
 		PacketSendUtility.broadcastPacket(player,
 			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, 1, 0), true);
 		Collection<Item> conditioningItems = getConditioningItems(player, parentItem, targetItem);

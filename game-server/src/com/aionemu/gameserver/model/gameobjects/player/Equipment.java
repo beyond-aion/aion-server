@@ -740,7 +740,7 @@ public class Equipment implements Persistable {
 							new SM_ITEM_USAGE_ANIMATION(responder.getObjectId(), item.getObjectId(), item.getItemId(), 0, 8), true);
 					}
 				};
-				
+
 				responder.getObserveController().attach(observer);
 
 				// item usage animation

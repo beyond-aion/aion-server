@@ -83,7 +83,7 @@ public class RideAction extends AbstractItemAction {
 			final ItemUseObserver observer = new ItemUseObserver() {
 				@Override
 				public void abort() {
-					player.getController().cancelUseItem();
+					player.getController().cancelUseItem(false);
 					player.removeItemCoolDown(parentItem.getItemTemplate().getUseLimits().getDelayId());
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_CANCELED());
 					PacketSendUtility.broadcastPacket(player,

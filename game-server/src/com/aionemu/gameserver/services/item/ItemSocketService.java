@@ -161,7 +161,7 @@ public class ItemSocketService {
 			AuditLogger.log(player, "tried to insert godstone in not compatible item " + weapon.getItemId());
 			return;
 		}
-		
+
 		final ItemUseObserver observer = new ItemUseObserver() {
 			@Override
 			public void abort() {

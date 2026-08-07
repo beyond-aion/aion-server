@@ -543,7 +543,7 @@ public class PlayerController extends CreatureController<Player> {
 	public void cancelUseItem() {
 		cancelUseItem(true);
 	}
-	
+
 	public void cancelUseItem(boolean sendCancelAnimation) {
 		Player player = getOwner();
 		Item usingItem = player.getUsingItem();

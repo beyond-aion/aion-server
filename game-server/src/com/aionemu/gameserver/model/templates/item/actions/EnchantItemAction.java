@@ -89,7 +89,7 @@ public class EnchantItemAction extends AbstractItemAction {
 
 		boolean isEnchantmentStone = parentItem.getItemTemplate().getItemGroup() == ItemGroup.ENCHANTMENT;
 		int enchantDurationMillis = isEnchantmentStone ? 4000 : 2000;
-		
+
 		final ItemUseObserver observer = new ItemUseObserver() {
 			@Override
 			public void abort() {
