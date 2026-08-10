@@ -121,25 +121,25 @@ public abstract class CreatureGameStats<T extends Creature> {
 
 	public Stat2 getStat(StatEnum statEnum, float base, CalculationType... calculationTypes) {
 		Stat2 stat = new AdditionStat(statEnum, base, owner);
-		return getStat(statEnum, stat, calculationTypes);
+		return applyStatFunctions(statEnum, stat, calculationTypes);
 	}
 
 	public Stat2 getStat(StatEnum statEnum, float base, float bonusRate, CalculationType... calculationTypes) {
 		Stat2 stat = new AdditionStat(statEnum, base, owner, bonusRate);
-		return getStat(statEnum, stat, calculationTypes);
+		return applyStatFunctions(statEnum, stat, calculationTypes);
 	}
 
 	public Stat2 getReverseStat(StatEnum statEnum, float base) {
 		Stat2 stat = new ReverseStat(statEnum, base, owner);
-		return getStat(statEnum, stat);
+		return applyStatFunctions(statEnum, stat);
 	}
 
 	public Stat2 getReverseStat(StatEnum statEnum, float base, float bonusRate) {
 		Stat2 stat = new ReverseStat(statEnum, base, owner, bonusRate);
-		return getStat(statEnum, stat);
+		return applyStatFunctions(statEnum, stat);
 	}
 
-	public Stat2 getStat(StatEnum statEnum, Stat2 stat, CalculationType... calculationTypes) {
+	public Stat2 applyStatFunctions(StatEnum statEnum, Stat2 stat, CalculationType... calculationTypes) {
 		List<IStatFunction> functions = getStatsSorted(statEnum);
 		if (functions != null) {
 			for (IStatFunction func : functions) {

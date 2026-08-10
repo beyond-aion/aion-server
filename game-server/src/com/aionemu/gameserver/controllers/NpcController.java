@@ -85,11 +85,11 @@ public class NpcController extends CreatureController<Npc> {
 					if (getOwner().getTarget() == null)
 						getOwner().getAi().think(); // resume walking or reset heading
 				}, 750);
-			} else {
-				if (newTarget != null && !getOwner().equals(newTarget))
-					getOwner().getPosition().setH(PositionUtil.getHeadingTowards(getOwner(), newTarget));
-				PacketSendUtility.broadcastPacket(getOwner(), new SM_LOOKATOBJECT(getOwner()));
+			} else if (newTarget != null && !getOwner().equals(newTarget)) {
+				getOwner().getPosition().setH(PositionUtil.getHeadingTowards(getOwner(), newTarget));
 			}
+			// broadcast NPC's current target and heading
+			PacketSendUtility.broadcastPacket(getOwner(), new SM_LOOKATOBJECT(getOwner()));
 		}
 	}
 

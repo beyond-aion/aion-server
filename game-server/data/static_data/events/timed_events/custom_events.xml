@@ -26,8 +26,8 @@
 			</buff>
 		</buffs>
 	</event>
-	<event name="Increased XP Rates" start="2026-04-02T00:00:00" end="2026-04-03T23:59:59">
-		<login_message>Benefit from increased XP until Friday!</login_message>
+	<event name="Increased XP Rates" start="2026-08-03T00:00:00" end="2026-08-09T23:59:59">
+		<login_message>Benefit from increased XP until Sunday!</login_message>
 		<buffs>
 			<!-- [Event] Marvelous XP Energy (XP +100%) -->
 			<buff skill_ids="10821" permanent="true">
@@ -35,8 +35,8 @@
 			</buff>
 		</buffs>
 	</event>
-	<event name="Increased AP Rates" start="2026-04-06T00:00:00" end="2026-04-07T23:59:59">
-		<login_message>Benefit from increased AP until Tuesday!</login_message>
+	<event name="Increased AP Rates" start="2026-08-03T00:00:00" end="2026-08-09T23:59:59">
+		<login_message>Benefit from increased AP until Sunday!</login_message>
 		<buffs>
 			<!-- AP Boost Effect - 30% -->
 			<buff skill_ids="10925" permanent="true">
@@ -54,7 +54,7 @@
 			</buff>
 		</buffs>
 	</event>
-	<event name="Increased Drop Rates" start="2025-03-22T00:00:00" end="2025-03-23T23:59:59">
+	<event name="Increased Drop Rates" start="2026-08-10T00:00:00" end="2026-08-16T23:59:59">
 		<login_message>Benefit from increased drop rates until Sunday!</login_message>
 		<buffs>
 			<!-- [Event] Marvelous Item Energy (Drop Boost +20%) -->
@@ -64,7 +64,7 @@
 		</buffs>
 	</event>
 	<event name="Increased Drop Rates 50%" start="2025-08-08T00:00:00" end="2025-08-14T23:59:59">
-		<login_message>Benefit from increased drop rates until next Thursday!</login_message>
+		<login_message>Benefit from increased drop rates until Sunday!</login_message>
 		<buffs>
 			<!-- [Event] Powerful Item Energy (Drop Boost +50%) -->
 			<buff skill_ids="10826" permanent="true">
@@ -72,14 +72,21 @@
 			</buff>
 		</buffs>
 	</event>
-	<event name="Increased Gather Count" start="2026-04-04T00:00:00" end="2026-04-05T23:59:59">
+	<event name="Increased Gather Count" start="2026-08-17T00:00:00" end="2026-08-23T23:59:59">
 		<login_message>Benefit from increased gather count until Sunday!</login_message>
 		<config_properties>
 			<property>gameserver.rates.gathering.count = 4</property>
 		</config_properties>
 	</event>
-	<event name="Increased Crafting Crit Rate" start="2026-04-05T00:00:00" end="2026-04-05T23:59:59">
-		<login_message>Take advantage of the inreased crafting crit rate today only!</login_message>
+	<event name="Increased Enchantment Rate" start="2026-08-16T00:00:00" end="2026-08-16T23:59:59">
+		<login_message>Benefit from increased enchantment rate. But only today!</login_message>
+		<config_properties>
+			<property>gameserver.rates.enchantment_stone.base_chances = 73</property>
+			<property>gameserver.rates.enchantment_stone.amplified_chances = 55</property>
+		</config_properties>
+	</event>
+	<event name="Increased Crafting Crit Rate" start="2026-08-17T00:00:00" end="2026-08-23T23:59:59">
+		<login_message>Take advantage of the inreased crafting crit rate until Sunday!</login_message>
 		<config_properties>
 			<property>gameserver.rates.crafting.crit_chances = 50</property>
 			<property>gameserver.rates.crafting.combo_crit_chances = 50</property>

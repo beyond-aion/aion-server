@@ -3174,7 +3174,7 @@
 		</spawns>
 	</event>
 	<!-- https://web.archive.org/web/20140802060910/http://na.aiononline.com/en/news/events/07302014-the-summer-block-party-returns.php -->
-	<event name="Summer Block Party" start="2025-08-01T00:00:00" end="2025-08-24T23:59:59">
+	<event name="Summer Block Party" start="2026-08-03T00:00:00" end="2026-08-23T23:59:59">
 		<quests>
 			<maintainable>80351 80352 80359 80360 80361 80368</maintainable>
 		</quests>
@@ -3413,7 +3413,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Summer Block Party Part 1" start="2025-08-01T00:00:00" end="2025-08-07T23:59:59">
+	<event name="Summer Block Party Part 1" start="2026-08-03T00:00:00" end="2026-08-09T23:59:59">
 		<quests>
 			<maintainable>80353 80356 80359 80362 80365 80368</maintainable>
 		</quests>
@@ -3443,7 +3443,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Summer Block Party Part 2" start="2025-08-08T00:00:00" end="2025-08-14T23:59:59">
+	<event name="Summer Block Party Part 2" start="2026-08-10T00:00:00" end="2026-08-16T23:59:59">
 		<quests>
 			<maintainable>80354 80357 80359 80363 80366 80368</maintainable>
 		</quests>
@@ -3472,7 +3472,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Summer Block Party Part 3" start="2025-08-15T00:00:00" end="2025-08-24T23:59:59">
+	<event name="Summer Block Party Part 3" start="2026-08-17T00:00:00" end="2026-08-23T23:59:59">
 		<quests>
 			<maintainable>80355 80358 80359 80364 80367 80368</maintainable>
 		</quests>
@@ -3501,7 +3501,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Summer Block Party Part 4" start="2025-08-25T00:00:00" end="2025-08-28T23:59:59">
+	<event name="Summer Block Party Part 4" start="2026-08-24T00:00:00" end="2026-08-27T23:59:59">
 		<quests>
 			<maintainable>80359 80368</maintainable>
 		</quests>
@@ -3531,7 +3531,7 @@
 		</spawns>
 	</event>
 	<!-- https://web.archive.org/web/20140912125551/http://na.aiononline.com/en/news/events/08272014-the-alchemy-event-returns.php -->
-	<event name="Alchemy Event" start="2024-04-12T00:00:00" end="2024-04-21T23:59:59">
+	<event name="Alchemy Event" start="2026-07-13T00:00:00" end="2026-07-19T23:59:59">
 		<quests>
 			<maintainable>80344</maintainable>
 		</quests>

@@ -39,8 +39,7 @@ public class StatCapUtil {
 			register(stat, 0, 700);
 		for (StatEnum stat : List.of(POWER, AGILITY, ACCURACY, HEALTH, KNOWLEDGE, WILL))
 			register(stat, 80, 999);
-		for (StatEnum stat : List.of(MAIN_HAND_POWER, MAIN_HAND_ACCURACY, MAIN_HAND_CRITICAL, OFF_HAND_POWER, OFF_HAND_ACCURACY, OFF_HAND_CRITICAL,
-			PHYSICAL_DEFENSE, PHYSICAL_ACCURACY, MAGICAL_ACCURACY))
+		for (StatEnum stat : List.of(PHYSICAL_ATTACK, PHYSICAL_DEFENSE, PHYSICAL_ACCURACY, MAGICAL_ACCURACY))
 			register(stat, 0, CapFunction.UNLIMITED_UPPER);
 		for (StatEnum stat : List.of(WATER_RESISTANCE, FIRE_RESISTANCE, EARTH_RESISTANCE, WIND_RESISTANCE, DARK_RESISTANCE, LIGHT_RESISTANCE))
 			register(stat, creature -> -getElementalDefenseCapForCreature(creature), StatCapUtil::getElementalDefenseCapForCreature);

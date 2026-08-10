@@ -73,9 +73,10 @@ public class Wish extends ConsoleCommand {
 			String objectName = visibleObject.getObjectTemplate().getName();
 			sendInfo(admin, objectName + " spawned");
 		} else { // add item
-			if (!(admin.getTarget() instanceof Player player)) {
-				PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_INVALID_TARGET());
-				return;
+			Player target = admin;
+
+			if (admin.getTarget() instanceof Player targetPlayer){
+				target = targetPlayer;
 			}
 
 			String itemName = params[0];
@@ -98,7 +99,7 @@ public class Wish extends ConsoleCommand {
 
 			if (itemTemplate != null) {
 				itemId = itemTemplate.getTemplateId();
-				if (!AdminService.getInstance().canOperate(admin, player, itemId, "command ///wish"))
+				if (!AdminService.getInstance().canOperate(admin, target, itemId, "command ///wish"))
 					return;
 
 				long addedCount;
@@ -120,17 +121,17 @@ public class Wish extends ConsoleCommand {
 					} else {
 						newItem.setTempering(enchant);
 					}
-					addedCount = addCount - ItemService.addItem(player, newItem);
+					addedCount = addCount - ItemService.addItem(target, newItem);
 				} else {
-					addedCount = addCount - ItemService.addItem(player, itemId, addCount, true);
+					addedCount = addCount - ItemService.addItem(target, itemId, addCount, true);
 				}
 
 				if (addedCount <= 0) {
 					sendInfo(admin, "Item couldn't be added");
 				} else {
-					if (!admin.equals(player)) {
-						sendInfo(admin, "You gave " + addedCount + " " + ChatUtil.item(itemId) + " to " + player.getName() + ".");
-						sendInfo(player, "You received " + addedCount + " " + ChatUtil.item(itemId) + " from " + admin.getName() + ".");
+					if (!admin.equals(target)) {
+						sendInfo(admin, "You gave " + addedCount + " " + ChatUtil.item(itemId) + " to " + target.getName() + ".");
+						sendInfo(target, "You received " + addedCount + " " + ChatUtil.item(itemId) + " from " + admin.getName() + ".");
 					}
 				}
 			}

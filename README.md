@@ -2,7 +2,7 @@
 <div align="center">
 
   ![](https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Fgithub.com%2Fbeyond-aion%2Faion-server%2Fraw%2F4.8%2Fpom.xml&query=%2F%2A%5Blocal-name%28%29%3D%22project%22%5D%2F%2A%5Blocal-name%28%29%3D%22properties%22%5D%2F%2A%5Blocal-name%28%29%3D%22maven.compiler.release%22%5D%2Ftext%28%29&label=Java%20version)
-  [![](https://img.shields.io/github/contributors-anon/beyond-aion/aion-server)](https://htmlpreview.github.io/?https://gist.github.com/neon-dev/ce9729bcacaac31f78771b8521512d0a/raw/contributors.html&repo=beyond-aion/aion-server&title=Beyond%20Aion%20Server%20Contributors)
+  [![](https://img.shields.io/github/contributors-anon/beyond-aion/aion-server)](https://gisthost.github.io/?ce9729bcacaac31f78771b8521512d0a&repo=beyond-aion%2Faion-server&title=Beyond%20Aion%20Server%20Contributors)
   ![](https://img.shields.io/github/repo-size/beyond-aion/aion-server)
 
 </div>
@@ -85,15 +85,13 @@ server) and `config/myls.properties` (login server) and put all your custom prop
 *.properties files and will not be modified when updating the server.  
 
 ### Game client setup
-You can download the game client for this version from [here](https://mega.nz/folder/wxMRXZDS#qMsKJlkyYUNp_TQln2EZlg).  
-As it blocks connections to non-official servers, it needs to be patched. This can be done by copying
+You can download the game client for this version from [here](https://archive.org/download/aion-4.8-na/Aion%204.8%20NA.7z), or via [torrent](https://archive.org/download/aion-4.8-na/aion-4.8-na_archive.torrent).  
+As the game blocks connections to unofficial servers and does not run properly on Windows 10 or later, it needs to be patched. This can be done by copying
 this [version.dll](https://github.com/beyond-aion/aion-version-dll/releases/latest) into the bin32 and bin64 folders of the game client.  
 To run the game, create a file called `start.bat` in the game's root directory with the following content:
 ```batch
-start /affinity 7FFFFFFF "" "bin64\AION.bin" -ip:127.0.0.1 -port:2106 -cc:2 -lang:ENG -loginex
+start "" "bin64\aion.bin" -ip:127.0.0.1 -port:2106 -loginex
 ```
-<sup>The `-lang` parameter accepts any language installed in the l10n folder. The affinity mask ensures that no more than 31 CPU cores are assigned to the
-process, as the game client does not support more.</sup>  
 
 ## Developing
 Import the root directory as a Maven project. If your IDE does not support [EditorConfig](https://editorconfig.org/#pre-installed) natively, install a
