@@ -327,6 +327,7 @@
 		<xs:complexContent>
 			<xs:extension base="AbstractItemAction">
 				<xs:attribute name="sync_ids" type="IntListType"/>
+				<xs:attribute name="recovery_instance_count" type="xs:int" default="1"/>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>

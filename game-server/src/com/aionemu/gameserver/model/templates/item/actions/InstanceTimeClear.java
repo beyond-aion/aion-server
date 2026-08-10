@@ -27,15 +27,13 @@ public class InstanceTimeClear extends AbstractItemAction {
 
 	@XmlAttribute(name = "sync_ids")
 	private List<Integer> syncIds;
+	@XmlAttribute(name = "recovery_instance_count")
+	private int recoveryInstanceCount = 1;
 
 	@Override
 	public boolean canAct(Player player, Item parentItem, Item targetItem, Object... params) {
 		int syncId = (int) params[0];
-		if (!syncIds.contains(syncId))
-			return false;
-		int worldId = DataManager.INSTANCE_COOLTIME_DATA.getWorldId(syncId);
-		PortalCooldown portalCooldown = player.getPortalCooldownList().getPortalCooldown(worldId);
-		if (portalCooldown == null || (portalCooldown.getReuseTime() < System.currentTimeMillis() && portalCooldown.getEnterCount() == 0)) {
+		if (!syncIds.contains(syncId)) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_INSTANCE_COOL_TIME_INIT());
 			return false;
 		}
@@ -57,7 +55,6 @@ public class InstanceTimeClear extends AbstractItemAction {
 
 			@Override
 			public void abort() {
-				// TODO: abort is invalid. Should we abort all or only the last syncid?
 				player.getController().cancelUseItem(false);
 				player.removeItemCoolDown(parentItem.getItemTemplate().getUseLimits().getDelayId());
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_CANCELED());
@@ -76,25 +73,19 @@ public class InstanceTimeClear extends AbstractItemAction {
 
 	private void finishUse(Player player, Item parentItem, int syncId) {
 		int worldId = DataManager.INSTANCE_COOLTIME_DATA.getWorldId(syncId);
-		PortalCooldown portalCD = player.getPortalCooldownList().getPortalCooldown(worldId);
-		if (portalCD == null || portalCD.getEnterCount() < 1) {
-			// cooldown state changed during the cast, or nothing to clear - don't consume the item for nothing
-			PacketSendUtility.broadcastPacketAndReceive(player,
-				new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, 2, 0));
-			return;
-		}
 
 		if (parentItem.getActivationCount() > 1) {
+			if (player.getInventory().getItemByObjId(parentItem.getObjectId()) == null)
+				return; // item was traded or sold during the casting delay
 			parentItem.setActivationCount(parentItem.getActivationCount() - 1);
-		} else {
-			player.getInventory().decreaseByObjectId(parentItem.getObjectId(), 1);
+		} else if (!player.getInventory().decreaseByObjectId(parentItem.getObjectId(), 1))
+			return;
+
+		PortalCooldown portalCD = player.getPortalCooldownList().getOrCreatePortalCooldown(worldId);
+		if (portalCD != null) {
+			portalCD.decreaseEnterCount(recoveryInstanceCount);
+			player.getPortalCooldownList().sendEntryInfo(worldId);
 		}
-
-		portalCD.decreaseEnterCount();
-		if (portalCD.getEnterCount() < 1)
-			player.getPortalCooldownList().removePortalCooldown(worldId);
-
-		player.getPortalCooldownList().sendEntryInfo(worldId);
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_USE_ITEM(parentItem.getL10n()));
 		PacketSendUtility.broadcastPacketAndReceive(player,
 			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, 1, 0));
