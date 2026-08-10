@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlType;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.controllers.attack.AttackUtil;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.SkillElement;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.SignetData;
 import com.aionemu.gameserver.skillengine.model.SignetEnum;
