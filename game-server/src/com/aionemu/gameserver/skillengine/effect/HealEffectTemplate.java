@@ -35,17 +35,15 @@ public interface HealEffectTemplate {
 
 	default int applyHealDeboost(Effect effect, int healValue) {
 		// apply target's heal related effects (e.g. brilliant protection)
-		if (allowHpHealSkillDeboost(effect)) {
+		if (allowHpHealSkillDeboost(effect))
 			return Math.max(0, effect.getEffected().getGameStats().getStat(StatEnum.HEAL_SKILL_DEBOOST, healValue).getCurrent());
-		}
 		return healValue;
 	}
 
 	default int calculateHealValue(Effect effect, HealType type) {
 		int healValue = calculateSnapshotHealValue(effect, type);
-		if (type == HealType.HP) {
+		if (type == HealType.HP)
 			healValue = applyHealDeboost(effect, healValue);
-		}
 		return healValue;
 	}
 }

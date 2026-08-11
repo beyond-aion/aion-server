@@ -353,8 +353,8 @@ public class Skill {
 	}
 
 	private int calculateCastDuration() {
-		//todo remove hardcoded skillId and add casting delay to item_templates.xml
-		//ap & cash revival stones, or 2nd+ time of multicast-skill activation
+		// TODO: remove hardcoded skillId and add casting delay to item_templates.xml
+		// ap & cash revival stones, or 2nd+ time of multicast-skill activation
 		if (getSkillId() == 10802 || getMultiCastCount() > 0)
 			return 0;
 		if (!isCastDurationAffectedByCastSpeed())

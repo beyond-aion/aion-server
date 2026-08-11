@@ -44,14 +44,17 @@ public class NoReduceSpellATKInstantEffect extends DamageEffect {
 		return false;
 	}
 
+	@Override
 	public boolean shouldUseKnowledge() {
 		return false;
 	}
 
+	@Override
 	public boolean shouldUseBoostSpellAttackEffects() {
 		return false;
 	}
 
+	@Override
 	public boolean shouldUseOneTimeBoostSkillAttack() {
 		return false;
 	}

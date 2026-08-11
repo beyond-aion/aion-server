@@ -208,6 +208,7 @@ public class SkillTemplate implements L10n {
 	public boolean isApplyCastingTimeBonus() {
 		return applyCastingTimeBonus;
 	}
+
 	public int getDuration() {
 		return duration;
 	}

@@ -394,9 +394,9 @@ public class StatFunctions {
 		int knowledge = useKnowledge ? sgs.getKnowledge().getCurrent() : 100;
 		damage *= (magicBoost / 1000f) + (knowledge / 100f);
 
-		if (useBoostSpellAttack) {
+		if (useBoostSpellAttack)
 			damage = sgs.getStat(StatEnum.BOOST_SPELL_ATTACK, (int) damage).getCurrent();
-		}
+
 		// add bonus damage
 		damage += bonus;
 		if (template.getElement() != SkillElement.NONE && !(template instanceof NoReduceSpellATKInstantEffect)) {

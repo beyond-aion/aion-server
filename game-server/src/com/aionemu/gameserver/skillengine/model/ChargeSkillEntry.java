@@ -44,7 +44,7 @@ public class ChargeSkillEntry {
 	public int getId() {
 		return id;
 	}
-	
+
 	public SkillType getChargeTimeBonusType() {
 		return chargeTimeBonusType;
 	}

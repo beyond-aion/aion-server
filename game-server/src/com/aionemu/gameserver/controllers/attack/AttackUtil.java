@@ -306,7 +306,7 @@ public class AttackUtil {
 		if (!useTemplateDmg) {
 			float damageMultiplier;
 			if (isPhysical) {
-				damageMultiplier =  template.shouldUseOneTimeBoostSkillAttack() ? effector.getObserveController().getBasePhysicalDamageMultiplier(true) : 1f;
+				damageMultiplier = template.shouldUseOneTimeBoostSkillAttack() ? effector.getObserveController().getBasePhysicalDamageMultiplier(true) : 1f;
 				damage += bonus;
 			} else {
 				boolean applyMagicalSkillBoostBonus = template.shouldApplyMagicalSkillBoostBonus(effect);

@@ -41,9 +41,8 @@ public abstract class HealOverTimeEffect extends AbstractOverTimeEffect implemen
 		int maxCurValue = getMaxStatValue(effect);
 		int possibleHealValue = effect.getReserveds(position).getValue();
 
-		if (healType == HealType.HP) {
+		if (healType == HealType.HP)
 			possibleHealValue = applyHealDeboost(effect, possibleHealValue);
-		}
 
 		int healValue = Math.min(maxCurValue - currentValue, possibleHealValue);
 

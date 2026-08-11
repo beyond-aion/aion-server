@@ -64,10 +64,12 @@ public class SignetBurstEffect extends DamageEffect {
 		return signet;
 	}
 
+	@Override
 	public boolean shouldUseBoostSpellAttackEffects() {
 		return false;
 	}
-	
+
+	@Override
 	public boolean shouldUseOneTimeBoostSkillAttack() {
 		return false;
 	}
