@@ -66,13 +66,12 @@ public class EnchantService {
 		else
 			stoneId = 166000191; // Alpha
 
-		if (inventory.decreaseByObjectId(parentItem.getObjectId(), 1)) {
-			if (inventory.delete(targetItem) != null) {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_SUCCEED(targetItem.getL10n()));
-				ItemService.addItem(player, stoneId, itemTemplate.isWeapon() ? Rnd.get(2, 5) : Rnd.get(1, 3));
-			}
-		} else
+		if (!inventory.decreaseByObjectId(parentItem.getObjectId(), 1) || inventory.delete(targetItem) == null) {
 			AuditLogger.log(player, "possibly used break item hack");
+			return false;
+		}
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_SUCCEED(targetItem.getL10n()));
+		ItemService.addItem(player, stoneId, itemTemplate.isWeapon() ? Rnd.get(2, 5) : Rnd.get(1, 3));
 		return true;
 	}
 

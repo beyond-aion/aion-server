@@ -59,8 +59,10 @@ public class PortalCooldownList {
 	 */
 	public PortalCooldown getOrCreatePortalCooldown(int worldId) {
 		long reuseTime = DataManager.INSTANCE_COOLTIME_DATA.calculateInstanceEntranceCooltime(owner, worldId);
-		if (reuseTime == 0)
-			return null;
+		return reuseTime == 0 ? null : getOrCreatePortalCooldown(worldId, reuseTime);
+	}
+
+	private synchronized PortalCooldown getOrCreatePortalCooldown(int worldId, long reuseTime) {
 		if (portalCooldowns == null)
 			portalCooldowns = new HashMap<>();
 		return portalCooldowns.computeIfAbsent(worldId, id -> new PortalCooldown(id, reuseTime, 0));
@@ -75,15 +77,7 @@ public class PortalCooldownList {
 	}
 
 	public void addPortalCooldown(int worldId, long useDelay) {
-		if (portalCooldowns == null)
-			portalCooldowns = new HashMap<>();
-
-		PortalCooldown portalCooldown = portalCooldowns.get(worldId);
-		if (portalCooldown == null)
-			portalCooldown = new PortalCooldown(worldId, useDelay, 0);
-
-		portalCooldown.increaseEnterCount();
-		portalCooldowns.put(worldId, portalCooldown);
+		getOrCreatePortalCooldown(worldId, useDelay).increaseEnterCount();
 
 		PortalCooldownsDAO.storePortalCooldowns(owner);
 

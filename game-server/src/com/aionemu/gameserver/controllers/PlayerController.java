@@ -468,6 +468,9 @@ public class PlayerController extends CreatureController<Player> {
 			if (!PlayerRestrictions.canUseSkill(player, skill))
 				return;
 
+			if (player.isCasting()) // only item casts pass the restriction check, they get cancelled by the new skill
+				cancelCurrentSkill(null);
+
 			skill.setTargetType(targetType, x, y, z);
 			skill.setClientHitTime(clientHitTime);
 			skill.useSkill();

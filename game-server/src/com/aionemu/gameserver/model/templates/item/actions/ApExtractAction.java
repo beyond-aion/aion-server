@@ -118,11 +118,12 @@ public class ApExtractAction extends AbstractItemAction {
 				return false;
 		}
 		// EQUIPMENT is a shorthand for "any of WEAPON/ARMOR/ACCESSORY/WING", confirmed on retail it does NOT also match OTHER
-		if (target == UseTarget.ALL || target == type || (target == UseTarget.EQUIPMENT && type != UseTarget.OTHER))
-			return true;
-		PacketSendUtility.sendPacket(player,
-			SM_SYSTEM_MESSAGE.STR_MSG_AP_DECOMPOSE_WRONG_TARGET_ITEM_CATEGORY(parentItem.getL10n(), targetItem.getL10n()));
-		return false;
+		if (target != UseTarget.ALL && target != type && !(target == UseTarget.EQUIPMENT && type != UseTarget.OTHER)) {
+			PacketSendUtility.sendPacket(player,
+				SM_SYSTEM_MESSAGE.STR_MSG_AP_DECOMPOSE_WRONG_TARGET_ITEM_CATEGORY(parentItem.getL10n(), targetItem.getL10n()));
+			return false;
+		}
+		return true;
 	}
 
 	@Override
@@ -163,13 +164,11 @@ public class ApExtractAction extends AbstractItemAction {
 		if (acquisition == null || acquisition.getRequiredAp() == 0)
 			return false;
 		Storage inventory = player.getInventory();
-		if (inventory.getItemByObjId(parentItem.getObjectId()) == null || inventory.getItemByObjId(targetItem.getObjectId()) == null) {
+		if (!inventory.decreaseByObjectId(parentItem.getObjectId(), 1) || inventory.delete(targetItem) == null) {
 			AuditLogger.log(player, "possibly using item AP extraction hack");
 			return false;
 		}
 		int ap = (int) (acquisition.getRequiredAp() * rate);
-		inventory.decreaseByObjectId(parentItem.getObjectId(), 1);
-		inventory.delete(targetItem);
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_AP_DECOMPOSE_ITEM_SUCCEED(targetItem.getL10n()));
 		AbyssPointsService.addAp(player, ap, SM_SYSTEM_MESSAGE::STR_MSG_AP_DECOMPOSE_ITEM_SUCCEED_AP);
 		return true;

@@ -63,16 +63,9 @@ public class PlayerRestrictions {
 		if (!checkFly(player, target) || player.getLifeStats().isAboutToDie() || player.isDead()) {
 			return false;
 		}
-		// check if is casting to avoid multicast exploit
-		// TODO cancel skill if other is used
-		if (player.isCasting()) {
-			if (player.getCastingSkill().getItemTemplate() == null) {
-				return false;
-			} else {
-				player.getController().cancelCurrentSkill(null);
-			}
-		}
-
+		// item casts are interruptible (PlayerController cancels them), skill casts are not
+		if (player.isCasting() && player.getCastingSkill().getItemTemplate() == null)
+			return false;
 
 		if (!player.canAttack() && !template.hasEvadeEffect()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CAN_NOT_ATTACK_WHILE_IN_ABNORMAL_STATE());
