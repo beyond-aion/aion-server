@@ -11,6 +11,7 @@ import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
+import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -27,7 +28,7 @@ public class _1845OpeningDoors extends AbstractQuestHandler {
 		qe.registerQuestNpc(278591).addOnTalkEvent(questId);
 		qe.registerQuestNpc(278624).addOnTalkEvent(questId);
 		qe.registerQuestNpc(798316).addOnTalkEvent(questId);
-		qe.registerQuestItem(182204181, questId);
+		qe.registerQuestItem(182202181, questId);
 	}
 
 	@Override
@@ -39,10 +40,9 @@ public class _1845OpeningDoors extends AbstractQuestHandler {
 		if (env.getVisibleObject() instanceof Npc)
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 		if (targetId == 0) {
-			if (env.getDialogActionId() == QUEST_ACCEPT_1) {
-				qs.setStatus(QuestStatus.START);
-				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 0));
-				return true;
+			if (env.getDialogActionId() == QUEST_ACCEPT_1 && (qs == null || qs.isStartable())) {
+				QuestService.startQuest(env);
+				return closeDialogWindow(env);
 			}
 		} else if (targetId == 278591) {
 			if (qs != null) {

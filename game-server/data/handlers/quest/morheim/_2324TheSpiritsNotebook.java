@@ -5,13 +5,12 @@ import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.services.QuestService;
 
 /**
  * @author MrPoke, Nephis
@@ -37,16 +36,12 @@ public class _2324TheSpiritsNotebook extends AbstractQuestHandler {
 		if (env.getVisibleObject() instanceof Npc)
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 
-		if (qs == null)
-			return false;
-
 		if (targetId == 0) {
-			if (env.getDialogActionId() == QUEST_ACCEPT_1) {
-				qs.setStatus(QuestStatus.START);
-				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 0));
-				return true;
+			if (env.getDialogActionId() == QUEST_ACCEPT_1 && (qs == null || qs.isStartable())) {
+				QuestService.startQuest(env);
+				return closeDialogWindow(env);
 			}
-		} else if (targetId == 204373) {
+		} else if (qs != null && targetId == 204373) {
 			if (qs.getStatus() == QuestStatus.START) {
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 2375);
