@@ -465,11 +465,13 @@ public class PlayerController extends CreatureController<Player> {
 		}
 
 		if (skill != null) {
+			// item casts get interrupted by skill usage (skill casts don't, see PlayerRestrictions#canUseSkill). this must
+			// happen before checking the restrictions, since Creature#canAttack returns false as long as we are casting
+			if (player.isCasting() && player.getCastingSkill().getItemTemplate() != null)
+				cancelCurrentSkill(null);
+
 			if (!PlayerRestrictions.canUseSkill(player, skill))
 				return;
-
-			if (player.isCasting()) // only item casts pass the restriction check, they get cancelled by the new skill
-				cancelCurrentSkill(null);
 
 			skill.setTargetType(targetType, x, y, z);
 			skill.setClientHitTime(clientHitTime);
