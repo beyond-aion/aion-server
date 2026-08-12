@@ -31,6 +31,8 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 @XmlType(namespace = "", name = "ItemTemplate")
 public class ItemTemplate extends VisibleObjectTemplate {
 
+	private static final byte[] DEFAULT_LEVEL_RESTRICTION = new byte[] { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
+
 	private int itemId;
 	@XmlElement(name = "modifiers")
 	private ModifiersTemplate modifiers;
@@ -53,7 +55,7 @@ public class ItemTemplate extends VisibleObjectTemplate {
 	@XmlAttribute(name = "quality")
 	private ItemQuality itemQuality;
 	@XmlAttribute(name = "item_type")
-	private ItemType itemType;
+	private ItemType itemType = ItemType.NORMAL;
 	@XmlAttribute(name = "attack_type")
 	private ItemAttackType attackType;
 	@XmlAttribute(name = "attack_gap")
@@ -82,7 +84,7 @@ public class ItemTemplate extends VisibleObjectTemplate {
 	private String clientName;
 	@XmlJavaTypeAdapter(SpaceSeparatedBytesAdapter.class)
 	@XmlAttribute(name = "restrict")
-	private byte[] levelRestrictions;
+	private byte[] levelRestrictions = DEFAULT_LEVEL_RESTRICTION;
 	@XmlJavaTypeAdapter(SpaceSeparatedBytesAdapter.class)
 	@XmlAttribute(name = "restrict_max")
 	private byte[] maxLevelRestrictions;

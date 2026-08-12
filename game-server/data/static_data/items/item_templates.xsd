@@ -126,15 +126,15 @@
 		<xs:attribute name="attack_type" type="ItemAttackType"/>
 		<xs:attribute name="desc" type="xs:int"/>
 		<xs:attribute name="restrict_max" type="ByteList"/>
-		<xs:attribute name="restrict" type="ByteList"/>
+		<xs:attribute name="restrict" type="ByteList" default="1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1"/>
 		<xs:attribute name="rnd_bonus" type="xs:int"/>
-		<xs:attribute name="rnd_count" type="xs:int"/>
-		<xs:attribute name="race" type="itemRace"/>
+		<xs:attribute name="rnd_count" type="xs:int" default="-1"/>
+		<xs:attribute name="race" type="itemRace" default="PC_ALL"/>
 		<xs:attribute name="price" type="xs:int"/>
 		<xs:attribute name="quality" type="itemQuality"/>
-		<xs:attribute name="item_type" type="itemType"/>
-		<xs:attribute name="max_stack_count" type="xs:int"/>
-		<xs:attribute name="item_group" type="ItemGroup"/>
+		<xs:attribute name="item_type" type="itemType" default="NORMAL"/>
+		<xs:attribute name="max_stack_count" type="xs:int" default="1"/>
+		<xs:attribute name="item_group" type="ItemGroup" default="NONE"/>
 		<xs:attribute name="mask" type="xs:int"/>
 		<xs:attribute name="level" type="xs:int"/>
 		<xs:attribute name="id" type="itemId" use="required"/>
