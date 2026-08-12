@@ -71,12 +71,10 @@ public class QuestStartAction extends AbstractItemAction {
 		PacketSendUtility.broadcastPacketAndReceive(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), item.getObjectId(), item.getItemId()));
 
 		QuestState qs = player.getQuestStateList().getQuestState(questid);
+		// retail stays silent when the quest is already active, but warns about race/level/etc. before sending the use
+		// message (confirmed on retail 5.8, for plain quest items as well as for documents)
 		boolean alreadyActive = qs != null && (qs.getStatus() == QuestStatus.START || qs.getStatus() == QuestStatus.REWARD);
-
-		// Retail only gates "doc_"-named quest items on race/level/etc.; plain quest items skip this check
-		// entirely and always reach the accept dialog (confirmed on retail 5.8)
-		boolean isDocument = item.getItemTemplate().getClientName().toLowerCase().startsWith("doc_");
-		boolean canStart = !alreadyActive && (!isDocument || QuestService.checkStartConditions(player, questid, true, 0, true, false, false));
+		boolean canStart = !alreadyActive && QuestService.checkStartConditions(player, questid, true, 0, true, false, false);
 
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_USE_ITEM(item.getL10n()));
 

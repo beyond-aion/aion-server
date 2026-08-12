@@ -80,8 +80,6 @@ public class ItemTemplate extends VisibleObjectTemplate {
 	private Stigma stigma;
 	@XmlAttribute(name = "name")
 	private String name;
-	@XmlAttribute(name = "cName")
-	private String clientName;
 	@XmlJavaTypeAdapter(SpaceSeparatedBytesAdapter.class)
 	@XmlAttribute(name = "restrict")
 	private byte[] levelRestrictions = DEFAULT_LEVEL_RESTRICTION;
@@ -314,13 +312,6 @@ public class ItemTemplate extends VisibleObjectTemplate {
 	@Override
 	public String getName() {
 		return name == null ? "" : name;
-	}
-
-	/**
-	 * @return the internal client name (e.g. "doc_quest_13520a"), never null
-	 */
-	public String getClientName() {
-		return clientName == null ? "" : clientName;
 	}
 
 	@Override
