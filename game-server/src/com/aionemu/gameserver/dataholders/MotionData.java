@@ -71,11 +71,8 @@ public class MotionData {
 		int motionSpeed = skill.getSkillTemplate().getMotion().getSpeed() * 10;
 		float attackRate = getAttackRate(player);
 		float motionSpeedRate = skill.allowAnimationBoostByCastSpeed() ? Math.min(attackRate, calculateCastSpeedRate(skill.getCastSpeedForAnimationBoostAndChargeSkills())) : attackRate;
-		// TODO parse movement related times (see "_run" suffix in client templates)
 		int animationLastHitMillis = (int) (times.getMaxTime() * motionSpeed * motionSpeedRate);
-		// TODO parse animation_length to remove approxAnimationLength (currently only parsed for AT)
-		float approxAnimationLength = times.getAnimationLength() > 0 ? times.getAnimationLength() : 1.4f + times.getMaxTime();
-		int animationFullDurationMillis = (int) (approxAnimationLength * motionSpeed * motionSpeedRate);
+		int animationFullDurationMillis = (int) (times.getAnimationLength() * motionSpeed * motionSpeedRate);
 		return new AnimationTimes(animationLastHitMillis, animationFullDurationMillis);
 	}
 
