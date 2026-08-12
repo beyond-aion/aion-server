@@ -134,14 +134,13 @@
 		<xs:attribute name="quality" type="itemQuality"/>
 		<xs:attribute name="item_type" type="itemType"/>
 		<xs:attribute name="max_stack_count" type="xs:int"/>
-		<xs:attribute name="drop" type="xs:boolean"/>
 		<xs:attribute name="item_group" type="ItemGroup"/>
 		<xs:attribute name="mask" type="xs:int"/>
 		<xs:attribute name="level" type="xs:int"/>
 		<xs:attribute name="id" type="itemId" use="required"/>
 		<xs:attribute name="name" type="xs:string"/>
-		<xs:attribute name="casting_delay" type="xs:int"/>
 		<xs:attribute name="cName" type="xs:string"/>
+		<xs:attribute name="casting_delay" type="xs:int"/>
 		<xs:attribute name="tempering_name" type="xs:string"/>
 		<xs:attribute name="enchant_name" type="xs:string" />
 		<xs:attribute name="multi_return" type="xs:string"/>
