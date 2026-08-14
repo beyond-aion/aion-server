@@ -28,7 +28,6 @@ public class PlayerStatFunctions {
 		FUNCTIONS.add(new AttackSpeedFunction());
 		FUNCTIONS.add(new BoostCastingTimeFunction());
 		FUNCTIONS.add(new PvPAttackRatioFunction());
-		FUNCTIONS.add(new PDefFunction());
 		FUNCTIONS.add(new MaxHpFunction());
 		FUNCTIONS.add(new MaxMpFunction());
 		FUNCTIONS.add(new BlockFunction());
@@ -130,24 +129,6 @@ class MagicalAttackFunction extends StatFunction {
 	@Override
 	public int getPriority() {
 		return 30;
-	}
-}
-
-class PDefFunction extends StatFunction {
-
-	PDefFunction() {
-		stat = StatEnum.PHYSICAL_DEFENSE;
-	}
-
-	@Override
-	public void apply(Stat2 stat, CalculationType... calculationTypes) {
-		if (stat.getOwner().isInFlyingState())
-			stat.setBonus(stat.getBonus() - (stat.getBase() / 2));
-	}
-
-	@Override
-	public int getPriority() {
-		return 60;
 	}
 }
 
