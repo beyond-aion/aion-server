@@ -65,7 +65,7 @@
 	</report_to_many>
 	<report_to id="1119" start_npc_ids="203075" end_npc_ids="203080"/>
 	<report_to id="1230" start_npc_ids="801032" end_npc_ids="801033"/>
-	<report_to id="1231" start_npc_ids="801032" end_npc_ids="801033"/>
+	<report_to id="1231" start_npc_ids="801033" end_npc_ids="801032"/>
 	<xml_quest id="1127" start_npc_ids="798008">
 		<on_talk_event ids="700001">
 			<conditions operate="AND">
