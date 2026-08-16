@@ -1,6 +1,5 @@
 package admincommands;
 
-import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
@@ -21,7 +20,7 @@ public class AddSkill extends AdminCommand {
 			return;
 		}
 
-		VisibleObject target = player.getTarget();
+		Player target = player.getTarget() instanceof Player p ? p : player;
 
 		int skillId = 0;
 		int skillLevel = 0;
@@ -34,12 +33,10 @@ public class AddSkill extends AdminCommand {
 			return;
 		}
 
-		if (target instanceof Player) {
-			Player targetpl = (Player) target;
-			targetpl.getSkillList().addSkill(targetpl, skillId, skillLevel);
-			PacketSendUtility.sendMessage(player, "You have success add skill");
-			PacketSendUtility.sendMessage(targetpl, "You have acquire a new skill");
-		}
+		target.getSkillList().addSkill(target, skillId, skillLevel);
+		PacketSendUtility.sendMessage(player, "You have success add skill");
+		if (!target.equals(player))
+			PacketSendUtility.sendMessage(target, "You have acquire a new skill");
 	}
 
 	@Override

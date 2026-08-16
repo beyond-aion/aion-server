@@ -19,18 +19,20 @@ public class AddCube extends AdminCommand {
 	@Override
 	public void execute(Player admin, String... params) {
 
-		if (params.length != 1) {
-			PacketSendUtility.sendMessage(admin, "Syntax: //addcube <player name>");
+		if (params.length > 1) {
+			info(admin, null);
 			return;
 		}
 
-		Player receiver = null;
-
-		receiver = World.getInstance().getPlayer(Util.convertName(params[0]));
-
-		if (receiver == null) {
-			PacketSendUtility.sendMessage(admin, "The player " + Util.convertName(params[0]) + " is not online.");
-			return;
+		Player receiver;
+		if (params.length == 0) {
+			receiver = admin.getTarget() instanceof Player target ? target : admin;
+		} else {
+			receiver = World.getInstance().getPlayer(Util.convertName(params[0]));
+			if (receiver == null) {
+				PacketSendUtility.sendMessage(admin, "The player " + Util.convertName(params[0]) + " is not online.");
+				return;
+			}
 		}
 
 		if (CubeExpandService.canExpand(receiver)) {
@@ -46,6 +48,6 @@ public class AddCube extends AdminCommand {
 
 	@Override
 	public void info(Player admin, String message) {
-		PacketSendUtility.sendMessage(admin, "Syntax: //addcube <player name>");
+		PacketSendUtility.sendMessage(admin, "Syntax: //addcube [player name]\nWithout a name, your current target will be taken (defaults to your character, if no player is targeted).");
 	}
 }

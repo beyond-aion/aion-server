@@ -22,7 +22,8 @@ public class RelinquishCraft extends AdminCommand {
 		// @formatter:off
 		setSyntaxInfo(
 			"<skillId> <expert|master> - Removes master or expert status of your target for the given crafting skill.",
-			"<name> <skillId> <expert|master> - Removes the players master or expert status for the given crafting skill."
+			"<name> <skillId> <expert|master> - Removes the players master or expert status for the given crafting skill.",
+			"Note: Without a name, your current target will be taken (defaults to your character, if no player is targeted)."
 		);
 		// @formatter:on
 	}
@@ -44,12 +45,7 @@ public class RelinquishCraft extends AdminCommand {
 				return;
 			}
 		} else {
-			if (admin.getTarget() instanceof Player)
-				target = (Player) admin.getTarget();
-			else {
-				PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_INVALID_TARGET());
-				return;
-			}
+			target = admin.getTarget() instanceof Player player ? player : admin;
 		}
 
 		Profession profession = Profession.getBySkillId(NumberUtils.toInt(params[i++]));

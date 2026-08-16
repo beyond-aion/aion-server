@@ -3,7 +3,6 @@ package admincommands;
 import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.ClassChangeService;
 import com.aionemu.gameserver.services.abyss.AbyssPointsService;
 import com.aionemu.gameserver.services.abyss.GloryPointsService;
@@ -24,7 +23,8 @@ public class Set extends AdminCommand {
 			"level <value> - Sets the level of the selected player.",
 			"exp <value> - Sets the experience points of the selected player.",
 			"ap <value> - Sets the abyss points of the selected player.",
-			"gp <value> - Sets the glory points of the selected player."
+			"gp <value> - Sets the glory points of the selected player.",
+			"Note: Your current target will be taken (defaults to your character, if no player is targeted)."
 		);
 		// @formatter:on
 	}
@@ -35,10 +35,7 @@ public class Set extends AdminCommand {
 			sendInfo(admin);
 			return;
 		}
-		if (!(admin.getTarget() instanceof Player target)) {
-			PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_INVALID_TARGET());
-			return;
-		}
+		Player target = admin.getTarget() instanceof Player player ? player : admin;
 
 		if (params[0].equals("class")) {
 			PlayerClass playerClass = PlayerClass.valueOf(params[1].toUpperCase());
