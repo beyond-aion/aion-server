@@ -43,7 +43,7 @@ public class Rift extends AdminCommand {
 		}
 
 		if (COMMAND_OPEN.equalsIgnoreCase(params[0])) {
-			boolean guards = Boolean.parseBoolean(params[2]);
+			boolean guards = params.length > 2 && Boolean.parseBoolean(params[2]);
 			result = RiftService.getInstance().openRifts(id, guards);
 			PacketSendUtility.sendMessage(player, result ? "Rifts is opened!" : "Rifts was already opened");
 		} else if (COMMAND_CLOSE.equalsIgnoreCase(params[0])) {

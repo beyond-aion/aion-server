@@ -19,7 +19,7 @@ public class PasskeyReset extends AdminCommand {
 
 	@Override
 	public void execute(Player player, String... params) {
-		if (params == null || params.length < 1) {
+		if (params == null || params.length < 2) {
 			PacketSendUtility.sendMessage(player, "syntax: //passkeyreset <player> <passkey>");
 			return;
 		}

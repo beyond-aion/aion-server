@@ -68,7 +68,7 @@ public class Weather extends AdminCommand {
 					}
 					weatherCode = -1;
 				} else {
-					weatherCode = NumberUtils.toInt(params[1], -1);
+					weatherCode = params.length > 1 ? NumberUtils.toInt(params[1], -1) : -1;
 					if (weatherCode < 0 || weatherCode > 12) {
 						sendInfo(admin, "Weather code must be between 0 and 12.");
 						return;
