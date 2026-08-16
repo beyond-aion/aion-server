@@ -1,11 +1,8 @@
 package consolecommands;
 
 import com.aionemu.gameserver.model.PlayerClass;
-import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.ClassChangeService;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.ConsoleCommand;
 
 /**
@@ -16,7 +13,7 @@ public class Changeclass extends ConsoleCommand {
 	public Changeclass() {
 		super("changeclass", "Changes a players class.");
 
-		setSyntaxInfo("<class> - Changes your characters class to the one specified.");
+		setSyntaxInfo("<class> - Changes your targets class to the one specified (defaults to your character, if nothing is targeted).");
 	}
 
 	@Override
@@ -26,13 +23,7 @@ public class Changeclass extends ConsoleCommand {
 			return;
 		}
 
-		final VisibleObject target = admin.getTarget();
-		if (!(target instanceof Player)) {
-			PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_INVALID_TARGET());
-			return;
-		}
-
-		Player player = (Player) target;
+		Player player = admin.getTarget() instanceof Player target ? target : admin;
 		String newClass = params[0];
 
 		if (newClass.equalsIgnoreCase("fighter"))

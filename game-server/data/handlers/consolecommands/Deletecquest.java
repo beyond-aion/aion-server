@@ -1,6 +1,5 @@
 package consolecommands;
 
-import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION.ActionType;
@@ -18,7 +17,7 @@ public class Deletecquest extends ConsoleCommand {
 	public Deletecquest() {
 		super("deletecquest", "Deletes a quest from the players quest list.");
 
-		setSyntaxInfo("<3> <quest> - Deletes the quest from the targets quest list.");
+		setSyntaxInfo("<3> <quest> - Deletes the quest from your targets quest list (defaults to your character, if nothing is targeted).");
 	}
 
 	@Override
@@ -28,13 +27,7 @@ public class Deletecquest extends ConsoleCommand {
 			return;
 		}
 
-		VisibleObject target = admin.getTarget();
-		if (!(target instanceof Player)) {
-			PacketSendUtility.sendMessage(admin, "Please select a player.");
-			return;
-		}
-
-		Player player = (Player) target;
+		Player player = admin.getTarget() instanceof Player target ? target : admin;
 		int questId;
 		try {
 			questId = Integer.valueOf(params[0]);
