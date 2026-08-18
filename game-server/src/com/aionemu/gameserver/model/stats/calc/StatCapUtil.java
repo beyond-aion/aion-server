@@ -53,12 +53,10 @@ public class StatCapUtil {
 		int lowerCap = getLowerCap(stat.getStat(), creature);
 		int upperCap = getUpperCap(stat.getStat(), creature);
 
-		if (stat.getStat() == ATTACK_SPEED) {
-			int base = stat.getBase() / 2;
-			if (stat.getBonus() > 0 && base < stat.getBonus())
-				stat.setBonus(base);
-			else if (stat.getBonus() < 0 && base < -stat.getBonus())
-				stat.setBonus(-base);
+		if (stat.getStat() == ATTACK_SPEED) { // attack delay is capped to [500, 10000] ms and afterwards to [base * 0.5, base * 2]
+			int attackDelay = Math.clamp(stat.getCurrent(), 500, 10000);
+			attackDelay = Math.clamp(attackDelay, (int) (stat.getBase() * 0.5f), stat.getBase() * 2);
+			stat.setBonus(attackDelay - stat.getBase());
 		}
 
 		calculate(stat, lowerCap, upperCap);
