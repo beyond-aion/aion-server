@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -16,6 +18,7 @@ import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.commons.database.IUStH;
 import com.aionemu.commons.database.ParamReadStH;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.skillengine.effect.EffectTemplate;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.Effect.ForceType;
 
@@ -26,9 +29,9 @@ public class PlayerEffectsDAO {
 
 	private static final Logger log = LoggerFactory.getLogger(PlayerEffectsDAO.class);
 
-	public static final String INSERT_QUERY = "INSERT INTO `player_effects` (`player_id`, `skill_id`, `skill_lvl`, `remaining_time`, `end_time`, `force_type`) VALUES (?,?,?,?,?,?)";
+	public static final String INSERT_QUERY = "INSERT INTO `player_effects` (`player_id`, `skill_id`, `skill_lvl`, `remaining_time`, `end_time`, `force_type`, `magical_criticals`) VALUES (?,?,?,?,?,?,?)";
 	public static final String DELETE_QUERY = "DELETE FROM `player_effects` WHERE `player_id`=?";
-	public static final String SELECT_QUERY = "SELECT `skill_id`, `skill_lvl`, `remaining_time`, `end_time`,`force_type` FROM `player_effects` WHERE `player_id`=?";
+	public static final String SELECT_QUERY = "SELECT `skill_id`, `skill_lvl`, `remaining_time`, `end_time`, `force_type`, `magical_criticals` FROM `player_effects` WHERE `player_id`=?";
 
 	private static final Predicate<Effect> insertableEffectsPredicate = effect -> effect.canSaveOnLogout() && effect.getRemainingTimeMillis() > 28000;
 
@@ -49,9 +52,10 @@ public class PlayerEffectsDAO {
 					long endTime = rset.getLong("end_time");
 					String forceTypeStr = rset.getString("force_type");
 					ForceType forceType = forceTypeStr == null ? null : ForceType.getInstance(forceTypeStr);
+					Set<Integer> magicalCriticalPositions = decodeMagicalCriticalPositions(rset.getInt("magical_criticals"));
 
 					if (remainingTime > 0)
-						player.getEffectController().addSavedEffect(skillId, skillLvl, remainingTime, endTime, forceType);
+						player.getEffectController().addSavedEffect(skillId, skillLvl, remainingTime, endTime, forceType, magicalCriticalPositions);
 				}
 			}
 		});
@@ -78,6 +82,7 @@ public class PlayerEffectsDAO {
 				ps.setInt(4, (int) effect.getRemainingTimeMillis());
 				ps.setLong(5, effect.getEndTime());
 				ps.setString(6, effect.getForceType() == null ? null : effect.getForceType().getName());
+				ps.setInt(7, encodeMagicalCriticalPositions(effect));
 				ps.addBatch();
 			}
 
@@ -86,6 +91,25 @@ public class PlayerEffectsDAO {
 		} catch (SQLException e) {
 			log.error("Exception while saving effects of player " + player.getObjectId(), e);
 		}
+	}
+
+	/**
+	 * Magical criticals are stored as one bit per effect position, bit 0 being position 1.
+	 */
+	private static int encodeMagicalCriticalPositions(Effect effect) {
+		int bits = 0;
+		for (EffectTemplate template : effect.getEffectTemplates())
+			if (effect.isMagicalCritical(template.getPosition()))
+				bits |= 1 << template.getPosition() - 1;
+		return bits;
+	}
+
+	private static Set<Integer> decodeMagicalCriticalPositions(int bits) {
+		Set<Integer> positions = new HashSet<>();
+		for (int position = 1; bits != 0; position++, bits >>= 1)
+			if ((bits & 1) != 0)
+				positions.add(position);
+		return positions;
 	}
 
 	private static void deletePlayerEffects(Player player) {

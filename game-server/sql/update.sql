@@ -15,3 +15,6 @@ ALTER TABLE `bookmark`
 
 DROP TABLE `ingameshop`;
 DROP TABLE `ingameshop_log`;
+
+ALTER TABLE `player_effects`
+	ADD COLUMN `magical_criticals` TINYINT NOT NULL DEFAULT '0' AFTER `force_type`;

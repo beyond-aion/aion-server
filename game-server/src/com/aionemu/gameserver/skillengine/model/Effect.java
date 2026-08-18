@@ -277,7 +277,7 @@ public class Effect implements StatOwner {
 			magicalCritical = StatFunctions.calculateMagicalCriticalRate(effector, effected, criticalProb);
 			magicalCriticalRolled = true;
 		}
-		magicalCriticals[position - 1] = magicalCritical;
+		reuseMagicalCritical(position);
 	}
 
 	/**
@@ -293,6 +293,11 @@ public class Effect implements StatOwner {
 	public void resetMagicalCritical() {
 		magicalCritical = false;
 		magicalCriticalRolled = false;
+	}
+
+	public void setMagicalCriticalPositions(Collection<Integer> positions) {
+		for (int position : positions)
+			magicalCriticals[position - 1] = true;
 	}
 
 	public List<EffectTemplate> getEffectTemplates() {
