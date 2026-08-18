@@ -20,12 +20,12 @@ import com.aionemu.gameserver.controllers.observer.DeathObserver;
 import com.aionemu.gameserver.controllers.observer.StartMovingListener;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.dataholders.MotionData.AnimationTimes;
-import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.skill.NpcSkillEntry;
+import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_CASTSPELL;
@@ -324,32 +324,27 @@ public class Skill {
 	}
 
 	private int calculateChargeCastDuration() {
-		SkillType skillType = SkillType.NONE;
+		SkillType chargeTimeBonusType = SkillType.NONE;
 		// cast/attack speed can affect charge time since 4.8 (https://aionpowerbook.com/powerbook/New_World_Update_-_Skill_Changes#Other_Changes)
 		SkillChargeCondition chargeCondition = skillTemplate.getSkillChargeCondition();
 		if (chargeCondition != null) {
 			int maxCastDuration = 0;
 			ChargeSkillEntry skillCharge = DataManager.SKILL_CHARGE_DATA.getChargedSkillEntry(chargeCondition.getValue());
-			skillType = skillCharge.getChargeTimeBonusType();
+			chargeTimeBonusType = skillCharge.getChargeTimeBonusType();
 			for (ChargedSkill chargedSkill : skillCharge.getSkills()) {
 				maxCastDuration += chargedSkill.getTime();
 			}
 			baseCastDuration = maxCastDuration;
 		}
-		return switch (skillType) {
+		float speedRatio = switch (chargeTimeBonusType) {
 			case PHYSICAL -> {
-				int castDuration = (int) effector.getGameStats().getPositiveStat(StatEnum.ATTACK_SPEED, baseCastDuration);
-				int minCap = (int) (baseCastDuration * 0.75f);
-				int maxCap = (int) (baseCastDuration * 1.5f);
-				yield Math.clamp(castDuration, minCap, maxCap);
+				Stat2 attackSpeed = effector.getGameStats().getAttackSpeed();
+				yield attackSpeed.getBase() == 0 ? 1f : (float) attackSpeed.getCurrent() / attackSpeed.getBase();
 			}
-			case MAGICAL -> {
-				int normalDuration = calculateMagicalCastDuration();
-				int delta = baseCastDuration - normalDuration;
-				yield baseCastDuration - delta / 2;
-			}
-			default -> baseCastDuration;
+			case MAGICAL -> isCastDurationAffectedByCastSpeed() ? (float) calculateMagicalCastDuration() / baseCastDuration : 1f;
+			default -> 1f;
 		};
+		return (int) (baseCastDuration * (1 - (1 - speedRatio) / 2)); // charge skills are only affected by half of the speed bonus
 	}
 
 	private int calculateCastDuration() {
