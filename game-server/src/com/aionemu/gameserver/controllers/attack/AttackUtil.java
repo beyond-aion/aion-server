@@ -33,7 +33,6 @@ import com.aionemu.gameserver.utils.stats.StatFunctions;
  * @author ATracer
  */
 public class AttackUtil {
-	
 
 	/**
 	 * This method calculates the physical attack status and damage in the following order: <br>
