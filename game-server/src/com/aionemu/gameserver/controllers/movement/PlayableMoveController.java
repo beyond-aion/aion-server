@@ -1,8 +1,5 @@
 package com.aionemu.gameserver.controllers.movement;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MOVE;
@@ -16,8 +13,6 @@ import com.aionemu.gameserver.world.World;
  * @author ATracer base class for summon & player move controller
  */
 public abstract class PlayableMoveController<T extends Creature> extends CreatureMoveController<T> {
-
-	private static final Logger log = LoggerFactory.getLogger(PlayableMoveController.class);
 
 	private boolean sendMovePacket = true;
 	private final MovementModifierState movementModifierState = new MovementModifierState();
@@ -84,9 +79,7 @@ public abstract class PlayableMoveController<T extends Creature> extends Creatur
 
 		// server side controlled movement (fear, confuse) is not affected by the activation and deactivation delays of movement modifiers, since those
 		// only apply to movement requested by the client. The speed penalty for moving sideways or backwards applies immediately.
-		MovementModifierState.Direction direction = calculateMovementDirection();
-		MovementModifierDirection modifierDirection = direction == null ? MovementModifierDirection.NONE : direction.getModifierDirection();
-		float currentSpeed = StatFunctions.adjustStatByMovementModifier(modifierDirection, StatEnum.SPEED, owner.getGameStats().getMovementSpeedFloat());
+		float currentSpeed = StatFunctions.adjustSpeedByMovementModifier(calculateMovementDirection(), owner.getGameStats().getMovementSpeedFloat());
 		long msElapsed = System.currentTimeMillis() - lastMoveUpdate;
 		float futureXYDistPassed = Math.min(currentSpeed * msElapsed / 1000f, dist);
 		float futureZDistPassed = isJumping() ? Math.min(2 * msElapsed / 1000f, dist) : futureXYDistPassed;
@@ -133,53 +126,45 @@ public abstract class PlayableMoveController<T extends Creature> extends Creatur
 	 * the mouse while running forward would look like sideways movement).
 	 */
 	public void updateMovementModifierDirection() {
-		MovementModifierState.Direction direction = calculateMovementDirection();
-		if (MovementModifierState.DEBUG) {
-			log.info("MOVEDEBUG move {}: mask={} at {}/{} towards {}/{} (distance {}m), heading={} ({}°), relativeAngle={}° => {}", owner.getName(),
-				movementMask & 0xFF, owner.getX(), owner.getY(), targetDestX, targetDestY,
-				String.format("%.3f", PositionUtil.getDistance(owner.getX(), owner.getY(), targetDestX, targetDestY)), heading,
-				PositionUtil.convertHeadingToAngle(heading),
-				String.format("%.1f", PositionUtil.calculateAngleTowards(owner.getX(), owner.getY(), heading, targetDestX, targetDestY)),
-				direction == null ? "STOPPED" : direction);
-		}
-		if (direction == null)
-			onMovementStopped(); // no destination to move to (stop packet, turning on the spot or jumping on the spot)
-		else
-			movementModifierState.onMove(direction);
+		movementModifierState.setMoveState(calculateMovementDirection().getMoveStateFlag());
 	}
 
 	/**
-	 * @return The direction of the movement towards the current destination, or null if there is no destination to move to. Must be called after the
-	 *         position update, since the direction is calculated from the current position towards the destination.
+	 * @return The direction of the movement towards the current destination, or {@link MovementModifierDirection#NONE} if there is no destination to move
+	 *         to (stop packet, turning on the spot or jumping on the spot). Must be called after the position update, since the direction is calculated
+	 *         from the current position towards the destination.
 	 */
-	private MovementModifierState.Direction calculateMovementDirection() {
+	private MovementModifierDirection calculateMovementDirection() {
 		if (PositionUtil.getDistance(owner.getX(), owner.getY(), targetDestX, targetDestY) < MOVE_CHECK_OFFSET)
-			return null;
-		return calculateDirection(PositionUtil.calculateAngleTowards(owner.getX(), owner.getY(), heading, targetDestX, targetDestY));
+			return MovementModifierDirection.NONE;
+		return calculateDirection(PositionUtil.getHeadingTowards(owner.getX(), owner.getY(), targetDestX, targetDestY), heading);
 	}
 
-	private static MovementModifierState.Direction calculateDirection(float relativeMovementAngle) {
-		if (relativeMovementAngle >= -67.5 && relativeMovementAngle <= 67.5)
-			return MovementModifierState.Direction.FORWARD;
-		if (relativeMovementAngle <= -112.5 || relativeMovementAngle >= 112.5)
-			return MovementModifierState.Direction.BACKWARD;
-		// negative angles are on the owners left side, see PositionUtil.calculateAngleTowards
-		// left and right apply the same modifier, but are tracked separately (see MovementModifierState)
-		return relativeMovementAngle < 0 ? MovementModifierState.Direction.LEFT : MovementModifierState.Direction.RIGHT;
+	/**
+	 * Compares two client headings (120 units of 3° each), folds the difference into 0..60 and treats <= 15 units as forward and >= 45 units as
+	 * backward, i.e. a 90° wide forward cone.
+	 * <p>
+	 * The arithmetic must stay integer. Comparing degrees instead is asymmetric, because only the own heading is quantized to 3° steps while the angle
+	 * towards the destination is not: a diagonal then lands at 45° ± 1.5° and falls on either side of the boundary depending on which diagonal it is.
+	 * Quantizing both sides puts every diagonal at exactly 15 units.
+	 */
+	static MovementModifierDirection calculateDirection(byte destinationHeading, byte ownHeading) {
+		int headingDiff = (destinationHeading + 120 - ownHeading) % 120;
+		if (headingDiff > 60)
+			headingDiff = 120 - headingDiff;
+		if (headingDiff <= 15)
+			return MovementModifierDirection.FORWARD;
+		return headingDiff >= 45 ? MovementModifierDirection.BACKWARD : MovementModifierDirection.SIDEWAYS;
 	}
 
 	public void onMovementStopped() {
-		movementModifierState.onStop();
+		movementModifierState.setMoveState(MovementModifierState.MoveState.NONE);
 	}
 
 	/**
-	 * Activates the modifiers of the current movement direction immediately, without waiting for the usual activation delay.
+	 * @return The currently active movement directions as a {@link MovementModifierState.MoveState} bit mask.
 	 */
-	public void commitMovementModifierDirection() {
-		movementModifierState.commitCurrentDirection();
-	}
-
-	public MovementModifierDirection getMovementDirection() {
-		return movementModifierState.getModifierDirection();
+	public int getMoveState() {
+		return movementModifierState.getMoveState();
 	}
 }

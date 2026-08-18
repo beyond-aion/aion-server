@@ -64,12 +64,10 @@ public class PlayerMoveController extends PlayableMoveController<Player> {
 	private void updateMovementModifiers() {
 		if ((getMovementMask() & MovementMask.FALL) == MovementMask.FALL) {
 			// While airborne the client doesn't request a direction, the horizontal movement is momentum from before the jump. Turning in mid air must
-			// therefore not change the movement direction (and reset its activation timer).
+			// therefore not change the movement direction (and reset its activation timer). The state is only cleared when neither POSITION nor FALL
+			// is set.
 			return;
 		}
-		// Must happen before the direction is updated, since the landing packet is a stop packet which would end the movement first.
-		if (lastFallZ != 0)
-			commitMovementModifierDirection(); // jumping into a direction activates its modifiers immediately on landing
 		updateMovementModifierDirection();
 	}
 

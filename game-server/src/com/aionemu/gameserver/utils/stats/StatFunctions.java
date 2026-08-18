@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.ArrayUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.configs.main.FallDamageConfig;
@@ -43,8 +41,6 @@ import com.aionemu.gameserver.world.WorldMapInstance;
  * @author ATracer, alexa026, Neon
  */
 public class StatFunctions {
-
-	private static final Logger log = LoggerFactory.getLogger(StatFunctions.class);
 
 	/**
 	 * @param maxLevelInRange
@@ -639,58 +635,59 @@ public class StatFunctions {
 		return fallDamage;
 	}
 
+	/**
+	 * Movement modifier table, indexed by move state (see {@link MovementModifierState.MoveState}) and by the column constants below.<br>
+	 * The combined states are authored by hand rather than derived from their parts: forward combined with anything else loses its defense penalties,
+	 * and having all three active cancels every modifier.
+	 */
+	private static final int[][] MOVEMENT_MODIFIERS = {
+		//    atk%  def%  elem  parry  block  dodge  crit
+		{        0,    0,    0,     0,     0,     0,    0 }, // 0: not moving
+		{       10,  -20,  -50,     0,     0,     0,    0 }, // 1: forward
+		{      -20,    0,    0,   500,   500,     0,    0 }, // 2: backward
+		{       10,    0,    0,   500,   500,     0,    0 }, // 3: forward + backward
+		{      -20,    0,    0,     0,     0,   300,    0 }, // 4: sideways
+		{       10,    0,    0,     0,     0,   300,    0 }, // 5: forward + sideways
+		{      -20,    0,    0,   500,   500,   300,    0 }, // 6: backward + sideways
+		{        0,    0,    0,     0,     0,     0,    0 }, // 7: forward + backward + sideways
+	};
+
+	private static final int COLUMN_ATTACK = 0, COLUMN_DEFENSE = 1, COLUMN_ELEMENTAL_DEFENSE = 2, COLUMN_PARRY = 3, COLUMN_BLOCK = 4,
+		COLUMN_DODGE = 5;
+
 	public static float adjustStatByMovementModifier(Creature creature, StatEnum stat, float value) {
-		if (!(creature instanceof Player player))
+		if (stat == null || !(creature instanceof Player player))
 			return value;
-		MovementModifierDirection movementDirection = player.getMoveController().getMovementDirection();
-		float adjustedValue = adjustStatByMovementModifier(movementDirection, stat, value);
-		if (MovementModifierState.DEBUG && (stat == StatEnum.PHYSICAL_ATTACK || stat == StatEnum.MAGICAL_ATTACK)) {
-			log.info("MOVEDEBUG damage {}: {} {} => {} (direction {})", player.getName(), stat, value, adjustedValue, movementDirection);
-		}
-		return adjustedValue;
+		int moveState = player.getMoveController().getMoveState();
+		if (moveState == MovementModifierState.MoveState.NONE)
+			return value;
+		return adjustStatByMoveState(moveState, stat, value);
 	}
 
-	public static float adjustStatByMovementModifier(MovementModifierDirection movementDirection, StatEnum stat, float value) {
-		if (stat == null)
-			return value;
+	static float adjustStatByMoveState(int moveState, StatEnum stat, float value) {
+		int[] modifiers = MOVEMENT_MODIFIERS[moveState];
+		return switch (stat) {
+			case PHYSICAL_ATTACK, MAGICAL_ATTACK -> value * (1 + modifiers[COLUMN_ATTACK] / 100f);
+			case PHYSICAL_DEFENSE, MAGICAL_DEFEND -> value * (1 + modifiers[COLUMN_DEFENSE] / 100f);
+			case FIRE_RESISTANCE, EARTH_RESISTANCE, WATER_RESISTANCE, WIND_RESISTANCE, LIGHT_RESISTANCE, DARK_RESISTANCE ->
+				value + modifiers[COLUMN_ELEMENTAL_DEFENSE];
+			case PARRY -> value + modifiers[COLUMN_PARRY];
+			case BLOCK -> value + modifiers[COLUMN_BLOCK];
+			case EVASION -> value + modifiers[COLUMN_DODGE];
+			default -> value;
+		};
+	}
 
-		// https://web.archive.org/web/20170429204823/gameguide.na.aiononline.com/aion/Combat
-		switch (movementDirection) {
-			case FORWARD:
-				switch (stat) {
-					case PHYSICAL_ATTACK:
-					case MAGICAL_ATTACK:
-						return value * 1.1f; // verified on 4.6 PTS
-					case FIRE_RESISTANCE, EARTH_RESISTANCE, WATER_RESISTANCE, WIND_RESISTANCE, LIGHT_RESISTANCE, DARK_RESISTANCE:
-						return value - 50; // verified on 4.6 PTS
-					case MAGICAL_DEFEND, PHYSICAL_DEFENSE:
-						return value * 0.8f; // verified on 4.6 PTS
-				}
-				break;
-			case SIDEWAYS:
-				switch (stat) {
-					case PHYSICAL_ATTACK:
-					case MAGICAL_ATTACK:
-					case SPEED:
-						return value * 0.8f; // verified on 4.6 PTS
-					case EVASION:
-						return value + 300;
-				}
-				break;
-			case BACKWARD:
-				switch (stat) {
-					case PHYSICAL_ATTACK:
-					case MAGICAL_ATTACK:
-						return value * 0.8f; // verified on 4.6 PTS
-					case SPEED:
-						return value * 0.6f; // verified on 4.6 PTS
-					case PARRY:
-					case BLOCK:
-						return value + 500;
-				}
-				break;
-		}
-		return value;
+	/**
+	 * Movement speed is not part of the modifier table above. It stays a plain per direction factor and is applied instantly, without the activation
+	 * and deactivation delays of the combat modifiers.
+	 */
+	public static float adjustSpeedByMovementModifier(MovementModifierDirection movementDirection, float speed) {
+		return switch (movementDirection) {
+			case SIDEWAYS -> speed * 0.8f;
+			case BACKWARD -> speed * 0.6f;
+			default -> speed;
+		};
 	}
 
 	private static float getNpcLevelDiffMod(Creature target, Creature attacker) {
