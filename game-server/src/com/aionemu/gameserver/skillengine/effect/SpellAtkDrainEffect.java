@@ -23,6 +23,11 @@ public class SpellAtkDrainEffect extends AbstractOverTimeEffect {
 	private int mpPercent;
 
 	@Override
+	protected void resolveMagicalCritical(Effect effect) {
+		effect.rollMagicalCritical(position, critProbMod2); // periodic damage ignores the apply_magical_critical flag
+	}
+
+	@Override
 	public void onPeriodicAction(Effect effect) {
 		int valueWithDelta = calculateBaseValue(effect);
 		int damage = AttackUtil.calculateMagicalOverTimeSkillResult(effect, valueWithDelta, this, effect.getSkillTemplate().isApplyMagicalSkillBoostBonus());

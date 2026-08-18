@@ -306,20 +306,27 @@ public abstract class EffectTemplate {
 			return false;
 		}
 
-		if (!effect.isForcedEffect()) {
-			if (!validateEffectConditions(effect))
-				return false;
-			if (!validatePreEffects(effect))
-				return false;
-			if (isDodgedOrResisted(effect, statEnum)) {
-				if (getPosition() != 1 && !(effect.effectInPos(1) instanceof DamageEffect))
-					effect.getSuccessEffects().clear();
-				return false;
-			}
+		boolean isForcedEffect = effect.isForcedEffect();
+		if (!isForcedEffect && (!validateEffectConditions(effect) || !validatePreEffects(effect))) {
+			effect.resetMagicalCritical(); // a filtered out effect breaks the chain, so the next position rolls its own critical
+			return false;
+		}
+		resolveMagicalCritical(effect);
+		if (!isForcedEffect && isDodgedOrResisted(effect, statEnum)) {
+			if (getPosition() != 1 && !(effect.effectInPos(1) instanceof DamageEffect))
+				effect.getSuccessEffects().clear();
+			return false;
 		}
 		addSuccessEffect(effect, spellStatus);
 		calculateDamage(effect);
 		return true;
+	}
+
+	/**
+	 * Rolls or takes over the magical critical for this effect position. Called before the resist check, so even resisted effects can decide the
+	 * critical of the following positions.
+	 */
+	protected void resolveMagicalCritical(Effect effect) {
 	}
 
 	private boolean validateEffectConditions(Effect effect) {

@@ -55,6 +55,9 @@ public class Effect implements StatOwner {
 	private SpellStatus spellStatus = SpellStatus.NONE;
 	private DashStatus dashStatus = DashStatus.NONE;
 	private AttackStatus attackStatus = AttackStatus.NORMALHIT;
+	private final boolean[] magicalCriticals = new boolean[4];
+	private boolean magicalCriticalRolled;
+	private boolean magicalCritical;
 
 	/**
 	 * shield effects related
@@ -259,6 +262,37 @@ public class Effect implements StatOwner {
 
 	public void setAttackStatus(AttackStatus attackStatus) {
 		this.attackStatus = attackStatus;
+	}
+
+	public boolean isMagicalCritical(int position) {
+		return magicalCriticals[position - 1];
+	}
+
+	/**
+	 * Rolls the magical critical for the given effect position, or takes over the one an earlier position already rolled, since a cast only rolls once
+	 * per target.
+	 */
+	public void rollMagicalCritical(int position, int criticalProb) {
+		if (!magicalCriticalRolled) {
+			magicalCritical = StatFunctions.calculateMagicalCriticalRate(effector, effected, criticalProb);
+			magicalCriticalRolled = true;
+		}
+		magicalCriticals[position - 1] = magicalCritical;
+	}
+
+	/**
+	 * Takes over the magical critical of an earlier effect position without rolling one.
+	 */
+	public void reuseMagicalCritical(int position) {
+		magicalCriticals[position - 1] = magicalCritical;
+	}
+
+	/**
+	 * An effect which got filtered out breaks the chain, so the next effect position rolls its own magical critical again.
+	 */
+	public void resetMagicalCritical() {
+		magicalCritical = false;
+		magicalCriticalRolled = false;
 	}
 
 	public List<EffectTemplate> getEffectTemplates() {

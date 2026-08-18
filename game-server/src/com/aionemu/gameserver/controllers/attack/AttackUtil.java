@@ -235,7 +235,7 @@ public class AttackUtil {
 
 		AttackStatus status = switch (element) {
 			case NONE -> calculatePhysicalStatus(effector, effected, template, effect.getSkillLevel());
-			default -> calculateMagicalStatus(effector, effected, template.getCritProbMod2(), true, effect.getSkillTemplate().isApplyMagicalCritical());
+			default -> effect.isMagicalCritical(template.getPosition()) ? AttackStatus.CRITICAL : AttackStatus.NORMALHIT;
 		};
 
 		int baseAttack = 0;
@@ -323,7 +323,7 @@ public class AttackUtil {
 		if (randomDamageType > 0)
 			damage = randomizeDamage(randomDamageType, damage);
 
-		if (status.isCritical()) {
+		if (status.isCritical() && !useTemplateDmg) {
 			int critAddDmg = template.calculateCritAddDmg(effect);
 			StatEnum stat = element == SkillElement.NONE ? StatEnum.PHYSICAL_CRITICAL_DAMAGE_REDUCE : StatEnum.MAGICAL_CRITICAL_DAMAGE_REDUCE;
 			damage = calculateWeaponCritical(element, effected, damage, getWeaponGroup(effector, true), critAddDmg, stat, true);
@@ -423,7 +423,7 @@ public class AttackUtil {
 	 * @return {@code List<AttackResult>} containing the results for each hand
 	 */
 	public static List<AttackResult> calculateMagAttackResult(Creature attacker, Creature attacked, SkillElement element, CalculationType... calculationTypes) {
-		AttackStatus attackStatus = calculateMagicalStatus(attacker, attacked, 100, false, true);
+		AttackStatus attackStatus = calculateMagicalStatus(attacker, attacked, 100, false);
 		List<AttackResult> attackResultList = StatFunctions.calculateAttackDamage(attacker, element, attackStatus, calculationTypes);
 		adjustDamageByStatModifiers(attacker, attacked, attackStatus, attackResultList, element);
 		amplifyDamageByAdditionalHitCount(attacker, attackStatus, attackResultList);
@@ -444,10 +444,7 @@ public class AttackUtil {
 			damage = StatFunctions.calculateMagicalSkillDamage(effector, effected, skillDamage, 0, template, useMagicBoost, false, false);
 			damage = damage * damageMultiplier;
 
-			AttackStatus status = effect.getAttackStatus();
-			// calculate attack status only if it has not been forced already
-			if (status == AttackStatus.NORMALHIT && template.getPosition() == 1)
-				status = calculateMagicalStatus(effector, effected, template.getCritProbMod2(), true, effect.getSkillTemplate().isApplyMagicalCritical());
+			AttackStatus status = effect.isMagicalCritical(template.getPosition()) ? AttackStatus.CRITICAL : AttackStatus.NORMALHIT;
 			if (status == AttackStatus.CRITICAL) {
 				int critAddDmg = template.calculateCritAddDmg(effect);
 				damage = calculateWeaponCritical(template.getElement(), effected, damage, getWeaponGroup(effector, true), critAddDmg,
@@ -503,13 +500,13 @@ public class AttackUtil {
 	 * Every + 100 delta of (MR - MA) = + 10% to resist<br>
 	 * if the difference is 1000 = 100% resist
 	 */
-	public static AttackStatus calculateMagicalStatus(Creature attacker, Creature attacked, int criticalProb, boolean isSkill, boolean applyMcrit) {
+	public static AttackStatus calculateMagicalStatus(Creature attacker, Creature attacked, int criticalProb, boolean isSkill) {
 		if (!isSkill) {
 			if (Rnd.get(1, 1000) <= StatFunctions.calculateMagicalResistRate(attacker, attacked, 0, SkillElement.NONE))
 				return AttackStatus.RESIST;
 		}
 
-		if (StatFunctions.calculateMagicalCriticalRate(attacker, attacked, criticalProb, applyMcrit)) {
+		if (StatFunctions.calculateMagicalCriticalRate(attacker, attacked, criticalProb)) {
 			return AttackStatus.CRITICAL;
 		}
 

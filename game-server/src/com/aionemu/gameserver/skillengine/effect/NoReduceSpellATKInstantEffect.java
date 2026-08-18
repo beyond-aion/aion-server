@@ -21,6 +21,11 @@ public class NoReduceSpellATKInstantEffect extends DamageEffect {
 	protected int max_damage;
 
 	@Override
+	protected void resolveMagicalCritical(Effect effect) {
+		effect.reuseMagicalCritical(position); // shows an already rolled critical, but never multiplies the damage
+	}
+
+	@Override
 	public void calculateDamage(Effect effect) {
 		int valueWithDelta = calculateBaseValue(effect);
 		if (percent) {

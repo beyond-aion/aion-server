@@ -21,6 +21,11 @@ import com.aionemu.gameserver.skillengine.model.EffectReserved.ResourceType;
 public class PoisonEffect extends AbstractOverTimeEffect {
 
 	@Override
+	protected void resolveMagicalCritical(Effect effect) {
+		effect.rollMagicalCritical(position, critProbMod2); // periodic damage ignores the apply_magical_critical flag
+	}
+
+	@Override
 	public void calculate(Effect effect) {
 		super.calculate(effect, StatEnum.POISON_RESISTANCE, null);
 	}

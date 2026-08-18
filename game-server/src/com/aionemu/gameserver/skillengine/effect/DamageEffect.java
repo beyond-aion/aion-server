@@ -40,6 +40,12 @@ public abstract class DamageEffect extends EffectTemplate {
 	}
 
 	@Override
+	protected void resolveMagicalCritical(Effect effect) {
+		if (element != SkillElement.NONE && effect.getSkillTemplate().isApplyMagicalCritical())
+			effect.rollMagicalCritical(position, critProbMod2);
+	}
+
+	@Override
 	public void calculateDamage(Effect effect) {
 		int valueWithDelta = calculateBaseValue(effect);
 		AttackUtil.calculateSkillResult(effect, valueWithDelta, this, false);
