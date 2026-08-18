@@ -208,16 +208,12 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 					cancelCurrentSkill(attacker);
 				} else {
 					int cancelRate = skill.getSkillTemplate().getCancelRate();
-					// retail has no special case for the highest cancel rates: cancel_rate 100000, which it allows and uses for skills like Return,
-					// Bandage Heal and Herb Treatment, simply makes the formula exceed 1000 for any hit above 0.01% of max HP, so the roll always wins.
-					if (cancelRate > 0 && !(getOwner() instanceof Npc npc && npc.isBoss())) {
+					if (cancelRate > 0) {
 						int concentration = getOwner().getGameStats().getStat(StatEnum.CONCENTRATION, 0).getCurrent();
 						float maxHp = getOwner().getGameStats().getMaxHp().getCurrent();
-						// retail: damage / maxHp * cancelRate * 100 * (cancelLevel / 100) - concentration, truncated and rolled against 1..1000.
-						// Two of its inputs are left out because both are inert in 4.6: cancelLevel, a creature stat which is a hardcoded 100 for players
-						// and defaults to the same 100 for npcs (nothing ever loads it from a file), and the attacking skill's pvp_skill_cancel_bonus, which
-						// retail adds in pvp but which is only set on two of NCSofts internal test skills.
-						int cancelChance = (int) (damage / maxHp * cancelRate * 100 - concentration);
+						// chance per mille, driven by the share of max HP the hit took. Skills with an extreme cancel rate, like Return, Bandage Heal and
+						// Herb Treatment, exceed 1000 for any noticeable hit and are therefore always interrupted.
+						int cancelChance = (int) (damage / maxHp * cancelRate * 100 * (getOwner().getCancelLevel() / 100f) - concentration);
 						if (cancelChance > 0 && Rnd.get(1, 1000) <= cancelChance)
 							cancelCurrentSkill(attacker);
 					}
