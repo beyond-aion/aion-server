@@ -76,12 +76,11 @@ public class CM_MOVE extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
-		if (player.isDead() || player.getEffectController().isUnderFear() || player.getEffectController().isConfused()) { // just in case of bad timing
+		if (player.isDead() || player.getEffectController().isUnderFear() || player.getEffectController().isConfused())  // just in case of bad timing
 			return;
-		}
-		if (handleBogusPacket(player)) {
+
+		if (handleBogusPacket(player))
 			return;
-		}
 
 		PlayerMoveController m = player.getMoveController();
 		boolean jumping = false;
@@ -137,9 +136,8 @@ public class CM_MOVE extends AionClientPacket {
 			return;
 		}
 
-		if (!player.isSpawned()) { // should be checked as late as possible, to prevent false warnings from World.updatePosition
+		if (!player.isSpawned())  // should be checked as late as possible, to prevent false warnings from World.updatePosition
 			return;
-		}
 		if (player.isProtectionActive() && (player.getX() != x || player.getY() != y || player.getZ() > z + 0.5f))
 			player.getController().stopProtectionActiveTask();
 		player.getMoveController().setIsJumping(jumping);

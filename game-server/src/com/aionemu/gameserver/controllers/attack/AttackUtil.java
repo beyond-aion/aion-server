@@ -35,8 +35,7 @@ import com.aionemu.gameserver.utils.stats.StatFunctions;
  * @author ATracer
  */
 public class AttackUtil {
-
-	private static final Logger log = LoggerFactory.getLogger(AttackUtil.class);
+	
 
 	/**
 	 * This method calculates the physical attack status and damage in the following order: <br>
@@ -443,7 +442,6 @@ public class AttackUtil {
 			effect.setProtectorId(attackResult.getProtectorId());
 			effect.setShieldDefense(attackResult.getShieldType());
 		}
-		log.info("Time {}, dmg = {}, status = {}, hit_type = {}", OffsetDateTime.now(), damage, status, hitType);
 		effect.setReserveds(new EffectReserved(position, attackResult.getDamage(), ResourceType.HP, true, send), false);
 		effect.setAttackStatus(attackResult.getAttackStatus());
 		effect.setLaunchSubEffect(attackResult.isLaunchSubEffect());

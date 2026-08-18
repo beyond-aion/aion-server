@@ -21,9 +21,9 @@ package com.aionemu.gameserver.controllers.movement;
 public class MovementModifierState {
 
 	/** Movement in the same direction needed before its modifier applies, exclusive. */
-	static final int ACTIVATION_DELAY = 666;
+	private static final int ACTIVATION_DELAY = 666;
 	/** Time an already applied modifier keeps being applied after the direction changed, exclusive. */
-	static final int DEACTIVATION_DELAY = 1332;
+	private static final int DEACTIVATION_DELAY = 1332;
 
 	private int pendingState = MoveState.NONE;
 	private long pendingSince;
