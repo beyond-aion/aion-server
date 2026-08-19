@@ -1,5 +1,6 @@
 package admincommands;
 
+import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_RESURRECT;
 import com.aionemu.gameserver.services.player.PlayerReviveService;
@@ -17,9 +18,20 @@ public class Res extends AdminCommand {
 
 	@Override
 	public void execute(Player admin, String... params) {
-		final Player player = admin.getTarget() instanceof Player target ? target : admin;
+		final VisibleObject target = admin.getTarget();
+		if (target == null) {
+			PacketSendUtility.sendMessage(admin, "No target selected.");
+			return;
+		}
+
+		if (!(target instanceof Player)) {
+			PacketSendUtility.sendMessage(admin, "You can only resurrect other players.");
+			return;
+		}
+
+		final Player player = (Player) target;
 		if (!player.isDead()) {
-			PacketSendUtility.sendMessage(admin, player.equals(admin) ? "You're already alive." : player.getName() + " is already alive.");
+			PacketSendUtility.sendMessage(admin, "That player is already alive.");
 			return;
 		}
 

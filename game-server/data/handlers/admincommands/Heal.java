@@ -4,11 +4,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_STATUPDATE_EXP;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.skillengine.model.DispelSlotType;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
@@ -28,15 +30,20 @@ public class Heal extends AdminCommand {
 			"<fp> - Heals your targets flight time.",
 			"<repose> - Heals your targets energy of repose.",
 			"<number> - Heals your targets HP by given amount.",
-			"<number%> - Heals your targets HP by given percentage.",
-			"Note: Defaults to your character, if nothing is targeted."
+			"<number%> - Heals your targets HP by given percentage."
 		);
 		// @formatter:on
 	}
 
 	@Override
 	public void execute(Player player, String... params) {
-		Creature creature = player.getTarget() instanceof Creature target ? target : player;
+		VisibleObject target = player.getTarget();
+		if (!(target instanceof Creature)) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_INVALID_TARGET());
+			return;
+		}
+
+		Creature creature = (Creature) target;
 
 		if (params.length == 0) {
 			creature.getLifeStats().increaseHp(TYPE.HP, creature.getLifeStats().getMaxHp());

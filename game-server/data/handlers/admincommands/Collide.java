@@ -8,7 +8,9 @@ import com.aionemu.gameserver.geoEngine.collision.CollisionResults;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
+import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.geo.GeoService;
 
@@ -23,8 +25,7 @@ public class Collide extends AdminCommand {
 		// @formatter:off
 		setSyntaxInfo(
 			" - Lists collisions between your target and the ground.",
-			"me - Lists collisions between you and your target.",
-			"Note: Defaults to your character, if nothing is targeted."
+			"me - Lists collisions between you and your target."
 		);
 		// @formatter:on
 	}
@@ -36,7 +37,11 @@ public class Collide extends AdminCommand {
 			sendInfo(admin);
 			return;
 		}
-		VisibleObject target = admin.getTarget() == null ? admin : admin.getTarget();
+		VisibleObject target = admin.getTarget();
+		if (target == null) {
+			PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_INVALID_TARGET());
+			return;
+		}
 
 		final byte intentions = CollisionIntention.PHYSICAL.getId();
 		float x = target.getX();

@@ -5,9 +5,12 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.ChatUtil;
+import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 
@@ -25,15 +28,22 @@ public class State extends AdminCommand {
 				"<state> - Sets given creature state(s) by name or ID, replacing existing states.",
 				"add <state> - Sets given creature state(s) by name or ID.",
 				"remove <state> - Removes given creature state(s) by name or ID. Use -1 to remove all states.",
-				"list - Shows possible state names and ID. Add ID values together to add or remove multiple states at once.",
-				"Note: Defaults to your character, if nothing is targeted."
+				"list - Shows possible state names and ID. Add ID values together to add or remove multiple states at once."
 		);
 		// @formatter:on
 	}
 
 	@Override
 	public void execute(Player admin, String... params) {
-		Creature creature = admin.getTarget() instanceof Creature target ? target : admin;
+		VisibleObject target = admin.getTarget();
+		if (target == null) {
+			sendInfo(admin);
+			return;
+		}
+		if (!(target instanceof Creature creature)) {
+			PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_INVALID_TARGET());
+			return;
+		}
 
 		if (params.length == 0) {
 			sendInfo(admin, creature.getName() + "'s state: " + getStateDescription(creature.getState()) + "\nSee "+ ChatUtil.color(getAliasWithPrefix() + " help", Color.WHITE) + " for more options.");
@@ -65,14 +75,13 @@ public class State extends AdminCommand {
 
 			creature.setState(newState);
 
-			if (creature instanceof Player player) {
+			if (target instanceof Player player) {
 				player.getController().onChangedPlayerAttributes();
 			} else {
 				creature.clearKnownlist();
 				creature.updateKnownlist();
 			}
-			if (!creature.equals(admin))
-				ThreadPoolManager.getInstance().schedule(() -> admin.setTarget(creature), 200);
+			ThreadPoolManager.getInstance().schedule(() -> admin.setTarget(target), 200);
 
 			sendInfo(admin, creature.getName() + "'s state changed to " + getStateDescription(creature.getState()));
 		}
