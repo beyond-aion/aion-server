@@ -10972,7 +10972,7 @@
 			<polishchargeweapon value="77" />
 		</endconditions>
 		<effects>
-			<onetimeboostskillattack count="5" type="PHYSICAL" value="30" duration2="60000" effectid="177" e="1" noresist="true" hoptype="SKILLLV" hopb="684" />
+			<onetimeboostskillattack count="5" type="PHYSICAL" value="30" acc_flat="500" duration2="60000" effectid="177" e="1" noresist="true" hoptype="SKILLLV" hopb="684" />
 			<statdown duration2="60000" effectid="106842" e="2" noresist="true" element="FIRE" preeffect="1">
 				<change stat="PHYSICAL_DEFENSE" func="PERCENT" value="-30" />
 			</statdown>
@@ -116915,7 +116915,7 @@
 	<skill_template skill_id="13194" name="Blessing: Successful Attack I" nameId="2285435" stack="ASD_PROC_NEXTATKHITBUFF_PROC" lvl="1" skilltype="MAGICAL" skillsubtype="NONE" tslot="BUFF" dispel_category="BUFF" req_dispel_level="1" req_dispel_count="10" activation="PROVOKED" cooldown="0" duration="0" cancel_rate="10">
 		<properties first_target="TARGET" first_target_range="25" target_relation="FRIEND" target_type="ONLYONE" />
 		<effects>
-			<onetimeboostskillattack count="1" type="ALL" value="0" duration2="3000" effectid="989291" e="1" noresist="true" />
+			<onetimeboostskillattack count="1" type="ALL" value="0" dmg_flat="1" duration2="3000" effectid="989291" e="1" noresist="true" />
 			<alwayshit duration2="3000" effectid="141" e="2" noresist="true" preeffect="1" />
 			<alwaysnoresist duration2="3000" effectid="205" e="3" noresist="true" preeffect="1" />
 		</effects>
@@ -116924,7 +116924,7 @@
 	<skill_template skill_id="13195" name="Blessing: Successful Attack II" nameId="2285437" stack="ASD_PROC_NEXTATKHITBUFF_PROC" lvl="2" skilltype="MAGICAL" skillsubtype="NONE" tslot="BUFF" dispel_category="BUFF" req_dispel_level="1" req_dispel_count="10" activation="PROVOKED" cooldown="0" duration="0" cancel_rate="10">
 		<properties first_target="TARGET" first_target_range="25" target_relation="FRIEND" target_type="ONLYONE" />
 		<effects>
-			<onetimeboostskillattack count="1" type="ALL" value="0" duration2="5000" effectid="989301" e="1" noresist="true" />
+			<onetimeboostskillattack count="1" type="ALL" value="0" dmg_flat="1" duration2="5000" effectid="989301" e="1" noresist="true" />
 			<alwayshit duration2="5000" effectid="141" e="2" noresist="true" preeffect="1" />
 			<alwaysnoresist duration2="5000" effectid="205" e="3" noresist="true" preeffect="1" />
 		</effects>
@@ -116933,7 +116933,7 @@
 	<skill_template skill_id="13196" name="Blessing: Successful Attack III" nameId="2285541" stack="ASD_PROC_NEXTATKHITBUFF_PROC" lvl="3" skilltype="MAGICAL" skillsubtype="NONE" tslot="BUFF" dispel_category="BUFF" req_dispel_level="1" req_dispel_count="10" activation="PROVOKED" cooldown="0" duration="0" cancel_rate="10">
 		<properties first_target="TARGET" first_target_range="25" target_relation="FRIEND" target_type="ONLYONE" />
 		<effects>
-			<onetimeboostskillattack count="1" type="ALL" value="0" duration2="5000" effectid="989301" e="1" noresist="true" />
+			<onetimeboostskillattack count="1" type="ALL" value="0" dmg_flat="1" duration2="5000" effectid="989301" e="1" noresist="true" />
 			<alwayshit duration2="5000" effectid="141" e="2" noresist="true" preeffect="1" />
 			<alwaysnoresist duration2="5000" effectid="205" e="3" noresist="true" preeffect="1" />
 		</effects>
@@ -116942,7 +116942,7 @@
 	<skill_template skill_id="13197" name="Blessing: Successful Attack IV" nameId="2285542" stack="ASD_PROC_NEXTATKHITBUFF_PROC" lvl="4" skilltype="MAGICAL" skillsubtype="NONE" tslot="BUFF" dispel_category="BUFF" req_dispel_level="1" req_dispel_count="10" activation="PROVOKED" cooldown="0" duration="0" cancel_rate="10">
 		<properties first_target="TARGET" first_target_range="25" target_relation="FRIEND" target_type="ONLYONE" />
 		<effects>
-			<onetimeboostskillattack count="1" type="ALL" value="0" duration2="5000" effectid="989301" e="1" noresist="true" />
+			<onetimeboostskillattack count="1" type="ALL" value="0" dmg_flat="1" duration2="5000" effectid="989301" e="1" noresist="true" />
 			<alwayshit duration2="5000" effectid="141" e="2" noresist="true" preeffect="1" />
 			<alwaysnoresist duration2="5000" effectid="205" e="3" noresist="true" preeffect="1" />
 		</effects>
@@ -117652,7 +117652,7 @@
 	<skill_template skill_id="13272" name="Blessing: Successful Attack V" nameId="2285868" stack="ASD_PROC_NEXTATKHITBUFF_PROC" lvl="5" skilltype="MAGICAL" skillsubtype="NONE" tslot="BUFF" dispel_category="BUFF" req_dispel_level="1" req_dispel_count="10" activation="PROVOKED" cooldown="0" duration="0" cancel_rate="10">
 		<properties first_target="TARGET" first_target_range="25" target_relation="FRIEND" target_type="ONLYONE" />
 		<effects>
-			<onetimeboostskillattack count="1" type="ALL" value="0" duration2="5000" effectid="986961" e="1" noresist="true" />
+			<onetimeboostskillattack count="1" type="ALL" value="0" dmg_flat="1" duration2="5000" effectid="986961" e="1" noresist="true" />
 			<alwayshit duration2="5000" effectid="141" e="2" noresist="true" preeffect="1" />
 			<alwaysnoresist duration2="5000" effectid="205" e="3" noresist="true" preeffect="1" />
 		</effects>
