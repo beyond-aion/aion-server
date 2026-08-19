@@ -92,8 +92,4 @@ public abstract class DamageEffect extends EffectTemplate {
 	public boolean shouldUseBoostSpellAttackEffects() {
 		return true;
 	}
-
-	public boolean shouldUseOneTimeBoostSkillAttack() {
-		return true;
-	}
 }
