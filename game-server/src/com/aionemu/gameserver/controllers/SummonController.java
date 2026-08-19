@@ -70,7 +70,7 @@ public class SummonController extends CreatureController<Summon> {
 	}
 
 	public boolean canAttack(int targetObjId) {
-		return getOwner().getKnownList().getObject(targetObjId) instanceof Creature;
+		return getOwner().getKnownList().getObject(targetObjId) instanceof Creature creature && getOwner().getMaster().isEnemy(creature);
 	}
 
 	@Override
@@ -132,7 +132,7 @@ public class SummonController extends CreatureController<Summon> {
 		Skill skill = SkillEngine.getInstance().getSkill(creature, order.getSkillId(), 1, order.getTarget());
 		skill.setHate(order.getHate());
 		if (skill.useSkill() && order.isRelease()) {
-			SummonsService.release(getOwner(), UnsummonType.UNSPECIFIED);
+			SummonsService.release(getOwner(), UnsummonType.SKILL_ORDER);
 		}
 	}
 

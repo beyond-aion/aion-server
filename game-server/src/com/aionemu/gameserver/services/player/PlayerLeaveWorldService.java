@@ -100,7 +100,6 @@ public class PlayerLeaveWorldService {
 		}
 		player.getEffectController().removeNonStorableEffectsForLogout();
 		PlayerEffectsDAO.storePlayerEffects(player);
-		PlayerCooldownsDAO.storePlayerCooldowns(player);
 		ItemCooldownsDAO.storeItemCooldowns(player);
 		PlayerLifeStatsDAO.updatePlayerLifeStat(player);
 
@@ -113,7 +112,8 @@ public class PlayerLeaveWorldService {
 
 		Summon summon = player.getSummon();
 		if (summon != null)
-			SummonsService.release(summon, UnsummonType.LOGOUT);
+			SummonsService.release(summon, UnsummonType.LOGOUT); // puts the summoning skill on cooldown, so store cooldowns afterwards
+		PlayerCooldownsDAO.storePlayerCooldowns(player);
 		if (player.getPet() != null)
 			player.getPet().getController().delete();
 		if (player.getPostman() != null)

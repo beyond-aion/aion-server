@@ -83,28 +83,19 @@ public class SummonsService {
 			if (summon.equals(master.getSummon()))
 				master.setSummon(null);
 
-			switch (unsummonType) {
-				case COMMAND:
-				case DISTANCE:
-				case SUMMON_DEATH:
-				case MASTER_DEATH:
-				case UNSPECIFIED:
-				case PET_ORDER_UNSUMMON_EFFECT:
-					SkillTemplate summoningSkill = DataManager.SKILL_DATA.getSkillTemplate(summon.getSummonedBySkillId());
-					if (summoningSkill != null && summoningSkill.getCooldown() > 0)
-						master.setSkillCoolDown(summoningSkill.getCooldownId(), summoningSkill.getCooldown() * 100 + System.currentTimeMillis());
+			SkillTemplate summoningSkill = DataManager.SKILL_DATA.getSkillTemplate(summon.getSummonedBySkillId());
+			if (summoningSkill != null && summoningSkill.getCooldown() > 0)
+				master.setSkillCoolDown(summoningSkill.getCooldownId(), summoningSkill.getCooldown() * 100 + System.currentTimeMillis());
 
-					if (unsummonType == UnsummonType.DISTANCE)
-						PacketSendUtility.sendPacket(master, SM_SYSTEM_MESSAGE.STR_SKILL_SUMMON_UNSUMMON_BY_TOO_DISTANCE());
-					else
-						PacketSendUtility.sendPacket(master, SM_SYSTEM_MESSAGE.STR_SKILL_SUMMON_UNSUMMONED(summon.getL10n()));
-					PacketSendUtility.sendPacket(master, new SM_SUMMON_PANEL_REMOVE(summon.getSummonedBySkillId()));
-					PacketSendUtility.sendPacket(master, new SM_SUMMON_OWNER_REMOVE(summon.getObjectId()));
-					if (!addedMasterHate)
-						scheduleAddMasterHate(summon);
-					break;
-				case LOGOUT:
-					break;
+			if (unsummonType != UnsummonType.LOGOUT) { // the master is leaving the world, updating his client is pointless
+				if (unsummonType == UnsummonType.DISTANCE)
+					PacketSendUtility.sendPacket(master, SM_SYSTEM_MESSAGE.STR_SKILL_SUMMON_UNSUMMON_BY_TOO_DISTANCE());
+				else
+					PacketSendUtility.sendPacket(master, SM_SYSTEM_MESSAGE.STR_SKILL_SUMMON_UNSUMMONED(summon.getL10n()));
+				PacketSendUtility.sendPacket(master, new SM_SUMMON_PANEL_REMOVE(summon.getSummonedBySkillId()));
+				PacketSendUtility.sendPacket(master, new SM_SUMMON_OWNER_REMOVE(summon.getObjectId()));
+				if (!addedMasterHate)
+					scheduleAddMasterHate(summon);
 			}
 		}
 
@@ -207,7 +198,8 @@ public class SummonsService {
 				return;
 			if (summonMode == SummonMode.ATTACK && !summon.getController().canAttack(targetObjId))
 				return; // don't cancel a pending release for an order that won't be carried out
-			if (summonMode != SummonMode.RELEASE)
+			// UNK leaves the summons mode untouched, so it must not take back a pending release either
+			if (summonMode == SummonMode.ATTACK || summonMode == SummonMode.GUARD || summonMode == SummonMode.REST)
 				summon.cancelReleaseByMaster();
 		}
 

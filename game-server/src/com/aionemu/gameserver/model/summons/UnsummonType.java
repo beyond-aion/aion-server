@@ -12,8 +12,10 @@ public enum UnsummonType {
 	COMMAND(3000, true),
 	SUMMON_DEATH(0, false),
 	MASTER_DEATH(0, false),
-	/** Live time ran out, skill order with release flag (summon casts and vanishes), instance script, ... */
-	UNSPECIFIED(3000, false),
+	/** Live time ran out, instance script, ... */
+	UNSPECIFIED(0, false),
+	/** The summon was ordered to cast a skill and vanish afterwards. */
+	SKILL_ORDER(3000, false),
 	PET_ORDER_UNSUMMON_EFFECT(0, false);
 
 	private final int delayMillis;
