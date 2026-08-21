@@ -324,7 +324,7 @@
 	<report_to id="4917" start_npc_ids="203385" end_npc_ids="798358"/>
 	<report_to id="4921" start_npc_ids="798358" end_npc_ids="279022"/>
 	<report_to id="4964" start_npc_ids="204286" end_npc_ids="204051"/>
-	<report_to id="4965" start_npc_ids="204182" end_npc_ids="204207"/>
+	<report_to id="4965" start_npc_ids="204837" end_npc_ids="204715"/>
 	<report_to id="29040" start_npc_ids="798385" end_npc_ids="798443"/>
 	<report_to id="29041" start_npc_ids="204051" end_npc_ids="204286"/>
 	<report_to id="29044" start_npc_ids="798443" end_npc_ids="798441"/>
@@ -427,8 +427,8 @@
 	<item_collecting id="4910" start_npc_ids="798317"/>
 	<item_collecting id="4911" start_npc_ids="798317"/>
 	<item_collecting id="4912" start_npc_ids="798317"/>
-	<item_collecting id="4915" start_npc_ids="203385"/>
-	<item_collecting id="4916" start_npc_ids="203385"/>
+	<item_collecting id="4915" start_npc_ids="204837"/>
+	<item_collecting id="4916" start_npc_ids="204837"/>
 	<item_collecting id="4918" start_npc_ids="798358"/>
 	<item_collecting id="4919" start_npc_ids="798358"/>
 	<item_collecting id="4945" start_npc_ids="204104"/>
@@ -528,7 +528,7 @@
 	
 	<!-- HUNTING QUESTS -->
 	<monster_hunt id="4213" start_npc_ids="204202"/>
-	<monster_hunt id="4977" start_npc_ids="203385"/>
+	<monster_hunt id="4977" start_npc_ids="204837"/>
 	<monster_hunt id="4978" start_npc_ids="204286"/>
 	<monster_hunt id="4979" start_npc_ids="204283"/>
 	<monster_hunt id="80013" start_npc_ids="799788"/>
