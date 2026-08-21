@@ -42,7 +42,7 @@ public abstract class DamageEffect extends EffectTemplate {
 	@Override
 	protected void resolveMagicalCritical(Effect effect) {
 		if (element != SkillElement.NONE && effect.getSkillTemplate().isApplyMagicalCritical())
-			effect.rollMagicalCritical(position, critProbMod2);
+			effect.rollMagicalCritical(position, getCritProbMod2());
 	}
 
 	@Override
