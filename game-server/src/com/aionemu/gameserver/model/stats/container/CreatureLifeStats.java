@@ -82,6 +82,10 @@ public abstract class CreatureLifeStats<T extends Creature> {
 	 * @return The HP that this creature has left. If 0, the creature died.
 	 */
 	public int reduceHp(TYPE type, int value, int skillId, LOG log, Creature attacker) {
+		return reduceHp(type, value, skillId, log, attacker, false);
+	}
+
+	public int reduceHp(TYPE type, int value, int skillId, LOG log, Creature attacker, boolean criticalHit) {
 		Objects.requireNonNull(attacker, "attacker");
 		if (getOwner().isInvulnerable()) {
 			unsetIsAboutToDie();
@@ -102,7 +106,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 		}
 
 		if (newHp != previousHp || skillId != 0)
-			sendAttackStatusPacketUpdate(type, previousHp - newHp, skillId, log);
+			sendAttackStatusPacketUpdate(type, previousHp - newHp, skillId, log, criticalHit);
 		if (newHp != previousHp)
 			onHpChanged(previousHp, newHp, attacker);
 		return newHp;
@@ -139,8 +143,12 @@ public abstract class CreatureLifeStats<T extends Creature> {
 	}
 
 	protected void sendAttackStatusPacketUpdate(TYPE type, int value, int skillId, LOG log) {
+		sendAttackStatusPacketUpdate(type, value, skillId, log, false);
+	}
+
+	protected void sendAttackStatusPacketUpdate(TYPE type, int value, int skillId, LOG log, boolean criticalHit) {
 		if (type != null)
-			PacketSendUtility.broadcastToSightedPlayers(owner, new SM_ATTACK_STATUS(owner, type, skillId, value, log), true);
+			PacketSendUtility.broadcastToSightedPlayers(owner, new SM_ATTACK_STATUS(owner, type, skillId, value, log, criticalHit), true);
 	}
 
 	/**

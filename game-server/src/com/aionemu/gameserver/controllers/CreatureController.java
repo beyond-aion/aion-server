@@ -184,21 +184,29 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	}
 
 	public final void onAttack(Creature creature, int damage, AttackStatus attackStatus, Effect criticalEffect) {
-		onAttack(creature, null, TYPE.REGULAR, damage, true, LOG.REGULAR, attackStatus, HopType.DAMAGE, criticalEffect);
+		onAttack(creature, null, TYPE.REGULAR, damage, true, LOG.REGULAR, attackStatus, HopType.DAMAGE, criticalEffect, false);
 	}
 
 	public final void onAttack(Effect effect, TYPE type, int damage, boolean notifyAttack, LOG logId, HopType hopType) {
-		onAttack(effect.getEffector(), effect, type, damage, notifyAttack, logId, effect.getAttackStatus(), hopType, null);
+		onAttack(effect, type, damage, notifyAttack, logId, hopType, false);
+	}
+
+	/**
+	 * Perform tasks when Creature was attacked by a periodic effect. Its critical hits are only visible in the attack status packet, since the cast
+	 * result was already sent when the effect started.
+	 */
+	public final void onAttack(Effect effect, TYPE type, int damage, boolean notifyAttack, LOG logId, HopType hopType, boolean criticalHit) {
+		onAttack(effect.getEffector(), effect, type, damage, notifyAttack, logId, effect.getAttackStatus(), hopType, null, criticalHit);
 	}
 
 	public void onAttack(Creature attacker, Effect effect, TYPE type, int damage, boolean notifyAttack, LOG logId, AttackStatus status, HopType hopType) {
-		onAttack(attacker, effect, type, damage, notifyAttack, logId, status, hopType, null);
+		onAttack(attacker, effect, type, damage, notifyAttack, logId, status, hopType, null, false);
 	}
 
 	/**
 	 * Perform tasks when Creature was attacked
 	 */
-	private void onAttack(Creature attacker, Effect effect, TYPE type, int damage, boolean notifyAttack, LOG logId, AttackStatus status, HopType hopType, Effect criticalEffect) {
+	private void onAttack(Creature attacker, Effect effect, TYPE type, int damage, boolean notifyAttack, LOG logId, AttackStatus status, HopType hopType, Effect criticalEffect, boolean criticalHit) {
 		if (!getOwner().isSpawned())
 			return;
 		if (damage != 0 && notifyAttack) {
@@ -226,7 +234,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 
 		// notify all NPC's around that creature is attacking me
 		getOwner().getKnownList().forEachNpc(npc -> npc.getAi().onCreatureEvent(AIEventType.CREATURE_NEEDS_SUPPORT, getOwner()));
-		getOwner().getLifeStats().reduceHp(type, damage, effect == null ? 0 : effect.getSkillId(), logId, attacker);
+		getOwner().getLifeStats().reduceHp(type, damage, effect == null ? 0 : effect.getSkillId(), logId, attacker, criticalHit);
 		getOwner().incrementAttackedCount();
 
 		if (!getOwner().isDead() && attacker instanceof Player player) {
