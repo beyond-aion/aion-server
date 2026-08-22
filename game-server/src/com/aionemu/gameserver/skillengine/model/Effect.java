@@ -375,8 +375,8 @@ public class Effect implements StatOwner {
 					toSend.add(er);
 			}
 		}
-		if (toSend.isEmpty())
-			return Collections.singleton(new EffectReserved(0, 0, ResourceType.HP, true));
+		if (toSend.isEmpty()) // effects without a sent value (like damage over time) can still show their attack status
+			return Collections.singleton(new EffectReserved(0, 0, ResourceType.HP, true, true, attackStatus));
 		return toSend;
 	}
 

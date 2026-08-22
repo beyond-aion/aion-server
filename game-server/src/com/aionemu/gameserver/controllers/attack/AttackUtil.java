@@ -406,7 +406,7 @@ public class AttackUtil {
 			effect.setProtectorId(attackResult.getProtectorId());
 			effect.setShieldDefense(attackResult.getShieldType());
 		}
-		effect.setReserveds(new EffectReserved(position, attackResult.getDamage(), ResourceType.HP, true, send), false);
+		effect.setReserveds(new EffectReserved(position, attackResult.getDamage(), ResourceType.HP, true, send, attackResult.getAttackStatus()), false);
 		effect.setAttackStatus(attackResult.getAttackStatus());
 		effect.setLaunchSubEffect(attackResult.isLaunchSubEffect());
 	}
