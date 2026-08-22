@@ -234,7 +234,7 @@ public class AttackUtil {
 		boolean send = !(template instanceof DelayedSpellAttackInstantEffect) && !(template instanceof ProcAtkInstantEffect);
 
 		AttackStatus status = switch (element) {
-			case NONE -> calculatePhysicalStatus(effector, effected, template, effect.getSkillLevel());
+			case NONE -> calculatePhysicalStatus(effector, effected, template, effect);
 			default -> effect.isMagicalCritical(template.getPosition()) ? AttackStatus.CRITICAL : AttackStatus.NORMALHIT;
 		};
 
@@ -462,10 +462,10 @@ public class AttackUtil {
 		return (int) damage;
 	}
 
-	private static AttackStatus calculatePhysicalStatus(Creature attacker, Creature attacked, EffectTemplate template, int skillLevel) {
-		int accMod = template.getAccMod2() + template.getAccMod1() * skillLevel;
+	private static AttackStatus calculatePhysicalStatus(Creature attacker, Creature attacked, EffectTemplate template, Effect effect) {
+		int accMod = template.getAccMod2() + template.getAccMod1() * effect.getSkillLevel();
 		boolean cannotMiss = template instanceof SkillAttackInstantEffect skillAttackInstantEffect && skillAttackInstantEffect.isCannotmiss();
-		return calculatePhysicalStatus(attacker, attacked, true, accMod, template.getCritProbMod2(), true, cannotMiss);
+		return calculatePhysicalStatus(attacker, attacked, true, accMod, template.calculateCritProbMod(effect), true, cannotMiss);
 	}
 
 	private static AttackStatus calculatePhysicalStatus(Creature attacker, Creature attacked, boolean isMainHand, int accMod, int criticalProb,

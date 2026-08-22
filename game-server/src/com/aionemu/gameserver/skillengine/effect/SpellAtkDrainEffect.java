@@ -24,7 +24,7 @@ public class SpellAtkDrainEffect extends AbstractOverTimeEffect {
 
 	@Override
 	protected void resolveMagicalCritical(Effect effect) {
-		effect.rollMagicalCritical(position, critProbMod2); // periodic damage ignores the apply_magical_critical flag
+		effect.rollMagicalCritical(position, calculateCritProbMod(effect)); // periodic damage ignores the apply_magical_critical flag
 	}
 
 	@Override

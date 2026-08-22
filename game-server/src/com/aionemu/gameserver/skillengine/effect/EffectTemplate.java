@@ -76,6 +76,8 @@ public abstract class EffectTemplate {
 	protected int[] preEffects;
 	@XmlAttribute(name = "preeffect_prob")
 	protected int preEffectProb = 100;
+	@XmlAttribute(name = "critprobmod1")
+	protected int critProbMod1 = 0;
 	@XmlAttribute(name = "critprobmod2")
 	protected int critProbMod2 = 100;
 	@XmlAttribute(name = "critadddmg1")
@@ -191,13 +193,6 @@ public abstract class EffectTemplate {
 	}
 
 	/**
-	 * @return the critProbMod2
-	 */
-	public int getCritProbMod2() {
-		return critProbMod2;
-	}
-
-	/**
 	 * @return the critAddDmg1
 	 */
 	public int getCritAddDmg1() {
@@ -272,6 +267,10 @@ public abstract class EffectTemplate {
 
 	public int calculateCritAddDmg(Effect effect) {
 		return critAddDmg2 + critAddDmg1 * effect.getSkillLevel();
+	}
+
+	public int calculateCritProbMod(Effect effect) {
+		return critProbMod2 + critProbMod1 * effect.getSkillLevel();
 	}
 
 	/**

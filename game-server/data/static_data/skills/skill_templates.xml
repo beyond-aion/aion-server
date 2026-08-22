@@ -102089,7 +102089,7 @@
 		<effects>
 			<spellatkinstant value="1500" e="1" noresist="true" element="FIRE" critprobmod2="0" hoptype="DAMAGE" />
 			<spellatk checktime="1000" value="800" duration2="5000" e="2" noresist="true" element="FIRE" preeffect="1" critprobmod2="0" hoptype="DAMAGE" />
-			<confuse duration2="5000" e="3" noresist="true" element="FIRE" preeffect="2" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<confuse duration2="5000" e="3" noresist="true" element="FIRE" preeffect="2" critprobmod1="100" hoptype="SKILLLV" hopb="60" hopa="60" />
 		</effects>
 		<motion name="pointfire" />
 	</skill_template>
@@ -184689,7 +184689,7 @@
 			<form value="FORM1" />
 		</startconditions>
 		<effects>
-			<noreducespellatk value="1120" e="1" noresist="true" element="EARTH" critprobmod2="0" />
+			<noreducespellatk value="1120" e="1" noresist="true" element="EARTH" critprobmod1="100" critprobmod2="0" />
 		</effects>
 		<motion name="poweratk" />
 	</skill_template>
@@ -184699,7 +184699,7 @@
 			<form value="FORM1" />
 		</startconditions>
 		<effects>
-			<noreducespellatk value="500" e="1" noresist="true" element="EARTH" critprobmod2="0" />
+			<noreducespellatk value="500" e="1" noresist="true" element="EARTH" critprobmod1="100" critprobmod2="0" />
 		</effects>
 		<motion name="hurtatk" speed="50" />
 	</skill_template>
@@ -184709,7 +184709,7 @@
 			<form value="FORM1" />
 		</startconditions>
 		<effects>
-			<noreducespellatk value="3000" e="1" noresist="true" element="EARTH" critprobmod2="0" />
+			<noreducespellatk value="3000" e="1" noresist="true" element="EARTH" critprobmod1="100" critprobmod2="0" />
 		</effects>
 		<motion name="fiareaatk2" />
 	</skill_template>
@@ -184719,7 +184719,7 @@
 			<form value="FORM1" />
 		</startconditions>
 		<effects>
-			<noreducespellatk value="1700" e="1" noresist="true" element="EARTH" critprobmod2="0" />
+			<noreducespellatk value="1700" e="1" noresist="true" element="EARTH" critprobmod1="100" critprobmod2="0" />
 		</effects>
 		<motion name="upperatk2" speed="90" />
 	</skill_template>
@@ -184730,7 +184730,7 @@
 			<form value="FORM1" />
 		</startconditions>
 		<effects>
-			<spellatkinstant value="600" e="1" noresist="true" element="WATER" critprobmod2="0" />
+			<spellatkinstant value="600" e="1" noresist="true" element="WATER" critprobmod1="100" critprobmod2="0" />
 			<spellatk checktime="1000" value="350" delta="2" duration2="10000" e="2" noresist="true" element="WATER" preeffect="1" />
 		</effects>
 		<actions>
@@ -184745,7 +184745,7 @@
 			<form value="FORM1" />
 		</startconditions>
 		<effects>
-			<shield percent="true" hitvalue="100" value="500000000" duration2="8000" effectid="154" e="1" noresist="true" hittype="EVERYHIT" element="EARTH" />
+			<shield percent="true" hitvalue="100" value="500000000" duration2="8000" effectid="154" e="1" noresist="true" hittype="EVERYHIT" element="EARTH" critprobmod1="100" />
 			<reflector radius="5" value="200" duration2="8000" effectid="153" e="2" noresist="true" hittype="EVERYHIT" preeffect="1" />
 		</effects>
 		<actions>
@@ -184759,7 +184759,7 @@
 			<form value="FORM1" />
 		</startconditions>
 		<effects>
-			<skillatk value="1000" e="1" noresist="true" accmod2="0" element="EARTH" critprobmod2="0" />
+			<skillatk value="1000" e="1" noresist="true" accmod2="0" element="EARTH" critprobmod1="100" critprobmod2="0" />
 		</effects>
 		<motion name="poweratk" />
 	</skill_template>
@@ -184769,7 +184769,7 @@
 			<form value="FORM1" />
 		</startconditions>
 		<effects>
-			<skillatk value="3000" e="1" noresist="true" accmod2="0" element="EARTH" critprobmod2="0" />
+			<skillatk value="3000" e="1" noresist="true" accmod2="0" element="EARTH" critprobmod1="100" critprobmod2="0" />
 		</effects>
 		<motion name="windblade" />
 	</skill_template>
@@ -184779,7 +184779,7 @@
 			<form value="FORM1" />
 		</startconditions>
 		<effects>
-			<skillatk value="1700" e="1" noresist="true" accmod2="0" element="EARTH" critprobmod2="0" />
+			<skillatk value="1700" e="1" noresist="true" accmod2="0" element="EARTH" critprobmod1="100" critprobmod2="0" />
 		</effects>
 		<motion name="throwtrap" />
 	</skill_template>
@@ -185028,7 +185028,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<spellatkinstant value="8000" e="1" noresist="true" element="WATER" critprobmod2="0" />
+			<spellatkinstant value="8000" e="1" noresist="true" element="WATER" critprobmod1="100" critprobmod2="0" />
 		</effects>
 		<motion name="normalfire" delay="500" />
 	</skill_template>
@@ -185059,7 +185059,7 @@
 			<form value="FORM1" />
 		</startconditions>
 		<effects>
-			<shield percent="true" hitvalue="100" value="500000000" duration2="10000" effectid="154" e="1" noresist="true" hittype="EVERYHIT" element="EARTH" />
+			<shield percent="true" hitvalue="100" value="500000000" duration2="10000" effectid="154" e="1" noresist="true" hittype="EVERYHIT" element="EARTH" critprobmod1="100" />
 			<reflector hitvalue="2000" radius="5" value="50" duration2="10000" effectid="153" e="2" noresist="true" hittype="EVERYHIT" preeffect="1" />
 		</effects>
 		<actions>
@@ -187562,7 +187562,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<noreducespellatk value="1" e="1" noresist="true" element="EARTH" critprobmod2="0" />
+			<noreducespellatk value="1" e="1" noresist="true" element="EARTH" critprobmod1="100" critprobmod2="0" />
 		</effects>
 		<motion name="asdpatk" />
 	</skill_template>
@@ -187576,7 +187576,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<noreducespellatk value="1" e="1" noresist="true" element="EARTH" critprobmod2="0" />
+			<noreducespellatk value="1" e="1" noresist="true" element="EARTH" critprobmod1="100" critprobmod2="0" />
 		</effects>
 		<motion name="pointfire4" />
 	</skill_template>
@@ -187590,7 +187590,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<noreducespellatk value="1" e="1" noresist="true" element="EARTH" critprobmod2="0" />
+			<noreducespellatk value="1" e="1" noresist="true" element="EARTH" critprobmod1="100" critprobmod2="0" />
 		</effects>
 		<motion name="normalfire" />
 	</skill_template>
@@ -187653,7 +187653,7 @@
 			<form value="FORM1" />
 		</startconditions>
 		<effects>
-			<noreducespellatk value="16200" e="1" noresist="true" element="EARTH" critprobmod2="0" hoptype="SKILLLV" hopb="10000" />
+			<noreducespellatk value="16200" e="1" noresist="true" element="EARTH" critprobmod1="100" critprobmod2="0" hoptype="SKILLLV" hopb="10000" />
 		</effects>
 		<motion name="hurtatk" speed="50" />
 	</skill_template>
@@ -187663,7 +187663,7 @@
 			<form value="FORM1" />
 		</startconditions>
 		<effects>
-			<noreducespellatk value="112800" e="1" noresist="true" element="EARTH" critprobmod2="0" hoptype="SKILLLV" hopb="50000" />
+			<noreducespellatk value="112800" e="1" noresist="true" element="EARTH" critprobmod1="100" critprobmod2="0" hoptype="SKILLLV" hopb="50000" />
 		</effects>
 		<motion name="fiareaatk2" />
 	</skill_template>
@@ -187673,7 +187673,7 @@
 			<form value="FORM1" />
 		</startconditions>
 		<effects>
-			<noreducespellatk value="48000" e="1" noresist="true" element="EARTH" critprobmod2="0" hoptype="SKILLLV" hopb="30000" />
+			<noreducespellatk value="48000" e="1" noresist="true" element="EARTH" critprobmod1="100" critprobmod2="0" hoptype="SKILLLV" hopb="30000" />
 		</effects>
 		<motion name="upperatk2" speed="90" />
 	</skill_template>
@@ -187683,7 +187683,7 @@
 			<form value="FORM1" />
 		</startconditions>
 		<effects>
-			<noreducespellatk value="24000" e="1" noresist="true" element="EARTH" critprobmod2="0" hoptype="SKILLLV" hopb="5000" />
+			<noreducespellatk value="24000" e="1" noresist="true" element="EARTH" critprobmod1="100" critprobmod2="0" hoptype="SKILLLV" hopb="5000" />
 		</effects>
 		<motion name="hellcurse" delay="380" />
 	</skill_template>
@@ -187822,7 +187822,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<noreducespellatk value="99999" e="1" noresist="true" element="EARTH" critprobmod2="0" />
+			<noreducespellatk value="99999" e="1" noresist="true" element="EARTH" critprobmod1="100" critprobmod2="0" />
 			<stun duration2="2000" effectid="20000" e="2" basiclvl="200" noresist="true" element="WATER" preeffect="1" />
 		</effects>
 		<motion name="poweratk" />
@@ -187833,7 +187833,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<noreducespellatk value="99999" e="1" noresist="true" element="EARTH" critprobmod2="0" />
+			<noreducespellatk value="99999" e="1" noresist="true" element="EARTH" critprobmod1="100" critprobmod2="0" />
 			<stun duration2="2000" effectid="20000" e="2" basiclvl="200" noresist="true" element="WATER" preeffect="1" />
 		</effects>
 		<motion name="poweratk" />
@@ -187887,7 +187887,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<stumble value="100" duration2="3000" effectid="154" e="1" noresist="true" element="EARTH" />
+			<stumble value="100" duration2="3000" effectid="154" e="1" noresist="true" element="EARTH" critprobmod1="100" />
 		</effects>
 		<motion name="normalfire" />
 	</skill_template>
@@ -187909,7 +187909,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<noreducespellatk value="44444" e="1" noresist="true" element="EARTH" critprobmod2="0" hoptype="DAMAGE" />
+			<noreducespellatk value="44444" e="1" noresist="true" element="EARTH" critprobmod1="100" critprobmod2="0" hoptype="DAMAGE" />
 			<fear duration2="3000" e="2" noresist="true" element="EARTH" preeffect="1" hoptype="SKILLLV" hopb="11737" />
 		</effects>
 		<motion name="normalfire" />
@@ -187920,7 +187920,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<stun value="100" duration2="2000" e="1" noresist="true" element="WATER" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<stun value="100" duration2="2000" e="1" noresist="true" element="WATER" critprobmod1="100" hoptype="SKILLLV" hopb="60" hopa="60" />
 		</effects>
 		<motion name="poweratk" speed="90" />
 	</skill_template>
@@ -187930,7 +187930,7 @@
 			<form value="FORM1" />
 		</startconditions>
 		<effects>
-			<noreducespellatk value="24300" e="1" noresist="true" element="EARTH" critprobmod2="0" hoptype="SKILLLV" hopb="10000" />
+			<noreducespellatk value="24300" e="1" noresist="true" element="EARTH" critprobmod1="100" critprobmod2="0" hoptype="SKILLLV" hopb="10000" />
 		</effects>
 		<motion name="vacuumexplosion" />
 	</skill_template>
@@ -187943,7 +187943,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<noreducespellatk value="79200" e="1" noresist="true" element="EARTH" critprobmod2="0" hoptype="SKILLLV" hopb="30000" />
+			<noreducespellatk value="79200" e="1" noresist="true" element="EARTH" critprobmod1="100" critprobmod2="0" hoptype="SKILLLV" hopb="30000" />
 		</effects>
 		<motion name="twistatk" speed="90" />
 	</skill_template>
@@ -187953,7 +187953,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<spellatkinstant value="4444" e="1" noresist="true" element="WATER" critprobmod2="0" />
+			<spellatkinstant value="4444" e="1" noresist="true" element="WATER" critprobmod1="100" critprobmod2="0" />
 			<spellatk checktime="2000" value="11111" delta="2" duration2="10000" e="2" noresist="true" element="WATER" preeffect="1" />
 		</effects>
 		<motion name="pointfire" />
@@ -187964,7 +187964,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<noreducespellatk value="49999" e="1" noresist="true" element="EARTH" critprobmod2="0" />
+			<noreducespellatk value="49999" e="1" noresist="true" element="EARTH" critprobmod1="100" critprobmod2="0" />
 			<stumble duration2="2000" effectid="20000" e="2" basiclvl="200" noresist="true" element="WATER" preeffect="1" />
 		</effects>
 		<motion name="areaatk" />
@@ -187975,8 +187975,8 @@
 			<form value="FORM1" />
 		</startconditions>
 		<effects>
-			<noreducespellatk value="57600" e="1" noresist="true" element="EARTH" critprobmod2="0" hoptype="SKILLLV" hopb="5000" hopa="60" />
-			<spellatkinstant value="100" e="2" noresist="true" element="WATER" preeffect="1" critprobmod2="0" hoptype="DAMAGE">
+			<noreducespellatk value="57600" e="1" noresist="true" element="EARTH" critprobmod1="100" critprobmod2="0" hoptype="SKILLLV" hopb="5000" hopa="60" />
+			<spellatkinstant value="100" e="2" noresist="true" element="WATER" preeffect="1" critprobmod1="100" critprobmod2="0" hoptype="DAMAGE">
 				<subeffect skill_id="8632" />
 			</spellatkinstant>
 			<spellatk checktime="1000" value="222" delta="2" duration2="2000" e="3" noresist="true" element="WATER" preeffect="2" />
@@ -187989,7 +187989,7 @@
 			<form value="FORM1" />
 		</startconditions>
 		<effects>
-			<noreducespellatk value="3000" e="1" noresist="true" element="EARTH" critprobmod2="0" hoptype="DAMAGE" />
+			<noreducespellatk value="3000" e="1" noresist="true" element="EARTH" critprobmod1="100" critprobmod2="0" hoptype="DAMAGE" />
 			<spellatk checktime="1000" value="1000" delta="2" duration2="5000" e="2" noresist="true" element="WATER" preeffect="1" />
 			<snare duration2="6000" effectid="20000" e="3" element="WATER" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60">
 				<change stat="SPEED" func="PERCENT" value="-40" />
@@ -188057,14 +188057,14 @@
 	<skill_template skill_id="21357" name="IU's Blam Skill" nameId="2283519" stack="IU_STUMBLE" lvl="1" skilltype="MAGICAL" skillsubtype="DEBUFF" tslot="DEBUFF" activation="ACTIVE" cooldown="0" duration="0" hostile_type="DIRECT" apply_magical_skill_boost_bonus="false" apply_magical_critical="false" apply_heal_boost_bonus="false">
 		<properties first_target="ME" first_target_range="1" target_relation="ENEMY" target_type="AREA" target_maxcount="100" effective_altitude="7" effective_range="28" />
 		<effects>
-			<stumble value="100" duration2="2000" effectid="154" e="1" noresist="true" element="EARTH" />
+			<stumble value="100" duration2="2000" effectid="154" e="1" noresist="true" element="EARTH" critprobmod1="100" />
 		</effects>
 		<motion name="buff" />
 	</skill_template>
 	<skill_template skill_id="21358" name="IU's Blam Skill" nameId="2283520" stack="IU_STUMBLE2" lvl="1" skilltype="MAGICAL" skillsubtype="DEBUFF" tslot="DEBUFF" activation="ACTIVE" cooldown="0" duration="0" hostile_type="DIRECT" apply_magical_skill_boost_bonus="false" apply_magical_critical="false" apply_heal_boost_bonus="false">
 		<properties first_target="ME" first_target_range="1" target_relation="ENEMY" target_type="AREA" target_maxcount="100" effective_altitude="7" effective_range="28" />
 		<effects>
-			<stumble value="100" duration2="3000" effectid="154" e="1" noresist="true" element="EARTH" />
+			<stumble value="100" duration2="3000" effectid="154" e="1" noresist="true" element="EARTH" critprobmod1="100" />
 		</effects>
 		<motion name="buff" />
 	</skill_template>
@@ -188093,7 +188093,7 @@
 			<target value="PC" />
 		</startconditions>
 		<effects>
-			<shield percent="true" hitvalue="100" value="500000000" duration2="6000" effectid="154" e="1" noresist="true" hittype="EVERYHIT" element="EARTH" />
+			<shield percent="true" hitvalue="100" value="500000000" duration2="6000" effectid="154" e="1" noresist="true" hittype="EVERYHIT" element="EARTH" critprobmod1="100" />
 			<reflector radius="5" value="200" duration2="8000" effectid="153" e="2" noresist="true" hittype="EVERYHIT" preeffect="1" />
 		</effects>
 		<motion name="buff" />
@@ -188104,7 +188104,7 @@
 			<target value="PC" />
 		</startconditions>
 		<effects>
-			<shield percent="true" hitvalue="100" value="500000000" duration2="8000" effectid="154" e="1" noresist="true" hittype="EVERYHIT" element="EARTH" />
+			<shield percent="true" hitvalue="100" value="500000000" duration2="8000" effectid="154" e="1" noresist="true" hittype="EVERYHIT" element="EARTH" critprobmod1="100" />
 			<reflector radius="5" value="200" duration2="8000" effectid="153" e="2" noresist="true" hittype="EVERYHIT" preeffect="1" />
 		</effects>
 		<motion name="buff" />
@@ -188115,7 +188115,7 @@
 			<target value="PC" />
 		</startconditions>
 		<effects>
-			<shield percent="true" hitvalue="100" value="500000000" duration2="10000" effectid="154" e="1" noresist="true" hittype="EVERYHIT" element="EARTH" />
+			<shield percent="true" hitvalue="100" value="500000000" duration2="10000" effectid="154" e="1" noresist="true" hittype="EVERYHIT" element="EARTH" critprobmod1="100" />
 			<reflector radius="5" value="200" duration2="8000" effectid="153" e="2" noresist="true" hittype="EVERYHIT" preeffect="1" />
 		</effects>
 		<motion name="buff" />
@@ -188188,7 +188188,7 @@
 	<skill_template skill_id="21368" name="IU's Healing" nameId="2283525" stack="IU_DAMAGE" lvl="1" skilltype="PHYSICAL" skillsubtype="ATTACK" tslot="NONE" activation="ACTIVE" cooldown="0" duration="0" apply_magical_skill_boost_bonus="false" apply_magical_critical="false" apply_heal_boost_bonus="false">
 		<properties first_target="ME" first_target_range="6" target_relation="ENEMY" target_type="AREA" target_maxcount="4" effective_altitude="4" effective_range="8" />
 		<effects>
-			<noreducespellatk value="12000" e="1" noresist="true" element="EARTH" critprobmod2="0" />
+			<noreducespellatk value="12000" e="1" noresist="true" element="EARTH" critprobmod1="100" critprobmod2="0" />
 			<dispelbuff dispel_level="10" power="10" value="3" e="2" noresist="true" element="EARTH" preeffect="1" />
 		</effects>
 		<motion name="normalfire" speed="50" />
@@ -188303,7 +188303,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<noreducespellatk value="236880" e="1" noresist="true" element="EARTH" critprobmod2="0" hoptype="SKILLLV" hopb="50000" />
+			<noreducespellatk value="236880" e="1" noresist="true" element="EARTH" critprobmod1="100" critprobmod2="0" hoptype="SKILLLV" hopb="50000" />
 		</effects>
 		<motion name="downatk3" />
 	</skill_template>
@@ -188327,7 +188327,7 @@
 			<form value="FORM1" />
 		</startconditions>
 		<effects>
-			<noreducespellatk value="30000" e="1" noresist="true" element="EARTH" critprobmod2="0" hoptype="DAMAGE" />
+			<noreducespellatk value="30000" e="1" noresist="true" element="EARTH" critprobmod1="100" critprobmod2="0" hoptype="DAMAGE" />
 		</effects>
 		<motion name="hurtatk" speed="50" />
 	</skill_template>
@@ -188337,7 +188337,7 @@
 			<form value="FORM1" />
 		</startconditions>
 		<effects>
-			<noreducespellatk value="100000" e="1" noresist="true" element="EARTH" critprobmod2="0" hoptype="DAMAGE" />
+			<noreducespellatk value="100000" e="1" noresist="true" element="EARTH" critprobmod1="100" critprobmod2="0" hoptype="DAMAGE" />
 		</effects>
 		<motion name="fiareaatk2" />
 	</skill_template>
@@ -188347,7 +188347,7 @@
 			<form value="FORM1" />
 		</startconditions>
 		<effects>
-			<noreducespellatk value="54000" e="1" noresist="true" element="EARTH" critprobmod2="0" hoptype="DAMAGE" />
+			<noreducespellatk value="54000" e="1" noresist="true" element="EARTH" critprobmod1="100" critprobmod2="0" hoptype="DAMAGE" />
 		</effects>
 		<motion name="upperatk2" speed="90" />
 	</skill_template>
@@ -188358,7 +188358,7 @@
 			<form value="FORM1" />
 		</startconditions>
 		<effects>
-			<spellatkinstant value="10000" e="1" noresist="true" element="WATER" critprobmod2="0" hoptype="DAMAGE" />
+			<spellatkinstant value="10000" e="1" noresist="true" element="WATER" critprobmod1="100" critprobmod2="0" hoptype="DAMAGE" />
 			<spellatk checktime="1000" value="10000" delta="2" duration2="10000" e="2" noresist="true" element="WATER" preeffect="1" />
 		</effects>
 		<actions>
@@ -188614,7 +188614,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<stumble value="100" duration2="1000" effectid="154" e="1" noresist="true" element="EARTH" />
+			<stumble value="100" duration2="1000" effectid="154" e="1" noresist="true" element="EARTH" critprobmod1="100" />
 		</effects>
 		<motion name="poweratk" />
 	</skill_template>
@@ -188624,7 +188624,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<noreducespellatk value="99999" e="1" noresist="true" element="EARTH" critprobmod2="0" />
+			<noreducespellatk value="99999" e="1" noresist="true" element="EARTH" critprobmod1="100" critprobmod2="0" />
 			<stumble duration2="2000" effectid="20000" e="2" basiclvl="200" noresist="true" element="WATER" preeffect="1" />
 		</effects>
 		<motion name="chainatk2" />
@@ -188635,7 +188635,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<stun value="100" duration2="2000" e="1" noresist="true" element="WATER" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<stun value="100" duration2="2000" e="1" noresist="true" element="WATER" critprobmod1="100" hoptype="SKILLLV" hopb="60" hopa="60" />
 		</effects>
 		<motion name="areaatk" speed="90" />
 	</skill_template>
@@ -189129,7 +189129,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<noreducespellatk value="100" e="1" noresist="true" element="FIRE" hoptype="DAMAGE" />
+			<noreducespellatk value="100" e="1" noresist="true" element="FIRE" critprobmod1="100" hoptype="DAMAGE" />
 			<dispelnpcbuff dispel_level="5" power="20" value="10" e="2" noresist="true" element="EARTH" preeffect="1" />
 		</effects>
 		<actions>
@@ -189376,7 +189376,7 @@
 			<form value="FORM1" />
 		</startconditions>
 		<effects>
-			<noreducespellatk value="16200" e="1" noresist="true" element="EARTH" critprobmod2="0" hoptype="SKILLLV" hopb="10000" />
+			<noreducespellatk value="16200" e="1" noresist="true" element="EARTH" critprobmod1="100" critprobmod2="0" hoptype="SKILLLV" hopb="10000" />
 		</effects>
 		<motion name="hurtatk" speed="50" />
 	</skill_template>
@@ -189386,7 +189386,7 @@
 			<form value="FORM1" />
 		</startconditions>
 		<effects>
-			<noreducespellatk value="112800" e="1" noresist="true" element="EARTH" critprobmod2="0" hoptype="SKILLLV" hopb="50000" />
+			<noreducespellatk value="112800" e="1" noresist="true" element="EARTH" critprobmod1="100" critprobmod2="0" hoptype="SKILLLV" hopb="50000" />
 		</effects>
 		<motion name="fiareaatk2" />
 	</skill_template>
@@ -189396,7 +189396,7 @@
 			<form value="FORM1" />
 		</startconditions>
 		<effects>
-			<noreducespellatk value="48000" e="1" noresist="true" element="EARTH" critprobmod2="0" hoptype="SKILLLV" hopb="30000" />
+			<noreducespellatk value="48000" e="1" noresist="true" element="EARTH" critprobmod1="100" critprobmod2="0" hoptype="SKILLLV" hopb="30000" />
 		</effects>
 		<motion name="upperatk2" speed="90" />
 	</skill_template>
@@ -189406,7 +189406,7 @@
 			<form value="FORM1" />
 		</startconditions>
 		<effects>
-			<noreducespellatk value="24000" e="1" noresist="true" element="EARTH" critprobmod2="0" hoptype="SKILLLV" hopb="5000" />
+			<noreducespellatk value="24000" e="1" noresist="true" element="EARTH" critprobmod1="100" critprobmod2="0" hoptype="SKILLLV" hopb="5000" />
 		</effects>
 		<motion name="hellcurse" delay="380" />
 	</skill_template>
@@ -189416,7 +189416,7 @@
 			<form value="FORM1" />
 		</startconditions>
 		<effects>
-			<noreducespellatk value="24300" e="1" noresist="true" element="EARTH" critprobmod2="0" hoptype="SKILLLV" hopb="10000" />
+			<noreducespellatk value="24300" e="1" noresist="true" element="EARTH" critprobmod1="100" critprobmod2="0" hoptype="SKILLLV" hopb="10000" />
 		</effects>
 		<motion name="vacuumexplosion" />
 	</skill_template>
@@ -189429,7 +189429,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<noreducespellatk value="79200" e="1" noresist="true" element="EARTH" critprobmod2="0" hoptype="SKILLLV" hopb="30000" />
+			<noreducespellatk value="79200" e="1" noresist="true" element="EARTH" critprobmod1="100" critprobmod2="0" hoptype="SKILLLV" hopb="30000" />
 		</effects>
 		<motion name="twistatk" speed="90" />
 	</skill_template>
@@ -189439,8 +189439,8 @@
 			<form value="FORM1" />
 		</startconditions>
 		<effects>
-			<noreducespellatk value="57600" e="1" noresist="true" element="EARTH" critprobmod2="0" hoptype="SKILLLV" hopb="5000" hopa="60" />
-			<spellatkinstant value="100" e="2" noresist="true" element="WATER" preeffect="1" critprobmod2="0" hoptype="DAMAGE">
+			<noreducespellatk value="57600" e="1" noresist="true" element="EARTH" critprobmod1="100" critprobmod2="0" hoptype="SKILLLV" hopb="5000" hopa="60" />
+			<spellatkinstant value="100" e="2" noresist="true" element="WATER" preeffect="1" critprobmod1="100" critprobmod2="0" hoptype="DAMAGE">
 				<subeffect skill_id="8632" />
 			</spellatkinstant>
 			<spellatk checktime="1000" value="222" delta="2" duration2="2000" e="3" noresist="true" element="WATER" preeffect="2" />
@@ -189456,7 +189456,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<noreducespellatk value="236880" e="1" noresist="true" element="EARTH" critprobmod2="0" hoptype="SKILLLV" hopb="50000" />
+			<noreducespellatk value="236880" e="1" noresist="true" element="EARTH" critprobmod1="100" critprobmod2="0" hoptype="SKILLLV" hopb="50000" />
 		</effects>
 		<motion name="downatk3" />
 	</skill_template>
@@ -189595,7 +189595,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<noreducespellatk value="99999" e="1" noresist="true" element="EARTH" critprobmod2="0" />
+			<noreducespellatk value="99999" e="1" noresist="true" element="EARTH" critprobmod1="100" critprobmod2="0" />
 			<stun duration2="2000" effectid="20000" e="2" basiclvl="200" noresist="true" element="WATER" preeffect="1" />
 		</effects>
 		<motion name="poweratk" />
@@ -189606,7 +189606,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<noreducespellatk value="99999" e="1" noresist="true" element="EARTH" critprobmod2="0" />
+			<noreducespellatk value="99999" e="1" noresist="true" element="EARTH" critprobmod1="100" critprobmod2="0" />
 			<stun duration2="2000" effectid="20000" e="2" basiclvl="200" noresist="true" element="WATER" preeffect="1" />
 		</effects>
 		<motion name="poweratk" />
@@ -189660,7 +189660,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<stumble value="100" duration2="3000" effectid="154" e="1" noresist="true" element="EARTH" />
+			<stumble value="100" duration2="3000" effectid="154" e="1" noresist="true" element="EARTH" critprobmod1="100" />
 		</effects>
 		<motion name="normalfire" />
 	</skill_template>
@@ -189682,7 +189682,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<noreducespellatk value="44444" e="1" noresist="true" element="EARTH" critprobmod2="0" hoptype="DAMAGE" />
+			<noreducespellatk value="44444" e="1" noresist="true" element="EARTH" critprobmod1="100" critprobmod2="0" hoptype="DAMAGE" />
 			<fear duration2="3000" e="2" noresist="true" element="EARTH" preeffect="1" hoptype="SKILLLV" hopb="11737" />
 		</effects>
 		<motion name="normalfire" />
@@ -189693,7 +189693,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<stun value="100" duration2="2000" e="1" noresist="true" element="WATER" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<stun value="100" duration2="2000" e="1" noresist="true" element="WATER" critprobmod1="100" hoptype="SKILLLV" hopb="60" hopa="60" />
 		</effects>
 		<motion name="poweratk" speed="90" />
 	</skill_template>
@@ -189703,7 +189703,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<spellatkinstant value="4444" e="1" noresist="true" element="WATER" critprobmod2="0" />
+			<spellatkinstant value="4444" e="1" noresist="true" element="WATER" critprobmod1="100" critprobmod2="0" />
 			<spellatk checktime="2000" value="11111" delta="2" duration2="10000" e="2" noresist="true" element="WATER" preeffect="1" />
 		</effects>
 		<motion name="pointfire" />
@@ -189714,7 +189714,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<noreducespellatk value="49999" e="1" noresist="true" element="EARTH" critprobmod2="0" />
+			<noreducespellatk value="49999" e="1" noresist="true" element="EARTH" critprobmod1="100" critprobmod2="0" />
 			<stumble duration2="2000" effectid="20000" e="2" basiclvl="200" noresist="true" element="WATER" preeffect="1" />
 		</effects>
 		<motion name="areaatk" />
@@ -189738,7 +189738,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<stumble value="100" duration2="1000" effectid="154" e="1" noresist="true" element="EARTH" />
+			<stumble value="100" duration2="1000" effectid="154" e="1" noresist="true" element="EARTH" critprobmod1="100" />
 		</effects>
 		<motion name="poweratk" />
 	</skill_template>
@@ -189748,7 +189748,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<noreducespellatk value="99999" e="1" noresist="true" element="EARTH" critprobmod2="0" />
+			<noreducespellatk value="99999" e="1" noresist="true" element="EARTH" critprobmod1="100" critprobmod2="0" />
 			<stumble duration2="2000" effectid="20000" e="2" basiclvl="200" noresist="true" element="WATER" preeffect="1" />
 		</effects>
 		<motion name="chainatk2" />
@@ -189759,7 +189759,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<stun value="100" duration2="2000" e="1" noresist="true" element="WATER" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<stun value="100" duration2="2000" e="1" noresist="true" element="WATER" critprobmod1="100" hoptype="SKILLLV" hopb="60" hopa="60" />
 		</effects>
 		<motion name="areaatk" speed="90" />
 	</skill_template>
@@ -189772,7 +189772,7 @@
 			<hp value="100" delta="0" ratio="true" />
 		</endconditions>
 		<effects>
-			<noreducespellatk value="3000" e="1" noresist="true" element="FIRE" critprobmod2="0" />
+			<noreducespellatk value="3000" e="1" noresist="true" element="FIRE" critprobmod1="100" critprobmod2="0" />
 		</effects>
 		<motion name="poweratk" />
 	</skill_template>
@@ -192565,7 +192565,7 @@
 				<change stat="FLY_SPEED" func="REPLACE" value="7000" />
 			</absolutesnare>
 			<silence duration2="11000" effectid="10217151" e="2" noresist="true" element="WATER" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
-			<buffbind duration2="11000" effectid="10217151" e="3" noresist="true" element="WATER" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<buffbind duration2="11000" effectid="10217151" e="3" noresist="true" element="WATER" preeffect="1" critprobmod1="100" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<shield hitvalue="150000" value="150000" duration2="11000" effectid="10217151" e="4" noresist="true" hittype="EVERYHIT" preeffect="3" />
 		</effects>
 		<motion name="pointfire2" />
@@ -193012,7 +193012,7 @@
 				<change stat="FLY_SPEED" func="REPLACE" value="5000" />
 			</absolutesnare>
 			<silence duration2="11000" effectid="10217151" e="2" noresist="true" element="WATER" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
-			<buffbind duration2="11000" effectid="10217151" e="3" noresist="true" element="WATER" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<buffbind duration2="11000" effectid="10217151" e="3" noresist="true" element="WATER" preeffect="1" critprobmod1="100" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<shield hitvalue="150000" value="150000" duration2="11000" effectid="10217151" e="4" noresist="true" hittype="EVERYHIT" preeffect="3" />
 		</effects>
 		<motion name="debuff" />
@@ -194160,7 +194160,7 @@
 		<effects>
 			<spellatkinstant mode="PERCENT" value="220" e="1" element="WATER" hoptype="DAMAGE" />
 			<silence duration2="8000" effectid="20101" e="2" noresist="true" element="WATER" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
-			<buffbind duration2="8000" effectid="10217151" e="3" noresist="true" element="WATER" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<buffbind duration2="8000" effectid="10217151" e="3" noresist="true" element="WATER" preeffect="1" critprobmod1="100" hoptype="SKILLLV" hopb="60" hopa="60" />
 		</effects>
 		<motion name="pointfire" />
 	</skill_template>
@@ -194618,7 +194618,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<caseheal type="HP" cond_value="50" percent="true" value="100" duration2="86400000" effectid="155" e="1" noresist="true" hoptype="SKILLLV" hopb="65" hopa="65" />
+			<caseheal type="HP" cond_value="50" percent="true" value="100" duration2="86400000" effectid="155" e="1" noresist="true" critprobmod1="100" hoptype="SKILLLV" hopb="65" hopa="65" />
 		</effects>
 		<motion name="normalfire" />
 	</skill_template>

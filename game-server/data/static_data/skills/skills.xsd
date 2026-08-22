@@ -303,6 +303,7 @@
 		<xs:attribute name="hoptype" type="HopType" />
 		<xs:attribute name="critadddmg1" type="xs:int" />
 		<xs:attribute name="critadddmg2" type="xs:int" />
+		<xs:attribute name="critprobmod1" type="xs:int" />
 		<xs:attribute name="critprobmod2" type="xs:int" />
 		<xs:attribute name="preeffect_prob" type="xs:int" />
 		<xs:attribute name="preeffect" type="xs:string" />
