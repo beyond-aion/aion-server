@@ -144,7 +144,7 @@ public class DecomposeAction extends AbstractItemAction {
 			public void abort() {
 				player.getController().cancelUseItem(false);
 				player.removeItemCoolDown(parentItem.getItemTemplate().getUseLimits().getDelayId());
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_CANCELED(parentItem.getL10n()));
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_UNCOMPRESS_COMPRESSED_ITEM_CANCELED(parentItem.getL10n()));
 				PacketSendUtility.broadcastPacket(player,
 					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), 0, 2, 0), true);
 				player.getObserveController().removeObserver(this);
