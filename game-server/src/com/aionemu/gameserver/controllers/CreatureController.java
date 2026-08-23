@@ -208,13 +208,13 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 					cancelCurrentSkill(attacker);
 				} else {
 					int cancelRate = skill.getSkillTemplate().getCancelRate();
-					if (cancelRate >= 99999) {
-						cancelCurrentSkill(attacker);
-					} else if (cancelRate > 0 && !(getOwner() instanceof Npc && ((Npc) getOwner()).isBoss())) {
-						int conc = getOwner().getGameStats().getStat(StatEnum.CONCENTRATION, 0).getCurrent();
+					if (cancelRate > 0) {
+						int concentration = getOwner().getGameStats().getStat(StatEnum.CONCENTRATION, 0).getCurrent();
 						float maxHp = getOwner().getGameStats().getMaxHp().getCurrent();
-						int cancel = Math.round(((7f * (damage / maxHp) * 100f) - conc / 2f) * (cancelRate / 100f));
-						if (Rnd.chance() < cancel)
+						// chance per mille, driven by the share of max HP the hit took. Skills with an extreme cancel rate, like Return, Bandage Heal and
+						// Herb Treatment, exceed 1000 for any noticeable hit and are therefore always interrupted.
+						int cancelChance = (int) (damage / maxHp * cancelRate * 100 * (getOwner().getCancelLevel() / 100f) - concentration);
+						if (cancelChance > 0 && Rnd.get(1, 1000) <= cancelChance)
 							cancelCurrentSkill(attacker);
 					}
 				}

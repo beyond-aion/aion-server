@@ -144,6 +144,14 @@ public abstract class Creature extends VisibleObject {
 		return castingSkill;
 	}
 
+	/**
+	 * @return The factor (in percent) scaling the chance to have the current cast interrupted by incoming damage. Players are always at 100, npcs take it
+	 *         from their template.
+	 */
+	public int getCancelLevel() {
+		return 100;
+	}
+
 	public int getSkillNumber() {
 		return skillNumber;
 	}
