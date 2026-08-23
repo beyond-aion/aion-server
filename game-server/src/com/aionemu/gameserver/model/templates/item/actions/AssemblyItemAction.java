@@ -69,7 +69,6 @@ public class AssemblyItemAction extends AbstractItemAction {
 		player.getObserveController().attach(observer);
 		player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(() -> {
 			player.getObserveController().removeObserver(observer);
-			player.startCooldown(parentItem);
 			finishUse(player, parentItem);
 		}, castingDelay));
 	}
@@ -84,6 +83,7 @@ public class AssemblyItemAction extends AbstractItemAction {
 				return;
 			}
 		}
+		player.startCooldown(parentItem);
 		for (Integer itemId : assemblyItem.getParts()) {
 			player.getInventory().decreaseByItemId(itemId, 1);
 		}

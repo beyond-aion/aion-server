@@ -93,7 +93,6 @@ public class RideAction extends AbstractItemAction {
 			player.getObserveController().attach(observer);
 			player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(() -> {
 				player.getObserveController().removeObserver(observer);
-				player.startCooldown(parentItem);
 				finishUse(player, parentItem);
 			}, castingDelay));
 		}
@@ -141,6 +140,7 @@ public class RideAction extends AbstractItemAction {
 				new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, 3, 0), true);
 			return;
 		}
+		player.startCooldown(parentItem);
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_USE_ITEM(parentItem.getL10n()));
 		player.unsetState(CreatureState.ACTIVE);
 		player.setState(CreatureState.RESTING);

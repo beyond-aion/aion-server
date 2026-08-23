@@ -57,8 +57,9 @@ public class ExtractAction extends AbstractItemAction {
 		player.getObserveController().attach(observer);
 		player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(() -> {
 			player.getObserveController().removeObserver(observer);
-			player.startCooldown(parentItem);
 			boolean result = canAct(player, parentItem, targetItem) && EnchantService.breakItem(player, targetItem, parentItem);
+			if (result)
+				player.startCooldown(parentItem);
 			PacketSendUtility.sendPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate()
 				.getTemplateId(), 0, result ? 1 : 2, 0));
 		}, 5000));

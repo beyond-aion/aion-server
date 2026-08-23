@@ -79,7 +79,6 @@ public class TuningAction extends AbstractItemAction {
 		player.getObserveController().attach(observer);
 		player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(() -> {
 			player.getObserveController().removeObserver(observer);
-			player.startCooldown(parentItem);
 			if (player.getInventory().getItemByObjId(targetItem.getObjectId()) == null || !canAct(player, parentItem, targetItem)) {
 				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), tuningScrollObjectId, tuningScrollItemId, 0, 14, 0),
 					true);
@@ -89,6 +88,7 @@ public class TuningAction extends AbstractItemAction {
 				true);
 			if (!player.getInventory().decreaseByObjectId(tuningScrollObjectId, 1))
 				return;
+			player.startCooldown(parentItem);
 
 			int newOptionalSockets, newEnchantBonus, newStatBonusId;
 			if (shouldNotReduceTuneCount) { // only tune attributes (bonus stats)

@@ -71,13 +71,11 @@ public class ExpExtractAction extends AbstractItemAction {
 
 		player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(() -> {
 			player.getObserveController().removeObserver(observer);
-			player.startCooldown(parentItem);
 			finishUse(player, parentItem);
 		}, castingDelay));
 	}
 
 	private void finishUse(Player player, Item parentItem) {
-
 		PlayerCommonData cd = player.getCommonData();
 		long requiredExp = getRequiredExp(cd);
 		long newExp = cd.getExp() - requiredExp;
@@ -88,6 +86,7 @@ public class ExpExtractAction extends AbstractItemAction {
 			return;
 		}
 
+		player.startCooldown(parentItem);
 		cd.setExp(newExp);
 		ItemService.addItem(player, itemId, 1);
 		String rewardItem = DataManager.ITEM_DATA.getItemTemplate(itemId).getL10n();

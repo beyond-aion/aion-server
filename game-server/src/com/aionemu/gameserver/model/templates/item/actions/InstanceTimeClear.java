@@ -66,7 +66,6 @@ public class InstanceTimeClear extends AbstractItemAction {
 		player.getObserveController().attach(observer);
 		player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(() -> {
 			player.getObserveController().removeObserver(observer);
-			player.startCooldown(parentItem);
 			finishUse(player, parentItem, syncId);
 		}, castingDelay));
 	}
@@ -80,6 +79,8 @@ public class InstanceTimeClear extends AbstractItemAction {
 			parentItem.setActivationCount(parentItem.getActivationCount() - 1);
 		} else if (!player.getInventory().decreaseByObjectId(parentItem.getObjectId(), 1))
 			return;
+
+		player.startCooldown(parentItem);
 
 		PortalCooldown portalCD = player.getPortalCooldownList().getOrCreatePortalCooldown(worldId);
 		if (portalCD != null) {

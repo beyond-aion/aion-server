@@ -549,17 +549,15 @@ public class Skill {
 		effector.setCasting(null);
 
 		// try removing item, if its not possible return to prevent exploits
-		if (effector instanceof Player && skillMethod == SkillMethod.ITEM) {
-			Item item = ((Player) effector).getInventory().getItemByObjId(itemObjectId);
+		if (skillMethod == SkillMethod.ITEM && effector instanceof Player itemUser) {
+			Item item = itemUser.getInventory().getItemByObjId(itemObjectId);
 			if (item == null)
 				return;
-			if (item.getActivationCount() > 1) {
+			if (item.getActivationCount() > 1)
 				item.setActivationCount(item.getActivationCount() - 1);
-			} else {
-				if (!((Player) effector).getInventory().decreaseByObjectId(item.getObjectId(), 1, ItemUpdateType.DEC_ITEM_USE))
-					return;
-			}
-			((Player) effector).startCooldown(item);
+			else if (!itemUser.getInventory().decreaseByObjectId(item.getObjectId(), 1, ItemUpdateType.DEC_ITEM_USE))
+				return;
+			itemUser.startCooldown(item);
 		}
 
 		endCondCheck();

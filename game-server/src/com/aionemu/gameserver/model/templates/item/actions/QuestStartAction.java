@@ -60,13 +60,13 @@ public class QuestStartAction extends AbstractItemAction {
 		player.getObserveController().attach(observer);
 		player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(() -> {
 			player.getObserveController().removeObserver(observer);
-			player.startCooldown(parentItem);
 			finishUse(player, parentItem);
 		}, castingDelay));
 
 	}
 
 	private void finishUse(Player player, Item item) {
+		player.startCooldown(item);
 		PacketSendUtility.broadcastPacketAndReceive(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), item.getObjectId(), item.getItemId()));
 
 		// retail stays silent when the quest is already active or cannot be repeated (anymore), but warns about

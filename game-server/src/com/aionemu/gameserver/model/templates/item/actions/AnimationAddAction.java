@@ -65,7 +65,6 @@ public class AnimationAddAction extends AbstractItemAction {
 			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), castingDelay, 0, 0));
 		player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(() -> {
 			player.getObserveController().removeObserver(observer);
-			player.startCooldown(parentItem);
 			finishUse(player, parentItem);
 		}, castingDelay));
 	}
@@ -73,6 +72,7 @@ public class AnimationAddAction extends AbstractItemAction {
 	private void finishUse(Player player, Item parentItem) {
 		if (player.getInventory().decreaseItemCount(parentItem, 1) != 0)
 			return;
+		player.startCooldown(parentItem);
 		if (idle != null) {
 			addMotion(player, idle);
 		}

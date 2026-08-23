@@ -111,8 +111,6 @@ public class EnchantItemAction extends AbstractItemAction {
 
 		player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(() -> {
 			player.getObserveController().removeObserver(observer);
-			player.startCooldown(parentItem);
-
 			if (player.getInventory().getItemByObjId(targetItem.getObjectId()) == null && !targetItem.isEquipped()) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ENCHANT_ITEM_NO_TARGET_ITEM());
 				PacketSendUtility.broadcastPacketAndReceive(player,
@@ -120,6 +118,7 @@ public class EnchantItemAction extends AbstractItemAction {
 				return;
 			}
 
+			player.startCooldown(parentItem);
 			if (isEnchantmentStone)
 				EnchantService.enchantItemAct(player, parentItem, targetItem, supplementItem, currentEnchant, isSuccess);
 			else // Manastone

@@ -144,13 +144,14 @@ public class ApExtractAction extends AbstractItemAction {
 		player.getObserveController().attach(observer);
 		player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(() -> {
 			player.getObserveController().removeObserver(observer);
-			player.startCooldown(parentItem);
 			finishUse(player, parentItem, targetItem);
 		}, CASTING_DELAY));
 	}
 
 	private void finishUse(Player player, Item parentItem, Item targetItem) {
 		boolean success = extractAp(player, parentItem, targetItem);
+		if (success)
+			player.startCooldown(parentItem);
 		PacketSendUtility.broadcastPacket(player,
 			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, success ? 1 : 2, 0), true);
 	}

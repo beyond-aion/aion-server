@@ -154,7 +154,6 @@ public class DecomposeAction extends AbstractItemAction {
 		player.getObserveController().attach(observer);
 		player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(() -> {
 			player.getObserveController().removeObserver(observer);
-			player.startCooldown(parentItem);
 			finishUse(player, parentItem, targetItem, selectedCollection);
 		}, castingDelay));
 	}
@@ -173,6 +172,7 @@ public class DecomposeAction extends AbstractItemAction {
 	private void finishUse(final Player player, Item parentItem, Item targetItem, ExtractedItemsCollection selectedCollection) {
 		boolean validAction = postValidate(player, parentItem, targetItem);
 		if (validAction) {
+			player.startCooldown(parentItem);
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_UNCOMPRESS_COMPRESSED_ITEM_SUCCEEDED(parentItem.getL10n()));
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_USE_ITEM(parentItem.getL10n()));
 			for (ResultedItem resultItem : selectedCollection.getItems()) {

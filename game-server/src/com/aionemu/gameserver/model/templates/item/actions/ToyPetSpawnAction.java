@@ -90,7 +90,6 @@ public class ToyPetSpawnAction extends AbstractItemAction {
 		player.getObserveController().attach(observer);
 		player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(() -> {
 			player.getObserveController().removeObserver(observer);
-			player.startCooldown(parentItem);
 			finishUse(player, parentItem);
 		}, castingDelay));
 	}
@@ -107,6 +106,7 @@ public class ToyPetSpawnAction extends AbstractItemAction {
 		// RemoveKisk
 		if (!player.getInventory().decreaseByObjectId(parentItem.getObjectId(), 1))
 			return;
+		player.startCooldown(parentItem);
 		float x = player.getX();
 		float y = player.getY();
 		float z = player.getZ();

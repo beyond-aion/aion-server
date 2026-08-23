@@ -92,7 +92,6 @@ public class ChargeAction extends AbstractItemAction {
 		player.getObserveController().attach(observer);
 		player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(() -> {
 			player.getObserveController().removeObserver(observer);
-			player.startCooldown(parentItem);
 			finishUse(player, parentItem, targetItem);
 		}, castingDelay));
 	}
@@ -111,6 +110,7 @@ public class ChargeAction extends AbstractItemAction {
 			return;
 		if (!player.getInventory().decreaseByObjectId(parentItem.getObjectId(), 1))
 			return;
+		player.startCooldown(parentItem);
 		if (targetItem != null) // avoid the "Successfully conditioned equipped item(s)" bulk summary for a single targeted item
 			ItemChargeService.chargeItem(player, targetItem, maxChargeLevel, false, false);
 		else
