@@ -11,16 +11,11 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- * @author ATracer
+ * @author ATracer, w4terbomb
  */
 public class EmoteManager {
 
-	/**
-	 * Npc starts attacking from idle state
-	 * 
-	 * @param owner
-	 */
-	public static final void emoteStartAttacking(Npc owner, Creature target) {
+	public static void emoteStartAttacking(Npc owner, Creature target) {
 		owner.unsetState(CreatureState.WALK_MODE);
 		if (!owner.isInState(CreatureState.WEAPON_EQUIPPED)) {
 			owner.setState(CreatureState.WEAPON_EQUIPPED);
@@ -29,12 +24,7 @@ public class EmoteManager {
 		}
 	}
 
-	/**
-	 * Npc stops attacking
-	 * 
-	 * @param owner
-	 */
-	public static final void emoteStopAttacking(Npc owner) {
+	public static void emoteStopAttacking(Npc owner) {
 		owner.unsetState(CreatureState.WEAPON_EQUIPPED);
 		VisibleObject target = owner.getTarget();
 		if (target instanceof Player) {
@@ -42,54 +32,27 @@ public class EmoteManager {
 		}
 	}
 
-	/**
-	 * Npc starts following other creature
-	 * 
-	 * @param owner
-	 */
-	public static final void emoteStartFollowing(Npc owner) {
+	public static void emoteStartFollowing(Npc owner) {
 		owner.unsetState(CreatureState.WALK_MODE);
-		PacketSendUtility.broadcastPacket(owner, new SM_EMOTION(owner, EmotionType.CHANGE_SPEED, 0, 0));
-		PacketSendUtility.broadcastPacket(owner, new SM_EMOTION(owner, EmotionType.NEUTRALMODE_IN_MOVE, 0, 0));
+		emoteStartReturning(owner);
 	}
 
-	/**
-	 * Npc starts walking (either random or path)
-	 * 
-	 * @param owner
-	 */
-	public static final void emoteStartWalking(Npc owner) {
+	public static void emoteStartWalking(Npc owner) {
 		owner.setState(CreatureState.WALK_MODE);
 		PacketSendUtility.broadcastPacket(owner, new SM_EMOTION(owner, EmotionType.WALK));
 	}
 
-	/**
-	 * Npc stops walking
-	 * 
-	 * @param owner
-	 */
-	public static final void emoteStopWalking(Npc owner) {
+	public static void emoteStopWalking(Npc owner) {
 		owner.unsetState(CreatureState.WALK_MODE);
 	}
 
-	/**
-	 * Npc starts returning to spawn location
-	 * 
-	 * @param owner
-	 */
-	public static final void emoteStartReturning(Npc owner) {
+	public static void emoteStartReturning(Npc owner) {
 		PacketSendUtility.broadcastPacket(owner, new SM_EMOTION(owner, EmotionType.CHANGE_SPEED, 0, 0));
 		PacketSendUtility.broadcastPacket(owner, new SM_EMOTION(owner, EmotionType.NEUTRALMODE_IN_MOVE, 0, 0));
 	}
 
-	/**
-	 * Npc starts idling
-	 * 
-	 * @param owner
-	 */
-	public static final void emoteStartIdling(Npc owner) {
+	public static void emoteStartIdling(Npc owner) {
 		owner.setState(CreatureState.WALK_MODE);
-		PacketSendUtility.broadcastPacket(owner, new SM_EMOTION(owner, EmotionType.CHANGE_SPEED, 0, 0));
-		PacketSendUtility.broadcastPacket(owner, new SM_EMOTION(owner, EmotionType.NEUTRALMODE_IN_MOVE, 0, 0));
+		emoteStartReturning(owner);
 	}
 }

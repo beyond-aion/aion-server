@@ -4,17 +4,16 @@ import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.gameserver.ai.AIName;
-import com.aionemu.gameserver.controllers.attack.AggroTarget;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.skillengine.SkillEngine;
+import com.aionemu.gameserver.model.templates.npcskill.NpcSkillTargetAttribute;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 import ai.AggressiveNpcAI;
 
 /**
- * @author Luzien
+ * @author Luzien, w4terbomb
  */
 @AIName("warrior_preceptor")
 public class WarriorPreceptorAI extends AggressiveNpcAI {
@@ -27,66 +26,52 @@ public class WarriorPreceptorAI extends AggressiveNpcAI {
 	}
 
 	@Override
-	public void handleDespawned() {
+	protected void handleDespawned() {
 		cancelTask();
 		super.handleDespawned();
 	}
 
 	@Override
-	public void handleDied() {
+	protected void handleDied() {
 		cancelTask();
-		PacketSendUtility.broadcastMessage(getOwner(), 1500208);
+		int msgId = getNpcId() == 217578 ? 1500208 : 1500210;
+		PacketSendUtility.broadcastMessage(getOwner(), msgId);
 		super.handleDied();
 	}
 
 	@Override
-	public void handleBackHome() {
+	protected void handleBackHome() {
 		cancelTask();
 		isHome.set(true);
 		super.handleBackHome();
 	}
 
 	@Override
-	public void handleAttack(Creature creature) {
-
+	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
-		if (isHome.compareAndSet(true, false)) {
+		if (isHome.compareAndSet(true, false))
 			startSkillTask();
-		}
 	}
 
 	private void startSkillTask() {
-		task = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
-
-			@Override
-			public void run() {
-				if (isDead()) {
-					cancelTask();
-				} else {
-					startSkillEvent();
-				}
+		task = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
+			if (isDead()) {
+				cancelTask();
+			} else {
+				startSkillEvent();
 			}
-
 		}, 30000, 30000);
 	}
 
 	private void cancelTask() {
-		if (task != null && !task.isCancelled()) {
+		if (task != null && !task.isCancelled())
 			task.cancel(true);
-		}
 	}
 
 	private void startSkillEvent() {
-		PacketSendUtility.broadcastMessage(getOwner(), 1500207);
-		SkillEngine.getInstance().getSkill(getOwner(), 19595, 10, getRandomTarget()).useNoAnimationSkill(); // Divine Grasp II
-		ThreadPoolManager.getInstance().schedule(() -> {
-			if (!isDead()) {
-				SkillEngine.getInstance().getSkill(getOwner(), 19596, 15, getOwner()).useNoAnimationSkill(); // Wrathful Wave II
-			}
-		}, 6000);
-	}
-
-	private Creature getRandomTarget() {
-		return getAggroList().getTarget(AggroTarget.RANDOM, 15);
+		int msgId = getNpcId() == 217578 ? 1500207 : 1500209;
+		PacketSendUtility.broadcastMessage(getOwner(), msgId);
+		getOwner().queueSkill(19595, 10, 6000, NpcSkillTargetAttribute.RANDOM); // Divine Grasp II
+		getOwner().queueSkill(19596, 15); // Wrathful Wave II
 	}
 }

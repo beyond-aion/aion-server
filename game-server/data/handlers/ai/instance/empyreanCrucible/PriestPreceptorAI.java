@@ -2,41 +2,54 @@ package ai.instance.empyreanCrucible;
 
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.HpPhases;
-import com.aionemu.gameserver.controllers.attack.AggroTarget;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.skillengine.SkillEngine;
+import com.aionemu.gameserver.model.templates.npcskill.NpcSkillTargetAttribute;
+import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldPosition;
 
-import ai.AggressiveNpcAI;
+import ai.AggressiveNoLootNpcAI;
 
 /**
- * @author Luzien
+ * @author Luzien, w4terbomb
  */
 @AIName("priest_preceptor")
-public class PriestPreceptorAI extends AggressiveNpcAI implements HpPhases.PhaseHandler {
+public class PriestPreceptorAI extends AggressiveNoLootNpcAI implements HpPhases.PhaseHandler {
 
-	private final HpPhases hpPhases = new HpPhases(75, 25);
+	private final HpPhases hpPhases = new HpPhases(100, 75, 25);
+	private final int[] helpers;
 
 	public PriestPreceptorAI(Npc owner) {
 		super(owner);
+		if (owner.getNpcId() == 217581) // Thrasymedes
+			helpers = new int[] { 282366, 282367, 282368 }; // Boreas, Jumentis, Charna
+		else // Freyr
+			helpers = new int[] { 282369, 282370, 282371 }; // Traufnir, Sigyn, Sif
 	}
 
-	@Override
-	public void handleSpawned() {
+	protected void handleSpawned() {
 		super.handleSpawned();
-		ThreadPoolManager.getInstance().schedule(() -> SkillEngine.getInstance().getSkill(getOwner(), 19612, 15, getOwner()).useNoAnimationSkill(), 1000);
+		ThreadPoolManager.getInstance().schedule(() -> getOwner().queueSkill(19612, 10, -1, NpcSkillTargetAttribute.ME), 1000);
 	}
 
 	@Override
-	public void handleBackHome() {
+	protected void handleDied() {
+		despawnHelpers();
+		int msgId = getNpcId() == 217581 ? 1500220 : 1500222;
+		PacketSendUtility.broadcastMessage(getOwner(), msgId);
+		super.handleDied();
+	}
+
+	@Override
+	protected void handleBackHome() {
+		despawnHelpers();
 		super.handleBackHome();
 		hpPhases.reset();
 	}
 
 	@Override
-	public void handleAttack(Creature creature) {
+	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
 		hpPhases.tryEnterNextPhase(this);
 	}
@@ -44,48 +57,30 @@ public class PriestPreceptorAI extends AggressiveNpcAI implements HpPhases.Phase
 	@Override
 	public void handleHpPhase(int phaseHpPercent) {
 		switch (phaseHpPercent) {
-			case 75 -> SkillEngine.getInstance().getSkill(getOwner(), 19611, 10, getRandomTarget()).useNoAnimationSkill();
-			case 25 -> startEvent();
+			case 100 -> {
+				int msgId = getNpcId() == 217581 ? 1500219 : 1500221;
+				PacketSendUtility.broadcastMessage(getOwner(), msgId);
+			}
+			case 75 -> getOwner().queueSkill(19611, 10, -1, NpcSkillTargetAttribute.RANDOM); // Word of Destruction II
+			case 25 -> startTask();
 		}
 	}
 
-	private void startEvent() {
-		SkillEngine.getInstance().getSkill(getOwner(), 19610, 10, getOwner()).useNoAnimationSkill();
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				SkillEngine.getInstance().getSkill(getOwner(), 19614, 10, getOwner()).useNoAnimationSkill();
-
-				ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-					@Override
-					public void run() {
-						WorldPosition p = getPosition();
-						applySoulSickness((Npc) spawn(282366, p.getX(), p.getY(), p.getZ(), p.getHeading()));
-						applySoulSickness((Npc) spawn(282367, p.getX(), p.getY(), p.getZ(), p.getHeading()));
-						applySoulSickness((Npc) spawn(282368, p.getX(), p.getY(), p.getZ(), p.getHeading()));
-					}
-				}, 5000);
-			}
-
-		}, 2000);
+	private void startTask() {
+		getOwner().queueSkill(19610, 10, 2000);
+		getOwner().queueSkill(19614, 10, -1, NpcSkillTargetAttribute.ME);
+		ThreadPoolManager.getInstance().schedule(() -> {
+			WorldPosition p = getPosition();
+			for (int helperNpcId : helpers)
+				applySoulSickness((Npc) spawn(helperNpcId, p.getX(), p.getY(), p.getZ(), p.getHeading()));
+		}, 7000);
 	}
 
-	private Creature getRandomTarget() {
-		return getAggroList().getTarget(AggroTarget.RANDOM, 25);
+	private void applySoulSickness(Npc npc) {
+		ThreadPoolManager.getInstance().schedule(() -> npc.queueSkill(19594, 4, -1, NpcSkillTargetAttribute.ME), 1000);
 	}
 
-	private void applySoulSickness(final Npc npc) {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				npc.getLifeStats().setCurrentHpPercent(50); // TODO: remove this, fix max hp debuffs not reducing current hp properly
-				SkillEngine.getInstance().getSkill(npc, 19594, 4, npc).useNoAnimationSkill();
-			}
-
-		}, 1000);
+	private void despawnHelpers() {
+		getPosition().getWorldMapInstance().getNpcs(helpers).forEach(npc -> npc.getController().deleteIfAliveOrCancelRespawn());
 	}
-
 }
