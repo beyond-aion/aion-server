@@ -559,6 +559,7 @@ public class Skill {
 				if (!((Player) effector).getInventory().decreaseByObjectId(item.getObjectId(), 1, ItemUpdateType.DEC_ITEM_USE))
 					return;
 			}
+			((Player) effector).startCooldown(item);
 		}
 
 		endCondCheck();

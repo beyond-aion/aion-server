@@ -49,7 +49,6 @@ public class TamperingAction extends AbstractItemAction {
 			@Override
 			public void abort() {
 				player.getController().cancelUseItem();
-				player.removeItemCoolDown(parentItem.getItemTemplate().getUseLimits().getDelayId());
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ITEM_AUTHORIZE_CANCEL(targetItem.getL10n()));
 				player.getObserveController().removeObserver(this);
 			}
@@ -60,6 +59,7 @@ public class TamperingAction extends AbstractItemAction {
 			@Override
 			public void run() {
 				player.getObserveController().removeObserver(observer);
+				player.startCooldown(parentItem);
 
 				if (player.getInventory().getItemByObjId(targetItem.getObjectId()) == null && !targetItem.isEquipped()) {
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ENCHANT_ITEM_NO_TARGET_ITEM());

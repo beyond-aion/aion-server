@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
+import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.HouseObject;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -114,12 +115,6 @@ public class CM_USE_ITEM extends AionClientPacket {
 		if (actions.isEmpty())
 			return; // notification should be handled in canAct
 
-		int useDelay = item.getItemTemplate().getUseLimits().getDelayTime();
-		if (useDelay > 0)
-			player.addItemCoolDown(item.getItemTemplate().getUseLimits().getDelayId(), System.currentTimeMillis() + useDelay, useDelay / 1000);
-
-
-
 		for (AbstractItemAction itemAction : actions) {
 			switch (itemAction) {
 				case DyeAction _ -> itemAction.act(player, item, targetItem, targetHouseObject);
@@ -128,5 +123,10 @@ public class CM_USE_ITEM extends AionClientPacket {
 				default -> itemAction.act(player, item, targetItem);
 			}
 		}
+
+		// the use delay starts when the item use is over, so actions which cast start it themselves
+		if (!player.getController().hasScheduledTask(TaskId.ITEM_USE)
+			&& !(player.isCasting() && player.getCastingSkill().getItemTemplate() != null))
+			player.startCooldown(item);
 	}
 }

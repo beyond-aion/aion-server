@@ -1009,6 +1009,14 @@ public class Player extends Creature {
 		return true;
 	}
 
+	public void startCooldown(Item item) {
+		ItemUseLimits limits = item.getItemTemplate().getUseLimits();
+		if (limits == null || limits.getDelayTime() <= 0 || hasCooldown(item))
+			return;
+
+		addItemCoolDown(limits.getDelayId(), System.currentTimeMillis() + limits.getDelayTime(), limits.getDelayTime() / 1000);
+	}
+
 	public long getItemReuseTime(int delayId) {
 		ItemCooldown cd = itemCoolDowns.get(delayId);
 		return cd == null ? 0 : cd.getReuseTime();

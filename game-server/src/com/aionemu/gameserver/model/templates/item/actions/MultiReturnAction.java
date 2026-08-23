@@ -44,7 +44,6 @@ public class MultiReturnAction extends AbstractItemAction {
 			@Override
 			public void abort() {
 				player.getController().cancelUseItem(false);
-				player.removeItemCoolDown(item.getItemTemplate().getUseLimits().getDelayId());
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_CANCELED());
 				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), item.getObjectId(), item.getItemId(), 0, 2, 0),
 					true);
@@ -59,6 +58,7 @@ public class MultiReturnAction extends AbstractItemAction {
 		player.getObserveController().attach(observer);
 		player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(() -> {
 			player.getObserveController().removeObserver(observer);
+			player.startCooldown(item);
 			finishUse(player, item, observer, indexReturn);
 		}, castingDelay));
 	}
