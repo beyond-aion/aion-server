@@ -96,6 +96,22 @@ public class RideAction extends AbstractItemAction {
 				finishUse(player, parentItem);
 			}, castingDelay));
 		}
+	}
+
+	private void finishUse(Player player, Item parentItem) {
+		if (!canAct(player, parentItem, null)) {
+			PacketSendUtility.broadcastPacket(player,
+				new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, 3, 0), true);
+			return;
+		}
+		player.startCooldown(parentItem);
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_USE_ITEM(parentItem.getL10n()));
+		player.unsetState(CreatureState.ACTIVE);
+		player.setState(CreatureState.RESTING);
+		if (player.isInFlyingState())
+			player.setState(CreatureState.FLOATING_CORPSE);
+		ItemTemplate itemTemplate = parentItem.getItemTemplate();
+		player.setPlayerMode(PlayerMode.RIDE, getRideInfo());
 
 		ActionObserver rideObserver = new ActionObserver(ObserverType.ABNORMALSETTED) {
 
@@ -132,22 +148,7 @@ public class RideAction extends AbstractItemAction {
 		};
 		player.getObserveController().addObserver(dotAttackedObserver);
 		player.addRideObserver(dotAttackedObserver);
-	}
 
-	private void finishUse(Player player, Item parentItem) {
-		if (!canAct(player, parentItem, null)) {
-			PacketSendUtility.broadcastPacket(player,
-				new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, 3, 0), true);
-			return;
-		}
-		player.startCooldown(parentItem);
-		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_USE_ITEM(parentItem.getL10n()));
-		player.unsetState(CreatureState.ACTIVE);
-		player.setState(CreatureState.RESTING);
-		if (player.isInFlyingState())
-			player.setState(CreatureState.FLOATING_CORPSE);
-		ItemTemplate itemTemplate = parentItem.getItemTemplate();
-		player.setPlayerMode(PlayerMode.RIDE, getRideInfo());
 		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.CHANGE_SPEED, 0, 0), true);
 		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.RIDE, 0, getRideInfo().getNpcId()), true);
 		PacketSendUtility.broadcastPacket(player,
