@@ -120,7 +120,7 @@ public class Effect implements StatOwner {
 
 	// Whether this effect is a sub effect of another effect
 	private boolean isSubEffect = false;
-	private boolean applyCriticalEffect = false;
+	private boolean applyCriticalProcEffect = false;
 	private final AtomicBoolean allowGodstoneActivation = new AtomicBoolean();
 
 	public Effect(Skill skill, Creature effected) {
@@ -531,13 +531,13 @@ public class Effect implements StatOwner {
 				}
 			}
 			if (effector instanceof Player p && getAttackStatus() == AttackStatus.CRITICAL && getSubEffect() == null && !isPeriodic() && Rnd.chance() < 10) {
-				Effect criticalEffect = SkillEngine.getInstance().createCriticalEffect(p, getEffected(), skillTemplate.getSkillId());
-				if (criticalEffect != null && criticalEffect.getEffectResult() != EffectResult.DODGE && criticalEffect.getEffectResult() != EffectResult.RESIST) {
-					applyCriticalEffect = true;
-					setSpellStatus(criticalEffect.getSpellStatus());
-					setSubEffect(criticalEffect);
-					setSubEffectType(criticalEffect.getSubEffectType());
-					setTargetLoc(criticalEffect.getTargetX(), criticalEffect.getTargetY(), criticalEffect.getTargetZ());
+				Effect criticalProcEffect = SkillEngine.getInstance().createCriticalProcEffect(p, getEffected(), skillTemplate.getSkillId());
+				if (criticalProcEffect != null && criticalProcEffect.getEffectResult() != EffectResult.DODGE && criticalProcEffect.getEffectResult() != EffectResult.RESIST) {
+					applyCriticalProcEffect = true;
+					setSpellStatus(criticalProcEffect.getSpellStatus());
+					setSubEffect(criticalProcEffect);
+					setSubEffectType(criticalProcEffect.getSubEffectType());
+					setTargetLoc(criticalProcEffect.getTargetX(), criticalProcEffect.getTargetY(), criticalProcEffect.getTargetZ());
 				}
 			}
 		}
@@ -609,7 +609,7 @@ public class Effect implements StatOwner {
 					break;
 				template.startSubEffect(this);
 			}
-			if (applyCriticalEffect && subEffect != null)
+			if (applyCriticalProcEffect && subEffect != null)
 				subEffect.applyEffect();
 			if (effected != null)
 				effected.getAi().onEffectApplied(this);
