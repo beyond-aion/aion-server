@@ -46,14 +46,18 @@ public class AssemblyItemAction extends AbstractItemAction {
 
 	@Override
 	public void act(final Player player, final Item parentItem, Item targetItem, Object... params) {
+		int castingDelay = parentItem.getItemTemplate().getCastingDelay();
+		if (castingDelay <= 0) {
+			finishUse(player, parentItem);
+			return;
+		}
 		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(),
-			1000, 0, 0), true);
+			castingDelay, 0, 0), true);
 		final ItemUseObserver observer = new ItemUseObserver() {
 
 			@Override
 			public void abort() {
 				player.getController().cancelUseItem(false);
-				player.removeItemCoolDown(parentItem.getItemTemplate().getUseLimits().getDelayId());
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ASSEMBLY_ITEM_CANCELED());
 				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem
 					.getItemTemplate().getTemplateId(), 0, 2, 0), true);
@@ -65,25 +69,29 @@ public class AssemblyItemAction extends AbstractItemAction {
 		player.getObserveController().attach(observer);
 		player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(() -> {
 			player.getObserveController().removeObserver(observer);
-			AssemblyItem assemblyItem = getAssemblyItem();
-			Map<Integer, Long> requiredCounts = assemblyItem.getParts().stream().collect(Collectors.groupingBy(id -> id, Collectors.counting()));
-			for (Map.Entry<Integer, Long> requiredCount : requiredCounts.entrySet()) {
-				if (player.getInventory().getItemCountByItemId(requiredCount.getKey()) < requiredCount.getValue()) {
-					PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem
-						.getItemTemplate().getTemplateId(), 0, 2, 0), true);
-					return;
-				}
-			}
-			for (Integer itemId : assemblyItem.getParts()) {
-				player.getInventory().decreaseByItemId(itemId, 1);
-			}
-			PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem
-				.getItemTemplate().getTemplateId(), 0, 1, 0), true);
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_USE_ITEM(parentItem.getL10n()));
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ASSEMBLY_ITEM_SUCCEEDED());
-			ItemService.addItem(player, assemblyItem.getId(), 1);
-		}, 1000));
+			player.startCooldown(parentItem);
+			finishUse(player, parentItem);
+		}, castingDelay));
+	}
 
+	private void finishUse(Player player, Item parentItem) {
+		AssemblyItem assemblyItem = getAssemblyItem();
+		Map<Integer, Long> requiredCounts = assemblyItem.getParts().stream().collect(Collectors.groupingBy(id -> id, Collectors.counting()));
+		for (Map.Entry<Integer, Long> requiredCount : requiredCounts.entrySet()) {
+			if (player.getInventory().getItemCountByItemId(requiredCount.getKey()) < requiredCount.getValue()) {
+				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem
+					.getItemTemplate().getTemplateId(), 0, 2, 0), true);
+				return;
+			}
+		}
+		for (Integer itemId : assemblyItem.getParts()) {
+			player.getInventory().decreaseByItemId(itemId, 1);
+		}
+		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem
+			.getItemTemplate().getTemplateId(), 0, 1, 0), true);
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_USE_ITEM(parentItem.getL10n()));
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ASSEMBLY_ITEM_SUCCEEDED());
+		ItemService.addItem(player, assemblyItem.getId(), 1);
 	}
 
 	public AssemblyItem getAssemblyItem() {
