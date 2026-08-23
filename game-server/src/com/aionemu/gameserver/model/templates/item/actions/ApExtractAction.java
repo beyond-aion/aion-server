@@ -42,7 +42,7 @@ public class ApExtractAction extends AbstractItemAction {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_AP_DECOMPOSE_WRONG_LEVEL(parentItem.getL10n(), targetItem.getL10n()));
 			return false;
 		}
-		if (parentItem.getItemTemplate().getItemQuality() != targetItem.getItemTemplate().getItemQuality()) {
+		if (parentItem.getItemTemplate().getItemQuality().getQualityId() < targetItem.getItemTemplate().getItemQuality().getQualityId()) {
 			PacketSendUtility.sendPacket(player,
 				SM_SYSTEM_MESSAGE.STR_MSG_AP_DECOMPOSE_WRONG_QUALITY(parentItem.getL10n(), targetItem.getL10n()));
 			return false;
@@ -113,14 +113,12 @@ public class ApExtractAction extends AbstractItemAction {
 				type = UseTarget.OTHER;
 				break;
 			default:
-				PacketSendUtility.sendPacket(player,
-					SM_SYSTEM_MESSAGE.STR_MSG_AP_DECOMPOSE_WRONG_TARGET_ITEM_CATEGORY(parentItem.getL10n(), targetItem.getL10n()));
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_AP_DECOMPOSE_CANNOT(targetItem.getL10n()));
 				return false;
 		}
 		// EQUIPMENT is a shorthand for "any of WEAPON/ARMOR/ACCESSORY/WING", confirmed on retail it does NOT also match OTHER
 		if (target != UseTarget.ALL && target != type && !(target == UseTarget.EQUIPMENT && type != UseTarget.OTHER)) {
-			PacketSendUtility.sendPacket(player,
-				SM_SYSTEM_MESSAGE.STR_MSG_AP_DECOMPOSE_WRONG_TARGET_ITEM_CATEGORY(parentItem.getL10n(), targetItem.getL10n()));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_AP_DECOMPOSE_CANNOT(targetItem.getL10n()));
 			return false;
 		}
 		return true;
