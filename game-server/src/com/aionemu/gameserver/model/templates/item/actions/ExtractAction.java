@@ -59,6 +59,8 @@ public class ExtractAction extends AbstractItemAction {
 			player.getObserveController().removeObserver(observer);
 			boolean result = canAct(player, parentItem, targetItem) && EnchantService.breakItem(player, targetItem, parentItem);
 			if (result)
+				// The only item with an extract action has no use delay, so this is effectively
+				// a no-op, but kept for consistency with the other actions.
 				player.startCooldown(parentItem);
 			PacketSendUtility.sendPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate()
 				.getTemplateId(), 0, result ? 1 : 2, 0));
