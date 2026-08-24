@@ -553,7 +553,7 @@ public class AttackUtil {
 	public static void cancelCastOn(Creature target) {
 		target.getKnownList().forEachObject(visibleObject -> {
 			if (visibleObject instanceof Creature creature && visibleObject.getTarget() == target) {
-				if (creature.getCastingSkill() != null && creature.getCastingSkill().getFirstTarget().equals(target)) {
+				if (creature.getCastingSkill() != null && target.equals(creature.getCastingSkill().getFirstTarget())) {
 					if (isHostileTo(creature, target)) {
 						creature.getController().cancelCurrentSkill(null);
 					}
