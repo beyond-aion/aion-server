@@ -547,14 +547,27 @@ public class AttackUtil {
 
 		return AttackStatus.NORMALHIT;
 	}
-
+	
+	//If the target is an enemy and goes into hide, interrupt the cast.
+	//Do not interrupt casts on allies (heals/buffs in the group).
 	public static void cancelCastOn(Creature target) {
 		target.getKnownList().forEachObject(visibleObject -> {
 			if (visibleObject instanceof Creature creature && visibleObject.getTarget() == target) {
-				if (creature.getCastingSkill() != null && creature.getCastingSkill().getFirstTarget().equals(target))
-					creature.getController().cancelCurrentSkill(null);
+				if (creature.getCastingSkill() != null && creature.getCastingSkill().getFirstTarget().equals(target)) {
+					if (isHostileTo(creature, target)) {
+						creature.getController().cancelCurrentSkill(null);
+					}
+				}
 			}
 		});
+	}
+
+	private static boolean isHostileTo(Creature caster, Creature target) {
+		return switch (target) {
+			case Player p -> caster.isEnemyFrom(p);
+			case Npc n -> caster.isEnemyFrom(n);
+			default -> caster.isEnemyFrom(target);
+		};
 	}
 
 	/**
