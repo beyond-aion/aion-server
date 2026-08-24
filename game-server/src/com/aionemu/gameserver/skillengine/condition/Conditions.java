@@ -68,6 +68,17 @@ public class Conditions {
 		return true;
 	}
 
+	public boolean canValidate(Skill skill) {
+		if (conditions != null) {
+			for (Condition condition : getConditions()) {
+				if (!condition.canValidate(skill)) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
 	public boolean validate(Stat2 stat, IStatFunction statFunction) {
 		if (conditions != null) {
 			for (Condition condition : getConditions()) {

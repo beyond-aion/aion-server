@@ -30,8 +30,24 @@ public class MpUseAction extends Action {
 
 	@Override
 	public boolean act(Skill skill) {
+		if (!canAct(skill))
+			return false;
+		skill.getEffector().getLifeStats().reduceMp(SM_ATTACK_STATUS.TYPE.USED_MP, getCost(skill), 0, SM_ATTACK_STATUS.LOG.REGULAR);
+		return true;
+	}
+
+	@Override
+	public boolean canAct(Skill skill) {
 		Creature effector = skill.getEffector();
-		int currentMp = effector.getLifeStats().getCurrentMp();
+		if (!(effector instanceof Player player))
+			return true;
+		if (effector.getLifeStats().getCurrentMp() >= getCost(skill))
+			return true;
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_NOT_ENOUGH_MP());
+		return false;
+	}
+
+	private int getCost(Skill skill) {
 		int valueWithDelta = value + delta * skill.getSkillLevel();
 		if (ratio)
 			valueWithDelta = skill.getEffector().getLifeStats().getMaxMp() * valueWithDelta / 100;
@@ -40,16 +56,7 @@ public class MpUseAction extends Action {
 			// changeMpPercent is negative
 			valueWithDelta = valueWithDelta - ((valueWithDelta / ((100 / changeMpPercent))));
 		}
-
-		if (effector instanceof Player) {
-			if (currentMp <= 0 || currentMp < valueWithDelta) {
-				PacketSendUtility.sendPacket((Player) effector, SM_SYSTEM_MESSAGE.STR_SKILL_NOT_ENOUGH_MP());
-				return false;
-			}
-		}
-
-		effector.getLifeStats().reduceMp(SM_ATTACK_STATUS.TYPE.USED_MP, valueWithDelta, 0, SM_ATTACK_STATUS.LOG.REGULAR);
-		return true;
+		return valueWithDelta;
 	}
 
 }

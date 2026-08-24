@@ -340,6 +340,7 @@
 			<xs:extension base="Action">
 				<xs:attribute name="itemid" type="xs:int" use="required" />
 				<xs:attribute name="count" type="xs:int" use="required" />
+				<xs:attribute name="expendable" type="xs:boolean" default="true" />
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>

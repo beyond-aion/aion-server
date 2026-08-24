@@ -23,4 +23,13 @@ public abstract class Action {
 	 */
 	public abstract boolean act(Skill skill);
 
+	/**
+	 * Checks whether {@link #act(Skill)} could be performed, without performing it.
+	 *
+	 * @return True, if the action can be performed
+	 */
+	public boolean canAct(Skill skill) {
+		return true;
+	}
+
 }
