@@ -97,7 +97,7 @@ public class Decompose extends PlayerCommand {
 				remainingCount--;
 				totalCount++;
 			}
-		}, 10, DecomposeAction.USAGE_DELAY + 100));
+		}, 10, DataManager.ITEM_DATA.getItemTemplate(itemId).getCastingDelay() + 100));
 	}
 
 	private void cancelTask(Player player, ItemUseObserver observer, String message) {

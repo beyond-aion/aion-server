@@ -260,7 +260,7 @@
 	<report_to id="2330" start_npc_ids="204300" end_npc_ids="205128"/>
 	<report_to id="2361" start_npc_ids="204372" end_npc_ids="204363"/>
 	<report_to id="2364" start_npc_ids="204363" end_npc_ids="204342"/>
-	<report_to id="2383" start_npc_ids="204354" end_npc_ids="790011"/>
+	<report_to id="2383" start_npc_ids="204354" end_npc_ids="798080"/>
 	<report_to id="2395" start_npc_ids="204345" end_npc_ids="204369"/>
 	<report_to id="2414" start_npc_ids="204369" end_npc_ids="204361"/>
 	<report_to id="2417" start_npc_ids="204364" end_npc_ids="204390"/>
@@ -296,7 +296,7 @@
 	<item_collecting id="2359" start_npc_ids="204339"/>
 	<item_collecting id="2362" start_npc_ids="204363"/>
 	<item_collecting id="2369" start_npc_ids="798083"/>
-	<item_collecting id="2371" start_npc_ids="798089"/>
+	<item_collecting id="2371" start_npc_ids="798079"/>
 	<item_collecting id="2372" start_npc_ids="798056" end_npc_ids="798079"/>
 	<item_collecting id="2373" start_npc_ids="804606"/>
 	<item_collecting id="2378" start_npc_ids="204408"/>
@@ -335,14 +335,14 @@
 	<item_collecting id="2461" start_npc_ids="204424"/>
 	<item_collecting id="2462" start_npc_ids="204330"/>
 	<item_collecting id="2463" start_npc_ids="204387"/>
-	<item_collecting id="2464" start_npc_ids="204110" end_npc_ids="204387"/>
+	<item_collecting id="2464" start_npc_ids="204387"/>
 	<item_collecting id="2465" start_npc_ids="204393"/>
 	<item_collecting id="2466" start_npc_ids="204382"/>
 	<item_collecting id="2467" start_npc_ids="204382"/>
 	<item_collecting id="2468" start_npc_ids="204341"/>
 	<item_collecting id="2469" start_npc_ids="204341"/>
 	<item_collecting id="2470" start_npc_ids="204348"/>
-	<item_collecting id="2471" start_npc_ids="204110" end_npc_ids="204387"/>
+	<item_collecting id="2471" start_npc_ids="204387"/>
 	<item_collecting id="2472" start_npc_ids="204356"/>
 	<item_collecting id="2473" start_npc_ids="204356"/>
 	<item_collecting id="2474" start_npc_ids="204390" end_npc_ids="204364"/>
@@ -445,7 +445,7 @@
 	<monster_hunt id="4323" start_npc_ids="204352"/>
 	<monster_hunt id="4324" start_npc_ids="204349"/>
 	<monster_hunt id="4325" start_npc_ids="204363"/>
-	<monster_hunt id="4326" start_npc_ids="204359"/>
+	<monster_hunt id="4326" start_npc_ids="804606"/>
 	<monster_hunt id="4335" start_npc_ids="204369"/>
 	<monster_hunt id="26900" start_npc_ids="204301"/>
 	<monster_hunt id="26901" start_npc_ids="204301"/>

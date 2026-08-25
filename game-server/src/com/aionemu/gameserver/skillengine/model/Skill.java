@@ -348,9 +348,10 @@ public class Skill {
 	}
 
 	private int calculateCastDuration() {
-		// TODO: remove hardcoded skillId and add casting delay to item_templates.xml
-		// ap & cash revival stones, or 2nd+ time of multicast-skill activation
-		if (getSkillId() == 10802 || getMultiCastCount() > 0)
+		if (getItemTemplate() != null)
+			return getItemTemplate().getCastingDelay();
+		//2nd+ time of multicast-skill activation
+		if (getMultiCastCount() > 0)
 			return 0;
 		if (!isCastDurationAffectedByCastSpeed())
 			return baseCastDuration;
@@ -543,16 +544,15 @@ public class Skill {
 		effector.setCasting(null);
 
 		// try removing item, if its not possible return to prevent exploits
-		if (effector instanceof Player && skillMethod == SkillMethod.ITEM) {
-			Item item = ((Player) effector).getInventory().getItemByObjId(itemObjectId);
+		if (skillMethod == SkillMethod.ITEM && effector instanceof Player itemUser) {
+			Item item = itemUser.getInventory().getItemByObjId(itemObjectId);
 			if (item == null)
 				return;
-			if (item.getActivationCount() > 1) {
+			if (item.getActivationCount() > 1)
 				item.setActivationCount(item.getActivationCount() - 1);
-			} else {
-				if (!((Player) effector).getInventory().decreaseByObjectId(item.getObjectId(), 1, ItemUpdateType.DEC_ITEM_USE))
-					return;
-			}
+			else if (!itemUser.getInventory().decreaseByObjectId(item.getObjectId(), 1, ItemUpdateType.DEC_ITEM_USE))
+				return;
+			itemUser.startCooldown(item);
 		}
 
 		endCondCheck();
@@ -640,13 +640,21 @@ public class Skill {
 		if (!blockedPenaltySkill)
 			startPenaltySkill();
 
-		if (isInstantSkill())
+		boolean isItemSkill = skillMethod == SkillMethod.ITEM;
+		boolean sentCastSpellResultPacket = false;
+		// the client must learn the hit time before any HP change reaches it, or it updates the status bar before displaying the hit
+		if (isItemSkill)
+			sentCastSpellResultPacket = sendCastSpellEnd(dashStatus, effects);
+
+		// item skills apply their effects immediately, hitTime only tells the client when to display the hit
+		if (isInstantSkill() || isItemSkill)
 			applyEffect(effects);
 		else
 			ThreadPoolManager.getInstance().schedule(() -> applyEffect(effects), hitTime);
 
-		if (skillMethod == SkillMethod.PENALTY || skillMethod == SkillMethod.CAST || skillMethod == SkillMethod.ITEM) {
-			boolean sentCastSpellResultPacket = sendCastSpellEnd(dashStatus, effects);
+		if (skillMethod == SkillMethod.PENALTY || skillMethod == SkillMethod.CAST || isItemSkill) {
+			if (!isItemSkill)
+				sentCastSpellResultPacket = sendCastSpellEnd(dashStatus, effects);
 			if (sentCastSpellResultPacket && skillMethod != SkillMethod.PENALTY && effector instanceof Player player) {
 				// animation times must be calculated after applyEffect of instant skills in order to honor speed buffs from this skill
 				AnimationTimes animation = DataManager.MOTION_DATA.calculateAnimationTimesAfterLastHit(player, this);

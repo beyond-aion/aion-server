@@ -63,13 +63,12 @@ public class TuningAction extends AbstractItemAction {
 		int tuningScrollItemId = parentItem.getItemId();
 		int tuningScrollObjectId = parentItem.getObjectId();
 		PacketSendUtility.broadcastPacket(player,
-			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), tuningScrollItemId, 5000, 12, 0), true);
+			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), tuningScrollObjectId, tuningScrollItemId, 5000, 12, 0), true);
 		ItemUseObserver observer = new ItemUseObserver() {
 
 			@Override
 			public void abort() {
-				player.getController().cancelTask(TaskId.ITEM_USE);
-				player.removeItemCoolDown(parentItem.getItemTemplate().getUseLimits().getDelayId());
+				player.getController().cancelUseItem(false);
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ITEM_REIDENTIFY_CANCELED(targetItem.getL10n()));
 				PacketSendUtility.broadcastPacket(player,
 					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), tuningScrollObjectId, tuningScrollItemId, 0, 14, 0), true);
@@ -80,10 +79,16 @@ public class TuningAction extends AbstractItemAction {
 		player.getObserveController().attach(observer);
 		player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(() -> {
 			player.getObserveController().removeObserver(observer);
+			if (player.getInventory().getItemByObjId(targetItem.getObjectId()) == null || !canAct(player, parentItem, targetItem)) {
+				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), tuningScrollObjectId, tuningScrollItemId, 0, 14, 0),
+					true);
+				return;
+			}
 			PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), tuningScrollObjectId, tuningScrollItemId, 0, 13, 0),
 				true);
 			if (!player.getInventory().decreaseByObjectId(tuningScrollObjectId, 1))
 				return;
+			player.startCooldown(parentItem);
 
 			int newOptionalSockets, newEnchantBonus, newStatBonusId;
 			if (shouldNotReduceTuneCount) { // only tune attributes (bonus stats)
