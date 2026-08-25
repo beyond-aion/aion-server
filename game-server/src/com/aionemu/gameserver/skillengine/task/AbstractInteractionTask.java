@@ -4,6 +4,8 @@ import java.util.concurrent.Future;
 
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.services.RecallService;
+import com.aionemu.gameserver.services.RecallService.CancelReason;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
@@ -56,6 +58,8 @@ public abstract class AbstractInteractionTask {
 	 * Interaction scheduling method
 	 */
 	public void start() {
+		requester.setInteractionTask(this);
+		RecallService.getInstance().cancel(requester, CancelReason.CANCELLED);
 		onInteractionStart();
 
 		task = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
@@ -74,6 +78,8 @@ public abstract class AbstractInteractionTask {
 	 * Stop current interaction
 	 */
 	public void stop() {
+		if (requester.getInteractionTask() == this)
+			requester.setInteractionTask(null);
 		onInteractionFinish();
 
 		if (task != null && !task.isCancelled()) {

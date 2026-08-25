@@ -4,26 +4,41 @@ import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
- * @author SVDNESS
+ * Opens the window which asks a player whether he wants to be teleported to the caster of a summon skill, and closes it again when the request is
+ * no longer valid. The client answers with CM_RECALLED_BY_OTHER_ANSWER.
  */
 public class SM_RECALLED_BY_OTHER extends AionServerPacket {
 
-	public static final int RECALL_REQUEST_ID = 0x0F44;
 	private final String casterName;
 	private final int skillId;
-	private final int timeSeconds;
+	private final int seconds;
 
-	public SM_RECALLED_BY_OTHER(String casterName, int skillId, int timeSeconds) {
+	/**
+	 * Closes the window on the client.
+	 */
+	public SM_RECALLED_BY_OTHER() {
+		this(null, 0, 0);
+	}
+
+	/**
+	 * @param casterName
+	 *          - name of the summoning player
+	 * @param skillId
+	 *          - skill he used, its name is displayed in the window
+	 * @param seconds
+	 *          - time the player has to answer
+	 */
+	public SM_RECALLED_BY_OTHER(String casterName, int skillId, int seconds) {
 		this.casterName = casterName;
 		this.skillId = skillId;
-		this.timeSeconds = timeSeconds;
+		this.seconds = seconds;
 	}
 
 	@Override
 	protected void writeImpl(AionConnection con) {
-		writeC(0); //Retail always sends 0.
+		writeC(casterName == null ? 1 : 0); // 0 = open the window, 1 = close it
 		writeS(casterName);
 		writeH(skillId);
-		writeH(timeSeconds);
+		writeH(seconds);
 	}
 }

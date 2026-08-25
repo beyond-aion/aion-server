@@ -46,6 +46,7 @@ import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.restrictions.PlayerRestrictions;
 import com.aionemu.gameserver.services.*;
+import com.aionemu.gameserver.services.RecallService.CancelReason;
 import com.aionemu.gameserver.services.conquerorAndProtectorSystem.ConquerorAndProtectorService;
 import com.aionemu.gameserver.services.drop.DropService;
 import com.aionemu.gameserver.services.instance.InstanceService;
@@ -267,6 +268,7 @@ public class PlayerController extends CreatureController<Player> {
 	public void onDie(Creature lastAttacker) {
 		Player player = getOwner();
 		player.getController().cancelCurrentSkill(null);
+		RecallService.getInstance().cancel(player, CancelReason.CANCELLED);
 		setRebirthReviveInfo();
 		Creature master = lastAttacker.getMaster();
 
@@ -510,15 +512,6 @@ public class PlayerController extends CreatureController<Player> {
 
 	@Override
 	public void cancelCurrentSkill(Creature lastAttacker) {
-		Skill castingSkill = getOwner().getCastingSkill();
-		//RecallInstantEffect sends its own cast cancellation message.
-		if (castingSkill != null && castingSkill.getSkillTemplate().hasRecallInstant()) {
-			Creature target = castingSkill.getFirstTarget();
-			String targetName = target != null ? target.getName() : "";
-			//Summoning of %0 is cancelled.
-			cancelCurrentSkill(lastAttacker, SM_SYSTEM_MESSAGE.STR_MSG_Recall_CANCEL_EFFECT(targetName));
-			return;
-		}
 		cancelCurrentSkill(lastAttacker, SM_SYSTEM_MESSAGE.STR_SKILL_CANCELED());
 	}
 
@@ -767,7 +760,7 @@ public class PlayerController extends CreatureController<Player> {
 	}
 
 	/**
-	 * Refreshes the combat timer, see {@link #isInCombat()}.
+	 * Refreshes the combat timer (see {@link #isInCombat()}) and cancels a pending summon request, which combat invalidates.
 	 *
 	 * @param attacking
 	 *          True, if the player attacked someone, false if he was attacked
@@ -777,5 +770,6 @@ public class PlayerController extends CreatureController<Player> {
 			lastAttackMillis = System.currentTimeMillis();
 		else
 			lastAttackedMillis = System.currentTimeMillis();
+		RecallService.getInstance().cancel(getOwner(), CancelReason.CANCELLED);
 	}
 }

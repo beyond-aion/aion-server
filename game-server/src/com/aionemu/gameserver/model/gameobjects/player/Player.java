@@ -71,6 +71,7 @@ import com.aionemu.gameserver.skillengine.effect.RebirthEffect;
 import com.aionemu.gameserver.skillengine.model.ChainSkills;
 import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
+import com.aionemu.gameserver.skillengine.task.AbstractInteractionTask;
 import com.aionemu.gameserver.skillengine.task.CraftingTask;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapType;
@@ -121,6 +122,7 @@ public class Player extends Creature {
 	private int flyState = 0;
 	private FlyController flyController;
 	private CraftingTask craftingTask;
+	private volatile AbstractInteractionTask interactionTask;
 	private FlightPath flightPath;
 	private Summon summon;
 	private Pet pet;
@@ -810,6 +812,17 @@ public class Player extends Creature {
 
 	public CraftingTask getCraftingTask() {
 		return craftingTask;
+	}
+
+	public void setInteractionTask(AbstractInteractionTask interactionTask) {
+		this.interactionTask = interactionTask;
+	}
+
+	/**
+	 * @return The gathering or crafting task the player is currently busy with, null if there is none.
+	 */
+	public AbstractInteractionTask getInteractionTask() {
+		return interactionTask;
 	}
 
 	public void setFlightTeleportId(int flightTeleportId) {

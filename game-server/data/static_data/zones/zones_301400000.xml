@@ -16,7 +16,7 @@
             <point x="524.5766" y="328.17316"/>
         </points>
     </zone>
-    <zone mapid="301400000" name="IDSWEEP_WORLD_NOGLIDE_301400000" area_type="POLYGON" zone_type="LIMIT" flags="0">
+    <zone mapid="301400000" name="IDSWEEP_WORLD_NOGLIDE_301400000" area_type="POLYGON" zone_type="LIMIT" priority="16" flags="0">
         <points bottom="14.314783" top="664.31476">
             <point x="56.63315" y="44.098038"/>
             <point x="688.28955" y="44.1604"/>

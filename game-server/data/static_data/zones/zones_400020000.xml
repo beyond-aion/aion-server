@@ -266,7 +266,7 @@
             <point x="522.0337" y="592.97516"/>
         </points>
     </zone>
-    <zone mapid="400020000" name="LIMITAREA10111_CASTLE_WORLD1_400020000" area_type="POLYGON" zone_type="LIMIT" flags="12">
+    <zone mapid="400020000" name="LIMITAREA10111_CASTLE_WORLD1_400020000" area_type="POLYGON" zone_type="LIMIT" priority="16" flags="12">
         <points bottom="1249.3984" top="1949.3984">
             <point x="490.2173" y="489.20847"/>
             <point x="1030.0825" y="248.82986"/>

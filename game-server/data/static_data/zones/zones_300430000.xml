@@ -136,7 +136,7 @@
             <point x="1597.6772" y="1337.0299"/>
         </points>
     </zone>
-    <zone mapid="300430000" name="NOGLIDEAREA1_1_300430000" area_type="POLYGON" zone_type="LIMIT" flags="4">
+    <zone mapid="300430000" name="NOGLIDEAREA1_1_300430000" area_type="POLYGON" zone_type="LIMIT" priority="16" flags="4">
         <points bottom="221.7" top="246.7">
             <point x="241.59767" y="1201.4625"/>
             <point x="233.62454" y="1212.732"/>
@@ -157,7 +157,7 @@
             <point x="204.87569" y="1180.1255"/>
         </points>
     </zone>
-    <zone mapid="300430000" name="NOGLIDEAREA2_1_300430000" area_type="POLYGON" zone_type="LIMIT" flags="4">
+    <zone mapid="300430000" name="NOGLIDEAREA2_1_300430000" area_type="POLYGON" zone_type="LIMIT" priority="16" flags="4">
         <points bottom="221.46089" top="243.46089">
             <point x="206.79715" y="1180.0287"/>
             <point x="243.7815" y="1201.3444"/>
