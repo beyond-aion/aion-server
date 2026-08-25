@@ -645,13 +645,21 @@ public class Skill {
 		if (!blockedPenaltySkill)
 			startPenaltySkill();
 
-		if (isInstantSkill())
+		boolean isItemSkill = skillMethod == SkillMethod.ITEM;
+		boolean sentCastSpellResultPacket = false;
+		// the client must learn the hit time before any HP change reaches it, or it updates the status bar before displaying the hit
+		if (isItemSkill)
+			sentCastSpellResultPacket = sendCastSpellEnd(dashStatus, effects);
+
+		// item skills apply their effects immediately, hitTime only tells the client when to display the hit
+		if (isInstantSkill() || isItemSkill)
 			applyEffect(effects);
 		else
 			ThreadPoolManager.getInstance().schedule(() -> applyEffect(effects), hitTime);
 
-		if (skillMethod == SkillMethod.PENALTY || skillMethod == SkillMethod.CAST || skillMethod == SkillMethod.ITEM) {
-			boolean sentCastSpellResultPacket = sendCastSpellEnd(dashStatus, effects);
+		if (skillMethod == SkillMethod.PENALTY || skillMethod == SkillMethod.CAST || isItemSkill) {
+			if (!isItemSkill)
+				sentCastSpellResultPacket = sendCastSpellEnd(dashStatus, effects);
 			if (sentCastSpellResultPacket && skillMethod != SkillMethod.PENALTY && effector instanceof Player player) {
 				// animation times must be calculated after applyEffect of instant skills in order to honor speed buffs from this skill
 				AnimationTimes animation = DataManager.MOTION_DATA.calculateAnimationTimesAfterLastHit(player, this);
