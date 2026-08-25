@@ -55,6 +55,7 @@ public class EmotionLearnAction extends AbstractItemAction {
 			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), itemTemplate.getTemplateId()), true);
 
 		player.getEmotions().add(emotionId, minutes == 0 ? 0 : (int) (System.currentTimeMillis() / 1000) + minutes * 60, true);
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_USE_ITEM(parentItem.getL10n()));
 		player.getInventory().delete(parentItem);
 
 	}

@@ -43,12 +43,11 @@ public class ExtractAction extends AbstractItemAction {
 	public void act(Player player, Item parentItem, Item targetItem, Object... params) {
 		PacketSendUtility.sendPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate()
 			.getTemplateId(), 5000, 0, 0));
-		player.getController().cancelTask(TaskId.ITEM_USE);
 		ItemUseObserver observer = new ItemUseObserver() {
 
 			@Override
 			public void abort() {
-				player.getController().cancelTask(TaskId.ITEM_USE);
+				player.getController().cancelUseItem(false);
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_CANCELED(targetItem.getL10n()));
 				PacketSendUtility.sendPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate()
 					.getTemplateId(), 0, 2, 0));
@@ -58,7 +57,11 @@ public class ExtractAction extends AbstractItemAction {
 		player.getObserveController().attach(observer);
 		player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(() -> {
 			player.getObserveController().removeObserver(observer);
-			boolean result = EnchantService.breakItem(player, targetItem, parentItem);
+			boolean result = canAct(player, parentItem, targetItem) && EnchantService.breakItem(player, targetItem, parentItem);
+			if (result)
+				// The only item with an extract action has no use delay, so this is effectively
+				// a no-op, but kept for consistency with the other actions.
+				player.startCooldown(parentItem);
 			PacketSendUtility.sendPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate()
 				.getTemplateId(), 0, result ? 1 : 2, 0));
 		}, 5000));

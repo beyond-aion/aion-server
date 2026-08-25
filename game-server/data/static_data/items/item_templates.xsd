@@ -126,21 +126,21 @@
 		<xs:attribute name="attack_type" type="ItemAttackType"/>
 		<xs:attribute name="desc" type="xs:int"/>
 		<xs:attribute name="restrict_max" type="ByteList"/>
-		<xs:attribute name="restrict" type="ByteList"/>
+		<xs:attribute name="restrict" type="ByteList" default="1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1"/>
 		<xs:attribute name="rnd_bonus" type="xs:int"/>
-		<xs:attribute name="rnd_count" type="xs:int"/>
-		<xs:attribute name="race" type="itemRace"/>
+		<xs:attribute name="rnd_count" type="xs:int" default="-1"/>
+		<xs:attribute name="race" type="itemRace" default="PC_ALL"/>
 		<xs:attribute name="price" type="xs:int"/>
 		<xs:attribute name="quality" type="itemQuality"/>
-		<xs:attribute name="item_type" type="itemType"/>
-		<xs:attribute name="max_stack_count" type="xs:int"/>
-		<xs:attribute name="drop" type="xs:boolean"/>
-		<xs:attribute name="item_group" type="ItemGroup"/>
+		<xs:attribute name="item_type" type="itemType" default="NORMAL"/>
+		<xs:attribute name="max_stack_count" type="xs:int" default="1"/>
+		<xs:attribute name="item_group" type="ItemGroup" default="NONE"/>
 		<xs:attribute name="mask" type="xs:int"/>
 		<xs:attribute name="level" type="xs:int"/>
 		<xs:attribute name="id" type="itemId" use="required"/>
 		<xs:attribute name="name" type="xs:string"/>
 		<xs:attribute name="cName" type="xs:string"/>
+		<xs:attribute name="casting_delay" type="xs:int"/>
 		<xs:attribute name="tempering_name" type="xs:string"/>
 		<xs:attribute name="enchant_name" type="xs:string" />
 		<xs:attribute name="multi_return" type="xs:string"/>
@@ -178,7 +178,6 @@
 			<xs:element name="remodel" type="RemodelAction" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="expextract" type="ExpExtractAction" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="polish" type="PolishAction" minOccurs="0" maxOccurs="1"/>
-			<xs:element name="composition" type="CompositionAction" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="tuning" type="TuningAction" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="megaphone" type="MegaphoneAction" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="pack" type="PackAction" minOccurs="0" maxOccurs="1"/>
@@ -327,6 +326,7 @@
 		<xs:complexContent>
 			<xs:extension base="AbstractItemAction">
 				<xs:attribute name="sync_ids" type="IntListType"/>
+				<xs:attribute name="recovery_instance_count" type="xs:int" default="1"/>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
@@ -403,11 +403,6 @@
 			<xs:extension base="AbstractItemAction">
 				<xs:attribute name="id" type="xs:int"/>
 			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-	<xs:complexType name="CompositionAction">
-		<xs:complexContent>
-			<xs:extension base="AbstractItemAction"/>
 		</xs:complexContent>
 	</xs:complexType>
 	<xs:complexType name="MegaphoneAction">

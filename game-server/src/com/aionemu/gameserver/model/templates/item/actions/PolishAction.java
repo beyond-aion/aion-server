@@ -51,9 +51,8 @@ public class PolishAction extends AbstractItemAction {
 
 			@Override
 			public void abort() {
-				player.getController().cancelTask(TaskId.ITEM_USE);
-				player.removeItemCoolDown(parentItem.getItemTemplate().getUseLimits().getDelayId());
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_CANCELED());
+				player.getController().cancelUseItem(false);
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_POLISH_CANCELED(targetItem.getL10n()));
 				PacketSendUtility.broadcastPacket(player,
 					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, 2, 0), true);
 				player.getObserveController().removeObserver(this);
@@ -64,11 +63,19 @@ public class PolishAction extends AbstractItemAction {
 		player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(() -> {
 			player.getObserveController().removeObserver(observer);
 
+			if (player.getInventory().getItemByObjId(targetItem.getObjectId()) == null && !targetItem.isEquipped()) {
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ENCHANT_ITEM_NO_TARGET_ITEM());
+				PacketSendUtility.broadcastPacket(player,
+					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, 2, 0), true);
+				return;
+			}
+
 			PacketSendUtility.broadcastPacket(player,
 				new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, 1, 1), true);
 			if (!player.getInventory().decreaseByObjectId(parentItem.getObjectId(), 1)) {
 				return;
 			}
+			player.startCooldown(parentItem);
 			int bonusNumber = DataManager.ITEM_RANDOM_BONUSES.selectRandomBonusNumber(StatBonusType.POLISH, polishSetId);
 			if (bonusNumber == 0) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ENCHANT_ITEM_FAILED(parentItem.getL10n()));

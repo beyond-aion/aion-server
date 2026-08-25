@@ -27,15 +27,13 @@ public class InstanceTimeClear extends AbstractItemAction {
 
 	@XmlAttribute(name = "sync_ids")
 	private List<Integer> syncIds;
+	@XmlAttribute(name = "recovery_instance_count")
+	private int recoveryInstanceCount = 1;
 
 	@Override
 	public boolean canAct(Player player, Item parentItem, Item targetItem, Object... params) {
 		int syncId = (int) params[0];
-		if (!syncIds.contains(syncId))
-			return false;
-		int worldId = DataManager.INSTANCE_COOLTIME_DATA.getWorldId(syncId);
-		PortalCooldown portalCooldown = player.getPortalCooldownList().getPortalCooldown(worldId);
-		if (portalCooldown == null || (portalCooldown.getReuseTime() < System.currentTimeMillis() && portalCooldown.getEnterCount() == 0)) {
+		if (!syncIds.contains(syncId)) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_INSTANCE_COOL_TIME_INIT());
 			return false;
 		}
@@ -44,17 +42,20 @@ public class InstanceTimeClear extends AbstractItemAction {
 
 	@Override
 	public void act(final Player player, final Item parentItem, Item targetItem, Object... params) {
+		int castingDelay = parentItem.getItemTemplate().getCastingDelay();
 		int syncId = (int) params[0];
+		if (castingDelay <= 0) {
+			finishUse(player, parentItem, syncId);
+			return;
+		}
 		PacketSendUtility.broadcastPacketAndReceive(player,
-			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 1000, 0, 0));
+			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), castingDelay, 0, 0));
 
 		final ItemUseObserver observer = new ItemUseObserver() {
 
 			@Override
 			public void abort() {
-				// TODO: abort is invalid. Should we abort all or only the last syncid?
-				player.getController().cancelTask(TaskId.ITEM_USE);
-				player.removeItemCoolDown(parentItem.getItemTemplate().getUseLimits().getDelayId());
+				player.getController().cancelUseItem(false);
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_CANCELED());
 				PacketSendUtility.broadcastPacket(player,
 					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), 0, 2, 0), true);
@@ -63,32 +64,31 @@ public class InstanceTimeClear extends AbstractItemAction {
 
 		};
 		player.getObserveController().attach(observer);
-		player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				player.getObserveController().removeObserver(observer);
-				if (parentItem.getActivationCount() > 1) {
-					parentItem.setActivationCount(parentItem.getActivationCount() - 1);
-				} else {
-					player.getInventory().decreaseByObjectId(parentItem.getObjectId(), 1);
-				}
-
-				int worldId = DataManager.INSTANCE_COOLTIME_DATA.getWorldId(syncId);
-				PortalCooldown portalCD = player.getPortalCooldownList().getPortalCooldown(worldId);
-				if (portalCD == null || portalCD.getEnterCount() < 1)
-					return; // don't spam with not needed packets!
-
-				portalCD.decreaseEnterCount();
-				if (portalCD.getEnterCount() < 1)
-					player.getPortalCooldownList().removePortalCooldown(worldId);
-
-				player.getPortalCooldownList().sendEntryInfo(worldId);
-				PacketSendUtility.broadcastPacketAndReceive(player,
-					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, 1, 0));
-			}
-
-		}, 1000));
+		player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(() -> {
+			player.getObserveController().removeObserver(observer);
+			finishUse(player, parentItem, syncId);
+		}, castingDelay));
 	}
 
+	private void finishUse(Player player, Item parentItem, int syncId) {
+		int worldId = DataManager.INSTANCE_COOLTIME_DATA.getWorldId(syncId);
+
+		if (parentItem.getActivationCount() > 1) {
+			if (player.getInventory().getItemByObjId(parentItem.getObjectId()) == null)
+				return; // item was traded or sold during the casting delay
+			parentItem.setActivationCount(parentItem.getActivationCount() - 1);
+		} else if (!player.getInventory().decreaseByObjectId(parentItem.getObjectId(), 1))
+			return;
+
+		player.startCooldown(parentItem);
+
+		PortalCooldown portalCD = player.getPortalCooldownList().getOrCreatePortalCooldown(worldId);
+		if (portalCD != null) {
+			portalCD.decreaseEnterCount(recoveryInstanceCount);
+			player.getPortalCooldownList().sendEntryInfo(worldId);
+		}
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_USE_ITEM(parentItem.getL10n()));
+		PacketSendUtility.broadcastPacketAndReceive(player,
+			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, 1, 0));
+	}
 }

@@ -465,6 +465,11 @@ public class PlayerController extends CreatureController<Player> {
 		}
 
 		if (skill != null) {
+			// item casts get interrupted by skill usage (skill casts don't, see PlayerRestrictions#canUseSkill). this must
+			// happen before checking the restrictions, since Creature#canAttack returns false as long as we are casting
+			if (player.isCasting() && player.getCastingSkill().getItemTemplate() != null)
+				cancelCurrentSkill(null);
+
 			if (!PlayerRestrictions.canUseSkill(player, skill))
 				return;
 
@@ -529,7 +534,6 @@ public class PlayerController extends CreatureController<Player> {
 				PacketSendUtility.sendPacket(player, message);
 		} else if (castingSkill.getSkillMethod() == SkillMethod.ITEM) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_CANCELED());
-			player.removeItemCoolDown(castingSkill.getItemTemplate().getUseLimits().getDelayId());
 			PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), castingSkill.getFirstTarget().getObjectId(),
 				castingSkill.getItemObjectId(), castingSkill.getItemTemplate().getTemplateId(), 0, 3, 0), true);
 		}
@@ -541,11 +545,14 @@ public class PlayerController extends CreatureController<Player> {
 
 	@Override
 	public void cancelUseItem() {
+		cancelUseItem(true);
+	}
+
+	public void cancelUseItem(boolean sendCancelAnimation) {
 		Player player = getOwner();
 		Item usingItem = player.getUsingItem();
 		player.setUsingItem(null);
-		if (hasTask(TaskId.ITEM_USE)) {
-			cancelTask(TaskId.ITEM_USE);
+		if (cancelTask(TaskId.ITEM_USE) != null && sendCancelAnimation) {
 			PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), usingItem == null ? 0 : usingItem.getObjectId(),
 				usingItem == null ? 0 : usingItem.getItemTemplate().getTemplateId(), 0, 3, 0), true);
 		}
