@@ -12,8 +12,8 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
-import com.aionemu.gameserver.utils.stats.CalculationType;
 import com.aionemu.gameserver.model.templates.world.WorldMapTemplate;
+import com.aionemu.gameserver.utils.stats.CalculationType;
 
 /**
  * @author ATracer
@@ -28,6 +28,7 @@ public class PlayerStatFunctions {
 		FUNCTIONS.add(new AttackSpeedFunction());
 		FUNCTIONS.add(new BoostCastingTimeFunction());
 		FUNCTIONS.add(new PvPAttackRatioFunction());
+		FUNCTIONS.add(new PDefFunction());
 		FUNCTIONS.add(new MaxHpFunction());
 		FUNCTIONS.add(new MaxMpFunction());
 		FUNCTIONS.add(new BlockFunction());
@@ -129,6 +130,19 @@ class MagicalAttackFunction extends StatFunction {
 	@Override
 	public int getPriority() {
 		return 30;
+	}
+}
+
+class PDefFunction extends StatFunction {
+
+	PDefFunction() {
+		stat = StatEnum.PHYSICAL_DEFENSE;
+	}
+
+	@Override
+	public void apply(Stat2 stat, CalculationType... calculationTypes) {
+		if (stat.getOwner().isInFlyingState())
+			stat.setFinalRate(0.6f);
 	}
 }
 

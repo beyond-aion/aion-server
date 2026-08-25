@@ -26,8 +26,6 @@ import com.aionemu.gameserver.utils.stats.CalculationType;
  */
 public class PlayerGameStats extends CreatureGameStats<Player> {
 
-	private static final float FLIGHT_PHYSICAL_DEFENSE_RATE = 0.6f;
-
 	private StatsTemplate statsTemplate;
 	private int cachedAttackSpeed;
 	private int maxDamageChance;
@@ -139,14 +137,6 @@ public class PlayerGameStats extends CreatureGameStats<Player> {
 		if (offHandWeapon != null && !equipment.isShieldEquipped())
 			minWeaponRange = Math.min(minWeaponRange, offHandWeapon.getItemTemplate().getWeaponStats().getAttackRange());
 		return getStat(StatEnum.ATTACK_RANGE, minWeaponRange == Integer.MAX_VALUE ? base : minWeaponRange);
-	}
-
-	@Override
-	public Stat2 getPDef() {
-		Stat2 pDef = super.getPDef();
-		if (owner.isInFlyingState())
-			pDef.setFinalRate(FLIGHT_PHYSICAL_DEFENSE_RATE);
-		return pDef;
 	}
 
 	@Override
