@@ -425,7 +425,7 @@ public class PlayerController extends CreatureController<Player> {
 			PacketSendUtility.sendPacket(getOwner(), SM_ATTACK_RESPONSE.STOP_WITHOUT_MESSAGE(gameStats.getAttackCounter()));
 			return;
 		}
-		lastAttackMillis = milis;
+		enterCombat(true);
 
 		super.attackTarget(target, time, true);
 	}
@@ -451,7 +451,7 @@ public class PlayerController extends CreatureController<Player> {
 			QuestEngine.getInstance().onAttack(new QuestEnv(attacker, getOwner(), 0));
 		}
 
-		lastAttackedMillis = System.currentTimeMillis();
+		enterCombat(false);
 	}
 
 	public void useSkill(SkillTemplate template, int targetType, float x, float y, float z, int clientHitTime, int skillLevel) {
@@ -758,4 +758,16 @@ public class PlayerController extends CreatureController<Player> {
 		return Math.max(lastAttackedMillis, lastAttackMillis);
 	}
 
+	/**
+	 * Refreshes the combat timer, see {@link #isInCombat()}.
+	 *
+	 * @param attacking
+	 *          True, if the player attacked someone, false if he was attacked
+	 */
+	public void enterCombat(boolean attacking) {
+		if (attacking)
+			lastAttackMillis = System.currentTimeMillis();
+		else
+			lastAttackedMillis = System.currentTimeMillis();
+	}
 }

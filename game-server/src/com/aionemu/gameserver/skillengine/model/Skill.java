@@ -645,6 +645,9 @@ public class Skill {
 		if (!blockedPenaltySkill)
 			startPenaltySkill();
 
+		if (isHostile() && effector instanceof Player playerEffector)
+			playerEffector.getController().enterCombat(true);
+
 		boolean isItemSkill = skillMethod == SkillMethod.ITEM;
 		boolean sentCastSpellResultPacket = false;
 		// the client must learn the hit time before any HP change reaches it, or it updates the status bar before displaying the hit
@@ -718,7 +721,22 @@ public class Skill {
 		// Apply effects to effected objects
 		effects.forEach(Effect::applyEffect);
 
+		if (isHostile()) {
+			for (Effect effect : effects) {
+				if (effect.getEffected() instanceof Player effectedPlayer)
+					effectedPlayer.getController().enterCombat(false);
+			}
+		}
+
 		addResistedEffectHateAndNotifyFriends(effects);
+	}
+
+	/**
+	 * @return True, if this skill is meant to be used against enemies (which is what puts caster and targets into combat)
+	 */
+	private boolean isHostile() {
+		SkillSubType subType = skillTemplate.getSubType();
+		return subType == SkillSubType.ATTACK || subType == SkillSubType.DEBUFF;
 	}
 
 	private boolean sendCastSpellEnd(int dashStatus, List<Effect> effects) {
