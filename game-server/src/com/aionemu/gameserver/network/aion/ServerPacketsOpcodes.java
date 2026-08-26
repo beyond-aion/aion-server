@@ -84,7 +84,7 @@ public class ServerPacketsOpcodes {
 		addPacketOpcode(66, SM_GM_SHOW_LEGION_MEMBERLIST.class); // [S_GUILD_OTHER_MEMBER_INFO]
 		addPacketOpcode(67, SM_WEATHER.class); // [S_WEATHER]
 		addPacketOpcode(68, SM_PLAYER_STATE.class); // [S_INVISIBLE_LEVEL]
-		// addPacketOpcode(69, ); // [S_RECALLED_BY_OTHER] SM_SUMMON_TELEPORT_REQUEST some teleport/summon dialog. response when accepting/declining the dialog is CM_SUMMON_TELEPORT_RESPONSE (opcode 195). first D in SM and CM packets is identical (dialog ID?) //fsc 69 cshh unk name skill_id time_seconds
+		addPacketOpcode(69, S_RECALLED_BY_OTHER.class);
 		addPacketOpcode(70, SM_ACTION_ANIMATION.class); // [S_EFFECT]
 		addPacketOpcode(71, SM_QUEST_LIST.class); // [S_LOAD_WORKINGQUEST]
 		addPacketOpcode(72, SM_KEY.class); // [S_KEY]
