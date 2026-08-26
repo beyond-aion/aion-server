@@ -113,7 +113,7 @@ public class GeoService implements GameEngine {
 
 	private float getSeeCheckOffset(VisibleObject object) {
 		float height = object.getObjectTemplate().getBoundRadius().getUpper();
-		if (object instanceof Player p && p.isTransformed() && p.getTransformModel().getBanMovement() == 1) {
+		if (object instanceof Player p && p.isTransformed() && p.getTransformModel().cantMove()) {
 			NpcTemplate t = DataManager.NPC_DATA.getNpcTemplate(p.getTransformModel().getModelId());
 			if (t != null)
 				return t.getBoundRadius().getUpper();

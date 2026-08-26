@@ -42,8 +42,8 @@ public class SM_TRANSFORM extends AionServerPacket {
 
 	/**
 	 * structure SM_TRANSFORM D - objectId D - modelId (res9) 100% H - state F - 0,25f F - 2.0f C - cannotuseskill(res7) 100%- not used for FORM1 D -
-	 * transformTypeId (res8) 100% C - (res6) cannot fly/glide? C - cannot useitem (res5) C - attack disabled (res3) C - jump disabled (res2?) C -
-	 * summon disabled? (res1?) C - move disabled(res13) 100% D - panelId(res4) 100% cant mount - client recognises it by modelId? TODO server side
+	 * transformTypeId (res8) 100% C - (res6) cannot fly/glide C - cannot useitem (res5) C - attack disabled (res3) C - jump disabled (res2) C -
+	 * summon disabled (res1) C - move disabled(res13) 100% D - panelId(res4) 100% cant mount - client recognises it by modelId? TODO server side
 	 * checks for mounts
 	 */
 	@Override
@@ -69,14 +69,14 @@ public class SM_TRANSFORM extends AionServerPacket {
 			writeH(creature.getState());
 			writeF(0.25f);
 			writeF(2.0f);
-			writeC(creature.getTransformModel().getBanUseSkills());
+			writeC(creature.getTransformModel().cantUseSkills() ? 1 : 0);
 			writeD(creature.getTransformModel().getType().getId());
-			writeC(creature.getTransformModel().getRes6());
-			writeC(creature.getTransformModel().getRes5());
-			writeC(creature.getTransformModel().getRes3());
-			writeC(creature.getTransformModel().getRes2());
-			writeC(creature.getTransformModel().getRes1());
-			writeC(creature.getTransformModel().getBanMovement());
+			writeC(creature.getTransformModel().cantFly() ? 1 : 0);
+			writeC(creature.getTransformModel().cantUseItems() ? 1 : 0);
+			writeC(creature.getTransformModel().cantAttack() ? 1 : 0);
+			writeC(creature.getTransformModel().cantJump() ? 1 : 0);
+			writeC(creature.getTransformModel().cantRecall() ? 1 : 0);
+			writeC(creature.getTransformModel().cantMove() ? 1 : 0);
 			writeD(creature.getTransformModel().getPanelId()); // display panel
 		}
 	}

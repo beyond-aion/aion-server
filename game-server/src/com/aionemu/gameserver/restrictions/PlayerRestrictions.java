@@ -88,7 +88,7 @@ public class PlayerRestrictions {
 
 		// cannot use skills while transformed
 		if (player.getTransformModel().isActive()) {
-			if (player.getTransformModel().getBanUseSkills() == 1) {
+			if (player.getTransformModel().cantUseSkills()) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CAN_NOT_CAST_IN_SHAPECHANGE());
 				return false;
 			}
@@ -108,7 +108,7 @@ public class PlayerRestrictions {
 			if (!(target instanceof Player))
 				return false;
 			if (player.getController().isInCombat() || ((Player) target).getController().isInCombat()
-				|| ((Player) target).getTransformModel().getRes1() == 1)// cannot be summoned while transformed
+				|| ((Player) target).getTransformModel().cantRecall())// cannot be summoned while transformed
 			{
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_Recall_CANNOT_ACCEPT_EFFECT(target.getName()));
 				return false;
@@ -246,7 +246,7 @@ public class PlayerRestrictions {
 		}
 
 		// cannot attack while transformed
-		if (player.getTransformModel().getRes3() == 1) {
+		if (player.getTransformModel().cantAttack()) {
 			return false;
 		}
 
@@ -308,7 +308,7 @@ public class PlayerRestrictions {
 		}
 
 		// cannot use item while transformed
-		if (player.getTransformModel().getRes5() == 1) {
+		if (player.getTransformModel().cantUseItems()) {
 			// client sends message by itself
 			return false;
 		}
