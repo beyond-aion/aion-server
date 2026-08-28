@@ -333,4 +333,14 @@ public class ChatUtil {
 			name = (player.getRace() == Race.ELYOS ? ELYOS_NAME_PREFIX : ASMO_NAME_PREFIX) + name;
 		return name;
 	}
+
+	/**
+	 * @return The string padded to the given width for display in chat.
+	 */
+	public static String leftPad(long number, int width) {
+		String num = String.valueOf(number);
+		if (num.length() >= width)
+			return num;
+		return "\t".repeat(width - num.length()) + num;
+	}
 }

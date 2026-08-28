@@ -74,6 +74,10 @@ public abstract class Stat2 {
 		return (base * baseRate + bonus * bonusRate + base * fixedBonusRate) * finalRate;
 	}
 
+	public final float getExactCurrentWithoutBonus() {
+		return (base * baseRate + base * fixedBonusRate) * finalRate;
+	}
+
 	public final float getExactCurrentWithoutFixedBonus() {
 		return (base * baseRate + bonus * bonusRate) * finalRate;
 	}

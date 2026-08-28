@@ -511,6 +511,15 @@ public class PlayerController extends CreatureController<Player> {
 
 	@Override
 	public void cancelCurrentSkill(Creature lastAttacker) {
+		Skill castingSkill = getOwner().getCastingSkill();
+		//RecallInstantEffect sends its own cast cancellation message.
+		if (castingSkill != null && castingSkill.getSkillTemplate().hasRecallInstant()) {
+			Creature target = castingSkill.getFirstTarget();
+			String targetName = target != null ? target.getName() : "";
+			//Summoning of %0 is cancelled.
+			cancelCurrentSkill(lastAttacker, SM_SYSTEM_MESSAGE.STR_MSG_Recall_CANCEL_EFFECT(targetName));
+			return;
+		}
 		cancelCurrentSkill(lastAttacker, SM_SYSTEM_MESSAGE.STR_SKILL_CANCELED());
 	}
 

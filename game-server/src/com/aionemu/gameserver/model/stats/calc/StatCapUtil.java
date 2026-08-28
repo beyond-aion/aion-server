@@ -39,7 +39,7 @@ public class StatCapUtil {
 			register(stat, 0, 700);
 		for (StatEnum stat : List.of(POWER, AGILITY, ACCURACY, HEALTH, KNOWLEDGE, WILL))
 			register(stat, 80, 999);
-		for (StatEnum stat : List.of(PHYSICAL_ATTACK, PHYSICAL_DEFENSE, PHYSICAL_ACCURACY, MAGICAL_ACCURACY))
+		for (StatEnum stat : List.of(PHYSICAL_ATTACK, MAGICAL_ATTACK, PHYSICAL_DEFENSE, MAGICAL_DEFEND, PHYSICAL_ACCURACY, MAGICAL_ACCURACY))
 			register(stat, 0, CapFunction.UNLIMITED_UPPER);
 		for (StatEnum stat : List.of(WATER_RESISTANCE, FIRE_RESISTANCE, EARTH_RESISTANCE, WIND_RESISTANCE, DARK_RESISTANCE, LIGHT_RESISTANCE))
 			register(stat, creature -> -getElementalDefenseCapForCreature(creature), StatCapUtil::getElementalDefenseCapForCreature);
@@ -108,10 +108,15 @@ public class StatCapUtil {
 	}
 
 	private static void calculate(Stat2 stat2, int lowerCap, int upperCap) {
-		if (stat2.getCurrent() > upperCap) {
-			stat2.setBonus(upperCap - stat2.getBase());
-		} else if (stat2.getCurrent() < lowerCap) {
-			stat2.setBonus(lowerCap - stat2.getBase());
+		float exactCurrent = stat2.getExactCurrent();
+		if (exactCurrent > upperCap) {
+			stat2.setFinalRate(1f);
+			stat2.setBonusRate(1f);
+			stat2.setBonus(upperCap - stat2.getExactCurrentWithoutBonus());
+		} else if (exactCurrent < lowerCap) {
+			stat2.setFinalRate(1f);
+			stat2.setBonusRate(1f);
+			stat2.setBonus(lowerCap - stat2.getExactCurrentWithoutBonus());
 		}
 	}
 
