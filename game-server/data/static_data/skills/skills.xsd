@@ -646,13 +646,13 @@
 				<xs:attribute name="model" type="xs:int" use="required" />
 				<xs:attribute name="type" type="TransformType" default="NONE" />
 				<xs:attribute name="panelid" type="xs:int" />
-				<xs:attribute name="banUseSkills" type="xs:int" />
-				<xs:attribute name="banMovement" type="xs:int" />
-				<xs:attribute name="res1" type="xs:int" />
-				<xs:attribute name="res2" type="xs:int" />
-				<xs:attribute name="res3" type="xs:int" />
-				<xs:attribute name="res5" type="xs:int" />
-				<xs:attribute name="res6" type="xs:int" />
+				<xs:attribute name="cantUseSkills" type="xs:boolean" />
+				<xs:attribute name="cantMove" type="xs:boolean" />
+				<xs:attribute name="cantRecall" type="xs:boolean" />
+				<xs:attribute name="cantJump" type="xs:boolean" />
+				<xs:attribute name="cantAttack" type="xs:boolean" />
+				<xs:attribute name="cantUseItems" type="xs:boolean" />
+				<xs:attribute name="cantFly" type="xs:boolean" />
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>

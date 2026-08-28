@@ -1621,7 +1621,7 @@ public class Player extends Creature {
 	@Override
 	public boolean canPerformMove() {
 		// player cannot move is transformed
-		if (getTransformModel().getBanMovement() == 1)
+		if (getTransformModel().cantMove())
 			return false;
 
 		return super.canPerformMove();
