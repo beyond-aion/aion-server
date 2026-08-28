@@ -26,10 +26,7 @@ import com.aionemu.gameserver.world.World;
  */
 public class SummonsService {
 
-	/**
-	 * create summon
-	 */
-	public static final Summon createSummon(Player master, int npcId, int skillId, int skillLevel, int time) {
+	public static Summon createSummon(Player master, int npcId, int skillId, int skillLevel, int time) {
 		if (master.getSummon() != null) {
 			PacketSendUtility.sendPacket(master, SM_SYSTEM_MESSAGE.STR_SKILL_SUMMON_ALREADY_HAVE_A_FOLLOWER());
 			return null;
@@ -45,7 +42,7 @@ public class SummonsService {
 	/**
 	 * Releases the summon after {@link UnsummonType#getDelayMillis()}, see {@link Summon#registerRelease(SummonRelease)} for competing releases.
 	 */
-	public static final void release(Summon summon, UnsummonType unsummonType) {
+	public static void release(Summon summon, UnsummonType unsummonType) {
 		SummonRelease release = new SummonRelease(unsummonType);
 		if (!summon.registerRelease(release))
 			return;
