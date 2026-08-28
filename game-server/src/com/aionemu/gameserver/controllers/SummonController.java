@@ -70,7 +70,7 @@ public class SummonController extends CreatureController<Summon> {
 	}
 
 	public boolean canAttack(int targetObjId) {
-		return getOwner().getKnownList().getObject(targetObjId) instanceof Creature creature && getOwner().getMaster().isEnemy(creature);
+		return getOwner().getKnownList().getObject(targetObjId) instanceof Creature creature && getOwner().isEnemy(creature);
 	}
 
 	@Override
