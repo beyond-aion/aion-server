@@ -87,16 +87,14 @@ public class SummonsService {
 			if (summoningSkill != null && summoningSkill.getCooldown() > 0)
 				master.setSkillCoolDown(summoningSkill.getCooldownId(), summoningSkill.getCooldown() * 100 + System.currentTimeMillis());
 
-			if (unsummonType != UnsummonType.LOGOUT) { // the master is leaving the world, updating his client is pointless
-				if (unsummonType == UnsummonType.DISTANCE)
-					PacketSendUtility.sendPacket(master, SM_SYSTEM_MESSAGE.STR_SKILL_SUMMON_UNSUMMON_BY_TOO_DISTANCE());
-				else
-					PacketSendUtility.sendPacket(master, SM_SYSTEM_MESSAGE.STR_SKILL_SUMMON_UNSUMMONED(summon.getL10n()));
-				PacketSendUtility.sendPacket(master, new SM_SUMMON_PANEL_REMOVE(summon.getSummonedBySkillId()));
-				PacketSendUtility.sendPacket(master, new SM_SUMMON_OWNER_REMOVE(summon.getObjectId()));
-				if (!addedMasterHate)
-					scheduleAddMasterHate(summon);
-			}
+			if (unsummonType == UnsummonType.DISTANCE)
+				PacketSendUtility.sendPacket(master, SM_SYSTEM_MESSAGE.STR_SKILL_SUMMON_UNSUMMON_BY_TOO_DISTANCE());
+			else
+				PacketSendUtility.sendPacket(master, SM_SYSTEM_MESSAGE.STR_SKILL_SUMMON_UNSUMMONED(summon.getL10n()));
+			PacketSendUtility.sendPacket(master, new SM_SUMMON_PANEL_REMOVE(summon.getSummonedBySkillId()));
+			PacketSendUtility.sendPacket(master, new SM_SUMMON_OWNER_REMOVE(summon.getObjectId()));
+			if (!addedMasterHate)
+				scheduleAddMasterHate(summon);
 		}
 
 		public void scheduleOrRun() {
