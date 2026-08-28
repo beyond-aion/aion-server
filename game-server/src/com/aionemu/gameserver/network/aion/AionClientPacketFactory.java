@@ -220,7 +220,7 @@ public class AionClientPacketFactory {
 			packets[192] = new PacketInfo<>(CM_INSTANCE_INFO.class, State.IN_GAME); // [C_INSTANCE_DUNGEON_COOLTIMES (InstanceDungeonCooltimePacket)]
 			// packets[193] = // [C_SHOP_REQUEST]
 			packets[194] = new PacketInfo<>(CM_SHOW_RESTRICTIONS.class, State.IN_GAME); // [C_ASK_BOT_POINT (&LAB_14063b3e0)] when writing /restriction in chat
-			packets[195] = new PacketInfo<>(C_RECALLED_BY_OTHER_ANSWER.class, State.IN_GAME);
+			packets[195] = new PacketInfo<>(CM_RECALLED_BY_OTHER_ANSWER.class, State.IN_GAME); // [C_RECALLED_BY_OTHER_ANSWER (&LAB_14063b5b0)] when player accepts/declines SM_RECALLED_BY_OTHER window
 			packets[196] = new PacketInfo<>(CM_SHOW_MAP.class, State.IN_GAME); // [C_REQUEST_SERIAL_KILLER_LIST (RequestSerialKillerListPacket)]
 			packets[197] = new PacketInfo<>(CM_APPEARANCE.class, State.IN_GAME); // [C_ADDED_SERVICE_REQUEST (&LAB_14063ba60)]
 			// packets[198] = [C_SNDC_CHECK_MESSAGE (SndcCheckMessagePacket)]

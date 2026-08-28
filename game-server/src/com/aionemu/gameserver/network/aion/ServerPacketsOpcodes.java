@@ -84,7 +84,7 @@ public class ServerPacketsOpcodes {
 		addPacketOpcode(66, SM_GM_SHOW_LEGION_MEMBERLIST.class); // [S_GUILD_OTHER_MEMBER_INFO]
 		addPacketOpcode(67, SM_WEATHER.class); // [S_WEATHER]
 		addPacketOpcode(68, SM_PLAYER_STATE.class); // [S_INVISIBLE_LEVEL]
-		addPacketOpcode(69, S_RECALLED_BY_OTHER.class);
+		addPacketOpcode(69, SM_RECALLED_BY_OTHER.class); // [S_RECALLED_BY_OTHER]
 		addPacketOpcode(70, SM_ACTION_ANIMATION.class); // [S_EFFECT]
 		addPacketOpcode(71, SM_QUEST_LIST.class); // [S_LOAD_WORKINGQUEST]
 		addPacketOpcode(72, SM_KEY.class); // [S_KEY]

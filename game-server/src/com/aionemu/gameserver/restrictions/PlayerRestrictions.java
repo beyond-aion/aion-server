@@ -10,7 +10,6 @@ import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.CustomPlayerState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.team.TeamMember;
 import com.aionemu.gameserver.model.team.TemporaryPlayerTeam;
 import com.aionemu.gameserver.model.team.alliance.PlayerAlliance;
@@ -104,9 +103,8 @@ public class PlayerRestrictions {
 			}
 		}
 		if (skill.getSkillTemplate().hasRecallInstant()) {
-			if (!(target instanceof Player)) {
+			if (!(target instanceof Player))
 				return false;
-			}
 			if (player.getController().isInCombat()
 				|| ((Player) target).getController().isInCombat()
 				|| ((Player) target).getTransformModel().getRes1() == 1
@@ -122,7 +120,7 @@ public class PlayerRestrictions {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_IS_NOT_VALID());
 				return false;
 			}
-			if (!targetPlayer.isInState(CreatureState.DEAD)) {
+			if (!targetPlayer.isDead()) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_IS_NOT_VALID());
 				return false;
 			}

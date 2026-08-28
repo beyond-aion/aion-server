@@ -7,18 +7,16 @@ import javax.xml.bind.annotation.XmlType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.RequestResponseHandler;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_RECALLED_BY_OTHER;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.network.aion.serverpackets.S_RECALLED_BY_OTHER;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
- * @author SVDNESS
+ * @author Bio, Sippolo, SVDNESS
  */
-
-//Player recall logic.
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "RecallInstantEffect")
 public class RecallInstantEffect extends EffectTemplate {
@@ -56,8 +54,8 @@ public class RecallInstantEffect extends EffectTemplate {
 				}
 			}
 		};
-		if (effected.getResponseRequester().putRequest(S_RECALLED_BY_OTHER.RECALL_REQUEST_ID, rrh)) {
-			PacketSendUtility.sendPacket(effected, new S_RECALLED_BY_OTHER(effector.getName(), effect.getSkillId(), 30));
+		if (effected.getResponseRequester().putRequest(SM_RECALLED_BY_OTHER.RECALL_REQUEST_ID, rrh)) {
+			PacketSendUtility.sendPacket(effected, new SM_RECALLED_BY_OTHER(effector.getName(), effect.getSkillId(), 30));
 		} else {
 			//You cannot summon %0 as you are already under the same effect.
 			PacketSendUtility.sendPacket((Player) effector, SM_SYSTEM_MESSAGE.STR_MSG_Recall_DUPLICATE_EFFECT(effected.getName()));
