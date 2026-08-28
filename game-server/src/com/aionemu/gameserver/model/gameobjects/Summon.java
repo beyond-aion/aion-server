@@ -19,7 +19,6 @@ import com.aionemu.gameserver.model.stats.container.SummonLifeStats;
 import com.aionemu.gameserver.model.summons.SkillOrder;
 import com.aionemu.gameserver.model.summons.SummonMode;
 import com.aionemu.gameserver.model.summons.SummonRelease;
-import com.aionemu.gameserver.model.summons.UnsummonType;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplateType;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
@@ -32,7 +31,7 @@ public class Summon extends Creature {
 
 	private final Player master;
 	private SummonMode mode = SummonMode.GUARD;
-	private SummonMode modeBeforeRelease;
+	private SummonMode modeBeforeRelease = mode;
 	private final Queue<SkillOrder> skillOrders = new ConcurrentLinkedQueue<>();
 	private SummonRelease pendingRelease;
 	private SkillElement alwaysResistElement = SkillElement.NONE;
@@ -126,7 +125,7 @@ public class Summon extends Creature {
 	public void setMode(SummonMode mode) {
 		if (mode != SummonMode.ATTACK)
 			clearSkillOrders();
-		if (mode == SummonMode.RELEASE && this.mode != SummonMode.RELEASE)
+		if (this.mode != SummonMode.RELEASE)
 			modeBeforeRelease = this.mode;
 		this.mode = mode;
 	}
