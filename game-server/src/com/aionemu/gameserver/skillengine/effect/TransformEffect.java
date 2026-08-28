@@ -77,9 +77,8 @@ public abstract class TransformEffect extends EffectTemplate {
 
 	@Override
 	public void startEffect(Effect effect) {
-		final Creature effected = effect.getEffected();
-		effected.getTransformModel().apply(this.getTransformId(), this.getTransformType(), this.getPanelId(), this.cantUseSkills(),
-			this.cantMove(), this.cantRecall(), this.cantJump(), this.cantAttack(), this.cantUseItems(), this.cantFly());
+		effect.getEffected().getTransformModel().apply(getTransformId(), getTransformType(), getPanelId(), cantUseSkills(), cantMove(), cantRecall(),
+			cantJump(), cantAttack(), cantUseItems(), cantFly());
 	}
 
 	public TransformType getTransformType() {
