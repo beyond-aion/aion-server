@@ -15,7 +15,6 @@ import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.model.gameobjects.player.BindPointPosition;
 import com.aionemu.gameserver.model.gameobjects.player.FriendList;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.summons.SummonMode;
 import com.aionemu.gameserver.model.summons.UnsummonType;
 import com.aionemu.gameserver.model.team.alliance.PlayerAllianceService;
 import com.aionemu.gameserver.model.team.group.PlayerGroupService;
@@ -101,7 +100,6 @@ public class PlayerLeaveWorldService {
 		}
 		player.getEffectController().removeNonStorableEffectsForLogout();
 		PlayerEffectsDAO.storePlayerEffects(player);
-		PlayerCooldownsDAO.storePlayerCooldowns(player);
 		ItemCooldownsDAO.storeItemCooldowns(player);
 		PlayerLifeStatsDAO.updatePlayerLifeStat(player);
 
@@ -114,7 +112,8 @@ public class PlayerLeaveWorldService {
 
 		Summon summon = player.getSummon();
 		if (summon != null)
-			SummonsService.doMode(SummonMode.RELEASE, summon, UnsummonType.LOGOUT);
+			SummonsService.release(summon, UnsummonType.LOGOUT); // puts the summoning skill on cooldown, so store cooldowns afterwards
+		PlayerCooldownsDAO.storePlayerCooldowns(player);
 		if (player.getPet() != null)
 			player.getPet().getController().delete();
 		if (player.getPostman() != null)
