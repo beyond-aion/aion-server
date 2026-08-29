@@ -646,6 +646,7 @@ public class PlayerController extends CreatureController<Player> {
 			AttackUtil.cancelCastOn(getOwner());
 			AttackUtil.removeTargetFrom(getOwner());
 			PacketSendUtility.broadcastToSightedPlayers(getOwner(), new SM_PLAYER_STATE(getOwner()), true);
+			PacketSendUtility.sendPacket(getOwner(), new SM_INVINCIBLE_TIME(60_000));
 			addTask(TaskId.PROTECTION_ACTIVE, ThreadPoolManager.getInstance().schedule(this::stopProtectionActiveTask, 60000));
 		}
 	}
@@ -659,6 +660,7 @@ public class PlayerController extends CreatureController<Player> {
 		if (player.isSpawned()) {
 			player.unsetVisualState(CreatureVisualState.BLINKING);
 			PacketSendUtility.broadcastToSightedPlayers(player, new SM_PLAYER_STATE(player), true);
+			PacketSendUtility.sendPacket(player, new SM_INVINCIBLE_TIME(0));
 			notifyAIOnMove();
 		}
 	}
