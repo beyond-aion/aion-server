@@ -14,10 +14,10 @@ import com.aionemu.gameserver.utils.xml.JAXBUtil;
 /**
  * @author ginho1
  */
-public class Addcskill extends ConsoleCommand {
+public class Addskill extends ConsoleCommand {
 
-	public Addcskill() {
-		super("addcskill");
+	public Addskill() {
+		super("addskill");
 	}
 
 	@Override
@@ -58,7 +58,7 @@ public class Addcskill extends ConsoleCommand {
 
 	@Override
 	public void info(Player admin, String message) {
-		PacketSendUtility.sendMessage(admin, "syntax ///addcskill <skill name>");
+		PacketSendUtility.sendMessage(admin, "syntax ///addskill <skill name>");
 	}
 
 	@XmlRootElement(name = "skill")
