@@ -26,19 +26,19 @@ public abstract class TransformEffect extends EffectTemplate {
 	protected int panelid;
 
 	@XmlAttribute
-	protected int banUseSkills;
+	protected boolean cantUseSkills;
 	@XmlAttribute
-	protected int banMovement;
+	protected boolean cantMove;
 	@XmlAttribute
-	protected int res1;
+	protected boolean cantRecall;
 	@XmlAttribute
-	protected int res2;
+	protected boolean cantJump;
 	@XmlAttribute
-	protected int res3;
+	protected boolean cantAttack;
 	@XmlAttribute
-	protected int res5;
+	protected boolean cantUseItems;
 	@XmlAttribute
-	protected int res6;
+	protected boolean cantFly;
 
 	@Override
 	public void applyEffect(Effect effect) {
@@ -69,17 +69,16 @@ public abstract class TransformEffect extends EffectTemplate {
 			}
 		}
 		if (temp != null)
-			effected.getTransformModel().apply(temp.getTransformId(), temp.getTransformType(), temp.getPanelId(), temp.getBanUseSkills(),
-				temp.getBanMovement(), temp.getRes1(), temp.getRes2(), temp.getRes3(), temp.getRes5(), temp.getRes6());
+			effected.getTransformModel().apply(temp.getTransformId(), temp.getTransformType(), temp.getPanelId(), temp.cantUseSkills(),
+				temp.cantMove(), temp.cantRecall(), temp.cantJump(), temp.cantAttack(), temp.cantUseItems(), temp.cantFly());
 		else
 			effected.endTransformation();
 	}
 
 	@Override
 	public void startEffect(Effect effect) {
-		final Creature effected = effect.getEffected();
-		effected.getTransformModel().apply(this.getTransformId(), this.getTransformType(), this.getPanelId(), this.getBanUseSkills(),
-			this.getBanMovement(), this.getRes1(), this.getRes2(), this.getRes3(), this.getRes5(), this.getRes6());
+		effect.getEffected().getTransformModel().apply(getTransformId(), getTransformType(), getPanelId(), cantUseSkills(), cantMove(), cantRecall(),
+			cantJump(), cantAttack(), cantUseItems(), cantFly());
 	}
 
 	public TransformType getTransformType() {
@@ -94,53 +93,32 @@ public abstract class TransformEffect extends EffectTemplate {
 		return panelid;
 	}
 
-	/**
-	 * @return the banUseSkills
-	 */
-	public int getBanUseSkills() {
-		return banUseSkills;
+	public boolean cantUseSkills() {
+		return cantUseSkills;
 	}
 
-	/**
-	 * @return the banMovement
-	 */
-	public int getBanMovement() {
-		return banMovement;
+	public boolean cantMove() {
+		return cantMove;
 	}
 
-	/**
-	 * @return the res1
-	 */
-	public int getRes1() {
-		return res1;
+	public boolean cantRecall() {
+		return cantRecall;
 	}
 
-	/**
-	 * @return the res2
-	 */
-	public int getRes2() {
-		return res2;
+	public boolean cantJump() {
+		return cantJump;
 	}
 
-	/**
-	 * @return the res3
-	 */
-	public int getRes3() {
-		return res3;
+	public boolean cantAttack() {
+		return cantAttack;
 	}
 
-	/**
-	 * @return the res5
-	 */
-	public int getRes5() {
-		return res5;
+	public boolean cantUseItems() {
+		return cantUseItems;
 	}
 
-	/**
-	 * @return the res6
-	 */
-	public int getRes6() {
-		return res6;
+	public boolean cantFly() {
+		return cantFly;
 	}
 
 }

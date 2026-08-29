@@ -31,6 +31,8 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 @XmlType(namespace = "", name = "ItemTemplate")
 public class ItemTemplate extends VisibleObjectTemplate {
 
+	private static final byte[] DEFAULT_LEVEL_RESTRICTION = new byte[] { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
+
 	private int itemId;
 	@XmlElement(name = "modifiers")
 	private ModifiersTemplate modifiers;
@@ -53,7 +55,7 @@ public class ItemTemplate extends VisibleObjectTemplate {
 	@XmlAttribute(name = "quality")
 	private ItemQuality itemQuality;
 	@XmlAttribute(name = "item_type")
-	private ItemType itemType;
+	private ItemType itemType = ItemType.NORMAL;
 	@XmlAttribute(name = "attack_type")
 	private ItemAttackType attackType;
 	@XmlAttribute(name = "attack_gap")
@@ -80,7 +82,7 @@ public class ItemTemplate extends VisibleObjectTemplate {
 	private String name;
 	@XmlJavaTypeAdapter(SpaceSeparatedBytesAdapter.class)
 	@XmlAttribute(name = "restrict")
-	private byte[] levelRestrictions;
+	private byte[] levelRestrictions = DEFAULT_LEVEL_RESTRICTION;
 	@XmlJavaTypeAdapter(SpaceSeparatedBytesAdapter.class)
 	@XmlAttribute(name = "restrict_max")
 	private byte[] maxLevelRestrictions;
@@ -96,6 +98,8 @@ public class ItemTemplate extends VisibleObjectTemplate {
 	private int enchantType;
 	@XmlAttribute(name = "max_tampering")
 	private int maxTampering;
+	@XmlAttribute(name = "casting_delay")
+	private int castingDelay;
 	@XmlAttribute(name = "temp_exchange_time")
 	private int temExchangeTime;
 	@XmlAttribute(name = "expire_time")
@@ -281,6 +285,10 @@ public class ItemTemplate extends VisibleObjectTemplate {
 
 	public boolean isStigma() {
 		return stigma != null;
+	}
+
+	public int getCastingDelay() {
+		return castingDelay;
 	}
 
 	/**

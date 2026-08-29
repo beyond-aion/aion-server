@@ -13,6 +13,7 @@ public abstract class Stat2 {
 	float base;
 	float bonus;
 	float fixedBonusRate;
+	float finalRate = 1f;
 	private final Creature owner;
 	protected final StatEnum stat;
 
@@ -66,15 +67,19 @@ public abstract class Stat2 {
 	}
 
 	public final int getCurrent() {
-		return (int) (base * baseRate + bonus * bonusRate + base * fixedBonusRate);
+		return (int) getExactCurrent();
 	}
 
 	public final float getExactCurrent() {
-		return base * baseRate + bonus * bonusRate + base * fixedBonusRate;
+		return (base * baseRate + bonus * bonusRate + base * fixedBonusRate) * finalRate;
+	}
+
+	public final float getExactCurrentWithoutBonus() {
+		return (base * baseRate + base * fixedBonusRate) * finalRate;
 	}
 
 	public final float getExactCurrentWithoutFixedBonus() {
-		return base * baseRate + bonus * bonusRate;
+		return (base * baseRate + bonus * bonusRate) * finalRate;
 	}
 
 	public final void setBonus(float bonus) {
@@ -97,6 +102,18 @@ public abstract class Stat2 {
 
 	public float getFixedBonusRate() {
 		return fixedBonusRate;
+	}
+
+	/**
+	 * Rate applied to the final value (base and bonus alike), meant for situational penalties which are not part of the stat itself, like the physical
+	 * defense loss while flying. Must be set after all stat functions have been applied, since caps are calculated without it.
+	 */
+	public final void setFinalRate(float finalRate) {
+		this.finalRate = finalRate;
+	}
+
+	public final float getFinalRate() {
+		return finalRate;
 	}
 
 	public abstract float calculatePercent(int delta);

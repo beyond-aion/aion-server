@@ -1,9 +1,6 @@
 package com.aionemu.gameserver.model.stats.container;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.commons.lang3.ArrayUtils;
@@ -140,33 +137,27 @@ public abstract class CreatureGameStats<T extends Creature> {
 	}
 
 	public Stat2 applyStatFunctions(StatEnum statEnum, Stat2 stat, CalculationType... calculationTypes) {
-		List<IStatFunction> functions = getStatsSorted(statEnum);
-		if (functions != null) {
-			for (IStatFunction func : functions) {
-				if (func.validate(stat)) {
-					if ((statEnum == StatEnum.PHYSICAL_ATTACK || statEnum == StatEnum.MAGICAL_ATTACK) && func.getOwner() instanceof EnchantEffect ef) {
-						if (ef.getItemSlot() == ItemSlot.MAIN_HAND && ArrayUtils.contains(calculationTypes, CalculationType.MAIN_HAND)
-								|| ef.getItemSlot() == ItemSlot.SUB_HAND && ArrayUtils.contains(calculationTypes, CalculationType.OFF_HAND)) {
-							func.apply(stat, calculationTypes);
-						}
-					} else {
+		for (IStatFunction func : getStatsSorted(statEnum)) {
+			if (func.validate(stat)) {
+				if ((statEnum == StatEnum.PHYSICAL_ATTACK || statEnum == StatEnum.MAGICAL_ATTACK) && func.getOwner() instanceof EnchantEffect ef) {
+					if (ef.getItemSlot() == ItemSlot.MAIN_HAND && ArrayUtils.contains(calculationTypes, CalculationType.MAIN_HAND)
+							|| ef.getItemSlot() == ItemSlot.SUB_HAND && ArrayUtils.contains(calculationTypes, CalculationType.OFF_HAND)) {
 						func.apply(stat, calculationTypes);
 					}
+				} else {
+					func.apply(stat, calculationTypes);
 				}
 			}
-			StatCapUtil.calculateBaseValue(stat, owner);
 		}
+		StatCapUtil.calculateBaseValue(stat, owner);
 		return stat;
 	}
 
 	public Stat2 getItemStatBoost(StatEnum statEnum, Stat2 stat) {
-		List<IStatFunction> functions = getStatsSorted(statEnum);
-		if (functions != null) {
-			for (IStatFunction func : functions) {
-				if (func.isBonus() && func.validate(stat) && (func.getOwner() instanceof Item || func.getOwner() instanceof ManaStone
-					|| func.getOwner() instanceof ItemSetTemplate || func.getOwner() instanceof RandomBonusEffect)) {
-					func.apply(stat);
-				}
+		for (IStatFunction func : getStatsSorted(statEnum)) {
+			if (func.isBonus() && func.validate(stat) && (func.getOwner() instanceof Item || func.getOwner() instanceof ManaStone
+				|| func.getOwner() instanceof ItemSetTemplate || func.getOwner() instanceof RandomBonusEffect)) {
+				func.apply(stat);
 			}
 		}
 		return stat;
@@ -355,7 +346,7 @@ public abstract class CreatureGameStats<T extends Creature> {
 	public List<IStatFunction> getStatsSorted(StatEnum stat) {
 		List<IStatFunction> statFunctions = stats.get(stat);
 		if (statFunctions == null)
-			return null;
+			return Collections.emptyList();
 		synchronized (statFunctions) {
 				return new ArrayList<>(statFunctions);
 		}

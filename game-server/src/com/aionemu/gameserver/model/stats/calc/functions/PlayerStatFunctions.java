@@ -12,8 +12,8 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
-import com.aionemu.gameserver.utils.stats.CalculationType;
 import com.aionemu.gameserver.model.templates.world.WorldMapTemplate;
+import com.aionemu.gameserver.utils.stats.CalculationType;
 
 /**
  * @author ATracer
@@ -142,12 +142,7 @@ class PDefFunction extends StatFunction {
 	@Override
 	public void apply(Stat2 stat, CalculationType... calculationTypes) {
 		if (stat.getOwner().isInFlyingState())
-			stat.setBonus(stat.getBonus() - (stat.getBase() / 2));
-	}
-
-	@Override
-	public int getPriority() {
-		return 60;
+			stat.setFinalRate(0.6f);
 	}
 }
 

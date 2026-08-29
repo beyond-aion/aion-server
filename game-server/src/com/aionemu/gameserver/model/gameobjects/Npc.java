@@ -337,6 +337,11 @@ public class Npc extends Creature {
 		return getObjectTemplate().getNpcTemplateType() == NpcTemplateType.RAID_MONSTER;
 	}
 
+	@Override
+	public int getCancelLevel() {
+		return getObjectTemplate().getCancelLevel();
+	}
+
 	public boolean isBoss() {
 		return getObjectTemplate().getRating() == NpcRating.HERO || getObjectTemplate().getRating() == NpcRating.LEGENDARY;
 	}

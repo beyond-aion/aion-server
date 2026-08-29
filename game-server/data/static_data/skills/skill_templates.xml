@@ -451,7 +451,7 @@
 				<change stat="FIRE_RESISTANCE" func="ADD" value="600" />
 				<change stat="EARTH_RESISTANCE" func="ADD" value="600" />
 			</statup>
-			<deform model="217386" type="NONE" banUseSkills="1" duration2="20000" effectid="175" e="3" element="FIRE" preeffect="1" hoptype="SKILLLV" hopb="1" />
+			<deform model="217386" type="NONE" cantUseSkills="true" duration2="20000" effectid="175" e="3" element="FIRE" preeffect="1" hoptype="SKILLLV" hopb="1" />
 		</effects>
 		<motion name="debuff" />
 	</skill_template>
@@ -474,7 +474,7 @@
 				<change stat="FIRE_RESISTANCE" func="ADD" value="600" />
 				<change stat="EARTH_RESISTANCE" func="ADD" value="600" />
 			</statup>
-			<deform model="212995" type="NONE" banUseSkills="1" duration2="20000" effectid="175" e="3" element="FIRE" preeffect="1" hoptype="SKILLLV" hopb="1" />
+			<deform model="212995" type="NONE" cantUseSkills="true" duration2="20000" effectid="175" e="3" element="FIRE" preeffect="1" hoptype="SKILLLV" hopb="1" />
 		</effects>
 		<motion name="debuff" />
 	</skill_template>
@@ -494,7 +494,7 @@
 		</endconditions>
 		<effects>
 			<fear duration2="15000" randomtime="7000" effectid="20103" e="1" accmod2="-150" element="EARTH" hoptype="SKILLLV" hopb="9337" />
-			<deform model="217385" type="NONE" banUseSkills="1" duration2="15000" randomtime="7000" effectid="175" e="2" element="FIRE" preeffect="1" hoptype="SKILLLV" hopb="911" />
+			<deform model="217385" type="NONE" cantUseSkills="true" duration2="15000" randomtime="7000" effectid="175" e="2" element="FIRE" preeffect="1" hoptype="SKILLLV" hopb="911" />
 			<statdown duration2="15000" randomtime="7000" effectid="112493" e="3" basiclvl="200" element="FIRE" preeffect="1">
 				<change stat="SPEED" func="PERCENT" value="-40" />
 			</statdown>
@@ -517,7 +517,7 @@
 		</endconditions>
 		<effects>
 			<fear duration2="15000" randomtime="7000" effectid="20103" e="1" accmod2="-150" element="EARTH" hoptype="SKILLLV" hopb="9337" />
-			<deform model="210595" type="NONE" banUseSkills="1" duration2="15000" randomtime="7000" effectid="175" e="2" element="FIRE" preeffect="1" hoptype="SKILLLV" hopb="911" />
+			<deform model="210595" type="NONE" cantUseSkills="true" duration2="15000" randomtime="7000" effectid="175" e="2" element="FIRE" preeffect="1" hoptype="SKILLLV" hopb="911" />
 			<statdown duration2="15000" randomtime="7000" effectid="112493" e="3" basiclvl="200" element="FIRE" preeffect="1">
 				<change stat="SPEED" func="PERCENT" value="-40" />
 			</statdown>
@@ -3039,7 +3039,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="281812" type="NONE" banUseSkills="1" duration2="60000" effectid="175" e="1" basiclvl="100" noresist="true" element="WIND" />
+			<polymorph model="281812" type="NONE" cantUseSkills="true" duration2="60000" effectid="175" e="1" basiclvl="100" noresist="true" element="WIND" />
 			<nofly duration2="60000" effectid="20109" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 	</skill_template>
@@ -3338,21 +3338,21 @@
 	<skill_template skill_id="267" name="Lepharist Disguise" nameId="290258" stack="Q_POLYMORPH_LEHPAR" lvl="1" skilltype="MAGICAL" skillsubtype="BUFF" tslot="BUFF" dispel_category="EXTRA" activation="ACTIVE" cooldown="100" duration="0" no_save_on_logout="true">
 		<properties first_target="ME" target_relation="FRIEND" target_type="ONLYONE" />
 		<effects>
-			<polymorph model="202512" type="NONE" banUseSkills="1" duration2="300000" effectid="175" e="1" basiclvl="100" element="WIND" />
+			<polymorph model="202512" type="NONE" cantUseSkills="true" duration2="300000" effectid="175" e="1" basiclvl="100" element="WIND" />
 		</effects>
 		<motion name="phburst" />
 	</skill_template>
 	<skill_template skill_id="268" name="Skeleton Transformation" nameId="290260" stack="Q_POLYMORPH_SKELETON" lvl="1" skilltype="MAGICAL" skillsubtype="BUFF" tslot="BUFF" dispel_category="EXTRA" activation="ACTIVE" cooldown="100" duration="0" no_save_on_logout="true">
 		<properties first_target="ME" target_relation="FRIEND" target_type="ONLYONE" />
 		<effects>
-			<shapechange model="280271" type="NONE" banUseSkills="1" duration2="60000" effectid="175" e="1" basiclvl="100" noresist="true" element="WIND" />
+			<shapechange model="280271" type="NONE" cantUseSkills="true" duration2="60000" effectid="175" e="1" basiclvl="100" noresist="true" element="WIND" />
 		</effects>
 		<motion name="phburst" />
 	</skill_template>
 	<skill_template skill_id="269" name="Lepharist Disguise" nameId="292505" stack="Q_POLYMORPH_LEHPARM" lvl="1" skilltype="MAGICAL" skillsubtype="BUFF" tslot="BUFF" dispel_category="EXTRA" activation="ACTIVE" cooldown="100" duration="0" no_save_on_logout="true">
 		<properties first_target="ME" target_relation="FRIEND" target_type="ONLYONE" />
 		<effects>
-			<polymorph model="202513" type="NONE" banUseSkills="1" duration2="300000" effectid="175" e="1" basiclvl="100" element="WIND" />
+			<polymorph model="202513" type="NONE" cantUseSkills="true" duration2="300000" effectid="175" e="1" basiclvl="100" element="WIND" />
 		</effects>
 		<motion name="phburst" />
 	</skill_template>
@@ -3387,7 +3387,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="203694" type="NONE" banUseSkills="1" duration2="300000" effectid="175" e="1" basiclvl="165" />
+			<polymorph model="203694" type="NONE" cantUseSkills="true" duration2="300000" effectid="175" e="1" basiclvl="165" />
 			<nofly duration2="300000" effectid="20109" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 		<motion name="phburst" />
@@ -3450,7 +3450,7 @@
 	<skill_template skill_id="278" name="Ettin Pretor Transformation" nameId="284398" cooldownId="1341" stack="ETTINPOLYMORPH" lvl="1" skilltype="MAGICAL" skillsubtype="BUFF" tslot="BUFF" activation="ACTIVE" cooldown="10" duration="0" cancel_rate="20">
 		<properties first_target="ME" first_target_range="1" target_relation="FRIEND" target_type="ONLYONE" />
 		<effects>
-			<shapechange model="211046" type="NONE" banUseSkills="1" duration2="60000" effectid="175" e="1" noresist="true" />
+			<shapechange model="211046" type="NONE" cantUseSkills="true" duration2="60000" effectid="175" e="1" noresist="true" />
 			<nofly duration2="60000" effectid="20109" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 		<motion name="normalfire" speed="50" instant_skill="true" />
@@ -3458,7 +3458,7 @@
 	<skill_template skill_id="279" name="Draconute Pretor Transformation" nameId="284400" cooldownId="1341" stack="LIZARDMANPOLYMORPH" lvl="1" skilltype="MAGICAL" skillsubtype="BUFF" tslot="BUFF" activation="ACTIVE" cooldown="10" duration="0" cancel_rate="20">
 		<properties first_target="ME" first_target_range="1" target_relation="FRIEND" target_type="ONLYONE" />
 		<effects>
-			<shapechange model="211042" type="NONE" banUseSkills="1" duration2="60000" effectid="175" e="1" noresist="true" />
+			<shapechange model="211042" type="NONE" cantUseSkills="true" duration2="60000" effectid="175" e="1" noresist="true" />
 			<nofly duration2="60000" effectid="20109" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 		<motion name="normalfire" speed="50" instant_skill="true" />
@@ -3466,7 +3466,7 @@
 	<skill_template skill_id="280" name="Worg Pretor Transformation" nameId="284402" cooldownId="1341" stack="ZAIFPOLYMORPH" lvl="1" skilltype="MAGICAL" skillsubtype="BUFF" tslot="BUFF" activation="ACTIVE" cooldown="10" duration="0" cancel_rate="20">
 		<properties first_target="ME" first_target_range="1" target_relation="FRIEND" target_type="ONLYONE" />
 		<effects>
-			<shapechange model="211047" type="NONE" banUseSkills="1" duration2="60000" effectid="175" e="1" noresist="true" />
+			<shapechange model="211047" type="NONE" cantUseSkills="true" duration2="60000" effectid="175" e="1" noresist="true" />
 			<nofly duration2="60000" effectid="20109" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 		<motion name="normalfire" speed="50" instant_skill="true" />
@@ -3522,7 +3522,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="281812" type="NONE" banUseSkills="1" duration2="60000" effectid="175" e="1" basiclvl="100" noresist="true" element="WIND" />
+			<polymorph model="281812" type="NONE" cantUseSkills="true" duration2="60000" effectid="175" e="1" basiclvl="100" noresist="true" element="WIND" />
 			<nofly duration2="60000" effectid="20109" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 	</skill_template>
@@ -3563,7 +3563,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="216124" type="NONE" banUseSkills="1" duration2="180000" effectid="175" e="1" basiclvl="100" noresist="true" element="WIND" />
+			<shapechange model="216124" type="NONE" cantUseSkills="true" duration2="180000" effectid="175" e="1" basiclvl="100" noresist="true" element="WIND" />
 			<nofly duration2="180000" effectid="20109" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 	</skill_template>
@@ -3593,7 +3593,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="205299" type="NONE" banUseSkills="1" duration2="300000" effectid="175" e="1" basiclvl="100" noresist="true" element="WIND" />
+			<polymorph model="205299" type="NONE" cantUseSkills="true" duration2="300000" effectid="175" e="1" basiclvl="100" noresist="true" element="WIND" />
 			<nofly duration2="300000" effectid="20109" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 	</skill_template>
@@ -3603,7 +3603,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="205301" type="NONE" banUseSkills="1" duration2="300000" effectid="175" e="1" basiclvl="100" noresist="true" element="WIND" />
+			<polymorph model="205301" type="NONE" cantUseSkills="true" duration2="300000" effectid="175" e="1" basiclvl="100" noresist="true" element="WIND" />
 			<nofly duration2="300000" effectid="20109" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 	</skill_template>
@@ -3613,7 +3613,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="205300" type="NONE" banUseSkills="1" duration2="300000" effectid="175" e="1" basiclvl="100" noresist="true" element="WIND" />
+			<polymorph model="205300" type="NONE" cantUseSkills="true" duration2="300000" effectid="175" e="1" basiclvl="100" noresist="true" element="WIND" />
 			<nofly duration2="300000" effectid="20109" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 	</skill_template>
@@ -3623,7 +3623,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="205302" type="NONE" banUseSkills="1" duration2="300000" effectid="175" e="1" basiclvl="100" noresist="true" element="WIND" />
+			<polymorph model="205302" type="NONE" cantUseSkills="true" duration2="300000" effectid="175" e="1" basiclvl="100" noresist="true" element="WIND" />
 			<nofly duration2="300000" effectid="20109" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 	</skill_template>
@@ -3705,7 +3705,7 @@
 			<target value="PC" />
 		</startconditions>
 		<effects>
-			<polymorph model="800459" type="NONE" banUseSkills="1" duration2="600000" effectid="175" e="1" basiclvl="100" noresist="true" element="FIRE" />
+			<polymorph model="800459" type="NONE" cantUseSkills="true" duration2="600000" effectid="175" e="1" basiclvl="100" noresist="true" element="FIRE" />
 			<nofly duration2="600000" effectid="20109" e="2" noresist="true" element="FIRE" preeffect="1" />
 		</effects>
 		<motion name="normalfire" instant_skill="true" />
@@ -3716,7 +3716,7 @@
 			<target value="PC" />
 		</startconditions>
 		<effects>
-			<shapechange model="216009" type="NONE" banUseSkills="1" duration2="180000" effectid="175" e="1" basiclvl="100" noresist="true" />
+			<shapechange model="216009" type="NONE" cantUseSkills="true" duration2="180000" effectid="175" e="1" basiclvl="100" noresist="true" />
 			<nofly duration2="180000" effectid="20109" e="2" noresist="true" element="FIRE" preeffect="1" />
 			<delayedskill skill_id="8773" duration2="180000" effectid="127853" e="3" basiclvl="100" noresist="true" element="FIRE" preeffect="2" />
 		</effects>
@@ -4952,7 +4952,7 @@
 			<target value="PC" />
 		</startconditions>
 		<effects>
-			<shapechange model="201079" type="PC" banUseSkills="1" res3="1" res6="1" duration2="3600000" effectid="101741" e="1" basiclvl="100" noresist="true" hoptype="SKILLLV" hopb="22698" />
+			<shapechange model="201079" type="PC" cantUseSkills="true" cantAttack="true" cantFly="true" duration2="3600000" effectid="101741" e="1" basiclvl="100" noresist="true" hoptype="SKILLLV" hopb="22698" />
 			<nofly duration2="3600000" effectid="20109" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 		<motion name="alterfire" speed="50" instant_skill="true" />
@@ -4963,7 +4963,7 @@
 			<target value="PC" />
 		</startconditions>
 		<effects>
-			<shapechange model="201080" type="PC" banUseSkills="1" res3="1" res6="1" duration2="3600000" effectid="101741" e="1" basiclvl="100" noresist="true" hoptype="SKILLLV" hopb="22698" />
+			<shapechange model="201080" type="PC" cantUseSkills="true" cantAttack="true" cantFly="true" duration2="3600000" effectid="101741" e="1" basiclvl="100" noresist="true" hoptype="SKILLLV" hopb="22698" />
 			<nofly duration2="3600000" effectid="20109" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 		<motion name="alterfire" speed="50" instant_skill="true" />
@@ -4974,7 +4974,7 @@
 			<target value="PC" />
 		</startconditions>
 		<effects>
-			<shapechange model="201077" type="PC" banUseSkills="1" res3="1" res6="1" duration2="3600000" effectid="101741" e="1" basiclvl="100" noresist="true" hoptype="SKILLLV" hopb="22698" />
+			<shapechange model="201077" type="PC" cantUseSkills="true" cantAttack="true" cantFly="true" duration2="3600000" effectid="101741" e="1" basiclvl="100" noresist="true" hoptype="SKILLLV" hopb="22698" />
 			<nofly duration2="3600000" effectid="20109" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 		<motion name="alterfire" speed="50" instant_skill="true" />
@@ -4985,7 +4985,7 @@
 			<target value="PC" />
 		</startconditions>
 		<effects>
-			<shapechange model="201078" type="PC" banUseSkills="1" res3="1" res6="1" duration2="3600000" effectid="101741" e="1" basiclvl="100" noresist="true" hoptype="SKILLLV" hopb="22698" />
+			<shapechange model="201078" type="PC" cantUseSkills="true" cantAttack="true" cantFly="true" duration2="3600000" effectid="101741" e="1" basiclvl="100" noresist="true" hoptype="SKILLLV" hopb="22698" />
 			<nofly duration2="3600000" effectid="20109" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 		<motion name="alterfire" speed="50" instant_skill="true" />
@@ -4996,7 +4996,7 @@
 			<target value="PC" />
 		</startconditions>
 		<effects>
-			<shapechange model="207000" type="PC" banUseSkills="1" res3="1" res6="1" duration2="3600000" effectid="101741" e="1" basiclvl="100" noresist="true" hoptype="SKILLLV" hopb="22698" />
+			<shapechange model="207000" type="PC" cantUseSkills="true" cantAttack="true" cantFly="true" duration2="3600000" effectid="101741" e="1" basiclvl="100" noresist="true" hoptype="SKILLLV" hopb="22698" />
 			<statup duration2="3600000" effectid="101742" e="2" basiclvl="100" noresist="true" preeffect="1">
 				<change stat="SPEED" func="PERCENT" value="5" />
 			</statup>
@@ -5010,7 +5010,7 @@
 			<target value="PC" />
 		</startconditions>
 		<effects>
-			<shapechange model="207000" type="PC" banUseSkills="1" res3="1" res6="1" duration2="3600000" effectid="101741" e="1" basiclvl="100" noresist="true" hoptype="SKILLLV" hopb="22698" />
+			<shapechange model="207000" type="PC" cantUseSkills="true" cantAttack="true" cantFly="true" duration2="3600000" effectid="101741" e="1" basiclvl="100" noresist="true" hoptype="SKILLLV" hopb="22698" />
 			<statup duration2="3600000" effectid="101742" e="2" basiclvl="100" noresist="true" preeffect="1">
 				<change stat="SPEED" func="PERCENT" value="5" />
 			</statup>
@@ -19490,7 +19490,7 @@
 			<polishchargeweapon value="1055" />
 		</endconditions>
 		<effects>
-			<deform model="833230" type="NONE" banUseSkills="1" duration2="10000" effectid="175" e="1" accmod2="100" element="WATER" hoptype="SKILLLV" hopb="12997" />
+			<deform model="833230" type="NONE" cantUseSkills="true" duration2="10000" effectid="175" e="1" accmod2="100" element="WATER" hoptype="SKILLLV" hopb="12997" />
 			<sleep duration2="10000" effectid="20106" e="2" preeffect="1" />
 			<statup duration2="10000" effectid="114543" e="3" noresist="true" preeffect="1">
 				<change stat="WATER_RESISTANCE" func="ADD" value="600" />
@@ -19513,7 +19513,7 @@
 			<polishchargeweapon value="1055" />
 		</endconditions>
 		<effects>
-			<deform model="833230" type="NONE" banUseSkills="1" duration2="15000" effectid="175" e="1" accmod2="150" element="WATER" hoptype="SKILLLV" hopb="12997" />
+			<deform model="833230" type="NONE" cantUseSkills="true" duration2="15000" effectid="175" e="1" accmod2="150" element="WATER" hoptype="SKILLLV" hopb="12997" />
 			<sleep duration2="15000" effectid="20106" e="2" preeffect="1" />
 			<statup duration2="15000" effectid="114543" e="3" noresist="true" preeffect="1">
 				<change stat="WATER_RESISTANCE" func="ADD" value="600" />
@@ -19536,7 +19536,7 @@
 			<polishchargeweapon value="1055" />
 		</endconditions>
 		<effects>
-			<deform model="833230" type="NONE" banUseSkills="1" duration2="20000" effectid="175" e="1" accmod2="200" element="WATER" hoptype="SKILLLV" hopb="12997" />
+			<deform model="833230" type="NONE" cantUseSkills="true" duration2="20000" effectid="175" e="1" accmod2="200" element="WATER" hoptype="SKILLLV" hopb="12997" />
 			<sleep duration2="20000" effectid="20106" e="2" preeffect="1" />
 			<statup duration2="20000" effectid="114543" e="3" noresist="true" preeffect="1">
 				<change stat="WATER_RESISTANCE" func="ADD" value="600" />
@@ -19562,7 +19562,7 @@
 			<polishchargeweapon value="296" />
 		</endconditions>
 		<effects>
-			<deform model="833230" type="NONE" banUseSkills="1" duration2="4000" effectid="175" e="1" accmod2="-50" element="FIRE" hoptype="SKILLLV" hopb="8200" />
+			<deform model="833230" type="NONE" cantUseSkills="true" duration2="4000" effectid="175" e="1" accmod2="-50" element="FIRE" hoptype="SKILLLV" hopb="8200" />
 			<sleep duration2="4000" effectid="20106" e="2" element="FIRE" preeffect="1" />
 			<statup duration2="4000" effectid="114543" e="3" noresist="true" preeffect="1">
 				<change stat="WATER_RESISTANCE" func="ADD" value="600" />
@@ -19585,7 +19585,7 @@
 			<polishchargeweapon value="296" />
 		</endconditions>
 		<effects>
-			<deform model="833230" type="NONE" banUseSkills="1" duration2="11000" effectid="175" e="1" accmod2="-50" element="FIRE" hoptype="SKILLLV" hopb="8200" />
+			<deform model="833230" type="NONE" cantUseSkills="true" duration2="11000" effectid="175" e="1" accmod2="-50" element="FIRE" hoptype="SKILLLV" hopb="8200" />
 			<sleep duration2="11000" effectid="20106" e="2" element="FIRE" preeffect="1" />
 			<statup duration2="11000" effectid="114543" e="3" noresist="true" preeffect="1">
 				<change stat="WATER_RESISTANCE" func="ADD" value="600" />
@@ -19608,7 +19608,7 @@
 			<polishchargeweapon value="296" />
 		</endconditions>
 		<effects>
-			<deform model="833230" type="NONE" banUseSkills="1" duration2="20000" effectid="175" e="1" accmod2="-50" element="FIRE" hoptype="SKILLLV" hopb="8200" />
+			<deform model="833230" type="NONE" cantUseSkills="true" duration2="20000" effectid="175" e="1" accmod2="-50" element="FIRE" hoptype="SKILLLV" hopb="8200" />
 			<sleep duration2="20000" effectid="20106" e="2" element="FIRE" preeffect="1" />
 			<statup duration2="20000" effectid="114543" e="3" noresist="true" preeffect="1">
 				<change stat="WATER_RESISTANCE" func="ADD" value="600" />
@@ -20836,7 +20836,7 @@
 			<polishchargeweapon value="633" />
 		</endconditions>
 		<effects>
-			<deform model="833228" type="NONE" banUseSkills="1" duration2="20000" effectid="175" e="1" element="FIRE" hoptype="SKILLLV" hopb="6775" />
+			<deform model="833228" type="NONE" cantUseSkills="true" duration2="20000" effectid="175" e="1" element="FIRE" hoptype="SKILLLV" hopb="6775" />
 			<sleep duration2="20000" effectid="20106" e="2" noresist="true" element="FIRE" preeffect="1" hoptype="SKILLLV" hopb="9885" />
 			<statup duration2="20000" effectid="114303" e="3" noresist="true" preeffect="2">
 				<change stat="WATER_RESISTANCE" func="ADD" value="500" />
@@ -20859,7 +20859,7 @@
 			<polishchargeweapon value="317" />
 		</endconditions>
 		<effects>
-			<deform model="833227" type="NONE" banUseSkills="1" duration2="20000" effectid="175" e="1" accmod2="50" element="FIRE" hoptype="SKILLLV" hopb="6775" />
+			<deform model="833227" type="NONE" cantUseSkills="true" duration2="20000" effectid="175" e="1" accmod2="50" element="FIRE" hoptype="SKILLLV" hopb="6775" />
 			<sleep duration2="20000" effectid="20106" e="2" accmod2="500" element="FIRE" preeffect="1" />
 			<statup duration2="20000" effectid="114543" e="3" noresist="true" preeffect="1">
 				<change stat="WATER_RESISTANCE" func="ADD" value="500" />
@@ -61053,7 +61053,7 @@
 		</endconditions>
 		<effects>
 			<fear duration2="18000" randomtime="7000" effectid="20103" e="1" accmod2="-150" element="EARTH" hoptype="SKILLLV" hopb="11737" />
-			<deform model="201051" type="NONE" banUseSkills="1" duration2="18000" randomtime="7000" effectid="175" e="2" element="FIRE" preeffect="1" hoptype="SKILLLV" hopb="911" />
+			<deform model="201051" type="NONE" cantUseSkills="true" duration2="18000" randomtime="7000" effectid="175" e="2" element="FIRE" preeffect="1" hoptype="SKILLLV" hopb="911" />
 			<statdown duration2="18000" randomtime="7000" effectid="112493" e="3" basiclvl="200" noresist="true" element="EARTH" preeffect="1">
 				<change stat="SPEED" func="PERCENT" value="-40" />
 			</statdown>
@@ -61086,7 +61086,7 @@
 			<polishchargeweapon value="866" />
 		</endconditions>
 		<effects>
-			<deform model="833251" type="NONE" banUseSkills="1" duration2="8000" randomtime="2000" effectid="175" e="1" accmod2="-60" element="FIRE" hoptype="SKILLLV" hopb="13102" />
+			<deform model="833251" type="NONE" cantUseSkills="true" duration2="8000" randomtime="2000" effectid="175" e="1" accmod2="-60" element="FIRE" hoptype="SKILLLV" hopb="13102" />
 			<fear duration2="8000" effectid="20103" e="2" element="FIRE" preeffect="1" />
 			<statdown duration2="8000" effectid="112493" e="3" basiclvl="200" noresist="true" element="FIRE" preeffect="1">
 				<change stat="SPEED" func="PERCENT" value="-30" />
@@ -61109,7 +61109,7 @@
 			<polishchargeweapon value="866" />
 		</endconditions>
 		<effects>
-			<deform model="833252" type="NONE" banUseSkills="1" duration2="8000" randomtime="2000" effectid="175" e="1" accmod2="-60" element="FIRE" hoptype="SKILLLV" hopb="13102" />
+			<deform model="833252" type="NONE" cantUseSkills="true" duration2="8000" randomtime="2000" effectid="175" e="1" accmod2="-60" element="FIRE" hoptype="SKILLLV" hopb="13102" />
 			<fear duration2="8000" effectid="20103" e="2" element="FIRE" preeffect="1" />
 			<statdown duration2="8000" effectid="112493" e="3" basiclvl="200" noresist="true" element="FIRE" preeffect="1">
 				<change stat="SPEED" func="PERCENT" value="-30" />
@@ -61792,7 +61792,7 @@
 		<effects>
 			<fear duration2="5000" effectid="20103" e="1" element="EARTH" hoptype="SKILLLV" hopb="1000" />
 			<root duration2="5000" effectid="20003" e="2" noresist="true" element="EARTH" preeffect="1" />
-			<deform model="201051" type="NONE" banUseSkills="1" duration2="5000" effectid="175" e="3" element="FIRE" preeffect="2" />
+			<deform model="201051" type="NONE" cantUseSkills="true" duration2="5000" effectid="175" e="3" element="FIRE" preeffect="2" />
 		</effects>
 		<motion name="debuff2" />
 	</skill_template>
@@ -64224,7 +64224,7 @@
 		</endconditions>
 		<effects>
 			<fear duration2="15000" randomtime="7000" effectid="20103" e="1" accmod2="-100" element="EARTH" hoptype="SKILLLV" hopb="9337" />
-			<deform model="201051" type="NONE" banUseSkills="1" duration2="15000" randomtime="7000" effectid="175" e="2" element="FIRE" preeffect="1" hoptype="SKILLLV" hopb="911" />
+			<deform model="201051" type="NONE" cantUseSkills="true" duration2="15000" randomtime="7000" effectid="175" e="2" element="FIRE" preeffect="1" hoptype="SKILLLV" hopb="911" />
 			<statdown duration2="15000" randomtime="7000" effectid="112493" e="3" basiclvl="200" element="FIRE" preeffect="1">
 				<change stat="SPEED" func="PERCENT" value="-40" />
 			</statdown>
@@ -74859,7 +74859,7 @@
 			<polishchargeweapon value="133" />
 		</endconditions>
 		<effects>
-			<deform model="201081" type="NONE" banUseSkills="1" duration2="6000" effectid="175" e="1" accmod2="50" element="FIRE" hoptype="SKILLLV" hopb="8200" />
+			<deform model="201081" type="NONE" cantUseSkills="true" duration2="6000" effectid="175" e="1" accmod2="50" element="FIRE" hoptype="SKILLLV" hopb="8200" />
 			<sleep duration2="6000" effectid="20106" e="2" accmod2="50" element="FIRE" preeffect="1" />
 			<statup duration2="6000" effectid="943383" e="3" noresist="true" preeffect="1">
 				<change stat="WATER_RESISTANCE" func="ADD" value="600" />
@@ -77121,7 +77121,7 @@
 			<polishchargeweapon value="133" />
 		</endconditions>
 		<effects>
-			<deform model="201082" type="NONE" banUseSkills="1" duration2="15000" effectid="175" e="1" accmod2="250" element="FIRE" hoptype="SKILLLV" hopb="8200" />
+			<deform model="201082" type="NONE" cantUseSkills="true" duration2="15000" effectid="175" e="1" accmod2="250" element="FIRE" hoptype="SKILLLV" hopb="8200" />
 			<sleep duration2="15000" effectid="20106" e="2" accmod2="50" element="FIRE" preeffect="1" />
 			<statdown duration2="15000" effectid="944563" e="3" noresist="true" preeffect="1">
 				<change stat="MAGICAL_RESIST" func="ADD" value="-300" />
@@ -79853,7 +79853,7 @@
 			<mp value="10" delta="0" />
 		</endconditions>
 		<effects>
-			<polymorph model="210172" type="NONE" banUseSkills="1" duration2="600000" duration1="600000" effectid="175" e="1" element="WIND" />
+			<polymorph model="210172" type="NONE" cantUseSkills="true" duration2="600000" duration1="600000" effectid="175" e="1" element="WIND" />
 		</effects>
 		<motion name="phburst" />
 	</skill_template>
@@ -79881,7 +79881,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="210360" type="NONE" banUseSkills="1" duration2="300000" effectid="175" e="1" basiclvl="100" />
+			<polymorph model="210360" type="NONE" cantUseSkills="true" duration2="300000" effectid="175" e="1" basiclvl="100" />
 		</effects>
 		<motion name="phburst" />
 	</skill_template>
@@ -79951,7 +79951,7 @@
 			<mp value="10" delta="0" />
 		</endconditions>
 		<effects>
-			<polymorph model="212135" type="NONE" banUseSkills="1" duration2="4000" duration1="6000" effectid="175" e="1" element="WIND" />
+			<polymorph model="212135" type="NONE" cantUseSkills="true" duration2="4000" duration1="6000" effectid="175" e="1" element="WIND" />
 		</effects>
 		<motion name="phburst" />
 	</skill_template>
@@ -81684,7 +81684,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="210273" type="NONE" banUseSkills="1" duration2="10000" effectid="175" e="1" noresist="true" element="EARTH" />
+			<shapechange model="210273" type="NONE" cantUseSkills="true" duration2="10000" effectid="175" e="1" noresist="true" element="EARTH" />
 		</effects>
 		<motion name="phburst" />
 	</skill_template>
@@ -81725,7 +81725,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="203695" type="NONE" banUseSkills="1" duration2="300000" effectid="175" e="1" basiclvl="165" />
+			<polymorph model="203695" type="NONE" cantUseSkills="true" duration2="300000" effectid="175" e="1" basiclvl="165" />
 			<nofly duration2="300000" effectid="20109" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 		<motion name="phburst" />
@@ -82941,7 +82941,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="211095" type="NONE" banUseSkills="1" duration2="600000" effectid="175" e="1" basiclvl="165" element="WIND" />
+			<polymorph model="211095" type="NONE" cantUseSkills="true" duration2="600000" effectid="175" e="1" basiclvl="165" element="WIND" />
 		</effects>
 		<motion name="phburst" />
 	</skill_template>
@@ -82951,7 +82951,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="280271" type="NONE" banUseSkills="1" duration2="60000" effectid="175" e="1" basiclvl="165" noresist="true" element="WIND" />
+			<shapechange model="280271" type="NONE" cantUseSkills="true" duration2="60000" effectid="175" e="1" basiclvl="165" noresist="true" element="WIND" />
 		</effects>
 		<motion name="phburst" />
 	</skill_template>
@@ -86077,7 +86077,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<deform model="217238" banUseSkills="1" duration2="35000" effectid="175" e="1" noresist="true" element="LIGHT" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<deform model="217238" cantUseSkills="true" duration2="35000" effectid="175" e="1" noresist="true" element="LIGHT" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<search state="SEARCH10" duration2="35000" effectid="166" e="2" basiclvl="60" noresist="true" element="LIGHT" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<provoker skill_id="8703" provoke_target="OPPONENT" duration2="35000" effectid="1087023" e="3" noresist="true" hittype="NMLATK" element="LIGHT" preeffect="1" hoptype="DAMAGE" />
 		</effects>
@@ -86354,7 +86354,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="282708" type="FORM1" panelid="12" res3="1" res5="1" res6="1" duration2="15000" effectid="175" e="1" noresist="true" element="LIGHT" hoptype="SKILLLV" hopb="1" />
+			<shapechange model="282708" type="FORM1" panelid="12" cantAttack="true" cantUseItems="true" cantFly="true" duration2="15000" effectid="175" e="1" noresist="true" element="LIGHT" hoptype="SKILLLV" hopb="1" />
 		</effects>
 		<motion name="poweratk" />
 	</skill_template>
@@ -86382,7 +86382,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="282709" type="FORM1" panelid="13" res3="1" res5="1" res6="1" duration2="15000" effectid="175" e="1" noresist="true" element="DARK" hoptype="SKILLLV" hopb="1" />
+			<shapechange model="282709" type="FORM1" panelid="13" cantAttack="true" cantUseItems="true" cantFly="true" duration2="15000" effectid="175" e="1" noresist="true" element="DARK" hoptype="SKILLLV" hopb="1" />
 		</effects>
 		<motion name="poweratk" />
 	</skill_template>
@@ -91702,7 +91702,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="210306" type="NONE" banUseSkills="1" res6="1" duration2="600000" effectid="175" e="1" noresist="true" />
+			<shapechange model="210306" type="NONE" cantUseSkills="true" cantFly="true" duration2="600000" effectid="175" e="1" noresist="true" />
 			<statup duration2="600000" effectid="30182" e="2" noresist="true" element="WIND" preeffect="1">
 				<change stat="SPEED" func="ADD" value="2400" />
 			</statup>
@@ -91718,7 +91718,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="210306" type="NONE" banUseSkills="1" res6="1" duration2="600000" effectid="175" e="1" noresist="true" />
+			<shapechange model="210306" type="NONE" cantUseSkills="true" cantFly="true" duration2="600000" effectid="175" e="1" noresist="true" />
 			<statup duration2="600000" effectid="30182" e="2" noresist="true" element="WIND" preeffect="1">
 				<change stat="SPEED" func="ADD" value="2400" />
 			</statup>
@@ -92512,7 +92512,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="210138" type="NONE" banUseSkills="1" res6="1" duration2="600000" effectid="175" e="1" noresist="true" />
+			<shapechange model="210138" type="NONE" cantUseSkills="true" cantFly="true" duration2="600000" effectid="175" e="1" noresist="true" />
 			<statup duration2="600000" effectid="30182" e="2" noresist="true" element="WIND" preeffect="1">
 				<change stat="SPEED" func="ADD" value="1200" />
 			</statup>
@@ -92528,7 +92528,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="210757" type="NONE" banUseSkills="1" res6="1" duration2="600000" effectid="175" e="1" noresist="true" />
+			<shapechange model="210757" type="NONE" cantUseSkills="true" cantFly="true" duration2="600000" effectid="175" e="1" noresist="true" />
 			<statup duration2="600000" effectid="30182" e="2" noresist="true" element="WIND" preeffect="1">
 				<change stat="SPEED" func="ADD" value="1800" />
 			</statup>
@@ -92544,7 +92544,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="210306" type="NONE" banUseSkills="1" res6="1" duration2="600000" effectid="175" e="1" noresist="true" />
+			<shapechange model="210306" type="NONE" cantUseSkills="true" cantFly="true" duration2="600000" effectid="175" e="1" noresist="true" />
 			<statup duration2="600000" effectid="30182" e="2" noresist="true" element="WIND" preeffect="1">
 				<change stat="SPEED" func="ADD" value="2400" />
 			</statup>
@@ -92656,7 +92656,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="210633" type="NONE" banUseSkills="1" res6="1" duration2="600000" effectid="175" e="1" noresist="true" />
+			<shapechange model="210633" type="NONE" cantUseSkills="true" cantFly="true" duration2="600000" effectid="175" e="1" noresist="true" />
 			<nofly duration2="600000" effectid="20109" e="2" noresist="true" element="FIRE" preeffect="1" />
 		</effects>
 	</skill_template>
@@ -92669,7 +92669,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="210832" type="NONE" banUseSkills="1" duration2="600000" effectid="175" e="1" noresist="true" />
+			<shapechange model="210832" type="NONE" cantUseSkills="true" duration2="600000" effectid="175" e="1" noresist="true" />
 		</effects>
 	</skill_template>
 	<skill_template skill_id="9946" name="Scolopen's poisoned stinger Effect" nameId="701675" stack="ITEM_SOULSTONE_DOT_POISON" lvl="1" skilltype="MAGICAL" skillsubtype="ATTACK" tslot="DEBUFF" dispel_category="BUFF" req_dispel_level="1" req_dispel_count="10" activation="ACTIVE" cooldown="0" duration="0" applymcrit="false">
@@ -92695,7 +92695,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="210421" type="NONE" banUseSkills="1" res6="1" duration2="600000" effectid="175" e="1" noresist="true" />
+			<shapechange model="210421" type="NONE" cantUseSkills="true" cantFly="true" duration2="600000" effectid="175" e="1" noresist="true" />
 			<statup duration2="600000" effectid="30182" e="2" noresist="true" element="WIND" preeffect="1">
 				<change stat="SPEED" func="ADD" value="1200" />
 			</statup>
@@ -92711,7 +92711,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="211875" type="NONE" banUseSkills="1" res6="1" duration2="600000" effectid="175" e="1" noresist="true" />
+			<shapechange model="211875" type="NONE" cantUseSkills="true" cantFly="true" duration2="600000" effectid="175" e="1" noresist="true" />
 			<statup duration2="600000" effectid="30182" e="2" noresist="true" element="WIND" preeffect="1">
 				<change stat="SPEED" func="ADD" value="1800" />
 			</statup>
@@ -92727,7 +92727,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="210390" type="NONE" banUseSkills="1" res6="1" duration2="600000" effectid="175" e="1" noresist="true" />
+			<shapechange model="210390" type="NONE" cantUseSkills="true" cantFly="true" duration2="600000" effectid="175" e="1" noresist="true" />
 			<statup duration2="600000" effectid="30182" e="2" noresist="true" element="WIND" preeffect="1">
 				<change stat="SPEED" func="ADD" value="2400" />
 			</statup>
@@ -94304,7 +94304,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="215956" type="NONE" banUseSkills="1" res6="1" duration2="600000" effectid="275" e="1" noresist="true" element="WIND" />
+			<shapechange model="215956" type="NONE" cantUseSkills="true" cantFly="true" duration2="600000" effectid="275" e="1" noresist="true" element="WIND" />
 			<nofly duration2="600000" effectid="20109" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 	</skill_template>
@@ -94317,7 +94317,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="215956" type="NONE" banUseSkills="1" res6="1" duration2="600000" effectid="275" e="1" noresist="true" element="WIND" />
+			<shapechange model="215956" type="NONE" cantUseSkills="true" cantFly="true" duration2="600000" effectid="275" e="1" noresist="true" element="WIND" />
 			<nofly duration2="600000" effectid="20109" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 	</skill_template>
@@ -94371,7 +94371,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="254523" type="NONE" banUseSkills="1" duration2="600000" effectid="275" e="1" noresist="true" />
+			<shapechange model="254523" type="NONE" cantUseSkills="true" duration2="600000" effectid="275" e="1" noresist="true" />
 		</effects>
 	</skill_template>
 	<skill_template skill_id="10033" name="Experience Boost" nameId="725537" stack="XP_BOOST_01" lvl="1" skilltype="MAGICAL" skillsubtype="BUFF" tslot="BOOST" activation="ACTIVE" cooldown="0" duration="0" hostile_type="INDIRECT">
@@ -96940,7 +96940,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="210119" type="NONE" banUseSkills="1" duration2="600000" effectid="275" e="1" noresist="true" />
+			<shapechange model="210119" type="NONE" cantUseSkills="true" duration2="600000" effectid="275" e="1" noresist="true" />
 			<statup duration2="600000" e="2" noresist="true" element="FIRE" preeffect="1">
 				<change stat="FLY_TIME" func="ADD" value="10" />
 			</statup>
@@ -96955,7 +96955,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="211850" type="NONE" banUseSkills="1" res6="1" duration2="600000" effectid="275" e="1" noresist="true" />
+			<shapechange model="211850" type="NONE" cantUseSkills="true" cantFly="true" duration2="600000" effectid="275" e="1" noresist="true" />
 			<nofly duration2="600000" effectid="20109" e="2" noresist="true" element="FIRE" preeffect="1" />
 			<search state="SEARCH1" duration2="600000" effectid="166" e="3" noresist="true" preeffect="2" />
 		</effects>
@@ -96969,7 +96969,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="210833" type="NONE" banUseSkills="1" res6="1" duration2="3600000" effectid="275" e="1" noresist="true" />
+			<shapechange model="210833" type="NONE" cantUseSkills="true" cantFly="true" duration2="3600000" effectid="275" e="1" noresist="true" />
 			<nofly duration2="600000" effectid="20109" e="2" noresist="true" element="FIRE" preeffect="1" />
 		</effects>
 	</skill_template>
@@ -96982,7 +96982,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="210915" type="NONE" banUseSkills="1" res6="1" duration2="3600000" effectid="275" e="1" noresist="true" />
+			<shapechange model="210915" type="NONE" cantUseSkills="true" cantFly="true" duration2="3600000" effectid="275" e="1" noresist="true" />
 			<nofly duration2="600000" effectid="20109" e="2" noresist="true" element="FIRE" preeffect="1" />
 		</effects>
 	</skill_template>
@@ -96995,7 +96995,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="212104" type="NONE" banUseSkills="1" res6="1" duration2="3600000" effectid="275" e="1" noresist="true" />
+			<shapechange model="212104" type="NONE" cantUseSkills="true" cantFly="true" duration2="3600000" effectid="275" e="1" noresist="true" />
 			<nofly duration2="600000" effectid="20109" e="2" noresist="true" element="FIRE" preeffect="1" />
 			<statup duration2="600000" e="3" noresist="true" element="FIRE" preeffect="2">
 				<change stat="REGEN_HP" func="ADD" value="8" />
@@ -97014,7 +97014,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="210656" type="NONE" banUseSkills="1" duration2="600000" effectid="275" e="1" noresist="true" />
+			<shapechange model="210656" type="NONE" cantUseSkills="true" duration2="600000" effectid="275" e="1" noresist="true" />
 			<statup duration2="600000" e="2" noresist="true" element="FIRE" preeffect="1">
 				<change stat="FLY_TIME" func="ADD" value="10" />
 			</statup>
@@ -97029,7 +97029,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="211318" type="NONE" banUseSkills="1" res6="1" duration2="3600000" effectid="275" e="1" noresist="true" />
+			<shapechange model="211318" type="NONE" cantUseSkills="true" cantFly="true" duration2="3600000" effectid="275" e="1" noresist="true" />
 			<nofly duration2="600000" effectid="20109" e="2" noresist="true" element="FIRE" preeffect="1" />
 		</effects>
 	</skill_template>
@@ -97042,7 +97042,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="211850" type="NONE" banUseSkills="1" res6="1" duration2="600000" effectid="275" e="1" noresist="true" />
+			<shapechange model="211850" type="NONE" cantUseSkills="true" cantFly="true" duration2="600000" effectid="275" e="1" noresist="true" />
 			<nofly duration2="600000" effectid="20109" e="2" noresist="true" element="FIRE" preeffect="1" />
 			<search state="SEARCH1" duration2="600000" effectid="166" e="3" noresist="true" preeffect="2" />
 		</effects>
@@ -97056,7 +97056,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="213020" type="NONE" banUseSkills="1" res6="1" duration2="3600000" effectid="275" e="1" noresist="true" />
+			<shapechange model="213020" type="NONE" cantUseSkills="true" cantFly="true" duration2="3600000" effectid="275" e="1" noresist="true" />
 			<nofly duration2="600000" effectid="20109" e="2" noresist="true" element="FIRE" preeffect="1" />
 		</effects>
 	</skill_template>
@@ -97069,7 +97069,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="213140" type="NONE" banUseSkills="1" res6="1" duration2="3600000" effectid="275" e="1" noresist="true" />
+			<shapechange model="213140" type="NONE" cantUseSkills="true" cantFly="true" duration2="3600000" effectid="275" e="1" noresist="true" />
 			<nofly duration2="600000" effectid="20109" e="2" noresist="true" element="FIRE" preeffect="1" />
 			<statup duration2="600000" e="3" noresist="true" element="FIRE" preeffect="2">
 				<change stat="REGEN_HP" func="ADD" value="8" />
@@ -97490,7 +97490,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="214532" type="NONE" banUseSkills="1" res6="1" duration2="600000" effectid="275" e="1" noresist="true" element="WIND" />
+			<shapechange model="214532" type="NONE" cantUseSkills="true" cantFly="true" duration2="600000" effectid="275" e="1" noresist="true" element="WIND" />
 			<nofly duration2="600000" effectid="20109" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 	</skill_template>
@@ -97503,7 +97503,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="214532" type="NONE" banUseSkills="1" res6="1" duration2="600000" effectid="275" e="1" noresist="true" element="WIND" />
+			<shapechange model="214532" type="NONE" cantUseSkills="true" cantFly="true" duration2="600000" effectid="275" e="1" noresist="true" element="WIND" />
 			<nofly duration2="600000" effectid="20109" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 	</skill_template>
@@ -97847,7 +97847,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="214905" type="NONE" banUseSkills="1" res6="1" duration2="600000" effectid="275" e="1" noresist="true" />
+			<shapechange model="214905" type="NONE" cantUseSkills="true" cantFly="true" duration2="600000" effectid="275" e="1" noresist="true" />
 			<nofly duration2="600000" effectid="20109" e="2" noresist="true" element="FIRE" preeffect="1" />
 		</effects>
 	</skill_template>
@@ -97860,7 +97860,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="214945" type="NONE" banUseSkills="1" res6="1" duration2="600000" effectid="275" e="1" noresist="true" />
+			<shapechange model="214945" type="NONE" cantUseSkills="true" cantFly="true" duration2="600000" effectid="275" e="1" noresist="true" />
 			<nofly duration2="600000" effectid="20109" e="2" noresist="true" element="FIRE" preeffect="1" />
 		</effects>
 	</skill_template>
@@ -98647,7 +98647,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="202529" type="PC" res6="1" duration2="3600000" effectid="275" e="1" noresist="true" />
+			<shapechange model="202529" type="PC" cantFly="true" duration2="3600000" effectid="275" e="1" noresist="true" />
 			<nofly duration2="3600000" effectid="20109" e="2" noresist="true" element="FIRE" preeffect="1" />
 			<statup duration2="3600000" effectid="10012" e="3" noresist="true" element="FIRE" preeffect="2">
 				<change stat="MAXHP" func="ADD" value="181" />
@@ -98666,7 +98666,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="202530" type="PC" res6="1" duration2="3600000" effectid="275" e="1" noresist="true" />
+			<shapechange model="202530" type="PC" cantFly="true" duration2="3600000" effectid="275" e="1" noresist="true" />
 			<nofly duration2="3600000" effectid="20109" e="2" noresist="true" element="FIRE" preeffect="1" />
 			<statup duration2="3600000" effectid="10012" e="3" noresist="true" element="FIRE" preeffect="2">
 				<change stat="MAXHP" func="ADD" value="181" />
@@ -98685,7 +98685,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="202529" type="PC" res6="1" duration2="3600000" effectid="275" e="1" noresist="true" />
+			<shapechange model="202529" type="PC" cantFly="true" duration2="3600000" effectid="275" e="1" noresist="true" />
 			<nofly duration2="3600000" effectid="20109" e="2" noresist="true" element="FIRE" preeffect="1" />
 			<statup duration2="3600000" effectid="10012" e="3" noresist="true" element="FIRE" preeffect="2">
 				<change stat="MAXHP" func="ADD" value="181" />
@@ -98704,7 +98704,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="202530" type="PC" res6="1" duration2="3600000" effectid="275" e="1" noresist="true" />
+			<shapechange model="202530" type="PC" cantFly="true" duration2="3600000" effectid="275" e="1" noresist="true" />
 			<nofly duration2="3600000" effectid="20109" e="2" noresist="true" element="FIRE" preeffect="1" />
 			<statup duration2="3600000" effectid="10012" e="3" noresist="true" element="FIRE" preeffect="2">
 				<change stat="MAXHP" func="ADD" value="181" />
@@ -98723,7 +98723,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="202529" type="PC" res6="1" duration2="3600000" effectid="275" e="1" noresist="true" />
+			<shapechange model="202529" type="PC" cantFly="true" duration2="3600000" effectid="275" e="1" noresist="true" />
 			<nofly duration2="3600000" effectid="20109" e="2" noresist="true" element="FIRE" preeffect="1" />
 			<statup duration2="3600000" effectid="10012" e="3" noresist="true" element="FIRE" preeffect="2">
 				<change stat="REGEN_HP" func="ADD" value="12" />
@@ -98742,7 +98742,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="202530" type="PC" res6="1" duration2="3600000" effectid="275" e="1" noresist="true" />
+			<shapechange model="202530" type="PC" cantFly="true" duration2="3600000" effectid="275" e="1" noresist="true" />
 			<nofly duration2="3600000" effectid="20109" e="2" noresist="true" element="FIRE" preeffect="1" />
 			<statup duration2="3600000" effectid="10012" e="3" noresist="true" element="FIRE" preeffect="2">
 				<change stat="REGEN_HP" func="ADD" value="12" />
@@ -98761,7 +98761,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="202529" type="PC" res6="1" duration2="3600000" effectid="275" e="1" noresist="true" />
+			<shapechange model="202529" type="PC" cantFly="true" duration2="3600000" effectid="275" e="1" noresist="true" />
 			<nofly duration2="3600000" effectid="20109" e="2" noresist="true" element="FIRE" preeffect="1" />
 			<statup duration2="3600000" effectid="10012" e="3" noresist="true" element="FIRE" preeffect="2">
 				<change stat="REGEN_HP" func="ADD" value="12" />
@@ -98780,7 +98780,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="202530" type="PC" res6="1" duration2="3600000" effectid="275" e="1" noresist="true" />
+			<shapechange model="202530" type="PC" cantFly="true" duration2="3600000" effectid="275" e="1" noresist="true" />
 			<nofly duration2="3600000" effectid="20109" e="2" noresist="true" element="FIRE" preeffect="1" />
 			<statup duration2="3600000" effectid="10012" e="3" noresist="true" element="FIRE" preeffect="2">
 				<change stat="REGEN_HP" func="ADD" value="12" />
@@ -98799,7 +98799,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="202529" type="PC" res6="1" duration2="3600000" effectid="275" e="1" noresist="true" />
+			<shapechange model="202529" type="PC" cantFly="true" duration2="3600000" effectid="275" e="1" noresist="true" />
 			<nofly duration2="3600000" effectid="20109" e="2" noresist="true" element="FIRE" preeffect="1" />
 		</effects>
 	</skill_template>
@@ -98812,7 +98812,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="202530" type="PC" res6="1" duration2="3600000" effectid="275" e="1" noresist="true" />
+			<shapechange model="202530" type="PC" cantFly="true" duration2="3600000" effectid="275" e="1" noresist="true" />
 			<nofly duration2="3600000" effectid="20109" e="2" noresist="true" element="FIRE" preeffect="1" />
 		</effects>
 	</skill_template>
@@ -98825,7 +98825,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="202537" type="PC" res6="1" duration2="3600000" effectid="275" e="1" noresist="true" />
+			<shapechange model="202537" type="PC" cantFly="true" duration2="3600000" effectid="275" e="1" noresist="true" />
 			<nofly duration2="3600000" effectid="20109" e="2" noresist="true" element="FIRE" preeffect="1" />
 			<statup duration2="3600000" effectid="10012" e="3" noresist="true" element="FIRE" preeffect="2">
 				<change stat="MAXHP" func="ADD" value="181" />
@@ -98844,7 +98844,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="202538" type="PC" res6="1" duration2="3600000" effectid="275" e="1" noresist="true" />
+			<shapechange model="202538" type="PC" cantFly="true" duration2="3600000" effectid="275" e="1" noresist="true" />
 			<nofly duration2="3600000" effectid="20109" e="2" noresist="true" element="FIRE" preeffect="1" />
 			<statup duration2="3600000" effectid="10012" e="3" noresist="true" element="FIRE" preeffect="2">
 				<change stat="MAXHP" func="ADD" value="181" />
@@ -98863,7 +98863,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="202537" type="PC" res6="1" duration2="3600000" effectid="275" e="1" noresist="true" />
+			<shapechange model="202537" type="PC" cantFly="true" duration2="3600000" effectid="275" e="1" noresist="true" />
 			<nofly duration2="3600000" effectid="20109" e="2" noresist="true" element="FIRE" preeffect="1" />
 			<statup duration2="3600000" effectid="10012" e="3" noresist="true" element="FIRE" preeffect="2">
 				<change stat="MAXHP" func="ADD" value="181" />
@@ -98882,7 +98882,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="202538" type="PC" res6="1" duration2="3600000" effectid="275" e="1" noresist="true" />
+			<shapechange model="202538" type="PC" cantFly="true" duration2="3600000" effectid="275" e="1" noresist="true" />
 			<nofly duration2="3600000" effectid="20109" e="2" noresist="true" element="FIRE" preeffect="1" />
 			<statup duration2="3600000" effectid="10012" e="3" noresist="true" element="FIRE" preeffect="2">
 				<change stat="MAXHP" func="ADD" value="181" />
@@ -98901,7 +98901,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="202537" type="PC" res6="1" duration2="3600000" effectid="275" e="1" noresist="true" />
+			<shapechange model="202537" type="PC" cantFly="true" duration2="3600000" effectid="275" e="1" noresist="true" />
 			<nofly duration2="3600000" effectid="20109" e="2" noresist="true" element="FIRE" preeffect="1" />
 			<statup duration2="3600000" effectid="10012" e="3" noresist="true" element="FIRE" preeffect="2">
 				<change stat="REGEN_HP" func="ADD" value="12" />
@@ -98920,7 +98920,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="202538" type="PC" res6="1" duration2="3600000" effectid="275" e="1" noresist="true" />
+			<shapechange model="202538" type="PC" cantFly="true" duration2="3600000" effectid="275" e="1" noresist="true" />
 			<nofly duration2="3600000" effectid="20109" e="2" noresist="true" element="FIRE" preeffect="1" />
 			<statup duration2="3600000" effectid="10012" e="3" noresist="true" element="FIRE" preeffect="2">
 				<change stat="REGEN_HP" func="ADD" value="12" />
@@ -98939,7 +98939,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="202537" type="PC" res6="1" duration2="3600000" effectid="275" e="1" noresist="true" />
+			<shapechange model="202537" type="PC" cantFly="true" duration2="3600000" effectid="275" e="1" noresist="true" />
 			<nofly duration2="3600000" effectid="20109" e="2" noresist="true" element="FIRE" preeffect="1" />
 			<statup duration2="3600000" effectid="10012" e="3" noresist="true" element="FIRE" preeffect="2">
 				<change stat="REGEN_HP" func="ADD" value="12" />
@@ -98958,7 +98958,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="202538" type="PC" res6="1" duration2="3600000" effectid="275" e="1" noresist="true" />
+			<shapechange model="202538" type="PC" cantFly="true" duration2="3600000" effectid="275" e="1" noresist="true" />
 			<nofly duration2="3600000" effectid="20109" e="2" noresist="true" element="FIRE" preeffect="1" />
 			<statup duration2="3600000" effectid="10012" e="3" noresist="true" element="FIRE" preeffect="2">
 				<change stat="REGEN_HP" func="ADD" value="12" />
@@ -98977,7 +98977,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="202537" type="PC" res6="1" duration2="3600000" effectid="275" e="1" noresist="true" />
+			<shapechange model="202537" type="PC" cantFly="true" duration2="3600000" effectid="275" e="1" noresist="true" />
 			<nofly duration2="3600000" effectid="20109" e="2" noresist="true" element="FIRE" preeffect="1" />
 		</effects>
 	</skill_template>
@@ -98990,7 +98990,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="202538" type="PC" res6="1" duration2="3600000" effectid="275" e="1" noresist="true" />
+			<shapechange model="202538" type="PC" cantFly="true" duration2="3600000" effectid="275" e="1" noresist="true" />
 			<nofly duration2="3600000" effectid="20109" e="2" noresist="true" element="FIRE" preeffect="1" />
 		</effects>
 	</skill_template>
@@ -99003,7 +99003,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="202539" type="PC" res6="1" duration2="3600000" effectid="275" e="1" noresist="true" />
+			<shapechange model="202539" type="PC" cantFly="true" duration2="3600000" effectid="275" e="1" noresist="true" />
 			<nofly duration2="3600000" effectid="20109" e="2" noresist="true" element="FIRE" preeffect="1" />
 			<statup duration2="3600000" effectid="10012" e="3" noresist="true" element="FIRE" preeffect="2">
 				<change stat="MAXHP" func="ADD" value="181" />
@@ -99022,7 +99022,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="202540" type="PC" res6="1" duration2="3600000" effectid="275" e="1" noresist="true" />
+			<shapechange model="202540" type="PC" cantFly="true" duration2="3600000" effectid="275" e="1" noresist="true" />
 			<nofly duration2="3600000" effectid="20109" e="2" noresist="true" element="FIRE" preeffect="1" />
 			<statup duration2="3600000" effectid="10012" e="3" noresist="true" element="FIRE" preeffect="2">
 				<change stat="MAXHP" func="ADD" value="181" />
@@ -99041,7 +99041,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="202539" type="PC" res6="1" duration2="3600000" effectid="275" e="1" noresist="true" />
+			<shapechange model="202539" type="PC" cantFly="true" duration2="3600000" effectid="275" e="1" noresist="true" />
 			<nofly duration2="3600000" effectid="20109" e="2" noresist="true" element="FIRE" preeffect="1" />
 			<statup duration2="3600000" effectid="10012" e="3" noresist="true" element="FIRE" preeffect="2">
 				<change stat="MAXHP" func="ADD" value="181" />
@@ -99060,7 +99060,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="202540" type="PC" res6="1" duration2="3600000" effectid="275" e="1" noresist="true" />
+			<shapechange model="202540" type="PC" cantFly="true" duration2="3600000" effectid="275" e="1" noresist="true" />
 			<nofly duration2="3600000" effectid="20109" e="2" noresist="true" element="FIRE" preeffect="1" />
 			<statup duration2="3600000" effectid="10012" e="3" noresist="true" element="FIRE" preeffect="2">
 				<change stat="MAXHP" func="ADD" value="181" />
@@ -99079,7 +99079,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="202539" type="PC" res6="1" duration2="3600000" effectid="275" e="1" noresist="true" />
+			<shapechange model="202539" type="PC" cantFly="true" duration2="3600000" effectid="275" e="1" noresist="true" />
 			<nofly duration2="3600000" effectid="20109" e="2" noresist="true" element="FIRE" preeffect="1" />
 			<statup duration2="3600000" effectid="10012" e="3" noresist="true" element="FIRE" preeffect="2">
 				<change stat="REGEN_HP" func="ADD" value="12" />
@@ -99098,7 +99098,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="202540" type="PC" res6="1" duration2="3600000" effectid="275" e="1" noresist="true" />
+			<shapechange model="202540" type="PC" cantFly="true" duration2="3600000" effectid="275" e="1" noresist="true" />
 			<nofly duration2="3600000" effectid="20109" e="2" noresist="true" element="FIRE" preeffect="1" />
 			<statup duration2="3600000" effectid="10012" e="3" noresist="true" element="FIRE" preeffect="2">
 				<change stat="REGEN_HP" func="ADD" value="12" />
@@ -99117,7 +99117,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="202539" type="PC" res6="1" duration2="3600000" effectid="275" e="1" noresist="true" />
+			<shapechange model="202539" type="PC" cantFly="true" duration2="3600000" effectid="275" e="1" noresist="true" />
 			<nofly duration2="3600000" effectid="20109" e="2" noresist="true" element="FIRE" preeffect="1" />
 			<statup duration2="3600000" effectid="10012" e="3" noresist="true" element="FIRE" preeffect="2">
 				<change stat="REGEN_HP" func="ADD" value="12" />
@@ -99136,7 +99136,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="202540" type="PC" res6="1" duration2="3600000" effectid="275" e="1" noresist="true" />
+			<shapechange model="202540" type="PC" cantFly="true" duration2="3600000" effectid="275" e="1" noresist="true" />
 			<nofly duration2="3600000" effectid="20109" e="2" noresist="true" element="FIRE" preeffect="1" />
 			<statup duration2="3600000" effectid="10012" e="3" noresist="true" element="FIRE" preeffect="2">
 				<change stat="REGEN_HP" func="ADD" value="12" />
@@ -99155,7 +99155,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="202539" type="PC" res6="1" duration2="3600000" effectid="275" e="1" noresist="true" />
+			<shapechange model="202539" type="PC" cantFly="true" duration2="3600000" effectid="275" e="1" noresist="true" />
 			<nofly duration2="3600000" effectid="20109" e="2" noresist="true" element="FIRE" preeffect="1" />
 		</effects>
 	</skill_template>
@@ -99168,7 +99168,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="202540" type="PC" res6="1" duration2="3600000" effectid="275" e="1" noresist="true" />
+			<shapechange model="202540" type="PC" cantFly="true" duration2="3600000" effectid="275" e="1" noresist="true" />
 			<nofly duration2="3600000" effectid="20109" e="2" noresist="true" element="FIRE" preeffect="1" />
 		</effects>
 	</skill_template>
@@ -99985,7 +99985,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="217754" type="NONE" banUseSkills="1" res6="1" duration2="3600000" effectid="275" e="1" noresist="true" />
+			<shapechange model="217754" type="NONE" cantUseSkills="true" cantFly="true" duration2="3600000" effectid="275" e="1" noresist="true" />
 			<nofly duration2="600000" effectid="20109" e="2" noresist="true" element="FIRE" preeffect="1" />
 		</effects>
 	</skill_template>
@@ -100169,7 +100169,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="218498" banUseSkills="1" res5="1" res6="1" duration2="600000" effectid="275" e="1" noresist="true" element="LIGHT" />
+			<polymorph model="218498" cantUseSkills="true" cantUseItems="true" cantFly="true" duration2="600000" effectid="275" e="1" noresist="true" element="LIGHT" />
 		</effects>
 		<motion name="normalfire" />
 	</skill_template>
@@ -100182,7 +100182,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<deform model="280004" banUseSkills="1" res5="1" res6="1" duration2="45000" effectid="175" e="1" noresist="true" element="DARK" />
+			<deform model="280004" cantUseSkills="true" cantUseItems="true" cantFly="true" duration2="45000" effectid="175" e="1" noresist="true" element="DARK" />
 			<paralyze duration2="45000" effectid="20002" e="2" basiclvl="200" noresist="true" element="DARK" preeffect="1" />
 		</effects>
 		<motion name="normalfire" />
@@ -101248,7 +101248,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="214532" type="NONE" banUseSkills="1" res6="1" duration2="600000" effectid="275" e="1" noresist="true" element="WIND" />
+			<shapechange model="214532" type="NONE" cantUseSkills="true" cantFly="true" duration2="600000" effectid="275" e="1" noresist="true" element="WIND" />
 			<nofly duration2="600000" effectid="20109" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 	</skill_template>
@@ -106521,7 +106521,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="210342" banUseSkills="1" res6="1" duration2="1800000" effectid="275" e="1" noresist="true" />
+			<shapechange model="210342" cantUseSkills="true" cantFly="true" duration2="1800000" effectid="275" e="1" noresist="true" />
 		</effects>
 	</skill_template>
 	<skill_template skill_id="10776" name="Cute Elroco Confection" nameId="2283314" stack="FOOD_SHAPE_MINX_L_1_N" lvl="1" skilltype="MAGICAL" skillsubtype="NONE" tslot="BUFF" tslot_level="2" activation="ACTIVE" cooldown="0" duration="0" noremoveatdie="true">
@@ -106533,7 +106533,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="210338" banUseSkills="1" res6="1" duration2="1800000" effectid="275" e="1" noresist="true" />
+			<shapechange model="210338" cantUseSkills="true" cantFly="true" duration2="1800000" effectid="275" e="1" noresist="true" />
 		</effects>
 	</skill_template>
 	<skill_template skill_id="10777" name="Cute Gumi Form" nameId="2283315" stack="FOOD_SHAPE_GUMI_D_1_N" lvl="1" skilltype="MAGICAL" skillsubtype="NONE" tslot="BUFF" tslot_level="2" activation="ACTIVE" cooldown="0" duration="0" noremoveatdie="true">
@@ -106545,7 +106545,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="210342" banUseSkills="1" res6="1" duration2="1800000" effectid="275" e="1" noresist="true" />
+			<shapechange model="210342" cantUseSkills="true" cantFly="true" duration2="1800000" effectid="275" e="1" noresist="true" />
 		</effects>
 	</skill_template>
 	<skill_template skill_id="10778" name="Cute Elroco Confection" nameId="2283316" stack="FOOD_SHAPE_MINX_D_1_N" lvl="1" skilltype="MAGICAL" skillsubtype="NONE" tslot="BUFF" tslot_level="2" activation="ACTIVE" cooldown="0" duration="0" noremoveatdie="true">
@@ -106557,7 +106557,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="210338" banUseSkills="1" res6="1" duration2="1800000" effectid="275" e="1" noresist="true" />
+			<shapechange model="210338" cantUseSkills="true" cantFly="true" duration2="1800000" effectid="275" e="1" noresist="true" />
 		</effects>
 	</skill_template>
 	<skill_template skill_id="10779" name="Guardian General Form" nameId="2283305" stack="FOOD_SHAPE_RANKERAVATARL_1_N" lvl="1" skilltype="MAGICAL" skillsubtype="BUFF" tslot="BUFF" tslot_level="2" activation="ACTIVE" cooldown="0" duration="0" no_save_on_logout="true" noremoveatdie="true">
@@ -106767,7 +106767,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="202611" type="FORM1" panelid="33" res3="1" duration2="86400000" effectid="101742" e="1" basiclvl="1" noresist="true" />
+			<polymorph model="202611" type="FORM1" panelid="33" cantAttack="true" duration2="86400000" effectid="101742" e="1" basiclvl="1" noresist="true" />
 			<statup duration2="3000000" effectid="10195022" e="2" noresist="true" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60">
 				<change stat="MAXHP" func="ADD" value="500000" />
 				<change stat="PHYSICAL_DEFENSE" func="ADD" value="2000" />
@@ -106780,7 +106780,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="202612" type="FORM1" panelid="34" res3="1" duration2="86400000" effectid="101742" e="1" basiclvl="2" noresist="true" />
+			<polymorph model="202612" type="FORM1" panelid="34" cantAttack="true" duration2="86400000" effectid="101742" e="1" basiclvl="2" noresist="true" />
 			<statup duration2="3000000" effectid="10195022" e="2" noresist="true" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60">
 				<change stat="MAXHP" func="ADD" value="500000" />
 				<change stat="PHYSICAL_DEFENSE" func="ADD" value="2000" />
@@ -106793,7 +106793,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="202613" type="FORM1" panelid="35" res3="1" duration2="86400000" effectid="101742" e="1" basiclvl="3" noresist="true" />
+			<polymorph model="202613" type="FORM1" panelid="35" cantAttack="true" duration2="86400000" effectid="101742" e="1" basiclvl="3" noresist="true" />
 			<statup duration2="3000000" effectid="10195022" e="2" noresist="true" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60">
 				<change stat="MAXHP" func="ADD" value="500000" />
 				<change stat="PHYSICAL_DEFENSE" func="ADD" value="2000" />
@@ -108900,7 +108900,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="233887" banUseSkills="1" res3="1" res5="1" res6="1" duration2="15000" effectid="275" e="1" basiclvl="255" noresist="true" element="FIRE" />
+			<polymorph model="233887" cantUseSkills="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="15000" effectid="275" e="1" basiclvl="255" noresist="true" element="FIRE" />
 		</effects>
 	</skill_template>
 	<skill_template skill_id="10915" name="Nullify Recovery" nameId="2284658" stack="IDLDF4_RE_01_ANTI_HEAL" lvl="1" skilltype="MAGICAL" skillsubtype="SUMMONTRAP" tslot="NONE" activation="ACTIVE" cooldown="0" duration="0" ammospeed="25">
@@ -112016,7 +112016,7 @@
 			<mp value="227" delta="0" />
 		</endconditions>
 		<effects>
-			<deform model="201046" type="NONE" banUseSkills="1" duration2="30000" effectid="175" e="1" noresist="true" element="FIRE" hoptype="SKILLLV" hopb="4948" />
+			<deform model="201046" type="NONE" cantUseSkills="true" duration2="30000" effectid="175" e="1" noresist="true" element="FIRE" hoptype="SKILLLV" hopb="4948" />
 			<sleep duration2="30000" effectid="20106" e="2" element="FIRE" preeffect="1" />
 			<statdown duration2="30000" effectid="114543" e="3" noresist="true" element="FIRE" preeffect="1">
 				<change stat="FIRE_RESISTANCE" func="ADD" value="-1000" />
@@ -112345,7 +112345,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="211235" type="NONE" banUseSkills="1" duration2="30000" effectid="175" e="1" noresist="true" element="FIRE" />
+			<shapechange model="211235" type="NONE" cantUseSkills="true" duration2="30000" effectid="175" e="1" noresist="true" element="FIRE" />
 			<statup duration2="30000" effectid="183492" e="2" noresist="true" preeffect="1">
 				<change stat="PHYSICAL_ATTACK" func="ADD" value="300" />
 			</statup>
@@ -112361,7 +112361,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="211235" type="NONE" banUseSkills="1" duration2="30000" effectid="175" e="1" noresist="true" element="FIRE" />
+			<shapechange model="211235" type="NONE" cantUseSkills="true" duration2="30000" effectid="175" e="1" noresist="true" element="FIRE" />
 			<statup duration2="30000" effectid="183502" e="2" noresist="true" preeffect="1">
 				<change stat="PHYSICAL_ATTACK" func="ADD" value="500" />
 			</statup>
@@ -113276,7 +113276,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<deform model="280598" type="NONE" banUseSkills="1" duration2="180000" effectid="175" e="1" basiclvl="100" noresist="true" element="FIRE" />
+			<deform model="280598" type="NONE" cantUseSkills="true" duration2="180000" effectid="175" e="1" basiclvl="100" noresist="true" element="FIRE" />
 			<silence duration2="180000" effectid="20101" e="2" basiclvl="100" noresist="true" element="WATER" preeffect="1" />
 			<bind duration2="180000" effectid="20014" e="3" basiclvl="100" noresist="true" element="WATER" preeffect="1 2" />
 			<snare duration2="180000" effectid="20007" e="4" basiclvl="100" noresist="true" element="WATER" preeffect="1">
@@ -113658,7 +113658,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<deform model="280598" type="NONE" banUseSkills="1" duration2="180000" effectid="175" e="1" basiclvl="120" noresist="true" element="FIRE" />
+			<deform model="280598" type="NONE" cantUseSkills="true" duration2="180000" effectid="175" e="1" basiclvl="120" noresist="true" element="FIRE" />
 			<silence duration2="180000" effectid="20101" e="2" basiclvl="120" noresist="true" element="WATER" preeffect="1" />
 			<bind duration2="180000" effectid="20014" e="3" basiclvl="120" noresist="true" element="WATER" preeffect="1 2" />
 			<snare duration2="180000" effectid="20007" e="4" basiclvl="120" noresist="true" element="WATER" preeffect="1">
@@ -113952,7 +113952,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<deform model="281754" type="NONE" banUseSkills="1" duration2="12000" effectid="175" e="1" basiclvl="120" noresist="true" element="FIRE" />
+			<deform model="281754" type="NONE" cantUseSkills="true" duration2="12000" effectid="175" e="1" basiclvl="120" noresist="true" element="FIRE" />
 		</effects>
 	</skill_template>
 	<skill_template skill_id="12108" name="Cyclone of Void" nameId="294727" stack="LF4_ARTIFACT_AIRBIND" lvl="1" skilltype="MAGICAL" skillsubtype="ATTACK" tslot="DEBUFF" dispel_category="DEBUFF_PHYSICAL" req_dispel_level="1" req_dispel_count="90" activation="ACTIVE" cooldown="0" duration="0">
@@ -113999,7 +113999,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<deform model="281750" type="NONE" banUseSkills="1" duration2="12000" effectid="175" e="1" basiclvl="120" noresist="true" element="FIRE" />
+			<deform model="281750" type="NONE" cantUseSkills="true" duration2="12000" effectid="175" e="1" basiclvl="120" noresist="true" element="FIRE" />
 		</effects>
 	</skill_template>
 	<skill_template skill_id="12111" name="Cyclone of Void" nameId="294733" stack="DF4_ARTIFACT_AIRBIND" lvl="1" skilltype="MAGICAL" skillsubtype="ATTACK" tslot="DEBUFF" dispel_category="DEBUFF_PHYSICAL" req_dispel_level="1" req_dispel_count="90" activation="ACTIVE" cooldown="0" duration="0">
@@ -114265,7 +114265,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<deform model="218418" type="NONE" banUseSkills="1" duration2="8000" effectid="175" e="1" basiclvl="100" noresist="true" element="FIRE" />
+			<deform model="218418" type="NONE" cantUseSkills="true" duration2="8000" effectid="175" e="1" basiclvl="100" noresist="true" element="FIRE" />
 			<statup duration2="8000" effectid="121292" e="2" basiclvl="100" noresist="true" preeffect="1">
 				<change stat="PHYSICAL_ATTACK" func="PERCENT" value="10" />
 				<change stat="MAGICAL_ATTACK" func="PERCENT" value="10" />
@@ -114293,7 +114293,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<deform model="216943" type="NONE" banUseSkills="1" res5="1" res6="1" duration2="10000" effectid="175" e="1" basiclvl="100" noresist="true" element="EARTH" />
+			<deform model="216943" type="NONE" cantUseSkills="true" cantUseItems="true" cantFly="true" duration2="10000" effectid="175" e="1" basiclvl="100" noresist="true" element="EARTH" />
 			<paralyze duration2="10000" effectid="20002" e="2" basiclvl="100" noresist="true" element="EARTH" preeffect="1" />
 			<statup duration2="10000" effectid="121313" e="3" basiclvl="100" noresist="true" preeffect="1">
 				<change stat="PHYSICAL_DEFENSE" func="PERCENT" value="30" />
@@ -127147,7 +127147,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="286129" res6="100" duration2="3100" duration1="50" effectid="175" e="1" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<shapechange model="286129" cantFly="true" duration2="3100" duration1="50" effectid="175" e="1" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<paralyze duration2="3100" duration1="50" effectid="20002" e="2" noresist="true" element="EARTH" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<bleed checktime="3000" value="49" delta="1" duration2="3100" duration1="50" effectid="10170123" e="3" noresist="true" element="EARTH" preeffect="2" hoptype="DAMAGE" />
 		</effects>
@@ -139993,7 +139993,7 @@
 		</startconditions>
 		<effects>
 			<spellatkdraininstant hp_percent="100" mode="PERCENT" value="181" e="1" element="WATER" critprobmod2="0" hoptype="DAMAGE" />
-			<deform model="210420" banUseSkills="1" duration2="30000" effectid="175" e="2" noresist="true" element="WATER" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<deform model="210420" cantUseSkills="true" duration2="30000" effectid="175" e="2" noresist="true" element="WATER" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<statdown duration2="30000" effectid="10178943" e="3" noresist="true" element="WATER" preeffect="2" hoptype="SKILLLV" hopb="60" hopa="60">
 				<change stat="MAXHP" func="PERCENT" value="-50" />
 			</statdown>
@@ -140261,7 +140261,7 @@
 		</useconditions>
 		<effects>
 			<signetburst signetlvl="1" signet="SIGNET2" value="570" delta="41" e="1" element="FIRE" critprobmod2="0" hoptype="DAMAGE" />
-			<deform model="213176" banUseSkills="1" duration2="5000" effectid="175" e="2" noresist="true" element="EARTH" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<deform model="213176" cantUseSkills="true" duration2="5000" effectid="175" e="2" noresist="true" element="EARTH" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<confuse duration2="5000" effectid="20104" e="3" noresist="true" element="WATER" preeffect="2" hoptype="SKILLLV" hopb="60" hopa="60" />
 		</effects>
 		<motion name="normalfire" />
@@ -140289,7 +140289,7 @@
 		</useconditions>
 		<effects>
 			<signetburst signetlvl="1" signet="SIGNET2" value="570" delta="41" e="1" element="FIRE" critprobmod2="0" hoptype="DAMAGE" />
-			<deform model="213176" banUseSkills="1" duration2="5000" effectid="175" e="2" noresist="true" element="EARTH" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<deform model="213176" cantUseSkills="true" duration2="5000" effectid="175" e="2" noresist="true" element="EARTH" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<confuse duration2="5000" effectid="20104" e="3" noresist="true" element="WATER" preeffect="2" hoptype="SKILLLV" hopb="60" hopa="60" />
 		</effects>
 		<motion name="normalfire" />
@@ -140304,7 +140304,7 @@
 		</useconditions>
 		<effects>
 			<skillatk mode="PERCENT" value="42" e="1" accmod2="0" critprobmod2="0" hoptype="DAMAGE" />
-			<deform model="211094" banUseSkills="1" duration2="15100" duration1="350" effectid="175" e="2" noresist="true" element="EARTH" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<deform model="211094" cantUseSkills="true" duration2="15100" duration1="350" effectid="175" e="2" noresist="true" element="EARTH" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<poison value="0" duration2="15100" duration1="350" effectid="10179153" e="3" noresist="true" element="EARTH" preeffect="2" hoptype="SKILLLV" hopb="60" hopa="60" />
 		</effects>
 		<motion name="poweratk" />
@@ -141359,7 +141359,7 @@
 				<change stat="MAXHP" func="PERCENT" value="-30" />
 				<change stat="MAXMP" func="PERCENT" value="-30" />
 			</curse>
-			<deform model="211960" banUseSkills="1" duration2="8500" duration1="120" effectid="175" e="2" noresist="true" element="EARTH" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<deform model="211960" cantUseSkills="true" duration2="8500" duration1="120" effectid="175" e="2" noresist="true" element="EARTH" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
 		</effects>
 		<motion name="pointfire" />
 	</skill_template>
@@ -141937,7 +141937,7 @@
 			<statdown duration2="20000" effectid="10180231" e="1" element="EARTH" hoptype="SKILLLV" hopb="60" hopa="60">
 				<change stat="MAXHP" func="PERCENT" value="-30" />
 			</statdown>
-			<deform model="211111" banUseSkills="1" duration2="20000" effectid="175" e="2" noresist="true" element="EARTH" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<deform model="211111" cantUseSkills="true" duration2="20000" effectid="175" e="2" noresist="true" element="EARTH" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
 		</effects>
 		<motion name="normalfire" />
 	</skill_template>
@@ -144428,7 +144428,7 @@
 		</useconditions>
 		<effects>
 			<fear resistchance="75" duration2="5000" effectid="20103" e="1" element="EARTH" hoptype="SKILLLV" hopb="60" hopa="60" />
-			<deform model="210420" banUseSkills="1" duration2="5000" effectid="175" e="2" noresist="true" element="EARTH" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<deform model="210420" cantUseSkills="true" duration2="5000" effectid="175" e="2" noresist="true" element="EARTH" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<statdown duration2="5000" effectid="10181623" e="3" noresist="true" element="EARTH" preeffect="2" hoptype="SKILLLV" hopb="60" hopa="60">
 				<change stat="MAXHP" func="PERCENT" value="-50" />
 			</statdown>
@@ -144625,7 +144625,7 @@
 		</useconditions>
 		<effects>
 			<sleep duration2="6100" effectid="20106" e="1" element="EARTH" hoptype="SKILLLV" hopb="60" hopa="60" />
-			<deform model="214869" banUseSkills="1" duration2="6100" effectid="175" e="2" noresist="true" element="EARTH" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<deform model="214869" cantUseSkills="true" duration2="6100" effectid="175" e="2" noresist="true" element="EARTH" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<spellatk checktime="6000" value="15" delta="94" duration2="6100" effectid="1018175" e="3" noresist="true" element="EARTH" preeffect="1" hoptype="DAMAGE" />
 		</effects>
 		<motion name="normalfire" />
@@ -145693,7 +145693,7 @@
 		</useconditions>
 		<effects>
 			<spellatkinstant mode="PERCENT" value="23" e="1" element="EARTH" hoptype="DAMAGE" />
-			<deform model="210804" banUseSkills="1" duration2="3000" duration1="50" effectid="175" e="2" noresist="true" element="EARTH" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<deform model="210804" cantUseSkills="true" duration2="3000" duration1="50" effectid="175" e="2" noresist="true" element="EARTH" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<paralyze duration2="3000" duration1="50" effectid="20002" e="3" noresist="true" element="EARTH" preeffect="2" hoptype="SKILLLV" hopb="60" hopa="60" />
 		</effects>
 		<motion name="pointfire" />
@@ -145725,7 +145725,7 @@
 		</useconditions>
 		<effects>
 			<fear resistchance="75" duration2="5000" effectid="20103" e="1" element="EARTH" hoptype="SKILLLV" hopb="60" hopa="60" />
-			<deform model="210420" banUseSkills="1" duration2="5000" effectid="175" e="2" noresist="true" element="EARTH" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<deform model="210420" cantUseSkills="true" duration2="5000" effectid="175" e="2" noresist="true" element="EARTH" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<snare duration2="5000" effectid="20007" e="3" noresist="true" element="FIRE" preeffect="2" hoptype="SKILLLV" hopb="60" hopa="60">
 				<change stat="SPEED" func="PERCENT" value="-30" />
 				<change stat="FLY_SPEED" func="PERCENT" value="-30" />
@@ -148621,7 +148621,7 @@
 		<effects>
 			<spellatkinstant mode="PERCENT" value="100" e="1" element="EARTH" hoptype="DAMAGE" />
 			<confuse duration2="35000" effectid="20104" e="2" noresist="true" element="EARTH" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
-			<deform model="280684" banUseSkills="1" duration2="35000" effectid="175" e="3" noresist="true" element="EARTH" preeffect="2" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<deform model="280684" cantUseSkills="true" duration2="35000" effectid="175" e="3" noresist="true" element="EARTH" preeffect="2" hoptype="SKILLLV" hopb="60" hopa="60" />
 		</effects>
 		<motion name="debuff" />
 	</skill_template>
@@ -148961,7 +148961,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="280952" type="NONE" banUseSkills="1" duration2="90000" effectid="175" e="1" noresist="true" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<polymorph model="280952" type="NONE" cantUseSkills="true" duration2="90000" effectid="175" e="1" noresist="true" hoptype="SKILLLV" hopb="60" hopa="60" />
 		</effects>
 		<motion name="normalfire" />
 	</skill_template>
@@ -149024,7 +149024,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<deform model="280115" banUseSkills="1" duration2="60000" effectid="175" e="1" element="EARTH" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<deform model="280115" cantUseSkills="true" duration2="60000" effectid="175" e="1" element="EARTH" hoptype="SKILLLV" hopb="60" hopa="60" />
 		</effects>
 		<motion name="normalfire" />
 	</skill_template>
@@ -149048,7 +149048,7 @@
 			<weapon weapon="GREATSWORD SPELLBOOK BOW DAGGER MACE ORB POLEARM STAFF SWORD GUN CANNON HARP KEYBLADE" />
 		</startconditions>
 		<effects>
-			<deform model="202522" banUseSkills="1" duration2="60000" effectid="175" e="1" noresist="true" element="EARTH" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<deform model="202522" cantUseSkills="true" duration2="60000" effectid="175" e="1" noresist="true" element="EARTH" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<disease duration2="60000" effectid="20009" e="2" noresist="true" element="EARTH" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
 		</effects>
 		<motion name="normalfire" />
@@ -149121,7 +149121,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="210273" type="NONE" banUseSkills="1" duration2="10000" effectid="175" e="1" noresist="true" />
+			<shapechange model="210273" type="NONE" cantUseSkills="true" duration2="10000" effectid="175" e="1" noresist="true" />
 		</effects>
 		<motion name="normalfire" />
 	</skill_template>
@@ -151199,7 +151199,7 @@
 		<properties first_target="TARGET" first_target_range="25" target_relation="ENEMY" target_type="ONLYONE" target_maxcount="1" />
 		<effects>
 			<spellatkinstant mode="PERCENT" value="100" e="1" element="EARTH" critprobmod2="0" hoptype="DAMAGE" />
-			<deform model="210804" banUseSkills="1" duration2="15000" effectid="175" e="2" basiclvl="20" noresist="true" element="EARTH" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<deform model="210804" cantUseSkills="true" duration2="15000" effectid="175" e="2" basiclvl="20" noresist="true" element="EARTH" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<paralyze duration2="15000" effectid="20002" e="3" noresist="true" element="EARTH" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
 		</effects>
 		<motion name="pointfire" />
@@ -154470,7 +154470,7 @@
 				<change stat="FIRE_RESISTANCE" func="ADD" value="500" />
 				<change stat="EARTH_RESISTANCE" func="ADD" value="500" />
 			</statup>
-			<deform model="201012" type="NONE" banUseSkills="1" duration2="30000" effectid="175" e="4" element="WIND" preeffect="1" hoptype="SKILLLV" hopb="1" />
+			<deform model="201012" type="NONE" cantUseSkills="true" duration2="30000" effectid="175" e="4" element="WIND" preeffect="1" hoptype="SKILLLV" hopb="1" />
 		</effects>
 		<motion name="pointfire" />
 	</skill_template>
@@ -154488,7 +154488,7 @@
 				<change stat="FIRE_RESISTANCE" func="ADD" value="500" />
 				<change stat="EARTH_RESISTANCE" func="ADD" value="500" />
 			</statup>
-			<deform model="201016" type="NONE" banUseSkills="1" duration2="30000" effectid="175" e="4" basiclvl="20" element="WIND" preeffect="1" hoptype="SKILLLV" hopb="1" />
+			<deform model="201016" type="NONE" cantUseSkills="true" duration2="30000" effectid="175" e="4" basiclvl="20" element="WIND" preeffect="1" hoptype="SKILLLV" hopb="1" />
 		</effects>
 		<motion name="pointfire" />
 	</skill_template>
@@ -154506,7 +154506,7 @@
 				<change stat="FIRE_RESISTANCE" func="ADD" value="500" />
 				<change stat="EARTH_RESISTANCE" func="ADD" value="500" />
 			</statup>
-			<deform model="201020" type="NONE" banUseSkills="1" duration2="30000" effectid="175" e="4" basiclvl="40" element="WIND" preeffect="1" hoptype="SKILLLV" hopb="1" />
+			<deform model="201020" type="NONE" cantUseSkills="true" duration2="30000" effectid="175" e="4" basiclvl="40" element="WIND" preeffect="1" hoptype="SKILLLV" hopb="1" />
 		</effects>
 		<motion name="pointfire" />
 	</skill_template>
@@ -154524,7 +154524,7 @@
 				<change stat="FIRE_RESISTANCE" func="ADD" value="500" />
 				<change stat="EARTH_RESISTANCE" func="ADD" value="500" />
 			</statup>
-			<deform model="201036" type="NONE" banUseSkills="1" duration2="30000" effectid="175" e="4" basiclvl="60" element="WIND" preeffect="1" hoptype="SKILLLV" hopb="1" />
+			<deform model="201036" type="NONE" cantUseSkills="true" duration2="30000" effectid="175" e="4" basiclvl="60" element="WIND" preeffect="1" hoptype="SKILLLV" hopb="1" />
 		</effects>
 		<motion name="pointfire" />
 	</skill_template>
@@ -154542,7 +154542,7 @@
 				<change stat="FIRE_RESISTANCE" func="ADD" value="500" />
 				<change stat="EARTH_RESISTANCE" func="ADD" value="500" />
 			</statup>
-			<deform model="201022" type="NONE" banUseSkills="1" duration2="30000" effectid="175" e="4" element="FIRE" preeffect="1" hoptype="SKILLLV" hopb="1" />
+			<deform model="201022" type="NONE" cantUseSkills="true" duration2="30000" effectid="175" e="4" element="FIRE" preeffect="1" hoptype="SKILLLV" hopb="1" />
 		</effects>
 		<motion name="pointfire" />
 	</skill_template>
@@ -154560,7 +154560,7 @@
 				<change stat="FIRE_RESISTANCE" func="ADD" value="500" />
 				<change stat="EARTH_RESISTANCE" func="ADD" value="500" />
 			</statup>
-			<deform model="201028" type="NONE" banUseSkills="1" duration2="30000" effectid="175" e="4" basiclvl="20" element="FIRE" preeffect="1" hoptype="SKILLLV" hopb="1" />
+			<deform model="201028" type="NONE" cantUseSkills="true" duration2="30000" effectid="175" e="4" basiclvl="20" element="FIRE" preeffect="1" hoptype="SKILLLV" hopb="1" />
 		</effects>
 		<motion name="pointfire" />
 	</skill_template>
@@ -154578,7 +154578,7 @@
 				<change stat="FIRE_RESISTANCE" func="ADD" value="500" />
 				<change stat="EARTH_RESISTANCE" func="ADD" value="500" />
 			</statup>
-			<deform model="201031" type="NONE" banUseSkills="1" duration2="30000" effectid="175" e="4" basiclvl="40" element="FIRE" preeffect="1" hoptype="SKILLLV" hopb="1" />
+			<deform model="201031" type="NONE" cantUseSkills="true" duration2="30000" effectid="175" e="4" basiclvl="40" element="FIRE" preeffect="1" hoptype="SKILLLV" hopb="1" />
 		</effects>
 		<motion name="pointfire" />
 	</skill_template>
@@ -154596,7 +154596,7 @@
 				<change stat="FIRE_RESISTANCE" func="ADD" value="500" />
 				<change stat="EARTH_RESISTANCE" func="ADD" value="500" />
 			</statup>
-			<deform model="201034" type="NONE" banUseSkills="1" duration2="30000" effectid="175" e="4" basiclvl="60" element="FIRE" preeffect="1" hoptype="SKILLLV" hopb="1" />
+			<deform model="201034" type="NONE" cantUseSkills="true" duration2="30000" effectid="175" e="4" basiclvl="60" element="FIRE" preeffect="1" hoptype="SKILLLV" hopb="1" />
 		</effects>
 		<motion name="pointfire" />
 	</skill_template>
@@ -154614,7 +154614,7 @@
 				<change stat="FIRE_RESISTANCE" func="ADD" value="500" />
 				<change stat="EARTH_RESISTANCE" func="ADD" value="500" />
 			</statup>
-			<deform model="201010" type="NONE" banUseSkills="1" duration2="30000" effectid="175" e="4" element="EARTH" preeffect="1" hoptype="SKILLLV" hopb="1" />
+			<deform model="201010" type="NONE" cantUseSkills="true" duration2="30000" effectid="175" e="4" element="EARTH" preeffect="1" hoptype="SKILLLV" hopb="1" />
 		</effects>
 		<motion name="pointfire" />
 	</skill_template>
@@ -154632,7 +154632,7 @@
 				<change stat="FIRE_RESISTANCE" func="ADD" value="500" />
 				<change stat="EARTH_RESISTANCE" func="ADD" value="500" />
 			</statup>
-			<deform model="201014" type="NONE" banUseSkills="1" duration2="30000" effectid="175" e="4" basiclvl="20" element="EARTH" preeffect="1" hoptype="SKILLLV" hopb="1" />
+			<deform model="201014" type="NONE" cantUseSkills="true" duration2="30000" effectid="175" e="4" basiclvl="20" element="EARTH" preeffect="1" hoptype="SKILLLV" hopb="1" />
 		</effects>
 		<motion name="pointfire" />
 	</skill_template>
@@ -154650,7 +154650,7 @@
 				<change stat="FIRE_RESISTANCE" func="ADD" value="500" />
 				<change stat="EARTH_RESISTANCE" func="ADD" value="500" />
 			</statup>
-			<deform model="201018" type="NONE" banUseSkills="1" duration2="30000" effectid="175" e="4" basiclvl="40" element="EARTH" preeffect="1" hoptype="SKILLLV" hopb="1" />
+			<deform model="201018" type="NONE" cantUseSkills="true" duration2="30000" effectid="175" e="4" basiclvl="40" element="EARTH" preeffect="1" hoptype="SKILLLV" hopb="1" />
 		</effects>
 		<motion name="pointfire" />
 	</skill_template>
@@ -154668,7 +154668,7 @@
 				<change stat="FIRE_RESISTANCE" func="ADD" value="500" />
 				<change stat="EARTH_RESISTANCE" func="ADD" value="500" />
 			</statup>
-			<deform model="201038" type="NONE" banUseSkills="1" duration2="30000" effectid="175" e="4" basiclvl="60" element="EARTH" preeffect="1" hoptype="SKILLLV" hopb="1" />
+			<deform model="201038" type="NONE" cantUseSkills="true" duration2="30000" effectid="175" e="4" basiclvl="60" element="EARTH" preeffect="1" hoptype="SKILLLV" hopb="1" />
 		</effects>
 		<motion name="pointfire" />
 	</skill_template>
@@ -154686,7 +154686,7 @@
 				<change stat="FIRE_RESISTANCE" func="ADD" value="500" />
 				<change stat="EARTH_RESISTANCE" func="ADD" value="500" />
 			</statup>
-			<deform model="201024" type="NONE" banUseSkills="1" duration2="30000" effectid="175" e="4" element="WATER" preeffect="1" hoptype="SKILLLV" hopb="1" />
+			<deform model="201024" type="NONE" cantUseSkills="true" duration2="30000" effectid="175" e="4" element="WATER" preeffect="1" hoptype="SKILLLV" hopb="1" />
 		</effects>
 		<motion name="pointfire" />
 	</skill_template>
@@ -154704,7 +154704,7 @@
 				<change stat="FIRE_RESISTANCE" func="ADD" value="500" />
 				<change stat="EARTH_RESISTANCE" func="ADD" value="500" />
 			</statup>
-			<deform model="201026" type="NONE" banUseSkills="1" duration2="30000" effectid="175" e="4" basiclvl="20" element="WATER" preeffect="1" hoptype="SKILLLV" hopb="1" />
+			<deform model="201026" type="NONE" cantUseSkills="true" duration2="30000" effectid="175" e="4" basiclvl="20" element="WATER" preeffect="1" hoptype="SKILLLV" hopb="1" />
 		</effects>
 		<motion name="pointfire" />
 	</skill_template>
@@ -154722,7 +154722,7 @@
 				<change stat="FIRE_RESISTANCE" func="ADD" value="500" />
 				<change stat="EARTH_RESISTANCE" func="ADD" value="500" />
 			</statup>
-			<deform model="201032" type="NONE" banUseSkills="1" duration2="30000" effectid="175" e="4" basiclvl="40" element="WATER" preeffect="1" hoptype="SKILLLV" hopb="1" />
+			<deform model="201032" type="NONE" cantUseSkills="true" duration2="30000" effectid="175" e="4" basiclvl="40" element="WATER" preeffect="1" hoptype="SKILLLV" hopb="1" />
 		</effects>
 		<motion name="pointfire" />
 	</skill_template>
@@ -154740,7 +154740,7 @@
 				<change stat="FIRE_RESISTANCE" func="ADD" value="500" />
 				<change stat="EARTH_RESISTANCE" func="ADD" value="500" />
 			</statup>
-			<deform model="201060" type="NONE" banUseSkills="1" duration2="30000" effectid="175" e="4" basiclvl="60" element="WATER" preeffect="1" hoptype="SKILLLV" hopb="1" />
+			<deform model="201060" type="NONE" cantUseSkills="true" duration2="30000" effectid="175" e="4" basiclvl="60" element="WATER" preeffect="1" hoptype="SKILLLV" hopb="1" />
 		</effects>
 		<motion name="pointfire" />
 	</skill_template>
@@ -154758,7 +154758,7 @@
 				<change stat="FIRE_RESISTANCE" func="ADD" value="500" />
 				<change stat="EARTH_RESISTANCE" func="ADD" value="500" />
 			</statup>
-			<deform model="201041" type="NONE" banUseSkills="1" duration2="30000" effectid="175" e="4" element="EARTH" preeffect="1" hoptype="SKILLLV" hopb="1" />
+			<deform model="201041" type="NONE" cantUseSkills="true" duration2="30000" effectid="175" e="4" element="EARTH" preeffect="1" hoptype="SKILLLV" hopb="1" />
 		</effects>
 		<motion name="pointfire" />
 	</skill_template>
@@ -154776,7 +154776,7 @@
 				<change stat="FIRE_RESISTANCE" func="ADD" value="500" />
 				<change stat="EARTH_RESISTANCE" func="ADD" value="500" />
 			</statup>
-			<deform model="201040" type="NONE" banUseSkills="1" duration2="30000" effectid="175" e="4" element="EARTH" preeffect="1" hoptype="SKILLLV" hopb="1" />
+			<deform model="201040" type="NONE" cantUseSkills="true" duration2="30000" effectid="175" e="4" element="EARTH" preeffect="1" hoptype="SKILLLV" hopb="1" />
 		</effects>
 		<motion name="pointfire" />
 	</skill_template>
@@ -154975,7 +154975,7 @@
 		</useconditions>
 		<effects>
 			<fear resistchance="75" duration2="3000" effectid="20103" e="1" noresist="true" element="WIND" hoptype="SKILLLV" hopb="60" hopa="60" />
-			<deform model="211094" banUseSkills="1" duration2="3000" effectid="175" e="2" noresist="true" element="WIND" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<deform model="211094" cantUseSkills="true" duration2="3000" effectid="175" e="2" noresist="true" element="WIND" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<statdown duration2="4000" effectid="10171622" e="3" noresist="true" element="WIND" preeffect="2" hoptype="SKILLLV" hopb="60" hopa="60">
 				<change stat="MAXHP" func="PERCENT" value="-50" />
 			</statdown>
@@ -156042,7 +156042,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<deform model="280711" banUseSkills="1" duration2="3000" effectid="175" e="1" noresist="true" element="WATER" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<deform model="280711" cantUseSkills="true" duration2="3000" effectid="175" e="1" noresist="true" element="WATER" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<stun duration2="3000" effectid="20000" e="2" noresist="true" element="WATER" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
 		</effects>
 		<motion name="normalfire" />
@@ -157189,7 +157189,7 @@
 		</useconditions>
 		<effects>
 			<fear duration2="15000" effectid="20103" e="1" noresist="true" element="EARTH" hoptype="SKILLLV" hopb="60" hopa="60" />
-			<deform model="211960" banUseSkills="1" duration2="15000" effectid="175" e="2" noresist="true" element="EARTH" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<deform model="211960" cantUseSkills="true" duration2="15000" effectid="175" e="2" noresist="true" element="EARTH" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<snare duration2="15000" effectid="20007" e="3" noresist="true" element="FIRE" preeffect="2" hoptype="SKILLLV" hopb="60" hopa="60">
 				<change stat="SPEED" func="PERCENT" value="-80" />
 				<change stat="FLY_SPEED" func="PERCENT" value="-80" />
@@ -157489,7 +157489,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<deform model="210273" banUseSkills="1" duration2="5000" effectid="175" e="1" element="WATER" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<deform model="210273" cantUseSkills="true" duration2="5000" effectid="175" e="1" element="WATER" hoptype="SKILLLV" hopb="60" hopa="60" />
 		</effects>
 		<motion name="normalfire" />
 	</skill_template>
@@ -159685,7 +159685,7 @@
 		</useconditions>
 		<effects>
 			<fear resistchance="75" duration2="5000" effectid="20103" e="1" element="EARTH" hoptype="SKILLLV" hopb="60" hopa="60" />
-			<deform model="210420" banUseSkills="1" duration2="5000" effectid="175" e="2" noresist="true" element="EARTH" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<deform model="210420" cantUseSkills="true" duration2="5000" effectid="175" e="2" noresist="true" element="EARTH" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<snare duration2="5000" effectid="20007" e="3" noresist="true" element="FIRE" preeffect="2" hoptype="SKILLLV" hopb="60" hopa="60">
 				<change stat="SPEED" func="PERCENT" value="-30" />
 				<change stat="FLY_SPEED" func="PERCENT" value="-30" />
@@ -159703,7 +159703,7 @@
 		</useconditions>
 		<effects>
 			<fear resistchance="75" duration2="5000" effectid="20103" e="1" element="EARTH" hoptype="SKILLLV" hopb="60" hopa="60" />
-			<deform model="210420" banUseSkills="1" duration2="5000" effectid="175" e="2" noresist="true" element="EARTH" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<deform model="210420" cantUseSkills="true" duration2="5000" effectid="175" e="2" noresist="true" element="EARTH" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<statdown duration2="5000" effectid="10181623" e="3" noresist="true" element="EARTH" preeffect="2" hoptype="SKILLLV" hopb="60" hopa="60">
 				<change stat="MAXHP" func="PERCENT" value="-50" />
 			</statdown>
@@ -160992,7 +160992,7 @@
 		</useconditions>
 		<effects>
 			<provoker skill_id="8691" provoke_target="OPPONENT" duration2="25000" effectid="10193161" e="1" noresist="true" hittype="NMLATK" element="FIRE" hoptype="SKILLLV" hopb="60" hopa="60" />
-			<deform model="210805" banUseSkills="1" duration2="25000" effectid="175" e="2" noresist="true" element="FIRE" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<deform model="210805" cantUseSkills="true" duration2="25000" effectid="175" e="2" noresist="true" element="FIRE" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<statup duration2="25000" effectid="10193163" e="3" noresist="true" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60">
 				<change stat="SPEED" func="PERCENT" value="100" />
 			</statup>
@@ -161009,7 +161009,7 @@
 		</useconditions>
 		<effects>
 			<provoker skill_id="8692" provoke_target="OPPONENT" duration2="25000" effectid="10193171" e="1" noresist="true" hittype="NMLATK" element="WATER" hoptype="SKILLLV" hopb="60" hopa="60" />
-			<deform model="210827" banUseSkills="1" duration2="25000" effectid="175" e="2" noresist="true" element="WATER" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<deform model="210827" cantUseSkills="true" duration2="25000" effectid="175" e="2" noresist="true" element="WATER" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<statup duration2="25000" effectid="10193173" e="3" noresist="true" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60">
 				<change stat="SPEED" func="PERCENT" value="100" />
 			</statup>
@@ -161026,7 +161026,7 @@
 		</useconditions>
 		<effects>
 			<provoker skill_id="8693" provoke_target="OPPONENT" duration2="25000" effectid="10193181" e="1" noresist="true" hittype="NMLATK" element="WIND" hoptype="SKILLLV" hopb="60" hopa="60" />
-			<deform model="210881" banUseSkills="1" duration2="25000" effectid="175" e="2" noresist="true" element="WIND" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<deform model="210881" cantUseSkills="true" duration2="25000" effectid="175" e="2" noresist="true" element="WIND" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<statup duration2="25000" effectid="10193183" e="3" noresist="true" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60">
 				<change stat="SPEED" func="PERCENT" value="100" />
 			</statup>
@@ -161043,7 +161043,7 @@
 		</useconditions>
 		<effects>
 			<provoker skill_id="8694" provoke_target="OPPONENT" duration2="25000" effectid="10193191" e="1" noresist="true" hittype="NMLATK" element="EARTH" hoptype="SKILLLV" hopb="60" hopa="60" />
-			<deform model="210913" banUseSkills="1" duration2="25000" effectid="175" e="2" noresist="true" element="EARTH" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<deform model="210913" cantUseSkills="true" duration2="25000" effectid="175" e="2" noresist="true" element="EARTH" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<statup duration2="25000" effectid="10193193" e="3" noresist="true" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60">
 				<change stat="SPEED" func="PERCENT" value="100" />
 			</statup>
@@ -161477,7 +161477,7 @@
 			<weapon weapon="GREATSWORD SPELLBOOK BOW DAGGER MACE ORB POLEARM STAFF SWORD GUN CANNON HARP KEYBLADE" />
 		</startconditions>
 		<effects>
-			<shapechange model="218610" type="FORM1" panelid="6" res5="1" res6="1" duration2="86400000" effectid="175" e="1" noresist="true" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<shapechange model="218610" type="FORM1" panelid="6" cantUseItems="true" cantFly="true" duration2="86400000" effectid="175" e="1" noresist="true" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<statup duration2="86400000" effectid="10193502" e="2" noresist="true" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60">
 				<change stat="MAXHP" func="ADD" value="80000" />
 			</statup>
@@ -161663,7 +161663,7 @@
 			<weapon weapon="GREATSWORD SPELLBOOK BOW DAGGER MACE ORB POLEARM STAFF SWORD GUN CANNON HARP KEYBLADE" />
 		</startconditions>
 		<effects>
-			<deform model="282429" banUseSkills="1" duration2="15000" effectid="175" e="1" noresist="true" element="EARTH" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<deform model="282429" cantUseSkills="true" duration2="15000" effectid="175" e="1" noresist="true" element="EARTH" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<fear duration2="15000" effectid="20103" e="2" noresist="true" element="EARTH" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<snare duration2="15000" effectid="20007" e="3" noresist="true" element="EARTH" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60">
 				<change stat="SPEED" func="PERCENT" value="-50" />
@@ -161856,7 +161856,7 @@
 			<weapon weapon="GREATSWORD SPELLBOOK BOW DAGGER MACE ORB POLEARM STAFF SWORD GUN CANNON HARP KEYBLADE" />
 		</startconditions>
 		<effects>
-			<polymorph model="218612" type="FORM1" panelid="7" res5="1" res6="1" duration2="86400000" effectid="175" e="1" noresist="true" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<polymorph model="218612" type="FORM1" panelid="7" cantUseItems="true" cantFly="true" duration2="86400000" effectid="175" e="1" noresist="true" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<statup duration2="86400000" effectid="10193762" e="2" noresist="true" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60">
 				<change stat="MAXHP" func="ADD" value="200000" />
 			</statup>
@@ -161998,7 +161998,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<deform model="214803" banUseSkills="1" duration2="15000" effectid="175" e="1" noresist="true" element="DARK" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<deform model="214803" cantUseSkills="true" duration2="15000" effectid="175" e="1" noresist="true" element="DARK" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<paralyze duration2="15000" effectid="20002" e="2" noresist="true" element="DARK" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
 		</effects>
 		<motion name="normalfire" />
@@ -162118,7 +162118,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<deform model="217265" banUseSkills="1" duration2="25000" effectid="175" e="1" noresist="true" element="DARK" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<deform model="217265" cantUseSkills="true" duration2="25000" effectid="175" e="1" noresist="true" element="DARK" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<statup duration2="25000" effectid="10193932" e="2" noresist="true" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60">
 				<change stat="SPEED" func="PERCENT" value="200" />
 			</statup>
@@ -162948,7 +162948,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<deform model="217249" banUseSkills="1" duration2="10000" effectid="175" e="1" noresist="true" element="DARK" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<deform model="217249" cantUseSkills="true" duration2="10000" effectid="175" e="1" noresist="true" element="DARK" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<confuse duration2="10000" effectid="20104" e="2" noresist="true" element="DARK" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<snare duration2="10000" effectid="20007" e="3" noresist="true" element="DARK" preeffect="2" hoptype="SKILLLV" hopb="60" hopa="60">
 				<change stat="SPEED" func="PERCENT" value="-60" />
@@ -163612,7 +163612,7 @@
 	<skill_template skill_id="19502" name="Board the Steam Tachysphere." nameId="297374" cooldownId="10" stack="STATION_PC_POLYMORPH" lvl="1" skilltype="MAGICAL" skillsubtype="BUFF" tslot="BUFF" dispel_category="NPC_BUFF" req_dispel_level="1" req_dispel_count="10" activation="ACTIVE" cooldown="0" duration="0" hostile_type="DIRECT">
 		<properties first_target="TARGET" first_target_range="10" target_relation="FRIEND" target_type="ONLYONE" target_maxcount="1" />
 		<effects>
-			<shapechange model="217384" type="FORM1" panelid="4" res3="1" res5="1" res6="1" duration2="3000000" effectid="1019502" e="1" basiclvl="255" noresist="true" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<shapechange model="217384" type="FORM1" panelid="4" cantAttack="true" cantUseItems="true" cantFly="true" duration2="3000000" effectid="1019502" e="1" basiclvl="255" noresist="true" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<statup duration2="3000000" effectid="39143" e="2" noresist="true" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60">
 				<change stat="MAXHP" func="ADD" value="375000" />
 				<change stat="PHYSICAL_DEFENSE" func="ADD" value="2000" />
@@ -165182,7 +165182,7 @@
 	<skill_template skill_id="19621" name="Curse of Water II" nameId="297653" cooldownId="1782" stack="NPC_WATERFEAR" lvl="2" skilltype="MAGICAL" skill_category="MENTAL_DEBUFF" skillsubtype="DEBUFF" tslot="DEBUFF" dispel_category="DEBUFF_MENTAL" req_dispel_level="1" req_dispel_count="30" activation="ACTIVE" cooldown="0" duration="0" cancel_rate="20" hostile_type="DIRECT">
 		<properties first_target="TARGET" first_target_range="37" target_relation="ENEMY" target_type="ONLYONE" target_maxcount="1" />
 		<effects>
-			<deform model="749166" type="NONE" banUseSkills="1" duration2="6000" randomtime="2000" effectid="175" e="1" element="FIRE" hoptype="SKILLLV" />
+			<deform model="749166" type="NONE" cantUseSkills="true" duration2="6000" randomtime="2000" effectid="175" e="1" element="FIRE" hoptype="SKILLLV" />
 			<fear duration2="8000" effectid="20103" e="2" noresist="true" element="FIRE" preeffect="1" />
 			<snare duration2="8000" effectid="20007" e="3" basiclvl="200" noresist="true" element="FIRE" preeffect="1">
 				<change stat="SPEED" func="PERCENT" value="-30" />
@@ -168422,7 +168422,7 @@
 		</useconditions>
 		<effects>
 			<confuse duration2="5000" effectid="20104" e="1" element="DARK" hoptype="SKILLLV" hopb="60" hopa="60" />
-			<deform model="282517" banUseSkills="1" res5="1" res6="1" duration2="5000" effectid="175" e="2" noresist="true" element="DARK" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<deform model="282517" cantUseSkills="true" cantUseItems="true" cantFly="true" duration2="5000" effectid="175" e="2" noresist="true" element="DARK" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
 		</effects>
 		<motion name="normalfire" />
 	</skill_template>
@@ -170339,7 +170339,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="218610" type="FORM1" panelid="6" res3="1" res5="1" res6="1" duration2="900000" effectid="175" e="1" noresist="true" />
+			<shapechange model="218610" type="FORM1" panelid="6" cantAttack="true" cantUseItems="true" cantFly="true" duration2="900000" effectid="175" e="1" noresist="true" />
 			<statup duration2="900000" effectid="10200212" e="2" noresist="true" preeffect="1">
 				<change stat="MAXHP" func="ADD" value="100000" />
 				<change stat="PHYSICAL_DEFENSE" func="ADD" value="5000" />
@@ -170423,7 +170423,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="218611" type="FORM1" panelid="7" res3="1" res5="1" res6="1" duration2="900000" effectid="175" e="1" noresist="true" />
+			<shapechange model="218611" type="FORM1" panelid="7" cantAttack="true" cantUseItems="true" cantFly="true" duration2="900000" effectid="175" e="1" noresist="true" />
 			<statup duration2="900000" effectid="10200272" e="2" noresist="true" preeffect="1">
 				<change stat="MAXHP" func="ADD" value="30000" />
 				<change stat="SPEED" func="PERCENT" value="30" />
@@ -170481,7 +170481,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="218612" type="FORM1" panelid="8" res3="1" res5="1" res6="1" duration2="900000" effectid="175" e="1" noresist="true" />
+			<shapechange model="218612" type="FORM1" panelid="8" cantAttack="true" cantUseItems="true" cantFly="true" duration2="900000" effectid="175" e="1" noresist="true" />
 			<statup duration2="900000" effectid="10200312" e="2" noresist="true" preeffect="1">
 				<change stat="MAXHP" func="ADD" value="20000" />
 				<change stat="PHYSICAL_ATTACK" func="PERCENT" value="100" />
@@ -170576,7 +170576,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="218611" type="FORM1" panelid="7" res3="1" res5="1" res6="1" duration2="900000" effectid="175" e="1" noresist="true" />
+			<shapechange model="218611" type="FORM1" panelid="7" cantAttack="true" cantUseItems="true" cantFly="true" duration2="900000" effectid="175" e="1" noresist="true" />
 			<statup duration2="900000" effectid="10200372" e="2" noresist="true" preeffect="1">
 				<change stat="MAXHP" func="ADD" value="30000" />
 				<change stat="SPEED" func="PERCENT" value="30" />
@@ -170723,7 +170723,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="218803" type="FORM1" panelid="9" banMovement="1" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="30000" effectid="175" e="1" noresist="true" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<shapechange model="218803" type="FORM1" panelid="9" cantMove="true" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="30000" effectid="175" e="1" noresist="true" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<statup duration2="15000" effectid="10200482" e="2" noresist="true" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60">
 				<change stat="ABNORMAL_RESISTANCE_ALL" func="ADD" value="10000" />
 				<change stat="MAGICAL_RESIST" func="ADD" value="10000" />
@@ -170741,7 +170741,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="218804" type="FORM1" panelid="10" banMovement="1" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="30000" effectid="175" e="1" noresist="true" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<shapechange model="218804" type="FORM1" panelid="10" cantMove="true" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="30000" effectid="175" e="1" noresist="true" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<statup duration2="15000" effectid="10200482" e="2" noresist="true" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60">
 				<change stat="ABNORMAL_RESISTANCE_ALL" func="ADD" value="10000" />
 				<change stat="MAGICAL_RESIST" func="ADD" value="10000" />
@@ -170759,7 +170759,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="218805" type="FORM1" panelid="11" banMovement="1" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="30000" effectid="175" e="1" noresist="true" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<shapechange model="218805" type="FORM1" panelid="11" cantMove="true" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="30000" effectid="175" e="1" noresist="true" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<statup duration2="15000" effectid="10200482" e="2" noresist="true" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60">
 				<change stat="ABNORMAL_RESISTANCE_ALL" func="ADD" value="10000" />
 				<change stat="MAGICAL_RESIST" func="ADD" value="10000" />
@@ -174792,7 +174792,7 @@
 				<change stat="FIRE_RESISTANCE" func="ADD" value="500" />
 				<change stat="EARTH_RESISTANCE" func="ADD" value="500" />
 			</statup>
-			<deform model="201034" type="NONE" banUseSkills="1" duration2="30000" effectid="175" e="4" basiclvl="60" element="FIRE" preeffect="1" hoptype="SKILLLV" hopb="1" />
+			<deform model="201034" type="NONE" cantUseSkills="true" duration2="30000" effectid="175" e="4" basiclvl="60" element="FIRE" preeffect="1" hoptype="SKILLLV" hopb="1" />
 		</effects>
 		<motion name="pointfire" />
 	</skill_template>
@@ -174810,7 +174810,7 @@
 				<change stat="FIRE_RESISTANCE" func="ADD" value="500" />
 				<change stat="EARTH_RESISTANCE" func="ADD" value="500" />
 			</statup>
-			<deform model="201036" type="NONE" banUseSkills="1" duration2="30000" effectid="175" e="4" basiclvl="60" element="WIND" preeffect="1" hoptype="SKILLLV" hopb="1" />
+			<deform model="201036" type="NONE" cantUseSkills="true" duration2="30000" effectid="175" e="4" basiclvl="60" element="WIND" preeffect="1" hoptype="SKILLLV" hopb="1" />
 		</effects>
 		<motion name="pointfire" />
 	</skill_template>
@@ -174828,7 +174828,7 @@
 				<change stat="FIRE_RESISTANCE" func="ADD" value="500" />
 				<change stat="EARTH_RESISTANCE" func="ADD" value="500" />
 			</statup>
-			<deform model="201041" type="NONE" banUseSkills="1" duration2="30000" effectid="175" e="4" element="EARTH" preeffect="1" hoptype="SKILLLV" hopb="1" />
+			<deform model="201041" type="NONE" cantUseSkills="true" duration2="30000" effectid="175" e="4" element="EARTH" preeffect="1" hoptype="SKILLLV" hopb="1" />
 		</effects>
 		<motion name="pointfire" />
 	</skill_template>
@@ -174846,7 +174846,7 @@
 				<change stat="FIRE_RESISTANCE" func="ADD" value="500" />
 				<change stat="EARTH_RESISTANCE" func="ADD" value="500" />
 			</statup>
-			<deform model="201040" type="NONE" banUseSkills="1" duration2="30000" effectid="175" e="4" element="EARTH" preeffect="1" hoptype="SKILLLV" hopb="1" />
+			<deform model="201040" type="NONE" cantUseSkills="true" duration2="30000" effectid="175" e="4" element="EARTH" preeffect="1" hoptype="SKILLLV" hopb="1" />
 		</effects>
 		<motion name="pointfire" />
 	</skill_template>
@@ -175124,7 +175124,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="297038" type="FORM1" panelid="16" banMovement="1" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="3600000" effectid="10210001" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
+			<polymorph model="297038" type="FORM1" panelid="16" cantMove="true" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="3600000" effectid="10210001" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
 			<statup duration2="3600000" e="2" noresist="true" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60">
 				<change stat="MAXHP" func="ADD" value="200000" />
 				<change stat="ABNORMAL_RESISTANCE_ALL" func="ADD" value="10000" />
@@ -175138,7 +175138,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="297039" type="FORM1" panelid="16" banMovement="1" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="3600000" effectid="10210001" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
+			<polymorph model="297039" type="FORM1" panelid="16" cantMove="true" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="3600000" effectid="10210001" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
 			<statup duration2="3600000" e="2" noresist="true" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60">
 				<change stat="MAXHP" func="ADD" value="200000" />
 				<change stat="ABNORMAL_RESISTANCE_ALL" func="ADD" value="10000" />
@@ -175730,7 +175730,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="282912" banUseSkills="1" res3="1" res6="1" duration2="300000" effectid="175" e="1" noresist="true" />
+			<polymorph model="282912" cantUseSkills="true" cantAttack="true" cantFly="true" duration2="300000" effectid="175" e="1" noresist="true" />
 		</effects>
 		<motion name="normalfire" />
 	</skill_template>
@@ -176040,7 +176040,7 @@
 	<skill_template skill_id="20435" name="Frightcorn's Curse" nameId="299768" cooldownId="2" stack="LDF4B_D2_POLYMORPH_CORN" lvl="1" skilltype="MAGICAL" skillsubtype="DEBUFF" tslot="DEBUFF" dispel_category="DEBUFF_PHYSICAL" req_dispel_level="1" req_dispel_count="10" activation="ACTIVE" cooldown="0" duration="0" hostile_type="DIRECT">
 		<properties first_target="TARGET" first_target_range="30" target_relation="ENEMY" target_type="ONLYONE" target_maxcount="1" />
 		<effects>
-			<deform model="218368" banUseSkills="1" res3="1" res6="1" duration2="60000" effectid="175" e="1" noresist="true" />
+			<deform model="218368" cantUseSkills="true" cantAttack="true" cantFly="true" duration2="60000" effectid="175" e="1" noresist="true" />
 			<heal percent="true" checktime="3000" value="10" duration2="60000" effectid="10204352" e="2" preeffect="1" />
 			<mpheal percent="true" checktime="3000" value="10" duration2="60000" effectid="10204353" e="3" noresist="true" element="WATER" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
 		</effects>
@@ -176049,7 +176049,7 @@
 	<skill_template skill_id="20436" name="Starturtle's Curse" nameId="299769" cooldownId="2" stack="LDF4B_D2_POLYMORPH_STARTURTLE" lvl="1" skilltype="MAGICAL" skillsubtype="DEBUFF" tslot="DEBUFF" dispel_category="DEBUFF_PHYSICAL" req_dispel_level="1" req_dispel_count="10" activation="ACTIVE" cooldown="0" duration="0" hostile_type="DIRECT">
 		<properties first_target="TARGET" first_target_range="30" target_relation="ENEMY" target_type="ONLYONE" target_maxcount="1" />
 		<effects>
-			<deform model="218370" banUseSkills="1" res3="1" res6="1" duration2="60000" effectid="175" e="1" noresist="true" />
+			<deform model="218370" cantUseSkills="true" cantAttack="true" cantFly="true" duration2="60000" effectid="175" e="1" noresist="true" />
 			<heal percent="true" checktime="3000" value="10" duration2="60000" effectid="10204362" e="2" preeffect="1" />
 			<mpheal percent="true" checktime="3000" value="10" duration2="60000" effectid="10204363" e="3" noresist="true" element="WATER" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
 		</effects>
@@ -176058,7 +176058,7 @@
 	<skill_template skill_id="20437" name="Gastron's Curse" nameId="299770" cooldownId="2" stack="LDF4B_D2_POLYMORPH_STARFISH" lvl="1" skilltype="MAGICAL" skillsubtype="DEBUFF" tslot="DEBUFF" dispel_category="DEBUFF_PHYSICAL" req_dispel_level="1" req_dispel_count="10" activation="ACTIVE" cooldown="0" duration="0" hostile_type="DIRECT">
 		<properties first_target="TARGET" first_target_range="30" target_relation="ENEMY" target_type="ONLYONE" target_maxcount="1" />
 		<effects>
-			<deform model="218377" banUseSkills="1" res3="1" res6="1" duration2="60000" effectid="175" e="1" noresist="true" />
+			<deform model="218377" cantUseSkills="true" cantAttack="true" cantFly="true" duration2="60000" effectid="175" e="1" noresist="true" />
 			<heal percent="true" checktime="3000" value="10" duration2="60000" effectid="10204372" e="2" preeffect="1" />
 			<mpheal percent="true" checktime="3000" value="10" duration2="60000" effectid="10204373" e="3" noresist="true" element="WATER" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
 		</effects>
@@ -177040,7 +177040,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<deform model="255705" banUseSkills="1" duration2="30000" effectid="175" e="1" noresist="true" element="EARTH" />
+			<deform model="255705" cantUseSkills="true" duration2="30000" effectid="175" e="1" noresist="true" element="EARTH" />
 			<statup duration2="30000" effectid="10205132" e="2" noresist="true" preeffect="1">
 				<change stat="ATTACK_SPEED" func="PERCENT" value="-150" />
 				<change stat="SPEED" func="PERCENT" value="100" />
@@ -177536,7 +177536,7 @@
 			<weapon weapon="GREATSWORD SPELLBOOK BOW DAGGER MACE ORB POLEARM STAFF SWORD GUN CANNON HARP KEYBLADE" />
 		</startconditions>
 		<effects>
-			<deform model="210340" type="NONE" banUseSkills="1" res3="1" res5="1" res6="1" duration2="4000" duration1="80" effectid="175" e="1" noresist="true" element="EARTH" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<deform model="210340" type="NONE" cantUseSkills="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="4000" duration1="80" effectid="175" e="1" noresist="true" element="EARTH" hoptype="SKILLLV" hopb="60" hopa="60" />
 		</effects>
 		<motion name="normalfire" instant_skill="true" />
 	</skill_template>
@@ -178994,7 +178994,7 @@
 				<change stat="SPEED" func="PERCENT" value="-90" />
 				<change stat="FLY_SPEED" func="PERCENT" value="-90" />
 			</snare>
-			<deform model="201051" banUseSkills="1" duration2="3000" duration1="20" effectid="175" e="3" noresist="true" element="EARTH" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<deform model="201051" cantUseSkills="true" duration2="3000" duration1="20" effectid="175" e="3" noresist="true" element="EARTH" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
 		</effects>
 		<motion name="debuff" />
 	</skill_template>
@@ -181176,7 +181176,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="218803" type="FORM1" panelid="9" res3="1" res5="1" res6="1" duration2="60000" effectid="175" e="1" noresist="true" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<shapechange model="218803" type="FORM1" panelid="9" cantAttack="true" cantUseItems="true" cantFly="true" duration2="60000" effectid="175" e="1" noresist="true" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<absstatbuff statsetid="22" duration2="60000" effectid="10188461" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 		<motion name="poweratk" />
@@ -181190,7 +181190,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<deform model="218377" banUseSkills="1" res3="1" res6="1" duration2="60000" effectid="175" e="1" noresist="true" />
+			<deform model="218377" cantUseSkills="true" cantAttack="true" cantFly="true" duration2="60000" effectid="175" e="1" noresist="true" />
 			<absstatdebuff statsetid="23" duration2="60000" effectid="10188461" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 		<motion name="poweratk" />
@@ -181204,7 +181204,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="218805" type="FORM1" panelid="11" res3="1" res5="1" res6="1" duration2="60000" effectid="175" e="1" noresist="true" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<shapechange model="218805" type="FORM1" panelid="11" cantAttack="true" cantUseItems="true" cantFly="true" duration2="60000" effectid="175" e="1" noresist="true" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<absstatbuff statsetid="24" duration2="60000" effectid="10188461" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 		<motion name="poweratk" />
@@ -181267,7 +181267,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="218611" type="FORM1" panelid="7" res3="1" res5="1" res6="1" duration2="18000" effectid="175" e="1" noresist="true" />
+			<polymorph model="218611" type="FORM1" panelid="7" cantAttack="true" cantUseItems="true" cantFly="true" duration2="18000" effectid="175" e="1" noresist="true" />
 			<statup duration2="900000" effectid="10200272" e="2" noresist="true" preeffect="1">
 				<change stat="MAXHP" func="ADD" value="30000" />
 				<change stat="SPEED" func="PERCENT" value="30" />
@@ -181281,7 +181281,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="218611" type="FORM1" panelid="7" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="18000" effectid="175" e="1" noresist="true" />
+			<polymorph model="218611" type="FORM1" panelid="7" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="18000" effectid="175" e="1" noresist="true" />
 			<statup duration2="900000" effectid="10200272" e="2" noresist="true" preeffect="1">
 				<change stat="MAXHP" func="ADD" value="30000" />
 				<change stat="SPEED" func="PERCENT" value="30" />
@@ -181295,7 +181295,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="218611" type="FORM1" panelid="7" res3="1" res5="1" res6="1" duration2="18000" effectid="175" e="1" noresist="true" />
+			<shapechange model="218611" type="FORM1" panelid="7" cantAttack="true" cantUseItems="true" cantFly="true" duration2="18000" effectid="175" e="1" noresist="true" />
 			<statup duration2="900000" effectid="10200272" e="2" noresist="true" preeffect="1">
 				<change stat="MAXHP" func="ADD" value="30000" />
 				<change stat="SPEED" func="PERCENT" value="30" />
@@ -181309,7 +181309,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="218611" type="FORM1" panelid="7" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="18000" effectid="175" e="1" noresist="true" />
+			<shapechange model="218611" type="FORM1" panelid="7" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="18000" effectid="175" e="1" noresist="true" />
 			<statup duration2="900000" effectid="10200272" e="2" noresist="true" preeffect="1">
 				<change stat="MAXHP" func="ADD" value="30000" />
 				<change stat="SPEED" func="PERCENT" value="30" />
@@ -181323,7 +181323,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<deform model="218611" type="FORM1" panelid="7" res3="1" res5="1" res6="1" duration2="18000" effectid="175" e="1" noresist="true" />
+			<deform model="218611" type="FORM1" panelid="7" cantAttack="true" cantUseItems="true" cantFly="true" duration2="18000" effectid="175" e="1" noresist="true" />
 			<statup duration2="900000" effectid="10200272" e="2" noresist="true" preeffect="1">
 				<change stat="MAXHP" func="ADD" value="30000" />
 				<change stat="SPEED" func="PERCENT" value="30" />
@@ -181337,7 +181337,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<deform model="218611" type="FORM1" panelid="7" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="18000" effectid="175" e="1" noresist="true" />
+			<deform model="218611" type="FORM1" panelid="7" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="18000" effectid="175" e="1" noresist="true" />
 			<statup duration2="900000" effectid="10200272" e="2" noresist="true" preeffect="1">
 				<change stat="MAXHP" func="ADD" value="30000" />
 				<change stat="SPEED" func="PERCENT" value="30" />
@@ -181351,7 +181351,7 @@
 			<target value="PC" />
 		</startconditions>
 		<effects>
-			<shapechange model="283111" type="FORM1" panelid="17" res3="1" res5="1" res6="1" duration2="30000" effectid="175" e="1" noresist="true" element="DARK" />
+			<shapechange model="283111" type="FORM1" panelid="17" cantAttack="true" cantUseItems="true" cantFly="true" duration2="30000" effectid="175" e="1" noresist="true" element="DARK" />
 			<statup duration2="30000" effectid="10208712" e="2" noresist="true" preeffect="1">
 				<change stat="SPEED" func="PERCENT" value="40" />
 				<change stat="MAXHP" func="ADD" value="10000" />
@@ -182443,7 +182443,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<deform model="207006" banUseSkills="1" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="5000" duration1="60" effectid="175" e="1" accmod2="300" element="WIND" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<deform model="207006" cantUseSkills="true" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="5000" duration1="60" effectid="175" e="1" accmod2="300" element="WIND" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<fear duration2="5000" duration1="60" effectid="20104" e="2" element="WIND" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<snare duration2="5000" duration1="60" effectid="20007" e="3" element="WIND" preeffect="2" hoptype="SKILLLV" hopb="60" hopa="60">
 				<change stat="SPEED" func="PERCENT" value="-70" />
@@ -182471,7 +182471,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<deform model="283800" banUseSkills="1" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="5000" duration1="60" effectid="175" e="1" accmod2="300" element="EARTH" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<deform model="283800" cantUseSkills="true" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="5000" duration1="60" effectid="175" e="1" accmod2="300" element="EARTH" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<fear duration2="5000" duration1="60" effectid="20104" e="2" element="EARTH" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<snare duration2="5000" duration1="60" effectid="20007" e="3" element="EARTH" preeffect="2" hoptype="SKILLLV" hopb="60" hopa="60">
 				<change stat="SPEED" func="PERCENT" value="-70" />
@@ -183501,7 +183501,7 @@
 				<change stat="FIRE_RESISTANCE" func="ADD" value="500" />
 				<change stat="EARTH_RESISTANCE" func="ADD" value="500" />
 			</statup>
-			<deform model="201038" type="NONE" banUseSkills="1" duration2="30000" effectid="175" e="4" basiclvl="60" element="EARTH" preeffect="1" hoptype="SKILLLV" hopb="1" />
+			<deform model="201038" type="NONE" cantUseSkills="true" duration2="30000" effectid="175" e="4" basiclvl="60" element="EARTH" preeffect="1" hoptype="SKILLLV" hopb="1" />
 		</effects>
 		<motion name="pointfire" />
 	</skill_template>
@@ -183788,7 +183788,7 @@
 				<change stat="FIRE_RESISTANCE" func="ADD" value="500" />
 				<change stat="EARTH_RESISTANCE" func="ADD" value="500" />
 			</statup>
-			<deform model="201060" type="NONE" banUseSkills="1" duration2="30000" effectid="175" e="4" basiclvl="60" element="WATER" preeffect="1" hoptype="SKILLLV" hopb="1" />
+			<deform model="201060" type="NONE" cantUseSkills="true" duration2="30000" effectid="175" e="4" basiclvl="60" element="WATER" preeffect="1" hoptype="SKILLLV" hopb="1" />
 		</effects>
 		<motion name="pointfire" />
 	</skill_template>
@@ -184021,7 +184021,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="701629" type="FORM1" panelid="18" banMovement="1" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="3600000" effectid="10210001" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
+			<polymorph model="701629" type="FORM1" panelid="18" cantMove="true" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="3600000" effectid="10210001" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
 			<absstatbuff statsetid="30" duration2="3600000" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 		<motion name="normalfire" />
@@ -184032,7 +184032,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="701636" type="FORM1" panelid="18" banMovement="1" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="3600000" effectid="10210001" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
+			<polymorph model="701636" type="FORM1" panelid="18" cantMove="true" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="3600000" effectid="10210001" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
 			<absstatbuff statsetid="30" duration2="3600000" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 		<motion name="normalfire" />
@@ -184091,7 +184091,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="701628" type="FORM1" panelid="19" banMovement="1" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="3600000" effectid="10210001" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
+			<polymorph model="701628" type="FORM1" panelid="19" cantMove="true" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="3600000" effectid="10210001" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
 			<absstatbuff statsetid="30" duration2="3600000" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 		<motion name="normalfire" />
@@ -184102,7 +184102,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="701635" type="FORM1" panelid="19" banMovement="1" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="3600000" effectid="10210001" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
+			<polymorph model="701635" type="FORM1" panelid="19" cantMove="true" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="3600000" effectid="10210001" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
 			<absstatbuff statsetid="30" duration2="3600000" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 		<motion name="normalfire" />
@@ -184161,7 +184161,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="701630" type="FORM1" panelid="20" banMovement="1" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="3600000" effectid="10210001" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
+			<polymorph model="701630" type="FORM1" panelid="20" cantMove="true" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="3600000" effectid="10210001" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
 			<absstatbuff statsetid="30" duration2="3600000" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 		<motion name="normalfire" />
@@ -184172,7 +184172,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="701637" type="FORM1" panelid="20" banMovement="1" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="3600000" effectid="10210001" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
+			<polymorph model="701637" type="FORM1" panelid="20" cantMove="true" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="3600000" effectid="10210001" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
 			<absstatbuff statsetid="30" duration2="3600000" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 		<motion name="normalfire" />
@@ -184231,7 +184231,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="701631" type="FORM1" panelid="21" banMovement="1" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="3600000" effectid="10210001" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
+			<polymorph model="701631" type="FORM1" panelid="21" cantMove="true" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="3600000" effectid="10210001" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
 			<absstatbuff statsetid="30" duration2="3600000" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 		<motion name="normalfire" />
@@ -184242,7 +184242,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="701638" type="FORM1" panelid="21" banMovement="1" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="3600000" effectid="10210001" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
+			<polymorph model="701638" type="FORM1" panelid="21" cantMove="true" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="3600000" effectid="10210001" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
 			<absstatbuff statsetid="30" duration2="3600000" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 		<motion name="normalfire" />
@@ -184303,7 +184303,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="701632" type="FORM1" panelid="22" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="3600000" effectid="10210001" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
+			<polymorph model="701632" type="FORM1" panelid="22" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="3600000" effectid="10210001" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
 			<absstatbuff statsetid="30" duration2="3600000" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 		<motion name="normalfire" />
@@ -184314,7 +184314,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="701639" type="FORM1" panelid="22" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="3600000" effectid="10210001" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
+			<polymorph model="701639" type="FORM1" panelid="22" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="3600000" effectid="10210001" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
 			<absstatbuff statsetid="30" duration2="3600000" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 		<motion name="normalfire" />
@@ -184373,7 +184373,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="701633" type="FORM1" panelid="23" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="3600000" effectid="10210001" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
+			<polymorph model="701633" type="FORM1" panelid="23" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="3600000" effectid="10210001" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
 			<absstatbuff statsetid="30" duration2="3600000" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 		<motion name="normalfire" />
@@ -184384,7 +184384,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="701640" type="FORM1" panelid="23" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="3600000" effectid="10210001" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
+			<polymorph model="701640" type="FORM1" panelid="23" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="3600000" effectid="10210001" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
 			<absstatbuff statsetid="30" duration2="3600000" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 		<motion name="normalfire" />
@@ -184443,7 +184443,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="701634" type="FORM1" panelid="24" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="3600000" effectid="10210001" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
+			<polymorph model="701634" type="FORM1" panelid="24" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="3600000" effectid="10210001" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
 			<absstatbuff statsetid="30" duration2="3600000" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 		<motion name="normalfire" />
@@ -184454,7 +184454,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="701641" type="FORM1" panelid="24" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="3600000" effectid="10210001" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
+			<polymorph model="701641" type="FORM1" panelid="24" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="3600000" effectid="10210001" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
 			<absstatbuff statsetid="30" duration2="3600000" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 		<motion name="normalfire" />
@@ -184559,7 +184559,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="202587" type="FORM1" panelid="29" res3="1" duration2="86400000" effectid="175" e="1" noresist="true" />
+			<polymorph model="202587" type="FORM1" panelid="29" cantAttack="true" duration2="86400000" effectid="175" e="1" noresist="true" />
 		</effects>
 		<motion name="normalfire" instant_skill="true" />
 	</skill_template>
@@ -184569,7 +184569,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="202588" type="FORM1" panelid="25" res3="1" duration2="86400000" effectid="175" e="1" noresist="true" />
+			<polymorph model="202588" type="FORM1" panelid="25" cantAttack="true" duration2="86400000" effectid="175" e="1" noresist="true" />
 		</effects>
 		<motion name="normalfire" instant_skill="true" />
 	</skill_template>
@@ -184579,7 +184579,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="202589" type="FORM1" panelid="26" res3="1" duration2="86400000" effectid="175" e="1" noresist="true" />
+			<polymorph model="202589" type="FORM1" panelid="26" cantAttack="true" duration2="86400000" effectid="175" e="1" noresist="true" />
 		</effects>
 		<motion name="normalfire" instant_skill="true" />
 	</skill_template>
@@ -184589,7 +184589,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="202590" type="FORM1" panelid="27" res3="1" duration2="86400000" effectid="175" e="1" noresist="true" />
+			<polymorph model="202590" type="FORM1" panelid="27" cantAttack="true" duration2="86400000" effectid="175" e="1" noresist="true" />
 		</effects>
 		<motion name="normalfire" instant_skill="true" />
 	</skill_template>
@@ -184649,7 +184649,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="202591" type="FORM1" panelid="29" res3="1" duration2="86400000" effectid="175" e="1" noresist="true" />
+			<polymorph model="202591" type="FORM1" panelid="29" cantAttack="true" duration2="86400000" effectid="175" e="1" noresist="true" />
 		</effects>
 		<motion name="normalfire" instant_skill="true" />
 	</skill_template>
@@ -184659,7 +184659,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="202592" type="FORM1" panelid="25" res3="1" duration2="86400000" effectid="175" e="1" noresist="true" />
+			<polymorph model="202592" type="FORM1" panelid="25" cantAttack="true" duration2="86400000" effectid="175" e="1" noresist="true" />
 		</effects>
 		<motion name="normalfire" instant_skill="true" />
 	</skill_template>
@@ -184669,7 +184669,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="202593" type="FORM1" panelid="26" res3="1" duration2="86400000" effectid="175" e="1" noresist="true" />
+			<polymorph model="202593" type="FORM1" panelid="26" cantAttack="true" duration2="86400000" effectid="175" e="1" noresist="true" />
 		</effects>
 		<motion name="normalfire" instant_skill="true" />
 	</skill_template>
@@ -184679,7 +184679,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="202594" type="FORM1" panelid="27" res3="1" duration2="86400000" effectid="175" e="1" noresist="true" />
+			<polymorph model="202594" type="FORM1" panelid="27" cantAttack="true" duration2="86400000" effectid="175" e="1" noresist="true" />
 		</effects>
 		<motion name="normalfire" instant_skill="true" />
 	</skill_template>
@@ -184888,7 +184888,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="284032" type="FORM1" panelid="28" banMovement="1" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="86400000" effectid="10210001" e="1" basiclvl="255" noresist="true" />
+			<polymorph model="284032" type="FORM1" panelid="28" cantMove="true" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="86400000" effectid="10210001" e="1" basiclvl="255" noresist="true" />
 			<statup duration2="86400000" effectid="10210001" e="2" noresist="true" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60">
 				<change stat="MAXHP" func="ADD" value="200000" />
 				<change stat="ABNORMAL_RESISTANCE_ALL" func="ADD" value="10000" />
@@ -185086,7 +185086,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="284318" type="FORM1" panelid="30" banMovement="1" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="86400000" effectid="10210001" e="1" basiclvl="255" noresist="true" />
+			<polymorph model="284318" type="FORM1" panelid="30" cantMove="true" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="86400000" effectid="10210001" e="1" basiclvl="255" noresist="true" />
 			<absstatbuff statsetid="29" duration2="86400000" effectid="10210001" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 		<motion name="normalfire" />
@@ -185097,7 +185097,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="284319" type="FORM1" panelid="30" banMovement="1" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="86400000" effectid="10210001" e="1" basiclvl="255" noresist="true" />
+			<polymorph model="284319" type="FORM1" panelid="30" cantMove="true" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="86400000" effectid="10210001" e="1" basiclvl="255" noresist="true" />
 			<absstatbuff statsetid="29" duration2="86400000" effectid="10210001" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 		<motion name="normalfire" />
@@ -185128,7 +185128,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="284320" type="FORM1" panelid="31" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="86400000" effectid="10210001" e="1" basiclvl="255" noresist="true" />
+			<polymorph model="284320" type="FORM1" panelid="31" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="86400000" effectid="10210001" e="1" basiclvl="255" noresist="true" />
 			<absstatbuff statsetid="33" duration2="86400000" effectid="10210001" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 		<motion name="normalfire" />
@@ -186186,7 +186186,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<deform model="210340" type="NONE" banUseSkills="1" res1="1" res2="1" res3="1" res6="1" duration2="4000" effectid="175" e="1" noresist="true" element="EARTH" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<deform model="210340" type="NONE" cantUseSkills="true" cantRecall="true" cantJump="true" cantAttack="true" cantFly="true" duration2="4000" effectid="175" e="1" noresist="true" element="EARTH" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<confuse duration2="4000" effectid="20104" e="2" noresist="true" element="EARTH" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
 		</effects>
 		<motion name="areafire" />
@@ -186216,7 +186216,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<deform model="210340" type="NONE" banUseSkills="1" res1="1" res2="1" res3="1" res6="1" duration2="7000" effectid="175" e="1" noresist="true" element="EARTH" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<deform model="210340" type="NONE" cantUseSkills="true" cantRecall="true" cantJump="true" cantAttack="true" cantFly="true" duration2="7000" effectid="175" e="1" noresist="true" element="EARTH" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<absstatdebuff statsetid="28" duration2="7000" effectid="10188461" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 		<motion name="areafire" />
@@ -187155,7 +187155,7 @@
 		</useconditions>
 		<effects>
 			<sleep duration2="6100" effectid="20106" e="1" element="EARTH" hoptype="SKILLLV" hopb="60" hopa="60" />
-			<deform model="214869" banUseSkills="1" duration2="6100" effectid="175" e="2" noresist="true" element="EARTH" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<deform model="214869" cantUseSkills="true" duration2="6100" effectid="175" e="2" noresist="true" element="EARTH" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<spellatk checktime="6000" value="15" delta="94" duration2="6100" effectid="1018175" e="3" noresist="true" element="EARTH" preeffect="1" hoptype="DAMAGE" />
 		</effects>
 		<motion name="pointfire" />
@@ -187715,7 +187715,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="202611" type="FORM1" panelid="33" res3="1" duration2="86400000" effectid="101742" e="1" basiclvl="1" noresist="true" />
+			<polymorph model="202611" type="FORM1" panelid="33" cantAttack="true" duration2="86400000" effectid="101742" e="1" basiclvl="1" noresist="true" />
 			<statup duration2="3000000" effectid="10195022" e="2" noresist="true" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60">
 				<change stat="MAXHP" func="ADD" value="500000" />
 				<change stat="PHYSICAL_DEFENSE" func="ADD" value="-8000" />
@@ -187729,7 +187729,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="202612" type="FORM1" panelid="34" res3="1" duration2="86400000" effectid="101742" e="1" basiclvl="2" noresist="true" />
+			<polymorph model="202612" type="FORM1" panelid="34" cantAttack="true" duration2="86400000" effectid="101742" e="1" basiclvl="2" noresist="true" />
 			<statup duration2="3000000" effectid="10195022" e="2" noresist="true" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60">
 				<change stat="MAXHP" func="ADD" value="500000" />
 				<change stat="PHYSICAL_DEFENSE" func="ADD" value="-8000" />
@@ -187743,7 +187743,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="202613" type="FORM1" panelid="35" res3="1" duration2="86400000" effectid="101742" e="1" basiclvl="3" noresist="true" />
+			<polymorph model="202613" type="FORM1" panelid="35" cantAttack="true" duration2="86400000" effectid="101742" e="1" basiclvl="3" noresist="true" />
 			<statup duration2="3000000" effectid="10195022" e="2" noresist="true" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60">
 				<change stat="MAXHP" func="ADD" value="1000000" />
 				<change stat="PHYSICAL_DEFENSE" func="ADD" value="-8000" />
@@ -187757,7 +187757,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="202614" type="FORM1" panelid="33" res3="1" duration2="86400000" effectid="101742" e="1" basiclvl="1" noresist="true" />
+			<polymorph model="202614" type="FORM1" panelid="33" cantAttack="true" duration2="86400000" effectid="101742" e="1" basiclvl="1" noresist="true" />
 			<statup duration2="3000000" effectid="10195022" e="2" noresist="true" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60">
 				<change stat="MAXHP" func="ADD" value="500000" />
 				<change stat="PHYSICAL_DEFENSE" func="ADD" value="-8000" />
@@ -187771,7 +187771,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="202615" type="FORM1" panelid="34" res3="1" duration2="86400000" effectid="101742" e="1" basiclvl="2" noresist="true" />
+			<polymorph model="202615" type="FORM1" panelid="34" cantAttack="true" duration2="86400000" effectid="101742" e="1" basiclvl="2" noresist="true" />
 			<statup duration2="3000000" effectid="10195022" e="2" noresist="true" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60">
 				<change stat="MAXHP" func="ADD" value="500000" />
 				<change stat="PHYSICAL_DEFENSE" func="ADD" value="-8000" />
@@ -187785,7 +187785,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="202616" type="FORM1" panelid="35" res3="1" duration2="86400000" effectid="101742" e="1" basiclvl="3" noresist="true" />
+			<polymorph model="202616" type="FORM1" panelid="35" cantAttack="true" duration2="86400000" effectid="101742" e="1" basiclvl="3" noresist="true" />
 			<statup duration2="3000000" effectid="10195022" e="2" noresist="true" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60">
 				<change stat="MAXHP" func="ADD" value="1000000" />
 				<change stat="PHYSICAL_DEFENSE" func="ADD" value="-8000" />
@@ -188017,7 +188017,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="218805" type="FORM1" panelid="36" banMovement="1" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="30000" effectid="1075" e="1" noresist="true" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<shapechange model="218805" type="FORM1" panelid="36" cantMove="true" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="30000" effectid="1075" e="1" noresist="true" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<statup duration2="15000" effectid="10200482" e="2" noresist="true" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60">
 				<change stat="ABNORMAL_RESISTANCE_ALL" func="ADD" value="10000" />
 				<change stat="MAGICAL_RESIST" func="ADD" value="10000" />
@@ -188035,7 +188035,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="218805" type="FORM1" panelid="37" banMovement="1" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="30000" effectid="1075" e="1" noresist="true" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<shapechange model="218805" type="FORM1" panelid="37" cantMove="true" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="30000" effectid="1075" e="1" noresist="true" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<statup duration2="15000" effectid="10200482" e="2" noresist="true" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60">
 				<change stat="ABNORMAL_RESISTANCE_ALL" func="ADD" value="10000" />
 				<change stat="MAGICAL_RESIST" func="ADD" value="10000" />
@@ -188313,7 +188313,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="202613" type="FORM1" panelid="39" res3="1" duration2="86400000" effectid="101742" e="1" basiclvl="3" noresist="true" />
+			<polymorph model="202613" type="FORM1" panelid="39" cantAttack="true" duration2="86400000" effectid="101742" e="1" basiclvl="3" noresist="true" />
 			<statup duration2="3000000" effectid="10195022" e="2" noresist="true" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60">
 				<change stat="MAXHP" func="ADD" value="500000" />
 				<change stat="PHYSICAL_DEFENSE" func="ADD" value="2000" />
@@ -188428,7 +188428,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="701628" type="FORM1" panelid="40" banMovement="1" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="3600000" effectid="10210001" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
+			<polymorph model="701628" type="FORM1" panelid="40" cantMove="true" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="3600000" effectid="10210001" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
 			<absstatbuff statsetid="30" duration2="3600000" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 		<motion name="normalfire" />
@@ -188439,7 +188439,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="701635" type="FORM1" panelid="40" banMovement="1" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="3600000" effectid="10210001" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
+			<polymorph model="701635" type="FORM1" panelid="40" cantMove="true" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="3600000" effectid="10210001" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
 			<absstatbuff statsetid="30" duration2="3600000" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 		<motion name="normalfire" />
@@ -188497,7 +188497,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="701628" type="FORM1" panelid="41" banMovement="1" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="3600000" effectid="10210001" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
+			<polymorph model="701628" type="FORM1" panelid="41" cantMove="true" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="3600000" effectid="10210001" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
 			<absstatbuff statsetid="30" duration2="3600000" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 		<motion name="normalfire" />
@@ -188508,7 +188508,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="701635" type="FORM1" panelid="41" banMovement="1" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="3600000" effectid="10210001" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
+			<polymorph model="701635" type="FORM1" panelid="41" cantMove="true" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="3600000" effectid="10210001" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
 			<absstatbuff statsetid="30" duration2="3600000" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 		<motion name="normalfire" />
@@ -188566,7 +188566,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="284032" type="FORM1" panelid="42" banMovement="1" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="86400000" effectid="10210001" e="1" basiclvl="255" noresist="true" />
+			<polymorph model="284032" type="FORM1" panelid="42" cantMove="true" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="86400000" effectid="10210001" e="1" basiclvl="255" noresist="true" />
 			<statup duration2="86400000" effectid="10210001" e="2" noresist="true" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60">
 				<change stat="MAXHP" func="ADD" value="200000" />
 				<change stat="ABNORMAL_RESISTANCE_ALL" func="ADD" value="10000" />
@@ -188670,7 +188670,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="701898" type="FORM1" panelid="43" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="3600000" effectid="10210001" e="1" basiclvl="255" noresist="true" hoptype="SKILLLV" hopb="60" />
+			<polymorph model="701898" type="FORM1" panelid="43" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="3600000" effectid="10210001" e="1" basiclvl="255" noresist="true" hoptype="SKILLLV" hopb="60" />
 			<absstatbuff statsetid="31" duration2="3600000" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 		<actions>
@@ -188684,7 +188684,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="701899" type="FORM1" panelid="43" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="3600000" effectid="10210001" e="1" basiclvl="255" noresist="true" hoptype="SKILLLV" hopb="60" />
+			<polymorph model="701899" type="FORM1" panelid="43" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="3600000" effectid="10210001" e="1" basiclvl="255" noresist="true" hoptype="SKILLLV" hopb="60" />
 			<absstatbuff statsetid="31" duration2="3600000" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 		<actions>
@@ -188756,7 +188756,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="233287" type="FORM1" panelid="44" banMovement="1" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="60000" effectid="175" e="1" basiclvl="200" noresist="true" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<shapechange model="233287" type="FORM1" panelid="44" cantMove="true" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="60000" effectid="175" e="1" basiclvl="200" noresist="true" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<absstatbuff statsetid="31" duration2="3600000" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 		<motion name="normalfire" instant_skill="true" />
@@ -189089,7 +189089,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="701646" type="FORM1" panelid="46" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="360000" effectid="10210001" e="1" basiclvl="255" noresist="true" hoptype="SKILLLV" hopb="60" />
+			<polymorph model="701646" type="FORM1" panelid="46" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="360000" effectid="10210001" e="1" basiclvl="255" noresist="true" hoptype="SKILLLV" hopb="60" />
 			<absstatbuff statsetid="32" duration2="3600000" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 		<motion name="normalfire" />
@@ -189100,7 +189100,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="701647" type="FORM1" panelid="46" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="360000" effectid="10210001" e="1" basiclvl="255" noresist="true" hoptype="SKILLLV" hopb="60" />
+			<polymorph model="701647" type="FORM1" panelid="46" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="360000" effectid="10210001" e="1" basiclvl="255" noresist="true" hoptype="SKILLLV" hopb="60" />
 			<absstatbuff statsetid="32" duration2="3600000" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 		<motion name="normalfire" />
@@ -189330,7 +189330,7 @@
 		</useconditions>
 		<effects>
 			<sleep duration2="5100" duration1="100" effectid="20106" e="1" element="EARTH" hoptype="SKILLLV" hopb="60" hopa="60" />
-			<deform model="214869" banUseSkills="1" duration2="5100" duration1="100" effectid="175" e="2" noresist="true" element="EARTH" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<deform model="214869" cantUseSkills="true" duration2="5100" duration1="100" effectid="175" e="2" noresist="true" element="EARTH" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<spellatk checktime="10000" value="100" delta="231" duration2="5100" duration1="100" effectid="1018175" e="3" noresist="true" element="EARTH" preeffect="1" hoptype="DAMAGE" />
 		</effects>
 		<motion name="pointfire" />
@@ -189529,7 +189529,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="202611" type="FORM1" panelid="38" res3="1" duration2="86400000" effectid="101742" e="1" basiclvl="1" noresist="true" />
+			<polymorph model="202611" type="FORM1" panelid="38" cantAttack="true" duration2="86400000" effectid="101742" e="1" basiclvl="1" noresist="true" />
 			<statup duration2="3000000" effectid="10195022" e="2" noresist="true" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60">
 				<change stat="MAXHP" func="ADD" value="500000" />
 				<change stat="PHYSICAL_DEFENSE" func="ADD" value="-8000" />
@@ -189543,7 +189543,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="202613" type="FORM1" panelid="39" res3="1" duration2="86400000" effectid="101742" e="1" basiclvl="3" noresist="true" />
+			<polymorph model="202613" type="FORM1" panelid="39" cantAttack="true" duration2="86400000" effectid="101742" e="1" basiclvl="3" noresist="true" />
 			<statup duration2="3000000" effectid="10195022" e="2" noresist="true" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60">
 				<change stat="MAXHP" func="ADD" value="1000000" />
 				<change stat="PHYSICAL_DEFENSE" func="ADD" value="-8000" />
@@ -189557,7 +189557,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="202614" type="FORM1" panelid="38" res3="1" duration2="86400000" effectid="101742" e="1" basiclvl="1" noresist="true" />
+			<polymorph model="202614" type="FORM1" panelid="38" cantAttack="true" duration2="86400000" effectid="101742" e="1" basiclvl="1" noresist="true" />
 			<statup duration2="3000000" effectid="10195022" e="2" noresist="true" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60">
 				<change stat="MAXHP" func="ADD" value="500000" />
 				<change stat="PHYSICAL_DEFENSE" func="ADD" value="-8000" />
@@ -189571,7 +189571,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="202616" type="FORM1" panelid="39" res3="1" duration2="86400000" effectid="101742" e="1" basiclvl="3" noresist="true" />
+			<polymorph model="202616" type="FORM1" panelid="39" cantAttack="true" duration2="86400000" effectid="101742" e="1" basiclvl="3" noresist="true" />
 			<statup duration2="3000000" effectid="10195022" e="2" noresist="true" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60">
 				<change stat="MAXHP" func="ADD" value="1000000" />
 				<change stat="PHYSICAL_DEFENSE" func="ADD" value="-8000" />
@@ -189837,7 +189837,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="284803" type="FORM1" panelid="47" banMovement="1" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="3600000" effectid="1075" e="1" basiclvl="255" noresist="true" hoptype="SKILLLV" hopb="60" />
+			<shapechange model="284803" type="FORM1" panelid="47" cantMove="true" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="3600000" effectid="1075" e="1" basiclvl="255" noresist="true" hoptype="SKILLLV" hopb="60" />
 			<absstatbuff statsetid="36" duration2="3600000" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 		<motion name="normalfire" />
@@ -189848,7 +189848,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="284802" type="FORM1" panelid="48" banMovement="1" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="3600000" effectid="1075" e="1" basiclvl="255" noresist="true" hoptype="SKILLLV" hopb="60" />
+			<shapechange model="284802" type="FORM1" panelid="48" cantMove="true" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="3600000" effectid="1075" e="1" basiclvl="255" noresist="true" hoptype="SKILLLV" hopb="60" />
 			<absstatbuff statsetid="36" duration2="3600000" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 		<motion name="normalfire" />
@@ -189859,7 +189859,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="284801" type="FORM1" panelid="49" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="3600000" effectid="1075" e="1" basiclvl="255" noresist="true" hoptype="SKILLLV" hopb="60" />
+			<shapechange model="284801" type="FORM1" panelid="49" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="3600000" effectid="1075" e="1" basiclvl="255" noresist="true" hoptype="SKILLLV" hopb="60" />
 			<absstatbuff statsetid="37" duration2="3600000" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 		<motion name="normalfire" />
@@ -189870,7 +189870,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="284805" type="FORM1" panelid="50" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="3600000" effectid="1075" e="1" basiclvl="255" noresist="true" hoptype="SKILLLV" hopb="60" />
+			<shapechange model="284805" type="FORM1" panelid="50" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="3600000" effectid="1075" e="1" basiclvl="255" noresist="true" hoptype="SKILLLV" hopb="60" />
 			<absstatbuff statsetid="37" duration2="3600000" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 		<motion name="normalfire" />
@@ -190091,7 +190091,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="284867" type="FORM1" panelid="51" banMovement="1" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="3600000" effectid="10214951" e="1" basiclvl="255" noresist="true" hoptype="SKILLLV" hopb="60" />
+			<polymorph model="284867" type="FORM1" panelid="51" cantMove="true" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="3600000" effectid="10214951" e="1" basiclvl="255" noresist="true" hoptype="SKILLLV" hopb="60" />
 			<absstatbuff statsetid="29" duration2="3600000" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 		<motion name="normalfire" />
@@ -190182,7 +190182,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="701630" type="FORM1" panelid="52" banMovement="1" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="3600000" effectid="10210001" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
+			<polymorph model="701630" type="FORM1" panelid="52" cantMove="true" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="3600000" effectid="10210001" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
 			<absstatbuff statsetid="38" duration2="3600000" effectid="10210001" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 		<motion name="normalfire" />
@@ -190193,7 +190193,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="701637" type="FORM1" panelid="52" banMovement="1" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="3600000" effectid="10210001" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
+			<polymorph model="701637" type="FORM1" panelid="52" cantMove="true" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="3600000" effectid="10210001" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
 			<absstatbuff statsetid="38" duration2="3600000" effectid="10210001" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 		<motion name="normalfire" />
@@ -190238,7 +190238,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="701632" type="FORM1" panelid="53" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="3600000" effectid="1075" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
+			<polymorph model="701632" type="FORM1" panelid="53" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="3600000" effectid="1075" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
 			<absstatbuff statsetid="39" duration2="3600000" effectid="10215211" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 		<motion name="normalfire" />
@@ -190249,7 +190249,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="701639" type="FORM1" panelid="53" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="3600000" effectid="1075" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
+			<polymorph model="701639" type="FORM1" panelid="53" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="3600000" effectid="1075" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
 			<absstatbuff statsetid="39" duration2="3600000" effectid="10215211" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 		<motion name="normalfire" />
@@ -190913,7 +190913,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="297472" type="FORM1" panelid="56" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="600000" effectid="10210001" e="1" basiclvl="255" noresist="true" hoptype="SKILLLV" hopb="60" />
+			<shapechange model="297472" type="FORM1" panelid="56" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="600000" effectid="10210001" e="1" basiclvl="255" noresist="true" hoptype="SKILLLV" hopb="60" />
 			<absstatbuff statsetid="40" duration2="3600000" effectid="10210001" e="2" noresist="true" element="WIND" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
 		</effects>
 		<motion name="normalfire" />
@@ -190950,7 +190950,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="297331" type="FORM1" panelid="57" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="600000" effectid="10210001" e="1" basiclvl="255" noresist="true" hoptype="SKILLLV" hopb="60" />
+			<shapechange model="297331" type="FORM1" panelid="57" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="600000" effectid="10210001" e="1" basiclvl="255" noresist="true" hoptype="SKILLLV" hopb="60" />
 			<absstatbuff statsetid="41" duration2="3600000" effectid="10210001" e="2" noresist="true" element="WIND" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
 		</effects>
 		<motion name="normalfire" />
@@ -191012,7 +191012,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="297473" type="FORM1" panelid="56" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="600000" effectid="10210001" e="1" basiclvl="255" noresist="true" hoptype="SKILLLV" hopb="60" />
+			<shapechange model="297473" type="FORM1" panelid="56" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="600000" effectid="10210001" e="1" basiclvl="255" noresist="true" hoptype="SKILLLV" hopb="60" />
 			<absstatbuff statsetid="40" duration2="3600000" effectid="10210001" e="2" noresist="true" element="WIND" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
 		</effects>
 		<motion name="normalfire" />
@@ -191023,7 +191023,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="297474" type="FORM1" panelid="56" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="600000" effectid="10210001" e="1" basiclvl="255" noresist="true" hoptype="SKILLLV" hopb="60" />
+			<shapechange model="297474" type="FORM1" panelid="56" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="600000" effectid="10210001" e="1" basiclvl="255" noresist="true" hoptype="SKILLLV" hopb="60" />
 			<absstatbuff statsetid="40" duration2="3600000" effectid="10210001" e="2" noresist="true" element="WIND" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
 		</effects>
 		<motion name="normalfire" />
@@ -191034,7 +191034,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="297475" type="FORM1" panelid="56" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="600000" effectid="10210001" e="1" basiclvl="255" noresist="true" hoptype="SKILLLV" hopb="60" />
+			<shapechange model="297475" type="FORM1" panelid="56" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="600000" effectid="10210001" e="1" basiclvl="255" noresist="true" hoptype="SKILLLV" hopb="60" />
 			<absstatbuff statsetid="40" duration2="3600000" effectid="10210001" e="2" noresist="true" element="WIND" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
 		</effects>
 		<motion name="normalfire" />
@@ -191045,7 +191045,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="297332" type="FORM1" panelid="57" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="600000" effectid="10210001" e="1" basiclvl="255" noresist="true" hoptype="SKILLLV" hopb="60" />
+			<shapechange model="297332" type="FORM1" panelid="57" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="600000" effectid="10210001" e="1" basiclvl="255" noresist="true" hoptype="SKILLLV" hopb="60" />
 			<absstatbuff statsetid="41" duration2="3600000" effectid="10210001" e="2" noresist="true" element="WIND" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
 		</effects>
 		<motion name="normalfire" />
@@ -191056,7 +191056,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="297333" type="FORM1" panelid="57" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="600000" effectid="10210001" e="1" basiclvl="255" noresist="true" hoptype="SKILLLV" hopb="60" />
+			<shapechange model="297333" type="FORM1" panelid="57" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="600000" effectid="10210001" e="1" basiclvl="255" noresist="true" hoptype="SKILLLV" hopb="60" />
 			<absstatbuff statsetid="41" duration2="3600000" effectid="10210001" e="2" noresist="true" element="WIND" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
 		</effects>
 		<motion name="normalfire" />
@@ -191067,7 +191067,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="297334" type="FORM1" panelid="57" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="600000" effectid="10210001" e="1" basiclvl="255" noresist="true" hoptype="SKILLLV" hopb="60" />
+			<shapechange model="297334" type="FORM1" panelid="57" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="600000" effectid="10210001" e="1" basiclvl="255" noresist="true" hoptype="SKILLLV" hopb="60" />
 			<absstatbuff statsetid="41" duration2="3600000" effectid="10210001" e="2" noresist="true" element="WIND" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
 		</effects>
 		<motion name="normalfire" />
@@ -191078,7 +191078,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="702586" type="FORM1" panelid="58" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="2400000" effectid="10215211" e="1" basiclvl="255" noresist="true" hoptype="SKILLLV" hopb="60" />
+			<polymorph model="702586" type="FORM1" panelid="58" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="2400000" effectid="10215211" e="1" basiclvl="255" noresist="true" hoptype="SKILLLV" hopb="60" />
 			<absstatbuff statsetid="42" duration2="2400000" effectid="10215211" e="2" noresist="true" element="WIND" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
 		</effects>
 		<motion name="normalfire" />
@@ -191089,7 +191089,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="702587" type="FORM1" panelid="58" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="2400000" effectid="10215211" e="1" basiclvl="255" noresist="true" hoptype="SKILLLV" hopb="60" />
+			<polymorph model="702587" type="FORM1" panelid="58" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="2400000" effectid="10215211" e="1" basiclvl="255" noresist="true" hoptype="SKILLLV" hopb="60" />
 			<absstatbuff statsetid="42" duration2="2400000" effectid="10215211" e="2" noresist="true" element="WIND" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
 		</effects>
 		<motion name="normalfire" />
@@ -191877,7 +191877,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="855085" type="FORM1" panelid="55" banMovement="1" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="180000" effectid="175" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
+			<shapechange model="855085" type="FORM1" panelid="55" cantMove="true" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="180000" effectid="175" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
 			<absstatbuff statsetid="43" duration2="3600000" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 		<motion name="pointfire" />
@@ -191968,7 +191968,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="701628" type="FORM1" panelid="59" banMovement="1" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="2400000" effectid="10210001" e="1" basiclvl="255" noresist="true" hoptype="SKILLLV" hopb="60" />
+			<polymorph model="701628" type="FORM1" panelid="59" cantMove="true" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="2400000" effectid="10210001" e="1" basiclvl="255" noresist="true" hoptype="SKILLLV" hopb="60" />
 			<absstatbuff statsetid="44" duration2="2400000" e="2" noresist="true" element="WIND" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
 		</effects>
 		<motion name="normalfire" />
@@ -191979,7 +191979,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="701635" type="FORM1" panelid="59" banMovement="1" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="2400000" effectid="10210001" e="1" basiclvl="255" noresist="true" hoptype="SKILLLV" hopb="60" />
+			<polymorph model="701635" type="FORM1" panelid="59" cantMove="true" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="2400000" effectid="10210001" e="1" basiclvl="255" noresist="true" hoptype="SKILLLV" hopb="60" />
 			<absstatbuff statsetid="44" duration2="2400000" e="2" noresist="true" element="WIND" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
 		</effects>
 		<motion name="normalfire" />
@@ -192701,7 +192701,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="855234" type="FORM1" panelid="55" banMovement="1" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="180000" effectid="175" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
+			<shapechange model="855234" type="FORM1" panelid="55" cantMove="true" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="180000" effectid="175" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
 			<absstatbuff statsetid="43" duration2="3600000" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 		<motion name="normalfire" />
@@ -192712,7 +192712,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="855235" type="FORM1" panelid="55" banMovement="1" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="180000" effectid="175" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
+			<shapechange model="855235" type="FORM1" panelid="55" cantMove="true" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="180000" effectid="175" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
 			<absstatbuff statsetid="43" duration2="3600000" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 		<motion name="normalfire" />
@@ -192723,7 +192723,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="855236" type="FORM1" panelid="55" banMovement="1" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="180000" effectid="175" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
+			<shapechange model="855236" type="FORM1" panelid="55" cantMove="true" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="180000" effectid="175" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
 			<absstatbuff statsetid="43" duration2="3600000" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 		<motion name="normalfire" />
@@ -192734,7 +192734,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<shapechange model="855237" type="FORM1" panelid="55" banMovement="1" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="180000" effectid="175" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
+			<shapechange model="855237" type="FORM1" panelid="55" cantMove="true" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="180000" effectid="175" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
 			<absstatbuff statsetid="43" duration2="3600000" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 		<motion name="normalfire" />
@@ -192921,7 +192921,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="284997" type="FORM1" panelid="31" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="86400000" effectid="10210001" e="1" basiclvl="255" noresist="true" />
+			<polymorph model="284997" type="FORM1" panelid="31" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="86400000" effectid="10210001" e="1" basiclvl="255" noresist="true" />
 			<absstatbuff statsetid="33" duration2="86400000" effectid="10210001" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 		<motion name="normalfire" />
@@ -193373,7 +193373,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="701630" type="FORM1" panelid="52" banMovement="1" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="3600000" effectid="10210001" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
+			<polymorph model="701630" type="FORM1" panelid="52" cantMove="true" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="3600000" effectid="10210001" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
 			<absstatbuff statsetid="45" duration2="3600000" effectid="10210001" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 		<motion name="normalfire" />
@@ -193384,7 +193384,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="701637" type="FORM1" panelid="52" banMovement="1" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="3600000" effectid="10210001" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
+			<polymorph model="701637" type="FORM1" panelid="52" cantMove="true" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="3600000" effectid="10210001" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
 			<absstatbuff statsetid="45" duration2="3600000" effectid="10210001" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 		<motion name="normalfire" />
@@ -193616,7 +193616,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="702649" type="FORM1" panelid="63" banMovement="1" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="3600000" effectid="10210001" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
+			<polymorph model="702649" type="FORM1" panelid="63" cantMove="true" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="3600000" effectid="10210001" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
 			<statup duration2="3600000" e="2" noresist="true" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60">
 				<change stat="MAXHP" func="ADD" value="200000" />
 				<change stat="ABNORMAL_RESISTANCE_ALL" func="ADD" value="10000" />
@@ -193630,7 +193630,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="702648" type="FORM1" panelid="63" banMovement="1" res1="1" res2="1" res3="1" res5="1" res6="1" duration2="3600000" effectid="10210001" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
+			<polymorph model="702648" type="FORM1" panelid="63" cantMove="true" cantRecall="true" cantJump="true" cantAttack="true" cantUseItems="true" cantFly="true" duration2="3600000" effectid="10210001" e="1" noresist="true" hoptype="SKILLLV" hopb="60" />
 			<statup duration2="3600000" e="2" noresist="true" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60">
 				<change stat="MAXHP" func="ADD" value="200000" />
 				<change stat="ABNORMAL_RESISTANCE_ALL" func="ADD" value="10000" />
@@ -193641,7 +193641,7 @@
 	<skill_template skill_id="21807" name="Board Swift Runner" nameId="2285192" cooldownId="10" stack="STATION_PC_POLYMORPH_A" lvl="1" skilltype="MAGICAL" skillsubtype="BUFF" tslot="BUFF" dispel_category="BUFF" req_dispel_level="1" req_dispel_count="10" activation="ACTIVE" cooldown="0" duration="0" no_save_on_logout="true" hostile_type="DIRECT">
 		<properties first_target="TARGET" first_target_range="5" target_relation="ALL" target_type="ONLYONE" target_maxcount="1" />
 		<effects>
-			<polymorph model="731533" type="FORM1" panelid="61" res3="1" res5="1" res6="1" duration2="3000000" effectid="1019502" e="1" basiclvl="255" noresist="true" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<polymorph model="731533" type="FORM1" panelid="61" cantAttack="true" cantUseItems="true" cantFly="true" duration2="3000000" effectid="1019502" e="1" basiclvl="255" noresist="true" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<absstatbuff statsetid="46" duration2="3600000" effectid="10210001" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 		<motion name="normalfire" instant_skill="true" />
@@ -193649,7 +193649,7 @@
 	<skill_template skill_id="21808" name="Board Swift Runner" nameId="2285193" cooldownId="10" stack="STATION_PC_POLYMORPH_B" lvl="1" skilltype="MAGICAL" skillsubtype="BUFF" tslot="BUFF" dispel_category="BUFF" req_dispel_level="1" req_dispel_count="10" activation="ACTIVE" cooldown="0" duration="0" no_save_on_logout="true" hostile_type="DIRECT">
 		<properties first_target="TARGET" first_target_range="5" target_relation="ALL" target_type="ONLYONE" target_maxcount="1" />
 		<effects>
-			<shapechange model="731534" type="FORM1" panelid="62" res3="1" res5="1" res6="1" duration2="3000000" effectid="1019502" e="1" basiclvl="255" noresist="true" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<shapechange model="731534" type="FORM1" panelid="62" cantAttack="true" cantUseItems="true" cantFly="true" duration2="3000000" effectid="1019502" e="1" basiclvl="255" noresist="true" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<absstatbuff statsetid="47" duration2="3600000" effectid="10210001" e="2" noresist="true" element="WIND" preeffect="1" />
 		</effects>
 		<motion name="normalfire" instant_skill="true" />
@@ -193899,7 +193899,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="202629" type="FORM1" panelid="64" res3="1" res6="1" duration2="86400000" effectid="101742" e="1" basiclvl="1" noresist="true" />
+			<polymorph model="202629" type="FORM1" panelid="64" cantAttack="true" cantFly="true" duration2="86400000" effectid="101742" e="1" basiclvl="1" noresist="true" />
 			<statup duration2="3000000" effectid="10195022" e="2" noresist="true" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60">
 				<change stat="MAXHP" func="ADD" value="300000" />
 				<change stat="SPEED" func="ADD" value="3000" />
@@ -193913,7 +193913,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="202630" type="FORM1" panelid="65" res3="1" res6="1" duration2="86400000" effectid="101742" e="1" basiclvl="1" noresist="true" />
+			<polymorph model="202630" type="FORM1" panelid="65" cantAttack="true" cantFly="true" duration2="86400000" effectid="101742" e="1" basiclvl="1" noresist="true" />
 			<statup duration2="3000000" effectid="10195022" e="2" noresist="true" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60">
 				<change stat="MAXHP" func="ADD" value="200000" />
 				<change stat="SPEED" func="ADD" value="3000" />
@@ -193927,7 +193927,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="202631" type="FORM1" panelid="66" res3="1" res6="1" duration2="86400000" effectid="101742" e="1" basiclvl="1" noresist="true" />
+			<polymorph model="202631" type="FORM1" panelid="66" cantAttack="true" cantFly="true" duration2="86400000" effectid="101742" e="1" basiclvl="1" noresist="true" />
 			<statup duration2="3000000" effectid="10195022" e="2" noresist="true" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60">
 				<change stat="MAXHP" func="ADD" value="150000" />
 				<change stat="SPEED" func="ADD" value="3000" />
@@ -193941,7 +193941,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="202632" type="FORM1" panelid="64" res3="1" res6="1" duration2="86400000" effectid="101742" e="1" basiclvl="1" noresist="true" />
+			<polymorph model="202632" type="FORM1" panelid="64" cantAttack="true" cantFly="true" duration2="86400000" effectid="101742" e="1" basiclvl="1" noresist="true" />
 			<statup duration2="3000000" effectid="10195022" e="2" noresist="true" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60">
 				<change stat="MAXHP" func="ADD" value="300000" />
 				<change stat="SPEED" func="ADD" value="3000" />
@@ -193955,7 +193955,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="202633" type="FORM1" panelid="65" res3="1" res6="1" duration2="86400000" effectid="101742" e="1" basiclvl="1" noresist="true" />
+			<polymorph model="202633" type="FORM1" panelid="65" cantAttack="true" cantFly="true" duration2="86400000" effectid="101742" e="1" basiclvl="1" noresist="true" />
 			<statup duration2="3000000" effectid="10195022" e="2" noresist="true" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60">
 				<change stat="MAXHP" func="ADD" value="200000" />
 				<change stat="SPEED" func="ADD" value="3000" />
@@ -193969,7 +193969,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<polymorph model="202634" type="FORM1" panelid="66" res3="1" res6="1" duration2="86400000" effectid="101742" e="1" basiclvl="1" noresist="true" />
+			<polymorph model="202634" type="FORM1" panelid="66" cantAttack="true" cantFly="true" duration2="86400000" effectid="101742" e="1" basiclvl="1" noresist="true" />
 			<statup duration2="3000000" effectid="10195022" e="2" noresist="true" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60">
 				<change stat="MAXHP" func="ADD" value="150000" />
 				<change stat="SPEED" func="ADD" value="3000" />

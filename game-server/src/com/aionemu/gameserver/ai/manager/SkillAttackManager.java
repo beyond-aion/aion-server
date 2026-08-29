@@ -77,7 +77,7 @@ public class SkillAttackManager {
 		if ((template.getType() == SkillType.MAGICAL && owner.getEffectController().isAbnormalSet(AbnormalState.SILENCE))
 			|| (template.getType() == SkillType.PHYSICAL && owner.getEffectController().isAbnormalSet(AbnormalState.BIND))
 			|| (owner.getEffectController().isInAnyAbnormalState(AbnormalState.CANT_ATTACK_STATE))
-			|| (owner.isTransformed() && owner.getTransformModel().getBanUseSkills() == 1)) {
+			|| (owner.isTransformed() && owner.getTransformModel().cantUseSkills())) {
 			afterUseSkill(npcAI);
 		} else {
 			if (template.getProperties().getFirstTarget() == FirstTargetAttribute.ME) {
@@ -192,7 +192,7 @@ public class SkillAttackManager {
 				if ((template.getType() == SkillType.MAGICAL && owner.getEffectController().isAbnormalSet(AbnormalState.SILENCE))
 					|| (template.getType() == SkillType.PHYSICAL && owner.getEffectController().isAbnormalSet(AbnormalState.BIND))
 					|| (owner.getEffectController().isInAnyAbnormalState(AbnormalState.CANT_ATTACK_STATE))
-					|| (owner.isTransformed() && owner.getTransformModel().getBanUseSkills() == 1)) {
+					|| (owner.isTransformed() && owner.getTransformModel().cantUseSkills())) {
 					return false;
 				} else {
 					return true;

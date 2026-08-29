@@ -110,7 +110,6 @@ public class Player extends Creature {
 	private final Storage[] cabinets = new Storage[StorageType.HOUSE_WH_MAX - StorageType.HOUSE_WH_MIN + 1];
 	private Item usingItem;
 
-	private final AbsoluteStatOwner absStatsHolder;
 	private PlayerSettings playerSettings;
 
 	private PlayerGroup playerGroup;
@@ -214,7 +213,6 @@ public class Player extends Creature {
 
 		setGameStats(new PlayerGameStats(this));
 		setLifeStats(new PlayerLifeStats(this));
-		absStatsHolder = new AbsoluteStatOwner(this, 0);
 	}
 
 	public boolean isInPlayerMode(PlayerMode mode) {
@@ -1009,6 +1007,14 @@ public class Player extends Creature {
 		return true;
 	}
 
+	public void startCooldown(Item item) {
+		ItemUseLimits limits = item.getItemTemplate().getUseLimits();
+		if (limits == null || limits.getDelayTime() <= 0)
+			return;
+
+		addItemCoolDown(limits.getDelayId(), System.currentTimeMillis() + limits.getDelayTime(), limits.getDelayTime() / 1000);
+	}
+
 	public long getItemReuseTime(int delayId) {
 		ItemCooldown cd = itemCoolDowns.get(delayId);
 		return cd == null ? 0 : cd.getReuseTime();
@@ -1575,7 +1581,7 @@ public class Player extends Creature {
 		this.isInSprintMode = isInSprintMode;
 	}
 
-	public void setRideObservers(ActionObserver observer) {
+	public void addRideObserver(ActionObserver observer) {
 		if (rideObservers == null)
 			rideObservers = new ArrayList<>();
 
@@ -1586,10 +1592,6 @@ public class Player extends Creature {
 
 	public List<ActionObserver> getRideObservers() {
 		return rideObservers;
-	}
-
-	public AbsoluteStatOwner getAbsoluteStats() {
-		return absStatsHolder;
 	}
 
 	@Override
@@ -1619,7 +1621,7 @@ public class Player extends Creature {
 	@Override
 	public boolean canPerformMove() {
 		// player cannot move is transformed
-		if (getTransformModel().getBanMovement() == 1)
+		if (getTransformModel().cantMove())
 			return false;
 
 		return super.canPerformMove();

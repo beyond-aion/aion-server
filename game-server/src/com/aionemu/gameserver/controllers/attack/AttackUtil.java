@@ -113,9 +113,8 @@ public class AttackUtil {
 			boolean isPhysical = element == SkillElement.NONE;
 			StatEnum attackStat = isPhysical ? StatEnum.PHYSICAL_ATTACK : StatEnum.MAGICAL_ATTACK;
 			StatEnum defenseStat = isPhysical ? StatEnum.PHYSICAL_DEFENSE : StatEnum.MAGICAL_DEFEND;
-			float defenseBase = isPhysical ? attacked.getGameStats().getPDef().getBase() : attacked.getGameStats().getMDef().getBase();
-			float defenseBonus = isPhysical ? attacked.getGameStats().getPDef().getBonus() : attacked.getGameStats().getMDef().getBonus();
-			float defense = StatFunctions.adjustStatByMovementModifier(attacked, defenseStat, defenseBase) + defenseBonus;
+			float defenseStatValue = isPhysical ? attacked.getGameStats().getPDef().getCurrent() : attacked.getGameStats().getMDef().getCurrent();
+			float defense = StatFunctions.adjustStatByMovementModifier(attacked, defenseStat, defenseStatValue);
 			float damage = attackResultList.get(i).getDamage() - (defense / 10);
 			damage *= damageMultiplier;
 			damage = StatFunctions.adjustStatByMovementModifier(attacker, attackStat, damage);
@@ -329,8 +328,7 @@ public class AttackUtil {
 		}
 
 		if (isPhysical) {
-			float def = effected.getGameStats().getPDef().getBonus() + StatFunctions.adjustStatByMovementModifier(effected, StatEnum.PHYSICAL_DEFENSE,
-					effected.getGameStats().getPDef().getBase());
+			float def = StatFunctions.adjustStatByMovementModifier(effected, StatEnum.PHYSICAL_DEFENSE, effected.getGameStats().getPDef().getCurrent());
 			damage -= def / 10;
 		}
 

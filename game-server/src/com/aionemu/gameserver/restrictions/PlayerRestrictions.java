@@ -25,6 +25,7 @@ import com.aionemu.gameserver.services.VortexService;
 import com.aionemu.gameserver.services.ban.ChatBanService;
 import com.aionemu.gameserver.services.player.PlayerChatService;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
+import com.aionemu.gameserver.skillengine.effect.RecallInstantEffect;
 import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.skillengine.model.SkillType;
@@ -63,9 +64,8 @@ public class PlayerRestrictions {
 		if (!checkFly(player, target) || player.getLifeStats().isAboutToDie() || player.isDead()) {
 			return false;
 		}
-		// check if is casting to avoid multicast exploit
-		// TODO cancel skill if other is used
-		if (player.isCasting())
+		// item casts are interruptible (PlayerController cancels them), skill casts are not
+		if (player.isCasting() && player.getCastingSkill().getItemTemplate() == null)
 			return false;
 
 		if (!player.canAttack() && !template.hasEvadeEffect()) {
@@ -89,7 +89,7 @@ public class PlayerRestrictions {
 
 		// cannot use skills while transformed
 		if (player.getTransformModel().isActive()) {
-			if (player.getTransformModel().getBanUseSkills() == 1) {
+			if (player.getTransformModel().cantUseSkills()) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CAN_NOT_CAST_IN_SHAPECHANGE());
 				return false;
 			}
@@ -102,32 +102,29 @@ public class PlayerRestrictions {
 				}
 			}
 		}
-
-		// Fix for Summon Group Member, cannot be used while either caster or summoned is actively in combat
-		// example skillId: 1606
 		if (skill.getSkillTemplate().hasRecallInstant()) {
 			if (!(target instanceof Player))
 				return false;
-			if (player.getController().isInCombat() || ((Player) target).getController().isInCombat()
-				|| ((Player) target).getTransformModel().getRes1() == 1)// cannot be summoned while transformed
-			{
+			if (player.getController().isInCombat()
+				|| ((Player) target).getController().isInCombat()
+				|| ((Player) target).getTransformModel().cantRecall()
+				|| target.getWorldId() != player.getWorldId()
+				|| !RecallInstantEffect.canRecallTo(player)) {
+				//%0 cannot be summoned right now.
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_Recall_CANNOT_ACCEPT_EFFECT(target.getName()));
 				return false;
 			}
 		}
-
 		if (template.hasResurrectEffect()) {
-			if (!(target instanceof Player)) {
+			if (!(target instanceof Player targetPlayer)) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_IS_NOT_VALID());
 				return false;
 			}
-			Player targetPlayer = (Player) target;
 			if (!targetPlayer.isDead()) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_IS_NOT_VALID());
 				return false;
 			}
 		}
-
 		return true;
 	}
 
@@ -247,7 +244,7 @@ public class PlayerRestrictions {
 		}
 
 		// cannot attack while transformed
-		if (player.getTransformModel().getRes3() == 1) {
+		if (player.getTransformModel().cantAttack()) {
 			return false;
 		}
 
@@ -309,7 +306,7 @@ public class PlayerRestrictions {
 		}
 
 		// cannot use item while transformed
-		if (player.getTransformModel().getRes5() == 1) {
+		if (player.getTransformModel().cantUseItems()) {
 			// client sends message by itself
 			return false;
 		}
@@ -325,6 +322,12 @@ public class PlayerRestrictions {
 			return false;
 		}
 
+		// Checked before the "no actions" fallback below so a race mismatch reports correctly even without one
+		if (item.getItemTemplate().getRace() != Race.PC_ALL && item.getItemTemplate().getRace() != player.getRace()) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_USE_ITEM_INVALID_RACE());
+			return false;
+		}
+
 		ItemActions itemActions = item.getItemTemplate().getActions();
 		if (itemActions == null || itemActions.getItemActions().isEmpty()) {
 			if (!QuestEngine.getInstance().isRegisteredQuestItem(item.getItemId())) {
@@ -336,11 +339,6 @@ public class PlayerRestrictions {
 		ItemUseLimits limits = item.getItemTemplate().getUseLimits();
 		if (limits.getGenderPermitted() != null && limits.getGenderPermitted() != player.getGender()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_USE_ITEM_INVALID_GENDER());
-			return false;
-		}
-
-		if (item.getItemTemplate().getRace() != Race.PC_ALL && item.getItemTemplate().getRace() != player.getRace()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_USE_ITEM_INVALID_RACE());
 			return false;
 		}
 
