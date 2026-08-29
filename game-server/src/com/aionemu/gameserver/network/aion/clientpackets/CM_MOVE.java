@@ -115,8 +115,8 @@ public class CM_MOVE extends AionClientPacket {
 				}
 			} else {
 				if ((type & MovementMask.ABSOLUTE) == 0) {
-					float speed = player.getGameStats().getMovementSpeedFloat();
-					m.setNewDirection(x + m.vectorX * speed, y + m.vectorY * speed, player.isFlying() ? z + m.vectorZ * speed : z + m.vectorZ, heading);
+					//The movement vector from the client already accounts for movement speed, so multiplying it by speed again overestimates the distance several times.
+					m.setNewDirection(x + m.vectorX, y + m.vectorY, z + m.vectorZ, heading);
 				} else if (heading != player.getHeading())
 					m.setNewDirection(m.getTargetX2(), m.getTargetY2(), m.getTargetZ2(), heading);
 			}
