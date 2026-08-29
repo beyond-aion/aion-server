@@ -1,13 +1,9 @@
 package com.aionemu.gameserver.skillengine.condition;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElements;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.model.stats.calc.functions.IStatFunction;
@@ -38,64 +34,41 @@ public class Conditions {
 	})
 	protected List<Condition> conditions;
 
-	/**
-	 * Gets the value of the conditions property.
-	 * <p>
-	 * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to the returned list will be
-	 * present inside the JAXB object. This is why there is not a <CODE>set</CODE> method for the conditions property.
-	 * <p>
-	 * For example, to add a new item, do as follows:
-	 * 
-	 * <pre>
-	 * getConditions().add(newItem);
-	 * </pre>
-	 */
 	public List<Condition> getConditions() {
-		if (conditions == null) {
-			conditions = new ArrayList<>();
-		}
-		return this.conditions;
+		return conditions == null ? Collections.emptyList() : conditions;
 	}
 
 	public boolean validate(Skill skill) {
-		if (conditions != null) {
-			for (Condition condition : getConditions()) {
-				if (!condition.validate(skill)) {
-					return false;
-				}
+		for (Condition condition : getConditions()) {
+			if (!condition.validate(skill)) {
+				return false;
 			}
 		}
 		return true;
 	}
 
 	public boolean canValidate(Skill skill) {
-		if (conditions != null) {
-			for (Condition condition : getConditions()) {
-				if (!condition.canValidate(skill)) {
-					return false;
-				}
+		for (Condition condition : getConditions()) {
+			if (!condition.canValidate(skill)) {
+				return false;
 			}
 		}
 		return true;
 	}
 
 	public boolean validate(Stat2 stat, IStatFunction statFunction) {
-		if (conditions != null) {
-			for (Condition condition : getConditions()) {
-				if (!condition.validate(stat, statFunction)) {
-					return false;
-				}
+		for (Condition condition : getConditions()) {
+			if (!condition.validate(stat, statFunction)) {
+				return false;
 			}
 		}
 		return true;
 	}
 
 	public boolean validate(Effect effect) {
-		if (conditions != null) {
-			for (Condition condition : getConditions()) {
-				if (!condition.validate(effect)) {
-					return false;
-				}
+		for (Condition condition : getConditions()) {
+			if (!condition.validate(effect)) {
+				return false;
 			}
 		}
 		return true;

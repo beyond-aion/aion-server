@@ -5,7 +5,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
-import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -38,13 +37,12 @@ public class MpUseAction extends Action {
 
 	@Override
 	public boolean canAct(Skill skill) {
-		Creature effector = skill.getEffector();
-		if (!(effector instanceof Player player))
-			return true;
-		if (effector.getLifeStats().getCurrentMp() >= getCost(skill))
-			return true;
-		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_NOT_ENOUGH_MP());
-		return false;
+		// npcs have no mp, so they must not be blocked by an mp cost
+		if (skill.getEffector() instanceof Player player && player.getLifeStats().getCurrentMp() < getCost(skill)) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_NOT_ENOUGH_MP());
+			return false;
+		}
+		return true;
 	}
 
 	private int getCost(Skill skill) {

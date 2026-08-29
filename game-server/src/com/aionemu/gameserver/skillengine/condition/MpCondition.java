@@ -31,20 +31,18 @@ public class MpCondition extends Condition {
 	public boolean validate(Skill skill) {
 		if (!canValidate(skill))
 			return false;
-		int cost = getCost(skill);
-		if (skill.getEffector().getLifeStats().getCurrentMp() >= cost) // npcs pass the check even when they cannot afford it
-			skill.getEffector().getLifeStats().reduceMp(SM_ATTACK_STATUS.TYPE.USED_MP, cost, 0, SM_ATTACK_STATUS.LOG.REGULAR);
+		skill.getEffector().getLifeStats().reduceMp(SM_ATTACK_STATUS.TYPE.USED_MP, getCost(skill), 0, SM_ATTACK_STATUS.LOG.REGULAR);
 		return true;
 	}
 
 	@Override
 	public boolean canValidate(Skill skill) {
-		if (!(skill.getEffector() instanceof Player player)) // npc templates carry no mp at all, so they must not be blocked by an mp cost
-			return true;
-		if (player.getLifeStats().getCurrentMp() >= getCost(skill))
-			return true;
-		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_NOT_ENOUGH_MP());
-		return false;
+		// npcs have no mp, so they must not be blocked by an mp cost
+		if (skill.getEffector() instanceof Player player && player.getLifeStats().getCurrentMp() < getCost(skill)) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_NOT_ENOUGH_MP());
+			return false;
+		}
+		return true;
 	}
 
 	private int getCost(Skill skill) {

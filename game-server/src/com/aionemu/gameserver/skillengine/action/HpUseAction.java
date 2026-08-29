@@ -38,13 +38,12 @@ public class HpUseAction extends Action {
 
 	@Override
 	public boolean canAct(Skill skill) {
-		Creature effector = skill.getEffector();
-		if (!(effector instanceof Player player))
-			return true;
-		if (effector.getLifeStats().getCurrentHp() > getCost(skill)) // the cast may never be lethal
-			return true;
-		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_NOT_ENOUGH_HP());
-		return false;
+		// npcs are never blocked by an hp cost, they pay what they have, see validate()
+		if (skill.getEffector() instanceof Player player && player.getLifeStats().getCurrentHp() <= getCost(skill)) { // the cast may never be lethal
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_NOT_ENOUGH_HP());
+			return false;
+		}
+		return true;
 	}
 
 	private int getCost(Skill skill) {

@@ -29,22 +29,19 @@ public class ItemUseAction extends Action {
 	protected boolean expendable = true;
 
 	@Override
-	public boolean canAct(Skill skill) {
-		if (!(skill.getEffector() instanceof Player player))
-			return true;
-		if (player.getInventory().getItemCountByItemId(itemid) >= count)
-			return true;
-		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_NOT_ENOUGH_ITEM(DataManager.ITEM_DATA.getItemTemplate(itemid).getL10n()));
-		return false;
+	public boolean act(Skill skill) {
+		if (!expendable)
+			return canAct(skill);
+		if (skill.getEffector() instanceof Player player && !player.getInventory().decreaseByItemId(itemid, count)) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_NOT_ENOUGH_ITEM(DataManager.ITEM_DATA.getItemTemplate(itemid).getL10n()));
+			return false;
+		}
+		return true;
 	}
 
 	@Override
-	public boolean act(Skill skill) {
-		if (!(skill.getEffector() instanceof Player player))
-			return true;
-		if (!expendable)
-			return canAct(skill);
-		if (!player.getInventory().decreaseByItemId(itemid, count)) {
+	public boolean canAct(Skill skill) {
+		if (skill.getEffector() instanceof Player player && player.getInventory().getItemCountByItemId(itemid) < count) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_NOT_ENOUGH_ITEM(DataManager.ITEM_DATA.getItemTemplate(itemid).getL10n()));
 			return false;
 		}

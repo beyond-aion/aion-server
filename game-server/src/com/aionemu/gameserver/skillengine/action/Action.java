@@ -18,8 +18,6 @@ public abstract class Action {
 
 	/**
 	 * Perform action specified in template
-	 * 
-	 * @param env
 	 */
 	public abstract boolean act(Skill skill);
 
