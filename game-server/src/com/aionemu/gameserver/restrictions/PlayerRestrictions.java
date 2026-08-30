@@ -25,6 +25,7 @@ import com.aionemu.gameserver.services.VortexService;
 import com.aionemu.gameserver.services.ban.ChatBanService;
 import com.aionemu.gameserver.services.player.PlayerChatService;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
+import com.aionemu.gameserver.skillengine.effect.RecallInstantEffect;
 import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.skillengine.model.SkillType;
@@ -88,7 +89,7 @@ public class PlayerRestrictions {
 
 		// cannot use skills while transformed
 		if (player.getTransformModel().isActive()) {
-			if (player.getTransformModel().getBanUseSkills() == 1) {
+			if (player.getTransformModel().cantUseSkills()) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CAN_NOT_CAST_IN_SHAPECHANGE());
 				return false;
 			}
@@ -101,32 +102,29 @@ public class PlayerRestrictions {
 				}
 			}
 		}
-
-		// Fix for Summon Group Member, cannot be used while either caster or summoned is actively in combat
-		// example skillId: 1606
 		if (skill.getSkillTemplate().hasRecallInstant()) {
 			if (!(target instanceof Player))
 				return false;
-			if (player.getController().isInCombat() || ((Player) target).getController().isInCombat()
-				|| ((Player) target).getTransformModel().getRes1() == 1)// cannot be summoned while transformed
-			{
+			if (player.getController().isInCombat()
+				|| ((Player) target).getController().isInCombat()
+				|| ((Player) target).getTransformModel().cantRecall()
+				|| target.getWorldId() != player.getWorldId()
+				|| !RecallInstantEffect.canRecallTo(player)) {
+				//%0 cannot be summoned right now.
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_Recall_CANNOT_ACCEPT_EFFECT(target.getName()));
 				return false;
 			}
 		}
-
 		if (template.hasResurrectEffect()) {
-			if (!(target instanceof Player)) {
+			if (!(target instanceof Player targetPlayer)) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_IS_NOT_VALID());
 				return false;
 			}
-			Player targetPlayer = (Player) target;
 			if (!targetPlayer.isDead()) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_IS_NOT_VALID());
 				return false;
 			}
 		}
-
 		return true;
 	}
 
@@ -246,7 +244,7 @@ public class PlayerRestrictions {
 		}
 
 		// cannot attack while transformed
-		if (player.getTransformModel().getRes3() == 1) {
+		if (player.getTransformModel().cantAttack()) {
 			return false;
 		}
 
@@ -308,7 +306,7 @@ public class PlayerRestrictions {
 		}
 
 		// cannot use item while transformed
-		if (player.getTransformModel().getRes5() == 1) {
+		if (player.getTransformModel().cantUseItems()) {
 			// client sends message by itself
 			return false;
 		}

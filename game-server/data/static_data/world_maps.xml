@@ -142,8 +142,8 @@
 	<map id="400040000" name="Aspida" cName="Gab1_02" water_level="1" death_level="0" world_type="PANESTERRA" world_size="2048" drop_type="PANESTERRA" flags="GLIDE FLY RIDE PVP DUEL_SAME_RACE"/>
 	<map id="400050000" name="Atanatos" cName="Gab1_03" water_level="1" death_level="0" world_type="PANESTERRA" world_size="2048" drop_type="PANESTERRA" flags="GLIDE FLY RIDE PVP DUEL_SAME_RACE"/>
 	<map id="400060000" name="Disillon" cName="Gab1_04" water_level="1" death_level="0" world_type="PANESTERRA" world_size="2048" drop_type="PANESTERRA" flags="GLIDE FLY RIDE PVP DUEL_SAME_RACE"/>
-	<map id="510010000" name="LF_Prison" cName="LF_Prison" prison="true" water_level="16" death_level="0" world_size="512" drop_type="NONE" flags="BIND PVP DUEL_SAME_RACE NO_RETURN_BATTLE"/>
-	<map id="520010000" name="DF_Prison" cName="DF_Prison" prison="true" water_level="16" death_level="0" world_size="512" drop_type="NONE" flags="PVP DUEL_SAME_RACE NO_RETURN_BATTLE"/>
+	<map id="510010000" name="LF_Prison" cName="LF_Prison" prison="true" water_level="16" death_level="0" world_size="512" drop_type="NONE" flags="BIND RECALL PVP DUEL_SAME_RACE NO_RETURN_BATTLE"/>
+	<map id="520010000" name="DF_Prison" cName="DF_Prison" prison="true" water_level="16" death_level="0" world_size="512" drop_type="NONE" flags="RECALL PVP DUEL_SAME_RACE NO_RETURN_BATTLE"/>
 	<map id="600010000" name="Silentera_Canyon" cName="Underpass" water_level="16" death_level="0" world_type="BALAUREA" world_size="1536" drop_type="BALAUREA" flags="GLIDE RIDE PVP DUEL_SAME_RACE NO_RETURN_BATTLE" pve_attack_ratio="150" pve_defend_ratio="50"/>
 	<map id="600080000" name="Live_Party_Concert_Hall" cName="IDIU" water_level="16" death_level="0" world_size="3072" drop_type="NONE" flags="RECALL GLIDE RIDE DUEL_SAME_RACE NO_RETURN_BATTLE"/>
 	<map id="600090000" name="Kaldor" cName="LDF5_Fortress" water_level="1" death_level="0" world_type="BALAUREA" world_size="1536" drop_type="BALAUREA_HIGH" flags="BIND RECALL GLIDE RIDE PVP DUEL_SAME_RACE NO_RETURN_BATTLE"/>
@@ -151,17 +151,17 @@
 	<map id="700010000" name="Oriel" cName="Housing_LF_personal" water_level="77" death_level="0" world_type="ELYSEA" world_size="3072" drop_type="ELYSEA" flags="RECALL GLIDE RIDE PVP DUEL_SAME_RACE"/>
 	<map id="700020000" name="Elyos_Legion_Housing" cName="Housing_LC_legion" water_level="16" death_level="0" world_size="3072" drop_type="NONE" flags="BIND RECALL GLIDE RIDE PVP DUEL_SAME_RACE NO_RETURN_BATTLE"/>
 	<map id="710010000" name="Pernon" cName="Housing_DF_personal" water_level="70" death_level="0" world_type="ASMODAE" world_size="3072" drop_type="ASMODAE" flags="RECALL GLIDE RIDE PVP DUEL_SAME_RACE"/>
-	<map id="710020000" name="Asmodian_Legion_Housing" cName="Housing_DC_legion" water_level="0" death_level="0" world_size="0" drop_type="NONE" flags=""/>
+	<map id="710020000" name="Asmodian_Legion_Housing" cName="Housing_DC_legion" water_level="0" death_level="0" world_size="0" drop_type="NONE" flags="RECALL"/>
 	<map id="720010000" name="Oriel" cName="housing_idlf_personal" instance="true" water_level="20" death_level="0" world_size="512" drop_type="NONE" flags="RECALL GLIDE PVP DUEL_SAME_RACE"/>
 	<map id="730010000" name="Pernon" cName="housing_iddf_personal" instance="true" water_level="225" death_level="0" world_size="512" drop_type="NONE" flags="RECALL GLIDE PVP DUEL_SAME_RACE"/>
 	<map id="900020000" name="TestBasic" cName="Test_Basic" twin_count="10" beginner_twin_count="10" water_level="16" death_level="0" world_size="256" drop_type="NONE" flags="BIND RECALL GLIDE FLY RIDE DUEL_SAME_RACE" pve_attack_ratio="100" pve_defend_ratio="100"/>
 	<map id="900030000" name="Test_Server" cName="Test_Server" twin_count="5" beginner_twin_count="5" water_level="0" death_level="0" world_size="1024" drop_type="NONE" flags="BIND RECALL GLIDE FLY RIDE PVP DUEL_SAME_RACE"/>
 	<map id="900100000" name="Test_GiantMonster" cName="Test_GiantMonster" water_level="16" death_level="0" world_size="1024" drop_type="NONE" flags="BIND RECALL GLIDE FLY DUEL_SAME_RACE DUEL_OTHER_RACE"/>
 	<map id="900110000" name="Housing_barrack" cName="Housing_barrack" water_level="115" death_level="0" world_size="3072" drop_type="NONE" flags="BIND RECALL GLIDE RIDE PVP DUEL_SAME_RACE"/>
-	<map id="900120000" name="Test_IDArena" cName="Test_IDArena" instance="true" water_level="0" death_level="0" world_size="0" drop_type="NONE" flags=""/>
-	<map id="900130000" name="IDLDF5RE_test" cName="IDLDF5RE_test" instance="true" water_level="0" death_level="0" world_size="0" drop_type="NONE" flags=""/>
-	<map id="900140000" name="Instanced_Dungeon_Test" cName="Test_Kgw" instance="true" water_level="0" death_level="0" world_size="0" drop_type="NONE" flags=""/>
-	<map id="900150000" name="Instanced_Dungeon_Test2" cName="Test_Basic_Mj" instance="true" water_level="0" death_level="0" world_size="0" drop_type="NONE" flags=""/>
+	<map id="900120000" name="Test_IDArena" cName="Test_IDArena" instance="true" water_level="0" death_level="0" world_size="0" drop_type="NONE" flags="RECALL"/>
+	<map id="900130000" name="IDLDF5RE_test" cName="IDLDF5RE_test" instance="true" water_level="0" death_level="0" world_size="0" drop_type="NONE" flags="RECALL"/>
+	<map id="900140000" name="Instanced_Dungeon_Test" cName="Test_Kgw" instance="true" water_level="0" death_level="0" world_size="0" drop_type="NONE" flags="RECALL"/>
+	<map id="900150000" name="Instanced_Dungeon_Test2" cName="Test_Basic_Mj" instance="true" water_level="0" death_level="0" world_size="0" drop_type="NONE" flags="RECALL"/>
 	<map id="900170000" name="test_intro" cName="test_intro" water_level="16" death_level="0" world_size="2048" drop_type="NONE" flags="BIND RECALL GLIDE FLY RIDE PVP DUEL_SAME_RACE"/>
 	<map id="900180000" name="Test_server_art" cName="Test_server_art" water_level="100" death_level="0" world_size="1024" drop_type="NONE" flags="BIND RECALL GLIDE FLY RIDE PVP DUEL_SAME_RACE"/>
 	<map id="900190000" name="Tag_Match_Test_Level" cName="Test_TagMatch" instance="true" water_level="16" death_level="0" world_size="256" drop_type="NONE" flags="BIND RECALL GLIDE FLY RIDE PVP DUEL_SAME_RACE NO_RETURN_BATTLE"/>

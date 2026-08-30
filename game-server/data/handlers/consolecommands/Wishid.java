@@ -19,7 +19,7 @@ public class Wishid extends ConsoleCommand {
 
 	@Override
 	public void execute(Player admin, String... params) {
-		if (params.length < 1) {
+		if (params.length < 2) {
 			info(admin, null);
 			return;
 		}

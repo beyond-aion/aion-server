@@ -33,7 +33,6 @@ import com.aionemu.gameserver.model.gameobjects.state.CreatureVisualState;
 import com.aionemu.gameserver.model.gameobjects.state.FlyState;
 import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.model.stats.container.PlayerGameStats;
-import com.aionemu.gameserver.model.summons.SummonMode;
 import com.aionemu.gameserver.model.summons.UnsummonType;
 import com.aionemu.gameserver.model.templates.QuestTemplate;
 import com.aionemu.gameserver.model.templates.flypath.FlightPath;
@@ -290,7 +289,7 @@ public class PlayerController extends CreatureController<Player> {
 		// Release summon
 		Summon summon = player.getSummon();
 		if (summon != null)
-			SummonsService.doMode(SummonMode.RELEASE, summon, UnsummonType.UNSPECIFIED);
+			SummonsService.release(summon, UnsummonType.MASTER_DEATH);
 
 		// setIsFlyingBeforeDead for PlayerReviveService
 		if (player.isInState(CreatureState.FLYING))
@@ -425,7 +424,7 @@ public class PlayerController extends CreatureController<Player> {
 			PacketSendUtility.sendPacket(getOwner(), SM_ATTACK_RESPONSE.STOP_WITHOUT_MESSAGE(gameStats.getAttackCounter()));
 			return;
 		}
-		lastAttackMillis = milis;
+		enterCombat(true);
 
 		super.attackTarget(target, time, true);
 	}
@@ -451,7 +450,7 @@ public class PlayerController extends CreatureController<Player> {
 			QuestEngine.getInstance().onAttack(new QuestEnv(attacker, getOwner(), 0));
 		}
 
-		lastAttackedMillis = System.currentTimeMillis();
+		enterCombat(false);
 	}
 
 	public void useSkill(SkillTemplate template, int targetType, float x, float y, float z, int clientHitTime, int skillLevel) {
@@ -511,6 +510,15 @@ public class PlayerController extends CreatureController<Player> {
 
 	@Override
 	public void cancelCurrentSkill(Creature lastAttacker) {
+		Skill castingSkill = getOwner().getCastingSkill();
+		//RecallInstantEffect sends its own cast cancellation message.
+		if (castingSkill != null && castingSkill.getSkillTemplate().hasRecallInstant()) {
+			Creature target = castingSkill.getFirstTarget();
+			String targetName = target != null ? target.getName() : "";
+			//Summoning of %0 is cancelled.
+			cancelCurrentSkill(lastAttacker, SM_SYSTEM_MESSAGE.STR_MSG_Recall_CANCEL_EFFECT(targetName));
+			return;
+		}
 		cancelCurrentSkill(lastAttacker, SM_SYSTEM_MESSAGE.STR_SKILL_CANCELED());
 	}
 
@@ -758,4 +766,16 @@ public class PlayerController extends CreatureController<Player> {
 		return Math.max(lastAttackedMillis, lastAttackMillis);
 	}
 
+	/**
+	 * Refreshes the combat timer, see {@link #isInCombat()}.
+	 *
+	 * @param attacking
+	 *          True, if the player attacked someone, false if he was attacked
+	 */
+	public void enterCombat(boolean attacking) {
+		if (attacking)
+			lastAttackMillis = System.currentTimeMillis();
+		else
+			lastAttackedMillis = System.currentTimeMillis();
+	}
 }

@@ -110,7 +110,6 @@ public class Player extends Creature {
 	private final Storage[] cabinets = new Storage[StorageType.HOUSE_WH_MAX - StorageType.HOUSE_WH_MIN + 1];
 	private Item usingItem;
 
-	private final AbsoluteStatOwner absStatsHolder;
 	private PlayerSettings playerSettings;
 
 	private PlayerGroup playerGroup;
@@ -214,7 +213,6 @@ public class Player extends Creature {
 
 		setGameStats(new PlayerGameStats(this));
 		setLifeStats(new PlayerLifeStats(this));
-		absStatsHolder = new AbsoluteStatOwner(this, 0);
 	}
 
 	public boolean isInPlayerMode(PlayerMode mode) {
@@ -1596,10 +1594,6 @@ public class Player extends Creature {
 		return rideObservers;
 	}
 
-	public AbsoluteStatOwner getAbsoluteStats() {
-		return absStatsHolder;
-	}
-
 	@Override
 	public void setPosition(WorldPosition position) {
 		super.setPosition(position);
@@ -1627,7 +1621,7 @@ public class Player extends Creature {
 	@Override
 	public boolean canPerformMove() {
 		// player cannot move is transformed
-		if (getTransformModel().getBanMovement() == 1)
+		if (getTransformModel().cantMove())
 			return false;
 
 		return super.canPerformMove();

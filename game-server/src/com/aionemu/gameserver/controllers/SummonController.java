@@ -65,10 +65,12 @@ public class SummonController extends CreatureController<Summon> {
 	 * Change to attackMode
 	 */
 	public void attackMode(int targetObjId) {
-		VisibleObject obj = getOwner().getKnownList().getObject(targetObjId);
-		if (obj instanceof Creature) {
+		if (canAttack(targetObjId))
 			SummonsService.attackMode(getOwner());
-		}
+	}
+
+	public boolean canAttack(int targetObjId) {
+		return getOwner().getKnownList().getObject(targetObjId) instanceof Creature creature && getOwner().isEnemy(creature);
 	}
 
 	@Override
@@ -95,8 +97,7 @@ public class SummonController extends CreatureController<Summon> {
 		if (getOwner().isDead())
 			return;
 
-		// temp
-		if (getOwner().getMode() == SummonMode.RELEASE)
+		if (getOwner().isReleaseUncancelable())
 			return;
 
 		super.onAttack(creature, effect, type, damage, notifyAttack, log, attackStatus, hopType);
@@ -119,7 +120,7 @@ public class SummonController extends CreatureController<Summon> {
 	@Override
 	public void onDie(Creature lastAttacker) {
 		super.onDie(lastAttacker);
-		SummonsService.release(getOwner(), UnsummonType.UNSPECIFIED);
+		SummonsService.release(getOwner(), UnsummonType.SUMMON_DEATH);
 	}
 
 	public void useSkill(SkillOrder order) {
@@ -131,7 +132,7 @@ public class SummonController extends CreatureController<Summon> {
 		Skill skill = SkillEngine.getInstance().getSkill(creature, order.getSkillId(), 1, order.getTarget());
 		skill.setHate(order.getHate());
 		if (skill.useSkill() && order.isRelease()) {
-			SummonsService.release(getOwner(), UnsummonType.UNSPECIFIED);
+			SummonsService.release(getOwner(), UnsummonType.SKILL_ORDER);
 		}
 	}
 

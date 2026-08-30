@@ -1,7 +1,5 @@
 package admincommands;
 
-import org.apache.commons.lang3.math.NumberUtils;
-
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.world.WeatherEntry;
@@ -68,7 +66,7 @@ public class Weather extends AdminCommand {
 					}
 					weatherCode = -1;
 				} else {
-					weatherCode = NumberUtils.toInt(params[1], -1);
+					weatherCode = params.length > 1 ? Integer.parseInt(params[1]) : -1;
 					if (weatherCode < 0 || weatherCode > 12) {
 						sendInfo(admin, "Weather code must be between 0 and 12.");
 						return;
@@ -81,7 +79,6 @@ public class Weather extends AdminCommand {
 				} else {
 					sendInfo(admin, "This region has no weather defined.");
 				}
-				return;
 		}
 	}
 }

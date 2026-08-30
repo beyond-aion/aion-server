@@ -22,13 +22,13 @@ public class TransformModel {
 	private TribeClass transformTribe;
 
 	// restrictions
-	protected int banUseSkills;
-	protected int banMovement;
-	protected int res1;
-	protected int res2;
-	protected int res3;
-	protected int res5;
-	protected int res6;
+	protected boolean cantUseSkills;
+	protected boolean cantMove;
+	protected boolean cantRecall;
+	protected boolean cantJump;
+	protected boolean cantAttack;
+	protected boolean cantUseItems;
+	protected boolean cantFly;
 
 	public TransformModel(Creature creature) {
 		this.originalType = creature instanceof Player ? TransformType.PC : TransformType.NONE;
@@ -37,47 +37,36 @@ public class TransformModel {
 	}
 
 	public void apply(int modelId) {
-		apply(modelId, originalType, 0, 0, 0, 0, 0, 0, 0, 0);
+		apply(modelId, originalType, 0, false, false, false, false, false, false, false);
 	}
 
 	/**
 	 * Function that activates transform
-	 * 
-	 * @param modelId
-	 * @param type
-	 * @param panelId
-	 * @param banUseSkills
-	 * @param banMovement
-	 * @param res1
-	 * @param res2
-	 * @param res3
-	 * @param res5
-	 * @param res6
 	 */
-	public void apply(int modelId, TransformType type, int panelId, int banUseSkills, int banMovement, int res1, int res2, int res3, int res5, int res6) {
+	public void apply(int modelId, TransformType type, int panelId, boolean cantUseSkills, boolean cantMove, boolean cantRecall, boolean cantJump, boolean cantAttack, boolean cantUseItems, boolean cantFly) {
 		int originalModelId = owner.getObjectTemplate().getTemplateId();
 		if (modelId == 0 || modelId == originalModelId) { // reset
 			this.modelId = originalModelId;
 			this.transformType = originalType;
 			this.panelId = 0;
-			this.banUseSkills = 0;
-			this.banMovement = 0;
-			this.res1 = 0;
-			this.res2 = 0;
-			this.res3 = 0;
-			this.res5 = 0;
-			this.res6 = 0;
+			this.cantUseSkills = false;
+			this.cantMove = false;
+			this.cantRecall = false;
+			this.cantJump = false;
+			this.cantAttack = false;
+			this.cantUseItems = false;
+			this.cantFly = false;
 		} else { // set new
 			this.modelId = modelId;
 			this.transformType = type;
 			this.panelId = panelId;
-			this.banUseSkills = banUseSkills;
-			this.banMovement = banMovement;
-			this.res1 = res1;
-			this.res2 = res2;
-			this.res3 = res3;
-			this.res5 = res5;
-			this.res6 = res6;
+			this.cantUseSkills = cantUseSkills;
+			this.cantMove = cantMove;
+			this.cantRecall = cantRecall;
+			this.cantJump = cantJump;
+			this.cantAttack = cantAttack;
+			this.cantUseItems = cantUseItems;
+			this.cantFly = cantFly;
 		}
 
 		this.updateVisually();
@@ -117,7 +106,7 @@ public class TransformModel {
 	}
 
 	public boolean isUnrestricted() {
-		return banUseSkills == 0 && banMovement == 0 && res1 == 0 && res2 == 0 && res3 == 0 && res5 == 0 && res6 == 0;
+		return !cantUseSkills && !cantMove && !cantRecall && !cantJump && !cantAttack && !cantUseItems && !cantFly;
 	}
 
 	/**
@@ -169,52 +158,31 @@ public class TransformModel {
 		this.updateTribeVisually();
 	}
 
-	/**
-	 * @return the banUseSkills
-	 */
-	public int getBanUseSkills() {
-		return banUseSkills;
+	public boolean cantUseSkills() {
+		return cantUseSkills;
 	}
 
-	/**
-	 * @return the banMovement
-	 */
-	public int getBanMovement() {
-		return banMovement;
+	public boolean cantMove() {
+		return cantMove;
 	}
 
-	/**
-	 * @return the res1
-	 */
-	public int getRes1() {
-		return res1;
+	public boolean cantRecall() {
+		return cantRecall;
 	}
 
-	/**
-	 * @return the res2
-	 */
-	public int getRes2() {
-		return res2;
+	public boolean cantJump() {
+		return cantJump;
 	}
 
-	/**
-	 * @return the res3
-	 */
-	public int getRes3() {
-		return res3;
+	public boolean cantAttack() {
+		return cantAttack;
 	}
 
-	/**
-	 * @return the res5
-	 */
-	public int getRes5() {
-		return res5;
+	public boolean cantUseItems() {
+		return cantUseItems;
 	}
 
-	/**
-	 * @return the res6
-	 */
-	public int getRes6() {
-		return res6;
+	public boolean cantFly() {
+		return cantFly;
 	}
 }
