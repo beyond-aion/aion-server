@@ -78,7 +78,7 @@ public class PlayerLeaveWorldService {
 		}
 
 		FindGroupService.getInstance().onLogout(player);
-		RecallService.getInstance().cancel(player, CancelReason.SILENT);
+		RecallService.getInstance().cancel(player, CancelReason.CANCELLED);
 		player.getResponseRequester().denyAll();
 		player.getFriendList().setStatus(FriendList.Status.OFFLINE, player.getCommonData());
 		BrokerService.getInstance().removePlayerCache(player);

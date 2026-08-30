@@ -31,10 +31,8 @@ public class RecallService {
 		TIMEOUT,
 		/** The summoned player declined. */
 		DECLINED,
-		/** Something invalidated the request (combat, death, teleport, ...). Both sides are notified. */
-		CANCELLED,
-		/** The request is dropped without notifying anyone. */
-		SILENT
+		/** Something invalidated the request (combat, death, logout, teleport, ...). Both sides are notified. */
+		CANCELLED
 	}
 
 	private static final int CONFIRMATION_SECONDS = 30;
@@ -85,8 +83,6 @@ public class RecallService {
 			return;
 		if (reason == CancelReason.TIMEOUT || reason == CancelReason.CANCELLED)
 			PacketSendUtility.sendPacket(summoned, new SM_RECALLED_BY_OTHER()); // the client closes the window itself only when it answered
-		if (reason == CancelReason.SILENT)
-			return;
 
 		Player caster = World.getInstance().getPlayer(request.casterObjectId);
 		if (caster == null)
