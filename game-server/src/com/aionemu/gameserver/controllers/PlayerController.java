@@ -553,8 +553,7 @@ public class PlayerController extends CreatureController<Player> {
 
 	@Override
 	public void cancelUseItem() {
-		getOwner().getObserveController().abortItemUseObservers(); // each observer knows its item, so it sends the matching message and animation
-		cancelTask(TaskId.ITEM_USE);
+		getOwner().getObserveController().abortItemUseObservers(); // each observer knows its item and cancels its own task, message and animation
 	}
 
 	@Override
