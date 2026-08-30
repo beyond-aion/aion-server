@@ -5,12 +5,11 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.actions.PlayerMode;
-import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
-import com.aionemu.gameserver.model.templates.item.actions.ItemActions;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
@@ -119,12 +118,16 @@ public class CM_EMOTION extends AionClientPacket {
 			&& (emotionType == EmotionType.CHAIR_SIT || emotionType == EmotionType.JUMP))
 			return;
 
-		Item usingItem = player.getUsingItem();
-		if (usingItem == null || !hasRideAction(usingItem)) // don't cancel getting on mount
-			player.getController().cancelUseItem();
-		if (emotionType == EmotionType.SELECT_TARGET)
+		if (emotionType == EmotionType.SELECT_TARGET) {
+			if (CustomConfig.CANCEL_ITEM_USE_ON_TARGET_CHANGE) {
+				player.getController().cancelUseItem();
+				if (player.isCastingItemSkill()) // selecting a target interrupts item casts, but not skill casts
+					player.getController().cancelCurrentSkill(null);
+			}
 			return;
+		}
 
+		player.getController().cancelUseItem();
 		player.getController().cancelCurrentSkill(null);
 
 		// check for stance
@@ -224,11 +227,6 @@ public class CM_EMOTION extends AionClientPacket {
 
 		if (player.isProtectionActive())
 			player.getController().stopProtectionActiveTask();
-	}
-
-	private boolean hasRideAction(Item item) {
-		ItemActions actions = item.getItemTemplate().getActions();
-		return actions != null && actions.getRideAction() != null;
 	}
 
 	private int getTargetObjectId(Player player) {

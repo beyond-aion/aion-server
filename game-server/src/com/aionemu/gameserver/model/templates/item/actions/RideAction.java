@@ -83,7 +83,7 @@ public class RideAction extends AbstractItemAction {
 			final ItemUseObserver observer = new ItemUseObserver() {
 				@Override
 				public void abort() {
-					player.getController().cancelUseItem(false);
+					player.getController().cancelTask(TaskId.ITEM_USE);
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_CANCELED());
 					PacketSendUtility.broadcastPacket(player,
 						new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, 3, 0), true);

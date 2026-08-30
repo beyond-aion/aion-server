@@ -734,7 +734,7 @@ public class Equipment implements Persistable {
 
 					@Override
 					public void abort() {
-						responder.getController().cancelUseItem(false);
+						responder.getController().cancelTask(TaskId.ITEM_USE);
 						PacketSendUtility.sendPacket(responder, STR_SOUL_BOUND_ITEM_CANCELED(item.getL10n()));
 						PacketSendUtility.broadcastPacket(responder,
 							new SM_ITEM_USAGE_ANIMATION(responder.getObjectId(), item.getObjectId(), item.getItemId(), 0, 8), true);
