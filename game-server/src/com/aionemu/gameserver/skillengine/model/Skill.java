@@ -1034,7 +1034,7 @@ public class Skill {
 	 * - hit time will only be boosted if the current skill if cast before the animation of the previous skill finishes<br>
 	 */
 	public boolean allowAnimationBoostByCastSpeed() {
-		return isMagical();
+		return skillTemplate.isApplyCastingTimeBonus();
 	}
 
 	private boolean isCastDurationAffectedByCastSpeed() {
@@ -1077,9 +1077,5 @@ public class Skill {
 
 	public void setHate(int hate) {
 		this.hate = hate;
-	}
-
-	private boolean isMagical() {
-		return skillTemplate.getType() == SkillType.MAGICAL && skillTemplate.getSubType() != SkillSubType.NONE;
 	}
 }
