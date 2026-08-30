@@ -8,4 +8,19 @@
             <point x="833.55853" y="303.02"/>
         </points>
     </zone>
+    <zone mapid="300080000" name="RECALLAREAIDABRE_LOW_WCIEL_RECALLAREA1_300080000" area_type="POLYGON" zone_type="LIMIT" priority="16" flags="0">
+        <points bottom="3.6e+02" top="4.2e+02">
+            <point x="188.41089" y="362.4589"/>
+            <point x="137.82036" y="508.9511"/>
+            <point x="138.92583" y="662.1732"/>
+            <point x="191.61285" y="810.74426"/>
+            <point x="269.20325" y="779.3932"/>
+            <point x="236.35886" y="708.83185"/>
+            <point x="220.21387" y="648.28156"/>
+            <point x="214.52548" y="585.53644"/>
+            <point x="220.06184" y="522.8916"/>
+            <point x="236.28827" y="462.56522"/>
+            <point x="266.7805" y="396.3083"/>
+        </points>
+    </zone>
 </zones>

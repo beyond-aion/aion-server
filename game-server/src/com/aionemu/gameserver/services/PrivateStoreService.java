@@ -19,6 +19,7 @@ import com.aionemu.gameserver.model.trade.TradePSItem;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PRIVATE_STORE_NAME;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.services.RecallService.CancelReason;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -44,6 +45,7 @@ public class PrivateStoreService {
 		}
 		player.setStore(store);
 		player.setState(CreatureState.PRIVATE_SHOP, true);
+		RecallService.getInstance().cancel(player, CancelReason.CANCELLED);
 		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.OPEN_PRIVATESHOP, 0, 0), true);
 	}
 

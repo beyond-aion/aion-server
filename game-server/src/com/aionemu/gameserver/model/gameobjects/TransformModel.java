@@ -4,6 +4,8 @@ import com.aionemu.gameserver.model.TribeClass;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_CUSTOM_SETTINGS;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_TRANSFORM;
+import com.aionemu.gameserver.services.RecallService;
+import com.aionemu.gameserver.services.RecallService.CancelReason;
 import com.aionemu.gameserver.skillengine.model.TransformType;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
@@ -154,7 +156,10 @@ public class TransformModel {
 	 *          the transformTribe to set
 	 */
 	public void setTribe(TribeClass transformTribe) {
+		boolean tribeChanged = this.transformTribe != transformTribe;
 		this.transformTribe = transformTribe;
+		if (tribeChanged && owner instanceof Player player)
+			RecallService.getInstance().cancel(player, CancelReason.CANCELLED);
 		this.updateTribeVisually();
 	}
 

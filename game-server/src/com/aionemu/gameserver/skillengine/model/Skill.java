@@ -34,6 +34,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
+import com.aionemu.gameserver.services.RecallService;
 import com.aionemu.gameserver.services.abyss.AbyssService;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
 import com.aionemu.gameserver.skillengine.SkillEngine;
@@ -148,6 +149,9 @@ public class Skill {
 		}
 
 		if (!preCastCheck())
+			return false;
+
+		if (castState == CastState.CAST_START && isInvalidRecall())
 			return false;
 
 		// check for counter skill
@@ -568,6 +572,10 @@ public class Skill {
 			effector.getController().cancelCurrentSkill(null); // calls effector.setCasting(null) and sends skill cancel packet
 			return;
 		}
+		if (isInvalidRecall()) {
+			effector.getController().cancelCurrentSkill(null, null); // the validation already told the caster why the recall failed
+			return;
+		}
 		if (!payCastCosts()) {
 			effector.getController().cancelCurrentSkill(null, null); // the unpaid cost already told the player what is missing
 			return;
@@ -732,6 +740,16 @@ public class Skill {
 		}
 
 		addResistedEffectHateAndNotifyFriends(effects);
+	}
+
+	/**
+	 * Recall skills (Summon Group Member, example skillId: 3777) validate their target when the cast starts and again when it ends. The caster is
+	 * told why it failed.
+	 *
+	 * @return True, if this is a recall skill whose target may not be recalled
+	 */
+	private boolean isInvalidRecall() {
+		return skillTemplate.hasRecallInstant() && effector instanceof Player caster && !RecallService.validateCast(caster, firstTarget);
 	}
 
 	/**

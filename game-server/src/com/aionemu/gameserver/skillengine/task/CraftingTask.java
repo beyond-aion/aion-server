@@ -97,12 +97,10 @@ public class CraftingTask extends AbstractCraftTask {
 	protected void onInteractionAbort() {
 		PacketSendUtility.sendPacket(requester, new SM_CRAFT_UPDATE(recipeTemplate.getSkillId(), itemTemplate, 0, 0, 4, 0, 0));
 		PacketSendUtility.broadcastPacket(requester, new SM_CRAFT_ANIMATION(requester.getObjectId(), responder.getObjectId(), 0, 2), true);
-		requester.setCraftingTask(null);
 	}
 
 	@Override
 	protected void onInteractionFinish() {
-		requester.setCraftingTask(null);
 	}
 
 	@Override

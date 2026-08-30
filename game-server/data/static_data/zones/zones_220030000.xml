@@ -225,7 +225,7 @@
             <point x="2401.755" y="1639.875"/>
         </points>
     </zone>
-    <zone mapid="220030000" name="DF1A_IMPETUSIUM_LIMITAREA_220030000" area_type="POLYGON" zone_type="LIMIT" flags="52">
+    <zone mapid="220030000" name="DF1A_IMPETUSIUM_LIMITAREA_220030000" area_type="POLYGON" zone_type="LIMIT" priority="16" flags="52">
         <points bottom="100.0" top="450.0">
             <point x="2731.62" y="1485.91"/>
             <point x="2768.604" y="1519.0339"/>
@@ -295,7 +295,7 @@
             <point x="2438.4646" y="2556.7385"/>
         </points>
     </zone>
-    <zone mapid="220030000" name="DF1A_OP_LIMITAREA_NORIDE_220030000" area_type="POLYGON" zone_type="LIMIT" flags="6">
+    <zone mapid="220030000" name="DF1A_OP_LIMITAREA_NORIDE_220030000" area_type="POLYGON" zone_type="LIMIT" priority="16" flags="6">
         <points bottom="250.0" top="261.81">
             <point x="1747.8" y="1829.71"/>
             <point x="1743.9373" y="1845.2467"/>
