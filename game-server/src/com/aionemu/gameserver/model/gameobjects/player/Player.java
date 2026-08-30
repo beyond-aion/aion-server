@@ -108,7 +108,6 @@ public class Player extends Creature {
 	private final Storage regularWarehouse;
 	private final Storage[] petBags = new Storage[StorageType.PET_BAG_MAX - StorageType.PET_BAG_MIN + 1];
 	private final Storage[] cabinets = new Storage[StorageType.HOUSE_WH_MAX - StorageType.HOUSE_WH_MIN + 1];
-	private Item usingItem;
 
 	private PlayerSettings playerSettings;
 
@@ -459,14 +458,6 @@ public class Player extends Creature {
 
 	public Equipment getEquipment() {
 		return equipment;
-	}
-
-	public Item getUsingItem() {
-		return usingItem;
-	}
-
-	public void setUsingItem(Item usingItem) {
-		this.usingItem = usingItem;
 	}
 
 	/**
