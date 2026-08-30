@@ -16,12 +16,10 @@ import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
 import com.aionemu.gameserver.model.siege.FortressLocation;
 import com.aionemu.gameserver.model.stats.container.PlayerGameStats;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.restrictions.PlayerRestrictions;
 import com.aionemu.gameserver.services.SiegeService;
 import com.aionemu.gameserver.services.TownService;
 import com.aionemu.gameserver.spawnengine.ClusteredNpc;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.utils.stats.CalculationType;
@@ -34,16 +32,13 @@ public class Info extends AdminCommand {
 
 	public Info() {
 		super("info", "Shows information about your target.");
+
+		setSyntaxInfo(" - Shows information about your target (defaults to your character, if no player is targeted).");
 	}
 
 	@Override
 	public void execute(Player admin, String... params) {
-		VisibleObject target = admin.getTarget();
-
-		if (target == null) {
-			PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_INVALID_TARGET());
-			return;
-		}
+		VisibleObject target = admin.getTarget() == null ? admin : admin.getTarget();
 
 		sendInfo(admin, "[Info about " + target.getClass().getSimpleName() + "]\n\tName: " + target.getName() + ", ObjectId: " + target.getObjectId()
 			+ "\n\tTemplateId: " + target.getObjectTemplate().getTemplateId());

@@ -1,6 +1,5 @@
 package consolecommands;
 
-import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -28,18 +27,7 @@ public class Givetitle extends ConsoleCommand {
 			return;
 		}
 
-		final VisibleObject target = admin.getTarget();
-		if (target == null) {
-			PacketSendUtility.sendMessage(admin, "No target selected.");
-			return;
-		}
-
-		if (!(target instanceof Player)) {
-			PacketSendUtility.sendMessage(admin, "Select one player.");
-			return;
-		}
-
-		final Player player = (Player) target;
+		final Player player = admin.getTarget() instanceof Player target ? target : admin;
 
 		int titleId;
 		try {

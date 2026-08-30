@@ -1,7 +1,6 @@
 package consolecommands;
 
 import com.aionemu.gameserver.model.gameobjects.Item;
-import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.item.ItemQuality;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemDeleteType;
@@ -24,18 +23,7 @@ public class Delete_items extends ConsoleCommand {
 			return;
 		}
 
-		final VisibleObject target = admin.getTarget();
-		if (target == null) {
-			PacketSendUtility.sendMessage(admin, "No target selected.");
-			return;
-		}
-
-		if (!(target instanceof Player)) {
-			PacketSendUtility.sendMessage(admin, "This command can only be used on a player!");
-			return;
-		}
-
-		final Player player = (Player) target;
+		final Player player = admin.getTarget() instanceof Player target ? target : admin;
 
 		int quality;
 

@@ -1,10 +1,7 @@
 package consolecommands;
 
 import com.aionemu.gameserver.configs.main.GSConfig;
-import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.ConsoleCommand;
 
 /**
@@ -15,7 +12,7 @@ public class Leveldown extends ConsoleCommand {
 	public Leveldown() {
 		super("leveldown", "Levels a player down.");
 
-		setSyntaxInfo("<value> - Levels your target down by the specified number of levels.");
+		setSyntaxInfo("<value> - Levels your target down by the specified number of levels (defaults to your character, if no player is targeted).");
 	}
 
 	@Override
@@ -25,13 +22,7 @@ public class Leveldown extends ConsoleCommand {
 			return;
 		}
 
-		final VisibleObject target = admin.getTarget();
-		if (!(target instanceof Player)) {
-			PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_INVALID_TARGET());
-			return;
-		}
-
-		final Player player = (Player) target;
+		final Player player = admin.getTarget() instanceof Player target ? target : admin;
 		int newLevel;
 		try {
 			newLevel = player.getLevel() - Integer.parseInt(params[0]);

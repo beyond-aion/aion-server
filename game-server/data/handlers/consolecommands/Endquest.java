@@ -1,7 +1,6 @@
 package consolecommands;
 
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION.ActionType;
@@ -20,7 +19,7 @@ public class Endquest extends ConsoleCommand {
 	public Endquest() {
 		super("endquest", "Completes a quest.");
 
-		setSyntaxInfo("<quest> - Completes the specified quest (without giving rewards).");
+		setSyntaxInfo("<quest> - Completes the specified quest of your target, without giving rewards (defaults to your character, if no player is targeted).");
 	}
 
 	@Override
@@ -30,13 +29,7 @@ public class Endquest extends ConsoleCommand {
 			return;
 		}
 
-		VisibleObject target = admin.getTarget();
-		if (!(target instanceof Player)) {
-			sendInfo(admin, "Please select a player.");
-			return;
-		}
-
-		Player player = (Player) target;
+		Player player = admin.getTarget() instanceof Player target ? target : admin;
 		int questId = ChatUtil.getQuestId(params[0]);
 		if (questId == 0) {
 			sendInfo(admin, "Invalid quest link or ID.");

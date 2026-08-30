@@ -1,10 +1,7 @@
 package consolecommands;
 
 import com.aionemu.gameserver.configs.main.GSConfig;
-import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.ConsoleCommand;
 
 /**
@@ -15,7 +12,7 @@ public class Levelup extends ConsoleCommand {
 	public Levelup() {
 		super("levelup", "Levels a player up.");
 
-		setSyntaxInfo("<value> - Levels your target up by the specified number of levels.");
+		setSyntaxInfo("<value> - Levels your target up by the specified number of levels (defaults to your character, if no player is targeted).");
 	}
 
 	@Override
@@ -25,18 +22,12 @@ public class Levelup extends ConsoleCommand {
 			return;
 		}
 
-		final VisibleObject target = admin.getTarget();
-		if (!(target instanceof Player)) {
-			PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_INVALID_TARGET());
-			return;
-		}
-
-		final Player player = (Player) target;
+		final Player player = admin.getTarget() instanceof Player target ? target : admin;
 		int newLevel;
 		try {
 			newLevel = player.getLevel() + Integer.parseInt(params[0]);
 		} catch (NumberFormatException e) {
-			sendInfo(admin, "Please specify the number of levels to subtract.");
+			sendInfo(admin, "Please specify the number of levels to add.");
 			return;
 		}
 

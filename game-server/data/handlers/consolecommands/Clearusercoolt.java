@@ -16,10 +16,17 @@ public class Clearusercoolt extends ConsoleCommand {
 
 	public Clearusercoolt() {
 		super("clearusercoolt", "Clears cooldowns for instances.");
+
+		setSyntaxInfo("<player> - Removes the instance cooldowns of the given player.");
 	}
 
 	@Override
 	public void execute(Player admin, String... params) {
+		if (params.length == 0) {
+			sendInfo(admin);
+			return;
+		}
+
 		String playerName = ChatUtil.getRealCharName(params[0], true);
 		Player player = World.getInstance().getPlayer(playerName);
 		if (player == null) {

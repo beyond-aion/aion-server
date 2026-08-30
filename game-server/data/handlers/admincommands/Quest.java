@@ -236,14 +236,14 @@ public class Quest extends AdminCommand {
 		sendInfo(admin, "Quest not implemented or player level doesn't match.");
 	}
 
-	private void deleteQuest(Player admin, Player target, int questId) {
+	public void deleteQuest(Player admin, Player target, int questId) {
 		if (!admin.hasAccess(AdminConfig.CMD_QUEST_ADV_PARAMS)) {
 			sendInfo(admin, "<You need access level " + AdminConfig.CMD_QUEST_ADV_PARAMS + " or higher to use this function>");
 			return;
 		}
 		QuestState qs = target.getQuestStateList().deleteQuest(questId);
 		if (qs == null) {
-			sendInfo(admin, "Player " + target.getName() + " does not have that quest.");
+			sendInfo(admin, target.getName() + " does not have that quest.");
 			return;
 		}
 		if (qs.getStatus() == QuestStatus.COMPLETE)
@@ -251,7 +251,8 @@ public class Quest extends AdminCommand {
 		else
 			PacketSendUtility.sendPacket(target, new SM_QUEST_ACTION(ActionType.ABANDON, qs));
 		target.getController().updateNearbyQuests();
-		sendInfo(admin, "Deleted " + ChatUtil.quest(questId) + " for player " + target.getName() + ".");
+		if (!admin.equals(target))
+			sendInfo(admin, "Deleted " + ChatUtil.quest(questId) + " for player " + target.getName() + ".");
 	}
 
 	private void showQuestStatus(Player admin, Player target, int questId) {
