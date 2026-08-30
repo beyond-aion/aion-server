@@ -151,7 +151,7 @@ public class Skill {
 		if (!preCastCheck())
 			return false;
 
-		if (castState == CastState.CAST_START && isRecallBlocked())
+		if (castState == CastState.CAST_START && isInvalidRecall())
 			return false;
 
 		// check for counter skill
@@ -572,7 +572,7 @@ public class Skill {
 			effector.getController().cancelCurrentSkill(null); // calls effector.setCasting(null) and sends skill cancel packet
 			return;
 		}
-		if (isRecallBlocked()) {
+		if (isInvalidRecall()) {
 			effector.getController().cancelCurrentSkill(null, null); // the validation already told the caster why the recall failed
 			return;
 		}
@@ -748,7 +748,7 @@ public class Skill {
 	 *
 	 * @return True, if this is a recall skill whose target may not be recalled
 	 */
-	private boolean isRecallBlocked() {
+	private boolean isInvalidRecall() {
 		return skillTemplate.hasRecallInstant() && effector instanceof Player caster && !RecallService.validateCast(caster, firstTarget);
 	}
 
