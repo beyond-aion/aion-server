@@ -122,8 +122,8 @@ public class PlayerLeaveWorldService {
 			player.getPostman().getController().delete();
 
 		ExpireTimerTask.getInstance().unregisterExpirables(player);
-		if (player.getCraftingTask() != null)
-			player.getCraftingTask().stop();
+		if (player.getInteractionTask() != null)
+			player.getInteractionTask().abort();
 
 		QuestEngine.getInstance().onLogOut(new QuestEnv(null, player, 0));
 		Timestamp lastOnline = new Timestamp(System.currentTimeMillis());

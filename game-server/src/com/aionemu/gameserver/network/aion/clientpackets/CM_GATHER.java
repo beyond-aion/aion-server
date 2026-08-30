@@ -8,6 +8,7 @@ import com.aionemu.gameserver.model.gameobjects.Gatherable;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
+import com.aionemu.gameserver.skillengine.task.GatheringTask;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 
 /**
@@ -44,16 +45,7 @@ public class CM_GATHER extends AionClientPacket {
 	}
 
 	private void cancelGathering(Player player) {
-		// player can switch targets during gathering, so the target is not guaranteed to be the correct gatherable
-		Gatherable gatherable = player.getTarget() instanceof Gatherable g && g.getController().getGatheringPlayerId() == player.getObjectId() ? g : null;
-		if (gatherable == null) {
-			gatherable = player.getKnownList().stream()
-				.filter(o -> o.get() instanceof Gatherable g && g.getController().getGatheringPlayerId() == player.getObjectId())
-				.findFirst()
-				.map(o -> (Gatherable) o.get())
-				.orElse(null);
-		}
-		if (gatherable != null)
-			gatherable.getController().cancelGathering();
+		if (player.getInteractionTask() instanceof GatheringTask gatheringTask)
+			gatheringTask.abort();
 	}
 }

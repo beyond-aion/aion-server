@@ -120,15 +120,15 @@ public class CraftService {
 				break;
 		}
 		int skillLvlDiff = player.getSkillList().getSkillLevel(skillId) - recipeTemplate.getSkillpoint();
-		player.setCraftingTask(new CraftingTask(player, (StaticObject) target, recipeTemplate, skillLvlDiff, craftType == 1 ? 15 : 0));
+		CraftingTask craftingTask = new CraftingTask(player, (StaticObject) target, recipeTemplate, skillLvlDiff, craftType == 1 ? 15 : 0);
 
 		if (skillId == 40009) {
-			player.getCraftingTask().setInterval(200);
+			craftingTask.setInterval(200);
 		} else {
 			int interval = 2500 - (skillLvlDiff * 60);
-			player.getCraftingTask().setInterval(interval < intervalCap ? intervalCap : interval);
+			craftingTask.setInterval(interval < intervalCap ? intervalCap : interval);
 		}
-		player.getCraftingTask().start();
+		craftingTask.start();
 	}
 
 	private static boolean checkCraft(Player player, RecipeTemplate recipeTemplate, int skillId, VisibleObject target, ItemTemplate itemTemplate,
@@ -142,7 +142,7 @@ public class CraftService {
 			return false;
 		}
 
-		if (player.getCraftingTask() != null && player.getCraftingTask().isInProgress()) {
+		if (player.getInteractionTask() instanceof CraftingTask craftingTask && craftingTask.isInProgress()) {
 			return false;
 		}
 

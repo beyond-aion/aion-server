@@ -21,7 +21,7 @@ import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
  * Handles pending summon requests (Summon Group Member, example skillId: 3777).<br>
- * The request is not re-validated when the summoned player accepts it. Instead every state change which would invalidate it cancels the request, see
+ * The request is not re-validated when the summoned player accepts it. Instead, every state change that would invalidate it cancels the request, see
  * {@link #cancel(Player, CancelReason)}.
  */
 public class RecallService {

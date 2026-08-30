@@ -58,6 +58,9 @@ public abstract class AbstractInteractionTask {
 	 * Interaction scheduling method
 	 */
 	public void start() {
+		AbstractInteractionTask oldTask = requester.getInteractionTask();
+		if (oldTask != null)
+			oldTask.abort();
 		requester.setInteractionTask(this);
 		RecallService.getInstance().cancel(requester, CancelReason.CANCELLED);
 		onInteractionStart();
