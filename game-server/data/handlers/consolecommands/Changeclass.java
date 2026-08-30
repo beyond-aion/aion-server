@@ -13,7 +13,7 @@ public class Changeclass extends ConsoleCommand {
 	public Changeclass() {
 		super("changeclass", "Changes a players class.");
 
-		setSyntaxInfo("<class> - Changes your targets class to the one specified (defaults to your character, if nothing is targeted).");
+		setSyntaxInfo("<class> - Changes your target's class to the one specified (defaults to your character, if no player is targeted).");
 	}
 
 	@Override

@@ -1,13 +1,11 @@
 package consolecommands;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION.ActionType;
-import com.aionemu.gameserver.questEngine.QuestEngine;
-import com.aionemu.gameserver.questEngine.model.QuestState;
-import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.ChatUtil;
+import com.aionemu.gameserver.utils.chathandlers.ChatProcessor;
 import com.aionemu.gameserver.utils.chathandlers.ConsoleCommand;
+
+import admincommands.Quest;
 
 /**
  * @author ginho1, Neon
@@ -17,7 +15,7 @@ public class Deletecquest extends ConsoleCommand {
 	public Deletecquest() {
 		super("deletecquest", "Deletes a quest from the players quest list.");
 
-		setSyntaxInfo("<3> <quest> - Deletes the quest from your targets quest list (defaults to your character, if nothing is targeted).");
+		setSyntaxInfo("<quest link|ID> - Deletes the quest from your target's quest list (defaults to your character, if no player is targeted).");
 	}
 
 	@Override
@@ -26,25 +24,8 @@ public class Deletecquest extends ConsoleCommand {
 			sendInfo(admin);
 			return;
 		}
-
 		Player player = admin.getTarget() instanceof Player target ? target : admin;
-		int questId;
-		try {
-			questId = Integer.valueOf(params[0]);
-		} catch (NumberFormatException e) {
-			sendInfo(admin);
-			return;
-		}
-
-		QuestState qs = player.getQuestStateList().deleteQuest(questId);
-		if (qs == null) {
-			sendInfo(admin, "Player " + player.getName() + " does not have that quest.");
-			return;
-		}
-		if (qs.getStatus() == QuestStatus.COMPLETE)
-			QuestEngine.getInstance().sendCompletedQuests(player); // rewrite completed quest list
-		else
-			PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(ActionType.ABANDON, qs));
-		player.getController().updateNearbyQuests();
+		Quest questCommand = ChatProcessor.getInstance().getCommand(Quest.class);
+		questCommand.deleteQuest(admin, player, ChatUtil.getQuestId(params[0]));
 	}
 }

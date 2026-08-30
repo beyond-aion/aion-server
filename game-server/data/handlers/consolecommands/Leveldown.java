@@ -12,7 +12,7 @@ public class Leveldown extends ConsoleCommand {
 	public Leveldown() {
 		super("leveldown", "Levels a player down.");
 
-		setSyntaxInfo("<value> - Levels your target down by the specified number of levels (defaults to your character, if nothing is targeted).");
+		setSyntaxInfo("<value> - Levels your target down by the specified number of levels (defaults to your character, if no player is targeted).");
 	}
 
 	@Override

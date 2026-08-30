@@ -19,7 +19,7 @@ public class Endquest extends ConsoleCommand {
 	public Endquest() {
 		super("endquest", "Completes a quest.");
 
-		setSyntaxInfo("<quest> - Completes the specified quest of your target, without giving rewards (defaults to your character, if nothing is targeted).");
+		setSyntaxInfo("<quest> - Completes the specified quest of your target, without giving rewards (defaults to your character, if no player is targeted).");
 	}
 
 	@Override

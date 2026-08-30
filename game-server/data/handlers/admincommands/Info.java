@@ -33,7 +33,7 @@ public class Info extends AdminCommand {
 	public Info() {
 		super("info", "Shows information about your target.");
 
-		setSyntaxInfo(" - Shows information about your target (defaults to your character, if nothing is targeted).");
+		setSyntaxInfo(" - Shows information about your target (defaults to your character, if no player is targeted).");
 	}
 
 	@Override

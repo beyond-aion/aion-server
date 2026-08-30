@@ -13,7 +13,7 @@ public class Classup extends ConsoleCommand {
 	public Classup() {
 		super("classup", "Promotes a players class.");
 
-		setSyntaxInfo("<class> - Promotes your targets class to the one specified (defaults to your character, if nothing is targeted).");
+		setSyntaxInfo("<class> - Promotes your target's class to the one specified (defaults to your character, if no player is targeted).");
 	}
 
 	@Override

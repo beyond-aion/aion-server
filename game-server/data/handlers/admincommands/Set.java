@@ -6,7 +6,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.ClassChangeService;
 import com.aionemu.gameserver.services.abyss.AbyssPointsService;
 import com.aionemu.gameserver.services.abyss.GloryPointsService;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 
 /**
@@ -24,7 +23,7 @@ public class Set extends AdminCommand {
 			"exp <value> - Sets the experience points of the selected player.",
 			"ap <value> - Sets the abyss points of the selected player.",
 			"gp <value> - Sets the glory points of the selected player.",
-			"Note: Your current target will be taken (defaults to your character, if no player is targeted)."
+			"Note: Any actions default to your character, if no player is targeted."
 		);
 		// @formatter:on
 	}
@@ -47,7 +46,7 @@ public class Set extends AdminCommand {
 		} else if (params[0].equals("exp")) {
 			long exp = Long.parseLong(params[1]);
 			target.getCommonData().setExp(exp);
-			PacketSendUtility.sendMessage(admin, "Set exp of target to " + target.getCommonData().getExp());
+			sendInfo(admin, "Set exp of target to " + target.getCommonData().getExp());
 		} else if (params[0].equals("ap")) {
 			int ap = Integer.parseInt(params[1]);
 			AbyssPointsService.addAp(target, ap - target.getAbyssRank().getAp());
@@ -62,6 +61,8 @@ public class Set extends AdminCommand {
 				sendInfo(admin, "Set " + target.getName() + "'s glory points to " + target.getAbyssRank().getCurrentGP() + ".");
 				sendInfo(target, "Admin set your glory points to " + target.getAbyssRank().getCurrentGP() + ".");
 			}
+		} else {
+			sendInfo(admin);
 		}
 	}
 }

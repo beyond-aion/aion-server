@@ -21,9 +21,8 @@ public class RelinquishCraft extends AdminCommand {
 
 		// @formatter:off
 		setSyntaxInfo(
-			"<skillId> <expert|master> - Removes master or expert status of your target for the given crafting skill.",
-			"<name> <skillId> <expert|master> - Removes the players master or expert status for the given crafting skill.",
-			"Note: Without a name, your current target will be taken (defaults to your character, if no player is targeted)."
+			"<skillId> <expert|master> - Removes your target's master or expert status for the given crafting skill. Affects your own character if no player is targeted.",
+			"<name> <skillId> <expert|master> - Removes the player's master or expert status for the given crafting skill."
 		);
 		// @formatter:on
 	}

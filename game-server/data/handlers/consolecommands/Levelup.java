@@ -12,7 +12,7 @@ public class Levelup extends ConsoleCommand {
 	public Levelup() {
 		super("levelup", "Levels a player up.");
 
-		setSyntaxInfo("<value> - Levels your target up by the specified number of levels (defaults to your character, if nothing is targeted).");
+		setSyntaxInfo("<value> - Levels your target up by the specified number of levels (defaults to your character, if no player is targeted).");
 	}
 
 	@Override
