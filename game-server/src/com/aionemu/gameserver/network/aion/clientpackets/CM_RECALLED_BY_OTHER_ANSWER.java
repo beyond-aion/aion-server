@@ -10,6 +10,8 @@ import com.aionemu.gameserver.services.RecallService.CancelReason;
 
 /**
  * Answer to SM_RECALLED_BY_OTHER.
+ * 
+ * @author SVDNESS
  */
 public class CM_RECALLED_BY_OTHER_ANSWER extends AionClientPacket {
 

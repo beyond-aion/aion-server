@@ -6,6 +6,8 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
 /**
  * Opens the window which asks a player whether he wants to be teleported to the caster of a summon skill, and closes it again when the request is
  * no longer valid. The client answers with CM_RECALLED_BY_OTHER_ANSWER.
+ * 
+ * @author SVDNESS
  */
 public class SM_RECALLED_BY_OTHER extends AionServerPacket {
 
