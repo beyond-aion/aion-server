@@ -553,17 +553,8 @@ public class PlayerController extends CreatureController<Player> {
 
 	@Override
 	public void cancelUseItem() {
-		cancelUseItem(true);
-	}
-
-	public void cancelUseItem(boolean sendCancelAnimation) {
-		Player player = getOwner();
-		Item usingItem = player.getUsingItem();
-		player.setUsingItem(null);
-		if (cancelTask(TaskId.ITEM_USE) != null && sendCancelAnimation) {
-			PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), usingItem == null ? 0 : usingItem.getObjectId(),
-				usingItem == null ? 0 : usingItem.getItemTemplate().getTemplateId(), 0, 3, 0), true);
-		}
+		getOwner().getObserveController().abortItemUseObservers(); // each observer knows its item, so it sends the matching message and animation
+		cancelTask(TaskId.ITEM_USE);
 	}
 
 	@Override
