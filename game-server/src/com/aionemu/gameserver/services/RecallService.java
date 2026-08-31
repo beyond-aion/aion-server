@@ -82,7 +82,7 @@ public class RecallService {
 		if (request == null)
 			return;
 		if (reason == CancelReason.TIMEOUT || reason == CancelReason.CANCELLED)
-			PacketSendUtility.sendPacket(summoned, new SM_RECALLED_BY_OTHER()); // the client closes the window itself only when it answered
+			PacketSendUtility.sendPacket(summoned, SM_RECALLED_BY_OTHER.cancelled()); // the client closes the window itself only when it answered
 
 		Player caster = World.getInstance().getPlayer(request.casterObjectId);
 		if (caster == null)

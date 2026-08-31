@@ -10,27 +10,24 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
  * @author SVDNESS
  */
 public class SM_RECALLED_BY_OTHER extends AionServerPacket {
-
+	
+	private static final int OPEN_WINDOW = 0;
+	private static final int CANCELLED = 1;
+	private final int result;
 	private final String casterName;
 	private final int skillId;
 	private final int seconds;
-
-	/**
-	 * Closes the window on the client.
-	 */
-	public SM_RECALLED_BY_OTHER() {
-		this(null, 0, 0);
+	
+	public static SM_RECALLED_BY_OTHER cancelled() {
+		return new SM_RECALLED_BY_OTHER(CANCELLED, null, 0, 0);
 	}
 
-	/**
-	 * @param casterName
-	 *          - name of the summoning player
-	 * @param skillId
-	 *          - skill he used, its name is displayed in the window
-	 * @param seconds
-	 *          - time the player has to answer
-	 */
 	public SM_RECALLED_BY_OTHER(String casterName, int skillId, int seconds) {
+		this(OPEN_WINDOW, casterName, skillId, seconds);
+	}
+
+	private SM_RECALLED_BY_OTHER(int result, String casterName, int skillId, int seconds) {
+		this.result = result;
 		this.casterName = casterName;
 		this.skillId = skillId;
 		this.seconds = seconds;
@@ -38,7 +35,7 @@ public class SM_RECALLED_BY_OTHER extends AionServerPacket {
 
 	@Override
 	protected void writeImpl(AionConnection con) {
-		writeC(casterName == null ? 1 : 0); // 0 = open the window, 1 = close it
+		writeC(result);
 		writeS(casterName);
 		writeH(skillId);
 		writeH(seconds);

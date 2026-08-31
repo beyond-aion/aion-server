@@ -117,7 +117,7 @@ public class TeleportService {
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_NO_ROUTE());
 					return;
 				}
-
+				RecallService.getInstance().cancel(player, CancelReason.CANCELLED);
 				player.setCurrentFlypath(flypath);
 			}
 			player.unsetPlayerMode(PlayerMode.RIDE);
@@ -182,6 +182,7 @@ public class TeleportService {
 	}
 
 	private static void sendLoc(Player player, int worldId, int instanceId, float x, float y, float z, byte h, TeleportAnimation animation) {
+		RecallService.getInstance().cancel(player, CancelReason.CANCELLED);
 		abortPlayerActions(player);
 		// despawn from world and send animation to others (also ends flying)
 		World.getInstance().despawn(player, animation.getDefaultObjectDeleteAnimation());
@@ -220,6 +221,7 @@ public class TeleportService {
 
 	public static void teleportTo(Player player, WorldPosition pos) {
 		if (player.getWorldId() == pos.getMapId()) {
+			RecallService.getInstance().cancel(player, CancelReason.CANCELLED);
 			World.getInstance().setPosition(player.getPet(), pos.getMapId(), pos.getInstanceId(), pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
 			World.getInstance().setPosition(player, pos.getMapId(), pos.getInstanceId(), pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
 			spawnOnSameMap(player);
@@ -231,6 +233,7 @@ public class TeleportService {
 	}
 
 	public static void teleportDeadTo(Player player, int worldId, int instanceId, float x, float y, float z, byte heading) {
+		RecallService.getInstance().cancel(player, CancelReason.CANCELLED);
 		if (player.getWorldId() != worldId || player.getInstanceId() != instanceId) {
 			ConquerorAndProtectorService.getInstance().onLeaveMap(player);
 			InstanceService.onLeaveInstance(player);
@@ -279,7 +282,6 @@ public class TeleportService {
 
 	public static void teleportTo(final Player player, final int worldId, final int instanceId, final float x, final float y, final float z,
 		final byte heading, TeleportAnimation animation) {
-		RecallService.getInstance().cancel(player, CancelReason.CANCELLED);
 		if (player.isDead()) {
 			PlayerReviveService.revive(player, 20, 20, true, 0);
 		} else if (DuelService.getInstance().isDueling(player)) {
