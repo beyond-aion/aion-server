@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.model.gameobjects.player;
 
+import static com.aionemu.gameserver.model.items.ItemUseAnimation.*;
 import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.*;
 
 import java.util.*;
@@ -728,7 +729,7 @@ public class Equipment implements Persistable {
 				responder.getController().cancelUseItem();
 
 				PacketSendUtility.broadcastPacket(responder,
-					new SM_ITEM_USAGE_ANIMATION(responder.getObjectId(), item.getObjectId(), item.getItemId(), 5000, 4), true);
+					new SM_ITEM_USAGE_ANIMATION(responder.getObjectId(), item.getObjectId(), item.getItemId(), 5000, SOUL_BIND_START), true);
 
 				final ItemUseObserver observer = new ItemUseObserver() {
 
@@ -737,7 +738,7 @@ public class Equipment implements Persistable {
 						responder.getController().cancelTask(TaskId.ITEM_USE);
 						PacketSendUtility.sendPacket(responder, STR_SOUL_BOUND_ITEM_CANCELED(item.getL10n()));
 						PacketSendUtility.broadcastPacket(responder,
-							new SM_ITEM_USAGE_ANIMATION(responder.getObjectId(), item.getObjectId(), item.getItemId(), 0, 8), true);
+							new SM_ITEM_USAGE_ANIMATION(responder.getObjectId(), item.getObjectId(), item.getItemId(), 0, SOUL_BIND_CANCEL), true);
 					}
 				};
 
@@ -751,7 +752,7 @@ public class Equipment implements Persistable {
 						responder.getObserveController().removeObserver(observer);
 
 						PacketSendUtility.broadcastPacket(responder,
-							new SM_ITEM_USAGE_ANIMATION(responder.getObjectId(), item.getObjectId(), item.getItemId(), 0, 6), true);
+							new SM_ITEM_USAGE_ANIMATION(responder.getObjectId(), item.getObjectId(), item.getItemId(), 0, SOUL_BIND_SUCCESS), true);
 						PacketSendUtility.sendPacket(responder, STR_SOUL_BOUND_ITEM_SUCCEED(item.getL10n()));
 
 						item.setSoulBound(true);

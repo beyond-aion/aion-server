@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.services;
 
+import static com.aionemu.gameserver.model.items.ItemUseAnimation.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -373,7 +375,7 @@ public class StigmaService {
 		final int parentItemId = stigma.getItemId();
 		final int parentObjectId = stigma.getObjectId();
 		PacketSendUtility.broadcastPacket(player,
-			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentObjectId, chargeStone.getObjectId(), parentItemId, 5000, 0, 0), true);
+			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentObjectId, chargeStone.getObjectId(), parentItemId, 5000, USE_START), true);
 		final ItemUseObserver observer = new ItemUseObserver() {
 
 			@Override
@@ -381,7 +383,7 @@ public class StigmaService {
 				player.getController().cancelTask(TaskId.ITEM_USE);
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_CANCELED());
 				PacketSendUtility.broadcastPacket(player,
-					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentObjectId, chargeStone.getObjectId(), parentItemId, 0, 2, 0), true);
+					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentObjectId, chargeStone.getObjectId(), parentItemId, 0, USE_FAIL), true);
 				player.getObserveController().removeObserver(this);
 			}
 		};
@@ -392,7 +394,7 @@ public class StigmaService {
 			public void run() {
 				player.getObserveController().removeObserver(observer);
 				PacketSendUtility.broadcastPacket(player,
-					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentObjectId, parentItemId, 0, isSuccess ? 1 : 2, 1), true);
+					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentObjectId, parentItemId, 0, isSuccess ? USE_SUCCESS : USE_FAIL), true);
 				if (!player.getInventory().decreaseByObjectId(chargeStone.getObjectId(), 1, ItemPacketService.ItemUpdateType.DEC_STIGMA_USE))
 					return;
 				if (!isSuccess) {

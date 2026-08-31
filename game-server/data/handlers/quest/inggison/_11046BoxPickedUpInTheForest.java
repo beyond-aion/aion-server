@@ -1,6 +1,7 @@
 package quest.inggison;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
+import static com.aionemu.gameserver.model.items.ItemUseAnimation.*;
 
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -74,7 +75,7 @@ public class _11046BoxPickedUpInTheForest extends AbstractQuestHandler {
 
 		if (id != 182206745)
 			return HandlerResult.UNKNOWN;
-		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 20, 1, 0), true);
+		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 20, USE_SUCCESS), true);
 		if (qs == null || qs.isStartable())
 			sendQuestDialog(env, 4);
 		return HandlerResult.SUCCESS;

@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.model.templates.item.actions;
 
+import static com.aionemu.gameserver.model.items.ItemUseAnimation.*;
+
 import javax.xml.bind.annotation.XmlAttribute;
 
 import com.aionemu.gameserver.controllers.observer.ItemUseObserver;
@@ -127,7 +129,7 @@ public class ApExtractAction extends AbstractItemAction {
 	@Override
 	public void act(Player player, Item parentItem, Item targetItem, Object... params) {
 		PacketSendUtility.broadcastPacket(player,
-			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), CASTING_DELAY, 0, 0), true);
+			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), CASTING_DELAY, USE_START), true);
 
 		ItemUseObserver observer = new ItemUseObserver() {
 
@@ -136,7 +138,7 @@ public class ApExtractAction extends AbstractItemAction {
 				player.getController().cancelTask(TaskId.ITEM_USE);
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_AP_DECOMPOSE_ITEM_CANCELED(targetItem.getL10n()));
 				PacketSendUtility.broadcastPacket(player,
-					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, 2, 0), true);
+					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, USE_FAIL), true);
 				player.getObserveController().removeObserver(this);
 			}
 
@@ -153,7 +155,7 @@ public class ApExtractAction extends AbstractItemAction {
 		if (success)
 			player.startCooldown(parentItem);
 		PacketSendUtility.broadcastPacket(player,
-			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, success ? 1 : 2, 0), true);
+			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, success ? USE_SUCCESS : USE_FAIL), true);
 	}
 
 	private boolean extractAp(Player player, Item parentItem, Item targetItem) {

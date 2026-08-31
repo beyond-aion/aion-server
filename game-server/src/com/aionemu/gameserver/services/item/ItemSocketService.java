@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.services.item;
 
+import static com.aionemu.gameserver.model.items.ItemUseAnimation.*;
+
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -181,20 +183,20 @@ public class ItemSocketService {
 				player.getController().cancelTask(TaskId.ITEM_USE);
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GIVE_PROC_CANCEL(weapon.getL10n()));
 				PacketSendUtility.broadcastPacketAndReceive(player,
-					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), stoneId, itemTemplate.getTemplateId(), 0, 3, 0));
+					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), stoneId, itemTemplate.getTemplateId(), 0, USE_CANCEL));
 			}
 		};
 
 		player.getObserveController().attach(observer);
 
 		PacketSendUtility.broadcastPacketAndReceive(player,
-			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), stoneId, itemTemplate.getTemplateId(), 2000, 0, 0));
+			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), stoneId, itemTemplate.getTemplateId(), 2000, USE_START));
 
 		player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(() -> {
 			player.getObserveController().removeObserver(observer);
 
 			PacketSendUtility.broadcastPacketAndReceive(player,
-				new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), stoneId, itemTemplate.getTemplateId(), 0, 1, 0));
+				new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), stoneId, itemTemplate.getTemplateId(), 0, USE_SUCCESS));
 
 			if (!player.getInventory().decreaseByObjectId(stoneId, 1))
 				return;

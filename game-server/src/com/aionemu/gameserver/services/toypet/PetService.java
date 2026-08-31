@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.services.toypet;
 
+import static com.aionemu.gameserver.model.items.ItemUseAnimation.*;
+
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -172,7 +174,7 @@ public class PetService {
 			for (AbstractItemAction itemAction : useItem.getItemTemplate().getActions().getItemActions()) {
 				if (itemAction instanceof SkillUseAction) {
 					PacketSendUtility.broadcastPacket(player,
-						new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), player.getObjectId(), useItem.getObjectId(), useItem.getItemId(), 0, 1, 1, 1, 0, 15360),
+						new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), player.getObjectId(), useItem.getObjectId(), useItem.getItemId(), 0, USE_SUCCESS, true),
 						true);
 					SkillEngine.getInstance().applyEffectDirectly(((SkillUseAction) itemAction).getSkillId(), ((SkillUseAction) itemAction).getLevel(), player,
 						player, null, ForceType.DEFAULT);
