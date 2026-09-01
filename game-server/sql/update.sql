@@ -15,3 +15,6 @@ ALTER TABLE `bookmark`
 
 DROP TABLE `ingameshop`;
 DROP TABLE `ingameshop_log`;
+
+ALTER TABLE `inventory`
+	ADD COLUMN `rank_limit_expire_time` int NOT NULL DEFAULT '0' AFTER `rnd_plume_bonus`;

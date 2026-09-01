@@ -11,11 +11,10 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.controllers.observer.ItemUseObserver;
 import com.aionemu.gameserver.dao.InventoryDAO;
-import com.aionemu.gameserver.model.ActionState;
+import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.TaskId;
-import com.aionemu.gameserver.model.actions.PlayerMode;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Persistable;
 import com.aionemu.gameserver.model.gameobjects.Summon;
@@ -45,6 +44,8 @@ import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
 public class Equipment implements Persistable {
 
 	private static final Logger log = LoggerFactory.getLogger(Equipment.class);
+	private static final int RANK_LIMIT_GRACE_SECONDS = 600;
+	private static final int RANK_LIMIT_LAST_WARNING_SECONDS = 60;
 
 	private final SortedMap<Long, Item> equipment = Collections.synchronizedSortedMap(new TreeMap<>());
 	private final Player owner;
@@ -66,13 +67,35 @@ public class Equipment implements Persistable {
 		if (itemTemplate.isTwoHandWeapon()) // client only sends main+sub slot when equipping via right click / double click
 			slot = ItemSlot.MAIN_OR_SUB.getSlotIdMask();
 		else if (itemTemplate.isOneHandWeapon() && !WeaponDualEffect.hasDualWieldEffect(owner))
-			slot = ItemSlot.MAIN_HAND.getSlotIdMask();
+			slot = ItemSlot.MAIN_HAND.getSlotIdMask(); // without the skill an off hand request is silently moved to the main hand, no message is sent
+
+		int rank = owner.getAbyssRank().getRank().getId();
+		ItemUseLimits unmetRankLimits = findUnmetRankLimits(item, rank);
+		if (unmetRankLimits != null) {
+			if (unmetRankLimits.getMinRank() > rank)
+				PacketSendUtility.sendPacket(owner,
+					STR_MSG_CANT_USE_ITEM_TOO_LOW_RANK(AbyssRankEnum.getRankL10n(owner.getRace(), unmetRankLimits.getMinRank()), item.getL10n()));
+			else
+				PacketSendUtility.sendPacket(owner,
+					STR_MSG_CANT_USE_ITEM_TOO_HIGH_RANK(AbyssRankEnum.getRankL10n(owner.getRace(), unmetRankLimits.getMaxRank()), item.getL10n()));
+			return null;
+		}
+
+		if (!checkAvailableEquipSkills(item)) {
+			if (itemTemplate.getItemGroup() == ItemGroup.SHIELD)
+				PacketSendUtility.sendPacket(owner, STR_SKILL_NO_SHIELD_MASTERY_SKILL());
+			else if (itemTemplate.isWeapon())
+				PacketSendUtility.sendPacket(owner, STR_SKILL_NO_WEAPON_MASTERY_SKILL());
+			else
+				PacketSendUtility.sendPacket(owner, STR_SKILL_NO_ARMOR_MASTERY_SKILL());
+			return null;
+		}
 
 		if (!itemTemplate.isClassSpecific(owner.getPlayerClass())) {
 			PacketSendUtility.sendPacket(owner, STR_CANNOT_USE_ITEM_INVALID_CLASS());
 			return null;
 		}
-		// don't allow to wear items of not allowed level
+
 		int requiredLevel = itemTemplate.getRequiredLevel(owner.getPlayerClass());
 		if (requiredLevel == -1 || requiredLevel > owner.getLevel()) {
 			PacketSendUtility.sendPacket(owner, STR_CANNOT_USE_ITEM_TOO_LOW_LEVEL_MUST_BE_THIS_LEVEL(item.getL10n(), requiredLevel));
@@ -96,18 +119,10 @@ public class Equipment implements Persistable {
 			return null;
 		}
 
-		if (!verifyRankLimits(item)) {
-			PacketSendUtility.sendPacket(owner, STR_CANNOT_USE_ITEM_INVALID_RANK(AbyssRankEnum.getRankL10n(owner.getRace(), limits.getMinRank())));
-			return null;
-		}
-
 		if (!checkInventorySlots(slot)) {
 			PacketSendUtility.sendPacket(owner, STR_UI_INVENTORY_FULL());
 			return null;
 		}
-
-		if (!checkAvailableEquipSkills(item))
-			return null;
 
 		ItemSlot[] targetSlots = ItemSlot.getSlotsFor(slot);
 		if (targetSlots.length == 0) {
@@ -241,7 +256,7 @@ public class Equipment implements Persistable {
 			if (itemToUnequip.getEquipmentSlot() == ItemSlot.MAIN_HAND.getSlotIdMask()) {
 				Item ohWeapon = equipment.get(ItemSlot.SUB_HAND.getSlotIdMask());
 				if (ohWeapon != null && ohWeapon.getItemTemplate().isWeapon()) {
-					if (owner.getInventory().getFreeSlots() < 2) {
+					if (checkFullInventory && owner.getInventory().getFreeSlots() < 2) {
 						return null;
 					}
 					unEquip(ItemSlot.SUB_HAND.getSlotIdMask());
@@ -302,16 +317,16 @@ public class Equipment implements Persistable {
 	}
 
 	private boolean checkAvailableEquipSkills(Item item) {
-		int[] requiredSkills = item.getItemTemplate().getRequiredSkills();
-		if (requiredSkills.length == 0) // if no skills required - validate as true
+		Set<Integer> masterySkills = DataManager.SKILL_DATA.getMasterySkills(item.getItemTemplate().getItemGroup());
+		if (masterySkills.isEmpty())
 			return true;
 
-		for (int skill : requiredSkills) {
-			if (owner.getSkillList().isSkillPresent(skill))
+		for (int skillId : masterySkills) {
+			if (owner.getSkillList().isSkillPresent(skillId))
 				return true;
 		}
 
-		return false; // FIXME leather skill allows you to wear leather. You don't need cloth skill too!
+		return false;
 	}
 
 	public Item getEquippedItemByObjId(int itemObjId) {
@@ -699,26 +714,8 @@ public class Equipment implements Persistable {
 	private boolean soulBindItem(final Player player, final Item item, final long slot) {
 		if (player.getInventory().getItemByObjId(item.getObjectId()) == null)
 			return false;
-		if (player.isDead()) {
-			PacketSendUtility.sendPacket(player, STR_SOUL_BOUND_INVALID_STANCE(ActionState.DEAD.getL10n()));
-			return false;
-		} else if (player.isInPlayerMode(PlayerMode.RIDE)) {
-			PacketSendUtility.sendPacket(player, STR_SOUL_BOUND_INVALID_STANCE(ActionState.RIDING.getL10n()));
-			return false;
-		} else if (player.isInState(CreatureState.CHAIR)) {
-			PacketSendUtility.sendPacket(player, STR_SOUL_BOUND_INVALID_STANCE(ActionState.SITTING.getL10n()));
-			return false;
-		} else if (player.isInState(CreatureState.RESTING)) {
-			PacketSendUtility.sendPacket(player, STR_SOUL_BOUND_INVALID_STANCE(ActionState.RESTING.getL10n()));
-			return false;
-		} else if (player.isInState(CreatureState.GLIDING)) {
-			PacketSendUtility.sendPacket(player, STR_SOUL_BOUND_INVALID_STANCE(ActionState.GLIDING.getL10n()));
-			return false;
-		} else if (player.isInState(CreatureState.FLYING)) {
-			PacketSendUtility.sendPacket(player, STR_SOUL_BOUND_INVALID_STANCE(ActionState.FREE_FLYING.getL10n()));
-			return false;
-		} else if (player.isInState(CreatureState.WEAPON_EQUIPPED)) {
-			PacketSendUtility.sendPacket(player, STR_SOUL_BOUND_INVALID_STANCE(ActionState.COMBAT.getL10n()));
+		if (player.isInState(CreatureState.WEAPON_EQUIPPED) || !CreatureState.isStanding(player.getState())) {
+			PacketSendUtility.sendPacket(player, STR_SOUL_BOUND_INVALID_STANCE(CreatureState.getActionState(player.getState()).getL10n()));
 			return false;
 		}
 
@@ -781,21 +778,71 @@ public class Equipment implements Persistable {
 	}
 
 	private boolean verifyRankLimits(Item item) {
-		int rank = owner.getAbyssRank().getRank().getId();
-		if (!item.getItemTemplate().getUseLimits().verifyRank(rank))
-			return false;
-		if (item.getFusionedItemTemplate() != null)
-			return item.getFusionedItemTemplate().getUseLimits().verifyRank(rank);
-		return true;
+		return findUnmetRankLimits(item, owner.getAbyssRank().getRank().getId()) == null;
 	}
 
+	/**
+	 * @return The limits of the item or of the item fused into it that the given abyss rank does not satisfy, null if it satisfies both.
+	 */
+	private ItemUseLimits findUnmetRankLimits(Item item, int rank) {
+		if (!item.getItemTemplate().getUseLimits().verifyRank(rank))
+			return item.getItemTemplate().getUseLimits();
+		if (item.getFusionedItemTemplate() != null && !item.getFusionedItemTemplate().getUseLimits().verifyRank(rank))
+			return item.getFusionedItemTemplate().getUseLimits();
+		return null;
+	}
+
+	/**
+	 * Gives the owner ten minutes to keep wearing the items his abyss rank no longer allows, warns him a minute before the end and takes them off when the
+	 * time is up. Regaining the rank in the meantime cancels it. The deadline is stored with the item, so it keeps running across a relog.
+	 */
 	public void checkRankLimitItems() {
+		int now = (int) (System.currentTimeMillis() / 1000);
+		int nextDeadline = 0;
 		for (Item item : getEquippedItems()) {
-			if (!verifyRankLimits(item)) {
-				unEquipItem(item.getObjectId(), false);
-				PacketSendUtility.sendPacket(owner, STR_MSG_UNEQUIP_RANKITEM(item.getL10n()));
-				// TODO: Check retail what happens with full inv and the task msgs.
+			if (verifyRankLimits(item)) {
+				if (item.getRankLimitExpireTime() != 0)
+					item.setRankLimitExpireTime(0); // the rank came back in time
+				continue;
 			}
+			if (item.getRankLimitExpireTime() == 0) {
+				item.setRankLimitExpireTime(now + RANK_LIMIT_GRACE_SECONDS);
+				PacketSendUtility.sendPacket(owner, STR_MSG_UNEQUIP_RANKITEM_TIMER_10M(item.getL10n()));
+			}
+			if (nextDeadline == 0 || item.getRankLimitExpireTime() < nextDeadline)
+				nextDeadline = item.getRankLimitExpireTime();
 		}
+		owner.getController().cancelTask(TaskId.RANK_LIMIT_UNEQUIP);
+		if (nextDeadline != 0)
+			scheduleRankLimitCheck(nextDeadline - now);
+	}
+
+	private void scheduleRankLimitCheck(int secondsLeft) {
+		boolean warnOnly = secondsLeft > RANK_LIMIT_LAST_WARNING_SECONDS;
+		int delay = Math.max(warnOnly ? secondsLeft - RANK_LIMIT_LAST_WARNING_SECONDS : secondsLeft, 0);
+		owner.getController().addTask(TaskId.RANK_LIMIT_UNEQUIP,
+			ThreadPoolManager.getInstance().schedule(warnOnly ? this::warnAboutRankLimitItems : this::unequipRankLimitItems, delay * 1000L));
+	}
+
+	private void warnAboutRankLimitItems() {
+		int now = (int) (System.currentTimeMillis() / 1000);
+		for (Item item : getEquippedItems()) {
+			if (item.getRankLimitExpireTime() != 0 && item.getRankLimitExpireTime() - now <= RANK_LIMIT_LAST_WARNING_SECONDS)
+				PacketSendUtility.sendPacket(owner, STR_MSG_UNEQUIP_RANKITEM_TIMER_1M(item.getL10n()));
+		}
+		scheduleRankLimitCheck(RANK_LIMIT_LAST_WARNING_SECONDS);
+	}
+
+	private void unequipRankLimitItems() {
+		int now = (int) (System.currentTimeMillis() / 1000);
+		for (Item item : getEquippedItems()) {
+			if (item.getRankLimitExpireTime() == 0 || item.getRankLimitExpireTime() > now)
+				continue;
+			item.setRankLimitExpireTime(0);
+			// the inventory may overflow, taking these off is not optional
+			if (unEquipItem(item.getObjectId(), false) != null)
+				PacketSendUtility.sendPacket(owner, STR_MSG_UNEQUIP_RANKITEM(item.getL10n()));
+		}
+		checkRankLimitItems(); // items whose grace period started later keep waiting for their own deadline
 	}
 }
