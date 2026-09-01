@@ -36,12 +36,8 @@ import com.aionemu.gameserver.model.templates.teleport.TeleportLocation;
 import com.aionemu.gameserver.model.templates.teleport.TeleportType;
 import com.aionemu.gameserver.model.templates.teleport.TeleporterTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.*;
-import com.aionemu.gameserver.services.DuelService;
-import com.aionemu.gameserver.services.LegionService;
-import com.aionemu.gameserver.services.PrivateStoreService;
-import com.aionemu.gameserver.services.RecallService;
+import com.aionemu.gameserver.services.*;
 import com.aionemu.gameserver.services.RecallService.CancelReason;
-import com.aionemu.gameserver.services.SiegeService;
 import com.aionemu.gameserver.services.conquerorAndProtectorSystem.ConquerorAndProtectorService;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
@@ -117,10 +113,9 @@ public class TeleportService {
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_NO_ROUTE());
 					return;
 				}
-
 				player.setCurrentFlypath(flypath);
 			}
-			player.unsetPlayerMode(PlayerMode.RIDE);
+			abortPlayerActions(player);
 			player.setState(CreatureState.FLYING);
 			player.unsetState(CreatureState.ACTIVE);
 			player.setFlightTeleportId(location.getTeleportId());
@@ -200,6 +195,7 @@ public class TeleportService {
 	private static void abortPlayerActions(Player player) {
 		if (player.hasStore())
 			PrivateStoreService.closePrivateStore(player);
+		RecallService.getInstance().cancel(player, CancelReason.CANCELLED);
 		player.getController().cancelCurrentSkill(null);
 		player.setTarget(null);
 		player.unsetPlayerMode(PlayerMode.RIDE);
@@ -220,6 +216,7 @@ public class TeleportService {
 
 	public static void teleportTo(Player player, WorldPosition pos) {
 		if (player.getWorldId() == pos.getMapId()) {
+			abortPlayerActions(player);
 			World.getInstance().setPosition(player.getPet(), pos.getMapId(), pos.getInstanceId(), pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
 			World.getInstance().setPosition(player, pos.getMapId(), pos.getInstanceId(), pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
 			spawnOnSameMap(player);
@@ -279,7 +276,6 @@ public class TeleportService {
 
 	public static void teleportTo(final Player player, final int worldId, final int instanceId, final float x, final float y, final float z,
 		final byte heading, TeleportAnimation animation) {
-		RecallService.getInstance().cancel(player, CancelReason.CANCELLED);
 		if (player.isDead()) {
 			PlayerReviveService.revive(player, 20, 20, true, 0);
 		} else if (DuelService.getInstance().isDueling(player)) {
