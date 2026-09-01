@@ -546,11 +546,13 @@ public class AttackUtil {
 		return AttackStatus.NORMALHIT;
 	}
 
+	//Cast is interrupted only for those who can no longer see the target after it enters hide.
 	public static void cancelCastOn(Creature target) {
 		target.getKnownList().forEachObject(visibleObject -> {
 			if (visibleObject instanceof Creature creature && visibleObject.getTarget() == target) {
-				if (creature.getCastingSkill() != null && creature.getCastingSkill().getFirstTarget().equals(target))
+				if (creature.getCastingSkill() != null && target.equals(creature.getCastingSkill().getFirstTarget()) && !creature.canSee(target)) {
 					creature.getController().cancelCurrentSkill(null);
+				}
 			}
 		});
 	}
