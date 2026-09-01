@@ -2,6 +2,7 @@ package com.aionemu.gameserver.services.player;
 
 import java.sql.Timestamp;
 import java.util.concurrent.Future;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,6 +42,7 @@ import com.aionemu.gameserver.world.WorldPosition;
 public class PlayerLeaveWorldService {
 
 	private static final Logger log = LoggerFactory.getLogger(PlayerLeaveWorldService.class);
+	private static final AtomicInteger pendingLeaves = new AtomicInteger();
 
 	/**
 	 * This method is called when a player loses client connection, e.g. when killing the process, or due to bad network connectivity.<br>
@@ -61,6 +63,23 @@ public class PlayerLeaveWorldService {
 	 * <b><font color='red'>NOTICE:</font> This method is called only from {@link CM_QUIT} and must not be called from anywhere else</b>
 	 */
 	public static void leaveWorld(Player player) {
+		if (!player.startLeavingWorld()) {
+			return; //Already leaving or gone, calling it twice would save him from two threads at once.
+		}
+		pendingLeaves.incrementAndGet();
+		try {
+			removeFromWorldAndSave(player);
+		} finally {
+			pendingLeaves.decrementAndGet();
+		}
+	}
+
+	//Players vanish from the world in the middle of the leave world procedure, so the shutdown hook uses this to await unfinished ones.
+	public static boolean hasPendingLeaves() {
+		return pendingLeaves.get() > 0;
+	}
+
+	private static void removeFromWorldAndSave(Player player) {
 		AionConnection con = player.getClientConnection();
 		player.setClientConnection(null); // this sets the player semi-offline, PacketSendUtility will not send packets anymore
 

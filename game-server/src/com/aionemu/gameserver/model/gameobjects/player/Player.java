@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.configs.main.SecurityConfig;
@@ -102,6 +103,7 @@ public class Player extends Creature {
 	private List<House> houses;
 
 	private ResponseRequester requester;
+	private final AtomicBoolean leavingWorld = new AtomicBoolean();
 	private boolean lookingForGroup = false;
 	private final Equipment equipment;
 	private final Storage inventory;
@@ -411,6 +413,11 @@ public class Player extends Creature {
 
 	public boolean isOnline() {
 		return getClientConnection() != null;
+	}
+
+	//Leaving the world is triggered by the quit packet, by a lost connection and by the server shutdown, but must run exactly once per session.
+	public boolean startLeavingWorld() {
+		return leavingWorld.compareAndSet(false, true);
 	}
 
 	public int getQuestExpands() {
