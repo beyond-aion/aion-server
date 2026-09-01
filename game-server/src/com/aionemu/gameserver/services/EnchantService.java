@@ -234,8 +234,13 @@ public class EnchantService {
 		item.setEnchantLevel(enchantLevel);
 		int oldBuffId = item.getBuffSkill();
 		int newBuffId = 0;
-		if (enchantLevel >= 20)
-			newBuffId = getEquipBuff(item);
+		if (enchantLevel >= 20) {
+			if (oldBuffId > 0) {
+				newBuffId = oldBuffId;
+			} else {
+				newBuffId = getEquipBuff(item);
+			}
+		}
 		if (newBuffId != oldBuffId) {
 			item.setBuffSkill(newBuffId);
 			if (item.isEquipped()) {
