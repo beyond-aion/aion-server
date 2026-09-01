@@ -1044,6 +1044,13 @@
 		<xs:complexContent>
 			<xs:extension base="Effect">
 				<xs:attribute name="count" type="xs:int" />
+				<xs:attribute name="count_delta" type="xs:int" />
+				<xs:attribute name="dmg_flat" type="xs:int" />
+				<xs:attribute name="dmg_flat_delta" type="xs:int" />
+				<xs:attribute name="acc_flat" type="xs:int" />
+				<xs:attribute name="acc_flat_delta" type="xs:int" />
+				<xs:attribute name="acc_percent" type="xs:int" />
+				<xs:attribute name="acc_percent_delta" type="xs:int" />
 				<xs:attribute name="type" type="skillType" />
 			</xs:extension>
 		</xs:complexContent>

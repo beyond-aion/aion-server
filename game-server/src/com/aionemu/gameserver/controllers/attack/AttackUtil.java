@@ -8,6 +8,7 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.utils.Rnd;
+import com.aionemu.gameserver.controllers.observer.OneTimeBoostSkillAttack;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.SkillElement;
 import com.aionemu.gameserver.model.gameobjects.*;
@@ -231,7 +232,7 @@ public class AttackUtil {
 		int randomDamageType = template instanceof SkillAttackInstantEffect skillAttackInstantEffect ? skillAttackInstantEffect.getRnddmg() : 0;
 		boolean useTemplateDmg = isUseTemplateDmg(effect, template);
 		boolean send = !(template instanceof DelayedSpellAttackInstantEffect) && !(template instanceof ProcAtkInstantEffect);
-		boolean shouldIncreaseByOneTimeBoost = !(template instanceof ProcAtkInstantEffect);
+		OneTimeBoostSkillAttack boost = OneTimeBoostSkillAttackEffect.getActiveBoost(effector, template);
 
 		AttackStatus status = switch (element) {
 			case NONE -> calculatePhysicalStatus(effector, effected, template, effect.getSkillLevel());
@@ -304,18 +305,18 @@ public class AttackUtil {
 
 		boolean isPhysical = element == SkillElement.NONE;
 		if (!useTemplateDmg) {
-			float damageMultiplier;
 			if (isPhysical) {
-				damageMultiplier = effector.getObserveController().getBasePhysicalDamageMultiplier(true);
 				damage += bonus;
 			} else {
-				damageMultiplier = shouldIncreaseByOneTimeBoost ? effector.getObserveController().getBaseMagicalDamageMultiplier() : 1f;
 				damage = StatFunctions.calculateMagicalSkillDamage(effector, effected, damage, (int) bonus, template, true, true);
 			}
 			if (template.shouldApplyAttackerMovementModifier()) {
 				damage = StatFunctions.adjustStatByMovementModifier(effector, isPhysical ? StatEnum.PHYSICAL_ATTACK : StatEnum.MAGICAL_ATTACK, damage);
 			}
-			damage *= damageMultiplier;
+		}
+		if (boost != null) {
+			damage = boost.calculateDamage(damage);
+			boost.consumeCharge();
 		}
 
 		if (randomDamageType > 0)
@@ -470,9 +471,7 @@ public class AttackUtil {
 		if (effector instanceof Trap) {
 			damage = skillDamage;
 		} else {
-			float damageMultiplier = effector.getObserveController().getBaseMagicalDamageMultiplier();
 			damage = StatFunctions.calculateMagicalSkillDamage(effector, effected, skillDamage, 0, template, useMagicBoost, false);
-			damage = damage * damageMultiplier;
 
 			AttackStatus status = effect.getAttackStatus();
 			// calculate attack status only if it has not been forced already
@@ -497,6 +496,11 @@ public class AttackUtil {
 
 	private static AttackStatus calculatePhysicalStatus(Creature attacker, Creature attacked, EffectTemplate template, int skillLevel) {
 		int accMod = template.getAccMod2() + template.getAccMod1() * skillLevel;
+		if (!template.isNoResist()) {
+			OneTimeBoostSkillAttack boost = OneTimeBoostSkillAttackEffect.getActiveBoost(attacker, template);
+			if (boost != null)
+				accMod += boost.calculatePhysicalAccuracyBonus(attacker.getGameStats().getMainHandPAccuracy());
+		}
 		boolean cannotMiss = template instanceof SkillAttackInstantEffect skillAttackInstantEffect && skillAttackInstantEffect.isCannotmiss();
 		return calculatePhysicalStatus(attacker, attacked, true, accMod, template.getCritProbMod2(), true, cannotMiss);
 	}

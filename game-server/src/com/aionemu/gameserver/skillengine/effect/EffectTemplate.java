@@ -12,6 +12,7 @@ import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.controllers.attack.AttackResult;
 import com.aionemu.gameserver.controllers.effect.CumulativeResistType;
+import com.aionemu.gameserver.controllers.observer.OneTimeBoostSkillAttack;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.SkillElement;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -346,12 +347,17 @@ public abstract class EffectTemplate {
 	 * @return true = no dodge/resist, false = dodged/resisted
 	 */
 	private boolean checkDodgeOrResistRate(Effect effect) {
+		Creature effector = effect.getEffector();
 		int accuracyModifier = accMod2 + accMod1 * effect.getSkillLevel() + effect.getAccModBoost();
 		if (effect.getSkillTemplate().getSubType() == SkillSubType.DEBUFF)
-			accuracyModifier += effect.getEffector().getGameStats().getStat(StatEnum.BOOST_RESIST_DEBUFF, 0).getCurrent();
-		if (element == SkillElement.NONE)
-			return !StatFunctions.checkIsDodgedHit(effect.getEffector(), effect.getEffected(), accuracyModifier);
-		return Rnd.get(1, 1000) > StatFunctions.calculateMagicalResistRate(effect.getEffector(), effect.getEffected(), accuracyModifier, element);
+			accuracyModifier += effector.getGameStats().getStat(StatEnum.BOOST_RESIST_DEBUFF, 0).getCurrent();
+		OneTimeBoostSkillAttack boost = OneTimeBoostSkillAttackEffect.getActiveBoost(effector, this);
+		if (element == SkillElement.NONE) {
+			if (boost != null)
+				accuracyModifier += boost.calculatePhysicalAccuracyBonus(effector.getGameStats().getMainHandPAccuracy());
+			return !StatFunctions.checkIsDodgedHit(effector, effect.getEffected(), accuracyModifier);
+		}
+		return Rnd.get(1, 1000) > StatFunctions.calculateMagicalResistRate(effector, effect.getEffected(), accuracyModifier, element, boost);
 	}
 
 	private void addSuccessEffect(Effect effect, SpellStatus spellStatus) {
