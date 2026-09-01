@@ -707,6 +707,9 @@ public class EffectController {
 		owner.getObserveController().notifyAbnormalSettedObservers(state);
 		abnormals |= state.getId();
 
+		if ((state.getId() & AbnormalState.CANCEL_ITEM_USE.getId()) != 0)
+			owner.getController().cancelUseItem();
+
 		// TODO move to observer?
 		// if player is sitting when setting certain abnormal states, he is forcefully made to stand up
 		if (owner instanceof Player && owner.isInState(CreatureState.RESTING)) {
