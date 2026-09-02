@@ -15,7 +15,7 @@ import com.aionemu.gameserver.world.World;
 public abstract class PlayableMoveController<T extends Creature> extends CreatureMoveController<T> {
 
 	private boolean sendMovePacket = true;
-	private MovementModifierDirection movementModifierDirection = MovementModifierDirection.NONE;
+	private final MovementModifierState movementModifierState = new MovementModifierState();
 
 	public float vehicleX;
 	public float vehicleY;
@@ -60,6 +60,7 @@ public abstract class PlayableMoveController<T extends Creature> extends Creatur
 			if (started.compareAndSet(true, false)) {
 				setAndSendStopMove(owner);
 				updateLastMove();
+				onMovementStopped();
 			}
 			return;
 		}
@@ -76,7 +77,9 @@ public abstract class PlayableMoveController<T extends Creature> extends Creatur
 		if (dist < 0.01f)
 			return;
 
-		float currentSpeed = StatFunctions.adjustStatByMovementModifier(owner, StatEnum.SPEED, owner.getGameStats().getMovementSpeedFloat());
+		// server side controlled movement (fear, confuse) is not affected by the activation and deactivation delays of movement modifiers, since those
+		// only apply to movement requested by the client. The speed penalty for moving sideways or backwards applies immediately.
+		float currentSpeed = StatFunctions.adjustSpeedByMovementModifier(calculateMovementDirection(), owner.getGameStats().getMovementSpeedFloat());
 		long msElapsed = System.currentTimeMillis() - lastMoveUpdate;
 		float futureXYDistPassed = Math.min(currentSpeed * msElapsed / 1000f, dist);
 		float futureZDistPassed = isJumping() ? Math.min(2 * msElapsed / 1000f, dist) : futureXYDistPassed;
@@ -98,6 +101,7 @@ public abstract class PlayableMoveController<T extends Creature> extends Creatur
 	@Override
 	public void abortMove() {
 		started.set(false);
+		onMovementStopped();
 		PlayerMoveTaskManager.getInstance().removePlayer(owner);
 		targetDestX = 0;
 		targetDestY = 0;
@@ -111,26 +115,56 @@ public abstract class PlayableMoveController<T extends Creature> extends Creatur
 			sendMovePacket = true;
 		}
 		super.setNewDirection(x, y, z);
-
-		float relativeMovementAngle = PositionUtil.calculateAngleTowards(owner.getX(), owner.getY(), heading, targetDestX, targetDestY);
-		if (relativeMovementAngle >= -67.5 && relativeMovementAngle <= 67.5)
-			movementModifierDirection = MovementModifierDirection.FORWARD;
-		else if (relativeMovementAngle <= -112.5 || relativeMovementAngle >= 112.5)
-			movementModifierDirection = MovementModifierDirection.BACKWARD;
-		else
-			movementModifierDirection = MovementModifierDirection.SIDEWAYS;
 	}
 
-	public MovementModifierDirection getMovementDirection() {
-		if (!isInMove() && System.currentTimeMillis() - lastMoveUpdate > 1000)
+	/**
+	 * Feeds the currently requested movement direction into the movement modifier state. Must only be called for movements requested by the client, since
+	 * movement modifiers don't apply to server side controlled movement (there are no direction arrows while under fear, for example).
+	 * <p>
+	 * The requested destination is used instead of the covered distance, because the client sends position updates only about every 672 ms. Movement
+	 * during that period is not necessarily a straight line, so the covered distance would be misclassified whenever the heading changes (turning with
+	 * the mouse while running forward would look like sideways movement).
+	 */
+	public void updateMovementModifierDirection() {
+		movementModifierState.setMoveState(calculateMovementDirection().getMoveStateFlag());
+	}
+
+	/**
+	 * @return The direction of the movement towards the current destination, or {@link MovementModifierDirection#NONE} if there is no destination to move
+	 *         to (stop packet, turning on the spot or jumping on the spot). Must be called after the position update, since the direction is calculated
+	 *         from the current position towards the destination.
+	 */
+	private MovementModifierDirection calculateMovementDirection() {
+		if (PositionUtil.getDistance(owner.getX(), owner.getY(), targetDestX, targetDestY) < MOVE_CHECK_OFFSET)
 			return MovementModifierDirection.NONE;
-		return movementModifierDirection;
+		return calculateDirection(PositionUtil.getHeadingTowards(owner.getX(), owner.getY(), targetDestX, targetDestY), heading);
 	}
 
-	public enum MovementModifierDirection {
-		NONE,
-		FORWARD,
-		SIDEWAYS,
-		BACKWARD
+	/**
+	 * Compares two client headings (120 units of 3° each), folds the difference into 0..60 and treats <= 15 units as forward and >= 45 units as
+	 * backward, i.e. a 90° wide forward cone.
+	 * <p>
+	 * The arithmetic must stay integer. Comparing degrees instead is asymmetric, because only the own heading is quantized to 3° steps while the angle
+	 * towards the destination is not: a diagonal then lands at 45° ± 1.5° and falls on either side of the boundary depending on which diagonal it is.
+	 * Quantizing both sides puts every diagonal at exactly 15 units.
+	 */
+	static MovementModifierDirection calculateDirection(byte destinationHeading, byte ownHeading) {
+		int headingDiff = (destinationHeading + 120 - ownHeading) % 120;
+		if (headingDiff > 60)
+			headingDiff = 120 - headingDiff;
+		if (headingDiff <= 15)
+			return MovementModifierDirection.FORWARD;
+		return headingDiff >= 45 ? MovementModifierDirection.BACKWARD : MovementModifierDirection.SIDEWAYS;
+	}
+
+	public void onMovementStopped() {
+		movementModifierState.setMoveState(MovementModifierState.MoveState.NONE);
+	}
+
+	/**
+	 * @return The currently active movement directions as a {@link MovementModifierState.MoveState} bit mask.
+	 */
+	public int getMoveState() {
+		return movementModifierState.getMoveState();
 	}
 }

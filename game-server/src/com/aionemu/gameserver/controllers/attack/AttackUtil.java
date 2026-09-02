@@ -40,8 +40,9 @@ public class AttackUtil {
 	 * 2. calculate main & off hand damage<br>
 	 * 3. apply stat modifiers<br>
 	 * 4. amplify damage by hit count<br>
-	 * @param attacker Creature attacking
-	 * @param attacked Creature being attacked
+	 *
+	 * @param attacker         Creature attacking
+	 * @param attacked         Creature being attacked
 	 * @param calculationTypes
 	 * @return {@code List<AttackResult>} containing the results for each hand
 	 */
