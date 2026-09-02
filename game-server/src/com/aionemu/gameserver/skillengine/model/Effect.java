@@ -617,6 +617,16 @@ public class Effect implements StatOwner {
 			if (successEffects.isEmpty())
 				return;
 
+			if (duration == null) {
+				if (isToggle()) {
+					if (effector instanceof Player)
+						activateToggleSkill();
+					duration = skillTemplate.getToggleTimer();
+				} else {
+					duration = calculateEffectsDuration();
+				}
+			}
+
 			schedulePeriodicActions();
 
 			if (!successEffects.isEmpty()) {
@@ -627,15 +637,6 @@ public class Effect implements StatOwner {
 
 			broadcastHate();
 
-			if (duration == null) {
-				if (isToggle()) {
-					if (effector instanceof Player)
-						activateToggleSkill();
-					duration = skillTemplate.getToggleTimer();
-				} else {
-					duration = calculateEffectsDuration();
-				}
-			}
 			if (duration == 0)
 				return;
 			endTime = System.currentTimeMillis() + duration;
@@ -843,7 +844,17 @@ public class Effect implements StatOwner {
 	}
 
 	private int calculateEffectsDuration() {
-		long duration = calculateTemplateDuration();
+		EffectTemplate durationTemplate = null;
+		long duration = 0;
+		// the first effect with a duration > 0 sets the skill duration, longer durations of other effects are ignored (see 620 Armor of Attrition)
+		for (EffectTemplate et : successEffects.values()) {
+			long templateDuration = et.getDuration2() + ((long) et.getDuration1()) * getSkillLevel(); // some event skills would produce an int overflow
+			if (templateDuration > 0) {
+				durationTemplate = et;
+				duration = et.getRandomTime() > 0 ? templateDuration - Rnd.get(0, et.getRandomTime()) : templateDuration;
+				break;
+			}
+		}
 
 		if (getEffected() instanceof Player effectedPlayer) {
 			boolean isEffectorPlayer = (CustomConfig.COUNT_SUMMON_EFFECTS_FOR_CUMULATIVE_RESIST ? effector.getMaster() : effector) instanceof Player;
@@ -854,20 +865,9 @@ public class Effect implements StatOwner {
 				duration = duration * skillTemplate.getPvpDuration() / 100;
 			}
 		}
+		if (durationTemplate instanceof AbstractOverTimeEffect overTimeEffect)
+			duration = overTimeEffect.roundDurationToTicks(duration);
 		return (int) Math.min(Integer.MAX_VALUE, duration);
-	}
-
-	private long calculateTemplateDuration() {
-		// retail sets the first effect duration > 0 as the skill duration, ignoring longer durations of other effects (see 620 Armor of Attrition)
-		for (EffectTemplate et : successEffects.values()) {
-			long effectDuration = et.getDuration2() + ((long) et.getDuration1()) * getSkillLevel(); // some event skills would produce an int overflow
-			if (effectDuration > 0) {
-				if (et.getRandomTime() > 0)
-					effectDuration -= Rnd.get(0, et.getRandomTime());
-				return effectDuration;
-			}
-		}
-		return 0;
 	}
 
 	private long applyCumulativeResistDurationMultiplier(long duration, Player effected) {
