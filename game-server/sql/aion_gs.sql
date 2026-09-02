@@ -659,6 +659,7 @@ CREATE TABLE `player_effects` (
   `remaining_time` int NOT NULL,
   `end_time` bigint NOT NULL,
   `force_type` varchar(255) DEFAULT NULL,
+  `magical_criticals` tinyint NOT NULL DEFAULT '0',
   PRIMARY KEY (`player_id`,`skill_id`),
   CONSTRAINT `player_effects_ibfk_1` FOREIGN KEY (`player_id`) REFERENCES `players` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

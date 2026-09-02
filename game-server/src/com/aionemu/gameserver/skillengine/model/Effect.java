@@ -55,6 +55,9 @@ public class Effect implements StatOwner {
 	private SpellStatus spellStatus = SpellStatus.NONE;
 	private DashStatus dashStatus = DashStatus.NONE;
 	private AttackStatus attackStatus = AttackStatus.NORMALHIT;
+	private final boolean[] magicalCriticals = new boolean[4];
+	private boolean magicalCriticalRolled;
+	private boolean magicalCritical;
 
 	/**
 	 * shield effects related
@@ -117,7 +120,7 @@ public class Effect implements StatOwner {
 
 	// Whether this effect is a sub effect of another effect
 	private boolean isSubEffect = false;
-	private boolean applyCriticalEffect = false;
+	private boolean applyCriticalProcEffect = false;
 	private final AtomicBoolean allowGodstoneActivation = new AtomicBoolean();
 
 	public Effect(Skill skill, Creature effected) {
@@ -261,6 +264,42 @@ public class Effect implements StatOwner {
 		this.attackStatus = attackStatus;
 	}
 
+	public boolean isMagicalCritical(int position) {
+		return magicalCriticals[position - 1];
+	}
+
+	/**
+	 * Rolls the magical critical for the given effect position, or takes over the one an earlier position already rolled, since a cast only rolls once
+	 * per target.
+	 */
+	public void rollMagicalCritical(int position, int criticalProb) {
+		if (!magicalCriticalRolled) {
+			magicalCritical = StatFunctions.calculateMagicalCriticalRate(effector, effected, criticalProb);
+			magicalCriticalRolled = true;
+		}
+		reuseMagicalCritical(position);
+	}
+
+	/**
+	 * Takes over the magical critical of an earlier effect position without rolling one.
+	 */
+	public void reuseMagicalCritical(int position) {
+		magicalCriticals[position - 1] = magicalCritical;
+	}
+
+	/**
+	 * An effect which got filtered out breaks the chain, so the next effect position rolls its own magical critical again.
+	 */
+	public void resetMagicalCritical() {
+		magicalCritical = false;
+		magicalCriticalRolled = false;
+	}
+
+	public void setMagicalCriticalPositions(Collection<Integer> positions) {
+		for (int position : positions)
+			magicalCriticals[position - 1] = true;
+	}
+
 	public List<EffectTemplate> getEffectTemplates() {
 		return skillTemplate.getEffects().getEffects();
 	}
@@ -336,8 +375,8 @@ public class Effect implements StatOwner {
 					toSend.add(er);
 			}
 		}
-		if (toSend.isEmpty())
-			return Collections.singleton(new EffectReserved(0, 0, ResourceType.HP, true));
+		if (toSend.isEmpty()) // effects without a sent value (like damage over time) can still show their attack status
+			return Collections.singleton(new EffectReserved(0, 0, ResourceType.HP, true, true, attackStatus));
 		return toSend;
 	}
 
@@ -492,13 +531,13 @@ public class Effect implements StatOwner {
 				}
 			}
 			if (effector instanceof Player p && getAttackStatus() == AttackStatus.CRITICAL && getSubEffect() == null && !isPeriodic() && Rnd.chance() < 10) {
-				Effect criticalEffect = SkillEngine.getInstance().createCriticalEffect(p, getEffected(), skillTemplate.getSkillId());
-				if (criticalEffect != null && criticalEffect.getEffectResult() != EffectResult.DODGE && criticalEffect.getEffectResult() != EffectResult.RESIST) {
-					applyCriticalEffect = true;
-					setSpellStatus(criticalEffect.getSpellStatus());
-					setSubEffect(criticalEffect);
-					setSubEffectType(criticalEffect.getSubEffectType());
-					setTargetLoc(criticalEffect.getTargetX(), criticalEffect.getTargetY(), criticalEffect.getTargetZ());
+				Effect criticalProcEffect = SkillEngine.getInstance().createCriticalProcEffect(p, getEffected(), skillTemplate.getSkillId());
+				if (criticalProcEffect != null && criticalProcEffect.getEffectResult() != EffectResult.DODGE && criticalProcEffect.getEffectResult() != EffectResult.RESIST) {
+					applyCriticalProcEffect = true;
+					setSpellStatus(criticalProcEffect.getSpellStatus());
+					setSubEffect(criticalProcEffect);
+					setSubEffectType(criticalProcEffect.getSubEffectType());
+					setTargetLoc(criticalProcEffect.getTargetX(), criticalProcEffect.getTargetY(), criticalProcEffect.getTargetZ());
 				}
 			}
 		}
@@ -570,7 +609,7 @@ public class Effect implements StatOwner {
 					break;
 				template.startSubEffect(this);
 			}
-			if (applyCriticalEffect && subEffect != null)
+			if (applyCriticalProcEffect && subEffect != null)
 				subEffect.applyEffect();
 			if (effected != null)
 				effected.getAi().onEffectApplied(this);

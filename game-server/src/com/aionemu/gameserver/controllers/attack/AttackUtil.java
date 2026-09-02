@@ -229,13 +229,12 @@ public class AttackUtil {
 		ActionModifier modifier = template.getActionModifiers(effect);
 		SkillElement element = template.getElement();
 		int randomDamageType = template instanceof SkillAttackInstantEffect skillAttackInstantEffect ? skillAttackInstantEffect.getRnddmg() : 0;
-		boolean useTemplateDmg = isUseTemplateDmg(effect, template);
+		boolean useTemplateDmg = template instanceof NoReduceSpellATKInstantEffect;
 		boolean send = !(template instanceof DelayedSpellAttackInstantEffect) && !(template instanceof ProcAtkInstantEffect);
-		boolean shouldIncreaseByOneTimeBoost = !(template instanceof ProcAtkInstantEffect);
 
 		AttackStatus status = switch (element) {
-			case NONE -> calculatePhysicalStatus(effector, effected, template, effect.getSkillLevel());
-			default -> calculateMagicalStatus(effector, effected, template.getCritProbMod2(), true, effect.getSkillTemplate().isMcritApplied());
+			case NONE -> calculatePhysicalStatus(effector, effected, template, effect);
+			default -> effect.isMagicalCritical(template.getPosition()) ? AttackStatus.CRITICAL : AttackStatus.NORMALHIT;
 		};
 
 		int baseAttack = 0;
@@ -306,11 +305,13 @@ public class AttackUtil {
 		if (!useTemplateDmg) {
 			float damageMultiplier;
 			if (isPhysical) {
-				damageMultiplier = effector.getObserveController().getBasePhysicalDamageMultiplier(true);
+				damageMultiplier = template.shouldUseOneTimeBoostSkillAttack() ? effector.getObserveController().getBasePhysicalDamageMultiplier(true) : 1f;
 				damage += bonus;
 			} else {
-				damageMultiplier = shouldIncreaseByOneTimeBoost ? effector.getObserveController().getBaseMagicalDamageMultiplier() : 1f;
-				damage = StatFunctions.calculateMagicalSkillDamage(effector, effected, damage, (int) bonus, template, true, true);
+				boolean applyMagicalSkillBoostBonus = template.shouldApplyMagicalSkillBoostBonus(effect);
+				damageMultiplier = template.shouldUseOneTimeBoostSkillAttack() ? effector.getObserveController().getBaseMagicalDamageMultiplier() : 1f;
+				damage = StatFunctions.calculateMagicalSkillDamage(effector, effected, damage, (int) bonus, template, applyMagicalSkillBoostBonus,
+					template.shouldUseKnowledge(), template.shouldUseBoostSpellAttackEffects());
 			}
 			if (template.shouldApplyAttackerMovementModifier()) {
 				damage = StatFunctions.adjustStatByMovementModifier(effector, isPhysical ? StatEnum.PHYSICAL_ATTACK : StatEnum.MAGICAL_ATTACK, damage);
@@ -321,7 +322,7 @@ public class AttackUtil {
 		if (randomDamageType > 0)
 			damage = randomizeDamage(randomDamageType, damage);
 
-		if (status.isCritical()) {
+		if (status.isCritical() && !useTemplateDmg) {
 			int critAddDmg = template.calculateCritAddDmg(effect);
 			StatEnum stat = element == SkillElement.NONE ? StatEnum.PHYSICAL_CRITICAL_DAMAGE_REDUCE : StatEnum.MAGICAL_CRITICAL_DAMAGE_REDUCE;
 			damage = calculateWeaponCritical(element, effected, damage, getWeaponGroup(effector, true), critAddDmg, stat, true);
@@ -353,39 +354,6 @@ public class AttackUtil {
 			damage = effected.getAi().modifyDamage(effector, damage, effect);
 		}
 		calculateEffectResult(effect, effected, (int) damage, status, ht, ignoreShield, template.getPosition(), send);
-	}
-
-	private static boolean isUseTemplateDmg(Effect effect, EffectTemplate template) {
-		if (template instanceof NoReduceSpellATKInstantEffect)
-			return true;
-		if (template instanceof ProcAtkInstantEffect && effect.getSkillTemplate().isProvoked() || effect.getStack().startsWith("IDEVENT")) { // proc effects of skills like 8583
-			// TODO: find pattern or extract <apply_magical_skill_boost_bonus> and <apply_magical_critical> from server files. What about missing ones?
-			switch (effect.getStack().toLowerCase()) {
-				case "nwi_delayspell_dd_proca_tal":
-				case "ngu_vritra_delayspell_dd_proca_tal":
-				case "sgfi_procts_air":
-				case "ab1_artifact_hellfire":
-				case "ldf4b_c3_artifact_tiamat_delayatk":
-				case "ldf4b_t4_artifact_crystal_dd":
-				case "ldf4b_t3_artifact_fury_dd":
-				case "ldf4b_t2_artifact_gravity_openaerial":
-				case "ldf4b_t2_artifact_gravity_dd":
-				case "ldf4b_t1_artifact_crack_stumble_mpatk":
-				case "ldf4b_t1_artifact_crack_dd":
-				case "idtiamat_tahabata_adddmgtobleed":
-				case "kn_turnaggressiveeffect":
-				case "tiamatdown_tiamatagent_bomb":
-				case "idtiamat_thor_procatk":
-				case "idyun_vasharti_refdmg_red":
-				case "idyun_vasharti_refdmg_blue":
-				case "ldf4b_d3_buff_poison_proc":
-				case "ldf4b_tatar_procatk":
-				case "idforest_wave_trico_proclight":
-				case "idevent01_areadot":
-					return true;
-			}
-		}
-		return false;
 	}
 
 	private static float randomizeDamage(int randomDamageType, float damage) {
@@ -436,7 +404,7 @@ public class AttackUtil {
 			effect.setProtectorId(attackResult.getProtectorId());
 			effect.setShieldDefense(attackResult.getShieldType());
 		}
-		effect.setReserveds(new EffectReserved(position, attackResult.getDamage(), ResourceType.HP, true, send), false);
+		effect.setReserveds(new EffectReserved(position, attackResult.getDamage(), ResourceType.HP, true, send, attackResult.getAttackStatus()), false);
 		effect.setAttackStatus(attackResult.getAttackStatus());
 		effect.setLaunchSubEffect(attackResult.isLaunchSubEffect());
 	}
@@ -453,7 +421,7 @@ public class AttackUtil {
 	 * @return {@code List<AttackResult>} containing the results for each hand
 	 */
 	public static List<AttackResult> calculateMagAttackResult(Creature attacker, Creature attacked, SkillElement element, CalculationType... calculationTypes) {
-		AttackStatus attackStatus = calculateMagicalStatus(attacker, attacked, 100, false, true);
+		AttackStatus attackStatus = calculateMagicalStatus(attacker, attacked, 100, false);
 		List<AttackResult> attackResultList = StatFunctions.calculateAttackDamage(attacker, element, attackStatus, calculationTypes);
 		adjustDamageByStatModifiers(attacker, attacked, attackStatus, attackResultList, element);
 		amplifyDamageByAdditionalHitCount(attacker, attackStatus, attackResultList);
@@ -471,13 +439,10 @@ public class AttackUtil {
 			damage = skillDamage;
 		} else {
 			float damageMultiplier = effector.getObserveController().getBaseMagicalDamageMultiplier();
-			damage = StatFunctions.calculateMagicalSkillDamage(effector, effected, skillDamage, 0, template, useMagicBoost, false);
+			damage = StatFunctions.calculateMagicalSkillDamage(effector, effected, skillDamage, 0, template, useMagicBoost, false, false);
 			damage = damage * damageMultiplier;
 
-			AttackStatus status = effect.getAttackStatus();
-			// calculate attack status only if it has not been forced already
-			if (status == AttackStatus.NORMALHIT && template.getPosition() == 1)
-				status = calculateMagicalStatus(effector, effected, template.getCritProbMod2(), true, effect.getSkillTemplate().isMcritApplied());
+			AttackStatus status = effect.isMagicalCritical(template.getPosition()) ? AttackStatus.CRITICAL : AttackStatus.NORMALHIT;
 			if (status == AttackStatus.CRITICAL) {
 				int critAddDmg = template.calculateCritAddDmg(effect);
 				damage = calculateWeaponCritical(template.getElement(), effected, damage, getWeaponGroup(effector, true), critAddDmg,
@@ -495,10 +460,10 @@ public class AttackUtil {
 		return (int) damage;
 	}
 
-	private static AttackStatus calculatePhysicalStatus(Creature attacker, Creature attacked, EffectTemplate template, int skillLevel) {
-		int accMod = template.getAccMod2() + template.getAccMod1() * skillLevel;
+	private static AttackStatus calculatePhysicalStatus(Creature attacker, Creature attacked, EffectTemplate template, Effect effect) {
+		int accMod = template.getAccMod2() + template.getAccMod1() * effect.getSkillLevel();
 		boolean cannotMiss = template instanceof SkillAttackInstantEffect skillAttackInstantEffect && skillAttackInstantEffect.isCannotmiss();
-		return calculatePhysicalStatus(attacker, attacked, true, accMod, template.getCritProbMod2(), true, cannotMiss);
+		return calculatePhysicalStatus(attacker, attacked, true, accMod, template.calculateCritProbMod(effect), true, cannotMiss);
 	}
 
 	private static AttackStatus calculatePhysicalStatus(Creature attacker, Creature attacked, boolean isMainHand, int accMod, int criticalProb,
@@ -533,13 +498,13 @@ public class AttackUtil {
 	 * Every + 100 delta of (MR - MA) = + 10% to resist<br>
 	 * if the difference is 1000 = 100% resist
 	 */
-	public static AttackStatus calculateMagicalStatus(Creature attacker, Creature attacked, int criticalProb, boolean isSkill, boolean applyMcrit) {
+	public static AttackStatus calculateMagicalStatus(Creature attacker, Creature attacked, int criticalProb, boolean isSkill) {
 		if (!isSkill) {
 			if (Rnd.get(1, 1000) <= StatFunctions.calculateMagicalResistRate(attacker, attacked, 0, SkillElement.NONE))
 				return AttackStatus.RESIST;
 		}
 
-		if (StatFunctions.calculateMagicalCriticalRate(attacker, attacked, criticalProb, applyMcrit)) {
+		if (StatFunctions.calculateMagicalCriticalRate(attacker, attacked, criticalProb)) {
 			return AttackStatus.CRITICAL;
 		}
 

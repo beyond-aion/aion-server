@@ -20,12 +20,12 @@ import com.aionemu.gameserver.controllers.observer.DeathObserver;
 import com.aionemu.gameserver.controllers.observer.StartMovingListener;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.dataholders.MotionData.AnimationTimes;
-import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.skill.NpcSkillEntry;
+import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_CASTSPELL;
@@ -341,8 +341,7 @@ public class Skill {
 			castDuration = Math.round(baseCastDuration * (npc.getGameStats().getCastSpeed() / 1000f));
 			castSpeedForAnimationBoostAndChargeSkills = 1f;
 		} else if (skillTemplate.isCharge()) {
-			boolean isChargeTimeFixed = updateChargeBaseCastDuration();
-			castDuration = isChargeTimeFixed ? baseCastDuration : calculateChargeCastDuration();
+			castDuration = calculateChargeCastDuration();
 			castSpeedForAnimationBoostAndChargeSkills = (float) castDuration / baseCastDuration;
 		} else {
 			castDuration = calculateCastDuration();
@@ -350,32 +349,28 @@ public class Skill {
 		}
 	}
 
-	private boolean updateChargeBaseCastDuration() {
+	private int calculateChargeCastDuration() {
+		SkillType chargeTimeBonusType = SkillType.NONE;
 		// cast/attack speed can affect charge time since 4.8 (https://aionpowerbook.com/powerbook/New_World_Update_-_Skill_Changes#Other_Changes)
-		boolean isChargeTimeFixed = !isCastDurationAffectedByCastSpeed(); // fear and sleep charge skills are excluded, just like with regular casts
 		SkillChargeCondition chargeCondition = skillTemplate.getSkillChargeCondition();
 		if (chargeCondition != null) {
 			int maxCastDuration = 0;
 			ChargeSkillEntry skillCharge = DataManager.SKILL_CHARGE_DATA.getChargedSkillEntry(chargeCondition.getValue());
+			chargeTimeBonusType = skillCharge.getChargeTimeBonusType();
 			for (ChargedSkill chargedSkill : skillCharge.getSkills()) {
-				if (!isChargeTimeFixed && !DataManager.SKILL_DATA.getSkillTemplate(chargedSkill.getId()).isCastDurationAffectedByCastSpeed())
-					isChargeTimeFixed = true;
 				maxCastDuration += chargedSkill.getTime();
 			}
 			baseCastDuration = maxCastDuration;
 		}
-		return isChargeTimeFixed;
-	}
-
-	private int calculateChargeCastDuration() {
-		boolean isPhysicalClass = effector instanceof Player player
-			&& (player.getPlayerClass().isPhysicalClass() || player.getPlayerClass() == PlayerClass.RIDER || player.getPlayerClass() == PlayerClass.GUNNER);
-		int castDuration;
-		if (isPhysicalClass) // TODO check if attack speed should also affect magical classes
-			castDuration = (int) effector.getGameStats().getPositiveStat(StatEnum.ATTACK_SPEED, baseCastDuration);
-		else
-			castDuration = calculateMagicalCastDuration();
-		return Math.max(castDuration, (int) (baseCastDuration * 0.25f));
+		float speedRatio = switch (chargeTimeBonusType) {
+			case PHYSICAL -> {
+				Stat2 attackSpeed = effector.getGameStats().getAttackSpeed();
+				yield attackSpeed.getBase() == 0 ? 1f : (float) attackSpeed.getCurrent() / attackSpeed.getBase();
+			}
+			case MAGICAL -> isCastDurationAffectedByCastSpeed() ? (float) calculateMagicalCastDuration() / baseCastDuration : 1f;
+			default -> 1f;
+		};
+		return (int) (baseCastDuration * (1 - (1 - speedRatio) / 2)); // charge skills are only affected by half of the speed bonus
 	}
 
 	private int calculateCastDuration() {
@@ -384,7 +379,7 @@ public class Skill {
 		//2nd+ time of multicast-skill activation
 		if (getMultiCastCount() > 0)
 			return 0;
-		if (skillTemplate.getType() != SkillType.MAGICAL || !isCastDurationAffectedByCastSpeed())
+		if (!isCastDurationAffectedByCastSpeed())
 			return baseCastDuration;
 		return calculateMagicalCastDuration();
 	}
@@ -1057,11 +1052,11 @@ public class Skill {
 	 * - hit time will only be boosted if the current skill if cast before the animation of the previous skill finishes<br>
 	 */
 	public boolean allowAnimationBoostByCastSpeed() {
-		return isMagical();
+		return skillTemplate.isApplyCastingTimeBonus();
 	}
 
 	private boolean isCastDurationAffectedByCastSpeed() {
-		return skillMethod == SkillMethod.CAST && skillTemplate.isCastDurationAffectedByCastSpeed();
+		return skillMethod == SkillMethod.CAST && skillTemplate.isApplyCastingTimeBonus();
 	}
 
 	public void setChainCategory(String chainCategory) {
@@ -1100,9 +1095,5 @@ public class Skill {
 
 	public void setHate(int hate) {
 		this.hate = hate;
-	}
-
-	private boolean isMagical() {
-		return skillTemplate.getType() == SkillType.MAGICAL && skillTemplate.getSubType() != SkillSubType.NONE;
 	}
 }

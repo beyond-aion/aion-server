@@ -9,11 +9,14 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
  */
 public class SM_ATTACK_STATUS extends AionServerPacket {
 
+	private static final int CRITICAL_DISPLAY_CODE = 12;
+
 	private Creature creature;
 	private TYPE type;
 	private int skillId;
 	private int value;
 	private int logId;
+	private boolean criticalHit;
 
 	public static enum TYPE {
 		// missing
@@ -94,6 +97,11 @@ public class SM_ATTACK_STATUS extends AionServerPacket {
 		}
 	}
 
+	public SM_ATTACK_STATUS(Creature creature, TYPE type, int skillId, int value, LOG log, boolean criticalHit) {
+		this(creature, type, skillId, value, log);
+		this.criticalHit = criticalHit;
+	}
+
 	public SM_ATTACK_STATUS(Creature creature, TYPE type, int skillId, int value, LOG log) {
 		this.creature = creature;
 		this.type = type;
@@ -145,7 +153,7 @@ public class SM_ATTACK_STATUS extends AionServerPacket {
 		writeC(type.getValue());
 		writeC(hpOrMp);
 		writeH(skillId);
-		writeH(logId);
+		writeH(criticalHit ? logId | CRITICAL_DISPLAY_CODE << 8 : logId); // the high byte of the log field is the display code
 	}
 
 	/**
@@ -171,7 +179,7 @@ public class SM_ATTACK_STATUS extends AionServerPacket {
 	 * heal_instant (regular) 171 protecteffect on protector - (8) 171 4.5
 	 * type="MP(21)" skillId="17722" logId="UNKNOWN(141) - mpattack
 	 * type="UNKNOWN(15)" skillId="2196" logId="UNKNOWN(112) - magiccounteratk
-	 * type="DAMAGE_HEAL_HP(7)" skillId="2858" logId="UNKNOWN(3073)" - spellatk(Flame Cage only)???
+	 * type="DAMAGE_HEAL_HP(7)" skillId="2858" logId="3073" - spellatk, 3073 = SPELLATK(1) | CRITICAL_DISPLAY_CODE << 8
 	 * type="DAMAGE_HEAL_HP(7)"  skillId="8759" logId="UNKNOWN(132)" - spellatkdrain
 	 * type="DAMAGE_HEAL_HP(7)"  skillId="2391" logId="UNKNOWN(21)" - caseheal(hp)
 	 * type="DAMAGE_HEAL_FP(26)" skillId="8772" logId="UNKNOWN(134) - fpheal

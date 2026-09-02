@@ -187,7 +187,10 @@ public class SkillEngine {
 		return skillTemplate;
 	}
 
-	public Effect createCriticalEffect(Player attacker, Creature target, int skillId) {
+	/**
+	 * @return the stumble which procs on a critical hit, null if it cannot proc for the given skill or was dodged/resisted
+	 */
+	public Effect createCriticalProcEffect(Player attacker, Creature target, int skillId) {
 		if (target.getEffectController().isUnderNormalShield())
 			return null;
 		if (skillId != 0) {

@@ -24,6 +24,9 @@ public class ChargeSkillEntry {
 	@XmlAttribute(name = "min_time", required = true)
 	protected int minTime;
 
+	@XmlAttribute(name = "charge_time_bonus_type", required = true)
+	protected SkillType chargeTimeBonusType;
+
 	public List<ChargedSkill> getSkills() {
 		return skills;
 	}
@@ -40,5 +43,9 @@ public class ChargeSkillEntry {
 	 */
 	public int getId() {
 		return id;
+	}
+
+	public SkillType getChargeTimeBonusType() {
+		return chargeTimeBonusType;
 	}
 }

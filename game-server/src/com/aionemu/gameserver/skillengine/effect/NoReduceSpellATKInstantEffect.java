@@ -21,6 +21,11 @@ public class NoReduceSpellATKInstantEffect extends DamageEffect {
 	protected int max_damage;
 
 	@Override
+	protected void resolveMagicalCritical(Effect effect) {
+		effect.reuseMagicalCritical(position); // shows an already rolled critical, but never multiplies the damage
+	}
+
+	@Override
 	public void calculateDamage(Effect effect) {
 		int valueWithDelta = calculateBaseValue(effect);
 		if (percent) {
@@ -36,6 +41,26 @@ public class NoReduceSpellATKInstantEffect extends DamageEffect {
 
 	@Override
 	public boolean shouldApplyAttackerMovementModifier() {
+		return false;
+	}
+
+	@Override
+	public boolean shouldApplyMagicalSkillBoostBonus(Effect effect) {
+		return false;
+	}
+
+	@Override
+	public boolean shouldUseKnowledge() {
+		return false;
+	}
+
+	@Override
+	public boolean shouldUseBoostSpellAttackEffects() {
+		return false;
+	}
+
+	@Override
+	public boolean shouldUseOneTimeBoostSkillAttack() {
 		return false;
 	}
 }
