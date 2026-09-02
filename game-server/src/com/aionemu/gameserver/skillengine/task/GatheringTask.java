@@ -166,6 +166,11 @@ public class GatheringTask extends AbstractCraftTask {
 			public void dotattacked(Creature creature, Effect dotEffect) {
 				abort();
 			}
+
+			@Override
+			public void died(Creature lastAttacker) {
+				abort();
+			}
 		};
 	}
 }

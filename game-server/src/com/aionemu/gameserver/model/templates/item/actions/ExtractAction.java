@@ -44,7 +44,7 @@ public class ExtractAction extends AbstractItemAction {
 	@Override
 	public void act(Player player, Item parentItem, Item targetItem, Object... params) {
 		PacketSendUtility.sendPacket(player,
-			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate() .getTemplateId(), 5000, USE_START));
+			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), 5000, USE_START));
 		ItemUseObserver observer = new ItemUseObserver() {
 
 			@Override
@@ -52,7 +52,7 @@ public class ExtractAction extends AbstractItemAction {
 				player.getController().cancelTask(TaskId.ITEM_USE);
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_CANCELED(targetItem.getL10n()));
 				PacketSendUtility.sendPacket(player,
-					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate() .getTemplateId(), 0, USE_FAIL));
+					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), 0, USE_CANCEL));
 				player.getObserveController().removeObserver(this);
 			}
 		};
@@ -65,7 +65,7 @@ public class ExtractAction extends AbstractItemAction {
 				// a no-op, but kept for consistency with the other actions.
 				player.startCooldown(parentItem);
 			PacketSendUtility.sendPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(),
-				parentItem.getItemTemplate() .getTemplateId(), 0, result ? USE_SUCCESS : USE_FAIL));
+				parentItem.getItemTemplate().getTemplateId(), 0, result ? USE_SUCCESS : USE_FAIL));
 		}, 5000));
 	}
 

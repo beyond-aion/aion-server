@@ -62,7 +62,7 @@ public class AssemblyItemAction extends AbstractItemAction {
 				player.getController().cancelTask(TaskId.ITEM_USE);
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ASSEMBLY_ITEM_CANCELED());
 				PacketSendUtility.broadcastPacket(player,
-					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem .getItemTemplate().getTemplateId(), 0, USE_FAIL),
+					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), 0, USE_CANCEL),
 					true);
 				player.getObserveController().removeObserver(this);
 			}
@@ -82,7 +82,7 @@ public class AssemblyItemAction extends AbstractItemAction {
 		for (Map.Entry<Integer, Long> requiredCount : requiredCounts.entrySet()) {
 			if (player.getInventory().getItemCountByItemId(requiredCount.getKey()) < requiredCount.getValue()) {
 				PacketSendUtility.broadcastPacket(player,
-					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem .getItemTemplate().getTemplateId(), 0, USE_FAIL),
+					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), 0, USE_FAIL),
 					true);
 				return;
 			}
@@ -92,7 +92,7 @@ public class AssemblyItemAction extends AbstractItemAction {
 			player.getInventory().decreaseByItemId(itemId, 1);
 		}
 		PacketSendUtility.broadcastPacket(player,
-			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem .getItemTemplate().getTemplateId(), 0, USE_SUCCESS),
+			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), 0, USE_SUCCESS),
 			true);
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_USE_ITEM(parentItem.getL10n()));
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ASSEMBLY_ITEM_SUCCEEDED());

@@ -69,8 +69,16 @@ public class SkillData {
 	private void indexMasterySkills(int skillId, List<EffectTemplate> effects) {
 		for (EffectTemplate effect : effects) {
 			switch (effect) {
-				case WeaponMasteryEffect e -> masterySkillsByWeapon.computeIfAbsent(e.getItemGroup(), k -> new HashSet<>()).add(skillId);
-				case ArmorMasteryEffect e -> masterySkillsByArmor.computeIfAbsent(e.getArmorType(), k -> new HashSet<>()).add(skillId);
+				case WeaponMasteryEffect e -> {
+					if (e.getItemGroup() == null)
+						throw new IllegalArgumentException("Weapon mastery effect of skill " + skillId + " has no weapon attribute");
+					masterySkillsByWeapon.computeIfAbsent(e.getItemGroup(), _ -> new HashSet<>()).add(skillId);
+				}
+				case ArmorMasteryEffect e -> {
+					if (e.getArmorType() == null)
+						throw new IllegalArgumentException("Armor mastery effect of skill " + skillId + " has no armor attribute");
+					masterySkillsByArmor.computeIfAbsent(e.getArmorType(), _ -> new HashSet<>()).add(skillId);
+				}
 				case ShieldMasteryEffect _ -> shieldMasterySkills.add(skillId);
 				default -> {
 				}

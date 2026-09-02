@@ -45,11 +45,12 @@ public class Equipment implements Persistable {
 
 	private static final Logger log = LoggerFactory.getLogger(Equipment.class);
 	private static final int RANK_LIMIT_GRACE_SECONDS = 600;
-	private static final int RANK_LIMIT_LAST_WARNING_SECONDS = 60;
+	private static final int RANK_LIMIT_WARNING_SECONDS = 60;
 
 	private final SortedMap<Long, Item> equipment = Collections.synchronizedSortedMap(new TreeMap<>());
 	private final Player owner;
 	private PersistentState persistentState = PersistentState.UPDATED;
+	private int lastRankLimitCheck;
 
 	public Equipment(Player player) {
 		this.owner = player;
@@ -171,7 +172,8 @@ public class Equipment implements Persistable {
 	}
 
 	private boolean checkDualWieldRestriction(Item item, long slot) {
-		if (item.getItemTemplate().isOneHandWeapon() && (slot & ItemSlot.LEFT_HAND.getSlotIdMask()) == slot && !WeaponDualEffect.hasDualWieldEffect(owner))
+		if (item.getItemTemplate().isOneHandWeapon() && (slot & ItemSlot.LEFT_HAND.getSlotIdMask()) == slot
+			&& !WeaponDualEffect.hasDualWieldEffect(owner))
 			return false;
 		return true;
 	}
@@ -193,6 +195,7 @@ public class Equipment implements Persistable {
 				equipment.put(slot.getSlotIdMask(), item);
 			item.setEquipped(true);
 			item.setEquipmentSlot(itemSlotToEquip);
+			item.setRankLimitExpireTime(0); // the rank was verified before equipping, so a deadline left over from an earlier one is stale
 			ItemPacketService.updateItemAfterEquip(owner, item);
 
 			// update stats
@@ -296,6 +299,7 @@ public class Equipment implements Persistable {
 			updateStats = true;
 			item.setEquipped(false);
 			item.setEquipmentSlot(0);
+			item.setRankLimitExpireTime(0);
 			owner.getInventory().put(item);
 			setPersistentState(PersistentState.UPDATE_REQUIRED);
 			notifyItemUnequip(item);
@@ -469,6 +473,7 @@ public class Equipment implements Persistable {
 	private void putItemBackToInventory(Item item) {
 		item.setEquipped(false);
 		item.setEquipmentSlot(0);
+		item.setRankLimitExpireTime(0);
 		setPersistentState(PersistentState.UPDATE_REQUIRED);
 		owner.getInventory().put(item);
 	}
@@ -793,56 +798,49 @@ public class Equipment implements Persistable {
 	}
 
 	/**
-	 * Gives the owner ten minutes to keep wearing the items his abyss rank no longer allows, warns him a minute before the end and takes them off when the
-	 * time is up. Regaining the rank in the meantime cancels it. The deadline is stored with the item, so it keeps running across a relog.
+	 * Gives the owner ten minutes to keep wearing the items his abyss rank no longer allows, warns him a minute before the end and takes them off
+	 * when the time is up. Regaining the rank in the meantime cancels it. The deadline is stored with the item, so it keeps running across a relog.
+	 * Reschedules itself for the earliest warning or removal still ahead.
 	 */
 	public void checkRankLimitItems() {
 		int now = (int) (System.currentTimeMillis() / 1000);
-		int nextDeadline = 0;
+		int nextCheck = 0;
+		boolean appearanceChanged = false;
 		for (Item item : getEquippedItems()) {
+			if (!item.isEquipped()) // unequipping a main hand weapon takes the off hand one off too, so the snapshot can hold items that already left
+				continue;
+			int expireTime = item.getRankLimitExpireTime();
 			if (verifyRankLimits(item)) {
-				if (item.getRankLimitExpireTime() != 0)
+				if (expireTime != 0)
 					item.setRankLimitExpireTime(0); // the rank came back in time
 				continue;
 			}
-			if (item.getRankLimitExpireTime() == 0) {
-				item.setRankLimitExpireTime(now + RANK_LIMIT_GRACE_SECONDS);
+			if (expireTime == 0) { // items that are already counting down keep their own deadline
+				expireTime = now + RANK_LIMIT_GRACE_SECONDS;
+				item.setRankLimitExpireTime(expireTime);
 				PacketSendUtility.sendPacket(owner, STR_MSG_UNEQUIP_RANKITEM_TIMER_10M(item.getL10n()));
-			}
-			if (nextDeadline == 0 || item.getRankLimitExpireTime() < nextDeadline)
-				nextDeadline = item.getRankLimitExpireTime();
-		}
-		owner.getController().cancelTask(TaskId.RANK_LIMIT_UNEQUIP);
-		if (nextDeadline != 0)
-			scheduleRankLimitCheck(nextDeadline - now);
-	}
-
-	private void scheduleRankLimitCheck(int secondsLeft) {
-		boolean warnOnly = secondsLeft > RANK_LIMIT_LAST_WARNING_SECONDS;
-		int delay = Math.max(warnOnly ? secondsLeft - RANK_LIMIT_LAST_WARNING_SECONDS : secondsLeft, 0);
-		owner.getController().addTask(TaskId.RANK_LIMIT_UNEQUIP,
-			ThreadPoolManager.getInstance().schedule(warnOnly ? this::warnAboutRankLimitItems : this::unequipRankLimitItems, delay * 1000L));
-	}
-
-	private void warnAboutRankLimitItems() {
-		int now = (int) (System.currentTimeMillis() / 1000);
-		for (Item item : getEquippedItems()) {
-			if (item.getRankLimitExpireTime() != 0 && item.getRankLimitExpireTime() - now <= RANK_LIMIT_LAST_WARNING_SECONDS)
-				PacketSendUtility.sendPacket(owner, STR_MSG_UNEQUIP_RANKITEM_TIMER_1M(item.getL10n()));
-		}
-		scheduleRankLimitCheck(RANK_LIMIT_LAST_WARNING_SECONDS);
-	}
-
-	private void unequipRankLimitItems() {
-		int now = (int) (System.currentTimeMillis() / 1000);
-		for (Item item : getEquippedItems()) {
-			if (item.getRankLimitExpireTime() == 0 || item.getRankLimitExpireTime() > now)
+			} else if (expireTime <= now) {
+				item.setRankLimitExpireTime(0);
+				if (unEquipItem(item.getObjectId(), false) != null) {
+					appearanceChanged = true;
+					PacketSendUtility.sendPacket(owner, STR_MSG_UNEQUIP_RANKITEM(item.getL10n()));
+				}
 				continue;
-			item.setRankLimitExpireTime(0);
-			// the inventory may overflow, taking these off is not optional
-			if (unEquipItem(item.getObjectId(), false) != null)
-				PacketSendUtility.sendPacket(owner, STR_MSG_UNEQUIP_RANKITEM(item.getL10n()));
+			}
+			int warningTime = expireTime - RANK_LIMIT_WARNING_SECONDS;
+			if (warningTime > lastRankLimitCheck && warningTime <= now) // only the run crossing it warns, so it stays a single message
+				PacketSendUtility.sendPacket(owner, STR_MSG_UNEQUIP_RANKITEM_TIMER_1M(item.getL10n()));
+			int itemNextCheck = warningTime > now ? warningTime : expireTime; // both are in the future, so the task can never reschedule itself instantly
+			if (nextCheck == 0 || itemNextCheck < nextCheck)
+				nextCheck = itemNextCheck;
 		}
-		checkRankLimitItems(); // items whose grace period started later keep waiting for their own deadline
+		if (appearanceChanged) // only the packet handlers do this, so items taken off by the server would stay visible until the next equip change
+			PacketSendUtility.broadcastPacket(owner, new SM_UPDATE_PLAYER_APPEARANCE(owner.getObjectId(), getEquippedForAppearance()), true);
+		lastRankLimitCheck = now;
+		if (nextCheck == 0)
+			owner.getController().cancelTask(TaskId.RANK_LIMIT_UNEQUIP);
+		else
+			owner.getController().addTask(TaskId.RANK_LIMIT_UNEQUIP,
+				ThreadPoolManager.getInstance().schedule(this::checkRankLimitItems, (nextCheck - now) * 1000L));
 	}
 }

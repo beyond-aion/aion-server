@@ -24,6 +24,7 @@ import com.aionemu.gameserver.model.templates.item.ItemUseLimits;
 import com.aionemu.gameserver.model.templates.item.bonuses.StatBonusType;
 import com.aionemu.gameserver.model.templates.item.enums.EquipType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_UPDATE_PLAYER_APPEARANCE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -703,8 +704,9 @@ public class Item extends AionObject implements Expirable, StatOwner, Persistabl
 
 	@Override
 	public void onExpire(Player player) {
-		if (isEquipped())
-			player.getEquipment().unEquipItem(getObjectId());
+		if (isEquipped() && player.getEquipment().unEquipItem(getObjectId(), false) != null)
+			PacketSendUtility.broadcastPacket(player,
+				new SM_UPDATE_PLAYER_APPEARANCE(player.getObjectId(), player.getEquipment().getEquippedForAppearance()), true);
 
 		for (StorageType i : StorageType.values()) {
 			if (i == StorageType.LEGION_WAREHOUSE)

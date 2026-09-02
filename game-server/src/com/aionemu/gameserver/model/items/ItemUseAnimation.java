@@ -1,8 +1,9 @@
 package com.aionemu.gameserver.model.items;
 
 /**
- * Stage of the item usage animation, as sent in SM_ITEM_USAGE_ANIMATION. Each group is a START / SUCCESS / CANCEL triple, where START carries the cast
- * duration and the other two are sent with a cast time of zero.
+ * Stage of the item usage animation, as sent in SM_ITEM_USAGE_ANIMATION. Every group opens with its START stage, the only one carrying the cast
+ * duration, and closes either with an outcome or with CANCEL. Aborting a running use has to send the CANCEL stage of its group, since it is the only
+ * stage that stops the animation, on all others the client plays it to the end.
  */
 public enum ItemUseAnimation {
 

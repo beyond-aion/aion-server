@@ -23,12 +23,12 @@ public enum ObserverType {
 	ATTACK_DEFEND(ATTACK.observerMask | ATTACKED.observerMask),
 	DOT_ATTACK_DEFEND(DOT_ATTACKED.observerMask | ATTACK.observerMask | ATTACKED.observerMask),
 	MOVE_OR_DIE(MOVE.observerMask | DEATH.observerMask),
-	// the two masks below cover exactly what their observer reacts to, so a notification it ignores cannot detach it (both are attached for a single one)
+	// the two masks below cover exactly what their observer reacts to, so a notification it ignores cannot detach these one time observers
 	ITEM_USE_CANCEL(MOVE.observerMask | ATTACK.observerMask | ATTACKED.observerMask | EQUIP.observerMask | UNEQUIP.observerMask
 		| STARTSKILLCAST.observerMask | ENDSKILLCAST.observerMask | DEATH.observerMask | DOT_ATTACKED.observerMask | ITEMUSE.observerMask
 		| SIT.observerMask | BOOSTSKILLCOST.observerMask),
-	GATHERING_CANCEL(MOVE.observerMask | ATTACK.observerMask | ATTACKED.observerMask | STARTSKILLCAST.observerMask | DOT_ATTACKED.observerMask
-		| ITEMUSE.observerMask),
+	GATHERING_CANCEL(MOVE.observerMask | ATTACK.observerMask | ATTACKED.observerMask | STARTSKILLCAST.observerMask | DEATH.observerMask
+		| DOT_ATTACKED.observerMask | ITEMUSE.observerMask),
 	ALL(MOVE.observerMask | ATTACK.observerMask | ATTACKED.observerMask | EQUIP.observerMask | UNEQUIP.observerMask | STARTSKILLCAST.observerMask
 		| DEATH.observerMask | DOT_ATTACKED.observerMask | ITEMUSE.observerMask | ABNORMALSETTED.observerMask | SUMMONRELEASE.observerMask
 		| SIT.observerMask | HP_CHANGED.observerMask | ENDSKILLCAST.observerMask | BOOSTSKILLCOST.observerMask);
