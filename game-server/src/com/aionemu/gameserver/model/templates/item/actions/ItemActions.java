@@ -14,7 +14,8 @@ public class ItemActions {
 
 	@XmlElements({ @XmlElement(name = "skilllearn", type = SkillLearnAction.class), @XmlElement(name = "extract", type = ExtractAction.class),
 		@XmlElement(name = "skilluse", type = SkillUseAction.class), @XmlElement(name = "enchant", type = EnchantItemAction.class),
-		@XmlElement(name = "queststart", type = QuestStartAction.class), @XmlElement(name = "dye", type = DyeAction.class),
+		@XmlElement(name = "queststart", type = QuestStartAction.class), @XmlElement(name = "questuse", type = QuestUseAction.class),
+		@XmlElement(name = "dye", type = DyeAction.class),
 		@XmlElement(name = "craftlearn", type = CraftLearnAction.class), @XmlElement(name = "toypetspawn", type = ToyPetSpawnAction.class),
 		@XmlElement(name = "decompose", type = DecomposeAction.class), @XmlElement(name = "titleadd", type = TitleAddAction.class),
 		@XmlElement(name = "learnemotion", type = EmotionLearnAction.class), @XmlElement(name = "read", type = ReadAction.class),

@@ -155,6 +155,7 @@
 			<xs:element name="skilluse" type="SkillUseAction" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="enchant" type="EnchantItemAction" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="queststart" type="QuestStartAction" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="questuse" type="QuestUseAction" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="dye" type="DyeAction" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="craftlearn" type="CraftLearnAction" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="extract" type="ExtractAction" minOccurs="0" maxOccurs="1"/>
@@ -288,6 +289,11 @@
 			<xs:extension base="AbstractItemAction">
 				<xs:attribute name="questid" type="xs:int"/>
 			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="QuestUseAction">
+		<xs:complexContent>
+			<xs:extension base="AbstractItemAction"/>
 		</xs:complexContent>
 	</xs:complexType>
 	<xs:complexType name="CraftLearnAction">
