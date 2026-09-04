@@ -71,6 +71,9 @@ public final class QuestService {
 
 	private static final Logger log = LoggerFactory.getLogger(QuestService.class);
 
+	/** Maximum number of quests a player can work on at the same time, no matter their category */
+	private static final int MAX_WORKING_QUESTS = 266;
+
 	private static Map<Integer, List<QuestDrop>> questDrop = new HashMap<>();
 
 	private static boolean deny(Consumer<String> denialReason, String reason) {
@@ -444,7 +447,7 @@ public final class QuestService {
 		if (!checkStartConditions(player, id, warn))
 			return false;
 
-		if (!template.isNoCount() && !checkQuestListSize(qsl) && !player.hasPermission(MembershipConfig.QUEST_LIMIT_DISABLED)) {
+		if (!checkQuestListSize(qsl, template) && !player.hasPermission(MembershipConfig.QUEST_LIMIT_DISABLED)) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_MAX_NORMAL());
 			return false;
 		}
@@ -573,12 +576,18 @@ public final class QuestService {
 	}
 
 	/*
-	 * Check the player's quest list size for starting a new one
+	 * Check the player's quest list size for starting a new one. Retail has two limits, both rejecting with the same message: the total number of
+	 * quests a player can work on, and the number of quests of the categories which count towards the basic limit.
 	 * @param quest state list
+	 * @param template of the quest to start
 	 */
-	private static boolean checkQuestListSize(QuestStateList qsl) {
+	private static boolean checkQuestListSize(QuestStateList qsl, QuestTemplate template) {
 		// The player's quest list size + the new one to start
-		return (qsl.getNormalQuests().size() + 1) <= CustomConfig.BASIC_QUEST_SIZE_LIMIT;
+		if (qsl.getUncompletedQuests().size() + 1 > MAX_WORKING_QUESTS)
+			return false;
+		if (!template.getCategory().countsTowardsQuestLimit())
+			return true;
+		return (qsl.getQuestsCountingTowardsLimit().size() + 1) <= CustomConfig.BASIC_QUEST_SIZE_LIMIT;
 	}
 
 	public static boolean collectItemCheck(QuestEnv env, boolean removeItem) {

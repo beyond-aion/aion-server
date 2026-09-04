@@ -115,13 +115,12 @@ public class XMLStartCondition {
 	}
 
 	private boolean checkEquippedItems(Player player, boolean warn) {
-		if (!warn)
-			return true;
 		int missingItemId = getMissingEquippedItem(player);
 		if (missingItemId == 0)
 			return true;
-		PacketSendUtility.sendPacket(player,
-			SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_EQUIP_ITEM(DataManager.ITEM_DATA.getItemTemplate(missingItemId).getL10n()));
+		if (warn)
+			PacketSendUtility.sendPacket(player,
+				SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_EQUIP_ITEM(DataManager.ITEM_DATA.getItemTemplate(missingItemId).getL10n()));
 		return false;
 	}
 

@@ -7,7 +7,13 @@ import org.slf4j.LoggerFactory;
  */
 public class QuestVars {
 
-	private int[] questVars = new int[6];
+	private static final int VAR_COUNT = 6;
+	private static final int VAR_BITS = 6;
+	private static final int VAR_MASK = (1 << VAR_BITS) - 1;
+	/** The six vars don't fit into the stored integer, so the last one only has the two bits left above the other five */
+	private static final int LAST_VAR_MASK = (1 << (Integer.SIZE - VAR_BITS * (VAR_COUNT - 1))) - 1;
+
+	private int[] questVars = new int[VAR_COUNT];
 
 	public QuestVars() {
 	}
@@ -29,9 +35,13 @@ public class QuestVars {
 	 * @param var
 	 */
 	public void setVarById(int id, int var) {
-		if (var > 0x3F)
+		if (var > getMaxValue(id))
 			LoggerFactory.getLogger(QuestVars.class).warn("Out of range value was passed for quest var on index " + id, new IllegalArgumentException());
 		questVars[id] = var;
+	}
+
+	private static int getMaxValue(int id) {
+		return id == VAR_COUNT - 1 ? LAST_VAR_MASK : VAR_MASK;
 	}
 
 	/**
@@ -39,8 +49,8 @@ public class QuestVars {
 	 */
 	public int getQuestVars() {
 		int var = 0;
-		for (int i = 5; i >= 0; i--) {
-			var <<= 0x06;
+		for (int i = VAR_COUNT - 1; i >= 0; i--) {
+			var <<= VAR_BITS;
 			var |= questVars[i];
 		}
 		return var;
@@ -48,14 +58,14 @@ public class QuestVars {
 
 	/**
 	 * Fill the array with values, based on
-	 * 
+	 *
 	 * @param int
 	 *          value, represented like above
 	 */
 	public void setVar(int var) {
-		for (int i = 0; i <= 5; i++) {
-			questVars[i] = var & 0x3F;
-			var >>= 0x06;
+		for (int i = 0; i < VAR_COUNT; i++) {
+			questVars[i] = var & VAR_MASK;
+			var >>>= VAR_BITS; // unsigned, the last var occupies the sign bit
 		}
 	}
 }
