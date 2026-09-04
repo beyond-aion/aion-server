@@ -104,19 +104,24 @@ public class XMLStartCondition {
 		return true;
 	}
 
-	private boolean checkEquippedItems(Player player, boolean warn) {
-		if (!warn)
-			return true;
-		if (equipped != null && equipped.size() > 0) {
+	private int getMissingEquippedItem(Player player) {
+		if (equipped != null) {
 			for (int itemId : equipped) {
-				if (!player.getEquipment().getEquippedItemIds().contains(itemId)) {
-					String requiredItem = DataManager.ITEM_DATA.getItemTemplate(itemId).getL10n();
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_EQUIP_ITEM(requiredItem));
-					return false;
-				}
+				if (!player.getEquipment().getEquippedItemIds().contains(itemId))
+					return itemId;
 			}
 		}
-		return true;
+		return 0;
+	}
+
+	private boolean checkEquippedItems(Player player, boolean warn) {
+		int missingItemId = getMissingEquippedItem(player);
+		if (missingItemId == 0)
+			return true;
+		if (warn)
+			PacketSendUtility.sendPacket(player,
+				SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_EQUIP_ITEM(DataManager.ITEM_DATA.getItemTemplate(missingItemId).getL10n()));
+		return false;
 	}
 
 	private boolean isRequiredTitleDisplayed(Player player) {
@@ -134,5 +139,36 @@ public class XMLStartCondition {
 
 	public List<FinishedQuestCond> getFinishedPreconditions() {
 		return finished;
+	}
+
+	/** Names the sub condition which made {@link #check} fail, for diagnostics. */
+	public String getFailureDescription(Player player) {
+		QuestStateList qsl = player.getQuestStateList();
+		if (!checkFinishedQuests(qsl)) {
+			StringBuilder sb = new StringBuilder("finished");
+			for (FinishedQuestCond fqc : finished) {
+				QuestState qs = qsl.getQuestState(fqc.getQuestId());
+				sb.append(" q").append(fqc.getQuestId()).append('=')
+					.append(qs == null ? "never acquired" : qs.getStatus() + ", completeCount " + qs.getCompleteCount() + ", rewardGroup " + qs.getRewardGroup());
+				if (fqc.getReward() >= 0)
+					sb.append(" (required rewardGroup ").append(fqc.getReward()).append(')');
+				QuestTemplate template = DataManager.QUEST_DATA.getQuestById(fqc.getQuestId());
+				if (template != null && template.isRepeatable() && template.getMaxRepeatCount() != 255)
+					sb.append(" (must be completed ").append(template.getMaxRepeatCount()).append(" times)");
+			}
+			return sb.toString();
+		}
+		if (!checkUnfinishedQuests(qsl))
+			return "unfinished " + unfinished;
+		if (!checkAcquiredQuests(qsl))
+			return "acquired " + acquired;
+		if (!checkNoAcquiredQuests(qsl))
+			return "noacquired " + noacquired;
+		int missingEquippedItem = getMissingEquippedItem(player);
+		if (missingEquippedItem != 0)
+			return "equipped " + equipped + " (missing " + missingEquippedItem + ")";
+		if (!isRequiredTitleDisplayed(player))
+			return "required_title " + requiredTitle + " (player has " + player.getCommonData().getTitleId() + ")";
+		return "none";
 	}
 }

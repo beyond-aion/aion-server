@@ -83,15 +83,15 @@ public class QuestStateList {
 	}
 
 	/**
-	 * @return All normal (light blue) quests, that are currently active.
+	 * @return All currently active quests of a category which counts towards the basic quest limit.
 	 */
-	public List<QuestState> getNormalQuests() {
+	public List<QuestState> getQuestsCountingTowardsLimit() {
 		List<QuestState> questList = new ArrayList<>();
 		for (QuestState qs : getAllQuestState()) {
 			QuestCategory qc = DataManager.QUEST_DATA.getQuestById(qs.getQuestId()).getCategory();
 			QuestStatus s = qs.getStatus();
 
-			if (qc == QuestCategory.QUEST && s != QuestStatus.COMPLETE && s != QuestStatus.LOCKED) {
+			if (qc.countsTowardsQuestLimit() && s != QuestStatus.COMPLETE && s != QuestStatus.LOCKED) {
 				questList.add(qs);
 			}
 		}

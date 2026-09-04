@@ -13,6 +13,7 @@ import com.aionemu.gameserver.model.templates.item.actions.DyeAction;
 import com.aionemu.gameserver.model.templates.item.actions.InstanceTimeClear;
 import com.aionemu.gameserver.model.templates.item.actions.MultiReturnAction;
 import com.aionemu.gameserver.model.templates.item.actions.QuestStartAction;
+import com.aionemu.gameserver.model.templates.item.actions.QuestUseAction;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -85,8 +86,8 @@ public class CM_USE_ITEM extends AionClientPacket {
 		List<AbstractItemAction> itemActions = item.getItemTemplate().getActions() == null ? Collections.emptyList()
 			: item.getItemTemplate().getActions().getItemActions();
 
-		// QuestStartAction opens the quest dialog itself (after the casting delay), quest handlers must not open it a second time
-		HandlerResult result = itemActions.stream().anyMatch(a -> a instanceof QuestStartAction) ? HandlerResult.UNKNOWN
+		// QuestStartAction and QuestUseAction notify the quest themselves (after the casting delay), so it must not fire here as well
+		HandlerResult result = itemActions.stream().anyMatch(a -> a instanceof QuestStartAction || a instanceof QuestUseAction) ? HandlerResult.UNKNOWN
 			: QuestEngine.getInstance().onItemUseEvent(new QuestEnv(null, player, 0), item);
 
 		if (itemActions.isEmpty() && result != HandlerResult.SUCCESS) {

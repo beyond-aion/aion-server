@@ -24,8 +24,9 @@ public class ReadAction extends AbstractItemAction {
 
 	@Override
 	public void act(Player player, Item parentItem, Item targetItem, Object... params) {
-		// items combining <queststart> with <read> get their "used" message and usage animation from QuestStartAction already
-		if (parentItem.getItemTemplate().getActions().getItemActions().stream().anyMatch(a -> a instanceof QuestStartAction))
+		// items combining <read> with a quest action get their "used" message and usage animation from that action already
+		if (parentItem.getItemTemplate().getActions().getItemActions().stream()
+			.anyMatch(a -> a instanceof QuestStartAction || a instanceof QuestUseAction))
 			return;
 
 		int castingDelay = parentItem.getItemTemplate().getCastingDelay();

@@ -114,6 +114,14 @@ public abstract class AbstractQuestHandler {
 	}
 
 	/**
+	 * @return True if this quest expects the player to interact with the given npc in its current state. Handlers which can't tell answer true, so
+	 *         they keep behaving as before.
+	 */
+	public boolean isWaitingForInteractionWith(Player player, int npcId) {
+		return true;
+	}
+
+	/**
 	 * This method is called on every handler (which registered the event), after a player entered a map.
 	 */
 	public boolean onEnterWorldEvent(QuestEnv env) {
@@ -434,10 +442,8 @@ public abstract class AbstractQuestHandler {
 							npcHasActiveQuest = true; // TODO correct way to make sure that active quest can be continued at this npc
 					}
 				}
-				boolean npcHasNewQuest = false;
 				for (Integer questId : questNpc.getOnQuestStart()) { // all quest IDs that are registered to be started at this npc
 					if (QuestService.checkStartConditions(player, questId, false)) {
-						npcHasNewQuest = true;
 						QuestTemplate template = DataManager.QUEST_DATA.getQuestById(questId);
 						for (XMLStartCondition startCondition : template.getXMLStartConditions()) {
 							List<FinishedQuestCond> finishedQuests = startCondition.getFinishedPreconditions();
@@ -454,7 +460,8 @@ public abstract class AbstractQuestHandler {
 						}
 					}
 				}
-				return npcHasActiveQuest || npcHasNewQuest ? sendQuestSelectionDialog(env) : closeDialogWindow(env);
+				// on retail the window closes even when the npc still has quests to offer, only an ongoing one keeps it open
+				return npcHasActiveQuest ? sendQuestSelectionDialog(env) : closeDialogWindow(env);
 			}
 		} else {
 			switch (dialogActionId) {

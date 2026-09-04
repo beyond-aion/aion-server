@@ -10,7 +10,7 @@
 			10505 [SCRIPT] Sneeze Attack (Campaign)
 			10506 [SCRIPT] Mind Over Matter (Campaign)
 			10507 [SCRIPT] A Big Plot to Foil (Campaign)
-			15000 [ToDo] Not Any Fool's Tool (Multistep)
+			15000 [XML] Not Any Fool's Tool
 			15001 [XML] Lending Both Hands (Monster Hunt)
 			15002 [XML] Cold Hands, Warm Luciferin (Collect Item)
 			15003 [UNUSED] HOLD
@@ -205,4 +205,72 @@
 	<monster_hunt id="15202" start_npc_ids="804704"/>
 	<monster_hunt id="15203" start_npc_ids="804704"/>
 	<monster_hunt id="18971" start_npc_ids="804865" end_npc_ids="805213 805214 805215"/>
+
+	<!-- MULTISTEP QUESTS -->
+	<xml_quest id="15000" start_npc_ids="804874" end_npc_ids="804874">
+		<on_talk_event ids="804874">
+			<conditions operate="AND">
+				<quest_status value="START" op="EQUAL"/>
+			</conditions>
+			<var value="0"><!-- bring the odium shard to Milliard -->
+				<npc id="804874">
+					<dialog id="31">
+						<operations>
+							<npc_dialog id="1011"/>
+						</operations>
+					</dialog>
+					<dialog id="39">
+						<operations>
+							<collect_items>
+								<true>
+									<set_quest_var var_id="0" value="1"/>
+									<npc_dialog id="10000"/>
+								</true>
+								<false>
+									<npc_dialog id="10001"/>
+								</false>
+							</collect_items>
+						</operations>
+					</dialog>
+				</npc>
+			</var>
+			<var value="1"><!-- he hands over the tool -->
+				<npc id="804874">
+					<dialog id="31">
+						<operations>
+							<npc_dialog id="1352"/>
+						</operations>
+					</dialog>
+					<dialog id="1352">
+						<operations>
+							<npc_dialog id="1352"/>
+						</operations>
+					</dialog>
+					<dialog id="1353">
+						<operations>
+							<npc_dialog id="1353"/>
+						</operations>
+					</dialog>
+					<dialog id="10001">
+						<operations>
+							<give_item item_id="182215662" count="1"/>
+							<set_quest_var var_id="0" value="2"/>
+							<npc_dialog id="0" quest_id="0"/>
+						</operations>
+					</dialog>
+				</npc>
+			</var>
+		</on_talk_event>
+		<on_item_use_event item_ids="182215662">
+			<conditions operate="AND">
+				<quest_status value="START" op="EQUAL"/>
+				<quest_var var_id="0" value="2" op="EQUAL"/>
+			</conditions>
+			<operations>
+				<take_item item_id="182215662" count="1"/>
+				<set_quest_var var_id="0" value="3"/>
+				<set_quest_status status="REWARD"/>
+			</operations>
+		</on_item_use_event>
+	</xml_quest>
 </quest_scripts>

@@ -42,6 +42,9 @@ public class OnKillEvent extends QuestEvent {
 		if (monster == null || !(env.getVisibleObject() instanceof Npc))
 			return false;
 
+		if (conditions != null && !conditions.checkConditionOfSet(env))
+			return false;
+
 		QuestState qs = env.getPlayer().getQuestStateList().getQuestState(env.getQuestId());
 		if (qs == null)
 			return false;

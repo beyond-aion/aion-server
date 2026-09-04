@@ -11,15 +11,21 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.questEngine.QuestEngine;
+import com.aionemu.gameserver.questEngine.handlers.models.xmlQuest.events.OnEnterWorldEvent;
+import com.aionemu.gameserver.questEngine.handlers.models.xmlQuest.events.OnEnterZoneEvent;
+import com.aionemu.gameserver.questEngine.handlers.models.xmlQuest.events.OnItemUseEvent;
 import com.aionemu.gameserver.questEngine.handlers.models.xmlQuest.events.OnKillEvent;
+import com.aionemu.gameserver.questEngine.handlers.models.xmlQuest.events.OnLevelUpEvent;
 import com.aionemu.gameserver.questEngine.handlers.models.xmlQuest.events.OnTalkEvent;
+import com.aionemu.gameserver.questEngine.handlers.models.xmlQuest.events.OnTimerEndEvent;
 import com.aionemu.gameserver.questEngine.handlers.template.XmlQuest;
 
 /**
  * @author Mr. Poke, Pad
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "XmlQuest", propOrder = { "onTalkEvents", "onKillEvents" })
+@XmlType(name = "XmlQuest", propOrder = { "onTalkEvents", "onKillEvents", "onEnterZoneEvents", "onItemUseEvents", "onTimerEndEvents",
+	"onEnterWorldEvents", "onLevelUpEvents" })
 public class XmlQuestData extends XMLQuest {
 
 	@XmlElement(name = "on_talk_event")
@@ -27,6 +33,21 @@ public class XmlQuestData extends XMLQuest {
 
 	@XmlElement(name = "on_kill_event")
 	protected List<OnKillEvent> onKillEvents;
+
+	@XmlElement(name = "on_enter_zone_event")
+	protected List<OnEnterZoneEvent> onEnterZoneEvents;
+
+	@XmlElement(name = "on_item_use_event")
+	protected List<OnItemUseEvent> onItemUseEvents;
+
+	@XmlElement(name = "on_timer_end_event")
+	protected List<OnTimerEndEvent> onTimerEndEvents;
+
+	@XmlElement(name = "on_enter_world_event")
+	protected List<OnEnterWorldEvent> onEnterWorldEvents;
+
+	@XmlElement(name = "on_level_up_event")
+	protected List<OnLevelUpEvent> onLevelUpEvents;
 
 	@XmlAttribute(name = "start_npc_ids")
 	protected List<Integer> startNpcIds;
@@ -36,7 +57,43 @@ public class XmlQuestData extends XMLQuest {
 
 	@Override
 	public void register(QuestEngine questEngine) {
-		questEngine.addQuestHandler(new XmlQuest(id, startNpcIds, endNpcIds, onTalkEvents, onKillEvents));
+		questEngine.addQuestHandler(new XmlQuest(this));
+	}
+
+	public List<Integer> getStartNpcIds() {
+		return startNpcIds;
+	}
+
+	public List<Integer> getEndNpcIds() {
+		return endNpcIds;
+	}
+
+	public List<OnTalkEvent> getOnTalkEvents() {
+		return onTalkEvents;
+	}
+
+	public List<OnKillEvent> getOnKillEvents() {
+		return onKillEvents;
+	}
+
+	public List<OnEnterZoneEvent> getOnEnterZoneEvents() {
+		return onEnterZoneEvents;
+	}
+
+	public List<OnItemUseEvent> getOnItemUseEvents() {
+		return onItemUseEvents;
+	}
+
+	public List<OnTimerEndEvent> getOnTimerEndEvents() {
+		return onTimerEndEvents;
+	}
+
+	public List<OnEnterWorldEvent> getOnEnterWorldEvents() {
+		return onEnterWorldEvents;
+	}
+
+	public List<OnLevelUpEvent> getOnLevelUpEvents() {
+		return onLevelUpEvents;
 	}
 
 	@Override
