@@ -215,42 +215,48 @@ public class PvpService {
 		List<Player> players = new ArrayList<>();
 		int maxRank = 1;
 		int maxLevel = 0;
-
 		for (Player member : teamMember) {
-			if (!member.isOnline() || member.isDead() || !PositionUtil.isInRange(member, victim, GroupConfig.GROUP_MAX_DISTANCE))
+			if (!member.isOnline() || member.isDead() || !PositionUtil.isInRange(member, victim, GroupConfig.GROUP_MAX_DISTANCE)) {
 				continue;
+			}
 			players.add(member);
-			if (member.getLevel() > maxLevel)
+			if (member.getLevel() > maxLevel) {
 				maxLevel = member.getLevel();
-			if (member.getAbyssRank().getRank().getId() > maxRank)
+			}
+			if (member.getAbyssRank().getRank().getId() > maxRank) {
 				maxRank = member.getAbyssRank().getRank().getId();
+			}
 		}
 		// They are all dead or out of range.
-		if (players.isEmpty())
+		if (players.isEmpty()) {
 			return false;
-
+		}
 		float baseApReward = StatFunctions.calculatePvpApGained(victim, maxRank, maxLevel) * apWinMulti;
-		int baseXpReward = StatFunctions.calculatePvpXpGained(victim, maxRank, maxLevel);
+		int baseXpReward = StatFunctions.calculatePvpXpGained(victim, maxLevel);
 		int baseDpReward = StatFunctions.calculatePvpDpGained(victim, maxRank, maxLevel);
 		float groupDamagePercentage = (float) damage / totalDamage;
 		int apRewardPerMember = Math.round(baseApReward * groupDamagePercentage / players.size());
 		int xpRewardPerMember = Math.round(baseXpReward * groupDamagePercentage / players.size());
 		int dpRewardPerMember = Math.round(baseDpReward * groupDamagePercentage / players.size());
-
 		for (Player member : players) {
 			int memberApGain = 1;
 			int memberXpGain = 1;
 			int memberDpGain = 1;
 			if (KillCounter.addKillFor(member.getObjectId(), victim.getObjectId()) < CustomConfig.MAX_DAILY_PVP_KILLS) {
-				if (apRewardPerMember > 0)
+				if (apRewardPerMember > 0) {
 					memberApGain = Rates.AP_PVP.calcResult(member, apRewardPerMember);
-				if (xpRewardPerMember > 0)
-					memberXpGain = xpRewardPerMember; // rates are applied in addExp()
+				}
+				if (xpRewardPerMember > 0) {
+					// Retail: PvP EXP restrictions — target cooldown + global limit.
+					int allowedXp = PvpExpLimitService.getInstance().tryGainPvpExp(member, victim, xpRewardPerMember);
+					if (allowedXp > 0) {
+						memberXpGain = allowedXp;
+					}
+				}
 				if (dpRewardPerMember > 0) {
 					memberDpGain = StatFunctions.adjustPvpDpGained(dpRewardPerMember, victim.getLevel(), member.getLevel());
 					memberDpGain = Rates.DP_PVP.calcResult(member, memberDpGain);
 				}
-
 			}
 			AbyssPointsService.addAp(member, victim, memberApGain);
 			member.getCommonData().addExp(memberXpGain, Rates.XP_PVP, victim.getName());
