@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- Made by SVDNESS -->
+<xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="pvp_exp_mod_table">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="level_diff_mod" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:attribute name="diff" type="xs:int" use="required"/>
+						<xs:attribute name="mods" type="xs:string" use="required"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

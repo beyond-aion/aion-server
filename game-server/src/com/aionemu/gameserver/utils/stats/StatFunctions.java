@@ -3,6 +3,10 @@ package com.aionemu.gameserver.utils.stats;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.dataholders.PvpExpModTable;
+import com.aionemu.gameserver.dataholders.PvpExpTable;
+
 import org.apache.commons.lang3.ArrayUtils;
 
 import com.aionemu.commons.utils.Rnd;
@@ -185,47 +189,20 @@ public class StatFunctions {
 		return pointsGained;
 	}
 
-	/**
-	 * @return XP Points Gained in PvP Kill TODO: Find the correct formula.
-	 */
-	public static int calculatePvpXpGained(Player defeated, int winnerAbyssRank, int maxLevel) {
-		int pointsGained = 5000;
-
-		// Level penalty calculation
-		int difference = maxLevel - defeated.getLevel();
-
-		if (difference > 4) {
-			pointsGained = Math.round(pointsGained * 0.1f);
-		} else if (difference < -3) {
-			pointsGained = Math.round(pointsGained * 1.3f);
-		} else {
-			switch (difference) {
-				case 3:
-					pointsGained = Math.round(pointsGained * 0.85f);
-					break;
-				case 4:
-					pointsGained = Math.round(pointsGained * 0.65f);
-					break;
-				case -2:
-					pointsGained = Math.round(pointsGained * 1.1f);
-					break;
-				case -3:
-					pointsGained = Math.round(pointsGained * 1.2f);
-					break;
-			}
+	// Retail: PvP EXP is calculated from the base value for the victim's level multiplied by the level-difference modifier.
+	// Rank penalty applies only to AP and does not affect EXP.
+	public static int calculatePvpXpGained(Player defeated, int maxLevel) {
+		PvpExpTable table = DataManager.PVP_EXP_TABLE;
+		if (table == null) {
+			return 0;
 		}
-
-		// Abyss rank penalty calculation
-		int defeatedAbyssRank = defeated.getAbyssRank().getRank().getId();
-		int abyssRankDifference = winnerAbyssRank - defeatedAbyssRank;
-
-		if (winnerAbyssRank <= 7 && abyssRankDifference > 0) {
-			float penaltyPercent = abyssRankDifference * 0.05f;
-
-			pointsGained -= Math.round(pointsGained * penaltyPercent);
+		int base = table.getExp(defeated.getLevel());
+		if (base <= 0) {
+			return 0;
 		}
-
-		return pointsGained;
+		PvpExpModTable modTable = DataManager.PVP_EXP_MOD_TABLE;
+		float mod = modTable == null ? 1f : modTable.getMultiplier(maxLevel, defeated.getLevel());
+		return Math.round(base * mod);
 	}
 
 	public static int calculatePvpDpGained(Player defeated, int maxRank, int maxLevel) {
