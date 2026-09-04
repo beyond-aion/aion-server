@@ -32,8 +32,8 @@
 			25073 [SCRIPT] No Revival for the Balaur
 			25080 [XML] Hot Shards! (Collect Item)
 			25081 [XML] Red Coral Delights (Collect Item)
-			25082 [ToDo] Tyrant Take Out (MultiStep)
-			25084 [ToDo] Is This a Trap? (MultiStep)
+			25082 [XML] Tyrant Take Out
+			25084 [XML] Is This a Trap?
 			25085 [ToDo] Intercept the Ide (Collect Item)
 			25090 [XML] They Chose Poorly (Monster Hunt)
 			25091 [XML] The More You Know... (Collect Item)
@@ -122,4 +122,145 @@
 	<monster_hunt id="25202" start_npc_ids="804914"/>
 	<monster_hunt id="25203" start_npc_ids="804914"/>
 	<monster_hunt id="28971" start_npc_ids="804924" end_npc_ids="805216 805217 805218"/>
+
+	<!-- MULTISTEP QUESTS -->
+	<xml_quest id="25082" start_npc_ids="804923" end_npc_ids="804924">
+		<on_talk_event ids="731559">
+			<conditions operate="AND">
+				<quest_status value="START" op="EQUAL"/>
+			</conditions>
+			<var value="0"><!-- put the meat on the luring bonfire -->
+				<npc id="731559">
+					<dialog id="31">
+						<operations>
+							<npc_dialog id="1011"/>
+						</operations>
+					</dialog>
+					<dialog id="39">
+						<operations>
+							<collect_items>
+								<true>
+									<set_quest_var var_id="0" value="1"/>
+									<npc_dialog id="10000"/>
+								</true>
+								<false>
+									<npc_dialog id="10001"/>
+								</false>
+							</collect_items>
+						</operations>
+					</dialog>
+				</npc>
+			</var>
+			<var value="1"><!-- light it and lure the tyrant out -->
+				<npc id="731559">
+					<dialog id="31">
+						<operations>
+							<npc_dialog id="1352"/>
+						</operations>
+					</dialog>
+					<dialog id="1352">
+						<operations>
+							<npc_dialog id="1352"/>
+						</operations>
+					</dialog>
+					<dialog id="10001">
+						<operations>
+							<spawn_npc npc_id="833465" x="1056" y="194" z="227" h="30" lifetime="30"/>
+							<!-- retail has the burning bonfires ai spawn the tyrant on its own point, three seconds after it appears -->
+							<spawn_npc npc_id="220037" x="1056" y="194" z="227" aggro="true"/>
+							<add_timer seconds="300"/>
+							<set_quest_var var_id="0" value="2"/>
+							<npc_dialog id="0" quest_id="0"/>
+						</operations>
+					</dialog>
+				</npc>
+			</var>
+		</on_talk_event>
+		<on_kill_event ids="220037"><!-- only counts while the timer runs, like retail -->
+			<conditions operate="AND">
+				<quest_status value="START" op="EQUAL"/>
+				<quest_var var_id="0" value="2" op="EQUAL"/>
+			</conditions>
+			<monster var="1" start_var="0" end_var="1" npc_ids="220037" step="2"/>
+			<complite>
+				<set_quest_var var_id="1" value="0"/>
+				<set_quest_var var_id="0" value="3"/>
+				<set_quest_status status="REWARD"/>
+			</complite>
+		</on_kill_event>
+		<on_timer_end_event><!-- the bonfire can be lit again, the tyrant stays but no longer counts -->
+			<conditions operate="AND">
+				<quest_status value="START" op="EQUAL"/>
+				<quest_var var_id="0" value="2" op="EQUAL"/>
+			</conditions>
+			<operations>
+				<set_quest_var var_id="0" value="1"/>
+			</operations>
+		</on_timer_end_event>
+		<on_enter_world_event><!-- the timer didn't survive the relog, so the step has to become available again -->
+			<conditions operate="AND">
+				<quest_status value="START" op="EQUAL"/>
+				<quest_var var_id="0" value="2" op="EQUAL"/>
+				<quest_timer running="false" op="EQUAL"/>
+			</conditions>
+			<operations>
+				<set_quest_var var_id="0" value="1"/>
+			</operations>
+		</on_enter_world_event>
+	</xml_quest>
+	<xml_quest id="25084" start_npc_ids="804926" end_npc_ids="804927">
+		<on_talk_event ids="804925 804926">
+			<conditions operate="AND">
+				<quest_status value="START" op="EQUAL"/>
+			</conditions>
+			<var value="0"><!-- bring the shells to Coli -->
+				<npc id="804925">
+					<dialog id="31">
+						<operations>
+							<npc_dialog id="1011"/>
+						</operations>
+					</dialog>
+					<dialog id="39">
+						<operations>
+							<collect_items>
+								<true>
+									<set_quest_var var_id="0" value="1"/>
+									<npc_dialog id="10000"/>
+								</true>
+								<false>
+									<npc_dialog id="10001"/>
+								</false>
+							</collect_items>
+						</operations>
+					</dialog>
+				</npc>
+			</var>
+			<var value="1"><!-- report back to Zake -->
+				<npc id="804926">
+					<dialog id="31">
+						<operations>
+							<npc_dialog id="1352"/>
+						</operations>
+					</dialog>
+					<dialog id="10001">
+						<operations>
+							<set_quest_var var_id="0" value="2"/>
+							<npc_dialog id="0" quest_id="0"/>
+						</operations>
+					</dialog>
+				</npc>
+			</var>
+		</on_talk_event>
+		<on_enter_zone_event zones="DF5_SENSORYAREA_Q25084_206403_6_220080000">
+			<conditions operate="AND">
+				<quest_status value="START" op="EQUAL"/>
+				<quest_var var_id="0" value="2" op="EQUAL"/>
+			</conditions>
+			<operations>
+				<spawn_npc npc_id="220038" count="2" distance="7" lifetime="300" aggro="true"/>
+				<set_quest_var var_id="0" value="3"/>
+				<set_quest_status status="REWARD"/>
+			</operations>
+		</on_enter_zone_event>
+	</xml_quest>
 </quest_scripts>
