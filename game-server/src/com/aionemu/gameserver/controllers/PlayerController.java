@@ -92,6 +92,15 @@ public class PlayerController extends CreatureController<Player> {
 	private long lastAttackedMillis = 0;
 	private long lastAutoAttackMillis = 0;
 	private StanceObserver stanceObserver;
+	private int questTimerQuestId; // only one quest timer can run at a time, this is the quest it belongs to
+
+	public int getQuestTimerQuestId() {
+		return questTimerQuestId;
+	}
+
+	public void setQuestTimerQuestId(int questId) {
+		questTimerQuestId = questId;
+	}
 
 	@Override
 	public void see(VisibleObject object) {
