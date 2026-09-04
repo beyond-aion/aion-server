@@ -1,7 +1,6 @@
 package admincommands;
 
 import java.util.Arrays;
-import java.util.List;
 
 import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -9,8 +8,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.npcFaction.ENpcFactionQuestState;
 import com.aionemu.gameserver.model.gameobjects.player.npcFaction.NpcFaction;
 import com.aionemu.gameserver.model.templates.QuestTemplate;
-import com.aionemu.gameserver.model.templates.quest.FinishedQuestCond;
-import com.aionemu.gameserver.model.templates.quest.XMLStartCondition;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION.ActionType;
@@ -190,23 +187,9 @@ public class Quest extends AdminCommand {
 		} else if (qs != null && qs.getStatus() == QuestStatus.COMPLETE && !qs.canRepeat()) {
 			sendInfo(admin, "Quest is already completed.");
 		} else {
-			StringBuilder sb = new StringBuilder();
-			List<XMLStartCondition> preconditions = template.getXMLStartConditions();
-			if (preconditions != null) {
-				for (XMLStartCondition condition : preconditions) {
-					List<FinishedQuestCond> finisheds = condition.getFinishedPreconditions();
-					if (finisheds != null) {
-						for (FinishedQuestCond fcondition : finisheds) {
-							QuestState qs1 = target.getQuestStateList().getQuestState(fcondition.getQuestId());
-							if (qs1 == null || qs1.getStatus() != QuestStatus.COMPLETE) {
-								sb.append("\n\t" + ChatUtil.quest(fcondition.getQuestId()));
-							}
-						}
-					}
-				}
-			}
-			sendInfo(admin,
-				"Quest not started. " + (sb.length() > 0 ? "These quest(s) must be completed first:" + sb.toString() : "Some preconditions failed."));
+			StringBuilder denialReason = new StringBuilder();
+			QuestService.checkStartConditions(target, questId, false, 0, false, false, false, denialReason::append);
+			sendInfo(admin, "Quest not started" + (denialReason.isEmpty() ? "." : ", " + target.getName() + " fails: " + denialReason));
 		}
 	}
 
@@ -251,8 +234,7 @@ public class Quest extends AdminCommand {
 		else
 			PacketSendUtility.sendPacket(target, new SM_QUEST_ACTION(ActionType.ABANDON, qs));
 		target.getController().updateNearbyQuests();
-		if (!admin.equals(target))
-			sendInfo(admin, "Deleted " + ChatUtil.quest(questId) + " for player " + target.getName() + ".");
+		sendInfo(admin, "Deleted " + ChatUtil.quest(questId) + " (was " + qs.getStatus() + ") for player " + target.getName() + ".");
 	}
 
 	private void showQuestStatus(Player admin, Player target, int questId) {
@@ -270,8 +252,11 @@ public class Quest extends AdminCommand {
 			for (int i = 0; i <= 5; i++)
 				sb.append(" " + qs.getQuestVarById(i));
 			sb.append(", encoded [" + qs.getQuestVars().getQuestVars() + "]");
-			sb.append("\n\tQuest flags: " + (qs.getFlags() & 0x3F) + " " + qs.getStepGroup()); // needs rework when flags are implemented like vars
+			sb.append("\n\tQuest flags: " + qs.getFlagValue() + ", step group: " + qs.getStepGroup());
 			sb.append(", encoded [" + qs.getFlags() + "]");
+			sb.append("\n\tComplete count: " + qs.getCompleteCount() + ", reward group: " + qs.getRewardGroup());
+			int timerQuestId = target.getController().getQuestTimerQuestId();
+			sb.append("\n\tQuest timer: " + (timerQuestId == 0 ? "none" : "running for " + ChatUtil.quest(timerQuestId)));
 		}
 		sendInfo(admin, sb.toString());
 	}
