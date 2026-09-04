@@ -57,6 +57,8 @@
 	<xs:include schemaLocation="pets/pet_feed.xsd" />
 	<xs:include schemaLocation="pets/pets.xsd" />
 	<xs:include schemaLocation="player_experience_table.xsd" />
+	<xs:include schemaLocation="exp_mod_table/pvp_exp_table.xsd"/>
+	<xs:include schemaLocation="exp_mod_table/pvp_exp_mod_table.xsd"/>
 	<xs:include schemaLocation="player_initial_data.xsd" />
 	<xs:include schemaLocation="player_titles.xsd" />
 	<xs:include schemaLocation="polymorph_panels/polymorph_panels.xsd" />
@@ -157,6 +159,8 @@
 					<xs:element ref="pet_skill_templates" minOccurs="0" />
 					<xs:element ref="pets" minOccurs="0" />
 					<xs:element ref="player_experience_table" minOccurs="0" />
+					<xs:element ref="pvp_exp_table" minOccurs="0"/>
+					<xs:element ref="pvp_exp_mod_table" minOccurs="0"/>
 					<xs:element ref="player_initial_data" minOccurs="0" />
 					<xs:element ref="player_titles" minOccurs="0" />
 					<xs:element ref="polymorph_panels" minOccurs="0" />
