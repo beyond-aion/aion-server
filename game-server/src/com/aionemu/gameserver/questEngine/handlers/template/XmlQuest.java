@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.questEngine.handlers.template;
 
 import static com.aionemu.gameserver.model.DialogAction.QUEST_SELECT;
+import static com.aionemu.gameserver.model.DialogAction.USE_OBJECT;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -87,6 +88,9 @@ public class XmlQuest extends AbstractTemplateQuestHandler {
 					return sendQuestStartDialog(env);
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD && endNpcIds.contains(targetId)) {
+			// data driven quests let the npc comment on the result before the reward window opens
+			if (isDataDriven && (env.getDialogActionId() == QUEST_SELECT || env.getDialogActionId() == USE_OBJECT))
+				return sendQuestDialog(env, 10002);
 			return sendQuestEndDialog(env);
 		}
 		return false;
