@@ -31,7 +31,7 @@ public class SetQuestStatusOperation extends QuestOperation {
 		if (qs != null) {
 			qs.setStatus(status);
 			PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(ActionType.UPDATE, qs));
-			if (qs.getStatus() == QuestStatus.COMPLETE)
+			if (qs.getStatus() == QuestStatus.COMPLETE || qs.getStatus() == QuestStatus.REWARD)
 				player.getController().updateNearbyQuests();
 		}
 	}

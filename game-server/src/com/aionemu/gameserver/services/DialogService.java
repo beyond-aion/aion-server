@@ -30,6 +30,8 @@ import com.aionemu.gameserver.model.templates.zone.ZoneTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.*;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
+import com.aionemu.gameserver.questEngine.model.QuestState;
+import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.abyss.AbyssRankingCache;
 import com.aionemu.gameserver.services.craft.CraftSkillUpdateService;
 import com.aionemu.gameserver.services.craft.RelinquishCraftStatus;
@@ -285,6 +287,15 @@ public class DialogService {
 			env.setExtendedRewardIndex(extendedRewardIndex);
 			if (QuestEngine.getInstance().onDialog(env))
 				return;
+			if (dialogActionId == QUEST_SELECT) {
+				QuestState qs = player.getQuestStateList().getQuestState(questId);
+				if (qs != null && qs.getStatus() == QuestStatus.START) {
+					// the client offers the quest here, so its data and our declaration disagree about who owns it
+					log.warn("Quest {} is offered at npc {} but no handler claims it there", questId, npc.getNpcId());
+					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npc.getObjectId(), 11, questId)); // recap what's left to do
+					return;
+				}
+			}
 		}
 		// action id = next page id
 		PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npc.getObjectId(), dialogActionId, questId));
