@@ -19,7 +19,10 @@ public class QuestOperations {
 		@XmlElement(name = "set_quest_status", type = SetQuestStatusOperation.class), @XmlElement(name = "give_item", type = GiveItemOperation.class),
 		@XmlElement(name = "start_quest", type = StartQuestOperation.class), @XmlElement(name = "npc_use", type = ActionItemUseOperation.class),
 		@XmlElement(name = "set_quest_var", type = SetQuestVarOperation.class),
-		@XmlElement(name = "collect_items", type = CollectItemQuestOperation.class) })
+		@XmlElement(name = "collect_items", type = CollectItemQuestOperation.class),
+		@XmlElement(name = "spawn_npc", type = SpawnNpcOperation.class), @XmlElement(name = "add_timer", type = AddTimerOperation.class),
+		@XmlElement(name = "teleport", type = TeleportOperation.class),
+		@XmlElement(name = "play_cutscene", type = PlayCutsceneOperation.class) })
 	protected List<QuestOperation> operations;
 	@XmlAttribute
 	protected Boolean override;

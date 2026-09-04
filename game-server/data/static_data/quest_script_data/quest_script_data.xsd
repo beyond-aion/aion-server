@@ -36,6 +36,11 @@
 				<xs:sequence>
 					<xs:element name="on_talk_event" type="OnTalkEvent" minOccurs="0" maxOccurs="unbounded"/>
 					<xs:element name="on_kill_event" type="OnKillEvent" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="on_enter_zone_event" type="OnEnterZoneEvent" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="on_item_use_event" type="OnItemUseEvent" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="on_timer_end_event" type="OnTimerEndEvent" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="on_enter_world_event" type="OnEnterWorldEvent" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="on_level_up_event" type="OnLevelUpEvent" minOccurs="0" maxOccurs="unbounded"/>
 				</xs:sequence>
 				<xs:attribute name="start_npc_ids" type="IntListType"/>
 				<xs:attribute name="end_npc_ids" type="IntListType"/>
@@ -91,6 +96,39 @@
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
+	<xs:complexType name="OnItemUseEvent">
+		<xs:complexContent>
+			<xs:extension base="QuestEvent">
+				<xs:attribute name="item_ids" type="NumberListType" use="required"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="OnEnterZoneEvent">
+		<xs:complexContent>
+			<xs:extension base="QuestEvent">
+				<xs:attribute name="zones" type="StringListType" use="required"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="OnTimerEndEvent">
+		<xs:complexContent>
+			<xs:extension base="QuestEvent"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="OnEnterWorldEvent">
+		<xs:complexContent>
+			<xs:extension base="QuestEvent">
+				<xs:attribute name="world_ids" type="NumberListType"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="OnLevelUpEvent">
+		<xs:complexContent>
+			<xs:extension base="QuestEvent">
+				<xs:attribute name="level" type="xs:int"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
 	<xs:complexType name="QuestConditions">
 		<xs:sequence minOccurs="0" maxOccurs="unbounded">
 			<xs:element name="dialog_id" type="DialogIdCondition" minOccurs="0" maxOccurs="unbounded"/>
@@ -98,6 +136,7 @@
 			<xs:element name="pc_inventory" type="PcInventoryCondition" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="quest_status" type="QuestStatusCondition" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="quest_var" type="QuestVarCondition" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="quest_timer" type="QuestTimerCondition" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 		<xs:attribute name="operate" type="ConditionUnionType" use="required"/>
 	</xs:complexType>
@@ -110,6 +149,10 @@
 			<xs:element name="start_quest" type="StartQuestOperation" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="take_item" type="TakeItemOperation" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="collect_items" type="CollectItemQuestOperation" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="spawn_npc" type="SpawnNpcOperation" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="add_timer" type="AddTimerOperation" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="teleport" type="TeleportOperation" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="play_cutscene" type="PlayCutsceneOperation" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="npc_use" type="ActionItemUseOperation" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="kill" type="KillOperation" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
@@ -150,6 +193,55 @@
 			<xs:extension base="QuestCondition">
 				<xs:attribute name="value" type="xs:int" use="required"/>
 				<xs:attribute name="var_id" type="xs:int" use="required"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="QuestTimerCondition">
+		<xs:complexContent>
+			<xs:extension base="QuestCondition">
+				<xs:attribute name="running" type="xs:boolean" use="required"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SpawnNpcOperation">
+		<xs:complexContent>
+			<xs:extension base="QuestOperation">
+				<xs:attribute name="npc_id" type="xs:int" use="required"/>
+				<xs:attribute name="count" type="xs:int"/>
+				<xs:attribute name="lifetime" type="xs:int"/>
+				<xs:attribute name="distance" type="xs:float"/>
+				<xs:attribute name="x" type="xs:float"/>
+				<xs:attribute name="y" type="xs:float"/>
+				<xs:attribute name="z" type="xs:float"/>
+				<xs:attribute name="h" type="xs:byte"/>
+				<xs:attribute name="aggro" type="xs:boolean"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="AddTimerOperation">
+		<xs:complexContent>
+			<xs:extension base="QuestOperation">
+				<xs:attribute name="seconds" type="xs:int" use="required"/>
+				<xs:attribute name="visible" type="xs:boolean"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="TeleportOperation">
+		<xs:complexContent>
+			<xs:extension base="QuestOperation">
+				<xs:attribute name="world_id" type="xs:int"/>
+				<xs:attribute name="x" type="xs:float" use="required"/>
+				<xs:attribute name="y" type="xs:float" use="required"/>
+				<xs:attribute name="z" type="xs:float" use="required"/>
+				<xs:attribute name="h" type="xs:byte"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PlayCutsceneOperation">
+		<xs:complexContent>
+			<xs:extension base="QuestOperation">
+				<xs:attribute name="id" type="xs:int" use="required"/>
+				<xs:attribute name="movie" type="xs:boolean"/>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
