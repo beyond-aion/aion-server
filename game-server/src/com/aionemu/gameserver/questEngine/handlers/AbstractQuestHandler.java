@@ -114,6 +114,14 @@ public abstract class AbstractQuestHandler {
 	}
 
 	/**
+	 * @return True if this quest expects the player to interact with the given npc in its current state. Handlers which can't tell answer true, so
+	 *         they keep behaving as before.
+	 */
+	public boolean isWaitingForInteractionWith(Player player, int npcId) {
+		return true;
+	}
+
+	/**
 	 * This method is called on every handler (which registered the event), after a player entered a map.
 	 */
 	public boolean onEnterWorldEvent(QuestEnv env) {

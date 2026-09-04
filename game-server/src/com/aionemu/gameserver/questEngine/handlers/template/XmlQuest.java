@@ -182,6 +182,19 @@ public class XmlQuest extends AbstractTemplateQuestHandler {
 	}
 
 	@Override
+	public boolean isWaitingForInteractionWith(Player player, int npcId) {
+		QuestEnv env = new QuestEnv(null, player, questId);
+		for (OnTalkEvent onTalkEvent : onTalkEvents) {
+			if (onTalkEvent.isWaitingFor(env, npcId))
+				return true;
+		}
+		QuestState qs = player.getQuestStateList().getQuestState(questId);
+		if (qs == null || qs.isStartable())
+			return startNpcIds.contains(npcId);
+		return qs.getStatus() == QuestStatus.REWARD && endNpcIds.contains(npcId);
+	}
+
+	@Override
 	public boolean onEnterWorldEvent(QuestEnv env) {
 		for (OnEnterWorldEvent onEnterWorldEvent : onEnterWorldEvents) {
 			if (onEnterWorldEvent.operate(env))

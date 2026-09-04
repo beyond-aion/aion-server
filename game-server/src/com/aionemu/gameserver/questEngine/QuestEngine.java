@@ -881,6 +881,26 @@ public class QuestEngine implements GameEngine {
 		return questHandlers.get(questId);
 	}
 
+	/**
+	 * @return True if any quest of the player currently expects him to interact with this npc, be it to start, continue or hand in a quest.
+	 */
+	public boolean isNpcNeededByAnyQuestOf(Player player, int npcId) {
+		QuestNpc questNpc = getQuestNpc(npcId);
+		for (int questId : questNpc.getOnTalkEvent()) {
+			QuestState qs = player.getQuestStateList().getQuestState(questId);
+			if (qs == null || qs.getStatus() != QuestStatus.START && qs.getStatus() != QuestStatus.REWARD)
+				continue;
+			AbstractQuestHandler questHandler = getQuestHandlerByQuestId(questId);
+			if (questHandler == null || questHandler.isWaitingForInteractionWith(player, npcId))
+				return true;
+		}
+		for (int questId : questNpc.getOnQuestStart()) {
+			if (QuestService.checkStartConditions(player, questId, false))
+				return true;
+		}
+		return false;
+	}
+
 	public int getQuestHandlerCount() {
 		return questHandlers.size();
 	}
