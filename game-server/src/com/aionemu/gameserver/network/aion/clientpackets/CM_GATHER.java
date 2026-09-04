@@ -30,6 +30,8 @@ public class CM_GATHER extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
+		player.getController().cancelUseItem(); // including the stop action
+		player.getController().cancelCurrentSkill(null);
 		switch (actionId) {
 			case -1 -> cancelGathering(player);
 			case 0, 128 -> startGathering(player); // 128 is sent when using /attack chat command

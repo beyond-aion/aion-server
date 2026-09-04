@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.model.templates.item.actions;
 
+import static com.aionemu.gameserver.model.items.ItemUseAnimation.*;
+
 import javax.xml.bind.annotation.XmlAttribute;
 
 import com.aionemu.gameserver.controllers.observer.ItemUseObserver;
@@ -53,8 +55,8 @@ public class ExpExtractAction extends AbstractItemAction {
 			return;
 		}
 
-		PacketSendUtility.sendPacket(player,
-			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), castingDelay, 0, 0));
+		PacketSendUtility.sendPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(),
+			parentItem.getItemTemplate().getTemplateId(), castingDelay, USE_START));
 
 		final ItemUseObserver observer = new ItemUseObserver() {
 			@Override
@@ -62,7 +64,7 @@ public class ExpExtractAction extends AbstractItemAction {
 				player.getController().cancelTask(TaskId.ITEM_USE);
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_CANCELED(parentItem.getL10n()));
 				PacketSendUtility.sendPacket(player,
-					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), 0, 2, 0));
+					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), 0, USE_CANCEL));
 				player.getObserveController().removeObserver(this);
 			}
 		};
@@ -81,7 +83,7 @@ public class ExpExtractAction extends AbstractItemAction {
 		long newExp = cd.getExp() - requiredExp;
 		if (!canExtractExp(player, newExp) || !player.getInventory().decreaseByItemId(parentItem.getItemId(), 1)) {
 			PacketSendUtility.sendPacket(player,
-				new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), 0, 2, 0));
+				new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), 0, USE_FAIL));
 			return;
 		}
 
@@ -91,7 +93,7 @@ public class ExpExtractAction extends AbstractItemAction {
 		String rewardItem = DataManager.ITEM_DATA.getItemTemplate(itemId).getL10n();
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EXP_EXTRACTION_USE(parentItem.getL10n(), requiredExp, rewardItem));
 		PacketSendUtility.sendPacket(player,
-			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), 0, 1, 0));
+			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), 0, USE_SUCCESS));
 	}
 
 	private long getRequiredExp(PlayerCommonData cd) {

@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.controllers;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
+import static com.aionemu.gameserver.model.items.ItemUseAnimation.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -536,7 +537,7 @@ public class PlayerController extends CreatureController<Player> {
 		} else if (castingSkill.getSkillMethod() == SkillMethod.ITEM) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_CANCELED());
 			PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), castingSkill.getFirstTarget().getObjectId(),
-				castingSkill.getItemObjectId(), castingSkill.getItemTemplate().getTemplateId(), 0, 3, 0), true);
+				castingSkill.getItemObjectId(), castingSkill.getItemTemplate().getTemplateId(), 0, USE_CANCEL), true);
 		}
 
 		if (lastAttacker instanceof Player && !lastAttacker.equals(getOwner())) {

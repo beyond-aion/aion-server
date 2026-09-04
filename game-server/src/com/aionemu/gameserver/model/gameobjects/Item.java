@@ -24,6 +24,7 @@ import com.aionemu.gameserver.model.templates.item.ItemUseLimits;
 import com.aionemu.gameserver.model.templates.item.bonuses.StatBonusType;
 import com.aionemu.gameserver.model.templates.item.enums.EquipType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_UPDATE_PLAYER_APPEARANCE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -54,6 +55,7 @@ public class Item extends AionObject implements Expirable, StatOwner, Persistabl
 	private int enchantLevel;
 	private int enchantBonus;
 	private int expireTime = 0;
+	private int rankLimitExpireTime = 0;
 	private int temporaryExchangeTime = 0;
 	private long repurchasePrice;
 	private int activationCount = 0;
@@ -103,7 +105,7 @@ public class Item extends AionObject implements Expirable, StatOwner, Persistabl
 	public Item(int objId, int itemId, long itemCount, Integer itemColor, int colorExpires, String itemCreator, int expireTime, int activationCount,
 		boolean isEquipped, boolean isSoulBound, long equipmentSlot, int itemLocation, int enchant, int enchantBonus, int itemSkin, int fusionedItem,
 		int optionalSockets, int fusionedItemOptionalSockets, int charge, int tuneCount, int statBonusId, int fusionedItemStatBonusId, int tempering,
-		int packCount, boolean isAmplified, int buffSkill, int rndPlumeBonusValue) {
+		int packCount, boolean isAmplified, int buffSkill, int rndPlumeBonusValue, int rankLimitExpireTime) {
 		super(objId);
 
 		this.itemTemplate = Objects.requireNonNull(DataManager.ITEM_DATA.getItemTemplate(itemId), () -> "Missing template for item " + itemId);
@@ -132,6 +134,7 @@ public class Item extends AionObject implements Expirable, StatOwner, Persistabl
 		this.isAmplified = isAmplified;
 		this.buffSkill = buffSkill;
 		this.rndPlumeBonusValue = rndPlumeBonusValue;
+		this.rankLimitExpireTime = rankLimitExpireTime;
 		if (itemTemplate.getStatBonusSetId() != 0 && statBonusId > 0) {
 			setBonusStats(statBonusId, false);
 		}
@@ -667,6 +670,18 @@ public class Item extends AionObject implements Expirable, StatOwner, Persistabl
 	}
 
 	/**
+	 * @return Seconds since the epoch at which this item is taken off because its owner no longer has the abyss rank for it, 0 if it is not on notice.
+	 */
+	public int getRankLimitExpireTime() {
+		return rankLimitExpireTime;
+	}
+
+	public void setRankLimitExpireTime(int rankLimitExpireTime) {
+		this.rankLimitExpireTime = rankLimitExpireTime;
+		setPersistentState(PersistentState.UPDATE_REQUIRED);
+	}
+
+	/**
 	 * @return Returns the temporaryExchangeTime.
 	 */
 	public int getTemporaryExchangeTime() {
@@ -689,8 +704,9 @@ public class Item extends AionObject implements Expirable, StatOwner, Persistabl
 
 	@Override
 	public void onExpire(Player player) {
-		if (isEquipped())
-			player.getEquipment().unEquipItem(getObjectId());
+		if (isEquipped() && player.getEquipment().unEquipItem(getObjectId(), false) != null)
+			PacketSendUtility.broadcastPacket(player,
+				new SM_UPDATE_PLAYER_APPEARANCE(player.getObjectId(), player.getEquipment().getEquippedForAppearance()), true);
 
 		for (StorageType i : StorageType.values()) {
 			if (i == StorageType.LEGION_WAREHOUSE)

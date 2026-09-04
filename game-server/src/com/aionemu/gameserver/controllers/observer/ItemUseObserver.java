@@ -12,7 +12,7 @@ import com.aionemu.gameserver.skillengine.model.Skill;
 public abstract class ItemUseObserver extends ActionObserver {
 
 	public ItemUseObserver() {
-		super(ObserverType.ALL);
+		super(ObserverType.ITEM_USE_CANCEL);
 	}
 
 	@Override

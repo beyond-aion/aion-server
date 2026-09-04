@@ -1,6 +1,7 @@
 package quest.beshmundir;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
+import static com.aionemu.gameserver.model.items.ItemUseAnimation.*;
 
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -90,9 +91,9 @@ public class _30208GroupTheTruthHurts extends AbstractQuestHandler {
 		if (qs == null)
 			return HandlerResult.UNKNOWN;
 
-		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 3000, 0, 0), true);
+		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 3000, USE_START), true);
 		ThreadPoolManager.getInstance().schedule(() -> {
-			PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0, 1, 0), true);
+			PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0, USE_SUCCESS), true);
 			player.getInventory().decreaseByObjectId(itemObjId, 1);
 			spawnInFrontOf(799506, player);
 		}, 3000);

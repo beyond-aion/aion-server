@@ -25,6 +25,10 @@ public class ArmorMasteryEffect extends BufEffect {
 	@XmlAttribute(name = "armor")
 	private ItemSubType armorType;
 
+	public ItemSubType getArmorType() {
+		return armorType;
+	}
+
 	@Override
 	public void startEffect(Effect effect) {
 		if (change == null)

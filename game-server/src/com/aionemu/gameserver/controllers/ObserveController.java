@@ -192,8 +192,8 @@ public class ObserveController {
 		}
 
 		for (ItemUseObserver itemUseObserver : itemUseObservers) {
-			itemUseObserver.onRemoved();
 			itemUseObserver.abort();
+			itemUseObserver.onRemoved();
 		}
 	}
 

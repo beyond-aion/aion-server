@@ -1,6 +1,7 @@
 package quest.enshar;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
+import static com.aionemu.gameserver.model.items.ItemUseAnimation.*;
 
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -92,9 +93,9 @@ public class _25023SproutingDevelopments extends AbstractQuestHandler {
 			return HandlerResult.UNKNOWN;
 
 		final int itemObjId = item.getObjectId();
-		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 1000, 0, 0), true);
+		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 1000, USE_START), true);
 		ThreadPoolManager.getInstance().schedule(() -> {
-			PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0, 1, 0), true);
+			PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0, USE_SUCCESS), true);
 			int var = qs.getQuestVarById(0);
 			if (var == 2) {
 				spawnTemporarily(805161, player.getWorldMapInstance(), player.getX() + 2, player.getY() + 2, player.getZ(), (byte) 60, 2);

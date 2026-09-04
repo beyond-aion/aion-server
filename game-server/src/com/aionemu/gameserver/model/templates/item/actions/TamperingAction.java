@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.model.templates.item.actions;
 
+import static com.aionemu.gameserver.model.items.ItemUseAnimation.*;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,8 +44,8 @@ public class TamperingAction extends AbstractItemAction {
 	public void act(final Player player, final Item parentItem, final Item targetItem, Object... params) {
 		final int parentItemId = parentItem.getItemId();
 		final int parntObjectId = parentItem.getObjectId();
-		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItemId, 5000, 0, 0),
-			true);
+		PacketSendUtility.broadcastPacket(player,
+			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItemId, 5000, USE_START), true);
 		final ItemUseObserver observer = new ItemUseObserver() {
 
 			@Override
@@ -51,7 +53,7 @@ public class TamperingAction extends AbstractItemAction {
 				player.getController().cancelTask(TaskId.ITEM_USE);
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ITEM_AUTHORIZE_CANCEL(targetItem.getL10n()));
 				PacketSendUtility.broadcastPacketAndReceive(player,
-					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parntObjectId, parentItemId, 0, 3, 0));
+					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parntObjectId, parentItemId, 0, USE_CANCEL));
 				player.getObserveController().removeObserver(this);
 			}
 		};
@@ -65,20 +67,20 @@ public class TamperingAction extends AbstractItemAction {
 				if (player.getInventory().getItemByObjId(targetItem.getObjectId()) == null && !targetItem.isEquipped()) {
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ENCHANT_ITEM_NO_TARGET_ITEM());
 					PacketSendUtility.broadcastPacketAndReceive(player,
-						new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parntObjectId, parentItemId, 0, 2, 0));
+						new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parntObjectId, parentItemId, 0, USE_FAIL));
 					return;
 				}
 
 				int maxTemp = targetItem.getItemTemplate().getMaxTampering();
 				if (targetItem.getTempering() >= maxTemp) {
 					PacketSendUtility.broadcastPacketAndReceive(player,
-						new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parntObjectId, parentItemId, 0, 2, 0));
+						new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parntObjectId, parentItemId, 0, USE_FAIL));
 					return;
 				}
 
 				if (!player.getInventory().decreaseByObjectId(parntObjectId, 1)) {
 					PacketSendUtility.broadcastPacketAndReceive(player,
-						new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parntObjectId, parentItemId, 0, 2, 0));
+						new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parntObjectId, parentItemId, 0, USE_FAIL));
 					return;
 				}
 				player.startCooldown(parentItem);
@@ -89,7 +91,7 @@ public class TamperingAction extends AbstractItemAction {
 					PacketSendUtility.sendPacket(player,
 						SM_SYSTEM_MESSAGE.STR_MSG_ITEM_AUTHORIZE_SUCCEEDED(targetItem.getL10n(), targetItem.getTempering()));
 					PacketSendUtility.broadcastPacketAndReceive(player,
-						new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parntObjectId, parentItemId, 0, 1, 0));
+						new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parntObjectId, parentItemId, 0, USE_SUCCESS));
 
 					if (CustomConfig.ENABLE_ENCHANT_ANNOUNCE && targetItem.getTempering() == 10) {
 						PacketSendUtility.broadcastToWorld(
@@ -106,7 +108,7 @@ public class TamperingAction extends AbstractItemAction {
 					if (targetItem.getItemTemplate().getItemGroup() == ItemGroup.PLUME) {
 						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ITEM_AUTHORIZE_FAILED_TSHIRT(targetItem.getL10n()));
 						PacketSendUtility.broadcastPacketAndReceive(player,
-							new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parntObjectId, parentItemId, 0, 2, 0));
+							new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parntObjectId, parentItemId, 0, USE_FAIL));
 						if (targetItem.isEquipped())
 							player.getEquipment().decreaseEquippedItemCount(targetItem.getObjectId(), 1);
 						else
@@ -114,7 +116,7 @@ public class TamperingAction extends AbstractItemAction {
 					} else {
 						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ITEM_AUTHORIZE_FAILED(targetItem.getL10n()));
 						PacketSendUtility.broadcastPacketAndReceive(player,
-							new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parntObjectId, parentItemId, 0, 2, 0));
+							new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parntObjectId, parentItemId, 0, USE_FAIL));
 					}
 
 					if (LoggingConfig.LOG_TAMPERING)

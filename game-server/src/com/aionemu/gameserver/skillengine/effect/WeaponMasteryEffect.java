@@ -25,6 +25,10 @@ public class WeaponMasteryEffect extends BufEffect {
 	@XmlAttribute(name = "weapon")
 	private ItemGroup itemGroup;
 
+	public ItemGroup getItemGroup() {
+		return itemGroup;
+	}
+
 	@Override
 	public void startEffect(Effect effect) {
 		if (change == null)

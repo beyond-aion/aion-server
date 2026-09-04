@@ -1,6 +1,7 @@
 package quest.beluslan;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
+import static com.aionemu.gameserver.model.items.ItemUseAnimation.*;
 
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -103,12 +104,12 @@ public class _24052AFrozenCity extends AbstractQuestHandler {
 			|| id != 182215380 && qs.getQuestVarById(0) == 3)
 			return HandlerResult.UNKNOWN;
 
-		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 2000, 0, 0), true);
+		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 2000, USE_START), true);
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
 			public void run() {
-				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0, 1, 0), true);
+				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0, USE_SUCCESS), true);
 				if (qs.getQuestVarById(0) == 1) {
 					playQuestMovie(env, 243);
 					removeQuestItem(env, id, 1);

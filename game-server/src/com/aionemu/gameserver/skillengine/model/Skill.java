@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.skillengine.model;
 
+import static com.aionemu.gameserver.model.items.ItemUseAnimation.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -531,7 +533,7 @@ public class Skill {
 				player.setNextSkillUse(System.currentTimeMillis() + GSConfig.MIN_SKILL_CAST_INTERVAL_MILLIS);
 		} else if (skillMethod == SkillMethod.ITEM && castDuration > 0) {
 			PacketSendUtility.broadcastPacketAndReceive(effector, new SM_ITEM_USAGE_ANIMATION(effector.getObjectId(), firstTarget.getObjectId(),
-				itemObjectId, itemTemplate.getTemplateId(), castDuration, 0, 0));
+				itemObjectId, itemTemplate.getTemplateId(), castDuration, USE_START));
 		}
 
 		if (firstTarget != null && !firstTarget.equals(effector) && !skillTemplate.hasResurrectEffect() && (castDuration > 0)
@@ -764,7 +766,7 @@ public class Skill {
 		boolean sentCastSpellPacket = false;
 		if (itemTemplate != null && !itemTemplate.isCombatActivated()) {
 			PacketSendUtility.broadcastPacketAndReceive(effector,
-				new SM_ITEM_USAGE_ANIMATION(effector.getObjectId(), firstTarget.getObjectId(), itemObjectId, itemTemplate.getTemplateId(), 0, 1, 0));
+				new SM_ITEM_USAGE_ANIMATION(effector.getObjectId(), firstTarget.getObjectId(), itemObjectId, itemTemplate.getTemplateId(), 0, USE_SUCCESS));
 		} else {
 			AIEventType et = skillTemplate.getSubType() == SkillSubType.ATTACK ? AIEventType.CREATURE_NEEDS_HELP : null;
 			switch (targetType) {
