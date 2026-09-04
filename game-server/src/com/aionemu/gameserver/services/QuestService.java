@@ -843,10 +843,12 @@ public final class QuestService {
 
 			@Override
 			public void run() {
+				player.getController().setQuestTimerQuestId(0);
 				QuestEngine.getInstance().onQuestTimerEnd(new QuestEnv(null, player, 0));
 			}
 		}, timeInSeconds * 1000);
 		player.getController().addTask(TaskId.QUEST_TIMER, task);
+		player.getController().setQuestTimerQuestId(env.getQuestId());
 		PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(env.getQuestId(), timeInSeconds));
 		return true;
 	}
@@ -855,19 +857,28 @@ public final class QuestService {
 		final Player player = env.getPlayer();
 
 		// Schedule Action When Timer Finishes
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
+		Future<?> task = ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
 			public void run() {
+				player.getController().setQuestTimerQuestId(0);
 				QuestEngine.getInstance().onInvisibleTimerEnd(new QuestEnv(null, player, 0));
 			}
 		}, timeInSeconds * 1000);
+		player.getController().addTask(TaskId.QUEST_TIMER, task); // so it's cancelled when the player leaves the world
+		player.getController().setQuestTimerQuestId(env.getQuestId());
 		return true;
 	}
 
+	/**
+	 * Ends the running quest timer, if it belongs to the quest of the given env.
+	 */
 	public static boolean questTimerEnd(QuestEnv env) {
 		final Player player = env.getPlayer();
 
+		if (player.getController().getQuestTimerQuestId() != env.getQuestId())
+			return false; // the timer belongs to another quest
+		player.getController().setQuestTimerQuestId(0);
 		player.getController().cancelTask(TaskId.QUEST_TIMER);
 		PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(env.getQuestId(), 0));
 		return true;
