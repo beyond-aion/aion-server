@@ -495,12 +495,28 @@ public abstract class Creature extends VisibleObject {
 
 	public boolean isInsidePvPZone() {
 		synchronized (zoneTypes) {
-			if (zoneTypes[ZoneType.SIEGE.ordinal()] > 0) {
+			if (zoneTypes[ZoneType.SIEGE.ordinal()] > 0 || zoneTypes[ZoneType.PVP.ordinal()] > 0) {
 				return true;
 			}
-			int pvpValue = zoneTypes[ZoneType.PVP.ordinal()];
-			return pvpValue == 0 || pvpValue == 2;
+			return zoneTypes[ZoneType.DISABLE_PVP.ordinal()] == 0;
 		}
+	}
+
+	// A summon or trap is considered neutral if either its own position or its owner's position is inside a neutral zone.
+	public boolean isInsideDisablePvPZone() {
+		if (isInsideZoneType(ZoneType.DISABLE_PVP)) {
+			return true;
+		}
+		Creature master = getMaster();
+		return master != this && master.isInsideZoneType(ZoneType.DISABLE_PVP);
+	}
+
+	// PvP is disabled if either side is inside a neutral zone; this check does not apply to mobs or NPCs.
+	public boolean isPvPNeutralWith(Creature other) {
+		if (!(getMaster() instanceof Player) || !(other.getMaster() instanceof Player)) {
+			return false;
+		}
+		return isInsideDisablePvPZone() || other.isInsideDisablePvPZone();
 	}
 
 	public Race getRace() {

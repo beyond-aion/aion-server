@@ -132,6 +132,9 @@ public class Summon extends Creature {
 
 	@Override
 	public boolean isEnemy(Creature creature) {
+		if (isPvPNeutralWith(creature) && !master.isDueling(creature)) {
+			return false;
+		}
 		return master.isEnemy(creature);
 	}
 
@@ -142,6 +145,9 @@ public class Summon extends Creature {
 
 	@Override
 	public boolean isEnemyFrom(Player player) {
+		if (isPvPNeutralWith(player) && !player.isDueling(this)) {
+			return false;
+		}
 		return master.isEnemyFrom(player);
 	}
 

@@ -62,6 +62,10 @@ public class Kisk extends SummonedObject<Player> {
 	 */
 	@Override
 	public boolean isEnemyFrom(Player player) {
+		// The neutral zone is checked separately because Kaldor's siege area allows PvP by default.
+		if (isInsideDisablePvPZone() || player.isInsideDisablePvPZone()) {
+			return false;
+		}
 		return !player.getRace().equals(ownerRace) && isInsidePvPZone() && player.isInsidePvPZone();
 	}
 

@@ -873,10 +873,14 @@ public class Player extends Creature {
 	 */
 	@Override
 	public boolean isEnemyFrom(Player enemy) {
-		if (equals(enemy))
+		if (equals(enemy)) {
 			return false;
+		}
 		if (isInCustomState(CustomPlayerState.ENEMY_OF_ALL_PLAYERS) || enemy.isInCustomState(CustomPlayerState.ENEMY_OF_ALL_PLAYERS)) {
 			return !isInFfaTeamMode || !enemy.isInFfaTeamMode() || !isInSameTeam(enemy);
+		}
+		if (isPvPNeutralWith(enemy) && !isDueling(enemy)) {
+			return false;
 		}
 		return canPvP(enemy) || isDueling(enemy);
 	}
