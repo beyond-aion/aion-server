@@ -8,6 +8,7 @@ import java.time.LocalTime;
 import java.time.ZonedDateTime;
 import java.util.*;
 import java.util.concurrent.Future;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
@@ -69,7 +70,14 @@ import com.aionemu.gameserver.utils.time.ServerTime;
 public final class QuestService {
 
 	private static final Logger log = LoggerFactory.getLogger(QuestService.class);
+
 	private static Map<Integer, List<QuestDrop>> questDrop = new HashMap<>();
+
+	private static boolean deny(Consumer<String> denialReason, String reason) {
+		if (denialReason != null)
+			denialReason.accept(reason);
+		return false;
+	}
 
 	/**
 	 * Finishes the quest and rewards the player.
@@ -301,13 +309,23 @@ public final class QuestService {
 	 */
 	public static boolean checkStartConditions(Player player, int questId, boolean warn, int allowedDiffToMinLevel, boolean skipStartedCheck,
 		boolean skipRepeatCountCheck, boolean skipXmlPreconditionCheck) {
+		return checkStartConditions(player, questId, warn, allowedDiffToMinLevel, skipStartedCheck, skipRepeatCountCheck, skipXmlPreconditionCheck, null);
+	}
+
+	/**
+	 * @param denialReason
+	 *          - Receives the condition which rejected the quest, for diagnostics. May be null.
+	 * @see #checkStartConditions(Player, int, boolean, int, boolean, boolean, boolean)
+	 */
+	public static boolean checkStartConditions(Player player, int questId, boolean warn, int allowedDiffToMinLevel, boolean skipStartedCheck,
+		boolean skipRepeatCountCheck, boolean skipXmlPreconditionCheck, Consumer<String> denialReason) {
 		try {
 			QuestState qs = player.getQuestStateList().getQuestState(questId);
 			if (qs != null) {
 				if (!skipStartedCheck && (qs.getStatus() == QuestStatus.START || qs.getStatus() == QuestStatus.REWARD)) {
 					if (warn)
 						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_WORKING_QUEST());
-					return false;
+					return deny(denialReason, "quest already active (status " + qs.getStatus() + ")");
 				} else if (!skipRepeatCountCheck && qs.getStatus() == QuestStatus.COMPLETE && !qs.canRepeat()) {
 					QuestTemplate template = DataManager.QUEST_DATA.getQuestById(questId);
 					if (template.getMaxRepeatCount() > 1 && template.getMaxRepeatCount() != 255 && qs.getCompleteCount() >= template.getMaxRepeatCount()) {
@@ -318,7 +336,8 @@ public final class QuestService {
 						if (warn)
 							PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_NONE_REPEATABLE(ChatUtil.quest(questId)));
 					}
-					return false;
+					return deny(denialReason, "cannot repeat (completeCount " + qs.getCompleteCount() + " of maxRepeatCount " + template.getMaxRepeatCount()
+						+ ", nextRepeatTime " + qs.getNextRepeatTime() + ")");
 				}
 			}
 
@@ -326,7 +345,7 @@ public final class QuestService {
 			if (template.getRacePermitted() != null && template.getRacePermitted() != Race.PC_ALL && template.getRacePermitted() != player.getRace()) {
 				if (warn)
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_RACE());
-				return false;
+				return deny(denialReason, "race (quest wants " + template.getRacePermitted() + ")");
 			}
 
 			// min level - 2 so that the gray quest arrow shows when quest is almost available
@@ -334,32 +353,32 @@ public final class QuestService {
 			if (levelDiff > 0) {
 				if (warn)
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_MIN_LEVEL(template.getMinlevelPermitted()));
-				return false;
+				return deny(denialReason, "minlevel_permitted " + template.getMinlevelPermitted());
 			}
 
 			if (template.getMaxlevelPermitted() != 0 && player.getLevel() > template.getMaxlevelPermitted()) {
 				if (warn)
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_MAX_LEVEL(template.getMaxlevelPermitted()));
-				return false;
+				return deny(denialReason, "maxlevel_permitted " + template.getMaxlevelPermitted());
 			}
 
 			if (!template.getClassPermitted().isEmpty() && !template.getClassPermitted().contains(player.getPlayerClass())) {
 				if (warn)
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_CLASS());
-				return false;
+				return deny(denialReason, "class_permitted " + template.getClassPermitted());
 			}
 
 			if (template.getGenderPermitted() != null && template.getGenderPermitted() != player.getGender()) {
 				if (warn)
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_GENDER());
-				return false;
+				return deny(denialReason, "gender_permitted " + template.getGenderPermitted());
 			}
 
 			if (template.getRequiredRank() != 0 && player.getAbyssRank().getRank().getId() < template.getRequiredRank()) {
 				if (warn)
 					PacketSendUtility.sendPacket(player,
 						SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_MIN_RANK(AbyssRankEnum.getRankL10n(player.getRace(), template.getRequiredRank())));
-				return false;
+				return deny(denialReason, "required_rank " + template.getRequiredRank());
 			}
 
 			if (!skipXmlPreconditionCheck) {
@@ -368,26 +387,34 @@ public final class QuestService {
 					if (startCondition.check(player, warn))
 						fulfilledStartConditions++;
 				}
-				if (fulfilledStartConditions < template.getRequiredConditionCount())
-					return false;
+				if (fulfilledStartConditions < template.getRequiredConditionCount()) {
+					StringBuilder sb = new StringBuilder("start_conditions (" + fulfilledStartConditions + " of " + template.getRequiredConditionCount()
+						+ " fulfilled)");
+					if (denialReason != null)
+						for (XMLStartCondition startCondition : template.getXMLStartConditions())
+							if (!startCondition.check(player, false))
+								sb.append(": ").append(startCondition.getFailureDescription(player));
+					return deny(denialReason, sb.toString());
+				}
 			}
 
 			QuestEnv env = new QuestEnv(null, player, questId);
 			if (!inventoryItemCheck(env, warn))
-				return false;
+				return deny(denialReason, "inventory_item missing");
 
 			if (!checkCombineSkill(env, warn))
-				return false;
+				return deny(denialReason, "combineskill " + template.getCombineSkill() + " needs level " + template.getCombineSkillPoint()
+					+ (template.getCategory() == QuestCategory.TASK ? "-" + (template.getCombineSkillPoint() + 40) : "+"));
 
 			// check if NpcFaction daily quest
 			if (template.getNpcFactionId() != 0) {
 				// check if the NpcFaction daily time limit has passed
 				if (!template.isTimeBased() && !player.getNpcFactions().canStartQuest(template))
-					return false;
+					return deny(denialReason, "npc_faction " + template.getNpcFactionId() + " daily time limit not passed");
 
 				NpcFaction faction = player.getNpcFactions().getFactionById(template.getNpcFactionId());
 				if (faction == null || !faction.isActive())
-					return false;
+					return deny(denialReason, "npc_faction " + template.getNpcFactionId() + (faction == null ? " not joined" : " not active"));
 			}
 
 			return true;
