@@ -124,9 +124,13 @@ public class XMLStartCondition {
 		return false;
 	}
 
-	private boolean isRequiredTitleDisplayed(Player player) {
-		if (requiredTitle != 0 && player.getCommonData().getTitleId() != requiredTitle)
+	private boolean isRequiredTitleDisplayed(Player player, boolean warn) {
+		if (requiredTitle != 0 && player.getCommonData().getTitleId() != requiredTitle) {
+			if (warn)
+				PacketSendUtility.sendPacket(player,
+					SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_TITLE(DataManager.TITLE_DATA.getTitleTemplate(requiredTitle).getL10n()));
 			return false;
+		}
 		return true;
 	}
 
@@ -134,7 +138,7 @@ public class XMLStartCondition {
 	public boolean check(Player player, boolean warn) {
 		QuestStateList qsl = player.getQuestStateList();
 		return checkFinishedQuests(qsl) && checkUnfinishedQuests(qsl) && checkAcquiredQuests(qsl) && checkNoAcquiredQuests(qsl)
-			&& checkEquippedItems(player, warn) && isRequiredTitleDisplayed(player);
+			&& checkEquippedItems(player, warn) && isRequiredTitleDisplayed(player, warn);
 	}
 
 	public List<FinishedQuestCond> getFinishedPreconditions() {
@@ -167,7 +171,7 @@ public class XMLStartCondition {
 		int missingEquippedItem = getMissingEquippedItem(player);
 		if (missingEquippedItem != 0)
 			return "equipped " + equipped + " (missing " + missingEquippedItem + ")";
-		if (!isRequiredTitleDisplayed(player))
+		if (!isRequiredTitleDisplayed(player, false))
 			return "required_title " + requiredTitle + " (player has " + player.getCommonData().getTitleId() + ")";
 		return "none";
 	}
