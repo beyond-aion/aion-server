@@ -1032,7 +1032,7 @@ public abstract class AbstractQuestHandler {
 
 		// Check the quests, that have to be done before starting this one and other start conditions, listed in quest_data
 		for (XMLStartCondition cond : template.getXMLStartConditions()) {
-			if (!cond.check(player, false)) {
+			if (!cond.check(player)) {
 				if (qs == null && template.isMission())
 					QuestService.addOrUpdateQuest(player, questId, QuestStatus.LOCKED);
 				return false;
@@ -1098,7 +1098,7 @@ public abstract class AbstractQuestHandler {
 		// Check the quests, that have to be done before starting this one and other start conditions, listed in quest_data
 		missingRequirement = false;
 		for (XMLStartCondition cond : template.getXMLStartConditions()) {
-			if (!cond.check(player, false)) {
+			if (!cond.check(player)) {
 				if (qs != null || !template.isMission()) // fast return if its already locked or no campaign quest
 					return false;
 				else if (hasAnyPreQuestFinished(qsl, cond)) { // recursive check

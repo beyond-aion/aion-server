@@ -114,31 +114,30 @@ public class XMLStartCondition {
 		return 0;
 	}
 
-	private boolean checkEquippedItems(Player player, boolean warn) {
-		int missingItemId = getMissingEquippedItem(player);
-		if (missingItemId == 0)
-			return true;
-		if (warn)
-			PacketSendUtility.sendPacket(player,
-				SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_EQUIP_ITEM(DataManager.ITEM_DATA.getItemTemplate(missingItemId).getL10n()));
-		return false;
-	}
-
-	private boolean isRequiredTitleDisplayed(Player player, boolean warn) {
-		if (requiredTitle != 0 && player.getCommonData().getTitleId() != requiredTitle) {
-			if (warn)
-				PacketSendUtility.sendPacket(player,
-					SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_TITLE(DataManager.TITLE_DATA.getTitleTemplate(requiredTitle).getL10n()));
+	private boolean isRequiredTitleDisplayed(Player player) {
+		if (requiredTitle != 0 && player.getCommonData().getTitleId() != requiredTitle)
 			return false;
-		}
 		return true;
 	}
 
 	/** Check all conditions */
-	public boolean check(Player player, boolean warn) {
+	public boolean check(Player player) {
 		QuestStateList qsl = player.getQuestStateList();
 		return checkFinishedQuests(qsl) && checkUnfinishedQuests(qsl) && checkAcquiredQuests(qsl) && checkNoAcquiredQuests(qsl)
-			&& checkEquippedItems(player, warn) && isRequiredTitleDisplayed(player, warn);
+			&& getMissingEquippedItem(player) == 0 && isRequiredTitleDisplayed(player);
+	}
+
+	/** Tells the player why {@link #check} failed. Retail answers the quest link conditions with a generic message. */
+	public void sendFailureMessage(Player player) {
+		int missingItemId = getMissingEquippedItem(player);
+		if (missingItemId != 0)
+			PacketSendUtility.sendPacket(player,
+				SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_EQUIP_ITEM(DataManager.ITEM_DATA.getItemTemplate(missingItemId).getL10n()));
+		else if (!isRequiredTitleDisplayed(player))
+			PacketSendUtility.sendPacket(player,
+				SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_TITLE(DataManager.TITLE_DATA.getTitleTemplate(requiredTitle).getL10n()));
+		else
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_DEFAULT());
 	}
 
 	public List<FinishedQuestCond> getFinishedPreconditions() {
@@ -171,7 +170,7 @@ public class XMLStartCondition {
 		int missingEquippedItem = getMissingEquippedItem(player);
 		if (missingEquippedItem != 0)
 			return "equipped " + equipped + " (missing " + missingEquippedItem + ")";
-		if (!isRequiredTitleDisplayed(player, false))
+		if (!isRequiredTitleDisplayed(player))
 			return "required_title " + requiredTitle + " (player has " + player.getCommonData().getTitleId() + ")";
 		return "none";
 	}

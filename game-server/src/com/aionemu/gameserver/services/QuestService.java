@@ -387,16 +387,23 @@ public final class QuestService {
 			if (!skipXmlPreconditionCheck) {
 				int fulfilledStartConditions = 0;
 				for (XMLStartCondition startCondition : template.getXMLStartConditions()) {
-					if (startCondition.check(player, warn))
+					if (startCondition.check(player))
 						fulfilledStartConditions++;
 				}
 				if (fulfilledStartConditions < template.getRequiredConditionCount()) {
 					StringBuilder sb = new StringBuilder("start_conditions (" + fulfilledStartConditions + " of " + template.getRequiredConditionCount()
 						+ " fulfilled)");
-					if (denialReason != null)
-						for (XMLStartCondition startCondition : template.getXMLStartConditions())
-							if (!startCondition.check(player, false))
-								sb.append(": ").append(startCondition.getFailureDescription(player));
+					boolean warned = false;
+					for (XMLStartCondition startCondition : template.getXMLStartConditions()) {
+						if (startCondition.check(player))
+							continue;
+						if (warn && !warned) {
+							startCondition.sendFailureMessage(player);
+							warned = true;
+						}
+						if (denialReason != null)
+							sb.append(": ").append(startCondition.getFailureDescription(player));
+					}
 					return deny(denialReason, sb.toString());
 				}
 			}
