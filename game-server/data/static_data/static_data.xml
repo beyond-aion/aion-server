@@ -113,6 +113,8 @@
 	<import file="pets/pet_feed.xml" />
 	<import file="pets/pets.xml" />
 	<import file="player_experience_table.xml" />
+	<import file="exp_mod_table/pvp_exp_table.xml"/>
+	<import file="exp_mod_table/pvp_exp_mod_table.xml"/>
 	<import file="player_initial_data.xml" />
 	<import file="player_titles.xml" />
 	<import file="polymorph_panels/polymorph_panels.xml" />

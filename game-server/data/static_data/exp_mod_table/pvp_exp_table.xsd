@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- Made by SVDNESS -->
+<xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="pvp_exp_table">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="level" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:attribute name="lvl" type="xs:int" use="required"/>
+						<xs:attribute name="exp" type="xs:int" use="required"/>
+						<xs:attribute name="get_max_from_all_user" type="xs:int" use="required"/>
+						<xs:attribute name="get_max_reduce_amount" type="xs:int" use="required"/>
+						<xs:attribute name="get_max_reduce_interval" type="xs:int" use="required"/>
+						<xs:attribute name="delay_time" type="xs:int" use="required"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
