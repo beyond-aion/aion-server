@@ -223,6 +223,7 @@
 				<xs:attribute name="z" type="xs:float"/>
 				<xs:attribute name="h" type="xs:byte"/>
 				<xs:attribute name="aggro" type="xs:boolean"/>
+				<xs:attribute name="delay" type="xs:int"/>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>

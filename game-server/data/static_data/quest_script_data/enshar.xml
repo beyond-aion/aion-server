@@ -166,8 +166,8 @@
 					<dialog id="10001">
 						<operations>
 							<spawn_npc npc_id="833465" x="1056" y="194" z="227" h="30" lifetime="30"/>
-							<!-- retail has the burning bonfires ai spawn the tyrant on its own point, three seconds after it appears -->
-							<spawn_npc npc_id="220037" x="1056" y="194" z="227" aggro="true"/>
+							<!-- the burning bonfire lures the tyrant out three seconds later -->
+							<spawn_npc npc_id="220037" x="1056" y="194" z="227" aggro="true" delay="3"/>
 							<add_timer seconds="300"/>
 							<set_quest_var var_id="0" value="2"/>
 							<npc_dialog id="0" quest_id="0"/>
@@ -176,7 +176,7 @@
 				</npc>
 			</var>
 		</on_talk_event>
-		<on_kill_event ids="220037"><!-- only counts while the timer runs, like retail -->
+		<on_kill_event ids="220037"><!-- only counts while the timer runs -->
 			<conditions operate="AND">
 				<quest_status value="START" op="EQUAL"/>
 				<quest_var var_id="0" value="2" op="EQUAL"/>

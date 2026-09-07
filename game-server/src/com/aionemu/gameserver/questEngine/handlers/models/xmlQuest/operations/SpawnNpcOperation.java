@@ -16,8 +16,8 @@ import com.aionemu.gameserver.world.WorldPosition;
 import com.aionemu.gameserver.world.geo.GeoService;
 
 /**
- * Spawns npcs for the player, like the ambushes and props retail sets up on a quest step. Without x/y/z they appear
- * around the player, otherwise at the given position.
+ * Spawns npcs for the player, like the ambushes and props a quest step sets up. Without x/y/z they appear around the player, otherwise at
+ * the given position.
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "SpawnNpcOperation")
@@ -44,10 +44,24 @@ public class SpawnNpcOperation extends QuestOperation {
 	/** whether the spawns should attack the player right away */
 	@XmlAttribute
 	protected boolean aggro;
+	/** seconds until the npcs appear */
+	@XmlAttribute
+	protected int delay;
 
 	@Override
 	public void doOperate(QuestEnv env) {
 		Player player = env.getPlayer();
+		int mapId = player.getWorldId();
+		int instanceId = player.getInstanceId();
+		if (delay > 0)
+			ThreadPoolManager.getInstance().schedule(() -> spawnAll(player, mapId, instanceId), delay * 1000L);
+		else
+			spawnAll(player, mapId, instanceId);
+	}
+
+	private void spawnAll(Player player, int mapId, int instanceId) {
+		if (player.getWorldId() != mapId || player.getInstanceId() != instanceId)
+			return; // the player left before the spawns were due
 		WorldPosition position = player.getPosition();
 		for (int i = 0; i < count; i++) {
 			float spawnX, spawnY, spawnZ;
@@ -63,8 +77,8 @@ public class SpawnNpcOperation extends QuestOperation {
 				spawnY = collision.getY();
 				spawnZ = collision.getZ();
 			}
-			Npc npc = (Npc) SpawnEngine.spawnObject(
-				SpawnEngine.newSingleTimeSpawn(position.getMapId(), npcId, spawnX, spawnY, spawnZ, h == null ? 0 : h), position.getInstanceId());
+			Npc npc = (Npc) SpawnEngine
+				.spawnObject(SpawnEngine.newSingleTimeSpawn(mapId, npcId, spawnX, spawnY, spawnZ, h == null ? 0 : h), instanceId);
 			if (npc == null)
 				return; // npc id doesn't exist, the spawn engine logged it
 			if (aggro)
