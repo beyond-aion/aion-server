@@ -468,7 +468,7 @@ public abstract class AbstractQuestHandler {
 						}
 					}
 				}
-				// on retail the window closes even when the npc still has quests to offer, only an ongoing one keeps it open
+				// only an ongoing quest keeps the window open, quests the npc merely offers don't
 				return npcHasActiveQuest ? sendQuestSelectionDialog(env) : closeDialogWindow(env);
 			}
 		} else {

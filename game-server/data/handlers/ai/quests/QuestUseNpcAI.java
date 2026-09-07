@@ -20,7 +20,7 @@ public class QuestUseNpcAI extends ActionItemNpcAI {
 
 	@Override
 	protected void handleDialogStart(Player player) {
-		// on retail a quest object doesn't react at all as long as no quest step of the player needs it
+		// a quest object stays silent as long as no quest step of the player needs it
 		if (QuestEngine.getInstance().isNpcNeededByAnyQuestOf(player, getNpcId()))
 			super.handleDialogStart(player);
 	}

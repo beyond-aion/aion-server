@@ -127,7 +127,7 @@ public class XMLStartCondition {
 			&& getMissingEquippedItem(player) == 0 && isRequiredTitleDisplayed(player);
 	}
 
-	/** Tells the player why {@link #check} failed. Retail answers the quest link conditions with a generic message. */
+	/** Tells the player why {@link #check} failed. The conditions linking quests to each other are answered with a generic message. */
 	public void sendFailureMessage(Player player) {
 		int missingItemId = getMissingEquippedItem(player);
 		if (missingItemId != 0)
