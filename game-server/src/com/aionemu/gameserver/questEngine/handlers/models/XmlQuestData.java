@@ -16,6 +16,7 @@ import com.aionemu.gameserver.questEngine.handlers.models.xmlQuest.events.OnEnte
 import com.aionemu.gameserver.questEngine.handlers.models.xmlQuest.events.OnItemUseEvent;
 import com.aionemu.gameserver.questEngine.handlers.models.xmlQuest.events.OnKillEvent;
 import com.aionemu.gameserver.questEngine.handlers.models.xmlQuest.events.OnLevelUpEvent;
+import com.aionemu.gameserver.questEngine.handlers.models.xmlQuest.events.OnMovieEndEvent;
 import com.aionemu.gameserver.questEngine.handlers.models.xmlQuest.events.OnTalkEvent;
 import com.aionemu.gameserver.questEngine.handlers.models.xmlQuest.events.OnTimerEndEvent;
 import com.aionemu.gameserver.questEngine.handlers.template.XmlQuest;
@@ -25,7 +26,7 @@ import com.aionemu.gameserver.questEngine.handlers.template.XmlQuest;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "XmlQuest", propOrder = { "onTalkEvents", "onKillEvents", "onEnterZoneEvents", "onItemUseEvents", "onTimerEndEvents",
-	"onEnterWorldEvents", "onLevelUpEvents" })
+	"onEnterWorldEvents", "onLevelUpEvents", "onMovieEndEvents" })
 public class XmlQuestData extends XMLQuest {
 
 	@XmlElement(name = "on_talk_event")
@@ -48,6 +49,9 @@ public class XmlQuestData extends XMLQuest {
 
 	@XmlElement(name = "on_level_up_event")
 	protected List<OnLevelUpEvent> onLevelUpEvents;
+
+	@XmlElement(name = "on_movie_end_event")
+	protected List<OnMovieEndEvent> onMovieEndEvents;
 
 	@XmlAttribute(name = "start_npc_ids")
 	protected List<Integer> startNpcIds;
@@ -94,6 +98,10 @@ public class XmlQuestData extends XMLQuest {
 
 	public List<OnLevelUpEvent> getOnLevelUpEvents() {
 		return onLevelUpEvents;
+	}
+
+	public List<OnMovieEndEvent> getOnMovieEndEvents() {
+		return onMovieEndEvents;
 	}
 
 	@Override

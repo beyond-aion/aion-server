@@ -10,7 +10,7 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- * Plays a cutscene or, with {@code movie="true"}, a movie. Retail declares both as one action with the type in front of the id.
+ * Plays a cutscene or, with {@code movie="true"}, a movie. The quest is notified by {@code on_movie_end_event} when it finished playing.
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PlayCutsceneOperation")

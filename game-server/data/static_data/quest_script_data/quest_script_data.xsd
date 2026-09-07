@@ -41,6 +41,7 @@
 					<xs:element name="on_timer_end_event" type="OnTimerEndEvent" minOccurs="0" maxOccurs="unbounded"/>
 					<xs:element name="on_enter_world_event" type="OnEnterWorldEvent" minOccurs="0" maxOccurs="unbounded"/>
 					<xs:element name="on_level_up_event" type="OnLevelUpEvent" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="on_movie_end_event" type="OnMovieEndEvent" minOccurs="0" maxOccurs="unbounded"/>
 				</xs:sequence>
 				<xs:attribute name="start_npc_ids" type="IntListType"/>
 				<xs:attribute name="end_npc_ids" type="IntListType"/>
@@ -126,6 +127,13 @@
 		<xs:complexContent>
 			<xs:extension base="QuestEvent">
 				<xs:attribute name="level" type="xs:int"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="OnMovieEndEvent">
+		<xs:complexContent>
+			<xs:extension base="QuestEvent">
+				<xs:attribute name="movie_ids" type="NumberListType" use="required"/>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>

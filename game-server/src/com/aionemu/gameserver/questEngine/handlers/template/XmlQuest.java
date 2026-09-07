@@ -22,6 +22,7 @@ import com.aionemu.gameserver.questEngine.handlers.models.xmlQuest.events.OnEnte
 import com.aionemu.gameserver.questEngine.handlers.models.xmlQuest.events.OnItemUseEvent;
 import com.aionemu.gameserver.questEngine.handlers.models.xmlQuest.events.OnKillEvent;
 import com.aionemu.gameserver.questEngine.handlers.models.xmlQuest.events.OnLevelUpEvent;
+import com.aionemu.gameserver.questEngine.handlers.models.xmlQuest.events.OnMovieEndEvent;
 import com.aionemu.gameserver.questEngine.handlers.models.xmlQuest.events.OnTalkEvent;
 import com.aionemu.gameserver.questEngine.handlers.models.xmlQuest.events.OnTimerEndEvent;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -45,6 +46,7 @@ public class XmlQuest extends AbstractTemplateQuestHandler {
 	private final List<OnTimerEndEvent> onTimerEndEvents = new ArrayList<>();
 	private final List<OnEnterWorldEvent> onEnterWorldEvents = new ArrayList<>();
 	private final List<OnLevelUpEvent> onLevelUpEvents = new ArrayList<>();
+	private final List<OnMovieEndEvent> onMovieEndEvents = new ArrayList<>();
 	private final boolean isDataDriven;
 
 	public XmlQuest(XmlQuestData data) {
@@ -69,6 +71,8 @@ public class XmlQuest extends AbstractTemplateQuestHandler {
 			this.onEnterWorldEvents.addAll(data.getOnEnterWorldEvents());
 		if (data.getOnLevelUpEvents() != null)
 			this.onLevelUpEvents.addAll(data.getOnLevelUpEvents());
+		if (data.getOnMovieEndEvents() != null)
+			this.onMovieEndEvents.addAll(data.getOnMovieEndEvents());
 		isDataDriven = DataManager.QUEST_DATA.getQuestById(questId).isDataDriven();
 	}
 
@@ -206,6 +210,14 @@ public class XmlQuest extends AbstractTemplateQuestHandler {
 		QuestEnv env = new QuestEnv(null, player, questId);
 		for (OnLevelUpEvent onLevelUpEvent : onLevelUpEvents) {
 			if (onLevelUpEvent.operate(env))
+				return;
+		}
+	}
+
+	@Override
+	public void onMovieEndEvent(QuestEnv env, int movieId) {
+		for (OnMovieEndEvent onMovieEndEvent : onMovieEndEvents) {
+			if (onMovieEndEvent.operate(env, movieId))
 				return;
 		}
 	}

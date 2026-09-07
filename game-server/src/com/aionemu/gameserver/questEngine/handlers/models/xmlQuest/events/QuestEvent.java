@@ -14,7 +14,7 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "QuestEvent", propOrder = { "conditions", "operations" })
 @XmlSeeAlso({ OnKillEvent.class, OnTalkEvent.class, OnEnterZoneEvent.class, OnItemUseEvent.class, OnTimerEndEvent.class, OnEnterWorldEvent.class,
-	OnLevelUpEvent.class })
+	OnLevelUpEvent.class, OnMovieEndEvent.class })
 public abstract class QuestEvent {
 
 	protected QuestConditions conditions;
