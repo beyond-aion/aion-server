@@ -583,7 +583,7 @@ public final class QuestService {
 	}
 
 	/*
-	 * Check the player's quest list size for starting a new one. Retail has two limits, both rejecting with the same message: the total number of
+	 * Check the player's quest list size for starting a new one. There are two limits, both rejecting with the same message: the total number of
 	 * quests a player can work on, and the number of quests of the categories which count towards the basic limit.
 	 * @param quest state list
 	 * @param template of the quest to start
@@ -851,36 +851,39 @@ public final class QuestService {
 		return template == null ? 99 : template.getMinlevelPermitted() - playerLevel;
 	}
 
+	/**
+	 * Starts a timer which shows the player how much time is left.
+	 */
 	public static boolean questTimerStart(QuestEnv env, int timeInSeconds) {
-		final Player player = env.getPlayer();
-
-		// Schedule Action When Timer Finishes
-		Future<?> task = ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				player.getController().setQuestTimerQuestId(0);
-				QuestEngine.getInstance().onQuestTimerEnd(new QuestEnv(null, player, 0));
-			}
-		}, timeInSeconds * 1000);
-		player.getController().addTask(TaskId.QUEST_TIMER, task);
-		player.getController().setQuestTimerQuestId(env.getQuestId());
+		Player player = env.getPlayer();
+		if (!startTimer(env, timeInSeconds, () -> QuestEngine.getInstance().onQuestTimerEnd(new QuestEnv(null, player, 0))))
+			return false;
 		PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(env.getQuestId(), timeInSeconds));
 		return true;
 	}
 
+	/**
+	 * Starts a timer the player doesn't see.
+	 */
 	public static boolean invisibleTimerStart(QuestEnv env, int timeInSeconds) {
-		final Player player = env.getPlayer();
+		Player player = env.getPlayer();
+		return startTimer(env, timeInSeconds, () -> QuestEngine.getInstance().onInvisibleTimerEnd(new QuestEnv(null, player, 0)));
+	}
 
-		// Schedule Action When Timer Finishes
-		Future<?> task = ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				player.getController().setQuestTimerQuestId(0);
-				QuestEngine.getInstance().onInvisibleTimerEnd(new QuestEnv(null, player, 0));
-			}
-		}, timeInSeconds * 1000);
+	/**
+	 * A player has one timer slot, so a quest can only start a timer as long as no other quest occupies it. The player is told when it's taken.
+	 */
+	private static boolean startTimer(QuestEnv env, int timeInSeconds, Runnable timerEndAction) {
+		Player player = env.getPlayer();
+		int runningTimerQuestId = player.getController().getQuestTimerQuestId();
+		if (runningTimerQuestId != 0 && runningTimerQuestId != env.getQuestId()) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ANOTHER_SINGLE_STEP_NOT_COMPLETED());
+			return false;
+		}
+		Future<?> task = ThreadPoolManager.getInstance().schedule(() -> {
+			player.getController().setQuestTimerQuestId(0);
+			timerEndAction.run();
+		}, timeInSeconds * 1000L);
 		player.getController().addTask(TaskId.QUEST_TIMER, task); // so it's cancelled when the player leaves the world
 		player.getController().setQuestTimerQuestId(env.getQuestId());
 		return true;
