@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.xml.bind.annotation.*;
 
-import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.ConsoleCommand;
@@ -14,10 +13,10 @@ import com.aionemu.gameserver.utils.xml.JAXBUtil;
 /**
  * @author ginho1
  */
-public class Addcskill extends ConsoleCommand {
+public class Addskill extends ConsoleCommand {
 
-	public Addcskill() {
-		super("addcskill");
+	public Addskill() {
+		super("addskill");
 	}
 
 	@Override
@@ -27,18 +26,7 @@ public class Addcskill extends ConsoleCommand {
 			return;
 		}
 
-		final VisibleObject target = admin.getTarget();
-		if (target == null) {
-			PacketSendUtility.sendMessage(admin, "No target selected.");
-			return;
-		}
-
-		if (!(target instanceof Player)) {
-			PacketSendUtility.sendMessage(admin, "This command can only be used on a player!");
-			return;
-		}
-
-		final Player player = (Player) target;
+		final Player player = admin.getTarget() instanceof Player target ? target : admin;
 
 		String skillName = params[0];
 		int skillId = 0;
@@ -58,7 +46,7 @@ public class Addcskill extends ConsoleCommand {
 
 	@Override
 	public void info(Player admin, String message) {
-		PacketSendUtility.sendMessage(admin, "syntax ///addcskill <skill name>");
+		PacketSendUtility.sendMessage(admin, "syntax ///addskill <skill name>");
 	}
 
 	@XmlRootElement(name = "skill")

@@ -24,6 +24,7 @@ import com.aionemu.gameserver.network.chatserver.ChatServer;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.services.*;
+import com.aionemu.gameserver.services.RecallService.CancelReason;
 import com.aionemu.gameserver.services.conquerorAndProtectorSystem.ConquerorAndProtectorService;
 import com.aionemu.gameserver.services.findgroup.FindGroupService;
 import com.aionemu.gameserver.services.instance.InstanceService;
@@ -77,6 +78,7 @@ public class PlayerLeaveWorldService {
 		}
 
 		FindGroupService.getInstance().onLogout(player);
+		RecallService.getInstance().cancel(player, CancelReason.CANCELLED);
 		player.getResponseRequester().denyAll();
 		player.getFriendList().setStatus(FriendList.Status.OFFLINE, player.getCommonData());
 		BrokerService.getInstance().removePlayerCache(player);
@@ -120,8 +122,8 @@ public class PlayerLeaveWorldService {
 			player.getPostman().getController().delete();
 
 		ExpireTimerTask.getInstance().unregisterExpirables(player);
-		if (player.getCraftingTask() != null)
-			player.getCraftingTask().stop();
+		if (player.getInteractionTask() != null)
+			player.getInteractionTask().abort();
 
 		QuestEngine.getInstance().onLogOut(new QuestEnv(null, player, 0));
 		Timestamp lastOnline = new Timestamp(System.currentTimeMillis());

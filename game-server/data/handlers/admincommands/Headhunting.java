@@ -45,35 +45,30 @@ public class Headhunting extends AdminCommand {
 	private Map<Race, Map<PlayerClass, List<Headhunter>>> results;
 
 	public Headhunting() {
-		super("headhunting");
-
-		// @formatter:off
-		setSyntaxInfo(
-			"<analyze> - Analyzes the season.",
-			"<show> <rewards|results> - Shows the registered rewards or analyzed results",
-			"<clear> - Clears the analayzed results",
-			"<addKills> <playerId> <kills> - Add headhunting kills of specified player.",
-			"<finalize> <true|false> - Finalizes the season (clears all references) and rewards all participants if requested"
-		);
-		// @formatter:on
+		super("headhunting", "Manages seasonal headhunting event.", """
+			analyze - Analyzes the season.
+			show <rewards|results> - Shows the registered rewards or analyzed results.
+			clear - Clears the analyzed results.
+			addKills <player ID> <kills> - Adds headhunting kills for the specified player.
+			finalize <true|false> - Finalizes the season (clears all references) and rewards all participants if requested.
+			""");
 
 		// Initialize seasonal headhunting rewards
-		rewards.put(1, new ArrayList<>());
-		rewards.put(2, new ArrayList<>());
-		rewards.put(3, new ArrayList<>());
-
-		rewards.get(1).add(new RewardItem(164002276, 5)); // Eternal War Battle Scroll
-		rewards.get(1).add(new RewardItem(188950017, 3)); // Special Courier Pass (Abyss Eternal/Lv. 61-65)
-		rewards.get(1).add(new RewardItem(186000051, 15)); // Major Ancient Crown
-
-		rewards.get(2).add(new RewardItem(164002276, 3)); // Eternal War Battle Scroll
-		rewards.get(2).add(new RewardItem(188950017, 3)); // Special Courier Pass (Abyss Eternal/Lv. 61-65)
-		rewards.get(2).add(new RewardItem(186000051, 10)); // Major Ancient Crown
-
-		rewards.get(3).add(new RewardItem(164002276, 1)); // Eternal War Battle Scroll
-		rewards.get(3).add(new RewardItem(188950017, 2)); // Special Courier Pass (Abyss Eternal/Lv. 61-65)
-		rewards.get(3).add(new RewardItem(186000051, 5)); // Major Ancient Crown
-
+		rewards.put(1, List.of(
+			new RewardItem(164002276, 5), // Eternal War Battle Scroll
+			new RewardItem(188950017, 3), // Special Courier Pass (Abyss Eternal/Lv. 61-65)
+			new RewardItem(186000051, 15) // Major Ancient Crown
+		));
+		rewards.put(2, List.of(
+			new RewardItem(164002276, 3), // Eternal War Battle Scroll
+			new RewardItem(188950017, 3), // Special Courier Pass (Abyss Eternal/Lv. 61-65)
+			new RewardItem(186000051, 10) // Major Ancient Crown
+		));
+		rewards.put(3, List.of(
+			new RewardItem(164002276, 1), // Eternal War Battle Scroll
+			new RewardItem(188950017, 2), // Special Courier Pass (Abyss Eternal/Lv. 61-65)
+			new RewardItem(186000051, 5) // Major Ancient Crown
+		));
 		consolationRewards.add(new RewardItem(186000051, 1)); // Major Ancient Crown
 	}
 
@@ -90,7 +85,6 @@ public class Headhunting extends AdminCommand {
 				break;
 			case "clear":
 				if (results != null) {
-					results.clear();
 					results = null;
 					sendInfo(admin, "Results successfully cleared.");
 				}
@@ -108,11 +102,7 @@ public class Headhunting extends AdminCommand {
 					sendInfo(admin);
 					return;
 				}
-				try {
-					addKills(admin, Integer.parseInt(params[1]), Integer.parseInt(params[2]));
-				} catch (NumberFormatException e) {
-					sendInfo(admin, "playerId and kills should be numbers.");
-				}
+				addKills(admin, Integer.parseInt(params[1]), Integer.parseInt(params[2]));
 				break;
 			case "finalize":
 				if (params.length < 2) {
@@ -209,12 +199,11 @@ public class Headhunting extends AdminCommand {
 		}
 		StringBuilder builder = new StringBuilder();
 		builder.append("<hr><center>Rewards</center><br><hr>");
-		for (Integer rank : rewards.keySet()) {
+		rewards.forEach((rank, items) -> {
 			builder.append("<br><br><br>Rank: ").append(rank).append("<br>");
-			List<RewardItem> items = rewards.get(rank);
 			for (RewardItem item : items)
 				builder.append("<br>").append(item.getCount()).append("x ").append(DataManager.ITEM_DATA.getItemTemplate(item.getId()).getName());
-		}
+		});
 		if (!consolationRewards.isEmpty()) {
 			builder.append("<br><br>Consolation prize for >= ").append(EventsConfig.HEADHUNTING_CONSOLATION_PRIZE_KILLS).append(" kills<br>");
 			for (RewardItem item : consolationRewards)
@@ -242,20 +231,12 @@ public class Headhunting extends AdminCommand {
 						continue;
 
 					String name = PlayerService.getPlayerName(hunter.getHunterId());
-					String rank;
-					switch (pos) {
-						case 0:
-							rank = "1st";
-							break;
-						case 1:
-							rank = "2nd";
-							break;
-						case 2:
-							rank = "3rd";
-							break;
-						default:
-							rank = "consolation";
-					}
+					String rank = switch (pos) {
+						case 0 -> "1st";
+						case 1 -> "2nd";
+						case 2 -> "3rd";
+						default -> "consolation";
+					};
 					for (RewardItem item : items) {
 						if (SystemMailService.sendMail("Headhunting Corp", name, "Rewards",
 							"We congratulate you for reaching the " + rank + " rank in this season with a total of " + hunter.getKills() + " kills.", item.getId(),
@@ -293,7 +274,6 @@ public class Headhunting extends AdminCommand {
 
 		PvpService.getInstance().finalizeHeadhuntingSeason();
 		HeadhuntingDAO.clearTables();
-		results.clear();
 		results = null;
 		sendInfo(admin, "Successfully cleared all references for this season and finished archiving.");
 	}

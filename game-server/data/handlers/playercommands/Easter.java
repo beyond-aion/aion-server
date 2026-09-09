@@ -1,5 +1,7 @@
 package playercommands;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,81 +19,65 @@ import com.aionemu.gameserver.utils.chathandlers.PlayerCommand;
  */
 public class Easter extends PlayerCommand {
 
-    private static final Logger log = LoggerFactory.getLogger(Easter.class);
-    private static int neededItem = 186000175;
-    private static int[][] rewards = { { 25, 0 }, { 50, 186000147 }, { 50, 186000055 }, { 75, 166020000 }, { 75, 188053609 }, { 75, 166200013 },
-            { 75, 188053113 }, { 100, 188053295 }, { 100, 166030005 }, { 300, 188053702 } };
-    private static int[][] randomItems = {
-            { 10, 162002030 }, // [Event] Premium Restoration Serum
-            { 50, 186000237 }, // Ancient Coin
-            { 3, 162000137 }, // Sublime Life Serum
-            { 3, 162000139 }, // Sublime Mana Serum
-            { 5, 186000146 }, // Guestpetal
-            { 1, 188054198 }, // Greater Scroll Bundle
-            { 10, 164000126 }, // Major Strike Resist Scroll
-            { 10, 164000130 } // Major Spell Resist Scroll
-    };
+	private static final Logger log = LoggerFactory.getLogger(Easter.class);
+	private static final int neededItem = 186000175;
+	private static final List<Reward> rewards = List.of(
+		new Reward(50, 186000147, 2), // Mithril Medal
+		new Reward(50, 186000055, 3), // Major Ancient Goblet
+		new Reward(75, 166020000, 5), // Omega Enchantment Stone
+		new Reward(75, 188053609, 3), // [Event] Level 60 Composite Manastone Bundle
+		new Reward(75, 166200013, 1), // Enduring Mythic Weapon Tuning Scroll
+		new Reward(75, 188053113, 3), // Ahserion's Flight Ancient Manastone Bundle
+		new Reward(100, 188053295, 1), // Empyrean Plume Chest
+		new Reward(100, 166030005, 5), // Tempering Solution
+		new Reward(300, 188053702, 1) // Vasharti's Equipment Box
+	);
+	private static final List<Reward> randomRewards = List.of(
+		new Reward(25, 162002030, 10), // [Event] Premium Restoration Serum
+		new Reward(25, 186000237, 50), // Ancient Coin
+		new Reward(25, 162000137, 3), // Sublime Life Serum
+		new Reward(25, 162000139, 3), // Sublime Mana Serum
+		new Reward(25, 186000146, 5), // Guestpetal
+		new Reward(25, 188054198, 1), // Greater Scroll Bundle
+		new Reward(25, 164000126, 10), // Major Strike Resist Scroll
+		new Reward(25, 164000130, 10) // Major Spell Resist Scroll
+	);
 
-    public Easter() {
-        super("easter", "Exchanges " + ChatUtil.item(186000175) + " for prizes.");
+	public Easter() {
+		super("easter", "Exchanges " + ChatUtil.item(186000175) + " for prizes.", buildSyntaxInfo());
+	}
 
-        setSyntaxInfo("Type in .easter <id> to get your reward:",
-                "[1] - (" + rewards[0][0] + " eggs) Random item",
-                "[2] - (" + rewards[1][0] + " eggs) " + " 2x " + ChatUtil.item(rewards[1][1]),
-                "[3] - (" + rewards[2][0] + " eggs) " + " 3x " + ChatUtil.item(rewards[2][1]),
-                "[4] - (" + rewards[3][0] + " eggs) " + " 5x " + ChatUtil.item(rewards[3][1]),
-                "[5] - (" + rewards[4][0] + " eggs) " + " 3x " + ChatUtil.item(rewards[4][1]),
-                "[6] - (" + rewards[5][0] + " eggs) " + ChatUtil.item(rewards[5][1]),
-                "[7] - (" + rewards[6][0] + " eggs) " + " 3x " + ChatUtil.item(rewards[6][1]),
-                "[8] - (" + rewards[7][0] + " eggs) " + ChatUtil.item(rewards[7][1]),
-                "[9] - (" + rewards[8][0] + " eggs) " + " 5x " + ChatUtil.item(rewards[8][1]),
-                "[10] - (" + rewards[9][0] + " eggs) " + ChatUtil.item(rewards[9][1]));
-    }
+	private static String buildSyntaxInfo() {
+		String syntaxInfo = "Type in .easter <ID> to get your reward:";
+		int i = 1;
+		syntaxInfo += "\n[" + i++ + "] - (" + randomRewards.getFirst().requiredEggs + " eggs) Random item";
+		for (Reward r : rewards)
+			syntaxInfo += "\n[" + i++ + "] - (" + r.requiredEggs + " eggs) " + r.itemCount + "x " + ChatUtil.item(r.itemId);
+		return syntaxInfo;
+	}
 
-    @Override
-    public void execute(Player player, String... params) {
-        if (params.length == 0) {
-            sendInfo(player);
-            return;
-        }
+	@Override
+	public void execute(Player player, String... params) {
+		if (params.length == 0) {
+			sendInfo(player);
+			return;
+		}
+		int rewardIndex = Integer.parseInt(params[0]) - 1;
+		if (rewardIndex < 0 || rewardIndex >= rewards.size() + 1) {
+			sendInfo(player, "Invalid reward ID.");
+			return;
+		}
+		Reward reward = rewardIndex == 0 ? Rnd.get(randomRewards) : rewards.get(rewardIndex - 1);
+		int cost = reward.requiredEggs;
+		if (player.getInventory().getItemCountByItemId(neededItem) < cost || !player.getInventory().decreaseByItemId(neededItem, cost)) {
+			sendInfo(player, "You need " + cost + " " + ChatUtil.item(neededItem) + " for this.");
+			return;
+		}
+		long notAddedCount = ItemService.addItem(player, reward.itemId, reward.itemCount, true,
+			new ItemUpdatePredicate(ItemAddType.DECOMPOSABLE, ItemUpdateType.INC_CASH_ITEM));
+		if (notAddedCount > 0)
+			log.warn("[Easter Event] " + notAddedCount + "/" + reward.itemCount + " of " + reward.itemId + " could not be added.");
+	}
 
-        try {
-            int rewardIndex = Integer.parseInt(params[0]) - 1;
-            if (rewardIndex < 0 || rewardIndex >= rewards.length)
-                throw new IllegalArgumentException(); // sends the list
-
-            int cost = rewards[rewardIndex][0];
-            if (player.getInventory().getItemCountByItemId(neededItem) < cost || !player.getInventory().decreaseByItemId(neededItem, cost))
-                throw new IllegalArgumentException("You need " + cost + " " + ChatUtil.item(neededItem) + " for this.");
-
-            int count = 1;
-            int itemId = rewards[rewardIndex][1];
-            if (itemId == 0) {
-                int rndIndex = Rnd.nextInt(randomItems.length);
-                count = randomItems[rndIndex][0];
-                itemId = randomItems[rndIndex][1];
-            }
-            switch (itemId) {
-                case 186000147: // Mithril Medal
-                    count = 2;
-                    break;
-                case 186000055: // Major Ancient Goblet
-                case 188053113: // Ahserion's Flight Ancient Manastone Bundle
-                case 188053609: // [Event] Level 60 Composite Manastone Bundle
-                    count = 3;
-                    break;
-                case 166020000: // Omega Enchantment Stone
-                case 166030005: // Tempering Solution
-                    count = 5;
-                    break;
-            }
-
-            long notAddedCount = ItemService.addItem(player, itemId, count, true,
-                    new ItemUpdatePredicate(ItemAddType.DECOMPOSABLE, ItemUpdateType.INC_CASH_ITEM));
-            if (notAddedCount > 0)
-                log.warn("[Easter Event] " + notAddedCount + "/" + count + " of " + itemId + " could not be added.");
-        } catch (IllegalArgumentException e) {
-            sendInfo(player, e instanceof NumberFormatException ? "Invalid prize." : e.getMessage());
-        }
-    }
+	private record Reward(int requiredEggs, int itemId, long itemCount) {}
 }

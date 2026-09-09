@@ -3,12 +3,12 @@ package com.aionemu.gameserver.network.aion.clientpackets;
 import java.util.Set;
 
 import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.model.ActionState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
-import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 
 /**
@@ -75,7 +75,7 @@ public class CM_CASTSPELL extends AionClientPacket {
 		Player player = getConnection().getActivePlayer();
 
 		if (player.isDead()) {
-			sendPacket(SM_SYSTEM_MESSAGE.STR_SKILL_CANT_CAST(ChatUtil.l10n(1400059)));
+			sendPacket(SM_SYSTEM_MESSAGE.STR_SKILL_CANT_CAST(ActionState.DEAD.getL10n()));
 			return;
 		}
 

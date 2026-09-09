@@ -22,20 +22,16 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 public class Auction extends AdminCommand {
 
 	public Auction() {
-		super("auction", "Adds or removes houses to/from auction.");
-
-		// @formatter:off
-		setSyntaxInfo(
-			"<address> [starting price] - Auctions the given house.",
-			"<zone> <house type> <count> [starting price] - Auctions free houses of given type that are in the specified zone.",
-			"asmo|ely <house type> <count> [starting price] - Auctions free asmodian or elysean houses of given type.",
-			"end <address|zone> - Ends the auction for given house(s), transferring ownership to the highest bidder.",
-			"cancel <address|zone> - Cancels the auction for given house(s).",
-			"Zone: Zone name from zones xml files",
-			"House type: house, mansion, estate, palace",
-			"If no starting price is given, default will be taken from templates."
-		);
-		// @formatter:on
+		super("auction", "Adds or removes houses to/from auction.", """
+			<address> [starting price] - Auctions the given house.
+			<zone> <house type> <count> [starting price] - Auctions free houses of given type that are in the specified zone.
+			<asmo|ely> <house type> <count> [starting price] - Auctions free asmodian or elysean houses of given type.
+			end <address|zone> - Ends the auction for given house(s), transferring ownership to the highest bidder.
+			cancel <address|zone> - Cancels the auction for given house(s).
+			Zone: Zone name from zones xml files
+			House type: house, mansion, estate, palace
+			If no starting price is given, default will be taken from templates.
+			""");
 	}
 
 	@Override

@@ -1,9 +1,6 @@
 package admincommands;
 
-import org.apache.commons.lang3.math.NumberUtils;
-
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.TitleTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -18,9 +15,10 @@ import com.aionemu.gameserver.world.World;
 public class AddTitle extends AdminCommand {
 
 	public AddTitle() {
-		super("addtitle", "Adds titles to players.");
-
-		setSyntaxInfo("<titleId> [playerName] - Adds the title to your target or the specified player.");
+		super("addtitle", "Adds titles to players.", """
+			<title ID> - Adds the title to your target (defaults to your character, if no player is targeted).
+			<title ID> <player> - Adds the title to the specified player.
+			""");
 	}
 
 	@Override
@@ -30,13 +28,13 @@ public class AddTitle extends AdminCommand {
 			return;
 		}
 
-		TitleTemplate titleTemplate = DataManager.TITLE_DATA.getTitleTemplate(NumberUtils.toInt(params[0]));
+		TitleTemplate titleTemplate = DataManager.TITLE_DATA.getTitleTemplate(Integer.parseInt(params[0]));
 		if (titleTemplate == null) {
-			sendInfo(player, "Invalid title id.");
+			sendInfo(player, "Invalid title ID.");
 			return;
 		}
 
-		Player target = null;
+		Player target;
 		if (params.length == 2) {
 			String playerName = Util.convertName(params[1]);
 			target = World.getInstance().getPlayer(playerName);
@@ -45,23 +43,16 @@ public class AddTitle extends AdminCommand {
 				return;
 			}
 		} else {
-			VisibleObject creature = player.getTarget();
-			if (player.getTarget() instanceof Player) {
-				target = (Player) creature;
-			}
-
-			if (target == null) {
-				target = player;
-			}
+			target = player.getTarget() instanceof Player playerTarget ? playerTarget : player;
 		}
 
 		if (!target.getTitleList().addTitle(titleTemplate.getTitleId(), false, 0)) {
 			if (!target.equals(player))
-				sendInfo(player, "Couldn't add title \"" + titleTemplate.getL10n() + "\" to " + target);
+				sendInfo(player, "Couldn't add title \"" + titleTemplate.getL10n() + "\" to " + name(target));
 		} else {
 			if (!target.equals(player)) {
-				sendInfo(player, "Added title \"" + titleTemplate.getL10n() + "\" to " + target);
-				sendInfo(target, player.getName(true) + " gave you the title \"" + titleTemplate.getL10n() + "\"");
+				sendInfo(player, "Added title \"" + titleTemplate.getL10n() + "\" to " + name(target));
+				sendInfo(target, name(player) + " gave you the title \"" + titleTemplate.getL10n() + "\"");
 			}
 		}
 	}

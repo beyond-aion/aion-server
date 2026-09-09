@@ -59,7 +59,7 @@ public class ExpExtractAction extends AbstractItemAction {
 		final ItemUseObserver observer = new ItemUseObserver() {
 			@Override
 			public void abort() {
-				player.getController().cancelUseItem(false);
+				player.getController().cancelTask(TaskId.ITEM_USE);
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_CANCELED(parentItem.getL10n()));
 				PacketSendUtility.sendPacket(player,
 					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), 0, 2, 0));
@@ -80,7 +80,6 @@ public class ExpExtractAction extends AbstractItemAction {
 		long requiredExp = getRequiredExp(cd);
 		long newExp = cd.getExp() - requiredExp;
 		if (!canExtractExp(player, newExp) || !player.getInventory().decreaseByItemId(parentItem.getItemId(), 1)) {
-			player.getController().cancelUseItem(false);
 			PacketSendUtility.sendPacket(player,
 				new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), 0, 2, 0));
 			return;

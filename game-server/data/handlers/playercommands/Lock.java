@@ -11,12 +11,10 @@ import com.aionemu.gameserver.utils.chathandlers.PlayerCommand;
 public class Lock extends PlayerCommand {
 
 	public Lock() {
-		super("lock", "Enables/disables blocking logins from other computers.");
-
-		setSyntaxInfo(
-			"<enable> - Allows login from only this computer.",
-			"<disable> - Allows login from any computer."
-		);
+		super("lock", "Enables/disables blocking logins from other computers.", """
+			enable - Allows login from only this computer.
+			disable - Allows login from any computer.
+			""");
 	}
 
 	@Override

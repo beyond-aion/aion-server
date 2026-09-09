@@ -10,8 +10,9 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 public class Ranking extends AdminCommand {
 
 	public Ranking() {
-		super("ranking", "Abyss rank control.");
-		setSyntaxInfo("<update> - Runs the daily Abyss rank update task.");
+		super("ranking", "Abyss rank control.", """
+			update - Runs the daily Abyss rank update task.
+			""");
 	}
 
 	@Override

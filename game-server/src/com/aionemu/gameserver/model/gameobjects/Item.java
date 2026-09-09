@@ -17,6 +17,7 @@ import com.aionemu.gameserver.model.items.storage.ItemStorage;
 import com.aionemu.gameserver.model.items.storage.StorageType;
 import com.aionemu.gameserver.model.stats.calc.StatOwner;
 import com.aionemu.gameserver.model.stats.calc.functions.StatFunction;
+import com.aionemu.gameserver.model.templates.L10n;
 import com.aionemu.gameserver.model.templates.item.GodstoneInfo;
 import com.aionemu.gameserver.model.templates.item.Improvement;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
@@ -29,7 +30,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 /**
  * @author ATracer, Wakizashi, xTz
  */
-public class Item extends AionObject implements Expirable, StatOwner, Persistable {
+public class Item extends AionObject implements Expirable, StatOwner, Persistable, L10n {
 
 	public static final int MAX_BASIC_STONES = 6;
 	private static final Logger log = LoggerFactory.getLogger(Item.class);
@@ -564,8 +565,9 @@ public class Item extends AionObject implements Expirable, StatOwner, Persistabl
 		return itemTemplate.getTemplateId();
 	}
 
-	public String getL10n() {
-		return itemTemplate.getL10n();
+	@Override
+	public int getL10nId() {
+		return itemTemplate.getL10nId();
 	}
 
 	public boolean hasFusionedItem() {

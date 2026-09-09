@@ -53,8 +53,10 @@ public class AnimationAddAction extends AbstractItemAction {
 
 			@Override
 			public void abort() {
-				player.getController().cancelUseItem();
+				player.getController().cancelTask(TaskId.ITEM_USE);
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_CANCELED());
+				PacketSendUtility.sendPacket(player,
+					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), 0, 3, 0));
 				player.getObserveController().removeObserver(this);
 			}
 

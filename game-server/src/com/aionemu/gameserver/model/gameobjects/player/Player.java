@@ -71,7 +71,7 @@ import com.aionemu.gameserver.skillengine.effect.RebirthEffect;
 import com.aionemu.gameserver.skillengine.model.ChainSkills;
 import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
-import com.aionemu.gameserver.skillengine.task.CraftingTask;
+import com.aionemu.gameserver.skillengine.task.AbstractInteractionTask;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapType;
 import com.aionemu.gameserver.world.WorldPosition;
@@ -108,7 +108,6 @@ public class Player extends Creature {
 	private final Storage regularWarehouse;
 	private final Storage[] petBags = new Storage[StorageType.PET_BAG_MAX - StorageType.PET_BAG_MIN + 1];
 	private final Storage[] cabinets = new Storage[StorageType.HOUSE_WH_MAX - StorageType.HOUSE_WH_MIN + 1];
-	private Item usingItem;
 
 	private PlayerSettings playerSettings;
 
@@ -120,7 +119,7 @@ public class Player extends Creature {
 
 	private int flyState = 0;
 	private FlyController flyController;
-	private CraftingTask craftingTask;
+	private volatile AbstractInteractionTask interactionTask;
 	private FlightPath flightPath;
 	private Summon summon;
 	private Pet pet;
@@ -461,14 +460,6 @@ public class Player extends Creature {
 		return equipment;
 	}
 
-	public Item getUsingItem() {
-		return usingItem;
-	}
-
-	public void setUsingItem(Item usingItem) {
-		this.usingItem = usingItem;
-	}
-
 	/**
 	 * @return the player private store
 	 */
@@ -804,12 +795,15 @@ public class Player extends Creature {
 		this.flyController = flyController;
 	}
 
-	public void setCraftingTask(CraftingTask craftingTask) {
-		this.craftingTask = craftingTask;
+	public void setInteractionTask(AbstractInteractionTask interactionTask) {
+		this.interactionTask = interactionTask;
 	}
 
-	public CraftingTask getCraftingTask() {
-		return craftingTask;
+	/**
+	 * @return The gathering or crafting task the player is currently busy with, null if there is none.
+	 */
+	public AbstractInteractionTask getInteractionTask() {
+		return interactionTask;
 	}
 
 	public void setFlightTeleportId(int flightTeleportId) {

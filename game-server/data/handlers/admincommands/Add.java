@@ -19,16 +19,12 @@ import com.aionemu.gameserver.world.World;
 public class Add extends AdminCommand {
 
 	public Add() {
-		super("add", "Adds Kinah or items to a player's inventory.");
-
-		// @formatter:off
-		setSyntaxInfo(
-			"kinah <amount> - Adds the specified amount of Kinah to your inventory.",
-			"<item link|ID> [count] - Adds the specified item(s) to your inventory.",
-			"<player> kinah <amount> - Adds the specified amount of Kinah to the player's inventory.",
-			"<player> <item link|ID> [count] - Adds the specified item(s) to the player's inventory."
-		);
-		// @formatter:on
+		super("add", "Adds Kinah or items to a player's inventory.", """
+			kinah <amount> - Adds the specified amount of Kinah to your inventory.
+			<item link|ID> [count] - Adds the specified item(s) to your inventory.
+			<player> kinah <amount> - Adds the specified amount of Kinah to the player's inventory.
+			<player> <item link|ID> [count] - Adds the specified item(s) to the player's inventory.
+			""");
 	}
 
 	@Override
@@ -71,11 +67,11 @@ public class Add extends AdminCommand {
 		long notAddedCount = ItemService.addItem(receiver, itemId, itemCount, true);
 		if (notAddedCount == 0) {
 			if (player != receiver) {
-				sendInfo(player, "You gave " + itemCount + " x [item:" + itemId + "] to " + receiver.getName() + ".");
-				sendInfo(receiver, "You received " + itemCount + " x [item:" + itemId + "] from " + player.getName() + ".");
+				sendInfo(player, "You gave " + itemCount + " x " + ChatUtil.item(itemId) + " to " + name(receiver) + ".");
+				sendInfo(receiver, "You received " + itemCount + " x " + ChatUtil.item(itemId) + " from " + name(player) + ".");
 			}
 		} else {
-			sendInfo(player, "Item couldn't be added");
+			sendInfo(player, "Item couldn't be added.");
 		}
 	}
 }

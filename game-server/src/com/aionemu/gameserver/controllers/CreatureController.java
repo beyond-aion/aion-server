@@ -1,11 +1,12 @@
 package com.aionemu.gameserver.controllers;
 
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Future;
 
-import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -33,7 +34,6 @@ import com.aionemu.gameserver.model.items.GodStone;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.item.GodstoneInfo;
 import com.aionemu.gameserver.model.templates.item.ItemAttackType;
-import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
@@ -273,8 +273,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 			return;
 
 		GodstoneInfo godstoneInfo = godStone.getGodstoneInfo();
-		ItemTemplate template = DataManager.ITEM_DATA.getItemTemplate(godStone.getItemId());
-		Skill skill = SkillEngine.getInstance().getSkill(attacker, godstoneInfo.getSkillId(), godstoneInfo.getSkillLevel(), getOwner(), template);
+		Skill skill = SkillEngine.getInstance().getSkill(attacker, godstoneInfo.getSkillId(), godstoneInfo.getSkillLevel(), getOwner(), godStone.getItemTemplate());
 		skill.setFirstTargetRangeCheck(false);
 		if (!skill.canUseSkill(CastState.CAST_START))
 			return;
@@ -290,8 +289,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 				// PacketSendUtility.sendPacket(owner, SM_SYSTEM_MESSAGE.STR_MSG_BREAK_PROC_REMAIN_START(equippedItem.getL10n(),
 				// itemTemplate.getL10nId()));
 				weapon.setGodStone(null);
-				PacketSendUtility.sendPacket(attacker,
-					SM_SYSTEM_MESSAGE.STR_MSG_BREAK_PROC(weapon.getL10n(), DataManager.ITEM_DATA.getItemTemplate(godStone.getItemId()).getL10n()));
+				PacketSendUtility.sendPacket(attacker, SM_SYSTEM_MESSAGE.STR_MSG_BREAK_PROC(weapon.getL10n(), godStone.getL10n()));
 				ItemPacketService.updateItemAfterInfoChange(attacker, weapon);
 			}
 		}
@@ -318,9 +316,9 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 		AttackTypeAnimation attackTypeAnimation = AttackTypeAnimation.MELEE;
 		List<AttackResult> attackResult;
 
-		CalculationType[] calculationTypes = new CalculationType[] { CalculationType.APPLY_POWER_SHARD_DAMAGE, CalculationType.REMOVE_POWER_SHARD };
+		Set<CalculationType> calculationTypes = EnumSet.of(CalculationType.APPLY_POWER_SHARD_DAMAGE, CalculationType.REMOVE_POWER_SHARD);
 		if (getOwner() instanceof Player p && p.getEquipment().isDualWeaponEquipped())
-			calculationTypes = ArrayUtils.add(calculationTypes, CalculationType.DUAL_WIELD);
+			calculationTypes.add(CalculationType.DUAL_WIELD);
 		if (getOwner().getAttackType() == ItemAttackType.PHYSICAL)
 			attackResult = AttackUtil.calculatePhysAttackResult(getOwner(), target, calculationTypes);
 		else {

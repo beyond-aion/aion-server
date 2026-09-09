@@ -19,9 +19,9 @@ import com.aionemu.gameserver.utils.chathandlers.PlayerCommand;
 public class Decompose extends PlayerCommand {
 
 	public Decompose() {
-		super("decompose", "Opens decomposable items.");
-
-		setSyntaxInfo("<item> [count] - Decomposes the specified item (default: all, optional: number of items to decompose).");
+		super("decompose", "Opens decomposable items.", """
+			<item> [count] - Decomposes the specified item (default: all, optional: number of items to decompose).
+			""");
 	}
 
 	@Override

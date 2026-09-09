@@ -40,21 +40,23 @@ public class CM_WINDSTREAM extends AionClientPacket {
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
 		switch (state) {
-			case 0: // ?
-				player.unsetPlayerMode(PlayerMode.RIDE);
-				break;
-			case 1: // entering windstream
+			case 0: // entering windstream
 				if (player.isUsingFlightTransporterOrWindstream() || !player.isFlying())
 					return;
+				player.unsetPlayerMode(PlayerMode.RIDE);
 				player.setFlightPath(new FlightPath(FlightPath.Type.WINDSTREAM, teleportId, distance));
 				player.unsetState(CreatureState.ACTIVE);
 				player.unsetState(CreatureState.GLIDING);
 				player.setState(CreatureState.FLYING);
 				player.unsetFlyState(FlyState.GLIDING);
 				player.setFlyState(FlyState.FLYING);
-				PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.WINDSTREAM, teleportId, distance), true);
 				player.getLifeStats().triggerFpRestore();
-				QuestEngine.getInstance().onEnterWindStream(new QuestEnv(null, player, 0), teleportId);
+				break;
+			case 1: // after entering windstream
+				if (player.isUsingFlightPath(FlightPath.Type.WINDSTREAM)) {
+					PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.WINDSTREAM, teleportId, distance), true);
+					QuestEngine.getInstance().onEnterWindStream(new QuestEnv(null, player, 0), teleportId);
+				}
 				return; // don't send SM_WINDSTREAM
 			case 2: // leaving windstream (gliding)
 			case 3: // leaving windstream

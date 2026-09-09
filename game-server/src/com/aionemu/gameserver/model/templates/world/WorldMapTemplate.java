@@ -3,14 +3,10 @@ package com.aionemu.gameserver.model.templates.world;
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.*;
 
 import com.aionemu.gameserver.configs.main.WorldConfig;
+import com.aionemu.gameserver.model.templates.L10n;
 import com.aionemu.gameserver.world.WorldDropType;
 import com.aionemu.gameserver.world.WorldType;
 import com.aionemu.gameserver.world.zone.ZoneAttributes;
@@ -20,16 +16,19 @@ import com.aionemu.gameserver.world.zone.ZoneAttributes;
  */
 @XmlRootElement(name = "map")
 @XmlAccessorType(XmlAccessType.NONE)
-public class WorldMapTemplate {
-
-	@XmlAttribute(name = "name")
-	private String name = "";
-
-	@XmlAttribute(name = "cName")
-	private String cName = "";
+public class WorldMapTemplate implements L10n {
 
 	@XmlAttribute(name = "id", required = true)
 	private int mapId;
+
+	@XmlAttribute(name = "cName", required = true)
+	private String cName;
+
+	@XmlAttribute(name = "name")
+	private String name;
+
+	@XmlAttribute(name = "name_id")
+	private int nameId;
 
 	@XmlAttribute(name = "twin_count")
 	private int twinCount;
@@ -81,16 +80,21 @@ public class WorldMapTemplate {
 	@XmlTransient
 	private int flags;
 
-	public String getName() {
-		return name;
+	public int getMapId() {
+		return mapId;
 	}
 
 	public String getCName() {
 		return cName;
 	}
 
-	public int getMapId() {
-		return mapId;
+	public String getName() {
+		return name == null ? cName : name;
+	}
+
+	@Override
+	public int getL10nId() {
+		return nameId;
 	}
 
 	public int getTwinCount() {

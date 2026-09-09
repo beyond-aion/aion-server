@@ -1,6 +1,5 @@
 package admincommands;
 
-import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.skill.PlayerSkillEntry;
 import com.aionemu.gameserver.model.skill.PlayerSkillList;
@@ -56,32 +55,22 @@ public class DelSkill extends AdminCommand {
 
 		}
 		if (params.length == 1) {
-			VisibleObject target = admin.getTarget();
-			if (target == null) {
-				PacketSendUtility.sendMessage(admin, "You should select a target first!");
-				return;
-			}
+			player = admin.getTarget() instanceof Player target ? target : admin;
 
-			if (target instanceof Player) {
-				player = (Player) target;
-
-				if ("all".startsWith(params[0]))
-					playerSkillList = player.getSkillList();
-				else {
-					try {
-						skillId = Integer.parseInt(params[0]);
-					} catch (NumberFormatException e) {
-						PacketSendUtility.sendMessage(admin, "Param 0 must be an integer or <all>.");
-						return;
-					}
-
-					if (!check(admin, player, skillId))
-						return;
+			if ("all".startsWith(params[0]))
+				playerSkillList = player.getSkillList();
+			else {
+				try {
+					skillId = Integer.parseInt(params[0]);
+				} catch (NumberFormatException e) {
+					PacketSendUtility.sendMessage(admin, "Param 0 must be an integer or <all>.");
+					return;
 				}
-				if (target instanceof Player)
-					apply(admin, player, skillId, playerSkillList);
-			} else
-				PacketSendUtility.sendMessage(admin, "This command can only be used on a player !");
+
+				if (!check(admin, player, skillId))
+					return;
+			}
+			apply(admin, player, skillId, playerSkillList);
 		}
 	}
 

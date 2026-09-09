@@ -78,7 +78,7 @@ public class ChargeAction extends AbstractItemAction {
 
 			@Override
 			public void abort() {
-				player.getController().cancelUseItem(false);
+				player.getController().cancelTask(TaskId.ITEM_USE);
 				if (chargeWay == 1)
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ITEM_CHARGE_CANCELED());
 				else

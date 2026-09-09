@@ -27,7 +27,7 @@ public class ItemActionService {
 
 			@Override
 			public void abort() {
-				player.getController().cancelUseItem(false);
+				player.getController().cancelTask(TaskId.ITEM_USE);
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ITEM_IDENTIFY_CANCELED(item.getL10n()));
 				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), item.getObjectId(), itemId, 0, 11, 0), true);
 				player.getObserveController().removeObserver(this);

@@ -2,8 +2,7 @@ package com.aionemu.gameserver.utils.stats;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.apache.commons.lang3.ArrayUtils;
+import java.util.Set;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.configs.main.FallDamageConfig;
@@ -270,8 +269,8 @@ public class StatFunctions {
 		return (int) ((long) value * (1000 + boostHate) / 1000);
 	}
 
-	public static List<AttackResult> calculateAttackDamage(Creature attacker,
-														   SkillElement element, AttackStatus status, CalculationType... calculationTypes) {
+	public static List<AttackResult> calculateAttackDamage(Creature attacker, SkillElement element, AttackStatus status,
+		Set<CalculationType> calculationTypes) {
 		List<AttackResult> attackResultList = new ArrayList<>();
 		if (AttackStatus.getBaseStatus(status) == AttackStatus.DODGE || AttackStatus.getBaseStatus(status) == AttackStatus.RESIST) {
 			attackResultList.add(new AttackResult(0, AttackStatus.getBaseStatus(status)));
@@ -302,7 +301,7 @@ public class StatFunctions {
 				if (mainWeaponStats != null) {
 					float mainHandDamage = mainHandAttack.getExactCurrent();
 					float offHandDamage = offHandAttack.getExactCurrent();
-					if (ArrayUtils.contains(calculationTypes, CalculationType.SKILL)) { // 80% of damage is added on retail
+					if (calculationTypes.contains(CalculationType.SKILL)) { // 80% of damage is added on retail
 						if (offWeaponStats != null) {
 							float totalBaseDamage = (offHandAttack.getExactBaseWithoutBaseRate() * p.getGameStats().getSkillEfficiency() + mainHandAttack.getExactBaseWithoutBaseRate()) * 0.8f;
 							mainHandDamage = (mainHandAttack.getExactCurrentWithoutFixedBonus() + totalBaseDamage * offHandAttack.getFixedBonusRate()) * 0.8f;

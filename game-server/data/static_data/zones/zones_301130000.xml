@@ -165,7 +165,7 @@
             <point x="149.44098" y="402.10382"/>
         </points>
     </zone>
-    <zone mapid="301130000" name="NO_GLIDE_AREA_BOSS_1_301130000" area_type="POLYGON" zone_type="LIMIT" flags="0">
+    <zone mapid="301130000" name="NO_GLIDE_AREA_BOSS_1_301130000" area_type="POLYGON" zone_type="LIMIT" priority="16" flags="0">
         <points bottom="369.29935" top="469.29935">
             <point x="89.68917" y="865.078"/>
             <point x="85.52164" y="869.5234"/>
@@ -218,7 +218,7 @@
             <point x="92.18969" y="863.411"/>
         </points>
     </zone>
-    <zone mapid="301130000" name="NO_GLIDE_AREA_BOSS_2_301130000" area_type="POLYGON" zone_type="LIMIT" flags="0">
+    <zone mapid="301130000" name="NO_GLIDE_AREA_BOSS_2_301130000" area_type="POLYGON" zone_type="LIMIT" priority="16" flags="0">
         <points bottom="369.29935" top="469.29935">
             <point x="287.78275" y="865.8725"/>
             <point x="283.6152" y="870.3179"/>
@@ -271,7 +271,7 @@
             <point x="290.28326" y="864.2055"/>
         </points>
     </zone>
-    <zone mapid="301130000" name="NO_GLIDE_AREA_BOSS_3_301130000" area_type="POLYGON" zone_type="LIMIT" flags="0">
+    <zone mapid="301130000" name="NO_GLIDE_AREA_BOSS_3_301130000" area_type="POLYGON" zone_type="LIMIT" priority="16" flags="0">
         <points bottom="369.29935" top="469.29935">
             <point x="484.59958" y="865.30524"/>
             <point x="480.43204" y="869.7506"/>
@@ -324,7 +324,7 @@
             <point x="487.1001" y="863.63824"/>
         </points>
     </zone>
-    <zone mapid="301130000" name="NO_GLIDE_AREA_BOSS_4_301130000" area_type="POLYGON" zone_type="LIMIT" flags="0">
+    <zone mapid="301130000" name="NO_GLIDE_AREA_BOSS_4_301130000" area_type="POLYGON" zone_type="LIMIT" priority="16" flags="0">
         <points bottom="369.29935" top="469.29935">
             <point x="684.24316" y="865.39984"/>
             <point x="680.0756" y="869.8452"/>
@@ -377,7 +377,7 @@
             <point x="686.74365" y="863.73285"/>
         </points>
     </zone>
-    <zone mapid="301130000" name="NO_GLIDE_AREA_BOSS_5_301130000" area_type="POLYGON" zone_type="LIMIT" flags="0">
+    <zone mapid="301130000" name="NO_GLIDE_AREA_BOSS_5_301130000" area_type="POLYGON" zone_type="LIMIT" priority="16" flags="0">
         <points bottom="369.29935" top="469.29935">
             <point x="880.9114" y="865.0225"/>
             <point x="876.74384" y="869.4679"/>

@@ -4,8 +4,6 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.commons.lang3.ArrayUtils;
-
 import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
@@ -59,7 +57,8 @@ public class MapRegion {
 	}
 
 	void addNeighbourRegion(MapRegion neighbour) {
-		neighboursIncludingSelf = ArrayUtils.add(neighboursIncludingSelf, neighbour);
+		neighboursIncludingSelf = Arrays.copyOf(neighboursIncludingSelf, neighboursIncludingSelf.length + 1);
+		neighboursIncludingSelf[neighboursIncludingSelf.length - 1] = neighbour;
 	}
 
 	void add(VisibleObject object) {

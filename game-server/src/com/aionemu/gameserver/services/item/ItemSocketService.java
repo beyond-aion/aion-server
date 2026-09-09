@@ -162,17 +162,6 @@ public class ItemSocketService {
 			return;
 		}
 
-		final ItemUseObserver observer = new ItemUseObserver() {
-			@Override
-			public void abort() {
-				player.getObserveController().removeObserver(this);
-				player.getController().cancelUseItem();
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GIVE_PROC_CANCEL(weapon.getL10n()));
-			}
-		};
-
-		player.getObserveController().attach(observer);
-
 		Item godstone = player.getInventory().getItemByObjId(stoneId);
 		if (godstone == null) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_PROC_NO_PROC_GIVE_ITEM());
@@ -184,6 +173,19 @@ public class ItemSocketService {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_PROC_NO_PROC_GIVE_ITEM());
 			return;
 		}
+
+		final ItemUseObserver observer = new ItemUseObserver() {
+			@Override
+			public void abort() {
+				player.getObserveController().removeObserver(this);
+				player.getController().cancelTask(TaskId.ITEM_USE);
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GIVE_PROC_CANCEL(weapon.getL10n()));
+				PacketSendUtility.broadcastPacketAndReceive(player,
+					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), stoneId, itemTemplate.getTemplateId(), 0, 3, 0));
+			}
+		};
+
+		player.getObserveController().attach(observer);
 
 		PacketSendUtility.broadcastPacketAndReceive(player,
 			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), stoneId, itemTemplate.getTemplateId(), 2000, 0, 0));

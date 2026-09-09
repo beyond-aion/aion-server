@@ -2,13 +2,12 @@ package com.aionemu.gameserver.utils;
 
 import java.awt.Color;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.math.NumberUtils;
 
 import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -83,17 +82,10 @@ public class ChatUtil {
 	}
 
 	/**
-	 * @see #name(String)
+	 * @return A clickable character name for system {@link ChatType chat types}.<br>
 	 */
-	public static String name(Player player) {
-		return name(player.getName(true));
-	}
-
-	/**
-	 * @return A clickable (for system {@link ChatType}s) character name.<br>
-	 */
-	public static String name(String name) {
-		return String.format("[charname:%s;1 1 1]", name); // the 3 parameters are color values, but client doesn't render them anyways
+	public static String charName(Player player) {
+		return String.format("[charname:%s;1 1 1]", player.getName(true)); // the 3 parameters are color values, but the client doesn't render them
 	}
 
 	/**
@@ -130,7 +122,7 @@ public class ChatUtil {
 	private static String path(VisibleObjectTemplate template, boolean withIdInName) {
 		String name = template.getL10n();
 		if (name == null)
-			name = StringUtils.capitalize(template.getName());
+			name = template.getName();
 		if (withIdInName)
 			name = name + " | " + template.getTemplateId();
 		return path(name, template.getTemplateId());
@@ -183,17 +175,17 @@ public class ChatUtil {
 		if (startIndex < 0 || startIndex >= endIndex)
 			return null;
 		String[] posStr = posLink.substring(startIndex, endIndex).trim().split("\\h+");
-		if (NumberUtils.toInt(posStr[0]) <= 1) // if present, strip ely/asmo language restriction flag (0 = ely only, 1 = asmo only)
-			posStr = ArrayUtils.subarray(posStr, 1, posStr.length);
+		if (posStr[0].equals("0") || posStr[0].equals("1")) // if present, strip ely/asmo language restriction flag (0 = ely only, 1 = asmo only)
+			posStr = Arrays.copyOfRange(posStr, 1, posStr.length);
 
 		if (posStr.length < 3)
 			return null;
 
-		int mapAndInstanceId = NumberUtils.toInt(posStr[0]);
-		float x = NumberUtils.toFloat(posStr[1]);
-		float y = NumberUtils.toFloat(posStr[2]);
-		float z = posStr.length > 3 ? NumberUtils.toFloat(posStr[3]) : 0; // client always creates position links with z = 0
-		int layer = posStr.length > 4 ? NumberUtils.toInt(posStr[4]) : 0;
+		int mapAndInstanceId = Integer.parseInt(posStr[0]);
+		float x = Float.parseFloat(posStr[1]);
+		float y = Float.parseFloat(posStr[2]);
+		float z = posStr.length > 3 ? Float.parseFloat(posStr[3]) : 0; // client always creates position links with z = 0
+		int layer = posStr.length > 4 ? Integer.parseInt(posStr[4]) : 0;
 		Integer zSearchOffset = null;
 		if (layer > 0 && z == 0 && mapAndInstanceId == 400010000) { // abyss
 			switch (layer) {
@@ -281,7 +273,7 @@ public class ChatUtil {
 
 		Matcher m = Pattern.compile("^(" + validationPattern + ")(?:[^\\d][^\\[]*\\]?$|$)").matcher(input);
 		if (m.find())
-			return NumberUtils.toInt(m.group(1));
+			return Integer.parseInt(m.group(1));
 
 		return 0;
 	}
@@ -342,5 +334,70 @@ public class ChatUtil {
 		if (num.length() >= width)
 			return num;
 		return "\t".repeat(width - num.length()) + num;
+	}
+
+	/**
+	 * Splits a chat message into parts that fit within the client's 1022 character display limit.<br>
+	 * It makes a best-effort estimate to account for links and l10n identifiers, which often expand into longer rendered text on the client side.<br>
+	 * Splitting occurs at a newline or space, if present, to avoid breaking links or words.
+	 */
+	public static List<String> split(String chatMessage) {
+		if (chatMessage.length() <= SM_MESSAGE.MESSAGE_SIZE_LIMIT / 2)
+			return List.of(chatMessage);
+		List<String> parts = new ArrayList<>();
+		for (int start = 0, length = chatMessage.length(); start < length; ) {
+			int splitIndex = findSplitIndex(chatMessage, start, length);
+			parts.add(chatMessage.substring(start, splitIndex));
+			start = splitIndex;
+			if (start < length) {
+				char splitChar = chatMessage.charAt(start);
+				if (splitChar == ' ' || splitChar == '\n')
+					start++;
+			}
+		}
+		return parts;
+	}
+
+	private static int findSplitIndex(String chatMessage, int startIndex, int endIndex) {
+		int estimatedDisplayLength = 0;
+		int lastNewLineIndex = -1;
+		int lastSpaceIndex = -1;
+		for (int i = startIndex; i < endIndex; i++) {
+			int lengthToAdd = 1;
+			switch (chatMessage.charAt(i)) {
+				case '\n' -> lastNewLineIndex = i;
+				case ' ' -> lastSpaceIndex = i;
+				case '$' -> { // check for l10n ID
+					if (i + 2 < endIndex && (chatMessage.charAt(i + 1) & 1) == 1) {
+						i += 2;
+						lengthToAdd += 15; // conservative estimate for the character count of a resolved localized string on the client side
+					}
+				}
+				case '[' -> { // check for any link type, such as [quest:1006], [item:182400001], etc.
+					if (i + 3 < endIndex && Character.isLowerCase(chatMessage.charAt(i + 1))) {
+						int linkEndIndex = chatMessage.indexOf(']', i + 2, Math.min(i + 40, endIndex));
+						if (linkEndIndex == -1)
+							break;
+						int colonIndex = chatMessage.indexOf(':', i + 2, linkEndIndex);
+						if (colonIndex == -1)
+							break;
+						int linkLength = linkEndIndex - i;
+						i += linkLength;
+						lengthToAdd += 30; // conservative estimate for the character count of a rendered chat link on the client side
+					}
+				}
+			}
+			estimatedDisplayLength += lengthToAdd;
+			if (estimatedDisplayLength >= SM_MESSAGE.MESSAGE_SIZE_LIMIT) {
+				if (i == startIndex)
+					break;
+				if (lastNewLineIndex != -1)
+					return lastNewLineIndex;
+				if (lastSpaceIndex != -1)
+					return lastSpaceIndex;
+				return i;
+			}
+		}
+		return endIndex;
 	}
 }

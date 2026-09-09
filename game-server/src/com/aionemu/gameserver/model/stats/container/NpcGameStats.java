@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.model.stats.container;
 
+import java.util.Set;
+
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AILogger;
 import com.aionemu.gameserver.ai.AISubState;
@@ -45,7 +47,7 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 	}
 
 	@Override
-	public Stat2 applyStatFunctions(StatEnum statEnum, Stat2 stat, CalculationType... calculationTypes) {
+	public Stat2 applyStatFunctions(StatEnum statEnum, Stat2 stat, Set<CalculationType> calculationTypes) {
 		Stat2 s = super.applyStatFunctions(statEnum, stat, calculationTypes);
 		owner.getAi().modifyOwnerStat(s);
 		return s;

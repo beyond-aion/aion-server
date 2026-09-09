@@ -1,10 +1,7 @@
 package com.aionemu.gameserver.controllers.attack;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
-import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.utils.Rnd;
@@ -45,7 +42,7 @@ public class AttackUtil {
 	 * @param calculationTypes
 	 * @return {@code List<AttackResult>} containing the results for each hand
 	 */
-	public static List<AttackResult> calculatePhysAttackResult(Creature attacker, Creature attacked, CalculationType... calculationTypes) {
+	public static List<AttackResult> calculatePhysAttackResult(Creature attacker, Creature attacked, Set<CalculationType> calculationTypes) {
 		AttackStatus attackStatus = calculatePhysicalStatus(attacker, attacked, true, 0, 100, false, false);
 		List<AttackResult> attackResultList = StatFunctions.calculateAttackDamage(attacker, SkillElement.NONE, attackStatus, calculationTypes);
 		adjustDamageByStatModifiers(attacker, attacked, attackStatus, attackResultList, SkillElement.NONE);
@@ -242,9 +239,9 @@ public class AttackUtil {
 		HitType ht = HitType.PHHIT;
 		List<AttackResult> weaponAttack = new ArrayList<>();
 		float damage = 0;
-		CalculationType[] calculationTypes = new CalculationType[] { CalculationType.SKILL };
+		Set<CalculationType> calculationTypes = EnumSet.of(CalculationType.SKILL);
 		if (effector instanceof Player p && p.getEquipment().isDualWeaponEquipped())
-			calculationTypes = ArrayUtils.add(calculationTypes, CalculationType.DUAL_WIELD);
+			calculationTypes.add(CalculationType.DUAL_WIELD);
 		if (!useTemplateDmg) {
 			if (effector instanceof SummonedObject && !(effector instanceof Servant)) {
 				ht = effect.getSkillType() == SkillType.MAGICAL ? HitType.MAHIT : HitType.PHHIT;
@@ -256,22 +253,19 @@ public class AttackUtil {
 						ht = HitType.MAHIT;
 						baseAttack = effector.getGameStats().getMainHandMAttack(calculationTypes).getBase();
 						if (baseAttack == 0 && effector.getAttackType() == ItemAttackType.PHYSICAL) { // dirty fix for staffs and maces -.-
-							calculationTypes = ArrayUtils.add(calculationTypes, CalculationType.APPLY_POWER_SHARD_DAMAGE);
+							calculationTypes.add(CalculationType.APPLY_POWER_SHARD_DAMAGE);
 							if (element == SkillElement.NONE) { // fix for magical skills which actually inflict physical damage
-								calculationTypes = ArrayUtils.add(calculationTypes, CalculationType.REMOVE_POWER_SHARD);
 								weaponAttack = StatFunctions.calculateAttackDamage(effect.getEffector(), SkillElement.NONE, status, calculationTypes);
-								calculationTypes = ArrayUtils.removeElement(calculationTypes, CalculationType.REMOVE_POWER_SHARD); // remove to prevent power shards being removed again in baseAttack calculation
-							} else {
-								calculationTypes = ArrayUtils.add(calculationTypes, CalculationType.REMOVE_POWER_SHARD);
 							}
+							calculationTypes.add(CalculationType.REMOVE_POWER_SHARD);
 							baseAttack = effector.getGameStats().getMainHandPAttack(calculationTypes).getBase();
 						}
 						break;
 					default:
 						if (element == SkillElement.NONE) {
-							calculationTypes = ArrayUtils.add(calculationTypes, CalculationType.APPLY_POWER_SHARD_DAMAGE);
+							calculationTypes.add(CalculationType.APPLY_POWER_SHARD_DAMAGE);
 							baseAttack = effector.getGameStats().getMainHandPAttack(calculationTypes).getBase();
-							calculationTypes = ArrayUtils.add(calculationTypes, CalculationType.REMOVE_POWER_SHARD);
+							calculationTypes.add(CalculationType.REMOVE_POWER_SHARD);
 							weaponAttack = StatFunctions.calculateAttackDamage(effect.getEffector(), SkillElement.NONE, status, calculationTypes);
 						} else {
 							baseAttack = effector.getGameStats().getMainHandMAttack(calculationTypes).getBase();
@@ -420,7 +414,7 @@ public class AttackUtil {
 	 * @param calculationTypes
 	 * @return {@code List<AttackResult>} containing the results for each hand
 	 */
-	public static List<AttackResult> calculateMagAttackResult(Creature attacker, Creature attacked, SkillElement element, CalculationType... calculationTypes) {
+	public static List<AttackResult> calculateMagAttackResult(Creature attacker, Creature attacked, SkillElement element, Set<CalculationType> calculationTypes) {
 		AttackStatus attackStatus = calculateMagicalStatus(attacker, attacked, 100, false);
 		List<AttackResult> attackResultList = StatFunctions.calculateAttackDamage(attacker, element, attackStatus, calculationTypes);
 		adjustDamageByStatModifiers(attacker, attacked, attackStatus, attackResultList, element);
