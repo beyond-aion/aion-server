@@ -5,6 +5,7 @@ import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlType;
 
+import com.aionemu.gameserver.controllers.PlayerController;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 
 /**
@@ -19,7 +20,8 @@ public class QuestTimerCondition extends QuestCondition {
 
 	@Override
 	public boolean doCheck(QuestEnv env) {
-		boolean isRunning = env.getPlayer().getController().getQuestTimerQuestId() == env.getQuestId();
+		PlayerController controller = env.getPlayer().getController();
+		boolean isRunning = controller.getQuestTimerQuestId() == env.getQuestId() || controller.hasInvisibleQuestTimer(env.getQuestId());
 		return switch (getOp()) {
 			case EQUAL -> isRunning == running;
 			case NOT_EQUAL -> isRunning != running;

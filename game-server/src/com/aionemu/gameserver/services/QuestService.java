@@ -852,28 +852,10 @@ public final class QuestService {
 	}
 
 	/**
-	 * Starts a timer which shows the player how much time is left.
+	 * Starts a timer which shows the player how much time is left. There is one such slot per player, so it fails while another quest occupies it,
+	 * and the player is told to finish that quest first.
 	 */
 	public static boolean questTimerStart(QuestEnv env, int timeInSeconds) {
-		Player player = env.getPlayer();
-		if (!startTimer(env, timeInSeconds, () -> QuestEngine.getInstance().onQuestTimerEnd(new QuestEnv(null, player, 0))))
-			return false;
-		PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(env.getQuestId(), timeInSeconds));
-		return true;
-	}
-
-	/**
-	 * Starts a timer the player doesn't see.
-	 */
-	public static boolean invisibleTimerStart(QuestEnv env, int timeInSeconds) {
-		Player player = env.getPlayer();
-		return startTimer(env, timeInSeconds, () -> QuestEngine.getInstance().onInvisibleTimerEnd(new QuestEnv(null, player, 0)));
-	}
-
-	/**
-	 * A player has one timer slot, so a quest can only start a timer as long as no other quest occupies it. The player is told when it's taken.
-	 */
-	private static boolean startTimer(QuestEnv env, int timeInSeconds, Runnable timerEndAction) {
 		Player player = env.getPlayer();
 		int runningTimerQuestId = player.getController().getQuestTimerQuestId();
 		if (runningTimerQuestId != 0 && runningTimerQuestId != env.getQuestId()) {
@@ -882,10 +864,26 @@ public final class QuestService {
 		}
 		Future<?> task = ThreadPoolManager.getInstance().schedule(() -> {
 			player.getController().setQuestTimerQuestId(0);
-			timerEndAction.run();
+			QuestEngine.getInstance().onQuestTimerEnd(new QuestEnv(null, player, 0));
 		}, timeInSeconds * 1000L);
 		player.getController().addTask(TaskId.QUEST_TIMER, task); // so it's cancelled when the player leaves the world
 		player.getController().setQuestTimerQuestId(env.getQuestId());
+		PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(env.getQuestId(), timeInSeconds));
+		return true;
+	}
+
+	/**
+	 * Starts a timer the player doesn't see. Those belong to their quest instead of to the player, so they neither occupy the visible timer slot
+	 * nor cancel each other.
+	 */
+	public static boolean invisibleTimerStart(QuestEnv env, int timeInSeconds) {
+		Player player = env.getPlayer();
+		int questId = env.getQuestId();
+		Future<?> task = ThreadPoolManager.getInstance().schedule(() -> {
+			player.getController().cancelInvisibleQuestTimer(questId);
+			QuestEngine.getInstance().onInvisibleTimerEnd(new QuestEnv(null, player, questId));
+		}, timeInSeconds * 1000L);
+		player.getController().addInvisibleQuestTimer(questId, task);
 		return true;
 	}
 
@@ -935,6 +933,7 @@ public final class QuestService {
 
 		if (player.getController().hasTask(TaskId.QUEST_TIMER))
 			questTimerEnd(new QuestEnv(null, player, questId));
+		player.getController().cancelInvisibleQuestTimer(questId);
 
 		PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(ActionType.ABANDON, qs));
 		player.getController().updateNearbyQuests();

@@ -527,14 +527,15 @@ public class QuestEngine implements GameEngine {
 		}
 	}
 
+	/**
+	 * Notifies the quest whose timer expired, since invisible timers belong to a quest, not to the player.
+	 */
 	public void onInvisibleTimerEnd(QuestEnv env) {
 		try {
-			for (int questId : onInvisibleTimerEnd) {
-				AbstractQuestHandler questHandler = getQuestHandlerByQuestId(questId);
-				if (questHandler != null) {
-					env.setQuestId(questId);
+			if (onInvisibleTimerEnd.contains(env.getQuestId())) {
+				AbstractQuestHandler questHandler = getQuestHandlerByQuestId(env.getQuestId());
+				if (questHandler != null)
 					questHandler.onInvisibleTimerEndEvent(env);
-				}
 			}
 		} catch (Exception ex) {
 			log.error("QE: exception in onInvisibleTimerEnd", ex);
