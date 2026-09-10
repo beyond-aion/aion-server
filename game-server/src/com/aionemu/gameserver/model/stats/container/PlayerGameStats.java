@@ -83,11 +83,9 @@ public class PlayerGameStats extends CreatureGameStats<Player> {
 	}
 
 	@Override
-	public Stat2 getAttackSpeed() {
+	public int getBaseAttackSpeed() {
 		int base = 1500;
-		Equipment equipment = owner.getEquipment();
-		Item mainHandWeapon = equipment.getMainHandWeapon();
-
+		Item mainHandWeapon = owner.getEquipment().getMainHandWeapon();
 		if (mainHandWeapon != null) {
 			base = mainHandWeapon.getItemTemplate().getWeaponStats().getAttackSpeed();
 			Item offWeapon = owner.getEquipment().getOffHandWeapon();
@@ -96,7 +94,7 @@ public class PlayerGameStats extends CreatureGameStats<Player> {
 			if (offWeapon != null)
 				base += offWeapon.getItemTemplate().getWeaponStats().getAttackSpeed() / 4;
 		}
-		return getStat(StatEnum.ATTACK_SPEED, base);
+		return base;
 	}
 
 	@Override

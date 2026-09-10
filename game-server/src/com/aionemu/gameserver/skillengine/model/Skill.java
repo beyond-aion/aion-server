@@ -25,7 +25,6 @@ import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.skill.NpcSkillEntry;
-import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_CASTSPELL;
@@ -363,10 +362,7 @@ public class Skill {
 			baseCastDuration = maxCastDuration;
 		}
 		float speedRatio = switch (chargeTimeBonusType) {
-			case PHYSICAL -> {
-				Stat2 attackSpeed = effector.getGameStats().getAttackSpeed();
-				yield attackSpeed.getBase() == 0 ? 1f : (float) attackSpeed.getCurrent() / attackSpeed.getBase();
-			}
+			case PHYSICAL -> effector.getGameStats().getAttackSpeedRate();
 			case MAGICAL -> isCastDurationAffectedByCastSpeed() ? (float) calculateMagicalCastDuration() / baseCastDuration : 1f;
 			default -> 1f;
 		};

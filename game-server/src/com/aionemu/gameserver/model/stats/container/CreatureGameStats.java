@@ -271,7 +271,15 @@ public abstract class CreatureGameStats<T extends Creature> {
 		return getStat(statEnum, base);
 	}
 
-	public abstract Stat2 getAttackSpeed();
+	public Stat2 getAttackSpeed() {
+		return getStat(StatEnum.ATTACK_SPEED, getBaseAttackSpeed());
+	}
+
+	public abstract int getBaseAttackSpeed();
+
+	public float getAttackSpeedRate() {
+		return (float) getAttackSpeed().getCurrent() / getBaseAttackSpeed();
+	}
 
 	public abstract Stat2 getMovementSpeed();
 
