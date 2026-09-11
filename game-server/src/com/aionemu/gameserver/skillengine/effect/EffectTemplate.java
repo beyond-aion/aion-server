@@ -385,13 +385,11 @@ public abstract class EffectTemplate {
 			effect.setReflectedSkillId(attackResult.getReflectedSkillId());
 		}
 	}
-
-	/**
-	 * @param effect
-	 */
+	
 	public void calculateSubEffect(Effect effect) {
-		if (subEffect == null)
+		if (subEffect == null) {
 			return;
+		}
 		ActionModifiers mod = this.getModifiers();
 		if (mod != null) {
 			ActionModifier modifier = this.getActionModifiers(effect);
@@ -399,32 +397,40 @@ public abstract class EffectTemplate {
 				return;
 			}
 		}
-		// Pre-Check for sub effect conditions
+		// Pre-Check for sub effect conditions.
 		if (!effectSubConditionsCheck(effect)) {
 			effect.setSubEffectAborted(true);
 			return;
 		}
-
-		// chance to trigger subeffect
-		if (Rnd.chance() >= subEffect.getChance())
+		// Chance to trigger subeffect.
+		if (Rnd.chance() >= subEffect.getChance()) {
 			return;
+		}
+		Effect newEffect = createSubEffectInstance(effect);
+		if (newEffect.getSpellStatus() != SpellStatus.DODGE && newEffect.getSpellStatus() != SpellStatus.RESIST) {
+			effect.setSpellStatus(newEffect.getSpellStatus());
+		}
+		effect.setSubEffect(newEffect);
+		effect.setSubEffectType(newEffect.getSubEffectType());
+		effect.setTargetLoc(newEffect.getTargetX(), newEffect.getTargetY(), newEffect.getTargetZ());
+	}
 
+	private Effect createSubEffectInstance(Effect effect) {
 		SkillTemplate template = DataManager.SKILL_DATA.getSkillTemplate(subEffect.getSkillId());
 		int level = 1;
 		int accBoost = effect.getAccModBoost();
-		if (subEffect.isAddEffect()) { // Only used by signet bursts
-			level = effect.getSignetBurstedCount();
-			accBoost = Short.MAX_VALUE; // sub effects cannot be resisted by magic resist in case of signet bursts
+		// Only used by signet bursts.
+		if (subEffect.isAddEffect()) {
+			// Retail: sub-effect level = its base level (always 1) + the level of the bursted signet.
+			level = effect.getSignetBurstedCount() + 1;
+			// Sub effects cannot be resisted by magic resist in case of signet bursts.
+			accBoost = Short.MAX_VALUE;
 		}
 		Effect newEffect = new Effect(effect.getEffector(), effect.getOriginalEffected(), template, level, null, effect.getForceType(), true);
 		newEffect.setShieldDefense(effect.getShieldDefense());
 		newEffect.setAccModBoost(accBoost);
 		newEffect.initialize();
-		if (newEffect.getSpellStatus() != SpellStatus.DODGE && newEffect.getSpellStatus() != SpellStatus.RESIST)
-			effect.setSpellStatus(newEffect.getSpellStatus());
-		effect.setSubEffect(newEffect);
-		effect.setSubEffectType(newEffect.getSubEffectType());
-		effect.setTargetLoc(newEffect.getTargetX(), newEffect.getTargetY(), newEffect.getTargetZ());
+		return newEffect;
 	}
 
 	/**
