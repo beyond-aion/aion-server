@@ -339,7 +339,11 @@ public abstract class EffectTemplate {
 	}
 
 	protected boolean isDodgedOrResisted(Effect effect, StatEnum statEnum) {
-		return !isNoResist() && (!checkEffectResistRate(effect, statEnum) || !checkDodgeOrResistRate(effect));
+		if (effect.isSubEffect()) {
+			return !checkEffectResistRate(effect, statEnum) || (!isNoResist() && !checkDodgeOrResistRate(effect));
+		} else {
+			return !isNoResist() && (!checkEffectResistRate(effect, statEnum) || !checkDodgeOrResistRate(effect));
+		}
 	}
 
 	/**
