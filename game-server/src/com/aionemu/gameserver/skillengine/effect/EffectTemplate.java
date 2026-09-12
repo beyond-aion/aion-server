@@ -422,7 +422,7 @@ public abstract class EffectTemplate {
 			level = effect.getSignetBurstedCount();
 			accBoost = Short.MAX_VALUE; // sub effects cannot be resisted by magic resist in case of signet bursts
 		}
-		Effect newEffect = new Effect(effect.getEffector(), effect.getOriginalEffected(), template, level, null, effect.getForceType(), true);
+		Effect newEffect = new Effect(effect.getEffector(), effect.getOriginalEffected(), template, level, null, effect.getForceType(), true, null);
 		newEffect.setShieldDefense(effect.getShieldDefense());
 		newEffect.setAccModBoost(accBoost);
 		newEffect.initialize();

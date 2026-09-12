@@ -217,7 +217,7 @@ public class SkillEngine {
 
 		SkillTemplate skillTemplate = checkAndGetSkillTemplate(id);
 		if (skillTemplate != null) {
-			Effect ef = new Effect(attacker, target, skillTemplate, skillTemplate.getLvl(), null, null, true);
+			Effect ef = new Effect(attacker, target, skillTemplate, skillTemplate.getLvl(), null, null, true, null);
 			ef.initialize();
 			return ef;
 		}

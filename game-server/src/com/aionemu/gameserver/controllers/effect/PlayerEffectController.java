@@ -1,10 +1,6 @@
 package com.aionemu.gameserver.controllers.effect;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.EnumMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -114,8 +110,7 @@ public class PlayerEffectController extends EffectController {
 				remainingTime = (int) (endTime - System.currentTimeMillis());
 		}
 
-		Effect effect = new Effect(getOwner(), getOwner(), template, skillLvl, remainingTime, forceType);
-		effect.setMagicalCriticalPositions(magicalCriticalPositions);
+		Effect effect = new Effect(getOwner(), getOwner(), template, skillLvl, remainingTime, forceType, false, magicalCriticalPositions);
 		put(effect);
 		effect.addAllEffectToSucess();
 		effect.startEffect();

@@ -136,7 +136,14 @@ public class Effect implements StatOwner {
 		this(effector, effected, skillTemplate, skillLevel, null, null);
 	}
 
-	public Effect(Creature effector, Creature effected, SkillTemplate skillTemplate, int skillLevel, Integer duration, ForceType forceType, boolean isSubEffect) {
+	/**
+	 * If duration is null, it will be calculated upon execution, else the forced value will be used.
+	 */
+	public Effect(Creature effector, Creature effected, SkillTemplate skillTemplate, int skillLevel, Integer duration, ForceType forceType) {
+		this(effector, effected, skillTemplate, skillLevel, duration, forceType, false, null);
+	}
+
+	public Effect(Creature effector, Creature effected, SkillTemplate skillTemplate, int skillLevel, Integer duration, ForceType forceType, boolean isSubEffect, Set<Integer> magicalCriticalPositions) {
 		this.effector = effector;
 		this.effected = effected;
 		this.skillTemplate = skillTemplate;
@@ -145,19 +152,8 @@ public class Effect implements StatOwner {
 		this.forceType = forceType;
 		this.isSubEffect = isSubEffect;
 		this.power = skillTemplate.getReqDispelCount();
-	}
-
-	/**
-	 * If duration is null, it will be calculated upon execution, else the forced value will be used.
-	 */
-	public Effect(Creature effector, Creature effected, SkillTemplate skillTemplate, int skillLevel, Integer duration, ForceType forceType) {
-		this.effector = effector;
-		this.effected = effected;
-		this.skillTemplate = skillTemplate;
-		this.skillLevel = skillLevel;
-		this.duration = duration;
-		this.forceType = forceType;
-		this.power = skillTemplate.getReqDispelCount();
+		if (magicalCriticalPositions != null)
+			setMagicalCriticals(magicalCriticalPositions);
 	}
 
 	public void setWorldPosition(int worldId, int instanceId, float x, float y, float z) {
@@ -295,9 +291,13 @@ public class Effect implements StatOwner {
 		magicalCriticalRolled = false;
 	}
 
-	public void setMagicalCriticalPositions(Collection<Integer> positions) {
-		for (int position : positions)
-			magicalCriticals[position - 1] = true;
+	private void setMagicalCriticals(Set<Integer> positions) {
+		magicalCritical = false;
+		magicalCriticalRolled = true;
+		for (int i = 0; i < magicalCriticals.length; i++) {
+			magicalCriticals[i] = positions.contains(i);
+			magicalCritical |= magicalCriticals[i];
+		}
 	}
 
 	public List<EffectTemplate> getEffectTemplates() {
