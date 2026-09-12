@@ -53,9 +53,7 @@ public class PlayerEffectsDAO {
 					String forceTypeStr = rset.getString("force_type");
 					ForceType forceType = forceTypeStr == null ? null : ForceType.getInstance(forceTypeStr);
 					Set<Integer> magicalCriticalPositions = decodeMagicalCriticalPositions(rset.getInt("magical_criticals"));
-
-					if (remainingTime > 0)
-						player.getEffectController().addSavedEffect(skillId, skillLvl, remainingTime, endTime, forceType, magicalCriticalPositions);
+					player.getEffectController().addSavedEffect(skillId, skillLvl, remainingTime, endTime, forceType, magicalCriticalPositions);
 				}
 			}
 		});
