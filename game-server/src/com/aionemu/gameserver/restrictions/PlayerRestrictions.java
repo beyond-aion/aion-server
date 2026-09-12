@@ -353,11 +353,11 @@ public class PlayerRestrictions {
 		}
 
 		if (item.getItemTemplate().getActivationRace() != null) {
-			if (!(player.getTarget() instanceof Creature)) {
+			if (!(player.getTarget() instanceof Creature target)) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_CANT_FIND_VALID_TARGET());
 				return false;
 			}
-			if (((Creature) player.getTarget()).getRace() != item.getItemTemplate().getActivationRace()) {
+			if (target.getRace() != item.getItemTemplate().getActivationRace()) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_WRONG_TARGET_RACE(item.getL10n()));
 				return false;
 			}

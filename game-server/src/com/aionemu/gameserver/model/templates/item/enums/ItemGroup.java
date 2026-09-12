@@ -28,7 +28,7 @@ public enum ItemGroup {
 	CANNON(ItemSlot.MAIN_OR_SUB.getSlotIdMask(), ItemSubType.TWO_HAND, true),
 	KEYBLADE(ItemSlot.MAIN_OR_SUB.getSlotIdMask(), ItemSubType.TWO_HAND, true),
 	SHIELD(ItemSlot.SUB_HAND.getSlotIdMask(), ItemSubType.SHIELD, true),
-	
+
 	TORSO(ItemSlot.TORSO.getSlotIdMask(), ItemSubType.ALL_ARMOR, true),
 	GLOVE(ItemSlot.GLOVES.getSlotIdMask(), ItemSubType.ALL_ARMOR, true),
 	SHOULDER(ItemSlot.SHOULDER.getSlotIdMask(), ItemSubType.ALL_ARMOR, true),
@@ -59,7 +59,7 @@ public enum ItemGroup {
 	PL_SHOULDER(ItemSlot.SHOULDER.getSlotIdMask(), ItemSubType.PLATE, true),
 	PL_PANTS(ItemSlot.PANTS.getSlotIdMask(), ItemSubType.PLATE, true),
 	PL_SHOES(ItemSlot.BOOTS.getSlotIdMask(), ItemSubType.PLATE, true),
-	
+
 	EARRING(ItemSlot.EARRINGS_LEFT.getSlotIdMask() | ItemSlot.EARRINGS_RIGHT.getSlotIdMask(), ArmorType.ACCESSORY),
 	RING(ItemSlot.RING_LEFT.getSlotIdMask() | ItemSlot.RING_RIGHT.getSlotIdMask(), ArmorType.ACCESSORY),
 	NECKLACE(ItemSlot.NECKLACE.getSlotIdMask(), ArmorType.ACCESSORY),
@@ -72,7 +72,7 @@ public enum ItemGroup {
 	CL_HEADS(ItemSlot.HELMET.getSlotIdMask(), ItemSubType.CLOTHES),
 	CL_MULTISLOT(ItemSlot.TORSO.getSlotIdMask() | ItemSlot.PANTS.getSlotIdMask(), ItemSubType.CLOTHES),
 	CL_SHIELD(ItemSlot.SUB_HAND.getSlotIdMask(), ArmorType.ACCESSORY),
-	
+
 	POWER_SHARDS(ItemSlot.POWER_SHARD_RIGHT.getSlotIdMask() | ItemSlot.POWER_SHARD_LEFT.getSlotIdMask(), ArmorType.ACCESSORY),
 	STIGMA(ItemSlot.ALL_STIGMA.getSlotIdMask(), ItemSubType.STIGMA),
 	// other
@@ -111,26 +111,26 @@ public enum ItemGroup {
 	private final ArmorType armorType;
 	private final boolean requiresMastery;
 
-	private ItemGroup() {
+	ItemGroup() {
 		this(0, ItemSubType.NONE, false);
 	}
 
-	private ItemGroup(long validEquipmentSlots, ArmorType armorType) {
+	ItemGroup(long validEquipmentSlots, ArmorType armorType) {
 		this(validEquipmentSlots, armorType, false);
 	}
 
-	private ItemGroup(long validEquipmentSlots, ItemSubType itemSubType) {
+	ItemGroup(long validEquipmentSlots, ItemSubType itemSubType) {
 		this(validEquipmentSlots, itemSubType, false);
 	}
 
-	private ItemGroup(long validEquipmentSlots, ItemSubType itemSubType, boolean requiresMastery) {
+	ItemGroup(long validEquipmentSlots, ItemSubType itemSubType, boolean requiresMastery) {
 		this.validEquipmentSlots = validEquipmentSlots;
 		this.itemSubType = itemSubType;
 		this.armorType = null;
 		this.requiresMastery = requiresMastery;
 	}
 
-	private ItemGroup(long validEquipmentSlots, ArmorType armorType, boolean requiresMastery) {
+	ItemGroup(long validEquipmentSlots, ArmorType armorType, boolean requiresMastery) {
 		this.validEquipmentSlots = validEquipmentSlots;
 		this.itemSubType = ItemSubType.NONE;
 		this.armorType = armorType;

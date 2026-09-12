@@ -44,18 +44,17 @@ public enum AbnormalState {
 	/**
 	 * Compound abnormal states
 	 */
-	CANT_ATTACK_STATE(SPIN.id | SLEEP.id | STUN.id | STUMBLE.id | STAGGER.id | OPENAERIAL.id | PARALYZE.id | FEAR.id | PULLED.id | SANCTUARY.id | CONFUSE.id),
-	STANCE_OFF(SPIN.id | STUN.id | STUMBLE.id | STAGGER.id | OPENAERIAL.id | PARALYZE.id | FEAR.id | PULLED.id | SANCTUARY.id | CONFUSE.id),
-	CANT_MOVE_STATE(SPIN.id | ROOT.id | SLEEP.id | STUMBLE.id | STUN.id | STAGGER.id | OPENAERIAL.id | PARALYZE.id | PULLED.id | SANCTUARY.id),
-	DISMOUNT_RIDE(SPIN.id | ROOT.id | SLEEP.id | STUMBLE.id | STUN.id | STAGGER.id | OPENAERIAL.id | PARALYZE.id | PULLED.id | FEAR.id | SNARE.id | DEFORM.id | CONFUSE.id),
+	ANY_STUN(STUN.id | STUMBLE.id | STAGGER.id | SPIN.id),
+	CANT_ATTACK_STATE(ANY_STUN.id | PARALYZE.id | SLEEP.id | FEAR.id | OPENAERIAL.id | PULLED.id | SANCTUARY.id | CONFUSE.id),
+	STANCE_OFF(ANY_STUN.id | PARALYZE.id | FEAR.id | OPENAERIAL.id | PULLED.id | SANCTUARY.id | CONFUSE.id),
+	CANT_MOVE_STATE(ANY_STUN.id | PARALYZE.id | SLEEP.id | ROOT.id | OPENAERIAL.id | PULLED.id | SANCTUARY.id),
+	DISMOUNT_RIDE(ANY_STUN.id | PARALYZE.id | SLEEP.id | ROOT.id | OPENAERIAL.id | PULLED.id | FEAR.id | SNARE.id | DEFORM.id | CONFUSE.id),
 	AUTOMATICALLY_STANDUP(PARALYZE.id | SLEEP.id | FEAR.id | STUN.id | STAGGER.id | OPENAERIAL.id | SPIN.id | DEFORM.id | PULLED.id | CONFUSE.id),
-	CANCEL_ITEM_USE(PARALYZE.id | SLEEP.id | CHARM.id | FEAR.id | CONFUSE.id | STUN.id | PETRIFICATION.id | STUMBLE.id | STAGGER.id | OPENAERIAL.id
-		| SPIN.id | PULLED.id),
-	ANY_STUN(SPIN.getId() | STUN.getId() | STUMBLE.getId() | STAGGER.getId());
+	CANCEL_ITEM_USE(ANY_STUN.id | PARALYZE.id | SLEEP.id | CHARM.id | FEAR.id | CONFUSE.id | PETRIFICATION.id | OPENAERIAL.id | PULLED.id);
 
 	private final int id;
 
-	private AbnormalState(int id) {
+	AbnormalState(int id) {
 		this.id = id;
 	}
 
