@@ -391,7 +391,7 @@ public class Skill {
 
 		int buffDelta = baseCastDuration - boostValue;
 		castDuration -= buffDelta;
-		
+
 		if (!isSummonType(skillTemplate.getSubType())) {
 			castDuration = Math.max(castDuration, baseDurationCap);
 		}
