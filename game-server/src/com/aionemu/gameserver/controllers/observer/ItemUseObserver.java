@@ -92,8 +92,8 @@ public abstract class ItemUseObserver extends ActionObserver {
 
 	protected final void tryAbort() {
 		if (aborted.compareAndSet(false, true)) {
-			abort();
 			observed.getObserveController().removeObserver(this);
+			abort();
 		}
 	}
 
