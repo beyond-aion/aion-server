@@ -48,7 +48,7 @@ public class QuestStartAction extends AbstractItemAction {
 		}
 		PacketSendUtility.broadcastPacket(player,
 			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), castingDelay, USE_START), true);
-		final ItemUseObserver observer = new ItemUseObserver() {
+		ItemUseObserver observer = new ItemUseObserver(player) {
 
 			@Override
 			public void abort() {
@@ -60,7 +60,7 @@ public class QuestStartAction extends AbstractItemAction {
 			}
 		};
 
-		player.getObserveController().attach(observer);
+		player.getObserveController().addObserver(observer);
 		player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(() -> {
 			player.getObserveController().removeObserver(observer);
 			finishUse(player, parentItem);

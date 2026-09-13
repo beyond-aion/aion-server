@@ -2,9 +2,12 @@ package com.aionemu.gameserver.controllers.observer;
 
 import static com.aionemu.gameserver.controllers.observer.ObserverType.*;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.Skill;
 
@@ -13,68 +16,85 @@ import com.aionemu.gameserver.skillengine.model.Skill;
  */
 public abstract class ItemUseObserver extends ActionObserver {
 
-	public ItemUseObserver() {
-		super(ATTACK, ATTACKED, DEATH, DOT_ATTACKED, EQUIP, UNEQUIP, MOVE, STARTSKILLCAST, ENDSKILLCAST, SIT, ITEMUSE, BOOSTSKILLCOST);
+	private final Player observed;
+	private final AtomicBoolean aborted = new AtomicBoolean();
+
+	public ItemUseObserver(Player observed) {
+		super(ATTACK, ATTACKED, DEATH, DOT_ATTACKED, EQUIP, UNEQUIP, MOVE, STARTSKILLCAST, ENDSKILLCAST, SIT, ITEMUSE, ABNORMALSETTED, BOOSTSKILLCOST);
+		this.observed = observed;
 	}
 
 	@Override
 	public final void attack(Creature creature, int skillId) {
-		abort();
+		tryAbort();
 	}
 
 	@Override
 	public final void attacked(Creature creature, int skillId) {
-		abort();
+		tryAbort();
 	}
 
 	@Override
 	public final void died(Creature creature) {
-		abort();
+		tryAbort();
 	}
 
 	@Override
 	public final void dotattacked(Creature creature, Effect dotEffect) {
-		abort();
+		tryAbort();
 	}
 
 	@Override
 	public final void equip(Item item, Player owner) {
-		abort();
+		tryAbort();
 	}
 
 	@Override
 	public final void unequip(Item item, Player owner) {
-		abort();
+		tryAbort();
 	}
 
 	@Override
 	public final void moved() {
-		abort();
+		tryAbort();
 	}
 
 	@Override
 	public final void startSkillCast(Skill skill) {
-		abort();
+		tryAbort();
 	}
 
 	@Override
 	public final void sit() {
-		abort();
+		tryAbort();
 	}
 
 	@Override
 	public void endSkillCast(Skill skill) {
-		abort();
+		tryAbort();
 	}
 
 	@Override
 	public void itemused(Item item) {
-		abort();
+		tryAbort();
+	}
+
+	@Override
+	public void abnormalsetted(AbnormalState state) {
+		if ((state.getId() & AbnormalState.CANCEL_ITEM_USE.getId()) != 0)
+			tryAbort();
 	}
 
 	@Override
 	public void boostSkillCost(Skill skill) {
-		abort();
+		tryAbort();
+	}
+
+	protected final void tryAbort() {
+		if (aborted.compareAndSet(false, true)) {
+			abort();
+			observed.getObserveController().removeObserver(this);
+		}
 	}
 
 	public abstract void abort();

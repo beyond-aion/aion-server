@@ -375,7 +375,7 @@ public class StigmaService {
 		final int parentObjectId = stigma.getObjectId();
 		PacketSendUtility.broadcastPacket(player,
 			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentObjectId, chargeStone.getObjectId(), parentItemId, 5000, USE_START), true);
-		final ItemUseObserver observer = new ItemUseObserver() {
+		ItemUseObserver observer = new ItemUseObserver(player) {
 
 			@Override
 			public void abort() {
@@ -383,10 +383,9 @@ public class StigmaService {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_CANCELED());
 				PacketSendUtility.broadcastPacket(player,
 					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentObjectId, chargeStone.getObjectId(), parentItemId, 0, USE_CANCEL), true);
-				player.getObserveController().removeObserver(this);
 			}
 		};
-		player.getObserveController().attach(observer);
+		player.getObserveController().addObserver(observer);
 		player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override

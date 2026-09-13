@@ -45,7 +45,7 @@ public class ExtractAction extends AbstractItemAction {
 	public void act(Player player, Item parentItem, Item targetItem, Object... params) {
 		PacketSendUtility.sendPacket(player,
 			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), 5000, USE_START));
-		ItemUseObserver observer = new ItemUseObserver() {
+		ItemUseObserver observer = new ItemUseObserver(player) {
 
 			@Override
 			public void abort() {
@@ -53,10 +53,9 @@ public class ExtractAction extends AbstractItemAction {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_CANCELED(targetItem.getL10n()));
 				PacketSendUtility.sendPacket(player,
 					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), 0, USE_CANCEL));
-				player.getObserveController().removeObserver(this);
 			}
 		};
-		player.getObserveController().attach(observer);
+		player.getObserveController().addObserver(observer);
 		player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(() -> {
 			player.getObserveController().removeObserver(observer);
 			boolean result = canAct(player, parentItem, targetItem) && EnchantService.breakItem(player, targetItem, parentItem);

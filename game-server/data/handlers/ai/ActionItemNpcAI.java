@@ -41,7 +41,7 @@ public class ActionItemNpcAI extends NpcAI {
 	protected void handleUseItemStart(Player player) {
 		final int talkDelayInMs = getTalkDelayInMs();
 		if (talkDelayInMs > 0) {
-			final ItemUseObserver observer = new ItemUseObserver() {
+			ItemUseObserver observer = new ItemUseObserver(player) {
 
 				@Override
 				public void abort() {
@@ -51,9 +51,7 @@ public class ActionItemNpcAI extends NpcAI {
 					synchronized (observers) {
 						observers.remove(this);
 					}
-					player.getObserveController().removeObserver(this);
 				}
-
 			};
 
 			player.getObserveController().addObserver(observer);

@@ -733,7 +733,7 @@ public class Equipment implements Persistable {
 				PacketSendUtility.broadcastPacket(responder,
 					new SM_ITEM_USAGE_ANIMATION(responder.getObjectId(), item.getObjectId(), item.getItemId(), 5000, SOUL_BIND_START), true);
 
-				final ItemUseObserver observer = new ItemUseObserver() {
+				ItemUseObserver observer = new ItemUseObserver(responder) {
 
 					@Override
 					public void abort() {
@@ -744,7 +744,7 @@ public class Equipment implements Persistable {
 					}
 				};
 
-				responder.getObserveController().attach(observer);
+				responder.getObserveController().addObserver(observer);
 
 				// item usage animation
 				responder.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(new Runnable() {

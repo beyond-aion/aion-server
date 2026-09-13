@@ -176,10 +176,9 @@ public class ItemSocketService {
 			return;
 		}
 
-		final ItemUseObserver observer = new ItemUseObserver() {
+		ItemUseObserver observer = new ItemUseObserver(player) {
 			@Override
 			public void abort() {
-				player.getObserveController().removeObserver(this);
 				player.getController().cancelTask(TaskId.ITEM_USE);
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GIVE_PROC_CANCEL(weapon.getL10n()));
 				PacketSendUtility.broadcastPacketAndReceive(player,
@@ -187,7 +186,7 @@ public class ItemSocketService {
 			}
 		};
 
-		player.getObserveController().attach(observer);
+		player.getObserveController().addObserver(observer);
 
 		PacketSendUtility.broadcastPacketAndReceive(player,
 			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), stoneId, itemTemplate.getTemplateId(), 2000, USE_START));

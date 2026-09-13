@@ -26,7 +26,7 @@ public class ItemActionService {
 		int itemId = item.getItemId();
 		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), item.getObjectId(), itemId, 5000, IDENTIFY_START),
 			true);
-		final ItemUseObserver observer = new ItemUseObserver() {
+		ItemUseObserver observer = new ItemUseObserver(player) {
 
 			@Override
 			public void abort() {
@@ -34,11 +34,10 @@ public class ItemActionService {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ITEM_IDENTIFY_CANCELED(item.getL10n()));
 				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), item.getObjectId(), itemId, 0, IDENTIFY_CANCEL),
 					true);
-				player.getObserveController().removeObserver(this);
 			}
 
 		};
-		player.getObserveController().attach(observer);
+		player.getObserveController().addObserver(observer);
 		player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override

@@ -61,12 +61,12 @@ public class Decompose extends PlayerCommand {
 
 			{
 				// use observer to abort task on move, attack, die, item use, etc.
-				observer = new ItemUseObserver() {
+				observer = new ItemUseObserver(player) {
 
 					@Override
 					public void itemused(Item item) {
 						if (item.getItemId() != itemId)
-							abort();
+							tryAbort();
 					}
 
 					@Override

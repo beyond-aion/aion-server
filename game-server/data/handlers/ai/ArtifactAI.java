@@ -129,29 +129,20 @@ public class ArtifactAI extends NpcAI {
 		PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), getObjectId(), 10000, 1));
 		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.START_QUESTLOOT, 0, getObjectId()), true);
 
-		ItemUseObserver observer = new ItemUseObserver() {
+		ItemUseObserver observer = new ItemUseObserver(player) {
 
 			@Override
 			public void abort() {
 				player.getController().cancelTask(TaskId.ACTION_ITEM_NPC);
 				PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.END_QUESTLOOT, 0, getObjectId()), true);
 				PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), getObjectId(), 10000, 0));
-				final SM_SYSTEM_MESSAGE message = STR_ARTIFACT_CANCELED(loc.getRace().getL10n(), skillTemplate.getL10n());
 				loc.setStatus(ArtifactStatus.IDLE);
-				final SM_ABYSS_ARTIFACT_INFO3 artifactInfo = new SM_ABYSS_ARTIFACT_INFO3(loc.getLocationId());
-				getOwner().getPosition().getWorldMapInstance().forEachPlayer(new Consumer<Player>() {
-
-					@Override
-					public void accept(Player player) {
-						PacketSendUtility.sendPacket(player, message);
-						PacketSendUtility.sendPacket(player, artifactInfo);
-					}
-
-				});
+				PacketSendUtility.broadcastToMap(getOwner(), STR_ARTIFACT_CANCELED(loc.getRace().getL10n(), skillTemplate.getL10n()));
+				PacketSendUtility.broadcastToMap(getOwner(), new SM_ABYSS_ARTIFACT_INFO3(loc.getLocationId()));
 			}
 
 		};
-		player.getObserveController().attach(observer);
+		player.getObserveController().addObserver(observer);
 		player.getController().addTask(TaskId.ACTION_ITEM_NPC, ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override

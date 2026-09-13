@@ -41,12 +41,11 @@ public class ShugoMorpher extends GeneralNpcAI {
 	protected void handleDialogStart(Player player) {
 		if (DialogService.isInteractionAllowed(player, getOwner()) && started.compareAndSet(false, true)) {
 			final int delay = 1000;
-			final ItemUseObserver obs = new ItemUseObserver() {
+			ItemUseObserver obs = new ItemUseObserver(player) {
 
 				@Override
 				public void abort() {
 					started.set(false);
-					player.getObserveController().removeObserver(this);
 					player.getController().cancelTask(TaskId.ACTION_ITEM_NPC);
 					PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.END_QUESTLOOT, 0, getObjectId()), true);
 					PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), getObjectId(), 0, 2));
@@ -54,7 +53,7 @@ public class ShugoMorpher extends GeneralNpcAI {
 
 			};
 
-			player.getObserveController().attach(obs);
+			player.getObserveController().addObserver(obs);
 			PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), getObjectId(), delay, 1));
 			PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.START_QUESTLOOT, 0, getObjectId()), true);
 			player.getController().addTask(TaskId.ACTION_ITEM_NPC, ThreadPoolManager.getInstance().schedule(new Runnable() {

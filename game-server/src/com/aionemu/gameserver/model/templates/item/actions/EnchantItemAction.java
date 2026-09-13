@@ -92,7 +92,7 @@ public class EnchantItemAction extends AbstractItemAction {
 		boolean isEnchantmentStone = parentItem.getItemTemplate().getItemGroup() == ItemGroup.ENCHANTMENT;
 		int enchantDurationMillis = isEnchantmentStone ? 4000 : 2000;
 
-		final ItemUseObserver observer = new ItemUseObserver() {
+		ItemUseObserver observer = new ItemUseObserver(player) {
 			@Override
 			public void abort() {
 				player.getController().cancelTask(TaskId.ITEM_USE);
@@ -100,11 +100,10 @@ public class EnchantItemAction extends AbstractItemAction {
 					: SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_OPTION_CANCELED(targetItem.getL10n()));
 				PacketSendUtility.broadcastPacketAndReceive(player,
 					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), 0, USE_CANCEL));
-				player.getObserveController().removeObserver(this);
 			}
 		};
 
-		player.getObserveController().attach(observer);
+		player.getObserveController().addObserver(observer);
 
 		// Current enchant level
 		int currentEnchant = targetItem.getEnchantLevel();

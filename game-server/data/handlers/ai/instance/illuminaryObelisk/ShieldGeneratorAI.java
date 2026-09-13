@@ -98,18 +98,17 @@ public abstract class ShieldGeneratorAI extends GeneralNpcAI {
 	}
 
 	private void handleCharging(final Player player) {
-		final ItemUseObserver observer = new ItemUseObserver() {
+		ItemUseObserver observer = new ItemUseObserver(player) {
 
 			@Override
 			public void abort() {
 				player.getController().cancelTask(TaskId.ACTION_ITEM_NPC);
 				PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.END_QUESTLOOT, 0, getObjectId()), true);
 				PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), getObjectId(), 0, 2));
-				player.getObserveController().removeObserver(this);
 				isUnderCharge.set(false);
 			}
 		};
-		player.getObserveController().attach(observer);
+		player.getObserveController().addObserver(observer);
 		PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), getObjectId(), 20000, 1));
 		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.START_QUESTLOOT, 0, getObjectId()), true);
 		shout(getChargeMsg());

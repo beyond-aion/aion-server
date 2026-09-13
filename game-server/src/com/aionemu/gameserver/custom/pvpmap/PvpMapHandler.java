@@ -206,7 +206,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 	private void startTeleportation(Player p, boolean isLeaving) {
 		ActionObserver observer = getAllObserver(p);
 		PacketSendUtility.broadcastPacket(p, new SM_BIND_POINT_TELEPORT(1, p.getObjectId(), 1, 0), true);
-		p.getObserveController().attach(observer);
+		p.getObserveController().addObserver(observer);
 
 		p.getController().addTask(TaskId.SKILL_USE, ThreadPoolManager.getInstance().schedule(() -> {
 			PacketSendUtility.broadcastPacket(p, new SM_BIND_POINT_TELEPORT(3, p.getObjectId(), 1, 0), true);
@@ -229,7 +229,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 	}
 
 	private ActionObserver getAllObserver(final Player p) {
-		return new ItemUseObserver() {
+		return new ItemUseObserver(p) {
 
 			@Override
 			public void abort() {
