@@ -85,6 +85,7 @@ public class PlayerController extends CreatureController<Player> {
 	private static final Logger log = LoggerFactory.getLogger(PlayerController.class);
 	private long lastAttackMillis = 0;
 	private long lastAttackedMillis = 0;
+	private long lastAutoAttackMillis = 0;
 	private StanceObserver stanceObserver;
 
 	@Override
@@ -420,13 +421,14 @@ public class PlayerController extends CreatureController<Player> {
 
 		int attackSpeed = gameStats.getAttackSpeed().getCurrent();
 
-		long milis = System.currentTimeMillis();
+		long now = System.currentTimeMillis();
 		// network ping..
-		if (milis - lastAttackMillis + 300 < attackSpeed) {
+		if (now - lastAutoAttackMillis + 300 < attackSpeed) {
 			// hack
 			PacketSendUtility.sendPacket(getOwner(), SM_ATTACK_RESPONSE.STOP_WITHOUT_MESSAGE(gameStats.getAttackCounter()));
 			return;
 		}
+		lastAutoAttackMillis = now;
 		enterCombat(true);
 
 		super.attackTarget(target, time, true);
