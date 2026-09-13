@@ -75,7 +75,9 @@ public class MotionTime {
 						break;
 				}
 				if (times != null) {
-					return times.get(i);
+					Times time = times.get(i);
+					if (time != null)
+						return time;
 				}
 			}
 		}
@@ -109,9 +111,12 @@ public class MotionTime {
 			switch (t.getWeapon()) {
 				case "1hand":
 					wrapper = new WeaponTypeWrapper(ItemGroup.SWORD, null);
+					map.computeIfAbsent(new WeaponTypeWrapper(ItemGroup.TOOLHOES, null), k -> new HashMap<>()).put(t.getId(), t);
 					break;
 				case "2hand":
 					wrapper = new WeaponTypeWrapper(ItemGroup.GREATSWORD, null);
+					map.computeIfAbsent(new WeaponTypeWrapper(ItemGroup.TOOLPICKS, null), k -> new HashMap<>()).put(t.getId(), t);
+					map.computeIfAbsent(new WeaponTypeWrapper(ItemGroup.TOOLRODS, null), k -> new HashMap<>()).put(t.getId(), t);
 					break;
 				case "keyblade":
 					wrapper = new WeaponTypeWrapper(ItemGroup.KEYBLADE, null);

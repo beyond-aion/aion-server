@@ -16,6 +16,8 @@ import com.aionemu.gameserver.utils.audit.AuditLogger;
  */
 public class CM_CASTSPELL extends AionClientPacket {
 
+	private static final int MAX_HIT_TIME_MILLIS = 8000;
+
 	private final long receiveTime = System.currentTimeMillis();
 	private int spellid;
 	// 0 - obj id, 1 - point location, 2 - unk, 3 - object not in sight(skill 1606)? 4 - unk
@@ -66,7 +68,9 @@ public class CM_CASTSPELL extends AionClientPacket {
 				break;
 		}
 
-		hitTime = readUH();
+		// hard ceiling for the paths that skip the corridor in Skill.updateHitTime, since the field holds up to 65535 ms and the longest hit time
+		// our motion data can produce is 6200 ms, at the slowest attack speed the stat caps allow
+		hitTime = Math.min(readUH(), MAX_HIT_TIME_MILLIS);
 		unk = readD();
 	}
 

@@ -294,19 +294,23 @@ public abstract class CreatureLifeStats<T extends Creature> {
 	}
 
 	/**
-	 * @return HP percentage 0 - 100 (minimum 1% while alive)
+	 * @return The health as the client shows it in a status bar: 100 when full, 0 only when dead, and at least 1 for anything in between. Thresholds
+	 *         compare against it inclusively, so "below 50" holds at 50 already.
 	 */
 	public int getHpPercentage() {
-		if (currentHp == 0)
+		if (currentHp <= 0 || getMaxHp() <= 0)
 			return 0;
-		return Math.max(1, (int) (100f * currentHp / getMaxHp()));
+		return (int) (99L * currentHp / getMaxHp()) + 1;
 	}
 
 	/**
-	 * @return MP percentage 0 - 100
+	 * @return The mana as the client shows it in a status bar, rounded the same way as {@link #getHpPercentage()}: 100 when full, 0 only when empty
+	 *         or when the creature has no mana at all.
 	 */
 	public int getMpPercentage() {
-		return (int) (100f * currentMp / getMaxMp());
+		if (currentMp <= 0 || getMaxMp() <= 0)
+			return 0;
+		return (int) (99L * currentMp / getMaxMp()) + 1;
 	}
 
 	protected void onHpChanged(int previousHp, int newHp, Creature effector) {

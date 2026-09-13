@@ -345,11 +345,7 @@ public class Effect implements StatOwner {
 
 	public void setReserveds(EffectReserved er, boolean overTimeEffect) {
 		// set effected hp
-		// TODO RI_ChargeAttack_G, RI_ChargingFlight_G
-		boolean instantSkill = false;
-		if (this.getSkill() != null && this.getSkill().isInstantSkill())
-			instantSkill = true;
-		if (er.getType() == ResourceType.HP && er.getValue() != 0 && !overTimeEffect && !instantSkill && !getEffected().isInvulnerable()) {
+		if (er.getType() == ResourceType.HP && er.getValue() != 0 && !overTimeEffect && !getEffected().isInvulnerable()) {
 			Creature effected = getEffected();
 			int value = (er.isDamage() ? -er.getValue() : er.getValue());
 			value += effected.getLifeStats().getCurrentHp();
@@ -360,7 +356,7 @@ public class Effect implements StatOwner {
 					effected.getLifeStats().setKillingBlow(er.getValue());
 				effectedHp = 0;
 			} else {
-				effectedHp = Math.max(1, (int) (100f * value / effected.getLifeStats().getMaxHp()));
+				effectedHp = (int) (99L * value / effected.getLifeStats().getMaxHp()) + 1;
 			}
 		}
 		synchronized (reservedEffects) {

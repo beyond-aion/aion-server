@@ -18,6 +18,7 @@ import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.configs.main.*;
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
 import com.aionemu.gameserver.controllers.attack.AttackUtil;
+import com.aionemu.gameserver.controllers.attack.AutoAttackValidator;
 import com.aionemu.gameserver.controllers.observer.StanceObserver;
 import com.aionemu.gameserver.custom.pvpmap.PvpMapService;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -83,9 +84,9 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 public class PlayerController extends CreatureController<Player> {
 
 	private static final Logger log = LoggerFactory.getLogger(PlayerController.class);
+	private final AutoAttackValidator autoAttackValidator = new AutoAttackValidator();
 	private long lastAttackMillis = 0;
 	private long lastAttackedMillis = 0;
-	private long lastAutoAttackMillis = 0;
 	private StanceObserver stanceObserver;
 
 	@Override
@@ -278,13 +279,13 @@ public class PlayerController extends CreatureController<Player> {
 			boolean killedByOpponent = player.isDueling(master);
 			DuelService.getInstance().loseDuel(player);
 			if (killedByOpponent) {
-				if (player.getLifeStats().getHpPercentage() < 33)
+				if (player.getLifeStats().getHpPercentage() <= 33)
 					player.getLifeStats().setCurrentHpPercent(33);
-				if (player.getLifeStats().getMpPercentage() < 33)
+				if (player.getLifeStats().getMpPercentage() <= 33)
 					player.getLifeStats().setCurrentMpPercent(33);
-				if (master.getLifeStats().getHpPercentage() < 33)
+				if (master.getLifeStats().getHpPercentage() <= 33)
 					master.getLifeStats().setCurrentHpPercent(33);
-				if (master.getLifeStats().getMpPercentage() < 33)
+				if (master.getLifeStats().getMpPercentage() <= 33)
 					master.getLifeStats().setCurrentMpPercent(33);
 				return;
 			}
@@ -390,12 +391,19 @@ public class PlayerController extends CreatureController<Player> {
 			getOwner().setState(CreatureState.ACTIVE);
 		}
 		getOwner().setHitTimeBoost(0, 0);
+		getOwner().setNextAttackUse(0);
+		autoAttackValidator.reset();
 		if (getOwner().getPanesterraFaction() != null && !WorldMapType.isPanesterraMap(getOwner().getWorldId()))
 			getOwner().setPanesterraFaction(null);
 	}
 
-	@Override
-	public void attackTarget(Creature target, int time, boolean skipChecks) {
+	/**
+	 * Handles an auto attack the client announced.
+	 *
+	 * @param reportedAnimation
+	 *          The number of the attack animation the client says it played, or 0 if unknown
+	 */
+	public void attackTarget(Creature target, int time, int reportedAnimation) {
 		if (!PlayerRestrictions.canAttack(getOwner(), target))
 			return;
 
@@ -419,19 +427,16 @@ public class PlayerController extends CreatureController<Player> {
 			QuestEngine.getInstance().onAttack(new QuestEnv(target, getOwner(), 0));
 		}
 
-		int attackSpeed = gameStats.getAttackSpeed().getCurrent();
-
-		long now = System.currentTimeMillis();
-		// network ping..
-		if (now - lastAutoAttackMillis + 300 < attackSpeed) {
-			// hack
-			PacketSendUtility.sendPacket(getOwner(), SM_ATTACK_RESPONSE.STOP_WITHOUT_MESSAGE(gameStats.getAttackCounter()));
+		if (!autoAttackValidator.isAllowed(getOwner(), target))
 			return;
-		}
-		lastAutoAttackMillis = now;
 		enterCombat(true);
 
-		super.attackTarget(target, time, true);
+		super.attackTarget(target, autoAttackValidator.validateHitTime(getOwner(), target, time, reportedAnimation), true);
+	}
+
+	@Override
+	public void attackTarget(Creature target, int time, boolean skipChecks) {
+		attackTarget(target, time, 0);
 	}
 
 	@Override

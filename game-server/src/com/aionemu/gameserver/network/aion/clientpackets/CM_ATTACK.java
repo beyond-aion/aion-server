@@ -17,16 +17,14 @@ import com.aionemu.gameserver.network.aion.AionConnection.State;
 public class CM_ATTACK extends AionClientPacket {
 
 	private static final Logger log = LoggerFactory.getLogger(CM_ATTACK.class);
-	/**
-	 * Target object id that client wants to TALK WITH or 0 if wants to unselect
-	 */
+	/** Object id of the attacked creature */
 	private int targetObjectId;
-	// TODO: Question, are they really needed?
+	/** Auto attack counter the client keeps per character, not per target, wrapping at 256. Unused, since we answer with our own counter. */
 	@SuppressWarnings("unused")
 	private int attackno;
-
+	/** Milliseconds until the auto attack lands, from the animation marker of the equipped weapon plus the flight time of its projectile */
 	private int time;
-	@SuppressWarnings("unused")
+	/** Number of the attack animation the client played, 1 or 2, with an unrelated flag in the highest bit */
 	private int type;
 
 	public CM_ATTACK(int opcode, Set<State> validStates) {
@@ -35,10 +33,10 @@ public class CM_ATTACK extends AionClientPacket {
 
 	@Override
 	protected void readImpl() {
-		targetObjectId = readD();// empty
-		attackno = readUC();// empty
-		time = readUH();// empty
-		type = readUC();// empty
+		targetObjectId = readD();
+		attackno = readUC();
+		time = readUH();
+		type = readUC();
 	}
 
 	@Override
@@ -52,7 +50,7 @@ public class CM_ATTACK extends AionClientPacket {
 
 		VisibleObject obj = player.getKnownList().getObject(targetObjectId);
 		if (obj instanceof Creature) {
-			player.getController().attackTarget((Creature) obj, time, false);
+			player.getController().attackTarget((Creature) obj, time, type & 0x7F);
 		} else if (obj != null) {
 			log.warn(player + " attacking unsupported target " + obj);
 		}

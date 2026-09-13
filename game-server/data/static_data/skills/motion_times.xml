@@ -1671,6 +1671,112 @@
     <elyos_male weapon="orb" id="1" min="0.5" max="0.5" animation_length="1.8000001"/>
     <elyos_male weapon="noweapon" id="1" min="0.5" max="0.5" animation_length="1.8000001"/>
   </motion_time>
+  <motion_time name="cattack">
+    <asmodian_female weapon="dagger" id="1" min="0.26666665" max="0.26666665" animation_length="0.8000001"/>
+    <asmodian_female weapon="dagger" id="2" min="0.267" max="0.267" animation_length="0.8000001"/>
+    <asmodian_female weapon="polearm" id="1" min="1.0003333" max="1.0003333" animation_length="2.4"/>
+    <asmodian_female weapon="polearm" id="2" min="0.9663334" max="0.9663334" animation_length="2.4"/>
+    <asmodian_female weapon="1hand" id="1" min="0.43333334" max="0.43333334" animation_length="1.1"/>
+    <asmodian_female weapon="1hand" id="2" min="0.49999997" max="0.49999997" animation_length="1.1666667"/>
+    <asmodian_female weapon="mace" id="1" min="0.53333336" max="0.53333336" animation_length="1.1"/>
+    <asmodian_female weapon="mace" id="2" min="0.59999996" max="0.59999996" animation_length="1.1"/>
+    <asmodian_female weapon="book" id="1" min="1.1333333" max="1.1333333" animation_length="1.6666667"/>
+    <asmodian_female weapon="cannon" id="1" min="1.5" max="1.5" animation_length="2.1333334"/>
+    <asmodian_female weapon="harp" id="1" min="1.0" max="1.0" animation_length="1.5000001"/>
+    <asmodian_female weapon="harp" id="2" min="0.594" max="0.594" animation_length="1.2"/>
+    <asmodian_female weapon="staff" id="1" min="0.53" max="0.53" animation_length="1.1333334"/>
+    <asmodian_female weapon="staff" id="2" min="0.53" max="0.53" animation_length="1.1333334"/>
+    <asmodian_female weapon="2weapon" id="1" min="0.433" max="0.96666664" animation_length="1.5000001"/>
+    <asmodian_female weapon="2weapon" id="2" min="0.3003333" max="0.99666667" animation_length="1.5000001"/>
+    <asmodian_female weapon="bow" id="1" min="0.9" max="0.9" animation_length="1.4000001"/>
+    <asmodian_female weapon="2hand" id="1" min="0.8666666" max="0.8666666" animation_length="2.0"/>
+    <asmodian_female weapon="2hand" id="2" min="0.7333333" max="0.7333333" animation_length="2.0"/>
+    <asmodian_female weapon="2gun" id="1" min="0.6666667" max="0.7333333" animation_length="1.5000001"/>
+    <asmodian_female weapon="1gun" id="1" min="0.672" max="0.672" animation_length="1.5000001"/>
+    <asmodian_female weapon="keyblade" id="1" min="0.825" max="0.825" animation_length="2.0333335"/>
+    <asmodian_female weapon="orb" id="1" min="0.6666667" max="0.6666667" animation_length="1.3333334"/>
+    <asmodian_female weapon="orb" id="2" min="0.7" max="0.7" animation_length="1.3333334"/>
+    <asmodian_female weapon="noweapon" id="1" min="0.53" max="0.53" animation_length="1.3000001"/>
+    <asmodian_female weapon="noweapon" id="2" min="0.39666668" max="0.89666665" animation_length="1.5000001"/>
+    <asmodian_male weapon="dagger" id="1" min="0.26666665" max="0.26666665" animation_length="0.8000001"/>
+    <asmodian_male weapon="dagger" id="2" min="0.267" max="0.267" animation_length="0.73333335"/>
+    <asmodian_male weapon="polearm" id="1" min="0.93366665" max="0.93366665" animation_length="2.4666667"/>
+    <asmodian_male weapon="polearm" id="2" min="1.1663333" max="1.1663333" animation_length="2.3333335"/>
+    <asmodian_male weapon="1hand" id="1" min="0.36666667" max="0.36666667" animation_length="1.1666667"/>
+    <asmodian_male weapon="1hand" id="2" min="0.39999998" max="0.39999998" animation_length="1.1666667"/>
+    <asmodian_male weapon="mace" id="1" min="0.5" max="0.5" animation_length="1.3333334"/>
+    <asmodian_male weapon="mace" id="2" min="0.5" max="0.5" animation_length="1.3333334"/>
+    <asmodian_male weapon="book" id="1" min="1.0666667" max="1.0666667" animation_length="1.6666667"/>
+    <asmodian_male weapon="cannon" id="1" min="1.5" max="1.5" animation_length="2.1333334"/>
+    <asmodian_male weapon="harp" id="1" min="1.0" max="1.0" animation_length="1.5000001"/>
+    <asmodian_male weapon="harp" id="2" min="0.594" max="0.594" animation_length="1.2"/>
+    <asmodian_male weapon="staff" id="1" min="0.5999999" max="0.5999999" animation_length="1.5333334"/>
+    <asmodian_male weapon="staff" id="2" min="0.69999987" max="0.69999987" animation_length="1.5333334"/>
+    <asmodian_male weapon="2weapon" id="1" min="0.33299997" max="0.93333334" animation_length="1.5000001"/>
+    <asmodian_male weapon="2weapon" id="2" min="0.33366662" max="0.83" animation_length="1.3666668"/>
+    <asmodian_male weapon="bow" id="1" min="0.8666667" max="0.8666667" animation_length="1.4000001"/>
+    <asmodian_male weapon="2hand" id="1" min="0.93333334" max="0.93333334" animation_length="2.0333335"/>
+    <asmodian_male weapon="2hand" id="2" min="1.0333334" max="1.0333334" animation_length="1.9333334"/>
+    <asmodian_male weapon="2gun" id="1" min="0.6666667" max="0.73333335" animation_length="1.5000001"/>
+    <asmodian_male weapon="1gun" id="1" min="0.672" max="0.672" animation_length="1.5000001"/>
+    <asmodian_male weapon="keyblade" id="1" min="0.825" max="0.825" animation_length="2.0333335"/>
+    <asmodian_male weapon="orb" id="1" min="0.7" max="0.7" animation_length="1.3333334"/>
+    <asmodian_male weapon="orb" id="2" min="0.7" max="0.7" animation_length="1.3333334"/>
+    <asmodian_male weapon="noweapon" id="1" min="0.42999998" max="0.42999998" animation_length="0.9666667"/>
+    <asmodian_male weapon="noweapon" id="2" min="0.49666667" max="0.8333333" animation_length="1.3333334"/>
+    <elyos_female weapon="dagger" id="1" min="0.26666665" max="0.26666665" animation_length="0.8000001"/>
+    <elyos_female weapon="dagger" id="2" min="0.267" max="0.267" animation_length="0.8000001"/>
+    <elyos_female weapon="polearm" id="1" min="1.0003333" max="1.0003333" animation_length="2.4"/>
+    <elyos_female weapon="polearm" id="2" min="0.9663334" max="0.9663334" animation_length="2.4"/>
+    <elyos_female weapon="1hand" id="1" min="0.43333334" max="0.43333334" animation_length="1.1"/>
+    <elyos_female weapon="1hand" id="2" min="0.49999997" max="0.49999997" animation_length="1.1666667"/>
+    <elyos_female weapon="mace" id="1" min="0.53333336" max="0.53333336" animation_length="1.1"/>
+    <elyos_female weapon="mace" id="2" min="0.59999996" max="0.59999996" animation_length="1.1"/>
+    <elyos_female weapon="book" id="1" min="1.1333333" max="1.1333333" animation_length="1.6666667"/>
+    <elyos_female weapon="cannon" id="1" min="1.5" max="1.5" animation_length="2.1333334"/>
+    <elyos_female weapon="harp" id="1" min="1.0" max="1.0" animation_length="1.5000001"/>
+    <elyos_female weapon="harp" id="2" min="0.594" max="0.594" animation_length="1.2"/>
+    <elyos_female weapon="staff" id="1" min="0.53" max="0.53" animation_length="1.1333334"/>
+    <elyos_female weapon="staff" id="2" min="0.53" max="0.53" animation_length="1.1333334"/>
+    <elyos_female weapon="2weapon" id="1" min="0.433" max="0.96666664" animation_length="1.5000001"/>
+    <elyos_female weapon="2weapon" id="2" min="0.3003333" max="0.99666667" animation_length="1.5000001"/>
+    <elyos_female weapon="bow" id="1" min="0.9" max="0.9" animation_length="1.4000001"/>
+    <elyos_female weapon="2hand" id="1" min="0.8666666" max="0.8666666" animation_length="2.0"/>
+    <elyos_female weapon="2hand" id="2" min="0.7333333" max="0.7333333" animation_length="2.0"/>
+    <elyos_female weapon="2gun" id="1" min="0.6666667" max="0.73333335" animation_length="1.5000001"/>
+    <elyos_female weapon="1gun" id="1" min="0.672" max="0.672" animation_length="1.5000001"/>
+    <elyos_female weapon="keyblade" id="1" min="0.825" max="0.825" animation_length="2.0333335"/>
+    <elyos_female weapon="orb" id="1" min="0.6666667" max="0.6666667" animation_length="1.3333334"/>
+    <elyos_female weapon="orb" id="2" min="0.7" max="0.7" animation_length="1.3333334"/>
+    <elyos_female weapon="noweapon" id="1" min="0.53" max="0.53" animation_length="1.3000001"/>
+    <elyos_female weapon="noweapon" id="2" min="0.39666668" max="0.89666665" animation_length="1.5000001"/>
+    <elyos_male weapon="dagger" id="1" min="0.26666665" max="0.26666665" animation_length="0.8000001"/>
+    <elyos_male weapon="dagger" id="2" min="0.267" max="0.267" animation_length="0.73333335"/>
+    <elyos_male weapon="polearm" id="1" min="0.93366665" max="0.93366665" animation_length="2.4666667"/>
+    <elyos_male weapon="polearm" id="2" min="1.1663333" max="1.1663333" animation_length="2.3333335"/>
+    <elyos_male weapon="1hand" id="1" min="0.36666667" max="0.36666667" animation_length="1.1666667"/>
+    <elyos_male weapon="1hand" id="2" min="0.39999998" max="0.39999998" animation_length="1.1666667"/>
+    <elyos_male weapon="mace" id="1" min="0.5" max="0.5" animation_length="1.3333334"/>
+    <elyos_male weapon="mace" id="2" min="0.5" max="0.5" animation_length="1.3333334"/>
+    <elyos_male weapon="book" id="1" min="1.0666667" max="1.0666667" animation_length="1.6666667"/>
+    <elyos_male weapon="cannon" id="1" min="1.5" max="1.5" animation_length="2.1333334"/>
+    <elyos_male weapon="harp" id="1" min="1.0" max="1.0" animation_length="1.5000001"/>
+    <elyos_male weapon="harp" id="2" min="0.594" max="0.594" animation_length="1.2"/>
+    <elyos_male weapon="staff" id="1" min="0.5999999" max="0.5999999" animation_length="1.5333334"/>
+    <elyos_male weapon="staff" id="2" min="0.69999987" max="0.69999987" animation_length="1.5333334"/>
+    <elyos_male weapon="2weapon" id="1" min="0.33299997" max="0.93333334" animation_length="1.5000001"/>
+    <elyos_male weapon="2weapon" id="2" min="0.33366662" max="0.83" animation_length="1.3666668"/>
+    <elyos_male weapon="bow" id="1" min="0.8666667" max="0.8666667" animation_length="1.4000001"/>
+    <elyos_male weapon="2hand" id="1" min="0.93333334" max="0.93333334" animation_length="2.0333335"/>
+    <elyos_male weapon="2hand" id="2" min="1.0333334" max="1.0333334" animation_length="1.9333334"/>
+    <elyos_male weapon="2gun" id="1" min="0.6666667" max="0.73333335" animation_length="1.5000001"/>
+    <elyos_male weapon="1gun" id="1" min="0.672" max="0.672" animation_length="1.5000001"/>
+    <elyos_male weapon="keyblade" id="1" min="0.825" max="0.825" animation_length="2.0333335"/>
+    <elyos_male weapon="orb" id="1" min="0.7" max="0.7" animation_length="1.3333334"/>
+    <elyos_male weapon="orb" id="2" min="0.7" max="0.7" animation_length="1.3333334"/>
+    <elyos_male weapon="noweapon" id="1" min="0.42999998" max="0.42999998" animation_length="0.9666667"/>
+    <elyos_male weapon="noweapon" id="2" min="0.49666667" max="0.8333333" animation_length="1.3333334"/>
+  </motion_time>
   <motion_time name="chainatk03">
     <asmodian_female weapon="2hand" id="1" min="0.6333333" max="0.6333333" animation_length="1.2666668"/>
     <asmodian_female weapon="dagger" id="1" min="0.6333333" max="0.6333333" animation_length="1.2666668"/>
@@ -2483,92 +2589,92 @@
     <elyos_male weapon="harp" id="1" min="0.6666" max="0.6666" animation_length="1.5000001"/>
   </motion_time>
   <motion_time name="crossparry">
-    <asmodian_female weapon="2hand" id="1" min="0.0" max="0.0" animation_length="0.86666673"/>
-    <asmodian_female weapon="dagger" id="1" min="0.0" max="0.0" animation_length="0.86666673"/>
-    <asmodian_female weapon="polearm" id="1" min="0.0" max="0.0" animation_length="0.86666673"/>
-    <asmodian_female weapon="1hand" id="1" min="0.0" max="0.0" animation_length="0.86666673"/>
-    <asmodian_female weapon="mace" id="1" min="0.0" max="0.0" animation_length="0.86666673"/>
-    <asmodian_female weapon="staff" id="1" min="0.0" max="0.0" animation_length="0.86666673"/>
-    <asmodian_female weapon="2weapon" id="1" min="0.0" max="0.0" animation_length="0.86666673"/>
-    <asmodian_female weapon="bow" id="1" min="0.0" max="0.0" animation_length="0.86666673"/>
-    <asmodian_female weapon="bow" id="1" min="0.0" max="0.0" animation_length="0.86666673"/>
-    <asmodian_female weapon="noweapon" id="1" min="0.0" max="0.0" animation_length="0.86666673"/>
-    <asmodian_female weapon="noweapon" id="1" min="0.0" max="0.0" animation_length="0.86666673"/>
-    <asmodian_male weapon="2hand" id="1" min="0.0" max="0.0" animation_length="0.86666673"/>
-    <asmodian_male weapon="dagger" id="1" min="0.0" max="0.0" animation_length="0.86666673"/>
-    <asmodian_male weapon="polearm" id="1" min="0.0" max="0.0" animation_length="0.86666673"/>
-    <asmodian_male weapon="1hand" id="1" min="0.0" max="0.0" animation_length="0.86666673"/>
-    <asmodian_male weapon="mace" id="1" min="0.0" max="0.0" animation_length="0.86666673"/>
-    <asmodian_male weapon="staff" id="1" min="0.0" max="0.0" animation_length="0.86666673"/>
-    <asmodian_male weapon="2weapon" id="1" min="0.0" max="0.0" animation_length="0.86666673"/>
-    <asmodian_male weapon="bow" id="1" min="0.0" max="0.0" animation_length="0.86666673"/>
-    <asmodian_male weapon="bow" id="1" min="0.0" max="0.0" animation_length="0.86666673"/>
-    <asmodian_male weapon="noweapon" id="1" min="0.0" max="0.0" animation_length="0.86666673"/>
-    <asmodian_male weapon="noweapon" id="1" min="0.0" max="0.0" animation_length="0.86666673"/>
-    <elyos_female weapon="2hand" id="1" min="0.0" max="0.0" animation_length="0.86666673"/>
-    <elyos_female weapon="dagger" id="1" min="0.0" max="0.0" animation_length="0.86666673"/>
-    <elyos_female weapon="polearm" id="1" min="0.0" max="0.0" animation_length="0.86666673"/>
-    <elyos_female weapon="1hand" id="1" min="0.0" max="0.0" animation_length="0.86666673"/>
-    <elyos_female weapon="mace" id="1" min="0.0" max="0.0" animation_length="0.86666673"/>
-    <elyos_female weapon="staff" id="1" min="0.0" max="0.0" animation_length="0.86666673"/>
-    <elyos_female weapon="2weapon" id="1" min="0.0" max="0.0" animation_length="0.86666673"/>
-    <elyos_female weapon="bow" id="1" min="0.0" max="0.0" animation_length="0.86666673"/>
-    <elyos_female weapon="noweapon" id="1" min="0.0" max="0.0" animation_length="0.86666673"/>
-    <elyos_male weapon="2hand" id="1" min="0.0" max="0.0" animation_length="0.86666673"/>
-    <elyos_male weapon="dagger" id="1" min="0.0" max="0.0" animation_length="0.86666673"/>
-    <elyos_male weapon="polearm" id="1" min="0.0" max="0.0" animation_length="0.86666673"/>
-    <elyos_male weapon="1hand" id="1" min="0.0" max="0.0" animation_length="0.86666673"/>
-    <elyos_male weapon="mace" id="1" min="0.0" max="0.0" animation_length="0.86666673"/>
-    <elyos_male weapon="staff" id="1" min="0.0" max="0.0" animation_length="0.86666673"/>
-    <elyos_male weapon="2weapon" id="1" min="0.0" max="0.0" animation_length="0.86666673"/>
-    <elyos_male weapon="bow" id="1" min="0.0" max="0.0" animation_length="0.86666673"/>
-    <elyos_male weapon="noweapon" id="1" min="0.0" max="0.0" animation_length="0.86666673"/>
+    <asmodian_female weapon="2hand" id="1" min="0.86666673" max="0.86666673" animation_length="0.86666673"/>
+    <asmodian_female weapon="dagger" id="1" min="0.86666673" max="0.86666673" animation_length="0.86666673"/>
+    <asmodian_female weapon="polearm" id="1" min="0.86666673" max="0.86666673" animation_length="0.86666673"/>
+    <asmodian_female weapon="1hand" id="1" min="0.86666673" max="0.86666673" animation_length="0.86666673"/>
+    <asmodian_female weapon="mace" id="1" min="0.86666673" max="0.86666673" animation_length="0.86666673"/>
+    <asmodian_female weapon="staff" id="1" min="0.86666673" max="0.86666673" animation_length="0.86666673"/>
+    <asmodian_female weapon="2weapon" id="1" min="0.86666673" max="0.86666673" animation_length="0.86666673"/>
+    <asmodian_female weapon="bow" id="1" min="0.86666673" max="0.86666673" animation_length="0.86666673"/>
+    <asmodian_female weapon="bow" id="1" min="0.86666673" max="0.86666673" animation_length="0.86666673"/>
+    <asmodian_female weapon="noweapon" id="1" min="0.86666673" max="0.86666673" animation_length="0.86666673"/>
+    <asmodian_female weapon="noweapon" id="1" min="0.86666673" max="0.86666673" animation_length="0.86666673"/>
+    <asmodian_male weapon="2hand" id="1" min="0.86666673" max="0.86666673" animation_length="0.86666673"/>
+    <asmodian_male weapon="dagger" id="1" min="0.86666673" max="0.86666673" animation_length="0.86666673"/>
+    <asmodian_male weapon="polearm" id="1" min="0.86666673" max="0.86666673" animation_length="0.86666673"/>
+    <asmodian_male weapon="1hand" id="1" min="0.86666673" max="0.86666673" animation_length="0.86666673"/>
+    <asmodian_male weapon="mace" id="1" min="0.86666673" max="0.86666673" animation_length="0.86666673"/>
+    <asmodian_male weapon="staff" id="1" min="0.86666673" max="0.86666673" animation_length="0.86666673"/>
+    <asmodian_male weapon="2weapon" id="1" min="0.86666673" max="0.86666673" animation_length="0.86666673"/>
+    <asmodian_male weapon="bow" id="1" min="0.86666673" max="0.86666673" animation_length="0.86666673"/>
+    <asmodian_male weapon="bow" id="1" min="0.86666673" max="0.86666673" animation_length="0.86666673"/>
+    <asmodian_male weapon="noweapon" id="1" min="0.86666673" max="0.86666673" animation_length="0.86666673"/>
+    <asmodian_male weapon="noweapon" id="1" min="0.86666673" max="0.86666673" animation_length="0.86666673"/>
+    <elyos_female weapon="2hand" id="1" min="0.86666673" max="0.86666673" animation_length="0.86666673"/>
+    <elyos_female weapon="dagger" id="1" min="0.86666673" max="0.86666673" animation_length="0.86666673"/>
+    <elyos_female weapon="polearm" id="1" min="0.86666673" max="0.86666673" animation_length="0.86666673"/>
+    <elyos_female weapon="1hand" id="1" min="0.86666673" max="0.86666673" animation_length="0.86666673"/>
+    <elyos_female weapon="mace" id="1" min="0.86666673" max="0.86666673" animation_length="0.86666673"/>
+    <elyos_female weapon="staff" id="1" min="0.86666673" max="0.86666673" animation_length="0.86666673"/>
+    <elyos_female weapon="2weapon" id="1" min="0.86666673" max="0.86666673" animation_length="0.86666673"/>
+    <elyos_female weapon="bow" id="1" min="0.86666673" max="0.86666673" animation_length="0.86666673"/>
+    <elyos_female weapon="noweapon" id="1" min="0.86666673" max="0.86666673" animation_length="0.86666673"/>
+    <elyos_male weapon="2hand" id="1" min="0.86666673" max="0.86666673" animation_length="0.86666673"/>
+    <elyos_male weapon="dagger" id="1" min="0.86666673" max="0.86666673" animation_length="0.86666673"/>
+    <elyos_male weapon="polearm" id="1" min="0.86666673" max="0.86666673" animation_length="0.86666673"/>
+    <elyos_male weapon="1hand" id="1" min="0.86666673" max="0.86666673" animation_length="0.86666673"/>
+    <elyos_male weapon="mace" id="1" min="0.86666673" max="0.86666673" animation_length="0.86666673"/>
+    <elyos_male weapon="staff" id="1" min="0.86666673" max="0.86666673" animation_length="0.86666673"/>
+    <elyos_male weapon="2weapon" id="1" min="0.86666673" max="0.86666673" animation_length="0.86666673"/>
+    <elyos_male weapon="bow" id="1" min="0.86666673" max="0.86666673" animation_length="0.86666673"/>
+    <elyos_male weapon="noweapon" id="1" min="0.86666673" max="0.86666673" animation_length="0.86666673"/>
   </motion_time>
   <motion_time name="cryinginsult">
-    <asmodian_female weapon="2hand" id="1" min="0.0" max="0.0" animation_length="1.6666667"/>
-    <asmodian_female weapon="dagger" id="1" min="0.0" max="0.0" animation_length="1.6666667"/>
-    <asmodian_female weapon="polearm" id="1" min="0.0" max="0.0" animation_length="1.6666667"/>
-    <asmodian_female weapon="1hand" id="1" min="0.0" max="0.0" animation_length="1.6666667"/>
-    <asmodian_female weapon="mace" id="1" min="0.0" max="0.0" animation_length="1.6666667"/>
-    <asmodian_female weapon="book" id="1" min="0.0" max="0.0" animation_length="1.6666667"/>
-    <asmodian_female weapon="staff" id="1" min="0.0" max="0.0" animation_length="1.6666667"/>
-    <asmodian_female weapon="2weapon" id="1" min="0.0" max="0.0" animation_length="1.6666667"/>
-    <asmodian_female weapon="bow" id="1" min="0.0" max="0.0" animation_length="1.6666667"/>
-    <asmodian_female weapon="orb" id="1" min="0.0" max="0.0" animation_length="1.6666667"/>
-    <asmodian_female weapon="noweapon" id="1" min="0.0" max="0.0" animation_length="1.6666667"/>
-    <asmodian_male weapon="2hand" id="1" min="0.0" max="0.0" animation_length="1.6666667"/>
-    <asmodian_male weapon="dagger" id="1" min="0.0" max="0.0" animation_length="1.6666667"/>
-    <asmodian_male weapon="polearm" id="1" min="0.0" max="0.0" animation_length="1.6666667"/>
-    <asmodian_male weapon="1hand" id="1" min="0.0" max="0.0" animation_length="1.6666667"/>
-    <asmodian_male weapon="mace" id="1" min="0.0" max="0.0" animation_length="1.6666667"/>
-    <asmodian_male weapon="book" id="1" min="0.0" max="0.0" animation_length="1.6666667"/>
-    <asmodian_male weapon="staff" id="1" min="0.0" max="0.0" animation_length="1.6666667"/>
-    <asmodian_male weapon="2weapon" id="1" min="0.0" max="0.0" animation_length="1.6666667"/>
-    <asmodian_male weapon="bow" id="1" min="0.0" max="0.0" animation_length="1.6666667"/>
-    <asmodian_male weapon="orb" id="1" min="0.0" max="0.0" animation_length="1.6666667"/>
-    <asmodian_male weapon="noweapon" id="1" min="0.0" max="0.0" animation_length="1.6666667"/>
-    <elyos_female weapon="2hand" id="1" min="0.0" max="0.0" animation_length="1.6666667"/>
-    <elyos_female weapon="dagger" id="1" min="0.0" max="0.0" animation_length="1.6666667"/>
-    <elyos_female weapon="polearm" id="1" min="0.0" max="0.0" animation_length="1.6666667"/>
-    <elyos_female weapon="1hand" id="1" min="0.0" max="0.0" animation_length="1.6666667"/>
-    <elyos_female weapon="mace" id="1" min="0.0" max="0.0" animation_length="1.6666667"/>
-    <elyos_female weapon="book" id="1" min="0.0" max="0.0" animation_length="1.6666667"/>
-    <elyos_female weapon="staff" id="1" min="0.0" max="0.0" animation_length="1.6666667"/>
-    <elyos_female weapon="2weapon" id="1" min="0.0" max="0.0" animation_length="1.6666667"/>
-    <elyos_female weapon="bow" id="1" min="0.0" max="0.0" animation_length="1.6666667"/>
-    <elyos_female weapon="orb" id="1" min="0.0" max="0.0" animation_length="1.6666667"/>
-    <elyos_female weapon="noweapon" id="1" min="0.0" max="0.0" animation_length="1.6666667"/>
-    <elyos_male weapon="2hand" id="1" min="0.0" max="0.0" animation_length="1.6666667"/>
-    <elyos_male weapon="dagger" id="1" min="0.0" max="0.0" animation_length="1.6666667"/>
-    <elyos_male weapon="polearm" id="1" min="0.0" max="0.0" animation_length="1.6666667"/>
-    <elyos_male weapon="1hand" id="1" min="0.0" max="0.0" animation_length="1.6666667"/>
-    <elyos_male weapon="mace" id="1" min="0.0" max="0.0" animation_length="1.6666667"/>
-    <elyos_male weapon="book" id="1" min="0.0" max="0.0" animation_length="1.6666667"/>
-    <elyos_male weapon="staff" id="1" min="0.0" max="0.0" animation_length="1.6666667"/>
-    <elyos_male weapon="2weapon" id="1" min="0.0" max="0.0" animation_length="1.6666667"/>
-    <elyos_male weapon="bow" id="1" min="0.0" max="0.0" animation_length="1.6666667"/>
-    <elyos_male weapon="orb" id="1" min="0.0" max="0.0" animation_length="1.6666667"/>
-    <elyos_male weapon="noweapon" id="1" min="0.0" max="0.0" animation_length="1.6666667"/>
+    <asmodian_female weapon="2hand" id="1" min="1.6666667" max="1.6666667" animation_length="1.6666667"/>
+    <asmodian_female weapon="dagger" id="1" min="1.6666667" max="1.6666667" animation_length="1.6666667"/>
+    <asmodian_female weapon="polearm" id="1" min="1.6666667" max="1.6666667" animation_length="1.6666667"/>
+    <asmodian_female weapon="1hand" id="1" min="1.6666667" max="1.6666667" animation_length="1.6666667"/>
+    <asmodian_female weapon="mace" id="1" min="1.6666667" max="1.6666667" animation_length="1.6666667"/>
+    <asmodian_female weapon="book" id="1" min="1.6666667" max="1.6666667" animation_length="1.6666667"/>
+    <asmodian_female weapon="staff" id="1" min="1.6666667" max="1.6666667" animation_length="1.6666667"/>
+    <asmodian_female weapon="2weapon" id="1" min="1.6666667" max="1.6666667" animation_length="1.6666667"/>
+    <asmodian_female weapon="bow" id="1" min="1.6666667" max="1.6666667" animation_length="1.6666667"/>
+    <asmodian_female weapon="orb" id="1" min="1.6666667" max="1.6666667" animation_length="1.6666667"/>
+    <asmodian_female weapon="noweapon" id="1" min="1.6666667" max="1.6666667" animation_length="1.6666667"/>
+    <asmodian_male weapon="2hand" id="1" min="1.6666667" max="1.6666667" animation_length="1.6666667"/>
+    <asmodian_male weapon="dagger" id="1" min="1.6666667" max="1.6666667" animation_length="1.6666667"/>
+    <asmodian_male weapon="polearm" id="1" min="1.6666667" max="1.6666667" animation_length="1.6666667"/>
+    <asmodian_male weapon="1hand" id="1" min="1.6666667" max="1.6666667" animation_length="1.6666667"/>
+    <asmodian_male weapon="mace" id="1" min="1.6666667" max="1.6666667" animation_length="1.6666667"/>
+    <asmodian_male weapon="book" id="1" min="1.6666667" max="1.6666667" animation_length="1.6666667"/>
+    <asmodian_male weapon="staff" id="1" min="1.6666667" max="1.6666667" animation_length="1.6666667"/>
+    <asmodian_male weapon="2weapon" id="1" min="1.6666667" max="1.6666667" animation_length="1.6666667"/>
+    <asmodian_male weapon="bow" id="1" min="1.6666667" max="1.6666667" animation_length="1.6666667"/>
+    <asmodian_male weapon="orb" id="1" min="1.6666667" max="1.6666667" animation_length="1.6666667"/>
+    <asmodian_male weapon="noweapon" id="1" min="1.6666667" max="1.6666667" animation_length="1.6666667"/>
+    <elyos_female weapon="2hand" id="1" min="1.6666667" max="1.6666667" animation_length="1.6666667"/>
+    <elyos_female weapon="dagger" id="1" min="1.6666667" max="1.6666667" animation_length="1.6666667"/>
+    <elyos_female weapon="polearm" id="1" min="1.6666667" max="1.6666667" animation_length="1.6666667"/>
+    <elyos_female weapon="1hand" id="1" min="1.6666667" max="1.6666667" animation_length="1.6666667"/>
+    <elyos_female weapon="mace" id="1" min="1.6666667" max="1.6666667" animation_length="1.6666667"/>
+    <elyos_female weapon="book" id="1" min="1.6666667" max="1.6666667" animation_length="1.6666667"/>
+    <elyos_female weapon="staff" id="1" min="1.6666667" max="1.6666667" animation_length="1.6666667"/>
+    <elyos_female weapon="2weapon" id="1" min="1.6666667" max="1.6666667" animation_length="1.6666667"/>
+    <elyos_female weapon="bow" id="1" min="1.6666667" max="1.6666667" animation_length="1.6666667"/>
+    <elyos_female weapon="orb" id="1" min="1.6666667" max="1.6666667" animation_length="1.6666667"/>
+    <elyos_female weapon="noweapon" id="1" min="1.6666667" max="1.6666667" animation_length="1.6666667"/>
+    <elyos_male weapon="2hand" id="1" min="1.6666667" max="1.6666667" animation_length="1.6666667"/>
+    <elyos_male weapon="dagger" id="1" min="1.6666667" max="1.6666667" animation_length="1.6666667"/>
+    <elyos_male weapon="polearm" id="1" min="1.6666667" max="1.6666667" animation_length="1.6666667"/>
+    <elyos_male weapon="1hand" id="1" min="1.6666667" max="1.6666667" animation_length="1.6666667"/>
+    <elyos_male weapon="mace" id="1" min="1.6666667" max="1.6666667" animation_length="1.6666667"/>
+    <elyos_male weapon="book" id="1" min="1.6666667" max="1.6666667" animation_length="1.6666667"/>
+    <elyos_male weapon="staff" id="1" min="1.6666667" max="1.6666667" animation_length="1.6666667"/>
+    <elyos_male weapon="2weapon" id="1" min="1.6666667" max="1.6666667" animation_length="1.6666667"/>
+    <elyos_male weapon="bow" id="1" min="1.6666667" max="1.6666667" animation_length="1.6666667"/>
+    <elyos_male weapon="orb" id="1" min="1.6666667" max="1.6666667" animation_length="1.6666667"/>
+    <elyos_male weapon="noweapon" id="1" min="1.6666667" max="1.6666667" animation_length="1.6666667"/>
   </motion_time>
   <motion_time name="cursedbreath">
     <asmodian_female weapon="dagger" id="1" min="0.5" max="0.5" animation_length="1.666667"/>
@@ -3488,50 +3594,50 @@
     <elyos_male weapon="noweapon" id="1" min="0.5" max="0.5" animation_length="1.8333333"/>
   </motion_time>
   <motion_time name="elementtransfer">
-    <asmodian_female weapon="2hand" id="1" min="0.0" max="0.0" animation_length="1.3333334"/>
-    <asmodian_female weapon="dagger" id="1" min="0.0" max="0.0" animation_length="1.3333334"/>
-    <asmodian_female weapon="polearm" id="1" min="0.0" max="0.0" animation_length="1.3333334"/>
-    <asmodian_female weapon="1hand" id="1" min="0.0" max="0.0" animation_length="1.3333334"/>
-    <asmodian_female weapon="mace" id="1" min="0.0" max="0.0" animation_length="1.3333334"/>
-    <asmodian_female weapon="book" id="1" min="0.0" max="0.0" animation_length="1.3333334"/>
-    <asmodian_female weapon="staff" id="1" min="0.0" max="0.0" animation_length="1.3333334"/>
-    <asmodian_female weapon="2weapon" id="1" min="0.0" max="0.0" animation_length="1.3333334"/>
-    <asmodian_female weapon="bow" id="1" min="0.0" max="0.0" animation_length="1.3333334"/>
-    <asmodian_female weapon="orb" id="1" min="0.0" max="0.0" animation_length="1.3333334"/>
-    <asmodian_female weapon="noweapon" id="1" min="0.0" max="0.0" animation_length="1.3333334"/>
-    <asmodian_male weapon="2hand" id="1" min="0.0" max="0.0" animation_length="1.3333334"/>
-    <asmodian_male weapon="dagger" id="1" min="0.0" max="0.0" animation_length="1.3333334"/>
-    <asmodian_male weapon="polearm" id="1" min="0.0" max="0.0" animation_length="1.3333334"/>
-    <asmodian_male weapon="1hand" id="1" min="0.0" max="0.0" animation_length="1.3333334"/>
-    <asmodian_male weapon="mace" id="1" min="0.0" max="0.0" animation_length="1.3333334"/>
-    <asmodian_male weapon="book" id="1" min="0.0" max="0.0" animation_length="1.3333334"/>
-    <asmodian_male weapon="staff" id="1" min="0.0" max="0.0" animation_length="1.3333334"/>
-    <asmodian_male weapon="2weapon" id="1" min="0.0" max="0.0" animation_length="1.3333334"/>
-    <asmodian_male weapon="bow" id="1" min="0.0" max="0.0" animation_length="1.3333334"/>
-    <asmodian_male weapon="orb" id="1" min="0.0" max="0.0" animation_length="1.3333334"/>
-    <asmodian_male weapon="noweapon" id="1" min="0.0" max="0.0" animation_length="1.3333334"/>
-    <elyos_female weapon="2hand" id="1" min="0.0" max="0.0" animation_length="1.3333334"/>
-    <elyos_female weapon="dagger" id="1" min="0.0" max="0.0" animation_length="1.3333334"/>
-    <elyos_female weapon="polearm" id="1" min="0.0" max="0.0" animation_length="1.3333334"/>
-    <elyos_female weapon="1hand" id="1" min="0.0" max="0.0" animation_length="1.3333334"/>
-    <elyos_female weapon="mace" id="1" min="0.0" max="0.0" animation_length="1.3333334"/>
-    <elyos_female weapon="book" id="1" min="0.0" max="0.0" animation_length="1.3333334"/>
-    <elyos_female weapon="staff" id="1" min="0.0" max="0.0" animation_length="1.3333334"/>
-    <elyos_female weapon="2weapon" id="1" min="0.0" max="0.0" animation_length="1.3333334"/>
-    <elyos_female weapon="bow" id="1" min="0.0" max="0.0" animation_length="1.3333334"/>
-    <elyos_female weapon="orb" id="1" min="0.0" max="0.0" animation_length="1.3333334"/>
-    <elyos_female weapon="noweapon" id="1" min="0.0" max="0.0" animation_length="1.3333334"/>
-    <elyos_male weapon="2hand" id="1" min="0.0" max="0.0" animation_length="1.3333334"/>
-    <elyos_male weapon="dagger" id="1" min="0.0" max="0.0" animation_length="1.3333334"/>
-    <elyos_male weapon="polearm" id="1" min="0.0" max="0.0" animation_length="1.3333334"/>
-    <elyos_male weapon="1hand" id="1" min="0.0" max="0.0" animation_length="1.3333334"/>
-    <elyos_male weapon="mace" id="1" min="0.0" max="0.0" animation_length="1.3333334"/>
-    <elyos_male weapon="book" id="1" min="0.0" max="0.0" animation_length="1.3333334"/>
-    <elyos_male weapon="staff" id="1" min="0.0" max="0.0" animation_length="1.3333334"/>
-    <elyos_male weapon="2weapon" id="1" min="0.0" max="0.0" animation_length="1.3333334"/>
-    <elyos_male weapon="bow" id="1" min="0.0" max="0.0" animation_length="1.3333334"/>
-    <elyos_male weapon="orb" id="1" min="0.0" max="0.0" animation_length="1.3333334"/>
-    <elyos_male weapon="noweapon" id="1" min="0.0" max="0.0" animation_length="1.3333334"/>
+    <asmodian_female weapon="2hand" id="1" min="1.3333334" max="1.3333334" animation_length="1.3333334"/>
+    <asmodian_female weapon="dagger" id="1" min="1.3333334" max="1.3333334" animation_length="1.3333334"/>
+    <asmodian_female weapon="polearm" id="1" min="1.3333334" max="1.3333334" animation_length="1.3333334"/>
+    <asmodian_female weapon="1hand" id="1" min="1.3333334" max="1.3333334" animation_length="1.3333334"/>
+    <asmodian_female weapon="mace" id="1" min="1.3333334" max="1.3333334" animation_length="1.3333334"/>
+    <asmodian_female weapon="book" id="1" min="1.3333334" max="1.3333334" animation_length="1.3333334"/>
+    <asmodian_female weapon="staff" id="1" min="1.3333334" max="1.3333334" animation_length="1.3333334"/>
+    <asmodian_female weapon="2weapon" id="1" min="1.3333334" max="1.3333334" animation_length="1.3333334"/>
+    <asmodian_female weapon="bow" id="1" min="1.3333334" max="1.3333334" animation_length="1.3333334"/>
+    <asmodian_female weapon="orb" id="1" min="1.3333334" max="1.3333334" animation_length="1.3333334"/>
+    <asmodian_female weapon="noweapon" id="1" min="1.3333334" max="1.3333334" animation_length="1.3333334"/>
+    <asmodian_male weapon="2hand" id="1" min="1.3333334" max="1.3333334" animation_length="1.3333334"/>
+    <asmodian_male weapon="dagger" id="1" min="1.3333334" max="1.3333334" animation_length="1.3333334"/>
+    <asmodian_male weapon="polearm" id="1" min="1.3333334" max="1.3333334" animation_length="1.3333334"/>
+    <asmodian_male weapon="1hand" id="1" min="1.3333334" max="1.3333334" animation_length="1.3333334"/>
+    <asmodian_male weapon="mace" id="1" min="1.3333334" max="1.3333334" animation_length="1.3333334"/>
+    <asmodian_male weapon="book" id="1" min="1.3333334" max="1.3333334" animation_length="1.3333334"/>
+    <asmodian_male weapon="staff" id="1" min="1.3333334" max="1.3333334" animation_length="1.3333334"/>
+    <asmodian_male weapon="2weapon" id="1" min="1.3333334" max="1.3333334" animation_length="1.3333334"/>
+    <asmodian_male weapon="bow" id="1" min="1.3333334" max="1.3333334" animation_length="1.3333334"/>
+    <asmodian_male weapon="orb" id="1" min="1.3333334" max="1.3333334" animation_length="1.3333334"/>
+    <asmodian_male weapon="noweapon" id="1" min="1.3333334" max="1.3333334" animation_length="1.3333334"/>
+    <elyos_female weapon="2hand" id="1" min="1.3333334" max="1.3333334" animation_length="1.3333334"/>
+    <elyos_female weapon="dagger" id="1" min="1.3333334" max="1.3333334" animation_length="1.3333334"/>
+    <elyos_female weapon="polearm" id="1" min="1.3333334" max="1.3333334" animation_length="1.3333334"/>
+    <elyos_female weapon="1hand" id="1" min="1.3333334" max="1.3333334" animation_length="1.3333334"/>
+    <elyos_female weapon="mace" id="1" min="1.3333334" max="1.3333334" animation_length="1.3333334"/>
+    <elyos_female weapon="book" id="1" min="1.3333334" max="1.3333334" animation_length="1.3333334"/>
+    <elyos_female weapon="staff" id="1" min="1.3333334" max="1.3333334" animation_length="1.3333334"/>
+    <elyos_female weapon="2weapon" id="1" min="1.3333334" max="1.3333334" animation_length="1.3333334"/>
+    <elyos_female weapon="bow" id="1" min="1.3333334" max="1.3333334" animation_length="1.3333334"/>
+    <elyos_female weapon="orb" id="1" min="1.3333334" max="1.3333334" animation_length="1.3333334"/>
+    <elyos_female weapon="noweapon" id="1" min="1.3333334" max="1.3333334" animation_length="1.3333334"/>
+    <elyos_male weapon="2hand" id="1" min="1.3333334" max="1.3333334" animation_length="1.3333334"/>
+    <elyos_male weapon="dagger" id="1" min="1.3333334" max="1.3333334" animation_length="1.3333334"/>
+    <elyos_male weapon="polearm" id="1" min="1.3333334" max="1.3333334" animation_length="1.3333334"/>
+    <elyos_male weapon="1hand" id="1" min="1.3333334" max="1.3333334" animation_length="1.3333334"/>
+    <elyos_male weapon="mace" id="1" min="1.3333334" max="1.3333334" animation_length="1.3333334"/>
+    <elyos_male weapon="book" id="1" min="1.3333334" max="1.3333334" animation_length="1.3333334"/>
+    <elyos_male weapon="staff" id="1" min="1.3333334" max="1.3333334" animation_length="1.3333334"/>
+    <elyos_male weapon="2weapon" id="1" min="1.3333334" max="1.3333334" animation_length="1.3333334"/>
+    <elyos_male weapon="bow" id="1" min="1.3333334" max="1.3333334" animation_length="1.3333334"/>
+    <elyos_male weapon="orb" id="1" min="1.3333334" max="1.3333334" animation_length="1.3333334"/>
+    <elyos_male weapon="noweapon" id="1" min="1.3333334" max="1.3333334" animation_length="1.3333334"/>
   </motion_time>
   <motion_time name="elsummon1">
     <asmodian_female weapon="2hand" id="1" min="0.33333334" max="0.33333334" animation_length="0.9333334"/>
@@ -3885,7 +3991,7 @@
     <elyos_female weapon="polearm" id="1" min="0.46666667" max="0.46666667" animation_length="1.3333334"/>
     <elyos_female weapon="1hand" id="1" min="0.46666667" max="0.46666667" animation_length="1.1"/>
     <elyos_female weapon="mace" id="1" min="0.46666667" max="0.46666667" animation_length="1.1"/>
-    <elyos_female weapon="book" id="1" min="0.0" max="0.0" animation_length="1.6666667"/>
+    <elyos_female weapon="book" id="1" min="1.6666667" max="1.6666667" animation_length="1.6666667"/>
     <elyos_female weapon="staff" id="1" min="0.46666667" max="0.46666667" animation_length="1.0"/>
     <elyos_female weapon="2weapon" id="1" min="0.46666667" max="0.46666667" animation_length="1.1666667"/>
     <elyos_female weapon="bow" id="1" min="0.8333333" max="0.8333333" animation_length="1.6666667"/>
@@ -3926,7 +4032,7 @@
     <asmodian_male weapon="orb" id="1" min="0.9" max="0.9" animation_length="1.5000001"/>
     <asmodian_male weapon="noweapon" id="1" min="0.9" max="0.9" animation_length="1.5000001"/>
     <elyos_female weapon="2hand" id="1" min="0.46666667" max="0.46666667" animation_length="1.5000001"/>
-    <elyos_female weapon="dagger" id="1" min="0.0" max="0.0" animation_length="1.5000001"/>
+    <elyos_female weapon="dagger" id="1" min="1.5000001" max="1.5000001" animation_length="1.5000001"/>
     <elyos_female weapon="polearm" id="1" min="0.46666667" max="0.46666667" animation_length="1.5000001"/>
     <elyos_female weapon="1hand" id="1" min="0.9" max="0.9" animation_length="1.5000001"/>
     <elyos_female weapon="mace" id="1" min="0.9" max="0.9" animation_length="1.5000001"/>
@@ -4008,17 +4114,17 @@
     <asmodian_female weapon="mace" id="1" min="0.23333333" max="0.23333333" animation_length="0.6666667"/>
     <asmodian_female weapon="staff" id="1" min="0.23333333" max="0.23333333" animation_length="0.6666667"/>
     <asmodian_female weapon="2weapon" id="1" min="0.23333333" max="0.23333333" animation_length="0.6666667"/>
-    <asmodian_female weapon="bow" id="1" min="0.0" max="0.0" animation_length="0.6666667"/>
+    <asmodian_female weapon="bow" id="1" min="0.6666667" max="0.6666667" animation_length="0.6666667"/>
     <asmodian_male weapon="2hand" id="1" min="0.23333333" max="0.23333333" animation_length="0.6666667"/>
     <asmodian_male weapon="dagger" id="1" min="0.23333333" max="0.23333333" animation_length="0.6666667"/>
     <asmodian_male weapon="polearm" id="1" min="0.23333333" max="0.23333333" animation_length="0.6666667"/>
     <asmodian_male weapon="1hand" id="1" min="0.23333333" max="0.23333333" animation_length="0.6666667"/>
     <asmodian_male weapon="mace" id="1" min="0.23333333" max="0.23333333" animation_length="0.6666667"/>
-    <asmodian_male weapon="book" id="1" min="0.0" max="0.0" animation_length="0.6666667"/>
+    <asmodian_male weapon="book" id="1" min="0.6666667" max="0.6666667" animation_length="0.6666667"/>
     <asmodian_male weapon="staff" id="1" min="0.23333333" max="0.23333333" animation_length="0.6666667"/>
     <asmodian_male weapon="2weapon" id="1" min="0.23333333" max="0.23333333" animation_length="0.6666667"/>
-    <asmodian_male weapon="bow" id="1" min="0.0" max="0.0" animation_length="0.6666667"/>
-    <asmodian_male weapon="orb" id="1" min="0.0" max="0.0" animation_length="0.6666667"/>
+    <asmodian_male weapon="bow" id="1" min="0.6666667" max="0.6666667" animation_length="0.6666667"/>
+    <asmodian_male weapon="orb" id="1" min="0.6666667" max="0.6666667" animation_length="0.6666667"/>
     <elyos_female weapon="2hand" id="1" min="0.23333333" max="0.23333333" animation_length="0.6666667"/>
     <elyos_female weapon="dagger" id="1" min="0.23333333" max="0.23333333" animation_length="0.6666667"/>
     <elyos_female weapon="polearm" id="1" min="0.23333333" max="0.23333333" animation_length="0.6666667"/>
@@ -4026,17 +4132,17 @@
     <elyos_female weapon="mace" id="1" min="0.23333333" max="0.23333333" animation_length="0.6666667"/>
     <elyos_female weapon="staff" id="1" min="0.23333333" max="0.23333333" animation_length="0.6666667"/>
     <elyos_female weapon="2weapon" id="1" min="0.23333333" max="0.23333333" animation_length="0.6666667"/>
-    <elyos_female weapon="bow" id="1" min="0.0" max="0.0" animation_length="0.6666667"/>
+    <elyos_female weapon="bow" id="1" min="0.6666667" max="0.6666667" animation_length="0.6666667"/>
     <elyos_male weapon="2hand" id="1" min="0.23333333" max="0.23333333" animation_length="0.6666667"/>
     <elyos_male weapon="dagger" id="1" min="0.23333333" max="0.23333333" animation_length="0.6666667"/>
     <elyos_male weapon="polearm" id="1" min="0.23333333" max="0.23333333" animation_length="0.6666667"/>
     <elyos_male weapon="1hand" id="1" min="0.23333333" max="0.23333333" animation_length="0.6666667"/>
     <elyos_male weapon="mace" id="1" min="0.23333333" max="0.23333333" animation_length="0.6666667"/>
-    <elyos_male weapon="book" id="1" min="0.0" max="0.0" animation_length="0.6666667"/>
+    <elyos_male weapon="book" id="1" min="0.6666667" max="0.6666667" animation_length="0.6666667"/>
     <elyos_male weapon="staff" id="1" min="0.23333333" max="0.23333333" animation_length="0.6666667"/>
     <elyos_male weapon="2weapon" id="1" min="0.23333333" max="0.23333333" animation_length="0.6666667"/>
-    <elyos_male weapon="bow" id="1" min="0.0" max="0.0" animation_length="0.6666667"/>
-    <elyos_male weapon="orb" id="1" min="0.0" max="0.0" animation_length="0.6666667"/>
+    <elyos_male weapon="bow" id="1" min="0.6666667" max="0.6666667" animation_length="0.6666667"/>
+    <elyos_male weapon="orb" id="1" min="0.6666667" max="0.6666667" animation_length="0.6666667"/>
   </motion_time>
   <motion_time name="frontdash_flyingslash">
     <asmodian_female weapon="2hand" id="1" min="0.4666" max="0.4666" animation_length="1.4666665"/>
@@ -5984,7 +6090,7 @@
     <asmodian_male weapon="book" id="1" min="0.8666667" max="0.8666667" animation_length="1.6666667"/>
     <asmodian_male weapon="cannon" id="1" min="0.83" max="0.83" animation_length="1.6666667"/>
     <asmodian_male weapon="harp" id="1" min="0.8666667" max="0.8666667" animation_length="1.6666667"/>
-    <asmodian_male weapon="staff" id="1" min="0.0" max="0.0" animation_length="1.6666667"/>
+    <asmodian_male weapon="staff" id="1" min="1.6666667" max="1.6666667" animation_length="1.6666667"/>
     <asmodian_male weapon="2weapon" id="1" min="0.8666667" max="0.8666667" animation_length="1.6666667"/>
     <asmodian_male weapon="bow" id="1" min="0.8666667" max="0.8666667" animation_length="1.6666667"/>
     <asmodian_male weapon="2hand" id="1" min="0.8333333" max="0.8333333" animation_length="1.6666667"/>
@@ -6016,7 +6122,7 @@
     <elyos_male weapon="book" id="1" min="0.8666667" max="0.8666667" animation_length="1.6666667"/>
     <elyos_male weapon="cannon" id="1" min="0.83" max="0.83" animation_length="1.6666667"/>
     <elyos_male weapon="harp" id="1" min="0.8666667" max="0.8666667" animation_length="1.6666667"/>
-    <elyos_male weapon="staff" id="1" min="0.0" max="0.0" animation_length="1.6666667"/>
+    <elyos_male weapon="staff" id="1" min="1.6666667" max="1.6666667" animation_length="1.6666667"/>
     <elyos_male weapon="2weapon" id="1" min="0.8666667" max="0.8666667" animation_length="1.6666667"/>
     <elyos_male weapon="bow" id="1" min="0.8666667" max="0.8666667" animation_length="1.6666667"/>
     <elyos_male weapon="2hand" id="1" min="0.8333333" max="0.8333333" animation_length="1.6666667"/>

@@ -51,7 +51,7 @@ public class TwinProtectorAI extends AggressiveNoLootNpcAI implements HpPhases.P
 	}
 
 	private void spawnAdds(int npcId, int hpThreshold) {
-		int count = getLifeStats().getHpPercentage() < hpThreshold ? 3 : 1;
+		int count = getLifeStats().getHpPercentage() <= hpThreshold ? 3 : 1;
 		getAggroList().streamValidTargets(20)
 			.limit(count)
 			.forEach(target -> adds.add((Npc) spawn(npcId, target.getX(), target.getY(), target.getZ(), (byte) 0)));

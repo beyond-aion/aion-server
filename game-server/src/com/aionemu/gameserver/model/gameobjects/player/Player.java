@@ -142,6 +142,7 @@ public class Player extends Creature {
 	private final Cooldowns craftCooldowns;
 	private final Cooldowns houseObjectCooldowns;
 	private long nextSkillUse;
+	private long nextAttackUse;
 	private SkillTemplate lastSkill;
 	private long hitTimeBoostExpireTimeMillis;
 	private float hitTimeBoostCastSpeed;
@@ -1145,6 +1146,17 @@ public class Player extends Creature {
 
 	public void setNextSkillUse(long nextSkillUse) {
 		this.nextSkillUse = nextSkillUse;
+	}
+
+	/**
+	 * @return The time until which the animation of the last cast keeps the client from sending an auto attack.
+	 */
+	public long getNextAttackUse() {
+		return nextAttackUse;
+	}
+
+	public void setNextAttackUse(long nextAttackUse) {
+		this.nextAttackUse = nextAttackUse;
 	}
 
 	@Override

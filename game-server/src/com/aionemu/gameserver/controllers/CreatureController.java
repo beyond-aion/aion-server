@@ -468,9 +468,17 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	public boolean useChargeSkill(Skill startSkill, long chargeTimeMillis) {
 		SkillChargeCondition chargeCondition = startSkill.getSkillTemplate().getSkillChargeCondition();
 		ChargeSkillEntry chargeSkill = chargeCondition == null ? null : DataManager.SKILL_CHARGE_DATA.getChargedSkillEntry(chargeCondition.getValue());
-		if (chargeSkill == null || chargeTimeMillis < chargeSkill.getMinTime() * startSkill.getCastSpeedForAnimationBoostAndChargeSkills()) {
+		if (chargeSkill == null) {
 			if (getOwner() instanceof Player player)
-				AuditLogger.log(player, "tried to use charge skill " + startSkill.getSkillId() + " after " + chargeTimeMillis);
+				AuditLogger.log(player, "used charge skill " + startSkill.getSkillId() + ", which has no charge data");
+			return false;
+		}
+		int minChargeMillis = Math.round(chargeSkill.getMinTime() * startSkill.getCastSpeedForAnimationBoostAndChargeSkills());
+		if (chargeTimeMillis < minChargeMillis) {
+			if (getOwner() instanceof Player player)
+				AuditLogger.log(player, "released charge skill " + startSkill.getSkillId() + " after " + chargeTimeMillis + " ms, needs "
+					+ minChargeMillis + " ms (" + chargeSkill.getMinTime() + " ms at cast speed " + startSkill.getCastSpeedForAnimationBoostAndChargeSkills()
+					+ ")");
 			return false;
 		}
 		try {

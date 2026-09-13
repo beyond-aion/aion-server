@@ -421,7 +421,9 @@ public class Skill {
 			return;
 
 		float animationTimeUntilFirstHit = DataManager.MOTION_DATA.calculateAnimationTimeUntilFirstHit(player, this);
+		float maxAnimationTime = DataManager.MOTION_DATA.calculateMaxAnimationTime(player, this);
 		int toleranceMillis = 1;
+		int loggedDistance = -1, loggedFlightMillis = 0;
 		if (skillTemplate.getAmmoSpeed() != 0) {
 			float distance = (float) PositionUtil.getDistance(player, firstTarget);
 			if (player.getMoveController().isInMove() || firstTarget.getMoveController().isInMove()) // subtract the run distance until ammo is actually fired
@@ -430,17 +432,31 @@ public class Skill {
 			float ammoTime = Math.max(0, distance / skillTemplate.getAmmoSpeed() * 1000);
 			toleranceMillis += Math.max(0, (int) Math.ceil(distanceTolerance / skillTemplate.getAmmoSpeed() * 1000));
 			animationTimeUntilFirstHit += ammoTime;
+			if (maxAnimationTime > 0)
+				maxAnimationTime += ammoTime;
+			loggedDistance = Math.round(distance);
+			loggedFlightMillis = Math.round(ammoTime);
 		}
+		String context = " (motion: " + (skillTemplate.getMotion() == null ? "none" : skillTemplate.getMotion().getName())
+			+ (loggedDistance < 0 ? "" : ", target at " + loggedDistance + "m, flight: " + loggedFlightMillis + " ms") + ")";
 
 		int motionDelay = skillTemplate.getMotion() == null ? 0 : skillTemplate.getMotion().getDelay();
 		int serverHitTime = motionDelay + Math.round(animationTimeUntilFirstHit);
 		if (serverHitTime > clientHitTime) {
 			hitTime = serverHitTime;
-			if (isSuspiciousClientHitTime(clientHitTime, serverHitTime, toleranceMillis, player)) {
+			if (isSuspiciousClientHitTime(clientHitTime, serverHitTime, toleranceMillis)) {
 				List<String> uncertainties = collectUncertaintyFactorsForHitTime(player, toleranceMillis);
 				String uncertaintyFactors = uncertainties.isEmpty() ? "" : " Uncertainty factors: " + String.join(", ", uncertainties);
-				AuditLogger.log(player,
-					"modified hit time for skill %d (client < server: %d/%d).%s".formatted(getSkillId(), clientHitTime, serverHitTime, uncertaintyFactors));
+				AuditLogger.log(player, "hit time %d for skill %d is earlier than its animation can hit, raised to %d%s.%s".formatted(clientHitTime,
+					getSkillId(), serverHitTime, context, uncertaintyFactors));
+			}
+		} else if (maxAnimationTime > 0) {
+			// an effect cannot land after the animation is over, so a hit time above it delays damage or crowd control at will
+			int maxHitTime = motionDelay + Math.round(maxAnimationTime) + toleranceMillis;
+			if (clientHitTime > maxHitTime) {
+				hitTime = maxHitTime;
+				AuditLogger.log(player, "hit time %d for skill %d lands past the end of its animation, capped at %d%s".formatted(clientHitTime,
+					getSkillId(), maxHitTime, context));
 			}
 		}
 	}
@@ -456,13 +472,11 @@ public class Skill {
 		return distanceTolerance;
 	}
 
-	private boolean isSuspiciousClientHitTime(int clientHitTime, int serverHitTime, int tolerance, Player player) {
+	private boolean isSuspiciousClientHitTime(int clientHitTime, int serverHitTime, int tolerance) {
 		if (clientHitTime >= serverHitTime - tolerance)
 			return false;
 		if (clientHitTime == 0 && (itemTemplate != null || skillTemplate.getMotion() != null && skillTemplate.getMotion().isInstantSkill()))
 			return false; // effects apply immediately (damage too, though visually delayed)
-		if (clientHitTime == 0 && player.isInRobotMode() && (player.getLastSkill().isMultiCast() || DataManager.SKILL_CHARGE_DATA.isChargeSkill(player.getLastSkill())))
-			return false; // AT sends no hitTime when casting a non-instant skill within the animation time of a previous multiCast or charge skill, like 2640
 		return true;
 	}
 
@@ -472,8 +486,6 @@ public class Skill {
 			uncertainties.add("cast speed");
 		if (skillTemplate.getAmmoSpeed() != 0)
 			uncertainties.add("movement (calculated tolerance: " + toleranceMillis + " ms)");
-		if (clientHitTime == 0 && player.isInRobotMode()) // TODO remove once isSuspiciousClientHitTime() identifies all false positives 
-			uncertainties.add("Aethertech being weird 🤷‍♂️ (previous skill: " + player.getLastSkill().getSkillId() + ")");
 		return uncertainties;
 	}
 
@@ -653,19 +665,21 @@ public class Skill {
 			playerEffector.getController().enterCombat(true);
 
 		boolean isItemSkill = skillMethod == SkillMethod.ITEM;
+		boolean sendsCastSpellResult = skillMethod == SkillMethod.PENALTY || skillMethod == SkillMethod.CAST || isItemSkill;
+		// their effects land before the hit time is ever used, so it only tells the client when to display the hit
+		boolean appliesEffectsImmediately = isInstantSkill() || isItemSkill;
 		boolean sentCastSpellResultPacket = false;
 		// the client must learn the hit time before any HP change reaches it, or it updates the status bar before displaying the hit
-		if (isItemSkill)
+		if (sendsCastSpellResult && appliesEffectsImmediately)
 			sentCastSpellResultPacket = sendCastSpellEnd(dashStatus, effects);
 
-		// item skills apply their effects immediately, hitTime only tells the client when to display the hit
-		if (isInstantSkill() || isItemSkill)
+		if (appliesEffectsImmediately)
 			applyEffect(effects);
 		else
 			ThreadPoolManager.getInstance().schedule(() -> applyEffect(effects), hitTime);
 
-		if (skillMethod == SkillMethod.PENALTY || skillMethod == SkillMethod.CAST || isItemSkill) {
-			if (!isItemSkill)
+		if (sendsCastSpellResult) {
+			if (!appliesEffectsImmediately)
 				sentCastSpellResultPacket = sendCastSpellEnd(dashStatus, effects);
 			if (sentCastSpellResultPacket && skillMethod != SkillMethod.PENALTY && effector instanceof Player player) {
 				// animation times must be calculated after applyEffect of instant skills in order to honor speed buffs from this skill
@@ -677,8 +691,11 @@ public class Skill {
 				} else {
 					player.setHitTimeBoost(0, 0);
 				}
-				if (animation != null) // Math.max because nextSkillUse set from startCast() must not be undercut
+				if (animation != null) { // Math.max because nextSkillUse set from startCast() must not be undercut
+					// the client sends the next skill after the last hit point of the animation, but releases the auto attack already on the first one
 					player.setNextSkillUse(Math.max(player.getNextSkillUse(), nowMillis + animation.lastHitMillis()));
+					player.setNextAttackUse(Math.max(player.getNextAttackUse(), nowMillis + animation.firstHitMillis()));
+				}
 			}
 		}
 
