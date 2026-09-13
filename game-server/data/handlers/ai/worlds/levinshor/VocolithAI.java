@@ -41,7 +41,7 @@ public class VocolithAI extends GeneralNpcAI {
 			ItemUseObserver observer = new ItemUseObserver(player) {
 
 				@Override
-				public void abort() {
+				protected void onAbort() {
 					player.getController().cancelTask(TaskId.ACTION_ITEM_NPC);
 					PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.END_QUESTLOOT, 0, getObjectId()), true);
 					PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), getObjectId(), 0, 2));

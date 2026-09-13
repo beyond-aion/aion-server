@@ -60,7 +60,7 @@ public class ExpExtractAction extends AbstractItemAction {
 
 		ItemUseObserver observer = new ItemUseObserver(player) {
 			@Override
-			public void abort() {
+			protected void onAbort() {
 				player.getController().cancelTask(TaskId.ITEM_USE);
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_CANCELED(parentItem.getL10n()));
 				PacketSendUtility.sendPacket(player,

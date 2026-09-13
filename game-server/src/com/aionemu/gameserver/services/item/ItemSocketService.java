@@ -178,7 +178,7 @@ public class ItemSocketService {
 
 		ItemUseObserver observer = new ItemUseObserver(player) {
 			@Override
-			public void abort() {
+			protected void onAbort() {
 				player.getController().cancelTask(TaskId.ITEM_USE);
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GIVE_PROC_CANCEL(weapon.getL10n()));
 				PacketSendUtility.broadcastPacketAndReceive(player,

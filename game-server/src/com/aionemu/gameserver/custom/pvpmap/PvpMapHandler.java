@@ -232,7 +232,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 		return new ItemUseObserver(p) {
 
 			@Override
-			public void abort() {
+			protected void onAbort() {
 				BindPointTeleportService.cancelTeleport(p, 1);
 			}
 		};

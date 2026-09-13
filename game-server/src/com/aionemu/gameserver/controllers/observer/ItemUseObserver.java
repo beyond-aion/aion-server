@@ -26,76 +26,76 @@ public abstract class ItemUseObserver extends ActionObserver {
 
 	@Override
 	public final void attack(Creature creature, int skillId) {
-		tryAbort();
+		abort();
 	}
 
 	@Override
 	public final void attacked(Creature creature, int skillId) {
-		tryAbort();
+		abort();
 	}
 
 	@Override
 	public final void died(Creature creature) {
-		tryAbort();
+		abort();
 	}
 
 	@Override
 	public final void dotattacked(Creature creature, Effect dotEffect) {
-		tryAbort();
+		abort();
 	}
 
 	@Override
 	public final void equip(Item item, Player owner) {
-		tryAbort();
+		abort();
 	}
 
 	@Override
 	public final void unequip(Item item, Player owner) {
-		tryAbort();
+		abort();
 	}
 
 	@Override
 	public final void moved() {
-		tryAbort();
+		abort();
 	}
 
 	@Override
 	public final void startSkillCast(Skill skill) {
-		tryAbort();
+		abort();
 	}
 
 	@Override
 	public final void sit() {
-		tryAbort();
+		abort();
 	}
 
 	@Override
 	public void endSkillCast(Skill skill) {
-		tryAbort();
+		abort();
 	}
 
 	@Override
 	public void itemused(Item item) {
-		tryAbort();
+		abort();
 	}
 
 	@Override
 	public void abnormalsetted(AbnormalState state) {
 		if ((state.getId() & AbnormalState.CANCEL_ITEM_USE.getId()) != 0)
-			tryAbort();
+			abort();
 	}
 
 	@Override
 	public void boostSkillCost(Skill skill) {
-		tryAbort();
+		abort();
 	}
 
-	protected final void tryAbort() {
+	public final void abort() {
 		if (aborted.compareAndSet(false, true)) {
 			observed.getObserveController().removeObserver(this);
-			abort();
+			onAbort();
 		}
 	}
 
-	public abstract void abort();
+	protected abstract void onAbort();
 }

@@ -94,7 +94,7 @@ public class EnchantItemAction extends AbstractItemAction {
 
 		ItemUseObserver observer = new ItemUseObserver(player) {
 			@Override
-			public void abort() {
+			protected void onAbort() {
 				player.getController().cancelTask(TaskId.ITEM_USE);
 				PacketSendUtility.sendPacket(player, isEnchantmentStone ? SM_SYSTEM_MESSAGE.STR_ENCHANT_ITEM_CANCELED(targetItem.getL10n())
 					: SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_OPTION_CANCELED(targetItem.getL10n()));

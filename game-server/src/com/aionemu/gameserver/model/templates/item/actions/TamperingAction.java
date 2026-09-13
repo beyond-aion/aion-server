@@ -49,7 +49,7 @@ public class TamperingAction extends AbstractItemAction {
 		ItemUseObserver observer = new ItemUseObserver(player) {
 
 			@Override
-			public void abort() {
+			protected void onAbort() {
 				player.getController().cancelTask(TaskId.ITEM_USE);
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ITEM_AUTHORIZE_CANCEL(targetItem.getL10n()));
 				PacketSendUtility.broadcastPacketAndReceive(player,

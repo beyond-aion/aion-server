@@ -44,7 +44,7 @@ public class ShugoMorpher extends GeneralNpcAI {
 			ItemUseObserver obs = new ItemUseObserver(player) {
 
 				@Override
-				public void abort() {
+				protected void onAbort() {
 					started.set(false);
 					player.getController().cancelTask(TaskId.ACTION_ITEM_NPC);
 					PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.END_QUESTLOOT, 0, getObjectId()), true);

@@ -66,11 +66,11 @@ public class Decompose extends PlayerCommand {
 					@Override
 					public void itemused(Item item) {
 						if (item.getItemId() != itemId)
-							tryAbort();
+							abort();
 					}
 
 					@Override
-					public void abort() {
+					protected void onAbort() {
 						cancelTask(player, observer, "Decomposing aborted: Processed " + Math.max(0, totalCount - 1) + "x " + ChatUtil.item(itemId) + ".");
 					}
 				};
