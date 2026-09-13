@@ -1,40 +1,31 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
-import java.util.Collection;
-
-import com.aionemu.gameserver.model.templates.item.ResultedItem;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
+ * Answers the selection the client made in the decomposable window. It carries no items, only whether the chosen one was handed out.
+ *
  * @author xTz
  */
 public class SM_SECONDARY_SHOW_DECOMPOSABLE extends AionServerPacket {
 
-	private Collection<ResultedItem> itemsCollections;
-	private int objectId;
+	public static final int GRANTED = 0;
+	public static final int NOT_GRANTED = 1;
 
-	public SM_SECONDARY_SHOW_DECOMPOSABLE(int objectId, Collection<ResultedItem> itemsCollections) {
-		this.itemsCollections = itemsCollections;
+	private final int objectId;
+	private final int result;
+
+	public SM_SECONDARY_SHOW_DECOMPOSABLE(int objectId, int result) {
 		this.objectId = objectId;
+		this.result = result;
 	}
 
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeD(objectId);
-		writeD(0);
-		writeC(itemsCollections.size());
-		int index = 0;
-		for (ResultedItem item : itemsCollections) {
-			writeC(index);
-			writeD(item.getItemId());
-			writeD(item.getMinCount());
-			writeC(0);
-			writeC(0);
-			writeC(0);
-			writeC(1);
-			index++;
-		}
+		writeD(0); // the object id is a 64 bit field, ours never fill the upper half
+		writeC(result);
 	}
 
 }
