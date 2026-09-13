@@ -21,6 +21,8 @@ public enum ActionState implements L10n {
 	FLY_LOOTING(1400063), // looting
 	CURRENT_STATUS(1400064), // in your current status
 	COMBAT(1400079), // in combat
+	MOVING(1400080), // moving
+	USING_SKILL(1400081), // using a skill
 	GLIDING(1400082), // gliding
 	POLYMORPH(1401212); // Transformation Mode
 

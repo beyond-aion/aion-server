@@ -1,7 +1,8 @@
 package com.aionemu.gameserver.model.items;
 
+import static com.aionemu.gameserver.controllers.observer.ObserverType.*;
+
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
-import com.aionemu.gameserver.controllers.observer.ObserverType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
@@ -26,7 +27,7 @@ public class ChargeInfo extends ActionObserver {
 	private int playerId;
 
 	public ChargeInfo(int chargePoints, Item item) {
-		super(ObserverType.DOT_ATTACK_DEFEND);
+		super(DOT_ATTACKED, ATTACKED, ATTACK);
 		this.chargePoints = chargePoints;
 		this.item = item;
 		if (item.getImprovement() != null) {

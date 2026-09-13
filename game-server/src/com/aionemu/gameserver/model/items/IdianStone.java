@@ -1,7 +1,8 @@
 package com.aionemu.gameserver.model.items;
 
+import static com.aionemu.gameserver.controllers.observer.ObserverType.*;
+
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
-import com.aionemu.gameserver.controllers.observer.ObserverType;
 import com.aionemu.gameserver.dao.ItemStoneListDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -38,7 +39,7 @@ public class IdianStone extends ItemStone {
 
 	public void onEquip(final Player player, long slot) {
 		if (polishCharge > 0 && (slot & ItemSlot.MAIN_HAND.getSlotIdMask()) != 0) {
-			actionListener = new ActionObserver(ObserverType.DOT_ATTACK_DEFEND) {
+			actionListener = new ActionObserver(DOT_ATTACKED, ATTACKED, ATTACK) {
 
 				@Override
 				public void dotattacked(Creature creature, Effect dotEffect) {

@@ -129,6 +129,7 @@ public class DropService {
 
 		PacketSendUtility.sendPacket(player, new SM_LOOT_ITEMLIST(dropNpc, dropItems, player));
 		PacketSendUtility.sendPacket(player, new SM_LOOT_STATUS(npcObjectId, Status.OPEN_DROP_LIST));
+		player.getController().cancelUseItem();
 		player.unsetState(CreatureState.ACTIVE);
 		player.setState(CreatureState.LOOTING);
 		player.setLootingNpcOid(npcObjectId);

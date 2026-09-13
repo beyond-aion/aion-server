@@ -377,6 +377,7 @@ CREATE TABLE `inventory` (
   `is_amplified` boolean NOT NULL DEFAULT '0',
   `buff_skill` int NOT NULL DEFAULT '0',
   `rnd_plume_bonus` smallint NOT NULL DEFAULT '0',
+  `rank_limit_expire_time` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`item_unique_id`),
   KEY `item_location` (`item_location`),
   KEY `index3` (`item_owner`,`item_location`,`is_equipped`)

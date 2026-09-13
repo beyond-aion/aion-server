@@ -31,7 +31,7 @@ public abstract class AbstractMaterialSkillActor extends AbstractCollisionObserv
 	protected volatile boolean isTouched = false;
 
 	public AbstractMaterialSkillActor(Creature creature, Spatial geometry, byte intentions, CheckType checkType, TaskId taskId, List<MaterialSkill> skills) {
-		super(creature, geometry, intentions, checkType);
+		super(creature, geometry, intentions, checkType, ObserverType.DEATH);
 		this.taskId = taskId;
 		this.skills = skills;
 	}
