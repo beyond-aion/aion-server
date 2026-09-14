@@ -148,9 +148,11 @@ public class DecomposeAction extends AbstractItemAction {
 		for (DecomposableSet set : info.getSets()) {
 			if (!set.isApplicableTo(player))
 				continue;
-			for (DecomposedItem item : set.getItems()) {
-				if (DataManager.ITEM_DATA.getItemTemplate(item.getItemId()).getExtraInventoryId() > 0)
-					return true;
+			for (DecomposedReward reward : set.getRewards()) {
+				for (DecomposedItem item : reward.getItems()) {
+					if (DataManager.ITEM_DATA.getItemTemplate(item.getItemId()).getExtraInventoryId() > 0)
+						return true;
+				}
 			}
 		}
 		return false;

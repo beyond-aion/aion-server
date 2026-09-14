@@ -357,7 +357,7 @@ public class StaticData {
 		log.info("Loaded " + guideData.size() + " guide entries");
 		log.info("Loaded " + roadData.size() + " road entries");
 		log.info("Loaded " + instanceCooltimeData.size() + " instance cooltime entries");
-		log.info("Loaded " + decomposableItemsData.size() + " decomposable items entries");
+		log.info("Loaded " + decomposableItemsData.size() + " decomposable items entries (" + decomposableItemsData.overrideCount() + " overridden)");
 		log.info("Loaded " + aiData.size() + " ai templates");
 		log.info("Loaded " + flyPath.size() + " flypath templates");
 		log.info("Loaded " + windstreamsData.size() + " windstream entries");

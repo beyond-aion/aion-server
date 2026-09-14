@@ -28,15 +28,22 @@ public class DecomposableSet {
 	@XmlList
 	@XmlAttribute(name = "player_classes")
 	private List<PlayerClass> playerClasses;
-	@XmlElement(name = "item")
-	private List<DecomposedItem> items;
+	@XmlElements({ @XmlElement(name = "item", type = DecomposedItem.class), @XmlElement(name = "bundle", type = DecomposedBundle.class) })
+	private List<DecomposedReward> rewards;
 
 	public float getChance() {
 		return chance;
 	}
 
+	public List<DecomposedReward> getRewards() {
+		return rewards != null ? rewards : Collections.emptyList();
+	}
+
+	/**
+	 * @return The alternatives as single items, which is all a selection window can list.
+	 */
 	public List<DecomposedItem> getItems() {
-		return items != null ? items : Collections.emptyList();
+		return getRewards().stream().map(DecomposedItem.class::cast).toList();
 	}
 
 	public boolean isApplicableTo(Player player) {
@@ -51,13 +58,13 @@ public class DecomposableSet {
 	/**
 	 * @return The one alternative this branch yields, or null if the alternatives don't cover the whole roll.
 	 */
-	public DecomposedItem selectItem() {
+	public DecomposedReward selectReward() {
 		int roll = Rnd.get(1, 10000);
 		int sum = 0;
-		for (DecomposedItem item : getItems()) {
-			sum += Math.round(item.getChance() * 100);
+		for (DecomposedReward reward : getRewards()) {
+			sum += Math.round(reward.getChance() * 100);
 			if (roll <= sum)
-				return item;
+				return reward;
 		}
 		return null;
 	}

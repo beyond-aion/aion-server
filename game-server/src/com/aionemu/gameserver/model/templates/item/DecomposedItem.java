@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.model.templates.item;
 
+import java.util.List;
+
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
@@ -13,7 +15,7 @@ import com.aionemu.gameserver.dataholders.loadingutils.StaticDataListener;
  * One reward alternative of a {@link DecomposableSet}, weighted against its siblings.
  */
 @XmlType(name = "DecomposedItem")
-public class DecomposedItem {
+public class DecomposedItem implements DecomposedReward {
 
 	@XmlAttribute(name = "id")
 	private int itemId;
@@ -41,7 +43,13 @@ public class DecomposedItem {
 		return count;
 	}
 
+	@Override
 	public float getChance() {
 		return chance;
+	}
+
+	@Override
+	public List<DecomposedItem> getItems() {
+		return List.of(this);
 	}
 }
