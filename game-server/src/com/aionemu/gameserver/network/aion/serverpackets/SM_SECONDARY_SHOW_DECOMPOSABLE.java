@@ -10,6 +10,11 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
  */
 public class SM_SECONDARY_SHOW_DECOMPOSABLE extends AionServerPacket {
 
+	/*
+	 * The client closes the window on both results. Retail never sends NOT_GRANTED, its picks always land in the cube, even past its size.
+	 * We send it for a full cube, so a flood of picks can't overfill it, and for a box that is already gone.
+	 * Result 2 keeps the window open with "can't acquire the item right now" and answers a per item drop quota, which we don't have.
+	 */
 	public static final int GRANTED = 0;
 	public static final int NOT_GRANTED = 1;
 
