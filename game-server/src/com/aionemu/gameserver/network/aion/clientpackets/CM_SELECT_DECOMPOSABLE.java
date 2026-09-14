@@ -61,16 +61,16 @@ public class CM_SELECT_DECOMPOSABLE extends AionClientPacket {
 			return;
 		}
 		PacketSendUtility.broadcastPacketAndReceive(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), objectId, item.getItemId()));
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_USE_ITEM(item.getL10n()));
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_UNCOMPRESS_COMPRESSED_ITEM_SUCCEEDED(item.getL10n()));
 		if (!player.getInventory().decreaseByObjectId(objectId, 1)) {
 			PacketSendUtility.sendPacket(player, new SM_SECONDARY_SHOW_DECOMPOSABLE(objectId, SM_SECONDARY_SHOW_DECOMPOSABLE.NOT_GRANTED));
 			return;
 		}
-		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_USE_ITEM(item.getL10n()));
-		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_UNCOMPRESS_COMPRESSED_ITEM_SUCCEEDED(item.getL10n()));
+		PacketSendUtility.sendPacket(player, new SM_SECONDARY_SHOW_DECOMPOSABLE(objectId, SM_SECONDARY_SHOW_DECOMPOSABLE.GRANTED));
 		ItemService.addItem(player, selectedItem.getItemId(), selectedItem.getCount(), true,
 			new ItemUpdatePredicate(ItemAddType.DECOMPOSABLE, ItemUpdateType.INC_ITEM_COLLECT));
 		player.startCooldown(item);
-		PacketSendUtility.sendPacket(player, new SM_SECONDARY_SHOW_DECOMPOSABLE(objectId, SM_SECONDARY_SHOW_DECOMPOSABLE.GRANTED));
 	}
 
 	private void refuse(Player player, Item item) {
