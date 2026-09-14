@@ -24,13 +24,17 @@ public class DecomposableItemInfo {
 	private boolean isSelectable;
 	@XmlAttribute(name = "only_one")
 	private boolean isOnlyOne;
+	@XmlAttribute(name = "override")
+	private boolean isOverride;
 	@XmlElement(name = "set")
 	private List<DecomposableSet> sets;
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		if (sets == null)
 			sets = Collections.emptyList();
-		else if (isOnlyOne) // the likeliest branch gets the first roll, so the rare ones are only reached when it misses
+		if (isSelectable && sets.stream().anyMatch(set -> set.getRewards().stream().anyMatch(reward -> reward instanceof DecomposedBundle)))
+			throw new IllegalArgumentException("Selectable decomposable item " + itemId + " cannot offer bundles");
+		if (isOnlyOne) // the likeliest branch gets the first roll, so the rare ones are only reached when it misses
 			sets.sort(Comparator.comparing(DecomposableSet::getChance).reversed());
 	}
 
@@ -42,13 +46,17 @@ public class DecomposableItemInfo {
 		return isSelectable;
 	}
 
+	public boolean isOverride() {
+		return isOverride;
+	}
+
 	public List<DecomposableSet> getSets() {
 		return sets;
 	}
 
 	public DecomposableSet getSelectableSet(Player player) {
 		for (DecomposableSet set : sets) {
-			if (set.isApplicableTo(player) && !set.getItems().isEmpty())
+			if (set.isApplicableTo(player) && !set.getRewards().isEmpty())
 				return set;
 		}
 		return null;
@@ -62,9 +70,9 @@ public class DecomposableItemInfo {
 		for (DecomposableSet set : sets) {
 			if (!set.isApplicableTo(player) || !set.roll())
 				continue;
-			DecomposedItem item = set.selectItem();
-			if (item != null)
-				rewards.add(item);
+			DecomposedReward reward = set.selectReward();
+			if (reward != null)
+				rewards.addAll(reward.getItems());
 			if (isOnlyOne)
 				break;
 		}
