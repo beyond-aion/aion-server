@@ -18,16 +18,18 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public abstract class CreatureLifeStats<T extends Creature> {
 
 	private int currentHp;
+	private int cachedMaxHp;
 	private int currentMp;
+	private int cachedMaxMp;
 	private int killingBlow; // for long animation skills that will kill - last damage
 	protected final T owner;
 	protected final Object restoreLock = new Object();
 	protected Future<?> lifeRestoreTask;
 
-	public CreatureLifeStats(T owner, int currentHp, int currentMp) {
+	public CreatureLifeStats(T owner) {
 		this.owner = owner;
-		this.currentHp = currentHp;
-		this.currentMp = currentMp;
+		currentHp = cachedMaxHp = getMaxHp();
+		currentMp = cachedMaxMp = getMaxMp();
 	}
 
 	public T getOwner() {
@@ -133,7 +135,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 				return 0;
 
 			previousMp = currentMp;
-			currentMp = newMp = Math.min(currentMp, Math.max(currentMp - value, 0));
+			currentMp = newMp = Math.clamp(currentMp - value, 0, currentMp);
 		}
 
 		if (newMp != previousMp || skillId != 0)
@@ -276,8 +278,14 @@ public abstract class CreatureLifeStats<T extends Creature> {
 	 * to game or player level up
 	 */
 	public void synchronizeWithMaxStats() {
-		currentHp = getMaxHp();
-		currentMp = getMaxMp();
+		synchronized (this) {
+			cachedMaxHp = getMaxHp();
+			cachedMaxMp = getMaxMp();
+		}
+		if (currentHp != cachedMaxHp)
+			setCurrentHp(cachedMaxHp);
+		if (currentMp != cachedMaxMp)
+			setCurrentMp(cachedMaxMp);
 	}
 
 	/**
@@ -351,7 +359,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 		int previousHp, newHp;
 		synchronized (this) {
 			previousHp = currentHp;
-			currentHp = newHp = Math.max(0, Math.min(hp, getMaxHp()));
+			currentHp = newHp = Math.clamp(hp, 0, getMaxHp());
 			if (killingBlow != 0 && (newHp == 0 || newHp > killingBlow))
 				unsetIsAboutToDie();
 		}
@@ -368,7 +376,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 			if (isDead())
 				return;
 			previousMp = currentMp;
-			currentMp = newMp = Math.max(0, Math.min(value, getMaxMp()));
+			currentMp = newMp = Math.clamp(value, 0, getMaxMp());
 		}
 		if (newMp != previousMp) {
 			PacketSendUtility.broadcastToSightedPlayers(owner, new SM_ATTACK_STATUS(owner, TYPE.HEAL_MP, 0, 0, LOG.MPHEAL));
@@ -383,4 +391,38 @@ public abstract class CreatureLifeStats<T extends Creature> {
 		setCurrentMp((int) ((long) getMaxMp() * mpPercent / 100));
 	}
 
+	public void onStatsChange(Effect effect) {
+		if (isDead())
+			return;
+		checkMaxHPChanged(effect == null ? owner : effect.getEffector());
+		checkMaxMPChanged();
+	}
+
+	private void checkMaxHPChanged(Creature effector) {
+		int newHp;
+		synchronized (this) {
+			newHp = currentHp;
+			int currentMaxHp = getMaxHp();
+			if (cachedMaxHp != currentMaxHp) {
+				newHp = currentHp >= currentMaxHp ? currentMaxHp : Math.max(1, Math.round((long) currentHp * currentMaxHp / (float) cachedMaxHp));
+				cachedMaxHp = currentMaxHp;
+			}
+		}
+		if (newHp != currentHp)
+			setCurrentHp(newHp, effector);
+	}
+
+	private void checkMaxMPChanged() {
+		int newMp;
+		synchronized (this) {
+			newMp = currentMp;
+			int currentMaxMp = getMaxMp();
+			if (cachedMaxMp != currentMaxMp) {
+				newMp = currentMp >= currentMaxMp ? currentMaxMp : Math.max(1, Math.round((long) currentMp * currentMaxMp / (float) cachedMaxMp));
+				cachedMaxMp = currentMaxMp;
+			}
+		}
+		if (newMp != currentMp)
+			setCurrentMp(newMp);
+	}
 }

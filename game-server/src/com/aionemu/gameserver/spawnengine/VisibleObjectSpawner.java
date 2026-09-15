@@ -248,7 +248,6 @@ public class VisibleObjectSpawner {
 			npcTemplate, creator, time);
 		summon.setKnownlist(new CreatureAwareKnownList(summon));
 		summon.setEffectController(new EffectController(summon));
-		summon.getLifeStats().synchronizeWithMaxStats();
 		summon.setSummonedBySkillId(skillId);
 
 		SpawnEngine.bringIntoWorld(summon, spawn, instanceId);

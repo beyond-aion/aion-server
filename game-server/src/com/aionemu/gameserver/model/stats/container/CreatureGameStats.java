@@ -33,7 +33,7 @@ public abstract class CreatureGameStats<T extends Creature> {
 	private final Map<StatEnum, List<IStatFunction>> stats = new ConcurrentHashMap<>();
 
 	private int attackCounter = 0;
-	private int cachedMaxHp, cachedMaxMp, cachedSpeed;
+	private int cachedSpeed;
 
 	protected CreatureGameStats(T owner) {
 		this.owner = owner;
@@ -363,32 +363,7 @@ public abstract class CreatureGameStats<T extends Creature> {
 	 * This method will be called outside of stats lock.
 	 */
 	protected void onStatsChange(Effect effect) {
-		checkMaxHPChanged(effect);
-		checkMaxMPChanged(effect);
-	}
-
-	private void checkMaxHPChanged(Effect effect) {
-		synchronized (this) {
-			int oldMaxHp = cachedMaxHp != 0 ? cachedMaxHp : getStatsTemplate().getMaxHp();
-			int currentMaxHp = cachedMaxHp = getMaxHp().getCurrent();
-			if (oldMaxHp != currentMaxHp) {
-				float percent = 1f * currentMaxHp / oldMaxHp;
-				int newHp = Math.min(Math.round(owner.getLifeStats().getCurrentHp() * percent), currentMaxHp);
-				Creature effector = effect == null ? owner : effect.getEffector();
-				owner.getLifeStats().setCurrentHp(newHp, effector);
-			}
-		}
-	}
-
-	private void checkMaxMPChanged(Effect effect) {
-		synchronized (this) {
-			int oldMaxMp = cachedMaxMp != 0 ? cachedMaxMp : getStatsTemplate().getMaxMp();
-			int currentMaxMp = cachedMaxMp = getMaxMp().getCurrent();
-			if (oldMaxMp != currentMaxMp) {
-				float percent = 1f * currentMaxMp / oldMaxMp;
-				owner.getLifeStats().setCurrentMp(Math.min(Math.round(owner.getLifeStats().getCurrentMp() * percent), currentMaxMp));
-			}
-		}
+		owner.getLifeStats().onStatsChange(effect);
 	}
 
 	protected static Set<CalculationType> toSet(CalculationType[] calculationTypes) {
