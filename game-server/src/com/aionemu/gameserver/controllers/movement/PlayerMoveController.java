@@ -58,6 +58,17 @@ public class PlayerMoveController extends PlayableMoveController<Player> {
 			lastPositionFromClient = new WorldPosition(owner.getWorldId(), owner.getX(), owner.getY(), owner.getZ(), owner.getHeading());
 		else
 			lastPositionFromClient.setXYZH(owner.getX(), owner.getY(), owner.getZ(), owner.getHeading());
+		updateMovementModifiers();
+	}
+
+	private void updateMovementModifiers() {
+		if ((getMovementMask() & MovementMask.FALL) == MovementMask.FALL) {
+			// While airborne the client doesn't request a direction, the horizontal movement is momentum from before the jump. Turning in mid air must
+			// therefore not change the movement direction (and reset its activation timer). The state is only cleared when neither POSITION nor FALL
+			// is set.
+			return;
+		}
+		updateMovementModifierDirection();
 	}
 
 	public void resetToLastPositionFromClient() {
