@@ -14,6 +14,7 @@ import com.aionemu.gameserver.services.GameTimeService;
 import com.aionemu.gameserver.services.PeriodicSaveService;
 import com.aionemu.gameserver.services.cron.CronService;
 import com.aionemu.gameserver.services.cron.CurrentThreadRunnableRunner;
+import com.aionemu.gameserver.services.player.PlayerLeaveWorldService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
@@ -27,6 +28,8 @@ public class ShutdownHook extends Thread {
 
 	private static final Logger log = LoggerFactory.getLogger(ShutdownHook.class);
 	private static final int UNSET_DELAY = Integer.MIN_VALUE;
+	private static final long PENDING_LEAVES_TIMEOUT_MILLIS = 5000;
+	private static final long FINAL_PACKET_FLUSH_MILLIS = 1000;
 	private final AtomicInteger remainingSeconds = new AtomicInteger(UNSET_DELAY);
 
 	public static ShutdownHook getInstance() {
@@ -47,8 +50,10 @@ public class ShutdownHook extends Thread {
 		remainingSeconds.compareAndSet(UNSET_DELAY, ShutdownConfig.DELAY);
 		for (int announceInterval = 1, expectedSeconds = remainingSeconds.get(); remainingSeconds.get() > 0;) {
 			try {
-				if (World.getInstance().getAllPlayers().isEmpty())
-					break; // fast exit
+				//An empty world does not mean everyone is gone: players vanish from it in the middle of the leave world procedure.
+				if (World.getInstance().getAllPlayers().isEmpty() && !PlayerLeaveWorldService.hasPendingLeaves()) {
+					break; //Fast exit.
+				}
 
 				if (remainingSeconds.get() % announceInterval == 0) {
 					log.info("Runtime is shutting down in " + remainingSeconds + " seconds.");
@@ -69,7 +74,11 @@ public class ShutdownHook extends Thread {
 			}
 		}
 
+		remainingSeconds.set(0);
+		awaitPendingLeaves();
+
 		GameServer.shutdownNioServer(); // shuts down network, disconnects cs/ls/all players and saves them
+		saveRemainingPlayers();
 
 		RunnableStatsManager.dumpClassStats(SortBy.AVG);
 		PeriodicSaveService.getInstance().onShutdown();
@@ -80,6 +89,38 @@ public class ShutdownHook extends Thread {
 
 		// shut down logger factory to flush all pending log messages
 		((LoggerContext) LoggerFactory.getILoggerFactory()).stop();
+	}
+
+	//Awaits leave world procedures which already started, so clients receive their quit response instead of a broken connection.
+	private void awaitPendingLeaves() {
+		long timeoutAt = System.currentTimeMillis() + PENDING_LEAVES_TIMEOUT_MILLIS;
+		while (PlayerLeaveWorldService.hasPendingLeaves() && System.currentTimeMillis() < timeoutAt) {
+			try {
+				sleep(100);
+			} catch (InterruptedException ignored) {
+				Thread.currentThread().interrupt();
+				return;
+			}
+		}
+		if (PlayerLeaveWorldService.hasPendingLeaves())
+			log.warn("Some players are still leaving the world, shutting down anyway.");
+		try {
+			sleep(FINAL_PACKET_FLUSH_MILLIS); //The quit response is sent after the procedure, so let it leave the send queue.
+		} catch (InterruptedException ignored) {
+			Thread.currentThread().interrupt();
+		}
+	}
+
+	//Players without a connection (e.g. with a pending delayed leave after a crash) are not affected by closing the sockets, so they are saved here.
+	private void saveRemainingPlayers() {
+		World.getInstance().forEachPlayer(player -> {
+			try {
+				log.warn("{} was still in the world during shutdown, saving him now.", player);
+				PlayerLeaveWorldService.leaveWorld(player);
+			} catch (Exception e) {
+				log.error("Error saving {} during shutdown.", player, e);
+			}
+		});
 	}
 
 	protected void initShutdown(int exitCode, int delaySeconds) {
