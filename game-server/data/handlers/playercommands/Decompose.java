@@ -5,9 +5,11 @@ import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.templates.item.DecomposableItemInfo;
 import com.aionemu.gameserver.model.templates.item.actions.DecomposeAction;
 import com.aionemu.gameserver.model.templates.item.actions.ItemActions;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.restrictions.PlayerRestrictions;
 import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -41,7 +43,8 @@ public class Decompose extends PlayerCommand {
 		ItemActions itemActions = item.getItemTemplate().getActions();
 		DecomposeAction decomposeAction = itemActions == null ? null
 			: itemActions.getItemActions().stream().filter(a -> a instanceof DecomposeAction).map(DecomposeAction.class::cast).findAny().orElse(null);
-		if (decomposeAction == null || DataManager.DECOMPOSABLE_ITEMS_DATA.getSelectableItems(item.getItemId()) != null) { // exclude selectable decomposables
+		DecomposableItemInfo info = DataManager.DECOMPOSABLE_ITEMS_DATA.getInfoByItemId(item.getItemId());
+		if (decomposeAction == null || info == null || info.isSelectable()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_IT_CAN_NOT_BE_DECOMPOSED(item.getItemTemplate().getL10n()));
 			return;
 		}
@@ -87,7 +90,10 @@ public class Decompose extends PlayerCommand {
 					return;
 				}
 
-				if (!decomposeAction.canAct(player, item, item)) {
+				if (player.hasCooldown(item)) // the previous decompose started it, wait for it instead of aborting
+					return;
+
+				if (!PlayerRestrictions.canUseItem(player, item) || !decomposeAction.canAct(player, item, item)) {
 					cancelTask(player, observer, "Decomposing aborted: Processed " + totalCount + "x " + ChatUtil.item(itemId) + ".");
 					return;
 				}
