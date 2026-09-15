@@ -313,7 +313,7 @@ public final class PlayerEnterWorldService {
 		HousingBidService.getInstance().onPlayerLogin(player); // must ensure player mailbox is initialized first
 		AtreianPassportService.getInstance().onLogin(player);
 		sendMacroList(client, player);
-		client.sendPacket(new SM_RECIPE_LIST(player.getRecipeList().getRecipeList()));
+		client.sendPacket(new SM_RECIPE_LIST(player.getRecipeList().getRecipes()));
 		BrokerService.getInstance().onPlayerLogin(player);
 		HousingService.getInstance().onPlayerLogin(player); // must ensure player mailbox is initialized first
 		// ----------------------------- Retail sequence -----------------------------
