@@ -197,7 +197,7 @@ public class Skill {
 	private boolean validateEffectedList() {
 		if (effector instanceof Player player) {
 			if (canUseSkill(player)) {
-				if (firstTarget != null && !player.canSee(firstTarget)) {
+				if (!canTargetFirstTarget(player)) {
 					if (getTargetRangeAttribute() != TargetRangeAttribute.AREA) {
 						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_IS_NOT_VALID());
 						return false;
@@ -232,6 +232,8 @@ public class Skill {
 	}
 
 	private boolean isValidTarget(Player player, Creature target) {
+		if (target.isSpawnProtectedFrom(player))
+			return false;
 		if (target instanceof Player targetPlayer) {
 			if (targetPlayer.isUsingFlightTransporterOrWindstream())
 				return false;
@@ -564,17 +566,21 @@ public class Skill {
 	}
 
 	/**
-	 * An unseeable first target only drops out of an area skill's effected list, on any other skill it fails the cast.
+	 * An unusable first target only drops out of an area skill's effected list, on any other skill it fails the cast.
 	 *
 	 * @return True, if the cast was cancelled
 	 */
-	protected boolean cancelOnHiddenFirstTarget() {
-		if (!(effector instanceof Player player) || firstTarget == null || player.canSee(firstTarget))
+	protected boolean cancelOnUnusableFirstTarget() {
+		if (!(effector instanceof Player player) || canTargetFirstTarget(player))
 			return false;
 		if (getTargetRangeAttribute() == TargetRangeAttribute.AREA)
 			return false;
 		effector.getController().cancelCurrentSkill(null, SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_LOST());
 		return true;
+	}
+
+	private boolean canTargetFirstTarget(Player player) {
+		return firstTarget == null || player.canSee(firstTarget) && !firstTarget.isSpawnProtectedFrom(player);
 	}
 
 	/**
@@ -584,7 +590,7 @@ public class Skill {
 		removeObservers();
 		if (!effector.isCasting() || isCancelled)
 			return;
-		if (cancelOnHiddenFirstTarget())
+		if (cancelOnUnusableFirstTarget())
 			return;
 		// check if target is out of skill range or other requirements are not met (anymore)
 		Properties properties = skillTemplate.getProperties();
