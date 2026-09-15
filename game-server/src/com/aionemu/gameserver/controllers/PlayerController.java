@@ -81,6 +81,7 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 public class PlayerController extends CreatureController<Player> {
 
 	private static final Logger log = LoggerFactory.getLogger(PlayerController.class);
+	private static final int PROTECTION_TIME = 60000;
 	private long lastAttackMillis = 0;
 	private long lastAttackedMillis = 0;
 	private StanceObserver stanceObserver;
@@ -646,9 +647,9 @@ public class PlayerController extends CreatureController<Player> {
 			AttackUtil.cancelCastOn(getOwner());
 			AttackUtil.removeTargetFrom(getOwner());
 			PacketSendUtility.broadcastToSightedPlayers(getOwner(), new SM_PLAYER_STATE(getOwner()), true);
-			PacketSendUtility.sendPacket(getOwner(), new SM_INVINCIBLE_TIME(60_000));
-			addTask(TaskId.PROTECTION_ACTIVE, ThreadPoolManager.getInstance().schedule(this::stopProtectionActiveTask, 60000));
 		}
+		PacketSendUtility.sendPacket(getOwner(), new SM_INVINCIBLE_TIME(PROTECTION_TIME));
+		addTask(TaskId.PROTECTION_ACTIVE, ThreadPoolManager.getInstance().schedule(this::stopProtectionActiveTask, PROTECTION_TIME));
 	}
 
 	/**
