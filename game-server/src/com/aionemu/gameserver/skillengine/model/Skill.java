@@ -210,7 +210,7 @@ public class Skill {
 			return false;
 		} else if (!canTargetFirstTarget()) {
 			effectedList.remove(firstTarget);
-			return true; // an npc cast still goes off, just without a first target it cannot see or that died
+			return true; // a non-player cast (npc or summon) still goes off, just without a first target it cannot see or that died
 		}
 
 		if (targetType == 0 && effectedList.isEmpty()) { // target selected but no target will be hit
@@ -569,7 +569,7 @@ public class Skill {
 	}
 
 	/**
-	 * Ends a started npc skill without a cancel packet when its first target is gone, and the npc drops that target.
+	 * Ends a started non-player skill (npc or summon) without a cancel packet when its first target is gone, and the caster drops that target.
 	 *
 	 * @return True, if the cast was ended
 	 */
@@ -583,7 +583,7 @@ public class Skill {
 	}
 
 	/**
-	 * @return True, if the first target despawned or moved so far away that a started npc skill must not reach it anymore
+	 * @return True, if the first target despawned or moved so far away that a started non-player skill (npc or summon) must not reach it anymore
 	 */
 	private boolean isFirstTargetGone() {
 		if (firstTarget == null || firstTarget.equals(effector))
