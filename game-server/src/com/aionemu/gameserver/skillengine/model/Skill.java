@@ -197,7 +197,7 @@ public class Skill {
 	private boolean validateEffectedList() {
 		if (effector instanceof Player player) {
 			if (canUseSkill(player)) {
-				if (!canTargetFirstTarget(player)) {
+				if (!canTargetFirstTarget()) {
 					if (getTargetRangeAttribute() != TargetRangeAttribute.AREA) {
 						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_IS_NOT_VALID());
 						return false;
@@ -208,6 +208,9 @@ public class Skill {
 			} else {
 				effectedList.clear();
 			}
+		} else if (!canTargetFirstTarget()) {
+			effectedList.remove(firstTarget);
+			return true; // an npc cast still goes off, it just misses the target it cannot see
 		}
 
 		if (targetType == 0 && effectedList.isEmpty()) { // target selected but no target will be hit
@@ -566,21 +569,19 @@ public class Skill {
 	}
 
 	/**
-	 * An unusable first target only drops out of an area skill's effected list, on any other skill it fails the cast.
+	 * A player's cast fails on an unusable first target, unless it is an area skill, which only loses that target.
 	 *
 	 * @return True, if the cast was cancelled
 	 */
 	protected boolean cancelOnUnusableFirstTarget() {
-		if (!(effector instanceof Player player) || canTargetFirstTarget(player))
-			return false;
-		if (getTargetRangeAttribute() == TargetRangeAttribute.AREA)
+		if (!(effector instanceof Player) || canTargetFirstTarget() || getTargetRangeAttribute() == TargetRangeAttribute.AREA)
 			return false;
 		effector.getController().cancelCurrentSkill(null, SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_LOST());
 		return true;
 	}
 
-	private boolean canTargetFirstTarget(Player player) {
-		return firstTarget == null || player.canSee(firstTarget) && !firstTarget.isSpawnProtectedFrom(player);
+	private boolean canTargetFirstTarget() {
+		return firstTarget == null || firstTarget.equals(effector) || effector.canSee(firstTarget) && !firstTarget.isSpawnProtectedFrom(effector);
 	}
 
 	/**

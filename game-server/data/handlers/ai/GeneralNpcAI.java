@@ -41,6 +41,8 @@ public class GeneralNpcAI extends NpcAI {
 	@Override
 	protected void handleCreatureNotSee(Creature creature) {
 		if (creature.equals(getTarget())) {
+			if (getOwner().isCasting() && !getOwner().canSee(creature))
+				return; // the cast runs out and simply misses the hidden target
 			getOwner().getController().abortCast();
 			onGeneralEvent(AIEventType.TARGET_TOOFAR);
 		}
