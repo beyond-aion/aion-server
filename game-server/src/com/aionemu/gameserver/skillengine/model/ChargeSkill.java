@@ -26,6 +26,8 @@ public class ChargeSkill extends Skill {
 
 	@Override
 	public boolean useSkill() {
+		if (cancelOnUnusableFirstTarget())
+			return false;
 		if (!canUseSkill(CastState.CAST_END)) {
 			effector.getController().cancelCurrentSkill(null);
 			return false;
