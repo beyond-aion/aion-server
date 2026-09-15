@@ -16,7 +16,6 @@ import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.configs.main.SecurityConfig;
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
-import com.aionemu.gameserver.controllers.observer.DeathObserver;
 import com.aionemu.gameserver.controllers.observer.StartMovingListener;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.dataholders.MotionData.AnimationTimes;
@@ -90,7 +89,6 @@ public class Skill {
 	private String chainCategory = null;
 	private int chainUsageDuration = 0;
 	private int hate;
-	private volatile DeathObserver firstTargetDieObserver;
 
 	public enum SkillMethod {
 		CAST,
@@ -208,9 +206,11 @@ public class Skill {
 			} else {
 				effectedList.clear();
 			}
+		} else if (isFirstTargetGone()) {
+			return false;
 		} else if (!canTargetFirstTarget()) {
 			effectedList.remove(firstTarget);
-			return true; // an npc cast still goes off, it just misses the target it cannot see
+			return true; // an npc cast still goes off, just without a first target it cannot see or that died
 		}
 
 		if (targetType == 0 && effectedList.isEmpty()) { // target selected but no target will be hit
@@ -542,18 +542,6 @@ public class Skill {
 			PacketSendUtility.broadcastPacketAndReceive(effector, new SM_ITEM_USAGE_ANIMATION(effector.getObjectId(), firstTarget.getObjectId(),
 				itemObjectId, itemTemplate.getTemplateId(), castDuration, 0, 0));
 		}
-
-		if (firstTarget != null && !firstTarget.equals(effector) && !skillTemplate.hasResurrectEffect() && (castDuration > 0)
-			&& skillTemplate.getProperties().getFirstTarget() != FirstTargetAttribute.POINT
-			&& skillTemplate.getProperties().getFirstTarget() != FirstTargetAttribute.ME) {
-			if ((effector instanceof Npc && ((Npc) effector).isBoss())
-				|| (skillTemplate.getProperties().getFirstTarget() == FirstTargetAttribute.TARGET && skillTemplate.getProperties().getEffectiveDist() > 0)) {
-				return;
-			}
-			firstTargetDieObserver = new DeathObserver(_ -> getEffector().getController().cancelCurrentSkill(null, SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_LOST()));
-			firstTarget.getObserveController().attach(firstTargetDieObserver);
-		}
-
 	}
 
 	public void cancelCast() {
@@ -580,8 +568,37 @@ public class Skill {
 		return true;
 	}
 
+	/**
+	 * Ends a started npc skill without a cancel packet when its first target is gone, and the npc drops that target.
+	 *
+	 * @return True, if the cast was ended
+	 */
+	private boolean endOnGoneFirstTarget() {
+		if (effector instanceof Player || !isFirstTargetGone())
+			return false;
+		effector.getController().abortCast();
+		effector.setTarget(null);
+		effector.getAi().onGeneralEvent(AIEventType.ATTACK_COMPLETE);
+		return true;
+	}
+
+	/**
+	 * @return True, if the first target despawned or moved so far away that a started npc skill must not reach it anymore
+	 */
+	private boolean isFirstTargetGone() {
+		if (firstTarget == null || firstTarget.equals(effector))
+			return false;
+		Properties properties = skillTemplate.getProperties();
+		int range = (properties == null ? 0 : properties.getFirstTargetRange()) + 30;
+		return !firstTarget.isSpawned() || !PositionUtil.isInRange(effector, firstTarget, range, false);
+	}
+
 	private boolean canTargetFirstTarget() {
-		return firstTarget == null || firstTarget.equals(effector) || effector.canSee(firstTarget) && !firstTarget.isSpawnProtectedFrom(effector);
+		if (firstTarget == null || firstTarget.equals(effector))
+			return true;
+		if (!firstTarget.isSpawned() || firstTarget.isDead() != skillTemplate.hasResurrectEffect())
+			return false;
+		return effector.canSee(firstTarget) && !firstTarget.isSpawnProtectedFrom(effector);
 	}
 
 	/**
@@ -591,7 +608,7 @@ public class Skill {
 		removeObservers();
 		if (!effector.isCasting() || isCancelled)
 			return;
-		if (cancelOnUnusableFirstTarget())
+		if (cancelOnUnusableFirstTarget() || endOnGoneFirstTarget())
 			return;
 		// check if target is out of skill range or other requirements are not met (anymore)
 		Properties properties = skillTemplate.getProperties();
@@ -732,8 +749,6 @@ public class Skill {
 	}
 
 	private void removeObservers() {
-		if (firstTargetDieObserver != null)
-			firstTarget.getObserveController().removeObserver(firstTargetDieObserver);
 		effector.getObserveController().removeObserver(moveListener);
 	}
 
