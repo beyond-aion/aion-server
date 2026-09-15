@@ -873,16 +873,21 @@ public class Player extends Creature {
 	 */
 	@Override
 	public boolean isEnemyFrom(Player enemy) {
+		return isEnemyFrom(enemy, this);
+	}
+
+	/**
+	 * @param ownedCreature
+	 *          this player or a creature it summoned, whose position decides whether PvP is allowed on this side
+	 */
+	public boolean isEnemyFrom(Player enemy, Creature ownedCreature) {
 		if (equals(enemy)) {
 			return false;
 		}
 		if (isInCustomState(CustomPlayerState.ENEMY_OF_ALL_PLAYERS) || enemy.isInCustomState(CustomPlayerState.ENEMY_OF_ALL_PLAYERS)) {
 			return !isInFfaTeamMode || !enemy.isInFfaTeamMode() || !isInSameTeam(enemy);
 		}
-		if (isPvPNeutralWith(enemy) && !isDueling(enemy)) {
-			return false;
-		}
-		return canPvP(enemy) || isDueling(enemy);
+		return ownedCreature.isInsidePvPZone() && enemy.isInsidePvPZone() && isPvPEnemyOf(enemy) || isDueling(enemy);
 	}
 
 	public boolean isAggroIconTo(Player enemy) {
@@ -907,13 +912,17 @@ public class Player extends Creature {
 		return false;
 	}
 
-	private boolean canPvP(Player enemy) {
+	/**
+	 * @return True, if the relation between both players allows PvP. Their positions are not part of the answer.
+	 */
+	public boolean isPvPEnemyOf(Player enemy) {
+		if (equals(enemy))
+			return false;
+		if (enemy.getRace() != getRace() || isHostileInPanesterra(enemy))
+			return true;
 		int worldId = enemy.getWorldId();
-		if (enemy.getRace() != getRace() || isHostileInPanesterra(enemy)) {
-			return isInsidePvPZone() && enemy.isInsidePvPZone();
-		} else if (worldId == 110010000 || worldId == 120010000 || isInInstance()) {
+		if (worldId == 110010000 || worldId == 120010000 || isInInstance())
 			return isInsideZoneType(ZoneType.PVP) && enemy.isInsideZoneType(ZoneType.PVP) && !isInSameTeam(enemy);
-		}
 		return false;
 	}
 
