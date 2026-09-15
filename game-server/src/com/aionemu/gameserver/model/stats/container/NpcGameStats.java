@@ -92,7 +92,7 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 		int divider = 2;
 		if (owner.getAbyssNpcType() != AbyssNpcType.NONE)
 			divider = 4; // Abyss type related NPCs restore their health by 25%
-		return getStat(StatEnum.REGEN_HP, getStatsTemplate().getMaxHp() / divider);
+		return getStat(StatEnum.REGEN_HP, getMaxHp().getExactCurrent() / divider);
 	}
 
 	@Override

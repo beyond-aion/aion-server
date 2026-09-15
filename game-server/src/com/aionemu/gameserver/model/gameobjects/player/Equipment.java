@@ -496,7 +496,6 @@ public class Equipment implements Persistable {
 				}
 			}
 		}
-		owner.getLifeStats().synchronizeWithMaxStats();
 	}
 
 	/**
