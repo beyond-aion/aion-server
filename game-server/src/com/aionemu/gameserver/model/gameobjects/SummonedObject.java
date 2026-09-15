@@ -67,8 +67,9 @@ public class SummonedObject<T extends VisibleObject> extends Npc {
 
 	@Override
 	public boolean isEnemy(Creature creature) {
-		if (creator instanceof Creature)
+		if (creator instanceof Creature) {
 			return ((Creature) creator).isEnemy(creature);
+		}
 		return super.isEnemy(creature);
 	}
 
@@ -81,8 +82,12 @@ public class SummonedObject<T extends VisibleObject> extends Npc {
 
 	@Override
 	public boolean isEnemyFrom(Player player) {
-		if (creator instanceof Creature)
+		if (creator instanceof Player owner) {
+			return owner.isEnemyFrom(player, this);
+		}
+		if (creator instanceof Creature) {
 			return ((Creature) creator).isEnemyFrom(player);
+		}
 		return super.isEnemyFrom(player);
 	}
 

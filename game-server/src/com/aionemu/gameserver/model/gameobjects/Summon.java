@@ -142,7 +142,7 @@ public class Summon extends Creature {
 
 	@Override
 	public boolean isEnemyFrom(Player player) {
-		return master.isEnemyFrom(player);
+		return master.isEnemyFrom(player, this);
 	}
 
 	@Override

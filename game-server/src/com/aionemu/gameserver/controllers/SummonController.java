@@ -75,10 +75,13 @@ public class SummonController extends CreatureController<Summon> {
 
 	@Override
 	public void attackTarget(Creature target, int time, boolean skipChecks) {
-		if (target.isDead() || target.getLifeStats().isAboutToDie() || !getOwner().isEnemy(target)) {
+		if (target.isDead() || target.getLifeStats().isAboutToDie()) {
 			PacketSendUtility.sendPacket(getMaster(), SM_SYSTEM_MESSAGE.STR_INVALID_TARGET());
 			return;
 		}
+		// the client keeps its summon attacking on its own, so an attack that isn't allowed right now is just dropped
+		if (!getOwner().isEnemy(target))
+			return;
 
 		int attackSpeed = getOwner().getGameStats().getAttackSpeed().getCurrent();
 		long now = System.currentTimeMillis();

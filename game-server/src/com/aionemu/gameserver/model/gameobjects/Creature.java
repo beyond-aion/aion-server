@@ -494,13 +494,7 @@ public abstract class Creature extends VisibleObject {
 	}
 
 	public boolean isInsidePvPZone() {
-		synchronized (zoneTypes) {
-			if (zoneTypes[ZoneType.SIEGE.ordinal()] > 0) {
-				return true;
-			}
-			int pvpValue = zoneTypes[ZoneType.PVP.ordinal()];
-			return pvpValue == 0 || pvpValue == 2;
-		}
+		return !isInsideZoneType(ZoneType.DISABLE_PVP);
 	}
 
 	public Race getRace() {

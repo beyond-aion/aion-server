@@ -79,7 +79,9 @@ public class TargetRelationProperty {
 	}
 
 	public static boolean isSameAreaType(Creature source, Creature target) {
-		return source.isInsidePvPZone() == target.isInsidePvPZone();
+		if (!(source.getMaster() instanceof Player sourceOwner) || !(target.getMaster() instanceof Player))
+			return true;
+		return sourceOwner.isInsidePvPZone() == target.isInsidePvPZone();
 	}
 
 }

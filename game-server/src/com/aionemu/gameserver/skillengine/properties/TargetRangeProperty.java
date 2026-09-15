@@ -11,11 +11,9 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureVisualState;
 import com.aionemu.gameserver.model.team.TeamMember;
 import com.aionemu.gameserver.model.team.TemporaryPlayerTeam;
-import com.aionemu.gameserver.model.templates.zone.ZoneType;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.world.geo.GeoService;
-import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
  * @author ATracer, Yeats, Neon
@@ -44,7 +42,6 @@ public class TargetRangeProperty {
 					.filter(knownObject -> knownObject.get() instanceof Creature)
 					.map(knownObject -> (Creature) knownObject.get())
 					.filter(creature -> checkCommonRequirements(creature, skillTemplate))
-//					.filter(creature -> !(creature instanceof Kisk && isInsideDisablePvpZone(creature)))
 					.filter(creature -> Math.abs(firstTarget.getZ() - creature.getZ()) <= altitude)
 					.filter(creature -> !(creature instanceof Player player && player.isUsingFlightTransporterOrWindstream()))
 					.filter(creature -> !(skillEffector instanceof Trap trap && trap.getCreator() == creature)) // TODO this is a temporary hack for traps
@@ -111,17 +108,6 @@ public class TargetRangeProperty {
 			return false;
 
 		return true;
-	}
-
-	@SuppressWarnings("unused")
-	private static boolean isInsideDisablePvpZone(Creature creature) {
-		if (creature.isInsideZoneType(ZoneType.PVP)) {
-			for (ZoneInstance zone : creature.findZones()) {
-				if (zone.getZoneTemplate().getFlags() == 0)
-					return true;
-			}
-		}
-		return false;
 	}
 
 	private static boolean checkRange(Properties properties, Creature skillEffector, float x, float y, float z, Creature creature, int effectiveRange, Creature firstTarget) {
