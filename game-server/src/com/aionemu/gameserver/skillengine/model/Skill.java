@@ -196,10 +196,18 @@ public class Skill {
 
 	private boolean validateEffectedList() {
 		if (effector instanceof Player player) {
-			if (canUseSkill(player))
+			if (canUseSkill(player)) {
+				if (firstTarget != null && !player.canSee(firstTarget)) {
+					if (getTargetRangeAttribute() != TargetRangeAttribute.AREA) {
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_IS_NOT_VALID());
+						return false;
+					}
+					effectedList.remove(firstTarget); // everyone else in the area is still hit
+				}
 				effectedList.removeIf(effected -> !isValidTarget(player, effected));
-			else
+			} else {
 				effectedList.clear();
+			}
 		}
 
 		if (targetType == 0 && effectedList.isEmpty()) { // target selected but no target will be hit
@@ -556,11 +564,27 @@ public class Skill {
 	}
 
 	/**
+	 * An unseeable first target only drops out of an area skill's effected list, on any other skill it fails the cast.
+	 *
+	 * @return True, if the cast was cancelled
+	 */
+	protected boolean cancelOnHiddenFirstTarget() {
+		if (!(effector instanceof Player player) || firstTarget == null || player.canSee(firstTarget))
+			return false;
+		if (getTargetRangeAttribute() == TargetRangeAttribute.AREA)
+			return false;
+		effector.getController().cancelCurrentSkill(null, SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_LOST());
+		return true;
+	}
+
+	/**
 	 * Apply effects and perform actions specified in skill template
 	 */
 	protected void endCast() {
 		removeObservers();
 		if (!effector.isCasting() || isCancelled)
+			return;
+		if (cancelOnHiddenFirstTarget())
 			return;
 		// check if target is out of skill range or other requirements are not met (anymore)
 		Properties properties = skillTemplate.getProperties();
