@@ -42,6 +42,7 @@ public class Effect implements StatOwner {
 	private Skill skill;
 	private int skillLevel;
 	private Integer duration;
+	private volatile boolean slotReserved;
 	private long endTime;
 	private SubEffectType subEffectType = SubEffectType.NONE;
 	private Future<?> endTask = null;
@@ -72,6 +73,7 @@ public class Effect implements StatOwner {
 	private int mpShieldSkillId = 0;
 
 	private boolean addedToController;
+	private boolean effectListBroadcastRequested;
 	private final List<Runnable> observerRemoveTasks = new ArrayList<>();
 	private boolean launchSubEffect = true;
 	private Effect subEffect;
@@ -592,6 +594,38 @@ public class Effect implements StatOwner {
 	}
 
 	/**
+	 * Holds this effects place in the effected creatures effect list from the moment the cast ends, so a skill with a long hit time keeps the position
+	 * it took when it was cast. While reserved the effect is invisible to packets, dispels, conflict searches and counters.
+	 */
+	public void reserveEffectSlot() {
+		Creature target = getEffected();
+		if (target == null || successEffects.isEmpty() || isPassive() || getTargetSlot() == SkillTargetSlot.NONE)
+			return;
+		slotReserved = true;
+		target.getEffectController().reserveSlot(this);
+	}
+
+	/**
+	 * Frees a reserved place which never became an effect, for example after a resist or when the target died meanwhile.
+	 */
+	public void releaseUnusedEffectSlot() {
+		if (!slotReserved)
+			return;
+		slotReserved = false;
+		Creature target = getEffected();
+		if (target != null)
+			target.getEffectController().releaseSlot(this);
+	}
+
+	public boolean isSlotReserved() {
+		return slotReserved;
+	}
+
+	public void setSlotStarted() {
+		slotReserved = false;
+	}
+
+	/**
 	 * Apply all effect templates
 	 */
 	public void applyEffect() {
@@ -612,6 +646,8 @@ public class Effect implements StatOwner {
 			}
 			if (applyCriticalProcEffect && subEffect != null)
 				subEffect.applyEffect();
+			if (effectListBroadcastRequested && !addedToController && effected != null)
+				effected.getEffectController().broadCastEffects(null); // nothing was added to the controller, which would have broadcasted on its own
 			if (effected != null)
 				effected.getAi().onEffectApplied(this);
 		} catch (Exception e) {
@@ -797,6 +833,14 @@ public class Effect implements StatOwner {
 
 	public ItemTemplate getItemTemplate() {
 		return skill == null ? null : skill.getItemTemplate();
+	}
+
+	/**
+	 * Makes this effect broadcast the effect list of the effected creature once all its templates were applied, for templates which change the list
+	 * without adding anything to it.
+	 */
+	public void requestEffectListBroadcast() {
+		effectListBroadcastRequested = true;
 	}
 
 	/**

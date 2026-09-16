@@ -32,7 +32,7 @@ public class DispelBuffCounterAtkEffect extends DamageEffect {
 	@Override
 	public void applyEffect(Effect effect) {
 		super.applyEffect(effect);
-		effect.getEffected().getEffectController().dispelBuffCounterAtkEffect(effect);
+		effect.requestEffectListBroadcast();
 	}
 
 	@Override
@@ -42,6 +42,7 @@ public class DispelBuffCounterAtkEffect extends DamageEffect {
 		int finalPower = power + dpower * effect.getSkillLevel();
 
 		int dispelledEffectCount = effected.getEffectController().calculateBuffsOrEffectorDebuffsToRemove(effect, count, dispelLevel, finalPower);
+		effected.getEffectController().dispelBuffCounterAtkEffect(effect, false);
 		int valueWithDelta = dispelledEffectCount > 0 ? hitvalue + ((hitvalue / 2) * (dispelledEffectCount - 1)) + hitdelta * effect.getSkillLevel() : 0;
 		AttackUtil.calculateSkillResult(effect, valueWithDelta, this, false);
 	}
