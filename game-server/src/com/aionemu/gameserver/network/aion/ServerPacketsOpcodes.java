@@ -269,7 +269,7 @@ public class ServerPacketsOpcodes {
 		// addPacketOpcode(251, ); // [S_CHAR_BM_PACK_LIST] first c or h must be size or type since nonzero leads to a client crash, because of incorrect following data
 		addPacketOpcode(252, SM_PRICES.class); // [S_TAX_INFO]
 		addPacketOpcode(253, SM_TRADELIST.class); // [S_STORE_SALE_INFO]
-		// addPacketOpcode(254, ); // [S_INVINCIBLE_TIME]
+		addPacketOpcode(254, SM_INVINCIBLE_TIME.class);
 		addPacketOpcode(255, SM_RECONNECT_KEY.class); // [S_RECONNECT_KEY]
 		addPacketOpcode(256, SM_HOUSE_BIDS.class); // [S_AUCTION_LIST]
 		// addPacketOpcode(257, ); // [S_AUCTION_REGISTER] TODO: Format: d "Unknown Error d"
