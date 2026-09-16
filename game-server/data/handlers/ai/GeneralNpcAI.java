@@ -40,8 +40,8 @@ public class GeneralNpcAI extends NpcAI {
 
 	@Override
 	protected void handleCreatureNotSee(Creature creature) {
-		if (creature.equals(getTarget())) {
-			getOwner().getController().abortCast();
+		if (creature.equals(getTarget()) && !getOwner().isCasting()) { // a started cast runs out and checks its target when it ends
+			getOwner().getController().abortCast(); // drops a skill that is chosen but not started yet
 			onGeneralEvent(AIEventType.TARGET_TOOFAR);
 		}
 	}
