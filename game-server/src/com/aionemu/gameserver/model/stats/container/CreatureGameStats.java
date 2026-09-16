@@ -371,8 +371,8 @@ public abstract class CreatureGameStats<T extends Creature> {
 	}
 
 	protected static EnumSet<CalculationType> copyWith(Set<CalculationType> types, CalculationType type) {
-		EnumSet<CalculationType> calculationTypes = EnumSet.copyOf(types);
-		calculationTypes.add(type);
+		EnumSet<CalculationType> calculationTypes = EnumSet.of(type);
+		calculationTypes.addAll(types);
 		return calculationTypes;
 	}
 }
