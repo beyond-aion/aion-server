@@ -4,6 +4,9 @@ import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
+ * This packet is sent alongside SM_PLAYER_STATE to the protected player on retail.<br>
+ * It does not have any effect on the client. SM_PLAYER_STATE is what controls the blinking.
+ * 
  * @author SVDNESS
  */
 public class SM_INVINCIBLE_TIME extends AionServerPacket {
