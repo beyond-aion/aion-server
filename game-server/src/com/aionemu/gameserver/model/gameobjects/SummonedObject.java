@@ -15,10 +15,6 @@ import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 public class SummonedObject<T extends VisibleObject> extends Npc {
 
 	private final byte level;
-
-	/**
-	 * Creator of this SummonedObject
-	 */
 	private final T creator;
 
 	public SummonedObject(NpcController controller, SpawnTemplate spawnTemplate, byte level, T creator) {
@@ -55,9 +51,7 @@ public class SummonedObject<T extends VisibleObject> extends Npc {
 
 	@Override
 	public final Creature getMaster() {
-		if (creator instanceof Creature)
-			return (Creature) getCreator();
-		return this;
+		return creator instanceof Creature owner ? owner : this;
 	}
 
 	@Override
@@ -67,38 +61,35 @@ public class SummonedObject<T extends VisibleObject> extends Npc {
 
 	@Override
 	public boolean isEnemy(Creature creature) {
-		if (creator instanceof Creature) {
-			return ((Creature) creator).isEnemy(creature);
-		}
+		if (creator instanceof Creature owner)
+			return owner.isEnemy(creature);
 		return super.isEnemy(creature);
 	}
 
 	@Override
 	public boolean isEnemyFrom(Npc npc) {
-		if (creator instanceof Creature)
-			return ((Creature) creator).isEnemyFrom(npc);
+		if (creator instanceof Creature owner)
+			return owner.isEnemyFrom(npc);
 		return super.isEnemyFrom(npc);
 	}
 
 	@Override
 	public boolean isEnemyFrom(Player player) {
-		if (creator instanceof Player owner) {
+		if (creator instanceof Player owner)
 			return owner.isEnemyFrom(player, this);
-		}
-		if (creator instanceof Creature) {
-			return ((Creature) creator).isEnemyFrom(player);
-		}
+		if (creator instanceof Creature owner)
+			return owner.isEnemyFrom(player);
 		return super.isEnemyFrom(player);
 	}
 
 	@Override
 	public Race getRace() {
-		return creator instanceof Creature ? ((Creature) creator).getRace() : super.getRace();
+		return creator instanceof Creature owner ? owner.getRace() : super.getRace();
 	}
 
 	@Override
 	public boolean isPvpTarget(Creature creature) {
-		return (getActingCreature() instanceof Player) && (creature.getActingCreature() instanceof Player);
+		return creator instanceof Player && creature.getMaster() instanceof Player;
 	}
 
 }

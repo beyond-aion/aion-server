@@ -441,7 +441,7 @@ public class PlayerController extends CreatureController<Player> {
 			return;
 
 		// avoid killing players after duel
-		if (!getOwner().equals(attacker) && attacker.getActingCreature() instanceof Player && !getOwner().isEnemy(attacker))
+		if (!getOwner().equals(attacker) && attacker.getMaster() instanceof Player && !getOwner().isEnemy(attacker))
 			return;
 
 		cancelUseItem();

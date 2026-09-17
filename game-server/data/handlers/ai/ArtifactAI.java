@@ -248,7 +248,7 @@ public class ArtifactAI extends NpcAI {
 			});
 			boolean pc = skill.getProperties().getTargetSpecies() == TargetSpeciesAttribute.PC;
 			artifact.forEachCreature(creature -> {
-				if (creature.getActingCreature() instanceof Player || (creature instanceof SiegeNpc && !pc)) {
+				if (creature.getMaster() instanceof Player || (creature instanceof SiegeNpc && !pc)) {
 					switch (skill.getProperties().getTargetRelation()) {
 						case FRIEND:
 							if (player.isEnemy(creature))

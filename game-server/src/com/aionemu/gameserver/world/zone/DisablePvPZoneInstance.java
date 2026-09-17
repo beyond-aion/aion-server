@@ -7,7 +7,6 @@ import com.aionemu.gameserver.model.templates.zone.ZoneType;
 /**
  * @author SVDNESS
  */
-// Neutral zone: client-side disablePvP area, represented in static data as zone_type="PVP" with no flags.
 public class DisablePvPZoneInstance extends ZoneInstance {
 
 	public DisablePvPZoneInstance(int mapId, ZoneInfo template) {

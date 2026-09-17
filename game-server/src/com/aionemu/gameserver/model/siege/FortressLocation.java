@@ -13,7 +13,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.siegelocation.SiegeLegionReward;
 import com.aionemu.gameserver.model.templates.siegelocation.SiegeLocationTemplate;
 import com.aionemu.gameserver.model.templates.siegelocation.SiegeMercenaryZone;
-import com.aionemu.gameserver.model.templates.zone.ZoneType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.ShieldService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
@@ -50,7 +49,6 @@ public class FortressLocation extends SiegeLocation {
 	@Override
 	public void onEnterZone(Creature creature, ZoneInstance zone) {
 		super.onEnterZone(creature, zone);
-		creature.setInsideZoneType(ZoneType.SIEGE);
 		checkForBalanceBuff(creature, SiegeBuffAction.ADD);
 		if (isUnderShield() && getRace() != SiegeRace.getByRace(creature.getRace())) {
 			ShieldObserver observer = ShieldService.getInstance().createShieldObserver(this, creature);
@@ -64,7 +62,6 @@ public class FortressLocation extends SiegeLocation {
 	@Override
 	public void onLeaveZone(Creature creature, ZoneInstance zone) {
 		super.onLeaveZone(creature, zone);
-		creature.unsetInsideZoneType(ZoneType.SIEGE);
 		checkForBalanceBuff(creature, SiegeBuffAction.LEAVE_ZONE_REMOVE);
 		ShieldObserver observer = shieldObservers.remove(creature.getObjectId());
 		if (observer != null)

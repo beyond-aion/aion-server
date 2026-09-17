@@ -362,17 +362,6 @@ public abstract class Creature extends VisibleObject {
 		return this;
 	}
 
-	/**
-	 * For summons it will return summon object and for <br>
-	 * servants - player object.<br>
-	 * Used to find attackable target for npcs.<br>
-	 * 
-	 * @return acting master - player in case of servants
-	 */
-	public Creature getActingCreature() {
-		return getMaster();
-	}
-
 	public boolean isSkillDisabled(SkillTemplate template) {
 		if (skillCoolDowns == null)
 			return false;

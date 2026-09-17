@@ -881,9 +881,8 @@ public class Player extends Creature {
 	 *          this player or a creature it summoned, whose position decides whether PvP is allowed on this side
 	 */
 	public boolean isEnemyFrom(Player enemy, Creature ownedCreature) {
-		if (equals(enemy)) {
+		if (equals(enemy))
 			return false;
-		}
 		if (isInCustomState(CustomPlayerState.ENEMY_OF_ALL_PLAYERS) || enemy.isInCustomState(CustomPlayerState.ENEMY_OF_ALL_PLAYERS)) {
 			return !isInFfaTeamMode || !enemy.isInFfaTeamMode() || !isInSameTeam(enemy);
 		}
@@ -1350,7 +1349,7 @@ public class Player extends Creature {
 
 	@Override
 	public boolean isPvpTarget(Creature creature) {
-		return creature.getActingCreature() instanceof Player;
+		return creature.getMaster() instanceof Player;
 	}
 
 	public boolean isTargetingNpcWithFunction(int objectId, int dialogActionId) {
