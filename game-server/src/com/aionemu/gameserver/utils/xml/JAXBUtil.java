@@ -14,6 +14,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 
 import org.w3c.dom.Document;
@@ -82,28 +83,26 @@ public class JAXBUtil {
 		return deserialize(doc, clazz, XmlUtil.getSchema(schemaFile));
 	}
 
-	@SuppressWarnings("unchecked")
 	private static <T> T deserialize(Object xml, Class<T> clazz, Schema schema) {
 		Unmarshaller u = newUnmarshaller(clazz, schema);
 		try {
 			return switch (xml) {
-				case Reader reader -> (T) u.unmarshal(reader);
-				case File file -> (T) u.unmarshal(file);
+				case Reader reader -> u.unmarshal(new StreamSource(reader), clazz).getValue();
+				case File file -> u.unmarshal(new StreamSource(file), clazz).getValue();
 				case Node node -> u.unmarshal(node, clazz).getValue();
-				default -> (T) u.unmarshal(new StringReader(xml.toString()));
+				default -> u.unmarshal(new StreamSource(new StringReader(xml.toString())), clazz).getValue();
 			};
 		} catch (Exception e) {
 			throw new RuntimeException("Failed to unmarshal class " + clazz.getName() + " from " + xml, e);
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	public static <T> List<T> deserialize(Collection<File> files, Class<T> clazz, String schemaFile) {
 		Unmarshaller u = newUnmarshaller(clazz, XmlUtil.getSchema(schemaFile));
 		List<T> objects = new ArrayList<>();
 		for (File file : files) {
 			try {
-				objects.add((T) u.unmarshal(file));
+				objects.add(u.unmarshal(new StreamSource(file), clazz).getValue());
 			} catch (Exception e) {
 				throw new RuntimeException("Failed to unmarshal class " + clazz.getName() + " from file:\n" + file, e);
 			}

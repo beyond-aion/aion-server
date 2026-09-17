@@ -3,8 +3,7 @@ package admincommands;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.commons.lang3.math.NumberUtils;
-
+import com.aionemu.gameserver.configs.main.GeoDataConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
@@ -27,60 +26,53 @@ import com.aionemu.gameserver.world.WorldPosition;
 public class MoveTo extends AdminCommand {
 
 	public MoveTo() {
-		super("moveto", "Moves you to any location.");
-
-		// @formatter:off
-		setSyntaxInfo(
-			"<x> <y> [z] - Moves you to the specified coordinates on the current map (also supports pasted xml attributes like x=\"1422.7744\" y=\"1250.0612\" z=\"569.47\").",
-			"<map name|ID> <x> <y> [z] - Moves you to the specified position (map names need underscores instead of spaces).",
-			"<position link> - Moves you to the position of the chat link.",
-			"<player name> - Moves you to the position of the player.",
-			"<npc name|ID> - Moves you to the position of the npc.",
-			"forward <distance> - Moves you forward by the specified distance, ignoring any obstacles in between."
-		);
-		// @formatter:on
+		super("moveto", "Moves you to any location.", """
+			<x> <y> [z] - Moves you to the specified coordinates on the current map (also supports pasted xml attributes like x="1422.7744" y="1250.0612" z="569.47").
+			<map name|ID> <x> <y> [z] - Moves you to the specified position (map names need underscores instead of spaces).
+			<position link> - Moves you to the position of the chat link.
+			<player name> - Moves you to the player.
+			<npc name|ID> - Moves you to a spawn spot of the NPC.
+			forward <distance> - Moves you forward by the specified distance, ignoring any obstacles in between.
+			""");
 	}
 
 	@Override
 	public void execute(Player admin, String... params) {
+		if (params.length < 1) {
+			sendInfo(admin);
+			return;
+		}
 		String errorMsg = null;
+		if (params.length == 2 && "forward".equalsIgnoreCase(params[0])) {
+			moveForward(admin, Float.parseFloat(params[1]));
+			return;
+		}
+		WorldPosition pos = params.length == 1 ? ChatUtil.getPosition(params[0]) : parseWorldPosition(admin, params);
+		if (pos != null) {
+			pos.setH(admin.getHeading());
+			moveTo(admin, pos, "Teleported to " + worldName(pos.getMapId()) + "\nX:" + pos.getX() + " Y:" + pos.getY() + " Z:" + pos.getZ());
+			return;
+		} else if (params.length > 1 || params[0].startsWith("[pos:"))
+			errorMsg = "Invalid map position or %s geo.".formatted(GeoDataConfig.GEO_ENABLE ? "missing" : "deactivated");
 
-		if (params.length >= 1) {
-			if (params.length == 2 && "forward".equalsIgnoreCase(params[0])) {
-				moveForward(admin, Float.parseFloat(params[1]));
-				return;
-			}
-			WorldPosition pos;
-			if (params.length == 1) {
-				pos = ChatUtil.getPosition(params[0]);
-			} else {
-				pos = parseWorldPosition(admin, params);
-			}
-			if (pos != null) {
-				pos.setH(admin.getHeading());
-				moveTo(admin, pos, "Teleported to " + WorldMapType.getWorld(pos.getMapId()) + "\nX:" + pos.getX() + " Y:" + pos.getY() + " Z:" + pos.getZ());
-				return;
-			} else if (params.length > 1 || params[0].startsWith("[pos:"))
-				errorMsg = "Invalid map position or missing/deactivated geo.";
+		String nameOrId = String.join(" ", params).toLowerCase();
+		Player player = World.getInstance().getPlayer(Util.convertName(nameOrId));
+		if (player != null && !player.equals(admin)) {
+			moveTo(admin, player.getPosition(), "Teleported to " + name(player) + ".");
+			return;
+		} else if (errorMsg == null || admin.equals(player)) {
+			errorMsg = "Invalid player name or player is offline.";
 		}
 
-		if (params.length == 1 && !NumberUtils.isDigits(params[0])) {
-			Player player = World.getInstance().getPlayer(Util.convertName(params[0]));
-			if (player != null && !player.equals(admin)) {
-				moveTo(admin, player.getPosition(), "Teleported to " + ChatUtil.name(player) + ".");
-				return;
-			} else if (errorMsg == null || player != null)
-				errorMsg = "Invalid player name or player is offline.";
-		}
-
-		if (params.length >= 1) {
-			int npcId = getNpcId(admin, params);
-			if (npcId > 0) {
-				sendInfo(admin, "Teleported to " + ChatUtil.path(npcId, true) + ".");
-				TeleportService.teleportToNpc(admin, npcId);
-				return;
-			} else if (errorMsg == null)
-				errorMsg = "Could not find the specified npc.";
+		int npcId = getNpcId(nameOrId);
+		if (npcId > 0 && DataManager.SPAWNS_DATA.getFirstSpawnByNpcId(0, npcId) != null) {
+			sendInfo(admin, "Teleported to " + ChatUtil.path(npcId, true) + ".");
+			TeleportService.teleportToNpc(admin, npcId);
+			return;
+		} else if (npcId > 0) {
+			errorMsg = "Could not find " + ChatUtil.path(npcId, true) + ".";
+		} else if (nameOrId.contains(" ")) {
+			errorMsg = "Could not find \"" + nameOrId + "\".";
 		}
 
 		sendInfo(admin, errorMsg);
@@ -97,11 +89,10 @@ public class MoveTo extends AdminCommand {
 	private WorldPosition parseWorldPosition(Player admin, String[] params) {
 		int coordIndex = 0;
 		int mapId;
-		boolean isMapNameOrId = params[0].matches("^([a-zA-Z_]+|[1-9][0-9]{8,})$");
-		if (isMapNameOrId) {
-			mapId = NumberUtils.toInt(params[0]);
-			if (mapId == 0)
-				mapId = WorldMapType.getMapId(params[0]);
+		boolean isMapId = params[0].matches("[1-9][0-9]{8,}");
+		boolean isMapName = params[0].matches("[a-zA-Z_]+");
+		if (isMapId || isMapName) {
+			mapId = isMapId ? Integer.parseInt(params[0]) : WorldMapType.getMapId(params[0]);
 			coordIndex = 1;
 		} else {
 			mapId = admin.getWorldId() + admin.getInstanceId() - 1;
@@ -112,7 +103,7 @@ public class MoveTo extends AdminCommand {
 		for (int i = coordIndex; i < maxIndex; i++) {
 			Matcher m = p.matcher(params[i]);
 			if (m.find()) {
-				float coord = NumberUtils.toFloat(m.group("coord"));
+				float coord = Float.parseFloat(m.group("coord"));
 				String type = m.group("type");
 				if ("x".equalsIgnoreCase(type) || x == null && type == null)
 					x = coord;
@@ -137,19 +128,12 @@ public class MoveTo extends AdminCommand {
 		TeleportService.teleportTo(admin, pos);
 	}
 
-	private int getNpcId(Player admin, String... params) {
-		if (NumberUtils.isDigits(params[0])) {
-			int npcId = NumberUtils.toInt(params[0]);
-			if (npcId > 0 && DataManager.SPAWNS_DATA.getFirstSpawnByNpcId(admin.getWorldId(), npcId) != null)
-				return npcId;
-		} else {
-			String npcName = String.join(" ", params).toLowerCase();
-			for (NpcTemplate template : DataManager.NPC_DATA.getNpcData()) {
-				if (template.getName().toLowerCase().equals(npcName)) {
-					if (DataManager.SPAWNS_DATA.getFirstSpawnByNpcId(admin.getWorldId(), template.getTemplateId()) != null)
-						return template.getTemplateId();
-				}
-			}
+	private int getNpcId(String nameOrId) {
+		if (nameOrId.matches("[1-9][0-9]{5}"))
+			return Integer.parseInt(nameOrId);
+		for (NpcTemplate template : DataManager.NPC_DATA.getNpcData()) {
+			if (template.getName().toLowerCase().equals(nameOrId))
+				return template.getTemplateId();
 		}
 		return 0;
 	}

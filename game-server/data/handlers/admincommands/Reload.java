@@ -25,20 +25,19 @@ import com.aionemu.gameserver.utils.xml.XmlUtil;
 public class Reload extends AdminCommand {
 
 	public Reload() {
-		super("reload", "Reloads templates or handlers (static data).");
-
-		// @formatter:off
-		setSyntaxInfo(
-			"<config> - Reloads all configuration settings.",
-			"<commands|ai> - Reloads the specified handlers.",
-			"<quests> - Reloads quest templates and handlers.",
-			"<skills|npcskills> - Reloads the specified skill templates.",
-			"<events> - Reloads event templates and (re)starts events.",
-			"<arcade> - Reloads the Upgrade Arcade reward item list.",
-			"<decomposables> - Reloads content of item bundles",
-			"<items|customdrops> - Reloads the specified data." 
-		);
-		// @formatter:on
+		super("reload", "Reloads templates or handlers (static data).", """
+			config - Reloads all configuration settings.
+			commands - Reloads all chat commands and console commands.
+			quests - Reloads quest templates and handlers.
+			skills - Reloads skill templates.
+			npcskills - Reloads NPC skill rules.
+			ai - Reloads NPC AI handlers. NPCs must respawn to use the reloaded AI.
+			events - Reloads event templates and (re)starts events.
+			arcade - Reloads the Upgrade Arcade reward item list.
+			decomposables - Reloads content of item bundles.
+			items - Reloads item templates.
+			customdrops - Reloads drops for chests.
+			""");
 	}
 
 	@Override
@@ -66,7 +65,7 @@ public class Reload extends AdminCommand {
 			JAXBUtil.deserialize(files, NpcSkillData.class, "./data/static_data/static_data.xsd")
 				.forEach(e -> templates.addAll(e.getAllNpcSkillTemplates()));
 			DataManager.NPC_SKILL_DATA.setNpcSkillTemplates(templates);
-			sendInfo(admin, DataManager.NPC_SKILL_DATA.size() + " npc skills loaded.");
+			sendInfo(admin, DataManager.NPC_SKILL_DATA.size() + " NPC skills loaded.");
 		} else if (params[0].equalsIgnoreCase("items")) {
 			File xml = new File("./data/static_data/items/item_templates.xml");
 			DataManager.ITEM_DATA = JAXBUtil.deserialize(xml, ItemData.class, "./data/static_data/static_data.xsd");

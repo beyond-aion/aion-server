@@ -22,15 +22,11 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 public class Debug extends AdminCommand {
 
 	public Debug() {
-		super("debug", "Helps fixing runtime problems.");
-
-		// @formatter:off
-		setSyntaxInfo(
-			"<connections> - Displays all connected game clients.",
-			"<connectedPlayers> - Displays information about connected players.",
-			"<dcBuggedPlayers> - Disconnects and attempts to save bugged players."
-		);
-		// @formatter:on
+		super("debug", "Helps fixing runtime problems.", """
+			connections - Displays all connected game clients.
+			connectedPlayers - Displays information about connected players.
+			dcBuggedPlayers - Disconnects and attempts to save bugged players.
+			""");
 	}
 
 	@Override
@@ -39,68 +35,56 @@ public class Debug extends AdminCommand {
 			sendInfo(admin);
 			return;
 		}
-
 		if ("connections".equalsIgnoreCase(params[0])) {
-			List<AionConnection> connections = findAionConnections(admin);
-			if (connections != null) {
-				sendInfo(admin, "Online clients:\n\t" + connections.stream().map(AionConnection::toString).collect(Collectors.joining("\n\t")));
-			}
+			List<AionConnection> connections = findAionConnections();
+			sendInfo(admin, "Online clients:\n\t" + connections.stream().map(AionConnection::toString).collect(Collectors.joining("\n\t")));
 		} else if ("connectedPlayers".equalsIgnoreCase(params[0])) {
-			List<Player> connectedPlayers = findConnectedPlayers(admin);
-			if (connectedPlayers != null) {
-				String message = "Connected players (" + connectedPlayers.size() + "):";
-				for (Player player : connectedPlayers) {
-					String details = "position: " + player.getPosition().toCoordString() + ", spawned: " + player.isSpawned();
-					if (!player.isInWorld()) {
-						details += ", " + ChatUtil.color("not in world", Color.RED);
-					}
-					message += "\n\t" + player.getName() + " [" + details + "]";
+			List<Player> connectedPlayers = findConnectedPlayers();
+			String message = "Connected players (" + connectedPlayers.size() + "):";
+			for (Player player : connectedPlayers) {
+				String details = player.getPosition().toCoordString() + ", spawned: " + player.isSpawned();
+				if (!player.isInWorld()) {
+					details += ", " + ChatUtil.color("not in world", Color.RED);
 				}
-				sendInfo(admin, message);
+				message += "\n\t" + name(player) + " - " + ChatUtil.position("Location", player.getPosition()) + ": " + details;
 			}
+			sendInfo(admin, message);
 		} else if ("dcBuggedPlayers".equalsIgnoreCase(params[0])) {
-			List<Player> buggedPlayers = findConnectedPlayers(admin).stream().filter(p -> !p.isInWorld()).collect(Collectors.toList());
-			if (buggedPlayers != null) {
-				if (buggedPlayers.isEmpty()) {
-					sendInfo(admin, "No bugged players found.");
-				} else {
-					for (Player player : buggedPlayers) {
-						player.getController().cancelAllTasks(); // ensure to cancel item update task etc
-						player.getCommonData().setOnline(false);
-						PlayerService.storePlayer(player);
-						player.getClientConnection().setActivePlayer(null);
-						player.getClientConnection().close();
-						player.setClientConnection(null);
-					}
-					sendInfo(admin, "Saved most data and disconnected the following players:\n" + buggedPlayers);
+			List<Player> buggedPlayers = findConnectedPlayers().stream().filter(p -> !p.isInWorld()).toList();
+			if (buggedPlayers.isEmpty()) {
+				sendInfo(admin, "No bugged players found.");
+			} else {
+				for (Player player : buggedPlayers) {
+					player.getController().cancelAllTasks(); // ensure to cancel item update task etc
+					player.getCommonData().setOnline(false);
+					PlayerService.storePlayer(player);
+					player.getClientConnection().setActivePlayer(null);
+					player.getClientConnection().close();
+					player.setClientConnection(null);
 				}
+				sendInfo(admin, "Saved most data and disconnected the following players:\n" + buggedPlayers);
 			}
+		} else {
+			sendInfo(admin);
 		}
 	}
 
-	private List<Player> findConnectedPlayers(Player admin) {
-		List<AionConnection> connections = findAionConnections(admin);
-		if (connections != null) {
-			return connections.stream().map(AionConnection::getActivePlayer).filter(Objects::nonNull)
-				.sorted(Comparator.comparing(Player::getName)).collect(Collectors.toList());
-		}
-		return null;
+	private List<Player> findConnectedPlayers() {
+		List<AionConnection> connections = findAionConnections();
+		return connections.stream().map(AionConnection::getActivePlayer).filter(Objects::nonNull).sorted(Comparator.comparing(Player::getName)).toList();
 	}
 
-	private List<AionConnection> findAionConnections(Player admin) {
+	private List<AionConnection> findAionConnections() {
 		try {
 			Field nioServerField = GameServer.class.getDeclaredField("nioServer");
-			boolean oldAccessible = nioServerField.isAccessible();
+			boolean oldAccessible = nioServerField.canAccess(null);
 			nioServerField.setAccessible(true);
 			NioServer nioServer = (NioServer) nioServerField.get(null);
 			nioServerField.setAccessible(oldAccessible);
 			java.util.Set<SelectionKey> keys = nioServer.getReadWriteDispatcher().selector().keys();
-			return keys.stream().map(SelectionKey::attachment).filter(o -> o instanceof AionConnection).map(o -> (AionConnection) o)
-				.collect(Collectors.toList());
-		} catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e) {
-			sendInfo(admin, e.toString());
-			return null;
+			return keys.stream().map(SelectionKey::attachment).filter(o -> o instanceof AionConnection).map(o -> (AionConnection) o).toList();
+		} catch (NoSuchFieldException | SecurityException | IllegalAccessException e) {
+			throw new IllegalArgumentException(e.toString());
 		}
 	}
-
 }

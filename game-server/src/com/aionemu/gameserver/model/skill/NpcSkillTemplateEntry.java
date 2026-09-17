@@ -88,9 +88,6 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 
 	@Override
 	public boolean conditionReady(Creature creature) {
-		if (creature == null || creature.isDead() || creature.getLifeStats().isAboutToDie()) {
-			return false;
-		}
 		NpcSkillConditionTemplate condTemp = getConditionTemplate();
 		if (condTemp == null)
 			return true;
@@ -123,11 +120,11 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 			case TARGET_IS_NPC -> curTarget instanceof Npc;
 			case TARGET_IS_MAGICAL_CLASS -> curTarget instanceof Player player && !player.getPlayerClass().isPhysicalClass();
 			case TARGET_IS_PHYSICAL_CLASS -> curTarget instanceof Player player && player.getPlayerClass().isPhysicalClass();
-			case TARGET_HAS_CARVED_SIGNET -> hasCarvedSignet(curTarget, template.getSkillTemplate(), 0);
-			case TARGET_HAS_CARVED_SIGNET_LEVEL_II -> hasCarvedSignet(curTarget, template.getSkillTemplate(), 1);
-			case TARGET_HAS_CARVED_SIGNET_LEVEL_III -> hasCarvedSignet(curTarget, template.getSkillTemplate(), 2);
-			case TARGET_HAS_CARVED_SIGNET_LEVEL_IV -> hasCarvedSignet(curTarget, template.getSkillTemplate(), 3);
-			case TARGET_HAS_CARVED_SIGNET_LEVEL_V -> hasCarvedSignet(curTarget, template.getSkillTemplate(), 4);
+			case TARGET_HAS_CARVED_SIGNET -> hasCarvedSignet(curTarget, getSkillTemplate(), 0);
+			case TARGET_HAS_CARVED_SIGNET_LEVEL_II -> hasCarvedSignet(curTarget, getSkillTemplate(), 1);
+			case TARGET_HAS_CARVED_SIGNET_LEVEL_III -> hasCarvedSignet(curTarget, getSkillTemplate(), 2);
+			case TARGET_HAS_CARVED_SIGNET_LEVEL_IV -> hasCarvedSignet(curTarget, getSkillTemplate(), 3);
+			case TARGET_HAS_CARVED_SIGNET_LEVEL_V -> hasCarvedSignet(curTarget, getSkillTemplate(), 4);
 			case NPC_IS_ALIVE -> creature.getWorldMapInstance().getNpcs(condTemp.getNpcId()).stream().anyMatch(npc -> !npc.isDead());
 			case TARGET_IS_IN_RANGE -> PositionUtil.isInRange(creature, curTarget, condTemp.getRange(), false);
 		};

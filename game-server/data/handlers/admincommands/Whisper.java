@@ -7,9 +7,10 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 public class Whisper extends AdminCommand {
 
 	public Whisper() {
-		super("whisper", "Enables/disables incoming whispers.");
-
-		setSyntaxInfo("<on|off> - Enable or disable whispers from others (GMs can always whisper you).");
+		super("whisper", "Enables/disables incoming whispers.", """
+			on - Allows whispers from others.
+			off - Blocks whispers from others, except from GMs.
+			""");
 	}
 
 	@Override

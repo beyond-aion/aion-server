@@ -30,15 +30,11 @@ import com.aionemu.gameserver.utils.chathandlers.ConsoleCommand;
 public class Wish extends ConsoleCommand {
 
 	public Wish() {
-		super("wish", "Spawns npcs and adds items.");
-
-		// @formatter:off
-		setSyntaxInfo(
-			"<npc name> - Spawns the specified npc on your targets position.",
-			"<count> <item name> - Adds the specified item to your target.",
-			"<item name> <enchant> - Adds the specified item with the enchant level to your target."
-		);
-		// @formatter:on
+		super("wish", "Spawns NPCs and adds items.", """
+			<npc name> - Spawns the specified NPC on your targets position.
+			<count> <item name> - Adds the specified item to your target.
+			<item name> <enchant> - Adds the specified item with the enchant level to your target.
+			""");
 	}
 
 	@Override
@@ -52,18 +48,16 @@ public class Wish extends ConsoleCommand {
 			String npcName = params[0];
 			int npcId = findNpcId(npcName);
 			if (npcId == 0) {
-				sendInfo(admin, "There is no npc with that name.");
+				sendInfo(admin, "There is no NPC with that name.");
 				return;
 			}
 			SpawnTemplate spawn = SpawnEngine.newSpawn(admin.getWorldId(), npcId, admin.getX(), admin.getY(), admin.getZ(), admin.getHeading(), 0);
 			VisibleObject visibleObject = SpawnEngine.spawnObject(spawn, admin.getInstanceId());
 			if (visibleObject == null) {
-				sendInfo(admin, "Spawn id " + npcId + " was not found!");
+				sendInfo(admin, "Could not spawn npc with ID " + npcId + ".");
 				return;
 			}
-
-			String objectName = visibleObject.getObjectTemplate().getName();
-			sendInfo(admin, objectName + " spawned");
+			sendInfo(admin, "Spawned " + name(visibleObject) + ".");
 		} else { // add item
 			Player target = admin.getTarget() instanceof Player targetPlayer ? targetPlayer : admin;
 			String itemName = params[0];
@@ -72,10 +66,10 @@ public class Wish extends ConsoleCommand {
 			try {
 				addCount = Integer.parseInt(params[0]);
 				itemName = params[1];
-			} catch (NumberFormatException e) {
+			} catch (NumberFormatException _) {
 				try {
 					enchant = Integer.parseInt(params[1]);
-				} catch (NumberFormatException e2) {
+				} catch (NumberFormatException _) {
 				}
 			}
 			int itemId = findItemId(itemName);
@@ -111,10 +105,10 @@ public class Wish extends ConsoleCommand {
 			}
 
 			if (addedCount <= 0) {
-				sendInfo(admin, "Item couldn't be added");
+				sendInfo(admin, "Item couldn't be added.");
 			} else if (!admin.equals(target)) {
-				sendInfo(admin, "You gave " + addedCount + " " + ChatUtil.item(itemId) + " to " + target.getName() + ".");
-				sendInfo(target, "You received " + addedCount + " " + ChatUtil.item(itemId) + " from " + admin.getName() + ".");
+				sendInfo(admin, "You gave " + addedCount + " " + ChatUtil.item(itemId) + " to " + name(target) + ".");
+				sendInfo(target, "You received " + addedCount + " " + ChatUtil.item(itemId) + " from " + name(admin) + ".");
 			}
 		}
 	}

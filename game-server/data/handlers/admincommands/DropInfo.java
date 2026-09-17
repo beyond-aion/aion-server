@@ -25,9 +25,10 @@ import com.aionemu.gameserver.world.WorldDropType;
 public class DropInfo extends AdminCommand {
 
 	public DropInfo() {
-		super("dropinfo", "Shows drop information of your target.");
-
-		setSyntaxInfo("[all] - Lists drops of the selected npc (default: only drops for your level range, optional: all possible drops).");
+		super("dropinfo", "Shows drop information of your target.", """
+			 - Lists drops of the selected NPC for your level range.
+			all - Lists all drops of the selected NPC.
+			""");
 	}
 
 	@Override
@@ -45,7 +46,7 @@ public class DropInfo extends AdminCommand {
 		dropModifiers.setMaxDropsPerGroup(Integer.MAX_VALUE);
 
 		int[] counts = { 0, 0 };
-		String info = "[" + npc.getObjectTemplate().getL10n() + "'s drops]";
+		String info = "[" + name(npc) + "'s drops]";
 		if (npcDrop != null) {
 			for (DropGroup dropGroup : npcDrop.getDropGroup()) {
 				if (dropGroup.getRace() == Race.PC_ALL || dropGroup.getRace() == dropModifiers.getDropRace()) {

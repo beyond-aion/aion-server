@@ -19,9 +19,9 @@ import com.aionemu.gameserver.utils.chathandlers.PlayerCommand;
 public class Decompose extends PlayerCommand {
 
 	public Decompose() {
-		super("decompose", "Opens decomposable items.");
-
-		setSyntaxInfo("<item> [count] - Decomposes the specified item (default: all, optional: number of items to decompose).");
+		super("decompose", "Opens decomposable items.", """
+			<item> [count] - Decomposes the specified item (default: all, optional: number of items to decompose).
+			""");
 	}
 
 	@Override
@@ -61,7 +61,7 @@ public class Decompose extends PlayerCommand {
 
 			{
 				// use observer to abort task on move, attack, die, item use, etc.
-				observer = new ItemUseObserver() {
+				observer = new ItemUseObserver(player) {
 
 					@Override
 					public void itemused(Item item) {
@@ -70,7 +70,7 @@ public class Decompose extends PlayerCommand {
 					}
 
 					@Override
-					public void abort() {
+					protected void onAbort() {
 						cancelTask(player, observer, "Decomposing aborted: Processed " + Math.max(0, totalCount - 1) + "x " + ChatUtil.item(itemId) + ".");
 					}
 				};

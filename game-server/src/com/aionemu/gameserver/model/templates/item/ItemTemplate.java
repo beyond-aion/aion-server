@@ -554,10 +554,6 @@ public class ItemTemplate extends VisibleObjectTemplate {
 		return itemGroup;
 	}
 
-	public int[] getRequiredSkills() {
-		return itemGroup.getRequiredSkills();
-	}
-
 	public String getTemperingName() {
 		return temperingName;
 	}
