@@ -33,7 +33,7 @@ import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 
 /**
- * @author MrPoke, sphinx, synchro2, Evil_dnk
+ * @author MrPoke, sphinx, synchro2, Evil_dnk, SVDNESS
  */
 public class CraftService {
 
@@ -42,12 +42,8 @@ public class CraftService {
 	@SuppressWarnings("lossy-conversions")
 	public static void finishCrafting(Player player, RecipeTemplate recipetemplate, int critCount, int bonus) {
 
-		if (recipetemplate.getMaxProductionCount() != null) {
-			player.getRecipeList().deleteRecipe(player, recipetemplate.getId());
-			if (critCount == 0) {
-				QuestEngine.getInstance().onFailCraft(new QuestEnv(null, player, 0),
-					recipetemplate.getComboProduct(1) == null ? 0 : recipetemplate.getComboProduct(1));
-			}
+		if (recipetemplate.getMaxProductionCount() != null && critCount == 0) {
+			QuestEngine.getInstance().onFailCraft(new QuestEnv(null, player, 0, 0), recipetemplate.getComboProduct(1) == null ? 0 : recipetemplate.getComboProduct(1));
 		}
 
 		int skillId = recipetemplate.getSkillId();
@@ -105,7 +101,8 @@ public class CraftService {
 			sendCancelCraft(player, skillId, targetObjId, itemTemplate);
 			return;
 		}
-
+		// Retail consumes a charge at craft start, regardless of success or failure.
+		player.getRecipeList().decreaseProductionCount(player, recipeId);
 		if (recipeTemplate.getDp() != null)
 			player.getCommonData().addDp(-recipeTemplate.getDp());
 
