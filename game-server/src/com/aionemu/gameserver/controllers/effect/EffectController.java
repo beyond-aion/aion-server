@@ -93,11 +93,33 @@ public class EffectController {
 				chants.getFirst().endEffect();
 		}
 		put(mapToUpdate, nextEffect);
+		nextEffect.setSlotStarted();
 
 		nextEffect.startEffect();
 
 		if (!nextEffect.isPassive())
 			broadCastEffects(nextEffect);
+	}
+
+	/**
+	 * Takes the place an effect will occupy once it lands, so that the list follows the order casts ended.
+	 */
+	public void reserveSlot(Effect effect) {
+		long stamp = lock.writeLock();
+		try {
+			abnormalEffectMap.putIfAbsent(effect.getStack(), effect);
+		} finally {
+			lock.unlockWrite(stamp);
+		}
+	}
+
+	public void releaseSlot(Effect effect) {
+		long stamp = lock.writeLock();
+		try {
+			abnormalEffectMap.remove(effect.getStack(), effect);
+		} finally {
+			lock.unlockWrite(stamp);
+		}
 	}
 
 	protected final void put(Effect nextEffect) {
@@ -130,7 +152,7 @@ public class EffectController {
 		try {
 			mainLoop:
 			for (Effect effect : mapToUpdate.values()) {
-				if (!canConflict(effect, nextEffect))
+				if (effect.isSlotReserved() || !canConflict(effect, nextEffect))
 					continue;
 				for (EffectTemplate et : effect.getEffectTemplates()) {
 					if (et.getEffectId() == 0)
@@ -167,7 +189,7 @@ public class EffectController {
 		long stamp = lock.readLock();
 		try {
 			for (Effect currentEffect : mapForEffect.values()) {
-				if (!canConflict(currentEffect, newEffect))
+				if (currentEffect.isSlotReserved() || !canConflict(currentEffect, newEffect))
 					continue;
 				for (EffectTemplate newEffectTemplate : newEffect.getEffectTemplates()) {
 					if (newEffectTemplate.getEffectId() == 0)
@@ -387,7 +409,7 @@ public class EffectController {
 		long stamp = lock.readLock();
 		try {
 			for (Effect effect : effectMap.values()) {
-				if (filter.test(effect))
+				if (!effect.isSlotReserved() && filter.test(effect))
 					return effect;
 			}
 		} finally {
@@ -412,7 +434,7 @@ public class EffectController {
 		long stamp = lock.readLock();
 		try {
 			for (Effect effect : effectMap.values()) {
-				if (filter.test(effect))
+				if (!effect.isSlotReserved() && filter.test(effect))
 					effects.add(effect);
 			}
 		} finally {
@@ -456,6 +478,8 @@ public class EffectController {
 				// check count
 				if (count == 0)
 					break;
+				if (effect.isSlotReserved())
+					continue;
 				if (effectType != null) {
 					if (!effect.getSkillTemplate().hasAnyEffect(effectType))
 						continue;
@@ -602,6 +626,8 @@ public class EffectController {
 	}
 
 	private boolean isDispellable(Effect effect) {
+		if (effect.isSlotReserved()) // only holds its place, nothing to dispel yet
+			return false;
 		if (isNoShowToggle(effect))
 			return false;
 		if (effect.isSanctuaryEffect())
@@ -616,10 +642,10 @@ public class EffectController {
 		return true;
 	}
 
-	public void dispelBuffCounterAtkEffect(Effect effect) {
+	public void dispelBuffCounterAtkEffect(Effect effect, boolean broadcast) {
 		List<Effect> effectsToEnd = filterEffects(abnormalEffectMap, e -> effect.equals(e.getDesignatedDispelEffect()));
 		for (Effect ef : effectsToEnd) {
-			ef.endEffect();
+			ef.endEffect(broadcast);
 		}
 	}
 

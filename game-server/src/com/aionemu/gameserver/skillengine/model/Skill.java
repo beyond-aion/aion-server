@@ -659,10 +659,20 @@ public class Skill {
 			sentCastSpellResultPacket = sendCastSpellEnd(dashStatus, effects);
 
 		// item skills apply their effects immediately, hitTime only tells the client when to display the hit
-		if (isInstantSkill() || isItemSkill)
+		boolean appliesNow = isInstantSkill() || isItemSkill;
+		if (appliesNow) {
 			applyEffect(effects);
-		else
-			ThreadPoolManager.getInstance().schedule(() -> applyEffect(effects), hitTime);
+		} else {
+			// the place in the effect list is taken now, so a long hit time does not push this skill behind ones cast after it
+			effects.forEach(Effect::reserveEffectSlot);
+			ThreadPoolManager.getInstance().schedule(() -> {
+				try {
+					applyEffect(effects);
+				} finally {
+					effects.forEach(Effect::releaseUnusedEffectSlot);
+				}
+			}, hitTime);
+		}
 
 		if (skillMethod == SkillMethod.PENALTY || skillMethod == SkillMethod.CAST || isItemSkill) {
 			if (!isItemSkill)
