@@ -362,17 +362,6 @@ public abstract class Creature extends VisibleObject {
 		return this;
 	}
 
-	/**
-	 * For summons it will return summon object and for <br>
-	 * servants - player object.<br>
-	 * Used to find attackable target for npcs.<br>
-	 * 
-	 * @return acting master - player in case of servants
-	 */
-	public Creature getActingCreature() {
-		return getMaster();
-	}
-
 	public boolean isSkillDisabled(SkillTemplate template) {
 		if (skillCoolDowns == null)
 			return false;
@@ -494,13 +483,7 @@ public abstract class Creature extends VisibleObject {
 	}
 
 	public boolean isInsidePvPZone() {
-		synchronized (zoneTypes) {
-			if (zoneTypes[ZoneType.SIEGE.ordinal()] > 0) {
-				return true;
-			}
-			int pvpValue = zoneTypes[ZoneType.PVP.ordinal()];
-			return pvpValue == 0 || pvpValue == 2;
-		}
+		return !isInsideZoneType(ZoneType.DISABLE_PVP);
 	}
 
 	public Race getRace() {
