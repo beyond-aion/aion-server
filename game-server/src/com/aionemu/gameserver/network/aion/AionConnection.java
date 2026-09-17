@@ -237,8 +237,9 @@ public class AionConnection extends AConnection<AionServerPacket> {
 	@Override
 	protected final void onDisconnect() {
 		connectionAliveChecker.stop();
-		if (GameServer.isShuttingDownSoon()) { // client crashing during last seconds of countdown
+		if (GameServer.isShutdownScheduled()) { //Client leaving or crashing during the countdown.
 			safeLogout(); // instant synchronized leaveWorld to ensure completion before onServerClose
+			LoginServer.getInstance().onDisconnect(this); //The login server must drop the account too, or the next login counts as a duplicate.
 			return;
 		}
 
