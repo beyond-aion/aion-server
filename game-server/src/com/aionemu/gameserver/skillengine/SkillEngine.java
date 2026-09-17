@@ -147,11 +147,12 @@ public class SkillEngine {
 	}
 
 	/**
-	 * Applies the skill's effects to one or multiple targets, depending on its template properties.
+	 * Applies the skill's effects to one or multiple targets, depending on its template properties. Unless a forceType is given, the effects are
+	 * calculated against the current stats of effector and targets, so they can be dodged or resisted.
 	 *
 	 * @return affected targets
 	 */
-	public List<Creature> applyEffectsDirectly(int skillId, Creature effector, Creature firstTarget, float x, float y, float z) {
+	public List<Creature> applyEffects(int skillId, Creature effector, Creature firstTarget, float x, float y, float z, ForceType forceType) {
 		SkillTemplate skillTemplate = DataManager.SKILL_DATA.getSkillTemplate(skillId);
 		Properties properties = skillTemplate.getProperties();
 		List<Creature> targets = new ArrayList<>();
@@ -159,7 +160,7 @@ public class SkillEngine {
 		if (properties != null) // add valid targets in range
 			properties.validateEffectedList(targets, firstTarget, effector, skillTemplate, x, y, z);
 		for (Creature target : targets)
-			applyEffect(effector, target, skillTemplate, skillTemplate.getLvl(), null, ForceType.DEFAULT);
+			applyEffect(effector, target, skillTemplate, skillTemplate.getLvl(), null, forceType);
 		return targets;
 	}
 
