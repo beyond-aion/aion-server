@@ -70,4 +70,9 @@ public class MaterialZoneHandler implements ZoneHandler {
 			PacketSendUtility.sendMessage(player, "Left material zone " + geometry.getName());
 		}
 	}
+
+	@Override
+	public boolean handlesAllCreatures() {
+		return true;
+	}
 }

@@ -23,7 +23,10 @@ import com.aionemu.gameserver.model.templates.zone.ZoneInfo;
 import com.aionemu.gameserver.model.templates.zone.ZoneTemplate;
 import com.aionemu.gameserver.model.vortex.VortexLocation;
 import com.aionemu.gameserver.services.ShieldService;
-import com.aionemu.gameserver.world.zone.handler.*;
+import com.aionemu.gameserver.world.zone.handler.MaterialZoneHandler;
+import com.aionemu.gameserver.world.zone.handler.ZoneHandler;
+import com.aionemu.gameserver.world.zone.handler.ZoneHandlerClassListener;
+import com.aionemu.gameserver.world.zone.handler.ZoneNameAnnotation;
 
 /**
  * @author ATracer, antness
@@ -61,8 +64,7 @@ public final class ZoneService implements GameEngine {
 				log.warn("Can't instantiate zone handler " + zoneName, ex);
 			}
 		}
-
-		return zoneHandler != null ? zoneHandler : new GeneralZoneHandler();
+		return zoneHandler;
 	}
 
 	public final void addZoneHandlerClass(Class<? extends ZoneHandler> handler) {
@@ -72,7 +74,7 @@ public final class ZoneService implements GameEngine {
 			for (String zoneNameString : zoneNames) {
 				try {
 					ZoneName zoneName = ZoneName.get(zoneNameString.trim());
-					if (zoneName == ZoneName.get("NONE"))
+					if (zoneName == ZoneName.NONE)
 						throw new RuntimeException();
 					zoneHandlers.put(zoneName, handler);
 				} catch (Exception e) {
@@ -92,7 +94,6 @@ public final class ZoneService implements GameEngine {
 		WorldZoneTemplate zone = new WorldZoneTemplate(worldSize, mapId);
 		PolyArea fullArea = new PolyArea(zone.getName(), mapId, zone.getPoints().getPoint(), zone.getPoints().getBottom(), zone.getPoints().getTop());
 		ZoneInstance fullMap = new ZoneInstance(mapId, new ZoneInfo(fullArea, zone));
-		fullMap.addHandler(getNewZoneHandler(zone.getName()));
 		zones.put(zone.getName(), fullMap);
 		Collection<ZoneInfo> areas = this.zoneByMapIdMap.get(mapId);
 		if (areas == null) {
@@ -128,7 +129,9 @@ public final class ZoneService implements GameEngine {
 					instance = Objects.requireNonNullElseGet(invasionZone, () -> new ZoneInstance(mapId, area));
 				}
 			}
-			instance.addHandler(getNewZoneHandler(area.getZoneTemplate().getName()));
+			ZoneHandler zoneHandler = getNewZoneHandler(area.getZoneTemplate().getName());
+			if (zoneHandler != null)
+				instance.addHandler(zoneHandler);
 			zones.put(area.getZoneTemplate().getName(), instance);
 		}
 		return zones;

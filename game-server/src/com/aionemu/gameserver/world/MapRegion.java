@@ -146,6 +146,8 @@ public class MapRegion {
 		ZoneClassName zoneType = null;
 		boolean enteredPriorityZone = false;
 		for (ZoneInstance zone : zonesSortedByTypeAndPriority) {
+			if (zone.isIgnored(creature))
+				continue;
 			if (zoneType != zone.getZoneTemplate().getZoneType()) {
 				zoneType = zone.getZoneTemplate().getZoneType();
 				enteredPriorityZone = false;
@@ -185,7 +187,7 @@ public class MapRegion {
 		for (ZoneInstance zone : zonesSortedByTypeAndPriority) {
 			if (zone.getZoneTemplate().getName() != zoneName)
 				continue;
-			return zone.isInsideCordinate(x, y, z);
+			return zone.isInsideCoordinate(x, y, z);
 		}
 		return false;
 	}
