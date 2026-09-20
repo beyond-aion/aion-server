@@ -47,6 +47,7 @@ public class SummonsService {
 		if (!summon.registerRelease(release))
 			return;
 		summon.getController().cancelCurrentSkill(null);
+		summon.getController().onReleaseStart();
 		summon.setMode(SummonMode.RELEASE);
 		summon.getObserveController().notifySummonReleaseObservers();
 		new ReleaseSummonTask(summon, release).scheduleOrRun();
