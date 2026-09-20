@@ -44,6 +44,12 @@ public class SummonController extends CreatureController<Summon> {
 	}
 
 	/**
+	 * Called when a release was registered, before the summon despawns (which may happen delayed).
+	 */
+	public void onReleaseStart() {
+	}
+
+	/**
 	 * Change to rest mode
 	 */
 	public void restMode() {
