@@ -7,7 +7,8 @@ import java.util.Map;
 import java.util.function.Consumer;
 
 import com.aionemu.gameserver.model.gameobjects.Creature;
-import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.SummonedObject;
 import com.aionemu.gameserver.model.geometry.Area;
 import com.aionemu.gameserver.model.templates.zone.ZoneClassName;
 import com.aionemu.gameserver.model.templates.zone.ZoneInfo;
@@ -24,24 +25,19 @@ public class ZoneInstance {
 
 	private final ZoneInfo template;
 	private final int mapId;
-	protected final Map<Integer, Creature> creatures = new HashMap<>();
-	protected List<ZoneHandler> handlers = new ArrayList<>();
+	private final Map<Integer, Creature> creatures = new HashMap<>();
+	private final List<ZoneHandler> handlers = new ArrayList<>(0);
+	private boolean ignoreRegularNpcs = true;
 
 	public ZoneInstance(int mapId, ZoneInfo template) {
 		this.template = template;
 		this.mapId = mapId;
 	}
 
-	/**
-	 * @return the template
-	 */
 	public Area getAreaTemplate() {
 		return template.getArea();
 	}
 
-	/**
-	 * @return the template
-	 */
 	public ZoneTemplate getZoneTemplate() {
 		return template.getZoneTemplate();
 	}
@@ -50,21 +46,25 @@ public class ZoneInstance {
 		return (mapId == creature.getWorldId() && template.getArea().isInside3D(creature.getX(), creature.getY(), creature.getZ()));
 	}
 
+	/**
+	 * @return true if this zone is irrelevant to the creature, meaning that it should not be tracked by it
+	 */
+	public boolean isIgnored(Creature creature) {
+		return ignoreRegularNpcs && creature instanceof Npc npc && !(npc instanceof SummonedObject<?>);
+	}
+
 	public synchronized boolean onEnter(Creature creature) {
-		if (creatures.containsKey(creature.getObjectId()))
+		if (creatures.putIfAbsent(creature.getObjectId(), creature) != null)
 			return false;
-		creatures.put(creature.getObjectId(), creature);
-		if (creature instanceof Player)
-			creature.getController().onEnterZone(this);
+		creature.getController().onEnterZone(this);
 		for (ZoneHandler handler : handlers)
 			handler.onEnterZone(creature, this);
 		return true;
 	}
 
 	public synchronized boolean onLeave(Creature creature) {
-		if (!creatures.containsKey(creature.getObjectId()))
+		if (creatures.remove(creature.getObjectId()) == null)
 			return false;
-		creatures.remove(creature.getObjectId());
 		creature.getController().onLeaveZone(this);
 		for (ZoneHandler handler : handlers)
 			handler.onLeaveZone(creature, this);
@@ -87,11 +87,13 @@ public class ZoneInstance {
 		return creatures.containsKey(creature.getObjectId());
 	}
 
-	public boolean isInsideCordinate(float x, float y, float z) {
+	public boolean isInsideCoordinate(float x, float y, float z) {
 		return template.getArea().isInside3D(x, y, z);
 	}
 
 	public void addHandler(ZoneHandler handler) {
+		if (handler.handlesAllCreatures())
+			ignoreRegularNpcs = false;
 		handlers.add(handler);
 	}
 

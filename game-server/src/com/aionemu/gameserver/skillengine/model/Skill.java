@@ -303,7 +303,7 @@ public class Skill {
 		if (effector instanceof Npc npc) {
 			NpcSkillEntry currentNpcSkillEntry = npc.getGameStats().getLastSkill();
 			if (currentNpcSkillEntry != null) {
-				currentNpcSkillEntry.setLastTimeUsed();
+				npc.setSkillCoolDown(currentNpcSkillEntry.getSkillId(), System.currentTimeMillis() + currentNpcSkillEntry.getTemplate().getCooldown());
 				npc.getGameStats().setNextSkillDelay(currentNpcSkillEntry.getNextSkillTime());
 			} else {
 				npc.getGameStats().setNextSkillDelay(-1);

@@ -39,7 +39,7 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 
 	@Override
 	public boolean isReady(int hpPercentage, long fightingTimeInMSec) {
-		if (hasCooldown() || !chanceReady())
+		if (!chanceReady())
 			return false;
 
 		return switch (template.getConjunctionType()) {
@@ -69,11 +69,6 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 		long minTime = template.getMinTime();
 		long maxTime = template.getMaxTime();
 		return maxTime == 0 && minTime == 0 || maxTime == 0 && minTime <= elapsedFightTime || maxTime >= elapsedFightTime && minTime <= elapsedFightTime;
-	}
-
-	@Override
-	public boolean hasCooldown() {
-		return template.getCooldown() > (System.currentTimeMillis() - lastTimeUsed);
 	}
 
 	@Override

@@ -2,26 +2,18 @@ package com.aionemu.gameserver.controllers;
 
 import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.ai.follow.FollowStartService;
-import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
 import com.aionemu.gameserver.model.templates.npc.NpcRating;
-import com.aionemu.gameserver.model.templates.npcskill.NpcSkillTemplates;
 import com.aionemu.gameserver.world.geo.GeoService;
 
 /**
  * @author xTz
  */
 public class SiegeWeaponController extends SummonController {
-
-	private NpcSkillTemplates skills;
-
-	public SiegeWeaponController(int npcId) {
-		skills = DataManager.NPC_SKILL_DATA.getNpcSkillList(npcId);
-	}
 
 	@Override
 	public void onReleaseStart() {
@@ -93,9 +85,5 @@ public class SiegeWeaponController extends SummonController {
 
 	private boolean isBalaurBoss(Creature creature) {
 		return creature.getRace() == Race.DRAKAN && creature instanceof SiegeNpc && ((SiegeNpc) creature).getObjectTemplate().getRating() == NpcRating.LEGENDARY;
-	}
-
-	public NpcSkillTemplates getNpcSkillTemplates() {
-		return skills;
 	}
 }
