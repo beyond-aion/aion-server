@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.services.item;
 
+import static com.aionemu.gameserver.model.items.ItemUseAnimation.*;
+
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -162,17 +164,6 @@ public class ItemSocketService {
 			return;
 		}
 
-		final ItemUseObserver observer = new ItemUseObserver() {
-			@Override
-			public void abort() {
-				player.getObserveController().removeObserver(this);
-				player.getController().cancelUseItem();
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GIVE_PROC_CANCEL(weapon.getL10n()));
-			}
-		};
-
-		player.getObserveController().attach(observer);
-
 		Item godstone = player.getInventory().getItemByObjId(stoneId);
 		if (godstone == null) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_PROC_NO_PROC_GIVE_ITEM());
@@ -185,14 +176,26 @@ public class ItemSocketService {
 			return;
 		}
 
+		ItemUseObserver observer = new ItemUseObserver(player) {
+			@Override
+			protected void onAbort() {
+				player.getController().cancelTask(TaskId.ITEM_USE);
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GIVE_PROC_CANCEL(weapon.getL10n()));
+				PacketSendUtility.broadcastPacketAndReceive(player,
+					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), stoneId, itemTemplate.getTemplateId(), 0, USE_CANCEL));
+			}
+		};
+
+		player.getObserveController().addObserver(observer);
+
 		PacketSendUtility.broadcastPacketAndReceive(player,
-			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), stoneId, itemTemplate.getTemplateId(), 2000, 0, 0));
+			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), stoneId, itemTemplate.getTemplateId(), 2000, USE_START));
 
 		player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(() -> {
 			player.getObserveController().removeObserver(observer);
 
 			PacketSendUtility.broadcastPacketAndReceive(player,
-				new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), stoneId, itemTemplate.getTemplateId(), 0, 1, 0));
+				new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), stoneId, itemTemplate.getTemplateId(), 0, USE_SUCCESS));
 
 			if (!player.getInventory().decreaseByObjectId(stoneId, 1))
 				return;

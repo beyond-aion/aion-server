@@ -35,6 +35,8 @@ public class FollowSummonTaskAI implements Runnable {
 
 	@Override
 	public void run() {
+		if (!summon.isSpawned())
+			return;
 		if (!isInMasterRange()) {
 			SummonsService.release(summon, UnsummonType.DISTANCE);
 			return;

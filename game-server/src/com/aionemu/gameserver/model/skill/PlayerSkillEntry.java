@@ -21,8 +21,8 @@ public class PlayerSkillEntry extends SkillEntry implements Persistable {
 	public PlayerSkillEntry(Player player, int skillId, int skillLvl, PersistentState persistentState) {
 		this(skillId, skillLvl, 0, persistentState);
 		List<SkillLearnTemplate> learnTemplates = DataManager.SKILL_TREE_DATA.getTemplatesForSkill(skillId, player.getPlayerClass(), player.getRace());
-		if (learnTemplates.size() == 0)
-			skillType = DataManager.SKILL_DATA.getSkillTemplate(skillId).getStigmaType() == StigmaType.NONE ? 0 : 1; // no way to tell if linked stigma
+		if (learnTemplates.isEmpty())
+			skillType = getSkillTemplate().getStigmaType() == StigmaType.NONE ? 0 : 1; // no way to tell if linked stigma
 		else {
 			for (SkillLearnTemplate template : learnTemplates) {
 				if (template.isStigma()) {

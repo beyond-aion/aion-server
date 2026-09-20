@@ -6,7 +6,6 @@ import java.util.List;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 
-import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.ConsoleCommand;
@@ -28,18 +27,7 @@ public class Combineskill extends ConsoleCommand {
 			return;
 		}
 
-		final VisibleObject target = admin.getTarget();
-		if (target == null) {
-			PacketSendUtility.sendMessage(admin, "No target selected.");
-			return;
-		}
-
-		if (!(target instanceof Player)) {
-			PacketSendUtility.sendMessage(admin, "This command can only be used on a player!");
-			return;
-		}
-
-		final Player player = (Player) target;
+		final Player player = admin.getTarget() instanceof Player target ? target : admin;
 
 		String skillName = params[0];
 		int skillId = 0;

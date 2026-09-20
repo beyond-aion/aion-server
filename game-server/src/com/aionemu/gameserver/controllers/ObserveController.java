@@ -63,7 +63,7 @@ public class ObserveController {
 				return;
 			for (Iterator<ActionObserver> iterator = observers.iterator(); iterator.hasNext(); ) {
 				ActionObserver observer = iterator.next();
-				if (observer.getObserverType().matchesObserver(type)) {
+				if (observer.matches(type)) {
 					if (notifiable.isEmpty())
 						notifiable = new ArrayList<>();
 					notifiable.add(observer);
@@ -173,6 +173,28 @@ public class ObserveController {
 
 	public void notifyItemUnEquip(Item item, Player owner) {
 		notifyObservers(ObserverType.UNEQUIP, item, owner);
+	}
+
+	/**
+	 * Aborts every attached {@link ItemUseObserver}, so each of them cancels its own item use and tells the player about it.
+	 */
+	public void abortItemUseObservers() {
+		List<ItemUseObserver> itemUseObservers = Collections.emptyList();
+		synchronized (observers) {
+			for (Iterator<ActionObserver> iterator = observers.iterator(); iterator.hasNext();) {
+				if (iterator.next() instanceof ItemUseObserver itemUseObserver) {
+					if (itemUseObservers.isEmpty())
+						itemUseObservers = new ArrayList<>();
+					itemUseObservers.add(itemUseObserver);
+					iterator.remove();
+				}
+			}
+		}
+
+		for (ItemUseObserver itemUseObserver : itemUseObservers) {
+			itemUseObserver.abort();
+			itemUseObserver.onRemoved();
+		}
 	}
 
 	public void notifyItemuseObservers(Item item) {

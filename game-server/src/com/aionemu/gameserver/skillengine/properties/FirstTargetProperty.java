@@ -96,9 +96,8 @@ public class FirstTargetProperty {
 						return false;
 					}
 				} else if (relation != TargetRelationAttribute.ENEMY && !isTargetAllowed(skill, skill.getFirstTarget())) {
-					if (effector instanceof Player playerEffector) {
+					if (effector instanceof Player playerEffector)
 						PacketSendUtility.sendPacket(playerEffector, SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_IS_NOT_VALID());
-					}
 					return false;
 				}
 				break;
@@ -128,9 +127,11 @@ public class FirstTargetProperty {
 				skill.setFirstTarget(effector);
 				break;
 			case TARGET_MYPARTY_NONVISIBLE: // Summon Group Member
-				if (!isTargetTeamMember(skill, true))
+				if (!isTargetTeamMember(skill, true)) {
+					if (effector instanceof Player playerEffector)
+						PacketSendUtility.sendPacket(playerEffector, SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_IS_NOT_VALID());
 					return false;
-
+				}
 				skill.setFirstTargetRangeCheck(false);
 				break;
 			case POINT:

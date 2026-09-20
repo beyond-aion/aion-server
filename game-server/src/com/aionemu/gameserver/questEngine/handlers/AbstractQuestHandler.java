@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.questEngine.handlers;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
+import static com.aionemu.gameserver.model.items.ItemUseAnimation.*;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -952,12 +953,12 @@ public abstract class AbstractQuestHandler {
 		final int objectId = item.getObjectId();
 
 		if (qs.getQuestVarById(varNum) == step) {
-			PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), objectId, itemId, 3000, 0, 0), true);
+			PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), objectId, itemId, 3000, USE_START), true);
 			ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 				@Override
 				public void run() {
-					PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), objectId, itemId, 0, 1, 0), true);
+					PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), objectId, itemId, 0, USE_SUCCESS), true);
 					removeQuestItem(env, itemId, 1);
 
 					if (addItemId != 0 && addItemCount != 0) {

@@ -27,6 +27,7 @@ public class StatCapUtil {
 		register(MAXMP, creature -> creature instanceof Player ? 1 : 0, CapFunction.UNLIMITED_UPPER);
 		register(SPEED, 0, creature -> creature instanceof Player p && !p.isStaff() ? 12000 : Integer.MAX_VALUE);
 		register(FLY_SPEED, 0, creature -> creature instanceof Player p && !p.isStaff() ? 16000 : Integer.MAX_VALUE);
+		register(ATTACK_SPEED, 500, 10000);
 		register(HEAL_BOOST, -1000, 1000);
 		register(EVASION, 0, CapFunction.UNLIMITED_UPPER, 300);
 		register(PARRY, 0, CapFunction.UNLIMITED_UPPER, 400);
@@ -53,15 +54,9 @@ public class StatCapUtil {
 		int lowerCap = getLowerCap(stat.getStat(), creature);
 		int upperCap = getUpperCap(stat.getStat(), creature);
 
-		if (stat.getStat() == ATTACK_SPEED) {
-			int base = stat.getBase() / 2;
-			if (stat.getBonus() > 0 && base < stat.getBonus())
-				stat.setBonus(base);
-			else if (stat.getBonus() < 0 && base < -stat.getBonus())
-				stat.setBonus(-base);
-		}
-
-		calculate(stat, lowerCap, upperCap);
+		cap(stat, lowerCap, upperCap);
+		if (stat.getStat() == ATTACK_SPEED) // attack delay is first capped to [500, 10000] ms and then to [base * 0.5, base * 2]
+			cap(stat, (int) (stat.getBase() * 0.5f), stat.getBase() * 2);
 	}
 
 	public static int getLowerCap(StatEnum stat, Creature creature) {
@@ -107,7 +102,7 @@ public class StatCapUtil {
 		return Math.clamp(value, cap.min(), cap.max());
 	}
 
-	private static void calculate(Stat2 stat2, int lowerCap, int upperCap) {
+	private static void cap(Stat2 stat2, int lowerCap, int upperCap) {
 		float exactCurrent = stat2.getExactCurrent();
 		if (exactCurrent > upperCap) {
 			stat2.setFinalRate(1f);

@@ -1,11 +1,12 @@
 package com.aionemu.gameserver.controllers;
 
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Future;
 
-import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -33,7 +34,6 @@ import com.aionemu.gameserver.model.items.GodStone;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.item.GodstoneInfo;
 import com.aionemu.gameserver.model.templates.item.ItemAttackType;
-import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
@@ -183,22 +183,41 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 		onAttack(creature, null, TYPE.REGULAR, damage, true, LOG.REGULAR, attackStatus, HopType.DAMAGE);
 	}
 
-	public final void onAttack(Creature creature, int damage, AttackStatus attackStatus, Effect criticalEffect) {
-		onAttack(creature, null, TYPE.REGULAR, damage, true, LOG.REGULAR, attackStatus, HopType.DAMAGE, criticalEffect);
+	public final void onAttack(Creature creature, int damage, AttackStatus attackStatus, Effect criticalProcEffect) {
+		onAttack(creature, null, TYPE.REGULAR, damage, true, LOG.REGULAR, attackStatus, HopType.DAMAGE, criticalProcEffect, false);
 	}
 
 	public final void onAttack(Effect effect, TYPE type, int damage, boolean notifyAttack, LOG logId, HopType hopType) {
-		onAttack(effect.getEffector(), effect, type, damage, notifyAttack, logId, effect.getAttackStatus(), hopType, null);
+		onAttack(effect, type, damage, notifyAttack, logId, hopType, false);
+	}
+
+	/**
+	 * Perform tasks when Creature was attacked by a periodic effect. Its critical hits are only visible in the attack status packet, since the cast
+	 * result was already sent when the effect started.
+	 */
+	public final void onAttack(Effect effect, TYPE type, int damage, boolean notifyAttack, LOG logId, HopType hopType, boolean criticalHit) {
+		onAttack(effect.getEffector(), effect, type, damage, notifyAttack, logId, effect.getAttackStatus(), hopType, null, criticalHit);
 	}
 
 	public void onAttack(Creature attacker, Effect effect, TYPE type, int damage, boolean notifyAttack, LOG logId, AttackStatus status, HopType hopType) {
-		onAttack(attacker, effect, type, damage, notifyAttack, logId, status, hopType, null);
+		onAttack(attacker, effect, type, damage, notifyAttack, logId, status, hopType, null, false);
 	}
 
 	/**
 	 * Perform tasks when Creature was attacked
+	 * 
+	 * @param attacker
+	 *          creature the damage is credited to, which is not always the effector (reflected and protected damage)
+	 * @param effect
+	 *          effect which dealt the damage, null for auto attacks
+	 * @param notifyAttack
+	 *          whether the hit may interrupt casts and notify attack observers
+	 * @param criticalProcEffect
+	 *          stumble which procced from an earlier critical hit and is applied on top of this damage, null if none procced
+	 * @param criticalHit
+	 *          whether the attack status packet must mark this damage as a critical hit
 	 */
-	private void onAttack(Creature attacker, Effect effect, TYPE type, int damage, boolean notifyAttack, LOG logId, AttackStatus status, HopType hopType, Effect criticalEffect) {
+	private void onAttack(Creature attacker, Effect effect, TYPE type, int damage, boolean notifyAttack, LOG logId, AttackStatus status, HopType hopType, Effect criticalProcEffect, boolean criticalHit) {
 		if (!getOwner().isSpawned())
 			return;
 		if (damage != 0 && notifyAttack) {
@@ -226,12 +245,12 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 
 		// notify all NPC's around that creature is attacking me
 		getOwner().getKnownList().forEachNpc(npc -> npc.getAi().onCreatureEvent(AIEventType.CREATURE_NEEDS_SUPPORT, getOwner()));
-		getOwner().getLifeStats().reduceHp(type, damage, effect == null ? 0 : effect.getSkillId(), logId, attacker);
+		getOwner().getLifeStats().reduceHp(type, damage, effect == null ? 0 : effect.getSkillId(), logId, attacker, criticalHit);
 		getOwner().incrementAttackedCount();
 
 		if (!getOwner().isDead() && attacker instanceof Player player) {
-			if (criticalEffect != null) {
-				criticalEffect.applyEffect();
+			if (criticalProcEffect != null) {
+				criticalProcEffect.applyEffect();
 			}
 			if ((effect == null || effect.tryActivateGodstone()) && status != AttackStatus.DODGE && status != AttackStatus.RESIST)
 				calculateGodStoneEffects(player);
@@ -254,8 +273,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 			return;
 
 		GodstoneInfo godstoneInfo = godStone.getGodstoneInfo();
-		ItemTemplate template = DataManager.ITEM_DATA.getItemTemplate(godStone.getItemId());
-		Skill skill = SkillEngine.getInstance().getSkill(attacker, godstoneInfo.getSkillId(), godstoneInfo.getSkillLevel(), getOwner(), template);
+		Skill skill = SkillEngine.getInstance().getSkill(attacker, godstoneInfo.getSkillId(), godstoneInfo.getSkillLevel(), getOwner(), godStone.getItemTemplate());
 		skill.setFirstTargetRangeCheck(false);
 		if (!skill.canUseSkill(CastState.CAST_START))
 			return;
@@ -271,8 +289,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 				// PacketSendUtility.sendPacket(owner, SM_SYSTEM_MESSAGE.STR_MSG_BREAK_PROC_REMAIN_START(equippedItem.getL10n(),
 				// itemTemplate.getL10nId()));
 				weapon.setGodStone(null);
-				PacketSendUtility.sendPacket(attacker,
-					SM_SYSTEM_MESSAGE.STR_MSG_BREAK_PROC(weapon.getL10n(), DataManager.ITEM_DATA.getItemTemplate(godStone.getItemId()).getL10n()));
+				PacketSendUtility.sendPacket(attacker, SM_SYSTEM_MESSAGE.STR_MSG_BREAK_PROC(weapon.getL10n(), godStone.getL10n()));
 				ItemPacketService.updateItemAfterInfoChange(attacker, weapon);
 			}
 		}
@@ -299,9 +316,9 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 		AttackTypeAnimation attackTypeAnimation = AttackTypeAnimation.MELEE;
 		List<AttackResult> attackResult;
 
-		CalculationType[] calculationTypes = new CalculationType[] { CalculationType.APPLY_POWER_SHARD_DAMAGE, CalculationType.REMOVE_POWER_SHARD };
+		Set<CalculationType> calculationTypes = EnumSet.of(CalculationType.APPLY_POWER_SHARD_DAMAGE, CalculationType.REMOVE_POWER_SHARD);
 		if (getOwner() instanceof Player p && p.getEquipment().isDualWeaponEquipped())
-			calculationTypes = ArrayUtils.add(calculationTypes, CalculationType.DUAL_WIELD);
+			calculationTypes.add(CalculationType.DUAL_WIELD);
 		if (getOwner().getAttackType() == ItemAttackType.PHYSICAL)
 			attackResult = AttackUtil.calculatePhysAttackResult(getOwner(), target, calculationTypes);
 		else {
@@ -321,14 +338,14 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 		}
 
 		AttackStatus firstAttackStatus = AttackStatus.getBaseStatus(attackResult.getFirst().getAttackStatus());
-		Effect criticalEffect = null;
+		Effect criticalProcEffect = null;
 		if (getOwner() instanceof Player player && firstAttackStatus == AttackStatus.CRITICAL && Rnd.chance() < 10) {
-			criticalEffect = SkillEngine.getInstance().createCriticalEffect(player, target, 0);
-			if (criticalEffect != null && (criticalEffect.getEffectResult() == EffectResult.DODGE || criticalEffect.getEffectResult() == EffectResult.RESIST))
-				criticalEffect = null;
+			criticalProcEffect = SkillEngine.getInstance().createCriticalProcEffect(player, target, 0);
+			if (criticalProcEffect != null && (criticalProcEffect.getEffectResult() == EffectResult.DODGE || criticalProcEffect.getEffectResult() == EffectResult.RESIST))
+				criticalProcEffect = null;
 		}
 		PacketSendUtility.broadcastPacketAndReceive(getOwner(),
-			new SM_ATTACK(getOwner(), target, getOwner().getGameStats().getAttackCounter(), time, attackTypeAnimation, attackHandAnimation, attackResult, criticalEffect),
+			new SM_ATTACK(getOwner(), target, getOwner().getGameStats().getAttackCounter(), time, attackTypeAnimation, attackHandAnimation, attackResult, criticalProcEffect),
 			AIEventType.CREATURE_NEEDS_HELP);
 
 		getOwner().getGameStats().increaseAttackCounter();
@@ -337,9 +354,9 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 		}
 
 		if (time == 0)
-			target.getController().onAttack(getOwner(), damage, firstAttackStatus, criticalEffect);
+			target.getController().onAttack(getOwner(), damage, firstAttackStatus, criticalProcEffect);
 		else
-			ThreadPoolManager.getInstance().schedule(new DelayedOnAttack(target, getOwner(), damage, firstAttackStatus, criticalEffect), time);
+			ThreadPoolManager.getInstance().schedule(new DelayedOnAttack(target, getOwner(), damage, firstAttackStatus, criticalProcEffect), time);
 	}
 
 	/**
@@ -545,22 +562,22 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 		private Creature creature;
 		private int finalDamage;
 		private AttackStatus attackStatus;
-		private Effect criticalEffect;
+		private Effect criticalProcEffect;
 
-		private DelayedOnAttack(Creature target, Creature creature, int finalDamage, AttackStatus attackStatus, Effect criticalEffect) {
+		private DelayedOnAttack(Creature target, Creature creature, int finalDamage, AttackStatus attackStatus, Effect criticalProcEffect) {
 			this.target = target;
 			this.creature = creature;
 			this.finalDamage = finalDamage;
 			this.attackStatus = attackStatus;
-			this.criticalEffect = criticalEffect;
+			this.criticalProcEffect = criticalProcEffect;
 		}
 
 		@Override
 		public void run() {
-			target.getController().onAttack(creature, finalDamage, attackStatus, criticalEffect);
+			target.getController().onAttack(creature, finalDamage, attackStatus, criticalProcEffect);
 			target = null;
 			creature = null;
-			criticalEffect = null;
+			criticalProcEffect = null;
 		}
 
 	}

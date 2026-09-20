@@ -4,6 +4,7 @@ import java.util.concurrent.Future;
 
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.ai.manager.SkillAttackManager;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -11,9 +12,6 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.NpcObjectType;
 import com.aionemu.gameserver.model.skill.NpcSkillEntry;
 import com.aionemu.gameserver.skillengine.SkillEngine;
-import com.aionemu.gameserver.skillengine.effect.AbnormalState;
-import com.aionemu.gameserver.skillengine.model.SkillTemplate;
-import com.aionemu.gameserver.skillengine.model.SkillType;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
@@ -73,14 +71,8 @@ public class ServantNpcAI extends GeneralNpcAI {
 			if (target == null || target.isDead()) {
 				AIActions.deleteOwner(ServantNpcAI.this);
 				cancelTask();
-			} else {
-				SkillTemplate template = skill.getTemplate().getSkillTemplate();
-				if ((template.getType() != SkillType.MAGICAL || !getOwner().getEffectController().isAbnormalSet(AbnormalState.SILENCE))
-					&& (template.getType() != SkillType.PHYSICAL || !getOwner().getEffectController().isAbnormalSet(AbnormalState.BIND))
-					&& (!getOwner().getEffectController().isInAnyAbnormalState(AbnormalState.CANT_ATTACK_STATE))
-					&& (!getOwner().isTransformed() || !getOwner().getTransformModel().cantUseSkills())) {
-					SkillEngine.getInstance().getSkill(getOwner(), skill.getSkillId(), skill.getSkillLevel(), getOwner().getTarget()).useSkill();
-				}
+			} else if (!SkillAttackManager.cantUseSkill(skill, getOwner())) {
+				SkillEngine.getInstance().getSkill(getOwner(), skill.getSkillId(), skill.getSkillLevel(), getOwner().getTarget()).useSkill();
 			}
 		}, startDelay, duration);
 		getOwner().getController().addTask(TaskId.SKILL_USE, skillTask);

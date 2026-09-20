@@ -15,9 +15,9 @@ import com.aionemu.gameserver.utils.chathandlers.PlayerCommand;
 public class Questrestart extends PlayerCommand {
 
 	public Questrestart() {
-		super("questrestart", "Restarts a bugged Quest.");
-
-		setSyntaxInfo("<quest link|ID> - Restarts the specified quest.");
+		super("questrestart", "Restarts a quest.", """
+			<quest link|ID> - Restarts the specified quest.
+			""");
 	}
 
 	@Override

@@ -71,7 +71,7 @@ import com.aionemu.gameserver.skillengine.effect.RebirthEffect;
 import com.aionemu.gameserver.skillengine.model.ChainSkills;
 import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
-import com.aionemu.gameserver.skillengine.task.CraftingTask;
+import com.aionemu.gameserver.skillengine.task.AbstractInteractionTask;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapType;
 import com.aionemu.gameserver.world.WorldPosition;
@@ -108,7 +108,6 @@ public class Player extends Creature {
 	private final Storage regularWarehouse;
 	private final Storage[] petBags = new Storage[StorageType.PET_BAG_MAX - StorageType.PET_BAG_MIN + 1];
 	private final Storage[] cabinets = new Storage[StorageType.HOUSE_WH_MAX - StorageType.HOUSE_WH_MIN + 1];
-	private Item usingItem;
 
 	private PlayerSettings playerSettings;
 
@@ -120,7 +119,7 @@ public class Player extends Creature {
 
 	private int flyState = 0;
 	private FlyController flyController;
-	private CraftingTask craftingTask;
+	private volatile AbstractInteractionTask interactionTask;
 	private FlightPath flightPath;
 	private Summon summon;
 	private Pet pet;
@@ -461,14 +460,6 @@ public class Player extends Creature {
 		return equipment;
 	}
 
-	public Item getUsingItem() {
-		return usingItem;
-	}
-
-	public void setUsingItem(Item usingItem) {
-		this.usingItem = usingItem;
-	}
-
 	/**
 	 * @return the player private store
 	 */
@@ -804,12 +795,15 @@ public class Player extends Creature {
 		this.flyController = flyController;
 	}
 
-	public void setCraftingTask(CraftingTask craftingTask) {
-		this.craftingTask = craftingTask;
+	public void setInteractionTask(AbstractInteractionTask interactionTask) {
+		this.interactionTask = interactionTask;
 	}
 
-	public CraftingTask getCraftingTask() {
-		return craftingTask;
+	/**
+	 * @return The gathering or crafting task the player is currently busy with, null if there is none.
+	 */
+	public AbstractInteractionTask getInteractionTask() {
+		return interactionTask;
 	}
 
 	public void setFlightTeleportId(int flightTeleportId) {
@@ -879,12 +873,20 @@ public class Player extends Creature {
 	 */
 	@Override
 	public boolean isEnemyFrom(Player enemy) {
+		return isEnemyFrom(enemy, this);
+	}
+
+	/**
+	 * @param ownedCreature
+	 *          this player or a creature it summoned, whose position decides whether PvP is allowed on this side
+	 */
+	public boolean isEnemyFrom(Player enemy, Creature ownedCreature) {
 		if (equals(enemy))
 			return false;
 		if (isInCustomState(CustomPlayerState.ENEMY_OF_ALL_PLAYERS) || enemy.isInCustomState(CustomPlayerState.ENEMY_OF_ALL_PLAYERS)) {
 			return !isInFfaTeamMode || !enemy.isInFfaTeamMode() || !isInSameTeam(enemy);
 		}
-		return canPvP(enemy) || isDueling(enemy);
+		return ownedCreature.isInsidePvPZone() && enemy.isInsidePvPZone() && isPvPEnemyOf(enemy) || isDueling(enemy);
 	}
 
 	public boolean isAggroIconTo(Player enemy) {
@@ -909,13 +911,17 @@ public class Player extends Creature {
 		return false;
 	}
 
-	private boolean canPvP(Player enemy) {
+	/**
+	 * @return True, if the relation between both players allows PvP. Their positions are not part of the answer.
+	 */
+	public boolean isPvPEnemyOf(Player enemy) {
+		if (equals(enemy))
+			return false;
+		if (enemy.getRace() != getRace() || isHostileInPanesterra(enemy))
+			return true;
 		int worldId = enemy.getWorldId();
-		if (enemy.getRace() != getRace() || isHostileInPanesterra(enemy)) {
-			return isInsidePvPZone() && enemy.isInsidePvPZone();
-		} else if (worldId == 110010000 || worldId == 120010000 || isInInstance()) {
+		if (worldId == 110010000 || worldId == 120010000 || isInInstance())
 			return isInsideZoneType(ZoneType.PVP) && enemy.isInsideZoneType(ZoneType.PVP) && !isInSameTeam(enemy);
-		}
 		return false;
 	}
 
@@ -1343,7 +1349,7 @@ public class Player extends Creature {
 
 	@Override
 	public boolean isPvpTarget(Creature creature) {
-		return creature.getActingCreature() instanceof Player;
+		return creature.getMaster() instanceof Player;
 	}
 
 	public boolean isTargetingNpcWithFunction(int objectId, int dialogActionId) {

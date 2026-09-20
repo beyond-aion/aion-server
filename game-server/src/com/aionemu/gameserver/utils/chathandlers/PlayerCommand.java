@@ -11,15 +11,17 @@ public abstract class PlayerCommand extends ChatCommand {
 	public final static String PREFIX = ".";
 
 	/**
-	 * Registers a new player command.
-	 * 
-	 * @param alias
-	 *          the command name
-	 * @param description
-	 *          description what the command does
+	 * @see PlayerCommand(String, String, String)
 	 */
 	public PlayerCommand(String alias, String description) {
-		super(PREFIX, alias, description);
+		this(alias, description, "");
+	}
+
+	/**
+	 * @see ChatCommand#ChatCommand(String, String, String, String)
+	 */
+	public PlayerCommand(String alias, String description, String syntaxInfo) {
+		super(PREFIX, alias, description, syntaxInfo);
 	}
 
 	@Override

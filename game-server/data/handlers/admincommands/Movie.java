@@ -11,14 +11,10 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 public class Movie extends AdminCommand {
 
 	public Movie() {
-		super("movie");
-
-		// @formatter:off
-		setSyntaxInfo(
-			"<cutsceneId> - Plays the given cutscene (correct rendering depends on your current map)",
-			"m <movieId> - Plays the given movie cutscene"
-		);
-		// @formatter:on
+		super("movie", "Plays movies/cutscenes.", """
+			<cutscene ID> - Plays the given cutscene (correct rendering depends on your current map).
+			m <movie ID> - Plays the given movie cutscene.
+			""");
 	}
 
 	@Override

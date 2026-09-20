@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.model.templates.item.actions;
 
+import static com.aionemu.gameserver.model.items.ItemUseAnimation.*;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -49,20 +51,21 @@ public class AnimationAddAction extends AbstractItemAction {
 			finishUse(player, parentItem);
 			return;
 		}
-		final ItemUseObserver observer = new ItemUseObserver() {
+		ItemUseObserver observer = new ItemUseObserver(player) {
 
 			@Override
-			public void abort() {
-				player.getController().cancelUseItem();
+			protected void onAbort() {
+				player.getController().cancelTask(TaskId.ITEM_USE);
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_CANCELED());
-				player.getObserveController().removeObserver(this);
+				PacketSendUtility.sendPacket(player,
+					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), 0, USE_CANCEL));
 			}
 
 		};
 
-		player.getObserveController().attach(observer);
-		PacketSendUtility.sendPacket(player,
-			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), castingDelay, 0, 0));
+		player.getObserveController().addObserver(observer);
+		PacketSendUtility.sendPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(),
+			parentItem.getItemTemplate().getTemplateId(), castingDelay, USE_START));
 		player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(() -> {
 			player.getObserveController().removeObserver(observer);
 			finishUse(player, parentItem);
@@ -90,7 +93,7 @@ public class AnimationAddAction extends AbstractItemAction {
 		}
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_USE_ITEM(parentItem.getL10n()));
 		PacketSendUtility.broadcastPacketAndReceive(player,
-			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, 1, 0));
+			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, USE_SUCCESS));
 		PacketSendUtility.broadcastPacket(player, new SM_MOTION(player.getObjectId(), player.getMotions().getActiveMotions()), false);
 	}
 

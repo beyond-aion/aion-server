@@ -9,15 +9,11 @@ import consolecommands.Bookmark_add;
 public class Bookmark extends AdminCommand {
 
 	public Bookmark() {
-		super("bookmark", "Manages teleport bookmarks.");
-
-		// @formatter:off
-		setSyntaxInfo(
-			"del <name> - Deletes the bookmark with the specified name.",
-			"deleteAll - Deletes all bookmarks.",
-			"Note: Press Shift+G and click the \"Bookmark\" button to add or use your teleport bookmarks."
-		);
-		// @formatter:on
+		super("bookmark", "Manages teleport bookmarks.", """
+			del <name> - Deletes the bookmark with the specified name.
+			deleteAll - Deletes all bookmarks.
+			Note: Press Shift+G and click the "Bookmark" button to add or use your teleport bookmarks.
+			""");
 	}
 
 	@Override

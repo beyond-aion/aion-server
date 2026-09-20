@@ -116,7 +116,8 @@ public class FlyController {
 	public boolean switchToGliding() {
 		if (player.isInGlidingState() || !player.canPerformMove())
 			return false;
-
+		if (player.isUsingFlightTransporterOrWindstream())
+			return false;
 		if (!canGlide(player))
 			return false;
 		if (player.getFlyState() == 0) {

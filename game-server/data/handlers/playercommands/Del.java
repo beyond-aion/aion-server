@@ -1,7 +1,5 @@
 package playercommands;
 
-import org.apache.commons.lang3.math.NumberUtils;
-
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.storage.Storage;
 import com.aionemu.gameserver.utils.ChatUtil;
@@ -13,9 +11,9 @@ import com.aionemu.gameserver.utils.chathandlers.PlayerCommand;
 public class Del extends PlayerCommand {
 
 	public Del() {
-		super("del", "Deletes items from your inventory.");
-
-		setSyntaxInfo("<item link|ID> [count] - Removes item(s) with the specified name/ID (default: 1, optional: number of items to delete).");
+		super("del", "Deletes items from your inventory.", """
+			<item link|ID> [count] - Removes item(s) with the specified name/ID (default: 1, optional: number of items to delete).
+			""");
 	}
 
 	@Override
@@ -31,8 +29,8 @@ public class Del extends PlayerCommand {
 			return;
 		}
 
-		int itemCount = params.length > 1 ? NumberUtils.toInt(params[1]) : 1;
-		if (itemCount == 0) {
+		int itemCount = params.length > 1 ? Integer.parseInt(params[1]) : 1;
+		if (itemCount <= 0) {
 			sendInfo(player, "Invalid item count.");
 			return;
 		}

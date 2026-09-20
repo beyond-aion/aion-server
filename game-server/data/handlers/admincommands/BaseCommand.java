@@ -13,17 +13,13 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 public class BaseCommand extends AdminCommand {
 
 	public BaseCommand() {
-		super("base", "Lists bases or changes their state.");
-
-		// @formatter:off
-		setSyntaxInfo(
-			"list - Lists all available base locations with their respective occupier.",
-			"start <id> - Activates the specified base.",
-			"stop <id> - Deactivates the specified base.",
-			"capture <id> <occupier> - Captures the specified base with the specified new occupier.",
-			"assault <id> - Spawns attacker NPCs for the specified base if available."
-		);
-		// @formatter:on
+		super("base", "Lists bases or changes their state.", """
+			list - Lists all available base locations with their respective occupier.
+			start <id> - Activates the specified base.
+			stop <id> - Deactivates the specified base.
+			capture <id> <occupier> - Captures the specified base with the specified new occupier.
+			assault <id> - Spawns attacker NPCs for the specified base if available.
+			""");
 	}
 
 	@Override

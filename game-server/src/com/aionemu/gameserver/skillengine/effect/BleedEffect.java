@@ -21,6 +21,11 @@ import com.aionemu.gameserver.skillengine.model.EffectReserved.ResourceType;
 public class BleedEffect extends AbstractOverTimeEffect {
 
 	@Override
+	protected void resolveMagicalCritical(Effect effect) {
+		effect.rollMagicalCritical(position, calculateCritProbMod(effect)); // periodic damage ignores the apply_magical_critical flag
+	}
+
+	@Override
 	public void calculate(Effect effect) {
 		super.calculate(effect, StatEnum.BLEED_RESISTANCE, null);
 	}
@@ -41,7 +46,8 @@ public class BleedEffect extends AbstractOverTimeEffect {
 	@Override
 	public void onPeriodicAction(Effect effect) {
 		Creature effected = effect.getEffected();
-		effected.getController().onAttack(effect, TYPE.DAMAGE, effect.getReserveds(position).getValue(), false, LOG.BLEED, hopType);
+		effected.getController().onAttack(effect, TYPE.DAMAGE, effect.getReserveds(position).getValue(), false, LOG.BLEED, hopType,
+			effect.isMagicalCritical(position));
 		effected.getObserveController().notifyDotAttackedObservers(effect.getEffector(), effect);
 	}
 }

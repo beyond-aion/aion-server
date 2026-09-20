@@ -61,6 +61,14 @@ public class SkillTemplate implements L10n {
 	private int reqDispelLevel;
 	@XmlAttribute(name = "req_dispel_count")
 	private int reqDispelCount;
+	@XmlAttribute(name = "apply_magical_skill_boost_bonus")
+	private boolean applyMagicalSkillBoostBonus;
+	@XmlAttribute(name = "apply_magical_critical")
+	private boolean applyMagicalCritical;
+	@XmlAttribute(name = "apply_heal_boost_bonus")
+	private boolean applyHealBoostBonus;
+	@XmlAttribute(name = "apply_casting_time_bonus")
+	private boolean applyCastingTimeBonus;
 	@XmlAttribute(name = "activation", required = true)
 	private ActivationAttribute activationAttribute;
 	@XmlAttribute(required = true)
@@ -101,8 +109,6 @@ public class SkillTemplate implements L10n {
 	private boolean noSaveOnLogout = false;
 	@XmlAttribute(name = "stigma")
 	private StigmaType stigmaType = StigmaType.NONE;
-	@XmlAttribute(name = "applymcrit")
-	private boolean applyMcrit = true;
 	@XmlAttribute(name = "hostile_type")
 	private HostileType hostileType = HostileType.NONE;
 
@@ -187,6 +193,22 @@ public class SkillTemplate implements L10n {
 		return reqDispelCount;
 	}
 
+	public boolean isApplyMagicalSkillBoostBonus() {
+		return applyMagicalSkillBoostBonus;
+	}
+
+	public boolean isApplyMagicalCritical() {
+		return applyMagicalCritical;
+	}
+
+	public boolean isApplyHealBoostBonus() {
+		return applyHealBoostBonus;
+	}
+
+	public boolean isApplyCastingTimeBonus() {
+		return applyCastingTimeBonus;
+	}
+
 	public int getDuration() {
 		return duration;
 	}
@@ -266,16 +288,6 @@ public class SkillTemplate implements L10n {
 
 	public boolean isStance() {
 		return stance;
-	}
-
-	public boolean isCastDurationAffectedByCastSpeed() {
-		if (isDeityAvatar())
-			return false;
-		if (hasAnyEffect(EffectType.SLEEP, EffectType.FEAR, EffectType.RETURN, EffectType.ESCAPE))
-			return false; // sleep and fear skills are no longer affected by cast speed since 1.5.0.5
-		if (getActions() != null && getActions().getActions().stream().anyMatch(action -> action instanceof ItemUseAction)) // e.g. Herb Treatment
-			return false;
-		return true;
 	}
 
 	public boolean hasAnyEffect(EffectType... effectTypes) {
@@ -403,10 +415,6 @@ public class SkillTemplate implements L10n {
 
 	public SkillCategory getSkillCategory() {
 		return skillCategory;
-	}
-
-	public boolean isMcritApplied() {
-		return applyMcrit;
 	}
 
 	public HostileType getHostileType() {

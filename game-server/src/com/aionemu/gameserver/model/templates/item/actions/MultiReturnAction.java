@@ -1,5 +1,9 @@
 package com.aionemu.gameserver.model.templates.item.actions;
 
+import static com.aionemu.gameserver.model.items.ItemUseAnimation.*;
+
+import java.util.List;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -29,49 +33,52 @@ public class MultiReturnAction extends AbstractItemAction {
 
 	@Override
 	public boolean canAct(Player player, Item item, Item targetItem, Object... params) {
-		return true;
+		return getReturnLoc((int) params[0]) != null;
 	}
 
 	@Override
 	public void act(final Player player, final Item item, final Item targetItem, Object... params) {
 		int castingDelay = item.getItemTemplate().getCastingDelay();
-		int indexReturn = (int) params[0];
-		PacketSendUtility.broadcastPacket(player,
-			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), item.getObjectId(), item.getItemId(), castingDelay, 0, 0), true);
-
-		final ItemUseObserver observer = new ItemUseObserver() {
-
-			@Override
-			public void abort() {
-				player.getController().cancelUseItem(false);
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_CANCELED());
-				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), item.getObjectId(), item.getItemId(), 0, 2, 0),
-					true);
-				player.getObserveController().removeObserver(this);
-			}
-		};
+		ReturnLocList loc = getReturnLoc((int) params[0]);
 		if (castingDelay <= 0) {
-			finishUse(player, item, observer, indexReturn);
+			finishUse(player, item, loc);
 			return;
 		}
+		PacketSendUtility.broadcastPacket(player,
+			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), item.getObjectId(), item.getItemId(), castingDelay, USE_START), true);
 
-		player.getObserveController().attach(observer);
+		ItemUseObserver observer = new ItemUseObserver(player) {
+
+			@Override
+			protected void onAbort() {
+				player.getController().cancelTask(TaskId.ITEM_USE);
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_CANCELED());
+				PacketSendUtility.broadcastPacket(player,
+					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), item.getObjectId(), item.getItemId(), 0, USE_CANCEL), true);
+			}
+		};
+		player.getObserveController().addObserver(observer);
 		player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(() -> {
 			player.getObserveController().removeObserver(observer);
-			finishUse(player, item, observer, indexReturn);
+			finishUse(player, item, loc);
 		}, castingDelay));
 	}
 
-	private void finishUse(Player player, Item item, ItemUseObserver observer, int indexReturn) {
-		ReturnLocList loc = DataManager.MULTIRETURN_DATA.getReturnLocListById(id).get(indexReturn);
-		if (loc != null && loc.getAlias() != null && loc.getWorldid() > 0) {
-			if (!player.getInventory().decreaseByObjectId(item.getObjectId(), 1)) {
-				observer.abort();
-				return;
-			}
-			player.startCooldown(item);
-			TeleportService.useTeleportScroll(player, loc.getAlias().toUpperCase(), loc.getWorldid());
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_USE_ITEM(item.getL10n()));
-		}
+	private void finishUse(Player player, Item item, ReturnLocList loc) {
+		if (!player.getInventory().decreaseByObjectId(item.getObjectId(), 1))
+			return;
+		player.startCooldown(item);
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_USE_ITEM(item.getL10n()));
+		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), item.getObjectId(), item.getItemId(), 0, USE_SUCCESS),
+			true);
+		TeleportService.useTeleportScroll(player, loc.getAlias().toUpperCase(), loc.getWorldid());
+	}
+
+	private ReturnLocList getReturnLoc(int index) {
+		List<ReturnLocList> locs = DataManager.MULTIRETURN_DATA.getReturnLocListById(id);
+		if (locs == null || index < 0 || index >= locs.size())
+			return null;
+		ReturnLocList loc = locs.get(index);
+		return loc != null && loc.getAlias() != null && loc.getWorldid() > 0 ? loc : null;
 	}
 }

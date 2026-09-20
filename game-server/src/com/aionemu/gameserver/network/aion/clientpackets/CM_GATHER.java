@@ -8,6 +8,7 @@ import com.aionemu.gameserver.model.gameobjects.Gatherable;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
+import com.aionemu.gameserver.skillengine.task.GatheringTask;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 
 /**
@@ -29,6 +30,8 @@ public class CM_GATHER extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
+		player.getController().cancelUseItem(); // including the stop action
+		player.getController().cancelCurrentSkill(null);
 		switch (actionId) {
 			case -1 -> cancelGathering(player);
 			case 0, 128 -> startGathering(player); // 128 is sent when using /attack chat command
@@ -44,16 +47,7 @@ public class CM_GATHER extends AionClientPacket {
 	}
 
 	private void cancelGathering(Player player) {
-		// player can switch targets during gathering, so the target is not guaranteed to be the correct gatherable
-		Gatherable gatherable = player.getTarget() instanceof Gatherable g && g.getController().getGatheringPlayerId() == player.getObjectId() ? g : null;
-		if (gatherable == null) {
-			gatherable = player.getKnownList().stream()
-				.filter(o -> o.get() instanceof Gatherable g && g.getController().getGatheringPlayerId() == player.getObjectId())
-				.findFirst()
-				.map(o -> (Gatherable) o.get())
-				.orElse(null);
-		}
-		if (gatherable != null)
-			gatherable.getController().cancelGathering();
+		if (player.getInteractionTask() instanceof GatheringTask gatheringTask)
+			gatheringTask.abort();
 	}
 }

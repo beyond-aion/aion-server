@@ -2,8 +2,7 @@ package com.aionemu.gameserver.utils.stats;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.apache.commons.lang3.ArrayUtils;
+import java.util.Set;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.configs.main.FallDamageConfig;
@@ -270,8 +269,8 @@ public class StatFunctions {
 		return (int) ((long) value * (1000 + boostHate) / 1000);
 	}
 
-	public static List<AttackResult> calculateAttackDamage(Creature attacker,
-														   SkillElement element, AttackStatus status, CalculationType... calculationTypes) {
+	public static List<AttackResult> calculateAttackDamage(Creature attacker, SkillElement element, AttackStatus status,
+		Set<CalculationType> calculationTypes) {
 		List<AttackResult> attackResultList = new ArrayList<>();
 		if (AttackStatus.getBaseStatus(status) == AttackStatus.DODGE || AttackStatus.getBaseStatus(status) == AttackStatus.RESIST) {
 			attackResultList.add(new AttackResult(0, AttackStatus.getBaseStatus(status)));
@@ -302,7 +301,7 @@ public class StatFunctions {
 				if (mainWeaponStats != null) {
 					float mainHandDamage = mainHandAttack.getExactCurrent();
 					float offHandDamage = offHandAttack.getExactCurrent();
-					if (ArrayUtils.contains(calculationTypes, CalculationType.SKILL)) { // 80% of damage is added on retail
+					if (calculationTypes.contains(CalculationType.SKILL)) { // 80% of damage is added on retail
 						if (offWeaponStats != null) {
 							float totalBaseDamage = (offHandAttack.getExactBaseWithoutBaseRate() * p.getGameStats().getSkillEfficiency() + mainHandAttack.getExactBaseWithoutBaseRate()) * 0.8f;
 							mainHandDamage = (mainHandAttack.getExactCurrentWithoutFixedBonus() + totalBaseDamage * offHandAttack.getFixedBonusRate()) * 0.8f;
@@ -380,18 +379,22 @@ public class StatFunctions {
 	}
 
 	public static float calculateMagicalSkillDamage(Creature effector, Creature target, float baseDamage, int bonus, EffectTemplate template,
-													boolean useMagicBoost, boolean useKnowledge) {
+													boolean useMagicBoost, boolean useKnowledge, boolean useBoostSpellAttack) {
 		float damage = baseDamage;
-		if (!(template instanceof NoReduceSpellATKInstantEffect)) {
-			CreatureGameStats<?> sgs = effector.getGameStats();
-			CreatureGameStats<?> tgs = target.getGameStats();
-			float magicBoost = useMagicBoost ? sgs.getMBoost().getCurrent() : 0;
-			magicBoost -= effector instanceof Trap ? 0 : tgs.getMBResist().getCurrent();
+		CreatureGameStats<?> sgs = effector.getGameStats();
+		CreatureGameStats<?> tgs = target.getGameStats();
+		int magicBoost = 0;
+
+		if (useMagicBoost) {
+			magicBoost = sgs.getMBoost().getCurrent();
+			magicBoost -= tgs.getMBResist().getCurrent();
 			magicBoost = (int) Math.max(0, limit(StatEnum.BOOST_MAGICAL_SKILL, magicBoost));
-			float knowledge = useKnowledge ? sgs.getKnowledge().getCurrent() : 100; // this line might be wrong now
-			damage *= (1 + (magicBoost / (knowledge * 10)));
-			damage = sgs.getStat(StatEnum.BOOST_SPELL_ATTACK, (int) damage).getCurrent();
 		}
+		int knowledge = useKnowledge ? sgs.getKnowledge().getCurrent() : 100;
+		damage *= (magicBoost / 1000f) + (knowledge / 100f);
+
+		if (useBoostSpellAttack)
+			damage = sgs.getStat(StatEnum.BOOST_SPELL_ATTACK, (int) damage).getCurrent();
 
 		// add bonus damage
 		damage += bonus;
@@ -414,8 +417,8 @@ public class StatFunctions {
 	/**
 	 * Calculates MAGICAL CRITICAL chance
 	 */
-	public static boolean calculateMagicalCriticalRate(Creature attacker, Creature attacked, int criticalProb, boolean applyMcrit) {
-		if (attacker instanceof Servant || attacker instanceof Homing || !applyMcrit)
+	public static boolean calculateMagicalCriticalRate(Creature attacker, Creature attacked, int criticalProb) {
+		if (attacker instanceof Servant || attacker instanceof Homing)
 			return false;
 
 		float critical = attacker.getGameStats().getMCritical().getCurrent() - attacked.getGameStats().getMCR().getCurrent();

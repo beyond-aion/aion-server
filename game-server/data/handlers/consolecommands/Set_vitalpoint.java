@@ -1,6 +1,5 @@
 package consolecommands;
 
-import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_STATS_INFO;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -22,18 +21,7 @@ public class Set_vitalpoint extends ConsoleCommand {
 			return;
 		}
 
-		final VisibleObject target = admin.getTarget();
-		if (target == null) {
-			PacketSendUtility.sendMessage(admin, "No target selected.");
-			return;
-		}
-
-		if (!(target instanceof Player)) {
-			PacketSendUtility.sendMessage(admin, "This command can only be used on a player!");
-			return;
-		}
-
-		final Player player = (Player) target;
+		final Player player = admin.getTarget() instanceof Player target ? target : admin;
 
 		int value;
 

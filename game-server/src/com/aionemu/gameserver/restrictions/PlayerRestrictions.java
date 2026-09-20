@@ -3,6 +3,7 @@ package com.aionemu.gameserver.restrictions;
 import com.aionemu.gameserver.GameServer;
 import com.aionemu.gameserver.configs.main.GroupConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.model.ActionState;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -25,12 +26,10 @@ import com.aionemu.gameserver.services.VortexService;
 import com.aionemu.gameserver.services.ban.ChatBanService;
 import com.aionemu.gameserver.services.player.PlayerChatService;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
-import com.aionemu.gameserver.skillengine.effect.RecallInstantEffect;
 import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.skillengine.model.SkillType;
 import com.aionemu.gameserver.skillengine.model.TransformType;
-import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.world.zone.ZoneName;
@@ -40,13 +39,10 @@ import com.aionemu.gameserver.world.zone.ZoneName;
  */
 public class PlayerRestrictions {
 
-	private static boolean checkFly(Player player, VisibleObject target) {
+	private static boolean checkFly(Player player) {
 		if (player.isUsingFlightTransporterOrWindstream()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_RESTRICTION_NO_FLY());
-			return false;
-		}
-
-		if (target instanceof Player playerTarget && playerTarget.isUsingFlightTransporterOrWindstream()) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CANT_CAST(ActionState.PATH_FLYING.getL10n()));
+			AuditLogger.log(player, "tried to attack " + player.getTarget() + " while using " + player.getFlightPath().getType());
 			return false;
 		}
 		return true;
@@ -60,8 +56,12 @@ public class PlayerRestrictions {
 		VisibleObject target = player.getTarget();
 		SkillTemplate template = skill.getSkillTemplate();
 
-		// TODO check if its ok
-		if (!checkFly(player, target) || player.getLifeStats().isAboutToDie() || player.isDead()) {
+		if (!checkFly(player) || player.getLifeStats().isAboutToDie() || player.isDead()) {
+			return false;
+		}
+
+		if (player.getStore() != null) { // You cannot do that while you are running a Private Store.
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CANT_CAST(ActionState.PERSONAL_SHOP.getL10n()));
 			return false;
 		}
 		// item casts are interruptible (PlayerController cancels them), skill casts are not
@@ -100,19 +100,6 @@ public class PlayerRestrictions {
 					AuditLogger.log(player, "tried to use non panel skill while transformed in TransformType.FORM1");
 					return false;
 				}
-			}
-		}
-		if (skill.getSkillTemplate().hasRecallInstant()) {
-			if (!(target instanceof Player))
-				return false;
-			if (player.getController().isInCombat()
-				|| ((Player) target).getController().isInCombat()
-				|| ((Player) target).getTransformModel().cantRecall()
-				|| target.getWorldId() != player.getWorldId()
-				|| !RecallInstantEffect.canRecallTo(player)) {
-				//%0 cannot be summoned right now.
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_Recall_CANNOT_ACCEPT_EFFECT(target.getName()));
-				return false;
 			}
 		}
 		if (template.hasResurrectEffect()) {
@@ -222,7 +209,13 @@ public class PlayerRestrictions {
 			return false;
 		}
 
-		if (!player.isSpawned() || target == null || !checkFly(player, target) || player.getLifeStats().isAboutToDie() || player.isDead())
+		if (!player.isSpawned() || player.getLifeStats().isAboutToDie() || player.isDead())
+			return false;
+
+		if (!checkFly(player))
+			return false;
+
+		if (target instanceof Player targetPlayer && targetPlayer.isUsingFlightTransporterOrWindstream())
 			return false;
 
 		if (!player.canAttack()) {
@@ -231,14 +224,7 @@ public class PlayerRestrictions {
 			return false;
 		}
 
-		if (!(target instanceof Creature)) {
-			PacketSendUtility.sendPacket(player, SM_ATTACK_RESPONSE.STOP_INVALID_TARGET(player.getGameStats().getAttackCounter()));
-			return false;
-		}
-
-		Creature creature = (Creature) target;
-
-		if (creature.isDead() || creature.getLifeStats().isAboutToDie()) {
+		if (!(target instanceof Creature creature) || creature.isDead() || creature.getLifeStats().isAboutToDie()) {
 			PacketSendUtility.sendPacket(player, SM_ATTACK_RESPONSE.STOP_INVALID_TARGET(player.getGameStats().getAttackCounter()));
 			return false;
 		}
@@ -312,19 +298,13 @@ public class PlayerRestrictions {
 		}
 
 		if (player.getStore() != null) { // You cannot use an item while running a Private Store.
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANNOT_USE_ITEM_DURING_PATH_FLYING(ChatUtil.l10n(1400061)));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANNOT_USE_ITEM_DURING_PATH_FLYING(ActionState.PERSONAL_SHOP.getL10n()));
 			return false;
 		}
 
 		// Prevents potion spamming, and relogging to use kisks/aether jelly/long CD items.
 		if (player.hasCooldown(item)) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_CANT_USE_UNTIL_DELAY_TIME());
-			return false;
-		}
-
-		// Checked before the "no actions" fallback below so a race mismatch reports correctly even without one
-		if (item.getItemTemplate().getRace() != Race.PC_ALL && item.getItemTemplate().getRace() != player.getRace()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_USE_ITEM_INVALID_RACE());
 			return false;
 		}
 
@@ -336,10 +316,12 @@ public class PlayerRestrictions {
 			}
 		}
 
-		ItemUseLimits limits = item.getItemTemplate().getUseLimits();
-		if (limits.getGenderPermitted() != null && limits.getGenderPermitted() != player.getGender()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_USE_ITEM_INVALID_GENDER());
-			return false;
+		if (item.getItemTemplate().hasAreaRestriction()) {
+			ZoneName restriction = item.getItemTemplate().getUseArea();
+			if (!player.isInsideItemUseZone(restriction)) {
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_USE_ITEM_INVALID_LOCATION());
+				return false;
+			}
 		}
 
 		if (!item.getItemTemplate().isClassSpecific(player.getCommonData().getPlayerClass())) {
@@ -359,22 +341,24 @@ public class PlayerRestrictions {
 			return false;
 		}
 
-		if (item.getItemTemplate().hasAreaRestriction()) {
-			ZoneName restriction = item.getItemTemplate().getUseArea();
-			if (!player.isInsideItemUseZone(restriction)) {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CAN_NOT_USE_ITEM_IN_CURRENT_POSITION());
-				return false;
-			}
+		if (item.getItemTemplate().getRace() != Race.PC_ALL && item.getItemTemplate().getRace() != player.getRace()) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_USE_ITEM_INVALID_RACE());
+			return false;
+		}
+
+		ItemUseLimits limits = item.getItemTemplate().getUseLimits();
+		if (limits.getGenderPermitted() != null && limits.getGenderPermitted() != player.getGender()) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_USE_ITEM_INVALID_GENDER());
+			return false;
 		}
 
 		if (item.getItemTemplate().getActivationRace() != null) {
-			// TODO: check retail messages
-			if (!(player.getTarget() instanceof Creature)) {
+			if (!(player.getTarget() instanceof Creature target)) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_CANT_FIND_VALID_TARGET());
 				return false;
 			}
-			if (((Creature) player.getTarget()).getRace() != item.getItemTemplate().getActivationRace()) {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CANT_CAST_TO_CURRENT_TARGET());
+			if (target.getRace() != item.getItemTemplate().getActivationRace()) {
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_WRONG_TARGET_RACE(item.getL10n()));
 				return false;
 			}
 		}
