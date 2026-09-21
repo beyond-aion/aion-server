@@ -6,7 +6,6 @@ import java.nio.channels.SocketChannel;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 
 import org.slf4j.Logger;
@@ -19,7 +18,6 @@ import com.aionemu.commons.network.PacketProcessor;
 import com.aionemu.commons.network.packet.BasePacket;
 import com.aionemu.commons.utils.concurrent.ExecuteWrapper;
 import com.aionemu.commons.utils.concurrent.RunnableStatsManager;
-import com.aionemu.gameserver.GameServer;
 import com.aionemu.gameserver.configs.main.ThreadConfig;
 import com.aionemu.gameserver.configs.network.NetworkConfig;
 import com.aionemu.gameserver.configs.network.PffConfig;
@@ -237,21 +235,14 @@ public class AionConnection extends AConnection<AionServerPacket> {
 	@Override
 	protected final void onDisconnect() {
 		connectionAliveChecker.stop();
-		if (GameServer.isShuttingDownSoon()) { // client crashing during last seconds of countdown
-			safeLogout(); // instant synchronized leaveWorld to ensure completion before onServerClose
-			return;
-		}
-
 		LoginServer.getInstance().onDisconnect(this);
 
 		String msg = getAccount() == null ? "" : " " + getAccount();
 		Player player = getActivePlayer();
-		if (player != null) {
+		if (player != null && !PlayerLeaveWorldService.isLeavingWorld(player)) {
 			msg += " " + player + " (client crash or connection loss)";
 			player.getMoveController().resetToLastPositionFromClient(); // avoid mapkick and bugging through walls
-			long millisSinceLastClientPacket = System.currentTimeMillis() - lastClientMessageTime;
-			long delayMs = Math.max(0, TimeUnit.SECONDS.toMillis(10) - millisSinceLastClientPacket);
-			PlayerLeaveWorldService.leaveWorldDelayed(player, delayMs); // delayed to prevent ctrl+alt+del / close window exploit
+			PlayerLeaveWorldService.registerLeaveWorld(player);
 		}
 
 		if (msg.isEmpty())
@@ -263,20 +254,6 @@ public class AionConnection extends AConnection<AionServerPacket> {
 	@Override
 	protected final void onServerClose() {
 		close();
-		safeLogout();
-	}
-
-	private void safeLogout() {
-		synchronized (this) {
-			Player player = getActivePlayer();
-			if (player == null) // player was already saved
-				return;
-			try {
-				PlayerLeaveWorldService.leaveWorld(player);
-			} catch (Exception e) {
-				log.error("Error saving " + player, e);
-			}
-		}
 	}
 
 	/**

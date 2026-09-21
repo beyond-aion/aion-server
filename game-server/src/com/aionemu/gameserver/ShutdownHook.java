@@ -1,5 +1,6 @@
 package com.aionemu.gameserver;
 
+import java.util.Collection;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.slf4j.Logger;
@@ -9,11 +10,13 @@ import com.aionemu.commons.utils.ExitCode;
 import com.aionemu.commons.utils.concurrent.RunnableStatsManager;
 import com.aionemu.commons.utils.concurrent.RunnableStatsManager.SortBy;
 import com.aionemu.gameserver.configs.main.ShutdownConfig;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.GameTimeService;
 import com.aionemu.gameserver.services.PeriodicSaveService;
 import com.aionemu.gameserver.services.cron.CronService;
 import com.aionemu.gameserver.services.cron.CurrentThreadRunnableRunner;
+import com.aionemu.gameserver.services.player.PlayerLeaveWorldService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
@@ -47,7 +50,8 @@ public class ShutdownHook extends Thread {
 		remainingSeconds.compareAndSet(UNSET_DELAY, ShutdownConfig.DELAY);
 		for (int announceInterval = 1, expectedSeconds = remainingSeconds.get(); remainingSeconds.get() > 0;) {
 			try {
-				if (World.getInstance().getAllPlayers().isEmpty())
+				Collection<Player> allPlayers = World.getInstance().getAllPlayers();
+				if (allPlayers.isEmpty() || ShutdownConfig.INSTANT_SHUTDOWN_WITH_ONLY_STAFF_ONLINE && allPlayers.stream().allMatch(Player::isStaff))
 					break; // fast exit
 
 				if (remainingSeconds.get() % announceInterval == 0) {
@@ -69,7 +73,8 @@ public class ShutdownHook extends Thread {
 			}
 		}
 
-		GameServer.shutdownNioServer(); // shuts down network, disconnects cs/ls/all players and saves them
+		GameServer.shutdownNioServer(); // shuts down network, disconnects cs/ls/all players and schedules leaveWorld
+		PlayerLeaveWorldService.processPendingLeaveWorldTasks();
 
 		RunnableStatsManager.dumpClassStats(SortBy.AVG);
 		PeriodicSaveService.getInstance().onShutdown();

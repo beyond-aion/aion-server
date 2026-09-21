@@ -1,6 +1,9 @@
 package com.aionemu.gameserver.services.player;
 
 import java.sql.Timestamp;
+import java.time.Duration;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Future;
 
 import org.slf4j.Logger;
@@ -10,7 +13,6 @@ import com.aionemu.gameserver.configs.main.AutoGroupConfig;
 import com.aionemu.gameserver.dao.*;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.dataholders.PlayerInitialData.LocationData;
-import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.model.gameobjects.player.BindPointPosition;
 import com.aionemu.gameserver.model.gameobjects.player.FriendList;
@@ -19,7 +21,6 @@ import com.aionemu.gameserver.model.summons.UnsummonType;
 import com.aionemu.gameserver.model.team.alliance.PlayerAllianceService;
 import com.aionemu.gameserver.model.team.group.PlayerGroupService;
 import com.aionemu.gameserver.network.aion.AionConnection;
-import com.aionemu.gameserver.network.aion.clientpackets.CM_QUIT;
 import com.aionemu.gameserver.network.chatserver.ChatServer;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -41,26 +42,34 @@ import com.aionemu.gameserver.world.WorldPosition;
 public class PlayerLeaveWorldService {
 
 	private static final Logger log = LoggerFactory.getLogger(PlayerLeaveWorldService.class);
+	private static final Map<Player, LeaveWorldTask> leaveWorldTaskByPlayer = new ConcurrentHashMap<>();
 
 	/**
-	 * This method is called when a player loses client connection, e.g. when killing the process, or due to bad network connectivity.<br>
-	 * <br>
-	 * <b><font color='red'>NOTICE:</font> This method must only be called from {@link AionConnection#onDisconnect()} and not from anywhere else</b>
-	 * 
-	 * @see #leaveWorld(Player)
+	 * Registers a player to leave the world 10 seconds after their last action. If their last action was more than 10 seconds ago, the player will
+	 * leave the world immediately and the task will be run synchronously. If the player has already been registered, the existing task will not be
+	 * rescheduled.
 	 */
-	public static void leaveWorldDelayed(Player player, long delayInMillis) {
-		Future<?> leaveWorldTask = ThreadPoolManager.getInstance().schedule(() -> leaveWorld(player), delayInMillis);
-		player.getController().addTask(TaskId.DESPAWN, leaveWorldTask);
+	public static void registerLeaveWorld(Player player) {
+		long lastActionTimeMillis = Math.max(player.getMoveController().getLastMoveUpdate(), player.getController().getLastCombatTime());
+		long millisSinceLastPlayerAction = System.currentTimeMillis() - lastActionTimeMillis;
+		long waitTimeMillis = Duration.ofSeconds(10).toMillis();
+		long delayMillis = Math.max(0, waitTimeMillis - millisSinceLastPlayerAction);
+		leaveWorldTaskByPlayer.computeIfAbsent(player, LeaveWorldTask::new).scheduleOrRun(delayMillis);
 	}
 
-	/**
-	 * This method saves a player and removes him from the world. It is called when a player leaves the game, which includes just two cases: either
-	 * he goes back to char selection screen or is leaving the game (closing client).<br>
-	 * <br>
-	 * <b><font color='red'>NOTICE:</font> This method is called only from {@link CM_QUIT} and must not be called from anywhere else</b>
-	 */
-	public static void leaveWorld(Player player) {
+	public static boolean isLeavingWorld(int playerObjectId) {
+		return leaveWorldTaskByPlayer.keySet().stream().anyMatch(p -> p.getObjectId() == playerObjectId);
+	}
+
+	public static boolean isLeavingWorld(Player player) {
+		return leaveWorldTaskByPlayer.containsKey(player);
+	}
+
+	public static void processPendingLeaveWorldTasks() {
+		leaveWorldTaskByPlayer.values().forEach(LeaveWorldTask::run);
+	}
+
+	private static void leaveWorld(Player player) {
 		AionConnection con = player.getClientConnection();
 		player.setClientConnection(null); // this sets the player semi-offline, PacketSendUtility will not send packets anymore
 
@@ -147,8 +156,45 @@ public class PlayerLeaveWorldService {
 
 		PlayerDAO.storeOldCharacterLevel(player.getObjectId(), player.getLevel());
 		PlayerDAO.storeLastOnlineTime(player.getObjectId(), lastOnline);
-		PlayerDAO.onlinePlayer(player, false); // marks that player was fully saved and may enter world again
+		PlayerDAO.onlinePlayer(player, false);
 
 		con.setActivePlayer(null);
+	}
+
+	private static class LeaveWorldTask implements Runnable {
+
+		private final Player player;
+		private Future<?> future;
+		private boolean finished;
+
+		LeaveWorldTask(Player player) {
+			this.player = player;
+		}
+
+		synchronized void scheduleOrRun(long delayMillis) {
+			if (finished || future != null)
+				return;
+			if (delayMillis <= 0)
+				run();
+			else
+				future = ThreadPoolManager.getInstance().schedule(this, delayMillis);
+		}
+
+		@Override
+		public synchronized void run() {
+			if (finished)
+				return;
+			finished = true;
+			try {
+				if (player.isOnline())
+					leaveWorld(player);
+				if (future != null)
+					future.cancel(false);
+			} catch (Exception e) {
+				log.error("Error while processing leave world task for " + player, e);
+			} finally {
+				leaveWorldTaskByPlayer.remove(player, this);
+			}
+		}
 	}
 }
