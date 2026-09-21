@@ -50,7 +50,7 @@ public class MoveTo extends AdminCommand {
 		WorldPosition pos = params.length == 1 ? ChatUtil.getPosition(params[0]) : parseWorldPosition(admin, params);
 		if (pos != null) {
 			pos.setH(admin.getHeading());
-			moveTo(admin, pos, "Teleported to " + WorldMapType.getWorld(pos.getMapId()) + "\nX:" + pos.getX() + " Y:" + pos.getY() + " Z:" + pos.getZ());
+			moveTo(admin, pos, "Teleported to " + worldName(pos.getMapId()) + "\nX:" + pos.getX() + " Y:" + pos.getY() + " Z:" + pos.getZ());
 			return;
 		} else if (params.length > 1 || params[0].startsWith("[pos:"))
 			errorMsg = "Invalid map position or %s geo.".formatted(GeoDataConfig.GEO_ENABLE ? "missing" : "deactivated");

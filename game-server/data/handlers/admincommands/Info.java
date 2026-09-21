@@ -47,7 +47,7 @@ public class Info extends AdminCommand {
 			if (creature instanceof Player player) {
 				Pet pet = player.getPet();
 				sendInfo(admin, (pet != null ? "\tPet: " + name(pet) + ", ID: " + pet.getObjectTemplate().getTemplateId() + ", ObjectId: " + pet.getObjectId()
-					: "") + "\n\tTown ID: " + TownService.getInstance().getTownResidence(player));
+					+ "\n" : "") + "\tTown ID: " + TownService.getInstance().getTownResidence(player));
 				for (int i = 0; i < 2; i++) {
 					NpcFaction faction = player.getNpcFactions().getActiveNpcFaction(i == 0);
 					if (faction != null) {

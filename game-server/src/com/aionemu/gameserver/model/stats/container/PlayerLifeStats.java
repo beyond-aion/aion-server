@@ -28,7 +28,7 @@ public class PlayerLifeStats extends CreatureLifeStats<Player> {
 	private Future<?> flyReduceTask;
 
 	public PlayerLifeStats(Player owner) {
-		super(owner, owner.getGameStats().getMaxHp().getCurrent(), owner.getGameStats().getMaxMp().getCurrent());
+		super(owner);
 		this.currentFp = owner.getGameStats().getFlyTime().getCurrent();
 	}
 
@@ -72,8 +72,6 @@ public class PlayerLifeStats extends CreatureLifeStats<Player> {
 		currentFp = getMaxFp();
 
 		if (owner.isSpawned()) {
-			sendHpPacketUpdate();
-			sendMpPacketUpdate();
 			sendFpPacketUpdate();
 		}
 	}

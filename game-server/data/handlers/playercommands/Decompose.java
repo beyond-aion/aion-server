@@ -61,7 +61,7 @@ public class Decompose extends PlayerCommand {
 
 			{
 				// use observer to abort task on move, attack, die, item use, etc.
-				observer = new ItemUseObserver() {
+				observer = new ItemUseObserver(player) {
 
 					@Override
 					public void itemused(Item item) {
@@ -70,7 +70,7 @@ public class Decompose extends PlayerCommand {
 					}
 
 					@Override
-					public void abort() {
+					protected void onAbort() {
 						cancelTask(player, observer, "Decomposing aborted: Processed " + Math.max(0, totalCount - 1) + "x " + ChatUtil.item(itemId) + ".");
 					}
 				};

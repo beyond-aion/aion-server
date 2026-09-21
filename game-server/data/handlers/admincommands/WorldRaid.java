@@ -2,14 +2,12 @@ package admincommands;
 
 import java.awt.Color;
 import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.LinkedHashMap;
 import java.util.stream.Collectors;
 
 import com.aionemu.gameserver.configs.main.EventsConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.templates.world.WorldMapTemplate;
 import com.aionemu.gameserver.model.templates.worldraid.WorldRaidLocation;
 import com.aionemu.gameserver.services.WorldRaidService;
 import com.aionemu.gameserver.utils.ChatUtil;
@@ -83,20 +81,12 @@ public class WorldRaid extends AdminCommand {
 			return sb.toString();
 		}
 
-		Map<String, List<WorldRaidLocation>> locationsByMapId = locations.stream().collect(Collectors.groupingBy(worldRaidLocation -> {
-			WorldMapTemplate mapTemplate = DataManager.WORLD_MAPS_DATA.getTemplate(worldRaidLocation.getMapId());
-			if (mapTemplate == null || mapTemplate.getName().isEmpty())
-				return String.valueOf(worldRaidLocation.getMapId());
-			return mapTemplate.getName();
-		}, Collectors.toList()));
-
-		locationsByMapId.keySet().stream().sorted().forEach(mapName -> {
-			List<WorldRaidLocation> locationsForMap = locationsByMapId.get(mapName);
-			if (locationsForMap == null)
-				return;
-			sb.append("\n\t").append(ChatUtil.color(mapName, Color.WHITE)).append(" - ");
-			sb.append(locationsForMap.stream().map(this::createPositionString).collect(Collectors.joining(", ")));
-		});
+		locations.stream()
+			.collect(Collectors.groupingBy(WorldRaidLocation::getMapId, LinkedHashMap::new, Collectors.toList()))
+			.forEach((mapId, locationsForMap) -> {
+				sb.append("\n\t").append(ChatUtil.color(worldName(mapId), Color.WHITE)).append(" - ");
+				sb.append(locationsForMap.stream().map(this::createPositionString).collect(Collectors.joining(", ")));
+			});
 		return sb.toString();
 	}
 

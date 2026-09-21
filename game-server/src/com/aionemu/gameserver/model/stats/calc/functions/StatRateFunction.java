@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.model.stats.calc.functions;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.utils.stats.CalculationType;
@@ -17,7 +19,7 @@ public class StatRateFunction extends StatFunction {
 	}
 
 	@Override
-	public void apply(Stat2 stat, CalculationType... calculationTypes) {
+	public void apply(Stat2 stat, Set<CalculationType> calculationTypes) {
 		if (isBonus()) {
 			int baseValue = stat.getBaseWithoutBaseRate();
 			if (getName() == StatEnum.SPEED && getValue() < 0 && stat.getBonus() < 0) { // fix to avoid run speed <= 0%

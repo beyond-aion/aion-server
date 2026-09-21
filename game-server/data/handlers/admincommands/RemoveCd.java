@@ -11,7 +11,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_COOLDOWN;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SKILL_COOLDOWN;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
-import com.aionemu.gameserver.world.World;
 
 import consolecommands.Clearusercoolt;
 
@@ -55,15 +54,14 @@ public class RemoveCd extends AdminCommand {
 				if (target.getPortalCooldownList().isPortalUseDisabled(worldId)) {
 					target.getPortalCooldownList().removePortalCooldown(worldId);
 					target.getPortalCooldownList().sendEntryInfo(worldId);
-					String worldName = World.getInstance().getWorldMap(worldId).getName().replace('_', ' ');
 					if (target.equals(admin)) {
-						sendInfo(admin, "Your instance cooldown for " + worldName + " was removed.");
+						sendInfo(admin, "Your instance cooldown for " + worldName(worldId) + " was removed.");
 					} else {
-						sendInfo(admin, "You have removed the instance cooldown for " + worldName + " of " + name(target) + '.');
-						sendInfo(target, name(admin) + " removed your instance cooldown for " + worldName);
+						sendInfo(admin, "You have removed the instance cooldown for " + worldName(worldId) + " of " + name(target) + '.');
+						sendInfo(target, name(admin) + " removed your instance cooldown for " + worldName(worldId) + ".");
 					}
 				} else
-					sendInfo(admin, (target.equals(admin) ? "You have" : name(target) + " has") + " no cooldown on given instance.");
+					sendInfo(admin, (target.equals(admin) ? "You have" : name(target) + " has") + " no cooldown on " + worldName(worldId) + ".");
 			}
 		} else {
 			sendInfo(admin);

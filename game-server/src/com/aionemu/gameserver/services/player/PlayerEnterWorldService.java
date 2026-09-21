@@ -102,7 +102,7 @@ public final class PlayerEnterWorldService {
 			return;
 		}
 
-		if (PlayerDAO.isOnline(objectId)) { // char is still leaving the world and not saved yet (fast reentry from plastic surgery screen or packet hack)
+		if (PlayerLeaveWorldService.isLeavingWorld(objectId)) { // char is not saved yet (fast reentry from plastic surgery screen or packet hack)
 			client.sendPacket(new SM_ENTER_WORLD_CHECK(Msg.REENTRY_TIME));
 			return;
 		}
@@ -112,7 +112,7 @@ public final class PlayerEnterWorldService {
 			.map(p -> p.getPlayerCommonData().getPlayerObjId())
 			.orElse(null);
 		if (onlinePlayerId != null) { // a char was online during acc login (double login or client crash), so reload pcd, appearance and acc warehouse
-			if (PlayerDAO.isOnline(onlinePlayerId)) { // the found char is still leaving the world, so the acc wh might still be outdated
+			if (PlayerLeaveWorldService.isLeavingWorld(onlinePlayerId)) { // the acc wh might still be outdated, as the char hasn't been saved yet
 				client.sendPacket(new SM_ENTER_WORLD_CHECK(Msg.REENTRY_TIME));
 				return;
 			}

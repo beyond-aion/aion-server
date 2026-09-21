@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.model.stats.container;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
@@ -34,7 +36,7 @@ public class SummonGameStats extends CreatureGameStats<Summon> {
 	}
 
 	@Override
-	public Stat2 getStat(StatEnum statEnum, float base, CalculationType... calculationTypes) {
+	public Stat2 getStat(StatEnum statEnum, float base, Set<CalculationType> calculationTypes) {
 		Stat2 stat = super.getStat(statEnum, base, calculationTypes);
 		if (owner.getMaster() == null)
 			return stat;
@@ -109,8 +111,8 @@ public class SummonGameStats extends CreatureGameStats<Summon> {
 	}
 
 	@Override
-	public Stat2 getAttackSpeed() {
-		return getStat(StatEnum.ATTACK_SPEED, owner.getObjectTemplate().getAttackSpeed());
+	public int getBaseAttackSpeed() {
+		return owner.getObjectTemplate().getAttackSpeed();
 	}
 
 	@Override

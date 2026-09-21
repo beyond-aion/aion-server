@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.controllers.observer;
 
+import static com.aionemu.gameserver.controllers.observer.ObserverType.*;
+
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.item.actions.ItemActions;
@@ -17,7 +19,7 @@ public class StanceObserver extends ActionObserver {
 	private final int stanceSkillId;
 
 	public StanceObserver(Player player, int stanceSkillId) {
-		super(ObserverType.ALL);
+		super(STARTSKILLCAST, ITEMUSE, ABNORMALSETTED);
 		this.player = player;
 		this.stanceSkillId = stanceSkillId;
 	}

@@ -2,6 +2,7 @@ package admincommands;
 
 import java.awt.Color;
 import java.util.*;
+import java.util.Set;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
@@ -156,7 +157,7 @@ public class Stat extends AdminCommand {
 		}
 
 		@Override
-		public void apply(Stat2 stat, CalculationType... calculationTypes) {
+		public void apply(Stat2 stat, Set<CalculationType> calculationTypes) {
 			stat.setBonusRate(1f);
 			stat.setFinalRate(1f);
 			stat.setBonus(getValue() - stat.getExactCurrentWithoutBonus());

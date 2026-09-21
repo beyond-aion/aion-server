@@ -288,7 +288,7 @@ public class CustomInstanceBossAI extends GeneralNpcAI {
 		functions.add(new StatSetFunction(StatEnum.WILL, pgs.getWill().getCurrent()));
 		functions.add(new StatSetFunction(StatEnum.ATTACK_SPEED, pgs.getAttackSpeed().getCurrent()));
 		// Work-around for not considered dual wield stats for NPCs
-		int pAtk = pgs.getMainHandPAttack().getCurrent();
+		int pAtk = pgs.getMainHandPAttack(CalculationType.DISPLAY).getCurrent();
 		if (player.getEquipment().getOffHandWeapon() != null)
 			pAtk += pgs.getOffHandPAttack(CalculationType.DISPLAY).getCurrent() / 2;
 		functions.add(new StatSetFunction(StatEnum.PHYSICAL_ATTACK, pAtk));

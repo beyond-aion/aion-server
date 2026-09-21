@@ -4,7 +4,6 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
-import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -96,18 +95,18 @@ public class BrokerService {
 	}
 
 	public void showRequestedItems(Player player, int clientMask, byte sortType, int startPage, List<Integer> itemList) {
-		BrokerItem[] searchItems = null;
+		List<BrokerItem> searchItems;
 		int playerBrokerMaskCache = getPlayerMask(player);
 		BrokerItemMask brokerMaskById = BrokerItemMask.getBrokerMaskById(clientMask);
-		boolean isChidrenMask = brokerMaskById.isChildrenMask(playerBrokerMaskCache);
+		boolean isChildrenMask = brokerMaskById.isChildrenMask(playerBrokerMaskCache);
 		if (itemList != null && clientMask == 0) {
 			Map<Integer, BrokerItem> brokerItems = getRaceBrokerItems(player.getRace());
 			if (brokerItems == null)
 				return;
-			searchItems = brokerItems.values().toArray(new BrokerItem[brokerItems.values().size()]);
-		} else if ((getFilteredItems(player).length == 0 || !isChidrenMask) && clientMask != 0) {
+			searchItems = brokerItems.values().stream().toList();
+		} else if (clientMask != 0 && (getFilteredItems(player).isEmpty() || !isChildrenMask)) {
 			searchItems = getItemsByMask(player, clientMask, false);
-		} else if (isChidrenMask) {
+		} else if (isChildrenMask) {
 			searchItems = getItemsByMask(player, clientMask, true);
 		} else
 			searchItems = getFilteredItems(player);
@@ -125,14 +124,13 @@ public class BrokerService {
 					itemsFound.add(item);
 			}
 			getPlayerCache(player).setSearchItemsList(itemList);
-			searchItems = itemsFound.toArray(new BrokerItem[itemsFound.size()]);
-			getPlayerCache(player).setBrokerListCache(searchItems);
+			getPlayerCache(player).setBrokerListCache(itemsFound);
+			searchItems = itemsFound;
 		} else
 			getPlayerCache(player).setSearchItemsList(null);
 
-		sortBrokerItems(searchItems, sortType);
-		int totalSearchItemsCount = searchItems.length;
-		searchItems = getRequestedPage(searchItems, startPage);
+		int totalSearchItemsCount = searchItems.size();
+		searchItems = getRequestedPage(searchItems, startPage, sortType);
 
 		for (BrokerItem bi : searchItems) {
 			if (bi.getAveragePrice() == 0) {
@@ -144,8 +142,6 @@ public class BrokerService {
 	}
 
 	public long getAveragePrice(Race race, int itemId) {
-		BrokerItem[] searchItems = null;
-
 		Map<Integer, BrokerItem> brokerItems = getRaceBrokerItems(race);
 		if (brokerItems == null)
 			return 0;
@@ -153,9 +149,7 @@ public class BrokerService {
 		long average = 0, sum = 0;
 		int counter = 0;
 
-		searchItems = brokerItems.values().toArray(new BrokerItem[brokerItems.values().size()]);
-
-		for (BrokerItem item : searchItems) {
+		for (BrokerItem item : brokerItems.values()) {
 			if (itemId == item.getItemId()) {
 				sum += item.getPrice();
 				counter++;
@@ -165,17 +159,13 @@ public class BrokerService {
 		return average;
 	}
 
-	private BrokerItem[] getItemsByMask(Player player, int clientMask, boolean cached) {
+	private List<BrokerItem> getItemsByMask(Player player, int clientMask, boolean cached) {
 		List<BrokerItem> searchItems = new ArrayList<>();
 
 		BrokerItemMask brokerMask = BrokerItemMask.getBrokerMaskById(clientMask);
 
 		if (cached) {
-			BrokerItem[] brokerItems = getFilteredItems(player);
-			if (brokerItems == null)
-				return null;
-
-			for (BrokerItem item : brokerItems) {
+			for (BrokerItem item : getFilteredItems(player)) {
 				if (item == null || item.getItem() == null)
 					continue;
 
@@ -197,26 +187,14 @@ public class BrokerService {
 			}
 		}
 
-		BrokerItem[] items = searchItems.toArray(new BrokerItem[searchItems.size()]);
-		getPlayerCache(player).setBrokerListCache(items);
+		getPlayerCache(player).setBrokerListCache(searchItems);
 		getPlayerCache(player).setBrokerMaskCache(clientMask);
 
-		return items;
+		return searchItems;
 	}
 
-	private void sortBrokerItems(BrokerItem[] brokerItems, byte sortType) {
-		Arrays.sort(brokerItems, BrokerItem.getComparatoryByType(sortType));
-	}
-
-	private BrokerItem[] getRequestedPage(BrokerItem[] brokerItems, int startPage) {
-		List<BrokerItem> page = new ArrayList<>();
-		int startingElement = startPage * 9;
-
-		for (int i = startingElement, limit = 0; i < brokerItems.length && limit < 45; i++, limit++) {
-			page.add(brokerItems[i]);
-		}
-
-		return page.toArray(new BrokerItem[page.size()]);
+	private List<BrokerItem> getRequestedPage(List<BrokerItem> brokerItems, int startPage, byte sortType) {
+		return brokerItems.stream().sorted(BrokerItem.getComparatoryByType(sortType)).skip(startPage * 9L).limit(36).toList();
 	}
 
 	private Map<Integer, BrokerItem> getRaceBrokerItems(Race race) {
@@ -243,7 +221,6 @@ public class BrokerService {
 
 	public void buyBrokerItem(Player player, int itemUniqueId, long itemCount) {
 
-		boolean isEmptyCache = getFilteredItems(player).length == 0;
 		Race playerRace = player.getRace();
 
 		if (!PlayerRestrictions.canTrade(player))
@@ -298,10 +275,7 @@ public class BrokerService {
 
 			putToSettled(playerRace, buyingItem, true);
 
-			if (!isEmptyCache) {
-				BrokerItem[] newCache = ArrayUtils.removeElement(getFilteredItems(player), buyingItem);
-				getPlayerCache(player).setBrokerListCache(newCache);
-			}
+			getPlayerCache(player).removeFromCache(buyingItem);
 
 			player.getInventory().decreaseKinah(price);
 			// unpack
@@ -469,7 +443,7 @@ public class BrokerService {
 				registeredItems.add(item);
 		}
 
-		PacketSendUtility.sendPacket(player, new SM_BROKER_SERVICE(registeredItems.toArray(new BrokerItem[registeredItems.size()])));
+		PacketSendUtility.sendPacket(player, new SM_BROKER_SERVICE(registeredItems));
 	}
 
 	public boolean hasRegisteredItems(Player player) {
@@ -662,7 +636,7 @@ public class BrokerService {
 		return getPlayerCache(player).getBrokerMaskCache();
 	}
 
-	private BrokerItem[] getFilteredItems(Player player) {
+	private List<BrokerItem> getFilteredItems(Player player) {
 		return getPlayerCache(player).getBrokerListCache();
 	}
 

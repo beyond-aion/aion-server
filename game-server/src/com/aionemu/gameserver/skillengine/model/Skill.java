@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.skillengine.model;
 
+import static com.aionemu.gameserver.model.items.ItemUseAnimation.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,11 +18,9 @@ import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.configs.main.SecurityConfig;
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
-import com.aionemu.gameserver.controllers.observer.DeathObserver;
 import com.aionemu.gameserver.controllers.observer.StartMovingListener;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.dataholders.MotionData.AnimationTimes;
-import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -91,7 +91,6 @@ public class Skill {
 	private String chainCategory = null;
 	private int chainUsageDuration = 0;
 	private int hate;
-	private volatile DeathObserver firstTargetDieObserver;
 
 	public enum SkillMethod {
 		CAST,
@@ -200,10 +199,23 @@ public class Skill {
 
 	private boolean validateEffectedList() {
 		if (effector instanceof Player player) {
-			if (canUseSkill(player))
+			if (canUseSkill(player)) {
+				if (!canTargetFirstTarget()) {
+					if (getTargetRangeAttribute() != TargetRangeAttribute.AREA) {
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_IS_NOT_VALID());
+						return false;
+					}
+					effectedList.remove(firstTarget); // everyone else in the area is still hit
+				}
 				effectedList.removeIf(effected -> !isValidTarget(player, effected));
-			else
+			} else {
 				effectedList.clear();
+			}
+		} else if (isFirstTargetGone()) {
+			return false;
+		} else if (!canTargetFirstTarget()) {
+			effectedList.remove(firstTarget);
+			return true; // a non-player cast (npc or summon) still goes off, just without a first target it cannot see or that died
 		}
 
 		if (targetType == 0 && effectedList.isEmpty()) { // target selected but no target will be hit
@@ -228,6 +240,8 @@ public class Skill {
 	}
 
 	private boolean isValidTarget(Player player, Creature target) {
+		if (target.isSpawnProtectedFrom(player))
+			return false;
 		if (target instanceof Player targetPlayer) {
 			if (targetPlayer.isUsingFlightTransporterOrWindstream())
 				return false;
@@ -302,7 +316,7 @@ public class Skill {
 		if (effector instanceof Npc npc) {
 			NpcSkillEntry currentNpcSkillEntry = npc.getGameStats().getLastSkill();
 			if (currentNpcSkillEntry != null) {
-				currentNpcSkillEntry.setLastTimeUsed();
+				npc.setSkillCoolDown(currentNpcSkillEntry.getSkillId(), System.currentTimeMillis() + currentNpcSkillEntry.getTemplate().getCooldown());
 				npc.getGameStats().setNextSkillDelay(currentNpcSkillEntry.getNextSkillTime());
 			} else {
 				npc.getGameStats().setNextSkillDelay(-1);
@@ -341,8 +355,7 @@ public class Skill {
 			castDuration = Math.round(baseCastDuration * (npc.getGameStats().getCastSpeed() / 1000f));
 			castSpeedForAnimationBoostAndChargeSkills = 1f;
 		} else if (skillTemplate.isCharge()) {
-			boolean isChargeTimeFixed = updateChargeBaseCastDuration();
-			castDuration = isChargeTimeFixed ? baseCastDuration : calculateChargeCastDuration();
+			castDuration = calculateChargeCastDuration();
 			castSpeedForAnimationBoostAndChargeSkills = (float) castDuration / baseCastDuration;
 		} else {
 			castDuration = calculateCastDuration();
@@ -350,41 +363,34 @@ public class Skill {
 		}
 	}
 
-	private boolean updateChargeBaseCastDuration() {
+	private int calculateChargeCastDuration() {
+		SkillType chargeTimeBonusType = SkillType.NONE;
 		// cast/attack speed can affect charge time since 4.8 (https://aionpowerbook.com/powerbook/New_World_Update_-_Skill_Changes#Other_Changes)
-		boolean isChargeTimeFixed = !isCastDurationAffectedByCastSpeed(); // fear and sleep charge skills are excluded, just like with regular casts
 		SkillChargeCondition chargeCondition = skillTemplate.getSkillChargeCondition();
 		if (chargeCondition != null) {
 			int maxCastDuration = 0;
 			ChargeSkillEntry skillCharge = DataManager.SKILL_CHARGE_DATA.getChargedSkillEntry(chargeCondition.getValue());
+			chargeTimeBonusType = skillCharge.getChargeTimeBonusType();
 			for (ChargedSkill chargedSkill : skillCharge.getSkills()) {
-				if (!isChargeTimeFixed && !DataManager.SKILL_DATA.getSkillTemplate(chargedSkill.getId()).isCastDurationAffectedByCastSpeed())
-					isChargeTimeFixed = true;
 				maxCastDuration += chargedSkill.getTime();
 			}
 			baseCastDuration = maxCastDuration;
 		}
-		return isChargeTimeFixed;
-	}
-
-	private int calculateChargeCastDuration() {
-		boolean isPhysicalClass = effector instanceof Player player
-			&& (player.getPlayerClass().isPhysicalClass() || player.getPlayerClass() == PlayerClass.RIDER || player.getPlayerClass() == PlayerClass.GUNNER);
-		int castDuration;
-		if (isPhysicalClass) // TODO check if attack speed should also affect magical classes
-			castDuration = (int) effector.getGameStats().getPositiveStat(StatEnum.ATTACK_SPEED, baseCastDuration);
-		else
-			castDuration = calculateMagicalCastDuration();
-		return Math.max(castDuration, (int) (baseCastDuration * 0.25f));
+		float speedRatio = switch (chargeTimeBonusType) {
+			case PHYSICAL -> effector.getGameStats().getAttackSpeedRate();
+			case MAGICAL -> isCastDurationAffectedByCastSpeed() ? (float) calculateMagicalCastDuration() / baseCastDuration : 1f;
+			default -> 1f;
+		};
+		return (int) (baseCastDuration * (1 - (1 - speedRatio) / 2)); // charge skills are only affected by half of the speed bonus
 	}
 
 	private int calculateCastDuration() {
-		if (getItemTemplate() != null)
-			return getItemTemplate().getCastingDelay();
+		if (itemTemplate != null)
+			return itemTemplate.isCombatActivated() ? baseCastDuration : itemTemplate.getCastingDelay();
 		//2nd+ time of multicast-skill activation
 		if (getMultiCastCount() > 0)
 			return 0;
-		if (skillTemplate.getType() != SkillType.MAGICAL || !isCastDurationAffectedByCastSpeed())
+		if (!isCastDurationAffectedByCastSpeed())
 			return baseCastDuration;
 		return calculateMagicalCastDuration();
 	}
@@ -400,7 +406,7 @@ public class Skill {
 
 		int buffDelta = baseCastDuration - boostValue;
 		castDuration -= buffDelta;
-		
+
 		if (!isSummonType(skillTemplate.getSubType())) {
 			castDuration = Math.max(castDuration, baseDurationCap);
 		}
@@ -531,20 +537,8 @@ public class Skill {
 				player.setNextSkillUse(System.currentTimeMillis() + GSConfig.MIN_SKILL_CAST_INTERVAL_MILLIS);
 		} else if (skillMethod == SkillMethod.ITEM && castDuration > 0) {
 			PacketSendUtility.broadcastPacketAndReceive(effector, new SM_ITEM_USAGE_ANIMATION(effector.getObjectId(), firstTarget.getObjectId(),
-				itemObjectId, itemTemplate.getTemplateId(), castDuration, 0, 0));
+				itemObjectId, itemTemplate.getTemplateId(), castDuration, USE_START));
 		}
-
-		if (firstTarget != null && !firstTarget.equals(effector) && !skillTemplate.hasResurrectEffect() && (castDuration > 0)
-			&& skillTemplate.getProperties().getFirstTarget() != FirstTargetAttribute.POINT
-			&& skillTemplate.getProperties().getFirstTarget() != FirstTargetAttribute.ME) {
-			if ((effector instanceof Npc && ((Npc) effector).isBoss())
-				|| (skillTemplate.getProperties().getFirstTarget() == FirstTargetAttribute.TARGET && skillTemplate.getProperties().getEffectiveDist() > 0)) {
-				return;
-			}
-			firstTargetDieObserver = new DeathObserver(_ -> getEffector().getController().cancelCurrentSkill(null, SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_LOST()));
-			firstTarget.getObserveController().attach(firstTargetDieObserver);
-		}
-
 	}
 
 	public void cancelCast() {
@@ -560,11 +554,58 @@ public class Skill {
 	}
 
 	/**
+	 * A player's cast fails on an unusable first target, unless it is an area skill, which only loses that target.
+	 *
+	 * @return True, if the cast was cancelled
+	 */
+	protected boolean cancelOnUnusableFirstTarget() {
+		if (!(effector instanceof Player) || canTargetFirstTarget() || getTargetRangeAttribute() == TargetRangeAttribute.AREA)
+			return false;
+		effector.getController().cancelCurrentSkill(null, SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_LOST());
+		return true;
+	}
+
+	/**
+	 * Ends a started non-player skill (npc or summon) without a cancel packet when its first target is gone, and the caster drops that target.
+	 *
+	 * @return True, if the cast was ended
+	 */
+	private boolean endOnGoneFirstTarget() {
+		if (effector instanceof Player || !isFirstTargetGone())
+			return false;
+		effector.getController().abortCast();
+		effector.setTarget(null);
+		effector.getAi().onGeneralEvent(AIEventType.ATTACK_COMPLETE);
+		return true;
+	}
+
+	/**
+	 * @return True, if the first target despawned or moved so far away that a started non-player skill (npc or summon) must not reach it anymore
+	 */
+	private boolean isFirstTargetGone() {
+		if (firstTarget == null || firstTarget.equals(effector))
+			return false;
+		Properties properties = skillTemplate.getProperties();
+		int range = (properties == null ? 0 : properties.getFirstTargetRange()) + 30;
+		return !firstTarget.isSpawned() || !PositionUtil.isInRange(effector, firstTarget, range, false);
+	}
+
+	private boolean canTargetFirstTarget() {
+		if (firstTarget == null || firstTarget.equals(effector))
+			return true;
+		if (!firstTarget.isSpawned() || firstTarget.isDead() != skillTemplate.hasResurrectEffect())
+			return false;
+		return effector.canSee(firstTarget) && !firstTarget.isSpawnProtectedFrom(effector);
+	}
+
+	/**
 	 * Apply effects and perform actions specified in skill template
 	 */
 	protected void endCast() {
 		removeObservers();
 		if (!effector.isCasting() || isCancelled)
+			return;
+		if (cancelOnUnusableFirstTarget() || endOnGoneFirstTarget())
 			return;
 		// check if target is out of skill range or other requirements are not met (anymore)
 		Properties properties = skillTemplate.getProperties();
@@ -719,8 +760,6 @@ public class Skill {
 	}
 
 	private void removeObservers() {
-		if (firstTargetDieObserver != null)
-			firstTarget.getObserveController().removeObserver(firstTargetDieObserver);
 		effector.getObserveController().removeObserver(moveListener);
 	}
 
@@ -774,7 +813,7 @@ public class Skill {
 		boolean sentCastSpellPacket = false;
 		if (itemTemplate != null && !itemTemplate.isCombatActivated()) {
 			PacketSendUtility.broadcastPacketAndReceive(effector,
-				new SM_ITEM_USAGE_ANIMATION(effector.getObjectId(), firstTarget.getObjectId(), itemObjectId, itemTemplate.getTemplateId(), 0, 1, 0));
+				new SM_ITEM_USAGE_ANIMATION(effector.getObjectId(), firstTarget.getObjectId(), itemObjectId, itemTemplate.getTemplateId(), 0, USE_SUCCESS));
 		} else {
 			AIEventType et = skillTemplate.getSubType() == SkillSubType.ATTACK ? AIEventType.CREATURE_NEEDS_HELP : null;
 			switch (targetType) {
@@ -1067,11 +1106,11 @@ public class Skill {
 	 * - hit time will only be boosted if the current skill if cast before the animation of the previous skill finishes<br>
 	 */
 	public boolean allowAnimationBoostByCastSpeed() {
-		return isMagical();
+		return skillTemplate.isApplyCastingTimeBonus();
 	}
 
 	private boolean isCastDurationAffectedByCastSpeed() {
-		return skillMethod == SkillMethod.CAST && skillTemplate.isCastDurationAffectedByCastSpeed();
+		return skillMethod == SkillMethod.CAST && skillTemplate.isApplyCastingTimeBonus();
 	}
 
 	public void setChainCategory(String chainCategory) {
@@ -1110,9 +1149,5 @@ public class Skill {
 
 	public void setHate(int hate) {
 		this.hate = hate;
-	}
-
-	private boolean isMagical() {
-		return skillTemplate.getType() == SkillType.MAGICAL && skillTemplate.getSubType() != SkillSubType.NONE;
 	}
 }

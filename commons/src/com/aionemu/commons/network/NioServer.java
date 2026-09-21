@@ -141,7 +141,7 @@ public class NioServer {
 		}
 	}
 
-	private Set<AConnection<?>> findAllConnections() {
+	public Set<AConnection<?>> findAllConnections() {
 		Set<AConnection<?>> activeConnections = new HashSet<>();
 		if (readWriteDispatchers != null) {
 			for (Dispatcher d : readWriteDispatchers)

@@ -63,7 +63,7 @@ public class ObserveController {
 				return;
 			for (Iterator<ActionObserver> iterator = observers.iterator(); iterator.hasNext(); ) {
 				ActionObserver observer = iterator.next();
-				if (observer.getObserverType().matchesObserver(type)) {
+				if (observer.matches(type)) {
 					if (notifiable.isEmpty())
 						notifiable = new ArrayList<>();
 					notifiable.add(observer);
@@ -192,8 +192,8 @@ public class ObserveController {
 		}
 
 		for (ItemUseObserver itemUseObserver : itemUseObservers) {
-			itemUseObserver.onRemoved();
 			itemUseObserver.abort();
+			itemUseObserver.onRemoved();
 		}
 	}
 

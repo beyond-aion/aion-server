@@ -40,6 +40,10 @@
 		<xs:attribute name="dispel_category" type="DispelCategoryType" default="NONE" />
 		<xs:attribute name="req_dispel_level" type="xs:int" />
 		<xs:attribute name="req_dispel_count" type="xs:int" />
+		<xs:attribute name="apply_magical_skill_boost_bonus" type="xs:boolean" />
+		<xs:attribute name="apply_magical_critical" type="xs:boolean" />
+		<xs:attribute name="apply_heal_boost_bonus" type="xs:boolean" />
+		<xs:attribute name="apply_casting_time_bonus" type="xs:boolean" />
 		<xs:attribute name="activation" type="activationAttribute" use="required" />
 		<xs:attribute name="stigma" type="StigmaType" />
 		<xs:attribute name="ammospeed" type="xs:int" />
@@ -58,7 +62,6 @@
 		<xs:attribute name="remove_flyend" type="xs:boolean" />
 		<xs:attribute name="noremoveatdie" type="xs:boolean" />
 		<xs:attribute name="no_save_on_logout" type="xs:boolean" />
-		<xs:attribute name="applymcrit" type="xs:boolean" default="true"/>
 		<xs:attribute name="hostile_type" type="HostileType" default="NONE"/>
 	</xs:complexType>
 	<xs:complexType name="Effects">
@@ -300,6 +303,7 @@
 		<xs:attribute name="hoptype" type="HopType" />
 		<xs:attribute name="critadddmg1" type="xs:int" />
 		<xs:attribute name="critadddmg2" type="xs:int" />
+		<xs:attribute name="critprobmod1" type="xs:int" />
 		<xs:attribute name="critprobmod2" type="xs:int" />
 		<xs:attribute name="preeffect_prob" type="xs:int" />
 		<xs:attribute name="preeffect" type="xs:string" />

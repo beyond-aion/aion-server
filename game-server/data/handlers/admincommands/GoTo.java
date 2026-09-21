@@ -6,8 +6,6 @@ import static java.util.stream.Collectors.*;
 import java.awt.Color;
 import java.util.*;
 
-import org.apache.commons.lang3.text.WordUtils;
-
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.instance.InstanceService;
@@ -50,8 +48,8 @@ public class GoTo extends AdminCommand {
 				StringBuilder msg = new StringBuilder("Could not find the specified destination.");
 				if (!matches.isEmpty()) {
 					msg.append(" Possible matches:");
-					for (Map.Entry<String, Location> e : matches.entrySet())
-						msg.append("\n\t- ").append(ChatUtil.color(e.getKey(), Color.WHITE)).append(" (").append(getName(e.getValue().mapType)).append(")");
+					matches.forEach((match, loc) -> msg.append("\n\t- ").append(ChatUtil.color(match, Color.WHITE)).append(" (")
+						.append(worldName(loc.mapType.getId())).append(")"));
 				}
 				sendInfo(player, msg.toString());
 			}
@@ -96,37 +94,29 @@ public class GoTo extends AdminCommand {
 	private void listLocations(Player player) {
 		Map<WorldMapType, Collection<Location>> locsByWorld = locations.entrySet().stream()
 			.collect(groupingBy(e -> e.getValue().mapType, LinkedHashMap::new, mapping(Map.Entry::getValue, toCollection(LinkedHashSet::new))));
-		StringBuilder sb = new StringBuilder();
-		if (locsByWorld.size() == 1)
-			sb.append("Locations for ");
-		else
-			sb.append("List of locations per map:\n");
+		StringBuilder sb = new StringBuilder("Available locations:");
 		locsByWorld.forEach((worldMapType, locs) -> appendLocationsForMap(sb, worldMapType, locs));
+		sb.append("\nType " + ChatUtil.color(getAliasWithPrefix() + " <location name>", Color.WHITE) + " to teleport to a location. Location names can be abbreviated.");
 		sendInfo(player, sb.toString());
 	}
 
 	private void appendLocationsForMap(StringBuilder sb, WorldMapType worldMapType, Collection<Location> locs) {
-		sb.append(getName(worldMapType)).append(':');
-		if (locs.size() > 1)
-			sb.append('\n');
+		sb.append('\n').append(worldName(worldMapType.getId())).append(':');
 		for (Location loc : locs) {
+			if (locs.size() > 1)
+				sb.append('\n');
 			sb.append('\t');
 			if (locs.size() > 1)
 				sb.append("- ");
 			appendLocNames(sb, loc.identifiers);
-			sb.append('\n');
 		}
-	}
-
-	private String getName(WorldMapType worldMapType) {
-		return WordUtils.capitalizeFully(worldMapType.name().replace('_', ' '));
 	}
 
 	private void appendLocNames(StringBuilder sb, List<String> locNames) {
 		for (int i = 0; i < locNames.size();) {
 			sb.append(ChatUtil.color(locNames.get(i++), Color.WHITE));
 			if (i != locNames.size())
-				sb.append(" // ");
+				sb.append(" / ");
 		}
 	}
 

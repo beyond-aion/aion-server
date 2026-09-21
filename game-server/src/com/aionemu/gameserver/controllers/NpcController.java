@@ -295,7 +295,7 @@ public class NpcController extends CreatureController<Npc> {
 		if (attacker instanceof Summon && attacker.isSpawned())
 			actingCreature = attacker;
 		else
-			actingCreature = attacker.getActingCreature();
+			actingCreature = attacker.getMaster();
 
 		super.onAttack(actingCreature, effect, type, damage, notifyAttack, logId, attackStatus, hopType);
 

@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.ai.manager;
 
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import com.aionemu.gameserver.ai.AILogger;
@@ -10,7 +9,6 @@ import com.aionemu.gameserver.ai.AISubState;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.controllers.attack.AggroTarget;
-import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
@@ -70,14 +68,11 @@ public class SkillAttackManager {
 			npcAI.onGeneralEvent(AIEventType.TARGET_TOOFAR);
 			return;
 		}
-		SkillTemplate template = DataManager.SKILL_DATA.getSkillTemplate(skill.getSkillId());
+		SkillTemplate template = skill.getSkillTemplate();
 		if (npcAI.isLogging()) {
 			AILogger.info(npcAI, "Using skill " + skill.getSkillId() + " level: " + skill.getSkillLevel() + " duration: " + template.getDuration());
 		}
-		if ((template.getType() == SkillType.MAGICAL && owner.getEffectController().isAbnormalSet(AbnormalState.SILENCE))
-			|| (template.getType() == SkillType.PHYSICAL && owner.getEffectController().isAbnormalSet(AbnormalState.BIND))
-			|| (owner.getEffectController().isInAnyAbnormalState(AbnormalState.CANT_ATTACK_STATE))
-			|| (owner.isTransformed() && owner.getTransformModel().cantUseSkills())) {
+		if (cantUseSkill(skill, owner)) {
 			afterUseSkill(npcAI);
 		} else {
 			if (template.getProperties().getFirstTarget() == FirstTargetAttribute.ME) {
@@ -106,18 +101,18 @@ public class SkillAttackManager {
 		}
 	}
 
-	/**
-	 * @param npcAI
-	 */
+	public static boolean cantUseSkill(NpcSkillEntry skill, Creature owner) {
+		return owner.isTransformed() && owner.getTransformModel().cantUseSkills()
+			|| owner.getEffectController().isInAnyAbnormalState(AbnormalState.CANT_ATTACK_STATE)
+			|| owner.getEffectController().isAbnormalSet(AbnormalState.SILENCE) && skill.getSkillTemplate().getType() == SkillType.MAGICAL
+			|| owner.getEffectController().isAbnormalSet(AbnormalState.BIND) && skill.getSkillTemplate().getType() == SkillType.PHYSICAL;
+	}
+
 	public static void afterUseSkill(NpcAI npcAI) {
 		npcAI.setSubStateIfNot(AISubState.NONE);
 		npcAI.onGeneralEvent(AIEventType.ATTACK_COMPLETE);
 	}
 
-	/**
-	 * @param npcAI
-	 * @return
-	 */
 	public static NpcSkillEntry chooseNextSkill(NpcAI npcAI) {
 		if (npcAI.isInSubState(AISubState.CAST)) {
 			return null;
@@ -143,32 +138,23 @@ public class SkillAttackManager {
 
 			NpcSkillEntry lastSkill = owner.getGameStats().getLastSkill();
 			if (lastSkill != null && lastSkill.hasChain() && lastSkill.canUseNextChain(owner)) {
-				List<NpcSkillEntry> chainSkills = skillList.getChainSkills(lastSkill);
-				if (chainSkills.size() > 1) {
-					if (chainSkills.stream().anyMatch(cs -> cs.getPriority() > 0)) {
-						chainSkills.sort(Comparator.comparingInt(NpcSkillEntry::getPriority).reversed());
-					} else {
-						Collections.shuffle(chainSkills);
-					}
-				}
-				for (NpcSkillEntry entry : chainSkills) {
-					if (entry != null && isReady(owner, entry)) {
+				List<NpcSkillEntry> chainSkillsSortedByPrio = skillList.getChainSkillsSortedByPriority(lastSkill);
+				if (chainSkillsSortedByPrio.size() > 1 && chainSkillsSortedByPrio.getFirst().getPriority() == 0) // all skills have the default priority
+					Collections.shuffle(chainSkillsSortedByPrio);
+				for (NpcSkillEntry entry : chainSkillsSortedByPrio) {
+					if (isReady(owner, entry)) {
 						return getNpcSkillEntryIfNotTooFarAway(owner, entry);
 					}
 				}
 			}
 
-			int[] priorities = skillList.getPriorities();
-			if (priorities != null) {
-				for (int priority : priorities) {
-					List<NpcSkillEntry> skillsByPriority = skillList.getSkillsByPriority(priority);
-					if (skillsByPriority.size() > 1)
-						Collections.shuffle(skillsByPriority);
-
-					for (NpcSkillEntry entry : skillsByPriority) {
-						if (entry.getChainId() == 0 && isReady(owner, entry)) {
-							return getNpcSkillEntryIfNotTooFarAway(owner, entry);
-						}
+			for (int priority : skillList.getPriorities()) {
+				List<NpcSkillEntry> skillsByPriority = skillList.getSkillsSortedByPriority(priority);
+				if (skillsByPriority.size() > 1)
+					Collections.shuffle(skillsByPriority);
+				for (NpcSkillEntry entry : skillsByPriority) {
+					if (entry.getChainId() == 0 && isReady(owner, entry)) {
+						return getNpcSkillEntryIfNotTooFarAway(owner, entry);
 					}
 				}
 			}
@@ -176,6 +162,7 @@ public class SkillAttackManager {
 		return null;
 	}
 
+	// TODO if the NPC can see its target, it should move towards it instead of skipping the skill
 	private static NpcSkillEntry getNpcSkillEntryIfNotTooFarAway(Npc owner, NpcSkillEntry entry) {
 		if (targetTooFar(owner, entry)) {
 			owner.getGameStats().setNextSkillDelay(5000);
@@ -186,25 +173,19 @@ public class SkillAttackManager {
 
 	// check for bind/silence/fear/stun etc debuffs on npc
 	private static boolean isReady(Npc owner, NpcSkillEntry entry) {
-		if (entry.isReady(owner.getLifeStats().getHpPercentage(), System.currentTimeMillis() - owner.getGameStats().getFightStartingTime())) {
-			if (entry.conditionReady(owner)) {
-				SkillTemplate template = DataManager.SKILL_DATA.getSkillTemplate(entry.getSkillId());
-				if ((template.getType() == SkillType.MAGICAL && owner.getEffectController().isAbnormalSet(AbnormalState.SILENCE))
-					|| (template.getType() == SkillType.PHYSICAL && owner.getEffectController().isAbnormalSet(AbnormalState.BIND))
-					|| (owner.getEffectController().isInAnyAbnormalState(AbnormalState.CANT_ATTACK_STATE))
-					|| (owner.isTransformed() && owner.getTransformModel().cantUseSkills())) {
-					return false;
-				} else {
-					return true;
-				}
-			}
-		}
-		return false;
+		if (owner.isDead() || owner.getLifeStats().isAboutToDie())
+			return false;
+		if (cantUseSkill(entry, owner))
+			return false;
+		if (owner.getSkillCoolDown(entry.getSkillId()) > System.currentTimeMillis())
+			return false;
+		if (!entry.isReady(owner.getLifeStats().getHpPercentage(), System.currentTimeMillis() - owner.getGameStats().getFightStartingTime()))
+			return false;
+		return entry.conditionReady(owner);
 	}
 
 	private static boolean targetTooFar(Npc owner, NpcSkillEntry entry) {
-		SkillTemplate template = DataManager.SKILL_DATA.getSkillTemplate(entry.getSkillId());
-		Properties prop = template.getProperties();
+		Properties prop = entry.getSkillTemplate().getProperties();
 		if (prop.getFirstTarget() != FirstTargetAttribute.ME && entry.getTemplate().getTarget() != NpcSkillTargetAttribute.NONE
 			&& entry.getTemplate().getTarget() != NpcSkillTargetAttribute.MOST_HATED && entry.getTemplate().getTarget() != NpcSkillTargetAttribute.ME) {
 			if (owner.getTarget()instanceof Creature target) {
