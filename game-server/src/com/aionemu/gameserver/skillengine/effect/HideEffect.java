@@ -60,9 +60,6 @@ public class HideEffect extends BufEffect {
 
 		effected.setVisualState(state);
 
-		// Cancel targeted enemy cast
-		AttackUtil.cancelCastOn(effected);
-
 		// send all to set new 'effected' visual state (remove all visual targetting from 'effected')
 		PacketSendUtility.broadcastPacketAndReceive(effected, new SM_PLAYER_STATE(effected));
 

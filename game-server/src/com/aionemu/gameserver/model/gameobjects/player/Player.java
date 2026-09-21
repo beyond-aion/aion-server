@@ -35,7 +35,6 @@ import com.aionemu.gameserver.model.gameobjects.player.motion.MotionList;
 import com.aionemu.gameserver.model.gameobjects.player.npcFaction.NpcFactions;
 import com.aionemu.gameserver.model.gameobjects.player.title.TitleList;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
-import com.aionemu.gameserver.model.gameobjects.state.CreatureVisualState;
 import com.aionemu.gameserver.model.gameobjects.state.FlyState;
 import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.model.items.ItemCooldown;
@@ -761,10 +760,6 @@ public class Player extends Creature {
 		if (durationSeconds < 0)
 			prisonEndTimeMillis = durationSeconds = 0;
 		return durationSeconds;
-	}
-
-	public boolean isProtectionActive() {
-		return isInVisualState(CreatureVisualState.BLINKING);
 	}
 
 	@Override

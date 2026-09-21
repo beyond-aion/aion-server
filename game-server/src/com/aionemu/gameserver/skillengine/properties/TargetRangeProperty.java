@@ -8,7 +8,6 @@ import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.model.gameobjects.Trap;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.gameobjects.state.CreatureVisualState;
 import com.aionemu.gameserver.model.team.TeamMember;
 import com.aionemu.gameserver.model.team.TemporaryPlayerTeam;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
@@ -41,7 +40,7 @@ public class TargetRangeProperty {
 				firstTarget.getKnownList().stream()
 					.filter(knownObject -> knownObject.get() instanceof Creature)
 					.map(knownObject -> (Creature) knownObject.get())
-					.filter(creature -> checkCommonRequirements(creature, skillTemplate))
+					.filter(creature -> checkCommonRequirements(creature, skillEffector, skillTemplate))
 					.filter(creature -> Math.abs(firstTarget.getZ() - creature.getZ()) <= altitude)
 					.filter(creature -> !(creature instanceof Player player && player.isUsingFlightTransporterOrWindstream()))
 					.filter(creature -> !(skillEffector instanceof Trap trap && trap.getCreator() == creature)) // TODO this is a temporary hack for traps
@@ -67,7 +66,7 @@ public class TargetRangeProperty {
 						for (Player member : team.getMembers()) {
 							if (!member.isOnline())
 								continue;
-							if (!checkCommonRequirements(member, skillTemplate))
+							if (!checkCommonRequirements(member, skillEffector, skillTemplate))
 								continue;
 							if (PositionUtil.isInRange(effector, member, effectiveRange, false)) {
 								if (checkGeo(member, result.getFirstTarget(), skillTemplate))
@@ -83,7 +82,7 @@ public class TargetRangeProperty {
 				skillEffector.getKnownList().stream()
 					.filter(knownObject -> knownObject.get() instanceof Creature)
 					.map(knownObject -> (Creature) knownObject.get())
-					.filter(creature -> checkCommonRequirements(creature, skillTemplate))
+					.filter(creature -> checkCommonRequirements(creature, skillEffector, skillTemplate))
 					.filter(creature -> !(creature instanceof Trap trap) || trap.getMaster().isEnemy(skillEffector))
 					.filter(creature -> PositionUtil.isInRange(creature, x, y, z, properties.getTargetDistance() + 1))
 					.filter(creature -> checkGeo(creature, result.getFirstTarget(), skillTemplate))
@@ -94,7 +93,7 @@ public class TargetRangeProperty {
 		return true;
 	}
 
-	private static boolean checkCommonRequirements(Creature creature, SkillTemplate skillTemplate) {
+	private static boolean checkCommonRequirements(Creature creature, Creature skillEffector, SkillTemplate skillTemplate) {
 		if (skillTemplate.hasResurrectEffect()) {
 			if (!creature.isDead())
 				return false;
@@ -103,8 +102,7 @@ public class TargetRangeProperty {
 				return false;
 		}
 
-		// blinking state means protection is active (no interaction with creature is possible)
-		if (creature.isInVisualState(CreatureVisualState.BLINKING))
+		if (creature.isSpawnProtectedFrom(skillEffector))
 			return false;
 
 		return true;

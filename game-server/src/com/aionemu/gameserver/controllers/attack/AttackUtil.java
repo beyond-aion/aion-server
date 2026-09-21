@@ -505,15 +505,6 @@ public class AttackUtil {
 		return AttackStatus.NORMALHIT;
 	}
 
-	public static void cancelCastOn(Creature target) {
-		target.getKnownList().forEachObject(visibleObject -> {
-			if (visibleObject instanceof Creature creature && visibleObject.getTarget() == target) {
-				if (creature.getCastingSkill() != null && creature.getCastingSkill().getFirstTarget().equals(target))
-					creature.getController().cancelCurrentSkill(null);
-			}
-		});
-	}
-
 	/**
 	 * Send a packet to everyone who is targeting creature.
 	 * 
