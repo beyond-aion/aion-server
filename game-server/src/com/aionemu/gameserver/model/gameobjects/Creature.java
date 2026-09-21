@@ -329,11 +329,15 @@ public abstract class Creature extends VisibleObject {
 		return TribeClass.GENERAL;
 	}
 
+	public boolean isProtectionActive() {
+		return isInVisualState(CreatureVisualState.BLINKING);
+	}
+
 	/**
 	 * @return True, if this creature is under spawn protection, which only its owner and its team can still target
 	 */
 	public boolean isSpawnProtectedFrom(Creature other) {
-		if (!isInVisualState(CreatureVisualState.BLINKING) || other.equals(getMaster()))
+		if (!isProtectionActive() || other.equals(getMaster()))
 			return false;
 		return !(getMaster() instanceof Player master && other instanceof Player otherPlayer && otherPlayer.isInSameTeam(master)
 			&& !otherPlayer.isDueling(master));
