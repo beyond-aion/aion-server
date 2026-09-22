@@ -95,7 +95,7 @@ public abstract class AbstractMaterialSkillActor extends AbstractCollisionObserv
 				return;
 			int materialId = AbstractMaterialSkillActor.this.materialId;
 			List<MaterialSkill> skills = AbstractMaterialSkillActor.this.skills;
-			MaterialSkillUsage usage = creature.getController().getMaterialSkillUsage();
+			MaterialSkillUsage usage = creature.getController().getOrCreateMaterialSkillUsage();
 			for (int slot = 0; slot < skills.size(); slot++) {
 				MaterialSkill skill = skills.get(slot);
 				if (!skill.getTarget().matches(creature) || !matchActConditions(skill) || !usage.tryUse(materialId, slot, skill.getFrequency()))

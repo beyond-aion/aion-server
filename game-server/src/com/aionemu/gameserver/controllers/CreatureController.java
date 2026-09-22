@@ -65,7 +65,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 
 	private static final Logger log = LoggerFactory.getLogger(CreatureController.class);
 	private volatile TerrainZoneCollisionMaterialActor actor;
-	private final MaterialSkillUsage materialSkillUsage = new MaterialSkillUsage();
+	private MaterialSkillUsage materialSkillUsage;
 	private final ConcurrentHashMap<Integer, Future<?>> tasks = new ConcurrentHashMap<>();
 
 	@Override
@@ -535,7 +535,9 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	public void cancelUseItem() {
 	}
 
-	public MaterialSkillUsage getMaterialSkillUsage() {
+	public synchronized MaterialSkillUsage getOrCreateMaterialSkillUsage() {
+		if (materialSkillUsage == null)
+			materialSkillUsage = new MaterialSkillUsage();
 		return materialSkillUsage;
 	}
 

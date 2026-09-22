@@ -5,7 +5,7 @@ import java.util.Map;
 
 /**
  * Last uses of material skills, kept per creature so that stepping off a material and back on (or re-entering a material zone) does not restart
- * the skill periods. Slots are the positions of the skills in their material template.
+ * the skill periods. Slots are the positions of the skills in their material template. Created on the first material skill of a creature.
  */
 public class MaterialSkillUsage {
 
