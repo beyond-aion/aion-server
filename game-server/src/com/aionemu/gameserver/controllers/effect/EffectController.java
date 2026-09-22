@@ -298,7 +298,8 @@ public class EffectController {
 	public Effect getAbnormalEffect(String stack) {
 		long stamp = lock.readLock();
 		try {
-			return abnormalEffectMap.get(stack);
+			Effect effect = abnormalEffectMap.get(stack);
+			return effect == null || effect.isSlotReserved() ? null : effect;
 		} finally {
 			lock.unlockRead(stamp);
 		}
