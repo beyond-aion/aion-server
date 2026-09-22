@@ -18,7 +18,6 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.utils.time.gametime.DayTime;
 
 /**
  * @author Yeats, Neon
@@ -69,19 +68,18 @@ public abstract class AbstractMaterialSkillActor extends AbstractCollisionObserv
 	}
 
 	private boolean matchActConditions(MaterialSkill skill) {
-		if (skill.getConditions().isEmpty())
-			return true;
 		for (MaterialActCondition condition : skill.getConditions()) {
-			if (condition == MaterialActCondition.NIGHT && GameTimeService.getInstance().getGameTime().getDayTime() == DayTime.NIGHT)
-				return true;
-			if (condition == MaterialActCondition.SUNNY) { // sunny actually means "not raining" (fireplaces don't burn during rain)
+			if (condition == MaterialActCondition.NIGHT) {
+				if (!GameTimeService.getInstance().getGameTime().isNight())
+					return false;
+			} else if (condition == MaterialActCondition.SUNNY) { // sunny actually means "not raining" (fireplaces don't burn during rain)
 				WeatherEntry weatherEntry = WeatherService.getInstance().findWeatherEntry(creature);
 				boolean isRain = weatherEntry.getWeatherName() != null && weatherEntry.getWeatherName().startsWith("RAIN");
-				if (!isRain || weatherEntry.isBefore()) // before means "before" the weather (e.g. clouds before rain)
-					return true;
+				if (isRain && !weatherEntry.isBefore()) // before means "before" the weather (e.g. clouds before rain)
+					return false;
 			}
 		}
-		return false;
+		return true;
 	}
 
 	private class MaterialSkillTask implements Runnable {
