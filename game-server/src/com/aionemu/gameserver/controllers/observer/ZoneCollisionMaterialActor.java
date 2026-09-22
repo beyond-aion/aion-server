@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.controllers.observer;
 
-import java.util.List;
-
 import com.aionemu.gameserver.configs.main.GeoDataConfig;
 import com.aionemu.gameserver.geoEngine.collision.CollisionIntention;
 import com.aionemu.gameserver.geoEngine.collision.CollisionResults;
@@ -9,7 +7,7 @@ import com.aionemu.gameserver.geoEngine.scene.Spatial;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.templates.materials.MaterialSkill;
+import com.aionemu.gameserver.model.templates.materials.MaterialTemplate;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -17,8 +15,18 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class ZoneCollisionMaterialActor extends AbstractMaterialSkillActor {
 
-	public ZoneCollisionMaterialActor(Creature creature, Spatial geometry, List<MaterialSkill> matchingSkills, CheckType checkType) {
-		super(creature, geometry, CollisionIntention.MATERIAL.getId(), checkType, TaskId.ZONE_MATERIAL_ACTION, matchingSkills);
+	public ZoneCollisionMaterialActor(Creature creature, Spatial geometry, MaterialTemplate template, CheckType checkType) {
+		super(creature, geometry, CollisionIntention.MATERIAL.getId(), checkType, TaskId.ZONE_MATERIAL_ACTION, template.getId(), template.getSkills());
+	}
+
+	@Override
+	protected float getTouchZMax(float z) {
+		return z + 2;
+	}
+
+	@Override
+	protected float getTouchZMin(float x, float y, float z) {
+		return z - 2;
 	}
 
 	@Override

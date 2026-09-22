@@ -53,18 +53,8 @@ public abstract class AbstractCollisionObserver extends ActionObserver {
 							float x = creature.getX();
 							float y = creature.getY();
 							float z = creature.getZ();
-							float zMax = z + 0.05f + creature.getObjectTemplate().getBoundRadius().getUpper();
-							float zMin = z - 0.11f;
-							if (creature instanceof Player) {
-								if (((Player) creature).getMoveController().isJumping() || !((Player) creature).isInGlidingState() && !creature.isFlying()) {
-									float geoZ = GeoService.getInstance().getZ(creature.getWorldId(), x, y, z, creature.getInstanceId());
-									if (!Float.isNaN(geoZ)) {
-										zMin = geoZ - 0.11f;
-									}
-								}
-							}
-							pos = new Vector3f(x, y, zMax);
-							dir = new Vector3f(pos.getX(), pos.getY(), zMin);
+							pos = new Vector3f(x, y, getTouchZMax(z));
+							dir = new Vector3f(x, y, getTouchZMin(x, y, z));
 						} else { // check if we passed the geometry (either entering or leaving)
 							pos = new Vector3f(creature.getX(), creature.getY(), creature.getZ() + GeoMap.COLLISION_CHECK_Z_OFFSET);
 							dir = oldPos.clone();
@@ -84,6 +74,25 @@ public abstract class AbstractCollisionObserver extends ActionObserver {
 				}
 			});
 		}
+	}
+
+	/**
+	 * @return The upper end of the vertical ray that checks whether the creature touches the geometry.
+	 */
+	protected float getTouchZMax(float z) {
+		return z + 0.05f + creature.getObjectTemplate().getBoundRadius().getUpper();
+	}
+
+	/**
+	 * @return The lower end of the vertical ray that checks whether the creature touches the geometry.
+	 */
+	protected float getTouchZMin(float x, float y, float z) {
+		if (creature instanceof Player player && (player.getMoveController().isJumping() || !player.isInGlidingState() && !creature.isFlying())) {
+			float geoZ = GeoService.getInstance().getZ(creature.getWorldId(), x, y, z, creature.getInstanceId());
+			if (!Float.isNaN(geoZ))
+				return geoZ - 0.11f;
+		}
+		return z - 0.11f;
 	}
 
 	public abstract void onMoved(CollisionResults result);

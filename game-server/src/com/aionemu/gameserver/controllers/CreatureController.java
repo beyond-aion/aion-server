@@ -17,6 +17,7 @@ import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.controllers.attack.AttackResult;
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
 import com.aionemu.gameserver.controllers.attack.AttackUtil;
+import com.aionemu.gameserver.controllers.observer.MaterialSkillUsage;
 import com.aionemu.gameserver.controllers.observer.TerrainZoneCollisionMaterialActor;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.EmotionType;
@@ -64,6 +65,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 
 	private static final Logger log = LoggerFactory.getLogger(CreatureController.class);
 	private volatile TerrainZoneCollisionMaterialActor actor;
+	private final MaterialSkillUsage materialSkillUsage = new MaterialSkillUsage();
 	private final ConcurrentHashMap<Integer, Future<?>> tasks = new ConcurrentHashMap<>();
 
 	@Override
@@ -531,6 +533,10 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	 * Cancel use Item
 	 */
 	public void cancelUseItem() {
+	}
+
+	public MaterialSkillUsage getMaterialSkillUsage() {
+		return materialSkillUsage;
 	}
 
 	@Override
