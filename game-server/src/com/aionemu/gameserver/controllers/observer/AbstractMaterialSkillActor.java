@@ -97,8 +97,6 @@ public abstract class AbstractMaterialSkillActor extends AbstractCollisionObserv
 				return;
 			if (!creature.isSpawned() || creature.isDead())
 				return;
-			if (creature.isProtectionActive())
-				return;
 			if ((skill = findFirstSkillWithMatchingCondition()) == null) // skip if currently nothing matches (fires are off while raining)
 				return;
 			if (GeoDataConfig.GEO_MATERIALS_SHOWDETAILS && creature instanceof Player player && player.isStaff())
