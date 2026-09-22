@@ -105,18 +105,11 @@ public class EffectController {
 	 * Takes the place an effect will occupy once it lands, so that the list follows the order casts ended.
 	 */
 	public void reserveSlot(Effect effect) {
+		if (!effect.isSlotReserved())
+			throw new IllegalArgumentException("Effect " + effect.getStack() + " is not set to reserve a slot.");
 		long stamp = lock.writeLock();
 		try {
-			abnormalEffectMap.putIfAbsent(effect.getStack(), effect);
-		} finally {
-			lock.unlockWrite(stamp);
-		}
-	}
-
-	public void releaseSlot(Effect effect) {
-		long stamp = lock.writeLock();
-		try {
-			abnormalEffectMap.remove(effect.getStack(), effect);
+			getMapForEffect(effect).putIfAbsent(effect.getStack(), effect);
 		} finally {
 			lock.unlockWrite(stamp);
 		}
@@ -333,12 +326,8 @@ public class EffectController {
 		Map<String, Effect> effectMap = getMapForEffect(effect.getSkillTemplate(), false);
 		long stamp = lock.writeLock();
 		try {
-			Effect oldEffect = effectMap.get(effect.getStack());
-			if (oldEffect != null) {
-				if (!oldEffect.equals(effect))
-					return; // effect in map was already replaced by a newer one (e.g. when toggling many auras), so there's no need to re-broadcast
-				effectMap.remove(effect.getStack());
-			}
+			if (!effectMap.remove(effect.getStack(), effect))
+				return; // effect in map was already removed or replaced by a newer one (e.g. when toggling many auras), so there's no need to re-broadcast
 		} finally {
 			lock.unlockWrite(stamp);
 		}

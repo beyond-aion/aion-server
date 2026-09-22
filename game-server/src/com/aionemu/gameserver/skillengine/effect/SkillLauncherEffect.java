@@ -24,7 +24,7 @@ public class SkillLauncherEffect extends EffectTemplate {
 		ThreadPoolManager.getInstance().schedule(() -> {
 			if (effect.getEffector().isSpawned() && !effect.getEffector().isDead())
 				SkillEngine.getInstance().applyEffect(skillId, effect.getEffector(), effect.getEffected());
-		}, 50);
+		}, 50); // the minimum delay on retail is 50 ms, and it is also controlled by the reserved3/4 params, but they are 0 in all 4.8 skills
 	}
 
 	@Override

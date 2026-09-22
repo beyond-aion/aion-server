@@ -614,7 +614,7 @@ public class Effect implements StatOwner {
 		slotReserved = false;
 		Creature target = getEffected();
 		if (target != null)
-			target.getEffectController().releaseSlot(this);
+			target.getEffectController().clearEffect(this, false);
 	}
 
 	public boolean isSlotReserved() {
