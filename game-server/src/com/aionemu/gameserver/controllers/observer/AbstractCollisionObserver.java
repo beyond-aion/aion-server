@@ -87,7 +87,7 @@ public abstract class AbstractCollisionObserver extends ActionObserver {
 	 * @return The lower end of the vertical ray that checks whether the creature touches the geometry.
 	 */
 	protected float getTouchZMin(float x, float y, float z) {
-		if (creature instanceof Player player && (player.getMoveController().isJumping() || !player.isInGlidingState() && !creature.isFlying())) {
+		if (creature instanceof Player player && (player.getMoveController().isJumping() || !player.isFlying())) {
 			float geoZ = GeoService.getInstance().getZ(creature.getWorldId(), x, y, z, creature.getInstanceId());
 			if (!Float.isNaN(geoZ))
 				return geoZ - 0.11f;
