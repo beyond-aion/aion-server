@@ -517,12 +517,16 @@ public class Effect implements StatOwner {
 		if (skillTemplate.getEffects() == null)
 			return;
 
-		if (effected != null && effected.getEffectController().isConflicting(this))
+		// when an existing effect prevails, a skill starting with an instant effect still does its instant effects, any other skill fails as a whole
+		boolean outranked = effected != null && effected.getEffectController().isOutranked(this);
+		if (outranked && !Effects.isInstant(getEffectTemplates().getFirst()))
 			setEffectResult(EffectResult.CONFLICT);
 		if (effectResult != EffectResult.CONFLICT) {
 			for (EffectTemplate template : getEffectTemplates()) {
 				template.calculate(this);
 			}
+			if (outranked)
+				successEffects.values().removeIf(template -> !Effects.isInstant(template));
 		}
 		if (!isInSuccessEffects(1)) {
 			successEffects.clear();

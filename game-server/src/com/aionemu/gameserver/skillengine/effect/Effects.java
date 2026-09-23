@@ -16,7 +16,32 @@ import static com.aionemu.gameserver.skillengine.effect.EffectType.*;
 @XmlType(name = "Effects")
 public class Effects {
 
-	private static final Set<EffectType> CONFLICT_TYPES = EnumSet.of(SHIELD, PROTECT, REFLECTOR, MPSHIELD);
+	private static final Set<EffectType> CONFLICT_TYPES = EnumSet.of(SHIELD, PROTECT, REFLECTOR, MPSHIELD, CONVERTHEAL, CASEHEAL, CHANGEHATEONATTACKED,
+		HEALCASTORONATTACKED, HEALCASTORONTARGETDEAD);
+	private static final Set<EffectType> ONE_PER_SLOT_TYPES = EnumSet.of(ABSOLUTESLOW, ABSOLUTESNARE, ALWAYSBLOCK, ALWAYSDODGE, ALWAYSHIT, ALWAYSNORESIST,
+		ALWAYSPARRY, ALWAYSRESIST, BIND, BLIND, BOOSTDROPRATE, BUFFBIND, BUFFSILENCE, BUFFSLEEP, BUFFSTUN, CONFUSE, CURSE, DISEASE, FEAR, HIDE,
+		INVULNERABLEWING, MAGICCOUNTERATK, NOFLY, ONETIMEBOOSTHEAL, ONETIMEBOOSTSKILLATTACK, ONETIMEBOOSTSKILLCRITICAL, OPENAERIAL, PARALYZE, PETRIFICATION,
+		PULLED, REBIRTH, RESURRECTBASE, ROOT, SEARCH, SILENCE, SIMPLEROOT, SLEEP, SLOW, SNARE, SPIN, STAGGER, STUMBLE, STUN);
+	private static final Set<EffectType> INSTANT_TYPES = EnumSet.of(ABSOLUTEEXPPOINTHEALINSTANT, ACTIVATEENSLAVE, BACKDASH, CARVESIGNET, CLOSEAERIAL, DASH,
+		DEATHBLOW, DELAYEDFPATKINSTANT, DELAYEDSPELLATTACKINSTANT, DISPEL, DISPELBUFF, DISPELBUFFCOUNTERATK, DISPELDEBUFF, DISPELDEBUFFMENTAL,
+		DISPELDEBUFFPHYSICAL, DISPELNPCBUFF, DISPELNPCDEBUFF, DPHEALINSTANT, DPTRANSFER, DUMMY, ESCAPE, EVADE, FALL, FLYOFF, FPATTACKINSTANT, FPHEALINSTANT,
+		HEALINSTANT, HOSTILEUP, MOVEBEHIND, MPATTACKINSTANT, MPHEALINSTANT, NOREDUCESPELLATKINSTANT, PETORDERUNSUMMON, PETORDERUSEULTRASKILL, PROCATKINSTANT,
+		PROCDPHEALINSTANT, PROCFPHEALINSTANT, PROCHEALINSTANT, PROCMPHEALINSTANT, PROCVPHEALINSTANT, RANDOMMOVELOC, RECALLINSTANT, RESURRECT,
+		RESURRECTPOSITIONAL, RETURN, RETURNPOINT, SIGNETBURST, SKILLATKDRAININSTANT, SKILLATTACKINSTANT, SKILLLAUNCHER, SPELLATKDRAININSTANT,
+		SPELLATTACKINSTANT, SUMMON, SUMMONBINDINGGROUPGATE, SUMMONFUNCTIONALNPC, SUMMONGROUPGATE, SUMMONHOMING, SUMMONHOUSEGATE, SUMMONSERVANT,
+		SUMMONSKILLAREA, SUMMONTOTEM, SUMMONTRAP, SWITCHHOSTILE, SWITCHHPMP, TARGETTELEPORT);
+	private static final ClassValue<EffectType> EFFECT_TYPES = new ClassValue<>() {
+
+		@Override
+		protected EffectType computeValue(Class<?> type) {
+			String effectName = type.getSimpleName().replace("Effect", "").toUpperCase();
+			try {
+				return EffectType.valueOf(effectName);
+			} catch (Exception e) {
+				throw new IllegalArgumentException("Missing EffectType " + effectName + " for: " + type);
+			}
+		}
+	};
 	private static final Set<EffectType> ALWAYS_NO_RESIST = EnumSet.of(ABSOLUTESTATTOPCBUFF, ALWAYSBLOCK, ALWAYSDODGE, ALWAYSPARRY, ALWAYSRESIST,
 		ARMORMASTERY, APBOOST, AURA, BOOSTHATE, BOOSTHEAL, BOOSTSKILLCASTINGTIME, BOOSTSKILLCOST, BOOSTSPELLATTACK, CASEHEAL, CHANGEHATEONATTACKED,
 		CONDSKILLLAUNCHER, CONVERTHEAL, DISPELDEBUFF, DISPELDEBUFFMENTAL, DISPELDEBUFFPHYSICAL, DISPELNPCDEBUFF, DPHEAL, DPHEALINSTANT, DPTRANSFER,
@@ -178,13 +203,29 @@ public class Effects {
 			effect.setNoResist(true);
 	}
 
-	private EffectType resolveEffectType(EffectTemplate et) {
-		String effectName = et.getClass().getSimpleName().replace("Effect", "").toUpperCase();
-		try {
-			return EffectType.valueOf(effectName);
-		} catch (Exception e) {
-			throw new IllegalArgumentException("Missing EffectType " + effectName + " for: " + et.getClass());
-		}
+	private static EffectType resolveEffectType(EffectTemplate et) {
+		return EFFECT_TYPES.get(et.getClass());
+	}
+
+	/**
+	 * @return True if a creature can hold only one effect of this type, in any target slot.
+	 */
+	static boolean isOnePerCreature(EffectTemplate et) {
+		return CONFLICT_TYPES.contains(resolveEffectType(et));
+	}
+
+	/**
+	 * @return True if the effect does its work at once and never stays on the effected creature.
+	 */
+	public static boolean isInstant(EffectTemplate et) {
+		return INSTANT_TYPES.contains(resolveEffectType(et));
+	}
+
+	/**
+	 * @return True if a creature can hold only one effect of this type per target slot.
+	 */
+	static boolean isOnePerSlot(EffectTemplate et) {
+		return ONE_PER_SLOT_TYPES.contains(resolveEffectType(et));
 	}
 
 	public List<EffectTemplate> getEffects() {

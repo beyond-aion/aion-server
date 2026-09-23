@@ -155,26 +155,21 @@ public class EffectController {
 	private boolean searchConflict(Map<String, Effect> mapToUpdate, Effect nextEffect, boolean broadcast) {
 		if (checkExtraEffect(mapToUpdate, nextEffect, broadcast))
 			return false;
-		Effect effectToEnd = null;
+		List<Effect> effectsToEnd = new ArrayList<>();
 		long stamp = lock.readLock();
 		try {
-			mainLoop:
+			effectLoop:
 			for (Effect effect : mapToUpdate.values()) {
 				if (effect.isSlotReserved() || !canConflict(effect, nextEffect))
 					continue;
+				boolean sameSlot = isSameSlot(effect, nextEffect);
 				for (EffectTemplate et : effect.getEffectTemplates()) {
-					if (et.getEffectId() == 0)
-						continue;
 					for (EffectTemplate et2 : nextEffect.getEffectTemplates()) {
-						if (et2.getEffectId() == 0)
-							continue;
-						if ((et.getEffectId() == et2.getEffectId()) || (et instanceof SilenceEffect && et2 instanceof SilenceEffect)) {
-							if (et.getBasicLvl() > et2.getBasicLvl()) {
+						if (et.conflictsWith(et2, sameSlot)) {
+							if (et.getBasicLvl() > et2.getBasicLvl())
 								return true;
-							} else {
-								effectToEnd = effect;
-								break mainLoop;
-							}
+							effectsToEnd.add(effect);
+							continue effectLoop;
 						}
 					}
 				}
@@ -182,7 +177,7 @@ public class EffectController {
 		} finally {
 			lock.unlockRead(stamp);
 		}
-		if (effectToEnd != null) {
+		for (Effect effectToEnd : effectsToEnd) {
 			if (!broadcast)
 				nextEffect.addUnbroadcastSlot(effectToEnd.getTargetSlot());
 			effectToEnd.endEffect(broadcast && effectToEnd.getTargetSlot() != nextEffect.getTargetSlot());
@@ -193,34 +188,41 @@ public class EffectController {
 	/**
 	 * @return True if {@code newEffectTemplate} is in conflict with another existing effect.
 	 */
-	public boolean isConflicting(Effect newEffect) {
-		if (newEffect.isPassive() || newEffect.getTargetSlot() == SkillTargetSlot.DEBUFF)
+	public boolean isOutranked(Effect newEffect) {
+		if (newEffect.isPassive())
 			return false;
+		for (EffectTemplate newEffectTemplate : newEffect.getEffectTemplates()) {
+			if (isOutranked(newEffect, newEffectTemplate))
+				return true;
+		}
+		return false;
+	}
+
+	/**
+	 * @return True if an existing effect conflicts with {@code newEffectTemplate} of {@code newEffect} and prevails over it.
+	 */
+	private boolean isOutranked(Effect newEffect, EffectTemplate newEffectTemplate) {
 		Map<String, Effect> mapForEffect = getMapForEffect(newEffect.getSkillTemplate(), false);
 		long stamp = lock.readLock();
 		try {
 			for (Effect currentEffect : mapForEffect.values()) {
 				if (currentEffect.isSlotReserved() || !canConflict(currentEffect, newEffect))
 					continue;
-				for (EffectTemplate newEffectTemplate : newEffect.getEffectTemplates()) {
-					if (newEffectTemplate.getEffectId() == 0)
-						continue;
-					for (EffectTemplate currentEffectTemplate : currentEffect.getEffectTemplates()) {
-						if (currentEffectTemplate.getEffectId() == 0)
-							continue;
-						if ((currentEffectTemplate.getEffectId() == newEffectTemplate.getEffectId())
-							|| (currentEffectTemplate instanceof SilenceEffect && newEffectTemplate instanceof SilenceEffect)) {
-							if (currentEffectTemplate.getBasicLvl() > newEffectTemplate.getBasicLvl() && !(currentEffectTemplate instanceof HideEffect)) {
-								return true;
-							}
-						}
-					}
+				boolean sameSlot = isSameSlot(currentEffect, newEffect);
+				for (EffectTemplate currentEffectTemplate : currentEffect.getEffectTemplates()) {
+					if (currentEffectTemplate.conflictsWith(newEffectTemplate, sameSlot) && currentEffectTemplate.getBasicLvl() > newEffectTemplate.getBasicLvl()
+						&& !(currentEffectTemplate instanceof HideEffect))
+						return true;
 				}
 			}
 		} finally {
 			lock.unlockRead(stamp);
 		}
 		return false;
+	}
+
+	private static boolean isSameSlot(Effect e1, Effect e2) {
+		return e1.getTargetSlot() == e2.getTargetSlot() && e1.getTargetSlot() != SkillTargetSlot.NONE;
 	}
 
 	private static boolean canConflict(Effect e1, Effect e2) {
