@@ -617,7 +617,7 @@ public class Effect implements StatOwner {
 		Creature target = getEffected();
 		if (target != null) {
 			target.getEffectController().clearEffect(this, false);
-			target.getEffectController().broadCastEffects(getTargetSlot().getId() | unbroadcastSlots);
+			target.getEffectController().updateEffectSlots(getTargetSlot().getId() | unbroadcastSlots);
 		}
 		slotReserved = false;
 	}
@@ -632,7 +632,7 @@ public class Effect implements StatOwner {
 	public void broadcastUnbroadcastSlots() {
 		Creature target = getEffected();
 		if (target != null && unbroadcastSlots != 0)
-			target.getEffectController().broadCastEffects(unbroadcastSlots);
+			target.getEffectController().updateEffectSlots(unbroadcastSlots);
 	}
 
 	public int getUnbroadcastSlots() {
@@ -669,7 +669,7 @@ public class Effect implements StatOwner {
 			if (applyCriticalProcEffect && subEffect != null)
 				subEffect.applyEffect();
 			if (effectListBroadcastRequested && !addedToController && effected != null)
-				effected.getEffectController().broadCastEffects(null); // nothing was added to the controller, which would have broadcasted on its own
+				effected.getEffectController().updateEffectSlots(SkillTargetSlot.FULLSLOTS); // nothing was added to the controller, which would have broadcasted on its own
 			if (effected != null)
 				effected.getAi().onEffectApplied(this);
 		} catch (Exception e) {

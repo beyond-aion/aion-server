@@ -341,6 +341,13 @@ public class EffectController {
 		broadCastEffects(effect != null ? effect.getTargetSlot().getId() : SkillTargetSlot.FULLSLOTS);
 	}
 
+	/**
+	 * Sends the effect list of the given slots to everyone who needs it, which for a player includes the player itself and its team.
+	 */
+	public void updateEffectSlots(int slots) {
+		broadCastEffects(slots);
+	}
+
 	public void broadCastEffects(int slots) {
 		List<Effect> effects = getAbnormalEffects();
 		PacketSendUtility.broadcastPacket(getOwner(), new SM_ABNORMAL_EFFECT(getOwner(), abnormals, effects, slots));
