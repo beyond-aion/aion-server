@@ -24,9 +24,7 @@ public class FpAttackInstantEffect extends EffectTemplate {
 
 	@Override
 	public void calculate(Effect effect) {
-		// Only players have FP
-		if (effect.getEffected() instanceof Player) {
-			Player player = (Player) effect.getEffected();
+		if (effect.getEffected() instanceof Player player) {
 			int maxFP = player.getLifeStats().getMaxFp();
 			int newValue = value;
 			// Support for values in percentage
@@ -34,9 +32,8 @@ public class FpAttackInstantEffect extends EffectTemplate {
 				newValue = (maxFP * value) / 100;
 
 			effect.setReserveds(new EffectReserved(position, newValue, ResourceType.FP, true), false);
-
-			super.calculate(effect, null, null);
 		}
+		super.calculate(effect, null, null);
 	}
 
 	@Override

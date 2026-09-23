@@ -4,7 +4,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
-import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.skillengine.model.Effect;
 
 /**
@@ -16,9 +15,7 @@ public class InvulnerableWingEffect extends EffectTemplate {
 
 	@Override
 	public void calculate(Effect effect) {
-		// Only for players
-		if (effect.getEffected() instanceof Player)
-			super.calculate(effect, null, null);
+		super.calculate(effect, null, null);
 	}
 
 	@Override

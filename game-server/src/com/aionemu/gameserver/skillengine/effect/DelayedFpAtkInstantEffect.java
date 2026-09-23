@@ -22,9 +22,7 @@ public class DelayedFpAtkInstantEffect extends EffectTemplate implements Delayed
 
 	@Override
 	public void calculate(Effect effect) {
-		// Only players have FP
-		if (effect.getEffected() instanceof Player)
-			super.calculate(effect, null, null);
+		super.calculate(effect, null, null);
 	}
 
 	@Override
@@ -44,10 +42,9 @@ public class DelayedFpAtkInstantEffect extends EffectTemplate implements Delayed
 	}
 
 	private void calculateAndApplyDamage(Effect effect) {
-		if (!effect.getEffector().isEnemy(effect.getEffected()))
+		if (!(effect.getEffected() instanceof Player player) || !effect.getEffector().isEnemy(player))
 			return;
 		int valueWithDelta = calculateBaseValue(effect);
-		Player player = (Player) effect.getEffected();
 		int maxFP = player.getLifeStats().getMaxFp();
 
 		int newValue = valueWithDelta;

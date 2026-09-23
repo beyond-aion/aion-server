@@ -327,8 +327,7 @@ public abstract class EffectTemplate {
 		}
 		resolveMagicalCritical(effect);
 		if (!isForcedEffect && isDodgedOrResisted(effect, statEnum)) {
-			if (getPosition() != 1 && !(effect.effectInPos(1) instanceof DamageEffect))
-				effect.getSuccessEffects().clear();
+			effect.setResisted();
 			return false;
 		}
 		addSuccessEffect(effect, spellStatus);

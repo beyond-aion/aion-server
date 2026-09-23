@@ -74,6 +74,7 @@ public class Effect implements StatOwner {
 	private int mpShieldSkillId = 0;
 
 	private boolean addedToController;
+	private boolean resisted;
 	private boolean effectListBroadcastRequested;
 	private final List<Runnable> observerRemoveTasks = new ArrayList<>();
 	private boolean launchSubEffect = true;
@@ -517,20 +518,23 @@ public class Effect implements StatOwner {
 		if (skillTemplate.getEffects() == null)
 			return;
 
-		// when an existing effect prevails, a skill starting with an instant effect still does its instant effects, any other skill fails as a whole
+		// the whole skill fails when its first effect fails, when a later effect is resisted while the first one lasts, or when an existing effect
+		// prevails over a skill whose first effect lasts. Otherwise the lasting effects only ever succeed together, the instant ones on their own.
+		EffectTemplate firstEffect = getEffectTemplates().getFirst();
+		boolean startsInstant = Effects.isInstant(firstEffect);
 		boolean outranked = effected != null && effected.getEffectController().isOutranked(this);
-		if (outranked && !Effects.isInstant(getEffectTemplates().getFirst()))
+		if (outranked && !startsInstant)
 			setEffectResult(EffectResult.CONFLICT);
 		if (effectResult != EffectResult.CONFLICT) {
 			for (EffectTemplate template : getEffectTemplates()) {
 				template.calculate(this);
 			}
-			if (outranked)
+			if (!isInSuccessEffects(firstEffect.getPosition()) || resisted && !startsInstant)
+				successEffects.clear();
+			else if (outranked || getEffectTemplates().stream().anyMatch(t -> !Effects.isInstant(t) && !isInSuccessEffects(t.getPosition())))
 				successEffects.values().removeIf(template -> !Effects.isInstant(template));
 		}
-		if (!isInSuccessEffects(1)) {
-			successEffects.clear();
-		} else {
+		if (!successEffects.isEmpty()) {
 			if (effectHate == 0) // can be overridden from constructor with skill (from pet order)
 				effectHate = calculateHateForSuccessEffects();
 			if (isLaunchSubEffect()) {
@@ -907,6 +911,13 @@ public class Effect implements StatOwner {
 	private void removeObservers() {
 		observerRemoveTasks.forEach(Runnable::run);
 		observerRemoveTasks.clear();
+	}
+
+	/**
+	 * Marks that one of the effects was dodged or resisted, as opposed to being filtered out by its conditions.
+	 */
+	public void setResisted() {
+		resisted = true;
 	}
 
 	public void addSuccessEffect(EffectTemplate effect) {
