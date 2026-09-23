@@ -33,7 +33,11 @@ public class DelayedFpAtkInstantEffect extends EffectTemplate {
 			public void run() {
 				calculateAndApplyDamage(effect);
 			}
-		}, delay);
+		}, DelayedSpellAttackInstantEffect.getRemainingDelay(effect, delay));
+	}
+
+	public int getDelay() {
+		return delay;
 	}
 
 	private void calculateAndApplyDamage(Effect effect) {

@@ -43,6 +43,9 @@ import com.aionemu.gameserver.skillengine.action.Actions;
 import com.aionemu.gameserver.skillengine.condition.Conditions;
 import com.aionemu.gameserver.skillengine.condition.SkillChargeCondition;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
+import com.aionemu.gameserver.skillengine.effect.DelayedFpAtkInstantEffect;
+import com.aionemu.gameserver.skillengine.effect.DelayedSpellAttackInstantEffect;
+import com.aionemu.gameserver.skillengine.effect.EffectTemplate;
 import com.aionemu.gameserver.skillengine.properties.FirstTargetAttribute;
 import com.aionemu.gameserver.skillengine.properties.Properties;
 import com.aionemu.gameserver.skillengine.properties.Properties.CastState;
@@ -86,6 +89,7 @@ public class Skill {
 	private int castDuration;
 	private int clientHitTime; // from CM_CASTSPELL
 	private int hitTime; // time when effect is applied
+	private int landingDelay; // time from the end of the cast until the effects are applied
 	private float castSpeedForAnimationBoostAndChargeSkills; // cast speed can boost the animation time of the current skill and the hit time of the following skill
 	private long castStartTime;
 	private String chainCategory = null;
@@ -706,20 +710,26 @@ public class Skill {
 		if (isItemSkill)
 			sentCastSpellResultPacket = sendCastSpellEnd(dashStatus, effects);
 
+		// a delayed first effect holds back the whole skill, the other effects land together with it
+		int firstEffectDelay = getFirstEffectDelay();
 		// item skills apply their effects immediately, hitTime only tells the client when to display the hit
-		boolean appliesNow = isInstantSkill() || isItemSkill;
+		boolean appliesNow = firstEffectDelay == 0 && (isInstantSkill() || isItemSkill);
 		if (appliesNow) {
+			landingDelay = 0;
 			applyEffect(effects);
 		} else {
+			landingDelay = firstEffectDelay > 0 ? firstEffectDelay : hitTime;
 			// the place in the effect list is taken now, so a long hit time does not push this skill behind ones cast after it
 			effects.forEach(Effect::reserveEffectSlot);
+			if (landingDelay != hitTime && landingDelay > 2000) // effects ended by the reservation would otherwise keep their icons until the landing
+				effects.forEach(Effect::broadcastUnbroadcastSlots);
 			ThreadPoolManager.getInstance().schedule(() -> {
 				try {
 					applyEffect(effects);
 				} finally {
 					effects.forEach(Effect::releaseUnusedEffectSlot);
 				}
-			}, hitTime);
+			}, landingDelay);
 		}
 
 		if (skillMethod == SkillMethod.PENALTY || skillMethod == SkillMethod.CAST || isItemSkill) {
@@ -1084,6 +1094,24 @@ public class Skill {
 
 	public void setClientHitTime(int time) {
 		this.clientHitTime = time;
+	}
+
+	private int getFirstEffectDelay() {
+		if (skillTemplate.getEffects() == null || skillTemplate.getEffects().getEffects().isEmpty())
+			return 0;
+		EffectTemplate firstEffect = skillTemplate.getEffects().getEffects().getFirst();
+		if (firstEffect instanceof DelayedSpellAttackInstantEffect delayedEffect)
+			return delayedEffect.getDelay();
+		if (firstEffect instanceof DelayedFpAtkInstantEffect delayedEffect)
+			return delayedEffect.getDelay();
+		return 0;
+	}
+
+	/**
+	 * @return Time from the end of the cast until the effects were applied.
+	 */
+	public int getLandingDelay() {
+		return landingDelay;
 	}
 
 	public int getHitTime() {

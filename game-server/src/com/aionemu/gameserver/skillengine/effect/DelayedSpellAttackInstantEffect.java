@@ -31,7 +31,18 @@ public class DelayedSpellAttackInstantEffect extends DamageEffect {
 				effect.getEffected().getController().onAttack(effect, TYPE.DELAYDAMAGE, effect.getReserveds(finalPosition).getValue(), true,
 					LOG.DELAYEDSPELLATKINSTANT, hopType);
 				effect.getEffector().getObserveController().notifyAttackObservers(effect.getEffected(), effect.getSkillId());
-		}, delay);
+		}, getRemainingDelay(effect, delay));
+	}
+
+	/**
+	 * @return The part of {@code delay}, counted from the end of the cast, which has not yet passed when the effects of the skill are applied.
+	 */
+	static int getRemainingDelay(Effect effect, int delay) {
+		return effect.getSkill() == null ? delay : Math.max(0, delay - effect.getSkill().getLandingDelay());
+	}
+
+	public int getDelay() {
+		return delay;
 	}
 
 	@Override

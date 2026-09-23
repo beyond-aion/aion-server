@@ -629,6 +629,12 @@ public class Effect implements StatOwner {
 		unbroadcastSlots |= slot.getId();
 	}
 
+	public void broadcastUnbroadcastSlots() {
+		Creature target = getEffected();
+		if (target != null && unbroadcastSlots != 0)
+			target.getEffectController().broadCastEffects(unbroadcastSlots);
+	}
+
 	public int getUnbroadcastSlots() {
 		return unbroadcastSlots;
 	}
