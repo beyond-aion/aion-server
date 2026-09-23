@@ -11,7 +11,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 /**
  * @author kecimis
  */
-public class DelayedFpAtkInstantEffect extends EffectTemplate {
+public class DelayedFpAtkInstantEffect extends EffectTemplate implements DelayedAttackEffect {
 
 	@XmlAttribute
 	protected int delay;
@@ -35,11 +35,12 @@ public class DelayedFpAtkInstantEffect extends EffectTemplate {
 			public void run() {
 				calculateAndApplyDamage(effect);
 			}
-		}, DelayedSpellAttackInstantEffect.getRemainingDelay(effect, getDelay(effect.getSkillLevel())));
+		}, getRemainingDelay(effect));
 	}
 
+	@Override
 	public int getDelay(int skillLevel) {
-		return DelayedSpellAttackInstantEffect.calculateDelay(delay, delayDelta, skillLevel);
+		return DelayedAttackEffect.calculateDelay(delay, delayDelta, skillLevel);
 	}
 
 	private void calculateAndApplyDamage(Effect effect) {

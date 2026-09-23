@@ -16,7 +16,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "DelayedSpellAttackInstantEffect")
-public class DelayedSpellAttackInstantEffect extends DamageEffect {
+public class DelayedSpellAttackInstantEffect extends DamageEffect implements DelayedAttackEffect {
 
 	@XmlAttribute
 	protected int delay;
@@ -33,26 +33,12 @@ public class DelayedSpellAttackInstantEffect extends DamageEffect {
 				effect.getEffected().getController().onAttack(effect, TYPE.DELAYDAMAGE, effect.getReserveds(finalPosition).getValue(), true,
 					LOG.DELAYEDSPELLATKINSTANT, hopType);
 				effect.getEffector().getObserveController().notifyAttackObservers(effect.getEffected(), effect.getSkillId());
-		}, getRemainingDelay(effect, getDelay(effect.getSkillLevel())));
+		}, getRemainingDelay(effect));
 	}
 
-	/**
-	 * @return The delay for the given skill level, counted from the end of the cast.
-	 */
-	static int calculateDelay(int delay, int delayDelta, int skillLevel) {
-		int delayWithDelta = delay + delayDelta * skillLevel;
-		return delayWithDelta < 0 ? 500 : delayWithDelta;
-	}
-
-	/**
-	 * @return The part of {@code delay}, counted from the end of the cast, which has not yet passed when the effects of the skill are applied.
-	 */
-	static int getRemainingDelay(Effect effect, int delay) {
-		return effect.getSkill() == null ? delay : Math.max(0, delay - effect.getSkill().getLandingDelay());
-	}
-
+	@Override
 	public int getDelay(int skillLevel) {
-		return calculateDelay(delay, delayDelta, skillLevel);
+		return DelayedAttackEffect.calculateDelay(delay, delayDelta, skillLevel);
 	}
 
 	@Override

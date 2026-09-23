@@ -43,8 +43,7 @@ import com.aionemu.gameserver.skillengine.action.Actions;
 import com.aionemu.gameserver.skillengine.condition.Conditions;
 import com.aionemu.gameserver.skillengine.condition.SkillChargeCondition;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
-import com.aionemu.gameserver.skillengine.effect.DelayedFpAtkInstantEffect;
-import com.aionemu.gameserver.skillengine.effect.DelayedSpellAttackInstantEffect;
+import com.aionemu.gameserver.skillengine.effect.DelayedAttackEffect;
 import com.aionemu.gameserver.skillengine.effect.EffectTemplate;
 import com.aionemu.gameserver.skillengine.properties.FirstTargetAttribute;
 import com.aionemu.gameserver.skillengine.properties.Properties;
@@ -1100,11 +1099,7 @@ public class Skill {
 		if (skillTemplate.getEffects() == null || skillTemplate.getEffects().getEffects().isEmpty())
 			return 0;
 		EffectTemplate firstEffect = skillTemplate.getEffects().getEffects().getFirst();
-		if (firstEffect instanceof DelayedSpellAttackInstantEffect delayedEffect)
-			return delayedEffect.getDelay(skillLevel);
-		if (firstEffect instanceof DelayedFpAtkInstantEffect delayedEffect)
-			return delayedEffect.getDelay(skillLevel);
-		return 0;
+		return firstEffect instanceof DelayedAttackEffect delayedEffect ? delayedEffect.getDelay(skillLevel) : 0;
 	}
 
 	/**
