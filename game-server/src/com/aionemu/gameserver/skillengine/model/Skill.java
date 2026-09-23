@@ -240,7 +240,7 @@ public class Skill {
 	}
 
 	private boolean isValidTarget(Player player, Creature target) {
-		if (target.isSpawnProtectedFrom(player))
+		if (!(target.equals(firstTarget) ? player.canTarget(target) : player.canAffect(target)))
 			return false;
 		if (target instanceof Player targetPlayer) {
 			if (targetPlayer.isUsingFlightTransporterOrWindstream())
@@ -595,7 +595,7 @@ public class Skill {
 			return true;
 		if (!firstTarget.isSpawned() || firstTarget.isDead() != skillTemplate.hasResurrectEffect())
 			return false;
-		return effector.canSee(firstTarget) && !firstTarget.isSpawnProtectedFrom(effector);
+		return effector.canTarget(firstTarget);
 	}
 
 	/**

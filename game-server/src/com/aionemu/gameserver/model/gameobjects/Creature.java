@@ -333,28 +333,50 @@ public abstract class Creature extends VisibleObject {
 		return isInVisualState(CreatureVisualState.BLINKING);
 	}
 
-	/**
-	 * @return True, if this creature is under spawn protection, which only its owner and its team can still target
-	 */
-	public boolean isSpawnProtectedFrom(Creature other) {
-		if (!isProtectionActive() || other.equals(getMaster()))
-			return false;
-		return !(getMaster() instanceof Player master && other instanceof Player otherPlayer && otherPlayer.isInSameTeam(master)
-			&& !otherPlayer.isDueling(master));
-	}
-
 	@Override
 	public boolean canSee(VisibleObject object) {
 		if (object instanceof Creature creature) {
-			int visualStateExcludingBlinking = creature.getVisualState() & ~CreatureVisualState.BLINKING.getId();
-			if (visualStateExcludingBlinking <= getSeeState())
-				return true;
-			return equals(creature.getMaster()); // traps, summons, etc. should always be visible to the master
+			// spawn protected creatures stay visible, they only can't be targeted
+			return seesThrough(creature.getVisualState() & ~CreatureVisualState.BLINKING.getId()) || ignoresInvisibilityOf(creature);
 		} else if (object instanceof Pet pet) {
 			// we must prevent sending the pet's spawn packet to others before the master's, as this causes the pet to stay invisible
 			return equals(pet.getMaster()) || canSee(pet.getMaster()) && getKnownList().sees(pet.getMaster());
 		}
 		return super.canSee(object);
+	}
+
+	/**
+	 * @return True, if hide, spawn protection and GM invisibility don't prevent this creature from choosing the target, e.g. as a skill's first
+	 *         target
+	 */
+	public boolean canTarget(Creature target) {
+		return seesThrough(target.getVisualState()) || ignoresInvisibilityOf(target);
+	}
+
+	/**
+	 * @return True, if spawn protection and GM invisibility don't prevent a skill of this creature from affecting the target besides its first
+	 *         target. Hide doesn't protect from that.
+	 */
+	public boolean canAffect(Creature target) {
+		int protectedStates = CreatureVisualState.BLINKING.getId() | CreatureVisualState.GM_INVISIBLE.getId();
+		return (target.getVisualState() & protectedStates) == 0 || ignoresInvisibilityOf(target);
+	}
+
+	private boolean seesThrough(int visualState) {
+		int gmInvisible = CreatureVisualState.GM_INVISIBLE.getId();
+		if ((visualState & gmInvisible) != 0 && !isInSeeState(CreatureSeeState.SEARCH_GM_INVISIBLE))
+			return false;
+		return (visualState & ~gmInvisible) <= (getSeeState() & ~CreatureSeeState.SEARCH_GM_INVISIBLE.getId());
+	}
+
+	/**
+	 * @return True, if this creature sees the target regardless of its hide, spawn protection or GM invisibility. This applies to the target itself,
+	 *         creatures of the same master (traps, summons, etc.) and creatures whose masters are in the same team.
+	 */
+	public boolean ignoresInvisibilityOf(Creature target) {
+		Creature master = getMaster(), targetMaster = target.getMaster();
+		return master.equals(targetMaster)
+			|| master instanceof Player player && targetMaster instanceof Player targetPlayer && player.isInSameTeam(targetPlayer);
 	}
 
 	/**

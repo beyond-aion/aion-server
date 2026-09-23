@@ -17,7 +17,6 @@ import com.aionemu.gameserver.ai.handler.ShoutEventHandler;
 import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.configs.main.*;
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
-import com.aionemu.gameserver.controllers.attack.AttackUtil;
 import com.aionemu.gameserver.controllers.observer.StanceObserver;
 import com.aionemu.gameserver.custom.pvpmap.PvpMapService;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -154,12 +153,6 @@ public class PlayerController extends CreatureController<Player> {
 		super.onTargetChanged(oldTarget, newTarget);
 		PacketSendUtility.sendPacket(getOwner(), new SM_TARGET_SELECTED(newTarget));
 		PacketSendUtility.broadcastToSightedPlayers(getOwner(), new SM_TARGET_UPDATE(getOwner()));
-	}
-
-	@Override
-	public void onHide() {
-		super.onHide();
-		DuelService.getInstance().fixTeamVisibility(getOwner());
 	}
 
 	@Override
@@ -630,10 +623,10 @@ public class PlayerController extends CreatureController<Player> {
 	public void startProtectionActiveTask() {
 		if (!getOwner().isProtectionActive()) {
 			getOwner().setVisualState(CreatureVisualState.BLINKING);
-			AttackUtil.removeTargetFrom(getOwner());
-			PacketSendUtility.broadcastToSightedPlayers(getOwner(), new SM_PLAYER_STATE(getOwner()), true);
+			PacketSendUtility.broadcastToSightedPlayers(getOwner(), new SM_PLAYER_STATE(getOwner()));
 		}
 		PacketSendUtility.sendPacket(getOwner(), new SM_INVINCIBLE_TIME(PROTECTION_TIME));
+		PacketSendUtility.sendPacket(getOwner(), new SM_PLAYER_STATE(getOwner(), true));
 		addTask(TaskId.PROTECTION_ACTIVE, ThreadPoolManager.getInstance().schedule(this::stopProtectionActiveTask, PROTECTION_TIME));
 	}
 

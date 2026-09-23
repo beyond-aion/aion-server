@@ -68,7 +68,7 @@ public class DuelService {
 			PacketSendUtility.sendPacket(requester, SM_SYSTEM_MESSAGE.STR_MSG_REJECTED_DUEL(targetPlayer.getName()));
 			return;
 		}
-		if (requester.isDead() || targetPlayer.isDead()) {
+		if (requester.isDead() || targetPlayer.isDead() || !requester.canTarget(targetPlayer)) {
 			PacketSendUtility.sendPacket(requester, SM_SYSTEM_MESSAGE.STR_DUEL_PARTNER_INVALID(targetPlayer.getName()));
 			return;
 		}
@@ -164,23 +164,6 @@ public class DuelService {
 		PacketSendUtility.sendPacket(responder, SM_DUEL.SM_DUEL_STARTED(requester.getObjectId()));
 		registerDuel(requester.getObjectId(), responder.getObjectId());
 		createTask(requester, responder);
-		if (requester.isInAnyHide())
-			requester.getController().onHide();
-		if (responder.isInAnyHide())
-			responder.getController().onHide();
-	}
-
-	/**
-	 * send SM_DELETE a second time to fix client not fading out the char (only happens when dueling with a team member of a group or alliance)
-	 */
-	public void fixTeamVisibility(Player hiddenDuelist) {
-		Integer opponentId = DuelService.getInstance().getOpponentId(hiddenDuelist);
-		if (opponentId != null) {
-			Player opponent = World.getInstance().getPlayer(opponentId);
-			if (opponent != null && opponent.getKnownList().knows(hiddenDuelist) && !opponent.getKnownList().sees(hiddenDuelist)
-				&& hiddenDuelist.isInSameTeam(opponent))
-				PacketSendUtility.sendPacket(opponent, new SM_DELETE(hiddenDuelist));
-		}
 	}
 
 	/**

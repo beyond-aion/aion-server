@@ -516,7 +516,7 @@ public class AttackUtil {
 
 	public static void removeTargetFrom(Creature object, boolean validateSee) {
 		object.getKnownList().forEachPlayer(player -> {
-			if (player.getTarget() == object && (!validateSee || !player.canSee(object)))
+			if (player.getTarget() == object && (!validateSee || !player.canTarget(object)))
 				player.setTarget(null);
 		});
 	}
