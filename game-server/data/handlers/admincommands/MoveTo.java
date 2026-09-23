@@ -4,6 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.aionemu.gameserver.configs.main.GeoDataConfig;
+import com.aionemu.gameserver.configs.main.GeoDataConfig.Mode;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
@@ -53,7 +54,7 @@ public class MoveTo extends AdminCommand {
 			moveTo(admin, pos, "Teleported to " + worldName(pos.getMapId()) + "\nX:" + pos.getX() + " Y:" + pos.getY() + " Z:" + pos.getZ());
 			return;
 		} else if (params.length > 1 || params[0].startsWith("[pos:"))
-			errorMsg = "Invalid map position or %s geo.".formatted(GeoDataConfig.GEO_ENABLE ? "missing" : "deactivated");
+			errorMsg = "Invalid map position or %s geo.".formatted(GeoDataConfig.MODE == Mode.ON ? "missing" : "deactivated");
 
 		String nameOrId = String.join(" ", params).toLowerCase();
 		Player player = World.getInstance().getPlayer(Util.convertName(nameOrId));
