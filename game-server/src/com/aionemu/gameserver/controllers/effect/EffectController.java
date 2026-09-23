@@ -64,13 +64,13 @@ public class EffectController {
 
 		if (useEffectId) {
 			// idea here is that effects with same effectId shouldn't stack, effect with higher basic lvl takes priority
-			if (searchConflict(mapToUpdate, nextEffect)) {
+			if (searchConflict(mapToUpdate, nextEffect, true)) {
 				if (!nextEffect.isPassive() && nextEffect.getTargetSlot() != SkillTargetSlot.DEBUFF)
 					nextEffect.setEffectResult(EffectResult.CONFLICT);
 				return;
 			}
 		}
-		endConflictedEffect(mapToUpdate, nextEffect);
+		endConflictedEffect(mapToUpdate, nextEffect, true);
 		checkEffectCooldownId(nextEffect);
 
 		// max 3 aura effects or 1 toggle skill in noshoweffects
@@ -102,17 +102,25 @@ public class EffectController {
 	}
 
 	/**
-	 * Takes the place an effect will occupy once it lands, so that the list follows the order casts ended.
+	 * Takes the place an effect will occupy once it lands, so that the list follows the order casts ended. Effects it conflicts with end right away
+	 * without an effect list broadcast, so the effected is free of them until the reserved effect lands.
+	 * 
+	 * @return False if an existing effect prevails, so no place was taken.
 	 */
-	public void reserveSlot(Effect effect) {
+	public boolean reserveSlot(Effect effect) {
 		if (!effect.isSlotReserved())
 			throw new IllegalArgumentException("Effect " + effect.getStack() + " is not set to reserve a slot.");
+		Map<String, Effect> mapToUpdate = getMapForEffect(effect);
+		if (searchConflict(mapToUpdate, effect, false))
+			return false;
+		endConflictedEffect(mapToUpdate, effect, false);
 		long stamp = lock.writeLock();
 		try {
-			getMapForEffect(effect).putIfAbsent(effect.getStack(), effect);
+			mapToUpdate.putIfAbsent(effect.getStack(), effect);
 		} finally {
 			lock.unlockWrite(stamp);
 		}
+		return true;
 	}
 
 	protected final void put(Effect nextEffect) {
@@ -128,17 +136,21 @@ public class EffectController {
 		}
 	}
 
-	private void endConflictedEffect(Map<String, Effect> effectMap, Effect newEffect) {
+	private void endConflictedEffect(Map<String, Effect> effectMap, Effect newEffect, boolean broadcast) {
 		int conflictId = newEffect.getSkillTemplate().getConflictId();
 		if (conflictId == 0)
 			return;
 		Effect effectToEnd = findFirstEffect(effectMap, effect -> effect.getSkillTemplate().getConflictId() == conflictId);
 		if (effectToEnd != null)
-			effectToEnd.endEffect();
+			effectToEnd.endEffect(broadcast);
 	}
 
-	private boolean searchConflict(Map<String, Effect> mapToUpdate, Effect nextEffect) {
-		if (checkExtraEffect(mapToUpdate, nextEffect))
+	/**
+	 * @param broadcast whether ending an effect of another target slot broadcasts the effect list, the slot of {@code nextEffect} is broadcast when it
+	 *          is added
+	 */
+	private boolean searchConflict(Map<String, Effect> mapToUpdate, Effect nextEffect, boolean broadcast) {
+		if (checkExtraEffect(mapToUpdate, nextEffect, broadcast))
 			return false;
 		Effect effectToEnd = null;
 		long stamp = lock.readLock();
@@ -168,7 +180,7 @@ public class EffectController {
 			lock.unlockRead(stamp);
 		}
 		if (effectToEnd != null)
-			effectToEnd.endEffect(effectToEnd.getTargetSlot() != nextEffect.getTargetSlot());
+			effectToEnd.endEffect(broadcast && effectToEnd.getTargetSlot() != nextEffect.getTargetSlot());
 		return false;
 	}
 
@@ -213,13 +225,13 @@ public class EffectController {
 		return false;
 	}
 
-	private boolean checkExtraEffect(Map<String, Effect> effectMap, Effect nextEffect) {
+	private boolean checkExtraEffect(Map<String, Effect> effectMap, Effect nextEffect, boolean broadcast) {
 		if (nextEffect.isPassive() || nextEffect.getDispelCategory() != DispelCategoryType.EXTRA)
 			return false;
 		Effect extraEffect = findFirstEffect(effectMap, effect -> effect.getDispelCategory() == DispelCategoryType.EXTRA
 			&& !effect.getSkillTemplate().getStack().startsWith("IDSEAL_BOSS_VRITRA_BUFF"));
 		if (extraEffect != null) {
-			extraEffect.endEffect();
+			extraEffect.endEffect(broadcast);
 			return true;
 		}
 		return false;

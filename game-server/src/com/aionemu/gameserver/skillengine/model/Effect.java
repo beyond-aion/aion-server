@@ -601,19 +601,21 @@ public class Effect implements StatOwner {
 		Creature target = getEffected();
 		if (target == null || successEffects.isEmpty() || isPassive() || getTargetSlot() == SkillTargetSlot.NONE)
 			return;
-		slotReserved = true;
-		target.getEffectController().reserveSlot(this);
+		slotReserved = true; // must be set before reserveSlot, which checks it and must not expose the effect as landed
+		if (!target.getEffectController().reserveSlot(this))
+			slotReserved = false;
 	}
 
 	/**
-	 * Frees a reserved place which never became an effect, for example after a resist or when the target died meanwhile.
+	 * Frees a reserved place which never became an effect, for example after a resist or when the target died meanwhile. The list
+	 * is broadcast because the reservation may have ended conflicting effects without one.
 	 */
 	public void releaseUnusedEffectSlot() {
 		if (!slotReserved)
 			return;
 		Creature target = getEffected();
 		if (target != null)
-			target.getEffectController().clearEffect(this, false);
+			target.getEffectController().clearEffect(this, true);
 		slotReserved = false;
 	}
 
