@@ -15,6 +15,8 @@ public class DelayedFpAtkInstantEffect extends EffectTemplate {
 
 	@XmlAttribute
 	protected int delay;
+	@XmlAttribute(name = "delaydelta")
+	protected int delayDelta;
 	@XmlAttribute
 	protected boolean percent;
 
@@ -33,11 +35,11 @@ public class DelayedFpAtkInstantEffect extends EffectTemplate {
 			public void run() {
 				calculateAndApplyDamage(effect);
 			}
-		}, DelayedSpellAttackInstantEffect.getRemainingDelay(effect, delay));
+		}, DelayedSpellAttackInstantEffect.getRemainingDelay(effect, getDelay(effect.getSkillLevel())));
 	}
 
-	public int getDelay() {
-		return delay;
+	public int getDelay(int skillLevel) {
+		return DelayedSpellAttackInstantEffect.calculateDelay(delay, delayDelta, skillLevel);
 	}
 
 	private void calculateAndApplyDamage(Effect effect) {

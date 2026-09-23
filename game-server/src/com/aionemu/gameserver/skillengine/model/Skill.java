@@ -1101,9 +1101,9 @@ public class Skill {
 			return 0;
 		EffectTemplate firstEffect = skillTemplate.getEffects().getEffects().getFirst();
 		if (firstEffect instanceof DelayedSpellAttackInstantEffect delayedEffect)
-			return delayedEffect.getDelay();
+			return delayedEffect.getDelay(skillLevel);
 		if (firstEffect instanceof DelayedFpAtkInstantEffect delayedEffect)
-			return delayedEffect.getDelay();
+			return delayedEffect.getDelay(skillLevel);
 		return 0;
 	}
 

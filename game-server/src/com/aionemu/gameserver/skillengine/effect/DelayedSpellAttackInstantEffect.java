@@ -20,6 +20,8 @@ public class DelayedSpellAttackInstantEffect extends DamageEffect {
 
 	@XmlAttribute
 	protected int delay;
+	@XmlAttribute(name = "delaydelta")
+	protected int delayDelta;
 
 	@Override
 	public void applyEffect(Effect effect) {
@@ -31,7 +33,15 @@ public class DelayedSpellAttackInstantEffect extends DamageEffect {
 				effect.getEffected().getController().onAttack(effect, TYPE.DELAYDAMAGE, effect.getReserveds(finalPosition).getValue(), true,
 					LOG.DELAYEDSPELLATKINSTANT, hopType);
 				effect.getEffector().getObserveController().notifyAttackObservers(effect.getEffected(), effect.getSkillId());
-		}, getRemainingDelay(effect, delay));
+		}, getRemainingDelay(effect, getDelay(effect.getSkillLevel())));
+	}
+
+	/**
+	 * @return The delay for the given skill level, counted from the end of the cast.
+	 */
+	static int calculateDelay(int delay, int delayDelta, int skillLevel) {
+		int delayWithDelta = delay + delayDelta * skillLevel;
+		return delayWithDelta < 0 ? 500 : delayWithDelta;
 	}
 
 	/**
@@ -41,8 +51,8 @@ public class DelayedSpellAttackInstantEffect extends DamageEffect {
 		return effect.getSkill() == null ? delay : Math.max(0, delay - effect.getSkill().getLandingDelay());
 	}
 
-	public int getDelay() {
-		return delay;
+	public int getDelay(int skillLevel) {
+		return calculateDelay(delay, delayDelta, skillLevel);
 	}
 
 	@Override
