@@ -98,7 +98,7 @@ public class EffectController {
 		nextEffect.startEffect();
 
 		if (!nextEffect.isPassive())
-			broadCastEffects(nextEffect);
+			broadCastEffects(nextEffect.getTargetSlot().getId() | nextEffect.getUnbroadcastSlots());
 	}
 
 	/**
@@ -141,8 +141,11 @@ public class EffectController {
 		if (conflictId == 0)
 			return;
 		Effect effectToEnd = findFirstEffect(effectMap, effect -> effect.getSkillTemplate().getConflictId() == conflictId);
-		if (effectToEnd != null)
+		if (effectToEnd != null) {
+			if (!broadcast)
+				newEffect.addUnbroadcastSlot(effectToEnd.getTargetSlot());
 			effectToEnd.endEffect(broadcast);
+		}
 	}
 
 	/**
@@ -179,8 +182,11 @@ public class EffectController {
 		} finally {
 			lock.unlockRead(stamp);
 		}
-		if (effectToEnd != null)
+		if (effectToEnd != null) {
+			if (!broadcast)
+				nextEffect.addUnbroadcastSlot(effectToEnd.getTargetSlot());
 			effectToEnd.endEffect(broadcast && effectToEnd.getTargetSlot() != nextEffect.getTargetSlot());
+		}
 		return false;
 	}
 
@@ -231,6 +237,8 @@ public class EffectController {
 		Effect extraEffect = findFirstEffect(effectMap, effect -> effect.getDispelCategory() == DispelCategoryType.EXTRA
 			&& !effect.getSkillTemplate().getStack().startsWith("IDSEAL_BOSS_VRITRA_BUFF"));
 		if (extraEffect != null) {
+			if (!broadcast)
+				nextEffect.addUnbroadcastSlot(extraEffect.getTargetSlot());
 			extraEffect.endEffect(broadcast);
 			return true;
 		}
@@ -330,9 +338,12 @@ public class EffectController {
 	}
 
 	public void broadCastEffects(Effect effect) {
-		int slot = effect != null ? effect.getTargetSlot().getId() : SkillTargetSlot.FULLSLOTS;
+		broadCastEffects(effect != null ? effect.getTargetSlot().getId() : SkillTargetSlot.FULLSLOTS);
+	}
+
+	public void broadCastEffects(int slots) {
 		List<Effect> effects = getAbnormalEffects();
-		PacketSendUtility.broadcastPacket(getOwner(), new SM_ABNORMAL_EFFECT(getOwner(), abnormals, effects, slot));
+		PacketSendUtility.broadcastPacket(getOwner(), new SM_ABNORMAL_EFFECT(getOwner(), abnormals, effects, slots));
 	}
 
 	public void clearEffect(Effect effect, boolean broadCastEffects) {

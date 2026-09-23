@@ -43,6 +43,7 @@ public class Effect implements StatOwner {
 	private int skillLevel;
 	private Integer duration;
 	private volatile boolean slotReserved;
+	private int unbroadcastSlots;
 	private long endTime;
 	private SubEffectType subEffectType = SubEffectType.NONE;
 	private Future<?> endTask = null;
@@ -614,9 +615,22 @@ public class Effect implements StatOwner {
 		if (!slotReserved)
 			return;
 		Creature target = getEffected();
-		if (target != null)
-			target.getEffectController().clearEffect(this, true);
+		if (target != null) {
+			target.getEffectController().clearEffect(this, false);
+			target.getEffectController().broadCastEffects(getTargetSlot().getId() | unbroadcastSlots);
+		}
 		slotReserved = false;
+	}
+
+	/**
+	 * Remembers the slot of an effect this one ended while reserving, so it is broadcast together with this effect.
+	 */
+	public void addUnbroadcastSlot(SkillTargetSlot slot) {
+		unbroadcastSlots |= slot.getId();
+	}
+
+	public int getUnbroadcastSlots() {
+		return unbroadcastSlots;
 	}
 
 	public boolean isSlotReserved() {
