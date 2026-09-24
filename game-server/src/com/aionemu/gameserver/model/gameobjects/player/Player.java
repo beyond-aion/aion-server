@@ -2,6 +2,7 @@ package com.aionemu.gameserver.model.gameobjects.player;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -598,7 +599,9 @@ public class Player extends Creature {
 	}
 
 	public void setPlayerGroup(PlayerGroup playerGroup) {
+		TemporaryPlayerTeam<? extends TeamMember<Player>> oldTeam = getCurrentTeam();
 		this.playerGroup = playerGroup;
+		onTeamChange(oldTeam);
 	}
 
 	/**
@@ -931,8 +934,7 @@ public class Player extends Creature {
 
 	@Override
 	public boolean ignoresInvisibilityOf(Creature target) {
-		// invisible kisks can be seen from players of the same race
-		return super.ignoresInvisibilityOf(target) || target instanceof Kisk kisk && kisk.getOwnerRace() == getRace();
+		return super.ignoresInvisibilityOf(target) || target instanceof Kisk kisk && kisk.isOwnerOrTeamMember(this);
 	}
 
 	@Override
@@ -1059,7 +1061,27 @@ public class Player extends Creature {
 	}
 
 	public void setPlayerAllianceGroup(PlayerAllianceGroup playerAllianceGroup) {
+		TemporaryPlayerTeam<? extends TeamMember<Player>> oldTeam = getCurrentTeam();
 		this.playerAllianceGroup = playerAllianceGroup;
+		onTeamChange(oldTeam);
+	}
+
+	/**
+	 * Team members see each other and their kisks through hide, so this player and the members of its old and new team must update what they see.
+	 */
+	private void onTeamChange(TemporaryPlayerTeam<? extends TeamMember<Player>> oldTeam) {
+		TemporaryPlayerTeam<? extends TeamMember<Player>> newTeam = getCurrentTeam();
+		if (oldTeam == newTeam)
+			return;
+		if (isSpawned())
+			updateKnownlist();
+		for (TemporaryPlayerTeam<? extends TeamMember<Player>> team : Arrays.asList(oldTeam, newTeam)) {
+			if (team != null)
+				team.forEach(member -> {
+					if (!member.equals(this) && member.isSpawned())
+						member.updateKnownlist();
+				});
+		}
 	}
 
 	public final boolean isInLeague() {

@@ -18,6 +18,7 @@ import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.templates.stats.KiskStatsTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_KISK_UPDATE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.services.DuelService;
 import com.aionemu.gameserver.services.LegionService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
@@ -58,18 +59,35 @@ public class Kisk extends SummonedObject<Player> {
 	}
 
 	/**
-	 * Required so that the enemy race can attack the Kisk!
+	 * The enemy race can attack the kisk inside PvP zones, the owner's duel opponent anywhere.
 	 */
 	@Override
 	public boolean isEnemyFrom(Player player) {
-		return !player.getRace().equals(ownerRace) && isInsidePvPZone() && player.isInsidePvPZone();
+		if (isEnemyRaceInPvPZone(player))
+			return true;
+		Integer opponentId = DuelService.getInstance().getOpponentId(player);
+		return opponentId != null && opponentId == getCreatorId();
 	}
 
+	/**
+	 * The owner's duel opponent still sees the kisk as friendly.
+	 */
 	@Override
 	public CreatureType getType(Creature creature) {
 		if (creature instanceof Player player)
-			return isEnemyFrom(player) ? CreatureType.ATTACKABLE : CreatureType.SUPPORT;
+			return isEnemyRaceInPvPZone(player) ? CreatureType.ATTACKABLE : CreatureType.SUPPORT;
 		return super.getType(creature);
+	}
+
+	private boolean isEnemyRaceInPvPZone(Player player) {
+		return !player.getRace().equals(ownerRace) && isInsidePvPZone() && player.isInsidePvPZone();
+	}
+
+	/**
+	 * @return True, if the player is the owner of this kisk or in a group or alliance with the owner
+	 */
+	public boolean isOwnerOrTeamMember(Player player) {
+		return player.getObjectId() == getCreatorId() || player.isInTeam() && player.getCurrentTeam().hasMember(getCreatorId());
 	}
 
 	/**
@@ -155,7 +173,7 @@ public class Kisk extends SummonedObject<Player> {
 					return true;
 				break;
 			case 5: // Alliance (PlayerGroup or PlayerAlliance)
-				if (player.getObjectId() == getCreatorId() || player.isInTeam() && player.getCurrentTeam().hasMember(getCreatorId()))
+				if (isOwnerOrTeamMember(player))
 					return true;
 				break;
 			default:
