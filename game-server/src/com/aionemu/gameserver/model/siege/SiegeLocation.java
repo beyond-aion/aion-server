@@ -197,7 +197,7 @@ public class SiegeLocation implements ZoneHandler {
 		if (zones.isEmpty())
 			return false;
 		for (SiegeZoneInstance zone : zones)
-			if (zone.isInsideCordinate(x, y, z))
+			if (zone.isInsideCoordinate(x, y, z))
 				return true;
 		return false;
 	}

@@ -22,8 +22,10 @@ public class Damage extends AdminCommand {
 
 	@Override
 	public void execute(Player admin, String... params) {
-		if (params.length > 2)
+		if (params.length < 1 || params.length > 2) {
 			info(admin, null);
+			return;
+		}
 
 		VisibleObject target = admin.getTarget();
 		if (target == null)

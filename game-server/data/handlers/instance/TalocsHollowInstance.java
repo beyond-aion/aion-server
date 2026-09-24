@@ -13,7 +13,6 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.geometry.Point3D;
-import com.aionemu.gameserver.model.summons.SummonMode;
 import com.aionemu.gameserver.model.summons.UnsummonType;
 import com.aionemu.gameserver.model.templates.flyring.FlyRingTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
@@ -111,7 +110,7 @@ public class TalocsHollowInstance extends GeneralInstanceHandler {
 						Summon summon = player.getSummon();
 						if (summon != null) {
 							if (summon.getNpcId() == 799500 || summon.getNpcId() == 799501) {
-								SummonsService.doMode(SummonMode.RELEASE, summon, UnsummonType.UNSPECIFIED);
+								SummonsService.release(summon, UnsummonType.UNSPECIFIED);
 								PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(false, 0, 0, 435, true));
 							}
 						}

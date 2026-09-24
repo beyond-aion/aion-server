@@ -18,14 +18,10 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 public class Delete extends AdminCommand {
 
 	public Delete() {
-		super("delete", "Removes a spawn from world.");
-
-		// @formatter:off
-		setSyntaxInfo(
-			" - Deletes the object you are targeting.",
-			"<range> - Deletes all objects around you in given radius in meters."
-		);
-		// @formatter:on
+		super("delete", "Removes a spawn from world.", """
+			 - Deletes the object you are targeting.
+			<range> - Deletes all objects around you in given radius in meters.
+			""");
 	}
 
 	@Override

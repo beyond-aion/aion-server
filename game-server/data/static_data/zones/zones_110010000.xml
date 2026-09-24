@@ -243,6 +243,29 @@
             <point x="1451.7059" y="1341.4465"/>
         </points>
     </zone>
+    <zone mapid="110010000" name="LC1_RECALLAREA_1_110010000" area_type="POLYGON" zone_type="LIMIT" priority="10" flags="20">
+        <points bottom="591.9805" top="604.9805">
+            <point x="2029.4291" y="1484.4188"/>
+            <point x="2029.6045" y="1437.8916"/>
+            <point x="2056.2727" y="1437.1434"/>
+            <point x="2056.3347" y="1443.9208"/>
+            <point x="2044.8285" y="1453.8513"/>
+            <point x="2044.5494" y="1469.485"/>
+            <point x="2061.209" y="1484.9601"/>
+            <point x="2060.4814" y="1537.9344"/>
+            <point x="2045.718" y="1553.3903"/>
+            <point x="2045.399" y="1568.6986"/>
+            <point x="2056.9111" y="1579.2391"/>
+            <point x="2057.1104" y="1584.78"/>
+            <point x="2029.457" y="1584.5767"/>
+            <point x="2028.83" y="1537.6415"/>
+            <point x="2035.84" y="1537.4689"/>
+            <point x="2047.696" y="1525.7439"/>
+            <point x="2047.5209" y="1495.9457"/>
+            <point x="2047.075" y="1495.8508"/>
+            <point x="2035.4697" y="1484.3995"/>
+        </points>
+    </zone>
     <zone mapid="110010000" name="LEGIONS_BOARD_1_110010000" area_type="POLYGON" zone_type="SUB" priority="15" flags="54">
         <points bottom="560.79517" top="660.79517">
             <point x="1896.6603" y="1398.7772"/>
@@ -267,7 +290,7 @@
             <point x="1954.7456" y="1523.1342"/>
         </points>
     </zone>
-    <zone mapid="110010000" name="LIMIT_AREA_1_1_110010000" area_type="POLYGON" zone_type="LIMIT" flags="6">
+    <zone mapid="110010000" name="LIMIT_AREA_1_1_110010000" area_type="POLYGON" zone_type="LIMIT" priority="16" flags="6">
         <points bottom="549.00543" top="649.00543">
             <point x="1457.5846" y="1434.1298"/>
             <point x="1455.257" y="1439.3574"/>
@@ -283,7 +306,7 @@
             <point x="1462.874" y="1422.7335"/>
         </points>
     </zone>
-    <zone mapid="110010000" name="LIMIT_AREA_2_1_110010000" area_type="POLYGON" zone_type="LIMIT" flags="6">
+    <zone mapid="110010000" name="LIMIT_AREA_2_1_110010000" area_type="POLYGON" zone_type="LIMIT" priority="16" flags="6">
         <points bottom="549.00543" top="849.00543">
             <point x="1901.8812" y="1587.9086"/>
             <point x="1832.9965" y="1588.2"/>

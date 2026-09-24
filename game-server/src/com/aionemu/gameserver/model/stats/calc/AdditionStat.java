@@ -12,10 +12,6 @@ public class AdditionStat extends Stat2 {
 		super(stat, base, owner);
 	}
 
-	public AdditionStat(StatEnum stat, float base, Creature owner, float bonusRate) {
-		super(stat, base, owner, bonusRate);
-	}
-
 	@Override
 	public final void addToBase(float base) {
 		this.base += base;
@@ -23,7 +19,7 @@ public class AdditionStat extends Stat2 {
 
 	@Override
 	public final void addToBonus(float bonus) {
-		this.bonus += bonusRate * bonus;
+		this.bonus += bonus;
 	}
 
 	@Override

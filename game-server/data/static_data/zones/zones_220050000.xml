@@ -644,7 +644,7 @@
             <point x="860.961" y="300.08652"/>
         </points>
     </zone>
-    <zone mapid="220050000" name="DF2A_LIMITAREA_A_TOWN_220050000" area_type="POLYGON" zone_type="LIMIT" flags="6">
+    <zone mapid="220050000" name="DF2A_LIMITAREA_A_TOWN_220050000" area_type="POLYGON" zone_type="LIMIT" priority="16" flags="6">
         <points bottom="40.0" top="50.97">
             <point x="1331.95" y="2023.74"/>
             <point x="1346.9012" y="2029.18"/>

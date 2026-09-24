@@ -2,8 +2,7 @@ package com.aionemu.gameserver.model.stats.calc.functions;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.apache.commons.lang3.ArrayUtils;
+import java.util.Set;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -12,8 +11,8 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
-import com.aionemu.gameserver.utils.stats.CalculationType;
 import com.aionemu.gameserver.model.templates.world.WorldMapTemplate;
+import com.aionemu.gameserver.utils.stats.CalculationType;
 
 /**
  * @author ATracer
@@ -56,13 +55,13 @@ class PhysicalAttackFunction extends StatFunction {
 	}
 
 	@Override
-	public void apply(Stat2 stat, CalculationType... calculationTypes) {
+	public void apply(Stat2 stat, Set<CalculationType> calculationTypes) {
 		if (stat.getOwner() instanceof Player player) {
 			int power = stat.getOwner().getGameStats().getPower().getCurrent();
 			if (player.getEquipment().getMainHandWeapon() == null) {
 				stat.setBaseRate(1 + ((power - 100) * player.getPlayerClass().getNoWeaponPowerMultiplier())/10000f);
 			} else {
-				if (ArrayUtils.contains(calculationTypes, CalculationType.SKILL) && ArrayUtils.contains(calculationTypes, CalculationType.DUAL_WIELD)) {
+				if (calculationTypes.contains(CalculationType.SKILL) && calculationTypes.contains(CalculationType.DUAL_WIELD)) {
 					if (power > 100)
 						power = Rnd.get(100, power);
 					else
@@ -86,7 +85,7 @@ class MaxHpFunction extends StatFunction {
 	}
 
 	@Override
-	public void apply(Stat2 stat, CalculationType... calculationTypes) {
+	public void apply(Stat2 stat, Set<CalculationType> calculationTypes) {
 		if (stat.getOwner() instanceof Player player)
 			stat.addToBase(player.getGameStats().getHealthDependentAdditionalHp());
 	}
@@ -104,7 +103,7 @@ class MaxMpFunction extends StatFunction {
 	}
 
 	@Override
-	public void apply(Stat2 stat, CalculationType... calculationTypes) {
+	public void apply(Stat2 stat, Set<CalculationType> calculationTypes) {
 		if (stat.getOwner() instanceof Player player)
 			stat.addToBase(player.getGameStats().getWillDependentAdditionalMp());
 	}
@@ -122,7 +121,7 @@ class MagicalAttackFunction extends StatFunction {
 	}
 
 	@Override
-	public void apply(Stat2 stat, CalculationType... calculationTypes) {
+	public void apply(Stat2 stat, Set<CalculationType> calculationTypes) {
 		float knowledge = stat.getOwner().getGameStats().getKnowledge().getCurrent();
 		stat.setBaseRate(knowledge * 0.01f);
 	}
@@ -140,14 +139,9 @@ class PDefFunction extends StatFunction {
 	}
 
 	@Override
-	public void apply(Stat2 stat, CalculationType... calculationTypes) {
+	public void apply(Stat2 stat, Set<CalculationType> calculationTypes) {
 		if (stat.getOwner().isInFlyingState())
-			stat.setBonus(stat.getBonus() - (stat.getBase() / 2));
-	}
-
-	@Override
-	public int getPriority() {
-		return 60;
+			stat.setFinalRate(0.6f);
 	}
 }
 
@@ -157,7 +151,7 @@ class BlockFunction extends StatFunction {
 	}
 
 	@Override
-	public void apply(Stat2 stat, CalculationType... calculationTypes) {
+	public void apply(Stat2 stat, Set<CalculationType> calculationTypes) {
 		if (stat.getOwner() instanceof Player player)
 			stat.addToBase(player.getGameStats().getAgilityDependentAdditionalBaseBlock());
 	}
@@ -169,7 +163,7 @@ class ParryFunction extends StatFunction {
 	}
 
 	@Override
-	public void apply(Stat2 stat, CalculationType... calculationTypes) {
+	public void apply(Stat2 stat, Set<CalculationType> calculationTypes) {
 		if (stat.getOwner() instanceof Player player)
 			stat.addToBase(player.getGameStats().getAgilityDependentAdditionalBaseParry());
 	}
@@ -181,7 +175,7 @@ class EvasionFunction extends StatFunction {
 	}
 
 	@Override
-	public void apply(Stat2 stat, CalculationType... calculationTypes) {
+	public void apply(Stat2 stat, Set<CalculationType> calculationTypes) {
 		if (stat.getOwner() instanceof Player player)
 			stat.addToBase(player.getGameStats().getAgilityDependentAdditionalBaseEvasion());
 	}
@@ -193,7 +187,7 @@ class PhysicalCriticalFunction extends StatFunction {
 	}
 
 	@Override
-	public void apply(Stat2 stat, CalculationType... calculationTypes) {
+	public void apply(Stat2 stat, Set<CalculationType> calculationTypes) {
 		if (stat.getOwner() instanceof Player player)
 			stat.addToBase(player.getGameStats().getAccuracyDependentAdditionalBasePhysicalCritical());
 	}
@@ -206,7 +200,7 @@ class PhysicalAccuracyFunction extends StatFunction {
 	}
 
 	@Override
-	public void apply(Stat2 stat, CalculationType... calculationTypes) {
+	public void apply(Stat2 stat, Set<CalculationType> calculationTypes) {
 		if (stat.getOwner() instanceof Player player)
 			stat.addToBase(player.getGameStats().getAccuracyDependentAdditionalBasePhysicalAccuracy());
 	}
@@ -234,7 +228,7 @@ class PvEAttackRatioFunction extends StatFunction {
 	}
 
 	@Override
-	public void apply(Stat2 stat, CalculationType... calculationTypes) {
+	public void apply(Stat2 stat, Set<CalculationType> calculationTypes) {
 		WorldMapTemplate template = DataManager.WORLD_MAPS_DATA.getTemplate(stat.getOwner().getWorldId());
 		stat.addToBonus(template.getPvEAttackRatio());
 	}
@@ -247,7 +241,7 @@ class PvEDefendRatioFunction extends StatFunction {
 	}
 
 	@Override
-	public void apply(Stat2 stat, CalculationType... calculationTypes) {
+	public void apply(Stat2 stat, Set<CalculationType> calculationTypes) {
 		WorldMapTemplate template = DataManager.WORLD_MAPS_DATA.getTemplate(stat.getOwner().getWorldId());
 		stat.addToBonus(template.getPvEDefendRatio());
 	}
@@ -263,7 +257,7 @@ class PvPAttackRatioFunction extends DuplicateStatFunction {
 class DuplicateStatFunction extends StatFunction {
 
 	@Override
-	public void apply(Stat2 stat, CalculationType... calculationTypes) {
+	public void apply(Stat2 stat, Set<CalculationType> calculationTypes) {
 		Item mainWeapon = ((Player) stat.getOwner()).getEquipment().getMainHandWeapon();
 		Item offWeapon = ((Player) stat.getOwner()).getEquipment().getOffHandWeapon();
 		if (mainWeapon == offWeapon)

@@ -18,7 +18,7 @@ public class SecurityToken extends AdminCommand {
 
 	@Override
 	public void execute(Player player, String... params) {
-		if (params.length < 1) {
+		if (params.length < 1 || (params[0].equals("show") && params.length < 2)) {
 			PacketSendUtility.sendMessage(player, "Syntax: //stoken <playername> || //stoken show <playername>");
 			return;
 		}

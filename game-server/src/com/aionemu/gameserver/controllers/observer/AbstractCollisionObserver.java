@@ -24,14 +24,14 @@ public abstract class AbstractCollisionObserver extends ActionObserver {
 	protected Spatial geometry;
 	protected byte intentions;
 	private final CheckType checkType;
-	private AtomicBoolean isRunning = new AtomicBoolean();
+	private final AtomicBoolean isRunning = new AtomicBoolean();
 
-	public AbstractCollisionObserver(Creature creature, Spatial geometry, byte intentions, CheckType checkType) {
-		super(ObserverType.MOVE_OR_DIE);
+	public AbstractCollisionObserver(Creature creature, Spatial geometry, byte intentions, CheckType checkType, ObserverType... observerTypes) {
+		super(ObserverType.MOVE, observerTypes);
 		this.creature = creature;
 		this.geometry = geometry;
 		WorldPosition lastPos;
-		if (creature instanceof Player && (lastPos = ((Player) creature).getMoveController().getLastPositionFromClient()) != null)
+		if (creature instanceof Player player && (lastPos = player.getMoveController().getLastPositionFromClient()) != null)
 			this.oldPos = new Vector3f(lastPos.getX(), lastPos.getY(), lastPos.getZ());
 		else
 			this.oldPos = new Vector3f(creature.getX(), creature.getY(), creature.getZ());

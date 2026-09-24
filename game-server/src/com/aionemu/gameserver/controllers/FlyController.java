@@ -102,7 +102,7 @@ public class FlyController {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANT_FLY_NOW_DUE_TO_NOFLY());
 			return false;
 		}
-		if (player.getTransformModel().getRes6() == 1) {
+		if (player.getTransformModel().cantFly()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FLY_CANNOT_FLY_POLYMORPH_STATUS());
 			return false;
 		}
@@ -116,7 +116,8 @@ public class FlyController {
 	public boolean switchToGliding() {
 		if (player.isInGlidingState() || !player.canPerformMove())
 			return false;
-
+		if (player.isUsingFlightTransporterOrWindstream())
+			return false;
 		if (!canGlide(player))
 			return false;
 		if (player.getFlyState() == 0) {
@@ -138,7 +139,7 @@ public class FlyController {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GLIDE_ONLY_DEVA_CAN());
 			return false;
 		}
-		if (player.getTransformModel().getRes6() == 1) {
+		if (player.getTransformModel().cantFly()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GLIDE_CANNOT_GLIDE_POLYMORPH_STATUS());
 			return false;
 		}

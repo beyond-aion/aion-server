@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <zones>
-    <zone mapid="600080000" name="LIMITAREAIDIU_DESIGN2_600080000" area_type="POLYGON" zone_type="LIMIT" flags="4">
+    <zone mapid="600080000" name="LIMITAREAIDIU_DESIGN2_600080000" area_type="POLYGON" zone_type="LIMIT" priority="16" flags="4">
         <points bottom="532.0" top="632.0">
             <point x="1344.8359" y="1356.7966"/>
             <point x="1653.9684" y="1357.8481"/>

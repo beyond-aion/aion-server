@@ -20,7 +20,7 @@ public class SM_SUMMON_UPDATE extends AionServerPacket {
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeC(summon.getLevel());
-		writeH(summon.getMode().getId());
+		writeH(summon.getVisibleMode().getId());
 		writeD(0);// unk
 		writeD(0);// unk
 		writeD(summon.getLifeStats().getCurrentHp());

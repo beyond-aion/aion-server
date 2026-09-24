@@ -3,8 +3,6 @@ package admincommands;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Predicate;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
@@ -21,15 +19,11 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 public class Kill extends AdminCommand {
 
 	public Kill() {
-		super("kill", "Kills the specified NPC(s) or player.");
-
-		// @formatter:off
-		setSyntaxInfo(
-			" - kills your target (can be NPC or player)",
-			"all [neutral|enemy|npcId] - kills all NPCs in the surrounding area (default: all, optional: only neutral/hostile NPCs/specific NPC)",
-			"<range (in meters)> [neutral|enemy|npcId] - kills NPCs in the specified radius around you (default: all, optional: only neutral/hostile NPCs/specific NPC)"
-		);
-		// @formatter:on
+		super("kill", "Kills the specified NPC(s) or player.", """
+			 - kills your target (can be NPC or player)
+			all [neutral|enemy|npcId] - kills all NPCs in the surrounding area (default: all, optional: only neutral/hostile NPCs/specific NPC)
+			<range (in meters)> [neutral|enemy|npcId] - kills NPCs in the specified radius around you (default: all, optional: only neutral/hostile NPCs/specific NPC)
+			""");
 	}
 
 	@Override
@@ -47,7 +41,7 @@ public class Kill extends AdminCommand {
 				if (target instanceof Npc)
 					targetInfo += ChatUtil.path(target, true);
 				else
-					targetInfo += StringUtils.capitalize(target.getName());
+					targetInfo += name(target);
 				if (kill(player, creature))
 					sendInfo(player, "Killed " + targetInfo);
 				else

@@ -53,6 +53,21 @@ public class PortalCooldownList {
 		return portalCooldowns == null ? null : portalCooldowns.get(worldId);
 	}
 
+	/**
+	 * @return The cooldown of the given world, creating it if absent, or null if the world has no entry limit (the client
+	 *         displays such instances as unlimited, as long as we don't send any entry info for them).
+	 */
+	public PortalCooldown getOrCreatePortalCooldown(int worldId) {
+		long reuseTime = DataManager.INSTANCE_COOLTIME_DATA.calculateInstanceEntranceCooltime(owner, worldId);
+		return reuseTime == 0 ? null : getOrCreatePortalCooldown(worldId, reuseTime);
+	}
+
+	private synchronized PortalCooldown getOrCreatePortalCooldown(int worldId, long reuseTime) {
+		if (portalCooldowns == null)
+			portalCooldowns = new HashMap<>();
+		return portalCooldowns.computeIfAbsent(worldId, id -> new PortalCooldown(id, reuseTime, 0));
+	}
+
 	public Map<Integer, PortalCooldown> getPortalCoolDowns() {
 		return portalCooldowns;
 	}
@@ -62,15 +77,7 @@ public class PortalCooldownList {
 	}
 
 	public void addPortalCooldown(int worldId, long useDelay) {
-		if (portalCooldowns == null)
-			portalCooldowns = new HashMap<>();
-
-		PortalCooldown portalCooldown = portalCooldowns.get(worldId);
-		if (portalCooldown == null)
-			portalCooldown = new PortalCooldown(worldId, useDelay, 0);
-
-		portalCooldown.increaseEnterCount();
-		portalCooldowns.put(worldId, portalCooldown);
+		getOrCreatePortalCooldown(worldId, useDelay).increaseEnterCount();
 
 		PortalCooldownsDAO.storePortalCooldowns(owner);
 

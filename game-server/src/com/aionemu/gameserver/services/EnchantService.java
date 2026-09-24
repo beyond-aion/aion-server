@@ -66,11 +66,12 @@ public class EnchantService {
 		else
 			stoneId = 166000191; // Alpha
 
-		if (inventory.delete(targetItem) != null) {
-			if (inventory.decreaseByObjectId(parentItem.getObjectId(), 1))
-				ItemService.addItem(player, stoneId, itemTemplate.isWeapon() ? Rnd.get(2, 5) : Rnd.get(1, 3));
-		} else
+		if (!inventory.decreaseByObjectId(parentItem.getObjectId(), 1) || inventory.delete(targetItem) == null) {
 			AuditLogger.log(player, "possibly used break item hack");
+			return false;
+		}
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_SUCCEED(targetItem.getL10n()));
+		ItemService.addItem(player, stoneId, itemTemplate.isWeapon() ? Rnd.get(2, 5) : Rnd.get(1, 3));
 		return true;
 	}
 
@@ -174,7 +175,7 @@ public class EnchantService {
 
 		int maxEnchant = targetItem.getItemTemplate().getMaxEnchantLevel(); // max enchant level from item_templates
 		maxEnchant += targetItem.getEnchantBonus();
-		if (targetItem.getEnchantLevel() < 20) {
+		if (targetItem.getEnchantLevel() < maxEnchant) {
 			float chance = Rnd.chance(); // crit modifier
 			if (chance < 5)
 				addLevel = 3;
@@ -233,8 +234,10 @@ public class EnchantService {
 		item.setEnchantLevel(enchantLevel);
 		int oldBuffId = item.getBuffSkill();
 		int newBuffId = 0;
-		if (enchantLevel >= 20)
-			newBuffId = getEquipBuff(item);
+		if (enchantLevel >= 20) {
+			// The breakthrough skill is granted once at +20 and retained through subsequent enchantments.
+			newBuffId = oldBuffId != 0 ? oldBuffId : getEquipBuff(item);
+		}
 		if (newBuffId != oldBuffId) {
 			item.setBuffSkill(newBuffId);
 			if (item.isEquipped()) {
@@ -243,10 +246,15 @@ public class EnchantService {
 				if (newBuffId != 0)
 					SkillLearnService.learnTemporarySkill(player, newBuffId, 1);
 			}
+			if (newBuffId != 0) {
+				String skillName = DataManager.SKILL_DATA.getSkillTemplate(newBuffId).getL10n();
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EXCEED_SKILL_ENCHANT(item.getL10n(), enchantLevel, skillName));
+				if (!item.isEquipped())
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_SKILL_ABLE_EQUIPED(item.getL10n(), skillName));
+			} else {
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EXCEED_SKILL_DELETE(item.getL10n()));
+			}
 		}
-		if (newBuffId != 0)
-			PacketSendUtility.sendPacket(player,
-				SM_SYSTEM_MESSAGE.STR_MSG_EXCEED_SKILL_ENCHANT(item.getL10n(), enchantLevel, DataManager.SKILL_DATA.getSkillTemplate(newBuffId).getL10n()));
 		if (item.getEnchantEffect() != null) {
 			item.getEnchantEffect().endEffect(player);
 			item.setEnchantEffect(null);
@@ -394,10 +402,10 @@ public class EnchantService {
 	}
 
 	public static boolean socketManastoneAct(Player player, Item parentItem, Item targetItem, Item supplementItem, int targetWeapon, boolean result) {
-		// Decrease required supplements
-		player.updateSupplements();
 		if (!player.getInventory().decreaseByObjectId(parentItem.getObjectId(), 1))
 			return false;
+		// Decrease required supplements
+		player.updateSupplements();
 		if (result) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_OPTION_SUCCEED(targetItem.getL10n()));
 
@@ -432,13 +440,13 @@ public class EnchantService {
 			case RANK1_SET2_MAGICAL_GLOVES -> new int[] { 13046, 13058, 13056 };
 			case RANK1_SET2_MAGICAL_PANTS -> new int[] { 13075, 13061, 13067 };
 			case RANK1_SET2_MAGICAL_SHOES -> new int[] { 13121, 13114, 13119 };
-			case RANK1_SET2_MAGICAL_SHOULDER -> new int[] { 13104, 13094, 13192 };
+			case RANK1_SET2_MAGICAL_SHOULDER -> new int[] { 13104, 13094, 13102 };
 			case RANK1_SET2_MAGICAL_TORSO -> new int[] { 13144, 13135, 13133 };
 			case RANK1_SET2_MAGICAL_WEAPON -> new int[] { 13029, 13003, 13023 };
 			case RANK1_SET2_PHYSICAL_GLOVES -> new int[] { 13046, 13058, 13056 };
 			case RANK1_SET2_PHYSICAL_PANTS -> new int[] { 13075, 13064, 13069 };
 			case RANK1_SET2_PHYSICAL_SHOES -> new int[] { 13121, 13114, 13119 };
-			case RANK1_SET2_PHYSICAL_SHOULDER -> new int[] { 13104, 13094, 13192 };
+			case RANK1_SET2_PHYSICAL_SHOULDER -> new int[] { 13104, 13094, 13102 };
 			case RANK1_SET2_PHYSICAL_TORSO -> new int[] { 13144, 13135, 13133 };
 			case RANK1_SET2_PHYSICAL_WEAPON -> new int[] { 13029, 13006, 13023 };
 			case RANK1_SET3_MAGICAL_WEAPON -> new int[] { 13031, 13022, 13026 };
@@ -446,13 +454,13 @@ public class EnchantService {
 			case RANK2_SET1_MAGICAL_GLOVES -> new int[] { 13050, 13047, 13057 };
 			case RANK2_SET1_MAGICAL_PANTS -> new int[] { 13072, 13075, 13068 };
 			case RANK2_SET1_MAGICAL_SHOES -> new int[] { 13125, 13122, 13120 };
-			case RANK2_SET1_MAGICAL_SHOULDER -> new int[] { 13088, 13105, 13193 };
+			case RANK2_SET1_MAGICAL_SHOULDER -> new int[] { 13088, 13105, 13103 };
 			case RANK2_SET1_MAGICAL_TORSO -> new int[] { 13139, 13145, 13134 };
 			case RANK2_SET1_MAGICAL_WEAPON -> new int[] { 13008, 13010, 13024 };
 			case RANK2_SET1_PHYSICAL_GLOVES -> new int[] { 13050, 13047, 13057 };
 			case RANK2_SET1_PHYSICAL_PANTS -> new int[] { 13072, 13075, 13070 };
 			case RANK2_SET1_PHYSICAL_SHOES -> new int[] { 13125, 13122, 13120 };
-			case RANK2_SET1_PHYSICAL_SHOULDER -> new int[] { 13091, 13105, 13193 };
+			case RANK2_SET1_PHYSICAL_SHOULDER -> new int[] { 13091, 13105, 13103 };
 			case RANK2_SET1_PHYSICAL_TORSO -> new int[] { 13139, 13145, 13134 };
 			case RANK2_SET2_MAGICAL_WEAPON -> new int[] { 13010, 13032, 13004 };
 			case RANK2_SET2_PHYSICAL_GLOVES -> new int[] { 13050, 13043, 13059 };

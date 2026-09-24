@@ -1,12 +1,14 @@
 package com.aionemu.gameserver.model.templates.item.actions;
 
+import static com.aionemu.gameserver.model.items.ItemUseAnimation.*;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.configs.main.CustomConfig;
-import com.aionemu.gameserver.controllers.observer.StartMovingListener;
+import com.aionemu.gameserver.controllers.observer.ItemUseObserver;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.enchants.EnchantmentStone;
 import com.aionemu.gameserver.model.gameobjects.Item;
@@ -90,60 +92,53 @@ public class EnchantItemAction extends AbstractItemAction {
 		boolean isEnchantmentStone = parentItem.getItemTemplate().getItemGroup() == ItemGroup.ENCHANTMENT;
 		int enchantDurationMillis = isEnchantmentStone ? 4000 : 2000;
 
-		StartMovingListener move = new StartMovingListener() {
-
+		ItemUseObserver observer = new ItemUseObserver(player) {
 			@Override
-			public void moved() {
-				super.moved();
-				player.getObserveController().removeObserver(this);
-				player.getController().cancelUseItem();
+			protected void onAbort() {
+				player.getController().cancelTask(TaskId.ITEM_USE);
 				PacketSendUtility.sendPacket(player, isEnchantmentStone ? SM_SYSTEM_MESSAGE.STR_ENCHANT_ITEM_CANCELED(targetItem.getL10n())
 					: SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_OPTION_CANCELED(targetItem.getL10n()));
+				PacketSendUtility.broadcastPacketAndReceive(player,
+					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), 0, USE_CANCEL));
 			}
-
 		};
 
-		player.getObserveController().attach(move);
+		player.getObserveController().addObserver(observer);
 
 		// Current enchant level
 		int currentEnchant = targetItem.getEnchantLevel();
 		boolean isSuccess = isSuccess(player, parentItem, targetItem, supplementItem, targetWeapon);
 		// Item template
 		PacketSendUtility.broadcastPacketAndReceive(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), targetItem.getObjectId(),
-			parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), enchantDurationMillis, 0, 0, 1, 0, 0));
+			parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), enchantDurationMillis, USE_START));
 
-		player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				player.getObserveController().removeObserver(move);
-
-				if (player.getInventory().getItemByObjId(targetItem.getObjectId()) == null && !targetItem.isEquipped()) {
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ENCHANT_ITEM_NO_TARGET_ITEM());
-					PacketSendUtility.broadcastPacketAndReceive(player,
-						new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), 0, 2, 0));
-					return;
-				}
-
-				if (isEnchantmentStone)
-					EnchantService.enchantItemAct(player, parentItem, targetItem, supplementItem, currentEnchant, isSuccess);
-				else // Manastone
-					EnchantService.socketManastoneAct(player, parentItem, targetItem, supplementItem, targetWeapon, isSuccess);
-
-				PacketSendUtility.broadcastPacketAndReceive(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(),
-					parentItem.getItemTemplate().getTemplateId(), 0, isSuccess ? 1 : 2, 0));
-				if (CustomConfig.ENABLE_ENCHANT_ANNOUNCE) {
-					if (isEnchantmentStone && isSuccess && (targetItem.getEnchantLevel() == 15 || targetItem.getEnchantLevel() == 20)) {
-						SM_SYSTEM_MESSAGE packet;
-						if (targetItem.getEnchantLevel() == 15)
-							packet = SM_SYSTEM_MESSAGE.STR_MSG_ENCHANT_ITEM_SUCCEEDED_15(player.getName(), targetItem.getItemTemplate().getL10n());
-						else
-							packet = SM_SYSTEM_MESSAGE.STR_MSG_ENCHANT_ITEM_SUCCEEDED_20(player.getName(), targetItem.getItemTemplate().getL10n());
-						PacketSendUtility.broadcastToWorld(packet, Predicates.Players.sameRace(player));
-					}
-				}
+		player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(() -> {
+			player.getObserveController().removeObserver(observer);
+			if (player.getInventory().getItemByObjId(targetItem.getObjectId()) == null && !targetItem.isEquipped()) {
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ENCHANT_ITEM_NO_TARGET_ITEM());
+				PacketSendUtility.broadcastPacketAndReceive(player,
+					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), 0, USE_FAIL));
+				return;
 			}
 
+			player.startCooldown(parentItem);
+			if (isEnchantmentStone)
+				EnchantService.enchantItemAct(player, parentItem, targetItem, supplementItem, currentEnchant, isSuccess);
+			else // Manastone
+				EnchantService.socketManastoneAct(player, parentItem, targetItem, supplementItem, targetWeapon, isSuccess);
+
+			PacketSendUtility.broadcastPacketAndReceive(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(),
+				parentItem.getItemTemplate().getTemplateId(), 0, isSuccess ? USE_SUCCESS : USE_FAIL));
+			if (CustomConfig.ENABLE_ENCHANT_ANNOUNCE) {
+				if (isEnchantmentStone && isSuccess && (targetItem.getEnchantLevel() == 15 || targetItem.getEnchantLevel() == 20)) {
+					SM_SYSTEM_MESSAGE packet;
+					if (targetItem.getEnchantLevel() == 15)
+						packet = SM_SYSTEM_MESSAGE.STR_MSG_ENCHANT_ITEM_SUCCEEDED_15(player.getName(), targetItem.getItemTemplate().getL10n());
+					else
+						packet = SM_SYSTEM_MESSAGE.STR_MSG_ENCHANT_ITEM_SUCCEEDED_20(player.getName(), targetItem.getItemTemplate().getL10n());
+					PacketSendUtility.broadcastToWorld(packet, Predicates.Players.sameRace(player));
+				}
+			}
 		}, enchantDurationMillis));
 	}
 

@@ -28,7 +28,7 @@ public class PetOrderUseUltraSkillEffect extends EffectTemplate {
 	public void applyEffect(Effect effect) {
 		Player effector = (Player) effect.getEffector();
 
-		if (effector.getSummon() == null) {
+		if (effector.getSummon() == null || effector.getSummon().isBeingReleased()) {
 			return;
 		}
 
@@ -44,7 +44,6 @@ public class PetOrderUseUltraSkillEffect extends EffectTemplate {
 				.warn("Couldn't find summon skill template for ID {} (summon order skill ID {})", petUseSkillId, orderSkillId);
 			return;
 		}
-
 		int skillLvl = skillTemplate.getLvl();
 		int targetId = effect.getEffected().getObjectId();
 		int hate = effect.getEffectHate() > 1 ? effect.getEffectHate() : 0;

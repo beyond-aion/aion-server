@@ -1,22 +1,25 @@
 package com.aionemu.gameserver.model.items;
 
+import java.util.Objects;
+
+import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Persistable;
 import com.aionemu.gameserver.model.stats.calc.StatOwner;
+import com.aionemu.gameserver.model.templates.L10n;
+import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 
 /**
  * @author ATracer, Wakizashi
  */
-public class ItemStone implements StatOwner, Persistable {
+public class ItemStone implements StatOwner, Persistable, L10n {
 
-	private int itemObjId;
-
-	private int itemId;
-
+	private final int itemObjId;
+	private final int itemId;
 	private int slot;
 
 	private PersistentState persistentState;
 
-	public static enum ItemStoneType {
+	public enum ItemStoneType {
 		MANASTONE,
 		GODSTONE,
 		FUSIONSTONE,
@@ -28,6 +31,7 @@ public class ItemStone implements StatOwner, Persistable {
 		this.itemId = itemId;
 		this.slot = slot;
 		this.persistentState = persistentState;
+		Objects.requireNonNull(getItemTemplate(), () -> "Invalid item ID: " + itemId);
 	}
 
 	public int getItemObjId() {
@@ -36,6 +40,10 @@ public class ItemStone implements StatOwner, Persistable {
 
 	public int getItemId() {
 		return itemId;
+	}
+
+	public ItemTemplate getItemTemplate() {
+		return DataManager.ITEM_DATA.getItemTemplate(itemId);
 	}
 
 	public int getSlot() {
@@ -70,4 +78,8 @@ public class ItemStone implements StatOwner, Persistable {
 		}
 	}
 
+	@Override
+	public int getL10nId() {
+		return getItemTemplate().getL10nId();
+	}
 }

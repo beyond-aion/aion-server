@@ -19,6 +19,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.GameServerError;
+import com.aionemu.gameserver.configs.main.GeoDataConfig;
+import com.aionemu.gameserver.configs.main.GeoDataConfig.Mode;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.geoEngine.collision.CollisionIntention;
 import com.aionemu.gameserver.geoEngine.math.Matrix3f;
@@ -40,7 +42,8 @@ public class GeoWorldLoader {
 	private static final Path GEO_DIR = Path.of("data/geo/");
 
 	public static void load(Collection<GeoMap> maps) {
-		loadTerrains(maps);
+		if (GeoDataConfig.MODE == Mode.ON)
+			loadTerrains(maps);
 		load(maps, loadMeshes());
 		// preload mesh collision data for responsive initial collision checks and predictable memory usage
 		ThreadPoolManager.getInstance()
@@ -143,12 +146,16 @@ public class GeoWorldLoader {
 					m.setMaterialId(geo.get());
 					m.setCollisionIntentions(geo.get());
 					intentions |= m.getCollisionIntentions();
+					if (GeoDataConfig.MODE == Mode.MATERIALS_ONLY && m.getMaterialId() == 0)
+						continue;
 					if (node.getName() == null && (m.getMaterialId() == 11 || DataManager.MATERIAL_DATA.getTemplate(m.getMaterialId()) != null))
 						node.setName(name);
 					if (modelCount == 1)
 						singleChildMaterialId = m.getMaterialId();
 					node.attachChild(new Geometry(name, m));
 				}
+				if (node.getChildren().isEmpty())
+					continue;
 				node.setCollisionIntentions(intentions);
 				node.setMaterialId((byte) singleChildMaterialId);
 				if (!name.contains("|")) {
@@ -229,7 +236,7 @@ public class GeoWorldLoader {
 							}
 						}
 					}
-				} else {
+				} else if (GeoDataConfig.MODE != Mode.MATERIALS_ONLY) {
 					missingMeshes.add(name);
 				}
 			}

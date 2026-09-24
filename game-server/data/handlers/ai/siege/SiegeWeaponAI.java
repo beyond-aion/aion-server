@@ -12,7 +12,6 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.model.summons.SummonMode;
 import com.aionemu.gameserver.model.templates.npcskill.NpcSkillTemplate;
-import com.aionemu.gameserver.model.templates.npcskill.NpcSkillTemplates;
 import com.aionemu.gameserver.services.summons.SummonsService;
 
 /**
@@ -34,7 +33,7 @@ public class SiegeWeaponAI extends AITemplate<Summon> {
 	protected void handleSpawned() {
 		this.setStateIfNot(AIState.IDLE);
 		SummonsService.doMode(SummonMode.GUARD, getOwner());
-		NpcSkillTemplate skillTemplate = getNpcSkillTemplates().getNpcSkills().getFirst();
+		NpcSkillTemplate skillTemplate = DataManager.NPC_SKILL_DATA.getNpcSkillTemplates(getOwner().getNpcId()).getFirst();
 		skill = skillTemplate.getSkillId();
 		skillLvl = skillTemplate.getSkillLevel();
 		duration = DataManager.SKILL_DATA.getSkillTemplate(skill).getDuration();
@@ -66,10 +65,6 @@ public class SiegeWeaponAI extends AITemplate<Summon> {
 	protected void handleMoveValidate() {
 		getOwner().getController().onMove();
 		getOwner().getMoveController().moveToTargetObject();
-	}
-
-	private NpcSkillTemplates getNpcSkillTemplates() {
-		return ((SiegeWeaponController) getOwner().getController()).getNpcSkillTemplates();
 	}
 
 	@Override

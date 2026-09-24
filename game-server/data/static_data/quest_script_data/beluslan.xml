@@ -512,7 +512,7 @@
 	<monster_hunt id="4525" start_npc_ids="832820"/>
 	<monster_hunt id="4526" start_npc_ids="204789"/>
 	<monster_hunt id="4527" start_npc_ids="204702"/>
-	<monster_hunt id="4528" start_npc_ids="212211"/>
+	<monster_hunt id="4528" start_npc_ids="204781"/>
 	<monster_hunt id="4529" start_npc_ids="798117" end_npc_ids="798118"/>
 	<monster_hunt id="4531" start_npc_ids="798118"/>
 	<monster_hunt id="4532" start_npc_ids="204805"/>

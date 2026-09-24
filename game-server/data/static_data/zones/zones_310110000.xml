@@ -90,6 +90,14 @@
             <point x="656.7754" y="190.68898"/>
         </points>
     </zone>
+    <zone mapid="310110000" name="IDLF2A_LAB_RECALLAREA_310110000" area_type="POLYGON" zone_type="LIMIT" priority="16" flags="4">
+        <points bottom="185.97984" top="235.97984">
+            <point x="567.6791" y="526.3542"/>
+            <point x="567.7048" y="455.08594"/>
+            <point x="646.36505" y="454.72125"/>
+            <point x="645.92786" y="526.37775"/>
+        </points>
+    </zone>
     <zone mapid="310110000" name="LEPHARIST_RESEARCH_CENTER_ENTRANCE_310110000" area_type="POLYGON" zone_type="SUB" priority="15" flags="2">
         <points bottom="157.99792" top="207.99792">
             <point x="446.38058" y="239.35094"/>
@@ -98,7 +106,7 @@
             <point x="446.39655" y="324.82245"/>
         </points>
     </zone>
-    <zone mapid="310110000" name="LF2A_LAB_NOGLIDEAREA_BOSSROOM_310110000" area_type="POLYGON" zone_type="LIMIT" flags="2">
+    <zone mapid="310110000" name="LF2A_LAB_NOGLIDEAREA_BOSSROOM_310110000" area_type="POLYGON" zone_type="LIMIT" priority="16" flags="2">
         <points bottom="180.88412" top="240.88412">
             <point x="568.16" y="453.9"/>
             <point x="646.1795" y="454.81473"/>

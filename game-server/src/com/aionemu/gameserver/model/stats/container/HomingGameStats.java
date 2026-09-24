@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.model.stats.container;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Homing;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -17,7 +19,7 @@ public class HomingGameStats extends SummonedObjectGameStats {
 	}
 
 	@Override
-	public Stat2 getStat(StatEnum statEnum, float base, CalculationType... calculationTypes) {
+	public Stat2 getStat(StatEnum statEnum, float base, Set<CalculationType> calculationTypes) {
 		Stat2 stat = super.getStat(statEnum, base, calculationTypes);
 		if (owner.getMaster() == null)
 			return stat;
@@ -31,7 +33,7 @@ public class HomingGameStats extends SummonedObjectGameStats {
 	}
 
 	@Override
-	public Stat2 getMainHandMAttack(CalculationType... calculationTypes) {
+	public Stat2 getMainHandMAttack(Set<CalculationType> calculationTypes) {
 		Homing homing = (Homing) owner;
 		int power = getStatsTemplate().getMagicalAttack();
 		SkillTemplate skill = DataManager.SKILL_DATA.getSkillTemplate(homing.getSkillId());

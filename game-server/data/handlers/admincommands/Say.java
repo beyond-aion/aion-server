@@ -14,9 +14,9 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 public class Say extends AdminCommand {
 
 	public Say() {
-		super("say", "Lets your target say a message.");
-
-		setSyntaxInfo("<message> - Sends the message as your target (npc only).");
+		super("say", "Lets your target say a message.", """
+			<message> - Sends the message as your target (NPC only).
+			""");
 	}
 
 	@Override

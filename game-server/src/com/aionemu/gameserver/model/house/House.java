@@ -1,13 +1,10 @@
 package com.aionemu.gameserver.model.house;
 
 import java.sql.Timestamp;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-
-import org.apache.commons.lang3.time.DateUtils;
 
 import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.configs.main.HousingConfig;
@@ -195,11 +192,7 @@ public class House extends VisibleObject implements Persistable {
 	}
 
 	public void setNextPay(Date nextPay) {
-		Timestamp result = null;
-		if (nextPay != null) { // round to midnight
-			result = new Timestamp(DateUtils.round(nextPay, Calendar.DAY_OF_MONTH).getTime());
-		}
-		this.nextPay = result;
+		this.nextPay = nextPay == null ? null : new Timestamp(nextPay.getTime());
 		setPersistentState(PersistentState.UPDATE_REQUIRED);
 	}
 

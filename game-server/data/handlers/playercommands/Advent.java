@@ -14,14 +14,11 @@ import com.aionemu.gameserver.utils.chathandlers.PlayerCommand;
 public class Advent extends PlayerCommand {
 
 	public Advent() {
-		super("advent", "Gets your advent reward for today.");
-
-		// @formatter:off
-		setSyntaxInfo(
-			"show - Shows today's reward.",
-			"get - Gets your reward for today on this character.\n" + ChatUtil.color("ATTENTION:", Color.PINK) + " Only one character per account can receive this reward!"
-		);
-		// @formatter:on
+		super("advent", "Gets your advent reward for today.", """
+			show - Shows today's reward.
+			get - Gets your reward for today on this character.
+			%s Only one character per account can receive this reward!
+			""".formatted(ChatUtil.color("ATTENTION:", Color.PINK)));
 	}
 
 	@Override

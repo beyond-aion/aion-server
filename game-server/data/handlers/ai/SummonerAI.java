@@ -96,6 +96,7 @@ public class SummonerAI extends AggressiveNpcAI {
 			}
 
 			if (hpPercentage <= percent.getPercent()) {
+				spawnedPercent = percent.getPercent();
 				int skill = percent.getSkillId();
 				if (skill != 0)
 					AIActions.useSkill(this, skill);
@@ -109,7 +110,6 @@ public class SummonerAI extends AggressiveNpcAI {
 						ThreadPoolManager.getInstance().schedule(() -> spawnHelpers(sg), summonGroup.getSchedule());
 					}
 				}
-				spawnedPercent = percent.getPercent();
 			}
 		}
 	}

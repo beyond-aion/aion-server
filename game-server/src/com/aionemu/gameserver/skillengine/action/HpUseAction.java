@@ -28,19 +28,29 @@ public class HpUseAction extends Action {
 
 	@Override
 	public boolean act(Skill skill) {
+		if (!canAct(skill))
+			return false;
 		Creature effector = skill.getEffector();
+		// npcs pass the check even when they cannot afford it and then pay what they have, down to 1 hp
+		effector.getLifeStats().reduceHp(SM_ATTACK_STATUS.TYPE.USED_HP, getCost(skill), 0, SM_ATTACK_STATUS.LOG.REGULAR, effector);
+		return true;
+	}
+
+	@Override
+	public boolean canAct(Skill skill) {
+		// npcs are never blocked by an hp cost, they pay what they have, see validate()
+		if (skill.getEffector() instanceof Player player && player.getLifeStats().getCurrentHp() <= getCost(skill)) { // the cast may never be lethal
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_NOT_ENOUGH_HP());
+			return false;
+		}
+		return true;
+	}
+
+	private int getCost(Skill skill) {
 		int valueWithDelta = value + delta * skill.getSkillLevel();
-		int currentHp = effector.getLifeStats().getCurrentHp();
 		if (ratio)
 			valueWithDelta = (int) (valueWithDelta / 100f * skill.getEffector().getLifeStats().getMaxHp());
-		if (effector instanceof Player) {
-			if (currentHp <= 0 || currentHp < valueWithDelta) {
-				PacketSendUtility.sendPacket((Player) effector, SM_SYSTEM_MESSAGE.STR_SKILL_NOT_ENOUGH_HP());
-				return false;
-			}
-		}
-		effector.getLifeStats().reduceHp(SM_ATTACK_STATUS.TYPE.USED_HP, valueWithDelta, 0, SM_ATTACK_STATUS.LOG.REGULAR, effector);
-		return true;
+		return valueWithDelta;
 	}
 
 }

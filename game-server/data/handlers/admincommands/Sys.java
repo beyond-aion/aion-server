@@ -20,16 +20,13 @@ import com.aionemu.gameserver.utils.time.ServerTime;
 public class Sys extends AdminCommand {
 
 	public Sys() {
-		super("sys", "Shows and controls the system environment.");
-
-		// @formatter:off
-		setSyntaxInfo(
-			"<info> - Shows general system information.",
-			"<memory> [gc] - Shows memory usage statistics and optionally runs the garbage collector.",
-			"<threadpool> - Shows thread pool manager info.",
-			"<restart|shutdown> [delay] - Restarts or shuts down the server after the specified delay in seconds (default: uses delay from config)."
-		);
-		// @formatter:on
+		super("sys", "Shows and controls the system environment.", """
+			<info> - Shows general system information.
+			<memory> [gc] - Shows memory usage statistics and optionally runs the garbage collector.
+			<threadpool> - Shows thread pool manager info.
+			<restart|shutdown> [delay] - Restarts or shuts down the server after the specified delay in seconds (default: uses delay from config). The \
+			delay is skipped when no players%s are online.
+			""".formatted(ShutdownConfig.INSTANT_SHUTDOWN_WITH_ONLY_STAFF_ONLINE ? " or only staff" : ""));
 	}
 
 	@Override

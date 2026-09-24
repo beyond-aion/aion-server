@@ -147,11 +147,12 @@ public class SkillEngine {
 	}
 
 	/**
-	 * Applies the skill's effects to one or multiple targets, depending on its template properties.
+	 * Applies the skill's effects to one or multiple targets, depending on its template properties. Unless a forceType is given, the effects are
+	 * calculated against the current stats of effector and targets, so they can be dodged or resisted.
 	 *
 	 * @return affected targets
 	 */
-	public List<Creature> applyEffectsDirectly(int skillId, Creature effector, Creature firstTarget, float x, float y, float z) {
+	public List<Creature> applyEffects(int skillId, Creature effector, Creature firstTarget, float x, float y, float z, ForceType forceType) {
 		SkillTemplate skillTemplate = DataManager.SKILL_DATA.getSkillTemplate(skillId);
 		Properties properties = skillTemplate.getProperties();
 		List<Creature> targets = new ArrayList<>();
@@ -159,7 +160,7 @@ public class SkillEngine {
 		if (properties != null) // add valid targets in range
 			properties.validateEffectedList(targets, firstTarget, effector, skillTemplate, x, y, z);
 		for (Creature target : targets)
-			applyEffect(effector, target, skillTemplate, skillTemplate.getLvl(), null, ForceType.DEFAULT);
+			applyEffect(effector, target, skillTemplate, skillTemplate.getLvl(), null, forceType);
 		return targets;
 	}
 
@@ -187,7 +188,10 @@ public class SkillEngine {
 		return skillTemplate;
 	}
 
-	public Effect createCriticalEffect(Player attacker, Creature target, int skillId) {
+	/**
+	 * @return the stumble which procs on a critical hit, null if it cannot proc for the given skill or was dodged/resisted
+	 */
+	public Effect createCriticalProcEffect(Player attacker, Creature target, int skillId) {
 		if (target.getEffectController().isUnderNormalShield())
 			return null;
 		if (skillId != 0) {
@@ -214,7 +218,7 @@ public class SkillEngine {
 
 		SkillTemplate skillTemplate = checkAndGetSkillTemplate(id);
 		if (skillTemplate != null) {
-			Effect ef = new Effect(attacker, target, skillTemplate, skillTemplate.getLvl(), null, null, true);
+			Effect ef = new Effect(attacker, target, skillTemplate, skillTemplate.getLvl(), null, null, true, null);
 			ef.initialize();
 			return ef;
 		}

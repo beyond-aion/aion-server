@@ -41,19 +41,17 @@ public class ActionItemNpcAI extends NpcAI {
 	protected void handleUseItemStart(Player player) {
 		final int talkDelayInMs = getTalkDelayInMs();
 		if (talkDelayInMs > 0) {
-			final ItemUseObserver observer = new ItemUseObserver() {
+			ItemUseObserver observer = new ItemUseObserver(player) {
 
 				@Override
-				public void abort() {
+				protected void onAbort() {
 					player.getController().cancelTask(TaskId.ACTION_ITEM_NPC);
 					PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.END_QUESTLOOT, 0, getObjectId()), true);
 					PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), getObjectId(), 0, cancelBarAnimation));
 					synchronized (observers) {
 						observers.remove(this);
 					}
-					player.getObserveController().removeObserver(this);
 				}
-
 			};
 
 			player.getObserveController().addObserver(observer);

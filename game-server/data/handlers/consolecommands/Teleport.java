@@ -20,9 +20,9 @@ import com.aionemu.gameserver.world.geo.GeoService;
 public class Teleport extends ConsoleCommand {
 
 	public Teleport() {
-		super("teleport", "Moves you to any location.");
-
-		setSyntaxInfo("[mapCName] <x> <y> <z> - Moves you to the specified coordinates on the given map (default: current map).");
+		super("teleport", "Moves you to any location.", """
+			[mapCName] <x> <y> <z> - Moves you to the specified coordinates on the given map (default: current map).
+			""");
 	}
 
 	@Override

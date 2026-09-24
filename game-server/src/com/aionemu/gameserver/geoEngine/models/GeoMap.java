@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.configs.main.GeoDataConfig;
+import com.aionemu.gameserver.configs.main.GeoDataConfig.Mode;
 import com.aionemu.gameserver.geoEngine.collision.CollisionIntention;
 import com.aionemu.gameserver.geoEngine.collision.CollisionResult;
 import com.aionemu.gameserver.geoEngine.collision.CollisionResults;
@@ -287,7 +288,7 @@ public class GeoMap extends Node {
 	public void setDoorState(int instanceId, int doorId, boolean open) {
 		DespawnableNode[] doors = despawnableDoors.get(doorId);
 		if (doors == null) {
-			if (GeoDataConfig.GEO_ENABLE && !getIgnorableDoorIds().contains(doorId))
+			if (GeoDataConfig.MODE == Mode.ON && !getIgnorableDoorIds().contains(doorId))
 				log.warn("No geometry found for door " + doorId + " in world " + mapId);
 		} else {
 			if (doors[0] != null) {

@@ -454,8 +454,8 @@
 	<item_collecting id="3905" start_npc_ids="798316"/>
 	<item_collecting id="3906" start_npc_ids="798316"/>
 	<item_collecting id="3907" start_npc_ids="798316"/>
-	<item_collecting id="3915" start_npc_ids="203384"/>
-	<item_collecting id="3916" start_npc_ids="203384"/>
+	<item_collecting id="3915" start_npc_ids="204656"/>
+	<item_collecting id="3916" start_npc_ids="204656"/>
 	<item_collecting id="3918" start_npc_ids="798357"/>
 	<item_collecting id="3919" start_npc_ids="798357"/>
 	<item_collecting id="3941" start_npc_ids="203788"/>
@@ -562,7 +562,7 @@
 	<!-- HUNTING QUESTS -->
 	<monster_hunt id="1939" start_npc_ids="203703"/>
 	<monster_hunt id="3213" start_npc_ids="203735"/>
-	<monster_hunt id="3977" start_npc_ids="203384"/>
+	<monster_hunt id="3977" start_npc_ids="204656"/>
 	<monster_hunt id="3978" start_npc_ids="798319"/>
 	<monster_hunt id="3979" start_npc_ids="798322"/>
 	<monster_hunt id="80010" start_npc_ids="799767"/>

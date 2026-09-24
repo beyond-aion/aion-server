@@ -1,6 +1,5 @@
 package ai.instance.shugoImperialTomb;
 
-import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -40,11 +39,10 @@ public class ShugoTombBossAI extends ShugoTombAttackerAI {
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
-		List<NpcSkillEntry> skills = getSkillList().getNpcSkills();
-		if (getOwner().getEffectController().isInAnyAbnormalState(AbnormalState.CANT_ATTACK_STATE) || usedSkills.get() >= skills.size())
+		if (getOwner().getEffectController().isInAnyAbnormalState(AbnormalState.CANT_ATTACK_STATE) || usedSkills.get() >= getSkillList().size())
 			return;
 
-		NpcSkillEntry entry = skills.get(usedSkills.get());
+		NpcSkillEntry entry = getSkillList().getSkillOnPosition(usedSkills.get());
 		if (getLifeStats().getHpPercentage() <= entry.getTemplate().getMaxhp() && isCasting.compareAndSet(false, true)) {
 			if (getMoveController().isInMove())
 				WalkManager.stopWalking(this);

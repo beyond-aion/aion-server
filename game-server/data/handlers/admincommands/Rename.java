@@ -20,14 +20,10 @@ import com.aionemu.gameserver.world.World;
 public class Rename extends AdminCommand {
 
 	public Rename() {
-		super("rename", "Changes a player's name.");
-
-		// @formatter:off
-		setSyntaxInfo(
-			"<new name> - Renames your target.",
-			"<player name> <new name> [f] - Renames the given player (f = force rename, ignoring reserved names)."
-		);
-		// @formatter:on
+		super("rename", "Changes a player's name.", """
+			<new name> - Renames your target.
+			<player name> <new name> [f] - Renames the given player (f = force rename, ignoring reserved names).
+			""");
 	}
 
 	@Override

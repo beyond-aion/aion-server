@@ -937,7 +937,8 @@ public final class QuestService {
 		if (qwi != null) {
 			for (QuestItems qi : qwi.getQuestWorkItem()) {
 				if (qi != null) {
-					long count = player.getInventory().getItemCountByItemId(qi.getItemId());
+					// Only remove the amount the quest actually needs, not the player's whole stack of that item
+					long count = Math.min(qi.getCount(), player.getInventory().getItemCountByItemId(qi.getItemId()));
 					if (count > 0)
 						player.getInventory().decreaseByItemId(qi.getItemId(), count, qs.getStatus());
 				}

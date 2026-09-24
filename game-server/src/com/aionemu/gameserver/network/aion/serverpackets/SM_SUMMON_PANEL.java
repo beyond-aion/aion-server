@@ -10,7 +10,7 @@ import com.aionemu.gameserver.utils.stats.CalculationType;
  */
 public class SM_SUMMON_PANEL extends AionServerPacket {
 
-	private Summon summon;
+	private final Summon summon;
 
 	public SM_SUMMON_PANEL(Summon summon) {
 		this.summon = summon;
@@ -25,10 +25,8 @@ public class SM_SUMMON_PANEL extends AionServerPacket {
 		writeD(summon.getLifeStats().getCurrentHp());
 		writeD(summon.getGameStats().getMaxHp().getCurrent());
 		writeD(summon.getGameStats().getMainHandPAttack(CalculationType.DISPLAY).getCurrent());
-		writeH(summon.getGameStats().getPDef().getCurrent());
-		writeH(0);
-		writeH(summon.getGameStats().getMResist().getCurrent());
-		writeH(0);// unk
+		writeD(summon.getGameStats().getPDef().getCurrent());
+		writeD(summon.getGameStats().getMDef().getCurrent());
 		writeH(0);// unk
 		writeD(summon.getLiveTime()); // life time
 	}

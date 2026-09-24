@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.model.stats.calc.functions;
 
-import org.apache.commons.lang3.ArrayUtils;
+import java.util.Set;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -22,7 +22,7 @@ public class StatWeaponMasteryFunction extends StatRateFunction {
 	}
 
 	@Override
-	public void apply(Stat2 stat, CalculationType... calculationTypes) {
+	public void apply(Stat2 stat, Set<CalculationType> calculationTypes) {
 		Player player = (Player) stat.getOwner();
 		ItemGroup mainWeapon = player.getEquipment().getMainHandWeaponType();
 		ItemGroup offHandWeapon = player.getEquipment().getOffHandWeaponType();
@@ -43,10 +43,10 @@ public class StatWeaponMasteryFunction extends StatRateFunction {
 	}
 
 
-	private void applyTo(Stat2 stat, CalculationType... calculationTypes) {
+	private void applyTo(Stat2 stat, Set<CalculationType> calculationTypes) {
 		if (isBonus()) {
 			int bonusRate = getValue();
-			if (ArrayUtils.contains(calculationTypes, CalculationType.SKILL) && ArrayUtils.contains(calculationTypes, CalculationType.DUAL_WIELD)) {
+			if (calculationTypes.contains(CalculationType.SKILL) && calculationTypes.contains(CalculationType.DUAL_WIELD)) {
 				bonusRate = Rnd.get(0, getValue());
 			}
 			stat.setFixedBonusRate(bonusRate / 100f);

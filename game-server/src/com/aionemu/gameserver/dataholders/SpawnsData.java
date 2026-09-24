@@ -218,7 +218,7 @@ public class SpawnsData {
 			+ ".xml";
 		File xml = new File(folder + "/New/" + fileName);
 		String schema = "./data/static_data/spawns/spawns.xsd";
-		SpawnsData data = xml.isFile() ? JAXBUtil.deserialize(xml, SpawnsData.class, schema) : new SpawnsData();
+		SpawnsData data = xml.isFile() ? JAXBUtil.deserialize(xml, UnprocessedSpawns.class, schema) : new SpawnsData();
 		SpawnMap spawnMap = data.templates == null ? null
 			: data.templates.stream().filter(m -> m.getMapId() == visibleObject.getWorldId()).findFirst().orElse(null);
 		if (spawnMap == null) {
@@ -282,7 +282,7 @@ public class SpawnsData {
 				@Override
 				public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
 					if (attrs.isRegularFile() && file.toString().toLowerCase().endsWith(".xml")) {
-						for (SpawnMap spawnMap : JAXBUtil.deserialize(file.toFile(), SpawnsData.class, schema).templates) {
+						for (SpawnMap spawnMap : JAXBUtil.deserialize(file.toFile(), UnprocessedSpawns.class, schema).getTemplates()) {
 							Spawn s = findSpawnTemplate(spawnMap, spawn, exactMatch);
 							if (s != null) {
 								match.set(s);
@@ -466,4 +466,11 @@ public class SpawnsData {
 			.forEach(npcIds::add);
 	}
 
+	@XmlRootElement(name = "spawns")
+	private static class UnprocessedSpawns extends SpawnsData {
+
+		@Override
+		void afterUnmarshal(Unmarshaller u, Object parent) {
+		}
+	}
 }

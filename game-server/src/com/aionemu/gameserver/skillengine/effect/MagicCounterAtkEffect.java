@@ -14,6 +14,7 @@ import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.skillengine.model.Skill.SkillMethod;
 import com.aionemu.gameserver.skillengine.model.SkillType;
+import com.aionemu.gameserver.utils.stats.StatFunctions;
 
 /**
  * @author ViAl
@@ -24,8 +25,7 @@ public class MagicCounterAtkEffect extends EffectTemplate {
 
 	@XmlAttribute
 	protected int maxdmg;
-
-	// TODO bosses are resistent to this?
+	
 	@Override
 	public void applyEffect(Effect effect) {
 		effect.addToEffectedController();
@@ -39,8 +39,14 @@ public class MagicCounterAtkEffect extends EffectTemplate {
 			@Override
 			public void endSkillCast(Skill skill) {
 				if (skill.getSkillMethod() != SkillMethod.ITEM && skill.getSkillTemplate().getType() == SkillType.MAGICAL) {
-					int damage = Math.min(maxdmg, (int) (effected.getGameStats().getMaxHp().getBase() / 100f * value));
-					effected.getController().onAttack(effect, TYPE.MAGICCOUNTERATK, damage, true, LOG.MAGICCOUNTERATK, hopType);
+					float maxHpDamage = effected.getGameStats().getMaxHp().getBase() * calculateBaseValue(effect) / 100f;
+
+					float adjustedDamage = StatFunctions.adjustDamageByPvpOrPveModifiers(effect.getEffector(), effect.getEffected(), maxHpDamage,
+						effect.getSkillTemplate().getPvpDamage(), false, element);
+
+					int finalDamage = (int) Math.min(maxdmg, adjustedDamage);
+
+					effected.getController().onAttack(effect, TYPE.MAGICCOUNTERATK, finalDamage, true, LOG.MAGICCOUNTERATK, hopType);
 				}
 			}
 		});

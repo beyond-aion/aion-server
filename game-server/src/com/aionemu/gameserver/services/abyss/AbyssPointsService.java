@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.services.abyss;
 
+import java.util.function.IntFunction;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,6 +31,10 @@ public class AbyssPointsService {
 	}
 
 	public static void addAp(Player player, int amount) {
+		addAp(player, amount, SM_SYSTEM_MESSAGE::STR_MSG_COMBAT_MY_ABYSS_POINT_GAIN);
+	}
+
+	public static void addAp(Player player, int amount, IntFunction<SM_SYSTEM_MESSAGE> gainMessage) {
 		if (player == null)
 			return;
 
@@ -37,7 +43,7 @@ public class AbyssPointsService {
 		player.getAbyssRank().addAp(amount);
 		int added = player.getAbyssRank().getAp() - oldAp;
 
-		SM_SYSTEM_MESSAGE msg = amount >= 0 ? SM_SYSTEM_MESSAGE.STR_MSG_COMBAT_MY_ABYSS_POINT_GAIN(added) : SM_SYSTEM_MESSAGE.STR_MSG_USE_ABYSSPOINT(-added);
+		SM_SYSTEM_MESSAGE msg = amount >= 0 ? gainMessage.apply(added) : SM_SYSTEM_MESSAGE.STR_MSG_USE_ABYSSPOINT(-added);
 		PacketSendUtility.sendPacket(player, msg);
 		onRankChanged(player, added != 0, oldAbyssRank != player.getAbyssRank().getRank(), null);
 		if (player.isLegionMember() && added > 0) {

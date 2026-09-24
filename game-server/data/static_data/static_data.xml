@@ -73,7 +73,6 @@
 	<import file="bounties/kill_bounties.xml" />
 	<import file="chests/chest_templates.xml" />
 	<import file="cosmetic_items/cosmetic_items.xml" />
-	<import file="curing_objects/curing_objects.xml" />
 	<import file="custom_drop/custom_drop.xml" />
 	<import file="decomposable_items/decomposable_items.xml" />
 	<import file="enchants/enchant_templates.xml" />
@@ -127,7 +126,6 @@
 	<import file="roads/roads.xml" />
 	<import file="conqueror_protector_ranks/conqueror_protector_ranks.xml" />
 	<import file="siege/siege_locations.xml" />
-	<import file="siege/siege_shields.xml" />
 	<import file="skills/motion_times.xml" />
 	<import file="skills/skill_charge.xml" />
 	<import file="skills/skill_templates.xml" />
