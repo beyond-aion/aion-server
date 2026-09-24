@@ -126,7 +126,11 @@ public abstract class PlayableMoveController<T extends Creature> extends Creatur
 	 * the mouse while running forward would look like sideways movement).
 	 */
 	public void updateMovementModifierDirection() {
-		movementModifierState.setMoveState(calculateMovementDirection().getMoveStateFlag());
+		setMovementModifierDirection(calculateMovementDirection());
+	}
+
+	protected void setMovementModifierDirection(MovementModifierDirection direction) {
+		movementModifierState.setMoveState(direction.getMoveStateFlag());
 	}
 
 	/**

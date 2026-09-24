@@ -62,13 +62,32 @@ public class PlayerMoveController extends PlayableMoveController<Player> {
 	}
 
 	private void updateMovementModifiers() {
-		if ((getMovementMask() & MovementMask.FALL) == MovementMask.FALL) {
-			// While airborne the client doesn't request a direction, the horizontal movement is momentum from before the jump. Turning in mid air must
-			// therefore not change the movement direction (and reset its activation timer). The state is only cleared when neither POSITION nor FALL
-			// is set.
-			return;
+		switch (getMoveRequest(getMovementMask())) {
+			case DIRECTION -> updateMovementModifierDirection();
+			case POINT -> setMovementModifierDirection(MovementModifierDirection.FORWARD);
+			case STOP -> onMovementStopped();
 		}
-		updateMovementModifierDirection();
+	}
+
+	/**
+	 * Only packets with both POSITION and MANUAL carry a new movement request. All others keep the current direction as long as the movement goes on
+	 * (POSITION) or the player is airborne (FALL), so neither turning in mid air nor a plain position update restarts the activation timer.
+	 */
+	static MoveRequest getMoveRequest(byte movementMask) {
+		if ((movementMask & MovementMask.POSITION) == MovementMask.POSITION && (movementMask & MovementMask.MANUAL) == MovementMask.MANUAL)
+			return (movementMask & MovementMask.ABSOLUTE) == MovementMask.ABSOLUTE ? MoveRequest.POINT : MoveRequest.DIRECTION;
+		if ((movementMask & MovementMask.POSITION) == 0 && (movementMask & MovementMask.FALL) == 0)
+			return MoveRequest.STOP;
+		return MoveRequest.CONTINUE;
+	}
+
+	enum MoveRequest {
+		/** Movement along a vector, classified relative to the own heading. */
+		DIRECTION,
+		/** Movement towards a clicked point, which always counts as forward. */
+		POINT,
+		CONTINUE,
+		STOP
 	}
 
 	public void resetToLastPositionFromClient() {
