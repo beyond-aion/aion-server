@@ -224,7 +224,7 @@ public class PlayerRestrictions {
 			return false;
 		}
 
-		if (!(target instanceof Creature creature) || creature.isDead() || creature.getLifeStats().isAboutToDie()) {
+		if (!(target instanceof Creature creature) || creature.isDead() || creature.getLifeStats().isAboutToDie() || !player.canTarget(creature)) {
 			PacketSendUtility.sendPacket(player, SM_ATTACK_RESPONSE.STOP_INVALID_TARGET(player.getGameStats().getAttackCounter()));
 			return false;
 		}
