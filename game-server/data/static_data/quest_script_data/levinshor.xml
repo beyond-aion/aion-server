@@ -121,10 +121,10 @@
 	<item_collecting id="23743" start_npc_ids="802353"/>
 	
 	<!-- REPORTING QUESTS -->
-	<report_to id="13700" start_npc_ids="800527" end_npc_ids="802350"/>
+	<report_to id="13700" start_npc_ids="804699" end_npc_ids="802350"/>
 	<report_to id="13701" start_npc_ids="798926" end_npc_ids="802350"/>
-	<report_to id="23700" start_npc_ids="800529" end_npc_ids="802353"/>
-	<report_to id="23701" start_npc_ids="800529" end_npc_ids="802353"/>
+	<report_to id="23700" start_npc_ids="804719" end_npc_ids="802353"/>
+	<report_to id="23701" start_npc_ids="799225" end_npc_ids="802353"/>
 	
 	<!-- HUNTING QUESTS -->
 	<monster_hunt id="13702" start_npc_ids="802350" end_npc_ids="802352" end_dialog_id="2375"/>

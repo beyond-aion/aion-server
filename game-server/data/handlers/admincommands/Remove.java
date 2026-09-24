@@ -36,7 +36,7 @@ public class Remove extends AdminCommand {
 		}
 
 		String itemString = params[1];
-		if (itemString.equals("[item:") && params.length >= 2) {
+		if (itemString.equals("[item:") && params.length > 2) {
 			// some item links have space before their ID
 			itemString += params[2];
 			if (params.length > 3) {

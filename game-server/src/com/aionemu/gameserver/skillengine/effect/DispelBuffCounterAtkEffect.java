@@ -25,8 +25,8 @@ public class DispelBuffCounterAtkEffect extends DamageEffect {
 	private int dispelLevel;
 
 	@Override
-	public int getCritProbMod2() {
-		return 0; // critProbMod2 is 100 by default but this effect type cannot crit
+	protected void resolveMagicalCritical(Effect effect) {
+		// this effect type deals its damage without the magical attack calculation, so it never crits and never decides the critical of other effects
 	}
 
 	@Override
@@ -55,5 +55,20 @@ public class DispelBuffCounterAtkEffect extends DamageEffect {
 	public void endEffect(Effect effect) {
 		effect.getEffected().getEffectController().resetDesignatedDispelEffect(effect);
 		super.endEffect(effect);
+	}
+
+	@Override
+	public boolean shouldUseKnowledge() {
+		return false;
+	}
+
+	@Override
+	public boolean shouldUseBoostSpellAttackEffects() {
+		return false;
+	}
+
+	@Override
+	public boolean shouldUseOneTimeBoostSkillAttack() {
+		return false;
 	}
 }

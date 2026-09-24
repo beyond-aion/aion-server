@@ -112,7 +112,7 @@ CREATE TABLE `bookmark` (
   `x` float NOT NULL,
   `y` float NOT NULL,
   `z` float NOT NULL,
-  PRIMARY KEY (`player_id`, `name`)
+  PRIMARY KEY (`player_id`, `name`),
 	CONSTRAINT `bookmark_ibfk_1` FOREIGN KEY (`player_id`) REFERENCES `players` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -377,6 +377,7 @@ CREATE TABLE `inventory` (
   `is_amplified` boolean NOT NULL DEFAULT '0',
   `buff_skill` int NOT NULL DEFAULT '0',
   `rnd_plume_bonus` smallint NOT NULL DEFAULT '0',
+  `rank_limit_expire_time` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`item_unique_id`),
   KEY `item_location` (`item_location`),
   KEY `index3` (`item_owner`,`item_location`,`is_equipped`)
@@ -659,6 +660,7 @@ CREATE TABLE `player_effects` (
   `remaining_time` int NOT NULL,
   `end_time` bigint NOT NULL,
   `force_type` varchar(255) DEFAULT NULL,
+  `magical_criticals` tinyint NOT NULL DEFAULT '0',
   PRIMARY KEY (`player_id`,`skill_id`),
   CONSTRAINT `player_effects_ibfk_1` FOREIGN KEY (`player_id`) REFERENCES `players` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

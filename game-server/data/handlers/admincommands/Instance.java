@@ -14,17 +14,13 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 public class Instance extends AdminCommand {
 
 	public Instance() {
-		super("instance", "Activates or deactivates registration for pvp instances.");
-
-		// @formatter:off
-			setSyntaxInfo(
-							"<open|close> dredgion - Opens/closes the registration for Dredgion (6vs6)",
-							"<open|close> id - Opens/closes the registration for Idgel Dome (6vs6)",
-							"<open|close> eob - Opens/closes the registration for Engulfed Ophidan Bridge (6vs6)",
-							"<open|close> kb - Opens/closes the registration for Kamar Battlefield (12vs12)",
-							"<open|close> iww - Opens/closes the registration for Iron Wall Warfront (24vs24)"
-			);
-			// @formatter:on
+		super("instance", "Activates or deactivates registration for pvp instances.", """
+			<open|close> dredgion - Opens/closes the registration for Dredgion (6vs6)
+			<open|close> id - Opens/closes the registration for Idgel Dome (6vs6)
+			<open|close> eob - Opens/closes the registration for Engulfed Ophidan Bridge (6vs6)
+			<open|close> kb - Opens/closes the registration for Kamar Battlefield (12vs12)
+			<open|close> iww - Opens/closes the registration for Iron Wall Warfront (24vs24)
+			""");
 	}
 
 	@Override

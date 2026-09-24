@@ -8,23 +8,19 @@ import com.aionemu.gameserver.model.stats.container.StatEnum;
  */
 public abstract class Stat2 {
 
-	float bonusRate;
-	float baseRate = 1f;
-	float base;
-	float bonus;
-	float fixedBonusRate;
-	private final Creature owner;
 	protected final StatEnum stat;
+	private final Creature owner;
+	float base;
+	float baseRate = 1f;
+	float bonus;
+	float bonusRate = 1f;
+	float fixedBonusRate;
+	float finalRate = 1f;
 
 	public Stat2(StatEnum stat, float base, Creature owner) {
-		this(stat, base, owner, 1);
-	}
-
-	public Stat2(StatEnum stat, float base, Creature owner, float bonusRate) {
 		this.stat = stat;
-		this.base = base;
 		this.owner = owner;
-		this.bonusRate = bonusRate;
+		this.base = base;
 	}
 
 	public final StatEnum getStat() {
@@ -66,15 +62,19 @@ public abstract class Stat2 {
 	}
 
 	public final int getCurrent() {
-		return (int) (base * baseRate + bonus * bonusRate + base * fixedBonusRate);
+		return (int) getExactCurrent();
 	}
 
 	public final float getExactCurrent() {
-		return base * baseRate + bonus * bonusRate + base * fixedBonusRate;
+		return (base * baseRate + bonus * bonusRate + base * fixedBonusRate) * finalRate;
+	}
+
+	public final float getExactCurrentWithoutBonus() {
+		return (base * baseRate + base * fixedBonusRate) * finalRate;
 	}
 
 	public final float getExactCurrentWithoutFixedBonus() {
-		return base * baseRate + bonus * bonusRate;
+		return (base * baseRate + bonus * bonusRate) * finalRate;
 	}
 
 	public final void setBonus(float bonus) {
@@ -97,6 +97,18 @@ public abstract class Stat2 {
 
 	public float getFixedBonusRate() {
 		return fixedBonusRate;
+	}
+
+	/**
+	 * Rate applied to the final value (base and bonus alike), meant for situational penalties which are not part of the stat itself, like the physical
+	 * defense loss while flying. Must be set after all stat functions have been applied, since caps are calculated without it.
+	 */
+	public final void setFinalRate(float finalRate) {
+		this.finalRate = finalRate;
+	}
+
+	public final float getFinalRate() {
+		return finalRate;
 	}
 
 	public abstract float calculatePercent(int delta);

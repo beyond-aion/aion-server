@@ -1,10 +1,10 @@
 package com.aionemu.commons.utils;
 
-import java.net.Inet4Address;
+import java.net.DatagramSocket;
 import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.net.SocketException;
 import java.nio.ByteBuffer;
+
+import org.slf4j.LoggerFactory;
 
 /**
  * @author KID, -Nemesiss-
@@ -12,16 +12,14 @@ import java.nio.ByteBuffer;
 public class NetworkUtils {
 
 	/**
-	 * @return The first matching non-loopback IPv4 address on this machine (meaning network reachable, so ignoring IPs like 127.0.0.1)
+	 * @return The outbound IPv4 address, or null if unavailable.
 	 */
 	public static InetAddress findLocalIPv4() {
-		try {
-			return NetworkInterface.networkInterfaces()
-														 .flatMap(NetworkInterface::inetAddresses)
-														 .filter(inetAddress -> inetAddress instanceof Inet4Address && !inetAddress.isLoopbackAddress() && !inetAddress.isMulticastAddress())
-														 .findFirst()
-														 .orElse(null);
-		} catch (SocketException ignored) {
+		try (DatagramSocket socket = new DatagramSocket()) {
+			socket.connect(InetAddress.getByAddress(new byte[] { 1, 1, 1, 1 }), 80);
+			return socket.getLocalAddress();
+		} catch (Exception e) {
+			LoggerFactory.getLogger(NetworkUtils.class).error("Could not find local IPv4 address", e);
 			return null;
 		}
 	}

@@ -29,14 +29,10 @@ public class Buy extends PlayerCommand {
 	private static final Map<Integer, Map<String, Integer>> rewards = new LinkedHashMap<>();
 
 	public Buy() {
-		super("buy", "Exchange your " + ChatUtil.item(REWARD_COIN_ID) + " for various rewards.");
-
-		// @formatter:off
-		setSyntaxInfo(
-			" - Shows all buyable rewards.",
-			"<item link|ID> - Buys the respective item."
-		);
-		// @formatter:on
+		super("buy", "Exchanges your " + ChatUtil.item(REWARD_COIN_ID) + " for various rewards.", """
+			 - Shows all rewards.
+			<item link|ID> - Buys the respective item.
+			""");
 		initRewards();
 	}
 

@@ -20,17 +20,13 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 public class State extends AdminCommand {
 
 	public State() {
-		super("state", "Views and adjusts your target's creature states.");
-
-		// @formatter:off
-		setSyntaxInfo(
-				" - Shows your target's creature states.",
-				"<state> - Sets given creature state(s) by name or ID, replacing existing states.",
-				"add <state> - Sets given creature state(s) by name or ID.",
-				"remove <state> - Removes given creature state(s) by name or ID. Use -1 to remove all states.",
-				"list - Shows possible state names and ID. Add ID values together to add or remove multiple states at once."
-		);
-		// @formatter:on
+		super("state", "Views and adjusts your target's creature states.", """
+				 - Shows your target's creature states.
+				<state> - Sets given creature state(s) by name or ID, replacing existing states.
+				add <state> - Sets given creature state(s) by name or ID.
+				remove <state> - Removes given creature state(s) by name or ID. Use -1 to remove all states.
+				list - Shows possible state names and ID. Add ID values together to add or remove multiple states at once.
+				""");
 	}
 
 	@Override
@@ -44,9 +40,8 @@ public class State extends AdminCommand {
 			PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_INVALID_TARGET());
 			return;
 		}
-
 		if (params.length == 0) {
-			sendInfo(admin, creature.getName() + "'s state: " + getStateDescription(creature.getState()) + "\nSee "+ ChatUtil.color(getAliasWithPrefix() + " help", Color.WHITE) + " for more options.");
+			sendInfo(admin, name(creature) + "'s state: " + getStateDescription(creature.getState()) + "\nSee "+ ChatUtil.color(getAliasWithPrefix() + " help", Color.WHITE) + " for more options.");
 		} else if ("list".equalsIgnoreCase(params[0])) {
 			sendInfo(admin, "Known states:\n\t" + Arrays.stream(CreatureState.values()).map(c -> c.name() + " (" + c.getId() + ')').collect(Collectors.joining("\n\t")));
 		} else {
@@ -83,7 +78,7 @@ public class State extends AdminCommand {
 			}
 			ThreadPoolManager.getInstance().schedule(() -> admin.setTarget(target), 200);
 
-			sendInfo(admin, creature.getName() + "'s state changed to " + getStateDescription(creature.getState()));
+			sendInfo(admin, name(creature) + "'s state changed to " + getStateDescription(creature.getState()));
 		}
 	}
 

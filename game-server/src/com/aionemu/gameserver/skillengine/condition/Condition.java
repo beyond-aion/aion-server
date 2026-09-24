@@ -25,6 +25,15 @@ public abstract class Condition implements StatCondition {
 	 */
 	public abstract boolean validate(Skill env);
 
+	/**
+	 * Checks whether {@link #validate(Skill)} would succeed, without paying anything.
+	 *
+	 * @return True, if the condition is met
+	 */
+	public boolean canValidate(Skill skill) {
+		return true;
+	}
+
 	@Override
 	public boolean validate(Stat2 stat, IStatFunction statFunction) {
 		return true;

@@ -512,10 +512,10 @@
 	<monster_hunt id="3538" start_npc_ids="204551"/>
 	<monster_hunt id="3541" start_npc_ids="204600"/>
 	<monster_hunt id="3543" start_npc_ids="204552"/>
-	<monster_hunt id="16902" start_npc_ids="258230" end_npc_ids="204612" end_dialog_id="2375"/>
-	<monster_hunt id="16903" start_npc_ids="258230" end_npc_ids="204656" end_dialog_id="2375"/>
-	<monster_hunt id="16907" start_npc_ids="258230" end_npc_ids="204500"/>
-	<monster_hunt id="16908" start_npc_ids="258230" end_npc_ids="204500"/>
+	<monster_hunt id="16902" start_npc_ids="204500" end_npc_ids="204612" end_dialog_id="2375"/>
+	<monster_hunt id="16903" start_npc_ids="204500" end_npc_ids="204656" end_dialog_id="2375"/>
+	<monster_hunt id="16907" start_npc_ids="204500"/>
+	<monster_hunt id="16908" start_npc_ids="204500"/>
 	<monster_hunt id="18605" start_npc_ids="205230"/>
 	<monster_hunt id="18606" start_npc_ids="205231"/>
 	<monster_hunt id="18617" start_npc_ids="205230"/>

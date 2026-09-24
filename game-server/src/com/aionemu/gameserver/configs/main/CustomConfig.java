@@ -244,6 +244,12 @@ public class CustomConfig {
 	public static boolean IGNORE_POTIONS_AT_FULL_HEALTH;
 
 	/**
+	 * Cancel a running item use when the player selects another target, as the retail server does
+	 */
+	@Property(key = "gameserver.items.cancel_use_on_target_change", defaultValue = "true")
+	public static boolean CANCEL_ITEM_USE_ON_TARGET_CHANGE;
+
+	/**
 	 * Custom Reward Packages
 	 */
 	@Property(key = "gameserver.custom.starter_kit.enable", defaultValue = "false")

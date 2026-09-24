@@ -17,14 +17,11 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 public class Zone extends AdminCommand {
 
 	public Zone() {
-		super("zone");
-
-		// @formatter:off
-		setSyntaxInfo(
-				"[zone name] - Shows info about your target's current zone(s) (default: all zones, optional: filtered by given zone name).",
-				"<refresh> - Refreshes your zones."
-		);
-		// @formatter:on
+		super("zone", "Shows zone information.", """
+				 - Shows info about your target's current zone(s).
+				<zone name> - Shows info about your target's current zone(s), filtered by the given zone name.
+				refresh - Refreshes your zones.
+				""");
 	}
 
 	@Override
@@ -42,11 +39,11 @@ public class Zone extends AdminCommand {
 		List<ZoneInstance> zones = findZones(target, zoneNameParam);
 		String zoneTypes = Arrays.stream(ZoneType.values()).filter(target::isInsideZoneType).map(ZoneType::name).collect(Collectors.joining(", "));
 		if (!zoneTypes.isEmpty())
-			sendInfo(admin, target.getName() + "'s zone types: " + zoneTypes);
+			sendInfo(admin, name(target) + "'s zone types: " + zoneTypes);
 		if (zones.isEmpty()) {
-			sendInfo(admin, target.getName() + " is not in " + (zoneNameParam == null ? "any zone" : zoneNameParam) + '.');
+			sendInfo(admin, name(target) + " is not in " + (zoneNameParam == null ? "any zone" : zoneNameParam) + '.');
 		} else {
-			sendInfo(admin, target.getName() + "'s " + (zones.size() == 1 ? "zone" : "zones") + ':');
+			sendInfo(admin, name(target) + "'s " + (zones.size() == 1 ? "zone" : "zones") + ':');
 			for (ZoneInstance zone : zones) {
 				sendInfo(admin, zone.getAreaTemplate().getZoneName().name());
 				sendInfo(admin, "Fly: " + zone.canFly() + "; Glide: " + zone.canGlide());

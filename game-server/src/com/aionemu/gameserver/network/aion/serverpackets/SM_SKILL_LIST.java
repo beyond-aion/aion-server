@@ -3,7 +3,6 @@ package com.aionemu.gameserver.network.aion.serverpackets;
 import java.util.Collections;
 import java.util.List;
 
-import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.skill.PlayerSkillEntry;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
@@ -31,7 +30,7 @@ public class SM_SKILL_LIST extends AionServerPacket {
 	public SM_SKILL_LIST(PlayerSkillEntry skill, int messageId) {
 		this.skillList = Collections.singletonList(skill);
 		this.messageId = messageId;
-		this.skillNameL10n = DataManager.SKILL_DATA.getSkillTemplate(skill.getSkillId()).getL10n();
+		this.skillNameL10n = skill.getSkillTemplate().getL10n();
 		this.skillLvl = String.valueOf(skill.getSkillLevel());
 	}
 

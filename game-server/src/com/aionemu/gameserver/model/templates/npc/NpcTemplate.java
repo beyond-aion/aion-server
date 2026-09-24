@@ -73,6 +73,9 @@ public class NpcTemplate extends CreatureTemplate {
 	@XmlAttribute(name = "cast_speed")
 	private int castSpeed = 1000;
 
+	@XmlAttribute(name = "cancel_level")
+	private int cancelLevel = 100;
+
 	@XmlAttribute(name = "flag_type")
 	private int flagType;
 
@@ -209,6 +212,10 @@ public class NpcTemplate extends CreatureTemplate {
 
 	public int getAttackRange() {
 		return attackRange;
+	}
+
+	public int getCancelLevel() {
+		return cancelLevel;
 	}
 
 	public int getCastSpeed() {

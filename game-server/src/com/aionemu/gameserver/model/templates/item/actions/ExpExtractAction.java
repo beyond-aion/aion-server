@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.model.templates.item.actions;
 
+import static com.aionemu.gameserver.model.items.ItemUseAnimation.*;
+
 import javax.xml.bind.annotation.XmlAttribute;
 
 import com.aionemu.gameserver.controllers.observer.ItemUseObserver;
@@ -47,49 +49,50 @@ public class ExpExtractAction extends AbstractItemAction {
 
 	@Override
 	public void act(final Player player, final Item parentItem, Item targetItem, Object... params) {
-		PacketSendUtility.sendPacket(player,
-			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), 5000, 0, 0));
+		int castingDelay = parentItem.getItemTemplate().getCastingDelay();
+		if (castingDelay <= 0) {
+			finishUse(player, parentItem);
+			return;
+		}
 
-		player.getController().cancelTask(TaskId.ITEM_USE);
+		PacketSendUtility.sendPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(),
+			parentItem.getItemTemplate().getTemplateId(), castingDelay, USE_START));
 
-		final ItemUseObserver observer = new ItemUseObserver() {
+		ItemUseObserver observer = new ItemUseObserver(player) {
 			@Override
-			public void abort() {
+			protected void onAbort() {
 				player.getController().cancelTask(TaskId.ITEM_USE);
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_CANCELED(parentItem.getL10n()));
 				PacketSendUtility.sendPacket(player,
-					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), 0, 2, 0));
-				player.getObserveController().removeObserver(this);
+					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), 0, USE_CANCEL));
 			}
 		};
 
-		player.getObserveController().attach(observer);
+		player.getObserveController().addObserver(observer);
 
-		player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(new Runnable() {
+		player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(() -> {
+			player.getObserveController().removeObserver(observer);
+			finishUse(player, parentItem);
+		}, castingDelay));
+	}
 
-			@Override
-			public void run() {
-				player.getObserveController().removeObserver(observer);
+	private void finishUse(Player player, Item parentItem) {
+		PlayerCommonData cd = player.getCommonData();
+		long requiredExp = getRequiredExp(cd);
+		long newExp = cd.getExp() - requiredExp;
+		if (!canExtractExp(player, newExp) || !player.getInventory().decreaseByItemId(parentItem.getItemId(), 1)) {
+			PacketSendUtility.sendPacket(player,
+				new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), 0, USE_FAIL));
+			return;
+		}
 
-				PlayerCommonData cd = player.getCommonData();
-				long requiredExp = getRequiredExp(cd);
-				long newExp = cd.getExp() - requiredExp;
-				if (!canExtractExp(player, newExp) || !player.getInventory().decreaseByItemId(parentItem.getItemId(), 1)) {
-					player.getController().cancelTask(TaskId.ITEM_USE);
-					PacketSendUtility.sendPacket(player,
-						new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(),
-							parentItem.getItemTemplate().getTemplateId(), 0, 2, 0));
-					return;
-				}
-
-				cd.setExp(newExp);
-				ItemService.addItem(player, itemId, 1);
-				String rewardItem = DataManager.ITEM_DATA.getItemTemplate(itemId).getL10n();
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EXP_EXTRACTION_USE(parentItem.getL10n(), requiredExp, rewardItem));
-				PacketSendUtility.sendPacket(player,
-					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), 0, 1, 0));
-			}
-		}, 5000));
+		player.startCooldown(parentItem);
+		cd.setExp(newExp);
+		ItemService.addItem(player, itemId, 1);
+		String rewardItem = DataManager.ITEM_DATA.getItemTemplate(itemId).getL10n();
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EXP_EXTRACTION_USE(parentItem.getL10n(), requiredExp, rewardItem));
+		PacketSendUtility.sendPacket(player,
+			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), 0, USE_SUCCESS));
 	}
 
 	private long getRequiredExp(PlayerCommonData cd) {

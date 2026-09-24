@@ -25,7 +25,7 @@ public class ItemActions {
 		@XmlElement(name = "housedeco", type = DecorateAction.class), @XmlElement(name = "assemble", type = AssemblyItemAction.class),
 		@XmlElement(name = "adoptpet", type = AdoptPetAction.class), @XmlElement(name = "apextract", type = ApExtractAction.class),
 		@XmlElement(name = "remodel", type = RemodelAction.class), @XmlElement(name = "expextract", type = ExpExtractAction.class),
-		@XmlElement(name = "polish", type = PolishAction.class), @XmlElement(name = "composition", type = CompositionAction.class),
+		@XmlElement(name = "polish", type = PolishAction.class),
 		@XmlElement(name = "tuning", type = TuningAction.class), @XmlElement(name = "megaphone", type = MegaphoneAction.class),
 		@XmlElement(name = "pack", type = PackAction.class), @XmlElement(name = "tampering", type = TamperingAction.class),
 		@XmlElement(name = "multireturn", type = MultiReturnAction.class) })

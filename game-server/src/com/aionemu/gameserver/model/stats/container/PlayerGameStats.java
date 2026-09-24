@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.model.stats.container;
 
-import org.apache.commons.lang3.ArrayUtils;
+import java.util.Set;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.configs.main.CustomConfig;
@@ -83,11 +83,9 @@ public class PlayerGameStats extends CreatureGameStats<Player> {
 	}
 
 	@Override
-	public Stat2 getAttackSpeed() {
+	public int getBaseAttackSpeed() {
 		int base = 1500;
-		Equipment equipment = owner.getEquipment();
-		Item mainHandWeapon = equipment.getMainHandWeapon();
-
+		Item mainHandWeapon = owner.getEquipment().getMainHandWeapon();
 		if (mainHandWeapon != null) {
 			base = mainHandWeapon.getItemTemplate().getWeaponStats().getAttackSpeed();
 			Item offWeapon = owner.getEquipment().getOffHandWeapon();
@@ -96,7 +94,7 @@ public class PlayerGameStats extends CreatureGameStats<Player> {
 			if (offWeapon != null)
 				base += offWeapon.getItemTemplate().getWeaponStats().getAttackSpeed() / 4;
 		}
-		return getStat(StatEnum.ATTACK_SPEED, base);
+		return base;
 	}
 
 	@Override
@@ -150,89 +148,89 @@ public class PlayerGameStats extends CreatureGameStats<Player> {
 	}
 
 	@Override
-	public Stat2 getMainHandPAttack(CalculationType... calculationTypes) {
-		calculationTypes = ArrayUtils.add(calculationTypes, CalculationType.MAIN_HAND);
+	public Stat2 getMainHandPAttack(Set<CalculationType> calculationTypes) {
 		float base = getStatsTemplate().getAttack();
 		Equipment equipment = owner.getEquipment();
 		Item mainHandWeapon = equipment.getMainHandWeapon();
 		if (mainHandWeapon != null) {
 			if (mainHandWeapon.getItemTemplate().getAttackType().isMagical())
-				return new AdditionStat(StatEnum.MAIN_HAND_POWER, 0, owner);
-			if (ArrayUtils.contains(calculationTypes, CalculationType.DISPLAY)) {
+				return new AdditionStat(StatEnum.PHYSICAL_ATTACK, 0, owner);
+			if (calculationTypes.contains(CalculationType.DISPLAY)) {
 				base = mainHandWeapon.getItemTemplate().getWeaponStats().getMeanDamage();
 			} else {
 				base = Rnd.get(mainHandWeapon.getItemTemplate().getWeaponStats().getMinDamage(),
 						mainHandWeapon.getItemTemplate().getWeaponStats().getMaxDamage());
 			}
-			if (ArrayUtils.contains(calculationTypes, CalculationType.APPLY_POWER_SHARD_DAMAGE)) {
-				base += getPowerShardDamage(true, ArrayUtils.contains(calculationTypes, CalculationType.REMOVE_POWER_SHARD));
+			if (calculationTypes.contains(CalculationType.APPLY_POWER_SHARD_DAMAGE)) {
+				base += getPowerShardDamage(true, calculationTypes.contains(CalculationType.REMOVE_POWER_SHARD));
 			}
 		}
-		Stat2 stat = getStat(StatEnum.PHYSICAL_ATTACK, base, calculationTypes);
-		calculationTypes = ArrayUtils.removeElement(calculationTypes, CalculationType.MAIN_HAND);
-		return getStat(StatEnum.MAIN_HAND_POWER, stat, calculationTypes);
+		Stat2 stat = getStat(StatEnum.PHYSICAL_ATTACK, base, copyWith(calculationTypes, CalculationType.MAIN_HAND));
+		return applyStatFunctions(StatEnum.MAIN_HAND_POWER, stat, calculationTypes);
 	}
 
-	public Stat2 getOffHandPAttack(CalculationType... calculationTypes) {
+	public final Stat2 getOffHandPAttack(CalculationType... calculationTypes) {
+		return getOffHandPAttack(toSet(calculationTypes));
+	}
+
+	public Stat2 getOffHandPAttack(Set<CalculationType> calculationTypes) {
 		Equipment equipment = owner.getEquipment();
 		Item offHandWeapon = equipment.getOffHandWeapon();
 		if (offHandWeapon != null && !offHandWeapon.equals(equipment.getMainHandWeapon()) && offHandWeapon.getItemTemplate().isWeapon()) {
-			calculationTypes = ArrayUtils.add(calculationTypes, CalculationType.OFF_HAND);
 			float base;
-			if (ArrayUtils.contains(calculationTypes, CalculationType.DISPLAY)) {
+			if (calculationTypes.contains(CalculationType.DISPLAY)) {
 				base = offHandWeapon.getItemTemplate().getWeaponStats().getMeanDamage();
 			} else {
 				base = Rnd.get(offHandWeapon.getItemTemplate().getWeaponStats().getMinDamage(),
 						offHandWeapon.getItemTemplate().getWeaponStats().getMaxDamage());
 			}
-			if (ArrayUtils.contains(calculationTypes, CalculationType.APPLY_POWER_SHARD_DAMAGE))
-				base += getPowerShardDamage(false, ArrayUtils.contains(calculationTypes, CalculationType.REMOVE_POWER_SHARD));
-			Stat2 stat = getStat(StatEnum.PHYSICAL_ATTACK, base, calculationTypes);
-			if (ArrayUtils.contains(calculationTypes, CalculationType.DISPLAY)) {
+			if (calculationTypes.contains(CalculationType.APPLY_POWER_SHARD_DAMAGE))
+				base += getPowerShardDamage(false, calculationTypes.contains(CalculationType.REMOVE_POWER_SHARD));
+			Stat2 stat = getStat(StatEnum.PHYSICAL_ATTACK, base, copyWith(calculationTypes, CalculationType.OFF_HAND));
+			if (calculationTypes.contains(CalculationType.DISPLAY)) {
 				stat.setBaseRate(stat.getBaseRate() * getOffHandDamageRatio());
 				stat.setBonusRate(stat.getBonusRate() * getOffHandDamageRatio());
 			}
-			calculationTypes = ArrayUtils.removeElement(calculationTypes, CalculationType.OFF_HAND);
-			return getStat(StatEnum.OFF_HAND_POWER, stat, calculationTypes);
+			return applyStatFunctions(StatEnum.OFF_HAND_POWER, stat, calculationTypes);
 		}
-		return new AdditionStat(StatEnum.OFF_HAND_POWER, 0, owner);
+		return new AdditionStat(StatEnum.PHYSICAL_ATTACK, 0, owner);
 	}
 
 	@Override
-	public Stat2 getMainHandMAttack(CalculationType... calculationTypes) {
-		calculationTypes = ArrayUtils.add(calculationTypes, CalculationType.MAIN_HAND);
+	public Stat2 getMainHandMAttack(Set<CalculationType> calculationTypes) {
 		float base = getStatsTemplate().getMagicalAttack();
 		Equipment equipment = owner.getEquipment();
 		Item mainHandWeapon = equipment.getMainHandWeapon();
 		if (mainHandWeapon != null) {
 			if (!mainHandWeapon.getItemTemplate().getAttackType().isMagical())
-				return new AdditionStat(StatEnum.MAIN_HAND_POWER, 0, owner);
+				return new AdditionStat(StatEnum.MAGICAL_ATTACK, 0, owner);
 			base = mainHandWeapon.getItemTemplate().getWeaponStats().getMeanDamage();
-			if (ArrayUtils.contains(calculationTypes, CalculationType.APPLY_POWER_SHARD_DAMAGE))
-				base += getPowerShardDamage(true, ArrayUtils.contains(calculationTypes, CalculationType.REMOVE_POWER_SHARD));
+			if (calculationTypes.contains(CalculationType.APPLY_POWER_SHARD_DAMAGE))
+				base += getPowerShardDamage(true, calculationTypes.contains(CalculationType.REMOVE_POWER_SHARD));
 		}
-		Stat2 stat = getStat(StatEnum.MAGICAL_ATTACK, base, calculationTypes);
-		calculationTypes = ArrayUtils.removeElement(calculationTypes, CalculationType.MAIN_HAND);
-		return getStat(StatEnum.MAIN_HAND_POWER, stat, calculationTypes);
+		Stat2 stat = getStat(StatEnum.MAGICAL_ATTACK, base, copyWith(calculationTypes, CalculationType.MAIN_HAND));
+		return applyStatFunctions(StatEnum.MAIN_HAND_POWER, stat, calculationTypes);
 	}
 
-	public Stat2 getOffHandMAttack(CalculationType... calculationTypes) {
+	public final Stat2 getOffHandMAttack(CalculationType... calculationTypes) {
+		return getOffHandMAttack(toSet(calculationTypes));
+	}
+
+	public Stat2 getOffHandMAttack(Set<CalculationType> calculationTypes) {
 		Equipment equipment = owner.getEquipment();
 		Item offHandWeapon = equipment.getOffHandWeapon();
 		if (offHandWeapon != null && !offHandWeapon.equals(equipment.getMainHandWeapon()) && offHandWeapon.getItemTemplate().isWeapon()) {
-			calculationTypes = ArrayUtils.add(calculationTypes, CalculationType.OFF_HAND);
 			float base = offHandWeapon.getItemTemplate().getWeaponStats().getMeanDamage();
-			if (ArrayUtils.contains(calculationTypes, CalculationType.APPLY_POWER_SHARD_DAMAGE))
-				base += getPowerShardDamage(false, ArrayUtils.contains(calculationTypes, CalculationType.REMOVE_POWER_SHARD));
-			Stat2 stat = getStat(StatEnum.MAGICAL_ATTACK, base, calculationTypes);
-			if (ArrayUtils.contains(calculationTypes, CalculationType.DISPLAY)) {
+			if (calculationTypes.contains(CalculationType.APPLY_POWER_SHARD_DAMAGE))
+				base += getPowerShardDamage(false, calculationTypes.contains(CalculationType.REMOVE_POWER_SHARD));
+			Stat2 stat = getStat(StatEnum.MAGICAL_ATTACK, base, copyWith(calculationTypes, CalculationType.OFF_HAND));
+			if (calculationTypes.contains(CalculationType.DISPLAY)) {
 				stat.setBaseRate(stat.getBaseRate() * getOffHandDamageRatio());
 				stat.setBonusRate(stat.getBonusRate() * getOffHandDamageRatio());
 			}
-			calculationTypes = ArrayUtils.removeElement(calculationTypes, CalculationType.OFF_HAND);
-			return getStat(StatEnum.OFF_HAND_POWER, stat, calculationTypes);
+			return applyStatFunctions(StatEnum.OFF_HAND_POWER, stat, calculationTypes);
 		}
-		return new AdditionStat(StatEnum.OFF_HAND_POWER, 0, owner);
+		return new AdditionStat(StatEnum.MAGICAL_ATTACK, 0, owner);
 	}
 
 	@Override
@@ -247,15 +245,15 @@ public class PlayerGameStats extends CreatureGameStats<Player> {
 	}
 
 	public Stat2 getOffHandPCritical() {
-		int base = getStatsTemplate().getPcrit();
 		Equipment equipment = owner.getEquipment();
 		Item offHandWeapon = equipment.getOffHandWeapon();
 		if (offHandWeapon != null && !offHandWeapon.equals(equipment.getMainHandWeapon()) && offHandWeapon.getItemTemplate().isWeapon()
 			&& !offHandWeapon.getItemTemplate().getAttackType().isMagical()) {
+			int base = getStatsTemplate().getPcrit();
 			base += offHandWeapon.getItemTemplate().getWeaponStats().getCritical();
 			return getStat(StatEnum.PHYSICAL_CRITICAL, base);
 		}
-		return new AdditionStat(StatEnum.OFF_HAND_CRITICAL, 0, owner);
+		return new AdditionStat(StatEnum.PHYSICAL_CRITICAL, 0, owner);
 	}
 
 	@Override
@@ -276,7 +274,7 @@ public class PlayerGameStats extends CreatureGameStats<Player> {
 			base += offHandWeapon.getItemTemplate().getWeaponStats().getPhysicalAccuracy();
 			return getStat(StatEnum.PHYSICAL_ACCURACY, base);
 		}
-		return new AdditionStat(StatEnum.OFF_HAND_ACCURACY, 0, owner);
+		return new AdditionStat(StatEnum.PHYSICAL_ACCURACY, 0, owner);
 	}
 
 	@Override

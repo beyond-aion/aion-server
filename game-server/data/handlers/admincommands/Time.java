@@ -13,15 +13,11 @@ import com.aionemu.gameserver.utils.time.gametime.GameTime;
 public class Time extends AdminCommand {
 
 	public Time() {
-		super("time", "Changes the game time.");
-
-		// @formatter:off
-		setSyntaxInfo(
-			"<dawn|day|dusk|night> - Sets the specified day time.",
-			"<0-23> - Sets the specified hour.",
-			"<0-23> <0-59> - Sets the specified hour and minute."
-		);
-		// @formatter:on
+		super("time", "Changes the game time.", """
+			<dawn|day|dusk|night> - Sets the specified day time.
+			<0-23> - Sets the specified hour.
+			<0-23> <0-59> - Sets the specified hour and minute.
+			""");
 	}
 
 	@Override
@@ -41,18 +37,17 @@ public class Time extends AdminCommand {
 		} else if (params[0].equalsIgnoreCase("dawn")) {
 			hour = 4;
 		} else {
-			try {
-				hour = Integer.parseInt(params[0]);
-				if (hour < 0 || hour > 23)
-					throw new IllegalArgumentException("A day has only 24 hours!\nMin value: 0 - Max value: 23");
-				if (params.length == 2) {
-					minute = Integer.parseInt(params[1]);
-					if (minute < 0 || minute > 59)
-						throw new IllegalArgumentException("An hour has only 60 minutes!\nMin value: 0 - Max value: 59");
-				}
-			} catch (IllegalArgumentException e) {
-				sendInfo(admin, e.getClass() == IllegalArgumentException.class ? e.getMessage() : null); // default info for NumberFormatException
+			hour = Integer.parseInt(params[0]);
+			if (hour < 0 || hour > 23) {
+				sendInfo(admin, "Hour must be between 0 and 23.");
 				return;
+			}
+			if (params.length == 2) {
+				minute = Integer.parseInt(params[1]);
+				if (minute < 0 || minute > 59) {
+					sendInfo(admin, "Minute must be between 0 and 59.");
+					return;
+				}
 			}
 		}
 

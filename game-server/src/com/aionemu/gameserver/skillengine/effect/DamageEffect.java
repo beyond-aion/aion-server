@@ -39,13 +39,15 @@ public abstract class DamageEffect extends EffectTemplate {
 		effect.getEffected().getController().onAttack(effect, type, effect.getReserveds(this.position).getValue(), true, log, hopType);
 	}
 
-	@SuppressWarnings("lossy-conversions")
+	@Override
+	protected void resolveMagicalCritical(Effect effect) {
+		if (element != SkillElement.NONE && effect.getSkillTemplate().isApplyMagicalCritical())
+			effect.rollMagicalCritical(position, calculateCritProbMod(effect));
+	}
+
 	@Override
 	public void calculateDamage(Effect effect) {
 		int valueWithDelta = calculateBaseValue(effect);
-		if (element != SkillElement.NONE)
-			valueWithDelta *= effect.getEffector().getGameStats().getKnowledge().getCurrent() / 100f;
-
 		AttackUtil.calculateSkillResult(effect, valueWithDelta, this, false);
 	}
 
@@ -76,6 +78,22 @@ public abstract class DamageEffect extends EffectTemplate {
 	 *         {@code false} otherwise
 	 */
 	public boolean shouldApplyAttackerMovementModifier() {
+		return true;
+	}
+
+	public boolean shouldApplyMagicalSkillBoostBonus(Effect effect) {
+		return effect.getSkillTemplate().isApplyMagicalSkillBoostBonus();
+	}
+
+	public boolean shouldUseKnowledge() {
+		return true;
+	}
+
+	public boolean shouldUseBoostSpellAttackEffects() {
+		return true;
+	}
+
+	public boolean shouldUseOneTimeBoostSkillAttack() {
 		return true;
 	}
 }

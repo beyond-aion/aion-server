@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.model.templates.item.actions;
 
+import static com.aionemu.gameserver.model.items.ItemUseAnimation.*;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
@@ -41,26 +43,28 @@ public class ExtractAction extends AbstractItemAction {
 
 	@Override
 	public void act(Player player, Item parentItem, Item targetItem, Object... params) {
-		PacketSendUtility.sendPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate()
-			.getTemplateId(), 5000, 0, 0));
-		player.getController().cancelTask(TaskId.ITEM_USE);
-		ItemUseObserver observer = new ItemUseObserver() {
+		PacketSendUtility.sendPacket(player,
+			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), 5000, USE_START));
+		ItemUseObserver observer = new ItemUseObserver(player) {
 
 			@Override
-			public void abort() {
+			protected void onAbort() {
 				player.getController().cancelTask(TaskId.ITEM_USE);
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_CANCELED(targetItem.getL10n()));
-				PacketSendUtility.sendPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate()
-					.getTemplateId(), 0, 2, 0));
-				player.getObserveController().removeObserver(this);
+				PacketSendUtility.sendPacket(player,
+					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), 0, USE_CANCEL));
 			}
 		};
-		player.getObserveController().attach(observer);
+		player.getObserveController().addObserver(observer);
 		player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(() -> {
 			player.getObserveController().removeObserver(observer);
-			boolean result = EnchantService.breakItem(player, targetItem, parentItem);
-			PacketSendUtility.sendPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate()
-				.getTemplateId(), 0, result ? 1 : 2, 0));
+			boolean result = canAct(player, parentItem, targetItem) && EnchantService.breakItem(player, targetItem, parentItem);
+			if (result)
+				// The only item with an extract action has no use delay, so this is effectively
+				// a no-op, but kept for consistency with the other actions.
+				player.startCooldown(parentItem);
+			PacketSendUtility.sendPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(),
+				parentItem.getItemTemplate().getTemplateId(), 0, result ? USE_SUCCESS : USE_FAIL));
 		}, 5000));
 	}
 

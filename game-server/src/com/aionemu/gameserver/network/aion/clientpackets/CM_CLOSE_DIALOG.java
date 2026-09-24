@@ -6,6 +6,7 @@ import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_LOOKATOBJECT;
 import com.aionemu.gameserver.services.DialogService;
 
 public class CM_CLOSE_DIALOG extends AionClientPacket {
@@ -28,6 +29,9 @@ public class CM_CLOSE_DIALOG extends AionClientPacket {
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
 		VisibleObject target = player.getKnownList().getObject(targetObjectId);
+		if (target == null)
+			return;
 		DialogService.onCloseDialog(player, target);
+		sendPacket(new SM_LOOKATOBJECT(target));
 	}
 }
