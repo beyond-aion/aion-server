@@ -193,6 +193,21 @@ public abstract class EffectTemplate {
 	}
 
 	/**
+	 * Effects conflict when they share an effect id. Effects of a type a creature can only hold once (like shields or reflectors) also conflict with
+	 * any other effect of their type, and some other types (like stuns, snares or hide) do so within the same target slot.
+	 * 
+	 * @param sameSlot whether both effects occupy the same target slot
+	 * @return True if this effect and {@code other} cannot be active on the same creature at the same time.
+	 */
+	public boolean conflictsWith(EffectTemplate other, boolean sameSlot) {
+		if (effectid != 0 && effectid == other.effectid)
+			return true;
+		if (getClass() != other.getClass())
+			return false;
+		return Effects.isOnePerCreature(this) || sameSlot && Effects.isOnePerSlot(this);
+	}
+
+	/**
 	 * @return the critAddDmg1
 	 */
 	public int getCritAddDmg1() {
@@ -312,8 +327,7 @@ public abstract class EffectTemplate {
 		}
 		resolveMagicalCritical(effect);
 		if (!isForcedEffect && isDodgedOrResisted(effect, statEnum)) {
-			if (getPosition() != 1 && !(effect.effectInPos(1) instanceof DamageEffect))
-				effect.getSuccessEffects().clear();
+			effect.setResisted();
 			return false;
 		}
 		addSuccessEffect(effect, spellStatus);

@@ -11,18 +11,18 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 /**
  * @author kecimis
  */
-public class DelayedFpAtkInstantEffect extends EffectTemplate {
+public class DelayedFpAtkInstantEffect extends EffectTemplate implements DelayedAttackEffect {
 
 	@XmlAttribute
 	protected int delay;
+	@XmlAttribute(name = "delaydelta")
+	protected int delayDelta;
 	@XmlAttribute
 	protected boolean percent;
 
 	@Override
 	public void calculate(Effect effect) {
-		// Only players have FP
-		if (effect.getEffected() instanceof Player)
-			super.calculate(effect, null, null);
+		super.calculate(effect, null, null);
 	}
 
 	@Override
@@ -33,14 +33,18 @@ public class DelayedFpAtkInstantEffect extends EffectTemplate {
 			public void run() {
 				calculateAndApplyDamage(effect);
 			}
-		}, delay);
+		}, getRemainingDelay(effect));
+	}
+
+	@Override
+	public int getDelay(int skillLevel) {
+		return DelayedAttackEffect.calculateDelay(delay, delayDelta, skillLevel);
 	}
 
 	private void calculateAndApplyDamage(Effect effect) {
-		if (!effect.getEffector().isEnemy(effect.getEffected()))
+		if (!(effect.getEffected() instanceof Player player) || !effect.getEffector().isEnemy(player))
 			return;
 		int valueWithDelta = calculateBaseValue(effect);
-		Player player = (Player) effect.getEffected();
 		int maxFP = player.getLifeStats().getMaxFp();
 
 		int newValue = valueWithDelta;

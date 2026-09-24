@@ -80481,8 +80481,8 @@
 		</useconditions>
 		<effects>
 			<snare duration2="10000" duration1="10000" effectid="20007" e="1" accmod2="100" element="FIRE">
-				<change stat="SPEED" func="PERCENT" delta="10" value="0" />
-				<change stat="FLY_SPEED" func="PERCENT" value="0" />
+				<change stat="SPEED" func="PERCENT" delta="-10" value="0" />
+				<change stat="FLY_SPEED" func="PERCENT" delta="-10" value="0" />
 			</snare>
 		</effects>
 		<motion name="normalfire" />
@@ -84608,8 +84608,8 @@
 				<change stat="ATTACK_SPEED" func="PERCENT" delta="5" value="0" />
 			</slow>
 			<snare duration1="300000" effectid="20007" e="2" noresist="true" element="FIRE" preeffect="1" preeffect_prob="10">
-				<change stat="SPEED" func="PERCENT" delta="5" value="0" />
-				<change stat="FLY_SPEED" func="PERCENT" value="0" />
+				<change stat="SPEED" func="PERCENT" delta="-5" value="0" />
+				<change stat="FLY_SPEED" func="PERCENT" delta="-5" value="0" />
 			</snare>
 		</effects>
 		<motion name="normalfire" />
@@ -103380,8 +103380,8 @@
 		</useconditions>
 		<effects>
 			<snare duration2="6000" e="1" noresist="true" element="EARTH">
-				<change stat="SPEED" func="ADD" delta="10000" value="0" />
-				<change stat="FLY_SPEED" func="ADD" value="0" />
+				<change stat="SPEED" func="ADD" delta="-10000" value="0" />
+				<change stat="FLY_SPEED" func="ADD" delta="-10000" value="0" />
 			</snare>
 		</effects>
 		<motion name="pointfire3" />
@@ -119609,8 +119609,8 @@
 		</useconditions>
 		<effects>
 			<snare duration2="5000" effectid="20007" e="1" element="WATER">
-				<change stat="SPEED" func="PERCENT" delta="10" value="-40" />
-				<change stat="FLY_SPEED" func="PERCENT" value="-40" />
+				<change stat="SPEED" func="PERCENT" delta="-10" value="-40" />
+				<change stat="FLY_SPEED" func="PERCENT" delta="-10" value="-40" />
 			</snare>
 		</effects>
 		<motion name="poweratk" />
@@ -122331,7 +122331,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<delaydamage delay="20000" value="125" e="1" element="FIRE" />
+			<delaydamage delay="20000" delaydelta="400" value="125" e="1" element="FIRE" />
 			<spellatk checktime="2000" value="10" delta="1" duration2="8100" duration1="200" effectid="80001" e="2" noresist="true" element="FIRE" preeffect="1" hoptype="DAMAGE" />
 		</effects>
 		<motion name="pointfire" />
@@ -123476,7 +123476,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<delaydamage delay="20000" value="125" e="1" element="FIRE" />
+			<delaydamage delay="20000" delaydelta="400" value="125" e="1" element="FIRE" />
 			<spellatk checktime="2000" value="10" delta="1" duration2="8100" duration1="200" effectid="80001" e="2" noresist="true" element="FIRE" preeffect="1" hoptype="DAMAGE" />
 		</effects>
 		<motion name="poweratk" />
@@ -124474,7 +124474,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<delaydamage delay="20000" value="10" e="1" element="WATER" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<delaydamage delay="20000" delaydelta="400" value="10" e="1" element="WATER" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<confuse duration2="3000" duration1="60" effectid="20104" e="2" noresist="true" element="WATER" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<deform model="286079" duration2="3000" duration1="60" effectid="175" e="3" noresist="true" element="WATER" preeffect="2" hoptype="SKILLLV" hopb="60" hopa="60" />
 		</effects>
@@ -126016,7 +126016,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<delaydamage delay="20000" value="10" e="1" element="WATER" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<delaydamage delay="20000" delaydelta="400" value="10" e="1" element="WATER" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<confuse duration2="3000" duration1="60" effectid="20104" e="2" noresist="true" element="WATER" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<deform model="207006" duration2="3000" duration1="60" effectid="175" e="3" noresist="true" element="WATER" preeffect="2" hoptype="SKILLLV" hopb="60" hopa="60" />
 		</effects>
@@ -126294,7 +126294,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<delaydamage delay="4000" value="100" e="1" element="FIRE" hoptype="DAMAGE" />
+			<delaydamage delay="4000" delaydelta="300" value="100" e="1" element="FIRE" hoptype="DAMAGE" />
 		</effects>
 		<motion name="pointfire" />
 	</skill_template>

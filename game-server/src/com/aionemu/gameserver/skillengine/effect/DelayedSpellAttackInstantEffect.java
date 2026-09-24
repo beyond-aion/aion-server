@@ -16,10 +16,12 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "DelayedSpellAttackInstantEffect")
-public class DelayedSpellAttackInstantEffect extends DamageEffect {
+public class DelayedSpellAttackInstantEffect extends DamageEffect implements DelayedAttackEffect {
 
 	@XmlAttribute
 	protected int delay;
+	@XmlAttribute(name = "delaydelta")
+	protected int delayDelta;
 
 	@Override
 	public void applyEffect(Effect effect) {
@@ -31,7 +33,12 @@ public class DelayedSpellAttackInstantEffect extends DamageEffect {
 				effect.getEffected().getController().onAttack(effect, TYPE.DELAYDAMAGE, effect.getReserveds(finalPosition).getValue(), true,
 					LOG.DELAYEDSPELLATKINSTANT, hopType);
 				effect.getEffector().getObserveController().notifyAttackObservers(effect.getEffected(), effect.getSkillId());
-		}, delay);
+		}, getRemainingDelay(effect));
+	}
+
+	@Override
+	public int getDelay(int skillLevel) {
+		return DelayedAttackEffect.calculateDelay(delay, delayDelta, skillLevel);
 	}
 
 	@Override

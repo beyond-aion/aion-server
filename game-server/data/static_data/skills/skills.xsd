@@ -789,6 +789,7 @@
 		<xs:complexContent>
 			<xs:extension base="DamageEffect">
 				<xs:attribute name="delay" type="xs:int" use="required" />
+				<xs:attribute name="delaydelta" type="xs:int" />
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
@@ -1343,6 +1344,7 @@
 			<xs:extension base="Effect">
 				<xs:attribute name="percent" type="xs:boolean" />
 				<xs:attribute name="delay" type="xs:int" />
+				<xs:attribute name="delaydelta" type="xs:int" />
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>

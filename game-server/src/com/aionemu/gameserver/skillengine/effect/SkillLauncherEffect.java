@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.model.Effect;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * @author ATracer
@@ -20,7 +21,10 @@ public class SkillLauncherEffect extends EffectTemplate {
 
 	@Override
 	public void applyEffect(Effect effect) {
-		SkillEngine.getInstance().applyEffect(skillId, effect.getEffector(), effect.getEffected());
+		ThreadPoolManager.getInstance().schedule(() -> {
+			if (effect.getEffector().isSpawned() && !effect.getEffector().isDead())
+				SkillEngine.getInstance().applyEffect(skillId, effect.getEffector(), effect.getEffected());
+		}, 50); // the minimum delay on retail is 50 ms, and it is also controlled by the reserved3/4 params, but they are 0 in all 4.8 skills
 	}
 
 	@Override

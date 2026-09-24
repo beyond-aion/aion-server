@@ -64,13 +64,13 @@ public class EffectController {
 
 		if (useEffectId) {
 			// idea here is that effects with same effectId shouldn't stack, effect with higher basic lvl takes priority
-			if (searchConflict(mapToUpdate, nextEffect)) {
+			if (searchConflict(mapToUpdate, nextEffect, true)) {
 				if (!nextEffect.isPassive() && nextEffect.getTargetSlot() != SkillTargetSlot.DEBUFF)
 					nextEffect.setEffectResult(EffectResult.CONFLICT);
 				return;
 			}
 		}
-		endConflictedEffect(mapToUpdate, nextEffect);
+		endConflictedEffect(mapToUpdate, nextEffect, true);
 		checkEffectCooldownId(nextEffect);
 
 		// max 3 aura effects or 1 toggle skill in noshoweffects
@@ -93,11 +93,34 @@ public class EffectController {
 				chants.getFirst().endEffect();
 		}
 		put(mapToUpdate, nextEffect);
+		nextEffect.setSlotStarted();
 
 		nextEffect.startEffect();
 
 		if (!nextEffect.isPassive())
-			broadCastEffects(nextEffect);
+			broadCastEffects(nextEffect.getTargetSlot().getId() | nextEffect.getUnbroadcastSlots());
+	}
+
+	/**
+	 * Takes the place an effect will occupy once it lands, so that the list follows the order casts ended. Effects it conflicts with end right away
+	 * without an effect list broadcast, so the effected is free of them until the reserved effect lands.
+	 * 
+	 * @return False if an existing effect prevails, so no place was taken.
+	 */
+	public boolean reserveSlot(Effect effect) {
+		if (!effect.isSlotReserved())
+			throw new IllegalArgumentException("Effect " + effect.getStack() + " is not set to reserve a slot.");
+		Map<String, Effect> mapToUpdate = getMapForEffect(effect);
+		if (searchConflict(mapToUpdate, effect, false))
+			return false;
+		endConflictedEffect(mapToUpdate, effect, false);
+		long stamp = lock.writeLock();
+		try {
+			mapToUpdate.putIfAbsent(effect.getStack(), effect);
+		} finally {
+			lock.unlockWrite(stamp);
+		}
+		return true;
 	}
 
 	protected final void put(Effect nextEffect) {
@@ -113,38 +136,40 @@ public class EffectController {
 		}
 	}
 
-	private void endConflictedEffect(Map<String, Effect> effectMap, Effect newEffect) {
+	private void endConflictedEffect(Map<String, Effect> effectMap, Effect newEffect, boolean broadcast) {
 		int conflictId = newEffect.getSkillTemplate().getConflictId();
 		if (conflictId == 0)
 			return;
 		Effect effectToEnd = findFirstEffect(effectMap, effect -> effect.getSkillTemplate().getConflictId() == conflictId);
-		if (effectToEnd != null)
-			effectToEnd.endEffect();
+		if (effectToEnd != null) {
+			if (!broadcast)
+				newEffect.addUnbroadcastSlot(effectToEnd.getTargetSlot());
+			effectToEnd.endEffect(broadcast);
+		}
 	}
 
-	private boolean searchConflict(Map<String, Effect> mapToUpdate, Effect nextEffect) {
-		if (checkExtraEffect(mapToUpdate, nextEffect))
+	/**
+	 * @param broadcast whether ending an effect of another target slot broadcasts the effect list, the slot of {@code nextEffect} is broadcast when it
+	 *          is added
+	 */
+	private boolean searchConflict(Map<String, Effect> mapToUpdate, Effect nextEffect, boolean broadcast) {
+		if (checkExtraEffect(mapToUpdate, nextEffect, broadcast))
 			return false;
-		Effect effectToEnd = null;
+		List<Effect> effectsToEnd = new ArrayList<>();
 		long stamp = lock.readLock();
 		try {
-			mainLoop:
+			effectLoop:
 			for (Effect effect : mapToUpdate.values()) {
-				if (!canConflict(effect, nextEffect))
+				if (effect.isSlotReserved() || !canConflict(effect, nextEffect))
 					continue;
+				boolean sameSlot = isSameSlot(effect, nextEffect);
 				for (EffectTemplate et : effect.getEffectTemplates()) {
-					if (et.getEffectId() == 0)
-						continue;
 					for (EffectTemplate et2 : nextEffect.getEffectTemplates()) {
-						if (et2.getEffectId() == 0)
-							continue;
-						if ((et.getEffectId() == et2.getEffectId()) || (et instanceof SilenceEffect && et2 instanceof SilenceEffect)) {
-							if (et.getBasicLvl() > et2.getBasicLvl()) {
+						if (et.conflictsWith(et2, sameSlot)) {
+							if (et.getBasicLvl() > et2.getBasicLvl())
 								return true;
-							} else {
-								effectToEnd = effect;
-								break mainLoop;
-							}
+							effectsToEnd.add(effect);
+							continue effectLoop;
 						}
 					}
 				}
@@ -152,42 +177,52 @@ public class EffectController {
 		} finally {
 			lock.unlockRead(stamp);
 		}
-		if (effectToEnd != null)
-			effectToEnd.endEffect(effectToEnd.getTargetSlot() != nextEffect.getTargetSlot());
+		for (Effect effectToEnd : effectsToEnd) {
+			if (!broadcast)
+				nextEffect.addUnbroadcastSlot(effectToEnd.getTargetSlot());
+			effectToEnd.endEffect(broadcast && effectToEnd.getTargetSlot() != nextEffect.getTargetSlot());
+		}
 		return false;
 	}
 
 	/**
 	 * @return True if {@code newEffectTemplate} is in conflict with another existing effect.
 	 */
-	public boolean isConflicting(Effect newEffect) {
-		if (newEffect.isPassive() || newEffect.getTargetSlot() == SkillTargetSlot.DEBUFF)
+	public boolean isOutranked(Effect newEffect) {
+		if (newEffect.isPassive())
 			return false;
+		for (EffectTemplate newEffectTemplate : newEffect.getEffectTemplates()) {
+			if (isOutranked(newEffect, newEffectTemplate))
+				return true;
+		}
+		return false;
+	}
+
+	/**
+	 * @return True if an existing effect conflicts with {@code newEffectTemplate} of {@code newEffect} and prevails over it.
+	 */
+	private boolean isOutranked(Effect newEffect, EffectTemplate newEffectTemplate) {
 		Map<String, Effect> mapForEffect = getMapForEffect(newEffect.getSkillTemplate(), false);
 		long stamp = lock.readLock();
 		try {
 			for (Effect currentEffect : mapForEffect.values()) {
-				if (!canConflict(currentEffect, newEffect))
+				if (currentEffect.isSlotReserved() || !canConflict(currentEffect, newEffect))
 					continue;
-				for (EffectTemplate newEffectTemplate : newEffect.getEffectTemplates()) {
-					if (newEffectTemplate.getEffectId() == 0)
-						continue;
-					for (EffectTemplate currentEffectTemplate : currentEffect.getEffectTemplates()) {
-						if (currentEffectTemplate.getEffectId() == 0)
-							continue;
-						if ((currentEffectTemplate.getEffectId() == newEffectTemplate.getEffectId())
-							|| (currentEffectTemplate instanceof SilenceEffect && newEffectTemplate instanceof SilenceEffect)) {
-							if (currentEffectTemplate.getBasicLvl() > newEffectTemplate.getBasicLvl() && !(currentEffectTemplate instanceof HideEffect)) {
-								return true;
-							}
-						}
-					}
+				boolean sameSlot = isSameSlot(currentEffect, newEffect);
+				for (EffectTemplate currentEffectTemplate : currentEffect.getEffectTemplates()) {
+					if (currentEffectTemplate.conflictsWith(newEffectTemplate, sameSlot) && currentEffectTemplate.getBasicLvl() > newEffectTemplate.getBasicLvl()
+						&& !(currentEffectTemplate instanceof HideEffect))
+						return true;
 				}
 			}
 		} finally {
 			lock.unlockRead(stamp);
 		}
 		return false;
+	}
+
+	private static boolean isSameSlot(Effect e1, Effect e2) {
+		return e1.getTargetSlot() == e2.getTargetSlot() && e1.getTargetSlot() != SkillTargetSlot.NONE;
 	}
 
 	private static boolean canConflict(Effect e1, Effect e2) {
@@ -198,13 +233,15 @@ public class EffectController {
 		return false;
 	}
 
-	private boolean checkExtraEffect(Map<String, Effect> effectMap, Effect nextEffect) {
+	private boolean checkExtraEffect(Map<String, Effect> effectMap, Effect nextEffect, boolean broadcast) {
 		if (nextEffect.isPassive() || nextEffect.getDispelCategory() != DispelCategoryType.EXTRA)
 			return false;
 		Effect extraEffect = findFirstEffect(effectMap, effect -> effect.getDispelCategory() == DispelCategoryType.EXTRA
 			&& !effect.getSkillTemplate().getStack().startsWith("IDSEAL_BOSS_VRITRA_BUFF"));
 		if (extraEffect != null) {
-			extraEffect.endEffect();
+			if (!broadcast)
+				nextEffect.addUnbroadcastSlot(extraEffect.getTargetSlot());
+			extraEffect.endEffect(broadcast);
 			return true;
 		}
 		return false;
@@ -283,7 +320,8 @@ public class EffectController {
 	public Effect getAbnormalEffect(String stack) {
 		long stamp = lock.readLock();
 		try {
-			return abnormalEffectMap.get(stack);
+			Effect effect = abnormalEffectMap.get(stack);
+			return effect == null || effect.isSlotReserved() ? null : effect;
 		} finally {
 			lock.unlockRead(stamp);
 		}
@@ -302,21 +340,27 @@ public class EffectController {
 	}
 
 	public void broadCastEffects(Effect effect) {
-		int slot = effect != null ? effect.getTargetSlot().getId() : SkillTargetSlot.FULLSLOTS;
+		broadCastEffects(effect != null ? effect.getTargetSlot().getId() : SkillTargetSlot.FULLSLOTS);
+	}
+
+	/**
+	 * Sends the effect list of the given slots to everyone who needs it, which for a player includes the player itself and its team.
+	 */
+	public void updateEffectSlots(int slots) {
+		broadCastEffects(slots);
+	}
+
+	public void broadCastEffects(int slots) {
 		List<Effect> effects = getAbnormalEffects();
-		PacketSendUtility.broadcastPacket(getOwner(), new SM_ABNORMAL_EFFECT(getOwner(), abnormals, effects, slot));
+		PacketSendUtility.broadcastPacket(getOwner(), new SM_ABNORMAL_EFFECT(getOwner(), abnormals, effects, slots));
 	}
 
 	public void clearEffect(Effect effect, boolean broadCastEffects) {
 		Map<String, Effect> effectMap = getMapForEffect(effect.getSkillTemplate(), false);
 		long stamp = lock.writeLock();
 		try {
-			Effect oldEffect = effectMap.get(effect.getStack());
-			if (oldEffect != null) {
-				if (!oldEffect.equals(effect))
-					return; // effect in map was already replaced by a newer one (e.g. when toggling many auras), so there's no need to re-broadcast
-				effectMap.remove(effect.getStack());
-			}
+			if (!effectMap.remove(effect.getStack(), effect))
+				return; // effect in map was already removed or replaced by a newer one (e.g. when toggling many auras), so there's no need to re-broadcast
 		} finally {
 			lock.unlockWrite(stamp);
 		}
@@ -387,7 +431,7 @@ public class EffectController {
 		long stamp = lock.readLock();
 		try {
 			for (Effect effect : effectMap.values()) {
-				if (filter.test(effect))
+				if (!effect.isSlotReserved() && filter.test(effect))
 					return effect;
 			}
 		} finally {
@@ -412,7 +456,7 @@ public class EffectController {
 		long stamp = lock.readLock();
 		try {
 			for (Effect effect : effectMap.values()) {
-				if (filter.test(effect))
+				if (!effect.isSlotReserved() && filter.test(effect))
 					effects.add(effect);
 			}
 		} finally {
@@ -456,6 +500,8 @@ public class EffectController {
 				// check count
 				if (count == 0)
 					break;
+				if (effect.isSlotReserved())
+					continue;
 				if (effectType != null) {
 					if (!effect.getSkillTemplate().hasAnyEffect(effectType))
 						continue;
@@ -602,6 +648,8 @@ public class EffectController {
 	}
 
 	private boolean isDispellable(Effect effect) {
+		if (effect.isSlotReserved()) // only holds its place, nothing to dispel yet
+			return false;
 		if (isNoShowToggle(effect))
 			return false;
 		if (effect.isSanctuaryEffect())
@@ -616,10 +664,10 @@ public class EffectController {
 		return true;
 	}
 
-	public void dispelBuffCounterAtkEffect(Effect effect) {
+	public void dispelBuffCounterAtkEffect(Effect effect, boolean broadcast) {
 		List<Effect> effectsToEnd = filterEffects(abnormalEffectMap, e -> effect.equals(e.getDesignatedDispelEffect()));
 		for (Effect ef : effectsToEnd) {
-			ef.endEffect();
+			ef.endEffect(broadcast);
 		}
 	}
 

@@ -42,6 +42,8 @@ public class Effect implements StatOwner {
 	private Skill skill;
 	private int skillLevel;
 	private Integer duration;
+	private volatile boolean slotReserved;
+	private int unbroadcastSlots;
 	private long endTime;
 	private SubEffectType subEffectType = SubEffectType.NONE;
 	private Future<?> endTask = null;
@@ -72,6 +74,8 @@ public class Effect implements StatOwner {
 	private int mpShieldSkillId = 0;
 
 	private boolean addedToController;
+	private boolean resisted;
+	private boolean effectListBroadcastRequested;
 	private final List<Runnable> observerRemoveTasks = new ArrayList<>();
 	private boolean launchSubEffect = true;
 	private Effect subEffect;
@@ -514,16 +518,23 @@ public class Effect implements StatOwner {
 		if (skillTemplate.getEffects() == null)
 			return;
 
-		if (effected != null && effected.getEffectController().isConflicting(this))
+		// the whole skill fails when its first effect fails, when a later effect is resisted while the first one lasts, or when an existing effect
+		// prevails over a skill whose first effect lasts. Otherwise the lasting effects only ever succeed together, the instant ones on their own.
+		EffectTemplate firstEffect = getEffectTemplates().getFirst();
+		boolean startsInstant = Effects.isInstant(firstEffect);
+		boolean outranked = effected != null && effected.getEffectController().isOutranked(this);
+		if (outranked && !startsInstant)
 			setEffectResult(EffectResult.CONFLICT);
 		if (effectResult != EffectResult.CONFLICT) {
 			for (EffectTemplate template : getEffectTemplates()) {
 				template.calculate(this);
 			}
+			if (!isInSuccessEffects(firstEffect.getPosition()) || resisted && !startsInstant)
+				successEffects.clear();
+			else if (outranked || getEffectTemplates().stream().anyMatch(t -> !Effects.isInstant(t) && !isInSuccessEffects(t.getPosition())))
+				successEffects.values().removeIf(template -> !Effects.isInstant(template));
 		}
-		if (!isInSuccessEffects(1)) {
-			successEffects.clear();
-		} else {
+		if (!successEffects.isEmpty()) {
 			if (effectHate == 0) // can be overridden from constructor with skill (from pet order)
 				effectHate = calculateHateForSuccessEffects();
 			if (isLaunchSubEffect()) {
@@ -592,6 +603,59 @@ public class Effect implements StatOwner {
 	}
 
 	/**
+	 * Holds this effects place in the effected creatures effect list from the moment the cast ends, so a skill with a long hit time keeps the position
+	 * it took when it was cast. While reserved the effect is invisible to packets, dispels, conflict searches and counters.
+	 */
+	public void reserveEffectSlot() {
+		Creature target = getEffected();
+		if (target == null || successEffects.isEmpty() || isPassive() || getTargetSlot() == SkillTargetSlot.NONE)
+			return;
+		slotReserved = true; // must be set before reserveSlot, which checks it and must not expose the effect as landed
+		if (!target.getEffectController().reserveSlot(this))
+			slotReserved = false;
+	}
+
+	/**
+	 * Frees a reserved place which never became an effect, for example after a resist or when the target died meanwhile. The list
+	 * is broadcast because the reservation may have ended conflicting effects without one.
+	 */
+	public void releaseUnusedEffectSlot() {
+		if (!slotReserved)
+			return;
+		Creature target = getEffected();
+		if (target != null) {
+			target.getEffectController().clearEffect(this, false);
+			target.getEffectController().updateEffectSlots(getTargetSlot().getId() | unbroadcastSlots);
+		}
+		slotReserved = false;
+	}
+
+	/**
+	 * Remembers the slot of an effect this one ended while reserving, so it is broadcast together with this effect.
+	 */
+	public void addUnbroadcastSlot(SkillTargetSlot slot) {
+		unbroadcastSlots |= slot.getId();
+	}
+
+	public void broadcastUnbroadcastSlots() {
+		Creature target = getEffected();
+		if (target != null && unbroadcastSlots != 0)
+			target.getEffectController().updateEffectSlots(unbroadcastSlots);
+	}
+
+	public int getUnbroadcastSlots() {
+		return unbroadcastSlots;
+	}
+
+	public boolean isSlotReserved() {
+		return slotReserved;
+	}
+
+	public void setSlotStarted() {
+		slotReserved = false;
+	}
+
+	/**
 	 * Apply all effect templates
 	 */
 	public void applyEffect() {
@@ -612,6 +676,8 @@ public class Effect implements StatOwner {
 			}
 			if (applyCriticalProcEffect && subEffect != null)
 				subEffect.applyEffect();
+			if (effectListBroadcastRequested && !addedToController && effected != null)
+				effected.getEffectController().updateEffectSlots(SkillTargetSlot.FULLSLOTS); // nothing was added to the controller, which would have broadcasted on its own
 			if (effected != null)
 				effected.getAi().onEffectApplied(this);
 		} catch (Exception e) {
@@ -800,6 +866,14 @@ public class Effect implements StatOwner {
 	}
 
 	/**
+	 * Makes this effect broadcast the effect list of the effected creature once all its templates were applied, for templates which change the list
+	 * without adding anything to it.
+	 */
+	public void requestEffectListBroadcast() {
+		effectListBroadcastRequested = true;
+	}
+
+	/**
 	 * Try to add this effect to effected controller
 	 */
 	public void addToEffectedController() {
@@ -837,6 +911,13 @@ public class Effect implements StatOwner {
 	private void removeObservers() {
 		observerRemoveTasks.forEach(Runnable::run);
 		observerRemoveTasks.clear();
+	}
+
+	/**
+	 * Marks that one of the effects was dodged or resisted, as opposed to being filtered out by its conditions.
+	 */
+	public void setResisted() {
+		resisted = true;
 	}
 
 	public void addSuccessEffect(EffectTemplate effect) {

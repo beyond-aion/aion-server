@@ -18,14 +18,13 @@ public class FpAttackEffect extends AbstractOverTimeEffect {
 
 	@Override
 	public void calculate(Effect effect) {
-		// Only players have FP
-		if (effect.getEffected() instanceof Player)
-			super.calculate(effect, null, null);
+		super.calculate(effect, null, null);
 	}
 
 	@Override
 	public void onPeriodicAction(Effect effect) {
-		Player effected = (Player) effect.getEffected();
+		if (!(effect.getEffected() instanceof Player effected))
+			return;
 		int maxFP = effected.getLifeStats().getMaxFp();
 		int newValue = value;
 		// Support for values in percentage
