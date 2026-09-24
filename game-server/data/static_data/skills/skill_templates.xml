@@ -80481,8 +80481,8 @@
 		</useconditions>
 		<effects>
 			<snare duration2="10000" duration1="10000" effectid="20007" e="1" accmod2="100" element="FIRE">
-				<change stat="SPEED" func="PERCENT" delta="10" value="0" />
-				<change stat="FLY_SPEED" func="PERCENT" value="0" />
+				<change stat="SPEED" func="PERCENT" delta="-10" value="0" />
+				<change stat="FLY_SPEED" func="PERCENT" delta="-10" value="0" />
 			</snare>
 		</effects>
 		<motion name="normalfire" />
@@ -84608,8 +84608,8 @@
 				<change stat="ATTACK_SPEED" func="PERCENT" delta="5" value="0" />
 			</slow>
 			<snare duration1="300000" effectid="20007" e="2" noresist="true" element="FIRE" preeffect="1" preeffect_prob="10">
-				<change stat="SPEED" func="PERCENT" delta="5" value="0" />
-				<change stat="FLY_SPEED" func="PERCENT" value="0" />
+				<change stat="SPEED" func="PERCENT" delta="-5" value="0" />
+				<change stat="FLY_SPEED" func="PERCENT" delta="-5" value="0" />
 			</snare>
 		</effects>
 		<motion name="normalfire" />
@@ -103380,8 +103380,8 @@
 		</useconditions>
 		<effects>
 			<snare duration2="6000" e="1" noresist="true" element="EARTH">
-				<change stat="SPEED" func="ADD" delta="10000" value="0" />
-				<change stat="FLY_SPEED" func="ADD" value="0" />
+				<change stat="SPEED" func="ADD" delta="-10000" value="0" />
+				<change stat="FLY_SPEED" func="ADD" delta="-10000" value="0" />
 			</snare>
 		</effects>
 		<motion name="pointfire3" />
@@ -119609,8 +119609,8 @@
 		</useconditions>
 		<effects>
 			<snare duration2="5000" effectid="20007" e="1" element="WATER">
-				<change stat="SPEED" func="PERCENT" delta="10" value="-40" />
-				<change stat="FLY_SPEED" func="PERCENT" value="-40" />
+				<change stat="SPEED" func="PERCENT" delta="-10" value="-40" />
+				<change stat="FLY_SPEED" func="PERCENT" delta="-10" value="-40" />
 			</snare>
 		</effects>
 		<motion name="poweratk" />
