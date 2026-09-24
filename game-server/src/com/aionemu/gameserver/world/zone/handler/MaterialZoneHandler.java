@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.world.zone.handler;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -13,7 +11,6 @@ import com.aionemu.gameserver.geoEngine.scene.Spatial;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.templates.materials.MaterialSkill;
 import com.aionemu.gameserver.model.templates.materials.MaterialTemplate;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
@@ -42,16 +39,11 @@ public class MaterialZoneHandler implements ZoneHandler {
 	public void onEnterZone(Creature creature, ZoneInstance zone) {
 		if (ownerRace == creature.getRace())
 			return;
-		List<MaterialSkill> matchingSkills = new ArrayList<>();
-		for (MaterialSkill skill : template.getSkills()) {
-			if (skill.getTarget().matches(creature))
-				matchingSkills.add(skill);
-		}
-		if (matchingSkills.isEmpty())
+		if (!AbstractMaterialSkillActor.hasSkillFor(creature, template.getSkills()))
 			return;
 		// Teminon/Primum Landing shield 14 & 15, abyss core 16
 		CheckType checkType = geometry.getMaterialId() >= 14 && geometry.getMaterialId() <= 16 ? CheckType.PASS : CheckType.TOUCH;
-		ZoneCollisionMaterialActor actor = new ZoneCollisionMaterialActor(creature, geometry, matchingSkills, checkType);
+		ZoneCollisionMaterialActor actor = new ZoneCollisionMaterialActor(creature, geometry, template, checkType);
 		creature.getObserveController().addObserver(actor);
 		observed.put(creature.getObjectId(), actor);
 		if (GeoDataConfig.GEO_MATERIALS_SHOWDETAILS && creature instanceof Player player && player.isStaff())

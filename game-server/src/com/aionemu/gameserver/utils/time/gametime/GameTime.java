@@ -147,6 +147,14 @@ public class GameTime implements Cloneable {
 		return gameTime % MINUTES_IN_HOUR;
 	}
 
+	/**
+	 * @return True from 20:00 to 06:59. Not tied to {@link DayTime#NIGHT}, which only drives weather changes.
+	 */
+	public boolean isNight() {
+		int hour = getHour();
+		return hour < 7 || hour >= 20;
+	}
+
 	private void onHourChange(boolean changedByClock) {
 		TemporarySpawnEngine.onHourChange();
 		if (setDayTime(calculateDayTime()) && changedByClock) // don't change weather if time was changed by admin
