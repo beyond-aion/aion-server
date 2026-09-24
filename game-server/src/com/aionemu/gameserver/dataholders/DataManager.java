@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.GameServerError;
 import com.aionemu.gameserver.dataholders.loadingutils.XmlDataLoader;
-import com.aionemu.gameserver.model.templates.item.actions.DecomposeAction;
 import com.aionemu.gameserver.model.templates.mail.Mails;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 
@@ -227,7 +226,6 @@ public final class DataManager {
 		GLOBAL_DROP_DATA.processRules(npcTemplates);
 		TRADE_LIST_DATA.validateBuyLists(npcTemplates);
 		SKILL_DATA.validateMotions();
-		DecomposeAction.validateRandomItemIds();
 
 		long time = System.currentTimeMillis() - start;
 		log.info("##### [Static Data loaded in " + String.format("%.1f", time / 1000f) + " seconds] #####");
