@@ -263,7 +263,7 @@ public class PvpService {
 		List<ZoneInstance> zones = victim.findZones();
 		for (Player p : killers) {
 			for (ZoneInstance zone : zones)
-				QuestEngine.getInstance().onKillInZone(new QuestEnv(victim, p, 0), zone.getAreaTemplate().getZoneName().name());
+				QuestEngine.getInstance().onKillInZone(new QuestEnv(victim, p, 0), zone);
 			QuestEngine.getInstance().onKillInWorld(new QuestEnv(victim, p, 0), victim.getWorldId());
 			QuestEngine.getInstance().onKillRanked(new QuestEnv(victim, p, 0), victim.getAbyssRank().getRank());
 		}

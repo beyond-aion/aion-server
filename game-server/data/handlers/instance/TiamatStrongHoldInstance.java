@@ -18,7 +18,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
-import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author Cheatkiller
@@ -227,11 +226,11 @@ public class TiamatStrongHoldInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void onEnterZone(Player player, ZoneInstance zone) {
-		if (zone.getAreaTemplate().getZoneName() == ZoneName.get("LAKSYAKA_LEGION_HQ_300510000")) {
+		if (zone.matches("LAKSYAKA_LEGION_HQ_300510000")) {
 			if (startSuramaEvent.compareAndSet(false, true)) {
 				spawn(800433, 725.93f, 1319.9f, 490.7f, (byte) 61);
 			}
-		} else if (zone.getAreaTemplate().getZoneName() == ZoneName.get("GLORIOUS_NEXUS_300510000")) {
+		} else if (zone.matches("GLORIOUS_NEXUS_300510000")) {
 			player.getEffectController().removeEffect(300);
 		}
 	}

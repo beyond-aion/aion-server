@@ -17,7 +17,7 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
-import com.aionemu.gameserver.world.zone.ZoneName;
+import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
  * @author MrPoke, vlog, Rolandas, Majka, Pad
@@ -81,8 +81,8 @@ public class ItemCollecting extends AbstractTemplateQuestHandler {
 				qe.registerCanAct(questId, actionItem);
 			}
 		}
-		if (startZone != null && !ZoneName.get(startZone).name().equalsIgnoreCase("NONE"))
-			qe.registerOnEnterZone(ZoneName.get(startZone), questId);
+		if (startZone != null && DataManager.ZONE_DATA.validateZoneName(startZone))
+			qe.registerOnEnterZone(startZone, questId);
 	}
 
 	@Override
@@ -165,8 +165,8 @@ public class ItemCollecting extends AbstractTemplateQuestHandler {
 	}
 
 	@Override
-	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) {
-		if (zoneName.name().equalsIgnoreCase(startZone)) {
+	public boolean onEnterZoneEvent(QuestEnv env, ZoneInstance zone) {
+		if (zone.matches(startZone)) {
 			Player player = env.getPlayer();
 			QuestState qs = player.getQuestStateList().getQuestState(questId);
 			if (qs == null || qs.isStartable()) {

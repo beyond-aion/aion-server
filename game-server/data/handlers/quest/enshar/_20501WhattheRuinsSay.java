@@ -7,7 +7,7 @@ import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.world.zone.ZoneName;
+import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
  * @Author Majka
@@ -42,7 +42,7 @@ public class _20501WhattheRuinsSay extends AbstractQuestHandler {
 		for (int npc : npcs) {
 			qe.registerQuestNpc(npc).addOnTalkEvent(questId);
 		}
-		qe.registerOnEnterZone(ZoneName.get("DF5_SENSORYAREA_Q20501A_206375_1_220080000"), questId); // Dreg Findspot zone
+		qe.registerOnEnterZone("DF5_SENSORYAREA_Q20501A_206375_1_220080000", questId); // Dreg Findspot zone
 		qe.registerOnQuestCompleted(questId);
 		qe.registerOnLevelChanged(questId);
 	}
@@ -133,9 +133,9 @@ public class _20501WhattheRuinsSay extends AbstractQuestHandler {
 	}
 
 	@Override
-	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) { // Step 2: Go to Dreg Findspot.
+	public boolean onEnterZoneEvent(QuestEnv env, ZoneInstance zone) { // Step 2: Go to Dreg Findspot.
 
-		if (zoneName == ZoneName.get("DF5_SENSORYAREA_Q20501A_206375_1_220080000")) {
+		if (zone.matches("DF5_SENSORYAREA_Q20501A_206375_1_220080000")) {
 
 			Player player = env.getPlayer();
 			if (player == null) {

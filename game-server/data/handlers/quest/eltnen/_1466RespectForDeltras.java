@@ -14,7 +14,6 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author Nephis and AU quest helper Team
@@ -41,7 +40,7 @@ public class _1466RespectForDeltras extends AbstractQuestHandler {
 
 		if (id != 182201385)
 			return HandlerResult.UNKNOWN;
-		if (!player.isInsideZone(ZoneName.get("EXECUTION_GROUND_OF_DELTRAS_220020000")))
+		if (!player.isInsideZone("EXECUTION_GROUND_OF_DELTRAS_220020000"))
 			return HandlerResult.UNKNOWN;
 		final QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null)

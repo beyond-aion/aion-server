@@ -7,7 +7,7 @@ import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.world.zone.ZoneName;
+import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
  * @Author Majka
@@ -36,7 +36,7 @@ public class _20507ItsWorseThanWeThought extends AbstractQuestHandler {
 		for (int npc : npcs) {
 			qe.registerQuestNpc(npc).addOnTalkEvent(questId);
 		}
-		qe.registerOnEnterZone(ZoneName.get("DF5_SENSORYAREA_Q20507A_206377_9_220080000"), questId); // Uncharted Cave zone
+		qe.registerOnEnterZone("DF5_SENSORYAREA_Q20507A_206377_9_220080000", questId); // Uncharted Cave zone
 		qe.registerOnQuestCompleted(questId);
 		qe.registerOnLevelChanged(questId);
 	}
@@ -110,9 +110,9 @@ public class _20507ItsWorseThanWeThought extends AbstractQuestHandler {
 	}
 
 	@Override
-	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) {
+	public boolean onEnterZoneEvent(QuestEnv env, ZoneInstance zone) {
 
-		if (zoneName == ZoneName.get("DF5_SENSORYAREA_Q20507A_206377_9_220080000")) {
+		if (zone.matches("DF5_SENSORYAREA_Q20507A_206377_9_220080000")) {
 
 			Player player = env.getPlayer();
 			if (player == null) {

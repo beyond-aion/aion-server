@@ -1,9 +1,12 @@
 package com.aionemu.gameserver.world;
 
+import java.util.List;
 import java.util.function.Function;
 
 import com.aionemu.gameserver.instance.handlers.InstanceHandler;
+import com.aionemu.gameserver.world.zone.RegionZone;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
+import com.aionemu.gameserver.world.zone.ZoneService;
 
 /**
  * @author ATracer
@@ -17,24 +20,23 @@ public class WorldMap2DInstance extends WorldMapInstance {
 		this.ownerId = ownerId;
 	}
 
-	@Override
-	protected MapRegion createMapRegion(int regionId) {
+	private MapRegion createMapRegion(int regionId, List<ZoneInstance> zoneInstances) {
 		float startX = RegionUtil.getXFrom2dRegionId(regionId);
 		float startY = RegionUtil.getYFrom2dRegionId(regionId);
 		int size = this.getParent().getWorldSize();
 		float maxZ = Math.round((float) size / regionSize) * regionSize;
-		ZoneInstance[] zones = filterZones(this.getMapId(), regionId, startX, startY, 0, maxZ);
-		return new MapRegion(regionId, this, zones);
+		return createMapRegion(regionId, zoneInstances, new RegionZone(startX, startY, 0, maxZ));
 	}
 
 	@Override
 	protected void initMapRegions() {
+		List<ZoneInstance> zoneInstances = ZoneService.getInstance().createZoneInstances(getMapId());
 		int size = this.getParent().getWorldSize();
 		// Create all mapRegion
 		for (int x = 0; x <= size; x = x + regionSize) {
 			for (int y = 0; y <= size; y = y + regionSize) {
 				int regionId = RegionUtil.get2dRegionId(x, y);
-				regions.put(regionId, createMapRegion(regionId));
+				regions.put(regionId, createMapRegion(regionId, zoneInstances));
 			}
 		}
 

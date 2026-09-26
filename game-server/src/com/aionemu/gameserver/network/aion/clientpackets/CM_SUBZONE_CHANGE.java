@@ -38,11 +38,10 @@ public class CM_SUBZONE_CHANGE extends AionClientPacket {
 					continue;
 				foundZones++;
 				PacketSendUtility.sendMessage(player, "Passed zone: unk=" + unk + "; " + zone.getZoneTemplate().getZoneType() + " "
-					+ zone.getAreaTemplate().getZoneName().name());
+					+ zone.getZoneTemplate().getName());
 			}
 			if (foundZones == 0) {
 				PacketSendUtility.sendMessage(player, "Passed unknown zone, unk=" + unk);
-				return;
 			}
 		}
 	}

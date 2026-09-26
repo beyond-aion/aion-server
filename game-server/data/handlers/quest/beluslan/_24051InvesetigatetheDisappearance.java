@@ -11,7 +11,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.world.zone.ZoneName;
+import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
  * @author Ritsu, Majka
@@ -28,7 +28,7 @@ public class _24051InvesetigatetheDisappearance extends AbstractQuestHandler {
 		qe.registerOnQuestCompleted(questId);
 		qe.registerOnLevelChanged(questId);
 		qe.registerQuestItem(182215375, questId);
-		qe.registerOnEnterZone(ZoneName.get("MINE_PORT_220040000"), questId);
+		qe.registerOnEnterZone("MINE_PORT_220040000", questId);
 		qe.registerOnEnterWorld(questId);
 		for (int npc : npcs) {
 			qe.registerQuestNpc(npc).addOnTalkEvent(questId);
@@ -113,22 +113,16 @@ public class _24051InvesetigatetheDisappearance extends AbstractQuestHandler {
 	}
 
 	@Override
-	public boolean onEnterZoneEvent(final QuestEnv env, ZoneName name) {
+	public boolean onEnterZoneEvent(QuestEnv env, ZoneInstance zone) {
 		Player player = env.getPlayer();
 		if (player == null)
 			return false;
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
-			if (name == ZoneName.get("MINE_PORT_220040000")) {
+			if (zone.matches("MINE_PORT_220040000")) {
 				if (var == 5) {
-					ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-						@Override
-						public void run() {
-							playQuestMovie(env, 236);
-						}
-					}, 10000);
+					ThreadPoolManager.getInstance().schedule(() -> playQuestMovie(env, 236), 10000);
 				}
 			}
 		}

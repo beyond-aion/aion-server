@@ -18,7 +18,6 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.questEngine.task.QuestTasks;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author Cheatkiller
@@ -67,7 +66,7 @@ public class _2394ADyingWish extends AbstractQuestHandler {
 					orlan.getAi().onCreatureEvent(AIEventType.FOLLOW_ME, player);
 					PacketSendUtility.broadcastPacket(orlan, new SM_EMOTION(orlan, EmotionType.CHANGE_SPEED, 0, orlan.getObjectId()));
 					player.getController().addTask(TaskId.QUEST_FOLLOW,
-						QuestTasks.newFollowingToTargetCheckTask(env, orlan, ZoneName.get("HALABANA_HOT_SPRINGS_220020000")));
+						QuestTasks.newFollowingToTargetCheckTask(env, orlan, "HALABANA_HOT_SPRINGS_220020000"));
 					return defaultCloseDialog(env, 0, 1);
 				}
 			}

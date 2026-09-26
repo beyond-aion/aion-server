@@ -5,7 +5,6 @@ import java.awt.Rectangle;
 
 import com.aionemu.gameserver.model.templates.zone.Point2D;
 import com.aionemu.gameserver.utils.PositionUtil;
-import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * Rectangle area, most wide spread in the game
@@ -78,8 +77,8 @@ public class RectangleArea extends AbstractArea {
 	 * @param maxZ
 	 *          maximal z
 	 */
-	public RectangleArea(ZoneName zoneName, int worldId, Point p1, Point p2, Point p3, Point p4, int minZ, int maxZ) {
-		super(zoneName, worldId, minZ, maxZ);
+	public RectangleArea(Point p1, Point p2, Point p3, Point p4, int minZ, int maxZ) {
+		super(minZ, maxZ);
 
 		Rectangle r = new Rectangle();
 		r.add(p1);
@@ -109,8 +108,8 @@ public class RectangleArea extends AbstractArea {
 	 * @param maxZ
 	 *          maximal z point
 	 */
-	public RectangleArea(ZoneName zoneName, int worldId, float minX, float minY, float maxX, float maxY, float minZ, float maxZ) {
-		super(zoneName, worldId, minZ, maxZ);
+	public RectangleArea(float minX, float minY, float maxX, float maxY, float minZ, float maxZ) {
+		super(minZ, maxZ);
 		this.minX = minX;
 		this.maxX = maxX;
 		this.minY = minY;

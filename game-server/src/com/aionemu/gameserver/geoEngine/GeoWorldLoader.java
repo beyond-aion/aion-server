@@ -30,7 +30,6 @@ import com.aionemu.gameserver.geoEngine.models.Terrain;
 import com.aionemu.gameserver.geoEngine.scene.*;
 import com.aionemu.gameserver.model.templates.world.WorldMapTemplate;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.world.zone.ZoneName;
 import com.aionemu.gameserver.world.zone.ZoneService;
 
 /**
@@ -272,8 +271,7 @@ public class GeoWorldLoader {
 			if (childNumber > 0)
 				name += "_CHILD" + childNumber;
 			geometry.setName(name + "_" + regionId);
-			ZoneName zoneName = ZoneName.createOrGet(geometry.getName() + "_" + worldId);
-			ZoneService.getInstance().createMaterialZoneTemplate(geometry, worldId, zoneName);
+			ZoneService.getInstance().createMaterialZoneTemplate(geometry, worldId);
 		}
 	}
 

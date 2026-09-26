@@ -9,7 +9,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.zone.ZoneType;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
-import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author ATracer
@@ -35,17 +34,17 @@ public class Zone extends AdminCommand {
 			return;
 		}
 		Creature target = admin.getTarget() instanceof Creature creature ? creature : admin;
-		String zoneNameParam = params.length == 0 ? null : params[0];
+		String zoneNameParam = params.length == 0 ? "" : params[0].toUpperCase();
 		List<ZoneInstance> zones = findZones(target, zoneNameParam);
 		String zoneTypes = Arrays.stream(ZoneType.values()).filter(target::isInsideZoneType).map(ZoneType::name).collect(Collectors.joining(", "));
 		if (!zoneTypes.isEmpty())
 			sendInfo(admin, name(target) + "'s zone types: " + zoneTypes);
 		if (zones.isEmpty()) {
-			sendInfo(admin, name(target) + " is not in " + (zoneNameParam == null ? "any zone" : zoneNameParam) + '.');
+			sendInfo(admin, name(target) + " is not in " + (zoneNameParam.isEmpty() ? "any zone" : zoneNameParam + "*") + '.');
 		} else {
 			sendInfo(admin, name(target) + "'s " + (zones.size() == 1 ? "zone" : "zones") + ':');
 			for (ZoneInstance zone : zones) {
-				sendInfo(admin, zone.getAreaTemplate().getZoneName().name());
+				sendInfo(admin, zone.getZoneTemplate().getName());
 				sendInfo(admin, "Fly: " + zone.canFly() + "; Glide: " + zone.canGlide());
 				sendInfo(admin, "Ride: " + zone.canRide() + "; Fly-ride: " + zone.canFlyRide());
 				sendInfo(admin, "Kisk: " + zone.canPutKisk() + "; Recall: " + zone.canRecall());
@@ -56,14 +55,10 @@ public class Zone extends AdminCommand {
 		}
 	}
 
-	private List<ZoneInstance> findZones(Creature creature, String zoneNameFilter) {
+	private List<ZoneInstance> findZones(Creature creature, String zoneNameUpperCase) {
 		List<ZoneInstance> zones = creature.findZones();
-		if (zoneNameFilter != null) {
-			ZoneName zoneName = ZoneName.get(zoneNameFilter);
-			if (zoneName == ZoneName.NONE)
-				throw new IllegalArgumentException("Invalid zone name.");
-			zones = zones.stream().filter(zone -> zone.getZoneTemplate().getName() == zoneName).toList();
-		}
+		if (!zoneNameUpperCase.isEmpty())
+			zones = zones.stream().filter(zone -> zone.getZoneTemplate().getName().toUpperCase().startsWith(zoneNameUpperCase)).toList();
 		return zones;
 	}
 }

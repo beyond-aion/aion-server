@@ -17,7 +17,6 @@ import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldPosition;
 import com.aionemu.gameserver.world.geo.GeoService;
-import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * While using the restorative the player should be ambushed by some drakans.
@@ -99,7 +98,7 @@ public class _30771ImpendingDebrisEnergy extends AbstractQuestHandler {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			if (player.isInsideItemUseZone(ZoneName.get("DF5_ITEMUSEAREA_Q30771"))) {
+			if (player.isInsideItemUseZone("DF5_ITEMUSEAREA_Q30771")) {
 				int var = qs.getQuestVarById(0);
 				if (var == 2) {
 					boolean isItemUseComplete = useQuestItem(env, item, 2, 3, false);

@@ -26,7 +26,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldMapInstance;
-import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author Estrayl, Sykra
@@ -85,7 +84,7 @@ public class AgentSiege extends Siege<AgentLocation> {
 
 	private void distributeQuest() {
 		for (Player player : World.getInstance().getWorldMap(600100000).getMainWorldMapInstance().getPlayersInside()) {
-			if (player.isInsideZone(ZoneName.get("DRAGON_LORDS_SHRINE_600100000")) || player.isInsideZone(ZoneName.get("FLAMEBERTH_DOWNS_600100000"))) {
+			if (player.isInsideZone("DRAGON_LORDS_SHRINE_600100000") || player.isInsideZone("FLAMEBERTH_DOWNS_600100000")) {
 				int questId = player.getRace() == Race.ELYOS ? 13744 : 23744;
 				QuestState qs = player.getQuestStateList().getQuestState(questId);
 				if (qs == null || qs.isStartable())
@@ -147,7 +146,7 @@ public class AgentSiege extends Siege<AgentLocation> {
 	@Override
 	public void onAbyssPointsAdded(Player player, int abyssPoints) {
 		if (startProgress >= 10 && getSiegeLocation().isVulnerable()
-				&& (player.isInsideZone(ZoneName.get("FLAMEBERTH_DOWNS_600100000")) || player.isInsideZone(ZoneName.get("DRAGON_LORDS_SHRINE_600100000"))))
+				&& (player.isInsideZone("FLAMEBERTH_DOWNS_600100000") || player.isInsideZone("DRAGON_LORDS_SHRINE_600100000")))
 			getSiegeCounter().addAbyssPoints(player, abyssPoints);
 	}
 

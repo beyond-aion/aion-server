@@ -9,7 +9,6 @@ import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author Ritsu, Majka
@@ -130,7 +129,7 @@ public class _24022SneakBehindtheIceClaw extends AbstractQuestHandler {
 	@Override
 	public HandlerResult onItemUseEvent(QuestEnv env, Item item) {
 		Player player = env.getPlayer();
-		if (player.isInsideZone(ZoneName.get("ALTAR_OF_TRIAL_220020000"))) {
+		if (player.isInsideZone("ALTAR_OF_TRIAL_220020000")) {
 			return HandlerResult.fromBoolean(useQuestItem(env, item, 6, 6, false));
 		}
 		return HandlerResult.FAILED;

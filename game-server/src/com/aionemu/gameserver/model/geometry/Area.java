@@ -1,7 +1,7 @@
 package com.aionemu.gameserver.model.geometry;
 
 import com.aionemu.gameserver.model.templates.zone.Point2D;
-import com.aionemu.gameserver.world.zone.ZoneName;
+import com.aionemu.gameserver.model.templates.zone.ZoneTemplate;
 
 /**
  * Basic interface for all areas in AionEmu.<br>
@@ -181,7 +181,14 @@ public interface Area {
 
 	public boolean intersectsRectangle(RectangleArea area);
 
-	public int getWorldId();
-
-	public ZoneName getZoneName();
+	static Area create(ZoneTemplate zone) {
+		return switch (zone.getAreaType()) {
+			case POLYGON -> new PolyArea(zone.getPoints().getPoint(), zone.getPoints().getBottom(), zone.getPoints().getTop());
+			case CYLINDER -> new CylinderArea(zone.getCylinder().getX(), zone.getCylinder().getY(), zone.getCylinder().getR(),
+				zone.getCylinder().getBottom(), zone.getCylinder().getTop());
+			case SPHERE -> new SphereArea(zone.getSphere().getX(), zone.getSphere().getY(), zone.getSphere().getZ(), zone.getSphere().getR());
+			case SEMISPHERE -> new SemisphereArea(zone.getSemisphere().getX(), zone.getSemisphere().getY(), zone.getSemisphere().getZ(),
+				zone.getSemisphere().getR());
+		};
+	}
 }

@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.model.geometry;
 
 import com.aionemu.gameserver.model.templates.zone.Point2D;
-import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * Class with basic method implementation for ares.<br>
@@ -20,10 +19,6 @@ public abstract class AbstractArea implements Area {
 	 */
 	private final float maxZ;
 
-	private ZoneName zoneName;
-
-	private int worldId;
-
 	/**
 	 * Creates new AbstractArea with min and max z
 	 * 
@@ -32,14 +27,12 @@ public abstract class AbstractArea implements Area {
 	 * @param maxZ
 	 *          max z
 	 */
-	protected AbstractArea(ZoneName zoneName, int worldId, float minZ, float maxZ) {
+	protected AbstractArea(float minZ, float maxZ) {
 		if (minZ > maxZ) {
 			throw new IllegalArgumentException("minZ(" + minZ + ") > maxZ(" + maxZ + ")");
 		}
 		this.minZ = minZ;
 		this.maxZ = maxZ;
-		this.zoneName = zoneName;
-		this.worldId = worldId;
 	}
 
 	@Override
@@ -112,18 +105,5 @@ public abstract class AbstractArea implements Area {
 	@Override
 	public float getMaxZ() {
 		return maxZ;
-	}
-
-	@Override
-	public int getWorldId() {
-		return worldId;
-	}
-
-	/**
-	 * @return the zoneName
-	 */
-	@Override
-	public ZoneName getZoneName() {
-		return zoneName;
 	}
 }

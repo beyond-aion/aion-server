@@ -13,7 +13,6 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author Ritsu, Majka
@@ -97,7 +96,7 @@ public class _24052AFrozenCity extends AbstractQuestHandler {
 		final int itemObjId = item.getObjectId();
 
 		final QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (!player.isInsideItemUseZone(ZoneName.get("DF3_ITEMUSEAREA_Q2056")))
+		if (!player.isInsideItemUseZone("DF3_ITEMUSEAREA_Q2056"))
 			return HandlerResult.FAILED;
 
 		if (id != 182215378 && qs.getQuestVarById(0) == 1 || id != 182215379 && qs.getQuestVarById(0) == 2

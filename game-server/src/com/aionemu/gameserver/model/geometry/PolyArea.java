@@ -5,7 +5,6 @@ import java.util.Collection;
 import com.aionemu.gameserver.configs.main.WorldConfig;
 import com.aionemu.gameserver.model.templates.zone.Point2D;
 import com.aionemu.gameserver.utils.PositionUtil;
-import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * Area of free form
@@ -29,8 +28,8 @@ public class PolyArea extends AbstractArea {
 	 * @param zMax
 	 *          maximal z
 	 */
-	public PolyArea(ZoneName zoneName, int worldId, Collection<Point2D> points, float zMin, float zMax) {
-		this(zoneName, worldId, points.toArray(new Point2D[points.size()]), zMin, zMax);
+	public PolyArea(Collection<Point2D> points, float zMin, float zMax) {
+		this(points.toArray(Point2D[]::new), zMin, zMax);
 	}
 
 	/**
@@ -43,8 +42,8 @@ public class PolyArea extends AbstractArea {
 	 * @param zMax
 	 *          maximal z
 	 */
-	public PolyArea(ZoneName zoneName, int worldId, Point2D[] points, float zMin, float zMax) {
-		super(zoneName, worldId, zMin, zMax);
+	public PolyArea(Point2D[] points, float zMin, float zMax) {
+		super(zMin, zMax);
 
 		if (points.length < 3) {
 			throw new IllegalArgumentException("Not enough points, needed at least 3 but got " + points.length);

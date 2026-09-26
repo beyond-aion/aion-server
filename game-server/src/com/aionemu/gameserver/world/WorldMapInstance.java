@@ -16,19 +16,16 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.StaticDoor;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.geometry.RectangleArea;
 import com.aionemu.gameserver.model.team.GeneralTeam;
 import com.aionemu.gameserver.model.templates.quest.QuestNpc;
 import com.aionemu.gameserver.model.templates.world.WorldMapTemplate;
-import com.aionemu.gameserver.model.templates.zone.ZoneClassName;
 import com.aionemu.gameserver.model.templates.zone.ZoneType;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.collections.CollectionUtil;
 import com.aionemu.gameserver.world.exceptions.DuplicateAionObjectException;
-import com.aionemu.gameserver.world.zone.RegionZone;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
-import com.aionemu.gameserver.world.zone.ZoneName;
-import com.aionemu.gameserver.world.zone.ZoneService;
 
 /**
  * World map instance object.
@@ -47,7 +44,6 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 	private final Map<Integer, Player> worldMapPlayers = new ConcurrentHashMap<>(); // All players spawned in this world map instance
 	private final Set<Integer> registeredObjects = ConcurrentHashMap.newKeySet();
 	private final Set<Integer> questIds = ConcurrentHashMap.newKeySet();
-	private final Map<ZoneName, ZoneInstance> zones;
 	private final InstanceHandler instanceHandler;
 	private final int instanceId; // Id of this instance (channel)
 	private final int maxPlayers;
@@ -58,7 +54,6 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 
 	public WorldMapInstance(WorldMap parent, int instanceId, int maxPlayers, Function<WorldMapInstance, InstanceHandler> instanceHandlerSupplier) {
 		this.parent = parent;
-		this.zones = ZoneService.getInstance().getZoneInstancesByWorldId(parent.getMapId());
 		this.instanceHandler = instanceHandlerSupplier.apply(this);
 		this.instanceId = instanceId;
 		this.maxPlayers = maxPlayers;
@@ -93,12 +88,10 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 	 */
 	public abstract MapRegion getRegion(float x, float y, float z);
 
-	/**
-	 * Create new MapRegion and add link to neighbours.
-	 * 
-	 * @return newly created map region
-	 */
-	protected abstract MapRegion createMapRegion(int regionId);
+	protected final MapRegion createMapRegion(int regionId, Collection<ZoneInstance> allZones, RectangleArea area) {
+		ZoneInstance[] zones = allZones.stream().filter(zone -> zone.getAreaTemplate().intersectsRectangle(area)).toArray(ZoneInstance[]::new);
+		return new MapRegion(regionId, this, zones);
+	}
 
 	protected abstract void initMapRegions();
 
@@ -274,27 +267,6 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 
 	public WorldPosition getStartPos() {
 		return startPos;
-	}
-
-	protected ZoneInstance[] filterZones(int mapId, int regionId, float startX, float startY, float minZ, float maxZ) {
-		RegionZone regionZone = new RegionZone(startX, startY, minZ, maxZ);
-		return zones.values().stream().filter(zoneInstance -> {
-			if (zoneInstance.getAreaTemplate().intersectsRectangle(regionZone))
-				return true;
-			if (zoneInstance.getZoneTemplate().getZoneType() == ZoneClassName.DUMMY)
-				log.error("Region " + regionId + " should intersect with whole map zone!!! (map=" + mapId + ")");
-			return false;
-		}).toArray(ZoneInstance[]::new);
-	}
-
-	public boolean isInsideZone(VisibleObject object, ZoneName zoneName) {
-		ZoneInstance zoneTemplate = zones.get(zoneName);
-		return zoneTemplate != null && isInsideZone(object.getPosition(), zoneName);
-	}
-
-	public boolean isInsideZone(WorldPosition pos, ZoneName zoneName) {
-		MapRegion mapRegion = this.getRegion(pos.getX(), pos.getY(), pos.getZ());
-		return mapRegion.isInsideZone(zoneName, pos.getX(), pos.getY(), pos.getZ());
 	}
 
 	public int getMaxPlayers() {

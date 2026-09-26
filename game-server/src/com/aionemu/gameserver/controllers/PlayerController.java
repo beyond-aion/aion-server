@@ -73,7 +73,6 @@ import com.aionemu.gameserver.world.WorldMapType;
 import com.aionemu.gameserver.world.WorldType;
 import com.aionemu.gameserver.world.geo.GeoService;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
-import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * This class is for controlling players.
@@ -199,11 +198,7 @@ public class PlayerController extends CreatureController<Player> {
 			player.unsetPlayerMode(PlayerMode.RIDE);
 		ConquerorAndProtectorService.getInstance().onEnterZone(player, zone);
 		InstanceService.onEnterZone(player, zone);
-		ZoneName zoneName = zone.getAreaTemplate().getZoneName();
-		if (zoneName == null)
-			log.warn("No name found for a zone in map " + zone.getAreaTemplate().getWorldId() + " with xml name " + zone.getZoneTemplate().getXmlName());
-		else
-			QuestEngine.getInstance().onEnterZone(new QuestEnv(null, player, 0), zoneName);
+		QuestEngine.getInstance().onEnterZone(new QuestEnv(null, player, 0), zone);
 	}
 
 	@Override
@@ -211,11 +206,7 @@ public class PlayerController extends CreatureController<Player> {
 		Player player = getOwner();
 		ConquerorAndProtectorService.getInstance().onLeaveZone(player, zone);
 		InstanceService.onLeaveZone(player, zone);
-		ZoneName zoneName = zone.getAreaTemplate().getZoneName();
-		if (zoneName == null)
-			log.warn("No name found for a zone in map " + zone.getAreaTemplate().getWorldId() + " with xml name " + zone.getZoneTemplate().getXmlName());
-		else
-			QuestEngine.getInstance().onLeaveZone(new QuestEnv(null, player, 0), zoneName);
+		QuestEngine.getInstance().onLeaveZone(new QuestEnv(null, player, 0), zone);
 	}
 
 	/**

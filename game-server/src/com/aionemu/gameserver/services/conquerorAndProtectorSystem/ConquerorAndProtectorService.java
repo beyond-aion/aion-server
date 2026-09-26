@@ -140,7 +140,7 @@ public class ConquerorAndProtectorService {
 		if (player.getLegion() == null)
 			return false;
 		LegionDominionLocation loc = LegionDominionService.getInstance().getLegionDominionLoc(player.getLegion().getOccupiedLegionDominion());
-		return loc != null && loc.getZoneNameAsString().equalsIgnoreCase(zone.getAreaTemplate().getZoneName().name());
+		return loc != null && zone.matches(loc.getZoneName());
 	}
 
 	public void onKill(Player killer, Player victim) {

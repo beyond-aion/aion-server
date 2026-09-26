@@ -7,7 +7,7 @@ import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.world.zone.ZoneName;
+import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
  * @Author Majka
@@ -31,7 +31,7 @@ public class _10035SoartotheCorridor extends AbstractQuestHandler {
 		int[] npcs = { 798928, 799025, 798958, 798996, 206363, 702663, 798926 };
 		qe.registerOnLevelChanged(questId);
 		qe.registerOnQuestCompleted(questId);
-		qe.registerOnEnterZone(ZoneName.get("ANGRIEF_GATE_210050000"), questId);
+		qe.registerOnEnterZone("ANGRIEF_GATE_210050000", questId);
 		for (int mob : mobs) {
 			qe.registerQuestNpc(mob).addOnKillEvent(questId);
 		}
@@ -155,12 +155,12 @@ public class _10035SoartotheCorridor extends AbstractQuestHandler {
 	}
 
 	@Override
-	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) {
+	public boolean onEnterZoneEvent(QuestEnv env, ZoneInstance zone) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
-			if (zoneName.equals(ZoneName.get("ANGRIEF_GATE_210050000"))) {
+			if (zone.matches("ANGRIEF_GATE_210050000")) {
 				if (var == 4) {
 					changeQuestStep(env, 4, 5);
 					return true;

@@ -14,7 +14,6 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author Nephis and AU quest helper Team
@@ -40,7 +39,7 @@ public class _2393TheLoveOfAFather extends AbstractQuestHandler {
 
 		if (id != 182204162)
 			return HandlerResult.UNKNOWN;
-		if (!player.isInsideItemUseZone(ZoneName.get("DF2_ITEMUSEAREA_Q2393")))
+		if (!player.isInsideItemUseZone("DF2_ITEMUSEAREA_Q2393"))
 			return HandlerResult.UNKNOWN;
 		final QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null)

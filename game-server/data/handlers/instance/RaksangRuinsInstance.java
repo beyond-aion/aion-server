@@ -19,7 +19,6 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.geo.GeoService;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
-import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author Estrayl
@@ -302,7 +301,7 @@ public class RaksangRuinsInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void onEnterZone(Player player, ZoneInstance zone) {
-		if (zone.getZoneTemplate().getName() == ZoneName.get("IDRAKSHA_SOLO_WAVE_01_206399_1_300610000")) {
+		if (zone.matches("IDRAKSHA_SOLO_WAVE_01_206399_1_300610000")) {
 			if (spawnTask == null && isEventStarted.compareAndSet(false, true)) {
 				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_TAMES_SOLO_A_START());
 				delaySpawn((byte) 3, 20000);

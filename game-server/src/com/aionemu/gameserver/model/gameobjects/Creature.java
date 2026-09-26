@@ -31,7 +31,6 @@ import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.world.MapRegion;
 import com.aionemu.gameserver.world.WorldPosition;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
-import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * This class is representing movable objects, its base class for all in game objects that may move
@@ -457,13 +456,13 @@ public abstract class Creature extends VisibleObject {
 			mapRegion.revalidateZones(this);
 	}
 
-	public boolean isInsideZone(ZoneName zoneName) {
+	public boolean isInsideZone(String zoneName) {
 		if (!isSpawned())
 			return false;
 		return getPosition().getMapRegion().isInsideZone(zoneName, this);
 	}
 
-	public boolean isInsideItemUseZone(ZoneName zoneName) {
+	public boolean isInsideItemUseZone(String zoneName) {
 		if (!isSpawned())
 			return false;
 		return getPosition().getMapRegion().isInsideItemUseZone(zoneName, this);

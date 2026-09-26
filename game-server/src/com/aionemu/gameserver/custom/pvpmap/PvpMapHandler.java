@@ -823,7 +823,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 
 	private String getZoneNameL10n(Player player) {
 		for (ZoneInstance zone : player.findZones()) {
-			int zoneNameL10nId = getZoneNameL10nId(zone.getAreaTemplate().getZoneName().name());
+			int zoneNameL10nId = getZoneNameL10nId(zone.getZoneTemplate().getName());
 			if (zoneNameL10nId > 0) {
 				return ChatUtil.l10n(zoneNameL10nId);
 			}

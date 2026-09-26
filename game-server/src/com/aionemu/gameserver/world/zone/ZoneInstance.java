@@ -26,12 +26,17 @@ public class ZoneInstance {
 	private final ZoneInfo template;
 	private final int mapId;
 	private final Map<Integer, Creature> creatures = new HashMap<>();
-	private final List<ZoneHandler> handlers = new ArrayList<>(0);
+	private final List<ZoneHandler> handlers;
 	private boolean ignoreRegularNpcs = true;
 
 	public ZoneInstance(int mapId, ZoneInfo template) {
+		this(mapId, template, new ArrayList<>(0));
+	}
+
+	public ZoneInstance(int mapId, ZoneInfo template, List<ZoneHandler> handlers) {
 		this.template = template;
 		this.mapId = mapId;
+		this.handlers = handlers;
 	}
 
 	public Area getAreaTemplate() {
@@ -40,6 +45,10 @@ public class ZoneInstance {
 
 	public ZoneTemplate getZoneTemplate() {
 		return template.getZoneTemplate();
+	}
+
+	public boolean matches(String zoneName) {
+		return template.matches(zoneName);
 	}
 
 	public boolean revalidate(Creature creature) {

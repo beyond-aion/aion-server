@@ -28,7 +28,6 @@ import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
-import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author xTz
@@ -186,9 +185,9 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 			case 217838:
 				Player player = npc.getAggroList().getMostPlayerDamage();
 				if (player != null) {
-					if (player.isInsideZone(ZoneName.get("ILLUSION_STADIUM_1_300320000"))) {
+					if (player.isInsideZone("ILLUSION_STADIUM_1_300320000")) {
 						sp(217820, 1251.1598f, 237.97736f, 405.3968f, (byte) 0, 0);
-					} else if (player.isInsideZone(ZoneName.get("ILLUSION_STADIUM_6_300320000"))) {
+					} else if (player.isInsideZone("ILLUSION_STADIUM_6_300320000")) {
 						sp(217820, 1266.9661f, 791.5348f, 436.64014f, (byte) 0, 0);
 					}
 				}
@@ -420,19 +419,19 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 	public boolean onDie(Player player, Creature lastAttacker) {
 		super.onDie(player, lastAttacker);
 		int place = 0;
-		if (isInZone(ZoneName.get("ILLUSION_STADIUM_4_300320000"), player)) { // stage 1
+		if (player.isInsideZone("ILLUSION_STADIUM_4_300320000")) { // stage 1
 			place = 1;
-		} else if (isInZone(ZoneName.get("ILLUSION_STADIUM_8_300320000"), player)) { // stage 2
+		} else if (player.isInsideZone("ILLUSION_STADIUM_8_300320000")) { // stage 2
 			place = 2;
-		} else if (isInZone(ZoneName.get("ILLUSION_STADIUM_5_300320000"), player)) { // stage 3
+		} else if (player.isInsideZone("ILLUSION_STADIUM_5_300320000")) { // stage 3
 			place = 3;
-		} else if (isInZone(ZoneName.get("ILLUSION_STADIUM_1_300320000"), player)) { // stage 4
+		} else if (player.isInsideZone("ILLUSION_STADIUM_1_300320000")) { // stage 4
 			place = 4;
-		} else if (isInZone(ZoneName.get("ILLUSION_STADIUM_6_300320000"), player)) { // stage 4
+		} else if (player.isInsideZone("ILLUSION_STADIUM_6_300320000")) { // stage 4
 			place = 5;
-		} else if (isInZone(ZoneName.get("ILLUSION_STADIUM_2_300320000"), player)) { // stage 5
+		} else if (player.isInsideZone("ILLUSION_STADIUM_2_300320000")) { // stage 5
 			place = 6;
-		} else if (isInZone(ZoneName.get("ILLUSION_STADIUM_7_300320000"), player)) { // stage 6
+		} else if (player.isInsideZone("ILLUSION_STADIUM_7_300320000")) { // stage 6
 			place = 7;
 		}
 		getPlayerReward(player.getObjectId()).setSpawnPosition(place);
@@ -665,9 +664,9 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 					return;
 				}
 				rewardCount++;
-				if (npc.isInsideZone(ZoneName.get("ILLUSION_STADIUM_1_300320000"))) {
+				if (npc.isInsideZone("ILLUSION_STADIUM_1_300320000")) {
 					sp(205667, 1258.8464f, 237.85518f, 405.39673f, (byte) 0, 0);
-				} else if (npc.isInsideZone(ZoneName.get("ILLUSION_STADIUM_6_300320000"))) {
+				} else if (npc.isInsideZone("ILLUSION_STADIUM_6_300320000")) {
 					sp(205677, 1271.5472f, 791.36145f, 436.64017f, (byte) 0, 0);
 				}
 				dropItems.clear();

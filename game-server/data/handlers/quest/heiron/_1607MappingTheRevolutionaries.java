@@ -8,7 +8,7 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
-import com.aionemu.gameserver.world.zone.ZoneName;
+import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
  * @author vlog
@@ -23,10 +23,10 @@ public class _1607MappingTheRevolutionaries extends AbstractQuestHandler {
 	public void register() {
 		qe.registerQuestNpc(204578).addOnTalkEvent(questId);
 		qe.registerQuestNpc(204574).addOnTalkEvent(questId);
-		qe.registerOnEnterZone(ZoneName.get("MUDTHORN_EXPERIMENT_LAB_210040000"), questId);
-		qe.registerOnEnterZone(ZoneName.get("ROTRON_EXPERIMENT_LAB_210040000"), questId);
-		qe.registerOnEnterZone(ZoneName.get("PRETOR_EXPERIMENT_LAB_210040000"), questId);
-		qe.registerOnEnterZone(ZoneName.get("POISON_EXTRACTION_LAB_210040000"), questId);
+		qe.registerOnEnterZone("MUDTHORN_EXPERIMENT_LAB_210040000", questId);
+		qe.registerOnEnterZone("ROTRON_EXPERIMENT_LAB_210040000", questId);
+		qe.registerOnEnterZone("PRETOR_EXPERIMENT_LAB_210040000", questId);
+		qe.registerOnEnterZone("POISON_EXTRACTION_LAB_210040000", questId);
 	}
 
 	@Override
@@ -80,7 +80,7 @@ public class _1607MappingTheRevolutionaries extends AbstractQuestHandler {
 	}
 
 	@Override
-	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) {
+	public boolean onEnterZoneEvent(QuestEnv env, ZoneInstance zone) {
 		Player player = env.getPlayer();
 		if (player == null)
 			return false;
@@ -88,13 +88,13 @@ public class _1607MappingTheRevolutionaries extends AbstractQuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (var == 1) {
-				if (zoneName == ZoneName.get("MUDTHORN_EXPERIMENT_LAB_210040000"))
+				if (zone.matches("MUDTHORN_EXPERIMENT_LAB_210040000"))
 					return changeQuestStep(env, 0, 1, false, 1); // 1: 1
-				if (zoneName == ZoneName.get("ROTRON_EXPERIMENT_LAB_210040000"))
+				if (zone.matches("ROTRON_EXPERIMENT_LAB_210040000"))
 					return changeQuestStep(env, 0, 1, false, 2); // 2: 1
-				if (zoneName == ZoneName.get("PRETOR_EXPERIMENT_LAB_210040000"))
+				if (zone.matches("PRETOR_EXPERIMENT_LAB_210040000"))
 					return changeQuestStep(env, 0, 1, false, 3); // 3: 1
-				if (zoneName == ZoneName.get("POISON_EXTRACTION_LAB_210040000"))
+				if (zone.matches("POISON_EXTRACTION_LAB_210040000"))
 					return changeQuestStep(env, 0, 1, false, 4); // 4: 1
 			}
 		}

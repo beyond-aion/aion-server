@@ -12,7 +12,7 @@ import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldMapType;
-import com.aionemu.gameserver.world.zone.ZoneName;
+import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
  * @author Artur, Majka
@@ -32,7 +32,7 @@ public class _24046TheShadowCalls extends AbstractQuestHandler {
 		for (int npc : npcs) {
 			qe.registerQuestNpc(npc).addOnTalkEvent(questId);
 		}
-		qe.registerOnLeaveZone(ZoneName.get("BALTASAR_HILL_VILLAGE_220050000"), questId);
+		qe.registerOnLeaveZone("BALTASAR_HILL_VILLAGE_220050000", questId);
 		qe.registerOnDie(questId);
 		qe.registerOnEnterWorld(questId);
 	}
@@ -117,12 +117,12 @@ public class _24046TheShadowCalls extends AbstractQuestHandler {
 	}
 
 	@Override
-	public boolean onLeaveZoneEvent(QuestEnv env, ZoneName zoneName) {
+	public boolean onLeaveZoneEvent(QuestEnv env, ZoneInstance zone) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(env.getQuestId());
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
-			if (zoneName == ZoneName.get("BALTASAR_HILL_VILLAGE_220050000") && var == 1) {
+			if (zone.matches("BALTASAR_HILL_VILLAGE_220050000") && var == 1) {
 				giveQuestItem(env, 182205502, 1);
 				changeQuestStep(env, 1, 2); // 2
 				return true;

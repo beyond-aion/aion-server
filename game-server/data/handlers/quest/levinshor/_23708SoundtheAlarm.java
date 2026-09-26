@@ -9,7 +9,6 @@ import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author Pad
@@ -71,7 +70,7 @@ public class _23708SoundtheAlarm extends AbstractQuestHandler {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			if (player.isInsideZone(ZoneName.get("LDF4_ADVANCE_ITEMUSEAREA_Q23708_600100000"))) {
+			if (player.isInsideZone("LDF4_ADVANCE_ITEMUSEAREA_Q23708_600100000")) {
 				return HandlerResult.fromBoolean(useQuestItem(env, item, 0, 1, false));
 			}
 		}
