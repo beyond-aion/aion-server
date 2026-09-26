@@ -168,9 +168,9 @@ public class RecallService {
 			if (decisive == null || template.getPriority() < decisive.getPriority())
 				decisive = template;
 		}
-		if (decisive != null && (decisive.getFlags() & ZoneAttributes.RECALL.getId()) == 0)
+		if (decisive != null && !decisive.hasZoneAttribute(ZoneAttributes.RECALL))
 			return false;
-		return World.getInstance().getWorldMap(caster.getWorldId()).canRecall();
+		return caster.getWorldMapInstance().getTemplate().hasAttribute(ZoneAttributes.RECALL);
 	}
 
 	private static class Request {

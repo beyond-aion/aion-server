@@ -1,8 +1,7 @@
 package com.aionemu.gameserver.model.templates.world;
 
-import java.util.List;
+import java.util.EnumSet;
 
-import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 
 import com.aionemu.gameserver.configs.main.WorldConfig;
@@ -68,17 +67,13 @@ public class WorldMapTemplate implements L10n {
 	private boolean exceptBuff = false;
 
 	@XmlAttribute(name = "flags")
-	private List<ZoneAttributes> flagValues;
+	private EnumSet<ZoneAttributes> zoneAttributes = EnumSet.noneOf(ZoneAttributes.class);
 
 	@XmlAttribute(name = "pve_attack_ratio")
 	private int pveAttackRatio = 0;
 
 	@XmlAttribute(name = "pve_defend_ratio")
 	private int pveDefendRatio = 0;
-
-
-	@XmlTransient
-	private int flags;
 
 	public int getMapId() {
 		return mapId;
@@ -143,50 +138,8 @@ public class WorldMapTemplate implements L10n {
 		return dropWorldType;
 	}
 
-	/* Default zone attributes for the map */
-
-	public boolean isFly() {
-		return (flags & ZoneAttributes.FLY.getId()) != 0;
-	}
-
-	public boolean canGlide() {
-		return (flags & ZoneAttributes.GLIDE.getId()) != 0;
-	}
-
-	public boolean canPutKisk() {
-		return (flags & ZoneAttributes.BIND.getId()) != 0;
-	}
-
-	public boolean canRecall() {
-		return (flags & ZoneAttributes.RECALL.getId()) != 0;
-	}
-
-	public boolean canRide() {
-		return (flags & ZoneAttributes.RIDE.getId()) != 0;
-	}
-
-	public boolean canFlyRide() {
-		return (flags & ZoneAttributes.FLY_RIDE.getId()) != 0;
-	}
-
-	public boolean isPvpAllowed() {
-		return (flags & ZoneAttributes.PVP_ENABLED.getId()) != 0;
-	}
-
-	public boolean isSameRaceDuelsAllowed() {
-		return (flags & ZoneAttributes.DUEL_SAME_RACE_ENABLED.getId()) != 0;
-	}
-
-	public boolean isOtherRaceDuelsAllowed() {
-		return (flags & ZoneAttributes.DUEL_OTHER_RACE_ENABLED.getId()) != 0;
-	}
-
-	public boolean canReturnToBattle() {
-		return (flags & ZoneAttributes.NO_RETURN_BATTLE.getId()) != 0;
-	}
-
-	public int getFlags() {
-		return flags;
+	public boolean hasAttribute(ZoneAttributes attribute) {
+		return zoneAttributes.contains(attribute);
 	}
 
 	public int getPvEAttackRatio() {
@@ -197,13 +150,6 @@ public class WorldMapTemplate implements L10n {
 		return pveDefendRatio;
 	}
 
-	void afterUnmarshal(Unmarshaller u, Object parent) {
-		flags = ZoneAttributes.fromList(flagValues);
-	}
-
-	/**
-	 * @return the exceptBuff
-	 */
 	public boolean isExceptBuff() {
 		return exceptBuff;
 	}

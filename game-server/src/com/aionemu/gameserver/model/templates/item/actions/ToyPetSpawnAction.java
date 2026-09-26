@@ -24,6 +24,7 @@ import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.spawnengine.VisibleObjectSpawner;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+import com.aionemu.gameserver.world.zone.ZoneAttributes;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
@@ -134,8 +135,10 @@ public class ToyPetSpawnAction extends AbstractItemAction {
 	}
 
 	private boolean isPutKiskZone(Player player) {
+		if (!player.getWorldMapInstance().getTemplate().hasAttribute(ZoneAttributes.BIND))
+			return false;
 		for (ZoneInstance zone : player.findZones()) {
-			if (!zone.canPutKisk())
+			if (zone.getZoneTemplate().getFlags() > 0 && !zone.getZoneTemplate().hasZoneAttribute(ZoneAttributes.BIND))
 				return false;
 		}
 		return true;
