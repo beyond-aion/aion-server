@@ -236,7 +236,7 @@ public class PlayerLifeStats extends CreatureLifeStats<Player> {
 				flightReduceValue = owner.ride.getCostFp();
 				flightReducePeriod = 1;
 			} else if (owner.isFlying()) {
-				boolean isInFlyArea = owner.isInsideZoneType(ZoneType.FLY) && !owner.isInsideZoneType(ZoneType.NO_FLY);
+				boolean isInFlyArea = owner.isInsideFlyZone();
 				flightReduceValue = isInFlyArea ? 1 : 2;
 				flightReducePeriod = isInFlyArea && owner.isInGlidingState() ? 2 : 1;
 			} else {

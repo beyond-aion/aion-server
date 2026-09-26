@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.world.zone;
 
-import java.util.List;
-
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlEnumValue;
 import javax.xml.bind.annotation.XmlType;
@@ -10,7 +8,7 @@ import javax.xml.bind.annotation.XmlType;
  * @author Rolandas
  */
 @XmlType(name = "ZoneAttributes")
-@XmlEnum(String.class)
+@XmlEnum
 public enum ZoneAttributes {
 	BIND(1 << 0),
 	RECALL(1 << 1),
@@ -28,25 +26,14 @@ public enum ZoneAttributes {
 
 	NO_RETURN_BATTLE(1 << 9); // in client XML it's no_return_battlefield attribute
 
-	private int id;
+	private final int id;
 
-	private ZoneAttributes(int id) {
+	ZoneAttributes(int id) {
 		this.id = id;
 	}
 
-	/**
-	 * @return the id
-	 */
 	public int getId() {
 		return id;
 	}
 
-	public static Integer fromList(List<ZoneAttributes> flagValues) {
-		Integer result = 0;
-		for (ZoneAttributes attribute : ZoneAttributes.values()) {
-			if (flagValues.contains(attribute))
-				result |= attribute.getId();
-		}
-		return result;
-	}
 }

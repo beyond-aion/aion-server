@@ -30,6 +30,7 @@ import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.world.MapRegion;
 import com.aionemu.gameserver.world.WorldPosition;
+import com.aionemu.gameserver.world.zone.ZoneAttributes;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
@@ -495,8 +496,16 @@ public abstract class Creature extends VisibleObject {
 		}
 	}
 
+	public boolean isInsideFlyZone() {
+		if (isInsideZoneType(ZoneType.NO_FLY))
+			return false;
+		return isInsideZoneType(ZoneType.FLY) || getWorldMapInstance().getTemplate().hasAttribute(ZoneAttributes.FLY);
+	}
+
 	public boolean isInsidePvPZone() {
-		return !isInsideZoneType(ZoneType.DISABLE_PVP);
+		if (isInsideZoneType(ZoneType.DISABLE_PVP))
+			return false;
+		return isInsideZoneType(ZoneType.PVP) || getWorldMapInstance().getTemplate().hasAttribute(ZoneAttributes.PVP_ENABLED);
 	}
 
 	public Race getRace() {

@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.xml.bind.annotation.*;
 
+import com.aionemu.gameserver.world.zone.ZoneAttributes;
+
 /**
  * @author ATracer
  */
@@ -89,6 +91,10 @@ public class ZoneTemplate {
 
 	public List<Integer> getSiegeId() {
 		return siegeId;
+	}
+
+	public boolean hasZoneAttribute(ZoneAttributes attribute) {
+		return flags != -1 && (flags & attribute.getId()) != 0;
 	}
 
 	public int getFlags() {

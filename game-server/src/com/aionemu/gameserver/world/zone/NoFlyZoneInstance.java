@@ -27,7 +27,7 @@ public class NoFlyZoneInstance extends ZoneInstance {
 		if (!super.onLeave(creature))
 			return false;
 		creature.unsetInsideZoneType(ZoneType.NO_FLY);
-		if (!creature.isInsideZoneType(ZoneType.NO_FLY) && creature.isInsideZoneType(ZoneType.FLY) && creature instanceof Player player)
+		if (creature instanceof Player player && !player.isInsideFlyZone())
 			player.getController().onEnterFlyArea();
 		return true;
 	}

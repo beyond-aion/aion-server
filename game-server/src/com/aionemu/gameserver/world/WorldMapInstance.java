@@ -20,7 +20,6 @@ import com.aionemu.gameserver.model.geometry.RectangleArea;
 import com.aionemu.gameserver.model.team.GeneralTeam;
 import com.aionemu.gameserver.model.templates.quest.QuestNpc;
 import com.aionemu.gameserver.model.templates.world.WorldMapTemplate;
-import com.aionemu.gameserver.model.templates.zone.ZoneType;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.collections.CollectionUtil;
@@ -123,8 +122,6 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 			}
 		}
 		if (object instanceof Player player) {
-			if (getParent().isFlightAllowed())
-				player.setInsideZoneType(ZoneType.FLY);
 			worldMapPlayers.put(object.getObjectId(), player);
 		}
 	}
@@ -133,8 +130,7 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 		worldMapObjects.remove(object.getObjectId());
 		if (object instanceof Player player) {
 			lastPlayerLeaveTime = System.currentTimeMillis();
-			if (getParent().isFlightAllowed()) {
-				player.unsetInsideZoneType(ZoneType.FLY);
+			if (player.isInFlyingState()) {
 				// necessary for fly maps like the abyss (they don't have FlyZones, so no FlyZoneInstance.onLeave() is called)
 				player.getController().onLeaveFlyArea();
 			}
