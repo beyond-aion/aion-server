@@ -1061,19 +1061,6 @@ public class Player extends Creature {
 		this.playerAllianceGroup = playerAllianceGroup;
 	}
 
-	/**
-	 * Team members see each other and their kisks through hide, so this player and the members of the group or alliance it joined or left must
-	 * update what they see. Called by the team, not on moves between the groups of an alliance, which don't change who is in the same team.
-	 */
-	public void onTeamChange(TemporaryPlayerTeam<? extends TeamMember<Player>> team) {
-		if (isSpawned())
-			updateKnownlist();
-		team.forEach(member -> {
-			if (!member.equals(this) && member.isSpawned())
-				member.updateKnownlist();
-		});
-	}
-
 	public final boolean isInLeague() {
 		return isInAlliance() && getPlayerAlliance().isInLeague();
 	}
