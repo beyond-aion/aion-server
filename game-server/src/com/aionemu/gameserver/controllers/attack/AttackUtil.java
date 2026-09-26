@@ -505,22 +505,6 @@ public class AttackUtil {
 		return AttackStatus.NORMALHIT;
 	}
 
-	/**
-	 * Send a packet to everyone who is targeting creature.
-	 * 
-	 * @param object
-	 */
-	public static void removeTargetFrom(Creature object) {
-		removeTargetFrom(object, false);
-	}
-
-	public static void removeTargetFrom(Creature object, boolean validateSee) {
-		object.getKnownList().forEachPlayer(player -> {
-			if (player.getTarget() == object && (!validateSee || !player.canSee(object)))
-				player.setTarget(null);
-		});
-	}
-
 	private static ItemGroup getWeaponGroup(Creature effector, boolean mainHand) {
 		if (effector instanceof Player) {
 			Item weapon = mainHand ? ((Player) effector).getEquipment().getMainHandWeapon() : ((Player) effector).getEquipment().getOffHandWeapon();

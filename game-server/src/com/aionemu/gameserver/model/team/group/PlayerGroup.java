@@ -24,12 +24,14 @@ public class PlayerGroup extends TemporaryPlayerTeam<PlayerGroupMember> {
 		super.addMember(member);
 		playerGroupStats.onAddPlayer(member);
 		member.getObject().setPlayerGroup(this);
+		member.getObject().onTeamChange(this);
 	}
 
 	@Override
 	public void onRemoveMember(PlayerGroupMember member) {
 		playerGroupStats.onRemovePlayer(member);
 		member.getObject().setPlayerGroup(null);
+		member.getObject().onTeamChange(this);
 	}
 
 	@Override

@@ -5,7 +5,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
-import com.aionemu.gameserver.controllers.attack.AttackUtil;
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.ObserverType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -18,7 +17,6 @@ import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.skillengine.model.Skill.SkillMethod;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * @author Sweetkr, Cura
@@ -62,11 +60,6 @@ public class HideEffect extends BufEffect {
 
 		// send all to set new 'effected' visual state (remove all visual targetting from 'effected')
 		PacketSendUtility.broadcastPacketAndReceive(effected, new SM_PLAYER_STATE(effected));
-
-		ThreadPoolManager.getInstance().schedule(() -> {
-			// do on all who targetting on 'effected' (set target null, cancel attack skill, cancel npc pursuit)
-			AttackUtil.removeTargetFrom(effected, true);
-		}, 500);
 
 		effected.getController().onHide();
 		// for player adding: Remove Hide when using any item action . when requesting dialog to any npc . when being attacked . when attacking

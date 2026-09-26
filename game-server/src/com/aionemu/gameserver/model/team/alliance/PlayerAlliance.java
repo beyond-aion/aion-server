@@ -38,11 +38,13 @@ public class PlayerAlliance extends TemporaryPlayerTeam<PlayerAllianceMember> {
 		super.addMember(member);
 		PlayerAllianceGroup openAllianceGroup = getOpenAllianceGroup();
 		openAllianceGroup.addMember(member);
+		member.getObject().onTeamChange(this);
 	}
 
 	@Override
 	public void onRemoveMember(PlayerAllianceMember member) {
 		member.getPlayerAllianceGroup().removeMember(member);
+		member.getObject().onTeamChange(this);
 	}
 
 	@Override
