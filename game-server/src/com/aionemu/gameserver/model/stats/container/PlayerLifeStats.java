@@ -33,30 +33,9 @@ public class PlayerLifeStats extends CreatureLifeStats<Player> {
 	}
 
 	@Override
-	public int reduceHp(TYPE type, int value, int skillId, LOG log, Creature attacker, boolean criticalHit) {
-		int previousHp = getCurrentHp();
-		int newHp = super.reduceHp(type, value, skillId, log, attacker, criticalHit);
+	protected void onHpChanged(TYPE type, int previousHp, int newHp, Creature effector) {
 		if (newHp < previousHp)
-			endProtectionOnDamage();
-		return newHp;
-	}
-
-	@Override
-	public int reduceMp(TYPE type, int value, int skillId, LOG log) {
-		int previousMp = getCurrentMp();
-		int newMp = super.reduceMp(type, value, skillId, log);
-		if (newMp < previousMp)
-			endProtectionOnDamage();
-		return newMp;
-	}
-
-	private void endProtectionOnDamage() {
-		if (owner.isProtectionActive())
-			owner.getController().stopProtectionActiveTask();
-	}
-
-	@Override
-	protected void onHpChanged(int previousHp, int newHp, Creature effector) {
+			endProtectionOnDamage(type);
 		if (isFullyRestoredHp()) // FIXME: Temp Fix: Reset aggro list when hp is full
 			owner.getAggroList().clear();
 		if (owner.isSpawned()) {
@@ -67,18 +46,30 @@ public class PlayerLifeStats extends CreatureLifeStats<Player> {
 			if (previousHp == 0)
 				triggerFpRestore();
 		}
-		super.onHpChanged(previousHp, newHp, effector);
+		super.onHpChanged(type, previousHp, newHp, effector);
 	}
 
 	@Override
-	protected void onMpChanged(int previousMp, int newMp) {
-		super.onMpChanged(previousMp, newMp);
+	protected void onMpChanged(TYPE type, int previousMp, int newMp) {
+		super.onMpChanged(type, previousMp, newMp);
+		if (newMp < previousMp)
+			endProtectionOnDamage(type);
 		if (owner.isSpawned()) {
 			sendMpPacketUpdate();
 			sendGroupPacketUpdate();
 			if (newMp < previousMp)
 				triggerRestoreTask();
 		}
+	}
+
+	/**
+	 * Ends the spawn protection when HP or MP were lost to damage. Setting them directly (login, max stat changes, revive) and skill costs don't count.
+	 */
+	private void endProtectionOnDamage(TYPE type) {
+		if (type == TYPE.HP || type == TYPE.HEAL_MP || type == TYPE.USED_HP || type == TYPE.USED_MP)
+			return;
+		if (owner.isProtectionActive())
+			owner.getController().stopProtectionActiveTask();
 	}
 
 	private void sendGroupPacketUpdate() {
