@@ -35,14 +35,6 @@ public abstract class AbstractMaterialSkillActor extends AbstractCollisionObserv
 		this.skills = skills;
 	}
 
-	public static boolean hasSkillFor(Creature creature, List<MaterialSkill> skills) {
-		for (MaterialSkill skill : skills) {
-			if (skill.getTarget().matches(creature))
-				return true;
-		}
-		return false;
-	}
-
 	public void act() {
 		if (!skills.isEmpty() && !creature.getController().hasTask(taskId)) {
 			Future<?> t = ThreadPoolManager.getInstance().scheduleAtFixedRate(new MaterialSkillTask(), 0, 1000);
@@ -80,7 +72,7 @@ public abstract class AbstractMaterialSkillActor extends AbstractCollisionObserv
 			MaterialSkillUsage usage = creature.getController().getOrCreateMaterialSkillUsage();
 			for (int slot = 0; slot < skills.size(); slot++) {
 				MaterialSkill skill = skills.get(slot);
-				if (!skill.getTarget().matches(creature) || !WeatherService.getInstance().matchesMaterialActConditions(creature, skill.getConditions()) || !usage.tryUse(materialId, slot, skill.getFrequency()))
+				if (!WeatherService.getInstance().matchesMaterialActConditions(creature, skill.getConditions()) || !usage.tryUse(materialId, slot, skill.getFrequency()))
 					continue;
 				if (GeoDataConfig.GEO_MATERIALS_SHOWDETAILS && creature instanceof Player player && player.isStaff())
 					PacketSendUtility.sendMessage(player, AbstractMaterialSkillActor.this.getClass().getSimpleName() + " use skill=" + skill.getId());

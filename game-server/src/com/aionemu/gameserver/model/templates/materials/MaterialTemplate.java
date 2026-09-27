@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.model.templates.materials;
 
+import com.aionemu.gameserver.model.gameobjects.Creature;
+
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -26,6 +28,10 @@ public class MaterialTemplate {
 
 	public List<MaterialSkill> getSkills() {
 		return skills;
+	}
+
+	public List<MaterialSkill> getSkills(Creature creature) {
+		return skills.stream().filter(skill -> skill.getTarget().matches(creature)).toList();
 	}
 
 	public Integer getSkillObstacle() {

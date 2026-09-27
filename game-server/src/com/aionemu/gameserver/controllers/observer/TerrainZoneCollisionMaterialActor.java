@@ -23,14 +23,12 @@ public class TerrainZoneCollisionMaterialActor extends AbstractMaterialSkillActo
 
 	@Override
 	public void moved() {
-		GeoService geoService = GeoService.getInstance();
-		int matId = geoService.worldHasTerrainMaterials(creature.getWorldId())
-			? geoService.getTerrainMaterialAt(creature.getWorldId(), creature.getX(), creature.getY(), creature.getZ(), creature.getInstanceId()) : 0;
+		int matId = GeoService.getInstance().getTerrainMaterialAt(creature.getWorldId(), creature.getX(), creature.getY(), creature.getZ(), creature.getInstanceId());
 		if (matId == materialId && isTouched)
 			return;
 		MaterialTemplate template = matId == 0 ? null : DataManager.MATERIAL_DATA.getTemplate(matId);
-		if (template != null && hasSkillFor(creature, template.getSkills())) {
-			skills = template.getSkills();
+		if (template != null) {
+			skills = template.getSkills(creature);
 			materialId = matId;
 			isTouched = true;
 			act();
