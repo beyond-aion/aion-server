@@ -11381,6 +11381,166 @@
 			<item id="164000256" count="100"/><!-- Fine Crit Spell Scroll -->
 		</set>
 	</decomposable>
+	<decomposable item_id="188051523" override="true"><!-- Red Medicine Bundle -->
+		<set max_level="19">
+			<item id="162000052" count="5" chance="9.1"/><!-- Minor Life Elixir -->
+			<item id="162000052" count="6" chance="9.09"/><!-- Minor Life Elixir -->
+			<item id="162000052" count="7" chance="9.09"/><!-- Minor Life Elixir -->
+			<item id="162000052" count="8" chance="9.09"/><!-- Minor Life Elixir -->
+			<item id="162000052" count="9" chance="9.09"/><!-- Minor Life Elixir -->
+			<item id="162000052" count="10" chance="9.09"/><!-- Minor Life Elixir -->
+			<item id="162000052" count="11" chance="9.09"/><!-- Minor Life Elixir -->
+			<item id="162000052" count="12" chance="9.09"/><!-- Minor Life Elixir -->
+			<item id="162000052" count="13" chance="9.09"/><!-- Minor Life Elixir -->
+			<item id="162000052" count="14" chance="9.09"/><!-- Minor Life Elixir -->
+			<item id="162000052" count="15" chance="9.09"/><!-- Minor Life Elixir -->
+		</set>
+		<set min_level="20" max_level="29">
+			<item id="162000053" count="5" chance="9.1"/><!-- Lesser Life Elixir -->
+			<item id="162000053" count="6" chance="9.09"/><!-- Lesser Life Elixir -->
+			<item id="162000053" count="7" chance="9.09"/><!-- Lesser Life Elixir -->
+			<item id="162000053" count="8" chance="9.09"/><!-- Lesser Life Elixir -->
+			<item id="162000053" count="9" chance="9.09"/><!-- Lesser Life Elixir -->
+			<item id="162000053" count="10" chance="9.09"/><!-- Lesser Life Elixir -->
+			<item id="162000053" count="11" chance="9.09"/><!-- Lesser Life Elixir -->
+			<item id="162000053" count="12" chance="9.09"/><!-- Lesser Life Elixir -->
+			<item id="162000053" count="13" chance="9.09"/><!-- Lesser Life Elixir -->
+			<item id="162000053" count="14" chance="9.09"/><!-- Lesser Life Elixir -->
+			<item id="162000053" count="15" chance="9.09"/><!-- Lesser Life Elixir -->
+		</set>
+		<set min_level="30" max_level="39">
+			<item id="162000054" count="5" chance="9.1"/><!-- Regular Life Elixir -->
+			<item id="162000054" count="6" chance="9.09"/><!-- Regular Life Elixir -->
+			<item id="162000054" count="7" chance="9.09"/><!-- Regular Life Elixir -->
+			<item id="162000054" count="8" chance="9.09"/><!-- Regular Life Elixir -->
+			<item id="162000054" count="9" chance="9.09"/><!-- Regular Life Elixir -->
+			<item id="162000054" count="10" chance="9.09"/><!-- Regular Life Elixir -->
+			<item id="162000054" count="11" chance="9.09"/><!-- Regular Life Elixir -->
+			<item id="162000054" count="12" chance="9.09"/><!-- Regular Life Elixir -->
+			<item id="162000054" count="13" chance="9.09"/><!-- Regular Life Elixir -->
+			<item id="162000054" count="14" chance="9.09"/><!-- Regular Life Elixir -->
+			<item id="162000054" count="15" chance="9.09"/><!-- Regular Life Elixir -->
+		</set>
+		<set min_level="40" max_level="49">
+			<item id="162000055" count="5" chance="9.1"/><!-- Greater Life Elixir -->
+			<item id="162000055" count="6" chance="9.09"/><!-- Greater Life Elixir -->
+			<item id="162000055" count="7" chance="9.09"/><!-- Greater Life Elixir -->
+			<item id="162000055" count="8" chance="9.09"/><!-- Greater Life Elixir -->
+			<item id="162000055" count="9" chance="9.09"/><!-- Greater Life Elixir -->
+			<item id="162000055" count="10" chance="9.09"/><!-- Greater Life Elixir -->
+			<item id="162000055" count="11" chance="9.09"/><!-- Greater Life Elixir -->
+			<item id="162000055" count="12" chance="9.09"/><!-- Greater Life Elixir -->
+			<item id="162000055" count="13" chance="9.09"/><!-- Greater Life Elixir -->
+			<item id="162000055" count="14" chance="9.09"/><!-- Greater Life Elixir -->
+			<item id="162000055" count="15" chance="9.09"/><!-- Greater Life Elixir -->
+		</set>
+		<set min_level="50" max_level="55">
+			<item id="162000056" count="5" chance="9.1"/><!-- Major Life Elixir -->
+			<item id="162000056" count="6" chance="9.09"/><!-- Major Life Elixir -->
+			<item id="162000056" count="7" chance="9.09"/><!-- Major Life Elixir -->
+			<item id="162000056" count="8" chance="9.09"/><!-- Major Life Elixir -->
+			<item id="162000056" count="9" chance="9.09"/><!-- Major Life Elixir -->
+			<item id="162000056" count="10" chance="9.09"/><!-- Major Life Elixir -->
+			<item id="162000056" count="11" chance="9.09"/><!-- Major Life Elixir -->
+			<item id="162000056" count="12" chance="9.09"/><!-- Major Life Elixir -->
+			<item id="162000056" count="13" chance="9.09"/><!-- Major Life Elixir -->
+			<item id="162000056" count="14" chance="9.09"/><!-- Major Life Elixir -->
+			<item id="162000056" count="15" chance="9.09"/><!-- Major Life Elixir -->
+		</set>
+		<set min_level="56">
+			<item id="162000085" count="5" chance="9.1"/><!-- Fine Life Elixir -->
+			<item id="162000085" count="6" chance="9.09"/><!-- Fine Life Elixir -->
+			<item id="162000085" count="7" chance="9.09"/><!-- Fine Life Elixir -->
+			<item id="162000085" count="8" chance="9.09"/><!-- Fine Life Elixir -->
+			<item id="162000085" count="9" chance="9.09"/><!-- Fine Life Elixir -->
+			<item id="162000085" count="10" chance="9.09"/><!-- Fine Life Elixir -->
+			<item id="162000085" count="11" chance="9.09"/><!-- Fine Life Elixir -->
+			<item id="162000085" count="12" chance="9.09"/><!-- Fine Life Elixir -->
+			<item id="162000085" count="13" chance="9.09"/><!-- Fine Life Elixir -->
+			<item id="162000085" count="14" chance="9.09"/><!-- Fine Life Elixir -->
+			<item id="162000085" count="15" chance="9.09"/><!-- Fine Life Elixir -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188051524" override="true"><!-- Blue Medicine Bundle -->
+		<set max_level="19">
+			<item id="162000057" count="5" chance="9.1"/><!-- Minor Mana Elixir -->
+			<item id="162000057" count="6" chance="9.09"/><!-- Minor Mana Elixir -->
+			<item id="162000057" count="7" chance="9.09"/><!-- Minor Mana Elixir -->
+			<item id="162000057" count="8" chance="9.09"/><!-- Minor Mana Elixir -->
+			<item id="162000057" count="9" chance="9.09"/><!-- Minor Mana Elixir -->
+			<item id="162000057" count="10" chance="9.09"/><!-- Minor Mana Elixir -->
+			<item id="162000057" count="11" chance="9.09"/><!-- Minor Mana Elixir -->
+			<item id="162000057" count="12" chance="9.09"/><!-- Minor Mana Elixir -->
+			<item id="162000057" count="13" chance="9.09"/><!-- Minor Mana Elixir -->
+			<item id="162000057" count="14" chance="9.09"/><!-- Minor Mana Elixir -->
+			<item id="162000057" count="15" chance="9.09"/><!-- Minor Mana Elixir -->
+		</set>
+		<set min_level="20" max_level="29">
+			<item id="162000058" count="5" chance="9.1"/><!-- Lesser Mana Elixir -->
+			<item id="162000058" count="6" chance="9.09"/><!-- Lesser Mana Elixir -->
+			<item id="162000058" count="7" chance="9.09"/><!-- Lesser Mana Elixir -->
+			<item id="162000058" count="8" chance="9.09"/><!-- Lesser Mana Elixir -->
+			<item id="162000058" count="9" chance="9.09"/><!-- Lesser Mana Elixir -->
+			<item id="162000058" count="10" chance="9.09"/><!-- Lesser Mana Elixir -->
+			<item id="162000058" count="11" chance="9.09"/><!-- Lesser Mana Elixir -->
+			<item id="162000058" count="12" chance="9.09"/><!-- Lesser Mana Elixir -->
+			<item id="162000058" count="13" chance="9.09"/><!-- Lesser Mana Elixir -->
+			<item id="162000058" count="14" chance="9.09"/><!-- Lesser Mana Elixir -->
+			<item id="162000058" count="15" chance="9.09"/><!-- Lesser Mana Elixir -->
+		</set>
+		<set min_level="30" max_level="39">
+			<item id="162000059" count="5" chance="9.1"/><!-- Regular Mana Elixir -->
+			<item id="162000059" count="6" chance="9.09"/><!-- Regular Mana Elixir -->
+			<item id="162000059" count="7" chance="9.09"/><!-- Regular Mana Elixir -->
+			<item id="162000059" count="8" chance="9.09"/><!-- Regular Mana Elixir -->
+			<item id="162000059" count="9" chance="9.09"/><!-- Regular Mana Elixir -->
+			<item id="162000059" count="10" chance="9.09"/><!-- Regular Mana Elixir -->
+			<item id="162000059" count="11" chance="9.09"/><!-- Regular Mana Elixir -->
+			<item id="162000059" count="12" chance="9.09"/><!-- Regular Mana Elixir -->
+			<item id="162000059" count="13" chance="9.09"/><!-- Regular Mana Elixir -->
+			<item id="162000059" count="14" chance="9.09"/><!-- Regular Mana Elixir -->
+			<item id="162000059" count="15" chance="9.09"/><!-- Regular Mana Elixir -->
+		</set>
+		<set min_level="40" max_level="49">
+			<item id="162000060" count="5" chance="9.1"/><!-- Greater Mana Elixir -->
+			<item id="162000060" count="6" chance="9.09"/><!-- Greater Mana Elixir -->
+			<item id="162000060" count="7" chance="9.09"/><!-- Greater Mana Elixir -->
+			<item id="162000060" count="8" chance="9.09"/><!-- Greater Mana Elixir -->
+			<item id="162000060" count="9" chance="9.09"/><!-- Greater Mana Elixir -->
+			<item id="162000060" count="10" chance="9.09"/><!-- Greater Mana Elixir -->
+			<item id="162000060" count="11" chance="9.09"/><!-- Greater Mana Elixir -->
+			<item id="162000060" count="12" chance="9.09"/><!-- Greater Mana Elixir -->
+			<item id="162000060" count="13" chance="9.09"/><!-- Greater Mana Elixir -->
+			<item id="162000060" count="14" chance="9.09"/><!-- Greater Mana Elixir -->
+			<item id="162000060" count="15" chance="9.09"/><!-- Greater Mana Elixir -->
+		</set>
+		<set min_level="50" max_level="55">
+			<item id="162000061" count="5" chance="9.1"/><!-- Major Mana Elixir -->
+			<item id="162000061" count="6" chance="9.09"/><!-- Major Mana Elixir -->
+			<item id="162000061" count="7" chance="9.09"/><!-- Major Mana Elixir -->
+			<item id="162000061" count="8" chance="9.09"/><!-- Major Mana Elixir -->
+			<item id="162000061" count="9" chance="9.09"/><!-- Major Mana Elixir -->
+			<item id="162000061" count="10" chance="9.09"/><!-- Major Mana Elixir -->
+			<item id="162000061" count="11" chance="9.09"/><!-- Major Mana Elixir -->
+			<item id="162000061" count="12" chance="9.09"/><!-- Major Mana Elixir -->
+			<item id="162000061" count="13" chance="9.09"/><!-- Major Mana Elixir -->
+			<item id="162000061" count="14" chance="9.09"/><!-- Major Mana Elixir -->
+			<item id="162000061" count="15" chance="9.09"/><!-- Major Mana Elixir -->
+		</set>
+		<set min_level="56">
+			<item id="162000086" count="5" chance="9.1"/><!-- Fine Mana Elixir -->
+			<item id="162000086" count="6" chance="9.09"/><!-- Fine Mana Elixir -->
+			<item id="162000086" count="7" chance="9.09"/><!-- Fine Mana Elixir -->
+			<item id="162000086" count="8" chance="9.09"/><!-- Fine Mana Elixir -->
+			<item id="162000086" count="9" chance="9.09"/><!-- Fine Mana Elixir -->
+			<item id="162000086" count="10" chance="9.09"/><!-- Fine Mana Elixir -->
+			<item id="162000086" count="11" chance="9.09"/><!-- Fine Mana Elixir -->
+			<item id="162000086" count="12" chance="9.09"/><!-- Fine Mana Elixir -->
+			<item id="162000086" count="13" chance="9.09"/><!-- Fine Mana Elixir -->
+			<item id="162000086" count="14" chance="9.09"/><!-- Fine Mana Elixir -->
+			<item id="162000086" count="15" chance="9.09"/><!-- Fine Mana Elixir -->
+		</set>
+	</decomposable>
 	<decomposable item_id="188051579" override="true"><!-- Heavy Hidden Bundle -->
 		<set>
 			<item id="152000107" chance="33.34"/><!-- Mithril Ore -->
@@ -41605,6 +41765,17 @@
 			<item id="186000054" chance="25"/><!-- Lesser Ancient Crown -->
 		</set>
 	</decomposable>
+	<decomposable item_id="188053161" override="true"><!-- Altar of Avarice Assault Reward Box: Grade 3 -->
+		<set>
+			<item id="186000242"/><!-- Ceramium Medal -->
+		</set>
+		<set>
+			<item id="186000059" chance="25"/><!-- Major Ancient Seal -->
+			<item id="186000060" chance="25"/><!-- Greater Ancient Seal -->
+			<item id="186000061" chance="25"/><!-- Ancient Seal -->
+			<item id="186000062" chance="25"/><!-- Lesser Ancient Seal -->
+		</set>
+	</decomposable>
 	<decomposable item_id="188053162" override="true"><!-- Altar of Avarice Assault Reward Box: Grade 4 -->
 		<set>
 			<item id="186000147" count="2"/><!-- Mithril Medal -->
@@ -41625,6 +41796,17 @@
 			<item id="186000052" chance="25"/><!-- Greater Ancient Crown -->
 			<item id="186000053" chance="25"/><!-- Ancient Crown -->
 			<item id="186000054" chance="25"/><!-- Lesser Ancient Crown -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053165" override="true"><!-- Temple of Scales Assault Reward Box: Grade 3 -->
+		<set>
+			<item id="186000242"/><!-- Ceramium Medal -->
+		</set>
+		<set>
+			<item id="186000059" chance="25"/><!-- Major Ancient Seal -->
+			<item id="186000060" chance="25"/><!-- Greater Ancient Seal -->
+			<item id="186000061" chance="25"/><!-- Ancient Seal -->
+			<item id="186000062" chance="25"/><!-- Lesser Ancient Seal -->
 		</set>
 	</decomposable>
 	<decomposable item_id="188053166" override="true"><!-- Temple of Scales Assault Reward Box: Grade 4 -->
@@ -41649,6 +41831,17 @@
 			<item id="186000054" chance="25"/><!-- Lesser Ancient Crown -->
 		</set>
 	</decomposable>
+	<decomposable item_id="188053169" override="true"><!-- Crimson Temple Assault Reward Box: Grade 3 -->
+		<set>
+			<item id="186000242"/><!-- Ceramium Medal -->
+		</set>
+		<set>
+			<item id="186000059" chance="25"/><!-- Major Ancient Seal -->
+			<item id="186000060" chance="25"/><!-- Greater Ancient Seal -->
+			<item id="186000061" chance="25"/><!-- Ancient Seal -->
+			<item id="186000062" chance="25"/><!-- Lesser Ancient Seal -->
+		</set>
+	</decomposable>
 	<decomposable item_id="188053170" override="true"><!-- Crimson Temple Assault Reward Box: Grade 4 -->
 		<set>
 			<item id="186000147" count="2"/><!-- Mithril Medal -->
@@ -41669,6 +41862,17 @@
 			<item id="186000052" chance="25"/><!-- Greater Ancient Crown -->
 			<item id="186000053" chance="25"/><!-- Ancient Crown -->
 			<item id="186000054" chance="25"/><!-- Lesser Ancient Crown -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053173" override="true"><!-- Vorgaltem Citadel Assault Reward Box: Grade 3 -->
+		<set>
+			<item id="186000242"/><!-- Ceramium Medal -->
+		</set>
+		<set>
+			<item id="186000059" chance="25"/><!-- Major Ancient Seal -->
+			<item id="186000060" chance="25"/><!-- Greater Ancient Seal -->
+			<item id="186000061" chance="25"/><!-- Ancient Seal -->
+			<item id="186000062" chance="25"/><!-- Lesser Ancient Seal -->
 		</set>
 	</decomposable>
 	<decomposable item_id="188053174" override="true"><!-- Vorgaltem Citadel Assault Reward Box: Grade 4 -->
@@ -42063,6 +42267,20 @@
 			<item id="186000247"/><!-- Major Danuar Relic -->
 		</set>
 	</decomposable>
+	<decomposable item_id="188053300" override="true"><!-- Expeditionary Force Ceramium Medal Box -->
+		<set>
+			<item id="186000242" chance="25"/><!-- Ceramium Medal -->
+			<item id="186000242" count="2" chance="25"/><!-- Ceramium Medal -->
+			<item id="186000243" count="3" chance="6.25"/><!-- Fragmented Ceramium -->
+			<item id="186000243" count="4" chance="6.25"/><!-- Fragmented Ceramium -->
+			<item id="186000243" count="5" chance="6.25"/><!-- Fragmented Ceramium -->
+			<item id="186000243" count="6" chance="6.25"/><!-- Fragmented Ceramium -->
+			<item id="186000243" count="7" chance="6.25"/><!-- Fragmented Ceramium -->
+			<item id="186000243" count="8" chance="6.25"/><!-- Fragmented Ceramium -->
+			<item id="186000243" count="9" chance="6.25"/><!-- Fragmented Ceramium -->
+			<item id="186000243" count="10" chance="6.25"/><!-- Fragmented Ceramium -->
+		</set>
+	</decomposable>
 	<decomposable item_id="188053304" override="true"><!-- Expeditionary Force Ceramium Medal Box -->
 		<set>
 			<item id="186000242" chance="25"/><!-- Ceramium Medal -->
@@ -42153,6 +42371,11 @@
 			<item id="168000175" chance="5.88"/><!-- Illusion Godstone: Triniel's Rationality -->
 			<item id="168000176" chance="5.88"/><!-- Illusion Godstone: Vaizel's Vow -->
 			<item id="168000177" chance="5.88"/><!-- Illusion Godstone: Meslamtaeda's Regret -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053309" override="true"><!-- Legion's Ceramium Medal Box -->
+		<set>
+			<item id="186000242"/><!-- Ceramium Medal -->
 		</set>
 	</decomposable>
 	<decomposable item_id="188053322" override="true"><!-- Levinshor Alliance Manastone Box -->
@@ -50092,6 +50315,11 @@
 			<item id="167000877" chance="1.85"/><!-- Manastone: Magical Accuracy +14 / Attack +2 -->
 		</set>
 	</decomposable>
+	<decomposable item_id="188053909" override="true"><!-- Large Ascension Water Box -->
+		<set>
+			<item id="166030005" count="5"/><!-- Tempering Solution -->
+		</set>
+	</decomposable>
 	<decomposable item_id="188053915" override="true"><!-- [Event] Aether Bloom Bouquet -->
 		<set>
 			<item id="186000406" count="3"/><!-- [Event] Aether Bloom -->
@@ -50362,14 +50590,6 @@
 		<set>
 			<item id="187060166"/><!-- Trillirunerk's Ice Flame Feather -->
 			<item id="187060170"/><!-- Trillirunerk's Blue Flame Feather -->
-		</set>
-	</decomposable>
-	<decomposable item_id="188053997" override="true"><!-- Ancient Crown Bundle -->
-		<set>
-			<item id="186000051" chance="10"/><!-- Major Ancient Crown -->
-			<item id="186000052" chance="20"/><!-- Greater Ancient Crown -->
-			<item id="186000053" chance="30"/><!-- Ancient Crown -->
-			<item id="186000054" chance="40"/><!-- Lesser Ancient Crown -->
 		</set>
 	</decomposable>
 	<decomposable item_id="188053998" override="true"><!-- Ornate Enchantment Stone Bundle -->
