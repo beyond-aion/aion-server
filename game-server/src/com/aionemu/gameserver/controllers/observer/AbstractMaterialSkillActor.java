@@ -25,7 +25,6 @@ public abstract class AbstractMaterialSkillActor extends AbstractCollisionObserv
 	private final TaskId taskId;
 	protected volatile int materialId;
 	protected volatile List<MaterialSkill> skills;
-	protected volatile boolean isTouched = false;
 
 	public AbstractMaterialSkillActor(Creature creature, Spatial geometry, byte intentions, CheckType checkType, TaskId taskId, int materialId,
 		List<MaterialSkill> skills) {
@@ -53,7 +52,6 @@ public abstract class AbstractMaterialSkillActor extends AbstractCollisionObserv
 
 	@Override
 	public void died(Creature creature) {
-		isTouched = false;
 		abort();
 	}
 
@@ -61,8 +59,6 @@ public abstract class AbstractMaterialSkillActor extends AbstractCollisionObserv
 
 		@Override
 		public void run() {
-			if (!isTouched)
-				return;
 			if (!creature.isSpawned() || creature.isDead())
 				return;
 			if (creature instanceof Player player && (player.isInFlyingState() || player.isUsingFlightTransporterOrWindstream()))

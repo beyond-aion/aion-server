@@ -18,6 +18,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class ZoneCollisionMaterialActor extends AbstractMaterialSkillActor {
 
+	private volatile boolean isTouched = false;
+
 	public ZoneCollisionMaterialActor(Creature creature, Spatial geometry, MaterialTemplate template, CheckType checkType, List<MaterialSkill> skills) {
 		super(creature, geometry, CollisionIntention.MATERIAL.getId(), checkType, TaskId.ZONE_MATERIAL_ACTION, template.getId(), skills);
 	}
