@@ -471,6 +471,8 @@ public class StatFunctions {
 	 */
 	public static float adjustDamageByPvpOrPveModifiers(Creature attacker, Creature target, float baseDamage, int pvpDamage, boolean useTemplateDmg,
 		SkillElement element) {
+		if (attacker.equals(target)) // e.g. material skills, which the creature casts on itself
+			return baseDamage;
 		int attackBonus = 0;
 		int defenseBonus = 0;
 		float damage = baseDamage;

@@ -82,7 +82,7 @@ public abstract class DamageEffect extends EffectTemplate {
 	}
 
 	public boolean shouldApplyMagicalSkillBoostBonus(Effect effect) {
-		return effect.getSkillTemplate().isApplyMagicalSkillBoostBonus();
+		return effect.getSkillTemplate().isApplyMagicalSkillBoostBonus() && !effect.getEffector().equals(effect.getEffected());
 	}
 
 	public boolean shouldUseKnowledge() {
