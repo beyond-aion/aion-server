@@ -33,6 +33,29 @@ public class PlayerLifeStats extends CreatureLifeStats<Player> {
 	}
 
 	@Override
+	public int reduceHp(TYPE type, int value, int skillId, LOG log, Creature attacker, boolean criticalHit) {
+		int previousHp = getCurrentHp();
+		int newHp = super.reduceHp(type, value, skillId, log, attacker, criticalHit);
+		if (newHp < previousHp)
+			endProtectionOnDamage();
+		return newHp;
+	}
+
+	@Override
+	public int reduceMp(TYPE type, int value, int skillId, LOG log) {
+		int previousMp = getCurrentMp();
+		int newMp = super.reduceMp(type, value, skillId, log);
+		if (newMp < previousMp)
+			endProtectionOnDamage();
+		return newMp;
+	}
+
+	private void endProtectionOnDamage() {
+		if (owner.isProtectionActive())
+			owner.getController().stopProtectionActiveTask();
+	}
+
+	@Override
 	protected void onHpChanged(int previousHp, int newHp, Creature effector) {
 		if (isFullyRestoredHp()) // FIXME: Temp Fix: Reset aggro list when hp is full
 			owner.getAggroList().clear();

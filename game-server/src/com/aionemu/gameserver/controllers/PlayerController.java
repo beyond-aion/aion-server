@@ -441,9 +441,6 @@ public class PlayerController extends CreatureController<Player> {
 		if (getOwner().isDead())
 			return;
 
-		if (getOwner().isProtectionActive())
-			return;
-
 		// avoid killing players after duel
 		if (!getOwner().equals(attacker) && attacker.getMaster() instanceof Player && !getOwner().isEnemy(attacker))
 			return;
