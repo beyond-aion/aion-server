@@ -9,10 +9,7 @@ import com.aionemu.gameserver.geoEngine.scene.Spatial;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.templates.materials.MaterialActCondition;
 import com.aionemu.gameserver.model.templates.materials.MaterialSkill;
-import com.aionemu.gameserver.model.templates.world.WeatherEntry;
-import com.aionemu.gameserver.services.GameTimeService;
 import com.aionemu.gameserver.services.WeatherService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.model.Effect;
@@ -68,21 +65,6 @@ public abstract class AbstractMaterialSkillActor extends AbstractCollisionObserv
 		abort();
 	}
 
-	private boolean matchActConditions(MaterialSkill skill) {
-		for (MaterialActCondition condition : skill.getConditions()) {
-			if (condition == MaterialActCondition.NIGHT) {
-				if (!GameTimeService.getInstance().getGameTime().isNight())
-					return false;
-			} else if (condition == MaterialActCondition.SUNNY) { // sunny actually means "not raining" (fireplaces don't burn during rain)
-				WeatherEntry weatherEntry = WeatherService.getInstance().findWeatherEntry(creature);
-				boolean isRain = weatherEntry.getWeatherName() != null && weatherEntry.getWeatherName().startsWith("RAIN");
-				if (isRain && !weatherEntry.isBefore()) // before means "before" the weather (e.g. clouds before rain)
-					return false;
-			}
-		}
-		return true;
-	}
-
 	private class MaterialSkillTask implements Runnable {
 
 		@Override
@@ -98,7 +80,7 @@ public abstract class AbstractMaterialSkillActor extends AbstractCollisionObserv
 			MaterialSkillUsage usage = creature.getController().getOrCreateMaterialSkillUsage();
 			for (int slot = 0; slot < skills.size(); slot++) {
 				MaterialSkill skill = skills.get(slot);
-				if (!skill.getTarget().matches(creature) || !matchActConditions(skill) || !usage.tryUse(materialId, slot, skill.getFrequency()))
+				if (!skill.getTarget().matches(creature) || !WeatherService.getInstance().matchesMaterialActConditions(creature, skill.getConditions()) || !usage.tryUse(materialId, slot, skill.getFrequency()))
 					continue;
 				if (GeoDataConfig.GEO_MATERIALS_SHOWDETAILS && creature instanceof Player player && player.isStaff())
 					PacketSendUtility.sendMessage(player, AbstractMaterialSkillActor.this.getClass().getSimpleName() + " use skill=" + skill.getId());

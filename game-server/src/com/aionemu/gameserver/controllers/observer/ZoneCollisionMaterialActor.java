@@ -20,16 +20,6 @@ public class ZoneCollisionMaterialActor extends AbstractMaterialSkillActor {
 	}
 
 	@Override
-	protected float getTouchZMax(float z) {
-		return z + 2;
-	}
-
-	@Override
-	protected float getTouchZMin(float x, float y, float z) {
-		return z - 2;
-	}
-
-	@Override
 	public void onMoved(CollisionResults collisionResults) {
 		boolean oldTouched = isTouched;
 		isTouched = collisionResults.size() > 0;

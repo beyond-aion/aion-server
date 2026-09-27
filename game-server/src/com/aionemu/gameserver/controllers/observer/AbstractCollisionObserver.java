@@ -11,7 +11,6 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldPosition;
-import com.aionemu.gameserver.world.geo.GeoService;
 
 /**
  * @author MrPoke
@@ -50,11 +49,11 @@ public abstract class AbstractCollisionObserver extends ActionObserver {
 						Vector3f pos;
 						Vector3f dir;
 						if (checkType == CheckType.TOUCH) { // check if we are standing on the geometry (either top or bottom)
-							float x = creature.getX();
-							float y = creature.getY();
 							float z = creature.getZ();
-							pos = new Vector3f(x, y, getTouchZMax(z));
-							dir = new Vector3f(x, y, getTouchZMin(x, y, z));
+							float zMax = z + Math.max(2f, 0.05f + creature.getObjectTemplate().getBoundRadius().getUpper());
+							float zMin = z - 2f; // hit jumping, gliding or flying players
+							pos = new Vector3f(creature.getX(), creature.getY(), zMax);
+							dir = new Vector3f(pos.getX(), pos.getY(), zMin);
 						} else { // check if we passed the geometry (either entering or leaving)
 							pos = new Vector3f(creature.getX(), creature.getY(), creature.getZ() + GeoMap.COLLISION_CHECK_Z_OFFSET);
 							dir = oldPos.clone();
@@ -74,25 +73,6 @@ public abstract class AbstractCollisionObserver extends ActionObserver {
 				}
 			});
 		}
-	}
-
-	/**
-	 * @return The upper end of the vertical ray that checks whether the creature touches the geometry.
-	 */
-	protected float getTouchZMax(float z) {
-		return z + 0.05f + creature.getObjectTemplate().getBoundRadius().getUpper();
-	}
-
-	/**
-	 * @return The lower end of the vertical ray that checks whether the creature touches the geometry.
-	 */
-	protected float getTouchZMin(float x, float y, float z) {
-		if (creature instanceof Player player && (player.getMoveController().isJumping() || !player.isFlying())) {
-			float geoZ = GeoService.getInstance().getZ(creature.getWorldId(), x, y, z, creature.getInstanceId());
-			if (!Float.isNaN(geoZ))
-				return geoZ - 0.11f;
-		}
-		return z - 0.11f;
 	}
 
 	public abstract void onMoved(CollisionResults result);
