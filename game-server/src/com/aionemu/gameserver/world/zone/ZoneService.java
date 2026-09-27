@@ -21,7 +21,7 @@ import com.aionemu.gameserver.services.ShieldService;
 import com.aionemu.gameserver.world.zone.handler.MaterialZoneHandler;
 import com.aionemu.gameserver.world.zone.handler.ZoneHandler;
 import com.aionemu.gameserver.world.zone.handler.ZoneHandlerClassListener;
-import com.aionemu.gameserver.world.zone.handler.ZoneNameAnnotation;
+import com.aionemu.gameserver.world.zone.handler.ZoneHandlerArea;
 
 /**
  * @author ATracer, antness
@@ -59,10 +59,9 @@ public final class ZoneService implements GameEngine {
 	}
 
 	public void addZoneHandlerClass(Class<? extends ZoneHandler> handler) {
-		ZoneNameAnnotation idAnnotation = handler.getAnnotation(ZoneNameAnnotation.class);
+		ZoneHandlerArea idAnnotation = handler.getAnnotation(ZoneHandlerArea.class);
 		if (idAnnotation != null) {
-			String[] zoneNames = idAnnotation.value().split(" +");
-			for (String zoneName : zoneNames) {
+			for (String zoneName : idAnnotation.value()) {
 				if (DataManager.ZONE_DATA.validateZoneName(zoneName))
 					zoneHandlers.put(zoneName, handler);
 			}
