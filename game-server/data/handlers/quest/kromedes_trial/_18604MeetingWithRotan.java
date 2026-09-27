@@ -13,7 +13,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.world.zone.ZoneName;
+import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
  * @author Rolandas, Pad, Neon
@@ -26,7 +26,7 @@ public class _18604MeetingWithRotan extends AbstractQuestHandler {
 
 	@Override
 	public void register() {
-		qe.registerOnEnterZone(ZoneName.get("GRAND_CAVERN_300230000"), questId);
+		qe.registerOnEnterZone("GRAND_CAVERN_300230000", questId);
 		qe.registerQuestNpc(700961).addOnTalkEvent(questId); // Grave Robber's Corpse
 	}
 
@@ -77,8 +77,8 @@ public class _18604MeetingWithRotan extends AbstractQuestHandler {
 	}
 
 	@Override
-	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) {
-		if (zoneName != ZoneName.get("GRAND_CAVERN_300230000"))
+	public boolean onEnterZoneEvent(QuestEnv env, ZoneInstance zone) {
+		if (!zone.matches("GRAND_CAVERN_300230000"))
 			return false;
 
 		QuestState qs = env.getPlayer().getQuestStateList().getQuestState(questId);

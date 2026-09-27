@@ -8,15 +8,21 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION.ActionT
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.zone.handler.QuestZoneHandler;
-import com.aionemu.gameserver.world.zone.handler.ZoneNameAnnotation;
+import com.aionemu.gameserver.world.zone.handler.ZoneHandlerArea;
 
 /**
  * @author Rolandas
  */
-@ZoneNameAnnotation(
-	value = "LF1A_SENSORYAREA_Q1012_2_206005_4_210030000 LF1A_SENSORYAREA_Q1012_3_206006_6_210030000 LF1A_SENSORYAREA_Q1012_1_206004_8_210030000",
-	questId = 1012)
+@ZoneHandlerArea({
+	"LF1A_SENSORYAREA_Q1012_1_206004_8_210030000",
+	"LF1A_SENSORYAREA_Q1012_2_206005_4_210030000",
+	"LF1A_SENSORYAREA_Q1012_3_206006_6_210030000"
+})
 public class _1012SensoryArea extends QuestZoneHandler {
+
+	public _1012SensoryArea() {
+		super(1012);
+	}
 
 	@Override
 	public AbstractQuestZoneObserver createObserver(Player player, ZoneTemplate zoneTemplate) {

@@ -13,7 +13,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.world.zone.ZoneName;
+import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
  * @Author Majka
@@ -50,7 +50,7 @@ public class _10503GuardDownSecretsOut extends AbstractQuestHandler {
 		qe.registerQuestNpc(mobTargetId).addOnKillEvent(questId);
 		qe.registerQuestItem(collectItemId, questId);
 		qe.registerQuestItem(workItemId, questId);
-		qe.registerOnEnterZone(ZoneName.get("LF5_SENSORYAREA_Q10503_206364_3_210070000"), questId); // Aetheric Field Stone of Earth zone
+		qe.registerOnEnterZone("LF5_SENSORYAREA_Q10503_206364_3_210070000", questId); // Aetheric Field Stone of Earth zone
 		qe.registerOnQuestCompleted(questId);
 		qe.registerOnLevelChanged(questId);
 	}
@@ -140,9 +140,9 @@ public class _10503GuardDownSecretsOut extends AbstractQuestHandler {
 	}
 
 	@Override
-	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) { // Step 6: Examine the Aetheric Field Stone of Earth.
+	public boolean onEnterZoneEvent(QuestEnv env, ZoneInstance zone) { // Step 6: Examine the Aetheric Field Stone of Earth.
 
-		if (zoneName == ZoneName.get("LF5_SENSORYAREA_Q10503_206364_3_210070000")) {
+		if (zone.matches("LF5_SENSORYAREA_Q10503_206364_3_210070000")) {
 
 			Player player = env.getPlayer();
 			if (player == null) {

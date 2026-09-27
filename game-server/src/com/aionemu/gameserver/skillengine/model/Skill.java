@@ -239,6 +239,14 @@ public class Skill {
 		return true;
 	}
 
+	/**
+	 * @return True if the skill must not reach enemies, which a duel partner is for the time of the duel.
+	 */
+	private boolean isFriendOnlySkill() {
+		TargetRelationAttribute relation = getSkillTemplate().getProperties().getTargetRelation();
+		return relation != TargetRelationAttribute.ENEMY && relation != TargetRelationAttribute.ALL;
+	}
+
 	private boolean isValidTarget(Player player, Creature target) {
 		if (target.isSpawnProtectedFrom(player))
 			return false;
@@ -248,7 +256,7 @@ public class Skill {
 			if (target.getRace() != player.getRace()) {
 				if (!target.isEnemyFrom(player))
 					return false;
-			} else if (targetPlayer.isDueling(player) && getSkillTemplate().getProperties().getTargetRelation() != TargetRelationAttribute.ENEMY) {
+			} else if (targetPlayer.isDueling(player) && isFriendOnlySkill()) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_IS_NOT_VALID());
 				return false;
 			}

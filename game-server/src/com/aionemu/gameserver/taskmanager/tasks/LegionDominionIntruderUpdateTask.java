@@ -16,7 +16,6 @@ import com.aionemu.gameserver.services.conquerorAndProtectorSystem.ConquerorAndP
 import com.aionemu.gameserver.taskmanager.AbstractPeriodicTaskManager;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
-import com.aionemu.gameserver.world.zone.ZoneName;
 
 public class LegionDominionIntruderUpdateTask extends AbstractPeriodicTaskManager {
 
@@ -38,16 +37,11 @@ public class LegionDominionIntruderUpdateTask extends AbstractPeriodicTaskManage
 				continue;
 			List<Player> players = World.getInstance().getWorldMap(entry.getKey()).getMainWorldMapInstance().getPlayersInside();
 			for (LegionDominionLocation location : entry.getValue()) {
-				if (location.getZoneNameAsString().isEmpty())
-					continue;
-				ZoneName zoneName = ZoneName.get(location.getZoneNameAsString());
-				if (zoneName == ZoneName.NONE)
-					continue;
 				ConquerorAndProtectorService cpService = ConquerorAndProtectorService.getInstance();
 				List<Player> protectors = new ArrayList<>();
 				List<Player> conquerors = new ArrayList<>();
 				for (Player player : players) {
-					if (!player.isInsideZone(zoneName))
+					if (!player.isInsideZone(location.getZoneName()))
 						continue;
 					CPInfo cpInfo = cpService.getCPInfoForCurrentMap(player);
 					if (cpInfo == null || (cpInfo.getType() == CPType.PROTECTOR && cpInfo.getLDRank() != 3))

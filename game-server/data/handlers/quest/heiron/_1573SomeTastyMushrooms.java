@@ -10,7 +10,6 @@ import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author Ritsu
@@ -34,7 +33,7 @@ public class _1573SomeTastyMushrooms extends AbstractQuestHandler {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			if (player.isInsideItemUseZone(ZoneName.get("LF3_ITEMUSEAREA_Q1573"))) {
+			if (player.isInsideItemUseZone("LF3_ITEMUSEAREA_Q1573")) {
 				removeQuestItem(env, 182201784, 1);
 				return HandlerResult.fromBoolean(useQuestItem(env, item, 1, 2, false, 182201735, 1, 0));
 			}

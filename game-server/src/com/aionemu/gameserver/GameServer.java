@@ -25,7 +25,6 @@ import com.aionemu.gameserver.configs.Config;
 import com.aionemu.gameserver.configs.main.CleaningConfig;
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.configs.main.GSConfig;
-import com.aionemu.gameserver.configs.main.GeoDataConfig;
 import com.aionemu.gameserver.configs.network.NetworkConfig;
 import com.aionemu.gameserver.custom.instance.CustomInstanceService;
 import com.aionemu.gameserver.custom.pvpmap.PvpMapService;
@@ -162,8 +161,6 @@ public class GameServer {
 		AtreianPassportService.getInstance();
 		CronJobService.getInstance();
 
-		if (!GeoDataConfig.GEO_MATERIALS_ENABLE)
-			CuringZoneService.getInstance();
 		RoadService.getInstance();
 		HTMLCache.getInstance();
 		AbyssRankingCache.getInstance();

@@ -8,7 +8,7 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.world.zone.ZoneName;
+import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
  * Talk with Sefrim.
@@ -42,7 +42,7 @@ public class _20506MuscleOverMind extends AbstractQuestHandler {
 		for (int mob : mobs) {
 			qe.registerQuestNpc(mob).addOnKillEvent(questId);
 		}
-		qe.registerOnEnterZone(ZoneName.get("DF5_SENSORYAREA_Q20506A_206376_2_220080000"), questId); // Mindboggle Waste zone
+		qe.registerOnEnterZone("DF5_SENSORYAREA_Q20506A_206376_2_220080000", questId); // Mindboggle Waste zone
 		qe.registerOnQuestCompleted(questId);
 		qe.registerOnLevelChanged(questId);
 		qe.registerOnLogOut(questId);
@@ -118,8 +118,8 @@ public class _20506MuscleOverMind extends AbstractQuestHandler {
 	}
 
 	@Override
-	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) {
-		if (zoneName == ZoneName.get("DF5_SENSORYAREA_Q20506A_206376_2_220080000")) {
+	public boolean onEnterZoneEvent(QuestEnv env, ZoneInstance zone) {
+		if (zone.matches("DF5_SENSORYAREA_Q20506A_206376_2_220080000")) {
 			Player player = env.getPlayer();
 			if (player == null)
 				return false;

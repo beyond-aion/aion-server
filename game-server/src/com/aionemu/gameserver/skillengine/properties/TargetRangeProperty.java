@@ -3,6 +3,7 @@ package com.aionemu.gameserver.skillengine.properties;
 import java.util.List;
 
 import com.aionemu.gameserver.configs.main.GeoDataConfig;
+import com.aionemu.gameserver.configs.main.GeoDataConfig.Mode;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.model.gameobjects.Trap;
@@ -138,7 +139,7 @@ public class TargetRangeProperty {
 
 	private static boolean checkGeo(VisibleObject object, Creature firstTarget, SkillTemplate skillTemplate) {
 		// If creature is at least 2 meters above the terrain, ground skill cannot be applied
-		if (GeoDataConfig.GEO_ENABLE) {
+		if (GeoDataConfig.MODE == Mode.ON) {
 			if (skillTemplate.isGroundSkill()) {
 				float geoZ = GeoService.getInstance().getZ(object, object.getZ() + 2, object.getZ() - 2);
 				if (Float.isNaN(geoZ))

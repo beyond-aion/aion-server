@@ -1,10 +1,8 @@
 package com.aionemu.gameserver.model.templates.vortex;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
+import java.util.Set;
+
+import javax.xml.bind.annotation.*;
 
 import com.aionemu.gameserver.model.Race;
 
@@ -21,6 +19,8 @@ public class VortexTemplate {
 	protected Race dRace;
 	@XmlAttribute(name = "offence_race")
 	protected Race oRace;
+	@XmlAttribute(name = "zones")
+	private Set<String> zones;
 	@XmlElement(name = "home_point")
 	protected HomePoint home;
 	@XmlElement(name = "resurrection_point")
@@ -47,6 +47,10 @@ public class VortexTemplate {
 	 */
 	public Race getInvadersRace() {
 		return this.oRace;
+	}
+
+	public Set<String> getZones() {
+		return zones;
 	}
 
 	public HomePoint getHomePoint() {

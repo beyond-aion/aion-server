@@ -13,6 +13,7 @@ import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.handler.TargetEventHandler;
 import com.aionemu.gameserver.ai.manager.WalkManager;
 import com.aionemu.gameserver.configs.main.GeoDataConfig;
+import com.aionemu.gameserver.configs.main.GeoDataConfig.Mode;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.geoEngine.collision.IgnoreProperties;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -270,7 +271,7 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 		float newX = (targetDestX - ownerX) * distFraction + ownerX;
 		float newY = (targetDestY - ownerY) * distFraction + ownerY;
 		float newZ = (targetDestZ - ownerZ) * distFraction + ownerZ;
-		if (GeoDataConfig.GEO_NPC_MOVE && GeoDataConfig.GEO_ENABLE && owner.getAi().getSubState() != AISubState.WALK_PATH
+		if (GeoDataConfig.GEO_NPC_MOVE && GeoDataConfig.MODE == Mode.ON && owner.getAi().getSubState() != AISubState.WALK_PATH
 			&& owner.getAi().getState() != AIState.RETURNING && owner.getGameStats().getNextGeoZUpdate() < System.currentTimeMillis()) {
 			// fix Z if npc doesn't move to spawn point
 			if (owner.getSpawn().getX() != targetDestX || owner.getSpawn().getY() != targetDestY || owner.getSpawn().getZ() != targetDestZ) {

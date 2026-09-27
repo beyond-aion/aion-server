@@ -17,7 +17,6 @@ import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldPosition;
 import com.aionemu.gameserver.world.geo.GeoService;
-import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author Estrayl
@@ -97,7 +96,7 @@ public class _30721OminousDebrisEnergy extends AbstractQuestHandler {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			if (player.isInsideItemUseZone(ZoneName.get("LF5_ITEMUSEAREA_Q30721"))) {
+			if (player.isInsideItemUseZone("LF5_ITEMUSEAREA_Q30721")) {
 				int var = qs.getQuestVarById(0);
 				if (var == 2) {
 					boolean isItemUseComplete = useQuestItem(env, item, 2, 3, false);

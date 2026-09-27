@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.house.House;
@@ -14,7 +15,6 @@ import com.aionemu.gameserver.services.HousingBidService;
 import com.aionemu.gameserver.services.HousingService;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.utils.collections.Predicates;
-import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author Rolandas, Luzien, Neon
@@ -58,9 +58,7 @@ public class Auction extends AdminCommand {
 				}
 				houses = Collections.singletonList(house);
 			} else {
-				houses = findHousesInZone(admin, params[1], Predicates.alwaysTrue());
-				if (houses == null)
-					return;
+				houses = findHousesInZone(params[1], Predicates.alwaysTrue());
 			}
 
 			int removedHouses = 0;
@@ -114,15 +112,13 @@ public class Auction extends AdminCommand {
 				filter = filter.and(house -> house.matchesLandRace(Race.ELYOS));
 				houses = HousingService.getInstance().getCustomHouses().stream().filter(filter).collect(Collectors.toList());
 			} else {
-				houses = findHousesInZone(admin, params[1], filter);
+				houses = findHousesInZone(params[1], filter);
 			}
-			if (houses == null)
-				return;
 			if (houses.isEmpty()) {
 				sendInfo(admin, "No auctionable " + houseType.name().toLowerCase() + "s found.");
 				return;
 			}
-			long price = params.length < 5 ? houses.get(0).getDefaultAuctionPrice() : Long.parseLong(params[4]);
+			long price = params.length < 5 ? houses.getFirst().getDefaultAuctionPrice() : Long.parseLong(params[4]);
 			if (price <= 0) {
 				sendInfo(admin, "Starting price must be positive.");
 				return;
@@ -141,17 +137,14 @@ public class Auction extends AdminCommand {
 		}
 	}
 
-	private List<House> findHousesInZone(Player admin, String zoneName, Predicate<House> filter) {
-		ZoneName zone = ZoneName.get(zoneName);
-		if (zone == ZoneName.NONE) {
-			sendInfo(admin, "Invalid zone name");
-			return null;
-		}
+	private List<House> findHousesInZone(String zoneName, Predicate<House> filter) {
+		if (!DataManager.ZONE_DATA.isValidZoneName(zoneName))
+			throw new IllegalArgumentException("Invalid zone name.");
 		List<House> housesToRemove = new ArrayList<>();
 		for (House house : HousingService.getInstance().getCustomHouses()) {
 			if (!filter.test(house))
 				continue;
-			if (house.getPosition().getMapRegion().isInsideZone(zone, house.getX(), house.getY(), house.getZ()))
+			if (house.getPosition().getMapRegion().isInsideZone(zoneName, house.getX(), house.getY(), house.getZ()))
 				housesToRemove.add(house);
 		}
 		return housesToRemove;

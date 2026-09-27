@@ -9,7 +9,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.zone.PvPZoneInstance;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
-import com.aionemu.gameserver.world.zone.ZoneName;
 import com.aionemu.gameserver.world.zone.handler.AdvancedZoneHandler;
 
 /**
@@ -45,12 +44,12 @@ public abstract class PvPZone implements AdvancedZoneHandler {
 			player.getController().addTask(TaskId.TELEPORT, ThreadPoolManager.getInstance().schedule(() -> {
 				player.getController().getAndRemoveTask(TaskId.TELEPORT); // remove manually as it won't get removed automatically
 				PlayerReviveService.duelRevive(player);
-				doTeleport(player, zone.getZoneTemplate().getName());
+				doTeleport(player, zone);
 				PacketSendUtility.broadcastToZone(zone, SM_SYSTEM_MESSAGE.STR_PvPZONE_OUT_MESSAGE(player.getName()));
 			}, 5000));
 		}
 		return true;
 	}
 
-	protected abstract void doTeleport(Player player, ZoneName zoneName);
+	protected abstract void doTeleport(Player player, ZoneInstance zone);
 }
