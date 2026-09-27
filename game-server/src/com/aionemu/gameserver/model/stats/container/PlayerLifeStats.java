@@ -5,7 +5,6 @@ import java.util.concurrent.Future;
 import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.templates.zone.ZoneType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_FLY_TIME;
@@ -34,13 +33,13 @@ public class PlayerLifeStats extends CreatureLifeStats<Player> {
 
 	@Override
 	protected void onHpChanged(TYPE type, int previousHp, int newHp, Creature effector) {
-		if (newHp < previousHp)
-			endProtectionOnDamage(type);
 		if (isFullyRestoredHp()) // FIXME: Temp Fix: Reset aggro list when hp is full
 			owner.getAggroList().clear();
 		if (owner.isSpawned()) {
 			sendHpPacketUpdate();
 			sendGroupPacketUpdate();
+			if (newHp < previousHp)
+				endProtectionOnDamage(type);
 			if (previousHp == 0 || newHp < previousHp)
 				triggerRestoreTask();
 			if (previousHp == 0)
@@ -52,13 +51,13 @@ public class PlayerLifeStats extends CreatureLifeStats<Player> {
 	@Override
 	protected void onMpChanged(TYPE type, int previousMp, int newMp) {
 		super.onMpChanged(type, previousMp, newMp);
-		if (newMp < previousMp)
-			endProtectionOnDamage(type);
 		if (owner.isSpawned()) {
 			sendMpPacketUpdate();
 			sendGroupPacketUpdate();
-			if (newMp < previousMp)
+			if (newMp < previousMp) {
+				endProtectionOnDamage(type);
 				triggerRestoreTask();
+			}
 		}
 	}
 

@@ -1,14 +1,10 @@
 package com.aionemu.gameserver.model.templates.materials;
 
-import com.aionemu.gameserver.model.gameobjects.Creature;
-
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
+
+import com.aionemu.gameserver.model.gameobjects.Creature;
 
 /**
  * @author Rolandas
