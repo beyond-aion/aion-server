@@ -31,7 +31,7 @@ public class FlyZoneInstance extends ZoneInstance {
 	public synchronized boolean onLeave(Creature creature) {
 		if (super.onLeave(creature)) {
 			creature.unsetInsideZoneType(ZoneType.FLY);
-			if (!creature.isInsideZoneType(ZoneType.FLY) && creature instanceof Player)
+			if (!creature.isInsideFlyZone() && creature instanceof Player)
 				((Player) creature).getController().onLeaveFlyArea();
 			return true;
 		} else
