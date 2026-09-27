@@ -9,7 +9,6 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "ZoneClassName")
 @XmlEnum
 public enum ZoneClassName {
-	DUMMY,
 	SUB,
 	FLY,
 	NO_FLY,

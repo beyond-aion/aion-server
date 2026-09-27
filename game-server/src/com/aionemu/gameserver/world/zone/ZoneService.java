@@ -15,14 +15,13 @@ import com.aionemu.gameserver.model.GameEngine;
 import com.aionemu.gameserver.model.siege.SiegeLocation;
 import com.aionemu.gameserver.model.templates.materials.MaterialTemplate;
 import com.aionemu.gameserver.model.templates.zone.MaterialZoneTemplate;
-import com.aionemu.gameserver.model.templates.zone.WorldZoneTemplate;
 import com.aionemu.gameserver.model.templates.zone.ZoneInfo;
 import com.aionemu.gameserver.model.vortex.VortexLocation;
 import com.aionemu.gameserver.services.ShieldService;
 import com.aionemu.gameserver.world.zone.handler.MaterialZoneHandler;
 import com.aionemu.gameserver.world.zone.handler.ZoneHandler;
 import com.aionemu.gameserver.world.zone.handler.ZoneHandlerClassListener;
-import com.aionemu.gameserver.world.zone.handler.ZoneNameAnnotation;
+import com.aionemu.gameserver.world.zone.handler.ZoneHandlerArea;
 
 /**
  * @author ATracer, antness
@@ -60,10 +59,9 @@ public final class ZoneService implements GameEngine {
 	}
 
 	public void addZoneHandlerClass(Class<? extends ZoneHandler> handler) {
-		ZoneNameAnnotation idAnnotation = handler.getAnnotation(ZoneNameAnnotation.class);
+		ZoneHandlerArea idAnnotation = handler.getAnnotation(ZoneHandlerArea.class);
 		if (idAnnotation != null) {
-			String[] zoneNames = idAnnotation.value().split(" +");
-			for (String zoneName : zoneNames) {
+			for (String zoneName : idAnnotation.value()) {
 				if (DataManager.ZONE_DATA.validateZoneName(zoneName))
 					zoneHandlers.put(zoneName, handler);
 			}
@@ -72,10 +70,6 @@ public final class ZoneService implements GameEngine {
 
 	public List<ZoneInstance> createZoneInstances(int mapId) {
 		List<ZoneInstance> zones = new ArrayList<>();
-		int worldSize = DataManager.WORLD_MAPS_DATA.getTemplate(mapId).getWorldSize();
-		WorldZoneTemplate zone = new WorldZoneTemplate(worldSize, mapId);
-		ZoneInstance fullMap = new ZoneInstance(mapId, new ZoneInfo(zone));
-		zones.add(fullMap);
 		VortexLocation vortex = getAndValidateVortexLocation(mapId);
 		for (ZoneInfo area : DataManager.ZONE_DATA.getZones(mapId)) {
 			ZoneInstance instance;
@@ -101,7 +95,7 @@ public final class ZoneService implements GameEngine {
 						}
 					}
 				}
-				case PVP -> instance = area.getZoneTemplate().getFlags() == 0 ? new DisablePvPZoneInstance(mapId, area) : new PvPZoneInstance(mapId, area);
+				case PVP -> instance = area.getZoneTemplate().hasZoneAttribute(ZoneAttributes.PVP_ENABLED) ? new PvPZoneInstance(mapId, area) : new DisablePvPZoneInstance(mapId, area);
 				default -> {
 					instance = tryRegisterInvasionZone(vortex, area);
 					if (instance == null)

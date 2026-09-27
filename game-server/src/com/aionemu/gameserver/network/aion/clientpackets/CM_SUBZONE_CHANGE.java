@@ -34,7 +34,7 @@ public class CM_SUBZONE_CHANGE extends AionClientPacket {
 		if (player.hasAccess(AdminConfig.ZONE_INFO)) {
 			int foundZones = 0;
 			for (ZoneInstance zone : player.findZones()) {
-				if (zone.getZoneTemplate().getZoneType() == ZoneClassName.DUMMY || zone.getZoneTemplate().getZoneType() == ZoneClassName.WEATHER)
+				if (zone.getZoneTemplate().getZoneType() == ZoneClassName.WEATHER)
 					continue;
 				foundZones++;
 				PacketSendUtility.sendMessage(player, "Passed zone: unk=" + unk + "; " + zone.getZoneTemplate().getZoneType() + " "

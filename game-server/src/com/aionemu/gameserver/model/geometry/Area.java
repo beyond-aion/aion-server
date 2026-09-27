@@ -183,7 +183,7 @@ public interface Area {
 
 	static Area create(ZoneTemplate zone) {
 		return switch (zone.getAreaType()) {
-			case POLYGON -> new PolyArea(zone.getPoints().getPoint(), zone.getPoints().getBottom(), zone.getPoints().getTop());
+			case POLYGON -> new PolyArea(zone.getPoints().getPoints(), zone.getPoints().getBottom(), zone.getPoints().getTop());
 			case CYLINDER -> new CylinderArea(zone.getCylinder().getX(), zone.getCylinder().getY(), zone.getCylinder().getR(),
 				zone.getCylinder().getBottom(), zone.getCylinder().getTop());
 			case SPHERE -> new SphereArea(zone.getSphere().getX(), zone.getSphere().getY(), zone.getSphere().getZ(), zone.getSphere().getR());

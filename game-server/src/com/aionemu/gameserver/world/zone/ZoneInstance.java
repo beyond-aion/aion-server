@@ -14,7 +14,6 @@ import com.aionemu.gameserver.model.templates.zone.ZoneClassName;
 import com.aionemu.gameserver.model.templates.zone.ZoneInfo;
 import com.aionemu.gameserver.model.templates.zone.ZoneTemplate;
 import com.aionemu.gameserver.utils.collections.CollectionUtil;
-import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.zone.handler.AdvancedZoneHandler;
 import com.aionemu.gameserver.world.zone.handler.ZoneHandler;
 
@@ -104,74 +103,6 @@ public class ZoneInstance {
 		if (handler.handlesAllCreatures())
 			ignoreRegularNpcs = false;
 		handlers.add(handler);
-	}
-
-	public boolean canFly() {
-		if (template.getZoneTemplate().getFlags() == -1 || template.getZoneTemplate().getFlags() == 0
-			|| World.getInstance().getWorldMap(mapId).hasOverridenOption(ZoneAttributes.FLY))
-			return World.getInstance().getWorldMap(mapId).isFlightAllowed();
-		return (template.getZoneTemplate().getFlags() & ZoneAttributes.FLY.getId()) != 0;
-	}
-
-	public boolean canGlide() {
-		if (template.getZoneTemplate().getFlags() == -1 || template.getZoneTemplate().getFlags() == 0
-			|| World.getInstance().getWorldMap(mapId).hasOverridenOption(ZoneAttributes.GLIDE))
-			return World.getInstance().getWorldMap(mapId).canGlide();
-		return (template.getZoneTemplate().getFlags() & ZoneAttributes.GLIDE.getId()) != 0;
-	}
-
-	public boolean canPutKisk() {
-		if (template.getZoneTemplate().getFlags() == -1 || template.getZoneTemplate().getFlags() == 0
-			|| World.getInstance().getWorldMap(mapId).hasOverridenOption(ZoneAttributes.BIND))
-			return World.getInstance().getWorldMap(mapId).canPutKisk();
-		return (template.getZoneTemplate().getFlags() & ZoneAttributes.BIND.getId()) != 0;
-	}
-
-	public boolean canRecall() {
-		if (template.getZoneTemplate().getFlags() == -1 || template.getZoneTemplate().getFlags() == 0
-			|| World.getInstance().getWorldMap(mapId).hasOverridenOption(ZoneAttributes.RECALL)) {
-			return World.getInstance().getWorldMap(mapId).canRecall();
-		}
-		return (template.getZoneTemplate().getFlags() & ZoneAttributes.RECALL.getId()) != 0;
-	}
-
-	public boolean canReturnToBattle() {
-		return World.getInstance().getWorldMap(mapId).canReturnToBattle();
-	}
-
-	public boolean canRide() {
-		if (template.getZoneTemplate().getFlags() == -1 || template.getZoneTemplate().getFlags() == 0
-			|| World.getInstance().getWorldMap(mapId).hasOverridenOption(ZoneAttributes.RIDE)) {
-			return World.getInstance().getWorldMap(mapId).canRide();
-		}
-		return (template.getZoneTemplate().getFlags() & ZoneAttributes.RIDE.getId()) != 0;
-	}
-
-	public boolean canFlyRide() {
-		if (template.getZoneTemplate().getFlags() == -1 || template.getZoneTemplate().getFlags() == 0
-			|| World.getInstance().getWorldMap(mapId).hasOverridenOption(ZoneAttributes.FLY_RIDE))
-			return World.getInstance().getWorldMap(mapId).canFlyRide();
-		return (template.getZoneTemplate().getFlags() & ZoneAttributes.FLY_RIDE.getId()) != 0;
-	}
-
-	public boolean isPvpAllowed() {
-		if (template.getZoneTemplate().getZoneType() != ZoneClassName.PVP)
-			return World.getInstance().getWorldMap(mapId).isPvpAllowed();
-		return (template.getZoneTemplate().getFlags() & ZoneAttributes.PVP_ENABLED.getId()) != 0;
-	}
-
-	public boolean isSameRaceDuelsAllowed() {
-		if (template.getZoneTemplate().getZoneType() != ZoneClassName.DUEL || template.getZoneTemplate().getFlags() == 0
-			|| World.getInstance().getWorldMap(mapId).hasOverridenOption(ZoneAttributes.DUEL_SAME_RACE_ENABLED))
-			return World.getInstance().getWorldMap(mapId).isSameRaceDuelsAllowed();
-		return (template.getZoneTemplate().getFlags() & ZoneAttributes.DUEL_SAME_RACE_ENABLED.getId()) != 0;
-	}
-
-	public boolean isOtherRaceDuelsAllowed() {
-		if (template.getZoneTemplate().getZoneType() != ZoneClassName.DUEL || template.getZoneTemplate().getFlags() == 0
-			|| World.getInstance().getWorldMap(mapId).hasOverridenOption(ZoneAttributes.DUEL_OTHER_RACE_ENABLED))
-			return World.getInstance().getWorldMap(mapId).isOtherRaceDuelsAllowed();
-		return (template.getZoneTemplate().getFlags() & ZoneAttributes.DUEL_OTHER_RACE_ENABLED.getId()) != 0;
 	}
 
 	public int getTownId() {

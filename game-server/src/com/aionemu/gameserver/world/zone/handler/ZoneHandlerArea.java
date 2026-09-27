@@ -10,9 +10,8 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-public @interface ZoneNameAnnotation {
+public @interface ZoneHandlerArea {
 
-	String value();
+	String[] value();
 
-	int questId() default 0;
 }
