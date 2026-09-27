@@ -64,10 +64,6 @@ public abstract class AbstractOverTimeEffect extends EffectTemplate {
 			effect.getEffected().getEffectController().unsetAbnormal(abnormal);
 	}
 
-	public int getChecktime() {
-		return checktime;
-	}
-
 	/**
 	 * Rounds the duration down to a whole number of ticks and adds one second on top. Ticking runs while more than one interval is left, so this is what
 	 * decides the tick count: a duration of 10000 with a checktime of 1000 yields ten ticks, and one of 1000 yields a single one.
