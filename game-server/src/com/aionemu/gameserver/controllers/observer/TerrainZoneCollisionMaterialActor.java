@@ -22,6 +22,12 @@ public class TerrainZoneCollisionMaterialActor extends AbstractMaterialSkillActo
 	}
 
 	@Override
+	public void died(Creature creature) {
+		super.died(creature);
+		materialId = 0; 
+	}
+
+	@Override
 	public void moved() {
 		int matId = GeoService.getInstance().getTerrainMaterialAt(creature.getWorldId(), creature.getX(), creature.getY(), creature.getZ(), creature.getInstanceId());
 		if (materialId == matId)

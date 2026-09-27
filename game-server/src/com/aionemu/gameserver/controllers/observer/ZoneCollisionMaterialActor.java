@@ -25,6 +25,12 @@ public class ZoneCollisionMaterialActor extends AbstractMaterialSkillActor {
 	}
 
 	@Override
+	public void died(Creature creature) {
+		super.died(creature);
+		isTouched = false;
+	}
+
+	@Override
 	public void onMoved(CollisionResults collisionResults) {
 		boolean oldTouched = isTouched;
 		isTouched = collisionResults.size() > 0;
