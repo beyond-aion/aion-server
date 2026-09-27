@@ -18,10 +18,14 @@ public class MaterialSkillUsage {
 	 */
 	public synchronized boolean tryUse(int materialId, int slot, int periodSeconds) {
 		long now = System.currentTimeMillis();
-		Long lastUseMillis = lastUseMillisBySlot.get(slot);
-		if (lastUseMillis != null && materialId == lastMaterialId && now < lastUseMillis + periodSeconds * 1000L)
-			return false;
-		lastMaterialId = materialId;
+		if (lastMaterialId != materialId) {
+			lastUseMillisBySlot.clear();
+			lastMaterialId = materialId;
+		} else {
+			Long lastUseMillis = lastUseMillisBySlot.get(slot);
+			if (lastUseMillis != null && now < lastUseMillis + periodSeconds * 1000L)
+				return false;
+		}
 		lastUseMillisBySlot.put(slot, now);
 		return true;
 	}
