@@ -39,34 +39,21 @@ public class CraftService {
 
 	private static final Logger log = LoggerFactory.getLogger("CRAFT_LOG");
 
-	@SuppressWarnings("lossy-conversions")
 	public static void finishCrafting(Player player, RecipeTemplate recipetemplate, int critCount, int bonus) {
 
 		if (recipetemplate.getMaxProductionCount() != null && critCount == 0) {
-			QuestEngine.getInstance().onFailCraft(new QuestEnv(null, player, 0, 0), recipetemplate.getComboProduct(1) == null ? 0 : recipetemplate.getComboProduct(1));
+			QuestEngine.getInstance().onFailCraft(new QuestEnv(null, player, 0),
+				recipetemplate.getComboProduct(1) == null ? 0 : recipetemplate.getComboProduct(1));
 		}
 
-		int skillId = recipetemplate.getSkillId();
-		int skillLvl = recipetemplate.getSkillpoint();
-		int xpReward = (int) ((0.008 * (skillLvl + 100) * (skillLvl + 100) + 60));
-		xpReward = xpReward + (xpReward * bonus / 100); // bonus
-		int gainedCraftXp = Rates.SKILL_XP_CRAFTING.calcResult(player, xpReward);
-		StatEnum boostStat = StatEnum.getModifier(skillId);
-		if (boostStat != null) // there is no boost for morphing (40009)
-			gainedCraftXp *= player.getGameStats().getStat(boostStat, 100).getCurrent() / 100f;
-		gainedCraftXp = Math.max(1, gainedCraftXp);
-
-		if (player.getSkillList().addSkillXp(player, skillId, gainedCraftXp, skillLvl)) {
-			player.getCommonData().addExp(xpReward, Rates.XP_CRAFTING);
-		} else {
-			PacketSendUtility.sendPacket(player,
-				SM_SYSTEM_MESSAGE.STR_MSG_DONT_GET_PRODUCTION_EXP(DataManager.SKILL_DATA.getSkillTemplate(skillId).getL10n()));
-		}
+		// morphing has no skill points and grants no experience
+		if (!recipetemplate.isMorph())
+			rewardCraftXp(player, recipetemplate, bonus);
 
 		int productItemId = critCount > 0 ? recipetemplate.getComboProduct(critCount) : recipetemplate.getProductId();
 
 		ItemService.addItem(player, productItemId, recipetemplate.getQuantity(), true,
-			new ItemUpdatePredicate(ItemAddType.CRAFTED_ITEM, ItemUpdateType.INC_ITEM_COLLECT) {
+			new ItemUpdatePredicate(ItemAddType.CRAFTED_ITEM, ItemUpdateType.INC_ITEM_CRAFT) {
 
 				@Override
 				public boolean changeItem(Item item) {
@@ -90,6 +77,26 @@ public class CraftService {
 		}
 	}
 
+	@SuppressWarnings("lossy-conversions")
+	private static void rewardCraftXp(Player player, RecipeTemplate recipetemplate, int bonus) {
+		int skillId = recipetemplate.getSkillId();
+		int skillLvl = recipetemplate.getSkillpoint();
+		int xpReward = (int) ((0.008 * (skillLvl + 100) * (skillLvl + 100) + 60));
+		xpReward = xpReward + (xpReward * bonus / 100); // bonus
+		int gainedCraftXp = Rates.SKILL_XP_CRAFTING.calcResult(player, xpReward);
+		StatEnum boostStat = StatEnum.getModifier(skillId);
+		if (boostStat != null)
+			gainedCraftXp *= player.getGameStats().getStat(boostStat, 100).getCurrent() / 100f;
+		gainedCraftXp = Math.max(1, gainedCraftXp);
+
+		if (player.getSkillList().addSkillXp(player, skillId, gainedCraftXp, skillLvl)) {
+			player.getCommonData().addExp(xpReward, Rates.XP_CRAFTING);
+		} else {
+			PacketSendUtility.sendPacket(player,
+				SM_SYSTEM_MESSAGE.STR_MSG_DONT_GET_PRODUCTION_EXP(DataManager.SKILL_DATA.getSkillTemplate(skillId).getL10n()));
+		}
+	}
+
 	public static void startCrafting(Player player, int recipeId, int targetObjId, int craftType, Map<Integer, Long> sendMaterialsData) {
 
 		RecipeTemplate recipeTemplate = DataManager.RECIPE_DATA.getRecipeTemplateById(recipeId);
@@ -101,8 +108,9 @@ public class CraftService {
 			sendCancelCraft(player, skillId, targetObjId, itemTemplate);
 			return;
 		}
-		// Retail consumes a charge at craft start, regardless of success or failure.
+		// a production of a limited recipe is used up on craft start, regardless of the result
 		player.getRecipeList().decreaseProductionCount(player, recipeId);
+		consumeComponents(player, recipeTemplate, sendMaterialsData);
 		if (recipeTemplate.getDp() != null)
 			player.getCommonData().addDp(-recipeTemplate.getDp());
 
@@ -119,9 +127,7 @@ public class CraftService {
 		int skillLvlDiff = player.getSkillList().getSkillLevel(skillId) - recipeTemplate.getSkillpoint();
 		CraftingTask craftingTask = new CraftingTask(player, (StaticObject) target, recipeTemplate, skillLvlDiff, craftType == 1 ? 15 : 0);
 
-		if (skillId == 40009) {
-			craftingTask.setInterval(200);
-		} else {
+		if (!recipeTemplate.isMorph()) {
 			int interval = 2500 - (skillLvlDiff * 60);
 			craftingTask.setInterval(interval < intervalCap ? intervalCap : interval);
 		}
@@ -144,7 +150,7 @@ public class CraftService {
 		}
 
 		// morphing dont need static object/npc to use
-		if ((skillId != 40009)) {
+		if (!recipeTemplate.isMorph()) {
 			if (target == null || !(target instanceof StaticObject)) {
 				AuditLogger.log(player, "tried to craft with incorrect target");
 				return false;
@@ -216,6 +222,10 @@ public class CraftService {
 			return false;
 		}
 
+		return true;
+	}
+
+	private static void consumeComponents(Player player, RecipeTemplate recipeTemplate, Map<Integer, Long> sendMaterialsData) {
 		for (ComponentsData componentsData : recipeTemplate.getComponents()) {
 			Component firstComponent = componentsData.getComponent().get(0);
 			if (!sendMaterialsData.containsKey(firstComponent.getItemId()))
@@ -225,8 +235,6 @@ public class CraftService {
 				player.getInventory().decreaseByItemId(component.getItemId(), component.getQuantity());
 			break;
 		}
-
-		return true;
 	}
 
 	private static void sendCancelCraft(Player player, int skillId, int targetObjId, ItemTemplate itemTemplate) {

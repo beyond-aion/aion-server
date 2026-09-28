@@ -1,13 +1,12 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
 import java.util.Map;
-import java.util.Set;
 
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
- * @author SVDNESS
+ * @author lord_rex, SVDNESS
  */
 public class SM_RECIPE_LIST extends AionServerPacket {
 	private final Map<Integer, Integer> recipes;

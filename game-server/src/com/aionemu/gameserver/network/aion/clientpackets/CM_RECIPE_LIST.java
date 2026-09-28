@@ -1,11 +1,11 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_RECIPE_LIST;
-
-import java.util.Set;
 
 /**
  * @author SVDNESS

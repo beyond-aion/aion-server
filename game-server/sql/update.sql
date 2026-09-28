@@ -7,3 +7,6 @@ ALTER TABLE `player_effects`
 
 ALTER TABLE `inventory`
 	ADD COLUMN `rank_limit_expire_time` int NOT NULL DEFAULT '0' AFTER `rnd_plume_bonus`;
+
+ALTER TABLE `player_recipes`
+	ADD COLUMN `production_count` tinyint NOT NULL DEFAULT '0' AFTER `recipe_id`;

@@ -4,7 +4,7 @@ import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
- * @author SVDNESS
+ * @author lord_rex, SVDNESS
  */
 public class SM_LEARN_RECIPE extends AionServerPacket {
 	private final int recipeId;
