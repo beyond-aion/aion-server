@@ -5,6 +5,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.SkillType;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * Resolved values of an active one time skill attack boost. A creature can only have one of them, the last applied effect replaces the previous one.
@@ -68,7 +69,9 @@ public class OneTimeBoostSkillAttack {
 	public void consumeCharge() {
 		if (dmgPercent == 0 && dmgFlat == 0)
 			return;
-		if (remainingCount.decrementAndGet() <= 0)
-			effect.endEffect();
+		// the damage of all targets and effects of one attack is calculated in a row, so ending the boost right away would deny it to the ones after
+		// the last charge was used. the short delay lets them still receive the bonus, no matter which code path calculates the damage
+		if (remainingCount.decrementAndGet() == 0)
+			ThreadPoolManager.getInstance().schedule(effect::endEffect, 10);
 	}
 }
