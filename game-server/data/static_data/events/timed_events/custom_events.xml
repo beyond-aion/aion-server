@@ -82,7 +82,7 @@
 		<login_message>Benefit from increased enchantment rate. But only today!</login_message>
 		<config_properties>
 			<property>gameserver.rates.enchantment_stone.base_chances = 73</property>
-			<property>gameserver.rates.enchantment_stone.amplified_chances = 55</property>
+			<property>gameserver.rates.enchantment_stone.amplified_chances = 65</property>
 		</config_properties>
 	</event>
 	<event name="Increased Crafting Crit Rate" start="2026-08-17T00:00:00" end="2026-08-23T23:59:59">

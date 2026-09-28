@@ -1,11 +1,6 @@
 package com.aionemu.gameserver.services.toypet;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.TreeSet;
-
-import org.apache.commons.lang3.ArrayUtils;
+import java.util.*;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -162,8 +157,9 @@ public final class PetFeedCalculator {
 		if (progress.getHungryLevel() != PetHungryLevel.FULL || rewardGroup.getResults().size() == 0)
 			return null;
 
-		int pointsIndex = ArrayUtils.indexOf(fullCounts, (short) fullCount);
-		if (pointsIndex == ArrayUtils.INDEX_NOT_FOUND)
+		// binary search works because fullCounts is sorted
+		int pointsIndex = Arrays.binarySearch(fullCounts, (short) fullCount);
+		if (pointsIndex < 0)
 			return null;
 
 		if (progress.isLovedFeeded()) { // for cash feed

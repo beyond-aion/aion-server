@@ -12,6 +12,7 @@ import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.controllers.attack.AttackResult;
 import com.aionemu.gameserver.controllers.effect.CumulativeResistType;
+import com.aionemu.gameserver.controllers.observer.OneTimeBoostSkillAttack;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.SkillElement;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -76,6 +77,8 @@ public abstract class EffectTemplate {
 	protected int[] preEffects;
 	@XmlAttribute(name = "preeffect_prob")
 	protected int preEffectProb = 100;
+	@XmlAttribute(name = "critprobmod1")
+	protected int critProbMod1 = 0;
 	@XmlAttribute(name = "critprobmod2")
 	protected int critProbMod2 = 100;
 	@XmlAttribute(name = "critadddmg1")
@@ -191,13 +194,6 @@ public abstract class EffectTemplate {
 	}
 
 	/**
-	 * @return the critProbMod2
-	 */
-	public int getCritProbMod2() {
-		return critProbMod2;
-	}
-
-	/**
 	 * @return the critAddDmg1
 	 */
 	public int getCritAddDmg1() {
@@ -274,6 +270,10 @@ public abstract class EffectTemplate {
 		return critAddDmg2 + critAddDmg1 * effect.getSkillLevel();
 	}
 
+	public int calculateCritProbMod(Effect effect) {
+		return critProbMod2 + critProbMod1 * effect.getSkillLevel();
+	}
+
 	/**
 	 * Calculate effect result
 	 *
@@ -306,20 +306,27 @@ public abstract class EffectTemplate {
 			return false;
 		}
 
-		if (!effect.isForcedEffect()) {
-			if (!validateEffectConditions(effect))
-				return false;
-			if (!validatePreEffects(effect))
-				return false;
-			if (isDodgedOrResisted(effect, statEnum)) {
-				if (getPosition() != 1 && !(effect.effectInPos(1) instanceof DamageEffect))
-					effect.getSuccessEffects().clear();
-				return false;
-			}
+		boolean isForcedEffect = effect.isForcedEffect();
+		if (!isForcedEffect && (!validateEffectConditions(effect) || !validatePreEffects(effect))) {
+			effect.resetMagicalCritical(); // a filtered out effect breaks the chain, so the next position rolls its own critical
+			return false;
+		}
+		resolveMagicalCritical(effect);
+		if (!isForcedEffect && isDodgedOrResisted(effect, statEnum)) {
+			if (getPosition() != 1 && !(effect.effectInPos(1) instanceof DamageEffect))
+				effect.getSuccessEffects().clear();
+			return false;
 		}
 		addSuccessEffect(effect, spellStatus);
 		calculateDamage(effect);
 		return true;
+	}
+
+	/**
+	 * Rolls or takes over the magical critical for this effect position. Called before the resist check, so even resisted effects can decide the
+	 * critical of the following positions.
+	 */
+	protected void resolveMagicalCritical(Effect effect) {
 	}
 
 	private boolean validateEffectConditions(Effect effect) {
@@ -339,19 +346,28 @@ public abstract class EffectTemplate {
 	}
 
 	protected boolean isDodgedOrResisted(Effect effect, StatEnum statEnum) {
-		return !isNoResist() && (!checkEffectResistRate(effect, statEnum) || !checkDodgeOrResistRate(effect));
+		if (effect.isSubEffect()) {
+			return !checkEffectResistRate(effect, statEnum) || (!isNoResist() && !checkDodgeOrResistRate(effect));
+		} else {
+			return !isNoResist() && (!checkEffectResistRate(effect, statEnum) || !checkDodgeOrResistRate(effect));
+		}
 	}
 
 	/**
 	 * @return true = no dodge/resist, false = dodged/resisted
 	 */
 	private boolean checkDodgeOrResistRate(Effect effect) {
+		Creature effector = effect.getEffector();
 		int accuracyModifier = accMod2 + accMod1 * effect.getSkillLevel() + effect.getAccModBoost();
 		if (effect.getSkillTemplate().getSubType() == SkillSubType.DEBUFF)
-			accuracyModifier += effect.getEffector().getGameStats().getStat(StatEnum.BOOST_RESIST_DEBUFF, 0).getCurrent();
-		if (element == SkillElement.NONE)
-			return !StatFunctions.checkIsDodgedHit(effect.getEffector(), effect.getEffected(), accuracyModifier);
-		return Rnd.get(1, 1000) > StatFunctions.calculateMagicalResistRate(effect.getEffector(), effect.getEffected(), accuracyModifier, element);
+			accuracyModifier += effector.getGameStats().getStat(StatEnum.BOOST_RESIST_DEBUFF, 0).getCurrent();
+		OneTimeBoostSkillAttack boost = OneTimeBoostSkillAttackEffect.getActiveBoost(effector, this);
+		if (element == SkillElement.NONE) {
+			if (boost != null)
+				accuracyModifier += boost.calculatePhysicalAccuracyBonus(effector.getGameStats().getMainHandPAccuracy());
+			return !StatFunctions.checkIsDodgedHit(effector, effect.getEffected(), accuracyModifier);
+		}
+		return Rnd.get(1, 1000) > StatFunctions.calculateMagicalResistRate(effector, effect.getEffected(), accuracyModifier, element, boost);
 	}
 
 	private void addSuccessEffect(Effect effect, SpellStatus spellStatus) {
@@ -416,7 +432,7 @@ public abstract class EffectTemplate {
 			level = effect.getSignetBurstedCount();
 			accBoost = Short.MAX_VALUE; // sub effects cannot be resisted by magic resist in case of signet bursts
 		}
-		Effect newEffect = new Effect(effect.getEffector(), effect.getOriginalEffected(), template, level, null, effect.getForceType(), true);
+		Effect newEffect = new Effect(effect.getEffector(), effect.getOriginalEffected(), template, level, null, effect.getForceType(), true, null);
 		newEffect.setShieldDefense(effect.getShieldDefense());
 		newEffect.setAccModBoost(accBoost);
 		newEffect.initialize();

@@ -1,6 +1,7 @@
 package quest.reshanta;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
+import static com.aionemu.gameserver.model.items.ItemUseAnimation.*;
 
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Item;
@@ -188,7 +189,7 @@ public class _14043DrawlingBalaur extends AbstractQuestHandler {
 		if (qs == null)
 			return HandlerResult.FAILED;
 
-		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 1, 1, 0), true);
+		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 1, USE_SUCCESS), true);
 		removeQuestItem(env, 182215351, 1);
 		qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 		updateQuestStatus(env);

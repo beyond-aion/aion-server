@@ -3,7 +3,6 @@ package admincommands;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.skill.PlayerSkillEntry;
@@ -72,7 +71,7 @@ public class PlayerInfo extends AdminCommand {
 		} else if (params[1].equalsIgnoreCase("skills")) {
 			StringBuilder sb = new StringBuilder("- Skills:");
 			for (PlayerSkillEntry skill : target.getSkillList().getAllSkills())
-				sb.append("\n\tlevel " + skill.getSkillLevel() + " of " + DataManager.SKILL_DATA.getSkillTemplate(skill.getSkillId()).getL10n());
+				sb.append("\n\tlevel " + skill.getSkillLevel() + " of " + skill.getSkillTemplate().getL10n());
 			sendInfo(admin, sb.toString());
 		} else if (params[1].equalsIgnoreCase("legion")) {
 			Legion legion = target.getLegion();

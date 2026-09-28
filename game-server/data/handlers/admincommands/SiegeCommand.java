@@ -6,7 +6,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.siege.SiegeLocation;
 import com.aionemu.gameserver.model.siege.SiegeRace;
@@ -49,7 +48,7 @@ public class SiegeCommand extends AdminCommand {
 		for (List<SiegeLocation> siegeLocations : locations) {
 			for (int i = 0; i < siegeLocations.size(); i++) {
 				SiegeLocation loc = siegeLocations.get(i);
-				String worldName = DataManager.WORLD_MAPS_DATA.getTemplate(loc.getTemplate().getWorldId()).getName();
+				String worldName = worldName(loc.getTemplate().getWorldId());
 				String name = loc.getTemplate().getL10nId() == 0 ? loc.getType().toString() : loc.getTemplate().getL10n();
 				String message = name + " (ID: " + loc.getLocationId() + ") in " + worldName + " belongs to " + loc.getRace();
 				int secondsLeft = SiegeService.getInstance().getRemainingSiegeTimeInSeconds(loc.getLocationId());

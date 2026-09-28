@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.skillengine.model;
 
+import com.aionemu.gameserver.controllers.attack.AttackStatus;
+
 /**
  * @author kecimis
  */
@@ -10,6 +12,7 @@ public class EffectReserved implements Comparable<EffectReserved> {
 	private ResourceType type;
 	private boolean isDamage = true;
 	private boolean send = true;
+	private AttackStatus attackStatus = AttackStatus.NORMALHIT;
 
 	public static enum ResourceType {
 
@@ -35,6 +38,11 @@ public class EffectReserved implements Comparable<EffectReserved> {
 
 	public EffectReserved(int position, int value, ResourceType type, boolean isDamage) {
 		this(position, value, type, isDamage, true);
+	}
+
+	public EffectReserved(int position, int value, ResourceType type, boolean isDamage, boolean send, AttackStatus attackStatus) {
+		this(position, value, type, isDamage, send);
+		this.attackStatus = attackStatus;
 	}
 
 	public EffectReserved(int position, int value, ResourceType type, boolean isDamage, boolean send) {
@@ -85,6 +93,13 @@ public class EffectReserved implements Comparable<EffectReserved> {
 	 */
 	public boolean isSend() {
 		return send;
+	}
+
+	/**
+	 * @return the attack status of this position, {@link AttackStatus#NORMALHIT} for values which cannot crit (like drained mp)
+	 */
+	public AttackStatus getAttackStatus() {
+		return attackStatus;
 	}
 
 	@Override

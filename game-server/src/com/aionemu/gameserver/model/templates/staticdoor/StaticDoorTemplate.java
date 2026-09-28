@@ -58,7 +58,7 @@ public class StaticDoorTemplate extends VisibleObjectTemplate {
 
 	@Override
 	public String getName() {
-		return "door";
+		return "Door";
 	}
 
 	@Override

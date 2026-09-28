@@ -41,7 +41,7 @@ public class CM_WINDSTREAM extends AionClientPacket {
 		Player player = getConnection().getActivePlayer();
 		switch (state) {
 			case 0: // entering windstream
-				if (player.isUsingFlightTransporterOrWindstream() || !player.isFlying())
+				if (player.isUsingFlightTransporterOrWindstream())
 					return;
 				player.unsetPlayerMode(PlayerMode.RIDE);
 				player.setFlightPath(new FlightPath(FlightPath.Type.WINDSTREAM, teleportId, distance));

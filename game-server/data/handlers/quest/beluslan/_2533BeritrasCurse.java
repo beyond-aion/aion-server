@@ -11,7 +11,6 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
-import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author Ritsu
@@ -36,7 +35,7 @@ public class _2533BeritrasCurse extends AbstractQuestHandler {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			if (player.isInsideZone(ZoneName.get("BERITRAS_WEAPON_220040000"))) {
+			if (player.isInsideZone("BERITRAS_WEAPON_220040000")) {
 				QuestService.questTimerStart(env, 300);
 				return HandlerResult.fromBoolean(useQuestItem(env, item, 0, 1, false, 182204426, 1, 0));
 			}

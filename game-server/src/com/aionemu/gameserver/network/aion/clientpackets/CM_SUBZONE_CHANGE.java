@@ -34,15 +34,14 @@ public class CM_SUBZONE_CHANGE extends AionClientPacket {
 		if (player.hasAccess(AdminConfig.ZONE_INFO)) {
 			int foundZones = 0;
 			for (ZoneInstance zone : player.findZones()) {
-				if (zone.getZoneTemplate().getZoneType() == ZoneClassName.DUMMY || zone.getZoneTemplate().getZoneType() == ZoneClassName.WEATHER)
+				if (zone.getZoneTemplate().getZoneType() == ZoneClassName.WEATHER)
 					continue;
 				foundZones++;
 				PacketSendUtility.sendMessage(player, "Passed zone: unk=" + unk + "; " + zone.getZoneTemplate().getZoneType() + " "
-					+ zone.getAreaTemplate().getZoneName().name());
+					+ zone.getZoneTemplate().getName());
 			}
 			if (foundZones == 0) {
 				PacketSendUtility.sendMessage(player, "Passed unknown zone, unk=" + unk);
-				return;
 			}
 		}
 	}

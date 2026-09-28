@@ -17,7 +17,7 @@ import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
-import com.aionemu.gameserver.world.zone.ZoneInstance;
+import com.aionemu.gameserver.world.zone.ZoneAttributes;
 
 /**
  * @author xTz, Rolandas
@@ -58,15 +58,8 @@ public class HouseGateAI extends NpcAI {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_ENTER_NO_RIGHT2());
 			return;
 		}
-		boolean returnBattle = true;
-		for (ZoneInstance zone : player.findZones()) {
-			if (!zone.canReturnToBattle()) {
-				returnBattle = false;
-				break;
-			}
-		}
 		int requestId = SM_QUESTION_WINDOW.STR_ASK_GROUP_GATE_DO_YOU_ACCEPT_MOVE;
-		if (!returnBattle)
+		if (player.getWorldMapInstance().getTemplate().hasAttribute(ZoneAttributes.NO_RETURN_BATTLE))
 			requestId = SM_QUESTION_WINDOW.STR_HOUSE_GATE_ACCEPT_MOVE_DONT_RETURN;
 
 		AIActions.addRequest(this, player, requestId, 9, new AIRequest() {
@@ -79,14 +72,7 @@ public class HouseGateAI extends NpcAI {
 					return;
 
 				WorldMapInstance instance = InstanceService.getOrCreateHouseInstance(house);
-				boolean canReturnToBattle = true;
-				for (ZoneInstance zone : responder.findZones()) {
-					if (!zone.canReturnToBattle()) {
-						canReturnToBattle = false;
-						break;
-					}
-				}
-				if (!canReturnToBattle) {
+				if (responder.getWorldMapInstance().getTemplate().hasAttribute(ZoneAttributes.NO_RETURN_BATTLE)) {
 					responder.setBattleReturnCoords(0, null);
 				} else {
 					PacketSendUtility.sendPacket(responder, new SM_HOUSE_TELEPORT(house.getAddress().getId(), responder.getObjectId()));

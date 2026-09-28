@@ -3,8 +3,6 @@ package com.aionemu.gameserver.model.stats.container;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.apache.commons.lang3.ArrayUtils;
-
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.SkillElement;
 import com.aionemu.gameserver.model.enchants.EnchantEffect;
@@ -35,7 +33,7 @@ public abstract class CreatureGameStats<T extends Creature> {
 	private final Map<StatEnum, List<IStatFunction>> stats = new ConcurrentHashMap<>();
 
 	private int attackCounter = 0;
-	private int cachedMaxHp, cachedMaxMp, cachedSpeed;
+	private int cachedSpeed;
 
 	protected CreatureGameStats(T owner) {
 		this.owner = owner;
@@ -106,42 +104,34 @@ public abstract class CreatureGameStats<T extends Creature> {
 
 	public float getPositiveStat(StatEnum statEnum, float base) {
 		Stat2 stat = getStat(statEnum, base);
-		float value = stat.getCurrent();
-		return value > 0 ? value : 0;
+		return Math.max(0, stat.getCurrent());
 	}
 
 	public int getPositiveReverseStat(StatEnum statEnum, int base) {
 		Stat2 stat = getReverseStat(statEnum, base);
-		int value = stat.getCurrent();
-		return value > 0 ? value : 0;
+		return Math.max(0, stat.getCurrent());
 	}
 
-	public Stat2 getStat(StatEnum statEnum, float base, CalculationType... calculationTypes) {
+	public final Stat2 getStat(StatEnum statEnum, float base) {
+		return getStat(statEnum, base, Collections.emptySet());
+	}
+
+	protected Stat2 getStat(StatEnum statEnum, float base, Set<CalculationType> calculationTypes) {
 		Stat2 stat = new AdditionStat(statEnum, base, owner);
-		return applyStatFunctions(statEnum, stat, calculationTypes);
-	}
-
-	public Stat2 getStat(StatEnum statEnum, float base, float bonusRate, CalculationType... calculationTypes) {
-		Stat2 stat = new AdditionStat(statEnum, base, owner, bonusRate);
 		return applyStatFunctions(statEnum, stat, calculationTypes);
 	}
 
 	public Stat2 getReverseStat(StatEnum statEnum, float base) {
 		Stat2 stat = new ReverseStat(statEnum, base, owner);
-		return applyStatFunctions(statEnum, stat);
+		return applyStatFunctions(statEnum, stat, Collections.emptySet());
 	}
 
-	public Stat2 getReverseStat(StatEnum statEnum, float base, float bonusRate) {
-		Stat2 stat = new ReverseStat(statEnum, base, owner, bonusRate);
-		return applyStatFunctions(statEnum, stat);
-	}
-
-	public Stat2 applyStatFunctions(StatEnum statEnum, Stat2 stat, CalculationType... calculationTypes) {
+	public Stat2 applyStatFunctions(StatEnum statEnum, Stat2 stat, Set<CalculationType> calculationTypes) {
 		for (IStatFunction func : getStatsSorted(statEnum)) {
 			if (func.validate(stat)) {
 				if ((statEnum == StatEnum.PHYSICAL_ATTACK || statEnum == StatEnum.MAGICAL_ATTACK) && func.getOwner() instanceof EnchantEffect ef) {
-					if (ef.getItemSlot() == ItemSlot.MAIN_HAND && ArrayUtils.contains(calculationTypes, CalculationType.MAIN_HAND)
-							|| ef.getItemSlot() == ItemSlot.SUB_HAND && ArrayUtils.contains(calculationTypes, CalculationType.OFF_HAND)) {
+					if (ef.getItemSlot() == ItemSlot.MAIN_HAND && calculationTypes.contains(CalculationType.MAIN_HAND)
+							|| ef.getItemSlot() == ItemSlot.SUB_HAND && calculationTypes.contains(CalculationType.OFF_HAND)) {
 						func.apply(stat, calculationTypes);
 					}
 				} else {
@@ -157,7 +147,7 @@ public abstract class CreatureGameStats<T extends Creature> {
 		for (IStatFunction func : getStatsSorted(statEnum)) {
 			if (func.isBonus() && func.validate(stat) && (func.getOwner() instanceof Item || func.getOwner() instanceof ManaStone
 				|| func.getOwner() instanceof ItemSetTemplate || func.getOwner() instanceof RandomBonusEffect)) {
-				func.apply(stat);
+				func.apply(stat, Collections.emptySet());
 			}
 		}
 		return stat;
@@ -229,7 +219,11 @@ public abstract class CreatureGameStats<T extends Creature> {
 		return getStat(StatEnum.MAGICAL_CRITICAL_RESIST, getStatsTemplate().getSpellResist());
 	}
 
-	public Stat2 getMainHandPAttack(CalculationType... calculationTypes) {
+	public final Stat2 getMainHandPAttack(CalculationType... calculationTypes) {
+		return getMainHandPAttack(toSet(calculationTypes));
+	}
+
+	public Stat2 getMainHandPAttack(Set<CalculationType> calculationTypes) {
 		return getStat(StatEnum.PHYSICAL_ATTACK, getStatsTemplate().getAttack(), calculationTypes);
 	}
 
@@ -241,7 +235,11 @@ public abstract class CreatureGameStats<T extends Creature> {
 		return getStat(StatEnum.PHYSICAL_ACCURACY, getStatsTemplate().getAccuracy());
 	}
 
-	public Stat2 getMainHandMAttack(CalculationType... calculationTypes) {
+	public final Stat2 getMainHandMAttack(CalculationType... calculationTypes) {
+		return getMainHandMAttack(toSet(calculationTypes));
+	}
+
+	public Stat2 getMainHandMAttack(Set<CalculationType> calculationTypes) {
 		return getStat(StatEnum.MAGICAL_ATTACK, getStatsTemplate().getMagicalAttack(), calculationTypes);
 	}
 
@@ -273,7 +271,15 @@ public abstract class CreatureGameStats<T extends Creature> {
 		return getStat(statEnum, base);
 	}
 
-	public abstract Stat2 getAttackSpeed();
+	public Stat2 getAttackSpeed() {
+		return getStat(StatEnum.ATTACK_SPEED, getBaseAttackSpeed());
+	}
+
+	public abstract int getBaseAttackSpeed();
+
+	public float getAttackSpeedRate() {
+		return (float) getAttackSpeed().getCurrent() / getBaseAttackSpeed();
+	}
 
 	public abstract Stat2 getMovementSpeed();
 
@@ -357,31 +363,16 @@ public abstract class CreatureGameStats<T extends Creature> {
 	 * This method will be called outside of stats lock.
 	 */
 	protected void onStatsChange(Effect effect) {
-		checkMaxHPChanged(effect);
-		checkMaxMPChanged(effect);
+		owner.getLifeStats().onStatsChange(effect);
 	}
 
-	private void checkMaxHPChanged(Effect effect) {
-		synchronized (this) {
-			int oldMaxHp = cachedMaxHp != 0 ? cachedMaxHp : getStatsTemplate().getMaxHp();
-			int currentMaxHp = cachedMaxHp = getMaxHp().getCurrent();
-			if (oldMaxHp != currentMaxHp) {
-				float percent = 1f * currentMaxHp / oldMaxHp;
-				int newHp = Math.min(Math.round(owner.getLifeStats().getCurrentHp() * percent), currentMaxHp);
-				Creature effector = effect == null ? owner : effect.getEffector();
-				owner.getLifeStats().setCurrentHp(newHp, effector);
-			}
-		}
+	protected static Set<CalculationType> toSet(CalculationType[] calculationTypes) {
+		return calculationTypes.length == 0 ? Collections.emptySet() : EnumSet.of(calculationTypes[0], calculationTypes);
 	}
 
-	private void checkMaxMPChanged(Effect effect) {
-		synchronized (this) {
-			int oldMaxMp = cachedMaxMp != 0 ? cachedMaxMp : getStatsTemplate().getMaxMp();
-			int currentMaxMp = cachedMaxMp = getMaxMp().getCurrent();
-			if (oldMaxMp != currentMaxMp) {
-				float percent = 1f * currentMaxMp / oldMaxMp;
-				owner.getLifeStats().setCurrentMp(Math.min(Math.round(owner.getLifeStats().getCurrentMp() * percent), currentMaxMp));
-			}
-		}
+	protected static EnumSet<CalculationType> copyWith(Set<CalculationType> types, CalculationType type) {
+		EnumSet<CalculationType> calculationTypes = EnumSet.of(type);
+		calculationTypes.addAll(types);
+		return calculationTypes;
 	}
 }

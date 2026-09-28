@@ -1,8 +1,13 @@
 package com.aionemu.gameserver.controllers.observer;
 
+import static com.aionemu.gameserver.controllers.observer.ObserverType.*;
+
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.Skill;
 
@@ -11,8 +16,12 @@ import com.aionemu.gameserver.skillengine.model.Skill;
  */
 public abstract class ItemUseObserver extends ActionObserver {
 
-	public ItemUseObserver() {
-		super(ObserverType.ALL);
+	private final Player observed;
+	private final AtomicBoolean aborted = new AtomicBoolean();
+
+	public ItemUseObserver(Player observed) {
+		super(ATTACK, ATTACKED, DEATH, DOT_ATTACKED, EQUIP, UNEQUIP, MOVE, STARTSKILLCAST, ENDSKILLCAST, SIT, ITEMUSE, ABNORMALSETTED, BOOSTSKILLCOST);
+		this.observed = observed;
 	}
 
 	@Override
@@ -71,9 +80,22 @@ public abstract class ItemUseObserver extends ActionObserver {
 	}
 
 	@Override
+	public void abnormalsetted(AbnormalState state) {
+		if ((state.getId() & AbnormalState.CANCEL_ITEM_USE.getId()) != 0)
+			abort();
+	}
+
+	@Override
 	public void boostSkillCost(Skill skill) {
 		abort();
 	}
 
-	public abstract void abort();
+	public final void abort() {
+		if (aborted.compareAndSet(false, true)) {
+			observed.getObserveController().removeObserver(this);
+			onAbort();
+		}
+	}
+
+	protected abstract void onAbort();
 }

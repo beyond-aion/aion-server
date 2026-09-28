@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.services.toypet;
 
+import static com.aionemu.gameserver.model.items.ItemUseAnimation.*;
+
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -34,7 +36,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
-import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author M@xx, IlBuono, xTz, Rolandas
@@ -172,7 +173,7 @@ public class PetService {
 			for (AbstractItemAction itemAction : useItem.getItemTemplate().getActions().getItemActions()) {
 				if (itemAction instanceof SkillUseAction) {
 					PacketSendUtility.broadcastPacket(player,
-						new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), player.getObjectId(), useItem.getObjectId(), useItem.getItemId(), 0, 1, 1, 1, 0, 15360),
+						new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), player.getObjectId(), useItem.getObjectId(), useItem.getItemId(), 0, USE_SUCCESS, true),
 						true);
 					SkillEngine.getInstance().applyEffectDirectly(((SkillUseAction) itemAction).getSkillId(), ((SkillUseAction) itemAction).getLevel(), player,
 						player, null, ForceType.DEFAULT);
@@ -210,13 +211,7 @@ public class PetService {
 	}
 
 	private boolean isPetItemUseAllowed(Player player, Item item) {
-		if (item.getItemTemplate().hasAreaRestriction()) {
-			ZoneName restriction = item.getItemTemplate().getUseArea();
-			if (restriction != null && !player.isInsideItemUseZone(restriction)) {
-				return false;
-			}
-		}
-		return true;
+		return !item.getItemTemplate().hasAreaRestriction() || player.isInsideItemUseZone(item.getItemTemplate().getUseArea());
 	}
 
 	public void activateLoot(Pet pet, boolean activate) {

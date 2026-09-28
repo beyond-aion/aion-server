@@ -1,14 +1,12 @@
 package admincommands;
 
 import java.awt.Color;
-import java.lang.reflect.Field;
-import java.nio.channels.SelectionKey;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-import com.aionemu.commons.network.NioServer;
 import com.aionemu.gameserver.GameServer;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionConnection;
@@ -36,8 +34,8 @@ public class Debug extends AdminCommand {
 			return;
 		}
 		if ("connections".equalsIgnoreCase(params[0])) {
-			List<AionConnection> connections = findAionConnections();
-			sendInfo(admin, "Online clients:\n\t" + connections.stream().map(AionConnection::toString).collect(Collectors.joining("\n\t")));
+			Stream<AionConnection> connections = GameServer.findClientConnections();
+			sendInfo(admin, "Online clients:\n\t" + connections.map(AionConnection::toString).collect(Collectors.joining("\n\t")));
 		} else if ("connectedPlayers".equalsIgnoreCase(params[0])) {
 			List<Player> connectedPlayers = findConnectedPlayers();
 			String message = "Connected players (" + connectedPlayers.size() + "):";
@@ -70,21 +68,7 @@ public class Debug extends AdminCommand {
 	}
 
 	private List<Player> findConnectedPlayers() {
-		List<AionConnection> connections = findAionConnections();
-		return connections.stream().map(AionConnection::getActivePlayer).filter(Objects::nonNull).sorted(Comparator.comparing(Player::getName)).toList();
-	}
-
-	private List<AionConnection> findAionConnections() {
-		try {
-			Field nioServerField = GameServer.class.getDeclaredField("nioServer");
-			boolean oldAccessible = nioServerField.canAccess(null);
-			nioServerField.setAccessible(true);
-			NioServer nioServer = (NioServer) nioServerField.get(null);
-			nioServerField.setAccessible(oldAccessible);
-			java.util.Set<SelectionKey> keys = nioServer.getReadWriteDispatcher().selector().keys();
-			return keys.stream().map(SelectionKey::attachment).filter(o -> o instanceof AionConnection).map(o -> (AionConnection) o).toList();
-		} catch (NoSuchFieldException | SecurityException | IllegalAccessException e) {
-			throw new IllegalArgumentException(e.toString());
-		}
+		Stream<AionConnection> connections = GameServer.findClientConnections();
+		return connections.map(AionConnection::getActivePlayer).filter(Objects::nonNull).sorted(Comparator.comparing(Player::getName)).toList();
 	}
 }

@@ -30,8 +30,8 @@ import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.world.MapRegion;
 import com.aionemu.gameserver.world.WorldPosition;
+import com.aionemu.gameserver.world.zone.ZoneAttributes;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
-import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * This class is representing movable objects, its base class for all in game objects that may move
@@ -329,6 +329,20 @@ public abstract class Creature extends VisibleObject {
 		return TribeClass.GENERAL;
 	}
 
+	public boolean isProtectionActive() {
+		return isInVisualState(CreatureVisualState.BLINKING);
+	}
+
+	/**
+	 * @return True, if this creature is under spawn protection, which only its owner and its team can still target
+	 */
+	public boolean isSpawnProtectedFrom(Creature other) {
+		if (!isProtectionActive() || other.equals(getMaster()))
+			return false;
+		return !(getMaster() instanceof Player master && other instanceof Player otherPlayer && otherPlayer.isInSameTeam(master)
+			&& !otherPlayer.isDueling(master));
+	}
+
 	@Override
 	public boolean canSee(VisibleObject object) {
 		if (object instanceof Creature creature) {
@@ -360,17 +374,6 @@ public abstract class Creature extends VisibleObject {
 	 */
 	public Creature getMaster() {
 		return this;
-	}
-
-	/**
-	 * For summons it will return summon object and for <br>
-	 * servants - player object.<br>
-	 * Used to find attackable target for npcs.<br>
-	 * 
-	 * @return acting master - player in case of servants
-	 */
-	public Creature getActingCreature() {
-		return getMaster();
 	}
 
 	public boolean isSkillDisabled(SkillTemplate template) {
@@ -454,13 +457,13 @@ public abstract class Creature extends VisibleObject {
 			mapRegion.revalidateZones(this);
 	}
 
-	public boolean isInsideZone(ZoneName zoneName) {
+	public boolean isInsideZone(String zoneName) {
 		if (!isSpawned())
 			return false;
 		return getPosition().getMapRegion().isInsideZone(zoneName, this);
 	}
 
-	public boolean isInsideItemUseZone(ZoneName zoneName) {
+	public boolean isInsideItemUseZone(String zoneName) {
 		if (!isSpawned())
 			return false;
 		return getPosition().getMapRegion().isInsideItemUseZone(zoneName, this);
@@ -493,14 +496,16 @@ public abstract class Creature extends VisibleObject {
 		}
 	}
 
+	public boolean isInsideFlyZone() {
+		if (isInsideZoneType(ZoneType.NO_FLY))
+			return false;
+		return isInsideZoneType(ZoneType.FLY) || getWorldMapInstance().getTemplate().hasAttribute(ZoneAttributes.FLY);
+	}
+
 	public boolean isInsidePvPZone() {
-		synchronized (zoneTypes) {
-			if (zoneTypes[ZoneType.SIEGE.ordinal()] > 0) {
-				return true;
-			}
-			int pvpValue = zoneTypes[ZoneType.PVP.ordinal()];
-			return pvpValue == 0 || pvpValue == 2;
-		}
+		if (isInsideZoneType(ZoneType.DISABLE_PVP))
+			return false;
+		return isInsideZoneType(ZoneType.PVP) || getWorldMapInstance().getTemplate().hasAttribute(ZoneAttributes.PVP_ENABLED);
 	}
 
 	public Race getRace() {

@@ -8,7 +8,7 @@ import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.world.zone.ZoneName;
+import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
  * @author Artur, Majka
@@ -26,7 +26,7 @@ public class _24015TotemPlowed extends AbstractQuestHandler {
 		qe.registerQuestNpc(203669).addOnTalkEvent(questId); // Taora
 		qe.registerQuestNpc(203557).addOnTalkEvent(questId); // Suthran
 		qe.registerQuestNpc(700099).addOnKillEvent(questId); // Zemurru's Totem
-		qe.registerOnEnterZone(ZoneName.get("DF1A_SENSORYAREA_Q2021_206013_2_220030000"), questId);
+		qe.registerOnEnterZone("DF1A_SENSORYAREA_Q2021_206013_2_220030000", questId);
 	}
 
 	@Override
@@ -88,8 +88,8 @@ public class _24015TotemPlowed extends AbstractQuestHandler {
 	}
 
 	@Override
-	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) {
-		if (zoneName != ZoneName.get("DF1A_SENSORYAREA_Q2021_206013_2_220030000"))
+	public boolean onEnterZoneEvent(QuestEnv env, ZoneInstance zone) {
+		if (!zone.matches("DF1A_SENSORYAREA_Q2021_206013_2_220030000"))
 			return false;
 		final Player player = env.getPlayer();
 		if (player == null)

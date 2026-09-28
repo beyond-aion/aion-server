@@ -171,7 +171,7 @@ public class SM_CASTSPELL_RESULT extends AionServerPacket {
 			for (EffectReserved er : reservedEffects) {
 				writeC(er.getType().getValue());// HP - 0 , MP - 1, FP - 2, DP - 3?
 				writeD(er.getValueToSend());
-				writeC(effect.getAttackStatus().getId());
+				writeC(er.getAttackStatus().getId());
 				boolean isCounter = effect.getAttackStatus().isCounterSkill();
 				if (effect.getEffectResult() == EffectResult.RESIST)
 					isCounter = true;

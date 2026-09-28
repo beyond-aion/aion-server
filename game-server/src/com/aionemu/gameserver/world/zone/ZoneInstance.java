@@ -7,13 +7,13 @@ import java.util.Map;
 import java.util.function.Consumer;
 
 import com.aionemu.gameserver.model.gameobjects.Creature;
-import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.SummonedObject;
 import com.aionemu.gameserver.model.geometry.Area;
 import com.aionemu.gameserver.model.templates.zone.ZoneClassName;
 import com.aionemu.gameserver.model.templates.zone.ZoneInfo;
 import com.aionemu.gameserver.model.templates.zone.ZoneTemplate;
 import com.aionemu.gameserver.utils.collections.CollectionUtil;
-import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.zone.handler.AdvancedZoneHandler;
 import com.aionemu.gameserver.world.zone.handler.ZoneHandler;
 
@@ -24,47 +24,55 @@ public class ZoneInstance {
 
 	private final ZoneInfo template;
 	private final int mapId;
-	protected final Map<Integer, Creature> creatures = new HashMap<>();
-	protected List<ZoneHandler> handlers = new ArrayList<>();
+	private final Map<Integer, Creature> creatures = new HashMap<>();
+	private final List<ZoneHandler> handlers;
+	private boolean ignoreRegularNpcs = true;
 
 	public ZoneInstance(int mapId, ZoneInfo template) {
-		this.template = template;
-		this.mapId = mapId;
+		this(mapId, template, new ArrayList<>(0));
 	}
 
-	/**
-	 * @return the template
-	 */
+	public ZoneInstance(int mapId, ZoneInfo template, List<ZoneHandler> handlers) {
+		this.template = template;
+		this.mapId = mapId;
+		this.handlers = handlers;
+	}
+
 	public Area getAreaTemplate() {
 		return template.getArea();
 	}
 
-	/**
-	 * @return the template
-	 */
 	public ZoneTemplate getZoneTemplate() {
 		return template.getZoneTemplate();
+	}
+
+	public boolean matches(String zoneName) {
+		return template.matches(zoneName);
 	}
 
 	public boolean revalidate(Creature creature) {
 		return (mapId == creature.getWorldId() && template.getArea().isInside3D(creature.getX(), creature.getY(), creature.getZ()));
 	}
 
+	/**
+	 * @return true if this zone is irrelevant to the creature, meaning that it should not be tracked by it
+	 */
+	public boolean isIgnored(Creature creature) {
+		return ignoreRegularNpcs && creature instanceof Npc npc && !(npc instanceof SummonedObject<?>);
+	}
+
 	public synchronized boolean onEnter(Creature creature) {
-		if (creatures.containsKey(creature.getObjectId()))
+		if (creatures.putIfAbsent(creature.getObjectId(), creature) != null)
 			return false;
-		creatures.put(creature.getObjectId(), creature);
-		if (creature instanceof Player)
-			creature.getController().onEnterZone(this);
+		creature.getController().onEnterZone(this);
 		for (ZoneHandler handler : handlers)
 			handler.onEnterZone(creature, this);
 		return true;
 	}
 
 	public synchronized boolean onLeave(Creature creature) {
-		if (!creatures.containsKey(creature.getObjectId()))
+		if (creatures.remove(creature.getObjectId()) == null)
 			return false;
-		creatures.remove(creature.getObjectId());
 		creature.getController().onLeaveZone(this);
 		for (ZoneHandler handler : handlers)
 			handler.onLeaveZone(creature, this);
@@ -87,80 +95,14 @@ public class ZoneInstance {
 		return creatures.containsKey(creature.getObjectId());
 	}
 
-	public boolean isInsideCordinate(float x, float y, float z) {
+	public boolean isInsideCoordinate(float x, float y, float z) {
 		return template.getArea().isInside3D(x, y, z);
 	}
 
 	public void addHandler(ZoneHandler handler) {
+		if (handler.handlesAllCreatures())
+			ignoreRegularNpcs = false;
 		handlers.add(handler);
-	}
-
-	public boolean canFly() {
-		if (template.getZoneTemplate().getFlags() == -1 || template.getZoneTemplate().getFlags() == 0
-			|| World.getInstance().getWorldMap(mapId).hasOverridenOption(ZoneAttributes.FLY))
-			return World.getInstance().getWorldMap(mapId).isFlightAllowed();
-		return (template.getZoneTemplate().getFlags() & ZoneAttributes.FLY.getId()) != 0;
-	}
-
-	public boolean canGlide() {
-		if (template.getZoneTemplate().getFlags() == -1 || template.getZoneTemplate().getFlags() == 0
-			|| World.getInstance().getWorldMap(mapId).hasOverridenOption(ZoneAttributes.GLIDE))
-			return World.getInstance().getWorldMap(mapId).canGlide();
-		return (template.getZoneTemplate().getFlags() & ZoneAttributes.GLIDE.getId()) != 0;
-	}
-
-	public boolean canPutKisk() {
-		if (template.getZoneTemplate().getFlags() == -1 || template.getZoneTemplate().getFlags() == 0
-			|| World.getInstance().getWorldMap(mapId).hasOverridenOption(ZoneAttributes.BIND))
-			return World.getInstance().getWorldMap(mapId).canPutKisk();
-		return (template.getZoneTemplate().getFlags() & ZoneAttributes.BIND.getId()) != 0;
-	}
-
-	public boolean canRecall() {
-		if (template.getZoneTemplate().getFlags() == -1 || template.getZoneTemplate().getFlags() == 0
-			|| World.getInstance().getWorldMap(mapId).hasOverridenOption(ZoneAttributes.RECALL)) {
-			return World.getInstance().getWorldMap(mapId).canRecall();
-		}
-		return (template.getZoneTemplate().getFlags() & ZoneAttributes.RECALL.getId()) != 0;
-	}
-
-	public boolean canReturnToBattle() {
-		return World.getInstance().getWorldMap(mapId).canReturnToBattle();
-	}
-
-	public boolean canRide() {
-		if (template.getZoneTemplate().getFlags() == -1 || template.getZoneTemplate().getFlags() == 0
-			|| World.getInstance().getWorldMap(mapId).hasOverridenOption(ZoneAttributes.RIDE)) {
-			return World.getInstance().getWorldMap(mapId).canRide();
-		}
-		return (template.getZoneTemplate().getFlags() & ZoneAttributes.RIDE.getId()) != 0;
-	}
-
-	public boolean canFlyRide() {
-		if (template.getZoneTemplate().getFlags() == -1 || template.getZoneTemplate().getFlags() == 0
-			|| World.getInstance().getWorldMap(mapId).hasOverridenOption(ZoneAttributes.FLY_RIDE))
-			return World.getInstance().getWorldMap(mapId).canFlyRide();
-		return (template.getZoneTemplate().getFlags() & ZoneAttributes.FLY_RIDE.getId()) != 0;
-	}
-
-	public boolean isPvpAllowed() {
-		if (template.getZoneTemplate().getZoneType() != ZoneClassName.PVP)
-			return World.getInstance().getWorldMap(mapId).isPvpAllowed();
-		return (template.getZoneTemplate().getFlags() & ZoneAttributes.PVP_ENABLED.getId()) != 0;
-	}
-
-	public boolean isSameRaceDuelsAllowed() {
-		if (template.getZoneTemplate().getZoneType() != ZoneClassName.DUEL || template.getZoneTemplate().getFlags() == 0
-			|| World.getInstance().getWorldMap(mapId).hasOverridenOption(ZoneAttributes.DUEL_SAME_RACE_ENABLED))
-			return World.getInstance().getWorldMap(mapId).isSameRaceDuelsAllowed();
-		return (template.getZoneTemplate().getFlags() & ZoneAttributes.DUEL_SAME_RACE_ENABLED.getId()) != 0;
-	}
-
-	public boolean isOtherRaceDuelsAllowed() {
-		if (template.getZoneTemplate().getZoneType() != ZoneClassName.DUEL || template.getZoneTemplate().getFlags() == 0
-			|| World.getInstance().getWorldMap(mapId).hasOverridenOption(ZoneAttributes.DUEL_OTHER_RACE_ENABLED))
-			return World.getInstance().getWorldMap(mapId).isOtherRaceDuelsAllowed();
-		return (template.getZoneTemplate().getFlags() & ZoneAttributes.DUEL_OTHER_RACE_ENABLED.getId()) != 0;
 	}
 
 	public int getTownId() {

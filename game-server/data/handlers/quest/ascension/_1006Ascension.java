@@ -29,7 +29,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldMapType;
-import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * Talk with Pernos (790001). Go to the island at the center of Cliona Lake (CLIONA_LAKE_210010000) and fill up the bottle Pernos gave you
@@ -196,7 +195,7 @@ public class _1006Ascension extends AbstractQuestHandler {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			if (player.isInsideItemUseZone(ZoneName.get("LF1_ITEMUSEAREA_Q1006"))) {
+			if (player.isInsideItemUseZone("LF1_ITEMUSEAREA_Q1006")) {
 				int var = qs.getQuestVarById(0);
 				if (var == 1) {
 					return HandlerResult.fromBoolean(useQuestItem(env, item, 1, 2, false, 182200008, 1, 0)); // 2

@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.model.templates.item.actions;
 
+import static com.aionemu.gameserver.model.items.ItemUseAnimation.*;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -30,6 +32,7 @@ import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+import com.aionemu.gameserver.world.zone.ZoneAttributes;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
@@ -47,14 +50,9 @@ public class RideAction extends AbstractItemAction {
 		if (!player.isInPlayerMode(PlayerMode.RIDE)) { // RideAction is for mounting and dismounting, canAct should never forbid dismounting
 			if (parentItem == null)
 				return false;
-
-			if (CustomConfig.ENABLE_RIDE_RESTRICTION) {
-				for (ZoneInstance zone : player.findZones()) {
-					if (!zone.canRide()) {
-						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANNOT_RIDE_INVALID_LOCATION());
-						return false;
-					}
-				}
+			if (!isInRideZone(player)) {
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANNOT_RIDE_INVALID_LOCATION());
+				return false;
 			}
 			if (player.isInState(CreatureState.RESTING)) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_RIDE(ActionState.RESTING.getL10n()));
@@ -63,6 +61,18 @@ public class RideAction extends AbstractItemAction {
 			if (player.getEffectController().isInAnyAbnormalState(AbnormalState.DISMOUNT_RIDE)) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANNOT_RIDE_ABNORMAL_STATE());
 				return false;
+			}
+		}
+		return true;
+	}
+
+	public static boolean isInRideZone(Player player) {
+		if (CustomConfig.ENABLE_RIDE_RESTRICTION) {
+			if (!player.getWorldMapInstance().getTemplate().hasAttribute(ZoneAttributes.RIDE))
+				return false;
+			for (ZoneInstance zone : player.findZones()) {
+				if (zone.getZoneTemplate().getFlags() > 0 && !zone.getZoneTemplate().hasZoneAttribute(ZoneAttributes.RIDE))
+					return false;
 			}
 		}
 		return true;
@@ -79,18 +89,17 @@ public class RideAction extends AbstractItemAction {
 			finishUse(player, parentItem);
 		} else {
 			PacketSendUtility.broadcastPacket(player,
-				new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), castingDelay, 0, 0), true);
-			final ItemUseObserver observer = new ItemUseObserver() {
+				new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), castingDelay, USE_START), true);
+			ItemUseObserver observer = new ItemUseObserver(player) {
 				@Override
-				public void abort() {
+				protected void onAbort() {
 					player.getController().cancelTask(TaskId.ITEM_USE);
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_CANCELED());
 					PacketSendUtility.broadcastPacket(player,
-						new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, 3, 0), true);
-					player.getObserveController().removeObserver(this);
+						new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, USE_CANCEL), true);
 				}
 			};
-			player.getObserveController().attach(observer);
+			player.getObserveController().addObserver(observer);
 			player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(() -> {
 				player.getObserveController().removeObserver(observer);
 				finishUse(player, parentItem);
@@ -101,7 +110,7 @@ public class RideAction extends AbstractItemAction {
 	private void finishUse(Player player, Item parentItem) {
 		if (!canAct(player, parentItem, null)) {
 			PacketSendUtility.broadcastPacket(player,
-				new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, 3, 0), true);
+				new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, USE_CANCEL), true);
 			return;
 		}
 		player.startCooldown(parentItem);
@@ -152,7 +161,7 @@ public class RideAction extends AbstractItemAction {
 		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.CHANGE_SPEED, 0, 0), true);
 		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.RIDE, 0, getRideInfo().getNpcId()), true);
 		PacketSendUtility.broadcastPacket(player,
-			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, 1, 1), true);
+			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, USE_SUCCESS), true);
 		QuestEngine.getInstance().rideAction(new QuestEnv(null, player, 0), itemTemplate.getTemplateId());
 	}
 

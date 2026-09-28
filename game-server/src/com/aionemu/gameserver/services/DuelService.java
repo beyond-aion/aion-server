@@ -13,6 +13,7 @@ import com.aionemu.gameserver.model.DuelResult;
 import com.aionemu.gameserver.model.gameobjects.player.DeniedStatus;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.RequestResponseHandler;
+import com.aionemu.gameserver.model.templates.zone.ZoneClassName;
 import com.aionemu.gameserver.network.aion.serverpackets.*;
 import com.aionemu.gameserver.services.player.PlayerService;
 import com.aionemu.gameserver.skillengine.model.Skill;
@@ -20,6 +21,7 @@ import com.aionemu.gameserver.skillengine.model.SkillTargetSlot;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
+import com.aionemu.gameserver.world.zone.ZoneAttributes;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
@@ -72,12 +74,9 @@ public class DuelService {
 			PacketSendUtility.sendPacket(requester, SM_SYSTEM_MESSAGE.STR_DUEL_PARTNER_INVALID(targetPlayer.getName()));
 			return;
 		}
-		for (ZoneInstance zone : targetPlayer.findZones()) {
-			if (!zone.isOtherRaceDuelsAllowed() && !targetPlayer.getRace().equals(requester.getRace())
-				|| (!zone.isSameRaceDuelsAllowed() && targetPlayer.getRace().equals(requester.getRace()))) {
-				PacketSendUtility.sendPacket(requester, SM_SYSTEM_MESSAGE.STR_MSG_DUEL_CANT_IN_THIS_ZONE());
-				return;
-			}
+		if (!isInDuelZone(requester, targetPlayer)) {
+			PacketSendUtility.sendPacket(requester, SM_SYSTEM_MESSAGE.STR_MSG_DUEL_CANT_IN_THIS_ZONE());
+			return;
 		}
 
 		RequestResponseHandler<Player> rrh = new RequestResponseHandler<>(requester) {
@@ -101,6 +100,17 @@ public class DuelService {
 		} else {
 			PacketSendUtility.sendPacket(requester, SM_SYSTEM_MESSAGE.STR_DUEL_CANT_REQUEST_WHEN_HE_IS_ASKED_QUESTION(targetPlayer.getName()));
 		}
+	}
+
+	private boolean isInDuelZone(Player requester, Player target) {
+		ZoneAttributes attribute = target.getRace() == requester.getRace() ? ZoneAttributes.DUEL_SAME_RACE_ENABLED : ZoneAttributes.DUEL_OTHER_RACE_ENABLED;
+		if (!target.getWorldMapInstance().getTemplate().hasAttribute(attribute))
+			return false;
+		for (ZoneInstance zone : target.findZones()) {
+			if (zone.getZoneTemplate().getZoneType() == ZoneClassName.DUEL && !zone.getZoneTemplate().hasZoneAttribute(attribute))
+				return false;
+		}
+		return true;
 	}
 
 	/**

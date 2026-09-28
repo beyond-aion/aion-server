@@ -5,7 +5,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.vortex.VortexLocation;
 import com.aionemu.gameserver.services.VortexService;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
-import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldMapType;
 
 public class VortexRaid extends AdminCommand {
@@ -30,20 +29,18 @@ public class VortexRaid extends AdminCommand {
 			sendInfo(player, "Invalid location.");
 			return;
 		}
-		String locationName = World.getInstance().getWorldMap(mapId).getName();
-
 		if ("start".equalsIgnoreCase(params[0])) {
 			if (VortexService.getInstance().isInvasionInProgress(loc.getId())) {
-				sendInfo(player, locationName + " is already under siege.");
+				sendInfo(player, worldName(mapId) + " is already under siege.");
 			} else {
-				sendInfo(player, locationName + " raid started.");
+				sendInfo(player, worldName(mapId) + " raid started.");
 				VortexService.getInstance().startInvasion(loc.getId());
 			}
 		} else if ("stop".equalsIgnoreCase(params[0])) {
 			if (!VortexService.getInstance().isInvasionInProgress(loc.getId())) {
-				sendInfo(player, locationName + " is not under siege.");
+				sendInfo(player, worldName(mapId) + " is not under siege.");
 			} else {
-				sendInfo(player, locationName + " raid stopped.");
+				sendInfo(player, worldName(mapId) + " raid stopped.");
 				VortexService.getInstance().stopInvasion(loc.getId());
 			}
 		} else {

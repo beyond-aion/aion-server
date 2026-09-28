@@ -219,7 +219,7 @@ public class CMT_CHARACTER_INFORMATION extends BaseClientPacket<AionConnection> 
 			// plume Bonus is lost
 			Item item = new Item(newId, itemId, itemCnt, itemColor, colorExpires, itemCreator, itemExpireTime, itemActivationCnt, itemEquipped,
 				itemSoulBound, equipSlot, location, enchant, enchantBonus, skinId, fusionId, optSocket, optFusion, charge, tuneCount, bonusStatsId,
-				fusionedItemBonusStatsId, tempering, packCount, itemAmplified, buffSkill, 0);
+				fusionedItemBonusStatsId, tempering, packCount, itemAmplified, buffSkill, 0, 0);
 			if (manastones.size() > 0)
 				for (int[] stone : manastones)
 					ItemSocketService.addManaStone(item, stone[0], stone[1], false);
