@@ -66,9 +66,4 @@ public class DispelBuffCounterAtkEffect extends DamageEffect {
 	public boolean shouldUseBoostSpellAttackEffects() {
 		return false;
 	}
-
-	@Override
-	public boolean shouldUseOneTimeBoostSkillAttack() {
-		return false;
-	}
 }

@@ -38,9 +38,4 @@ public class ProcAtkInstantEffect extends DamageEffect {
 	public boolean shouldUseBoostSpellAttackEffects() {
 		return false;
 	}
-
-	@Override
-	public boolean shouldUseOneTimeBoostSkillAttack() {
-		return false;
-	}
 }
