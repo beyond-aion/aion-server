@@ -25,8 +25,6 @@ public class SkillLearnTemplate {
 	private Race race = Race.PC_ALL;
 	@XmlAttribute(name = "minLevel", required = true)
 	private int minLevel;
-	@XmlAttribute(name = "skillLevel", required = true)
-	private int skillLevel;
 	@XmlAttribute
 	private boolean autolearn;
 	@XmlAttribute
@@ -40,8 +38,11 @@ public class SkillLearnTemplate {
 		return skillId;
 	}
 
+	/**
+	 * Fixed, because the skill tree data has no level: since 4.8 every learnable skill starts at level 1, higher grades have their own skillId.
+	 */
 	public int getSkillLevel() {
-		return skillLevel;
+		return 1;
 	}
 
 	public int getMinLevel() {
