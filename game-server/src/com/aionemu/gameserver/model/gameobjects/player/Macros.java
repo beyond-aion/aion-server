@@ -28,7 +28,7 @@ public class Macros {
 	}
 
 	public static boolean isValidId(int macroId) {
-		return macroId >= 1 && macroId <= CustomConfig.MAX_MACROS;
+		return macroId >= 1 && macroId <= CustomConfig.MACROS_LIMIT;
 	}
 
 	public synchronized boolean remove(int macroId) {

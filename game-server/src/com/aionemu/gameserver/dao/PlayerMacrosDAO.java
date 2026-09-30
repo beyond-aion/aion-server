@@ -76,7 +76,7 @@ public class PlayerMacrosDAO {
 					if (Macros.isValidId(order))
 						macros.add(order, rset.getString("macro"));
 					else
-						log.warn("Skipped macro " + order + " of player " + playerId + " (limit is " + CustomConfig.MAX_MACROS + ")");
+						log.warn("Skipped macro " + order + " of player " + playerId + " (limit is " + CustomConfig.MACROS_LIMIT + ")");
 				}
 			}
 		} catch (Exception e) {
