@@ -69,7 +69,7 @@ public class Deleteskill extends ConsoleCommand {
 
 	@Override
 	public void info(Player admin, String message) {
-		PacketSendUtility.sendMessage(admin, "syntax ///addcskill <skill name>");
+		PacketSendUtility.sendMessage(admin, "syntax ///deleteskill <skill name>");
 	}
 
 	@XmlAccessorType(XmlAccessType.NONE)
