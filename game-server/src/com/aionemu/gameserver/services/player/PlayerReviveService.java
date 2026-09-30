@@ -177,7 +177,7 @@ public class PlayerReviveService {
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME());
 		player.getGameStats().updateStatsAndSpeedVisually();
 		PacketSendUtility.sendPacket(player, new SM_PLAYER_INFO(player));
-		PacketSendUtility.sendPacket(player, new SM_MOTION(player.getObjectId(), player.getMotions().getActiveMotions()));
+		PacketSendUtility.sendPacket(player, SM_MOTION.playerMotions(player));
 		if (map.isInstanceType() && player.getPosition().getWorldMapInstance().getStartPos() != null) {
 			WorldPosition pos = player.getPosition().getWorldMapInstance().getStartPos();
 			TeleportService.teleportTo(player, pos.getMapId(), pos.getX(), pos.getY(), pos.getZ());
