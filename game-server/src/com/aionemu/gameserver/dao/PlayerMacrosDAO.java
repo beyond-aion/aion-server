@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.commons.database.DB;
 import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.commons.database.IUStH;
+import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.model.gameobjects.player.Macros;
 
 /**
@@ -71,7 +72,11 @@ public class PlayerMacrosDAO {
 			stmt.setInt(1, playerId);
 			try (ResultSet rset = stmt.executeQuery()) {
 				while (rset.next()) {
-					macros.add(rset.getInt("order"), rset.getString("macro"));
+					int order = rset.getInt("order");
+					if (Macros.isValidId(order))
+						macros.add(order, rset.getString("macro"));
+					else
+						log.warn("Skipped macro " + order + " of player " + playerId + " (limit is " + CustomConfig.MAX_MACROS + ")");
 				}
 			}
 		} catch (Exception e) {

@@ -489,7 +489,7 @@ public final class PlayerEnterWorldService {
 	private static void sendMacroList(AionConnection client, Player player) {
 		SplitList<Macros.Macro> macroSplitList = new DynamicServerPacketBodySplitList<>(player.getMacros().getAll(), true, SM_MACRO_LIST.STATIC_BODY_SIZE,
 			SM_MACRO_LIST.DYNAMIC_BODY_PART_SIZE_CALCULATOR);
-		macroSplitList.forEach(part -> PacketSendUtility.sendPacket(player, new SM_MACRO_LIST(player.getObjectId(), part, part.isFirst())));
+		macroSplitList.forEach(part -> PacketSendUtility.sendPacket(player, new SM_MACRO_LIST(player.getObjectId(), part, part.isFirst(), part.isLast())));
 	}
 }
 
