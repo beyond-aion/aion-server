@@ -35,8 +35,8 @@ public class CustomConfig {
 	/**
 	 * Maximum number of macros per character
 	 */
-	@Property(key = "gameserver.macros.max", defaultValue = "12")
-	public static int MAX_MACROS;
+	@Property(key = "gameserver.macros.limit", defaultValue = "12")
+	public static int MACROS_LIMIT;
 
 	/**
 	 * Time in days after which an item in broker will be unregistered (client cannot display more than 255 days)
