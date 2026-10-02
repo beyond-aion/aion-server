@@ -32055,9 +32055,24 @@
 			<item id="165020015" /><!-- Armor Wrapping Scroll (Eternal/Lv. 65 and lower) -->
 		</items>
 	</decomposable>
-	<decomposable item_id="188053543" /><!-- Shu-Ghost's Egg and Aether Cherry Box -->
-	<decomposable item_id="188053544" /><!-- Pinkybell's Egg and Aether Cherry Box -->
-	<decomposable item_id="188053545" /><!-- Royal Kitter's Egg and Aether Cherry Box -->
+	<decomposable item_id="188053543"><!-- Shu-Ghost's Egg and Aether Cherry Box -->
+		<items>
+			<item id="190020221" /><!-- Shu-Ghost's Egg -->
+			<item id="182007162" min_count="50" /><!-- Aether Cherry -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188053544"><!-- Pinkybell's Egg and Aether Cherry Box -->
+		<items>
+			<item id="190020223" /><!-- Pinkybell's Egg -->
+			<item id="182007162" min_count="50" /><!-- Aether Cherry -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188053545"><!-- Royal Kitter's Egg and Aether Cherry Box -->
+		<items>
+			<item id="190020214" /><!-- Royal Kitter Egg -->
+			<item id="182007162" min_count="50" /><!-- Aether Cherry -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188053546" /><!-- Seven Fortune Pouch -->
 	<decomposable item_id="188053547" /><!-- Nether Dragon King's Sealed Box -->
 	<decomposable item_id="188053548" /><!-- Nether Dragon's Sealed Box -->
