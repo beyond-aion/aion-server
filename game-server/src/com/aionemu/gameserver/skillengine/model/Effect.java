@@ -104,10 +104,6 @@ public class Effect implements StatOwner {
 	 * power of effect ( used for dispels)
 	 */
 	private int power;
-	/**
-	 * accModBoost used for SignetBurstEffect
-	 */
-	private int accModBoost = 0;
 
 	private EffectResult effectResult = EffectResult.NORMAL;
 
@@ -1018,14 +1014,6 @@ public class Effect implements StatOwner {
 		this.power -= power;
 
 		return this.power;
-	}
-
-	public void setAccModBoost(int accModBoost) {
-		this.accModBoost = accModBoost;
-	}
-
-	public int getAccModBoost() {
-		return this.accModBoost;
 	}
 
 	public boolean isHideEffect() {

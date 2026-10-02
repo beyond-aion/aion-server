@@ -11,6 +11,8 @@ public class SignetData {
 
     @XmlAttribute(name = "lvl", required = true)
     private int level;
+    @XmlAttribute(name = "carve_prob")
+    private int carveProb = 100;
     @XmlAttribute(name = "add_effect_prob", required = true)
     private int addEffectProb = 1;
     @XmlAttribute(name = "dmg_multi", required = true)
@@ -18,6 +20,10 @@ public class SignetData {
 
     public int getLevel() {
         return level;
+    }
+
+    public int getCarveProb() {
+        return carveProb;
     }
 
     public int getAddEffectProb() {

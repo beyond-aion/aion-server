@@ -19,34 +19,36 @@ import com.aionemu.gameserver.skillengine.model.SignetEnum;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "SignetBurstEffect")
 public class SignetBurstEffect extends DamageEffect {
+
 	@XmlAttribute
 	protected int signetlvl;
 	@XmlAttribute
 	protected String signet;
 	@XmlAttribute(name = "add_effect_prob_multi")
 	protected int addEffectProbMultiplier = 0;
+	@XmlAttribute(name = "add_effect_prob_multi_delta")
+	protected float addEffectProbMultiplierDelta;
 
 	@SuppressWarnings("lossy-conversions")
 	@Override
 	public void calculateDamage(Effect effect) {
 		Effect signetEffect = effect.getEffected().getEffectController().getAbnormalEffect(signet);
 		int valueWithDelta = calculateBaseValue(effect);
-		if (element != SkillElement.NONE) {
+		if (element != SkillElement.NONE)
 			valueWithDelta *= effect.getEffector().getGameStats().getKnowledge().getCurrent() / 100f;
-		}
+
 		int effectProb = 0;
 		int signetLvl = Math.min(signetlvl, signetEffect == null ? 0 : signetEffect.getSkillLevel());
 		SignetData signetData = DataManager.SIGNET_DATA_TEMPLATES.getSignetData(SignetEnum.valueOf(signet), signetLvl);
 		if (signetData != null) {
 			valueWithDelta *= signetData.getDamageMultiplier();
-			effectProb = signetData.getAddEffectProb() * addEffectProbMultiplier;
+			effectProb = (int) ((addEffectProbMultiplier + addEffectProbMultiplierDelta * effect.getSkillLevel()) * signetData.getAddEffectProb());
 		}
 		effect.setSignetBurstedCount(signetLvl);
 		AttackUtil.calculateSkillResult(effect, valueWithDelta, this, false);
 		effect.setLaunchSubEffect(Rnd.chance() < effectProb);
-		if (signetEffect != null) {
+		if (signetEffect != null)
 			signetEffect.endEffect();
-		}
 	}
 
 	@Override
@@ -59,7 +61,12 @@ public class SignetBurstEffect extends DamageEffect {
 		}
 	}
 
+	public int getSignetlvl() {
+		return signetlvl;
+	}
+
 	public String getSignet() {
 		return signet;
 	}
+
 }
