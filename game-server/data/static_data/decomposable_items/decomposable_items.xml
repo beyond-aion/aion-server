@@ -23991,7 +23991,65 @@
 	</decomposable>
 	<decomposable item_id="188052647" /><!-- Daevic Fortune Cookie -->
 	<decomposable item_id="188052648" /><!-- Noble Fabled Godstone Box -->
-	<decomposable item_id="188052649" /><!-- Pet Egg Box -->
+	<decomposable item_id="188052649"><!-- Pet Egg Box -->
+		<items>
+			<item id="190020180" /><!-- Golden Pack Saam Egg (32 slots) -->
+		</items>
+		<items>
+			<item id="190020175" /><!-- Tahabata Egg (30 slots) -->
+		</items>
+		<items>
+			<item id="190020174" /><!-- Traveling Kitter Egg (26 slots) -->
+		</items>
+		<items>
+			<item id="190020019" /><!-- Shugo Lass Egg (24 slots) -->
+		</items>
+		<items>
+			<item id="190020020" /><!-- Shugo Lad Egg (24 slots) -->
+		</items>
+		<items>
+			<item id="190000078" /><!-- Woodkeeper Ailu Egg (18 slots) -->
+		</items>
+		<items>
+			<item id="190020135" /><!-- Evolved Speckled Ailu Egg (18 slots) -->
+		</items>
+		<items>
+			<item id="190020017" /><!-- Micro MuMu Egg (18 slots) -->
+		</items>
+		<items>
+			<item id="190020018" /><!-- Mini MuMu Egg (18 slots) -->
+		</items>
+		<items>
+			<item id="190000067" /><!-- Sunset Drakie Egg (18 slots) -->
+		</items>
+		<items>
+			<item id="190000046" /><!-- Goldmane Trico Egg (12 slots) -->
+		</items>
+		<items>
+			<item id="190000047" /><!-- Golden Drakie Egg (12 slots) -->
+		</items>
+		<items>
+			<item id="190020026" /><!-- Boxing King Kerub Egg (12 slots) -->
+		</items>
+		<items>
+			<item id="190020027" /><!-- Tin Narky Egg (12 slots) -->
+		</items>
+		<items>
+			<item id="190020028" /><!-- Pink Griffo Egg (12 slots) -->
+		</items>
+		<items>
+			<item id="190020047" /><!-- Speckled Ailu Egg (12 slots) -->
+		</items>
+		<items>
+			<item id="190020048" /><!-- Potbelly Inquin Egg (12 slots) -->
+		</items>
+		<items>
+			<item id="190000018" /><!-- Silvertail Dorion Egg (6 slots) -->
+		</items>
+		<items>
+			<item id="190000019" /><!-- Goldentail Dorion Egg (6 slots) -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188052650" /><!-- Noble Medal Box -->
 	<decomposable item_id="188052651" /><!-- Title Card Box -->
 	<decomposable item_id="188052652" /><!-- Greater Enchantment Stone Bundle -->
@@ -26592,7 +26650,20 @@
 	</decomposable>
 	<decomposable item_id="188052916" /><!-- [Event] Triniel's Shadow Wraith Weapon Chest -->
 	<decomposable item_id="188052917" /><!-- [Event] Triniel's Shadow Wraith Attire Chest -->
-	<decomposable item_id="188052918" /><!-- [Event] Angel Wings Chest -->
+	<decomposable item_id="188052918"><!-- [Event] Angel Wings Chest -->
+		<items chance="25.0">
+			<item id="187050022" /><!-- [Event] Black Angel Wings -->
+		</items>
+		<items chance="25.0">
+			<item id="187050024" /><!-- [Event] Ghostly Angel Wings -->
+		</items>
+		<items chance="25.0">
+			<item id="187050023" /><!-- [Event] Red Angel Wings -->
+		</items>
+		<items chance="25.0">
+			<item id="187050025" /><!-- [Event] White Angel Wings -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188052919"><!-- Fortress Supplies -->
 		<items>
 			<item id="186000242" /><!-- Ceramium Medal -->
@@ -32429,7 +32500,38 @@
 			<item id="186000130" /><!-- Crucible Insignia -->
 		</items>
 	</decomposable>
-	<decomposable item_id="188053634" /><!-- Midsummer Honey Box -->
+	<decomposable item_id="188053634"><!-- Midsummer Honey Box -->
+		<items chance="10.0">
+			<item id="110900420" /><!-- Cool Summer Look -->
+		</items>
+		<items chance="10.0">
+			<item id="110900552" /><!-- Aquablue Swimsuit -->
+		</items>
+		<items chance="10.0">
+			<item id="125040076" /><!-- Summer Sunglasses -->
+		</items>
+		<items chance="10.0">
+			<item id="125040080" /><!-- Beach Hat -->
+		</items>
+		<items chance="10.0">
+			<item id="169600103" /><!-- [Emotion Card] Diving -->
+		</items>
+		<items chance="10.0">
+			<item id="169600217" /><!-- [Emotion Card] Summer Vacation -->
+		</items>
+		<items chance="10.0">
+			<item id="170415026" /><!-- Comfortable Camp Hammock -->
+		</items>
+		<items chance="10.0">
+			<item id="170425038" /><!-- Picnic Table -->
+		</items>
+		<items chance="10.0">
+			<item id="171130034" /><!-- Fresh Summer Camp Wallpaper -->
+		</items>
+		<items chance="10.0">
+			<item id="171130038" /><!-- Fresh Summer Camp Floor -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188053635" /><!-- Kikorinerk's Sweet Surprise -->
 	<decomposable item_id="188053636"><!-- Blood Mark Box -->
 		<items>
