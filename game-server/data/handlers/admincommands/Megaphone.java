@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
@@ -21,20 +19,14 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
  */
 public class Megaphone extends AdminCommand {
 
-	private final List<MegaphoneChatColor> colors;
+	private static final List<MegaphoneChatColor> colors = collectColors();
 
 	public Megaphone() {
-		super("megaphone", "Sends a message to the global faction chat (client must be started with -megaphone to show the megaphone chat window).");
-
-		colors = collectColors();
-
-		// @formatter:off
-		setSyntaxInfo(
-			"<none|elyos|asmo> <name> <message> - Sends the message with given sender name and faction prefix.",
-			"<color ID> <none|elyos|asmo> <name> <message> - Sends the message in the color of given color ID.",
-			"Color IDs: " + colorIds()
-		);
-		// @formatter:on
+		super("megaphone", "Sends a message to the global faction chat (client must be started with -megaphone to show the megaphone chat window).", """
+			<none|elyos|asmo> <name> <message> - Sends the message with given sender name and faction prefix.
+			<color ID> <none|elyos|asmo> <name> <message> - Sends the message in the color of given color ID.
+			Color IDs: %s
+			""".formatted(colorIds()));
 	}
 
 	@Override
@@ -64,12 +56,11 @@ public class Megaphone extends AdminCommand {
 			return;
 		}
 		String sender = params[i++];
-		String message = StringUtils.join(params, ' ', i, params.length);
-
+		String message = join(params, i);
 		PacketSendUtility.broadcastToWorld(new SM_MEGAPHONE(factionLabel, sender, message, megaphoneItemId));
 	}
 
-	private List<MegaphoneChatColor> collectColors() {
+	private static List<MegaphoneChatColor> collectColors() {
 		List<MegaphoneChatColor> colors = new ArrayList<>();
 		for (ItemTemplate itemTemplate : DataManager.ITEM_DATA.getItemTemplates()) {
 			if (itemTemplate.getActions() != null) {
@@ -83,7 +74,7 @@ public class Megaphone extends AdminCommand {
 		return colors;
 	}
 
-	private String colorIds() {
+	private static String colorIds() {
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < colors.size(); i++) {
 			if (sb.length() > 0)
@@ -93,14 +84,5 @@ public class Megaphone extends AdminCommand {
 		return sb.toString();
 	}
 
-	private class MegaphoneChatColor {
-
-		private final int megaphoneItemId;
-		private final int color;
-
-		private MegaphoneChatColor(int megaphoneItemId, int color) {
-			this.megaphoneItemId = megaphoneItemId;
-			this.color = color;
-		}
-	}
+	private record MegaphoneChatColor(int megaphoneItemId, int color) {}
 }

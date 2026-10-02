@@ -23,7 +23,7 @@ public class AuditLogger {
 	 * Notifies permitted online staff members.<br>
 	 * Automatically punishes player, if punishments are enabled.
 	 */
-	public static final void log(Player player, String message) {
+	public static void log(Player player, String message) {
 		if (PunishmentConfig.PUNISHMENT_ENABLE)
 			AutoBan.punishment(player);
 
@@ -32,7 +32,7 @@ public class AuditLogger {
 
 		for (Player gm : GMService.getInstance().getOnlineStaffMembers()) {
 			if (gm.hasAccess(AdminConfig.AUDIT_INFO))
-				PacketSendUtility.sendMessage(gm, ChatUtil.name(player) + " " + message, ChatType.YELLOW);
+				PacketSendUtility.sendMessage(gm, ChatUtil.charName(player) + " " + message, ChatType.YELLOW);
 		}
 	}
 }

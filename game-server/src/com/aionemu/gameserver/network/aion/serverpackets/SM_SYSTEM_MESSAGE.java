@@ -25578,6 +25578,20 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
+	 * Level %0 and above may use %1.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_CANT_USE_ITEM_TOO_LOW_RANK(String value0, String value1) {
+		return new SM_SYSTEM_MESSAGE(1401325, value0, value1);
+	}
+
+	/**
+	 * Level %0 and below may use %1.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_CANT_USE_ITEM_TOO_HIGH_RANK(String value0, String value1) {
+		return new SM_SYSTEM_MESSAGE(1401326, value0, value1);
+	}
+
+	/**
 	 * %0 disappears in 10 minutes because your Abyss Rank changed.
 	 */
 	public static SM_SYSTEM_MESSAGE STR_MSG_UNEQUIP_RANKITEM_TIMER_10M(String value0) {
@@ -28214,6 +28228,20 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	 */
 	public static SM_SYSTEM_MESSAGE STR_MSG_EXCEED_SKILL_ENCHANT(String value0, int num1, String value2) {
 		return new SM_SYSTEM_MESSAGE(1402662, value0, num1, value2);
+	}
+
+	/**
+	 * %0 has failed enchantment and the added skill has been lost.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_EXCEED_SKILL_DELETE(String value0) {
+		return new SM_SYSTEM_MESSAGE(1402663, value0);
+	}
+
+	/**
+	 * You must equip %0 to use %1.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_SKILL_ABLE_EQUIPED(String value0, String value1) {
+		return new SM_SYSTEM_MESSAGE(1402664, value0, value1);
 	}
 
 	/**

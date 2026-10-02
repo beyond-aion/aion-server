@@ -26,7 +26,6 @@ import com.aionemu.gameserver.spawnengine.VisibleObjectSpawner;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.world.geo.GeoService;
-import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author Rolandas, Neon
@@ -104,7 +103,7 @@ public class HouseController extends VisibleObjectController<House> {
 	}
 
 	public void kickVisitors(Player kicker, boolean kickFriends, boolean ownerChanged) {
-		ZoneName houseZone = ZoneName.get(getOwner().getName());
+		String houseZone = getOwner().getName();
 		getOwner().getKnownList().forEachPlayer(player -> {
 			if (player.getObjectId() == getOwner().getOwnerId())
 				return;

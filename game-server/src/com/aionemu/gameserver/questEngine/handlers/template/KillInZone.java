@@ -11,11 +11,11 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.templates.zone.ZoneTemplate;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
+import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
  * @author Cheatkiller, Majka, Pad
@@ -42,11 +42,9 @@ public class KillInZone extends AbstractTemplateQuestHandler {
 			this.endNpcIds.addAll(endNpcIds);
 		else
 			this.endNpcIds.addAll(startNpcIds);
-		if (zones != null) {
-			this.zones.addAll(zones);
-		} else {
-			for (ZoneTemplate template : DataManager.ZONE_DATA.zoneList)
-				this.zones.add(template.getXmlName());
+		for (String zoneName : zones) {
+			if (DataManager.ZONE_DATA.validateZoneName(zoneName))
+				this.zones.add(zoneName);
 		}
 		if (killAmount == 0)
 			this.killAmount = 1;
@@ -107,7 +105,7 @@ public class KillInZone extends AbstractTemplateQuestHandler {
 	}
 
 	@Override
-	public boolean onKillInZoneEvent(QuestEnv env) {
+	public boolean onKillInZoneEvent(QuestEnv env, ZoneInstance zone) {
 		// Rank restriction
 		if (minRank > 0 && ((Player) env.getVisibleObject()).getAbyssRank().getRank().getId() < minRank)
 			return false;

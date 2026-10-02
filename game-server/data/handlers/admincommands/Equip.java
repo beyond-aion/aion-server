@@ -23,15 +23,12 @@ import com.aionemu.gameserver.world.World;
 public class Equip extends AdminCommand {
 
 	public Equip() {
-		super("equip", "Enchants all equipped items.");
-		// @formatter:off
-		setSyntaxInfo(
-			"socket <manastone link|ID> [limit] [player] - Sockets the manastone in all equipped items of your target or the given player.",
-			"unsocket [player] - Removes manastones from all equipped items of your target or the given player.",
-			"enchant <0-255> [player] - Enchant all equipped items of your target or the given player.",
-			"temper <0-255> [player] - Temper all equipped items of your target or the given player."
-		);
-		// @formatter:on
+		super("equip", "Enchants all equipped items.", """
+			socket <manastone link|ID> [limit] [player] - Sockets the manastone in all equipped items of your target or the given player.
+			unsocket [player] - Removes manastones from all equipped items of your target or the given player.
+			enchant <0-255> [player] - Enchants all equipped items of your target or the given player.
+			temper <0-255> [player] - Tempers all equipped items of your target or the given player.
+			""");
 	}
 
 	@Override
@@ -50,10 +47,10 @@ public class Equip extends AdminCommand {
 		} else if ("unsocket".equalsIgnoreCase(params[0])) {
 			unsocket(admin, player);
 		} else if ("enchant".equalsIgnoreCase(params[0]) && params.length >= 2) {
-			int enchant = Math.max(0, Math.min(255, Integer.parseInt(params[1])));
+			int enchant = Math.clamp(Integer.parseInt(params[1]), 0, 255);
 			enchant(admin, player, enchant);
 		} else if ("temper".equalsIgnoreCase(params[0]) && params.length >= 2) {
-			int temperingLevel =  Math.max(0, Math.min(255, Integer.parseInt(params[1])));
+			int temperingLevel = Math.clamp(Integer.parseInt(params[1]), 0, 255);
 			temper(admin, player, temperingLevel);
 		} else {
 			sendInfo(admin);
@@ -90,10 +87,10 @@ public class Equip extends AdminCommand {
 		if (maxSocketed == 0)
 			sendInfo(admin, "There are no free slots on any equipped items.");
 		else if (player == admin)
-			sendInfo(player, maxSocketed + "x " + ChatUtil.item(manastoneId) + " were added to free slots on all equipped items");
+			sendInfo(player, maxSocketed + "x " + ChatUtil.item(manastoneId) + " were added to free slots on all equipped items.");
 		else {
-			sendInfo(admin, maxSocketed + "x " + ChatUtil.item(manastoneId) + " were added to free slots on all equipped items of player " + player.getName());
-			sendInfo(player, admin.getName(true) + " added " + count + "x " + ChatUtil.item(manastoneId) + " to free slots on all your equipped items");
+			sendInfo(admin, maxSocketed + "x " + ChatUtil.item(manastoneId) + " were added to free slots on all equipped items of " + name(player) + ".");
+			sendInfo(player, name(admin) + " added " + count + "x " + ChatUtil.item(manastoneId) + " to free slots on all your equipped items.");
 		}
 	}
 
@@ -110,8 +107,8 @@ public class Equip extends AdminCommand {
 		if (player == admin)
 			sendInfo(player, "Removed manastones from all equipped items.");
 		else {
-			sendInfo(admin, "Removed manastones from all equipped items of player " + player.getName() + ".");
-			sendInfo(player, admin.getName(true) + " removed all manastones from all your equipped items.");
+			sendInfo(admin, "Removed manastones from all equipped items of " + name(player) + ".");
+			sendInfo(player, name(admin) + " removed all manastones from all your equipped items.");
 		}
 	}
 
@@ -128,8 +125,8 @@ public class Equip extends AdminCommand {
 		if (player == admin)
 			sendInfo(player, "Enchanted all equipped items to +" + enchant + ".");
 		else {
-			sendInfo(admin, "Enchanted all equipped items of player " + player.getName() + " to +" + enchant + ".");
-			sendInfo(player, admin.getName(true) + " enchanted all your equipped items to +" + enchant + ".");
+			sendInfo(admin, "Enchanted all equipped items of " + name(player) + " to +" + enchant + ".");
+			sendInfo(player, name(admin) + " enchanted all your equipped items to +" + enchant + ".");
 		}
 	}
 
@@ -142,8 +139,8 @@ public class Equip extends AdminCommand {
 		if (player == admin)
 			sendInfo(player, "Tempered all equipped items to +" + temperingLevel + ".");
 		else {
-			sendInfo(admin, "Tempered all equipped items of player " + player.getName() + " to +" + temperingLevel + ".");
-			sendInfo(player, admin.getName(true) + " tempered all your equipped items to +" + temperingLevel + ".");
+			sendInfo(admin, "Tempered all equipped items of " + name(player) + " to +" + temperingLevel + ".");
+			sendInfo(player, name(admin) + " tempered all your equipped items to +" + temperingLevel + ".");
 		}
 	}
 }

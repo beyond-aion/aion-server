@@ -10,6 +10,7 @@ import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.materials.MaterialSkill;
+import com.aionemu.gameserver.model.templates.materials.MaterialTemplate;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -17,8 +18,16 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class ZoneCollisionMaterialActor extends AbstractMaterialSkillActor {
 
-	public ZoneCollisionMaterialActor(Creature creature, Spatial geometry, List<MaterialSkill> matchingSkills, CheckType checkType) {
-		super(creature, geometry, CollisionIntention.MATERIAL.getId(), checkType, TaskId.ZONE_MATERIAL_ACTION, matchingSkills);
+	private volatile boolean isTouched = false;
+
+	public ZoneCollisionMaterialActor(Creature creature, Spatial geometry, MaterialTemplate template, CheckType checkType, List<MaterialSkill> skills) {
+		super(creature, geometry, CollisionIntention.MATERIAL.getId(), checkType, TaskId.ZONE_MATERIAL_ACTION, template.getId(), skills);
+	}
+
+	@Override
+	public void died(Creature creature) {
+		super.died(creature);
+		isTouched = false;
 	}
 
 	@Override

@@ -35,9 +35,9 @@ public class Send extends AdminCommand {
 	private static final String SCHEMAFILE = FOLDER + "packets.xsd";
 
 	public Send() {
-		super("send", "Sends custom packets.");
-
-		setSyntaxInfo("<file> - Sends packets to your client, based on the ./data/packets/<file>.xml template.");
+		super("send", "Sends custom packets.", """
+			<file> - Sends packets to your client, based on the ./data/packets/<file>.xml template.
+			""");
 	}
 
 	@Override

@@ -39,9 +39,7 @@ public class Symphony extends PlayerCommand {
 	};
 
 	public Symphony() {
-		super("symphony", "Exchanges " + ChatUtil.item(REQUIRED_ITEM_ID) + " for prizes.");
-
-		setSyntaxInfo(buildSyntaxInfo());
+		super("symphony", "Exchanges " + ChatUtil.item(REQUIRED_ITEM_ID) + " for prizes.", buildSyntaxInfo());
 	}
 
 	@Override
@@ -50,35 +48,31 @@ public class Symphony extends PlayerCommand {
 			sendInfo(player);
 			return;
 		}
-
-		try {
-			int rewardIndex = Integer.parseInt(params[0]) - 1;
-			if (rewardIndex < 0 || rewardIndex >= REWARDS.length)
-				throw new IllegalArgumentException();
-
-			int cost = REWARDS[rewardIndex][0];
-			if (player.getInventory().getItemCountByItemId(REQUIRED_ITEM_ID) < cost || !player.getInventory().decreaseByItemId(REQUIRED_ITEM_ID, cost))
-				throw new IllegalArgumentException("You need %d %s to buy this.".formatted(cost, ChatUtil.item(REQUIRED_ITEM_ID)));
-
-			int itemId = REWARDS[rewardIndex][1];
-			int itemCount = REWARDS[rewardIndex][2];
-
-			long notAddedCount = ItemService.addItem(player, itemId, itemCount, true,
-				new ItemUpdatePredicate(ItemAddType.DECOMPOSABLE, ItemUpdateType.INC_CASH_ITEM));
-			if (notAddedCount > 0) {
-				log.warn("[Legendary Symphony Event] {}x {} could not be added to {}'s inventory.", notAddedCount, itemId, player.getName());
-			}
-		} catch (IllegalArgumentException e) {
-			sendInfo(player, e instanceof NumberFormatException ? "Invalid prize." : e.getMessage());
+		int rewardIndex = Integer.parseInt(params[0]) - 1;
+		if (rewardIndex < 0 || rewardIndex >= REWARDS.length) {
+			sendInfo(player, "Invalid prize.");
+			return;
+		}
+		int cost = REWARDS[rewardIndex][0];
+		if (player.getInventory().getItemCountByItemId(REQUIRED_ITEM_ID) < cost || !player.getInventory().decreaseByItemId(REQUIRED_ITEM_ID, cost)) {
+			sendInfo(player, "You need %d %s to buy this.".formatted(cost, ChatUtil.item(REQUIRED_ITEM_ID)));
+			return;
+		}
+		int itemId = REWARDS[rewardIndex][1];
+		int itemCount = REWARDS[rewardIndex][2];
+		long notAddedCount = ItemService.addItem(player, itemId, itemCount, true,
+			new ItemUpdatePredicate(ItemAddType.DECOMPOSABLE, ItemUpdateType.INC_CASH_ITEM));
+		if (notAddedCount > 0) {
+			log.warn("[Legendary Symphony Event] {}x {} could not be added to {}'s inventory.", notAddedCount, itemId, player.getName());
 		}
 	}
 
-	private String buildSyntaxInfo() {
+	private static String buildSyntaxInfo() {
 		StringBuilder sb = new StringBuilder("Type .symphony <id> to get your reward:\n");
 
 		for (int i = 0; i < REWARDS.length; i++) {
 			int[] reward = REWARDS[i];
-			sb.append("[").append(i + 1).append("] - (").append(reward[0]).append(" copies): ").append(reward[2]).append("x ")
+			sb.append(i + 1).append(" - (").append(reward[0]).append(" copies): ").append(reward[2]).append("x ")
 				.append(ChatUtil.item(reward[1])).append("\n");
 		}
 

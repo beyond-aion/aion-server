@@ -13,14 +13,10 @@ import com.aionemu.gameserver.world.World;
 public class Kick extends AdminCommand {
 
 	public Kick() {
-		super("kick", "Disconnects players from the server.");
-
-		// @formatter:off
-		setSyntaxInfo(
-			"<name> - Disconnects the player with the specified name.",
-			"<ALL> - Disconnects everyone (parameter must be typed in uppercase, for safety)."
-		);
-		// @formatter:on
+		super("kick", "Disconnects players from the server.", """
+			<name> - Disconnects the player with the specified name.
+			ALL - Disconnects everyone (parameter must be typed in uppercase, for safety).
+			""");
 	}
 
 	@Override

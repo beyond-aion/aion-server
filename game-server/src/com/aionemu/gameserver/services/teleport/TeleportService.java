@@ -199,6 +199,10 @@ public class TeleportService {
 		player.getController().cancelCurrentSkill(null);
 		player.setTarget(null);
 		player.unsetPlayerMode(PlayerMode.RIDE);
+		if (player.isUsingFlightTransporterOrWindstream()) {
+			player.setFlightPath(null);
+			player.getFlyController().endFly(false);
+		}
 	}
 
 	private static void spawnOnSameMap(Player player) {

@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.model.stats.calc.functions;
 
+import java.util.Set;
+
 import javax.xml.bind.annotation.*;
 
 import com.aionemu.gameserver.model.stats.calc.Stat2;
@@ -72,7 +74,7 @@ public class StatFunction implements IStatFunction {
 	}
 
 	@Override
-	public void apply(Stat2 stat, CalculationType... calculationTypes) {
+	public void apply(Stat2 stat, Set<CalculationType> calculationTypes) {
 	}
 
 	@Override

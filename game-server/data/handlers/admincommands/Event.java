@@ -11,7 +11,6 @@ import com.aionemu.gameserver.model.team.alliance.PlayerAllianceService;
 import com.aionemu.gameserver.model.team.group.PlayerGroupService;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.teleport.TeleportService;
-import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
@@ -24,20 +23,16 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 public class Event extends AdminCommand {
 
 	public Event() {
-		super("event", "Manages event functions and player event-states.");
-
-		// @formatter:off
-		setSyntaxInfo(
-			"<setStatus> [name] - Disables ap gain/loss for the given player and sets him to event state.",
-			"<setGroupStatus> [name] - Gets and sets the group of the given player to event state and disables ap gain/loss for them.",
-			"<setEnemy> <cancel|team|ffa> [name] - Sets the specific state (cancel: normal, team: everyone outside the players team is an enemy, ffa: everyone is an enemy).",
-			"<pvpSpawn> [asmo|elyos] - Sets a resurrection point for the given race.",
-			"<clearInstance> - Clears the whole instance you have created.",
-			"<announce> <text> - Sends a yellow message for all players in event state.",
-			"<list> - Lists all players in event state.",
-			"<removeAll> - Removes all players from event state."
-		);
-		// @formatter:on
+		super("event", "Manages event functions and player event states.", """
+			setStatus [name] - Disables AP gain/loss for the given player and sets him to event state.
+			setGroupStatus [name] - Gets and sets the group of the given player to event state and disables AP gain/loss for them.
+			setEnemy <cancel|team|ffa> [name] - Sets the specific state (cancel: normal, team: everyone outside the players team is an enemy, ffa: everyone is an enemy).
+			pvpSpawn [asmo|elyos] - Sets a resurrection point for the given race.
+			clearInstance - Clears the whole instance you have created.
+			announce <text> - Sends a yellow message for all players in event state.
+			list - Lists all players in event state.
+			removeAll - Removes all players from event state.
+			""");
 	}
 
 	@Override
@@ -61,7 +56,7 @@ public class Event extends AdminCommand {
 			clearInstance(admin);
 		} else if (params[0].equalsIgnoreCase("announce")) {
 			StringBuilder sb = new StringBuilder();
-			sb.append(ChatUtil.name(admin)).append(':');
+			sb.append(name(admin)).append(':');
 			for (int i = 1; i < params.length; i++)
 				sb.append(" ").append(params[i]);
 
@@ -72,7 +67,7 @@ public class Event extends AdminCommand {
 		} else if (params[0].equalsIgnoreCase("list")) {
 			StringBuilder sb = new StringBuilder("Players in event state:");
 			World.getInstance().getAllPlayers().stream().filter(p -> p.isInCustomState(CustomPlayerState.EVENT_MODE))
-				.forEach(p -> sb.append("\n\t").append(ChatUtil.name(p)));
+				.forEach(p -> sb.append("\n\t").append(name(p)));
 			sendInfo(admin, sb.toString());
 		} else if (params[0].equalsIgnoreCase("removeAll")) {
 			for (Player player : World.getInstance().getAllPlayers())
@@ -98,7 +93,7 @@ public class Event extends AdminCommand {
 			if (player == null)
 				return;
 			if (!player.isInCustomState(CustomPlayerState.EVENT_MODE)) {
-				sendInfo(admin, player.getName() + " is not in event state");
+				sendInfo(admin, name(player) + " is not in event state");
 				return;
 			}
 			boolean ffaTeamMode = false;
@@ -120,7 +115,7 @@ public class Event extends AdminCommand {
 			}
 			player.setInFfaTeamMode(ffaTeamMode);
 			player.getController().onChangedPlayerAttributes();
-			sendInfo(admin, ChatUtil.name(player) + " is " + msg);
+			sendInfo(admin, name(player) + " is " + msg);
 			PacketSendUtility.sendMessage(player, "You are " + msg, ChatType.BRIGHT_YELLOW_CENTER);
 		} else {
 			sendInfo(admin);
@@ -169,11 +164,11 @@ public class Event extends AdminCommand {
 			player.unsetCustomState(CustomPlayerState.ENEMY_OF_ALL_PLAYERS);
 			player.setInFfaTeamMode(false);
 			player.getController().onChangedPlayerAttributes();
-			sendInfo(admin, ChatUtil.name(player) + " was removed from event state.");
+			sendInfo(admin, name(player) + " was removed from event state.");
 			PacketSendUtility.sendMessage(player, "You were removed from event state!", ChatType.BRIGHT_YELLOW_CENTER);
 		} else if (!onlyRemove) {
 			player.setCustomState(CustomPlayerState.EVENT_MODE);
-			sendInfo(admin, ChatUtil.name(player) + " was set in event state.");
+			sendInfo(admin, name(player) + " was set in event state.");
 			PacketSendUtility.sendMessage(player,
 				"You are in event state now. Please notice that you are not allowed to leave the event without removal of this state!",
 				ChatType.BRIGHT_YELLOW_CENTER);

@@ -112,7 +112,7 @@ public abstract class XmlUtil {
 	 */
 	public static Collection<File> listFiles(File root, boolean recursive) {
 		try (var paths = Files.find(root.toPath(), recursive ? Integer.MAX_VALUE : 1, (path, attrs) -> attrs.isRegularFile() && path.toString().toLowerCase().endsWith(".xml"))) {
-			return paths.map(Path::toFile).toList();
+			return paths.map(Path::toFile).sorted().toList();
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}

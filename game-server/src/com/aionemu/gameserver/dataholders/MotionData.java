@@ -9,7 +9,6 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.skillengine.model.*;
 
 /**
@@ -55,7 +54,7 @@ public class MotionData {
 		if (times == null)
 			return 0f;
 		int motionSpeed = skill.getSkillTemplate().getMotion().getSpeed() * 10;
-		float attackRate = getAttackRate(player);
+		float attackRate = player.getGameStats().getAttackSpeedRate();
 		float motionSpeedRate = player.isHitTimeBoosted() ? Math.min(attackRate, calculateCastSpeedRate(player.getHitTimeBoostCastSpeed())) : attackRate;
 		return (player.isInRobotMode() ? times.getAnimationLength() : times.getMinTime()) * motionSpeed * motionSpeedRate;
 	}
@@ -69,16 +68,11 @@ public class MotionData {
 		if (times == null)
 			return null;
 		int motionSpeed = skill.getSkillTemplate().getMotion().getSpeed() * 10;
-		float attackRate = getAttackRate(player);
+		float attackRate = player.getGameStats().getAttackSpeedRate();
 		float motionSpeedRate = skill.allowAnimationBoostByCastSpeed() ? Math.min(attackRate, calculateCastSpeedRate(skill.getCastSpeedForAnimationBoostAndChargeSkills())) : attackRate;
 		int animationLastHitMillis = (int) (times.getMaxTime() * motionSpeed * motionSpeedRate);
 		int animationFullDurationMillis = (int) (times.getAnimationLength() * motionSpeed * motionSpeedRate);
 		return new AnimationTimes(animationLastHitMillis, animationFullDurationMillis);
-	}
-
-	private float getAttackRate(Player player) {
-		Stat2 attackSpeedStat = player.getGameStats().getAttackSpeed();
-		return attackSpeedStat.getCurrent() / (float) attackSpeedStat.getBase();
 	}
 
 	private float calculateCastSpeedRate(float castSpeedForAnimationBoost) {

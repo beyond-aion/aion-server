@@ -219,6 +219,6 @@ public class WorldPosition {
 	}
 
 	public String toCoordString() {
-		return "Map ID: " + mapId + ", Instance ID: " + getInstanceId() + "\nX: " + x + ", Y: " + y + ", Z: " + z + ", Heading: " + heading;
+		return "Map ID: " + mapId + ", Instance ID: " + getInstanceId() + ", X: " + x + ", Y: " + y + ", Z: " + z + ", Heading: " + heading;
 	}
 }

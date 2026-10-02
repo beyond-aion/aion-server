@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.model.stats.calc.functions;
 
 import java.util.List;
+import java.util.Set;
 
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.items.ItemSlot;
@@ -44,7 +45,7 @@ public class StatArmorMasteryFunction extends StatRateFunction {
 	}
 
 	@Override
-	public void apply(Stat2 stat, CalculationType... calculationTypes) {
+	public void apply(Stat2 stat, Set<CalculationType> calculationTypes) {
 		super.apply(stat, calculationTypes);
 		if (fixedBonus != 0 && equipmentFactor != 0)
 			stat.addToBonus(fixedBonus * equipmentFactor / 100f);

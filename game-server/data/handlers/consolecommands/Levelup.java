@@ -10,9 +10,9 @@ import com.aionemu.gameserver.utils.chathandlers.ConsoleCommand;
 public class Levelup extends ConsoleCommand {
 
 	public Levelup() {
-		super("levelup", "Levels a player up.");
-
-		setSyntaxInfo("<value> - Levels your target up by the specified number of levels (defaults to your character, if no player is targeted).");
+		super("levelup", "Levels a player up.", """
+			<value> - Levels your target up by the specified number of levels (defaults to your character, if no player is targeted).
+			""");
 	}
 
 	@Override
@@ -21,22 +21,13 @@ public class Levelup extends ConsoleCommand {
 			sendInfo(admin);
 			return;
 		}
-
-		final Player player = admin.getTarget() instanceof Player target ? target : admin;
-		int newLevel;
-		try {
-			newLevel = player.getLevel() + Integer.parseInt(params[0]);
-		} catch (NumberFormatException e) {
-			sendInfo(admin, "Please specify the number of levels to add.");
-			return;
-		}
-
+		Player player = admin.getTarget() instanceof Player target ? target : admin;
+		int newLevel = player.getLevel() + Integer.parseInt(params[0]);
 		if (newLevel < 1 || newLevel > GSConfig.PLAYER_MAX_LEVEL) {
 			sendInfo(admin, "Invalid level.");
 			return;
 		}
-
 		player.getCommonData().setLevel(newLevel);
-		sendInfo(admin, "Set " + player.getName() + "'s level to " + player.getLevel());
+		sendInfo(admin, "Set " + name(player) + "'s level to " + player.getLevel());
 	}
 }

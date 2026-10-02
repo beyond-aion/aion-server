@@ -1,68 +1,43 @@
 package admincommands;
 
-import org.apache.commons.lang3.math.NumberUtils;
-
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.RiftService;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 
 public class Rift extends AdminCommand {
 
-	private static final String COMMAND_OPEN = "open";
-	private static final String COMMAND_CLOSE = "close";
-
 	public Rift() {
-		super("rift");
+		super("rift", "Opens or closes rifts in the world.", """
+			list - Lists all rift locations.
+			open <location ID|world ID> [g] - Opens the rifts at the given location. If g is specified and spawns are defined, guards will spawn.
+			close <location ID|world ID> - Closes the rifts at the given location.
+			""");
 	}
 
 	@Override
 	public void execute(Player player, String... params) {
-
-		if (params.length == 0) {
-			showHelp(player);
-			return;
-		}
-
-		if (COMMAND_CLOSE.equalsIgnoreCase(params[0]) || COMMAND_OPEN.equalsIgnoreCase(params[0])) {
-			handleRift(player, params);
-		}
-	}
-
-	protected void handleRift(Player player, String... params) {
-		if (params.length < 2 || !NumberUtils.isDigits(params[1])) {
-			showHelp(player);
-			return;
-		}
-
-		int id = NumberUtils.toInt(params[1]);
-		boolean result;
-		if (!isValidId(player, id)) {
-			showHelp(player);
-			return;
-		}
-
-		if (COMMAND_OPEN.equalsIgnoreCase(params[0])) {
-			boolean guards = params.length > 2 && Boolean.parseBoolean(params[2]);
-			result = RiftService.getInstance().openRifts(id, guards);
-			PacketSendUtility.sendMessage(player, result ? "Rifts is opened!" : "Rifts was already opened");
-		} else if (COMMAND_CLOSE.equalsIgnoreCase(params[0])) {
-			result = RiftService.getInstance().closeRifts(id);
-			PacketSendUtility.sendMessage(player, result ? "Rifts is closed!" : "Rifts was already closed");
+		if (params.length > 0 && "list".equalsIgnoreCase(params[0])) {
+			sendInfo(player, "Rift locations:");
+			RiftService.getInstance().getRiftLocations().forEach(
+				(id, loc) -> sendInfo(player, "ID: " + id + ", world ID: " + loc.getWorldId() + (loc.isOpened() ? " (open)" : "")));
+		} else if (params.length > 1 && "open".equalsIgnoreCase(params[0])) {
+			int id = parseId(params[1]);
+			boolean guards = params.length > 2 && params[2].equalsIgnoreCase("g");
+			boolean result = RiftService.getInstance().openRifts(id, guards);
+			sendInfo(player, result ? "Opened rifts at location " + id + "." : "Rifts are already open.");
+		} else if (params.length > 1 && "close".equalsIgnoreCase(params[0])) {
+			int id = parseId(params[1]);
+			boolean result = RiftService.getInstance().closeRifts(parseId(params[1]));
+			sendInfo(player, result ? "Closed rifts at location " + id + "." : "Rifts were already closed.");
+		} else {
+			sendInfo(player);
 		}
 	}
 
-	protected boolean isValidId(Player player, int id) {
-		if (!RiftService.getInstance().isValidId(id)) {
-			PacketSendUtility.sendMessage(player, "Id " + id + " is invalid");
-			return false;
-		}
-
-		return true;
+	private int parseId(String idParam) {
+		int id = Integer.parseInt(idParam);
+		if (!RiftService.getInstance().isValidId(id))
+			throw new IllegalArgumentException("Invalid rift world ID or location ID.");
+		return id;
 	}
-
-	protected void showHelp(Player player) {
-		PacketSendUtility.sendMessage(player, "AdminCommand //rift open|close <Id|worldId> (open with boolean for guards)");
-	}
-
 }

@@ -1,9 +1,9 @@
 package playercommands;
 
-import com.aionemu.gameserver.model.gameobjects.player.CustomPlayerState;
+import java.util.Collection;
+
 import com.aionemu.gameserver.model.gameobjects.player.FriendList;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.audit.GMService;
 import com.aionemu.gameserver.utils.chathandlers.PlayerCommand;
 
@@ -18,21 +18,16 @@ public class GmList extends PlayerCommand {
 
 	@Override
 	public void execute(Player player, String... params) {
-		StringBuilder sb = new StringBuilder();
-		int count = 0;
-
-		for (Player gm : GMService.getInstance().getOnlineStaffMembers()) {
-			FriendList.Status status = gm.getFriendList().getStatus();
-			if (!gm.isInCustomState(CustomPlayerState.NO_WHISPERS_MODE) && status != FriendList.Status.OFFLINE) {
-				sb.append("\n\t" + ChatUtil.name(gm) + " (" + status.name().toLowerCase() + ")");
-				count++;
-			}
-		}
-
-		if (count == 0) {
+		Collection<Player> availableStaffMembers = GMService.getInstance().getAvailableStaffMembers();
+		if (availableStaffMembers.isEmpty()) {
 			sendInfo(player, "There is no GM online.");
 			return;
 		}
-		sendInfo(player, "GMs online (" + count + "):" + sb.toString());
+		StringBuilder sb = new StringBuilder("GMs online (" + availableStaffMembers.size() + "):");
+		for (Player gm : availableStaffMembers) {
+			FriendList.Status status = gm.getFriendList().getStatus();
+			sb.append("\n\t").append(name(gm)).append(" (").append(status.name().toLowerCase()).append(")");
+		}
+		sendInfo(player, sb.toString());
 	}
 }

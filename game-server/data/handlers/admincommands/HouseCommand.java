@@ -1,16 +1,9 @@
 package admincommands;
 
 import java.awt.Color;
-import java.util.Comparator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
-import org.apache.commons.lang3.math.NumberUtils;
-import org.apache.commons.lang3.text.WordUtils;
-
-import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -23,7 +16,6 @@ import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
-import com.aionemu.gameserver.world.WorldMapType;
 
 /**
  * @author Rolandas
@@ -31,80 +23,48 @@ import com.aionemu.gameserver.world.WorldMapType;
 public class HouseCommand extends AdminCommand {
 
 	public HouseCommand() {
-		super("house", "House teleport and ownership management.");
-
-		// @formatter:off
-		setSyntaxInfo(
-			"list - Shows all maps with houses.",
-			"list <map> - Shows all house addresses for the given map.",
-			"tp <address> - Teleports you to the house with the given address.",
-			"own <address> - Gives ownership of given house to your target.",
-			"revoke <address> - Revokes ownership of given house.",
-			"reloadscripts <address> - Reloads all scripts for the given house."
-		);
-		// @formatter:on
+		super("house", "House teleport and ownership management.", """
+			list - Shows house addresses for each map.
+			tp <address> - Teleports you to the house with the given address.
+			own <address> - Gives ownership of given house to your target.
+			revoke <address> - Revokes ownership of given house.
+			reloadscripts <address> - Reloads all scripts for the given house.
+			""");
 	}
 
 	@Override
 	public void execute(Player admin, String... params) {
-		if (params.length == 0) {
-			sendInfo(admin);
-			return;
-		}
-
-		House house = null;
-		if (params.length >= 2) {
-			int address = NumberUtils.toInt(params[1]);
-			house = HousingService.getInstance().getHouseByAddress(address);
-		}
-		if (house == null && !"list".equalsIgnoreCase(params[0])) {
-			sendInfo(admin, "Invalid address.");
-			return;
-		}
-		if ("list".equalsIgnoreCase(params[0])) {
-			if (params.length == 1)
-				listMapsWithHouses(admin);
-			else
-				listHouses(admin, WorldMapType.of(params[1]));
-		} else if ("own".equalsIgnoreCase(params[0])) {
-			acquireHouse(admin, house);
-		} else if ("revoke".equalsIgnoreCase(params[0])) {
-			revokeOwnership(admin, house);
-		} else if ("tp".equalsIgnoreCase(params[0])) {
-			TeleportService.teleportTo(admin, house.getPosition().getWorldMapInstance(), house.getX(), house.getY(), house.getZ(),
-				house.getTeleportHeading(), TeleportAnimation.NONE);
-		} else if ("reloadscripts".equalsIgnoreCase(params[0])) {
-			reloadPlayerScripts(admin, house);
+		if (params.length >= 1 && "list".equalsIgnoreCase(params[0])) {
+			listHouses(admin);
+		} else if (params.length >= 2 && "own".equalsIgnoreCase(params[0])) {
+			acquireHouse(admin, getHouse(params[1]));
+		} else if (params.length >= 2 && "revoke".equalsIgnoreCase(params[0])) {
+			revokeOwnership(admin, getHouse(params[1]));
+		} else if (params.length >= 2 && "tp".equalsIgnoreCase(params[0])) {
+			House house = getHouse(params[1]);
+			TeleportService.teleportTo(admin, house.getWorldMapInstance(), house.getX(), house.getY(), house.getZ(), house.getTeleportHeading());
+		} else if (params.length >= 2 && "reloadscripts".equalsIgnoreCase(params[0])) {
+			reloadPlayerScripts(admin, getHouse(params[1]));
 		} else {
 			sendInfo(admin);
 		}
 	}
 
-	private void listMapsWithHouses(Player admin) {
-		String maps = HousingService.getInstance().getCustomHouses().stream().map(house -> WorldMapType.getWorld(house.getAddress().getMapId()))
-			.distinct().sorted().map(worldMapType -> ChatUtil.color(WordUtils.capitalizeFully(String.valueOf(worldMapType)), Color.WHITE))
-			.collect(Collectors.joining("\n\t"));
-		sendInfo(admin, "Maps with houses:\n\t" + maps + "\nType " + ChatUtil.color(getAliasWithPrefix() + " list mapname", Color.WHITE)
-			+ " to show all houses for that map.");
-	}
-
-	private void listHouses(Player admin, WorldMapType worldMapType) {
-		if (worldMapType == null) {
-			sendInfo(admin, "Invalid map name.");
-			return;
-		}
-		Map<HouseType, List<House>> housesByType = getHousesByType(worldMapType.getId());
-		if (housesByType.isEmpty()) {
-			sendInfo(admin, "There are no houses in " + WordUtils.capitalizeFully(worldMapType.toString()));
-			return;
-		}
-		sendInfo(admin, "Houses in " + WordUtils.capitalizeFully(worldMapType.toString()) + ":");
-		housesByType.forEach((houseType, houses) -> sendInfo(admin, WordUtils.capitalizeFully(houseType.toString()) + ":\n\t" + formatAddresses(houses)));
+	private void listHouses(Player admin) {
+		HousingService.getInstance().getCustomHouses().stream()
+			.collect(Collectors.groupingBy(house -> house.getAddress().getMapId(), TreeMap::new, Collectors.toList()))
+			.forEach((mapId, houses) -> {
+				sendInfo(admin, "House addresses in " + worldName(mapId) + ":");
+				groupByType(houses).forEach((houseType, housesOfType) -> {
+					String houseTypeName = houseType.name().charAt(0) + houseType.name().substring(1).toLowerCase();
+					sendInfo(admin, "\t" + houseTypeName + ": " + formatAddresses(housesOfType));
+			});
+		});
 	}
 
 	private String formatAddresses(List<House> houses) {
 		boolean dash = false;
-		int lastAddress = houses.get(0).getAddress().getId();
+		int lastAddress = houses.getFirst().getAddress().getId();
 		String addresses = ChatUtil.color(lastAddress + "", Color.WHITE);
 		for (int i = 1; i < houses.size(); i++) {
 			House house = houses.get(i);
@@ -123,11 +83,15 @@ public class HouseCommand extends AdminCommand {
 		return addresses;
 	}
 
-	private Map<HouseType, List<House>> getHousesByType(int mapId) {
-		Comparator<House> comparator = Comparator.comparing(house -> house.getHouseType().getId());
-		comparator = comparator.reversed().thenComparing(house -> house.getAddress().getId());
-		return HousingService.getInstance().getCustomHouses().stream().filter(house -> house.getAddress().getMapId() == mapId).sorted(comparator)
+	private Map<HouseType, List<House>> groupByType(List<House> houses) {
+		return houses.stream()
+			.sorted(Comparator.comparing((House house) -> house.getHouseType().getId()).reversed().thenComparing(house -> house.getAddress().getId()))
 			.collect(Collectors.groupingBy(House::getHouseType, LinkedHashMap::new, Collectors.toList()));
+	}
+
+	private House getHouse(String param) {
+		int address = Integer.parseInt(param);
+		return Objects.requireNonNull(HousingService.getInstance().getHouseByAddress(address), "Invalid address.");
 	}
 
 	private void acquireHouse(Player admin, House house) {
@@ -138,18 +102,18 @@ public class HouseCommand extends AdminCommand {
 		}
 
 		if (house.getOwnerId() == target.getObjectId()) {
-			sendInfo(admin, target.getName() + " already owns that house.");
+			sendInfo(admin, name(target) + " already owns that house.");
 			return;
 		}
 		if (target.getHouses().size() >= 2) {
-			sendInfo(admin, target.getName() + " must sell his old house which is currently in grace time first!");
+			sendInfo(admin, name(target) + " must sell his old house which is currently in grace time first!");
 			return;
 		}
 		House studio = HousingService.getInstance().getPlayerStudio(target.getObjectId());
 		if (studio != null)
 			HousingService.getInstance().changeOwner(studio, 0);
 		HousingService.getInstance().changeOwner(house, target.getObjectId());
-		sendInfo(admin, "House " + house.getName() + " is now owned by " + target.getName());
+		sendInfo(admin, "House " + house.getName() + " is now owned by " + name(target));
 	}
 
 	private void revokeOwnership(Player admin, House house) {

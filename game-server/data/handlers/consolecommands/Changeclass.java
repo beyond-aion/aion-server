@@ -11,9 +11,9 @@ import com.aionemu.gameserver.utils.chathandlers.ConsoleCommand;
 public class Changeclass extends ConsoleCommand {
 
 	public Changeclass() {
-		super("changeclass", "Changes a players class.");
-
-		setSyntaxInfo("<class> - Changes your target's class to the one specified (defaults to your character, if no player is targeted).");
+		super("changeclass", "Changes a player's class.", """
+			<class> - Changes your target's class to the one specified (defaults to your character, if no player is targeted).
+			""");
 	}
 
 	@Override
@@ -22,28 +22,19 @@ public class Changeclass extends ConsoleCommand {
 			sendInfo(admin);
 			return;
 		}
-
 		Player player = admin.getTarget() instanceof Player target ? target : admin;
-		String newClass = params[0];
-
-		if (newClass.equalsIgnoreCase("fighter"))
-			newClass = "GLADIATOR";
-		else if (newClass.equalsIgnoreCase("knight"))
-			newClass = "TEMPLAR";
-		else if (newClass.equalsIgnoreCase("wizard"))
-			newClass = "SORCERER";
-		else if (newClass.equalsIgnoreCase("elementalist"))
-			newClass = "SPIRIT_MASTER";
-
-		PlayerClass playerClass;
-		try {
-			playerClass = PlayerClass.valueOf(newClass.toUpperCase());
-		} catch (IllegalArgumentException e) {
-			sendInfo(admin, "Invalid player class.");
-			return;
-		}
-
+		PlayerClass playerClass = parsePlayerClass(params[0]);
 		ClassChangeService.setClass(player, playerClass, false, true);
 		sendInfo(admin, "You have changed " + player.getName() + "'s class to " + playerClass.toString().toLowerCase() +  ".");
+	}
+
+	protected static PlayerClass parsePlayerClass(String param) {
+		return switch (param.toUpperCase()) {
+			case "FIGHTER" -> PlayerClass.GLADIATOR;
+			case "KNIGHT" -> PlayerClass.TEMPLAR;
+			case "WIZARD" -> PlayerClass.SORCERER;
+			case "ELEMENTALIST" -> PlayerClass.SPIRIT_MASTER;
+			case String newClass -> PlayerClass.valueOf(newClass);
+		};
 	}
 }

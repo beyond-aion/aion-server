@@ -17,19 +17,21 @@ public abstract class AdminCommand extends ChatCommand {
 
 	// only for backwards compatibility TODO: remove when all commands are updated
 	public AdminCommand(String alias) {
-		this(alias, "");
+		this(alias, "", "");
 	}
 
 	/**
-	 * Registers a new admin command.
-	 * 
-	 * @param alias
-	 *          the command name
-	 * @param description
-	 *          description what the command does
+	 * @see AdminCommand(String, String, String)
 	 */
 	public AdminCommand(String alias, String description) {
-		super(PREFIX, alias, description);
+		this(alias, description, "");
+	}
+
+	/**
+	 * @see ChatCommand#ChatCommand(String, String, String, String)
+	 */
+	public AdminCommand(String alias, String description, String syntaxInfo) {
+		super(PREFIX, alias, description, syntaxInfo);
 	}
 
 	@Override

@@ -23,13 +23,13 @@ public class SM_ATTACK extends AionServerPacket {
 	private List<AttackResult> attackList;
 	private Creature attacker;
 	private Creature target;
-	private Effect criticalEffect;
+	private Effect criticalProcEffect;
 
 	public SM_ATTACK(Creature attacker, Creature target, int attackno, int time, AttackTypeAnimation attackTypeAnimation, AttackHandAnimation attackHandAnimation, List<AttackResult> attackList) {
 		this(attacker, target, attackno, time, attackTypeAnimation, attackHandAnimation, attackList, null);
 	}
 
-	public SM_ATTACK(Creature attacker, Creature target, int attackno, int time, AttackTypeAnimation attackTypeAnimation, AttackHandAnimation attackHandAnimation, List<AttackResult> attackList, Effect criticalEffect) {
+	public SM_ATTACK(Creature attacker, Creature target, int attackno, int time, AttackTypeAnimation attackTypeAnimation, AttackHandAnimation attackHandAnimation, List<AttackResult> attackList, Effect criticalProcEffect) {
 		this.attacker = attacker;
 		this.target = target;
 		this.attackno = attackno;// empty
@@ -37,7 +37,7 @@ public class SM_ATTACK extends AionServerPacket {
 		this.attackHandAnimation = attackHandAnimation;
 		this.attackTypeAnimation = attackTypeAnimation;
 		this.attackList = attackList;
-		this.criticalEffect = criticalEffect;
+		this.criticalProcEffect = criticalProcEffect;
 	}
 
 	@Override
@@ -73,11 +73,11 @@ public class SM_ATTACK extends AionServerPacket {
 				writeH(256); // need more info becuz sometimes 0
 				break;
 			default:
-				if (criticalEffect != null) {
+				if (criticalProcEffect != null) {
 					if (target instanceof Player)
-						writeH(criticalEffect.getSkillId() == 8218 ? 1 : 2);
+						writeH(criticalProcEffect.getSkillId() == 8218 ? 1 : 2);
 					else
-						writeH(criticalEffect.getSkillId() == 8218 ? 1025 : 1026);
+						writeH(criticalProcEffect.getSkillId() == 8218 ? 1025 : 1026);
 				} else {
 					writeH(0);
 				}
@@ -90,10 +90,10 @@ public class SM_ATTACK extends AionServerPacket {
 		}
 
 		writeH(0);
-		if (criticalEffect != null) {
-			writeF(criticalEffect.getTargetX());
-			writeF(criticalEffect.getTargetY());
-			writeF(criticalEffect.getTargetZ());
+		if (criticalProcEffect != null) {
+			writeF(criticalProcEffect.getTargetX());
+			writeF(criticalProcEffect.getTargetY());
+			writeF(criticalProcEffect.getTargetZ());
 		}
 		// TODO! those 2h (== d) up is some kind of very weird flag...
 		// writeD(attackFlag);

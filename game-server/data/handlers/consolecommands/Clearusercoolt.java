@@ -15,9 +15,9 @@ import com.aionemu.gameserver.world.World;
 public class Clearusercoolt extends ConsoleCommand {
 
 	public Clearusercoolt() {
-		super("clearusercoolt", "Clears cooldowns for instances.");
-
-		setSyntaxInfo("<player> - Removes the instance cooldowns of the given player.");
+		super("clearusercoolt", "Removes cooldowns for a player.", """
+			<player> - Removes the instance cooldowns of the given player.
+			""");
 	}
 
 	@Override
@@ -38,7 +38,7 @@ public class Clearusercoolt extends ConsoleCommand {
 
 	public static void clearAllInstanceCooldowns(Player admin, Player player) {
 		if (player.getPortalCooldownList().getPortalCoolDowns() == null) {
-			PacketSendUtility.sendMessage(admin, (player.equals(admin) ? "You have" : player.getName() + " has") + " no instance cooldowns to remove.");
+			PacketSendUtility.sendMessage(admin, (player.equals(admin) ? "You have" : name(player) + " has") + " no instance cooldowns to remove.");
 			return;
 		}
 
@@ -49,8 +49,8 @@ public class Clearusercoolt extends ConsoleCommand {
 		if (player.equals(admin)) {
 			PacketSendUtility.sendMessage(admin, "Your instance cooldowns were removed.");
 		} else {
-			PacketSendUtility.sendMessage(admin, "You have removed instance cooldowns of " + player.getName() + '.');
-			PacketSendUtility.sendMessage(player, admin.getName(true) + " removed your instance cooldowns.");
+			PacketSendUtility.sendMessage(admin, "You have removed instance cooldowns of " + name(player) + '.');
+			PacketSendUtility.sendMessage(player, name(admin) + " removed your instance cooldowns.");
 		}
 	}
 }

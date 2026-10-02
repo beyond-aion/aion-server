@@ -1,7 +1,5 @@
 package admincommands;
 
-import org.apache.commons.lang3.math.NumberUtils;
-
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
@@ -19,14 +17,10 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 public class UseSkill extends AdminCommand {
 
 	public UseSkill() {
-		super("useskill", "Use (or let a target use) any skill, even those not in skill list.");
-
-		// @formatter:off
-		setSyntaxInfo(
-			"<id> [lvl] [f] - Uses the skill with the specified skill level on your target (f = force use).",
-			"<me|self|target> <id> [lvl] [f] - Lets your target use the skill on you, itself or its target (f = force use)."
-		);
-		// @formatter:on
+		super("useskill", "Use (or let a target use) any skill, even those not in skill list.", """
+			<id> [lvl] [f] - Uses the skill with the specified skill level on your target (f = force use).
+			<me|self|target> <id> [lvl] [f] - Lets your target use the skill on you, itself or its target (f = force use).
+			""");
 	}
 
 	@Override
@@ -50,17 +44,17 @@ public class UseSkill extends AdminCommand {
 			}
 			SkillTemplate template = DataManager.SKILL_DATA.getSkillTemplate(Integer.parseInt(params[i++]));
 			if (template != null) {
-				int skillLevel = params.length > i && NumberUtils.isNumber(params[i]) ? Integer.parseInt(params[i++]) : template.getLvl();
+				int skillLevel = params.length > i && !params[i].equals("f") ? Integer.parseInt(params[i++]) : template.getLvl();
 				boolean forceUse = params.length > i && params[i].equals("f");
 				if (useSkill(admin, template, skillLevel, targetMode, forceUse))
 					sendInfo(admin, "Used skill: " + template.getL10n());
 				else
 					sendInfo(admin, "Could not use skill (" + (forceUse ? "missing preconditions" : "add parameter 'f' to force use") + ").");
 			} else {
-				sendInfo(admin, "Invalid skill id.");
+				sendInfo(admin, "Invalid skill ID.");
 			}
-		} catch (NumberFormatException e) {
-			sendInfo(admin, "Invalid skill id or level.");
+		} catch (NumberFormatException _) {
+			sendInfo(admin, "Invalid skill ID or level.");
 		}
 	}
 

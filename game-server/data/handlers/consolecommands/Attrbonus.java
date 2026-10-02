@@ -12,17 +12,13 @@ import admincommands.Stat;
 public class Attrbonus extends ConsoleCommand {
 
 	public Attrbonus() {
-		super("attrbonus", "Modifies your stats.");
-
-		// @formatter:off
-		setSyntaxInfo(
-			"list - Lists all stats.",
-			"<stat> - Shows active stat functions for the given stat.",
-			"<stat> <value> - Sets the given stat to the given value.",
-			"cancel - Cancels all active stat overrides.",
-			"Stat parameters accept lowercase and abbreviated formats, such as flytime or flyt instead of FLY_TIME."
-		);
-		// @formatter:on
+		super("attrbonus", "Modifies your stats.", """
+			list - Lists all stats.
+			<stat> - Shows active stat functions for the given stat.
+			<stat> <value> - Sets the given stat to the given value.
+			cancel - Cancels all active stat overrides.
+			Stat parameters accept lowercase and abbreviated formats, such as flytime or flyt instead of FLY_TIME.
+			""");
 	}
 
 	@Override

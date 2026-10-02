@@ -14,14 +14,10 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 public class MapCommand extends AdminCommand {
 
 	public MapCommand() {
-		super("map", "Offers different functions for the current map instance.");
-
-		// @formatter:off
-		setSyntaxInfo(
-			"freeze - Freezes all NPCs on this map instance.",
-			"unfreeze - Unfreezes all NPCs on this map instance."
-		);
-		// @formatter:on
+		super("map", "Offers different functions for the current map instance.", """
+			freeze - Freezes all NPCs on this map instance.
+			unfreeze - Unfreezes all NPCs on this map instance.
+			""");
 	}
 
 	@Override

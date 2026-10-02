@@ -4,8 +4,10 @@ import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.file.Files;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.zip.CRC32;
@@ -137,7 +139,7 @@ public class XmlMerger {
 		ImportFileHashChecker handler = new ImportFileHashChecker(sourceFile.getParentFile(), metadata);
 		SAXParserFactory.newInstance().newSAXParser().parse(sourceFile, handler);
 
-		return handler.isModified();
+		return handler.isModified() || !metadata.unchecked.isEmpty();
 	}
 
 	/**
@@ -402,6 +404,7 @@ public class XmlMerger {
 		private final Properties properties = new Properties();
 		private final CRC32 crc = new CRC32();
 		private final ByteBuffer buffer = ByteBuffer.allocate(64 * 1024);
+		private final Set<String> unchecked = new HashSet<>();
 
 		void add(File file) throws IOException {
 			properties.setProperty(file.getPath(), String.valueOf(hash(file)));
@@ -420,13 +423,17 @@ public class XmlMerger {
 		}
 
 		boolean checkIsNewOrModified(File file) throws IOException {
-			String data = properties.getProperty(file.getPath());
+			String key = file.getPath();
+			String data = properties.getProperty(key);
+			unchecked.remove(key);
 			return data == null || !data.equals(String.valueOf(hash(file)));
 		}
 
 		void load(File file) throws IOException {
 			try (BufferedReader reader = Files.newBufferedReader(file.toPath())) {
 				properties.load(reader);
+				unchecked.clear();
+				unchecked.addAll(properties.stringPropertyNames());
 			}
 		}
 

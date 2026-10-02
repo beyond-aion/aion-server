@@ -3,8 +3,6 @@ package admincommands;
 import java.awt.Color;
 import java.util.Iterator;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.pet.PetFunction;
@@ -19,15 +17,11 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 public class Pet extends AdminCommand {
 
 	public Pet() {
-		super("pet", "Adds or removes a pet.");
-
-		// @formatter:off
-		setSyntaxInfo(
-			"<list> - Lists all available Pet IDs.",
-			"<add> <pet id> <name> - Adds the pet with the specified ID and names it.",
-			"<del> <pet id> - Deletes the pet with the specified ID."
-		);
-		// @formatter:on
+		super("pet", "Adds or removes a pet.", """
+			list - Lists all available Pet IDs.
+			add <pet ID> <name> - Adds the pet with the specified ID and names it.
+			del <pet ID> - Deletes the pet with the specified ID.
+			""");
 	}
 
 	@Override
@@ -45,25 +39,18 @@ public class Pet extends AdminCommand {
 				sb.append('\n');
 				sb.append(template.getTemplateId());
 				sb.append(" - ");
-				sb.append(ChatUtil.color(StringUtils.capitalize(template.getName()), Color.WHITE));
+				sb.append(ChatUtil.color(template.getL10n(), Color.WHITE));
 				sb.append("\n\tFunctions: ");
-				Iterator<PetFunction> iter = template.getPetFunctions().iterator();
-				while (iter.hasNext())
-					sb.append(iter.next().getPetFunctionType() + (iter.hasNext() ? ", " : ""));
+				for (Iterator<PetFunction> iter = template.getPetFunctions().iterator(); iter.hasNext(); )
+					sb.append(iter.next().getPetFunctionType()).append(iter.hasNext() ? ", " : "");
 			});
 			sendInfo(admin, sb.toString());
 		} else {
-			int petId;
-
-			try {
-				petId = Integer.parseInt(params[1]);
-				if (DataManager.PET_DATA.getPetTemplate(petId) == null)
-					throw new IllegalArgumentException();
-			} catch (ArrayIndexOutOfBoundsException | IllegalArgumentException e) {
-				sendInfo(admin, e instanceof ArrayIndexOutOfBoundsException ? "You must specify the pet ID." : "Pet ID is invalid.");
+			int petId = Integer.parseInt(params[1]);
+			if (DataManager.PET_DATA.getPetTemplate(petId) == null) {
+				sendInfo(admin, "Invalid pet ID.");
 				return;
 			}
-
 			if (action.equalsIgnoreCase("add")) {
 				if (params.length != 3) {
 					sendInfo(admin, "You must specify a name for the pet.");

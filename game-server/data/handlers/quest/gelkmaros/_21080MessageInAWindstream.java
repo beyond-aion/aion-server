@@ -7,7 +7,7 @@ import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.world.zone.ZoneName;
+import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
  * @author Cheatkiller
@@ -23,8 +23,8 @@ public class _21080MessageInAWindstream extends AbstractQuestHandler {
 		qe.registerQuestNpc(799231).addOnQuestStart(questId);
 		qe.registerQuestNpc(799231).addOnTalkEvent(questId);
 		qe.registerQuestNpc(799427).addOnTalkEvent(questId);
-		qe.registerOnEnterZone(ZoneName.get("ANTAGOR_CANYON_220070000"), questId);
-		qe.registerOnEnterZone(ZoneName.get("GELKMAROS_FORTRESS_220070000"), questId);
+		qe.registerOnEnterZone("ANTAGOR_CANYON_220070000", questId);
+		qe.registerOnEnterZone("GELKMAROS_FORTRESS_220070000", questId);
 	}
 
 	@Override
@@ -64,17 +64,17 @@ public class _21080MessageInAWindstream extends AbstractQuestHandler {
 	}
 
 	@Override
-	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) {
+	public boolean onEnterZoneEvent(QuestEnv env, ZoneInstance zone) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
-			if (zoneName == ZoneName.get("ANTAGOR_CANYON_220070000")) {
+			if (zone.matches("ANTAGOR_CANYON_220070000")) {
 				if (var < 3) {
 					changeQuestStep(env, var, var + 1);
 					return true;
 				}
-			} else if (zoneName == ZoneName.get("GELKMAROS_FORTRESS_220070000") && var == 4) {
+			} else if (zone.matches("GELKMAROS_FORTRESS_220070000") && var == 4) {
 				changeQuestStep(env, 4, 4, true);
 				return true;
 			}

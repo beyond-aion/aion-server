@@ -18,16 +18,18 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public abstract class CreatureLifeStats<T extends Creature> {
 
 	private int currentHp;
+	private int cachedMaxHp;
 	private int currentMp;
+	private int cachedMaxMp;
 	private int killingBlow; // for long animation skills that will kill - last damage
 	protected final T owner;
 	protected final Object restoreLock = new Object();
 	protected Future<?> lifeRestoreTask;
 
-	public CreatureLifeStats(T owner, int currentHp, int currentMp) {
+	public CreatureLifeStats(T owner) {
 		this.owner = owner;
-		this.currentHp = currentHp;
-		this.currentMp = currentMp;
+		currentHp = cachedMaxHp = getMaxHp();
+		currentMp = cachedMaxMp = getMaxMp();
 	}
 
 	public T getOwner() {
@@ -82,6 +84,10 @@ public abstract class CreatureLifeStats<T extends Creature> {
 	 * @return The HP that this creature has left. If 0, the creature died.
 	 */
 	public int reduceHp(TYPE type, int value, int skillId, LOG log, Creature attacker) {
+		return reduceHp(type, value, skillId, log, attacker, false);
+	}
+
+	public int reduceHp(TYPE type, int value, int skillId, LOG log, Creature attacker, boolean criticalHit) {
 		Objects.requireNonNull(attacker, "attacker");
 		if (getOwner().isInvulnerable()) {
 			unsetIsAboutToDie();
@@ -103,9 +109,9 @@ public abstract class CreatureLifeStats<T extends Creature> {
 		}
 
 		if (newHp != previousHp || skillId != 0)
-			sendAttackStatusPacketUpdate(type, previousHp - newHp, skillId, log);
+			sendAttackStatusPacketUpdate(type, previousHp - newHp, skillId, log, criticalHit);
 		if (newHp != previousHp)
-			onHpChanged(previousHp, newHp, attacker);
+			onHpChanged(type, previousHp, newHp, attacker);
 		return newHp;
 	}
 
@@ -129,19 +135,23 @@ public abstract class CreatureLifeStats<T extends Creature> {
 				return 0;
 
 			previousMp = currentMp;
-			currentMp = newMp = Math.min(currentMp, Math.max(currentMp - value, 0));
+			currentMp = newMp = Math.clamp(currentMp - value, 0, currentMp);
 		}
 
 		if (newMp != previousMp || skillId != 0)
 			sendAttackStatusPacketUpdate(type, previousMp - newMp, skillId, log);
 		if (newMp != previousMp)
-			onMpChanged(previousMp, newMp);
+			onMpChanged(type, previousMp, newMp);
 		return newMp;
 	}
 
 	protected void sendAttackStatusPacketUpdate(TYPE type, int value, int skillId, LOG log) {
+		sendAttackStatusPacketUpdate(type, value, skillId, log, false);
+	}
+
+	protected void sendAttackStatusPacketUpdate(TYPE type, int value, int skillId, LOG log, boolean criticalHit) {
 		if (type != null)
-			PacketSendUtility.broadcastToSightedPlayers(owner, new SM_ATTACK_STATUS(owner, type, skillId, value, log), true);
+			PacketSendUtility.broadcastToSightedPlayers(owner, new SM_ATTACK_STATUS(owner, type, skillId, value, log, criticalHit), true);
 	}
 
 	/**
@@ -182,7 +192,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 		if (newHp != previousHp || skillId != 0)
 			sendAttackStatusPacketUpdate(type, newHp - previousHp, skillId, log);
 		if (newHp != previousHp)
-			onHpChanged(previousHp, newHp, effector == null ? getOwner() : effector);
+			onHpChanged(type, previousHp, newHp, effector == null ? getOwner() : effector);
 		return newHp;
 	}
 
@@ -209,7 +219,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 		if (newMp != previousMp || skillId != 0)
 			sendAttackStatusPacketUpdate(type, newMp - previousMp, skillId, log);
 		if (newMp != previousMp)
-			onMpChanged(previousMp, newMp);
+			onMpChanged(type, previousMp, newMp);
 		return currentMp;
 	}
 
@@ -268,8 +278,14 @@ public abstract class CreatureLifeStats<T extends Creature> {
 	 * to game or player level up
 	 */
 	public void synchronizeWithMaxStats() {
-		currentHp = getMaxHp();
-		currentMp = getMaxMp();
+		synchronized (this) {
+			cachedMaxHp = getMaxHp();
+			cachedMaxMp = getMaxMp();
+		}
+		if (currentHp != cachedMaxHp)
+			setCurrentHp(cachedMaxHp);
+		if (currentMp != cachedMaxMp)
+			setCurrentMp(cachedMaxMp);
 	}
 
 	/**
@@ -301,13 +317,13 @@ public abstract class CreatureLifeStats<T extends Creature> {
 		return (int) (100f * currentMp / getMaxMp());
 	}
 
-	protected void onHpChanged(int previousHp, int newHp, Creature effector) {
+	protected void onHpChanged(TYPE type, int previousHp, int newHp, Creature effector) {
 		if (newHp == 0)
 			getOwner().getController().onDie(effector);
 		getOwner().getObserveController().notifyHPChangeObservers(newHp);
 	}
 
-	protected void onMpChanged(int previousMp, int newMp) {
+	protected void onMpChanged(TYPE type, int previousMp, int newMp) {
 	}
 
 	public int getMaxFp() {
@@ -343,14 +359,19 @@ public abstract class CreatureLifeStats<T extends Creature> {
 		int previousHp, newHp;
 		synchronized (this) {
 			previousHp = currentHp;
-			currentHp = newHp = Math.max(0, Math.min(hp, getMaxHp()));
+			int maxHp = getMaxHp();
+			currentHp = newHp = Math.clamp(hp, 0, maxHp);
+			if (previousHp == 0 || newHp == 0) {
+				cachedMaxHp = maxHp;
+				cachedMaxMp = getMaxMp();
+			}
 			if (killingBlow != 0 && (newHp == 0 || newHp > killingBlow))
 				unsetIsAboutToDie();
 		}
 		if (newHp != previousHp) {
 			// broadcast current hp percentage to others
 			PacketSendUtility.broadcastToSightedPlayers(owner, new SM_ATTACK_STATUS(owner, TYPE.HP, 0, 0, LOG.REGULAR));
-			onHpChanged(previousHp, newHp, effector);
+			onHpChanged(TYPE.HP, previousHp, newHp, effector);
 		}
 	}
 
@@ -360,11 +381,11 @@ public abstract class CreatureLifeStats<T extends Creature> {
 			if (isDead())
 				return;
 			previousMp = currentMp;
-			currentMp = newMp = Math.max(0, Math.min(value, getMaxMp()));
+			currentMp = newMp = Math.clamp(value, 0, getMaxMp());
 		}
 		if (newMp != previousMp) {
 			PacketSendUtility.broadcastToSightedPlayers(owner, new SM_ATTACK_STATUS(owner, TYPE.HEAL_MP, 0, 0, LOG.MPHEAL));
-			onMpChanged(previousMp, newMp);
+			onMpChanged(TYPE.HEAL_MP, previousMp, newMp);
 		}
 	}
 
@@ -375,4 +396,38 @@ public abstract class CreatureLifeStats<T extends Creature> {
 		setCurrentMp((int) ((long) getMaxMp() * mpPercent / 100));
 	}
 
+	public void onStatsChange(Effect effect) {
+		if (isDead())
+			return;
+		checkMaxHPChanged(effect == null ? owner : effect.getEffector());
+		checkMaxMPChanged();
+	}
+
+	private void checkMaxHPChanged(Creature effector) {
+		int newHp;
+		synchronized (this) {
+			newHp = currentHp;
+			int currentMaxHp = getMaxHp();
+			if (cachedMaxHp != currentMaxHp) {
+				newHp = Math.max(1, Math.round((long) currentHp * currentMaxHp / (float) cachedMaxHp));
+				cachedMaxHp = currentMaxHp;
+			}
+		}
+		if (newHp != currentHp)
+			setCurrentHp(newHp, effector);
+	}
+
+	private void checkMaxMPChanged() {
+		int newMp;
+		synchronized (this) {
+			newMp = currentMp;
+			int currentMaxMp = getMaxMp();
+			if (cachedMaxMp != currentMaxMp) {
+				newMp = Math.max(1, Math.round((long) currentMp * currentMaxMp / (float) cachedMaxMp));
+				cachedMaxMp = currentMaxMp;
+			}
+		}
+		if (newMp != currentMp)
+			setCurrentMp(newMp);
+	}
 }

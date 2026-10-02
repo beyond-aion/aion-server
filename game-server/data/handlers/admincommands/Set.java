@@ -14,18 +14,14 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 public class Set extends AdminCommand {
 
 	public Set() {
-		super("set", "Changes various player attributes.");
-
-		// @formatter:off
-		setSyntaxInfo(
-			"class <value> - Sets the class of the selected player.",
-			"level <value> - Sets the level of the selected player.",
-			"exp <value> - Sets the experience points of the selected player.",
-			"ap <value> - Sets the abyss points of the selected player.",
-			"gp <value> - Sets the glory points of the selected player.",
-			"Note: Any actions default to your character, if no player is targeted."
-		);
-		// @formatter:on
+		super("set", "Changes various player attributes.", """
+			class <value> - Sets the class of the selected player.
+			level <value> - Sets the level of the selected player.
+			exp <value> - Sets the experience points of the selected player.
+			ap <value> - Sets the abyss points of the selected player.
+			gp <value> - Sets the glory points of the selected player.
+			Note: Any actions default to your character, if no player is targeted.
+			""");
 	}
 
 	@Override
@@ -42,7 +38,7 @@ public class Set extends AdminCommand {
 		} else if (params[0].equals("level")) {
 			int level = Math.min(GSConfig.PLAYER_MAX_LEVEL, Integer.parseInt(params[1]));
 			target.getCommonData().setLevel(level);
-			sendInfo(admin, "Set " + target.getName() + " level to " + target.getLevel());
+			sendInfo(admin, "Set " + name(target) + "'s level to " + target.getLevel());
 		} else if (params[0].equals("exp")) {
 			long exp = Long.parseLong(params[1]);
 			target.getCommonData().setExp(exp);
@@ -51,14 +47,14 @@ public class Set extends AdminCommand {
 			int ap = Integer.parseInt(params[1]);
 			AbyssPointsService.addAp(target, ap - target.getAbyssRank().getAp());
 			if (target != admin) {
-				sendInfo(admin, "Set " + target.getName() + "'s abyss points to " + target.getAbyssRank().getAp() + ".");
+				sendInfo(admin, "Set " + name(target) + "'s abyss points to " + target.getAbyssRank().getAp() + ".");
 				sendInfo(target, "Admin set your abyss points to " + target.getAbyssRank().getAp() + ".");
 			}
 		} else if (params[0].equals("gp")) {
 			int gp = Integer.parseInt(params[1]);
 			GloryPointsService.addGp(target.getObjectId(), gp - target.getAbyssRank().getCurrentGP());
 			if (target != admin) {
-				sendInfo(admin, "Set " + target.getName() + "'s glory points to " + target.getAbyssRank().getCurrentGP() + ".");
+				sendInfo(admin, "Set " + name(target) + "'s glory points to " + target.getAbyssRank().getCurrentGP() + ".");
 				sendInfo(target, "Admin set your glory points to " + target.getAbyssRank().getCurrentGP() + ".");
 			}
 		} else {

@@ -6,7 +6,7 @@ import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.skill.NpcSkillList;
+import com.aionemu.gameserver.model.skill.NpcSkillEntry;
 import com.aionemu.gameserver.model.templates.npcskill.NpcSkillConditionTemplate;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.model.Effect;
@@ -31,22 +31,20 @@ public class UseSkillAndDieAI extends NpcAI {
 	}
 
 	private void scheduleSkill() {
-		NpcSkillList skillList = getOwner().getSkillList();
-		if (skillList.getNpcSkills().isEmpty()) {
+		NpcSkillEntry skill = getOwner().getSkillList().getSkillOnPosition(0);
+		if (skill == null) {
 			LoggerFactory.getLogger(getClass()).warn(getOwner() + " has no skill list");
 			getOwner().getController().delete();
 			return;
 		}
-		NpcSkillConditionTemplate conditionTemplate = skillList.getNpcSkills().get(0).getConditionTemplate();
+		NpcSkillConditionTemplate conditionTemplate = skill.getConditionTemplate();
 		if (conditionTemplate != null) {
 			canDie = conditionTemplate.canDie();
 			ThreadPoolManager.getInstance().schedule(() -> {
 				if (getOwner().isDead() || !getOwner().isSpawned())
 					return;
 				if (getCreatorId() == 0 || getKnownList().getObject(getCreatorId()) instanceof Creature creator && !creator.isDead()) {
-					SkillEngine.getInstance()
-						.getSkill(getOwner(), skillList.getNpcSkills().get(0).getSkillId(), skillList.getNpcSkills().get(0).getSkillLevel(), getOwner())
-						.useSkill();
+					SkillEngine.getInstance().getSkill(getOwner(), skill.getSkillId(), skill.getSkillLevel(), getOwner()).useSkill();
 				}
 				ThreadPoolManager.getInstance().schedule(() -> getOwner().getController().delete(), conditionTemplate.getDespawnTime());
 			}, conditionTemplate.getDelay());

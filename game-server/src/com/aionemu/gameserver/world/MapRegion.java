@@ -4,8 +4,6 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.commons.lang3.ArrayUtils;
-
 import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
@@ -13,7 +11,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.zone.ZoneClassName;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
-import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * Just some part of map.
@@ -24,7 +21,7 @@ public class MapRegion {
 
 	private static final Comparator<ZoneInstance> zoneComparator = Comparator.comparing((ZoneInstance z) -> z.getZoneTemplate().getZoneType())
 		.thenComparingInt(z -> z.getZoneTemplate().getPriority())
-		.thenComparingInt(z -> z.getZoneTemplate().getName().id());
+		.thenComparingInt(z -> z.getZoneTemplate().getName().hashCode());
 
 	private final int regionId;
 	private final WorldMapInstance parent;
@@ -59,7 +56,8 @@ public class MapRegion {
 	}
 
 	void addNeighbourRegion(MapRegion neighbour) {
-		neighboursIncludingSelf = ArrayUtils.add(neighboursIncludingSelf, neighbour);
+		neighboursIncludingSelf = Arrays.copyOf(neighboursIncludingSelf, neighboursIncludingSelf.length + 1);
+		neighboursIncludingSelf[neighboursIncludingSelf.length - 1] = neighbour;
 	}
 
 	void add(VisibleObject object) {
@@ -147,6 +145,8 @@ public class MapRegion {
 		ZoneClassName zoneType = null;
 		boolean enteredPriorityZone = false;
 		for (ZoneInstance zone : zonesSortedByTypeAndPriority) {
+			if (zone.isIgnored(creature))
+				continue;
 			if (zoneType != zone.getZoneTemplate().getZoneType()) {
 				zoneType = zone.getZoneTemplate().getZoneType();
 				enteredPriorityZone = false;
@@ -182,18 +182,17 @@ public class MapRegion {
 		return false;
 	}
 
-	public boolean isInsideZone(ZoneName zoneName, float x, float y, float z) {
+	public boolean isInsideZone(String zoneName, float x, float y, float z) {
 		for (ZoneInstance zone : zonesSortedByTypeAndPriority) {
-			if (zone.getZoneTemplate().getName() != zoneName)
-				continue;
-			return zone.isInsideCordinate(x, y, z);
+			if (zone.matches(zoneName))
+				return zone.isInsideCoordinate(x, y, z);
 		}
 		return false;
 	}
 
-	public boolean isInsideZone(ZoneName zoneName, Creature creature) {
+	public boolean isInsideZone(String zoneName, Creature creature) {
 		for (ZoneInstance zone : zonesSortedByTypeAndPriority) {
-			if (zone.getZoneTemplate().getName() == zoneName)
+			if (zone.matches(zoneName))
 				return zone.isInsideCreature(creature);
 		}
 		return false;
@@ -202,13 +201,13 @@ public class MapRegion {
 	/**
 	 * Item use zones always have the same names instances, while we have unique names; Thus, a special check for item use.
 	 */
-	public boolean isInsideItemUseZone(ZoneName zoneName, Creature creature) {
-		boolean checkFortresses = "_ABYSS_CASTLE_AREA_".equals(zoneName.name()); // some items have this special zonename in uselimits
+	public boolean isInsideItemUseZone(String zoneName, Creature creature) {
+		boolean checkFortresses = "_ABYSS_CASTLE_AREA_".equals(zoneName); // some items have this special zonename in uselimits
 		for (ZoneInstance zone : zonesSortedByTypeAndPriority) {
 			if (checkFortresses) {
 				if (zone.getZoneTemplate().getZoneType() != ZoneClassName.FORT)
 					continue;
-			} else if (!zone.getZoneTemplate().getXmlName().startsWith(zoneName.toString())) {
+			} else if (!zone.getZoneTemplate().getName().startsWith(zoneName)) {
 				continue;
 			}
 			if (zone.isInsideCreature(creature))

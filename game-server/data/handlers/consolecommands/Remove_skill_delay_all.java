@@ -10,9 +10,10 @@ import com.aionemu.gameserver.utils.chathandlers.ConsoleCommand;
 public class Remove_skill_delay_all extends ConsoleCommand {
 
 	public Remove_skill_delay_all() {
-		super("remove_skill_delay_all", "Enables/disables zero cooldown mode for all skills.");
-
-		setSyntaxInfo("<1|0> - Enable or disable skill cooldowns.");
+		super("remove_skill_delay_all", "Enables/disables your skill cooldowns.", """
+			1 - Enables your skill cooldowns.
+			0 - Disables your skill cooldowns.
+			""");
 	}
 
 	@Override

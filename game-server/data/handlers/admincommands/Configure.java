@@ -7,8 +7,6 @@ import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.aionemu.commons.configuration.ConfigurableProcessor;
 import com.aionemu.commons.configuration.Properties;
 import com.aionemu.commons.configuration.TransformationException;
@@ -23,16 +21,12 @@ import com.aionemu.gameserver.utils.collections.Predicates;
 public class Configure extends AdminCommand {
 
 	public Configure() {
-		super("configure", "Shows/changes config settings.");
-
-		// @formatter:off
-		setSyntaxInfo(
-			"<list> - Shows all available configuration categories.",
-			"<category> - Shows all available properties of the specified configuration.",
-			"<category> <property> - Shows the properties active value.",
-			"<category> <property> <value> - Changes the properties value to the new value."
-		);
-		// @formatter:on
+		super("configure", "Shows/changes config settings.", """
+			list - Shows all available configuration categories.
+			<category> - Shows all available properties of the specified configuration.
+			<category> <property> - Shows the properties active value.
+			<category> <property> <value> - Changes the properties value to the new value.
+			""");
 	}
 
 	@Override
@@ -79,7 +73,7 @@ public class Configure extends AdminCommand {
 				Field field = fields.get(0);
 				String value = getFieldValue(field);
 				if (params.length > 2) {
-					String newValue = StringUtils.join(params, ' ', 2, params.length);
+					String newValue = join(params, 2);
 					try {
 						if (field.isAnnotationPresent(Properties.class))
 							field.set(null, ConfigurableProcessor.transform(toMap(newValue), field));

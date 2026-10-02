@@ -55,7 +55,7 @@ public class CM_QUIT extends AionClientPacket {
 				for (PlayerAccountData plAccData : con.getAccount().getPlayerAccDataList())
 					plAccData.setCharBanInfo(PlayerPunishmentsDAO.getCharBanInfo(plAccData.getPlayerCommonData().getPlayerObjId()));
 			}
-			PlayerLeaveWorldService.leaveWorld(player);
+			PlayerLeaveWorldService.registerLeaveWorld(player);
 		}
 
 		if (stayConnected)

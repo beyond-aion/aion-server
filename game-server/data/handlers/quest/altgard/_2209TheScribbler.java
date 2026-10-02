@@ -22,6 +22,7 @@ public class _2209TheScribbler extends AbstractQuestHandler {
 	public void register() {
 		qe.registerQuestNpc(203555).addOnQuestStart(questId);
 		qe.registerQuestNpc(203555).addOnTalkEvent(questId);
+		qe.registerQuestNpc(203572).addOnTalkEvent(questId);
 		qe.registerQuestNpc(203562).addOnTalkEvent(questId);
 		qe.registerQuestNpc(203592).addOnTalkEvent(questId);
 	}

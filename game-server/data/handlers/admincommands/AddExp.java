@@ -9,9 +9,9 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 public class AddExp extends AdminCommand {
 
 	public AddExp() {
-		super("addexp", "Increases/decreases a players experience points.");
-
-		setSyntaxInfo("<exp> - The experience points to add (may be negative).");
+		super("addexp", "Increases/decreases a players experience points.", """
+			<exp> - The experience points to add (may be negative).
+			""");
 	}
 
 	@Override
@@ -20,22 +20,10 @@ public class AddExp extends AdminCommand {
 			sendInfo(admin);
 			return;
 		}
-
-		Player target = admin;
-
-		if (admin.getTarget() instanceof Player)
-			target = (Player) admin.getTarget();
-
-		long exp;
-		try {
-			exp = Long.parseLong(params[0]);
-		} catch (NumberFormatException e) {
-			sendInfo(admin, "Invalid <exp> (must be a number)");
-			return;
-		}
-
+		Player target = admin.getTarget() instanceof Player p ? p : admin;
+		long exp = Long.parseLong(params[0]);
 		long resultExp = Math.max(0, target.getCommonData().getExp() + exp);
 		target.getCommonData().setExp(resultExp);
-		sendInfo(admin, "You added " + exp + " exp points to " + target.getName() + ".");
+		sendInfo(admin, "You added " + exp + " exp points to " + name(target) + ".");
 	}
 }

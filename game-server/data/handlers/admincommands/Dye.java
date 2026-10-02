@@ -21,9 +21,10 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 public class Dye extends AdminCommand {
 
 	public Dye() {
-		super("dye", "Dyes a players visible equipment.");
-
-		setSyntaxInfo("<color> - Dyes the selected player in the specified color (can be dye item link/ID, color name or color HEX code). 0 removes all dyeing.");
+		super("dye", "Dyes a player's visible equipment.", """
+			<color> - Dyes the selected player's equipment in the specified color (can be dye item link/ID, color name or color HEX code).
+			0 - Removes all dyes from the selected player's equipment.
+			""");
 	}
 
 	@Override
@@ -62,7 +63,7 @@ public class Dye extends AdminCommand {
 						itemColor = Integer.valueOf(colorParam, 16);
 					}
 					colorText = ChatUtil.color("#" + String.format("%06X", itemColor & 0xFFFFFF), itemColor);
-				} catch (NumberFormatException e) {
+				} catch (NumberFormatException _) {
 					sendInfo(player, "Invalid color.");
 					return;
 				}
@@ -75,7 +76,7 @@ public class Dye extends AdminCommand {
 			return;
 		}
 		if (appearanceItems.stream().noneMatch(item -> item.getItemTemplate().isItemDyePermitted())) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_COLOR_CHANGE_ERROR_CANNOTDYE(appearanceItems.get(0).getL10n()));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_COLOR_CHANGE_ERROR_CANNOTDYE(appearanceItems.getFirst().getL10n()));
 			return;
 		}
 		for (Item item : appearanceItems) {
@@ -87,11 +88,11 @@ public class Dye extends AdminCommand {
 		target.getEquipment().setPersistentState(PersistentState.UPDATE_REQUIRED);
 
 		if (itemColor == null)
-			sendInfo(player, "Removed dyeing from " + target.getName() + "'s visible equipment.");
+			sendInfo(player, "Removed dyeing from " + name(target) + "'s visible equipment.");
 		else
-			sendInfo(player, "Dyed " + target.getName() + " (color: " + colorText + ")");
+			sendInfo(player, "Dyed " + name(target) + " (color: " + colorText + ")");
 
 		if (!target.equals(player))
-			sendInfo(target, player.getName() + " has changed the color of your visible equipment to: " + colorText);
+			sendInfo(target, name(player) + " has changed the color of your visible equipment to: " + colorText);
 	}
 }

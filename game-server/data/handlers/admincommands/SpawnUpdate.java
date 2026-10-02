@@ -1,7 +1,6 @@
 package admincommands;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Gatherable;
@@ -25,12 +24,11 @@ import com.aionemu.gameserver.world.WorldPosition;
 public class SpawnUpdate extends AdminCommand {
 
 	public SpawnUpdate() {
-		super("spawnu", "Updates spawn data.");
-
-		setSyntaxInfo(
-			"<x|y|z|h> [value] - Update X, Y, or Z coordinate or the heading of the selected npc/gatherable (default: takes your current position, optional: the specified value).",
-			"<xyz|xyzh> - Update position or position and heading of the selected npc/gatherable to your own one.",
-			"<w> [walker_id] - Set walker data of the selected npc (default: remove walker data, optional: set walker id to npc).");
+		super("spawnu", "Updates spawn data.", """
+			<x|y|z|h> [value] - Update X, Y, or Z coordinate or the heading of the selected NPC/gatherable (default: takes your current position, optional: the specified value).
+			<xyz|xyzh> - Update position or position and heading of the selected NPC/gatherable to your own one.
+			w [walker_id] - Set walker data of the selected NPC (default: remove walker data, optional: set NPC's walker ID).
+			""");
 	}
 
 	@Override
@@ -115,8 +113,8 @@ public class SpawnUpdate extends AdminCommand {
 					return;
 				}
 				List<SpawnGroup> allSpawns = DataManager.SPAWNS_DATA.getSpawnsByWorldId(target.getWorldId());
-				List<SpawnTemplate> allSpots = allSpawns.stream().flatMap(s -> s.getSpawnTemplates().stream()).collect(Collectors.toList());
-				List<SpawnTemplate> sameIds = allSpots.stream().filter(s -> s.getWalkerId().equals(walkerId)).collect(Collectors.toList());
+				List<SpawnTemplate> allSpots = allSpawns.stream().flatMap(s -> s.getSpawnTemplates().stream()).toList();
+				List<SpawnTemplate> sameIds = allSpots.stream().filter(s -> s.getWalkerId().equals(walkerId)).toList();
 				if (sameIds.size() >= template.getPool()) {
 					sendInfo(admin, "Can not assign, walker pool reached the limit.");
 					return;
@@ -126,9 +124,9 @@ public class SpawnUpdate extends AdminCommand {
 			PacketSendUtility.sendPacket(admin, new SM_DELETE(target));
 			PacketSendUtility.sendPacket(admin, new SM_NPC_INFO(target, admin));
 			if (walkerId == null)
-				sendInfo(admin, "Removed npcs walker_id " + oldId + " for " + target.getNpcId() + ".");
+				sendInfo(admin, "Removed walker_id " + oldId + " for NPC " + target.getNpcId() + ".");
 			else
-				sendInfo(admin, "Updated npcs walker_id from " + oldId + " to " + walkerId + ".");
+				sendInfo(admin, "Updated walker_id from " + oldId + " to " + walkerId + " for NPC " + target.getNpcId() + ".");
 			if (!DataManager.SPAWNS_DATA.saveSpawn(target, false))
 				sendInfo(admin, "Could not save spawn.");
 		}

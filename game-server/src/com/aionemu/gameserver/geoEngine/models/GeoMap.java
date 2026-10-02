@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.configs.main.GeoDataConfig;
+import com.aionemu.gameserver.configs.main.GeoDataConfig.Mode;
 import com.aionemu.gameserver.geoEngine.collision.CollisionIntention;
 import com.aionemu.gameserver.geoEngine.collision.CollisionResult;
 import com.aionemu.gameserver.geoEngine.collision.CollisionResults;
@@ -239,8 +240,8 @@ public class GeoMap extends Node {
 		int matId = terrain == null ? 0 : terrain.getTerrainMaterialAt(x, y);
 		if (matId > 0) {
 			CollisionResults results = new CollisionResults(CollisionIntention.PHYSICAL.getId(), instanceId);
-			float zMax = z + 1;
-			float zMin = z - 1;
+			float zMax = z + 2;
+			float zMin = z - 2;
 			Vector3f origin = new Vector3f(x, y, zMax);
 			Vector3f target = new Vector3f(x, y, zMin);
 			target.subtractLocal(origin).normalizeLocal(); // convert to direction vector
@@ -248,9 +249,17 @@ public class GeoMap extends Node {
 			r.setLimit(zMax - zMin);
 			terrain.collideAtOrigin(r, results);
 			CollisionResult terrainCollision = results.getClosestCollision();
-			if (terrainCollision != null && (collideWith(r, results) == 0 || results.getClosestCollision().equals(terrainCollision))) {
-				return matId;
+			if (terrainCollision == null)
+				return 0;
+			float terrainZ = terrainCollision.getContactPoint().getZ();
+			collideWith(r, results);
+			for (CollisionResult result : results) {
+				float surfaceZ = result.getContactPoint().getZ();
+				// a mesh surface between the terrain and the feet is the closer ground, one hanging above the feet is not
+				if (!result.equals(terrainCollision) && surfaceZ > terrainZ && surfaceZ <= z + 0.1f)
+					return 0;
 			}
+			return matId;
 		}
 		return 0;
 	}
@@ -287,7 +296,7 @@ public class GeoMap extends Node {
 	public void setDoorState(int instanceId, int doorId, boolean open) {
 		DespawnableNode[] doors = despawnableDoors.get(doorId);
 		if (doors == null) {
-			if (GeoDataConfig.GEO_ENABLE && !getIgnorableDoorIds().contains(doorId))
+			if (GeoDataConfig.MODE == Mode.ON && !getIgnorableDoorIds().contains(doorId))
 				log.warn("No geometry found for door " + doorId + " in world " + mapId);
 		} else {
 			if (doors[0] != null) {

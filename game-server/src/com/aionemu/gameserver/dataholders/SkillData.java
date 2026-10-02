@@ -7,6 +7,13 @@ import javax.xml.bind.annotation.*;
 
 import org.slf4j.LoggerFactory;
 
+import com.aionemu.gameserver.model.templates.item.enums.EquipType;
+import com.aionemu.gameserver.model.templates.item.enums.ItemGroup;
+import com.aionemu.gameserver.model.templates.item.enums.ItemSubType;
+import com.aionemu.gameserver.skillengine.effect.ArmorMasteryEffect;
+import com.aionemu.gameserver.skillengine.effect.EffectTemplate;
+import com.aionemu.gameserver.skillengine.effect.ShieldMasteryEffect;
+import com.aionemu.gameserver.skillengine.effect.WeaponMasteryEffect;
 import com.aionemu.gameserver.skillengine.model.Motion;
 import com.aionemu.gameserver.skillengine.model.MotionTime;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
@@ -30,10 +37,22 @@ public class SkillData {
 	@XmlTransient
 	private final Map<String, List<SkillTemplate>> skillTemplatesByStack = new LinkedHashMap<>();
 
+	@XmlTransient
+	private final Map<ItemGroup, Set<Integer>> masterySkillsByWeapon = new EnumMap<>(ItemGroup.class);
+
+	@XmlTransient
+	private final Map<ItemSubType, Set<Integer>> masterySkillsByArmor = new EnumMap<>(ItemSubType.class);
+
+	@XmlTransient
+	private final Set<Integer> shieldMasterySkills = new HashSet<>();
+
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		skillTemplateById.clear();
 		skillTemplatesByGroup.clear();
 		skillTemplatesByStack.clear();
+		masterySkillsByWeapon.clear();
+		masterySkillsByArmor.clear();
+		shieldMasterySkills.clear();
 		for (SkillTemplate skillTemplate : skillTemplates) {
 			int skillId = skillTemplate.getSkillId();
 			skillTemplateById.put(skillId, skillTemplate);
@@ -41,8 +60,43 @@ public class SkillData {
 				skillTemplatesByGroup.computeIfAbsent(skillTemplate.getGroup(), k -> new ArrayList<>()).add(skillTemplate);
 			if (skillTemplate.getStack() != null)
 				skillTemplatesByStack.computeIfAbsent(skillTemplate.getStack(), k -> new ArrayList<>()).add(skillTemplate);
+			if (skillTemplate.getEffects() != null)
+				indexMasterySkills(skillId, skillTemplate.getEffects().getEffects());
 		}
 		skillTemplates = null;
+	}
+
+	private void indexMasterySkills(int skillId, List<EffectTemplate> effects) {
+		for (EffectTemplate effect : effects) {
+			switch (effect) {
+				case WeaponMasteryEffect e -> {
+					if (e.getItemGroup() == null)
+						throw new IllegalArgumentException("Weapon mastery effect of skill " + skillId + " has no weapon attribute");
+					masterySkillsByWeapon.computeIfAbsent(e.getItemGroup(), _ -> new HashSet<>()).add(skillId);
+				}
+				case ArmorMasteryEffect e -> {
+					if (e.getArmorType() == null)
+						throw new IllegalArgumentException("Armor mastery effect of skill " + skillId + " has no armor attribute");
+					masterySkillsByArmor.computeIfAbsent(e.getArmorType(), _ -> new HashSet<>()).add(skillId);
+				}
+				case ShieldMasteryEffect _ -> shieldMasterySkills.add(skillId);
+				default -> {
+				}
+			}
+		}
+	}
+
+	/**
+	 * @return The skills that allow equipping items of this group, empty if the group needs no mastery skill.
+	 */
+	public Set<Integer> getMasterySkills(ItemGroup itemGroup) {
+		if (itemGroup == null || !itemGroup.requiresMastery())
+			return Set.of();
+		if (itemGroup == ItemGroup.SHIELD)
+			return shieldMasterySkills;
+		if (itemGroup.getEquipType() == EquipType.WEAPON)
+			return masterySkillsByWeapon.getOrDefault(itemGroup, Set.of());
+		return masterySkillsByArmor.getOrDefault(itemGroup.getItemSubType(), Set.of());
 	}
 
 	public SkillTemplate getSkillTemplate(int skillId) {

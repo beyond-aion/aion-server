@@ -24,8 +24,7 @@ public class SM_SKILL_COOLDOWN extends AionServerPacket {
 
 	public SM_SKILL_COOLDOWN(Player player, Map<Integer, Long> cooldownExpirationMillisByCooldownId, boolean notify) {
 		for (PlayerSkillEntry skill : player.getSkillList().getAllSkills()) {
-			int cooldownId = DataManager.SKILL_DATA.getSkillTemplate(skill.getSkillId()).getCooldownId();
-			Long cooldownExpirationMillis = cooldownExpirationMillisByCooldownId.get(cooldownId);
+			Long cooldownExpirationMillis = cooldownExpirationMillisByCooldownId.get(skill.getSkillTemplate().getCooldownId());
 			if (cooldownExpirationMillis != null)
 				cooldowns.add(new Cooldown(skill.getSkillId(), cooldownExpirationMillis));
 		}

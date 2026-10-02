@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.model.stats.container;
 
+import java.util.Set;
+
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AILogger;
 import com.aionemu.gameserver.ai.AISubState;
@@ -45,15 +47,15 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 	}
 
 	@Override
-	public Stat2 applyStatFunctions(StatEnum statEnum, Stat2 stat, CalculationType... calculationTypes) {
+	public Stat2 applyStatFunctions(StatEnum statEnum, Stat2 stat, Set<CalculationType> calculationTypes) {
 		Stat2 s = super.applyStatFunctions(statEnum, stat, calculationTypes);
 		owner.getAi().modifyOwnerStat(s);
 		return s;
 	}
 
 	@Override
-	public Stat2 getAttackSpeed() {
-		return getStat(StatEnum.ATTACK_SPEED, owner.getObjectTemplate().getAttackSpeed());
+	public int getBaseAttackSpeed() {
+		return owner.getObjectTemplate().getAttackSpeed();
 	}
 
 	@Override
@@ -90,7 +92,7 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 		int divider = 2;
 		if (owner.getAbyssNpcType() != AbyssNpcType.NONE)
 			divider = 4; // Abyss type related NPCs restore their health by 25%
-		return getStat(StatEnum.REGEN_HP, getStatsTemplate().getMaxHp() / divider);
+		return getStat(StatEnum.REGEN_HP, getMaxHp().getExactCurrent() / divider);
 	}
 
 	@Override

@@ -28,15 +28,11 @@ public class FixPath extends AdminCommand {
 	private static boolean oldInvul = false;
 
 	public FixPath() {
-		super("fixpath", "Fixes Z-coordinates for npc walk routes using your client (not internal geo data).");
-
-		// @formatter:off
-		setSyntaxInfo(
-			"[z-offset] - Gathers new Z-coordinates for the route of your target (default: uses old Z values as a base, optional: adds the offset to old values).",
-			"<route id> [z-offset] - Gathers new Z-coordinates for the specified route (default: uses old Z values as a base, optional: adds the offset to old values).",
-			"<cancel> - Cancels route fixing."
-		);
-		// @formatter:on
+		super("fixpath", "Fixes Z-coordinates for NPC walk routes using your client (not internal geo data).", """
+			[z-offset] - Gathers new Z-coordinates for the route of your target (default: uses old Z values as a base, optional: adds the offset to old values).
+			<route ID> [z-offset] - Gathers new Z-coordinates for the specified route (default: uses old Z values as a base, optional: adds the offset to old values).
+			cancel - Cancels route fixing.
+			""");
 	}
 
 	@Override
@@ -63,31 +59,19 @@ public class FixPath extends AdminCommand {
 		WalkerTemplate t = null;
 
 		if (params.length > 0 && (t = DataManager.WALKER_DATA.getWalkerTemplate(params[0])) != null) {
-			if (params.length > 1) {
-				try {
-					zOffset = Float.parseFloat(params[1]);
-				} catch (NumberFormatException e) {
-					sendInfo(admin, "Invalid Z offset.");
-					return;
-				}
-			}
+			if (params.length > 1)
+				zOffset = Float.parseFloat(params[1]);
 			map = admin.getWorldId();
 			sendInfo(admin, "Make sure you are on the correct map. If not use <cancel>!");
 		} else {
 			if (admin.getTarget() instanceof Npc) {
-				if (params.length > 0) {
-					try {
-						zOffset = Float.parseFloat(params[0]);
-					} catch (NumberFormatException e) {
-						sendInfo(admin, "Invalid Z offset.");
-						return;
-					}
-				}
+				if (params.length > 0)
+					zOffset = Float.parseFloat(params[0]);
 				map = admin.getTarget().getWorldId();
 				t = DataManager.WALKER_DATA.getWalkerTemplate(admin.getTarget().getSpawn().getWalkerId());
 			}
 			if (t == null) {
-				sendInfo(admin, "Couldn't find route id.");
+				sendInfo(admin, "Couldn't find route ID.");
 				return;
 			}
 		}

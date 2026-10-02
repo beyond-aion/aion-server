@@ -25,5 +25,6 @@ public enum TaskId {
 	SUMMON_FOLLOW,
 	ZONE_MATERIAL_ACTION,
 	TERRAIN_MATERIAL_ACTION,
-	SHOUT
+	SHOUT,
+	RANK_LIMIT_UNEQUIP // grace period before items the abyss rank no longer allows are taken off
 }

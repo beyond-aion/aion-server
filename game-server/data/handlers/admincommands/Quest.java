@@ -33,18 +33,14 @@ import com.aionemu.gameserver.world.World;
 public class Quest extends AdminCommand {
 
 	public Quest() {
-		super("quest", "Handles quest states of your target.");
-
-		// @formatter:off
-		setSyntaxInfo(
-			"[player] <quest> <reset|start|delete> - Resets/starts/deletes the specified quest.",
-			"[player] <quest> <status> - Shows the quest status of the specified quest.",
-			"[player] <quest> <set> <status> <var> [varNum] - Sets the specified quest state (default: apply var to all varNums, optional: set var to varNum [0-5]).",
-			"[player] <quest> <setflags> <flags> - Sets the specified quest flags.",
-			"[player] <quest> <dialog> <dialog_page_id> - Sends the dialog page with the given page ID.",
-			"Note: If no player parameter is given, your current target will be taken (defaults to your character, if no player is targeted)."
-		);
-		// @formatter:on
+		super("quest", "Handles quest states of your target.", """
+			[player] <quest> <reset|start|delete> - Resets/starts/deletes the specified quest.
+			[player] <quest> status - Shows the quest status of the specified quest.
+			[player] <quest> set <status> <var> [varNum] - Sets the specified quest state (default: apply var to all varNums, optional: set var to varNum [0-5]).
+			[player] <quest> setflags <flags> - Sets the specified quest flags.
+			[player] <quest> dialog <page ID> - Sends the dialog page with the given page ID.
+			Note: If no player parameter is given, your current target will be taken (defaults to your character, if no player is targeted).
+			""");
 	}
 
 	@Override
@@ -58,18 +54,16 @@ public class Quest extends AdminCommand {
 		Player target;
 		int questId = ChatUtil.getQuestId(params[index]);
 		if (questId == 0) {
-			target = World.getInstance().getPlayer(Util.convertName(params[index]));
-
-			if (target == null || !target.isOnline()) {
-				PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_MSG_ASK_PCINFO_LOGOFF());
+			String playerName = Util.convertName(params[index]);
+			target = World.getInstance().getPlayer(playerName);
+			if (target == null) {
+				PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_NO_SUCH_USER(playerName));
 				return;
 			}
-
 			if (++index >= params.length) {
 				sendInfo(admin);
 				return;
 			}
-
 			questId = ChatUtil.getQuestId(params[index]);
 		} else {
 			target = admin.getTarget() instanceof Player p ? p : admin;
@@ -94,64 +88,23 @@ public class Quest extends AdminCommand {
 			deleteQuest(admin, target, questId);
 		} else if (params[index].equalsIgnoreCase("status")) {
 			showQuestStatus(admin, target, questId);
-		} else if (params[index].equalsIgnoreCase("set")) {
-			QuestStatus status;
-			int var;
+		} else if (params[index].equalsIgnoreCase("set") && params.length > index + 2) {
+			QuestStatus status = QuestStatus.valueOf(params[++index].toUpperCase());
+			int var = Integer.parseInt(params[++index]);
 			int varNum = -1;
-
-			try {
-				status = QuestStatus.valueOf(params[++index].toUpperCase());
-			} catch (IllegalArgumentException e) {
-				sendInfo(admin, "<status> is one of " + Arrays.toString(QuestStatus.values()));
-				return;
-			} catch (IndexOutOfBoundsException e) {
-				sendInfo(admin);
-				return;
-			}
-
-			try {
-				var = Integer.valueOf(params[++index]);
-			} catch (NumberFormatException e) {
-				sendInfo(admin, "<var> must be an int value.");
-				return;
-			} catch (IndexOutOfBoundsException e) {
-				sendInfo(admin);
-				return;
-			}
-
 			if (++index < params.length) { // optional
-				try {
-					varNum = Integer.valueOf(params[index]);
-					if (varNum < 0 || varNum > 5)
-						throw new IllegalArgumentException();
-				} catch (IllegalArgumentException e) { // also catches NumberFormatException
-					sendInfo(admin, "[varNum] must be an int value from 0 to 5.");
+				varNum = Integer.parseInt(params[index]);
+				if (varNum < 0 || varNum > 5) {
+					sendInfo(admin, "[varNum] must be between 0 and 5.");
 					return;
 				}
 			}
-
 			setQuestStatus(admin, target, questId, status, var, varNum);
-		} else if (params[index].equalsIgnoreCase("setflags")) {
-			int flags;
-
-			try {
-				flags = Integer.valueOf(params[++index]);
-			} catch (IndexOutOfBoundsException | NumberFormatException e) {
-				sendInfo(admin, "<flags> must be an int value.");
-				return;
-			}
-
+		} else if (params[index].equalsIgnoreCase("setflags") && params.length > index + 1) {
+			int flags = Integer.parseInt(params[++index]);
 			setQuestFlags(admin, target, questId, flags);
-		} else if (params[index].equalsIgnoreCase("dialog")) {
-			int dialogPageId;
-
-			try {
-				dialogPageId = Integer.valueOf(params[++index]);
-			} catch (IndexOutOfBoundsException | NumberFormatException e) {
-				sendInfo(admin, "<dialog_page_id> must be an int value.");
-				return;
-			}
-
+		} else if (params[index].equalsIgnoreCase("dialog") && params.length > index + 1) {
+			int dialogPageId = Integer.parseInt(params[++index]);
 			sendQuestDialog(admin, questId, dialogPageId);
 		} else {
 			sendInfo(admin);
@@ -165,14 +118,14 @@ public class Quest extends AdminCommand {
 			return;
 		}
 		if (qs.getQuestVars().getQuestVars() == 0 && qs.getRewardGroup() == null) {
-			sendInfo(admin, "Player " + target.getName() + "'s quest is already at the beginning.");
+			sendInfo(admin, name(target) + "'s quest is already at the beginning.");
 			return;
 		}
 		qs.setStatus(QuestStatus.START);
 		qs.setQuestVar(0);
 		qs.setRewardGroup(null);
 		PacketSendUtility.sendPacket(target, new SM_QUEST_ACTION(ActionType.UPDATE, qs));
-		sendInfo(admin, "Reset " + ChatUtil.quest(questId) + " for player " + target.getName() + ".");
+		sendInfo(admin, "Reset " + ChatUtil.quest(questId) + " for " + name(target) + ".");
 	}
 
 	private void startQuest(Player admin, Player target, int questId) {
@@ -181,7 +134,7 @@ public class Quest extends AdminCommand {
 			startNpcFactionQuest(admin, target, questId, template.getNpcFactionId());
 			return;
 		} else if (QuestService.startQuest(new QuestEnv(null, target, questId))) {
-			sendInfo(admin, "Started " + ChatUtil.quest(questId) + " for player " + target.getName() + ".");
+			sendInfo(admin, "Started " + ChatUtil.quest(questId) + " for " + name(target) + ".");
 			return;
 		}
 		QuestState qs = target.getQuestStateList().getQuestState(questId);
@@ -213,7 +166,7 @@ public class Quest extends AdminCommand {
 	private void startNpcFactionQuest(Player admin, Player target, int questId, int factionId) {
 		NpcFaction faction = target.getNpcFactions().getActiveNpcFaction(false);
 		if (faction == null || faction.getId() != factionId) {
-			sendInfo(admin, "Player " + target.getName() + " is not registered to the organization for this quest.");
+			sendInfo(admin, name(target) + " is not registered to the organization for this quest.");
 			return;
 		}
 		for (QuestTemplate template : DataManager.QUEST_DATA.getQuestsByNpcFaction(faction.getId(), target)) {
@@ -229,7 +182,7 @@ public class Quest extends AdminCommand {
 				faction.setTime(faction.getTime() + 100);
 				// send the daily quest to player
 				target.getNpcFactions().sendDailyQuest();
-				sendInfo(admin, "Started npc faction quest " + ChatUtil.quest(questId) + " for player " + target.getName() + ".");
+				sendInfo(admin, "Started NPC faction quest " + ChatUtil.quest(questId) + " for " + name(target) + ".");
 				return;
 			}
 		}
@@ -243,7 +196,7 @@ public class Quest extends AdminCommand {
 		}
 		QuestState qs = target.getQuestStateList().deleteQuest(questId);
 		if (qs == null) {
-			sendInfo(admin, target.getName() + " does not have that quest.");
+			sendInfo(admin, name(target) + " does not have that quest.");
 			return;
 		}
 		if (qs.getStatus() == QuestStatus.COMPLETE)
@@ -252,7 +205,7 @@ public class Quest extends AdminCommand {
 			PacketSendUtility.sendPacket(target, new SM_QUEST_ACTION(ActionType.ABANDON, qs));
 		target.getController().updateNearbyQuests();
 		if (!admin.equals(target))
-			sendInfo(admin, "Deleted " + ChatUtil.quest(questId) + " for player " + target.getName() + ".");
+			sendInfo(admin, "Deleted " + ChatUtil.quest(questId) + " for " + name(target) + ".");
 	}
 
 	private void showQuestStatus(Player admin, Player target, int questId) {
@@ -261,7 +214,7 @@ public class Quest extends AdminCommand {
 			return;
 		}
 		QuestState qs = target.getQuestStateList().getQuestState(questId);
-		StringBuilder sb = new StringBuilder("Player: " + target.getName() + ", quest: " + ChatUtil.quest(questId) + "\n\tQuest status: ");
+		StringBuilder sb = new StringBuilder("Player: " + name(target) + ", quest: " + ChatUtil.quest(questId) + "\n\tQuest status: ");
 		if (qs == null) {
 			sb.append("NULL");
 		} else {
@@ -307,7 +260,7 @@ public class Quest extends AdminCommand {
 		else
 			PacketSendUtility.sendPacket(target, new SM_QUEST_ACTION(actionType, qs));
 		target.getController().updateNearbyQuests();
-		sendInfo(admin, "Set quest status of " + ChatUtil.quest(questId) + " for player " + target.getName() + ".");
+		sendInfo(admin, "Set quest status of " + ChatUtil.quest(questId) + " for " + name(target) + ".");
 	}
 
 	private void setQuestFlags(Player admin, Player target, int questId, int flags) { // needs rework when flags are implemented like vars
@@ -322,7 +275,7 @@ public class Quest extends AdminCommand {
 		}
 		qs.setFlags(flags);
 		PacketSendUtility.sendPacket(target, new SM_QUEST_ACTION(ActionType.UPDATE, qs));
-		sendInfo(admin, "Set " + target.getName() + "'s quest flags to " + flags + ".");
+		sendInfo(admin, "Set " + name(target) + "'s quest flags to " + flags + ".");
 	}
 
 	private void sendQuestDialog(Player admin, int questId, int dialogPageId) {

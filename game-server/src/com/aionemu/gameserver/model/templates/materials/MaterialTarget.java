@@ -17,10 +17,10 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 @XmlEnum
 public enum MaterialTarget {
 
-	ALL(c -> true),
+	ALL(_ -> true),
 	NPC(c -> c instanceof Npc),
 	PLAYER(c -> c instanceof Player),
-	PLAYER_WITH_PET(c -> PLAYER.matches(c) || c instanceof Summon && ((Summon) c).getMaster() != null);
+	PLAYER_WITH_PET(c -> PLAYER.matches(c) || c instanceof Summon);
 
 	private final Predicate<Creature> isTargetCheck;
 

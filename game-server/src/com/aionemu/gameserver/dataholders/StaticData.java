@@ -148,9 +148,6 @@ public class StaticData {
 	@XmlElement(name = "fly_rings")
 	public FlyRingData flyRingData;
 
-	@XmlElement(name = "shields")
-	public ShieldData shieldData;
-
 	@XmlElement(name = "pets")
 	public PetData petData;
 
@@ -234,9 +231,6 @@ public class StaticData {
 
 	@XmlElement(name = "house_parts")
 	public HousePartsData housePartsData;
-
-	@XmlElement(name = "curing_objects")
-	public CuringObjectsData curingObjectsData;
 
 	@XmlElement(name = "house_npcs")
 	public HouseNpcsData houseNpcsData;
@@ -367,7 +361,6 @@ public class StaticData {
 		log.info("Loaded " + riftData.size() + " rift entries");
 		log.info("Loaded " + baseData.size() + " base entries");
 		log.info("Loaded " + flyRingData.size() + " fly ring entries");
-		log.info("Loaded " + shieldData.size() + " shield entries");
 		log.info("Loaded " + petData.size() + " pet entries");
 		log.info("Loaded " + guideData.size() + " guide entries");
 		log.info("Loaded " + roadData.size() + " road entries");
@@ -392,7 +385,6 @@ public class StaticData {
 		log.info("Loaded " + houseBuildingData.size() + " house building styles");
 		log.info("Loaded " + housePartsData.size() + " house parts");
 		log.info("Loaded " + houseNpcsData.size() + " house spawns");
-		log.info("Loaded " + curingObjectsData.size() + " curing object entries");
 		log.info("Loaded " + assemblyItemData.size() + " assembly items entries");
 		log.info("Loaded " + challengeData.size() + " challenge tasks entries");
 		log.info("Loaded " + conquerorAndProtectorData.size() + " conqueror and protector entries");
