@@ -7,6 +7,7 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 
 import com.aionemu.gameserver.model.Gender;
+import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.item.enums.ItemGroup;
 
@@ -24,6 +25,8 @@ public class MotionTime {
 	private List<Times> elyosMale;
 	@XmlElement(name = "robot")
 	private List<Times> robot;
+	@XmlElement(name = "npc")
+	private List<NpcMotionTime> npc;
 
 	@XmlAttribute(required = true)
 	private String name;
@@ -47,7 +50,30 @@ public class MotionTime {
 	@XmlTransient
 	HashMap<Integer, Times> robotTimes = new HashMap<>();
 
+	@XmlTransient
+	private final HashMap<Integer, HashMap<Integer, Times>> npcTimes = new HashMap<>();
+
+	public Times getTimesForNpc(int npcId, int id) {
+		HashMap<Integer, Times> times = npcTimes.get(npcId);
+		if (times != null) {
+			for (int i = id; i > 0; i--) {
+				if (times.get(i) != null)
+					return times.get(i);
+			}
+		}
+		return null;
+	}
+
+	public Times getTimesFor(Creature creature, int id) {
+		return creature instanceof Player player ? getTimesFor(player, id) : getTimesForNpc(creature.getTransformModel().getModelId(), id);
+	}
+
 	public Times getTimesFor(Player player, int id) {
+		if (player.isTransformed()) {
+			Times times = getTimesForNpc(player.getTransformModel().getModelId(), id);
+			if (times != null)
+				return times;
+		}
 		WeaponTypeWrapper weapons = player.isInRobotMode() ? null : new WeaponTypeWrapper(player.getEquipment().getMainHandWeaponType(), player.getEquipment().getOffHandWeaponType());
 		for (int i = id; i > 0; i--) {
 			if (player.isInRobotMode()) {
@@ -74,7 +100,7 @@ public class MotionTime {
 						}
 						break;
 				}
-				if (times != null) {
+				if (times != null && times.get(i) != null) {
 					return times.get(i);
 				}
 			}
@@ -87,6 +113,14 @@ public class MotionTime {
 		parseTimesFrom(asmodianMale, asmodianMaleTimeForWeaponType);
 		parseTimesFrom(elyosFemale, elyosFemaleTimeForWeaponType);
 		parseTimesFrom(elyosMale, elyosMaleTimeForWeaponType);
+		if (npc != null) {
+			for (NpcMotionTime time : npc) {
+				for (int npcId : time.getNpcIds()) {
+					if (npcTimes.computeIfAbsent(npcId, k -> new HashMap<>()).putIfAbsent(time.getId(), time) != null)
+						throw new IllegalArgumentException("Duplicate NPC motion timing: " + name + " / " + npcId + " / " + time.getId());
+				}
+			}
+		}
 		if (robot != null) {
 			for (Times time : robot) {
 				robotTimes.put(time.getId(), time);
@@ -98,6 +132,7 @@ public class MotionTime {
 		elyosFemale = null;
 		elyosMale = null;
 		robot = null;
+		npc = null;
 	}
 
 	private void parseTimesFrom(List<Times> times, HashMap<WeaponTypeWrapper, HashMap<Integer, Times>> map) {

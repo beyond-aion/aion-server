@@ -15,6 +15,7 @@
 			<xs:element name="elyos_female" type="Times" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="elyos_male" type="Times" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="robot" type="Times" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="npc" type="NpcMotionTime" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 		<xs:attribute name="name" type="xs:string" use="required" />
 	</xs:complexType>
@@ -24,5 +25,15 @@
 		<xs:attribute name="min" type="xs:float" use="required" />
 		<xs:attribute name="max" type="xs:float" use="required" />
 		<xs:attribute name="animation_length" type="xs:float" use="required" />
+		<xs:attribute name="hitpoints" type="xs:boolean" />
+		<xs:attribute name="cast_animation" type="xs:boolean" />
+		<xs:attribute name="source" type="xs:string" />
+	</xs:complexType>
+	<xs:complexType name="NpcMotionTime">
+		<xs:complexContent>
+			<xs:extension base="Times">
+				<xs:attribute name="npc_ids" type="xs:string" use="required" />
+			</xs:extension>
+		</xs:complexContent>
 	</xs:complexType>
 </xs:schema>

@@ -29,6 +29,15 @@ public class Times {
 	@XmlAttribute(name = "animation_length")
 	private float animationLength;
 
+	@XmlAttribute(name = "hitpoints")
+	private boolean hitpoints = true;
+
+	@XmlAttribute(name = "cast_animation")
+	private boolean castAnimation;
+
+	@XmlAttribute
+	private String source;
+
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		weapon = weapon.intern();
 	}
@@ -51,6 +60,14 @@ public class Times {
 
 	public String getWeapon() {
 		return weapon;
+	}
+
+	public boolean hasHitpoints() {
+		return hitpoints;
+	}
+
+	public boolean isCastAnimation() {
+		return castAnimation;
 	}
 
 }
