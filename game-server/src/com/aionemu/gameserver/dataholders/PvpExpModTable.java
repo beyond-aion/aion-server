@@ -1,80 +1,55 @@
 package com.aionemu.gameserver.dataholders;
 
-import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
-
 import java.util.List;
 
+import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.annotation.*;
+
 /**
+ * PvP XP multipliers by the level difference between killer and victim. Each row holds one column per ten killer levels.
+ * 
  * @author SVDNESS
  */
-// Retail: new PvP EXP logic.
-// PvP EXP modifier: killer-victim level difference + victim level bracket.
-// Large level gap penalty (low-level anti-gank); the client provides a diff of 1..50.
+@XmlRootElement(name = "pvp_exp_mod_table")
 @XmlAccessorType(XmlAccessType.NONE)
 public class PvpExpModTable {
-	private static final int BRACKETS = 8;
+
 	@XmlElement(name = "level_diff_mod")
 	private List<Row> rows;
-	private int[][] mods;
 
-	void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
-		int maxDiff = 0;
-		for (Row row : rows) {
-			maxDiff = Math.max(maxDiff, row.diff);
-		}
-		int[][] built = new int[maxDiff + 1][BRACKETS];
-		// Difference 0 -> x1.0.
-		for (int b = 0; b < BRACKETS; b++) {
-			built[0][b] = 100;
-		}
-		for (Row row : rows) {
-			String[] parts = row.mods.trim().split("\\s+");
-			if (parts.length != BRACKETS) {
-				throw new IllegalStateException("pvp_exp_mod row diff=" + row.diff + " expected " + BRACKETS + " values, got " + parts.length + ".");
-			}
-			for (int b = 0; b < BRACKETS; b++) {
-				built[row.diff][b] = Integer.parseInt(parts[b]);
-			}
-		}
-		mods = built;
+	private int minLevelDiff;
+	private int[][] modsByLevelDiff;
+
+	void afterUnmarshal(Unmarshaller u, Object parent) {
+		minLevelDiff = rows.stream().mapToInt(row -> row.levelDiff).min().orElseThrow();
+		int maxLevelDiff = rows.stream().mapToInt(row -> row.levelDiff).max().orElseThrow();
+		modsByLevelDiff = new int[maxLevelDiff - minLevelDiff + 1][];
+		for (Row row : rows)
+			modsByLevelDiff[row.levelDiff - minLevelDiff] = row.mods;
 		rows = null;
 	}
 
-	// EXP multiplier based on the level difference and victim's level.
+	/**
+	 * Level differences outside the table use its first or last row.
+	 */
 	public float getMultiplier(int killerLevel, int victimLevel) {
-		if (mods == null) {
-			return 1f;
-		}
-		int diff = killerLevel - victimLevel;
-		if (diff < 0) {
-			diff = 0;
-		} else if (diff >= mods.length) {
-			diff = mods.length - 1;
-		}
-		int bracket = (int) Math.ceil(victimLevel / 10.0) - 1;
-		if (bracket < 0) {
-			bracket = 0;
-		} else if (bracket >= BRACKETS) {
-			bracket = BRACKETS - 1;
-		}
-		return mods[diff][bracket] / 100f;
+		int[] mods = modsByLevelDiff[Math.clamp(killerLevel - victimLevel - minLevelDiff, 0, modsByLevelDiff.length - 1)];
+		return mods[Math.clamp((killerLevel - 1) / 10, 0, mods.length - 1)] / 100f;
 	}
 
-	public int getMaxLevelDiff() {
-		return mods == null ? 0 : mods.length - 1;
+	public int size() {
+		return modsByLevelDiff.length;
 	}
 
 	@XmlType(name = "pvp_exp_mod_row")
 	@XmlAccessorType(XmlAccessType.NONE)
 	private static class Row {
-		@XmlAttribute(name = "diff")
-		private int diff;
-		@XmlAttribute(name = "mods")
-		private String mods;
+
+		@XmlAttribute(name = "level_diff", required = true)
+		private int levelDiff;
+
+		@XmlList
+		@XmlAttribute(name = "mods", required = true)
+		private int[] mods;
 	}
 }

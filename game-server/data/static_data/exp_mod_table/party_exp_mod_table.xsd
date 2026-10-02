@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
 	<xs:include schemaLocation="../global_types.xsd" />
-	<xs:element name="pvp_exp_mod_table">
+	<xs:element name="party_exp_mod_table">
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element name="level_diff_mod" minOccurs="0" maxOccurs="unbounded">

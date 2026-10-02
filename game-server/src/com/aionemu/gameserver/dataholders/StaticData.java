@@ -58,6 +58,12 @@ public class StaticData {
 	@XmlElement(name = "pvp_exp_mod_table")
 	public PvpExpModTable pvpExpModTable;
 
+	@XmlElement(name = "party_exp_mod_table")
+	public PartyExpModTable partyExpModTable;
+
+	@XmlElement(name = "mentee_exp_limit_table")
+	public MenteeExpLimitTable menteeExpLimitTable;
+
 	@XmlElement(name = "absolute_stats")
 	public AbsoluteStatsData absoluteStatsData;
 
@@ -316,8 +322,10 @@ public class StaticData {
 		log.info("Loaded " + materiaData.size() + " material ids");
 		log.info("Loaded weather for " + mapWeatherData.size() + " maps");
 		log.info("Loaded " + playerExperienceTable.getMaxLevel() + " player experience table entries");
-		log.info("Loaded pvp exp table: {} levels.", pvpExpTable == null ? 0 : pvpExpTable.getMaxLevel());
-		log.info("Loaded pvp exp mod table: max level diff {}.", pvpExpModTable == null ? 0 : pvpExpModTable.getMaxLevelDiff());
+		log.info("Loaded " + pvpExpTable.getMaxLevel() + " pvp experience table entries");
+		log.info("Loaded " + pvpExpModTable.size() + " pvp experience modifier entries");
+		log.info("Loaded " + partyExpModTable.size() + " party experience modifier entries");
+		log.info("Loaded " + menteeExpLimitTable.size() + " mentee experience limit entries");
 		log.info("Loaded " + absoluteStatsData.size() + " absolute stat templates");
 		log.info("Loaded " + itemCleanup.size() + " item cleanup entries");
 		log.info("Loaded " + itemData.size() + " item templates");

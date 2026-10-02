@@ -11,9 +11,6 @@ import com.aionemu.gameserver.controllers.attack.AttackResult;
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
 import com.aionemu.gameserver.controllers.observer.AttackerCriticalStatus;
 import com.aionemu.gameserver.controllers.observer.OneTimeBoostSkillAttack;
-import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.dataholders.PvpExpModTable;
-import com.aionemu.gameserver.dataholders.PvpExpTable;
 import com.aionemu.gameserver.model.SkillElement;
 import com.aionemu.gameserver.model.gameobjects.*;
 import com.aionemu.gameserver.model.gameobjects.player.Equipment;
@@ -186,22 +183,6 @@ public class StatFunctions {
 		}
 
 		return pointsGained;
-	}
-
-	// Retail: PvP EXP is calculated from the base value for the victim's level multiplied by the level-difference modifier.
-	// Rank penalty applies only to AP and does not affect EXP.
-	public static int calculatePvpXpGained(Player defeated, int maxLevel) {
-		PvpExpTable table = DataManager.PVP_EXP_TABLE;
-		if (table == null) {
-			return 0;
-		}
-		int base = table.getExp(defeated.getLevel());
-		if (base <= 0) {
-			return 0;
-		}
-		PvpExpModTable modTable = DataManager.PVP_EXP_MOD_TABLE;
-		float mod = modTable == null ? 1f : modTable.getMultiplier(maxLevel, defeated.getLevel());
-		return Math.round(base * mod);
 	}
 
 	public static int calculatePvpDpGained(Player defeated, int maxRank, int maxLevel) {

@@ -261,6 +261,7 @@ public final class PlayerEnterWorldService {
 		client.sendPacket(new SM_CHANNEL_INFO(player.getPosition()));
 
 		KiskService.getInstance().onLogin(player);
+		PvpExpLimitService.getInstance().onEnterWorld(player);
 		TeleportService.sendObeliskBindPoint(player);
 		TeleportService.sendKiskBindPoint(player);
 

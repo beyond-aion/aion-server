@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Made by SVDNESS -->
 <pvp_exp_table xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="pvp_exp_table.xsd">
 	<level lvl="1" exp="0" get_max_from_all_user="0" get_max_reduce_amount="0" get_max_reduce_interval="60" delay_time="1800"/>
 	<level lvl="2" exp="0" get_max_from_all_user="0" get_max_reduce_amount="0" get_max_reduce_interval="60" delay_time="1800"/>

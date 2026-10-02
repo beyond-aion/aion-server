@@ -83,6 +83,8 @@ public final class DataManager {
 	public static PlayerExperienceTable PLAYER_EXPERIENCE_TABLE;
 	public static PvpExpTable PVP_EXP_TABLE;
 	public static PvpExpModTable PVP_EXP_MOD_TABLE;
+	public static PartyExpModTable PARTY_EXP_MOD_TABLE;
+	public static MenteeExpLimitTable MENTEE_EXP_LIMIT_TABLE;
 	public static PlayerInitialData PLAYER_INITIAL_DATA;
 	public static Portal2Data PORTAL2_DATA;
 	public static PortalLocData PORTAL_LOC_DATA;
@@ -138,6 +140,8 @@ public final class DataManager {
 		PLAYER_EXPERIENCE_TABLE = data.playerExperienceTable;
 		PVP_EXP_TABLE = data.pvpExpTable;
 		PVP_EXP_MOD_TABLE = data.pvpExpModTable;
+		PARTY_EXP_MOD_TABLE = data.partyExpModTable;
+		MENTEE_EXP_LIMIT_TABLE = data.menteeExpLimitTable;
 		ABSOLUTE_STATS_DATA = data.absoluteStatsData;
 		ITEM_CLEAN_UP = data.itemCleanup;
 		ITEM_DATA = data.itemData;
