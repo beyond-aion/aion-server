@@ -64677,7 +64677,7 @@
 			<polishchargeweapon value="260" />
 		</endconditions>
 		<effects>
-			<summonhoming attack_count="1" npc_count="4" time="1" npc_id="833371" e="1" noresist="true" element="WIND" hoptype="SKILLLV" hopb="1" />
+			<summonhoming attack_count="3" npc_count="4" time="1" npc_id="833371" e="1" noresist="true" element="WIND" hoptype="SKILLLV" hopb="1" />
 		</effects>
 		<motion name="elsummon1" />
 	</skill_template>
@@ -64693,7 +64693,7 @@
 			<polishchargeweapon value="260" />
 		</endconditions>
 		<effects>
-			<summonhoming attack_count="1" npc_count="4" time="1" npc_id="833372" e="1" noresist="true" element="WIND" hoptype="SKILLLV" hopb="1" />
+			<summonhoming attack_count="3" npc_count="4" time="1" npc_id="833372" e="1" noresist="true" element="WIND" hoptype="SKILLLV" hopb="1" />
 		</effects>
 		<motion name="elsummon1" />
 	</skill_template>
@@ -64709,7 +64709,7 @@
 			<polishchargeweapon value="260" />
 		</endconditions>
 		<effects>
-			<summonhoming attack_count="1" npc_count="4" time="1" npc_id="833373" e="1" noresist="true" element="WIND" hoptype="SKILLLV" hopb="1" />
+			<summonhoming attack_count="3" npc_count="4" time="1" npc_id="833373" e="1" noresist="true" element="WIND" hoptype="SKILLLV" hopb="1" />
 		</effects>
 		<motion name="elsummon1" />
 	</skill_template>
@@ -64725,7 +64725,7 @@
 			<polishchargeweapon value="260" />
 		</endconditions>
 		<effects>
-			<summonhoming attack_count="1" npc_count="4" time="1" npc_id="833374" e="1" noresist="true" element="WIND" hoptype="SKILLLV" hopb="1" />
+			<summonhoming attack_count="3" npc_count="4" time="1" npc_id="833374" e="1" noresist="true" element="WIND" hoptype="SKILLLV" hopb="1" />
 		</effects>
 		<motion name="elsummon1" />
 	</skill_template>
@@ -64741,7 +64741,7 @@
 			<polishchargeweapon value="260" />
 		</endconditions>
 		<effects>
-			<summonhoming attack_count="1" npc_count="4" time="1" npc_id="833375" e="1" noresist="true" element="WIND" hoptype="SKILLLV" hopb="1" />
+			<summonhoming attack_count="3" npc_count="4" time="1" npc_id="833375" e="1" noresist="true" element="WIND" hoptype="SKILLLV" hopb="1" />
 		</effects>
 		<motion name="elsummon1" />
 	</skill_template>
@@ -64757,7 +64757,7 @@
 			<polishchargeweapon value="260" />
 		</endconditions>
 		<effects>
-			<summonhoming attack_count="1" npc_count="4" time="1" npc_id="833376" e="1" noresist="true" element="WIND" hoptype="SKILLLV" hopb="1" />
+			<summonhoming attack_count="3" npc_count="4" time="1" npc_id="833376" e="1" noresist="true" element="WIND" hoptype="SKILLLV" hopb="1" />
 		</effects>
 		<motion name="elsummon1" />
 	</skill_template>
@@ -64773,7 +64773,7 @@
 			<polishchargeweapon value="260" />
 		</endconditions>
 		<effects>
-			<summonhoming attack_count="1" npc_count="4" time="1" npc_id="833377" e="1" noresist="true" element="WIND" hoptype="SKILLLV" hopb="1" />
+			<summonhoming attack_count="3" npc_count="4" time="1" npc_id="833377" e="1" noresist="true" element="WIND" hoptype="SKILLLV" hopb="1" />
 		</effects>
 		<motion name="elsummon1" />
 	</skill_template>
@@ -64789,7 +64789,7 @@
 			<polishchargeweapon value="260" />
 		</endconditions>
 		<effects>
-			<summonhoming attack_count="1" npc_count="4" time="1" npc_id="833378" e="1" noresist="true" element="WIND" hoptype="SKILLLV" hopb="1" />
+			<summonhoming attack_count="3" npc_count="4" time="1" npc_id="833378" e="1" noresist="true" element="WIND" hoptype="SKILLLV" hopb="1" />
 		</effects>
 		<motion name="elsummon1" />
 	</skill_template>
@@ -64805,7 +64805,7 @@
 			<polishchargeweapon value="260" />
 		</endconditions>
 		<effects>
-			<summonhoming attack_count="1" npc_count="4" time="1" npc_id="833379" e="1" noresist="true" element="WIND" hoptype="SKILLLV" hopb="1" />
+			<summonhoming attack_count="3" npc_count="4" time="1" npc_id="833379" e="1" noresist="true" element="WIND" hoptype="SKILLLV" hopb="1" />
 		</effects>
 		<motion name="elsummon1" />
 	</skill_template>
@@ -64821,7 +64821,7 @@
 			<polishchargeweapon value="260" />
 		</endconditions>
 		<effects>
-			<summonhoming attack_count="1" npc_count="4" time="1" npc_id="833380" e="1" noresist="true" element="WIND" hoptype="SKILLLV" hopb="1" />
+			<summonhoming attack_count="3" npc_count="4" time="1" npc_id="833380" e="1" noresist="true" element="WIND" hoptype="SKILLLV" hopb="1" />
 		</effects>
 		<motion name="elsummon1" />
 	</skill_template>
@@ -64837,7 +64837,7 @@
 			<polishchargeweapon value="260" />
 		</endconditions>
 		<effects>
-			<summonhoming attack_count="1" npc_count="4" time="1" npc_id="833263" e="1" noresist="true" element="WIND" hoptype="SKILLLV" hopb="1" />
+			<summonhoming attack_count="3" npc_count="4" time="1" npc_id="833263" e="1" noresist="true" element="WIND" hoptype="SKILLLV" hopb="1" />
 		</effects>
 		<motion name="elsummon1" />
 	</skill_template>
@@ -64853,7 +64853,7 @@
 			<polishchargeweapon value="260" />
 		</endconditions>
 		<effects>
-			<summonhoming attack_count="1" npc_count="4" time="1" npc_id="833264" e="1" noresist="true" element="WIND" hoptype="SKILLLV" hopb="1" />
+			<summonhoming attack_count="3" npc_count="4" time="1" npc_id="833264" e="1" noresist="true" element="WIND" hoptype="SKILLLV" hopb="1" />
 		</effects>
 		<motion name="elsummon1" />
 	</skill_template>
