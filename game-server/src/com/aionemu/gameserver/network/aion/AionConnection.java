@@ -255,6 +255,16 @@ public class AionConnection extends AConnection<AionServerPacket> {
 	}
 
 	@Override
+	protected boolean isAuthenticated() {
+		return state != State.CONNECTED;
+	}
+
+	@Override
+	protected long getAuthTimeoutMillis() {
+		return NetworkConfig.CLIENT_AUTH_TIMEOUT_SECONDS * 1000L;
+	}
+
+	@Override
 	protected int getMaxSendQueueSize() {
 		return NetworkConfig.MAX_PENDING_SERVER_PACKETS;
 	}

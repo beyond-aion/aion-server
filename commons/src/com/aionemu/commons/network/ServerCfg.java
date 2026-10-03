@@ -7,7 +7,14 @@ import java.net.InetSocketAddress;
  * 
  * @author -Nemesiss-, Neon
  */
-public record ServerCfg(InetSocketAddress address, String clientDescription, ConnectionFactory connectionFactory) {
+public record ServerCfg(InetSocketAddress address, String clientDescription, ConnectionFactory connectionFactory, int maxConnectionsPerIp) {
+
+	/**
+	 * Creates a config without a limit of connections per IP.
+	 */
+	public ServerCfg(InetSocketAddress address, String clientDescription, ConnectionFactory connectionFactory) {
+		this(address, clientDescription, connectionFactory, 0);
+	}
 
 	public boolean isAnyLocalAddress() {
 		return address.getAddress().isAnyLocalAddress();

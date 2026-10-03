@@ -66,7 +66,7 @@ public class NioServer {
 				log.info("Listening on " + cfg.getAddressInfo() + " for " + cfg.clientDescription());
 
 				// Register the server socket channel, indicating an interest in accepting new connections
-				SelectionKey acceptKey = getAcceptDispatcher().register(serverChannel, SelectionKey.OP_ACCEPT, new Acceptor(cfg.connectionFactory(), this));
+				SelectionKey acceptKey = getAcceptDispatcher().register(serverChannel, SelectionKey.OP_ACCEPT, new Acceptor(cfg, this));
 				serverChannelKeys.add(acceptKey);
 			}
 		} catch (Exception e) {

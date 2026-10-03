@@ -116,6 +116,18 @@ public class NetworkConfig {
 	public static int MAX_SEND_STALL_SECONDS;
 
 	/**
+	 * Maximum number of simultaneous client connections from one IP address (0 = unlimited).
+	 */
+	@Property(key = "gameserver.network.client.max_connections_per_ip", defaultValue = "10")
+	public static int MAX_CONNECTIONS_PER_IP;
+
+	/**
+	 * Time in seconds a client has to authenticate after connecting, before it gets disconnected.
+	 */
+	@Property(key = "gameserver.network.client.auth_timeout_seconds", defaultValue = "60")
+	public static int CLIENT_AUTH_TIMEOUT_SECONDS;
+
+	/**
 	 * If aion client packets unknown by the server should be logged.
 	 */
 	@Property(key = "gameserver.network.logging.unknown_packets", defaultValue = "false")
@@ -127,7 +139,7 @@ public class NetworkConfig {
 	@Property(key = "gameserver.network.logging.ignored_packets", defaultValue = "false")
 	public static boolean LOG_IGNORED_PACKETS;
 
-	@Property(key = "gameserver.network.flood.connections", defaultValue = "false")
+	@Property(key = "gameserver.network.flood.connections", defaultValue = "true")
 	public static boolean ENABLE_FLOOD_CONNECTIONS;
 
 	@Property(key = "gameserver.network.flood.tick", defaultValue = "1000")

@@ -20,6 +20,7 @@ public class AcceptReadWriteDispatcherImpl extends Dispatcher {
 	 * List of connections that should be closed by this <code>Dispatcher</code> as soon as possible.
 	 */
 	private final List<AConnection<?>> pendingClose = new ArrayList<>();
+	private long nextAuthCheckMillis;
 
 	public AcceptReadWriteDispatcherImpl(String name, Executor dcExecutor) throws IOException {
 		super(name, dcExecutor);
@@ -32,7 +33,7 @@ public class AcceptReadWriteDispatcherImpl extends Dispatcher {
 	 */
 	@Override
 	void dispatch() throws IOException {
-		int selected = selector.select();
+		int selected = selector.select(1000);
 
 		if (selected != 0) {
 			for (Iterator<SelectionKey> selectedKeys = selector.selectedKeys().iterator(); selectedKeys.hasNext();) {
@@ -56,6 +57,18 @@ public class AcceptReadWriteDispatcherImpl extends Dispatcher {
 			}
 		}
 		processPendingClose();
+		closeUnauthenticatedConnections();
+	}
+
+	private void closeUnauthenticatedConnections() {
+		long nowMillis = System.currentTimeMillis();
+		if (nowMillis < nextAuthCheckMillis)
+			return;
+		nextAuthCheckMillis = nowMillis + 1000;
+		for (SelectionKey key : selector.keys()) {
+			if (key.attachment() instanceof AConnection<?> connection)
+				connection.closeIfAuthTimedOut(nowMillis);
+		}
 	}
 
 	/**

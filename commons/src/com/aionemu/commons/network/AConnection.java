@@ -66,6 +66,16 @@ public abstract class AConnection<T extends BaseServerPacket> {
 	private final String ip;
 
 	/**
+	 * Time when this connection was established
+	 */
+	private final long connectedAtMillis = System.currentTimeMillis();
+
+	/**
+	 * Called once when this connection gets closed, to release its slot in the per IP connection limit
+	 */
+	private Runnable onCloseCallback;
+
+	/**
 	 * Time when data was last written to the socket or the send queue became non-empty
 	 */
 	private volatile long lastWriteProgressMillis;
@@ -171,6 +181,36 @@ public abstract class AConnection<T extends BaseServerPacket> {
 		return Long.MAX_VALUE;
 	}
 
+	final void setOnCloseCallback(Runnable onCloseCallback) {
+		this.onCloseCallback = onCloseCallback;
+	}
+
+	/**
+	 * @return True if the remote side has authenticated itself. Connections that didn't authenticate within {@link #getAuthTimeoutMillis()} get
+	 *         closed.
+	 */
+	protected boolean isAuthenticated() {
+		return true;
+	}
+
+	/**
+	 * @return The time in milliseconds the remote side has to authenticate itself, or 0 for no limit.
+	 */
+	protected long getAuthTimeoutMillis() {
+		return 0;
+	}
+
+	/**
+	 * Called by the Dispatcher Thread periodically to close connections which didn't authenticate in time.
+	 */
+	final void closeIfAuthTimedOut(long nowMillis) {
+		long authTimeoutMillis = getAuthTimeoutMillis();
+		if (authTimeoutMillis > 0 && nowMillis - connectedAtMillis > authTimeoutMillis && !isAuthenticated() && !isPendingClose() && !closed) {
+			log.info("{} didn't authenticate within {} ms, disconnecting", this, authTimeoutMillis);
+			close();
+		}
+	}
+
 	/**
 	 * Called by the Dispatcher after data was written to the socket.
 	 */
@@ -231,6 +271,8 @@ public abstract class AConnection<T extends BaseServerPacket> {
 		} catch (IOException ignored) {
 		}
 		key.attach(null);
+		if (onCloseCallback != null)
+			onCloseCallback.run();
 
 		dcExecutor.execute(this::onDisconnect);
 	}

@@ -4,6 +4,11 @@ import java.io.IOException;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This class represents an <code>Acceptor</code> that will accept sockets<br>
@@ -25,13 +30,9 @@ import java.nio.channels.SocketChannel;
  */
 public class Acceptor {
 
-	/**
-	 * <code>ConnectionFactory</code> that will create new <code>AConnection</code>
-	 * 
-	 * @see com.aionemu.commons.network.ConnectionFactory
-	 * @see com.aionemu.commons.network.AConnection
-	 */
-	private final ConnectionFactory factory;
+	private static final Logger log = LoggerFactory.getLogger(Acceptor.class);
+
+	private final ServerCfg cfg;
 
 	/**
 	 * <code>NioServer</code> that created this Acceptor.
@@ -41,19 +42,12 @@ public class Acceptor {
 	private final NioServer nioServer;
 
 	/**
-	 * Constructor that accept <code>ConnectionFactory</code> and <code>NioServer</code> as parameter<br>
-	 * 
-	 * @param factory
-	 *          <code>ConnectionFactory</code> that will be used to<br>
-	 * @param nioServer
-	 *          <code>NioServer</code> that created this Acceptor object<br>
-	 *          creating new <code>AConnection</code> instances.
-	 * @see com.aionemu.commons.network.ConnectionFactory
-	 * @see com.aionemu.commons.network.NioServer
-	 * @see com.aionemu.commons.network.AConnection
+	 * Number of open connections per IP address, only tracked if {@link ServerCfg#maxConnectionsPerIp()} is set
 	 */
-	Acceptor(ConnectionFactory factory, NioServer nioServer) {
-		this.factory = factory;
+	private final Map<String, Integer> connectionsByIp = new ConcurrentHashMap<>();
+
+	Acceptor(ServerCfg cfg, NioServer nioServer) {
+		this.cfg = cfg;
 		this.nioServer = nioServer;
 	}
 
@@ -81,21 +75,60 @@ public class Acceptor {
 		ServerSocketChannel serverSocketChannel = (ServerSocketChannel) key.channel();
 		// Accept the connection and make it non-blocking
 		SocketChannel socketChannel = serverSocketChannel.accept();
-		socketChannel.configureBlocking(false);
-		socketChannel.socket().setSoLinger(true, 10);
-		socketChannel.socket().setTcpNoDelay(true);
+		if (socketChannel == null)
+			return;
 
-		Dispatcher dispatcher = nioServer.getReadWriteDispatcher();
-		AConnection<?> con = factory.create(socketChannel, dispatcher);
-
-		if (con == null) {
+		String ip = socketChannel.socket().getInetAddress().getHostAddress();
+		if (!tryAcquireConnectionSlot(ip)) {
+			log.debug("Rejected connection from {}: limit of {} connections per IP reached", ip, cfg.maxConnectionsPerIp());
 			socketChannel.close();
 			return;
 		}
 
-		// register
-		dispatcher.register(socketChannel, SelectionKey.OP_READ, con);
+		AConnection<?> con;
+		try {
+			socketChannel.configureBlocking(false);
+			socketChannel.socket().setSoLinger(true, 10);
+			socketChannel.socket().setTcpNoDelay(true);
+
+			Dispatcher dispatcher = nioServer.getReadWriteDispatcher();
+			con = cfg.connectionFactory().create(socketChannel, dispatcher);
+
+			if (con == null) {
+				releaseConnectionSlot(ip);
+				socketChannel.close();
+				return;
+			}
+
+			if (cfg.maxConnectionsPerIp() > 0)
+				con.setOnCloseCallback(() -> releaseConnectionSlot(ip));
+			// register
+			dispatcher.register(socketChannel, SelectionKey.OP_READ, con);
+		} catch (IOException | RuntimeException e) {
+			releaseConnectionSlot(ip);
+			socketChannel.close();
+			throw e;
+		}
 		// notify initialized :)
 		con.initialized();
+	}
+
+	private boolean tryAcquireConnectionSlot(String ip) {
+		if (cfg.maxConnectionsPerIp() <= 0)
+			return true;
+		boolean[] acquired = { false };
+		connectionsByIp.compute(ip, (_, count) -> {
+			int current = count == null ? 0 : count;
+			if (current >= cfg.maxConnectionsPerIp())
+				return count;
+			acquired[0] = true;
+			return current + 1;
+		});
+		return acquired[0];
+	}
+
+	private void releaseConnectionSlot(String ip) {
+		if (cfg.maxConnectionsPerIp() > 0)
+			connectionsByIp.computeIfPresent(ip, (_, count) -> count > 1 ? count - 1 : null);
 	}
 }

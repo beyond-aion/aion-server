@@ -18,7 +18,7 @@ public class NetConnector {
 	private final static ExecutorService dcExecutor = Executors.newCachedThreadPool();
 
 	static {
-		ServerCfg aion = new ServerCfg(Config.CLIENT_SOCKET_ADDRESS, "Aion game clients", LoginConnection::new);
+		ServerCfg aion = new ServerCfg(Config.CLIENT_SOCKET_ADDRESS, "Aion game clients", LoginConnection::new, Config.MAX_CONNECTIONS_PER_IP);
 		ServerCfg gs = new ServerCfg(Config.GAMESERVER_SOCKET_ADDRESS, "game servers", GsConnection::new);
 		instance = new NioServer(Config.NIO_READ_WRITE_THREADS, aion, gs);
 	}
