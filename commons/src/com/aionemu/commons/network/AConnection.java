@@ -5,9 +5,12 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.SocketChannel;
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.Queue;
 import java.util.concurrent.Executor;
 
+import com.aionemu.commons.network.packet.BaseClientPacket;
 import com.aionemu.commons.network.packet.BaseServerPacket;
 import com.aionemu.commons.options.Assertion;
 
@@ -58,9 +61,15 @@ public abstract class AConnection<T extends BaseServerPacket> {
 	private final String ip;
 
 	/**
-	 * Used only for PacketProcessor synchronization purpose
+	 * Client packets of this connection waiting for execution. Guarded by the lock of the {@link PacketProcessor}.
 	 */
-	private boolean locked = false;
+	final Deque<BaseClientPacket<?>> pendingPackets = new ArrayDeque<>();
+
+	/**
+	 * True while this connection waits in the {@link PacketProcessor} or one of its packets is being executed. Guarded by the lock of the
+	 * {@link PacketProcessor}.
+	 */
+	boolean scheduledForProcessing;
 
 	/**
 	 * Constructor
@@ -192,24 +201,6 @@ public abstract class AConnection<T extends BaseServerPacket> {
 	 */
 	public final String getIP() {
 		return ip;
-	}
-
-	/**
-	 * Used only for PacketProcessor synchronization purpose. Return true if locked successful - if wasn't locked before.
-	 * 
-	 * @return locked
-	 */
-	boolean tryLockConnection() {
-		if (locked)
-			return false;
-		return locked = true;
-	}
-
-	/**
-	 * Used only for PacketProcessor synchronization purpose. Unlock this connection.
-	 */
-	void unlockConnection() {
-		locked = false;
 	}
 
 	/**

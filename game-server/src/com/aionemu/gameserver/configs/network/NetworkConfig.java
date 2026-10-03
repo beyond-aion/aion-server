@@ -98,6 +98,12 @@ public class NetworkConfig {
 	public static int PACKET_PROCESSOR_THREAD_SPAWN_THRESHOLD;
 
 	/**
+	 * Maximum number of packets of one client that may wait for execution. A client exceeding it gets disconnected.
+	 */
+	@Property(key = "gameserver.network.packet.processor.max_pending_per_connection", defaultValue = "500")
+	public static int PACKET_PROCESSOR_MAX_PENDING_PACKETS_PER_CONNECTION;
+
+	/**
 	 * If aion client packets unknown by the server should be logged.
 	 */
 	@Property(key = "gameserver.network.logging.unknown_packets", defaultValue = "false")

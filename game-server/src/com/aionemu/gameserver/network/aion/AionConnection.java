@@ -43,7 +43,7 @@ public class AionConnection extends AConnection<AionServerPacket> {
 
 	private static final PacketProcessor<AionConnection> packetProcessor = new PacketProcessor<>(NetworkConfig.PACKET_PROCESSOR_MIN_THREADS,
 		NetworkConfig.PACKET_PROCESSOR_MAX_THREADS, NetworkConfig.PACKET_PROCESSOR_THREAD_SPAWN_THRESHOLD,
-		NetworkConfig.PACKET_PROCESSOR_THREAD_KILL_THRESHOLD, new ExecuteWrapper(ThreadConfig.MAXIMUM_RUNTIME_IN_MILLISEC_WITHOUT_WARNING));
+		NetworkConfig.PACKET_PROCESSOR_THREAD_KILL_THRESHOLD, NetworkConfig.PACKET_PROCESSOR_MAX_PENDING_PACKETS_PER_CONNECTION, new ExecuteWrapper(ThreadConfig.MAXIMUM_RUNTIME_IN_MILLISEC_WITHOUT_WARNING));
 
 	/**
 	 * Possible states of AionConnection
@@ -186,7 +186,10 @@ public class AionConnection extends AConnection<AionServerPacket> {
 			if (!pck.read())
 				return false;
 			sendPacketInfo(pck);
-			packetProcessor.executePacket(pck);
+			if (!packetProcessor.executePacket(pck)) {
+				log.warn("{} has more than {} packets waiting for execution, disconnecting", this, NetworkConfig.PACKET_PROCESSOR_MAX_PENDING_PACKETS_PER_CONNECTION);
+				return false;
+			}
 		}
 
 		return true;
