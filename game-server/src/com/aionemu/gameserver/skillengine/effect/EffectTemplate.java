@@ -3,7 +3,7 @@ package com.aionemu.gameserver.skillengine.effect;
 import java.util.Collections;
 import java.util.List;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 
 import org.slf4j.LoggerFactory;
 

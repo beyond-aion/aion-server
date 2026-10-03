@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.model.templates.quest;
 
-import javax.xml.bind.annotation.XmlEnum;
+import jakarta.xml.bind.annotation.XmlEnum;
 
 /**
  * @author MrPoke

@@ -2,7 +2,7 @@ package com.aionemu.gameserver.dataholders.loadingutils.adapters;
 
 import java.time.LocalDateTime;
 
-import javax.xml.bind.annotation.adapters.XmlAdapter;
+import jakarta.xml.bind.annotation.adapters.XmlAdapter;
 
 /**
  * @author Neon

@@ -28,7 +28,6 @@ import org.xml.sax.helpers.DefaultHandler;
 import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.xml.XmlUtil;
-import com.sun.xml.bind.v2.util.ByteArrayOutputStreamEx;
 
 /**
  * <p>
@@ -152,7 +151,7 @@ public class XmlMerger {
 		Metadata metadata = new Metadata();
 
 		try (FileReader fileReader = new FileReader(sourceFile)) {
-			ByteArrayOutputStreamEx outputStream = new ByteArrayOutputStreamEx(100 * 1024 * 1024);
+			BufferExposingOutputStream outputStream = new BufferExposingOutputStream(100 * 1024 * 1024);
 			writer = outputFactory.createXMLStreamWriter(new BufferedWriter(new OutputStreamWriter(outputStream)));
 			reader = inputFactory.createXMLStreamReader(fileReader);
 
@@ -479,6 +478,17 @@ public class XmlMerger {
 			} catch (InterruptedException | ExecutionException e) {
 				return false;
 			}
+		}
+	}
+
+	private static class BufferExposingOutputStream extends ByteArrayOutputStream {
+
+		BufferExposingOutputStream(int size) {
+			super(size);
+		}
+
+		byte[] getBuffer() {
+			return buf;
 		}
 	}
 }
