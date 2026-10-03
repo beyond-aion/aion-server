@@ -255,6 +255,16 @@ public class AionConnection extends AConnection<AionServerPacket> {
 	}
 
 	@Override
+	protected int getMaxSendQueueSize() {
+		return NetworkConfig.MAX_PENDING_SERVER_PACKETS;
+	}
+
+	@Override
+	protected long getMaxSendStallMillis() {
+		return NetworkConfig.MAX_SEND_STALL_SECONDS * 1000L;
+	}
+
+	@Override
 	protected final void onServerClose() {
 		close();
 	}

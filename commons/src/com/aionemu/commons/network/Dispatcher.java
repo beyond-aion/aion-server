@@ -241,6 +241,8 @@ public abstract class Dispatcher extends Thread {
 				closeConnectionImpl(con);
 				return;
 			}
+			if (numWrite > 0)
+				con.onDataWritten();
 
 			if (numWrite == 0) {
 				log.info("Write " + numWrite + " ip: " + con.getIP());
@@ -268,6 +270,8 @@ public abstract class Dispatcher extends Thread {
 				closeConnectionImpl(con);
 				return;
 			}
+			if (numWrite > 0)
+				con.onDataWritten();
 
 			if (numWrite == 0) {
 				log.info("Write " + numWrite + " ip: " + con.getIP());

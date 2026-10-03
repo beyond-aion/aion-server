@@ -104,6 +104,18 @@ public class NetworkConfig {
 	public static int PACKET_PROCESSOR_MAX_PENDING_PACKETS_PER_CONNECTION;
 
 	/**
+	 * Maximum number of server packets that may wait to be sent to one client. A client exceeding it gets disconnected.
+	 */
+	@Property(key = "gameserver.network.client.max_pending_server_packets", defaultValue = "20000")
+	public static int MAX_PENDING_SERVER_PACKETS;
+
+	/**
+	 * Time in seconds a client may not receive any data while server packets are waiting to be sent to it, before it gets disconnected.
+	 */
+	@Property(key = "gameserver.network.client.max_send_stall_seconds", defaultValue = "60")
+	public static int MAX_SEND_STALL_SECONDS;
+
+	/**
 	 * If aion client packets unknown by the server should be logged.
 	 */
 	@Property(key = "gameserver.network.logging.unknown_packets", defaultValue = "false")
