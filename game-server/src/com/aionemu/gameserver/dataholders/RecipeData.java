@@ -2,8 +2,8 @@ package com.aionemu.gameserver.dataholders;
 
 import java.util.*;
 
-import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.Unmarshaller;
+import jakarta.xml.bind.annotation.*;
 
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.templates.recipe.RecipeTemplate;

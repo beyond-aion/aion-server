@@ -17,6 +17,7 @@ import javax.xml.parsers.SAXParserFactory;
 import javax.xml.stream.*;
 import javax.xml.stream.events.XMLEvent;
 
+import org.glassfish.jaxb.runtime.v2.util.ByteArrayOutputStreamEx;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.Attributes;
@@ -28,7 +29,6 @@ import org.xml.sax.helpers.DefaultHandler;
 import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.xml.XmlUtil;
-import com.sun.xml.bind.v2.util.ByteArrayOutputStreamEx;
 
 /**
  * <p>

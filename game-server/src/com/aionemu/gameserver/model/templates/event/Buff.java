@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 
-import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.Unmarshaller;
+import jakarta.xml.bind.annotation.*;
 
 import org.slf4j.LoggerFactory;
 
