@@ -165,6 +165,16 @@ public class LoginConnection extends AConnection<AionServerPacket> {
 	}
 
 	@Override
+	protected int getMaxSendQueueSize() {
+		return 100;
+	}
+
+	@Override
+	protected long getMaxSendStallMillis() {
+		return 60_000;
+	}
+
+	@Override
 	protected final void onServerClose() {
 		// TODO mb some packet should be send to client before closing?
 		close( /* packet */);

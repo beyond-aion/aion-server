@@ -10,6 +10,9 @@ import java.util.Deque;
 import java.util.Queue;
 import java.util.concurrent.Executor;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.commons.network.packet.BaseClientPacket;
 import com.aionemu.commons.network.packet.BaseServerPacket;
 import com.aionemu.commons.options.Assertion;
@@ -21,6 +24,8 @@ import com.aionemu.commons.options.Assertion;
  * @author -Nemesiss-
  */
 public abstract class AConnection<T extends BaseServerPacket> {
+
+	private static final Logger log = LoggerFactory.getLogger(AConnection.class);
 
 	/**
 	 * SocketChannel representing this connection
@@ -59,6 +64,11 @@ public abstract class AConnection<T extends BaseServerPacket> {
 	 * Caching ip address to make sure that {@link #getIP()} method works even after disconnection
 	 */
 	private final String ip;
+
+	/**
+	 * Time when data was last written to the socket or the send queue became non-empty
+	 */
+	private volatile long lastWriteProgressMillis;
 
 	/**
 	 * Client packets of this connection waiting for execution. Guarded by the lock of the {@link PacketProcessor}.
@@ -115,13 +125,57 @@ public abstract class AConnection<T extends BaseServerPacket> {
 				return;
 
 			if (isConnected()) {
-				getSendMsgQueue().add(serverPacket);
+				Queue<T> sendMsgQueue = getSendMsgQueue();
+				if (sendMsgQueue.isEmpty()) {
+					lastWriteProgressMillis = System.currentTimeMillis();
+				} else if (isSendQueueStuck(sendMsgQueue.size())) {
+					sendMsgQueue.clear();
+					close();
+					return;
+				}
+				sendMsgQueue.add(serverPacket);
 				key.interestOps(key.interestOps() | SelectionKey.OP_WRITE);
 				key.selector().wakeup();
 			} else {
 				close();
 			}
 		}
+	}
+
+	private boolean isSendQueueStuck(int queuedPackets) {
+		if (queuedPackets >= getMaxSendQueueSize()) {
+			log.warn("{} has {} server packets waiting to be sent, disconnecting", this, queuedPackets);
+			return true;
+		}
+		long millisWithoutProgress = System.currentTimeMillis() - lastWriteProgressMillis;
+		if (millisWithoutProgress > getMaxSendStallMillis()) {
+			log.warn("{} hasn't received any data for {} ms while {} server packets are waiting to be sent, disconnecting", this, millisWithoutProgress,
+				queuedPackets);
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * @return The maximum number of server packets that may wait to be sent before the connection gets closed.
+	 */
+	protected int getMaxSendQueueSize() {
+		return Integer.MAX_VALUE;
+	}
+
+	/**
+	 * @return The maximum time in milliseconds the remote side may not receive any data while server packets are waiting to be sent, before the
+	 *         connection gets closed.
+	 */
+	protected long getMaxSendStallMillis() {
+		return Long.MAX_VALUE;
+	}
+
+	/**
+	 * Called by the Dispatcher after data was written to the socket.
+	 */
+	final void onDataWritten() {
+		lastWriteProgressMillis = System.currentTimeMillis();
 	}
 
 	/**
