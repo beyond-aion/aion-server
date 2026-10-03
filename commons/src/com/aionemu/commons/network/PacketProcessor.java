@@ -1,10 +1,10 @@
 package com.aionemu.commons.network;
 
 import java.time.Duration;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.Deque;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.concurrent.Executor;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
@@ -17,18 +17,17 @@ import com.aionemu.commons.network.packet.BaseClientPacket;
 
 /**
  * Packet Processor responsible for executing packets in correct order with respecting rules: - 1 packet / client at one time. - execute packets in
- * received order.
- * 
+ * received order.<br>
+ * Every connection keeps its own queue of pending packets, and connections with pending packets take turns, so a client flooding packets neither
+ * slows down the selection of other clients' packets nor gets more than its share of the working threads.
+ *
  * @author -Nemesiss-
  * @param <T>
  *          AConnection - owner of client packets.
  */
 public class PacketProcessor<T extends AConnection<?>> {
 
-	/**
-	 * Logger for PacketProcessor
-	 */
-	private static final Logger log = LoggerFactory.getLogger(PacketProcessor.class.getName());
+	private static final Logger log = LoggerFactory.getLogger(PacketProcessor.class);
 
 	/**
 	 * When one working thread should be created.
@@ -41,38 +40,33 @@ public class PacketProcessor<T extends AConnection<?>> {
 	private final int threadKillThreshold;
 
 	/**
-	 * Lock for synchronization.
+	 * Max. number of packets of a single connection that may wait for execution.
 	 */
+	private final int maxPendingPacketsPerConnection;
+
 	private final Lock lock = new ReentrantLock();
 
-	/**
-	 * Not Empty condition.
-	 */
 	private final Condition notEmpty = lock.newCondition();
 
 	/**
-	 * Queue of packet that will be executed in correct order.
+	 * Connections that have pending packets and none of them is being executed right now.
 	 */
-	private final List<BaseClientPacket<T>> packets = new LinkedList<>();
+	private final Deque<AConnection<?>> readyConnections = new ArrayDeque<>();
+
+	/**
+	 * Number of packets of all connections waiting for execution.
+	 */
+	private int pendingPacketCount;
 
 	/**
 	 * Working threads.
 	 */
 	private final List<Thread> threads = new ArrayList<>();
 
-	/**
-	 * minimum number of working Threads
-	 */
 	private final int minThreads;
 
-	/**
-	 * maximum number of working Threads
-	 */
 	private final int maxThreads;
 
-	/**
-	 * Executor that will be used to execute packets
-	 */
 	private final Executor executor;
 
 	private static class DummyExecutor implements Executor {
@@ -83,50 +77,23 @@ public class PacketProcessor<T extends AConnection<?>> {
 		}
 	}
 
-	/**
-	 * Create and start PacketProcessor responsible for executing packets.
-	 * 
-	 * @param minThreads
-	 *          - minimum number of working Threads.
-	 * @param maxThreads
-	 *          - maximum number of working Threads.
-	 * @param threadSpawnThreshold
-	 *          - if not yet executed packets count exceeds given threshold then new thread would be spawned. (if current thread count is smaller than
-	 *          maxThreads).
-	 * @param threadKillThreshold
-	 *          - if not yet executed packets count went below given threshold then one of worker thread will be killed (if current thread count is
-	 *          bigger than minThreads).
-	 */
-	public PacketProcessor(int minThreads, int maxThreads, int threadSpawnThreshold, int threadKillThreshold) {
-		this(minThreads, maxThreads, threadSpawnThreshold, threadKillThreshold, new DummyExecutor());
+	public PacketProcessor(int minThreads, int maxThreads, int threadSpawnThreshold, int threadKillThreshold, int maxPendingPacketsPerConnection) {
+		this(minThreads, maxThreads, threadSpawnThreshold, threadKillThreshold, maxPendingPacketsPerConnection, new DummyExecutor());
 	}
 
-	/**
-	 * Create and start PacketProcessor responsible for executing packets.
-	 * 
-	 * @param minThreads
-	 *          - minimum number of working Threads.
-	 * @param maxThreads
-	 *          - maximum number of working Threads.
-	 * @param threadSpawnThreshold
-	 *          - if not yet executed packets count exceeds given threshold then new thread would be spawned. (if current thread count is smaller than
-	 *          maxThreads).
-	 * @param threadKillThreshold
-	 *          - if not yet executed packets count went below given threshold then one of worker thread will be killed (if current thread count is
-	 *          bigger than minThreads).
-	 * @param executor
-	 *          - Executor that will be used to execute task (should be used only as decorator).
-	 */
-	public PacketProcessor(int minThreads, int maxThreads, int threadSpawnThreshold, int threadKillThreshold, Executor executor) {
+	public PacketProcessor(int minThreads, int maxThreads, int threadSpawnThreshold, int threadKillThreshold, int maxPendingPacketsPerConnection,
+		Executor executor) {
 		checkArgument(minThreads > 0, "Min Threads must be positive");
 		checkArgument(maxThreads >= minThreads, "Max Threads must be >= Min Threads");
 		checkArgument(threadSpawnThreshold > 0, "Thread Spawn Threshold must be positive");
 		checkArgument(threadKillThreshold > 0, "Thread Kill Threshold must be positive");
+		checkArgument(maxPendingPacketsPerConnection > 0, "Max pending packets per connection must be positive");
 
 		this.minThreads = minThreads;
 		this.maxThreads = maxThreads;
 		this.threadSpawnThreshold = threadSpawnThreshold;
 		this.threadKillThreshold = threadKillThreshold;
+		this.maxPendingPacketsPerConnection = maxPendingPacketsPerConnection;
 		this.executor = executor;
 
 		if (minThreads != maxThreads)
@@ -141,24 +108,16 @@ public class PacketProcessor<T extends AConnection<?>> {
 			throw new IllegalArgumentException(errorMessage);
 	}
 
-	/**
-	 * Start Checker Thread. Checker is responsible for increasing / reducing PacketProcessor Thread count based on Runtime needs.
-	 */
 	private void startCheckerThread() {
 		Thread.ofPlatform().name("PacketProcessor:Checker").start(new CheckerTask());
 	}
 
-	/**
-	 * Create and start new PacketProcessor Thread, but only if there wont be more working Threads than "maxThreads"
-	 * 
-	 * @return true if new Thread was created.
-	 */
 	private boolean newThread() {
 		if (threads.size() >= maxThreads)
 			return false;
 
 		String name = "PacketProcessor:" + threads.size();
-		log.debug("Creating new PacketProcessor Thread: " + name);
+		log.debug("Creating new PacketProcessor Thread: {}", name);
 
 		Thread t = Thread.ofPlatform().name(name).unstarted(new PacketProcessorTask());
 		threads.add(t);
@@ -173,46 +132,52 @@ public class PacketProcessor<T extends AConnection<?>> {
 	private void killThread() {
 		if (threads.size() > minThreads) {
 			Thread t = threads.removeLast();
-			log.debug("Killing PacketProcessor Thread: " + t.getName());
+			log.debug("Killing PacketProcessor Thread: {}", t.getName());
 			t.interrupt();
 		}
 	}
 
 	/**
-	 * Add packet to execution queue and execute it as soon as possible on another Thread.
-	 * 
-	 * @param packet
-	 *          that will be executed.
+	 * Queues the packet for execution after all previously received packets of its connection.
+	 *
+	 * @return False if the connection already has the maximum number of packets waiting for execution. The packet is dropped in that case and the
+	 *         connection should be closed.
 	 */
-	public final void executePacket(BaseClientPacket<T> packet) {
+	public final boolean executePacket(BaseClientPacket<T> packet) {
+		AConnection<?> connection = packet.getConnection();
 		lock.lock();
 		try {
-			packets.add(packet);
-			notEmpty.signal();
+			if (connection.pendingPackets.size() >= maxPendingPacketsPerConnection)
+				return false;
+			connection.pendingPackets.add(packet);
+			pendingPacketCount++;
+			if (!connection.scheduledForProcessing) {
+				connection.scheduledForProcessing = true;
+				readyConnections.add(connection);
+				notEmpty.signal();
+			}
+			return true;
 		} finally {
 			lock.unlock();
 		}
 	}
 
 	/**
-	 * Return first packet available for execution with respecting rules: - 1 packet / client at one time. - execute packets in received order.
-	 * 
-	 * @return first available BaseClientPacket
+	 * Takes the next packet of the connection that waited the longest. The connection stays scheduled until {@link #finishPacket} was called.
 	 */
-	private BaseClientPacket<T> getFirstAvailable() {
-		for (;;) {
-			while (packets.isEmpty())
-				notEmpty.awaitUninterruptibly();
-
-			ListIterator<BaseClientPacket<T>> it = packets.listIterator();
-			while (it.hasNext()) {
-				BaseClientPacket<T> packet = it.next();
-				if (packet.getConnection().tryLockConnection()) {
-					it.remove();
-					return packet;
-				}
-			}
+	private BaseClientPacket<?> takeNextPacket() {
+		while (readyConnections.isEmpty())
 			notEmpty.awaitUninterruptibly();
+		pendingPacketCount--;
+		return readyConnections.poll().pendingPackets.poll();
+	}
+
+	private void finishPacket(AConnection<?> connection) {
+		if (connection.pendingPackets.isEmpty()) {
+			connection.scheduledForProcessing = false;
+		} else {
+			readyConnections.add(connection);
+			notEmpty.signal();
 		}
 	}
 
@@ -225,18 +190,18 @@ public class PacketProcessor<T extends AConnection<?>> {
 
 		@Override
 		public void run() {
-			BaseClientPacket<T> packet = null;
+			BaseClientPacket<?> packet = null;
 			for (;;) {
 				lock.lock();
 				try {
 					if (packet != null)
-						packet.getConnection().unlockConnection();
+						finishPacket(packet.getConnection());
 
 					/* thread killed */
 					if (Thread.interrupted())
 						return;
 
-					packet = getFirstAvailable();
+					packet = takeNextPacket();
 				} finally {
 					lock.unlock();
 				}
@@ -246,9 +211,7 @@ public class PacketProcessor<T extends AConnection<?>> {
 	}
 
 	/**
-	 * Checking if PacketProcessor is busy or idle and increasing / reducing numbers of threads.
-	 * 
-	 * @author -Nemesiss-
+	 * Checking if PacketProcessor is busy or idle and increasing / decreasing numbers of threads.
 	 */
 	private final class CheckerTask implements Runnable {
 
@@ -264,15 +227,21 @@ public class PacketProcessor<T extends AConnection<?>> {
 					return;
 				}
 
-				int packetsWaitingForExecution = packets.size();
+				int packetsWaitingForExecution;
+				lock.lock();
+				try {
+					packetsWaitingForExecution = pendingPacketCount;
+				} finally {
+					lock.unlock();
+				}
 				if (packetsWaitingForExecution <= previousPacketCount && packetsWaitingForExecution <= threadKillThreshold) {
 					// reduce thread count by one
 					killThread();
 				} else if (packetsWaitingForExecution > threadSpawnThreshold) {
 					// too small amount of threads
 					if (!newThread() && packetsWaitingForExecution >= threadSpawnThreshold * 3)
-						log.warn("Lag detected! [" + packetsWaitingForExecution
-							+ " client packets are waiting for execution]. You should consider increasing PacketProcessor maxThreads or hardware upgrade.");
+						log.warn("Lag detected! [{} client packets are waiting for execution]. You should consider increasing PacketProcessor maxThreads or hardware upgrade.",
+							packetsWaitingForExecution);
 				}
 				previousPacketCount = packetsWaitingForExecution;
 			}

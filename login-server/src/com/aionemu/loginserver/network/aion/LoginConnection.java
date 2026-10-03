@@ -39,7 +39,8 @@ public class LoginConnection extends AConnection<AionServerPacket> {
 	/**
 	 * PacketProcessor for executing packets.
 	 */
-	private final static PacketProcessor<LoginConnection> processor = new PacketProcessor<>(1, 8, 50, 3);
+	private static final int MAX_PENDING_PACKETS = 50;
+	private final static PacketProcessor<LoginConnection> processor = new PacketProcessor<>(1, 8, 50, 3, MAX_PENDING_PACKETS);
 	/**
 	 * Server Packet "to send" Queue
 	 */
@@ -126,8 +127,10 @@ public class LoginConnection extends AConnection<AionServerPacket> {
 		AionClientPacket pck = AionPacketHandlerFactory.handle(data, this);
 
 		// Execute packet only if packet exists and read was ok.
-		if (pck != null && pck.read())
-			processor.executePacket(pck);
+		if (pck != null && pck.read() && !processor.executePacket(pck)) {
+			log.warn("{} has more than {} packets waiting for execution, disconnecting", this, MAX_PENDING_PACKETS);
+			return false;
+		}
 
 		return true;
 	}
