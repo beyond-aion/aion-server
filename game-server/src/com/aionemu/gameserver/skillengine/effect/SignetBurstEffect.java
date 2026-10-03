@@ -58,10 +58,6 @@ public class SignetBurstEffect extends DamageEffect {
 		}
 	}
 
-	public int getSignetlvl() {
-		return signetlvl;
-	}
-
 	public String getSignet() {
 		return signet;
 	}
