@@ -31,7 +31,6 @@ import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.BindPointPosition;
 import com.aionemu.gameserver.model.gameobjects.player.FriendList.Status;
-import com.aionemu.gameserver.model.gameobjects.player.Macros;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 import com.aionemu.gameserver.model.house.House;
@@ -312,7 +311,7 @@ public final class PlayerEnterWorldService {
 		MailService.onPlayerLogin(player);
 		HousingBidService.getInstance().onPlayerLogin(player); // must ensure player mailbox is initialized first
 		AtreianPassportService.getInstance().onLogin(player);
-		sendMacroList(client, player);
+		PlayerService.sendMacroList(player);
 		client.sendPacket(new SM_RECIPE_LIST(player.getRecipeList().getRecipeList()));
 		BrokerService.getInstance().onPlayerLogin(player);
 		HousingService.getInstance().onPlayerLogin(player); // must ensure player mailbox is initialized first
@@ -484,12 +483,6 @@ public final class PlayerEnterWorldService {
 			client.sendPacket(new SM_WAREHOUSE_INFO(null, storageType, 0, false, player));
 			client.sendPacket(new SM_WAREHOUSE_INFO(null, i, 0, false, player));
 		}
-	}
-
-	private static void sendMacroList(AionConnection client, Player player) {
-		SplitList<Macros.Macro> macroSplitList = new DynamicServerPacketBodySplitList<>(player.getMacros().getAll(), true, SM_MACRO_LIST.STATIC_BODY_SIZE,
-			SM_MACRO_LIST.DYNAMIC_BODY_PART_SIZE_CALCULATOR);
-		macroSplitList.forEach(part -> PacketSendUtility.sendPacket(player, new SM_MACRO_LIST(player.getObjectId(), part, part.isFirst())));
 	}
 }
 
