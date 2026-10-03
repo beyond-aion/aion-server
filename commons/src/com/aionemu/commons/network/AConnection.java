@@ -201,13 +201,23 @@ public abstract class AConnection<T extends BaseServerPacket> {
 	}
 
 	/**
-	 * Called by the Dispatcher Thread periodically to close connections which didn't authenticate in time.
+	 * Called by the Dispatcher Thread periodically to close connections which didn't authenticate in time or stopped receiving data.
 	 */
-	final void closeIfAuthTimedOut(long nowMillis) {
-		long authTimeoutMillis = getAuthTimeoutMillis();
-		if (authTimeoutMillis > 0 && nowMillis - connectedAtMillis > authTimeoutMillis && !isAuthenticated() && !isPendingClose() && !closed) {
-			log.info("{} didn't authenticate within {} ms, disconnecting", this, authTimeoutMillis);
-			close();
+	final void closeIfTimedOut(long nowMillis) {
+		synchronized (guard) {
+			if (pendingCloseUntilMillis != 0 || closed)
+				return;
+			long authTimeoutMillis = getAuthTimeoutMillis();
+			if (authTimeoutMillis > 0 && nowMillis - connectedAtMillis > authTimeoutMillis && !isAuthenticated()) {
+				log.info("{} didn't authenticate within {} ms, disconnecting", this, authTimeoutMillis);
+				close();
+				return;
+			}
+			Queue<T> sendMsgQueue = getSendMsgQueue();
+			if (!sendMsgQueue.isEmpty() && isSendQueueStuck(sendMsgQueue.size())) {
+				sendMsgQueue.clear();
+				close();
+			}
 		}
 	}
 
