@@ -55,6 +55,12 @@ public class Config {
 	public static int NIO_READ_WRITE_THREADS;
 
 	/**
+	 * Time in seconds a client has to log in after connecting, before it gets disconnected.
+	 */
+	@Property(key = "loginserver.network.client.auth_timeout_seconds", defaultValue = "60")
+	public static int CLIENT_AUTH_TIMEOUT_SECONDS;
+
+	/**
 	 * Should server automatically create accounts for users or not?
 	 */
 	@Property(key = "loginserver.accounts.autocreate", defaultValue = "true")

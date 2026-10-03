@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.commons.network.AConnection;
 import com.aionemu.commons.network.Dispatcher;
 import com.aionemu.commons.network.PacketProcessor;
+import com.aionemu.loginserver.configs.Config;
 import com.aionemu.loginserver.controller.AccountController;
 import com.aionemu.loginserver.controller.AccountTimeController;
 import com.aionemu.loginserver.model.Account;
@@ -162,6 +163,16 @@ public class LoginConnection extends AConnection<AionServerPacket> {
 			AccountController.removeAccountOnLS(account);
 			AccountTimeController.updateOnLogout(account);
 		}
+	}
+
+	@Override
+	protected boolean isAuthenticated() {
+		return state == State.AUTHED_LOGIN;
+	}
+
+	@Override
+	protected long getAuthTimeoutMillis() {
+		return Config.CLIENT_AUTH_TIMEOUT_SECONDS * 1000L;
 	}
 
 	@Override

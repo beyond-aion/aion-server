@@ -66,6 +66,11 @@ public abstract class AConnection<T extends BaseServerPacket> {
 	private final String ip;
 
 	/**
+	 * Time when this connection was established
+	 */
+	private final long connectedAtMillis = System.currentTimeMillis();
+
+	/**
 	 * Time when data was last written to the socket or the send queue became non-empty
 	 */
 	private volatile long lastWriteProgressMillis;
@@ -169,6 +174,42 @@ public abstract class AConnection<T extends BaseServerPacket> {
 	 */
 	protected long getMaxSendStallMillis() {
 		return Long.MAX_VALUE;
+	}
+
+	/**
+	 * @return True if the remote side has authenticated itself. Connections that didn't authenticate within {@link #getAuthTimeoutMillis()} get
+	 *         closed.
+	 */
+	protected boolean isAuthenticated() {
+		return true;
+	}
+
+	/**
+	 * @return The time in milliseconds the remote side has to authenticate itself, or 0 for no limit.
+	 */
+	protected long getAuthTimeoutMillis() {
+		return 0;
+	}
+
+	/**
+	 * Called by the Dispatcher Thread periodically to close connections which didn't authenticate in time or stopped receiving data.
+	 */
+	final void closeIfTimedOut(long nowMillis) {
+		synchronized (guard) {
+			if (pendingCloseUntilMillis != 0 || closed)
+				return;
+			long authTimeoutMillis = getAuthTimeoutMillis();
+			if (authTimeoutMillis > 0 && nowMillis - connectedAtMillis > authTimeoutMillis && !isAuthenticated()) {
+				log.info("{} didn't authenticate within {} ms, disconnecting", this, authTimeoutMillis);
+				close();
+				return;
+			}
+			Queue<T> sendMsgQueue = getSendMsgQueue();
+			if (!sendMsgQueue.isEmpty() && isSendQueueStuck(sendMsgQueue.size())) {
+				sendMsgQueue.clear();
+				close();
+			}
+		}
 	}
 
 	/**
