@@ -22,14 +22,14 @@ public class Invis extends AdminCommand {
 
 	@Override
 	public void execute(Player player, String... params) {
-		if (!player.isInVisualState(CreatureVisualState.HIDE20)) {
+		if (!player.isInVisualState(CreatureVisualState.GM_INVISIBLE)) {
 			player.getEffectController().setAbnormal(AbnormalState.HIDE);
-			player.setVisualState(CreatureVisualState.HIDE20);
+			player.setVisualState(CreatureVisualState.GM_INVISIBLE);
 			player.getController().onHide();
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_EFFECT_INVISIBLE_BEGIN());
 		} else {
 			player.getEffectController().unsetAbnormal(AbnormalState.HIDE);
-			player.unsetVisualState(CreatureVisualState.HIDE20);
+			player.unsetVisualState(CreatureVisualState.GM_INVISIBLE);
 			player.getController().onHideEnd();
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_EFFECT_INVISIBLE_END());
 		}

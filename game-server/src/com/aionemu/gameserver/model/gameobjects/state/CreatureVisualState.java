@@ -12,7 +12,8 @@ public enum CreatureVisualState {
 	HIDE10(10), // Hide from Npc?
 	HIDE13(13), // Hide from Npc?
 	HIDE20(20), // Hide from Npc?
-	BLINKING(64); // Blinking when entering to zone
+	BLINKING(64), // Blinking when entering to zone
+	GM_INVISIBLE(128);
 
 	private int id;
 

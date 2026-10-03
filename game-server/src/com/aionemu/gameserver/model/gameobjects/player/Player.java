@@ -930,20 +930,8 @@ public class Player extends Creature {
 	}
 
 	@Override
-	public boolean canSee(VisibleObject object) {
-		if (super.canSee(object))
-			return true;
-
-		if (object instanceof Creature creature) {
-			if (creature.getMaster() instanceof Player player) { // player or a summon's master
-				if (isInSameTeam(player) && !isDueling(player))
-					return true;
-			}
-			// invisible kisks can be seen from players of the same race
-			return object instanceof Kisk && ((Kisk) object).getOwnerRace() == getRace();
-		}
-
-		return false;
+	public boolean ignoresInvisibilityOf(Creature target) {
+		return super.ignoresInvisibilityOf(target) || target instanceof Kisk kisk && kisk.isOwnerOrTeamMember(this);
 	}
 
 	@Override

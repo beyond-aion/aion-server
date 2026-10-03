@@ -31,6 +31,7 @@ public class PlayerGroupLeavedEvent extends PlayerLeavedEvent<PlayerGroupMember,
 	@Override
 	public void handleEvent() {
 		team.removeMember(leavedPlayer.getObjectId());
+		leavedPlayer.updateKnownlist();
 
 		if (leavedPlayer.isMentor()) {
 			team.onEvent(new PlayerGroupStopMentoringEvent(team, leavedPlayer));
@@ -38,6 +39,8 @@ public class PlayerGroupLeavedEvent extends PlayerLeavedEvent<PlayerGroupMember,
 
 		team.forEach(member -> {
 			PacketSendUtility.sendPacket(member, new SM_GROUP_MEMBER_INFO(team, leavedPlayer, GroupEvent.LEAVE));
+			if (member.getKnownList().knows(leavedPlayer))
+				member.updateKnownlist();
 
 			switch (reason) {
 				case LEAVE -> PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_PARTY_HE_LEAVE_PARTY(leavedPlayer.getName()));
