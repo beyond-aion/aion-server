@@ -8,7 +8,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.network.AConnection;
 import com.aionemu.commons.utils.NetworkUtils;
 
 /**
@@ -16,9 +15,9 @@ import com.aionemu.commons.utils.NetworkUtils;
  * 
  * @author -Nemesiss-
  * @param <T>
- *          AConnection - owner of this client packet.
+ *          connection - owner of this client packet.
  */
-public abstract class BaseClientPacket<T extends AConnection<?>> extends BasePacket implements Runnable {
+public abstract class BaseClientPacket<T> extends BasePacket implements Runnable {
 
 	private static final Logger log = LoggerFactory.getLogger(BaseClientPacket.class);
 	private static final Set<Integer> partiallyReadPackets = ConcurrentHashMap.newKeySet();

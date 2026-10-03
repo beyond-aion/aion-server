@@ -1,11 +1,10 @@
 package com.aionemu.chatserver.network.aion.clientpackets;
 
+import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 
-import org.jboss.netty.buffer.ChannelBuffer;
-
 import com.aionemu.chatserver.network.aion.AbstractClientPacket;
-import com.aionemu.chatserver.network.netty.handler.ClientChannelHandler;
+import com.aionemu.chatserver.network.aion.AionConnection;
 import com.aionemu.chatserver.service.ChatService;
 
 /**
@@ -19,16 +18,16 @@ public class CM_PLAYER_AUTH extends AbstractClientPacket {
 	private String identifierSeparator;
 	private String accountName;
 
-	public CM_PLAYER_AUTH(ChannelBuffer channelBuffer, ClientChannelHandler clientChannelHandler, byte opCode) {
-		super(channelBuffer, clientChannelHandler, opCode);
+	public CM_PLAYER_AUTH(ByteBuffer buf, AionConnection connection, int opCode) {
+		super(buf, connection, opCode);
 	}
 
 	@Override
 	protected void readImpl() {
 		identifierSeparator = new String(readB(2), StandardCharsets.UTF_16LE); // @
-		readC(); // 0
+		readUC(); // 0
 		readD(); // 1
-		int gameNameLength = readH() * 2;
+		int gameNameLength = readUH() * 2;
 		readB(gameNameLength); // AION
 		readD(); // 27
 		readD(); // 1 or 3
@@ -37,11 +36,11 @@ public class CM_PLAYER_AUTH extends AbstractClientPacket {
 		readD(); // 0
 		readD(); // 0
 		readD(); // 0
-		int length = readH() * 2;
+		int length = readUH() * 2;
 		identifier = readB(length);
-		int accountNameLength = readH() * 2;
+		int accountNameLength = readUH() * 2;
 		accountName = new String(readB(accountNameLength), StandardCharsets.UTF_16LE);
-		int tokenLength = readH();
+		int tokenLength = readUH();
 		token = readB(tokenLength);
 	}
 
@@ -49,6 +48,6 @@ public class CM_PLAYER_AUTH extends AbstractClientPacket {
 	protected void runImpl() {
 		String nameIdentifier = new String(identifier, StandardCharsets.UTF_16LE); // Name@identifier
 		String charName = nameIdentifier.substring(0, nameIdentifier.lastIndexOf(identifierSeparator));
-		ChatService.getInstance().registerPlayerConnection(playerId, token, identifier, charName, accountName, clientChannelHandler);
+		ChatService.getInstance().registerPlayerConnection(playerId, token, identifier, charName, accountName, getConnection());
 	}
 }

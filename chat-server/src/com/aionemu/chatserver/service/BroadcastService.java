@@ -39,6 +39,6 @@ public class BroadcastService {
 	}
 
 	public void sendMessage(ChatClient chatClient, Message message) {
-		chatClient.getChannelHandler().sendPacket(new SM_CHANNEL_MESSAGE(message));
+		chatClient.getConnection().sendPacket(new SM_CHANNEL_MESSAGE(message));
 	}
 }

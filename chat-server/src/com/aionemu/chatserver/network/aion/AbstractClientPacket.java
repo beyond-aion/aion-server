@@ -1,19 +1,30 @@
 package com.aionemu.chatserver.network.aion;
 
-import org.jboss.netty.buffer.ChannelBuffer;
+import java.nio.ByteBuffer;
 
-import com.aionemu.chatserver.common.netty.BaseClientPacket;
-import com.aionemu.chatserver.network.netty.handler.ClientChannelHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.aionemu.commons.network.packet.BaseClientPacket;
 
 /**
  * @author ATracer
  */
-public abstract class AbstractClientPacket extends BaseClientPacket {
+public abstract class AbstractClientPacket extends BaseClientPacket<AionConnection> {
 
-	protected final ClientChannelHandler clientChannelHandler;
+	private static final Logger log = LoggerFactory.getLogger(AbstractClientPacket.class);
 
-	public AbstractClientPacket(ChannelBuffer channelBuffer, ClientChannelHandler clientChannelHandler, byte opCode) {
-		super(channelBuffer, opCode);
-		this.clientChannelHandler = clientChannelHandler;
+	public AbstractClientPacket(ByteBuffer buf, AionConnection connection, int opCode) {
+		super(buf, opCode);
+		setConnection(connection);
+	}
+
+	@Override
+	public final void run() {
+		try {
+			runImpl();
+		} catch (Exception e) {
+			log.error("Running failed for packet {} of {}", this, getConnection(), e);
+		}
 	}
 }

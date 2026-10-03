@@ -187,7 +187,7 @@ public class PacketProcessor<T extends AConnection<?>> {
 				lock.lock();
 				try {
 					if (packet != null)
-						finishPacket(packet.getConnection());
+						finishPacket((AConnection<?>) packet.getConnection());
 
 					/* thread killed */
 					if (Thread.interrupted())
