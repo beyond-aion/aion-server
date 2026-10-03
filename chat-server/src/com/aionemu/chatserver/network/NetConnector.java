@@ -19,8 +19,13 @@ import io.netty.channel.Channel;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
+import io.netty.channel.IoHandlerFactory;
 import io.netty.channel.MultiThreadIoEventLoopGroup;
+import io.netty.channel.ServerChannel;
 import io.netty.channel.WriteBufferWaterMark;
+import io.netty.channel.epoll.Epoll;
+import io.netty.channel.epoll.EpollIoHandler;
+import io.netty.channel.epoll.EpollServerSocketChannel;
 import io.netty.channel.group.ChannelGroup;
 import io.netty.channel.group.DefaultChannelGroup;
 import io.netty.channel.nio.NioIoHandler;
@@ -39,11 +44,22 @@ public class NetConnector {
 	private static EventLoopGroup acceptorGroup;
 	private static EventLoopGroup ioGroup;
 	private static EventExecutorGroup packetExecutors;
+	private static Class<? extends ServerChannel> serverChannelClass;
 
 	public static void connect() {
-		acceptorGroup = new MultiThreadIoEventLoopGroup(1, new DefaultThreadFactory("Acceptor"), NioIoHandler.newFactory());
+		IoHandlerFactory ioHandlerFactory;
+		if (Epoll.isAvailable()) {
+			ioHandlerFactory = EpollIoHandler.newFactory();
+			serverChannelClass = EpollServerSocketChannel.class;
+			log.info("Using the epoll transport");
+		} else {
+			ioHandlerFactory = NioIoHandler.newFactory();
+			serverChannelClass = NioServerSocketChannel.class;
+			log.debug("Using the NIO transport, epoll is unavailable: {}", Epoll.unavailabilityCause().toString());
+		}
+		acceptorGroup = new MultiThreadIoEventLoopGroup(1, new DefaultThreadFactory("Acceptor"), ioHandlerFactory);
 		ioGroup = new MultiThreadIoEventLoopGroup(Math.max(1, NetworkConfig.NIO_READ_WRITE_THREADS), new DefaultThreadFactory("ReadWrite"),
-			NioIoHandler.newFactory());
+			ioHandlerFactory);
 		packetExecutors = new DefaultEventExecutorGroup(8, new DefaultThreadFactory("PacketProcessor"));
 		bind(NetworkConfig.CLIENT_SOCKET_ADDRESS, "Aion game clients", 8192 * 2, NetworkConfig.MAX_CONNECTIONS_PER_IP, AionConnection::new);
 		bind(NetworkConfig.GAMESERVER_SOCKET_ADDRESS, "game servers", 8192 * 8, 0, GsConnection::new);
@@ -52,7 +68,7 @@ public class NetConnector {
 	private static void bind(InetSocketAddress address, String clientDescription, int maxPacketSize, int maxConnectionsPerIp,
 		BiFunction<Channel, EventExecutor, NettyConnection<?>> connectionFactory) {
 		Map<String, Integer> connectionsByIp = new ConcurrentHashMap<>();
-		Channel serverChannel = new ServerBootstrap().group(acceptorGroup, ioGroup).channel(NioServerSocketChannel.class)
+		Channel serverChannel = new ServerBootstrap().group(acceptorGroup, ioGroup).channel(serverChannelClass)
 			.childOption(ChannelOption.TCP_NODELAY, true)
 			.childOption(ChannelOption.WRITE_BUFFER_WATER_MARK, new WriteBufferWaterMark(32 * 1024, 256 * 1024))
 			.childHandler(new ChannelInitializer<SocketChannel>() {
