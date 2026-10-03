@@ -57,8 +57,7 @@ public class OneTimeBoostSkillAttackEffect extends BufEffect {
 	 * @return the boostable attack type of the given effect, null if it cannot be boosted at all
 	 */
 	public static SkillType getBoostedSkillType(EffectTemplate template) {
-		if (template instanceof SkillAttackInstantEffect || template instanceof SkillAtkDrainInstantEffect || template instanceof DashEffect
-			|| template instanceof BackDashEffect || template instanceof MoveBehindEffect || template instanceof CarveSignetEffect)
+		if (DamageEffect.isPhysicalHit(template))
 			return SkillType.PHYSICAL;
 		if (template instanceof SpellAttackInstantEffect || template instanceof DelayedSpellAttackInstantEffect
 			|| template instanceof SpellAtkDrainInstantEffect)

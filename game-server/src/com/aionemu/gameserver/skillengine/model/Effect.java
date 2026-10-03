@@ -345,11 +345,7 @@ public class Effect implements StatOwner {
 
 	public void setReserveds(EffectReserved er, boolean overTimeEffect) {
 		// set effected hp
-		// TODO RI_ChargeAttack_G, RI_ChargingFlight_G
-		boolean instantSkill = false;
-		if (this.getSkill() != null && this.getSkill().isInstantSkill())
-			instantSkill = true;
-		if (er.getType() == ResourceType.HP && er.getValue() != 0 && !overTimeEffect && !instantSkill && !getEffected().isInvulnerable()) {
+		if (er.getType() == ResourceType.HP && er.getValue() != 0 && !overTimeEffect && !getEffected().isInvulnerable()) {
 			Creature effected = getEffected();
 			int value = (er.isDamage() ? -er.getValue() : er.getValue());
 			value += effected.getLifeStats().getCurrentHp();
@@ -360,7 +356,7 @@ public class Effect implements StatOwner {
 					effected.getLifeStats().setKillingBlow(er.getValue());
 				effectedHp = 0;
 			} else {
-				effectedHp = Math.max(1, (int) (100f * value / effected.getLifeStats().getMaxHp()));
+				effectedHp = (int) (99L * value / effected.getLifeStats().getMaxHp()) + 1;
 			}
 		}
 		synchronized (reservedEffects) {
@@ -379,6 +375,13 @@ public class Effect implements StatOwner {
 		if (toSend.isEmpty()) // effects without a sent value (like damage over time) can still show their attack status
 			return Collections.singleton(new EffectReserved(0, 0, ResourceType.HP, true, true, attackStatus));
 		return toSend;
+	}
+
+	/**
+	 * @return True if a physical hit of the skill landed without an effect of its own added to it, so a critical hit may add the weapon's
+	 */
+	private boolean hasPhysicalHitWithoutAddedEffect() {
+		return successEffects.values().stream().anyMatch(template -> template.getSubEffect() == null && DamageEffect.isPhysicalHit(template));
 	}
 
 	public boolean isLaunchSubEffect() {
@@ -531,8 +534,9 @@ public class Effect implements StatOwner {
 					template.calculateSubEffect(this);
 				}
 			}
-			if (effector instanceof Player p && getAttackStatus() == AttackStatus.CRITICAL && getSubEffect() == null && !isPeriodic() && Rnd.chance() < 10) {
-				Effect criticalProcEffect = SkillEngine.getInstance().createCriticalProcEffect(p, getEffected(), skillTemplate.getSkillId());
+			if (effector instanceof Player player && getAttackStatus() == AttackStatus.CRITICAL && getSubEffect() == null
+				&& hasPhysicalHitWithoutAddedEffect() && Rnd.chance() < SkillEngine.CRITICAL_PROC_CHANCE) {
+				Effect criticalProcEffect = SkillEngine.getInstance().createCriticalProcEffect(player, getEffected());
 				if (criticalProcEffect != null && criticalProcEffect.getEffectResult() != EffectResult.DODGE && criticalProcEffect.getEffectResult() != EffectResult.RESIST) {
 					applyCriticalProcEffect = true;
 					setSpellStatus(criticalProcEffect.getSpellStatus());

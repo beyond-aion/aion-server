@@ -14,4 +14,11 @@ public enum AttackTypeAnimation {
 	public byte getId() {
 		return animationId;
 	}
+
+	public static AttackTypeAnimation getById(int id) {
+		for (AttackTypeAnimation animation : values())
+			if (animation.animationId == id)
+				return animation;
+		return null;
+	}
 }

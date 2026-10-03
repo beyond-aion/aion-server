@@ -26,8 +26,7 @@ public class CM_SUMMON_CASTSPELL extends AionClientPacket {
 	private int targetObjId;
 	private int skillId;
 	private int skillLvl;
-	@SuppressWarnings("unused")
-	private int unk; // probably related to release
+	private int hitTime;
 
 	public CM_SUMMON_CASTSPELL(int opcode, Set<State> validStates) {
 		super(opcode, validStates);
@@ -39,7 +38,7 @@ public class CM_SUMMON_CASTSPELL extends AionClientPacket {
 		skillId = readUH();
 		skillLvl = readUC();
 		targetObjId = readD();
-		unk = readD();
+		hitTime = Math.clamp(Math.round(readF() * 1000), 0, 20000);
 	}
 
 	@Override
@@ -72,12 +71,12 @@ public class CM_SUMMON_CASTSPELL extends AionClientPacket {
 				if (order.getSkillId() != skillId || order.getSkillLevel() != skillLvl)
 					log.warn("{} used summon order with a different skill: skillId {}->{}; skillLvl {}->{}", player, skillId, order.getSkillId(), skillLvl,
 						order.getSkillLevel());
-				summon.getController().useSkill(order);
+				summon.getController().useSkill(order, hitTime);
 			}
 		} else {
 			summonOrMercenary.setTarget(target);
 			if (DataManager.PET_SKILL_DATA.petHasSkill(summonOrMercenary.getObjectTemplate().getTemplateId(), skillId))
-				summonOrMercenary.getController().useSkill(skillId, skillLvl);
+				summonOrMercenary.getController().useSkill(skillId, skillLvl, hitTime);
 			else
 				AuditLogger.log(player, "tried to use invalid mercenary skill " + skillId);
 		}

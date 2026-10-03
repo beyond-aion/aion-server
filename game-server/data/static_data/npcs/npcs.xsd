@@ -21,28 +21,29 @@
 			<xs:element name="talk_info" type="TalkInfo" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="massive_loot" type="MassiveLoot" minOccurs="0" maxOccurs="1"/>
 		</xs:sequence>
-		<xs:attribute name="npc_id" type="npcId" use="required"/>
+		<xs:attribute name="npc_id" type="npcId" use="required"/> <!-- retail: id -->
 		<xs:attribute name="level" type="xs:short" use="required"/>
-		<xs:attribute name="name_id" type="xs:int" use="required"/>
-		<xs:attribute name="title_id" type="xs:int" default="0"/>
+		<xs:attribute name="name_id" type="xs:int" use="required"/> <!-- retail: desc -->
+		<xs:attribute name="title_id" type="xs:int" default="0"/> <!-- retail: npc_title -->
 		<xs:attribute name="name" type="xs:string" default=""/>
+		<xs:attribute name="mesh" type="xs:string"/>
 		<xs:attribute name="group_drop" type="GroupDropType" default="NONE"/>
 		<xs:attribute name="height" type="xs:float" default="0"/>
 		<xs:attribute name="ammo_speed" type="xs:int"/>
 		<xs:attribute name="rating" type="NpcRating"/>
 		<xs:attribute name="rank" type="NpcRank"/>
-		<xs:attribute name="srange" type="xs:int" default="0"/>
-		<xs:attribute name="sangle" type="xs:int" default="360"/>
+		<xs:attribute name="srange" type="xs:int" default="0"/> <!-- retail: sensory_range -->
+		<xs:attribute name="sangle" type="xs:int" default="360"/> <!-- retail: sensory_angle -->
 		<xs:attribute name="tribe" type="TribeClass"/>
 		<xs:attribute name="type" type="NpcTemplateType"/>
 		<xs:attribute name="abyss_type" type="AbyssType"/>
 		<xs:attribute name="ai" type="xs:string"/>
-		<xs:attribute name="race" type="Race"/>
-		<xs:attribute name="hpgauge" type="xs:int"/>
-		<xs:attribute name="arange" type="xs:int"/>
-		<xs:attribute name="cast_speed" type="xs:int" default="1000"/>
+		<xs:attribute name="race" type="Race"/> <!-- retail: race_type -->
+		<xs:attribute name="hpgauge" type="xs:int"/> <!-- retail: hpgauge_level -->
+		<xs:attribute name="arange" type="xs:int"/> <!-- retail: attacks/data/attack_range -->
 		<xs:attribute name="cancel_level" type="xs:int" default="100"/>
-		<xs:attribute name="attack_speed" type="xs:int" default="2000"/>
+		<xs:attribute name="attack_speed" type="xs:int" default="2000"/> <!-- retail: attack_delay -->
+		<xs:attribute name="attack_rate" type="xs:int" default="1000"/> <!-- retail: attacks/data/attack_rate -->
 		<xs:attribute name="state" type="xs:int"/>
 		<xs:attribute name="floatcorpse" type="xs:boolean" default="false"/>
 		<xs:attribute name="stare_range" type="xs:int" default="10"/>

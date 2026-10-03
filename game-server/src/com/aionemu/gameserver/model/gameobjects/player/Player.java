@@ -72,6 +72,7 @@ import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.skillengine.task.AbstractInteractionTask;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.audit.MotionAuditTrail;
 import com.aionemu.gameserver.world.WorldMapType;
 import com.aionemu.gameserver.world.WorldPosition;
 
@@ -81,6 +82,8 @@ import com.aionemu.gameserver.world.WorldPosition;
  * @author -Nemesiss-, SoulKeeper, alexa026, cura
  */
 public class Player extends Creature {
+
+	private static final int HIT_TIME_BOOST_ROUND_TRIP_TOLERANCE_MILLIS = 300;
 
 	public volatile RideInfo ride;
 	public volatile InRoll inRoll;
@@ -141,6 +144,8 @@ public class Player extends Creature {
 	private final Cooldowns craftCooldowns;
 	private final Cooldowns houseObjectCooldowns;
 	private long nextSkillUse;
+	private long nextAttackUse;
+	private MotionAuditTrail motionAuditTrail;
 	private SkillTemplate lastSkill;
 	private long hitTimeBoostExpireTimeMillis;
 	private float hitTimeBoostCastSpeed;
@@ -1154,6 +1159,30 @@ public class Player extends Creature {
 		this.nextSkillUse = nextSkillUse;
 	}
 
+	/**
+	 * @return The trail of events the motion gates check, created on first use so players who never fight do not pay for it
+	 */
+	public synchronized MotionAuditTrail getMotionAuditTrail() {
+		if (motionAuditTrail == null)
+			motionAuditTrail = new MotionAuditTrail();
+		return motionAuditTrail;
+	}
+
+	/**
+	 * @return The trail of events the motion gates check, or null if it was never needed
+	 */
+	public synchronized MotionAuditTrail findMotionAuditTrail() {
+		return motionAuditTrail;
+	}
+
+	public long getNextAttackUse() {
+		return nextAttackUse;
+	}
+
+	public void setNextAttackUse(long nextAttackUse) {
+		this.nextAttackUse = nextAttackUse;
+	}
+
 	@Override
 	public void setCasting(Skill castingSkill) {
 		Skill lastSkill = getCastingSkill();
@@ -1172,6 +1201,15 @@ public class Player extends Creature {
 
 	public boolean isHitTimeBoosted(long timeMillis) {
 		return timeMillis <= hitTimeBoostExpireTimeMillis;
+	}
+
+	/**
+	 * @return True if the client may still have played the boosting animation when it sent a cast the server received at the given time. The client
+	 *         starts the animation once SM_CASTSPELL_RESULT reaches it and the cast takes as long again to arrive, so a cast may arrive up to a round
+	 *         trip after the window closed on the server.
+	 */
+	public boolean isHitTimeBoostedOnClient(long receivedMillis) {
+		return isHitTimeBoosted(receivedMillis - HIT_TIME_BOOST_ROUND_TRIP_TOLERANCE_MILLIS);
 	}
 
 	public float getHitTimeBoostCastSpeed() {
