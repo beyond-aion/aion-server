@@ -168,7 +168,15 @@ public abstract class Dispatcher extends Thread {
 		}
 
 		rb.flip();
-		while (rb.remaining() > 2 && rb.remaining() >= (rb.getShort(rb.position()) & 0xFFFF)) {
+		while (rb.remaining() > 2) {
+			int size = rb.getShort(rb.position()) & 0xFFFF;
+			if (size > rb.capacity()) {
+				log.warn("{} announced a packet of {} bytes, which exceeds the read buffer size of {} bytes", con, size, rb.capacity());
+				closeConnectionImpl(con);
+				return;
+			}
+			if (rb.remaining() < size)
+				break;
 			// got full message
 			if (!parse(con, rb)) {
 				closeConnectionImpl(con);
