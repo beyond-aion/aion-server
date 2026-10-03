@@ -1,5 +1,7 @@
 package com.aionemu.loginserver;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
@@ -92,7 +94,7 @@ public class GameServerTable {
 		/**
 		 * Check if password and ip are ok.
 		 */
-		if (!gsi.getPassword().equals(password) || !NetworkUtils.checkIPMatching(gsi.getIpMask(), gsConnection.getIP())) {
+		if (!MessageDigest.isEqual(gsi.getPassword().getBytes(StandardCharsets.UTF_8), password.getBytes(StandardCharsets.UTF_8)) || !NetworkUtils.checkIPMatching(gsi.getIpMask(), gsConnection.getIP())) {
 			log.warn("{} requested ID: {} has wrong IP or password!", gsConnection, requestedId);
 			return GsAuthResponse.NOT_AUTHED;
 		}
