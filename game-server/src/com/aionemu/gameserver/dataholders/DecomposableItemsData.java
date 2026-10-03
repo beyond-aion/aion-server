@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.dataholders;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,8 +8,6 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 
 import com.aionemu.gameserver.model.templates.item.DecomposableItemInfo;
-import com.aionemu.gameserver.model.templates.item.ExtractedItemsCollection;
-import com.aionemu.gameserver.model.templates.item.ResultedItem;
 
 /**
  * @author antness
@@ -23,22 +20,22 @@ public class DecomposableItemsData {
 	private List<DecomposableItemInfo> decomposableItemsTemplates;
 
 	@XmlTransient
-	private final Map<Integer, List<ExtractedItemsCollection>> decomposableItemsInfo = new HashMap<>();
+	private final Map<Integer, DecomposableItemInfo> decomposableItemsInfo = new HashMap<>();
 	@XmlTransient
-	private final Map<Integer, List<ResultedItem>> selectableDecomposables = new HashMap<>();
+	private int overrideCount;
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		decomposableItemsInfo.clear();
+		Map<Integer, DecomposableItemInfo> overrides = new HashMap<>();
 		for (DecomposableItemInfo template : decomposableItemsTemplates) {
-			List<ExtractedItemsCollection> itemGroups = template.getItemsCollections();
-			if (itemGroups != null) {
-				if (template.isIsSelectable()) {
-					selectableDecomposables.put(template.getItemId(), itemGroups.get(0).getItems());
-				} else {
-					decomposableItemsInfo.put(template.getItemId(), itemGroups);
-				}
-			}
+			Map<Integer, DecomposableItemInfo> target = template.isOverride() ? overrides : decomposableItemsInfo;
+			if (target.putIfAbsent(template.getItemId(), template) != null)
+				throw new IllegalArgumentException("Duplicate decomposable item " + template.getItemId());
 		}
+		// the files of the folder are merged in no particular order, so the custom entries replace the retail ones only after all are read
+		decomposableItemsInfo.putAll(overrides);
+		decomposableItemsInfo.values().removeIf(info -> info.getSets().isEmpty());
+		overrideCount = overrides.size();
 		decomposableItemsTemplates = null;
 	}
 
@@ -46,12 +43,11 @@ public class DecomposableItemsData {
 		return decomposableItemsInfo.size();
 	}
 
-	public List<ResultedItem> getSelectableItems(int itemId) {
-		List<ResultedItem> items = selectableDecomposables.get(itemId);
-		return items == null ? null : new ArrayList<>(items);
+	public int overrideCount() {
+		return overrideCount;
 	}
 
-	public List<ExtractedItemsCollection> getInfoByItemId(int itemId) {
+	public DecomposableItemInfo getInfoByItemId(int itemId) {
 		return decomposableItemsInfo.get(itemId);
 	}
 }
