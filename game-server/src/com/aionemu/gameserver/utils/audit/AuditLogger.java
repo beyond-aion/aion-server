@@ -24,7 +24,15 @@ public class AuditLogger {
 	 * Automatically punishes player, if punishments are enabled.
 	 */
 	public static void log(Player player, String message) {
-		if (PunishmentConfig.PUNISHMENT_ENABLE)
+		log(player, message, true);
+	}
+
+	/**
+	 * @param punish
+	 *          False for heuristics an honest client can trip, which must never punish
+	 */
+	public static void log(Player player, String message, boolean punish) {
+		if (punish && PunishmentConfig.PUNISHMENT_ENABLE)
 			AutoBan.punishment(player);
 
 		if (LoggingConfig.LOG_AUDIT)

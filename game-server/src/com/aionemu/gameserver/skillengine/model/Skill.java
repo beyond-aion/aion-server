@@ -24,6 +24,7 @@ import com.aionemu.gameserver.dataholders.MotionData.AnimationTimes;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.skill.NpcSkillEntry;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
@@ -51,7 +52,8 @@ import com.aionemu.gameserver.skillengine.properties.TargetRelationAttribute;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.utils.audit.AuditLogger;
+import com.aionemu.gameserver.utils.audit.MotionAudit;
+import com.aionemu.gameserver.utils.audit.MotionAuditTrail.Event;
 
 /**
  * @author ATracer, Wakizashi, Neon
@@ -59,6 +61,8 @@ import com.aionemu.gameserver.utils.audit.AuditLogger;
 public class Skill {
 
 	private static final Logger log = LoggerFactory.getLogger(Skill.class);
+	/** Positions behind the flight of a summon's projectile may be stale, like a player's */
+	private static final int CLIENT_CONTROLLED_NPC_HIT_TIME_TOLERANCE_MILLIS = 200;
 
 	private final List<Creature> effectedList;
 	private Creature firstTarget;
@@ -85,6 +89,7 @@ public class Skill {
 	private int baseCastDuration;
 	private int castDuration;
 	private int clientHitTime; // from CM_CASTSPELL
+	private boolean clientHitTimeReported;
 	private int hitTime; // time when effect is applied
 	private float castSpeedForAnimationBoostAndChargeSkills; // cast speed can boost the animation time of the current skill and the hit time of the following skill
 	private long castStartTime;
@@ -333,7 +338,7 @@ public class Skill {
 		effector.getAi().onStartUseSkill(skillTemplate, skillLevel);
 		if (skillTemplate.isCharge()) {
 			ThreadPoolManager.getInstance().schedule(this::cancelCurrentSkillCast, castDuration);
-		} else if (castDuration > 0) {
+		} else if (castDuration > (effector instanceof Npc ? 100 : 0)) { // an NPC finishes a cast of up to 100 ms at once
 			ThreadPoolManager.getInstance().schedule(this::endCast, castDuration);
 		} else {
 			endCast();
@@ -359,15 +364,16 @@ public class Skill {
 	}
 
 	protected void updateCastDurationAndSpeed() {
-		if (effector instanceof Npc npc) { // TODO: check if all skills should be effected
-			castDuration = Math.round(baseCastDuration * (npc.getGameStats().getCastSpeed() / 1000f));
+		if (effector instanceof Npc) {
+			castDuration = calculateCastDuration();
 			castSpeedForAnimationBoostAndChargeSkills = 1f;
 		} else if (skillTemplate.isCharge()) {
 			castDuration = calculateChargeCastDuration();
 			castSpeedForAnimationBoostAndChargeSkills = (float) castDuration / baseCastDuration;
 		} else {
 			castDuration = calculateCastDuration();
-			castSpeedForAnimationBoostAndChargeSkills = 1 - effector.getGameStats().getStat(StatEnum.BOOST_CASTING_TIME, 1000).getBonus() / 1000f;
+			// the same stats that shorten the cast shorten the animation
+			castSpeedForAnimationBoostAndChargeSkills = calculateMagicalCastDuration(1000) / 1000f;
 		}
 	}
 
@@ -386,7 +392,7 @@ public class Skill {
 		}
 		float speedRatio = switch (chargeTimeBonusType) {
 			case PHYSICAL -> effector.getGameStats().getAttackSpeedRate();
-			case MAGICAL -> isCastDurationAffectedByCastSpeed() ? (float) calculateMagicalCastDuration() / baseCastDuration : 1f;
+			case MAGICAL -> isCastDurationAffectedByCastSpeed() ? (float) calculateMagicalCastDuration(baseCastDuration) / baseCastDuration : 1f;
 			default -> 1f;
 		};
 		return (int) (baseCastDuration * (1 - (1 - speedRatio) / 2)); // charge skills are only affected by half of the speed bonus
@@ -400,19 +406,19 @@ public class Skill {
 			return 0;
 		if (!isCastDurationAffectedByCastSpeed())
 			return baseCastDuration;
-		return calculateMagicalCastDuration();
+		return calculateMagicalCastDuration(baseCastDuration);
 	}
 
-	private int calculateMagicalCastDuration() {
-		int baseDurationCap = Math.round(baseCastDuration * 0.25f);
+	private int calculateMagicalCastDuration(int baseDuration) {
+		int baseDurationCap = Math.round(baseDuration * 0.25f);
 		//casting time stats cap 75%
-		int castDuration = Math.max(effector.getGameStats().getPositiveReverseStat(StatEnum.BOOST_CASTING_TIME, baseCastDuration), baseDurationCap);
-		int boostValue = effector.getGameStats().getPositiveReverseStat(StatEnum.BOOST_CASTING_TIME_SKILL, baseCastDuration);
+		int castDuration = Math.max(effector.getGameStats().getPositiveReverseStat(StatEnum.BOOST_CASTING_TIME, baseDuration), baseDurationCap);
+		int boostValue = effector.getGameStats().getPositiveReverseStat(StatEnum.BOOST_CASTING_TIME_SKILL, baseDuration);
 		StatEnum skillCastBoostStat = getSkillCastBoostStat();
 		if (skillCastBoostStat != null)
 			boostValue = effector.getGameStats().getPositiveReverseStat(skillCastBoostStat, boostValue);
 
-		int buffDelta = baseCastDuration - boostValue;
+		int buffDelta = baseDuration - boostValue;
 		castDuration -= buffDelta;
 
 		if (!isSummonType(skillTemplate.getSubType())) {
@@ -438,11 +444,24 @@ public class Skill {
 
 	protected void updateHitTime(boolean checkAnimation) {
 		hitTime = clientHitTime;
+		if (effector instanceof Npc npc && skillMethod == SkillMethod.CAST && !clientHitTimeReported) {
+			// unless the client controls the NPC, nothing reports its hit, so it comes from the animation of its own model
+			hitTime = DataManager.MOTION_DATA.calculateNpcHitTime(npc, this);
+			if (skillTemplate.getAmmoSpeed() != 0 && firstTarget != null && firstTarget != npc)
+				hitTime += (int) (PositionUtil.getDistance(npc, firstTarget) / skillTemplate.getAmmoSpeed() * 1000);
+			return;
+		}
+		if (clientHitTimeReported && skillMethod == SkillMethod.CAST && (effector instanceof Summon || effector instanceof Npc)) {
+			limitClientControlledNpcHitTime();
+			return;
+		}
 		if (!checkAnimation || !(effector instanceof Player player) || skillMethod != SkillMethod.CAST && skillMethod != SkillMethod.ITEM)
 			return;
 
 		float animationTimeUntilFirstHit = DataManager.MOTION_DATA.calculateAnimationTimeUntilFirstHit(player, this);
+		float maxAnimationTime = DataManager.MOTION_DATA.calculateMaxAnimationTime(player, this);
 		int toleranceMillis = 1;
+		int loggedDistance = -1, loggedFlightMillis = 0;
 		if (skillTemplate.getAmmoSpeed() != 0) {
 			float distance = (float) PositionUtil.getDistance(player, firstTarget);
 			if (player.getMoveController().isInMove() || firstTarget.getMoveController().isInMove()) // subtract the run distance until ammo is actually fired
@@ -451,19 +470,50 @@ public class Skill {
 			float ammoTime = Math.max(0, distance / skillTemplate.getAmmoSpeed() * 1000);
 			toleranceMillis += Math.max(0, (int) Math.ceil(distanceTolerance / skillTemplate.getAmmoSpeed() * 1000));
 			animationTimeUntilFirstHit += ammoTime;
+			if (maxAnimationTime > 0)
+				maxAnimationTime += ammoTime;
+			loggedDistance = Math.round(distance);
+			loggedFlightMillis = Math.round(ammoTime);
 		}
+		String context = " (motion: " + (skillTemplate.getMotion() == null ? "none" : skillTemplate.getMotion().getName())
+			+ (loggedDistance < 0 ? "" : ", target at " + loggedDistance + "m, flight: " + loggedFlightMillis + " ms") + ")";
 
 		int motionDelay = skillTemplate.getMotion() == null ? 0 : skillTemplate.getMotion().getDelay();
 		int serverHitTime = motionDelay + Math.round(animationTimeUntilFirstHit);
 		if (serverHitTime > clientHitTime) {
 			hitTime = serverHitTime;
-			if (isSuspiciousClientHitTime(clientHitTime, serverHitTime, toleranceMillis, player)) {
+			if (isSuspiciousClientHitTime(clientHitTime, serverHitTime, toleranceMillis) && !DataManager.MOTION_DATA.isUnarmedWithoutAnimation(player, this)) {
 				List<String> uncertainties = collectUncertaintyFactorsForHitTime(player, toleranceMillis);
 				String uncertaintyFactors = uncertainties.isEmpty() ? "" : " Uncertainty factors: " + String.join(", ", uncertainties);
-				AuditLogger.log(player,
-					"modified hit time for skill %d (client < server: %d/%d).%s".formatted(getSkillId(), clientHitTime, serverHitTime, uncertaintyFactors));
+				MotionAudit.log(player, "hit time %d for skill %d is earlier than its animation can hit, raised to %d%s.%s".formatted(clientHitTime,
+					getSkillId(), serverHitTime, context, uncertaintyFactors));
+			}
+		} else if (maxAnimationTime > 0) {
+			// an effect cannot land after the animation is over, so a hit time above it delays damage or crowd control at will
+			int maxHitTime = motionDelay + Math.round(maxAnimationTime) + toleranceMillis;
+			if (clientHitTime > maxHitTime) {
+				hitTime = maxHitTime;
+				MotionAudit.log(player, "hit time %d for skill %d lands past the end of its animation, capped at %d%s".formatted(clientHitTime,
+					getSkillId(), maxHitTime, context));
 			}
 		}
+	}
+
+	/**
+	 * A summon or mercenary skill lands at the hit time its client reports, which may not run past the animation on the NPC's model, so crowd control
+	 * cannot be held back at will.
+	 */
+	private void limitClientControlledNpcHitTime() {
+		int maxHitTime = DataManager.MOTION_DATA.calculateClientControlledNpcMaxHitTime(effector.getObjectTemplate().getTemplateId(), this)
+			+ CLIENT_CONTROLLED_NPC_HIT_TIME_TOLERANCE_MILLIS;
+		if (skillTemplate.getAmmoSpeed() != 0 && firstTarget != null && firstTarget != effector)
+			maxHitTime += (int) (PositionUtil.getDistance(effector, firstTarget) / skillTemplate.getAmmoSpeed() * 1000);
+		if (hitTime <= maxHitTime)
+			return;
+		if (effector instanceof Summon summon)
+			MotionAudit.log(summon.getMaster(), "sent hit time %d for skill %d of %s, which lands past the end of its animation, capped at %d".formatted(hitTime,
+				getSkillId(), summon.getName(), maxHitTime));
+		hitTime = maxHitTime;
 	}
 
 	private float getDistanceTolerance(Player player, Creature target) {
@@ -477,13 +527,11 @@ public class Skill {
 		return distanceTolerance;
 	}
 
-	private boolean isSuspiciousClientHitTime(int clientHitTime, int serverHitTime, int tolerance, Player player) {
+	private boolean isSuspiciousClientHitTime(int clientHitTime, int serverHitTime, int tolerance) {
 		if (clientHitTime >= serverHitTime - tolerance)
 			return false;
 		if (clientHitTime == 0 && (itemTemplate != null || skillTemplate.getMotion() != null && skillTemplate.getMotion().isInstantSkill()))
 			return false; // effects apply immediately (damage too, though visually delayed)
-		if (clientHitTime == 0 && player.isInRobotMode() && (player.getLastSkill().isMultiCast() || DataManager.SKILL_CHARGE_DATA.isChargeSkill(player.getLastSkill())))
-			return false; // AT sends no hitTime when casting a non-instant skill within the animation time of a previous multiCast or charge skill, like 2640
 		return true;
 	}
 
@@ -493,8 +541,6 @@ public class Skill {
 			uncertainties.add("cast speed");
 		if (skillTemplate.getAmmoSpeed() != 0)
 			uncertainties.add("movement (calculated tolerance: " + toleranceMillis + " ms)");
-		if (clientHitTime == 0 && player.isInRobotMode()) // TODO remove once isSuspiciousClientHitTime() identifies all false positives 
-			uncertainties.add("Aethertech being weird 🤷‍♂️ (previous skill: " + player.getLastSkill().getSkillId() + ")");
 		return uncertainties;
 	}
 
@@ -709,19 +755,21 @@ public class Skill {
 			playerEffector.getController().enterCombat(true);
 
 		boolean isItemSkill = skillMethod == SkillMethod.ITEM;
+		boolean sendsCastSpellResult = skillMethod == SkillMethod.PENALTY || skillMethod == SkillMethod.CAST || isItemSkill;
+		// their effects land before the hit time is ever used, so it only tells the client when to display the hit
+		boolean appliesEffectsImmediately = isInstantSkill() || isItemSkill;
 		boolean sentCastSpellResultPacket = false;
 		// the client must learn the hit time before any HP change reaches it, or it updates the status bar before displaying the hit
-		if (isItemSkill)
+		if (sendsCastSpellResult && appliesEffectsImmediately)
 			sentCastSpellResultPacket = sendCastSpellEnd(dashStatus, effects);
 
-		// item skills apply their effects immediately, hitTime only tells the client when to display the hit
-		if (isInstantSkill() || isItemSkill)
+		if (appliesEffectsImmediately)
 			applyEffect(effects);
 		else
 			ThreadPoolManager.getInstance().schedule(() -> applyEffect(effects), hitTime);
 
-		if (skillMethod == SkillMethod.PENALTY || skillMethod == SkillMethod.CAST || isItemSkill) {
-			if (!isItemSkill)
+		if (sendsCastSpellResult) {
+			if (!appliesEffectsImmediately)
 				sentCastSpellResultPacket = sendCastSpellEnd(dashStatus, effects);
 			if (sentCastSpellResultPacket && skillMethod != SkillMethod.PENALTY && effector instanceof Player player) {
 				// animation times must be calculated after applyEffect of instant skills in order to honor speed buffs from this skill
@@ -733,8 +781,18 @@ public class Skill {
 				} else {
 					player.setHitTimeBoost(0, 0);
 				}
-				if (animation != null) // Math.max because nextSkillUse set from startCast() must not be undercut
+				if (animation != null) { // Math.max because nextSkillUse set from startCast() must not be undercut
+					// the client sends the next skill after the last hit point of the animation, but releases the auto attack already on the first one
 					player.setNextSkillUse(Math.max(player.getNextSkillUse(), nowMillis + animation.lastHitMillis()));
+					player.setNextAttackUse(Math.max(player.getNextAttackUse(), nowMillis + animation.firstHitMillis()));
+				} else if (skillMethod == SkillMethod.CAST) {
+					// a cast without a hit animation holds the next skill and the next auto attack for the default hit time
+					int missingMotionMillis = DataManager.MOTION_DATA.calculateMissingMotionMillis(player, this);
+					player.setNextSkillUse(Math.max(player.getNextSkillUse(), nowMillis + missingMotionMillis));
+					player.setNextAttackUse(Math.max(player.getNextAttackUse(), nowMillis + missingMotionMillis));
+				}
+				MotionAudit.record(player, Event.CAST, getSkillId(), castDuration, clientHitTime, hitTime, (int) (player.getNextSkillUse() - nowMillis),
+					(int) (player.getNextAttackUse() - nowMillis));
 			}
 		}
 
@@ -748,6 +806,8 @@ public class Skill {
 			if (lastSkill != null)
 				lastSkill.fireOnEndCastEvents(npc);
 
+			if (skillMethod == SkillMethod.CAST)
+				npc.getGameStats().onSkillEnd(DataManager.MOTION_DATA.calculateNpcSkillRecoveryMillis(npc, this));
 			SkillAttackManager.afterUseSkill((NpcAI) npc.getAi());
 		}
 
@@ -1082,6 +1142,7 @@ public class Skill {
 
 	public void setClientHitTime(int time) {
 		this.clientHitTime = time;
+		this.clientHitTimeReported = true;
 	}
 
 	public int getHitTime() {

@@ -13,6 +13,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SUMMON_UPDATE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+
 import com.aionemu.gameserver.services.summons.SummonsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.model.Effect;
@@ -20,12 +21,17 @@ import com.aionemu.gameserver.skillengine.model.HopType;
 import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.taskmanager.tasks.PlayerMoveTaskManager;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.utils.audit.AuditLogger;
+import com.aionemu.gameserver.utils.PositionUtil;
+import com.aionemu.gameserver.world.geo.GeoService;
+import com.aionemu.gameserver.utils.audit.MotionAudit;
+import com.aionemu.gameserver.utils.audit.MotionAuditTrail.Event;
 
 /**
  * @author ATracer, RotO (Attack-speed hack protection), Sippolo
  */
 public class SummonController extends CreatureController<Summon> {
+
+	private static final int EARLIEST_HIT_TIME_DIVISOR = 8; // the earliest animation measured hits at a fifth of the attack interval, so an eighth leaves room
 
 	private long lastAttackMillis = 0;
 
@@ -90,14 +96,38 @@ public class SummonController extends CreatureController<Summon> {
 			return;
 
 		int attackSpeed = getOwner().getGameStats().getAttackSpeed().getCurrent();
+		// the client announces the auto attack, so the same reach and sight the master needs has to hold here, and dropping is silent because the summon has no attack response
+		float attackRange = 1 + getOwner().getGameStats().getAttackRange().getCurrent() / 1000f;
+		if (!target.getAggroList().isHating(getOwner())) // the first auto attack can be announced while the summon is still closing in
+			attackRange += PositionUtil.calculateMaxCoveredDistance(getOwner(), 100);
+		if (!PositionUtil.isInAttackRange(getOwner(), target, attackRange) || !GeoService.getInstance().canSee(getOwner(), target))
+			return;
+
 		long now = System.currentTimeMillis();
 		long msSinceLastAttack = now - lastAttackMillis;
 		if (msSinceLastAttack < attackSpeed && attackSpeed - msSinceLastAttack > 50) { // 50ms tolerance
-			AuditLogger.log(getMaster(), "possibly used hack to speed up summon auto-attack (" + msSinceLastAttack + "ms instead of " + attackSpeed + ")");
+			MotionAudit.record(getMaster(), Event.SUMMON_ATTACK, (int) Math.min(msSinceLastAttack, Integer.MAX_VALUE), time, 0, 0, 0, 0);
+			MotionAudit.log(getMaster(), "possibly used hack to speed up summon auto-attack (" + msSinceLastAttack + "ms instead of " + attackSpeed + ")");
 			return;
 		}
 		lastAttackMillis = now;
-		super.attackTarget(target, time, false);
+		int hitTime = validateHitTime(time, attackSpeed);
+		MotionAudit.record(getMaster(), Event.SUMMON_ATTACK, (int) Math.min(msSinceLastAttack, Integer.MAX_VALUE), time, hitTime, 1, 0, 0);
+		super.attackTarget(target, hitTime, false);
+	}
+
+	/**
+	 * Limits the hit time to what an attack animation can produce, as it schedules the damage and the client can send anything. Both the reported value
+	 * and the attack interval scale with attack speed, so the value is a fixed fraction of the interval per summon, and none measured hits within an
+	 * eighth of it or after a whole one.
+	 */
+	private int validateHitTime(int hitTime, int attackSpeed) {
+		int earliestHitTime = attackSpeed / EARLIEST_HIT_TIME_DIVISOR;
+		if (hitTime >= earliestHitTime && hitTime <= attackSpeed)
+			return hitTime;
+		MotionAudit.log(getMaster(), "sent hit time " + hitTime + " for an attack of " + getOwner().getName() + ", expected " + earliestHitTime + " to "
+			+ attackSpeed + " (auto attacks every " + attackSpeed + " ms)");
+		return Math.clamp(hitTime, earliestHitTime, attackSpeed);
 	}
 
 	@Override
@@ -132,7 +162,7 @@ public class SummonController extends CreatureController<Summon> {
 		SummonsService.release(getOwner(), UnsummonType.SUMMON_DEATH);
 	}
 
-	public void useSkill(SkillOrder order) {
+	public void useSkill(SkillOrder order, int clientHitTime) {
 		Creature creature = getOwner();
 		if (!DataManager.PET_SKILL_DATA.petHasSkill(getOwner().getObjectTemplate().getTemplateId(), order.getSkillId())) {
 			// hackers!)
@@ -140,6 +170,7 @@ public class SummonController extends CreatureController<Summon> {
 		}
 		Skill skill = SkillEngine.getInstance().getSkill(creature, order.getSkillId(), 1, order.getTarget());
 		skill.setHate(order.getHate());
+		skill.setClientHitTime(clientHitTime);
 		if (skill.useSkill() && order.isRelease()) {
 			SummonsService.release(getOwner(), UnsummonType.SKILL_ORDER);
 		}

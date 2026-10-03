@@ -72,6 +72,7 @@ import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.skillengine.task.AbstractInteractionTask;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.audit.MotionAuditTrail;
 import com.aionemu.gameserver.world.WorldMapType;
 import com.aionemu.gameserver.world.WorldPosition;
 
@@ -141,6 +142,8 @@ public class Player extends Creature {
 	private final Cooldowns craftCooldowns;
 	private final Cooldowns houseObjectCooldowns;
 	private long nextSkillUse;
+	private long nextAttackUse;
+	private MotionAuditTrail motionAuditTrail;
 	private SkillTemplate lastSkill;
 	private long hitTimeBoostExpireTimeMillis;
 	private float hitTimeBoostCastSpeed;
@@ -1152,6 +1155,33 @@ public class Player extends Creature {
 
 	public void setNextSkillUse(long nextSkillUse) {
 		this.nextSkillUse = nextSkillUse;
+	}
+
+	/**
+	 * @return The time until which the animation of the last cast keeps the client from sending an auto attack.
+	 */
+	/**
+	 * @return The trail of events the motion gates check, created on first use so players who never fight do not pay for it
+	 */
+	public synchronized MotionAuditTrail getMotionAuditTrail() {
+		if (motionAuditTrail == null)
+			motionAuditTrail = new MotionAuditTrail();
+		return motionAuditTrail;
+	}
+
+	/**
+	 * @return The trail of events the motion gates check, or null if it was never needed
+	 */
+	public synchronized MotionAuditTrail findMotionAuditTrail() {
+		return motionAuditTrail;
+	}
+
+	public long getNextAttackUse() {
+		return nextAttackUse;
+	}
+
+	public void setNextAttackUse(long nextAttackUse) {
+		this.nextAttackUse = nextAttackUse;
 	}
 
 	@Override

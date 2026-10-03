@@ -9,12 +9,15 @@ import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
-import com.aionemu.gameserver.utils.audit.AuditLogger;
+import com.aionemu.gameserver.utils.audit.MotionAudit;
+import com.aionemu.gameserver.utils.audit.MotionAuditTrail.Event;
 
 /**
  * @author alexa026, rhys2002
  */
 public class CM_CASTSPELL extends AionClientPacket {
+
+	private static final int MAX_HIT_TIME_MILLIS = 8000;
 
 	private final long receiveTime = System.currentTimeMillis();
 	private int spellid;
@@ -66,7 +69,9 @@ public class CM_CASTSPELL extends AionClientPacket {
 				break;
 		}
 
-		hitTime = readUH();
+		// hard ceiling for the paths that skip the corridor in Skill.updateHitTime, since the field holds up to 65535 ms and the longest hit time
+		// our motion data can produce is 6200 ms, at the slowest attack speed the stat caps allow
+		hitTime = Math.min(readUH(), MAX_HIT_TIME_MILLIS);
 		unk = readD();
 	}
 
@@ -98,7 +103,8 @@ public class CM_CASTSPELL extends AionClientPacket {
 
 		if (player.getNextSkillUse() > receiveTime) {
 			int lastSkillId = player.getLastSkill().getSkillId(); // lastSkill cannot be null, as nextSkillUse is zero on the first cast
-			AuditLogger.log(player, "tried to use skill " + spellid + " " + (player.getNextSkillUse() - receiveTime) + " ms too early. Previous skill: " + lastSkillId);
+			MotionAudit.record(player, Event.SKILL_TOO_EARLY, spellid, (int) (player.getNextSkillUse() - receiveTime), lastSkillId, 0, 0, 0);
+			MotionAudit.log(player, "tried to use skill " + spellid + " " + (player.getNextSkillUse() - receiveTime) + " ms too early. Previous skill: " + lastSkillId);
 			if (player.getNextSkillUse() > System.currentTimeMillis()) {
 				sendPacket(SM_SYSTEM_MESSAGE.STR_SKILL_NOT_READY());
 				return;

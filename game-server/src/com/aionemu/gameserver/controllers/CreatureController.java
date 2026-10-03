@@ -51,6 +51,7 @@ import com.aionemu.gameserver.taskmanager.tasks.MovementNotifyTask;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
+import com.aionemu.gameserver.utils.audit.MotionAudit;
 import com.aionemu.gameserver.utils.stats.CalculationType;
 import com.aionemu.gameserver.world.geo.GeoService;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
@@ -355,10 +356,24 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 			getOwner().getObserveController().notifyAttackObservers(target, 0);
 		}
 
-		if (time == 0)
+		int damageDelay = getAutoAttackDamageDelay(target, time, criticalProcEffect);
+		if (damageDelay == 0)
 			target.getController().onAttack(getOwner(), damage, firstAttackStatus, criticalProcEffect);
 		else
-			ThreadPoolManager.getInstance().schedule(new DelayedOnAttack(target, getOwner(), damage, firstAttackStatus, criticalProcEffect), time);
+			ThreadPoolManager.getInstance().schedule(new DelayedOnAttack(target, getOwner(), damage, firstAttackStatus, criticalProcEffect), damageDelay);
+	}
+
+	/**
+	 * @return Milliseconds until an auto attack with the given hit time deals its damage, and with it the effect of a critical hit, if any
+	 */
+	protected int getAutoAttackDamageDelay(Creature target, int hitTime, Effect criticalProcEffect) {
+		int damageDelay = hitTime - 50; // the damage lands 50 ms before the hit time echoed in SM_ATTACK
+		if (damageDelay <= 0)
+			return 0;
+		// a critical hit with an added effect on a player lands earlier still, unless the hit comes soon anyway
+		if (criticalProcEffect != null && target instanceof Player && damageDelay > 310)
+			return hitTime - 350;
+		return damageDelay;
 	}
 
 	/**
@@ -454,11 +469,22 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	/**
 	 * @return true if successful usage
 	 */
-	public boolean useSkill(int skillId, int skillLevel) {
+	public final boolean useSkill(int skillId, int skillLevel) {
+		return useSkill(skillId, skillLevel, null);
+	}
+
+	/**
+	 * @param clientHitTime
+	 *          Hit time the client reported for a creature it controls, or null if the server determines it
+	 * @return true if successful usage
+	 */
+	public boolean useSkill(int skillId, int skillLevel, Integer clientHitTime) {
 		try {
 			Creature creature = getOwner();
 			Skill skill = SkillEngine.getInstance().getSkill(creature, skillId, skillLevel, creature.getTarget());
 			if (skill != null) {
+				if (clientHitTime != null)
+					skill.setClientHitTime(clientHitTime);
 				return skill.useSkill();
 			}
 		} catch (Exception ex) {
@@ -470,9 +496,17 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	public boolean useChargeSkill(Skill startSkill, long chargeTimeMillis) {
 		SkillChargeCondition chargeCondition = startSkill.getSkillTemplate().getSkillChargeCondition();
 		ChargeSkillEntry chargeSkill = chargeCondition == null ? null : DataManager.SKILL_CHARGE_DATA.getChargedSkillEntry(chargeCondition.getValue());
-		if (chargeSkill == null || chargeTimeMillis < chargeSkill.getMinTime() * startSkill.getCastSpeedForAnimationBoostAndChargeSkills()) {
+		if (chargeSkill == null) {
 			if (getOwner() instanceof Player player)
-				AuditLogger.log(player, "tried to use charge skill " + startSkill.getSkillId() + " after " + chargeTimeMillis);
+				AuditLogger.log(player, "used charge skill " + startSkill.getSkillId() + ", which has no charge data");
+			return false;
+		}
+		int minChargeMillis = Math.round(chargeSkill.getMinTime() * startSkill.getCastSpeedForAnimationBoostAndChargeSkills());
+		if (chargeTimeMillis < minChargeMillis) {
+			if (getOwner() instanceof Player player) // the gap between two packets on the server clock, which network jitter moves either way
+				MotionAudit.log(player, "released charge skill " + startSkill.getSkillId() + " after " + chargeTimeMillis + " ms, needs "
+					+ minChargeMillis + " ms (" + chargeSkill.getMinTime() + " ms at cast speed " + startSkill.getCastSpeedForAnimationBoostAndChargeSkills()
+					+ ")");
 			return false;
 		}
 		try {

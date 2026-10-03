@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.ai.manager;
 
 import com.aionemu.gameserver.ai.AILogger;
+import com.aionemu.gameserver.ai.AIState;
 import com.aionemu.gameserver.ai.AISubState;
 import com.aionemu.gameserver.ai.AttackIntention;
 import com.aionemu.gameserver.ai.NpcAI;
@@ -9,6 +10,7 @@ import com.aionemu.gameserver.controllers.attack.AggroTarget;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
+import com.aionemu.gameserver.model.skill.NpcSkillEntry;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
@@ -53,15 +55,26 @@ public class AttackManager {
 		}
 		switch (attackIntention) {
 			case SIMPLE_ATTACK:
-				SimpleAttackManager.performAttack(npcAI, delay);
+				// the skill chances in npc_skills.xml are rolled once per attack cycle, so the auto attack runs when due without choosing again
+				if (delay > 0)
+					npcAI.getOwner().getGameStats().scheduleAttackTask(() -> attackWhenDue(npcAI), delay);
+				else
+					SimpleAttackManager.performAttack(npcAI);
 				break;
 			case SKILL_ATTACK:
-				SkillAttackManager.performAttack(npcAI, delay);
+				// a skill does not wait for the attack delay like an auto attack, only for its own timers
+				NpcSkillEntry skill = npcAI.getOwner().getGameStats().getLastSkill();
+				SkillAttackManager.performAttack(npcAI, skill == null ? delay : npcAI.getOwner().getGameStats().getNextSkillInterval(skill.getSkillTemplate()));
 				break;
 			case FINISH_ATTACK:
 				npcAI.think();
 				break;
 		}
+	}
+
+	private static void attackWhenDue(NpcAI npcAI) {
+		if (npcAI.isInState(AIState.FIGHT))
+			SimpleAttackManager.performAttack(npcAI);
 	}
 
 	public static void targetTooFar(NpcAI npcAI) {

@@ -25,6 +25,13 @@ import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class SkillData {
 
+	/**
+	 * Motions of skills that have no attack animation with a hit point on any model of the client, so they keep the default hit time
+	 */
+	private static final Set<String> MOTIONS_WITHOUT_ANIMATION = Set.of("areaatklh", "areaatkrh", "areafireod", "axe", "breathl4s", "breathl8s",
+		"breathm4s", "breathm8s", "breathr4s", "breathr8s", "cash_social_diving", "cidle", "earthquake", "herb", "mine", "normalfirehd", "normalfiremo",
+		"open", "pointfirelh", "pointfirerh", "quest_drinkpoint", "sanctuaryfire", "say", "sumrobot", "talk", "transform");
+
 	@XmlElement(name = "skill_template")
 	private List<SkillTemplate> skillTemplates;
 
@@ -128,19 +135,19 @@ public class SkillData {
 	}
 
 	public void validateMotions() {
-		StringBuilder missing = new StringBuilder();
-		Set<String> motionNames = new HashSet<>();
+		Set<String> missing = new TreeSet<>();
 		for (SkillTemplate t : getSkillTemplates()) {
 			Motion m = t.getMotion();
-			if (m == null || m.getName() == null)
-				continue;
-			if (motionNames.add(m.getName())) {
-				MotionTime mt = DataManager.MOTION_DATA.getMotionTime(m.getName());
-				if (mt == null)
-					missing.append('"').append(m.getName()).append("\" (skill id ").append(t.getSkillId()).append("), ");
-			}
+			if (m != null && m.getName() != null && DataManager.MOTION_DATA.getMotionTime(m.getName()) == null)
+				missing.add(m.getName());
 		}
-		if (missing.length() > 0)
-			LoggerFactory.getLogger(SkillData.class).warn("Missing motion times for these motion names: {}", missing.substring(0, missing.length() - 2));
+		Set<String> unexpected = new TreeSet<>(missing);
+		unexpected.removeAll(MOTIONS_WITHOUT_ANIMATION);
+		if (!unexpected.isEmpty())
+			LoggerFactory.getLogger(SkillData.class).warn("Missing motion times for these motion names: {}", unexpected);
+		Set<String> stale = new TreeSet<>(MOTIONS_WITHOUT_ANIMATION);
+		stale.removeAll(missing);
+		if (!stale.isEmpty())
+			LoggerFactory.getLogger(SkillData.class).warn("These motion names are listed as without animation, but have motion times or no skill uses them: {}", stale);
 	}
 }
