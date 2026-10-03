@@ -183,10 +183,10 @@ public class AionConnection extends AConnection<AionServerPacket> {
 				}
 			}
 
-			if (pck.read()) {
-				sendPacketInfo(pck);
-				packetProcessor.executePacket(pck);
-			}
+			if (!pck.read())
+				return false;
+			sendPacketInfo(pck);
+			packetProcessor.executePacket(pck);
 		}
 
 		return true;

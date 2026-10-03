@@ -125,9 +125,11 @@ public class LoginConnection extends AConnection<AionServerPacket> {
 
 		AionClientPacket pck = AionPacketHandlerFactory.handle(data, this);
 
-		// Execute packet only if packet exists and read was ok.
-		if (pck != null && pck.read())
+		if (pck != null) {
+			if (!pck.read())
+				return false;
 			processor.executePacket(pck);
+		}
 
 		return true;
 	}
