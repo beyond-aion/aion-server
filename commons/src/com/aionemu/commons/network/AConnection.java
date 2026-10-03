@@ -78,7 +78,7 @@ public abstract class AConnection<T extends BaseServerPacket> {
 	/**
 	 * Client packets of this connection waiting for execution. Guarded by the lock of the {@link PacketProcessor}.
 	 */
-	final Deque<BaseClientPacket<?>> pendingPackets = new ArrayDeque<>();
+	final Deque<BaseClientPacket<? extends AConnection<?>>> pendingPackets = new ArrayDeque<>();
 
 	/**
 	 * True while this connection waits in the {@link PacketProcessor} or one of its packets is being executed. Guarded by the lock of the

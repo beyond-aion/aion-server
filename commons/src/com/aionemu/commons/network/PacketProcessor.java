@@ -165,7 +165,7 @@ public class PacketProcessor<T extends AConnection<?>> {
 	/**
 	 * Takes the next packet of the connection that waited the longest. The connection stays scheduled until {@link #finishPacket} was called.
 	 */
-	private BaseClientPacket<?> takeNextPacket() {
+	private BaseClientPacket<? extends AConnection<?>> takeNextPacket() {
 		while (readyConnections.isEmpty())
 			notEmpty.awaitUninterruptibly();
 		pendingPacketCount--;
@@ -190,7 +190,7 @@ public class PacketProcessor<T extends AConnection<?>> {
 
 		@Override
 		public void run() {
-			BaseClientPacket<?> packet = null;
+			BaseClientPacket<? extends AConnection<?>> packet = null;
 			for (;;) {
 				lock.lock();
 				try {

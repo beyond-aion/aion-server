@@ -37,10 +37,10 @@ public class CM_CS_AUTH extends GsClientPacket {
 		switch (resp) {
 			case AUTHED -> {
 				getConnection().setState(GameServerConnectionState.AUTHED);
-				log.info("Gameserver #{} is now online", gameServerId);
+				log.info("Game server #{} is now online", gameServerId);
 			}
-			case NOT_AUTHED -> log.warn("Gameserver #{} (IP: {}) tried to register with an invalid password", gameServerId, getConnection().getIP());
-			case ALREADY_REGISTERED -> log.info("Gameserver #{} is already registered", gameServerId);
+			case NOT_AUTHED -> log.warn("Game server #{} (IP: {}) tried to register with an invalid password", gameServerId, getConnection().getIP());
+			case ALREADY_REGISTERED -> log.info("Game server #{} is already registered", gameServerId);
 		}
 		sendPacket(new SM_GS_AUTH_RESPONSE(resp));
 	}

@@ -32,7 +32,7 @@ public class GameServerService {
 	}
 
 	public void setOffline() {
-		log.info("Gameserver #{} is disconnected", GAMESERVER_ID);
+		log.info("Game server #{} disconnected", GAMESERVER_ID);
 		isOnline = false;
 	}
 }

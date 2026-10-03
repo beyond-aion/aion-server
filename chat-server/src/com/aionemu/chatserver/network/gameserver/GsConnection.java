@@ -1,81 +1,59 @@
 package com.aionemu.chatserver.network.gameserver;
 
-import java.io.IOException;
 import java.nio.ByteBuffer;
-import java.nio.channels.SocketChannel;
-import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.Queue;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadPoolExecutor;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.chatserver.network.factories.GsPacketHandlerFactory;
+import com.aionemu.chatserver.network.netty.NettyConnection;
 import com.aionemu.chatserver.service.GameServerService;
-import com.aionemu.commons.network.AConnection;
-import com.aionemu.commons.network.Dispatcher;
+import com.aionemu.commons.network.packet.BaseClientPacket;
+
+import io.netty.channel.Channel;
+import io.netty.util.concurrent.EventExecutor;
 
 /**
  * @author KID
  */
-public class GsConnection extends AConnection<GsServerPacket> {
+public class GsConnection extends NettyConnection<GsServerPacket> {
 
 	private static final Logger log = LoggerFactory.getLogger(GsConnection.class);
-	private static final ExecutorService PACKET_EXECUTOR = Executors.newCachedThreadPool();
-	private final Deque<GsServerPacket> sendMsgQueue = new ArrayDeque<>();
-	private GameServerConnectionState state;
 
-	static {
-		((ThreadPoolExecutor) PACKET_EXECUTOR).setCorePoolSize(1);
-	}
+	private volatile GameServerConnectionState state = GameServerConnectionState.CONNECTED;
 
 	public enum GameServerConnectionState {
-
 		CONNECTED,
 		AUTHED
-
 	}
 
-	public GsConnection(SocketChannel sc, Dispatcher d) throws IOException {
-		super(sc, d, 8192 * 8, 8192 * 8);
-	}
-
-	@Override
-	protected final Queue<GsServerPacket> getSendMsgQueue() {
-		return sendMsgQueue;
+	public GsConnection(Channel channel, EventExecutor packetExecutor) {
+		super(channel, packetExecutor);
 	}
 
 	@Override
-	public boolean processData(ByteBuffer data) {
-		GsClientPacket pck = GsPacketHandlerFactory.handle(data, this);
-		if (pck != null && pck.read())
-			PACKET_EXECUTOR.execute(pck);
-		return true;
+	protected BaseClientPacket<?> createPacket(ByteBuffer data) {
+		return GsPacketHandlerFactory.handle(data, this);
 	}
 
 	@Override
-	protected final boolean writeData(ByteBuffer data) {
-		synchronized (guard) {
-			GsServerPacket packet = sendMsgQueue.pollFirst();
-			if (packet == null)
-				return false;
-			packet.write(this, data);
-			return true;
-		}
+	protected void writePacket(GsServerPacket packet, ByteBuffer buffer) {
+		packet.write(this, buffer);
 	}
 
 	@Override
-	protected final void onDisconnect() {
+	protected int getMaxPendingPackets() {
+		return 10_000;
+	}
+
+	@Override
+	protected void onConnect() {
+		log.info("Game server connected: {}", getIP());
+	}
+
+	@Override
+	protected void onDisconnect() {
 		GameServerService.getInstance().setOffline();
-	}
-
-	@Override
-	protected final void onServerClose() {
-		close();
-		PACKET_EXECUTOR.shutdown();
 	}
 
 	public GameServerConnectionState getState() {
@@ -88,12 +66,6 @@ public class GsConnection extends AConnection<GsServerPacket> {
 
 	@Override
 	public String toString() {
-		return "Gameserver " + getIP();
-	}
-
-	@Override
-	protected void initialized() {
-		state = GameServerConnectionState.CONNECTED;
-		log.info("Gameserver connection attempt from: {}", getIP());
+		return "Game server " + getIP();
 	}
 }
