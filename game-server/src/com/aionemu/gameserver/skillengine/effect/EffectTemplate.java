@@ -358,7 +358,7 @@ public abstract class EffectTemplate {
 	 */
 	private boolean checkDodgeOrResistRate(Effect effect) {
 		Creature effector = effect.getEffector();
-		int accuracyModifier = accMod2 + accMod1 * effect.getSkillLevel() + effect.getAccModBoost();
+		int accuracyModifier = accMod2 + accMod1 * effect.getSkillLevel();
 		if (effect.getSkillTemplate().getSubType() == SkillSubType.DEBUFF)
 			accuracyModifier += effector.getGameStats().getStat(StatEnum.BOOST_RESIST_DEBUFF, 0).getCurrent();
 		OneTimeBoostSkillAttack boost = OneTimeBoostSkillAttackEffect.getActiveBoost(effector, this);
@@ -422,19 +422,15 @@ public abstract class EffectTemplate {
 		}
 
 		// chance to trigger subeffect
-		if (Rnd.chance() >= subEffect.getChance())
+		if (Rnd.chance() >= subEffect.getChance(effect.getSkillLevel()))
 			return;
 
 		SkillTemplate template = DataManager.SKILL_DATA.getSkillTemplate(subEffect.getSkillId());
 		int level = 1;
-		int accBoost = effect.getAccModBoost();
-		if (subEffect.isAddEffect()) { // Only used by signet bursts
-			level = effect.getSignetBurstedCount();
-			accBoost = Short.MAX_VALUE; // sub effects cannot be resisted by magic resist in case of signet bursts
-		}
+		if (subEffect.isAddEffect()) // Only used by signet bursts
+			level = effect.getSignetBurstedCount() + 1; // sub effect level is its base level (always 1) + the bursted signet level
 		Effect newEffect = new Effect(effect.getEffector(), effect.getOriginalEffected(), template, level, null, effect.getForceType(), true, null);
 		newEffect.setShieldDefense(effect.getShieldDefense());
-		newEffect.setAccModBoost(accBoost);
 		newEffect.initialize();
 		if (newEffect.getSpellStatus() != SpellStatus.DODGE && newEffect.getSpellStatus() != SpellStatus.RESIST)
 			effect.setSpellStatus(newEffect.getSpellStatus());
