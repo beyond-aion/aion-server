@@ -100,15 +100,15 @@ public final class ShoutEventHandler {
 		// TODO: Figure out what the difference between ATTACK_BEGIN and HELP; HELPCALL should make NPC run
 		if (npcAI.ask(AIQuestion.CAN_SHOUT)) {
 			Npc npc = npcAI.getOwner();
-			if (attacker.getActingCreature() instanceof Player) {
+			if (attacker.getMaster() instanceof Player attackerMaster) {
 				if (npc.getAttackedCount() == 0) {
 					List<NpcShout> shouts = DataManager.NPC_SHOUT_DATA.getNpcShouts(npc.getPosition().getMapId(), npc.getNpcId(), ShoutEventType.ATTACKED);
 					if (shouts != null && !shouts.isEmpty()) {
-						NpcShoutsService.getInstance().shoutRandom(npc, (Player) attacker.getActingCreature(), shouts, 0);
+						NpcShoutsService.getInstance().shoutRandom(npc, attackerMaster, shouts, 0);
 						return;
 					}
 					shouts = DataManager.NPC_SHOUT_DATA.getNpcShouts(npc.getPosition().getMapId(), npc.getNpcId(), ShoutEventType.HELPCALL);
-					NpcShoutsService.getInstance().shoutRandom(npc, (Player) attacker.getActingCreature(), shouts, 0);
+					NpcShoutsService.getInstance().shoutRandom(npc, attackerMaster, shouts, 0);
 				}
 			} else {
 				List<NpcShout> shouts = DataManager.NPC_SHOUT_DATA.getNpcShouts(npc.getPosition().getMapId(), npc.getNpcId(), ShoutEventType.ATTACKED);

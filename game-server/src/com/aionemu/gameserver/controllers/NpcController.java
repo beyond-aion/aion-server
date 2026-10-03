@@ -47,7 +47,6 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.stats.StatFunctions;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.geo.GeoService;
-import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
  * This class is for controlling Npc's
@@ -295,7 +294,7 @@ public class NpcController extends CreatureController<Npc> {
 		if (attacker instanceof Summon && attacker.isSpawned())
 			actingCreature = attacker;
 		else
-			actingCreature = attacker.getActingCreature();
+			actingCreature = attacker.getMaster();
 
 		super.onAttack(actingCreature, effect, type, damage, notifyAttack, logId, attackStatus, hopType);
 
@@ -315,13 +314,6 @@ public class NpcController extends CreatureController<Npc> {
 	public void onStopMove() {
 		super.onStopMove();
 		MoveTaskManager.getInstance().removeCreature(getOwner());
-	}
-
-	@Override
-	public void onEnterZone(ZoneInstance zoneInstance) {
-		if (zoneInstance.getAreaTemplate().getZoneName() == null) {
-			log.error("No name found for a Zone in the map " + zoneInstance.getAreaTemplate().getWorldId());
-		}
 	}
 
 	@Override

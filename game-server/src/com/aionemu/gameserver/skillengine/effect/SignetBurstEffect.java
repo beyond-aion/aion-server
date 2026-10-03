@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlType;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.controllers.attack.AttackUtil;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.SkillElement;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.SignetData;
 import com.aionemu.gameserver.skillengine.model.SignetEnum;
@@ -34,8 +33,6 @@ public class SignetBurstEffect extends DamageEffect {
 	public void calculateDamage(Effect effect) {
 		Effect signetEffect = effect.getEffected().getEffectController().getAbnormalEffect(signet);
 		int valueWithDelta = calculateBaseValue(effect);
-		if (element != SkillElement.NONE)
-			valueWithDelta *= effect.getEffector().getGameStats().getKnowledge().getCurrent() / 100f;
 
 		int effectProb = 0;
 		int signetLvl = Math.min(signetlvl, signetEffect == null ? 0 : signetEffect.getSkillLevel());
@@ -69,4 +66,8 @@ public class SignetBurstEffect extends DamageEffect {
 		return signet;
 	}
 
+	@Override
+	public boolean shouldUseBoostSpellAttackEffects() {
+		return false;
+	}
 }

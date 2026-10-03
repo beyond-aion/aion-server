@@ -1,6 +1,7 @@
 package quest.cygnea;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
+import static com.aionemu.gameserver.model.items.ItemUseAnimation.*;
 
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -130,12 +131,12 @@ public class _10501ResearchtheRuins extends AbstractQuestHandler {
 			return HandlerResult.UNKNOWN;
 
 		final int itemObjId = item.getObjectId();
-		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 1000, 0, 0), true);
+		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 1000, USE_START), true);
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
 			public void run() {
-				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0, 1, 0), true);
+				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0, USE_SUCCESS), true);
 				int var = qs.getQuestVarById(0);
 				// Step 1: Use the Ruins Location Map to find the first location
 				// Step 3: Use the Ruins Location Map to find the second location

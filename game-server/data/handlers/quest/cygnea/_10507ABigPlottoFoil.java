@@ -7,7 +7,7 @@ import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.world.zone.ZoneName;
+import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
  * @Author Majka
@@ -48,7 +48,7 @@ public class _10507ABigPlottoFoil extends AbstractQuestHandler {
 		for (int mob : mobs) {
 			qe.registerQuestNpc(mob).addOnKillEvent(questId);
 		}
-		qe.registerOnEnterZone(ZoneName.get("LF5_SENSORYAREA_Q10507_206366_2_210070000"), questId); // Beritra Guard Captain's Tent zone
+		qe.registerOnEnterZone("LF5_SENSORYAREA_Q10507_206366_2_210070000", questId); // Beritra Guard Captain's Tent zone
 		qe.registerOnLevelChanged(questId);
 		qe.registerOnQuestCompleted(questId);
 	}
@@ -152,9 +152,9 @@ public class _10507ABigPlottoFoil extends AbstractQuestHandler {
 	}
 
 	@Override
-	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) { // Step 7: Infiltrate Beritra Guard Captain's Tent.
+	public boolean onEnterZoneEvent(QuestEnv env, ZoneInstance zone) { // Step 7: Infiltrate Beritra Guard Captain's Tent.
 
-		if (zoneName == ZoneName.get("LF5_SENSORYAREA_Q10507_206366_2_210070000")) {
+		if (zone.matches("LF5_SENSORYAREA_Q10507_206366_2_210070000")) {
 
 			Player player = env.getPlayer();
 			if (player == null) {

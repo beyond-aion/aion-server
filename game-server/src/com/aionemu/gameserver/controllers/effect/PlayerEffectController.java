@@ -1,9 +1,6 @@
 package com.aionemu.gameserver.controllers.effect;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.EnumMap;
-import java.util.Map;
+import java.util.*;
 
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -98,7 +95,7 @@ public class PlayerEffectController extends EffectController {
 		return effect.getTargetSlot() == SkillTargetSlot.DEBUFF && effect.getEffector() instanceof Player player && !getOwner().equals(player) && !getOwner().isEnemy(player);
 	}
 
-	public void addSavedEffect(int skillId, int skillLvl, int remainingTime, long endTime, ForceType forceType) {
+	public void addSavedEffect(int skillId, int skillLvl, int remainingTime, long endTime, ForceType forceType, Set<Integer> magicalCriticalPositions) {
 		if (EventService.getInstance().isInactiveEventForceType(forceType))
 			return;
 		SkillTemplate template = DataManager.SKILL_DATA.getSkillTemplate(skillId);
@@ -113,7 +110,7 @@ public class PlayerEffectController extends EffectController {
 				remainingTime = (int) (endTime - System.currentTimeMillis());
 		}
 
-		Effect effect = new Effect(getOwner(), getOwner(), template, skillLvl, remainingTime, forceType);
+		Effect effect = new Effect(getOwner(), getOwner(), template, skillLvl, remainingTime, forceType, false, magicalCriticalPositions);
 		put(effect);
 		effect.addAllEffectToSucess();
 		effect.startEffect();

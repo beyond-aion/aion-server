@@ -57,7 +57,7 @@ public class Npc extends Creature {
 		super(IDFactory.getInstance().nextId(), controller, spawnTemplate, objectTemplate, new WorldPosition(spawnTemplate.getWorldId()), true);
 		controller.setOwner(this);
 		moveController = new NpcMoveController(this);
-		skillList = new NpcSkillList(this);
+		skillList = DataManager.NPC_SKILL_DATA.getOrCreateNpcSkillList(getNpcId());
 		setupStatContainers();
 	}
 

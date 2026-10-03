@@ -8,7 +8,7 @@ import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.world.zone.ZoneName;
+import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
  * @author MrPoke
@@ -23,7 +23,7 @@ public class _1123WheresTutty extends AbstractQuestHandler {
 	public void register() {
 		qe.registerQuestNpc(790001).addOnTalkEvent(questId);
 		qe.registerQuestNpc(790001).addOnQuestStart(questId);
-		qe.registerOnEnterZone(ZoneName.get("QUEST_1123_210010000"), questId);
+		qe.registerOnEnterZone("QUEST_1123_210010000", questId);
 	}
 
 	@Override
@@ -49,8 +49,8 @@ public class _1123WheresTutty extends AbstractQuestHandler {
 	}
 
 	@Override
-	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) {
-		if (zoneName != ZoneName.get("QUEST_1123_210010000"))
+	public boolean onEnterZoneEvent(QuestEnv env, ZoneInstance zone) {
+		if (!zone.matches("QUEST_1123_210010000"))
 			return false;
 		final Player player = env.getPlayer();
 		if (player == null)

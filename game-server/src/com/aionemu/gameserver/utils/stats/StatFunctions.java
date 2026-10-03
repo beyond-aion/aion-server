@@ -10,6 +10,7 @@ import com.aionemu.gameserver.configs.main.RatesConfig;
 import com.aionemu.gameserver.controllers.attack.AttackResult;
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
 import com.aionemu.gameserver.controllers.observer.AttackerCriticalStatus;
+import com.aionemu.gameserver.controllers.observer.OneTimeBoostSkillAttack;
 import com.aionemu.gameserver.model.SkillElement;
 import com.aionemu.gameserver.model.gameobjects.*;
 import com.aionemu.gameserver.model.gameobjects.player.Equipment;
@@ -379,18 +380,22 @@ public class StatFunctions {
 	}
 
 	public static float calculateMagicalSkillDamage(Creature effector, Creature target, float baseDamage, int bonus, EffectTemplate template,
-													boolean useMagicBoost, boolean useKnowledge) {
+													boolean useMagicBoost, boolean useKnowledge, boolean useBoostSpellAttack) {
 		float damage = baseDamage;
-		if (!(template instanceof NoReduceSpellATKInstantEffect)) {
-			CreatureGameStats<?> sgs = effector.getGameStats();
-			CreatureGameStats<?> tgs = target.getGameStats();
-			float magicBoost = useMagicBoost ? sgs.getMBoost().getCurrent() : 0;
-			magicBoost -= effector instanceof Trap ? 0 : tgs.getMBResist().getCurrent();
+		CreatureGameStats<?> sgs = effector.getGameStats();
+		CreatureGameStats<?> tgs = target.getGameStats();
+		int magicBoost = 0;
+
+		if (useMagicBoost) {
+			magicBoost = sgs.getMBoost().getCurrent();
+			magicBoost -= tgs.getMBResist().getCurrent();
 			magicBoost = (int) Math.max(0, limit(StatEnum.BOOST_MAGICAL_SKILL, magicBoost));
-			float knowledge = useKnowledge ? sgs.getKnowledge().getCurrent() : 100; // this line might be wrong now
-			damage *= (1 + (magicBoost / (knowledge * 10)));
-			damage = sgs.getStat(StatEnum.BOOST_SPELL_ATTACK, (int) damage).getCurrent();
 		}
+		int knowledge = useKnowledge ? sgs.getKnowledge().getCurrent() : 100;
+		damage *= (magicBoost / 1000f) + (knowledge / 100f);
+
+		if (useBoostSpellAttack)
+			damage = sgs.getStat(StatEnum.BOOST_SPELL_ATTACK, (int) damage).getCurrent();
 
 		// add bonus damage
 		damage += bonus;
@@ -413,8 +418,8 @@ public class StatFunctions {
 	/**
 	 * Calculates MAGICAL CRITICAL chance
 	 */
-	public static boolean calculateMagicalCriticalRate(Creature attacker, Creature attacked, int criticalProb, boolean applyMcrit) {
-		if (attacker instanceof Servant || attacker instanceof Homing || !applyMcrit)
+	public static boolean calculateMagicalCriticalRate(Creature attacker, Creature attacked, int criticalProb) {
+		if (attacker instanceof Servant || attacker instanceof Homing)
 			return false;
 
 		float critical = attacker.getGameStats().getMCritical().getCurrent() - attacked.getGameStats().getMCR().getCurrent();
@@ -467,6 +472,8 @@ public class StatFunctions {
 	 */
 	public static float adjustDamageByPvpOrPveModifiers(Creature attacker, Creature target, float baseDamage, int pvpDamage, boolean useTemplateDmg,
 		SkillElement element) {
+		if (attacker.equals(target)) // e.g. material skills, which the creature casts on itself
+			return baseDamage;
 		int attackBonus = 0;
 		int defenseBonus = 0;
 		float damage = baseDamage;
@@ -603,14 +610,21 @@ public class StatFunctions {
 	}
 
 	public static int calculateMagicalResistRate(Creature attacker, Creature attacked, int accMod, SkillElement element) {
+		return calculateMagicalResistRate(attacker, attacked, accMod, element, null);
+	}
+
+	public static int calculateMagicalResistRate(Creature attacker, Creature attacked, int accMod, SkillElement element,
+		OneTimeBoostSkillAttack boost) {
 		if (attacked.getObserveController().checkAttackStatus(AttackStatus.RESIST))
 			return 1000;
 		if (element != SkillElement.NONE && attacked instanceof Summon summon && element == summon.getAlwaysResistElement())
 			return 1000;
 
+		Stat2 mAccuracy = attacker.getGameStats().getMAccuracy();
+		int accuracy = boost == null ? mAccuracy.getCurrent() + accMod : boost.calculateMagicalAccuracy(mAccuracy, accMod);
 		int levelDiff = attacked.getLevel() - attacker.getLevel();
 		int mResi = attacked.getGameStats().getMResist().getCurrent();
-		int resistRate = mResi - attacker.getGameStats().getMAccuracy().getCurrent() - accMod;
+		int resistRate = mResi - accuracy;
 
 		if (mResi > 0 && levelDiff > 4) // only apply if creature has mres > 0 (to keep effect of AI#modifyOwnerStat)
 			resistRate += (levelDiff - 4) * 100;

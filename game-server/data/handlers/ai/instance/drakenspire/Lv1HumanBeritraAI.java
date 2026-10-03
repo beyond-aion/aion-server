@@ -175,13 +175,11 @@ public class Lv1HumanBeritraAI extends AggressiveNoLootNpcAI {
 	 * Retail sequence => Beritra will immediately execute 21604 + 21603 (Rending Shadow);
 	 */
 	protected void handleBuffsRemovedByNpc() {
-		int chainId = getOwner().getGameStats().getLastSkill().getNextChainId();
-		NpcSkillEntry entry = getOwner().getSkillList().getNpcSkills().stream().filter(nse -> nse.getChainId() == chainId).findAny().orElse(null);
-
+		List<NpcSkillEntry> nextChainSkills = getOwner().getSkillList().getChainSkillsSortedByPriority(getOwner().getGameStats().getLastSkill());
 		getOwner().queueSkill(21604, 56, 0);
-		getOwner().queueSkill(21603, 56, entry == null ? -1 : 0);
-		if (entry != null)
-			getOwner().queueSkill(entry);
+		getOwner().queueSkill(21603, 56, nextChainSkills.isEmpty() ? -1 : 0);
+		if (!nextChainSkills.isEmpty())
+			getOwner().queueSkill(nextChainSkills.getFirst());
 	}
 
 	/**

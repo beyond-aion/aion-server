@@ -54,8 +54,8 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 	}
 
 	@Override
-	public Stat2 getAttackSpeed() {
-		return getStat(StatEnum.ATTACK_SPEED, owner.getObjectTemplate().getAttackSpeed());
+	public int getBaseAttackSpeed() {
+		return owner.getObjectTemplate().getAttackSpeed();
 	}
 
 	@Override
@@ -92,7 +92,7 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 		int divider = 2;
 		if (owner.getAbyssNpcType() != AbyssNpcType.NONE)
 			divider = 4; // Abyss type related NPCs restore their health by 25%
-		return getStat(StatEnum.REGEN_HP, getStatsTemplate().getMaxHp() / divider);
+		return getStat(StatEnum.REGEN_HP, getMaxHp().getExactCurrent() / divider);
 	}
 
 	@Override

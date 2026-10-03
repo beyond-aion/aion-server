@@ -7,7 +7,7 @@ import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.world.zone.ZoneName;
+import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
  * @author zhkchi, Majka
@@ -22,7 +22,7 @@ public class _28500OdellaOdellaWhereArtThou extends AbstractQuestHandler {
 	public void register() {
 		int[] npcs = { 203560, 203649, 730306, 730307, 799522 };
 		qe.registerQuestNpc(203560).addOnQuestStart(questId);
-		qe.registerOnEnterZone(ZoneName.get("DF1A_SENSORYAREA_Q28500_206151_3_220030000"), questId);
+		qe.registerOnEnterZone("DF1A_SENSORYAREA_Q28500_206151_3_220030000", questId);
 		for (int npc : npcs) {
 			qe.registerQuestNpc(npc).addOnTalkEvent(questId);
 		}
@@ -95,9 +95,9 @@ public class _28500OdellaOdellaWhereArtThou extends AbstractQuestHandler {
 	}
 
 	@Override
-	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) { // Investigate the Abandoned Relic Site.
+	public boolean onEnterZoneEvent(QuestEnv env, ZoneInstance zone) { // Investigate the Abandoned Relic Site.
 
-		if (zoneName == ZoneName.get("DF1A_SENSORYAREA_Q28500_206151_3_220030000")) {
+		if (zone.matches("DF1A_SENSORYAREA_Q28500_206151_3_220030000")) {
 
 			Player player = env.getPlayer();
 			if (player == null) {

@@ -55,6 +55,9 @@ public class Effect implements StatOwner {
 	private SpellStatus spellStatus = SpellStatus.NONE;
 	private DashStatus dashStatus = DashStatus.NONE;
 	private AttackStatus attackStatus = AttackStatus.NORMALHIT;
+	private final boolean[] magicalCriticals = new boolean[4];
+	private boolean magicalCriticalRolled;
+	private boolean magicalCritical;
 
 	/**
 	 * shield effects related
@@ -113,7 +116,7 @@ public class Effect implements StatOwner {
 
 	// Whether this effect is a sub effect of another effect
 	private boolean isSubEffect = false;
-	private boolean applyCriticalEffect = false;
+	private boolean applyCriticalProcEffect = false;
 	private final AtomicBoolean allowGodstoneActivation = new AtomicBoolean();
 
 	public Effect(Skill skill, Creature effected) {
@@ -129,7 +132,14 @@ public class Effect implements StatOwner {
 		this(effector, effected, skillTemplate, skillLevel, null, null);
 	}
 
-	public Effect(Creature effector, Creature effected, SkillTemplate skillTemplate, int skillLevel, Integer duration, ForceType forceType, boolean isSubEffect) {
+	/**
+	 * If duration is null, it will be calculated upon execution, else the forced value will be used.
+	 */
+	public Effect(Creature effector, Creature effected, SkillTemplate skillTemplate, int skillLevel, Integer duration, ForceType forceType) {
+		this(effector, effected, skillTemplate, skillLevel, duration, forceType, false, null);
+	}
+
+	public Effect(Creature effector, Creature effected, SkillTemplate skillTemplate, int skillLevel, Integer duration, ForceType forceType, boolean isSubEffect, Set<Integer> magicalCriticalPositions) {
 		this.effector = effector;
 		this.effected = effected;
 		this.skillTemplate = skillTemplate;
@@ -138,19 +148,8 @@ public class Effect implements StatOwner {
 		this.forceType = forceType;
 		this.isSubEffect = isSubEffect;
 		this.power = skillTemplate.getReqDispelCount();
-	}
-
-	/**
-	 * If duration is null, it will be calculated upon execution, else the forced value will be used.
-	 */
-	public Effect(Creature effector, Creature effected, SkillTemplate skillTemplate, int skillLevel, Integer duration, ForceType forceType) {
-		this.effector = effector;
-		this.effected = effected;
-		this.skillTemplate = skillTemplate;
-		this.skillLevel = skillLevel;
-		this.duration = duration;
-		this.forceType = forceType;
-		this.power = skillTemplate.getReqDispelCount();
+		if (magicalCriticalPositions != null)
+			setMagicalCriticals(magicalCriticalPositions);
 	}
 
 	public void setWorldPosition(int worldId, int instanceId, float x, float y, float z) {
@@ -257,6 +256,47 @@ public class Effect implements StatOwner {
 		this.attackStatus = attackStatus;
 	}
 
+	public boolean isMagicalCritical(int position) {
+		return magicalCriticals[position - 1];
+	}
+
+	/**
+	 * Rolls the magical critical for the given effect position, or takes over the one an earlier position already rolled, since a cast only rolls once
+	 * per target.
+	 */
+	public void rollMagicalCritical(int position, int criticalProb) {
+		if (!magicalCriticalRolled) {
+			magicalCritical = StatFunctions.calculateMagicalCriticalRate(effector, effected, criticalProb);
+			magicalCriticalRolled = true;
+		}
+		reuseMagicalCritical(position);
+	}
+
+	/**
+	 * Takes over the magical critical of an earlier effect position without rolling one.
+	 */
+	public void reuseMagicalCritical(int position) {
+		magicalCriticals[position - 1] = magicalCritical;
+	}
+
+	/**
+	 * An effect which got filtered out breaks the chain, so the next effect position rolls its own magical critical again.
+	 */
+	public void resetMagicalCritical() {
+		magicalCritical = false;
+		magicalCriticalRolled = false;
+	}
+
+	private void setMagicalCriticals(Set<Integer> positions) {
+		magicalCritical = false;
+		magicalCriticalRolled = true;
+		for (int i = 0; i < magicalCriticals.length; i++) {
+			int position = i + 1;
+			magicalCriticals[i] = positions.contains(position);
+			magicalCritical |= magicalCriticals[i];
+		}
+	}
+
 	public List<EffectTemplate> getEffectTemplates() {
 		return skillTemplate.getEffects().getEffects();
 	}
@@ -332,8 +372,8 @@ public class Effect implements StatOwner {
 					toSend.add(er);
 			}
 		}
-		if (toSend.isEmpty())
-			return Collections.singleton(new EffectReserved(0, 0, ResourceType.HP, true));
+		if (toSend.isEmpty()) // effects without a sent value (like damage over time) can still show their attack status
+			return Collections.singleton(new EffectReserved(0, 0, ResourceType.HP, true, true, attackStatus));
 		return toSend;
 	}
 
@@ -488,13 +528,13 @@ public class Effect implements StatOwner {
 				}
 			}
 			if (effector instanceof Player p && getAttackStatus() == AttackStatus.CRITICAL && getSubEffect() == null && !isPeriodic() && Rnd.chance() < 10) {
-				Effect criticalEffect = SkillEngine.getInstance().createCriticalEffect(p, getEffected(), skillTemplate.getSkillId());
-				if (criticalEffect != null && criticalEffect.getEffectResult() != EffectResult.DODGE && criticalEffect.getEffectResult() != EffectResult.RESIST) {
-					applyCriticalEffect = true;
-					setSpellStatus(criticalEffect.getSpellStatus());
-					setSubEffect(criticalEffect);
-					setSubEffectType(criticalEffect.getSubEffectType());
-					setTargetLoc(criticalEffect.getTargetX(), criticalEffect.getTargetY(), criticalEffect.getTargetZ());
+				Effect criticalProcEffect = SkillEngine.getInstance().createCriticalProcEffect(p, getEffected(), skillTemplate.getSkillId());
+				if (criticalProcEffect != null && criticalProcEffect.getEffectResult() != EffectResult.DODGE && criticalProcEffect.getEffectResult() != EffectResult.RESIST) {
+					applyCriticalProcEffect = true;
+					setSpellStatus(criticalProcEffect.getSpellStatus());
+					setSubEffect(criticalProcEffect);
+					setSubEffectType(criticalProcEffect.getSubEffectType());
+					setTargetLoc(criticalProcEffect.getTargetX(), criticalProcEffect.getTargetY(), criticalProcEffect.getTargetZ());
 				}
 			}
 		}
@@ -566,7 +606,7 @@ public class Effect implements StatOwner {
 					break;
 				template.startSubEffect(this);
 			}
-			if (applyCriticalEffect && subEffect != null)
+			if (applyCriticalProcEffect && subEffect != null)
 				subEffect.applyEffect();
 			if (effected != null)
 				effected.getAi().onEffectApplied(this);
@@ -613,6 +653,16 @@ public class Effect implements StatOwner {
 			if (successEffects.isEmpty())
 				return;
 
+			if (duration == null) {
+				if (isToggle()) {
+					if (effector instanceof Player)
+						activateToggleSkill();
+					duration = skillTemplate.getToggleTimer();
+				} else {
+					duration = calculateEffectsDuration();
+				}
+			}
+
 			schedulePeriodicActions();
 
 			if (!successEffects.isEmpty()) {
@@ -623,15 +673,6 @@ public class Effect implements StatOwner {
 
 			broadcastHate();
 
-			if (duration == null) {
-				if (isToggle()) {
-					if (effector instanceof Player)
-						activateToggleSkill();
-					duration = skillTemplate.getToggleTimer();
-				} else {
-					duration = calculateEffectsDuration();
-				}
-			}
 			if (duration == 0)
 				return;
 			endTime = System.currentTimeMillis() + duration;
@@ -839,7 +880,17 @@ public class Effect implements StatOwner {
 	}
 
 	private int calculateEffectsDuration() {
-		long duration = calculateTemplateDuration();
+		EffectTemplate durationTemplate = null;
+		long duration = 0;
+		// the first effect with a duration > 0 sets the skill duration, longer durations of other effects are ignored (see 620 Armor of Attrition)
+		for (EffectTemplate et : successEffects.values()) {
+			long templateDuration = et.getDuration2() + ((long) et.getDuration1()) * getSkillLevel(); // some event skills would produce an int overflow
+			if (templateDuration > 0) {
+				durationTemplate = et;
+				duration = et.getRandomTime() > 0 ? templateDuration - Rnd.get(0, et.getRandomTime()) : templateDuration;
+				break;
+			}
+		}
 
 		if (getEffected() instanceof Player effectedPlayer) {
 			boolean isEffectorPlayer = (CustomConfig.COUNT_SUMMON_EFFECTS_FOR_CUMULATIVE_RESIST ? effector.getMaster() : effector) instanceof Player;
@@ -850,20 +901,9 @@ public class Effect implements StatOwner {
 				duration = duration * skillTemplate.getPvpDuration() / 100;
 			}
 		}
+		if (durationTemplate instanceof AbstractOverTimeEffect overTimeEffect)
+			duration = overTimeEffect.roundDurationToTicks(duration);
 		return (int) Math.min(Integer.MAX_VALUE, duration);
-	}
-
-	private long calculateTemplateDuration() {
-		// retail sets the first effect duration > 0 as the skill duration, ignoring longer durations of other effects (see 620 Armor of Attrition)
-		for (EffectTemplate et : successEffects.values()) {
-			long effectDuration = et.getDuration2() + ((long) et.getDuration1()) * getSkillLevel(); // some event skills would produce an int overflow
-			if (effectDuration > 0) {
-				if (et.getRandomTime() > 0)
-					effectDuration -= Rnd.get(0, et.getRandomTime());
-				return effectDuration;
-			}
-		}
-		return 0;
 	}
 
 	private long applyCumulativeResistDurationMultiplier(long duration, Player effected) {

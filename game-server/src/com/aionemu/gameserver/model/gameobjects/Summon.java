@@ -142,12 +142,12 @@ public class Summon extends Creature {
 
 	@Override
 	public boolean isEnemyFrom(Player player) {
-		return master.isEnemyFrom(player);
+		return master.isEnemyFrom(player, this);
 	}
 
 	@Override
 	public boolean isPvpTarget(Creature creature) {
-		return creature.getActingCreature() instanceof Player;
+		return creature.getMaster() instanceof Player;
 	}
 
 	@Override
@@ -163,11 +163,6 @@ public class Summon extends Creature {
 	@Override
 	public SummonMoveController getMoveController() {
 		return (SummonMoveController) super.getMoveController();
-	}
-
-	@Override
-	public Player getActingCreature() {
-		return getMaster();
 	}
 
 	@Override

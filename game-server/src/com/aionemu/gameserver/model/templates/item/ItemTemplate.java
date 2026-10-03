@@ -22,7 +22,6 @@ import com.aionemu.gameserver.model.templates.item.enums.ItemGroup;
 import com.aionemu.gameserver.model.templates.item.enums.ItemSubType;
 import com.aionemu.gameserver.model.templates.itemset.ItemSetTemplate;
 import com.aionemu.gameserver.model.templates.stats.ModifiersTemplate;
-import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author Luno, ATracer
@@ -436,7 +435,7 @@ public class ItemTemplate extends VisibleObjectTemplate {
 		return useLimits.getUseArea() != null;
 	}
 
-	public ZoneName getUseArea() {
+	public String getUseArea() {
 		return useLimits.getUseArea();
 	}
 
@@ -552,10 +551,6 @@ public class ItemTemplate extends VisibleObjectTemplate {
 
 	public ItemGroup getItemGroup() {
 		return itemGroup;
-	}
-
-	public int[] getRequiredSkills() {
-		return itemGroup.getRequiredSkills();
 	}
 
 	public String getTemperingName() {

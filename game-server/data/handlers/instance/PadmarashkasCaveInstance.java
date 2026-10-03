@@ -15,7 +15,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
-import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author Ritsu, Luzien
@@ -67,7 +66,7 @@ public class PadmarashkasCaveInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void onEnterZone(Player player, ZoneInstance zone) {
-		if (zone.getAreaTemplate().getZoneName() == ZoneName.get("PADMARASHKAS_NEST_320150000") && moviePlayed.compareAndSet(false, true))
+		if (zone.matches("PADMARASHKAS_NEST_320150000") && moviePlayed.compareAndSet(false, true))
 			PacketSendUtility.broadcastToMap(instance, new SM_PLAY_MOVIE(false, 0, 0, 488, true));
 	}
 

@@ -111,8 +111,8 @@ public class SummonGameStats extends CreatureGameStats<Summon> {
 	}
 
 	@Override
-	public Stat2 getAttackSpeed() {
-		return getStat(StatEnum.ATTACK_SPEED, owner.getObjectTemplate().getAttackSpeed());
+	public int getBaseAttackSpeed() {
+		return owner.getObjectTemplate().getAttackSpeed();
 	}
 
 	@Override

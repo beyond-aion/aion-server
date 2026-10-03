@@ -170,9 +170,9 @@ public class ChatUtil {
 		if (posLink == null || !posLink.startsWith("[pos:"))
 			return null;
 
-		int startIndex = posLink.indexOf(";");
+		int startIndex = posLink.indexOf(";") + 1;
 		int endIndex = posLink.indexOf("]");
-		if (startIndex < 0 || startIndex >= endIndex)
+		if (startIndex <= 0 || startIndex >= endIndex)
 			return null;
 		String[] posStr = posLink.substring(startIndex, endIndex).trim().split("\\h+");
 		if (posStr[0].equals("0") || posStr[0].equals("1")) // if present, strip ely/asmo language restriction flag (0 = ely only, 1 = asmo only)

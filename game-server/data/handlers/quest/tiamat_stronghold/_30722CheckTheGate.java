@@ -7,7 +7,7 @@ import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.world.zone.ZoneName;
+import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
  * @author Estrayl
@@ -26,7 +26,7 @@ public class _30722CheckTheGate extends AbstractQuestHandler {
 	public void register() {
 		qe.registerQuestNpc(START_NPC_ID).addOnQuestStart(questId);
 		qe.registerQuestNpc(END_NPC_ID).addOnTalkEvent(questId);
-		qe.registerOnEnterZone(ZoneName.get(ZONE_NAME), questId);
+		qe.registerOnEnterZone(ZONE_NAME, questId);
 	}
 
 	public boolean onDialogEvent(QuestEnv env) {
@@ -55,8 +55,8 @@ public class _30722CheckTheGate extends AbstractQuestHandler {
 	}
 
 	@Override
-	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) {
-		if (zoneName != ZoneName.get(ZONE_NAME))
+	public boolean onEnterZoneEvent(QuestEnv env, ZoneInstance zone) {
+		if (!zone.matches(ZONE_NAME))
 			return false;
 
 		Player player = env.getPlayer();

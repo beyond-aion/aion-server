@@ -10,7 +10,6 @@ import com.aionemu.gameserver.questEngine.task.checker.CoordinateDestinationChec
 import com.aionemu.gameserver.questEngine.task.checker.TargetDestinationChecker;
 import com.aionemu.gameserver.questEngine.task.checker.ZoneChecker;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author ATracer
@@ -61,7 +60,7 @@ public class QuestTasks {
 			1000);
 	}
 
-	public static final Future<?> newFollowingToTargetCheckTask(final QuestEnv env, Npc npc, ZoneName zoneName) {
+	public static Future<?> newFollowingToTargetCheckTask(QuestEnv env, Npc npc, String zoneName) {
 		return ThreadPoolManager.getInstance().scheduleAtFixedRate(new FollowingNpcCheckTask(env, new ZoneChecker(npc, zoneName)), 1000, 1000);
 	}
 }

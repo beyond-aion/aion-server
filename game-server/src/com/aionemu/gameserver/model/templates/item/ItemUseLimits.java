@@ -10,7 +10,6 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.model.Gender;
 import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
-import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author Rolandas
@@ -63,14 +62,8 @@ public class ItemUseLimits {
 		return useDelay;
 	}
 
-	public ZoneName getUseArea() {
-		if (usearea == null)
-			return null;
-		try {
-			return ZoneName.createOrGet(usearea);
-		} catch (Exception e) {
-			return null;
-		}
+	public String getUseArea() {
+		return usearea;
 	}
 
 	public List<Integer> getOwnershipWorldIds() {

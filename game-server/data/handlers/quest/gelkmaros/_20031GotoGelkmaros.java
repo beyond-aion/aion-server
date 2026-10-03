@@ -10,7 +10,6 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.teleport.TeleportService;
-import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @Author Majka
@@ -206,7 +205,7 @@ public class _20031GotoGelkmaros extends AbstractQuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVarById(0);
 			if (var == 9) {
-				if (player.isInsideZone(ZoneName.get("DF4_ITEMUSEAREA_Q20031_220070000"))) {
+				if (player.isInsideZone("DF4_ITEMUSEAREA_Q20031_220070000")) {
 
 					return HandlerResult.fromBoolean(useQuestItem(env, item, 9, 10, false, 566));
 					// playQuestMovie(env, 566);

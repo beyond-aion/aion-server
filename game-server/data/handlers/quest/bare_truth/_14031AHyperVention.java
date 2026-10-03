@@ -14,7 +14,6 @@ import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldMapType;
-import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author Artur
@@ -162,18 +161,18 @@ public class _14031AHyperVention extends AbstractQuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		int var = qs.getQuestVarById(0);
 		if (qs.getStatus() == QuestStatus.START) {
-			if (player.isInsideItemUseZone(ZoneName.get("LF1_ITEMUSEAREA_Q14031"))) {
+			if (player.isInsideItemUseZone("LF1_ITEMUSEAREA_Q14031")) {
 				if (var == 3) {
 					playQuestMovie(env, 21);
 					return HandlerResult.fromBoolean(useQuestItem(env, item, 3, 4, false));// 3-4
 				}
 			}
-			if (player.isInsideItemUseZone(ZoneName.get("LF1A_ITEMUSEAREA_Q14031"))) {
+			if (player.isInsideItemUseZone("LF1A_ITEMUSEAREA_Q14031")) {
 				if (var == 5) {
 					return HandlerResult.fromBoolean(useQuestItem(env, item, 5, 6, false));// 5-6
 				}
 			}
-			if (player.isInsideItemUseZone(ZoneName.get("LF2_ITEMUSEAREA_Q14031"))) {
+			if (player.isInsideItemUseZone("LF2_ITEMUSEAREA_Q14031")) {
 				if (var == 7) {
 					return HandlerResult.fromBoolean(useQuestItem(env, item, 7, 8, false));// 7-8
 				}

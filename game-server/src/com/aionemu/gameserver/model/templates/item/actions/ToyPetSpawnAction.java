@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.model.templates.item.actions;
 
+import static com.aionemu.gameserver.model.items.ItemUseAnimation.*;
+
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
@@ -22,6 +24,7 @@ import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.spawnengine.VisibleObjectSpawner;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+import com.aionemu.gameserver.world.zone.ZoneAttributes;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
@@ -75,19 +78,20 @@ public class ToyPetSpawnAction extends AbstractItemAction {
 			return;
 		}
 		PacketSendUtility.broadcastPacket(player,
-			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), castingDelay, 0, 0), true);
-		final ItemUseObserver observer = new ItemUseObserver() {
+			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), castingDelay, USE_START), true);
+		ItemUseObserver observer = new ItemUseObserver(player) {
 
 			@Override
-			public void abort() {
+			protected void onAbort() {
 				player.getController().cancelTask(TaskId.ITEM_USE);
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_CANCELED());
 				PacketSendUtility.broadcastPacket(player,
-					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), 0, 2, 0), true);
+					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), 0, USE_CANCEL),
+					true);
 			}
 		};
 
-		player.getObserveController().attach(observer);
+		player.getObserveController().addObserver(observer);
 		player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(() -> {
 			player.getObserveController().removeObserver(observer);
 			finishUse(player, parentItem);
@@ -97,12 +101,12 @@ public class ToyPetSpawnAction extends AbstractItemAction {
 	private void finishUse(Player player, Item parentItem) {
 		if (!canAct(player, parentItem, null)) {
 			PacketSendUtility.broadcastPacket(player,
-				new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, 2, 0), true);
+				new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, USE_FAIL), true);
 			return;
 		}
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_USE_ITEM(parentItem.getL10n()));
 		PacketSendUtility.broadcastPacket(player,
-			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, 1, 1), true);
+			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, USE_SUCCESS), true);
 		// RemoveKisk
 		if (!player.getInventory().decreaseByObjectId(parentItem.getObjectId(), 1))
 			return;
@@ -131,8 +135,10 @@ public class ToyPetSpawnAction extends AbstractItemAction {
 	}
 
 	private boolean isPutKiskZone(Player player) {
+		if (!player.getWorldMapInstance().getTemplate().hasAttribute(ZoneAttributes.BIND))
+			return false;
 		for (ZoneInstance zone : player.findZones()) {
-			if (!zone.canPutKisk())
+			if (zone.getZoneTemplate().getFlags() > 0 && !zone.getZoneTemplate().hasZoneAttribute(ZoneAttributes.BIND))
 				return false;
 		}
 		return true;
