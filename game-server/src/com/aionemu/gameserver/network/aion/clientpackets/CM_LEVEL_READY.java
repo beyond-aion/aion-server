@@ -57,7 +57,7 @@ public class CM_LEVEL_READY extends AionClientPacket {
 		WindstreamTemplate template = DataManager.WINDSTREAM_DATA.getStreamTemplate(activePlayer.getPosition().getMapId());
 		if (template != null)
 			for (Location2D location : template.getLocations().getLocation()) {
-				sendPacket(new SM_WINDSTREAM_ANNOUNCE(location.getFlyPathType().getId(), template.getMapId(), location.getId(), location.getState()));
+				sendPacket(new SM_WINDSTREAM_ANNOUNCE(location.getFlyPathType(), template.getMapId(), location.getId(), location.getState()));
 			}
 
 		// Spawn player into the world.
