@@ -102,6 +102,19 @@
 			<Pattern>${date} %message%n</Pattern>
 		</encoder>
 	</appender>
+	<appender name="app_motion_audit" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${logFolder}/motion_audit.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<fileNamePattern>${logFolder}/motion_audit.%i.log</fileNamePattern>
+			<maxIndex>${gameserver.log.max_rolled_files}</maxIndex>
+		</rollingPolicy>
+		<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<maxFileSize>${gameserver.log.max_file_size}</maxFileSize>
+		</triggeringPolicy>
+		<encoder>
+			<Pattern>${date} %message%n</Pattern>
+		</encoder>
+	</appender>
 	<appender name="app_chat" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<file>${logFolder}/chat.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
@@ -329,6 +342,9 @@
 	</logger>
 	<logger name="AUDIT_LOG">
 		<appender-ref ref="app_audit" />
+	</logger>
+	<logger name="MOTION_AUDIT_LOG" additivity="false">
+		<appender-ref ref="app_motion_audit" />
 	</logger>
 	<logger name="CHAT_LOG" additivity="false">
 		<appender-ref ref="app_chat" />

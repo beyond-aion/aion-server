@@ -5,11 +5,12 @@ import com.aionemu.gameserver.ai.AIState;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.controllers.attack.AggroTarget;
+import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.model.animations.AttackAnimation;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.utils.PositionUtil;
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.geo.GeoService;
 
 /**
@@ -17,34 +18,15 @@ import com.aionemu.gameserver.world.geo.GeoService;
  */
 public class SimpleAttackManager {
 
-	public static void performAttack(NpcAI npcAI, int delay) {
+	/**
+	 * Attacks the target now, the attack decision has found the auto attack due
+	 */
+	public static void performAttack(NpcAI npcAI) {
 		if (npcAI.isLogging()) {
 			AILogger.info(npcAI, "performAttack");
 		}
-		if (npcAI.getOwner().getGameStats().isNextAttackScheduled()) {
-			if (npcAI.isLogging()) {
-				AILogger.info(npcAI, "Attack already scheduled");
-			}
-			scheduleCheckedAttackAction(npcAI, delay);
-			return;
-		}
-
-		npcAI.getOwner().getGameStats().setNextAttackTime(System.currentTimeMillis() + delay);
-		if (delay > 0) {
-			ThreadPoolManager.getInstance().schedule(() -> attackAction(npcAI), delay);
-		} else {
-			attackAction(npcAI);
-		}
-	}
-
-	private static void scheduleCheckedAttackAction(NpcAI npcAI, int delay) {
-		if (delay < 2000) {
-			delay = 2000;
-		}
-		if (npcAI.isLogging()) {
-			AILogger.info(npcAI, "Scheduling checked attack " + delay);
-		}
-		ThreadPoolManager.getInstance().schedule(new SimpleCheckedAttackAction(npcAI), delay);
+		npcAI.getOwner().getGameStats().cancelAttackTask();
+		attackAction(npcAI);
 	}
 
 	public static boolean isTargetInAttackRange(Npc npc) {
@@ -81,34 +63,19 @@ public class SimpleAttackManager {
 				npcAI.onGeneralEvent(AIEventType.ATTACK_COMPLETE);
 			}
 		} else {
+			if (!npc.getGameStats().tryStartAutoAttack()) { // not due yet, e.g. slowed while waiting, or another attack came first
+				npc.getGameStats().scheduleAttackTask(() -> attackAction(npcAI), Math.max(1, npc.getGameStats().getNextAttackInterval()));
+				return;
+			}
 			if (npc.isSpawned() && !npc.isDead() && !npc.getLifeStats().isAboutToDie() && npc.canAttack()) {
 				npc.getPosition().setH(PositionUtil.getHeadingTowards(npc, target));
-				npc.getController().attackTarget(target, 0, true);
+				int animation = DataManager.MOTION_DATA.chooseNpcAutoAttackAnimation(npc);
+				int hitTime = DataManager.MOTION_DATA.calculateNpcAutoAttackHitTime(npc, target, animation);
+				npc.getController().attackTarget(target, hitTime, null, AttackAnimation.getById(animation), true);
+				npc.getGameStats().setAnimationEndTime(System.currentTimeMillis() + DataManager.MOTION_DATA.calculateNpcAutoAttackRecoveryMillis(npc));
 			}
 			npcAI.onGeneralEvent(AIEventType.ATTACK_COMPLETE);
 		}
-	}
-
-	private final static class SimpleCheckedAttackAction implements Runnable {
-
-		private NpcAI npcAI;
-
-		SimpleCheckedAttackAction(NpcAI npcAI) {
-			this.npcAI = npcAI;
-		}
-
-		@Override
-		public void run() {
-			if (!npcAI.getOwner().getGameStats().isNextAttackScheduled()) {
-				attackAction(npcAI);
-			} else {
-				if (npcAI.isLogging()) {
-					AILogger.info(npcAI, "Scheduled checked attacked confirmed");
-				}
-			}
-			npcAI = null;
-		}
-
 	}
 
 }

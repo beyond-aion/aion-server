@@ -11,6 +11,7 @@ import com.aionemu.gameserver.model.templates.npcskill.NpcSkillCondition;
 import com.aionemu.gameserver.model.templates.npcskill.NpcSkillConditionTemplate;
 import com.aionemu.gameserver.model.templates.npcskill.NpcSkillSpawn;
 import com.aionemu.gameserver.model.templates.npcskill.NpcSkillTemplate;
+import com.aionemu.gameserver.model.templates.npcskill.QueuedNpcSkillTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.services.TribeRelationService;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
@@ -35,6 +36,11 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 	public NpcSkillTemplateEntry(NpcSkillTemplate template) {
 		super(template.getSkillId(), template.getSkillLevel());
 		this.template = template;
+	}
+
+	@Override
+	public boolean isQueued() {
+		return template instanceof QueuedNpcSkillTemplate;
 	}
 
 	@Override

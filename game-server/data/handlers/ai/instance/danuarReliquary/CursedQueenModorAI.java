@@ -8,7 +8,7 @@ import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.HpPhases;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
-import com.aionemu.gameserver.model.animations.AttackHandAnimation;
+import com.aionemu.gameserver.model.animations.AttackAnimation;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_FORCED_MOVE;
@@ -45,8 +45,8 @@ public class CursedQueenModorAI extends AggressiveNpcAI implements HpPhases.Phas
 	}
 
 	@Override
-	public AttackHandAnimation modifyAttackHandAnimation(AttackHandAnimation attackHandAnimation) {
-		return Rnd.get(AttackHandAnimation.values());
+	public AttackAnimation modifyAttackAnimation(AttackAnimation attackAnimation) {
+		return Rnd.get(AttackAnimation.values());
 	}
 
 	@Override

@@ -33,6 +33,11 @@ public abstract class NpcSkillEntry extends SkillEntry {
 	public abstract boolean hasCondition();
 
 	public abstract int getNextSkillTime();
+
+	/**
+	 * @return True if an AI script queued the skill, false if the NPC chose it from its skill list
+	 */
+	public abstract boolean isQueued();
 	
 	public abstract boolean hasChain();
 	

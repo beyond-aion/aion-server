@@ -34,6 +34,7 @@ public abstract class CreatureGameStats<T extends Creature> {
 
 	private int attackCounter = 0;
 	private int cachedSpeed;
+	private int cachedAttackSpeed;
 
 	protected CreatureGameStats(T owner) {
 		this.owner = owner;
@@ -336,11 +337,17 @@ public abstract class CreatureGameStats<T extends Creature> {
 		PacketSendUtility.broadcastPacket(owner, new SM_EMOTION(owner, EmotionType.CHANGE_SPEED));
 	}
 
+	/**
+	 * Sends the speed info when the movement or the attack speed changed. Clients scale the attack and skill animations of every creature by the attack
+	 * speed they were last told, which also decides the hit time a client reports for a creature it controls (summons, mercenaries).
+	 */
 	protected boolean checkSpeedStats() {
 		int currentSpeed = getMovementSpeed().getCurrent();
-		if (currentSpeed != cachedSpeed) {
+		int currentAttackSpeed = getAttackSpeed().getCurrent();
+		if (currentSpeed != cachedSpeed || currentAttackSpeed != cachedAttackSpeed) {
 			updateSpeedInfo();
 			cachedSpeed = currentSpeed;
+			cachedAttackSpeed = currentAttackSpeed;
 			return true;
 		}
 		return false;

@@ -34,6 +34,9 @@ public class NpcTemplate extends CreatureTemplate {
 	@XmlAttribute(name = "name")
 	private String name;
 
+	@XmlAttribute(name = "mesh")
+	private String mesh;
+
 	@XmlAttribute(name = "group_drop")
 	private GroupDropType groupDrop;
 
@@ -49,7 +52,7 @@ public class NpcTemplate extends CreatureTemplate {
 	@XmlElement(name = "kisk_stats")
 	private KiskStatsTemplate kiskStatsTemplate;
 
-	@XmlElement(name = "ammo_speed")
+	@XmlAttribute(name = "ammo_speed")
 	private int ammoSpeed = 0;
 
 	@XmlAttribute(name = "rank")
@@ -70,8 +73,6 @@ public class NpcTemplate extends CreatureTemplate {
 	@XmlAttribute(name = "attack_speed")
 	private int attackSpeed = 2000;
 
-	@XmlAttribute(name = "cast_speed")
-	private int castSpeed = 1000;
 
 	@XmlAttribute(name = "cancel_level")
 	private int cancelLevel = 100;
@@ -143,6 +144,13 @@ public class NpcTemplate extends CreatureTemplate {
 	@Override
 	public String getName() {
 		return name;
+	}
+
+	/**
+	 * @return Name of the client model of this NPC, lowercase, which names its animation markers, or null if the client has none
+	 */
+	public String getMesh() {
+		return mesh;
 	}
 
 	public float getHeight() {
@@ -218,8 +226,11 @@ public class NpcTemplate extends CreatureTemplate {
 		return cancelLevel;
 	}
 
-	public int getCastSpeed() {
-		return castSpeed;
+	/**
+	 * @return Meters per second the projectile of an auto attack of this NPC flies, zero if its attacks land instantly
+	 */
+	public int getAmmoSpeed() {
+		return ammoSpeed;
 	}
 
 	public int getAttackSpeed() {

@@ -2,6 +2,8 @@ package com.aionemu.gameserver.controllers;
 
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
 import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.model.animations.AttackAnimation;
+import com.aionemu.gameserver.model.animations.AttackTypeAnimation;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
@@ -20,12 +22,16 @@ import com.aionemu.gameserver.skillengine.model.HopType;
 import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.taskmanager.tasks.PlayerMoveTaskManager;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.utils.audit.AuditLogger;
+import com.aionemu.gameserver.utils.PositionUtil;
+import com.aionemu.gameserver.utils.audit.MotionAudit;
+import com.aionemu.gameserver.world.geo.GeoService;
 
 /**
  * @author ATracer, RotO (Attack-speed hack protection), Sippolo
  */
 public class SummonController extends CreatureController<Summon> {
+
+	private static final int EARLIEST_HIT_TIME_DIVISOR = 8; // the earliest animation measured hits at a fifth of the attack interval, so an eighth leaves room
 
 	private long lastAttackMillis = 0;
 
@@ -80,7 +86,8 @@ public class SummonController extends CreatureController<Summon> {
 	}
 
 	@Override
-	public void attackTarget(Creature target, int time, boolean skipChecks) {
+	public void attackTarget(Creature target, int time, AttackTypeAnimation clientTypeAnimation, AttackAnimation clientAnimation,
+		boolean skipChecks) {
 		if (target.isDead() || target.getLifeStats().isAboutToDie()) {
 			PacketSendUtility.sendPacket(getMaster(), SM_SYSTEM_MESSAGE.STR_INVALID_TARGET());
 			return;
@@ -90,14 +97,41 @@ public class SummonController extends CreatureController<Summon> {
 			return;
 
 		int attackSpeed = getOwner().getGameStats().getAttackSpeed().getCurrent();
+		// the client announces the auto attack, so the same reach and sight the master needs has to hold here, and dropping is silent because the summon has no attack response
+		float attackRange = 1 + getOwner().getGameStats().getAttackRange().getCurrent() / 1000f;
+		if (!target.getAggroList().isHating(getOwner())) // the first auto attack can be announced while the summon is still closing in
+			attackRange += PositionUtil.calculateMaxCoveredDistance(getOwner(), 100);
+		if (!PositionUtil.isInAttackRange(getOwner(), target, attackRange) || !GeoService.getInstance().canSee(getOwner(), target))
+			return;
+
 		long now = System.currentTimeMillis();
 		long msSinceLastAttack = now - lastAttackMillis;
+		// Stricter than retail: the retail server keeps a balance of 500 ms (reset every 60 s, capped at 700) that lateness fills and early attacks
+		// drain. If honest summons get dropped here after lag, replace the per-attack tolerance with such a balance.
 		if (msSinceLastAttack < attackSpeed && attackSpeed - msSinceLastAttack > 50) { // 50ms tolerance
-			AuditLogger.log(getMaster(), "possibly used hack to speed up summon auto-attack (" + msSinceLastAttack + "ms instead of " + attackSpeed + ")");
+			MotionAudit.recordSummonAttack(getMaster(), msSinceLastAttack, time, 0, false);
+			MotionAudit.log(getMaster(), "possibly used hack to speed up summon auto-attack (" + msSinceLastAttack + "ms instead of " + attackSpeed + ")");
 			return;
 		}
 		lastAttackMillis = now;
-		super.attackTarget(target, time, false);
+		int hitTime = validateHitTime(time, attackSpeed);
+		MotionAudit.recordSummonAttack(getMaster(), msSinceLastAttack, time, hitTime, true);
+		super.attackTarget(target, hitTime, clientTypeAnimation, clientAnimation, false);
+	}
+
+	/**
+	 * Limits the hit time to what an attack animation can produce, as it schedules the damage and the client can send anything. Both the reported value
+	 * and the attack interval scale with attack speed, so the value is a fixed fraction of the interval per summon, and none measured hits within an
+	 * eighth of it or after a whole one.
+	 */
+	private int validateHitTime(int hitTime, int attackSpeed) {
+		// Stricter than retail: the retail server only caps a summon's hit time at 10000 ms. If honest summons get corrected here, fall back to that cap.
+		int earliestHitTime = attackSpeed / EARLIEST_HIT_TIME_DIVISOR;
+		if (hitTime >= earliestHitTime && hitTime <= attackSpeed)
+			return hitTime;
+		MotionAudit.log(getMaster(), "sent hit time " + hitTime + " for an attack of " + getOwner().getName() + ", expected " + earliestHitTime + " to "
+			+ attackSpeed + " (auto attacks every " + attackSpeed + " ms)");
+		return Math.clamp(hitTime, earliestHitTime, attackSpeed);
 	}
 
 	@Override
@@ -132,7 +166,7 @@ public class SummonController extends CreatureController<Summon> {
 		SummonsService.release(getOwner(), UnsummonType.SUMMON_DEATH);
 	}
 
-	public void useSkill(SkillOrder order) {
+	public void useSkill(SkillOrder order, int clientHitTime) {
 		Creature creature = getOwner();
 		if (!DataManager.PET_SKILL_DATA.petHasSkill(getOwner().getObjectTemplate().getTemplateId(), order.getSkillId())) {
 			// hackers!)
@@ -140,6 +174,7 @@ public class SummonController extends CreatureController<Summon> {
 		}
 		Skill skill = SkillEngine.getInstance().getSkill(creature, order.getSkillId(), 1, order.getTarget());
 		skill.setHate(order.getHate());
+		skill.setClientHitTime(clientHitTime);
 		if (skill.useSkill() && order.isRelease()) {
 			SummonsService.release(getOwner(), UnsummonType.SKILL_ORDER);
 		}

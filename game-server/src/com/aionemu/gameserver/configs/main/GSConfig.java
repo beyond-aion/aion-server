@@ -68,7 +68,7 @@ public class GSConfig {
 	/**
 	 * Minimum time in milliseconds between two skill casts. The game client will enforce wait times accordingly.
 	 */
-	@Property(key = "gameserver.min_skill_cast_interval_millis", defaultValue = "350")
+	@Property(key = "gameserver.min_skill_cast_interval_millis", defaultValue = "300")
 	public static int MIN_SKILL_CAST_INTERVAL_MILLIS;
 
 	@Property(key = "gameserver.item_wrap_limit", defaultValue = "0")

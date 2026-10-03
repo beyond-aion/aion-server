@@ -146,6 +146,10 @@ public class SM_ATTACK_STATUS extends AionServerPacket {
 				writeD(value);
 				hpOrMp = creature.getLifeStats().getMpPercentage();
 				break;
+			case REGULAR: // the amount reaches the client with SM_ATTACK or SM_CASTSPELL_RESULT, this only updates the HP gauge
+				writeD(0);
+				hpOrMp = creature.getLifeStats().getHpPercentage();
+				break;
 			default:
 				writeD(value);
 				hpOrMp = creature.getLifeStats().getHpPercentage();

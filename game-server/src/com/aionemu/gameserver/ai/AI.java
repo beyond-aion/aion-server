@@ -2,7 +2,7 @@ package com.aionemu.gameserver.ai;
 
 import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
-import com.aionemu.gameserver.model.animations.AttackHandAnimation;
+import com.aionemu.gameserver.model.animations.AttackAnimation;
 import com.aionemu.gameserver.model.animations.AttackTypeAnimation;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -87,7 +87,7 @@ public interface AI {
 
 	void onEffectEnd(Effect effect);
 
-	AttackHandAnimation modifyAttackHandAnimation(AttackHandAnimation attackHandAnimation);
+	AttackAnimation modifyAttackAnimation(AttackAnimation attackAnimation);
 
 	AttackTypeAnimation getAttackTypeAnimation(Creature target);
 

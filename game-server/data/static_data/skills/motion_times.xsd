@@ -15,8 +15,19 @@
 			<xs:element name="elyos_female" type="Times" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="elyos_male" type="Times" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="robot" type="Times" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="npc" type="NpcTimes" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 		<xs:attribute name="name" type="xs:string" use="required" />
+	</xs:complexType>
+	<xs:complexType name="NpcTimes">
+		<xs:attribute name="mesh" type="xs:string" use="required" />
+		<xs:attribute name="weapon" type="xs:string" use="required" />
+		<xs:attribute name="hit_times" use="required">
+			<xs:simpleType>
+				<xs:list itemType="xs:int" />
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="length" type="xs:int" />
 	</xs:complexType>
 	<xs:complexType name="Times">
 		<xs:attribute name="weapon" type="xs:string" use="required" />

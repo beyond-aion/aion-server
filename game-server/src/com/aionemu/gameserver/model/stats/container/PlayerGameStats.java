@@ -27,7 +27,6 @@ import com.aionemu.gameserver.utils.stats.CalculationType;
 public class PlayerGameStats extends CreatureGameStats<Player> {
 
 	private StatsTemplate statsTemplate;
-	private int cachedAttackSpeed;
 	private int maxDamageChance;
 	private float minDamageRatio;
 	private float skillEfficiency;
@@ -50,19 +49,6 @@ public class PlayerGameStats extends CreatureGameStats<Player> {
 
 	public void updateStatsVisually() {
 		updateStatInfo();
-	}
-
-	@Override
-	protected boolean checkSpeedStats() {
-		boolean speedChanged = super.checkSpeedStats();
-		int currentAttackSpeed = getAttackSpeed().getCurrent();
-		if (currentAttackSpeed != cachedAttackSpeed) {
-			if (!speedChanged) // prevent double packet broadcast (super.checkSpeedStats() already broadcasts on true)
-				updateSpeedInfo();
-			cachedAttackSpeed = currentAttackSpeed;
-			return true;
-		}
-		return speedChanged;
 	}
 
 	@Override

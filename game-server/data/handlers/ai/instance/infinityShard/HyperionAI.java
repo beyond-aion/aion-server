@@ -10,7 +10,7 @@ import com.aionemu.gameserver.ai.HpPhases;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.manager.WalkManager;
 import com.aionemu.gameserver.model.EmotionType;
-import com.aionemu.gameserver.model.animations.AttackHandAnimation;
+import com.aionemu.gameserver.model.animations.AttackAnimation;
 import com.aionemu.gameserver.model.animations.AttackTypeAnimation;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -82,8 +82,8 @@ public class HyperionAI extends AggressiveNpcAI implements HpPhases.PhaseHandler
 	}
 
 	@Override
-	public AttackHandAnimation modifyAttackHandAnimation(AttackHandAnimation attackHandAnimation) {
-		return Rnd.get(AttackHandAnimation.values());
+	public AttackAnimation modifyAttackAnimation(AttackAnimation attackAnimation) {
+		return Rnd.get(AttackAnimation.values());
 	}
 
 	@Override

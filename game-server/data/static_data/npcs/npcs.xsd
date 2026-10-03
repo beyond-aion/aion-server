@@ -26,6 +26,7 @@
 		<xs:attribute name="name_id" type="xs:int" use="required"/>
 		<xs:attribute name="title_id" type="xs:int" default="0"/>
 		<xs:attribute name="name" type="xs:string" default=""/>
+		<xs:attribute name="mesh" type="xs:string"/>
 		<xs:attribute name="group_drop" type="GroupDropType" default="NONE"/>
 		<xs:attribute name="height" type="xs:float" default="0"/>
 		<xs:attribute name="ammo_speed" type="xs:int"/>
@@ -40,7 +41,6 @@
 		<xs:attribute name="race" type="Race"/>
 		<xs:attribute name="hpgauge" type="xs:int"/>
 		<xs:attribute name="arange" type="xs:int"/>
-		<xs:attribute name="cast_speed" type="xs:int" default="1000"/>
 		<xs:attribute name="cancel_level" type="xs:int" default="100"/>
 		<xs:attribute name="attack_speed" type="xs:int" default="2000"/>
 		<xs:attribute name="state" type="xs:int"/>

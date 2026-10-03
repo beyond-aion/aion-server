@@ -22,7 +22,7 @@ import com.aionemu.gameserver.controllers.observer.TerrainZoneCollisionMaterialA
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.TaskId;
-import com.aionemu.gameserver.model.animations.AttackHandAnimation;
+import com.aionemu.gameserver.model.animations.AttackAnimation;
 import com.aionemu.gameserver.model.animations.AttackTypeAnimation;
 import com.aionemu.gameserver.model.animations.ObjectDeleteAnimation;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -51,6 +51,7 @@ import com.aionemu.gameserver.taskmanager.tasks.MovementNotifyTask;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
+import com.aionemu.gameserver.utils.audit.MotionAudit;
 import com.aionemu.gameserver.utils.stats.CalculationType;
 import com.aionemu.gameserver.world.geo.GeoService;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
@@ -307,6 +308,17 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	}
 
 	public void attackTarget(Creature target, int time, boolean skipChecks) {
+		attackTarget(target, time, null, null, skipChecks);
+	}
+
+	/**
+	 * @param typeAnimation
+	 *          The attack of its template the client used for a creature it controls, or null to pick it here
+	 * @param animation
+	 *          The attack animation the hit time belongs to: the one the client played for a creature it controls, or the one an NPC chose with
+	 *          its hit time. Null to pick it here.
+	 */
+	public void attackTarget(Creature target, int time, AttackTypeAnimation typeAnimation, AttackAnimation animation, boolean skipChecks) {
 		boolean addAttackObservers = true;
 		if (!skipChecks
 			&& (target == null || getOwner().isDead() || getOwner().getLifeStats().isAboutToDie() || !getOwner().canAttack() || !getOwner().isSpawned())) {
@@ -314,7 +326,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 		}
 
 		// Calculate and apply damage
-		AttackHandAnimation attackHandAnimation = AttackHandAnimation.MAIN_HAND;
+		AttackAnimation attackAnimation = AttackAnimation.FIRST;
 		AttackTypeAnimation attackTypeAnimation = AttackTypeAnimation.MELEE;
 		List<AttackResult> attackResult;
 
@@ -325,12 +337,16 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 			attackResult = AttackUtil.calculatePhysAttackResult(getOwner(), target, calculationTypes);
 		else {
 			attackResult = AttackUtil.calculateMagAttackResult(getOwner(), target, getOwner().getAttackType().getMagicalElement(), calculationTypes);
-			attackHandAnimation = AttackHandAnimation.OFF_HAND;
+			attackAnimation = AttackAnimation.SECOND;
 		}
 		if (getOwner() instanceof Npc) {
-			attackHandAnimation = getOwner().getAi().modifyAttackHandAnimation(attackHandAnimation);
+			attackAnimation = getOwner().getAi().modifyAttackAnimation(attackAnimation);
 			attackTypeAnimation = getOwner().getAi().getAttackTypeAnimation(target);
 		}
+		if (typeAnimation != null)
+			attackTypeAnimation = typeAnimation;
+		if (animation != null)
+			attackAnimation = animation;
 
 		int damage = 0;
 		for (AttackResult result : attackResult) {
@@ -341,13 +357,13 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 
 		AttackStatus firstAttackStatus = AttackStatus.getBaseStatus(attackResult.getFirst().getAttackStatus());
 		Effect criticalProcEffect = null;
-		if (getOwner() instanceof Player player && firstAttackStatus == AttackStatus.CRITICAL && Rnd.chance() < 10) {
-			criticalProcEffect = SkillEngine.getInstance().createCriticalProcEffect(player, target, 0);
+		if (getOwner() instanceof Player player && firstAttackStatus == AttackStatus.CRITICAL && Rnd.chance() < SkillEngine.CRITICAL_PROC_CHANCE) {
+			criticalProcEffect = SkillEngine.getInstance().createCriticalProcEffect(player, target);
 			if (criticalProcEffect != null && (criticalProcEffect.getEffectResult() == EffectResult.DODGE || criticalProcEffect.getEffectResult() == EffectResult.RESIST))
 				criticalProcEffect = null;
 		}
 		PacketSendUtility.broadcastPacketAndReceive(getOwner(),
-			new SM_ATTACK(getOwner(), target, getOwner().getGameStats().getAttackCounter(), time, attackTypeAnimation, attackHandAnimation, attackResult, criticalProcEffect),
+			new SM_ATTACK(getOwner(), target, getOwner().getGameStats().getAttackCounter(), time, attackTypeAnimation, attackAnimation, attackResult, criticalProcEffect),
 			AIEventType.CREATURE_NEEDS_HELP);
 
 		getOwner().getGameStats().increaseAttackCounter();
@@ -454,11 +470,22 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	/**
 	 * @return true if successful usage
 	 */
-	public boolean useSkill(int skillId, int skillLevel) {
+	public final boolean useSkill(int skillId, int skillLevel) {
+		return useSkill(skillId, skillLevel, null);
+	}
+
+	/**
+	 * @param clientHitTime
+	 *          Hit time the client reported for a creature it controls, or null if the server determines it
+	 * @return true if successful usage
+	 */
+	public boolean useSkill(int skillId, int skillLevel, Integer clientHitTime) {
 		try {
 			Creature creature = getOwner();
 			Skill skill = SkillEngine.getInstance().getSkill(creature, skillId, skillLevel, creature.getTarget());
 			if (skill != null) {
+				if (clientHitTime != null)
+					skill.setClientHitTime(clientHitTime);
 				return skill.useSkill();
 			}
 		} catch (Exception ex) {
@@ -470,9 +497,17 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	public boolean useChargeSkill(Skill startSkill, long chargeTimeMillis) {
 		SkillChargeCondition chargeCondition = startSkill.getSkillTemplate().getSkillChargeCondition();
 		ChargeSkillEntry chargeSkill = chargeCondition == null ? null : DataManager.SKILL_CHARGE_DATA.getChargedSkillEntry(chargeCondition.getValue());
-		if (chargeSkill == null || chargeTimeMillis < chargeSkill.getMinTime() * startSkill.getCastSpeedForAnimationBoostAndChargeSkills()) {
+		if (chargeSkill == null) {
 			if (getOwner() instanceof Player player)
-				AuditLogger.log(player, "tried to use charge skill " + startSkill.getSkillId() + " after " + chargeTimeMillis);
+				AuditLogger.log(player, "used charge skill " + startSkill.getSkillId() + ", which has no charge data");
+			return false;
+		}
+		int minChargeMillis = Math.round(chargeSkill.getMinTime() * startSkill.getCastSpeedForAnimationBoostAndChargeSkills());
+		if (chargeTimeMillis < minChargeMillis) {
+			if (getOwner() instanceof Player player) // the gap between two packets on the server clock, which network jitter moves either way
+				MotionAudit.log(player, "released charge skill " + startSkill.getSkillId() + " after " + chargeTimeMillis + " ms, needs "
+					+ minChargeMillis + " ms (" + chargeSkill.getMinTime() + " ms at cast speed " + startSkill.getCastSpeedForAnimationBoostAndChargeSkills()
+					+ ")");
 			return false;
 		}
 		try {
