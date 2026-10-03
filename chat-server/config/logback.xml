@@ -4,6 +4,7 @@
 	<property file="config/main/logging.properties" />
 	<property file="config/mycs.properties" />
 	<property name="logFolder" value="log" />
+	<!-- log files roll over at logMaxFileSize (default 100MB) and keep logMaxRolledFiles (default 5) old files, both can be set in config/main/logging.properties -->
 	<property name="consoleTime" value="%date{HH:mm:ss}" />
 	<property name="date" value="%date{&quot;yyyy-MM-dd'T'HH:mm:ss,SSSXXX&quot;}" />
 	<appender name="out_console" class="ch.qos.logback.core.ConsoleAppender">
@@ -12,30 +13,51 @@
 			<Pattern>${consoleTime} %highlight(%-5level) %gray([%thread]) - %message%n</Pattern>
 		</encoder>
 	</appender>
-	<appender name="app_console" class="ch.qos.logback.core.FileAppender">
+	<appender name="app_console" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<file>${logFolder}/server_console.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<fileNamePattern>${logFolder}/server_console.%i.log</fileNamePattern>
+			<maxIndex>${logMaxRolledFiles:-5}</maxIndex>
+		</rollingPolicy>
+		<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<maxFileSize>${logMaxFileSize:-100MB}</maxFileSize>
+		</triggeringPolicy>
 		<encoder>
 			<Pattern>${date} %-5level [%thread] %logger - %message%n</Pattern>
 		</encoder>
 	</appender>
-	<appender name="app_warn" class="ch.qos.logback.core.FileAppender">
+	<appender name="app_warn" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<filter class="ch.qos.logback.classic.filter.LevelFilter">
 			<level>WARN</level>
 			<onMatch>ACCEPT</onMatch>
 			<onMismatch>DENY</onMismatch>
 		</filter>
 		<file>${logFolder}/server_warnings.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<fileNamePattern>${logFolder}/server_warnings.%i.log</fileNamePattern>
+			<maxIndex>${logMaxRolledFiles:-5}</maxIndex>
+		</rollingPolicy>
+		<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<maxFileSize>${logMaxFileSize:-100MB}</maxFileSize>
+		</triggeringPolicy>
 		<encoder>
 			<Pattern>${date} %logger - %message%n</Pattern>
 		</encoder>
 	</appender>
-	<appender name="app_error" class="ch.qos.logback.core.FileAppender">
+	<appender name="app_error" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<filter class="ch.qos.logback.classic.filter.LevelFilter">
 			<level>ERROR</level>
 			<onMatch>ACCEPT</onMatch>
 			<onMismatch>DENY</onMismatch>
 		</filter>
 		<file>${logFolder}/server_errors.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<fileNamePattern>${logFolder}/server_errors.%i.log</fileNamePattern>
+			<maxIndex>${logMaxRolledFiles:-5}</maxIndex>
+		</rollingPolicy>
+		<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<maxFileSize>${logMaxFileSize:-100MB}</maxFileSize>
+		</triggeringPolicy>
 		<encoder>
 			<Pattern>${date} %logger - %message%n</Pattern>
 		</encoder>
@@ -54,8 +76,15 @@
 		<neverBlock>true</neverBlock>
 		<appender-ref ref="app_status_discord" />
 	</appender>
-	<appender name="app_chat" class="ch.qos.logback.core.FileAppender">
+	<appender name="app_chat" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<file>${logFolder}/chat.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<fileNamePattern>${logFolder}/chat.%i.log</fileNamePattern>
+			<maxIndex>${logMaxRolledFiles:-5}</maxIndex>
+		</rollingPolicy>
+		<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<maxFileSize>${logMaxFileSize:-100MB}</maxFileSize>
+		</triggeringPolicy>
 		<encoder>
 			<Pattern>${date} %message%n</Pattern>
 		</encoder>
