@@ -1,8 +1,8 @@
 package com.aionemu.gameserver.services.player;
 
 import java.time.Duration;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -73,7 +73,7 @@ public class MultiClientingService {
 
 		private final int accountId;
 		private final Map<Race, Long> lastCharOnlineTimeMillis = new ConcurrentHashMap<>();
-		private final List<Identifiers> identifiers = new LinkedList<>();
+		private final Deque<Identifiers> identifiers = new ArrayDeque<>();
 
 		public AccountSession(int accountId) {
 			this.accountId = accountId;

@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.model.gameobjects;
 
-import java.util.LinkedList;
+import java.util.ArrayDeque;
 import java.util.Objects;
 import java.util.Queue;
 import java.util.function.Predicate;
@@ -44,7 +44,7 @@ import com.aionemu.gameserver.world.WorldPosition;
 public class Npc extends Creature {
 
 	private final NpcSkillList skillList;
-	private final Queue<NpcSkillEntry> queuedSkills = new LinkedList<>();
+	private final Queue<NpcSkillEntry> queuedSkills = new ArrayDeque<>();
 	private WalkerGroup walkerGroup;
 	private String masterName;
 	private int creatorId = 0;

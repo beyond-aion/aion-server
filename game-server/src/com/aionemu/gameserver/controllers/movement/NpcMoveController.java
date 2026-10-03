@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.controllers.movement;
 
-import java.util.LinkedList;
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -52,7 +53,7 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 	private boolean nextPointFromGeo;
 	private boolean isStop;
 
-	private LinkedList<Point3D> lastSteps;
+	private Deque<Point3D> lastSteps;
 
 	private WalkerTemplate walkerTemplate;
 	private RouteStep currentStep;
@@ -432,7 +433,7 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 
 	private synchronized void tryStoreStep(float x, float y, float z) {
 		if (lastSteps == null)
-			lastSteps = new LinkedList<>();
+			lastSteps = new ArrayDeque<>();
 		Point3D lastStep = lastSteps.isEmpty() ? null : lastSteps.getLast();
 		if (lastStep == null || !PositionUtil.isInRange(lastStep.getX(), lastStep.getY(), lastStep.getZ(), x, y, z, 10)) {
 			if (owner.getAi().isLogging()) {
