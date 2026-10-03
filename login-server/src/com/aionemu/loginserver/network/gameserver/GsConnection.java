@@ -61,7 +61,7 @@ public class GsConnection extends AConnection<GsServerPacket> {
 	/**
 	 * Current state of this connection
 	 */
-	private State state;
+	private volatile State state;
 
 	/**
 	 * GameServerInfo for this GsConnection.
@@ -186,6 +186,16 @@ public class GsConnection extends AConnection<GsServerPacket> {
 			sb.append(" #").append(gameServerInfo.getId());
 		sb.append(" ").append(getIP());
 		return sb.toString();
+	}
+
+	@Override
+	protected boolean isAuthenticated() {
+		return state == State.AUTHED;
+	}
+
+	@Override
+	protected long getAuthTimeoutMillis() {
+		return 30_000;
 	}
 
 	@Override

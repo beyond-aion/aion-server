@@ -33,7 +33,7 @@ public class CM_CS_AUTH extends GsClientPacket {
 
 	@Override
 	protected void runImpl() {
-		GsAuthResponse resp = GameServerService.getInstance().registerGameServer(gameServerId, password);
+		GsAuthResponse resp = GameServerService.getInstance().registerGameServer(gameServerId, password, getConnection().isFromLoopback());
 		switch (resp) {
 			case AUTHED -> {
 				getConnection().setState(GameServerConnectionState.AUTHED);
@@ -42,6 +42,9 @@ public class CM_CS_AUTH extends GsClientPacket {
 			case NOT_AUTHED -> log.warn("Game server #{} (IP: {}) tried to register with an invalid password", gameServerId, getConnection().getIP());
 			case ALREADY_REGISTERED -> log.info("Game server #{} is already registered", gameServerId);
 		}
-		sendPacket(new SM_GS_AUTH_RESPONSE(resp));
+		if (resp == GsAuthResponse.AUTHED)
+			sendPacket(new SM_GS_AUTH_RESPONSE(resp));
+		else
+			getConnection().close(new SM_GS_AUTH_RESPONSE(resp));
 	}
 }
