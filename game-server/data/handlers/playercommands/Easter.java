@@ -76,7 +76,7 @@ public class Easter extends PlayerCommand {
 		long notAddedCount = ItemService.addItem(player, reward.itemId, reward.itemCount, true,
 			new ItemUpdatePredicate(ItemAddType.DECOMPOSABLE, ItemUpdateType.INC_CASH_ITEM));
 		if (notAddedCount > 0)
-			log.warn("[Easter Event] " + notAddedCount + "/" + reward.itemCount + " of " + reward.itemId + " could not be added.");
+			log.warn("[Easter Event] {}/{} of {} could not be added.", notAddedCount, reward.itemCount, reward.itemId);
 	}
 
 	private record Reward(int requiredEggs, int itemId, long itemCount) {}

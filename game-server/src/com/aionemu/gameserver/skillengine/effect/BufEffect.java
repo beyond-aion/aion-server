@@ -67,7 +67,7 @@ public abstract class BufEffect extends EffectTemplate {
 
 		for (Change changeItem : change) {
 			if (changeItem.getStat() == null) {
-				LoggerFactory.getLogger(BufEffect.class).warn("Skill stat has wrong name for skillid: " + skillId);
+				LoggerFactory.getLogger(BufEffect.class).warn("Skill stat has wrong name for skillid: {}", skillId);
 				continue;
 			}
 

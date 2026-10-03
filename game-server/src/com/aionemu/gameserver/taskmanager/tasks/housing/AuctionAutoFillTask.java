@@ -55,7 +55,7 @@ public class AuctionAutoFillTask extends AbstractCronTask {
 				added[0]++;
 			}
 		});
-		log.info("[" + race + "] Added " + added[0] + " new houses automatically to auction.");
+		log.info("[{}] Added {} new houses automatically to auction.", race, added[0]);
 	}
 
 	private Set<House> findAuctionedHouses(Race race) {

@@ -133,7 +133,7 @@ public class WorldRaid {
 			raidLocation.getY(), raidLocation.getZ(), raidLocation.getH(), null, "world_raid_aggressive");
 		Npc bossNpc = (Npc) SpawnEngine.spawnObject(bossTemplate, 1);
 		if (bossNpc == null) {
-			log.warn("Cannot initialize world raid boss with ID " + randomBossTemplate.getNpcId() + ". No boss was spawned.");
+			log.warn("Cannot initialize world raid boss with ID {}. No boss was spawned.", randomBossTemplate.getNpcId());
 			return;
 		}
 		boss = bossNpc;

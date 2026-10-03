@@ -32,7 +32,7 @@ public class AccountService {
 
 	public static Account getAccount(int accountId, String accountName, long creationDate, AccountTime accountTime, byte accessLevel, byte membership,
 			String allowedHddSerial) {
-		log.debug("[AS] request for account: " + accountId);
+		log.debug("[AS] request for account: {}", accountId);
 
 		Account account = loadAccount(accountId);
 		account.setName(accountName);

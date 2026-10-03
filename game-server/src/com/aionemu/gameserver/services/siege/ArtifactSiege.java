@@ -47,7 +47,7 @@ public class ArtifactSiege extends Siege<ArtifactLocation> {
 		if (isBossKilled())
 			onCapture();
 		else
-			log.error("Artifact siege (artifactId:" + getSiegeLocationId() + ") ended without killing a boss.");
+			log.error("Artifact siege (artifactId:{}) ended without killing a boss.", getSiegeLocationId());
 
 		// add new spawns
 		spawnNpcs(getSiegeLocationId(), getSiegeLocation().getRace(), SiegeModType.PEACE);

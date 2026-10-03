@@ -26,10 +26,10 @@ public class AbyssRankUpdateService {
 	}
 
 	public static void scheduleUpdate() {
-		log.info("Scheduling ranking update task based on cron expression: " + RankingConfig.TOP_RANKING_UPDATE_RULE);
+		log.info("Scheduling ranking update task based on cron expression: {}", RankingConfig.TOP_RANKING_UPDATE_RULE);
 		CronService.getInstance().schedule(AbyssRankUpdateService::performUpdate, RankingConfig.TOP_RANKING_UPDATE_RULE, true);
 
-		log.info("Scheduling daily GP loss task based on cron expression: " + RankingConfig.TOP_RANKING_DAILY_GP_LOSS_TIME);
+		log.info("Scheduling daily GP loss task based on cron expression: {}", RankingConfig.TOP_RANKING_DAILY_GP_LOSS_TIME);
 		CronService.getInstance().schedule(AbyssRankUpdateService::updateDailyGpLoss, RankingConfig.TOP_RANKING_DAILY_GP_LOSS_TIME, true);
 	}
 
@@ -64,7 +64,7 @@ public class AbyssRankUpdateService {
 			// update ranking cache
 			AbyssRankingCache.getInstance().reloadRankings();
 
-			log.info("AbyssRankUpdateService: Finished in " + (System.currentTimeMillis() - startTime) / 1000 + "s");
+			log.info("AbyssRankUpdateService: Finished in {}s", (System.currentTimeMillis() - startTime) / 1000);
 		}, 1000);
 	}
 

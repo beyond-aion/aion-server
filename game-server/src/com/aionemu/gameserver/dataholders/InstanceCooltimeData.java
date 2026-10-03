@@ -93,7 +93,7 @@ public class InstanceCooltimeData {
 				instanceCoolTime = System.currentTimeMillis() + (minutes * 60 * 1000);
 				break;
 			default:
-				LoggerFactory.getLogger(this.getClass()).warn("Unhandled InstanceCoolTimeType: " + clt.getCoolTimeType());
+				LoggerFactory.getLogger(this.getClass()).warn("Unhandled InstanceCoolTimeType: {}", clt.getCoolTimeType());
 		}
 		if (instanceCooldownRate != 1)
 			instanceCoolTime = System.currentTimeMillis() + ((instanceCoolTime - System.currentTimeMillis()) / instanceCooldownRate);

@@ -43,7 +43,7 @@ public class AIEngine implements GameEngine {
 		scriptManager.setGlobalClassListener(acl);
 		scriptManager.load(AIConfig.HANDLER_DIRECTORY);
 		validateScripts();
-		log.info("Loaded " + aiHandlers.size() + " AI handlers.");
+		log.info("Loaded {} AI handlers.", aiHandlers.size());
 	}
 
 	public void reload() {

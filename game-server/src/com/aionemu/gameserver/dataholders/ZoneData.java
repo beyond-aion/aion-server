@@ -57,7 +57,7 @@ public class ZoneData {
 
 	public boolean validateZoneName(String zoneName) {
 		if (!isValidZoneName(zoneName)) {
-			LoggerFactory.getLogger(getClass()).warn("Missing data for zone: " + zoneName);
+			LoggerFactory.getLogger(getClass()).warn("Missing data for zone: {}", zoneName);
 			return false;
 		}
 		return true;

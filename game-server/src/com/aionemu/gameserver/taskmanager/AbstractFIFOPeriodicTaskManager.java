@@ -47,13 +47,13 @@ public abstract class AbstractFIFOPeriodicTaskManager<T> extends AbstractPeriodi
 					RunnableStatsManager.handleStats(task.getClass(), getCalledMethodName(), duration);
 				}
 			} catch (Exception e) {
-				log.error("Exception in " + getClass().getSimpleName() + " processing " + task, e);
+				log.error("Exception in {} processing {}", getClass().getSimpleName(), task, e);
 			}
 		}
 		if (processedTasks.size() <= previouslyProcessedTasksSize)
 			counter = 0;
 		else if (++counter % counterLimit == 0) // log warning if the task queue size continually increased over the last WARNING_PERIOD_SECONDS
-			log.warn("Tasks for " + getClass().getSimpleName() + " are added faster than they can be executed (currently " + processedTasks.size() + " tasks).");
+			log.warn("Tasks for {} are added faster than they can be executed (currently {} tasks).", getClass().getSimpleName(), processedTasks.size());
 	}
 
 	protected abstract void callTask(T task);

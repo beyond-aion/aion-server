@@ -469,7 +469,7 @@ public class Item extends AionObject implements Expirable, StatOwner, Persistabl
 	public void addGodStone(int itemId, int activatedCount) {
 		GodstoneInfo godstoneInfo = DataManager.ITEM_DATA.getItemTemplate(itemId).getGodstoneInfo();
 		if (godstoneInfo == null) {
-			log.warn("Item " + itemId + " has no godstone info");
+			log.warn("Item {} has no godstone info", itemId);
 			return;
 		}
 		if (godStone != null)
@@ -834,8 +834,7 @@ public class Item extends AionObject implements Expirable, StatOwner, Persistabl
 	 */
 	public void setBonusStats(int statBonusId, boolean validate) {
 		if (validate && isEquipped)
-			log.warn(getItemId() + " was equipped while switching bonus stats from " + getBonusStatsId() + " to " + statBonusId,
-				new IllegalStateException());
+			log.warn("{} was equipped while switching bonus stats from {} to {}", getItemId(), getBonusStatsId(), statBonusId, new IllegalStateException());
 		if (statBonusId == 0)
 			bonusStatsEffect = null;
 		else
@@ -876,7 +875,7 @@ public class Item extends AionObject implements Expirable, StatOwner, Persistabl
 	 */
 	public void setFusionedItemBonusStats(int statBonusId, boolean validate) {
 		if (validate && isEquipped)
-			log.warn(getItemId() + " was equipped while switching fusioned bonus stats from " + getFusionedItemBonusStatsId() + " to " + statBonusId,
+			log.warn("{} was equipped while switching fusioned bonus stats from {} to {}", getItemId(), getFusionedItemBonusStatsId(), statBonusId,
 				new IllegalStateException());
 		if (statBonusId == 0)
 			fusionedItemBonusStatsEffect = null;

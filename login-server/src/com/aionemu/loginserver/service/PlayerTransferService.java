@@ -46,27 +46,27 @@ public class PlayerTransferService {
 
 	protected void verifyNewTasks() {
 		List<PlayerTransferTask> tasksNew = PlayerTransferDAO.getNew();
-		log.info("PlayerTransfer perform task init. " + tasks.size() + " new tasks.");
+		log.info("PlayerTransfer perform task init. {} new tasks.", tasks.size());
 		for (PlayerTransferTask task : tasksNew) {
 			GameServerInfo server = GameServerTable.getGameServerInfo(task.sourceServerId);
 			if (server == null || server.getConnection() == null) {
-				log.error("cannot perform transfer task #" + task.id + " while source server is down #" + task.sourceServerId);
+				log.error("cannot perform transfer task #{} while source server is down #{}", task.id, task.sourceServerId);
 				continue;
 			}
 
 			GameServerInfo targetServer = GameServerTable.getGameServerInfo(task.targetServerId);
 			if (targetServer == null || targetServer.getConnection() == null) {
-				log.error("cannot perform transfer task #" + task.id + " while target server is down #" + task.targetServerId);
+				log.error("cannot perform transfer task #{} while target server is down #{}", task.id, task.targetServerId);
 				continue;
 			}
 
 			if (server.isAccountOnGameServer(task.sourceAccountId)) {
-				log.error("cannot perform transfer task #" + task.id + " while source account is online " + task.sourceAccountId);
+				log.error("cannot perform transfer task #{} while source account is online {}", task.id, task.sourceAccountId);
 				continue;
 			}
 
 			if (targetServer.isAccountOnGameServer(task.targetAccountId)) {
-				log.error("cannot perform transfer task #" + task.id + " while target account is online " + task.targetAccountId);
+				log.error("cannot perform transfer task #{} while target account is online {}", task.id, task.targetAccountId);
 				continue;
 			}
 
@@ -74,7 +74,7 @@ public class PlayerTransferService {
 			tasks.put(task.id, task);
 			PlayerTransferDAO.update(task);
 			server.getConnection().sendPacket(new SM_PTRANSFER_RESPONSE(PlayerTransferResultStatus.PERFORM_ACTION, task));
-			log.info("performing player transfer #" + task.id);
+			log.info("performing player transfer #{}", task.id);
 		}
 	}
 
@@ -96,25 +96,25 @@ public class PlayerTransferService {
 		PlayerTransferTask task = tasks.get(taskId);
 		GameServerInfo targetServer = GameServerTable.getGameServerInfo(task.targetServerId);
 		if (targetServer == null || targetServer.getConnection() == null) {
-			log.error("Player transfer requests offline server! #" + task.targetServerId);
+			log.error("Player transfer requests offline server! #{}", task.targetServerId);
 			return;
 		}
 
 		GameServerInfo server = GameServerTable.getGameServerInfo(task.sourceServerId);
 		if (server == null || server.getConnection() == null) {
-			log.error("Player transfer requests offline server! #" + task.sourceServerId);
+			log.error("Player transfer requests offline server! #{}", task.sourceServerId);
 			return;
 		}
 
 		if (targetServer.isAccountOnGameServer(task.targetAccountId)) {
-			log.error("Player transfer cant be performed while target account is online at server #" + task.targetServerId + ". " + task.targetAccountId);
+			log.error("Player transfer cant be performed while target account is online at server #{}. {}", task.targetServerId, task.targetAccountId);
 			server.getConnection().sendPacket(
 				new SM_PTRANSFER_RESPONSE(PlayerTransferResultStatus.ERROR, taskId, "transfer cant be performed while target account is online at server"));
 			return;
 		}
 
 		if (transfers.containsKey(taskId)) {
-			log.error("Player transfer cant be performed while it is already active #" + task.targetServerId + ". " + task.targetAccountId);
+			log.error("Player transfer cant be performed while it is already active #{}. {}", task.targetServerId, task.targetAccountId);
 			server.getConnection().sendPacket(
 				new SM_PTRANSFER_RESPONSE(PlayerTransferResultStatus.ERROR, taskId, "transfer cant be performed while it is already active"));
 			return;
@@ -142,7 +142,7 @@ public class PlayerTransferService {
 		AccountDAO.updateAccount(saccount);
 
 		targetServer.getConnection().sendPacket(new SM_PTRANSFER_RESPONSE(PlayerTransferResultStatus.SEND_INFO, request));
-		log.info("player transfer account " + task.targetServerId + " became active.");
+		log.info("player transfer account {} became active.", task.targetServerId);
 	}
 
 	/**
@@ -166,7 +166,7 @@ public class PlayerTransferService {
 		PlayerTransferDAO.update(task);
 		GameServerInfo targetServer = GameServerTable.getGameServerInfo(request.targetServerId);
 		if (targetServer == null || targetServer.getConnection() == null) {
-			log.error("Player transfer requests offline server! #" + request.targetServerId);
+			log.error("Player transfer requests offline server! #{}", request.targetServerId);
 			return;
 		}
 
@@ -189,14 +189,14 @@ public class PlayerTransferService {
 		PlayerTransferDAO.update(task);
 		GameServerInfo sourceServer = GameServerTable.getGameServerInfo(request.serverId);
 		if (sourceServer == null || sourceServer.getConnection() == null) {
-			log.error("Player transfer requests offline server! #" + request.serverId);
+			log.error("Player transfer requests offline server! #{}", request.serverId);
 			return;
 		}
 		request.account.setActivated((byte) 1);
 		request.saccount.setActivated((byte) 1);
 		AccountDAO.updateAccount(request.account);
 		AccountDAO.updateAccount(request.saccount);
-		log.info("transfer #" + taskId + " went onOK!");
+		log.info("transfer #{} went onOK!", taskId);
 		sourceServer.getConnection().sendPacket(new SM_PTRANSFER_RESPONSE(PlayerTransferResultStatus.OK, request));
 	}
 }

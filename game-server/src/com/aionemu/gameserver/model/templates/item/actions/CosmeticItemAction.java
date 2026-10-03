@@ -78,7 +78,7 @@ public class CosmeticItemAction extends AbstractItemAction {
 				player.getAccountData().updateBoundingRadius();
 			}
 			default -> {
-				LoggerFactory.getLogger(getClass()).warn("Unhandled cosmetic item type: " + type);
+				LoggerFactory.getLogger(getClass()).warn("Unhandled cosmetic item type: {}", type);
 				return;
 			}
 		}

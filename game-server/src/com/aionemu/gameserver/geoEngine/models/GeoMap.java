@@ -297,17 +297,17 @@ public class GeoMap extends Node {
 		DespawnableNode[] doors = despawnableDoors.get(doorId);
 		if (doors == null) {
 			if (GeoDataConfig.MODE == Mode.ON && !getIgnorableDoorIds().contains(doorId))
-				log.warn("No geometry found for door " + doorId + " in world " + mapId);
+				log.warn("No geometry found for door {} in world {}", doorId, mapId);
 		} else {
 			if (doors[0] != null) {
 				doors[0].setActive(instanceId, !open);
 			} else {
-				log.warn("Door state 1 not available for door " + doorId + " in world " + mapId);
+				log.warn("Door state 1 not available for door {} in world {}", doorId, mapId);
 			}
 			if (doors[1] != null) {
 				doors[1].setActive(instanceId, open);
 			} else {
-				log.warn("Door state 2 not available for door " + doorId + " in world " + mapId);
+				log.warn("Door state 2 not available for door {} in world {}", doorId, mapId);
 			}
 		}
 	}

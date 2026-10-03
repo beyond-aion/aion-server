@@ -37,7 +37,7 @@ public class NpcSkillData {
 		for (NpcSkillTemplates npcSkillList : npcSkills) {
 			for (Integer npcId : npcSkillList.getNpcIds()) {
 				if (npcSkillData.putIfAbsent(npcId, npcSkillList) != null)
-					LoggerFactory.getLogger(NpcSkillData.class).warn("Npc " + npcId + " has multiple skill lists in npc_skills.xml");
+					LoggerFactory.getLogger(NpcSkillData.class).warn("Npc {} has multiple skill lists in npc_skills.xml", npcId);
 			}
 		}
 		npcSkills = null;

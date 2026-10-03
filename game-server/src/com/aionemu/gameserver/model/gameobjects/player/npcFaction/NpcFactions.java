@@ -109,7 +109,7 @@ public class NpcFactions {
 		int targetObjectId = npc.getObjectId();
 		NpcFactionTemplate npcFactionTemplate = DataManager.NPC_FACTIONS_DATA.getNpcFactionByNpcId(npc.getNpcId());
 		if (npcFactionTemplate == null) {
-			LoggerFactory.getLogger(NpcFactions.class).warn("Missing faction for faction registrar npc " + npc.getNpcId());
+			LoggerFactory.getLogger(NpcFactions.class).warn("Missing faction for faction registrar npc {}", npc.getNpcId());
 			return;
 		}
 		NpcFaction npcFaction = getFactionById(npcFactionTemplate.getId());

@@ -69,11 +69,11 @@ public class PetAdoptionService {
 			return false;
 		}
 		if (player.getPetList().hasPet(petId)) {
-			log.warn("Duplicate pet adoption " + player + " (pet: " + petId + ")");
+			log.warn("Duplicate pet adoption {} (pet: {})", player, petId);
 			return false;
 		}
 		if (DataManager.PET_DATA.getPetTemplate(petId) == null) {
-			log.warn("Trying adopt pet without template. PetId:" + petId);
+			log.warn("Trying adopt pet without template. PetId:{}", petId);
 			return false;
 		}
 		return true;

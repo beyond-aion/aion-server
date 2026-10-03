@@ -192,7 +192,7 @@ public class PvpInstancePlayerReward extends InstancePlayerReward {
 			}
 			default -> {
 				LoggerFactory.getLogger(PvpInstancePlayerReward.class)
-					.warn("Couldn't get mythic Kunax equipment for " + player + ". Rewards for " + player.getPlayerClass() + " are not implemented");
+					.warn("Couldn't get mythic Kunax equipment for {}. Rewards for {} are not implemented", player, player.getPlayerClass());
 				return 0;
 			}
 		}

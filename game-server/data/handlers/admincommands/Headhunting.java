@@ -150,7 +150,7 @@ public class Headhunting extends AdminCommand {
 		for (Headhunter hunter : headhunters.values()) {
 			PlayerCommonData pcd = PlayerService.getOrLoadPlayerCommonData(hunter.getHunterId());
 			if (pcd == null) {
-				log.warn("PlayerID: " + hunter.getHunterId() + " did not exist anymore.");
+				log.warn("PlayerID: {} did not exist anymore.", hunter.getHunterId());
 				continue;
 			}
 			PlayerClass pc = pcd.getPlayerClass();
@@ -243,12 +243,11 @@ public class Headhunting extends AdminCommand {
 							item.getCount(), 0, LetterType.BLACKCLOUD)) {
 							sentMails++;
 						} else {
-							log.error("Failed to send reward mail to player " + name + " for rank " + rank + ". (ItemId: " + item.getId() + " Count: "
-								+ item.getCount() + ").");
+							log.error("Failed to send reward mail to player {} for rank {}. (ItemId: {} Count: {}).", name, rank, item.getId(),
+								item.getCount());
 						}
 					}
-					log.info(
-						"[Race: " + race + "] [PlayerClass: " + pc + "] [Rank: " + rank + "] [RewardedPlayer: " + name + "] [Kills: " + hunter.getKills() + "]");
+					log.info("[Race: {}] [PlayerClass: {}] [Rank: {}] [RewardedPlayer: {}] [Kills: {}]", race, pc, rank, name, hunter.getKills());
 					rewardedPlayers++;
 				}
 			}

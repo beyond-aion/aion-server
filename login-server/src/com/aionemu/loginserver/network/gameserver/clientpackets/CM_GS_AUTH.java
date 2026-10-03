@@ -63,7 +63,7 @@ public class CM_GS_AUTH extends GsClientPacket {
 		GsAuthResponse resp = GameServerTable.registerGameServer(client, gameServerId, password, ip, port, minAccessLevel, maxPlayers);
 		switch (resp) {
 			case AUTHED:
-				log.info("Gameserver #" + gameServerId + " is now online");
+				log.info("Gameserver #{} is now online", gameServerId);
 				client.setState(State.AUTHED);
 				client.sendPacket(new SM_GS_AUTH_RESPONSE(resp));
 				break;

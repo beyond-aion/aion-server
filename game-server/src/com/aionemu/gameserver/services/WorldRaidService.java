@@ -39,7 +39,7 @@ public class WorldRaidService {
 			raidLocationsById = DataManager.WORLD_RAID_DATA.getLocations();
 		else
 			raidLocationsById = Collections.emptyMap();
-		log.debug("Finished initialization of world raid locations with size " + raidLocationsById.size());
+		log.debug("Finished initialization of world raid locations with size {}", raidLocationsById.size());
 	}
 
 	public final void initWorldRaids() {
@@ -62,7 +62,7 @@ public class WorldRaidService {
 	public final boolean isValidWorldRaidLocation(int locationId) {
 		if (raidLocationsById.containsKey(locationId))
 			return true;
-		log.debug("No world raid location found for id: " + locationId);
+		log.debug("No world raid location found for id: {}", locationId);
 		return false;
 	}
 
@@ -71,15 +71,15 @@ public class WorldRaidService {
 	}
 
 	public final void startRaid(int locationId, boolean useSpecialSpawnMsg) {
-		log.debug("Starting world raid for location: " + locationId);
+		log.debug("Starting world raid for location: {}", locationId);
 		WorldRaid worldRaid;
 		synchronized (this) {
 			if (!isValidWorldRaidLocation(locationId)) {
-				log.error("Attempt to start world raid for an invalid location: " + locationId);
+				log.error("Attempt to start world raid for an invalid location: {}", locationId);
 				return;
 			}
 			if (isWorldRaidInProgress(locationId)) {
-				log.error("Attempt to start world raid twice for location: " + locationId);
+				log.error("Attempt to start world raid twice for location: {}", locationId);
 				return;
 			}
 			boolean sendMessages = true;
@@ -99,21 +99,21 @@ public class WorldRaidService {
 			activeRaids.put(locationId, worldRaid);
 		}
 		worldRaid.startWorldRaid();
-		log.debug("Finished world raid start for location: " + locationId);
+		log.debug("Finished world raid start for location: {}", locationId);
 	}
 
 	public final void stopRaid(int locationId) {
-		log.debug("Stopping world for location: " + locationId);
+		log.debug("Stopping world for location: {}", locationId);
 		WorldRaid raid;
 		synchronized (this) {
 			raid = activeRaids.remove(locationId);
 		}
 		if (raid == null || raid.isFinished()) {
-			log.debug("Attempt to stop world raid twice for location: " + locationId);
+			log.debug("Attempt to stop world raid twice for location: {}", locationId);
 			return;
 		}
 		raid.stopWorldRaid();
-		log.debug("Succeeded to finish world raid for location: " + locationId);
+		log.debug("Succeeded to finish world raid for location: {}", locationId);
 	}
 
 	public static WorldRaidService getInstance() {

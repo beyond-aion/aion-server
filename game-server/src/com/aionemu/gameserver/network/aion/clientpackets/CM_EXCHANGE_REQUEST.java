@@ -66,7 +66,7 @@ public class CM_EXCHANGE_REQUEST extends AionClientPacket {
 		}
 
 		if (!activePlayer.getRace().equals(targetPlayer.getRace())) {
-			log.info("[AUDIT] Player " + activePlayer.getName() + " tried trade with player (" + targetPlayer.getName() + ") another race.");
+			log.info("[AUDIT] Player {} tried trade with player ({}) another race.", activePlayer.getName(), targetPlayer.getName());
 			return;
 		}
 

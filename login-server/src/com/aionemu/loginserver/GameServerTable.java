@@ -51,7 +51,7 @@ public class GameServerTable {
 	 */
 	public static void load() {
 		gameservers = GameServersDAO.getAllGameServers();
-		log.info("GameServerTable loaded " + gameservers.size() + " registered GameServers.");
+		log.info("GameServerTable loaded {} registered GameServers.", gameservers.size());
 	}
 
 	/**
@@ -79,7 +79,7 @@ public class GameServerTable {
 		 * This id is not Registered at LoginServer.
 		 */
 		if (gsi == null) {
-			log.warn(gsConnection + " requestedID: " + requestedId + " is not registered in LS database!");
+			log.warn("{} requestedID: {} is not registered in LS database!", gsConnection, requestedId);
 			return GsAuthResponse.NOT_AUTHED;
 		}
 
@@ -93,7 +93,7 @@ public class GameServerTable {
 		 * Check if password and ip are ok.
 		 */
 		if (!gsi.getPassword().equals(password) || !NetworkUtils.checkIPMatching(gsi.getIpMask(), gsConnection.getIP())) {
-			log.warn(gsConnection + " requested ID: " + requestedId + " has wrong IP or password!");
+			log.warn("{} requested ID: {} has wrong IP or password!", gsConnection, requestedId);
 			return GsAuthResponse.NOT_AUTHED;
 		}
 

@@ -33,7 +33,7 @@ public class WalkerData {
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		for (WalkerTemplate route : walkerlist) {
 			if (walkerlistData.putIfAbsent(route.getRouteId(), route) != null)
-				log.warn("Duplicate route ID: " + route.getRouteId());
+				log.warn("Duplicate route ID: {}", route.getRouteId());
 		}
 		walkerlist.clear();
 		walkerlist = null;
@@ -62,7 +62,7 @@ public class WalkerData {
 			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 			marshaller.marshal(this, xml);
 		} catch (JAXBException e) {
-			log.error("Error while saving data: " + e.getMessage(), e.getCause());
+			log.error("Error while saving data: {}", e.getMessage(), e.getCause());
 			return;
 		} finally {
 			if (walkerlist != null) {

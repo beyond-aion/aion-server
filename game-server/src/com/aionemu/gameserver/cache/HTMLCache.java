@@ -102,7 +102,7 @@ public final class HTMLCache {
 
 					entry.setValue(newHtml);
 				} catch (RuntimeException e) {
-					log.warn("Cache[HTML]: Error during compaction of " + entry.getKey(), e);
+					log.warn("Cache[HTML]: Error during compaction of {}", entry.getKey(), e);
 				}
 			}
 

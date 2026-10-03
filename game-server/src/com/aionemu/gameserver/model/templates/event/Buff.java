@@ -33,7 +33,7 @@ public class Buff {
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		if (pool > skillIds.size())
-			LoggerFactory.getLogger(Buff.class).warn("Pool size for event buffs must be smaller than skill id size (skill ids: " + skillIds + ").");
+			LoggerFactory.getLogger(Buff.class).warn("Pool size for event buffs must be smaller than skill id size (skill ids: {}).", skillIds);
 	}
 
 	public Set<Integer> getSkillIds() {

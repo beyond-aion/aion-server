@@ -328,7 +328,7 @@ public class ItemGroupsData {
 			case MISCELLANEOUS:
 				break;
 			default:
-				LoggerFactory.getLogger(ItemGroupsData.class).warn("Unhandled food type " + foodType);
+				LoggerFactory.getLogger(ItemGroupsData.class).warn("Unhandled food type {}", foodType);
 		}
 		return null;
 	}

@@ -68,7 +68,7 @@ public class PeriodicSaveService {
 				legionWhUpdated++;
 			}
 			long workTime = System.currentTimeMillis() - startTime;
-			log.info("Legion WH update: " + workTime + " ms, legions: " + legionWhUpdated + ".");
+			log.info("Legion WH update: {} ms, legions: {}.", workTime, legionWhUpdated);
 		}
 	}
 

@@ -65,7 +65,7 @@ public class World {
 			}
 		});
 		ShieldService.getInstance().logDetachedShields();
-		log.info("World: " + worldMaps.size() + " world maps created.");
+		log.info("World: {} world maps created.", worldMaps.size());
 	}
 
 	public static World getInstance() {
@@ -106,11 +106,11 @@ public class World {
 						despawn(object);
 					object.getController().onDelete();
 				} catch (Exception e) {
-					log.error(object + " did not leave world cleanly", e);
+					log.error("{} did not leave world cleanly", object, e);
 				}
 				removed = allObjects.remove(object.getObjectId(), object);
 			} else if (worldObject != null) {
-				log.warn("Attempt to remove " + object + " from world but ID already belongs to " + worldObject, new Exception());
+				log.warn("Attempt to remove {} from world but ID already belongs to {}", object, worldObject, new Exception());
 			}
 		}
 		if (removed) {

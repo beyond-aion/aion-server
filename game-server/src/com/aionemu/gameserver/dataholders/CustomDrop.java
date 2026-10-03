@@ -34,7 +34,7 @@ public class CustomDrop {
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		for (NpcDrop drop : npcDrop) {
 			if (dropById.putIfAbsent(drop.getNpcId(), drop) != null)
-				LoggerFactory.getLogger(CustomDrop.class).warn("Tried to set custom drop for npc " + drop.getNpcId() + " twice!");
+				LoggerFactory.getLogger(CustomDrop.class).warn("Tried to set custom drop for npc {} twice!", drop.getNpcId());
 		}
 		npcDrop = null;
 	}

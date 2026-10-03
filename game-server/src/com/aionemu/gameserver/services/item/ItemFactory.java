@@ -18,7 +18,7 @@ public class ItemFactory {
 	public static final Item newItem(int itemId) {
 		ItemTemplate itemTemplate = DataManager.ITEM_DATA.getItemTemplate(itemId);
 		if (itemTemplate == null) {
-			log.error("Item was not populated correctly. Item template is missing for item id: " + itemId);
+			log.error("Item was not populated correctly. Item template is missing for item id: {}", itemId);
 			return null;
 		}
 		return new Item(IDFactory.getInstance().nextId(), itemTemplate);

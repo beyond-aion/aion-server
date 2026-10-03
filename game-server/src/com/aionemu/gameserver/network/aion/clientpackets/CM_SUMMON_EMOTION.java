@@ -63,7 +63,7 @@ public class CM_SUMMON_EMOTION extends AionClientPacket {
 				break;
 			case NONE:
 				if (emotionTypeId != EmotionType.NONE.getTypeId())
-					log.warn("Unknown emotion type " + emotionTypeId + " from " + player);
+					log.warn("Unknown emotion type {} from {}", emotionTypeId, player);
 		}
 	}
 }

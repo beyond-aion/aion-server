@@ -59,15 +59,15 @@ public class BalaurAssaultService {
 		if (fortressAssaults.containsKey(locId)) {
 			fortressAssaults.remove(locId).finishAssault(isBossKilled);
 			if (isBossKilled && siege.getSiegeLocation().getRace().equals(SiegeRace.BALAUR))
-				log.info(siege + " has been captured by Balaur assault!");
+				log.info("{} has been captured by Balaur assault!", siege);
 			else
-				log.info(siege + " Balaur assault finished without capture!");
+				log.info("{} Balaur assault finished without capture!", siege);
 		} else if (artifactAssaults.containsKey(locId)) {
 			artifactAssaults.remove(locId).finishAssault(isBossKilled);
 			if (isBossKilled && siege.getSiegeLocation().getRace().equals(SiegeRace.BALAUR))
-				log.info(siege + " has been captured by Balaur assault!");
+				log.info("{} has been captured by Balaur assault!", siege);
 			else
-				log.info(siege + " Balaur assault finished without capture!");
+				log.info("{} Balaur assault finished without capture!", siege);
 		}
 	}
 
@@ -116,7 +116,7 @@ public class BalaurAssaultService {
 			throw new IllegalArgumentException("Unsupported fortress siege type: " + siege.getClass().getSimpleName());
 		}
 		if (LoggingConfig.LOG_SIEGE)
-			log.info("Scheduled assault of " + siege + " in " + delay + " seconds");
+			log.info("Scheduled assault of {} in {} seconds", siege, delay);
 	}
 
 	public void spawnDredgion(int spawnId) {

@@ -151,7 +151,7 @@ public class NpcController extends CreatureController<Npc> {
 			owner.getPosition().getWorldMapInstance().getInstanceHandler().onDie(owner);
 			owner.getAi().onGeneralEvent(AIEventType.DIED);
 		} catch (Exception e) {
-			log.error("onDie() exception for " + owner + ":", e);
+			log.error("onDie() exception for {}:", owner, e);
 		}
 
 		super.onDie(lastAttacker);

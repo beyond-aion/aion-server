@@ -103,7 +103,7 @@ public class QuestEngine implements GameEngine {
 		scriptManager.load(GSConfig.QUEST_HANDLER_DIRECTORY);
 		for (XMLQuest xmlQuest : DataManager.XML_QUESTS.getAllQuests())
 			xmlQuest.register(this);
-		log.info("Loaded " + questHandlers.size() + " quest handlers.");
+		log.info("Loaded {} quest handlers.", questHandlers.size());
 		if (GSConfig.ANALYZE_QUESTHANDLERS)
 			ThreadPoolManager.getInstance().executeLongRunning(() -> QuestSpawnAnalyzer.run(questHandlers.values(), questNpcs.values(), true));
 		addMessageSendingTask();
@@ -833,7 +833,7 @@ public class QuestEngine implements GameEngine {
 	public boolean registerCanAct(int questId, int npcId) {
 		NpcTemplate template = DataManager.NPC_DATA.getNpcTemplate(npcId);
 		if (template == null) {
-			log.warn("[QuestEngine] No such NPC template for " + npcId + " in Q" + questId);
+			log.warn("[QuestEngine] No such NPC template for {} in Q{}", npcId, questId);
 			return false;
 		}
 		if ("quest_use_item".equals(template.getAiName())) {
@@ -895,7 +895,7 @@ public class QuestEngine implements GameEngine {
 	public void addQuestHandler(AbstractQuestHandler questHandler) {
 		int questId = questHandler.getQuestId();
 		if (questHandlers.putIfAbsent(questId, questHandler) != null)
-			log.warn("Duplicate handler for quest: " + questId);
+			log.warn("Duplicate handler for quest: {}", questId);
 		else
 			questHandler.register();
 	}

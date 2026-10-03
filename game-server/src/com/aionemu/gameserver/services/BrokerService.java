@@ -91,7 +91,7 @@ public class BrokerService {
 			}
 		}
 
-		log.info("Broker loaded with " + loadedBrokerItemsCount + " broker items, " + loadedSettledItemsCount + " settled items.");
+		log.info("Broker loaded with {} broker items, {} settled items.", loadedBrokerItemsCount, loadedSettledItemsCount);
 	}
 
 	public void showRequestedItems(Player player, int clientMask, byte sortType, int startPage, List<Integer> itemList) {
@@ -285,8 +285,8 @@ public class BrokerService {
 			Item boughtItem = player.getInventory().add(item, ItemPacketService.ItemAddType.BROKER_BUY);
 
 			if (LoggingConfig.LOG_BROKER_EXCHANGE)
-				log.info("Player: " + player.getName() + " bought item " + boughtItem.getItemId() + " [" + boughtItem.getItemName() + "] (count: " + itemCount
-					+ ") from player: " + PlayerService.getPlayerName(buyingItem.getSellerId()) + " (total price: " + price + ")");
+				log.info("Player: {} bought item {} [{}] (count: {}) from player: {} (total price: {})", player.getName(), boughtItem.getItemId(),
+					boughtItem.getItemName(), itemCount, PlayerService.getPlayerName(buyingItem.getSellerId()), price);
 
 			// create save task
 			BrokerOpSaveTask bost = new BrokerOpSaveTask(buyingItem, boughtItem, player.getInventory().getKinahItem(), player.getObjectId());
@@ -568,7 +568,7 @@ public class BrokerService {
 						itemsLeft = true;
 
 				} else
-					log.warn("Broker settled item missed. ObjID: " + item.getItemUniqueId());
+					log.warn("Broker settled item missed. ObjID: {}", item.getItemUniqueId());
 			}
 		}
 

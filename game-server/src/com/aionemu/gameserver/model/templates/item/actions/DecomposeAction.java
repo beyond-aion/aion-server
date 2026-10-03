@@ -229,7 +229,7 @@ public class DecomposeAction extends AbstractItemAction {
 								itemLvl = randomType.getLevel();
 							List<ItemTemplate> stones = DataManager.ITEM_DATA.getManastones(itemLvl);
 							if (stones == null) {
-								log.warn("No lv" + itemLvl + " manastones found for decomposable random type " + randomItem.getType());
+								log.warn("No lv{} manastones found for decomposable random type {}", itemLvl, randomItem.getType());
 								break;
 							}
 							if (randomType != RandomType.MANASTONE) {
@@ -255,7 +255,7 @@ public class DecomposeAction extends AbstractItemAction {
 						case SPECIAL_MANASTONE_EPIC_GRADE:
 							List<ItemTemplate> ancientStones = DataManager.ITEM_DATA.getAncientManastones(randomType.getLevel());
 							if (ancientStones == null) {
-								log.warn("No ancient manastones found for decomposable random type " + randomItem.getType());
+								log.warn("No ancient manastones found for decomposable random type {}", randomItem.getType());
 								break;
 							}
 							final ItemQuality itemQuality;
@@ -395,7 +395,7 @@ public class DecomposeAction extends AbstractItemAction {
 				if (item.isObtainableFor(player)) {
 					ItemTemplate template = DataManager.ITEM_DATA.getItemTemplate(item.getItemId());
 					if (template == null)
-						log.error("Detected invalid item id during decompose action " + item.getItemId());
+						log.error("Detected invalid item id during decompose action {}", item.getItemId());
 					else if (template.getExtraInventoryId() > 0)
 						return true;
 				}

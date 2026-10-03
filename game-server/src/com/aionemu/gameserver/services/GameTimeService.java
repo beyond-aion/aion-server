@@ -60,7 +60,7 @@ public class GameTimeService {
 				log.warn("Error saving game time");
 		}, updateInterval, updateInterval);
 
-		log.info("GameTime started. Update interval: " + updateInterval / 1000 + "s");
+		log.info("GameTime started. Update interval: {}s", updateInterval / 1000);
 	}
 
 	public static final GameTimeService getInstance() {

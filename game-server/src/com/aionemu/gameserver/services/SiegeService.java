@@ -144,7 +144,7 @@ public class SiegeService {
 		// Start siege of artifacts
 		for (ArtifactLocation artifact : artifacts.values()) {
 			if (artifact.isStandAlone()) {
-				log.debug("Starting siege of artifact #" + artifact.getLocationId());
+				log.debug("Starting siege of artifact #{}", artifact.getLocationId());
 				startSiege(artifact.getLocationId());
 			} else {
 				log.debug("Artifact #{} siege was not started, it belongs to fortress", artifact.getLocationId());
@@ -196,11 +196,11 @@ public class SiegeService {
 	}
 
 	public synchronized void startSiege(final int siegeLocationId) {
-		log.debug("Starting siege of siege location: " + siegeLocationId);
+		log.debug("Starting siege of siege location: {}", siegeLocationId);
 
 		// Siege should not be started two times
 		if (activeSieges.containsKey(siegeLocationId)) {
-			log.error("Attempt to start siege twice for siege location: " + siegeLocationId, new Exception());
+			log.error("Attempt to start siege twice for siege location: {}", siegeLocationId, new Exception());
 			return;
 		}
 		Siege<? extends SiegeLocation> siege = newSiege(siegeLocationId);

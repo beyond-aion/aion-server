@@ -58,7 +58,7 @@ public class XmlDataLoader {
 
 	private static Future<?> validateAsync(XmlMerger.MergeResult mergeResult) {
 		return ThreadPoolManager.getInstance().submitLongRunning(() -> {
-			log.info("Validating " + mergeResult.getFile() + " in background...");
+			log.info("Validating {} in background...", mergeResult.getFile());
 			try {
 				if (!mergeResult.waitUntilFileIsWritten()) {
 					throw new RuntimeException();
@@ -67,7 +67,7 @@ public class XmlDataLoader {
 				try (Reader reader = mergeResult.newReader()) {
 					XmlUtil.getSchema(XML_SCHEMA_FILE).newValidator().validate(new SAXSource(new InputSource(reader)));
 				}
-				log.info("Validated " + mergeResult.getFile() + " in " + (System.currentTimeMillis() - time) + "ms");
+				log.info("Validated {} in {}ms", mergeResult.getFile(), System.currentTimeMillis() - time);
 			} catch (Throwable t) {
 				mergeResult.getFile().setLastModified(0); // mark file as outdated so validation will run again on next start
 				throw new GameServerError("Error validating " + CACHE_XML_FILE, t);

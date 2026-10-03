@@ -44,8 +44,8 @@ public final class ThreadPoolManager implements Executor {
 
 		longRunningPool = (ThreadPoolExecutor) Executors.newCachedThreadPool();
 
-		log.info("ThreadPoolManager: Initialized with " + instantPool.getPoolSize() + " instant, " + scheduledPool.getPoolSize() + " scheduler and "
-			+ longRunningPool.getPoolSize() + " long running threads");
+		log.info("ThreadPoolManager: Initialized with {} instant, {} scheduler and {} long running threads", instantPool.getPoolSize(),
+			scheduledPool.getPoolSize(), longRunningPool.getPoolSize());
 	}
 
 	public ScheduledFuture<?> schedule(Runnable r, long delay, TimeUnit unit) {
@@ -86,9 +86,9 @@ public final class ThreadPoolManager implements Executor {
 		final long begin = System.currentTimeMillis();
 
 		log.info("ThreadPoolManager: Shutting down.");
-		log.info("\t... executing " + scheduledPool.getActiveCount() + "/" + getTaskCount(scheduledPool) + " scheduled tasks.");
-		log.info("\t... executing " + getTaskCount(instantPool) + " instant tasks.");
-		log.info("\t... executing " + getTaskCount(longRunningPool) + " long running tasks.");
+		log.info("\t... executing {}/{} scheduled tasks.", scheduledPool.getActiveCount(), getTaskCount(scheduledPool));
+		log.info("\t... executing {} instant tasks.", getTaskCount(instantPool));
+		log.info("\t... executing {} long running tasks.", getTaskCount(longRunningPool));
 
 		scheduledPool.shutdown();
 		instantPool.shutdown();
@@ -100,10 +100,10 @@ public final class ThreadPoolManager implements Executor {
 		} catch (InterruptedException ignored) {
 		}
 
-		log.info("\t... success: " + success + " in " + (System.currentTimeMillis() - begin) + " msec.");
-		log.info("\t... " + getTaskCount(scheduledPool) + " scheduled tasks left.");
-		log.info("\t... " + getTaskCount(instantPool) + " instant tasks left.");
-		log.info("\t... " + getTaskCount(longRunningPool) + " long running tasks left.");
+		log.info("\t... success: {} in {} msec.", success, System.currentTimeMillis() - begin);
+		log.info("\t... {} scheduled tasks left.", getTaskCount(scheduledPool));
+		log.info("\t... {} instant tasks left.", getTaskCount(instantPool));
+		log.info("\t... {} long running tasks left.", getTaskCount(longRunningPool));
 	}
 
 	private int getTaskCount(ThreadPoolExecutor tp) {

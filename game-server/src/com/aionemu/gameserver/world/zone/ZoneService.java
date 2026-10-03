@@ -43,7 +43,7 @@ public final class ZoneService implements GameEngine {
 		acl.addClassListener(new ZoneHandlerClassListener());
 		scriptManager.setGlobalClassListener(acl);
 		scriptManager.load(WorldConfig.ZONE_HANDLER_DIRECTORY);
-		log.info("Loaded " + zoneHandlers.size() + " zone handlers.");
+		log.info("Loaded {} zone handlers.", zoneHandlers.size());
 	}
 
 	public ZoneHandler getNewZoneHandler(String zoneName) {
@@ -52,7 +52,7 @@ public final class ZoneService implements GameEngine {
 			try {
 				return zoneClass.getDeclaredConstructor().newInstance();
 			} catch (Exception ex) {
-				log.warn("Can't instantiate zone handler " + zoneName, ex);
+				log.warn("Can't instantiate zone handler {}", zoneName, ex);
 			}
 		}
 		return null;

@@ -171,7 +171,7 @@ public final class PlayerEnterWorldService {
 				player.setClientConnection(null);
 				client.setActivePlayer(null);
 				client.sendPacket(new SM_ENTER_WORLD_CHECK(Msg.CONNECTION_ERROR));
-				log.error("Error during enter world of " + player, ex);
+				log.error("Error during enter world of {}", player, ex);
 			} finally {
 				enteringWorld.remove(objectId);
 			}
@@ -191,7 +191,7 @@ public final class PlayerEnterWorldService {
 		player.getFriendList().setStatus(Status.ONLINE, pcd);
 		PlayerDAO.onlinePlayer(player, true);
 		PlayerDAO.storeLastOnlineTime(player.getObjectId(), new Timestamp(System.currentTimeMillis()));
-		log.info("Player " + player.getName() + " (" + account + ") logged on");
+		log.info("Player {} ({}) logged on", player.getName(), account);
 		pcd.setInEditMode(false);
 
 		World.getInstance().storeObject(player);
@@ -514,7 +514,7 @@ class GeneralUpdateTask implements Runnable {
 				for (House house : player.getHouses())
 					house.save();
 			} catch (Exception ex) {
-				log.error("Exception during periodic saving of player " + player.getName(), ex);
+				log.error("Exception during periodic saving of player {}", player.getName(), ex);
 			}
 		}
 	}
@@ -537,7 +537,7 @@ class ItemUpdateTask implements Runnable {
 				InventoryDAO.store(player);
 				ItemStoneListDAO.save(player);
 			} catch (Exception ex) {
-				log.error("Exception during periodic saving of player items " + player.getName(), ex);
+				log.error("Exception during periodic saving of player items {}", player.getName(), ex);
 			}
 		}
 	}

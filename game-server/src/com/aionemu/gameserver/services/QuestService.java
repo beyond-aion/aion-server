@@ -125,16 +125,16 @@ public final class QuestService {
 			List<Rewards> rewardGroups = DataManager.QUEST_DATA.getQuestById(questId).getRewards();
 			if (qs.getRewardGroup() != null) {
 				if (rewardGroups == null) {
-					log.warn("Handler for quest " + questId + " has set a reward group, but there are none in quest_data.xml.");
+					log.warn("Handler for quest {} has set a reward group, but there are none in quest_data.xml.", questId);
 					qs.setRewardGroup(null);
 				} else if (qs.getRewardGroup() < 0 || qs.getRewardGroup() >= rewardGroups.size()) {
-					log.warn("Handler for quest " + questId + " tried to reward a nonexistent reward group (index " + qs.getRewardGroup() + ").");
+					log.warn("Handler for quest {} tried to reward a nonexistent reward group (index {}).", questId, qs.getRewardGroup());
 					qs.setRewardGroup(rewardGroups.size() - 1);
 				}
 			} else { // you must explicitly specify the reward group when there are more than 1
 				if (rewardGroups != null && rewardGroups.size() > 0) {
 					if (rewardGroups.size() > 1)
-						log.warn("Handler for quest " + questId + " possibly rewarded the wrong reward group.");
+						log.warn("Handler for quest {} possibly rewarded the wrong reward group.", questId);
 					qs.setRewardGroup(0);
 				}
 			}
@@ -156,8 +156,8 @@ public final class QuestService {
 				} else if ((index - 1) >= 0 && (index - 1) < rewards.getSelectableRewardItem().size()) {
 					questItems.add(rewards.getSelectableRewardItem().get(index - 1));
 				} else {
-					log.warn("The extended SelectableRewardItem list has no element on index " + (index - 8) + ". See quest id " + env.getQuestId()
-						+ ". The size is: " + rewards.getSelectableRewardItem().size());
+					log.warn("The extended SelectableRewardItem list has no element on index {}. See quest id {}. The size is: {}", index - 8,
+						env.getQuestId(), rewards.getSelectableRewardItem().size());
 				}
 			}
 		} else {
@@ -173,13 +173,13 @@ public final class QuestService {
 						if (rewardIndex < template.getSelectableRewardByClass(playerClass).size()) {
 							questItems.add(template.getSelectableRewardByClass(playerClass).get(rewardIndex));
 						} else {
-							log.warn("The SelectableRewardByClass list has no element on index " + rewardIndex + ". See quest id " + env.getQuestId()
-								+ ". The size for " + playerClass + " is: " + template.getSelectableRewardByClass(playerClass).size());
+							log.warn("The SelectableRewardByClass list has no element on index {}. See quest id {}. The size for {} is: {}",
+								rewardIndex, env.getQuestId(), playerClass, template.getSelectableRewardByClass(playerClass).size());
 						}
 					} else if (rewardIndex < rewards.getSelectableRewardItem().size()) {
 						questItems.add(rewards.getSelectableRewardItem().get(rewardIndex));
 					} else {
-						log.warn("The SelectableRewardItem list has no element on index " + rewardIndex + ". See quest id " + env.getQuestId());
+						log.warn("The SelectableRewardItem list has no element on index {}. See quest id {}", rewardIndex, env.getQuestId());
 					}
 				} else if (dialogActionId == SELECTED_QUEST_NOREWARD) {
 					rewardIndex = env.getExtendedRewardIndex() - 8;
@@ -188,7 +188,7 @@ public final class QuestService {
 						if (rewardIndex >= 0 && rewardIndex < template.getSelectableRewardByClass(playerClass).size()) {
 							questItems.add(template.getSelectableRewardByClass(playerClass).get(rewardIndex));
 						} else {
-							log.warn("The SelectableRewardByClass list has no element on index " + rewardIndex + ". See quest id " + env.getQuestId(),
+							log.warn("The SelectableRewardByClass list has no element on index {}. See quest id {}", rewardIndex, env.getQuestId(),
 								new Throwable());
 						}
 					}
@@ -392,7 +392,7 @@ public final class QuestService {
 
 			return true;
 		} catch (Exception ex) {
-			log.error("QE: exception in checkStartCondition (" + player + ", questId " + questId + ")", ex);
+			log.error("QE: exception in checkStartCondition ({}, questId {})", player, questId, ex);
 		}
 		return false;
 	}

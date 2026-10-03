@@ -56,7 +56,7 @@ public class SurveyService {
 		}
 		if (player.getInventory().isFull(template.getExtraInventoryId())) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_FULL_INVENTORY());
-			log.warn("[SurveyController] player " + player.getName() + " tried to receive item with full inventory.");
+			log.warn("[SurveyController] player {} tried to receive item with full inventory.", player.getName());
 			return;
 		}
 		if (SurveyControllerDAO.useItem(item.uniqueId)) {
@@ -87,7 +87,7 @@ public class SurveyService {
 					players.add(survey.ownerId);
 			}
 		}
-		log.info("[SurveyController] found new " + cnt + " items for " + players.size() + " players.");
+		log.info("[SurveyController] found new {} items for {} players.", cnt, players.size());
 		for (int ownerId : players) {
 			Player player = World.getInstance().getPlayer(ownerId);
 			if (player != null) {

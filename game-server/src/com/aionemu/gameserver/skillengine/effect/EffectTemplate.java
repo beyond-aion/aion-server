@@ -577,7 +577,7 @@ public abstract class EffectTemplate {
 		try {
 			toReturn = StatEnum.valueOf(statEnum.toString() + "_PENETRATION");
 		} catch (Exception e) {
-			LoggerFactory.getLogger(EffectTemplate.class).warn("Missing statenum penetration for " + statEnum.toString());
+			LoggerFactory.getLogger(EffectTemplate.class).warn("Missing statenum penetration for {}", statEnum.toString());
 		}
 		return toReturn;
 	}
