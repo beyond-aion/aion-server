@@ -107,7 +107,7 @@ public class CM_LEGION extends AionClientPacket {
 				legionDominionId = readD();
 				break;
 			default:
-				LoggerFactory.getLogger(CM_LEGION.class).warn("Unknown Legion exOpcode 0x" + Integer.toHexString(exOpcode).toUpperCase());
+				LoggerFactory.getLogger(CM_LEGION.class).warn("Unknown Legion exOpcode 0x{}", Integer.toHexString(exOpcode).toUpperCase());
 				break;
 		}
 	}

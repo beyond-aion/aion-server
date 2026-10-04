@@ -86,7 +86,7 @@ public class PlayerAppearanceDAO {
 				}
 			}
 		} catch (Exception e) {
-			log.error("Could not restore PlayerAppearance data for player " + playerId + " from DB: " + e.getMessage(), e);
+			log.error("Could not restore PlayerAppearance data for player {} from DB: {}", playerId, e.getMessage(), e);
 			return null;
 		}
 		return pa;

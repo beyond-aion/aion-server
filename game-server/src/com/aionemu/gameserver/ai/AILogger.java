@@ -15,7 +15,7 @@ public class AILogger {
 
 	public static final void info(AbstractAI<? extends Creature> ai, String message) {
 		if (ai.isLogging()) {
-			log.info("[AI] " + ai.getOwner().getObjectId() + " - " + message);
+			log.info("[AI] {} - {}", ai.getOwner().getObjectId(), message);
 		}
 	}
 
@@ -25,7 +25,7 @@ public class AILogger {
 	 */
 	public static void moveinfo(Creature owner, String message) {
 		if (AIConfig.MOVE_DEBUG && owner.getAi().isLogging()) {
-			log.info("[AI] " + owner.getObjectId() + " - " + message);
+			log.info("[AI] {} - {}", owner.getObjectId(), message);
 		}
 	}
 }

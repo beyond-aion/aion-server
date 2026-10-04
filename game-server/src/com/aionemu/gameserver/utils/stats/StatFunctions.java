@@ -12,6 +12,7 @@ import com.aionemu.gameserver.controllers.attack.AttackStatus;
 import com.aionemu.gameserver.controllers.movement.MovementModifierDirection;
 import com.aionemu.gameserver.controllers.movement.MovementModifierState;
 import com.aionemu.gameserver.controllers.observer.AttackerCriticalStatus;
+import com.aionemu.gameserver.controllers.observer.OneTimeBoostSkillAttack;
 import com.aionemu.gameserver.model.SkillElement;
 import com.aionemu.gameserver.model.gameobjects.*;
 import com.aionemu.gameserver.model.gameobjects.player.Equipment;
@@ -473,6 +474,8 @@ public class StatFunctions {
 	 */
 	public static float adjustDamageByPvpOrPveModifiers(Creature attacker, Creature target, float baseDamage, int pvpDamage, boolean useTemplateDmg,
 		SkillElement element) {
+		if (attacker.equals(target)) // e.g. material skills, which the creature casts on itself
+			return baseDamage;
 		int attackBonus = 0;
 		int defenseBonus = 0;
 		float damage = baseDamage;
@@ -609,14 +612,21 @@ public class StatFunctions {
 	}
 
 	public static int calculateMagicalResistRate(Creature attacker, Creature attacked, int accMod, SkillElement element) {
+		return calculateMagicalResistRate(attacker, attacked, accMod, element, null);
+	}
+
+	public static int calculateMagicalResistRate(Creature attacker, Creature attacked, int accMod, SkillElement element,
+		OneTimeBoostSkillAttack boost) {
 		if (attacked.getObserveController().checkAttackStatus(AttackStatus.RESIST))
 			return 1000;
 		if (element != SkillElement.NONE && attacked instanceof Summon summon && element == summon.getAlwaysResistElement())
 			return 1000;
 
+		Stat2 mAccuracy = attacker.getGameStats().getMAccuracy();
+		int accuracy = boost == null ? mAccuracy.getCurrent() + accMod : boost.calculateMagicalAccuracy(mAccuracy, accMod);
 		int levelDiff = attacked.getLevel() - attacker.getLevel();
 		int mResi = attacked.getGameStats().getMResist().getCurrent();
-		int resistRate = mResi - attacker.getGameStats().getMAccuracy().getCurrent() - accMod;
+		int resistRate = mResi - accuracy;
 
 		if (mResi > 0 && levelDiff > 4) // only apply if creature has mres > 0 (to keep effect of AI#modifyOwnerStat)
 			resistRate += (levelDiff - 4) * 100;

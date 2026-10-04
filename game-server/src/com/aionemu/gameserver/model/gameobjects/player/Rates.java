@@ -155,7 +155,7 @@ public enum Rates {
 		try {
 			return Math.toIntExact(result);
 		} catch (ArithmeticException e) {
-			LoggerFactory.getLogger(getClass()).error(name() + " result is too large for " + player + ": " + result, e);
+			LoggerFactory.getLogger(getClass()).error("{} result is too large for {}: {}", name(), player, result, e);
 			return value;
 		}
 	}

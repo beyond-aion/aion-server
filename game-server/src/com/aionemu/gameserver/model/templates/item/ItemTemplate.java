@@ -2,9 +2,9 @@ package com.aionemu.gameserver.model.templates.item;
 
 import java.util.List;
 
-import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import jakarta.xml.bind.Unmarshaller;
+import jakarta.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -22,7 +22,6 @@ import com.aionemu.gameserver.model.templates.item.enums.ItemGroup;
 import com.aionemu.gameserver.model.templates.item.enums.ItemSubType;
 import com.aionemu.gameserver.model.templates.itemset.ItemSetTemplate;
 import com.aionemu.gameserver.model.templates.stats.ModifiersTemplate;
-import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author Luno, ATracer
@@ -436,7 +435,7 @@ public class ItemTemplate extends VisibleObjectTemplate {
 		return useLimits.getUseArea() != null;
 	}
 
-	public ZoneName getUseArea() {
+	public String getUseArea() {
 		return useLimits.getUseArea();
 	}
 

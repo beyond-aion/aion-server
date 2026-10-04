@@ -2,35 +2,24 @@ package com.aionemu.gameserver.model.geometry;
 
 import com.aionemu.gameserver.model.templates.zone.Point2D;
 import com.aionemu.gameserver.utils.PositionUtil;
-import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author MrPoke
  */
 public class SphereArea implements Area {
 
-	protected float x;
-	protected float y;
-	protected float z;
-	protected float r;
-	protected int worldId;
-	protected ZoneName zoneName;
+	protected final float x;
+	protected final float y;
+	protected final float z;
+	protected final float r;
 
-	/**
-	 * @param x
-	 * @param y
-	 * @param z
-	 * @param r
-	 * @param worldId
-	 * @param zoneName
-	 */
-	public SphereArea(ZoneName zoneName, int worldId, float x, float y, float z, float r) {
+	public SphereArea(float x, float y, float z, float r) {
+		if (r <= 0)
+			throw new IllegalArgumentException("Radius must be greater than 0");
 		this.x = x;
 		this.y = y;
 		this.z = z;
 		this.r = r;
-		this.worldId = worldId;
-		this.zoneName = zoneName;
 	}
 
 	@Deprecated
@@ -122,19 +111,6 @@ public class SphereArea implements Area {
 
 	@Override
 	public boolean intersectsRectangle(RectangleArea area) {
-		if (area.getDistance3D(x, y, z) <= r)
-			return true;
-		return false;
+		return area.getDistance3D(x, y, z) <= r;
 	}
-
-	@Override
-	public int getWorldId() {
-		return worldId;
-	}
-
-	@Override
-	public ZoneName getZoneName() {
-		return zoneName;
-	}
-
 }

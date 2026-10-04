@@ -113,7 +113,7 @@ public class SM_MESSAGE extends AionServerPacket {
 
 	private SM_MESSAGE(Creature sender, int senderObjectId, String senderName, String message, ChatType chatType) {
 		if (message.length() > MESSAGE_SIZE_LIMIT) {
-			log.warn("Exceeded maximum string size for packet SM_MESSAGE.\nSize: " + message.length() + "\nMessage: " + message);
+			log.warn("Exceeded maximum string size for packet SM_MESSAGE.\nSize: {}\nMessage: {}", message.length(), message);
 			if (message.length() > MESSAGE_SIZE_HARDCAP)
 				message = message.substring(0, MESSAGE_SIZE_HARDCAP); // shorten message to avoid send log error
 		}

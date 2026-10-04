@@ -1,10 +1,6 @@
 package com.aionemu.commons.database;
 
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -144,7 +140,7 @@ public final class DB {
 			ResultSet rset = stmt.executeQuery();
 			reader.handleRead(rset);
 		} catch (Exception e) {
-			log.error("Error executing select query " + query, e);
+			log.error("Error executing select query {}", query, e);
 			return false;
 		}
 		return true;
@@ -164,7 +160,7 @@ public final class DB {
 			ResultSet rset = stmt.executeQuery();
 			reader.handleRead(rset);
 		} catch (Exception e) {
-			log.error("Error calling stored procedure " + query, e);
+			log.error("Error calling stored procedure {}", query, e);
 			return false;
 		}
 		return true;
@@ -195,7 +191,7 @@ public final class DB {
 			else
 				stmt.executeUpdate();
 		} catch (Exception e) {
-			log.error("Failed to execute IU query " + query, e);
+			log.error("Failed to execute IU query {}", query, e);
 			return false;
 		}
 		return true;
@@ -248,7 +244,7 @@ public final class DB {
 			c = DatabaseFactory.getConnection();
 			ps = c.prepareStatement(sql, resultSetType, resultSetConcurrency);
 		} catch (Exception e) {
-			log.error("Can't create PreparedStatement for query: " + sql, e);
+			log.error("Can't create PreparedStatement for query: {}", sql, e);
 			if (c != null) {
 				try {
 					c.close();

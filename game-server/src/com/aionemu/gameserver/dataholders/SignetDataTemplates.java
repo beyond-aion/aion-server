@@ -4,8 +4,8 @@ import com.aionemu.gameserver.skillengine.model.SignetData;
 import com.aionemu.gameserver.skillengine.model.SignetDataTemplate;
 import com.aionemu.gameserver.skillengine.model.SignetEnum;
 
-import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.Unmarshaller;
+import jakarta.xml.bind.annotation.*;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;

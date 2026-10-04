@@ -35,7 +35,7 @@ public class Config {
 		Set<String> unusedProperties = ConfigurableProcessor.process(loadProperties(), CommonsConfig.class, LoggingConfig.class, DatabaseConfig.class, NetworkConfig.class);
 		if (!unusedProperties.isEmpty()) {
 			removePropertiesUsedInLogbackXml(unusedProperties);
-			unusedProperties.forEach(p -> LoggerFactory.getLogger(Config.class).warn("Config property " + p + " is unknown and therefore ignored."));
+			unusedProperties.forEach(p -> LoggerFactory.getLogger(Config.class).warn("Config property {} is unknown and therefore ignored.", p));
 		}
 
 		if (NetworkConfig.CLIENT_CONNECT_ADDRESS.getAddress().isAnyLocalAddress()) {
@@ -43,7 +43,7 @@ public class Config {
 			if (localIPv4 == null)
 				throw new Error("No connect IP for Aion client configured and local IP discovery failed. Please configure chatserver.network.client.connect_address");
 			NetworkConfig.CLIENT_CONNECT_ADDRESS = new InetSocketAddress(localIPv4, NetworkConfig.CLIENT_CONNECT_ADDRESS.getPort());
-			LoggerFactory.getLogger(Config.class).info("No connect IP for Aion client configured, using " + localIPv4.getHostAddress());
+			LoggerFactory.getLogger(Config.class).info("No connect IP for Aion client configured, using {}", localIPv4.getHostAddress());
 		}
 	}
 

@@ -123,7 +123,7 @@ public class UseableItemObject extends UseableHouseObject<HousingUseableItem> {
 
 		if (requiredItem != null ^ action.getRemoveCount() != null) {
 			LoggerFactory.getLogger(UseableItemObject.class)
-				.warn(this + " doesn't have valid usage requirements " + (requiredItem == null ? " (item missing)" : "(remove count missing)"));
+				.warn("{} doesn't have valid usage requirements {}", this, requiredItem == null ? " (item missing)" : "(remove count missing)");
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_ALL_CANT_USE());
 			return;
 		}

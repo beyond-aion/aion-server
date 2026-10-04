@@ -1,9 +1,9 @@
 package com.aionemu.gameserver.skillengine.effect;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.controllers.attack.AttackUtil;
 import com.aionemu.gameserver.model.SkillElement;
@@ -82,7 +82,7 @@ public abstract class DamageEffect extends EffectTemplate {
 	}
 
 	public boolean shouldApplyMagicalSkillBoostBonus(Effect effect) {
-		return effect.getSkillTemplate().isApplyMagicalSkillBoostBonus();
+		return effect.getSkillTemplate().isApplyMagicalSkillBoostBonus() && !effect.getEffector().equals(effect.getEffected());
 	}
 
 	public boolean shouldUseKnowledge() {
@@ -90,10 +90,6 @@ public abstract class DamageEffect extends EffectTemplate {
 	}
 
 	public boolean shouldUseBoostSpellAttackEffects() {
-		return true;
-	}
-
-	public boolean shouldUseOneTimeBoostSkillAttack() {
 		return true;
 	}
 }

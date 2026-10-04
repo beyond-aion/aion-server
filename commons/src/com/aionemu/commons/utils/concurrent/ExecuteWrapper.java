@@ -38,7 +38,7 @@ public class ExecuteWrapper implements Executor {
 			long durationMillis = TimeUnit.NANOSECONDS.toMillis(durationNanos);
 			if (durationMillis > expectedMaxExecutionTimeMillis) {
 				String name = runnable.getClass().isAnonymousClass() ? runnable.getClass().getName() : runnable.getClass().getSimpleName();
-				log.warn(name + " - execution time: " + durationMillis + "ms");
+				log.warn("{} - execution time: {} ms", name, durationMillis);
 			}
 		} catch (Throwable t) {
 			if (catchAndLogThrowables)

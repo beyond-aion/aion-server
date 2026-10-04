@@ -38,6 +38,7 @@ import com.aionemu.gameserver.model.summons.UnsummonType;
 import com.aionemu.gameserver.model.templates.QuestTemplate;
 import com.aionemu.gameserver.model.templates.flypath.FlightPath;
 import com.aionemu.gameserver.model.templates.flypath.FlyPathEntry;
+import com.aionemu.gameserver.model.templates.item.actions.RideAction;
 import com.aionemu.gameserver.model.templates.panels.SkillPanel;
 import com.aionemu.gameserver.model.templates.zone.ZoneType;
 import com.aionemu.gameserver.network.aion.serverpackets.*;
@@ -73,7 +74,6 @@ import com.aionemu.gameserver.world.WorldMapType;
 import com.aionemu.gameserver.world.WorldType;
 import com.aionemu.gameserver.world.geo.GeoService;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
-import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * This class is for controlling players.
@@ -195,15 +195,11 @@ public class PlayerController extends CreatureController<Player> {
 	@Override
 	public void onEnterZone(ZoneInstance zone) {
 		Player player = getOwner();
-		if (!zone.canRide() && player.isInPlayerMode(PlayerMode.RIDE))
+		if (player.isInPlayerMode(PlayerMode.RIDE) && !RideAction.isInRideZone(player))
 			player.unsetPlayerMode(PlayerMode.RIDE);
 		ConquerorAndProtectorService.getInstance().onEnterZone(player, zone);
 		InstanceService.onEnterZone(player, zone);
-		ZoneName zoneName = zone.getAreaTemplate().getZoneName();
-		if (zoneName == null)
-			log.warn("No name found for a zone in map " + zone.getAreaTemplate().getWorldId() + " with xml name " + zone.getZoneTemplate().getXmlName());
-		else
-			QuestEngine.getInstance().onEnterZone(new QuestEnv(null, player, 0), zoneName);
+		QuestEngine.getInstance().onEnterZone(new QuestEnv(null, player, 0), zone);
 	}
 
 	@Override
@@ -211,11 +207,7 @@ public class PlayerController extends CreatureController<Player> {
 		Player player = getOwner();
 		ConquerorAndProtectorService.getInstance().onLeaveZone(player, zone);
 		InstanceService.onLeaveZone(player, zone);
-		ZoneName zoneName = zone.getAreaTemplate().getZoneName();
-		if (zoneName == null)
-			log.warn("No name found for a zone in map " + zone.getAreaTemplate().getWorldId() + " with xml name " + zone.getZoneTemplate().getXmlName());
-		else
-			QuestEngine.getInstance().onLeaveZone(new QuestEnv(null, player, 0), zoneName);
+		QuestEngine.getInstance().onLeaveZone(new QuestEnv(null, player, 0), zone);
 	}
 
 	/**
@@ -439,9 +431,6 @@ public class PlayerController extends CreatureController<Player> {
 	public void onAttack(Creature attacker, Effect effect, TYPE type, int damage, boolean notifyAttack, LOG logId, AttackStatus attackStatus,
 		HopType hopType) {
 		if (getOwner().isDead())
-			return;
-
-		if (getOwner().isProtectionActive())
 			return;
 
 		// avoid killing players after duel

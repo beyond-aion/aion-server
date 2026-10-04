@@ -3,14 +3,13 @@ package com.aionemu.gameserver.model.templates.item;
 import java.util.Collections;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.model.Gender;
 import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
-import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author Rolandas
@@ -63,14 +62,8 @@ public class ItemUseLimits {
 		return useDelay;
 	}
 
-	public ZoneName getUseArea() {
-		if (usearea == null)
-			return null;
-		try {
-			return ZoneName.createOrGet(usearea);
-		} catch (Exception e) {
-			return null;
-		}
+	public String getUseArea() {
+		return usearea;
 	}
 
 	public List<Integer> getOwnershipWorldIds() {

@@ -42,7 +42,7 @@ public class PlayerTransferService {
 			for (String skillId : PlayerTransferConfig.REMOVE_SKILL_LIST.split(","))
 				rsList.add(Integer.parseInt(skillId));
 		}
-		log.info("PlayerTransferService loaded. With " + rsList.size() + " restricted skills.");
+		log.info("PlayerTransferService loaded. With {} restricted skills.", rsList.size());
 	}
 
 	public void startTransfer(int accountId, int targetAccountId, int playerId, byte targetServerId, int taskId) {
@@ -54,14 +54,14 @@ public class PlayerTransferService {
 			}
 
 		if (!exist) {
-			log.warn("transfer #" + taskId + " player " + playerId + " is not present on account " + accountId + ".");
+			log.warn("transfer #{} player {} is not present on account {}.", taskId, playerId, accountId);
 			LoginServer.getInstance().sendPacket(
 				new SM_PTRANSFER_CONTROL(SM_PTRANSFER_CONTROL.TASK_STOP, taskId, "player " + playerId + " is not present on account " + accountId));
 			return;
 		}
 
 		if (LegionMemberDAO.isIdUsed(playerId)) {
-			log.warn("cannot transfer #" + taskId + " player with existing legion " + playerId + ".");
+			log.warn("cannot transfer #{} player with existing legion {}.", taskId, playerId);
 			LoginServer.getInstance().sendPacket(
 				new SM_PTRANSFER_CONTROL(SM_PTRANSFER_CONTROL.TASK_STOP, taskId, "cannot transfer player with existing legion " + playerId));
 			return;
@@ -69,7 +69,7 @@ public class PlayerTransferService {
 
 		PlayerCommonData common = PlayerService.getOrLoadPlayerCommonData(playerId);
 		if (common.isOnline()) {
-			log.warn("cannot transfer #" + taskId + " online players " + playerId + ".");
+			log.warn("cannot transfer #{} online players {}.", taskId, playerId);
 			LoginServer.getInstance().sendPacket(
 				new SM_PTRANSFER_CONTROL(SM_PTRANSFER_CONTROL.TASK_STOP, taskId, "cannot transfer online players " + playerId));
 			return;
@@ -77,7 +77,7 @@ public class PlayerTransferService {
 
 		if (PlayerTransferConfig.REUSE_HOURS > 0
 			&& common.getLastTransferTime() + PlayerTransferConfig.REUSE_HOURS * 3600000 > System.currentTimeMillis()) {
-			log.warn("cannot transfer #" + taskId + " that player so often " + playerId + ".");
+			log.warn("cannot transfer #{} that player so often {}.", taskId, playerId);
 			LoginServer.getInstance().sendPacket(
 				new SM_PTRANSFER_CONTROL(SM_PTRANSFER_CONTROL.TASK_STOP, taskId, "cannot transfer that player so often " + playerId));
 			return;
@@ -86,14 +86,14 @@ public class PlayerTransferService {
 		Player player = PlayerService.getPlayer(playerId, AccountService.loadAccount(accountId));
 		long kinah = player.getInventory().getKinah() + player.getWarehouse().getKinah();
 		if (PlayerTransferConfig.MAX_KINAH > 0 && kinah >= PlayerTransferConfig.MAX_KINAH) {
-			log.warn("cannot transfer #" + taskId + " players with " + kinah + " kinah in inventory/wh.");
+			log.warn("cannot transfer #{} players with {} kinah in inventory/wh.", taskId, kinah);
 			LoginServer.getInstance().sendPacket(
 				new SM_PTRANSFER_CONTROL(SM_PTRANSFER_CONTROL.TASK_STOP, taskId, "cannot transfer players with " + kinah + " kinah in inventory/wh."));
 			return;
 		}
 
 		if (BrokerService.getInstance().hasRegisteredItems(player)) {
-			log.warn("cannot transfer #" + taskId + " player while he own some items in broker.");
+			log.warn("cannot transfer #{} player while he own some items in broker.", taskId);
 			LoginServer.getInstance().sendPacket(
 				new SM_PTRANSFER_CONTROL(SM_PTRANSFER_CONTROL.TASK_STOP, taskId, "cannot transfer player while he own some items in broker."));
 			return;
@@ -107,7 +107,7 @@ public class PlayerTransferService {
 		tp.taskId = taskId;
 		transfers.put(taskId, tp);
 
-		textLog.info("taskId:" + taskId + "; [StartTransfer]");
+		textLog.info("taskId:{}; [StartTransfer]", taskId);
 		LoginServer.getInstance().sendPacket(new SM_PTRANSFER_CONTROL(SM_PTRANSFER_CONTROL.CHARACTER_INFORMATION, tp));
 		LoginServer.getInstance().sendPacket(new SM_PTRANSFER_CONTROL(SM_PTRANSFER_CONTROL.ITEMS_INFORMATION, tp));
 		LoginServer.getInstance().sendPacket(new SM_PTRANSFER_CONTROL(SM_PTRANSFER_CONTROL.DATA_INFORMATION, tp));
@@ -130,8 +130,8 @@ public class PlayerTransferService {
 				return;
 			}
 
-			log.info("Name is already in use `" + name + "`");
-			textLog.info("taskId:" + taskId + "; [CloneCharacter:!isFreeName]");
+			log.info("Name is already in use `{}`", name);
+			textLog.info("taskId:{}; [CloneCharacter:!isFreeName]", taskId);
 			String newName = name;
 
 			int i = 0;
@@ -148,7 +148,7 @@ public class PlayerTransferService {
 		Player cha = new CMT_CHARACTER_INFORMATION(transfer.getDB()).readInfo(name, targetAccountId, account, rsList, textLog);
 
 		if (cha == null) { // something went wrong!
-			log.error("clone failed #" + taskId + " `" + name + "`");
+			log.error("clone failed #{} `{}`", taskId, name);
 			LoginServer.getInstance().sendPacket(
 				new SM_PTRANSFER_CONTROL(SM_PTRANSFER_CONTROL.ERROR, taskId, "unexpected sql error while creating a clone"));
 		} else {
@@ -156,8 +156,8 @@ public class PlayerTransferService {
 				InventoryDAO.store(ItemFactory.newItem(169670001), cha); // [Event] Name Change Ticket
 			PlayerDAO.setPlayerLastTransferTime(cha.getObjectId(), System.currentTimeMillis());
 			LoginServer.getInstance().sendPacket(new SM_PTRANSFER_CONTROL(SM_PTRANSFER_CONTROL.OK, taskId));
-			log.info("clone successful #" + taskId + " `" + name + "`");
-			textLog.info("taskId:" + taskId + "; [CloneCharacter:Done]");
+			log.info("clone successful #{} `{}`", taskId, name);
+			textLog.info("taskId:{}; [CloneCharacter:Done]", taskId);
 		}
 	}
 
@@ -166,7 +166,7 @@ public class PlayerTransferService {
 	 */
 	public void onOk(int taskId) {
 		TransferablePlayer tplayer = this.transfers.remove(taskId);
-		textLog.info("taskId:" + taskId + "; [TransferComplete]");
+		textLog.info("taskId:{}; [TransferComplete]", taskId);
 		PlayerService.deletePlayerFromDB(tplayer.playerId);
 	}
 
@@ -175,7 +175,7 @@ public class PlayerTransferService {
 	 */
 	public void onError(int taskId, String reason) {
 		this.transfers.remove(taskId);
-		textLog.info("taskId:" + taskId + "; [Error. Transfer failed] " + reason);
+		textLog.info("taskId:{}; [Error. Transfer failed] {}", taskId, reason);
 	}
 
 	public void putTransfer(int taskId, PlayerTransfer playerTransfer) {

@@ -13,7 +13,6 @@ import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
-import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author Cheatkiller
@@ -101,7 +100,7 @@ public class LinkgateFoundryInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void onEnterZone(Player player, ZoneInstance zone) {
-		if (zone.getAreaTemplate().getZoneName() == ZoneName.get("IDLDF4RE_01_ITEMUSEAREA_BOSS_301270000")) {
+		if (zone.matches("IDLDF4RE_01_ITEMUSEAREA_BOSS_301270000")){
 			if (timeCheckTask != null && !timeCheckTask.isDone()) {
 				timeCheckTask.cancel(true);
 			}

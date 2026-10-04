@@ -17,6 +17,7 @@ import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.controllers.attack.AttackResult;
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
 import com.aionemu.gameserver.controllers.attack.AttackUtil;
+import com.aionemu.gameserver.controllers.observer.MaterialSkillUsage;
 import com.aionemu.gameserver.controllers.observer.TerrainZoneCollisionMaterialActor;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.EmotionType;
@@ -64,6 +65,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 
 	private static final Logger log = LoggerFactory.getLogger(CreatureController.class);
 	private volatile TerrainZoneCollisionMaterialActor actor;
+	private MaterialSkillUsage materialSkillUsage;
 	private final ConcurrentHashMap<Integer, Future<?>> tasks = new ConcurrentHashMap<>();
 
 	@Override
@@ -402,7 +404,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 			if (oldTask != null) {
 				oldTask.cancel(false);
 				if (taskId == TaskId.DESPAWN) {
-					log.warn("Despawn task for " + getOwner() + " was cancelled and replaced with another one, possibly delaying the intended despawn time.");
+					log.warn("Despawn task for {} was cancelled and replaced with another one, possibly delaying the intended despawn time", getOwner());
 				}
 			}
 			return task;
@@ -460,7 +462,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 				return skill.useSkill();
 			}
 		} catch (Exception ex) {
-			log.error("Exception during skill use: " + skillId, ex);
+			log.error("Exception during skill use: {}", skillId, ex);
 		}
 		return false;
 	}
@@ -485,7 +487,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 			if (skill != null)
 				return skill.useSkill();
 		} catch (Exception ex) {
-			log.error("Could not use charge skill " + startSkill.getSkillId() + " with charge time " + chargeTimeMillis, ex);
+			log.error("Could not use charge skill {} with charge time {}", startSkill.getSkillId(), chargeTimeMillis, ex);
 		} finally {
 			startSkill.cancelCast();
 		}
@@ -531,6 +533,12 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	 * Cancel use Item
 	 */
 	public void cancelUseItem() {
+	}
+
+	public synchronized MaterialSkillUsage getOrCreateMaterialSkillUsage() {
+		if (materialSkillUsage == null)
+			materialSkillUsage = new MaterialSkillUsage();
+		return materialSkillUsage;
 	}
 
 	@Override

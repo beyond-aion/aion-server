@@ -190,10 +190,10 @@ public class PvpService {
 	private void logKill(Player winner, Player victim, List<Player> assistedGroup) {
 		if (LoggingConfig.LOG_KILL) {
 			if (assistedGroup.size() > 1 || assistedGroup.size() == 1 && !assistedGroup.contains(winner))
-				log.info("[KILL] " + winner + " killed " + victim + " assisted by "
-					+ assistedGroup.stream().filter(p -> !p.equals(winner)).map(String::valueOf).collect(Collectors.joining(",")));
+				log.info("[KILL] {} killed {} assisted by {}", winner, victim,
+					assistedGroup.stream().filter(p -> !p.equals(winner)).map(String::valueOf).collect(Collectors.joining(",")));
 			else
-				log.info("[KILL] " + winner + " killed " + victim);
+				log.info("[KILL] {} killed {}", winner, victim);
 		}
 
 		if (LoggingConfig.LOG_PL) {
@@ -263,7 +263,7 @@ public class PvpService {
 		List<ZoneInstance> zones = victim.findZones();
 		for (Player p : killers) {
 			for (ZoneInstance zone : zones)
-				QuestEngine.getInstance().onKillInZone(new QuestEnv(victim, p, 0), zone.getAreaTemplate().getZoneName().name());
+				QuestEngine.getInstance().onKillInZone(new QuestEnv(victim, p, 0), zone);
 			QuestEngine.getInstance().onKillInWorld(new QuestEnv(victim, p, 0), victim.getWorldId());
 			QuestEngine.getInstance().onKillRanked(new QuestEnv(victim, p, 0), victim.getAbyssRank().getRank());
 		}

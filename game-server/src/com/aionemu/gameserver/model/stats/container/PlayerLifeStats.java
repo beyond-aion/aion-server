@@ -5,7 +5,6 @@ import java.util.concurrent.Future;
 import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.templates.zone.ZoneType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_FLY_TIME;
@@ -33,29 +32,43 @@ public class PlayerLifeStats extends CreatureLifeStats<Player> {
 	}
 
 	@Override
-	protected void onHpChanged(int previousHp, int newHp, Creature effector) {
+	protected void onHpChanged(TYPE type, int previousHp, int newHp, Creature effector) {
 		if (isFullyRestoredHp()) // FIXME: Temp Fix: Reset aggro list when hp is full
 			owner.getAggroList().clear();
 		if (owner.isSpawned()) {
 			sendHpPacketUpdate();
 			sendGroupPacketUpdate();
+			if (newHp < previousHp)
+				endProtectionOnDamage(type);
 			if (previousHp == 0 || newHp < previousHp)
 				triggerRestoreTask();
 			if (previousHp == 0)
 				triggerFpRestore();
 		}
-		super.onHpChanged(previousHp, newHp, effector);
+		super.onHpChanged(type, previousHp, newHp, effector);
 	}
 
 	@Override
-	protected void onMpChanged(int previousMp, int newMp) {
-		super.onMpChanged(previousMp, newMp);
+	protected void onMpChanged(TYPE type, int previousMp, int newMp) {
+		super.onMpChanged(type, previousMp, newMp);
 		if (owner.isSpawned()) {
 			sendMpPacketUpdate();
 			sendGroupPacketUpdate();
-			if (newMp < previousMp)
+			if (newMp < previousMp) {
+				endProtectionOnDamage(type);
 				triggerRestoreTask();
+			}
 		}
+	}
+
+	/**
+	 * Ends the spawn protection when HP or MP were lost to damage. Setting them directly (login, max stat changes, revive) and skill costs don't count.
+	 */
+	private void endProtectionOnDamage(TYPE type) {
+		if (type == TYPE.HP || type == TYPE.HEAL_MP || type == TYPE.USED_HP || type == TYPE.USED_MP)
+			return;
+		if (owner.isProtectionActive())
+			owner.getController().stopProtectionActiveTask();
 	}
 
 	private void sendGroupPacketUpdate() {
@@ -236,7 +249,7 @@ public class PlayerLifeStats extends CreatureLifeStats<Player> {
 				flightReduceValue = owner.ride.getCostFp();
 				flightReducePeriod = 1;
 			} else if (owner.isFlying()) {
-				boolean isInFlyArea = owner.isInsideZoneType(ZoneType.FLY) && !owner.isInsideZoneType(ZoneType.NO_FLY);
+				boolean isInFlyArea = owner.isInsideFlyZone();
 				flightReduceValue = isInFlyArea ? 1 : 2;
 				flightReducePeriod = isInFlyArea && owner.isInGlidingState() ? 2 : 1;
 			} else {

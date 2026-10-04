@@ -37,9 +37,7 @@ public class PeriodicSaveService {
 	 * Save data on shutdown
 	 */
 	public void onShutdown() {
-		log.info("Starting data save on shutdown.");
 		tasks.forEach(PeriodicSaveTask::storeDataAndCancel);
-		log.info("Data successfully saved.");
 	}
 
 	private class LegionWarehouseSaveTask extends PeriodicSaveTask {
@@ -50,7 +48,6 @@ public class PeriodicSaveService {
 
 		@Override
 		public void run() {
-			log.info("Legion WH update task started.");
 			long startTime = System.currentTimeMillis();
 			int legionWhUpdated = 0;
 			for (Legion legion : LegionService.getInstance().getCachedLegions()) {
@@ -62,13 +59,13 @@ public class PeriodicSaveService {
 					// 2. save item stones
 					ItemStoneListDAO.save(allItems);
 				} catch (Exception ex) {
-					log.error("Exception during periodic saving of legion WH", ex);
+					log.error("Could not save warehouse of legion {}", legion.getLegionId(), ex);
 				}
 
 				legionWhUpdated++;
 			}
 			long workTime = System.currentTimeMillis() - startTime;
-			log.info("Legion WH update: " + workTime + " ms, legions: " + legionWhUpdated + ".");
+			log.info("Saved warehouses of {} legions in {} ms", legionWhUpdated, workTime);
 		}
 	}
 

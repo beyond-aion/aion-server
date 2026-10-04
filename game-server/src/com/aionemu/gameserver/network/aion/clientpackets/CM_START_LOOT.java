@@ -49,7 +49,7 @@ public class CM_START_LOOT extends AionClientPacket {
 				DropService.getInstance().closeDropList(player, targetObjectId);
 				break;
 			default:
-				log.warn(player + " sent unknown loot action type " + action);
+				log.warn("{} sent unknown loot action type {}", player, action);
 		}
 	}
 }

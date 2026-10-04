@@ -5,10 +5,10 @@ import static com.aionemu.gameserver.model.items.ItemUseAnimation.*;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.controllers.observer.ItemUseObserver;
@@ -24,6 +24,7 @@ import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.spawnengine.VisibleObjectSpawner;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+import com.aionemu.gameserver.world.zone.ZoneAttributes;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
@@ -134,8 +135,10 @@ public class ToyPetSpawnAction extends AbstractItemAction {
 	}
 
 	private boolean isPutKiskZone(Player player) {
+		if (!player.getWorldMapInstance().getTemplate().hasAttribute(ZoneAttributes.BIND))
+			return false;
 		for (ZoneInstance zone : player.findZones()) {
-			if (!zone.canPutKisk())
+			if (zone.getZoneTemplate().getFlags() > 0 && !zone.getZoneTemplate().hasZoneAttribute(ZoneAttributes.BIND))
 				return false;
 		}
 		return true;

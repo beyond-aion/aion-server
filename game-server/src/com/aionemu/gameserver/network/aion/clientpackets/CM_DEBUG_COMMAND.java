@@ -22,6 +22,6 @@ public class CM_DEBUG_COMMAND extends AbstractGmCommandPacket {
 
 	@Override
 	protected void runImpl() {
-		LoggerFactory.getLogger("ADMINAUDIT_LOG").info(getConnection().getActivePlayer() + " sent debug command ////" + command);
+		LoggerFactory.getLogger("ADMINAUDIT_LOG").info("{} sent debug command ////{}", getConnection().getActivePlayer(), command);
 	}
 }

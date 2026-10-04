@@ -200,7 +200,7 @@ public class ExchangeService {
 			for (ExchangeItem exItem : exchange.getItems().values()) {
 				Item realItem = player.getInventory().getItemByObjId(exItem.getItemObjId());
 				if (realItem == null) {
-					log.warn("Player " + player.getName() + " is trying to return fake item on exchange cancel!");
+					log.warn("Player {} is trying to return fake item on exchange cancel!", player.getName());
 					return;
 				}
 				if (realItem.getItemCount() == exItem.getItemCount()) {
@@ -334,14 +334,14 @@ public class ExchangeService {
 				itemToPut.setPackCount(itemToPut.getPackCount() * -1);
 			partner.getInventory().add(itemToPut, ItemPacketService.ItemAddType.PLAYER_EXCHANGE_GET);
 			if (LoggingConfig.LOG_PLAYER_EXCHANGE)
-				log.info("Player " + giver.getName() + " exchanged item " + itemToPut.getItemId() + " [" + itemToPut.getItemName() + "] (count: "
-					+ itemToPut.getItemCount() + ") with player " + partner.getName());
+				log.info("Player {} exchanged item {} [{}] (count: {}) with player {}", giver.getName(), itemToPut.getItemId(),
+					itemToPut.getItemName(), itemToPut.getItemCount(), partner.getName());
 		}
 		long kinahToExchange = exchange1.getKinahCount();
 		if (kinahToExchange > 0) {
 			partner.getInventory().increaseKinah(kinahToExchange);
 			if (LoggingConfig.LOG_PLAYER_EXCHANGE)
-				log.info("Player " + giver.getName() + " exchanged " + kinahToExchange + " Kinah with player " + partner.getName());
+				log.info("Player {} exchanged {} Kinah with player {}", giver.getName(), kinahToExchange, partner.getName());
 		}
 	}
 

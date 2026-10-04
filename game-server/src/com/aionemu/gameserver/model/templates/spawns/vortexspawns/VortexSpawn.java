@@ -2,7 +2,7 @@ package com.aionemu.gameserver.model.templates.spawns.vortexspawns;
 
 import java.util.List;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 
 import com.aionemu.gameserver.model.templates.spawns.Spawn;
 import com.aionemu.gameserver.model.vortex.VortexStateType;

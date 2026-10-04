@@ -28,7 +28,7 @@ public class BonusPackDAO {
 				return rset.getInt("receiving_player");
 			return 0;
 		} catch (SQLException e) {
-			log.error("[BONUS_PACK] Error loading received player id on account id " + accountId, e);
+			log.error("[BONUS_PACK] Error loading received player id on account id {}", accountId, e);
 			return Integer.MAX_VALUE;
 		}
 	}
@@ -40,7 +40,7 @@ public class BonusPackDAO {
 			stmt.execute();
 			return true;
 		} catch (Exception e) {
-			log.error("[BONUS_PACK] Error saving received player id " + playerId + " on account id " + accountId, e);
+			log.error("[BONUS_PACK] Error saving received player id {} on account id {}", playerId, accountId, e);
 			return false;
 		}
 	}

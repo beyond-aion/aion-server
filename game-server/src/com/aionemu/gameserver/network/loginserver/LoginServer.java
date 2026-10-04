@@ -74,10 +74,10 @@ public class LoginServer {
 			int delay;
 			if (e instanceof SocketException) {
 				delay = 10;
-				log.info("Could not connect to login server at " + NetworkConfig.LOGIN_ADDRESS + ", trying again in " + delay + "s");
+				log.info("Could not connect to login server at {}, trying again in {} seconds", NetworkConfig.LOGIN_ADDRESS, delay);
 			} else {
 				delay = 60;
-				log.error("Could not connect to login server at " + NetworkConfig.LOGIN_ADDRESS + ", trying again in " + delay + "s", e);
+				log.error("Could not connect to login server at {}, trying again in {} seconds", NetworkConfig.LOGIN_ADDRESS, delay, e);
 			}
 			ThreadPoolManager.getInstance().schedule(() -> connect(nioServer), delay * 1000);
 		}
@@ -101,7 +101,7 @@ public class LoginServer {
 			return;
 		int delay = lsCon.getState() == State.AUTHED ? 5 : 15;
 		disconnect();
-		log.info("Reconnecting to login server in " + delay + "s...");
+		log.info("Reconnecting to login server in {} seconds", delay);
 		ThreadPoolManager.getInstance().schedule(() -> connect(nioServer), delay * 1000);
 	}
 
@@ -167,23 +167,23 @@ public class LoginServer {
 		client.setAccount(account);
 		client.setState(AionConnection.State.AUTHED);
 		loggedInAccounts.put(accountId, client);
-		log.info(account + " authed with MAC: " + client.getMacAddress() + " and HDD serial: " + client.getHddSerial());
+		log.info("{} authed with MAC: {} and HDD serial: {}", account, client.getMacAddress(), client.getHddSerial());
 		client.sendPacket(new SM_L2AUTH_LOGIN_CHECK(true, accountName));
 		sendPacket(new SM_ACCOUNT_CONNECTION_INFO(account.getId(), System.currentTimeMillis(), client.getIP(), client.getMacAddress(), client.getHddSerial()));
 	}
 
 	private boolean validateMacAndHddSerial(AionConnection client, String allowedHddSerial) {
 		if (!client.getMacAddress().matches("^([0-9A-F]{2}-){5}[0-9A-F]{2}$")) {
-			log.warn(client + " sent an invalid MAC address (modified client or hack): " + client.getMacAddress());
+			log.warn("{} sent an invalid MAC address (modified client or hack): {}", client, client.getMacAddress());
 			return false;
 		} else if (BannedMacManager.getInstance().isBanned(client.getMacAddress())) {
-			log.info(client + " was kicked due to mac ban");
+			log.info("{} was kicked due to mac ban", client);
 			return false;
 		} else if (HDDBanService.getInstance().isBanned(client.getHddSerial())) {
-			log.info(client + " was kicked because hdd serial " + client.getHddSerial() + " is banned");
+			log.info("{} was kicked because hdd serial {} is banned", client, client.getHddSerial());
 			return false;
 		} else if (SecurityConfig.HDD_SERIAL_LOCK_ENABLE && !allowedHddSerial.isEmpty() && !allowedHddSerial.equals(client.getHddSerial())) {
-			log.info(client + " was kicked due to hdd serial mismatch. Expected " + allowedHddSerial + " but client connected with " + client.getHddSerial());
+			log.info("{} was kicked due to hdd serial mismatch. Expected {} but client connected with {}", client, allowedHddSerial, client.getHddSerial());
 			return false;
 		}
 		return true;
@@ -228,7 +228,7 @@ public class LoginServer {
 	public void kickAccount(int accountId, boolean notifyDoubleLogin) {
 		AionConnection client = loggedInAccounts.get(accountId);
 		if (client != null) {
-			log.info("Kicking account ID " + accountId + " by LS request.");
+			log.info("Kicking account ID {} by LS request", accountId);
 			client.close(notifyDoubleLogin ? SM_SYSTEM_MESSAGE.STR_KICK_ANOTHER_USER_TRY_LOGIN() : null);
 		}
 	}

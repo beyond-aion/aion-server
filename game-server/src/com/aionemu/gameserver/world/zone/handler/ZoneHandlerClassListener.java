@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.scripting.classlistener.ClassListener;
-import com.aionemu.gameserver.instance.InstanceHandlerClassListener;
 import com.aionemu.gameserver.world.zone.ZoneService;
 
 /**
@@ -14,14 +13,14 @@ import com.aionemu.gameserver.world.zone.ZoneService;
  */
 public class ZoneHandlerClassListener implements ClassListener {
 
-	private static final Logger log = LoggerFactory.getLogger(InstanceHandlerClassListener.class);
+	private static final Logger log = LoggerFactory.getLogger(ZoneHandlerClassListener.class);
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public void postLoad(Class<?>[] classes) {
 		for (Class<?> c : classes) {
 			if (log.isDebugEnabled())
-				log.debug("Load class " + c.getName());
+				log.debug("Load class {}", c.getName());
 
 			if (!isValidClass(c))
 				continue;
@@ -36,7 +35,7 @@ public class ZoneHandlerClassListener implements ClassListener {
 	public void preUnload(Class<?>[] classes) {
 		if (log.isDebugEnabled()) {
 			for (Class<?> c : classes)
-				log.debug("Unload class " + c.getName());
+				log.debug("Unload class {}", c.getName());
 		}
 	}
 

@@ -19,6 +19,7 @@
 		<xs:attribute name="id" type="xs:int" use="required"/>
 		<xs:attribute name="defends_race" type="Race"/>
 		<xs:attribute name="offence_race" type="Race"/>
+		<xs:attribute name="zones" type="StringListType" use="required"/>
 	</xs:complexType>
 	<xs:complexType name="HomePoint">
 		<xs:attribute name="map" type="xs:int" use="required"/>

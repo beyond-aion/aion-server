@@ -7,7 +7,7 @@ import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.world.zone.ZoneName;
+import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
  * @author Pad
@@ -24,7 +24,7 @@ public class _16987SeekOuttheCorridor extends AbstractQuestHandler {
 	public void register() {
 		qe.registerQuestNpc(npcId).addOnQuestStart(questId);
 		qe.registerQuestNpc(npcId).addOnTalkEvent(questId);
-		qe.registerOnEnterZone(ZoneName.get("DANUAR_SANCTUARY_INVESTIGATION_AREA_220080000"), questId);
+		qe.registerOnEnterZone("DANUAR_SANCTUARY_INVESTIGATION_AREA_220080000", questId);
 	}
 
 	@Override
@@ -49,7 +49,7 @@ public class _16987SeekOuttheCorridor extends AbstractQuestHandler {
 	}
 
 	@Override
-	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) {
+	public boolean onEnterZoneEvent(QuestEnv env, ZoneInstance zone) {
 		QuestState qs = env.getPlayer().getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			qs.setQuestVarById(0, 1);

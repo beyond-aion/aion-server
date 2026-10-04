@@ -9,7 +9,6 @@ import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author Ritsu
@@ -127,7 +126,7 @@ public class _24021GhostsintheDesert extends AbstractQuestHandler {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			if (item.getItemId() == 182215363 && player.isInsideItemUseZone(ZoneName.get("DF2_ITEMUSEAREA_Q2032"))) {
+			if (item.getItemId() == 182215363 && player.isInsideItemUseZone("DF2_ITEMUSEAREA_Q2032")) {
 				return HandlerResult.fromBoolean(useQuestItem(env, item, 4, 4, true, 88)); // reward
 			}
 		}

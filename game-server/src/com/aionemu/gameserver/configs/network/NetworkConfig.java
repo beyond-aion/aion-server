@@ -98,6 +98,30 @@ public class NetworkConfig {
 	public static int PACKET_PROCESSOR_THREAD_SPAWN_THRESHOLD;
 
 	/**
+	 * Maximum number of packets of one client that may wait for execution. A client exceeding it gets disconnected.
+	 */
+	@Property(key = "gameserver.network.packet.processor.max_pending_per_connection", defaultValue = "500")
+	public static int PACKET_PROCESSOR_MAX_PENDING_PACKETS_PER_CONNECTION;
+
+	/**
+	 * Maximum number of server packets that may wait to be sent to one client. A client exceeding it gets disconnected.
+	 */
+	@Property(key = "gameserver.network.client.max_pending_server_packets", defaultValue = "20000")
+	public static int MAX_PENDING_SERVER_PACKETS;
+
+	/**
+	 * Time in seconds a client may not receive any data while server packets are waiting to be sent to it, before it gets disconnected.
+	 */
+	@Property(key = "gameserver.network.client.max_send_stall_seconds", defaultValue = "60")
+	public static int MAX_SEND_STALL_SECONDS;
+
+	/**
+	 * Time in seconds a client has to authenticate after connecting, before it gets disconnected.
+	 */
+	@Property(key = "gameserver.network.client.auth_timeout_seconds", defaultValue = "60")
+	public static int CLIENT_AUTH_TIMEOUT_SECONDS;
+
+	/**
 	 * If aion client packets unknown by the server should be logged.
 	 */
 	@Property(key = "gameserver.network.logging.unknown_packets", defaultValue = "false")
@@ -109,7 +133,7 @@ public class NetworkConfig {
 	@Property(key = "gameserver.network.logging.ignored_packets", defaultValue = "false")
 	public static boolean LOG_IGNORED_PACKETS;
 
-	@Property(key = "gameserver.network.flood.connections", defaultValue = "false")
+	@Property(key = "gameserver.network.flood.connections", defaultValue = "true")
 	public static boolean ENABLE_FLOOD_CONNECTIONS;
 
 	@Property(key = "gameserver.network.flood.tick", defaultValue = "1000")

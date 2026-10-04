@@ -50,10 +50,10 @@ public class GameConnectionFactoryImpl implements ConnectionFactory {
 			final Result isFlooding = floodAcceptor.isFlooding(host, true);
 			switch (isFlooding) {
 				case REJECTED:
-					log.warn("Rejected connection from " + host);
+					log.warn("Rejected connection from {}", host);
 					return null;
 				case WARNED:
-					log.warn("Connection over warn limit from " + host);
+					log.warn("Connection over warn limit from {}", host);
 					break;
 			}
 		}
