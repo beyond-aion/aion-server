@@ -155,7 +155,7 @@ public class AntiHackService {
 		int legitSize = 212; // 212 after login, exactly 30 minutes later: 224, right after that: 1128 o.O
 		if (SecurityConfig.AION_BIN_CHECK) {
 			if (size != legitSize) {
-				log.warn("Detected modified aion.bin for account ID " + con.getAccount().getId());
+				log.warn("Detected modified aion.bin for account ID {}", con.getAccount().getId());
 				con.close(new SM_QUIT_RESPONSE());
 			}
 		}

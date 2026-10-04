@@ -47,7 +47,7 @@ public class AnnouncementService {
 		for (Announcement announcement : AnnouncementsDAO.loadAnnouncements())
 			schedule(announcement);
 
-		LoggerFactory.getLogger(AnnouncementService.class).info("Loaded " + announcements.size() + " announcements");
+		LoggerFactory.getLogger(AnnouncementService.class).info("Loaded {} announcements", announcements.size());
 	}
 
 	private void schedule(Announcement announce) {

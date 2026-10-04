@@ -2,14 +2,14 @@ package com.aionemu.gameserver.dataholders;
 
 import java.util.*;
 
-import jakarta.xml.bind.Unmarshaller;
-import jakarta.xml.bind.annotation.*;
-
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.model.templates.zone.ZoneClassName;
 import com.aionemu.gameserver.model.templates.zone.ZoneInfo;
 import com.aionemu.gameserver.model.templates.zone.ZoneTemplate;
+
+import jakarta.xml.bind.Unmarshaller;
+import jakarta.xml.bind.annotation.*;
 
 /**
  * @author ATracer
@@ -57,7 +57,7 @@ public class ZoneData {
 
 	public boolean validateZoneName(String zoneName) {
 		if (!isValidZoneName(zoneName)) {
-			LoggerFactory.getLogger(getClass()).warn("Missing data for zone: " + zoneName);
+			LoggerFactory.getLogger(getClass()).warn("Missing data for zone: {}", zoneName);
 			return false;
 		}
 		return true;

@@ -1,53 +1,19 @@
 package com.aionemu.gameserver.dataholders;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.EnumMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
+
+import org.slf4j.LoggerFactory;
+
+import com.aionemu.gameserver.model.templates.itemgroups.*;
+import com.aionemu.gameserver.model.templates.itemgroups.FeedGroups.*;
+import com.aionemu.gameserver.model.templates.pet.FoodType;
 
 import jakarta.xml.bind.Unmarshaller;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
-
-import org.slf4j.LoggerFactory;
-
-import com.aionemu.gameserver.model.templates.itemgroups.BonusItemGroup;
-import com.aionemu.gameserver.model.templates.itemgroups.BossGroup;
-import com.aionemu.gameserver.model.templates.itemgroups.CraftItemGroup;
-import com.aionemu.gameserver.model.templates.itemgroups.CraftRecipeGroup;
-import com.aionemu.gameserver.model.templates.itemgroups.EnchantGroup;
-import com.aionemu.gameserver.model.templates.itemgroups.EventGroup;
-import com.aionemu.gameserver.model.templates.itemgroups.FeedGroups.AetherCherryGroup;
-import com.aionemu.gameserver.model.templates.itemgroups.FeedGroups.AetherCrystalBiscuitGroup;
-import com.aionemu.gameserver.model.templates.itemgroups.FeedGroups.AetherGemBiscuitGroup;
-import com.aionemu.gameserver.model.templates.itemgroups.FeedGroups.AetherPowderBiscuitGroup;
-import com.aionemu.gameserver.model.templates.itemgroups.FeedGroups.FeedArmorGroup;
-import com.aionemu.gameserver.model.templates.itemgroups.FeedGroups.FeedBalaurGroup;
-import com.aionemu.gameserver.model.templates.itemgroups.FeedGroups.FeedBoneGroup;
-import com.aionemu.gameserver.model.templates.itemgroups.FeedGroups.FeedExcludeGroup;
-import com.aionemu.gameserver.model.templates.itemgroups.FeedGroups.FeedFluidGroup;
-import com.aionemu.gameserver.model.templates.itemgroups.FeedGroups.FeedSoulGroup;
-import com.aionemu.gameserver.model.templates.itemgroups.FeedGroups.FeedThornGroup;
-import com.aionemu.gameserver.model.templates.itemgroups.FeedGroups.HealthyFoodAllGroup;
-import com.aionemu.gameserver.model.templates.itemgroups.FeedGroups.HealthyFoodSpicyGroup;
-import com.aionemu.gameserver.model.templates.itemgroups.FeedGroups.PoppySnackGroup;
-import com.aionemu.gameserver.model.templates.itemgroups.FeedGroups.PoppySnackNutritiousGroup;
-import com.aionemu.gameserver.model.templates.itemgroups.FeedGroups.PoppySnackTastyGroup;
-import com.aionemu.gameserver.model.templates.itemgroups.FeedGroups.ShugoEventCoinGroup;
-import com.aionemu.gameserver.model.templates.itemgroups.FeedGroups.StinkingJunkGroup;
-import com.aionemu.gameserver.model.templates.itemgroups.FoodGroup;
-import com.aionemu.gameserver.model.templates.itemgroups.GatherGroup;
-import com.aionemu.gameserver.model.templates.itemgroups.ItemRaceEntry;
-import com.aionemu.gameserver.model.templates.itemgroups.ManastoneGroup;
-import com.aionemu.gameserver.model.templates.itemgroups.MedalGroup;
-import com.aionemu.gameserver.model.templates.itemgroups.MedicineGroup;
-import com.aionemu.gameserver.model.templates.itemgroups.OreGroup;
-import com.aionemu.gameserver.model.templates.pet.FoodType;
 
 /**
  * @author Rolandas
@@ -328,7 +294,7 @@ public class ItemGroupsData {
 			case MISCELLANEOUS:
 				break;
 			default:
-				LoggerFactory.getLogger(ItemGroupsData.class).warn("Unhandled food type " + foodType);
+				LoggerFactory.getLogger(ItemGroupsData.class).warn("Unhandled food type {}", foodType);
 		}
 		return null;
 	}

@@ -82,7 +82,8 @@ public abstract class BaseClientPacket<T> extends BasePacket implements Runnable
 			readImpl();
 
 			if (getRemainingBytes() > 0 && partiallyReadPackets.add(getOpCode()))
-				log.warn(this + " was not fully read! Last " + getRemainingBytes() + " bytes were not read from buffer:\n" + NetworkUtils.toHex(buf, startPos, buf.limit()));
+				log.warn("{} was not fully read! Last {} bytes were not read from buffer:\n{}", this, getRemainingBytes(),
+					NetworkUtils.toHex(buf, startPos, buf.limit()));
 
 			return true;
 		} catch (BufferUnderflowException ex) {

@@ -28,7 +28,7 @@ public class CM_HDD_BANLIST extends LsClientPacket {
 
 	@Override
 	protected void runImpl() {
-		log.info("Loaded " + count + " HDD ban entries.");
+		log.info("Loaded {} HDD ban entries", count);
 	}
 
 }

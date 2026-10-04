@@ -123,7 +123,7 @@ public class GsConnection extends AConnection<GsServerPacket> {
 	@Override
 	protected final void onDisconnect() {
 		pingPongTask.stop();
-		log.info(this + " disconnected");
+		log.info("{} disconnected", this);
 		if (gameServerInfo != null) {
 			gameServerInfo.setConnection(null);
 			gameServerInfo.clearAccountsOnGameServer();
@@ -181,7 +181,7 @@ public class GsConnection extends AConnection<GsServerPacket> {
 	 */
 	@Override
 	public String toString() {
-		StringBuilder sb = new StringBuilder("Gameserver");
+		StringBuilder sb = new StringBuilder("Game server");
 		if (gameServerInfo != null)
 			sb.append(" #").append(gameServerInfo.getId());
 		sb.append(" ").append(getIP());
@@ -201,6 +201,6 @@ public class GsConnection extends AConnection<GsServerPacket> {
 	@Override
 	protected void initialized() {
 		state = State.CONNECTED;
-		log.info("Gameserver connection attempt from: " + getIP());
+		log.info("Game server connected: {}", getIP());
 	}
 }

@@ -6,14 +6,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import jakarta.xml.bind.Unmarshaller;
-import jakarta.xml.bind.annotation.*;
-
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.model.skill.NpcSkillList;
 import com.aionemu.gameserver.model.templates.npcskill.NpcSkillTemplate;
 import com.aionemu.gameserver.model.templates.npcskill.NpcSkillTemplates;
+
+import jakarta.xml.bind.Unmarshaller;
+import jakarta.xml.bind.annotation.*;
 
 /**
  * @author ATracer
@@ -37,7 +37,7 @@ public class NpcSkillData {
 		for (NpcSkillTemplates npcSkillList : npcSkills) {
 			for (Integer npcId : npcSkillList.getNpcIds()) {
 				if (npcSkillData.putIfAbsent(npcId, npcSkillList) != null)
-					LoggerFactory.getLogger(NpcSkillData.class).warn("Npc " + npcId + " has multiple skill lists in npc_skills.xml");
+					LoggerFactory.getLogger(NpcSkillData.class).warn("Npc {} has multiple skill lists in npc_skills.xml", npcId);
 			}
 		}
 		npcSkills = null;

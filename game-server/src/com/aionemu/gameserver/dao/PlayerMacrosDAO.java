@@ -80,7 +80,7 @@ public class PlayerMacrosDAO {
 				}
 			}
 		} catch (Exception e) {
-			log.error("Could not load macros for player " + playerId, e);
+			log.error("Could not load macros for player {}", playerId, e);
 		}
 		return macros;
 	}

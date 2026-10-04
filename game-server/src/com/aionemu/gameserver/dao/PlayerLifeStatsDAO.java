@@ -34,7 +34,7 @@ public class PlayerLifeStatsDAO {
 					insertPlayerLifeStat(player);
 			}
 		} catch (Exception e) {
-			log.error("Could not restore PlayerLifeStat data for playerObjId: " + player.getObjectId() + " from DB: " + e.getMessage(), e);
+			log.error("Could not restore PlayerLifeStat data for playerObjId: {} from DB: {}", player.getObjectId(), e.getMessage(), e);
 		}
 	}
 
@@ -46,7 +46,7 @@ public class PlayerLifeStatsDAO {
 			stmt.setInt(4, player.getLifeStats().getCurrentFp());
 			stmt.execute();
 		} catch (Exception e) {
-			log.error("Could not store PlayerLifeStat data for player " + player.getObjectId() + " from DB: " + e.getMessage(), e);
+			log.error("Could not store PlayerLifeStat data for player {} from DB: {}", player.getObjectId(), e.getMessage(), e);
 		}
 	}
 
@@ -58,7 +58,7 @@ public class PlayerLifeStatsDAO {
 			stmt.setInt(4, player.getObjectId());
 			stmt.execute();
 		} catch (Exception e) {
-			log.error("Could not update PlayerLifeStat data for player " + player.getObjectId() + " from DB: " + e.getMessage(), e);
+			log.error("Could not update PlayerLifeStat data for player {} from DB: {}", player.getObjectId(), e.getMessage(), e);
 		}
 	}
 }

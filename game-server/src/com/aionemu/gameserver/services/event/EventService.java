@@ -71,7 +71,7 @@ public class EventService {
 			Set<String> eventNames = DataManager.EVENT_DATA.getEvents().stream().map(EventTemplate::getName).collect(Collectors.toSet());
 			EventsConfig.DISABLED_EVENTS.forEach(eventName -> {
 				if (!eventNames.contains(eventName))
-					log.warn("Unknown event \"" + eventName + "\" configured as disabled");
+					log.warn("Unknown event \"{}\" configured as disabled", eventName);
 			});
 		}
 	}
@@ -198,7 +198,7 @@ public class EventService {
 				try {
 					eventConfigProperties.putAll(et.loadConfigProperties());
 				} catch (Exception e) {
-					log.error("Could not load config properties of event " + et.getName(), e);
+					log.error("Could not load config properties of event {}", et.getName(), e);
 				}
 			});
 		return eventConfigProperties;

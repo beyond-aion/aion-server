@@ -95,7 +95,8 @@ public class Config {
 		Set<String> unusedProperties = ConfigurableProcessor.process(loadProperties(), Config.class, CommonsConfig.class, DatabaseConfig.class);
 		if (!unusedProperties.isEmpty()) {
 			removePropertiesUsedInLogbackXml(unusedProperties);
-			unusedProperties.forEach(unusedProperty -> LoggerFactory.getLogger(Config.class).warn("Config property " + unusedProperty + " is unknown and therefore ignored."));
+			unusedProperties.forEach(unusedProperty -> LoggerFactory.getLogger(Config.class).warn("Config property {} is unknown and therefore ignored.",
+				unusedProperty));
 		}
 	}
 

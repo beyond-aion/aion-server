@@ -53,7 +53,7 @@ public class GameServerTable {
 	 */
 	public static void load() {
 		gameservers = GameServersDAO.getAllGameServers();
-		log.info("GameServerTable loaded " + gameservers.size() + " registered GameServers.");
+		log.info("Loaded {} registered game servers", gameservers.size());
 	}
 
 	/**
@@ -81,7 +81,7 @@ public class GameServerTable {
 		 * This id is not Registered at LoginServer.
 		 */
 		if (gsi == null) {
-			log.warn(gsConnection + " requestedID: " + requestedId + " is not registered in LS database!");
+			log.warn("{} requestedID: {} is not registered in LS database!", gsConnection, requestedId);
 			return GsAuthResponse.NOT_AUTHED;
 		}
 

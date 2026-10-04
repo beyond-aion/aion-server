@@ -3,11 +3,6 @@ package com.aionemu.gameserver.skillengine.effect;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.xml.bind.annotation.XmlAccessType;
-import jakarta.xml.bind.annotation.XmlAccessorType;
-import jakarta.xml.bind.annotation.XmlAttribute;
-import jakarta.xml.bind.annotation.XmlType;
-
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -19,6 +14,11 @@ import com.aionemu.gameserver.model.stats.container.CreatureGameStats;
 import com.aionemu.gameserver.skillengine.change.Change;
 import com.aionemu.gameserver.skillengine.condition.Conditions;
 import com.aionemu.gameserver.skillengine.model.Effect;
+
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlType;
 
 /**
  * @author ATracer
@@ -67,7 +67,7 @@ public abstract class BufEffect extends EffectTemplate {
 
 		for (Change changeItem : change) {
 			if (changeItem.getStat() == null) {
-				LoggerFactory.getLogger(BufEffect.class).warn("Skill stat has wrong name for skillid: " + skillId);
+				LoggerFactory.getLogger(BufEffect.class).warn("Skill stat has wrong name for skillid: {}", skillId);
 				continue;
 			}
 

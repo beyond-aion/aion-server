@@ -6,15 +6,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import jakarta.xml.bind.Unmarshaller;
-import jakarta.xml.bind.annotation.*;
-
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 import com.aionemu.gameserver.model.templates.tradelist.TradeListTemplate;
+
+import jakarta.xml.bind.Unmarshaller;
+import jakarta.xml.bind.annotation.*;
 
 /**
  * This is a container holding and serving all {@link NpcTemplate} instances.<br>
@@ -90,12 +90,12 @@ public class TradeListData {
 				.map(NpcTemplate::getTemplateId).sorted()
 				.collect(Collectors.toList());
 		if (!missingNpcIds.isEmpty())
-			LoggerFactory.getLogger(getClass()).warn("Missing trade lists for these npcs: " + missingNpcIds);
+			LoggerFactory.getLogger(getClass()).warn("Missing trade lists for these npcs: {}", missingNpcIds);
 		missingNpcIds = npcTemplates.stream()
 				.filter(npc -> npc.supportsAction(DialogAction.TRADE_IN) && getTradeInListTemplate(npc.getTemplateId()) == null)
 				.map(NpcTemplate::getTemplateId).sorted()
 				.collect(Collectors.toList());
 		if (!missingNpcIds.isEmpty())
-			LoggerFactory.getLogger(getClass()).warn("Missing trade-in lists for these npcs: " + missingNpcIds);
+			LoggerFactory.getLogger(getClass()).warn("Missing trade-in lists for these npcs: {}", missingNpcIds);
 	}
 }

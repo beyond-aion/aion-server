@@ -54,7 +54,7 @@ public class SM_HOUSE_EDIT extends AionServerPacket {
 			if (obj == null) {
 				HouseDecoration deco = house.getRegistry().getDecorByObjId(itemObjectId);
 				if (deco == null) {
-					LoggerFactory.getLogger(getClass()).warn("House item with object ID " + itemObjectId + " wasn't found in registry of " + house);
+					LoggerFactory.getLogger(getClass()).warn("House item with object ID {} wasn't found in registry of {}", itemObjectId, house);
 					return;
 				}
 				templateId = deco.getTemplateId();

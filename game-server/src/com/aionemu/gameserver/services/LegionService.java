@@ -595,28 +595,28 @@ public class LegionService {
 		if (dataLength > 0) {
 			ByteBuffer buf = ByteBuffer.allocate(dataLength);
 			buf.put(legionEmblem.getCustomEmblemData()).position(0);
-			log.debug("legionEmblem size: " + buf.capacity() + " bytes");
+			log.debug("legionEmblem size: {} bytes", buf.capacity());
 			int maxSize = 7993;
 			int currentSize;
 			byte[] bytes;
 			do {
-				log.debug("legionEmblem data position: " + buf.position());
+				log.debug("legionEmblem data position: {}", buf.position());
 				currentSize = buf.capacity() - buf.position();
-				log.debug("legionEmblem data remaining capacity: " + currentSize + " bytes");
+				log.debug("legionEmblem data remaining capacity: {} bytes", currentSize);
 
 				if (currentSize >= maxSize) {
 					bytes = new byte[maxSize];
 					for (int i = 0; i < maxSize; i++) {
 						bytes[i] = buf.get();
 					}
-					log.debug("legionEmblem data send size: " + (bytes.length) + " bytes");
+					log.debug("legionEmblem data send size: {} bytes", bytes.length);
 					PacketSendUtility.sendPacket(player, new SM_LEGION_SEND_EMBLEM_DATA(maxSize, bytes));
 				} else {
 					bytes = new byte[currentSize];
 					for (int i = 0; i < currentSize; i++) {
 						bytes[i] = buf.get();
 					}
-					log.debug("legionEmblem data send size: " + (bytes.length) + " bytes");
+					log.debug("legionEmblem data send size: {} bytes", bytes.length);
 					PacketSendUtility.sendPacket(player, new SM_LEGION_SEND_EMBLEM_DATA(currentSize, bytes));
 				}
 			} while (buf.capacity() != buf.position());
@@ -635,7 +635,7 @@ public class LegionService {
 		Legion.Announcement announcement = null;
 		if (!message.isEmpty()) {
 			if (message.length() > 256) {
-				log.warn("Truncated legion announcement sent by " + activePlayer + " (old length: " + message.length() + ")");
+				log.warn("Truncated legion announcement sent by {} (old length: {})", activePlayer, message.length());
 				message = message.substring(0, 256);
 			}
 			announcement = new Legion.Announcement(message, new Timestamp(System.currentTimeMillis()));

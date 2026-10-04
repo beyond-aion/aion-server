@@ -27,7 +27,7 @@ public abstract class AbstractCronTask implements Runnable {
 	public AbstractCronTask(CronExpression cronExpression) {
 		this.cronExpression = cronExpression;
 		if (this.cronExpression == null) {
-			log.info(getClass().getSimpleName() + " is deactivated");
+			log.info("{} is deactivated", getClass().getSimpleName());
 			return;
 		}
 		this.nextRun = getNextRunAfter(new Date());
@@ -45,7 +45,7 @@ public abstract class AbstractCronTask implements Runnable {
 			if (shouldRunOnStart())
 				run();
 			CronService.getInstance().schedule(this, cronExpression, true);
-			log.info("Scheduled " + getClass().getSimpleName() + " with cron expression: " + cronExpression);
+			log.info("Scheduled {} with cron expression: {}", getClass().getSimpleName(), cronExpression);
 			semaphore.release();
 		});
 	}

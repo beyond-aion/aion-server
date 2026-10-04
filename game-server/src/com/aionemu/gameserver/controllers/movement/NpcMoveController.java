@@ -398,7 +398,7 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 
 			setWalkerTemplate(DataManager.WALKER_DATA.getWalkerTemplate(owner.getSpawn().getWalkerId()), 0);
 			if (walkerTemplate == null) {
-				log.warn("Bad Walker Id: " + owner.getSpawn().getWalkerId() + " - point: " + currentStep.getStepIndex());
+				log.warn("Bad Walker Id: {} - point: {}", owner.getSpawn().getWalkerId(), currentStep.getStepIndex());
 				return false;
 			}
 		}

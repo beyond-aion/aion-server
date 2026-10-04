@@ -49,7 +49,7 @@ public class AccountDAO {
 				}
 			}
 		} catch (SQLException e) {
-			log.error("Could not load account for: " + accountQueryParam, e);
+			log.error("Could not load account for: {}", accountQueryParam, e);
 		}
 		return null;
 	}
@@ -79,7 +79,7 @@ public class AccountDAO {
 			account.setCreationDate(new Timestamp(System.currentTimeMillis()));
 			return true;
 		} catch (SQLException e) {
-			log.error("Could not insert account for: " + account.getName(), e);
+			log.error("Could not insert account for: {}", account.getName(), e);
 		}
 		return false;
 	}
@@ -99,7 +99,7 @@ public class AccountDAO {
 			st.setInt(9, account.getId());
 			return st.executeUpdate() > 0;
 		} catch (SQLException e) {
-			log.error("Could not update account for: " + account.getName(), e);
+			log.error("Could not update account for: {}", account.getName(), e);
 		}
 		return false;
 	}
@@ -131,7 +131,7 @@ public class AccountDAO {
 				}
 			}
 		} catch (Exception e) {
-			log.error("Can't select last IP of account ID: " + accountId, e);
+			log.error("Can't select last IP of account ID: {}", accountId, e);
 		}
 		return lastIp;
 	}

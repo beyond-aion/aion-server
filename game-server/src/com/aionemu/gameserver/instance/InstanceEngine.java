@@ -32,7 +32,7 @@ public class InstanceEngine implements GameEngine {
 		acl.addClassListener(new InstanceHandlerClassListener());
 		scriptManager.setGlobalClassListener(acl);
 		scriptManager.load(InstanceConfig.HANDLER_DIRECTORY);
-		log.info("Loaded " + instanceHandlers.size() + " instance handlers.");
+		log.info("Loaded {} instance handlers", instanceHandlers.size());
 	}
 
 	public InstanceHandler getNewInstanceHandler(WorldMapInstance instance) {
@@ -42,7 +42,7 @@ public class InstanceEngine implements GameEngine {
 			try {
 				instanceHandler = handlerClass.getDeclaredConstructor(WorldMapInstance.class).newInstance(instance);
 			} catch (Exception ex) {
-				log.warn("Can't instantiate instance handler for map " + instance.getMapId() + " (instanceId: " + instance.getInstanceId() + ')', ex);
+				log.warn("Can't instantiate instance handler for map {} (instanceId: {})", instance.getMapId(), instance.getInstanceId(), ex);
 			}
 		}
 

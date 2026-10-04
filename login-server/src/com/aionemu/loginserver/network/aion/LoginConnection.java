@@ -121,7 +121,7 @@ public class LoginConnection extends AConnection<AionServerPacket> {
 	@Override
 	protected final boolean processData(ByteBuffer data) {
 		if (!decrypt(data)) {
-			log.warn("Wrong checksum from " + this);
+			log.warn("Wrong checksum from {}", this);
 			return false;
 		}
 
@@ -318,7 +318,7 @@ public class LoginConnection extends AConnection<AionServerPacket> {
 	@Override
 	protected void initialized() {
 		state = State.CONNECTED;
-		log.info("Connection attempt from: " + getIP());
+		log.info("Connection attempt from: {}", getIP());
 		encryptedRSAKeyPair = KeyGen.getEncryptedRSAKeyPair();
 		SecretKey blowfishKey = KeyGen.generateBlowfishKey();
 

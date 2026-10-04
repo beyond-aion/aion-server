@@ -63,7 +63,7 @@ public class DropDistributionService {
 		}
 		for (Player member : dropNpc.getInRangePlayers()) {
 			if (member == null) {
-				log.warn("member null Owner is in group? " + player.isInGroup() + " Owner is in Alliance? " + player.isInAlliance());
+				log.warn("member null Owner is in group? {} Owner is in Alliance? {}", player.isInGroup(), player.isInAlliance());
 				continue;
 			}
 			PacketSendUtility.sendPacket(member, new SM_GROUP_LOOT(dropNpc.getLootingTeamId(), member.getObjectId(), itemId, (int) requestedItem.getCount(),
