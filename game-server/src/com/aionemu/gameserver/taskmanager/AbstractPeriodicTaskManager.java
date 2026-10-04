@@ -14,7 +14,7 @@ public abstract class AbstractPeriodicTaskManager {
 	protected static final Logger log = LoggerFactory.getLogger(AbstractPeriodicTaskManager.class);
 
 	public AbstractPeriodicTaskManager(int period) {
-		log.info(getClass().getSimpleName() + " initialized.");
+		log.info("{} initialized", getClass().getSimpleName());
 		ThreadPoolManager.getInstance().scheduleAtFixedRate(this::run, Rnd.get(500, 550), period);
 	}
 

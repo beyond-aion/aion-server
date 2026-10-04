@@ -3,8 +3,6 @@ package com.aionemu.gameserver.skillengine.effect;
 import java.util.Collections;
 import java.util.List;
 
-import javax.xml.bind.annotation.*;
-
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.utils.Rnd;
@@ -27,6 +25,8 @@ import com.aionemu.gameserver.skillengine.effect.modifier.ActionModifier;
 import com.aionemu.gameserver.skillengine.effect.modifier.ActionModifiers;
 import com.aionemu.gameserver.skillengine.model.*;
 import com.aionemu.gameserver.utils.stats.StatFunctions;
+
+import jakarta.xml.bind.annotation.*;
 
 /**
  * @author ATracer
@@ -573,7 +573,7 @@ public abstract class EffectTemplate {
 		try {
 			toReturn = StatEnum.valueOf(statEnum.toString() + "_PENETRATION");
 		} catch (Exception e) {
-			LoggerFactory.getLogger(EffectTemplate.class).warn("Missing statenum penetration for " + statEnum.toString());
+			LoggerFactory.getLogger(EffectTemplate.class).warn("Missing statenum penetration for {}", statEnum.toString());
 		}
 		return toReturn;
 	}

@@ -68,7 +68,7 @@ public class ShieldService {
 			}
 		}
 		if (attached.isEmpty() && location.getType() != SiegeType.OUTPOST && location.getLocationId() != 1241) // Outposts and Miren don't have shields
-			log.warn("Could not find a shield for location ID {}.", location.getLocationId());
+			log.warn("Could not find a shield for location ID {}", location.getLocationId());
 	}
 
 	private boolean isShieldInsideLocation(SiegeShield shield, SiegeLocation location) {

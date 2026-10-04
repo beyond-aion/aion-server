@@ -62,7 +62,7 @@ public abstract class Siege<SL extends SiegeLocation> {
 		}
 
 		if (doubleStart) {
-			log.error("Attempt to start " + this + " twice", new IllegalStateException());
+			log.error("Attempt to start {} twice", this, new IllegalStateException());
 		} else {
 			onSiegeStart();
 		}
@@ -80,7 +80,7 @@ public abstract class Siege<SL extends SiegeLocation> {
 				BalaurAssaultService.getInstance().onSiegeFinish(this);
 			}
 		} else {
-			log.error("Attempt to stop " + this + " twice", new IllegalStateException());
+			log.error("Attempt to stop {} twice", this, new IllegalStateException());
 		}
 	}
 
@@ -206,12 +206,12 @@ public abstract class Siege<SL extends SiegeLocation> {
 					}
 				}
 				if (LoggingConfig.LOG_SIEGE && !rewardedGpPlayers.isEmpty()) {
-					log.info(this + ": Distributed " + gp + " " + (isWinner ? "winner" : "loser") + " GP each, to the following players (rank " + rewardLevel
-						+ "): " + rewardedGpPlayers);
+					log.info("{}: Distributed {} {} GP each, to the following players (rank {}): {}", this, gp, isWinner ? "winner" : "loser",
+						rewardLevel, rewardedGpPlayers);
 				}
 			}
 		} catch (Exception e) {
-			log.error("Error while distributing rewards for " + this, e);
+			log.error("Error while distributing rewards for {}", this, e);
 		}
 	}
 

@@ -1,9 +1,7 @@
 package com.aionemu.chatserver.network.aion.serverpackets;
 
-import org.jboss.netty.buffer.ChannelBuffer;
-
 import com.aionemu.chatserver.network.aion.AbstractServerPacket;
-import com.aionemu.chatserver.network.netty.handler.ClientChannelHandler;
+import com.aionemu.chatserver.network.aion.AionConnection;
 
 /**
  * @author ginho1
@@ -11,14 +9,14 @@ import com.aionemu.chatserver.network.netty.handler.ClientChannelHandler;
 public class SM_CHAT_INI extends AbstractServerPacket {
 
 	public SM_CHAT_INI() {
-		super((byte) 0x31);
+		super(0x31);
 	}
 
 	@Override
-	protected void writeImpl(ClientChannelHandler cHandler, ChannelBuffer buf) {
-		writeC(buf, getOpCode());
-		writeC(buf, 0x40);
-		writeD(buf, 0x02);
-		writeH(buf, 0x00);
+	protected void writeImpl(AionConnection connection) {
+		writeC(getOpCode());
+		writeC(0x40);
+		writeD(0x02);
+		writeH(0x00);
 	}
 }

@@ -38,7 +38,7 @@ public class DuelService {
 	}
 
 	private DuelService() {
-		log.info("DuelService started.");
+		log.info("DuelService initialized");
 	}
 
 	/**

@@ -30,7 +30,7 @@ public class QuestVars {
 	 */
 	public void setVarById(int id, int var) {
 		if (var > 0x3F)
-			LoggerFactory.getLogger(QuestVars.class).warn("Out of range value was passed for quest var on index " + id, new IllegalArgumentException());
+			LoggerFactory.getLogger(QuestVars.class).warn("Out of range value was passed for quest var on index {}", id, new IllegalArgumentException());
 		questVars[id] = var;
 	}
 

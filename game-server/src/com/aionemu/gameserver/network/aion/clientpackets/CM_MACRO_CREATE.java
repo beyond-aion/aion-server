@@ -2,9 +2,12 @@ package com.aionemu.gameserver.network.aion.clientpackets;
 
 import java.util.Set;
 
+import com.aionemu.gameserver.model.gameobjects.player.Macros;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MACRO_RESULT;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.player.PlayerService;
 
 /**
@@ -44,7 +47,14 @@ public class CM_MACRO_CREATE extends AionClientPacket {
 
 	@Override
 	protected void runImpl() {
-		PlayerService.addMacro(getConnection().getActivePlayer(), macroPosition, macroXML);
-		sendPacket(SM_MACRO_RESULT.SM_MACRO_CREATED);
+		Player player = getConnection().getActivePlayer();
+		if (Macros.isValidId(macroPosition)) {
+			PlayerService.addMacro(player, macroPosition, macroXML);
+			sendPacket(SM_MACRO_RESULT.SM_MACRO_CREATED);
+		} else {
+			// the client already shows the rejected macro and only drops it when the whole list gets replaced
+			sendPacket(SM_SYSTEM_MESSAGE.STR_MACRO_MSG_CANNOT_REGIST());
+			PlayerService.sendMacroList(player);
+		}
 	}
 }

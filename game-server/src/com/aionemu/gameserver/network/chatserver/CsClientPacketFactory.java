@@ -8,10 +8,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import com.aionemu.commons.utils.NetworkUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.aionemu.commons.utils.NetworkUtils;
 import com.aionemu.gameserver.network.chatserver.ChatServerConnection.State;
 import com.aionemu.gameserver.network.chatserver.clientpackets.CM_CS_AUTH_RESPONSE;
 import com.aionemu.gameserver.network.chatserver.clientpackets.CM_CS_PLAYER_AUTH_RESPONSE;
@@ -38,12 +38,12 @@ public class CsClientPacketFactory {
 		int opCode = data.get() & 0xff;
 		PacketInfo<? extends CsClientPacket> packetInfo = packets.get(opCode);
 		if (packetInfo == null) {
-			log.warn(String.format(client + " sent data with unknown opcode: 0x%02X, state=%s %n%s", opCode, state.toString(), NetworkUtils.toHex(data)));
+			log.warn("{} sent data with unknown opcode: 0x{}, state={}\n{}", client, "%02X".formatted(opCode), state, NetworkUtils.toHex(data));
 			return null;
 		}
 		if (!packetInfo.isValid(state)) {
-			log.warn(client + " sent " + packetInfo.getPacketClassName() + " but the connections current state (" + state
-				+ ") is invalid for this packet. Packet won't be instantiated.");
+			log.warn("{} sent {} but the connection's current state ({}) is invalid for this packet - packet won't be instantiated", client,
+				packetInfo.getPacketClassName(), state);
 			return null;
 		}
 		return packetInfo.newPacket(opCode, data, client);

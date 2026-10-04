@@ -2,8 +2,8 @@ package com.aionemu.gameserver.dataholders;
 
 import com.aionemu.gameserver.skillengine.model.SkillAliasLocation;
 
-import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.Unmarshaller;
+import jakarta.xml.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

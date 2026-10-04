@@ -53,7 +53,7 @@ public class Ai extends AdminCommand {
 			sendInfo(admin, "New movelog value: " + AIConfig.MOVE_DEBUG);
 		} else if (params[0].equalsIgnoreCase("marker")) {
 			if (params.length > 1)
-				LoggerFactory.getLogger(AILogger.class).info("[AI] marker: " + join(params, 1));
+				LoggerFactory.getLogger(AILogger.class).info("[AI] marker: {}", join(params, 1));
 			else
 				LoggerFactory.getLogger(AILogger.class).info("[AI] marker");
 		} else {

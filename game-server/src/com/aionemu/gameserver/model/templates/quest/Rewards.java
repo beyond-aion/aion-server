@@ -3,7 +3,7 @@ package com.aionemu.gameserver.model.templates.quest;
 import java.util.Collections;
 import java.util.List;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Rewards", propOrder = { "selectableRewardItem", "rewardItem" })

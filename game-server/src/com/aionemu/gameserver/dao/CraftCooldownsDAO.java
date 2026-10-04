@@ -34,7 +34,7 @@ public class CraftCooldownsDAO {
 				}
 			}
 		} catch (SQLException e) {
-			log.error("Couldn't load craft cooldowns for " + player, e);
+			log.error("Couldn't load craft cooldowns for {}", player, e);
 		}
 	}
 
@@ -54,7 +54,7 @@ public class CraftCooldownsDAO {
 				stmt.setLong(3, reuseTime);
 				stmt.execute();
 			} catch (SQLException e) {
-				log.error("Couldn't store craft cooldowns for " + player, e);
+				log.error("Couldn't store craft cooldowns for {}", player, e);
 			}
 		}
 	}
@@ -64,7 +64,7 @@ public class CraftCooldownsDAO {
 			stmt.setInt(1, player.getObjectId());
 			stmt.execute();
 		} catch (SQLException e) {
-			log.error("Couldn't delete craft cooldowns for " + player, e);
+			log.error("Couldn't delete craft cooldowns for {}", player, e);
 		}
 	}
 

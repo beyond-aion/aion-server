@@ -24,12 +24,7 @@ public class BaseService {
 	private final Map<Integer, Base<?>> activeBases = new ConcurrentHashMap<>();
 	private final Map<Integer, BaseLocation> allBaseLocations = new HashMap<>();
 
-	/**
-	 * Initializes all base locations
-	 */
 	private BaseService() {
-		log.info("Initializing bases...");
-
 		for (BaseTemplate template : DataManager.BASE_DATA.getAllBaseTemplates()) {
 			BaseLocation loc = switch (template.getType()) {
 				case CASUAL -> new BaseLocation(template);
@@ -39,6 +34,7 @@ public class BaseService {
 			};
 			allBaseLocations.put(template.getId(), loc);
 		}
+		log.info("BaseService initialized with {} bases", allBaseLocations.size());
 	}
 
 	/**

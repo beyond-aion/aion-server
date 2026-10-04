@@ -43,7 +43,7 @@ public class CM_CAPTCHA extends AionClientPacket {
 			case 4: // /ExtractStatus
 				break;
 			default:
-				log.warn("Unknown CAPTCHA packet type " + type);
+				log.warn("Unknown CAPTCHA packet type {}", type);
 				break;
 		}
 	}

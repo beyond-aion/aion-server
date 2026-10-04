@@ -31,7 +31,8 @@ public class SurveyService {
 	private final Map<Integer, SurveyItem> activeItems = new LinkedHashMap<>();
 
 	private SurveyService() {
-		ThreadPoolManager.getInstance().scheduleAtFixedRate(new TaskUpdate(), 2000, SecurityConfig.SURVEY_DELAY * 60000);
+		ThreadPoolManager.getInstance().scheduleAtFixedRate(this::taskUpdate, 2000, SecurityConfig.SURVEY_DELAY * 60000);
+		log.info("SurveyService initialized");
 	}
 
 	public boolean isActive(Player player, int survId) {
@@ -56,7 +57,7 @@ public class SurveyService {
 		}
 		if (player.getInventory().isFull(template.getExtraInventoryId())) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_FULL_INVENTORY());
-			log.warn("[SurveyController] player " + player.getName() + " tried to receive item with full inventory.");
+			log.warn("[SurveyController] player {} tried to receive item with full inventory", player.getName());
 			return;
 		}
 		if (SurveyControllerDAO.useItem(item.uniqueId)) {
@@ -75,7 +76,7 @@ public class SurveyService {
 
 	public void taskUpdate() {
 		List<SurveyItem> newList = SurveyControllerDAO.getAllUnused();
-		if (newList.size() == 0)
+		if (newList.isEmpty())
 			return;
 
 		List<Integer> players = new ArrayList<>();
@@ -87,7 +88,7 @@ public class SurveyService {
 					players.add(survey.ownerId);
 			}
 		}
-		log.info("[SurveyController] found new " + cnt + " items for " + players.size() + " players.");
+		log.info("[SurveyController] found new {} items for {} players", cnt, players.size());
 		for (int ownerId : players) {
 			Player player = World.getInstance().getPlayer(ownerId);
 			if (player != null) {
@@ -108,15 +109,6 @@ public class SurveyService {
 			context = context.replace("%radio%", item.radio);
 
 			HTMLService.sendData(player, item.uniqueId, context);
-		}
-	}
-
-	public class TaskUpdate implements Runnable {
-
-		@Override
-		public void run() {
-			log.info("[SurveyController] update task start.");
-			taskUpdate();
 		}
 	}
 

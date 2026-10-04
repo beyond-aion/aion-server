@@ -62,12 +62,12 @@ public class InstanceWalkerFormations {
 				}
 			}
 			if (maxSize == 0 || npcs == null) {
-				log.warn("Walkers missing for route: " + candidates.get(0).getWalkTemplate().getRouteId());
+				log.warn("Walkers missing for route: {}", candidates.get(0).getWalkTemplate().getRouteId());
 				continue;
 			}
 			if (maxSize == 1) {
 				if (candidates.size() != 1) {
-					log.warn("Walkers not aligned for route: " + candidates.get(0).getWalkTemplate().getRouteId());
+					log.warn("Walkers not aligned for route: {}", candidates.get(0).getWalkTemplate().getRouteId());
 					for (ClusteredNpc snpc : candidates)
 						snpc.spawn(snpc.getNpc().getSpawn().getZ());
 				} else {
@@ -85,7 +85,7 @@ public class InstanceWalkerFormations {
 			} else {
 				WalkerGroup wg = new WalkerGroup(npcs);
 				if (candidates.get(0).getWalkTemplate().getPool() != candidates.size())
-					log.warn("Incorrect pool for route: " + candidates.get(0).getWalkTemplate().getRouteId());
+					log.warn("Incorrect pool for route: {}", candidates.get(0).getWalkTemplate().getRouteId());
 				walkFormations.put(candidates.get(0).getWalkTemplate().getRouteId(), wg);
 				wg.form();
 				if (wg.getVersionId() == null) {

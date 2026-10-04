@@ -35,7 +35,7 @@ public class PlayerEmotionListDAO {
 				}
 			}
 		} catch (Exception e) {
-			log.error("Could not restore emotionId for playerObjId: " + player.getObjectId() + " from DB: " + e.getMessage(), e);
+			log.error("Could not restore emotionId for playerObjId: {} from DB: {}", player.getObjectId(), e.getMessage(), e);
 		}
 		player.setEmotions(emotions);
 	}
@@ -47,7 +47,7 @@ public class PlayerEmotionListDAO {
 			stmt.setInt(3, emotion.getExpireTime());
 			stmt.execute();
 		} catch (Exception e) {
-			log.error("Could not store emotionId for player " + player.getObjectId() + " from DB: " + e.getMessage(), e);
+			log.error("Could not store emotionId for player {} from DB: {}", player.getObjectId(), e.getMessage(), e);
 		}
 	}
 
@@ -57,7 +57,7 @@ public class PlayerEmotionListDAO {
 			stmt.setInt(2, emotionId);
 			stmt.execute();
 		} catch (Exception e) {
-			log.error("Could not delete title for player " + playerId + " from DB: " + e.getMessage(), e);
+			log.error("Could not delete title for player {} from DB: {}", playerId, e.getMessage(), e);
 		}
 	}
 

@@ -33,6 +33,12 @@ public class CustomConfig {
 	public static int LEVEL_TO_WHISPER;
 
 	/**
+	 * Maximum number of macros per character
+	 */
+	@Property(key = "gameserver.macros.limit", defaultValue = "12")
+	public static int MACROS_LIMIT;
+
+	/**
 	 * Time in days after which an item in broker will be unregistered (client cannot display more than 255 days)
 	 */
 	@Property(key = "gameserver.broker.registration_expiration_days", defaultValue = "8")

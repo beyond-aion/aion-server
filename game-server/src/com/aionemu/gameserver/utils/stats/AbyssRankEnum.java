@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.utils.stats;
 
-import javax.xml.bind.annotation.XmlEnum;
+import jakarta.xml.bind.annotation.XmlEnum;
 
 import com.aionemu.gameserver.configs.main.RankingConfig;
 import com.aionemu.gameserver.model.Race;

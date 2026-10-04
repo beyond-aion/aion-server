@@ -84,7 +84,7 @@ public class HouseBidsDAO {
 				stmt.executeUpdate();
 			}
 		} catch (Exception e) {
-			log.error("Cannot delete or disable house bids for player " + playerObjectId, e);
+			log.error("Cannot delete or disable house bids for player {}", playerObjectId, e);
 			return false;
 		}
 		return true;

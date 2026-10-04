@@ -63,7 +63,7 @@ public class CM_READ_EXPRESS_MAIL extends AionClientPacket {
 				}
 				break;
 			default:
-				log.warn(player + " sent unknown read express mail action type: " + action);
+				log.warn("{} sent unknown read express mail action type: {}", player, action);
 		}
 	}
 

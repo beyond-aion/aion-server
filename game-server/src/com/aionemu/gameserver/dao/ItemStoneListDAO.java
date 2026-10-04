@@ -52,13 +52,13 @@ public class ItemStoneListDAO {
 						switch (stoneType) {
 							case 0:
 								if (item.getSockets(false) <= item.getItemStonesSize()) {
-									log.warn("Deleting manastone " + itemId + " due to slot overload from " + item);
+									log.warn("Deleting manastone {} due to slot overload from {}", itemId, item);
 									deleteItemStone(con, item.getObjectId(), slot, stoneType);
 									continue;
 								}
 								if (DataManager.ITEM_DATA.getItemTemplate(itemId).getItemGroup() == ItemGroup.SPECIAL_MANASTONE
 									&& slot >= item.getItemTemplate().getSpecialSlots()) {
-									log.warn("Deleting special manastone " + itemId + " from normal slot of " + item);
+									log.warn("Deleting special manastone {} from normal slot of {}", itemId, item);
 									deleteItemStone(con, item.getObjectId(), slot, stoneType);
 									continue;
 								}
@@ -72,13 +72,13 @@ public class ItemStoneListDAO {
 								break;
 							case 2:
 								if (item.getSockets(true) <= item.getFusionStonesSize()) {
-									log.warn("Deleting manastone " + itemId + " due to slot overload from fusioned item of " + item);
+									log.warn("Deleting manastone {} due to slot overload from fusioned item of {}", itemId, item);
 									deleteItemStone(con, item.getObjectId(), slot, stoneType);
 									continue;
 								}
 								if (DataManager.ITEM_DATA.getItemTemplate(itemId).getItemGroup() == ItemGroup.SPECIAL_MANASTONE
 									&& slot >= item.getFusionedItemTemplate().getSpecialSlots()) {
-									log.warn("Deleting special manastone " + itemId + " from normal slot of fusioned item of " + item);
+									log.warn("Deleting special manastone {} from normal slot of fusioned item of {}", itemId, item);
 									deleteItemStone(con, item.getObjectId(), slot, stoneType);
 									continue;
 								}
@@ -93,7 +93,7 @@ public class ItemStoneListDAO {
 				}
 			}
 		} catch (Exception e) {
-			log.error("Could not restore ItemStoneList data from DB: " + e.getMessage(), e);
+			log.error("Could not restore ItemStoneList data from DB: {}", e.getMessage(), e);
 		}
 	}
 
