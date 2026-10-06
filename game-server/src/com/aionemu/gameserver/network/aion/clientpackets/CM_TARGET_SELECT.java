@@ -2,6 +2,7 @@ package com.aionemu.gameserver.network.aion.clientpackets;
 
 import java.util.Set;
 
+import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
@@ -47,7 +48,7 @@ public class CM_TARGET_SELECT extends AionClientPacket {
 				sendPacket(SM_SYSTEM_MESSAGE.STR_ASSISTKEY_NO_USER());
 				return;
 			}
-			if (!newTarget.equals(player) && !player.getKnownList().sees(newTarget)) {
+			if (!newTarget.equals(player) && !canSelect(player, newTarget)) {
 				sendPacket(player.getKnownList().knows(newTarget) ? SM_SYSTEM_MESSAGE.STR_ASSISTKEY_NO_USER() : SM_SYSTEM_MESSAGE.STR_ASSISTKEY_TOO_FAR());
 				return;
 			}
@@ -59,11 +60,15 @@ public class CM_TARGET_SELECT extends AionClientPacket {
 			newTarget = player.getKnownList().getObject(targetObjectId);
 			if (newTarget == null && player.isInTeam() && player.getCurrentTeam().hasMember(targetObjectId))
 				newTarget = player.getCurrentTeam().getMember(targetObjectId).getObject();
-			else if (newTarget != null && !player.equals(newTarget) && !player.getKnownList().sees(newTarget)) {
+			else if (newTarget != null && !player.equals(newTarget) && !canSelect(player, newTarget)) {
 				AuditLogger.log(player, "possibly used radar hack: trying to target invisible " + newTarget);
 				newTarget = null;
 			}
 		}
 		player.setTarget(newTarget);
+	}
+
+	private static boolean canSelect(Player player, VisibleObject target) {
+		return player.getKnownList().sees(target) && (!(target instanceof Creature creature) || player.canTarget(creature));
 	}
 }
