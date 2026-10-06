@@ -58,6 +58,36 @@ public class PlayerMoveController extends PlayableMoveController<Player> {
 			lastPositionFromClient = new WorldPosition(owner.getWorldId(), owner.getX(), owner.getY(), owner.getZ(), owner.getHeading());
 		else
 			lastPositionFromClient.setXYZH(owner.getX(), owner.getY(), owner.getZ(), owner.getHeading());
+		updateMovementModifiers();
+	}
+
+	private void updateMovementModifiers() {
+		switch (getMoveRequest(getMovementMask())) {
+			case DIRECTION -> updateMovementModifierDirection();
+			case POINT -> setMovementModifierDirection(MovementModifierDirection.FORWARD);
+			case STOP -> onMovementStopped();
+		}
+	}
+
+	/**
+	 * Only packets with both POSITION and MANUAL carry a new movement request. All others keep the current direction as long as the movement goes on
+	 * (POSITION) or the player is airborne (FALL), so neither turning in mid air nor a plain position update restarts the activation timer.
+	 */
+	static MoveRequest getMoveRequest(byte movementMask) {
+		if ((movementMask & MovementMask.POSITION) == MovementMask.POSITION && (movementMask & MovementMask.MANUAL) == MovementMask.MANUAL)
+			return (movementMask & MovementMask.ABSOLUTE) == MovementMask.ABSOLUTE ? MoveRequest.POINT : MoveRequest.DIRECTION;
+		if ((movementMask & MovementMask.POSITION) == 0 && (movementMask & MovementMask.FALL) == 0)
+			return MoveRequest.STOP;
+		return MoveRequest.CONTINUE;
+	}
+
+	enum MoveRequest {
+		/** Movement along a vector, classified relative to the own heading. */
+		DIRECTION,
+		/** Movement towards a clicked point, which always counts as forward. */
+		POINT,
+		CONTINUE,
+		STOP
 	}
 
 	public void resetToLastPositionFromClient() {

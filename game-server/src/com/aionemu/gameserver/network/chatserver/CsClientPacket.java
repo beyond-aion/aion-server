@@ -33,7 +33,7 @@ public abstract class CsClientPacket extends BaseClientPacket<ChatServerConnecti
 		try {
 			runImpl();
 		} catch (Throwable e) {
-			log.warn("error handling ls (" + getConnection().getIP() + ") message " + this, e);
+			log.warn("error handling ls ({}) message {}", getConnection().getIP(), this, e);
 		}
 	}
 

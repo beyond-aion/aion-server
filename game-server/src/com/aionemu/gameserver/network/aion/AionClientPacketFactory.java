@@ -293,8 +293,8 @@ public class AionClientPacketFactory {
 		}
 		if (!packetInfo.isValid(state)) {
 			if (NetworkConfig.LOG_IGNORED_PACKETS)
-				log.warn(client + " sent " + packetInfo.getPacketClassName() + " but the connections current state (" + state
-					+ ") is invalid for this packet. Packet won't be instantiated.");
+				log.warn("{} sent {} but the connection's current state ({}) is invalid for this packet - packet won't be instantiated", client,
+					packetInfo.getPacketClassName(), state);
 			return null;
 		}
 		return packetInfo.newPacket(opcode, data, client);

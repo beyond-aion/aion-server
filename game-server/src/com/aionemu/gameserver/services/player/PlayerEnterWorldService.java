@@ -31,7 +31,6 @@ import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.BindPointPosition;
 import com.aionemu.gameserver.model.gameobjects.player.FriendList.Status;
-import com.aionemu.gameserver.model.gameobjects.player.Macros;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 import com.aionemu.gameserver.model.house.House;
@@ -90,14 +89,14 @@ public final class PlayerEnterWorldService {
 		Account account = client.getAccount();
 		PlayerAccountData playerAccData = account.getPlayerAccountData(objectId);
 		if (playerAccData == null) {
-			log.warn("Player enterWorld fail: character obj ID {} was not found on account ID {}.", objectId, account.getId());
+			log.warn("Player enterWorld fail: character ID {} was not found on account ID {}", objectId, account.getId());
 			client.sendPacket(new SM_ENTER_WORLD_CHECK(Msg.CONNECTION_ERROR));
 			return;
 		}
 
 		PlayerCommonData pcd = playerAccData.getPlayerCommonData();
 		if (pcd == null) {
-			log.warn("Player enterWorld fail: CommonData for character obj ID {} is null.", objectId);
+			log.warn("Player enterWorld fail: CommonData for character ID {} is null", objectId);
 			client.sendPacket(new SM_ENTER_WORLD_CHECK(Msg.CONNECTION_ERROR));
 			return;
 		}
@@ -124,7 +123,7 @@ public final class PlayerEnterWorldService {
 		}
 
 		if (World.getInstance().isInWorld(objectId)) {
-			log.warn("Player enterWorld fail: Duplicate character obj ID {} found in world.", objectId);
+			log.warn("Player enterWorld fail: duplicate character ID {} found in world", objectId);
 			client.sendPacket(new SM_ENTER_WORLD_CHECK(Msg.CONNECTION_ERROR));
 			return;
 		}
@@ -171,7 +170,7 @@ public final class PlayerEnterWorldService {
 				player.setClientConnection(null);
 				client.setActivePlayer(null);
 				client.sendPacket(new SM_ENTER_WORLD_CHECK(Msg.CONNECTION_ERROR));
-				log.error("Error during enter world of " + player, ex);
+				log.error("Error during enter world of {}", player, ex);
 			} finally {
 				enteringWorld.remove(objectId);
 			}
@@ -191,7 +190,7 @@ public final class PlayerEnterWorldService {
 		player.getFriendList().setStatus(Status.ONLINE, pcd);
 		PlayerDAO.onlinePlayer(player, true);
 		PlayerDAO.storeLastOnlineTime(player.getObjectId(), new Timestamp(System.currentTimeMillis()));
-		log.info("Player " + player.getName() + " (" + account + ") logged on");
+		log.info("Player {} ({}) logged on", player.getName(), account);
 		pcd.setInEditMode(false);
 
 		World.getInstance().storeObject(player);
@@ -312,7 +311,7 @@ public final class PlayerEnterWorldService {
 		MailService.onPlayerLogin(player);
 		HousingBidService.getInstance().onPlayerLogin(player); // must ensure player mailbox is initialized first
 		AtreianPassportService.getInstance().onLogin(player);
-		sendMacroList(client, player);
+		PlayerService.sendMacroList(player);
 		BrokerService.getInstance().onPlayerLogin(player);
 		HousingService.getInstance().onPlayerLogin(player); // must ensure player mailbox is initialized first
 		// ----------------------------- Retail sequence -----------------------------
@@ -484,12 +483,6 @@ public final class PlayerEnterWorldService {
 			client.sendPacket(new SM_WAREHOUSE_INFO(null, i, 0, false, player));
 		}
 	}
-
-	private static void sendMacroList(AionConnection client, Player player) {
-		SplitList<Macros.Macro> macroSplitList = new DynamicServerPacketBodySplitList<>(player.getMacros().getAll(), true, SM_MACRO_LIST.STATIC_BODY_SIZE,
-			SM_MACRO_LIST.DYNAMIC_BODY_PART_SIZE_CALCULATOR);
-		macroSplitList.forEach(part -> PacketSendUtility.sendPacket(player, new SM_MACRO_LIST(player.getObjectId(), part, part.isFirst())));
-	}
 }
 
 class GeneralUpdateTask implements Runnable {
@@ -513,7 +506,7 @@ class GeneralUpdateTask implements Runnable {
 				for (House house : player.getHouses())
 					house.save();
 			} catch (Exception ex) {
-				log.error("Exception during periodic saving of player " + player.getName(), ex);
+				log.error("Exception during periodic saving of player {}", player.getName(), ex);
 			}
 		}
 	}
@@ -536,7 +529,7 @@ class ItemUpdateTask implements Runnable {
 				InventoryDAO.store(player);
 				ItemStoneListDAO.save(player);
 			} catch (Exception ex) {
-				log.error("Exception during periodic saving of player items " + player.getName(), ex);
+				log.error("Exception during periodic saving of player items {}", player.getName(), ex);
 			}
 		}
 	}

@@ -63,8 +63,8 @@ public class TownService {
 				}
 			}
 		}
-		log.info("Loaded " + elyosTowns.size() + " elyos towns.");
-		log.info("Loaded " + asmosTowns.size() + " asmodian towns.");
+		log.info("Loaded {} Elyos towns", elyosTowns.size());
+		log.info("Loaded {} Asmodian towns", asmosTowns.size());
 	}
 
 	public Town getTownById(int townId) {

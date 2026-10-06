@@ -65,7 +65,7 @@ public class CM_INVITE_TO_GROUP extends AionClientPacket {
 				LeagueService.inviteToLeague(inviter, invited);
 				break;
 			default:
-				log.warn("Received unknown invite type from player " + inviter.getName() + ": " + inviteType);
+				log.warn("Received unknown invite type from player {}: {}", inviter.getName(), inviteType);
 				break;
 		}
 	}

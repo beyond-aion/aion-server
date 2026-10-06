@@ -27,7 +27,7 @@ public abstract class LsClientPacket extends BaseClientPacket<LoginServerConnect
 		try {
 			runImpl();
 		} catch (Throwable e) {
-			LoggerFactory.getLogger(LsClientPacket.class).error("Error handling LS packet from " + getConnection().getIP() + ": " + this, e);
+			LoggerFactory.getLogger(LsClientPacket.class).error("Error handling LS packet from {}: {}", getConnection().getIP(), this, e);
 		}
 	}
 

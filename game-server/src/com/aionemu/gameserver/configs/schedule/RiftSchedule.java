@@ -3,7 +3,7 @@ package com.aionemu.gameserver.configs.schedule;
 import java.io.File;
 import java.util.List;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 
 import com.aionemu.gameserver.model.templates.rift.OpenRift;
 import com.aionemu.gameserver.utils.xml.JAXBUtil;

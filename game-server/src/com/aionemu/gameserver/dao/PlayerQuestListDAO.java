@@ -52,7 +52,7 @@ public class PlayerQuestListDAO {
 				}
 			}
 		} catch (Exception e) {
-			log.error("Could not restore QuestStateList data for player: " + playerObjId + " from DB: " + e.getMessage(), e);
+			log.error("Could not restore QuestStateList data for player: {} from DB: {}", playerObjId, e.getMessage(), e);
 		}
 		return questStateList;
 	}
@@ -70,7 +70,7 @@ public class PlayerQuestListDAO {
 			addQuests(con, player.getObjectId(), qsList);
 			updateQuests(con, player.getObjectId(), qsList);
 		} catch (SQLException e) {
-			log.error("Can't save quests for player " + player.getObjectId(), e);
+			log.error("Can't save quests for player {}", player.getObjectId(), e);
 		}
 
 		for (QuestState qs : qsList) {
@@ -101,7 +101,7 @@ public class PlayerQuestListDAO {
 			ps.executeBatch();
 			con.commit();
 		} catch (SQLException e) {
-			log.error("Failed to insert new quests for player " + playerId);
+			log.error("Failed to insert new quests for player {}", playerId);
 		}
 	}
 
@@ -128,7 +128,7 @@ public class PlayerQuestListDAO {
 			ps.executeBatch();
 			con.commit();
 		} catch (SQLException e) {
-			log.error("Failed to update existing quests for player " + playerId);
+			log.error("Failed to update existing quests for player {}", playerId);
 		}
 	}
 
@@ -154,7 +154,7 @@ public class PlayerQuestListDAO {
 			ps.executeBatch();
 			con.commit();
 		} catch (SQLException e) {
-			log.error("Failed to delete existing quests for player " + playerId);
+			log.error("Failed to delete existing quests for player {}", playerId);
 		}
 		questIds.clear();
 	}

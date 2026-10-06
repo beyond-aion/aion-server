@@ -50,7 +50,7 @@ public class BannedIpController {
 	public static void reload() {
 		// we are not going to make ip ban every minute, so it's ok to simplify a concurrent code a bit
 		banList = BannedIpDAO.getAllBans();
-		log.info("BannedIpController loaded " + banList.size() + " IP bans.");
+		log.info("BannedIpController loaded {} IP bans", banList.size());
 	}
 
 	/**

@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.dataholders.loadingutils.adapters;
 
-import javax.xml.bind.annotation.adapters.XmlAdapter;
+import jakarta.xml.bind.annotation.adapters.XmlAdapter;
 
 /**
  * JAXB supports space separated int lists. This adapter is designed to work in the same way, but for bytes instead.

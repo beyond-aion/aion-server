@@ -20,7 +20,7 @@ public class ZoneHandlerClassListener implements ClassListener {
 	public void postLoad(Class<?>[] classes) {
 		for (Class<?> c : classes) {
 			if (log.isDebugEnabled())
-				log.debug("Load class " + c.getName());
+				log.debug("Load class {}", c.getName());
 
 			if (!isValidClass(c))
 				continue;
@@ -35,7 +35,7 @@ public class ZoneHandlerClassListener implements ClassListener {
 	public void preUnload(Class<?>[] classes) {
 		if (log.isDebugEnabled()) {
 			for (Class<?> c : classes)
-				log.debug("Unload class " + c.getName());
+				log.debug("Unload class {}", c.getName());
 		}
 	}
 

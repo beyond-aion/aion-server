@@ -181,7 +181,7 @@ public class AhserionAI extends AggressiveNpcAI {
 			.map(ai -> String.format("%s (ID: %d, Dmg: %d)", ai.getAttacker().getName(), ai.getAttacker().getObjectId(), ai.getDamage()))
 			.collect(Collectors.joining(", "));
 
-		log.info("[{}] {} (ID:{}) was killed in {}s. Damage List: {}", getPosition().getWorldMapInstance().getTemplate().getName(), getOwner().getName(),
+		log.info("[{}] {} (ID:{}) was killed in {} seconds. Damage List: {}", getPosition().getWorldMapInstance().getTemplate().getName(), getOwner().getName(),
 			getNpcId(), fullFightTime, damageDealt);
 	}
 }

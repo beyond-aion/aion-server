@@ -169,8 +169,8 @@ public class PrivateStoreService {
 					PacketSendUtility.sendPacket(seller, SM_SYSTEM_MESSAGE.STR_MSG_PERSONAL_SHOP_SELL_ITEM(item.getL10n()));
 				else
 					PacketSendUtility.sendPacket(seller, SM_SYSTEM_MESSAGE.STR_MSG_PERSONAL_SHOP_SELL_ITEM_MULTI(boughtItem.getCount(), item.getL10n()));
-				log.info("[PRIVATE STORE] > [Seller: " + seller.getName() + "] sold [Item: " + item.getItemId() + "][Amount: " + boughtItem.getCount()
-					+ "] to [Buyer: " + buyer.getName() + "] for [Price: " + boughtItem.getPrice() * boughtItem.getCount() + "]");
+				log.info("[PRIVATE STORE] > [Seller: {}] sold [Item: {}][Amount: {}] to [Buyer: {}] for [Price: {}]", seller.getName(),
+					item.getItemId(), boughtItem.getCount(), buyer.getName(), boughtItem.getPrice() * boughtItem.getCount());
 			}
 		}
 		buyer.getInventory().decreaseKinah(price);
@@ -209,12 +209,12 @@ public class PrivateStoreService {
 			if (tradeItem.getItemId() >= 0 && tradeItem.getItemId() < storeItems.length) { // itemId is index! blame the one who implemented this
 				TradePSItem storeItem = storeItems[tradeItem.getItemId()];
 				if (tradeItem.getCount() > storeItem.getCount()) {
-					log.warn("[Private Store] Attempt to buy more than for sale: " + tradeItem.getCount() + " vs. " + storeItem.getCount());
+					log.warn("[Private Store] Attempt to buy more than for sale: {} vs. {}", tradeItem.getCount(), storeItem.getCount());
 					return null;
 				}
 				boughtItems.add(new TradePSItem(storeItem.getItemObjId(), storeItem.getItemId(), tradeItem.getCount(), storeItem.getPrice()));
 			} else {
-				log.warn("[Private Store] Attempt to buy from invalid store index: " + tradeItem.getItemId());
+				log.warn("[Private Store] Attempt to buy from invalid store index: {}", tradeItem.getItemId());
 				return null;
 			}
 		}

@@ -3,7 +3,7 @@ package com.aionemu.chatserver;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.chatserver.configs.Config;
-import com.aionemu.chatserver.network.netty.NettyServer;
+import com.aionemu.chatserver.network.NetConnector;
 import com.aionemu.chatserver.service.BroadcastService;
 import com.aionemu.chatserver.service.ChatService;
 import com.aionemu.chatserver.service.GameServerService;
@@ -35,7 +35,7 @@ class ChatServer {
 		VersionInfo.logAll(ChatServer.class);
 		SystemInfo.logAll();
 
-		NettyServer.getInstance();
+		NetConnector.connect();
 		Runtime.getRuntime().addShutdownHook(new ShutdownHook());
 	}
 
@@ -43,7 +43,7 @@ class ChatServer {
 
 		@Override
 		public void run() {
-			NettyServer.getInstance().shutdownAll();
+			NetConnector.shutdown();
 			// shut down logger factory to flush all pending log messages
 			((LoggerContext) LoggerFactory.getILoggerFactory()).stop();
 		}

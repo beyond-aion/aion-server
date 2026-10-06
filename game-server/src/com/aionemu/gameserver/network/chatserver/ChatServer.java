@@ -56,10 +56,10 @@ public class ChatServer {
 			int delay;
 			if (e instanceof SocketException) {
 				delay = 10;
-				log.info("Could not connect to chat server at " + NetworkConfig.CHAT_ADDRESS + ", trying again in " + delay + "s");
+				log.info("Could not connect to chat server at {}, trying again in {} seconds", NetworkConfig.CHAT_ADDRESS, delay);
 			} else {
 				delay = 60;
-				log.error("Could not connect to chat server at " + NetworkConfig.CHAT_ADDRESS + ", trying again in " + delay + "s", e);
+				log.error("Could not connect to chat server at {}, trying again in {} seconds", NetworkConfig.CHAT_ADDRESS, delay, e);
 			}
 			ThreadPoolManager.getInstance().schedule(() -> connect(nioServer), delay * 1000);
 		}
@@ -78,7 +78,7 @@ public class ChatServer {
 			return;
 		int delay = csCon.getState() == State.AUTHED ? 5 : 15;
 		disconnect();
-		log.info("Reconnecting to chat server in " + delay + "s...");
+		log.info("Reconnecting to chat server in {} seconds", delay);
 		ThreadPoolManager.getInstance().schedule(() -> connect(nioServer), delay * 1000);
 	}
 

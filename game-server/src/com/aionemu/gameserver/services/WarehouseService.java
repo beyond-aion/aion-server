@@ -34,7 +34,7 @@ public class WarehouseService {
 	public static void expandWarehouse(Player player, Npc npc) {
 		StorageExpansionTemplate template = DataManager.WAREHOUSEEXPANDER_DATA.getWarehouseExpansionTemplate(npc.getNpcId());
 		if (template == null) {
-			log.warn("Warehouse expansion template could not be found for " + npc);
+			log.warn("Warehouse expansion template could not be found for {}", npc);
 			return;
 		}
 

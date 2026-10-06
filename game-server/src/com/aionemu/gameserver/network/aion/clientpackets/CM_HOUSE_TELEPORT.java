@@ -84,7 +84,7 @@ public class CM_HOUSE_TELEPORT extends AionClientPacket {
 				}
 				break;
 			default:
-				LoggerFactory.getLogger(getClass()).warn("Unhandled house teleport actionId " + actionId);
+				LoggerFactory.getLogger(getClass()).warn("Unhandled house teleport actionId {}", actionId);
 				return;
 		}
 

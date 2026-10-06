@@ -67,8 +67,8 @@ public class CraftService {
 
 		if (LoggingConfig.LOG_CRAFT) {
 			ItemTemplate itemTemplate = DataManager.ITEM_DATA.getItemTemplate(productItemId);
-			log.info("Player " + player.getName() + " crafted item " + productItemId + " [" + itemTemplate.getName() + "] (count: "
-				+ recipetemplate.getQuantity() + ")" + (critCount > 0 ? " - critical" : ""));
+			log.info("Player {} crafted item {} [{}] (count: {}){}", player.getName(), productItemId, itemTemplate.getName(),
+				recipetemplate.getQuantity(), critCount > 0 ? " - critical" : "");
 		}
 
 		if (recipetemplate.getCraftDelayId() != null) {

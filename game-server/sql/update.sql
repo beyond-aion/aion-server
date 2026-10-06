@@ -1,12 +1,8 @@
 /*
- * DB changes since c5a0f34 (12.09.2026)
+ * DB changes since a31c1df (29.09.2026)
  */
 
-ALTER TABLE `player_effects`
-	ADD COLUMN `magical_criticals` TINYINT NOT NULL DEFAULT '0' AFTER `force_type`;
-
-ALTER TABLE `inventory`
-	ADD COLUMN `rank_limit_expire_time` int NOT NULL DEFAULT '0' AFTER `rnd_plume_bonus`;
+UPDATE `player_skills` SET `skill_level` = 1 WHERE `skill_id` < 30000;
 
 ALTER TABLE `player_recipes`
 	ADD COLUMN `production_count` tinyint NOT NULL DEFAULT '0' AFTER `recipe_id`;

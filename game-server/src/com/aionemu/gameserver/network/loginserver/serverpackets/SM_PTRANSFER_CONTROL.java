@@ -315,7 +315,7 @@ public class SM_PTRANSFER_CONTROL extends LsServerPacket {
 				List<QuestState> quests = new ArrayList<>();
 				for (QuestState qs : qsl.getAllQuestState()) {
 					if (qs == null) {
-						log.warn("there are null quest on player " + this.player.getName() + ". taskId #" + this.taskId + ". transfer skip that");
+						log.warn("there are null quest on player {}. taskId #{}. transfer skip that", this.player.getName(), this.taskId);
 						continue;
 					}
 					quests.add(qs);

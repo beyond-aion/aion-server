@@ -149,7 +149,7 @@ public class CMT_CHARACTER_INFORMATION extends BaseClientPacket<AionConnection> 
 		player.setPosition(pos);
 
 		if (!PlayerService.storeNewPlayer(player, accountName, targetAccount)) {
-			textLog.info("failed to store new player to " + accountName);
+			textLog.info("failed to store new player to {}", accountName);
 			IDFactory.getInstance().releaseId(playerCommonData.getPlayerObjId());
 			return null;
 		}
@@ -205,7 +205,7 @@ public class CMT_CHARACTER_INFORMATION extends BaseClientPacket<AionConnection> 
 			}
 			ItemTemplate template = DataManager.ITEM_DATA.getItemTemplate(itemId);
 			if (template == null) {
-				textLog.warn("(accId=" + targetAccount + ") item with id " + itemId + " was not found in templates");
+				textLog.warn("(accId={}) item with id {} was not found in templates", targetAccount, itemId);
 				continue;
 			}
 
@@ -241,7 +241,7 @@ public class CMT_CHARACTER_INFORMATION extends BaseClientPacket<AionConnection> 
 
 		// read data
 		cnt = readD();
-		textLog.info("EmotionList:" + cnt);
+		textLog.info("EmotionList:{}", cnt);
 		player.setEmotions(new EmotionList(player));
 		for (int a = 0; a < cnt; a++) { // emotes
 			int id = readD(), remainTime = readD();
@@ -251,7 +251,7 @@ public class CMT_CHARACTER_INFORMATION extends BaseClientPacket<AionConnection> 
 		}
 
 		cnt = readD();
-		textLog.info("MotionList:" + cnt);
+		textLog.info("MotionList:{}", cnt);
 		player.setMotions(new MotionList(player));
 		for (int i = 0; i < cnt; i++) { // motions
 			int id = readD(), expiryTime = readD();
@@ -262,7 +262,7 @@ public class CMT_CHARACTER_INFORMATION extends BaseClientPacket<AionConnection> 
 		}
 
 		cnt = readD();
-		textLog.info("Macros:" + cnt);
+		textLog.info("Macros:{}", cnt);
 		player.setMacros(new Macros());
 		for (int a = 0; a < cnt; a++) { // macros
 			int id = readD();
@@ -273,7 +273,7 @@ public class CMT_CHARACTER_INFORMATION extends BaseClientPacket<AionConnection> 
 		}
 
 		cnt = readD();
-		textLog.info("NpcFactions:" + cnt);
+		textLog.info("NpcFactions:{}", cnt);
 		player.setNpcFactions(new NpcFactions(player));
 		for (int a = 0; a < cnt; a++) { // npc factions
 			int id = readD(), time = readD();
@@ -288,7 +288,7 @@ public class CMT_CHARACTER_INFORMATION extends BaseClientPacket<AionConnection> 
 			PlayerNpcFactionsDAO.storeNpcFactions(player);
 
 		cnt = readD();
-		textLog.info("Pets:" + cnt);
+		textLog.info("Pets:{}", cnt);
 		for (int i = 0; i < cnt; i++) { // pets
 			int petId = readD();
 			int decorationId = readD();
@@ -305,7 +305,7 @@ public class CMT_CHARACTER_INFORMATION extends BaseClientPacket<AionConnection> 
 		}
 
 		cnt = readD();
-		textLog.info("TitleList:" + cnt);
+		textLog.info("TitleList:{}", cnt);
 		player.setTitleList(new TitleList());
 		for (int a = 0; a < cnt; a++) { // titles
 			int id = readD(), remainTime = readD();
@@ -340,7 +340,7 @@ public class CMT_CHARACTER_INFORMATION extends BaseClientPacket<AionConnection> 
 
 		// read skill data
 		cnt = readD();
-		textLog.info("PlayerSkillList:" + cnt);
+		textLog.info("PlayerSkillList:{}", cnt);
 		player.setSkillList(new PlayerSkillList());
 		boolean rsCheck = rsList.size() > 0;
 		for (int a = 0; a < cnt; a++) { // skills
@@ -365,7 +365,7 @@ public class CMT_CHARACTER_INFORMATION extends BaseClientPacket<AionConnection> 
 
 		// read recipe data
 		cnt = readD();
-		textLog.info("RecipeList:" + cnt);
+		textLog.info("RecipeList:{}", cnt);
 		player.setRecipeList(new RecipeList());
 		for (int a = 0; a < cnt; a++) { // recipes
 			int recipeId = readD();
@@ -377,7 +377,7 @@ public class CMT_CHARACTER_INFORMATION extends BaseClientPacket<AionConnection> 
 
 		// read quest data
 		cnt = readD();
-		textLog.info("QuestStateList:" + cnt);
+		textLog.info("QuestStateList:{}", cnt);
 		player.setQuestStateList(new QuestStateList());
 		for (int a = 0; a < cnt; a++) { // quests
 			int questId = readD();
@@ -394,7 +394,7 @@ public class CMT_CHARACTER_INFORMATION extends BaseClientPacket<AionConnection> 
 		}
 
 		PlayerService.storePlayer(player);
-		textLog.info("finished in " + (System.currentTimeMillis() - st) + " ms");
+		textLog.info("finished in {} ms", System.currentTimeMillis() - st);
 		return player;
 	}
 }

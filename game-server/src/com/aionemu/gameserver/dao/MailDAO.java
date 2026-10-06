@@ -96,7 +96,7 @@ public class MailDAO {
 			}
 			rset.close();
 		} catch (Exception e) {
-			log.error("Could not read mail for player: " + playerId + " from DB: " + e.getMessage(), e);
+			log.error("Could not read mail for player: {} from DB: {}", playerId, e.getMessage(), e);
 		}
 		return false;
 	}

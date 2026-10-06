@@ -102,7 +102,7 @@ public class StigmaService {
 		for (Item item : player.getEquipment().getEquippedItemsAllStigma()) {
 			if (!item.getItemTemplate().isStigma()) {
 				player.getEquipment().unEquipItem(item.getObjectId(), false);
-				log.warn("Unequipped stigma: " + item.getItemId() + ", stigma info missing for item (possibly pre-4.8 stigma)");
+				log.warn("Unequipped stigma: {}, stigma info missing for item (possibly pre-4.8 stigma)", item.getItemId());
 				continue;
 			}
 

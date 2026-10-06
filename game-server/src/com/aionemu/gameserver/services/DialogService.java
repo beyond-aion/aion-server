@@ -327,7 +327,7 @@ public class DialogService {
 					break;
 				}
 				if (fortZone == null) {
-					log.warn("Could not find FORT zone for npc: " + npc.getNpcId());
+					log.warn("Could not find FORT zone for npc: {}", npc.getNpcId());
 					return true;
 				}
 				List<Integer> siegeIds = fortZone.getSiegeId();
@@ -371,7 +371,7 @@ public class DialogService {
 			case LEVEL_HIGH:
 				return player.getLevel() < talkInfo.getSubDialogValue();
 			default:
-				log.warn("Unhandled subdialog type " + talkInfo.getSubDialogType() + " for npc: " + npc.getNpcId());
+				log.warn("Unhandled subdialog type {} for npc: {}", talkInfo.getSubDialogType(), npc.getNpcId());
 				return true;
 		}
 	}

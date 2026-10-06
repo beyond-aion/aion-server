@@ -1,9 +1,9 @@
 package com.aionemu.gameserver.skillengine.effect;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlType;
 
 /**
  * @author ATracer
@@ -16,6 +16,8 @@ public class SubEffect {
 	private int skillId;
 	@XmlAttribute
 	private int chance = 100;
+	@XmlAttribute(name = "chance_delta")
+	private int chanceDelta;
 	@XmlAttribute(name = "addeffect")
 	private boolean addEffect = false;
 
@@ -26,11 +28,8 @@ public class SubEffect {
 		return skillId;
 	}
 
-	/**
-	 * @return the chance
-	 */
-	public int getChance() {
-		return chance;
+	public int getChance(int skillLevel) {
+		return chance + chanceDelta * skillLevel;
 	}
 
 	/**

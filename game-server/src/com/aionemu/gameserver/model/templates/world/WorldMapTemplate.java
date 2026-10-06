@@ -2,7 +2,7 @@ package com.aionemu.gameserver.model.templates.world;
 
 import java.util.EnumSet;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 
 import com.aionemu.gameserver.configs.main.WorldConfig;
 import com.aionemu.gameserver.model.templates.L10n;

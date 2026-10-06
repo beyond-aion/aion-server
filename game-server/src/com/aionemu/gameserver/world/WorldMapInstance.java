@@ -284,7 +284,7 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 				return;
 			}
 		}
-		log.warn("Door (ID: " + staticId + ") doesn't exist", new RuntimeException());
+		log.warn("Door (ID: {}) doesn't exist", staticId, new RuntimeException());
 	}
 
 	public Iterator<VisibleObject> iterator() {

@@ -32,7 +32,7 @@ public class QuestSpawnAnalyzer {
 	}
 
 	static void run(Collection<AbstractQuestHandler> questHandlers, Collection<QuestNpc> questNpcs, boolean ignoreEventQuests) {
-		log.info("Analyzing quest handlers (ignoreEventQuests=" + ignoreEventQuests + ")...");
+		log.info("Analyzing quest handlers (ignoreEventQuests={})...", ignoreEventQuests);
 		long timeMillis = System.currentTimeMillis();
 		Set<Integer> unobtainableQuests = new HashSet<>();
 		Set<Integer> factionIds = new HashSet<>();

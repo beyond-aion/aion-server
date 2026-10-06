@@ -150,7 +150,7 @@ public class PanesterraService {
 
 	public void startAhserionRaid() {
 		if (Stream.of(10111, 10211, 10311, 10411).anyMatch(id -> SiegeService.getInstance().getSiege(id) != null)) {
-			log.error("Ahserion raid cannot be started while any Panesterra fortress is under siege.");
+			log.error("Ahserion raid cannot be started while any Panesterra fortress is under siege");
 			return;
 		}
 		createTeams(-1);

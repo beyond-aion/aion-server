@@ -131,7 +131,7 @@ public class CM_BUY_ITEM extends AionClientPacket {
 						TradeService.performBuyFromShop(npc, player, tradeList);
 					break;
 				default:
-					log.warn("Unknown shop action: " + tradeActionId);
+					log.warn("Unknown shop action: {}", tradeActionId);
 					break;
 			}
 		} else if (target instanceof Pet) {

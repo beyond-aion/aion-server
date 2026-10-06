@@ -54,7 +54,7 @@ public class EventDAO {
 				return storedBuffData;
 			}
 		} catch (SQLException e) {
-			log.error("Couldn't load stored event buff info for event: " + eventName, e);
+			log.error("Couldn't load stored event buff info for event: {}", eventName, e);
 		}
 		return null;
 	}
@@ -75,7 +75,7 @@ public class EventDAO {
 			stmt.executeBatch();
 			return true;
 		} catch (Exception e) {
-			log.error("Couldn't store event buff info for event: " + eventName, e);
+			log.error("Couldn't store event buff info for event: {}", eventName, e);
 			return false;
 		}
 	}

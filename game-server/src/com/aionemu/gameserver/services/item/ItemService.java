@@ -76,8 +76,8 @@ public class ItemService {
 		Objects.requireNonNull(predicate, "Predicate is not supplied");
 
 		if (LoggingConfig.LOG_ITEM)
-			log.info("Item: " + itemTemplate.getTemplateId() + " [" + itemTemplate.getName() + "] added to player " + player.getName() + " (count: " + count
-				+ ") (type: " + predicate.getAddType() + ")");
+			log.info("Item: {} [{}] added to player {} (count: {}) (type: {})", itemTemplate.getTemplateId(), itemTemplate.getName(), player.getName(),
+				count, predicate.getAddType());
 
 		Storage inventory = player.getInventory();
 		if (itemTemplate.isKinah()) {

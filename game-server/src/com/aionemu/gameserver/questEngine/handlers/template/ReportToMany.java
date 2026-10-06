@@ -90,7 +90,7 @@ public class ReportToMany extends AbstractTemplateQuestHandler {
 		} else if (qs.getStatus() == QuestStatus.START) {
 			int step = qs.getQuestVarById(0); // starting from 0
 			if (step > getMaxStep()) {
-				LoggerFactory.getLogger(ReportToMany.class).warn("Missing NpcInfo for quest " + questId + " step #" + (step + 1));
+				LoggerFactory.getLogger(ReportToMany.class).warn("Missing NpcInfo for quest {} step #{}", questId, step + 1);
 				return false;
 			}
 			NpcInfos targetNpcInfo = npcInfos.get(step);

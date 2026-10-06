@@ -63,7 +63,7 @@ public class NioServer {
 				serverChannel.configureBlocking(false);
 
 				serverChannel.socket().bind(cfg.address());
-				log.info("Listening on " + cfg.getAddressInfo() + " for " + cfg.clientDescription());
+				log.info("Listening on {} for {}", cfg.getAddressInfo(), cfg.clientDescription());
 
 				// Register the server socket channel, indicating an interest in accepting new connections
 				SelectionKey acceptKey = getAcceptDispatcher().register(serverChannel, SelectionKey.OP_ACCEPT, new Acceptor(cfg.connectionFactory(), this));
@@ -110,14 +110,12 @@ public class NioServer {
 	}
 
 	public final void shutdown() {
-		log.info("Closing ServerChannels...");
 		serverChannelKeys.forEach(SelectionKey::cancel);
-		log.info("ServerChannels closed.");
-
-		// find active connections once, at this point new ones cannot be added anymore
 		Set<AConnection<?>> activeConnections = findAllConnections();
-		if (!activeConnections.isEmpty()) {
-			log.info("\tClosing " + activeConnections.size() + " connections...");
+		if (activeConnections.isEmpty()) {
+			log.info("Stopped accepting new connections");
+		} else {
+			log.info("Stopped accepting new connections, now closing {} connection(s)", activeConnections.size());
 
 			// notify connections about server close (they should close themselves)
 			activeConnections.forEach(AConnection::onServerClose);
@@ -131,13 +129,14 @@ public class NioServer {
 				}
 				if (System.currentTimeMillis() > timeout) {
 					activeConnections.removeIf(AConnection::isClosed);
-					log.info("\tForcing " + activeConnections.size() + " connections to disconnect...");
+					log.info("\tForcing {} connection(s) to disconnect...", activeConnections.size());
 					activeConnections.forEach(AConnection::close);
 					break;
 				}
 			}
 			activeConnections.removeIf(AConnection::isClosed);
-			log.info("\tActive connections left: " + activeConnections.size());
+			if (!activeConnections.isEmpty())
+				log.info("\tActive connections left: {}", activeConnections.size());
 		}
 	}
 

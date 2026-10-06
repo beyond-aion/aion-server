@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.model.templates.npcskill;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 
 /**
  * @author AionChs Master, nrg, Yeats

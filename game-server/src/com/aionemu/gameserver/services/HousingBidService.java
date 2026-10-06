@@ -41,14 +41,14 @@ public class HousingBidService {
 		Set<Integer> deletedPlayerIds = HouseBidsDAO.loadBids(bids);
 		deletedPlayerIds.forEach(this::disableBids);
 		setBidInfoToHouses();
-		log.info("Loaded bids for " + bids.size() + " houses");
+		log.info("Loaded bids for {} houses", bids.size());
 	}
 
 	private void setBidInfoToHouses() {
 		HousingService.getInstance().getCustomHouses().forEach(house -> {
 			house.setBids(getBidInfo(house), true);
 			if (house.getBids() != null && house.isInactive())
-				log.warn(house + " is for auction but inactive.");
+				log.warn("{} is for auction but inactive", house);
 		});
 	}
 
@@ -226,22 +226,22 @@ public class HousingBidService {
 				MailFormatter.sendHouseAuctionMail(house, sellerPcd, result, time, compensation);
 			}
 			if (LoggingConfig.LOG_HOUSE_AUCTION) {
-				log.info("Address " + house.getAddress().getId() + " not sold for " + bids.getInitialOffer().getKinah() + " kinah (result: " + result
-					+ "; return: " + compensation + " kinah)");
+				log.info("Address {} not sold for {} kinah (result: {}; return: {} kinah)", house.getAddress().getId(),
+					bids.getInitialOffer().getKinah(), result, compensation);
 			}
 		} else {
 			PlayerCommonData buyerPcd = PlayerService.getOrLoadPlayerCommonData(highestBid.getPlayerObjectId());
 
 			if (buyerPcd == null) {
 				if (highestBid.getPlayerObjectId() == 0)
-					log.info(house + " wasn't sold because the winning bidder deleted his character.");
+					log.info("{} wasn't sold because the winning bidder deleted their character", house);
 				else
-					log.warn(house + " could not be sold to player " + highestBid.getPlayerObjectId() + " because the player couldn't be found");
+					log.warn("{} could not be sold to player {} because the player couldn't be found", house, highestBid.getPlayerObjectId());
 				house.getController().updateSign();
 				return true;
 			}
 			if (buyerPcd.getPlayerObjId() == sellerId) {
-				log.warn("Sold " + house + " to its own owner (" + sellerId + "), cancelling!");
+				log.warn("Sold {} to its own owner ({}), cancelling!", house, sellerId);
 				house.getController().updateSign();
 				return true;
 			}
@@ -278,8 +278,8 @@ public class HousingBidService {
 
 			if (LoggingConfig.LOG_HOUSE_AUCTION) {
 				String sellerInfo = sellerPcd == null ? "" : " by player " + sellerPcd.getPlayerObjId();
-				log.info("Address " + house.getAddress().getId() + " sold" + sellerInfo + " for " + highestBid.getKinah() + " kinah (" + bids.getBidCount()
-					+ " bids; result: " + result + ") to player " + buyerPcd.getPlayerObjId());
+				log.info("Address {} sold{} for {} kinah ({} bids; result: {}) to player {}", house.getAddress().getId(), sellerInfo,
+					highestBid.getKinah(), bids.getBidCount(), result, buyerPcd.getPlayerObjId());
 			}
 		}
 		return true;

@@ -31,7 +31,7 @@ public class WalkerFormator {
 		if (walkerId != null) {
 			WalkerTemplate template = DataManager.WALKER_DATA.getWalkerTemplate(walkerId);
 			if (template == null) {
-				log.warn("Missing walker ID: " + walkerId);
+				log.warn("Missing walker ID: {}", walkerId);
 				return false;
 			}
 			if (template.getPool() < 2)

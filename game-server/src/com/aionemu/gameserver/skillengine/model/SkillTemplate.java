@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.skillengine.model;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
 import com.aionemu.gameserver.dataholders.DataManager;
