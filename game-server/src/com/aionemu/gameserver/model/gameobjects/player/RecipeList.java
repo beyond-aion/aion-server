@@ -75,7 +75,8 @@ public class RecipeList {
 
 	/**
 	 * Consumes one production of a limited recipe. The recipe is removed when its last production is used up. The client is not informed about the
-	 * new count, it requests the recipe list again when needed.
+	 * new count, it requests the recipe list again when needed. The production is used up even if the database write fails, so a failing database
+	 * cannot make a limited recipe reusable.
 	 */
 	public void decreaseProductionCount(Player player, int recipeId) {
 		Integer productionCount = recipeList.get(recipeId);
@@ -83,10 +84,13 @@ public class RecipeList {
 			return;
 		int left = productionCount - 1;
 		if (left == 0) {
-			if (deleteRecipe(player, recipeId))
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMBINE_USAGE_OVER("[recipe_ex:" + recipeId + ";" + player.getName() + "]"));
-		} else if (PlayerRecipesDAO.updateProductionCount(player.getObjectId(), recipeId, left)) {
+			recipeList.remove(recipeId);
+			PlayerRecipesDAO.delRecipe(player.getObjectId(), recipeId);
+			PacketSendUtility.sendPacket(player, new SM_RECIPE_DELETE(recipeId));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMBINE_USAGE_OVER("[recipe_ex:" + recipeId + ";" + player.getName() + "]"));
+		} else {
 			recipeList.put(recipeId, left);
+			PlayerRecipesDAO.updateProductionCount(player.getObjectId(), recipeId, left);
 		}
 	}
 
