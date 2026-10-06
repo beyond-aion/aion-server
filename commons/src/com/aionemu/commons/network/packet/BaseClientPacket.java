@@ -21,6 +21,7 @@ public abstract class BaseClientPacket<T> extends BasePacket implements Runnable
 
 	private static final Logger log = LoggerFactory.getLogger(BaseClientPacket.class);
 	private static final Set<Integer> partiallyReadPackets = ConcurrentHashMap.newKeySet();
+	private static final Set<Integer> tooShortPackets = ConcurrentHashMap.newKeySet();
 	/**
 	 * Owner of this packet.
 	 */
@@ -87,7 +88,8 @@ public abstract class BaseClientPacket<T> extends BasePacket implements Runnable
 
 			return true;
 		} catch (BufferUnderflowException ex) {
-			log.warn("{} from {} is shorter than expected:\n{}", this, client, NetworkUtils.toHex(buf, startPos, buf.limit()));
+			if (tooShortPackets.add(getOpCode()))
+				log.warn("{} from {} is shorter than expected:\n{}", this, client, NetworkUtils.toHex(buf, startPos, buf.limit()));
 			return false;
 		} catch (Exception ex) {
 			String msg = "Reading failed for packet " + this + ". Buffer Info";
