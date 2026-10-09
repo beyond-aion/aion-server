@@ -29,7 +29,7 @@ public class VeteranRewardDAO {
 				return rset.getInt("received_months");
 			return 0;
 		} catch (SQLException e) {
-			log.error("Error loading received veteran reward months for player " + player, e);
+			log.error("Error loading received veteran reward months for player {}", player, e);
 			return -1;
 		}
 	}
@@ -41,7 +41,7 @@ public class VeteranRewardDAO {
 			stmt.execute();
 			return true;
 		} catch (Exception e) {
-			log.error("Error saving received veteran reward months (" + months + ") for player " + player, e);
+			log.error("Error saving received veteran reward months ({}) for player {}", months, player, e);
 			return false;
 		}
 	}

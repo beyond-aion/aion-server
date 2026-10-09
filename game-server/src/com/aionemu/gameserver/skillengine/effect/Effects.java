@@ -4,8 +4,8 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.Unmarshaller;
+import jakarta.xml.bind.annotation.*;
 
 import static com.aionemu.gameserver.skillengine.effect.EffectType.*;
 

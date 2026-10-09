@@ -75,7 +75,7 @@ public class HousesDAO {
 			stmt.execute();
 			house.setPersistentState(PersistentState.UPDATED);
 		} catch (Exception e) {
-			log.error("Could not insert house " + house.getObjectId(), e);
+			log.error("Could not insert house {}", house.getObjectId(), e);
 		}
 	}
 
@@ -92,7 +92,7 @@ public class HousesDAO {
 			stmt.execute();
 			house.setPersistentState(PersistentState.UPDATED);
 		} catch (Exception e) {
-			log.error("Could not store house " + house.getObjectId(), e);
+			log.error("Could not store house {}", house.getObjectId(), e);
 		}
 	}
 
@@ -126,10 +126,10 @@ public class HousesDAO {
 
 					House house;
 					if (building == null) {
-						log.warn("Missing building type for address " + address.getId());
+						log.warn("Missing building type for address {}", address.getId());
 						continue;
 					} else if (addressHouseIds.containsKey(address.getId())) {
-						log.warn("Duplicate house address " + address.getId() + "!");
+						log.warn("Duplicate house address {}!", address.getId());
 						continue;
 					} else {
 						house = new House(houseId, building, address, 0);

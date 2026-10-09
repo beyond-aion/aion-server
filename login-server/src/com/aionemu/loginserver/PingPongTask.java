@@ -29,7 +29,7 @@ public class PingPongTask implements Runnable {
 			connection.sendPacket(new SM_PING());
 		} else {
 			stop();
-			LoggerFactory.getLogger(PingPongTask.class).warn("Gameserver #" + connection.getGameServerInfo().getId() + " connection died, closing it.");
+			LoggerFactory.getLogger(PingPongTask.class).warn("Game server #{} connection died, closing it.", connection.getGameServerInfo().getId());
 			connection.close();
 		}
 	}

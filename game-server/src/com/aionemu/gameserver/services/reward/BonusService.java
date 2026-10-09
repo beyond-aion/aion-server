@@ -75,7 +75,7 @@ public class BonusService {
 			case NONE:
 				break;
 			default:
-				LoggerFactory.getLogger(BonusService.class).warn("Bonus of type " + type + " is not implemented");
+				LoggerFactory.getLogger(BonusService.class).warn("Bonus of type {} is not implemented", type);
 		}
 		return Collections.emptyList();
 	}

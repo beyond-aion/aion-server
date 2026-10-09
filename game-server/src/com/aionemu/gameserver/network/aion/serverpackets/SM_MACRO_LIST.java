@@ -20,18 +20,20 @@ public class SM_MACRO_LIST extends AionServerPacket {
 	private final int playerObjectId;
 	private final List<Macros.Macro> macros;
 	private final boolean clearList;
+	private final boolean isLast;
 
-	public SM_MACRO_LIST(int playerObjectId, List<Macros.Macro> macros, boolean clearList) {
+	public SM_MACRO_LIST(int playerObjectId, List<Macros.Macro> macros, boolean clearList, boolean isLast) {
 		this.playerObjectId = playerObjectId;
 		this.macros = macros;
 		this.clearList = clearList;
+		this.isLast = isLast;
 	}
 
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeD(playerObjectId);
 		writeC(clearList ? 1 : 0); // 1 = clears all entries in the macro list before adding the ones sent here
-		writeH(-macros.size());
+		writeH(isLast ? -macros.size() : macros.size()); // negative marks the last part
 		for (Macros.Macro macro : macros) {
 			writeC(macro.id());
 			writeS(macro.xml());

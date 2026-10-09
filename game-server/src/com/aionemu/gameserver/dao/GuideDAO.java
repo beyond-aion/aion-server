@@ -30,7 +30,7 @@ public class GuideDAO {
 			stmt.setInt(1, guide_id);
 			stmt.execute();
 		} catch (Exception e) {
-			log.error("Error delete guide_id: " + guide_id, e);
+			log.error("Error delete guide_id: {}", guide_id, e);
 			return false;
 		}
 		return true;
@@ -50,7 +50,7 @@ public class GuideDAO {
 				}
 			}
 		} catch (Exception e) {
-			log.error("Could not restore Guide data for player: " + playerId + " from DB: " + e.getMessage(), e);
+			log.error("Could not restore Guide data for player: {} from DB: {}", playerId, e.getMessage(), e);
 		}
 		return guides;
 	}
@@ -67,7 +67,7 @@ public class GuideDAO {
 				}
 			}
 		} catch (Exception e) {
-			log.error("Could not restore Survey data for player: " + player_id + " from DB: " + e.getMessage(), e);
+			log.error("Could not restore Survey data for player: {} from DB: {}", player_id, e.getMessage(), e);
 		}
 		return guide;
 	}
@@ -80,7 +80,7 @@ public class GuideDAO {
 			stmt.setInt(3, player.getObjectId());
 			stmt.execute();
 		} catch (Exception e) {
-			log.error("Error saving playerName: " + player, e);
+			log.error("Error saving playerName: {}", player, e);
 		}
 	}
 

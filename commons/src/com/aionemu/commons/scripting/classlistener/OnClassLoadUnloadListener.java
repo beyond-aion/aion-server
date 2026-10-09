@@ -55,9 +55,9 @@ public class OnClassLoadUnloadListener implements ClassListener {
 				try {
 					m.invoke(null);
 				} catch (IllegalAccessException e) {
-					log.error("Can't access method " + m.getName() + " of class " + m.getDeclaringClass().getName(), e);
+					log.error("Can't access method {} of class {}", m.getName(), m.getDeclaringClass().getName(), e);
 				} catch (InvocationTargetException e) {
-					log.error("Can't invoke method " + m.getName() + " of class " + m.getDeclaringClass().getName(), e);
+					log.error("Can't invoke method {} of class {}", m.getName(), m.getDeclaringClass().getName(), e);
 				}
 			}
 

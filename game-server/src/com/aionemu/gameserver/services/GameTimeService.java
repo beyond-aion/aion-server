@@ -5,7 +5,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.gameserver.GameServerError;
 import com.aionemu.gameserver.dao.ServerVariablesDAO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_GAME_TIME;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -22,7 +21,6 @@ public class GameTimeService {
 	private final AtomicBoolean isStarted = new AtomicBoolean();
 
 	private GameTimeService() {
-		log.info("Initialized GameTime");
 	}
 
 	/**
@@ -43,7 +41,7 @@ public class GameTimeService {
 
 	public void startClock() {
 		if (!isStarted.compareAndSet(false, true))
-			throw new GameServerError("Tried to start game time twice.");
+			throw new IllegalStateException("Tried to start game time twice.");
 
 		int updateInterval = 3 * 60000; // every 3 minutes
 
@@ -52,15 +50,13 @@ public class GameTimeService {
 
 		// task to save the game time and update all clients
 		ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
-			log.info("Sending current game time to all players");
-			PacketSendUtility.broadcastToWorld(new SM_GAME_TIME());
-			if (saveGameTime())
-				log.info("Game time saved...");
-			else
+			log.info("Saving current game time and sending it to all players");
+			if (!saveGameTime())
 				log.warn("Error saving game time");
+			PacketSendUtility.broadcastToWorld(new SM_GAME_TIME());
 		}, updateInterval, updateInterval);
 
-		log.info("GameTime started. Update interval: " + updateInterval / 1000 + "s");
+		log.info("Game time started with an update interval of {} seconds", updateInterval / 1000);
 	}
 
 	public static final GameTimeService getInstance() {

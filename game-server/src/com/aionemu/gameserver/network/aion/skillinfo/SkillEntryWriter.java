@@ -24,7 +24,7 @@ public class SkillEntryWriter extends PacketWriteHelper {
 	@Override
 	protected void writeMe(ByteBuffer buf) {
 		writeH(buf, skillEntry.getSkillId());
-		writeH(buf, skillEntry.isNormalSkill() ? 1 : skillEntry.getSkillLevel());
+		writeH(buf, skillEntry.getSkillLevel());
 		writeC(buf, 0x00);
 		writeC(buf, skillEntry.getProfessionSkillBarSize());
 		writeD(buf, skillEntry.isProfessionSkill() ? skillEntry.getProfessionFlag() : skillEntry.getFlag());

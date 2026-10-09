@@ -3,8 +3,6 @@ package com.aionemu.gameserver.skillengine.effect;
 import java.util.Collections;
 import java.util.List;
 
-import javax.xml.bind.annotation.*;
-
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.utils.Rnd;
@@ -12,6 +10,7 @@ import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.controllers.attack.AttackResult;
 import com.aionemu.gameserver.controllers.effect.CumulativeResistType;
+import com.aionemu.gameserver.controllers.observer.OneTimeBoostSkillAttack;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.SkillElement;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -26,6 +25,8 @@ import com.aionemu.gameserver.skillengine.effect.modifier.ActionModifier;
 import com.aionemu.gameserver.skillengine.effect.modifier.ActionModifiers;
 import com.aionemu.gameserver.skillengine.model.*;
 import com.aionemu.gameserver.utils.stats.StatFunctions;
+
+import jakarta.xml.bind.annotation.*;
 
 /**
  * @author ATracer
@@ -356,12 +357,17 @@ public abstract class EffectTemplate {
 	 * @return true = no dodge/resist, false = dodged/resisted
 	 */
 	private boolean checkDodgeOrResistRate(Effect effect) {
-		int accuracyModifier = accMod2 + accMod1 * effect.getSkillLevel() + effect.getAccModBoost();
+		Creature effector = effect.getEffector();
+		int accuracyModifier = accMod2 + accMod1 * effect.getSkillLevel();
 		if (effect.getSkillTemplate().getSubType() == SkillSubType.DEBUFF)
-			accuracyModifier += effect.getEffector().getGameStats().getStat(StatEnum.BOOST_RESIST_DEBUFF, 0).getCurrent();
-		if (element == SkillElement.NONE)
-			return !StatFunctions.checkIsDodgedHit(effect.getEffector(), effect.getEffected(), accuracyModifier);
-		return Rnd.get(1, 1000) > StatFunctions.calculateMagicalResistRate(effect.getEffector(), effect.getEffected(), accuracyModifier, element);
+			accuracyModifier += effector.getGameStats().getStat(StatEnum.BOOST_RESIST_DEBUFF, 0).getCurrent();
+		OneTimeBoostSkillAttack boost = OneTimeBoostSkillAttackEffect.getActiveBoost(effector, this);
+		if (element == SkillElement.NONE) {
+			if (boost != null)
+				accuracyModifier += boost.calculatePhysicalAccuracyBonus(effector.getGameStats().getMainHandPAccuracy());
+			return !StatFunctions.checkIsDodgedHit(effector, effect.getEffected(), accuracyModifier);
+		}
+		return Rnd.get(1, 1000) > StatFunctions.calculateMagicalResistRate(effector, effect.getEffected(), accuracyModifier, element, boost);
 	}
 
 	private void addSuccessEffect(Effect effect, SpellStatus spellStatus) {
@@ -416,19 +422,15 @@ public abstract class EffectTemplate {
 		}
 
 		// chance to trigger subeffect
-		if (Rnd.chance() >= subEffect.getChance())
+		if (Rnd.chance() >= subEffect.getChance(effect.getSkillLevel()))
 			return;
 
 		SkillTemplate template = DataManager.SKILL_DATA.getSkillTemplate(subEffect.getSkillId());
 		int level = 1;
-		int accBoost = effect.getAccModBoost();
-		if (subEffect.isAddEffect()) { // Only used by signet bursts
-			level = effect.getSignetBurstedCount();
-			accBoost = Short.MAX_VALUE; // sub effects cannot be resisted by magic resist in case of signet bursts
-		}
+		if (subEffect.isAddEffect()) // Only used by signet bursts
+			level = effect.getSignetBurstedCount() + 1; // sub effect level is its base level (always 1) + the bursted signet level
 		Effect newEffect = new Effect(effect.getEffector(), effect.getOriginalEffected(), template, level, null, effect.getForceType(), true, null);
 		newEffect.setShieldDefense(effect.getShieldDefense());
-		newEffect.setAccModBoost(accBoost);
 		newEffect.initialize();
 		if (newEffect.getSpellStatus() != SpellStatus.DODGE && newEffect.getSpellStatus() != SpellStatus.RESIST)
 			effect.setSpellStatus(newEffect.getSpellStatus());
@@ -571,7 +573,7 @@ public abstract class EffectTemplate {
 		try {
 			toReturn = StatEnum.valueOf(statEnum.toString() + "_PENETRATION");
 		} catch (Exception e) {
-			LoggerFactory.getLogger(EffectTemplate.class).warn("Missing statenum penetration for " + statEnum.toString());
+			LoggerFactory.getLogger(EffectTemplate.class).warn("Missing statenum penetration for {}", statEnum.toString());
 		}
 		return toReturn;
 	}

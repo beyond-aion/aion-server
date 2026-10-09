@@ -335,7 +335,8 @@
 	</xs:complexType>
 	<xs:complexType name="SubEffect">
 		<xs:attribute name="skill_id" type="skillId" use="required" />
-		<xs:attribute name="chance" type="xs:int" />
+		<xs:attribute name="chance" type="xs:int" default="100" />
+		<xs:attribute name="chance_delta" type="xs:int" default="0" />
 		<xs:attribute name="addeffect" type="xs:boolean" />
 	</xs:complexType>
 	<!-- ACTIONS -->
@@ -763,6 +764,7 @@
 		<xs:complexContent>
 			<xs:extension base="DamageEffect">
 				<xs:attribute name="prob" type="xs:int" />
+				<xs:attribute name="prob_delta" type="xs:int" default="0" />
 				<xs:attribute name="signet_increment" type="xs:int" default="1" />
 				<xs:attribute name="signet_cap" type="xs:int" use="required" />
 				<xs:attribute name="signet_id" type="xs:int" use="required" />
@@ -782,6 +784,7 @@
 				<xs:attribute name="signetlvl" type="xs:int" use="required" />
 				<xs:attribute name="absorb" type="xs:int" />
 				<xs:attribute name="add_effect_prob_multi" type="xs:int"/>
+				<xs:attribute name="add_effect_prob_multi_delta" type="xs:float" default="0"/>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
@@ -1048,6 +1051,13 @@
 		<xs:complexContent>
 			<xs:extension base="Effect">
 				<xs:attribute name="count" type="xs:int" />
+				<xs:attribute name="count_delta" type="xs:int" />
+				<xs:attribute name="dmg_flat" type="xs:int" />
+				<xs:attribute name="dmg_flat_delta" type="xs:int" />
+				<xs:attribute name="acc_flat" type="xs:int" />
+				<xs:attribute name="acc_flat_delta" type="xs:int" />
+				<xs:attribute name="acc_percent" type="xs:int" />
+				<xs:attribute name="acc_percent_delta" type="xs:int" />
 				<xs:attribute name="type" type="skillType" />
 			</xs:extension>
 		</xs:complexContent>

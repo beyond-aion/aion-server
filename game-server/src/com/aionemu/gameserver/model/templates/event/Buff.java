@@ -4,12 +4,12 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 
-import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.*;
-
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.world.WorldMapInstance;
+
+import jakarta.xml.bind.Unmarshaller;
+import jakarta.xml.bind.annotation.*;
 
 /**
  * @author Neon
@@ -33,7 +33,7 @@ public class Buff {
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		if (pool > skillIds.size())
-			LoggerFactory.getLogger(Buff.class).warn("Pool size for event buffs must be smaller than skill id size (skill ids: " + skillIds + ").");
+			LoggerFactory.getLogger(Buff.class).warn("Pool size for event buffs must be smaller than skill id size (skill ids: {}).", skillIds);
 	}
 
 	public Set<Integer> getSkillIds() {

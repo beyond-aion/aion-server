@@ -68,7 +68,7 @@ public class CM_DIALOG_SELECT extends AionClientPacket {
 		}
 		if (dialogActionName == null) {
 			LoggerFactory.getLogger(CM_DIALOG_SELECT.class)
-				.warn("Received unknown dialog action id " + dialogActionId + " (quest " + questId + ") from " + player);
+				.warn("Received unknown dialog action id {} (quest {}) from {}", dialogActionId, questId, player);
 			return;
 		}
 

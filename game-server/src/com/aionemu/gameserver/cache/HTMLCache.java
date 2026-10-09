@@ -56,26 +56,18 @@ public final class HTMLCache {
 		final File cacheFile = getCacheFile();
 
 		if (deleteCacheFile && cacheFile.exists()) {
-			log.info("Cache[HTML]: Deleting cache file... OK.");
-
 			cacheFile.delete();
 		}
 
-		log.info("Cache[HTML]: Caching started... OK.");
-
 		if (cacheFile.exists()) {
-			log.info("Cache[HTML]: Using cache file... OK.");
-
 			try (ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(getCacheFile())))) {
 				cache = (Map<String, String>) ois.readObject();
-
 				for (String html : cache.values()) {
 					loadedFiles++;
 					size += html.length();
 				}
 			} catch (Exception e) {
-				log.warn("", e);
-
+				log.warn("Could not load HTML cache file", e);
 				reload(true);
 				return;
 			}
@@ -85,10 +77,8 @@ public final class HTMLCache {
 
 		log.info(String.valueOf(this));
 
-		if (cacheFile.exists()) {
-			log.info("Cache[HTML]: Compaction skipped!");
-		} else {
-			log.info("Cache[HTML]: Compacting htmls... OK.");
+		if (!cacheFile.exists()) {
+			log.info("Cache[HTML]: Compacting HTMLs...");
 
 			final StringBuilder sb = new StringBuilder(8192);
 
@@ -102,20 +92,17 @@ public final class HTMLCache {
 
 					entry.setValue(newHtml);
 				} catch (RuntimeException e) {
-					log.warn("Cache[HTML]: Error during compaction of " + entry.getKey(), e);
+					log.warn("Cache[HTML]: Error during compaction of {}", entry.getKey(), e);
 				}
 			}
 
 			log.info(String.valueOf(this));
-		}
-
-		if (!cacheFile.exists()) {
-			log.info("Cache[HTML]: Creating cache file... OK.");
 
 			try (ObjectOutputStream oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(getCacheFile())))) {
 				oos.writeObject(cache);
+				log.info("Created HTML cache file...");
 			} catch (IOException e) {
-				log.warn("", e);
+				log.warn("Could not create HTML cache file", e);
 			}
 		}
 	}
@@ -186,12 +173,6 @@ public final class HTMLCache {
 	private void replaceAll(StringBuilder sb, String pattern, String value) {
 		for (int index = 0; (index = sb.indexOf(pattern, index)) != -1;)
 			sb.replace(index, index + pattern.length(), value);
-	}
-
-	public void reloadPath(File f) {
-		parseDir(f);
-
-		log.info("Cache[HTML]: Reloaded specified path.");
 	}
 
 	public void parseDir(File dir) {

@@ -38,7 +38,7 @@ public class CM_SHOW_MAP extends AionClientPacket {
 				// TODO unk
 				break;
 			default:
-				log.warn(player + " sent unknown show map action type: " + action);
+				log.warn("{} sent unknown show map action type: {}", player, action);
 		}
 	}
 }

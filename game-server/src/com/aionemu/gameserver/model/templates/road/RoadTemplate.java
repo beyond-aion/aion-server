@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.model.templates.road;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 
 /**
  * @author SheppeR

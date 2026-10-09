@@ -2,16 +2,14 @@ package com.aionemu.commons.network;
 
 import java.net.InetSocketAddress;
 
+import com.aionemu.commons.utils.NetworkUtils;
+
 /**
  * This class represents ServerCfg for configuring NioServer
  * 
  * @author -Nemesiss-, Neon
  */
 public record ServerCfg(InetSocketAddress address, String clientDescription, ConnectionFactory connectionFactory) {
-
-	public boolean isAnyLocalAddress() {
-		return address.getAddress().isAnyLocalAddress();
-	}
 
 	public String getIP() {
 		return address.getAddress().getHostAddress();
@@ -22,6 +20,6 @@ public record ServerCfg(InetSocketAddress address, String clientDescription, Con
 	}
 
 	public String getAddressInfo() {
-		return (isAnyLocalAddress() ? "all addresses on port " : getIP() + ":") + getPort();
+		return NetworkUtils.getAddressInfo(address);
 	}
 }

@@ -59,7 +59,7 @@ public class TownDAO {
 			stmt.executeUpdate();
 			town.setPersistentState(PersistentState.UPDATED);
 		} catch (SQLException e) {
-			log.error("Could not insert town " + town.getId(), e);
+			log.error("Could not insert town {}", town.getId(), e);
 		}
 	}
 
@@ -72,7 +72,7 @@ public class TownDAO {
 			stmt.executeUpdate();
 			town.setPersistentState(PersistentState.UPDATED);
 		} catch (SQLException e) {
-			log.error("Could not update town " + town.getId(), e);
+			log.error("Could not update town {}", town.getId(), e);
 		}
 	}
 

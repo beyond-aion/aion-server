@@ -43,7 +43,7 @@ public class AionConnection extends AConnection<AionServerPacket> {
 
 	private static final PacketProcessor<AionConnection> packetProcessor = new PacketProcessor<>(NetworkConfig.PACKET_PROCESSOR_MIN_THREADS,
 		NetworkConfig.PACKET_PROCESSOR_MAX_THREADS, NetworkConfig.PACKET_PROCESSOR_THREAD_SPAWN_THRESHOLD,
-		NetworkConfig.PACKET_PROCESSOR_THREAD_KILL_THRESHOLD, new ExecuteWrapper(ThreadConfig.MAXIMUM_RUNTIME_IN_MILLISEC_WITHOUT_WARNING));
+		NetworkConfig.PACKET_PROCESSOR_THREAD_KILL_THRESHOLD, NetworkConfig.PACKET_PROCESSOR_MAX_PENDING_PACKETS_PER_CONNECTION, new ExecuteWrapper(ThreadConfig.MAXIMUM_RUNTIME_IN_MILLISEC_WITHOUT_WARNING));
 
 	/**
 	 * Possible states of AionConnection
@@ -109,7 +109,7 @@ public class AionConnection extends AConnection<AionServerPacket> {
 		state = State.CONNECTED;
 
 		String ip = getIP();
-		log.debug("connection from: " + ip);
+		log.debug("connection from: {}", ip);
 
 		lastClientMessageTime = System.currentTimeMillis();
 		connectionAliveChecker = new ConnectionAliveChecker();
@@ -151,15 +151,15 @@ public class AionConnection extends AConnection<AionServerPacket> {
 
 		if (!crypt.decrypt(data)) {
 			if (++corruptPackets >= MAX_CORRUPT_PACKETS_BEFORE_DISCONNECT) {
-				log.warn("Client packet decryption failed " + corruptPackets + " times, disconnecting " + this);
+				log.warn("Client packet decryption failed {} times, disconnecting {}", corruptPackets, this);
 				return false;
 			}
-			log.debug("[" + corruptPackets + "/" + MAX_CORRUPT_PACKETS_BEFORE_DISCONNECT + "] Decrypt fail, client packet passed...");
+			log.debug("[{}/{}] Decrypt fail, client packet passed...", corruptPackets, MAX_CORRUPT_PACKETS_BEFORE_DISCONNECT);
 			return true;
 		}
 
 		if (data.remaining() < 5) {// op + static code + op == 5 bytes
-			log.warn("Received fake packet from " + this + ", disconnecting");
+			log.warn("Received fake packet from {}, disconnecting", this);
 			return false;
 		}
 
@@ -175,8 +175,8 @@ public class AionConnection extends AConnection<AionServerPacket> {
 					if (last != null) {
 						long diff = lastClientMessageTime - last;
 						if (diff < msBetweenPackets) {
-							log.warn(this + " is flooding " + pck.getClass().getSimpleName() + " (last diff: " + diff + "ms)");
-							if (PffConfig.PFF_MODE == 1) // disconnect
+							log.warn("{} is flooding {} (last diff: {} ms)", this, pck.getClass().getSimpleName(), diff);
+							if (PffConfig.PFF_MODE == 2) // disconnect
 								return false;
 						}
 					}
@@ -185,7 +185,10 @@ public class AionConnection extends AConnection<AionServerPacket> {
 
 			if (pck.read()) {
 				sendPacketInfo(pck);
-				packetProcessor.executePacket(pck);
+				if (!packetProcessor.executePacket(pck)) {
+					log.warn("{} has more than {} packets waiting for execution, disconnecting", this, NetworkConfig.PACKET_PROCESSOR_MAX_PENDING_PACKETS_PER_CONNECTION);
+					return false;
+				}
 			}
 		}
 
@@ -213,7 +216,8 @@ public class AionConnection extends AConnection<AionServerPacket> {
 				RunnableStatsManager.handleStats(packet.getClass(), "runImpl()", duration);
 			}
 			if (data.limit() > AionServerPacket.MAX_CLIENT_SUPPORTED_PACKET_SIZE)
-				log.warn(packet + " contains " + (data.limit() - AionServerPacket.MAX_CLIENT_SUPPORTED_PACKET_SIZE) + " more bytes than the game client of " + getActivePlayer() + " can read");
+				log.warn("{} contains {} more bytes than the game client of {} can read", packet,
+					data.limit() - AionServerPacket.MAX_CLIENT_SUPPORTED_PACKET_SIZE, getActivePlayer());
 			return true;
 		}
 	}
@@ -248,7 +252,27 @@ public class AionConnection extends AConnection<AionServerPacket> {
 		if (msg.isEmpty())
 			msg = " " + this;
 
-		log.info("Client disconnected:" + msg);
+		log.info("Client disconnected:{}", msg);
+	}
+
+	@Override
+	protected boolean isAuthenticated() {
+		return state != State.CONNECTED;
+	}
+
+	@Override
+	protected long getAuthTimeoutMillis() {
+		return NetworkConfig.CLIENT_AUTH_TIMEOUT_SECONDS * 1000L;
+	}
+
+	@Override
+	protected int getMaxSendQueueSize() {
+		return NetworkConfig.MAX_PENDING_SERVER_PACKETS;
+	}
+
+	@Override
+	protected long getMaxSendStallMillis() {
+		return NetworkConfig.MAX_SEND_STALL_SECONDS * 1000L;
 	}
 
 	@Override
@@ -390,7 +414,7 @@ public class AionConnection extends AConnection<AionServerPacket> {
 		public void run() {
 			long millisSinceLastClientPacket = System.currentTimeMillis() - lastClientMessageTime;
 			if (millisSinceLastClientPacket - 5000 > CM_PING.CLIENT_PING_INTERVAL) {
-				log.info("Closing hanged up connection of " + AionConnection.this + " (last sign of life was " + millisSinceLastClientPacket + "ms ago)");
+				log.info("Closing hanged up connection of {} (last sign of life was {} ms ago)", AionConnection.this, millisSinceLastClientPacket);
 				close();
 			}
 		}

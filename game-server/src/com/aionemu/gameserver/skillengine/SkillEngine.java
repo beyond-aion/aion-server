@@ -182,7 +182,7 @@ public class SkillEngine {
 	private SkillTemplate checkAndGetSkillTemplate(int skillId) {
 		SkillTemplate skillTemplate = DataManager.SKILL_DATA.getSkillTemplate(skillId);
 		if (skillTemplate == null) {
-			LoggerFactory.getLogger(SkillEngine.class).warn("Could not apply effect, invalid skill id " + skillId, new IllegalArgumentException());
+			LoggerFactory.getLogger(SkillEngine.class).warn("Could not apply effect, invalid skill id {}", skillId, new IllegalArgumentException());
 			return null;
 		}
 		return skillTemplate;

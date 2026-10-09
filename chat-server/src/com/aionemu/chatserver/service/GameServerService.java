@@ -1,5 +1,8 @@
 package com.aionemu.chatserver.service;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,10 +24,14 @@ public class GameServerService {
 		return instance;
 	}
 
-	public GsAuthResponse registerGameServer(byte gameServerId, String password) {
+	public GsAuthResponse registerGameServer(byte gameServerId, String password, boolean fromLoopback) {
 		if (isOnline)
 			return GsAuthResponse.ALREADY_REGISTERED;
-		if (!password.equals(NetworkConfig.GAMESERVER_PASSWORD))
+		if (NetworkConfig.GAMESERVER_PASSWORD.isEmpty() && !fromLoopback) {
+			log.warn("Rejected game server #{} from a remote address: chatserver.network.gameserver.password is not set", gameServerId);
+			return GsAuthResponse.NOT_AUTHED;
+		}
+		if (!MessageDigest.isEqual(password.getBytes(StandardCharsets.UTF_8), NetworkConfig.GAMESERVER_PASSWORD.getBytes(StandardCharsets.UTF_8)))
 			return GsAuthResponse.NOT_AUTHED;
 		isOnline = true;
 		GAMESERVER_ID = gameServerId;
@@ -32,7 +39,7 @@ public class GameServerService {
 	}
 
 	public void setOffline() {
-		log.info("Gameserver #{} is disconnected", GAMESERVER_ID);
+		log.info("Game server #{} disconnected", GAMESERVER_ID);
 		isOnline = false;
 	}
 }

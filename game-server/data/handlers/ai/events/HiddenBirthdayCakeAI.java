@@ -40,7 +40,7 @@ public class HiddenBirthdayCakeAI extends ChestAI {
 		int deviation = cakes - lastCakeCount;
 		long currentTime = System.currentTimeMillis();
 		if (currentTime - lastLogTime >= 3600 * 1000) { // Only log once every hour
-			log.info("[EVENT] Total cakes collected: {}; Cakes collected during the last hour: {}.", cakes, deviation);
+			log.info("[EVENT] Total cakes collected: {}; Cakes collected during the last hour: {}", cakes, deviation);
 			lastCakeCount = cakes;
 			lastLogTime = currentTime;
 		}

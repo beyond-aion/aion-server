@@ -280,7 +280,7 @@ public class DialogService {
 	}
 
 	private static void handleQuestDialogueOrSendNextPage(int dialogActionId, Player player, Npc npc, int questId, int extendedRewardIndex) {
-		if (questId != 0 || dialogActionId == USE_OBJECT || dialogActionId == EXCHANGE_COIN) {
+		if (questId != 0 || dialogActionId == USE_OBJECT || dialogActionId == EXCHANGE_COIN || dialogActionId >= SETPRO1) {
 			QuestEnv env = new QuestEnv(npc, player, questId, dialogActionId);
 			env.setExtendedRewardIndex(extendedRewardIndex);
 			if (QuestEngine.getInstance().onDialog(env))
@@ -327,7 +327,7 @@ public class DialogService {
 					break;
 				}
 				if (fortZone == null) {
-					log.warn("Could not find FORT zone for npc: " + npc.getNpcId());
+					log.warn("Could not find FORT zone for npc: {}", npc.getNpcId());
 					return true;
 				}
 				List<Integer> siegeIds = fortZone.getSiegeId();
@@ -371,7 +371,7 @@ public class DialogService {
 			case LEVEL_HIGH:
 				return player.getLevel() < talkInfo.getSubDialogValue();
 			default:
-				log.warn("Unhandled subdialog type " + talkInfo.getSubDialogType() + " for npc: " + npc.getNpcId());
+				log.warn("Unhandled subdialog type {} for npc: {}", talkInfo.getSubDialogType(), npc.getNpcId());
 				return true;
 		}
 	}

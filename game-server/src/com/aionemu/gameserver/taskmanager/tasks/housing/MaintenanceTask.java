@@ -38,7 +38,7 @@ public class MaintenanceTask extends AbstractCronTask {
 	@Override
 	protected void executeTask() {
 		List<House> housesToMaintain = findHousesToMaintain();
-		log.info("Executing house maintenance for " + housesToMaintain.size() + " houses");
+		log.info("Executing house maintenance for {} houses", housesToMaintain.size());
 
 		Date now = new Date();
 		for (House house : housesToMaintain) {
@@ -87,7 +87,7 @@ public class MaintenanceTask extends AbstractCronTask {
 	private void putHouseToAuction(House house, PlayerCommonData owner) {
 		HousingService.getInstance().changeOwner(house, 0);
 		HousingBidService.getInstance().auction(house, house.getDefaultAuctionPrice());
-		log.info("Auctioned house " + house.getAddress().getId() + " because " + (owner == null ? "owner got deleted." : "maintenance fee was overdue."));
+		log.info("Auctioned house {} because {}", house.getAddress().getId(), owner == null ? "owner got deleted." : "maintenance fee was overdue.");
 		if (owner != null && owner.isOnline())
 			PacketSendUtility.sendPacket(owner.getPlayer(), SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_SEQUESTRATE());
 	}

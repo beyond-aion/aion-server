@@ -1,23 +1,26 @@
 package com.aionemu.chatserver.network.aion;
 
-import org.jboss.netty.buffer.ChannelBuffer;
+import java.nio.ByteBuffer;
 
-import com.aionemu.chatserver.common.netty.BaseServerPacket;
-import com.aionemu.chatserver.network.netty.handler.ClientChannelHandler;
+import com.aionemu.commons.network.packet.BaseServerPacket;
 
 /**
  * @author ATracer
  */
 public abstract class AbstractServerPacket extends BaseServerPacket {
 
-	public AbstractServerPacket(byte opCode) {
+	public AbstractServerPacket(int opCode) {
 		super(opCode);
 	}
 
-	public void write(ClientChannelHandler clientChannelHandler, ChannelBuffer buf) {
-		buf.writeShort((short) 0);
-		writeImpl(clientChannelHandler, buf);
+	public final void write(AionConnection connection, ByteBuffer buffer) {
+		setBuf(buffer);
+		buf.putShort((short) 0);
+		writeImpl(connection);
+		buf.flip();
+		buf.putShort((short) buf.limit());
+		buf.position(0);
 	}
 
-	protected abstract void writeImpl(ClientChannelHandler cHandler, ChannelBuffer buf);
+	protected abstract void writeImpl(AionConnection connection);
 }
