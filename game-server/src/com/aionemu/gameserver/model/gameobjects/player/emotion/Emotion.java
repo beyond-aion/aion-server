@@ -6,8 +6,8 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 /**
  * @author MrPoke
  */
-
 public class Emotion implements Expirable {
+
 	private final int id;
 	private final int expireTime;
 
