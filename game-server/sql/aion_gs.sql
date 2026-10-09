@@ -805,6 +805,7 @@ DROP TABLE IF EXISTS `player_recipes`;
 CREATE TABLE `player_recipes` (
   `player_id` int NOT NULL,
   `recipe_id` int NOT NULL,
+  `production_count` tinyint NOT NULL DEFAULT '0',
   PRIMARY KEY (`player_id`,`recipe_id`),
   CONSTRAINT `player_recipes_ibfk_1` FOREIGN KEY (`player_id`) REFERENCES `players` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

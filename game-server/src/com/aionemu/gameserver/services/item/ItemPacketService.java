@@ -43,6 +43,7 @@ public class ItemPacketService {
 		INC_KINAH_SELL(0x20, true),
 		INC_PLAYER_EXCHANGE_GET_BACK(0x23, true),
 		PUT_TO_EXCHANGE(0x25, true),
+		INC_ITEM_CRAFT(0x2D, true),
 		INC_KINAH_QUEST(0x32, true),
 		DEC_KINAH_LEARN(0x49, true), // craft skill learn
 		DEC_KINAH_FLY(0x4B, true), // teleport or fly
