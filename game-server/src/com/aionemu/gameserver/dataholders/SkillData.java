@@ -132,7 +132,7 @@ public class SkillData {
 		Set<String> motionNames = new HashSet<>();
 		for (SkillTemplate t : getSkillTemplates()) {
 			Motion m = t.getMotion();
-			if (m == null || m.getName() == null)
+			if (m == null || m.getName() == null || m.isInstantSkill())
 				continue;
 			if (motionNames.add(m.getName())) {
 				MotionTime mt = DataManager.MOTION_DATA.getMotionTime(m.getName());

@@ -9,6 +9,7 @@ import jakarta.xml.bind.Unmarshaller;
 import jakarta.xml.bind.annotation.*;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.skillengine.model.*;
 
 /**
@@ -47,13 +48,19 @@ public class MotionData {
 	}
 
 	public float calculateAnimationTimeUntilFirstHit(Player player, Skill skill) {
+		return calculateAnimationTimeUntilFirstHit((Creature) player, skill);
+	}
+
+	public float calculateAnimationTimeUntilFirstHit(Creature creature, Skill skill) {
 		MotionTime motionTime = getMotionTime(skill);
 		if (motionTime == null)
 			return 0f;
-		Times times = motionTime.getTimesFor(player, 1);
-		if (times == null)
+		Times times = motionTime.getTimesFor(creature, 1);
+		if (times == null || !times.hasHitpoints() || times.isCastAnimation())
 			return 0f;
 		int motionSpeed = skill.getSkillTemplate().getMotion().getSpeed() * 10;
+		if (!(creature instanceof Player player))
+			return times.getMinTime() * motionSpeed * creature.getGameStats().getAttackSpeedRate();
 		float attackRate = player.getGameStats().getAttackSpeedRate();
 		float motionSpeedRate = player.isHitTimeBoosted() ? Math.min(attackRate, calculateCastSpeedRate(player.getHitTimeBoostCastSpeed())) : attackRate;
 		return (player.isInRobotMode() ? times.getAnimationLength() : times.getMinTime()) * motionSpeed * motionSpeedRate;
@@ -65,7 +72,7 @@ public class MotionData {
 			return null;
 		int motionId = skill instanceof ChargeSkill chargeSkill ? chargeSkill.getMotionId() : Math.max(1, skill.getMultiCastCount());
 		Times times = motionTime.getTimesFor(player, motionId);
-		if (times == null)
+		if (times == null || times.isCastAnimation())
 			return null;
 		int motionSpeed = skill.getSkillTemplate().getMotion().getSpeed() * 10;
 		float attackRate = player.getGameStats().getAttackSpeedRate();

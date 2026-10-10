@@ -438,8 +438,19 @@ public class Skill {
 
 	protected void updateHitTime(boolean checkAnimation) {
 		hitTime = clientHitTime;
-		if (!checkAnimation || !(effector instanceof Player player) || skillMethod != SkillMethod.CAST && skillMethod != SkillMethod.ITEM)
+		if (!checkAnimation || skillMethod != SkillMethod.CAST && skillMethod != SkillMethod.ITEM)
 			return;
+		if (!(effector instanceof Player player)) {
+			MotionTime motionTime = DataManager.MOTION_DATA.getMotionTime(this);
+			Times times = motionTime == null ? null : motionTime.getTimesFor(effector, 1);
+			if (times == null || !times.hasHitpoints() || times.isCastAnimation() || skillTemplate.getMotion().isInstantSkill())
+				return;
+			float animationTime = DataManager.MOTION_DATA.calculateAnimationTimeUntilFirstHit(effector, this);
+			if (skillTemplate.getAmmoSpeed() > 0 && firstTarget != null)
+				animationTime += (float) (PositionUtil.getDistance(effector, firstTarget) / skillTemplate.getAmmoSpeed() * 1000);
+			hitTime = Math.max(clientHitTime, skillTemplate.getMotion().getDelay() + Math.round(animationTime));
+			return;
+		}
 
 		float animationTimeUntilFirstHit = DataManager.MOTION_DATA.calculateAnimationTimeUntilFirstHit(player, this);
 		int toleranceMillis = 1;
