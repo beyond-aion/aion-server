@@ -180,9 +180,9 @@ public class SpawnEngine {
 		}
 		if (spawnedCounter > 0) {
 			if (eventTemplate == null)
-				log.info("Spawned " + spawnedCounter + " objects in " + instance);
+				log.info("Spawned {} objects in {}", spawnedCounter, instance);
 			else
-				log.info('[' + eventTemplate.getName() + "] Spawned " + spawnedCounter + " event objects in " + instance);
+				log.info("[{}] Spawned {} event objects in {}", eventTemplate.getName(), spawnedCounter, instance);
 		}
 		if (eventTemplate == null)
 			HousingService.getInstance().spawnHouses(instance, ownerId);
@@ -190,7 +190,7 @@ public class SpawnEngine {
 
 	public static boolean checkPool(SpawnGroup spawn) {
 		if (spawn.getPool() >= spawn.getSpawnTemplates().size()) {
-			log.warn("Spawn pool size must be smaller than spots to take effect, npcId: " + spawn.getNpcId() + ", worldId: " + spawn.getWorldId());
+			log.warn("Spawn pool size must be smaller than spots to take effect, npcId: {}, worldId: {}", spawn.getNpcId(), spawn.getWorldId());
 			return false;
 		}
 		return true;
@@ -199,8 +199,8 @@ public class SpawnEngine {
 	public static void printWorldSpawnStats() {
 		StatsCollector function = new StatsCollector();
 		World.getInstance().forEachObject(function);
-		log.info("Loaded " + function.getNpcCount() + " npc spawns");
-		log.info("Loaded " + function.getGatherableCount() + " gatherable spawns");
+		log.info("Loaded {} npc spawns", function.getNpcCount());
+		log.info("Loaded {} gatherable spawns", function.getGatherableCount());
 	}
 
 	static class StatsCollector implements Consumer<VisibleObject> {

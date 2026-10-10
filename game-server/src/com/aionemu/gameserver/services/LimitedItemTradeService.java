@@ -31,7 +31,7 @@ public class LimitedItemTradeService {
 			for (TradeTab list : npc.getTradeTablist()) {
 				GoodsList goodsList = DataManager.GOODSLIST_DATA.getGoodsListById(list.getId());
 				if (goodsList == null) {
-					log.warn("No goodslist for tradelist of npc " + npcId);
+					log.warn("No goodslist for tradelist of npc {}", npcId);
 					continue;
 				}
 				List<LimitedItem> limitedItems = goodsList.getLimitedItems();
@@ -46,7 +46,7 @@ public class LimitedItemTradeService {
 				CronService.getInstance().schedule(limitedItem::setToDefault, limitedItem.getSalesTime());
 			}
 		}
-		log.info("Scheduled Limited Items based on cron expression size: " + limitedTradeNpcs.size());
+		log.info("Scheduled Limited Items based on cron expression size: {}", limitedTradeNpcs.size());
 	}
 
 	public LimitedItem getLimitedItem(int itemId, int npcId) {

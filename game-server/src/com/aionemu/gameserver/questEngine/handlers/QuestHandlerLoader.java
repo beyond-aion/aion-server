@@ -25,7 +25,7 @@ public class QuestHandlerLoader implements ClassListener {
 			if (c == null)
 				continue;
 			if (logger.isDebugEnabled())
-				logger.debug("Load class " + c.getName());
+				logger.debug("Load class {}", c.getName());
 
 			if (!isValidClass(c))
 				continue;
@@ -46,7 +46,7 @@ public class QuestHandlerLoader implements ClassListener {
 		if (logger.isDebugEnabled())
 			for (Class<?> c : classes)
 				// debug messages
-				logger.debug("Unload class " + c.getName());
+				logger.debug("Unload class {}", c.getName());
 
 		QuestEngine.getInstance().clear();
 	}

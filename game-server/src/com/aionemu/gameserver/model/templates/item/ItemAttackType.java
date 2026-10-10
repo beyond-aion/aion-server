@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.model.templates.item;
 
-import javax.xml.bind.annotation.XmlEnum;
+import jakarta.xml.bind.annotation.XmlEnum;
 
 import com.aionemu.gameserver.model.SkillElement;
 

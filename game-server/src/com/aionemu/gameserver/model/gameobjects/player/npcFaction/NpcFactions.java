@@ -20,11 +20,7 @@ import com.aionemu.gameserver.model.templates.QuestTemplate;
 import com.aionemu.gameserver.model.templates.factions.FactionCategory;
 import com.aionemu.gameserver.model.templates.factions.NpcFactionTemplate;
 import com.aionemu.gameserver.model.templates.quest.QuestMentorType;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_QUESTION_WINDOW;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_TITLE_INFO;
+import com.aionemu.gameserver.network.aion.serverpackets.*;
 import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.time.ServerTime;
@@ -109,7 +105,7 @@ public class NpcFactions {
 		int targetObjectId = npc.getObjectId();
 		NpcFactionTemplate npcFactionTemplate = DataManager.NPC_FACTIONS_DATA.getNpcFactionByNpcId(npc.getNpcId());
 		if (npcFactionTemplate == null) {
-			LoggerFactory.getLogger(NpcFactions.class).warn("Missing faction for faction registrar npc " + npc.getNpcId());
+			LoggerFactory.getLogger(NpcFactions.class).warn("Missing faction for faction registrar npc {}", npc.getNpcId());
 			return;
 		}
 		NpcFaction npcFaction = getFactionById(npcFactionTemplate.getId());

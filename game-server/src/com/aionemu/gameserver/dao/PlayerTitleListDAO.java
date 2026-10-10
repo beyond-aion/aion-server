@@ -55,7 +55,7 @@ public class PlayerTitleListDAO {
 			stmt.setInt(3, entry.getExpireTime());
 			stmt.execute();
 		} catch (Exception e) {
-			log.error("Could not store emotionId for player " + player.getObjectId() + " from DB: " + e.getMessage(), e);
+			log.error("Could not store emotionId for player {} from DB: {}", player.getObjectId(), e.getMessage(), e);
 			return false;
 		}
 		return true;
@@ -67,7 +67,7 @@ public class PlayerTitleListDAO {
 			stmt.setInt(2, titleId);
 			stmt.execute();
 		} catch (Exception e) {
-			log.error("Could not delete title for player " + playerId + " from DB: " + e.getMessage(), e);
+			log.error("Could not delete title for player {} from DB: {}", playerId, e.getMessage(), e);
 			return false;
 		}
 		return true;

@@ -209,7 +209,7 @@ public class TeleportService {
 		PacketSendUtility.sendPacket(player, new SM_CHANNEL_INFO(player.getPosition()));
 		PacketSendUtility.sendPacket(player, new SM_PLAYER_INFO(player));
 		PacketSendUtility.sendPacket(player, new SM_STATS_INFO(player));
-		PacketSendUtility.sendPacket(player, new SM_MOTION(player.getObjectId(), player.getMotions().getActiveMotions()));
+		PacketSendUtility.sendPacket(player, SM_MOTION.playerMotions(player));
 		World.getInstance().spawn(player);
 		World.getInstance().spawn(player.getPet());
 		player.getController().startProtectionActiveTask();
@@ -305,7 +305,7 @@ public class TeleportService {
 		SpawnSearchResult searchResult = DataManager.SPAWNS_DATA.getFirstSpawnByNpcId(player.getWorldId(), npcId);
 
 		if (searchResult == null) {
-			log.warn("No npc spawn found for : " + npcId);
+			log.warn("No npc spawn found for : {}", npcId);
 			return;
 		}
 
@@ -397,7 +397,7 @@ public class TeleportService {
 			teleportTo(player, instanceExit.getExitWorld(), instanceExit.getX(), instanceExit.getY(), instanceExit.getZ(), instanceExit.getH());
 		} else {
 			if (instanceExit == null)
-				log.warn("No instance exit found for race: " + race + " " + worldId);
+				log.warn("No instance exit found for race: {} {}", race, worldId);
 			moveToBindLocation(player);
 		}
 	}
@@ -405,19 +405,19 @@ public class TeleportService {
 	public static void useTeleportScroll(Player player, String portalName, int worldId) {
 		PortalScroll template = DataManager.PORTAL2_DATA.getPortalScroll(portalName);
 		if (template == null) {
-			log.warn("No portal template found for: " + portalName + " " + worldId);
+			log.warn("No portal template found for: {} {}", portalName, worldId);
 			return;
 		}
 
 		Race playerRace = player.getRace();
 		PortalPath portalPath = template.getPortalPath();
 		if (portalPath == null) {
-			log.warn("No portal scroll for " + playerRace + " on: " + portalName + " " + worldId);
+			log.warn("No portal scroll for {} on: {} {}", playerRace, portalName, worldId);
 			return;
 		}
 		PortalLoc loc = DataManager.PORTAL_LOC_DATA.getPortalLoc(portalPath.getLocId());
 		if (loc == null) {
-			log.warn("No portal loc for locId " + portalPath.getLocId());
+			log.warn("No portal loc for locId {}", portalPath.getLocId());
 			return;
 		}
 		teleportTo(player, worldId, loc.getX(), loc.getY(), loc.getZ());
@@ -434,13 +434,13 @@ public class TeleportService {
 	public static void setEventPos(WorldPosition pos, Race race) {
 		if (race == Race.ELYOS) {
 			eventPosElyos = new double[] { pos.getMapId(), pos.getInstanceId(), pos.getX(), pos.getY(), pos.getZ(), pos.getHeading() };
-			log.info("elyos: mapId: " + pos.getMapId() + ", instanceId: " + (int) eventPosElyos[1] + ", X: " + eventPosElyos[2] + ", Y: " + eventPosElyos[3]
-				+ ", Z: " + eventPosElyos[4] + ", H: " + (byte) eventPosElyos[5]);
+			log.info("elyos: mapId: {}, instanceId: {}, X: {}, Y: {}, Z: {}, H: {}", pos.getMapId(), (int) eventPosElyos[1], eventPosElyos[2],
+				eventPosElyos[3], eventPosElyos[4], (byte) eventPosElyos[5]);
 		} else if (race == Race.ASMODIANS) {
 			eventPosAsmodians = new double[] { pos.getWorldMapInstance().getMapId(), pos.getInstanceId(), pos.getX(), pos.getY(), pos.getZ(),
 				pos.getHeading() };
-			log.info("asmo: mapId: " + pos.getMapId() + ", instanceId: " + (int) eventPosAsmodians[1] + ", X: " + eventPosAsmodians[2] + ", Y: "
-				+ eventPosAsmodians[3] + ", Z: " + eventPosAsmodians[4] + ", H: " + (byte) eventPosAsmodians[5]);
+			log.info("asmo: mapId: {}, instanceId: {}, X: {}, Y: {}, Z: {}, H: {}", pos.getMapId(), (int) eventPosAsmodians[1], eventPosAsmodians[2],
+				eventPosAsmodians[3], eventPosAsmodians[4], (byte) eventPosAsmodians[5]);
 		}
 	}
 

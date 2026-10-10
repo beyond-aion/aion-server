@@ -45,7 +45,7 @@ public class FriendListDAO {
 				}
 			}
 		} catch (Exception e) {
-			log.error("Could not restore FriendList data for player: " + player.getObjectId() + " from DB: " + e.getMessage(), e);
+			log.error("Could not restore FriendList data for player: {} from DB: {}", player.getObjectId(), e.getMessage(), e);
 		}
 
 		return new FriendList(player, friends);

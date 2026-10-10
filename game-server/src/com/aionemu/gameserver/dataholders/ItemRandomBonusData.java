@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.Unmarshaller;
+import jakarta.xml.bind.annotation.*;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.model.templates.item.bonuses.RandomBonusSet;

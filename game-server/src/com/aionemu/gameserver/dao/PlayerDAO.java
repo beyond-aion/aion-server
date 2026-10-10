@@ -39,7 +39,7 @@ public class PlayerDAO {
 			rs.next();
 			return rs.getInt("cnt") > 0;
 		} catch (SQLException e) {
-			log.error("Can't check if name " + name + " is used, returning positive result", e);
+			log.error("Can't check if name {} is used, returning positive result", name, e);
 			return true;
 		}
 	}
@@ -80,7 +80,7 @@ public class PlayerDAO {
 			stmt.setInt(27, player.getObjectId());
 			stmt.execute();
 		} catch (Exception e) {
-			log.error("Error saving " + player, e);
+			log.error("Error saving {}", player, e);
 		}
 	}
 
@@ -108,7 +108,7 @@ public class PlayerDAO {
 			stmt.setInt(17, player.getWhBonusExpands());
 			stmt.execute();
 		} catch (Exception e) {
-			log.error("Error saving new " + player, e);
+			log.error("Error saving new {}", player, e);
 			return false;
 		}
 		return true;
@@ -124,7 +124,7 @@ public class PlayerDAO {
 					playerObjId = rset.getInt("id");
 			}
 		} catch (Exception e) {
-			log.error("Could not restore playerId data for player name: " + name + " from DB: " + e.getMessage(), e);
+			log.error("Could not restore playerId data for player name: {} from DB: {}", name, e.getMessage(), e);
 		}
 
 		if (playerObjId == 0) {
@@ -172,7 +172,7 @@ public class PlayerDAO {
 				}
 			}
 		} catch (Exception e) {
-			log.error("Could not load PlayerCommonData data for player: " + playerObjId, e);
+			log.error("Could not load PlayerCommonData data for player: {}", playerObjId, e);
 		}
 		return null;
 	}
@@ -309,7 +309,7 @@ public class PlayerDAO {
 			if (rs.next())
 				return rs.getBoolean("online");
 		} catch (SQLException e) {
-			log.error("Can't get online state of player " + playerId, e);
+			log.error("Can't get online state of player {}", playerId, e);
 		}
 		return false;
 	}
@@ -407,7 +407,7 @@ public class PlayerDAO {
 			stmt.setInt(2, recipientCommonData.getPlayerObjId());
 			stmt.execute();
 		} catch (Exception e) {
-			log.error("Error saving playerName: " + recipientCommonData.getPlayerObjId() + " " + recipientCommonData.getName(), e);
+			log.error("Error saving playerName: {} {}", recipientCommonData.getPlayerObjId(), recipientCommonData.getName(), e);
 		}
 	}
 
@@ -485,7 +485,7 @@ public class PlayerDAO {
 					oldLevel = rs.getInt("old_level");
 			}
 		} catch (Exception e) {
-			log.error("Error reading old_level for player: " + playerObjectId, e);
+			log.error("Error reading old_level for player: {}", playerObjectId, e);
 		}
 		return oldLevel;
 	}
@@ -497,7 +497,7 @@ public class PlayerDAO {
 			stmt.setInt(2, playerObjectId);
 			stmt.execute();
 		} catch (Exception e) {
-			log.error("Error storing old_level: " + level + " for player: " + playerObjectId, e);
+			log.error("Error storing old_level: {} for player: {}", level, playerObjectId, e);
 		}
 	}
 

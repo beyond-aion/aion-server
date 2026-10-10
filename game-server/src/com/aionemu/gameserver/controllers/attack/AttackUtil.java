@@ -105,7 +105,7 @@ public class AttackUtil {
 
 		int maxListIndex = Math.min(attackResultList.size(), 2);
 		if (maxListIndex < attackResultList.size()) // should never happen but log just in case
-			LoggerFactory.getLogger(AttackUtil.class).warn("attackResultList has more elements than expected (" + attackResultList.size() + ")");
+			LoggerFactory.getLogger(AttackUtil.class).warn("attackResultList has more elements than expected ({})", attackResultList.size());
 		for (int i = 0; i < maxListIndex; i++) {
 			float damageMultiplier = i == 0 ? mainMultiplier : offMultiplier;
 			boolean isPhysical = element == SkillElement.NONE;

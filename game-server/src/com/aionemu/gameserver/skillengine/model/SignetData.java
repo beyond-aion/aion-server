@@ -1,9 +1,9 @@
 package com.aionemu.gameserver.skillengine.model;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlType;
 
 @XmlType(name = "signet_data")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -11,13 +11,19 @@ public class SignetData {
 
     @XmlAttribute(name = "lvl", required = true)
     private int level;
-    @XmlAttribute(name = "add_effect_prob", required = true)
+    @XmlAttribute(name = "carve_prob")
+    private int carveProb = 100;
+    @XmlAttribute(name = "add_effect_prob")
     private int addEffectProb = 1;
     @XmlAttribute(name = "dmg_multi", required = true)
     private float damageMultiplier;
 
     public int getLevel() {
         return level;
+    }
+
+    public int getCarveProb() {
+        return carveProb;
     }
 
     public int getAddEffectProb() {

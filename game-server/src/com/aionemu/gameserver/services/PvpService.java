@@ -200,10 +200,10 @@ public class PvpService {
 	private void logKill(Player winner, Player victim, List<Player> assistedGroup) {
 		if (LoggingConfig.LOG_KILL) {
 			if (assistedGroup.size() > 1 || assistedGroup.size() == 1 && !assistedGroup.contains(winner))
-				log.info("[KILL] " + winner + " killed " + victim + " assisted by "
-					+ assistedGroup.stream().filter(p -> !p.equals(winner)).map(String::valueOf).collect(Collectors.joining(",")));
+				log.info("[KILL] {} killed {} assisted by {}", winner, victim,
+					assistedGroup.stream().filter(p -> !p.equals(winner)).map(String::valueOf).collect(Collectors.joining(",")));
 			else
-				log.info("[KILL] " + winner + " killed " + victim);
+				log.info("[KILL] {} killed {}", winner, victim);
 		}
 
 		if (LoggingConfig.LOG_PL) {

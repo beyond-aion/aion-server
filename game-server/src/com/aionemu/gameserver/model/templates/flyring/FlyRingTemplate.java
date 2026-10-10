@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.model.templates.flyring;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 
 import com.aionemu.gameserver.model.geometry.Point3D;
 

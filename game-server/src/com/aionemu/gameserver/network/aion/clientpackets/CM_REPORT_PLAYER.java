@@ -51,7 +51,7 @@ public class CM_REPORT_PLAYER extends AionClientPacket {
 				sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_ACCUSE_COUNT_INFO("∞"));
 				break;
 			default:
-				LoggerFactory.getLogger(CM_REPORT_PLAYER.class).warn("Unhandled report type " + reportType + " (reported player: " + playerName + ")");
+				LoggerFactory.getLogger(CM_REPORT_PLAYER.class).warn("Unhandled report type {} (reported player: {})", reportType, playerName);
 		}
 	}
 

@@ -81,7 +81,7 @@ public class RiftManager {
 			}
 		}
 
-		log.info("Rift opened: " + rift.name() + ", spawned " + spawned + " Npcs (guards=" + isWithGuards + ").");
+		log.info("Rift opened: {}, spawned {} Npcs (guards={}).", rift.name(), spawned, isWithGuards);
 	}
 
 	private Npc spawnInstance(int instance, SpawnTemplate template, RVController controller) {

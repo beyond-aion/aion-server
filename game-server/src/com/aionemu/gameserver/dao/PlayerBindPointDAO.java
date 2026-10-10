@@ -39,7 +39,7 @@ public class PlayerBindPointDAO {
 				}
 			}
 		} catch (Exception e) {
-			log.error("Could not restore BindPointPosition data for playerObjId: " + player.getObjectId() + " from DB: " + e.getMessage(), e);
+			log.error("Could not restore BindPointPosition data for playerObjId: {} from DB: {}", player.getObjectId(), e.getMessage(), e);
 		}
 	}
 
@@ -54,7 +54,7 @@ public class PlayerBindPointDAO {
 			stmt.setByte(6, bpp.getHeading());
 			stmt.execute();
 		} catch (Exception e) {
-			log.error("Could not store BindPointPosition data for player " + player.getObjectId() + " from DB: " + e.getMessage(), e);
+			log.error("Could not store BindPointPosition data for player {} from DB: {}", player.getObjectId(), e.getMessage(), e);
 			return false;
 		}
 		return true;
@@ -71,7 +71,7 @@ public class PlayerBindPointDAO {
 			stmt.setFloat(6, player.getObjectId());
 			stmt.execute();
 		} catch (Exception e) {
-			log.error("Could not update BindPointPosition data for player " + player.getObjectId() + " from DB: " + e.getMessage(), e);
+			log.error("Could not update BindPointPosition data for player {} from DB: {}", player.getObjectId(), e.getMessage(), e);
 			return false;
 		}
 		return true;

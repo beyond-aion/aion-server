@@ -84,7 +84,7 @@ public class CM_WINDSTREAM extends AionClientPacket {
 					new SM_EMOTION(player, state == 7 ? EmotionType.WINDSTREAM_START_BOOST : EmotionType.WINDSTREAM_END_BOOST), true);
 				break;
 			default:
-				LoggerFactory.getLogger(CM_WINDSTREAM.class).warn("Unknown Windstream state #" + state + " was sent from " + player.getPosition());
+				LoggerFactory.getLogger(CM_WINDSTREAM.class).warn("Unknown Windstream state #{} was sent from {}", state, player.getPosition());
 				return;
 		}
 		PacketSendUtility.sendPacket(player, new SM_WINDSTREAM(state, 1));

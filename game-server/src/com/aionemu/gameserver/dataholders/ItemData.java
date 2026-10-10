@@ -2,12 +2,16 @@ package com.aionemu.gameserver.dataholders;
 
 import java.util.*;
 
-import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.Unmarshaller;
+import jakarta.xml.bind.annotation.*;
 
+import com.aionemu.gameserver.model.gameobjects.player.motion.MotionType;
 import com.aionemu.gameserver.model.items.ItemMask;
 import com.aionemu.gameserver.model.templates.item.ItemQuality;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
+import com.aionemu.gameserver.model.templates.item.actions.AbstractItemAction;
+import com.aionemu.gameserver.model.templates.item.actions.AnimationAddAction;
+import com.aionemu.gameserver.model.templates.item.actions.EmotionLearnAction;
 import com.aionemu.gameserver.model.templates.item.enums.ItemGroup;
 import com.aionemu.gameserver.model.templates.restriction.ItemCleanupTemplate;
 
@@ -27,6 +31,10 @@ public class ItemData {
 	private final Map<Integer, List<ItemTemplate>> manastones = new HashMap<>();
 	@XmlTransient
 	private final Map<Integer, List<ItemTemplate>> ancientManastones = new HashMap<>();
+	@XmlTransient
+	private final Map<Integer, MotionType> motionTypes = new HashMap<>();
+	@XmlTransient
+	private final Set<Integer> learnableEmotionIds = new HashSet<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		for (ItemTemplate it : its) {
@@ -37,6 +45,14 @@ public class ItemData {
 			} else if (it.getItemGroup() == ItemGroup.SPECIAL_MANASTONE) {
 				if (!it.getName().toLowerCase().contains("pvp"))
 					add(ancientManastones, it, it.getLevel());
+			}
+			if (it.getActions() != null) {
+				for (AbstractItemAction action : it.getActions().getItemActions()) {
+					if (action instanceof AnimationAddAction animation)
+						animation.getMotionIds().forEach((type, motionId) -> motionTypes.put(motionId, type));
+					else if (action instanceof EmotionLearnAction emotionLearn)
+						learnableEmotionIds.add(emotionLearn.getEmotionId());
+				}
 			}
 		}
 		its = null;
@@ -103,5 +119,30 @@ public class ItemData {
 
 	public List<ItemTemplate> getAncientManastones(int level) {
 		return ancientManastones.get(level);
+	}
+
+	/**
+	 * @return The slot of the custom animation, or null if no item teaches it.
+	 */
+	public MotionType getMotionType(int motionId) {
+		return motionTypes.get(motionId);
+	}
+
+	/**
+	 * Learnable IDs as of 4.8:<br>
+	 * 64 - 155<br>
+	 * <br>
+	 * Not learnable known valid IDs:<br>
+	 * 1 - 35 - default emotions<br>
+	 * >10000 - housing emotions (10006/10007 lay in left/right side of a bed, 10008 sitting on a chair, ...)
+	 * 
+	 * @return True if there exists a learn template for given emotion. False means it's either a default or an invalid emotion.
+	 */
+	public boolean isLearnableEmotion(int emotionId) {
+		return learnableEmotionIds.contains(emotionId);
+	}
+
+	public List<Integer> getLearnableEmotionIds() {
+		return learnableEmotionIds.stream().sorted().toList();
 	}
 }

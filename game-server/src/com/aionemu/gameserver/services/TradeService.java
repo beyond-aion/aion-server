@@ -69,7 +69,7 @@ public class TradeService {
 			case REWARD:
 				return performBuyTransaction(npc, player, tradeList, false); // trade without kinah
 			default:
-				log.warn("Unhandled TradeNpcType:" + npcType.name());
+				log.warn("Unhandled TradeNpcType:{}", npcType.name());
 		}
 		return false;
 	}

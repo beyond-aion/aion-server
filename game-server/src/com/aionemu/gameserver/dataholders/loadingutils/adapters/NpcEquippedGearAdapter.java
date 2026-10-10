@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.dataholders.loadingutils.adapters;
 
-import javax.xml.bind.annotation.adapters.XmlAdapter;
+import jakarta.xml.bind.annotation.adapters.XmlAdapter;
 
 import com.aionemu.gameserver.model.items.NpcEquippedGear;
 

@@ -73,7 +73,7 @@ enum AbyssSkills {
 				return aSkills.skills;
 			}
 		}
-		LoggerFactory.getLogger(AbyssSkills.class).warn("No abyss skills for: " + race + " " + rank);
+		LoggerFactory.getLogger(AbyssSkills.class).warn("No abyss skills for: {} {}", race, rank);
 		return new int[0];
 	}
 }

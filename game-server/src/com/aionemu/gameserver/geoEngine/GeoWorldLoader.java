@@ -74,11 +74,11 @@ public class GeoWorldLoader {
 						switch (image.getRaster().getDataBuffer()) {
 							case DataBufferUShort heightmap -> terrain.setHeightmap(heightmap.getData(), image.getWidth(), image.getHeight());
 							case DataBufferByte materials -> terrain.setMaterials(materials.getData(), image.getWidth(), image.getHeight());
-							default -> log.warn(path + " is not a supported terrain data format");
+							default -> log.warn("{} is not a supported terrain data format", path);
 						}
 					}
 				}
-				mapIds.forEach(mapId -> log.warn(mapId + " of " + path + " could not be associated with a map"));
+				mapIds.forEach(mapId -> log.warn("{} of {} could not be associated with a map", mapId, path));
 			});
 		} catch (IOException e) {
 			throw new RuntimeException(e);
@@ -87,13 +87,13 @@ public class GeoWorldLoader {
 			if (terrain.hasHeightmap())
 				map.setTerrain(terrain);
 			else
-				log.warn("Missing terrain heightmap for " + map.getMapId());
+				log.warn("Missing terrain heightmap for {}", map.getMapId());
 		});
 		long terrainMapCount = maps.stream().filter(GeoMap::hasTerrain).count();
 		if (terrainMapCount == 0)
 			log.warn("No terrains were loaded");
 		else
-			log.info("Loaded terrains for " + terrainMapCount + " maps");
+			log.info("Loaded terrains for {} maps", terrainMapCount);
 		if (maps.stream().noneMatch(GeoMap::hasTerrainMaterials))
 			log.warn("No terrain materials were loaded");
 	}
@@ -102,12 +102,12 @@ public class GeoWorldLoader {
 		Set<String> missingMeshes = ConcurrentHashMap.newKeySet();
 		maps.parallelStream().forEach(map -> loadWorld(map, models, missingMeshes));
 		if (!missingMeshes.isEmpty())
-			log.warn(missingMeshes.size() + " meshes are missing:\n" + missingMeshes.stream().sorted().collect(Collectors.joining("\n")));
+			log.warn("{} meshes are missing:\n{}", missingMeshes.size(), missingMeshes.stream().sorted().collect(Collectors.joining("\n")));
 		long loadedMaps = maps.stream().filter(m -> !m.getChildren().isEmpty()).count();
 		if (loadedMaps == 0) {
-			log.warn("No geo maps loaded.");
+			log.warn("No geo maps loaded");
 		} else {
-			log.info("Loaded " + maps.stream().mapToLong(GeoMap::getEntityCount).sum() + " entities on " + loadedMaps + " maps");
+			log.info("Loaded {} entities on {} maps", maps.stream().mapToLong(GeoMap::getEntityCount).sum(), loadedMaps);
 		}
 	}
 
@@ -172,7 +172,7 @@ public class GeoWorldLoader {
 		} catch (IOException | CloneNotSupportedException e) {
 			throw new GameServerError("Could not load meshes", e);
 		}
-		log.info("Loaded " + geoms.size() + " meshes");
+		log.info("Loaded {} meshes", geoms.size());
 		return geoms;
 	}
 
@@ -182,7 +182,7 @@ public class GeoWorldLoader {
 			WorldMapTemplate template = DataManager.WORLD_MAPS_DATA.getTemplate(map.getMapId());
 			boolean shouldHaveEntities = template.getWorldSize() != 0 && !template.isPrison() && !template.getName().equalsIgnoreCase("IDTest_Dungeon") && !template.getName().equalsIgnoreCase("System_Basic");
 			if (shouldHaveEntities)
-				log.warn(geoFile + " is missing");
+				log.warn("{} is missing", geoFile);
 			return;
 		}
 		try (FileChannel roChannel = FileChannel.open((geoFile))) {

@@ -28,7 +28,7 @@ public class AuditLogger {
 			AutoBan.punishment(player);
 
 		if (LoggingConfig.LOG_AUDIT)
-			log.info(player + " " + message);
+			log.info("{} {}", player, message);
 
 		for (Player gm : GMService.getInstance().getOnlineStaffMembers()) {
 			if (gm.hasAccess(AdminConfig.AUDIT_INFO))

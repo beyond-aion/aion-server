@@ -75,7 +75,7 @@ public class PlayerLeaveWorldService {
 
 		WorldPosition pos = player.getPosition();
 		if (pos == null || pos.getMapRegion() == null) { // ensure safe logout
-			log.warn(player + " had invalid position: " + pos + " so he was reset to bind point");
+			log.warn("{} had invalid position: {} so he was reset to bind point", player, pos);
 			BindPointPosition bp = player.getBindPoint();
 			if (bp != null)
 				pos = World.getInstance().createPosition(bp.getMapId(), bp.getX(), bp.getY(), bp.getZ(), bp.getHeading(), 1);
@@ -192,7 +192,7 @@ public class PlayerLeaveWorldService {
 				if (future != null)
 					future.cancel(false);
 			} catch (Exception e) {
-				log.error("Error while processing leave world task for " + player, e);
+				log.error("Error while processing leave world task for {}", player, e);
 			} finally {
 				leaveWorldTaskByPlayer.remove(player, this);
 			}

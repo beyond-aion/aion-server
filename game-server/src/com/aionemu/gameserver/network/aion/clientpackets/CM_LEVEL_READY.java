@@ -52,7 +52,7 @@ public class CM_LEVEL_READY extends AionClientPacket {
 		sendPacket(new SM_PLAYER_INFO(activePlayer));
 		activePlayer.getController().startProtectionActiveTask();
 		sendPacket(new SM_ACCOUNT_PROPERTIES());
-		sendPacket(new SM_MOTION(activePlayer.getObjectId(), activePlayer.getMotions().getActiveMotions()));
+		sendPacket(SM_MOTION.playerMotions(activePlayer));
 
 		WindstreamTemplate template = DataManager.WINDSTREAM_DATA.getStreamTemplate(activePlayer.getPosition().getMapId());
 		if (template != null)

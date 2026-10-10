@@ -3,7 +3,7 @@ package com.aionemu.gameserver.model.templates.item.actions;
 import java.util.Collections;
 import java.util.List;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 
 /**
  * @author ATracer

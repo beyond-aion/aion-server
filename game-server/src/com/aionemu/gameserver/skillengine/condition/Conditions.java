@@ -3,7 +3,7 @@ package com.aionemu.gameserver.skillengine.condition;
 import java.util.Collections;
 import java.util.List;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 
 import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.model.stats.calc.functions.IStatFunction;

@@ -20,8 +20,8 @@ import com.aionemu.gameserver.model.vortex.VortexLocation;
 import com.aionemu.gameserver.services.ShieldService;
 import com.aionemu.gameserver.world.zone.handler.MaterialZoneHandler;
 import com.aionemu.gameserver.world.zone.handler.ZoneHandler;
-import com.aionemu.gameserver.world.zone.handler.ZoneHandlerClassListener;
 import com.aionemu.gameserver.world.zone.handler.ZoneHandlerArea;
+import com.aionemu.gameserver.world.zone.handler.ZoneHandlerClassListener;
 
 /**
  * @author ATracer, antness
@@ -43,7 +43,7 @@ public final class ZoneService implements GameEngine {
 		acl.addClassListener(new ZoneHandlerClassListener());
 		scriptManager.setGlobalClassListener(acl);
 		scriptManager.load(WorldConfig.ZONE_HANDLER_DIRECTORY);
-		log.info("Loaded " + zoneHandlers.size() + " zone handlers.");
+		log.info("Loaded {} zone handlers", zoneHandlers.size());
 	}
 
 	public ZoneHandler getNewZoneHandler(String zoneName) {
@@ -52,7 +52,7 @@ public final class ZoneService implements GameEngine {
 			try {
 				return zoneClass.getDeclaredConstructor().newInstance();
 			} catch (Exception ex) {
-				log.warn("Can't instantiate zone handler " + zoneName, ex);
+				log.warn("Can't instantiate zone handler {}", zoneName, ex);
 			}
 		}
 		return null;

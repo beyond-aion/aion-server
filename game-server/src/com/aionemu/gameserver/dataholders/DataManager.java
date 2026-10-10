@@ -238,7 +238,7 @@ public final class DataManager {
 		DecomposeAction.validateRandomItemIds();
 
 		long time = System.currentTimeMillis() - start;
-		log.info("##### [Static Data loaded in " + String.format("%.1f", time / 1000f) + " seconds] #####");
+		log.info("##### [Static Data loaded in {} seconds] #####", String.format("%.1f", time / 1000f));
 	}
 
 	public static void waitForValidationToFinishAndShutdownOnFail() {
