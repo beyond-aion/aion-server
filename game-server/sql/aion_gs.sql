@@ -933,6 +933,7 @@ CREATE TABLE `players` (
   `dp` int NOT NULL DEFAULT '0',
   `soul_sickness` tinyint unsigned NOT NULL DEFAULT '0',
   `reposte_energy` bigint NOT NULL DEFAULT '0',
+  `pvp_exp` bigint NOT NULL DEFAULT '0',
   `online` boolean NOT NULL DEFAULT '0',
   `note` text,
   `mentor_flag_time` int NOT NULL DEFAULT '0',

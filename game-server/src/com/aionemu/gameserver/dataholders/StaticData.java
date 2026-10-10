@@ -6,15 +6,15 @@ import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
+import jakarta.xml.bind.Unmarshaller;
+import jakarta.xml.bind.annotation.*;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.GameServerError;
 import com.aionemu.gameserver.dataholders.loadingutils.StaticDataListener;
 import com.aionemu.gameserver.model.templates.mail.Mails;
-
-import jakarta.xml.bind.Unmarshaller;
-import jakarta.xml.bind.annotation.*;
 
 /**
  * An instance of this class is the result of data loading.
@@ -51,6 +51,18 @@ public class StaticData {
 
 	@XmlElement(name = "player_experience_table")
 	public PlayerExperienceTable playerExperienceTable;
+
+	@XmlElement(name = "pvp_exp_table")
+	public PvpExpTable pvpExpTable;
+
+	@XmlElement(name = "pvp_exp_mod_table")
+	public PvpExpModTable pvpExpModTable;
+
+	@XmlElement(name = "party_exp_mod_table")
+	public PartyExpModTable partyExpModTable;
+
+	@XmlElement(name = "mentee_exp_limit_table")
+	public MenteeExpLimitTable menteeExpLimitTable;
 
 	@XmlElement(name = "absolute_stats")
 	public AbsoluteStatsData absoluteStatsData;
@@ -310,6 +322,10 @@ public class StaticData {
 		log.info("Loaded {} material ids", materiaData.size());
 		log.info("Loaded weather for {} maps", mapWeatherData.size());
 		log.info("Loaded {} player experience table entries", playerExperienceTable.getMaxLevel());
+		log.info("Loaded {} pvp experience table entries", pvpExpTable.getMaxLevel());
+		log.info("Loaded {} pvp experience modifier entries", pvpExpModTable.size());
+		log.info("Loaded {} party experience modifier entries", partyExpModTable.size());
+		log.info("Loaded {} mentee experience limit entries", menteeExpLimitTable.size());
 		log.info("Loaded {} absolute stat templates", absoluteStatsData.size());
 		log.info("Loaded {} item cleanup entries", itemCleanup.size());
 		log.info("Loaded {} item templates", itemData.size());

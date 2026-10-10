@@ -187,49 +187,6 @@ public class StatFunctions {
 		return pointsGained;
 	}
 
-	/**
-	 * @return XP Points Gained in PvP Kill TODO: Find the correct formula.
-	 */
-	public static int calculatePvpXpGained(Player defeated, int winnerAbyssRank, int maxLevel) {
-		int pointsGained = 5000;
-
-		// Level penalty calculation
-		int difference = maxLevel - defeated.getLevel();
-
-		if (difference > 4) {
-			pointsGained = Math.round(pointsGained * 0.1f);
-		} else if (difference < -3) {
-			pointsGained = Math.round(pointsGained * 1.3f);
-		} else {
-			switch (difference) {
-				case 3:
-					pointsGained = Math.round(pointsGained * 0.85f);
-					break;
-				case 4:
-					pointsGained = Math.round(pointsGained * 0.65f);
-					break;
-				case -2:
-					pointsGained = Math.round(pointsGained * 1.1f);
-					break;
-				case -3:
-					pointsGained = Math.round(pointsGained * 1.2f);
-					break;
-			}
-		}
-
-		// Abyss rank penalty calculation
-		int defeatedAbyssRank = defeated.getAbyssRank().getRank().getId();
-		int abyssRankDifference = winnerAbyssRank - defeatedAbyssRank;
-
-		if (winnerAbyssRank <= 7 && abyssRankDifference > 0) {
-			float penaltyPercent = abyssRankDifference * 0.05f;
-
-			pointsGained -= Math.round(pointsGained * penaltyPercent);
-		}
-
-		return pointsGained;
-	}
-
 	public static int calculatePvpDpGained(Player defeated, int maxRank, int maxLevel) {
 		int pointsGained;
 
