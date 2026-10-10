@@ -2,8 +2,8 @@ package com.aionemu.gameserver.dataholders;
 
 import java.util.List;
 
-import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.Unmarshaller;
+import jakarta.xml.bind.annotation.*;
 
 /**
  * PvP XP for killing a player of the given level, and the killer's limits for gaining it, by the killer's level.

@@ -2,8 +2,8 @@ package com.aionemu.gameserver.dataholders;
 
 import java.util.List;
 
-import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.Unmarshaller;
+import jakarta.xml.bind.annotation.*;
 
 /**
  * Weights for sharing XP within a group, by how many levels a member is below the highest level member.

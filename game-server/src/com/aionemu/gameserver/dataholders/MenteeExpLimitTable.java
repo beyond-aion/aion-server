@@ -2,8 +2,8 @@ package com.aionemu.gameserver.dataholders;
 
 import java.util.List;
 
-import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.Unmarshaller;
+import jakarta.xml.bind.annotation.*;
 
 /**
  * The most XP a member of a mentor group can gain from one shared reward, by the member's level.

@@ -2,8 +2,8 @@ package com.aionemu.gameserver.dataholders;
 
 import java.util.List;
 
-import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.Unmarshaller;
+import jakarta.xml.bind.annotation.*;
 
 /**
  * PvP XP multipliers by the level difference between killer and victim. Each row holds one column per ten killer levels.
