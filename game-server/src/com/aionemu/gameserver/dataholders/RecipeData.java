@@ -48,6 +48,11 @@ public class RecipeData {
 		return recipeData.get(id);
 	}
 
+	public int getMaxProductionCount(int recipeId) {
+		RecipeTemplate template = getRecipeTemplateById(recipeId);
+		return template == null || template.getMaxProductionCount() == null ? 0 : template.getMaxProductionCount();
+	}
+
 	public Collection<RecipeTemplate> getRecipeTemplates() {
 		return recipeData.values();
 	}

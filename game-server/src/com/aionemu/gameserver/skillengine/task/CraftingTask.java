@@ -20,7 +20,10 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class CraftingTask extends AbstractCraftTask {
 
+	private static final int MORPH_BAR_DELAY = 3000;
+
 	private final RecipeTemplate recipeTemplate;
+	private final boolean isMorph;
 	private final int maxCritCount;
 	private final int bonus;
 	private ItemTemplate itemTemplate;
@@ -34,6 +37,12 @@ public class CraftingTask extends AbstractCraftTask {
 		this.maxCritCount = recipeTemplate.getComboProductSize();
 		this.bonus = bonus;
 		this.itemTemplate = DataManager.ITEM_DATA.getItemTemplate(recipeTemplate.getProductId());
+		this.isMorph = recipeTemplate.isMorph();
+		if (isMorph) {
+			// morphing has no progress steps and no combo, the result comes once the client bar has run out
+			showBarDelay = MORPH_BAR_DELAY;
+			delay = interval = MORPH_BAR_DELAY;
+		}
 	}
 
 	@Override
@@ -45,13 +54,13 @@ public class CraftingTask extends AbstractCraftTask {
 
 	@Override
 	protected boolean onSuccessFinish() {
-		if (calculateCrit()) {
+		if (!isMorph && calculateCrit()) {
 			onInteractionStart();
 			return false;
 		} else {
-			PacketSendUtility.sendPacket(requester,
-				new SM_CRAFT_UPDATE(recipeTemplate.getSkillId(), itemTemplate, currentSuccessValue, currentFailureValue, 5, 0, 0));
 			PacketSendUtility.broadcastPacket(requester, new SM_CRAFT_ANIMATION(requester.getObjectId(), responder.getObjectId(), 0, 2), true);
+			PacketSendUtility.sendPacket(requester,
+				new SM_CRAFT_UPDATE(recipeTemplate.getSkillId(), itemTemplate, currentSuccessValue, currentFailureValue, 5, 0, isMorph ? showBarDelay : 0));
 			CraftService.finishCrafting(requester, recipeTemplate, critCount, bonus);
 			return true;
 		}
@@ -108,21 +117,20 @@ public class CraftingTask extends AbstractCraftTask {
 		currentSuccessValue = 0;
 		currentFailureValue = 0;
 
-		PacketSendUtility.sendPacket(requester,
-			new SM_CRAFT_UPDATE(recipeTemplate.getSkillId(), itemTemplate, fullBarValue, fullBarValue, critCount == 0 ? 0 : 3, 0, 0));
-		PacketSendUtility.sendPacket(requester, new SM_CRAFT_UPDATE(recipeTemplate.getSkillId(), itemTemplate, 0, 0, 1, 0, 0));
+		PacketSendUtility.sendPacket(requester, new SM_CRAFT_UPDATE(recipeTemplate.getSkillId(), itemTemplate, fullBarValue, fullBarValue,
+			critCount == 0 ? 0 : 3, 0, isMorph ? showBarDelay : 0));
+		PacketSendUtility.sendPacket(requester, new SM_CRAFT_UPDATE(recipeTemplate.getSkillId(), itemTemplate, 0, 0, 1, 0, isMorph ? showBarDelay : 0));
 		PacketSendUtility.broadcastPacket(requester,
 			new SM_CRAFT_ANIMATION(requester.getObjectId(), responder.getObjectId(), recipeTemplate.getSkillId(), 0), true);
 		PacketSendUtility.broadcastPacket(requester,
 			new SM_CRAFT_ANIMATION(requester.getObjectId(), responder.getObjectId(), recipeTemplate.getSkillId(), 1), true);
+		if (isMorph)
+			currentSuccessValue = fullBarValue;
 	}
 
 	@Override
 	protected final void analyzeInteraction() {
-		if (recipeTemplate.getSkillId() == 40009) { // morph
-			currentSuccessValue = fullBarValue;
-			return;
-		} else if (skillLvlDiff < 0) {
+		if (skillLvlDiff < 0) {
 			currentFailureValue = fullBarValue;
 			return;
 		}

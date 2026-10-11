@@ -3,6 +3,7 @@ package com.aionemu.gameserver.network.loginserver.serverpackets;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.slf4j.Logger;
@@ -302,9 +303,10 @@ public class SM_PTRANSFER_CONTROL extends LsServerPacket {
 			case RECIPE_INFORMATION:
 				writeD(this.taskId);
 				RecipeList rec = this.player.getRecipeList();
-				writeD(rec.getRecipeList().size());
-				for (int id : rec.getRecipeList()) {
-					writeD(id);
+				writeD(rec.size());
+				for (Map.Entry<Integer, Integer> recipe : rec.getRecipes().entrySet()) {
+					writeD(recipe.getKey());
+					writeC(recipe.getValue());
 				}
 				break;
 			case QUEST_INFORMATION:
