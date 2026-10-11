@@ -55,6 +55,7 @@ public class PlayerCommonData extends CreatureTemplate {
 	private boolean noExp = false;
 	private long reposeCurrent;
 	private long reposeMax;
+	private long pvpExp;
 	private long salvationPoint;
 	private int mentorFlagTime;
 	private int worldOwnerId;
@@ -265,6 +266,17 @@ public class PlayerCommonData extends CreatureTemplate {
 
 	public long getMaxReposeEnergy() {
 		return reposeMax;
+	}
+
+	/**
+	 * @return The accumulated PvP XP that limits how much more PvP XP the player can gain.
+	 */
+	public long getPvpExp() {
+		return pvpExp;
+	}
+
+	public void setPvpExp(long pvpExp) {
+		this.pvpExp = pvpExp;
 	}
 
 	/**

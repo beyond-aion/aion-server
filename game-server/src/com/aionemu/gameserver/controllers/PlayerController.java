@@ -124,7 +124,7 @@ public class PlayerController extends CreatureController<Player> {
 
 	private void sendPlayerInfoPackets(Player player) {
 		PacketSendUtility.sendPacket(getOwner(), new SM_PLAYER_INFO(player, !player.equals(getOwner()) && getOwner().isAggroIconTo(player)));
-		PacketSendUtility.sendPacket(getOwner(), new SM_MOTION(player.getObjectId(), player.getMotions().getActiveMotions()));
+		PacketSendUtility.sendPacket(getOwner(), SM_MOTION.playerMotions(player));
 		if (player.isInPlayerMode(PlayerMode.RIDE))
 			PacketSendUtility.sendPacket(getOwner(), new SM_EMOTION(player, EmotionType.RIDE, 0, player.ride.getNpcId()));
 		if (player.getController().isUnderStance())

@@ -209,7 +209,7 @@ public class TeleportService {
 		PacketSendUtility.sendPacket(player, new SM_CHANNEL_INFO(player.getPosition()));
 		PacketSendUtility.sendPacket(player, new SM_PLAYER_INFO(player));
 		PacketSendUtility.sendPacket(player, new SM_STATS_INFO(player));
-		PacketSendUtility.sendPacket(player, new SM_MOTION(player.getObjectId(), player.getMotions().getActiveMotions()));
+		PacketSendUtility.sendPacket(player, SM_MOTION.playerMotions(player));
 		World.getInstance().spawn(player);
 		World.getInstance().spawn(player.getPet());
 		player.getController().startProtectionActiveTask();

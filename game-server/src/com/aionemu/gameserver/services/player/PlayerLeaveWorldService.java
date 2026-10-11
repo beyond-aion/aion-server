@@ -100,6 +100,7 @@ public class PlayerLeaveWorldService {
 		InstanceService.onLogout(player);
 		GMService.getInstance().onPlayerLogout(player);
 		KiskService.getInstance().onLogout(player);
+		PvpExpLimitService.getInstance().onLeaveWorld(player);
 
 		if (player.isDead()) {
 			if (player.isInInstance() || player.getWorldId() == 400030000)

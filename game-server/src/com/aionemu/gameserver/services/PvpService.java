@@ -14,6 +14,7 @@ import com.aionemu.gameserver.configs.main.LoggingConfig;
 import com.aionemu.gameserver.controllers.attack.DamageInfo;
 import com.aionemu.gameserver.controllers.attack.DamageList;
 import com.aionemu.gameserver.controllers.attack.KillCounter;
+import com.aionemu.gameserver.controllers.attack.TeamDamageList;
 import com.aionemu.gameserver.custom.pvpmap.PvpMapService;
 import com.aionemu.gameserver.dao.HeadhuntingDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -24,6 +25,7 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.Rates;
+import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.team.TeamMember;
 import com.aionemu.gameserver.model.team.TemporaryPlayerTeam;
 import com.aionemu.gameserver.model.templates.bounty.BountyTemplate;
@@ -53,6 +55,7 @@ import com.aionemu.gameserver.world.zone.ZoneInstance;
 public class PvpService {
 
 	private static final Logger log = LoggerFactory.getLogger("KILL_LOG");
+	private static final float FIRST_ATTACKER_XP_SHARE = 0.1f;
 	private final List<KillBountyTemplate> killBounties;
 	private final Map<Integer, Headhunter> headhunters;
 
@@ -140,8 +143,12 @@ public class PvpService {
 		int apRelevantDamage = 0;
 		int totalDamage = damageList.getTotalDamage();
 
+		TeamDamageList teamDamages = damageList.toTeamDamages();
+		DamageInfo<AionObject> firstDamage = teamDamages.getFirstDamage();
+		int victimXp = DataManager.PVP_EXP_TABLE.getExp(victim.getLevel());
+
 		// Distribute AP to groups and players that had damage.
-		for (DamageInfo<AionObject> damageInfo : damageList.toTeamDamages().getCreatureOrTeamDamages()) {
+		for (DamageInfo<AionObject> damageInfo : teamDamages.getCreatureOrTeamDamages()) {
 			Collection<Player> teamMembers = new ArrayList<>();
 			AionObject attacker = damageInfo.getAttacker();
 			if (attacker instanceof Player player && player.getRace() != victim.getRace())
@@ -149,8 +156,11 @@ public class PvpService {
 			else if (attacker instanceof TemporaryPlayerTeam<?> team && team.getLeaderObject().getRace() != victim.getRace())
 				teamMembers = team.getMembers();
 
+			float xpShare = (1 - FIRST_ATTACKER_XP_SHARE) * victimXp * damageInfo.getDamage() / totalDamage;
+			if (damageInfo == firstDamage)
+				xpShare += (int) (victimXp * FIRST_ATTACKER_XP_SHARE);
 			// Add damage last, so we don't include damage from same race. (Duels, Arena)
-			if (rewardPlayerTeam(teamMembers, victim, damageInfo.getDamage(), totalDamage, apWinMulti))
+			if (rewardPlayerTeam(teamMembers, attacker instanceof TemporaryPlayerTeam, victim, damageInfo.getDamage(), totalDamage, apWinMulti, xpShare))
 				apRelevantDamage += damageInfo.getDamage();
 		}
 
@@ -211,7 +221,12 @@ public class PvpService {
 		}
 	}
 
-	private boolean rewardPlayerTeam(Collection<Player> teamMember, Player victim, int damage, int totalDamage, float apWinMulti) {
+	/**
+	 * @param xpShare
+	 *          The PvP XP for the team's damage, before it is shared among the members and reduced by their level difference to the victim.
+	 */
+	private boolean rewardPlayerTeam(Collection<Player> teamMember, boolean isTeam, Player victim, int damage, int totalDamage, float apWinMulti,
+		float xpShare) {
 		List<Player> players = new ArrayList<>();
 		int maxRank = 1;
 		int maxLevel = 0;
@@ -230,22 +245,18 @@ public class PvpService {
 			return false;
 
 		float baseApReward = StatFunctions.calculatePvpApGained(victim, maxRank, maxLevel) * apWinMulti;
-		int baseXpReward = StatFunctions.calculatePvpXpGained(victim, maxRank, maxLevel);
 		int baseDpReward = StatFunctions.calculatePvpDpGained(victim, maxRank, maxLevel);
 		float groupDamagePercentage = (float) damage / totalDamage;
 		int apRewardPerMember = Math.round(baseApReward * groupDamagePercentage / players.size());
-		int xpRewardPerMember = Math.round(baseXpReward * groupDamagePercentage / players.size());
 		int dpRewardPerMember = Math.round(baseDpReward * groupDamagePercentage / players.size());
+		Map<Player, Integer> xpRewards = calculateXpRewards(players, isTeam, victim, xpShare);
 
 		for (Player member : players) {
 			int memberApGain = 1;
-			int memberXpGain = 1;
 			int memberDpGain = 1;
 			if (KillCounter.addKillFor(member.getObjectId(), victim.getObjectId()) < CustomConfig.MAX_DAILY_PVP_KILLS) {
 				if (apRewardPerMember > 0)
 					memberApGain = Rates.AP_PVP.calcResult(member, apRewardPerMember);
-				if (xpRewardPerMember > 0)
-					memberXpGain = xpRewardPerMember; // rates are applied in addExp()
 				if (dpRewardPerMember > 0) {
 					memberDpGain = StatFunctions.adjustPvpDpGained(dpRewardPerMember, victim.getLevel(), member.getLevel());
 					memberDpGain = Rates.DP_PVP.calcResult(member, memberDpGain);
@@ -253,10 +264,44 @@ public class PvpService {
 
 			}
 			AbyssPointsService.addAp(member, victim, memberApGain);
-			member.getCommonData().addExp(memberXpGain, Rates.XP_PVP, victim.getName());
 			member.getCommonData().addDp(memberDpGain);
+			// PvP XP has its own limits, independent of the kill count above
+			int xpReward = xpRewards.get(member);
+			if (xpReward > 0) {
+				xpReward = (int) (member.getGameStats().getStat(StatEnum.BOOST_HUNTING_XP_RATE, 100).getCurrent() / 100f * xpReward);
+				if (PvpExpLimitService.getInstance().tryGainPvpExp(member, victim, xpReward))
+					member.getCommonData().addExp(xpReward, Rates.XP_PVP, victim.getName()); // rates are applied in addExp()
+			}
 		}
 		return true;
+	}
+
+	/**
+	 * A single player gets the XP share reduced by the level difference to the victim. A team's share is split by weights that decrease the further
+	 * a member is below the team's highest level, then each part is reduced by the member's level difference to the victim.
+	 */
+	private Map<Player, Integer> calculateXpRewards(List<Player> players, boolean isTeam, Player victim, float xpShare) {
+		Map<Player, Integer> xpRewards = new HashMap<>();
+		if (!isTeam) {
+			for (Player player : players)
+				xpRewards.put(player, (int) (xpShare * DataManager.PVP_EXP_MOD_TABLE.getMultiplier(player.getLevel(), victim.getLevel())));
+			return xpRewards;
+		}
+		int teamXp = xpShare > 0 ? Math.max(1, (int) xpShare) : 0;
+		int highestLevel = players.stream().mapToInt(Player::getLevel).max().orElse(0);
+		float totalWeight = 0;
+		for (Player member : players)
+			totalWeight += DataManager.PARTY_EXP_MOD_TABLE.getWeight(member.getLevel(), highestLevel);
+		boolean isMentorTeam = players.stream().anyMatch(Player::isMentor);
+		for (Player member : players) {
+			float weight = DataManager.PARTY_EXP_MOD_TABLE.getWeight(member.getLevel(), highestLevel);
+			float multiplier = DataManager.PVP_EXP_MOD_TABLE.getMultiplier(member.getLevel(), victim.getLevel());
+			int xp = totalWeight > 0 ? (int) (weight / totalWeight * multiplier * teamXp) : 0;
+			if (isMentorTeam)
+				xp = (int) Math.min(xp, DataManager.MENTEE_EXP_LIMIT_TABLE.getExpLimit(member.getLevel()));
+			xpRewards.put(member, xp);
+		}
+		return xpRewards;
 	}
 
 	private void updateKillQuests(List<Player> killers, Player victim) {

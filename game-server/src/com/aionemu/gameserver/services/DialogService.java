@@ -280,7 +280,7 @@ public class DialogService {
 	}
 
 	private static void handleQuestDialogueOrSendNextPage(int dialogActionId, Player player, Npc npc, int questId, int extendedRewardIndex) {
-		if (questId != 0 || dialogActionId == USE_OBJECT || dialogActionId == EXCHANGE_COIN) {
+		if (questId != 0 || dialogActionId == USE_OBJECT || dialogActionId == EXCHANGE_COIN || dialogActionId >= SETPRO1) {
 			QuestEnv env = new QuestEnv(npc, player, questId, dialogActionId);
 			env.setExtendedRewardIndex(extendedRewardIndex);
 			if (QuestEngine.getInstance().onDialog(env))

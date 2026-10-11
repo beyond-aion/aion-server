@@ -239,7 +239,7 @@ public final class PlayerEnterWorldService {
 		if (pcd.getBonusTitleId() != 0) {
 			player.getTitleList().setBonusTitle(pcd.getBonusTitleId());
 		}
-		client.sendPacket(new SM_MOTION(player.getMotions().getMotions().values()));
+		client.sendPacket(SM_MOTION.list(player.getMotions().getMotions().values()));
 		client.sendPacket(new SM_AFTER_TIME_CHECK_4_7_5());// it is also sent after enter world check
 
 		byte[] uiSettings = player.getPlayerSettings().getUiSettings();
@@ -260,6 +260,7 @@ public final class PlayerEnterWorldService {
 		client.sendPacket(new SM_CHANNEL_INFO(player.getPosition()));
 
 		KiskService.getInstance().onLogin(player);
+		PvpExpLimitService.getInstance().onEnterWorld(player);
 		TeleportService.sendObeliskBindPoint(player);
 		TeleportService.sendKiskBindPoint(player);
 
@@ -273,7 +274,7 @@ public final class PlayerEnterWorldService {
 			LegionService.getInstance().onLogin(player);
 		sendWarehouseItemInfos(client, player);
 		client.sendPacket(new SM_TITLE_INFO(player));
-		client.sendPacket(new SM_EMOTION_LIST((byte) 0, player.getEmotions().getEmotions()));
+		client.sendPacket(new SM_EMOTION_LIST(SM_EMOTION_LIST.Action.LIST, player.getEmotions().getEmotions()));
 		// SM_BD_UNK h 0
 		SiegeService.getInstance().onPlayerLogin(player);
 		client.sendPacket(new SM_PRICES());

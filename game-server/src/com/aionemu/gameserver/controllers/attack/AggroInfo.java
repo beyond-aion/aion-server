@@ -13,6 +13,7 @@ public class AggroInfo {
 	private final Creature attacker;
 	private int hate;
 	private int damage;
+	private long firstDamageTime;
 	private long lastInteractionTime = 0;
 	private int hateReduceCount = 1;
 
@@ -25,8 +26,15 @@ public class AggroInfo {
 	}
 
 	public void addDamage(int damage) {
-		if (damage > 0)
+		addDamage(damage, System.currentTimeMillis());
+	}
+
+	void addDamage(int damage, long time) {
+		if (damage > 0) {
+			if (this.damage == 0 || time < firstDamageTime)
+				firstDamageTime = time;
 			this.damage += damage;
+		}
 	}
 
 	public void addHate(int hate) {
@@ -47,6 +55,10 @@ public class AggroInfo {
 
 	public int getDamage() {
 		return this.damage;
+	}
+
+	public long getFirstDamageTime() {
+		return firstDamageTime;
 	}
 
 	public long getLastInteractionTime() {
