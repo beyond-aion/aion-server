@@ -2,11 +2,11 @@ package com.aionemu.gameserver.dataholders;
 
 import java.util.*;
 
-import jakarta.xml.bind.Unmarshaller;
-import jakarta.xml.bind.annotation.*;
-
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.templates.recipe.RecipeTemplate;
+
+import jakarta.xml.bind.Unmarshaller;
+import jakarta.xml.bind.annotation.*;
 
 /**
  * @author ATracer, MrPoke, KID
@@ -46,6 +46,11 @@ public class RecipeData {
 
 	public RecipeTemplate getRecipeTemplateById(int id) {
 		return recipeData.get(id);
+	}
+
+	public int getMaxProductionCount(int recipeId) {
+		RecipeTemplate template = getRecipeTemplateById(recipeId);
+		return template == null || template.getMaxProductionCount() == null ? 0 : template.getMaxProductionCount();
 	}
 
 	public Collection<RecipeTemplate> getRecipeTemplates() {

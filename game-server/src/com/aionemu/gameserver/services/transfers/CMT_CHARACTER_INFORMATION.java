@@ -369,10 +369,10 @@ public class CMT_CHARACTER_INFORMATION extends BaseClientPacket<AionConnection> 
 		player.setRecipeList(new RecipeList());
 		for (int a = 0; a < cnt; a++) { // recipes
 			int recipeId = readD();
-			int productionCount = readUC();
+			int productionLimit = readUC();
 
 			if (PlayerTransferConfig.ALLOW_RECIPES)
-				player.getRecipeList().addRecipe(player, recipeId, productionCount);
+				player.getRecipeList().addRecipe(player, recipeId, productionLimit);
 		}
 
 		// read quest data

@@ -109,7 +109,7 @@ public class CraftService {
 			return;
 		}
 		// a production of a limited recipe is used up on craft start, regardless of the result
-		player.getRecipeList().decreaseProductionCount(player, recipeId);
+		player.getRecipeList().decreaseProductionLimit(player, recipeId);
 		consumeComponents(player, recipeTemplate, sendMaterialsData);
 		if (recipeTemplate.getDp() != null)
 			player.getCommonData().addDp(-recipeTemplate.getDp());

@@ -1,13 +1,10 @@
 package com.aionemu.gameserver.model.gameobjects.player;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 import com.aionemu.gameserver.dao.PlayerRecipesDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.templates.recipe.RecipeTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_LEARN_RECIPE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_RECIPE_DELETE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -22,52 +19,41 @@ public class RecipeList {
 	/**
 	 * Recipe ID -> remaining production count (0 = unlimited)
 	 */
-	private final Map<Integer, Integer> recipeList;
+	private final Map<Integer, Integer> productionLimitByRecipeId = new HashMap<>();
 
-	public RecipeList(Map<Integer, Integer> recipeList) {
-		this.recipeList = recipeList;
-		// limited recipes stored before production counts were tracked have a count of 0, they start with the full count
-		for (Map.Entry<Integer, Integer> recipe : recipeList.entrySet()) {
-			if (recipe.getValue() == 0)
-				recipe.setValue(getMaxProductionCount(recipe.getKey()));
-		}
-	}
 
-	public RecipeList() {
-		this(new HashMap<>());
-	}
-
-	public Set<Integer> getRecipeList() {
-		return recipeList.keySet();
-	}
-
-	public Map<Integer, Integer> getRecipes() {
-		return Collections.unmodifiableMap(recipeList);
+	public synchronized Map<Integer, Integer> getRecipes() {
+		return Map.copyOf(productionLimitByRecipeId);
 	}
 
 	public boolean addRecipe(Player player, int recipeId) {
-		return addRecipe(player, recipeId, 0);
+		return addRecipe(player, recipeId, DataManager.RECIPE_DATA.getMaxProductionCount(recipeId));
 	}
 
 	/**
-	 * @param productionCount
-	 *          remaining production count, 0 or anything above the template limit means the full count
+	 * @param productionLimit
+	 *          the allowed number of usages (0 = unlimited)
 	 */
-	public boolean addRecipe(Player player, int recipeId, int productionCount) {
-		int maxProductionCount = getMaxProductionCount(recipeId);
-		if (productionCount <= 0 || productionCount > maxProductionCount)
-			productionCount = maxProductionCount;
-		if (!isRecipePresent(recipeId) && PlayerRecipesDAO.addRecipe(player.getObjectId(), recipeId, productionCount)) {
-			recipeList.put(recipeId, productionCount);
-			PacketSendUtility.sendPacket(player, new SM_LEARN_RECIPE(recipeId, productionCount));
-			return true;
-		}
-		return false;
+	public boolean addRecipe(int recipeId, int productionLimit) {
+		return addRecipe(null, recipeId, productionLimit);
 	}
 
-	public boolean deleteRecipe(Player player, int recipeId) {
-		if (recipeList.containsKey(recipeId) && PlayerRecipesDAO.delRecipe(player.getObjectId(), recipeId)) {
-			recipeList.remove(recipeId);
+	public synchronized boolean addRecipe(Player player, int recipeId, int productionLimit) {
+		if (productionLimitByRecipeId.putIfAbsent(recipeId, productionLimit) != null)
+			return false;
+		if (player != null) {
+			if (!PlayerRecipesDAO.addRecipe(player.getObjectId(), recipeId, productionLimit)) {
+				productionLimitByRecipeId.remove(recipeId);
+				return false;
+			}
+			PacketSendUtility.sendPacket(player, new SM_LEARN_RECIPE(recipeId, productionLimit));
+		}
+		return true;
+	}
+
+	public synchronized boolean deleteRecipe(Player player, int recipeId) {
+		if (productionLimitByRecipeId.containsKey(recipeId) && PlayerRecipesDAO.delRecipe(player.getObjectId(), recipeId)) {
+			productionLimitByRecipeId.remove(recipeId);
 			PacketSendUtility.sendPacket(player, new SM_RECIPE_DELETE(recipeId));
 			return true;
 		}
@@ -79,32 +65,26 @@ public class RecipeList {
 	 * new count, it requests the recipe list again when needed. The production is used up even if the database write fails, so a failing database
 	 * cannot make a limited recipe reusable.
 	 */
-	public void decreaseProductionCount(Player player, int recipeId) {
-		Integer productionCount = recipeList.get(recipeId);
-		if (productionCount == null || productionCount == 0)
+	public synchronized void decreaseProductionLimit(Player player, int recipeId) {
+		Integer productionLimit = productionLimitByRecipeId.get(recipeId);
+		if (productionLimit == null || productionLimit == 0)
 			return;
-		int left = productionCount - 1;
-		if (left == 0) {
-			recipeList.remove(recipeId);
+		if (--productionLimit > 0) {
+			productionLimitByRecipeId.put(recipeId, productionLimit);
+			PlayerRecipesDAO.updateProductionLimit(player.getObjectId(), recipeId, productionLimit);
+		} else {
+			productionLimitByRecipeId.remove(recipeId);
 			PlayerRecipesDAO.delRecipe(player.getObjectId(), recipeId);
 			PacketSendUtility.sendPacket(player, new SM_RECIPE_DELETE(recipeId));
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMBINE_USAGE_OVER(ChatUtil.recipe(recipeId, player)));
-		} else {
-			recipeList.put(recipeId, left);
-			PlayerRecipesDAO.updateProductionCount(player.getObjectId(), recipeId, left);
 		}
 	}
 
-	public boolean isRecipePresent(int recipeId) {
-		return recipeList.containsKey(recipeId);
+	public synchronized boolean isRecipePresent(int recipeId) {
+		return productionLimitByRecipeId.containsKey(recipeId);
 	}
 
-	public int size() {
-		return this.recipeList.size();
-	}
-
-	private static int getMaxProductionCount(int recipeId) {
-		RecipeTemplate template = DataManager.RECIPE_DATA.getRecipeTemplateById(recipeId);
-		return template == null || template.getMaxProductionCount() == null ? 0 : template.getMaxProductionCount();
+	public synchronized int size() {
+		return productionLimitByRecipeId.size();
 	}
 }

@@ -9,6 +9,7 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
  * @author lord_rex, SVDNESS
  */
 public class SM_RECIPE_LIST extends AionServerPacket {
+
 	private final Map<Integer, Integer> recipes;
 
 	public SM_RECIPE_LIST(Map<Integer, Integer> recipes) {

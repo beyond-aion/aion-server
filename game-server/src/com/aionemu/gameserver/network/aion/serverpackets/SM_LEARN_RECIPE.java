@@ -7,17 +7,18 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
  * @author lord_rex, SVDNESS
  */
 public class SM_LEARN_RECIPE extends AionServerPacket {
-	private final int recipeId;
-	private final int productionCount;
 
-	public SM_LEARN_RECIPE(int recipeId, int productionCount) {
+	private final int recipeId;
+	private final int productionLimit;
+
+	public SM_LEARN_RECIPE(int recipeId, int productionLimit) {
 		this.recipeId = recipeId;
-		this.productionCount = productionCount;
+		this.productionLimit = productionLimit;
 	}
 
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeD(recipeId);
-		writeC(productionCount); // Remaining recipe production count; 0: unlimited uses.
+		writeC(productionLimit); // Remaining recipe production count; 0: unlimited uses.
 	}
 }
