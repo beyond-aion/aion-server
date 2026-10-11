@@ -11,6 +11,7 @@ import com.aionemu.gameserver.model.templates.recipe.RecipeTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_LEARN_RECIPE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_RECIPE_DELETE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -87,7 +88,7 @@ public class RecipeList {
 			recipeList.remove(recipeId);
 			PlayerRecipesDAO.delRecipe(player.getObjectId(), recipeId);
 			PacketSendUtility.sendPacket(player, new SM_RECIPE_DELETE(recipeId));
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMBINE_USAGE_OVER("[recipe_ex:" + recipeId + ";" + player.getName() + "]"));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMBINE_USAGE_OVER(ChatUtil.recipe(recipeId, player)));
 		} else {
 			recipeList.put(recipeId, left);
 			PlayerRecipesDAO.updateProductionCount(player.getObjectId(), recipeId, left);
