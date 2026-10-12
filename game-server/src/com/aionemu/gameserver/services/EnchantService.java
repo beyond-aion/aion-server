@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.aionemu.commons.utils.Rnd;
-import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.configs.main.RatesConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.enchants.EnchantEffect;
@@ -131,14 +130,14 @@ public class EnchantService {
 				// Amount of supplement items
 				int supplementUseCount = 1;
 				// Additional success rate for the supplement
+				float supplementChance = 0;
 				ItemTemplate supplementTemplate = supplementItem.getItemTemplate();
 
 				EnchantItemAction action = supplementTemplate.getActions().getEnchantAction();
 				if (action != null) {
 					if (action.isManastoneOnly())
 						return false;
-					// Add success rate of the supplement to the overall chance
-					successChance += action.getChance();
+					supplementChance = action.getChance();
 				}
 
 				action = enchantmentStoneItem.getItemTemplate().getActions().getEnchantAction();
@@ -149,25 +148,23 @@ public class EnchantService {
 				if (targetItem.getEnchantLevel() >= 10)
 					supplementUseCount = supplementUseCount * 2;
 
-				// Check the required amount of the supplements
-				if (player.getInventory().getItemCountByItemId(supplementTemplate.getTemplateId()) < supplementUseCount)
-					return false;
-
-				// Put supplements to wait for update
-				player.subtractSupplements(supplementUseCount, supplementTemplate.getTemplateId());
-
-				// Success can't be higher than 95%
-				if (successChance >= 95)
-					successChance = 95;
+				if (consumeSupplements(player, supplementTemplate.getTemplateId(), supplementUseCount)) {
+					successChance += supplementChance;
+					// Success can't be higher than 95%
+					if (successChance >= 95)
+						successChance = 95;
+				}
 			}
 		}
 
-		boolean result = Rnd.chance() < successChance;
+		return Rnd.chance() < successChance;
+	}
 
-		if (player.hasAccess(AdminConfig.ENCHANT_INFO))
-			PacketSendUtility.sendMessage(player, (result ? "Success" : "Fail") + " (success chance:" + successChance + "%)");
-
-		return result;
+	/**
+	 * @return True if the player had enough supplements and they were removed from the inventory
+	 */
+	private static boolean consumeSupplements(Player player, int supplementId, int count) {
+		return player.getInventory().getItemCountByItemId(supplementId) >= count && player.getInventory().decreaseByItemId(supplementId, count);
 	}
 
 	public static void enchantItemAct(Player player, Item parentItem, Item targetItem, Item supplementItem, int currentEnchant, boolean success) {
@@ -187,8 +184,6 @@ public class EnchantService {
 			AuditLogger.log(player, "possibly used enchant hack");
 			return;
 		}
-		// Decrease required supplements
-		player.updateSupplements();
 
 		// Items that are Fabled or Eternal can get up to +15.
 		if (success) {
@@ -366,6 +361,7 @@ public class EnchantService {
 				manastoneCount = targetItem.getFusionStones().size() + 1;
 
 			// Additional success rate for the supplement
+			float supplementChance = 0;
 			ItemTemplate supplementTemplate = supplementItem.getItemTemplate();
 
 			boolean isManastoneOnly = false;
@@ -375,8 +371,7 @@ public class EnchantService {
 
 			action = supplementTemplate.getActions().getEnchantAction();
 			if (action != null) {
-				// Add successRate
-				successChance += action.getChance();
+				supplementChance = action.getChance();
 				isManastoneOnly = action.isManastoneOnly();
 			}
 
@@ -385,27 +380,16 @@ public class EnchantService {
 			else if (stoneCount > 0)
 				supplementUseCount = supplementUseCount * manastoneCount;
 
-			if (player.getInventory().getItemCountByItemId(supplementTemplate.getTemplateId()) < supplementUseCount)
-				return false;
-
-			// Put up supplements to wait for update
-			player.subtractSupplements(supplementUseCount, supplementTemplate.getTemplateId());
+			if (consumeSupplements(player, supplementTemplate.getTemplateId(), supplementUseCount))
+				successChance += supplementChance;
 		}
 
-		boolean result = Rnd.chance() < successChance;
-
-		// For test purpose. To use by administrator
-		if (player.hasAccess(AdminConfig.ENCHANT_INFO))
-			PacketSendUtility.sendMessage(player, (result ? "Success" : "Fail") + " (success chance:" + successChance + "%)");
-
-		return result;
+		return Rnd.chance() < successChance;
 	}
 
 	public static boolean socketManastoneAct(Player player, Item parentItem, Item targetItem, Item supplementItem, int targetWeapon, boolean result) {
 		if (!player.getInventory().decreaseByObjectId(parentItem.getObjectId(), 1))
 			return false;
-		// Decrease required supplements
-		player.updateSupplements();
 		if (result) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_OPTION_SUCCEED(targetItem.getL10n()));
 

@@ -172,9 +172,6 @@ public class Player extends Creature {
 	private int lootingNpcOid;
 	private RebirthEffect rebirthEffect;
 
-	// Needed to remove supplements queue
-	private int subtractedSupplementsCount;
-	private int subtractedSupplementId;
 	private byte portAnimation;
 	private boolean isInSprintMode;
 	private List<ActionObserver> rideObservers;
@@ -1498,26 +1495,6 @@ public class Player extends Creature {
 
 	public boolean canUseRebirthRevive() {
 		return rebirthEffect != null || hasAccess(AdminConfig.AUTO_RES);
-	}
-
-	/**
-	 * Put up supplements to subtraction queue, so that when moving they would not decrease, need update as confirmation To update use
-	 * updateSupplements()
-	 */
-	public void subtractSupplements(int count, int supplementId) {
-		subtractedSupplementsCount = count;
-		subtractedSupplementId = supplementId;
-	}
-
-	/**
-	 * Update supplements in queue and clear the queue
-	 */
-	public void updateSupplements() {
-		if (subtractedSupplementId == 0 || subtractedSupplementsCount == 0)
-			return;
-		getInventory().decreaseByItemId(subtractedSupplementId, subtractedSupplementsCount);
-		subtractedSupplementsCount = 0;
-		subtractedSupplementId = 0;
 	}
 
 	public byte getPortAnimationId() {

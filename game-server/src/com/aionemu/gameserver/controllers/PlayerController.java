@@ -8,9 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.aionemu.gameserver.GameServer;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.handler.ShoutEventHandler;
@@ -82,7 +79,6 @@ import com.aionemu.gameserver.world.zone.ZoneInstance;
  */
 public class PlayerController extends CreatureController<Player> {
 
-	private static final Logger log = LoggerFactory.getLogger(PlayerController.class);
 	private static final int PROTECTION_TIME = 60000;
 	private long lastAttackMillis = 0;
 	private long lastAttackedMillis = 0;
@@ -505,17 +501,16 @@ public class PlayerController extends CreatureController<Player> {
 
 	@Override
 	public void cancelCurrentSkill(Creature lastAttacker) {
-		cancelCurrentSkill(lastAttacker, SM_SYSTEM_MESSAGE.STR_SKILL_CANCELED());
+		if (getOwner().isCasting())
+			cancelCurrentSkill(lastAttacker, SM_SYSTEM_MESSAGE.STR_SKILL_CANCELED());
 	}
 
 	@Override
 	public void cancelCurrentSkill(Creature lastAttacker, SM_SYSTEM_MESSAGE message) {
-		if (getOwner().getCastingSkill() == null) {
-			return;
-		}
-
 		Player player = getOwner();
 		Skill castingSkill = player.getCastingSkill();
+		if (castingSkill == null)
+			return;
 		castingSkill.cancelCast();
 		player.setCasting(null);
 		if (castingSkill.allowAnimationBoostByCastSpeed())
