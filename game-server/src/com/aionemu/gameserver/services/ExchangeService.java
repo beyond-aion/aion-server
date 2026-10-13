@@ -16,6 +16,7 @@ import com.aionemu.gameserver.model.items.storage.StorageType;
 import com.aionemu.gameserver.model.trade.Exchange;
 import com.aionemu.gameserver.model.trade.ExchangeItem;
 import com.aionemu.gameserver.network.aion.serverpackets.*;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_EXCHANGE_CONFIRMATION.Action;
 import com.aionemu.gameserver.restrictions.PlayerRestrictions;
 import com.aionemu.gameserver.services.item.ItemFactory;
 import com.aionemu.gameserver.services.item.ItemPacketService;
@@ -176,7 +177,7 @@ public class ExchangeService {
 		if (exchange != null) {
 			exchange.lock();
 			Player currentParter = getCurrentParter(activePlayer);
-			PacketSendUtility.sendPacket(currentParter, new SM_EXCHANGE_CONFIRMATION(3));
+			PacketSendUtility.sendPacket(currentParter, new SM_EXCHANGE_CONFIRMATION(Action.PARTNER_LOCKED));
 		}
 	}
 
@@ -186,7 +187,7 @@ public class ExchangeService {
 
 		if (currentPartner != null) {
 			returnItems(currentPartner);
-			PacketSendUtility.sendPacket(currentPartner, new SM_EXCHANGE_CONFIRMATION(1));
+			PacketSendUtility.sendPacket(currentPartner, new SM_EXCHANGE_CONFIRMATION(Action.CANCELED));
 		}
 
 		cleanUpExchanges(true, activePlayer, currentPartner);
@@ -226,9 +227,12 @@ public class ExchangeService {
 		currentExchange.confirm();
 
 		Player currentPartner = getCurrentParter(activePlayer);
-		PacketSendUtility.sendPacket(currentPartner, new SM_EXCHANGE_CONFIRMATION(2));
+		Exchange partnerExchange = currentPartner == null ? null : getCurrentExchange(currentPartner);
+		if (partnerExchange == null)
+			return;
+		PacketSendUtility.sendPacket(currentPartner, new SM_EXCHANGE_CONFIRMATION(Action.PARTNER_CONFIRMED));
 
-		if (getCurrentExchange(currentPartner).isConfirmed()) {
+		if (partnerExchange.isConfirmed()) {
 			performTrade(activePlayer, currentPartner);
 		}
 	}
@@ -246,14 +250,20 @@ public class ExchangeService {
 			return;
 		}
 
+		if (!canGive(activePlayer, exchange1) || !canGive(currentPartner, exchange2)) {
+			PacketSendUtility.sendPacket(activePlayer, new SM_EXCHANGE_CONFIRMATION(Action.CANCELED));
+			cancelExchange(activePlayer);
+			return;
+		}
+
 		if (!removeItemsFromInventory(activePlayer, exchange1) || !removeItemsFromInventory(currentPartner, exchange2)) {
 			cleanUpExchanges(true, activePlayer, currentPartner);
 			AuditLogger.log(activePlayer, "tried to exploit kinah exchange with partner: " + currentPartner);
 			return;
 		}
 
-		PacketSendUtility.sendPacket(activePlayer, new SM_EXCHANGE_CONFIRMATION(0));
-		PacketSendUtility.sendPacket(currentPartner, new SM_EXCHANGE_CONFIRMATION(0));
+		PacketSendUtility.sendPacket(activePlayer, new SM_EXCHANGE_CONFIRMATION(Action.COMPLETED));
+		PacketSendUtility.sendPacket(currentPartner, new SM_EXCHANGE_CONFIRMATION(Action.COMPLETED));
 
 		putItemToInventory(activePlayer, currentPartner, exchange1, exchange2);
 		putItemToInventory(currentPartner, activePlayer, exchange2, exchange1);
@@ -276,6 +286,18 @@ public class ExchangeService {
 				}
 			}
 		}
+	}
+
+	/**
+	 * Items can still be used, equipped or deleted and kinah can still be spent after they were put into the exchange.
+	 */
+	private boolean canGive(Player player, Exchange exchange) {
+		for (ExchangeItem exchangeItem : exchange.getItems().values()) {
+			Item item = player.getInventory().getItemByObjId(exchangeItem.getItemObjId());
+			if (item == null || item.getItemCount() < exchangeItem.getItemCount())
+				return false;
+		}
+		return player.getInventory().getKinah() >= exchange.getKinahCount();
 	}
 
 	private boolean removeItemsFromInventory(Player player, Exchange exchange) {
