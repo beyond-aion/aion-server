@@ -76,8 +76,7 @@ public class CosmeticItemAction extends AbstractItemAction {
 				playerAppearance.setSkinRGB(preset.getEyeColor());
 				playerAppearance.setHair(preset.getHairType());
 				playerAppearance.setFace(preset.getFaceType());
-				playerAppearance.setHeight(preset.getScale());
-				player.getAccountData().updateBoundingRadius();
+				playerAppearance.setHeightScale(preset.getScale());
 			}
 			default -> {
 				LoggerFactory.getLogger(getClass()).warn("Unhandled cosmetic item type: {}", type);

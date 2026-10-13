@@ -62,8 +62,6 @@ public class PlayerCommonData extends CreatureTemplate {
 	private boolean isDaeva;
 	private boolean isInEditMode;
 
-	private BoundRadius boundRadius;
-
 	private long lastTransferTime;
 
 	// TODO: Move all function to playerService or Player class.
@@ -524,13 +522,9 @@ public class PlayerCommonData extends CreatureTemplate {
 		return mailboxLetters;
 	}
 
-	public void setBoundingRadius(BoundRadius boundRadius) {
-		this.boundRadius = boundRadius;
-	}
-
 	@Override
 	public BoundRadius getBoundRadius() {
-		return boundRadius;
+		return BoundRadius.PLAYER;
 	}
 
 	public void setDeathCount(int count) {

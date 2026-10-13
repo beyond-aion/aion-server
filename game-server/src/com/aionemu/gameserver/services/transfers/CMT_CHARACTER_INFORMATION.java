@@ -134,7 +134,7 @@ public class CMT_CHARACTER_INFORMATION extends BaseClientPacket<AionConnection> 
 		playerAppearance.setShoulders(readUC());
 		playerAppearance.setFaceShape(readUC());
 		playerAppearance.setVoice(readUC());
-		playerAppearance.setHeight(readF());
+		playerAppearance.setHeightScale(readF());
 
 		PlayerAccountData accPlData = new PlayerAccountData(playerCommonData, playerAppearance);
 		Account account = AccountService.loadAccount(targetAccount);

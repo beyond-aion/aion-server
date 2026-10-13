@@ -82,7 +82,7 @@ public class PlayerAppearanceDAO {
 					pa.setFootSize(resultSet.getInt("foot_size"));
 					pa.setFacialRate(resultSet.getInt("facial_rate"));
 					pa.setVoice(resultSet.getInt("voice"));
-					pa.setHeight(resultSet.getFloat("height"));
+					pa.setHeightScale(resultSet.getFloat("height"));
 				}
 			}
 		} catch (Exception e) {
@@ -171,7 +171,7 @@ public class PlayerAppearanceDAO {
 				ps.setInt(51, pa.getFootSize());
 				ps.setInt(52, pa.getFacialRate());
 				ps.setInt(53, pa.getVoice());
-				ps.setFloat(54, pa.getHeight());
+				ps.setFloat(54, pa.getHeightScale());
 				ps.execute();
 			}
 		});

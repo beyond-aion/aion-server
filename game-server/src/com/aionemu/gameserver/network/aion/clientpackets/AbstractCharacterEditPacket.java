@@ -103,6 +103,6 @@ public abstract class AbstractCharacterEditPacket extends AionClientPacket {
 		readC();
 		readC();
 		readC();
-		playerAppearance.setHeight(readF());
+		playerAppearance.setHeightScale(readF());
 	}
 }
