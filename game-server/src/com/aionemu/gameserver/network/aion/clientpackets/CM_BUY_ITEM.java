@@ -57,7 +57,7 @@ public class CM_BUY_ITEM extends AionClientPacket {
 			tradeList = new TradeList(sellerObjId);
 		}
 
-		Set<Integer> itemObjectIds = new HashSet<>();
+		Set<Integer> entryIds = new HashSet<>();
 		for (int i = 0; i < amount; i++) {
 			int entryId = readD(); // see TradeAction.entryType
 			long count = readQ();
@@ -68,9 +68,14 @@ public class CM_BUY_ITEM extends AionClientPacket {
 				AuditLogger.log(player, "might be abusing CM_BUY_ITEM entry: " + tradeAction.entryType + " " + entryId + " was sent with count " + count + " for " + tradeAction);
 				break;
 			}
-			if (tradeAction.entryType == EntryType.ITEM_OBJECT_ID && !itemObjectIds.add(entryId)) {
+			if (tradeAction.entryType == EntryType.STORE_INDEX && entryId < 0) {
 				isAudit = true;
-				AuditLogger.log(player, "might be abusing CM_BUY_ITEM: item object ID " + entryId + " was sent more than once for " + tradeAction);
+				AuditLogger.log(player, "might be abusing CM_BUY_ITEM: " + tradeAction.entryType + " " + entryId + " was sent for " + tradeAction);
+				break;
+			}
+			if ((tradeAction.entryType == EntryType.ITEM_OBJECT_ID || tradeAction.entryType == EntryType.STORE_INDEX) && !entryIds.add(entryId)) {
+				isAudit = true;
+				AuditLogger.log(player, "might be abusing CM_BUY_ITEM: " + tradeAction.entryType + " " + entryId + " was sent more than once for " + tradeAction);
 				break;
 			}
 
