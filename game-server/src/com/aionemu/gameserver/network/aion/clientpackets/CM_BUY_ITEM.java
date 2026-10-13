@@ -1,14 +1,11 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.HashSet;
 import java.util.Set;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.Pet;
-import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.pet.PetFunction;
 import com.aionemu.gameserver.model.templates.pet.PetFunctionType;
@@ -29,12 +26,8 @@ import com.aionemu.gameserver.utils.audit.AuditLogger;
  */
 public class CM_BUY_ITEM extends AionClientPacket {
 
-	private static final Logger log = LoggerFactory.getLogger(CM_BUY_ITEM.class);
 	private int sellerObjId;
-	private short tradeActionId;
-	private int amount;
-	private int itemId;
-	private long count;
+	private TradeAction tradeAction;
 	private boolean isAudit;
 	private TradeList tradeList;
 	private RepurchaseList repurchaseList;
@@ -47,45 +40,44 @@ public class CM_BUY_ITEM extends AionClientPacket {
 	protected void readImpl() {
 		Player player = getConnection().getActivePlayer();
 		sellerObjId = readD();
-		tradeActionId = readH();
-		amount = readUH(); // total no of items
+		tradeAction = TradeAction.fromId(readUC());
+		readC(); // unused
+		int amount = readUH(); // total no of items
 
-		if (amount < 0 || amount > 36) {
+		if (tradeAction == null)
+			return;
+		if (amount > 36) {
 			isAudit = true;
 			AuditLogger.log(player, "might be abusing CM_BUY_ITEM amount: " + amount);
 			return;
 		}
-		if (tradeActionId == 2) {
+		if (tradeAction == TradeAction.SHOP_REPURCHASE) {
 			repurchaseList = new RepurchaseList(sellerObjId);
 		} else {
 			tradeList = new TradeList(sellerObjId);
 		}
 
+		Set<Integer> itemObjectIds = new HashSet<>();
 		for (int i = 0; i < amount; i++) {
-			itemId = readD();
-			count = readQ();
+			int entryId = readD(); // see TradeAction.entryType
+			long count = readQ();
 
 			// prevent exploit packets
-			if (count < 0 || (itemId <= 0 && tradeActionId != 0) || count > 20000) {
+			if (count <= 0 || (entryId <= 0 && tradeAction.entryType != EntryType.STORE_INDEX) || count > 20000) {
 				isAudit = true;
-				AuditLogger.log(player, "might be abusing CM_BUY_ITEM item: " + itemId + " count: " + count);
+				AuditLogger.log(player, "might be abusing CM_BUY_ITEM entry: " + tradeAction.entryType + " " + entryId + " was sent with count " + count + " for " + tradeAction);
+				break;
+			}
+			if (tradeAction.entryType == EntryType.ITEM_OBJECT_ID && !itemObjectIds.add(entryId)) {
+				isAudit = true;
+				AuditLogger.log(player, "might be abusing CM_BUY_ITEM: item object ID " + entryId + " was sent more than once for " + tradeAction);
 				break;
 			}
 
-			switch (tradeActionId) {
-				case 0:// private store (in this case its not itemId/objId, but item index in sellers list...)
-				case 1:// sell to shop
-				case 13:// buy from shop
-				case 14:// buy from abyss shop
-				case 15:// buy from reward shop
-				case 16:// buy from general shop
-				case 17:// sell to pet
-					tradeList.addItem(itemId, count);
-					break;
-				case 2:// repurchase
-					repurchaseList.addRepurchaseItem(player, itemId, count);
-					break;
-			}
+			if (tradeAction == TradeAction.SHOP_REPURCHASE)
+				repurchaseList.addRepurchaseItem(player, entryId, count);
+			else
+				tradeList.addItem(entryId, count);
 		}
 	}
 
@@ -93,52 +85,83 @@ public class CM_BUY_ITEM extends AionClientPacket {
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
 
-		if (isAudit || player == null)
+		if (tradeAction == null || isAudit || player == null)
 			return;
 
-		VisibleObject target = player.getKnownList().getObject(sellerObjId);
-
-		if (target == null)
-			return;
-
-		if (target instanceof Player targetPlayer && tradeActionId == 0) {
-			PrivateStoreService.sellStoreItem(targetPlayer, player, tradeList);
-		} else if (target instanceof Npc npc) {
-			if (!DialogService.isInteractionAllowed(player, npc)) {
-				AuditLogger.log(player, "might be abusing CM_BUY_ITEM: no right trading with " + npc);
-				return;
+		switch (player.getKnownList().getObject(sellerObjId)) {
+			case Player seller when tradeAction == TradeAction.PRIVATE_STORE_BUY -> PrivateStoreService.sellStoreItem(seller, player, tradeList);
+			case Npc npc -> tradeWithNpc(player, npc);
+			case Pet pet when pet.getMaster() == player && tradeAction == TradeAction.PET_SELL -> {
+				PetFunction pf = pet.getObjectTemplate().getPetFunction(PetFunctionType.MERCHANT);
+				if (pf != null)
+					TradeService.performSellToShop(player, tradeList, null, pf.getRatePrice());
 			}
-			TradeListTemplate tradeTemplate;
-			switch (tradeActionId) {
-				case 1: // sell to shop
-					if (npc.canBuy() || npc.canPurchase()) {
-						tradeTemplate = DataManager.TRADE_LIST_DATA.getPurchaseTemplate(npc.getNpcId());
-						if (tradeTemplate != null && tradeTemplate.getTradeNpcType() == TradeNpcType.ABYSS)
-							TradeService.performSellForAPToShop(player, tradeList, tradeTemplate);
-						else
-							TradeService.performSellToShop(player, tradeList, tradeTemplate);
-					}
-					break;
-				case 2: // repurchase
-					if (npc.canBuy())
-						RepurchaseService.getInstance().repurchaseFromShop(player, repurchaseList);
-					break;
-				case 13: // buy from shop
-				case 14: // buy from abyss shop
-				case 15: // reward shop
-				case 16: // abyss_kinah shop
-					if (npc.canSell())
-						TradeService.performBuyFromShop(npc, player, tradeList);
-					break;
-				default:
-					log.warn("Unknown shop action: {}", tradeActionId);
-					break;
-			}
-		} else if (target instanceof Pet) {
-			PetFunction pf = ((Pet) target).getObjectTemplate().getPetFunction(PetFunctionType.MERCHANT);
-			if (pf != null && tradeActionId == 17) {
-				TradeService.performSellToShop(player, tradeList, null, pf.getRatePrice());
+			case null, default -> {
 			}
 		}
+	}
+
+	private void tradeWithNpc(Player player, Npc npc) {
+		if (!DialogService.isInteractionAllowed(player, npc)) {
+			AuditLogger.log(player, "might be abusing CM_BUY_ITEM: no right trading with " + npc);
+			return;
+		}
+		switch (tradeAction) {
+			case SHOP_SELL -> {
+				if (npc.canBuy() || npc.canPurchase()) {
+					TradeListTemplate tradeTemplate = DataManager.TRADE_LIST_DATA.getPurchaseTemplate(npc.getNpcId());
+					if (tradeTemplate != null && tradeTemplate.getTradeNpcType() == TradeNpcType.ABYSS)
+						TradeService.performSellForAPToShop(player, tradeList, tradeTemplate);
+					else
+						TradeService.performSellToShop(player, tradeList, tradeTemplate);
+				}
+			}
+			case SHOP_REPURCHASE -> {
+				if (npc.canBuy())
+					RepurchaseService.getInstance().repurchaseFromShop(player, repurchaseList);
+			}
+			case SHOP_BUY, ABYSS_SHOP_BUY, REWARD_SHOP_BUY, ABYSS_KINAH_SHOP_BUY -> {
+				if (npc.canSell())
+					TradeService.performBuyFromShop(npc, player, tradeList);
+			}
+			default -> {
+			}
+		}
+	}
+
+	private enum TradeAction {
+
+		PRIVATE_STORE_BUY(0, EntryType.STORE_INDEX),
+		SHOP_SELL(1, EntryType.ITEM_OBJECT_ID),
+		SHOP_REPURCHASE(2, EntryType.ITEM_OBJECT_ID),
+		SHOP_BUY(13, EntryType.ITEM_ID), // the NPC's trade type decides the price, not which of the buy actions the client sends
+		ABYSS_SHOP_BUY(14, EntryType.ITEM_ID),
+		REWARD_SHOP_BUY(15, EntryType.ITEM_ID),
+		ABYSS_KINAH_SHOP_BUY(16, EntryType.ITEM_ID),
+		PET_SELL(17, EntryType.ITEM_OBJECT_ID);
+
+		private final int id;
+		private final EntryType entryType;
+
+		TradeAction(int id, EntryType entryType) {
+			this.id = id;
+			this.entryType = entryType;
+		}
+
+		private static TradeAction fromId(int id) {
+			for (TradeAction action : values())
+				if (action.id == id)
+					return action;
+			return null;
+		}
+	}
+
+	/**
+	 * What the ID of each item entry in the packet refers to.
+	 */
+	private enum EntryType {
+		STORE_INDEX, // index in the seller's private store list
+		ITEM_ID,
+		ITEM_OBJECT_ID
 	}
 }
