@@ -133,6 +133,7 @@ public class MailService {
 				attachedItem = senderItem;
 			} else if (senderItem.getItemCount() > attachedItemCount) {
 				attachedItem = ItemFactory.newItem(senderItem.getItemTemplate().getTemplateId(), attachedItemCount);
+				attachedItem.setExpireTime(senderItem.getExpireTime());
 				senderInventory.decreaseItemCount(senderItem, attachedItemCount);
 			}
 

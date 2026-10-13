@@ -138,6 +138,7 @@ public class ExchangeService {
 			Item newItem = null;
 			if (itemCount < item.getItemCount()) {
 				newItem = ItemFactory.newItem(item.getItemId(), itemCount);
+				newItem.setExpireTime(item.getExpireTime());
 			} else {
 				newItem = item;
 			}

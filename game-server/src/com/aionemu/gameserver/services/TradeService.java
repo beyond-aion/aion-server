@@ -234,6 +234,7 @@ public class TradeService {
 				repurchaseItem = item;
 			} else if (item.getItemCount() - count > 0) {
 				repurchaseItem = ItemFactory.newItem(item.getItemId(), count);
+				repurchaseItem.setExpireTime(item.getExpireTime());
 				inventory.decreaseItemCount(item, count);
 			} else
 				return false;
