@@ -104,7 +104,7 @@ public class SM_PLAYER_INFO extends AbstractPlayerInfoPacket {
 		writeC(playerAppearance.getFaceContour());
 		writeC(playerAppearance.getExpression());
 
-		writeC(5); // unk 0x05 0x06
+		writeC(6); // always 6, unused by the client
 
 		writeC(playerAppearance.getJawLine());
 		writeC(playerAppearance.getForehead());
@@ -131,8 +131,8 @@ public class SM_PLAYER_INFO extends AbstractPlayerInfoPacket {
 		writeC(playerAppearance.getLipSize());
 		writeC(playerAppearance.getSmile());
 		writeC(playerAppearance.getLipShape());
-		writeC(playerAppearance.getJawHeigh());
-		writeC(playerAppearance.getChinJut());
+		writeC(playerAppearance.getChinHeight());
+		writeC(playerAppearance.getCheekBones());
 		writeC(playerAppearance.getEarShape());
 		writeC(playerAppearance.getHeadSize());
 		// 1.5.x 0x00, shoulderSize, armLength, legLength (BYTE) after HeadSize

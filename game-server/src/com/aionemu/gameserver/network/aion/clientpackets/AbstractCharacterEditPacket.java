@@ -15,6 +15,11 @@ import com.aionemu.gameserver.utils.Util;
  */
 public abstract class AbstractCharacterEditPacket extends AionClientPacket {
 
+	/**
+	 * Range of the height slider in character creation. The client renders any other value as is.
+	 */
+	private static final float MIN_HEIGHT_SCALE = 0.65f, MAX_HEIGHT_SCALE = 1.2f;
+
 	protected String characterName;
 	protected Gender gender;
 	protected Race race;
@@ -46,7 +51,7 @@ public abstract class AbstractCharacterEditPacket extends AionClientPacket {
 		playerAppearance.setTattoo(readUC());
 		playerAppearance.setFaceContour(readUC());
 		playerAppearance.setExpression(readUC());
-		readC(); // always 4 o0 // 5 in 1.5.x
+		readC(); // always 6, unused by the client
 		playerAppearance.setJawLine(readUC());
 		playerAppearance.setForehead(readUC());
 
@@ -72,8 +77,8 @@ public abstract class AbstractCharacterEditPacket extends AionClientPacket {
 		playerAppearance.setLipSize(readUC());
 		playerAppearance.setSmile(readUC());
 		playerAppearance.setLipShape(readUC());
-		playerAppearance.setJawHeigh(readUC());
-		playerAppearance.setChinJut(readUC());
+		playerAppearance.setChinHeight(readUC());
+		playerAppearance.setCheekBones(readUC());
 		playerAppearance.setEarShape(readUC());
 		playerAppearance.setHeadSize(readUC());
 
@@ -95,14 +100,15 @@ public abstract class AbstractCharacterEditPacket extends AionClientPacket {
 		playerAppearance.setFootSize(readUC());
 		playerAppearance.setFacialRate(readUC());
 
-		readC(); // always 0
+		readC(); // wing size, the slider is hidden so it's always 0
 		playerAppearance.setArmLength(readUC());
-		playerAppearance.setLegLength(readUC()); // wrong??
-		playerAppearance.setShoulders(readUC()); // 1.5.x May be ShoulderSize
+		playerAppearance.setLegLength(readUC());
+		playerAppearance.setShoulders(readUC()); // shoulder width, unlike shoulderSize
 		playerAppearance.setFaceShape(readUC());
-		readC();
-		readC();
-		readC();
-		playerAppearance.setHeightScale(readF());
+		readC(); // unused
+		readH(); // padding
+		float heightScale = readF();
+		// Stricter than retail: retail keeps NaN, which the client can't render, we use the default height instead
+		playerAppearance.setHeightScale(Float.isNaN(heightScale) ? 1 : Math.clamp(heightScale, MIN_HEIGHT_SCALE, MAX_HEIGHT_SCALE));
 	}
 }

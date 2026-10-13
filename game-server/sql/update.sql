@@ -9,3 +9,7 @@ ALTER TABLE `players`
 
 ALTER TABLE `player_recipes`
 	ADD COLUMN `production_limit` tinyint NOT NULL DEFAULT '0' AFTER `recipe_id`;
+
+ALTER TABLE `player_appearance`
+	RENAME COLUMN `jaw_height` TO `chin_height`,
+	RENAME COLUMN `chin_jut` TO `cheek_bones`;

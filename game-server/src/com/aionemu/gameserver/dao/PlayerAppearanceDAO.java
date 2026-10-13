@@ -62,8 +62,8 @@ public class PlayerAppearanceDAO {
 					pa.setLipSize(resultSet.getInt("lip_size"));
 					pa.setSmile(resultSet.getInt("smile"));
 					pa.setLipShape(resultSet.getInt("lip_shape"));
-					pa.setJawHeigh(resultSet.getInt("jaw_height"));
-					pa.setChinJut(resultSet.getInt("chin_jut"));
+					pa.setChinHeight(resultSet.getInt("chin_height"));
+					pa.setCheekBones(resultSet.getInt("cheek_bones"));
 					pa.setEarShape(resultSet.getInt("ear_shape"));
 					pa.setHeadSize(resultSet.getInt("head_size"));
 					pa.setNeck(resultSet.getInt("neck"));
@@ -110,7 +110,7 @@ public class PlayerAppearanceDAO {
 			+ "player_id, face, hair, deco, tattoo, face_contour, expression, jaw_line, skin_rgb, hair_rgb, lip_rgb, eye_rgb, face_shape,"
 			+ "forehead, eye_height, eye_space, eye_width, eye_size, eye_shape, eye_angle,"
 			+ "brow_height, brow_angle, brow_shape, nose, nose_bridge, nose_width, nose_tip, "
-			+ "cheek, lip_height, mouth_size, lip_size, smile, lip_shape, jaw_height, chin_jut, ear_shape,"
+			+ "cheek, lip_height, mouth_size, lip_size, smile, lip_shape, chin_height, cheek_bones, ear_shape,"
 			+ "head_size, neck, neck_length, shoulders, shoulder_size , torso, chest, waist, hips, arm_thickness, arm_length, hand_size,"
 			+ "leg_thickness, leg_length, foot_size, facial_rate, voice, height)" + " VALUES "
 			+ "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,"
@@ -151,8 +151,8 @@ public class PlayerAppearanceDAO {
 				ps.setInt(31, pa.getLipSize());
 				ps.setInt(32, pa.getSmile());
 				ps.setInt(33, pa.getLipShape());
-				ps.setInt(34, pa.getJawHeigh());
-				ps.setInt(35, pa.getChinJut());
+				ps.setInt(34, pa.getChinHeight());
+				ps.setInt(35, pa.getCheekBones());
 				ps.setInt(36, pa.getEarShape());
 				ps.setInt(37, pa.getHeadSize());
 				ps.setInt(38, pa.getNeck());
