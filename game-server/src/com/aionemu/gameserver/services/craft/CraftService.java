@@ -131,6 +131,7 @@ public class CraftService {
 			int interval = 2500 - (skillLvlDiff * 60);
 			craftingTask.setInterval(interval < intervalCap ? intervalCap : interval);
 		}
+		player.blockQuitting();
 		craftingTask.start();
 	}
 

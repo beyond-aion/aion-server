@@ -312,6 +312,10 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 			&& (target == null || getOwner().isDead() || getOwner().getLifeStats().isAboutToDie() || !getOwner().canAttack() || !getOwner().isSpawned())) {
 			return;
 		}
+		if (getOwner() instanceof Player player)
+			player.blockQuitting();
+		if (target instanceof Player player)
+			player.blockQuitting();
 
 		// Calculate and apply damage
 		AttackHandAnimation attackHandAnimation = AttackHandAnimation.MAIN_HAND;

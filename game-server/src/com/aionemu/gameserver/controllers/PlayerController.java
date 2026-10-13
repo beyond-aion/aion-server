@@ -446,6 +446,7 @@ public class PlayerController extends CreatureController<Player> {
 		}
 
 		enterCombat(false);
+		getOwner().blockQuitting();
 	}
 
 	public void useSkill(SkillTemplate template, int targetType, float x, float y, float z, int clientHitTime, int skillLevel) {
