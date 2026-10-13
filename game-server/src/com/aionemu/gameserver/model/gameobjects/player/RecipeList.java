@@ -76,7 +76,7 @@ public class RecipeList {
 			productionLimitByRecipeId.remove(recipeId);
 			PlayerRecipesDAO.delRecipe(player.getObjectId(), recipeId);
 			PacketSendUtility.sendPacket(player, new SM_RECIPE_DELETE(recipeId));
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMBINE_USAGE_OVER(ChatUtil.recipe(recipeId, player)));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMBINE_USAGE_OVER(ChatUtil.recipeName(recipeId, player.getName())));
 		}
 	}
 
