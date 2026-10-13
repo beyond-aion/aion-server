@@ -68,9 +68,10 @@ public class CM_QUIT extends AionClientPacket {
 			PlayerLeaveWorldService.leaveWorldNow(player);
 		}
 
+		SM_QUIT_RESPONSE response = charEditScreen ? SM_QUIT_RESPONSE.quitToEditScreen() : SM_QUIT_RESPONSE.quit();
 		if (stayConnected)
-			sendPacket(new SM_QUIT_RESPONSE(charEditScreen));
+			sendPacket(response);
 		else
-			con.close(new SM_QUIT_RESPONSE(charEditScreen)); // makes sure this packet will be sent before closing connection
+			con.close(response); // makes sure this packet will be sent before closing connection
 	}
 }

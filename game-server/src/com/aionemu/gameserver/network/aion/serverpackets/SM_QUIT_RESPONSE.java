@@ -13,17 +13,17 @@ public class SM_QUIT_RESPONSE extends AionServerPacket {
 	private final int result;
 	private final int value;
 
-	public SM_QUIT_RESPONSE() {
-		this(false);
-	}
-
-	public SM_QUIT_RESPONSE(boolean editMode) {
-		this(editMode ? 2 : 1, 0);
-	}
-
 	private SM_QUIT_RESPONSE(int result, int value) {
 		this.result = result;
 		this.value = value;
+	}
+
+	public static SM_QUIT_RESPONSE quit() {
+		return new SM_QUIT_RESPONSE(1, 0);
+	}
+
+	public static SM_QUIT_RESPONSE quitToEditScreen() {
+		return new SM_QUIT_RESPONSE(2, 0);
 	}
 
 	/**
