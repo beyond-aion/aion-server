@@ -73,34 +73,33 @@ public class SecurityConfig {
 	public static int SURVEY_DELAY;
 
 	/**
-	 * Restriction mode for multi-clienting:<br>
-	 * NONE - Players are allowed to log in multiple accounts per computer<br>
-	 * FULL - Players are allowed to log in one account per computer<br>
-	 * SAME_FACTION - Players are allowed to log in multiple accounts per computer, but only log in characters of the same faction<br>
+	 * Maximum number of characters that can be logged in simultaneously from one computer (0 = unlimited).
 	 */
-	@Property(key = "gameserver.security.multi_clienting.restriction_mode", defaultValue = "NONE")
-	public static MultiClientingRestrictionMode MULTI_CLIENTING_RESTRICTION_MODE;
+	@Property(key = "gameserver.security.multi_client.max_clients_per_computer", defaultValue = "0")
+	public static int MULTI_CLIENT_MAX_CLIENTS_PER_COMPUTER;
+
+	/**
+	 * Whether characters of both factions can be logged in from the same IP or MAC address.
+	 */
+	@Property(key = "gameserver.security.multi_client.allow_both_factions", defaultValue = "true")
+	public static boolean MULTI_CLIENT_ALLOW_BOTH_FACTIONS;
 
 	/**
 	 * Comma separated list of MAC addresses that are allowed to log in regardless of the configured restrictions.
 	 */
-	@Property(key = "gameserver.security.multi_clienting.ignored_mac_addresses", defaultValue = "")
-	public static Set<String> MULTI_CLIENTING_IGNORED_MAC_ADDRESSES;
+	@Property(key = "gameserver.security.multi_client.ignored_mac_addresses", defaultValue = "")
+	public static Set<String> MULTI_CLIENT_IGNORED_MAC_ADDRESSES;
 
 	/**
-	 * If multi-clienting is restricted to the same faction, logging in characters of one faction will be denied until all characters of the opposite
+	 * If characters of both factions are not allowed, logging in characters of one faction will be denied until all characters of the opposite
 	 * faction have been offline for the specified amount of time.
 	 */
-	@Property(key = "gameserver.security.multi_clienting.faction_switch_cooldown_minutes", defaultValue = "20")
-	public static int MULTI_CLIENTING_FACTION_SWITCH_COOLDOWN_MINUTES;
+	@Property(key = "gameserver.security.multi_client.faction_switch_cooldown_minutes", defaultValue = "20")
+	public static int MULTI_CLIENT_FACTION_SWITCH_COOLDOWN_MINUTES;
 
 	@Property(key = "gameserver.security.hdd_serial_lock.enable", defaultValue = "false")
 	public static boolean HDD_SERIAL_LOCK_ENABLE;
 
 	@Property(key = "gameserver.security.hdd_serial_lock.auto_lock", defaultValue = "false")
 	public static boolean HDD_SERIAL_LOCK_UNLOCKED_ACCOUNTS;
-
-	public enum MultiClientingRestrictionMode {
-		NONE, FULL, SAME_FACTION
-	}
 }

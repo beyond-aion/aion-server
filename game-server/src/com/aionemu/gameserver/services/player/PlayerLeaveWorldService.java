@@ -96,7 +96,7 @@ public class PlayerLeaveWorldService {
 		if (AutoGroupConfig.AUTO_GROUP_ENABLE)
 			AutoGroupService.getInstance().onLogout(player);
 		ConquerorAndProtectorService.getInstance().onLeaveMap(player);
-		MultiClientingService.onLeaveWorld(player);
+		MultiClientService.onLeaveWorld(player);
 		InstanceService.onLogout(player);
 		GMService.getInstance().onPlayerLogout(player);
 		KiskService.getInstance().onLogout(player);
