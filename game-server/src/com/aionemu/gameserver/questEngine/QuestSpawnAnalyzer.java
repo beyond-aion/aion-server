@@ -39,6 +39,7 @@ public class QuestSpawnAnalyzer {
 		Set<Integer> allSpawns = loadNpcIdsSpawnedByHandlers();
 		DataManager.SPAWNS_DATA.addAllNpcIdsToSet(allSpawns);
 		DataManager.TOWN_SPAWNS_DATA.addAllNpcIdsToSet(allSpawns);
+		DataManager.HOUSE_DATA.addAllManagerNpcIdsToSet(allSpawns);
 		DataManager.EVENT_DATA.addAllNpcIdsToSet(allSpawns);
 		for (NpcFactionTemplate nft : DataManager.NPC_FACTIONS_DATA.getNpcFactionsData()) {
 			if (nft.getNpcIds() == null || nft.getNpcIds().stream().anyMatch(allSpawns::contains))
@@ -98,7 +99,7 @@ public class QuestSpawnAnalyzer {
 
 	public static Set<Integer> loadNpcIdsSpawnedByHandlers() {
 		Set<Integer> npcIds = new HashSet<>();
-		Pattern pattern = Pattern.compile("\\bsp(?:awn)?\\([^,\\d]*(\\d{6})(?: : (\\d{6}))?");
+		Pattern pattern = Pattern.compile("(?:[^/]{2})\\bsp(?:awn(?:[A-Z][a-z]+)*)?\\([^,]*?(\\d{6})(?: : (\\d{6}))?");
 		parseSpawnNpcIds(InstanceConfig.HANDLER_DIRECTORY, pattern, npcIds);
 		parseSpawnNpcIds(GSConfig.QUEST_HANDLER_DIRECTORY, pattern, npcIds);
 		parseSpawnNpcIds(AIConfig.HANDLER_DIRECTORY, pattern, npcIds);

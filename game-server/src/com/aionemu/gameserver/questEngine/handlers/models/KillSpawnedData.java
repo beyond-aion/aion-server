@@ -31,8 +31,11 @@ public class KillSpawnedData extends MonsterHuntData {
 	public Set<Integer> getAlternativeNpcs(int npcId) {
 		for (Monster m : monster) {
 			List<Integer> npcIds = m.getNpcIds();
-			if (npcIds != null && npcIds.size() > 1 && npcIds.contains(npcId))
-				return npcIds.stream().filter(id -> id != npcId).collect(Collectors.toSet());
+			if (npcIds.contains(npcId)) {
+				Set<Integer> alternativeNpcIds = npcIds.stream().filter(id -> id != npcId).collect(Collectors.toSet());
+				alternativeNpcIds.add(m.getSpawnerNpcId());
+				return alternativeNpcIds;
+			}
 		}
 		return super.getAlternativeNpcs(npcId);
 	}
