@@ -188,12 +188,29 @@ public class TeleportService {
 		}
 	}
 
+	/**
+	 * Moves the player to another spot of its current map at once. Unlike a teleport it neither starts nor ends spawn protection, so creatures
+	 * fighting the player keep it as their target. Used when a skill pulls the player.
+	 */
+	public static void moveOnSameMap(Player player, float x, float y, float z, byte h) {
+		abortPlayerActions(player);
+		World.getInstance().despawn(player, TeleportAnimation.NONE.getDefaultObjectDeleteAnimation());
+		World.getInstance().setPosition(player, player.getWorldId(), player.getInstanceId(), x, y, z, h);
+		World.getInstance().setPosition(player.getPet(), player.getWorldId(), player.getInstanceId(), x, y, z, h);
+		spawnOnSameMap(player, false);
+	}
+
 	private static void spawnOnSameMap(Player player) {
+		spawnOnSameMap(player, true);
+	}
+
+	private static void spawnOnSameMap(Player player, boolean startProtection) {
 		PacketSendUtility.sendPacket(player, new SM_CHANNEL_INFO(player.getPosition()));
 		PacketSendUtility.sendPacket(player, new SM_PLAYER_INFO(player));
 		PacketSendUtility.sendPacket(player, new SM_STATS_INFO(player));
 		PacketSendUtility.sendPacket(player, SM_MOTION.playerMotions(player));
-		player.getController().startProtectionActiveTask(); // before spawning, so others never see the player unprotected
+		if (startProtection)
+			player.getController().startProtectionActiveTask(); // before spawning, so others never see the player unprotected
 		World.getInstance().spawn(player);
 		World.getInstance().spawn(player.getPet());
 		player.getEffectController().updatePlayerEffectIcons(null);
