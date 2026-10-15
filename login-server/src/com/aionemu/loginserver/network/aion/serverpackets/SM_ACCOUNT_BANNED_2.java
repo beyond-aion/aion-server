@@ -19,8 +19,12 @@ public final class SM_ACCOUNT_BANNED_2 extends AionServerPacket {
 		super(0x09);
 	}
 
+	/**
+	 * The client lists an entry per block after the header (a reason bit, whose position selects a STR_L2AUTH_BLOCK_* message, and a text of its
+	 * own); none are sent.
+	 */
 	@Override
 	protected void writeImpl(LoginConnection con) {
-		// maybe some option to specify a custom message (STR_L2AUTH_BLOCK_*)? need retail sniff
+		writeC(0); // number of entries
 	}
 }

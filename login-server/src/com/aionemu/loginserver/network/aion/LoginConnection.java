@@ -104,6 +104,7 @@ public class LoginConnection extends NettyConnection<AionServerPacket> {
 			close();
 			return null;
 		}
+		data.limit(data.limit() - 8); // the checksum word and the unused word after it
 		return AionPacketHandlerFactory.handle(data, this);
 	}
 

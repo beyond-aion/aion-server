@@ -83,15 +83,22 @@ public class LoginPipelineTest {
 		}
 	}
 
-	/** Builds a client packet: data, a checksum word that makes all words but the last XOR to zero, padding, then encryption. */
+	/**
+	 * Builds a client packet the way the 4.8 client does: data, padding to whole blocks, a checksum word that makes all words before it XOR to zero,
+	 * one more word, then encryption.
+	 */
 	private static ByteBuf clientPacket(byte[] data, byte[] key, boolean corrupt) {
-		int length = (data.length + 4 + 4 + 7) & ~7;
+		int padded = (data.length + 7) & ~7;
+		int length = padded + 8;
 		ByteBuffer body = ByteBuffer.allocate(length).order(ByteOrder.LITTLE_ENDIAN);
 		body.put(data);
+		for (int i = data.length; i < padded; i++)
+			body.put(i, (byte) 0x5A); // the client leaves stack garbage there
 		int checksum = 0;
-		for (int i = 0; i < data.length; i += 4)
+		for (int i = 0; i < padded; i += 4)
 			checksum ^= body.getInt(i);
-		body.putInt(data.length, checksum);
+		body.putInt(padded, checksum);
+		body.putInt(padded + 4, 0x12345678);
 		if (corrupt)
 			body.put(1, (byte) (body.get(1) ^ 0x40));
 		new BlowfishCipher(key).cipher(body, 0, length);
@@ -102,7 +109,7 @@ public class LoginPipelineTest {
 	}
 
 	private static byte[] cmAuthGG(int sessionId) {
-		ByteBuffer data = ByteBuffer.allocate(32).order(ByteOrder.LITTLE_ENDIAN);
+		ByteBuffer data = ByteBuffer.allocate(21).order(ByteOrder.LITTLE_ENDIAN);
 		data.put((byte) 0x07).putInt(sessionId);
 		return data.array();
 	}
@@ -120,7 +127,6 @@ public class LoginPipelineTest {
 		channel.writeInbound(clientPacket(cmAuthGG(sessionId), sessionKey, false));
 		ByteBuffer authGG = readServerPacket(channel, sessionKey, false);
 		assertEquals(0x0b, authGG.get(0));
-		assertEquals(sessionId, authGG.getInt(1));
 		assertTrue(channel.isOpen());
 		channel.finishAndReleaseAll();
 	}

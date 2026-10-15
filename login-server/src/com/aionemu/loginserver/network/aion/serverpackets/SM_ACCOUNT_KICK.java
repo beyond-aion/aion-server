@@ -20,6 +20,6 @@ public final class SM_ACCOUNT_KICK extends AionServerPacket {
 
 	@Override
 	protected void writeImpl(LoginConnection con) {
-		writeD(msgId); // reason
+		writeC(msgId); // response code
 	}
 }
