@@ -157,8 +157,6 @@ public class Player extends Creature {
 	 * Connection of this Player.
 	 */
 	private AionConnection clientConnection;
-	private FlyPathEntry flyLocationId;
-	private long flyStartTime;
 
 	private EmotionList emotions;
 	private MotionList motions;
@@ -819,12 +817,11 @@ public class Player extends Creature {
 		return flightPath;
 	}
 
-	public void setCurrentFlypath(FlyPathEntry path) {
-		this.flyLocationId = path;
-		if (path != null)
-			this.flyStartTime = System.currentTimeMillis();
-		else
-			this.flyStartTime = 0;
+	/**
+	 * @return The path template of the flight transporter or windstream the player is currently flying along, null if there is none.
+	 */
+	public FlyPathEntry getFlightPathTemplate() {
+		return isUsingFlightTransporterOrWindstream() ? DataManager.FLY_PATH.getPathTemplate(flightPath.getId() / 1000) : null;
 	}
 
 	/**
@@ -1331,14 +1328,6 @@ public class Player extends Creature {
 		return ItemAttackType.PHYSICAL;
 	}
 
-	public long getFlyStartTime() {
-		return flyStartTime;
-	}
-
-	public FlyPathEntry getCurrentFlyPath() {
-		return flyLocationId;
-	}
-
 	public void resetAbyssRankListUpdated() {
 		this.abyssRankListUpdateMask = 0;
 	}
@@ -1594,10 +1583,7 @@ public class Player extends Creature {
 		super.setPosition(position);
 		getMoveController().resetLastPositionFromClient(); // if we don't reset it, material collision handlers (such as shields) affect you on teleport
 		getCommonData().setMapId(position.getMapId());
-		getCommonData().setX(position.getX());
-		getCommonData().setY(position.getY());
-		getCommonData().setZ(position.getZ());
-		getCommonData().setHeading(position.getHeading());
+		getCommonData().setXYZH(position.getX(), position.getY(), position.getZ(), position.getHeading());
 		getCommonData().setWorldOwnerId(position.getMapRegion() == null ? 0 : position.getWorldMapInstance().getOwnerId());
 	}
 

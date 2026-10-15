@@ -400,6 +400,13 @@ public class PlayerCommonData extends CreatureTemplate {
 		this.heading = heading;
 	}
 
+	public void setXYZH(float x, float y, float z, byte heading) {
+		this.x = x;
+		this.y = y;
+		this.z = z;
+		this.heading = heading;
+	}
+
 	/**
 	 * @return Timestamp the player was last online. May be null
 	 */

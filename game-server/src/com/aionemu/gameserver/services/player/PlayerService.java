@@ -194,10 +194,7 @@ public class PlayerService {
 		LocationData ld = playerInitialData.getSpawnLocation(playerCommonData.getRace());
 
 		playerCommonData.setMapId(ld.getMapId());
-		playerCommonData.setX(ld.getX());
-		playerCommonData.setY(ld.getY());
-		playerCommonData.setZ(ld.getZ());
-		playerCommonData.setHeading(ld.getHeading());
+		playerCommonData.setXYZH(ld.getX(), ld.getY(), ld.getZ(), ld.getHeading());
 
 		Player newPlayer = new Player(playerAccountData, account);
 

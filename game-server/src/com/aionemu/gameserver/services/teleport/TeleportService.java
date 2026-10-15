@@ -5,7 +5,6 @@ import java.util.concurrent.FutureTask;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.gameserver.configs.main.SecurityConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.dataholders.PlayerInitialData;
 import com.aionemu.gameserver.model.CreatureType;
@@ -23,7 +22,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.RequestResponseHandler;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.items.storage.Storage;
-import com.aionemu.gameserver.model.templates.flypath.FlyPathEntry;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 import com.aionemu.gameserver.model.templates.portal.InstanceExit;
 import com.aionemu.gameserver.model.templates.portal.PortalLoc;
@@ -88,33 +86,17 @@ public class TeleportService {
 			return;
 		}
 
+		// the landing is checked against the end of the path
+		if (location.getType() == TeleportType.FLIGHT && DataManager.FLY_PATH.getPathTemplate(location.getTeleportId() / 1000) == null) {
+			log.warn("Missing flypath_location in flypath_template.xml for teleport id {}", location.getTeleportId());
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_NO_ROUTE());
+			return;
+		}
+
 		if (!checkKinahForTransportation(location, player))
 			return;
 
 		if (location.getType().equals(TeleportType.FLIGHT)) {
-			if (SecurityConfig.ENABLE_FLYPATH_VALIDATOR) {
-				FlyPathEntry flypath = DataManager.FLY_PATH.getPathTemplate(location.getLocId());
-				if (flypath == null) {
-					AuditLogger.log(player, "tried to use invalid flyPath #" + location.getLocId());
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_NO_ROUTE());
-					return;
-				}
-
-				double dist = PositionUtil.getDistance(player, flypath.getStartX(), flypath.getStartY(), flypath.getStartZ());
-				if (dist > 7) {
-					AuditLogger.log(player, "tried to use flyPath #" + location.getLocId() + " but he's too far " + dist);
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_NO_ROUTE());
-					return;
-				}
-
-				if (player.getWorldId() != flypath.getStartWorldId()) {
-					AuditLogger.log(player, "tried to use flyPath #" + location.getLocId() + " from invalid start world " + player.getWorldId()
-						+ ", expected " + flypath.getStartWorldId());
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_NO_ROUTE());
-					return;
-				}
-				player.setCurrentFlypath(flypath);
-			}
 			abortPlayerActions(player);
 			player.setState(CreatureState.FLYING);
 			player.unsetState(CreatureState.ACTIVE);
