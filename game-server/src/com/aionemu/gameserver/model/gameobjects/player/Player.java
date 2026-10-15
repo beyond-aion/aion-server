@@ -1508,11 +1508,8 @@ public class Player extends Creature {
 	@Override
 	public boolean isSkillDisabled(SkillTemplate template) {
 		ChainCondition cond = template.getChainCondition();
-		if (cond != null && cond.getAllowedActivations() > 1) { // exception for multicast
-			int chainCount = getChainSkills().getCurrentChainCount(cond.getCategory());
-			if (chainCount > 0 && chainCount < cond.getAllowedActivations() && !getChainSkills().isChainExpired())
-				return false;
-		}
+		if (cond != null && cond.getAllowedActivations() > 1 && getChainSkills().canRepeat(cond.getCategory(), cond.getAllowedActivations(), cond.getActivationWindow()))
+			return false; // exception for multicast
 		if (super.isSkillDisabled(template)) {
 			PacketSendUtility.sendPacket(this, SM_SYSTEM_MESSAGE.STR_SKILL_NOT_READY());
 			return true;
