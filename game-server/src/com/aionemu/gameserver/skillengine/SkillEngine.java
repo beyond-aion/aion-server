@@ -21,6 +21,11 @@ import com.aionemu.gameserver.skillengine.properties.Properties;
  */
 public class SkillEngine {
 
+	/**
+	 * Percent chance that a critical hit of a player adds the stumble or stagger of the weapon
+	 */
+	public static final int CRITICAL_PROC_CHANCE = 20;
+
 	private static final SkillEngine skillEngine = new SkillEngine();
 
 	/**
@@ -189,30 +194,22 @@ public class SkillEngine {
 	}
 
 	/**
-	 * @return the stumble which procs on a critical hit, null if it cannot proc for the given skill or was dodged/resisted
+	 * @return The stumble or stagger that a critical hit of the player adds by the weapon in the main hand, null if the weapon adds none or the target
+	 *         is shielded
 	 */
-	public Effect createCriticalProcEffect(Player attacker, Creature target, int skillId) {
+	public Effect createCriticalProcEffect(Player attacker, Creature target) {
 		if (target.getEffectController().isUnderNormalShield())
 			return null;
-		if (skillId != 0) {
-			SkillTemplate skillTemplate = DataManager.SKILL_DATA.getSkillTemplate(skillId);
-			if (skillTemplate.getType() == SkillType.MAGICAL) // magical skills do not stun
-				return null;
-			if (skillTemplate.hasAnyEffect(true, EffectType.PULLED, EffectType.STUMBLE, EffectType.STAGGER, EffectType.STUN, EffectType.BACKDASH,
-				EffectType.DASH, EffectType.MOVEBEHIND, EffectType.RANDOMMOVELOC, EffectType.RECALLINSTANT)
-				|| !skillTemplate.hasAnyEffect(EffectType.SKILLATKDRAININSTANT, EffectType.SKILLATTACKINSTANT))
-				return null;
-		}
-
-		int id = 0;
-		ItemGroup mainHandWeaponType = attacker.getEquipment().getMainHandWeaponType();
-		if (mainHandWeaponType != null) {
-			switch (mainHandWeaponType) {
-				case POLEARM, STAFF, GREATSWORD -> id = 8218; // stumble
-				case BOW -> id = 8217; // stun
-			}
-		}
-
+		// a player in a siege weapon or vehicle form adds none
+		if (attacker.getEffectController()
+			.hasAbnormalEffect(effect -> effect.getSkillTemplate().hasAnyEffect(EffectType.ABSOLUTESTATTOPCBUFF, EffectType.ABSOLUTESTATTOPCDEBUFF)))
+			return null;
+		ItemGroup weaponType = attacker.getEquipment().getMainHandWeaponType();
+		int id = weaponType == null ? 0 : switch (weaponType) {
+			case POLEARM, STAFF, GREATSWORD -> 8218; // stumble
+			case BOW -> 8217; // stagger
+			default -> 0;
+		};
 		if (id == 0)
 			return null;
 

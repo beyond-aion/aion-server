@@ -9,7 +9,7 @@ import com.aionemu.gameserver.ai.handler.FreezeEventHandler;
 import com.aionemu.gameserver.configs.main.AIConfig;
 import com.aionemu.gameserver.controllers.attack.AggroTarget;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
-import com.aionemu.gameserver.model.animations.AttackHandAnimation;
+import com.aionemu.gameserver.model.animations.AttackAnimation;
 import com.aionemu.gameserver.model.animations.AttackTypeAnimation;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
@@ -449,8 +449,8 @@ public abstract class AbstractAI<T extends Creature> implements AI {
 	}
 
 	@Override
-	public AttackHandAnimation modifyAttackHandAnimation(AttackHandAnimation attackHandAnimation) {
-		return attackHandAnimation;
+	public AttackAnimation modifyAttackAnimation(AttackAnimation attackAnimation) {
+		return attackAnimation;
 	}
 
 	@Override

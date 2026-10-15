@@ -25,6 +25,11 @@ public abstract class DamageEffect extends EffectTemplate {
 	@XmlAttribute
 	protected boolean shared;
 
+	public static boolean isPhysicalHit(EffectTemplate template) {
+		return template instanceof SkillAttackInstantEffect || template instanceof SkillAtkDrainInstantEffect || template instanceof DashEffect
+			|| template instanceof BackDashEffect || template instanceof MoveBehindEffect || template instanceof CarveSignetEffect;
+	}
+
 	@Override
 	public void applyEffect(Effect effect) {
 		if (effect.getSkillTemplate().getActivationAttribute() == ActivationAttribute.PROVOKED) {
