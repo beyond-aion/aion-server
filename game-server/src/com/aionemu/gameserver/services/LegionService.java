@@ -479,6 +479,7 @@ public class LegionService {
 
 	public void openLegionWarehouse(Player player, Npc npc) {
 		if (legionRestrictions.canOpenWarehouse(player, npc)) {
+			player.setStorageManager(StorageType.LEGION_WAREHOUSE, npc);
 			LegionWhUpdate(player);
 			PacketSendUtility.sendPacket(player, new SM_LEGION_EDIT(0x04, player.getLegion()));// kinah
 			int whLvl = player.getLegion().getWarehouseExpansions();

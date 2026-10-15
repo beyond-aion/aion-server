@@ -127,6 +127,7 @@ public class Player extends Creature {
 	private int resurrectionSkill = 0;
 	private boolean isFlyingBeforeDeath = false;
 	private Npc postman = null;
+	private StorageManager storageManager;
 	private boolean isInResurrectPosState = false;
 	private float resPosX = 0;
 	private float resPosY = 0;
@@ -1118,6 +1119,22 @@ public class Player extends Creature {
 
 	public void setPostman(Npc postman) {
 		this.postman = postman;
+	}
+
+	/**
+	 * @return The NPC or house postbox at which the player opened the warehouse, legion warehouse or mailbox window, if it's still open.
+	 */
+	public VisibleObject getStorageManager(StorageType storageType) {
+		return storageManager != null && storageManager.matches(storageType) ? getKnownList().getObject(storageManager.objectId()) : null;
+	}
+
+	public void unsetStorageManager(VisibleObject object) {
+		if (storageManager != null && storageManager.objectId() == object.getObjectId())
+			storageManager = null;
+	}
+
+	public void setStorageManager(StorageType storageType, VisibleObject manager) {
+		this.storageManager = new StorageManager(storageType, manager.getObjectId());
 	}
 
 	public PlayerAccountData getAccountData() {
