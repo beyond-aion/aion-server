@@ -1,4 +1,4 @@
-package com.aionemu.chatserver.network.netty;
+package com.aionemu.commons.network.netty;
 
 import java.io.IOException;
 import java.nio.ByteOrder;
