@@ -110,36 +110,6 @@
 			<item id="168000177" chance="5.89" /><!-- Illusion Godstone: Meslamtaeda's Regret -->
 		</set>
 	</decomposable>
-	<decomposable item_id="188050705" override="true"><!-- Veille's 4th Grade Reward -->
-		<set>
-			<item id="182006281" /><!-- Veille's Favor -->
-		</set>
-		<set>
-			<item id="186000242" /><!-- Ceramium Medal -->
-		</set>
-		<set chance="4">
-			<item id="169610112" /><!-- [Title] Vanquisher of Mastarius -->
-		</set>
-		<set chance="0.5">
-			<item id="168000161" chance="5.88" /><!-- Illusion Godstone: Meslamtaeda's Greed -->
-			<item id="168000162" chance="5.88" /><!-- Illusion Godstone: Ereshkigal's Honor -->
-			<item id="168000163" chance="5.88" /><!-- Illusion Godstone: Nezekan's Advance -->
-			<item id="168000164" chance="5.88" /><!-- Illusion Godstone: Beritra's Plot -->
-			<item id="168000165" chance="5.88" /><!-- Illusion Godstone: Fregion's Trick -->
-			<item id="168000166" chance="5.88" /><!-- Illusion Godstone: Lumiel's Intervention -->
-			<item id="168000167" chance="5.88" /><!-- Illusion Godstone: Kaisinel's Fantasy -->
-			<item id="168000168" chance="5.88" /><!-- Illusion Godstone: Zikel's Arrogance -->
-			<item id="168000169" chance="5.88" /><!-- Illusion Godstone: Fregion's Stratagem -->
-			<item id="168000170" chance="5.88" /><!-- Illusion Godstone: Tiamat's Counterattack -->
-			<item id="168000171" chance="5.88" /><!-- Illusion Godstone: Marchutan's Impartiality -->
-			<item id="168000172" chance="5.88" /><!-- Illusion Godstone: Yustiel's Generosity -->
-			<item id="168000173" chance="5.89" /><!-- Illusion Godstone: Beritra's Selfishness -->
-			<item id="168000174" chance="5.88" /><!-- Illusion Godstone: Tiamat's Fury -->
-			<item id="168000175" chance="5.89" /><!-- Illusion Godstone: Triniel's Rationality -->
-			<item id="168000176" chance="5.89" /><!-- Illusion Godstone: Vaizel's Vow -->
-			<item id="168000177" chance="5.89" /><!-- Illusion Godstone: Meslamtaeda's Regret -->
-		</set>
-	</decomposable>
 	<decomposable item_id="188050706" override="true"><!-- Mastarius' 1st Grade Reward -->
 		<set>
 			<item id="182006282" count="3" /><!-- Mastarius' Favor -->
@@ -211,36 +181,6 @@
 			<item id="169610312" /><!-- [Title] Vanquisher of Veille -->
 		</set>
 		<set chance="1">
-			<item id="168000161" chance="5.88" /><!-- Illusion Godstone: Meslamtaeda's Greed -->
-			<item id="168000162" chance="5.88" /><!-- Illusion Godstone: Ereshkigal's Honor -->
-			<item id="168000163" chance="5.88" /><!-- Illusion Godstone: Nezekan's Advance -->
-			<item id="168000164" chance="5.88" /><!-- Illusion Godstone: Beritra's Plot -->
-			<item id="168000165" chance="5.88" /><!-- Illusion Godstone: Fregion's Trick -->
-			<item id="168000166" chance="5.88" /><!-- Illusion Godstone: Lumiel's Intervention -->
-			<item id="168000167" chance="5.88" /><!-- Illusion Godstone: Kaisinel's Fantasy -->
-			<item id="168000168" chance="5.88" /><!-- Illusion Godstone: Zikel's Arrogance -->
-			<item id="168000169" chance="5.88" /><!-- Illusion Godstone: Fregion's Stratagem -->
-			<item id="168000170" chance="5.88" /><!-- Illusion Godstone: Tiamat's Counterattack -->
-			<item id="168000171" chance="5.88" /><!-- Illusion Godstone: Marchutan's Impartiality -->
-			<item id="168000172" chance="5.88" /><!-- Illusion Godstone: Yustiel's Generosity -->
-			<item id="168000173" chance="5.89" /><!-- Illusion Godstone: Beritra's Selfishness -->
-			<item id="168000174" chance="5.88" /><!-- Illusion Godstone: Tiamat's Fury -->
-			<item id="168000175" chance="5.89" /><!-- Illusion Godstone: Triniel's Rationality -->
-			<item id="168000176" chance="5.89" /><!-- Illusion Godstone: Vaizel's Vow -->
-			<item id="168000177" chance="5.89" /><!-- Illusion Godstone: Meslamtaeda's Regret -->
-		</set>
-	</decomposable>
-	<decomposable item_id="188050709" override="true"><!-- Mastarius' 4th Grade Reward -->
-		<set>
-			<item id="182006282" /><!-- Mastarius' Favor -->
-		</set>
-		<set>
-			<item id="186000242" /><!-- Ceramium Medal -->
-		</set>
-		<set chance="4">
-			<item id="169610312" /><!-- [Title] Vanquisher of Veille -->
-		</set>
-		<set chance="0.5">
 			<item id="168000161" chance="5.88" /><!-- Illusion Godstone: Meslamtaeda's Greed -->
 			<item id="168000162" chance="5.88" /><!-- Illusion Godstone: Ereshkigal's Honor -->
 			<item id="168000163" chance="5.88" /><!-- Illusion Godstone: Nezekan's Advance -->

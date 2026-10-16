@@ -55533,7 +55533,54 @@
 			<item id="112301468" chance="16.66"/><!-- Magic Shoulderguards of Dark Dusk -->
 		</set>
 	</decomposable>
-	<decomposable item_id="188053265"/><!-- Bakarma's Fabled Weapon Box, counts unknown, defined in custom_decomposable_items.xml -->
+	<decomposable item_id="188053265"><!-- Bakarma's Fabled Weapon Box -->
+		<set player_classes="SORCERER SPIRIT_MASTER">
+			<item id="100500634" chance="50"/><!-- Commander Bakarma's Jewel -->
+			<item id="100600691" chance="50"/><!-- Commander Bakarma's Tome -->
+		</set>
+		<set player_classes="ASSASSIN">
+			<item id="100000818" chance="25"/><!-- Commander Bakarma's Sword -->
+			<item id="100200742" chance="55"/><!-- Commander Bakarma's Dagger -->
+			<item id="101700656" chance="20"/><!-- Commander Bakarma's Longbow -->
+		</set>
+		<set player_classes="RANGER">
+			<item id="100000818" chance="25"/><!-- Commander Bakarma's Sword -->
+			<item id="100200742" chance="20"/><!-- Commander Bakarma's Dagger -->
+			<item id="101700656" chance="55"/><!-- Commander Bakarma's Longbow -->
+		</set>
+		<set player_classes="CLERIC">
+			<item id="100100608" chance="67"/><!-- Commander Bakarma's Warhammer -->
+			<item id="101500634" chance="33"/><!-- Commander Bakarma's Staff -->
+		</set>
+		<set player_classes="CHANTER">
+			<item id="100100608" chance="33"/><!-- Commander Bakarma's Warhammer -->
+			<item id="101500634" chance="67"/><!-- Commander Bakarma's Staff -->
+		</set>
+		<set player_classes="TEMPLAR">
+			<item id="100000818" chance="55"/><!-- Commander Bakarma's Sword -->
+			<item id="100100608" chance="15"/><!-- Commander Bakarma's Warhammer -->
+			<item id="100900620" chance="30"/><!-- Commander Bakarma's Greatsword -->
+		</set>
+		<set player_classes="GLADIATOR">
+			<item id="100000818" chance="25"/><!-- Commander Bakarma's Sword -->
+			<item id="100100608" chance="5"/><!-- Commander Bakarma's Warhammer -->
+			<item id="100200742" chance="5"/><!-- Commander Bakarma's Dagger -->
+			<item id="100900620" chance="15"/><!-- Commander Bakarma's Greatsword -->
+			<item id="101300591" chance="45"/><!-- Commander Bakarma's Spear -->
+			<item id="101700656" chance="5"/><!-- Commander Bakarma's Longbow -->
+		</set>
+		<set player_classes="GUNNER">
+			<item id="101800597" chance="50"/><!-- Commander Bakarma's Pistol -->
+			<item id="101900593" chance="50"/><!-- Bakarma Brigade General's Aethercannon -->
+		</set>
+		<set player_classes="BARD">
+			<item id="102000628"/><!-- Commander Bakarma's Harp -->
+		</set>
+		<set player_classes="RIDER">
+			<item id="101800597" chance="33"/><!-- Commander Bakarma's Pistol -->
+			<item id="102100538" chance="67"/><!-- Commander Bakarma's Cipher-Blade -->
+		</set>
+	</decomposable>
 	<decomposable item_id="188053266" selectable="true"><!-- Jaadis' Pants Box -->
 		<set>
 			<item id="113100661" chance="25"/><!-- Bakarma Elite's Leggings -->
@@ -55660,35 +55707,35 @@
 			<item id="100600689" chance="25"/><!-- Triroan's Spellbook -->
 		</set>
 		<set player_classes="ASSASSIN">
-			<item id="100000727" chance="33.33"/><!-- Triroan's Sword -->
-			<item id="100200677" chance="33.33"/><!-- Triroan's Dagger -->
-			<item id="101700598" chance="33.33"/><!-- Triroan's Longbow -->
+			<item id="100000727" chance="25"/><!-- Triroan's Sword -->
+			<item id="100200677" chance="55"/><!-- Triroan's Dagger -->
+			<item id="101700598" chance="20"/><!-- Triroan's Longbow -->
 		</set>
 		<set player_classes="RANGER">
-			<item id="100000727" chance="33.33"/><!-- Triroan's Sword -->
-			<item id="100200677" chance="33.33"/><!-- Triroan's Dagger -->
-			<item id="101700598" chance="33.33"/><!-- Triroan's Longbow -->
+			<item id="100000727" chance="25"/><!-- Triroan's Sword -->
+			<item id="100200677" chance="20"/><!-- Triroan's Dagger -->
+			<item id="101700598" chance="55"/><!-- Triroan's Longbow -->
 		</set>
 		<set player_classes="CLERIC">
-			<item id="100100572" chance="50"/><!-- Triroan's Warhammer -->
-			<item id="101500570" chance="50"/><!-- Triroan's Staff -->
+			<item id="100100572" chance="67"/><!-- Triroan's Warhammer -->
+			<item id="101500570" chance="33"/><!-- Triroan's Staff -->
 		</set>
 		<set player_classes="CHANTER">
-			<item id="100100572" chance="50"/><!-- Triroan's Warhammer -->
-			<item id="101500570" chance="50"/><!-- Triroan's Staff -->
+			<item id="100100572" chance="33"/><!-- Triroan's Warhammer -->
+			<item id="101500570" chance="67"/><!-- Triroan's Staff -->
 		</set>
 		<set player_classes="TEMPLAR">
-			<item id="100000727" chance="33.33"/><!-- Triroan's Sword -->
-			<item id="100100572" chance="33.33"/><!-- Triroan's Warhammer -->
-			<item id="100900570" chance="33.33"/><!-- Triroan's Greatsword -->
+			<item id="100000727" chance="55"/><!-- Triroan's Sword -->
+			<item id="100100572" chance="15"/><!-- Triroan's Warhammer -->
+			<item id="100900570" chance="30"/><!-- Triroan's Greatsword -->
 		</set>
 		<set player_classes="GLADIATOR">
-			<item id="100000727" chance="16.66"/><!-- Triroan's Sword -->
-			<item id="100100572" chance="16.66"/><!-- Triroan's Warhammer -->
-			<item id="100200677" chance="16.66"/><!-- Triroan's Dagger -->
-			<item id="100900570" chance="16.66"/><!-- Triroan's Greatsword -->
-			<item id="101300542" chance="16.66"/><!-- Triroan's Spear -->
-			<item id="101700598" chance="16.66"/><!-- Triroan's Longbow -->
+			<item id="100000727" chance="25"/><!-- Triroan's Sword -->
+			<item id="100100572" chance="5"/><!-- Triroan's Warhammer -->
+			<item id="100200677" chance="5"/><!-- Triroan's Dagger -->
+			<item id="100900570" chance="15"/><!-- Triroan's Greatsword -->
+			<item id="101300542" chance="45"/><!-- Triroan's Spear -->
+			<item id="101700598" chance="5"/><!-- Triroan's Longbow -->
 		</set>
 		<set player_classes="GUNNER">
 			<item id="101800913" chance="50"/><!-- Triroan's Pistol -->
@@ -55698,8 +55745,8 @@
 			<item id="102000594"/><!-- Triroan's Harp -->
 		</set>
 		<set player_classes="RIDER">
-			<item id="101800913" chance="50"/><!-- Triroan's Pistol -->
-			<item id="102100768" chance="50"/><!-- Triroan's Cipher-Blade -->
+			<item id="101800913" chance="33"/><!-- Triroan's Pistol -->
+			<item id="102100768" chance="67"/><!-- Triroan's Cipher-Blade -->
 		</set>
 	</decomposable>
 	<decomposable item_id="188053275"><!-- Lannok's Fabled Weapon Box -->
@@ -55710,35 +55757,35 @@
 			<item id="100600690" chance="25"/><!-- Lannok's Spellbook -->
 		</set>
 		<set player_classes="ASSASSIN">
-			<item id="100000728" chance="33.33"/><!-- Lannok's Sword -->
-			<item id="100200678" chance="33.33"/><!-- Lannok's Dagger -->
-			<item id="101700599" chance="33.33"/><!-- Lannok's Longbow -->
+			<item id="100000728" chance="25"/><!-- Lannok's Sword -->
+			<item id="100200678" chance="55"/><!-- Lannok's Dagger -->
+			<item id="101700599" chance="20"/><!-- Lannok's Longbow -->
 		</set>
 		<set player_classes="RANGER">
-			<item id="100000728" chance="33.33"/><!-- Lannok's Sword -->
-			<item id="100200678" chance="33.33"/><!-- Lannok's Dagger -->
-			<item id="101700599" chance="33.33"/><!-- Lannok's Longbow -->
+			<item id="100000728" chance="25"/><!-- Lannok's Sword -->
+			<item id="100200678" chance="20"/><!-- Lannok's Dagger -->
+			<item id="101700599" chance="55"/><!-- Lannok's Longbow -->
 		</set>
 		<set player_classes="CLERIC">
-			<item id="100100573" chance="50"/><!-- Lannok's Warhammer -->
-			<item id="101500571" chance="50"/><!-- Lannok's Staff -->
+			<item id="100100573" chance="67"/><!-- Lannok's Warhammer -->
+			<item id="101500571" chance="33"/><!-- Lannok's Staff -->
 		</set>
 		<set player_classes="CHANTER">
-			<item id="100100573" chance="50"/><!-- Lannok's Warhammer -->
-			<item id="101500571" chance="50"/><!-- Lannok's Staff -->
+			<item id="100100573" chance="33"/><!-- Lannok's Warhammer -->
+			<item id="101500571" chance="67"/><!-- Lannok's Staff -->
 		</set>
 		<set player_classes="TEMPLAR">
-			<item id="100000728" chance="33.33"/><!-- Lannok's Sword -->
-			<item id="100100573" chance="33.33"/><!-- Lannok's Warhammer -->
-			<item id="100900571" chance="33.33"/><!-- Lannok's Greatsword -->
+			<item id="100000728" chance="55"/><!-- Lannok's Sword -->
+			<item id="100100573" chance="15"/><!-- Lannok's Warhammer -->
+			<item id="100900571" chance="30"/><!-- Lannok's Greatsword -->
 		</set>
 		<set player_classes="GLADIATOR">
-			<item id="100000728" chance="16.66"/><!-- Lannok's Sword -->
-			<item id="100100573" chance="16.66"/><!-- Lannok's Warhammer -->
-			<item id="100200678" chance="16.66"/><!-- Lannok's Dagger -->
-			<item id="100900571" chance="16.66"/><!-- Lannok's Greatsword -->
-			<item id="101300543" chance="16.66"/><!-- Lannok's Spear -->
-			<item id="101700599" chance="16.66"/><!-- Lannok's Longbow -->
+			<item id="100000728" chance="25"/><!-- Lannok's Sword -->
+			<item id="100100573" chance="5"/><!-- Lannok's Warhammer -->
+			<item id="100200678" chance="5"/><!-- Lannok's Dagger -->
+			<item id="100900571" chance="15"/><!-- Lannok's Greatsword -->
+			<item id="101300543" chance="45"/><!-- Lannok's Spear -->
+			<item id="101700599" chance="5"/><!-- Lannok's Longbow -->
 		</set>
 		<set player_classes="GUNNER">
 			<item id="101800914" chance="50"/><!-- Lannok's Pistol -->
@@ -55748,8 +55795,8 @@
 			<item id="102000595"/><!-- Lannok's Harp -->
 		</set>
 		<set player_classes="RIDER">
-			<item id="101800914" chance="50"/><!-- Lannok's Pistol -->
-			<item id="102100769" chance="50"/><!-- Lannok's Cipher-Blade -->
+			<item id="101800914" chance="33"/><!-- Lannok's Pistol -->
+			<item id="102100769" chance="67"/><!-- Lannok's Cipher-Blade -->
 		</set>
 	</decomposable>
 	<decomposable item_id="188053276" selectable="true"><!-- Anuhart's Fabled Pants Box -->
@@ -58783,7 +58830,7 @@
 			<item id="166100023" count="100" chance="5"/><!-- [Stamp] High Grade Enchanting Supplement (Mythic) -->
 		</set>
 	</decomposable>
-	<decomposable item_id="188053422"/><!-- [Stamp] Anniversary Consumables Box, counts unknown, defined in custom_decomposable_items.xml -->
+	<decomposable item_id="188053422"/><!-- [Stamp] Anniversary Consumables Box, counts unknown in every version -->
 	<decomposable item_id="188053423"><!-- [Stamp] Anniversary Gift Box -->
 		<set>
 			<item id="169610151"/><!-- [Stamp] Anniversary Celebrant (7 Days) -->
