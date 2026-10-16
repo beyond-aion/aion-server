@@ -198,7 +198,7 @@ public class DiscordChannelAppender<E> extends AppenderBase<E> {
 		} catch (Exception e) {
 			String errorHeader = "Error sending Discord message: ";
 			if (!msg.contains(errorHeader)) // avoid potential recursive message sending (if appender sends warnings)
-				log.warn(errorHeader + msg + "\nCaused by: " + e.getMessage());
+				log.warn("{}{}\nCaused by: {}", errorHeader, msg, e.getMessage());
 		}
 	}
 

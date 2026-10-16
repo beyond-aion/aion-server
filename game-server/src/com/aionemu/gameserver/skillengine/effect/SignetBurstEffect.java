@@ -1,9 +1,9 @@
 package com.aionemu.gameserver.skillengine.effect;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlType;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.controllers.attack.AttackUtil;
@@ -25,6 +25,8 @@ public class SignetBurstEffect extends DamageEffect {
 	protected String signet;
 	@XmlAttribute(name = "add_effect_prob_multi")
 	protected int addEffectProbMultiplier = 0;
+	@XmlAttribute(name = "add_effect_prob_multi_delta")
+	protected float addEffectProbMultiplierDelta;
 
 	@SuppressWarnings("lossy-conversions")
 	@Override
@@ -37,7 +39,7 @@ public class SignetBurstEffect extends DamageEffect {
 		SignetData signetData = DataManager.SIGNET_DATA_TEMPLATES.getSignetData(SignetEnum.valueOf(signet), signetLvl);
 		if (signetData != null) {
 			valueWithDelta *= signetData.getDamageMultiplier();
-			effectProb = signetData.getAddEffectProb() * addEffectProbMultiplier;
+			effectProb = (int) ((addEffectProbMultiplier + addEffectProbMultiplierDelta * effect.getSkillLevel()) * signetData.getAddEffectProb());
 		}
 		effect.setSignetBurstedCount(signetLvl);
 		AttackUtil.calculateSkillResult(effect, valueWithDelta, this, false);
@@ -56,21 +58,12 @@ public class SignetBurstEffect extends DamageEffect {
 		}
 	}
 
-	public int getSignetlvl() {
-		return signetlvl;
-	}
-
 	public String getSignet() {
 		return signet;
 	}
 
 	@Override
 	public boolean shouldUseBoostSpellAttackEffects() {
-		return false;
-	}
-
-	@Override
-	public boolean shouldUseOneTimeBoostSkillAttack() {
 		return false;
 	}
 }

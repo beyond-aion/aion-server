@@ -1,11 +1,10 @@
 package com.aionemu.gameserver.skillengine.model;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlType;
 
-import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.Race;
 
@@ -26,6 +25,8 @@ public class SkillLearnTemplate {
 	private Race race = Race.PC_ALL;
 	@XmlAttribute(name = "minLevel", required = true)
 	private int minLevel;
+	@XmlAttribute(name = "skillLevel")
+	private int skillLevel = 1;
 	@XmlAttribute
 	private boolean autolearn;
 	@XmlAttribute
@@ -40,7 +41,7 @@ public class SkillLearnTemplate {
 	}
 
 	public int getSkillLevel() {
-		return DataManager.SKILL_DATA.getSkillTemplate(skillId).getLvl();
+		return skillLevel;
 	}
 
 	public int getMinLevel() {

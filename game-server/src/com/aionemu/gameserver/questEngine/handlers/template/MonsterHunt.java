@@ -24,7 +24,7 @@ import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.RiftService;
 import com.aionemu.gameserver.services.VortexService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.world.zone.ZoneName;
+import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
  * @author MrPoke, vlog, Bobobear, Pad, Majka
@@ -95,8 +95,8 @@ public class MonsterHunt extends AbstractTemplateQuestHandler {
 		if (invasionWorldId != 0)
 			qe.registerOnEnterWorld(questId);
 
-		if (startZone != null && !ZoneName.get(startZone).name().equalsIgnoreCase("NONE"))
-			qe.registerOnEnterZone(ZoneName.get(startZone), questId);
+		if (startZone != null && DataManager.ZONE_DATA.validateZoneName(startZone))
+			qe.registerOnEnterZone(startZone, questId);
 
 		if (startDistanceNpcId != 0)
 			qe.registerQuestNpc(startDistanceNpcId, 300).addOnAtDistanceEvent(questId);
@@ -267,8 +267,8 @@ public class MonsterHunt extends AbstractTemplateQuestHandler {
 	}
 
 	@Override
-	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) {
-		if (zoneName.name().equalsIgnoreCase(startZone))
+	public boolean onEnterZoneEvent(QuestEnv env, ZoneInstance zone) {
+		if (zone.matches(startZone))
 			return startQuest(env);
 		return false;
 	}

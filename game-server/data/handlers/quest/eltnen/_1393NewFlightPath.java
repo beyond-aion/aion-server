@@ -12,7 +12,7 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.world.zone.ZoneName;
+import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
  * @author Balthazar
@@ -27,7 +27,7 @@ public class _1393NewFlightPath extends AbstractQuestHandler {
 	public void register() {
 		qe.registerQuestNpc(204041).addOnQuestStart(questId);
 		qe.registerQuestNpc(204041).addOnTalkEvent(questId);
-		qe.registerOnEnterZone(ZoneName.get("LEPHARIST_BASTION_210020000"), questId);
+		qe.registerOnEnterZone("LEPHARIST_BASTION_210020000", questId);
 	}
 
 	@Override
@@ -81,7 +81,7 @@ public class _1393NewFlightPath extends AbstractQuestHandler {
 	}
 
 	@Override
-	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) {
+	public boolean onEnterZoneEvent(QuestEnv env, ZoneInstance zone) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {

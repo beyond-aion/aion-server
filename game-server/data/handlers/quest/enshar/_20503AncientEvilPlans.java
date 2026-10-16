@@ -7,7 +7,7 @@ import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.world.zone.ZoneName;
+import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
  * @Author Majka
@@ -33,7 +33,7 @@ public class _20503AncientEvilPlans extends AbstractQuestHandler {
 		for (int npc : npcs) {
 			qe.registerQuestNpc(npc).addOnTalkEvent(questId);
 		}
-		qe.registerOnEnterZone(ZoneName.get("DF5_SENSORYAREA_Q20503A_206394_8_220080000"), questId); // Aetheric Field Stone Findspot zone
+		qe.registerOnEnterZone("DF5_SENSORYAREA_Q20503A_206394_8_220080000", questId); // Aetheric Field Stone Findspot zone
 		qe.registerOnQuestCompleted(questId);
 		qe.registerOnLevelChanged(questId);
 	}
@@ -101,9 +101,9 @@ public class _20503AncientEvilPlans extends AbstractQuestHandler {
 	}
 
 	@Override
-	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) {
+	public boolean onEnterZoneEvent(QuestEnv env, ZoneInstance zone) {
 
-		if (zoneName == ZoneName.get("DF5_SENSORYAREA_Q20503A_206394_8_220080000")) {
+		if (zone.matches("DF5_SENSORYAREA_Q20503A_206394_8_220080000")) {
 
 			Player player = env.getPlayer();
 			if (player == null) {

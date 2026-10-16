@@ -1,9 +1,9 @@
 package com.aionemu.gameserver.model.templates.world;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlType;
 
 /**
  * @author Rolandas
@@ -31,6 +31,8 @@ public class WeatherEntry {
 
 	@XmlAttribute(name = "after")
 	private boolean isAfter;
+	@XmlAttribute(name = "state")
+	private WeatherState state;
 
 	private WeatherEntry() {
 	}
@@ -62,6 +64,13 @@ public class WeatherEntry {
 
 	public String getWeatherName() {
 		return weatherName;
+	}
+
+	/**
+	 * @return The weather state or null if the weather has none (clear sky, clouds, fog, the lead-in of a rain etc.)
+	 */
+	public WeatherState getState() {
+		return state;
 	}
 
 }

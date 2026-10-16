@@ -88,7 +88,7 @@ public class ArtifactAI extends NpcAI {
 		final SkillTemplate skillTemplate = DataManager.SKILL_DATA.getSkillTemplate(skillId);
 
 		if (skillTemplate == null) {
-			LoggerFactory.getLogger(ArtifactAI.class).error("No skill template for artifact effect id : " + skillId);
+			LoggerFactory.getLogger(ArtifactAI.class).error("No skill template for artifact effect id : {}", skillId);
 			return;
 		}
 
@@ -108,7 +108,7 @@ public class ArtifactAI extends NpcAI {
 			return;
 
 		if (LoggingConfig.LOG_SIEGE)
-			log.info("Artifact " + getSpawnTemplate().getSiegeId() + " activated by " + player.getName() + " (race: " + player.getRace() + ")");
+			log.info("Artifact {} activated by {} (race: {})", getSpawnTemplate().getSiegeId(), player.getName(), player.getRace());
 
 		if (!loc.getStatus().equals(ArtifactStatus.IDLE))
 			return;

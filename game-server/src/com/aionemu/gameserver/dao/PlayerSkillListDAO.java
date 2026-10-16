@@ -45,7 +45,7 @@ public class PlayerSkillListDAO {
 				}
 			}
 		} catch (Exception e) {
-			log.error("Could not restore SkillList data for player: " + playerId + " from DB: " + e.getMessage(), e);
+			log.error("Could not restore SkillList data for player: {} from DB: {}", playerId, e.getMessage(), e);
 		}
 		return new PlayerSkillList(skills);
 	}
@@ -69,7 +69,7 @@ public class PlayerSkillListDAO {
 			updateSkills(con, player, skills);
 
 		} catch (SQLException e) {
-			log.error("Failed to open connection to database while saving SkillList for player " + player.getObjectId());
+			log.error("Failed to open connection to database while saving SkillList for player {}", player.getObjectId());
 		}
 
 		for (PlayerSkillEntry skill : skills) {
@@ -93,7 +93,7 @@ public class PlayerSkillListDAO {
 			ps.executeBatch();
 			con.commit();
 		} catch (SQLException e) {
-			log.error("Can't add skills for player: " + player.getObjectId(), e);
+			log.error("Can't add skills for player: {}", player.getObjectId(), e);
 		}
 	}
 
@@ -113,7 +113,7 @@ public class PlayerSkillListDAO {
 			ps.executeBatch();
 			con.commit();
 		} catch (SQLException e) {
-			log.error("Can't update skills for player: " + player.getObjectId());
+			log.error("Can't update skills for player: {}", player.getObjectId());
 		}
 	}
 
@@ -132,7 +132,7 @@ public class PlayerSkillListDAO {
 			ps.executeBatch();
 			con.commit();
 		} catch (SQLException e) {
-			log.error("Can't delete skills for player: " + player.getObjectId());
+			log.error("Can't delete skills for player: {}", player.getObjectId());
 		}
 	}
 

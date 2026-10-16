@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.model;
 
-import javax.xml.bind.annotation.XmlEnum;
+import jakarta.xml.bind.annotation.XmlEnum;
 
 /**
  * Creature gender. Typically there are males and females. But who knows, maybe NC can invent something new ;)

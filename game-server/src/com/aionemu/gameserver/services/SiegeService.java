@@ -74,21 +74,20 @@ public class SiegeService {
 
 	private SiegeService() {
 		if (SiegeConfig.SIEGE_ENABLED) {
-			log.info("Initializing sieges...");
-
-			// initialize current siege locations
 			artifacts = DataManager.SIEGE_LOCATION_DATA.getArtifacts();
 			fortresses = DataManager.SIEGE_LOCATION_DATA.getFortress();
 			outposts = DataManager.SIEGE_LOCATION_DATA.getOutpost();
 			locations = DataManager.SIEGE_LOCATION_DATA.getSiegeLocations();
 			agent = DataManager.SIEGE_LOCATION_DATA.getAgentLoc();
 			SiegeDAO.loadSiegeLocations(locations);
+			log.info("SiegeService initialized with {} fortresses, {} outposts, {} artifacts and {} agent location(s)", fortresses.size(), outposts.size(), artifacts.size(),
+				agent != null ? 1 : 0);
 		} else {
 			artifacts = Collections.emptyMap();
 			fortresses = Collections.emptyMap();
 			outposts = Collections.emptyMap();
 			locations = Collections.emptyMap();
-			log.info("Sieges are disabled in config.");
+			log.info("Sieges are disabled in config");
 		}
 	}
 
@@ -144,7 +143,7 @@ public class SiegeService {
 		// Start siege of artifacts
 		for (ArtifactLocation artifact : artifacts.values()) {
 			if (artifact.isStandAlone()) {
-				log.debug("Starting siege of artifact #" + artifact.getLocationId());
+				log.debug("Starting siege of artifact #{}", artifact.getLocationId());
 				startSiege(artifact.getLocationId());
 			} else {
 				log.debug("Artifact #{} siege was not started, it belongs to fortress", artifact.getLocationId());
@@ -196,11 +195,11 @@ public class SiegeService {
 	}
 
 	public synchronized void startSiege(final int siegeLocationId) {
-		log.debug("Starting siege of siege location: " + siegeLocationId);
+		log.debug("Starting siege of siege location: {}", siegeLocationId);
 
 		// Siege should not be started two times
 		if (activeSieges.containsKey(siegeLocationId)) {
-			log.error("Attempt to start siege twice for siege location: " + siegeLocationId, new Exception());
+			log.error("Attempt to start siege twice for siege location: {}", siegeLocationId, new Exception());
 			return;
 		}
 		Siege<? extends SiegeLocation> siege = newSiege(siegeLocationId);

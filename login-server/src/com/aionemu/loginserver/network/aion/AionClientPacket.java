@@ -51,7 +51,7 @@ public abstract class AionClientPacket extends BaseClientPacket<LoginConnection>
 				name = getConnection().getIP();
 			}
 
-			log.error("error handling client (" + name + ") message " + this, e);
+			log.error("error handling client ({}) message {}", name, this, e);
 		}
 	}
 

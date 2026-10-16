@@ -3,7 +3,7 @@ package com.aionemu.gameserver.model.templates.npcshout;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 
 /**
  * @author Rolandas

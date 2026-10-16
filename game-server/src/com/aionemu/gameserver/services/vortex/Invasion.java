@@ -80,8 +80,8 @@ public class Invasion extends DimensionalVortex<VortexLocation> {
 			else
 				defAlliance = PlayerAllianceService.createAlliance(otherPlayer, player, TeamType.ALLIANCE_DEFENCE);
 		} else if (participants.size() > 1) { // should never happen
-			LoggerFactory.getLogger(Invasion.class).warn("Couldn't add " + player + " to " + (isInvader ? "invaders" : "defenders")
-				+ " (alliance not initialized). Current participants: " + participants.size());
+			LoggerFactory.getLogger(Invasion.class).warn("Couldn't add {} to {} (alliance not initialized). Current participants: {}", player,
+				isInvader ? "invaders" : "defenders", participants.size());
 			return;
 		}
 		participants.put(player.getObjectId(), player);

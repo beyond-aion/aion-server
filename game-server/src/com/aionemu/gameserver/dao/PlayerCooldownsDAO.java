@@ -74,7 +74,7 @@ public class PlayerCooldownsDAO {
 			st.executeBatch();
 			con.commit();
 		} catch (SQLException e) {
-			log.error("Couldn't save cooldowns for " + player, e);
+			log.error("Couldn't save cooldowns for {}", player, e);
 		}
 	}
 

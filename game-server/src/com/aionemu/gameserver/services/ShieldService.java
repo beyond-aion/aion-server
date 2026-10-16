@@ -68,7 +68,7 @@ public class ShieldService {
 			}
 		}
 		if (attached.isEmpty() && location.getType() != SiegeType.OUTPOST && location.getLocationId() != 1241) // Outposts and Miren don't have shields
-			log.warn("Could not find a shield for location ID {}.", location.getLocationId());
+			log.warn("Could not find a shield for location ID {}", location.getLocationId());
 	}
 
 	private boolean isShieldInsideLocation(SiegeShield shield, SiegeLocation location) {
@@ -82,7 +82,7 @@ public class ShieldService {
 			switch (shield.getGeometry().getName()) {
 				case "PR_A_AIRBUNKER_EFFECT_01A_CHILD1_324011", "PR_A_AIRBUNKER_EFFECT_01A_CHILD2_324011" -> min.z -= 6;
 			}
-			RectangleArea rectangleArea = new RectangleArea(null, 0, min.x, min.y, max.x, max.y, min.z, max.z);
+			RectangleArea rectangleArea = new RectangleArea(min.x, min.y, max.x, max.y, min.z, max.z);
 			if (location.getZone().stream().anyMatch(z -> z.getAreaTemplate().intersectsRectangle(rectangleArea))) {
 				return true;
 			}

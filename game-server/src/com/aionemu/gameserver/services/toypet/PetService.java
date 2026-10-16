@@ -36,7 +36,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
-import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author M@xx, IlBuono, xTz, Rolandas
@@ -212,13 +211,7 @@ public class PetService {
 	}
 
 	private boolean isPetItemUseAllowed(Player player, Item item) {
-		if (item.getItemTemplate().hasAreaRestriction()) {
-			ZoneName restriction = item.getItemTemplate().getUseArea();
-			if (restriction != null && !player.isInsideItemUseZone(restriction)) {
-				return false;
-			}
-		}
-		return true;
+		return !item.getItemTemplate().hasAreaRestriction() || player.isInsideItemUseZone(item.getItemTemplate().getUseArea());
 	}
 
 	public void activateLoot(Pet pet, boolean activate) {

@@ -107,7 +107,6 @@ public class GameServer {
 		// ZoneService.getInstance().saveMaterialZones();
 
 		World.getInstance();
-		GameTimeService.getInstance();
 
 		DropRegistrationService.getInstance();
 
@@ -186,7 +185,7 @@ public class GameServer {
 
 		nioServer = initNioServer();
 		Runtime.getRuntime().addShutdownHook(ShutdownHook.getInstance());
-		log.info("Game server started in " + (System.currentTimeMillis() / 1000 - START_TIME_SECONDS) + " seconds.");
+		log.info("Game server started in {} seconds", System.currentTimeMillis() / 1000 - START_TIME_SECONDS);
 
 		LoginServer.getInstance().connect(nioServer);
 		if (GSConfig.ENABLE_CHAT_SERVER)
@@ -294,7 +293,7 @@ public class GameServer {
 			lock.unlock();
 		}
 
-		log.info("FACTIONS RATIO UPDATED: E " + String.format("%.1f", ELYOS_RATIO) + " % / A " + String.format("%.1f", ASMOS_RATIO) + " %");
+		log.info("FACTIONS RATIO UPDATED: E {} % / A {} %", String.format("%.1f", ELYOS_RATIO), String.format("%.1f", ASMOS_RATIO));
 	}
 
 	public static float getRatiosFor(Race race) {

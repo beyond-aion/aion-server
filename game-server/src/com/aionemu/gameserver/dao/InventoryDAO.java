@@ -63,7 +63,7 @@ public class InventoryDAO {
 				itemConsumer.accept(item);
 			}
 		} catch (Exception e) {
-			log.error("Could not load " + storageType + " items of owner " + ownerId, e);
+			log.error("Could not load {} items of owner {}", storageType, ownerId, e);
 		}
 	}
 
@@ -100,7 +100,7 @@ public class InventoryDAO {
 				items.add(new PlayerAccountData.VisibleItem(slotType, itemSkinId, godStoneItemId, itemColor));
 			}
 		} catch (Exception e) {
-			log.error("Could not load equipped items of owner " + ownerId, e);
+			log.error("Could not load equipped items of owner {}", ownerId, e);
 		}
 		return items;
 	}
@@ -149,7 +149,7 @@ public class InventoryDAO {
 				}
 			}
 		} catch (Exception e) {
-			log.error("Could not restore accountId data for player: " + playerId + " from DB: " + e.getMessage(), e);
+			log.error("Could not restore accountId data for player: {} from DB: {}", playerId, e.getMessage(), e);
 		}
 		return accountId;
 	}
@@ -164,7 +164,7 @@ public class InventoryDAO {
 				}
 			}
 		} catch (Exception e) {
-			log.error("Failed to load legion id for player id: " + playerId, e);
+			log.error("Failed to load legion id for player id: {}", playerId, e);
 		}
 		return legionId;
 	}
@@ -230,7 +230,7 @@ public class InventoryDAO {
 			insertResult = insertItems(con, itemsToInsert, playerId, accountId, legionId);
 			updateResult = updateItems(con, itemsToUpdate, playerId, accountId, legionId);
 		} catch (SQLException e) {
-			log.error("Can't save inventory for player: " + playerId, e);
+			log.error("Can't save inventory for player: {}", playerId, e);
 		}
 
 		for (Item item : items) {
@@ -381,7 +381,7 @@ public class InventoryDAO {
 			stmt.setInt(1, playerOrLegionId);
 			stmt.execute();
 		} catch (Exception e) {
-			log.error("Error deleting all player or legion items. playerOrLegionId: " + playerOrLegionId, e);
+			log.error("Error deleting all player or legion items. playerOrLegionId: {}", playerOrLegionId, e);
 			return false;
 		}
 		return true;
@@ -392,7 +392,7 @@ public class InventoryDAO {
 			stmt.setInt(1, accountId);
 			stmt.execute();
 		} catch (Exception e) {
-			log.error("Error deleting all items from account WH. AccountId: " + accountId, e);
+			log.error("Error deleting all items from account WH. AccountId: {}", accountId, e);
 		}
 	}
 

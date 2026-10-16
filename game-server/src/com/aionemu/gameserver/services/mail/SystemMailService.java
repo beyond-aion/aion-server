@@ -43,21 +43,21 @@ public class SystemMailService {
 				return false;
 			ItemTemplate itemTemplate = DataManager.ITEM_DATA.getItemTemplate(attachedItemId);
 			if (itemTemplate == null) {
-				log.warn("[SYSMAILSERVICE] > [SenderName: " + sender + "] [RecipientName: " + recipientName + "] RETURN ITEM ID:" + attachedItemId
-					+ " ITEM COUNT " + attachedItemCount + " KINAH COUNT " + attachedKinahCount + " ITEM TEMPLATE IS MISSING ");
+				log.warn("[SYSMAILSERVICE] > [SenderName: {}] [RecipientName: {}] RETURN ITEM ID:{} ITEM COUNT {} KINAH COUNT {} ITEM TEMPLATE IS MISSING ",
+					sender, recipientName, attachedItemId, attachedItemCount, attachedKinahCount);
 				return false;
 			}
 		}
 
 		if (recipientName.length() > 16) {
-			log.warn("[SYSMAILSERVICE] > [SenderName: " + sender + "] [RecipientName: " + recipientName + "] ITEM RETURN" + attachedItemId + " ITEM COUNT "
-				+ attachedItemCount + " KINAH COUNT " + attachedKinahCount + " RECIPIENT NAME LENGTH > 16 ");
+			log.warn("[SYSMAILSERVICE] > [SenderName: {}] [RecipientName: {}] ITEM RETURN{} ITEM COUNT {} KINAH COUNT {} RECIPIENT NAME LENGTH > 16 ",
+				sender, recipientName, attachedItemId, attachedItemCount, attachedKinahCount);
 			return false;
 		}
 
 		if (!sender.startsWith("$$") && sender.length() > 16) {
-			log.warn("[SYSMAILSERVICE] > [SenderName: " + sender + "] [RecipientName: " + recipientName + "] ITEM RETURN" + attachedItemId + " ITEM COUNT "
-				+ attachedItemCount + " KINAH COUNT " + attachedKinahCount + " SENDER NAME LENGTH > 16 ");
+			log.warn("[SYSMAILSERVICE] > [SenderName: {}] [RecipientName: {}] ITEM RETURN{} ITEM COUNT {} KINAH COUNT {} SENDER NAME LENGTH > 16 ",
+				sender, recipientName, attachedItemId, attachedItemCount, attachedKinahCount);
 			return false;
 		}
 
@@ -70,13 +70,13 @@ public class SystemMailService {
 		PlayerCommonData recipientCommonData = PlayerService.getOrLoadPlayerCommonData(recipientName);
 
 		if (recipientCommonData == null) {
-			log.info("[SYSMAILSERVICE] > [RecipientName: " + recipientName + "] NO SUCH CHARACTER NAME.");
+			log.info("[SYSMAILSERVICE] > [RecipientName: {}] NO SUCH CHARACTER NAME", recipientName);
 			return false;
 		}
 
 		if (recipientCommonData.getMailboxLetters() > 199) {
-			log.info("[SYSMAILSERVICE] > [SenderName: " + sender + "] [RecipientName: " + recipientCommonData.getName() + "] ITEM RETURN" + attachedItemId
-				+ " ITEM COUNT " + attachedItemCount + " KINAH COUNT " + attachedKinahCount + " MAILBOX FULL ");
+			log.info("[SYSMAILSERVICE] > [SenderName: {}] [RecipientName: {}] ITEM RETURN{} ITEM COUNT {} KINAH COUNT {} MAILBOX FULL ", sender,
+				recipientCommonData.getName(), attachedItemId, attachedItemCount, attachedKinahCount);
 			return false;
 		}
 		Item attachedItem = null;
@@ -106,8 +106,8 @@ public class SystemMailService {
 				return false;
 
 		if (LoggingConfig.LOG_SYSMAIL)
-			log.info("[SYSMAILSERVICE] > [SenderName: " + sender + "] [RecipientName: " + recipientName + "] RETURN ITEM ID:" + attachedItemId
-				+ " ITEM COUNT " + attachedItemCount + " KINAH COUNT " + attachedKinahCount + " MESSAGE SUCCESSFULLY SENDED ");
+			log.info("[SYSMAILSERVICE] > [SenderName: {}] [RecipientName: {}] RETURN ITEM ID:{} ITEM COUNT {} KINAH COUNT {} MESSAGE SUCCESSFULLY SENDED ",
+				sender, recipientName, attachedItemId, attachedItemCount, attachedKinahCount);
 
 		updateRecipientMailbox(recipientCommonData, newLetter);
 		return true;

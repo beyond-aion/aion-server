@@ -39,14 +39,14 @@ public class BannedMacManager {
 
 		bannedList.put(address, entry);
 
-		log.info("banned " + address + " to " + entry.getTime().toString() + " for " + details);
+		log.info("banned {} to {} for {}", address, entry.getTime().toString(), details);
 		LoginServer.getInstance().sendPacket(new SM_MACBAN_CONTROL((byte) 1, address, newTime, details));
 	}
 
 	public final boolean unbanAddress(String address, String details) {
 		BannedMacEntry bannedMacEntry = bannedList.remove(address);
 		if (bannedMacEntry != null) {
-			log.info("unbanned " + address + " for " + details);
+			log.info("unbanned {} for {}", address, details);
 			LoginServer.getInstance().sendPacket(new SM_MACBAN_CONTROL((byte) 0, address, 0, details));
 			return true;
 		} else
@@ -63,6 +63,6 @@ public class BannedMacManager {
 	}
 
 	public void onEnd() {
-		log.info("Loaded " + bannedList.size() + " banned mac addresses");
+		log.info("Loaded {} banned mac addresses", bannedList.size());
 	}
 }

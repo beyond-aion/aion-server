@@ -50,7 +50,7 @@ public class ChallengeTaskService {
 		taskAcceptTownIds = new ConcurrentHashMap<>();
 		cityTasks = new ConcurrentHashMap<>();
 		legionTasks = new ConcurrentHashMap<>();
-		log.info("ChallengeTaskService initialized.");
+		log.info("ChallengeTaskService initialized");
 	}
 
 	public void showTaskList(Player player, ChallengeType challengeType, int ownerId) {
@@ -143,7 +143,7 @@ public class ChallengeTaskService {
 			return;
 		ChallengeQuest quest = task.getQuest(questId);
 		if (quest == null) {
-			log.warn(player + " finished city task " + task.getTaskId() + " of town " + townId + " but info for quest " + questId + " is missing.");
+			log.warn("{} finished city task {} of town {} but info for quest {} is missing", player, task.getTaskId(), townId, questId);
 			return;
 		}
 		if (quest.getCompleteCount() < quest.getMaxRepeats() && !task.isCompleted()) {
@@ -178,7 +178,7 @@ public class ChallengeTaskService {
 			buildTaskList(player, ChallengeType.TOWN, townId, TownService.getInstance().getTownById(townId).getLevel());
 			taskMap = cityTasks.get(townId);
 			if (taskMap == null) {
-				log.warn("Town " + townId + " has no CityTasks! " + player + ", town residence:" + TownService.getInstance().getTownResidence(player));
+				log.warn("Town {} has no tasks for {} (town residence: {})", townId, player, TownService.getInstance().getTownResidence(player));
 				return null;
 			}
 		}

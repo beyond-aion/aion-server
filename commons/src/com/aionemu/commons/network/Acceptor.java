@@ -81,21 +81,27 @@ public class Acceptor {
 		ServerSocketChannel serverSocketChannel = (ServerSocketChannel) key.channel();
 		// Accept the connection and make it non-blocking
 		SocketChannel socketChannel = serverSocketChannel.accept();
-		socketChannel.configureBlocking(false);
-		socketChannel.socket().setSoLinger(true, 10);
-		socketChannel.socket().setTcpNoDelay(true);
-
-		Dispatcher dispatcher = nioServer.getReadWriteDispatcher();
-		AConnection<?> con = factory.create(socketChannel, dispatcher);
-
-		if (con == null) {
-			socketChannel.close();
+		if (socketChannel == null)
 			return;
-		}
 
-		// register
-		dispatcher.register(socketChannel, SelectionKey.OP_READ, con);
-		// notify initialized :)
-		con.initialized();
+		try {
+			socketChannel.configureBlocking(false);
+			socketChannel.socket().setSoLinger(true, 10);
+			socketChannel.socket().setTcpNoDelay(true);
+
+			Dispatcher dispatcher = nioServer.getReadWriteDispatcher();
+			AConnection<?> con = factory.create(socketChannel, dispatcher);
+
+			if (con == null) {
+				socketChannel.close();
+				return;
+			}
+
+			dispatcher.register(socketChannel, SelectionKey.OP_READ, con);
+			con.initialized();
+		} catch (IOException | RuntimeException e) {
+			socketChannel.close();
+			throw e;
+		}
 	}
 }

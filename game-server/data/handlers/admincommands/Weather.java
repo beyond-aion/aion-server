@@ -35,7 +35,7 @@ public class Weather extends AdminCommand {
 						int weatherZoneId = DataManager.ZONE_DATA.getWeatherZoneId(regionZone.getZoneTemplate());
 						WeatherEntry weatherEntry = WeatherService.getInstance().getWeatherEntry(admin.getWorldId(), weatherZoneId);
 						if (weatherEntry != null) {
-							String info = "Weather for region " + regionZone.getZoneTemplate().getXmlName() + ":";
+							String info = "Weather for region " + regionZone.getZoneTemplate().getName() + ":";
 							if (weatherEntry == WeatherEntry.NONE) {
 								info += "\n\tcode: " + weatherEntry.getCode() + " (no weather)";
 							} else {

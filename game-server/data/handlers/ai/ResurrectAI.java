@@ -45,7 +45,7 @@ public class ResurrectAI extends NpcAI {
 		BindPointTemplate bindPointTemplate = DataManager.BIND_POINT_DATA.getBindPointTemplate(getNpcId());
 		Race race = player.getRace();
 		if (bindPointTemplate == null) {
-			log.info("There is no bind point template for npc: " + getNpcId());
+			log.info("There is no bind point template for npc: {}", getNpcId());
 			return;
 		}
 

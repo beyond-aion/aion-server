@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.commons.network.AConnection;
 import com.aionemu.commons.network.Dispatcher;
 import com.aionemu.commons.network.PacketProcessor;
+import com.aionemu.loginserver.configs.Config;
 import com.aionemu.loginserver.controller.AccountController;
 import com.aionemu.loginserver.controller.AccountTimeController;
 import com.aionemu.loginserver.model.Account;
@@ -39,7 +40,8 @@ public class LoginConnection extends AConnection<AionServerPacket> {
 	/**
 	 * PacketProcessor for executing packets.
 	 */
-	private final static PacketProcessor<LoginConnection> processor = new PacketProcessor<>(1, 8, 50, 3);
+	private static final int MAX_PENDING_PACKETS = 50;
+	private final static PacketProcessor<LoginConnection> processor = new PacketProcessor<>(1, 8, 50, 3, MAX_PENDING_PACKETS);
 	/**
 	 * Server Packet "to send" Queue
 	 */
@@ -119,15 +121,17 @@ public class LoginConnection extends AConnection<AionServerPacket> {
 	@Override
 	protected final boolean processData(ByteBuffer data) {
 		if (!decrypt(data)) {
-			log.warn("Wrong checksum from " + this);
+			log.warn("Wrong checksum from {}", this);
 			return false;
 		}
 
 		AionClientPacket pck = AionPacketHandlerFactory.handle(data, this);
 
 		// Execute packet only if packet exists and read was ok.
-		if (pck != null && pck.read())
-			processor.executePacket(pck);
+		if (pck != null && pck.read() && !processor.executePacket(pck)) {
+			log.warn("{} has more than {} packets waiting for execution, disconnecting", this, MAX_PENDING_PACKETS);
+			return false;
+		}
 
 		return true;
 	}
@@ -159,6 +163,26 @@ public class LoginConnection extends AConnection<AionServerPacket> {
 			AccountController.removeAccountOnLS(account);
 			AccountTimeController.updateOnLogout(account);
 		}
+	}
+
+	@Override
+	protected boolean isAuthenticated() {
+		return state == State.AUTHED_LOGIN;
+	}
+
+	@Override
+	protected long getAuthTimeoutMillis() {
+		return Config.CLIENT_AUTH_TIMEOUT_SECONDS * 1000L;
+	}
+
+	@Override
+	protected int getMaxSendQueueSize() {
+		return 100;
+	}
+
+	@Override
+	protected long getMaxSendStallMillis() {
+		return 60_000;
 	}
 
 	@Override
@@ -294,7 +318,7 @@ public class LoginConnection extends AConnection<AionServerPacket> {
 	@Override
 	protected void initialized() {
 		state = State.CONNECTED;
-		log.info("Connection attempt from: " + getIP());
+		log.info("Connection attempt from: {}", getIP());
 		encryptedRSAKeyPair = KeyGen.getEncryptedRSAKeyPair();
 		SecretKey blowfishKey = KeyGen.generateBlowfishKey();
 

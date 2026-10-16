@@ -52,7 +52,7 @@ public class ChallengeTasksDAO {
 				}
 			}
 		} catch (SQLException e) {
-			log.error("Could not load " + type + " challenge tasks of owner " + ownerId, e);
+			log.error("Could not load {} challenge tasks of owner {}", type, ownerId, e);
 		}
 		return tasks;
 	}
@@ -77,7 +77,7 @@ public class ChallengeTasksDAO {
 			stmt.executeUpdate();
 			quest.setPersistentState(PersistentState.UPDATED);
 		} catch (SQLException e) {
-			log.error("Could not insert challenge task " + task.getTaskId() + " of owner " + task.getOwnerId(), e);
+			log.error("Could not insert challenge task {} of owner {}", task.getTaskId(), task.getOwnerId(), e);
 		}
 	}
 
@@ -91,7 +91,7 @@ public class ChallengeTasksDAO {
 			stmt.executeUpdate();
 			quest.setPersistentState(PersistentState.UPDATED);
 		} catch (SQLException e) {
-			log.error("Could not update challenge task " + task.getTaskId() + " of owner " + task.getOwnerId(), e);
+			log.error("Could not update challenge task {} of owner {}", task.getTaskId(), task.getOwnerId(), e);
 		}
 	}
 

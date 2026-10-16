@@ -50,7 +50,7 @@ public class SurveyControllerDAO {
 			stmt.setInt(2, id);
 			stmt.execute();
 		} catch (Exception e) {
-			log.error("Could not set used state for survey " + id, e);
+			log.error("Could not set used state for survey {}", id, e);
 			return false;
 		}
 		return true;

@@ -159,7 +159,7 @@ public class Kisk extends SummonedObject<Player> {
 					return true;
 				break;
 			default:
-				LoggerFactory.getLogger(Kisk.class).warn("Unhandled UseMask " + getUseMask() + " for Kisk " + getNpcId());
+				LoggerFactory.getLogger(Kisk.class).warn("Unhandled UseMask {} for Kisk {}", getUseMask(), getNpcId());
 		}
 
 		return false;

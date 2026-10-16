@@ -43,7 +43,7 @@ public class LegionMemberDAO {
 			rs.next();
 			return rs.getInt("cnt") > 0;
 		} catch (SQLException e) {
-			log.error("Can't check if name " + playerObjId + ", is used, returning possitive result", e);
+			log.error("Can't check if name {}, is used, returning possitive result", playerObjId, e);
 			return true;
 		} finally {
 			DB.close(s);
@@ -96,7 +96,7 @@ public class LegionMemberDAO {
 			legionMember.setChallengeScore(resultSet.getInt("challenge_score"));
 			return legionMember;
 		} catch (SQLException e) {
-			log.error("Could not load legion member " + playerObjId, e);
+			log.error("Could not load legion member {}", playerObjId, e);
 			return null;
 		}
 	}

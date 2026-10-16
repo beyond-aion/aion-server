@@ -103,8 +103,8 @@ public class DropService {
 
 		if (dropNpc.isBeingLooted()) {
 			if (!dropNpc.getLootingPlayer().isOnline()) {
-				log.warn(
-					dropNpc.getLootingPlayer() + " is offline but was still set as drop looter for " + World.getInstance().findVisibleObject(npcObjectId));
+				log.warn("{} is offline but was still set as drop looter for {}", dropNpc.getLootingPlayer(),
+					World.getInstance().findVisibleObject(npcObjectId));
 			} else {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_LOOT_FAIL_ONLOOTING());
 				return;

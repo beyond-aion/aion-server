@@ -37,7 +37,7 @@ public class QuestStateList {
 
 	public synchronized boolean addQuest(int questId, QuestState questState) {
 		if (quests.containsKey(questId)) {
-			log.warn("Tried to add duplicate quest to quest list: " + questId);
+			log.warn("Tried to add duplicate quest to quest list: {}", questId);
 			return false;
 		}
 		quests.put(questId, questState);

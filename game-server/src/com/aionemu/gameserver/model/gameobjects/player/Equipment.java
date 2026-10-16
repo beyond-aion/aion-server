@@ -127,7 +127,7 @@ public class Equipment implements Persistable {
 
 		ItemSlot[] targetSlots = ItemSlot.getSlotsFor(slot);
 		if (targetSlots.length == 0) {
-			log.warn("Unknown target slot " + slot + " for " + item);
+			log.warn("Unknown target slot {} for {}", slot, item);
 			return null;
 		}
 
@@ -180,7 +180,7 @@ public class Equipment implements Persistable {
 
 	private Item equip(long itemSlotToEquip, Item item) {
 		if (!item.isIdentified()) {
-			log.warn(item + " can't be equipped because it's not identified yet");
+			log.warn("{} can't be equipped because it's not identified yet", item);
 			return null;
 		}
 
@@ -464,7 +464,7 @@ public class Equipment implements Persistable {
 		}
 		for (ItemSlot slot : ItemSlot.getSlotsFor(item.getEquipmentSlot())) { // two slots (main+sub) for two-handed weapons
 			if (equipment.putIfAbsent(slot.getSlotIdMask(), item) != null) {
-				log.warn("Duplicate equipped item in slot " + slot + " for " + owner);
+				log.warn("Duplicate equipped item in slot {} for {}", slot, owner);
 				putItemBackToInventory(item);
 			}
 		}

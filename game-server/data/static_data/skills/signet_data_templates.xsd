@@ -14,7 +14,8 @@
 	</xs:complexType>
 	<xs:complexType name="SignetData">
 		<xs:attribute name="lvl" type="xs:int" use="required"/>
-		<xs:attribute name="add_effect_prob" type="xs:int" />
+		<xs:attribute name="carve_prob" type="xs:int" default="100"/>
+		<xs:attribute name="add_effect_prob" type="xs:int" default="1" />
 		<xs:attribute name="dmg_multi" type="xs:float" use="required"/>
 	</xs:complexType>
 	<xs:simpleType name="SignetEnum">

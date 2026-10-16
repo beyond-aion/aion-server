@@ -8,9 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.aionemu.gameserver.GameServer;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.handler.ShoutEventHandler;
@@ -38,6 +35,7 @@ import com.aionemu.gameserver.model.summons.UnsummonType;
 import com.aionemu.gameserver.model.templates.QuestTemplate;
 import com.aionemu.gameserver.model.templates.flypath.FlightPath;
 import com.aionemu.gameserver.model.templates.flypath.FlyPathEntry;
+import com.aionemu.gameserver.model.templates.item.actions.RideAction;
 import com.aionemu.gameserver.model.templates.panels.SkillPanel;
 import com.aionemu.gameserver.model.templates.zone.ZoneType;
 import com.aionemu.gameserver.network.aion.serverpackets.*;
@@ -73,7 +71,6 @@ import com.aionemu.gameserver.world.WorldMapType;
 import com.aionemu.gameserver.world.WorldType;
 import com.aionemu.gameserver.world.geo.GeoService;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
-import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * This class is for controlling players.
@@ -82,7 +79,6 @@ import com.aionemu.gameserver.world.zone.ZoneName;
  */
 public class PlayerController extends CreatureController<Player> {
 
-	private static final Logger log = LoggerFactory.getLogger(PlayerController.class);
 	private static final int PROTECTION_TIME = 60000;
 	private long lastAttackMillis = 0;
 	private long lastAttackedMillis = 0;
@@ -124,7 +120,7 @@ public class PlayerController extends CreatureController<Player> {
 
 	private void sendPlayerInfoPackets(Player player) {
 		PacketSendUtility.sendPacket(getOwner(), new SM_PLAYER_INFO(player, !player.equals(getOwner()) && getOwner().isAggroIconTo(player)));
-		PacketSendUtility.sendPacket(getOwner(), new SM_MOTION(player.getObjectId(), player.getMotions().getActiveMotions()));
+		PacketSendUtility.sendPacket(getOwner(), SM_MOTION.playerMotions(player));
 		if (player.isInPlayerMode(PlayerMode.RIDE))
 			PacketSendUtility.sendPacket(getOwner(), new SM_EMOTION(player, EmotionType.RIDE, 0, player.ride.getNpcId()));
 		if (player.getController().isUnderStance())
@@ -195,15 +191,11 @@ public class PlayerController extends CreatureController<Player> {
 	@Override
 	public void onEnterZone(ZoneInstance zone) {
 		Player player = getOwner();
-		if (!zone.canRide() && player.isInPlayerMode(PlayerMode.RIDE))
+		if (player.isInPlayerMode(PlayerMode.RIDE) && !RideAction.isInRideZone(player))
 			player.unsetPlayerMode(PlayerMode.RIDE);
 		ConquerorAndProtectorService.getInstance().onEnterZone(player, zone);
 		InstanceService.onEnterZone(player, zone);
-		ZoneName zoneName = zone.getAreaTemplate().getZoneName();
-		if (zoneName == null)
-			log.warn("No name found for a zone in map " + zone.getAreaTemplate().getWorldId() + " with xml name " + zone.getZoneTemplate().getXmlName());
-		else
-			QuestEngine.getInstance().onEnterZone(new QuestEnv(null, player, 0), zoneName);
+		QuestEngine.getInstance().onEnterZone(new QuestEnv(null, player, 0), zone);
 	}
 
 	@Override
@@ -211,11 +203,7 @@ public class PlayerController extends CreatureController<Player> {
 		Player player = getOwner();
 		ConquerorAndProtectorService.getInstance().onLeaveZone(player, zone);
 		InstanceService.onLeaveZone(player, zone);
-		ZoneName zoneName = zone.getAreaTemplate().getZoneName();
-		if (zoneName == null)
-			log.warn("No name found for a zone in map " + zone.getAreaTemplate().getWorldId() + " with xml name " + zone.getZoneTemplate().getXmlName());
-		else
-			QuestEngine.getInstance().onLeaveZone(new QuestEnv(null, player, 0), zoneName);
+		QuestEngine.getInstance().onLeaveZone(new QuestEnv(null, player, 0), zone);
 	}
 
 	/**
@@ -441,9 +429,6 @@ public class PlayerController extends CreatureController<Player> {
 		if (getOwner().isDead())
 			return;
 
-		if (getOwner().isProtectionActive())
-			return;
-
 		// avoid killing players after duel
 		if (!getOwner().equals(attacker) && attacker.getMaster() instanceof Player && !getOwner().isEnemy(attacker))
 			return;
@@ -516,17 +501,16 @@ public class PlayerController extends CreatureController<Player> {
 
 	@Override
 	public void cancelCurrentSkill(Creature lastAttacker) {
-		cancelCurrentSkill(lastAttacker, SM_SYSTEM_MESSAGE.STR_SKILL_CANCELED());
+		if (getOwner().isCasting())
+			cancelCurrentSkill(lastAttacker, SM_SYSTEM_MESSAGE.STR_SKILL_CANCELED());
 	}
 
 	@Override
 	public void cancelCurrentSkill(Creature lastAttacker, SM_SYSTEM_MESSAGE message) {
-		if (getOwner().getCastingSkill() == null) {
-			return;
-		}
-
 		Player player = getOwner();
 		Skill castingSkill = player.getCastingSkill();
+		if (castingSkill == null)
+			return;
 		castingSkill.cancelCast();
 		player.setCasting(null);
 		if (castingSkill.allowAnimationBoostByCastSpeed())

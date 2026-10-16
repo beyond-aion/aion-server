@@ -1,10 +1,5 @@
 package com.aionemu.gameserver.model.templates.item.actions;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlType;
-
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.dao.PlayerAppearanceDAO;
@@ -16,6 +11,11 @@ import com.aionemu.gameserver.model.gameobjects.player.PlayerAppearance;
 import com.aionemu.gameserver.model.templates.cosmeticitems.CosmeticItemTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlType;
 
 /**
  * @author xTz
@@ -52,6 +52,8 @@ public class CosmeticItemAction extends AbstractItemAction {
 
 	@Override
 	public void act(final Player player, Item parentItem, Item targetItem, Object... params) {
+		if (!player.getInventory().decreaseByObjectId(parentItem.getObjectId(), 1))
+			return;
 		CosmeticItemTemplate template = DataManager.COSMETIC_ITEMS_DATA.getCosmeticItemsTemplate(cosmeticName);
 		PlayerAppearance playerAppearance = player.getPlayerAppearance();
 		String type = template.getType();
@@ -74,16 +76,14 @@ public class CosmeticItemAction extends AbstractItemAction {
 				playerAppearance.setSkinRGB(preset.getEyeColor());
 				playerAppearance.setHair(preset.getHairType());
 				playerAppearance.setFace(preset.getFaceType());
-				playerAppearance.setHeight(preset.getScale());
-				player.getAccountData().updateBoundingRadius();
+				playerAppearance.setHeightScale(preset.getScale());
 			}
 			default -> {
-				LoggerFactory.getLogger(getClass()).warn("Unhandled cosmetic item type: " + type);
+				LoggerFactory.getLogger(getClass()).warn("Unhandled cosmetic item type: {}", type);
 				return;
 			}
 		}
 		PlayerAppearanceDAO.store(player);
-		player.getInventory().delete(targetItem);
 		player.getController().onChangedPlayerAttributes();
 	}
 }

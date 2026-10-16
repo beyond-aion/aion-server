@@ -58,9 +58,9 @@ public class StaticDoorService {
 		VisibleObject object = player.getPosition().getWorldMapInstance().getObjectByStaticId(doorId);
 		if (!(object instanceof StaticDoor)) {
 			if (object == null)
-				log.warn("Door (ID: " + doorId + ") is missing near " + player.getPosition());
+				log.warn("Door (ID: {}) is missing near {}", doorId, player.getPosition());
 			else
-				log.warn("Door (ID: " + doorId + ") is not a static door but " + object);
+				log.warn("Door (ID: {}) is not a static door but {}", doorId, object);
 			return null;
 		}
 		return (StaticDoor) object;

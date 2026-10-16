@@ -43,7 +43,7 @@ public class PlayerSettingsDAO {
 				}
 			}
 		} catch (Exception e) {
-			log.error("Could not restore PlayerSettings data for player " + playerId + " from DB: " + e.getMessage(), e);
+			log.error("Could not restore PlayerSettings data for player {} from DB: {}", playerId, e.getMessage(), e);
 		}
 		playerSettings.setPersistentState(PersistentState.UPDATED);
 		return playerSettings;

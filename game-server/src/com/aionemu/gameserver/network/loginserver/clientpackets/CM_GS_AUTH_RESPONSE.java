@@ -38,11 +38,11 @@ public class CM_GS_AUTH_RESPONSE extends LsClientPacket {
 				LoginServer.getInstance().sendLoggedInAccounts();
 				break;
 			case 1: // Not authed
-				log.error("GameServer is not authenticated at LoginServer side!");
+				log.warn("Authentication failed at the login server");
 				getConnection().close();
 				break;
 			case 2: // Already registered
-				log.info("GameServer is already registered at LoginServer side!");
+				log.warn("Game server is already registered at the login server");
 				getConnection().close();
 				break;
 		}

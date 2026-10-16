@@ -2,7 +2,7 @@ package com.aionemu.gameserver.model.templates.item.actions;
 
 import static com.aionemu.gameserver.model.items.ItemUseAnimation.*;
 
-import javax.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlAttribute;
 
 import com.aionemu.gameserver.controllers.observer.ItemUseObserver;
 import com.aionemu.gameserver.dataholders.DataManager;

@@ -7,7 +7,7 @@ import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.world.zone.ZoneName;
+import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
  * @author Ritsu
@@ -24,7 +24,7 @@ public class _24024ANepraProtector extends AbstractQuestHandler {
 		qe.registerOnQuestCompleted(questId);
 		qe.registerOnLevelChanged(questId);
 		qe.registerQuestNpc(212861).addOnKillEvent(questId);
-		qe.registerOnEnterZone(ZoneName.get("ALTAR_OF_THE_BLACK_DRAGON_220020000"), questId);
+		qe.registerOnEnterZone("ALTAR_OF_THE_BLACK_DRAGON_220020000", questId);
 		for (int npc_id : npc_ids)
 			qe.registerQuestNpc(npc_id).addOnTalkEvent(questId);
 	}
@@ -120,12 +120,12 @@ public class _24024ANepraProtector extends AbstractQuestHandler {
 	}
 
 	@Override
-	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) {
+	public boolean onEnterZoneEvent(QuestEnv env, ZoneInstance zone) {
 		Player player = env.getPlayer();
 		if (player == null)
 			return false;
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (zoneName != ZoneName.get("ALTAR_OF_THE_BLACK_DRAGON_220020000"))
+		if (!zone.matches("ALTAR_OF_THE_BLACK_DRAGON_220020000"))
 			return false;
 		if (qs != null && qs.getQuestVarById(0) == 2) {
 			env.setQuestId(questId);

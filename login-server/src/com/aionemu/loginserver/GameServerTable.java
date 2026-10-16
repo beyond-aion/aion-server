@@ -1,5 +1,7 @@
 package com.aionemu.loginserver;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
@@ -51,7 +53,7 @@ public class GameServerTable {
 	 */
 	public static void load() {
 		gameservers = GameServersDAO.getAllGameServers();
-		log.info("GameServerTable loaded " + gameservers.size() + " registered GameServers.");
+		log.info("Loaded {} registered game servers", gameservers.size());
 	}
 
 	/**
@@ -79,7 +81,7 @@ public class GameServerTable {
 		 * This id is not Registered at LoginServer.
 		 */
 		if (gsi == null) {
-			log.warn(gsConnection + " requestedID: " + requestedId + " is not registered in LS database!");
+			log.warn("{} requestedID: {} is not registered in LS database!", gsConnection, requestedId);
 			return GsAuthResponse.NOT_AUTHED;
 		}
 
@@ -92,8 +94,8 @@ public class GameServerTable {
 		/**
 		 * Check if password and ip are ok.
 		 */
-		if (!gsi.getPassword().equals(password) || !NetworkUtils.checkIPMatching(gsi.getIpMask(), gsConnection.getIP())) {
-			log.warn(gsConnection + " requested ID: " + requestedId + " has wrong IP or password!");
+		if (!MessageDigest.isEqual(gsi.getPassword().getBytes(StandardCharsets.UTF_8), password.getBytes(StandardCharsets.UTF_8)) || !NetworkUtils.checkIPMatching(gsi.getIpMask(), gsConnection.getIP())) {
+			log.warn("{} requested ID: {} has wrong IP or password!", gsConnection, requestedId);
 			return GsAuthResponse.NOT_AUTHED;
 		}
 

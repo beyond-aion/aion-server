@@ -14,7 +14,6 @@ import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
-import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author xTz, Gigi
@@ -105,7 +104,7 @@ public class EsoterraceInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void onEnterZone(Player player, ZoneInstance zone) {
-		if (zone.getAreaTemplate().getZoneName() == ZoneName.get("DRANA_PRODUCTION_LAB_300250000")) {
+		if (zone.matches("DRANA_PRODUCTION_LAB_300250000")) {
 			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400919));
 		}
 	}

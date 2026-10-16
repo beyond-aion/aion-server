@@ -37,7 +37,7 @@ public class MotionDAO {
 				}
 			}
 		} catch (Exception e) {
-			log.error("Could not restore motions for playerObjId: " + player.getObjectId() + " from DB: " + e.getMessage(), e);
+			log.error("Could not restore motions for playerObjId: {} from DB: {}", player.getObjectId(), e.getMessage(), e);
 		}
 		player.setMotions(motions);
 	}
@@ -50,7 +50,7 @@ public class MotionDAO {
 			stmt.setInt(4, motion.getExpireTime());
 			stmt.execute();
 		} catch (Exception e) {
-			log.error("Could not store motion for player " + objectId + " from DB: " + e.getMessage(), e);
+			log.error("Could not store motion for player {} from DB: {}", objectId, e.getMessage(), e);
 			return false;
 		}
 		return true;
@@ -62,7 +62,7 @@ public class MotionDAO {
 			stmt.setInt(2, motionId);
 			stmt.execute();
 		} catch (Exception e) {
-			log.error("Could not delete motion for player " + objectId + " from DB: " + e.getMessage(), e);
+			log.error("Could not delete motion for player {} from DB: {}", objectId, e.getMessage(), e);
 			return false;
 		}
 		return true;
@@ -75,7 +75,7 @@ public class MotionDAO {
 			stmt.setInt(3, motion.getId());
 			stmt.execute();
 		} catch (Exception e) {
-			log.error("Could not store motion for player " + objectId + " from DB: " + e.getMessage(), e);
+			log.error("Could not store motion for player {} from DB: {}", objectId, e.getMessage(), e);
 			return false;
 		}
 		return true;

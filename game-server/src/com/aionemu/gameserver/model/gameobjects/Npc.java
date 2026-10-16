@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.model.gameobjects;
 
-import java.util.LinkedList;
+import java.util.ArrayDeque;
 import java.util.Objects;
 import java.util.Queue;
 import java.util.function.Predicate;
@@ -44,7 +44,7 @@ import com.aionemu.gameserver.world.WorldPosition;
 public class Npc extends Creature {
 
 	private final NpcSkillList skillList;
-	private final Queue<NpcSkillEntry> queuedSkills = new LinkedList<>();
+	private Queue<NpcSkillEntry> queuedSkills;
 	private WalkerGroup walkerGroup;
 	private String masterName;
 	private int creatorId = 0;
@@ -129,36 +129,28 @@ public class Npc extends Creature {
 		return skillList;
 	}
 
-	public NpcSkillEntry getNextQueuedSkill() {
-		synchronized (queuedSkills) {
-			return queuedSkills.peek();
-		}
+	public synchronized NpcSkillEntry getNextQueuedSkill() {
+		return queuedSkills == null ? null : queuedSkills.peek();
 	}
 
-	public boolean hasQueuedSkill(Predicate<NpcSkillEntry> filter) {
-		synchronized (queuedSkills) {
-			return  queuedSkills.stream().anyMatch(filter);
-		}
+	public synchronized boolean hasQueuedSkill(Predicate<NpcSkillEntry> filter) {
+		return queuedSkills != null && queuedSkills.stream().anyMatch(filter);
 	}
 
-	public void removeNextQueuedSkill(NpcSkillEntry skill) {
-		synchronized (queuedSkills) {
-			if (queuedSkills.peek() == skill) {
-				queuedSkills.poll();
-			}
-		}
+	public synchronized void removeNextQueuedSkill(NpcSkillEntry skill) {
+		if (queuedSkills != null && queuedSkills.peek() == skill)
+			queuedSkills.poll();
 	}
 
-	public void clearQueuedSkills() {
-		synchronized (queuedSkills) {
+	public synchronized void clearQueuedSkills() {
+		if (queuedSkills != null)
 			queuedSkills.clear();
-		}
 	}
 
-	public void queueSkill(NpcSkillEntry skill) {
-		synchronized (queuedSkills) {
-			queuedSkills.offer(skill);
-		}
+	public synchronized void queueSkill(NpcSkillEntry skill) {
+		if (queuedSkills == null)
+			queuedSkills = new ArrayDeque<>(3);
+		queuedSkills.offer(skill);
 	}
 
 	public void queueSkill(int skillId, int level) {

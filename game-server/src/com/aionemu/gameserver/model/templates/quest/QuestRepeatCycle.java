@@ -1,7 +1,7 @@
 package com.aionemu.gameserver.model.templates.quest;
 
-import javax.xml.bind.annotation.XmlEnum;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlEnum;
+import jakarta.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.model.templates.L10n;
 

@@ -22,5 +22,13 @@
 		<xs:attribute name="code" type="xs:int" use="required" />
 		<xs:attribute name="rank" type="xs:int" use="required" />
 		<xs:attribute name="zone_id" type="xs:int" use="required" />
+		<xs:attribute name="state" type="WeatherState" />
 	</xs:complexType>
+	<xs:simpleType name="WeatherState">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="RAIN" />
+			<xs:enumeration value="SNOW" />
+			<xs:enumeration value="WIND" />
+		</xs:restriction>
+	</xs:simpleType>
 </xs:schema>

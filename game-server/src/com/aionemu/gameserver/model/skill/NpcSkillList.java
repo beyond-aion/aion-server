@@ -26,7 +26,7 @@ public class NpcSkillList {
 		List<NpcSkillEntry> skillsSortedByPrioDescending = new ArrayList<>(npcSkills.size());
 		for (NpcSkillTemplate template : npcSkills) {
 			if (DataManager.SKILL_DATA.getSkillTemplate(template.getSkillId()) == null) {
-				LoggerFactory.getLogger(NpcSkillList.class).warn("Missing skill data for skill " + template.getSkillId() + " in npc skill list");
+				LoggerFactory.getLogger(NpcSkillList.class).warn("Missing skill data for skill {} in npc skill list", template.getSkillId());
 				continue;
 			}
 			skillsSortedByPrioDescending.add(new NpcSkillTemplateEntry(template));

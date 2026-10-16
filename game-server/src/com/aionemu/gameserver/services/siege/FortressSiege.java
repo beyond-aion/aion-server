@@ -64,7 +64,7 @@ public class FortressSiege extends Siege<FortressLocation> {
 	@Override
 	public void onSiegeStart() {
 		if (LoggingConfig.LOG_SIEGE)
-			log.info(this + ": Siege started. Race: " + getSiegeLocation().getRace() + ", legion ID: " + getSiegeLocation().getLegionId());
+			log.info("{}: Siege started. Race: {}, legion ID: {}", this, getSiegeLocation().getRace(), getSiegeLocation().getLegionId());
 		// Mark fortress as vulnerable
 		getSiegeLocation().setVulnerable(true);
 
@@ -133,10 +133,10 @@ public class FortressSiege extends Siege<FortressLocation> {
 			int oldLegionId = getSiegeLocation().getLegionId();
 			if (isBossKilled()) {
 				SiegeRaceCounter winner = getWinnerRaceCounter();
-				log.info(this + ": Siege finished. Old race: " + oldRace + ", legion ID: " + oldLegionId + " -> New race: " + winner.getSiegeRace()
-					+ ", legion ID: " + (winner.getWinnerLegionId() == null ? 0 : winner.getWinnerLegionId()));
+				log.info("{}: Siege finished. Old race: {}, legion ID: {} -> New race: {}, legion ID: {}", this, oldRace, oldLegionId,
+					winner.getSiegeRace(), winner.getWinnerLegionId() == null ? 0 : winner.getWinnerLegionId());
 			} else {
-				log.info(this + ": Siege finished. No winner found. Race: " + oldRace + ", legion ID: " + oldLegionId);
+				log.info("{}: Siege finished. No winner found. Race: {}, legion ID: {}", this, oldRace, oldLegionId);
 			}
 		}
 
@@ -323,8 +323,8 @@ public class FortressSiege extends Siege<FortressLocation> {
 		Legion legion = legionId == 0 ? null : LegionService.getInstance().getLegion(legionId);
 		if (legion == null) {
 			if (LoggingConfig.LOG_SIEGE)
-				log.info(this + ": Skipped sending legion rewards because the fortress is not owned by any legion (owner race: "
-					+ getSiegeLocation().getRace() + ").");
+				log.info("{}: Skipped sending legion rewards because the fortress is not owned by any legion (owner race: {}).", this,
+					getSiegeLocation().getRace());
 			return;
 		}
 		distributeLegionGp(legion, winnerRaceCounter);
@@ -341,16 +341,16 @@ public class FortressSiege extends Siege<FortressLocation> {
 
 			if (participatedLegionMembers.isEmpty()) {
 				if (LoggingConfig.LOG_SIEGE)
-					log.info(this + ": Distributed no GP to the members of " + legion + " because no one made AP");
+					log.info("{}: Distributed no GP to the members of {} because no one made AP", this, legion);
 			} else {
 				int gp = Math.min(Math.round(legionGp / (float) participatedLegionMembers.size()), SiegeConfig.LEGION_GP_CAP_PER_MEMBER);
 				for (int participant : participatedLegionMembers)
 					GloryPointsService.addGp(participant, gp);
 				if (LoggingConfig.LOG_SIEGE)
-					log.info(this + ": Distributed " + gp + " GP each, to the following members of " + legion + ": " + participatedLegionMembers);
+					log.info("{}: Distributed {} GP each, to the following members of {}: {}", this, gp, legion, participatedLegionMembers);
 			}
 		} catch (Exception e) {
-			log.error("Error while distributing legion GP for " + this, e);
+			log.error("Error while distributing legion GP for {}", this, e);
 		}
 	}
 
@@ -382,10 +382,10 @@ public class FortressSiege extends Siege<FortressLocation> {
 				if (nonKinahItems > 0)
 					msg += (msg.isEmpty() ? "Sent " : " and sent ") + nonKinahItems + " legion rewards to brigade general " + brigadeGeneral.getName() + " of "
 						+ legion + " (see sysmail.log)";
-				log.info(this + ": " + msg);
+				log.info("{}: {}", this, msg);
 			}
 		} catch (Exception e) {
-			log.error("Error while distributing legion rewards for " + this, e);
+			log.error("Error while distributing legion rewards for {}", this, e);
 		}
 	}
 

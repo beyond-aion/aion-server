@@ -111,7 +111,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 		if (newHp != previousHp || skillId != 0)
 			sendAttackStatusPacketUpdate(type, previousHp - newHp, skillId, log, criticalHit);
 		if (newHp != previousHp)
-			onHpChanged(previousHp, newHp, attacker);
+			onHpChanged(type, previousHp, newHp, attacker);
 		return newHp;
 	}
 
@@ -141,7 +141,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 		if (newMp != previousMp || skillId != 0)
 			sendAttackStatusPacketUpdate(type, previousMp - newMp, skillId, log);
 		if (newMp != previousMp)
-			onMpChanged(previousMp, newMp);
+			onMpChanged(type, previousMp, newMp);
 		return newMp;
 	}
 
@@ -192,7 +192,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 		if (newHp != previousHp || skillId != 0)
 			sendAttackStatusPacketUpdate(type, newHp - previousHp, skillId, log);
 		if (newHp != previousHp)
-			onHpChanged(previousHp, newHp, effector == null ? getOwner() : effector);
+			onHpChanged(type, previousHp, newHp, effector == null ? getOwner() : effector);
 		return newHp;
 	}
 
@@ -219,7 +219,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 		if (newMp != previousMp || skillId != 0)
 			sendAttackStatusPacketUpdate(type, newMp - previousMp, skillId, log);
 		if (newMp != previousMp)
-			onMpChanged(previousMp, newMp);
+			onMpChanged(type, previousMp, newMp);
 		return currentMp;
 	}
 
@@ -317,13 +317,13 @@ public abstract class CreatureLifeStats<T extends Creature> {
 		return (int) (100f * currentMp / getMaxMp());
 	}
 
-	protected void onHpChanged(int previousHp, int newHp, Creature effector) {
+	protected void onHpChanged(TYPE type, int previousHp, int newHp, Creature effector) {
 		if (newHp == 0)
 			getOwner().getController().onDie(effector);
 		getOwner().getObserveController().notifyHPChangeObservers(newHp);
 	}
 
-	protected void onMpChanged(int previousMp, int newMp) {
+	protected void onMpChanged(TYPE type, int previousMp, int newMp) {
 	}
 
 	public int getMaxFp() {
@@ -371,7 +371,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 		if (newHp != previousHp) {
 			// broadcast current hp percentage to others
 			PacketSendUtility.broadcastToSightedPlayers(owner, new SM_ATTACK_STATUS(owner, TYPE.HP, 0, 0, LOG.REGULAR));
-			onHpChanged(previousHp, newHp, effector);
+			onHpChanged(TYPE.HP, previousHp, newHp, effector);
 		}
 	}
 
@@ -385,7 +385,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 		}
 		if (newMp != previousMp) {
 			PacketSendUtility.broadcastToSightedPlayers(owner, new SM_ATTACK_STATUS(owner, TYPE.HEAL_MP, 0, 0, LOG.MPHEAL));
-			onMpChanged(previousMp, newMp);
+			onMpChanged(TYPE.HEAL_MP, previousMp, newMp);
 		}
 	}
 

@@ -30,9 +30,9 @@ public class CM_ACCOUNT_CONNECTION_INFO extends GsClientPacket {
 
 	protected void runImpl() {
 		if (!AccountDAO.updateLastMac(accountId, mac))
-			log.warn("Couldn't update account_data.last_mac for accountId " + accountId);
+			log.warn("Couldn't update account_data.last_mac for accountId {}", accountId);
 		if (!AccountDAO.updateLastHDDSerial(accountId, hddSerial))
-			log.warn("Couldn't update account_data.last_hdd_serial for accountId " + accountId);
+			log.warn("Couldn't update account_data.last_hdd_serial for accountId {}", accountId);
 		if (Config.LOG_LOGINS)
 			AccountsLogDAO.addRecord(accountId, getConnection().getGameServerInfo().getId(), time, ip, mac, hddSerial);
 	}

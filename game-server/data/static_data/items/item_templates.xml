@@ -837999,27 +837999,27 @@
 			<enchant count="175"/>
 		</actions>
 	</item_template>
-	<item_template id="166000197" name="[Event] Lv. 1 Enchantment Stone (10 min)" level="1" cName="world_matter_enchant_g1_10m" mask="4160" quality="COMMON" price="950" desc="846947" activate_count="1" expire_time="10">
+	<item_template id="166000197" name="[Event] Lv. 1 Enchantment Stone (10 min)" level="1" cName="world_matter_enchant_g1_10m" mask="4160" item_group="ENCHANTMENT" quality="COMMON" price="950" desc="846947" activate_count="1" expire_time="10">
 		<actions>
 			<enchant count="1"/>
 		</actions>
 	</item_template>
-	<item_template id="166000198" name="[Event] Lv. 2 Enchantment Stone (10 min)" level="1" cName="world_matter_enchant_g2_10m" mask="4160" quality="COMMON" price="950" desc="846948" activate_count="1" expire_time="10">
+	<item_template id="166000198" name="[Event] Lv. 2 Enchantment Stone (10 min)" level="1" cName="world_matter_enchant_g2_10m" mask="4160" item_group="ENCHANTMENT" quality="COMMON" price="950" desc="846948" activate_count="1" expire_time="10">
 		<actions>
 			<enchant count="10"/>
 		</actions>
 	</item_template>
-	<item_template id="166000199" name="[Event] Lv. 3 Enchantment Stone (10 min)" level="1" cName="world_matter_enchant_g3_10m" mask="4160" quality="COMMON" price="950" desc="846949" activate_count="1" expire_time="10">
+	<item_template id="166000199" name="[Event] Lv. 3 Enchantment Stone (10 min)" level="1" cName="world_matter_enchant_g3_10m" mask="4160" item_group="ENCHANTMENT" quality="COMMON" price="950" desc="846949" activate_count="1" expire_time="10">
 		<actions>
 			<enchant count="50"/>
 		</actions>
 	</item_template>
-	<item_template id="166000200" name="[Event] Lv. 4 Enchantment Stone (10 min)" level="1" cName="world_matter_enchant_g4_10m" mask="4160" quality="COMMON" price="950" desc="846950" activate_count="1" expire_time="10">
+	<item_template id="166000200" name="[Event] Lv. 4 Enchantment Stone (10 min)" level="1" cName="world_matter_enchant_g4_10m" mask="4160" item_group="ENCHANTMENT" quality="COMMON" price="950" desc="846950" activate_count="1" expire_time="10">
 		<actions>
 			<enchant count="100"/>
 		</actions>
 	</item_template>
-	<item_template id="166000201" name="[Event] Lv. 5 Enchantment Stone (10 min)" level="1" cName="world_matter_enchant_g5_10m" mask="4160" quality="COMMON" price="950" desc="846951" activate_count="1" expire_time="10">
+	<item_template id="166000201" name="[Event] Lv. 5 Enchantment Stone (10 min)" level="1" cName="world_matter_enchant_g5_10m" mask="4160" item_group="ENCHANTMENT" quality="COMMON" price="950" desc="846951" activate_count="1" expire_time="10">
 		<actions>
 			<enchant count="150"/>
 		</actions>
@@ -838029,12 +838029,12 @@
 			<enchant count="200"/>
 		</actions>
 	</item_template>
-	<item_template id="166020001" name="[Event] Empyrean Lord's Enchantment Stone (10 min)" level="65" cName="world_matter_enchant_exceed_01_10m" mask="12352" max_stack_count="100" quality="MYTHIC" price="885" desc="846952" activate_count="1" expire_time="10">
+	<item_template id="166020001" name="[Event] Empyrean Lord's Enchantment Stone (10 min)" level="65" cName="world_matter_enchant_exceed_01_10m" mask="12352" max_stack_count="100" item_group="ENCHANTMENT" quality="MYTHIC" price="885" desc="846952" activate_count="1" expire_time="10">
 		<actions>
 			<enchant count="200"/>
 		</actions>
 	</item_template>
-	<item_template id="166020002" name="[Event] Empyrean Lord's Enchantment Stone (3 days)" level="65" cName="world_matter_enchant_exceed_01_3day" mask="12352" max_stack_count="100" quality="MYTHIC" price="885" desc="847619" activate_count="1" expire_time="4321">
+	<item_template id="166020002" name="[Event] Empyrean Lord's Enchantment Stone (3 days)" level="65" cName="world_matter_enchant_exceed_01_3day" mask="12352" max_stack_count="100" item_group="ENCHANTMENT" quality="MYTHIC" price="885" desc="847619" activate_count="1" expire_time="4321">
 		<actions>
 			<enchant count="200"/>
 		</actions>
@@ -838087,7 +838087,10 @@
 		</actions>
 		<acquisition type="AP" ap="200000"/>
 	</item_template>
-	<item_template id="166030009" name="Divine Tempering Water" level="65" cName="matter_2stenchant_m_65_test" mask="12414" max_stack_count="100" quality="MYTHIC" price="5" desc="841121" activate_count="1">
+	<item_template id="166030009" name="Divine Tempering Water" level="65" cName="matter_2stenchant_m_65_test" mask="12414" max_stack_count="100" item_group="TAMPERING" quality="MYTHIC" price="5" desc="841121" activate_count="1">
+		<actions>
+			<tampering/>
+		</actions>
 		<acquisition type="REWARD" item="186000317" count="5" ap="200000"/>
 	</item_template>
 	<item_template id="166030010" name="[Event] Divine Ascension Water (7 days)" level="65" cName="event_matter_2stenchant_m_65a_7day" mask="12360" max_stack_count="100" item_group="TAMPERING" quality="MYTHIC" price="5" desc="842480" activate_count="1" expire_time="10081">
@@ -846833,6 +846836,9 @@
 			<add name="PHYSICAL_ATTACK" value="5" bonus="true"/>
 			<add name="PHYSICAL_ACCURACY" value="27" bonus="true"/>
 		</modifiers>
+		<actions>
+			<enchant/>
+		</actions>
 	</item_template>
 	<item_template id="167040001" name="Multi-Manastone Test Manastone Attack, Parry, Resist Magic" level="70" cName="test_matter_multi_02" mask="4222" max_stack_count="10000" quality="RARE" price="100" desc="802002" activate_count="1">
 		<modifiers>
@@ -846840,6 +846846,9 @@
 			<add name="PARRY" value="27" bonus="true"/>
 			<add name="MAGICAL_RESIST" value="14" bonus="true"/>
 		</modifiers>
+		<actions>
+			<enchant/>
+		</actions>
 	</item_template>
 	<item_template id="167040002" name="Multi-Manastone Test Manastone Max MP, Max HP, Magic Boost, Magic Reduction" level="70" cName="test_matter_multi_03" mask="4222" max_stack_count="10000" quality="RARE" price="100" desc="802003" activate_count="1">
 		<modifiers>
@@ -846848,6 +846857,9 @@
 			<add name="BOOST_MAGICAL_SKILL" value="27" bonus="true"/>
 			<add name="MAGIC_SKILL_BOOST_RESIST" value="30" bonus="true"/>
 		</modifiers>
+		<actions>
+			<enchant/>
+		</actions>
 	</item_template>
 	<item_template id="167040003" name="Multi-Manastone Test Manastone Block, Parry, Resist Magic, Magic Accuracy, Crit Strike" level="70" cName="test_matter_multi_04" mask="4222" max_stack_count="10000" quality="RARE" price="100" desc="802004" activate_count="1">
 		<modifiers>
@@ -846857,6 +846869,9 @@
 			<add name="MAGICAL_ACCURACY" value="16" bonus="true"/>
 			<add name="PHYSICAL_CRITICAL" value="17" bonus="true"/>
 		</modifiers>
+		<actions>
+			<enchant/>
+		</actions>
 	</item_template>
 	<item_template id="167040004" name="Multi-Manastone Test Manastone for Error Detection" level="70" cName="test_matter_multi_05" mask="4222" max_stack_count="10000" quality="RARE" price="100" desc="802005" activate_count="1">
 		<modifiers>
@@ -846864,6 +846879,9 @@
 			<add name="PARRY" value="27" bonus="true"/>
 			<add name="MAGICAL_ACCURACY" value="16" bonus="true"/>
 		</modifiers>
+		<actions>
+			<enchant/>
+		</actions>
 	</item_template>
 	<item_template id="167040005" name="Silverine Manastone: MP +85 / Evasion +12" level="60" cName="special_matter_multi_silverlin_01" mask="12414" max_stack_count="10000" quality="RARE" price="100" desc="811157" activate_count="1">
 		<modifiers>

@@ -133,6 +133,7 @@ public class MailService {
 				attachedItem = senderItem;
 			} else if (senderItem.getItemCount() > attachedItemCount) {
 				attachedItem = ItemFactory.newItem(senderItem.getItemTemplate().getTemplateId(), attachedItemCount);
+				attachedItem.setExpireTime(senderItem.getExpireTime());
 				senderInventory.decreaseItemCount(senderItem, attachedItemCount);
 			}
 
@@ -162,8 +163,8 @@ public class MailService {
 			return;
 
 		if (attachedItem != null && LoggingConfig.LOG_MAIL)
-			log.info("Player: " + sender.getName() + " sent item " + attachedItem.getItemId() + " [" + attachedItem.getItemName() + "] (count: "
-				+ attachedItem.getItemCount() + ") to player " + recipientName);
+			log.info("Player: {} sent item {} [{}] (count: {}) to player {}", sender.getName(), attachedItem.getItemId(), attachedItem.getItemName(),
+				attachedItem.getItemCount(), recipientName);
 
 		PacketSendUtility.sendPacket(sender, new SM_MAIL_SERVICE(status));
 		SystemMailService.updateRecipientMailbox(recipientCommonData, newLetter);
@@ -204,7 +205,7 @@ public class MailService {
 	public static void readMail(Player player, int letterId) {
 		Letter letter = player.getMailbox().getLetterFromMailbox(letterId);
 		if (letter == null) {
-			log.warn("Cannot read mail " + player.getObjectId() + " " + letterId);
+			log.warn("Cannot read mail {} {}", player.getObjectId(), letterId);
 			return;
 		}
 

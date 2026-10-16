@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.skillengine.model;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 import java.util.List;
 
 @XmlType(name = "signet_data_template")

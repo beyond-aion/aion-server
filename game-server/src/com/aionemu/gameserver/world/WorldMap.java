@@ -10,7 +10,6 @@ import java.util.function.Consumer;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.templates.world.WorldMapTemplate;
-import com.aionemu.gameserver.world.zone.ZoneAttributes;
 
 /**
  * This object is representing one in-game map and can have instances.
@@ -22,12 +21,9 @@ public class WorldMap implements Iterable<WorldMapInstance> {
 	private final WorldMapTemplate worldMapTemplate;
 	private final AtomicInteger nextInstanceId = new AtomicInteger();
 	private final Map<Integer, WorldMapInstance> instances = new ConcurrentHashMap<>();
-	private int worldOptions;
 
 	public WorldMap(WorldMapTemplate worldMapTemplate) {
 		this.worldMapTemplate = worldMapTemplate;
-		this.worldOptions = worldMapTemplate.getFlags();
-
 		for (int i = 1; i <= getInstanceCount(); i++) {
 			if (isInstanceType()) // default instances are inaccessible but its handler methods are sometimes called via MainWorldMapInstance, e.g. on relog
 				WorldMapInstanceFactory.createWorldMapInstance(this, 0, GeneralInstanceHandler::new, 0);
@@ -64,62 +60,8 @@ public class WorldMap implements Iterable<WorldMapInstance> {
 		return worldMapTemplate.getMapId();
 	}
 
-	public boolean isFlightAllowed() {
-		return (worldOptions & ZoneAttributes.FLY.getId()) != 0;
-	}
-
 	public boolean isExceptBuff() {
 		return worldMapTemplate.isExceptBuff();
-	}
-
-	public boolean canGlide() {
-		return (worldOptions & ZoneAttributes.GLIDE.getId()) != 0;
-	}
-
-	public boolean canPutKisk() {
-		return (worldOptions & ZoneAttributes.BIND.getId()) != 0;
-	}
-
-	public boolean canRecall() {
-		return (worldOptions & ZoneAttributes.RECALL.getId()) != 0;
-	}
-
-	public boolean canRide() {
-		return (worldOptions & ZoneAttributes.RIDE.getId()) != 0;
-	}
-
-	public boolean canFlyRide() {
-		return (worldOptions & ZoneAttributes.FLY_RIDE.getId()) != 0;
-	}
-
-	public boolean isPvpAllowed() {
-		return (worldOptions & ZoneAttributes.PVP_ENABLED.getId()) != 0;
-	}
-
-	public boolean isSameRaceDuelsAllowed() {
-		return (worldOptions & ZoneAttributes.DUEL_SAME_RACE_ENABLED.getId()) != 0;
-	}
-
-	public boolean isOtherRaceDuelsAllowed() {
-		return (worldOptions & ZoneAttributes.DUEL_OTHER_RACE_ENABLED.getId()) != 0;
-	}
-
-	public boolean canReturnToBattle() {
-		return (worldOptions & ZoneAttributes.NO_RETURN_BATTLE.getId()) == 0;
-	}
-
-	public void setWorldOption(ZoneAttributes option) {
-		worldOptions |= option.getId();
-	}
-
-	public void removeWorldOption(ZoneAttributes option) {
-		worldOptions &= ~option.getId();
-	}
-
-	public boolean hasOverridenOption(ZoneAttributes option) {
-		if ((worldMapTemplate.getFlags() & option.getId()) == 0)
-			return (worldOptions & option.getId()) != 0;
-		return (worldOptions & option.getId()) == 0;
 	}
 
 	public int getInstanceCount() {

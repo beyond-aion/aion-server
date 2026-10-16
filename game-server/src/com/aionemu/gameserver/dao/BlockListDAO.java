@@ -66,7 +66,7 @@ public class BlockListDAO {
 					int blockedOid = rset.getInt("blocked_player");
 					String name = PlayerService.getPlayerName(blockedOid);
 					if (name == null) {
-						log.error("Attempt to load block list for player " + playerObjId + " tried to load a player which does not exist: " + blockedOid);
+						log.error("Attempt to load block list for player {} tried to load a player which does not exist: {}", playerObjId, blockedOid);
 					} else {
 						list.put(blockedOid, new BlockedPlayer(blockedOid, name, rset.getString("reason")));
 					}

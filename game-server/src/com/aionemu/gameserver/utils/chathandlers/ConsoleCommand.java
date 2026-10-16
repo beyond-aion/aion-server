@@ -51,9 +51,8 @@ public abstract class ConsoleCommand extends ChatCommand {
 			return player.isStaff(); // return false for regular players, so chat will send entered text (this way you can't guess commands without rights)
 
 		if (LoggingConfig.LOG_GMAUDIT)
-			log.info("[Console Command] > [Player: " + player.getName() + "]"
-				+ (player.getTarget() != null ? "[Target: " + player.getTarget().getName() + "]" : "") + ": " + getAliasWithPrefix() + " "
-				+ String.join(" ", params));
+			log.info("[Console Command] > [Player: {}]{}: {} {}", player.getName(),
+				player.getTarget() != null ? "[Target: " + player.getTarget().getName() + "]" : "", getAliasWithPrefix(), String.join(" ", params));
 
 		if (!run(player, params))
 			sendInfo(player, "<Error while executing command>");

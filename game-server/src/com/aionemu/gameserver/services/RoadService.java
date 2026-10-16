@@ -29,8 +29,7 @@ public class RoadService {
 			for (Integer instanceId : World.getInstance().getWorldMap(rt.getMap()).getAvailableInstanceIds()) {
 				Road r = new Road(rt, instanceId);
 				r.spawn();
-				log.debug("Added " + r.getName() + " at m=" + r.getWorldId() + ",x=" + r.getX() + ",y=" + r.getY() + ",z=" + r.getZ() + " [" + instanceId
-					+ "]");
+				log.debug("Added {} at m={},x={},y={},z={} [{}]", r.getName(), r.getWorldId(), r.getX(), r.getY(), r.getZ(), instanceId);
 			}
 		}
 	}

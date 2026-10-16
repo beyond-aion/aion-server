@@ -56,8 +56,8 @@ public class PeriodicInstanceManager {
 		for (CronExpression startExpression : startExpressions) {
 			CronService.getInstance().schedule(() -> openRegistration(openingMsg, maskId, registrationPeriod), startExpression);
 			log.info("Scheduled registration opening for {} based on cron expression: {}", AutoGroupType.getAGTByMaskId(maskId), startExpression);
-			log.info("Scheduled " + AutoGroupType.getAGTByMaskId(maskId) + ": based on cron expression: " + startExpression + " Duration: "
-				+ registrationPeriod + " in minutes");
+			log.info("Scheduled {}: based on cron expression: {} Duration: {} in minutes", AutoGroupType.getAGTByMaskId(maskId), startExpression,
+				registrationPeriod);
 		}
 	}
 

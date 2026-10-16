@@ -87,7 +87,7 @@ public class PlayerEffectsDAO {
 			ps.executeBatch();
 			con.commit();
 		} catch (SQLException e) {
-			log.error("Exception while saving effects of player " + player.getObjectId(), e);
+			log.error("Exception while saving effects of player {}", player.getObjectId(), e);
 		}
 	}
 

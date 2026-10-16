@@ -55,13 +55,12 @@ public class PlayerCommonData extends CreatureTemplate {
 	private boolean noExp = false;
 	private long reposeCurrent;
 	private long reposeMax;
+	private long pvpExp;
 	private long salvationPoint;
 	private int mentorFlagTime;
 	private int worldOwnerId;
 	private boolean isDaeva;
 	private boolean isInEditMode;
-
-	private BoundRadius boundRadius;
 
 	private long lastTransferTime;
 
@@ -265,6 +264,17 @@ public class PlayerCommonData extends CreatureTemplate {
 
 	public long getMaxReposeEnergy() {
 		return reposeMax;
+	}
+
+	/**
+	 * @return The accumulated PvP XP that limits how much more PvP XP the player can gain.
+	 */
+	public long getPvpExp() {
+		return pvpExp;
+	}
+
+	public void setPvpExp(long pvpExp) {
+		this.pvpExp = pvpExp;
 	}
 
 	/**
@@ -512,13 +522,9 @@ public class PlayerCommonData extends CreatureTemplate {
 		return mailboxLetters;
 	}
 
-	public void setBoundingRadius(BoundRadius boundRadius) {
-		this.boundRadius = boundRadius;
-	}
-
 	@Override
 	public BoundRadius getBoundRadius() {
-		return boundRadius;
+		return BoundRadius.PLAYER;
 	}
 
 	public void setDeathCount(int count) {

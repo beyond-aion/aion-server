@@ -3,8 +3,8 @@ package com.aionemu.gameserver.model.templates.spawns;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.Marshaller;
+import jakarta.xml.bind.annotation.*;
 
 import com.aionemu.gameserver.model.templates.event.EventTemplate;
 import com.aionemu.gameserver.spawnengine.SpawnHandlerType;

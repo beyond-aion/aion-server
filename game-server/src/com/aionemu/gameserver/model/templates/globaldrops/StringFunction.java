@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.model.templates.globaldrops;
 
-import javax.xml.bind.annotation.XmlEnum;
+import jakarta.xml.bind.annotation.XmlEnum;
 
 @XmlEnum
 public enum StringFunction {

@@ -80,6 +80,10 @@ public final class DataManager {
 	public static PetFeedData PET_FEED_DATA;
 	public static PetSkillData PET_SKILL_DATA;
 	public static PlayerExperienceTable PLAYER_EXPERIENCE_TABLE;
+	public static PvpExpTable PVP_EXP_TABLE;
+	public static PvpExpModTable PVP_EXP_MOD_TABLE;
+	public static PartyExpModTable PARTY_EXP_MOD_TABLE;
+	public static MenteeExpLimitTable MENTEE_EXP_LIMIT_TABLE;
 	public static PlayerInitialData PLAYER_INITIAL_DATA;
 	public static Portal2Data PORTAL2_DATA;
 	public static PortalLocData PORTAL_LOC_DATA;
@@ -133,6 +137,10 @@ public final class DataManager {
 		MATERIAL_DATA = data.materiaData;
 		MAP_WEATHER_DATA = data.mapWeatherData;
 		PLAYER_EXPERIENCE_TABLE = data.playerExperienceTable;
+		PVP_EXP_TABLE = data.pvpExpTable;
+		PVP_EXP_MOD_TABLE = data.pvpExpModTable;
+		PARTY_EXP_MOD_TABLE = data.partyExpModTable;
+		MENTEE_EXP_LIMIT_TABLE = data.menteeExpLimitTable;
 		ABSOLUTE_STATS_DATA = data.absoluteStatsData;
 		ITEM_CLEAN_UP = data.itemCleanup;
 		ITEM_DATA = data.itemData;
@@ -228,7 +236,7 @@ public final class DataManager {
 		SKILL_DATA.validateMotions();
 
 		long time = System.currentTimeMillis() - start;
-		log.info("##### [Static Data loaded in " + String.format("%.1f", time / 1000f) + " seconds] #####");
+		log.info("##### [Static Data loaded in {} seconds] #####", String.format("%.1f", time / 1000f));
 	}
 
 	public static void waitForValidationToFinishAndShutdownOnFail() {

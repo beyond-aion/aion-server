@@ -94,7 +94,7 @@ public class CM_EMOTION extends AionClientPacket {
 				heading = readC();
 				break;
 			default:
-				log.error("Unknown emotion type? 0x" + Integer.toHexString(et/* !!!!! */).toUpperCase());
+				log.error("Unknown emotion type? 0x{}", Integer.toHexString(et).toUpperCase());
 				break;
 		}
 	}

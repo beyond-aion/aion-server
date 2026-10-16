@@ -2,10 +2,10 @@ package com.aionemu.gameserver.model.templates.item.actions;
 
 import static com.aionemu.gameserver.model.items.ItemUseAnimation.*;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.controllers.observer.ItemUseObserver;
@@ -105,10 +105,6 @@ public class EnchantItemAction extends AbstractItemAction {
 
 		player.getObserveController().addObserver(observer);
 
-		// Current enchant level
-		int currentEnchant = targetItem.getEnchantLevel();
-		boolean isSuccess = isSuccess(player, parentItem, targetItem, supplementItem, targetWeapon);
-		// Item template
 		PacketSendUtility.broadcastPacketAndReceive(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), targetItem.getObjectId(),
 			parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), enchantDurationMillis, USE_START));
 
@@ -120,7 +116,17 @@ public class EnchantItemAction extends AbstractItemAction {
 					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), 0, USE_FAIL));
 				return;
 			}
+			if (player.getInventory().getItemByObjId(parentItem.getObjectId()) == null)
+				return;
+			if (supplementItem != null && player.getInventory().getItemByObjId(supplementItem.getObjectId()) == null) {
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_ENCHANT_ASSISTANT_CANNOT_FIND());
+				PacketSendUtility.broadcastPacketAndReceive(player,
+					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), 0, USE_FAIL));
+				return;
+			}
 
+			int currentEnchant = targetItem.getEnchantLevel();
+			boolean isSuccess = isSuccess(player, parentItem, targetItem, supplementItem, targetWeapon);
 			player.startCooldown(parentItem);
 			if (isEnchantmentStone)
 				EnchantService.enchantItemAct(player, parentItem, targetItem, supplementItem, currentEnchant, isSuccess);
@@ -143,7 +149,7 @@ public class EnchantItemAction extends AbstractItemAction {
 	}
 
 	/**
-	 * Check, if the item enchant will be successful
+	 * Rolls the enchant. Supplements are consumed here and only raise the chance if the player still has enough of them.
 	 *
 	 * @param player
 	 * @param parentItem

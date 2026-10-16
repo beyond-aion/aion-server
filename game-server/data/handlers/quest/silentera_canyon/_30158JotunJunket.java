@@ -7,7 +7,7 @@ import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.world.zone.ZoneName;
+import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
  * @author Ritsu
@@ -22,12 +22,12 @@ public class _30158JotunJunket extends AbstractQuestHandler {
 	public void register() {
 		qe.registerQuestNpc(799383).addOnQuestStart(questId);
 		qe.registerQuestNpc(799383).addOnTalkEvent(questId);
-		qe.registerOnEnterZone(ZoneName.get("UNKNOWN_LANDS_600010000"), questId);
+		qe.registerOnEnterZone("UNKNOWN_LANDS_600010000", questId);
 	}
 
 	@Override
-	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) {
-		if (zoneName != ZoneName.get("UNKNOWN_LANDS_600010000"))
+	public boolean onEnterZoneEvent(QuestEnv env, ZoneInstance zone) {
+		if (!zone.matches("UNKNOWN_LANDS_600010000"))
 			return false;
 		final Player player = env.getPlayer();
 		if (player == null)
