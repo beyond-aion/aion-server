@@ -50,12 +50,12 @@
   			26922 [TODO] Another Passage
 		[END] SUMMARY
 	-->
-	
+
 	<!-- REPORTING QUESTS -->
 	<report_to_many id="13800" start_npc_ids="804699">
 		<npc_infos npc_ids="800958"/>
 		<npc_infos npc_ids="801163"/>
-	</report_to_many> 
+	</report_to_many>
 	<report_to_many id="13809" start_npc_ids="802427">
 		<npc_infos npc_ids="730969"/>
 		<npc_infos npc_ids="730970"/>
@@ -67,9 +67,9 @@
 		<npc_infos npc_ids="804586"/>
 	</report_to_many>
 	<report_to_many id="23800" start_npc_ids="804719">
-		<npc_infos npc_ids="800980"/>
+		<npc_infos npc_ids="804753"/>
 		<npc_infos npc_ids="802433"/>
-	</report_to_many> 
+	</report_to_many>
 	<report_to_many id="23809" start_npc_ids="802429">
 		<npc_infos npc_ids="730969"/>
 		<npc_infos npc_ids="730970"/>
@@ -82,7 +82,7 @@
 	</report_to_many>
 	<report_to id="16922" start_npc_ids="802431" end_npc_ids="804628"/>
 	<report_to id="26922" start_npc_ids="802433" end_npc_ids="804628"/>
-	
+
 	<!-- COLLECTING QUESTS -->
 	<item_collecting id="13806" start_npc_ids="802358"/>
 	<item_collecting id="13807" start_npc_ids="802432"/>
@@ -100,7 +100,7 @@
 	<item_collecting id="23819" start_npc_ids="804593"/>
 	<item_collecting id="23820" start_npc_ids="804589"/>
 	<item_collecting id="23821" start_npc_ids="804589"/>
-	
+
 	<!-- MONSTER HUNT QUESTS -->
 	<monster_hunt id="13802" start_npc_ids="802427"/>
 	<monster_hunt id="13803" start_npc_ids="802427"/>
@@ -116,7 +116,7 @@
 	<monster_hunt id="23808" start_npc_ids="802433"/>
 	<monster_hunt id="23811" start_npc_ids="802429"/>
 	<monster_hunt id="23814" start_npc_ids="804590"/>
-	
+
 	<!-- KILL IN WORLD QUESTS -->
     <kill_in_world id="13801" end_npc_ids="802431" worlds="600090000"/>
 	<kill_in_world id="13818" start_npc_ids="804588" worlds="600090000" amount="6"/>
