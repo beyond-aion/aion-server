@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.services.player;
 
-import static com.aionemu.gameserver.configs.main.SecurityConfig.MultiClientingRestrictionMode.SAME_FACTION;
-
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -157,12 +155,11 @@ public final class PlayerEnterWorldService {
 		Player player = PlayerService.getPlayer(objectId, account);
 		if (!enteringWorld.contains(objectId) && enteringWorld.add(objectId)) {
 			try {
-				if (player.isStaff() || MultiClientingService.tryEnterWorld(player, client)) {
+				Msg denialMsg = player.isStaff() ? null : MultiClientService.tryEnterWorld(player, client);
+				if (denialMsg == null)
 					enterWorld(client, player);
-				} else {
-					Msg msg = SecurityConfig.MULTI_CLIENTING_RESTRICTION_MODE == SAME_FACTION ? Msg.BOTH_FACTIONS : Msg.CONNECTION_ERROR;
-					client.sendPacket(new SM_ENTER_WORLD_CHECK(msg));
-				}
+				else
+					client.sendPacket(new SM_ENTER_WORLD_CHECK(denialMsg));
 			} catch (Throwable ex) {
 				player.getController().delete();
 				pcd.setOnline(false);

@@ -16,7 +16,7 @@ import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.services.BrokerService;
 import com.aionemu.gameserver.services.LegionService;
-import com.aionemu.gameserver.services.player.MultiClientingService;
+import com.aionemu.gameserver.services.player.MultiClientService;
 
 /**
  * @author AEJTester, Nemesiss, Niato, Neon
@@ -169,9 +169,9 @@ public abstract class AbstractPlayerInfoPacket extends AionServerPacket {
 		long nowSeconds = System.currentTimeMillis() / 1000;
 		if (cbi != null && nowSeconds >= cbi.getEnd())
 			cbi = null;
-		if (cbi == null && SecurityConfig.MULTI_CLIENTING_RESTRICTION_MODE == SecurityConfig.MultiClientingRestrictionMode.SAME_FACTION) {
-			int cdMinutes = SecurityConfig.MULTI_CLIENTING_FACTION_SWITCH_COOLDOWN_MINUTES;
-			if (cdMinutes > 0 && MultiClientingService.checkForFactionSwitchCooldownTime(playerAccountData.getPlayerCommonData().getRace(), con) != null) {
+		if (cbi == null && !SecurityConfig.MULTI_CLIENT_ALLOW_BOTH_FACTIONS) {
+			int cdMinutes = SecurityConfig.MULTI_CLIENT_FACTION_SWITCH_COOLDOWN_MINUTES;
+			if (cdMinutes > 0 && MultiClientService.checkForFactionSwitchCooldownTime(playerAccountData.getPlayerCommonData().getRace(), con) != null) {
 				int durationSeconds = 61; // client will send CM_CHARACTER_LIST after this duration to update the ban info (<61s corrupts the ban info)
 				cbi = new CharacterBanInfo(nowSeconds, durationSeconds, "\n\n\n\uE026 " + cdMinutes + " minute cooldown between switching factions\n\n\n\n\n\n\n");
 			}
