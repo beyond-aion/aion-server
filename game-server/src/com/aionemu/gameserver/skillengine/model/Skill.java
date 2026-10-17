@@ -40,6 +40,7 @@ import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.action.Action;
 import com.aionemu.gameserver.skillengine.action.Actions;
+import com.aionemu.gameserver.skillengine.condition.ChainCondition;
 import com.aionemu.gameserver.skillengine.condition.Conditions;
 import com.aionemu.gameserver.skillengine.condition.SkillChargeCondition;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
@@ -88,8 +89,7 @@ public class Skill {
 	private int hitTime; // time when effect is applied
 	private float castSpeedForAnimationBoostAndChargeSkills; // cast speed can boost the animation time of the current skill and the hit time of the following skill
 	private long castStartTime;
-	private String chainCategory = null;
-	private int chainUsageDuration = 0;
+	private boolean chainResetOnCastStart;
 	private int hate;
 
 	public enum SkillMethod {
@@ -155,9 +155,6 @@ public class Skill {
 
 		// check for counter skill
 		if (effector instanceof Player player) {
-			if (skillMethod == SkillMethod.CAST && chainCategory == null) // category gets set in preCastCheck()
-				player.getChainSkills().resetChain();
-
 			if (skillTemplate.getCounterSkill() != null) {
 				long time = player.getLastCounterSkill(skillTemplate.getCounterSkill());
 				if ((time + 5000) < System.currentTimeMillis()) {
@@ -300,6 +297,9 @@ public class Skill {
 
 		if (checkproperties && !canUseSkill(CastState.CAST_START))
 			return false;
+
+		if (chainResetOnCastStart && effector instanceof Player player)
+			player.getChainSkills().resetChain();
 
 		updateCastDurationAndSpeed();
 		updateHitTime(checkAnimation);
@@ -634,7 +634,6 @@ public class Skill {
 		// Create effects and precalculate result
 		int dashStatus = 0;
 		int resistCount = 0;
-		boolean blockedChain = false;
 		boolean blockedStance = false;
 		final List<Effect> effects = new ArrayList<>();
 		if (skillTemplate.getEffects() != null) {
@@ -659,14 +658,12 @@ public class Skill {
 				}
 			}
 
-			if (resistCount == effectedList.size()) {
-				blockedChain = true;
+			if (resistCount == effectedList.size())
 				blockedPenaltySkill = true;
-			}
 
-			// exception for point point skills(example Ice Sheet)
+			// a skill placed at a point (example Ice Sheet) takes effect there without creatures around it
 			if (effectedList.isEmpty()) {
-				if (this.isPointPointSkill()) {
+				if (isPlacedAtPoint()) {
 					Effect effect = new Effect(this, null);
 					effect.initialize();
 					effect.setWorldPosition(effector.getWorldId(), effector.getInstanceId(), x, y, z);
@@ -682,17 +679,15 @@ public class Skill {
 			if (getMultiCastCount() > 0)
 				setCooldowns = false;
 
-			// Check Chain Skill Trigger Rate, only for chain skills and only for player
-			if (chainCategory != null) {
-				if (blockedChain)
-					chainSuccess = false;
-				else
-					chainSuccess = Rnd.chance() < skillTemplate.getChainSkillProb() || CustomConfig.SKILL_CHAIN_DISABLE_TRIGGERRATE;
-
-				if (chainSuccess)
-					playerEffector.getChainSkills().updateChain(chainCategory, chainUsageDuration);
-				else
-					playerEffector.getChainSkills().resetChain();
+			// every cast whose first effect lands on a target counts towards the chain state, a skill without chain category ends the current chain.
+			// A skill aimed at a point (summoned areas, traps, totems, gates) counts even without creatures around it.
+			boolean firstEffectLanded = effects.isEmpty() || effects.stream().anyMatch(e -> e.isInSuccessEffects(1));
+			if (skillMethod == SkillMethod.CAST && (!effectedList.isEmpty() || isPlacedAtPoint())) {
+				chainSuccess = firstEffectLanded && (Rnd.chance() < skillTemplate.getChainSkillProb() || CustomConfig.SKILL_CHAIN_DISABLE_TRIGGERRATE);
+				if (chainSuccess) {
+					ChainCondition chainCondition = skillTemplate.getChainCondition();
+					playerEffector.getChainSkills().updateChain(chainCondition == null ? "" : chainCondition.getCategory(), hitTime);
+				}
 			}
 
 			QuestEngine.getInstance().onUseSkill(new QuestEnv(effector.getTarget(), (Player) effector, 0), skillTemplate.getSkillId());
@@ -1111,26 +1106,32 @@ public class Skill {
 		return skillMethod == SkillMethod.CAST && skillTemplate.isApplyCastingTimeBonus();
 	}
 
-	public void setChainCategory(String chainCategory) {
-		this.chainCategory = chainCategory;
+	/**
+	 * @return True if starting this cast uses up the current chain, either as a follow-up skill or by restarting its own exhausted repetition.
+	 */
+	public boolean isChainResetOnCastStart() {
+		return chainResetOnCastStart;
 	}
 
-	public void setChainUsageDuration(int duration) {
-		this.chainUsageDuration = duration;
+	public void setChainResetOnCastStart(boolean chainResetOnCastStart) {
+		this.chainResetOnCastStart = chainResetOnCastStart;
 	}
 
 	public SkillMethod getSkillMethod() {
 		return this.skillMethod;
 	}
 
-	private boolean isPointPointSkill() {
-		return this.getSkillTemplate().getProperties().getFirstTarget() == FirstTargetAttribute.POINT
-			&& this.getSkillTemplate().getProperties().getTargetType() == TargetRangeAttribute.POINT;
-
+	/**
+	 * @return True if this skill is aimed at a point and places its effect there (summoned areas, traps, totems, gates), instead of hitting the
+	 *         creatures around it.
+	 */
+	private boolean isPlacedAtPoint() {
+		return skillTemplate.getProperties().getFirstTarget() == FirstTargetAttribute.POINT
+			&& skillTemplate.getProperties().getTargetType() == TargetRangeAttribute.POINT;
 	}
 
 	public int getMultiCastCount() {
-		return skillTemplate.isMultiCast() && effector instanceof Player p ? p.getChainSkills().getCurrentChainCount(chainCategory) : 0;
+		return skillTemplate.isMultiCast() && effector instanceof Player p ? p.getChainSkills().getCurrentChainCount(skillTemplate.getChainCondition().getCategory()) : 0;
 	}
 
 	public long getCastStartTime() {
