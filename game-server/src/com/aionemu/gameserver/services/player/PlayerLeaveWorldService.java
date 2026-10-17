@@ -46,16 +46,18 @@ public class PlayerLeaveWorldService {
 	private static final Map<Player, LeaveWorldTask> leaveWorldTaskByPlayer = new ConcurrentHashMap<>();
 
 	/**
-	 * Registers a player to leave the world 10 seconds after their last action. If their last action was more than 10 seconds ago, the player will
-	 * leave the world immediately and the task will be run synchronously. If the player has already been registered, the existing task will not be
-	 * rescheduled.
+	 * Registers a player whose connection was lost to leave the world 10 seconds later. If the player has already been registered, the existing task
+	 * will not be rescheduled.
 	 */
 	public static void registerLeaveWorld(Player player) {
-		long lastActionTimeMillis = Math.max(player.getMoveController().getLastMoveUpdate(), player.getController().getLastCombatTime());
-		long millisSinceLastPlayerAction = System.currentTimeMillis() - lastActionTimeMillis;
-		long waitTimeMillis = Duration.ofSeconds(10).toMillis();
-		long delayMillis = Math.max(0, waitTimeMillis - millisSinceLastPlayerAction);
-		leaveWorldTaskByPlayer.computeIfAbsent(player, LeaveWorldTask::new).scheduleOrRun(delayMillis);
+		leaveWorldTaskByPlayer.computeIfAbsent(player, LeaveWorldTask::new).scheduleOrRun(Duration.ofSeconds(10).toMillis());
+	}
+
+	/**
+	 * Lets a player who quit the game leave the world right away, also if they were already registered to leave it later.
+	 */
+	public static void leaveWorldNow(Player player) {
+		leaveWorldTaskByPlayer.computeIfAbsent(player, LeaveWorldTask::new).run();
 	}
 
 	public static boolean isLeavingWorld(int playerObjectId) {

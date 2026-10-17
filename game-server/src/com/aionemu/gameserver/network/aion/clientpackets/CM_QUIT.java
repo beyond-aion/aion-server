@@ -50,17 +50,28 @@ public class CM_QUIT extends AionClientPacket {
 					return;
 				}
 			}
+			long blockedMillis = player.getMillisUntilQuittingAllowed();
+			if (blockedMillis > 0) {
+				sendPacket(SM_QUIT_RESPONSE.refused((int) ((blockedMillis + 999) / 1000)));
+				return;
+			}
+			long countdownMillis = System.currentTimeMillis() - player.getQuitCountdownStartMillis();
+			if (!charEditScreen && (countdownMillis < 8000 || countdownMillis > 20000)) {
+				sendPacket(SM_QUIT_RESPONSE.refused((int) Math.min(countdownMillis, Integer.MAX_VALUE)));
+				return;
+			}
 			if (stayConnected) { // update char selection info
 				player.getAccountData().setVisibleItems(player.getEquipment().getEquippedForAppearance());
 				for (PlayerAccountData plAccData : con.getAccount().getPlayerAccDataList())
 					plAccData.setCharBanInfo(PlayerPunishmentsDAO.getCharBanInfo(plAccData.getPlayerCommonData().getPlayerObjId()));
 			}
-			PlayerLeaveWorldService.registerLeaveWorld(player);
+			PlayerLeaveWorldService.leaveWorldNow(player);
 		}
 
+		SM_QUIT_RESPONSE response = charEditScreen ? SM_QUIT_RESPONSE.quitToEditScreen() : SM_QUIT_RESPONSE.quit();
 		if (stayConnected)
-			sendPacket(new SM_QUIT_RESPONSE(charEditScreen));
+			sendPacket(response);
 		else
-			con.close(new SM_QUIT_RESPONSE(charEditScreen)); // makes sure this packet will be sent before closing connection
+			con.close(response); // makes sure this packet will be sent before closing connection
 	}
 }

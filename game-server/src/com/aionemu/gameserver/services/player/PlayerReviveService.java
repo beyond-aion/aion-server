@@ -187,6 +187,7 @@ public class PlayerReviveService {
 	}
 
 	public static void revive(Player player, int hpPercent, int mpPercent, boolean setSoulSickness, int resurrectionSkill) {
+		player.unblockQuitting();
 		player.getKnownList().forEachPlayer(p -> {
 			if (player.equals(p.getTarget()))
 				p.setTarget(null);

@@ -705,8 +705,10 @@ public class Skill {
 		if (!blockedPenaltySkill)
 			startPenaltySkill();
 
-		if (isHostile() && effector instanceof Player playerEffector)
+		if (isHostile() && effector instanceof Player playerEffector) {
 			playerEffector.getController().enterCombat(true);
+			playerEffector.blockQuitting();
+		}
 
 		boolean isItemSkill = skillMethod == SkillMethod.ITEM;
 		boolean sentCastSpellResultPacket = false;
@@ -778,6 +780,8 @@ public class Skill {
 	private void applyEffect(List<Effect> effects) {
 		// Apply effects to effected objects
 		effects.forEach(Effect::applyEffect);
+		if (isHostile() && effector instanceof Player player)
+			player.blockQuitting();
 
 		if (isHostile()) {
 			for (Effect effect : effects) {
