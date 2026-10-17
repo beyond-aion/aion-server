@@ -1,10 +1,7 @@
 package com.aionemu.loginserver.network.gameserver;
 
 import java.nio.ByteBuffer;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -102,6 +99,11 @@ public class GsConnection extends NettyConnection<GsServerPacket> {
 	public static void shutdownExecutors() {
 		PINGPONG_EXECUTOR.shutdown();
 		PACKET_EXECUTOR.shutdown();
+		try {
+			PINGPONG_EXECUTOR.awaitTermination(1, TimeUnit.SECONDS);
+			PACKET_EXECUTOR.awaitTermination(1, TimeUnit.SECONDS);
+		} catch (InterruptedException _) {
+		}
 	}
 
 	/**
