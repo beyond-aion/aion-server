@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.chatserver.configs.network.NetworkConfig;
 import com.aionemu.chatserver.model.ChatClient;
-import com.aionemu.chatserver.network.netty.NettyConnection;
+import com.aionemu.commons.network.netty.NettyConnection;
 import com.aionemu.commons.network.packet.BaseClientPacket;
 
 import io.netty.channel.Channel;

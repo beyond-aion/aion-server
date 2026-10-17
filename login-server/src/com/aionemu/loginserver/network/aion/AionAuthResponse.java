@@ -172,7 +172,7 @@ public enum AionAuthResponse {
 	/**
 	 * Age limit applied after a specified time (currently only for Thailand)
 	 */
-	STR_L2AUTH_S_UNDER_AGE_TIME_LIMIT(32),
+	STR_RESTRICTED_TIME_BY_TEENAGER_POLICY(32),
 
 	/**
 	 * Restricted server.

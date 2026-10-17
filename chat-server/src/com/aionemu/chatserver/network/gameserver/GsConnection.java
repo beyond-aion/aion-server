@@ -6,8 +6,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.chatserver.network.factories.GsPacketHandlerFactory;
-import com.aionemu.chatserver.network.netty.NettyConnection;
 import com.aionemu.chatserver.service.GameServerService;
+import com.aionemu.commons.network.netty.NettyConnection;
 import com.aionemu.commons.network.packet.BaseClientPacket;
 
 import io.netty.channel.Channel;
