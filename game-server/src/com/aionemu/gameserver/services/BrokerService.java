@@ -248,6 +248,12 @@ public class BrokerService {
 				return;
 			}
 
+			if (itemCount > buyingItem.getItemCount() || itemCount < buyingItem.getItemCount() && !buyingItem.isSplittingAvailable()) {
+				AuditLogger.log(player, "tried to buy " + itemCount + " of " + buyingItem.getItemCount() + " broker items (splitting allowed: "
+					+ buyingItem.isSplittingAvailable() + ")");
+				return;
+			}
+
 			Item item = buyingItem.getItem();
 			long price = buyingItem.getPrice() * itemCount;
 			if (player.getInventory().isFull(item.getItemTemplate().getExtraInventoryId())) {
@@ -265,8 +271,10 @@ public class BrokerService {
 				BrokerOpSaveTask bost = new BrokerOpSaveTask(buyingItem, buyingItem.getItem(), player.getInventory().getKinahItem(), player.getObjectId());
 				saveManager.add(bost);
 				// creating new broker item which will be settled
-				BrokerItem soldItem = new BrokerItem(ItemFactory.newItem(buyingItem.getItemId(), itemCount), buyingItem.getPrice(), buyingItem.getSellerId(),
-					buyingItem.isSplittingAvailable(), buyingItem.getItemBrokerRace());
+				Item soldPart = ItemFactory.newItem(buyingItem.getItemId(), itemCount);
+				soldPart.setExpireTime(item.getExpireTime());
+				BrokerItem soldItem = new BrokerItem(soldPart, buyingItem.getPrice(), buyingItem.getSellerId(), buyingItem.isSplittingAvailable(),
+					buyingItem.getItemBrokerRace());
 				buyingItem = soldItem;
 				item = buyingItem.getItem();
 				BrokerOpSaveTask bost2 = new BrokerOpSaveTask(buyingItem, buyingItem.getItem(), player.getInventory().getKinahItem(), player.getObjectId());

@@ -66,9 +66,6 @@ public class SecurityConfig {
 	@Property(key = "gameserver.security.flood.msg", defaultValue = "6")
 	public static int FLOOD_MSG;
 
-	@Property(key = "gameserver.security.validation.flypath", defaultValue = "false")
-	public static boolean ENABLE_FLYPATH_VALIDATOR;
-
 	@Property(key = "gameserver.security.survey.delay.minute", defaultValue = "20")
 	public static int SURVEY_DELAY;
 

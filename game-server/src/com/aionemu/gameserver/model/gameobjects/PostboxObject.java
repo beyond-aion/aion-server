@@ -7,7 +7,6 @@ import com.aionemu.gameserver.model.templates.housing.HousingPostbox;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_OBJECT_USE_UPDATE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.services.player.PlayerMailboxState;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -26,7 +25,7 @@ public class PostboxObject extends UseableHouseObject<HousingPostbox> {
 			return;
 		}
 
-		player.getMailbox().mailBoxState = PlayerMailboxState.REGULAR;
+		player.getMailbox().open(false, this);
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_USE(getObjectTemplate().getL10n()));
 		PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), DialogPage.MAIL.id()));
 		PacketSendUtility.sendPacket(player, new SM_OBJECT_USE_UPDATE(player.getObjectId(), 0, 0, this));

@@ -12,16 +12,14 @@ import com.aionemu.gameserver.model.team.group.PlayerGroupService;
 import com.aionemu.gameserver.model.team.league.LeagueService;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
+import com.aionemu.gameserver.utils.audit.AuditLogger;
 
 /**
  * @author Lyahim, Simple, xTz
  */
 public class CM_DISTRIBUTION_SETTINGS extends AionClientPacket {
 
-	@SuppressWarnings("unused")
-	private int isLeague;
-	private int lootRule;
-	private int misc;
+	private boolean autoDistributeJunk;
 	private LootRuleType lootRules;
 	private int commonItemAbove;
 	private int superiorItemAbove;
@@ -29,8 +27,6 @@ public class CM_DISTRIBUTION_SETTINGS extends AionClientPacket {
 	private int fabledItemAbove;
 	private int ethernalItemAbove;
 	private int mythicItemAbove;
-	@SuppressWarnings("unused")
-	private int unk;
 
 	public CM_DISTRIBUTION_SETTINGS(int opcode, Set<State> validStates) {
 		super(opcode, validStates);
@@ -38,40 +34,42 @@ public class CM_DISTRIBUTION_SETTINGS extends AionClientPacket {
 
 	@Override
 	protected void readImpl() {
-		isLeague = readD();
-		lootRule = readD();
-		switch (lootRule) {
-			case 0 -> lootRules = LootRuleType.FREEFORALL;
-			case 1 -> lootRules = LootRuleType.ROUNDROBIN;
-			case 2 -> lootRules = LootRuleType.LEADER;
-			default -> lootRules = LootRuleType.FREEFORALL;
-		}
-		misc = readD();
+		readD(); // isLeague, the team is taken from the leader instead
+		lootRules = LootRuleType.getById(readD());
+		autoDistributeJunk = readD() == 1;
 		commonItemAbove = readD();
 		superiorItemAbove = readD();
 		heroicItemAbove = readD();
 		fabledItemAbove = readD();
 		ethernalItemAbove = readD();
 		mythicItemAbove = readD();
-		unk = readD();
+		readD(); // rule for a seventh item grade, which 4.8 doesn't have
 	}
 
 	@Override
 	protected void runImpl() {
 		Player leader = getConnection().getActivePlayer();
+		if (lootRules == null)
+			return;
 
 		PlayerGroup group = leader.getPlayerGroup();
+		PlayerAlliance alliance = leader.getPlayerAlliance();
+		boolean isLeader = group != null && group.isLeader(leader)
+			|| alliance != null && (alliance.isInLeague() ? leader.equals(alliance.getLeague().getCaptain()) : alliance.isLeader(leader));
+		if (!isLeader) {
+			AuditLogger.log(leader, "tried to change the loot rules without being the team leader");
+			return;
+		}
 		if (group != null) {
-			PlayerGroupService.changeGroupRules(group, new LootGroupRules(lootRules, misc, commonItemAbove, superiorItemAbove, heroicItemAbove,
+			PlayerGroupService.changeGroupRules(group, new LootGroupRules(lootRules, autoDistributeJunk, commonItemAbove, superiorItemAbove, heroicItemAbove,
 				fabledItemAbove, ethernalItemAbove, mythicItemAbove));
 		}
-		PlayerAlliance alliance = leader.getPlayerAlliance();
 		if (alliance != null) {
 			if (alliance.isInLeague())
-				LeagueService.changeGroupRules(alliance.getLeague(), new LootGroupRules(lootRules, misc, commonItemAbove, superiorItemAbove, heroicItemAbove,
+				LeagueService.changeGroupRules(alliance.getLeague(), new LootGroupRules(lootRules, autoDistributeJunk, commonItemAbove, superiorItemAbove, heroicItemAbove,
 					fabledItemAbove, ethernalItemAbove, mythicItemAbove));
 			else
-				PlayerAllianceService.changeGroupRules(alliance, new LootGroupRules(lootRules, misc, commonItemAbove, superiorItemAbove, heroicItemAbove,
+				PlayerAllianceService.changeGroupRules(alliance, new LootGroupRules(lootRules, autoDistributeJunk, commonItemAbove, superiorItemAbove, heroicItemAbove,
 					fabledItemAbove, ethernalItemAbove, mythicItemAbove));
 		}
 	}

@@ -4,13 +4,11 @@ import static com.aionemu.gameserver.model.DialogAction.SETPRO1;
 
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.NpcAI;
-import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.actions.PlayerMode;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
-import com.aionemu.gameserver.model.templates.flypath.FlyPathEntry;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -42,8 +40,6 @@ public class HiddenTeleportNpcAI extends NpcAI {
 		int teleId = getTeleportId();
 		if (teleId == 0)
 			return;
-		FlyPathEntry flypath = DataManager.FLY_PATH.getPathTemplate(teleId);
-		player.setCurrentFlypath(flypath);
 		player.unsetPlayerMode(PlayerMode.RIDE);
 		player.setState(CreatureState.FLYING);
 		player.unsetState(CreatureState.ACTIVE);

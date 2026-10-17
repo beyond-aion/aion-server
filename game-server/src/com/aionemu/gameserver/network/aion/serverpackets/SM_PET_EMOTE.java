@@ -12,17 +12,16 @@ public class SM_PET_EMOTE extends AionServerPacket {
 
 	private Pet pet;
 	private PetEmote emote;
-	private int emotionId, param1;
+	private int actionParam;
 
 	public SM_PET_EMOTE(Pet pet, PetEmote emote) {
-		this(pet, emote, 0, 0);
+		this(pet, emote, 0);
 	}
 
-	public SM_PET_EMOTE(Pet pet, PetEmote emote, int emotionId, int param1) {
+	public SM_PET_EMOTE(Pet pet, PetEmote emote, int actionParam) {
 		this.pet = pet;
 		this.emote = emote;
-		this.emotionId = emotionId;
-		this.param1 = param1;
+		this.actionParam = actionParam;
 	}
 
 	@Override
@@ -31,6 +30,7 @@ public class SM_PET_EMOTE extends AionServerPacket {
 		writeC(emote.getEmoteId());
 		switch (emote) {
 			case MOVE_STOP:
+			case MOVE_POSITION_UPDATE:
 				writeF(pet.getX());
 				writeF(pet.getY());
 				writeF(pet.getZ());
@@ -46,8 +46,7 @@ public class SM_PET_EMOTE extends AionServerPacket {
 				writeF(pet.getMoveController().getTargetZ2());
 				break;
 			default:
-				writeC(emotionId);
-				writeC(param1); // happinessAdded?
+				writeH(actionParam);
 				break;
 		}
 	}

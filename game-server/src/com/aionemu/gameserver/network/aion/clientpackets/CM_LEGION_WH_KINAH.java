@@ -11,6 +11,7 @@ import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.LegionService;
+import com.aionemu.gameserver.services.item.ItemRestrictionService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -19,7 +20,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class CM_LEGION_WH_KINAH extends AionClientPacket {
 
 	private long amount;
-	private byte actionType;
+	private Action action;
 
 	public CM_LEGION_WH_KINAH(int opcode, Set<State> validStates) {
 		super(opcode, validStates);
@@ -28,17 +29,17 @@ public class CM_LEGION_WH_KINAH extends AionClientPacket {
 	@Override
 	protected void readImpl() {
 		amount = readQ();
-		actionType = readC();
+		action = Action.getById(readUC());
 	}
 
 	@Override
 	protected void runImpl() {
 		Player activePlayer = getConnection().getActivePlayer();
 		LegionMember legionMember = activePlayer.getLegionMember();
-		if (legionMember == null)
+		if (action == null || legionMember == null || !ItemRestrictionService.isLegionWarehouseUser(activePlayer))
 			return;
-		switch (actionType) {
-			case 0:
+		switch (action) {
+			case WITHDRAW -> {
 				if (!legionMember.hasRights(LegionPermissionsMask.WH_WITHDRAWAL)) {
 					// You do not have the authority to use the Legion warehouse.
 					PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_GUILD_WAREHOUSE_NO_RIGHT());
@@ -48,8 +49,8 @@ public class CM_LEGION_WH_KINAH extends AionClientPacket {
 					activePlayer.getInventory().increaseKinah(amount);
 					LegionService.getInstance().addHistory(legionMember.getLegion(), activePlayer.getName(), LegionHistoryAction.KINAH_WITHDRAW, Long.toString(amount));
 				}
-				break;
-			case 1:
+			}
+			case DEPOSIT -> {
 				if (!legionMember.hasRights(LegionPermissionsMask.WH_DEPOSIT)) {
 					// You do not have the authority to use the Legion warehouse.
 					PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_GUILD_WAREHOUSE_NO_RIGHT());
@@ -59,7 +60,26 @@ public class CM_LEGION_WH_KINAH extends AionClientPacket {
 					activePlayer.getStorage(StorageType.LEGION_WAREHOUSE.getId()).increaseKinah(amount);
 					LegionService.getInstance().addHistory(legionMember.getLegion(), activePlayer.getName(), LegionHistoryAction.KINAH_DEPOSIT, Long.toString(amount));
 				}
-				break;
+			}
+		}
+	}
+
+	private enum Action {
+
+		WITHDRAW(0),
+		DEPOSIT(1);
+
+		private final int id;
+
+		Action(int id) {
+			this.id = id;
+		}
+
+		static Action getById(int id) {
+			for (Action value : values())
+				if (value.id == id)
+					return value;
+			return null;
 		}
 	}
 }
