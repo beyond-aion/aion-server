@@ -22,6 +22,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.RequestResponseHandler;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.items.storage.Storage;
+import com.aionemu.gameserver.model.siege.SiegeLocation;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 import com.aionemu.gameserver.model.templates.portal.InstanceExit;
 import com.aionemu.gameserver.model.templates.portal.PortalLoc;
@@ -75,9 +76,9 @@ public class TeleportService {
 			return;
 		}
 
-		// TODO: remove teleportation route if it's enemy fortress (1221, 1231, 1241)
 		int id = SiegeService.getInstance().getSiegeIdByLocId(location.getLocId());
-		if (id > 0 && !SiegeService.getInstance().getSiegeLocation(id).isCanTeleport(player)) {
+		SiegeLocation fortress = id > 0 ? SiegeService.getInstance().getSiegeLocation(id) : null;
+		if (fortress != null && !fortress.isCanTeleport(player)) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_NO_ROUTE());
 			return;
 		}
@@ -93,7 +94,7 @@ public class TeleportService {
 			return;
 		}
 
-		if (!checkKinahForTransportation(location, player))
+		if (!checkKinahForTransportation(location, player, fortress != null && fortress.isVulnerable()))
 			return;
 
 		if (location.getType().equals(TeleportType.FLIGHT)) {
@@ -137,7 +138,7 @@ public class TeleportService {
 		return template;
 	}
 
-	private static boolean checkKinahForTransportation(TeleportLocation location, Player player) {
+	private static boolean checkKinahForTransportation(TeleportLocation location, Player player, boolean fortressVulnerable) {
 		Storage inventory = player.getInventory();
 
 		long transportationPrice;
@@ -146,8 +147,7 @@ public class TeleportService {
 		if (player.getEffectController().hasAbnormalEffect(Effect::isHiPass))
 			transportationPrice = 1;
 		else {
-			int basePrice = location.getPrice();
-			// TODO check for location.getPricePvp()
+			int basePrice = fortressVulnerable ? location.getPricePvp() : location.getPrice();
 			transportationPrice = PricesService.getPriceForService(basePrice, player.getRace());
 		}
 
