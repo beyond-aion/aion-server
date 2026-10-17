@@ -1,8 +1,8 @@
 package com.aionemu.gameserver.network.aion.instanceinfo;
 
-import java.nio.ByteBuffer;
-
 import com.aionemu.gameserver.model.instance.instancescore.NormalScore;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * @author xTz, Estrayl
@@ -14,7 +14,7 @@ public class EternalBastionScoreWriter extends InstanceScoreWriter<NormalScore> 
 	}
 
 	@Override
-	public void writeMe(ByteBuffer buf) {
+	public void writeMe(ByteBuf buf) {
 		writeD(buf, instanceScore.getPoints());
 		writeQ(buf, 0); // unk
 		writeD(buf, instanceScore.getRank());

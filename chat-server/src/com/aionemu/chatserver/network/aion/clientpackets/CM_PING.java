@@ -1,9 +1,9 @@
 package com.aionemu.chatserver.network.aion.clientpackets;
 
-import java.nio.ByteBuffer;
-
 import com.aionemu.chatserver.network.aion.AbstractClientPacket;
 import com.aionemu.chatserver.network.aion.AionConnection;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * Client sends this packet every 10 seconds after connecting to chat server
@@ -12,7 +12,7 @@ import com.aionemu.chatserver.network.aion.AionConnection;
  */
 public class CM_PING extends AbstractClientPacket {
 
-	public CM_PING(ByteBuffer buf, AionConnection connection, int opCode) {
+	public CM_PING(ByteBuf buf, AionConnection connection, int opCode) {
 		super(buf, connection, opCode);
 	}
 

@@ -1,13 +1,13 @@
 package com.aionemu.chatserver.network.aion;
 
-import java.nio.ByteBuffer;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.chatserver.network.aion.AionConnection.State;
 import com.aionemu.chatserver.network.aion.clientpackets.*;
 import com.aionemu.commons.utils.NetworkUtils;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * @author ATracer
@@ -16,7 +16,7 @@ public class ClientPacketHandler {
 
 	private static final Logger log = LoggerFactory.getLogger(ClientPacketHandler.class);
 
-	public static AbstractClientPacket handle(ByteBuffer buf, AionConnection connection) {
+	public static AbstractClientPacket handle(ByteBuf buf, AionConnection connection) {
 		/*
 			retail (KOR 8.2.22) client packet names for opcodes:
 			0x0012  (Leave channel)
@@ -86,7 +86,7 @@ public class ClientPacketHandler {
 			0x4917 ?   (H: pktsz(0x18)   H: opcode  D: taskID?(search in queue list for task with opcode 0x4916)   D: channelId  Q: userID D: ? )
 			0x4920 ? 
 		 */
-		byte opCode = buf.get();
+		byte opCode = buf.readByte();
 		State state = connection.getState();
 		AbstractClientPacket clientPacket = null;
 
@@ -114,8 +114,8 @@ public class ClientPacketHandler {
 		return clientPacket;
 	}
 
-	private static void logUnknownPacket(byte opCode, State state, ByteBuffer buf) {
-		log.warn("Unknown packet received from client: opCode=0x{} state={} length={} data=[{}]", "%02X".formatted(opCode), state, buf.remaining(),
+	private static void logUnknownPacket(byte opCode, State state, ByteBuf buf) {
+		log.warn("Unknown packet received from client: opCode=0x{} state={} length={} data=[{}]", "%02X".formatted(opCode), state, buf.readableBytes(),
 			NetworkUtils.toHex(buf));
 	}
 }

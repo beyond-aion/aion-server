@@ -14,6 +14,7 @@ import com.aionemu.commons.configs.CommonsConfig;
 import com.aionemu.commons.configs.DatabaseConfig;
 import com.aionemu.commons.configuration.ConfigurableProcessor;
 import com.aionemu.commons.configuration.Property;
+import com.aionemu.commons.network.netty.Transport;
 import com.aionemu.commons.utils.PropertiesUtils;
 
 import ch.qos.logback.classic.ClassicConstants;
@@ -46,6 +47,12 @@ public class Config {
 	 */
 	@Property(key = "loginserver.network.client.bantimeforbruteforcing", defaultValue = "15")
 	public static int WRONG_LOGIN_BAN_TIME;
+
+	/**
+	 * Socket transport of the network threads. AUTO uses epoll on Linux and NIO elsewhere, any other value uses only that transport.
+	 */
+	@Property(key = "loginserver.network.transport", defaultValue = "AUTO")
+	public static Transport TRANSPORT;
 
 	/**
 	 * Number of threads dedicated to be doing io read & write. There is always 1 acceptor thread. If value is < 1 - acceptor thread will also handle

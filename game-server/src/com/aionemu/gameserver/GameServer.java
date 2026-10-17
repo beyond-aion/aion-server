@@ -14,8 +14,7 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.commons.configuration.transformers.PropertyTransformers;
 import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.commons.logging.Logging;
-import com.aionemu.commons.network.NioServer;
-import com.aionemu.commons.network.ServerCfg;
+import com.aionemu.commons.network.netty.NettyServer;
 import com.aionemu.commons.utils.concurrent.UncaughtExceptionHandler;
 import com.aionemu.commons.utils.info.SystemInfo;
 import com.aionemu.commons.utils.info.VersionInfo;
@@ -36,7 +35,7 @@ import com.aionemu.gameserver.model.GameEngine;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.siege.Influence;
 import com.aionemu.gameserver.network.aion.AionConnection;
-import com.aionemu.gameserver.network.aion.GameConnectionFactoryImpl;
+import com.aionemu.gameserver.network.aion.AionChannelInitializer;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUIT_RESPONSE;
 import com.aionemu.gameserver.network.chatserver.ChatServer;
 import com.aionemu.gameserver.network.loginserver.LoginServer;
@@ -82,7 +81,7 @@ public class GameServer {
 	public static final int START_TIME_SECONDS = (int) (ManagementFactory.getRuntimeMXBean().getStartTime() / 1000);
 	public static final VersionInfo versionInfo = new VersionInfo(GameServer.class);
 
-	private static NioServer nioServer;
+	private static NettyServer nettyServer;
 
 	// TODO remove all this shit
 	private static int ELYOS_COUNT = 0;
@@ -183,25 +182,22 @@ public class GameServer {
 		VersionInfo.logAll(versionInfo, GSConfig.TIME_ZONE_ID);
 		SystemInfo.logAll();
 
-		nioServer = initNioServer();
+		nettyServer = initNettyServer();
 		Runtime.getRuntime().addShutdownHook(ShutdownHook.getInstance());
 		log.info("Game server started in {} seconds", System.currentTimeMillis() / 1000 - START_TIME_SECONDS);
 
-		LoginServer.getInstance().connect(nioServer);
+		LoginServer.getInstance().connect(nettyServer);
 		if (GSConfig.ENABLE_CHAT_SERVER)
-			ChatServer.getInstance().connect(nioServer);
+			ChatServer.getInstance().connect(nettyServer);
 	}
 
 	/**
 	 * Starts servers for connection with aion client and login\chat server.
 	 */
-	private static NioServer initNioServer() {
-		if (NetworkConfig.NIO_READ_WRITE_THREADS > 1 && !NetworkConfig.NIO_READ_WRITE_THREADS_UNSAFE_ALLOW)
-			throw new Error("gameserver.network.nio.threads must not exceed 1 (the game server is not thread-safe)");
-		NioServer nioServer = new NioServer(NetworkConfig.NIO_READ_WRITE_THREADS,
-			new ServerCfg(NetworkConfig.CLIENT_SOCKET_ADDRESS, "Aion game clients", new GameConnectionFactoryImpl()));
-		nioServer.connect(ThreadPoolManager.getInstance());
-		return nioServer;
+	private static NettyServer initNettyServer() {
+		NettyServer nettyServer = new NettyServer(NetworkConfig.TRANSPORT, NetworkConfig.NIO_READ_WRITE_THREADS);
+		nettyServer.bind(NetworkConfig.CLIENT_SOCKET_ADDRESS, "Aion game clients", new AionChannelInitializer());
+		return nettyServer;
 	}
 
 	/**
@@ -232,17 +228,21 @@ public class GameServer {
 		CronService.initSingleton(ThreadPoolManagerRunnableRunner.class, TimeZone.getTimeZone(GSConfig.TIME_ZONE_ID));
 	}
 
-	public static void shutdownNioServer() {
-		if (nioServer != null) {
+	public static void shutdownNettyServer() {
+		if (nettyServer != null) {
 			if (forceStaffClientsToServerSelectionScreen())
 				LockSupport.parkNanos(Duration.ofMillis(200).toNanos()); // wait for login server to accept reconnections
-			nioServer.shutdown();
-			nioServer = null;
+			long clients = findClientConnections().count();
+			log.info("Shutting down the network{}", clients == 0 ? "" : ", closing " + clients + " client connection(s)");
+			nettyServer.shutdown();
+			nettyServer = null;
+			if (!AionConnection.shutdownPacketExecution(Duration.ofSeconds(10)))
+				log.warn("Client packets were still being executed after 10 seconds");
 		}
 	}
 
 	public static Stream<AionConnection> findClientConnections() {
-		return nioServer.findAllConnections().stream().filter(c -> c instanceof AionConnection).map(c -> (AionConnection) c);
+		return nettyServer.findConnections(AionConnection.class);
 	}
 
 	private static boolean forceStaffClientsToServerSelectionScreen() {

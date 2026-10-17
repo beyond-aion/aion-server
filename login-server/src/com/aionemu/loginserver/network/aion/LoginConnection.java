@@ -1,6 +1,5 @@
 package com.aionemu.loginserver.network.aion;
 
-import java.nio.ByteBuffer;
 import java.security.interfaces.RSAPrivateKey;
 import java.util.concurrent.Executor;
 
@@ -10,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.network.netty.NettyConnection;
+import com.aionemu.commons.network.netty.NettyPipeline;
 import com.aionemu.commons.network.packet.BaseClientPacket;
 import com.aionemu.loginserver.configs.Config;
 import com.aionemu.loginserver.controller.AccountController;
@@ -21,6 +21,7 @@ import com.aionemu.loginserver.network.ncrypt.CryptEngine;
 import com.aionemu.loginserver.network.ncrypt.EncryptedRSAKeyPair;
 import com.aionemu.loginserver.network.ncrypt.KeyGen;
 
+import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
 
 /**
@@ -35,6 +36,8 @@ public class LoginConnection extends NettyConnection<AionServerPacket> {
 	 */
 	private static final Logger log = LoggerFactory.getLogger(LoginConnection.class);
 
+	private static final int MAX_PACKET_SIZE = 8192 * 2;
+
 	/**
 	 * Unique Session Id of this connection
 	 */
@@ -46,9 +49,9 @@ public class LoginConnection extends NettyConnection<AionServerPacket> {
 	private Account account;
 
 	/**
-	 * Crypt to encrypt/decrypt packets
+	 * Crypt to encrypt/decrypt packets. Only used by the I/O thread of the channel.
 	 */
-	private CryptEngine cryptEngine;
+	private final CryptEngine cryptEngine = new CryptEngine();
 
 	/**
 	 * True if this user is connecting to GS.
@@ -95,21 +98,23 @@ public class LoginConnection extends NettyConnection<AionServerPacket> {
 	}
 
 	/**
-	 * Decrypts the packet and creates it. A packet with a wrong checksum closes the connection.
+	 * Sets up the channel of an Aion game client.
+	 */
+	public static void initChannel(Channel channel, Executor packetExecutor) {
+		LoginConnection connection = new LoginConnection(channel, packetExecutor);
+		NettyPipeline.init(channel, connection, MAX_PACKET_SIZE, MAX_PACKET_SIZE, new LoginCryptHandler(connection, connection.cryptEngine));
+	}
+
+	/**
+	 * Creates the packet from the decrypted data, which the crypt handler has already verified.
 	 */
 	@Override
-	protected BaseClientPacket<?> createPacket(ByteBuffer data) {
-		if (!cryptEngine.decrypt(data, data.position(), data.remaining())) {
-			log.warn("Wrong checksum from {}", this);
-			close();
-			return null;
-		}
-		data.limit(data.limit() - 8); // the checksum word and the unused word after it
+	protected BaseClientPacket<?> createPacket(ByteBuf data) {
 		return AionPacketHandlerFactory.handle(data, this);
 	}
 
 	@Override
-	protected void writePacket(AionServerPacket packet, ByteBuffer buffer) {
+	protected void writePacket(AionServerPacket packet, ByteBuf buffer) {
 		packet.write(this, buffer);
 	}
 
@@ -145,20 +150,6 @@ public class LoginConnection extends NettyConnection<AionServerPacket> {
 	@Override
 	protected long getMaxSendStallMillis() {
 		return 60_000;
-	}
-
-	/**
-	 * Encrypt packet.
-	 * 
-	 * @param buf
-	 * @param offset
-	 *          absolute index of the packet data
-	 * @param length
-	 *          size of the packet data
-	 * @return encrypted packet size.
-	 */
-	public final int encrypt(ByteBuffer buf, int offset, int length) {
-		return cryptEngine.encrypt(buf, offset, length);
 	}
 
 	/**
@@ -267,7 +258,6 @@ public class LoginConnection extends NettyConnection<AionServerPacket> {
 		encryptedRSAKeyPair = KeyGen.getEncryptedRSAKeyPair();
 		SecretKey blowfishKey = KeyGen.generateBlowfishKey();
 
-		cryptEngine = new CryptEngine();
 		cryptEngine.updateKey(blowfishKey.getEncoded());
 
 		sendPacket(new SM_INIT(this, blowfishKey));

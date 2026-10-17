@@ -1,6 +1,7 @@
 package com.aionemu.loginserver.network.ncrypt;
 
-import java.nio.ByteBuffer;
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
 
 /**
  * Blowfish Cipher - symmetric 16-round cipher, uses 64-bit blocks, 32-448 key size and key-dependend 32-bit four S-boxes
@@ -178,7 +179,7 @@ public class BlowfishCipher {
 			pArray[i] = PARRAY_INIT[i] ^ data;
 		}
 
-		ByteBuffer b = ByteBuffer.allocate(8);
+		ByteBuf b = Unpooled.wrappedBuffer(new byte[8]);
 
 		for (int i = 0; i < 18; i += 2) {
 			cipher(b, 0, 8);
@@ -195,7 +196,7 @@ public class BlowfishCipher {
 	 * @param b
 	 * @param sBox
 	 */
-	private void initSBox(ByteBuffer b, int[] sBox) {
+	private void initSBox(ByteBuf b, int[] sBox) {
 		for (int j = 0; j < 256; j += 2) {
 			cipher(b, 0, 8);
 			sBox[j] = getInt(b, 0);
@@ -204,9 +205,9 @@ public class BlowfishCipher {
 	}
 
 	/**
-	 * Encrypts whole 8-byte blocks in place, starting at the given absolute index. The buffer's position, limit and byte order are not used.
+	 * Encrypts whole 8-byte blocks in place, starting at the given absolute index. The buffer's reader and writer index are not used.
 	 */
-	public void cipher(ByteBuffer data, int offset, int length) {
+	public void cipher(ByteBuf data, int offset, int length) {
 		int blockNumber = length >> 3;
 		int p;
 
@@ -236,9 +237,9 @@ public class BlowfishCipher {
 	}
 
 	/**
-	 * Decrypts whole 8-byte blocks in place, starting at the given absolute index. The buffer's position, limit and byte order are not used.
+	 * Decrypts whole 8-byte blocks in place, starting at the given absolute index. The buffer's reader and writer index are not used.
 	 */
-	public void decipher(ByteBuffer data, int offset, int length) {
+	public void decipher(ByteBuf data, int offset, int length) {
 		int blocks = length >> 3;
 		int p;
 
@@ -292,20 +293,11 @@ public class BlowfishCipher {
 		return y;
 	}
 
-	/**
-	 * Reads a little-endian int at the absolute index, whatever the buffer's byte order is.
-	 */
-	static int getInt(ByteBuffer b, int index) {
-		return (b.get(index + 3) & 0xFF) << 24 | (b.get(index + 2) & 0xFF) << 16 | (b.get(index + 1) & 0xFF) << 8 | (b.get(index) & 0xFF);
+	static int getInt(ByteBuf b, int index) {
+		return b.getIntLE(index);
 	}
 
-	/**
-	 * Writes a little-endian int at the absolute index, whatever the buffer's byte order is.
-	 */
-	static void putInt(ByteBuffer b, int index, int value) {
-		b.put(index, (byte) (value & 0xFF));
-		b.put(index + 1, (byte) (value >> 8 & 0xFF));
-		b.put(index + 2, (byte) (value >> 16 & 0xFF));
-		b.put(index + 3, (byte) (value >> 24 & 0xFF));
+	static void putInt(ByteBuf b, int index, int value) {
+		b.setIntLE(index, value);
 	}
 }
