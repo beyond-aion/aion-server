@@ -8,14 +8,27 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
  */
 public class SM_EXCHANGE_CONFIRMATION extends AionServerPacket {
 
-	private int action;
+	private final Action action;
 
-	public SM_EXCHANGE_CONFIRMATION(int action) {
+	public SM_EXCHANGE_CONFIRMATION(Action action) {
 		this.action = action;
 	}
 
 	@Override
 	protected void writeImpl(AionConnection con) {
-		writeC(action);
+		writeC(action.id);
+	}
+
+	public enum Action {
+		COMPLETED(0),
+		CANCELED(1),
+		PARTNER_CONFIRMED(2),
+		PARTNER_LOCKED(3);
+
+		private final int id;
+
+		Action(int id) {
+			this.id = id;
+		}
 	}
 }

@@ -98,19 +98,28 @@ public class CraftService {
 	}
 
 	public static void startCrafting(Player player, int recipeId, int targetObjId, int craftType, Map<Integer, Long> sendMaterialsData) {
-
 		RecipeTemplate recipeTemplate = DataManager.RECIPE_DATA.getRecipeTemplateById(recipeId);
+		if (recipeTemplate == null) {
+			AuditLogger.log(player, "tried to craft unknown recipe " + recipeId);
+			return;
+		}
+		ComponentsData components = findComponents(recipeTemplate, sendMaterialsData);
+		if (components == null) {
+			AuditLogger.log(player, "tried to craft recipe " + recipeTemplate.getId() + " without sending any of its component sets " + sendMaterialsData.keySet());
+			return;
+		}
+
 		int skillId = recipeTemplate.getSkillId();
 		VisibleObject target = player.getKnownList().getObject(targetObjId);
 		ItemTemplate itemTemplate = DataManager.ITEM_DATA.getItemTemplate(recipeTemplate.getProductId());
 
-		if (!checkCraft(player, recipeTemplate, skillId, target, itemTemplate, craftType, sendMaterialsData)) {
+		if (!checkCraft(player, recipeTemplate, skillId, target, craftType, components)) {
 			sendCancelCraft(player, skillId, targetObjId, itemTemplate);
 			return;
 		}
 		// a production of a limited recipe is used up on craft start, regardless of the result
 		player.getRecipeList().decreaseProductionLimit(player, recipeId);
-		consumeComponents(player, recipeTemplate, sendMaterialsData);
+		consumeComponents(player, components);
 		if (recipeTemplate.getDp() != null)
 			player.getCommonData().addDp(-recipeTemplate.getDp());
 
@@ -129,29 +138,19 @@ public class CraftService {
 
 		if (!recipeTemplate.isMorph()) {
 			int interval = 2500 - (skillLvlDiff * 60);
-			craftingTask.setInterval(interval < intervalCap ? intervalCap : interval);
+			craftingTask.setInterval(Math.max(interval, intervalCap));
 		}
 		craftingTask.start();
 	}
 
-	private static boolean checkCraft(Player player, RecipeTemplate recipeTemplate, int skillId, VisibleObject target, ItemTemplate itemTemplate,
-		int craftType, Map<Integer, Long> sendMaterialsData) {
-
-		if (recipeTemplate == null) {
-			return false;
-		}
-
-		if (itemTemplate == null) {
-			return false;
-		}
-
+	private static boolean checkCraft(Player player, RecipeTemplate recipeTemplate, int skillId, VisibleObject target, int craftType, ComponentsData components) {
 		if (player.getInteractionTask() instanceof CraftingTask craftingTask && craftingTask.isInProgress()) {
 			return false;
 		}
 
 		// morphing dont need static object/npc to use
 		if (!recipeTemplate.isMorph()) {
-			if (target == null || !(target instanceof StaticObject)) {
+			if (!(target instanceof StaticObject)) {
 				AuditLogger.log(player, "tried to craft with incorrect target");
 				return false;
 			} else if (!PositionUtil.isInRange(player, target, 5, false)) {
@@ -198,22 +197,16 @@ public class CraftService {
 			return false;
 		}
 
-		for (ComponentsData componentsData : recipeTemplate.getComponents()) {
-			Component firstComponent = componentsData.getComponent().get(0);
-			if (!sendMaterialsData.containsKey(firstComponent.getItemId()))
-				continue;
-			for (Component component : componentsData.getComponent()) {
-				long availableComponentCount = player.getInventory().getItemCountByItemId(component.getItemId());
-				if (availableComponentCount < component.getQuantity()) {
-					String itemL10n = DataManager.ITEM_DATA.getItemTemplate(component.getItemId()).getL10n();
-					if (component.getQuantity() == 1)
-						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMBINE_NO_COMPONENT_ITEM_SINGLE(itemL10n));
-					else
-						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMBINE_NO_COMPONENT_ITEM_MULTIPLE(component.getQuantity(), itemL10n));
-					return false;
-				}
+		for (Component component : components.getComponent()) {
+			long availableComponentCount = player.getInventory().getItemCountByItemId(component.getItemId());
+			if (availableComponentCount < component.getQuantity()) {
+				String itemL10n = DataManager.ITEM_DATA.getItemTemplate(component.getItemId()).getL10n();
+				if (component.getQuantity() == 1)
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMBINE_NO_COMPONENT_ITEM_SINGLE(itemL10n));
+				else
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMBINE_NO_COMPONENT_ITEM_MULTIPLE(component.getQuantity(), itemL10n));
+				return false;
 			}
-			break;
 		}
 
 		if (craftType == 1 && !player.getInventory().decreaseByItemId(getBonusReqItem(skillId), 1)) {
@@ -225,16 +218,21 @@ public class CraftService {
 		return true;
 	}
 
-	private static void consumeComponents(Player player, RecipeTemplate recipeTemplate, Map<Integer, Long> sendMaterialsData) {
-		for (ComponentsData componentsData : recipeTemplate.getComponents()) {
-			Component firstComponent = componentsData.getComponent().get(0);
-			if (!sendMaterialsData.containsKey(firstComponent.getItemId()))
-				continue;
+	private static void consumeComponents(Player player, ComponentsData components) {
+		for (Component component : components.getComponent())
+			player.getInventory().decreaseByItemId(component.getItemId(), component.getQuantity());
+	}
 
-			for (Component component : componentsData.getComponent())
-				player.getInventory().decreaseByItemId(component.getItemId(), component.getQuantity());
-			break;
+	/**
+	 * The client doesn't say which component set of the recipe it uses, so the set is matched by its first component in the material list the client
+	 * sent.
+	 */
+	private static ComponentsData findComponents(RecipeTemplate recipeTemplate, Map<Integer, Long> sendMaterialsData) {
+		for (ComponentsData componentsData : recipeTemplate.getComponents()) {
+			if (sendMaterialsData.containsKey(componentsData.getComponent().getFirst().getItemId()))
+				return componentsData;
 		}
+		return null;
 	}
 
 	private static void sendCancelCraft(Player player, int skillId, int targetObjId, ItemTemplate itemTemplate) {

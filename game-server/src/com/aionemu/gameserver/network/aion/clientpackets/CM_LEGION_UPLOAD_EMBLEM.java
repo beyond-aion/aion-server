@@ -13,7 +13,6 @@ import com.aionemu.gameserver.services.LegionService;
 public class CM_LEGION_UPLOAD_EMBLEM extends AionClientPacket {
 
 	/** Emblem related information **/
-	private int size;
 	private byte[] data;
 
 	/**
@@ -25,9 +24,7 @@ public class CM_LEGION_UPLOAD_EMBLEM extends AionClientPacket {
 
 	@Override
 	protected void readImpl() {
-		size = readD();
-		data = new byte[size];
-		data = readB(size);
+		data = readB(readD());
 	}
 
 	@Override
@@ -37,7 +34,7 @@ public class CM_LEGION_UPLOAD_EMBLEM extends AionClientPacket {
 			return;
 
 		if (data != null && data.length > 0) {
-			LegionService.getInstance().uploadEmblemData(getConnection().getActivePlayer(), size, data);
+			LegionService.getInstance().uploadEmblemData(activePlayer, data);
 		}
 	}
 }

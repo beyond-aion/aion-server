@@ -1,5 +1,7 @@
 package com.aionemu.loginserver.network.ncrypt;
 
+import java.nio.ByteBuffer;
+
 /**
  * Blowfish Cipher - symmetric 16-round cipher, uses 64-bit blocks, 32-448 key size and key-dependend 32-bit four S-boxes
  * 
@@ -176,12 +178,12 @@ public class BlowfishCipher {
 			pArray[i] = PARRAY_INIT[i] ^ data;
 		}
 
-		byte[] b = new byte[8];
+		ByteBuffer b = ByteBuffer.allocate(8);
 
 		for (int i = 0; i < 18; i += 2) {
-			cipher(b);
-			pArray[i] = byteArrayToInteger(b, 0);
-			pArray[i + 1] = byteArrayToInteger(b, 4);
+			cipher(b, 0, 8);
+			pArray[i] = getInt(b, 0);
+			pArray[i + 1] = getInt(b, 4);
 		}
 
 		for (int i = 0; i < 4; i++) {
@@ -193,43 +195,26 @@ public class BlowfishCipher {
 	 * @param b
 	 * @param sBox
 	 */
-	private void initSBox(byte[] b, int[] sBox) {
+	private void initSBox(ByteBuffer b, int[] sBox) {
 		for (int j = 0; j < 256; j += 2) {
-			cipher(b);
-			sBox[j] = byteArrayToInteger(b, 0);
-			sBox[j + 1] = byteArrayToInteger(b, 4);
+			cipher(b, 0, 8);
+			sBox[j] = getInt(b, 0);
+			sBox[j + 1] = getInt(b, 4);
 		}
 	}
 
 	/**
-	 * Cipher the given byte-array with Blowfish cipher
-	 * 
-	 * @param data
-	 *          byte array to be ciphered
+	 * Encrypts whole 8-byte blocks in place, starting at the given absolute index. The buffer's position, limit and byte order are not used.
 	 */
-	public void cipher(byte[] data) {
-		cipher(data, 0, data.length);
-	}
-
-	/**
-	 * Cipher the given byte-array with Blowfish cipher
-	 * 
-	 * @param data
-	 *          byte array to be ciphered
-	 * @param offset
-	 *          byte array offset
-	 * @param length
-	 *          byte array length
-	 */
-	public void cipher(byte[] data, int offset, int length) {
+	public void cipher(ByteBuffer data, int offset, int length) {
 		int blockNumber = length >> 3;
 		int p;
 
 		for (int k = 0; k < blockNumber; k++) {
 			p = offset + (k << 3);
 
-			int xl = byteArrayToInteger(data, p);
-			int xr = byteArrayToInteger(data, p + 4);
+			int xl = getInt(data, p);
+			int xr = getInt(data, p + 4);
 			int tmp;
 
 			for (int i = 0; i < 16; i++) {
@@ -245,40 +230,23 @@ public class BlowfishCipher {
 			xr = tmp;
 			xr ^= pArray[16];
 			xl ^= pArray[17];
-			integerToByteArray(xl, data, p);
-			integerToByteArray(xr, data, p + 4);
+			putInt(data, p, xl);
+			putInt(data, p + 4, xr);
 		}
 	}
 
 	/**
-	 * Decipher the given byte-array with Blowfish cipher
-	 * 
-	 * @param data
-	 *          byte array to be deciphered
+	 * Decrypts whole 8-byte blocks in place, starting at the given absolute index. The buffer's position, limit and byte order are not used.
 	 */
-	public void decipher(byte[] data) {
-		decipher(data, 0, data.length);
-	}
-
-	/**
-	 * Decipher the given byte-array with Blowfish cipher
-	 * 
-	 * @param data
-	 *          byte array to be deciphered
-	 * @param offset
-	 *          byte array offset
-	 * @param length
-	 *          byte array length
-	 */
-	public void decipher(byte[] data, int offset, int length) {
+	public void decipher(ByteBuffer data, int offset, int length) {
 		int blocks = length >> 3;
 		int p;
 
 		for (int k = 0; k < blocks; k++) {
 			p = offset + (k << 3);
 
-			int lb = byteArrayToInteger(data, p);
-			int rb = byteArrayToInteger(data, p + 4);
+			int lb = getInt(data, p);
+			int rb = getInt(data, p + 4);
 			int tmp;
 
 			for (int i = 17; i > 1; i--) {
@@ -294,8 +262,8 @@ public class BlowfishCipher {
 			rb = tmp;
 			rb ^= pArray[1];
 			lb ^= pArray[0];
-			integerToByteArray(lb, data, p);
-			integerToByteArray(rb, data, p + 4);
+			putInt(data, p, lb);
+			putInt(data, p + 4, rb);
 		}
 	}
 
@@ -325,32 +293,19 @@ public class BlowfishCipher {
 	}
 
 	/**
-	 * Convert 4 bytes to Integer
-	 * 
-	 * @param b
-	 *          byte array (4 bytes)
-	 * @param offset
-	 *          byte array offset
-	 * @return integer value
+	 * Reads a little-endian int at the absolute index, whatever the buffer's byte order is.
 	 */
-	private int byteArrayToInteger(byte[] b, int offset) {
-		return (b[offset + 3] & 0xFF) << 24 | (b[offset + 2] & 0xFF) << 16 | (b[offset + 1] & 0xFF) << 8 | (b[offset] & 0xFF);
+	static int getInt(ByteBuffer b, int index) {
+		return (b.get(index + 3) & 0xFF) << 24 | (b.get(index + 2) & 0xFF) << 16 | (b.get(index + 1) & 0xFF) << 8 | (b.get(index) & 0xFF);
 	}
 
 	/**
-	 * Convert integer value to bytes
-	 * 
-	 * @param value
-	 *          integer value
-	 * @param b
-	 *          dest byte array
-	 * @param offset
-	 *          byte array offset
+	 * Writes a little-endian int at the absolute index, whatever the buffer's byte order is.
 	 */
-	private void integerToByteArray(int value, byte[] b, int offset) {
-		b[offset] = (byte) (value & 0xFF);
-		b[offset + 1] = (byte) (value >> 8 & 0xFF);
-		b[offset + 2] = (byte) (value >> 16 & 0xFF);
-		b[offset + 3] = (byte) (value >> 24 & 0xFF);
+	static void putInt(ByteBuffer b, int index, int value) {
+		b.put(index, (byte) (value & 0xFF));
+		b.put(index + 1, (byte) (value >> 8 & 0xFF));
+		b.put(index + 2, (byte) (value >> 16 & 0xFF));
+		b.put(index + 3, (byte) (value >> 24 & 0xFF));
 	}
 }

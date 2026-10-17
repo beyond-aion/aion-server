@@ -116,7 +116,7 @@ public class AnimationAddAction extends AbstractItemAction {
 				new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, USE_FAIL));
 			return;
 		}
-		if (player.getInventory().decreaseItemCount(parentItem, 1) != 0)
+		if (!player.getInventory().decreaseByObjectId(parentItem.getObjectId(), 1))
 			return;
 		player.startCooldown(parentItem);
 		for (int motionId : getMotionIds().values())
