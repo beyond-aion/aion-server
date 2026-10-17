@@ -1,9 +1,6 @@
 package com.aionemu.gameserver.network.loginserver;
 
-import java.io.IOException;
 import java.net.SocketException;
-import java.nio.channels.SelectionKey;
-import java.nio.channels.SocketChannel;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -11,8 +8,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.network.Dispatcher;
-import com.aionemu.commons.network.NioServer;
+import com.aionemu.commons.network.netty.NettyPipeline;
+import com.aionemu.commons.network.netty.NettyServer;
 import com.aionemu.gameserver.configs.main.SecurityConfig;
 import com.aionemu.gameserver.configs.network.NetworkConfig;
 import com.aionemu.gameserver.model.account.Account;
@@ -32,6 +29,8 @@ import com.aionemu.gameserver.services.ban.HDDBanService;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
 
+import io.netty.channel.ChannelFuture;
+
 /**
  * Utility class for connecting GameServer to LoginServer.
  * 
@@ -43,8 +42,8 @@ public class LoginServer {
 
 	private final Map<Integer, LoginRequest> loginRequests = new ConcurrentHashMap<>();
 	private final Map<Integer, AionConnection> loggedInAccounts = new ConcurrentHashMap<>();
-	private LoginServerConnection lsCon = null;
-	private NioServer nioServer = null;
+	private volatile LoginServerConnection lsCon = null;
+	private NettyServer nettyServer = null;
 	private int gameServerCount = 1;
 
 	public static LoginServer getInstance() {
@@ -57,30 +56,28 @@ public class LoginServer {
 	private LoginServer() {
 	}
 
-	public void connect(NioServer nioServer) {
+	public void connect(NettyServer nettyServer) {
 		if (lsCon != null)
 			throw new IllegalStateException("Login server is already connected.");
 
-		try {
-			this.nioServer = nioServer;
-			SocketChannel sc = SocketChannel.open(NetworkConfig.LOGIN_ADDRESS);
-			sc.configureBlocking(false);
-			Dispatcher d = nioServer.getReadWriteDispatcher();
-			lsCon = new LoginServerConnection(sc, d);
-			d.register(sc, SelectionKey.OP_READ, lsCon);
-			lsCon.initialized();
-		} catch (IOException e) {
+		this.nettyServer = nettyServer;
+		nettyServer.connect(NetworkConfig.LOGIN_ADDRESS, channel -> {
+			lsCon = new LoginServerConnection(channel);
+			NettyPipeline.init(channel, lsCon, 0xFFFF);
+		}).addListener((ChannelFuture future) -> {
+			if (future.isSuccess())
+				return;
 			lsCon = null;
 			int delay;
-			if (e instanceof SocketException) {
+			if (future.cause() instanceof SocketException) {
 				delay = 10;
 				log.info("Could not connect to login server at {}, trying again in {} seconds", NetworkConfig.LOGIN_ADDRESS, delay);
 			} else {
 				delay = 60;
-				log.error("Could not connect to login server at {}, trying again in {} seconds", NetworkConfig.LOGIN_ADDRESS, delay, e);
+				log.error("Could not connect to login server at {}, trying again in {} seconds", NetworkConfig.LOGIN_ADDRESS, delay, future.cause());
 			}
-			ThreadPoolManager.getInstance().schedule(() -> connect(nioServer), delay * 1000);
-		}
+			ThreadPoolManager.getInstance().schedule(() -> connect(nettyServer), delay * 1000);
+		});
 	}
 
 	/**
@@ -102,7 +99,7 @@ public class LoginServer {
 		int delay = lsCon.getState() == State.AUTHED ? 5 : 15;
 		disconnect();
 		log.info("Reconnecting to login server in {} seconds", delay);
-		ThreadPoolManager.getInstance().schedule(() -> connect(nioServer), delay * 1000);
+		ThreadPoolManager.getInstance().schedule(() -> connect(nettyServer), delay * 1000);
 	}
 
 	public boolean isUp() {

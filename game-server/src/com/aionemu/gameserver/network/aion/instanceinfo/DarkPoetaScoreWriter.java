@@ -1,8 +1,8 @@
 package com.aionemu.gameserver.network.aion.instanceinfo;
 
-import java.nio.ByteBuffer;
-
 import com.aionemu.gameserver.model.instance.instancescore.DarkPoetaScore;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * @author xTz
@@ -14,7 +14,7 @@ public class DarkPoetaScoreWriter extends InstanceScoreWriter<DarkPoetaScore> {
 	}
 
 	@Override
-	public void writeMe(ByteBuffer buf) {
+	public void writeMe(ByteBuf buf) {
 		writeD(buf, instanceScore.getPoints());
 		writeD(buf, instanceScore.getNpcKills());
 		writeD(buf, instanceScore.getGatherCollections()); // gathers

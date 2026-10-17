@@ -1,11 +1,12 @@
 package com.aionemu.chatserver.network.aion.clientpackets;
 
-import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 
 import com.aionemu.chatserver.network.aion.AbstractClientPacket;
 import com.aionemu.chatserver.network.aion.AionConnection;
 import com.aionemu.chatserver.service.ChatService;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * @author ATracer
@@ -18,7 +19,7 @@ public class CM_PLAYER_AUTH extends AbstractClientPacket {
 	private String identifierSeparator;
 	private String accountName;
 
-	public CM_PLAYER_AUTH(ByteBuffer buf, AionConnection connection, int opCode) {
+	public CM_PLAYER_AUTH(ByteBuf buf, AionConnection connection, int opCode) {
 		super(buf, connection, opCode);
 	}
 

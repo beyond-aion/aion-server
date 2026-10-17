@@ -1,9 +1,9 @@
 package com.aionemu.gameserver.network.aion;
 
-import java.nio.ByteBuffer;
-
 import com.aionemu.commons.network.packet.BaseServerPacket;
 import com.aionemu.gameserver.network.Crypt;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * Base class for every GS -> Aion Server Packet.
@@ -43,29 +43,26 @@ public abstract class AionServerPacket extends BaseServerPacket {
 	private void writeOP() {
 		// obfuscate packet id
 		int op = Crypt.encodeServerPacketOpcode(getOpCode());
-		buf.putShort((short) (op));
+		buf.writeShortLE(op);
 		// put static server packet code
-		buf.put(Crypt.staticServerPacketCode);
+		buf.writeByte(Crypt.staticServerPacketCode);
 		// for checksum?
-		buf.putShort((short) (~op));
+		buf.writeShortLE(~op);
 	}
 
 	/**
-	 * Write and encrypt this packet data for given connection, to given buffer.
+	 * Write this packet data for given connection to the end of the buffer. The encryption happens afterwards, in the channel pipeline.
 	 * 
 	 * @param con
-	 * @param buf
+	 * @param buffer
 	 */
-	public final void write(AionConnection con, ByteBuffer buffer) {
+	public final void write(AionConnection con, ByteBuf buffer) {
 		setBuf(buffer);
-		buf.putShort((short) 0);
+		int start = buf.writerIndex();
+		buf.writeShortLE(0);
 		writeOP();
 		writeImpl(con);
-		buf.flip();
-		buf.putShort((short) buf.limit());
-		ByteBuffer b = buf.slice();
-		buf.position(0);
-		con.encrypt(b);
+		buf.setShortLE(start, buf.writerIndex() - start);
 	}
 
 	/**
@@ -77,7 +74,7 @@ public abstract class AionServerPacket extends BaseServerPacket {
 
 	}
 
-	public final ByteBuffer getBuf() {
+	public final ByteBuf getBuf() {
 		return this.buf;
 	}
 
@@ -89,11 +86,11 @@ public abstract class AionServerPacket extends BaseServerPacket {
 	 */
 	protected final void writeS(String text, int fixedLength) {
 		if (text == null || text.isEmpty()) {
-			buf.put(new byte[byteLengthForFixedString(fixedLength)]);
+			buf.writeZero(byteLengthForFixedString(fixedLength));
 		} else {
 			for (int i = 0; i < fixedLength; i++)
-				buf.putChar(i < text.length() ? text.charAt(i) : '\000');
-			buf.putChar('\000');
+				buf.writeShortLE(i < text.length() ? text.charAt(i) : 0);
+			buf.writeShortLE(0);
 		}
 	}
 

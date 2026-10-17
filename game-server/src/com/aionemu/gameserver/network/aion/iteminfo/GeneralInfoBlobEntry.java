@@ -1,9 +1,9 @@
 package com.aionemu.gameserver.network.aion.iteminfo;
 
-import java.nio.ByteBuffer;
-
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.network.aion.iteminfo.ItemInfoBlob.ItemBlobType;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * This blob entry is sent with ALL items. (unless partial blob is constructed, ie: sending equip slot only) It is the first and only block for
@@ -18,7 +18,7 @@ public class GeneralInfoBlobEntry extends ItemBlobEntry {
 	}
 
 	@Override
-	public void writeThisBlob(ByteBuffer buf) {// TODO what with kinah?
+	public void writeThisBlob(ByteBuf buf) {// TODO what with kinah?
 		writeH(buf, ownerItem.getItemMask());
 		writeQ(buf, ownerItem.getItemCount());
 		writeS(buf, ownerItem.getItemCreator());// Creator name

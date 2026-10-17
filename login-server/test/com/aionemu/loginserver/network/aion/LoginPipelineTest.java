@@ -8,18 +8,16 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
 import java.util.Arrays;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import com.aionemu.commons.network.netty.NettyPipeline;
 import com.aionemu.loginserver.network.ncrypt.BlowfishCipher;
 import com.aionemu.loginserver.network.ncrypt.KeyGen;
 
 import io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBufUtil;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.embedded.EmbeddedChannel;
 
@@ -46,19 +44,18 @@ public class LoginPipelineTest {
 				return client;
 			}
 		};
-		NettyPipeline.init(channel, new LoginConnection(channel, Runnable::run), 8192 * 2);
+		LoginConnection.initChannel(channel, Runnable::run);
 		channel.register();
 		return channel;
 	}
 
 	/** Reads one server packet and returns its body (opcode and data, without the size), decrypted. */
-	private static ByteBuffer readServerPacket(EmbeddedChannel channel, byte[] key, boolean first) {
+	private static ByteBuf readServerPacket(EmbeddedChannel channel, byte[] key, boolean first) {
 		ByteBuf out = channel.readOutbound();
 		assertNotNull(out, "no packet was sent");
 		int size = out.readUnsignedShortLE();
 		assertEquals(size - 2, out.readableBytes());
-		ByteBuffer body = ByteBuffer.allocate(size - 2).order(ByteOrder.LITTLE_ENDIAN);
-		out.readBytes(body);
+		ByteBuf body = Unpooled.wrappedBuffer(ByteBufUtil.getBytes(out));
 		out.release();
 		new BlowfishCipher(key).decipher(body, 0, body.capacity());
 		if (first) {
@@ -66,19 +63,19 @@ public class LoginPipelineTest {
 		} else {
 			int checksum = 0;
 			for (int i = 0; i < body.capacity() - 4; i += 4)
-				checksum ^= body.getInt(i);
-			assertEquals(checksum, body.getInt(body.capacity() - 4), "server checksum");
+				checksum ^= body.getIntLE(i);
+			assertEquals(checksum, body.getIntLE(body.capacity() - 4), "server checksum");
 		}
 		return body;
 	}
 
 	/** Reverses the XOR pass over the first packet: the last word before the final block holds the running key. */
-	private static void decXORPass(ByteBuffer body) {
+	private static void decXORPass(ByteBuf body) {
 		int stop = body.capacity() - 8;
-		int ecx = body.getInt(stop);
+		int ecx = body.getIntLE(stop);
 		for (int pos = stop - 4; pos >= 4; pos -= 4) {
-			int d = body.getInt(pos) ^ ecx;
-			body.putInt(pos, d);
+			int d = body.getIntLE(pos) ^ ecx;
+			body.setIntLE(pos, d);
 			ecx -= d;
 		}
 	}
@@ -90,27 +87,27 @@ public class LoginPipelineTest {
 	private static ByteBuf clientPacket(byte[] data, byte[] key, boolean corrupt) {
 		int padded = (data.length + 7) & ~7;
 		int length = padded + 8;
-		ByteBuffer body = ByteBuffer.allocate(length).order(ByteOrder.LITTLE_ENDIAN);
-		body.put(data);
+		ByteBuf body = Unpooled.buffer(length, length);
+		body.setBytes(0, data);
 		for (int i = data.length; i < padded; i++)
-			body.put(i, (byte) 0x5A); // the client leaves stack garbage there
+			body.setByte(i, 0x5A); // the client leaves stack garbage there
 		int checksum = 0;
 		for (int i = 0; i < padded; i += 4)
-			checksum ^= body.getInt(i);
-		body.putInt(padded, checksum);
-		body.putInt(padded + 4, 0x12345678);
+			checksum ^= body.getIntLE(i);
+		body.setIntLE(padded, checksum);
+		body.setIntLE(padded + 4, 0x12345678);
 		if (corrupt)
-			body.put(1, (byte) (body.get(1) ^ 0x40));
+			body.setByte(1, body.getByte(1) ^ 0x40);
 		new BlowfishCipher(key).cipher(body, 0, length);
 		ByteBuf frame = Unpooled.buffer(length + 2);
 		frame.writeShortLE(length + 2);
-		frame.writeBytes(body.array());
+		frame.writeBytes(body, 0, length);
 		return frame;
 	}
 
 	private static byte[] cmAuthGG(int sessionId) {
-		ByteBuffer data = ByteBuffer.allocate(21).order(ByteOrder.LITTLE_ENDIAN);
-		data.put((byte) 0x07).putInt(sessionId);
+		ByteBuf data = Unpooled.buffer(21, 21);
+		data.writeByte(0x07).writeIntLE(sessionId).writeZero(16);
 		return data.array();
 	}
 
@@ -118,15 +115,15 @@ public class LoginPipelineTest {
 	public void sendsInitAndAnswersAuthGG() throws Exception {
 		EmbeddedChannel channel = channel();
 
-		ByteBuffer init = readServerPacket(channel, STATIC_KEY, true);
-		assertEquals(0x00, init.get(0));
-		int sessionId = init.getInt(1);
-		assertEquals(0x0000c621, init.getInt(5), "protocol revision");
+		ByteBuf init = readServerPacket(channel, STATIC_KEY, true);
+		assertEquals(0x00, init.getByte(0));
+		int sessionId = init.getIntLE(1);
+		assertEquals(0x0000c621, init.getIntLE(5), "protocol revision");
 		byte[] sessionKey = Arrays.copyOfRange(init.array(), 1 + 4 + 4 + 128 + 16, 1 + 4 + 4 + 128 + 16 + 16);
 
 		channel.writeInbound(clientPacket(cmAuthGG(sessionId), sessionKey, false));
-		ByteBuffer authGG = readServerPacket(channel, sessionKey, false);
-		assertEquals(0x0b, authGG.get(0));
+		ByteBuf authGG = readServerPacket(channel, sessionKey, false);
+		assertEquals(0x0b, authGG.getByte(0));
 		assertTrue(channel.isOpen());
 		channel.finishAndReleaseAll();
 	}
@@ -134,10 +131,10 @@ public class LoginPipelineTest {
 	@Test
 	public void closesOnAWrongChecksum() throws Exception {
 		EmbeddedChannel channel = channel();
-		ByteBuffer init = readServerPacket(channel, STATIC_KEY, true);
+		ByteBuf init = readServerPacket(channel, STATIC_KEY, true);
 		byte[] sessionKey = Arrays.copyOfRange(init.array(), 1 + 4 + 4 + 128 + 16, 1 + 4 + 4 + 128 + 16 + 16);
 
-		channel.writeInbound(clientPacket(cmAuthGG(init.getInt(1)), sessionKey, true));
+		channel.writeInbound(clientPacket(cmAuthGG(init.getIntLE(1)), sessionKey, true));
 		assertNull(channel.readOutbound(), "a packet with a wrong checksum must not be answered");
 		assertFalse(channel.isOpen());
 		channel.finishAndReleaseAll();

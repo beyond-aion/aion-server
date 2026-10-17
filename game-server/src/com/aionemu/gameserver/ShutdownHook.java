@@ -73,7 +73,7 @@ public class ShutdownHook extends Thread {
 			}
 		}
 
-		GameServer.shutdownNioServer(); // shuts down network, disconnects cs/ls/all players and schedules leaveWorld
+		GameServer.shutdownNettyServer(); // shuts down network, disconnects cs/ls/all players and schedules leaveWorld
 		PlayerLeaveWorldService.processPendingLeaveWorldTasks();
 
 		RunnableStatsManager.dumpClassStats(SortBy.AVG);
