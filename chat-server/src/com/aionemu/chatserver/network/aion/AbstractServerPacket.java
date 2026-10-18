@@ -17,6 +17,7 @@ public abstract class AbstractServerPacket extends BaseServerPacket {
 		setBuf(buffer);
 		int start = buf.writerIndex();
 		buf.writeShortLE(0);
+		buf.writeShortLE(getOpCode());
 		writeImpl(connection);
 		buf.setShortLE(start, buf.writerIndex() - start);
 	}

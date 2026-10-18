@@ -61,7 +61,7 @@ public class ChatService {
 		return token;
 	}
 
-	public void registerPlayerConnection(int playerId, byte[] token, byte[] identifier, String name, String accName,
+	public void registerPlayerConnection(int msgIndex, int playerId, byte[] token, byte[] identifier, String name, String accName,
 		AionConnection connection) {
 		ChatClient chatClient = players.get(playerId);
 		if (chatClient == null)
@@ -75,7 +75,7 @@ public class ChatService {
 		else {
 			chatClient.setIdentifier(identifier);
 			chatClient.setConnection(connection);
-			connection.sendPacket(new SM_PLAYER_AUTH_RESPONSE());
+			connection.sendPacket(new SM_PLAYER_AUTH_RESPONSE(msgIndex));
 			connection.setState(State.AUTHED);
 			connection.setChatClient(chatClient);
 			BroadcastService.getInstance().addClient(chatClient);

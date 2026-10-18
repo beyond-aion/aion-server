@@ -24,10 +24,8 @@ public class CM_PLAYER_INFO extends AbstractClientPacket {
 
 	@Override
 	protected void readImpl() {
+		classId = readD();
 		readC(); // 0
-		readH(); // 0
-		classId = readUC();
-		readD(); // 0
 		level = readD();
 		unk = readB(135);
 	}

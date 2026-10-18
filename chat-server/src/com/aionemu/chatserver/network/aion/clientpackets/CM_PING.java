@@ -18,8 +18,6 @@ public class CM_PING extends AbstractClientPacket {
 
 	@Override
 	protected void readImpl() {
-		readC(); // 0
-		readH(); // 0
 		readB(16); // 0
 	}
 

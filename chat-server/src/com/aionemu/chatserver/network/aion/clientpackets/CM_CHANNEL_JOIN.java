@@ -23,10 +23,8 @@ public class CM_CHANNEL_JOIN extends AbstractClientPacket {
 
 	@Override
 	protected void readImpl() {
-		readC(); // 0x40 = @
-		readH(); // 0
 		channelRequestId = readD(); // client increases this by 1 for each request (e.g. after teleport)
-		readB(16); // 0
+		readB(16); // user ID, 0
 		int identifierLength = readUH() * 2;
 		channelIdentifier = readB(identifierLength); // encoded in UTF_16LE
 		int passwordLength = readUH() * 2;
