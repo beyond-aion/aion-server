@@ -7,20 +7,18 @@ import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 
 /**
- * @author xavier Packet sent by client when it starts the 10 second countdown before quitting the game
+ * The client sends this packet when starting the 10-second countdown before quitting the game.
+ * 
+ * @author xavier
  */
 public class CM_MAY_QUIT extends AionClientPacket {
 
-	/**
-	 * @param opcode
-	 */
 	public CM_MAY_QUIT(int opcode, Set<State> validStates) {
 		super(opcode, validStates);
 	}
 
 	@Override
 	protected void readImpl() {
-		// empty
 	}
 
 	@Override
