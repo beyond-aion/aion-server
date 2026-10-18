@@ -19,9 +19,15 @@ class AionCryptHandler extends ChannelDuplexHandler {
 
 	private static final Logger log = LoggerFactory.getLogger(AionCryptHandler.class);
 	private static final int MAX_CORRUPT_PACKETS_BEFORE_DISCONNECT = 3;
+	/**
+	 * Capacity of the client's send buffer, so the most it can hold over from its previous connection.
+	 */
+	private static final int MAX_LEFTOVER_BYTES = 66560;
 
 	private final AionConnection connection;
 	private final Crypt crypt;
+	private boolean decryptedAny;
+	private int leftoverBytes;
 	private int corruptPackets;
 
 	AionCryptHandler(AionConnection connection, Crypt crypt) {
@@ -36,12 +42,23 @@ class AionCryptHandler extends ChannelDuplexHandler {
 			ctx.fireChannelRead(frame);
 			return;
 		}
-		if (!crypt.isEnabled()) { // the client sends crap upon reconnect, just before SM_KEY is sent
+		if (!crypt.isEnabled()) { // see below, data the client queued for its previous connection
 			frame.release();
 			return;
 		}
+		int frameSize = frame.readableBytes() + 2;
 		if (!crypt.decrypt(frame)) {
 			frame.release();
+			// The client doesn't clear its send buffer when a connection breaks, and sends what it still holds over its next connection, encrypted
+			// with the old key (e.g. after a server restart and reconnecting from the server list). They come before the version check and the time
+			// sync, which the client builds right after receiving SM_KEY, with the new key. Counting them as decryption failures disconnected the
+			// client in the middle of the login, so they are dropped, up to what the client's send buffer can hold. Nothing waits for an answer to
+			// them: they belong to the session the client already left for the server list. Not tested with a real client yet; if clients hang
+			// after reconnecting, remove this branch to disconnect them again.
+			if (!decryptedAny && (leftoverBytes += frameSize) <= MAX_LEFTOVER_BYTES) {
+				log.debug("Dropped a packet of {} that the client encrypted for its previous connection", connection);
+				return;
+			}
 			if (++corruptPackets >= MAX_CORRUPT_PACKETS_BEFORE_DISCONNECT) {
 				log.warn("Client packet decryption failed {} times, disconnecting {}", corruptPackets, connection);
 				ctx.close();
@@ -50,6 +67,7 @@ class AionCryptHandler extends ChannelDuplexHandler {
 			}
 			return;
 		}
+		decryptedAny = true;
 		if (frame.readableBytes() < 5) { // op + static code + op == 5 bytes
 			frame.release();
 			log.warn("Received fake packet from {}, disconnecting", connection);
