@@ -147,7 +147,7 @@ public class _2002WheresRae extends AbstractQuestHandler {
 				case 203538:
 					switch (dialogActionId) {
 						case QUEST_SELECT:
-							if (var == 14){
+							if (var == 14) {
 								qs.setQuestVarById(0, var + 1);
 								updateQuestStatus(env);
 								Npc npc = (Npc) env.getVisibleObject();
