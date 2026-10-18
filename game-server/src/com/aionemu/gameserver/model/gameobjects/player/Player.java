@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.configs.main.SecurityConfig;
@@ -181,7 +182,7 @@ public class Player extends Creature {
 	private float[] battleReturnCoords;
 	private int robotId;
 	private boolean isInFfaTeamMode;
-	private int customStates;
+	private final AtomicInteger customStates = new AtomicInteger();
 	private PanesterraFaction panesterraFaction;
 
 	public Player(PlayerAccountData playerAccountData, Account account) {
@@ -1631,15 +1632,15 @@ public class Player extends Creature {
 	}
 
 	public void setCustomState(CustomPlayerState state) {
-		customStates |= state.getMask();
+		customStates.getAndUpdate(states -> states | state.getMask());
 	}
 
 	public void unsetCustomState(CustomPlayerState state) {
-		customStates &= ~state.getMask();
+		customStates.getAndUpdate(states -> states & ~state.getMask());
 	}
 
 	public boolean isInCustomState(CustomPlayerState state) {
-		return (customStates & state.getMask()) == state.getMask();
+		return (customStates.get() & state.getMask()) == state.getMask();
 	}
 
 	public PanesterraFaction getPanesterraFaction() {
