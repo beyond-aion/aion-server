@@ -59,7 +59,7 @@ public class MultiClientService {
 		String mac = con.getMacAddress();
 		return World.getInstance().getAllPlayers().stream().filter(onlinePlayer -> {
 			AionConnection onlineCon = onlinePlayer.getClientConnection();
-			return onlineCon != null && ip.equals(onlineCon.getIP()) && !mac.isEmpty() && mac.equals(onlineCon.getMacAddress());
+			return onlineCon != null && ip.equals(onlineCon.getIP()) && mac.equals(onlineCon.getMacAddress());
 		}).toList();
 	}
 
@@ -75,7 +75,7 @@ public class MultiClientService {
 		Race oppositeRace = race == Race.ELYOS ? Race.ASMODIANS : Race.ELYOS;
 		long minLastOnlineMillis = System.currentTimeMillis() - Duration.ofMinutes(SecurityConfig.MULTI_CLIENT_FACTION_SWITCH_COOLDOWN_MINUTES).toMillis();
 		return sessionsByAccountId.values().stream()
-			.filter(s -> !s.isIgnored() && s.wasPlayingOnSameComputer(oppositeRace, minLastOnlineMillis, con))
+			.filter(s -> !s.isIgnored() && s.wasPlayingOnSameIpOrMac(oppositeRace, minLastOnlineMillis, con))
 			.findAny()
 			.map(s -> s.accountId)
 			.orElse(null);
@@ -104,8 +104,8 @@ public class MultiClientService {
 			}
 		}
 
-		synchronized boolean hasComputer(String ip, String mac) {
-			return !mac.isEmpty() && identifiers.contains(new Identifiers(ip, mac));
+		synchronized boolean hasAny(String ip, String mac) {
+			return identifiers.stream().anyMatch(identifiers -> identifiers.ip.equals(ip) || identifiers.mac.equals(mac));
 		}
 
 		boolean isExpired() {
@@ -121,9 +121,9 @@ public class MultiClientService {
 			lastCharOnlineTimeMillis.put(player.getRace(), System.currentTimeMillis());
 		}
 
-		boolean wasPlayingOnSameComputer(Race race, long minLastOnlineMillis, AionConnection con) {
+		boolean wasPlayingOnSameIpOrMac(Race race, long minLastOnlineMillis, AionConnection con) {
 			Long lastOnlineMillis = lastCharOnlineTimeMillis.get(race);
-			return lastOnlineMillis != null && lastOnlineMillis > minLastOnlineMillis && hasComputer(con.getIP(), con.getMacAddress());
+			return lastOnlineMillis != null && lastOnlineMillis > minLastOnlineMillis && hasAny(con.getIP(), con.getMacAddress());
 		}
 	}
 

@@ -5,6 +5,7 @@ import java.util.List;
 import com.aionemu.gameserver.configs.main.SecurityConfig;
 import com.aionemu.gameserver.dao.MailDAO;
 import com.aionemu.gameserver.dao.PlayerSettingsDAO;
+import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.account.CharacterBanInfo;
 import com.aionemu.gameserver.model.account.PlayerAccountData;
 import com.aionemu.gameserver.model.gameobjects.Item;
@@ -169,11 +170,17 @@ public abstract class AbstractPlayerInfoPacket extends AionServerPacket {
 		long nowSeconds = System.currentTimeMillis() / 1000;
 		if (cbi != null && nowSeconds >= cbi.getEnd())
 			cbi = null;
-		if (cbi == null && !SecurityConfig.MULTI_CLIENT_ALLOW_BOTH_FACTIONS) {
-			int cdMinutes = SecurityConfig.MULTI_CLIENT_FACTION_SWITCH_COOLDOWN_MINUTES;
-			if (cdMinutes > 0 && MultiClientService.checkForFactionSwitchCooldownTime(playerAccountData.getPlayerCommonData().getRace(), con) != null) {
+		if (cbi == null && con.getAccount().getAccessLevel() == 0 && !SecurityConfig.MULTI_CLIENT_ALLOW_BOTH_FACTIONS) {
+			Race race = playerAccountData.getPlayerCommonData().getRace();
+			if (MultiClientService.checkForFactionSwitchCooldownTime(race, con) != null) {
+				int cdMinutes = SecurityConfig.MULTI_CLIENT_FACTION_SWITCH_COOLDOWN_MINUTES;
+				String reason;
+				if (cdMinutes > 0)
+					reason = "\uE026 " + cdMinutes + " minute cooldown between switching factions";
+				else
+					reason = "Please log out all " + (race == Race.ELYOS ? "Asmodian" : "Elyos") + " characters in your household";
 				int durationSeconds = 61; // client will send CM_CHARACTER_LIST after this duration to update the ban info (<61s corrupts the ban info)
-				cbi = new CharacterBanInfo(nowSeconds, durationSeconds, "\n\n\n\uE026 " + cdMinutes + " minute cooldown between switching factions\n\n\n\n\n\n\n");
+				cbi = new CharacterBanInfo(nowSeconds, durationSeconds, "\n\n\n%s\n\n\n\n\n\n\n".formatted(reason));
 			}
 		}
 		return cbi;
