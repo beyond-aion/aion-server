@@ -26,9 +26,7 @@ public class CM_CHANNEL_LEAVE extends AbstractClientPacket {
 
 	@Override
 	protected void readImpl() {
-		readC(); // 0
-		readH(); // 0
-		readB(16); // 0
+		readB(16); // user ID, 0
 		channelId = readD();
 	}
 

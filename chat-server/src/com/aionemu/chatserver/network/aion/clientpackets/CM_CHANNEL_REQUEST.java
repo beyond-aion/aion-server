@@ -24,10 +24,8 @@ public class CM_CHANNEL_REQUEST extends AbstractClientPacket {
 
 	@Override
 	protected void readImpl() {
-		readC(); // 0x40 = @
-		readH(); // 0
 		channelRequestId = readD(); // client increases this by 1 for each request (e.g. after teleport)
-		readB(16); // 0
+		readB(16); // user ID, 0
 		int length = (readUH() * 2);
 		channelIdentifier = readB(length);
 		readD(); // 0

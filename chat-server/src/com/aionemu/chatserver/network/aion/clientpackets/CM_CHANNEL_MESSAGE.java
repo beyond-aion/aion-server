@@ -31,14 +31,9 @@ public class CM_CHANNEL_MESSAGE extends AbstractClientPacket {
 
 	@Override
 	protected void readImpl() {
-		readH();
-		readC();
-		readD();
-		readD();
-		readD();
-		readD();
+		readB(16); // user ID
 		channelId = readD();
-		readC();
+		readC(); // message type
 		int contentLength = readUH() * 2;
 		content = readB(contentLength);
 	}
