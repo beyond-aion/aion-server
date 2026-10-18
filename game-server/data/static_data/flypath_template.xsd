@@ -26,6 +26,7 @@
 						<xs:attribute name="ez" type="xs:float" use="required"/>
 						<xs:attribute name="eworld" type="xs:int" use="required"/>
 						<xs:attribute name="time" type="xs:float" use="required"/>
+						<xs:attribute name="is_security_checked" type="xs:boolean" default="true"/>
 					</xs:complexType>
 				</xs:element>
 			</xs:sequence>

@@ -41,6 +41,9 @@ public class FlyPathEntry {
 	@XmlAttribute(name = "time", required = true)
 	private float time;
 
+	@XmlAttribute(name = "is_security_checked")
+	private boolean isSecurityChecked;
+
 	/**
 	 * Points of the windstream path, one per second of flight. Only set for windstreams.
 	 */
@@ -85,6 +88,10 @@ public class FlyPathEntry {
 
 	public int getTimeInMs() {
 		return (int) (time * 1000);
+	}
+
+	public boolean isSecurityChecked() {
+		return this.isSecurityChecked;
 	}
 
 	public boolean isWindstream() {

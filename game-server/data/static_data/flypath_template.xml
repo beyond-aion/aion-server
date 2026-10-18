@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <flypath_template xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="flypath_template.xsd">
-	<flypath_location id="1" sx="85.15" sy="189.13" sz="231.34" sworld="310020000" ex="218.85" ey="250.49" ez="206.72" eworld="310020000" time="45"/>
-	<flypath_location id="2" sx="85.15" sy="189.13" sz="231.34" sworld="310010000" ex="218.85" ey="250.49" ez="206.72" eworld="310010000" time="45"/>
-	<flypath_location id="3" sx="434.19" sy="401.97" sz="233.16" sworld="320020000" ex="308.21" ey="275.45" ez="206.27" eworld="320020000" time="45"/>
-	<flypath_location id="4" sx="434.19" sy="401.97" sz="233.16" sworld="320010000" ex="308.21" ey="275.45" ez="206.27" eworld="320010000" time="45"/>
+	<flypath_location id="1" sx="85.15" sy="189.13" sz="231.34" sworld="310020000" ex="218.85" ey="250.49" ez="206.72" eworld="310020000" time="45" is_security_checked="false"/>
+	<flypath_location id="2" sx="85.15" sy="189.13" sz="231.34" sworld="310010000" ex="218.85" ey="250.49" ez="206.72" eworld="310010000" time="45" is_security_checked="false"/>
+	<flypath_location id="3" sx="434.19" sy="401.97" sz="233.16" sworld="320020000" ex="308.21" ey="275.45" ez="206.27" eworld="320020000" time="45" is_security_checked="false"/>
+	<flypath_location id="4" sx="434.19" sy="401.97" sz="233.16" sworld="320010000" ex="308.21" ey="275.45" ez="206.27" eworld="320010000" time="45" is_security_checked="false"/>
 	<flypath_location id="5" sx="806.63" sy="1242.11" sz="119" sworld="210010000" ex="426.17" ey="1742.29" ez="119.85" eworld="210010000" time="38"/>
 	<flypath_location id="6" sx="427" sy="1741.83" sz="119.82" sworld="210010000" ex="806.78" ey="1242.13" ez="118.69" eworld="210010000" time="38"/>
 	<flypath_location id="7" sx="1642.54" sy="1500.1" sz="119.96" sworld="210030000" ex="2063" ey="2412.5" ez="275" eworld="210030000" time="52"/>

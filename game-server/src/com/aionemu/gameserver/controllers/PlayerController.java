@@ -662,7 +662,8 @@ public class PlayerController extends CreatureController<Player> {
 				log.warn("Missing flypath_location in flypath_template.xml for teleport id {}, landing of {} is not validated", flightPath.getId(), player);
 			} else {
 				if (player.getWorldId() != path.getEndWorldId()
-					|| !PositionUtil.isInRange(player, path.getEndX(), path.getEndY(), path.getEndZ(), MAX_FLIGHT_LANDING_DISTANCE)) {
+					|| (path.isSecurityChecked()
+						&& !PositionUtil.isInRange(player, path.getEndX(), path.getEndY(), path.getEndZ(), MAX_FLIGHT_LANDING_DISTANCE))) {
 					AuditLogger.log(player, "tried to land from flight path #" + path.getId() + " " + PositionUtil.getDistance(player, path.getEndX(),
 						path.getEndY(), path.getEndZ()) + "m away from its end" + (player.getWorldId() == path.getEndWorldId() ? "" : " on another map"));
 					return;
