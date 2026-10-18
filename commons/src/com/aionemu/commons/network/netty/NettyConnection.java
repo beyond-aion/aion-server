@@ -50,10 +50,15 @@ public abstract class NettyConnection<S extends BaseServerPacket> {
 	public final void sendPacket(S packet) {
 		if (closing.get())
 			return;
-		if (!channel.isWritable() && channel.bytesBeforeWritable() > getMaxPendingWriteBytes()) {
-			log.warn("{} has more than {} bytes waiting to be sent, disconnecting", this, getMaxPendingWriteBytes());
-			channel.close();
-			return;
+		if (!channel.isWritable()) {
+			long pendingBytes = channel.bytesBeforeWritable();
+			if (pendingBytes == Long.MAX_VALUE) // the channel is closed or being closed (it has no outbound buffer anymore)
+				return;
+			if (pendingBytes > getMaxPendingWriteBytes()) {
+				log.warn("{} has more than {} bytes waiting to be sent, disconnecting", this, getMaxPendingWriteBytes());
+				channel.close();
+				return;
+			}
 		}
 		channel.writeAndFlush(packet, channel.voidPromise());
 	}
