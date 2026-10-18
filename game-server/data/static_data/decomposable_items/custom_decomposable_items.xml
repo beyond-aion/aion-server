@@ -1,0 +1,3320 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<decomposable_items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="decomposable_items.xsd">
+	<decomposable item_id="188050004" override="true"><!-- Red Solorius Stocking -->
+		<set>
+			<item id="169231091" chance="16.67" /><!-- [Event] Dye: Bright Aqua -->
+			<item id="169231092" chance="16.67" /><!-- [Event] Dye: Bright Green -->
+			<item id="169231093" chance="16.67" /><!-- [Event] Dye: Bright Sky Blue -->
+			<item id="169231094" chance="16.67" /><!-- [Event] Dye: Bright Magenta -->
+			<item id="169231095" chance="16.66" /><!-- [Event] Dye: Bright Red -->
+			<item id="169231096" chance="16.66" /><!-- [Event] Dye: Bright Blue -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188050007" override="true"><!-- Red Solorius Stocking -->
+		<set>
+			<item id="169231091" chance="16.67" /><!-- [Event] Dye: Bright Aqua -->
+			<item id="169231092" chance="16.67" /><!-- [Event] Dye: Bright Green -->
+			<item id="169231093" chance="16.67" /><!-- [Event] Dye: Bright Sky Blue -->
+			<item id="169231094" chance="16.67" /><!-- [Event] Dye: Bright Magenta -->
+			<item id="169231095" chance="16.66" /><!-- [Event] Dye: Bright Red -->
+			<item id="169231096" chance="16.66" /><!-- [Event] Dye: Bright Blue -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188050702" override="true"><!-- Veille's 1st Grade Reward -->
+		<set>
+			<item id="182006281" count="3" /><!-- Veille's Favor -->
+		</set>
+		<set>
+			<item id="186000242" count="5" /><!-- Ceramium Medal -->
+		</set>
+		<set chance="7">
+			<item id="169610112" /><!-- [Title] Vanquisher of Mastarius -->
+		</set>
+		<set chance="2">
+			<item id="168000161" chance="5.88" /><!-- Illusion Godstone: Meslamtaeda's Greed -->
+			<item id="168000162" chance="5.88" /><!-- Illusion Godstone: Ereshkigal's Honor -->
+			<item id="168000163" chance="5.88" /><!-- Illusion Godstone: Nezekan's Advance -->
+			<item id="168000164" chance="5.88" /><!-- Illusion Godstone: Beritra's Plot -->
+			<item id="168000165" chance="5.88" /><!-- Illusion Godstone: Fregion's Trick -->
+			<item id="168000166" chance="5.88" /><!-- Illusion Godstone: Lumiel's Intervention -->
+			<item id="168000167" chance="5.88" /><!-- Illusion Godstone: Kaisinel's Fantasy -->
+			<item id="168000168" chance="5.88" /><!-- Illusion Godstone: Zikel's Arrogance -->
+			<item id="168000169" chance="5.88" /><!-- Illusion Godstone: Fregion's Stratagem -->
+			<item id="168000170" chance="5.88" /><!-- Illusion Godstone: Tiamat's Counterattack -->
+			<item id="168000171" chance="5.88" /><!-- Illusion Godstone: Marchutan's Impartiality -->
+			<item id="168000172" chance="5.88" /><!-- Illusion Godstone: Yustiel's Generosity -->
+			<item id="168000173" chance="5.89" /><!-- Illusion Godstone: Beritra's Selfishness -->
+			<item id="168000174" chance="5.88" /><!-- Illusion Godstone: Tiamat's Fury -->
+			<item id="168000175" chance="5.89" /><!-- Illusion Godstone: Triniel's Rationality -->
+			<item id="168000176" chance="5.89" /><!-- Illusion Godstone: Vaizel's Vow -->
+			<item id="168000177" chance="5.89" /><!-- Illusion Godstone: Meslamtaeda's Regret -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188050703" override="true"><!-- Veille's 2nd Grade Reward -->
+		<set>
+			<item id="182006281" count="2" /><!-- Veille's Favor -->
+		</set>
+		<set>
+			<item id="186000242" count="3" /><!-- Ceramium Medal -->
+		</set>
+		<set chance="6">
+			<item id="169610112" /><!-- [Title] Vanquisher of Mastarius -->
+		</set>
+		<set chance="1.5">
+			<item id="168000161" chance="5.88" /><!-- Illusion Godstone: Meslamtaeda's Greed -->
+			<item id="168000162" chance="5.88" /><!-- Illusion Godstone: Ereshkigal's Honor -->
+			<item id="168000163" chance="5.88" /><!-- Illusion Godstone: Nezekan's Advance -->
+			<item id="168000164" chance="5.88" /><!-- Illusion Godstone: Beritra's Plot -->
+			<item id="168000165" chance="5.88" /><!-- Illusion Godstone: Fregion's Trick -->
+			<item id="168000166" chance="5.88" /><!-- Illusion Godstone: Lumiel's Intervention -->
+			<item id="168000167" chance="5.88" /><!-- Illusion Godstone: Kaisinel's Fantasy -->
+			<item id="168000168" chance="5.88" /><!-- Illusion Godstone: Zikel's Arrogance -->
+			<item id="168000169" chance="5.88" /><!-- Illusion Godstone: Fregion's Stratagem -->
+			<item id="168000170" chance="5.88" /><!-- Illusion Godstone: Tiamat's Counterattack -->
+			<item id="168000171" chance="5.88" /><!-- Illusion Godstone: Marchutan's Impartiality -->
+			<item id="168000172" chance="5.88" /><!-- Illusion Godstone: Yustiel's Generosity -->
+			<item id="168000173" chance="5.89" /><!-- Illusion Godstone: Beritra's Selfishness -->
+			<item id="168000174" chance="5.88" /><!-- Illusion Godstone: Tiamat's Fury -->
+			<item id="168000175" chance="5.89" /><!-- Illusion Godstone: Triniel's Rationality -->
+			<item id="168000176" chance="5.89" /><!-- Illusion Godstone: Vaizel's Vow -->
+			<item id="168000177" chance="5.89" /><!-- Illusion Godstone: Meslamtaeda's Regret -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188050704" override="true"><!-- Veille's 3rd Grade Reward -->
+		<set>
+			<item id="182006281" /><!-- Veille's Favor -->
+		</set>
+		<set>
+			<item id="186000242" count="2" /><!-- Ceramium Medal -->
+		</set>
+		<set chance="5">
+			<item id="169610112" /><!-- [Title] Vanquisher of Mastarius -->
+		</set>
+		<set chance="1">
+			<item id="168000161" chance="5.88" /><!-- Illusion Godstone: Meslamtaeda's Greed -->
+			<item id="168000162" chance="5.88" /><!-- Illusion Godstone: Ereshkigal's Honor -->
+			<item id="168000163" chance="5.88" /><!-- Illusion Godstone: Nezekan's Advance -->
+			<item id="168000164" chance="5.88" /><!-- Illusion Godstone: Beritra's Plot -->
+			<item id="168000165" chance="5.88" /><!-- Illusion Godstone: Fregion's Trick -->
+			<item id="168000166" chance="5.88" /><!-- Illusion Godstone: Lumiel's Intervention -->
+			<item id="168000167" chance="5.88" /><!-- Illusion Godstone: Kaisinel's Fantasy -->
+			<item id="168000168" chance="5.88" /><!-- Illusion Godstone: Zikel's Arrogance -->
+			<item id="168000169" chance="5.88" /><!-- Illusion Godstone: Fregion's Stratagem -->
+			<item id="168000170" chance="5.88" /><!-- Illusion Godstone: Tiamat's Counterattack -->
+			<item id="168000171" chance="5.88" /><!-- Illusion Godstone: Marchutan's Impartiality -->
+			<item id="168000172" chance="5.88" /><!-- Illusion Godstone: Yustiel's Generosity -->
+			<item id="168000173" chance="5.89" /><!-- Illusion Godstone: Beritra's Selfishness -->
+			<item id="168000174" chance="5.88" /><!-- Illusion Godstone: Tiamat's Fury -->
+			<item id="168000175" chance="5.89" /><!-- Illusion Godstone: Triniel's Rationality -->
+			<item id="168000176" chance="5.89" /><!-- Illusion Godstone: Vaizel's Vow -->
+			<item id="168000177" chance="5.89" /><!-- Illusion Godstone: Meslamtaeda's Regret -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188050706" override="true"><!-- Mastarius' 1st Grade Reward -->
+		<set>
+			<item id="182006282" count="3" /><!-- Mastarius' Favor -->
+		</set>
+		<set>
+			<item id="186000242" count="5" /><!-- Ceramium Medal -->
+		</set>
+		<set chance="7">
+			<item id="169610312" /><!-- [Title] Vanquisher of Veille -->
+		</set>
+		<set chance="2">
+			<item id="168000161" chance="5.88" /><!-- Illusion Godstone: Meslamtaeda's Greed -->
+			<item id="168000162" chance="5.88" /><!-- Illusion Godstone: Ereshkigal's Honor -->
+			<item id="168000163" chance="5.88" /><!-- Illusion Godstone: Nezekan's Advance -->
+			<item id="168000164" chance="5.88" /><!-- Illusion Godstone: Beritra's Plot -->
+			<item id="168000165" chance="5.88" /><!-- Illusion Godstone: Fregion's Trick -->
+			<item id="168000166" chance="5.88" /><!-- Illusion Godstone: Lumiel's Intervention -->
+			<item id="168000167" chance="5.88" /><!-- Illusion Godstone: Kaisinel's Fantasy -->
+			<item id="168000168" chance="5.88" /><!-- Illusion Godstone: Zikel's Arrogance -->
+			<item id="168000169" chance="5.88" /><!-- Illusion Godstone: Fregion's Stratagem -->
+			<item id="168000170" chance="5.88" /><!-- Illusion Godstone: Tiamat's Counterattack -->
+			<item id="168000171" chance="5.88" /><!-- Illusion Godstone: Marchutan's Impartiality -->
+			<item id="168000172" chance="5.88" /><!-- Illusion Godstone: Yustiel's Generosity -->
+			<item id="168000173" chance="5.89" /><!-- Illusion Godstone: Beritra's Selfishness -->
+			<item id="168000174" chance="5.88" /><!-- Illusion Godstone: Tiamat's Fury -->
+			<item id="168000175" chance="5.89" /><!-- Illusion Godstone: Triniel's Rationality -->
+			<item id="168000176" chance="5.89" /><!-- Illusion Godstone: Vaizel's Vow -->
+			<item id="168000177" chance="5.89" /><!-- Illusion Godstone: Meslamtaeda's Regret -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188050707" override="true"><!-- Mastarius' 2nd Grade Reward -->
+		<set>
+			<item id="182006282" count="2" /><!-- Mastarius' Favor -->
+		</set>
+		<set>
+			<item id="186000242" count="3" /><!-- Ceramium Medal -->
+		</set>
+		<set chance="6">
+			<item id="169610312" /><!-- [Title] Vanquisher of Veille -->
+		</set>
+		<set chance="1.5">
+			<item id="168000161" chance="5.88" /><!-- Illusion Godstone: Meslamtaeda's Greed -->
+			<item id="168000162" chance="5.88" /><!-- Illusion Godstone: Ereshkigal's Honor -->
+			<item id="168000163" chance="5.88" /><!-- Illusion Godstone: Nezekan's Advance -->
+			<item id="168000164" chance="5.88" /><!-- Illusion Godstone: Beritra's Plot -->
+			<item id="168000165" chance="5.88" /><!-- Illusion Godstone: Fregion's Trick -->
+			<item id="168000166" chance="5.88" /><!-- Illusion Godstone: Lumiel's Intervention -->
+			<item id="168000167" chance="5.88" /><!-- Illusion Godstone: Kaisinel's Fantasy -->
+			<item id="168000168" chance="5.88" /><!-- Illusion Godstone: Zikel's Arrogance -->
+			<item id="168000169" chance="5.88" /><!-- Illusion Godstone: Fregion's Stratagem -->
+			<item id="168000170" chance="5.88" /><!-- Illusion Godstone: Tiamat's Counterattack -->
+			<item id="168000171" chance="5.88" /><!-- Illusion Godstone: Marchutan's Impartiality -->
+			<item id="168000172" chance="5.88" /><!-- Illusion Godstone: Yustiel's Generosity -->
+			<item id="168000173" chance="5.89" /><!-- Illusion Godstone: Beritra's Selfishness -->
+			<item id="168000174" chance="5.88" /><!-- Illusion Godstone: Tiamat's Fury -->
+			<item id="168000175" chance="5.89" /><!-- Illusion Godstone: Triniel's Rationality -->
+			<item id="168000176" chance="5.89" /><!-- Illusion Godstone: Vaizel's Vow -->
+			<item id="168000177" chance="5.89" /><!-- Illusion Godstone: Meslamtaeda's Regret -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188050708" override="true"><!-- Mastarius' 3rd Grade Reward -->
+		<set>
+			<item id="182006282" /><!-- Mastarius' Favor -->
+		</set>
+		<set>
+			<item id="186000242" count="2" /><!-- Ceramium Medal -->
+		</set>
+		<set chance="5">
+			<item id="169610312" /><!-- [Title] Vanquisher of Veille -->
+		</set>
+		<set chance="1">
+			<item id="168000161" chance="5.88" /><!-- Illusion Godstone: Meslamtaeda's Greed -->
+			<item id="168000162" chance="5.88" /><!-- Illusion Godstone: Ereshkigal's Honor -->
+			<item id="168000163" chance="5.88" /><!-- Illusion Godstone: Nezekan's Advance -->
+			<item id="168000164" chance="5.88" /><!-- Illusion Godstone: Beritra's Plot -->
+			<item id="168000165" chance="5.88" /><!-- Illusion Godstone: Fregion's Trick -->
+			<item id="168000166" chance="5.88" /><!-- Illusion Godstone: Lumiel's Intervention -->
+			<item id="168000167" chance="5.88" /><!-- Illusion Godstone: Kaisinel's Fantasy -->
+			<item id="168000168" chance="5.88" /><!-- Illusion Godstone: Zikel's Arrogance -->
+			<item id="168000169" chance="5.88" /><!-- Illusion Godstone: Fregion's Stratagem -->
+			<item id="168000170" chance="5.88" /><!-- Illusion Godstone: Tiamat's Counterattack -->
+			<item id="168000171" chance="5.88" /><!-- Illusion Godstone: Marchutan's Impartiality -->
+			<item id="168000172" chance="5.88" /><!-- Illusion Godstone: Yustiel's Generosity -->
+			<item id="168000173" chance="5.89" /><!-- Illusion Godstone: Beritra's Selfishness -->
+			<item id="168000174" chance="5.88" /><!-- Illusion Godstone: Tiamat's Fury -->
+			<item id="168000175" chance="5.89" /><!-- Illusion Godstone: Triniel's Rationality -->
+			<item id="168000176" chance="5.89" /><!-- Illusion Godstone: Vaizel's Vow -->
+			<item id="168000177" chance="5.89" /><!-- Illusion Godstone: Meslamtaeda's Regret -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188050714" override="true"><!-- Chocolate Candy Box -->
+		<set race="ELYOS">
+			<item id="160010109" count="3" /><!-- Enamored Tiger Form Candy -->
+		</set>
+		<set race="ASMODIANS">
+			<item id="160010110" count="3" /><!-- Enamored Tiger Form Candy -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188051090" selectable="true" override="true"><!-- [Event] Cold Box -->
+		<set>
+			<item id="125045164" /><!-- Rattan Hat -->
+			<item id="125045242" /><!-- Aquablue Sunhat -->
+			<item id="125040180" /><!-- Sports Cap -->
+			<item id="125045297" /><!-- Lawful Shades -->
+			<item id="125045346" /><!-- Dapper Fedora -->
+			<item id="188053609" count="3" /><!-- [Event] Level 60 Composite Manastone Bundle -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188051091" selectable="true" override="true"><!-- [Event] Frozen Box -->
+		<set>
+			<item id="169600096" /><!-- [Emotion Card] Blow Bubbles -->
+			<item id="169600100" /><!-- [Emotion Card] Paper Airplane -->
+			<item id="110900846" /><!-- Urban Summer Blue -->
+			<item id="110900847" /><!-- Urban Summer Lime -->
+			<item id="110900848" /><!-- Urban Summer Red -->
+			<item id="110900420" /><!-- Cool Summer Look -->
+			<item id="110900107" /><!-- NPC Cool Swimsuit -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188051092" selectable="true" override="true"><!-- [Event] Cold Box -->
+		<set>
+			<item id="125045164" /><!-- Rattan Hat -->
+			<item id="125045242" /><!-- Aquablue Sunhat -->
+			<item id="125040180" /><!-- Sports Cap -->
+			<item id="125045297" /><!-- Lawful Shades -->
+			<item id="125045346" /><!-- Dapper Fedora -->
+			<item id="188053609" count="3" /><!-- [Event] Level 60 Composite Manastone Bundle -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188051093" selectable="true" override="true"><!-- [Event] Frozen Box -->
+		<set>
+			<item id="169600096" /><!-- [Emotion Card] Blow Bubbles -->
+			<item id="169600100" /><!-- [Emotion Card] Paper Airplane -->
+			<item id="110900846" /><!-- Urban Summer Blue -->
+			<item id="110900847" /><!-- Urban Summer Lime -->
+			<item id="110900848" /><!-- Urban Summer Red -->
+			<item id="110900420" /><!-- Cool Summer Look -->
+			<item id="110900107" /><!-- NPC Cool Swimsuit -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188051099" override="true"><!-- Shugo Enchantment Stone Pouch -->
+		<set>
+			<item id="166000195" chance="33.34" /><!-- Epsilon Enchantment Stone -->
+			<item id="166000195" count="2" chance="33.33" /><!-- Epsilon Enchantment Stone -->
+			<item id="166000195" count="3" chance="33.33" /><!-- Epsilon Enchantment Stone -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188051103" override="true"><!-- [Event] Pumpkin King's Present Box -->
+		<set>
+			<item id="164000073" count="5" chance="6" /><!-- Greater Courage Scroll -->
+			<item id="164000076" count="5" chance="6" /><!-- Greater Running Scroll -->
+			<item id="164000079" count="5" chance="6" /><!-- Greater Raging Wind Scroll -->
+			<item id="164000118" count="5" chance="6" /><!-- Major Crit Strike Scroll -->
+			<item id="164000122" count="5" chance="6" /><!-- Major Crit Spell Scroll -->
+			<item id="164000134" count="5" chance="6" /><!-- Greater Awakening Scroll -->
+			<item id="167000518" count="2" chance="3" /><!-- Manastone: Attack +5 -->
+			<item id="167000551" count="2" chance="3" /><!-- Manastone: HP +95 -->
+			<item id="167000553" count="2" chance="3" /><!-- Manastone: Accuracy +27 -->
+			<item id="167000555" count="2" chance="3" /><!-- Manastone: Magic Boost +27 -->
+			<item id="167000557" count="2" chance="3" /><!-- Manastone: Block +27 -->
+			<item id="167000558" count="2" chance="3" /><!-- Manastone: Crit Strike +17 -->
+			<item id="167000560" count="2" chance="3" /><!-- Manastone: Magical Accuracy +14 -->
+			<item id="167000561" count="2" chance="3" /><!-- Manastone: Resist Magic +14 -->
+			<item id="162000075" count="5" chance="5" /><!-- Fine Life Potion -->
+			<item id="162000076" count="5" chance="5" /><!-- Fine Mana Potion -->
+			<item id="162000077" count="5" chance="5" /><!-- Fine Life Serum -->
+			<item id="162000078" count="5" chance="5" /><!-- Fine Mana Serum -->
+			<item id="162000080" count="5" chance="5" /><!-- Fine Recovery Serum -->
+			<item id="162000081" count="5" chance="5" /><!-- Fine Recovery Potion -->
+			<item id="166000194" chance="4" /><!-- Delta Enchantment Stone -->
+			<item id="166000194" count="2" chance="3" /><!-- Delta Enchantment Stone -->
+			<item id="166000195" chance="2" /><!-- Epsilon Enchantment Stone -->
+			<item id="166000195" count="2" chance="1" /><!-- Epsilon Enchantment Stone -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188051104" override="true"><!-- [Event] Surprise Box -->
+		<set>
+			<item id="160010093" count="30" /><!-- [Event] Harvest Revel Chocolate -->
+		</set>
+		<set>
+			<item id="169620003" /><!-- [Event] Pumpkin King's Blessing -->
+		</set>
+		<set>
+			<item id="166000195" count="5" /><!-- Epsilon Enchantment Stone -->
+		</set>
+		<set>
+			<item id="166030007" count="5" /><!-- [Event] Tempering Solution -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188051105" override="true"><!-- [Event] Pumpkin Pouch -->
+		<set>
+			<bundle chance="25.02">
+				<item id="164000073" count="3" /><!-- Greater Courage Scroll -->
+				<item id="164000076" count="3" /><!-- Greater Running Scroll -->
+				<item id="164000118" count="3" /><!-- Major Crit Strike Scroll -->
+				<item id="164000122" count="3" /><!-- Major Crit Spell Scroll -->
+				<item id="164000079" count="3" /><!-- Greater Raging Wind Scroll -->
+				<item id="164000134" count="3" /><!-- Greater Awakening Scroll -->
+			</bundle>
+			<item id="167000518" chance="2.09" /><!-- Manastone: Attack +5 -->
+			<item id="167000563" chance="2.09" /><!-- Manastone: Healing Boost +3 -->
+			<item id="167000766" chance="2.09" /><!-- Manastone: HP +100 -->
+			<item id="167000768" chance="2.09" /><!-- Manastone: Accuracy +29 -->
+			<item id="167000769" chance="2.09" /><!-- Manastone: Evasion +19 -->
+			<item id="167000770" chance="2.09" /><!-- Manastone: Magic Boost +28 -->
+			<item id="167000771" chance="2.09" /><!-- Manastone: Parry +29 -->
+			<item id="167000772" chance="2.08" /><!-- Manastone: Block +29 -->
+			<item id="167000773" chance="2.08" /><!-- Manastone: Crit Strike +19 -->
+			<item id="167000775" chance="2.08" /><!-- Manastone: Magical Accuracy +16 -->
+			<item id="167000776" chance="2.08" /><!-- Manastone: Resist Magic +16 -->
+			<item id="167000777" chance="2.08" /><!-- Manastone: Crit Spell +5 -->
+			<bundle chance="25.02">
+				<item id="162000075" count="3" /><!-- Fine Life Potion -->
+				<item id="162000076" count="3" /><!-- Fine Mana Potion -->
+				<item id="162000077" count="3" /><!-- Fine Life Serum -->
+				<item id="162000078" count="3" /><!-- Fine Mana Serum -->
+				<item id="162000080" count="3" /><!-- Fine Recovery Serum -->
+				<item id="162000081" count="3" /><!-- Fine Recovery Potion -->
+			</bundle>
+			<item id="166000193" chance="8.31" /><!-- Gamma Enchantment Stone -->
+			<item id="166000194" chance="8.31" /><!-- Delta Enchantment Stone -->
+			<item id="166000195" chance="8.31" /><!-- Epsilon Enchantment Stone -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188051326" override="true"><!-- [Event] Ornate Lockbox -->
+		<set>
+			<item id="186000199" count="80" /><!-- Legion Coin -->
+		</set>
+		<set>
+			<item id="186000051" count="3" /><!-- Major Ancient Crown -->
+		</set>
+		<set>
+			<item id="166000195" count="5" /><!-- Epsilon Enchantment Stone -->
+		</set>
+		<set>
+			<item id="169630007" /><!-- [Expand Card] Expand Cube Ticket (lvl 4) -->
+		</set>
+		<set>
+			<item id="169620072" /><!-- AP Boost Charm II - 30% -->
+		</set>
+		<set>
+			<item id="169620082" /><!-- Gathering Boost Charm II - 100% -->
+		</set>
+		<set>
+			<item id="169620094" /><!-- Crafting Boost Charm III - 100% -->
+		</set>
+		<set>
+			<item id="190020026" /><!-- Boxing King Kerub Egg -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188051460" override="true"><!-- Box Blessed by Veille -->
+		<set chance="12">
+			<item id="166150014" chance="84" /><!-- Blessed Manastone Socketing Supplements (Fabled) -->
+			<item id="166150015" chance="16" /><!-- Blessed Manastone Socketing Supplements (Eternal) -->
+		</set>
+		<set chance="18">
+			<item id="182213147" /><!-- A Letter from Veille -->
+		</set>
+		<set>
+			<item id="186000242" count="10" /><!-- Ceramium Medal -->
+		</set>
+		<set>
+			<item id="164002167" count="15" /><!-- [Event] Drana Coffee -->
+		</set>
+		<set>
+			<item id="166030005" count="10" /><!-- Tempering Solution -->
+		</set>
+		<set>
+			<item id="169620067" count="3" /><!-- AP Boost Charm II - 50% -->
+		</set>
+		<set>
+			<item id="186000247" count="10" /><!-- Major Danuar Relic -->
+		</set>
+		<set>
+			<item id="162000137" count="15" /><!-- Sublime Life Serum -->
+		</set>
+		<set>
+			<item id="162000139" count="15" /><!-- Sublime Mana Serum -->
+		</set>
+		<set>
+			<item id="188053113" count="3" /><!-- Ahserion's Flight Ancient Manastone Bundle -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188051461" override="true"><!-- Box Blessed by Mastarius -->
+		<set chance="12">
+			<item id="166150014" chance="84" /><!-- Blessed Manastone Socketing Supplements (Fabled) -->
+			<item id="166150015" chance="16" /><!-- Blessed Manastone Socketing Supplements (Eternal) -->
+		</set>
+		<set chance="18">
+			<item id="182213148" /><!-- A Letter From Mastarius -->
+		</set>
+		<set>
+			<item id="186000242" count="10" /><!-- Ceramium Medal -->
+		</set>
+		<set>
+			<item id="164002167" count="15" /><!-- [Event] Drana Coffee -->
+		</set>
+		<set>
+			<item id="166030005" count="10" /><!-- Tempering Solution -->
+		</set>
+		<set>
+			<item id="169620067" count="3" /><!-- AP Boost Charm II - 50% -->
+		</set>
+		<set>
+			<item id="186000247" count="10" /><!-- Major Danuar Relic -->
+		</set>
+		<set>
+			<item id="162000137" count="15" /><!-- Sublime Life Serum -->
+		</set>
+		<set>
+			<item id="162000139" count="15" /><!-- Sublime Mana Serum -->
+		</set>
+		<set>
+			<item id="188053113" count="3" /><!-- Ahserion's Flight Ancient Manastone Bundle -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188051516" selectable="true" override="true"><!-- Smart Greater Scroll Bundle -->
+		<set>
+			<item id="164000076" count="100" /><!-- Greater Running Scroll -->
+			<item id="164000073" count="100" /><!-- Greater Courage Scroll -->
+			<item id="164000079" count="100" /><!-- Greater Raging Wind Scroll -->
+			<item id="164000134" count="100" /><!-- Greater Awakening Scroll -->
+			<item id="164000257" count="50" /><!-- Fine Strike Resist Scroll -->
+			<item id="164000258" count="50" /><!-- Fine Spell Resist Scroll -->
+			<item id="164000255" count="100" /><!-- Fine Crit Strike Scroll -->
+			<item id="164000256" count="100" /><!-- Fine Crit Spell Scroll -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188051523" override="true"><!-- Red Medicine Bundle -->
+		<set max_level="19">
+			<item id="162000052" count="5" chance="9.1" /><!-- Minor Life Elixir -->
+			<item id="162000052" count="6" chance="9.09" /><!-- Minor Life Elixir -->
+			<item id="162000052" count="7" chance="9.09" /><!-- Minor Life Elixir -->
+			<item id="162000052" count="8" chance="9.09" /><!-- Minor Life Elixir -->
+			<item id="162000052" count="9" chance="9.09" /><!-- Minor Life Elixir -->
+			<item id="162000052" count="10" chance="9.09" /><!-- Minor Life Elixir -->
+			<item id="162000052" count="11" chance="9.09" /><!-- Minor Life Elixir -->
+			<item id="162000052" count="12" chance="9.09" /><!-- Minor Life Elixir -->
+			<item id="162000052" count="13" chance="9.09" /><!-- Minor Life Elixir -->
+			<item id="162000052" count="14" chance="9.09" /><!-- Minor Life Elixir -->
+			<item id="162000052" count="15" chance="9.09" /><!-- Minor Life Elixir -->
+		</set>
+		<set min_level="20" max_level="29">
+			<item id="162000053" count="5" chance="9.1" /><!-- Lesser Life Elixir -->
+			<item id="162000053" count="6" chance="9.09" /><!-- Lesser Life Elixir -->
+			<item id="162000053" count="7" chance="9.09" /><!-- Lesser Life Elixir -->
+			<item id="162000053" count="8" chance="9.09" /><!-- Lesser Life Elixir -->
+			<item id="162000053" count="9" chance="9.09" /><!-- Lesser Life Elixir -->
+			<item id="162000053" count="10" chance="9.09" /><!-- Lesser Life Elixir -->
+			<item id="162000053" count="11" chance="9.09" /><!-- Lesser Life Elixir -->
+			<item id="162000053" count="12" chance="9.09" /><!-- Lesser Life Elixir -->
+			<item id="162000053" count="13" chance="9.09" /><!-- Lesser Life Elixir -->
+			<item id="162000053" count="14" chance="9.09" /><!-- Lesser Life Elixir -->
+			<item id="162000053" count="15" chance="9.09" /><!-- Lesser Life Elixir -->
+		</set>
+		<set min_level="30" max_level="39">
+			<item id="162000054" count="5" chance="9.1" /><!-- Regular Life Elixir -->
+			<item id="162000054" count="6" chance="9.09" /><!-- Regular Life Elixir -->
+			<item id="162000054" count="7" chance="9.09" /><!-- Regular Life Elixir -->
+			<item id="162000054" count="8" chance="9.09" /><!-- Regular Life Elixir -->
+			<item id="162000054" count="9" chance="9.09" /><!-- Regular Life Elixir -->
+			<item id="162000054" count="10" chance="9.09" /><!-- Regular Life Elixir -->
+			<item id="162000054" count="11" chance="9.09" /><!-- Regular Life Elixir -->
+			<item id="162000054" count="12" chance="9.09" /><!-- Regular Life Elixir -->
+			<item id="162000054" count="13" chance="9.09" /><!-- Regular Life Elixir -->
+			<item id="162000054" count="14" chance="9.09" /><!-- Regular Life Elixir -->
+			<item id="162000054" count="15" chance="9.09" /><!-- Regular Life Elixir -->
+		</set>
+		<set min_level="40" max_level="49">
+			<item id="162000055" count="5" chance="9.1" /><!-- Greater Life Elixir -->
+			<item id="162000055" count="6" chance="9.09" /><!-- Greater Life Elixir -->
+			<item id="162000055" count="7" chance="9.09" /><!-- Greater Life Elixir -->
+			<item id="162000055" count="8" chance="9.09" /><!-- Greater Life Elixir -->
+			<item id="162000055" count="9" chance="9.09" /><!-- Greater Life Elixir -->
+			<item id="162000055" count="10" chance="9.09" /><!-- Greater Life Elixir -->
+			<item id="162000055" count="11" chance="9.09" /><!-- Greater Life Elixir -->
+			<item id="162000055" count="12" chance="9.09" /><!-- Greater Life Elixir -->
+			<item id="162000055" count="13" chance="9.09" /><!-- Greater Life Elixir -->
+			<item id="162000055" count="14" chance="9.09" /><!-- Greater Life Elixir -->
+			<item id="162000055" count="15" chance="9.09" /><!-- Greater Life Elixir -->
+		</set>
+		<set min_level="50" max_level="55">
+			<item id="162000056" count="5" chance="9.1" /><!-- Major Life Elixir -->
+			<item id="162000056" count="6" chance="9.09" /><!-- Major Life Elixir -->
+			<item id="162000056" count="7" chance="9.09" /><!-- Major Life Elixir -->
+			<item id="162000056" count="8" chance="9.09" /><!-- Major Life Elixir -->
+			<item id="162000056" count="9" chance="9.09" /><!-- Major Life Elixir -->
+			<item id="162000056" count="10" chance="9.09" /><!-- Major Life Elixir -->
+			<item id="162000056" count="11" chance="9.09" /><!-- Major Life Elixir -->
+			<item id="162000056" count="12" chance="9.09" /><!-- Major Life Elixir -->
+			<item id="162000056" count="13" chance="9.09" /><!-- Major Life Elixir -->
+			<item id="162000056" count="14" chance="9.09" /><!-- Major Life Elixir -->
+			<item id="162000056" count="15" chance="9.09" /><!-- Major Life Elixir -->
+		</set>
+		<set min_level="56">
+			<item id="162000085" count="5" chance="9.1" /><!-- Fine Life Elixir -->
+			<item id="162000085" count="6" chance="9.09" /><!-- Fine Life Elixir -->
+			<item id="162000085" count="7" chance="9.09" /><!-- Fine Life Elixir -->
+			<item id="162000085" count="8" chance="9.09" /><!-- Fine Life Elixir -->
+			<item id="162000085" count="9" chance="9.09" /><!-- Fine Life Elixir -->
+			<item id="162000085" count="10" chance="9.09" /><!-- Fine Life Elixir -->
+			<item id="162000085" count="11" chance="9.09" /><!-- Fine Life Elixir -->
+			<item id="162000085" count="12" chance="9.09" /><!-- Fine Life Elixir -->
+			<item id="162000085" count="13" chance="9.09" /><!-- Fine Life Elixir -->
+			<item id="162000085" count="14" chance="9.09" /><!-- Fine Life Elixir -->
+			<item id="162000085" count="15" chance="9.09" /><!-- Fine Life Elixir -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188051524" override="true"><!-- Blue Medicine Bundle -->
+		<set max_level="19">
+			<item id="162000057" count="5" chance="9.1" /><!-- Minor Mana Elixir -->
+			<item id="162000057" count="6" chance="9.09" /><!-- Minor Mana Elixir -->
+			<item id="162000057" count="7" chance="9.09" /><!-- Minor Mana Elixir -->
+			<item id="162000057" count="8" chance="9.09" /><!-- Minor Mana Elixir -->
+			<item id="162000057" count="9" chance="9.09" /><!-- Minor Mana Elixir -->
+			<item id="162000057" count="10" chance="9.09" /><!-- Minor Mana Elixir -->
+			<item id="162000057" count="11" chance="9.09" /><!-- Minor Mana Elixir -->
+			<item id="162000057" count="12" chance="9.09" /><!-- Minor Mana Elixir -->
+			<item id="162000057" count="13" chance="9.09" /><!-- Minor Mana Elixir -->
+			<item id="162000057" count="14" chance="9.09" /><!-- Minor Mana Elixir -->
+			<item id="162000057" count="15" chance="9.09" /><!-- Minor Mana Elixir -->
+		</set>
+		<set min_level="20" max_level="29">
+			<item id="162000058" count="5" chance="9.1" /><!-- Lesser Mana Elixir -->
+			<item id="162000058" count="6" chance="9.09" /><!-- Lesser Mana Elixir -->
+			<item id="162000058" count="7" chance="9.09" /><!-- Lesser Mana Elixir -->
+			<item id="162000058" count="8" chance="9.09" /><!-- Lesser Mana Elixir -->
+			<item id="162000058" count="9" chance="9.09" /><!-- Lesser Mana Elixir -->
+			<item id="162000058" count="10" chance="9.09" /><!-- Lesser Mana Elixir -->
+			<item id="162000058" count="11" chance="9.09" /><!-- Lesser Mana Elixir -->
+			<item id="162000058" count="12" chance="9.09" /><!-- Lesser Mana Elixir -->
+			<item id="162000058" count="13" chance="9.09" /><!-- Lesser Mana Elixir -->
+			<item id="162000058" count="14" chance="9.09" /><!-- Lesser Mana Elixir -->
+			<item id="162000058" count="15" chance="9.09" /><!-- Lesser Mana Elixir -->
+		</set>
+		<set min_level="30" max_level="39">
+			<item id="162000059" count="5" chance="9.1" /><!-- Regular Mana Elixir -->
+			<item id="162000059" count="6" chance="9.09" /><!-- Regular Mana Elixir -->
+			<item id="162000059" count="7" chance="9.09" /><!-- Regular Mana Elixir -->
+			<item id="162000059" count="8" chance="9.09" /><!-- Regular Mana Elixir -->
+			<item id="162000059" count="9" chance="9.09" /><!-- Regular Mana Elixir -->
+			<item id="162000059" count="10" chance="9.09" /><!-- Regular Mana Elixir -->
+			<item id="162000059" count="11" chance="9.09" /><!-- Regular Mana Elixir -->
+			<item id="162000059" count="12" chance="9.09" /><!-- Regular Mana Elixir -->
+			<item id="162000059" count="13" chance="9.09" /><!-- Regular Mana Elixir -->
+			<item id="162000059" count="14" chance="9.09" /><!-- Regular Mana Elixir -->
+			<item id="162000059" count="15" chance="9.09" /><!-- Regular Mana Elixir -->
+		</set>
+		<set min_level="40" max_level="49">
+			<item id="162000060" count="5" chance="9.1" /><!-- Greater Mana Elixir -->
+			<item id="162000060" count="6" chance="9.09" /><!-- Greater Mana Elixir -->
+			<item id="162000060" count="7" chance="9.09" /><!-- Greater Mana Elixir -->
+			<item id="162000060" count="8" chance="9.09" /><!-- Greater Mana Elixir -->
+			<item id="162000060" count="9" chance="9.09" /><!-- Greater Mana Elixir -->
+			<item id="162000060" count="10" chance="9.09" /><!-- Greater Mana Elixir -->
+			<item id="162000060" count="11" chance="9.09" /><!-- Greater Mana Elixir -->
+			<item id="162000060" count="12" chance="9.09" /><!-- Greater Mana Elixir -->
+			<item id="162000060" count="13" chance="9.09" /><!-- Greater Mana Elixir -->
+			<item id="162000060" count="14" chance="9.09" /><!-- Greater Mana Elixir -->
+			<item id="162000060" count="15" chance="9.09" /><!-- Greater Mana Elixir -->
+		</set>
+		<set min_level="50" max_level="55">
+			<item id="162000061" count="5" chance="9.1" /><!-- Major Mana Elixir -->
+			<item id="162000061" count="6" chance="9.09" /><!-- Major Mana Elixir -->
+			<item id="162000061" count="7" chance="9.09" /><!-- Major Mana Elixir -->
+			<item id="162000061" count="8" chance="9.09" /><!-- Major Mana Elixir -->
+			<item id="162000061" count="9" chance="9.09" /><!-- Major Mana Elixir -->
+			<item id="162000061" count="10" chance="9.09" /><!-- Major Mana Elixir -->
+			<item id="162000061" count="11" chance="9.09" /><!-- Major Mana Elixir -->
+			<item id="162000061" count="12" chance="9.09" /><!-- Major Mana Elixir -->
+			<item id="162000061" count="13" chance="9.09" /><!-- Major Mana Elixir -->
+			<item id="162000061" count="14" chance="9.09" /><!-- Major Mana Elixir -->
+			<item id="162000061" count="15" chance="9.09" /><!-- Major Mana Elixir -->
+		</set>
+		<set min_level="56">
+			<item id="162000086" count="5" chance="9.1" /><!-- Fine Mana Elixir -->
+			<item id="162000086" count="6" chance="9.09" /><!-- Fine Mana Elixir -->
+			<item id="162000086" count="7" chance="9.09" /><!-- Fine Mana Elixir -->
+			<item id="162000086" count="8" chance="9.09" /><!-- Fine Mana Elixir -->
+			<item id="162000086" count="9" chance="9.09" /><!-- Fine Mana Elixir -->
+			<item id="162000086" count="10" chance="9.09" /><!-- Fine Mana Elixir -->
+			<item id="162000086" count="11" chance="9.09" /><!-- Fine Mana Elixir -->
+			<item id="162000086" count="12" chance="9.09" /><!-- Fine Mana Elixir -->
+			<item id="162000086" count="13" chance="9.09" /><!-- Fine Mana Elixir -->
+			<item id="162000086" count="14" chance="9.09" /><!-- Fine Mana Elixir -->
+			<item id="162000086" count="15" chance="9.09" /><!-- Fine Mana Elixir -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188051676" override="true"><!-- [Event] Noble Box of Life -->
+		<set>
+			<item id="186000146" count="5" chance="12" /><!-- Guestpetal -->
+			<item id="162000107" count="25" chance="12" /><!-- Saam King's Herbs -->
+			<item id="166100023" count="250" chance="10" /><!-- [Stamp] High Grade Enchanting Supplement (Mythic) -->
+			<item id="166100020" count="250" chance="10" /><!-- [Stamp] High Grade Enchanting Supplement (Eternal) -->
+			<item id="188053617" chance="8" /><!-- Noble Tidal Idian Bundle -->
+			<item id="188053695" chance="8" /><!-- High Grade Crafting Material Box of Conquest -->
+			<item id="185000216" chance="8" /><!-- Ancestor's Relic -->
+			<item id="169620030" chance="8" /><!-- [Favorable Luck] Face of Spring Burgeoning -->
+			<item id="188053207" chance="8" /><!-- [Event] Ancient Spirit's Eternal Armor Chest -->
+			<item id="188950015" chance="5" /><!-- Special Courier Pass (Eternal/Lv. 61-65) -->
+			<item id="188053623" chance="5" /><!-- Fire Dragon King's Weapon Bundle -->
+			<item id="188053963" chance="3" /><!-- Camping Bundle -->
+			<item id="190020028" chance="3" /><!-- Pink Griffo Egg -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188051687" override="true"><!-- [Event] Ripe Enchantment Fruit Bundle -->
+		<set>
+			<item id="166000195" chance="50" /><!-- Epsilon Enchantment Stone -->
+			<item id="166020003" chance="50" /><!-- [Event] Empyrean Lord's Enchantment Stone -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188051709" selectable="true" override="true"><!-- [Event] Silver Box -->
+		<set player_classes="GLADIATOR TEMPLAR">
+			<item id="110601550" /><!-- Kunax's Breastplate -->
+			<item id="111601513" /><!-- Kunax's Gauntlets -->
+			<item id="112601495" /><!-- Kunax's Shoulderplates -->
+			<item id="113601496" /><!-- Kunax's Greaves -->
+			<item id="114601503" /><!-- Kunax's Sabatons -->
+		</set>
+		<set player_classes="ASSASSIN GUNNER RANGER">
+			<item id="110301752" /><!-- Kunax's Jerkin -->
+			<item id="111301690" /><!-- Kunax's Vambrace -->
+			<item id="112301629" /><!-- Kunax's Shoulderguards -->
+			<item id="113301721" /><!-- Kunax's Breeches -->
+			<item id="114301758" /><!-- Kunax's Boots -->
+		</set>
+		<set player_classes="BARD SORCERER SPIRIT_MASTER">
+			<item id="110101755" /><!-- Kunax's Tunic -->
+			<item id="111101580" /><!-- Kunax's Gloves -->
+			<item id="112101530" /><!-- Kunax's Pauldrons -->
+			<item id="113101592" /><!-- Kunax's Leggings -->
+			<item id="114101626" /><!-- Kunax's Shoes -->
+		</set>
+		<set player_classes="CHANTER CLERIC RIDER">
+			<item id="110551085" /><!-- Kunax's Hauberk -->
+			<item id="111501644" /><!-- Kunax's Handguards -->
+			<item id="112501583" /><!-- Kunax's Spaulders -->
+			<item id="113501662" /><!-- Kunax's Chausses -->
+			<item id="114501672" /><!-- Kunax's Brogans -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188051710" selectable="true" override="true"><!-- [Event] Gold Box -->
+		<set player_classes="GLADIATOR TEMPLAR">
+			<item id="125003995" /><!-- Destroyer Kunax's Helm -->
+			<item id="121001373" /><!-- Kunax's Opal Necklace -->
+			<item id="120001501" /><!-- Kunax's Opal Earrings -->
+			<item id="122001642" /><!-- Kunax's Opal Ring -->
+			<item id="123001419" /><!-- Kunax's Leather Belt -->
+		</set>
+		<set player_classes="ASSASSIN RANGER">
+			<item id="125003997" /><!-- Destroyer Kunax's Hat -->
+			<item id="121001373" /><!-- Kunax's Opal Necklace -->
+			<item id="120001501" /><!-- Kunax's Opal Earrings -->
+			<item id="122001642" /><!-- Kunax's Opal Ring -->
+			<item id="123001419" /><!-- Kunax's Leather Belt -->
+		</set>
+		<set player_classes="BARD SORCERER SPIRIT_MASTER">
+			<item id="125003998" /><!-- Destroyer Kunax's Headband -->
+			<item id="121001374" /><!-- Kunax's Nolan Necklace -->
+			<item id="120001502" /><!-- Kunax's Nolan Earrings -->
+			<item id="122001643" /><!-- Kunax's Nolan Ring -->
+			<item id="123001420" /><!-- Kunax's Sash -->
+		</set>
+		<set player_classes="CLERIC RIDER">
+			<item id="125003996" /><!-- Destroyer Kunax's Chain Helm -->
+			<item id="121001374" /><!-- Kunax's Nolan Necklace -->
+			<item id="120001502" /><!-- Kunax's Nolan Earrings -->
+			<item id="122001643" /><!-- Kunax's Nolan Ring -->
+			<item id="123001420" /><!-- Kunax's Sash -->
+		</set>
+		<set player_classes="CHANTER">
+			<item id="125003996" /><!-- Destroyer Kunax's Chain Helm -->
+			<item id="121001373" /><!-- Kunax's Opal Necklace -->
+			<item id="120001501" /><!-- Kunax's Opal Earrings -->
+			<item id="122001642" /><!-- Kunax's Opal Ring -->
+			<item id="123001419" /><!-- Kunax's Leather Belt -->
+		</set>
+		<set player_classes="GUNNER">
+			<item id="125003997" /><!-- Destroyer Kunax's Hat -->
+			<item id="121001374" /><!-- Kunax's Nolan Necklace -->
+			<item id="120001502" /><!-- Kunax's Nolan Earrings -->
+			<item id="122001643" /><!-- Kunax's Nolan Ring -->
+			<item id="123001420" /><!-- Kunax's Sash -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188051720" override="true"><!-- [Event] Unidentifiable Solorius Box -->
+		<set race="ELYOS">
+			<bundle chance="25">
+				<item id="160010201" count="5" /><!-- [Event] Solorius Cookie -->
+				<item id="160010202" count="5" /><!-- [Event] Solorius Wine -->
+			</bundle>
+			<item id="170030045" chance="10" /><!-- Solorius Wreath -->
+			<item id="170110014" chance="10" /><!-- Solorius Mantelpiece -->
+			<item id="170170086" chance="10" /><!-- Desktop Solorius Tree -->
+			<item id="170190034" chance="15" /><!-- [Event] Solorius Cake -->
+			<item id="188051686" chance="15" /><!-- [Event] Ripe Crown Fruit Bundle -->
+			<item id="188051687" chance="15" /><!-- [Event] Ripe Enchantment Fruit Bundle -->
+		</set>
+		<set race="ASMODIANS">
+			<bundle chance="25">
+				<item id="160010201" count="5" /><!-- [Event] Solorius Cookie -->
+				<item id="160010202" count="5" /><!-- [Event] Solorius Wine -->
+			</bundle>
+			<item id="170035001" chance="10" /><!-- Solorius Wreath -->
+			<item id="170115014" chance="10" /><!-- Solorius Mantelpiece -->
+			<item id="170175063" chance="10" /><!-- Desktop Solorius Tree -->
+			<item id="170190034" chance="15" /><!-- [Event] Solorius Cake -->
+			<item id="188051686" chance="15" /><!-- [Event] Ripe Crown Fruit Bundle -->
+			<item id="188051687" chance="15" /><!-- [Event] Ripe Enchantment Fruit Bundle -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188052081" override="true"><!-- Premium Enchantment Stone Bundle -->
+		<set>
+			<item id="166020000" count="3" chance="33.34" /><!-- Omega Enchantment Stone -->
+			<item id="166020000" count="4" chance="33.33" /><!-- Omega Enchantment Stone -->
+			<item id="166020000" count="5" chance="33.33" /><!-- Omega Enchantment Stone -->
+		</set>
+		<set>
+			<item id="188051216" count="3" /><!-- Greater Supplements Bag (Eternal) -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188052114" override="true"><!-- Krotan Refuge Siege Defense Reward Box -->
+		<set>
+			<item id="162000143" /><!-- Brigade General's Liquid Courage -->
+		</set>
+		<set>
+			<item id="164000134" count="35" /><!-- Greater Awakening Scroll -->
+		</set>
+		<set>
+			<item id="164000073" count="35" /><!-- Greater Courage Scroll -->
+		</set>
+		<set>
+			<item id="164000076" count="70" /><!-- Greater Running Scroll -->
+		</set>
+		<set>
+			<item id="186000247" /><!-- Major Danuar Relic -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188052115" override="true"><!-- Kysis Fortress Siege Defense Reward Box -->
+		<set>
+			<item id="162000143" /><!-- Brigade General's Liquid Courage -->
+		</set>
+		<set>
+			<item id="164000134" count="35" /><!-- Greater Awakening Scroll -->
+		</set>
+		<set>
+			<item id="164000073" count="35" /><!-- Greater Courage Scroll -->
+		</set>
+		<set>
+			<item id="164000076" count="70" /><!-- Greater Running Scroll -->
+		</set>
+		<set>
+			<item id="186000247" /><!-- Major Danuar Relic -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188052116" override="true"><!-- Miren Fortress Siege Defense Reward Box -->
+		<set>
+			<item id="162000143" /><!-- Brigade General's Liquid Courage -->
+		</set>
+		<set>
+			<item id="164000134" count="35" /><!-- Greater Awakening Scroll -->
+		</set>
+		<set>
+			<item id="164000073" count="35" /><!-- Greater Courage Scroll -->
+		</set>
+		<set>
+			<item id="164000076" count="70" /><!-- Greater Running Scroll -->
+		</set>
+		<set>
+			<item id="186000247" /><!-- Major Danuar Relic -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188052117" override="true"><!-- Divine Fortress Siege Defense Reward Box -->
+		<set>
+			<item id="162000143" /><!-- Brigade General's Liquid Courage -->
+		</set>
+		<set>
+			<item id="164000134" count="35" /><!-- Greater Awakening Scroll -->
+		</set>
+		<set>
+			<item id="164000073" count="35" /><!-- Greater Courage Scroll -->
+		</set>
+		<set>
+			<item id="164000076" count="70" /><!-- Greater Running Scroll -->
+		</set>
+		<set>
+			<item id="186000247" /><!-- Major Danuar Relic -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188052118" override="true"><!-- Altar of Avarice Fortress Siege Defense Reward Box -->
+		<set>
+			<item id="162000143" /><!-- Brigade General's Liquid Courage -->
+		</set>
+		<set>
+			<item id="164000134" count="35" /><!-- Greater Awakening Scroll -->
+		</set>
+		<set>
+			<item id="164000073" count="35" /><!-- Greater Courage Scroll -->
+		</set>
+		<set>
+			<item id="164000076" count="70" /><!-- Greater Running Scroll -->
+		</set>
+		<set>
+			<item id="186000247" /><!-- Major Danuar Relic -->
+		</set>
+		<set>
+			<item id="122001654" /><!-- Altar of Avarice Fortress Seal Ring (7 days) -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188052119" override="true"><!-- Temple of Scales Fortress Siege Defense Reward Box -->
+		<set>
+			<item id="162000143" /><!-- Brigade General's Liquid Courage -->
+		</set>
+		<set>
+			<item id="164000134" count="35" /><!-- Greater Awakening Scroll -->
+		</set>
+		<set>
+			<item id="164000073" count="35" /><!-- Greater Courage Scroll -->
+		</set>
+		<set>
+			<item id="164000076" count="70" /><!-- Greater Running Scroll -->
+		</set>
+		<set>
+			<item id="186000247" /><!-- Major Danuar Relic -->
+		</set>
+		<set>
+			<item id="122001655" /><!-- Temple of Scales Fortress Seal Ring (7 days) -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188052120" override="true"><!-- Vorgaltem Citadel Fortress Siege Defense Reward Box -->
+		<set>
+			<item id="162000143" /><!-- Brigade General's Liquid Courage -->
+		</set>
+		<set>
+			<item id="164000134" count="35" /><!-- Greater Awakening Scroll -->
+		</set>
+		<set>
+			<item id="164000073" count="35" /><!-- Greater Courage Scroll -->
+		</set>
+		<set>
+			<item id="164000076" count="70" /><!-- Greater Running Scroll -->
+		</set>
+		<set>
+			<item id="186000247" /><!-- Major Danuar Relic -->
+		</set>
+		<set>
+			<item id="122001656" /><!-- Vorgaltem Citadel Fortress Seal Ring (7 days) -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188052121" override="true"><!-- Crimson Temple Fortress Siege Defense Reward Box -->
+		<set>
+			<item id="162000143" /><!-- Brigade General's Liquid Courage -->
+		</set>
+		<set>
+			<item id="164000134" count="35" /><!-- Greater Awakening Scroll -->
+		</set>
+		<set>
+			<item id="164000073" count="35" /><!-- Greater Courage Scroll -->
+		</set>
+		<set>
+			<item id="164000076" count="70" /><!-- Greater Running Scroll -->
+		</set>
+		<set>
+			<item id="186000247" /><!-- Major Danuar Relic -->
+		</set>
+		<set>
+			<item id="122001657" /><!-- Crimson Temple Fortress Seal Ring (7 days) -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188052166" override="true"><!-- Token Pouch -->
+		<set>
+			<item id="182006999" count="3" chance="5.31" /><!-- Shugo Coin -->
+			<item id="182006999" count="4" chance="5.31" /><!-- Shugo Coin -->
+			<item id="182006999" count="5" chance="5.31" /><!-- Shugo Coin -->
+			<item id="182006999" count="6" chance="5.31" /><!-- Shugo Coin -->
+			<item id="182006999" count="7" chance="5.31" /><!-- Shugo Coin -->
+			<item id="182006999" count="8" chance="5.31" /><!-- Shugo Coin -->
+			<item id="182006999" count="9" chance="5.31" /><!-- Shugo Coin -->
+			<item id="182006999" count="10" chance="5.31" /><!-- Shugo Coin -->
+			<item id="186000409" count="10" chance="3.87" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="11" chance="3.87" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="12" chance="3.87" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="13" chance="3.87" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="14" chance="3.87" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="15" chance="3.87" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="16" chance="3.86" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="17" chance="3.86" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="18" chance="3.86" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="19" chance="3.86" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="20" chance="3.86" /><!-- Daeva's Respite Coin -->
+			<item id="185000128" chance="14" /><!-- Immortal Treasure Chest Key -->
+			<item id="188600199" chance="1" /><!-- Shugo Imperial Tomb Bonus Entry Scroll -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188052297" override="true"><!-- Noble Composite Manastone Bundle -->
+		<set>
+			<item id="167000682" chance="1.48" /><!-- Manastone: Attack +5 / HP +47 -->
+			<item id="167000684" chance="1.48" /><!-- Manastone: Attack +5 / Accuracy +13 -->
+			<item id="167000685" chance="1.48" /><!-- Manastone: Attack +5 / Evasion +13 -->
+			<item id="167000686" chance="1.48" /><!-- Manastone: Attack +5 / Parry +13 -->
+			<item id="167000687" chance="1.48" /><!-- Manastone: Attack +5 / Block +13 -->
+			<item id="167000688" chance="1.48" /><!-- Manastone: Crit Strike +17 / HP +47 -->
+			<item id="167000690" chance="1.48" /><!-- Manastone: Crit Strike +17 / Attack +2 -->
+			<item id="167000691" chance="1.48" /><!-- Manastone: Crit Strike +17 / Accuracy +13 -->
+			<item id="167000692" chance="1.48" /><!-- Manastone: Crit Strike +17 / Evasion +13 -->
+			<item id="167000693" chance="1.48" /><!-- Manastone: Crit Strike +17 / Parry +13 -->
+			<item id="167000694" chance="1.48" /><!-- Manastone: Crit Strike +17 / Block +13 -->
+			<item id="167000695" chance="1.48" /><!-- Manastone: Crit Strike +17 / Resist Magic +7 -->
+			<item id="167000696" chance="1.48" /><!-- Manastone: Crit Strike +17 / Magical Accuracy +7 -->
+			<item id="167000697" chance="1.48" /><!-- Manastone: Magic Boost +27 / HP +47 -->
+			<item id="167000699" chance="1.48" /><!-- Manastone: Magic Boost +27 / Accuracy +13 -->
+			<item id="167000700" chance="1.48" /><!-- Manastone: Magic Boost +27 / Evasion +13 -->
+			<item id="167000701" chance="1.48" /><!-- Manastone: Magic Boost +27 / Parry +13 -->
+			<item id="167000702" chance="1.48" /><!-- Manastone: Magic Boost +27 / Block +13 -->
+			<item id="167000703" chance="1.48" /><!-- Manastone: Magic Boost +27 / Crit Strike +8 -->
+			<item id="167000704" chance="1.48" /><!-- Manastone: Magic Boost +27 / Resist Magic +7 -->
+			<item id="167000705" chance="1.48" /><!-- Manastone: Magic Boost +27 / Magical Accuracy +7 -->
+			<item id="167000706" chance="1.48" /><!-- Manastone: Magical Accuracy +14 / HP +47 -->
+			<item id="167000708" chance="1.48" /><!-- Manastone: Magical Accuracy +14 / Magic Boost +13 -->
+			<item id="167000709" chance="1.48" /><!-- Manastone: Magical Accuracy +14 / Accuracy +13 -->
+			<item id="167000710" chance="1.48" /><!-- Manastone: Magical Accuracy +14 / Evasion +13 -->
+			<item id="167000711" chance="1.48" /><!-- Manastone: Magical Accuracy +14 / Parry +13 -->
+			<item id="167000712" chance="1.48" /><!-- Manastone: Magical Accuracy +14 / Block +13 -->
+			<item id="167000713" chance="1.48" /><!-- Manastone: Magical Accuracy +14 / Crit Strike +8 -->
+			<item id="167000714" chance="1.48" /><!-- Manastone: Magical Accuracy +14 / Resist Magic +7 -->
+			<item id="167000749" chance="1.48" /><!-- Manastone: Attack +5 / Crit Strike +8 -->
+			<item id="167000750" chance="1.48" /><!-- Manastone: Attack +5 / Resist Magic +7 -->
+			<item id="167000751" chance="1.48" /><!-- Manastone: Attack +5 / Magical Accuracy +7 -->
+			<item id="167000846" chance="1.48" /><!-- Manastone: HP +95 / Accuracy +13 -->
+			<item id="167000847" chance="1.48" /><!-- Manastone: HP +95 / Evasion +13 -->
+			<item id="167000848" chance="1.48" /><!-- Manastone: HP +95 / Parry +13 -->
+			<item id="167000849" chance="1.48" /><!-- Manastone: HP +95 / Block +13 -->
+			<item id="167000850" chance="1.48" /><!-- Manastone: HP +95 / Crit Strike +8 -->
+			<item id="167000851" chance="1.48" /><!-- Manastone: HP +95 / Resist Magic+7 -->
+			<item id="167000852" chance="1.48" /><!-- Manastone: HP +95 / Magical Accuracy +7 -->
+			<item id="167000861" chance="1.48" /><!-- Manastone: Evasion +17 / HP +47 -->
+			<item id="167000863" chance="1.48" /><!-- Manastone: Evasion +17 / Accuracy +13 -->
+			<item id="167000864" chance="1.48" /><!-- Manastone: Evasion +17 / Parry +13 -->
+			<item id="167000865" chance="1.48" /><!-- Manastone: Evasion +17 / Block +13 -->
+			<item id="167000866" chance="1.48" /><!-- Manastone: Evasion +17 / Crit Strike +8 -->
+			<item id="167000867" chance="1.48" /><!-- Manastone: Evasion +17 / Resist Magic+7 -->
+			<item id="167000868" chance="1.48" /><!-- Manastone: Evasion +17 / Magical Accuracy +7 -->
+			<item id="167000869" chance="1.48" /><!-- Manastone: Parry +27 / HP +47 -->
+			<item id="167000871" chance="1.48" /><!-- Manastone: Parry +27 / Accuracy +13 -->
+			<item id="167000872" chance="1.48" /><!-- Manastone: Parry +27 / Evasion +13 -->
+			<item id="167000873" chance="1.48" /><!-- Manastone: Parry +27 / Block +13 -->
+			<item id="167000874" chance="1.48" /><!-- Manastone: Parry +27 / Crit Strike +8 -->
+			<item id="167000875" chance="1.48" /><!-- Manastone: Parry +27 / Resist Magic+7 -->
+			<item id="167000876" chance="1.48" /><!-- Manastone: Parry +27 / Magical Accuracy +7 -->
+			<item id="167000877" chance="1.48" /><!-- Manastone: Magical Accuracy +14 / Attack +2 -->
+			<item id="167000715" chance="0.24" /><!-- Manastone: Attack +5 / Crit Strike +9 -->
+			<item id="167000716" chance="0.24" /><!-- Manastone: Attack +5 / Resist Magic +8 -->
+			<item id="167000717" chance="0.24" /><!-- Manastone: Attack +5 / Magical Accuracy +8 -->
+			<item id="167000718" chance="0.24" /><!-- Manastone: Crit Strike +19 / HP +50 -->
+			<item id="167000720" chance="0.24" /><!-- Manastone: Crit Strike +19 / Attack +2 -->
+			<item id="167000721" chance="0.24" /><!-- Manastone: Crit Strike +19 / Accuracy +14 -->
+			<item id="167000722" chance="0.24" /><!-- Manastone: Crit Strike +19 / Evasion +14 -->
+			<item id="167000723" chance="0.24" /><!-- Manastone: Crit Strike +19 / Parry +14 -->
+			<item id="167000724" chance="0.24" /><!-- Manastone: Crit Strike +19 / Block +14 -->
+			<item id="167000725" chance="0.24" /><!-- Manastone: Crit Strike +19 / Resist Magic +8 -->
+			<item id="167000726" chance="0.24" /><!-- Manastone: Crit Strike +19 / Magical Accuracy +8 -->
+			<item id="167000727" chance="0.24" /><!-- Manastone: Magic Boost +27 / HP +50 -->
+			<item id="167000729" chance="0.24" /><!-- Manastone: Magic Boost +27 / Accuracy +14 -->
+			<item id="167000730" chance="0.24" /><!-- Manastone: Magic Boost +27 / Evasion +14 -->
+			<item id="167000731" chance="0.24" /><!-- Manastone: Magic Boost +27 / Parry +14 -->
+			<item id="167000732" chance="0.24" /><!-- Manastone: Magic Boost +27 / Block +14 -->
+			<item id="167000733" chance="0.24" /><!-- Manastone: Magic Boost +27 / Crit Strike +9 -->
+			<item id="167000734" chance="0.24" /><!-- Manastone: Magic Boost +27 / Resist Magic +8 -->
+			<item id="167000735" chance="0.24" /><!-- Manastone: Magic Boost +27 / Magical Accuracy +8 -->
+			<item id="167000736" chance="0.24" /><!-- Manastone: Magical Accuracy +16 / HP +50 -->
+			<item id="167000738" chance="0.24" /><!-- Manastone: Magical Accuracy +16 / Magic Boost +14 -->
+			<item id="167000739" chance="0.24" /><!-- Manastone: Magical Accuracy +16 / Accuracy +14 -->
+			<item id="167000740" chance="0.24" /><!-- Manastone: Magical Accuracy +16 / Evasion +14 -->
+			<item id="167000741" chance="0.24" /><!-- Manastone: Magical Accuracy +16 / Parry +14 -->
+			<item id="167000742" chance="0.24" /><!-- Manastone: Magical Accuracy +16 / Block +14 -->
+			<item id="167000743" chance="0.24" /><!-- Manastone: Magical Accuracy +16 / Crit Strike +9 -->
+			<item id="167000744" chance="0.24" /><!-- Manastone: Magical Accuracy +16 / Resist Magic +8 -->
+			<item id="167000752" chance="0.24" /><!-- Manastone: Attack +5 / HP +50 -->
+			<item id="167000754" chance="0.24" /><!-- Manastone: Attack +5 / Accuracy +14 -->
+			<item id="167000755" chance="0.24" /><!-- Manastone: Attack +5 / Evasion +14 -->
+			<item id="167000756" chance="0.23" /><!-- Manastone: Attack +5 / Parry +14 -->
+			<item id="167000757" chance="0.23" /><!-- Manastone: Attack +5 / Block +14 -->
+			<item id="167010181" chance="0.23" /><!-- Manastone: Attack +5 / Crit Strike +10 -->
+			<item id="167010182" chance="0.23" /><!-- Manastone: Attack +5 / Crit Strike +9 -->
+			<item id="167010183" chance="0.23" /><!-- Manastone: Attack +5 / Magical Accuracy +9 -->
+			<item id="167010184" chance="0.23" /><!-- Manastone: Attack +5 / HP +55 -->
+			<item id="167010186" chance="0.23" /><!-- Manastone: Attack +5 / Accuracy +16 -->
+			<item id="167010187" chance="0.23" /><!-- Manastone: Attack +5 / Dodge +16 -->
+			<item id="167010188" chance="0.23" /><!-- Manastone: Attack +5 / Parry +16 -->
+			<item id="167010189" chance="0.23" /><!-- Manastone: Attack +5 / Block +16 -->
+			<item id="167010190" chance="0.23" /><!-- Manastone: Crit Strike +19 / HP +55 -->
+			<item id="167010192" chance="0.23" /><!-- Manastone: Crit Strike +19 / Attack +3 -->
+			<item id="167010193" chance="0.23" /><!-- Manastone: Crit Strike +19 / Accuracy +16 -->
+			<item id="167010194" chance="0.23" /><!-- Manastone: Crit Strike +19 / Dodge +16 -->
+			<item id="167010195" chance="0.23" /><!-- Manastone: Crit Strike +19 / Parry +16 -->
+			<item id="167010196" chance="0.23" /><!-- Manastone: Crit Strike +19 / Block +16 -->
+			<item id="167010197" chance="0.23" /><!-- Manastone: Crit Strike +19 / Crit Strike +9 -->
+			<item id="167010198" chance="0.23" /><!-- Manastone: Crit Strike +19 / Magical Accuracy +9 -->
+			<item id="167010199" chance="0.23" /><!-- Manastone: Magic Boost +27 / HP +55 -->
+			<item id="167010201" chance="0.23" /><!-- Manastone: Magic Boost +27 / Accuracy +16 -->
+			<item id="167010202" chance="0.23" /><!-- Manastone: Magic Boost +27 / Dodge +16 -->
+			<item id="167010203" chance="0.23" /><!-- Manastone: Magic Boost +27 / Parry +16 -->
+			<item id="167010204" chance="0.23" /><!-- Manastone: Magic Boost +27 / Block +16 -->
+			<item id="167010205" chance="0.23" /><!-- Manastone: Magic Boost +27 / Crit Strike +10 -->
+			<item id="167010206" chance="0.23" /><!-- Manastone: Magic Boost +27 / Crit Strike +9 -->
+			<item id="167010207" chance="0.23" /><!-- Manastone: Magic Boost +27 / Magical Accuracy +9 -->
+			<item id="167010208" chance="0.23" /><!-- Manastone: Magical Accuracy +16 / HP +55 -->
+			<item id="167010210" chance="0.23" /><!-- Manastone: Magical Accuracy +16 / Magic Boost +16 -->
+			<item id="167010211" chance="0.23" /><!-- Manastone: Magical Accuracy +16 / Accuracy +16 -->
+			<item id="167010212" chance="0.23" /><!-- Manastone: Magical Accuracy +16 / Dodge +16 -->
+			<item id="167010213" chance="0.23" /><!-- Manastone: Magical Accuracy +16 / Parry +16 -->
+			<item id="167010214" chance="0.23" /><!-- Manastone: Magical Accuracy +16 / Block +16 -->
+			<item id="167010215" chance="0.23" /><!-- Manastone: Magical Accuracy +16 / Crit Strike +10 -->
+			<item id="167010216" chance="0.23" /><!-- Manastone: Magical Accuracy +16 / Crit Strike +9 -->
+			<item id="167010217" chance="0.23" /><!-- Manastone: Magical Accuracy +16 / Attack +3 -->
+			<item id="167010219" chance="0.23" /><!-- Manastone: HP +95 / Accuracy +16 -->
+			<item id="167010220" chance="0.23" /><!-- Manastone: HP +95 / Dodge +16 -->
+			<item id="167010221" chance="0.23" /><!-- Manastone: HP +95 / Parry +16 -->
+			<item id="167010222" chance="0.23" /><!-- Manastone: HP +95 / Block +16 -->
+			<item id="167010223" chance="0.23" /><!-- Manastone: HP +95 / Crit Strike +10 -->
+			<item id="167010224" chance="0.23" /><!-- Manastone: HP +95 / Crit Strike +9 -->
+			<item id="167010225" chance="0.23" /><!-- Manastone: HP +95 / Magical Accuracy +9 -->
+			<item id="167010234" chance="0.23" /><!-- Manastone: Dodge +17 / HP +55 -->
+			<item id="167010236" chance="0.23" /><!-- Manastone: Dodge +17 / Accuracy +16 -->
+			<item id="167010237" chance="0.23" /><!-- Manastone: Dodge +17 / Parry +16 -->
+			<item id="167010238" chance="0.23" /><!-- Manastone: Dodge +17 / Block +16 -->
+			<item id="167010239" chance="0.23" /><!-- Manastone: Dodge +17 / Crit Strike +10 -->
+			<item id="167010240" chance="0.23" /><!-- Manastone: Dodge +17 / Crit Strike +9 -->
+			<item id="167010241" chance="0.23" /><!-- Manastone: Dodge +17 / Magical Accuracy +9 -->
+			<item id="167010242" chance="0.23" /><!-- Manastone: Parry +27 / HP +55 -->
+			<item id="167010244" chance="0.23" /><!-- Manastone: Parry +27 / Accuracy +16 -->
+			<item id="167010245" chance="0.23" /><!-- Manastone: Parry +27 / Dodge +16 -->
+			<item id="167010246" chance="0.23" /><!-- Manastone: Parry +27 / Block +16 -->
+			<item id="167010247" chance="0.23" /><!-- Manastone: Parry +27 / Crit Strike +10 -->
+			<item id="167010248" chance="0.23" /><!-- Manastone: Parry +27 / Crit Strike +9 -->
+			<item id="167010249" chance="0.23" /><!-- Manastone: Parry +27 / Magical Accuracy +9 -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188052318" override="true"><!-- [Event] Forged Aion Signet -->
+		<set race="ELYOS">
+			<item id="110900220" chance="1" /><!-- NPC Beatific Outfit -->
+			<item id="188051710" chance="1" /><!-- [Event] Gold Box -->
+			<item id="188053228" chance="1" /><!-- [Event] Heartseeker Equipment Box -->
+			<item id="168310018" chance="1" /><!-- Major Blessed Augment: Level 2 -->
+			<item id="165020020" chance="1" /><!-- Noble Weapon Wrapping Scroll (Mythic/Lv. 65 and lower) -->
+			<item id="165020014" chance="2" /><!-- Weapon Wrapping Scroll (Eternal/Lv. 65 and lower) -->
+			<item id="165020015" chance="2" /><!-- Armor Wrapping Scroll (Eternal/Lv. 65 and lower) -->
+			<item id="165020016" chance="2" /><!-- Accessory Wrapping Scroll (Eternal/Lv. 65 and lower) -->
+			<item id="188053295" chance="2" /><!-- Empyrean Plume Chest -->
+			<item id="169620072" count="2" chance="2" /><!-- AP Boost Charm II - 30% -->
+			<item id="188053617" chance="5" /><!-- Noble Tidal Idian Bundle -->
+			<item id="188053609" count="3" chance="5" /><!-- [Event] Level 60 Composite Manastone Bundle -->
+			<item id="166500002" count="3" chance="5" /><!-- Amplification Stone -->
+			<item id="166020000" count="3" chance="5" /><!-- Omega Enchantment Stone -->
+			<item id="166000195" count="5" chance="5" /><!-- Epsilon Enchantment Stone -->
+			<item id="188052822" count="2" chance="7" /><!-- Noble Ancient Manastone Chest -->
+			<item id="160010111" count="5" chance="7" /><!-- [Event] Jumpy Monk Form Candy -->
+			<item id="186000399" count="25" chance="7" /><!-- Honorable Conqueror's Mark -->
+			<item id="160010338" chance="7" /><!-- [Event] Loving Chocolate -->
+			<item id="188053793" count="3" chance="8" /><!-- Rare Manastone of Aetheric Field Bundle -->
+			<item id="160010208" count="3" chance="8" /><!-- [Event] Sweet Chocolate -->
+			<item id="162002001" count="3" chance="8" /><!-- Love Potion -->
+			<item id="186000237" count="50" chance="8" /><!-- Ancient Coin -->
+		</set>
+		<set race="ASMODIANS">
+			<item id="110900220" chance="1" /><!-- NPC Beatific Outfit -->
+			<item id="188051710" chance="1" /><!-- [Event] Gold Box -->
+			<item id="188053228" chance="1" /><!-- [Event] Heartseeker Equipment Box -->
+			<item id="168310018" chance="1" /><!-- Major Blessed Augment: Level 2 -->
+			<item id="165020020" chance="1" /><!-- Noble Weapon Wrapping Scroll (Mythic/Lv. 65 and lower) -->
+			<item id="165020014" chance="2" /><!-- Weapon Wrapping Scroll (Eternal/Lv. 65 and lower) -->
+			<item id="165020015" chance="2" /><!-- Armor Wrapping Scroll (Eternal/Lv. 65 and lower) -->
+			<item id="165020016" chance="2" /><!-- Accessory Wrapping Scroll (Eternal/Lv. 65 and lower) -->
+			<item id="188053295" chance="2" /><!-- Empyrean Plume Chest -->
+			<item id="169620072" count="2" chance="2" /><!-- AP Boost Charm II - 30% -->
+			<item id="188053617" chance="5" /><!-- Noble Tidal Idian Bundle -->
+			<item id="188053609" count="3" chance="5" /><!-- [Event] Level 60 Composite Manastone Bundle -->
+			<item id="166500002" count="3" chance="5" /><!-- Amplification Stone -->
+			<item id="166020000" count="3" chance="5" /><!-- Omega Enchantment Stone -->
+			<item id="166000195" count="5" chance="5" /><!-- Epsilon Enchantment Stone -->
+			<item id="188052822" count="2" chance="7" /><!-- Noble Ancient Manastone Chest -->
+			<item id="160010112" count="5" chance="7" /><!-- [Event] Jumpy Monk Form Candy -->
+			<item id="186000399" count="25" chance="7" /><!-- Honorable Conqueror's Mark -->
+			<item id="160010338" chance="7" /><!-- [Event] Loving Chocolate -->
+			<item id="188053793" count="3" chance="8" /><!-- Rare Manastone of Aetheric Field Bundle -->
+			<item id="160010208" count="3" chance="8" /><!-- [Event] Sweet Chocolate -->
+			<item id="162002001" count="3" chance="8" /><!-- Love Potion -->
+			<item id="186000237" count="50" chance="8" /><!-- Ancient Coin -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188052421" override="true"><!-- Lv. 4113 Composite Manastone Bundle -->
+		<set>
+			<item id="166000194" count="3" chance="16.67" /><!-- Delta Enchantment Stone -->
+			<item id="166000194" count="4" chance="16.67" /><!-- Delta Enchantment Stone -->
+			<item id="166000194" count="5" chance="16.67" /><!-- Delta Enchantment Stone -->
+			<item id="166000195" count="3" chance="16.67" /><!-- Epsilon Enchantment Stone -->
+			<item id="166000195" count="4" chance="16.66" /><!-- Epsilon Enchantment Stone -->
+			<item id="166000195" count="5" chance="16.66" /><!-- Epsilon Enchantment Stone -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188052556" override="true"><!-- Composite Manastone Bundle -->
+		<set>
+			<item id="167000614" chance="0.93" /><!-- Manastone: Attack +4 / HP +37 -->
+			<item id="167000616" chance="0.93" /><!-- Manastone: Attack +4 / Crit Strike +6 -->
+			<item id="167000617" chance="0.93" /><!-- Manastone: Attack +4 / Resist Magic +5 -->
+			<item id="167000618" chance="0.93" /><!-- Manastone: Attack +4 / Magical Accuracy +5 -->
+			<item id="167000619" chance="0.93" /><!-- Manastone: Crit Strike +13 / HP +37 -->
+			<item id="167000621" chance="0.93" /><!-- Manastone: Crit Strike +13 / Attack +2 -->
+			<item id="167000622" chance="0.93" /><!-- Manastone: Crit Strike +13 / Accuracy +11 -->
+			<item id="167000623" chance="0.93" /><!-- Manastone: Crit Strike +13 / Evasion +11 -->
+			<item id="167000624" chance="0.93" /><!-- Manastone: Crit Strike +13 / Parry +11 -->
+			<item id="167000625" chance="0.93" /><!-- Manastone: Crit Strike +13 / Block +11 -->
+			<item id="167000626" chance="0.93" /><!-- Manastone: Crit Strike +13 / Resist Magic +5 -->
+			<item id="167000627" chance="0.93" /><!-- Manastone: Crit Strike +13 / Magical Accuracy +5 -->
+			<item id="167000628" chance="0.93" /><!-- Manastone: Magic Boost +23 / HP +37 -->
+			<item id="167000630" chance="0.93" /><!-- Manastone: Magic Boost +23 / Accuracy +11 -->
+			<item id="167000631" chance="0.93" /><!-- Manastone: Magic Boost +23 / Evasion +11 -->
+			<item id="167000632" chance="0.93" /><!-- Manastone: Magic Boost +23 / Parry +11 -->
+			<item id="167000633" chance="0.93" /><!-- Manastone: Magic Boost +23 / Block +11 -->
+			<item id="167000634" chance="0.93" /><!-- Manastone: Magic Boost +23 / Crit Strike +6 -->
+			<item id="167000635" chance="0.93" /><!-- Manastone: Magic Boost +23 / Resist Magic +5 -->
+			<item id="167000636" chance="0.93" /><!-- Manastone: Magic Boost +23 / Magical Accuracy +5 -->
+			<item id="167000637" chance="0.93" /><!-- Manastone: Magical Accuracy +10 / HP +37 -->
+			<item id="167000639" chance="0.93" /><!-- Manastone: Magical Accuracy +10 / Magic Boost +11 -->
+			<item id="167000640" chance="0.93" /><!-- Manastone: Magical Accuracy +10 / Accuracy +11 -->
+			<item id="167000641" chance="0.93" /><!-- Manastone: Magical Accuracy +10 / Evasion +11 -->
+			<item id="167000642" chance="0.93" /><!-- Manastone: Magical Accuracy +10 / Parry +11 -->
+			<item id="167000643" chance="0.93" /><!-- Manastone: Magical Accuracy +10 / Block +11 -->
+			<item id="167000644" chance="0.93" /><!-- Manastone: Magical Accuracy +10 / Crit Strike +6 -->
+			<item id="167000645" chance="0.93" /><!-- Manastone: Magical Accuracy +10 / Resist Magic +5 -->
+			<item id="167000745" chance="0.93" /><!-- Manastone: Attack +4 / Accuracy +11 -->
+			<item id="167000746" chance="0.93" /><!-- Manastone: Attack +4 / Evasion +11 -->
+			<item id="167000747" chance="0.93" /><!-- Manastone: Attack +4 / Parry +11 -->
+			<item id="167000748" chance="0.93" /><!-- Manastone: Attack +4 / Block +11 -->
+			<item id="167000780" chance="0.93" /><!-- Manastone: HP +75 / Crit Strike +6 -->
+			<item id="167000781" chance="0.93" /><!-- Manastone: HP +75 / Resist Magic+5 -->
+			<item id="167000782" chance="0.93" /><!-- Manastone: HP +75 / Magical Accuracy +5 -->
+			<item id="167000783" chance="0.93" /><!-- Manastone: HP +75 / Accuracy +11 -->
+			<item id="167000784" chance="0.93" /><!-- Manastone: HP +75 / Evasion +11 -->
+			<item id="167000785" chance="0.93" /><!-- Manastone: HP +75 / Parry +11 -->
+			<item id="167000786" chance="0.93" /><!-- Manastone: HP +75 / Block +11 -->
+			<item id="167000795" chance="0.93" /><!-- Manastone: Evasion +13 / HP +37 -->
+			<item id="167000797" chance="0.93" /><!-- Manastone: Evasion +13 / Crit Strike +6 -->
+			<item id="167000798" chance="0.93" /><!-- Manastone: Evasion +13 / Resist Magic+5 -->
+			<item id="167000799" chance="0.93" /><!-- Manastone: Evasion +13 / Magical Accuracy +5 -->
+			<item id="167000800" chance="0.93" /><!-- Manastone: Evasion +13 / Accuracy +11 -->
+			<item id="167000801" chance="0.93" /><!-- Manastone: Evasion +13 / Parry +11 -->
+			<item id="167000802" chance="0.93" /><!-- Manastone: Evasion +13 / Block +11 -->
+			<item id="167000803" chance="0.93" /><!-- Manastone: Parry +23 / HP +37 -->
+			<item id="167000805" chance="0.93" /><!-- Manastone: Parry +23 / Crit Strike +6 -->
+			<item id="167000806" chance="0.93" /><!-- Manastone: Parry +23 / Resist Magic+5 -->
+			<item id="167000807" chance="0.93" /><!-- Manastone: Parry +23 / Magical Accuracy +5 -->
+			<item id="167000808" chance="0.93" /><!-- Manastone: Parry +23 / Accuracy +11 -->
+			<item id="167000809" chance="0.93" /><!-- Manastone: Parry +23 / Evasion +11 -->
+			<item id="167000810" chance="0.93" /><!-- Manastone: Parry +23 / Block +11 -->
+			<item id="167000811" chance="0.93" /><!-- Manastone: Magical Accuracy +10 / Attack +2 -->
+			<item id="167000646" chance="0.74" /><!-- Manastone: Attack +5 / HP +42 -->
+			<item id="167000648" chance="0.74" /><!-- Manastone: Attack +5 / Accuracy +12 -->
+			<item id="167000649" chance="0.74" /><!-- Manastone: Attack +5 / Evasion +12 -->
+			<item id="167000650" chance="0.74" /><!-- Manastone: Attack +5 / Parry +12 -->
+			<item id="167000651" chance="0.74" /><!-- Manastone: Attack +5 / Block +12 -->
+			<item id="167000652" chance="0.74" /><!-- Manastone: Attack +5 / Crit Strike +7 -->
+			<item id="167000653" chance="0.74" /><!-- Manastone: Attack +5 / Resist Magic +6 -->
+			<item id="167000654" chance="0.74" /><!-- Manastone: Attack +5 / Magical Accuracy +6 -->
+			<item id="167000655" chance="0.74" /><!-- Manastone: Crit Strike +15 / HP +42 -->
+			<item id="167000657" chance="0.74" /><!-- Manastone: Crit Strike +15 / Attack +2 -->
+			<item id="167000658" chance="0.74" /><!-- Manastone: Crit Strike +15 / Accuracy +12 -->
+			<item id="167000659" chance="0.74" /><!-- Manastone: Crit Strike +15 / Evasion +12 -->
+			<item id="167000660" chance="0.74" /><!-- Manastone: Crit Strike +15 / Parry +12 -->
+			<item id="167000661" chance="0.74" /><!-- Manastone: Crit Strike +15 / Block +12 -->
+			<item id="167000662" chance="0.74" /><!-- Manastone: Crit Strike +15 / Resist Magic +6 -->
+			<item id="167000663" chance="0.74" /><!-- Manastone: Crit Strike +15 / Magical Accuracy +6 -->
+			<item id="167000664" chance="0.74" /><!-- Manastone: Magic Boost +25 / HP +42 -->
+			<item id="167000666" chance="0.74" /><!-- Manastone: Magic Boost +25 / Accuracy +12 -->
+			<item id="167000667" chance="0.74" /><!-- Manastone: Magic Boost +25 / Evasion +12 -->
+			<item id="167000668" chance="0.74" /><!-- Manastone: Magic Boost +25 / Parry +12 -->
+			<item id="167000669" chance="0.74" /><!-- Manastone: Magic Boost +25 / Block +12 -->
+			<item id="167000670" chance="0.74" /><!-- Manastone: Magic Boost +25 / Crit Strike +7 -->
+			<item id="167000671" chance="0.74" /><!-- Manastone: Magic Boost +25 / Resist Magic +6 -->
+			<item id="167000672" chance="0.74" /><!-- Manastone: Magic Boost +25 / Magical Accuracy +6 -->
+			<item id="167000673" chance="0.74" /><!-- Manastone: Magical Accuracy +12 / HP +42 -->
+			<item id="167000675" chance="0.74" /><!-- Manastone: Magical Accuracy +12 / Magic Boost +12 -->
+			<item id="167000676" chance="0.74" /><!-- Manastone: Magical Accuracy +12 / Accuracy +12 -->
+			<item id="167000677" chance="0.74" /><!-- Manastone: Magical Accuracy +12 / Evasion +12 -->
+			<item id="167000678" chance="0.74" /><!-- Manastone: Magical Accuracy +12 / Parry +12 -->
+			<item id="167000679" chance="0.74" /><!-- Manastone: Magical Accuracy +12 / Block +12 -->
+			<item id="167000680" chance="0.74" /><!-- Manastone: Magical Accuracy +12 / Crit Strike +7 -->
+			<item id="167000681" chance="0.74" /><!-- Manastone: Magical Accuracy +12 / Resist Magic +6 -->
+			<item id="167000813" chance="0.74" /><!-- Manastone: HP +85 / Accuracy +12 -->
+			<item id="167000814" chance="0.74" /><!-- Manastone: HP +85 / Evasion +12 -->
+			<item id="167000815" chance="0.74" /><!-- Manastone: HP +85 / Parry +12 -->
+			<item id="167000816" chance="0.74" /><!-- Manastone: HP +85 / Block +12 -->
+			<item id="167000817" chance="0.74" /><!-- Manastone: HP +85 / Crit Strike +7 -->
+			<item id="167000818" chance="0.74" /><!-- Manastone: HP +85 / Resist Magic+6 -->
+			<item id="167000819" chance="0.74" /><!-- Manastone: HP +85 / Magical Accuracy +6 -->
+			<item id="167000828" chance="0.74" /><!-- Manastone: Evasion +15 / HP +42 -->
+			<item id="167000830" chance="0.74" /><!-- Manastone: Evasion +15 / Accuracy +12 -->
+			<item id="167000831" chance="0.74" /><!-- Manastone: Evasion +15 / Parry +12 -->
+			<item id="167000832" chance="0.74" /><!-- Manastone: Evasion +15 / Block +12 -->
+			<item id="167000833" chance="0.74" /><!-- Manastone: Evasion +15 / Crit Strike +7 -->
+			<item id="167000834" chance="0.74" /><!-- Manastone: Evasion +15 / Resist Magic+6 -->
+			<item id="167000835" chance="0.74" /><!-- Manastone: Evasion +15 / Magical Accuracy +6 -->
+			<item id="167000836" chance="0.74" /><!-- Manastone: Parry +25 / HP +42 -->
+			<item id="167000838" chance="0.74" /><!-- Manastone: Parry +25 / Accuracy +12 -->
+			<item id="167000839" chance="0.74" /><!-- Manastone: Parry +25 / Evasion +12 -->
+			<item id="167000840" chance="0.74" /><!-- Manastone: Parry +25 / Block +12 -->
+			<item id="167000841" chance="0.74" /><!-- Manastone: Parry +25 / Crit Strike +7 -->
+			<item id="167000842" chance="0.74" /><!-- Manastone: Parry +25 / Resist Magic+6 -->
+			<item id="167000843" chance="0.74" /><!-- Manastone: Parry +25 / Magical Accuracy +6 -->
+			<item id="167000844" chance="0.74" /><!-- Manastone: Magical Accuracy +12 / Attack +2 -->
+			<item id="167000682" chance="0.19" /><!-- Manastone: Attack +5 / HP +47 -->
+			<item id="167000684" chance="0.19" /><!-- Manastone: Attack +5 / Accuracy +13 -->
+			<item id="167000685" chance="0.19" /><!-- Manastone: Attack +5 / Evasion +13 -->
+			<item id="167000686" chance="0.19" /><!-- Manastone: Attack +5 / Parry +13 -->
+			<item id="167000687" chance="0.19" /><!-- Manastone: Attack +5 / Block +13 -->
+			<item id="167000688" chance="0.19" /><!-- Manastone: Crit Strike +17 / HP +47 -->
+			<item id="167000690" chance="0.19" /><!-- Manastone: Crit Strike +17 / Attack +2 -->
+			<item id="167000691" chance="0.19" /><!-- Manastone: Crit Strike +17 / Accuracy +13 -->
+			<item id="167000692" chance="0.19" /><!-- Manastone: Crit Strike +17 / Evasion +13 -->
+			<item id="167000693" chance="0.19" /><!-- Manastone: Crit Strike +17 / Parry +13 -->
+			<item id="167000694" chance="0.18" /><!-- Manastone: Crit Strike +17 / Block +13 -->
+			<item id="167000695" chance="0.18" /><!-- Manastone: Crit Strike +17 / Resist Magic +7 -->
+			<item id="167000696" chance="0.18" /><!-- Manastone: Crit Strike +17 / Magical Accuracy +7 -->
+			<item id="167000697" chance="0.18" /><!-- Manastone: Magic Boost +27 / HP +47 -->
+			<item id="167000699" chance="0.18" /><!-- Manastone: Magic Boost +27 / Accuracy +13 -->
+			<item id="167000700" chance="0.18" /><!-- Manastone: Magic Boost +27 / Evasion +13 -->
+			<item id="167000701" chance="0.18" /><!-- Manastone: Magic Boost +27 / Parry +13 -->
+			<item id="167000702" chance="0.18" /><!-- Manastone: Magic Boost +27 / Block +13 -->
+			<item id="167000703" chance="0.18" /><!-- Manastone: Magic Boost +27 / Crit Strike +8 -->
+			<item id="167000704" chance="0.18" /><!-- Manastone: Magic Boost +27 / Resist Magic +7 -->
+			<item id="167000705" chance="0.18" /><!-- Manastone: Magic Boost +27 / Magical Accuracy +7 -->
+			<item id="167000706" chance="0.18" /><!-- Manastone: Magical Accuracy +14 / HP +47 -->
+			<item id="167000708" chance="0.18" /><!-- Manastone: Magical Accuracy +14 / Magic Boost +13 -->
+			<item id="167000709" chance="0.18" /><!-- Manastone: Magical Accuracy +14 / Accuracy +13 -->
+			<item id="167000710" chance="0.18" /><!-- Manastone: Magical Accuracy +14 / Evasion +13 -->
+			<item id="167000711" chance="0.18" /><!-- Manastone: Magical Accuracy +14 / Parry +13 -->
+			<item id="167000712" chance="0.18" /><!-- Manastone: Magical Accuracy +14 / Block +13 -->
+			<item id="167000713" chance="0.18" /><!-- Manastone: Magical Accuracy +14 / Crit Strike +8 -->
+			<item id="167000714" chance="0.18" /><!-- Manastone: Magical Accuracy +14 / Resist Magic +7 -->
+			<item id="167000749" chance="0.18" /><!-- Manastone: Attack +5 / Crit Strike +8 -->
+			<item id="167000750" chance="0.18" /><!-- Manastone: Attack +5 / Resist Magic +7 -->
+			<item id="167000751" chance="0.18" /><!-- Manastone: Attack +5 / Magical Accuracy +7 -->
+			<item id="167000846" chance="0.18" /><!-- Manastone: HP +95 / Accuracy +13 -->
+			<item id="167000847" chance="0.18" /><!-- Manastone: HP +95 / Evasion +13 -->
+			<item id="167000848" chance="0.18" /><!-- Manastone: HP +95 / Parry +13 -->
+			<item id="167000849" chance="0.18" /><!-- Manastone: HP +95 / Block +13 -->
+			<item id="167000850" chance="0.18" /><!-- Manastone: HP +95 / Crit Strike +8 -->
+			<item id="167000851" chance="0.18" /><!-- Manastone: HP +95 / Resist Magic+7 -->
+			<item id="167000852" chance="0.18" /><!-- Manastone: HP +95 / Magical Accuracy +7 -->
+			<item id="167000861" chance="0.18" /><!-- Manastone: Evasion +17 / HP +47 -->
+			<item id="167000863" chance="0.18" /><!-- Manastone: Evasion +17 / Accuracy +13 -->
+			<item id="167000864" chance="0.18" /><!-- Manastone: Evasion +17 / Parry +13 -->
+			<item id="167000865" chance="0.18" /><!-- Manastone: Evasion +17 / Block +13 -->
+			<item id="167000866" chance="0.18" /><!-- Manastone: Evasion +17 / Crit Strike +8 -->
+			<item id="167000867" chance="0.18" /><!-- Manastone: Evasion +17 / Resist Magic+7 -->
+			<item id="167000868" chance="0.18" /><!-- Manastone: Evasion +17 / Magical Accuracy +7 -->
+			<item id="167000869" chance="0.18" /><!-- Manastone: Parry +27 / HP +47 -->
+			<item id="167000871" chance="0.18" /><!-- Manastone: Parry +27 / Accuracy +13 -->
+			<item id="167000872" chance="0.18" /><!-- Manastone: Parry +27 / Evasion +13 -->
+			<item id="167000873" chance="0.18" /><!-- Manastone: Parry +27 / Block +13 -->
+			<item id="167000874" chance="0.18" /><!-- Manastone: Parry +27 / Crit Strike +8 -->
+			<item id="167000875" chance="0.18" /><!-- Manastone: Parry +27 / Resist Magic+7 -->
+			<item id="167000876" chance="0.18" /><!-- Manastone: Parry +27 / Magical Accuracy +7 -->
+			<item id="167000877" chance="0.18" /><!-- Manastone: Magical Accuracy +14 / Attack +2 -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188052561" override="true"><!-- [Event] Consumables Bundle -->
+		<set>
+			<item id="162000066" count="3" chance="16.67" /><!-- Recovery Crystal -->
+			<item id="164002167" count="5" chance="16.67" /><!-- [Event] Drana Coffee -->
+			<item id="164002168" count="3" chance="16.67" /><!-- [Event] Spicy Drana Steak -->
+			<item id="164002169" count="3" chance="16.67" /><!-- [Event] Tasty Drana Steak -->
+			<item id="166100008" count="75" chance="16.66" /><!-- Greater Supplements (Eternal) -->
+			<item id="169000010" count="500" chance="16.66" /><!-- Superior Power Shard -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188052583" override="true"><!-- Sanctuary Conquerer Mark Bundle -->
+		<set>
+			<item id="186000238" count="60" chance="3.23" /><!-- Conqueror's Mark -->
+			<item id="186000238" count="61" chance="3.23" /><!-- Conqueror's Mark -->
+			<item id="186000238" count="62" chance="3.23" /><!-- Conqueror's Mark -->
+			<item id="186000238" count="63" chance="3.23" /><!-- Conqueror's Mark -->
+			<item id="186000238" count="64" chance="3.23" /><!-- Conqueror's Mark -->
+			<item id="186000238" count="65" chance="3.23" /><!-- Conqueror's Mark -->
+			<item id="186000238" count="66" chance="3.23" /><!-- Conqueror's Mark -->
+			<item id="186000238" count="67" chance="3.23" /><!-- Conqueror's Mark -->
+			<item id="186000238" count="68" chance="3.23" /><!-- Conqueror's Mark -->
+			<item id="186000238" count="69" chance="3.23" /><!-- Conqueror's Mark -->
+			<item id="186000238" count="70" chance="3.23" /><!-- Conqueror's Mark -->
+			<item id="186000238" count="71" chance="3.23" /><!-- Conqueror's Mark -->
+			<item id="186000238" count="72" chance="3.23" /><!-- Conqueror's Mark -->
+			<item id="186000238" count="73" chance="3.23" /><!-- Conqueror's Mark -->
+			<item id="186000238" count="74" chance="3.23" /><!-- Conqueror's Mark -->
+			<item id="186000238" count="75" chance="3.23" /><!-- Conqueror's Mark -->
+			<item id="186000238" count="76" chance="3.23" /><!-- Conqueror's Mark -->
+			<item id="186000238" count="77" chance="3.23" /><!-- Conqueror's Mark -->
+			<item id="186000238" count="78" chance="3.22" /><!-- Conqueror's Mark -->
+			<item id="186000238" count="79" chance="3.22" /><!-- Conqueror's Mark -->
+			<item id="186000238" count="80" chance="3.22" /><!-- Conqueror's Mark -->
+			<item id="186000238" count="81" chance="3.22" /><!-- Conqueror's Mark -->
+			<item id="186000238" count="82" chance="3.22" /><!-- Conqueror's Mark -->
+			<item id="186000238" count="83" chance="3.22" /><!-- Conqueror's Mark -->
+			<item id="186000238" count="84" chance="3.22" /><!-- Conqueror's Mark -->
+			<item id="186000238" count="85" chance="3.22" /><!-- Conqueror's Mark -->
+			<item id="186000238" count="86" chance="3.22" /><!-- Conqueror's Mark -->
+			<item id="186000238" count="87" chance="3.22" /><!-- Conqueror's Mark -->
+			<item id="186000238" count="88" chance="3.22" /><!-- Conqueror's Mark -->
+			<item id="186000238" count="89" chance="3.22" /><!-- Conqueror's Mark -->
+			<item id="186000238" count="90" chance="3.22" /><!-- Conqueror's Mark -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188052589" override="true"><!-- [Event] Consumables Bundle -->
+		<set>
+			<item id="162000066" count="3" chance="16.67" /><!-- Recovery Crystal -->
+			<item id="164002167" count="5" chance="16.67" /><!-- [Event] Drana Coffee -->
+			<item id="164002168" count="3" chance="16.67" /><!-- [Event] Spicy Drana Steak -->
+			<item id="164002169" count="3" chance="16.67" /><!-- [Event] Tasty Drana Steak -->
+			<item id="166100008" count="75" chance="16.66" /><!-- Greater Supplements (Eternal) -->
+			<item id="169000010" count="500" chance="16.66" /><!-- Superior Power Shard -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188052600" override="true"><!-- Beritran Supply Box -->
+		<set>
+			<item id="167000682" chance="4.35" /><!-- Manastone: Attack +5 / HP +47 -->
+			<item id="167000684" chance="4.35" /><!-- Manastone: Attack +5 / Accuracy +13 -->
+			<item id="167000687" chance="4.35" /><!-- Manastone: Attack +5 / Block +13 -->
+			<item id="167000749" chance="4.35" /><!-- Manastone: Attack +5 / Crit Strike +8 -->
+			<item id="167000750" chance="4.35" /><!-- Manastone: Attack +5 / Resist Magic +7 -->
+			<item id="167000751" chance="4.35" /><!-- Manastone: Attack +5 / Magical Accuracy +7 -->
+			<item id="167000688" chance="4.35" /><!-- Manastone: Crit Strike +17 / HP +47 -->
+			<item id="167000690" chance="4.35" /><!-- Manastone: Crit Strike +17 / Attack +2 -->
+			<item id="167000691" chance="4.35" /><!-- Manastone: Crit Strike +17 / Accuracy +13 -->
+			<item id="167000694" chance="4.35" /><!-- Manastone: Crit Strike +17 / Block +13 -->
+			<item id="167000695" chance="4.35" /><!-- Manastone: Crit Strike +17 / Resist Magic +7 -->
+			<item id="167000696" chance="4.35" /><!-- Manastone: Crit Strike +17 / Magical Accuracy +7 -->
+			<item id="167000697" chance="4.35" /><!-- Manastone: Magic Boost +27 / HP +47 -->
+			<item id="167000702" chance="4.35" /><!-- Manastone: Magic Boost +27 / Block +13 -->
+			<item id="167000703" chance="4.35" /><!-- Manastone: Magic Boost +27 / Crit Strike +8 -->
+			<item id="167000704" chance="4.35" /><!-- Manastone: Magic Boost +27 / Resist Magic +7 -->
+			<item id="167000705" chance="4.35" /><!-- Manastone: Magic Boost +27 / Magical Accuracy +7 -->
+			<item id="167000706" chance="4.35" /><!-- Manastone: Magical Accuracy +14 / HP +47 -->
+			<item id="167000708" chance="4.34" /><!-- Manastone: Magical Accuracy +14 / Magic Boost +13 -->
+			<item id="167000709" chance="4.34" /><!-- Manastone: Magical Accuracy +14 / Accuracy +13 -->
+			<item id="167000712" chance="4.34" /><!-- Manastone: Magical Accuracy +14 / Block +13 -->
+			<item id="167000713" chance="4.34" /><!-- Manastone: Magical Accuracy +14 / Crit Strike +8 -->
+			<item id="167000714" chance="4.34" /><!-- Manastone: Magical Accuracy +14 / Resist Magic +7 -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188052625" override="true"><!-- [Event] Ice-hot Box -->
+		<set>
+			<item id="162000107" count="5" chance="2.17" /><!-- Saam King's Herbs -->
+			<item id="162000107" count="6" chance="2.17" /><!-- Saam King's Herbs -->
+			<item id="162000107" count="7" chance="2.17" /><!-- Saam King's Herbs -->
+			<item id="162000107" count="8" chance="2.17" /><!-- Saam King's Herbs -->
+			<item id="162000107" count="9" chance="2.17" /><!-- Saam King's Herbs -->
+			<item id="162000107" count="10" chance="2.17" /><!-- Saam King's Herbs -->
+			<item id="186000238" count="50" chance="13" /><!-- Conqueror's Mark -->
+			<item id="186000237" count="75" chance="13" /><!-- Ancient Coin -->
+			<item id="186000409" count="5" chance="1.18" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="6" chance="1.18" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="7" chance="1.18" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="8" chance="1.18" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="9" chance="1.18" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="10" chance="1.18" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="11" chance="1.18" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="12" chance="1.18" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="13" chance="1.18" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="14" chance="1.18" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="15" chance="1.18" /><!-- Daeva's Respite Coin -->
+			<item id="186000243" count="3" chance="8" /><!-- Fragmented Ceramium -->
+			<item id="186000399" count="10" chance="0.5" /><!-- Honorable Conqueror's Mark -->
+			<item id="186000399" count="11" chance="0.5" /><!-- Honorable Conqueror's Mark -->
+			<item id="186000399" count="12" chance="0.5" /><!-- Honorable Conqueror's Mark -->
+			<item id="186000399" count="13" chance="0.5" /><!-- Honorable Conqueror's Mark -->
+			<item id="186000399" count="14" chance="0.5" /><!-- Honorable Conqueror's Mark -->
+			<item id="186000399" count="15" chance="0.5" /><!-- Honorable Conqueror's Mark -->
+			<item id="186000399" count="16" chance="0.5" /><!-- Honorable Conqueror's Mark -->
+			<item id="186000399" count="17" chance="0.5" /><!-- Honorable Conqueror's Mark -->
+			<item id="186000399" count="18" chance="0.5" /><!-- Honorable Conqueror's Mark -->
+			<item id="186000399" count="19" chance="0.5" /><!-- Honorable Conqueror's Mark -->
+			<item id="186000399" count="20" chance="0.5" /><!-- Honorable Conqueror's Mark -->
+			<item id="186000399" count="21" chance="0.5" /><!-- Honorable Conqueror's Mark -->
+			<item id="186000399" count="22" chance="0.5" /><!-- Honorable Conqueror's Mark -->
+			<item id="186000399" count="23" chance="0.5" /><!-- Honorable Conqueror's Mark -->
+			<item id="186000399" count="24" chance="0.5" /><!-- Honorable Conqueror's Mark -->
+			<item id="186000399" count="25" chance="0.5" /><!-- Honorable Conqueror's Mark -->
+			<item id="188054198" chance="8" /><!-- Greater Scroll Bundle -->
+			<item id="166020000" count="3" chance="5" /><!-- Omega Enchantment Stone -->
+			<item id="166030005" count="3" chance="5" /><!-- Tempering Solution -->
+			<item id="166500002" count="2" chance="5" /><!-- Amplification Stone -->
+			<item id="188053295" chance="2" /><!-- Empyrean Plume Chest -->
+			<item id="188053614" chance="2" /><!-- Illusion Godstone Bundle -->
+			<item id="188054238" chance="2" /><!-- Iron Wall Armor Box -->
+			<item id="188053698" chance="2" /><!-- Honorable Weapon Box of Conquest -->
+			<item id="187000121" chance="0.5" /><!-- Hyperion Wings -->
+			<item id="190070017" chance="0.4" /><!-- Sidekick Akumu Summoning Lamp -->
+			<item id="165020020" chance="0.1" /><!-- Noble Weapon Wrapping Scroll (Mythic/Lv. 65 and lower) -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188052626" override="true"><!-- [Event] Cocktail Shaker -->
+		<set race="ELYOS">
+			<item id="160010269" chance="20" /><!-- [Event] Manduri Sour -->
+			<item id="160010270" chance="20" /><!-- [Event] Blue Atreia -->
+			<item id="160010271" chance="20" /><!-- [Event] Ribbit Sunrise -->
+			<item id="160010272" chance="20" /><!-- [Event] Brommeltini -->
+			<item id="182007056" chance="20" /><!-- Shugo Warranty -->
+		</set>
+		<set race="ASMODIANS">
+			<item id="160010269" chance="20" /><!-- [Event] Manduri Sour -->
+			<item id="160010270" chance="20" /><!-- [Event] Blue Atreia -->
+			<item id="160010271" chance="20" /><!-- [Event] Ribbit Sunrise -->
+			<item id="160010272" chance="20" /><!-- [Event] Brommeltini -->
+			<item id="182007057" chance="20" /><!-- Shugo Warranty -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188052627" override="true"><!-- [Event] Bag of Ice -->
+		<set>
+			<item id="188100124" count="3" chance="26.67" /><!-- Ice Block -->
+			<item id="188100124" count="4" chance="26.67" /><!-- Ice Block -->
+			<item id="188100124" count="5" chance="26.66" /><!-- Ice Block -->
+			<item id="188100125" chance="20" /><!-- Ice Pick -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188052670" override="true"><!-- Kamar Victory Box -->
+		<set>
+			<item id="186000243" count="6" /><!-- Fragmented Ceramium -->
+		</set>
+		<set>
+			<item id="186000242" chance="0.5" /><!-- Ceramium Medal -->
+			<item id="162000131" chance="1" /><!-- Fine Bracing Water -->
+			<item id="188052661" chance="3.5" /><!-- Kamar Idian Bundle -->
+			<item id="186000243" chance="7" /><!-- Fragmented Ceramium -->
+			<item id="166000194" chance="8" /><!-- Delta Enchantment Stone -->
+			<item id="160003587" count="5" chance="5" /><!-- Pepento Jelly -->
+			<item id="164000076" count="10" chance="7.5" /><!-- Greater Running Scroll -->
+			<item id="164000079" count="10" chance="7.5" /><!-- Greater Raging Wind Scroll -->
+			<item id="164000073" count="10" chance="7.5" /><!-- Greater Courage Scroll -->
+			<item id="164000134" count="10" chance="7.5" /><!-- Greater Awakening Scroll -->
+			<item id="164000259" count="10" chance="7.5" /><!-- Premium Anti-Shock Scroll -->
+			<item id="164000255" count="10" chance="7.5" /><!-- Fine Crit Strike Scroll -->
+			<item id="164000256" count="10" chance="7.5" /><!-- Fine Crit Spell Scroll -->
+			<item id="162000125" count="10" chance="7.5" /><!-- Superior Wind Serum -->
+			<item id="162000123" count="10" chance="7.5" /><!-- Superior Mana Serum -->
+			<item id="162000122" count="10" chance="7.5" /><!-- Superior Life Serum -->
+		</set>
+		<set chance="65">
+			<item id="152012601" count="2" chance="33.85" /><!-- Conviction Crystal -->
+			<item id="152012603" count="2" chance="66.15" /><!-- Ore of Conviction -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188052719" selectable="true" override="true"><!-- [Event] Dye Bundle -->
+		<set>
+			<item id="169231016" /><!-- Dye: Punky Pink -->
+			<item id="169231017" /><!-- Dye: Indian Pink -->
+			<item id="169231018" /><!-- Dye: Romantic Pink -->
+			<item id="169231019" /><!-- Dye: Baby Yellow -->
+			<item id="169231020" /><!-- Dye: Pastel Orange -->
+			<item id="169231021" /><!-- Dye: Pastel Green Tea -->
+			<item id="169231022" /><!-- Dye: Indian Green -->
+			<item id="169231023" /><!-- Dye: Indian Blue -->
+			<item id="169231024" /><!-- Dye: Sky Blue -->
+			<item id="169231025" /><!-- Dye: Pastel Violet -->
+			<item id="169231026" /><!-- Dye: Light Cobalt -->
+			<item id="169231027" /><!-- Dye: Gray Violet -->
+			<item id="169220028" /><!-- Dye: True White -->
+			<item id="169220029" /><!-- Dye: True Black -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188052721" override="true"><!-- [Event] Manastones of Grace -->
+		<set>
+			<item id="167000682" chance="3.23" /><!-- Manastone: Attack +5 / HP +47 -->
+			<item id="167000684" chance="3.24" /><!-- Manastone: Attack +5 / Accuracy +13 -->
+			<item id="167000687" chance="3.24" /><!-- Manastone: Attack +5 / Block +13 -->
+			<item id="167000688" chance="3.23" /><!-- Manastone: Crit Strike +17 / HP +47 -->
+			<item id="167000690" chance="1.58" /><!-- Manastone: Crit Strike +17 / Attack +2 -->
+			<item id="167000691" chance="3.24" /><!-- Manastone: Crit Strike +17 / Accuracy +13 -->
+			<item id="167000692" chance="3.24" /><!-- Manastone: Crit Strike +17 / Evasion +13 -->
+			<item id="167000693" chance="3.24" /><!-- Manastone: Crit Strike +17 / Parry +13 -->
+			<item id="167000694" chance="3.24" /><!-- Manastone: Crit Strike +17 / Block +13 -->
+			<item id="167000695" chance="1.58" /><!-- Manastone: Crit Strike +17 / Resist Magic +7 -->
+			<item id="167000696" chance="1.58" /><!-- Manastone: Crit Strike +17 / Magical Accuracy +7 -->
+			<item id="167000697" chance="3.23" /><!-- Manastone: Magic Boost +27 / HP +47 -->
+			<item id="167000699" chance="3.24" /><!-- Manastone: Magic Boost +27 / Accuracy +13 -->
+			<item id="167000702" chance="3.24" /><!-- Manastone: Magic Boost +27 / Block +13 -->
+			<item id="167000703" chance="3.24" /><!-- Manastone: Magic Boost +27 / Crit Strike +8 -->
+			<item id="167000704" chance="1.58" /><!-- Manastone: Magic Boost +27 / Resist Magic +7 -->
+			<item id="167000705" chance="1.58" /><!-- Manastone: Magic Boost +27 / Magical Accuracy +7 -->
+			<item id="167000706" chance="3.23" /><!-- Manastone: Magical Accuracy +14 / HP +47 -->
+			<item id="167000708" chance="1.58" /><!-- Manastone: Magical Accuracy +14 / Magic Boost +13 -->
+			<item id="167000709" chance="3.24" /><!-- Manastone: Magical Accuracy +14 / Accuracy +13 -->
+			<item id="167000712" chance="3.24" /><!-- Manastone: Magical Accuracy +14 / Block +13 -->
+			<item id="167000713" chance="3.24" /><!-- Manastone: Magical Accuracy +14 / Crit Strike +8 -->
+			<item id="167000714" chance="1.58" /><!-- Manastone: Magical Accuracy +14 / Resist Magic +7 -->
+			<item id="167000749" chance="1.58" /><!-- Manastone: Attack +5 / Crit Strike +8 -->
+			<item id="167000750" chance="1.58" /><!-- Manastone: Attack +5 / Resist Magic +7 -->
+			<item id="167000751" chance="1.58" /><!-- Manastone: Attack +5 / Magical Accuracy +7 -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188052728" selectable="true" override="true"><!-- [Event] Dramata Wing Chest -->
+		<set>
+			<item id="187050020" /><!-- [Event] Dramata's Bone Wing -->
+			<item id="187050021" /><!-- [Event] Dramata Wings -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188052936" override="true"><!-- Shugo Icebox -->
+		<set player_classes="ARTIST ENGINEER MAGE PRIEST SCOUT WARRIOR">
+			<item id="166200009" chance="45" /><!-- Mythic Weapon Tuning Scroll -->
+			<item id="166200010" chance="45" /><!-- Mythic Armor Tuning Scroll -->
+		</set>
+		<set player_classes="GLADIATOR TEMPLAR">
+			<item id="166200009" chance="45" /><!-- Mythic Weapon Tuning Scroll -->
+			<item id="166200010" chance="45" /><!-- Mythic Armor Tuning Scroll -->
+			<item id="121001450" chance="2" /><!-- Trillirunerk's Combat Necklace -->
+			<item id="120015047" chance="2" /><!-- Trillirunerk's Combat Earrings -->
+			<item id="122001730" chance="2" /><!-- Trillirunerk's Combat Ring -->
+			<item id="123001493" chance="2" /><!-- Noble Emperor Trillirunerk's Belt -->
+			<item id="125004327" chance="2" /><!-- Trillirunerk's Helm -->
+		</set>
+		<set player_classes="ASSASSIN RANGER">
+			<item id="166200009" chance="45" /><!-- Mythic Weapon Tuning Scroll -->
+			<item id="166200010" chance="45" /><!-- Mythic Armor Tuning Scroll -->
+			<item id="121001450" chance="2" /><!-- Trillirunerk's Combat Necklace -->
+			<item id="120015047" chance="2" /><!-- Trillirunerk's Combat Earrings -->
+			<item id="122001730" chance="2" /><!-- Trillirunerk's Combat Ring -->
+			<item id="123001493" chance="2" /><!-- Noble Emperor Trillirunerk's Belt -->
+			<item id="125004325" chance="2" /><!-- Trillirunerk's Hat -->
+		</set>
+		<set player_classes="BARD SORCERER SPIRIT_MASTER">
+			<item id="166200009" chance="45" /><!-- Mythic Weapon Tuning Scroll -->
+			<item id="166200010" chance="45" /><!-- Mythic Armor Tuning Scroll -->
+			<item id="121001449" chance="2" /><!-- Trillirunerk's Magic Necklace -->
+			<item id="120015046" chance="2" /><!-- Trillirunerk's Magic Earrings -->
+			<item id="122001731" chance="2" /><!-- Trillirunerk's Magic Ring -->
+			<item id="123001494" chance="2" /><!-- Noble Emperor Trillirunerk's Waistband -->
+			<item id="125004324" chance="2" /><!-- Trillirunerk's Headband -->
+		</set>
+		<set player_classes="CLERIC RIDER">
+			<item id="166200009" chance="45" /><!-- Mythic Weapon Tuning Scroll -->
+			<item id="166200010" chance="45" /><!-- Mythic Armor Tuning Scroll -->
+			<item id="121001449" chance="2" /><!-- Trillirunerk's Magic Necklace -->
+			<item id="120015046" chance="2" /><!-- Trillirunerk's Magic Earrings -->
+			<item id="122001731" chance="2" /><!-- Trillirunerk's Magic Ring -->
+			<item id="123001494" chance="2" /><!-- Noble Emperor Trillirunerk's Waistband -->
+			<item id="125004326" chance="2" /><!-- Trillirunerk's Chain Helm -->
+		</set>
+		<set player_classes="CHANTER">
+			<item id="166200009" chance="45" /><!-- Mythic Weapon Tuning Scroll -->
+			<item id="166200010" chance="45" /><!-- Mythic Armor Tuning Scroll -->
+			<item id="121001450" chance="2" /><!-- Trillirunerk's Combat Necklace -->
+			<item id="120015047" chance="2" /><!-- Trillirunerk's Combat Earrings -->
+			<item id="122001730" chance="2" /><!-- Trillirunerk's Combat Ring -->
+			<item id="123001493" chance="2" /><!-- Noble Emperor Trillirunerk's Belt -->
+			<item id="125004326" chance="2" /><!-- Trillirunerk's Chain Helm -->
+		</set>
+		<set player_classes="GUNNER">
+			<item id="166200009" chance="45" /><!-- Mythic Weapon Tuning Scroll -->
+			<item id="166200010" chance="45" /><!-- Mythic Armor Tuning Scroll -->
+			<item id="121001449" chance="2" /><!-- Trillirunerk's Magic Necklace -->
+			<item id="120015046" chance="2" /><!-- Trillirunerk's Magic Earrings -->
+			<item id="122001731" chance="2" /><!-- Trillirunerk's Magic Ring -->
+			<item id="123001494" chance="2" /><!-- Noble Emperor Trillirunerk's Waistband -->
+			<item id="125004325" chance="2" /><!-- Trillirunerk's Hat -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188052986" override="true"><!-- +1 Snowball -->
+		<set race="ELYOS">
+			<item id="188052987" chance="90" /><!-- +2 Snowball -->
+			<item id="188052988" chance="5" /><!-- +3 Snowball -->
+			<item id="188052989" chance="1" /><!-- +4 Snowball -->
+			<item id="182007148" chance="1" /><!-- [Event] Snowflake Crystal -->
+			<bundle chance="0.43">
+				<item id="186000236" count="5" /><!-- Blood Mark -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+			<bundle chance="0.43">
+				<item id="164000130" count="5" /><!-- Major Spell Resist Scroll -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+			<bundle chance="0.43">
+				<item id="164000126" count="5" /><!-- Major Strike Resist Scroll -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+			<bundle chance="0.43">
+				<item id="160010101" count="2" /><!-- Summer-Loving Inquin Form Candy -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+			<bundle chance="0.43">
+				<item id="186000147" /><!-- Mithril Medal -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+			<bundle chance="0.43">
+				<item id="162002030" count="10" /><!-- [Event] Premium Restoration Serum -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+			<bundle chance="0.42">
+				<item id="186000130" count="250" /><!-- Crucible Insignia -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+		</set>
+		<set race="ASMODIANS">
+			<item id="188052987" chance="90" /><!-- +2 Snowball -->
+			<item id="188052988" chance="5" /><!-- +3 Snowball -->
+			<item id="188052989" chance="1" /><!-- +4 Snowball -->
+			<item id="182007148" chance="1" /><!-- [Event] Snowflake Crystal -->
+			<bundle chance="0.43">
+				<item id="186000236" count="5" /><!-- Blood Mark -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+			<bundle chance="0.43">
+				<item id="164000130" count="5" /><!-- Major Spell Resist Scroll -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+			<bundle chance="0.43">
+				<item id="164000126" count="5" /><!-- Major Strike Resist Scroll -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+			<bundle chance="0.43">
+				<item id="160010102" count="2" /><!-- Summer-Loving Inquin Form Candy -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+			<bundle chance="0.43">
+				<item id="186000147" /><!-- Mithril Medal -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+			<bundle chance="0.43">
+				<item id="162002030" count="10" /><!-- [Event] Premium Restoration Serum -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+			<bundle chance="0.42">
+				<item id="186000130" count="250" /><!-- Crucible Insignia -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+		</set>
+	</decomposable>
+	<decomposable item_id="188052987" override="true"><!-- +2 Snowball -->
+		<set race="ELYOS">
+			<item id="188052988" chance="83" /><!-- +3 Snowball -->
+			<item id="188052989" chance="5" /><!-- +4 Snowball -->
+			<item id="188052990" chance="1" /><!-- +5 Snowball -->
+			<item id="182007148" chance="2.75" /><!-- [Event] Snowflake Crystal -->
+			<bundle chance="1.18">
+				<item id="186000236" count="5" /><!-- Blood Mark -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+			<bundle chance="1.18">
+				<item id="164000130" count="5" /><!-- Major Spell Resist Scroll -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+			<bundle chance="1.18">
+				<item id="164000126" count="5" /><!-- Major Strike Resist Scroll -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+			<bundle chance="1.18">
+				<item id="160010101" count="2" /><!-- Summer-Loving Inquin Form Candy -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+			<bundle chance="1.18">
+				<item id="186000147" /><!-- Mithril Medal -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+			<bundle chance="1.18">
+				<item id="162002030" count="10" /><!-- [Event] Premium Restoration Serum -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+			<bundle chance="1.17">
+				<item id="186000130" count="250" /><!-- Crucible Insignia -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+		</set>
+		<set race="ASMODIANS">
+			<item id="188052988" chance="83" /><!-- +3 Snowball -->
+			<item id="188052989" chance="5" /><!-- +4 Snowball -->
+			<item id="188052990" chance="1" /><!-- +5 Snowball -->
+			<item id="182007148" chance="2.75" /><!-- [Event] Snowflake Crystal -->
+			<bundle chance="1.18">
+				<item id="186000236" count="5" /><!-- Blood Mark -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+			<bundle chance="1.18">
+				<item id="164000130" count="5" /><!-- Major Spell Resist Scroll -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+			<bundle chance="1.18">
+				<item id="164000126" count="5" /><!-- Major Strike Resist Scroll -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+			<bundle chance="1.18">
+				<item id="160010102" count="2" /><!-- Summer-Loving Inquin Form Candy -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+			<bundle chance="1.18">
+				<item id="186000147" /><!-- Mithril Medal -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+			<bundle chance="1.18">
+				<item id="162002030" count="10" /><!-- [Event] Premium Restoration Serum -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+			<bundle chance="1.17">
+				<item id="186000130" count="250" /><!-- Crucible Insignia -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+		</set>
+	</decomposable>
+	<decomposable item_id="188052988" override="true"><!-- +3 Snowball -->
+		<set race="ELYOS">
+			<item id="188052989" chance="76" /><!-- +4 Snowball -->
+			<item id="188052990" chance="5" /><!-- +5 Snowball -->
+			<item id="188052991" chance="1" /><!-- +6 Snowball -->
+			<item id="182007148" chance="4.5" /><!-- [Event] Snowflake Crystal -->
+			<bundle chance="1.93">
+				<item id="186000236" count="5" /><!-- Blood Mark -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+			<bundle chance="1.93">
+				<item id="164000130" count="5" /><!-- Major Spell Resist Scroll -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+			<bundle chance="1.93">
+				<item id="164000126" count="5" /><!-- Major Strike Resist Scroll -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+			<bundle chance="1.93">
+				<item id="160010101" count="2" /><!-- Summer-Loving Inquin Form Candy -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+			<bundle chance="1.93">
+				<item id="186000147" /><!-- Mithril Medal -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+			<bundle chance="1.93">
+				<item id="162002030" count="10" /><!-- [Event] Premium Restoration Serum -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+			<bundle chance="1.92">
+				<item id="186000130" count="250" /><!-- Crucible Insignia -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+		</set>
+		<set race="ASMODIANS">
+			<item id="188052989" chance="76" /><!-- +4 Snowball -->
+			<item id="188052990" chance="5" /><!-- +5 Snowball -->
+			<item id="188052991" chance="1" /><!-- +6 Snowball -->
+			<item id="182007148" chance="4.5" /><!-- [Event] Snowflake Crystal -->
+			<bundle chance="1.93">
+				<item id="186000236" count="5" /><!-- Blood Mark -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+			<bundle chance="1.93">
+				<item id="164000130" count="5" /><!-- Major Spell Resist Scroll -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+			<bundle chance="1.93">
+				<item id="164000126" count="5" /><!-- Major Strike Resist Scroll -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+			<bundle chance="1.93">
+				<item id="160010102" count="2" /><!-- Summer-Loving Inquin Form Candy -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+			<bundle chance="1.93">
+				<item id="186000147" /><!-- Mithril Medal -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+			<bundle chance="1.93">
+				<item id="162002030" count="10" /><!-- [Event] Premium Restoration Serum -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+			<bundle chance="1.92">
+				<item id="186000130" count="250" /><!-- Crucible Insignia -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+		</set>
+	</decomposable>
+	<decomposable item_id="188052989" override="true"><!-- +4 Snowball -->
+		<set race="ELYOS">
+			<item id="188052990" chance="69" /><!-- +5 Snowball -->
+			<item id="188052991" chance="5" /><!-- +6 Snowball -->
+			<item id="188052992" chance="1" /><!-- +7 Snowball -->
+			<item id="182007148" chance="6.25" /><!-- [Event] Snowflake Crystal -->
+			<bundle chance="2.68">
+				<item id="186000236" count="5" /><!-- Blood Mark -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+			<bundle chance="2.68">
+				<item id="164000130" count="5" /><!-- Major Spell Resist Scroll -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+			<bundle chance="2.68">
+				<item id="164000126" count="5" /><!-- Major Strike Resist Scroll -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+			<bundle chance="2.68">
+				<item id="160010101" count="2" /><!-- Summer-Loving Inquin Form Candy -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+			<bundle chance="2.68">
+				<item id="186000147" /><!-- Mithril Medal -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+			<bundle chance="2.68">
+				<item id="162002030" count="10" /><!-- [Event] Premium Restoration Serum -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+			<bundle chance="2.67">
+				<item id="186000130" count="250" /><!-- Crucible Insignia -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+		</set>
+		<set race="ASMODIANS">
+			<item id="188052990" chance="69" /><!-- +5 Snowball -->
+			<item id="188052991" chance="5" /><!-- +6 Snowball -->
+			<item id="188052992" chance="1" /><!-- +7 Snowball -->
+			<item id="182007148" chance="6.25" /><!-- [Event] Snowflake Crystal -->
+			<bundle chance="2.68">
+				<item id="186000236" count="5" /><!-- Blood Mark -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+			<bundle chance="2.68">
+				<item id="164000130" count="5" /><!-- Major Spell Resist Scroll -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+			<bundle chance="2.68">
+				<item id="164000126" count="5" /><!-- Major Strike Resist Scroll -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+			<bundle chance="2.68">
+				<item id="160010102" count="2" /><!-- Summer-Loving Inquin Form Candy -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+			<bundle chance="2.68">
+				<item id="186000147" /><!-- Mithril Medal -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+			<bundle chance="2.68">
+				<item id="162002030" count="10" /><!-- [Event] Premium Restoration Serum -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+			<bundle chance="2.67">
+				<item id="186000130" count="250" /><!-- Crucible Insignia -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+		</set>
+	</decomposable>
+	<decomposable item_id="188052990" override="true"><!-- +5 Snowball -->
+		<set race="ELYOS">
+			<item id="188052991" chance="62" /><!-- +6 Snowball -->
+			<item id="188052992" chance="5" /><!-- +7 Snowball -->
+			<item id="188052993" chance="1" /><!-- +8 Snowball -->
+			<item id="182007148" chance="8" /><!-- [Event] Snowflake Crystal -->
+			<bundle chance="3.43">
+				<item id="186000236" count="5" /><!-- Blood Mark -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+			<bundle chance="3.43">
+				<item id="164000130" count="5" /><!-- Major Spell Resist Scroll -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+			<bundle chance="3.43">
+				<item id="164000126" count="5" /><!-- Major Strike Resist Scroll -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+			<bundle chance="3.43">
+				<item id="160010101" count="2" /><!-- Summer-Loving Inquin Form Candy -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+			<bundle chance="3.43">
+				<item id="186000147" /><!-- Mithril Medal -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+			<bundle chance="3.43">
+				<item id="162002030" count="10" /><!-- [Event] Premium Restoration Serum -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+			<bundle chance="3.42">
+				<item id="186000130" count="250" /><!-- Crucible Insignia -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+		</set>
+		<set race="ASMODIANS">
+			<item id="188052991" chance="62" /><!-- +6 Snowball -->
+			<item id="188052992" chance="5" /><!-- +7 Snowball -->
+			<item id="188052993" chance="1" /><!-- +8 Snowball -->
+			<item id="182007148" chance="8" /><!-- [Event] Snowflake Crystal -->
+			<bundle chance="3.43">
+				<item id="186000236" count="5" /><!-- Blood Mark -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+			<bundle chance="3.43">
+				<item id="164000130" count="5" /><!-- Major Spell Resist Scroll -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+			<bundle chance="3.43">
+				<item id="164000126" count="5" /><!-- Major Strike Resist Scroll -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+			<bundle chance="3.43">
+				<item id="160010102" count="2" /><!-- Summer-Loving Inquin Form Candy -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+			<bundle chance="3.43">
+				<item id="186000147" /><!-- Mithril Medal -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+			<bundle chance="3.43">
+				<item id="162002030" count="10" /><!-- [Event] Premium Restoration Serum -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+			<bundle chance="3.42">
+				<item id="186000130" count="250" /><!-- Crucible Insignia -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+		</set>
+	</decomposable>
+	<decomposable item_id="188052991" override="true"><!-- +6 Snowball -->
+		<set>
+			<item id="188052992" chance="55" /><!-- +7 Snowball -->
+			<item id="188052993" chance="5" /><!-- +8 Snowball -->
+			<item id="188052994" chance="1" /><!-- +9 Snowball -->
+			<bundle chance="29.25">
+				<item id="188052996" /><!-- [Event] Broken Snow Bundle -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+			<item id="182007148" chance="9.75" /><!-- [Event] Snowflake Crystal -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188052992" override="true"><!-- +7 Snowball -->
+		<set>
+			<item id="188052993" chance="48" /><!-- +8 Snowball -->
+			<item id="188052994" chance="5" /><!-- +9 Snowball -->
+			<item id="188052994" chance="1" /><!-- +9 Snowball -->
+			<bundle chance="34.5">
+				<item id="188052996" /><!-- [Event] Broken Snow Bundle -->
+				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+			</bundle>
+			<item id="182007148" chance="11.5" /><!-- [Event] Snowflake Crystal -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188052993" override="true"><!-- +8 Snowball -->
+		<set>
+			<item id="188052994" chance="39" /><!-- +9 Snowball -->
+			<item id="188052995" chance="1" /><!-- +10 Brilliant Snowball -->
+			<item id="188052997" chance="60" /><!-- [Event] Crushed Snow Bundle -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188052994" override="true"><!-- +9 Snowball -->
+		<set>
+			<item id="188052995" chance="25" /><!-- +10 Brilliant Snowball -->
+			<item id="188052998" chance="75" /><!-- [Event] Noble Melted Bundle -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188052996" override="true"><!-- [Event] Broken Snow Bundle -->
+		<set>
+			<item id="188053636" chance="20" /><!-- Blood Mark Box -->
+			<item id="188053609" count="2" chance="20" /><!-- [Event] Level 60 Composite Manastone Bundle -->
+			<item id="166000194" count="3" chance="20" /><!-- Delta Enchantment Stone -->
+			<item id="166100020" count="250" chance="20" /><!-- [Stamp] High Grade Enchanting Supplement (Eternal) -->
+			<item id="166100023" count="250" chance="20" /><!-- [Stamp] High Grade Enchanting Supplement (Mythic) -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188052997" override="true"><!-- [Event] Crushed Snow Bundle -->
+		<set>
+			<item id="188051879" chance="16.67" /><!-- Solorius Furniture Set Box -->
+			<item id="188053610" count="2" chance="16.67" /><!-- [Event] Level 70 Composite Manastone Bundle -->
+			<item id="166500002" count="2" chance="16.67" /><!-- Amplification Stone -->
+			<item id="166030005" count="2" chance="16.67" /><!-- Tempering Solution -->
+			<item id="188053714" chance="16.66" /><!-- Captured Shelter Idian Bundle -->
+			<item id="188053113" count="3" chance="16.66" /><!-- Ahserion's Flight Ancient Manastone Bundle -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188052998" override="true"><!-- [Event] Noble Melted Bundle -->
+		<set>
+			<item id="188053702" chance="25" /><!-- Vasharti's Equipment Box -->
+			<item id="188053000" chance="25" /><!-- [Event] Assured Greater Felicitous Socketing Box -->
+			<item id="166200013" count="2" chance="25" /><!-- Enduring Mythic Weapon Tuning Scroll -->
+			<item id="166200014" count="2" chance="25" /><!-- Enduring Mythic Armor Tuning Scroll -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188052999" override="true"><!-- [Event] Brilliant Ice Prism -->
+		<set>
+			<item id="188053728" chance="16.67" /><!-- Beritra's Equipment Box -->
+			<item id="188053618" chance="16.67" /><!-- Honorable Elim's Idian Bundle -->
+			<item id="188053295" chance="16.67" /><!-- Empyrean Plume Chest -->
+			<item id="188053700" chance="16.67" /><!-- Honorable Accessory Box of Conquest -->
+			<item id="188950015" chance="16.66" /><!-- Special Courier Pass (Eternal/Lv. 61-65) -->
+			<item id="188950019" chance="16.66" /><!-- Special Courier Pass (Mythic/Lv. 61-65) -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053004" selectable="true" override="true"><!-- [Event] Dragon Lord's Weapon Chest -->
+		<set>
+			<item id="100001405" /><!-- Distorted Dragon Lord's Wrath -->
+			<item id="100001407" /><!-- Dragon Lord's Wrath -->
+			<item id="100101082" /><!-- Distorted Dragon Lord's Delight -->
+			<item id="100101084" /><!-- Dragon Lord's Delight -->
+			<item id="100201244" /><!-- Distorted Dragon Lord's Murderous Intent -->
+			<item id="100201246" /><!-- Dragon Lord's Murderous Intent -->
+			<item id="100501049" /><!-- Dragon Lord's Arrogance -->
+			<item id="100501092" /><!-- Dragon Lord's Arrogance -->
+			<item id="100601105" /><!-- Dragon Lord's Distrust -->
+			<item id="100601148" /><!-- Dragon Lord's Distrust -->
+			<item id="100901098" /><!-- Distorted Dragon Lord's Hatred -->
+			<item id="100901100" /><!-- Dragon Lord's Hatred -->
+			<item id="101301035" /><!-- Distorted Dragon Lord's Greed -->
+			<item id="101301037" /><!-- Dragon Lord's Greed -->
+			<item id="101501116" /><!-- Distorted Dragon Lord's Pride -->
+			<item id="101501118" /><!-- Dragon Lord's Pride -->
+			<item id="101701085" /><!-- Dragon Lord's Envy -->
+			<item id="101701129" /><!-- Dragon Lord's Envy -->
+			<item id="101800858" /><!-- Dragon Lord's Pistol -->
+			<item id="101800850" /><!-- Dragon Lord's Resolve -->
+			<item id="101900856" /><!-- Dragon Lord's Conviction -->
+			<item id="101900848" /><!-- Dragon Lord's Courage -->
+			<item id="102000890" /><!-- Dragon Lord's Harp -->
+			<item id="102000882" /><!-- Dragon Lord's Passion -->
+			<item id="102100742" /><!-- Dragon Lord's Passage -->
+			<item id="115001410" /><!-- Dragon Lord's Sigh -->
+			<item id="115001459" /><!-- Dragon Lord's Sigh -->
+			<item id="115001411" /><!-- Dragon Lord's Agony -->
+			<item id="115001460" /><!-- Dragon Lord's Agony -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053030" override="true"><!-- Idgel Dome Reward Box -->
+		<set>
+			<item id="152012598" count="2" chance="34" /><!-- Heart of Destruction -->
+			<item id="152012599" count="2" chance="46" /><!-- Heart of Protection -->
+			<bundle chance="10">
+				<item id="152012598" count="2" /><!-- Heart of Destruction -->
+				<item id="188950017" /><!-- Special Courier Pass (Abyss Eternal/Lv. 61-65) -->
+			</bundle>
+			<bundle chance="10">
+				<item id="152012599" count="2" /><!-- Heart of Protection -->
+				<item id="188950017" /><!-- Special Courier Pass (Abyss Eternal/Lv. 61-65) -->
+			</bundle>
+		</set>
+	</decomposable>
+	<decomposable item_id="188053031" override="true"><!-- Idgel Dome Consolation Prize -->
+		<set>
+			<item id="152012598" chance="34" /><!-- Heart of Destruction -->
+			<item id="152012599" chance="66" /><!-- Heart of Protection -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053106" selectable="true" override="true"><!-- Ahserion's Weapon Box -->
+		<set player_classes="GLADIATOR">
+			<item id="100001684" /><!-- Awakened Ahserion's Sword -->
+			<item id="100201457" /><!-- Awakened Ahserion's Dagger -->
+			<item id="100901312" /><!-- Awakened Ahserion's Greatsword -->
+			<item id="101301217" /><!-- Awakened Ahserion's Polearm -->
+			<item id="101701321" /><!-- Awakened Ahserion's Bow -->
+			<item id="115001704" /><!-- Awakened Ahserion's Shield -->
+		</set>
+		<set player_classes="TEMPLAR">
+			<item id="100001684" /><!-- Awakened Ahserion's Sword -->
+			<item id="100901312" /><!-- Awakened Ahserion's Greatsword -->
+			<item id="115001704" /><!-- Awakened Ahserion's Shield -->
+		</set>
+		<set player_classes="ASSASSIN RANGER">
+			<item id="100001684" /><!-- Awakened Ahserion's Sword -->
+			<item id="100201457" /><!-- Awakened Ahserion's Dagger -->
+			<item id="101701321" /><!-- Awakened Ahserion's Bow -->
+		</set>
+		<set player_classes="SORCERER SPIRIT_MASTER">
+			<item id="100501270" /><!-- Awakened Ahserion's Orb -->
+			<item id="100601380" /><!-- Awakened Ahserion's Spellbook -->
+		</set>
+		<set player_classes="CHANTER CLERIC">
+			<item id="100101283" /><!-- Awakened Ahserion's Mace -->
+			<item id="101501306" /><!-- Awakened Ahserion's Staff -->
+			<item id="115001704" /><!-- Awakened Ahserion's Shield -->
+		</set>
+		<set player_classes="RIDER">
+			<item id="101801172" /><!-- Awakened Ahserion's Pistol -->
+			<item id="102101005" /><!-- Awakened Ahserion's Cipher-Blade -->
+		</set>
+		<set player_classes="GUNNER">
+			<item id="101801172" /><!-- Awakened Ahserion's Pistol -->
+			<item id="101901083" /><!-- Awakened Ahserion's Aethercannon -->
+		</set>
+		<set player_classes="BARD">
+			<item id="102001199" /><!-- Awakened Ahserion's Harp -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053112" override="true"><!-- Ahserion's Flight Composite Manastone Bundle -->
+		<set>
+			<item id="167000682" count="2" chance="0.53" /><!-- Manastone: Attack +5 / HP +47 -->
+			<item id="167000684" count="2" chance="0.3" /><!-- Manastone: Attack +5 / Accuracy +13 -->
+			<item id="167000685" count="2" chance="2.33" /><!-- Manastone: Attack +5 / Evasion +13 -->
+			<item id="167000686" count="2" chance="2.33" /><!-- Manastone: Attack +5 / Parry +13 -->
+			<item id="167000687" count="2" chance="2.33" /><!-- Manastone: Attack +5 / Block +13 -->
+			<item id="167000688" count="2" chance="0.53" /><!-- Manastone: Crit Strike +17 / HP +47 -->
+			<item id="167000690" count="2" chance="0.3" /><!-- Manastone: Crit Strike +17 / Attack +2 -->
+			<item id="167000691" count="2" chance="0.3" /><!-- Manastone: Crit Strike +17 / Accuracy +13 -->
+			<item id="167000692" count="2" chance="2.33" /><!-- Manastone: Crit Strike +17 / Evasion +13 -->
+			<item id="167000693" count="2" chance="2.33" /><!-- Manastone: Crit Strike +17 / Parry +13 -->
+			<item id="167000694" count="2" chance="2.33" /><!-- Manastone: Crit Strike +17 / Block +13 -->
+			<item id="167000695" count="2" chance="0.3" /><!-- Manastone: Crit Strike +17 / Resist Magic +7 -->
+			<item id="167000696" count="2" chance="0.3" /><!-- Manastone: Crit Strike +17 / Magical Accuracy +7 -->
+			<item id="167000697" count="2" chance="0.53" /><!-- Manastone: Magic Boost +27 / HP +47 -->
+			<item id="167000699" count="2" chance="2.33" /><!-- Manastone: Magic Boost +27 / Accuracy +13 -->
+			<item id="167000700" count="2" chance="2.33" /><!-- Manastone: Magic Boost +27 / Evasion +13 -->
+			<item id="167000701" count="2" chance="2.33" /><!-- Manastone: Magic Boost +27 / Parry +13 -->
+			<item id="167000702" count="2" chance="2.33" /><!-- Manastone: Magic Boost +27 / Block +13 -->
+			<item id="167000703" count="2" chance="2.33" /><!-- Manastone: Magic Boost +27 / Crit Strike +8 -->
+			<item id="167000704" count="2" chance="0.3" /><!-- Manastone: Magic Boost +27 / Resist Magic +7 -->
+			<item id="167000705" count="2" chance="0.3" /><!-- Manastone: Magic Boost +27 / Magical Accuracy +7 -->
+			<item id="167000706" count="2" chance="0.53" /><!-- Manastone: Magical Accuracy +14 / HP +47 -->
+			<item id="167000708" count="2" chance="0.3" /><!-- Manastone: Magical Accuracy +14 / Magic Boost +13 -->
+			<item id="167000709" count="2" chance="2.33" /><!-- Manastone: Magical Accuracy +14 / Accuracy +13 -->
+			<item id="167000710" count="2" chance="2.33" /><!-- Manastone: Magical Accuracy +14 / Evasion +13 -->
+			<item id="167000711" count="2" chance="2.33" /><!-- Manastone: Magical Accuracy +14 / Parry +13 -->
+			<item id="167000712" count="2" chance="2.33" /><!-- Manastone: Magical Accuracy +14 / Block +13 -->
+			<item id="167000713" count="2" chance="0.3" /><!-- Manastone: Magical Accuracy +14 / Crit Strike +8 -->
+			<item id="167000714" count="2" chance="0.3" /><!-- Manastone: Magical Accuracy +14 / Resist Magic +7 -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053117" override="true"><!-- Ahserion's Glory Reward Box -->
+		<set>
+			<item id="188053109" /><!-- Ahserion's Equipment Box -->
+		</set>
+		<set>
+			<item id="188053112" /><!-- Ahserion's Flight Composite Manastone Bundle -->
+		</set>
+		<set>
+			<item id="188053113" /><!-- Ahserion's Flight Ancient Manastone Bundle -->
+		</set>
+		<set chance="10">
+			<item id="188053115" /><!-- Ahserion's Flight Godstone Bundle -->
+		</set>
+		<set>
+			<item id="188053090" /><!-- Ahserion's Flight Champion's Bundle -->
+		</set>
+		<set chance="10">
+			<item id="188053116" /><!-- Ahserion's Flight Recharger Bundle -->
+		</set>
+		<set>
+			<item id="188053110" /><!-- Ahserion's Flight Battlefield Material Bundle -->
+		</set>
+		<set>
+			<item id="186000242" count="4" /><!-- Ceramium Medal -->
+		</set>
+		<set>
+			<item id="169610148" /><!-- [Title] Ahserion Conqueror (3 days) -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053132" override="true"><!-- Altar of Avarice Fortress Siege Defense Reward Box -->
+		<set>
+			<item id="186000242" count="3" /><!-- Ceramium Medal -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053133" override="true"><!-- Temple of Scales Fortress Siege Defense Reward Box -->
+		<set>
+			<item id="186000242" count="3" /><!-- Ceramium Medal -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053134" override="true"><!-- Vorgaltem Citadel Fortress Siege Defense Reward Box -->
+		<set>
+			<item id="186000242" count="3" /><!-- Ceramium Medal -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053135" override="true"><!-- Crimson Temple Fortress Siege Defense Reward Box -->
+		<set>
+			<item id="186000242" count="3" /><!-- Ceramium Medal -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053140" override="true"><!-- Wealhtheow's Keep Assault Reward Box: Grade 1 -->
+		<set>
+			<item id="186000242" count="4" /><!-- Ceramium Medal -->
+		</set>
+		<set>
+			<item id="186000051" chance="30" /><!-- Major Ancient Crown -->
+			<item id="186000052" chance="25" /><!-- Greater Ancient Crown -->
+			<item id="186000053" chance="25" /><!-- Ancient Crown -->
+			<item id="186000054" chance="20" /><!-- Lesser Ancient Crown -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053141" override="true"><!-- Wealhtheow's Keep Assault Reward Box: Grade 2 -->
+		<set>
+			<item id="186000242" count="3" /><!-- Ceramium Medal -->
+		</set>
+		<set>
+			<item id="186000055" chance="30" /><!-- Major Ancient Goblet -->
+			<item id="186000056" chance="25" /><!-- Greater Ancient Goblet -->
+			<item id="186000057" chance="25" /><!-- Ancient Goblet -->
+			<item id="186000058" chance="20" /><!-- Lesser Ancient Goblet -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053142" override="true"><!-- Wealhtheow's Keep Assault Reward Box: Grade 3 -->
+		<set>
+			<item id="186000242" count="2" /><!-- Ceramium Medal -->
+		</set>
+		<set>
+			<item id="186000059" chance="30" /><!-- Major Ancient Seal -->
+			<item id="186000060" chance="25" /><!-- Greater Ancient Seal -->
+			<item id="186000061" chance="25" /><!-- Ancient Seal -->
+			<item id="186000062" chance="20" /><!-- Lesser Ancient Seal -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053159" override="true"><!-- Altar of Avarice Assault Reward Box: Grade 1 -->
+		<set>
+			<item id="186000242" count="3" /><!-- Ceramium Medal -->
+		</set>
+		<set race="ELYOS">
+			<item id="188100160" /><!-- Altar of Avarice Orb -->
+		</set>
+		<set race="ASMODIANS">
+			<item id="188100164" /><!-- Altar of Avarice Bead -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053161" override="true"><!-- Altar of Avarice Assault Reward Box: Grade 3 -->
+		<set>
+			<item id="186000242" /><!-- Ceramium Medal -->
+		</set>
+		<set>
+			<item id="186000059" chance="25" /><!-- Major Ancient Seal -->
+			<item id="186000060" chance="25" /><!-- Greater Ancient Seal -->
+			<item id="186000061" chance="25" /><!-- Ancient Seal -->
+			<item id="186000062" chance="25" /><!-- Lesser Ancient Seal -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053162" override="true"><!-- Altar of Avarice Assault Reward Box: Grade 4 -->
+		<set>
+			<item id="186000147" count="2" /><!-- Mithril Medal -->
+		</set>
+		<set>
+			<item id="186000063" chance="25" /><!-- Major Ancient Icon -->
+			<item id="186000064" chance="25" /><!-- Greater Ancient Icon -->
+			<item id="186000065" chance="25" /><!-- Ancient Icon -->
+			<item id="186000066" chance="25" /><!-- Lesser Ancient Icon -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053163" override="true"><!-- Temple of Scales Assault Reward Box: Grade 1 -->
+		<set>
+			<item id="186000242" count="3" /><!-- Ceramium Medal -->
+		</set>
+		<set race="ELYOS">
+			<item id="188100161" /><!-- Temple of Scales Orb -->
+		</set>
+		<set race="ASMODIANS">
+			<item id="188100165" /><!-- Temple of Scales Bead -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053165" override="true"><!-- Temple of Scales Assault Reward Box: Grade 3 -->
+		<set>
+			<item id="186000242" /><!-- Ceramium Medal -->
+		</set>
+		<set>
+			<item id="186000059" chance="25" /><!-- Major Ancient Seal -->
+			<item id="186000060" chance="25" /><!-- Greater Ancient Seal -->
+			<item id="186000061" chance="25" /><!-- Ancient Seal -->
+			<item id="186000062" chance="25" /><!-- Lesser Ancient Seal -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053166" override="true"><!-- Temple of Scales Assault Reward Box: Grade 4 -->
+		<set>
+			<item id="186000147" count="2" /><!-- Mithril Medal -->
+		</set>
+		<set>
+			<item id="186000063" chance="25" /><!-- Major Ancient Icon -->
+			<item id="186000064" chance="25" /><!-- Greater Ancient Icon -->
+			<item id="186000065" chance="25" /><!-- Ancient Icon -->
+			<item id="186000066" chance="25" /><!-- Lesser Ancient Icon -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053167" override="true"><!-- Crimson Temple Assault Reward Box: Grade 1 -->
+		<set>
+			<item id="186000242" count="3" /><!-- Ceramium Medal -->
+		</set>
+		<set race="ELYOS">
+			<item id="188100162" /><!-- Crimson Temple Orb -->
+		</set>
+		<set race="ASMODIANS">
+			<item id="188100166" /><!-- Crimson Temple Bead -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053169" override="true"><!-- Crimson Temple Assault Reward Box: Grade 3 -->
+		<set>
+			<item id="186000242" /><!-- Ceramium Medal -->
+		</set>
+		<set>
+			<item id="186000059" chance="25" /><!-- Major Ancient Seal -->
+			<item id="186000060" chance="25" /><!-- Greater Ancient Seal -->
+			<item id="186000061" chance="25" /><!-- Ancient Seal -->
+			<item id="186000062" chance="25" /><!-- Lesser Ancient Seal -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053170" override="true"><!-- Crimson Temple Assault Reward Box: Grade 4 -->
+		<set>
+			<item id="186000147" count="2" /><!-- Mithril Medal -->
+		</set>
+		<set>
+			<item id="186000063" chance="25" /><!-- Major Ancient Icon -->
+			<item id="186000064" chance="25" /><!-- Greater Ancient Icon -->
+			<item id="186000065" chance="25" /><!-- Ancient Icon -->
+			<item id="186000066" chance="25" /><!-- Lesser Ancient Icon -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053171" override="true"><!-- Vorgaltem Citadel Assault Reward Box: Grade 1 -->
+		<set>
+			<item id="186000242" count="3" /><!-- Ceramium Medal -->
+		</set>
+		<set race="ELYOS">
+			<item id="188100163" /><!-- Vorgaltem Citadel Orb -->
+		</set>
+		<set race="ASMODIANS">
+			<item id="188100167" /><!-- Vorgaltem Citadel Bead -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053173" override="true"><!-- Vorgaltem Citadel Assault Reward Box: Grade 3 -->
+		<set>
+			<item id="186000242" /><!-- Ceramium Medal -->
+		</set>
+		<set>
+			<item id="186000059" chance="25" /><!-- Major Ancient Seal -->
+			<item id="186000060" chance="25" /><!-- Greater Ancient Seal -->
+			<item id="186000061" chance="25" /><!-- Ancient Seal -->
+			<item id="186000062" chance="25" /><!-- Lesser Ancient Seal -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053174" override="true"><!-- Vorgaltem Citadel Assault Reward Box: Grade 4 -->
+		<set>
+			<item id="186000147" count="2" /><!-- Mithril Medal -->
+		</set>
+		<set>
+			<item id="186000063" chance="25" /><!-- Major Ancient Icon -->
+			<item id="186000064" chance="25" /><!-- Greater Ancient Icon -->
+			<item id="186000065" chance="25" /><!-- Ancient Icon -->
+			<item id="186000066" chance="25" /><!-- Lesser Ancient Icon -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053185" override="true"><!-- [Event] Wishing Soup -->
+		<set>
+			<item id="162000124" count="10" chance="13.74" /><!-- Superior Recovery Serum -->
+			<item id="186000237" count="10" chance="9.49" /><!-- Ancient Coin -->
+			<item id="186000238" count="15" chance="13.74" /><!-- Conqueror's Mark -->
+			<item id="188053453" count="3" chance="12.49" /><!-- [Event] Scroll Bundle -->
+			<item id="162000141" count="5" chance="5.24" /><!-- Sublime Wind Serum -->
+			<item id="162000107" count="3" chance="13.73" /><!-- Saam King's Herbs -->
+			<item id="169620067" chance="1.25" /><!-- AP Boost Charm II - 50% -->
+			<item id="188053624" count="5" chance="2.5" /><!-- Unified Return Scroll Bundle -->
+			<item id="164002238" chance="0.8" /><!-- Instant Return Scroll -->
+			<item id="186000051" count="3" chance="2.5" /><!-- Major Ancient Crown -->
+			<item id="188052914" count="3" chance="2.5" /><!-- [Event] Dandy Form Candy Box -->
+			<item id="166030005" count="2" chance="3.25" /><!-- Tempering Solution -->
+			<item id="188053295" chance="0.75" /><!-- Empyrean Plume Chest -->
+			<item id="188053618" chance="0.12" /><!-- Honorable Elim's Idian Bundle -->
+			<item id="166500002" count="5" chance="5.49" /><!-- Amplification Stone -->
+			<item id="166020000" count="5" chance="5.49" /><!-- Omega Enchantment Stone -->
+			<item id="188053610" count="3" chance="2.5" /><!-- [Event] Level 70 Composite Manastone Bundle -->
+			<item id="188052827" chance="2" /><!-- Dynatoum's Equipment Chest -->
+			<item id="166200010" chance="1" /><!-- Mythic Armor Tuning Scroll -->
+			<item id="166200009" chance="1" /><!-- Mythic Weapon Tuning Scroll -->
+			<item id="188053206" chance="0.35" /><!-- [Event] Stormwing's Eternal Armor Chest -->
+			<item id="165020015" chance="0.02" /><!-- Armor Wrapping Scroll (Eternal/Lv. 65 and lower) -->
+			<item id="188950017" chance="0.05" /><!-- Special Courier Pass (Abyss Eternal/Lv. 61-65) -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053296" override="true"><!-- Divine Fortress Siege Defense Reward Box -->
+		<set>
+			<item id="162000143" /><!-- Brigade General's Liquid Courage -->
+		</set>
+		<set>
+			<item id="164000134" count="35" /><!-- Greater Awakening Scroll -->
+		</set>
+		<set>
+			<item id="164000073" count="35" /><!-- Greater Courage Scroll -->
+		</set>
+		<set>
+			<item id="164000076" count="70" /><!-- Greater Running Scroll -->
+		</set>
+		<set>
+			<item id="186000247" /><!-- Major Danuar Relic -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053300" override="true"><!-- Expeditionary Force Ceramium Medal Box -->
+		<set>
+			<item id="186000242" chance="25" /><!-- Ceramium Medal -->
+			<item id="186000242" count="2" chance="25" /><!-- Ceramium Medal -->
+			<item id="186000243" count="3" chance="6.25" /><!-- Fragmented Ceramium -->
+			<item id="186000243" count="4" chance="6.25" /><!-- Fragmented Ceramium -->
+			<item id="186000243" count="5" chance="6.25" /><!-- Fragmented Ceramium -->
+			<item id="186000243" count="6" chance="6.25" /><!-- Fragmented Ceramium -->
+			<item id="186000243" count="7" chance="6.25" /><!-- Fragmented Ceramium -->
+			<item id="186000243" count="8" chance="6.25" /><!-- Fragmented Ceramium -->
+			<item id="186000243" count="9" chance="6.25" /><!-- Fragmented Ceramium -->
+			<item id="186000243" count="10" chance="6.25" /><!-- Fragmented Ceramium -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053304" override="true"><!-- Expeditionary Force Ceramium Medal Box -->
+		<set>
+			<item id="186000242" chance="25" /><!-- Ceramium Medal -->
+			<item id="186000242" count="2" chance="25" /><!-- Ceramium Medal -->
+			<item id="186000243" count="3" chance="6.25" /><!-- Fragmented Ceramium -->
+			<item id="186000243" count="4" chance="6.25" /><!-- Fragmented Ceramium -->
+			<item id="186000243" count="5" chance="6.25" /><!-- Fragmented Ceramium -->
+			<item id="186000243" count="6" chance="6.25" /><!-- Fragmented Ceramium -->
+			<item id="186000243" count="7" chance="6.25" /><!-- Fragmented Ceramium -->
+			<item id="186000243" count="8" chance="6.25" /><!-- Fragmented Ceramium -->
+			<item id="186000243" count="9" chance="6.25" /><!-- Fragmented Ceramium -->
+			<item id="186000243" count="10" chance="6.25" /><!-- Fragmented Ceramium -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053309" override="true"><!-- Legion's Ceramium Medal Box -->
+		<set>
+			<item id="186000242" /><!-- Ceramium Medal -->
+		</set>
+	</decomposable>
+	<!-- Should be kept as selectables | dropped by rift guardians -->
+	<decomposable item_id="188053367" selectable="true" override="true"><!-- Guardian Tactician Plate Set -->
+		<set>
+			<item id="110601511" /><!-- Resplendent Breastplate -->
+			<item id="111601474" /><!-- Resplendent Gauntlets -->
+			<item id="112601455" /><!-- Resplendent Shoulderplates -->
+			<item id="113601457" /><!-- Resplendent Greaves -->
+			<item id="114601464" /><!-- Resplendent Sabatons -->
+			<item id="110601513" /><!-- Seraph Breastplate -->
+			<item id="111601476" /><!-- Seraph Gauntlets -->
+			<item id="112601457" /><!-- Seraph Shoulderplates -->
+			<item id="113601459" /><!-- Seraph Greaves -->
+			<item id="114601466" /><!-- Seraph Sabatons -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053369" selectable="true" override="true"><!-- Guardian Tactician Chain Set -->
+		<set>
+			<item id="110551037" /><!-- Resplendent Hauberk -->
+			<item id="111501595" /><!-- Resplendent Handguards -->
+			<item id="112501537" /><!-- Resplendent Spaulders -->
+			<item id="113501613" /><!-- Resplendent Chausses -->
+			<item id="114501622" /><!-- Resplendent Brogans -->
+			<item id="110551039" /><!-- Seraph Hauberk -->
+			<item id="111501597" /><!-- Seraph Handguards -->
+			<item id="112501539" /><!-- Seraph Spaulders -->
+			<item id="113501615" /><!-- Seraph Chausses -->
+			<item id="114501624" /><!-- Seraph Brogans -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053371" selectable="true" override="true"><!-- Guardian Tactician Leather Set -->
+		<set>
+			<item id="110301707" /><!-- Resplendent Jerkin -->
+			<item id="111301645" /><!-- Resplendent Vambrace -->
+			<item id="112301584" /><!-- Resplendent Shoulderguards -->
+			<item id="113301676" /><!-- Resplendent Breeches -->
+			<item id="114301713" /><!-- Resplendent Boots -->
+			<item id="110301709" /><!-- Seraph Jerkin -->
+			<item id="111301647" /><!-- Seraph Vambrace -->
+			<item id="112301586" /><!-- Seraph Shoulderguards -->
+			<item id="113301678" /><!-- Seraph Breeches -->
+			<item id="114301715" /><!-- Seraph Boots -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053373" selectable="true" override="true"><!-- Guardian Tactician Cloth Set -->
+		<set>
+			<item id="110101704" /><!-- Resplendent Tunic -->
+			<item id="111101534" /><!-- Resplendent Gloves -->
+			<item id="112101486" /><!-- Resplendent Pauldrons -->
+			<item id="113101548" /><!-- Resplendent Leggings -->
+			<item id="114101582" /><!-- Resplendent Shoes -->
+			<item id="110101706" /><!-- Seraph Tunic -->
+			<item id="111101536" /><!-- Seraph Gloves -->
+			<item id="112101488" /><!-- Seraph Pauldrons -->
+			<item id="113101550" /><!-- Seraph Leggings -->
+			<item id="114101584" /><!-- Seraph Shoes -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053383" selectable="true" override="true"><!-- Archon Tactician Plate Set -->
+		<set>
+			<item id="110601512" /><!-- Eclipse Breastplate -->
+			<item id="111601475" /><!-- Eclipse Gauntlets -->
+			<item id="112601456" /><!-- Eclipse Shoulderplates -->
+			<item id="113601458" /><!-- Eclipse Greaves -->
+			<item id="114601465" /><!-- Eclipse Sabatons -->
+			<item id="110601514" /><!-- Shadowshift Breastplate -->
+			<item id="111601477" /><!-- Shadowshift Gauntlets -->
+			<item id="112601458" /><!-- Shadowshift Shoulderplates -->
+			<item id="113601460" /><!-- Shadowshift Greaves -->
+			<item id="114601467" /><!-- Shadowshift Sabatons -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053385" selectable="true" override="true"><!-- Archon Tactician Chain Set -->
+		<set>
+			<item id="110551038" /><!-- Eclipse Hauberk -->
+			<item id="111501596" /><!-- Eclipse Handguards -->
+			<item id="112501538" /><!-- Eclipse Spaulders -->
+			<item id="113501614" /><!-- Eclipse Chausses -->
+			<item id="114501623" /><!-- Eclipse Brogans -->
+			<item id="110551040" /><!-- Shadowshift Hauberk -->
+			<item id="111501598" /><!-- Shadowshift Handguards -->
+			<item id="112501540" /><!-- Shadowshift Spaulders -->
+			<item id="113501616" /><!-- Shadowshift Chausses -->
+			<item id="114501625" /><!-- Shadowshift Brogans -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053387" selectable="true" override="true"><!-- Archon Tactician Leather Set -->
+		<set>
+			<item id="110301708" /><!-- Eclipse Jerkin -->
+			<item id="111301646" /><!-- Eclipse Vambrace -->
+			<item id="112301585" /><!-- Eclipse Shoulderguards -->
+			<item id="113301677" /><!-- Eclipse Breeches -->
+			<item id="114301714" /><!-- Eclipse Boots -->
+			<item id="110301710" /><!-- Shadowshift Jerkin -->
+			<item id="111301648" /><!-- Shadowshift Vambrace -->
+			<item id="112301587" /><!-- Shadowshift Shoulderguards -->
+			<item id="113301679" /><!-- Shadowshift Breeches -->
+			<item id="114301716" /><!-- Shadowshift Boots -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053389" selectable="true" override="true"><!-- Archon Tactician Cloth Set -->
+		<set>
+			<item id="110101705" /><!-- Eclipse Tunic -->
+			<item id="111101535" /><!-- Eclipse Gloves -->
+			<item id="112101487" /><!-- Eclipse Pauldrons -->
+			<item id="113101549" /><!-- Eclipse Leggings -->
+			<item id="114101583" /><!-- Eclipse Shoes -->
+			<item id="110101707" /><!-- Shadowshift Tunic -->
+			<item id="111101537" /><!-- Shadowshift Gloves -->
+			<item id="112101489" /><!-- Shadowshift Pauldrons -->
+			<item id="113101551" /><!-- Shadowshift Leggings -->
+			<item id="114101585" /><!-- Shadowshift Shoes -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053453" override="true"><!-- [Event] Scroll Bundle -->
+		<set race="ELYOS" player_classes="ARTIST ENGINEER MAGE PRIEST SCOUT WARRIOR">
+			<item id="160001308" count="3" chance="16.67" /><!-- Beshu Cocktail -->
+			<item id="164000126" count="3" chance="16.67" /><!-- Major Strike Resist Scroll -->
+			<item id="164000130" count="3" chance="16.67" /><!-- Major Spell Resist Scroll -->
+			<item id="164000260" count="3" chance="16.66" /><!-- Premium Magic Suppression Scroll -->
+			<item id="164000259" count="3" chance="16.66" /><!-- Premium Anti-Shock Scroll -->
+		</set>
+		<set race="ELYOS" player_classes="ASSASSIN CHANTER GLADIATOR RANGER TEMPLAR">
+			<item id="160001308" count="3" chance="16.67" /><!-- Beshu Cocktail -->
+			<item id="164000118" count="3" chance="16.67" /><!-- Major Crit Strike Scroll -->
+			<item id="164000126" count="3" chance="16.67" /><!-- Major Strike Resist Scroll -->
+			<item id="164000130" count="3" chance="16.67" /><!-- Major Spell Resist Scroll -->
+			<item id="164000260" count="3" chance="16.66" /><!-- Premium Magic Suppression Scroll -->
+			<item id="164000259" count="3" chance="16.66" /><!-- Premium Anti-Shock Scroll -->
+		</set>
+		<set race="ELYOS" player_classes="BARD CLERIC GUNNER RIDER SORCERER SPIRIT_MASTER">
+			<item id="160001308" count="3" chance="16.67" /><!-- Beshu Cocktail -->
+			<item id="164000122" count="3" chance="16.67" /><!-- Major Crit Spell Scroll -->
+			<item id="164000126" count="3" chance="16.67" /><!-- Major Strike Resist Scroll -->
+			<item id="164000130" count="3" chance="16.67" /><!-- Major Spell Resist Scroll -->
+			<item id="164000260" count="3" chance="16.66" /><!-- Premium Magic Suppression Scroll -->
+			<item id="164000259" count="3" chance="16.66" /><!-- Premium Anti-Shock Scroll -->
+		</set>
+		<set race="ASMODIANS" player_classes="ARTIST ENGINEER MAGE PRIEST SCOUT WARRIOR">
+			<item id="160002306" count="3" chance="16.67" /><!-- Drupa Cocktail -->
+			<item id="164000126" count="3" chance="16.67" /><!-- Major Strike Resist Scroll -->
+			<item id="164000130" count="3" chance="16.67" /><!-- Major Spell Resist Scroll -->
+			<item id="164000260" count="3" chance="16.66" /><!-- Premium Magic Suppression Scroll -->
+			<item id="164000259" count="3" chance="16.66" /><!-- Premium Anti-Shock Scroll -->
+		</set>
+		<set race="ASMODIANS" player_classes="ASSASSIN CHANTER GLADIATOR RANGER TEMPLAR">
+			<item id="160002306" count="3" chance="16.67" /><!-- Drupa Cocktail -->
+			<item id="164000118" count="3" chance="16.67" /><!-- Major Crit Strike Scroll -->
+			<item id="164000126" count="3" chance="16.67" /><!-- Major Strike Resist Scroll -->
+			<item id="164000130" count="3" chance="16.67" /><!-- Major Spell Resist Scroll -->
+			<item id="164000260" count="3" chance="16.66" /><!-- Premium Magic Suppression Scroll -->
+			<item id="164000259" count="3" chance="16.66" /><!-- Premium Anti-Shock Scroll -->
+		</set>
+		<set race="ASMODIANS" player_classes="BARD CLERIC GUNNER RIDER SORCERER SPIRIT_MASTER">
+			<item id="160002306" count="3" chance="16.67" /><!-- Drupa Cocktail -->
+			<item id="164000122" count="3" chance="16.67" /><!-- Major Crit Spell Scroll -->
+			<item id="164000126" count="3" chance="16.67" /><!-- Major Strike Resist Scroll -->
+			<item id="164000130" count="3" chance="16.67" /><!-- Major Spell Resist Scroll -->
+			<item id="164000260" count="3" chance="16.66" /><!-- Premium Magic Suppression Scroll -->
+			<item id="164000259" count="3" chance="16.66" /><!-- Premium Anti-Shock Scroll -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053512" override="true"><!-- [Event] Arcade Token Bundle -->
+		<set>
+			<item id="186000389" count="5" /><!-- Arcade Token -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053542" override="true"><!-- [Event] Hirinerk's Gift -->
+		<set>
+			<item id="162000124" count="15" chance="13.78" /><!-- Superior Recovery Serum -->
+			<item id="186000237" count="40" chance="9.52" /><!-- Ancient Coin -->
+			<item id="186000238" count="50" chance="13.78" /><!-- Conqueror's Mark -->
+			<item id="188053453" count="3" chance="12.52" /><!-- [Event] Scroll Bundle -->
+			<item id="162000141" count="5" chance="5.26" /><!-- Sublime Wind Serum -->
+			<item id="162000107" count="3" chance="13.77" /><!-- Saam King's Herbs -->
+			<item id="169620067" chance="1.25" /><!-- AP Boost Charm II - 50% -->
+			<item id="188053624" count="5" chance="2.51" /><!-- Unified Return Scroll Bundle -->
+			<item id="164002238" chance="0.8" /><!-- Instant Return Scroll -->
+			<item id="186000051" count="4" chance="2.51" /><!-- Major Ancient Crown -->
+			<item id="188052914" count="3" chance="2.51" /><!-- [Event] Dandy Form Candy Box -->
+			<item id="166030005" count="5" chance="3.26" /><!-- Tempering Solution -->
+			<item id="188053295" chance="0.75" /><!-- Empyrean Plume Chest -->
+			<item id="188053618" chance="0.13" /><!-- Honorable Elim's Idian Bundle -->
+			<item id="166500002" count="3" chance="6.51" /><!-- Amplification Stone -->
+			<item id="166020000" count="3" chance="0.81" /><!-- Omega Enchantment Stone -->
+			<item id="166020000" count="4" chance="0.81" /><!-- Omega Enchantment Stone -->
+			<item id="166020000" count="5" chance="0.81" /><!-- Omega Enchantment Stone -->
+			<item id="166020000" count="6" chance="0.81" /><!-- Omega Enchantment Stone -->
+			<item id="166020000" count="7" chance="0.81" /><!-- Omega Enchantment Stone -->
+			<item id="166020000" count="8" chance="0.81" /><!-- Omega Enchantment Stone -->
+			<item id="166020000" count="9" chance="0.81" /><!-- Omega Enchantment Stone -->
+			<item id="166020000" count="10" chance="0.81" /><!-- Omega Enchantment Stone -->
+			<item id="188053610" count="3" chance="2.51" /><!-- [Event] Level 70 Composite Manastone Bundle -->
+			<item id="188052075" chance="0.1" /><!-- [Event] Tahabata Weapon Box -->
+			<item id="166200010" chance="1" /><!-- Mythic Armor Tuning Scroll -->
+			<item id="166200009" chance="1" /><!-- Mythic Weapon Tuning Scroll -->
+			<item id="165020015" chance="0.05" /><!-- Armor Wrapping Scroll (Eternal/Lv. 65 and lower) -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053643" override="true"><!-- [Event] Arcade Token Bundle -->
+		<set>
+			<item id="186000389" count="5" /><!-- Arcade Token -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053646" selectable="true" override="true"><!-- Nether Dragon King's Sealed Box -->
+		<set>
+			<item id="101901153" /><!-- Nether Dragon King's Aethercannon -->
+			<item id="101701388" /><!-- Nether Dragon King's Bow -->
+			<item id="102101088" /><!-- Nether Dragon King's Cipher-Blade -->
+			<item id="100201531" /><!-- Nether Dragon King's Dagger -->
+			<item id="100901397" /><!-- Nether Dragon King's Greatsword -->
+			<item id="102001271" /><!-- Nether Dragon King's Harp -->
+			<item id="100101356" /><!-- Nether Dragon King's Mace -->
+			<item id="100501333" /><!-- Nether Dragon King's Orb -->
+			<item id="101801244" /><!-- Nether Dragon King's Pistol -->
+			<item id="101301288" /><!-- Nether Dragon King's Polearm -->
+			<item id="115001797" /><!-- Nether Dragon King's Shield -->
+			<item id="100601452" /><!-- Nether Dragon King's Spellbook -->
+			<item id="101501378" /><!-- Nether Dragon King's Staff -->
+			<item id="100001762" /><!-- Nether Dragon King's Sword -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053674" override="true"><!-- [Event] Chromatic Gift -->
+		<set player_classes="ARTIST ENGINEER MAGE PRIEST SCOUT WARRIOR">
+			<item id="186000409" count="5" chance="2.28" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="6" chance="2.28" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="7" chance="2.28" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="8" chance="2.27" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="9" chance="2.27" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="10" chance="2.27" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="11" chance="2.27" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="12" chance="2.27" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="13" chance="2.27" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="14" chance="2.27" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="15" chance="2.27" /><!-- Daeva's Respite Coin -->
+			<item id="160010208" count="5" chance="20" /><!-- [Event] Sweet Chocolate -->
+			<item id="169220002" chance="6" /><!-- Dye: True White -->
+			<item id="169220003" chance="6" /><!-- Dye: True Black -->
+			<item id="188051438" chance="6" /><!-- Rainbow Dye Pack II -->
+			<item id="188052761" chance="5" /><!-- [Event] Bonus Entry Scroll Bundle -->
+			<item id="188053783" chance="5" /><!-- Stigma Sack -->
+			<item id="188052715" chance="5" /><!-- [Event] Summoning Stone Letter -->
+			<item id="166030005" chance="5" /><!-- Tempering Solution -->
+			<item id="188052741" chance="5" /><!-- [Event] Brilliant Composite Manastone Bundle -->
+			<item id="188052740" chance="2.5" /><!-- [Event] Brilliant Ancient Manastone Bundle -->
+			<item id="169620111" chance="2" /><!-- [Event] Rapturous Gathering Boost -->
+			<item id="169620112" chance="2" /><!-- [Event] Rapturous Crafting Boost -->
+			<item id="188053321" chance="1" /><!-- [Event] Empyrean Plume Chest -->
+			<item id="110900441" chance="0.5" /><!-- Spotted Snake Costume -->
+			<item id="110900442" chance="0.5" /><!-- Rainbow Snake Costume -->
+			<item id="110900443" chance="0.5" /><!-- Turquoise Snake Costume -->
+			<item id="171130013" chance="0.5" /><!-- Rainbow Field Wallpaper -->
+			<item id="171130015" chance="0.5" /><!-- Rainbow Sky Wallpaper -->
+		</set>
+		<set player_classes="GLADIATOR">
+			<item id="186000409" count="5" chance="2.28" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="6" chance="2.28" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="7" chance="2.28" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="8" chance="2.27" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="9" chance="2.27" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="10" chance="2.27" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="11" chance="2.27" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="12" chance="2.27" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="13" chance="2.27" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="14" chance="2.27" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="15" chance="2.27" /><!-- Daeva's Respite Coin -->
+			<item id="160010208" count="5" chance="20" /><!-- [Event] Sweet Chocolate -->
+			<item id="169220002" chance="6" /><!-- Dye: True White -->
+			<item id="169220003" chance="6" /><!-- Dye: True Black -->
+			<item id="188051438" chance="6" /><!-- Rainbow Dye Pack II -->
+			<item id="188052761" chance="5" /><!-- [Event] Bonus Entry Scroll Bundle -->
+			<item id="188053783" chance="5" /><!-- Stigma Sack -->
+			<item id="188052715" chance="5" /><!-- [Event] Summoning Stone Letter -->
+			<item id="166030005" chance="5" /><!-- Tempering Solution -->
+			<item id="188052741" chance="5" /><!-- [Event] Brilliant Composite Manastone Bundle -->
+			<item id="188052740" chance="2.5" /><!-- [Event] Brilliant Ancient Manastone Bundle -->
+			<item id="169620111" chance="2" /><!-- [Event] Rapturous Gathering Boost -->
+			<item id="169620112" chance="2" /><!-- [Event] Rapturous Crafting Boost -->
+			<item id="188053321" chance="1" /><!-- [Event] Empyrean Plume Chest -->
+			<item id="110900441" chance="0.5" /><!-- Spotted Snake Costume -->
+			<item id="110900442" chance="0.5" /><!-- Rainbow Snake Costume -->
+			<item id="110900443" chance="0.5" /><!-- Turquoise Snake Costume -->
+			<item id="171130013" chance="0.5" /><!-- Rainbow Field Wallpaper -->
+			<item id="171130015" chance="0.5" /><!-- Rainbow Sky Wallpaper -->
+			<item id="169405391" chance="0.5" /><!-- Upgraded Distorted Sword of the Fierce Battle Prototype -->
+			<item id="169405393" chance="0.5" /><!-- Upgraded Distorted Dagger of the Fierce Battle Prototype -->
+			<item id="169405394" chance="0.5" /><!-- Upgraded Distorted Greatsword of the Fierce Battle Prototype -->
+			<item id="169405395" chance="0.5" /><!-- Upgraded Distorted Polearm of the Fierce Battle Prototype -->
+		</set>
+		<set player_classes="TEMPLAR">
+			<item id="186000409" count="5" chance="2.28" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="6" chance="2.28" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="7" chance="2.28" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="8" chance="2.27" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="9" chance="2.27" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="10" chance="2.27" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="11" chance="2.27" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="12" chance="2.27" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="13" chance="2.27" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="14" chance="2.27" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="15" chance="2.27" /><!-- Daeva's Respite Coin -->
+			<item id="160010208" count="5" chance="20" /><!-- [Event] Sweet Chocolate -->
+			<item id="169220002" chance="6" /><!-- Dye: True White -->
+			<item id="169220003" chance="6" /><!-- Dye: True Black -->
+			<item id="188051438" chance="6" /><!-- Rainbow Dye Pack II -->
+			<item id="188052761" chance="5" /><!-- [Event] Bonus Entry Scroll Bundle -->
+			<item id="188053783" chance="5" /><!-- Stigma Sack -->
+			<item id="188052715" chance="5" /><!-- [Event] Summoning Stone Letter -->
+			<item id="166030005" chance="5" /><!-- Tempering Solution -->
+			<item id="188052741" chance="5" /><!-- [Event] Brilliant Composite Manastone Bundle -->
+			<item id="188052740" chance="2.5" /><!-- [Event] Brilliant Ancient Manastone Bundle -->
+			<item id="169620111" chance="2" /><!-- [Event] Rapturous Gathering Boost -->
+			<item id="169620112" chance="2" /><!-- [Event] Rapturous Crafting Boost -->
+			<item id="188053321" chance="1" /><!-- [Event] Empyrean Plume Chest -->
+			<item id="110900441" chance="0.5" /><!-- Spotted Snake Costume -->
+			<item id="110900442" chance="0.5" /><!-- Rainbow Snake Costume -->
+			<item id="110900443" chance="0.5" /><!-- Turquoise Snake Costume -->
+			<item id="171130013" chance="0.5" /><!-- Rainbow Field Wallpaper -->
+			<item id="171130015" chance="0.5" /><!-- Rainbow Sky Wallpaper -->
+			<item id="169405391" chance="0.5" /><!-- Upgraded Distorted Sword of the Fierce Battle Prototype -->
+			<item id="169405392" chance="0.5" /><!-- Upgraded Distorted Mace of the Fierce Battle Prototype -->
+			<item id="169405394" chance="0.5" /><!-- Upgraded Distorted Greatsword of the Fierce Battle Prototype -->
+			<item id="186000409" count="100" chance="0.5" /><!-- Daeva's Respite Coin -->
+		</set>
+		<set player_classes="ASSASSIN RANGER">
+			<item id="186000409" count="5" chance="2.28" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="6" chance="2.28" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="7" chance="2.28" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="8" chance="2.27" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="9" chance="2.27" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="10" chance="2.27" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="11" chance="2.27" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="12" chance="2.27" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="13" chance="2.27" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="14" chance="2.27" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="15" chance="2.27" /><!-- Daeva's Respite Coin -->
+			<item id="160010208" count="5" chance="20" /><!-- [Event] Sweet Chocolate -->
+			<item id="169220002" chance="6" /><!-- Dye: True White -->
+			<item id="169220003" chance="6" /><!-- Dye: True Black -->
+			<item id="188051438" chance="6" /><!-- Rainbow Dye Pack II -->
+			<item id="188052761" chance="5" /><!-- [Event] Bonus Entry Scroll Bundle -->
+			<item id="188053783" chance="5" /><!-- Stigma Sack -->
+			<item id="188052715" chance="5" /><!-- [Event] Summoning Stone Letter -->
+			<item id="166030005" chance="5" /><!-- Tempering Solution -->
+			<item id="188052741" chance="5" /><!-- [Event] Brilliant Composite Manastone Bundle -->
+			<item id="188052740" chance="2.5" /><!-- [Event] Brilliant Ancient Manastone Bundle -->
+			<item id="169620111" chance="2" /><!-- [Event] Rapturous Gathering Boost -->
+			<item id="169620112" chance="2" /><!-- [Event] Rapturous Crafting Boost -->
+			<item id="188053321" chance="1" /><!-- [Event] Empyrean Plume Chest -->
+			<item id="110900441" chance="0.5" /><!-- Spotted Snake Costume -->
+			<item id="110900442" chance="0.5" /><!-- Rainbow Snake Costume -->
+			<item id="110900443" chance="0.5" /><!-- Turquoise Snake Costume -->
+			<item id="171130013" chance="0.5" /><!-- Rainbow Field Wallpaper -->
+			<item id="171130015" chance="0.5" /><!-- Rainbow Sky Wallpaper -->
+			<item id="169405391" chance="0.5" /><!-- Upgraded Distorted Sword of the Fierce Battle Prototype -->
+			<item id="169405393" chance="0.5" /><!-- Upgraded Distorted Dagger of the Fierce Battle Prototype -->
+			<item id="186000409" count="100" chance="0.5" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="100" chance="0.5" /><!-- Daeva's Respite Coin -->
+		</set>
+		<set player_classes="BARD GUNNER RIDER SORCERER SPIRIT_MASTER">
+			<item id="186000409" count="5" chance="2.28" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="6" chance="2.28" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="7" chance="2.28" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="8" chance="2.27" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="9" chance="2.27" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="10" chance="2.27" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="11" chance="2.27" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="12" chance="2.27" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="13" chance="2.27" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="14" chance="2.27" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="15" chance="2.27" /><!-- Daeva's Respite Coin -->
+			<item id="160010208" count="5" chance="20" /><!-- [Event] Sweet Chocolate -->
+			<item id="169220002" chance="6" /><!-- Dye: True White -->
+			<item id="169220003" chance="6" /><!-- Dye: True Black -->
+			<item id="188051438" chance="6" /><!-- Rainbow Dye Pack II -->
+			<item id="188052761" chance="5" /><!-- [Event] Bonus Entry Scroll Bundle -->
+			<item id="188053783" chance="5" /><!-- Stigma Sack -->
+			<item id="188052715" chance="5" /><!-- [Event] Summoning Stone Letter -->
+			<item id="166030005" chance="5" /><!-- Tempering Solution -->
+			<item id="188052741" chance="5" /><!-- [Event] Brilliant Composite Manastone Bundle -->
+			<item id="188052740" chance="2.5" /><!-- [Event] Brilliant Ancient Manastone Bundle -->
+			<item id="169620111" chance="2" /><!-- [Event] Rapturous Gathering Boost -->
+			<item id="169620112" chance="2" /><!-- [Event] Rapturous Crafting Boost -->
+			<item id="188053321" chance="1" /><!-- [Event] Empyrean Plume Chest -->
+			<item id="110900441" chance="0.5" /><!-- Spotted Snake Costume -->
+			<item id="110900442" chance="0.5" /><!-- Rainbow Snake Costume -->
+			<item id="110900443" chance="0.5" /><!-- Turquoise Snake Costume -->
+			<item id="171130013" chance="0.5" /><!-- Rainbow Field Wallpaper -->
+			<item id="171130015" chance="0.5" /><!-- Rainbow Sky Wallpaper -->
+			<item id="186000409" count="100" chance="0.5" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="100" chance="0.5" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="100" chance="0.5" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="100" chance="0.5" /><!-- Daeva's Respite Coin -->
+		</set>
+		<set player_classes="CHANTER CLERIC">
+			<item id="186000409" count="5" chance="2.28" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="6" chance="2.28" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="7" chance="2.28" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="8" chance="2.27" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="9" chance="2.27" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="10" chance="2.27" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="11" chance="2.27" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="12" chance="2.27" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="13" chance="2.27" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="14" chance="2.27" /><!-- Daeva's Respite Coin -->
+			<item id="186000409" count="15" chance="2.27" /><!-- Daeva's Respite Coin -->
+			<item id="160010208" count="5" chance="20" /><!-- [Event] Sweet Chocolate -->
+			<item id="169220002" chance="6" /><!-- Dye: True White -->
+			<item id="169220003" chance="6" /><!-- Dye: True Black -->
+			<item id="188051438" chance="6" /><!-- Rainbow Dye Pack II -->
+			<item id="188052761" chance="5" /><!-- [Event] Bonus Entry Scroll Bundle -->
+			<item id="188053783" chance="5" /><!-- Stigma Sack -->
+			<item id="188052715" chance="5" /><!-- [Event] Summoning Stone Letter -->
+			<item id="166030005" chance="5" /><!-- Tempering Solution -->
+			<item id="188052741" chance="5" /><!-- [Event] Brilliant Composite Manastone Bundle -->
+			<item id="188052740" chance="2.5" /><!-- [Event] Brilliant Ancient Manastone Bundle -->
+			<item id="169620111" chance="2" /><!-- [Event] Rapturous Gathering Boost -->
+			<item id="169620112" chance="2" /><!-- [Event] Rapturous Crafting Boost -->
+			<item id="188053321" chance="1" /><!-- [Event] Empyrean Plume Chest -->
+			<item id="110900441" chance="0.5" /><!-- Spotted Snake Costume -->
+			<item id="110900442" chance="0.5" /><!-- Rainbow Snake Costume -->
+			<item id="110900443" chance="0.5" /><!-- Turquoise Snake Costume -->
+			<item id="171130013" chance="0.5" /><!-- Rainbow Field Wallpaper -->
+			<item id="171130015" chance="0.5" /><!-- Rainbow Sky Wallpaper -->
+			<item id="186000409" count="100" chance="0.5" /><!-- Daeva's Respite Coin -->
+			<item id="169405392" chance="0.5" /><!-- Upgraded Distorted Mace of the Fierce Battle Prototype -->
+			<item id="186000409" count="100" chance="0.5" /><!-- Daeva's Respite Coin -->
+			<item id="169405396" chance="0.5" /><!-- Upgraded Distorted Staff of the Fierce Battle Prototype -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053686" override="true"><!-- Sand Wanderers Trader's Treasure Box -->
+		<set>
+			<item id="186000242" /><!-- Ceramium Medal -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053697" override="true"><!-- Bundle of Honor and Conquest -->
+		<set>
+			<item id="186000238" chance="10" /><!-- Conqueror's Mark -->
+			<item id="186000238" count="2" chance="10" /><!-- Conqueror's Mark -->
+			<item id="186000238" count="3" chance="10" /><!-- Conqueror's Mark -->
+			<item id="186000238" count="5" chance="5" /><!-- Conqueror's Mark -->
+			<item id="186000238" count="7" chance="10" /><!-- Conqueror's Mark -->
+			<item id="186000238" count="9" chance="15" /><!-- Conqueror's Mark -->
+			<item id="186000238" count="10" chance="15" /><!-- Conqueror's Mark -->
+			<item id="186000238" count="13" chance="15" /><!-- Conqueror's Mark -->
+			<item id="186000238" count="15" chance="2" /><!-- Conqueror's Mark -->
+			<item id="186000238" count="20" chance="2" /><!-- Conqueror's Mark -->
+			<item id="186000238" count="25" chance="2" /><!-- Conqueror's Mark -->
+			<item id="186000238" count="30" chance="1" /><!-- Conqueror's Mark -->
+			<item id="186000238" count="50" chance="1" /><!-- Conqueror's Mark -->
+			<item id="186000238" count="70" chance="1" /><!-- Conqueror's Mark -->
+			<item id="186000238" count="90" chance="0.5" /><!-- Conqueror's Mark -->
+			<item id="186000238" count="100" chance="0.5" /><!-- Conqueror's Mark -->
+		</set>
+		<set>
+			<item id="186000238" count="1" chance="6.1" />
+			<item id="186000238" count="2" chance="6.1" />
+			<item id="186000238" count="3" chance="6.1" />
+			<item id="186000238" count="5" chance="3" />
+			<item id="186000238" count="7" chance="6.1" />
+			<item id="186000238" count="9" chance="9.17" />
+			<item id="186000238" count="10" chance="9.17" />
+			<item id="186000238" count="13" chance="9.17" />
+			<item id="186000238" count="15" chance="1.22" />
+			<item id="186000238" count="20" chance="1.22" />
+			<item id="186000238" count="25" chance="1.2" />
+			<item id="186000238" count="30" chance="0.6" />
+			<item id="186000238" count="50" chance="0.6" />
+			<item id="186000238" count="70" chance="0.6" />
+			<item id="186000238" count="90" chance="0.3" />
+			<item id="186000238" count="100" chance="39.25" />
+		</set>
+	</decomposable>
+	<decomposable item_id="188053702" override="true"><!-- Vasharti's Equipment Box -->
+		<set>
+			<item id="188053703" chance="40" /><!-- Vasharti Legionnaire's Weapon Box -->
+			<item id="188053704" chance="15" /><!-- Vasharti Brigade General's Weapon Box -->
+			<item id="188053705" chance="45" /><!-- Vasharti Brigade General's Armor Box -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053717" override="true"><!-- Volatile Rift Victory Loot Bundle -->
+		<set>
+			<item id="186000242" count="4" /><!-- Ceramium Medal -->
+		</set>
+		<set>
+			<item id="166000194" count="5" chance="33.33" /><!-- Delta Enchantment Stone -->
+			<item id="166000195" count="5" chance="33.33" /><!-- Epsilon Enchantment Stone -->
+			<item id="166020000" count="5" chance="33.33" /><!-- Omega Enchantment Stone -->
+		</set>
+		<set>
+			<item id="167000682" count="5" chance="2.36" /><!-- Manastone: Attack +5 / HP +47 -->
+			<item id="167000683" count="5" chance="2.36" /><!-- Manastone: Attack +5 / MP +47 -->
+			<item id="167000684" count="5" chance="2.36" /><!-- Manastone: Attack +5 / Accuracy +13 -->
+			<item id="167000685" count="5" chance="2.36" /><!-- Manastone: Attack +5 / Evasion +13 -->
+			<item id="167000686" count="5" chance="2.36" /><!-- Manastone: Attack +5 / Parry +13 -->
+			<item id="167000687" count="5" chance="2.36" /><!-- Manastone: Attack +5 / Block +13 -->
+			<item id="167000688" count="5" chance="2.36" /><!-- Manastone: Crit Strike +17 / HP +47 -->
+			<item id="167000689" count="5" chance="2.36" /><!-- Manastone: Crit Strike +17 / MP +47 -->
+			<item id="167000693" count="5" chance="2.36" /><!-- Manastone: Crit Strike +17 / Parry +13 -->
+			<item id="167000697" count="5" chance="2.36" /><!-- Manastone: Magic Boost +27 / HP +47 -->
+			<item id="167000698" count="5" chance="2.36" /><!-- Manastone: Magic Boost +27 / MP +47 -->
+			<item id="167000699" count="5" chance="2.36" /><!-- Manastone: Magic Boost +27 / Accuracy +13 -->
+			<item id="167000700" count="5" chance="2.36" /><!-- Manastone: Magic Boost +27 / Evasion +13 -->
+			<item id="167000702" count="5" chance="2.36" /><!-- Manastone: Magic Boost +27 / Block +13 -->
+			<item id="167000703" count="5" chance="2.36" /><!-- Manastone: Magic Boost +27 / Crit Strike +8 -->
+			<item id="167000704" count="5" chance="2.36" /><!-- Manastone: Magic Boost +27 / Resist Magic +7 -->
+			<item id="167000706" count="5" chance="2.36" /><!-- Manastone: Magical Accuracy +14 / HP +47 -->
+			<item id="167000707" count="5" chance="2.36" /><!-- Manastone: Magical Accuracy +14 / MP +47 -->
+			<item id="167000709" count="5" chance="2.36" /><!-- Manastone: Magical Accuracy +14 / Accuracy +13 -->
+			<item id="167000710" count="5" chance="2.36" /><!-- Manastone: Magical Accuracy +14 / Evasion +13 -->
+			<item id="167000711" count="5" chance="2.36" /><!-- Manastone: Magical Accuracy +14 / Parry +13 -->
+			<item id="167000712" count="5" chance="2.36" /><!-- Manastone: Magical Accuracy +14 / Block +13 -->
+			<item id="167000714" count="5" chance="2.38" /><!-- Manastone: Magical Accuracy +14 / Resist Magic +7 -->
+			<item id="167000750" count="5" chance="2.38" /><!-- Manastone: Attack +5 / Resist Magic +7 -->
+			<item id="167000845" count="5" chance="2.38" /><!-- Manastone: HP +95 / MP +47 -->
+			<item id="167000846" count="5" chance="2.38" /><!-- Manastone: HP +95 / Accuracy +13 -->
+			<item id="167000847" count="5" chance="2.38" /><!-- Manastone: HP +95 / Evasion +13 -->
+			<item id="167000848" count="5" chance="2.38" /><!-- Manastone: HP +95 / Parry +13 -->
+			<item id="167000849" count="5" chance="2.38" /><!-- Manastone: HP +95 / Block +13 -->
+			<item id="167000850" count="5" chance="2.38" /><!-- Manastone: HP +95 / Crit Strike +8 -->
+			<item id="167000851" count="5" chance="2.38" /><!-- Manastone: HP +95 / Resist Magic+7 -->
+			<item id="167000852" count="5" chance="2.38" /><!-- Manastone: HP +95 / Magical Accuracy +7 -->
+			<item id="167000853" count="5" chance="2.38" /><!-- Manastone: MP +95 / HP +47 -->
+			<item id="167000858" count="5" chance="2.38" /><!-- Manastone: MP +95 / Crit Strike +8 -->
+			<item id="167000861" count="5" chance="2.38" /><!-- Manastone: Evasion +17 / HP +47 -->
+			<item id="167000862" count="5" chance="2.38" /><!-- Manastone: Evasion +17 / MP +47 -->
+			<item id="167000869" count="5" chance="2.38" /><!-- Manastone: Parry +27 / HP +47 -->
+			<item id="167000877" count="5" chance="2.38" /><!-- Manastone: Magical Accuracy +14 / Attack +2 -->
+			<item id="167000690" count="5" chance="0.82" /><!-- Manastone: Crit Strike +17 / Attack +2 -->
+			<item id="167000691" count="5" chance="0.82" /><!-- Manastone: Crit Strike +17 / Accuracy +13 -->
+			<item id="167000692" count="5" chance="0.82" /><!-- Manastone: Crit Strike +17 / Evasion +13 -->
+			<item id="167000694" count="5" chance="0.82" /><!-- Manastone: Crit Strike +17 / Block +13 -->
+			<item id="167000695" count="5" chance="0.84" /><!-- Manastone: Crit Strike +17 / Resist Magic +7 -->
+			<item id="167000696" count="5" chance="0.84" /><!-- Manastone: Crit Strike +17 / Magical Accuracy +7 -->
+			<item id="167000701" count="5" chance="0.84" /><!-- Manastone: Magic Boost +27 / Parry +13 -->
+			<item id="167000705" count="5" chance="0.84" /><!-- Manastone: Magic Boost +27 / Magical Accuracy +7 -->
+			<item id="167000708" count="5" chance="0.84" /><!-- Manastone: Magical Accuracy +14 / Magic Boost +13 -->
+			<item id="167000713" count="5" chance="0.84" /><!-- Manastone: Magical Accuracy +14 / Crit Strike +8 -->
+			<item id="167000749" count="5" chance="0.84" /><!-- Manastone: Attack +5 / Crit Strike +8 -->
+			<item id="167000751" count="5" chance="0.84" /><!-- Manastone: Attack +5 / Magical Accuracy +7 -->
+		</set>
+		<set race="ELYOS">
+			<item id="182215750" /><!-- Asmodian Guardian General's Token -->
+		</set>
+		<set race="ASMODIANS">
+			<item id="182215751" /><!-- Elyos Guardian General Token -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053720" override="true"><!-- Operations Medal Box -->
+		<set>
+			<item id="186000242" chance="25" /><!-- Ceramium Medal -->
+			<item id="186000243" chance="25" /><!-- Fragmented Ceramium -->
+			<item id="186000147" chance="25" /><!-- Mithril Medal -->
+			<item id="186000096" chance="25" /><!-- Platinum Medal -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053722" override="true"><!-- Special Enchantment Stone Bundle of Fortuneers Legion -->
+		<set>
+			<item id="166020000" /><!-- Omega Enchantment Stone -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053725" override="true"><!-- Headquarters Medal Box -->
+		<set>
+			<item id="186000242" chance="25" /><!-- Ceramium Medal -->
+			<item id="186000243" chance="25" /><!-- Fragmented Ceramium -->
+			<item id="186000147" chance="25" /><!-- Mithril Medal -->
+			<item id="186000096" chance="25" /><!-- Platinum Medal -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053727" override="true"><!-- Special Enchantment Stone Bundle of Charlirunerk Inquiry Agency -->
+		<set>
+			<item id="166020000" /><!-- Omega Enchantment Stone -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053749" override="true"><!-- Heavy Enchantment Stone Bundle -->
+		<set>
+			<item id="166000194" count="3" chance="50" /><!-- Delta Enchantment Stone -->
+			<item id="166000195" count="3" chance="50" /><!-- Epsilon Enchantment Stone -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053798" override="true"><!-- Shining Enchantment Stone Bundle -->
+		<set>
+			<item id="166000194" count="3" chance="50" /><!-- Delta Enchantment Stone -->
+			<item id="166000195" count="3" chance="50" /><!-- Epsilon Enchantment Stone -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053873" override="true"><!-- [Event] Arcade Token Bundle -->
+		<set>
+			<item id="186000389" count="5" /><!-- Arcade Token -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053894" override="true"><!-- Territory Battle Contribution Bundle -->
+		<set>
+			<item id="186000242" /><!-- Ceramium Medal -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053909" override="true"><!-- Large Ascension Water Box -->
+		<set>
+			<item id="166030005" count="5" /><!-- Tempering Solution -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053916" override="true"><!-- Guestpetal Bundle -->
+		<set>
+			<item id="186000146" /><!-- Guestpetal -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053955" override="true"><!-- [Event] Ice Sculptor's Box -->
+		<set>
+			<item id="169650003" chance="1" /><!-- [Special] Plastic Surgery Ticket -->
+			<item id="188052073" chance="1" /><!-- [Event] Ancient Spirit's Wing Box -->
+			<item id="188053005" chance="0.5" /><!-- [Event] Hyperion's Wing Chest -->
+			<item id="188052319" chance="0.5" /><!-- [Event] Dragon Lord's Wing Box -->
+			<item id="188054038" chance="1" /><!-- Wave Song Armor Box -->
+			<item id="188054039" chance="1" /><!-- Sea Feast Armor Box -->
+			<item id="188052632" chance="15" /><!-- [Event] Superior Manastone Bundle -->
+			<item id="188053644" chance="20" /><!-- [Event] Small Ancient Coin Bundle -->
+			<item id="188052693" chance="20" /><!-- [Event] Saam King's Herbs Bundle -->
+			<item id="188052716" chance="20" /><!-- [Event] Lucky Scroll Pouch -->
+			<item id="161000003" chance="20" /><!-- Reviving Elemental Stone -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053956" override="true"><!-- [Event] Talented Ice Sculptor's Box -->
+		<set>
+			<item id="188053784" chance="5" /><!-- Stigma Bundle -->
+			<item id="188053206" chance="5" /><!-- [Event] Stormwing's Eternal Armor Chest -->
+			<item id="188053208" chance="5" /><!-- [Event] Tiamat Guard's Eternal Armor Chest -->
+			<item id="188053005" chance="1" /><!-- [Event] Hyperion's Wing Chest -->
+			<item id="188052319" chance="1" /><!-- [Event] Dragon Lord's Wing Box -->
+			<item id="188054038" chance="2" /><!-- Wave Song Armor Box -->
+			<item id="188054039" chance="2" /><!-- Sea Feast Armor Box -->
+			<item id="188053610" chance="15" /><!-- [Event] Level 70 Composite Manastone Bundle -->
+			<item id="169200006" chance="5" /><!-- Dye: True White -->
+			<item id="169200007" chance="5" /><!-- Dye: True Black -->
+			<item id="188053663" chance="20" /><!-- [Event] Blood Mark Box -->
+			<item id="188053644" chance="24" /><!-- [Event] Small Ancient Coin Bundle -->
+			<item id="188052716" chance="10" /><!-- [Event] Lucky Scroll Pouch -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053958" override="true"><!-- [Event] Soulful Ice Sculptor's Box -->
+		<set>
+			<item id="188053212" chance="1" /><!-- [Event] Dragon Lord's Mythic Weapon Chest -->
+			<item id="166500002" chance="15" /><!-- Amplification Stone -->
+			<item id="188051577" chance="10" /><!-- Packaged Sharptooth -->
+			<item id="188052560" chance="15" /><!-- Assured Greater Felicitous Socketing Box (Mythic) -->
+			<item id="188053786" chance="15" /><!-- Major Stigma Bundle -->
+			<item id="188053005" chance="10" /><!-- [Event] Hyperion's Wing Chest -->
+			<item id="188052319" chance="10" /><!-- [Event] Dragon Lord's Wing Box -->
+			<item id="188054038" chance="12" /><!-- Wave Song Armor Box -->
+			<item id="188054039" chance="12" /><!-- Sea Feast Armor Box -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053959" override="true"><!-- [Camping] Display Furniture Bag -->
+		<set>
+			<item id="170115027" chance="9.1" /><!-- Camping Essentials -->
+			<item id="170115028" chance="9.09" /><!-- Camping Luxuries -->
+			<item id="170115029" chance="9.09" /><!-- Roaring Campfire -->
+			<item id="170125025" chance="9.09" /><!-- Luxurious Camper -->
+			<item id="170155001" chance="9.09" /><!-- Camping Lantern -->
+			<item id="170155002" chance="9.09" /><!-- Hanging Camping Lantern -->
+			<item id="170205024" chance="9.09" /><!-- Camping Mat -->
+			<item id="170415025" chance="9.09" /><!-- Comfortable Camping Chair -->
+			<item id="170415026" chance="9.09" /><!-- Comfortable Camp Hammock -->
+			<item id="170425038" chance="9.09" /><!-- Picnic Table -->
+			<item id="170425039" chance="9.09" /><!-- Camping Tent -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053960" override="true"><!-- [Camping] Functional Furniture Bag -->
+		<set>
+			<item id="170100039" chance="16.67" /><!-- Comfortable Camping Cabinet -->
+			<item id="170100040" chance="16.67" /><!-- Pleasant Camping Cabinet -->
+			<item id="170195127" chance="16.67" /><!-- Cozy Campfire -->
+			<item id="170195128" chance="16.67" /><!-- Cozy Shugo Camper -->
+			<item id="170425036" chance="16.66" /><!-- Delicious Camp Smorgasbord -->
+			<item id="170425037" chance="16.66" /><!-- Camping Cook-off Grill -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053961" override="true"><!-- [Camping] Decorative Wallpaper -->
+		<set>
+			<item id="171130033" chance="25" /><!-- Bright Spring Camp Wallpaper -->
+			<item id="171130034" chance="25" /><!-- Fresh Summer Camp Wallpaper -->
+			<item id="171130035" chance="25" /><!-- Breezy Fall Camp Wallpaper -->
+			<item id="171130036" chance="25" /><!-- Cozy Winter Camp Wallpaper -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053962" override="true"><!-- [Camping] Decorative Flooring -->
+		<set>
+			<item id="171130037" chance="25" /><!-- Bright Spring Camp Floor -->
+			<item id="171130038" chance="25" /><!-- Fresh Summer Camp Floor -->
+			<item id="171130039" chance="25" /><!-- Cool Fall Camp Floor -->
+			<item id="171130040" chance="25" /><!-- Cozy Winter Camp Floor -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053963" override="true"><!-- Camping Bundle -->
+		<set>
+			<item id="188053959" chance="25" /><!-- [Camping] Display Furniture Bag -->
+			<item id="188053960" chance="25" /><!-- [Camping] Functional Furniture Bag -->
+			<item id="188053961" chance="25" /><!-- [Camping] Decorative Wallpaper -->
+			<item id="188053962" chance="25" /><!-- [Camping] Decorative Flooring -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053998" override="true"><!-- Ornate Enchantment Stone Bundle -->
+		<set>
+			<item id="166000191" count="5" chance="25" /><!-- Alpha Enchantment Stone -->
+			<item id="166000192" count="5" chance="25" /><!-- Beta Enchantment Stone -->
+			<item id="166000193" count="5" chance="25" /><!-- Gamma Enchantment Stone -->
+			<item id="166000194" count="5" chance="25" /><!-- Delta Enchantment Stone -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188054028" override="true"><!-- [Event] Fountain Gift -->
+		<set>
+			<item id="125045568" chance="2.5" /><!-- Breezy Summer Hat -->
+			<item id="169610060" chance="2.5" /><!-- [Title Card] Chaser of Atreia – 30-day pass -->
+			<item id="188052048" chance="5" /><!-- Eastern Display Furniture Pack -->
+			<item id="188053702" chance="5" /><!-- Vasharti's Equipment Box -->
+			<item id="188052388" chance="5" /><!-- Modor's Equipment Box -->
+			<item id="188052827" chance="5" /><!-- Dynatoum's Equipment Chest -->
+			<item id="186000406" chance="10" /><!-- [Event] Aether Bloom -->
+			<item id="186000243" count="5" chance="10" /><!-- Fragmented Ceramium -->
+			<item id="186000236" count="25" chance="10" /><!-- Blood Mark -->
+			<item id="186000051" count="2" chance="10" /><!-- Major Ancient Crown -->
+			<item id="186000237" count="50" chance="10" /><!-- Ancient Coin -->
+			<item id="188053609" count="2" chance="12.5" /><!-- [Event] Level 60 Composite Manastone Bundle -->
+			<item id="160005060" count="2" chance="12.5" /><!-- [Event] Zeraka Aether Jelly -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188054029" override="true"><!-- [Event] Blooming Gift -->
+		<set>
+			<item id="188053915" chance="3" /><!-- [Event] Aether Bloom Bouquet -->
+			<item id="190100115" chance="3" /><!-- Palomeno Heorn -->
+			<item id="169600038" chance="3" /><!-- [Emotion Card] Scatter Petals -->
+			<item id="188054238" chance="3" /><!-- Iron Wall Armor Box -->
+			<item id="188053695" count="3" chance="3" /><!-- High Grade Crafting Material Box of Conquest -->
+			<item id="188053610" chance="10" /><!-- [Event] Level 70 Composite Manastone Bundle -->
+			<item id="188053636" chance="12.5" /><!-- Blood Mark Box -->
+			<item id="188053618" chance="12.5" /><!-- Honorable Elim's Idian Bundle -->
+			<item id="186000242" count="2" chance="12.5" /><!-- Ceramium Medal -->
+			<item id="166020000" count="3" chance="12.5" /><!-- Omega Enchantment Stone -->
+			<item id="166500002" count="3" chance="12.5" /><!-- Amplification Stone -->
+			<item id="186000237" count="75" chance="12.5" /><!-- Ancient Coin -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188054030" override="true"><!-- [Club] Decorative Furniture Bundle -->
+		<set>
+			<item id="170005024" chance="7.15" /><!-- Fancy Club Window -->
+			<item id="170005025" chance="7.15" /><!-- Club Restroom Door -->
+			<item id="170135045" chance="7.15" /><!-- Club Couch -->
+			<item id="170155003" chance="7.15" /><!-- Disco Ball Light Stand -->
+			<item id="170155004" chance="7.14" /><!-- Green Bottle Lighting -->
+			<item id="170155006" chance="7.14" /><!-- Blue Bottle Lighting -->
+			<item id="170160026" chance="7.14" /><!-- Club Partition -->
+			<item id="170205025" chance="7.14" /><!-- Vinyl Dancefloor -->
+			<item id="170205026" chance="7.14" /><!-- Illuminated Dancefloor -->
+			<item id="170415028" chance="7.14" /><!-- Fancy Stool -->
+			<item id="170425041" chance="7.14" /><!-- Stylish Club Table -->
+			<item id="170425042" chance="7.14" /><!-- Mini Bar -->
+			<item id="171130041" chance="7.14" /><!-- Club Ambience Wallpaper -->
+			<item id="171130043" chance="7.14" /><!-- Starry Club Floor -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188054031" override="true"><!-- [Club] Functional Furniture Bundle -->
+		<set>
+			<item id="170100041" chance="25" /><!-- Club Speaker Cabinet -->
+			<item id="170195137" chance="25" /><!-- Illuminated Houseplant -->
+			<item id="170195138" chance="25" /><!-- Graceful Club Tree -->
+			<item id="170425040" chance="25" /><!-- Club Cocktail Table -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188054035" override="true"><!-- [Club] Full Furniture Bundle -->
+		<set>
+			<item id="188054030" chance="50" /><!-- [Club] Decorative Furniture Bundle -->
+			<item id="188054031" chance="50" /><!-- [Club] Functional Furniture Bundle -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188054036" override="true"><!-- [Event] Frozen Ice Festival Box -->
+		<set>
+			<bundle chance="4.17">
+				<item id="188053212" /><!-- [Event] Dragon Lord's Mythic Weapon Chest -->
+				<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+			</bundle>
+			<bundle chance="4.17">
+				<item id="169650003" /><!-- [Special] Plastic Surgery Ticket -->
+				<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+			</bundle>
+			<bundle chance="4.17">
+				<item id="188052319" /><!-- [Event] Dragon Lord's Wing Box -->
+				<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+			</bundle>
+			<bundle chance="4.17">
+				<item id="166500002" /><!-- Amplification Stone -->
+				<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+			</bundle>
+			<bundle chance="4.17">
+				<item id="188052560" /><!-- Assured Greater Felicitous Socketing Box (Mythic) -->
+				<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+			</bundle>
+			<bundle chance="4.17">
+				<item id="188052559" /><!-- Assured Greater Felicitous Socketing Box (Eternal) -->
+				<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+			</bundle>
+			<bundle chance="4.17">
+				<item id="188052073" /><!-- [Event] Ancient Spirit's Wing Box -->
+				<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+			</bundle>
+			<bundle chance="4.17">
+				<item id="188053786" /><!-- Major Stigma Bundle -->
+				<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+			</bundle>
+			<bundle chance="4.17">
+				<item id="187060091" /><!-- Shining Light's Wings -->
+				<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+			</bundle>
+			<bundle chance="4.17">
+				<item id="187060094" /><!-- Splendid Light's Wings -->
+				<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+			</bundle>
+			<bundle chance="4.17">
+				<item id="188053785" /><!-- Greater Stigma Bundle -->
+				<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+			</bundle>
+			<bundle chance="4.17">
+				<item id="188054038" /><!-- Wave Song Armor Box -->
+				<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+			</bundle>
+			<bundle chance="4.17">
+				<item id="188054039" /><!-- Sea Feast Armor Box -->
+				<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+			</bundle>
+			<bundle chance="4.17">
+				<item id="188053206" /><!-- [Event] Stormwing's Eternal Armor Chest -->
+				<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+			</bundle>
+			<bundle chance="4.17">
+				<item id="188053784" /><!-- Stigma Bundle -->
+				<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+			</bundle>
+			<bundle chance="4.17">
+				<item id="188053208" /><!-- [Event] Tiamat Guard's Eternal Armor Chest -->
+				<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+			</bundle>
+			<bundle chance="4.16">
+				<item id="188053324" /><!-- Levinshor Alliance Noble Ancient Manastone Box -->
+				<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+			</bundle>
+			<bundle chance="4.16">
+				<item id="169405339" /><!-- Pallasite Crystal -->
+				<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+			</bundle>
+			<bundle chance="4.16">
+				<item id="188053295" /><!-- Empyrean Plume Chest -->
+				<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+			</bundle>
+			<bundle chance="4.16">
+				<item id="188052693" /><!-- [Event] Saam King's Herbs Bundle -->
+				<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+			</bundle>
+			<bundle chance="4.16">
+				<item id="188052716" /><!-- [Event] Lucky Scroll Pouch -->
+				<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+			</bundle>
+			<bundle chance="4.16">
+				<item id="188053663" /><!-- [Event] Blood Mark Box -->
+				<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+			</bundle>
+			<bundle chance="4.16">
+				<item id="188053644" /><!-- [Event] Small Ancient Coin Bundle -->
+				<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+			</bundle>
+			<bundle chance="4.16">
+				<item id="161000003" /><!-- Reviving Elemental Stone -->
+				<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+			</bundle>
+		</set>
+	</decomposable>
+	<decomposable item_id="188054037" override="true"><!-- [Event] Engraved Ice Festival Box -->
+		<set>
+			<item id="188053212" chance="1" /><!-- [Event] Dragon Lord's Mythic Weapon Chest -->
+			<item id="188052560" chance="4" /><!-- Assured Greater Felicitous Socketing Box (Mythic) -->
+			<item id="188053663" count="3" chance="5" /><!-- [Event] Blood Mark Box -->
+			<item id="188053663" chance="10" /><!-- [Event] Blood Mark Box -->
+			<item id="166020000" count="3" chance="20" /><!-- Omega Enchantment Stone -->
+			<item id="166030005" count="2" chance="20" /><!-- Tempering Solution -->
+			<item id="166500002" count="3" chance="20" /><!-- Amplification Stone -->
+			<item id="188053786" chance="20" /><!-- Major Stigma Bundle -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188054198" selectable="true" override="true"><!-- Greater Scroll Bundle -->
+		<set>
+			<item id="164002116" count="25" /><!-- [Event] Rx: Accelerox -->
+			<item id="164002117" count="25" /><!-- [Event] Rx: Blitzopan -->
+			<item id="164002118" count="25" /><!-- [Event] Rx: Castafodin -->
+			<item id="164002119" count="25" /><!-- [Event] Rx: Critozyne -->
+			<item id="164002120" count="25" /><!-- [Event] Rx: Mojocycline -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188054260" selectable="true" override="true"><!-- Ride Box of Conquest -->
+		<set>
+			<item id="190100139" /><!-- Sleek Hovercycle -->
+			<item id="190100164" /><!-- Magnificent Clucklich -->
+			<item id="190100146" /><!-- Immortal Knight's War Steed -->
+			<item id="190100150" /><!-- Shugo Gyrocopter -->
+			<item id="190100072" /><!-- Rosenimbus -->
+		</set>
+	</decomposable>
+</decomposable_items>
