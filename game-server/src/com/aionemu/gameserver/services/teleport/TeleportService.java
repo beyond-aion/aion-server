@@ -193,9 +193,9 @@ public class TeleportService {
 		PacketSendUtility.sendPacket(player, new SM_PLAYER_INFO(player));
 		PacketSendUtility.sendPacket(player, new SM_STATS_INFO(player));
 		PacketSendUtility.sendPacket(player, SM_MOTION.playerMotions(player));
+		player.getController().startProtectionActiveTask(); // before spawning, so others never see the player unprotected
 		World.getInstance().spawn(player);
 		World.getInstance().spawn(player.getPet());
-		player.getController().startProtectionActiveTask();
 		player.getEffectController().updatePlayerEffectIcons(null);
 		player.getController().updateZone();
 		player.setPortAnimation(ArrivalAnimation.NONE);

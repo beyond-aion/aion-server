@@ -37,6 +37,7 @@ public class PlayerAllianceLeavedEvent extends PlayerLeavedEvent<PlayerAllianceM
 			team.onEvent(new ChangeAllianceLeaderEvent(team));
 
 		PlayerAllianceMember leavedTeamMember = team.removeMember(leavedPlayer.getObjectId());
+		leavedPlayer.updateKnownlist();
 
 		SM_SYSTEM_MESSAGE leaveMsg = switch (reason) {
 			case LEAVE -> SM_SYSTEM_MESSAGE.STR_FORCE_LEAVE_HIM(leavedPlayer.getName());
@@ -46,6 +47,8 @@ public class PlayerAllianceLeavedEvent extends PlayerLeavedEvent<PlayerAllianceM
 		};
 		team.forEach(player -> {
 			PacketSendUtility.sendPacket(player, leaveMsg);
+			if (player.getKnownList().knows(leavedPlayer))
+				player.updateKnownlist();
 			if (reason != LeaveReson.DISBAND) {
 				PacketSendUtility.sendPacket(player, new SM_ALLIANCE_MEMBER_INFO(leavedTeamMember, PlayerAllianceEvent.LEAVE));
 				PacketSendUtility.sendPacket(player, new SM_ALLIANCE_INFO(team));
