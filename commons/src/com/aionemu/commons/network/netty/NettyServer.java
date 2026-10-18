@@ -94,20 +94,24 @@ public class NettyServer {
 
 	/**
 	 * Stops accepting connections, closes all connections after sending their pending data (or after a timeout), and stops the network threads.
-	 * Afterwards, every connection has queued its {@link NettyConnection#onDisconnect()} on its packet executor.
+	 * Afterwards, every connection has queued its {@link NettyConnection#onDisconnect()} on its packet executor, unless a channel or a network
+	 * thread didn't stop in time. Every step waits a limited time only, because this runs in the shutdown hook, and the JVM can't exit while it
+	 * waits (a channel whose close never completes was seen with io_uring).
 	 */
 	public void shutdown() {
-		channels.close(ServerChannel.class::isInstance).awaitUninterruptibly();
+		if (!channels.close(ServerChannel.class::isInstance).awaitUninterruptibly(3000))
+			log.warn("The listening sockets didn't close within 3 seconds");
 		findConnections(NettyConnection.class).forEach(NettyConnection::close);
 		long deadlineNanos = System.nanoTime() + TimeUnit.SECONDS.toNanos(3);
 		for (Channel channel : channels)
 			channel.closeFuture().awaitUninterruptibly(Math.max(0, TimeUnit.NANOSECONDS.toMillis(deadlineNanos - System.nanoTime())));
-		channels.close().awaitUninterruptibly();
+		if (!channels.close().awaitUninterruptibly(3000))
+			log.warn("{} connection(s) didn't close within 3 seconds, stopping the network threads anyway", channels.size());
 		long quietPeriodMillis = 100;
 		long timeoutMillis = 3000;
 		Future<?> ioShutdown = ioGroup.shutdownGracefully(quietPeriodMillis, timeoutMillis, TimeUnit.MILLISECONDS);
 		Future<?> acceptorShutdown = acceptorGroup.shutdownGracefully(quietPeriodMillis, timeoutMillis, TimeUnit.MILLISECONDS);
-		ioShutdown.awaitUninterruptibly();
-		acceptorShutdown.awaitUninterruptibly();
+		if (!ioShutdown.awaitUninterruptibly(timeoutMillis + 2000) || !acceptorShutdown.awaitUninterruptibly(2000))
+			log.warn("The network threads didn't stop within {} seconds", (timeoutMillis + 4000) / 1000);
 	}
 }
