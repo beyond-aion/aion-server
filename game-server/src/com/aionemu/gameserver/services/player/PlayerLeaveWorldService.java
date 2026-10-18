@@ -1,10 +1,10 @@
 package com.aionemu.gameserver.services.player;
 
 import java.sql.Timestamp;
-import java.time.Duration;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,7 +50,7 @@ public class PlayerLeaveWorldService {
 	 * will not be rescheduled.
 	 */
 	public static void registerLeaveWorld(Player player) {
-		leaveWorldTaskByPlayer.computeIfAbsent(player, LeaveWorldTask::new).scheduleOrRun(Duration.ofSeconds(10).toMillis());
+		leaveWorldTaskByPlayer.computeIfAbsent(player, LeaveWorldTask::new).schedule();
 	}
 
 	/**
@@ -175,13 +175,10 @@ public class PlayerLeaveWorldService {
 			this.player = player;
 		}
 
-		synchronized void scheduleOrRun(long delayMillis) {
+		synchronized void schedule() {
 			if (finished || future != null)
 				return;
-			if (delayMillis <= 0)
-				run();
-			else
-				future = ThreadPoolManager.getInstance().schedule(this, delayMillis);
+			future = ThreadPoolManager.getInstance().schedule(this, 10, TimeUnit.SECONDS);
 		}
 
 		@Override
