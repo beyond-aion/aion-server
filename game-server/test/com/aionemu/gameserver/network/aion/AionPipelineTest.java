@@ -218,7 +218,30 @@ public class AionPipelineTest {
 	}
 
 	@Test
+	public void ignoresPacketsEncryptedForThePreviousConnectionBeforeTheFirstValidOne() {
+		byte[] garbage = new byte[16];
+		for (int i = 0; i < 5; i++)
+			channel.writeInbound(frame(garbage));
+		assertTrue(channel.isOpen());
+		channel.writeInbound(clientPacket(CM_TIME_CHECK, timeCheckBody(1)));
+		assertEquals(1, packetTasks.size(), "the cipher state got out of sync");
+		assertTrue(channel.isOpen());
+	}
+
+	@Test
+	public void closesAfterMorePacketsForThePreviousConnectionThanTheClientCanHold() {
+		byte[] garbage = new byte[8190];
+		for (int i = 0; i < 8; i++) // 65,536 bytes, the client's send buffer holds 66,560
+			channel.writeInbound(frame(garbage));
+		assertTrue(channel.isOpen());
+		for (int i = 0; i < 3; i++)
+			channel.writeInbound(frame(garbage));
+		assertFalse(channel.isOpen());
+	}
+
+	@Test
 	public void closesAfterThreePacketsThatCantBeDecrypted() {
+		channel.writeInbound(clientPacket(CM_TIME_CHECK, timeCheckBody(1)));
 		byte[] garbage = new byte[16];
 		channel.writeInbound(frame(garbage));
 		channel.writeInbound(frame(garbage));
