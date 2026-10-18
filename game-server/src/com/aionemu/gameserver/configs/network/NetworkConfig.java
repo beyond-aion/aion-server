@@ -71,7 +71,7 @@ public class NetworkConfig {
 	 * Number of threads dedicated to reading and writing network data. There is always 1 acceptor thread. If value is < 1, the acceptor thread also
 	 * handles read & write.
 	 */
-	@Property(key = "gameserver.network.nio.threads", defaultValue = "1")
+	@Property(key = "gameserver.network.nio.threads", defaultValue = "4")
 	public static int NIO_READ_WRITE_THREADS;
 
 	/**
