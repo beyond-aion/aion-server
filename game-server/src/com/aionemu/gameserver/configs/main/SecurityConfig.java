@@ -72,7 +72,7 @@ public class SecurityConfig {
 	/**
 	 * Maximum number of characters that can be logged in simultaneously from one computer (0 = unlimited).
 	 */
-	@Property(key = "gameserver.security.multi_client.max_clients_per_computer", defaultValue = "0")
+	@Property(key = "gameserver.security.multi_client.max_clients_per_computer", defaultValue = "2")
 	public static int MULTI_CLIENT_MAX_CLIENTS_PER_COMPUTER;
 
 	/**
