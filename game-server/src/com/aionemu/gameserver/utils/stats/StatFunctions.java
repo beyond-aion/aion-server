@@ -594,15 +594,11 @@ public class StatFunctions {
 		return (int) limit(StatEnum.MAGICAL_RESIST, resistRate);
 	}
 
-	public static int calculateFallDamage(Player player, float distance) {
-		int fallDamage = 0;
-		if (distance >= FallDamageConfig.MAXIMUM_DISTANCE_DAMAGE) {
-			fallDamage = player.getLifeStats().getCurrentHp();
-		} else if (distance >= FallDamageConfig.MINIMUM_DISTANCE_DAMAGE) {
-			float dmgPerMeter = player.getLifeStats().getMaxHp() * FallDamageConfig.FALL_DAMAGE_PERCENTAGE / 100f;
-			fallDamage = (int) (distance * dmgPerMeter);
-		}
-		return fallDamage;
+	/**
+	 * @return Damage of a non-lethal fall: a percentage of max HP plus a flat amount per meter.
+	 */
+	public static int calculateFallDamage(Player player, float height) {
+		return (int) (player.getLifeStats().getMaxHp() * height * FallDamageConfig.FALL_DAMAGE_PERCENTAGE / 100f + height * FallDamageConfig.FALL_DAMAGE_FLAT);
 	}
 
 	/**

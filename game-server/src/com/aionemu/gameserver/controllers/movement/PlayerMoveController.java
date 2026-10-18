@@ -8,14 +8,15 @@ import com.aionemu.gameserver.services.player.PlayerReviveService;
 import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.utils.stats.StatFunctions;
 import com.aionemu.gameserver.world.WorldPosition;
+import com.aionemu.gameserver.world.geo.GeoService;
 
 /**
  * @author ATracer
  */
 public class PlayerMoveController extends PlayableMoveController<Player> {
 
-	private float fallDistance;
-	private float lastFallZ;
+	private float fallStartZ = Float.NaN;
+	private float lastZ = Float.NaN;
 	private byte lastMovementMask;
 	private long lastPositionFromClientMillis;
 	private WorldPosition lastPositionFromClient;
@@ -23,12 +24,6 @@ public class PlayerMoveController extends PlayableMoveController<Player> {
 
 	public PlayerMoveController(Player owner) {
 		super(owner);
-	}
-
-	@Override
-	public void abortMove() {
-		super.abortMove();
-		stopFalling(owner.getZ());
 	}
 
 	public byte getLastMovementMask() {
@@ -97,33 +92,75 @@ public class PlayerMoveController extends PlayableMoveController<Player> {
 					lastPositionFromClient.getHeading());
 	}
 
+	/**
+	 * Called for move packets in which the player falls. A fall packet that already touches the ground counts as landing.
+	 */
 	public void updateFalling(float newZ) {
-		if (lastFallZ != 0) {
-			fallDistance += lastFallZ - newZ;
-			if (fallDistance >= FallDamageConfig.MAXIMUM_DISTANCE_MIDAIR && owner.getController().die(TYPE.FALL_DAMAGE, LOG.REGULAR, owner)) {
-				PlayerReviveService.scheduleReviveAtBase(owner, 1000, 0);
+		if (!Float.isNaN(GeoService.getInstance().getZ(owner, newZ + 0.3f, newZ - 0.3f))) {
+			stopFalling(newZ);
+			return;
+		}
+		if (isBelowWorld(newZ)) {
+			dieFromFall();
+			return;
+		}
+		if (!Float.isNaN(fallStartZ) && newZ < lastZ) {
+			float height = fallStartZ - newZ;
+			float maxHeight = owner.isInsideFlyZone() ? FallDamageConfig.MAXIMUM_DISTANCE_MIDAIR_FLY_ZONE : FallDamageConfig.MAXIMUM_DISTANCE_MIDAIR;
+			if (height > maxHeight && Float.isNaN(GeoService.getInstance().getWalkableZ(owner, newZ, newZ - 2 * maxHeight))) {
+				dieFromFall();
 				return;
 			}
 		}
-		lastFallZ = newZ;
+		lastZ = newZ;
 		owner.getObserveController().notifyMoveObservers();
 	}
 
+	/**
+	 * Called for all other move packets: the player stands on the ground, flies or glides.
+	 */
 	public void stopFalling(float newZ) {
-		if (lastFallZ == 0)
+		if (isBelowWorld(newZ)) {
+			dieFromFall();
 			return;
-
-		if (!owner.isFlying() && !owner.isDead()) {
-			fallDistance += lastFallZ - newZ;
-			int damage = StatFunctions.calculateFallDamage(owner, fallDistance);
-			if (damage > 0) {
-				owner.getLifeStats().reduceHp(TYPE.FALL_DAMAGE, damage, 0, LOG.REGULAR, owner);
+		}
+		float height = fallStartZ - newZ;
+		if (!owner.isFlying() && height > FallDamageConfig.MINIMUM_DISTANCE_DAMAGE) {
+			if (height >= FallDamageConfig.MAXIMUM_DISTANCE_DAMAGE) {
+				dieFromFall();
+				return;
+			}
+			if (!owner.isInSprintMode()) {
+				owner.getLifeStats().reduceHp(TYPE.FALL_DAMAGE, StatFunctions.calculateFallDamage(owner, height), 0, LOG.REGULAR, owner);
 				owner.getObserveController().notifyAttackedObservers(owner, 0);
 			}
 		}
-		fallDistance = 0;
-		lastFallZ = 0;
+		fallStartZ = newZ;
+		lastZ = newZ;
 		owner.getObserveController().notifyMoveObservers();
+	}
+
+	/**
+	 * Forgets where the current fall started, so a teleport doesn't count as one.
+	 */
+	public void resetFalling() {
+		fallStartZ = Float.NaN;
+		lastZ = Float.NaN;
+	}
+
+	/**
+	 * @return True if the player is below z 0 and more than 2 m under the ground.
+	 */
+	private boolean isBelowWorld(float z) {
+		return z <= 0 && !Float.isNaN(GeoService.getInstance().getZ(owner, 5000, z + 2));
+	}
+
+	private void dieFromFall() {
+		resetFalling();
+		if (owner.isDead())
+			return;
+		if (owner.getController().die(TYPE.FALL_DAMAGE, LOG.REGULAR, owner))
+			PlayerReviveService.scheduleBindReviveAfterFall(owner);
 	}
 
 	public void setHasMovedByRandomMoveLocEffect(Skill skill) {
