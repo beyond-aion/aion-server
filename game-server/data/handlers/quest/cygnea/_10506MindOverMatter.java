@@ -11,7 +11,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
-import com.aionemu.gameserver.world.zone.ZoneName;
+import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
  * @Author Majka
@@ -47,7 +47,7 @@ public class _10506MindOverMatter extends AbstractQuestHandler {
 		for (int mob : mobs) {
 			qe.registerQuestNpc(mob).addOnKillEvent(questId);
 		}
-		qe.registerOnEnterZone(ZoneName.get("LF5_SENSORYAREA_Q10506_206365_5_210070000"), questId); // Beritra Invasion Corridor zone
+		qe.registerOnEnterZone("LF5_SENSORYAREA_Q10506_206365_5_210070000", questId); // Beritra Invasion Corridor zone
 		qe.registerOnQuestCompleted(questId);
 		qe.registerOnLevelChanged(questId);
 		qe.registerOnInvisibleTimerEnd(questId);
@@ -142,9 +142,9 @@ public class _10506MindOverMatter extends AbstractQuestHandler {
 	}
 
 	@Override
-	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) { // Step 2: Look for the Beritra Invasion Corridor.
+	public boolean onEnterZoneEvent(QuestEnv env, ZoneInstance zone) { // Step 2: Look for the Beritra Invasion Corridor.
 
-		if (zoneName == ZoneName.get("LF5_SENSORYAREA_Q10506_206365_5_210070000")) {
+		if (zone.matches("LF5_SENSORYAREA_Q10506_206365_5_210070000")) {
 
 			Player player = env.getPlayer();
 			if (player == null) {

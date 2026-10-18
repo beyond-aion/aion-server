@@ -37,7 +37,7 @@ public class RewardServiceDAO {
 				}
 			}
 		} catch (Exception e) {
-			log.error("Couldn't load unreceived web rewards for player " + playerId, e);
+			log.error("Couldn't load unreceived web rewards for player {}", playerId, e);
 		}
 		return list;
 	}
@@ -54,8 +54,8 @@ public class RewardServiceDAO {
 			stmt.executeBatch();
 			con.commit();
 		} catch (Exception e) {
-			log.error("Error saving received web rewards, player could potentially receive rewards multiple times! Check entry_id's: "
-				+ Arrays.toString(ids.toArray()), e);
+			log.error("Error saving received web rewards, player could potentially receive rewards multiple times! Check entry_id's: {}",
+				Arrays.toString(ids.toArray()), e);
 		}
 	}
 

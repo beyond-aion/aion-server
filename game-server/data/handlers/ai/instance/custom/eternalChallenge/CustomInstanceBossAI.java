@@ -89,8 +89,8 @@ public class CustomInstanceBossAI extends GeneralNpcAI {
 
 		Player p = World.getInstance().getPlayer(playerId);
 		if (p == null) {
-			log.error("[CI_ROAH] No player object found for player id: " + playerId
-				+ ". Either the player is offline or the central artifact was destroyed by something else.", new Exception());
+			log.warn("[CI_ROAH] No online player found for ID {} - either the player is offline or the central artifact was destroyed by something else",
+				playerId, new Exception());
 			return;
 		}
 
@@ -181,7 +181,7 @@ public class CustomInstanceBossAI extends GeneralNpcAI {
 			for (int i = 0; i < output.size(); i++) {
 				Skill skillI = SkillEngine.getInstance().getSkill(getOwner(), skillSet.get(i), 1, getTarget());
 				if (skillI == null) {
-					log.warn("Detected a skill input with not existent template [skillId=" + skillSet.get(i) + "].");
+					log.warn("Detected a skill input with not existent template [skillId={}].", skillSet.get(i));
 					output.set(i, -1d);
 					continue;
 				}

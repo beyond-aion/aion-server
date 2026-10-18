@@ -7,6 +7,7 @@ import com.aionemu.gameserver.model.gameobjects.HouseObject;
 import com.aionemu.gameserver.model.gameobjects.UseableItemObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.house.HouseRegistry;
+import com.aionemu.gameserver.model.house.HousingContainer;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
@@ -15,10 +16,10 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
  */
 public class SM_HOUSE_REGISTRY extends AionServerPacket {
 
-	private final int action;
+	private final HousingContainer container;
 
-	public SM_HOUSE_REGISTRY(int action) {
-		this.action = action;
+	public SM_HOUSE_REGISTRY(HousingContainer container) {
+		this.container = container;
 	}
 
 	@Override
@@ -28,8 +29,8 @@ public class SM_HOUSE_REGISTRY extends AionServerPacket {
 			return;
 		HouseRegistry houseRegistry = player.getActiveHouse().getRegistry();
 
-		writeC(action);
-		if (action == 1) { // Display registered objects
+		writeC(container.getId());
+		if (container == HousingContainer.OBJECTS) {
 			if (houseRegistry == null) {
 				writeH(0);
 				return;
@@ -45,14 +46,14 @@ public class SM_HOUSE_REGISTRY extends AionServerPacket {
 				writeD(obj.secondsUntilExpiration());
 
 				writeDyeInfo(obj.getColor());
-				writeD(0); // expiration as for armor ?
+				writeD(obj.getColorExpireEnd());
 
 				writeC(obj.getObjectTemplate().getTypeId());
 				if (obj instanceof UseableItemObject) {
 					((UseableItemObject) obj).writeUsageData(getBuf());
 				}
 			}
-		} else if (action == 2) { // Display default and registered decoration items
+		} else if (container == HousingContainer.DECORATIONS) { // default and registered ones
 			List<Integer> defaultDecorIds = houseRegistry.getOwner().getBuilding().getDefaultPartIds();
 			List<HouseDecoration> unusedDecors = houseRegistry.getUnusedDecors();
 			writeH(defaultDecorIds.size() + unusedDecors.size());

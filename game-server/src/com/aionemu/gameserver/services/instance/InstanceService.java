@@ -57,7 +57,7 @@ public class InstanceService {
 		if (autoDestroy)
 			instance.setEmptyInstanceTask(ThreadPoolManager.getInstance().scheduleAtFixedRate(new EmptyInstanceCheckerTask(instance), 60000, 60000));
 
-		log.info("Created new instance: " + worldId + " [" + instance.getInstanceId() + "] owner:" + ownerId + " difficultyId:" + difficultyId);
+		log.info("Created new instance: {} [{}] owner:{} difficultyId:{}", worldId, instance.getInstanceId(), ownerId, difficultyId);
 		return instance;
 	}
 
@@ -91,7 +91,7 @@ public class InstanceService {
 
 		map.removeWorldMapInstance(instanceId);
 
-		log.info("Destroying " + instance);
+		log.info("Destroying {}", instance);
 
 		TemporarySpawnEngine.onInstanceDestroy(instance); // first unregister all temporary spawns, then despawn mobs
 		for (VisibleObject obj : instance) {

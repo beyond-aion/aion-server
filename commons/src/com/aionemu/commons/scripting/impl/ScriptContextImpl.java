@@ -76,7 +76,7 @@ public class ScriptContextImpl implements ScriptContext {
 		} catch (ClassFormatError e) {
 			if (!CommonsConfig.SCRIPT_COMPILER_CACHING)
 				throw e;
-			log.warn("Couldn't load cached classes from " + ScriptCompilerCache.CACHE_DIR + ", refreshing files in cache...", e);
+			log.warn("Couldn't load cached classes from {}, refreshing files in cache...", ScriptCompilerCache.CACHE_DIR, e);
 			ScriptCompilerCache.invalidate(sourceFiles = findFiles());
 			scriptCompiler.setClasses(Collections.emptyMap());
 			compilationResult = scriptCompiler.compile(sourceFiles);

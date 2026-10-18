@@ -44,8 +44,8 @@ public final class ThreadPoolManager implements Executor {
 
 		longRunningPool = (ThreadPoolExecutor) Executors.newCachedThreadPool();
 
-		log.info("ThreadPoolManager: Initialized with " + instantPool.getPoolSize() + " instant, " + scheduledPool.getPoolSize() + " scheduler and "
-			+ longRunningPool.getPoolSize() + " long running threads");
+		log.info("ThreadPoolManager initialized with {} instant, {} scheduler and {} long running threads", instantPool.getPoolSize(),
+			scheduledPool.getPoolSize(), longRunningPool.getPoolSize());
 	}
 
 	public ScheduledFuture<?> schedule(Runnable r, long delay, TimeUnit unit) {
@@ -83,27 +83,17 @@ public final class ThreadPoolManager implements Executor {
 	 * Shutdown all thread pools.
 	 */
 	public void shutdown() {
-		final long begin = System.currentTimeMillis();
-
-		log.info("ThreadPoolManager: Shutting down.");
-		log.info("\t... executing " + scheduledPool.getActiveCount() + "/" + getTaskCount(scheduledPool) + " scheduled tasks.");
-		log.info("\t... executing " + getTaskCount(instantPool) + " instant tasks.");
-		log.info("\t... executing " + getTaskCount(longRunningPool) + " long running tasks.");
-
+		long begin = System.currentTimeMillis();
 		scheduledPool.shutdown();
 		instantPool.shutdown();
 		longRunningPool.shutdown();
 
-		boolean success = false;
-		try {
-			success = awaitTermination(5000);
-		} catch (InterruptedException ignored) {
-		}
-
-		log.info("\t... success: " + success + " in " + (System.currentTimeMillis() - begin) + " msec.");
-		log.info("\t... " + getTaskCount(scheduledPool) + " scheduled tasks left.");
-		log.info("\t... " + getTaskCount(instantPool) + " instant tasks left.");
-		log.info("\t... " + getTaskCount(longRunningPool) + " long running tasks left.");
+		int tasksLeft = awaitTermination(5000);
+		if (tasksLeft == 0)
+			log.info("ThreadPoolManager shutdown completed in {} ms", System.currentTimeMillis() - begin);
+		else
+			log.info("ThreadPoolManager shutdown timed out after {} ms with {} scheduled tasks, {} instant tasks and {} long running tasks left",
+				System.currentTimeMillis() - begin, getTaskCount(scheduledPool), getTaskCount(instantPool), getTaskCount(longRunningPool));
 	}
 
 	private int getTaskCount(ThreadPoolExecutor tp) {
@@ -150,23 +140,20 @@ public final class ThreadPoolManager implements Executor {
 		return list;
 	}
 
-	private boolean awaitTermination(long timeoutInMillisec) throws InterruptedException {
-		final long begin = System.currentTimeMillis();
-
-		while (System.currentTimeMillis() - begin < timeoutInMillisec) {
-			if (!scheduledPool.awaitTermination(10, TimeUnit.MILLISECONDS))
-				continue;
-
-			if (!instantPool.awaitTermination(10, TimeUnit.MILLISECONDS))
-				continue;
-
-			if (!longRunningPool.awaitTermination(10, TimeUnit.MILLISECONDS))
-				continue;
-
-			return true;
+	private int awaitTermination(long timeoutMillis) {
+		for (long expirationTime = System.currentTimeMillis() + timeoutMillis; System.currentTimeMillis() < expirationTime; ) {
+			try {
+				if (!scheduledPool.awaitTermination(10, TimeUnit.MILLISECONDS))
+					continue;
+				if (!instantPool.awaitTermination(10, TimeUnit.MILLISECONDS))
+					continue;
+				if (!longRunningPool.awaitTermination(10, TimeUnit.MILLISECONDS))
+					continue;
+			} catch (InterruptedException _) {
+			}
+			break;
 		}
-
-		return false;
+		return getTaskCount(scheduledPool) + getTaskCount(instantPool) + getTaskCount(longRunningPool);
 	}
 
 	private static final class SingletonHolder {

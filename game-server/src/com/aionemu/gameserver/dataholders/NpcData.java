@@ -2,9 +2,6 @@ package com.aionemu.gameserver.dataholders;
 
 import java.util.*;
 
-import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.*;
-
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.dataholders.loadingutils.StaticDataListener;
@@ -17,6 +14,9 @@ import com.aionemu.gameserver.model.templates.npc.NpcRank;
 import com.aionemu.gameserver.model.templates.npc.NpcRating;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 import com.aionemu.gameserver.model.templates.stats.StatsTemplate;
+
+import jakarta.xml.bind.Unmarshaller;
+import jakarta.xml.bind.annotation.*;
 
 /**
  * This is a container holding and serving all {@link NpcTemplate} instances.<br>
@@ -48,7 +48,7 @@ public class NpcData {
 			if (npc.getFuncDialogIds() != null) {
 				for (Integer dialogActionId : npc.getFuncDialogIds()) {
 					if (DialogAction.nameOf(dialogActionId) == null)
-						LoggerFactory.getLogger(NpcData.class).warn("Unknown dialog action " + dialogActionId + " for Npc " + npc.getTemplateId());
+						LoggerFactory.getLogger(NpcData.class).warn("Unknown dialog action {} for Npc {}", dialogActionId, npc.getTemplateId());
 				}
 			}
 			if (npc.getTribe() != TribeClass.PET && npc.getTribe() != TribeClass.PET_DARK) { // summons and siege weapons have fixed stats

@@ -40,7 +40,7 @@ public class ChestAI extends ActionItemNpcAI {
 		chestTemplate = DataManager.CHEST_DATA.getChestTemplate(getNpcId());
 
 		if (chestTemplate == null) {
-			LoggerFactory.getLogger(ChestAI.class).warn("Missing chest template or incorrect AI for npc " + getNpcId());
+			LoggerFactory.getLogger(ChestAI.class).warn("Missing chest template or incorrect AI for npc {}", getNpcId());
 			return;
 		}
 		super.handleDialogStart(player);

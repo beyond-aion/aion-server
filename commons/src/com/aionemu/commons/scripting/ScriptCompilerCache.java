@@ -50,7 +50,7 @@ public class ScriptCompilerCache {
 					CLASS_FILES_BY_SOURCE_FILE.clear();
 					log.info("Rebuilding compiled class cache because some files got deleted or renamed");
 				} else {
-					log.info("Initialized compiled class cache with " + CLASS_FILES_BY_SOURCE_FILE.size() + " classes");
+					log.info("Initialized compiled class cache with {} classes", CLASS_FILES_BY_SOURCE_FILE.size());
 				}
 			}
 		} catch (IOException e) {
@@ -92,7 +92,7 @@ public class ScriptCompilerCache {
 				addClassFile(binaryClass.getSourceFile(), classFile);
 				SHOULD_PERSIST.set(true);
 			} catch (IOException e) {
-				log.error("Couldn't cache " + binaryClass.getName(), e);
+				log.error("Couldn't cache {}", binaryClass.getName(), e);
 			}
 		});
 		if (ACCESSORS.decrementAndGet() == 0 && SHOULD_PERSIST.get()) // only save once after concurrent access finished and only if cache changed

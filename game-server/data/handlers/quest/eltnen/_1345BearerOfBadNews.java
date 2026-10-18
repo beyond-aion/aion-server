@@ -10,7 +10,6 @@ import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author Ritsu
@@ -34,7 +33,7 @@ public class _1345BearerOfBadNews extends AbstractQuestHandler {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			if (player.isInsideItemUseZone(ZoneName.get("LC1_ITEMUSEAREA_Q1345")))
+			if (player.isInsideItemUseZone("LC1_ITEMUSEAREA_Q1345"))
 				return HandlerResult.fromBoolean(useQuestItem(env, item, 1, 2, true, 0, 0, 0));
 		}
 		return HandlerResult.SUCCESS; // ??

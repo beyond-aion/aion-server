@@ -165,7 +165,7 @@ public class SpawnGroup {
 			Set<SpawnTemplate> occupiedSpots = poolUsedTemplates.computeIfAbsent(instanceId, _ -> new HashSet<>(pool));
 			SpawnTemplate freeSpot = Rnd.get(spots.stream().filter(spot -> !occupiedSpots.contains(spot)).toList());
 			if (freeSpot == null) {
-				LoggerFactory.getLogger(SpawnGroup.class).warn("All spots are used, could not get random spot for npcId: " + npcId + ", worldId: " + worldId);
+				LoggerFactory.getLogger(SpawnGroup.class).warn("All spots are used, could not get random spot for npcId: {}, worldId: {}", npcId, worldId);
 				return null;
 			}
 			occupiedSpots.add(freeSpot);

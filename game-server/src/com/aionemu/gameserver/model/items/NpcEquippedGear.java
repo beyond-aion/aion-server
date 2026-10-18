@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.TreeMap;
 
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import com.aionemu.gameserver.dataholders.loadingutils.adapters.NpcEquipmentList;
 import com.aionemu.gameserver.dataholders.loadingutils.adapters.NpcEquippedGearAdapter;

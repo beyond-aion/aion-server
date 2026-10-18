@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.model.templates.zone;
 
-import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.geoEngine.bounding.BoundingBox;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.geoEngine.scene.Spatial;
@@ -12,8 +11,7 @@ public class MaterialZoneTemplate extends ZoneTemplate {
 
 	public MaterialZoneTemplate(Spatial geometry, int mapId) {
 		mapid = mapId;
-		flags = DataManager.WORLD_MAPS_DATA.getTemplate(mapId).getFlags();
-		setXmlName(geometry.getName() + "_" + mapId);
+		setXmlName(geometry.getName());
 		BoundingBox box = (BoundingBox) geometry.getWorldBound();
 		Vector3f center = box.getCenter();
 		// don't use polygons for small areas, they are bugged in Java API

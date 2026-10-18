@@ -5,9 +5,15 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.SocketChannel;
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.Queue;
 import java.util.concurrent.Executor;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.aionemu.commons.network.packet.BaseClientPacket;
 import com.aionemu.commons.network.packet.BaseServerPacket;
 import com.aionemu.commons.options.Assertion;
 
@@ -18,6 +24,8 @@ import com.aionemu.commons.options.Assertion;
  * @author -Nemesiss-
  */
 public abstract class AConnection<T extends BaseServerPacket> {
+
+	private static final Logger log = LoggerFactory.getLogger(AConnection.class);
 
 	/**
 	 * SocketChannel representing this connection
@@ -58,9 +66,25 @@ public abstract class AConnection<T extends BaseServerPacket> {
 	private final String ip;
 
 	/**
-	 * Used only for PacketProcessor synchronization purpose
+	 * Time when this connection was established
 	 */
-	private boolean locked = false;
+	private final long connectedAtMillis = System.currentTimeMillis();
+
+	/**
+	 * Time when data was last written to the socket or the send queue became non-empty
+	 */
+	private volatile long lastWriteProgressMillis;
+
+	/**
+	 * Client packets of this connection waiting for execution. Guarded by the lock of the {@link PacketProcessor}.
+	 */
+	final Deque<BaseClientPacket<? extends AConnection<?>>> pendingPackets = new ArrayDeque<>();
+
+	/**
+	 * True while this connection waits in the {@link PacketProcessor} or one of its packets is being executed. Guarded by the lock of the
+	 * {@link PacketProcessor}.
+	 */
+	boolean scheduledForProcessing;
 
 	/**
 	 * Constructor
@@ -106,13 +130,93 @@ public abstract class AConnection<T extends BaseServerPacket> {
 				return;
 
 			if (isConnected()) {
-				getSendMsgQueue().add(serverPacket);
+				Queue<T> sendMsgQueue = getSendMsgQueue();
+				if (sendMsgQueue.isEmpty()) {
+					lastWriteProgressMillis = System.currentTimeMillis();
+				} else if (isSendQueueStuck(sendMsgQueue.size())) {
+					sendMsgQueue.clear();
+					close();
+					return;
+				}
+				sendMsgQueue.add(serverPacket);
 				key.interestOps(key.interestOps() | SelectionKey.OP_WRITE);
 				key.selector().wakeup();
 			} else {
 				close();
 			}
 		}
+	}
+
+	private boolean isSendQueueStuck(int queuedPackets) {
+		if (queuedPackets >= getMaxSendQueueSize()) {
+			log.warn("{} has {} server packets waiting to be sent, disconnecting", this, queuedPackets);
+			return true;
+		}
+		long millisWithoutProgress = System.currentTimeMillis() - lastWriteProgressMillis;
+		if (millisWithoutProgress > getMaxSendStallMillis()) {
+			log.warn("{} hasn't received any data for {} ms while {} server packets are waiting to be sent, disconnecting", this, millisWithoutProgress,
+				queuedPackets);
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * @return The maximum number of server packets that may wait to be sent before the connection gets closed.
+	 */
+	protected int getMaxSendQueueSize() {
+		return Integer.MAX_VALUE;
+	}
+
+	/**
+	 * @return The maximum time in milliseconds the remote side may not receive any data while server packets are waiting to be sent, before the
+	 *         connection gets closed.
+	 */
+	protected long getMaxSendStallMillis() {
+		return Long.MAX_VALUE;
+	}
+
+	/**
+	 * @return True if the remote side has authenticated itself. Connections that didn't authenticate within {@link #getAuthTimeoutMillis()} get
+	 *         closed.
+	 */
+	protected boolean isAuthenticated() {
+		return true;
+	}
+
+	/**
+	 * @return The time in milliseconds the remote side has to authenticate itself, or 0 for no limit.
+	 */
+	protected long getAuthTimeoutMillis() {
+		return 0;
+	}
+
+	/**
+	 * Called by the Dispatcher Thread periodically to close connections which didn't authenticate in time or stopped receiving data.
+	 */
+	final void closeIfTimedOut(long nowMillis) {
+		synchronized (guard) {
+			if (pendingCloseUntilMillis != 0 || closed)
+				return;
+			long authTimeoutMillis = getAuthTimeoutMillis();
+			if (authTimeoutMillis > 0 && nowMillis - connectedAtMillis > authTimeoutMillis && !isAuthenticated()) {
+				log.info("{} didn't authenticate within {} ms, disconnecting", this, authTimeoutMillis);
+				close();
+				return;
+			}
+			Queue<T> sendMsgQueue = getSendMsgQueue();
+			if (!sendMsgQueue.isEmpty() && isSendQueueStuck(sendMsgQueue.size())) {
+				sendMsgQueue.clear();
+				close();
+			}
+		}
+	}
+
+	/**
+	 * Called by the Dispatcher after data was written to the socket.
+	 */
+	final void onDataWritten() {
+		lastWriteProgressMillis = System.currentTimeMillis();
 	}
 
 	/**
@@ -192,24 +296,6 @@ public abstract class AConnection<T extends BaseServerPacket> {
 	 */
 	public final String getIP() {
 		return ip;
-	}
-
-	/**
-	 * Used only for PacketProcessor synchronization purpose. Return true if locked successful - if wasn't locked before.
-	 * 
-	 * @return locked
-	 */
-	boolean tryLockConnection() {
-		if (locked)
-			return false;
-		return locked = true;
-	}
-
-	/**
-	 * Used only for PacketProcessor synchronization purpose. Unlock this connection.
-	 */
-	void unlockConnection() {
-		locked = false;
 	}
 
 	/**

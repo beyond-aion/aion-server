@@ -130,7 +130,7 @@ public class ConfigurableProcessor {
 				if (!Property.DEFAULT_VALUE.equals(value))
 					f.set(obj, transform(value, f));
 				else
-					log.debug("Field " + f.getName() + " of class " + f.getDeclaringClass().getName() + " wasn't modified");
+					log.debug("Field {} of class {} wasn't modified", f.getName(), f.getDeclaringClass().getName());
 			} else {
 				Pattern pattern = Pattern.compile(properties.keyPattern());
 				Map<String, String> values = filterProperties(pattern, props, unusedProperties);

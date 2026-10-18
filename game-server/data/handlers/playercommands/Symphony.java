@@ -63,7 +63,7 @@ public class Symphony extends PlayerCommand {
 		long notAddedCount = ItemService.addItem(player, itemId, itemCount, true,
 			new ItemUpdatePredicate(ItemAddType.DECOMPOSABLE, ItemUpdateType.INC_CASH_ITEM));
 		if (notAddedCount > 0) {
-			log.warn("[Legendary Symphony Event] {}x {} could not be added to {}'s inventory.", notAddedCount, itemId, player.getName());
+			log.warn("[Legendary Symphony Event] {}x {} could not be added to {}'s inventory", notAddedCount, itemId, player.getName());
 		}
 	}
 

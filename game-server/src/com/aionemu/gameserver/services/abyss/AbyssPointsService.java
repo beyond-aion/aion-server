@@ -24,7 +24,7 @@ public class AbyssPointsService {
 
 	public static void addAp(Player player, VisibleObject obj, int value) {
 		if (value > 30000) {
-			log.warn("WARN BIG COUNT AP: " + value + " for " + player + " from " + obj);
+			log.warn("WARN BIG COUNT AP: {} for {} from {}", value, player, obj);
 		}
 		addAp(player, value);
 		SiegeService.getInstance().onAbyssPointsAdded(player, obj, value);

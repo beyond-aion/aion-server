@@ -60,7 +60,7 @@ public class TemperingEffect implements StatOwner {
 			addAccessoryStatFunctions(item, functions);
 		}
 		if (functions.isEmpty()) {
-			LoggerFactory.getLogger(TemperingEffect.class).warn("Missing tempering effect info for item " + item);
+			LoggerFactory.getLogger(TemperingEffect.class).warn("Missing tempering effect info for item {}", item);
 			return;
 		}
 		if (item.getTemperingEffect() != null)

@@ -65,7 +65,7 @@ public class SiegeDAO {
 			stmt.setInt(5, siegeLocation.getLocationId());
 			stmt.execute();
 		} catch (Exception e) {
-			log.error("Could not update siege location " + siegeLocation.getLocationId() + " (race: " + siegeLocation.getRace() + ")", e);
+			log.error("Could not update siege location {} (race: {})", siegeLocation.getLocationId(), siegeLocation.getRace(), e);
 			return false;
 		}
 		return true;
@@ -81,7 +81,7 @@ public class SiegeDAO {
 			stmt.setInt(5, siegeLocation.getFactionBalance());
 			stmt.execute();
 		} catch (Exception e) {
-			log.error("Could not insert siege location " + siegeLocation.getLocationId(), e);
+			log.error("Could not insert siege location {}", siegeLocation.getLocationId(), e);
 			return false;
 		}
 		return true;

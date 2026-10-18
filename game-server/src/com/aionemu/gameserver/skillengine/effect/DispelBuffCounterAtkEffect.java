@@ -1,9 +1,9 @@
 package com.aionemu.gameserver.skillengine.effect;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.controllers.attack.AttackUtil;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -64,11 +64,6 @@ public class DispelBuffCounterAtkEffect extends DamageEffect {
 
 	@Override
 	public boolean shouldUseBoostSpellAttackEffects() {
-		return false;
-	}
-
-	@Override
-	public boolean shouldUseOneTimeBoostSkillAttack() {
 		return false;
 	}
 }

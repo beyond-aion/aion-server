@@ -47,7 +47,7 @@ public class AdminService {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		LoggerFactory.getLogger(AdminService.class).info("AdminService loaded " + list.size() + " operational items.");
+		LoggerFactory.getLogger(AdminService.class).info("AdminService loaded {} operational items.", list.size());
 	}
 
 	public boolean canOperate(Player player, Player target, Item item, String type) {
@@ -65,7 +65,7 @@ public class AdminService {
 			return true;
 
 		if (list.contains(itemId)) { // item goes from staff member to normal player, so log it
-			itemLog.info(player + " traded item " + itemId + " via " + type + (target != null ? " to player " + target : ""));
+			itemLog.info("{} traded item {} via {}{}", player, itemId, type, target != null ? " to player " + target : "");
 			return true;
 		}
 

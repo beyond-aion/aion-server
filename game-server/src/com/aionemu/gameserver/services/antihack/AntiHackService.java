@@ -129,10 +129,10 @@ public class AntiHackService {
 			case 2:
 				moveBack(player, normalMovePacket);
 				if (player.speedHackCounter > SecurityConfig.SPEEDHACK_COUNTER * 3 || player.abnormalHackCounter > SecurityConfig.ABNORMAL_COUNTER * 3)
-					player.getClientConnection().close(new SM_QUIT_RESPONSE());
+					player.getClientConnection().close(SM_QUIT_RESPONSE.quit());
 				return false;
 			case 3:
-				player.getClientConnection().close(new SM_QUIT_RESPONSE());
+				player.getClientConnection().close(SM_QUIT_RESPONSE.quit());
 				return false;
 			default:
 				return true;
@@ -155,8 +155,8 @@ public class AntiHackService {
 		int legitSize = 212; // 212 after login, exactly 30 minutes later: 224, right after that: 1128 o.O
 		if (SecurityConfig.AION_BIN_CHECK) {
 			if (size != legitSize) {
-				log.warn("Detected modified aion.bin for account ID " + con.getAccount().getId());
-				con.close(new SM_QUIT_RESPONSE());
+				log.warn("Detected modified aion.bin for account ID {}", con.getAccount().getId());
+				con.close(SM_QUIT_RESPONSE.quit());
 			}
 		}
 		// con.sendPacket(new SM_GAMEGUARD(size)); // not sent on GF servers currently

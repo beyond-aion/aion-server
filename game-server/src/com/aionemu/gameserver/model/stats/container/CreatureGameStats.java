@@ -314,12 +314,14 @@ public abstract class CreatureGameStats<T extends Creature> {
 
 	public void updateArmorMasteryStats(List<Item> equipment) {
 		stats.values().forEach(statFunctions -> {
-			statFunctions.forEach(statFunction -> {
-				if (statFunction instanceof StatFunctionProxy proxy)
-					statFunction = proxy.getProxiedFunction();
-				if (statFunction instanceof StatArmorMasteryFunction armorMasteryFunction)
-					armorMasteryFunction.updateEquipmentFactor(equipment);
-			});
+			synchronized (statFunctions) {
+				statFunctions.forEach(statFunction -> {
+					if (statFunction instanceof StatFunctionProxy proxy)
+						statFunction = proxy.getProxiedFunction();
+					if (statFunction instanceof StatArmorMasteryFunction armorMasteryFunction)
+						armorMasteryFunction.updateEquipmentFactor(equipment);
+				});
+			}
 		});
 	}
 

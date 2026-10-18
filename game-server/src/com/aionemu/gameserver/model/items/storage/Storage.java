@@ -240,7 +240,7 @@ public abstract class Storage implements IStorage {
 			ItemPacketService.sendItemDeletePacket(actor, StorageType.getStorageTypeById(item.getItemLocation()), item, deleteType);
 			if (LoggingConfig.LOG_ITEM && !item.getItemTemplate().isKinah() && item.getItemCount() > 0) {
 				String name = (item.getEnchantLevel() > 0 ? "+" + item.getEnchantLevel() + " " : "") + item.getItemName();
-				log.info("Deleted " +  item.getItemId() + " " + name + " from " + actor + " (count: " + item.getItemCount() + ") (deletion type: " + deleteType + ")");
+				log.info("Deleted {} {} from {} (count: {}) (deletion type: {})", item.getItemId(), name, actor, item.getItemCount(), deleteType);
 			}
 			QuestEngine.getInstance().onItemRemoved(actor, item.getItemId());
 			return item;

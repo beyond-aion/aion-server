@@ -33,6 +33,7 @@ import com.aionemu.gameserver.services.trade.PricesService;
 import com.aionemu.gameserver.taskmanager.AbstractFIFOPeriodicTaskManager;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.utils.collections.DynamicServerPacketBodySplitList;
 import com.aionemu.gameserver.utils.collections.ListPart;
 import com.aionemu.gameserver.utils.collections.SplitList;
@@ -65,7 +66,7 @@ public class BrokerService {
 	}
 
 	private void initBrokerService() {
-		log.info("Loading broker...");
+		long startTime = System.currentTimeMillis();
 		int loadedBrokerItemsCount = 0;
 		int loadedSettledItemsCount = 0;
 
@@ -91,7 +92,8 @@ public class BrokerService {
 			}
 		}
 
-		log.info("Broker loaded with " + loadedBrokerItemsCount + " broker items, " + loadedSettledItemsCount + " settled items.");
+		log.info("BrokerService initialized with {} active items and {} settled items in {} ms", loadedBrokerItemsCount, loadedSettledItemsCount,
+			System.currentTimeMillis() - startTime);
 	}
 
 	public void showRequestedItems(Player player, int clientMask, byte sortType, int startPage, List<Integer> itemList) {
@@ -246,6 +248,12 @@ public class BrokerService {
 				return;
 			}
 
+			if (itemCount > buyingItem.getItemCount() || itemCount < buyingItem.getItemCount() && !buyingItem.isSplittingAvailable()) {
+				AuditLogger.log(player, "tried to buy " + itemCount + " of " + buyingItem.getItemCount() + " broker items (splitting allowed: "
+					+ buyingItem.isSplittingAvailable() + ")");
+				return;
+			}
+
 			Item item = buyingItem.getItem();
 			long price = buyingItem.getPrice() * itemCount;
 			if (player.getInventory().isFull(item.getItemTemplate().getExtraInventoryId())) {
@@ -263,8 +271,10 @@ public class BrokerService {
 				BrokerOpSaveTask bost = new BrokerOpSaveTask(buyingItem, buyingItem.getItem(), player.getInventory().getKinahItem(), player.getObjectId());
 				saveManager.add(bost);
 				// creating new broker item which will be settled
-				BrokerItem soldItem = new BrokerItem(ItemFactory.newItem(buyingItem.getItemId(), itemCount), buyingItem.getPrice(), buyingItem.getSellerId(),
-					buyingItem.isSplittingAvailable(), buyingItem.getItemBrokerRace());
+				Item soldPart = ItemFactory.newItem(buyingItem.getItemId(), itemCount);
+				soldPart.setExpireTime(item.getExpireTime());
+				BrokerItem soldItem = new BrokerItem(soldPart, buyingItem.getPrice(), buyingItem.getSellerId(), buyingItem.isSplittingAvailable(),
+					buyingItem.getItemBrokerRace());
 				buyingItem = soldItem;
 				item = buyingItem.getItem();
 				BrokerOpSaveTask bost2 = new BrokerOpSaveTask(buyingItem, buyingItem.getItem(), player.getInventory().getKinahItem(), player.getObjectId());
@@ -285,8 +295,8 @@ public class BrokerService {
 			Item boughtItem = player.getInventory().add(item, ItemPacketService.ItemAddType.BROKER_BUY);
 
 			if (LoggingConfig.LOG_BROKER_EXCHANGE)
-				log.info("Player: " + player.getName() + " bought item " + boughtItem.getItemId() + " [" + boughtItem.getItemName() + "] (count: " + itemCount
-					+ ") from player: " + PlayerService.getPlayerName(buyingItem.getSellerId()) + " (total price: " + price + ")");
+				log.info("Player: {} bought item {} [{}] (count: {}) from player: {} (total price: {})", player.getName(), boughtItem.getItemId(),
+					boughtItem.getItemName(), itemCount, PlayerService.getPlayerName(buyingItem.getSellerId()), price);
 
 			// create save task
 			BrokerOpSaveTask bost = new BrokerOpSaveTask(buyingItem, boughtItem, player.getInventory().getKinahItem(), player.getObjectId());
@@ -465,7 +475,7 @@ public class BrokerService {
 		}
 		if (brokerItem != null) {
 			if (brokerItem.getSellerId() != player.getObjectId()) {
-				log.info("[AUDIT] Player: {} tried to get item from broker that he doesn't own", player.getName());
+				AuditLogger.log(player, "tried to get item " + brokerItem.getItemId() + " from broker that he doesn't own. Seller ID: " + brokerItem.getSellerId());
 				return;
 			}
 			if (player.getInventory().isFull(brokerItem.getItem().getItemTemplate().getExtraInventoryId())) {
@@ -568,7 +578,7 @@ public class BrokerService {
 						itemsLeft = true;
 
 				} else
-					log.warn("Broker settled item missed. ObjID: " + item.getItemUniqueId());
+					log.warn("Broker settled item missed. ObjID: {}", item.getItemUniqueId());
 			}
 		}
 

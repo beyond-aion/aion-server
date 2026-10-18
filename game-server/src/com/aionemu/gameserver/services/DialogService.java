@@ -16,9 +16,9 @@ import com.aionemu.gameserver.model.autogroup.AutoGroupType;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.PetAction;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
-import com.aionemu.gameserver.model.gameobjects.player.Mailbox;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.RequestResponseHandler;
+import com.aionemu.gameserver.model.items.storage.StorageType;
 import com.aionemu.gameserver.model.siege.FortressLocation;
 import com.aionemu.gameserver.model.team.alliance.PlayerAlliance;
 import com.aionemu.gameserver.model.templates.goods.GoodsList;
@@ -36,7 +36,6 @@ import com.aionemu.gameserver.services.craft.RelinquishCraftStatus;
 import com.aionemu.gameserver.services.instance.PeriodicInstanceManager;
 import com.aionemu.gameserver.services.item.ItemChargeService;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
-import com.aionemu.gameserver.services.player.PlayerMailboxState;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.services.trade.PricesService;
 import com.aionemu.gameserver.skillengine.model.DispelSlotType;
@@ -51,9 +50,6 @@ public class DialogService {
 	private static final Logger log = LoggerFactory.getLogger(DialogService.class);
 
 	public static void onCloseDialog(Player player, VisibleObject target) {
-		if (target == null)
-			return;
-
 		if (target instanceof Npc npc) {
 			npc.getAi().onCreatureEvent(AIEventType.DIALOG_FINISH, player);
 
@@ -61,9 +57,8 @@ public class DialogService {
 				player.getLegion().getLegionWarehouse().unsetInUse(player.getObjectId());
 		}
 
-		Mailbox mailbox = player.getMailbox();
-		if (mailbox != null && mailbox.mailBoxState != PlayerMailboxState.CLOSED)
-			mailbox.mailBoxState = PlayerMailboxState.CLOSED;
+		player.getMailbox().close();
+		player.unsetStorageManager(target);
 	}
 
 	public static void onDialogSelect(int dialogActionId, Player player, Npc npc, int questId, int extendedRewardIndex) {
@@ -95,6 +90,9 @@ public class DialogService {
 					break;
 				}
 				case DEPOSIT_CHAR_WAREHOUSE: // warehouse (2.5)
+					player.setStorageManager(StorageType.REGULAR_WAREHOUSE, npc);
+					sendDialogWindow(dialogActionId, player, npc);
+					break;
 				case OPEN_VENDOR: // Consign trade?? npc karinerk, koorunerk (2.5)
 				case OPEN_STIGMA_WINDOW: // stigma
 				case CREATE_LEGION: // create legion
@@ -280,7 +278,7 @@ public class DialogService {
 	}
 
 	private static void handleQuestDialogueOrSendNextPage(int dialogActionId, Player player, Npc npc, int questId, int extendedRewardIndex) {
-		if (questId != 0 || dialogActionId == USE_OBJECT || dialogActionId == EXCHANGE_COIN) {
+		if (questId != 0 || dialogActionId == USE_OBJECT || dialogActionId == EXCHANGE_COIN || dialogActionId >= SETPRO1) {
 			QuestEnv env = new QuestEnv(npc, player, questId, dialogActionId);
 			env.setExtendedRewardIndex(extendedRewardIndex);
 			if (QuestEngine.getInstance().onDialog(env))
@@ -327,7 +325,7 @@ public class DialogService {
 					break;
 				}
 				if (fortZone == null) {
-					log.warn("Could not find FORT zone for npc: " + npc.getNpcId());
+					log.warn("Could not find FORT zone for npc: {}", npc.getNpcId());
 					return true;
 				}
 				List<Integer> siegeIds = fortZone.getSiegeId();
@@ -371,7 +369,7 @@ public class DialogService {
 			case LEVEL_HIGH:
 				return player.getLevel() < talkInfo.getSubDialogValue();
 			default:
-				log.warn("Unhandled subdialog type " + talkInfo.getSubDialogType() + " for npc: " + npc.getNpcId());
+				log.warn("Unhandled subdialog type {} for npc: {}", talkInfo.getSubDialogType(), npc.getNpcId());
 				return true;
 		}
 	}

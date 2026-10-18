@@ -28,13 +28,10 @@ public class CM_SERVER_LIST extends AionClientPacket {
 	}
 
 	@Override
-	protected void readImpl() {
+	protected void readFields() {
 		accountId = readD();
 		loginOk = readD();
-		readC(); // always 7
-		readB(6); // static per session when coming from char selection, random otherwise
-		readD(); // always random
-		readD(); // 60222 when coming from char selection, random otherwise
+		readC(); // always 7 in the 4.8 client
 	}
 
 	@Override

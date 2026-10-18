@@ -47,7 +47,7 @@ public class WalkerGroup {
 		if (getWalkType() == WalkerGroupType.SQUARE) {
 			int[] rows = members.get(0).getWalkTemplate().getRows();
 			if (IntStream.of(rows).sum() != members.size()) {
-				log.warn("Invalid row sizes for walk cluster " + members.get(0).getWalkTemplate().getRouteId());
+				log.warn("Invalid row sizes for walk cluster {}", members.get(0).getWalkTemplate().getRouteId());
 			}
 			if (rows.length == 1) {
 				// Line formation: distance 2 meters from each other (divide by 2 and multiple by 2)
@@ -100,7 +100,7 @@ public class WalkerGroup {
 				}
 			}
 		} else if (getWalkType() == WalkerGroupType.POINT) {
-			log.warn("No formation specified for walk cluster " + members.get(0).getWalkTemplate().getRouteId());
+			log.warn("No formation specified for walk cluster {}", members.get(0).getWalkTemplate().getRouteId());
 		}
 	}
 

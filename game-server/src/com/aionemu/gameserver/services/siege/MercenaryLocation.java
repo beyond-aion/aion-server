@@ -101,7 +101,7 @@ public class MercenaryLocation {
 		MercenaryZone tempZone = null;
 		MercenarySpawn spawn = DataManager.SPAWNS_DATA.getMercenarySpawnBySiegeId(siegeId);
 		if (spawn == null) {
-			log.error("[MERC] There is no mercenaries spawns for siege " + siegeId + " and zone" + smz.getId());
+			log.error("[MERC] There is no mercenaries spawns for siege {} and zone{}", siegeId, smz.getId());
 			return tempZone;
 		}
 		MercenaryRace targetRace = null;
@@ -112,7 +112,7 @@ public class MercenaryLocation {
 			}
 		}
 		if (targetRace == null) {
-			log.error("[MERC] There is no mercenary race for siege " + siegeId + ", zone" + smz.getId() + ", race:" + race.toString());
+			log.error("[MERC] There is no mercenary race for siege {}, zone{}, race:{}", siegeId, smz.getId(), race.toString());
 			return tempZone;
 		}
 		for (MercenaryZone mzone : targetRace.getMercenaryZones()) {
@@ -122,7 +122,7 @@ public class MercenaryLocation {
 			}
 		}
 		if (tempZone == null) {
-			log.error("[MERC] There is no mercenary zone for siege " + siegeId + ", zone" + smz.getId() + ", race:" + race.toString());
+			log.error("[MERC] There is no mercenary zone for siege {}, zone{}, race:{}", siegeId, smz.getId(), race.toString());
 			return tempZone;
 		}
 		return tempZone;

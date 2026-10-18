@@ -11,7 +11,6 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.item.ItemService;
-import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author Artur, Ritsu, Majka
@@ -110,7 +109,7 @@ public class _14014TurningTheIde extends AbstractQuestHandler {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			if (qs.getQuestVarById(0) == 1 && player.isInsideZone(ZoneName.get("TURSIN_OUTPOST_210030000"))) {
+			if (qs.getQuestVarById(0) == 1 && player.isInsideZone("TURSIN_OUTPOST_210030000")) {
 				return HandlerResult.fromBoolean(useQuestItem(env, item, 1, 2, false, 18));
 			}
 		}

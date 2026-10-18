@@ -3,6 +3,7 @@ package com.aionemu.gameserver.network.loginserver.serverpackets;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.slf4j.Logger;
@@ -136,8 +137,8 @@ public class SM_PTRANSFER_CONTROL extends LsServerPacket {
 				writeC(playerAppearance.getLipSize());
 				writeC(playerAppearance.getSmile());
 				writeC(playerAppearance.getLipShape());
-				writeC(playerAppearance.getJawHeigh());
-				writeC(playerAppearance.getChinJut());
+				writeC(playerAppearance.getChinHeight());
+				writeC(playerAppearance.getCheekBones());
 				writeC(playerAppearance.getEarShape());
 				writeC(playerAppearance.getHeadSize());
 				writeC(playerAppearance.getNeck());
@@ -157,7 +158,7 @@ public class SM_PTRANSFER_CONTROL extends LsServerPacket {
 				writeC(playerAppearance.getShoulders());
 				writeC(playerAppearance.getFaceShape());
 				writeC(playerAppearance.getVoice());
-				writeF(playerAppearance.getHeight());
+				writeF(playerAppearance.getHeightScale());
 
 				writeF(this.player.getX());
 				writeF(this.player.getY());
@@ -302,9 +303,10 @@ public class SM_PTRANSFER_CONTROL extends LsServerPacket {
 			case RECIPE_INFORMATION:
 				writeD(this.taskId);
 				RecipeList rec = this.player.getRecipeList();
-				writeD(rec.getRecipeList().size());
-				for (int id : rec.getRecipeList()) {
-					writeD(id);
+				writeD(rec.size());
+				for (Map.Entry<Integer, Integer> recipe : rec.getRecipes().entrySet()) {
+					writeD(recipe.getKey());
+					writeC(recipe.getValue());
 				}
 				break;
 			case QUEST_INFORMATION:
@@ -313,7 +315,7 @@ public class SM_PTRANSFER_CONTROL extends LsServerPacket {
 				List<QuestState> quests = new ArrayList<>();
 				for (QuestState qs : qsl.getAllQuestState()) {
 					if (qs == null) {
-						log.warn("there are null quest on player " + this.player.getName() + ". taskId #" + this.taskId + ". transfer skip that");
+						log.warn("there are null quest on player {}. taskId #{}. transfer skip that", this.player.getName(), this.taskId);
 						continue;
 					}
 					quests.add(qs);

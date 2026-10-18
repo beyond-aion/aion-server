@@ -158,7 +158,7 @@ public class ClassUtils {
 				try {
 					jarFile.close();
 				} catch (IOException e) {
-					log.error("Failed to close jar file " + jarFile.getName(), e);
+					log.error("Failed to close jar file {}", jarFile.getName(), e);
 				}
 			}
 		}

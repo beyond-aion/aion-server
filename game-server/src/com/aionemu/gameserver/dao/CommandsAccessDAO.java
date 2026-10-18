@@ -41,7 +41,7 @@ public class CommandsAccessDAO {
 				});
 			}
 		} catch (Exception e) {
-			log.error("Error while loading commands accesses.", e);
+			log.error("Error while loading commands accesses", e);
 		}
 		return accesses;
 	}
@@ -52,7 +52,7 @@ public class CommandsAccessDAO {
 			stmt.setString(2, commandName);
 			stmt.executeUpdate();
 		} catch (Exception e) {
-			log.error("Error while adding access on command " + commandName + " to player " + playerId, e);
+			log.error("Error while adding access on command {} to player {}", commandName, playerId, e);
 		}
 	}
 
@@ -62,7 +62,7 @@ public class CommandsAccessDAO {
 			stmt.setString(2, commandName);
 			stmt.executeUpdate();
 		} catch (Exception e) {
-			log.error("Error while removing access on command " + commandName + " from player " + playerId, e);
+			log.error("Error while removing access on command {} from player {}", commandName, playerId, e);
 		}
 	}
 
@@ -71,7 +71,7 @@ public class CommandsAccessDAO {
 			stmt.setInt(1, playerId);
 			stmt.executeUpdate();
 		} catch (Exception e) {
-			log.error("Error while removing all accesses from player " + playerId, e);
+			log.error("Error while removing all accesses from player {}", playerId, e);
 		}
 	}
 

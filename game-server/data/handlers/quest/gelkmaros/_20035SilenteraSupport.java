@@ -9,7 +9,6 @@ import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @Author Majka
@@ -161,7 +160,7 @@ public class _20035SilenteraSupport extends AbstractQuestHandler {
 	@Override
 	public HandlerResult onItemUseEvent(final QuestEnv env, Item item) {
 		Player player = env.getPlayer();
-		if (player.isInsideZone(ZoneName.get("DF4_ITEMUSEAREA_Q20035_220070000"))) {
+		if (player.isInsideZone("DF4_ITEMUSEAREA_Q20035_220070000")) {
 			return HandlerResult.fromBoolean(useQuestItem(env, item, 6, 7, false, 182215660, 1)); // 7
 		}
 		return HandlerResult.FAILED;

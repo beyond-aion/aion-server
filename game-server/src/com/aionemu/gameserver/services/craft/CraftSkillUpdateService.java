@@ -73,7 +73,7 @@ public class CraftSkillUpdateService {
 		professionByNpc.put(798450, Profession.CONSTRUCTION);
 		professionByNpc.put(798454, Profession.CONSTRUCTION);
 
-		log.info("CraftSkillUpdateService: Initialized.");
+		log.info("CraftSkillUpdateService initialized");
 	}
 
 	public Profession getProfessionByNpc(Npc npc) {

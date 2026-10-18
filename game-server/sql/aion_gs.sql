@@ -321,7 +321,8 @@ DROP TABLE IF EXISTS `house_scripts`;
 CREATE TABLE `house_scripts` (
   `house_id` int NOT NULL,
   `script_id` tinyint NOT NULL,
-  `script` mediumtext NOT NULL,
+  `script` blob NOT NULL,
+  `uncompressed_size` int NOT NULL,
   `date_added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`house_id`,`script_id`),
   CONSTRAINT `houses_id_ibfk_1` FOREIGN KEY (`house_id`) REFERENCES `houses` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -597,8 +598,8 @@ CREATE TABLE `player_appearance` (
   `lip_size` int NOT NULL,
   `smile` int NOT NULL,
   `lip_shape` int NOT NULL,
-  `jaw_height` int NOT NULL,
-  `chin_jut` int NOT NULL,
+  `chin_height` int NOT NULL,
+  `cheek_bones` int NOT NULL,
   `ear_shape` int NOT NULL,
   `head_size` int NOT NULL,
   `neck` int NOT NULL,
@@ -805,6 +806,7 @@ DROP TABLE IF EXISTS `player_recipes`;
 CREATE TABLE `player_recipes` (
   `player_id` int NOT NULL,
   `recipe_id` int NOT NULL,
+  `production_limit` tinyint NOT NULL DEFAULT '0',
   PRIMARY KEY (`player_id`,`recipe_id`),
   CONSTRAINT `player_recipes_ibfk_1` FOREIGN KEY (`player_id`) REFERENCES `players` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -933,6 +935,7 @@ CREATE TABLE `players` (
   `dp` int NOT NULL DEFAULT '0',
   `soul_sickness` tinyint unsigned NOT NULL DEFAULT '0',
   `reposte_energy` bigint NOT NULL DEFAULT '0',
+  `pvp_exp` bigint NOT NULL DEFAULT '0',
   `online` boolean NOT NULL DEFAULT '0',
   `note` text,
   `mentor_flag_time` int NOT NULL DEFAULT '0',

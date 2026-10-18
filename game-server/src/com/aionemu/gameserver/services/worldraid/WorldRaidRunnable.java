@@ -25,7 +25,7 @@ public class WorldRaidRunnable implements Runnable {
 
 	@Override
 	public void run() {
-		log.debug("Attempting to start world raid with ID: " + worldRaidSchedule.getId() + " and location pool: "	+ worldRaidSchedule.getLocations());
+		log.debug("Attempting to start world raid with ID: {} and location pool: {}", worldRaidSchedule.getId(), worldRaidSchedule.getLocations());
 
 		List<Integer> validRaidLocations = worldRaidSchedule.getLocations().stream()
 			.filter(locationId -> WorldRaidService.getInstance().isValidWorldRaidLocation(locationId)
@@ -33,8 +33,8 @@ public class WorldRaidRunnable implements Runnable {
 			.collect(Collectors.toList());
 
 		if (validRaidLocations.size() != worldRaidSchedule.getLocations().size()) {
-			log.warn("Invalid world raid location count for raid with ID: " + worldRaidSchedule.getId()
-				+ ". Some locations may be invalid due to a misconfiguration or due to currently running raids!");
+			log.warn("Invalid world raid location count for raid with ID: {}. Some locations may be invalid due to a misconfiguration or due to currently running raids!",
+				worldRaidSchedule.getId());
 			return;
 		}
 
@@ -53,7 +53,7 @@ public class WorldRaidRunnable implements Runnable {
 		for (int locationId : validRaidLocations)
 			WorldRaidService.getInstance().startRaid(locationId, worldRaidSchedule.isSpecialRaid());
 		if (!validRaidLocations.isEmpty())
-			log.debug("Started scheduled world raid with ID " + worldRaidSchedule.getId() + " at the following raid locations: " + validRaidLocations);
+			log.debug("Started scheduled world raid with ID {} at the following raid locations: {}", worldRaidSchedule.getId(), validRaidLocations);
 	}
 
 }

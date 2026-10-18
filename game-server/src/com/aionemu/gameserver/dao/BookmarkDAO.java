@@ -23,7 +23,7 @@ public class BookmarkDAO {
 			while (rs.next())
 				bookmarks.add(new Bookmark(rs.getString("name"), rs.getInt("world_id"), rs.getFloat("x"), rs.getFloat("y"), rs.getFloat("z")));
 		} catch (SQLException e) {
-			LoggerFactory.getLogger(BookmarkDAO.class).error("Could not load bookmarks for player: " + playerId, e);
+			LoggerFactory.getLogger(BookmarkDAO.class).error("Could not load bookmarks for player: {}", playerId, e);
 		}
 		return bookmarks;
 	}
@@ -39,7 +39,7 @@ public class BookmarkDAO {
 			stmt.setFloat(6, bookmark.z());
 			stmt.execute();
 		} catch (SQLException e) {
-			LoggerFactory.getLogger(BookmarkDAO.class).error("Could not add bookmark for player " + playerId, e);
+			LoggerFactory.getLogger(BookmarkDAO.class).error("Could not add bookmark for player {}", playerId, e);
 		}
 	}
 
@@ -50,7 +50,7 @@ public class BookmarkDAO {
 			stmt.setString(2, name);
 			return stmt.executeUpdate() > 0;
 		} catch (SQLException e) {
-			LoggerFactory.getLogger(BookmarkDAO.class).error("Could not delete bookmark " + name + " for player " + playerId, e);
+			LoggerFactory.getLogger(BookmarkDAO.class).error("Could not delete bookmark {} for player {}", name, playerId, e);
 			return false;
 		}
 	}

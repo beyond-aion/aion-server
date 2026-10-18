@@ -76,7 +76,7 @@ public class AbyssRankDAO {
 				abyssRank.setPersistentState(PersistentState.NEW);
 			}
 		} catch (SQLException e) {
-			log.error("Couldn't load abyss rank for player " + playerId, e);
+			log.error("Couldn't load abyss rank for player {}", playerId, e);
 		}
 		return abyssRank;
 	}
@@ -123,7 +123,7 @@ public class AbyssRankDAO {
 			stmt.execute();
 			return true;
 		} catch (SQLException e) {
-			log.error("Couldn't insert abyss rank for player " + playerId, e);
+			log.error("Couldn't insert abyss rank for player {}", playerId, e);
 			return false;
 		}
 	}
@@ -150,7 +150,7 @@ public class AbyssRankDAO {
 			stmt.execute();
 			return true;
 		} catch (SQLException e) {
-			log.error("Couldn't update abyss rank of player " + playerId, e);
+			log.error("Couldn't update abyss rank of player {}", playerId, e);
 			return false;
 		}
 	}
@@ -162,7 +162,7 @@ public class AbyssRankDAO {
 			stmt.setInt(2, rank.getId());
 			stmt.execute();
 		} catch (SQLException e) {
-			log.error("Couldn't decrease daily GP for rank " + rank, e);
+			log.error("Couldn't decrease daily GP for rank {}", rank, e);
 		}
 	}
 
@@ -241,7 +241,7 @@ public class AbyssRankDAO {
 			rs.next();
 			return rs.getInt("players");
 		} catch (SQLException e) {
-			log.error("Couldn't load legion member count for legion " + legionId, e);
+			log.error("Couldn't load legion member count for legion {}", legionId, e);
 			return 0;
 		}
 	}
@@ -260,7 +260,7 @@ public class AbyssRankDAO {
 			}
 			return rankingList;
 		} catch (SQLException e) {
-			log.error("Couldn't load top ranks for race " + race, e);
+			log.error("Couldn't load top ranks for race {}", race, e);
 			return null;
 		}
 	}
@@ -276,7 +276,7 @@ public class AbyssRankDAO {
 				apByPlayerId.put(rs.getInt("player_id"), rs.getInt("ap"));
 			return apByPlayerId;
 		} catch (SQLException e) {
-			log.error("Couldn't load ranks for race " + race + " (minRank " + minRank + ")", e);
+			log.error("Couldn't load ranks for race {} (minRank {})", race, minRank, e);
 			return null;
 		}
 	}
@@ -288,7 +288,7 @@ public class AbyssRankDAO {
 			stmt.setInt(2, playerId);
 			stmt.execute();
 		} catch (SQLException e) {
-			log.error("Couldn't update abyss rank of player " + playerId + " to " + rank, e);
+			log.error("Couldn't update abyss rank of player {} to {}", playerId, rank, e);
 		}
 	}
 

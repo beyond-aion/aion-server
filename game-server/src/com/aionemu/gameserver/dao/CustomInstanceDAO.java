@@ -32,7 +32,7 @@ public class CustomInstanceDAO {
 				return new CustomInstanceRank(playerId, rset.getInt("rank"), rset.getTimestamp("last_entry").getTime(), rset.getInt("max_rank"),
 					rset.getInt("dps"));
 		} catch (SQLException e) {
-			log.error("[CUSTOM_INSTANCE] Error loading rank object on player id " + playerId, e);
+			log.error("[CUSTOM_INSTANCE] Error loading rank object on player id {}", playerId, e);
 		}
 		return null;
 	}
@@ -47,7 +47,7 @@ public class CustomInstanceDAO {
 			stmt.execute();
 			return true;
 		} catch (SQLException e) {
-			log.error("[CUSTOM_INSTANCE] Error storing last entries on player id " + rankObj.getPlayerId(), e);
+			log.error("[CUSTOM_INSTANCE] Error storing last entries on player id {}", rankObj.getPlayerId(), e);
 			return false;
 		}
 	}
@@ -68,7 +68,7 @@ public class CustomInstanceDAO {
 				players.add(new CustomInstanceRankedPlayer(playerId, rank, lastEntry, maxRank, dps, name, playerClass));
 			}
 		} catch (SQLException e) {
-			log.error("[CUSTOM_INSTANCE] Error loading top 10 " + race + " players", e);
+			log.error("[CUSTOM_INSTANCE] Error loading top 10 {} players", race, e);
 		}
 		return players;
 	}

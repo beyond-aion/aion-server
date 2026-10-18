@@ -33,11 +33,11 @@ public class ExternalAuth {
 			if (response.statusCode() == 200) {
 				info = JSON.parseObject(response.body(), Response.class);
 			} else {
-				log.warn("Server returned status code " + response.statusCode() + (response.body().isEmpty() ? "" : ": " + response.body()));
+				log.warn("Server returned status code {}{}", response.statusCode(), response.body().isEmpty() ? "" : ": " + response.body());
 			}
 		} catch (InterruptedException ignored) {
 		} catch (Exception e) {
-			log.error("Could not login user " + user, e);
+			log.error("Could not login user {}", user, e);
 		}
 		return info;
 	}

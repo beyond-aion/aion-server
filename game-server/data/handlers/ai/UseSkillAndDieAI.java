@@ -33,7 +33,7 @@ public class UseSkillAndDieAI extends NpcAI {
 	private void scheduleSkill() {
 		NpcSkillEntry skill = getOwner().getSkillList().getSkillOnPosition(0);
 		if (skill == null) {
-			LoggerFactory.getLogger(getClass()).warn(getOwner() + " has no skill list");
+			LoggerFactory.getLogger(getClass()).warn("{} has no skill list", getOwner());
 			getOwner().getController().delete();
 			return;
 		}

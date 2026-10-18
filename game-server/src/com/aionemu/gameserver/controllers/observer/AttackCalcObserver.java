@@ -45,19 +45,4 @@ public class AttackCalcObserver {
 	public AttackerCriticalStatus checkAttackerCriticalStatus(AttackStatus status, boolean isSkill) {
 		return new AttackerCriticalStatus(false);
 	}
-
-	/**
-	 * @param isSkill
-	 * @return physical damage multiplier
-	 */
-	public float getBasePhysicalDamageMultiplier(boolean isSkill) {
-		return 1f;
-	}
-
-	/**
-	 * @return magic damage multiplier
-	 */
-	public float getBaseMagicalDamageMultiplier() {
-		return 1f;
-	}
 }

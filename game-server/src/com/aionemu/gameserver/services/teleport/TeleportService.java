@@ -5,7 +5,6 @@ import java.util.concurrent.FutureTask;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.gameserver.configs.main.SecurityConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.dataholders.PlayerInitialData;
 import com.aionemu.gameserver.model.CreatureType;
@@ -23,7 +22,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.RequestResponseHandler;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.items.storage.Storage;
-import com.aionemu.gameserver.model.templates.flypath.FlyPathEntry;
+import com.aionemu.gameserver.model.siege.SiegeLocation;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 import com.aionemu.gameserver.model.templates.portal.InstanceExit;
 import com.aionemu.gameserver.model.templates.portal.PortalLoc;
@@ -77,9 +76,9 @@ public class TeleportService {
 			return;
 		}
 
-		// TODO: remove teleportation route if it's enemy fortress (1221, 1231, 1241)
 		int id = SiegeService.getInstance().getSiegeIdByLocId(location.getLocId());
-		if (id > 0 && !SiegeService.getInstance().getSiegeLocation(id).isCanTeleport(player)) {
+		SiegeLocation fortress = id > 0 ? SiegeService.getInstance().getSiegeLocation(id) : null;
+		if (fortress != null && !fortress.isCanTeleport(player)) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_NO_ROUTE());
 			return;
 		}
@@ -88,33 +87,17 @@ public class TeleportService {
 			return;
 		}
 
-		if (!checkKinahForTransportation(location, player))
+		// the landing is checked against the end of the path
+		if (location.getType() == TeleportType.FLIGHT && DataManager.FLY_PATH.getPathTemplate(location.getTeleportId() / 1000) == null) {
+			log.warn("Missing flypath_location in flypath_template.xml for teleport id {}", location.getTeleportId());
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_NO_ROUTE());
+			return;
+		}
+
+		if (!checkKinahForTransportation(location, player, fortress != null && fortress.isVulnerable()))
 			return;
 
 		if (location.getType().equals(TeleportType.FLIGHT)) {
-			if (SecurityConfig.ENABLE_FLYPATH_VALIDATOR) {
-				FlyPathEntry flypath = DataManager.FLY_PATH.getPathTemplate(location.getLocId());
-				if (flypath == null) {
-					AuditLogger.log(player, "tried to use invalid flyPath #" + location.getLocId());
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_NO_ROUTE());
-					return;
-				}
-
-				double dist = PositionUtil.getDistance(player, flypath.getStartX(), flypath.getStartY(), flypath.getStartZ());
-				if (dist > 7) {
-					AuditLogger.log(player, "tried to use flyPath #" + location.getLocId() + " but he's too far " + dist);
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_NO_ROUTE());
-					return;
-				}
-
-				if (player.getWorldId() != flypath.getStartWorldId()) {
-					AuditLogger.log(player, "tried to use flyPath #" + location.getLocId() + " from invalid start world " + player.getWorldId()
-						+ ", expected " + flypath.getStartWorldId());
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_NO_ROUTE());
-					return;
-				}
-				player.setCurrentFlypath(flypath);
-			}
 			abortPlayerActions(player);
 			player.setState(CreatureState.FLYING);
 			player.unsetState(CreatureState.ACTIVE);
@@ -155,7 +138,7 @@ public class TeleportService {
 		return template;
 	}
 
-	private static boolean checkKinahForTransportation(TeleportLocation location, Player player) {
+	private static boolean checkKinahForTransportation(TeleportLocation location, Player player, boolean fortressVulnerable) {
 		Storage inventory = player.getInventory();
 
 		long transportationPrice;
@@ -164,8 +147,7 @@ public class TeleportService {
 		if (player.getEffectController().hasAbnormalEffect(Effect::isHiPass))
 			transportationPrice = 1;
 		else {
-			int basePrice = location.getPrice();
-			// TODO check for location.getPricePvp()
+			int basePrice = fortressVulnerable ? location.getPricePvp() : location.getPrice();
 			transportationPrice = PricesService.getPriceForService(basePrice, player.getRace());
 		}
 
@@ -178,6 +160,7 @@ public class TeleportService {
 
 	private static void sendLoc(Player player, int worldId, int instanceId, float x, float y, float z, byte h, TeleportAnimation animation) {
 		abortPlayerActions(player);
+		player.unblockQuitting();
 		// despawn from world and send animation to others (also ends flying)
 		World.getInstance().despawn(player, animation.getDefaultObjectDeleteAnimation());
 
@@ -209,7 +192,7 @@ public class TeleportService {
 		PacketSendUtility.sendPacket(player, new SM_CHANNEL_INFO(player.getPosition()));
 		PacketSendUtility.sendPacket(player, new SM_PLAYER_INFO(player));
 		PacketSendUtility.sendPacket(player, new SM_STATS_INFO(player));
-		PacketSendUtility.sendPacket(player, new SM_MOTION(player.getObjectId(), player.getMotions().getActiveMotions()));
+		PacketSendUtility.sendPacket(player, SM_MOTION.playerMotions(player));
 		player.getController().startProtectionActiveTask(); // before spawning, so others never see the player unprotected
 		World.getInstance().spawn(player);
 		World.getInstance().spawn(player.getPet());
@@ -305,7 +288,7 @@ public class TeleportService {
 		SpawnSearchResult searchResult = DataManager.SPAWNS_DATA.getFirstSpawnByNpcId(player.getWorldId(), npcId);
 
 		if (searchResult == null) {
-			log.warn("No npc spawn found for : " + npcId);
+			log.warn("No npc spawn found for : {}", npcId);
 			return;
 		}
 
@@ -397,7 +380,7 @@ public class TeleportService {
 			teleportTo(player, instanceExit.getExitWorld(), instanceExit.getX(), instanceExit.getY(), instanceExit.getZ(), instanceExit.getH());
 		} else {
 			if (instanceExit == null)
-				log.warn("No instance exit found for race: " + race + " " + worldId);
+				log.warn("No instance exit found for race: {} {}", race, worldId);
 			moveToBindLocation(player);
 		}
 	}
@@ -405,19 +388,19 @@ public class TeleportService {
 	public static void useTeleportScroll(Player player, String portalName, int worldId) {
 		PortalScroll template = DataManager.PORTAL2_DATA.getPortalScroll(portalName);
 		if (template == null) {
-			log.warn("No portal template found for: " + portalName + " " + worldId);
+			log.warn("No portal template found for: {} {}", portalName, worldId);
 			return;
 		}
 
 		Race playerRace = player.getRace();
 		PortalPath portalPath = template.getPortalPath();
 		if (portalPath == null) {
-			log.warn("No portal scroll for " + playerRace + " on: " + portalName + " " + worldId);
+			log.warn("No portal scroll for {} on: {} {}", playerRace, portalName, worldId);
 			return;
 		}
 		PortalLoc loc = DataManager.PORTAL_LOC_DATA.getPortalLoc(portalPath.getLocId());
 		if (loc == null) {
-			log.warn("No portal loc for locId " + portalPath.getLocId());
+			log.warn("No portal loc for locId {}", portalPath.getLocId());
 			return;
 		}
 		teleportTo(player, worldId, loc.getX(), loc.getY(), loc.getZ());
@@ -434,13 +417,13 @@ public class TeleportService {
 	public static void setEventPos(WorldPosition pos, Race race) {
 		if (race == Race.ELYOS) {
 			eventPosElyos = new double[] { pos.getMapId(), pos.getInstanceId(), pos.getX(), pos.getY(), pos.getZ(), pos.getHeading() };
-			log.info("elyos: mapId: " + pos.getMapId() + ", instanceId: " + (int) eventPosElyos[1] + ", X: " + eventPosElyos[2] + ", Y: " + eventPosElyos[3]
-				+ ", Z: " + eventPosElyos[4] + ", H: " + (byte) eventPosElyos[5]);
+			log.info("elyos: mapId: {}, instanceId: {}, X: {}, Y: {}, Z: {}, H: {}", pos.getMapId(), (int) eventPosElyos[1], eventPosElyos[2],
+				eventPosElyos[3], eventPosElyos[4], (byte) eventPosElyos[5]);
 		} else if (race == Race.ASMODIANS) {
 			eventPosAsmodians = new double[] { pos.getWorldMapInstance().getMapId(), pos.getInstanceId(), pos.getX(), pos.getY(), pos.getZ(),
 				pos.getHeading() };
-			log.info("asmo: mapId: " + pos.getMapId() + ", instanceId: " + (int) eventPosAsmodians[1] + ", X: " + eventPosAsmodians[2] + ", Y: "
-				+ eventPosAsmodians[3] + ", Z: " + eventPosAsmodians[4] + ", H: " + (byte) eventPosAsmodians[5]);
+			log.info("asmo: mapId: {}, instanceId: {}, X: {}, Y: {}, Z: {}, H: {}", pos.getMapId(), (int) eventPosAsmodians[1], eventPosAsmodians[2],
+				eventPosAsmodians[3], eventPosAsmodians[4], (byte) eventPosAsmodians[5]);
 		}
 	}
 

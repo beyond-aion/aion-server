@@ -1,37 +1,34 @@
 package com.aionemu.loginserver.network.gameserver;
 
-import java.io.IOException;
 import java.nio.ByteBuffer;
-import java.nio.channels.SocketChannel;
-import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.Queue;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.network.AConnection;
-import com.aionemu.commons.network.Dispatcher;
+import com.aionemu.commons.network.netty.NettyConnection;
+import com.aionemu.commons.network.packet.BaseClientPacket;
 import com.aionemu.loginserver.GameServerInfo;
 import com.aionemu.loginserver.PingPongTask;
 import com.aionemu.loginserver.controller.AccountController;
 import com.aionemu.loginserver.network.factories.GsPacketHandlerFactory;
+
+import io.netty.channel.Channel;
 
 /**
  * Object representing connection between LoginServer and GameServer.
  * 
  * @author -Nemesiss-
  */
-public class GsConnection extends AConnection<GsServerPacket> {
+public class GsConnection extends NettyConnection<GsServerPacket> {
 
 	/**
 	 * Logger for this class.
 	 */
 	private static final Logger log = LoggerFactory.getLogger(GsConnection.class);
+	/**
+	 * Packets of game servers are executed concurrently, not one after another.
+	 */
 	private static final ExecutorService PACKET_EXECUTOR = Executors.newCachedThreadPool();
 	private static final ScheduledExecutorService PINGPONG_EXECUTOR = Executors.newSingleThreadScheduledExecutor();
 
@@ -54,14 +51,9 @@ public class GsConnection extends AConnection<GsServerPacket> {
 	}
 
 	/**
-	 * Server Packet "to send" Queue
-	 */
-	private final Deque<GsServerPacket> sendMsgQueue = new ArrayDeque<>();
-
-	/**
 	 * Current state of this connection
 	 */
-	private State state;
+	private volatile State state = State.CONNECTED;
 
 	/**
 	 * GameServerInfo for this GsConnection.
@@ -70,60 +62,29 @@ public class GsConnection extends AConnection<GsServerPacket> {
 
 	private final PingPongTask pingPongTask = new PingPongTask(this);
 
-	/**
-	 * Constructor.
-	 * 
-	 * @param sc
-	 * @param d
-	 * @throws IOException
-	 */
-	public GsConnection(SocketChannel sc, Dispatcher d) throws IOException {
-		super(sc, d, 8192 * 8, 8192 * 8);
+	public GsConnection(Channel channel) {
+		super(channel, PACKET_EXECUTOR);
 	}
 
 	@Override
-	protected final Queue<GsServerPacket> getSendMsgQueue() {
-		return sendMsgQueue;
+	protected BaseClientPacket<?> createPacket(ByteBuffer data) {
+		return GsPacketHandlerFactory.handle(data, this);
 	}
 
-	/**
-	 * Called by Dispatcher. ByteBuffer data contains one packet that should be processed.
-	 * 
-	 * @param data
-	 * @return True if data was processed correctly, False if some error occurred and connection should be closed NOW.
-	 */
 	@Override
-	public boolean processData(ByteBuffer data) {
-		GsClientPacket pck = GsPacketHandlerFactory.handle(data, this);
-
-		if (pck != null && pck.read())
-			PACKET_EXECUTOR.execute(pck);
-
-		return true;
+	protected void writePacket(GsServerPacket packet, ByteBuffer buffer) {
+		packet.write(this, buffer);
 	}
 
-	/**
-	 * This method will be called by Dispatcher, and will be repeated till return false.
-	 * 
-	 * @param data
-	 * @return True if data was written to buffer, False indicating that there are not any more data to write.
-	 */
 	@Override
-	protected final boolean writeData(ByteBuffer data) {
-		synchronized (guard) {
-			GsServerPacket packet = sendMsgQueue.pollFirst();
-			if (packet == null)
-				return false;
-
-			packet.write(this, data);
-			return true;
-		}
+	protected int getMaxPendingPackets() {
+		return 10_000;
 	}
 
 	@Override
 	protected final void onDisconnect() {
 		pingPongTask.stop();
-		log.info(this + " disconnected");
+		log.info("{} disconnected", this);
 		if (gameServerInfo != null) {
 			gameServerInfo.setConnection(null);
 			gameServerInfo.clearAccountsOnGameServer();
@@ -132,11 +93,17 @@ public class GsConnection extends AConnection<GsServerPacket> {
 		AccountController.updateServerListForAllLoggedInPlayers();
 	}
 
-	@Override
-	protected final void onServerClose() {
-		close();
+	/**
+	 * Stops the executors of all game server connections. Call after their channels were closed.
+	 */
+	public static void shutdownExecutors() {
 		PINGPONG_EXECUTOR.shutdown();
 		PACKET_EXECUTOR.shutdown();
+		try {
+			PINGPONG_EXECUTOR.awaitTermination(1, TimeUnit.SECONDS);
+			PACKET_EXECUTOR.awaitTermination(1, TimeUnit.SECONDS);
+		} catch (InterruptedException _) {
+		}
 	}
 
 	/**
@@ -181,7 +148,7 @@ public class GsConnection extends AConnection<GsServerPacket> {
 	 */
 	@Override
 	public String toString() {
-		StringBuilder sb = new StringBuilder("Gameserver");
+		StringBuilder sb = new StringBuilder("Game server");
 		if (gameServerInfo != null)
 			sb.append(" #").append(gameServerInfo.getId());
 		sb.append(" ").append(getIP());
@@ -189,8 +156,17 @@ public class GsConnection extends AConnection<GsServerPacket> {
 	}
 
 	@Override
-	protected void initialized() {
-		state = State.CONNECTED;
-		log.info("Gameserver connection attempt from: " + getIP());
+	protected boolean isAuthenticated() {
+		return state == State.AUTHED;
+	}
+
+	@Override
+	protected long getAuthTimeoutMillis() {
+		return 30_000;
+	}
+
+	@Override
+	protected void onConnect() {
+		log.info("Game server connected: {}", getIP());
 	}
 }

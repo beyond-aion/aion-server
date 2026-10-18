@@ -71,8 +71,8 @@ public abstract class ChatCommand {
 				sendInfo(player, toErrorMessage(e));
 			}
 		} catch (Throwable t) {
-			log.error("Exception executing chat command \"" + getAliasWithPrefix() + " " + String.join(" ", params) + "\" - Player: " + player.getName()
-				+ ", Target: " + player.getTarget(), t);
+			log.error("Exception executing chat command \"{} {}\" - Player: {}, Target: {}", getAliasWithPrefix(), String.join(" ", params),
+				player.getName(), player.getTarget(), t);
 			return false;
 		}
 		return true;
@@ -177,7 +177,7 @@ public abstract class ChatCommand {
 				String values = Stream.of(((Class<Enum<?>>) enumClass).getEnumConstants()).map(Enum::toString).collect(Collectors.joining(", "));
 				msg += "\nPossible values:\n" + values;
 			} catch (Exception ex) {
-				log.error("Could not get enum values for " + enumName, ex);
+				log.error("Could not get enum values for {}", enumName, ex);
 			}
 		} else if (e instanceof NumberFormatException) { // Integer.parseInt and Long.parseLong don't provide nice error messages
 			if (msg != null && msg.startsWith("For input string: "))

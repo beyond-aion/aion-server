@@ -48,7 +48,7 @@ public class CustomInstancePlayerModelEntryDAO {
 				entries.add(pme);
 			}
 		} catch (SQLException e) {
-			log.error("[CUSTOM_INSTANCE] Error loading player model entries on player id " + playerId, e);
+			log.error("[CUSTOM_INSTANCE] Error loading player model entries on player id {}", playerId, e);
 		}
 		return entries;
 	}
@@ -90,7 +90,7 @@ public class CustomInstancePlayerModelEntryDAO {
 			stmt.executeBatch();
 			con.commit();
 		} catch (Exception e) {
-			log.error("Error occured while saving player model entries.", e);
+			log.error("Could not save player model entries", e);
 		}
 	}
 

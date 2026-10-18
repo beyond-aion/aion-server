@@ -46,7 +46,7 @@ public class CM_ABYSS_RANKING_LEGIONS extends AionClientPacket {
 				updateType = AbyssRankUpdateType.LEGION_ASMODIANS;
 				break;
 			default:
-				log.warn("Received invalid raceId (" + raceId + ") from player " + player);
+				log.warn("Received invalid raceId ({}) from player {}", raceId, player);
 				return;
 		}
 		// calculate rankings and send packet

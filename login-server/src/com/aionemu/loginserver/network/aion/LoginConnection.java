@@ -1,21 +1,17 @@
 package com.aionemu.loginserver.network.aion;
 
-import java.io.IOException;
 import java.nio.ByteBuffer;
-import java.nio.channels.SocketChannel;
 import java.security.interfaces.RSAPrivateKey;
-import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.Queue;
+import java.util.concurrent.Executor;
 
 import javax.crypto.SecretKey;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.network.AConnection;
-import com.aionemu.commons.network.Dispatcher;
-import com.aionemu.commons.network.PacketProcessor;
+import com.aionemu.commons.network.netty.NettyConnection;
+import com.aionemu.commons.network.packet.BaseClientPacket;
+import com.aionemu.loginserver.configs.Config;
 import com.aionemu.loginserver.controller.AccountController;
 import com.aionemu.loginserver.controller.AccountTimeController;
 import com.aionemu.loginserver.model.Account;
@@ -25,25 +21,19 @@ import com.aionemu.loginserver.network.ncrypt.CryptEngine;
 import com.aionemu.loginserver.network.ncrypt.EncryptedRSAKeyPair;
 import com.aionemu.loginserver.network.ncrypt.KeyGen;
 
+import io.netty.channel.Channel;
+
 /**
  * Object representing connection between LoginServer and Aion Client.
  * 
  * @author -Nemesiss-
  */
-public class LoginConnection extends AConnection<AionServerPacket> {
+public class LoginConnection extends NettyConnection<AionServerPacket> {
 
 	/**
 	 * Logger for this class.
 	 */
 	private static final Logger log = LoggerFactory.getLogger(LoginConnection.class);
-	/**
-	 * PacketProcessor for executing packets.
-	 */
-	private final static PacketProcessor<LoginConnection> processor = new PacketProcessor<>(1, 8, 50, 3);
-	/**
-	 * Server Packet "to send" Queue
-	 */
-	private final Deque<AionServerPacket> sendMsgQueue = new ArrayDeque<>();
 
 	/**
 	 * Unique Session Id of this connection
@@ -78,7 +68,7 @@ public class LoginConnection extends AConnection<AionServerPacket> {
 	/**
 	 * Current state of this connection
 	 */
-	private State state;
+	private volatile State state = State.CONNECTED;
 
 	/**
 	 * Possible states of AionConnection
@@ -100,56 +90,27 @@ public class LoginConnection extends AConnection<AionServerPacket> {
 		AUTHED_LOGIN
 	}
 
-	public LoginConnection(SocketChannel sc, Dispatcher d) throws IOException {
-		super(sc, d, 8192 * 2, 8192 * 2);
-
-	}
-
-	@Override
-	protected final Queue<AionServerPacket> getSendMsgQueue() {
-		return sendMsgQueue;
+	public LoginConnection(Channel channel, Executor packetExecutor) {
+		super(channel, packetExecutor);
 	}
 
 	/**
-	 * Called by Dispatcher. ByteBuffer data contains one packet that should be processed.
-	 * 
-	 * @param data
-	 * @return True if data was processed correctly, False if some error occurred and connection should be closed NOW.
+	 * Decrypts the packet and creates it. A packet with a wrong checksum closes the connection.
 	 */
 	@Override
-	protected final boolean processData(ByteBuffer data) {
-		if (!decrypt(data)) {
-			log.warn("Wrong checksum from " + this);
-			return false;
+	protected BaseClientPacket<?> createPacket(ByteBuffer data) {
+		if (!cryptEngine.decrypt(data, data.position(), data.remaining())) {
+			log.warn("Wrong checksum from {}", this);
+			close();
+			return null;
 		}
-
-		AionClientPacket pck = AionPacketHandlerFactory.handle(data, this);
-
-		// Execute packet only if packet exists and read was ok.
-		if (pck != null && pck.read())
-			processor.executePacket(pck);
-
-		return true;
+		data.limit(data.limit() - 8); // the checksum word and the unused word after it
+		return AionPacketHandlerFactory.handle(data, this);
 	}
 
-	/**
-	 * This method will be called by Dispatcher, and will be repeated till return false.
-	 * 
-	 * @param data
-	 * @return True if data was written to buffer, False indicating that there are not any more data to write.
-	 */
 	@Override
-	protected final synchronized boolean writeData(ByteBuffer data) {
-		AionServerPacket packet = sendMsgQueue.pollFirst();
-
-		if (packet == null) {
-			return false;
-		}
-
-		packet.setBuf(data);
-		packet.write(this);
-
-		return true;
+	protected void writePacket(AionServerPacket packet, ByteBuffer buffer) {
+		packet.write(this, buffer);
 	}
 
 	@Override
@@ -162,33 +123,42 @@ public class LoginConnection extends AConnection<AionServerPacket> {
 	}
 
 	@Override
-	protected final void onServerClose() {
-		// TODO mb some packet should be send to client before closing?
-		close( /* packet */);
+	protected boolean isAuthenticated() {
+		return state == State.AUTHED_LOGIN;
 	}
 
-	/**
-	 * Decrypt packet.
-	 * 
-	 * @param buf
-	 * @return true if success
-	 */
-	private boolean decrypt(ByteBuffer buf) {
-		int size = buf.remaining();
-		int offset = buf.arrayOffset() + buf.position();
-		return cryptEngine.decrypt(buf.array(), offset, size);
+	@Override
+	protected long getAuthTimeoutMillis() {
+		return Config.CLIENT_AUTH_TIMEOUT_SECONDS * 1000L;
+	}
+
+	@Override
+	protected int getMaxPendingPackets() {
+		return 50;
+	}
+
+	@Override
+	protected long getMaxPendingWriteBytes() {
+		return 256 * 1024;
+	}
+
+	@Override
+	protected long getMaxSendStallMillis() {
+		return 60_000;
 	}
 
 	/**
 	 * Encrypt packet.
 	 * 
 	 * @param buf
+	 * @param offset
+	 *          absolute index of the packet data
+	 * @param length
+	 *          size of the packet data
 	 * @return encrypted packet size.
 	 */
-	public final int encrypt(ByteBuffer buf) {
-		int size = buf.limit() - 2;
-		int offset = buf.arrayOffset() + buf.position();
-		return cryptEngine.encrypt(buf.array(), offset, size);
+	public final int encrypt(ByteBuffer buf, int offset, int length) {
+		return cryptEngine.encrypt(buf, offset, length);
 	}
 
 	/**
@@ -292,9 +262,8 @@ public class LoginConnection extends AConnection<AionServerPacket> {
 	}
 
 	@Override
-	protected void initialized() {
-		state = State.CONNECTED;
-		log.info("Connection attempt from: " + getIP());
+	protected void onConnect() {
+		log.info("Connection attempt from: {}", getIP());
 		encryptedRSAKeyPair = KeyGen.getEncryptedRSAKeyPair();
 		SecretKey blowfishKey = KeyGen.generateBlowfishKey();
 

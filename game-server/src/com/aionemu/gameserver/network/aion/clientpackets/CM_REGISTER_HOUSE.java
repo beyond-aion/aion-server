@@ -11,6 +11,7 @@ import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_RECEIVE_BIDS;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.HousingBidService;
+import com.aionemu.gameserver.utils.audit.AuditLogger;
 
 /**
  * @author Rolandas
@@ -26,12 +27,16 @@ public class CM_REGISTER_HOUSE extends AionClientPacket {
 	@Override
 	protected void readImpl() {
 		bidKinah = readQ();
-		readQ(); // always 100000
+		readQ(); // minimum raise of each later bid, the client always sends 100000
 	}
 
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
+		if (bidKinah <= 0) {
+			AuditLogger.log(player, "tried to auction their house for " + bidKinah + " kinah");
+			return;
+		}
 		if (!HousingBidService.getInstance().isRegisteringAllowed()) {
 			sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_AUCTION_TIMEOUT());
 			return;

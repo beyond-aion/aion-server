@@ -7,7 +7,7 @@ import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.world.zone.ZoneName;
+import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
  * @author zhkchi, vlog, Majka
@@ -22,7 +22,7 @@ public class _18500BigKinah extends AbstractQuestHandler {
 	public void register() {
 		int[] npcs = { 203106, 203166, 730304, 730305, 799522, 206150 };
 		qe.registerQuestNpc(203106).addOnQuestStart(questId);
-		qe.registerOnEnterZone(ZoneName.get("LF1A_SENSORYAREA_Q18500_206150_3_210030000"), questId); // Haramel Entrance Zone
+		qe.registerOnEnterZone("LF1A_SENSORYAREA_Q18500_206150_3_210030000", questId); // Haramel Entrance Zone
 		for (int npc : npcs) {
 			qe.registerQuestNpc(npc).addOnTalkEvent(questId);
 		}
@@ -94,9 +94,9 @@ public class _18500BigKinah extends AbstractQuestHandler {
 	}
 
 	@Override
-	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) { // Investigate Suspicious Relic Site nearby.
+	public boolean onEnterZoneEvent(QuestEnv env, ZoneInstance zone) { // Investigate Suspicious Relic Site nearby.
 
-		if (zoneName == ZoneName.get("LF1A_SENSORYAREA_Q18500_206150_3_210030000")) {
+		if (zone.matches("LF1A_SENSORYAREA_Q18500_206150_3_210030000")) {
 
 			Player player = env.getPlayer();
 			if (player == null) {

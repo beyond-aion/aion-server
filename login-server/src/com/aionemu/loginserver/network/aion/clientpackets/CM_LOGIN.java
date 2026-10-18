@@ -67,21 +67,38 @@ public class CM_LOGIN extends AionClientPacket {
 	 */
 	private byte[] encryptedLoginData;
 	private int sessionId;
+	/**
+	 * The number in the client's package.dat.
+	 */
+	private int packageId;
+	/**
+	 * The number of game client windows open on the player's computer, this one included.
+	 */
+	private int openClientWindows;
+	/**
+	 * MD5 hash of the player's computer information, as the client logs it ("[PCInfo] MD5").
+	 */
+	private byte[] pcInfoMd5;
+
+	/**
+	 * Size of the fields after the RSA encrypted credentials.
+	 */
+	private static final int FIELDS_AFTER_CREDENTIALS = 43;
 
 	public CM_LOGIN(ByteBuffer buf, LoginConnection client, int opCode) {
 		super(buf, client, opCode);
 	}
 
 	@Override
-	protected void readImpl() {
-		encryptedLoginData = readB(getRemainingBytes() - 55);
+	protected void readFields() {
+		// one RSA block, two with -loginex; the rest is the fields below and up to 7 bytes of padding
+		encryptedLoginData = readB((getRemainingBytes() - FIELDS_AFTER_CREDENTIALS) / 128 * 128);
 		sessionId = readD();
-		readB(16); // 0
-		readB(7); // static bytes: 20 00 00 00 00 00 01
-		readB(16); // static bytes: 9D DA 47 A7 21 C0 A6 A5 4B B7 5E E3 CE C9 26 AA
-		readD(); // 0
-		readD(); // unk
-		readD(); // 0
+		readB(16); // zeros when logging in with a password, a token on the client's other login paths
+		readD(); // always 32 in the 4.8 client
+		packageId = readUH();
+		openClientWindows = readUC();
+		pcInfoMd5 = readB(16);
 	}
 
 	@Override
@@ -113,7 +130,7 @@ public class CM_LOGIN extends AionClientPacket {
 					if (!ip.equals("127.0.0.1") && BruteForceProtector.getInstance().addFailedConnect(ip)) {
 						Timestamp newTime = new Timestamp(System.currentTimeMillis() + Config.WRONG_LOGIN_BAN_TIME * 60000);
 						BannedIpController.banIp(ip, newTime);
-						log.info(loginData.username + " on " + ip + " banned for " + Config.WRONG_LOGIN_BAN_TIME + " min. bruteforce");
+						log.info("{} on {} banned for {} min. bruteforce", loginData.username, ip, Config.WRONG_LOGIN_BAN_TIME);
 						client.close(new SM_LOGIN_FAIL(AionAuthResponse.STR_L2AUTH_S_BLOCKED_IP));
 						break;
 					}

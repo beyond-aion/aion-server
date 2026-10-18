@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.dataholders.loadingutils;
 
-import javax.xml.bind.Unmarshaller;
+import jakarta.xml.bind.Unmarshaller;
 
 import com.aionemu.gameserver.dataholders.StaticData;
 import com.aionemu.gameserver.utils.ThreadPoolManager;

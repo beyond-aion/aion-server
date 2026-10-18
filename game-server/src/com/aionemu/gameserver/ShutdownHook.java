@@ -55,7 +55,7 @@ public class ShutdownHook extends Thread {
 					break; // fast exit
 
 				if (remainingSeconds.get() % announceInterval == 0) {
-					log.info("Runtime is shutting down in " + remainingSeconds + " seconds.");
+					log.info("Runtime is shutting down in {} seconds", remainingSeconds);
 					PacketSendUtility.broadcastToWorld(SM_SYSTEM_MESSAGE.STR_SERVER_SHUTDOWN(remainingSeconds.get()));
 					announceInterval = nextInterval(remainingSeconds.get(), 5, 60);
 				}

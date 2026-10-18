@@ -354,6 +354,10 @@ public class LegionService {
 	 * This method will handle the process when a member is demoted or promoted.
 	 */
 	public void appointRank(Player player, String charName, int rankId) {
+		if (rankId <= LegionRank.BRIGADE_GENERAL.ordinal() || rankId >= LegionRank.values().length) {
+			AuditLogger.log(player, "tried to appoint legion rank " + rankId + " to " + charName);
+			return;
+		}
 		LegionMember legionMember = getLegionMember(charName);
 		if (legionRestrictions.canAppointRank(player, legionMember)) {
 			LegionRank rank = LegionRank.values()[rankId];
@@ -479,6 +483,7 @@ public class LegionService {
 
 	public void openLegionWarehouse(Player player, Npc npc) {
 		if (legionRestrictions.canOpenWarehouse(player, npc)) {
+			player.setStorageManager(StorageType.LEGION_WAREHOUSE, npc);
 			LegionWhUpdate(player);
 			PacketSendUtility.sendPacket(player, new SM_LEGION_EDIT(0x04, player.getLegion()));// kinah
 			int whLvl = player.getLegion().getWarehouseExpansions();
@@ -552,6 +557,11 @@ public class LegionService {
 
 	public void uploadEmblemInfo(Player activePlayer, int totalSize, int color_a, int color_r, int color_g, int color_b, LegionEmblemType emblemType) {
 		LegionEmblem legionEmblem = activePlayer.getLegion().getLegionEmblem();
+		if (totalSize <= 0 || totalSize > LegionEmblem.MAX_CUSTOM_EMBLEM_SIZE) {
+			AuditLogger.log(activePlayer, "tried to upload a legion emblem of " + totalSize + " bytes");
+			legionEmblem.resetUploadSettings();
+			return;
+		}
 		if (legionRestrictions.canUploadEmblem(activePlayer, true)) {
 			legionEmblem.resetUploadSettings();
 			legionEmblem.setEmblem(legionEmblem.getEmblemId(), color_a, color_r, color_g, color_b, emblemType, null);
@@ -562,17 +572,15 @@ public class LegionService {
 		}
 	}
 
-	public void uploadEmblemData(Player activePlayer, int size, byte[] data) {
+	public void uploadEmblemData(Player activePlayer, byte[] data) {
 		LegionEmblem legionEmblem = activePlayer.getLegion().getLegionEmblem();
 		if (legionRestrictions.canUploadEmblem(activePlayer, false)) {
-			legionEmblem.addUploadedSize(size);
-			legionEmblem.addUploadData(data);
-
-			if (legionEmblem.getUploadedSize() >= legionEmblem.getUploadSize()) {
-				if (legionEmblem.getUploadedSize() == 0 || legionEmblem.getUploadedSize() > legionEmblem.getUploadSize()) {
-					PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_GUILD_WARN_CORRUPT_EMBLEM_FILE());
-					return;
-				}
+			if (!legionEmblem.addUploadData(data)) {
+				PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_GUILD_WARN_CORRUPT_EMBLEM_FILE());
+				legionEmblem.resetUploadSettings();
+				return;
+			}
+			if (legionEmblem.isUploadComplete()) {
 				activePlayer.getInventory()
 					.decreaseKinah(PricesService.getPriceForService(LegionConfig.LEGION_EMBLEM_REQUIRED_KINAH, activePlayer.getRace()));
 				// Finished
@@ -595,28 +603,28 @@ public class LegionService {
 		if (dataLength > 0) {
 			ByteBuffer buf = ByteBuffer.allocate(dataLength);
 			buf.put(legionEmblem.getCustomEmblemData()).position(0);
-			log.debug("legionEmblem size: " + buf.capacity() + " bytes");
+			log.debug("legionEmblem size: {} bytes", buf.capacity());
 			int maxSize = 7993;
 			int currentSize;
 			byte[] bytes;
 			do {
-				log.debug("legionEmblem data position: " + buf.position());
+				log.debug("legionEmblem data position: {}", buf.position());
 				currentSize = buf.capacity() - buf.position();
-				log.debug("legionEmblem data remaining capacity: " + currentSize + " bytes");
+				log.debug("legionEmblem data remaining capacity: {} bytes", currentSize);
 
 				if (currentSize >= maxSize) {
 					bytes = new byte[maxSize];
 					for (int i = 0; i < maxSize; i++) {
 						bytes[i] = buf.get();
 					}
-					log.debug("legionEmblem data send size: " + (bytes.length) + " bytes");
+					log.debug("legionEmblem data send size: {} bytes", bytes.length);
 					PacketSendUtility.sendPacket(player, new SM_LEGION_SEND_EMBLEM_DATA(maxSize, bytes));
 				} else {
 					bytes = new byte[currentSize];
 					for (int i = 0; i < currentSize; i++) {
 						bytes[i] = buf.get();
 					}
-					log.debug("legionEmblem data send size: " + (bytes.length) + " bytes");
+					log.debug("legionEmblem data send size: {} bytes", bytes.length);
 					PacketSendUtility.sendPacket(player, new SM_LEGION_SEND_EMBLEM_DATA(currentSize, bytes));
 				}
 			} while (buf.capacity() != buf.position());
@@ -635,7 +643,7 @@ public class LegionService {
 		Legion.Announcement announcement = null;
 		if (!message.isEmpty()) {
 			if (message.length() > 256) {
-				log.warn("Truncated legion announcement sent by " + activePlayer + " (old length: " + message.length() + ")");
+				log.warn("Truncated legion announcement sent by {} (old length: {})", activePlayer, message.length());
 				message = message.substring(0, 256);
 			}
 			announcement = new Legion.Announcement(message, new Timestamp(System.currentTimeMillis()));

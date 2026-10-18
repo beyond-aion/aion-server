@@ -4,16 +4,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
-
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.model.drop.NpcDrop;
+
+import jakarta.xml.bind.Unmarshaller;
+import jakarta.xml.bind.annotation.*;
 
 /**
  * @author ViAl, Neon
@@ -34,7 +30,7 @@ public class CustomDrop {
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		for (NpcDrop drop : npcDrop) {
 			if (dropById.putIfAbsent(drop.getNpcId(), drop) != null)
-				LoggerFactory.getLogger(CustomDrop.class).warn("Tried to set custom drop for npc " + drop.getNpcId() + " twice!");
+				LoggerFactory.getLogger(CustomDrop.class).warn("Tried to set custom drop for npc {} twice!", drop.getNpcId());
 		}
 		npcDrop = null;
 	}

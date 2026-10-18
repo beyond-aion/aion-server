@@ -8,7 +8,7 @@ import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.world.zone.ZoneName;
+import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
  * @author Cheatkiller
@@ -25,7 +25,7 @@ public class _11147CuteBeadyEyes extends AbstractQuestHandler {
 		qe.registerQuestNpc(798997).addOnTalkEvent(questId);
 		qe.registerQuestNpc(799079).addOnTalkEvent(questId);
 		qe.registerQuestNpc(799081).addOnTalkEvent(questId);
-		qe.registerOnEnterZone(ZoneName.get("KLAWNICKTS_CAVE_210050000"), questId);
+		qe.registerOnEnterZone("KLAWNICKTS_CAVE_210050000", questId);
 	}
 
 	@Override
@@ -89,8 +89,8 @@ public class _11147CuteBeadyEyes extends AbstractQuestHandler {
 	}
 
 	@Override
-	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) {
-		if (zoneName == ZoneName.get("KLAWNICKTS_CAVE_210050000")) {
+	public boolean onEnterZoneEvent(QuestEnv env, ZoneInstance zone) {
+		if (zone.matches("KLAWNICKTS_CAVE_210050000")) {
 			Player player = env.getPlayer();
 			if (player == null)
 				return false;

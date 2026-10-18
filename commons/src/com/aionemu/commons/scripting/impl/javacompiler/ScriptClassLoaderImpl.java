@@ -132,7 +132,7 @@ public class ScriptClassLoaderImpl extends ScriptClassLoader {
 				try {
 					loadRawClassByName(cn, bc);
 				} catch (IOException e) {
-					log.error("Error while loading class from package " + packageName, e);
+					log.error("Error while loading class from package {}", packageName, e);
 					throw e;
 				}
 				result.add(bc);
@@ -163,7 +163,7 @@ public class ScriptClassLoaderImpl extends ScriptClassLoader {
 		try (InputStream is = resource.openStream()) {
 			is.transferTo(bc.openOutputStream());
 		} catch (IOException e) {
-			log.error("Error while loading class data: " + name, e);
+			log.error("Error while loading class data: {}", name, e);
 			throw e;
 		}
 	}

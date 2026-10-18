@@ -47,7 +47,7 @@ public class CM_UI_SETTINGS extends AionClientPacket {
 				player.getPlayerSettings().setHouseBuddies(data);
 				break;
 			default:
-				log.warn(player + " sent unknown type of player settings: " + settingsType);
+				log.warn("{} sent unknown type of player settings: {}", player, settingsType);
 		}
 	}
 }

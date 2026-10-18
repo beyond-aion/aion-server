@@ -24,7 +24,7 @@ public class DebugService {
 
 	private DebugService() {
 		ThreadPoolManager.getInstance().scheduleAtFixedRate(this::analyzeWorldPlayers, ANALYZE_PLAYERS_INTERVAL, ANALYZE_PLAYERS_INTERVAL);
-		log.info("DebugService started. Analyze interval: " + ANALYZE_PLAYERS_INTERVAL);
+		log.info("DebugService started. Analyze interval: {}", ANALYZE_PLAYERS_INTERVAL);
 	}
 
 	private void analyzeWorldPlayers() {

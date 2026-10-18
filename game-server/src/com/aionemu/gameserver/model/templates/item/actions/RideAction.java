@@ -2,10 +2,10 @@ package com.aionemu.gameserver.model.templates.item.actions;
 
 import static com.aionemu.gameserver.model.items.ItemUseAnimation.*;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlType;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.configs.main.CustomConfig;
@@ -32,6 +32,7 @@ import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+import com.aionemu.gameserver.world.zone.ZoneAttributes;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
@@ -49,14 +50,9 @@ public class RideAction extends AbstractItemAction {
 		if (!player.isInPlayerMode(PlayerMode.RIDE)) { // RideAction is for mounting and dismounting, canAct should never forbid dismounting
 			if (parentItem == null)
 				return false;
-
-			if (CustomConfig.ENABLE_RIDE_RESTRICTION) {
-				for (ZoneInstance zone : player.findZones()) {
-					if (!zone.canRide()) {
-						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANNOT_RIDE_INVALID_LOCATION());
-						return false;
-					}
-				}
+			if (!isInRideZone(player)) {
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANNOT_RIDE_INVALID_LOCATION());
+				return false;
 			}
 			if (player.isInState(CreatureState.RESTING)) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_RIDE(ActionState.RESTING.getL10n()));
@@ -65,6 +61,18 @@ public class RideAction extends AbstractItemAction {
 			if (player.getEffectController().isInAnyAbnormalState(AbnormalState.DISMOUNT_RIDE)) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANNOT_RIDE_ABNORMAL_STATE());
 				return false;
+			}
+		}
+		return true;
+	}
+
+	public static boolean isInRideZone(Player player) {
+		if (CustomConfig.ENABLE_RIDE_RESTRICTION) {
+			if (!player.getWorldMapInstance().getTemplate().hasAttribute(ZoneAttributes.RIDE))
+				return false;
+			for (ZoneInstance zone : player.findZones()) {
+				if (zone.getZoneTemplate().getFlags() > 0 && !zone.getZoneTemplate().hasZoneAttribute(ZoneAttributes.RIDE))
+					return false;
 			}
 		}
 		return true;
