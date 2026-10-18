@@ -248,6 +248,17 @@ public class PlayerReviveService {
 
 	}
 
+	/**
+	 * Revives the player at the bind point right after a lethal fall, without offering resurrection options. Neither instances nor kisks apply.
+	 */
+	public static void scheduleBindReviveAfterFall(Player player) {
+		player.getController().addTask(TaskId.TELEPORT, ThreadPoolManager.getInstance().schedule(() -> {
+			player.getController().getAndRemoveTask(TaskId.TELEPORT); // remove manually as it won't get removed automatically
+			bindRevive(player);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME());
+		}, 0));
+	}
+
 	public static void scheduleReviveAtBase(Player player, int delayMillis, int skillId) {
 		player.getController().addTask(TaskId.TELEPORT, ThreadPoolManager.getInstance().schedule(() -> {
 			player.getController().getAndRemoveTask(TaskId.TELEPORT); // remove manually as it won't get removed automatically
