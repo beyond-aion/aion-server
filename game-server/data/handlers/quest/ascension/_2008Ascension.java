@@ -25,7 +25,6 @@ import com.aionemu.gameserver.services.reward.WebRewardService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldMapType;
 
@@ -53,6 +52,7 @@ public class _2008Ascension extends AbstractQuestHandler {
 		qe.registerQuestNpc(205041).addOnKillEvent(questId);
 		qe.registerOnEnterWorld(questId);
 		qe.registerOnDie(questId);
+		qe.registerOnFlightPathEnd(questId);
 	}
 
 	@Override
@@ -223,18 +223,6 @@ public class _2008Ascension extends AbstractQuestHandler {
 							PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.START_FLYTELEPORT, 3001, 0));
 							qs.setQuestVar(50);
 							updateQuestStatus(env);
-							ThreadPoolManager.getInstance().schedule(() -> {
-								qs.setQuestVar(51);
-								updateQuestStatus(env);
-								List<Npc> mobs = new ArrayList<>();
-								mobs.add((Npc) spawn(205040, player, 294f, 277f, 207f, (byte) 0));
-								mobs.add((Npc) spawn(205040, player, 305f, 279f, 206.5f, (byte) 0));
-								mobs.add((Npc) spawn(205040, player, 298f, 253f, 205.7f, (byte) 0));
-								mobs.add((Npc) spawn(205040, player, 306f, 251f, 206f, (byte) 0));
-								for (Npc mob : mobs) {
-									mob.getAggroList().addHate(player, 1000);
-								}
-							}, 43000);
 							return true;
 						}
 						return false;
@@ -258,6 +246,24 @@ public class _2008Ascension extends AbstractQuestHandler {
 	@Override
 	public void onLevelChangedEvent(Player player) {
 		defaultOnLevelChangedEvent(player);
+	}
+
+	@Override
+	public boolean onFlightPathEndEvent(QuestEnv env, int teleportId) {
+		Player player = env.getPlayer();
+		QuestState qs = player.getQuestStateList().getQuestState(questId);
+		if (teleportId != 3001 || qs == null || qs.getStatus() != QuestStatus.START || qs.getQuestVars().getQuestVars() != 50)
+			return false;
+		qs.setQuestVar(51);
+		updateQuestStatus(env);
+		List<Npc> mobs = new ArrayList<>();
+		mobs.add((Npc) spawn(205040, player, 294f, 277f, 207f, (byte) 0));
+		mobs.add((Npc) spawn(205040, player, 305f, 279f, 206.5f, (byte) 0));
+		mobs.add((Npc) spawn(205040, player, 298f, 253f, 205.7f, (byte) 0));
+		mobs.add((Npc) spawn(205040, player, 306f, 251f, 206f, (byte) 0));
+		for (Npc mob : mobs)
+			mob.getAggroList().addHate(player, 1000);
+		return true;
 	}
 
 	@Override

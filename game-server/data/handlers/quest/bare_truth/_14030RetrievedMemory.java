@@ -107,8 +107,8 @@ public class _14030RetrievedMemory extends AbstractQuestHandler {
 								SkillEngine.getInstance().applyEffectDirectly(18566, player, player);
 								player.setState(CreatureState.FLYING);
 								player.unsetState(CreatureState.ACTIVE);
-								player.setFlightTeleportId(1001);
-								PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.START_FLYTELEPORT, 1001, 0));
+								player.setFlightTeleportId(74001);
+								PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.START_FLYTELEPORT, 74001, 0));
 								changeQuestStep(env, 4, 5);
 								return true;
 							}

@@ -15,7 +15,6 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldMapType;
 
@@ -34,6 +33,7 @@ public class _1002RequestoftheElim extends AbstractQuestHandler {
 		qe.registerOnQuestCompleted(questId);
 		qe.registerOnLevelChanged(questId);
 		qe.registerOnEnterWorld(questId);
+		qe.registerOnFlightPathEnd(questId);
 		for (int npc : npcs) {
 			qe.registerQuestNpc(npc).addOnTalkEvent(questId);
 		}
@@ -135,16 +135,8 @@ public class _1002RequestoftheElim extends AbstractQuestHandler {
 							if (var == 20) {
 								player.setState(CreatureState.FLYING);
 								player.unsetState(CreatureState.ACTIVE);
-								player.setFlightTeleportId(1001);
-								PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.START_FLYTELEPORT, 1001, 0));
-								ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-									@Override
-									public void run() {
-										changeQuestStep(env, 20, 14); // 14
-										TeleportService.teleportTo(player, 210010000, 1, 603, 1537, 116, (byte) 20);
-									}
-								}, 43000);
+								player.setFlightTeleportId(2001);
+								PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.START_FLYTELEPORT, 2001, 0));
 								return true;
 							}
 					}
@@ -159,6 +151,17 @@ public class _1002RequestoftheElim extends AbstractQuestHandler {
 			}
 		}
 		return false;
+	}
+
+	@Override
+	public boolean onFlightPathEndEvent(QuestEnv env, int teleportId) {
+		Player player = env.getPlayer();
+		QuestState qs = player.getQuestStateList().getQuestState(questId);
+		if (teleportId != 2001 || qs == null || qs.getStatus() != QuestStatus.START || qs.getQuestVarById(0) != 20)
+			return false;
+		TeleportService.teleportTo(player, 210010000, 1, 603, 1537, 116, (byte) 20);
+		changeQuestStep(env, 20, 14); // 14
+		return true;
 	}
 
 	@Override

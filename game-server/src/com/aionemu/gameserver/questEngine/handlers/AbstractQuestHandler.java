@@ -267,6 +267,13 @@ public abstract class AbstractQuestHandler {
 		return false;
 	}
 
+	/**
+	 * Called when the player lands at the end of a flight transporter path.
+	 */
+	public boolean onFlightPathEndEvent(QuestEnv env, int teleportId) {
+		return false;
+	}
+
 	public boolean rideAction(QuestEnv env, int rideItemId) {
 		return false;
 	}

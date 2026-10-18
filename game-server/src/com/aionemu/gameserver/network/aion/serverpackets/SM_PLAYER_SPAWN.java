@@ -24,12 +24,10 @@ public class SM_PLAYER_SPAWN extends AionServerPacket {
 
 	@Override
 	protected void writeImpl(AionConnection con) {
-		boolean isPersonal = WorldMapType.getWorld(player.getWorldId()).isPersonal();
-		int worldChannel = player.getWorldId() + player.getInstanceId() - 1;
-		writeD(isPersonal ? -worldChannel : worldChannel); // world + chnl
+		writeD(player.getPosition().getClientWorldId());
 		writeD(player.getWorldId());
 		writeD(0x00); // unk
-		writeC(isPersonal ? 1 : 0);
+		writeC(WorldMapType.getWorld(player.getWorldId()).isPersonal() ? 1 : 0);
 		writeF(player.getX()); // x
 		writeF(player.getY()); // y
 		writeF(player.getZ()); // z
