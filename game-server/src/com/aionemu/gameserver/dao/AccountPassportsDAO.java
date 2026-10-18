@@ -31,6 +31,7 @@ public class AccountPassportsDAO {
 
 	public static void loadPassport(Account account) {
 		PassportsList passportList = new PassportsList();
+		boolean hasStamps = true;
 		try (Connection con = DatabaseFactory.getConnection()) {
 			try (PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
 				stmt.setInt(1, account.getId());
@@ -54,7 +55,7 @@ public class AccountPassportsDAO {
 					stamps = rset.getInt("stamps");
 					lastStamp = rset.getTimestamp("last_stamp");
 				} else {
-					insertStamps(account.getId());
+					hasStamps = false;
 				}
 				account.setPassportStamps(stamps);
 				account.setLastStamp(lastStamp);
@@ -62,6 +63,8 @@ public class AccountPassportsDAO {
 		} catch (Exception e) {
 			log.error("Could not restore completed passport data for account: {} from DB", account.getId(), e);
 		}
+		if (!hasStamps) // after the connection above was returned, a thread must not wait for a second one while holding one
+			insertStamps(account.getId());
 	}
 
 	public static void storePassportList(int accountId, List<Passport> pList) {
