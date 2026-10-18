@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.services;
 
 import java.util.*;
+import java.util.function.IntFunction;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,15 +49,22 @@ public class TradeService {
 	private static final TradeListData tradeListData = DataManager.TRADE_LIST_DATA;
 	private static final GoodsListData goodsListData = DataManager.GOODSLIST_DATA;
 
-	private static boolean canBuyLimitItem(Npc npc, Player player, TradeItem tradeItem) {
-		LimitedItem item = LimitedItemTradeService.getInstance().getLimitedItem(tradeItem.getItemId(), npc.getNpcId());
+	private static boolean canBuyLimitItem(Npc npc, Player player, int itemId, long count) {
+		LimitedItem item = LimitedItemTradeService.getInstance().getLimitedItem(itemId, npc.getNpcId());
 		if (item != null) {
-			if (item.getDefaultSellLimit() > 0 && item.getSellLimit() - tradeItem.getCount() < 0)
+			if (item.getDefaultSellLimit() > 0 && item.getSellLimit() - count < 0)
 				return false;
-			if (item.getBuyLimit() > 0 && item.getBuyCount(player.getObjectId()) + tradeItem.getCount() > item.getBuyLimit())
+			if (item.getBuyLimit() > 0 && item.getBuyCount(player.getObjectId()) + count > item.getBuyLimit())
 				return false;
 		}
 		return true;
+	}
+
+	private static boolean containsItem(TradeListTemplate tradeListTemplate, IntFunction<GoodsList> goodsListById, int itemId) {
+		for (TradeTab tab : tradeListTemplate.getTradeTablist())
+			if (goodsListById.apply(tab.getId()).getItemIdList().contains(itemId))
+				return true;
+		return false;
 	}
 
 	public static boolean performBuyFromShop(Npc npc, Player player, TradeList tradeList) {
@@ -115,14 +123,22 @@ public class TradeService {
 		}
 
 		// 4. check free slots
-		if (freeSlots < tradeList.size()) {
+		long requiredSlots = 0;
+		for (TradeItem tradeItem : tradeList.getTradeItems()) {
+			long maxStackCount = tradeItem.getItemTemplate().getMaxStackCount();
+			requiredSlots += (tradeItem.getCount() + maxStackCount - 1) / maxStackCount;
+		}
+		if (freeSlots < requiredSlots) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_FULL_INVENTORY());
 			return false;
 		}
 
 		// 5. check sell limits
-		for (TradeItem tradeItem : tradeList.getTradeItems()) {
-			if (!canBuyLimitItem(npc, player, tradeItem)) {
+		Map<Integer, Long> countByItemId = new HashMap<>();
+		for (TradeItem tradeItem : tradeList.getTradeItems())
+			countByItemId.merge(tradeItem.getItemId(), tradeItem.getCount(), Long::sum);
+		for (Map.Entry<Integer, Long> entry : countByItemId.entrySet()) {
+			if (!canBuyLimitItem(npc, player, entry.getKey(), entry.getValue())) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_LIMITED_BUYING_CANT_SELECT_NO_ITEMS());
 				return false;
 			}
@@ -131,7 +147,7 @@ public class TradeService {
 		// 6. subtract all costs
 		long tradeListPrice = tradeList.getRequiredKinah();
 		if (tradeList.getRequiredAp() > 0)
-			AbyssPointsService.addAp(player, -tradeList.getRequiredAp());
+			AbyssPointsService.addAp(player, (int) -tradeList.getRequiredAp());
 
 		if (useKinah && tradeListPrice > 0)
 			if (!inventory.tryDecreaseKinah(tradeListPrice))
@@ -184,13 +200,18 @@ public class TradeService {
 		return performSellToShop(player, tradeList, purchaseTemplate, PricesService.getVendorSellModifier());
 	}
 
+	/**
+	 * @param tradeList
+	 *          entries with item object IDs, each item at most once
+	 */
 	public static boolean performSellToShop(Player player, TradeList tradeList, TradeListTemplate purchaseTemplate, int sellModifier) {
 		if (!PlayerRestrictions.canTrade(player))
 			return false;
 
+		// validate all rows before removing anything, so a bad row can't take the items of the previous ones
+		record Sale(Item item, long count, long sellReward) {}
 		Storage inventory = player.getInventory();
-		long kinahReward = 0;
-		List<Item> items = new ArrayList<>();
+		List<Sale> sales = new ArrayList<>();
 		for (TradeItem tradeItem : tradeList.getTradeItems()) {
 			long count = tradeItem.getCount();
 			Item item = inventory.getItemByObjId(tradeItem.getItemId());
@@ -200,16 +221,7 @@ public class TradeService {
 			long sellReward;
 
 			if (purchaseTemplate != null) {
-				int itemId = item.getItemId();
-				boolean valid = false;
-				for (TradeTab tab : purchaseTemplate.getTradeTablist()) {
-					GoodsList goodList = goodsListData.getGoodsPurchaseListById(tab.getId());
-					if (goodList.getItemIdList().contains(itemId)) {
-						valid = true;
-						break;
-					}
-				}
-				if (!valid)
+				if (!containsItem(purchaseTemplate, goodsListData::getGoodsPurchaseListById, item.getItemId()))
 					return false;
 				sellReward = (long) (item.getItemTemplate().getPrice() * purchaseTemplate.getBuyPriceRate() / 100D);
 			} else {
@@ -220,23 +232,31 @@ public class TradeService {
 				sellReward = PricesService.getSellReward(item.getItemTemplate().getPrice(), sellModifier);
 			}
 
-			count = PlayerLimitService.updateSellLimit(player, sellReward, count);
+			if (count > item.getItemCount()) {
+				AuditLogger.log(player, "tried to sell more items to npc than he has");
+				return false;
+			}
+			sales.add(new Sale(item, count, sellReward));
+		}
+
+		long kinahReward = 0;
+		List<Item> items = new ArrayList<>();
+		for (Sale sale : sales) {
+			Item item = sale.item();
+			long count = PlayerLimitService.updateSellLimit(player, sale.sellReward(), sale.count());
 			if (count == 0)
 				break;
 
-			long realReward = sellReward * count;
+			long realReward = sale.sellReward() * count;
 			Item repurchaseItem;
-			if (item.getItemCount() - count < 0) {
-				AuditLogger.log(player, "tried to sell more items to npc than he has");
-				return false;
-			} else if (item.getItemCount() - count == 0) {
-				inventory.delete(item, ItemDeleteType.SELL); // need to be here to avoid exploit by sending packet with many items with same unique ids
+			if (item.getItemCount() == count) {
+				inventory.delete(item, ItemDeleteType.SELL);
 				repurchaseItem = item;
-			} else if (item.getItemCount() - count > 0) {
+			} else {
 				repurchaseItem = ItemFactory.newItem(item.getItemId(), count);
+				repurchaseItem.setExpireTime(item.getExpireTime());
 				inventory.decreaseItemCount(item, count);
-			} else
-				return false;
+			}
 
 			kinahReward += realReward;
 			repurchaseItem.setRepurchasePrice(realReward);
@@ -265,19 +285,13 @@ public class TradeService {
 			if (item == null)
 				return false;
 
-			int itemId = item.getItemId();
-			boolean valid = false;
-			for (TradeTab tab : purchaseTemplate.getTradeTablist()) {
-				GoodsList goodList = goodsListData.getGoodsPurchaseListById(tab.getId());
-				if (goodList.getItemIdList().contains(itemId)) {
-					valid = true;
-					break;
-				}
-			}
-			if (!valid)
+			Acquisition acquisition = item.getItemTemplate().getAcquisition();
+			if (acquisition == null)
+				return false;
+			if (!containsItem(purchaseTemplate, goodsListData::getGoodsPurchaseListById, item.getItemId()))
 				return false;
 			if (inventory.decreaseByObjectId(itemObjectId, count)) {
-				int requiredAp = item.getItemTemplate().getAcquisition().getRequiredAp();
+				int requiredAp = acquisition.getRequiredAp();
 				int apToAdd = Math.round((requiredAp * purchaseTemplate.getBuyPriceRate()) / 100F);
 				AbyssPointsService.addAp(player, apToAdd * (int) count);
 			}
@@ -302,15 +316,7 @@ public class TradeService {
 			return false;
 
 		TradeListTemplate tradeInList = tradeListData.getTradeInListTemplate(npc.getNpcId());
-		boolean valid = false;
-		for (TradeTab tab : tradeInList.getTradeTablist()) {
-			GoodsList goodList = goodsListData.getGoodsInListById(tab.getId());
-			if (goodList.getItemIdList().contains(itemId)) {
-				valid = true;
-				break;
-			}
-		}
-		if (!valid)
+		if (!containsItem(tradeInList, goodsListData::getGoodsInListById, itemId))
 			return false;
 
 		ItemTemplate itemTemplate = DataManager.ITEM_DATA.getItemTemplate(itemId);

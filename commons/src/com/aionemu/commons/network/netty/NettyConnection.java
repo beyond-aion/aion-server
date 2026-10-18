@@ -1,7 +1,8 @@
-package com.aionemu.chatserver.network.netty;
+package com.aionemu.commons.network.netty;
 
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
+import java.util.concurrent.Executor;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.slf4j.Logger;
@@ -12,22 +13,21 @@ import com.aionemu.commons.network.packet.BaseServerPacket;
 
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFutureListener;
-import io.netty.util.concurrent.EventExecutor;
 
 /**
- * Connection on top of a Netty channel. Received packets are executed one after another on the connection's packet executor, outside the I/O
- * threads.
+ * Connection on top of a Netty channel. Received packets are executed on the connection's packet executor, outside the I/O threads: one after
+ * another if the executor runs one task at a time (a Netty {@code EventExecutor}), concurrently if it is a thread pool.
  */
 public abstract class NettyConnection<S extends BaseServerPacket> {
 
 	private static final Logger log = LoggerFactory.getLogger(NettyConnection.class);
 
 	private final Channel channel;
-	private final EventExecutor packetExecutor;
+	private final Executor packetExecutor;
 	private final InetSocketAddress remoteAddress;
 	private final AtomicInteger pendingPackets = new AtomicInteger();
 
-	protected NettyConnection(Channel channel, EventExecutor packetExecutor) {
+	protected NettyConnection(Channel channel, Executor packetExecutor) {
 		this.channel = channel;
 		this.packetExecutor = packetExecutor;
 		this.remoteAddress = (InetSocketAddress) channel.remoteAddress();
@@ -91,7 +91,7 @@ public abstract class NettyConnection<S extends BaseServerPacket> {
 	}
 
 	/**
-	 * Runs the task after all packets of this connection, which are already queued for execution.
+	 * Runs the task after all packets of this connection, which are already queued for execution, if the packet executor runs one task at a time.
 	 */
 	final void executeAfterPendingPackets(Runnable task) {
 		packetExecutor.execute(task);

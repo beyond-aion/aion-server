@@ -29,6 +29,10 @@ public abstract class UseableHouseObject<T extends PlaceableHouseObject> extends
 		return usingPlayer.get() != 0;
 	}
 
+	public boolean isOccupiedBy(Player player) {
+		return usingPlayer.get() == player.getObjectId();
+	}
+
 	/**
 	 * @return True if the player could successful occupy the object or is already occupying it
 	 */

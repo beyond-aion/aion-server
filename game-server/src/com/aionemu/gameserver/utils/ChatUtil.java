@@ -234,16 +234,24 @@ public class ChatUtil {
 		return "[item:%d]".formatted(itemId);
 	}
 
-	public static String itemName(int itemId) {
-		return "[item_ex:%d]".formatted(itemId);
+	/**
+	 * @return A tag that prints the localized item name in chat.<br>
+	 * The playerName parameter is relevant for crafted items that carry the player's name, such as {@code [item_ex:100200836;Ownername]}.
+	 */
+	public static String itemName(int itemId, String playerName) {
+		return "[item_ex:%d;%s]".formatted(itemId, playerName);
 	}
 
 	public static String recipe(int recipeId) {
 		return "[recipe:%d]".formatted(recipeId);
 	}
 
-	public static String recipe(int recipeId, Player player) {
-		return "[recipe_ex:%d;%s]".formatted(recipeId, player.getName());
+	/**
+	 * @return A tag that prints the localized recipe name in chat.<br>
+	 * The playerName parameter is relevant for recipes that carry the player's name, such as {@code [recipe_ex:155006741;Ownername]}.
+	 */
+	public static String recipeName(int recipeId, String playerName) {
+		return "[recipe_ex:%d;%s]".formatted(recipeId, playerName);
 	}
 
 	public static String quest(int questId) {

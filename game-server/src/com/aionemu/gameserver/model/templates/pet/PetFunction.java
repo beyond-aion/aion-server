@@ -5,6 +5,8 @@ import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlRootElement;
 
+import com.aionemu.gameserver.model.items.storage.StorageType;
+
 /**
  * @author IlBuono
  */
@@ -35,6 +37,13 @@ public class PetFunction {
 
 	public int getRatePrice() {
 		return ratePrice;
+	}
+
+	/**
+	 * @return The ID of the pet bag storage that belongs to this warehouse function.
+	 */
+	public int getPetBagStorageId() {
+		return StorageType.PET_BAG_MIN - 3 + id;
 	}
 
 	public static PetFunction CreateEmpty() {

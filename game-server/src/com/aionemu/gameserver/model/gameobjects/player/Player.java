@@ -127,6 +127,7 @@ public class Player extends Creature {
 	private int resurrectionSkill = 0;
 	private boolean isFlyingBeforeDeath = false;
 	private Npc postman = null;
+	private StorageManager storageManager;
 	private boolean isInResurrectPosState = false;
 	private float resPosX = 0;
 	private float resPosY = 0;
@@ -158,8 +159,6 @@ public class Player extends Creature {
 	 * Connection of this Player.
 	 */
 	private AionConnection clientConnection;
-	private FlyPathEntry flyLocationId;
-	private long flyStartTime;
 
 	private EmotionList emotions;
 	private MotionList motions;
@@ -174,9 +173,6 @@ public class Player extends Creature {
 	private int lootingNpcOid;
 	private RebirthEffect rebirthEffect;
 
-	// Needed to remove supplements queue
-	private int subtractedSupplementsCount;
-	private int subtractedSupplementId;
 	private byte portAnimation;
 	private boolean isInSprintMode;
 	private List<ActionObserver> rideObservers;
@@ -852,12 +848,11 @@ public class Player extends Creature {
 		return flightPath;
 	}
 
-	public void setCurrentFlypath(FlyPathEntry path) {
-		this.flyLocationId = path;
-		if (path != null)
-			this.flyStartTime = System.currentTimeMillis();
-		else
-			this.flyStartTime = 0;
+	/**
+	 * @return The path template of the flight transporter or windstream the player is currently flying along, null if there is none.
+	 */
+	public FlyPathEntry getFlightPathTemplate() {
+		return isUsingFlightTransporterOrWindstream() ? DataManager.FLY_PATH.getPathTemplate(flightPath.getId() / 1000) : null;
 	}
 
 	/**
@@ -1154,6 +1149,22 @@ public class Player extends Creature {
 		this.postman = postman;
 	}
 
+	/**
+	 * @return The NPC or house postbox at which the player opened the warehouse, legion warehouse or mailbox window, if it's still open.
+	 */
+	public VisibleObject getStorageManager(StorageType storageType) {
+		return storageManager != null && storageManager.matches(storageType) ? getKnownList().getObject(storageManager.objectId()) : null;
+	}
+
+	public void unsetStorageManager(VisibleObject object) {
+		if (storageManager != null && storageManager.objectId() == object.getObjectId())
+			storageManager = null;
+	}
+
+	public void setStorageManager(StorageType storageType, VisibleObject manager) {
+		this.storageManager = new StorageManager(storageType, manager.getObjectId());
+	}
+
 	public PlayerAccountData getAccountData() {
 		return playerAccountData;
 	}
@@ -1348,14 +1359,6 @@ public class Player extends Creature {
 		return ItemAttackType.PHYSICAL;
 	}
 
-	public long getFlyStartTime() {
-		return flyStartTime;
-	}
-
-	public FlyPathEntry getCurrentFlyPath() {
-		return flyLocationId;
-	}
-
 	public void resetAbyssRankListUpdated() {
 		this.abyssRankListUpdateMask = 0;
 	}
@@ -1531,26 +1534,6 @@ public class Player extends Creature {
 		return rebirthEffect != null || hasAccess(AdminConfig.AUTO_RES);
 	}
 
-	/**
-	 * Put up supplements to subtraction queue, so that when moving they would not decrease, need update as confirmation To update use
-	 * updateSupplements()
-	 */
-	public void subtractSupplements(int count, int supplementId) {
-		subtractedSupplementsCount = count;
-		subtractedSupplementId = supplementId;
-	}
-
-	/**
-	 * Update supplements in queue and clear the queue
-	 */
-	public void updateSupplements() {
-		if (subtractedSupplementId == 0 || subtractedSupplementsCount == 0)
-			return;
-		getInventory().decreaseByItemId(subtractedSupplementId, subtractedSupplementsCount);
-		subtractedSupplementsCount = 0;
-		subtractedSupplementId = 0;
-	}
-
 	public byte getPortAnimationId() {
 		return portAnimation;
 	}
@@ -1562,11 +1545,8 @@ public class Player extends Creature {
 	@Override
 	public boolean isSkillDisabled(SkillTemplate template) {
 		ChainCondition cond = template.getChainCondition();
-		if (cond != null && cond.getAllowedActivations() > 1) { // exception for multicast
-			int chainCount = getChainSkills().getCurrentChainCount(cond.getCategory());
-			if (chainCount > 0 && chainCount < cond.getAllowedActivations() && !getChainSkills().isChainExpired())
-				return false;
-		}
+		if (cond != null && cond.getAllowedActivations() > 1 && getChainSkills().canRepeat(cond.getCategory(), cond.getAllowedActivations(), cond.getActivationWindow()))
+			return false; // exception for multicast
 		if (super.isSkillDisabled(template)) {
 			PacketSendUtility.sendPacket(this, SM_SYSTEM_MESSAGE.STR_SKILL_NOT_READY());
 			return true;
@@ -1631,10 +1611,7 @@ public class Player extends Creature {
 		super.setPosition(position);
 		getMoveController().resetLastPositionFromClient(); // if we don't reset it, material collision handlers (such as shields) affect you on teleport
 		getCommonData().setMapId(position.getMapId());
-		getCommonData().setX(position.getX());
-		getCommonData().setY(position.getY());
-		getCommonData().setZ(position.getZ());
-		getCommonData().setHeading(position.getHeading());
+		getCommonData().setXYZH(position.getX(), position.getY(), position.getZ(), position.getHeading());
 		getCommonData().setWorldOwnerId(position.getMapRegion() == null ? 0 : position.getWorldMapInstance().getOwnerId());
 	}
 

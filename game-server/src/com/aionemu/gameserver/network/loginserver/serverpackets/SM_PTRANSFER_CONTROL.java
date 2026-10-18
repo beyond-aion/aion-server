@@ -137,8 +137,8 @@ public class SM_PTRANSFER_CONTROL extends LsServerPacket {
 				writeC(playerAppearance.getLipSize());
 				writeC(playerAppearance.getSmile());
 				writeC(playerAppearance.getLipShape());
-				writeC(playerAppearance.getJawHeigh());
-				writeC(playerAppearance.getChinJut());
+				writeC(playerAppearance.getChinHeight());
+				writeC(playerAppearance.getCheekBones());
 				writeC(playerAppearance.getEarShape());
 				writeC(playerAppearance.getHeadSize());
 				writeC(playerAppearance.getNeck());
@@ -158,7 +158,7 @@ public class SM_PTRANSFER_CONTROL extends LsServerPacket {
 				writeC(playerAppearance.getShoulders());
 				writeC(playerAppearance.getFaceShape());
 				writeC(playerAppearance.getVoice());
-				writeF(playerAppearance.getHeight());
+				writeF(playerAppearance.getHeightScale());
 
 				writeF(this.player.getX());
 				writeF(this.player.getY());

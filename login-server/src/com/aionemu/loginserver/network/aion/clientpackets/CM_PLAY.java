@@ -35,12 +35,10 @@ public class CM_PLAY extends AionClientPacket {
 	}
 
 	@Override
-	protected void readImpl() {
+	protected void readFields() {
 		accountId = readD();
 		loginOk = readD();
 		servId = readC();
-		readB(6); // CE 15 F9 75 78 30 or all zero
-		readQ(); // random
 	}
 
 	@Override

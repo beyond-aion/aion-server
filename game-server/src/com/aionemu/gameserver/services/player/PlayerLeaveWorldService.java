@@ -20,6 +20,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.summons.UnsummonType;
 import com.aionemu.gameserver.model.team.alliance.PlayerAllianceService;
 import com.aionemu.gameserver.model.team.group.PlayerGroupService;
+import com.aionemu.gameserver.model.templates.flypath.FlyPathEntry;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.chatserver.ChatServer;
 import com.aionemu.gameserver.questEngine.QuestEngine;
@@ -98,7 +99,7 @@ public class PlayerLeaveWorldService {
 		if (AutoGroupConfig.AUTO_GROUP_ENABLE)
 			AutoGroupService.getInstance().onLogout(player);
 		ConquerorAndProtectorService.getInstance().onLeaveMap(player);
-		MultiClientingService.onLeaveWorld(player);
+		MultiClientService.onLeaveWorld(player);
 		InstanceService.onLogout(player);
 		GMService.getInstance().onPlayerLogout(player);
 		KiskService.getInstance().onLogout(player);
@@ -144,10 +145,10 @@ public class PlayerLeaveWorldService {
 		player.getCommonData().setLastOnline(lastOnline);
 		if (player.isLegionMember()) // must be called after setOnline and setLastOnline
 			LegionService.getInstance().onLogout(player);
-		player.getCommonData().setX(player.getX());
-		player.getCommonData().setY(player.getY());
-		player.getCommonData().setZ(player.getZ());
-		player.getCommonData().setHeading(player.getHeading());
+		FlyPathEntry flightPath = player.getFlightPathTemplate();
+		if (flightPath != null)
+			player.getPosition().setXYZH(flightPath.getEndX(), flightPath.getEndY(), flightPath.getEndZ(), (byte) 0);
+		player.getCommonData().setXYZH(player.getX(), player.getY(), player.getZ(), player.getHeading());
 
 		ChatServer.getInstance().sendPlayerLogout(player);
 

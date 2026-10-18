@@ -321,7 +321,8 @@ DROP TABLE IF EXISTS `house_scripts`;
 CREATE TABLE `house_scripts` (
   `house_id` int NOT NULL,
   `script_id` tinyint NOT NULL,
-  `script` mediumtext NOT NULL,
+  `script` blob NOT NULL,
+  `uncompressed_size` int NOT NULL,
   `date_added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`house_id`,`script_id`),
   CONSTRAINT `houses_id_ibfk_1` FOREIGN KEY (`house_id`) REFERENCES `houses` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -597,8 +598,8 @@ CREATE TABLE `player_appearance` (
   `lip_size` int NOT NULL,
   `smile` int NOT NULL,
   `lip_shape` int NOT NULL,
-  `jaw_height` int NOT NULL,
-  `chin_jut` int NOT NULL,
+  `chin_height` int NOT NULL,
+  `cheek_bones` int NOT NULL,
   `ear_shape` int NOT NULL,
   `head_size` int NOT NULL,
   `neck` int NOT NULL,

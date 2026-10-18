@@ -15,8 +15,9 @@ public class LegionEmblem implements Persistable {
 	private LegionEmblemType emblemType = LegionEmblemType.DEFAULT;
 	private PersistentState persistentState;
 
+	public static final int MAX_CUSTOM_EMBLEM_SIZE = 80000;
+
 	private boolean isUploading = false;
-	private int uploadSize = 0;
 	private int uploadedSize = 0;
 	private byte[] uploadData;
 
@@ -82,39 +83,27 @@ public class LegionEmblem implements Persistable {
 	}
 
 	public void setUploadSize(int emblemSize) {
-		this.uploadSize = emblemSize;
+		this.uploadData = new byte[emblemSize];
+		this.uploadedSize = 0;
 	}
 
-	public int getUploadSize() {
-		return uploadSize;
-	}
-
-	public void addUploadData(byte[] data) {
-		byte[] newData = new byte[uploadedSize];
-		int i = 0;
-		if (uploadData != null && uploadData.length > 0) {
-			for (byte dataByte : uploadData) {
-				newData[i] = dataByte;
-				i++;
-			}
-		}
-		for (byte dataByte : data) {
-			newData[i] = dataByte;
-			i++;
-		}
-		this.uploadData = newData;
+	/**
+	 * @return false if the chunk doesn't fit into the size announced for this upload
+	 */
+	public boolean addUploadData(byte[] data) {
+		if (uploadData == null || data.length > uploadData.length - uploadedSize)
+			return false;
+		System.arraycopy(data, 0, uploadData, uploadedSize, data.length);
+		uploadedSize += data.length;
+		return true;
 	}
 
 	public byte[] getUploadData() {
 		return this.uploadData;
 	}
 
-	public void addUploadedSize(int uploadedSize) {
-		this.uploadedSize += uploadedSize;
-	}
-
-	public int getUploadedSize() {
-		return uploadedSize;
+	public boolean isUploadComplete() {
+		return uploadData != null && uploadedSize == uploadData.length;
 	}
 
 	public void setEmblemType(LegionEmblemType emblemType) {
