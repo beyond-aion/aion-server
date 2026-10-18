@@ -251,7 +251,7 @@ public class GameServer {
 			return false;
 		staffClients.forEach(c -> {
 			if (c.getState() == AionConnection.State.IN_GAME)
-				PacketSendUtility.sendPacket(c.getActivePlayer(), new SM_QUIT_RESPONSE(true));
+				PacketSendUtility.sendPacket(c.getActivePlayer(), SM_QUIT_RESPONSE.quitToEditScreen());
 			LoginServer.getInstance().requestAuthReconnection(c.getAccount().getId(), c);
 		});
 		return true;

@@ -150,6 +150,8 @@ public class Player extends Creature {
 
 	private long prisonEndTimeMillis = 0;
 	private long gatherRestrictionMillis;
+	private long quitCountdownStartMillis;
+	private long quitBlockedUntilMillis;
 	private String captchaWord;
 	private byte[] captchaImage;
 
@@ -345,6 +347,35 @@ public class Player extends Creature {
 		if (durationSeconds < 0)
 			gatherRestrictionMillis = durationSeconds = 0;
 		return durationSeconds;
+	}
+
+	/**
+	 * @return The time when the client started its countdown before quitting the game, 0 if it never did
+	 */
+	public long getQuitCountdownStartMillis() {
+		return quitCountdownStartMillis;
+	}
+
+	public void setQuitCountdownStartMillis(long quitCountdownStartMillis) {
+		this.quitCountdownStartMillis = quitCountdownStartMillis;
+	}
+
+	/**
+	 * Keeps the player from quitting the game for the next 10 seconds, after fighting or starting to craft.
+	 */
+	public void blockQuitting() {
+		quitBlockedUntilMillis = System.currentTimeMillis() + 10000;
+	}
+
+	public void unblockQuitting() {
+		quitBlockedUntilMillis = 0;
+	}
+
+	/**
+	 * @return Milliseconds until the player may quit the game, 0 if they may quit now
+	 */
+	public long getMillisUntilQuittingAllowed() {
+		return Math.max(0, quitBlockedUntilMillis - System.currentTimeMillis());
 	}
 
 	public String getCaptchaWord() {

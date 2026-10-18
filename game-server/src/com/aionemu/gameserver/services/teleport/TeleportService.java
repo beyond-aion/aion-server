@@ -160,6 +160,7 @@ public class TeleportService {
 
 	private static void sendLoc(Player player, int worldId, int instanceId, float x, float y, float z, byte h, TeleportAnimation animation) {
 		abortPlayerActions(player);
+		player.unblockQuitting();
 		// despawn from world and send animation to others (also ends flying)
 		World.getInstance().despawn(player, animation.getDefaultObjectDeleteAnimation());
 
