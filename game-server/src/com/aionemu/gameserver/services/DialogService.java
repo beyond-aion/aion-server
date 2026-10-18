@@ -21,10 +21,8 @@ import com.aionemu.gameserver.model.gameobjects.player.RequestResponseHandler;
 import com.aionemu.gameserver.model.items.storage.StorageType;
 import com.aionemu.gameserver.model.siege.FortressLocation;
 import com.aionemu.gameserver.model.team.alliance.PlayerAlliance;
-import com.aionemu.gameserver.model.templates.goods.GoodsList;
 import com.aionemu.gameserver.model.templates.npc.TalkInfo;
 import com.aionemu.gameserver.model.templates.tradelist.TradeListTemplate;
-import com.aionemu.gameserver.model.templates.tradelist.TradeListTemplate.TradeTab;
 import com.aionemu.gameserver.model.templates.zone.ZoneClassName;
 import com.aionemu.gameserver.model.templates.zone.ZoneTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.*;
@@ -73,20 +71,12 @@ public class DialogService {
 						break;
 					}
 					int tradeModifier = tradeListTemplate.getSellPriceRate();
-					int legionLevel = player.getLegion() == null ? 0 : player.getLegion().getLegionLevel();
-					boolean hasAnythingToSell = false;
-					for (TradeTab tab : tradeListTemplate.getTradeTablist()) {
-						GoodsList goodsList = DataManager.GOODSLIST_DATA.getGoodsListById(tab.getId());
-						if (goodsList == null || goodsList.getLegionLevel() > legionLevel)
-							continue;
-						hasAnythingToSell = true;
-						break;
-					}
-					if (hasAnythingToSell)
-						PacketSendUtility.sendPacket(player,
-							new SM_TRADELIST(player, npc, tradeListTemplate, PricesService.getVendorBuyModifier() * tradeModifier / 100));
-					else
+					List<Integer> tradeTabIds = TradeService.getTradeListTabIds(tradeListTemplate, player);
+					if (tradeTabIds.isEmpty())
 						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_BUY_SELL_HE_DOES_NOT_SELL_ITEM(npc.getObjectTemplate().getL10n()));
+					else
+						PacketSendUtility.sendPacket(player, new SM_TRADELIST(player, npc, tradeListTemplate.getTradeNpcType(), tradeTabIds,
+							PricesService.getVendorBuyModifier() * tradeModifier / 100));
 					break;
 				}
 				case DEPOSIT_CHAR_WAREHOUSE: // warehouse (2.5)

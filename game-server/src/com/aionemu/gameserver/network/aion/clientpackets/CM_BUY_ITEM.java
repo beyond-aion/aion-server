@@ -127,7 +127,7 @@ public class CM_BUY_ITEM extends AionClientPacket {
 			}
 			case SHOP_BUY, ABYSS_SHOP_BUY, REWARD_SHOP_BUY, ABYSS_KINAH_SHOP_BUY -> {
 				if (npc.canSell())
-					TradeService.performBuyFromShop(npc, player, tradeList);
+					TradeService.buyFromShop(npc, player, tradeList);
 			}
 			default -> {
 			}
