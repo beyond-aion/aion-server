@@ -2,6 +2,7 @@ package com.aionemu.gameserver.utils;
 
 import java.awt.Color;
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -30,12 +31,14 @@ import com.aionemu.gameserver.world.geo.GeoService;
  */
 public class ChatUtil {
 
-	private static final DecimalFormat DF = (DecimalFormat) DecimalFormat.getInstance(Locale.US);
 	private static final char ASMO_NAME_PREFIX = '\uE053';
 	private static final char ELYOS_NAME_PREFIX = '\uE052';
 
-	static {
-		DF.applyPattern(".##");
+	/**
+	 * @return The value with at most two decimals. DecimalFormat isn't thread-safe, so every call creates its own.
+	 */
+	private static String format(float value) {
+		return new DecimalFormat(".##", DecimalFormatSymbols.getInstance(Locale.US)).format(value);
 	}
 
 	/**
@@ -70,7 +73,7 @@ public class ChatUtil {
 	 * @return The color encoded message.
 	 */
 	public static String color(String message, int r, int g, int b) {
-		return "[color:%s;%s %s %s]".formatted(message, DF.format(r / 255f), DF.format(g / 255f), DF.format(b / 255f));
+		return "[color:%s;%s %s %s]".formatted(message, format(r / 255f), format(g / 255f), format(b / 255f));
 	}
 
 	/**
@@ -158,7 +161,7 @@ public class ChatUtil {
 			else
 				subId = 1; // lower
 		}
-		return "[pos:%s;%d %s %s %s %d]".formatted(label, worldId, DF.format(x), DF.format(y), DF.format(z), subId);
+		return "[pos:%s;%d %s %s %s %d]".formatted(label, worldId, format(x), format(y), format(z), subId);
 	}
 
 	/**
