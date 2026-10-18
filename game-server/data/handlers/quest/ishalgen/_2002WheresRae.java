@@ -32,7 +32,7 @@ public class _2002WheresRae extends AbstractQuestHandler {
 
 	@Override
 	public void register() {
-		int[] npc_ids = { 203519, 203534, 203553, 700045, 203516, 203538 };
+		int[] npc_ids = { 203519, 203534, 203553, 700045, 203516, 203538, 790002 };
 		qe.registerOnQuestCompleted(questId);
 		qe.registerOnLevelChanged(questId);
 		qe.registerQuestNpc(210377).addOnKillEvent(questId);
@@ -145,14 +145,19 @@ public class _2002WheresRae extends AbstractQuestHandler {
 					}
 					return false;
 				case 203538:
-					if (var == 14 && env.getDialogActionId() == USE_OBJECT) {
-						qs.setQuestVarById(0, var + 1);
-						updateQuestStatus(env);
-						Npc npc = (Npc) env.getVisibleObject();
-						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npc.getObjectId(), 10));
-						spawnForFiveMinutes(203553, npc.getPosition());
-						npc.getController().deleteAndScheduleRespawn();
-						return true;
+					switch (dialogActionId) {
+						case QUEST_SELECT:
+							if (var == 14){
+								qs.setQuestVarById(0, var + 1);
+								updateQuestStatus(env);
+								Npc npc = (Npc) env.getVisibleObject();
+								PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npc.getObjectId(), 10));
+								spawnForFiveMinutes(203553, npc.getPosition());
+								npc.getController().deleteAndScheduleRespawn();
+								return true;
+							}
+
+						return false;
 					}
 					break;
 				case 203553:
