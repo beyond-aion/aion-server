@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Set;
 
 import com.aionemu.commons.utils.Rnd;
-import com.aionemu.gameserver.configs.main.FallDamageConfig;
 import com.aionemu.gameserver.configs.main.RatesConfig;
 import com.aionemu.gameserver.controllers.attack.AttackResult;
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
@@ -595,10 +594,10 @@ public class StatFunctions {
 	}
 
 	/**
-	 * @return Damage of a non-lethal fall: a percentage of max HP plus a flat amount per meter.
+	 * @return Damage of a non-lethal fall: 1% of max HP plus 4 per meter.
 	 */
 	public static int calculateFallDamage(Player player, float height) {
-		return (int) (player.getLifeStats().getMaxHp() * height * FallDamageConfig.FALL_DAMAGE_PERCENTAGE / 100f + height * FallDamageConfig.FALL_DAMAGE_FLAT);
+		return (int) (player.getLifeStats().getMaxHp() * height * 0.01f + height * 4);
 	}
 
 	/**
