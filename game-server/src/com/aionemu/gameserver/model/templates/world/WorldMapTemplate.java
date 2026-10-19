@@ -44,9 +44,6 @@ public class WorldMapTemplate implements L10n {
 	@XmlAttribute(name = "instance")
 	private boolean instance = false;
 
-	@XmlAttribute(name = "death_level", required = true)
-	private int deathlevel = 0;
-
 	@XmlAttribute(name = "water_level", required = true)
 	// TODO: Move to Zone
 	private int waterlevel = 16;
@@ -120,10 +117,6 @@ public class WorldMapTemplate implements L10n {
 
 	public int getWaterLevel() {
 		return waterlevel;
-	}
-
-	public int getDeathLevel() {
-		return deathlevel;
 	}
 
 	public WorldType getWorldType() {
