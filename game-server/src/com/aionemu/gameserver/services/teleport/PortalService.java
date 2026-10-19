@@ -105,6 +105,8 @@ public class PortalService {
 				return;
 			}
 		} else if (player.getWorldId() != mapId || player.getInstanceId() != instance.getInstanceId()) {
+			if (!instance.getInstanceHandler().canEnter(player))
+				return;
 			reenter = true;
 		}
 
