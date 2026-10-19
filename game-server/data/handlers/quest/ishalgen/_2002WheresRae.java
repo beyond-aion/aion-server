@@ -36,6 +36,7 @@ public class _2002WheresRae extends AbstractQuestHandler {
 		qe.registerOnLevelChanged(questId);
 		qe.registerQuestNpc(210377).addOnKillEvent(questId);
 		qe.registerQuestNpc(210378).addOnKillEvent(questId);
+		qe.registerOnFlightPathEnd(questId);
 		for (int npc_id : npc_ids)
 			qe.registerQuestNpc(npc_id).addOnTalkEvent(questId);
 		qe.registerOnEnterWorld(questId);
@@ -151,12 +152,8 @@ public class _2002WheresRae extends AbstractQuestHandler {
 							if (qs.getQuestVars().getQuestVars() == 99) {
 								player.setState(CreatureState.FLYING);
 								player.unsetState(CreatureState.ACTIVE);
-								player.setFlightTeleportId(3001);
-								PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.START_FLYTELEPORT, 3001, 0));
-								ThreadPoolManager.getInstance().schedule(() -> {
-									changeQuestStep(env, 99, 13);
-									TeleportService.teleportTo(player, 220010000, 940.15f, 2295.64f, 265.7f, (byte) 43);
-								}, 40000);
+								player.setFlightTeleportId(4001);
+								PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.START_FLYTELEPORT, 4001, 0));
 								return true;
 							}
 							return false;
@@ -186,6 +183,14 @@ public class _2002WheresRae extends AbstractQuestHandler {
 		if (player.getWorldId() == WorldMapType.ATAXIAR.getId())
 			return changeQuestStep(env, 12, 99);
 		return changeQuestStep(env, 99, 12);
+	}
+
+	@Override
+	public boolean onFlightPathEndEvent(QuestEnv env, int teleportId) {
+		if (teleportId != 4001 || !changeQuestStep(env, 99, 13))
+			return false;
+		TeleportService.teleportTo(env.getPlayer(), 220010000, 940.15f, 2295.64f, 265.7f, (byte) 43);
+		return true;
 	}
 
 	@Override
