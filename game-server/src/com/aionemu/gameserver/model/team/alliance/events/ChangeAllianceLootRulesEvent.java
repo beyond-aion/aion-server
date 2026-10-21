@@ -20,8 +20,9 @@ public class ChangeAllianceLootRulesEvent extends AlwaysTrueTeamEvent {
 
 	@Override
 	public void handleEvent() {
+		int messageId = lootGroupRules.getJunkDistributionChangeMessageId(alliance.getLootGroupRules());
 		alliance.setLootGroupRules(lootGroupRules);
-		alliance.sendPackets(new SM_ALLIANCE_INFO(alliance));
+		alliance.sendPackets(new SM_ALLIANCE_INFO(alliance, messageId, ""));
 	}
 
 }

@@ -27,7 +27,7 @@ import com.aionemu.gameserver.world.World;
  */
 public class CM_APPEARANCE extends AionClientPacket {
 
-	private byte type;
+	private Service service;
 	private int itemObjId;
 	private String newName;
 
@@ -37,33 +37,22 @@ public class CM_APPEARANCE extends AionClientPacket {
 
 	@Override
 	protected void readImpl() {
-		type = readC();
-		readC();
-		readH();
+		service = Service.fromId(readD());
 		itemObjId = readD();
-		switch (type) {
-			case 0:
-			case 1:
-				newName = readS();
-				break;
-		}
-
+		if (service == Service.RENAME_CHARACTER || service == Service.RENAME_LEGION)
+			newName = readS();
 	}
 
 	@Override
 	protected void runImpl() {
+		if (service == null)
+			return;
 		final Player player = getConnection().getActivePlayer();
 
-		switch (type) {
-			case 0: // Change Char Name
-				tryChangeCharacterName(player, Util.convertName(newName), itemObjId);
-				break;
-			case 1: // Change Legion Name
-				tryChangeLegionName(player, newName, itemObjId);
-				break;
-			case 2: // cosmetic items
-				tryUseCosmeticItem(player, itemObjId);
-				break;
+		switch (service) {
+			case RENAME_CHARACTER -> tryChangeCharacterName(player, Util.convertName(newName), itemObjId);
+			case RENAME_LEGION -> tryChangeLegionName(player, newName, itemObjId);
+			case COSMETIC -> tryUseCosmeticItem(player, itemObjId);
 		}
 	}
 
@@ -75,8 +64,7 @@ public class CM_APPEARANCE extends AionClientPacket {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EDIT_CHAR_NAME_ERROR_WRONG_INPUT());
 		else if (PlayerService.isNameUsedOrReserved(oldName, newName))
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EDIT_CHAR_NAME_ALREADY_EXIST());
-		else if ((player.getInventory().getItemByObjId(itemObjId).getItemId() != 169670000 && player.getInventory().getItemByObjId(itemObjId).getItemId() != 169670001)
-			|| !player.getInventory().decreaseByObjectId(itemObjId, 1))
+		else if (!isRenameCoupon(player.getInventory().getItemByObjId(itemObjId)) || !player.getInventory().decreaseByObjectId(itemObjId, 1))
 			AuditLogger.log(player, "tried to rename himself without coupon");
 		else {
 			OldNamesDAO.insertNames(player.getObjectId(), oldName, newName);
@@ -85,6 +73,10 @@ public class CM_APPEARANCE extends AionClientPacket {
 			PlayerDAO.storePlayer(player);
 			onPlayerNameChanged(player, oldName);
 		}
+	}
+
+	private static boolean isRenameCoupon(Item item) {
+		return item != null && (item.getItemId() == 169670000 || item.getItemId() == 169670001);
 	}
 
 	public static void onPlayerNameChanged(Player player, String oldName) {
@@ -110,10 +102,30 @@ public class CM_APPEARANCE extends AionClientPacket {
 		if (item != null) {
 			for (AbstractItemAction action : item.getItemTemplate().getActions().getItemActions()) {
 				if (action instanceof CosmeticItemAction && action.canAct(player, null, null)) {
-					action.act(player, null, item);
+					action.act(player, item, null);
 					break;
 				}
 			}
+		}
+	}
+
+	private enum Service {
+
+		RENAME_CHARACTER(0),
+		RENAME_LEGION(1),
+		COSMETIC(2);
+
+		private final int id;
+
+		Service(int id) {
+			this.id = id;
+		}
+
+		static Service fromId(int id) {
+			for (Service service : values())
+				if (service.id == id)
+					return service;
+			return null;
 		}
 	}
 }

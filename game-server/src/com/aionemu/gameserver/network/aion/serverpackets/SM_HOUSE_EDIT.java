@@ -7,6 +7,8 @@ import com.aionemu.gameserver.model.gameobjects.HouseObject;
 import com.aionemu.gameserver.model.gameobjects.UseableItemObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.house.House;
+import com.aionemu.gameserver.model.house.HousingCommand;
+import com.aionemu.gameserver.model.house.HousingContainer;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
@@ -15,23 +17,27 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
  */
 public class SM_HOUSE_EDIT extends AionServerPacket {
 
-	private int action;
-	private int storeId;
+	private HousingCommand action;
+	private HousingContainer container;
 	private int itemObjectId;
 	private float x, y, z;
 	private int rotation;
 
-	public SM_HOUSE_EDIT(int action) {
+	public SM_HOUSE_EDIT(HousingCommand action) {
 		this.action = action;
 	}
 
-	public SM_HOUSE_EDIT(int action, int storeId, int itemObjectId) {
+	public SM_HOUSE_EDIT(HousingCommand action, int itemObjectId) {
 		this(action);
 		this.itemObjectId = itemObjectId;
-		this.storeId = storeId;
 	}
 
-	public SM_HOUSE_EDIT(int action, int itemObjectId, float x, float y, float z, int rotation) {
+	public SM_HOUSE_EDIT(HousingCommand action, HousingContainer container, int itemObjectId) {
+		this(action, itemObjectId);
+		this.container = container;
+	}
+
+	public SM_HOUSE_EDIT(HousingCommand action, int itemObjectId, float x, float y, float z, int rotation) {
 		this.action = action;
 		this.itemObjectId = itemObjectId;
 		this.x = x;
@@ -48,7 +54,7 @@ public class SM_HOUSE_EDIT extends AionServerPacket {
 		House house = player.getActiveHouse();
 		HouseObject<?> obj = house.getRegistry().getObjectByObjId(itemObjectId);
 
-		if (action == 3) { // Add item
+		if (action == HousingCommand.REGISTER_ITEM) {
 			int templateId;
 			int typeId = 0;
 			if (obj == null) {
@@ -62,14 +68,14 @@ public class SM_HOUSE_EDIT extends AionServerPacket {
 				templateId = obj.getObjectTemplate().getTemplateId();
 				typeId = obj.getObjectTemplate().getTypeId();
 			}
-			writeC(action);
-			writeC(storeId);
+			writeC(action.getId());
+			writeC(container.getId());
 			writeD(itemObjectId);
 			writeD(templateId);
 			writeD(obj == null ? 0 : obj.secondsUntilExpiration());
 
 			writeDyeInfo(obj == null ? null : obj.getColor());
-			writeD(0); // expiration as for armor ?
+			writeD(obj == null ? 0 : obj.getColorExpireEnd());
 
 			writeC(typeId);
 			// Additional info about the usage
@@ -77,12 +83,12 @@ public class SM_HOUSE_EDIT extends AionServerPacket {
 				writeD(player.getObjectId());
 				((UseableItemObject) obj).writeUsageData(getBuf());
 			}
-		} else if (action == 4) { // Remove from inventory
-			writeC(action);
-			writeC(storeId);
+		} else if (action == HousingCommand.REMOVE_ITEM) {
+			writeC(action.getId());
+			writeC(container.getId());
 			writeD(itemObjectId);
-		} else if (action == 5) { // Spawn or move object
-			writeC(action);
+		} else if (action == HousingCommand.PUT_OBJECT) {
+			writeC(action.getId());
 			writeD(house.getAddress().getId()); // if painted 0 ?
 			writeD(player.getCommonData().getPlayerObjId());
 			writeD(itemObjectId);
@@ -94,18 +100,18 @@ public class SM_HOUSE_EDIT extends AionServerPacket {
 			writeD(player.getHouseObjectCooldowns().remainingSeconds(itemObjectId));
 			writeD(obj.secondsUntilExpiration());
 			writeDyeInfo(obj.getColor());
-			writeD(0); // expiration as for armor ?
+			writeD(obj.getColorExpireEnd());
 
 			writeC(obj.getObjectTemplate().getTypeId());
 
 			if (obj instanceof UseableItemObject) {
 				((UseableItemObject) obj).writeUsageData(getBuf());
 			}
-		} else if (action == 7) { // Despawn object
-			writeC(action);
+		} else if (action == HousingCommand.WITHDRAW_OBJECT) {
+			writeC(action.getId());
 			writeD(itemObjectId);
 		} else
-			writeC(action);
+			writeC(action.getId());
 	}
 
 }

@@ -6,8 +6,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import com.aionemu.gameserver.dao.PlayerEmotionListDAO;
+import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.templates.item.actions.EmotionLearnAction;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION_LIST;
 import com.aionemu.gameserver.taskmanager.tasks.ExpireTimerTask;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -34,14 +34,15 @@ public class EmotionList {
 		if (isNew) {
 			ExpireTimerTask.getInstance().registerExpirable(emotion, owner);
 			PlayerEmotionListDAO.insertEmotion(owner, emotion);
-			PacketSendUtility.sendPacket(owner, new SM_EMOTION_LIST((byte) 1, Collections.singletonList(emotion)));
+			PacketSendUtility.sendPacket(owner, new SM_EMOTION_LIST(SM_EMOTION_LIST.Action.ADD, Collections.singletonList(emotion)));
 		}
 	}
 
 	public void remove(int emotionId) {
-		emotions.remove(emotionId);
+		Emotion emotion = emotions.remove(emotionId);
 		PlayerEmotionListDAO.deleteEmotion(owner.getObjectId(), emotionId);
-		PacketSendUtility.sendPacket(owner, new SM_EMOTION_LIST((byte) 0, getEmotions()));
+		if (emotion != null)
+			PacketSendUtility.sendPacket(owner, new SM_EMOTION_LIST(SM_EMOTION_LIST.Action.REMOVE, Collections.singletonList(emotion)));
 	}
 
 	public boolean contains(int emotionId) {
@@ -49,7 +50,7 @@ public class EmotionList {
 	}
 
 	public boolean canUse(int emotionId) {
-		return !EmotionLearnAction.isLearnable(emotionId) || contains(emotionId);
+		return !DataManager.ITEM_DATA.isLearnableEmotion(emotionId) || contains(emotionId);
 	}
 
 	public Collection<Emotion> getEmotions() {

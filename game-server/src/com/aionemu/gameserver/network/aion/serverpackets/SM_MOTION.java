@@ -3,7 +3,9 @@ package com.aionemu.gameserver.network.aion.serverpackets;
 import java.util.Collection;
 import java.util.Map;
 
+import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.motion.Motion;
+import com.aionemu.gameserver.model.gameobjects.player.motion.MotionType;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
@@ -12,96 +14,102 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
  */
 public class SM_MOTION extends AionServerPacket {
 
-	byte action;
-	short motionId;
-	int remainingTime;
+	private enum Action {
+		LIST(1),
+		ADD(2),
+		SET(5),
+		REMOVE(6),
+		PLAYER_MOTIONS(7);
 
-	int playerId;
-	Map<Integer, Motion> activeMotions;
+		private final int id;
 
-	Collection<Motion> motions;
+		Action(int id) {
+			this.id = id;
+		}
+	}
 
-	byte type;
+	private final Action action;
+	private final int motionId;
+	private final int remainingTime;
+	private final MotionType type;
+	private final int playerId;
+	private final Map<MotionType, Motion> activeMotions;
+	private final Collection<Motion> motions;
 
-	/**
-	 * @param motions
-	 */
-	public SM_MOTION(Collection<Motion> motions) {
-		this.action = 1;
+	private SM_MOTION(Action action, int motionId, int remainingTime, MotionType type, int playerId, Map<MotionType, Motion> activeMotions,
+		Collection<Motion> motions) {
+		this.action = action;
+		this.motionId = motionId;
+		this.remainingTime = remainingTime;
+		this.type = type;
+		this.playerId = playerId;
+		this.activeMotions = activeMotions;
 		this.motions = motions;
 	}
 
 	/**
-	 * @param motionId
-	 * @param remainingTime
+	 * All learned motions of the player.
 	 */
-	public SM_MOTION(short motionId, int remainingTime) {
-		this.action = 2;
-		this.motionId = motionId;
-		this.remainingTime = remainingTime;
+	public static SM_MOTION list(Collection<Motion> motions) {
+		return new SM_MOTION(Action.LIST, 0, 0, null, 0, null, motions);
 	}
 
 	/**
-	 * @param motionId
-	 * @param remainingTime
+	 * A newly learned motion.
 	 */
-	public SM_MOTION(short motionId, byte type) {
-		this.action = 5;
-		this.motionId = motionId;
-		this.type = type;
+	public static SM_MOTION add(Motion motion) {
+		return new SM_MOTION(Action.ADD, motion.getId(), motion.secondsUntilExpiration(), null, 0, null, null);
 	}
 
 	/**
-	 * @param motionId
-	 * @param remainingTime
+	 * Answer to activating a motion, or to clearing the slot if motionId is 0.
 	 */
-	public SM_MOTION(short motionId) {
-		this.action = 6;
-		this.motionId = motionId;
+	public static SM_MOTION set(int motionId, MotionType type) {
+		return new SM_MOTION(Action.SET, motionId, 0, type, 0, null, null);
 	}
 
 	/**
-	 * @param playerId
-	 * @param activeMotions
+	 * An expired motion, the client prints the expiry message itself.
 	 */
-	public SM_MOTION(int playerId, Map<Integer, Motion> activeMotions) {
-		this.action = 7;
-		this.playerId = playerId;
-		this.activeMotions = activeMotions;
+	public static SM_MOTION remove(int motionId) {
+		return new SM_MOTION(Action.REMOVE, motionId, 0, null, 0, null, null);
+	}
+
+	/**
+	 * The active motion of each slot of the player, for everyone who sees him.
+	 */
+	public static SM_MOTION playerMotions(Player player) {
+		return new SM_MOTION(Action.PLAYER_MOTIONS, 0, 0, null, player.getObjectId(), player.getMotions().getActiveMotions(), null);
 	}
 
 	@Override
 	protected void writeImpl(AionConnection con) {
-		writeC(action);
+		writeC(action.id);
 		switch (action) {
-			case 1:
+			case LIST -> {
 				writeH(motions.size());
 				for (Motion motion : motions) {
 					writeH(motion.getId());
 					writeD(motion.secondsUntilExpiration());
 					writeC(motion.isActive() ? 1 : 0);
 				}
-				break;
-			case 2: // Add motion
+			}
+			case ADD -> {
 				writeH(motionId);
 				writeD(remainingTime);
-				break;
-			case 5: // Set motion
+			}
+			case SET -> {
 				writeH(motionId);
-				writeC(type);
-				break;
-			case 6: // remove
-				writeH(motionId);
-				break;
-			case 7: // Player motions
+				writeC(type.getId());
+			}
+			case REMOVE -> writeH(motionId);
+			case PLAYER_MOTIONS -> {
 				writeD(playerId);
-				for (int i = 1; i < 6; i++) {
-					Motion motion = activeMotions.get(i);
-					if (motion == null)
-						writeH(0);
-					else
-						writeH(motion.getId());
+				for (MotionType motionType : MotionType.values()) {
+					Motion motion = activeMotions.get(motionType);
+					writeH(motion == null ? 0 : motion.getId());
 				}
+			}
 		}
 	}
 }

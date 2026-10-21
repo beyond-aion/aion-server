@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
+import com.aionemu.gameserver.model.ClientBroadcastType;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
@@ -8,29 +9,37 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
  */
 public class SM_GROUP_DATA_EXCHANGE extends AionServerPacket {
 
-	private byte[] byteData;
-	private int action;
-	private int unk2;
+	private final ClientBroadcastType type;
+	private final int tag;
+	private final byte[] data;
 
-	public SM_GROUP_DATA_EXCHANGE(byte[] byteData, int action, int unk2) {
-		this.action = action;
-		this.byteData = byteData;
-		this.unk2 = unk2;
+	/**
+	 * @param tag
+	 *          the client's own tag of team data, passed on unchanged
+	 */
+	public SM_GROUP_DATA_EXCHANGE(int tag, byte[] data) {
+		this(ClientBroadcastType.TEAM, tag, data);
 	}
 
-	public SM_GROUP_DATA_EXCHANGE(byte[] byteData) {
-		this.action = 1;
-		this.byteData = byteData;
+	/**
+	 * House data, which always goes out as {@link ClientBroadcastType#HOUSE}, whichever house type it was sent as.
+	 */
+	public SM_GROUP_DATA_EXCHANGE(byte[] data) {
+		this(ClientBroadcastType.HOUSE, 0, data);
+	}
+
+	private SM_GROUP_DATA_EXCHANGE(ClientBroadcastType type, int tag, byte[] data) {
+		this.type = type;
+		this.tag = tag;
+		this.data = data;
 	}
 
 	@Override
 	protected void writeImpl(AionConnection con) {
-		writeC(action); // action
-
-		if (action != 1)
-			writeC(unk2); // unk
-
-		writeD(byteData.length);
-		writeB(byteData);
+		writeC(type.getId());
+		if (type == ClientBroadcastType.TEAM)
+			writeC(tag);
+		writeD(data.length);
+		writeB(data);
 	}
 }

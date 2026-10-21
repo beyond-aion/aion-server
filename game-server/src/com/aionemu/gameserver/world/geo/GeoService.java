@@ -9,6 +9,7 @@ import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.configs.main.GeoDataConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.geoEngine.GeoWorldLoader;
+import com.aionemu.gameserver.geoEngine.bounding.BoundingBox;
 import com.aionemu.gameserver.geoEngine.collision.CollisionIntention;
 import com.aionemu.gameserver.geoEngine.collision.CollisionResults;
 import com.aionemu.gameserver.geoEngine.collision.IgnoreProperties;
@@ -186,6 +187,10 @@ public class GeoService implements GameEngine {
 
 	public void setDoorState(int worldId, int instanceId, int doorId, boolean open) {
 		geoMaps.get(worldId).setDoorState(instanceId, doorId, open);
+	}
+
+	public BoundingBox getDoorBounds(int worldId, int doorId) {
+		return geoMaps.get(worldId).getDoorBounds(doorId);
 	}
 
 	public boolean worldHasTerrainMaterials(int worldId) {

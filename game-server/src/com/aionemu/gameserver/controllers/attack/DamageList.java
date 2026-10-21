@@ -22,7 +22,7 @@ public class DamageList {
 			// Don't include damage from creatures outside the known list.
 			if (!owner.getKnownList().knows(attackerMaster))
 				continue;
-			damageByCreature.computeIfAbsent(attackerMaster, DamageInfo::new).addDamage(aggroInfo.getDamage());
+			damageByCreature.computeIfAbsent(attackerMaster, DamageInfo::new).addDamage(aggroInfo.getDamage(), aggroInfo.getFirstDamageTime());
 		}
 	}
 

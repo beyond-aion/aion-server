@@ -6,6 +6,8 @@ import com.aionemu.gameserver.model.Expirable;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.model.house.HouseRegistry;
+import com.aionemu.gameserver.model.house.HousingCommand;
+import com.aionemu.gameserver.model.house.HousingContainer;
 import com.aionemu.gameserver.model.templates.housing.*;
 import com.aionemu.gameserver.model.templates.item.ItemQuality;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_HOUSE_EDIT;
@@ -92,10 +94,10 @@ public abstract class HouseObject<T extends PlaceableHouseObject> extends Visibl
 
 	protected void despawnAndRemoveHouseObject(Player player, boolean isExpired) {
 		if (isSpawnedByPlayer()) {
-			PacketSendUtility.sendPacket(player, new SM_HOUSE_EDIT(7, 0, getObjectId()));
+			PacketSendUtility.sendPacket(player, new SM_HOUSE_EDIT(HousingCommand.WITHDRAW_OBJECT, getObjectId()));
 			getController().delete();
 		}
-		PacketSendUtility.sendPacket(player, new SM_HOUSE_EDIT(4, 1, getObjectId()));
+		PacketSendUtility.sendPacket(player, new SM_HOUSE_EDIT(HousingCommand.REMOVE_ITEM, HousingContainer.OBJECTS, getObjectId()));
 		if (isExpired)
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_DELETE_EXPIRE_TIME(getObjectTemplate().getL10n()));
 		else

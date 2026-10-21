@@ -671,6 +671,11 @@ public class Item extends AionObject implements Expirable, StatOwner, Persistabl
 		return expireTime;
 	}
 
+	public void setExpireTime(int expireTime) {
+		this.expireTime = expireTime;
+		setPersistentState(PersistentState.UPDATE_REQUIRED);
+	}
+
 	/**
 	 * @return Seconds since the epoch at which this item is taken off because its owner no longer has the abyss rank for it, 0 if it is not on notice.
 	 */

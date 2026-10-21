@@ -23,7 +23,7 @@ public class AutoBan {
 
 		switch (PunishmentConfig.PUNISHMENT_TYPE) {
 			case 1:
-				player.getClientConnection().close(new SM_QUIT_RESPONSE());
+				player.getClientConnection().close(SM_QUIT_RESPONSE.quit());
 				break;
 			case 2:
 				PunishmentService.banChar(player.getObjectId(), dayCount, reason);

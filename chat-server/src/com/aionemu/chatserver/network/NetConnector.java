@@ -10,8 +10,8 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.chatserver.configs.network.NetworkConfig;
 import com.aionemu.chatserver.network.aion.AionConnection;
 import com.aionemu.chatserver.network.gameserver.GsConnection;
-import com.aionemu.chatserver.network.netty.NettyConnection;
-import com.aionemu.chatserver.network.netty.NettyPipeline;
+import com.aionemu.commons.network.netty.NettyConnection;
+import com.aionemu.commons.network.netty.NettyPipeline;
 import com.aionemu.commons.utils.NetworkUtils;
 
 import io.netty.bootstrap.ServerBootstrap;

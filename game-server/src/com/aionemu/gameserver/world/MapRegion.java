@@ -8,6 +8,7 @@ import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.templates.flypath.FlightPath;
 import com.aionemu.gameserver.model.templates.zone.ZoneClassName;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
@@ -142,6 +143,8 @@ public class MapRegion {
 	}
 
 	public void revalidateZones(Creature creature) {
+		// the position along a flight transporter's path isn't validated, so zones are only left until the player lands
+		boolean onFlightTransporter = creature instanceof Player player && player.isUsingFlightPath(FlightPath.Type.FLIGHT_TRANSPORTER);
 		ZoneClassName zoneType = null;
 		boolean enteredPriorityZone = false;
 		for (ZoneInstance zone : zonesSortedByTypeAndPriority) {
@@ -151,7 +154,7 @@ public class MapRegion {
 				zoneType = zone.getZoneTemplate().getZoneType();
 				enteredPriorityZone = false;
 			}
-			if (!creature.isSpawned() || enteredPriorityZone || !zone.revalidate(creature)) {
+			if (!creature.isSpawned() || enteredPriorityZone || onFlightTransporter || !zone.revalidate(creature)) {
 				zone.onLeave(creature);
 				continue;
 			}

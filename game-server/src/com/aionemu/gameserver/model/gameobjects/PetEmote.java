@@ -9,7 +9,7 @@ import java.util.Map;
 public enum PetEmote {
 
 	MOVE_STOP(0),
-	MOVE_POSITION_UPDATE(8), // TODO not totally sure, couldn't reproduce. sends current coords 
+	MOVE_POSITION_UPDATE(8),
 	MOVETO(12),
 	NO_INTERACTION(128), // sometimes after pet status action, otherwise when player is in attack mode
 	FLY_START(129),

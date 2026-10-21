@@ -2,6 +2,8 @@ package com.aionemu.gameserver.network.aion.clientpackets;
 
 import java.util.Set;
 
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.HouseDecoration;
 import com.aionemu.gameserver.model.gameobjects.HouseObject;
@@ -9,6 +11,8 @@ import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.house.House;
+import com.aionemu.gameserver.model.house.HousingCommand;
+import com.aionemu.gameserver.model.house.HousingContainer;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.model.templates.item.actions.DecorateAction;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
@@ -28,7 +32,7 @@ import com.aionemu.gameserver.utils.idfactory.IDFactory;
  */
 public class CM_HOUSE_EDIT extends AionClientPacket {
 
-	private int action;
+	private HousingCommand action;
 	private int itemObjectId;
 	private float x, y, z;
 	private int rotation;
@@ -40,110 +44,120 @@ public class CM_HOUSE_EDIT extends AionClientPacket {
 
 	@Override
 	protected void readImpl() {
-		action = readUC();
-		if (action == 3) {
-			itemObjectId = readD();
-		} else if (action == 4) {
-			itemObjectId = readD();
-		} else if (action == 5) {
-			itemObjectId = readD();
-			x = readF();
-			y = readF();
-			z = readF();
-			rotation = readUH();
-		} else if (action == 6) {
-			itemObjectId = readD();
-			x = readF();
-			y = readF();
-			z = readF();
-			rotation = readUH();
-		} else if (action == 7) {
-			itemObjectId = readD();
-		} else if (action == 16) {
-			buildingId = readD();
+		int actionId = readUC();
+		action = HousingCommand.getById(actionId);
+		if (action == null) {
+			LoggerFactory.getLogger(CM_HOUSE_EDIT.class).warn("{} sent unknown house edit action {}", getConnection().getActivePlayer(), actionId);
+			return;
+		}
+		switch (action) {
+			case REGISTER_ITEM, REMOVE_ITEM, WITHDRAW_OBJECT -> itemObjectId = readD();
+			case PUT_OBJECT, MOVE_OBJECT -> {
+				itemObjectId = readD();
+				x = readF();
+				y = readF();
+				z = readF();
+				rotation = readUH();
+			}
+			case CHANGE_BUILDING -> buildingId = readD();
 		}
 	}
 
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
-		if (player == null)
+		if (player == null || action == null)
 			return;
 		House house = player.getActiveHouse();
+		if (house == null)
+			return;
+		if (action != HousingCommand.END_EDIT && action != HousingCommand.END_BUILDING_EDIT && !house.isOnLand(player))
+			return;
+		if ((action == HousingCommand.PUT_OBJECT || action == HousingCommand.MOVE_OBJECT) && !house.isInsideLand(x, y)) {
+			AuditLogger.log(player, "tried to place a house object at " + x + ", " + y + ", " + z + " outside of house " + house.getAddress().getId());
+			return;
+		}
 
-		if (action == 1) { // Enter Decoration mode
-			sendPacket(new SM_HOUSE_EDIT(action));
-			sendPacket(new SM_HOUSE_REGISTRY(action));
-			sendPacket(new SM_HOUSE_REGISTRY(action + 1));
-		} else if (action == 2) { // Exit Decoration mode
-			sendPacket(new SM_HOUSE_EDIT(action));
-		} else if (action == 3) { // Add item
-			Item item = player.getInventory().getItemByObjId(itemObjectId);
-			if (item == null)
-				return;
-
-			ItemTemplate template = item.getItemTemplate();
-			player.getInventory().delete(item, ItemDeleteType.REGISTER);
-
-			DecorateAction decorateAction = template.getActions().getDecorateAction();
-			if (decorateAction != null) {
-				HouseDecoration decor = new HouseDecoration(IDFactory.getInstance().nextId(), decorateAction.getTemplateId());
-				house.getRegistry().putDecor(decor, true);
-				sendPacket(new SM_HOUSE_EDIT(action, 2, decor.getObjectId()));
-			} else {
-				HouseObject<?> obj = HouseObjectFactory.createNew(house, template);
-				house.getRegistry().putObject(obj, true);
-				sendPacket(new SM_HOUSE_EDIT(action, 1, obj.getObjectId()));
+		switch (action) {
+			case BEGIN_EDIT -> {
+				sendPacket(new SM_HOUSE_EDIT(action));
+				sendPacket(new SM_HOUSE_REGISTRY(HousingContainer.OBJECTS));
+				sendPacket(new SM_HOUSE_REGISTRY(HousingContainer.DECORATIONS));
 			}
-		} else if (action == 4) { // Delete item
-			house.getRegistry().discardObject(house.getRegistry().getObjectByObjId(itemObjectId), false);
-			sendPacket(new SM_HOUSE_EDIT(action, 1, itemObjectId));
-			sendPacket(new SM_HOUSE_EDIT(4, 1, itemObjectId));
-		} else if (action == 5) { // spawn object
-			HouseObject<?> obj = house.getRegistry().getObjectByObjId(itemObjectId);
-			if (obj == null)
-				return;
-			obj.setX(x);
-			obj.setY(y);
-			obj.setZ(z);
-			obj.setRotation(rotation);
-			sendPacket(new SM_HOUSE_EDIT(action, itemObjectId, x, y, z, rotation));
-			obj.spawn();
-			house.getRegistry().setPersistentState(PersistentState.UPDATE_REQUIRED);
-			sendPacket(new SM_HOUSE_EDIT(4, 1, itemObjectId));
-			QuestEngine.getInstance().onHouseItemUseEvent(new QuestEnv(null, player, 0));
-		} else if (action == 6) { // move object
-			HouseObject<?> obj = house.getRegistry().getObjectByObjId(itemObjectId);
-			if (obj == null)
-				return;
-			sendPacket(new SM_HOUSE_EDIT(action + 1, 0, itemObjectId));
-			obj.getController().delete();
-			obj.setX(x);
-			obj.setY(y);
-			obj.setZ(z);
-			obj.setRotation(rotation);
-			if (obj.getPersistentState() == PersistentState.UPDATE_REQUIRED)
+			case END_EDIT, BEGIN_BUILDING_EDIT, END_BUILDING_EDIT -> sendPacket(new SM_HOUSE_EDIT(action));
+			case REGISTER_ITEM -> {
+				Item item = player.getInventory().getItemByObjId(itemObjectId);
+				if (item == null)
+					return;
+
+				ItemTemplate template = item.getItemTemplate();
+				player.getInventory().delete(item, ItemDeleteType.REGISTER);
+
+				DecorateAction decorateAction = template.getActions().getDecorateAction();
+				if (decorateAction != null) {
+					HouseDecoration decor = new HouseDecoration(IDFactory.getInstance().nextId(), decorateAction.getTemplateId());
+					house.getRegistry().putDecor(decor, true);
+					sendPacket(new SM_HOUSE_EDIT(action, HousingContainer.DECORATIONS, decor.getObjectId()));
+				} else {
+					HouseObject<?> obj = HouseObjectFactory.createNew(house, template);
+					house.getRegistry().putObject(obj, true);
+					sendPacket(new SM_HOUSE_EDIT(action, HousingContainer.OBJECTS, obj.getObjectId()));
+				}
+			}
+			case REMOVE_ITEM -> {
+				house.getRegistry().discardObject(house.getRegistry().getObjectByObjId(itemObjectId), false);
+				sendPacket(new SM_HOUSE_EDIT(action, HousingContainer.OBJECTS, itemObjectId));
+				sendPacket(new SM_HOUSE_EDIT(action, HousingContainer.OBJECTS, itemObjectId));
+			}
+			case PUT_OBJECT -> {
+				HouseObject<?> obj = house.getRegistry().getObjectByObjId(itemObjectId);
+				if (obj == null)
+					return;
+				obj.setX(x);
+				obj.setY(y);
+				obj.setZ(z);
+				obj.setRotation(rotation);
+				sendPacket(new SM_HOUSE_EDIT(action, itemObjectId, x, y, z, rotation));
+				obj.spawn();
 				house.getRegistry().setPersistentState(PersistentState.UPDATE_REQUIRED);
-			sendPacket(new SM_HOUSE_EDIT(action - 1, itemObjectId, x, y, z, rotation));
-			obj.spawn();
-		} else if (action == 7) { // despawn object
-			HouseObject<?> obj = house.getRegistry().getObjectByObjId(itemObjectId);
-			if (obj == null)
-				return;
-			sendPacket(new SM_HOUSE_EDIT(action, 0, itemObjectId));
-			obj.removeFromHouse();
-			sendPacket(new SM_HOUSE_EDIT(3, 1, itemObjectId)); // place it back
-		} else if (action == 14) { // enter renovation mode
-			sendPacket(new SM_HOUSE_EDIT(14));
-		} else if (action == 15) { // exit renovation mode
-			sendPacket(new SM_HOUSE_EDIT(15));
-		} else if (action == 16) {
-			if (!removeRenovationCoupon(player, house)) {
-				AuditLogger.log(player, "attempted house renovation without coupon");
-				return;
+				sendPacket(new SM_HOUSE_EDIT(HousingCommand.REMOVE_ITEM, HousingContainer.OBJECTS, itemObjectId));
+				QuestEngine.getInstance().onHouseItemUseEvent(new QuestEnv(null, player, 0));
 			}
-			HousingService.getInstance().switchHouseBuilding(house, buildingId);
-			house.getController().updateAppearance();
+			case MOVE_OBJECT -> {
+				HouseObject<?> obj = house.getRegistry().getObjectByObjId(itemObjectId);
+				if (obj == null)
+					return;
+				sendPacket(new SM_HOUSE_EDIT(HousingCommand.WITHDRAW_OBJECT, itemObjectId));
+				obj.getController().delete();
+				obj.setX(x);
+				obj.setY(y);
+				obj.setZ(z);
+				obj.setRotation(rotation);
+				if (obj.getPersistentState() == PersistentState.UPDATE_REQUIRED)
+					house.getRegistry().setPersistentState(PersistentState.UPDATE_REQUIRED);
+				sendPacket(new SM_HOUSE_EDIT(HousingCommand.PUT_OBJECT, itemObjectId, x, y, z, rotation));
+				obj.spawn();
+			}
+			case WITHDRAW_OBJECT -> {
+				HouseObject<?> obj = house.getRegistry().getObjectByObjId(itemObjectId);
+				if (obj == null)
+					return;
+				sendPacket(new SM_HOUSE_EDIT(action, itemObjectId));
+				obj.removeFromHouse();
+				sendPacket(new SM_HOUSE_EDIT(HousingCommand.REGISTER_ITEM, HousingContainer.OBJECTS, itemObjectId)); // place it back
+			}
+			case CHANGE_BUILDING -> {
+				if (house.getLand().getBuildings().stream().noneMatch(building -> building.getId() == buildingId)) {
+					AuditLogger.log(player, "attempted house renovation to building " + buildingId + " which doesn't belong to " + house.getLand().getId());
+					return;
+				}
+				if (!removeRenovationCoupon(player, house)) {
+					AuditLogger.log(player, "attempted house renovation without coupon");
+					return;
+				}
+				HousingService.getInstance().switchHouseBuilding(house, buildingId);
+				house.getController().updateAppearance();
+			}
 		}
 	}
 

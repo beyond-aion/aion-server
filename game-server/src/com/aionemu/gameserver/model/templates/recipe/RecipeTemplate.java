@@ -10,6 +10,7 @@ import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.model.Race;
+import com.aionemu.gameserver.model.skill.PlayerSkillEntry;
 import com.aionemu.gameserver.model.templates.L10n;
 
 /**
@@ -143,6 +144,10 @@ public class RecipeTemplate implements L10n {
 	 */
 	public Integer getSkillId() {
 		return skillid;
+	}
+
+	public boolean isMorph() {
+		return skillid == PlayerSkillEntry.MORPH_SKILL_ID;
 	}
 
 	/**

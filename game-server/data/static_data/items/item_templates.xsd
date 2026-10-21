@@ -147,6 +147,7 @@
 		<xs:attribute name="can_exceed_enchant" type="xs:boolean"/>
 		<xs:attribute name="exceed_enchant_skill" type="ExceedEnchantSkillSet"/>
 		<xs:attribute name="enchant_type" type="xs:int"/>
+		<xs:attribute name="doping_pet_usable" type="xs:boolean"/>
 	</xs:complexType>
 	<xs:complexType name="AbstractItemAction" abstract="true"/>
 	<xs:complexType name="ItemActions">

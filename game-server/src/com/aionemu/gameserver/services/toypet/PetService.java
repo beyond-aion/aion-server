@@ -18,6 +18,7 @@ import com.aionemu.gameserver.model.gameobjects.PetSpecialFunction;
 import com.aionemu.gameserver.model.gameobjects.player.PetCommonData;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.common.legacy.LootRuleType;
+import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.model.templates.item.actions.AbstractItemAction;
 import com.aionemu.gameserver.model.templates.item.actions.SkillUseAction;
 import com.aionemu.gameserver.model.templates.pet.*;
@@ -156,7 +157,14 @@ public class PetService {
 				return;
 			}
 
-			Item useItem = player.getInventory().getItemsByItemId(itemId).get(0);
+			int[] dopingItems = pet.getCommonData().getDopingBag().getItems();
+			if (slot < 0 || slot >= dopingItems.length || dopingItems[slot] != itemId) {
+				AuditLogger.log(player, "tried to use item " + itemId + " through pet buffing, but it's not in slot " + slot);
+				return;
+			}
+			Item useItem = player.getInventory().getFirstItemByItemId(itemId);
+			if (useItem == null || !useItem.getItemTemplate().isDopingPetUsable())
+				return;
 
 			if (!isPetItemUseAllowed(player, useItem)) { // pet currently is not allowed to buff, schedule re-check
 				ThreadPoolManager.getInstance().schedule(() -> PacketSendUtility.sendPacket(player, new SM_PET(action, itemId, slot)), 20, TimeUnit.SECONDS);
@@ -192,6 +200,13 @@ public class PetService {
 		if (petFunction == null) {
 			AuditLogger.log(pet.getMaster(), "tried to set buff item " + itemId + " but " + pet + " doesn't support buffing");
 			return false;
+		}
+		if (itemId != 0) {
+			ItemTemplate itemTemplate = DataManager.ITEM_DATA.getItemTemplate(itemId);
+			if (itemTemplate == null || !itemTemplate.isDopingPetUsable()) {
+				AuditLogger.log(pet.getMaster(), "tried to set item " + itemId + " in pet buff slot " + slot + " but it can't be used by pets");
+				return false;
+			}
 		}
 		PetDopingEntry dope = DataManager.PET_DOPING_DATA.getDopingTemplate(petFunction.getId());
 		if (slot == 0 && !dope.isUseFood()) {

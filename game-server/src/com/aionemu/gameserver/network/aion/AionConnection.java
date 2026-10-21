@@ -176,7 +176,7 @@ public class AionConnection extends AConnection<AionServerPacket> {
 						long diff = lastClientMessageTime - last;
 						if (diff < msBetweenPackets) {
 							log.warn("{} is flooding {} (last diff: {} ms)", this, pck.getClass().getSimpleName(), diff);
-							if (PffConfig.PFF_MODE == 1) // disconnect
+							if (PffConfig.PFF_MODE == 2) // disconnect
 								return false;
 						}
 					}

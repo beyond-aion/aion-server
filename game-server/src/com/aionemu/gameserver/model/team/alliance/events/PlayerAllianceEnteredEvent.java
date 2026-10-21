@@ -38,8 +38,11 @@ public class PlayerAllianceEnteredEvent extends PlayerEnteredEvent<PlayerAllianc
 				PacketSendUtility.sendPacket(p, SM_SYSTEM_MESSAGE.STR_FORCE_HE_ENTERED_FORCE(player.getName()));
 				PacketSendUtility.sendPacket(p, allianceInfo);
 				PacketSendUtility.sendPacket(player, new SM_ALLIANCE_MEMBER_INFO(member, PlayerAllianceEvent.ENTER));
+				if (p.getKnownList().knows(player))
+					p.updateKnownlist();
 			}
 		});
+		player.updateKnownlist();
 		PacketSendUtility.broadcastPacket(player, new SM_ABYSS_RANK_UPDATE(1, player), true);
 
 		if (team.isInLeague()) {

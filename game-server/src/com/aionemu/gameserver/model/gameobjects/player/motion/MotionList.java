@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.model.gameobjects.player.motion;
 
 import java.util.Collections;
+import java.util.EnumMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -15,8 +16,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class MotionList {
 
-	private Player owner;
-	private Map<Integer, Motion> activeMotions;
+	private final Player owner;
+	private Map<MotionType, Motion> activeMotions;
 	private Map<Integer, Motion> motions;
 
 	/**
@@ -29,7 +30,7 @@ public class MotionList {
 	/**
 	 * @return the activeMotions
 	 */
-	public Map<Integer, Motion> getActiveMotions() {
+	public Map<MotionType, Motion> getActiveMotions() {
 		if (activeMotions == null)
 			return Collections.emptyMap();
 		return activeMotions;
@@ -51,10 +52,10 @@ public class MotionList {
 			remove(motion.getId());
 		}
 		motions.put(motion.getId(), motion);
-		if (motion.isActive()) {
+		if (motion.isActive() && motion.getType() != null) {
 			if (activeMotions == null)
-				activeMotions = new LinkedHashMap<>();
-			Motion old = activeMotions.put(Motion.motionType.get(motion.getId()), motion);
+				activeMotions = new EnumMap<>(MotionType.class);
+			Motion old = activeMotions.put(motion.getType(), motion);
 			if (old != null) {
 				old.setActive(false);
 				MotionDAO.updateMotion(owner.getObjectId(), old);
@@ -69,38 +70,42 @@ public class MotionList {
 	public boolean remove(int motionId) {
 		Motion motion = motions.remove(motionId);
 		if (motion != null) {
-			PacketSendUtility.sendPacket(owner, new SM_MOTION((short) motionId));
+			PacketSendUtility.sendPacket(owner, SM_MOTION.remove(motionId));
 			MotionDAO.deleteMotion(owner.getObjectId(), motionId);
 			if (motion.isActive()) {
-				activeMotions.remove(Motion.motionType.get(motionId));
+				if (activeMotions != null)
+					activeMotions.remove(motion.getType(), motion);
 				return true;
 			}
 		}
 		return false;
 	}
 
-	public void setActive(int motionId, int motionType) {
+	/**
+	 * Activates the motion in its own slot, or clears the given slot if motionId is 0.
+	 */
+	public void setActive(int motionId, MotionType type) {
 		if (motionId != 0) {
-			Motion motion = motions.get(motionId);
-			if (motion == null || motion.isActive())
+			Motion motion = getMotions().get(motionId);
+			if (motion == null || motion.getType() == null)
 				return;
 			if (activeMotions == null)
-				activeMotions = new LinkedHashMap<>();
-			Motion old = activeMotions.put(motionType, motion);
-			if (old != null) {
+				activeMotions = new EnumMap<>(MotionType.class);
+			Motion old = activeMotions.put(motion.getType(), motion);
+			if (old != null && old != motion) {
 				old.setActive(false);
 				MotionDAO.updateMotion(owner.getObjectId(), old);
 			}
 			motion.setActive(true);
 			MotionDAO.updateMotion(owner.getObjectId(), motion);
 		} else if (activeMotions != null) {
-			Motion old = activeMotions.remove(motionType);
-			if (old == null)
-				return; // TODO packet hack??
-			old.setActive(false);
-			MotionDAO.updateMotion(owner.getObjectId(), old);
+			Motion old = activeMotions.remove(type);
+			if (old != null) {
+				old.setActive(false);
+				MotionDAO.updateMotion(owner.getObjectId(), old);
+			}
 		}
-		PacketSendUtility.sendPacket(owner, new SM_MOTION((short) motionId, (byte) motionType));
-		PacketSendUtility.broadcastPacket(owner, new SM_MOTION(owner.getObjectId(), activeMotions), true);
+		PacketSendUtility.sendPacket(owner, SM_MOTION.set(motionId, type));
+		PacketSendUtility.broadcastPacket(owner, SM_MOTION.playerMotions(owner), true);
 	}
 }

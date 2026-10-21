@@ -13,6 +13,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_CUBE_UPDATE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.LegionService;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
+import com.aionemu.gameserver.taskmanager.tasks.ExpireTimerTask;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
 
@@ -54,6 +55,12 @@ public class ItemSplitService {
 			}
 		}
 
+		if (sourceStorageType == destinationStorageType && sourceStorage.getStorageType() == StorageType.LEGION_WAREHOUSE
+			&& !ItemRestrictionService.isLegionWarehouseUser(player))
+			return;
+		if (sourceStorageType == destinationStorageType && !ItemRestrictionService.isStorageOpen(player, sourceStorage.getStorageType()))
+			return;
+
 		if (sourceStorageType != destinationStorageType
 			&& (ItemRestrictionService.isItemRestrictedTo(player, sourceItem, destStorage.getStorageType()) || ItemRestrictionService.isItemRestrictedFrom(
 				player, sourceItem, sourceStorage.getStorageType()))) {
@@ -80,6 +87,7 @@ public class ItemSplitService {
 				LegionService.getInstance().addWHItemHistory(player, sourceItem.getItemId(), splitAmount, sourceStorage, destStorage);
 			}
 			Item newItem = ItemFactory.newItem(sourceItem.getItemTemplate().getTemplateId(), splitAmount);
+			newItem.setExpireTime(sourceItem.getExpireTime());
 			if (sourceStorageType == destinationStorageType)
 				newItem.setEquipmentSlot(slotNum);
 			sourceStorage.decreaseItemCount(sourceItem, splitAmount, sourceStorageType == destinationStorageType ? ItemUpdateType.DEC_ITEM_SPLIT
@@ -88,6 +96,8 @@ public class ItemSplitService {
 			if (destStorage.add(newItem) == null) {
 				// if item was not added - we can release its id
 				IDFactory.getInstance().releaseId(newItem.getObjectId());
+			} else {
+				ExpireTimerTask.getInstance().registerExpirable(newItem, player);
 			}
 		} else if (targetItem.getItemId() == sourceItem.getItemId()) {
 			if (sourceStorageType != destinationStorageType) {
@@ -113,7 +123,7 @@ public class ItemSplitService {
 	}
 
 	private static void moveKinah(Player player, IStorage source, long splitAmount) {
-		if (source.getKinah() < splitAmount)
+		if (source.getKinah() < splitAmount || !ItemRestrictionService.isAtStorageManager(player, StorageType.ACCOUNT_WAREHOUSE))
 			return;
 		switch (source.getStorageType()) {
 			case CUBE: {

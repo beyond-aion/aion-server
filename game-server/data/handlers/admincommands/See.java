@@ -20,9 +20,11 @@ public class See extends AdminCommand {
 	public void execute(Player admin, String... params) {
 		if (admin.getSeeState() < 2) {
 			admin.setSeeState(CreatureSeeState.SEARCH20);
+			admin.setSeeState(CreatureSeeState.SEARCH_GM_INVISIBLE);
 			sendInfo(admin, ChatUtil.l10n(288645)); // Can see targets in advanced hide states.
 		} else {
 			admin.unsetSeeState(CreatureSeeState.SEARCH20);
+			admin.unsetSeeState(CreatureSeeState.SEARCH_GM_INVISIBLE);
 			sendInfo(admin, "You lost vision.");
 		}
 		PacketSendUtility.broadcastPacket(admin, new SM_PLAYER_STATE(admin), true);

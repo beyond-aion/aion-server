@@ -11,7 +11,6 @@ import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.limiteditems.LimitedItem;
 import com.aionemu.gameserver.model.limiteditems.LimitedTradeNpc;
 import com.aionemu.gameserver.model.templates.goods.GoodsList;
-import com.aionemu.gameserver.model.templates.tradelist.TradeListTemplate.TradeTab;
 import com.aionemu.gameserver.services.cron.CronService;
 
 /**
@@ -27,9 +26,9 @@ public class LimitedItemTradeService {
 	private final Map<Integer, LimitedTradeNpc> limitedTradeNpcs = new HashMap<>();
 
 	public void start() {
-		DataManager.TRADE_LIST_DATA.getTradeListTemplate().forEach((npcId, npc) -> {
-			for (TradeTab list : npc.getTradeTablist()) {
-				GoodsList goodsList = DataManager.GOODSLIST_DATA.getGoodsListById(list.getId());
+		DataManager.TRADE_LIST_DATA.getTradeListTemplate().forEach((npcId, tradeList) -> {
+			for (Integer tradeTabId : tradeList.getTradeTabIds()) {
+				GoodsList goodsList = DataManager.GOODSLIST_DATA.getGoodsListById(tradeTabId);
 				if (goodsList == null) {
 					log.warn("No goodslist for tradelist of npc {}", npcId);
 					continue;

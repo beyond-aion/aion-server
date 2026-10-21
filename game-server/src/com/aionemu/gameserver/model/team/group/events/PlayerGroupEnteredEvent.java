@@ -33,8 +33,11 @@ public class PlayerGroupEnteredEvent extends PlayerEnteredEvent<PlayerGroup> {
 				PacketSendUtility.sendPacket(member, new SM_GROUP_MEMBER_INFO(team, player, GroupEvent.ENTER));
 				PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_PARTY_HE_ENTERED_PARTY(player.getName()));
 				PacketSendUtility.sendPacket(player, new SM_GROUP_MEMBER_INFO(team, member, GroupEvent.ENTER));
+				if (member.getKnownList().knows(player))
+					member.updateKnownlist();
 			}
 		});
+		player.updateKnownlist();
 		PacketSendUtility.broadcastPacket(player, new SM_ABYSS_RANK_UPDATE(1, player), true);
 		super.handleEvent();
 	}

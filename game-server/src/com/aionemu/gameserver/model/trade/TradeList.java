@@ -23,7 +23,7 @@ public class TradeList {
 
 	private long requiredKinah;
 
-	private int requiredAp;
+	private long requiredAp;
 
 	private Map<Integer, Long> requiredItems = new LinkedHashMap<>();
 
@@ -57,7 +57,7 @@ public class TradeList {
 	}
 
 	public boolean calculateAbyssRewardBuyList(Player player, int modifier) {
-		int ap = player.getAbyssRank().getAp();
+		long ap = player.getAbyssRank().getAp();
 
 		this.requiredAp = 0;
 		this.requiredItems.clear();
@@ -68,7 +68,7 @@ public class TradeList {
 				continue;
 
 			if (aquisition.getType().equals(AcquisitionType.AP) || aquisition.getType().equals(AcquisitionType.ABYSS))
-				requiredAp += (int) ((aquisition.getRequiredAp() * tradeItem.getCount() * modifier / 100.0D) * PricesService.getVendorBuyModifier()) / 100;
+				requiredAp += (long) ((aquisition.getRequiredAp() * tradeItem.getCount() * modifier / 100.0D) * PricesService.getVendorBuyModifier()) / 100;
 
 			int rewardItemId = aquisition.getItemId();
 			if (rewardItemId == 0) // no required item (medals, etc))
@@ -109,7 +109,7 @@ public class TradeList {
 		return sellerObjId;
 	}
 
-	public int getRequiredAp() {
+	public long getRequiredAp() {
 		return requiredAp;
 	}
 

@@ -30,7 +30,6 @@ import com.aionemu.gameserver.model.skill.PlayerSkillList;
 import com.aionemu.gameserver.model.stats.calc.functions.PlayerStatFunctions;
 import com.aionemu.gameserver.model.team.legion.LegionMember;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
-import com.aionemu.gameserver.model.templates.item.actions.EmotionLearnAction;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MACRO_LIST;
 import com.aionemu.gameserver.services.BrokerService;
 import com.aionemu.gameserver.services.HousingService;
@@ -175,7 +174,7 @@ public class PlayerService {
 		PlayerLifeStatsDAO.loadPlayerLifeStat(player);
 		PlayerEmotionListDAO.loadEmotions(player);
 		if (player.hasPermission(MembershipConfig.EMOTIONS_ALL)) {
-			for (int emotionId : EmotionLearnAction.getLearnableEmotionIds())
+			for (int emotionId : DataManager.ITEM_DATA.getLearnableEmotionIds())
 				player.getEmotions().add(emotionId, 0, false);
 		}
 
@@ -195,10 +194,7 @@ public class PlayerService {
 		LocationData ld = playerInitialData.getSpawnLocation(playerCommonData.getRace());
 
 		playerCommonData.setMapId(ld.getMapId());
-		playerCommonData.setX(ld.getX());
-		playerCommonData.setY(ld.getY());
-		playerCommonData.setZ(ld.getZ());
-		playerCommonData.setHeading(ld.getHeading());
+		playerCommonData.setXYZH(ld.getX(), ld.getY(), ld.getZ(), ld.getHeading());
 
 		Player newPlayer = new Player(playerAccountData, account);
 

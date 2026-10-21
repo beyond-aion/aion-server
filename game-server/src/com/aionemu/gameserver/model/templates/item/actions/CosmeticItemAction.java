@@ -52,6 +52,8 @@ public class CosmeticItemAction extends AbstractItemAction {
 
 	@Override
 	public void act(final Player player, Item parentItem, Item targetItem, Object... params) {
+		if (!player.getInventory().decreaseByObjectId(parentItem.getObjectId(), 1))
+			return;
 		CosmeticItemTemplate template = DataManager.COSMETIC_ITEMS_DATA.getCosmeticItemsTemplate(cosmeticName);
 		PlayerAppearance playerAppearance = player.getPlayerAppearance();
 		String type = template.getType();
@@ -74,8 +76,7 @@ public class CosmeticItemAction extends AbstractItemAction {
 				playerAppearance.setSkinRGB(preset.getEyeColor());
 				playerAppearance.setHair(preset.getHairType());
 				playerAppearance.setFace(preset.getFaceType());
-				playerAppearance.setHeight(preset.getScale());
-				player.getAccountData().updateBoundingRadius();
+				playerAppearance.setHeightScale(preset.getScale());
 			}
 			default -> {
 				LoggerFactory.getLogger(getClass()).warn("Unhandled cosmetic item type: {}", type);
@@ -83,7 +84,6 @@ public class CosmeticItemAction extends AbstractItemAction {
 			}
 		}
 		PlayerAppearanceDAO.store(player);
-		player.getInventory().delete(targetItem);
 		player.getController().onChangedPlayerAttributes();
 	}
 }

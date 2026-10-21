@@ -41397,7 +41397,7 @@
 		</endconditions>
 		<effects>
 			<spellatkinstant value="1625" e="1" element="FIRE" hoptype="DAMAGE">
-				<subeffect skill_id="8218" />
+				<subeffect skill_id="8218" chance="0" chance_delta="100" />
 			</spellatkinstant>
 		</effects>
 		<actions>
@@ -41421,7 +41421,7 @@
 		</endconditions>
 		<effects>
 			<spellatkinstant value="1781" e="1" element="FIRE" hoptype="DAMAGE">
-				<subeffect skill_id="8218" />
+				<subeffect skill_id="8218" chance="0" chance_delta="100" />
 			</spellatkinstant>
 		</effects>
 		<actions>
@@ -41445,7 +41445,7 @@
 		</endconditions>
 		<effects>
 			<spellatkinstant value="1938" e="1" element="FIRE" hoptype="DAMAGE">
-				<subeffect skill_id="8218" />
+				<subeffect skill_id="8218" chance="0" chance_delta="100" />
 			</spellatkinstant>
 		</effects>
 		<actions>
@@ -41469,7 +41469,7 @@
 		</endconditions>
 		<effects>
 			<spellatkinstant value="2094" e="1" element="FIRE" hoptype="DAMAGE">
-				<subeffect skill_id="8218" />
+				<subeffect skill_id="8218" chance="0" chance_delta="100" />
 			</spellatkinstant>
 		</effects>
 		<actions>
@@ -41493,7 +41493,7 @@
 		</endconditions>
 		<effects>
 			<spellatkinstant value="2251" e="1" element="FIRE" hoptype="DAMAGE">
-				<subeffect skill_id="8218" />
+				<subeffect skill_id="8218" chance="0" chance_delta="100" />
 			</spellatkinstant>
 		</effects>
 		<actions>
@@ -41517,7 +41517,7 @@
 		</endconditions>
 		<effects>
 			<spellatkinstant value="2408" e="1" element="FIRE" hoptype="DAMAGE">
-				<subeffect skill_id="8218" />
+				<subeffect skill_id="8218" chance="0" chance_delta="100" />
 			</spellatkinstant>
 		</effects>
 		<actions>
@@ -164734,7 +164734,7 @@
 		</startconditions>
 		<effects>
 			<skillatk mode="PERCENT" value="33" delta="10" e="1" accmod2="0" hoptype="DAMAGE">
-				<subeffect skill_id="8224" />
+				<subeffect skill_id="8224" chance="0" chance_delta="2" />
 				<subconditions>
 					<noflying />
 				</subconditions>
@@ -165534,7 +165534,7 @@
 		</useconditions>
 		<effects>
 			<skillatk mode="PERCENT" value="10" delta="1" e="1" noresist="true" accmod2="100">
-				<subeffect skill_id="8676" />
+				<subeffect skill_id="8676" chance="0" chance_delta="100" />
 			</skillatk>
 		</effects>
 		<motion name="handbind" />

@@ -354,6 +354,10 @@ public class LegionService {
 	 * This method will handle the process when a member is demoted or promoted.
 	 */
 	public void appointRank(Player player, String charName, int rankId) {
+		if (rankId <= LegionRank.BRIGADE_GENERAL.ordinal() || rankId >= LegionRank.values().length) {
+			AuditLogger.log(player, "tried to appoint legion rank " + rankId + " to " + charName);
+			return;
+		}
 		LegionMember legionMember = getLegionMember(charName);
 		if (legionRestrictions.canAppointRank(player, legionMember)) {
 			LegionRank rank = LegionRank.values()[rankId];
@@ -479,6 +483,7 @@ public class LegionService {
 
 	public void openLegionWarehouse(Player player, Npc npc) {
 		if (legionRestrictions.canOpenWarehouse(player, npc)) {
+			player.setStorageManager(StorageType.LEGION_WAREHOUSE, npc);
 			LegionWhUpdate(player);
 			PacketSendUtility.sendPacket(player, new SM_LEGION_EDIT(0x04, player.getLegion()));// kinah
 			int whLvl = player.getLegion().getWarehouseExpansions();
@@ -552,6 +557,11 @@ public class LegionService {
 
 	public void uploadEmblemInfo(Player activePlayer, int totalSize, int color_a, int color_r, int color_g, int color_b, LegionEmblemType emblemType) {
 		LegionEmblem legionEmblem = activePlayer.getLegion().getLegionEmblem();
+		if (totalSize <= 0 || totalSize > LegionEmblem.MAX_CUSTOM_EMBLEM_SIZE) {
+			AuditLogger.log(activePlayer, "tried to upload a legion emblem of " + totalSize + " bytes");
+			legionEmblem.resetUploadSettings();
+			return;
+		}
 		if (legionRestrictions.canUploadEmblem(activePlayer, true)) {
 			legionEmblem.resetUploadSettings();
 			legionEmblem.setEmblem(legionEmblem.getEmblemId(), color_a, color_r, color_g, color_b, emblemType, null);
@@ -562,17 +572,15 @@ public class LegionService {
 		}
 	}
 
-	public void uploadEmblemData(Player activePlayer, int size, byte[] data) {
+	public void uploadEmblemData(Player activePlayer, byte[] data) {
 		LegionEmblem legionEmblem = activePlayer.getLegion().getLegionEmblem();
 		if (legionRestrictions.canUploadEmblem(activePlayer, false)) {
-			legionEmblem.addUploadedSize(size);
-			legionEmblem.addUploadData(data);
-
-			if (legionEmblem.getUploadedSize() >= legionEmblem.getUploadSize()) {
-				if (legionEmblem.getUploadedSize() == 0 || legionEmblem.getUploadedSize() > legionEmblem.getUploadSize()) {
-					PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_GUILD_WARN_CORRUPT_EMBLEM_FILE());
-					return;
-				}
+			if (!legionEmblem.addUploadData(data)) {
+				PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_GUILD_WARN_CORRUPT_EMBLEM_FILE());
+				legionEmblem.resetUploadSettings();
+				return;
+			}
+			if (legionEmblem.isUploadComplete()) {
 				activePlayer.getInventory()
 					.decreaseKinah(PricesService.getPriceForService(LegionConfig.LEGION_EMBLEM_REQUIRED_KINAH, activePlayer.getRace()));
 				// Finished

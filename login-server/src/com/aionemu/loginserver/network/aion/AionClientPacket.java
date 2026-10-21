@@ -36,6 +36,19 @@ public abstract class AionClientPacket extends BaseClientPacket<LoginConnection>
 	}
 
 	/**
+	 * Reads the fields, then the padding to whole Blowfish blocks (up to 7 bytes) that the client puts between them and the checksum. Anything
+	 * longer stays unread and gets reported.
+	 */
+	@Override
+	protected final void readImpl() {
+		readFields();
+		if (getRemainingBytes() < 8)
+			readB(getRemainingBytes());
+	}
+
+	protected abstract void readFields();
+
+	/**
 	 * run runImpl catching and logging Throwable.
 	 */
 	@Override

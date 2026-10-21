@@ -75,26 +75,432 @@
 	<flypath_location id="73" sx="678.09" sy="550.12" sz="1026.46" sworld="300100000" ex="468.16" ey="513.14" ez="1072.07" eworld="300100000" time="11"/>
 	<flypath_location id="74" sx="85.15" sy="189.13" sz="231.34" sworld="310120000" ex="218.85" ey="250.49" ez="206.72" eworld="310120000" time="45"/>
 	<flypath_location id="75" sx="434.19" sy="401.97" sz="233.16" sworld="320140000" ex="308.21" ey="275.45" ez="206.27" eworld="320140000" time="45"/>
-	<flypath_location id="76" sx="438.55" sy="447.88" sz="169.54" sworld="900030000" ex="58.27" ey="945.84" ez="170.05" eworld="900030000" time="38"/>
-	<flypath_location id="77" sx="2400" sy="1330" sz="320" sworld="210050000" ex="1488" ey="1930" ez="350" eworld="210050000" time="39.2"/>
-	<flypath_location id="78" sx="2603" sy="1525" sz="340" sworld="210050000" ex="2263" ey="1440" ez="274" eworld="210050000" time="14.3"/>
-	<flypath_location id="79" sx="2463" sy="1258" sz="339" sworld="220070000" ex="2460" ey="965" ez="405" eworld="220070000" time="27.22"/>
-	<flypath_location id="80" sx="2750" sy="2115" sz="245" sworld="210050000" ex="2180" ey="2000" ez="355" eworld="210050000" time="20.5"/>
-	<flypath_location id="81" sx="750" sy="1295" sz="340" sworld="210050000" ex="1594.69" ey="1579.76" ez="351.13" eworld="210050000" time="39"/>
-	<flypath_location id="82" sx="2722" sy="1972" sz="500" sworld="220070000" ex="2650" ey="1970" ez="515" eworld="220070000" time="27.6"/>
-	<flypath_location id="83" sx="280" sy="2025" sz="450" sworld="220070000" ex="252" ey="2040" ez="473" eworld="220070000" time="33.6"/>
-	<flypath_location id="84" sx="175" sy="2838" sz="640" sworld="220070000" ex="1122" ey="2820" ez="420" eworld="220070000" time="25"/>
+	<flypath_location id="76" sx="438.55" sy="447.88" sz="169.54" sworld="900030000" ex="58.27" ey="945.84" ez="170.05" eworld="900030000" time="38">
+		<windstream_point x="438.6" y="447.9" z="169.5"/>
+		<windstream_point x="446.6" y="439.2" z="175.3"/>
+		<windstream_point x="453.3" y="425.7" z="182.5"/>
+		<windstream_point x="449.4" y="410.5" z="187.4"/>
+		<windstream_point x="433.1" y="392.3" z="190.6"/>
+		<windstream_point x="411.3" y="374" z="190.1"/>
+		<windstream_point x="385.2" y="356.6" z="182.6"/>
+		<windstream_point x="356" y="341.2" z="172.2"/>
+		<windstream_point x="327.7" y="330.5" z="163.5"/>
+		<windstream_point x="299.7" y="323.2" z="155.5"/>
+		<windstream_point x="275.2" y="321.2" z="151.7"/>
+		<windstream_point x="255.1" y="326.1" z="153.4"/>
+		<windstream_point x="238.1" y="335.4" z="158.2"/>
+		<windstream_point x="224.3" y="349" z="166.3"/>
+		<windstream_point x="214.6" y="366.5" z="175.6"/>
+		<windstream_point x="210.9" y="382.4" z="184.8"/>
+		<windstream_point x="208.9" y="408.9" z="190.2"/>
+		<windstream_point x="204.4" y="459" z="186.3"/>
+		<windstream_point x="199.5" y="518.6" z="178.9"/>
+		<windstream_point x="195.3" y="573.2" z="175.1"/>
+		<windstream_point x="195.1" y="610.8" z="171.9"/>
+		<windstream_point x="195" y="643.3" z="179.3"/>
+		<windstream_point x="193.8" y="674.4" z="192"/>
+		<windstream_point x="190.4" y="709.7" z="197.4"/>
+		<windstream_point x="186.7" y="745.8" z="201.8"/>
+		<windstream_point x="182.6" y="782" z="205.3"/>
+		<windstream_point x="178.1" y="817.8" z="208.2"/>
+		<windstream_point x="173.2" y="852.4" z="210.5"/>
+		<windstream_point x="167.8" y="886.5" z="211.7"/>
+		<windstream_point x="161.7" y="919.2" z="211.7"/>
+		<windstream_point x="154.7" y="949.2" z="211"/>
+		<windstream_point x="141.7" y="963.2" z="205.7"/>
+		<windstream_point x="128.2" y="961.9" z="200"/>
+		<windstream_point x="112.8" y="959.3" z="193.6"/>
+		<windstream_point x="97" y="956" z="186.9"/>
+		<windstream_point x="82.2" y="952.4" z="180.6"/>
+		<windstream_point x="69.9" y="949.1" z="175.4"/>
+		<windstream_point x="61.4" y="946.7" z="171.8"/>
+	</flypath_location>
+	<flypath_location id="77" sx="2400" sy="1330" sz="320" sworld="210050000" ex="1488" ey="1930" ez="350" eworld="210050000" time="39.2">
+		<windstream_point x="2400" y="1330" z="320"/>
+		<windstream_point x="2369.5" y="1345.5" z="306.3"/>
+		<windstream_point x="2327.7" y="1367.2" z="288.1"/>
+		<windstream_point x="2284.5" y="1390.3" z="270.9"/>
+		<windstream_point x="2250" y="1410" z="260"/>
+		<windstream_point x="2226.4" y="1426" z="256.1"/>
+		<windstream_point x="2207.7" y="1440.9" z="255.9"/>
+		<windstream_point x="2191.8" y="1454.6" z="258.1"/>
+		<windstream_point x="2176.2" y="1467" z="261.9"/>
+		<windstream_point x="2159" y="1478" z="266"/>
+		<windstream_point x="2139.3" y="1484.2" z="273.6"/>
+		<windstream_point x="2118.7" y="1485.4" z="285"/>
+		<windstream_point x="2098.1" y="1485.4" z="296.6"/>
+		<windstream_point x="2077.2" y="1483.3" z="309"/>
+		<windstream_point x="2056.8" y="1478.9" z="320"/>
+		<windstream_point x="2037" y="1472.4" z="332.1"/>
+		<windstream_point x="2017.8" y="1464.5" z="345.5"/>
+		<windstream_point x="1998.7" y="1455.9" z="359.4"/>
+		<windstream_point x="1979.7" y="1447.3" z="373.2"/>
+		<windstream_point x="1960.4" y="1439.4" z="386"/>
+		<windstream_point x="1940.5" y="1432.8" z="397.2"/>
+		<windstream_point x="1919.9" y="1428.5" z="406"/>
+		<windstream_point x="1898.4" y="1426.9" z="411.6"/>
+		<windstream_point x="1875.5" y="1429" z="413.3"/>
+		<windstream_point x="1849" y="1438.1" z="405"/>
+		<windstream_point x="1813.2" y="1463.5" z="371.9"/>
+		<windstream_point x="1774.6" y="1499.7" z="328.6"/>
+		<windstream_point x="1741" y="1539.7" z="292.7"/>
+		<windstream_point x="1719.1" y="1577.5" z="279.2"/>
+		<windstream_point x="1705.3" y="1616.8" z="277.5"/>
+		<windstream_point x="1696" y="1658.2" z="281.5"/>
+		<windstream_point x="1688.8" y="1700.3" z="289.4"/>
+		<windstream_point x="1681.5" y="1741.9" z="299.4"/>
+		<windstream_point x="1671.9" y="1781.7" z="309.4"/>
+		<windstream_point x="1657.5" y="1818.5" z="317.6"/>
+		<windstream_point x="1630.8" y="1846.9" z="322.5"/>
+		<windstream_point x="1580.9" y="1858.9" z="325.5"/>
+		<windstream_point x="1535" y="1872" z="330"/>
+		<windstream_point x="1508.4" y="1895.9" z="337.9"/>
+		<windstream_point x="1491" y="1924.1" z="347.9"/>
+	</flypath_location>
+	<flypath_location id="78" sx="2603" sy="1525" sz="340" sworld="210050000" ex="2263" ey="1440" ez="274" eworld="210050000" time="14.3">
+		<windstream_point x="2603" y="1525" z="340" exit="false"/>
+		<windstream_point x="2592" y="1529.5" z="360.6" exit="false"/>
+		<windstream_point x="2572.4" y="1533.8" z="376.5" exit="false"/>
+		<windstream_point x="2549.3" y="1539.3" z="387.9" exit="false"/>
+		<windstream_point x="2525" y="1541.7" z="396.7" exit="false"/>
+		<windstream_point x="2501.5" y="1536.4" z="402.8" exit="false"/>
+		<windstream_point x="2479.2" y="1525.9" z="407.7" exit="false"/>
+		<windstream_point x="2456.6" y="1512.4" z="410.8" exit="false"/>
+		<windstream_point x="2431.8" y="1497.5" z="411.1" exit="false"/>
+		<windstream_point x="2401" y="1481" z="407.3" exit="false"/>
+		<windstream_point x="2359.6" y="1459.5" z="394.2" exit="false"/>
+		<windstream_point x="2327.2" y="1446.9" z="365.4" exit="false"/>
+		<windstream_point x="2306.9" y="1445.8" z="316.3" exit="false"/>
+		<windstream_point x="2287.4" y="1443.9" z="285.7" exit="false"/>
+		<windstream_point x="2268.5" y="1440.9" z="275.5" exit="false"/>
+	</flypath_location>
+	<flypath_location id="79" sx="2463" sy="1258" sz="339" sworld="220070000" ex="2460" ey="965" ez="405" eworld="220070000" time="27.22">
+		<windstream_point x="2463" y="1258" z="339"/>
+		<windstream_point x="2433.6" y="1223" z="345.5"/>
+		<windstream_point x="2415" y="1187" z="351"/>
+		<windstream_point x="2412.3" y="1147.4" z="355.8"/>
+		<windstream_point x="2423.1" y="1110.6" z="358"/>
+		<windstream_point x="2448.7" y="1084.5" z="354.9"/>
+		<windstream_point x="2481.4" y="1062" z="349.5"/>
+		<windstream_point x="2507.2" y="1034" z="345.6"/>
+		<windstream_point x="2530.1" y="1001.5" z="342.3"/>
+		<windstream_point x="2547.2" y="967" z="340.2"/>
+		<windstream_point x="2552.9" y="930.9" z="340.6"/>
+		<windstream_point x="2548.3" y="889.7" z="344.2"/>
+		<windstream_point x="2534.6" y="852.1" z="348.4"/>
+		<windstream_point x="2510.7" y="828.4" z="350.4"/>
+		<windstream_point x="2470.9" y="818" z="350"/>
+		<windstream_point x="2429.9" y="821.1" z="349.7"/>
+		<windstream_point x="2398.9" y="838.6" z="351.7"/>
+		<windstream_point x="2370.7" y="867.1" z="354.7"/>
+		<windstream_point x="2348.1" y="900.9" z="358.1"/>
+		<windstream_point x="2334.4" y="935.5" z="361.2"/>
+		<windstream_point x="2330.3" y="974.8" z="363.9"/>
+		<windstream_point x="2334" y="1014.7" z="367.1"/>
+		<windstream_point x="2345.9" y="1049.1" z="372.5"/>
+		<windstream_point x="2376.3" y="1074.8" z="381.9"/>
+		<windstream_point x="2411.2" y="1076.1" z="391.3"/>
+		<windstream_point x="2438.8" y="1048.2" z="398.3"/>
+		<windstream_point x="2451" y="1012.8" z="401.9"/>
+		<windstream_point x="2458.6" y="973.8" z="404.5"/>
+	</flypath_location>
+	<flypath_location id="80" sx="2750" sy="2115" sz="245" sworld="210050000" ex="2180" ey="2000" ez="355" eworld="210050000" time="20.5">
+		<windstream_point x="2750" y="2115" z="245" exit="false"/>
+		<windstream_point x="2732.4" y="2087.3" z="245.7" exit="false"/>
+		<windstream_point x="2707" y="2049.3" z="246.8" exit="false"/>
+		<windstream_point x="2678.1" y="2010.4" z="248.3" exit="false"/>
+		<windstream_point x="2650" y="1980" z="250" exit="false"/>
+		<windstream_point x="2624.4" y="1960.3" z="251.7" exit="false"/>
+		<windstream_point x="2598.9" y="1946.4" z="253.4" exit="false"/>
+		<windstream_point x="2571.4" y="1936.9" z="256" exit="false"/>
+		<windstream_point x="2540" y="1930" z="260" exit="false"/>
+		<windstream_point x="2503.4" y="1924.1" z="265.3" exit="false"/>
+		<windstream_point x="2463.2" y="1919" z="271.3" exit="false"/>
+		<windstream_point x="2421.5" y="1915.2" z="277.8" exit="false"/>
+		<windstream_point x="2380.6" y="1913.7" z="284.8" exit="false"/>
+		<windstream_point x="2342.7" y="1915" z="292.2" exit="false"/>
+		<windstream_point x="2310" y="1920" z="300" exit="false"/>
+		<windstream_point x="2285.6" y="1932.4" z="308.8" exit="false"/>
+		<windstream_point x="2268.6" y="1952.4" z="318.8" exit="false"/>
+		<windstream_point x="2254.7" y="1975" z="329.1" exit="false"/>
+		<windstream_point x="2240" y="1995.3" z="339" exit="false"/>
+		<windstream_point x="2220.5" y="2007.5" z="347.4" exit="false"/>
+		<windstream_point x="2194.3" y="2004.5" z="352.9" exit="false"/>
+	</flypath_location>
+	<flypath_location id="81" sx="750" sy="1295" sz="340" sworld="210050000" ex="1594.69" ey="1579.76" ez="351.13" eworld="210050000" time="39">
+		<windstream_point x="750" y="1295" z="340"/>
+		<windstream_point x="758.5" y="1316.3" z="347.5"/>
+		<windstream_point x="770" y="1340" z="350"/>
+		<windstream_point x="780.1" y="1356.7" z="341.9"/>
+		<windstream_point x="789.9" y="1372.2" z="330"/>
+		<windstream_point x="800.8" y="1386.3" z="318.1"/>
+		<windstream_point x="814.4" y="1399.2" z="310"/>
+		<windstream_point x="832.9" y="1408.3" z="306.5"/>
+		<windstream_point x="854.9" y="1414.4" z="305.6"/>
+		<windstream_point x="876.4" y="1422.5" z="307"/>
+		<windstream_point x="893.3" y="1437.5" z="310"/>
+		<windstream_point x="902.2" y="1463.3" z="316.5"/>
+		<windstream_point x="906" y="1496.5" z="326"/>
+		<windstream_point x="910.2" y="1530.8" z="335.1"/>
+		<windstream_point x="920" y="1560" z="340"/>
+		<windstream_point x="948.6" y="1573" z="334.2"/>
+		<windstream_point x="980" y="1585" z="320"/>
+		<windstream_point x="989.1" y="1617.2" z="299.4"/>
+		<windstream_point x="1000" y="1650" z="280"/>
+		<windstream_point x="1034.5" y="1670.1" z="271.6"/>
+		<windstream_point x="1075" y="1680" z="270"/>
+		<windstream_point x="1109.9" y="1670" z="275.9"/>
+		<windstream_point x="1143.7" y="1663.3" z="285"/>
+		<windstream_point x="1175.8" y="1686.5" z="294.1"/>
+		<windstream_point x="1210" y="1720" z="300"/>
+		<windstream_point x="1251.2" y="1756.8" z="296.6"/>
+		<windstream_point x="1295" y="1785" z="290"/>
+		<windstream_point x="1340.2" y="1787.2" z="284.4"/>
+		<windstream_point x="1382.5" y="1773.4" z="280"/>
+		<windstream_point x="1416.1" y="1744.1" z="278.6"/>
+		<windstream_point x="1445" y="1710" z="280"/>
+		<windstream_point x="1472.2" y="1682.5" z="285.8"/>
+		<windstream_point x="1495" y="1660" z="293"/>
+		<windstream_point x="1513.2" y="1642.6" z="298"/>
+		<windstream_point x="1529.7" y="1626.9" z="302.3"/>
+		<windstream_point x="1545.2" y="1612.8" z="307.5"/>
+		<windstream_point x="1560" y="1600" z="315"/>
+		<windstream_point x="1572.4" y="1592.1" z="330.5"/>
+		<windstream_point x="1583.3" y="1587" z="347.5"/>
+	</flypath_location>
+	<flypath_location id="82" sx="2722" sy="1972" sz="500" sworld="220070000" ex="2650" ey="1970" ez="515" eworld="220070000" time="27.6">
+		<windstream_point x="2722" y="1972" z="500"/>
+		<windstream_point x="2760.9" y="1958.8" z="499.3"/>
+		<windstream_point x="2792.5" y="1954.1" z="500.4"/>
+		<windstream_point x="2817" y="1959.3" z="502.9"/>
+		<windstream_point x="2839.3" y="1966.8" z="505.9"/>
+		<windstream_point x="2862.5" y="1968.5" z="509.3"/>
+		<windstream_point x="2892.3" y="1956.6" z="514.7"/>
+		<windstream_point x="2920" y="1912" z="517.8"/>
+		<windstream_point x="2936.5" y="1809.3" z="511.5"/>
+		<windstream_point x="2940.7" y="1724" z="504.5"/>
+		<windstream_point x="2935.9" y="1682.6" z="500.1"/>
+		<windstream_point x="2927.5" y="1653.8" z="496.1"/>
+		<windstream_point x="2914.2" y="1632.8" z="492.6"/>
+		<windstream_point x="2894.7" y="1615.3" z="489.4"/>
+		<windstream_point x="2867.2" y="1599.5" z="487"/>
+		<windstream_point x="2834.2" y="1588.2" z="485"/>
+		<windstream_point x="2799.5" y="1583.8" z="482.9"/>
+		<windstream_point x="2767" y="1589" z="480"/>
+		<windstream_point x="2735.7" y="1609.7" z="474.9"/>
+		<windstream_point x="2704.7" y="1644.2" z="468.5"/>
+		<windstream_point x="2678.2" y="1683.9" z="463.8"/>
+		<windstream_point x="2659.9" y="1721.9" z="463.2"/>
+		<windstream_point x="2647.9" y="1762.3" z="465.2"/>
+		<windstream_point x="2640.4" y="1804" z="469.3"/>
+		<windstream_point x="2636.1" y="1844.6" z="475.2"/>
+		<windstream_point x="2634.6" y="1882.1" z="483.1"/>
+		<windstream_point x="2638.2" y="1916.9" z="494"/>
+		<windstream_point x="2645.1" y="1950.3" z="506.8"/>
+	</flypath_location>
+	<flypath_location id="83" sx="280" sy="2025" sz="450" sworld="220070000" ex="252" ey="2040" ez="473" eworld="220070000" time="33.6">
+		<windstream_point x="280" y="2025" z="450"/>
+		<windstream_point x="294.2" y="2003.8" z="450"/>
+		<windstream_point x="308.1" y="1982.4" z="450"/>
+		<windstream_point x="321.1" y="1960.6" z="450"/>
+		<windstream_point x="333.1" y="1938" z="450"/>
+		<windstream_point x="343.5" y="1914.6" z="450"/>
+		<windstream_point x="352" y="1890" z="450"/>
+		<windstream_point x="353.9" y="1860.3" z="450"/>
+		<windstream_point x="348.5" y="1826.8" z="450"/>
+		<windstream_point x="340.8" y="1796.2" z="450.1"/>
+		<windstream_point x="330.8" y="1767.2" z="450.7"/>
+		<windstream_point x="317.2" y="1742.2" z="450.3"/>
+		<windstream_point x="298.9" y="1724.1" z="447.4"/>
+		<windstream_point x="276.2" y="1712.4" z="442.7"/>
+		<windstream_point x="252.4" y="1706.2" z="438.3"/>
+		<windstream_point x="226.9" y="1705.6" z="433.9"/>
+		<windstream_point x="201" y="1710" z="430"/>
+		<windstream_point x="174.6" y="1719.6" z="427.2"/>
+		<windstream_point x="149.5" y="1734.5" z="425.3"/>
+		<windstream_point x="127.1" y="1755.1" z="424.4"/>
+		<windstream_point x="111.2" y="1780.1" z="424.8"/>
+		<windstream_point x="111.4" y="1804.5" z="426.5"/>
+		<windstream_point x="121.4" y="1829.3" z="429"/>
+		<windstream_point x="134.6" y="1853.9" z="430.1"/>
+		<windstream_point x="151.8" y="1878.9" z="429.2"/>
+		<windstream_point x="170" y="1902" z="430"/>
+		<windstream_point x="189.1" y="1922.1" z="434.9"/>
+		<windstream_point x="207.4" y="1940.1" z="441.5"/>
+		<windstream_point x="218.7" y="1956.4" z="447"/>
+		<windstream_point x="226.8" y="1972" z="451.8"/>
+		<windstream_point x="233.7" y="1987.2" z="456.6"/>
+		<windstream_point x="239.5" y="2002.1" z="461.2"/>
+		<windstream_point x="244.6" y="2016.8" z="465.8"/>
+		<windstream_point x="249.3" y="2031.3" z="470.3"/>
+	</flypath_location>
+	<flypath_location id="84" sx="175" sy="2838" sz="640" sworld="220070000" ex="1122" ey="2820" ez="420" eworld="220070000" time="25">
+		<windstream_point x="175" y="2838" z="640"/>
+		<windstream_point x="208" y="2814.8" z="640"/>
+		<windstream_point x="240.8" y="2791.2" z="637.5"/>
+		<windstream_point x="273" y="2767" z="630"/>
+		<windstream_point x="303.6" y="2742.3" z="616.5"/>
+		<windstream_point x="333.6" y="2717" z="598"/>
+		<windstream_point x="366" y="2690" z="575"/>
+		<windstream_point x="402.1" y="2659.1" z="543.9"/>
+		<windstream_point x="440.6" y="2626.5" z="508.4"/>
+		<windstream_point x="480" y="2598" z="480"/>
+		<windstream_point x="521.9" y="2579" z="470.5"/>
+		<windstream_point x="563" y="2567" z="470"/>
+		<windstream_point x="600.5" y="2558" z="467.7"/>
+		<windstream_point x="636.5" y="2551.3" z="466.3"/>
+		<windstream_point x="670" y="2545" z="465"/>
+		<windstream_point x="709.4" y="2558.3" z="457.2"/>
+		<windstream_point x="758.2" y="2599.2" z="441.9"/>
+		<windstream_point x="808.4" y="2649.3" z="426.7"/>
+		<windstream_point x="852.2" y="2691.7" z="418.5"/>
+		<windstream_point x="890.8" y="2734.9" z="416.4"/>
+		<windstream_point x="927.4" y="2779.4" z="417.2"/>
+		<windstream_point x="963.6" y="2818.7" z="419"/>
+		<windstream_point x="1001" y="2846" z="420"/>
+		<windstream_point x="1040.4" y="2852.8" z="420"/>
+		<windstream_point x="1080.9" y="2841" z="420"/>
+	</flypath_location>
 	<flypath_location id="85" sx="1024.1" sy="316.61" sz="220.23" sworld="300170000" ex="958.6" ey="430.7" ez="221" eworld="300170000" time="23"/>
 	<flypath_location id="86" sx="930.15" sy="439.35" sz="220.17" sworld="300170000" ex="821.9" ey="464.7" ez="221" eworld="300170000" time="23"/>
 	<flypath_location id="87" sx="783.1" sy="431.5" sz="219.9" sworld="300170000" ex="776.8" ey="299.8" ez="221" eworld="300170000" time="23"/>
 	<flypath_location id="88" sx="824.03" sy="274.87" sz="220.23" sworld="300170000" ex="942.5" ey="272.7" ez="221" eworld="300170000" time="23"/>
-	<flypath_location id="89" sx="1615" sy="1610" sz="230" sworld="210050000" ex="650" ey="1360" ez="230" eworld="210050000" time="38"/>
-	<flypath_location id="90" sx="500" sy="1100" sz="400" sworld="210050000" ex="280" ey="950" ez="400" eworld="210050000" time="33"/>
-	<flypath_location id="91" sx="638" sy="2055" sz="388" sworld="220070000" ex="1310" ey="1626" ez="380" eworld="220070000" time="25"/>
-	<flypath_location id="92" sx="1036.42" sy="1747.71" sz="240" sworld="210050000" ex="985" ey="1775" ez="350" eworld="210050000" time="7"/>
-	<flypath_location id="93" sx="810" sy="1420" sz="265" sworld="210050000" ex="780" ey="1525" ez="385" eworld="210050000" time="8"/>
-	<flypath_location id="94" sx="2495" sy="326" sz="505" sworld="210050000" ex="2620" ey="336" ez="538" eworld="210050000" time="6"/>
-	<flypath_location id="95" sx="2580" sy="333" sz="528" sworld="210050000" ex="2468" ey="327" ez="504" eworld="210050000" time="5"/>
+	<flypath_location id="89" sx="1615" sy="1610" sz="230" sworld="210050000" ex="650" ey="1360" ez="230" eworld="210050000" time="38">
+		<windstream_point x="1615" y="1610" z="230"/>
+		<windstream_point x="1595.8" y="1611.6" z="229"/>
+		<windstream_point x="1570" y="1618" z="230"/>
+		<windstream_point x="1544.3" y="1628.7" z="235"/>
+		<windstream_point x="1517.3" y="1640.8" z="241.7"/>
+		<windstream_point x="1491.6" y="1654.5" z="247.5"/>
+		<windstream_point x="1470" y="1670" z="250"/>
+		<windstream_point x="1455" y="1687.9" z="247.9"/>
+		<windstream_point x="1444.6" y="1708" z="242.7"/>
+		<windstream_point x="1434.3" y="1729.1" z="236.2"/>
+		<windstream_point x="1420" y="1750" z="230"/>
+		<windstream_point x="1395.1" y="1774.1" z="223.6"/>
+		<windstream_point x="1362.9" y="1792.9" z="217.5"/>
+		<windstream_point x="1326.5" y="1798.9" z="212"/>
+		<windstream_point x="1290" y="1790" z="210"/>
+		<windstream_point x="1258.2" y="1764" z="214.1"/>
+		<windstream_point x="1227.8" y="1730.8" z="220.4"/>
+		<windstream_point x="1197.3" y="1698.4" z="226.6"/>
+		<windstream_point x="1165" y="1675" z="230"/>
+		<windstream_point x="1129.1" y="1665.8" z="229"/>
+		<windstream_point x="1091" y="1665.6" z="225.3"/>
+		<windstream_point x="1053.7" y="1666.3" z="221.3"/>
+		<windstream_point x="1020.6" y="1660" z="219.5"/>
+		<windstream_point x="1001.1" y="1632.8" z="224.1"/>
+		<windstream_point x="985" y="1600" z="230"/>
+		<windstream_point x="954.6" y="1584" z="230.6"/>
+		<windstream_point x="928" y="1565" z="230"/>
+		<windstream_point x="917.2" y="1531.2" z="230.2"/>
+		<windstream_point x="911.9" y="1492.6" z="230.4"/>
+		<windstream_point x="905.4" y="1454.2" z="230.6"/>
+		<windstream_point x="891.1" y="1421.1" z="230.8"/>
+		<windstream_point x="851.5" y="1405.8" z="230.4"/>
+		<windstream_point x="806" y="1391.4" z="231.4"/>
+		<windstream_point x="783.7" y="1352.1" z="237.8"/>
+		<windstream_point x="762.4" y="1312.1" z="243.9"/>
+		<windstream_point x="716.4" y="1298.3" z="241.7"/>
+		<windstream_point x="689.1" y="1312.4" z="238"/>
+		<windstream_point x="668.2" y="1334.4" z="234.1"/>
+	</flypath_location>
+	<flypath_location id="90" sx="500" sy="1100" sz="400" sworld="210050000" ex="280" ey="950" ez="400" eworld="210050000" time="33">
+		<windstream_point x="500" y="1100" z="400"/>
+		<windstream_point x="467.7" y="1101.3" z="405"/>
+		<windstream_point x="436.2" y="1103.1" z="410"/>
+		<windstream_point x="406.7" y="1105.9" z="415"/>
+		<windstream_point x="380" y="1110" z="420"/>
+		<windstream_point x="356.4" y="1113.9" z="425"/>
+		<windstream_point x="335.5" y="1117.9" z="429.9"/>
+		<windstream_point x="316.8" y="1125.5" z="434.9"/>
+		<windstream_point x="300" y="1140" z="440"/>
+		<windstream_point x="285.5" y="1161.4" z="446"/>
+		<windstream_point x="273.1" y="1186.3" z="453"/>
+		<windstream_point x="261.7" y="1213.7" z="460.2"/>
+		<windstream_point x="250.1" y="1242.2" z="466.8"/>
+		<windstream_point x="237.3" y="1270.6" z="471.9"/>
+		<windstream_point x="222" y="1297.7" z="474.8"/>
+		<windstream_point x="200.9" y="1323.1" z="472"/>
+		<windstream_point x="161.2" y="1348.4" z="450.2"/>
+		<windstream_point x="127.8" y="1358.5" z="435"/>
+		<windstream_point x="111.3" y="1349.9" z="440"/>
+		<windstream_point x="100.2" y="1333.2" z="452.1"/>
+		<windstream_point x="93.3" y="1310.6" z="464.4"/>
+		<windstream_point x="89.6" y="1284.3" z="470.3"/>
+		<windstream_point x="92.8" y="1246.5" z="466.1"/>
+		<windstream_point x="102.7" y="1203.5" z="457.1"/>
+		<windstream_point x="117.3" y="1165.7" z="448.5"/>
+		<windstream_point x="137.6" y="1129.7" z="438.4"/>
+		<windstream_point x="160" y="1100" z="430"/>
+		<windstream_point x="184.1" y="1079.6" z="424.5"/>
+		<windstream_point x="209.6" y="1064.2" z="420.4"/>
+		<windstream_point x="232.5" y="1047.9" z="416.6"/>
+		<windstream_point x="249.4" y="1026.6" z="412.4"/>
+		<windstream_point x="261.9" y="1002.5" z="408.3"/>
+		<windstream_point x="271.7" y="976.6" z="404.1"/>
+	</flypath_location>
+	<flypath_location id="91" sx="638" sy="2055" sz="388" sworld="220070000" ex="1310" ey="1626" ez="380" eworld="220070000" time="25">
+		<windstream_point x="638" y="2055" z="388"/>
+		<windstream_point x="644.1" y="2007.3" z="390.7"/>
+		<windstream_point x="658.1" y="1973.4" z="392.6"/>
+		<windstream_point x="685.3" y="1963.6" z="393.4"/>
+		<windstream_point x="719.9" y="1968.7" z="393.4"/>
+		<windstream_point x="757" y="1976.3" z="393.4"/>
+		<windstream_point x="791.7" y="1973.9" z="394"/>
+		<windstream_point x="823" y="1960" z="395.4"/>
+		<windstream_point x="853.7" y="1942.1" z="397.3"/>
+		<windstream_point x="884" y="1921.8" z="399.3"/>
+		<windstream_point x="914" y="1900.4" z="401.4"/>
+		<windstream_point x="944" y="1879.5" z="403.2"/>
+		<windstream_point x="974.3" y="1860.6" z="404.5"/>
+		<windstream_point x="1005" y="1845" z="405"/>
+		<windstream_point x="1037.1" y="1834.9" z="404.6"/>
+		<windstream_point x="1070.5" y="1829.6" z="403.4"/>
+		<windstream_point x="1104.2" y="1826.2" z="401.6"/>
+		<windstream_point x="1136.9" y="1821.9" z="399.5"/>
+		<windstream_point x="1167.6" y="1814.1" z="397.2"/>
+		<windstream_point x="1195" y="1800" z="395"/>
+		<windstream_point x="1218.9" y="1779.2" z="392.8"/>
+		<windstream_point x="1240.3" y="1753.9" z="390.5"/>
+		<windstream_point x="1259.5" y="1725.1" z="388"/>
+		<windstream_point x="1277.2" y="1693.6" z="385.4"/>
+		<windstream_point x="1293.9" y="1660.2" z="382.7"/>
+	</flypath_location>
+	<flypath_location id="92" sx="1036.42" sy="1747.71" sz="240" sworld="210050000" ex="985" ey="1775" ez="350" eworld="210050000" time="7">
+		<windstream_point x="1036.4" y="1747.7" z="240" exit="false"/>
+		<windstream_point x="1037.4" y="1747.6" z="259.4" exit="false"/>
+		<windstream_point x="1038.5" y="1747.6" z="286.5" exit="false"/>
+		<windstream_point x="1038.9" y="1747.8" z="312.2" exit="false"/>
+		<windstream_point x="1038.8" y="1748.1" z="332.4" exit="false"/>
+		<windstream_point x="1035" y="1750" z="350" exit="false"/>
+		<windstream_point x="1015.6" y="1759.7" z="363.1" exit="false"/>
+	</flypath_location>
+	<flypath_location id="93" sx="810" sy="1420" sz="265" sworld="210050000" ex="780" ey="1525" ez="385" eworld="210050000" time="8">
+		<windstream_point x="810" y="1420" z="265" exit="false"/>
+		<windstream_point x="812.2" y="1418.3" z="294" exit="false"/>
+		<windstream_point x="814" y="1417" z="333.6" exit="false"/>
+		<windstream_point x="813" y="1417.8" z="372.2" exit="false"/>
+		<windstream_point x="805.3" y="1422.4" z="398.4" exit="false"/>
+		<windstream_point x="784.4" y="1432.9" z="408.9" exit="false"/>
+		<windstream_point x="769.4" y="1452.5" z="409.8" exit="false"/>
+		<windstream_point x="770.8" y="1484.7" z="401.1" exit="false"/>
+	</flypath_location>
+	<flypath_location id="94" sx="2495" sy="326" sz="505" sworld="210050000" ex="2620" ey="336" ez="538" eworld="210050000" time="6">
+		<windstream_point x="2495" y="326" z="505" exit="false"/>
+		<windstream_point x="2501.7" y="326.5" z="505.6" exit="false"/>
+		<windstream_point x="2523" y="328.2" z="511.9" exit="false"/>
+		<windstream_point x="2547.4" y="330.2" z="519.7" entry="false" exit="false"/>
+		<windstream_point x="2572.9" y="332.2" z="527.7" entry="false" exit="false"/>
+		<windstream_point x="2597.7" y="334.2" z="535" entry="false" exit="false"/>
+	</flypath_location>
+	<flypath_location id="95" sx="2580" sy="333" sz="528" sworld="210050000" ex="2468" ey="327" ez="504" eworld="210050000" time="5">
+		<windstream_point x="2580" y="333" z="528" exit="false"/>
+		<windstream_point x="2566.4" y="331.8" z="524.3" exit="false"/>
+		<windstream_point x="2546.5" y="330.2" z="519.1" exit="false"/>
+		<windstream_point x="2523.3" y="328.5" z="513.3" entry="false" exit="false"/>
+		<windstream_point x="2500" y="327" z="508" entry="false" exit="false"/>
+	</flypath_location>
 	<flypath_location id="96" sx="1891.34" sy="2864.25" sz="557.5" sworld="220070000" ex="2498.28" ey="2137.76" ez="465.27" eworld="220070000" time="47.5"/>
 	<flypath_location id="97" sx="2499.2" sy="2136.51" sz="466.95" sworld="220070000" ex="1892.26" ey="2863" ez="558.31" eworld="220070000" time="57.5"/>
 	<flypath_location id="98" sx="1335.09" sy="275.42" sz="589.8" sworld="210050000" ex="399.03" ey="948.24" ez="460.62" eworld="210050000" time="45"/>
@@ -145,23 +551,368 @@
 	<flypath_location id="143" sx="1999.21" sy="1391.78" sz="118.27" sworld="210040000" ex="1636.6" ey="2694.95" ez="115.52" eworld="210040000" time="37.1"/>
 	<flypath_location id="144" sx="1633.93" sy="2695.02" sz="115.49" sworld="210040000" ex="916.83" ey="2256.59" ez="157.55" eworld="210040000" time="37.8"/>
 	<flypath_location id="145" sx="916.83" sy="2256.59" sz="157.55" sworld="210040000" ex="1633.93" ey="2695.02" ez="115.49" eworld="210040000" time="37.8"/>
-	<flypath_location id="146" sx="222" sy="600" sz="628" sworld="210050000" ex="90" ey="310" ez="645" eworld="210050000" time="10"/>
-	<flypath_location id="147" sx="711" sy="633" sz="382" sworld="220070000" ex="1023" ey="1239" ez="305" eworld="220070000" time="18"/>
-	<flypath_location id="148" sx="514" sy="1213" sz="326" sworld="220070000" ex="998" ey="1255" ez="364" eworld="220070000" time="16"/>
-	<flypath_location id="149" sx="2236" sy="1361" sz="332" sworld="220070000" ex="2943" ey="1316" ez="330" eworld="220070000" time="38"/>
-	<flypath_location id="150" sx="2659" sy="2028" sz="442" sworld="220070000" ex="2683" ey="1990" ez="524" eworld="220070000" time="25"/>
-	<flypath_location id="151" sx="2307" sy="1923" sz="445" sworld="220070000" ex="1984" ey="1667" ez="403" eworld="220070000" time="10.1"/>
-	<flypath_location id="152" sx="1407" sy="366" sz="590" sworld="210050000" ex="1578" ey="505" ez="550" eworld="210050000" time="5.2"/>
-	<flypath_location id="153" sx="1610" sy="510" sz="540" sworld="210050000" ex="2430" ey="220" ez="470" eworld="210050000" time="20"/>
-	<flypath_location id="154" sx="2529" sy="183" sz="445" sworld="210050000" ex="2420" ey="340" ez="510" eworld="210050000" time="18"/>
-	<flypath_location id="155" sx="1796" sy="2821" sz="559" sworld="220070000" ex="1530" ey="2513" ez="400" eworld="220070000" time="17.5"/>
-	<flypath_location id="156" sx="1519" sy="2540" sz="380" sworld="220070000" ex="1030" ey="2696" ez="412" eworld="220070000" time="29.9"/>
-	<flypath_location id="157" sx="1124" sy="2752" sz="432" sworld="220070000" ex="1699" ey="2535" ez="520" eworld="220070000" time="16.2"/>
-	<flypath_location id="158" sx="230" sy="114" sz="35" sworld="300020000" ex="230" ey="140" ez="35" eworld="300020000" time="8"/>
-	<flypath_location id="159" sx="398" sy="553" sz="319" sworld="300250000" ex="881" ey="643" ez="187" eworld="300250000" time="26"/>
-	<flypath_location id="160" sx="398" sy="553" sz="318" sworld="300250000" ex="1279" ey="597" ez="304" eworld="300250000" time="24.6"/>
-	<flypath_location id="161" sx="396" sy="552" sz="320" sworld="300250000" ex="769" ey="863" ez="374" eworld="300250000" time="26.9"/>
-	<flypath_location id="162" sx="900" sy="1100" sz="363" sworld="300250000" ex="1083" ey="1121" ez="241" eworld="300250000" time="16.5"/>
+	<flypath_location id="146" sx="222" sy="600" sz="628" sworld="210050000" ex="90" ey="310" ez="645" eworld="210050000" time="10">
+		<windstream_point x="222" y="600" z="628" exit="false"/>
+		<windstream_point x="188.4" y="574.1" z="625" exit="false"/>
+		<windstream_point x="162.9" y="548.2" z="626.9" exit="false"/>
+		<windstream_point x="137.4" y="522.5" z="629.6" exit="false"/>
+		<windstream_point x="115.4" y="496.1" z="632.5" exit="false"/>
+		<windstream_point x="100" y="468" z="635" exit="false"/>
+		<windstream_point x="91.6" y="438" z="637.2" exit="false"/>
+		<windstream_point x="87.4" y="407" z="639.2" exit="false"/>
+		<windstream_point x="86.5" y="375.1" z="641.2" exit="false"/>
+		<windstream_point x="87.7" y="342.7" z="643.1" exit="false"/>
+	</flypath_location>
+	<flypath_location id="147" sx="711" sy="633" sz="382" sworld="220070000" ex="1023" ey="1239" ez="305" eworld="220070000" time="18">
+		<windstream_point x="711" y="633" z="382"/>
+		<windstream_point x="744.3" y="654.1" z="387.2"/>
+		<windstream_point x="775.2" y="678" z="391.2"/>
+		<windstream_point x="801" y="707.5" z="392.8"/>
+		<windstream_point x="819.6" y="745.1" z="390.7"/>
+		<windstream_point x="833.1" y="789.6" z="385.4"/>
+		<windstream_point x="842.5" y="838.8" z="378"/>
+		<windstream_point x="848.3" y="890.6" z="369.8"/>
+		<windstream_point x="851" y="943" z="362"/>
+		<windstream_point x="845.5" y="999" z="354.5"/>
+		<windstream_point x="832.5" y="1059" z="346.8"/>
+		<windstream_point x="821.5" y="1117.3" z="339"/>
+		<windstream_point x="821.8" y="1168.2" z="331.5"/>
+		<windstream_point x="845.9" y="1206.5" z="324.1"/>
+		<windstream_point x="892.7" y="1232" z="316.8"/>
+		<windstream_point x="939.6" y="1247.7" z="310.9"/>
+		<windstream_point x="972.2" y="1254" z="307.3"/>
+		<windstream_point x="999" y="1249.3" z="305.7"/>
+	</flypath_location>
+	<flypath_location id="148" sx="514" sy="1213" sz="326" sworld="220070000" ex="998" ey="1255" ez="364" eworld="220070000" time="16">
+		<windstream_point x="514" y="1213" z="326"/>
+		<windstream_point x="495.3" y="1259" z="330.1"/>
+		<windstream_point x="486.9" y="1299.1" z="333.5"/>
+		<windstream_point x="497.6" y="1329.2" z="335.8"/>
+		<windstream_point x="520.4" y="1357.8" z="337.3"/>
+		<windstream_point x="550.1" y="1382.6" z="338.4"/>
+		<windstream_point x="583.5" y="1397.4" z="339.3"/>
+		<windstream_point x="617.8" y="1396.3" z="340.2"/>
+		<windstream_point x="652.7" y="1379.2" z="340.8"/>
+		<windstream_point x="689" y="1351.7" z="341.1"/>
+		<windstream_point x="726.6" y="1319.2" z="341.5"/>
+		<windstream_point x="765.6" y="1286.8" z="342.2"/>
+		<windstream_point x="806" y="1259.6" z="343.6"/>
+		<windstream_point x="848.3" y="1243" z="346.2"/>
+		<windstream_point x="895.2" y="1239.4" z="350.9"/>
+		<windstream_point x="945.7" y="1244.9" z="357.1"/>
+	</flypath_location>
+	<flypath_location id="149" sx="2236" sy="1361" sz="332" sworld="220070000" ex="2943" ey="1316" ez="330" eworld="220070000" time="38">
+		<windstream_point x="2236" y="1361" z="362"/>
+		<windstream_point x="2247" y="1318.1" z="336.2"/>
+		<windstream_point x="2254.9" y="1275.3" z="312.1"/>
+		<windstream_point x="2256.7" y="1232.9" z="291.7"/>
+		<windstream_point x="2246.6" y="1192.1" z="277.5"/>
+		<windstream_point x="2221.2" y="1154.1" z="270.9"/>
+		<windstream_point x="2199.2" y="1110.3" z="266.2"/>
+		<windstream_point x="2192.9" y="1053.5" z="259.7"/>
+		<windstream_point x="2194.2" y="988.2" z="253.3"/>
+		<windstream_point x="2201.6" y="922.5" z="247.3"/>
+		<windstream_point x="2213.7" y="861" z="241.5"/>
+		<windstream_point x="2230.9" y="798.6" z="235.6"/>
+		<windstream_point x="2257.6" y="746.8" z="231.1"/>
+		<windstream_point x="2296.5" y="713.2" z="228.8"/>
+		<windstream_point x="2342.1" y="685.1" z="227.4"/>
+		<windstream_point x="2393.5" y="666.4" z="227.1"/>
+		<windstream_point x="2450.8" y="663.1" z="228.3"/>
+		<windstream_point x="2515.6" y="681.1" z="231.5"/>
+		<windstream_point x="2598.5" y="720.5" z="236.4"/>
+		<windstream_point x="2689.4" y="773.8" z="242.6"/>
+		<windstream_point x="2773.8" y="833" z="249.7"/>
+		<windstream_point x="2837.2" y="890.1" z="257.3"/>
+		<windstream_point x="2864.6" y="938.3" z="265.3"/>
+		<windstream_point x="2849.6" y="983.2" z="274.8"/>
+		<windstream_point x="2808.3" y="1026.5" z="285.1"/>
+		<windstream_point x="2759.6" y="1067.2" z="295"/>
+		<windstream_point x="2722.4" y="1104.9" z="303.6"/>
+		<windstream_point x="2702.4" y="1140.1" z="310.3"/>
+		<windstream_point x="2683.1" y="1174.4" z="316.4"/>
+		<windstream_point x="2667.7" y="1206.6" z="321.7"/>
+		<windstream_point x="2659.6" y="1235.4" z="326.1"/>
+		<windstream_point x="2662.5" y="1259.4" z="329.5"/>
+		<windstream_point x="2679.5" y="1277.5" z="331.8"/>
+		<windstream_point x="2707.7" y="1290.8" z="333"/>
+		<windstream_point x="2744.4" y="1300.4" z="333.4"/>
+		<windstream_point x="2788.1" y="1306.9" z="333.1"/>
+		<windstream_point x="2836.9" y="1311.2" z="332.4"/>
+		<windstream_point x="2889.1" y="1314" z="331.3"/>
+	</flypath_location>
+	<flypath_location id="150" sx="2659" sy="2028" sz="442" sworld="220070000" ex="2683" ey="1990" ez="524" eworld="220070000" time="25">
+		<windstream_point x="2659" y="2028" z="442"/>
+		<windstream_point x="2650" y="1980.4" z="419.9"/>
+		<windstream_point x="2646.8" y="1931.9" z="408.2"/>
+		<windstream_point x="2649.2" y="1881.8" z="409.2"/>
+		<windstream_point x="2652" y="1830.3" z="414.5"/>
+		<windstream_point x="2656.7" y="1779" z="421.8"/>
+		<windstream_point x="2665.1" y="1729.4" z="429.3"/>
+		<windstream_point x="2679" y="1683" z="435"/>
+		<windstream_point x="2706.5" y="1638" z="436.4"/>
+		<windstream_point x="2747.3" y="1601.9" z="436.4"/>
+		<windstream_point x="2791.9" y="1589.1" z="441.3"/>
+		<windstream_point x="2847.6" y="1598.3" z="452.8"/>
+		<windstream_point x="2901.1" y="1622" z="465.4"/>
+		<windstream_point x="2931.5" y="1655.3" z="472.9"/>
+		<windstream_point x="2937.4" y="1699.5" z="475"/>
+		<windstream_point x="2929.9" y="1751.3" z="474.4"/>
+		<windstream_point x="2917" y="1804.2" z="472.7"/>
+		<windstream_point x="2905.3" y="1854.5" z="471.7"/>
+		<windstream_point x="2888" y="1906" z="470.2"/>
+		<windstream_point x="2854.5" y="1937.9" z="462.5"/>
+		<windstream_point x="2800.2" y="1947.1" z="441.8"/>
+		<windstream_point x="2739.8" y="1946.9" z="420.3"/>
+		<windstream_point x="2692" y="1948" z="416"/>
+		<windstream_point x="2677.4" y="1952.8" z="461.1"/>
+		<windstream_point x="2679" y="1962" z="519"/>
+	</flypath_location>
+	<flypath_location id="151" sx="2307" sy="1923" sz="445" sworld="220070000" ex="1984" ey="1667" ez="403" eworld="220070000" time="10.1">
+		<windstream_point x="2307" y="1923" z="445"/>
+		<windstream_point x="2264.3" y="1886.5" z="441.8"/>
+		<windstream_point x="2236" y="1842.1" z="439.7"/>
+		<windstream_point x="2222.4" y="1785.1" z="439.1"/>
+		<windstream_point x="2213.6" y="1724" z="438.9"/>
+		<windstream_point x="2201.8" y="1670.3" z="438"/>
+		<windstream_point x="2179" y="1635" z="435"/>
+		<windstream_point x="2142.5" y="1622.8" z="429.4"/>
+		<windstream_point x="2096.8" y="1627.3" z="422"/>
+		<windstream_point x="2044.8" y="1643.1" z="413.3"/>
+		<windstream_point x="1989.6" y="1664.7" z="403.9"/>
+	</flypath_location>
+	<flypath_location id="152" sx="1407" sy="366" sz="590" sworld="210050000" ex="1578" ey="505" ez="550" eworld="210050000" time="5.2">
+		<windstream_point x="1407" y="366" z="590" exit="false"/>
+		<windstream_point x="1427" y="390.9" z="591.6" exit="false"/>
+		<windstream_point x="1448.4" y="416.9" z="592.2" exit="false"/>
+		<windstream_point x="1472.7" y="445" z="590.6" exit="false"/>
+		<windstream_point x="1511" y="486.1" z="579" exit="false"/>
+		<windstream_point x="1565.9" y="504" z="555.5" exit="false"/>
+	</flypath_location>
+	<flypath_location id="153" sx="1610" sy="510" sz="540" sworld="210050000" ex="2430" ey="220" ez="470" eworld="210050000" time="20">
+		<windstream_point x="1610" y="510" z="540" exit="false"/>
+		<windstream_point x="1640" y="510" z="540" exit="false"/>
+		<windstream_point x="1654.9" y="507.3" z="550.8" exit="false"/>
+		<windstream_point x="1673.6" y="503.9" z="566.5" exit="false"/>
+		<windstream_point x="1695.8" y="499.7" z="585.7" exit="false"/>
+		<windstream_point x="1720.8" y="494.8" z="606.8" exit="false"/>
+		<windstream_point x="1748.2" y="489.3" z="628.3" exit="false"/>
+		<windstream_point x="1777.5" y="483.3" z="648.7" exit="false"/>
+		<windstream_point x="1808.3" y="476.8" z="666.4" exit="false"/>
+		<windstream_point x="1840" y="470" z="680" exit="false"/>
+		<windstream_point x="1892.5" y="458.2" z="672.8" exit="false"/>
+		<windstream_point x="1960" y="440" z="650" exit="false"/>
+		<windstream_point x="2021.9" y="419.9" z="628.7" exit="false"/>
+		<windstream_point x="2084.7" y="397.7" z="605.1" exit="false"/>
+		<windstream_point x="2150" y="370" z="580" exit="false"/>
+		<windstream_point x="2218.1" y="336.5" z="553.7" exit="false"/>
+		<windstream_point x="2287.9" y="299.6" z="526.3" exit="false"/>
+		<windstream_point x="2358.7" y="260.3" z="498.3" exit="false"/>
+	</flypath_location>
+	<flypath_location id="154" sx="2529" sy="183" sz="445" sworld="210050000" ex="2420" ey="340" ez="510" eworld="210050000" time="18">
+		<windstream_point x="2529" y="183" z="445" exit="false"/>
+		<windstream_point x="2533" y="203.7" z="443.2" exit="false"/>
+		<windstream_point x="2537.9" y="233.9" z="445.2" exit="false"/>
+		<windstream_point x="2542.6" y="268.6" z="454.5" exit="false"/>
+		<windstream_point x="2545" y="305" z="470" exit="false"/>
+		<windstream_point x="2541.1" y="343.7" z="493" exit="false"/>
+		<windstream_point x="2535" y="370" z="520" exit="false"/>
+		<windstream_point x="2530" y="333" z="550" exit="false"/>
+		<windstream_point x="2531.4" y="291.1" z="525.9" exit="false"/>
+		<windstream_point x="2525.3" y="322" z="494.8" exit="false"/>
+		<windstream_point x="2508" y="420" z="470" exit="false"/>
+		<windstream_point x="2477.5" y="493.1" z="473.5" exit="false"/>
+		<windstream_point x="2441.6" y="508.5" z="487.3" exit="false"/>
+		<windstream_point x="2402.2" y="483.3" z="504.9" exit="false"/>
+		<windstream_point x="2370" y="450" z="520" exit="false"/>
+		<windstream_point x="2350.8" y="414.7" z="528.4" exit="false"/>
+		<windstream_point x="2350" y="380" z="530" exit="false"/>
+		<windstream_point x="2376.6" y="357.2" z="522.8" exit="false"/>
+	</flypath_location>
+	<flypath_location id="155" sx="1796" sy="2821" sz="559" sworld="220070000" ex="1530" ey="2513" ez="400" eworld="220070000" time="17.5">
+		<windstream_point x="1796" y="2821" z="559"/>
+		<windstream_point x="1807.6" y="2791.8" z="562.9"/>
+		<windstream_point x="1808.1" y="2763.1" z="580.8"/>
+		<windstream_point x="1791.1" y="2741" z="597.5"/>
+		<windstream_point x="1763.4" y="2723.1" z="604.7"/>
+		<windstream_point x="1736" y="2704.2" z="601.3"/>
+		<windstream_point x="1707.4" y="2685.6" z="596.1"/>
+		<windstream_point x="1680.3" y="2666.4" z="588.8"/>
+		<windstream_point x="1657.2" y="2645.9" z="579"/>
+		<windstream_point x="1640.9" y="2623.2" z="566.1"/>
+		<windstream_point x="1632.1" y="2597.3" z="549.3"/>
+		<windstream_point x="1628.2" y="2570.1" z="529.3"/>
+		<windstream_point x="1626.1" y="2543.9" z="507.3"/>
+		<windstream_point x="1626.9" y="2520.8" z="481.7"/>
+		<windstream_point x="1633.9" y="2502.3" z="448.7"/>
+		<windstream_point x="1616.1" y="2488.4" z="424.9"/>
+		<windstream_point x="1572.5" y="2480.2" z="410.7"/>
+		<windstream_point x="1540.5" y="2493.9" z="401.5"/>
+	</flypath_location>
+	<flypath_location id="156" sx="1519" sy="2540" sz="380" sworld="220070000" ex="1030" ey="2696" ez="412" eworld="220070000" time="29.9">
+		<windstream_point x="1519" y="2540" z="380"/>
+		<windstream_point x="1507.1" y="2570.4" z="377.9"/>
+		<windstream_point x="1495" y="2600.4" z="375.9"/>
+		<windstream_point x="1482.2" y="2630" z="374.4"/>
+		<windstream_point x="1468.4" y="2658.7" z="373.5"/>
+		<windstream_point x="1453.4" y="2686.4" z="373.4"/>
+		<windstream_point x="1435.6" y="2712.1" z="374.8"/>
+		<windstream_point x="1405.1" y="2728.7" z="382.8"/>
+		<windstream_point x="1382.7" y="2737.3" z="403"/>
+		<windstream_point x="1389.6" y="2730.1" z="430.5"/>
+		<windstream_point x="1414.7" y="2715.3" z="440.7"/>
+		<windstream_point x="1433.9" y="2703.1" z="413.9"/>
+		<windstream_point x="1418.5" y="2703.7" z="393.7"/>
+		<windstream_point x="1385.9" y="2717.4" z="389.2"/>
+		<windstream_point x="1358.8" y="2733.4" z="392.3"/>
+		<windstream_point x="1337.5" y="2756.3" z="402.1"/>
+		<windstream_point x="1327.3" y="2792.7" z="422.3"/>
+		<windstream_point x="1315.5" y="2827.5" z="442.6"/>
+		<windstream_point x="1297.4" y="2857.7" z="459.8"/>
+		<windstream_point x="1276.4" y="2882.3" z="474.5"/>
+		<windstream_point x="1252.4" y="2894.2" z="484.3"/>
+		<windstream_point x="1224.1" y="2893.6" z="489.8"/>
+		<windstream_point x="1198" y="2881" z="488"/>
+		<windstream_point x="1175.6" y="2861.5" z="480.9"/>
+		<windstream_point x="1153.7" y="2840.4" z="472.8"/>
+		<windstream_point x="1132.2" y="2817.9" z="463.8"/>
+		<windstream_point x="1111" y="2794.4" z="454.1"/>
+		<windstream_point x="1090" y="2769.9" z="443.8"/>
+		<windstream_point x="1069.2" y="2744.8" z="433"/>
+		<windstream_point x="1048.5" y="2719.2" z="422"/>
+	</flypath_location>
+	<flypath_location id="157" sx="1124" sy="2752" sz="432" sworld="220070000" ex="1699" ey="2535" ez="520" eworld="220070000" time="16.2">
+		<windstream_point x="1124" y="2752" z="432" exit="false"/>
+		<windstream_point x="1154.7" y="2776.2" z="434.3" exit="false"/>
+		<windstream_point x="1210.1" y="2803.3" z="451.1" exit="false"/>
+		<windstream_point x="1261.3" y="2805.4" z="461.9" exit="false"/>
+		<windstream_point x="1312.9" y="2805.6" z="470.8" exit="false"/>
+		<windstream_point x="1361.8" y="2801.3" z="479" exit="false"/>
+		<windstream_point x="1403.4" y="2787.9" z="486.9" exit="false"/>
+		<windstream_point x="1433" y="2761.2" z="495" exit="false"/>
+		<windstream_point x="1449.9" y="2721.6" z="504" exit="false"/>
+		<windstream_point x="1461.1" y="2674.1" z="512.3" exit="false"/>
+		<windstream_point x="1474.2" y="2623.6" z="518.3" exit="false"/>
+		<windstream_point x="1496.6" y="2571.6" z="519" exit="false"/>
+		<windstream_point x="1531.1" y="2503.8" z="508.6" exit="false"/>
+		<windstream_point x="1570.2" y="2458.4" z="500.1" exit="false"/>
+		<windstream_point x="1609" y="2460.2" z="502.3" exit="false"/>
+		<windstream_point x="1649.4" y="2486.6" z="509" exit="false"/>
+		<windstream_point x="1690.7" y="2526.4" z="518.1" exit="false"/>
+	</flypath_location>
+	<flypath_location id="158" sx="230" sy="114" sz="35" sworld="300020000" ex="230" ey="140" ez="35" eworld="300020000" time="8">
+		<windstream_point x="230" y="114" z="35"/>
+		<windstream_point x="210" y="84" z="35"/>
+		<windstream_point x="180" y="60" z="35"/>
+		<windstream_point x="150" y="90" z="35"/>
+		<windstream_point x="140" y="128" z="35"/>
+		<windstream_point x="150" y="166" z="35"/>
+		<windstream_point x="180" y="196" z="35"/>
+		<windstream_point x="210" y="170" z="35"/>
+	</flypath_location>
+	<flypath_location id="159" sx="398" sy="553" sz="319" sworld="300250000" ex="881" ey="643" ez="187" eworld="300250000" time="26">
+		<windstream_point x="398" y="553" z="319" exit="false"/>
+		<windstream_point x="401" y="556.9" z="319.7" exit="false"/>
+		<windstream_point x="404.2" y="561.5" z="317.9" exit="false"/>
+		<windstream_point x="408.2" y="570.1" z="301" exit="false"/>
+		<windstream_point x="417.4" y="603.9" z="188.8" exit="false"/>
+		<windstream_point x="413.1" y="659.9" z="164.4" exit="false"/>
+		<windstream_point x="411.9" y="688.2" z="161.6" exit="false"/>
+		<windstream_point x="410.4" y="709.8" z="158.3" exit="false"/>
+		<windstream_point x="410.8" y="729" z="154.9" exit="false"/>
+		<windstream_point x="415.6" y="748.1" z="150" exit="false"/>
+		<windstream_point x="433.8" y="771.9" z="138.3" exit="false"/>
+		<windstream_point x="473.7" y="789.5" z="122.6" exit="false"/>
+		<windstream_point x="510" y="770.5" z="129.8" exit="false"/>
+		<windstream_point x="546.7" y="738.3" z="144.4" exit="false"/>
+		<windstream_point x="583.4" y="712.5" z="152" exit="false"/>
+		<windstream_point x="621.7" y="702.5" z="142.1" exit="false"/>
+		<windstream_point x="656.4" y="697.5" z="130.3" exit="false"/>
+		<windstream_point x="679.8" y="688.6" z="130.4" exit="false"/>
+		<windstream_point x="698.7" y="681.2" z="135.7" exit="false"/>
+		<windstream_point x="724.5" y="682.9" z="142.1" exit="false"/>
+		<windstream_point x="754.6" y="690.5" z="149.3" exit="false"/>
+		<windstream_point x="785.9" y="700.3" z="157.1" exit="false"/>
+		<windstream_point x="817.1" y="709.3" z="165" exit="false"/>
+		<windstream_point x="846.3" y="714.4" z="172.5" exit="false"/>
+		<windstream_point x="871.5" y="709" z="179.5" exit="false"/>
+		<windstream_point x="883.9" y="682.7" z="184.7" exit="false"/>
+	</flypath_location>
+	<flypath_location id="160" sx="398" sy="553" sz="318" sworld="300250000" ex="1279" ey="597" ez="304" eworld="300250000" time="24.6">
+		<windstream_point x="398" y="553" z="318" exit="false"/>
+		<windstream_point x="418.5" y="596.2" z="298.4" exit="false"/>
+		<windstream_point x="440.5" y="637.1" z="279.8" exit="false"/>
+		<windstream_point x="465.2" y="673.2" z="263.3" exit="false"/>
+		<windstream_point x="494" y="702.2" z="250" exit="false"/>
+		<windstream_point x="528.4" y="721.9" z="240.8" exit="false"/>
+		<windstream_point x="571" y="728.3" z="237.2" exit="false"/>
+		<windstream_point x="623.4" y="719.3" z="239.6" exit="false"/>
+		<windstream_point x="681.1" y="701.1" z="246.1" exit="false"/>
+		<windstream_point x="739.4" y="680.5" z="254.5" exit="false"/>
+		<windstream_point x="793.4" y="664.1" z="262.8" exit="false"/>
+		<windstream_point x="839.4" y="656.5" z="270.1" exit="false"/>
+		<windstream_point x="879.6" y="653.6" z="278.4" exit="false"/>
+		<windstream_point x="917.3" y="652.2" z="287.4" exit="false"/>
+		<windstream_point x="955.5" y="649.5" z="296.6" exit="false"/>
+		<windstream_point x="997.5" y="643.1" z="305.6" exit="false"/>
+		<windstream_point x="1044.5" y="634.9" z="315" exit="false"/>
+		<windstream_point x="1091.4" y="620.4" z="324.1" exit="false"/>
+		<windstream_point x="1132.6" y="591.4" z="332.1" exit="false"/>
+		<windstream_point x="1168.1" y="538.9" z="339.7" exit="false"/>
+		<windstream_point x="1200.2" y="491.6" z="344.6" exit="false"/>
+		<windstream_point x="1231.1" y="480.2" z="343.9" exit="false"/>
+		<windstream_point x="1258.2" y="498.7" z="337.3" exit="false"/>
+		<windstream_point x="1274.3" y="531.8" z="325.8" exit="false"/>
+		<windstream_point x="1278.8" y="583.4" z="308.5" exit="false"/>
+	</flypath_location>
+	<flypath_location id="161" sx="396" sy="552" sz="320" sworld="300250000" ex="769" ey="863" ez="374" eworld="300250000" time="26.9">
+		<windstream_point x="396" y="552" z="320" exit="false"/>
+		<windstream_point x="403.8" y="582.6" z="277.9" exit="false"/>
+		<windstream_point x="411.4" y="613" z="238.1" exit="false"/>
+		<windstream_point x="418.5" y="642.7" z="202.8" exit="false"/>
+		<windstream_point x="425" y="671.6" z="174.2" exit="false"/>
+		<windstream_point x="430.2" y="699.6" z="156.4" exit="false"/>
+		<windstream_point x="432.5" y="727.8" z="160.7" exit="false"/>
+		<windstream_point x="434.5" y="752.2" z="173.3" exit="false"/>
+		<windstream_point x="439.7" y="768.2" z="176.3" exit="false"/>
+		<windstream_point x="446.1" y="778.3" z="170.2" exit="false"/>
+		<windstream_point x="453.7" y="784.2" z="161.6" exit="false"/>
+		<windstream_point x="463.9" y="786.4" z="154.1" exit="false"/>
+		<windstream_point x="478.3" y="785.4" z="151.3" exit="false"/>
+		<windstream_point x="500.2" y="779.9" z="151.9" exit="false"/>
+		<windstream_point x="526.9" y="767.9" z="158.3" exit="false"/>
+		<windstream_point x="553.5" y="747.6" z="176" exit="false"/>
+		<windstream_point x="580.3" y="701.3" z="223.7" exit="false"/>
+		<windstream_point x="606" y="662.6" z="272.3" exit="false"/>
+		<windstream_point x="630.8" y="651.2" z="300.6" exit="false"/>
+		<windstream_point x="656.4" y="646" z="324.7" exit="false"/>
+		<windstream_point x="679.6" y="647.2" z="345.7" exit="false"/>
+		<windstream_point x="697.3" y="655.1" z="364.5" exit="false"/>
+		<windstream_point x="702" y="674.8" z="380.8" exit="false"/>
+		<windstream_point x="690.5" y="712.3" z="391.8" exit="false"/>
+		<windstream_point x="685.1" y="753.1" z="398.4" exit="false"/>
+		<windstream_point x="719.3" y="786.5" z="395.2" exit="false"/>
+		<windstream_point x="760.8" y="825.4" z="383.6" exit="false"/>
+	</flypath_location>
+	<flypath_location id="162" sx="900" sy="1100" sz="363" sworld="300250000" ex="1083" ey="1121" ez="241" eworld="300250000" time="16.5">
+		<windstream_point x="900" y="1100" z="363" exit="false"/>
+		<windstream_point x="921.5" y="1096.8" z="350.8" exit="false"/>
+		<windstream_point x="934.3" y="1110.7" z="337.1" exit="false"/>
+		<windstream_point x="921.2" y="1165.5" z="320.6" exit="false"/>
+		<windstream_point x="908.1" y="1244.6" z="299.6" exit="false"/>
+		<windstream_point x="930.5" y="1324.2" z="270.4" exit="false"/>
+		<windstream_point x="967" y="1385.7" z="243.8" exit="false"/>
+		<windstream_point x="1023.7" y="1393.5" z="227.7" exit="false"/>
+		<windstream_point x="1057.4" y="1371" z="235.2" exit="false"/>
+		<windstream_point x="1086.7" y="1341.6" z="250.9" exit="false"/>
+		<windstream_point x="1110.6" y="1308.6" z="268" exit="false"/>
+		<windstream_point x="1124.4" y="1275.3" z="281.1" exit="false"/>
+		<windstream_point x="1117.1" y="1243.2" z="284" exit="false"/>
+		<windstream_point x="1082.7" y="1209.9" z="276.7" exit="false"/>
+		<windstream_point x="1053.3" y="1176.3" z="267.5" exit="false"/>
+		<windstream_point x="1049.3" y="1140.9" z="255.6" exit="false"/>
+		<windstream_point x="1073.8" y="1123.2" z="243.8" exit="false"/>
+	</flypath_location>
 	<flypath_location id="221" sx="456.64" sy="1256.94" sz="128.42" sworld="210060000" ex="1213.36" ey="381.59" ez="218.11" eworld="210060000" time="30"/>
 	<flypath_location id="222" sx="1216.96" sy="381.47" sz="218.41" sworld="210060000" ex="456.64" ey="1256" ez="127.54" eworld="210060000" time="30"/>
 	<flypath_location id="223" sx="2681.61" sy="847.99" sz="138.77" sworld="210060000" ex="1217.13" ey="381.75" ez="217.79" eworld="210060000" time="33.6"/>
@@ -184,9 +935,168 @@
 	<flypath_location id="240" sx="533" sy="1867" sz="262.85" sworld="220040000" ex="2431" ey="2060" ez="580.04" eworld="220040000" time="47.8"/>
 	<flypath_location id="274" sx="1843" sy="1774.65" sz="306" sworld="600100000" ex="1433.33" ey="249.75" ez="262.36" eworld="600100000" time="60.5"/>
 	<flypath_location id="275" sx="114" sy="127" sz="348" sworld="600100000" ex="331.05" ey="1414.74" ez="244.78" eworld="600100000" time="50"/>
-	<flypath_location id="276" sx="1484.62" sy="1732.62" sz="480" sworld="210070000" ex="2013.36" ey="1995.25" ez="230.56" eworld="210070000" time="60"/>
-	<flypath_location id="277" sx="1429.44" sy="1471.26" sz="294.66" sworld="220080000" ex="1446.29" ey="1010.78" ez="152.64" eworld="220080000" time="80"/>
-	<flypath_location id="278" sx="711.31" sy="1098.8" sz="231.42" sworld="220080000" ex="521.78" ey="681.62" ez="259.77" eworld="220080000" time="16"/>
+	<flypath_location id="276" sx="1484.62" sy="1732.62" sz="480" sworld="210070000" ex="2013.36" ey="1995.25" ez="230.56" eworld="210070000" time="60">
+		<windstream_point x="1484.6" y="1732.6" z="480"/>
+		<windstream_point x="1483" y="1757.1" z="469.7"/>
+		<windstream_point x="1477.8" y="1816.1" z="444.1"/>
+		<windstream_point x="1468" y="1888.1" z="411.2"/>
+		<windstream_point x="1453.1" y="1951.6" z="379.2"/>
+		<windstream_point x="1429" y="1988.4" z="352.5"/>
+		<windstream_point x="1389.4" y="2006.5" z="324"/>
+		<windstream_point x="1348.5" y="2018.9" z="298.3"/>
+		<windstream_point x="1321.9" y="2037.9" z="281.4"/>
+		<windstream_point x="1314.9" y="2068" z="276.7"/>
+		<windstream_point x="1318.7" y="2102.9" z="280.1"/>
+		<windstream_point x="1328.2" y="2138.4" z="285.8"/>
+		<windstream_point x="1338.2" y="2170.5" z="288.4"/>
+		<windstream_point x="1352.8" y="2192.7" z="283.4"/>
+		<windstream_point x="1371.7" y="2212.7" z="276.6"/>
+		<windstream_point x="1385.9" y="2243.3" z="274.5"/>
+		<windstream_point x="1397.8" y="2279.9" z="274.1"/>
+		<windstream_point x="1410.7" y="2315.3" z="273.9"/>
+		<windstream_point x="1427.4" y="2342.2" z="271"/>
+		<windstream_point x="1450.3" y="2355.8" z="268.5"/>
+		<windstream_point x="1476.8" y="2362" z="262"/>
+		<windstream_point x="1505.8" y="2363.2" z="254.4"/>
+		<windstream_point x="1536.4" y="2360.6" z="247.1"/>
+		<windstream_point x="1567.7" y="2355.7" z="241.6"/>
+		<windstream_point x="1598.6" y="2349.9" z="239.2"/>
+		<windstream_point x="1631.5" y="2341.6" z="242.3"/>
+		<windstream_point x="1666.5" y="2328.9" z="250.1"/>
+		<windstream_point x="1700.3" y="2312.5" z="259.7"/>
+		<windstream_point x="1729.3" y="2293.1" z="268.1"/>
+		<windstream_point x="1754.2" y="2271" z="275.8"/>
+		<windstream_point x="1776.2" y="2245.9" z="284"/>
+		<windstream_point x="1793.1" y="2217.3" z="290.7"/>
+		<windstream_point x="1802.3" y="2185.1" z="294.2"/>
+		<windstream_point x="1801.8" y="2146.8" z="293.2"/>
+		<windstream_point x="1793.3" y="2103.5" z="288.9"/>
+		<windstream_point x="1780.4" y="2059.6" z="283.2"/>
+		<windstream_point x="1766.7" y="2019.9" z="277.8"/>
+		<windstream_point x="1749.2" y="1985" z="272.3"/>
+		<windstream_point x="1727.4" y="1952.9" z="266.2"/>
+		<windstream_point x="1708.7" y="1923.4" z="260.8"/>
+		<windstream_point x="1700.6" y="1896.3" z="257.4"/>
+		<windstream_point x="1705.6" y="1869.5" z="256.1"/>
+		<windstream_point x="1719.1" y="1844.3" z="256.3"/>
+		<windstream_point x="1736.5" y="1824.9" z="258"/>
+		<windstream_point x="1753.4" y="1815.1" z="261.2"/>
+		<windstream_point x="1772.6" y="1815.4" z="268"/>
+		<windstream_point x="1793.8" y="1823.3" z="276.6"/>
+		<windstream_point x="1813.4" y="1836.8" z="283.6"/>
+		<windstream_point x="1827.8" y="1854.5" z="285.8"/>
+		<windstream_point x="1835.2" y="1880.4" z="282.1"/>
+		<windstream_point x="1838.7" y="1912.1" z="274.9"/>
+		<windstream_point x="1842.6" y="1942.8" z="266.8"/>
+		<windstream_point x="1850.8" y="1966.1" z="260.5"/>
+		<windstream_point x="1862.6" y="1982.9" z="255.5"/>
+		<windstream_point x="1876.5" y="1995.7" z="251"/>
+		<windstream_point x="1893" y="2004.5" z="246.8"/>
+		<windstream_point x="1912.4" y="2009.5" z="242.9"/>
+		<windstream_point x="1941.2" y="2008.6" z="238.7"/>
+		<windstream_point x="1974.5" y="2003.6" z="234.7"/>
+		<windstream_point x="2001.9" y="1997.9" z="231.7"/>
+	</flypath_location>
+	<flypath_location id="277" sx="1429.44" sy="1471.26" sz="294.66" sworld="220080000" ex="1446.29" ey="1010.78" ez="152.64" eworld="220080000" time="80">
+		<windstream_point x="1429.4" y="1471.3" z="294.7"/>
+		<windstream_point x="1427.6" y="1442.3" z="291.1"/>
+		<windstream_point x="1422.3" y="1411.5" z="286.6"/>
+		<windstream_point x="1413.9" y="1385.5" z="281.9"/>
+		<windstream_point x="1399.2" y="1359.5" z="278.4"/>
+		<windstream_point x="1380.8" y="1334.2" z="275"/>
+		<windstream_point x="1367.7" y="1313.2" z="270.2"/>
+		<windstream_point x="1357.2" y="1289.4" z="263"/>
+		<windstream_point x="1348.6" y="1249.7" z="247.6"/>
+		<windstream_point x="1360.2" y="1214.1" z="235.9"/>
+		<windstream_point x="1387.3" y="1189.8" z="230"/>
+		<windstream_point x="1418.8" y="1186.6" z="232.1"/>
+		<windstream_point x="1450.7" y="1194" z="235"/>
+		<windstream_point x="1477.6" y="1211.3" z="232.4"/>
+		<windstream_point x="1503.7" y="1230.2" z="228.1"/>
+		<windstream_point x="1533" y="1243.4" z="223.3"/>
+		<windstream_point x="1561.7" y="1247.3" z="220"/>
+		<windstream_point x="1589.1" y="1232.3" z="223.6"/>
+		<windstream_point x="1610" y="1208.4" z="225"/>
+		<windstream_point x="1618.9" y="1183.6" z="213.8"/>
+		<windstream_point x="1617.1" y="1154.3" z="200"/>
+		<windstream_point x="1601.1" y="1117.8" z="190.5"/>
+		<windstream_point x="1581.6" y="1079.9" z="182.9"/>
+		<windstream_point x="1576.5" y="1050.2" z="178.6"/>
+		<windstream_point x="1583.3" y="1027.4" z="177.5"/>
+		<windstream_point x="1593.5" y="1006.1" z="176.6"/>
+		<windstream_point x="1607.3" y="986.2" z="176.1"/>
+		<windstream_point x="1626" y="969.7" z="173.9"/>
+		<windstream_point x="1650.3" y="956.5" z="169.5"/>
+		<windstream_point x="1674.5" y="947.9" z="165.3"/>
+		<windstream_point x="1698.3" y="943.4" z="161.7"/>
+		<windstream_point x="1719.7" y="949.5" z="159.3"/>
+		<windstream_point x="1738" y="968.3" z="158.3"/>
+		<windstream_point x="1757.8" y="984.6" z="157.9"/>
+		<windstream_point x="1779.4" y="997.5" z="157.9"/>
+		<windstream_point x="1805.8" y="1003.8" z="158"/>
+		<windstream_point x="1838.8" y="1003.6" z="158"/>
+		<windstream_point x="1862.9" y="988.8" z="158"/>
+		<windstream_point x="1876.8" y="957.4" z="158"/>
+		<windstream_point x="1881.3" y="924.6" z="158"/>
+		<windstream_point x="1876.4" y="891.4" z="158.2"/>
+		<windstream_point x="1859" y="865.9" z="157.5"/>
+		<windstream_point x="1827.1" y="850" z="155.8"/>
+		<windstream_point x="1802.5" y="832" z="154.8"/>
+		<windstream_point x="1788.5" y="810.2" z="154.8"/>
+		<windstream_point x="1770" y="793.2" z="155.2"/>
+		<windstream_point x="1745.3" y="781.3" z="155.9"/>
+		<windstream_point x="1718.1" y="779.5" z="157.1"/>
+		<windstream_point x="1688.1" y="788.4" z="158.8"/>
+		<windstream_point x="1662.3" y="806.2" z="160.9"/>
+		<windstream_point x="1642.2" y="833.9" z="163.5"/>
+		<windstream_point x="1619.9" y="857.5" z="165.5"/>
+		<windstream_point x="1595.2" y="875.3" z="166.3"/>
+		<windstream_point x="1565.6" y="891" z="175.2"/>
+		<windstream_point x="1531.2" y="906.9" z="194.2"/>
+		<windstream_point x="1496.3" y="916" z="208.4"/>
+		<windstream_point x="1463.1" y="908.4" z="206"/>
+		<windstream_point x="1430.6" y="898" z="197.7"/>
+		<windstream_point x="1397.6" y="897.8" z="191.9"/>
+		<windstream_point x="1368.8" y="905" z="187.7"/>
+		<windstream_point x="1349.7" y="921.4" z="187.5"/>
+		<windstream_point x="1337.2" y="945.5" z="190.5"/>
+		<windstream_point x="1334.4" y="981.9" z="198.9"/>
+		<windstream_point x="1326.5" y="1015.1" z="206.3"/>
+		<windstream_point x="1308.9" y="1040.1" z="210"/>
+		<windstream_point x="1300.7" y="1075.1" z="213.6"/>
+		<windstream_point x="1307.8" y="1110.6" z="220.7"/>
+		<windstream_point x="1328.5" y="1135.5" z="229.8"/>
+		<windstream_point x="1356.9" y="1151.1" z="237.8"/>
+		<windstream_point x="1388.6" y="1163.6" z="242.7"/>
+		<windstream_point x="1421.9" y="1170.8" z="240.8"/>
+		<windstream_point x="1455.2" y="1172.2" z="233.9"/>
+		<windstream_point x="1482.7" y="1167.6" z="227.8"/>
+		<windstream_point x="1512.4" y="1153" z="222.5"/>
+		<windstream_point x="1540.7" y="1126.2" z="216.9"/>
+		<windstream_point x="1549.9" y="1098.3" z="207.5"/>
+		<windstream_point x="1544.7" y="1074.8" z="191.8"/>
+		<windstream_point x="1521.2" y="1057.4" z="176.3"/>
+		<windstream_point x="1482.8" y="1046" z="165"/>
+		<windstream_point x="1463.8" y="1035.4" z="158.4"/>
+	</flypath_location>
+	<flypath_location id="278" sx="711.31" sy="1098.8" sz="231.42" sworld="220080000" ex="521.78" ey="681.62" ez="259.77" eworld="220080000" time="16">
+		<windstream_point x="711.3" y="1098.8" z="231.4" exit="false"/>
+		<windstream_point x="707.9" y="1060.9" z="230" exit="false"/>
+		<windstream_point x="702.3" y="1009.4" z="231.4" exit="false"/>
+		<windstream_point x="694.8" y="960" z="239.9" exit="false"/>
+		<windstream_point x="685.8" y="927.1" z="260.4" exit="false"/>
+		<windstream_point x="675.9" y="910.5" z="298.2" exit="false"/>
+		<windstream_point x="663.4" y="900.6" z="342" exit="false"/>
+		<windstream_point x="645.9" y="888.5" z="378" exit="false"/>
+		<windstream_point x="608.7" y="871.1" z="390.9" exit="false"/>
+		<windstream_point x="573.6" y="844.4" z="378.8" exit="false"/>
+		<windstream_point x="547.8" y="807.6" z="346.9" exit="false"/>
+		<windstream_point x="535.6" y="780.4" z="323.3" exit="false"/>
+		<windstream_point x="532.3" y="760.9" z="306.7" exit="false"/>
+		<windstream_point x="532.3" y="743.7" z="292.5" exit="false"/>
+		<windstream_point x="532.2" y="726.3" z="279.3" exit="false"/>
+		<windstream_point x="528.1" y="703.9" z="266.9" exit="false"/>
+	</flypath_location>
 	<flypath_location id="279" sx="809.98" sy="485.39" sz="584.41" sworld="210070000" ex="641.89" ey="327.33" ez="441.35" eworld="210070000" time="12.2"/>
 	<flypath_location id="280" sx="1873.59" sy="2269" sz="376.29" sworld="210070000" ex="1821.7" ey="2248.59" ez="159.32" eworld="210070000" time="27"/>
 	<flypath_location id="281" sx="788.66" sy="524.83" sz="423.2" sworld="210070000" ex="797.47" ey="532.21" ez="567.67" eworld="210070000" time="15.4"/>
@@ -195,7 +1105,25 @@
 	<flypath_location id="284" sx="2516.43" sy="2613.2" sz="182.32" sworld="220080000" ex="2188.94" ey="2233.61" ez="322.83" eworld="220080000" time="33.2"/>
 	<flypath_location id="285" sx="1445" sy="882" sz="159" sworld="220080000" ex="1103.91" ey="986.08" ez="256.18" eworld="220080000" time="25.6"/>
 	<flypath_location id="286" sx="2183.94" sy="2263.11" sz="314.42" sworld="220080000" ex="2426.37" ey="2645.53" ez="211.32" eworld="220080000" time="43.5"/>
-	<flypath_location id="287" sx="805.46" sy="613.59" sz="1703.66" sworld="301390000" ex="634.84" ey="760.42" ez="1597.83" eworld="301390000" time="16.5"/>
+	<flypath_location id="287" sx="805.46" sy="613.59" sz="1703.66" sworld="301390000" ex="634.84" ey="760.42" ez="1597.83" eworld="301390000" time="16.5">
+		<windstream_point x="805.5" y="613.6" z="1703.7" exit="false"/>
+		<windstream_point x="808.5" y="623.1" z="1708.5" exit="false"/>
+		<windstream_point x="804.9" y="633.3" z="1708.7" exit="false"/>
+		<windstream_point x="785.3" y="638.2" z="1696.6" exit="false"/>
+		<windstream_point x="761.8" y="641.9" z="1680.5" exit="false"/>
+		<windstream_point x="745.2" y="647.2" z="1666.3" exit="false"/>
+		<windstream_point x="729.1" y="652.9" z="1653.9" exit="false"/>
+		<windstream_point x="712.8" y="660.8" z="1643.8" exit="false"/>
+		<windstream_point x="690" y="664.5" z="1640.3" exit="false"/>
+		<windstream_point x="648" y="651.9" z="1653.7" exit="false"/>
+		<windstream_point x="606.2" y="641.2" z="1666.4" exit="false"/>
+		<windstream_point x="598.7" y="667.6" z="1645.6" exit="false"/>
+		<windstream_point x="610.7" y="686.3" z="1619.6" exit="false"/>
+		<windstream_point x="622.6" y="711" z="1608" exit="false"/>
+		<windstream_point x="632.1" y="733.8" z="1601.2" exit="false"/>
+		<windstream_point x="635.5" y="747.7" z="1597.9" exit="false"/>
+		<windstream_point x="635.4" y="756.7" z="1597.5" exit="false"/>
+	</flypath_location>
 	<flypath_location id="288" sx="452.42" sy="2254.32" sz="220.94" sworld="220080000" ex="2688.69" ey="1422.51" ez="340.08" eworld="220080000" time="52.8"/>
 	<flypath_location id="289" sx="452.42" sy="2254.32" sz="220.94" sworld="220080000" ex="1578.95" ey="151.19" ez="189.21" eworld="220080000" time="56.6"/>
 	<flypath_location id="290" sx="2688.96" sy="1422.09" sz="339.58" sworld="220080000" ex="450.05" ey="2252.28" ez="221.21" eworld="220080000" time="53.2"/>

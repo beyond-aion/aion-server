@@ -23,6 +23,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerScripts;
 import com.aionemu.gameserver.model.templates.housing.*;
 import com.aionemu.gameserver.model.templates.spawns.SpawnType;
+import com.aionemu.gameserver.model.templates.zone.ZoneInfo;
 import com.aionemu.gameserver.services.TownService;
 import com.aionemu.gameserver.services.player.PlayerService;
 import com.aionemu.gameserver.taskmanager.tasks.housing.AuctionEndTask;
@@ -398,6 +399,25 @@ public class House extends VisibleObject implements Persistable {
 	public boolean matchesLandRace(Race race) {
 		boolean isEly = DataManager.NPC_DATA.getNpcTemplate(getLand().getManagerNpcId()).getTribe() == TribeClass.GENERAL;
 		return race == Race.ELYOS && isEly || race == Race.ASMODIANS && !isEly;
+	}
+
+	/**
+	 * @return True if the player stands on the land of this house, or inside this very studio.
+	 */
+	public boolean isOnLand(Player player) {
+		if (getPosition() == null || !isSpawned() || player.getWorldId() != address.getMapId())
+			return false;
+		if (address.getExitMapId() != null && player.getInstanceId() != getInstanceId()) // studios share one address
+			return false;
+		return isInsideLand(player.getX(), player.getY());
+	}
+
+	public boolean isInsideLand(float x, float y) {
+		String zoneName = "HOUSE_" + address.getId();
+		for (ZoneInfo zone : DataManager.ZONE_DATA.getZones(address.getMapId()))
+			if (zone.getZoneTemplate().getName().equals(zoneName))
+				return zone.getArea().isInside2D(x, y);
+		return false;
 	}
 
 	public void sendScripts(Player player) {

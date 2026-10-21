@@ -16,6 +16,8 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.PositionUtil;
+import com.aionemu.gameserver.utils.audit.AuditLogger;
 
 /**
  * @author SoulKeeper, nerolory
@@ -26,6 +28,7 @@ public class CM_EMOTION extends AionClientPacket {
 	 * Logger
 	 */
 	private static final Logger log = LoggerFactory.getLogger(CM_EMOTION.class);
+	private static final float MAX_CHAIR_DISTANCE = 10;
 	/**
 	 * Emotion number
 	 */
@@ -117,6 +120,10 @@ public class CM_EMOTION extends AionClientPacket {
 		if (player.isInState(CreatureState.PRIVATE_SHOP) || player.isInAttackMode()
 			&& (emotionType == EmotionType.CHAIR_SIT || emotionType == EmotionType.JUMP))
 			return;
+		if ((emotionType == EmotionType.CHAIR_SIT || emotionType == EmotionType.CHAIR_UP) && !PositionUtil.isInRange(player, x, y, z, MAX_CHAIR_DISTANCE)) {
+			AuditLogger.log(player, "tried to " + emotionType + " at " + x + ", " + y + ", " + z + " from " + player.getPosition());
+			return;
+		}
 
 		if (emotionType == EmotionType.SELECT_TARGET) {
 			if (CustomConfig.CANCEL_ITEM_USE_ON_TARGET_CHANGE) {

@@ -22,21 +22,19 @@ public abstract class AionServerPacket extends BaseServerPacket {
 	}
 
 	/**
-	 * Write and encrypt this packet data for given connection, to given buffer.
+	 * Write and encrypt this packet data for given connection, to given buffer. The buffer needs room for the checksum and the padding that the
+	 * encryption appends to the packet. Leaves the buffer's position at 0 and its limit at the end of the packet.
 	 * 
 	 * @param con
-	 * @param buf
+	 * @param buffer
 	 */
-	public final void write(LoginConnection con) {
+	public final void write(LoginConnection con, ByteBuffer buffer) {
+		setBuf(buffer);
 		buf.putShort((short) 0);
 		buf.put((byte) getOpCode());
 		writeImpl(con);
-		buf.flip();
-		buf.putShort((short) 0);
-		ByteBuffer b = buf.slice();
-
-		short size = (short) (con.encrypt(b) + 2);
-		buf.putShort(0, size);
+		int size = con.encrypt(buf, 2, buf.position() - 2) + 2;
+		buf.putShort(0, (short) size);
 		buf.position(0).limit(size);
 	}
 

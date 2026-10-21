@@ -10,6 +10,7 @@ import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.restrictions.PlayerRestrictions;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.audit.AuditLogger;
 
 /**
  * Receives a request to send a message to the global "Faction" chat.
@@ -19,6 +20,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class CM_MEGAPHONE extends AionClientPacket {
 
+	private static final int MAX_MESSAGE_LENGTH = 512;
 	private String message;
 	private int itemObjId;
 
@@ -36,11 +38,16 @@ public class CM_MEGAPHONE extends AionClientPacket {
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
 
+		if (message.length() > MAX_MESSAGE_LENGTH) {
+			AuditLogger.log(player, "sent megaphone message with " + message.length() + " chars, max is " + MAX_MESSAGE_LENGTH);
+			return;
+		}
+
 		Item item = player.getInventory().getItemByObjId(itemObjId);
 		if (item == null)
 			return;
 
-		if (!PlayerRestrictions.canUseItem(player, item))
+		if (!PlayerRestrictions.canChat(player) || !PlayerRestrictions.canUseItem(player, item))
 			return;
 
 		MegaphoneAction megaphoneAction = item.getItemTemplate().getActions().getItemActions().stream()

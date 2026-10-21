@@ -82,7 +82,7 @@ public class LeagueService {
 		Objects.requireNonNull(alliance, "Alliance can not be null");
 		LeagueMember mainAlliance = new LeagueMember(alliance, 0);
 		League league = new League(mainAlliance);
-		league.setLootGroupRules(new LootGroupRules(LootRuleType.FREEFORALL, 0, 0, 2, 2, 2, 2, 2));
+		league.setLootGroupRules(new LootGroupRules(LootRuleType.FREEFORALL, false, 0, 2, 2, 2, 2, 2));
 		league.addMember(mainAlliance);
 		leagues.put(league.getTeamId(), league);
 		league.onEvent(new LeagueCreateEvent(league));

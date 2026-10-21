@@ -19,10 +19,6 @@ public class CM_AUTH_GG extends AionClientPacket {
 	 */
 	private int sessionId;
 
-	/*
-	 * private final int data1; private final int data2; private final int data3; private final int data4;
-	 */
-
 	/**
 	 * Constructs new instance of <tt>CM_AUTH_GG</tt> packet.
 	 * 
@@ -34,13 +30,9 @@ public class CM_AUTH_GG extends AionClientPacket {
 	}
 
 	@Override
-	protected void readImpl() {
+	protected void readFields() {
 		sessionId = readD();
-		readD();
-		readD();
-		readD();
-		readD();
-		readB(0x0B);
+		readB(16); // zeros in the 4.8 client
 	}
 
 	@Override
@@ -48,7 +40,7 @@ public class CM_AUTH_GG extends AionClientPacket {
 		LoginConnection con = getConnection();
 		if (con.getSessionId() == sessionId) {
 			con.setState(State.AUTHED_GG);
-			con.sendPacket(new SM_AUTH_GG(sessionId));
+			con.sendPacket(new SM_AUTH_GG());
 		} else {
 			con.close(new SM_LOGIN_FAIL(AionAuthResponse.STR_L2AUTH_S_SYSTEM_ERROR)); // Session id is not ok, notify and disconnect client
 		}

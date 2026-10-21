@@ -9,7 +9,6 @@ import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerAppearance;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 import com.aionemu.gameserver.model.items.ItemSlot;
-import com.aionemu.gameserver.model.templates.BoundRadius;
 
 /**
  * This class is holding information about player, that is displayed on char selection screen, such as: player commondata, player's appearance and
@@ -37,7 +36,6 @@ public class PlayerAccountData {
 		this.appearance = appearance;
 		this.cbi = cbi;
 		this.visibleItems = visibleItems;
-		updateBoundingRadius();
 	}
 
 	public CharacterBanInfo getCharBanInfo() {
@@ -92,11 +90,6 @@ public class PlayerAccountData {
 
 	public void setAppearance(PlayerAppearance appearance) {
 		this.appearance = appearance;
-		updateBoundingRadius();
-	}
-
-	public void updateBoundingRadius() {
-		playerCommonData.setBoundingRadius(new BoundRadius(0.25f, 0.25f, appearance.getBoundHeight()));
 	}
 
 	public void setCreationDate(Timestamp creationDate) {

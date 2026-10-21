@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.configs.main.GeoDataConfig;
 import com.aionemu.gameserver.configs.main.GeoDataConfig.Mode;
+import com.aionemu.gameserver.geoEngine.bounding.BoundingBox;
 import com.aionemu.gameserver.geoEngine.collision.CollisionIntention;
 import com.aionemu.gameserver.geoEngine.collision.CollisionResult;
 import com.aionemu.gameserver.geoEngine.collision.CollisionResults;
@@ -310,6 +311,17 @@ public class GeoMap extends Node {
 				log.warn("Door state 2 not available for door {} in world {}", doorId, mapId);
 			}
 		}
+	}
+
+	/**
+	 * @return The bounds of the door geometry (preferably in closed state) or null if the door has no geometry.
+	 */
+	public BoundingBox getDoorBounds(int doorId) {
+		DespawnableNode[] doors = despawnableDoors.get(doorId);
+		if (doors == null)
+			return null;
+		DespawnableNode door = doors[0] != null ? doors[0] : doors[1];
+		return door != null && door.getWorldBound() instanceof BoundingBox box ? box : null;
 	}
 
 	private Set<Integer> getIgnorableDoorIds() {

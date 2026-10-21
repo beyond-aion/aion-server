@@ -17,6 +17,10 @@ import com.aionemu.gameserver.utils.audit.AuditLogger;
  */
 public class CM_HOUSE_SCRIPT extends AionClientPacket {
 
+	/**
+	 * Limit of the script block (both sizes and the compressed script), the client refuses to send larger ones.
+	 */
+	private static final int MAX_SCRIPT_BLOCK_SIZE = 3072;
 	private int address;
 	private int scriptId;
 	private int totalSize;
@@ -33,20 +37,23 @@ public class CM_HOUSE_SCRIPT extends AionClientPacket {
 		address = readD();
 		scriptId = readUC();
 		totalSize = readUH();
-		if (totalSize > 0) {
+		if (totalSize > 0 && totalSize <= MAX_SCRIPT_BLOCK_SIZE) {
 			compressedSize = readD();
-			if (compressedSize <= SM_HOUSE_SCRIPTS.MAX_COMPRESSED_SCRIPT_SIZE) {
-				uncompressedSize = readD();
+			uncompressedSize = readD();
+			if (compressedSize >= 0 && compressedSize <= totalSize - 8)
 				scriptContent = readB(compressedSize);
-			}
 		}
 	}
 
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
-		if (compressedSize > SM_HOUSE_SCRIPTS.MAX_COMPRESSED_SCRIPT_SIZE) {
+		if (totalSize > MAX_SCRIPT_BLOCK_SIZE) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_SCRIPT_OVERFLOW());
+			return;
+		}
+		if (totalSize > 0 && scriptContent == null) {
+			AuditLogger.log(player, "sent a house script of " + compressedSize + " bytes in a block of " + totalSize + " bytes");
 			return;
 		}
 		House house = player.getActiveHouse();
@@ -54,6 +61,8 @@ public class CM_HOUSE_SCRIPT extends AionClientPacket {
 			AuditLogger.log(player, "tried to modify script of house they don't own (address " + address + ")");
 			return;
 		}
+		if (!house.isOnLand(player))
+			return;
 		PlayerScripts scripts = house.getPlayerScripts();
 		if (totalSize == 0)
 			scripts.remove(scriptId);

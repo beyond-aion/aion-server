@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.configs.main.LoggingConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Equipment;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -87,7 +88,7 @@ public class ItemService {
 		}
 
 		if (itemTemplate.isStackable())
-			count = addStackableItem(player, itemTemplate, count, allowInventoryOverflow, predicate);
+			count = addStackableItem(player, itemTemplate, count, sourceItem, allowInventoryOverflow, predicate);
 		else
 			count = addNonStackableItem(player, itemTemplate, count, sourceItem, allowInventoryOverflow, predicate);
 
@@ -105,11 +106,9 @@ public class ItemService {
 		Storage inventory = player.getInventory();
 		while ((allowInventoryOverflow || !inventory.isFull(itemTemplate.getExtraInventoryId())) && count > 0) {
 			Item newItem = ItemFactory.newItem(itemTemplate.getTemplateId());
-
-			ExpireTimerTask.getInstance().registerExpirable(newItem, player);
-			if (sourceItem != null) {
+			if (sourceItem != null)
 				copyItemInfo(sourceItem, newItem);
-			}
+			ExpireTimerTask.getInstance().registerExpirable(newItem, player);
 			predicate.changeItem(newItem);
 			inventory.add(newItem, predicate.getAddType());
 			count--;
@@ -118,9 +117,23 @@ public class ItemService {
 	}
 
 	/**
-	 * Copy some item values like item stones and enchant level, without any fusion item attributes
+	 * Copy all item values that are not bound to the owner, like expiration, item stones, enchant level and the fusioned item
 	 */
 	public static void copyItemInfo(Item sourceItem, Item newItem) {
+		newItem.setExpireTime(sourceItem.getExpireTime());
+		newItem.setActivationCount(sourceItem.getActivationCount());
+		newItem.setColorExpireTime(sourceItem.getColorExpireTime());
+		newItem.setRndPlumeBonusValue(sourceItem.getRndPlumeBonusValue());
+		if (sourceItem.hasFusionedItem()) {
+			newItem.setFusionedItem(sourceItem.getFusionedItemTemplate(), sourceItem.getFusionedItemBonusStatsId(),
+				sourceItem.getFusionedItemOptionalSockets());
+			if (sourceItem.hasFusionStones()) {
+				for (ManaStone manaStone : sourceItem.getFusionStones())
+					newItem.getFusionStones().add(new ManaStone(newItem.getObjectId(), manaStone.getItemId(), manaStone.getSlot(), PersistentState.NEW));
+			}
+		}
+		if (newItem.getConditioningInfo() != null)
+			newItem.getConditioningInfo().updateChargePoints(sourceItem.getChargePoints());
 		newItem.setOptionalSockets(sourceItem.getOptionalSockets());
 		newItem.setItemCreator(sourceItem.getItemCreator());
 		if (sourceItem.hasManaStones()) {
@@ -145,7 +158,7 @@ public class ItemService {
 	/**
 	 * Add stackable item to inventory
 	 */
-	private static long addStackableItem(Player player, ItemTemplate itemTemplate, long count, boolean allowInventoryOverflow,
+	private static long addStackableItem(Player player, ItemTemplate itemTemplate, long count, Item sourceItem, boolean allowInventoryOverflow,
 		ItemUpdatePredicate predicate) {
 		Collection<Item> items;
 		// dirty & hacky check for arrows and shards...
@@ -171,6 +184,8 @@ public class ItemService {
 
 		while (count > 0 && (allowInventoryOverflow || !inventory.isFull(itemTemplate.getExtraInventoryId()))) {
 			Item newItem = ItemFactory.newItem(itemTemplate.getTemplateId(), count);
+			if (sourceItem != null)
+				newItem.setExpireTime(sourceItem.getExpireTime());
 			count -= newItem.getItemCount();
 			inventory.add(newItem, predicate.getAddType());
 		}

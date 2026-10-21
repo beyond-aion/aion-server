@@ -2,10 +2,12 @@ package com.aionemu.gameserver.network.aion.serverpackets;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.alliance.PlayerAlliance;
+import com.aionemu.gameserver.model.team.alliance.PlayerAllianceGroup;
 import com.aionemu.gameserver.model.team.common.legacy.LootGroupRules;
 import com.aionemu.gameserver.model.team.league.League;
 import com.aionemu.gameserver.network.aion.AionConnection;
@@ -143,35 +145,36 @@ public class SM_ALLIANCE_INFO extends AionServerPacket {
 			writeD(0);
 		}
 		writeD(lootRules.getLootRule().getId());
-		writeD(lootRules.getMisc());
+		writeD(lootRules.isAutoDistributeJunk() ? 1 : 0);
 		writeD(lootRules.getCommonItemAbove());
 		writeD(lootRules.getSuperiorItemAbove());
 		writeD(lootRules.getHeroicItemAbove());
 		writeD(lootRules.getFabledItemAbove());
 		writeD(lootRules.getEternalItemAbove());
 		writeD(lootRules.getMythicItemAbove());
-		writeD(0x02);
-		writeC(0x00);
+		writeD(LootGroupRules.SEVENTH_GRADE_RULE);
+		writeC(0); // always 0
 		writeD(type);
 		writeD(subType); // 3.5
 		writeD(leagueId);
-		for (int a = 0; a < 4; a++) {
-			writeD(a); // group num
-			writeD(1000 + a); // group id
+		int groupNumber = 0;
+		for (PlayerAllianceGroup group : alliance.getGroups().stream().sorted(Comparator.comparingInt(PlayerAllianceGroup::getTeamId)).toList()) {
+			writeD(groupNumber++);
+			writeD(group.getTeamId());
 		}
 		writeD(messageId); // System message ID
 		writeS(messageId != 0 ? message : ""); // System message
 		if (!leagueData.isEmpty()) {
 			writeH(leagueData.size());
 			writeD(lootLeagueRules.getLootRule().getId());
-			writeD(lootLeagueRules.getMisc());
+			writeD(lootLeagueRules.isAutoDistributeJunk() ? 1 : 0);
 			writeD(lootLeagueRules.getCommonItemAbove());
 			writeD(lootLeagueRules.getSuperiorItemAbove());
 			writeD(lootLeagueRules.getHeroicItemAbove());
 			writeD(lootLeagueRules.getFabledItemAbove());
 			writeD(lootLeagueRules.getEternalItemAbove());
 			writeD(lootLeagueRules.getMythicItemAbove());
-			writeD(0x02);
+			writeD(LootGroupRules.SEVENTH_GRADE_RULE);
 			for (AllianceInfo info : leagueData) {
 				writeD(info.getAlliancePosition());
 				writeD(info.getAllianceObjectId());

@@ -20,6 +20,7 @@ public class BoundRadius {
 	private float upper;
 
 	public static final BoundRadius DEFAULT = new BoundRadius(0f, 0f, 0f);
+	public static final BoundRadius PLAYER = new BoundRadius(0.25f, 0.25f, 2f);
 
 	public BoundRadius() {
 	}

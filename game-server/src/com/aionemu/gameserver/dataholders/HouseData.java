@@ -1,9 +1,6 @@
 package com.aionemu.gameserver.dataholders;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import jakarta.xml.bind.Unmarshaller;
@@ -59,5 +56,9 @@ public class HouseData {
 
 	public int size() {
 		return lands.size();
+	}
+
+	public void addAllManagerNpcIdsToSet(Set<Integer> npcIds) {
+		lands.forEach(land -> npcIds.add(land.getManagerNpcId()));
 	}
 }

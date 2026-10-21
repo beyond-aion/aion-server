@@ -33,10 +33,11 @@ public class CM_L2AUTH_LOGIN_CHECK extends AionClientPacket {
 	 */
 	private int loginOk;
 
+	/**
+	 * The value the client got in bytes 16-23 of S_RESULT_PASSPORT (SM_UNK_3_5_1), 0 on a normal login.
+	 */
 	@SuppressWarnings("unused")
-	private int unk1;
-	@SuppressWarnings("unused")
-	private int unk2;
+	private long passportKey;
 
 	/**
 	 * Constructs new instance of <tt>CM_L2AUTH_LOGIN_CHECK </tt> packet
@@ -53,8 +54,7 @@ public class CM_L2AUTH_LOGIN_CHECK extends AionClientPacket {
 		playOk1 = readD();
 		accountId = readD();
 		loginOk = readD();
-		unk1 = readD();
-		unk2 = readD();
+		passportKey = readQ();
 	}
 
 	@Override

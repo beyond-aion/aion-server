@@ -251,7 +251,7 @@
 		</spawn>
 		<!-- Cute Ribbit -->
 		<spawn npc_id="203538" respawn_time="295">
-			<spot x="940.402" y="2291.84" z="265.465" h="77"/>
+			<spot x="940.402" y="2291.84" z="265.465" h="77" random_walk="5"/>
 		</spawn>
 		<!-- Dabi -->
 		<spawn npc_id="203534" respawn_time="295">

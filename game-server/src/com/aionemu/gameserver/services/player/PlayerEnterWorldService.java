@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.services.player;
 
-import static com.aionemu.gameserver.configs.main.SecurityConfig.MultiClientingRestrictionMode.SAME_FACTION;
-
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -157,12 +155,11 @@ public final class PlayerEnterWorldService {
 		Player player = PlayerService.getPlayer(objectId, account);
 		if (!enteringWorld.contains(objectId) && enteringWorld.add(objectId)) {
 			try {
-				if (player.isStaff() || MultiClientingService.tryEnterWorld(player, client)) {
+				Msg denialMsg = player.isStaff() ? null : MultiClientService.tryEnterWorld(player, client);
+				if (denialMsg == null)
 					enterWorld(client, player);
-				} else {
-					Msg msg = SecurityConfig.MULTI_CLIENTING_RESTRICTION_MODE == SAME_FACTION ? Msg.BOTH_FACTIONS : Msg.CONNECTION_ERROR;
-					client.sendPacket(new SM_ENTER_WORLD_CHECK(msg));
-				}
+				else
+					client.sendPacket(new SM_ENTER_WORLD_CHECK(denialMsg));
 			} catch (Throwable ex) {
 				player.getController().delete();
 				pcd.setOnline(false);
@@ -239,7 +236,7 @@ public final class PlayerEnterWorldService {
 		if (pcd.getBonusTitleId() != 0) {
 			player.getTitleList().setBonusTitle(pcd.getBonusTitleId());
 		}
-		client.sendPacket(new SM_MOTION(player.getMotions().getMotions().values()));
+		client.sendPacket(SM_MOTION.list(player.getMotions().getMotions().values()));
 		client.sendPacket(new SM_AFTER_TIME_CHECK_4_7_5());// it is also sent after enter world check
 
 		byte[] uiSettings = player.getPlayerSettings().getUiSettings();
@@ -260,6 +257,7 @@ public final class PlayerEnterWorldService {
 		client.sendPacket(new SM_CHANNEL_INFO(player.getPosition()));
 
 		KiskService.getInstance().onLogin(player);
+		PvpExpLimitService.getInstance().onEnterWorld(player);
 		TeleportService.sendObeliskBindPoint(player);
 		TeleportService.sendKiskBindPoint(player);
 
@@ -273,7 +271,7 @@ public final class PlayerEnterWorldService {
 			LegionService.getInstance().onLogin(player);
 		sendWarehouseItemInfos(client, player);
 		client.sendPacket(new SM_TITLE_INFO(player));
-		client.sendPacket(new SM_EMOTION_LIST((byte) 0, player.getEmotions().getEmotions()));
+		client.sendPacket(new SM_EMOTION_LIST(SM_EMOTION_LIST.Action.LIST, player.getEmotions().getEmotions()));
 		// SM_BD_UNK h 0
 		SiegeService.getInstance().onPlayerLogin(player);
 		client.sendPacket(new SM_PRICES());
@@ -312,7 +310,6 @@ public final class PlayerEnterWorldService {
 		HousingBidService.getInstance().onPlayerLogin(player); // must ensure player mailbox is initialized first
 		AtreianPassportService.getInstance().onLogin(player);
 		PlayerService.sendMacroList(player);
-		client.sendPacket(new SM_RECIPE_LIST(player.getRecipeList().getRecipeList()));
 		BrokerService.getInstance().onPlayerLogin(player);
 		HousingService.getInstance().onPlayerLogin(player); // must ensure player mailbox is initialized first
 		// ----------------------------- Retail sequence -----------------------------

@@ -28,7 +28,7 @@ public class CM_LOOT_ITEM extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
-		if (player == null)
+		if (player == null || player.getLootingNpcOid() != targetObjectId) // items can only be taken from the opened loot list
 			return;
 		DropService.getInstance().requestDropItem(player, targetObjectId, index);
 	}

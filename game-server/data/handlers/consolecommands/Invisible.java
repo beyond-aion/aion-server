@@ -22,9 +22,9 @@ public class Invisible extends ConsoleCommand {
 
 	@Override
 	public void execute(Player player, String... params) {
-		if (!player.isInVisualState(CreatureVisualState.HIDE20)) {
+		if (!player.isInVisualState(CreatureVisualState.GM_INVISIBLE)) {
 			player.getEffectController().setAbnormal(AbnormalState.HIDE);
-			player.setVisualState(CreatureVisualState.HIDE20);
+			player.setVisualState(CreatureVisualState.GM_INVISIBLE);
 			player.getController().onHide();
 			PacketSendUtility.broadcastPacket(player, new SM_PLAYER_STATE(player), true);
 		}
