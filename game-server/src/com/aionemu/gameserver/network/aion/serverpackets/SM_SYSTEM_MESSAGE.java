@@ -25996,6 +25996,13 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
+	 * You cannot receive a quest.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_QUEST_ACQUIRE_ERROR_DEFAULT() {
+		return new SM_SYSTEM_MESSAGE(1401559);
+	}
+
+	/**
 	 * Tiamat has regained power and escaped to safety.
 	 */
 	public static SM_SYSTEM_MESSAGE IDTIAMAT_TIAMAT_COUNTDOWN_OVER() {

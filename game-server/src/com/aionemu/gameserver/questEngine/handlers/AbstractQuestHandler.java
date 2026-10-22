@@ -115,6 +115,14 @@ public abstract class AbstractQuestHandler {
 	}
 
 	/**
+	 * @return True if this quest expects the player to interact with the given npc in its current state. Handlers which can't tell answer true, so
+	 *         they keep behaving as before.
+	 */
+	public boolean isWaitingForInteractionWith(Player player, int npcId) {
+		return true;
+	}
+
+	/**
 	 * This method is called on every handler (which registered the event), after a player entered a map.
 	 */
 	public boolean onEnterWorldEvent(QuestEnv env) {
@@ -435,10 +443,8 @@ public abstract class AbstractQuestHandler {
 							npcHasActiveQuest = true; // TODO correct way to make sure that active quest can be continued at this npc
 					}
 				}
-				boolean npcHasNewQuest = false;
 				for (Integer questId : questNpc.getOnQuestStart()) { // all quest IDs that are registered to be started at this npc
 					if (QuestService.checkStartConditions(player, questId, false)) {
-						npcHasNewQuest = true;
 						QuestTemplate template = DataManager.QUEST_DATA.getQuestById(questId);
 						for (XMLStartCondition startCondition : template.getXMLStartConditions()) {
 							List<FinishedQuestCond> finishedQuests = startCondition.getFinishedPreconditions();
@@ -455,7 +461,8 @@ public abstract class AbstractQuestHandler {
 						}
 					}
 				}
-				return npcHasActiveQuest || npcHasNewQuest ? sendQuestSelectionDialog(env) : closeDialogWindow(env);
+				// only an ongoing quest keeps the window open, quests the npc merely offers don't
+				return npcHasActiveQuest ? sendQuestSelectionDialog(env) : closeDialogWindow(env);
 			}
 		} else {
 			switch (dialogActionId) {
@@ -1017,7 +1024,7 @@ public abstract class AbstractQuestHandler {
 
 		// Check the quests, that have to be done before starting this one and other start conditions, listed in quest_data
 		for (XMLStartCondition cond : template.getXMLStartConditions()) {
-			if (!cond.check(player, false)) {
+			if (!cond.check(player)) {
 				if (qs == null && template.isMission())
 					QuestService.addOrUpdateQuest(player, questId, QuestStatus.LOCKED);
 				return false;
@@ -1083,7 +1090,7 @@ public abstract class AbstractQuestHandler {
 		// Check the quests, that have to be done before starting this one and other start conditions, listed in quest_data
 		missingRequirement = false;
 		for (XMLStartCondition cond : template.getXMLStartConditions()) {
-			if (!cond.check(player, false)) {
+			if (!cond.check(player)) {
 				if (qs != null || !template.isMission()) // fast return if its already locked or no campaign quest
 					return false;
 				else if (hasAnyPreQuestFinished(qsl, cond)) { // recursive check
