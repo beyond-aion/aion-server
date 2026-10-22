@@ -43,7 +43,7 @@ public class PlayerNpcFactionsDAO {
 				}
 			}
 		} catch (Exception e) {
-			log.error("Could not restore Npc faction data for playerObjId: " + player.getObjectId() + " from DB: " + e.getMessage(), e);
+			log.error("Could not restore Npc faction data for playerObjId: {} from DB: {}", player.getObjectId(), e.getMessage(), e);
 		}
 	}
 
@@ -70,7 +70,7 @@ public class PlayerNpcFactionsDAO {
 			stmt.setInt(6, faction.getQuestId());
 			stmt.execute();
 		} catch (Exception e) {
-			log.error("Could not insert Npc faction data for playerObjId: " + playerObjectId + " from DB: " + e.getMessage(), e);
+			log.error("Could not insert Npc faction data for playerObjId: {} from DB: {}", playerObjectId, e.getMessage(), e);
 		}
 	}
 
@@ -84,7 +84,7 @@ public class PlayerNpcFactionsDAO {
 			stmt.setInt(6, faction.getId());
 			stmt.execute();
 		} catch (Exception e) {
-			log.error("Could not update Npc faction data for playerObjId: " + playerObjectId + " from DB: " + e.getMessage(), e);
+			log.error("Could not update Npc faction data for playerObjId: {} from DB: {}", playerObjectId, e.getMessage(), e);
 		}
 	}
 

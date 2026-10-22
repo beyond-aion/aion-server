@@ -21,15 +21,11 @@ import com.aionemu.gameserver.world.World;
 public class SpawnNpc extends AdminCommand {
 
 	public SpawnNpc() {
-		super("spawn", "Spawns npcs and gatherables.");
-
-		// @formatter:off
-		setSyntaxInfo(
-			"<id> - Spawns a temporary object with the specified template ID.",
-			"<id> <static id> [respawn time] - Spawns an object with the specified ID and static ID (default: temporary spawn, optional: respawn time in seconds).",
-			"<item link|ID> - Spawns the house object from given item link or ID."
-		);
-		// @formatter:on
+		super("spawn", "Spawns NPCs and gatherables.", """
+			<ID> - Spawns a temporary object with the specified template ID.
+			<ID> <static ID> [respawn time] - Spawns an object with the specified ID and static ID (default: temporary spawn, optional: respawn time in seconds).
+			<item link|ID> - Spawns the house object from given item link or ID.
+			""");
 	}
 
 	@Override
@@ -50,7 +46,7 @@ public class SpawnNpc extends AdminCommand {
 		int respawnTime = params.length < 3 ? 0 : Integer.parseInt(params[2]);
 
 		if (DataManager.NPC_DATA.getNpcTemplate(npcId) == null && DataManager.GATHERABLE_DATA.getGatherableTemplate(npcId) == null) {
-			sendInfo(admin, "Invalid npc ID.");
+			sendInfo(admin, "Invalid NPC ID.");
 			return;
 		}
 		if (staticId < 0) {

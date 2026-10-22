@@ -1,10 +1,6 @@
 package com.aionemu.gameserver.taskmanager.tasks.housing;
 
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import com.aionemu.gameserver.configs.main.HousingConfig;
@@ -55,7 +51,7 @@ public class AuctionAutoFillTask extends AbstractCronTask {
 				added[0]++;
 			}
 		});
-		log.info("[" + race + "] Added " + added[0] + " new houses automatically to auction.");
+		log.info("[{}] Added {} new houses automatically to auction", race, added[0]);
 	}
 
 	private Set<House> findAuctionedHouses(Race race) {

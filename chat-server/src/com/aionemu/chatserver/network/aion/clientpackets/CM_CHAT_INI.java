@@ -1,18 +1,18 @@
 package com.aionemu.chatserver.network.aion.clientpackets;
 
-import org.jboss.netty.buffer.ChannelBuffer;
+import java.nio.ByteBuffer;
 
 import com.aionemu.chatserver.network.aion.AbstractClientPacket;
+import com.aionemu.chatserver.network.aion.AionConnection;
 import com.aionemu.chatserver.network.aion.serverpackets.SM_CHAT_INI;
-import com.aionemu.chatserver.network.netty.handler.ClientChannelHandler;
 
 /**
  * @author ginho1
  */
 public class CM_CHAT_INI extends AbstractClientPacket {
 
-	public CM_CHAT_INI(ChannelBuffer channelBuffer, ClientChannelHandler clientChannelHandler, byte opCode) {
-		super(channelBuffer, clientChannelHandler, opCode);
+	public CM_CHAT_INI(ByteBuffer buf, AionConnection connection, int opCode) {
+		super(buf, connection, opCode);
 	}
 
 	@Override
@@ -26,6 +26,6 @@ public class CM_CHAT_INI extends AbstractClientPacket {
 
 	@Override
 	protected void runImpl() {
-		clientChannelHandler.sendPacket(new SM_CHAT_INI());
+		getConnection().sendPacket(new SM_CHAT_INI());
 	}
 }

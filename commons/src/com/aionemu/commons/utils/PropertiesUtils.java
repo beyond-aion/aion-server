@@ -79,7 +79,7 @@ public class PropertiesUtils {
 
 	private static List<File> collectPropertiesFiles(File dir, boolean recursive) throws IOException {
 		try (var paths = Files.find(dir.toPath(), recursive ? Integer.MAX_VALUE : 1, (path, attr) -> attr.isRegularFile() && path.toString().endsWith(".properties"))) {
-			return paths.map(Path::toFile).toList();
+			return paths.map(Path::toFile).sorted().toList();
 		}
 	}
 }

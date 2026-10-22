@@ -38,18 +38,17 @@ public class VocolithAI extends GeneralNpcAI {
 	@Override
 	protected void handleDialogStart(Player player) {
 		if (!used.get()) {
-			ItemUseObserver observer = new ItemUseObserver() {
+			ItemUseObserver observer = new ItemUseObserver(player) {
 
 				@Override
-				public void abort() {
+				protected void onAbort() {
 					player.getController().cancelTask(TaskId.ACTION_ITEM_NPC);
 					PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.END_QUESTLOOT, 0, getObjectId()), true);
 					PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), getObjectId(), 0, 2));
-					player.getObserveController().removeObserver(this);
 				}
 			};
 			int delay = 1500;
-			player.getObserveController().attach(observer);
+			player.getObserveController().addObserver(observer);
 			PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), getObjectId(), delay, 1));
 			PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.START_QUESTLOOT, 0, getObjectId()), true);
 			player.getController().addTask(TaskId.ACTION_ITEM_NPC, ThreadPoolManager.getInstance().schedule(() -> {

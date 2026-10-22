@@ -1,12 +1,12 @@
 package com.aionemu.gameserver.model.instance.playerreward;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author Estrayl
@@ -192,7 +192,7 @@ public class PvpInstancePlayerReward extends InstancePlayerReward {
 			}
 			default -> {
 				LoggerFactory.getLogger(PvpInstancePlayerReward.class)
-					.warn("Couldn't get mythic Kunax equipment for " + player + ". Rewards for " + player.getPlayerClass() + " are not implemented");
+					.warn("Couldn't get mythic Kunax equipment for {}. Rewards for {} are not implemented", player, player.getPlayerClass());
 				return 0;
 			}
 		}

@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.model.stats.calc.functions;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.utils.stats.CalculationType;
@@ -20,7 +22,7 @@ public class StatAbsFunction extends StatFunction {
 	}
 
 	@Override
-	public void apply(Stat2 stat, CalculationType... calculationTypes) {
+	public void apply(Stat2 stat, Set<CalculationType> calculationTypes) {
 		if (!isBonus()) {
 			stat.setBase(getValue());
 			stat.setBonus(0);

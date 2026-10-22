@@ -17,19 +17,21 @@ public abstract class AdminCommand extends ChatCommand {
 
 	// only for backwards compatibility TODO: remove when all commands are updated
 	public AdminCommand(String alias) {
-		this(alias, "");
+		this(alias, "", "");
 	}
 
 	/**
-	 * Registers a new admin command.
-	 * 
-	 * @param alias
-	 *          the command name
-	 * @param description
-	 *          description what the command does
+	 * @see AdminCommand(String, String, String)
 	 */
 	public AdminCommand(String alias, String description) {
-		super(PREFIX, alias, description);
+		this(alias, description, "");
+	}
+
+	/**
+	 * @see ChatCommand#ChatCommand(String, String, String, String)
+	 */
+	public AdminCommand(String alias, String description, String syntaxInfo) {
+		super(PREFIX, alias, description, syntaxInfo);
 	}
 
 	@Override
@@ -46,9 +48,8 @@ public abstract class AdminCommand extends ChatCommand {
 			return player.isStaff(); // return false for regular players, so chat will send entered text (this way you can't guess commands without rights)
 
 		if (LoggingConfig.LOG_GMAUDIT)
-			log.info(
-				"[Admin Command] > [Player: " + player.getName() + "]" + (player.getTarget() != null ? "[Target: " + player.getTarget().getName() + "]" : "")
-					+ ": " + getAliasWithPrefix() + " " + String.join(" ", params));
+			log.info("[Admin Command] > [Player: {}]{}: {} {}", player.getName(),
+				player.getTarget() != null ? "[Target: " + player.getTarget().getName() + "]" : "", getAliasWithPrefix(), String.join(" ", params));
 
 		if (!run(player, params))
 			sendInfo(player, "<Error while executing command>");

@@ -47,7 +47,7 @@ public class AccountTimeDAO {
 				}
 			}
 		} catch (Exception e) {
-			LoggerFactory.getLogger(AccountTimeDAO.class).error("Can't get account time for account with id: " + accountId, e);
+			LoggerFactory.getLogger(AccountTimeDAO.class).error("Can't get account time for account with id: {}", accountId, e);
 			return null;
 		}
 		return accountTime;

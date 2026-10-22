@@ -20,14 +20,10 @@ public class Id extends PlayerCommand {
 	private static final char ITEM_ICON = '\uE054'; // bag
 
 	public Id() {
-		super("id", "Shows item/quest/npc IDs.");
-
-		// @formatter:off
-		setSyntaxInfo(
-			" - Shows the ID of the selected object.",
-			"<item|quest> - Shows the ID of the specified item or quest."
-		);
-		// @formatter:on
+		super("id", "Shows item/quest/NPC IDs.", """
+			 - Shows the ID of the selected object.
+			<item|quest> - Shows the ID of the specified item or quest.
+			""");
 	}
 
 	@Override
@@ -80,15 +76,11 @@ public class Id extends PlayerCommand {
 	}
 
 	private char getQuestIcon(QuestTemplate template) {
-		switch (template.getCategory()) {
-			case EVENT:
-				return '\uE039'; // pink
-			case MISSION:
-				return '\uE037'; // golden
-			case IMPORTANT:
-			case SIGNIFICANT:
-				return '\uE03F'; // dark blue
-		}
-		return '\uE034'; // light blue
+		return switch (template.getCategory()) {
+			case EVENT -> '\uE039'; // pink
+			case MISSION -> '\uE037'; // golden
+			case IMPORTANT, SIGNIFICANT -> '\uE03F'; // dark blue
+			default -> '\uE034'; // light blue
+		};
 	}
 }

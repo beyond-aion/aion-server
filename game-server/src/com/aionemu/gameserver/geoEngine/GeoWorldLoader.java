@@ -19,6 +19,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.GameServerError;
+import com.aionemu.gameserver.configs.main.GeoDataConfig;
+import com.aionemu.gameserver.configs.main.GeoDataConfig.Mode;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.geoEngine.collision.CollisionIntention;
 import com.aionemu.gameserver.geoEngine.math.Matrix3f;
@@ -28,7 +30,6 @@ import com.aionemu.gameserver.geoEngine.models.Terrain;
 import com.aionemu.gameserver.geoEngine.scene.*;
 import com.aionemu.gameserver.model.templates.world.WorldMapTemplate;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.world.zone.ZoneName;
 import com.aionemu.gameserver.world.zone.ZoneService;
 
 /**
@@ -40,7 +41,8 @@ public class GeoWorldLoader {
 	private static final Path GEO_DIR = Path.of("data/geo/");
 
 	public static void load(Collection<GeoMap> maps) {
-		loadTerrains(maps);
+		if (GeoDataConfig.MODE == Mode.ON)
+			loadTerrains(maps);
 		load(maps, loadMeshes());
 		// preload mesh collision data for responsive initial collision checks and predictable memory usage
 		ThreadPoolManager.getInstance()
@@ -72,11 +74,11 @@ public class GeoWorldLoader {
 						switch (image.getRaster().getDataBuffer()) {
 							case DataBufferUShort heightmap -> terrain.setHeightmap(heightmap.getData(), image.getWidth(), image.getHeight());
 							case DataBufferByte materials -> terrain.setMaterials(materials.getData(), image.getWidth(), image.getHeight());
-							default -> log.warn(path + " is not a supported terrain data format");
+							default -> log.warn("{} is not a supported terrain data format", path);
 						}
 					}
 				}
-				mapIds.forEach(mapId -> log.warn(mapId + " of " + path + " could not be associated with a map"));
+				mapIds.forEach(mapId -> log.warn("{} of {} could not be associated with a map", mapId, path));
 			});
 		} catch (IOException e) {
 			throw new RuntimeException(e);
@@ -85,13 +87,13 @@ public class GeoWorldLoader {
 			if (terrain.hasHeightmap())
 				map.setTerrain(terrain);
 			else
-				log.warn("Missing terrain heightmap for " + map.getMapId());
+				log.warn("Missing terrain heightmap for {}", map.getMapId());
 		});
 		long terrainMapCount = maps.stream().filter(GeoMap::hasTerrain).count();
 		if (terrainMapCount == 0)
 			log.warn("No terrains were loaded");
 		else
-			log.info("Loaded terrains for " + terrainMapCount + " maps");
+			log.info("Loaded terrains for {} maps", terrainMapCount);
 		if (maps.stream().noneMatch(GeoMap::hasTerrainMaterials))
 			log.warn("No terrain materials were loaded");
 	}
@@ -100,12 +102,12 @@ public class GeoWorldLoader {
 		Set<String> missingMeshes = ConcurrentHashMap.newKeySet();
 		maps.parallelStream().forEach(map -> loadWorld(map, models, missingMeshes));
 		if (!missingMeshes.isEmpty())
-			log.warn(missingMeshes.size() + " meshes are missing:\n" + missingMeshes.stream().sorted().collect(Collectors.joining("\n")));
+			log.warn("{} meshes are missing:\n{}", missingMeshes.size(), missingMeshes.stream().sorted().collect(Collectors.joining("\n")));
 		long loadedMaps = maps.stream().filter(m -> !m.getChildren().isEmpty()).count();
 		if (loadedMaps == 0) {
-			log.warn("No geo maps loaded.");
+			log.warn("No geo maps loaded");
 		} else {
-			log.info("Loaded " + maps.stream().mapToLong(GeoMap::getEntityCount).sum() + " entities on " + loadedMaps + " maps");
+			log.info("Loaded {} entities on {} maps", maps.stream().mapToLong(GeoMap::getEntityCount).sum(), loadedMaps);
 		}
 	}
 
@@ -143,12 +145,16 @@ public class GeoWorldLoader {
 					m.setMaterialId(geo.get());
 					m.setCollisionIntentions(geo.get());
 					intentions |= m.getCollisionIntentions();
+					if (GeoDataConfig.MODE == Mode.MATERIALS_ONLY && m.getMaterialId() == 0)
+						continue;
 					if (node.getName() == null && (m.getMaterialId() == 11 || DataManager.MATERIAL_DATA.getTemplate(m.getMaterialId()) != null))
 						node.setName(name);
 					if (modelCount == 1)
 						singleChildMaterialId = m.getMaterialId();
 					node.attachChild(new Geometry(name, m));
 				}
+				if (node.getChildren().isEmpty())
+					continue;
 				node.setCollisionIntentions(intentions);
 				node.setMaterialId((byte) singleChildMaterialId);
 				if (!name.contains("|")) {
@@ -166,7 +172,7 @@ public class GeoWorldLoader {
 		} catch (IOException | CloneNotSupportedException e) {
 			throw new GameServerError("Could not load meshes", e);
 		}
-		log.info("Loaded " + geoms.size() + " meshes");
+		log.info("Loaded {} meshes", geoms.size());
 		return geoms;
 	}
 
@@ -176,7 +182,7 @@ public class GeoWorldLoader {
 			WorldMapTemplate template = DataManager.WORLD_MAPS_DATA.getTemplate(map.getMapId());
 			boolean shouldHaveEntities = template.getWorldSize() != 0 && !template.isPrison() && !template.getName().equalsIgnoreCase("IDTest_Dungeon") && !template.getName().equalsIgnoreCase("System_Basic");
 			if (shouldHaveEntities)
-				log.warn(geoFile + " is missing");
+				log.warn("{} is missing", geoFile);
 			return;
 		}
 		try (FileChannel roChannel = FileChannel.open((geoFile))) {
@@ -229,7 +235,7 @@ public class GeoWorldLoader {
 							}
 						}
 					}
-				} else {
+				} else if (GeoDataConfig.MODE != Mode.MATERIALS_ONLY) {
 					missingMeshes.add(name);
 				}
 			}
@@ -265,8 +271,7 @@ public class GeoWorldLoader {
 			if (childNumber > 0)
 				name += "_CHILD" + childNumber;
 			geometry.setName(name + "_" + regionId);
-			ZoneName zoneName = ZoneName.createOrGet(geometry.getName() + "_" + worldId);
-			ZoneService.getInstance().createMaterialZoneTemplate(geometry, worldId, zoneName);
+			ZoneService.getInstance().createMaterialZoneTemplate(geometry, worldId);
 		}
 	}
 

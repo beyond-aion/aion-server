@@ -48,7 +48,7 @@ public class KromedesTrialInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void onEnterZone(Player player, ZoneInstance zone) {
-		switch (zone.getAreaTemplate().getZoneName().toString()) {
+		switch (zone.getZoneTemplate().getName()) {
 			case "MANOR_ENTRANCE_300230000":
 				sendMovie(player, 462);
 				break;

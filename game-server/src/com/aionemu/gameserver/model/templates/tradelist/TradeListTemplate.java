@@ -1,14 +1,8 @@
 package com.aionemu.gameserver.model.templates.tradelist;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.*;
 
 /**
  * @author orz
@@ -17,9 +11,6 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "tradelist_template")
 public class TradeListTemplate {
 
-	/**
-	 * Npc Id.
-	 */
 	@XmlAttribute(name = "npc_id", required = true)
 	private int npcId;
 	@XmlAttribute(name = "npc_type")
@@ -37,60 +28,36 @@ public class TradeListTemplate {
 	@XmlElement(name = "tradelist")
 	protected List<TradeTab> tradeTablist;
 
-	/**
-	 * @return List<TradeTab>
-	 */
-	public List<TradeTab> getTradeTablist() {
-		if (tradeTablist == null)
-			tradeTablist = new ArrayList<>();
-		return this.tradeTablist;
-	}
-
 	public int getNpcId() {
 		return npcId;
 	}
 
-	public int getCount() {
-		return tradeTablist.size();
-	}
-
-	/**
-	 * @return the Npc Type
-	 */
 	public TradeNpcType getTradeNpcType() {
 		return tradeNpcType;
 	}
 
-	/**
-	 * @return the sellPriceRate
-	 */
 	public int getSellPriceRate() {
 		return sellPriceRate;
 	}
 
-	/**
-	 * @return the sellPriceRate2 //new 4.7
-	 */
 	public int getSellPriceRate2() {
 		return sellPriceRate2;
 	}
 
-	/**
-	 * @return the apSellPriceRate2 //new 4.7
-	 */
 	public int getApSellPriceRate2() {
 		return apSellPriceRate2;
 	}
 
-	/**
-	 * @return the buyPriceRate
-	 */
 	public int getBuyPriceRate() {
 		return buyPriceRate;
 	}
 
 	public Boolean isSaveCount() {
 		return saveCount;
+	}
+
+	public List<Integer> getTradeTabIds() {
+		return tradeTablist == null ? List.of() : tradeTablist.stream().map(TradeTab::getId).toList();
 	}
 
 	/**

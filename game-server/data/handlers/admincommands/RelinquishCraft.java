@@ -1,7 +1,5 @@
 package admincommands;
 
-import org.apache.commons.lang3.math.NumberUtils;
-
 import com.aionemu.gameserver.model.craft.Profession;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -17,14 +15,10 @@ import com.aionemu.gameserver.world.World;
 public class RelinquishCraft extends AdminCommand {
 
 	public RelinquishCraft() {
-		super("relinquishcraft", "Removes a players crafting expert or master status.");
-
-		// @formatter:off
-		setSyntaxInfo(
-			"<skillId> <expert|master> - Removes your target's master or expert status for the given crafting skill. Affects your own character if no player is targeted.",
-			"<name> <skillId> <expert|master> - Removes the player's master or expert status for the given crafting skill."
-		);
-		// @formatter:on
+		super("relinquishcraft", "Removes a players crafting expert or master status.", """
+			<skill ID> <expert|master> - Removes your target's master or expert status for the given crafting skill. Affects your own character if no player is targeted.
+			<name> <skill ID> <expert|master> - Removes the player's master or expert status for the given crafting skill.
+			""");
 	}
 
 	@Override
@@ -47,7 +41,7 @@ public class RelinquishCraft extends AdminCommand {
 			target = admin.getTarget() instanceof Player player ? player : admin;
 		}
 
-		Profession profession = Profession.getBySkillId(NumberUtils.toInt(params[i++]));
+		Profession profession = Profession.getBySkillId(Integer.parseInt(params[i++]));
 		if (profession == null || !profession.isCrafting()) {
 			sendInfo(admin, "Invalid skill ID.");
 			return;
@@ -57,12 +51,12 @@ public class RelinquishCraft extends AdminCommand {
 			if (RelinquishCraftStatus.relinquishExpertStatus(target, profession, 0))
 				sendInfo(admin, "Successfully removed expert status for " + profession);
 			else
-				sendInfo(admin, target.getName() + " doesn't have " + profession + " on expert.");
+				sendInfo(admin, name(target) + " doesn't have " + profession + " on expert.");
 		} else if ("master".equalsIgnoreCase(params[i])) {
 			if (RelinquishCraftStatus.relinquishMasterStatus(target, profession, 0))
 				sendInfo(admin, "Successfully removed master status for " + profession);
 			else
-				sendInfo(admin, target.getName() + " doesn't have " + profession + " on master.");
+				sendInfo(admin, name(target) + " doesn't have " + profession + " on master.");
 		} else
 			sendInfo(admin);
 	}

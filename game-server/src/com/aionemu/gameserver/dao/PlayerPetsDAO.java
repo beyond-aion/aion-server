@@ -29,7 +29,7 @@ public class PlayerPetsDAO {
 			stmt.setInt(4, petObjectId);
 			stmt.execute();
 		} catch (Exception e) {
-			log.error("Error updating feed status for pet #" + petObjectId, e);
+			log.error("Error updating feed status for pet #{}", petObjectId, e);
 		}
 	}
 
@@ -43,7 +43,7 @@ public class PlayerPetsDAO {
 			stmt.setInt(2, petObjectId);
 			stmt.execute();
 		} catch (Exception e) {
-			log.error("Error update doping for pet #" + petObjectId, e);
+			log.error("Error update doping for pet #{}", petObjectId, e);
 		}
 	}
 
@@ -54,7 +54,7 @@ public class PlayerPetsDAO {
 			stmt.setInt(2, petObjectId);
 			stmt.execute();
 		} catch (Exception e) {
-			log.error("Error update pet #" + petObjectId, e);
+			log.error("Error update pet #{}", petObjectId, e);
 		}
 	}
 
@@ -71,7 +71,7 @@ public class PlayerPetsDAO {
 			stmt.setInt(7, petCommonData.getExpireTime());
 			stmt.execute();
 		} catch (Exception e) {
-			log.error("Error inserting new pet #" + petCommonData.getObjectId() + ", name: " + petCommonData.getName(), e);
+			log.error("Error inserting new pet #{}, name: {}", petCommonData.getObjectId(), petCommonData.getName(), e);
 		}
 	}
 
@@ -80,7 +80,7 @@ public class PlayerPetsDAO {
 			stmt.setInt(1, petObjectId);
 			stmt.execute();
 		} catch (Exception e) {
-			log.error("Error removing pet #" + petObjectId, e);
+			log.error("Error removing pet #{}", petObjectId, e);
 		}
 	}
 
@@ -121,7 +121,7 @@ public class PlayerPetsDAO {
 				}
 			}
 		} catch (Exception e) {
-			log.error("Error loading pets for " + player, e);
+			log.error("Error loading pets for {}", player, e);
 		}
 		return pets;
 	}
@@ -133,7 +133,7 @@ public class PlayerPetsDAO {
 			stmt.setInt(2, petCommonData.getObjectId());
 			stmt.execute();
 		} catch (Exception e) {
-			log.error("Error update pet #" + petCommonData.getObjectId(), e);
+			log.error("Error update pet #{}", petCommonData.getObjectId(), e);
 		}
 	}
 
@@ -149,7 +149,7 @@ public class PlayerPetsDAO {
 			stmt.setInt(6, petCommonData.getObjectId());
 			stmt.execute();
 		} catch (Exception e) {
-			log.error("Error updating mood for pet #" + petCommonData.getObjectId(), e);
+			log.error("Error updating mood for pet #{}", petCommonData.getObjectId(), e);
 			return false;
 		}
 		return true;

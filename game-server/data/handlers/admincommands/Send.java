@@ -6,7 +6,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_CUSTOM_PACKET;
@@ -35,9 +35,9 @@ public class Send extends AdminCommand {
 	private static final String SCHEMAFILE = FOLDER + "packets.xsd";
 
 	public Send() {
-		super("send", "Sends custom packets.");
-
-		setSyntaxInfo("<file> - Sends packets to your client, based on the ./data/packets/<file>.xml template.");
+		super("send", "Sends custom packets.", """
+			<file> - Sends packets to your client, based on the ./data/packets/<file>.xml template.
+			""");
 	}
 
 	@Override

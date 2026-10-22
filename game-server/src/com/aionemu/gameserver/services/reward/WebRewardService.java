@@ -55,13 +55,13 @@ public class WebRewardService {
 		for (RewardEntryItem item : list) {
 			try {
 				if (sendRewardItem(player, item) || executeRewardAction(player, item)) {
-					log.info("[WebRewardService][" + item.getEntryId() + "] " + player + " has received " + item);
+					log.info("[WebRewardService][{}] {} has received {}", item.getEntryId(), player, item);
 					rewarded.add(item.getEntryId());
 				} else {
-					log.warn("[WebRewardService][" + item.getEntryId() + "] " + player + " could not receive " + item);
+					log.warn("[WebRewardService][{}] {} could not receive {}", item.getEntryId(), player, item);
 				}
 			} catch (Exception e) {
-				log.error("[WebRewardService][" + item.getEntryId() + "] error adding " + item + " to " + player, e);
+				log.error("[WebRewardService][{}] error adding {} to {}", item.getEntryId(), item, player, e);
 			}
 		}
 

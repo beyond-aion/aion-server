@@ -1,5 +1,8 @@
 package com.aionemu.gameserver.controllers.observer;
 
+import java.util.EnumSet;
+import java.util.Set;
+
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -12,12 +15,15 @@ import com.aionemu.gameserver.skillengine.model.Skill;
  */
 public class ActionObserver {
 
+	private final Set<ObserverType> observerTypes;
 	private boolean oneTimeUse = false;
 
-	private final ObserverType observerType;
+	public ActionObserver(ObserverType firstType, ObserverType... otherTypes) {
+		observerTypes = EnumSet.of(firstType, otherTypes);
+	}
 
-	public ActionObserver(ObserverType observerType) {
-		this.observerType = observerType;
+	public boolean matches(ObserverType observerType) {
+		return observerTypes.contains(observerType);
 	}
 
 	public void makeOneTimeUse() {
@@ -32,10 +38,6 @@ public class ActionObserver {
 	 * Called when the observer was removed and no longer receives events
 	 */
 	public void onRemoved() {
-	}
-
-	public ObserverType getObserverType() {
-		return observerType;
 	}
 
 	public void moved() {

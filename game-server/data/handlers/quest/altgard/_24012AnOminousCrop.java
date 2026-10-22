@@ -7,7 +7,7 @@ import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.world.zone.ZoneName;
+import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
  * @author Artur, Ritsu, Majka
@@ -24,7 +24,7 @@ public class _24012AnOminousCrop extends AbstractQuestHandler {
 		qe.registerOnLevelChanged(questId);
 		qe.registerQuestNpc(203605).addOnTalkEvent(questId);
 		qe.registerQuestNpc(700096).addOnTalkEvent(questId);
-		qe.registerOnEnterZone(ZoneName.get("MUMU_FARMLAND_220030000"), questId);
+		qe.registerOnEnterZone("MUMU_FARMLAND_220030000", questId);
 	}
 
 	@Override
@@ -73,8 +73,8 @@ public class _24012AnOminousCrop extends AbstractQuestHandler {
 	}
 
 	@Override
-	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) {
-		if (zoneName == ZoneName.get("MUMU_FARMLAND_220030000")) {
+	public boolean onEnterZoneEvent(QuestEnv env, ZoneInstance zone) {
+		if (zone.matches("MUMU_FARMLAND_220030000")) {
 			Player player = env.getPlayer();
 			if (player == null)
 				return false;

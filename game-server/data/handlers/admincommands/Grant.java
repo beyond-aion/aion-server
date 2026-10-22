@@ -14,14 +14,10 @@ import com.aionemu.gameserver.world.World;
 public class Grant extends AdminCommand {
 
 	public Grant() {
-		super("grant", "Grants/revokes account permissions.");
-
-		// @formatter:off
-		setSyntaxInfo(
-				"<a> <level> [name] - Grants the specified access level (default: target's account, optional: specified character's account). 0 will remove the account's access level.",
-				"<m> <level> [name] - Grants the specified membership level (default: target's account, optional: specified character's account). 0 will remove the account's membership level."
-		);
-		// @formatter:on
+		super("grant", "Grants/revokes account permissions.", """
+				a <level> [name] - Grants the specified access level (default: target's account, optional: specified character's account). 0 will remove the account's access level.
+				m <level> [name] - Grants the specified membership level (default: target's account, optional: specified character's account). 0 will remove the account's membership level.
+				""");
 	}
 
 	@Override

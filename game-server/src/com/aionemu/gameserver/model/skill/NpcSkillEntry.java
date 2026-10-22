@@ -10,8 +10,6 @@ import com.aionemu.gameserver.model.templates.npcskill.NpcSkillTemplate;
  */
 public abstract class NpcSkillEntry extends SkillEntry {
 
-	protected long lastTimeUsed = 0;
-
 	public NpcSkillEntry(int skillId, int skillLevel) {
 		super(skillId, skillLevel);
 	}
@@ -24,18 +22,8 @@ public abstract class NpcSkillEntry extends SkillEntry {
 
 	public abstract boolean timeReady(long fightingTimeInMSec);
 
-	public abstract boolean hasCooldown();
-
 	public abstract boolean hasPostSpawnCondition();
 
-	public long getLastTimeUsed() {
-		return lastTimeUsed;
-	}
-
-	public void setLastTimeUsed() {
-		this.lastTimeUsed = System.currentTimeMillis();
-	}
-	
 	public abstract int getPriority();
 	
 	public abstract boolean conditionReady(Creature creature);

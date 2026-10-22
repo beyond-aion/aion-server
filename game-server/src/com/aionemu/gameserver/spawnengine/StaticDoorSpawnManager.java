@@ -31,6 +31,6 @@ public class StaticDoorSpawnManager {
 			GeoService.getInstance().setDoorState(instance.getMapId(), instance.getInstanceId(), data.getId(), staticDoor.isOpen());
 		}
 		if (counter > 0)
-			log.info("Spawned " + counter + " static doors in " + instance);
+			log.info("Spawned {} static doors in {}", counter, instance);
 	}
 }

@@ -1,13 +1,14 @@
 package com.aionemu.chatserver.network.aion.clientpackets;
 
-import org.jboss.netty.buffer.ChannelBuffer;
+import java.nio.ByteBuffer;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.chatserver.model.channel.Channel;
 import com.aionemu.chatserver.model.channel.ChatChannels;
 import com.aionemu.chatserver.network.aion.AbstractClientPacket;
-import com.aionemu.chatserver.network.netty.handler.ClientChannelHandler;
+import com.aionemu.chatserver.network.aion.AionConnection;
 
 /**
  * Request to leave a channel (sent on map change, logout or manually via /leavechannel)
@@ -19,8 +20,8 @@ public class CM_CHANNEL_LEAVE extends AbstractClientPacket {
 	private static final Logger log = LoggerFactory.getLogger(CM_CHANNEL_LEAVE.class);
 	private int channelId;
 
-	public CM_CHANNEL_LEAVE(ChannelBuffer channelBuffer, ClientChannelHandler clientChannelHandler, byte opCode) {
-		super(channelBuffer, clientChannelHandler, opCode);
+	public CM_CHANNEL_LEAVE(ByteBuffer buf, AionConnection connection, int opCode) {
+		super(buf, connection, opCode);
 	}
 
 	@Override
@@ -34,7 +35,7 @@ public class CM_CHANNEL_LEAVE extends AbstractClientPacket {
 	@Override
 	protected void runImpl() {
 		Channel channel = ChatChannels.getChannelById(channelId);
-		if (!clientChannelHandler.getChatClient().removeChannel(channel))
-			log.warn("{}, couldn't leave channel: {} (id: {})", clientChannelHandler.getChatClient(), channel, channelId);
+		if (!getConnection().getChatClient().removeChannel(channel))
+			log.warn("{}, couldn't leave channel: {} (id: {})", getConnection().getChatClient(), channel, channelId);
 	}
 }

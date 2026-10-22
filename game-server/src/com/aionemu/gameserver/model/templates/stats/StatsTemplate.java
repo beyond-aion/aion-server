@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.model.templates.stats;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 
 /**
  * This class is only a container for Stats. Created on: 04.08.2009 14:59:10

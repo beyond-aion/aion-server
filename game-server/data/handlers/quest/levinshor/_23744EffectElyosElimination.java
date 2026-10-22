@@ -10,7 +10,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.SiegeService;
-import com.aionemu.gameserver.world.zone.ZoneName;
+import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
  * @author Pad
@@ -24,15 +24,15 @@ public class _23744EffectElyosElimination extends AbstractQuestHandler {
 	@Override
 	public void register() {
 		qe.registerQuestNpc(832841).addOnTalkEvent(questId);
-		qe.registerOnEnterZone(ZoneName.get("DRAGON_LORDS_SHRINE_600100000"), questId);
-		qe.registerOnEnterZone(ZoneName.get("FLAMEBERTH_DOWNS_600100000"), questId);
+		qe.registerOnEnterZone("DRAGON_LORDS_SHRINE_600100000", questId);
+		qe.registerOnEnterZone("FLAMEBERTH_DOWNS_600100000", questId);
 		qe.registerOnKillInZone("DRAGON_LORDS_SHRINE_600100000", questId);
 		qe.registerOnKillInZone("FLAMEBERTH_DOWNS_600100000", questId);
 	}
 
 	@Override
-	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) {
-		if ((zoneName == ZoneName.get("DRAGON_LORDS_SHRINE_600100000") || zoneName == ZoneName.get("FLAMEBERTH_DOWNS_600100000"))
+	public boolean onEnterZoneEvent(QuestEnv env, ZoneInstance zone) {
+		if ((zone.matches("DRAGON_LORDS_SHRINE_600100000") || zone.matches("FLAMEBERTH_DOWNS_600100000"))
 			&& SiegeService.getInstance().isSiegeInProgress(8011)) {
 			Player player = env.getPlayer();
 			QuestState qs = player.getQuestStateList().getQuestState(questId);
@@ -44,7 +44,7 @@ public class _23744EffectElyosElimination extends AbstractQuestHandler {
 	}
 
 	@Override
-	public boolean onKillInZoneEvent(QuestEnv env) {
+	public boolean onKillInZoneEvent(QuestEnv env, ZoneInstance zone) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.getStatus() != QuestStatus.START)
@@ -52,7 +52,7 @@ public class _23744EffectElyosElimination extends AbstractQuestHandler {
 
 		VisibleObject target = env.getVisibleObject();
 		if (target instanceof Player
-			&& (player.isInsideZone(ZoneName.get("DRAGON_LORDS_SHRINE_600100000")) || player.isInsideZone(ZoneName.get("FLAMEBERTH_DOWNS_600100000")))
+			&& (zone.matches("DRAGON_LORDS_SHRINE_600100000") || zone.matches("FLAMEBERTH_DOWNS_600100000"))
 			&& SiegeService.getInstance().isSiegeInProgress(8011)) {
 			if ((player.getLevel() >= (((Player) target).getLevel() - 5)) && (player.getLevel() <= (((Player) target).getLevel() + 9))) {
 				int var1 = qs.getQuestVarById(1);

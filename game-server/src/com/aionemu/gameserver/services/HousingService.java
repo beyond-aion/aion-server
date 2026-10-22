@@ -57,7 +57,7 @@ public class HousingService {
 		studios = new ConcurrentHashMap<>(HousesDAO.loadHouses(DataManager.HOUSE_DATA.getLands(), true));
 		updateInactiveStateForAllHouses();
 		revokeOwnershipOfDeletedPlayers();
-		log.info("Loaded " + customHouses.size() + " houses and " + studios.size() + " studios");
+		log.info("Loaded {} houses and {} studios", customHouses.size(), studios.size());
 	}
 
 	private void revokeOwnershipOfDeletedPlayers() {
@@ -65,7 +65,7 @@ public class HousingService {
 		Stream.concat(customHouses.values().stream(), studios.values().stream()).forEach(house -> {
 			// houses table has no player_id foreign key because houses need to stay in DB even on player deletion (to keep bidding possible for example)
 			if (house.getOwnerId() > 0 && !playerIds.contains(house.getOwnerId())) {
-				log.warn("Player with ID " + house.getOwnerId() + " got deleted from DB, revoking house ownership for house " + house.getAddress().getId());
+				log.warn("Player with ID {} got deleted from DB, revoking house ownership for house {}", house.getOwnerId(), house.getAddress().getId());
 				changeOwner(house, 0);
 			}
 		});
@@ -170,7 +170,7 @@ public class HousingService {
 			spawnedCounter++;
 		}
 		if (spawnedCounter > 0) {
-			log.info("Spawned " + spawnedCounter + " houses in " + instance);
+			log.info("Spawned {} houses in {}", spawnedCounter, instance);
 		}
 	}
 

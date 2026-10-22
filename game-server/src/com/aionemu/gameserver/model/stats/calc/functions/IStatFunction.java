@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.model.stats.calc.functions;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.model.stats.calc.StatOwner;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
@@ -20,7 +22,7 @@ public interface IStatFunction extends Comparable<IStatFunction> {
 
 	boolean validate(Stat2 stat);
 
-	void apply(Stat2 stat, CalculationType... calculationTypes);
+	void apply(Stat2 stat, Set<CalculationType> calculationTypes);
 
 	StatOwner getOwner();
 

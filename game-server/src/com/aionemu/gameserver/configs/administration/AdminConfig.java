@@ -58,8 +58,6 @@ public class AdminConfig {
 	public static byte HOUSE_SHOW_ADDRESS;
 	@Property(key = "gameserver.administration.dialog_info", defaultValue = "9")
 	public static byte DIALOG_INFO;
-	@Property(key = "gameserver.administration.enchant_info", defaultValue = "9")
-	public static byte ENCHANT_INFO;
 	@Property(key = "gameserver.administration.zone_info", defaultValue = "9")
 	public static byte ZONE_INFO;
 	@Property(key = "gameserver.administration.audit_info", defaultValue = "9")

@@ -79,7 +79,7 @@ public class ItemCooldownsDAO {
 			st.executeBatch();
 			con.commit();
 		} catch (SQLException e) {
-			log.error("Error while storing item cooldowns for " + player, e);
+			log.error("Error while storing item cooldowns for {}", player, e);
 		}
 	}
 

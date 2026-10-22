@@ -41,7 +41,7 @@ public class BannedMacDAO {
 			ps.setString(3, entry.getDetails());
 			return ps.executeUpdate() > 0;
 		} catch (SQLException e) {
-			LoggerFactory.getLogger(BannedMacDAO.class).error("Error storing BannedMacEntry " + entry.getMac(), e);
+			LoggerFactory.getLogger(BannedMacDAO.class).error("Error storing BannedMacEntry {}", entry.getMac(), e);
 		}
 		return false;
 	}
@@ -51,7 +51,7 @@ public class BannedMacDAO {
 			ps.setString(1, address);
 			return ps.executeUpdate() > 0;
 		} catch (SQLException e) {
-			LoggerFactory.getLogger(BannedMacDAO.class).error("Error removing BannedMacEntry " + address, e);
+			LoggerFactory.getLogger(BannedMacDAO.class).error("Error removing BannedMacEntry {}", address, e);
 		}
 		return false;
 	}

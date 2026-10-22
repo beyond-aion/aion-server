@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import com.aionemu.chatserver.model.channel.Channel;
-import com.aionemu.chatserver.network.netty.handler.ClientChannelHandler;
+import com.aionemu.chatserver.network.aion.AionConnection;
 
 /**
  * @author ATracer, Neon
@@ -20,7 +20,7 @@ public class ChatClient {
 	private final Race race;
 	private final byte accessLevel;
 	private byte[] identifier;
-	private ClientChannelHandler channelHandler;
+	private AionConnection connection;
 	private long gagTime;
 
 	/**
@@ -71,12 +71,12 @@ public class ChatClient {
 		this.identifier = identifier;
 	}
 
-	public ClientChannelHandler getChannelHandler() {
-		return channelHandler;
+	public AionConnection getConnection() {
+		return connection;
 	}
 
-	public void setChannelHandler(ClientChannelHandler channelHandler) {
-		this.channelHandler = channelHandler;
+	public void setConnection(AionConnection connection) {
+		this.connection = connection;
 	}
 
 	public void addChannel(Channel channel) {

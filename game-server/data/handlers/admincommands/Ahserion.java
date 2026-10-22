@@ -10,14 +10,10 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 public class Ahserion extends AdminCommand {
 
 	public Ahserion() {
-		super("ahserion", "Starts/stops Ahserions Flight.");
-
-		// @formatter:off
-		setSyntaxInfo(
-			"<start> - Starts Ahserions Flight.",
-			"<stop> - Stops Ahserions Flight."
-		);
-		// @formatter:on
+		super("ahserion", "Starts/stops Ahserion's Flight.", """
+			start - Starts Ahserion's Flight.
+			stop - Stops Ahserion's Flight.
+			""");
 	}
 
 	@Override

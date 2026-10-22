@@ -18,20 +18,16 @@ import com.aionemu.gameserver.world.World;
 public class LegionCommand extends AdminCommand {
 
 	public LegionCommand() {
-		super("legion", "Modifies a legion.");
-
-		// @formatter:off
-		setSyntaxInfo(
-			"info <legion name> - List legion members.",
-			"add <legion name> <player name> - Adds the player to the legion.",
-			"kick <player name> - Kicks the player from their legion.",
-			"disband <legion name> - Disbands the legion.",
-			"rename <legion name> <new name> - Changes the legion's name.",
-			"setbg <player name> - Appoints the player as brigade general of their legion.",
-			"setlevel <legion name> <level> - Changes the legion's level.",
-			"setpoints <legion name> <points> - Changes the legion's contributing points."
-		);
-		// @formatter:on
+		super("legion", "Modifies a legion.", """
+			info <legion name> - List legion members.
+			add <legion name> <player name> - Adds the player to the legion.
+			kick <player name> - Kicks the player from their legion.
+			disband <legion name> - Disbands the legion.
+			rename <legion name> <new name> - Changes the legion's name.
+			setbg <player name> - Appoints the player as brigade general of their legion.
+			setlevel <legion name> <level> - Changes the legion's level.
+			setpoints <legion name> <points> - Changes the legion's contributing points.
+			""");
 	}
 
 	@Override
@@ -90,9 +86,9 @@ public class LegionCommand extends AdminCommand {
 			else if (target.getLegionMember().isBrigadeGeneral())
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GUILD_BANISH_CAN_BANISH_MASTER());
 			else if (LegionService.getInstance().leaveLegion(target, true)) 
-				sendInfo(player, target.getName() + " was kicked from the legion.");
+				sendInfo(player, name(target) + " was kicked from the legion.");
 			else
-				sendInfo(player, target.getName() + " could not be kicked from the legion.");
+				sendInfo(player, name(target) + " could not be kicked from the legion.");
 		} else if (params[0].equalsIgnoreCase("add") && params.length >= 3) {
 			Legion legion = getLegion(params[1]);
 			Player target = World.getInstance().getPlayer(Util.convertName(params[2]));
@@ -101,7 +97,7 @@ public class LegionCommand extends AdminCommand {
 			else if (target.isLegionMember())
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GUILD_INVITE_HE_IS_OTHER_GUILD_MEMBER(target.getName()));
 			else if (LegionService.getInstance().addToLegion(legion, target, player))
-				sendInfo(player, target.getName() + " was added to " + legion.getName());
+				sendInfo(player, name(target) + " was added to " + legion.getName());
 		} else if (params[0].equalsIgnoreCase("setbg")) {
 			PlayerCommonData playerCommonData = PlayerService.getOrLoadPlayerCommonData(Util.convertName(params[1]));
 			if (playerCommonData == null) {
@@ -124,8 +120,7 @@ public class LegionCommand extends AdminCommand {
 	}
 
 	private Legion getLegion(String name) {
-		if (name.contains("_"))
-			name = name.replaceAll("_", " ");
+		name = name.replace('_', ' ');
 		Legion legion = LegionService.getInstance().getLegion(name.toLowerCase());
 		if (legion == null) {
 			throw new IllegalArgumentException("Legion " + name + " does not exist.");

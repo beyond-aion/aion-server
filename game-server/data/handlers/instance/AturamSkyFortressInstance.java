@@ -23,7 +23,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
-import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author xTz
@@ -208,7 +207,7 @@ public class AturamSkyFortressInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void onEnterZone(Player player, ZoneInstance zone) {
-		if (zone.getAreaTemplate().getZoneName() == ZoneName.get("SKY_FORTRESS_WAREHOUSE_ZONE_300240000")) {
+		if (zone.matches("SKY_FORTRESS_WAREHOUSE_ZONE_300240000")) {
 			// wtf is that? Notify only one player ?
 			if (msgIsSent.compareAndSet(false, true)) {
 				PacketSendUtility.sendPacket(player, STR_MSG_IDStation_Doping_01_AD());

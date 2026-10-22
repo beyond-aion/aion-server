@@ -1,5 +1,8 @@
 package com.aionemu.gameserver.model.skill;
 
+import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.skillengine.model.SkillTemplate;
+
 /**
  * @author ATracer
  */
@@ -25,4 +28,7 @@ public abstract class SkillEntry {
 		this.skillLevel = skillLevel;
 	}
 
+	public SkillTemplate getSkillTemplate() {
+		return DataManager.SKILL_DATA.getSkillTemplate(skillId);
+	}
 }

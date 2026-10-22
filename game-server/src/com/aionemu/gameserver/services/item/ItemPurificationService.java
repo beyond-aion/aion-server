@@ -29,7 +29,7 @@ public class ItemPurificationService {
 	public static boolean isPurificationAllowed(Player player, Item baseItem, int resultItemId) {
 		ItemPurificationTemplate itemPurificationTemplate = DataManager.ITEM_PURIFICATION_DATA.getItemPurificationTemplate(baseItem.getItemId());
 		if (itemPurificationTemplate == null) {
-			log.warn("Item purification template is not available for [resultItemId=" + resultItemId + "]");
+			log.warn("Item purification template is not available for [resultItemId={}]", resultItemId);
 			return false;
 		}
 

@@ -13,9 +13,9 @@ import admincommands.Quest;
 public class Deletecquest extends ConsoleCommand {
 
 	public Deletecquest() {
-		super("deletecquest", "Deletes a quest from the players quest list.");
-
-		setSyntaxInfo("<quest link|ID> - Deletes the quest from your target's quest list (defaults to your character, if no player is targeted).");
+		super("deletecquest", "Deletes a quest from a player's quest list.", """
+			<quest link|ID> - Deletes the quest from your target's quest list (defaults to your character, if no player is targeted).
+			""");
 	}
 
 	@Override

@@ -31,7 +31,7 @@ public class ChatProcessor implements GameEngine {
 		ScriptManager scriptManager = new ScriptManager();
 		scriptManager.setGlobalClassListener(new ChatCommandsLoader(this));
 		scriptManager.load(CommandsConfig.HANDLER_DIRECTORIES);
-		log.info("Loaded " + commandHandlers.size() + " commands.");
+		log.info("Loaded {} commands", commandHandlers.size());
 	}
 
 	public void reload() {

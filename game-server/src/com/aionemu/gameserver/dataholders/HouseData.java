@@ -1,18 +1,15 @@
 package com.aionemu.gameserver.dataholders;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
-import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.Unmarshaller;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlTransient;
+import jakarta.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.templates.housing.HouseAddress;
@@ -59,5 +56,9 @@ public class HouseData {
 
 	public int size() {
 		return lands.size();
+	}
+
+	public void addAllManagerNpcIdsToSet(Set<Integer> npcIds) {
+		lands.forEach(land -> npcIds.add(land.getManagerNpcId()));
 	}
 }

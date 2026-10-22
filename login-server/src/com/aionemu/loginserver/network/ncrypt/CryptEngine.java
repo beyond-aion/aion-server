@@ -1,10 +1,13 @@
 package com.aionemu.loginserver.network.ncrypt;
 
+import java.nio.ByteBuffer;
+
 import com.aionemu.commons.utils.Rnd;
 
 /**
- * Crypto engine for ecnrypting/decrypting packets, error handling and verifying checksum
- * 
+ * Crypto engine for ecnrypting/decrypting packets, error handling and verifying checksum. Works on any {@link ByteBuffer} (heap or direct) by
+ * absolute index; the buffer's position, limit and byte order are not used.
+ *
  * @author EvilSpirit
  */
 public class CryptEngine {
@@ -32,7 +35,7 @@ public class CryptEngine {
 
 	/**
 	 * Update the key for packet encryption/decryption with the Blowfish Cipher
-	 * 
+	 *
 	 * @param newKey
 	 *          new Blowfish Key
 	 */
@@ -42,33 +45,43 @@ public class CryptEngine {
 
 	/**
 	 * Decrypt given data
-	 * 
+	 *
 	 * @param data
-	 *          byte array to be decrypted
+	 *          buffer to be decrypted
 	 * @param offset
-	 *          byte array offset
+	 *          absolute index of the first byte
 	 * @param length
-	 *          byte array length
+	 *          number of bytes
 	 * @return true, if decrypted packet has valid checksum, false overwise
 	 */
-	public boolean decrypt(byte[] data, int offset, int length) {
+	public boolean decrypt(ByteBuffer data, int offset, int length) {
 		cipher.decipher(data, offset, length);
 
 		return verifyChecksum(data, offset, length);
 	}
 
 	/**
-	 * Encrypt given data
-	 * 
+	 * Encrypt given data. The packet grows by its checksum and the padding to whole Blowfish blocks, so the buffer needs up to 12 more bytes after
+	 * it.
+	 *
 	 * @param data
-	 *          byte array to be encrypted
+	 *          buffer to be encrypted
 	 * @param offset
-	 *          byte array offset
+	 *          absolute index of the first byte
 	 * @param length
-	 *          byte array length
-	 * @return length of encrypted byte array
+	 *          number of bytes
+	 * @return length of the encrypted packet
 	 */
-	public int encrypt(byte[] data, int offset, int length) {
+	public int encrypt(ByteBuffer data, int offset, int length) {
+		return encrypt(data, offset, length, Rnd.nextInt());
+	}
+
+	/**
+	 * @param xorKey
+	 *          key of the extra XOR pass over the first packet
+	 */
+	int encrypt(ByteBuffer data, int offset, int length, int xorKey) {
+		int dataLength = length;
 		length += 4;
 
 		// the key is not updated, so the first packet should be encrypted with
@@ -76,12 +89,14 @@ public class CryptEngine {
 		if (!updatedKey) {
 			length += 4;
 			length += 8 - length % 8;
-			encXORPass(data, offset, length, Rnd.nextInt());
+			clear(data, offset + dataLength, length - dataLength);
+			encXORPass(data, offset, length, xorKey);
 			cipher.cipher(data, offset, length);
 			cipher.updateKey(key);
 			updatedKey = true;
 		} else {
 			length += 8 - length % 8;
+			clear(data, offset + dataLength, length - dataLength);
 			appendChecksum(data, offset, length);
 			cipher.cipher(data, offset, length);
 		}
@@ -90,114 +105,83 @@ public class CryptEngine {
 	}
 
 	/**
-	 * Verify checksum in a packet
-	 * 
+	 * Fills the space for the checksum and the padding with zeros, instead of leaving whatever the buffer held there before.
+	 */
+	private void clear(ByteBuffer data, int from, int count) {
+		for (int i = 0; i < count; i++)
+			data.put(from + i, (byte) 0);
+	}
+
+	/**
+	 * Verify checksum in a packet: the 32-bit words of the packet, except for the last one, must XOR to zero. That is what the former byte array
+	 * version computed for a packet at the start of the read buffer; for packets further into the buffer its result depended on their position.
+	 *
 	 * @param data
-	 *          byte array - encrypted packet
+	 *          decrypted packet
 	 * @param offset
-	 *          byte array offset
+	 *          absolute index of the first byte
 	 * @param length
-	 *          byte array size
+	 *          number of bytes
 	 * @return true, if checksum is ok, false overwise
 	 */
-	private boolean verifyChecksum(byte[] data, int offset, int length) {
+	private boolean verifyChecksum(ByteBuffer data, int offset, int length) {
 		if ((length & 3) != 0 || (length <= 4)) {
 			return false;
 		}
 
-		long chksum = 0;
-		int count = length - 4;
-		long check;
-		int i;
-
-		for (i = offset; i < count; i += 4) {
-			check = data[i] & 0xff;
-			check |= data[i + 1] << 8 & 0xff00;
-			check |= data[i + 2] << 0x10 & 0xff0000;
-			check |= data[i + 3] << 0x18 & 0xff000000;
-			chksum ^= check;
-		}
-
-		check = data[i] & 0xff;
-		check |= data[i + 1] << 8 & 0xff00;
-		check |= data[i + 2] << 0x10 & 0xff0000;
-		check |= data[i + 3] << 0x18 & 0xff000000;
-		check = data[i] & 0xff;
-		check |= data[i + 1] << 8 & 0xff00;
-		check |= data[i + 2] << 0x10 & 0xff0000;
-		check |= data[i + 3] << 0x18 & 0xff000000;
+		int chksum = 0;
+		for (int i = 0; i < length - 4; i += 4)
+			chksum ^= BlowfishCipher.getInt(data, offset + i);
 
 		return 0 == chksum;
 	}
 
 	/**
 	 * add checksum to the end of the packet
-	 * 
+	 *
 	 * @param raw
-	 *          byte array - encrypted packet
+	 *          packet to be encrypted
 	 * @param offset
-	 *          byte array offset
+	 *          absolute index of the first byte
 	 * @param length
-	 *          byte array size
+	 *          number of bytes, including the checksum
 	 */
-	private void appendChecksum(byte[] raw, int offset, int length) {
-		long chksum = 0;
+	private void appendChecksum(ByteBuffer raw, int offset, int length) {
+		int chksum = 0;
 		int count = length - 4;
-		long ecx;
-		int i;
 
-		for (i = offset; i < count; i += 4) {
-			ecx = raw[i] & 0xff;
-			ecx |= raw[i + 1] << 8 & 0xff00;
-			ecx |= raw[i + 2] << 0x10 & 0xff0000;
-			ecx |= raw[i + 3] << 0x18 & 0xff000000;
-			chksum ^= ecx;
-		}
+		for (int i = 0; i < count; i += 4)
+			chksum ^= BlowfishCipher.getInt(raw, offset + i);
 
-		ecx = raw[i] & 0xff;
-		ecx |= raw[i + 1] << 8 & 0xff00;
-		ecx |= raw[i + 2] << 0x10 & 0xff0000;
-		ecx |= raw[i + 3] << 0x18 & 0xff000000;
-		raw[i] = (byte) (chksum & 0xff);
-		raw[i + 1] = (byte) (chksum >> 0x08 & 0xff);
-		raw[i + 2] = (byte) (chksum >> 0x10 & 0xff);
-		raw[i + 3] = (byte) (chksum >> 0x18 & 0xff);
+		BlowfishCipher.putInt(raw, offset + count, chksum);
 	}
 
 	/**
 	 * First packet encryption with XOR key (integer - 4 bytes)
-	 * 
+	 *
 	 * @param data
-	 *          byte array to be encrypted
+	 *          packet to be encrypted
 	 * @param offset
-	 *          byte array offset
+	 *          absolute index of the first byte
 	 * @param length
-	 *          byte array length
+	 *          number of bytes
 	 * @param key
 	 *          integer value as key
 	 */
-	private void encXORPass(byte[] data, int offset, int length, int key) {
-		int stop = length - 8;
+	private void encXORPass(ByteBuffer data, int offset, int length, int key) {
+		int stop = offset + length - 8;
 		int pos = 4 + offset;
 		int edx;
 		int ecx = key;
 
 		while (pos < stop) {
-			edx = (data[pos] & 0xFF);
-			edx |= (data[pos + 1] & 0xFF) << 8;
-			edx |= (data[pos + 2] & 0xFF) << 16;
-			edx |= (data[pos + 3] & 0xFF) << 24;
+			edx = BlowfishCipher.getInt(data, pos);
 			ecx += edx;
 			edx ^= ecx;
-			data[pos++] = (byte) (edx & 0xFF);
-			data[pos++] = (byte) (edx >> 8 & 0xFF);
-			data[pos++] = (byte) (edx >> 16 & 0xFF);
-			data[pos++] = (byte) (edx >> 24 & 0xFF);
+			BlowfishCipher.putInt(data, pos, edx);
+			pos += 4;
 		}
 
-		data[pos++] = (byte) (ecx & 0xFF);
-		data[pos++] = (byte) (ecx >> 8 & 0xFF);
-		data[pos++] = (byte) (ecx >> 16 & 0xFF);
-		data[pos] = (byte) (ecx >> 24 & 0xFF);
+		BlowfishCipher.putInt(data, pos, ecx);
 	}
 }

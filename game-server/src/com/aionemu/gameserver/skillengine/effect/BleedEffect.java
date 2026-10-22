@@ -1,8 +1,8 @@
 package com.aionemu.gameserver.skillengine.effect;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.controllers.attack.AttackUtil;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -19,6 +19,11 @@ import com.aionemu.gameserver.skillengine.model.EffectReserved.ResourceType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "BleedEffect")
 public class BleedEffect extends AbstractOverTimeEffect {
+
+	@Override
+	protected void resolveMagicalCritical(Effect effect) {
+		effect.rollMagicalCritical(position, calculateCritProbMod(effect)); // periodic damage ignores the apply_magical_critical flag
+	}
 
 	@Override
 	public void calculate(Effect effect) {
@@ -41,7 +46,8 @@ public class BleedEffect extends AbstractOverTimeEffect {
 	@Override
 	public void onPeriodicAction(Effect effect) {
 		Creature effected = effect.getEffected();
-		effected.getController().onAttack(effect, TYPE.DAMAGE, effect.getReserveds(position).getValue(), false, LOG.BLEED, hopType);
+		effected.getController().onAttack(effect, TYPE.DAMAGE, effect.getReserveds(position).getValue(), false, LOG.BLEED, hopType,
+			effect.isMagicalCritical(position));
 		effected.getObserveController().notifyDotAttackedObservers(effect.getEffector(), effect);
 	}
 }

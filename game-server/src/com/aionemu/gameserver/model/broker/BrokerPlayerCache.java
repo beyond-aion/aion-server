@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.model.broker;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.aionemu.gameserver.model.gameobjects.BrokerItem;
@@ -10,25 +11,22 @@ import com.aionemu.gameserver.model.gameobjects.BrokerItem;
  */
 public class BrokerPlayerCache {
 
-	private BrokerItem[] brokerListCache = new BrokerItem[0];
+	private List<BrokerItem> brokerListCache = Collections.emptyList();
 	private int brokerMaskCache;
 	private byte brokerSoftTypeCache;
 	private int brokerStartPageCache;
 	private List<Integer> itemList = new ArrayList<>();
 
-	/**
-	 * @return the brokerListCache
-	 */
-	public BrokerItem[] getBrokerListCache() {
+	public List<BrokerItem> getBrokerListCache() {
 		return brokerListCache;
 	}
 
-	/**
-	 * @param brokerListCache
-	 *          the brokerListCache to set
-	 */
-	public void setBrokerListCache(BrokerItem[] brokerListCache) {
+	public void setBrokerListCache(List<BrokerItem> brokerListCache) {
 		this.brokerListCache = brokerListCache;
+	}
+
+	public void removeFromCache(BrokerItem item) {
+		brokerListCache = brokerListCache.stream().filter(i -> !i.equals(item)).toList();
 	}
 
 	/**

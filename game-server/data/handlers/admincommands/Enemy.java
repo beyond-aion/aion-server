@@ -10,15 +10,11 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 public class Enemy extends AdminCommand {
 
 	public Enemy() {
-		super("enemy", "Modifies your enmity towards others.");
-
-		// @formatter:off
-		setSyntaxInfo(
-			"all [players|npcs] - Sets your enmity (default: you're everyone's enemy, optional: you're an enemy to any player, or any NPC).",
-			"none [players|npcs] - Disables your enmity (default: you're nobody's enemy, optional: you're not an enemy to any player, or any NPC).",
-			"cancel - Resets your enmity to the default."
-		);
-		// @formatter:on
+		super("enemy", "Modifies your enmity towards others.", """
+			all [players|npcs] - Sets your enmity (default: you're everyone's enemy, optional: you're an enemy to any player, or any NPC).
+			none [players|npcs] - Disables your enmity (default: you're nobody's enemy, optional: you're not an enemy to any player, or any NPC).
+			cancel - Resets your enmity to the default.
+			""");
 	}
 
 	@Override

@@ -38,7 +38,7 @@ public abstract class AionClientPacket extends BaseClientPacket<AionConnection> 
 			if (isValid()) // run only if packet is still valid (connection state didn't change, for example due to logout)
 				runImpl();
 		} catch (Throwable e) {
-			log.error("Error handling client packet from " + getConnection() + ": " + this, e);
+			log.error("Error handling client packet from {}: {}", getConnection(), this, e);
 		}
 	}
 

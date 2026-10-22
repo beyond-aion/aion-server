@@ -8,7 +8,7 @@ import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.world.zone.ZoneName;
+import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
  * @author Balthazar
@@ -25,7 +25,7 @@ public class _1194ReducingTursinStrength extends AbstractQuestHandler {
 		qe.registerQuestNpc(203098).addOnTalkEvent(questId);
 		qe.registerQuestNpc(210185).addOnKillEvent(questId);
 		qe.registerQuestNpc(210186).addOnKillEvent(questId);
-		qe.registerOnEnterZone(ZoneName.get("TURSIN_GARRISON_210030000"), questId);
+		qe.registerOnEnterZone("TURSIN_GARRISON_210030000", questId);
 	}
 
 	@Override
@@ -68,8 +68,8 @@ public class _1194ReducingTursinStrength extends AbstractQuestHandler {
 	}
 
 	@Override
-	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) {
-		if (zoneName != ZoneName.get("TURSIN_GARRISON_210030000"))
+	public boolean onEnterZoneEvent(QuestEnv env, ZoneInstance zone) {
+		if (!zone.matches("TURSIN_GARRISON_210030000"))
 			return false;
 
 		final Player player = env.getPlayer();

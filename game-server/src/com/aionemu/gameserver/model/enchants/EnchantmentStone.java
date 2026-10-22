@@ -31,37 +31,29 @@ public enum EnchantmentStone {
 	}
 
 	public static EnchantmentStone getByItemId(int itemId) {
-		switch (itemId) {
-			case 166000191:
-				return ALPHA;
-			case 166000192:
-				return BETA;
-			case 166000193:
-				return GAMMA;
-			case 166000194:
-				return DELTA;
-			case 166000195:
-				return EPSILON;
-			case 166020000:
-			case 166020001:
-			case 166020002:
-			case 166020003:
-				return OMEGA;
-			default:
+		return switch (itemId) {
+			case 166000191, 166000197 -> ALPHA;
+			case 166000192, 166000198 -> BETA;
+			case 166000193, 166000199 -> GAMMA;
+			case 166000194, 166000200 -> DELTA;
+			case 166000195, 166000196, 166000201 -> EPSILON;
+			case 166020000, 166020001, 166020002, 166020003 -> OMEGA;
+			default -> {
 				if (itemId >= 166000001 && itemId <= 166000190) { // L1 - L190 (old stones)
 					if (itemId > 166000100) { // 101+
-						return EPSILON;
+						yield EPSILON;
 					} else if (itemId > 166000060) { // 61-100
-						return DELTA;
+						yield DELTA;
 					} else if (itemId > 166000050) { // 51-60
-						return GAMMA;
+						yield GAMMA;
 					} else if (itemId > 166000030) { // 31-50
-						return BETA;
+						yield BETA;
 					} else { // 1-30
-						return ALPHA;
+						yield ALPHA;
 					}
 				}
 				throw new IllegalArgumentException("No matching enchantment stone found for item ID " + itemId);
-		}
+			}
+		};
 	}
 }

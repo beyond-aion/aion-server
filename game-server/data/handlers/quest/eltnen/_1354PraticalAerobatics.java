@@ -41,22 +41,14 @@ public class _1354PraticalAerobatics extends AbstractQuestHandler {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			if (rings[0].equals(flyingRing))
-				changeQuestStep(env, 1, 2);
-			else if (rings[1].equals(flyingRing))
-				changeQuestStep(env, 2, 3);
-			else if (rings[2].equals(flyingRing))
-				changeQuestStep(env, 3, 4);
-			else if (rings[3].equals(flyingRing))
-				changeQuestStep(env, 4, 5);
-			else if (rings[4].equals(flyingRing))
-				changeQuestStep(env, 5, 6);
-			else if (rings[5].equals(flyingRing))
-				changeQuestStep(env, 6, 7);
-			else if (rings[6].equals(flyingRing)) {
-				qs.setQuestVarById(0, 8);
-				changeQuestStep(env, 8, 8, true);
-				QuestService.questTimerEnd(env);
+			int questVar = qs.getQuestVarById(0);
+			if (questVar > 0 && questVar <= rings.length && rings[questVar - 1].equals(flyingRing)) {
+				if (questVar == rings.length) {
+					changeQuestStep(env, questVar, questVar + 1, true);
+					QuestService.questTimerEnd(env);
+				} else {
+					changeQuestStep(env, questVar, questVar + 1);
+				}
 			}
 			applyFlightRingEffect(env);
 			return true;

@@ -101,17 +101,18 @@ public class DropService {
 			return;
 		}
 
-		if (dropNpc.isBeingLooted()) {
-			if (!dropNpc.getLootingPlayer().isOnline()) {
-				log.warn(
-					dropNpc.getLootingPlayer() + " is offline but was still set as drop looter for " + World.getInstance().findVisibleObject(npcObjectId));
-			} else {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_LOOT_FAIL_ONLOOTING());
-				return;
+		synchronized (dropNpc) {
+			if (dropNpc.isBeingLooted()) {
+				if (!dropNpc.getLootingPlayer().isOnline()) {
+					log.warn("{} is offline but was still set as drop looter for {}", dropNpc.getLootingPlayer(),
+						World.getInstance().findVisibleObject(npcObjectId));
+				} else {
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_LOOT_FAIL_ONLOOTING());
+					return;
+				}
 			}
+			dropNpc.setLootingPlayer(player);
 		}
-
-		dropNpc.setLootingPlayer(player);
 		VisibleObject visObj = World.getInstance().findVisibleObject(npcObjectId);
 		if (visObj instanceof Npc npc) {
 			ScheduledFuture<?> decayTask = (ScheduledFuture<?>) npc.getController().cancelTask(TaskId.DECAY);
@@ -129,6 +130,7 @@ public class DropService {
 
 		PacketSendUtility.sendPacket(player, new SM_LOOT_ITEMLIST(dropNpc, dropItems, player));
 		PacketSendUtility.sendPacket(player, new SM_LOOT_STATUS(npcObjectId, Status.OPEN_DROP_LIST));
+		player.getController().cancelUseItem();
 		player.unsetState(CreatureState.ACTIVE);
 		player.setState(CreatureState.LOOTING);
 		player.setLootingNpcOid(npcObjectId);
@@ -152,11 +154,13 @@ public class DropService {
 		if (dropNpc == null)
 			return;
 
-		if (!player.equals(dropNpc.getLootingPlayer()))
-			return;// cheater :)
+		synchronized (dropNpc) {
+			if (!player.equals(dropNpc.getLootingPlayer()))
+				return;// cheater :)
+			dropNpc.setLootingPlayer(null);
+		}
 
 		Set<DropItem> dropItems = DropRegistrationService.getInstance().getCurrentDropMap().get(npcObjectId);
-		dropNpc.setLootingPlayer(null);
 
 		Npc npc = (Npc) World.getInstance().findVisibleObject(npcObjectId);
 		if (npc != null) {
@@ -342,19 +346,19 @@ public class DropService {
 		} else if (!requestedItem.isDistributeItem()) {
 			if (lootGroupRules != null) {
 				ItemQuality quality = DataManager.ITEM_DATA.getItemTemplate(itemId).getItemQuality();
-				if (lootGroupRules.isMisc(quality)) {
+				if (lootGroupRules.isAutoDistributedJunk(quality)) {
 					Collection<Player> members = dropNpc.getInRangePlayers();
 
-					if (members.size() > lootGroupRules.getNrMisc()) {
-						lootGroupRules.setNrMisc(lootGroupRules.getNrMisc() + 1);
+					if (members.size() > lootGroupRules.getJunkRecipientIndex()) {
+						lootGroupRules.setJunkRecipientIndex(lootGroupRules.getJunkRecipientIndex() + 1);
 					} else {
-						lootGroupRules.setNrMisc(1);
+						lootGroupRules.setJunkRecipientIndex(1);
 					}
 
 					int i = 0;
 					for (Player p : members) {
 						i++;
-						if (i == lootGroupRules.getNrMisc()) {
+						if (i == lootGroupRules.getJunkRecipientIndex()) {
 							requestedItem.setWinningPlayer(p);
 							break;
 						}

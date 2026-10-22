@@ -31,7 +31,8 @@ public class CM_ACCOUNT_RECONNECT_KEY extends GsClientPacket {
 		int reconectKey = Rnd.nextInt();
 		Account acc = getConnection().getGameServerInfo().removeAccountFromGameServer(accountId);
 		if (acc == null)
-			LoggerFactory.getLogger(CM_ACCOUNT_RECONNECT_KEY.class).warn(getConnection() + " requested reconnection for account " + accountId + ", but account is not registered on game server");
+			LoggerFactory.getLogger(CM_ACCOUNT_RECONNECT_KEY.class).warn("{} requested reconnection for account {}, but account is not registered on game server",
+				getConnection(), accountId);
 		else
 			AccountController.addReconnectingAccount(new ReconnectingAccount(acc, reconectKey));
 		sendPacket(new SM_ACCOUNT_RECONNECT_KEY(accountId, reconectKey));

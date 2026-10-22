@@ -1,15 +1,14 @@
 package com.aionemu.gameserver.model.geometry;
 
 import com.aionemu.gameserver.utils.PositionUtil;
-import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author Rolandas
  */
 public class SemisphereArea extends SphereArea {
 
-	public SemisphereArea(ZoneName zoneName, int worldId, float x, float y, float z, float r) {
-		super(zoneName, worldId, x, y, z, r);
+	public SemisphereArea(float x, float y, float z, float r) {
+		super(x, y, z, r);
 	}
 
 	@Override

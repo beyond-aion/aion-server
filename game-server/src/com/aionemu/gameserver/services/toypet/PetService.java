@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.services.toypet;
 
+import static com.aionemu.gameserver.model.items.ItemUseAnimation.*;
+
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -16,6 +18,7 @@ import com.aionemu.gameserver.model.gameobjects.PetSpecialFunction;
 import com.aionemu.gameserver.model.gameobjects.player.PetCommonData;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.common.legacy.LootRuleType;
+import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.model.templates.item.actions.AbstractItemAction;
 import com.aionemu.gameserver.model.templates.item.actions.SkillUseAction;
 import com.aionemu.gameserver.model.templates.pet.*;
@@ -34,7 +37,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
-import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author M@xx, IlBuono, xTz, Rolandas
@@ -155,7 +157,14 @@ public class PetService {
 				return;
 			}
 
-			Item useItem = player.getInventory().getItemsByItemId(itemId).get(0);
+			int[] dopingItems = pet.getCommonData().getDopingBag().getItems();
+			if (slot < 0 || slot >= dopingItems.length || dopingItems[slot] != itemId) {
+				AuditLogger.log(player, "tried to use item " + itemId + " through pet buffing, but it's not in slot " + slot);
+				return;
+			}
+			Item useItem = player.getInventory().getFirstItemByItemId(itemId);
+			if (useItem == null || !useItem.getItemTemplate().isDopingPetUsable())
+				return;
 
 			if (!isPetItemUseAllowed(player, useItem)) { // pet currently is not allowed to buff, schedule re-check
 				ThreadPoolManager.getInstance().schedule(() -> PacketSendUtility.sendPacket(player, new SM_PET(action, itemId, slot)), 20, TimeUnit.SECONDS);
@@ -172,7 +181,7 @@ public class PetService {
 			for (AbstractItemAction itemAction : useItem.getItemTemplate().getActions().getItemActions()) {
 				if (itemAction instanceof SkillUseAction) {
 					PacketSendUtility.broadcastPacket(player,
-						new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), player.getObjectId(), useItem.getObjectId(), useItem.getItemId(), 0, 1, 1, 1, 0, 15360),
+						new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), player.getObjectId(), useItem.getObjectId(), useItem.getItemId(), 0, USE_SUCCESS, true),
 						true);
 					SkillEngine.getInstance().applyEffectDirectly(((SkillUseAction) itemAction).getSkillId(), ((SkillUseAction) itemAction).getLevel(), player,
 						player, null, ForceType.DEFAULT);
@@ -192,6 +201,13 @@ public class PetService {
 			AuditLogger.log(pet.getMaster(), "tried to set buff item " + itemId + " but " + pet + " doesn't support buffing");
 			return false;
 		}
+		if (itemId != 0) {
+			ItemTemplate itemTemplate = DataManager.ITEM_DATA.getItemTemplate(itemId);
+			if (itemTemplate == null || !itemTemplate.isDopingPetUsable()) {
+				AuditLogger.log(pet.getMaster(), "tried to set item " + itemId + " in pet buff slot " + slot + " but it can't be used by pets");
+				return false;
+			}
+		}
 		PetDopingEntry dope = DataManager.PET_DOPING_DATA.getDopingTemplate(petFunction.getId());
 		if (slot == 0 && !dope.isUseFood()) {
 			AuditLogger.log(pet.getMaster(), "tried to set item " + itemId + " in pet buff food slot but " + pet + " doesn't support buffing with food");
@@ -210,13 +226,7 @@ public class PetService {
 	}
 
 	private boolean isPetItemUseAllowed(Player player, Item item) {
-		if (item.getItemTemplate().hasAreaRestriction()) {
-			ZoneName restriction = item.getItemTemplate().getUseArea();
-			if (restriction != null && !player.isInsideItemUseZone(restriction)) {
-				return false;
-			}
-		}
-		return true;
+		return !item.getItemTemplate().hasAreaRestriction() || player.isInsideItemUseZone(item.getItemTemplate().getUseArea());
 	}
 
 	public void activateLoot(Pet pet, boolean activate) {

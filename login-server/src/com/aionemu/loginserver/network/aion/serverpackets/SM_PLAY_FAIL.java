@@ -12,7 +12,7 @@ public class SM_PLAY_FAIL extends AionServerPacket {
 	/**
 	 * response - why play fail
 	 */
-	private AionAuthResponse response;
+	private final AionAuthResponse response;
 
 	/**
 	 * Constructs new instance of <tt>SM_PLAY_FAIL</tt> packet.
@@ -27,6 +27,6 @@ public class SM_PLAY_FAIL extends AionServerPacket {
 
 	@Override
 	protected void writeImpl(LoginConnection con) {
-		writeD(response.getId());
+		writeC(response.getId());
 	}
 }

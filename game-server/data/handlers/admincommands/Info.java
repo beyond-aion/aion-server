@@ -31,24 +31,33 @@ import com.aionemu.gameserver.utils.stats.StatFunctions;
 public class Info extends AdminCommand {
 
 	public Info() {
-		super("info", "Shows information about your target.");
-
-		setSyntaxInfo(" - Shows information about your target (defaults to your character, if no player is targeted).");
+		super("info", "Shows information about your target.", """
+			 - Shows information about your target (defaults to your character, if no player is targeted).
+			""");
 	}
 
 	@Override
 	public void execute(Player admin, String... params) {
 		VisibleObject target = admin.getTarget() == null ? admin : admin.getTarget();
 
-		sendInfo(admin, "[Info about " + target.getClass().getSimpleName() + "]\n\tName: " + target.getName() + ", ObjectId: " + target.getObjectId()
-			+ "\n\tTemplateId: " + target.getObjectTemplate().getTemplateId());
-
+		sendInfo(admin,
+			"[Info about " + target.getClass().getSimpleName() + "]\n\tName: " + name(target) + ", ID: " + target.getObjectTemplate().getTemplateId()
+				+ ", ObjectId: " + target.getObjectId());
 		if (target instanceof Creature creature) {
 			if (creature instanceof Player player) {
 				Pet pet = player.getPet();
-				sendInfo(admin, (pet != null ? "Pet Id: " + pet.getObjectTemplate().getTemplateId() + ", ObjectId: " + pet.getObjectId() + "\n\t" : "")
-					+ "Town ID: " + TownService.getInstance().getTownResidence(player));
-				sendInfo(admin, "Current Panesterra Faction: %s".formatted(player.getPanesterraFaction()));
+				sendInfo(admin, (pet != null ? "\tPet: " + name(pet) + ", ID: " + pet.getObjectTemplate().getTemplateId() + ", ObjectId: " + pet.getObjectId()
+					+ "\n" : "") + "\tTown ID: " + TownService.getInstance().getTownResidence(player));
+				for (int i = 0; i < 2; i++) {
+					NpcFaction faction = player.getNpcFactions().getActiveNpcFaction(i == 0);
+					if (faction != null) {
+						sendInfo(admin,
+							"\t" + (i == 0 ? "Mentor" : "Daily") + " faction: " + DataManager.NPC_FACTIONS_DATA.getNpcFactionById(faction.getId()).getL10n()
+								+ ", current quest state: " + faction.getState().name() + (faction.getState().equals(ENpcFactionQuestState.COMPLETE) ? (
+								", next after: " + ((faction.getTime() - System.currentTimeMillis() / 1000) / 3600f) + " h.") : ""));
+					}
+				}
+				sendInfo(admin, "\tPanesterra faction: " + player.getPanesterraFaction());
 				PlayerGameStats pgs = player.getGameStats();
 				sendInfo(admin,
 					"[Stats]"
@@ -108,25 +117,14 @@ public class Info extends AdminCommand {
 							+ "\n\tPvP defend: " + pgs.getStat(StatEnum.PVP_DEFEND_RATIO, 0).getCurrent() * 0.1f + "%"
 							+ "\n\tPvP p. defend: " + pgs.getStat(StatEnum.PVP_DEFEND_RATIO_PHYSICAL, 0).getCurrent() * 0.1f + "%"
 							+ "\n\tPvP m. defend: " + pgs.getStat(StatEnum.PVP_DEFEND_RATIO_MAGICAL, 0).getCurrent() * 0.1f + "%");
-
-				for (int i = 0; i < 2; i++) {
-					NpcFaction faction = player.getNpcFactions().getActiveNpcFaction(i == 0);
-					if (faction != null) {
-						sendInfo(admin,
-							player.getName() + " have join to " + (i == 0 ? "mentor" : "daily") + " faction: " + DataManager.NPC_FACTIONS_DATA.getNpcFactionById(faction.getId()).getName()
-									+ "\n\tCurrent quest state: " + faction.getState().name()
-									+ (faction.getState().equals(ENpcFactionQuestState.COMPLETE) ? ("\n\tNext after: " + ((faction.getTime() - System.currentTimeMillis() / 1000) / 3600f) + " h.") : ""));
-					}
-				}
 			} else if (creature instanceof Npc npc) {
 				sendInfo(admin, "[Template info]\n\tRating: " + npc.getRating() + ", Rank: " + npc.getRank()
 						+ "\n\tTemplateType: " + npc.getNpcTemplateType() + ", AbyssType: " + npc.getAbyssNpcType()
 						+ "\n\tRelative XP reward: " + StatFunctions.calculateExperienceReward(admin.getLevel(), npc));
-				if (npc instanceof SiegeNpc)
-					sendInfo(admin, "[Siege info]\n\tSiegeId: " + ((SiegeNpc) npc).getSiegeId() + ", SiegeRace: " + ((SiegeNpc) npc).getSiegeRace());
+				if (npc instanceof SiegeNpc siegeNpc)
+					sendInfo(admin, "[Siege info]\n\tSiegeId: " + siegeNpc.getSiegeId() + ", SiegeRace: " + siegeNpc.getSiegeRace());
 				sendInfo(admin,
-					"[AI info]\n\tAI: " + npc.getAi().getName()
-							+ "\n\tState: " + npc.getAi().getState() + ", SubState: " + npc.getAi().getSubState());
+					"[AI info]\n\tAI: " + npc.getAi().getName() + "\n\tState: " + npc.getAi().getState() + ", SubState: " + npc.getAi().getSubState());
 				sendInfo(admin,
 					"[Sense range]\n\tRadius: " + npc.getAggroRange()
 							+ "\n\tShort-Radius: " + npc.getShortAggroRange()
@@ -174,15 +172,15 @@ public class Info extends AdminCommand {
 		StringBuilder sb = new StringBuilder("[AggroList]");
 		AtomicInteger aDmg = new AtomicInteger(), eDmg = new AtomicInteger(), tDmg = new AtomicInteger();
 		creature.getAggroList().stream().forEach(ai -> {
-			String name = ai.getAttacker().getName();
 			Creature master = ai.getAttacker().getMaster();
+			String name = name(master);
+			if (!master.equals(ai.getAttacker()))
+				name += "'s " + name(ai.getAttacker());
 			tDmg.addAndGet(ai.getDamage());
 			if (master.getRace() == Race.ASMODIANS)
 				aDmg.addAndGet(ai.getDamage());
 			else if (master.getRace() == Race.ELYOS)
 				eDmg.addAndGet(ai.getDamage());
-			if (!master.equals(ai.getAttacker()))
-				name = master.getName() + "'s " + ai.getAttacker().getObjectTemplate().getL10n();
 			sb.append("\n\tName: " + name + ", Dmg: " + ai.getDamage() + ", Hate: " + ai.getHate());
 		});
 		if (tDmg.get() > 0) {

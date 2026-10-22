@@ -53,7 +53,7 @@ public class CM_UPGRADE_ARCADE extends AionClientPacket {
 				UpgradeArcadeService.getInstance().showRewardList(player);
 				break;
 			default:
-				LoggerFactory.getLogger(CM_UPGRADE_ARCADE.class).warn("Unhandled arcade action " + action);
+				LoggerFactory.getLogger(CM_UPGRADE_ARCADE.class).warn("Unhandled arcade action {}", action);
 		}
 	}
 }

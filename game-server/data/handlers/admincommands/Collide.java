@@ -20,14 +20,10 @@ import com.aionemu.gameserver.world.geo.GeoService;
 public class Collide extends AdminCommand {
 
 	public Collide() {
-		super("collide", "Geo debugging tool.");
-
-		// @formatter:off
-		setSyntaxInfo(
-			" - Lists collisions between your target and the ground.",
-			"me - Lists collisions between you and your target."
-		);
-		// @formatter:on
+		super("collide", "Geo debugging tool.", """
+			 - Lists collisions between your target and the ground.
+			me - Lists collisions between you and your target.
+			""");
 	}
 
 	@Override

@@ -9,6 +9,7 @@ import com.aionemu.gameserver.model.drop.DropItem;
 import com.aionemu.gameserver.model.gameobjects.player.InRoll;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.item.ItemQuality;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.drop.DropDistributionService;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
@@ -17,20 +18,26 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
  */
 public class LootGroupRules {
 
+	/**
+	 * Rule reported for a seventh item grade, which 4.8 doesn't have. It's always roll.
+	 */
+	public static final int SEVENTH_GRADE_RULE = 2;
+
 	private final LootRuleType lootRule;
-	private int misc;
+	private final boolean autoDistributeJunk;
 	private final int commonItemAbove;
 	private final int superiorItemAbove;
 	private final int heroicItemAbove;
 	private final int fabledItemAbove;
 	private final int eternalItemAbove;
 	private final int mythicItemAbove;
-	private int nrMisc;
+	private int junkRecipientIndex;
 	private int nrRoundRobin;
 	private final Deque<DropItem> itemsToBeDistributed = new ConcurrentLinkedDeque<>();
 
 	public LootGroupRules() {
 		lootRule = LootRuleType.ROUNDROBIN;
+		autoDistributeJunk = false;
 		commonItemAbove = 0;
 		superiorItemAbove = 2;
 		heroicItemAbove = 2;
@@ -39,11 +46,11 @@ public class LootGroupRules {
 		mythicItemAbove = 2;
 	}
 
-	public LootGroupRules(LootRuleType lootRule, int misc, int commonItemAbove, int superiorItemAbove, int heroicItemAbove, int fabledItemAbove,
+	public LootGroupRules(LootRuleType lootRule, boolean autoDistributeJunk, int commonItemAbove, int superiorItemAbove, int heroicItemAbove, int fabledItemAbove,
 		int eternalItemAbove, int mythicItemAbove) {
 		super();
 		this.lootRule = lootRule;
-		this.misc = misc;
+		this.autoDistributeJunk = autoDistributeJunk;
 		this.commonItemAbove = commonItemAbove;
 		this.superiorItemAbove = superiorItemAbove;
 		this.heroicItemAbove = heroicItemAbove;
@@ -64,8 +71,24 @@ public class LootGroupRules {
 		};
 	}
 
-	public boolean isMisc(ItemQuality quality) {
-		return quality.equals(ItemQuality.JUNK) && misc == 1;
+	/**
+	 * @return True if items of this quality are handed out to the team members in turn.
+	 */
+	public boolean isAutoDistributedJunk(ItemQuality quality) {
+		return autoDistributeJunk && quality == ItemQuality.JUNK;
+	}
+
+	public boolean isAutoDistributeJunk() {
+		return autoDistributeJunk;
+	}
+
+	/**
+	 * @return Id of the message announcing that the auto-distribution of junk items was turned on or off since the given rules, 0 if it wasn't.
+	 */
+	public int getJunkDistributionChangeMessageId(LootGroupRules previousRules) {
+		if (previousRules != null && previousRules.autoDistributeJunk == autoDistributeJunk)
+			return 0;
+		return (autoDistributeJunk ? SM_SYSTEM_MESSAGE.STR_MSG_JUNK_DISTRIBUTE_ON() : SM_SYSTEM_MESSAGE.STR_MSG_JUNK_DISTRIBUTE_OF()).getId();
 	}
 
 	public LootRuleType getLootRule() {
@@ -102,12 +125,12 @@ public class LootGroupRules {
 		return mythicItemAbove;
 	}
 
-	public int getNrMisc() {
-		return nrMisc;
+	public int getJunkRecipientIndex() {
+		return junkRecipientIndex;
 	}
 
-	public void setNrMisc(int nrMisc) {
-		this.nrMisc = nrMisc;
+	public void setJunkRecipientIndex(int junkRecipientIndex) {
+		this.junkRecipientIndex = junkRecipientIndex;
 	}
 
 	public void setPlayersInRoll(final Collection<Player> players, int time, final int index, final int npcId) {
@@ -129,10 +152,6 @@ public class LootGroupRules {
 
 	public void setNrRoundRobin(int nrRoundRobin) {
 		this.nrRoundRobin = nrRoundRobin;
-	}
-
-	public int getMisc() {
-		return misc;
 	}
 
 	public void addItemToBeDistributed(DropItem dropItem) {

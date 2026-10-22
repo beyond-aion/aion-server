@@ -93,7 +93,9 @@ public class GateRepairAI extends NpcAI {
 			}
 
 			if (LoggingConfig.LOG_SIEGE)
-				log.info("Gate Repair Stone with staticId: " + getSpawnTemplate().getStaticId() + " siege: " + getSpawnTemplate().getSiegeId() + " activated by " + player + " (race: " + player.getRace() + ") to heal door with staticId: " + (door.getSpawn().getStaticId()) + " by " + healValue);
+				log.info("Gate Repair Stone with staticId: {} siege: {} activated by {} (race: {}) to heal door with staticId: {} by {}",
+					getSpawnTemplate().getStaticId(), getSpawnTemplate().getSiegeId(), player, player.getRace(), door.getSpawn().getStaticId(),
+					healValue);
 			nextActivationTime.set(System.currentTimeMillis() + repairData.getCd());
 			PacketSendUtility.broadcastPacket(getOwner(), SM_SYSTEM_MESSAGE.STR_MSG_REPAIR_ABYSS_DOOR(player.getName(), "" + healValue));
 			PacketSendUtility.broadcastPacket(getOwner(), new SM_ACTION_ANIMATION(getObjectId(), ActionAnimation.REPAIR_GATE, door.getObjectId()));

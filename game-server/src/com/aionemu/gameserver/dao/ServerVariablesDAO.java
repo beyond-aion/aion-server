@@ -34,7 +34,7 @@ public class ServerVariablesDAO {
 			ps.setString(2, value.toString());
 			return ps.executeUpdate() > 0;
 		} catch (SQLException e) {
-			log.error("Error storing " + value + " for variable " + var, e);
+			log.error("Error storing {} for variable {}", value, var, e);
 			return false;
 		}
 	}
@@ -45,7 +45,7 @@ public class ServerVariablesDAO {
 			ps.setString(1, var);
 			return ps.executeUpdate() > 0;
 		} catch (SQLException e) {
-			log.error("Error loading value for " + var, e);
+			log.error("Error loading value for {}", var, e);
 			return false;
 		}
 	}
@@ -58,7 +58,7 @@ public class ServerVariablesDAO {
 			if (rs.next())
 				return rs.getString("value");
 		} catch (SQLException e) {
-			log.error("Error loading value for " + var, e);
+			log.error("Error loading value for {}", var, e);
 		}
 		return null;
 	}

@@ -3,13 +3,13 @@ package com.aionemu.gameserver.questEngine.handlers.models.xmlQuest.events;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
-import com.aionemu.gameserver.world.zone.ZoneName;
+import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
  * Runs its operations when the player enters one of the listed zones.
@@ -27,8 +27,8 @@ public class OnEnterZoneEvent extends QuestEvent {
 		return zones;
 	}
 
-	public boolean operate(QuestEnv env, ZoneName zoneName) {
-		if (zones == null || !zones.contains(zoneName.name()))
+	public boolean operate(QuestEnv env, ZoneInstance zone) {
+		if (zones == null || zones.stream().noneMatch(zone::matches))
 			return false;
 		if (conditions != null && !conditions.checkConditionOfSet(env))
 			return false;

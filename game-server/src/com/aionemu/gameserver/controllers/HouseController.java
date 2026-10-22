@@ -26,7 +26,6 @@ import com.aionemu.gameserver.spawnengine.VisibleObjectSpawner;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.world.geo.GeoService;
-import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author Rolandas, Neon
@@ -61,7 +60,7 @@ public class HouseController extends VisibleObjectController<House> {
 		HouseAddress address = getOwner().getAddress();
 		List<HouseSpawn> templates = DataManager.HOUSE_NPCS_DATA.getSpawnsByAddress(address.getId());
 		if (templates == null) {
-			log.warn("Missing npc spawns for house " + address.getId());
+			log.warn("Missing npc spawns for house {}", address.getId());
 			return;
 		}
 		for (HouseSpawn spawn : templates) {
@@ -81,7 +80,7 @@ public class HouseController extends VisibleObjectController<House> {
 					spawn.getH(), creatorId);
 				npc = (Npc) SpawnEngine.spawnObject(t, getOwner().getInstanceId());
 			} else {
-				log.warn("Unhandled spawn type " + spawn.getType());
+				log.warn("Unhandled spawn type {}", spawn.getType());
 				continue;
 			}
 			getOwner().updateSpawn(spawn.getType(), npc);
@@ -104,7 +103,7 @@ public class HouseController extends VisibleObjectController<House> {
 	}
 
 	public void kickVisitors(Player kicker, boolean kickFriends, boolean ownerChanged) {
-		ZoneName houseZone = ZoneName.get(getOwner().getName());
+		String houseZone = getOwner().getName();
 		getOwner().getKnownList().forEachPlayer(player -> {
 			if (player.getObjectId() == getOwner().getOwnerId())
 				return;

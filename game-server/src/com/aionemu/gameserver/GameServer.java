@@ -1,7 +1,10 @@
 package com.aionemu.gameserver;
 
 import java.lang.management.ManagementFactory;
+import java.time.Duration;
+import java.util.List;
 import java.util.TimeZone;
+import java.util.concurrent.locks.LockSupport;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.Stream;
 
@@ -22,7 +25,6 @@ import com.aionemu.gameserver.configs.Config;
 import com.aionemu.gameserver.configs.main.CleaningConfig;
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.configs.main.GSConfig;
-import com.aionemu.gameserver.configs.main.GeoDataConfig;
 import com.aionemu.gameserver.configs.network.NetworkConfig;
 import com.aionemu.gameserver.custom.instance.CustomInstanceService;
 import com.aionemu.gameserver.custom.pvpmap.PvpMapService;
@@ -33,7 +35,9 @@ import com.aionemu.gameserver.instance.InstanceEngine;
 import com.aionemu.gameserver.model.GameEngine;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.siege.Influence;
+import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.GameConnectionFactoryImpl;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_QUIT_RESPONSE;
 import com.aionemu.gameserver.network.chatserver.ChatServer;
 import com.aionemu.gameserver.network.loginserver.LoginServer;
 import com.aionemu.gameserver.questEngine.QuestEngine;
@@ -52,6 +56,7 @@ import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.taskmanager.tasks.housing.AuctionAutoFillTask;
 import com.aionemu.gameserver.taskmanager.tasks.housing.AuctionEndTask;
 import com.aionemu.gameserver.taskmanager.tasks.housing.MaintenanceTask;
+import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.chathandlers.ChatProcessor;
 import com.aionemu.gameserver.utils.cron.ThreadPoolManagerRunnableRunner;
@@ -102,7 +107,6 @@ public class GameServer {
 		// ZoneService.getInstance().saveMaterialZones();
 
 		World.getInstance();
-		GameTimeService.getInstance();
 
 		DropRegistrationService.getInstance();
 
@@ -156,8 +160,6 @@ public class GameServer {
 		AtreianPassportService.getInstance();
 		CronJobService.getInstance();
 
-		if (!GeoDataConfig.GEO_MATERIALS_ENABLE)
-			CuringZoneService.getInstance();
 		RoadService.getInstance();
 		HTMLCache.getInstance();
 		AbyssRankingCache.getInstance();
@@ -183,7 +185,7 @@ public class GameServer {
 
 		nioServer = initNioServer();
 		Runtime.getRuntime().addShutdownHook(ShutdownHook.getInstance());
-		log.info("Game server started in " + (System.currentTimeMillis() / 1000 - START_TIME_SECONDS) + " seconds.");
+		log.info("Game server started in {} seconds", System.currentTimeMillis() / 1000 - START_TIME_SECONDS);
 
 		LoginServer.getInstance().connect(nioServer);
 		if (GSConfig.ENABLE_CHAT_SERVER)
@@ -232,9 +234,27 @@ public class GameServer {
 
 	public static void shutdownNioServer() {
 		if (nioServer != null) {
+			if (forceStaffClientsToServerSelectionScreen())
+				LockSupport.parkNanos(Duration.ofMillis(200).toNanos()); // wait for login server to accept reconnections
 			nioServer.shutdown();
 			nioServer = null;
 		}
+	}
+
+	public static Stream<AionConnection> findClientConnections() {
+		return nioServer.findAllConnections().stream().filter(c -> c instanceof AionConnection).map(c -> (AionConnection) c);
+	}
+
+	private static boolean forceStaffClientsToServerSelectionScreen() {
+		List<AionConnection> staffClients = findClientConnections().filter(c -> c.getAccount() != null && c.getAccount().getAccessLevel() > 0).toList();
+		if (staffClients.isEmpty())
+			return false;
+		staffClients.forEach(c -> {
+			if (c.getState() == AionConnection.State.IN_GAME)
+				PacketSendUtility.sendPacket(c.getActivePlayer(), SM_QUIT_RESPONSE.quitToEditScreen());
+			LoginServer.getInstance().requestAuthReconnection(c.getAccount().getId(), c);
+		});
+		return true;
 	}
 
 	public static boolean isShutdownScheduled() {
@@ -273,7 +293,7 @@ public class GameServer {
 			lock.unlock();
 		}
 
-		log.info("FACTIONS RATIO UPDATED: E " + String.format("%.1f", ELYOS_RATIO) + " % / A " + String.format("%.1f", ASMOS_RATIO) + " %");
+		log.info("FACTIONS RATIO UPDATED: E {} % / A {} %", String.format("%.1f", ELYOS_RATIO), String.format("%.1f", ASMOS_RATIO));
 	}
 
 	public static float getRatiosFor(Race race) {

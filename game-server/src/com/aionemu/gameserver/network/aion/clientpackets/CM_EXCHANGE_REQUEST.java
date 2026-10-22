@@ -15,6 +15,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.ExchangeService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
+import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.world.World;
 
 /**
@@ -65,8 +66,8 @@ public class CM_EXCHANGE_REQUEST extends AionClientPacket {
 			return;
 		}
 
-		if (!activePlayer.getRace().equals(targetPlayer.getRace())) {
-			log.info("[AUDIT] Player " + activePlayer.getName() + " tried trade with player (" + targetPlayer.getName() + ") another race.");
+		if (activePlayer.getRace() != targetPlayer.getRace()) {
+			AuditLogger.log(activePlayer, "tried to trade with player of another race: " + targetPlayer);
 			return;
 		}
 

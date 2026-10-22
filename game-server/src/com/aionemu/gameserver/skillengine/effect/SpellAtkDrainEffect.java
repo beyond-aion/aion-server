@@ -1,9 +1,9 @@
 package com.aionemu.gameserver.skillengine.effect;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.controllers.attack.AttackUtil;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
@@ -23,10 +23,15 @@ public class SpellAtkDrainEffect extends AbstractOverTimeEffect {
 	private int mpPercent;
 
 	@Override
+	protected void resolveMagicalCritical(Effect effect) {
+		effect.rollMagicalCritical(position, calculateCritProbMod(effect)); // periodic damage ignores the apply_magical_critical flag
+	}
+
+	@Override
 	public void onPeriodicAction(Effect effect) {
 		int valueWithDelta = calculateBaseValue(effect);
-		int damage = AttackUtil.calculateMagicalOverTimeSkillResult(effect, valueWithDelta, this, true);
-		effect.getEffected().getController().onAttack(effect, TYPE.DAMAGE, damage, true, LOG.SPELLATKDRAIN, hopType);
+		int damage = AttackUtil.calculateMagicalOverTimeSkillResult(effect, valueWithDelta, this, effect.getSkillTemplate().isApplyMagicalSkillBoostBonus());
+		effect.getEffected().getController().onAttack(effect, TYPE.DAMAGE, damage, true, LOG.SPELLATKDRAIN, hopType, effect.isMagicalCritical(position));
 		effect.getEffector().getObserveController().notifyAttackObservers(effect.getEffected(), effect.getSkillId());
 
 		// Drain (heal) portion of damage inflicted

@@ -26,11 +26,7 @@ public class SM_CRAFT_UPDATE extends AionServerPacket {
 		this.failure = failure;
 		this.itemNameL10n = item.getL10n();
 		this.executionSpeed = executionSpeed;
-		if (skillId == 40009) {
-			this.delay = 1000;
-		} else {
-			this.delay = delay;
-		}
+		this.delay = delay;
 	}
 
 	@Override
@@ -58,9 +54,9 @@ public class SM_CRAFT_UPDATE extends AionServerPacket {
 				writeD(1330051);
 				writeS(null);
 				break;
-			case 5: // success (end)
-				writeD(1330049);
-				writeS(itemNameL10n); // param
+			case 5: // success (end), the client announces the product from the inventory update
+				writeD(0);
+				writeS(null);
 				break;
 			case 6: // failed (end)
 			case 7: // failure (never used?)

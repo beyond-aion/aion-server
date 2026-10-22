@@ -2,6 +2,7 @@ package com.aionemu.commons.utils;
 
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 
 import org.slf4j.LoggerFactory;
@@ -56,6 +57,10 @@ public class NetworkUtils {
 				return false;
 		}
 		return true;
+	}
+
+	public static String getAddressInfo(InetSocketAddress address) {
+		return (address.getAddress().isAnyLocalAddress() ? "all addresses on port " : address.getAddress().getHostAddress() + ":") + address.getPort();
 	}
 
 	/**

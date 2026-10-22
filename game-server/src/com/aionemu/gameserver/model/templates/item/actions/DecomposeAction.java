@@ -1,11 +1,9 @@
 package com.aionemu.gameserver.model.templates.item.actions;
 
+import static com.aionemu.gameserver.model.items.ItemUseAnimation.*;
+
 import java.util.*;
 import java.util.stream.Collectors;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,6 +26,10 @@ import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.item.ItemService.ItemUpdatePredicate;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlType;
 
 /**
  * @author oslo(a00441234)
@@ -136,22 +138,22 @@ public class DecomposeAction extends AbstractItemAction {
 			return;
 		}
 		PacketSendUtility.broadcastPacket(player,
-			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), castingDelay, 0, 0), true);
+			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), castingDelay, USE_START), true);
 
-		final ItemUseObserver observer = new ItemUseObserver() {
+		ItemUseObserver observer = new ItemUseObserver(player) {
 
 			@Override
-			public void abort() {
+			protected void onAbort() {
 				player.getController().cancelTask(TaskId.ITEM_USE);
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_UNCOMPRESS_COMPRESSED_ITEM_CANCELED(parentItem.getL10n()));
 				PacketSendUtility.broadcastPacket(player,
-					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), 0, 2, 0), true);
-				player.getObserveController().removeObserver(this);
+					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), 0, USE_CANCEL),
+					true);
 			}
 
 		};
 
-		player.getObserveController().attach(observer);
+		player.getObserveController().addObserver(observer);
 		player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(() -> {
 			player.getObserveController().removeObserver(observer);
 			finishUse(player, parentItem, targetItem, selectedCollection);
@@ -227,7 +229,7 @@ public class DecomposeAction extends AbstractItemAction {
 								itemLvl = randomType.getLevel();
 							List<ItemTemplate> stones = DataManager.ITEM_DATA.getManastones(itemLvl);
 							if (stones == null) {
-								log.warn("No lv" + itemLvl + " manastones found for decomposable random type " + randomItem.getType());
+								log.warn("No lv{} manastones found for decomposable random type {}", itemLvl, randomItem.getType());
 								break;
 							}
 							if (randomType != RandomType.MANASTONE) {
@@ -253,7 +255,7 @@ public class DecomposeAction extends AbstractItemAction {
 						case SPECIAL_MANASTONE_EPIC_GRADE:
 							List<ItemTemplate> ancientStones = DataManager.ITEM_DATA.getAncientManastones(randomType.getLevel());
 							if (ancientStones == null) {
-								log.warn("No ancient manastones found for decomposable random type " + randomItem.getType());
+								log.warn("No ancient manastones found for decomposable random type {}", randomItem.getType());
 								break;
 							}
 							final ItemQuality itemQuality;
@@ -363,7 +365,8 @@ public class DecomposeAction extends AbstractItemAction {
 			}
 		}
 		PacketSendUtility.broadcastPacket(player,
-			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, validAction ? 1 : 2, 0), true);
+			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, validAction ? USE_SUCCESS : USE_FAIL),
+			true);
 	}
 
 	/**
@@ -392,7 +395,7 @@ public class DecomposeAction extends AbstractItemAction {
 				if (item.isObtainableFor(player)) {
 					ItemTemplate template = DataManager.ITEM_DATA.getItemTemplate(item.getItemId());
 					if (template == null)
-						log.error("Detected invalid item id during decompose action " + item.getItemId());
+						log.error("Detected invalid item id during decompose action {}", item.getItemId());
 					else if (template.getExtraInventoryId() > 0)
 						return true;
 				}

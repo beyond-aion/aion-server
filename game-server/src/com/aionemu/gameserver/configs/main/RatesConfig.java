@@ -20,7 +20,7 @@ public class RatesConfig {
 	@Property(key = "gameserver.rates.enchantment_stone.base_chances", defaultValue = "65.0, 65.0")
 	public static float[] ENCHANTMENT_STONE_BASE_CHANCES;
 
-	@Property(key = "gameserver.rates.enchantment_stone.amplified_chances", defaultValue = "50.0, 50.0")
+	@Property(key = "gameserver.rates.enchantment_stone.amplified_chances", defaultValue = "61.0, 61.0")
 	public static float[] ENCHANTMENT_STONE_AMPLIFIED_CHANCES;
 
 	@Property(key = "gameserver.rates.tampering_chances", defaultValue = "65.0, 65.0")

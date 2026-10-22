@@ -1,11 +1,8 @@
 package admincommands;
 
-import org.apache.commons.lang3.ArrayUtils;
-
 import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.World;
@@ -16,12 +13,12 @@ import com.aionemu.gameserver.world.World;
 public class Announce extends AdminCommand {
 
 	public Announce() {
-		super("announce", "Sends a server-wide notice.");
-
-		setSyntaxInfo(
-			"<n|a> <message> - Sends the message either with your <n>ame or <a>nonymously.",
-			"<ely|asmo> <message> - Sends an anonymous message to <ely>os or <asmo>dian players."
-		);
+		super("announce", "Sends a server-wide notice.", """
+			n <message> - Sends the message with your name.
+			a <message> - Sends the message anonymously.
+			ely <message> - Sends an anonymous message to all Elyos players.
+			asmo <message> - Sends an anonymous message to all Asmodian players.
+			""");
 	}
 
 	@Override
@@ -30,38 +27,25 @@ public class Announce extends AdminCommand {
 			sendInfo(admin);
 			return;
 		}
-
-		String flag = params[0].toLowerCase();
-		String[] flags = { "n", "a", "ely", "asmo" };
-		if (!ArrayUtils.contains(flags, flag)) {
+		String message;
+		Race allowedRace = null;
+		if ("n".equalsIgnoreCase(params[0])) {
+			message = name(admin) + ": ";
+		} else if ("a".equalsIgnoreCase(params[0])) {
+			message = "Announce: ";
+		} else if ("ely".equalsIgnoreCase(params[0])) {
+			message = "Elyos: ";
+			allowedRace = Race.ELYOS;
+		} else if ("asmo".equalsIgnoreCase(params[0])) {
+			message = "Asmodians: ";
+			allowedRace = Race.ASMODIANS;
+		} else {
 			sendInfo(admin);
 			return;
 		}
-
-		StringBuilder sb = new StringBuilder();
-		Race allowedRace = null;
-		switch (flag) {
-			case "n":
-				sb.append(ChatUtil.name(admin) + ":");
-				break;
-			case "a":
-				sb.append("Announce:");
-				break;
-			case "ely":
-				sb.append("Elyos:");
-				allowedRace = Race.ELYOS;
-				break;
-			case "asmo":
-				sb.append("Asmodians:");
-				allowedRace = Race.ASMODIANS;
-				break;
-		}
-
-		for (int i = 1; i < params.length; i++)
-			sb.append(" ").append(params[i]);
-
+		message += join(params, 1);
 		for (Player player : World.getInstance().getAllPlayers())
 			if (allowedRace == null || player.getRace() == allowedRace || validateAccess(player))
-				PacketSendUtility.sendMessage(player, sb.toString(), ChatType.BRIGHT_YELLOW_CENTER);
+				PacketSendUtility.sendMessage(player, message, ChatType.BRIGHT_YELLOW_CENTER);
 	}
 }

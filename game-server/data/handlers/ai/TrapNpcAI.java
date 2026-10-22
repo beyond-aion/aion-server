@@ -10,6 +10,7 @@ import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureVisualState;
 import com.aionemu.gameserver.model.skill.NpcSkillEntry;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAYER_STATE;
@@ -49,11 +50,18 @@ public class TrapNpcAI extends NpcAI {
 			&& isInRange(creature, getOwner().getGameStats().getAttackRange().getCurrent())) {
 
 			Creature creator = (Creature) getCreator();
-			if (!creator.isEnemy(creature)) {
+			if (!isHostile(creator, creature)) {
 				return;
 			}
 			explode(creature);
 		}
+	}
+
+	// The npc ai does not check pvp zones, that is up to the skill it casts, so a trap is spent even where its effect will be dropped.
+	private static boolean isHostile(Creature creator, Creature creature) {
+		if (creator.getMaster() instanceof Player owner && creature.getMaster() instanceof Player victim)
+			return owner.isEnemyFrom(victim) || owner.isPvPEnemyOf(victim);
+		return creator.isEnemy(creature);
 	}
 
 	@Override

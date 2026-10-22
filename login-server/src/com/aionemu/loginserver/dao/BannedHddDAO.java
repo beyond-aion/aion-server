@@ -21,7 +21,7 @@ public class BannedHddDAO {
 			ps.setTimestamp(2, time);
 			return ps.executeUpdate() > 0;
 		} catch (SQLException e) {
-			LoggerFactory.getLogger(BannedHddDAO.class).error("Error storing hdd serial ban " + serial, e);
+			LoggerFactory.getLogger(BannedHddDAO.class).error("Error storing hdd serial ban {}", serial, e);
 		}
 		return false;
 	}
@@ -31,7 +31,7 @@ public class BannedHddDAO {
 			ps.setString(1, serial);
 			return ps.executeUpdate() > 0;
 		} catch (SQLException e) {
-			LoggerFactory.getLogger(BannedHddDAO.class).error("Error removing hdd serial " + serial, e);
+			LoggerFactory.getLogger(BannedHddDAO.class).error("Error removing hdd serial {}", serial, e);
 		}
 		return false;
 	}

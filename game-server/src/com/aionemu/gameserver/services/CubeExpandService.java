@@ -29,7 +29,7 @@ public class CubeExpandService {
 	public static void expandCube(Player player, Npc npc) {
 		StorageExpansionTemplate template = DataManager.CUBEEXPANDER_DATA.getCubeExpansionTemplate(npc.getNpcId());
 		if (template == null) {
-			log.warn("Cube expansion template could not be found for " + npc);
+			log.warn("Cube expansion template could not be found for {}", npc);
 			return;
 		}
 

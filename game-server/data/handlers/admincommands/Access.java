@@ -3,8 +3,6 @@ package admincommands;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.lang3.math.NumberUtils;
-
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 import com.aionemu.gameserver.services.CommandsAccessService;
@@ -20,17 +18,13 @@ public class Access extends AdminCommand {
 	private final Map<Integer, Byte> oldAccessLevels = new HashMap<>();
 
 	public Access() {
-		super("access", "Chat command and access level management.");
-
-		// @formatter:off
-		setSyntaxInfo(
-			"<add> <player name> <command name> - Grants the player access to the given chat command.",
-			"<remove> <player name> <command name> - Removes the player's access to the given chat command.",
-			"<removeall> <player name> - Removes all granted accesses.",
-			"<level> <number> - Temporarily sets your accesslevel to a given lower value (for test purposes).",
-			"<level> <reset> - Resets your accesslevel to the original value."
-		);
-		// @formatter:on
+		super("access", "Chat command and access level management.", """
+			add <player name> <command name> - Grants the player access to the given chat command.
+			remove <player name> <command name> - Removes the player's access to the given chat command.
+			removeall <player name> - Removes all granted accesses.
+			level <number> - Temporarily sets your accesslevel to a given lower value (for test purposes).
+			level reset - Resets your accesslevel to the original value.
+			""");
 	}
 
 	@Override
@@ -84,8 +78,8 @@ public class Access extends AdminCommand {
 					admin.getAccount().setAccessLevel(maxLevel);
 					sendInfo(admin, "Your access level has been reset.");
 				} else {
-					byte level = NumberUtils.toByte(params[1], (byte) -1);
-					if (level == -1 || level > maxLevel) {
+					byte level = Byte.parseByte(params[1]);
+					if (level < 0 || level > maxLevel) {
 						sendInfo(admin, "Invalid access level.");
 						return;
 					}

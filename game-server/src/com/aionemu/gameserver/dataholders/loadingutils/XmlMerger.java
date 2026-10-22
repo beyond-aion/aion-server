@@ -4,8 +4,10 @@ import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.file.Files;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.zip.CRC32;
@@ -15,6 +17,7 @@ import javax.xml.parsers.SAXParserFactory;
 import javax.xml.stream.*;
 import javax.xml.stream.events.XMLEvent;
 
+import org.glassfish.jaxb.runtime.v2.util.ByteArrayOutputStreamEx;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.Attributes;
@@ -26,7 +29,6 @@ import org.xml.sax.helpers.DefaultHandler;
 import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.xml.XmlUtil;
-import com.sun.xml.bind.v2.util.ByteArrayOutputStreamEx;
 
 /**
  * <p>
@@ -137,7 +139,7 @@ public class XmlMerger {
 		ImportFileHashChecker handler = new ImportFileHashChecker(sourceFile.getParentFile(), metadata);
 		SAXParserFactory.newInstance().newSAXParser().parse(sourceFile, handler);
 
-		return handler.isModified();
+		return handler.isModified() || !metadata.unchecked.isEmpty();
 	}
 
 	/**
@@ -216,7 +218,7 @@ public class XmlMerger {
 		} else {
 			boolean singleRootTag = Boolean.parseBoolean(getAttributeValue(reader, qNameSingleRootTag, "false"));
 			boolean recImport = Boolean.parseBoolean(getAttributeValue(reader, qNameRecursiveImport, "true"));
-			log.debug("Processing dir " + file);
+			log.debug("Processing dir {}", file);
 			for (File file2 : XmlUtil.listFiles(file, recImport)) {
 				boolean skipRootStartElement = singleRootTag && startElement != null;
 				startElement = importFile(file2, skipRootStartElement, singleRootTag, writer, metadata);
@@ -272,7 +274,7 @@ public class XmlMerger {
 	 */
 	private QName importFile(File file, boolean skipStartElement, boolean skipEndElement, XMLStreamWriter writer, Metadata metadata)
 		throws XMLStreamException, IOException {
-		log.debug("Appending file " + file);
+		log.debug("Appending file {}", file);
 		metadata.add(file);
 
 		XMLStreamReader reader = null;
@@ -387,7 +389,7 @@ public class XmlMerger {
 					}
 				}
 			} catch (IOException e) {
-				log.warn("File verification error. File: " + file.getPath() + ", location=" + locator.getLineNumber() + ":" + locator.getColumnNumber(), e);
+				log.warn("File verification error. File: {}, location={}:{}", file.getPath(), locator.getLineNumber(), locator.getColumnNumber(), e);
 				isModified = true;
 			}
 		}
@@ -402,6 +404,7 @@ public class XmlMerger {
 		private final Properties properties = new Properties();
 		private final CRC32 crc = new CRC32();
 		private final ByteBuffer buffer = ByteBuffer.allocate(64 * 1024);
+		private final Set<String> unchecked = new HashSet<>();
 
 		void add(File file) throws IOException {
 			properties.setProperty(file.getPath(), String.valueOf(hash(file)));
@@ -420,13 +423,17 @@ public class XmlMerger {
 		}
 
 		boolean checkIsNewOrModified(File file) throws IOException {
-			String data = properties.getProperty(file.getPath());
+			String key = file.getPath();
+			String data = properties.getProperty(key);
+			unchecked.remove(key);
 			return data == null || !data.equals(String.valueOf(hash(file)));
 		}
 
 		void load(File file) throws IOException {
 			try (BufferedReader reader = Files.newBufferedReader(file.toPath())) {
 				properties.load(reader);
+				unchecked.clear();
+				unchecked.addAll(properties.stringPropertyNames());
 			}
 		}
 

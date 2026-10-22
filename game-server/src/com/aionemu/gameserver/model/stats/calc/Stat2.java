@@ -8,24 +8,19 @@ import com.aionemu.gameserver.model.stats.container.StatEnum;
  */
 public abstract class Stat2 {
 
-	float bonusRate;
-	float baseRate = 1f;
+	protected final StatEnum stat;
+	private final Creature owner;
 	float base;
+	float baseRate = 1f;
 	float bonus;
+	float bonusRate = 1f;
 	float fixedBonusRate;
 	float finalRate = 1f;
-	private final Creature owner;
-	protected final StatEnum stat;
 
 	public Stat2(StatEnum stat, float base, Creature owner) {
-		this(stat, base, owner, 1);
-	}
-
-	public Stat2(StatEnum stat, float base, Creature owner, float bonusRate) {
 		this.stat = stat;
-		this.base = base;
 		this.owner = owner;
-		this.bonusRate = bonusRate;
+		this.base = base;
 	}
 
 	public final StatEnum getStat() {

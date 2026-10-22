@@ -1,12 +1,11 @@
 package com.aionemu.gameserver.skillengine.effect;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.controllers.attack.AttackUtil;
-import com.aionemu.gameserver.model.SkillElement;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
 import com.aionemu.gameserver.skillengine.model.Effect;
@@ -25,8 +24,6 @@ public class DelayedSpellAttackInstantEffect extends DamageEffect {
 	@Override
 	public void applyEffect(Effect effect) {
 		int valueWithDelta = calculateBaseValue(effect);
-		if (element != SkillElement.NONE)
-			valueWithDelta *= effect.getEffector().getGameStats().getKnowledge().getCurrent() / 100;
 
 		AttackUtil.calculateSkillResult(effect, valueWithDelta, this, true); // ignores shields on retail
 		final int finalPosition = this.position;

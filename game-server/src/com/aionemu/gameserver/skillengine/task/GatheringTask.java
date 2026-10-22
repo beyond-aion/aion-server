@@ -1,11 +1,13 @@
 package com.aionemu.gameserver.skillengine.task;
 
+import static com.aionemu.gameserver.controllers.observer.ObserverType.*;
+
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.configs.main.CraftConfig;
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
-import com.aionemu.gameserver.controllers.observer.ObserverType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Gatherable;
+import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.Rates;
 import com.aionemu.gameserver.model.templates.gather.GatherableTemplate;
@@ -135,9 +137,14 @@ public class GatheringTask extends AbstractCraftTask {
 	}
 
 	private ActionObserver createGathererObserver() {
-		return new ActionObserver(ObserverType.ALL) {
+		return new ActionObserver(STARTSKILLCAST, ITEMUSE, ATTACK, ATTACKED, MOVE, DOT_ATTACKED, DEATH) {
 			@Override
 			public void startSkillCast(Skill skill) {
+				abort();
+			}
+
+			@Override
+			public void itemused(Item item) {
 				abort();
 			}
 
@@ -158,6 +165,11 @@ public class GatheringTask extends AbstractCraftTask {
 
 			@Override
 			public void dotattacked(Creature creature, Effect dotEffect) {
+				abort();
+			}
+
+			@Override
+			public void died(Creature lastAttacker) {
 				abort();
 			}
 		};

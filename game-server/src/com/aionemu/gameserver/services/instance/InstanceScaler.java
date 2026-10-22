@@ -132,7 +132,7 @@ public class InstanceScaler implements StatOwner {
 		}
 
 		@Override
-		public void apply(Stat2 stat, CalculationType... calculationTypes) {
+		public void apply(Stat2 stat, Set<CalculationType> calculationTypes) {
 			stat.setBaseRate(stat.getBaseRate() * rate);
 			stat.setBonusRate(stat.getBonusRate() * rate);
 		}

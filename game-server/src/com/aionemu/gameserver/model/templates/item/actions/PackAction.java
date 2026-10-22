@@ -1,6 +1,8 @@
 package com.aionemu.gameserver.model.templates.item.actions;
 
-import javax.xml.bind.annotation.XmlAttribute;
+import static com.aionemu.gameserver.model.items.ItemUseAnimation.*;
+
+import jakarta.xml.bind.annotation.XmlAttribute;
 
 import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.model.gameobjects.Item;
@@ -93,7 +95,7 @@ public class PackAction extends AbstractItemAction {
 		final int parentItemId = parentItem.getItemId();
 		final int parentObjectId = parentItem.getObjectId();
 		int packCount = targetItem.getPackCount();
-		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentObjectId, parentItemId, 0, 1, 1), true);
+		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentObjectId, parentItemId, 0, USE_SUCCESS), true);
 		if (!player.getInventory().decreaseByObjectId(parentObjectId, 1)) {
 			return;
 		}

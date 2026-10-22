@@ -17,9 +17,9 @@ import com.aionemu.gameserver.utils.chathandlers.ConsoleCommand;
 public class Endquest extends ConsoleCommand {
 
 	public Endquest() {
-		super("endquest", "Completes a quest.");
-
-		setSyntaxInfo("<quest> - Completes the specified quest of your target, without giving rewards (defaults to your character, if no player is targeted).");
+		super("endquest", "Completes a quest.", """
+			<quest> - Completes the specified quest of your target, without giving rewards (defaults to your character, if no player is targeted).
+			""");
 	}
 
 	@Override

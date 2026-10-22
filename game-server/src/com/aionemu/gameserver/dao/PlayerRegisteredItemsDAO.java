@@ -72,7 +72,7 @@ public class PlayerRegisteredItemsDAO {
 				registry.setPersistentState(hasInvalidDecors ? PersistentState.UPDATE_REQUIRED : PersistentState.UPDATED);
 			}
 		} catch (Exception e) {
-			log.error("Could not load house registry data for player " + registry.getOwner().getOwnerId(), e);
+			log.error("Could not load house registry data for player {}", registry.getOwner().getOwnerId(), e);
 		}
 	}
 
@@ -143,7 +143,7 @@ public class PlayerRegisteredItemsDAO {
 			storeDecors(con, decorsToAdd, playerId, true);
 			registry.setPersistentState(PersistentState.UPDATED);
 		} catch (SQLException e) {
-			log.error("Can't save registered items for player: " + playerId, e);
+			log.error("Can't save registered items for player: {}", playerId, e);
 		}
 
 		for (HouseObject<?> obj : objects) {
@@ -280,7 +280,7 @@ public class PlayerRegisteredItemsDAO {
 			stmt.setInt(1, playerId);
 			stmt.execute();
 		} catch (Exception e) {
-			log.error("Error in deleting all player registered items. PlayerObjId: " + playerId, e);
+			log.error("Error in deleting all player registered items. PlayerObjId: {}", playerId, e);
 			return false;
 		}
 		return true;
@@ -291,7 +291,7 @@ public class PlayerRegisteredItemsDAO {
 			stmt.setInt(1, playerId);
 			stmt.execute();
 		} catch (Exception e) {
-			log.error("Error in resetting player registered items. PlayerObjId: " + playerId, e);
+			log.error("Error in resetting player registered items. PlayerObjId: {}", playerId, e);
 		}
 	}
 

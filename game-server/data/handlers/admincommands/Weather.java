@@ -14,15 +14,11 @@ import com.aionemu.gameserver.world.zone.ZoneInstance;
 public class Weather extends AdminCommand {
 
 	public Weather() {
-		super("weather", "Shows/changes the weather.");
-
-		// @formatter:off
-		setSyntaxInfo(
-			"<info> - Shows info for the weather in the current zone.",
-			"<next> - Triggers a natural weather change on this map.",
-			"<set> <code> - Changes the weather on this map, according to the weather code between 0 (default) and 12."
-		);
-		// @formatter:on
+		super("weather", "Shows/changes the weather.", """
+			<info> - Shows info for the weather in the current zone.
+			<next> - Triggers a natural weather change on this map.
+			<set> <code> - Changes the weather on this map, according to the weather code between 0 (default) and 12.
+			""");
 	}
 
 	@Override
@@ -39,7 +35,7 @@ public class Weather extends AdminCommand {
 						int weatherZoneId = DataManager.ZONE_DATA.getWeatherZoneId(regionZone.getZoneTemplate());
 						WeatherEntry weatherEntry = WeatherService.getInstance().getWeatherEntry(admin.getWorldId(), weatherZoneId);
 						if (weatherEntry != null) {
-							String info = "Weather for region " + regionZone.getZoneTemplate().getXmlName() + ":";
+							String info = "Weather for region " + regionZone.getZoneTemplate().getName() + ":";
 							if (weatherEntry == WeatherEntry.NONE) {
 								info += "\n\tcode: " + weatherEntry.getCode() + " (no weather)";
 							} else {

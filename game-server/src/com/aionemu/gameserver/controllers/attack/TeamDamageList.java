@@ -28,7 +28,7 @@ public class TeamDamageList {
 				DamageInfo<Player> memberDamage = (DamageInfo<Player>) damageInfo;
 				mostDamageByTeam.compute(team, (_, other) -> other == null || memberDamage.getDamage() > other.getDamage() ? memberDamage : other);
 			}
-			damageByCreatureOrTeam.computeIfAbsent(creatureOrTeam, DamageInfo::new).addDamage(damageInfo.getDamage());
+			damageByCreatureOrTeam.computeIfAbsent(creatureOrTeam, DamageInfo::new).addDamage(damageInfo.getDamage(), damageInfo.getFirstDamageTime());
 		}
 	}
 
@@ -38,6 +38,13 @@ public class TeamDamageList {
 
 	public DamageInfo<AionObject> getMostDamage() {
 		return damageByCreatureOrTeam.values().stream().max(Comparator.comparingInt(DamageInfo::getDamage)).orElse(null);
+	}
+
+	/**
+	 * @return The creature or team that dealt damage first.
+	 */
+	public DamageInfo<AionObject> getFirstDamage() {
+		return damageByCreatureOrTeam.values().stream().min(Comparator.comparingLong(DamageInfo::getFirstDamageTime)).orElse(null);
 	}
 
 	public DamageInfo<Player> getMostDamageByTeam(TemporaryPlayerTeam<?> team) {

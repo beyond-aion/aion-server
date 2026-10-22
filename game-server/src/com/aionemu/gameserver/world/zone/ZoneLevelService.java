@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.world.zone;
 
+import com.aionemu.gameserver.model.Gender;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
@@ -29,8 +30,10 @@ public class ZoneLevelService {
 			return;
 		}
 
-		float noseHeight = player.getPlayerAppearance().getBoundHeight() - 0.1f;
-		if (z + noseHeight < world.getWorldMap(player.getWorldId()).getWaterLevel())
+		float defaultEyeHeight = player.getGender() == Gender.MALE ? 1.7f : 1.58f; // eye_height from client_PCRace.xml
+		float eyeHeight = player.getPlayerAppearance().getHeightScale() * defaultEyeHeight;
+		float mouthHeight = eyeHeight - 0.05f;
+		if (z + mouthHeight < world.getWorldMap(player.getWorldId()).getWaterLevel())
 			startDrowning(player);
 		else
 			stopDrowning(player);

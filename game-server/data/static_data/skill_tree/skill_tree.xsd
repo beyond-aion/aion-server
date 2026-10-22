@@ -18,5 +18,6 @@
 		<xs:attribute name="stigma" type="xs:byte"/>
 		<xs:attribute name="race" type="Race"/>
 		<xs:attribute name="minLevel" type="xs:int" use="required"/>
+		<xs:attribute name="skillLevel" type="xs:int" default="1"/>
 	</xs:complexType>
 </xs:schema>

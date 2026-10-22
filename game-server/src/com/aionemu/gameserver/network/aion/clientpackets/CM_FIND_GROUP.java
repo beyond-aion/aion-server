@@ -113,7 +113,7 @@ public class CM_FIND_GROUP extends AionClientPacket {
 				bannedPlayerId = readD();
 				break;
 			default:
-				LoggerFactory.getLogger(CM_FIND_GROUP.class).warn("Unknown find group action " + action);
+				LoggerFactory.getLogger(CM_FIND_GROUP.class).warn("Unknown find group action {}", action);
 				break;
 		}
 	}

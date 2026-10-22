@@ -14,6 +14,8 @@ import com.aionemu.gameserver.skillengine.model.StigmaType;
  */
 public class PlayerSkillEntry extends SkillEntry implements Persistable {
 
+	public static final int MORPH_SKILL_ID = 40009;
+
 	private int skillType; // 0 normal skill , 1 stigma skill , 3 linked stigma skill
 	private volatile int currentXp; // for crafting skills
 	private PersistentState persistentState;
@@ -21,8 +23,8 @@ public class PlayerSkillEntry extends SkillEntry implements Persistable {
 	public PlayerSkillEntry(Player player, int skillId, int skillLvl, PersistentState persistentState) {
 		this(skillId, skillLvl, 0, persistentState);
 		List<SkillLearnTemplate> learnTemplates = DataManager.SKILL_TREE_DATA.getTemplatesForSkill(skillId, player.getPlayerClass(), player.getRace());
-		if (learnTemplates.size() == 0)
-			skillType = DataManager.SKILL_DATA.getSkillTemplate(skillId).getStigmaType() == StigmaType.NONE ? 0 : 1; // no way to tell if linked stigma
+		if (learnTemplates.isEmpty())
+			skillType = getSkillTemplate().getStigmaType() == StigmaType.NONE ? 0 : 1; // no way to tell if linked stigma
 		else {
 			for (SkillLearnTemplate template : learnTemplates) {
 				if (template.isStigma()) {
@@ -68,7 +70,7 @@ public class PlayerSkillEntry extends SkillEntry implements Persistable {
 	}
 
 	public boolean isMorphSkill() {
-		return skillId == 40009;
+		return skillId == MORPH_SKILL_ID;
 	}
 
 	public boolean isProfessionSkill() {
@@ -82,8 +84,8 @@ public class PlayerSkillEntry extends SkillEntry implements Persistable {
 	 * @return The flag that the client wants for the skill.
 	 */
 	public int getProfessionFlag() {
-		if (isTappingSkill() || isMorphSkill())
-			return 1; // not sure for morph
+		if (isTappingSkill())
+			return 1;
 		if (isCraftingSkill())
 			return getCurrentXp(); // not implemented in DB
 		return 0;

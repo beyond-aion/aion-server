@@ -38,7 +38,6 @@ public final class DataManager {
 	public static ChestData CHEST_DATA;
 	public static CosmeticItemsData COSMETIC_ITEMS_DATA;
 	public static CubeExpandData CUBEEXPANDER_DATA;
-	public static CuringObjectsData CURING_OBJECTS_DATA;
 	public static CustomDrop CUSTOM_NPC_DROP;
 	public static DecomposableItemsData DECOMPOSABLE_ITEMS_DATA;
 	public static EnchantData ENCHANT_DATA;
@@ -82,6 +81,10 @@ public final class DataManager {
 	public static PetFeedData PET_FEED_DATA;
 	public static PetSkillData PET_SKILL_DATA;
 	public static PlayerExperienceTable PLAYER_EXPERIENCE_TABLE;
+	public static PvpExpTable PVP_EXP_TABLE;
+	public static PvpExpModTable PVP_EXP_MOD_TABLE;
+	public static PartyExpModTable PARTY_EXP_MOD_TABLE;
+	public static MenteeExpLimitTable MENTEE_EXP_LIMIT_TABLE;
 	public static PlayerInitialData PLAYER_INITIAL_DATA;
 	public static Portal2Data PORTAL2_DATA;
 	public static PortalLocData PORTAL_LOC_DATA;
@@ -91,7 +94,6 @@ public final class DataManager {
 	public static RiftData RIFT_DATA;
 	public static RoadData ROAD_DATA;
 	public static ConquerorAndProtectorData CONQUEROR_AND_PROTECTOR_DATA;
-	public static ShieldData SHIELD_DATA;
 	public static SiegeLocationData SIEGE_LOCATION_DATA;
 	public static SkillChargeData SKILL_CHARGE_DATA;
 	public static SkillData SKILL_DATA;
@@ -136,6 +138,10 @@ public final class DataManager {
 		MATERIAL_DATA = data.materiaData;
 		MAP_WEATHER_DATA = data.mapWeatherData;
 		PLAYER_EXPERIENCE_TABLE = data.playerExperienceTable;
+		PVP_EXP_TABLE = data.pvpExpTable;
+		PVP_EXP_MOD_TABLE = data.pvpExpModTable;
+		PARTY_EXP_MOD_TABLE = data.partyExpModTable;
+		MENTEE_EXP_LIMIT_TABLE = data.menteeExpLimitTable;
 		ABSOLUTE_STATS_DATA = data.absoluteStatsData;
 		ITEM_CLEAN_UP = data.itemCleanup;
 		ITEM_DATA = data.itemData;
@@ -173,7 +179,6 @@ public final class DataManager {
 		RIFT_DATA = data.riftData;
 		BASE_DATA = data.baseData;
 		FLY_RING_DATA = data.flyRingData;
-		SHIELD_DATA = data.shieldData;
 		PET_DATA = data.petData;
 		PET_FEED_DATA = data.petFeedData;
 		PET_DOPING_DATA = data.petDopingData;
@@ -202,7 +207,6 @@ public final class DataManager {
 		HOUSE_DATA = data.houseData;
 		HOUSE_BUILDING_DATA = data.houseBuildingData;
 		HOUSE_PARTS_DATA = data.housePartsData;
-		CURING_OBJECTS_DATA = data.curingObjectsData;
 		HOUSE_NPCS_DATA = data.houseNpcsData;
 		SYSTEM_MAIL_TEMPLATES = data.systemMailTemplates;
 		CHALLENGE_DATA = data.challengeData;
@@ -234,7 +238,7 @@ public final class DataManager {
 		DecomposeAction.validateRandomItemIds();
 
 		long time = System.currentTimeMillis() - start;
-		log.info("##### [Static Data loaded in " + String.format("%.1f", time / 1000f) + " seconds] #####");
+		log.info("##### [Static Data loaded in {} seconds] #####", String.format("%.1f", time / 1000f));
 	}
 
 	public static void waitForValidationToFinishAndShutdownOnFail() {

@@ -1,8 +1,8 @@
 package com.aionemu.gameserver.skillengine.effect;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
@@ -32,5 +32,10 @@ public class ProcAtkInstantEffect extends DamageEffect {
 			return value;
 		else
 			return super.calculateBaseValue(effect);
+	}
+
+	@Override
+	public boolean shouldUseBoostSpellAttackEffects() {
+		return false;
 	}
 }

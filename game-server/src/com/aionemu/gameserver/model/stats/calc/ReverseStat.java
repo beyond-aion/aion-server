@@ -12,10 +12,6 @@ public class ReverseStat extends Stat2 {
 		super(stat, base, owner);
 	}
 
-	public ReverseStat(StatEnum stat, float base, Creature owner, float bonusRate) {
-		super(stat, base, owner, bonusRate);
-	}
-
 	@Override
 	public void addToBase(float base) {
 		this.base -= base;
@@ -26,7 +22,7 @@ public class ReverseStat extends Stat2 {
 
 	@Override
 	public void addToBonus(float bonus) {
-		this.bonus -= bonusRate * bonus;
+		this.bonus -= bonus;
 	}
 
 	@Override

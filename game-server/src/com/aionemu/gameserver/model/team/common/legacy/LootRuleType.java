@@ -18,4 +18,14 @@ public enum LootRuleType {
 	public int getId() {
 		return this.id;
 	}
+
+	/**
+	 * @return The loot rule with the given id, null if there is none.
+	 */
+	public static LootRuleType getById(int id) {
+		for (LootRuleType type : values())
+			if (type.id == id)
+				return type;
+		return null;
+	}
 }

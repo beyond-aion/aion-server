@@ -2,7 +2,6 @@ package com.aionemu.gameserver.model.geometry;
 
 import com.aionemu.gameserver.model.templates.zone.Point2D;
 import com.aionemu.gameserver.utils.PositionUtil;
-import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * This class implements cylinder area
@@ -38,8 +37,8 @@ public class CylinderArea extends AbstractArea {
 	 * @param maxZ
 	 *          max z
 	 */
-	public CylinderArea(ZoneName zoneName, int worldId, Point2D center, float radius, float minZ, float maxZ) {
-		this(zoneName, worldId, center.getX(), center.getY(), radius, minZ, maxZ);
+	public CylinderArea(Point2D center, float radius, float minZ, float maxZ) {
+		this(center.getX(), center.getY(), radius, minZ, maxZ);
 	}
 
 	/**
@@ -56,8 +55,8 @@ public class CylinderArea extends AbstractArea {
 	 * @param maxZ
 	 *          max z
 	 */
-	public CylinderArea(ZoneName zoneName, int worldId, float x, float y, float radius, float minZ, float maxZ) {
-		super(zoneName, worldId, minZ, maxZ);
+	public CylinderArea(float x, float y, float radius, float minZ, float maxZ) {
+		super(minZ, maxZ);
 		this.centerX = x;
 		this.centerY = y;
 		this.radius = radius;

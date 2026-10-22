@@ -36,7 +36,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.stats.DropRewardEnum;
 import com.aionemu.gameserver.world.WorldDropType;
 import com.aionemu.gameserver.world.WorldMapType;
-import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author xTz, Aioncool, Bobobear, Neon
@@ -381,7 +380,7 @@ public class DropRegistrationService {
 	private boolean checkGlobalRuleZones(GlobalRule rule, Npc npc) {
 		if (rule.getGlobalRuleZones() != null) {
 			for (GlobalDropZone gdZone : rule.getGlobalRuleZones().getGlobalDropZones())
-				if (npc.isInsideZone(ZoneName.get(gdZone.getZone())))
+				if (npc.isInsideZone(gdZone.getZone()))
 					return true;
 			return false;
 		}

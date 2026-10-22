@@ -1,9 +1,9 @@
 package com.aionemu.gameserver.skillengine.effect;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.controllers.attack.AttackUtil;
 import com.aionemu.gameserver.model.SkillElement;
@@ -39,13 +39,15 @@ public abstract class DamageEffect extends EffectTemplate {
 		effect.getEffected().getController().onAttack(effect, type, effect.getReserveds(this.position).getValue(), true, log, hopType);
 	}
 
-	@SuppressWarnings("lossy-conversions")
+	@Override
+	protected void resolveMagicalCritical(Effect effect) {
+		if (element != SkillElement.NONE && effect.getSkillTemplate().isApplyMagicalCritical())
+			effect.rollMagicalCritical(position, calculateCritProbMod(effect));
+	}
+
 	@Override
 	public void calculateDamage(Effect effect) {
 		int valueWithDelta = calculateBaseValue(effect);
-		if (element != SkillElement.NONE)
-			valueWithDelta *= effect.getEffector().getGameStats().getKnowledge().getCurrent() / 100f;
-
 		AttackUtil.calculateSkillResult(effect, valueWithDelta, this, false);
 	}
 
@@ -76,6 +78,18 @@ public abstract class DamageEffect extends EffectTemplate {
 	 *         {@code false} otherwise
 	 */
 	public boolean shouldApplyAttackerMovementModifier() {
+		return true;
+	}
+
+	public boolean shouldApplyMagicalSkillBoostBonus(Effect effect) {
+		return effect.getSkillTemplate().isApplyMagicalSkillBoostBonus() && !effect.getEffector().equals(effect.getEffected());
+	}
+
+	public boolean shouldUseKnowledge() {
+		return true;
+	}
+
+	public boolean shouldUseBoostSpellAttackEffects() {
 		return true;
 	}
 }

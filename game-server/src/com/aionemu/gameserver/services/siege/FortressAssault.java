@@ -132,8 +132,8 @@ public class FortressAssault extends Assault<FortressSiege> {
 		if (minSpawnDelay < 30) // just in case SIEGE_DIFFICULTY_MULTIPLIER is set beyond 1.0 (100%)
 			minSpawnDelay = 30;
 
-		log.info("Initialized fortress assault on [locationID=" + locationId + "] with [difficulty=" + difficulty + "] [factionBalance=" + factionBalance
-			+ "] [influence=" + influence + "] [difficultyMultiplier=" + SiegeConfig.SIEGE_DIFFICULTY_MULTIPLIER + "]");
+		log.info("Initialized fortress assault on [locationID={}] with [difficulty={}] [factionBalance={}] [influence={}] [difficultyMultiplier={}]",
+			locationId, difficulty, factionBalance, influence, SiegeConfig.SIEGE_DIFFICULTY_MULTIPLIER);
 	}
 
 	private float getFactionBalanceMultiplier() {
@@ -171,8 +171,8 @@ public class FortressAssault extends Assault<FortressSiege> {
 			});
 			if (spawnTask != null)
 				spawnTask.cancel(true);
-			log.info("Finished fortress assault on [locationID=" + locationId + "] by defeating " + possibleCommanderCount + " dredgion commanders after "
-				+ waveCount + " waves.");
+			log.info("Finished fortress assault on [locationID={}] by defeating {} dredgion commanders after {} waves", locationId,
+				possibleCommanderCount, waveCount);
 		}
 	}
 }

@@ -28,7 +28,7 @@ import com.aionemu.gameserver.questEngine.handlers.models.xmlQuest.events.OnTime
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.world.zone.ZoneName;
+import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
  * @author Mr.Poke, Bobobear, Pad
@@ -105,11 +105,8 @@ public class XmlQuest extends AbstractTemplateQuestHandler {
 			}
 		}
 		for (OnEnterZoneEvent onEnterZoneEvent : onEnterZoneEvents) {
-			for (String zone : onEnterZoneEvent.getZones()) {
-				ZoneName zoneName = ZoneName.get(zone);
-				if (zoneName != ZoneName.NONE) // unknown zone names are logged by ZoneName.get
-					qe.registerOnEnterZone(zoneName, questId);
-			}
+			for (String zoneName : onEnterZoneEvent.getZones())
+				qe.registerOnEnterZone(zoneName, questId); // unknown zone names are logged by ZoneData.validateZoneName
 		}
 		for (OnItemUseEvent onItemUseEvent : onItemUseEvents) {
 			for (Integer itemId : onItemUseEvent.getItemIds()) {
@@ -168,9 +165,9 @@ public class XmlQuest extends AbstractTemplateQuestHandler {
 	}
 
 	@Override
-	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) {
+	public boolean onEnterZoneEvent(QuestEnv env, ZoneInstance zone) {
 		for (OnEnterZoneEvent onEnterZoneEvent : onEnterZoneEvents) {
-			if (onEnterZoneEvent.operate(env, zoneName))
+			if (onEnterZoneEvent.operate(env, zone))
 				return true;
 		}
 		return false;

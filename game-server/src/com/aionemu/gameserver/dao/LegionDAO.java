@@ -53,7 +53,7 @@ public class LegionDAO {
 			rs.next();
 			return rs.getInt("cnt") > 0;
 		} catch (SQLException e) {
-			log.error("Can't check if name " + name + ", is used, returning possitive result", e);
+			log.error("Can't check if name {}, is used, returning possitive result", name, e);
 			return true;
 		} finally {
 			DB.close(s);
@@ -195,7 +195,7 @@ public class LegionDAO {
 				announcement = new Legion.Announcement(message, date);
 			}
 		} catch (SQLException e) {
-			log.error("Couldn't load legion announcements for legion " + legionId, e);
+			log.error("Couldn't load legion announcements for legion {}", legionId, e);
 		}
 		return announcement;
 	}
@@ -213,7 +213,7 @@ public class LegionDAO {
 				}
 			}
 		} catch (SQLException e) {
-			log.error("Couldn't save announcement for legion " + legionId + ": " + announcement, e);
+			log.error("Couldn't save announcement for legion {}: {}", legionId, announcement, e);
 		}
 	}
 
@@ -249,7 +249,7 @@ public class LegionDAO {
 			if (rs.next())
 				return true;
 		} catch (SQLException e) {
-			log.error("Can't check " + legionid + " legion emblem: ", e);
+			log.error("Can't check {} legion emblem: ", legionid, e);
 		} finally {
 			DB.close(st);
 		}
@@ -332,7 +332,7 @@ public class LegionDAO {
 				history.get(action.getType()).add(new LegionHistoryEntry(id, epochSeconds, action, name, description));
 			}
 		} catch (Exception e) {
-			log.error("Could not load history of legion " + legion, e);
+			log.error("Could not load history of legion {}", legion, e);
 		}
 		legion.setHistory(history);
 	}
@@ -350,7 +350,7 @@ public class LegionDAO {
 			result.next();
 			return new LegionHistoryEntry(result.getInt(1), (int) (nowMillis / 1000), action, name, description);
 		} catch (Exception e) {
-			log.error("Could not add history entry for legion " + legionId, e);
+			log.error("Could not add history entry for legion {}", legionId, e);
 			return null;
 		}
 	}
@@ -364,7 +364,7 @@ public class LegionDAO {
 				stmt.setInt(i + 1, entries.get(i).id());
 			stmt.executeUpdate();
 		} catch (Exception e) {
-			log.error("Could not delete " + entries.size() + " history entries for legion " + legionId, e);
+			log.error("Could not delete {} history entries for legion {}", entries.size(), legionId, e);
 		}
 	}
 }

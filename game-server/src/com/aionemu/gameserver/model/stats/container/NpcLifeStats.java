@@ -9,7 +9,7 @@ import com.aionemu.gameserver.services.LifeStatsRestoreService;
 public class NpcLifeStats extends CreatureLifeStats<Npc> {
 
 	public NpcLifeStats(Npc owner) {
-		super(owner, owner.getGameStats().getMaxHp().getCurrent(), owner.getGameStats().getMaxMp().getCurrent());
+		super(owner);
 	}
 
 	@Override

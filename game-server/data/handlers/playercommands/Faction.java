@@ -20,10 +20,9 @@ import com.aionemu.gameserver.world.World;
 public class Faction extends PlayerCommand {
 
 	public Faction() {
-		super("faction", "Faction chat.");
-
-		String priceInfo = CustomConfig.FACTION_USE_PRICE > 0 ? " Price: " + CustomConfig.FACTION_USE_PRICE + " Kinah." : "";
-		setSyntaxInfo("<message> - Sends the message to all players of your faction." + priceInfo);
+		super("faction", "Faction chat.", """
+			<message> - Sends the message to all players of your faction%s.
+			""".formatted(CustomConfig.FACTION_USE_PRICE > 0 ? " for " + CustomConfig.FACTION_USE_PRICE + " Kinah" : ""));
 	}
 
 	@Override

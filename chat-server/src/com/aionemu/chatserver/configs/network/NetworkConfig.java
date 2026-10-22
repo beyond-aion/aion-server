@@ -36,4 +36,10 @@ public class NetworkConfig {
 	 */
 	@Property(key = "chatserver.network.nio.threads", defaultValue = "1")
 	public static int NIO_READ_WRITE_THREADS;
+
+	/**
+	 * Time in seconds a client has to authenticate after connecting, before it gets disconnected.
+	 */
+	@Property(key = "chatserver.network.client.auth_timeout_seconds", defaultValue = "60")
+	public static int CLIENT_AUTH_TIMEOUT_SECONDS;
 }

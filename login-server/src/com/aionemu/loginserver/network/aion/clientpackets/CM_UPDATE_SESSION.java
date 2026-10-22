@@ -39,15 +39,10 @@ public class CM_UPDATE_SESSION extends AionClientPacket {
 	}
 
 	@Override
-	protected void readImpl() {
+	protected void readFields() {
 		accountId = readD();
 		loginOk = readD();
 		reconnectKey = readD();
-		readC(); // 68
-		readB(6); // random
-		readC(); // 4
-		readC(); // 68
-		readH(); // random
 	}
 
 	@Override

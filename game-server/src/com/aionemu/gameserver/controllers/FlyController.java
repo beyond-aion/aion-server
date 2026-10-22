@@ -94,7 +94,7 @@ public class FlyController {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GLIDE_ONLY_DEVA_CAN());
 			return false;
 		}
-		if (!player.hasAccess(AdminConfig.FREE_FLIGHT) && (player.isInsideZoneType(ZoneType.NO_FLY) || !player.isInsideZoneType(ZoneType.FLY))) {
+		if (!player.hasAccess(AdminConfig.FREE_FLIGHT) && !player.isInsideFlyZone()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FLYING_FORBIDDEN_HERE());
 			return false;
 		}
@@ -116,7 +116,8 @@ public class FlyController {
 	public boolean switchToGliding() {
 		if (player.isInGlidingState() || !player.canPerformMove())
 			return false;
-
+		if (player.isUsingFlightTransporterOrWindstream())
+			return false;
 		if (!canGlide(player))
 			return false;
 		if (player.getFlyState() == 0) {

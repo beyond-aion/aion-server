@@ -7,8 +7,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
 
-import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import jakarta.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import com.aionemu.gameserver.dataholders.SpawnsData;
 import com.aionemu.gameserver.dataholders.loadingutils.adapters.LocalDateTimeAdapter;

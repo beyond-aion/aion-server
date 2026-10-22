@@ -28,7 +28,7 @@ public class FactionPackDAO {
 				return rset.getInt("receiving_player");
 			return 0;
 		} catch (SQLException e) {
-			log.error("[FACTION_PACK] Error loading received player id on account id " + accountId, e);
+			log.error("[FACTION_PACK] Error loading received player id on account id {}", accountId, e);
 			return Integer.MAX_VALUE;
 		}
 	}
@@ -40,7 +40,7 @@ public class FactionPackDAO {
 			stmt.execute();
 			return true;
 		} catch (Exception e) {
-			log.error("[FACTION_PACK] Error saving received player id " + playerId + " on account id " + accountId, e);
+			log.error("[FACTION_PACK] Error saving received player id {} on account id {}", playerId, accountId, e);
 			return false;
 		}
 	}

@@ -25,7 +25,7 @@ public class MoveTaskManager extends AbstractPeriodicTaskManager {
 	public void addCreature(Creature creature) {
 		if (!creature.isSpawned()) { // log with stack trace to find the cause
 			LoggerFactory.getLogger(MoveTaskManager.class)
-				.warn("Failed attempt to add " + creature + " to moving creatures (despawned objects cannot move)", new UnsupportedOperationException());
+				.warn("Failed attempt to add {} to moving creatures (despawned objects cannot move)", creature, new UnsupportedOperationException());
 			return;
 		}
 		movingCreatures.putIfAbsent(creature.getObjectId(), creature);
@@ -40,7 +40,7 @@ public class MoveTaskManager extends AbstractPeriodicTaskManager {
 		movingCreatures.values().parallelStream().forEach(creature -> {
 			if (!creature.isSpawned()) { // can despawn concurrently, while this thread is already running
 				if (removeCreature(creature)) // should have been removed via onDespawn (MoveController#abortMove())
-					LoggerFactory.getLogger(MoveTaskManager.class).warn(creature + " was still in moving creatures list but already despawned");
+					LoggerFactory.getLogger(MoveTaskManager.class).warn("{} was still in moving creatures list but already despawned", creature);
 				return;
 			}
 			creature.getMoveController().moveToDestination();

@@ -36,17 +36,13 @@ public class Preview extends PlayerCommand {
 	private static final int PREVIEW_TIME_SECONDS = 10;
 
 	public Preview() {
-		super("preview", "Previews equipment and emotion cards.");
-
-		// @formatter:off
-		setSyntaxInfo(
-			"<emotion card item> - Previews the emotion.",
-			"<color> - Previews your equipped items in the specified color (dye item, color name or color HEX code).",
-			"<item(s)> [color] - Previews the specified equipment on your character (default: standard item color, optional: dye item, color name or color HEX code).",
-			"Multiple items can be separated by commas or spaces.",
-			"If a single item is given and it's a part of an item set, you will get a preview of the whole item set."
-		);
-		// @formatter:on
+		super("preview", "Previews equipment and emotion cards.", """
+			<emotion card item> - Previews the emotion.
+			<color> - Previews your equipped items in the specified color (dye item, color name or color HEX code).
+			<item(s)> [color] - Previews the specified equipment on your character (default: standard item color, optional: dye item, color name or color HEX code).
+			Multiple items can be separated by commas or spaces.
+			If a single item is given and it's a part of an item set, you will get a preview of the whole item set.
+			""");
 	}
 
 	@Override

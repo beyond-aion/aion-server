@@ -19,11 +19,11 @@ public enum TaskId {
 	ITEM_USE,
 	ACTION_ITEM_NPC,
 	HOUSE_OBJECT_USE,
-	EXPRESS_MAIL_USE,
 	SKILL_USE,
 	PET_UPDATE,
 	SUMMON_FOLLOW,
 	ZONE_MATERIAL_ACTION,
 	TERRAIN_MATERIAL_ACTION,
-	SHOUT
+	SHOUT,
+	RANK_LIMIT_UNEQUIP // grace period before items the abyss rank no longer allows are taken off
 }

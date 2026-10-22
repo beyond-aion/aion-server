@@ -125,7 +125,7 @@ public class Event {
 			onEnterMap(player);
 		});
 
-		log.info("Started event: " + eventTemplate.getName());
+		log.info("Started event: {}", eventTemplate.getName());
 	}
 
 	public void stop() {
@@ -147,7 +147,7 @@ public class Event {
 			}
 			count[0] += RespawnService.cancelEventRespawns(eventTemplate);
 			DataManager.SPAWNS_DATA.removeEventSpawnObjects(eventTemplate);
-			log.info("Removed " + count[0] + " event spawns (" + eventTemplate.getName() + ")");
+			log.info("Removed {} event spawns ({})", count[0], eventTemplate.getName());
 		}
 
 		synchronized (this) {
@@ -156,7 +156,7 @@ public class Event {
 					try {
 						task.run();
 					} catch (Exception e) {
-						log.error("Could not execute task on end of event " + getEventTemplate().getName(), e);
+						log.error("Could not execute task on end of event {}", getEventTemplate().getName(), e);
 					}
 				}
 				onEventEndTasks = null;
@@ -181,7 +181,7 @@ public class Event {
 			eventBuffHandler = null;
 		}
 
-		log.info("Stopped event: " + eventTemplate.getName());
+		log.info("Stopped event: {}", eventTemplate.getName());
 	}
 
 	public ForceType getEffectForceType() {

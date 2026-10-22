@@ -4,7 +4,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.stream.Collectors;
 
 import org.slf4j.LoggerFactory;
 
@@ -36,13 +35,17 @@ public class GMService {
 
 	private GMService() {
 		gmSkills = DataManager.SKILL_DATA.getSkillTemplates().stream()
-			.filter(t -> t.getGroup() != null && t.getGroup().startsWith("GM_") || t.getStack().startsWith("GM_")).collect(Collectors.toList());
+			.filter(t -> t.getGroup() != null && t.getGroup().startsWith("GM_") || t.getStack().startsWith("GM_")).toList();
 		if (gmSkills.isEmpty())
 			LoggerFactory.getLogger(GMService.class).warn("No GM skills found, possibly because of changed or missing skill templates.");
 	}
 
 	public Collection<Player> getOnlineStaffMembers() {
 		return staffMembers.values();
+	}
+
+	public List<Player> getAvailableStaffMembers() {
+		return getOnlineStaffMembers().stream().filter(this::isAvailable).toList();
 	}
 
 	public void onPlayerLogin(Player player) {
@@ -59,13 +62,16 @@ public class GMService {
 	}
 
 	public boolean isAnnounceable(Player player) {
-		return player.isOnline() && player.isStaff() && !player.isInCustomState(CustomPlayerState.NO_WHISPERS_MODE)
-			&& player.getFriendList().getStatus() != Status.OFFLINE
+		return player.isOnline() && player.isStaff() && isAvailable(player)
 			&& (AdminConfig.ANNOUNCE_LEVELS.contains(String.valueOf(player.getAccount().getAccessLevel())) || AdminConfig.ANNOUNCE_LEVELS.contains("*"));
 	}
 
+	private boolean isAvailable(Player player) {
+		return !player.isInCustomState(CustomPlayerState.NO_WHISPERS_MODE) && player.getFriendList().getStatus() != Status.OFFLINE;
+	}
+
 	private void broadcastConnectionStatus(Player gm, boolean connected) {
-		String name = ChatUtil.name(gm);
+		String name = ChatUtil.charName(gm);
 		SM_SYSTEM_MESSAGE sysMsg = connected ? SM_SYSTEM_MESSAGE.STR_NOTIFY_LOGIN_BUDDY(name) : SM_SYSTEM_MESSAGE.STR_NOTIFY_LOGOFF_BUDDY(name);
 
 		if ((connected && AdminConfig.ANNOUNCE_LOGIN_TO_ALL_PLAYERS) || (!connected && AdminConfig.ANNOUNCE_LOGOUT_TO_ALL_PLAYERS)) {

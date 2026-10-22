@@ -88,7 +88,7 @@ public class ArtifactAI extends NpcAI {
 		final SkillTemplate skillTemplate = DataManager.SKILL_DATA.getSkillTemplate(skillId);
 
 		if (skillTemplate == null) {
-			LoggerFactory.getLogger(ArtifactAI.class).error("No skill template for artifact effect id : " + skillId);
+			LoggerFactory.getLogger(ArtifactAI.class).error("No skill template for artifact effect id : {}", skillId);
 			return;
 		}
 
@@ -108,7 +108,7 @@ public class ArtifactAI extends NpcAI {
 			return;
 
 		if (LoggingConfig.LOG_SIEGE)
-			log.info("Artifact " + getSpawnTemplate().getSiegeId() + " activated by " + player.getName() + " (race: " + player.getRace() + ")");
+			log.info("Artifact {} activated by {} (race: {})", getSpawnTemplate().getSiegeId(), player.getName(), player.getRace());
 
 		if (!loc.getStatus().equals(ArtifactStatus.IDLE))
 			return;
@@ -129,29 +129,20 @@ public class ArtifactAI extends NpcAI {
 		PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), getObjectId(), 10000, 1));
 		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.START_QUESTLOOT, 0, getObjectId()), true);
 
-		ItemUseObserver observer = new ItemUseObserver() {
+		ItemUseObserver observer = new ItemUseObserver(player) {
 
 			@Override
-			public void abort() {
+			protected void onAbort() {
 				player.getController().cancelTask(TaskId.ACTION_ITEM_NPC);
 				PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.END_QUESTLOOT, 0, getObjectId()), true);
 				PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), getObjectId(), 10000, 0));
-				final SM_SYSTEM_MESSAGE message = STR_ARTIFACT_CANCELED(loc.getRace().getL10n(), skillTemplate.getL10n());
 				loc.setStatus(ArtifactStatus.IDLE);
-				final SM_ABYSS_ARTIFACT_INFO3 artifactInfo = new SM_ABYSS_ARTIFACT_INFO3(loc.getLocationId());
-				getOwner().getPosition().getWorldMapInstance().forEachPlayer(new Consumer<Player>() {
-
-					@Override
-					public void accept(Player player) {
-						PacketSendUtility.sendPacket(player, message);
-						PacketSendUtility.sendPacket(player, artifactInfo);
-					}
-
-				});
+				PacketSendUtility.broadcastToMap(getOwner(), STR_ARTIFACT_CANCELED(loc.getRace().getL10n(), skillTemplate.getL10n()));
+				PacketSendUtility.broadcastToMap(getOwner(), new SM_ABYSS_ARTIFACT_INFO3(loc.getLocationId()));
 			}
 
 		};
-		player.getObserveController().attach(observer);
+		player.getObserveController().addObserver(observer);
 		player.getController().addTask(TaskId.ACTION_ITEM_NPC, ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
@@ -248,7 +239,7 @@ public class ArtifactAI extends NpcAI {
 			});
 			boolean pc = skill.getProperties().getTargetSpecies() == TargetSpeciesAttribute.PC;
 			artifact.forEachCreature(creature -> {
-				if (creature.getActingCreature() instanceof Player || (creature instanceof SiegeNpc && !pc)) {
+				if (creature.getMaster() instanceof Player || (creature instanceof SiegeNpc && !pc)) {
 					switch (skill.getProperties().getTargetRelation()) {
 						case FRIEND:
 							if (player.isEnemy(creature))

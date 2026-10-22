@@ -1,44 +1,43 @@
 package com.aionemu.gameserver.model.siege;
 
 import com.aionemu.gameserver.model.Race;
-import com.aionemu.gameserver.utils.ChatUtil;
+import com.aionemu.gameserver.model.templates.L10n;
 
 /**
  * @author Sarynth
  */
-public enum SiegeRace {
+public enum SiegeRace implements L10n {
+
 	ELYOS(Race.ELYOS),
 	ASMODIANS(Race.ASMODIANS),
-	BALAUR(2, ChatUtil.l10n(900242));
+	BALAUR(2, 900242);
 
 	private final int raceId;
-	private final String l10n;
+	private final int l10nId;
 
-	private SiegeRace(Race race) {
-		this(race.getRaceId(), race.getL10n());
+	SiegeRace(Race race) {
+		this(race.getRaceId(), race.getL10nId());
 	}
 
-	private SiegeRace(int id, String l10n) {
+	SiegeRace(int id, int l10nId) {
 		this.raceId = id;
-		this.l10n = l10n;
+		this.l10nId = l10nId;
 	}
 
 	public int getRaceId() {
-		return this.raceId;
+		return raceId;
 	}
 
 	public static SiegeRace getByRace(Race race) {
-		switch (race) {
-			case ASMODIANS:
-				return SiegeRace.ASMODIANS;
-			case ELYOS:
-				return SiegeRace.ELYOS;
-			default:
-				return SiegeRace.BALAUR;
-		}
+		return switch (race) {
+			case ASMODIANS -> SiegeRace.ASMODIANS;
+			case ELYOS -> SiegeRace.ELYOS;
+			default -> SiegeRace.BALAUR;
+		};
 	}
 
-	public String getL10n() {
-		return l10n;
+	@Override
+	public int getL10nId() {
+		return l10nId;
 	}
 }

@@ -1,14 +1,15 @@
 package com.aionemu.gameserver.skillengine.condition;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.skillengine.model.ChainSkill;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.skillengine.model.ChainSkills;
 import com.aionemu.gameserver.skillengine.model.Skill;
+import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author ATracer, kecimis, Neon
@@ -28,48 +29,31 @@ public class ChainCondition extends Condition {
 	@XmlAttribute(name = "time")
 	private int time;
 
+	/**
+	 * Checks the chain state without changing it. A cast that passes and actually starts resets the chain if it was used as a follow-up skill or
+	 * restarts its own exhausted repetition, see {@link Skill#isChainResetOnCastStart()}.
+	 */
 	@Override
 	public boolean validate(Skill env) {
 		if (env.getEffector() instanceof Player player) {
-			ChainSkills chain =  player.getChainSkills();
-			ChainSkill currentSkill = chain.getCurrentChainSkill();
-
-			if (shouldReset(chain, env))
-				chain.resetChain();
-
+			ChainSkills chain = player.getChainSkills();
+			if (isRepeatable() && chain.canRepeat(category, selfCount, getActivationWindow()))
+				return true;
 			if (preCategory != null) {
-				if (currentSkill.getCategory().equals(preCategory)) {
-					if (currentSkill.getUseCount() < preCount) // preCategory skill must have been activated x times
-						return false;
-				} else if (!chain.getPreviousChainSkill().getCategory().equals(preCategory)) { // previously activated skill must match
+				if (!chain.canContinue(preCategory, preCount, getActivationWindow())) {
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CANT_CAST_IN_NONE_CHAINSKILL_STATUS());
 					return false;
 				}
+				env.setChainResetOnCastStart(true);
+			} else if (isRepeatable() && chain.isCurrentCategory(category)) {
+				env.setChainResetOnCastStart(true);
 			}
 		}
-
-		env.setChainCategory(category);
-		env.setChainUsageDuration(time);
 		return true;
 	}
 
-	private boolean shouldReset(ChainSkills chain, Skill env) {
-		ChainSkill currentSkill = chain.getCurrentChainSkill();
-		if (!currentSkill.getCategory().isEmpty()) {
-			if (chain.isChainExpired()) // check max allowed use time
-				return true;
-
-			if (preCategory == null && category.contains("_1TH")) { // first skill of a chain
-				if (!currentSkill.getCategory().equals(category)) // other skill
-					return true;
-				if (currentSkill.getUseCount() == selfCount) // same skill
-					return true;
-				int maxActiveDuration = time > 0 ? time : env.getCooldown() * 100; // template cooldown is seconds * 10...
-				if (System.currentTimeMillis() > currentSkill.getLastUseTime() + maxActiveDuration)
-					return true;
-			}
-		}
-
-		return false;
+	private boolean isRepeatable() {
+		return selfCount > 1;
 	}
 
 	/**
@@ -87,9 +71,13 @@ public class ChainCondition extends Condition {
 	}
 
 	/**
-	 * @return the time
+	 * @return Time in milliseconds after the hit of the predecessor (or of the own previous use for repetitions) within which this skill can be
+	 *         activated: the template time plus 1500, or 3000 if the template has none.<br>
+	 *         Differs from retail on purpose: retail tells a missing time (3000) from an explicit time of 0 (0 + 1500 = 1500), here 0 means
+	 *         missing and gives 3000. No template has an explicit 0, so the result is the same; to support one, make the field an Integer and
+	 *         check for null instead of 0.
 	 */
-	public int getTime() {
-		return time;
+	public int getActivationWindow() {
+		return time == 0 ? 3000 : time + 1500;
 	}
 }

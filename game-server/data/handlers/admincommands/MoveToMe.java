@@ -15,12 +15,10 @@ import com.aionemu.gameserver.world.World;
 public class MoveToMe extends AdminCommand {
 
 	public MoveToMe() {
-		super("movetome", "Teleports a player (optional his team) to the user.");
-		// @formatter:off
-		setSyntaxInfo(
-			"<name> - Teleports only the player.",
-			"<name> <(g)rp|(a)lli> - Teleports either the players group or his alliance including him.");
-		// @formatter:on
+		super("movetome", "Teleports a player (optional his team) to the user.", """
+			<name> - Teleports only the player.
+			<name> <(g)rp|(a)lli> - Teleports either the players group or his alliance including him.
+			""");
 	}
 
 	@Override
@@ -36,16 +34,12 @@ public class MoveToMe extends AdminCommand {
 			return;
 		}
 		if (params.length >= 2) {
-			if (!playerToMove.isInTeam()) {
-				sendInfo(admin, "The player does not belong to a team.");
-				return;
-			}
 			TemporaryPlayerTeam<?> teamToMove;
 			switch (params[1].toLowerCase()) {
 				case "g":
 				case "grp":
 				case "group":
-					teamToMove = playerToMove.getPlayerGroup();
+					teamToMove = playerToMove.getCurrentGroup();
 					break;
 				case "a":
 				case "alli":
@@ -57,7 +51,7 @@ public class MoveToMe extends AdminCommand {
 					return;
 			}
 			if (teamToMove == null) {
-				sendInfo(admin, playerToMove.getName() + " currently has no team.");
+				sendInfo(admin, name(playerToMove) + " currently has no team.");
 				return;
 			}
 			teamToMove.getOnlineMembers().forEach(p -> teleportPlayer(p, admin));
@@ -68,7 +62,7 @@ public class MoveToMe extends AdminCommand {
 
 	private void teleportPlayer(Player playerToMove, Player admin) {
 		TeleportService.teleportTo(playerToMove, admin.getPosition());
-		sendInfo(admin, "Teleported " + playerToMove.getName() + " to your location.");
-		sendInfo(playerToMove, "You have been teleported by " + admin.getName() + ".");
+		sendInfo(admin, "Teleported " + name(playerToMove) + " to your location.");
+		sendInfo(playerToMove, "You have been teleported by " + name(admin) + ".");
 	}
 }

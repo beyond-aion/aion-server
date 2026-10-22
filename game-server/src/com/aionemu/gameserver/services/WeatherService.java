@@ -10,7 +10,9 @@ import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.templates.materials.MaterialActCondition;
 import com.aionemu.gameserver.model.templates.world.WeatherEntry;
+import com.aionemu.gameserver.model.templates.world.WeatherState;
 import com.aionemu.gameserver.model.templates.world.WeatherTable;
 import com.aionemu.gameserver.model.templates.world.WorldMapTemplate;
 import com.aionemu.gameserver.model.templates.zone.ZoneClassName;
@@ -196,6 +198,24 @@ public class WeatherService {
 			}
 		}
 		return WeatherEntry.NONE;
+	}
+
+	/**
+	 * @return True if all conditions are met at the creature's position. Night lasts from 20:00 to 06:59, sunny means neither rain nor snow.
+	 */
+	public boolean matchesMaterialActConditions(Creature creature, List<MaterialActCondition> conditions) {
+		for (MaterialActCondition condition : conditions) {
+			if (condition == MaterialActCondition.NIGHT) {
+				int hour = GameTimeService.getInstance().getGameTime().getHour();
+				if (hour >= 7 && hour < 20)
+					return false;
+			} else if (condition == MaterialActCondition.SUNNY) {
+				WeatherState state = findWeatherEntry(creature).getState();
+				if (state == WeatherState.RAIN || state == WeatherState.SNOW)
+					return false;
+			}
+		}
+		return true;
 	}
 
 	public WeatherEntry getWeatherEntry(int mapId, int weatherZoneId) {

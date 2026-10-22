@@ -5,6 +5,7 @@ import java.util.List;
 import com.aionemu.gameserver.configs.main.SecurityConfig;
 import com.aionemu.gameserver.dao.MailDAO;
 import com.aionemu.gameserver.dao.PlayerSettingsDAO;
+import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.account.CharacterBanInfo;
 import com.aionemu.gameserver.model.account.PlayerAccountData;
 import com.aionemu.gameserver.model.gameobjects.Item;
@@ -16,7 +17,7 @@ import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.services.BrokerService;
 import com.aionemu.gameserver.services.LegionService;
-import com.aionemu.gameserver.services.player.MultiClientingService;
+import com.aionemu.gameserver.services.player.MultiClientService;
 
 /**
  * @author AEJTester, Nemesiss, Niato, Neon
@@ -51,7 +52,7 @@ public abstract class AbstractPlayerInfoPacket extends AionServerPacket {
 		writeC(playerAppearance.getTattoo());
 		writeC(playerAppearance.getFaceContour());
 		writeC(playerAppearance.getExpression());
-		writeC(5);// always 5 o0
+		writeC(6); // always 6, unused by the client
 		writeC(playerAppearance.getJawLine());
 		writeC(playerAppearance.getForehead());
 		writeC(playerAppearance.getEyeHeight());
@@ -73,8 +74,8 @@ public abstract class AbstractPlayerInfoPacket extends AionServerPacket {
 		writeC(playerAppearance.getLipSize());
 		writeC(playerAppearance.getSmile());
 		writeC(playerAppearance.getLipShape());
-		writeC(playerAppearance.getJawHeigh());
-		writeC(playerAppearance.getChinJut());
+		writeC(playerAppearance.getChinHeight());
+		writeC(playerAppearance.getCheekBones());
 		writeC(playerAppearance.getEarShape());
 		writeC(playerAppearance.getHeadSize());
 		// 1.5.x 0x00, shoulderSize, armLength, legLength (BYTE) after HeadSize
@@ -98,7 +99,7 @@ public abstract class AbstractPlayerInfoPacket extends AionServerPacket {
 		writeC(0x00); // always 0 may be acessLevel
 		writeC(0x00); // sometimes 0xC7 (199) for all chars, else 0
 		writeC(0x00); // sometimes 0x04 (4) for all chars, else 0
-		writeF(playerAppearance.getHeight());
+		writeF(playerAppearance.getHeightScale());
 		writeD(pcd.getTemplateId());
 		writeD(pcd.getMapId()); // mapid for preloading map
 		writeF(pcd.getX());
@@ -169,11 +170,17 @@ public abstract class AbstractPlayerInfoPacket extends AionServerPacket {
 		long nowSeconds = System.currentTimeMillis() / 1000;
 		if (cbi != null && nowSeconds >= cbi.getEnd())
 			cbi = null;
-		if (cbi == null && SecurityConfig.MULTI_CLIENTING_RESTRICTION_MODE == SecurityConfig.MultiClientingRestrictionMode.SAME_FACTION) {
-			int cdMinutes = SecurityConfig.MULTI_CLIENTING_FACTION_SWITCH_COOLDOWN_MINUTES;
-			if (cdMinutes > 0 && MultiClientingService.checkForFactionSwitchCooldownTime(playerAccountData.getPlayerCommonData().getRace(), con) != null) {
+		if (cbi == null && con.getAccount().getAccessLevel() == 0 && !SecurityConfig.MULTI_CLIENT_ALLOW_BOTH_FACTIONS) {
+			Race race = playerAccountData.getPlayerCommonData().getRace();
+			if (MultiClientService.checkForFactionSwitchCooldownTime(race, con) != null) {
+				int cdMinutes = SecurityConfig.MULTI_CLIENT_FACTION_SWITCH_COOLDOWN_MINUTES;
+				String reason;
+				if (cdMinutes > 0)
+					reason = "\uE026 " + cdMinutes + " minute cooldown between switching factions";
+				else
+					reason = "Please log out all " + (race == Race.ELYOS ? "Asmodian" : "Elyos") + " characters in your household";
 				int durationSeconds = 61; // client will send CM_CHARACTER_LIST after this duration to update the ban info (<61s corrupts the ban info)
-				cbi = new CharacterBanInfo(nowSeconds, durationSeconds, "\n\n\n\uE026 " + cdMinutes + " minute cooldown between switching factions\n\n\n\n\n\n\n");
+				cbi = new CharacterBanInfo(nowSeconds, durationSeconds, "\n\n\n%s\n\n\n\n\n\n\n".formatted(reason));
 			}
 		}
 		return cbi;

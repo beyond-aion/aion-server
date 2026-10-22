@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.model.gameobjects.player;
 
-import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
 import org.slf4j.Logger;
@@ -45,14 +44,16 @@ public class PlayerScripts {
 	public boolean set(int id, byte[] compressedXML, int uncompressedSize, boolean storeInDb) {
 		if (isInvalidScriptId(id))
 			return false;
-		String scriptXML = decompressAndValidate(compressedXML, uncompressedSize);
-		if (scriptXML == null)
+		if (!isValid(compressedXML, uncompressedSize)) {
+			log.warn("Invalid housing script data for house {}: {} bytes declared to inflate to {} bytes", houseObjId,
+				compressedXML == null ? 0 : compressedXML.length, uncompressedSize);
 			return false;
+		}
 		if (storeInDb) {
 			House house = HousingService.getInstance().findHouseOrStudio(houseObjId);
 			if (house.getPersistentState() == PersistentState.NEW)
 				house.save(); // new houses must be inserted first, due to foreign key constraints
-			HouseScriptsDAO.storeScript(houseObjId, id, scriptXML);
+			HouseScriptsDAO.storeScript(houseObjId, id, compressedXML, uncompressedSize);
 		}
 		scripts[id] = new PlayerScript(id, compressedXML, uncompressedSize);
 		return true;
@@ -80,23 +81,10 @@ public class PlayerScripts {
 		return scriptId < 0 || scriptId >= scripts.length;
 	}
 
-	private String decompressAndValidate(byte[] compressedXML, int uncompressedSize) {
+	private boolean isValid(byte[] compressedXML, int uncompressedSize) {
 		if (compressedXML == null || compressedXML.length == 0)
-			return "";
-		byte[] bytes;
-		try {
-			bytes = CompressUtil.decompress(compressedXML);
-		} catch (Exception ex) {
-			log.error("Housing script data for house {} could not be decompressed", houseObjId, ex);
-			return null;
-		}
-		String scriptXML = new String(bytes, StandardCharsets.UTF_16LE);
-		if (bytes.length != uncompressedSize) {
-			log.warn("Unexpected housing script size after decompression for house {}: Expected {} bytes, got {} bytes:\n{}", houseObjId, uncompressedSize,
-				bytes.length, scriptXML);
-			return null;
-		}
-		return scriptXML;
+			return uncompressedSize == 0;
+		return CompressUtil.inflatesTo(compressedXML, uncompressedSize);
 	}
 
 	public void sendToPlayer(Player player, int houseAddress) {

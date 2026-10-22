@@ -63,7 +63,7 @@ public class WorldPosition {
 	 */
 	public int getMapId() {
 		if (mapId == 0)
-			log.warn("WorldPosition has (mapId == 0) " + this.toString());
+			log.warn("WorldPosition has (mapId == 0) {}", this.toString());
 		return mapId;
 	}
 
@@ -219,6 +219,6 @@ public class WorldPosition {
 	}
 
 	public String toCoordString() {
-		return "Map ID: " + mapId + ", Instance ID: " + getInstanceId() + "\nX: " + x + ", Y: " + y + ", Z: " + z + ", Heading: " + heading;
+		return "Map ID: " + mapId + ", Instance ID: " + getInstanceId() + ", X: " + x + ", Y: " + y + ", Z: " + z + ", Heading: " + heading;
 	}
 }

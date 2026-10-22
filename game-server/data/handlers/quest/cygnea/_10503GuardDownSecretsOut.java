@@ -1,6 +1,7 @@
 package quest.cygnea;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
+import static com.aionemu.gameserver.model.items.ItemUseAnimation.*;
 
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -12,7 +13,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.world.zone.ZoneName;
+import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
  * @Author Majka
@@ -49,7 +50,7 @@ public class _10503GuardDownSecretsOut extends AbstractQuestHandler {
 		qe.registerQuestNpc(mobTargetId).addOnKillEvent(questId);
 		qe.registerQuestItem(collectItemId, questId);
 		qe.registerQuestItem(workItemId, questId);
-		qe.registerOnEnterZone(ZoneName.get("LF5_SENSORYAREA_Q10503_206364_3_210070000"), questId); // Aetheric Field Stone of Earth zone
+		qe.registerOnEnterZone("LF5_SENSORYAREA_Q10503_206364_3_210070000", questId); // Aetheric Field Stone of Earth zone
 		qe.registerOnQuestCompleted(questId);
 		qe.registerOnLevelChanged(questId);
 	}
@@ -139,9 +140,9 @@ public class _10503GuardDownSecretsOut extends AbstractQuestHandler {
 	}
 
 	@Override
-	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) { // Step 6: Examine the Aetheric Field Stone of Earth.
+	public boolean onEnterZoneEvent(QuestEnv env, ZoneInstance zone) { // Step 6: Examine the Aetheric Field Stone of Earth.
 
-		if (zoneName == ZoneName.get("LF5_SENSORYAREA_Q10503_206364_3_210070000")) {
+		if (zone.matches("LF5_SENSORYAREA_Q10503_206364_3_210070000")) {
 
 			Player player = env.getPlayer();
 			if (player == null) {
@@ -200,12 +201,12 @@ public class _10503GuardDownSecretsOut extends AbstractQuestHandler {
 			return HandlerResult.UNKNOWN;
 
 		final int itemObjId = item.getObjectId();
-		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 1000, 0, 0), true);
+		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 1000, USE_START), true);
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
 			public void run() {
-				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0, 1, 0), true);
+				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0, USE_SUCCESS), true);
 				int var = qs.getQuestVarById(0);
 				if (var == 4) { // Step 4: Read the Deciphered Balaur Document and find out what it says.
 					qs.setQuestVar(var + 1);

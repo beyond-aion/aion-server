@@ -1,11 +1,12 @@
 package com.aionemu.gameserver.model.geometry;
 
-import java.util.Collection;
+import java.awt.geom.Path2D;
+import java.awt.geom.Rectangle2D;
+import java.util.List;
 
 import com.aionemu.gameserver.configs.main.WorldConfig;
 import com.aionemu.gameserver.model.templates.zone.Point2D;
 import com.aionemu.gameserver.utils.PositionUtil;
-import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * Area of free form
@@ -14,10 +15,9 @@ import com.aionemu.gameserver.world.zone.ZoneName;
  */
 public class PolyArea extends AbstractArea {
 
-	/**
-	 * Polygon used to calculate isInside()
-	 */
-	private final Polygon2D poly;
+	private final List<Point2D> points;
+	private final Rectangle2D bounds;
+	private final Path2D.Float path;
 
 	/**
 	 * Creates new area from given points
@@ -29,41 +29,24 @@ public class PolyArea extends AbstractArea {
 	 * @param zMax
 	 *          maximal z
 	 */
-	public PolyArea(ZoneName zoneName, int worldId, Collection<Point2D> points, float zMin, float zMax) {
-		this(zoneName, worldId, points.toArray(new Point2D[points.size()]), zMin, zMax);
-	}
+	public PolyArea(List<Point2D> points, float zMin, float zMax) {
+		if (points.size() < 3)
+			throw new IllegalArgumentException("PolyArea needs at least 3 points but got " + points.size());
+		super(zMin, zMax);
 
-	/**
-	 * Creates new area from given points
-	 * 
-	 * @param points
-	 *          list of points
-	 * @param zMin
-	 *          minimal z
-	 * @param zMax
-	 *          maximal z
-	 */
-	public PolyArea(ZoneName zoneName, int worldId, Point2D[] points, float zMin, float zMax) {
-		super(zoneName, worldId, zMin, zMax);
-
-		if (points.length < 3) {
-			throw new IllegalArgumentException("Not enough points, needed at least 3 but got " + points.length);
+		this.points = points;
+		path = new Path2D.Float(Path2D.WIND_NON_ZERO, points.size());
+		path.moveTo(points.getFirst().getX(), points.getFirst().getY());
+		for (int i = 1; i < points.size(); i++) {
+			path.lineTo(points.get(i).getX(), points.get(i).getY());
 		}
-
-		float[] xPoints = new float[points.length];
-		float[] yPoints = new float[points.length];
-
-		for (int i = 0, n = points.length; i < n; i++) {
-			Point2D p = points[i];
-			xPoints[i] = p.getX();
-			yPoints[i] = p.getY();
-		}
-		this.poly = new Polygon2D(xPoints, yPoints, points.length);
+		bounds = path.getBounds2D();
+		path.closePath();
 	}
 
 	@Override
 	public boolean isInside2D(float x, float y) {
-		return poly.contains(x, y);
+		return bounds.contains(x, y) && path.contains(x, y);
 	}
 
 	@Override
@@ -90,22 +73,18 @@ public class PolyArea extends AbstractArea {
 
 	@Override
 	public Point2D getClosestPoint(float x, float y) {
-
 		Point2D closestPoint = null;
 		double closestDistance = 0;
-		for (int i = 0; i < poly.xpoints.length; i++) {
+		for (int i = 0; i < points.size(); i++) {
 			int nextIndex = i + 1;
-			if (nextIndex == poly.xpoints.length) {
+			if (nextIndex == points.size()) {
 				nextIndex = 0;
 			}
-
-			float p1x = poly.xpoints[i];
-			float p1y = poly.ypoints[i];
-			float p2x = poly.xpoints[nextIndex];
-			float p2y = poly.ypoints[nextIndex];
-
+			float p1x = points.get(i).getX();
+			float p1y = points.get(i).getY();
+			float p2x = points.get(nextIndex).getX();
+			float p2y = points.get(nextIndex).getY();
 			Point2D point = PositionUtil.getClosestPointOnSegment(p1x, p1y, p2x, p2y, x, y);
-
 			if (closestPoint == null) {
 				closestPoint = point;
 				closestDistance = PositionUtil.getDistance(closestPoint.getX(), closestPoint.getY(), x, y);
@@ -117,7 +96,6 @@ public class PolyArea extends AbstractArea {
 				}
 			}
 		}
-
 		return closestPoint;
 	}
 
@@ -125,6 +103,10 @@ public class PolyArea extends AbstractArea {
 	public boolean intersectsRectangle(RectangleArea area) {
 		if (area.getMinZ() > getMaxZ() || area.getMaxZ() < getMinZ())
 			return false;
-		return poly.intersects(area.getMinX(), area.getMinY(), WorldConfig.WORLD_REGION_SIZE, WorldConfig.WORLD_REGION_SIZE);
+		return intersects(area.getMinX(), area.getMinY(), WorldConfig.WORLD_REGION_SIZE, WorldConfig.WORLD_REGION_SIZE);
+	}
+
+	private boolean intersects(double x, double y, double w, double h) {
+		return bounds.intersects(x, y, w, h) && path.intersects(x, y, w, h);
 	}
 }

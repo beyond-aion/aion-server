@@ -8,6 +8,7 @@ import com.aionemu.gameserver.ai.AISubState;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.configs.main.AIConfig;
 import com.aionemu.gameserver.configs.main.GeoDataConfig;
+import com.aionemu.gameserver.configs.main.GeoDataConfig.Mode;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.geoEngine.collision.CollisionIntention;
 import com.aionemu.gameserver.geoEngine.collision.IgnoreProperties;
@@ -209,7 +210,7 @@ public class WalkManager {
 				int diameter = randomWalkRange * 2;
 				float nextX = Rnd.nextFloat(diameter) - randomWalkRange + owner.getSpawn().getX();
 				float nextY = Rnd.nextFloat(diameter) - randomWalkRange + owner.getSpawn().getY();
-				if (GeoDataConfig.GEO_ENABLE && GeoDataConfig.GEO_NPC_MOVE) {
+				if (GeoDataConfig.MODE == Mode.ON && GeoDataConfig.GEO_NPC_MOVE) {
 					Vector3f loc = GeoService.getInstance().getClosestCollision(owner, nextX, nextY, owner.getZ(), true, RANDOM_WALK_GEO_FLAGS, IgnoreProperties.of(owner.getRace()));
 					owner.getMoveController().moveToPoint(loc.x, loc.y, loc.z);
 				} else {

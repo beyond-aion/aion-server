@@ -7,7 +7,7 @@ import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.world.zone.ZoneName;
+import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
  * @author Ritsu
@@ -24,16 +24,16 @@ public class _28410FortressUnsecured extends AbstractQuestHandler {
 		qe.registerQuestNpc(799587).addOnTalkEvent(questId);
 		qe.registerQuestNpc(799563).addOnTalkEvent(questId);
 		qe.registerQuestNpc(799558).addOnTalkEvent(questId);
-		qe.registerOnEnterZone(ZoneName.get("DRANA_PRODUCTION_LAB_300250000"), questId);
+		qe.registerOnEnterZone("DRANA_PRODUCTION_LAB_300250000", questId);
 	}
 
 	@Override
-	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) {
+	public boolean onEnterZoneEvent(QuestEnv env, ZoneInstance zone) {
 		Player player = env.getPlayer();
 		if (player == null)
 			return false;
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (zoneName != ZoneName.get("DRANA_PRODUCTION_LAB_300250000"))
+		if (!zone.matches("DRANA_PRODUCTION_LAB_300250000"))
 			return false;
 		if (qs == null || qs.getQuestVars().getQuestVars() != 1)
 			return false;

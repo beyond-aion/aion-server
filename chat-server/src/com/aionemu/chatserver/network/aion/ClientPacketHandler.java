@@ -1,18 +1,22 @@
 package com.aionemu.chatserver.network.aion;
 
-import org.jboss.netty.buffer.ChannelBuffer;
+import java.nio.ByteBuffer;
 
-import com.aionemu.chatserver.common.netty.AbstractPacketHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.aionemu.chatserver.network.aion.AionConnection.State;
 import com.aionemu.chatserver.network.aion.clientpackets.*;
-import com.aionemu.chatserver.network.netty.handler.ClientChannelHandler;
-import com.aionemu.chatserver.network.netty.handler.ClientChannelHandler.ClientChannelHandlerState;
+import com.aionemu.commons.utils.NetworkUtils;
 
 /**
  * @author ATracer
  */
-public class ClientPacketHandler extends AbstractPacketHandler {
+public class ClientPacketHandler {
 
-	public AbstractClientPacket handle(ChannelBuffer buf, ClientChannelHandler channelHandler) {
+	private static final Logger log = LoggerFactory.getLogger(ClientPacketHandler.class);
+
+	public static AbstractClientPacket handle(ByteBuffer buf, AionConnection connection) {
 		/*
 			retail (KOR 8.2.22) client packet names for opcodes:
 			0x0012  (Leave channel)
@@ -82,31 +86,36 @@ public class ClientPacketHandler extends AbstractPacketHandler {
 			0x4917 ?   (H: pktsz(0x18)   H: opcode  D: taskID?(search in queue list for task with opcode 0x4916)   D: channelId  Q: userID D: ? )
 			0x4920 ? 
 		 */
-		byte opCode = buf.readByte();
-		ClientChannelHandlerState state = channelHandler.getState();
+		byte opCode = buf.get();
+		State state = connection.getState();
 		AbstractClientPacket clientPacket = null;
 
 		switch (state) {
 			case CONNECTED:
 				switch (opCode) {
-					case 0x30 -> clientPacket = new CM_CHAT_INI(buf, channelHandler, opCode);
-					case 0x05 -> clientPacket = new CM_PLAYER_AUTH(buf, channelHandler, opCode);
+					case 0x30 -> clientPacket = new CM_CHAT_INI(buf, connection, opCode);
+					case 0x05 -> clientPacket = new CM_PLAYER_AUTH(buf, connection, opCode);
 					default -> logUnknownPacket(opCode, state, buf);
 				}
 				break;
 			case AUTHED:
 				switch (opCode) {
-					case 0x0B -> clientPacket = new CM_CHANNEL_CREATE(buf, channelHandler, opCode);
-					case 0x0D -> clientPacket = new CM_CHANNEL_JOIN(buf, channelHandler, opCode);
-					case 0x10 -> clientPacket = new CM_CHANNEL_REQUEST(buf, channelHandler, opCode);
-					case 0x12 -> clientPacket = new CM_CHANNEL_LEAVE(buf, channelHandler, opCode);
-					case 0x18 -> clientPacket = new CM_CHANNEL_MESSAGE(buf, channelHandler, opCode);
-					case 0x2C -> clientPacket = new CM_PLAYER_INFO(buf, channelHandler, opCode);
-					case (byte) 0xFF -> clientPacket = new CM_PING(buf, channelHandler, opCode);
+					case 0x0B -> clientPacket = new CM_CHANNEL_CREATE(buf, connection, opCode);
+					case 0x0D -> clientPacket = new CM_CHANNEL_JOIN(buf, connection, opCode);
+					case 0x10 -> clientPacket = new CM_CHANNEL_REQUEST(buf, connection, opCode);
+					case 0x12 -> clientPacket = new CM_CHANNEL_LEAVE(buf, connection, opCode);
+					case 0x18 -> clientPacket = new CM_CHANNEL_MESSAGE(buf, connection, opCode);
+					case 0x2C -> clientPacket = new CM_PLAYER_INFO(buf, connection, opCode);
+					case (byte) 0xFF -> clientPacket = new CM_PING(buf, connection, opCode);
 					default -> logUnknownPacket(opCode, state, buf);
 				}
 				break;
 		}
 		return clientPacket;
+	}
+
+	private static void logUnknownPacket(byte opCode, State state, ByteBuffer buf) {
+		log.warn("Unknown packet received from client: opCode=0x{} state={} length={} data=[{}]", "%02X".formatted(opCode), state, buf.remaining(),
+			NetworkUtils.toHex(buf));
 	}
 }

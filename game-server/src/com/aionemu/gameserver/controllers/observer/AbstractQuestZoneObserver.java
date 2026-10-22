@@ -18,10 +18,10 @@ public abstract class AbstractQuestZoneObserver extends ActionObserver {
 	protected final ZoneTemplate observedZone;
 	protected Vector3f oldPos;
 	protected int stepCount;
-	private AtomicBoolean isRunning = new AtomicBoolean();
+	private final AtomicBoolean isRunning = new AtomicBoolean();
 
-	public AbstractQuestZoneObserver(Player player, ZoneTemplate zoneTemplate) {
-		super(ObserverType.ALL);
+	public AbstractQuestZoneObserver(Player player, ZoneTemplate zoneTemplate, ObserverType... observerTypes) {
+		super(ObserverType.MOVE, observerTypes);
 		this.player = player;
 		this.startPos = new Vector3f(player.getX(), player.getY(), player.getZ());
 		this.oldPos = startPos.clone();

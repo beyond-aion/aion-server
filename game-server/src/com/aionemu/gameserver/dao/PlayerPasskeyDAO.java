@@ -29,7 +29,7 @@ public class PlayerPasskeyDAO {
 			stmt.setString(2, passkey);
 			stmt.execute();
 		} catch (SQLException e) {
-			log.error("Error saving PlayerPasskey. accountId: " + accountId, e);
+			log.error("Error saving PlayerPasskey. accountId: {}", accountId, e);
 		}
 	}
 
@@ -42,7 +42,7 @@ public class PlayerPasskeyDAO {
 			if (stmt.executeUpdate() > 0)
 				result = true;
 		} catch (SQLException e) {
-			log.error("Error updating PlayerPasskey. accountId: " + accountId, e);
+			log.error("Error updating PlayerPasskey. accountId: {}", accountId, e);
 		}
 		return result;
 	}
@@ -55,7 +55,7 @@ public class PlayerPasskeyDAO {
 			if (stmt.executeUpdate() > 0)
 				result = true;
 		} catch (SQLException e) {
-			log.error("Error updaing PlayerPasskey. accountId: " + accountId, e);
+			log.error("Error updaing PlayerPasskey. accountId: {}", accountId, e);
 		}
 		return result;
 	}
@@ -72,7 +72,7 @@ public class PlayerPasskeyDAO {
 				}
 			}
 		} catch (SQLException e) {
-			log.error("Error loading PlayerPasskey. accountId: " + accountId, e);
+			log.error("Error loading PlayerPasskey. accountId: {}", accountId, e);
 			return false;
 		}
 		return passkeyChecked;
@@ -89,7 +89,7 @@ public class PlayerPasskeyDAO {
 				}
 			}
 		} catch (SQLException e) {
-			log.error("Error loading PlayerPasskey. accountId: " + accountId, e);
+			log.error("Error loading PlayerPasskey. accountId: {}", accountId, e);
 			return false;
 		}
 		return existPasskeyChecked;

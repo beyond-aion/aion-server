@@ -65,7 +65,7 @@ public class IDFactory {
 	private IDFactory() {
 		lockIds(0);
 		initializeUsedIds();
-		log.info("IDFactory: {} IDs used.", getUsedCount());
+		log.info("IDFactory: {} IDs used", getUsedCount());
 	}
 
 	public static IDFactory getInstance() {

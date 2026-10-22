@@ -1,14 +1,15 @@
 package com.aionemu.gameserver.model.templates.item.actions;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.model.gameobjects.HouseObject;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.house.HousingCommand;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_HOUSE_EDIT;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_UPDATE_PLAYER_APPEARANCE;
@@ -93,12 +94,13 @@ public class DyeAction extends AbstractItemAction {
 		if (!player.getInventory().decreaseByObjectId(dyeItem.getObjectId(), 1))
 			return;
 		houseObject.setColor(getColor());
+		houseObject.setColorExpireEnd(minutes == null ? 0 : (int) (System.currentTimeMillis() / 1000 + minutes * 60));
 		float x = houseObject.getX();
 		float y = houseObject.getY();
 		float z = houseObject.getZ();
 		int rotation = houseObject.getRotation();
-		PacketSendUtility.sendPacket(player, new SM_HOUSE_EDIT(7, 0, houseObject.getObjectId()));
-		PacketSendUtility.sendPacket(player, new SM_HOUSE_EDIT(5, houseObject.getObjectId(), x, y, z, rotation));
+		PacketSendUtility.sendPacket(player, new SM_HOUSE_EDIT(HousingCommand.WITHDRAW_OBJECT, houseObject.getObjectId()));
+		PacketSendUtility.sendPacket(player, new SM_HOUSE_EDIT(HousingCommand.PUT_OBJECT, houseObject.getObjectId(), x, y, z, rotation));
 		houseObject.spawn();
 		String objectName = houseObject.getObjectTemplate().getL10n();
 		if (houseObject.getColor() == null) {
