@@ -3,17 +3,17 @@ package com.aionemu.gameserver.dataholders;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import org.slf4j.LoggerFactory;
-
-import com.aionemu.gameserver.model.templates.itemgroups.*;
-import com.aionemu.gameserver.model.templates.itemgroups.FeedGroups.*;
-import com.aionemu.gameserver.model.templates.pet.FoodType;
-
 import jakarta.xml.bind.Unmarshaller;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
+
+import org.slf4j.LoggerFactory;
+
+import com.aionemu.gameserver.model.templates.itemgroups.*;
+import com.aionemu.gameserver.model.templates.itemgroups.FeedGroups.*;
+import com.aionemu.gameserver.model.templates.pet.FoodType;
 
 /**
  * @author Rolandas
@@ -169,7 +169,8 @@ public class ItemGroupsData {
 			petFood.put(foodType, itemIds);
 			if (foodType != FoodType.EXCLUDES && foodType != FoodType.STINKY)
 				petFoodCount += itemIds.size();
-			food.clear();
+			if (!food.isEmpty())
+				food.clear();
 		}
 	}
 

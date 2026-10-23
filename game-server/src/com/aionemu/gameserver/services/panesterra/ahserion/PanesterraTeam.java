@@ -1,14 +1,13 @@
 package com.aionemu.gameserver.services.panesterra.ahserion;
 
-import com.aionemu.gameserver.model.Race;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Consumer;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldPosition;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Consumer;
 
 /**
  * @author Yeats, Estrayl
@@ -102,11 +101,6 @@ public class PanesterraTeam {
 
 	public boolean isTeamMember(int playerId) {
 		return teamMembers.contains(playerId);
-	}
-
-	public void removeTeamMember(int playerId) {
-		if (teamMembers.contains(playerId))
-			teamMembers.remove(playerId);
 	}
 
 	public boolean isEliminated() {

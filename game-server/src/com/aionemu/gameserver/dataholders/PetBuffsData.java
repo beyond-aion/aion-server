@@ -30,7 +30,6 @@ public class PetBuffsData {
 		for (PetBuff buff : buffs)
 			petBuffsById.put(buff.getId(), buff);
 
-		buffs.clear();
 		buffs = null;
 	}
 

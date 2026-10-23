@@ -1,13 +1,8 @@
 package com.aionemu.gameserver.model.templates.quest;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.xml.bind.annotation.XmlAccessType;
-import jakarta.xml.bind.annotation.XmlAccessorType;
-import jakarta.xml.bind.annotation.XmlAttribute;
-import jakarta.xml.bind.annotation.XmlElement;
-import jakarta.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.*;
 
 /**
  * @author MrPoke
@@ -20,32 +15,13 @@ public class CollectItems {
 	protected List<CollectItem> collectItem;
 
 	@XmlAttribute(name = "start_check")
-	protected Boolean startCheck;
+	protected boolean startCheck;
 
-	/**
-	 * Gets the value of the collectItem property.
-	 * <p>
-	 * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to the returned list will be
-	 * present inside the JAXB object. This is why there is not a <CODE>set</CODE> method for the collectItem property.
-	 * <p>
-	 * For example, to add a new item, do as follows:
-	 * 
-	 * <pre>
-	 * getCollectItem().add(newItem);
-	 * </pre>
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list {@link CollectItem }
-	 */
 	public List<CollectItem> getCollectItem() {
-		if (collectItem == null) {
-			collectItem = new ArrayList<>();
-		}
-		return this.collectItem;
+		return collectItem == null ? List.of() : collectItem;
 	}
 
 	public boolean getStartCheck() {
-		if (startCheck == null)
-			return false;
 		return startCheck;
 	}
 
