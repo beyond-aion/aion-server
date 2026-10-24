@@ -195,27 +195,8 @@ public class _2002WheresRae extends AbstractQuestHandler {
 
 	@Override
 	public boolean onKillEvent(QuestEnv env) {
-		Player player = env.getPlayer();
-		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs == null)
-			return false;
-
-		int var = qs.getQuestVarById(0);
-		int targetId = 0;
-		if (env.getVisibleObject() instanceof Npc)
-			targetId = ((Npc) env.getVisibleObject()).getNpcId();
-
-		if (qs.getStatus() != QuestStatus.START)
-			return false;
-		switch (targetId) {
-			case 210377:
-			case 210378:
-				if (var >= 3 && var < 10) {
-					changeQuestStep(env, var, Math.min(10, var + 1));
-					return true;
-				}
-		}
-		return false;
+		int[] npcIds = { 210377, 210378 };
+		return defaultOnKillEvent(env, npcIds, 3, 10);
 	}
 
 	@Override

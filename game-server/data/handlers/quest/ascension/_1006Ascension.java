@@ -152,14 +152,12 @@ public class _1006Ascension extends AbstractQuestHandler {
 				case 205000: // Belpartan
 					switch (dialogActionId) {
 						case QUEST_SELECT:
-							if (qs.getQuestVars().getQuestVars() == 99) {
+							if (changeQuestStep(env, 99, 50)) {
 								SkillEngine.getInstance().applyEffectDirectly(281, player, player);
 								player.setState(CreatureState.FLYING);
 								player.unsetState(CreatureState.ACTIVE);
 								player.setFlightTeleportId(1001);
 								PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.START_FLYTELEPORT, 1001, 0));
-								qs.setQuestVar(50); // 50
-								updateQuestStatus(env);
 								return true;
 							}
 					}
@@ -197,27 +195,22 @@ public class _1006Ascension extends AbstractQuestHandler {
 	public boolean onKillEvent(QuestEnv env) {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			int var = qs.getQuestVarById(0);
-			int targetId = env.getTargetId();
-			if (targetId == 211042) {
-				env.getVisibleObject().getController().delete();
-				if (var >= 51 && var < 54) {
-					return defaultOnKillEvent(env, 211042, 51, 54); // 52 - 54
-				} else if (var == 54) {
-					qs.setQuestVar(4); // 4
-					updateQuestStatus(env);
-					Npc mob = (Npc) spawn(211043, player, 226.7f, 251.5f, 205.5f, (byte) 0);
-					mob.getAggroList().addHate(player, 1000);
-					return true;
-				}
-			} else if (targetId == 211043 && var == 4) {
-				playQuestMovie(env, 151);
-				player.getWorldMapInstance().forEachNpc(npc -> npc.getController().delete());
-				spawn(790001, player, 220.6f, 247.8f, 206.0f, (byte) 0);
-				qs.setQuestVar(5); // 5
-				updateQuestStatus(env);
+		if (qs == null || qs.getStatus() != QuestStatus.START)
+			return false;
+		int targetId = env.getTargetId();
+		if (targetId == 211042) {
+			env.getVisibleObject().getController().delete();
+			if (changeQuestStep(env, 54, 4)) {
+				Npc mob = (Npc) spawn(211043, player, 226.7f, 251.5f, 205.5f, (byte) 0);
+				mob.getAggroList().addHate(player, 1000);
+				return true;
 			}
+			return defaultOnKillEvent(env, 211042, 51, 54);
+		} else if (targetId == 211043 && changeQuestStep(env, 4, 5)) {
+			playQuestMovie(env, 151);
+			player.getWorldMapInstance().forEachNpc(npc -> npc.getController().delete());
+			spawn(790001, player, 220.6f, 247.8f, 206.0f, (byte) 0);
+			return true;
 		}
 		return false;
 	}
@@ -244,12 +237,9 @@ public class _1006Ascension extends AbstractQuestHandler {
 
 	@Override
 	public boolean onFlightPathEndEvent(QuestEnv env, int teleportId) {
-		Player player = env.getPlayer();
-		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (teleportId != 1001 || qs == null || qs.getStatus() != QuestStatus.START || qs.getQuestVars().getQuestVars() != 50)
+		if (teleportId != 1001 || !changeQuestStep(env, 50, 51))
 			return false;
-		qs.setQuestVar(51);
-		updateQuestStatus(env);
+		Player player = env.getPlayer();
 		List<Npc> mobs = new ArrayList<>();
 		mobs.add((Npc) spawn(211042, player, 224.073f, 239.1f, 206.7f, (byte) 0));
 		mobs.add((Npc) spawn(211042, player, 233.5f, 241.04f, 206.365f, (byte) 0));

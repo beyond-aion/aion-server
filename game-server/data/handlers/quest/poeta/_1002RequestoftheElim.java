@@ -123,7 +123,6 @@ public class _1002RequestoftheElim extends AbstractQuestHandler {
 						case SETPRO5:
 							WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(WorldMapType.KARAMATIS.getId(), player);
 							TeleportService.teleportTo(player, newInstance, 52, 174, 229);
-							changeQuestStep(env, 13, 20); // 20
 							return closeDialogWindow(env);
 						case SETPRO6:
 							return defaultCloseDialog(env, 14, 14, true, false); // reward
@@ -155,12 +154,9 @@ public class _1002RequestoftheElim extends AbstractQuestHandler {
 
 	@Override
 	public boolean onFlightPathEndEvent(QuestEnv env, int teleportId) {
-		Player player = env.getPlayer();
-		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (teleportId != 2001 || qs == null || qs.getStatus() != QuestStatus.START || qs.getQuestVarById(0) != 20)
+		if (teleportId != 2001 || !changeQuestStep(env, 20, 14))
 			return false;
-		TeleportService.teleportTo(player, 210010000, 1, 603, 1537, 116, (byte) 20);
-		changeQuestStep(env, 20, 14); // 14
+		TeleportService.teleportTo(env.getPlayer(), 210010000, 1, 603, 1537, 116, (byte) 20);
 		return true;
 	}
 
@@ -169,15 +165,11 @@ public class _1002RequestoftheElim extends AbstractQuestHandler {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			if (player.getWorldId() == 310010000) {
+			if (player.getWorldId() == WorldMapType.KARAMATIS.getId()) {
 				PacketSendUtility.sendPacket(player, new SM_ASCENSION_MORPH(1));
-				return true;
-			} else {
-				int var = qs.getQuestVarById(0);
-				if (var == 20) {
-					changeQuestStep(env, 20, 13); // 13
-				}
+				return changeQuestStep(env, 13, 20);
 			}
+			return changeQuestStep(env, 20, 13);
 		}
 		return false;
 	}
