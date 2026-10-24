@@ -26,7 +26,7 @@ public class _14031AHyperVention extends AbstractQuestHandler {
 
 	@Override
 	public void register() {
-		int[] npc_ids = { 203700, 801216, 790001, 203183, 203989, };
+		int[] npc_ids = { 203700, 801216, 790001, 203183, 203989, 730888, 730898 };
 		qe.registerOnQuestCompleted(questId);
 		qe.registerOnLevelChanged(questId);
 		qe.registerOnEnterWorld(questId);
@@ -55,9 +55,7 @@ public class _14031AHyperVention extends AbstractQuestHandler {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 1011);
 						case SETPRO1:
-							qs.setQuestVar(1);
-							updateQuestStatus(env);
-							return closeDialogWindow(env);
+							return defaultCloseDialog(env, 0, 1);
 					}
 					break;
 				case 801216:// Losthes
@@ -65,9 +63,7 @@ public class _14031AHyperVention extends AbstractQuestHandler {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 1352);
 						case SETPRO2:
-							qs.setQuestVar(2);
-							updateQuestStatus(env);
-							return closeDialogWindow(env);
+							return defaultCloseDialog(env, 1, 2);
 					}
 					break;
 				case 790001:// Pernos
@@ -77,9 +73,7 @@ public class _14031AHyperVention extends AbstractQuestHandler {
 						case SETPRO3:
 							if (!giveQuestItem(env, 182215388, 1))
 								return true;
-							qs.setQuestVar(3);
-							updateQuestStatus(env);
-							return closeDialogWindow(env);
+							return defaultCloseDialog(env, 2, 3);
 					}
 					break;
 				case 203183:// Khidia
@@ -89,9 +83,7 @@ public class _14031AHyperVention extends AbstractQuestHandler {
 						case SETPRO5:
 							if (!giveQuestItem(env, 182215389, 1))
 								return true;
-							qs.setQuestVar(5);
-							updateQuestStatus(env);
-							return closeDialogWindow(env);
+							return defaultCloseDialog(env, 4, 5);
 					}
 					break;
 				case 203989:// Tumblusen
@@ -107,34 +99,25 @@ public class _14031AHyperVention extends AbstractQuestHandler {
 						case SETPRO7:
 							if (!giveQuestItem(env, 182215390, 1))
 								return true;
-							qs.setQuestVar(7);
-							updateQuestStatus(env);
-							return closeDialogWindow(env);
+							return defaultCloseDialog(env, 6, 7);
 						case SETPRO9:
-							qs.setQuestVar(9);
-							updateQuestStatus(env);
 							WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(WorldMapType.NIDALBER.getId(), player);
-							TeleportService.teleportTo(player, newInstance, 274, 167, 204);
-							return closeDialogWindow(env);
+							TeleportService.teleportTo(player, newInstance, 274.6711f, 168.1845f, 204.3471f, (byte) 35, TeleportAnimation.FADE_OUT_BEAM);
+							return defaultCloseDialog(env, 8, 9);
 					}
 					break;
 				case 730888: // Large Teleporter
-					switch (dialogActionId) {
-						case QUEST_SELECT:
-							env.getVisibleObject().getController().delete();
-							qs.setQuestVar(11);
-							updateQuestStatus(env);
-							playQuestMovie(env, 888);
-							spawn(730898, player, 257, 257, (float) 226.35, (byte) 95); // Broken Teleporter Device
+					if (dialogActionId == QUEST_SELECT && changeQuestStep(env, 10, 11)) {
+						playQuestMovie(env, 888);
+						env.getVisibleObject().getController().delete();
+						spawn(730898, player, 257, 257, 226.35f, (byte) 95); // Broken Large Teleporter
+						return true;
 					}
 					break;
 				case 730898: // Broken Large Teleporter
-					switch (dialogActionId) {
-						case QUEST_SELECT:
-							env.getVisibleObject().getController().delete();
-							qs.setStatus(QuestStatus.REWARD);
-							updateQuestStatus(env);
-							TeleportService.teleportTo(player, 110010000, 1876.29f, 1511f, 812.675f, (byte) 60, TeleportAnimation.FADE_OUT_BEAM);
+					if (dialogActionId == QUEST_SELECT && defaultCloseDialog(env, 11, 11, true, false)) {
+						TeleportService.teleportTo(player, 110010000, 1876.29f, 1511f, 812.675f, (byte) 0, TeleportAnimation.FADE_OUT_BEAM);
+						return true;
 					}
 					break;
 			}
@@ -184,23 +167,27 @@ public class _14031AHyperVention extends AbstractQuestHandler {
 	@Override
 	public boolean onEnterWorldEvent(QuestEnv env) {
 		Player player = env.getPlayer();
+		if (player.getWorldId() != 320040000 || !player.getWorldMapInstance().getNpcs(730888, 730898).isEmpty())
+			return false;
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			int var = qs.getQuestVars().getQuestVars();
-			if (var == 9 && player.getWorldId() == 320040000) {
-				// Shattered Large Teleporter
-				spawn(730888, player, 257, 257, (float) 226.35, (byte) 95);
-				// Captain Tarbana
-				spawn(233878, player, (float) 262.9, (float) 224.5, (float) 211.348, (byte) 95);
-				// 5x Baranath Sentinel
-				spawn(233886, player, (float) 217.015, (float) 221.694, (float) 207.49455, (byte) 97);
-				spawn(233886, player, (float) 239.732, (float) 211.250, (float) 209.19, (byte) 97);
-				spawn(233886, player, (float) 257.065, (float) 204.49, (float) 209.094, (byte) 97);
-				spawn(233886, player, (float) 274.899, (float) 199.398, (float) 208.83487, (byte) 97);
-				spawn(233886, player, (float) 282.878, (float) 223.742, (float) 208.252, (byte) 97);
-			}
+		if (qs == null || qs.getStatus() != QuestStatus.START)
+			return false;
+		int var = qs.getQuestVars().getQuestVars();
+		if (var == 9 || var == 10)
+			spawn(730888, player, 257, 257, 226.35f, (byte) 95); // Large Teleporter
+		else if (var == 11)
+			spawn(730898, player, 257, 257, 226.35f, (byte) 95); // Broken Large Teleporter
+		if (var == 9) {
+			// Captain Tarbana
+			spawn(233878, player, 262.9f, 224.5f, 211.348f, (byte) 95);
+			// 5x Baranath Sentinel
+			spawn(233886, player, 217.015f, 221.694f, 207.49455f, (byte) 97);
+			spawn(233886, player, 239.732f, 211.250f, 209.19f, (byte) 97);
+			spawn(233886, player, 257.065f, 204.49f, 209.094f, (byte) 97);
+			spawn(233886, player, 274.899f, 199.398f, 208.83487f, (byte) 97);
+			spawn(233886, player, 282.878f, 223.742f, 208.252f, (byte) 97);
 		}
-		return false;
+		return true;
 	}
 
 	@Override

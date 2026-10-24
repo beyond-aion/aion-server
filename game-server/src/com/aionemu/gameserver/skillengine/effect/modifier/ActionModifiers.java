@@ -1,13 +1,8 @@
 package com.aionemu.gameserver.skillengine.effect.modifier;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.xml.bind.annotation.XmlAccessType;
-import jakarta.xml.bind.annotation.XmlAccessorType;
-import jakarta.xml.bind.annotation.XmlElement;
-import jakarta.xml.bind.annotation.XmlElements;
-import jakarta.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.*;
 
 /**
  * @author ATracer
@@ -22,16 +17,7 @@ public class ActionModifiers {
 		@XmlElement(name = "targetclass", type = TargetClassDamageModifier.class) })
 	protected List<ActionModifier> actionModifiers;
 
-	/**
-	 * Gets the value of the actionModifiers property.
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list {@link StumbleDamageModifier } {@link FrontDamageModifier } {@link BackDamageModifier }
-	 * {@link StunDamageModifier } {@link PoisonDamageModifier } {@link TargetRaceDamageModifier }
-	 */
 	public List<ActionModifier> getActionModifiers() {
-		if (actionModifiers == null) {
-			actionModifiers = new ArrayList<>();
-		}
-		return this.actionModifiers;
+		return actionModifiers == null ? List.of() : actionModifiers;
 	}
 }

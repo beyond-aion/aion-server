@@ -1,13 +1,8 @@
 package com.aionemu.gameserver.model.templates.walker;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.xml.bind.annotation.XmlAccessType;
-import jakarta.xml.bind.annotation.XmlAccessorType;
-import jakarta.xml.bind.annotation.XmlAttribute;
-import jakarta.xml.bind.annotation.XmlElement;
-import jakarta.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.*;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "RouteParent", propOrder = { "versions" })
@@ -20,9 +15,7 @@ public class RouteParent {
 	protected String id;
 
 	public List<RouteVersion> getRouteVersion() {
-		if (versions == null)
-			versions = new ArrayList<>();
-		return this.versions;
+		return versions == null ? List.of() : versions;
 	}
 
 	public String getId() {
