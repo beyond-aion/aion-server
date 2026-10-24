@@ -15,6 +15,8 @@ public class SkillAliasPosition {
     private float y;
     @XmlAttribute(name = "z", required = true)
     private float z;
+    @XmlAttribute(name = "h")
+    private byte h;
 
     public float getX() {
         return x;
@@ -26,5 +28,9 @@ public class SkillAliasPosition {
 
     public float getZ() {
         return z;
+    }
+
+    public byte getHeading() {
+        return h;
     }
 }
