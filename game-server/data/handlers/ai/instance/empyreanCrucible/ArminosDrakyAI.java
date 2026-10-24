@@ -19,7 +19,6 @@ import ai.GeneralNpcAI;
 public class ArminosDrakyAI extends GeneralNpcAI {
 
 	private String walkerId = "300300001";
-	private boolean isStart = true;
 
 	public ArminosDrakyAI(Npc owner) {
 		super(owner);
@@ -37,13 +36,10 @@ public class ArminosDrakyAI extends GeneralNpcAI {
 	@Override
 	protected void handleMoveArrived() {
 		super.handleMoveArrived();
-		if (getOwner().getMoveController().getCurrentStep().isLastStep()) { // circle twice
-			if (!isStart) {
-				getSpawnTemplate().setWalkerId(null);
-				WalkManager.stopWalking(this);
-				AIActions.deleteOwner(this);
-			} else
-				isStart = false;
+		if (getOwner().getMoveController().getCurrentStep().isLastStep()) { // the route already circles the arena twice
+			getSpawnTemplate().setWalkerId(null);
+			WalkManager.stopWalking(this);
+			AIActions.deleteOwner(this);
 		}
 	}
 

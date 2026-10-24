@@ -1,91 +1,87 @@
 package ai.instance.empyreanCrucible;
 
 import com.aionemu.gameserver.ai.AIName;
-import com.aionemu.gameserver.ai.HpPhases;
-import com.aionemu.gameserver.controllers.attack.AggroTarget;
-import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.ai.NpcAI;
+import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.templates.npcskill.NpcSkillTargetAttribute;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldPosition;
 
-import ai.AggressiveNpcAI;
-
 /**
- * @author Luzien
+ * @author Luzien, w4terbomb
  */
 @AIName("priest_preceptor")
-public class PriestPreceptorAI extends AggressiveNpcAI implements HpPhases.PhaseHandler {
+public class PriestPreceptorAI extends CrucibleBossAI {
 
-	private final HpPhases hpPhases = new HpPhases(75, 25);
+	private final int[] helpers; // warrior, ranger, mage
 
 	public PriestPreceptorAI(Npc owner) {
 		super(owner);
+		if (owner.getNpcId() == 217581) // Thrasymedes
+			helpers = new int[] { 282366, 282367, 282368 }; // Boreas, Jumentis, Charna
+		else // Freyr
+			helpers = new int[] { 282369, 282370, 282371 }; // Traufnir, Sigyn, Sif
+	}
+
+	private boolean isLight() {
+		return getNpcId() == 217581;
 	}
 
 	@Override
-	public void handleSpawned() {
-		super.handleSpawned();
-		ThreadPoolManager.getInstance().schedule(() -> SkillEngine.getInstance().getSkill(getOwner(), 19612, 15, getOwner()).useNoAnimationSkill(), 1000);
+	protected void onFightStart() {
+		say(isLight() ? 1500219 : 1500221);
+		cast(19612, 10, NpcSkillTargetAttribute.ME);
 	}
 
 	@Override
-	public void handleBackHome() {
-		super.handleBackHome();
-		hpPhases.reset();
-	}
-
-	@Override
-	public void handleAttack(Creature creature) {
-		super.handleAttack(creature);
-		hpPhases.tryEnterNextPhase(this);
-	}
-
-	@Override
-	public void handleHpPhase(int phaseHpPercent) {
-		switch (phaseHpPercent) {
-			case 75 -> SkillEngine.getInstance().getSkill(getOwner(), 19611, 10, getRandomTarget()).useNoAnimationSkill();
-			case 25 -> startEvent();
+	protected void onFightTick(int seconds, int hp) {
+		if (every(seconds, 10, 15)) {
+			cast(19587, 10);
+			cast(19588, 15);
+		}
+		if (every(seconds, 50, 60))
+			cast(19613, 10, NpcSkillTargetAttribute.RANDOM);
+		if (passed(80))
+			cast(19611, 10);
+		if (passed(30)) {
+			cast(19610, 10, NpcSkillTargetAttribute.ME);
+			cast(19614, 10, NpcSkillTargetAttribute.ME);
+			WorldPosition p = getPosition();
+			for (int i = 0; i < helpers.length; i++) {
+				if (spawn(helpers[i], p.getX(), p.getY(), p.getZ(), p.getHeading()) instanceof Npc helper) {
+					int sicknessLevel = i == 0 ? 1 : i == 1 ? 2 : 4;
+					ThreadPoolManager.getInstance().schedule(() -> helper.queueSkill(19594, sicknessLevel, -1, NpcSkillTargetAttribute.ME), 1000);
+				}
+			}
 		}
 	}
 
-	private void startEvent() {
-		SkillEngine.getInstance().getSkill(getOwner(), 19610, 10, getOwner()).useNoAnimationSkill();
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				SkillEngine.getInstance().getSkill(getOwner(), 19614, 10, getOwner()).useNoAnimationSkill();
-
-				ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-					@Override
-					public void run() {
-						WorldPosition p = getPosition();
-						applySoulSickness((Npc) spawn(282366, p.getX(), p.getY(), p.getZ(), p.getHeading()));
-						applySoulSickness((Npc) spawn(282367, p.getX(), p.getY(), p.getZ(), p.getHeading()));
-						applySoulSickness((Npc) spawn(282368, p.getX(), p.getY(), p.getZ(), p.getHeading()));
-					}
-				}, 5000);
-			}
-
-		}, 2000);
+	@Override
+	protected void handleDied() {
+		say(isLight() ? 1500220 : 1500222);
+		// the warrior and the mage go with the priest, the ranger only runs for 10 seconds and then fights on
+		getPosition().getWorldMapInstance().getNpcs(helpers[0], helpers[2]).forEach(npc -> npc.getController().deleteIfAliveOrCancelRespawn());
+		Npc ranger = getPosition().getWorldMapInstance().getNpc(helpers[1]);
+		if (ranger != null && !ranger.isDead() && ranger.getAi() instanceof NpcAI rangerAi) {
+			SkillEngine.getInstance().getSkill(ranger, 19604, 1, ranger).useNoAnimationSkill();
+			CrucibleRun.start(rangerAi, null, 10000, null);
+		}
+		super.handleDied();
 	}
 
-	private Creature getRandomTarget() {
-		return getAggroList().getTarget(AggroTarget.RANDOM, 25);
+	@Override
+	protected void onFightEnd() {
+		if (!isDead())
+			getPosition().getWorldMapInstance().getNpcs(helpers).forEach(npc -> npc.getController().deleteIfAliveOrCancelRespawn());
 	}
 
-	private void applySoulSickness(final Npc npc) {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				npc.getLifeStats().setCurrentHpPercent(50); // TODO: remove this, fix max hp debuffs not reducing current hp properly
-				SkillEngine.getInstance().getSkill(npc, 19594, 4, npc).useNoAnimationSkill();
-			}
-
-		}, 1000);
+	@Override
+	public boolean ask(AIQuestion question) {
+		return switch (question) {
+			case REWARD_LOOT, ALLOW_DECAY -> false;
+			default -> super.ask(question);
+		};
 	}
-
 }
