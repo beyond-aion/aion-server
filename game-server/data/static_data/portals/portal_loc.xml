@@ -84,7 +84,7 @@
 	<portal_loc world_id="210060000" loc_id="2100606" x="1221.755" y="369.1291" z="217.601"/> <!-- Basilon -->
 	<portal_loc world_id="210060000" loc_id="2100607" x="2679.0627" y="821.21454" z="138.35718" h="57"/> <!-- Atreia Defense Portal (Elyos) -->
 	<portal_loc world_id="210060000" loc_id="2100608" x="2682.2722" y="849.81226" z="138.35718" h="37"/> <!-- Atreia Defense Portal (Elyos) -->
-	<portal_loc world_id="210060000" loc_id="2100609" x="2681.577" y="852.42816" z="138.35718"/> <!-- Adma Stronghold Exit --> 
+	<portal_loc world_id="210060000" loc_id="2100609" x="2681.577" y="852.42816" z="138.35718"/> <!-- Adma Stronghold Exit -->
 	<!-- Cygnea -->
 	<portal_loc world_id="210070000" loc_id="2100700" x="2902.3115" y="799.593" z="569.935" h="25"/> <!-- Aequis Expedition Headquarters -->
 	<portal_loc world_id="210070000" loc_id="2100701" x="1893.7953" y="2455.609" z="336.875" h="112"/> <!-- Beritra Invasion Corridor -->
@@ -357,7 +357,7 @@
 	<!-- Bregiron -->
 	<portal_loc world_id="320030000" loc_id="3200300" x="274.2" y="171.7" z="204.3"/>
 	<!-- Nidalber -->
-	<portal_loc world_id="320040000" loc_id="3200400" x="277.2907" y="170.9613" z="204.3471"/>
+	<portal_loc world_id="320040000" loc_id="3200400" x="274.6711" y="168.1845" z="204.3471" h="35"/>
 	<!-- Sliver of Darkness -->
 	<portal_loc world_id="310070000" loc_id="3100700" x="338" y="101" z="1191"/>
 	<!-- Space of Destiny -->

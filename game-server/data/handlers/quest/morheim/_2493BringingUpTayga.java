@@ -23,6 +23,9 @@ public class _2493BringingUpTayga extends AbstractQuestHandler {
 		qe.registerOnLogOut(questId);
 		qe.registerQuestNpc(204325).addOnTalkEvent(questId);
 		qe.registerQuestNpc(204435).addOnTalkEvent(questId);
+		qe.registerQuestNpc(204436).addOnTalkEvent(questId);
+		qe.registerQuestNpc(204437).addOnTalkEvent(questId);
+		qe.registerQuestNpc(204438).addOnTalkEvent(questId);
 	}
 
 	@Override
