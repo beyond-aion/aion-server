@@ -9,12 +9,14 @@ import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.model.gameobjects.Creature;
-import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.services.teleport.TeleportService;
+import com.aionemu.gameserver.model.gameobjects.VisibleObject;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_POSITION;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.SkillAliasLocation;
 import com.aionemu.gameserver.skillengine.model.SkillAliasPosition;
+import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
+import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.geo.GeoService;
 
 /**
@@ -32,23 +34,32 @@ public class TargetTeleportEffect extends EffectTemplate {
 
 	@Override
 	public void applyEffect(Effect effect) {
-		if (effect.getEffected() instanceof Player p) {
-			if (loc == null) { // teleport in front of effector
-				final Creature effector = effect.isReflected() ? effect.getOriginalEffected() : effect.getEffector();
-				double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(effector.getHeading()));
-				float z = effector.getZ();
-				final float x1 = (float) Math.cos(radian);
-				final float y1 = (float) Math.sin(radian);
-				Vector3f closestCollision = GeoService.getInstance().getClosestCollision(effect.getEffected(),effector.getX() + x1, effector.getY() + y1, z);
-				byte heading = PositionUtil.getHeadingTowards(closestCollision.getX(), closestCollision.getY(), effector.getX(), effector.getY());
-				TeleportService.moveOnSameMap(p, closestCollision.getX(), closestCollision.getY(), closestCollision.getZ(), heading);
-			} else { // teleport to random specified position
-				SkillAliasLocation skillAliasLocation = DataManager.SKILL_ALIAS_LOCATION_DATA.getSkillAliasLocation(loc);
-				if (skillAliasLocation != null && p.getWorldId() == skillAliasLocation.getWorldId()) {
-					SkillAliasPosition position = Rnd.get(skillAliasLocation.getSkillAliasPositionList());
-					TeleportService.moveOnSameMap(p, position.getX(), position.getY(), position.getZ(), p.getHeading());
-				}
+		Creature effected = effect.getEffected();
+		if (loc == null) { // teleport in front of effector
+			final Creature effector = effect.isReflected() ? effect.getOriginalEffected() : effect.getEffector();
+			double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(effector.getHeading()));
+			float z = effector.getZ();
+			final float x1 = (float) Math.cos(radian);
+			final float y1 = (float) Math.sin(radian);
+			Vector3f closestCollision = GeoService.getInstance().getClosestCollision(effected,effector.getX() + x1, effector.getY() + y1, z);
+			moveToPosition(effected, closestCollision.getX(), closestCollision.getY(), closestCollision.getZ());
+		} else { // teleport to random specified position
+			SkillAliasLocation skillAliasLocation = DataManager.SKILL_ALIAS_LOCATION_DATA.getSkillAliasLocation(loc);
+			if (skillAliasLocation != null && effected.getWorldId() == skillAliasLocation.getWorldId()) {
+				SkillAliasPosition position = Rnd.get(skillAliasLocation.getSkillAliasPositionList());
+				moveToPosition(effected, position.getX(), position.getY(), position.getZ());
+			} else {
+				moveToPosition(effected, effected.getX(), effected.getY(), effected.getZ());
 			}
 		}
+	}
+
+	private void moveToPosition(VisibleObject object, float x, float y, float z) {
+		if (object instanceof Creature creature) {
+			creature.getController().cancelCurrentSkill(null);
+			creature.getMoveController().abortMove();
+		}
+		World.getInstance().updatePosition(object, x, y, z, object.getHeading());
+		PacketSendUtility.broadcastToSightedPlayers(object, new SM_POSITION(object), true);
 	}
 }
