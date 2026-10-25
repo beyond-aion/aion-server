@@ -146,7 +146,15 @@ public class PlayerMoveController extends PlayableMoveController<Player> {
 	}
 
 	/**
-	 * Forgets where the current fall started, so a teleport doesn't count as one.
+	 * Lets the next fall start at the given height, as after leaving a windstream or landing from free flight.
+	 */
+	public void restartFalling(float z) {
+		fallStartZ = z;
+		lastZ = z;
+	}
+
+	/**
+	 * Forgets where the current fall started, so a teleport or a landing from a flight path doesn't count as one.
 	 */
 	public void resetFalling() {
 		fallStartZ = Float.NaN;
