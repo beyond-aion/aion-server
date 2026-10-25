@@ -57,6 +57,7 @@ import com.aionemu.gameserver.model.templates.npc.NpcTemplateType;
 import com.aionemu.gameserver.model.templates.ride.RideInfo;
 import com.aionemu.gameserver.model.templates.zone.ZoneType;
 import com.aionemu.gameserver.network.aion.AionConnection;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_COOLDOWN;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_STATS_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.model.QuestState;
@@ -138,6 +139,7 @@ public class Player extends Creature {
 	private BindPointPosition bindPoint;
 
 	private final Map<Integer, ItemCooldown> itemCoolDowns = new ConcurrentHashMap<>();
+	private final Map<Integer, ItemCooldown> pendingItemCooldownClears = new ConcurrentHashMap<>();
 	private final PortalCooldownList portalCooldownList;
 	private final Cooldowns craftCooldowns;
 	private final Cooldowns houseObjectCooldowns;
@@ -1040,7 +1042,22 @@ public class Player extends Creature {
 	}
 
 	public void addItemCoolDown(int delayId, long time, int useDelay) {
+		if (isInCustomState(CustomPlayerState.NO_ITEM_COOLDOWN_MODE)) {
+			// Departs from retail, which leaves the client's own countdown running unless the client sets g_IgnoreUICoolTime. The client starts it on
+			// the use animation, so a zero use delay that clears it is sent right after that packet (see sendPendingItemCooldownClears).
+			// Fall back to a plain return to match retail.
+			pendingItemCooldownClears.put(delayId, new ItemCooldown(time, 0));
+			return;
+		}
 		itemCoolDowns.put(delayId, new ItemCooldown(time, useDelay));
+	}
+
+	public void sendPendingItemCooldownClears() {
+		if (pendingItemCooldownClears.isEmpty())
+			return;
+		Map<Integer, ItemCooldown> clears = new HashMap<>(pendingItemCooldownClears);
+		clears.keySet().forEach(pendingItemCooldownClears::remove);
+		PacketSendUtility.sendPacket(this, new SM_ITEM_COOLDOWN(clears)); // 4.8 client ignores reuseTime <= currentTime, but useDelay 0 works
 	}
 
 	public void removeItemCoolDown(int delayId) {

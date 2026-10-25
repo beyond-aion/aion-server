@@ -47,6 +47,10 @@ public class SM_ITEM_USAGE_ANIMATION extends AionServerPacket {
 		this.suppressAnimation = suppressAnimation;
 	}
 
+	public int getPlayerObjId() {
+		return playerObjId;
+	}
+
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeD(playerObjId);

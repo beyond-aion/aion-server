@@ -10,6 +10,7 @@ import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.legion.Legion;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MESSAGE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.world.World;
@@ -72,8 +73,11 @@ public class PacketSendUtility {
 	 * Sends a packet to the given player
 	 */
 	public static void sendPacket(Player player, AionServerPacket packet) {
-		if (player.isOnline())
-			player.getClientConnection().sendPacket(packet);
+		if (!player.isOnline())
+			return;
+		player.getClientConnection().sendPacket(packet);
+		if (packet instanceof SM_ITEM_USAGE_ANIMATION animation && animation.getPlayerObjId() == player.getObjectId())
+			player.sendPendingItemCooldownClears();
 	}
 
 	/**
