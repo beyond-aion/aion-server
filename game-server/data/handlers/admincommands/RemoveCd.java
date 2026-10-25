@@ -32,12 +32,7 @@ public class RemoveCd extends AdminCommand {
 	public void execute(Player admin, String... params) {
 		Player target = admin.getTarget() instanceof Player p ? p : admin;
 		if (params.length == 0) {
-			if (target.getSkillCoolDowns() != null) {
-				long nowMillis = System.currentTimeMillis();
-				List<Integer> cooldownIds = target.getSkillCoolDowns().entrySet().stream().filter(e -> e.getValue() > nowMillis).map(Entry::getKey).toList();
-				PacketSendUtility.sendPacket(target, new SM_SKILL_COOLDOWN(target, cooldownIds));
-				target.getSkillCoolDowns().clear();
-			}
+			removeSkillCooldowns(target);
 			removeItemCooldowns(target);
 			target.getHouseObjectCooldowns().clear();
 			if (target.equals(admin)) {
@@ -66,6 +61,15 @@ public class RemoveCd extends AdminCommand {
 		} else {
 			sendInfo(admin);
 		}
+	}
+
+	public static void removeSkillCooldowns(Player player) {
+		if (player.getSkillCoolDowns() == null)
+			return;
+		long nowMillis = System.currentTimeMillis();
+		List<Integer> cooldownIds = player.getSkillCoolDowns().entrySet().stream().filter(e -> e.getValue() > nowMillis).map(Entry::getKey).toList();
+		PacketSendUtility.sendPacket(player, new SM_SKILL_COOLDOWN(player, cooldownIds));
+		player.getSkillCoolDowns().clear();
 	}
 
 	public static void removeItemCooldowns(Player player) {

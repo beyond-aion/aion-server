@@ -4,6 +4,8 @@ import com.aionemu.gameserver.model.gameobjects.player.CustomPlayerState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.utils.chathandlers.ConsoleCommand;
 
+import admincommands.RemoveCd;
+
 /**
  * @author Neon
  */
@@ -12,7 +14,7 @@ public class Remove_skill_delay_all extends ConsoleCommand {
 	public Remove_skill_delay_all() {
 		super("remove_skill_delay_all", "Enables/disables your skill cooldowns.", """
 			1 - Enables your skill cooldowns.
-			0 - Disables your skill cooldowns.
+			0 - Removes and disables your skill cooldowns.
 			""");
 	}
 
@@ -25,9 +27,12 @@ public class Remove_skill_delay_all extends ConsoleCommand {
 		if (params[0].equals("1") && player.isInCustomState(CustomPlayerState.NO_SKILL_COOLDOWN_MODE)) {
 			sendInfo(player, "Cooldown times of all skills have been recovered.");
 			player.unsetCustomState(CustomPlayerState.NO_SKILL_COOLDOWN_MODE);
-		} else if (params[0].equals("0") && !player.isInCustomState(CustomPlayerState.NO_SKILL_COOLDOWN_MODE)) {
-			sendInfo(player, "Cooldown times of all skills have been disabled.");
-			player.setCustomState(CustomPlayerState.NO_SKILL_COOLDOWN_MODE);
+		} else if (params[0].equals("0")) {
+			RemoveCd.removeSkillCooldowns(player);
+			if (!player.isInCustomState(CustomPlayerState.NO_SKILL_COOLDOWN_MODE)) {
+				sendInfo(player, "Cooldown times of all skills have been disabled.");
+				player.setCustomState(CustomPlayerState.NO_SKILL_COOLDOWN_MODE);
+			}
 		}
 	}
 }
