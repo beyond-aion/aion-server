@@ -30,7 +30,7 @@ public class ReadAction extends AbstractItemAction {
 		if (parentItem.getItemTemplate().getActions().getItemActions().stream().anyMatch(a -> a instanceof QuestStartAction))
 			return;
 
-		int castingDelay = parentItem.getItemTemplate().getCastingDelay();
+		int castingDelay = player.getItemUseDelay(parentItem.getItemTemplate().getCastingDelay());
 		if (castingDelay <= 0) {
 			finishUse(player, parentItem);
 			return;

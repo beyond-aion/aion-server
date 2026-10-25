@@ -72,7 +72,7 @@ public class ToyPetSpawnAction extends AbstractItemAction {
 	@Override
 	public void act(final Player player, final Item parentItem, Item targetItem, Object... params) {
 		// ShowAction
-		int castingDelay = parentItem.getItemTemplate().getCastingDelay();
+		int castingDelay = player.getItemUseDelay(parentItem.getItemTemplate().getCastingDelay());
 		if (castingDelay <= 0) {
 			finishUse(player, parentItem);
 			return;

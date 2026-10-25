@@ -84,7 +84,7 @@ public class RideAction extends AbstractItemAction {
 			player.unsetPlayerMode(PlayerMode.RIDE);
 			return;
 		}
-		int castingDelay = parentItem.getItemTemplate().getCastingDelay();
+		int castingDelay = player.getItemUseDelay(parentItem.getItemTemplate().getCastingDelay());
 		if (castingDelay <= 0) {
 			finishUse(player, parentItem);
 		} else {

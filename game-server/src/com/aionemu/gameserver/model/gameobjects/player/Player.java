@@ -1032,6 +1032,10 @@ public class Player extends Creature {
 		addItemCoolDown(limits.getDelayId(), System.currentTimeMillis() + limits.getDelayTime(), limits.getDelayTime() / 1000);
 	}
 
+	public int getItemUseDelay(int useDelayMillis) {
+		return isInCustomState(CustomPlayerState.NO_ITEM_USE_GAUGE_MODE) ? 0 : useDelayMillis;
+	}
+
 	public long getItemReuseTime(int delayId) {
 		ItemCooldown cd = itemCoolDowns.get(delayId);
 		return cd == null ? 0 : cd.getReuseTime();
