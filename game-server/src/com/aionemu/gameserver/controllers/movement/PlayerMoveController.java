@@ -165,7 +165,7 @@ public class PlayerMoveController extends PlayableMoveController<Player> {
 		if (owner.isDead())
 			return;
 		if (owner.getController().die(TYPE.FALL_DAMAGE, LOG.REGULAR, owner))
-			PlayerReviveService.bindReviveAfterFall(owner);
+			PlayerReviveService.bindRevive(owner);
 	}
 
 	public void setHasMovedByRandomMoveLocEffect(Skill skill) {
