@@ -95,7 +95,7 @@ public class _1006Ascension extends AbstractQuestHandler {
 							return true;
 						case SETPRO3:
 							WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(WorldMapType.KARAMATIS_B.getId(), player);
-							TeleportService.teleportTo(player, newInstance, 52, 174, 229, (byte) 10, TeleportAnimation.NONE);
+							TeleportService.teleportTo(player, newInstance, 52, 174, 229, (byte) 10, TeleportAnimation.FADE_OUT_BEAM);
 							qs.setQuestVar(99); // 99
 							updateQuestStatus(env);
 							removeQuestItem(env, 182200009, 1);
