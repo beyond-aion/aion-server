@@ -678,6 +678,7 @@ public class PlayerController extends CreatureController<Player> {
 		} else {
 			return;
 		}
+		player.getMoveController().resetFalling();
 		player.setFlightPath(null);
 		if (flightPath.getType() == FlightPath.Type.FLIGHT_TRANSPORTER)
 			QuestEngine.getInstance().onFlightPathEnd(new QuestEnv(null, player, 0), flightPath.getId());
