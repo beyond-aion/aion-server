@@ -87,9 +87,6 @@
 	<xs:complexType name="AssembledItem">
 		<xs:attribute name="id" type="xs:int" use="required"/>
 	</xs:complexType>
-	<xs:complexType name="RequireSkill">
-		<xs:attribute name="skillIds" type="IntListType"/>
-	</xs:complexType>
 	<xs:complexType name="ItemTemplate">
 		<xs:sequence>
 			<xs:element name="modifiers" type="Modifiers" minOccurs="0" maxOccurs="1"/>
@@ -147,6 +144,7 @@
 		<xs:attribute name="can_exceed_enchant" type="xs:boolean"/>
 		<xs:attribute name="exceed_enchant_skill" type="ExceedEnchantSkillSet"/>
 		<xs:attribute name="enchant_type" type="xs:int"/>
+		<xs:attribute name="doping_pet_usable" type="xs:boolean"/>
 	</xs:complexType>
 	<xs:complexType name="AbstractItemAction" abstract="true"/>
 	<xs:complexType name="ItemActions">

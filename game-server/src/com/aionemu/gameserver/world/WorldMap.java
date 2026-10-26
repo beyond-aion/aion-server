@@ -40,10 +40,6 @@ public class WorldMap implements Iterable<WorldMapInstance> {
 		return worldMapTemplate.getWaterLevel();
 	}
 
-	public int getDeathLevel() {
-		return worldMapTemplate.getDeathLevel();
-	}
-
 	public WorldType getWorldType() {
 		return worldMapTemplate.getWorldType();
 	}

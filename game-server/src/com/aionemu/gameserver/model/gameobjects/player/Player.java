@@ -127,6 +127,7 @@ public class Player extends Creature {
 	private int resurrectionSkill = 0;
 	private boolean isFlyingBeforeDeath = false;
 	private Npc postman = null;
+	private StorageManager storageManager;
 	private boolean isInResurrectPosState = false;
 	private float resPosX = 0;
 	private float resPosY = 0;
@@ -149,6 +150,8 @@ public class Player extends Creature {
 
 	private long prisonEndTimeMillis = 0;
 	private long gatherRestrictionMillis;
+	private long quitCountdownStartMillis;
+	private long quitBlockedUntilMillis;
 	private String captchaWord;
 	private byte[] captchaImage;
 
@@ -156,8 +159,6 @@ public class Player extends Creature {
 	 * Connection of this Player.
 	 */
 	private AionConnection clientConnection;
-	private FlyPathEntry flyLocationId;
-	private long flyStartTime;
 
 	private EmotionList emotions;
 	private MotionList motions;
@@ -346,6 +347,35 @@ public class Player extends Creature {
 		if (durationSeconds < 0)
 			gatherRestrictionMillis = durationSeconds = 0;
 		return durationSeconds;
+	}
+
+	/**
+	 * @return The time when the client started its countdown before quitting the game, 0 if it never did
+	 */
+	public long getQuitCountdownStartMillis() {
+		return quitCountdownStartMillis;
+	}
+
+	public void setQuitCountdownStartMillis(long quitCountdownStartMillis) {
+		this.quitCountdownStartMillis = quitCountdownStartMillis;
+	}
+
+	/**
+	 * Keeps the player from quitting the game for the next 10 seconds, after fighting or starting to craft.
+	 */
+	public void blockQuitting() {
+		quitBlockedUntilMillis = System.currentTimeMillis() + 10000;
+	}
+
+	public void unblockQuitting() {
+		quitBlockedUntilMillis = 0;
+	}
+
+	/**
+	 * @return Milliseconds until the player may quit the game, 0 if they may quit now
+	 */
+	public long getMillisUntilQuittingAllowed() {
+		return Math.max(0, quitBlockedUntilMillis - System.currentTimeMillis());
 	}
 
 	public String getCaptchaWord() {
@@ -818,12 +848,11 @@ public class Player extends Creature {
 		return flightPath;
 	}
 
-	public void setCurrentFlypath(FlyPathEntry path) {
-		this.flyLocationId = path;
-		if (path != null)
-			this.flyStartTime = System.currentTimeMillis();
-		else
-			this.flyStartTime = 0;
+	/**
+	 * @return The path template of the flight transporter or windstream the player is currently flying along, null if there is none.
+	 */
+	public FlyPathEntry getFlightPathTemplate() {
+		return isUsingFlightTransporterOrWindstream() ? DataManager.FLY_PATH.getPathTemplate(flightPath.getId() / 1000) : null;
 	}
 
 	/**
@@ -927,20 +956,8 @@ public class Player extends Creature {
 	}
 
 	@Override
-	public boolean canSee(VisibleObject object) {
-		if (super.canSee(object))
-			return true;
-
-		if (object instanceof Creature creature) {
-			if (creature.getMaster() instanceof Player player) { // player or a summon's master
-				if (isInSameTeam(player) && !isDueling(player))
-					return true;
-			}
-			// invisible kisks can be seen from players of the same race
-			return object instanceof Kisk && ((Kisk) object).getOwnerRace() == getRace();
-		}
-
-		return false;
+	public boolean ignoresInvisibilityOf(Creature target) {
+		return super.ignoresInvisibilityOf(target) || target instanceof Kisk kisk && kisk.isOwnerOrTeamMember(this);
 	}
 
 	@Override
@@ -1118,6 +1135,22 @@ public class Player extends Creature {
 
 	public void setPostman(Npc postman) {
 		this.postman = postman;
+	}
+
+	/**
+	 * @return The NPC or house postbox at which the player opened the warehouse, legion warehouse or mailbox window, if it's still open.
+	 */
+	public VisibleObject getStorageManager(StorageType storageType) {
+		return storageManager != null && storageManager.matches(storageType) ? getKnownList().getObject(storageManager.objectId()) : null;
+	}
+
+	public void unsetStorageManager(VisibleObject object) {
+		if (storageManager != null && storageManager.objectId() == object.getObjectId())
+			storageManager = null;
+	}
+
+	public void setStorageManager(StorageType storageType, VisibleObject manager) {
+		this.storageManager = new StorageManager(storageType, manager.getObjectId());
 	}
 
 	public PlayerAccountData getAccountData() {
@@ -1314,14 +1347,6 @@ public class Player extends Creature {
 		return ItemAttackType.PHYSICAL;
 	}
 
-	public long getFlyStartTime() {
-		return flyStartTime;
-	}
-
-	public FlyPathEntry getCurrentFlyPath() {
-		return flyLocationId;
-	}
-
 	public void resetAbyssRankListUpdated() {
 		this.abyssRankListUpdateMask = 0;
 	}
@@ -1508,11 +1533,8 @@ public class Player extends Creature {
 	@Override
 	public boolean isSkillDisabled(SkillTemplate template) {
 		ChainCondition cond = template.getChainCondition();
-		if (cond != null && cond.getAllowedActivations() > 1) { // exception for multicast
-			int chainCount = getChainSkills().getCurrentChainCount(cond.getCategory());
-			if (chainCount > 0 && chainCount < cond.getAllowedActivations() && !getChainSkills().isChainExpired())
-				return false;
-		}
+		if (cond != null && cond.getAllowedActivations() > 1 && getChainSkills().canRepeat(cond.getCategory(), cond.getAllowedActivations(), cond.getActivationWindow()))
+			return false; // exception for multicast
 		if (super.isSkillDisabled(template)) {
 			PacketSendUtility.sendPacket(this, SM_SYSTEM_MESSAGE.STR_SKILL_NOT_READY());
 			return true;
@@ -1576,11 +1598,9 @@ public class Player extends Creature {
 	public void setPosition(WorldPosition position) {
 		super.setPosition(position);
 		getMoveController().resetLastPositionFromClient(); // if we don't reset it, material collision handlers (such as shields) affect you on teleport
+		getMoveController().resetFalling();
 		getCommonData().setMapId(position.getMapId());
-		getCommonData().setX(position.getX());
-		getCommonData().setY(position.getY());
-		getCommonData().setZ(position.getZ());
-		getCommonData().setHeading(position.getHeading());
+		getCommonData().setXYZH(position.getX(), position.getY(), position.getZ(), position.getHeading());
 		getCommonData().setWorldOwnerId(position.getMapRegion() == null ? 0 : position.getWorldMapInstance().getOwnerId());
 	}
 

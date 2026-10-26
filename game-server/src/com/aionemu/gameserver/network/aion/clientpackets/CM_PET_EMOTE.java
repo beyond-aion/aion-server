@@ -12,6 +12,7 @@ import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PET_EMOTE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.world.World;
 
 /**
@@ -19,11 +20,21 @@ import com.aionemu.gameserver.world.World;
  */
 public class CM_PET_EMOTE extends AionClientPacket {
 
+	/**
+	 * Stricter than retail, which takes any position for the pet: positions farther from the master are ignored, so the pet can't be put anywhere on
+	 * the map. Pets follow within a few meters, the margin covers the master's position lagging behind on fast mounts. Remove the check to fall back
+	 * to retail.
+	 */
+	private static final float MAX_DISTANCE_TO_MASTER = 50;
+	/**
+	 * Flags of the first byte: actions carry a parameter instead of a position, moves with a target carry its position too.
+	 */
+	private static final int ACTION_FLAG = 0x80, TARGET_FLAG = 0x04;
 	private PetEmote emote;
+	private int emoteId;
 	private float x1, y1, z1, x2, y2, z2;
 	private byte h;
-	private int emoteId, emotionId;
-	private int unk2;
+	private int actionParam;
 
 	public CM_PET_EMOTE(int opcode, Set<State> validStates) {
 		super(opcode, validStates);
@@ -33,26 +44,18 @@ public class CM_PET_EMOTE extends AionClientPacket {
 	protected void readImpl() {
 		emoteId = readUC();
 		emote = PetEmote.getEmoteById(emoteId);
-		switch (emote) {
-			case MOVE_STOP:
-			case MOVE_POSITION_UPDATE:
-				x1 = readF();
-				y1 = readF();
-				z1 = readF();
-				h = readC();
-				break;
-			case MOVETO:
-				x1 = readF();
-				y1 = readF();
-				z1 = readF();
-				h = readC();
+		if ((emoteId & ACTION_FLAG) != 0) {
+			actionParam = readUH();
+		} else {
+			x1 = readF();
+			y1 = readF();
+			z1 = readF();
+			h = readC();
+			if ((emoteId & TARGET_FLAG) != 0) {
 				x2 = readF();
 				y2 = readF();
 				z2 = readF();
-				break;
-			default:
-				emotionId = readUC();
-				unk2 = readUC();
+			}
 		}
 	}
 
@@ -64,24 +67,16 @@ public class CM_PET_EMOTE extends AionClientPacket {
 		if (pet == null || !pet.isSpawned()) // client sometimes just doesn't care...
 			return;
 		if (emote == PetEmote.UNKNOWN) {
-			LoggerFactory.getLogger(getClass()).warn("{} / {} sent pet emote {} (emotionId: {}, unk2: {})", player, pet, emoteId, emotionId, unk2);
+			LoggerFactory.getLogger(getClass()).warn("{} / {} sent pet emote {} (actionParam: {})", player, pet, emoteId, actionParam);
 			return;
 		}
 
-		// sometimes client is crazy enough to send -2.4457384E7 as z coordinate
-		// TODO (check retail) either its client bug or packet problem somewhere
-		// reproducible by flying randomly and falling from long height with fly resume
-		if (x1 < 0 || y1 < 0 || z1 < 0) {
-			LoggerFactory.getLogger(getClass()).warn("{} of {} sent {} at x:{}, y:{}, z:{}, h:{}", pet, player, emote, x1, y1, z1, h);
+		if ((emoteId & ACTION_FLAG) == 0 && !PositionUtil.isInRange(player, x1, y1, z1, MAX_DISTANCE_TO_MASTER))
 			return;
-		}
 
 		switch (emote) {
 			case MOVE_STOP:
 			case MOVE_POSITION_UPDATE:
-				if (emote == PetEmote.MOVE_POSITION_UPDATE) { // TODO remove once we're sure "MOVE_POSITION_UPDATE" is correct and h is actually h
-					LoggerFactory.getLogger(getClass()).warn("{} of {} sent {} at x:{}, y:{}, z:{}, h:{}", pet, player, emote, x1, y1, z1, h);
-				}
 				World.getInstance().updatePosition(pet, x1, y1, z1, h);
 				broadcastToSightedPlayers(pet, new SM_PET_EMOTE(pet, emote), false);
 				break;
@@ -91,7 +86,7 @@ public class CM_PET_EMOTE extends AionClientPacket {
 				broadcastToSightedPlayers(pet, new SM_PET_EMOTE(pet, emote), false);
 				break;
 			default:
-				broadcastToSightedPlayers(pet, new SM_PET_EMOTE(pet, emote, emotionId, unk2), emote == PetEmote.EMOTION);
+				broadcastToSightedPlayers(pet, new SM_PET_EMOTE(pet, emote, actionParam), emote == PetEmote.EMOTION);
 		}
 	}
 

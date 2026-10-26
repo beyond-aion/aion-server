@@ -135,6 +135,8 @@ public class ItemTemplate extends VisibleObjectTemplate {
 	private boolean canExceedEnchant;
 	@XmlAttribute(name = "exceed_enchant_skill")
 	private ExceedEnchantSkillSetType exceedEnchantSkill;
+	@XmlAttribute(name = "doping_pet_usable")
+	private boolean dopingPetUsable;
 
 	private static final WeaponStats emptyWeaponStats = new WeaponStats();
 	private static final ItemUseLimits emptyUseLimits = new ItemUseLimits();
@@ -567,6 +569,13 @@ public class ItemTemplate extends VisibleObjectTemplate {
 
 	public ExceedEnchantSkillSetType getExceedEnchantSkill() {
 		return exceedEnchantSkill;
+	}
+
+	/**
+	 * @return True if a buffing pet can use this item for its master.
+	 */
+	public boolean isDopingPetUsable() {
+		return dopingPetUsable;
 	}
 
 }

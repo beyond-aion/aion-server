@@ -106,8 +106,7 @@ public class PlayerReviveService {
 			revive(player, 100, 100, false, skillId);
 		else
 			revive(player, 25, 25, true, skillId);
-		if (skillId > 0)
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME());
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME());
 		player.getGameStats().updateStatsAndSpeedVisually();
 		if (player.isInPrison()) {
 			TeleportService.teleportToPrison(player);
@@ -145,9 +144,8 @@ public class PlayerReviveService {
 		Kisk kisk = player.getKisk();
 		if (kisk != null && kisk.isActive()) {
 			kisk.resurrectionUsed();
-			if (skillId > 0)
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME());
 			revive(player, 30, 30, false, skillId);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME());
 			player.getGameStats().updateStatsAndSpeedVisually();
 			player.unsetResPosState();
 			TeleportService.teleportTo(player, kisk.getPosition());
@@ -169,8 +167,9 @@ public class PlayerReviveService {
 		if (player.getPosition().getWorldMapInstance().getInstanceHandler().onReviveEvent(player))
 			return;
 		WorldMap map = World.getInstance().getWorldMap(player.getWorldId());
-		if (map == null) {
-			bindRevive(player);
+		WorldPosition startPos = player.getPosition().getWorldMapInstance().getStartPos();
+		if (map == null || !map.isInstanceType() || startPos == null) {
+			bindRevive(player, skillId);
 			return;
 		}
 		revive(player, 25, 25, true, skillId);
@@ -178,15 +177,12 @@ public class PlayerReviveService {
 		player.getGameStats().updateStatsAndSpeedVisually();
 		PacketSendUtility.sendPacket(player, new SM_PLAYER_INFO(player));
 		PacketSendUtility.sendPacket(player, SM_MOTION.playerMotions(player));
-		if (map.isInstanceType() && player.getPosition().getWorldMapInstance().getStartPos() != null) {
-			WorldPosition pos = player.getPosition().getWorldMapInstance().getStartPos();
-			TeleportService.teleportTo(player, pos.getMapId(), pos.getX(), pos.getY(), pos.getZ());
-		} else
-			bindRevive(player);
+		TeleportService.teleportTo(player, startPos.getMapId(), startPos.getX(), startPos.getY(), startPos.getZ());
 		player.unsetResPosState();
 	}
 
 	public static void revive(Player player, int hpPercent, int mpPercent, boolean setSoulSickness, int resurrectionSkill) {
+		player.unblockQuitting();
 		player.getKnownList().forEachPlayer(p -> {
 			if (player.equals(p.getTarget()))
 				p.setTarget(null);

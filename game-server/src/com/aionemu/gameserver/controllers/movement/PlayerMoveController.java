@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.controllers.movement;
 
-import com.aionemu.gameserver.configs.main.FallDamageConfig;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
@@ -8,14 +7,21 @@ import com.aionemu.gameserver.services.player.PlayerReviveService;
 import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.utils.stats.StatFunctions;
 import com.aionemu.gameserver.world.WorldPosition;
+import com.aionemu.gameserver.world.geo.GeoService;
 
 /**
  * @author ATracer
  */
 public class PlayerMoveController extends PlayableMoveController<Player> {
 
-	private float fallDistance;
-	private float lastFallZ;
+	/**
+	 * Heights in meters: no damage up to the first, death from the second on. A fall in mid air with no ground near enough below is lethal past
+	 * the third, or the fourth in fly zones.
+	 */
+	private static final float MIN_FALL_DAMAGE_HEIGHT = 10, LETHAL_FALL_HEIGHT = 50, MAX_MIDAIR_FALL_HEIGHT = 50, MAX_MIDAIR_FALL_HEIGHT_IN_FLY_ZONE = 100;
+
+	private float fallStartZ = Float.NaN;
+	private float lastZ = Float.NaN;
 	private byte lastMovementMask;
 	private long lastPositionFromClientMillis;
 	private WorldPosition lastPositionFromClient;
@@ -23,12 +29,6 @@ public class PlayerMoveController extends PlayableMoveController<Player> {
 
 	public PlayerMoveController(Player owner) {
 		super(owner);
-	}
-
-	@Override
-	public void abortMove() {
-		super.abortMove();
-		stopFalling(owner.getZ());
 	}
 
 	public byte getLastMovementMask() {
@@ -97,33 +97,83 @@ public class PlayerMoveController extends PlayableMoveController<Player> {
 					lastPositionFromClient.getHeading());
 	}
 
+	/**
+	 * Called for move packets in which the player falls. A fall packet that already touches the ground counts as landing.
+	 */
 	public void updateFalling(float newZ) {
-		if (lastFallZ != 0) {
-			fallDistance += lastFallZ - newZ;
-			if (fallDistance >= FallDamageConfig.MAXIMUM_DISTANCE_MIDAIR && owner.getController().die(TYPE.FALL_DAMAGE, LOG.REGULAR, owner)) {
-				PlayerReviveService.scheduleReviveAtBase(owner, 1000, 0);
+		if (!Float.isNaN(GeoService.getInstance().getZ(owner, newZ + 0.3f, newZ - 0.3f))) {
+			stopFalling(newZ);
+			return;
+		}
+		if (isBelowWorld(newZ)) {
+			dieFromFall();
+			return;
+		}
+		if (!Float.isNaN(fallStartZ) && newZ < lastZ) {
+			float height = fallStartZ - newZ;
+			float maxHeight = owner.isInsideFlyZone() ? MAX_MIDAIR_FALL_HEIGHT_IN_FLY_ZONE : MAX_MIDAIR_FALL_HEIGHT;
+			if (height > maxHeight && Float.isNaN(GeoService.getInstance().getWalkableZ(owner, newZ, newZ - 2 * maxHeight))) {
+				dieFromFall();
 				return;
 			}
 		}
-		lastFallZ = newZ;
+		lastZ = newZ;
 		owner.getObserveController().notifyMoveObservers();
 	}
 
+	/**
+	 * Called for all other move packets: the player stands on the ground, flies or glides.
+	 */
 	public void stopFalling(float newZ) {
-		if (lastFallZ == 0)
+		if (isBelowWorld(newZ)) {
+			dieFromFall();
 			return;
-
-		if (!owner.isFlying() && !owner.isDead()) {
-			fallDistance += lastFallZ - newZ;
-			int damage = StatFunctions.calculateFallDamage(owner, fallDistance);
-			if (damage > 0) {
-				owner.getLifeStats().reduceHp(TYPE.FALL_DAMAGE, damage, 0, LOG.REGULAR, owner);
+		}
+		float height = fallStartZ - newZ;
+		if (!owner.isFlying() && height > MIN_FALL_DAMAGE_HEIGHT) {
+			if (height >= LETHAL_FALL_HEIGHT) {
+				dieFromFall();
+				return;
+			}
+			if (!owner.isInSprintMode()) {
+				owner.getLifeStats().reduceHp(TYPE.FALL_DAMAGE, StatFunctions.calculateFallDamage(owner, height), 0, LOG.REGULAR, owner);
 				owner.getObserveController().notifyAttackedObservers(owner, 0);
 			}
 		}
-		fallDistance = 0;
-		lastFallZ = 0;
+		fallStartZ = newZ;
+		lastZ = newZ;
 		owner.getObserveController().notifyMoveObservers();
+	}
+
+	/**
+	 * Lets the next fall start at the given height, as after leaving a windstream or landing from free flight.
+	 */
+	public void restartFalling(float z) {
+		fallStartZ = z;
+		lastZ = z;
+	}
+
+	/**
+	 * Forgets where the current fall started, so a teleport or a landing from a flight path doesn't count as one.
+	 */
+	public void resetFalling() {
+		fallStartZ = Float.NaN;
+		lastZ = Float.NaN;
+	}
+
+	/**
+	 * @return True if the player is more than 2 m below z 0.
+	 */
+	private static boolean isBelowWorld(float z) {
+		return z < -2;
+	}
+
+	private void dieFromFall() {
+		resetFalling();
+		if (owner.isDead())
+			return;
+		if (owner.getController().die(TYPE.FALL_DAMAGE, LOG.REGULAR, owner))
+			PlayerReviveService.bindRevive(owner);
 	}
 
 	public void setHasMovedByRandomMoveLocEffect(Skill skill) {

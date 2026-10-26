@@ -449,11 +449,17 @@
 	</ai>
 	<ai npcId="217750">
 		<summons>
-			<percentage percent="50">
-				<summonGroup npcId="217752" distance="2"/>
+			<percentage percent="80">
+				<summonGroup npcId="217751" minCount="3" distance="5"/>
 			</percentage>
-			<percentage percent="30">
-				<summonGroup npcId="217752" minCount="3" distance="2"/>
+			<percentage percent="60">
+				<summonGroup npcId="217752" distance="5"/>
+			</percentage>
+			<percentage percent="40">
+				<summonGroup npcId="217751" minCount="5" distance="5"/>
+			</percentage>
+			<percentage percent="20">
+				<summonGroup npcId="217752" minCount="3" distance="5"/>
 			</percentage>
 		</summons>
 	</ai>

@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.questEngine.handlers.models.xmlQuest.events;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
@@ -31,10 +30,7 @@ public class OnKillEvent extends QuestEvent {
 	protected QuestOperations complite;
 
 	public List<Monster> getMonsters() {
-		if (monster == null) {
-			monster = new ArrayList<>();
-		}
-		return this.monster;
+		return monster == null ? List.of() : monster;
 	}
 
 	@Override

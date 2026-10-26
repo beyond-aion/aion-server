@@ -5,6 +5,8 @@ import java.util.Set;
 import com.aionemu.gameserver.model.gameobjects.HouseDecoration;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.house.House;
+import com.aionemu.gameserver.model.house.HousingCommand;
+import com.aionemu.gameserver.model.house.HousingContainer;
 import com.aionemu.gameserver.model.templates.housing.PartType;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
@@ -38,6 +40,8 @@ public class CM_HOUSE_DECORATE extends AionClientPacket {
 			return;
 
 		House house = player.getActiveHouse();
+		if (house == null || !house.isOnLand(player))
+			return;
 
 		PartType partType = PartType.getForLineNr(lineNo);
 		if (partType == null) // client may send lineNos which are not even implemented on client side (like 20-26)
@@ -48,11 +52,13 @@ public class CM_HOUSE_DECORATE extends AionClientPacket {
 			house.getRegistry().discardDecor(partType, roomNo);
 		} else { // apply decor and remove it from registry
 			HouseDecoration decor = house.getRegistry().getDecorByObjId(objectId);
+			if (decor == null)
+				return;
 			house.getRegistry().setUsed(decor, roomNo);
-			sendPacket(new SM_HOUSE_EDIT(4, 2, objectId)); // yes, in retail it's sent twice!
+			sendPacket(new SM_HOUSE_EDIT(HousingCommand.REMOVE_ITEM, HousingContainer.DECORATIONS, objectId)); // yes, in retail it's sent twice!
 		}
 
-		sendPacket(new SM_HOUSE_EDIT(4, 2, objectId));
+		sendPacket(new SM_HOUSE_EDIT(HousingCommand.REMOVE_ITEM, HousingContainer.DECORATIONS, objectId));
 		house.getController().updateAppearance();
 		QuestEngine.getInstance().onHouseItemUseEvent(new QuestEnv(null, player, 0));
 	}

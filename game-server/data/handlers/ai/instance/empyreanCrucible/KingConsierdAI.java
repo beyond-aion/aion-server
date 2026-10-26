@@ -1,130 +1,94 @@
 package ai.instance.empyreanCrucible;
 
-import java.util.List;
-import java.util.concurrent.Future;
-import java.util.concurrent.atomic.AtomicBoolean;
-
 import com.aionemu.gameserver.ai.AIName;
-import com.aionemu.gameserver.ai.HpPhases;
-import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.controllers.attack.AggroTarget;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.skillengine.SkillEngine;
+import com.aionemu.gameserver.model.templates.npcskill.NpcSkillTargetAttribute;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.world.WorldPosition;
-
-import ai.AggressiveNpcAI;
 
 /**
- * @author Luzien
+ * @author Luzien, w4terbomb
  */
 @AIName("king_consierd")
-public class KingConsierdAI extends AggressiveNpcAI implements HpPhases.PhaseHandler {
+public class KingConsierdAI extends CrucibleBossAI {
 
-	private final HpPhases hpPhases = new HpPhases(75, 25);
-	private AtomicBoolean isHome = new AtomicBoolean(true);
-	private Future<?> eventTask;
-	private Future<?> skillTask;
+	private static final int BABY_CONSIERD = 282378; // IDArena_Summon_Condor_55_An
+	private int cycleIn, frenzyStep;
 
 	public KingConsierdAI(Npc owner) {
 		super(owner);
 	}
 
 	@Override
-	public void handleDespawned() {
-		cancelTasks();
-		super.handleDespawned();
+	protected void onFightStart() {
+		cast(19691, 1);
+		cast(17954, 29);
+		cycleIn = 25;
+		frenzyStep = 0;
 	}
 
 	@Override
-	public void handleDied() {
-		cancelTasks();
-		despawnNpcs(getPosition().getWorldMapInstance().getNpcs(282378));
-		super.handleDied();
-	}
-
-	@Override
-	public void handleBackHome() {
-		cancelTasks();
-		despawnNpcs(getPosition().getWorldMapInstance().getNpcs(282378));
-		super.handleBackHome();
-		hpPhases.reset();
-	}
-
-	@Override
-	public void handleAttack(Creature creature) {
-		super.handleAttack(creature);
-		hpPhases.tryEnterNextPhase(this);
-		if (isHome.compareAndSet(true, false)) {
-			startBloodThirstTask();
-
-			ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-				@Override
-				public void run() {
-					SkillEngine.getInstance().getSkill(getOwner(), 19691, 1, getTarget()).useNoAnimationSkill();
-					ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-						@Override
-						public void run() {
-							SkillEngine.getInstance().getSkill(getOwner(), 17954, 29, getTarget()).useNoAnimationSkill();
-						}
-
-					}, 4000);
-
+	protected void onFightTick(int seconds, int hp) {
+		if (seconds == 240)
+			cast(19624, 10, NpcSkillTargetAttribute.ME);
+		if (passed(80)) {
+			stunAndTurn();
+			cycleIn = 25;
+		} else if (passed(55)) {
+			callBabies();
+			cycleIn = 30;
+		} else if (passed(25)) {
+			cast(19690, 1);
+			switchTarget(weakestAttacker());
+			cycleIn = 12;
+			frenzyStep = 0;
+		} else if (--cycleIn <= 0) {
+			if (hp > 80) {
+				cast(17950, 29);
+				cycleIn = 20;
+			} else if (hp > 55) {
+				stunAndTurn();
+				cycleIn = 25;
+			} else if (hp > 25) {
+				callBabies();
+				cycleIn = 30;
+			} else {
+				if (frenzyStep % 2 == 0) {
+					cast(17957, 29);
+					cast(17954, 29);
+				} else {
+					cast(19691, 1);
+					cast(17956, 29);
+					switchTarget(weakestAttacker());
+					cast(17956, 29);
 				}
-			}, 2000);
+				frenzyStep++;
+				cycleIn = frenzyStep % 2 == 1 ? 25 : 20; // after 12 s the two steps alternate 25 s and 20 s apart
+			}
 		}
+	}
+
+	private void stunAndTurn() {
+		cast(17951, 29);
+		switchTarget(attacker(AggroTarget.THIRD_MOST_HATED));
+		cast(17952, 29);
+		cast(17954, 29);
+	}
+
+	private void callBabies() {
+		cast(17951, 29);
+		for (int i = 0; i < 2; i++) {
+			if (rndSpawnInRange(BABY_CONSIERD, 1, 10) instanceof Npc baby)
+				ThreadPoolManager.getInstance().schedule(() -> baby.getController().deleteIfAliveOrCancelRespawn(), 600000);
+		}
+		switchTarget(attacker(AggroTarget.THIRD_MOST_HATED));
+		cast(17952, 29);
 	}
 
 	@Override
-	public void handleHpPhase(int phaseHpPercent) {
-		switch (phaseHpPercent) {
-			case 75 -> startSkillTask();
-			case 25 -> SkillEngine.getInstance().getSkill(getOwner(), 19690, 1, getTarget()).useNoAnimationSkill();
-		}
-	}
-
-	private void startBloodThirstTask() {
-		eventTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				SkillEngine.getInstance().getSkill(getOwner(), 19624, 10, getOwner()).useNoAnimationSkill();
-
-			}
-		}, 180 * 1000); // 3min, need confirm
-	}
-
-	private void startSkillTask() {
-		skillTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
-			if (isDead()) {
-				cancelTasks();
-				return;
-			}
-			SkillEngine.getInstance().getSkill(getOwner(), 17951, 29, getTarget()).useNoAnimationSkill();
-			ThreadPoolManager.getInstance().schedule(() -> {
-				if (getLifeStats().getHpPercentage() <= 50) {
-					WorldPosition p = getPosition();
-					spawn(282378, p.getX(), p.getY(), p.getZ(), p.getHeading());
-					spawn(282378, p.getX(), p.getY(), p.getZ(), p.getHeading());
-				}
-				ThreadPoolManager.getInstance().schedule(() -> SkillEngine.getInstance().getSkill(getOwner(), 17952, 29, getTarget()).useNoAnimationSkill(), 2000);
-			}, 3500);
-		}, 0, 25000);
-	}
-
-	private void cancelTasks() {
-		if (eventTask != null && !eventTask.isDone()) {
-			eventTask.cancel(true);
-		}
-		if (skillTask != null && !skillTask.isCancelled()) {
-			skillTask.cancel(true);
-		}
-	}
-
-	private void despawnNpcs(List<Npc> npcs) {
-		for (Npc npc : npcs) {
-			npc.getController().delete();
-		}
+	protected void onFightEnd() {
+		getPosition().getWorldMapInstance().getNpcs(BABY_CONSIERD).forEach(npc -> npc.getController().delete());
+		if (!isDead())
+			castOnSelf(19160, 1);
 	}
 }

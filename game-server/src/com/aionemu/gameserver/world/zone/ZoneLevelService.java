@@ -16,7 +16,7 @@ public class ZoneLevelService {
 	private static final long DROWN_PERIOD = 1000;
 
 	/**
-	 * Check water level (start drowning) and map death level (die)
+	 * Check water level (start drowning)
 	 */
 	public static void checkZoneLevels(Player player) {
 		World world = World.getInstance();
@@ -24,11 +24,6 @@ public class ZoneLevelService {
 
 		if (player.isDead())
 			return;
-
-		if (z < world.getWorldMap(player.getWorldId()).getDeathLevel()) {
-			player.getController().die();
-			return;
-		}
 
 		float defaultEyeHeight = player.getGender() == Gender.MALE ? 1.7f : 1.58f; // eye_height from client_PCRace.xml
 		float eyeHeight = player.getPlayerAppearance().getHeightScale() * defaultEyeHeight;

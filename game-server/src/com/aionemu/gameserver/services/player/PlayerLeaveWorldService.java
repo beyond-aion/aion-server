@@ -1,10 +1,10 @@
 package com.aionemu.gameserver.services.player;
 
 import java.sql.Timestamp;
-import java.time.Duration;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +20,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.summons.UnsummonType;
 import com.aionemu.gameserver.model.team.alliance.PlayerAllianceService;
 import com.aionemu.gameserver.model.team.group.PlayerGroupService;
+import com.aionemu.gameserver.model.templates.flypath.FlyPathEntry;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.chatserver.ChatServer;
 import com.aionemu.gameserver.questEngine.QuestEngine;
@@ -45,16 +46,18 @@ public class PlayerLeaveWorldService {
 	private static final Map<Player, LeaveWorldTask> leaveWorldTaskByPlayer = new ConcurrentHashMap<>();
 
 	/**
-	 * Registers a player to leave the world 10 seconds after their last action. If their last action was more than 10 seconds ago, the player will
-	 * leave the world immediately and the task will be run synchronously. If the player has already been registered, the existing task will not be
-	 * rescheduled.
+	 * Registers a player whose connection was lost to leave the world 10 seconds later. If the player has already been registered, the existing task
+	 * will not be rescheduled.
 	 */
 	public static void registerLeaveWorld(Player player) {
-		long lastActionTimeMillis = Math.max(player.getMoveController().getLastMoveUpdate(), player.getController().getLastCombatTime());
-		long millisSinceLastPlayerAction = System.currentTimeMillis() - lastActionTimeMillis;
-		long waitTimeMillis = Duration.ofSeconds(10).toMillis();
-		long delayMillis = Math.max(0, waitTimeMillis - millisSinceLastPlayerAction);
-		leaveWorldTaskByPlayer.computeIfAbsent(player, LeaveWorldTask::new).scheduleOrRun(delayMillis);
+		leaveWorldTaskByPlayer.computeIfAbsent(player, LeaveWorldTask::new).schedule();
+	}
+
+	/**
+	 * Lets a player who quit the game leave the world right away, also if they were already registered to leave it later.
+	 */
+	public static void leaveWorldNow(Player player) {
+		leaveWorldTaskByPlayer.computeIfAbsent(player, LeaveWorldTask::new).run();
 	}
 
 	public static boolean isLeavingWorld(int playerObjectId) {
@@ -96,7 +99,7 @@ public class PlayerLeaveWorldService {
 		if (AutoGroupConfig.AUTO_GROUP_ENABLE)
 			AutoGroupService.getInstance().onLogout(player);
 		ConquerorAndProtectorService.getInstance().onLeaveMap(player);
-		MultiClientingService.onLeaveWorld(player);
+		MultiClientService.onLeaveWorld(player);
 		InstanceService.onLogout(player);
 		GMService.getInstance().onPlayerLogout(player);
 		KiskService.getInstance().onLogout(player);
@@ -142,10 +145,10 @@ public class PlayerLeaveWorldService {
 		player.getCommonData().setLastOnline(lastOnline);
 		if (player.isLegionMember()) // must be called after setOnline and setLastOnline
 			LegionService.getInstance().onLogout(player);
-		player.getCommonData().setX(player.getX());
-		player.getCommonData().setY(player.getY());
-		player.getCommonData().setZ(player.getZ());
-		player.getCommonData().setHeading(player.getHeading());
+		FlyPathEntry flightPath = player.getFlightPathTemplate();
+		if (flightPath != null)
+			player.getPosition().setXYZH(flightPath.getEndX(), flightPath.getEndY(), flightPath.getEndZ(), (byte) 0);
+		player.getCommonData().setXYZH(player.getX(), player.getY(), player.getZ(), player.getHeading());
 
 		ChatServer.getInstance().sendPlayerLogout(player);
 
@@ -172,13 +175,10 @@ public class PlayerLeaveWorldService {
 			this.player = player;
 		}
 
-		synchronized void scheduleOrRun(long delayMillis) {
+		synchronized void schedule() {
 			if (finished || future != null)
 				return;
-			if (delayMillis <= 0)
-				run();
-			else
-				future = ThreadPoolManager.getInstance().schedule(this, delayMillis);
+			future = ThreadPoolManager.getInstance().schedule(this, 10, TimeUnit.SECONDS);
 		}
 
 		@Override

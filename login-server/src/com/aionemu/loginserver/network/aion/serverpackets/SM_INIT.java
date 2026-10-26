@@ -32,19 +32,18 @@ public final class SM_INIT extends AionServerPacket {
 		this.blowfishKey = blowfishKey;
 	}
 
+	/**
+	 * Protocol revision 50721: the 4.8 client picks its packet encryption by it (it also knows 30206, 30810 and 40916, with other ciphers).
+	 */
+	private static final int PROTOCOL_REVISION = 0xC621;
+
 	@Override
 	protected void writeImpl(LoginConnection con) {
-		writeD(sessionId); // session id
-		writeD(0x0000c621); // protocol revision
-		writeB(publicRsaKey); // RSA Public Key, 128 bytes
-		writeB(new byte[16]); // 0, spacer?
-		writeB(blowfishKey); // BlowFish key, 16 bytes
-		writeB(new byte[7]); // 0, spacer?
-		writeC(0); // test server id (100)
-		writeD(0); // test server ip (1632857679 = 79.110.83.97)
-		writeH(0); // test server port (7777)
-		writeC(0); // 0, flag?
-		writeD(0x3FCE09ED); // unk (old 0xD98E9655)
-		writeD(0); // unk
+		writeD(sessionId);
+		writeD(PROTOCOL_REVISION);
+		writeB(publicRsaKey); // scrambled RSA modulus, 128 bytes
+		writeB(new byte[16]); // skipped by the client
+		writeB(blowfishKey); // 16 bytes
+		writeC(0); // login mode: 0 password; with 3 or 4 the client reads 3 more bytes and logs in with an external token
 	}
 }

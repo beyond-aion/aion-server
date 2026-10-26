@@ -152196,7 +152196,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<targetteleport distance="5" e="1" noresist="true" hoptype="DAMAGE" />
+			<targetteleport e="1" noresist="true" hoptype="DAMAGE" />
 			<snare duration2="5000" effectid="20007" e="2" noresist="true" element="FIRE" preeffect="1" hoptype="DAMAGE">
 				<change stat="SPEED" func="PERCENT" value="-90" />
 				<change stat="FLY_SPEED" func="PERCENT" value="-90" />
@@ -152213,7 +152213,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<targetteleport distance="5" e="1" noresist="true" hoptype="DAMAGE" />
+			<targetteleport e="1" noresist="true" hoptype="DAMAGE" />
 			<snare duration2="5000" effectid="20007" e="2" noresist="true" element="FIRE" preeffect="1" hoptype="DAMAGE">
 				<change stat="SPEED" func="PERCENT" value="-50" />
 				<change stat="FLY_SPEED" func="PERCENT" value="-50" />
@@ -153046,7 +153046,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<targetteleport distance="5" e="1" noresist="true" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<targetteleport e="1" noresist="true" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<stun duration2="5000" effectid="20000" e="2" noresist="true" element="WATER" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
 		</effects>
 		<motion name="poweratk" />
@@ -153526,7 +153526,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<targetteleport distance="5" e="1" noresist="true" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<targetteleport alias_location="test_teleport_001" e="1" noresist="true" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<stun duration2="5000" effectid="20000" e="2" noresist="true" element="WATER" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
 		</effects>
 		<motion name="poweratk" />
@@ -156439,7 +156439,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<targetteleport distance="1" alias_location="IDTemple_Low_Furnace_01" e="1" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<targetteleport alias_location="IDTemple_Low_Furnace_01" e="1" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<stun duration2="3000" effectid="20000" e="2" noresist="true" element="FIRE" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
 		</effects>
 		<motion name="throw" />
@@ -158374,7 +158374,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<targetteleport distance="1" e="1" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<targetteleport alias_location="testmotion" e="1" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<stun duration2="3000" effectid="20000" e="2" noresist="true" element="FIRE" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
 		</effects>
 		<motion name="handbind" />
@@ -160816,7 +160816,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<targetteleport distance="10" e="1" noresist="true" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<targetteleport e="1" noresist="true" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<snare duration2="2000" effectid="20007" e="2" noresist="true" element="EARTH" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60">
 				<change stat="SPEED" func="PERCENT" value="-90" />
 				<change stat="FLY_SPEED" func="PERCENT" value="-90" />
@@ -164590,7 +164590,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<targetteleport distance="5" e="1" noresist="true" hoptype="DAMAGE" />
+			<targetteleport e="1" noresist="true" hoptype="DAMAGE" />
 			<snare duration2="12000" effectid="20007" e="2" noresist="true" element="FIRE" preeffect="1" hoptype="DAMAGE">
 				<change stat="SPEED" func="PERCENT" value="-90" />
 				<change stat="FLY_SPEED" func="PERCENT" value="-90" />
@@ -167025,7 +167025,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<targetteleport distance="5" e="1" noresist="true" hoptype="DAMAGE" />
+			<targetteleport e="1" noresist="true" hoptype="DAMAGE" />
 			<snare duration2="12000" effectid="20007" e="2" noresist="true" element="FIRE" preeffect="1" hoptype="DAMAGE">
 				<change stat="SPEED" func="PERCENT" value="-90" />
 				<change stat="FLY_SPEED" func="PERCENT" value="-90" />
@@ -175070,7 +175070,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<targetteleport distance="5" e="1" noresist="true" hoptype="DAMAGE" />
+			<targetteleport e="1" noresist="true" hoptype="DAMAGE" />
 			<snare duration2="5000" effectid="20007" e="2" noresist="true" element="FIRE" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60">
 				<change stat="SPEED" func="PERCENT" value="-50" />
 				<change stat="FLY_SPEED" func="PERCENT" value="-50" />
@@ -190819,7 +190819,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<targetteleport distance="10" alias_location="Alias_5" e="1" noresist="true" hoptype="DAMAGE" />
+			<targetteleport alias_location="Alias_5" e="1" noresist="true" hoptype="DAMAGE" />
 			<snare duration2="5000" effectid="20007" e="2" noresist="true" element="FIRE" preeffect="1" hoptype="DAMAGE">
 				<change stat="SPEED" func="PERCENT" value="-90" />
 				<change stat="FLY_SPEED" func="PERCENT" value="-90" />

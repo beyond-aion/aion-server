@@ -49,18 +49,35 @@ public class CM_QUIT extends AionClientPacket {
 					AuditLogger.log(player, "tried to enter the plastic surgery screen without targeting the respective npc within talk distance");
 					return;
 				}
+			} else {
+				// the delay between receiving CM_MAY_QUIT and CM_QUIT when there is zero latency involved is 11 seconds
+				long countdownMillis = System.currentTimeMillis() - player.getQuitCountdownStartMillis();
+				if (countdownMillis < 8_000 || countdownMillis > 20_000) {
+					if (countdownMillis < 8_000)
+						AuditLogger.log(player, "tried to quit the game without waiting the full 10 seconds after sending CM_MAY_QUIT");
+					else
+						AuditLogger.log(player, "tried to quit the game without sending CM_MAY_QUIT");
+					sendPacket(SM_QUIT_RESPONSE.refused((int) Math.min(countdownMillis, Integer.MAX_VALUE)));
+					return;
+				}
+			}
+			long blockedMillis = player.getMillisUntilQuittingAllowed();
+			if (blockedMillis > 0) {
+				sendPacket(SM_QUIT_RESPONSE.refused((int) ((blockedMillis + 999) / 1000)));
+				return;
 			}
 			if (stayConnected) { // update char selection info
 				player.getAccountData().setVisibleItems(player.getEquipment().getEquippedForAppearance());
 				for (PlayerAccountData plAccData : con.getAccount().getPlayerAccDataList())
 					plAccData.setCharBanInfo(PlayerPunishmentsDAO.getCharBanInfo(plAccData.getPlayerCommonData().getPlayerObjId()));
 			}
-			PlayerLeaveWorldService.registerLeaveWorld(player);
+			PlayerLeaveWorldService.leaveWorldNow(player);
 		}
 
+		SM_QUIT_RESPONSE response = charEditScreen ? SM_QUIT_RESPONSE.quitToEditScreen() : SM_QUIT_RESPONSE.quit();
 		if (stayConnected)
-			sendPacket(new SM_QUIT_RESPONSE(charEditScreen));
+			sendPacket(response);
 		else
-			con.close(new SM_QUIT_RESPONSE(charEditScreen)); // makes sure this packet will be sent before closing connection
+			con.close(response);
 	}
 }

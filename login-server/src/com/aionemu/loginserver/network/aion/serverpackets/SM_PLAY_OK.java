@@ -17,7 +17,7 @@ public class SM_PLAY_OK extends AionServerPacket {
 	 * playOk2 is part of session key - its used for security purposes [checked at game server side]
 	 */
 	private final int playOk2;
-	private int serverId;
+	private final int serverId;
 
 	/**
 	 * Constructs new instance of <tt>SM_PLAY_OK </tt> packet.
@@ -37,6 +37,5 @@ public class SM_PLAY_OK extends AionServerPacket {
 		writeD(playOk1);
 		writeD(playOk2);
 		writeC(serverId);
-		writeB(new byte[0x0E]);
 	}
 }

@@ -8,7 +8,10 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import com.aionemu.gameserver.model.gameobjects.Letter;
 import com.aionemu.gameserver.model.gameobjects.LetterType;
+import com.aionemu.gameserver.model.gameobjects.VisibleObject;
+import com.aionemu.gameserver.model.items.storage.StorageType;
 import com.aionemu.gameserver.services.mail.MailService;
+import com.aionemu.gameserver.services.player.PlayerMailboxState;
 
 /**
  * @author kosyachok, Atracer
@@ -26,6 +29,19 @@ public class Mailbox {
 
 	public Mailbox(Player player) {
 		this.owner = player;
+	}
+
+	/**
+	 * @param mailboxObject
+	 *          the postbox, postman or house postbox the player opened the mailbox at
+	 */
+	public void open(boolean isExpress, VisibleObject mailboxObject) {
+		this.mailBoxState = isExpress ? PlayerMailboxState.EXPRESS : PlayerMailboxState.REGULAR;
+		owner.setStorageManager(StorageType.MAILBOX, mailboxObject);
+	}
+
+	public void close() {
+		mailBoxState = PlayerMailboxState.CLOSED;
 	}
 
 	public void putLetterToMailbox(Letter letter) {
@@ -114,10 +130,12 @@ public class Mailbox {
 		return mails.size() < 100;
 	}
 
-	public void removeLetter(int letterId) {
-		mails.remove(letterId);
+	public boolean removeLetter(int letterId) {
+		if (mails.remove(letterId) == null)
+			return false;
 		uploadReserveLetters();
 		owner.getCommonData().setMailboxLetters(size());
+		return true;
 	}
 
 	/**

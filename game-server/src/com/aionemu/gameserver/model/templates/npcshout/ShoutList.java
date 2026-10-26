@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.model.templates.npcshout;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.xml.bind.annotation.*;
@@ -19,65 +18,17 @@ public class ShoutList {
 	protected List<Integer> npcIds;
 
 	@XmlAttribute(name = "restrict_world")
-	protected Integer restrictWorld;
+	protected int restrictWorld;
 
-	/**
-	 * Gets the value of the npcShouts property.
-	 * <p>
-	 * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to the returned list will be
-	 * present inside the JAXB object. This is why there is not a <CODE>set</CODE> method for the npcShouts property.
-	 * <p>
-	 * For example, to add a new item, do as follows:
-	 * 
-	 * <pre>
-	 * getNpcShouts().add(newItem);
-	 * </pre>
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list {@link NpcShout }
-	 */
 	public List<NpcShout> getNpcShouts() {
-		if (npcShouts == null) {
-			npcShouts = new ArrayList<>();
-		}
-		return this.npcShouts;
+		return npcShouts == null ? List.of() : npcShouts;
 	}
 
-	/**
-	 * Gets the value of the npcIds property.
-	 * <p>
-	 * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to the returned list will be
-	 * present inside the JAXB object. This is why there is not a <CODE>set</CODE> method for the npcIds property.
-	 * <p>
-	 * For example, to add a new item, do as follows:
-	 * 
-	 * <pre>
-	 * getNpcIds().add(newItem);
-	 * </pre>
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list {@link Integer }
-	 */
 	public List<Integer> getNpcIds() {
-		if (npcIds == null) {
-			npcIds = new ArrayList<>();
-		}
-		return this.npcIds;
+		return npcIds == null ? List.of() : npcIds;
 	}
 
-	/**
-	 * Gets the value of the restrictWorld property.
-	 * 
-	 * @return possible object is {@link Integer }
-	 */
 	public int getRestrictWorld() {
-		if (restrictWorld == null)
-			return 0;
 		return restrictWorld;
 	}
-
-	public void makeNull() {
-		this.npcIds = null;
-		this.npcShouts = null;
-		this.restrictWorld = null;
-	}
-
 }

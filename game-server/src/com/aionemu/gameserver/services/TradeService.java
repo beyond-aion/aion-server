@@ -21,7 +21,6 @@ import com.aionemu.gameserver.model.templates.item.AcquisitionType;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.model.templates.item.TradeinItem;
 import com.aionemu.gameserver.model.templates.tradelist.TradeListTemplate;
-import com.aionemu.gameserver.model.templates.tradelist.TradeListTemplate.TradeTab;
 import com.aionemu.gameserver.model.templates.tradelist.TradeNpcType;
 import com.aionemu.gameserver.model.trade.TradeItem;
 import com.aionemu.gameserver.model.trade.TradeList;
@@ -49,6 +48,19 @@ public class TradeService {
 	private static final TradeListData tradeListData = DataManager.TRADE_LIST_DATA;
 	private static final GoodsListData goodsListData = DataManager.GOODSLIST_DATA;
 
+	public static List<Integer> getTradeListTabIds(TradeListTemplate tradeListTemplate, Player player) {
+		List<Integer> tradeTabIds = tradeListTemplate.getTradeTabIds();
+		int legionLevel = player.getLegion() == null ? 0 : player.getLegion().getLegionLevel();
+		List<Integer> filteredTradeTabIds = new ArrayList<>();
+		for (Integer tradeTabId : tradeTabIds) {
+			GoodsList goodsList = goodsListData.getGoodsListById(tradeTabId);
+			if (goodsList == null || goodsList.getLegionLevel() > legionLevel)
+				continue;
+			filteredTradeTabIds.add(tradeTabId);
+		}
+		return filteredTradeTabIds;
+	}
+
 	private static boolean canBuyLimitItem(Npc npc, Player player, int itemId, long count) {
 		LimitedItem item = LimitedItemTradeService.getInstance().getLimitedItem(itemId, npc.getNpcId());
 		if (item != null) {
@@ -61,47 +73,36 @@ public class TradeService {
 	}
 
 	private static boolean containsItem(TradeListTemplate tradeListTemplate, IntFunction<GoodsList> goodsListById, int itemId) {
-		for (TradeTab tab : tradeListTemplate.getTradeTablist())
-			if (goodsListById.apply(tab.getId()).getItemIdList().contains(itemId))
+		for (Integer tradeTabId : tradeListTemplate.getTradeTabIds())
+			if (goodsListById.apply(tradeTabId).getItemIdList().contains(itemId))
 				return true;
-		return false;
-	}
-
-	public static boolean performBuyFromShop(Npc npc, Player player, TradeList tradeList) {
-		TradeNpcType npcType = tradeListData.getTradeListTemplate(npc.getNpcId()).getTradeNpcType();
-		switch (npcType) {
-			case NORMAL:
-			case ABYSS_KINAH:
-				return performBuyTransaction(npc, player, tradeList, true);// trade including kinah
-			case ABYSS:
-			case REWARD:
-				return performBuyTransaction(npc, player, tradeList, false); // trade without kinah
-			default:
-				log.warn("Unhandled TradeNpcType:{}", npcType.name());
-		}
 		return false;
 	}
 
 	/**
 	 * General Trade with NPC method. Handles buy items for AP and/or tokens (coins etc.) and/or kinah
 	 */
-	public static boolean performBuyTransaction(Npc npc, Player player, TradeList tradeList, boolean useKinah) {
+	public static boolean buyFromShop(Npc npc, Player player, TradeList tradeList) {
 		if (!PlayerRestrictions.canTrade(player)) {
 			return false;
 		}
-
-		if (!validateBuyItems(npc, tradeList, player)) {
+		TradeListTemplate template = tradeListData.getTradeListTemplate(npc.getNpcId());
+		if (!validateBuyItems(template, tradeList, player)) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_BUY_SELL_USER_BUY_FAILED());
 			return false;
 		}
 
 		Storage inventory = player.getInventory();
 		int freeSlots = inventory.getFreeSlots();
+		TradeNpcType npcType = template.getTradeNpcType();
+		boolean useKinah = switch (npcType) {
+			case ABYSS, REWARD -> false;
+			default -> true;
+		};
 
 		// strange new attributes for new trader type
-		TradeListTemplate template = tradeListData.getTradeListTemplate(npc.getNpcId());
-		int sellModifier = template.getTradeNpcType().equals(TradeNpcType.ABYSS_KINAH) ? template.getSellPriceRate2() : template.getSellPriceRate();
-		int apSellModifier = template.getTradeNpcType().equals(TradeNpcType.ABYSS_KINAH) ? template.getApSellPriceRate2() : template.getSellPriceRate();
+		int sellModifier = npcType == TradeNpcType.ABYSS_KINAH ? template.getSellPriceRate2() : template.getSellPriceRate();
+		int apSellModifier = npcType == TradeNpcType.ABYSS_KINAH ? template.getApSellPriceRate2() : template.getSellPriceRate();
 
 		// 1. If useKinah, check for required Kinah
 		if (useKinah && !tradeList.calculateBuyListPrice(player, sellModifier)) {
@@ -179,12 +180,10 @@ public class TradeService {
 		return true;
 	}
 
-	private static boolean validateBuyItems(Npc npc, TradeList tradeList, Player player) {
-		TradeListTemplate tradeListTemplate = tradeListData.getTradeListTemplate(npc.getObjectTemplate().getTemplateId());
-
+	private static boolean validateBuyItems(TradeListTemplate template, TradeList tradeList, Player player) {
 		Set<Integer> allowedItems = new HashSet<>();
-		for (TradeTab tradeTab : tradeListTemplate.getTradeTablist()) {
-			GoodsList goodsList = goodsListData.getGoodsListById(tradeTab.getId());
+		for (Integer tradeTabId : getTradeListTabIds(template, player)) {
+			GoodsList goodsList = goodsListData.getGoodsListById(tradeTabId);
 			if (goodsList != null && goodsList.getItemIdList() != null)
 				allowedItems.addAll(goodsList.getItemIdList());
 		}
