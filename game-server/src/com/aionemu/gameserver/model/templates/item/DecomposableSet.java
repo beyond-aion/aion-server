@@ -3,12 +3,12 @@ package com.aionemu.gameserver.model.templates.item;
 import java.util.Collections;
 import java.util.List;
 
+import jakarta.xml.bind.annotation.*;
+
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-
-import jakarta.xml.bind.annotation.*;
 
 /**
  * One reward branch of a decomposable item. Branches are rolled independently of each other, and a branch that fires yields exactly one of its
