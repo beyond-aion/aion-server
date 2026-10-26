@@ -17,8 +17,8 @@ import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.storage.StorageType;
 import com.aionemu.gameserver.model.templates.item.*;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_FIRST_SHOW_DECOMPOSABLE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SHOW_DECOMPOSABLE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemAddType;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
@@ -38,12 +38,12 @@ public class DecomposeAction extends AbstractItemAction {
 	public boolean canAct(Player player, Item parentItem, Item targetItem, Object... params) {
 		if (player.isDead() || !player.isSpawned())
 			return false;
-		DecomposableItemInfo info = DataManager.DECOMPOSABLE_ITEMS_DATA.getInfoByItemId(parentItem.getItemId());
-		if (info == null) {
+		DecomposableItem decomposableItem = DataManager.DECOMPOSABLE_ITEMS_DATA.get(parentItem.getItemId());
+		if (decomposableItem == null) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_IT_CAN_NOT_BE_DECOMPOSED(parentItem.getL10n()));
 			return false;
 		}
-		if (player.getInventory().isFull() || player.getInventory().isFullSpecialCube() && containsSpecialCubeItems(info, player)) {
+		if (player.getInventory().isFull() || player.getInventory().isFullSpecialCube() && containsSpecialCubeItems(decomposableItem, player)) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_WAREHOUSE_FULL_INVENTORY());
 			return false;
 		}
@@ -52,18 +52,18 @@ public class DecomposeAction extends AbstractItemAction {
 
 	@Override
 	public void act(final Player player, final Item parentItem, final Item targetItem, Object... params) {
-		DecomposableItemInfo info = DataManager.DECOMPOSABLE_ITEMS_DATA.getInfoByItemId(parentItem.getItemId());
-		if (info.isSelectable()) {
-			DecomposableSet set = info.getSelectableSet(player);
+		DecomposableItem decomposableItem = DataManager.DECOMPOSABLE_ITEMS_DATA.get(parentItem.getItemId());
+		if (decomposableItem.isSelectable()) {
+			DecomposableSet set = decomposableItem.getSelectableSet(player);
 			if (set == null)
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANT_USE_ITEM(parentItem.getL10n()));
 			else
-				PacketSendUtility.sendPacket(player, new SM_FIRST_SHOW_DECOMPOSABLE(parentItem.getObjectId(), set.getItems()));
+				PacketSendUtility.sendPacket(player, new SM_SHOW_DECOMPOSABLE(parentItem.getObjectId(), set.getItems()));
 			return;
 		}
 		int castingDelay = parentItem.getItemTemplate().getCastingDelay();
 		if (castingDelay <= 0) {
-			finishUse(player, parentItem, targetItem, info);
+			finishUse(player, parentItem, targetItem, decomposableItem);
 			return;
 		}
 		PacketSendUtility.broadcastPacket(player,
@@ -85,7 +85,7 @@ public class DecomposeAction extends AbstractItemAction {
 		player.getObserveController().addObserver(observer);
 		player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(() -> {
 			player.getObserveController().removeObserver(observer);
-			finishUse(player, parentItem, targetItem, info);
+			finishUse(player, parentItem, targetItem, decomposableItem);
 		}, castingDelay));
 	}
 
@@ -100,8 +100,8 @@ public class DecomposeAction extends AbstractItemAction {
 		return true;
 	}
 
-	private void finishUse(Player player, Item parentItem, Item targetItem, DecomposableItemInfo info) {
-		Map<Integer, Long> rewards = mergeRewards(info.decompose(player));
+	private void finishUse(Player player, Item parentItem, Item targetItem, DecomposableItem decomposableItem) {
+		Map<Integer, Long> rewards = mergeRewards(decomposableItem.decompose(player));
 		boolean obtainedRewards = !rewards.isEmpty() && !ownsLoreReward(player, rewards);
 		boolean validAction = obtainedRewards && postValidate(player, parentItem, targetItem);
 		if (validAction) {
@@ -144,8 +144,8 @@ public class DecomposeAction extends AbstractItemAction {
 		return false;
 	}
 
-	private boolean containsSpecialCubeItems(DecomposableItemInfo info, Player player) {
-		for (DecomposableSet set : info.getSets()) {
+	private boolean containsSpecialCubeItems(DecomposableItem decomposableItem, Player player) {
+		for (DecomposableSet set : decomposableItem.getSets()) {
 			if (!set.isApplicableTo(player))
 				continue;
 			for (DecomposedReward reward : set.getRewards()) {

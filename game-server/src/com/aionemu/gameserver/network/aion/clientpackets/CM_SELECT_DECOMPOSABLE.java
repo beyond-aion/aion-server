@@ -6,13 +6,13 @@ import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.ItemUseAnimation;
-import com.aionemu.gameserver.model.templates.item.DecomposableItemInfo;
+import com.aionemu.gameserver.model.templates.item.DecomposableItem;
 import com.aionemu.gameserver.model.templates.item.DecomposableSet;
 import com.aionemu.gameserver.model.templates.item.DecomposedItem;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SECONDARY_SHOW_DECOMPOSABLE;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SELECT_DECOMPOSABLE_RESULT;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.restrictions.PlayerRestrictions;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemAddType;
@@ -48,11 +48,11 @@ public class CM_SELECT_DECOMPOSABLE extends AionClientPacket {
 		Item item = player.getInventory().getItemByObjId(objectId);
 		if (item == null)
 			return;
-		DecomposableItemInfo info = DataManager.DECOMPOSABLE_ITEMS_DATA.getInfoByItemId(item.getItemId());
+		DecomposableItem decomposableItem = DataManager.DECOMPOSABLE_ITEMS_DATA.get(item.getItemId());
 		// nothing ties the pick to an opened window, so it has to pass the same checks as using the item
-		if (info == null || !info.isSelectable() || !PlayerRestrictions.canUseItem(player, item))
+		if (decomposableItem == null || !decomposableItem.isSelectable() || !PlayerRestrictions.canUseItem(player, item))
 			return;
-		DecomposableSet set = info.getSelectableSet(player);
+		DecomposableSet set = decomposableItem.getSelectableSet(player);
 		if (set == null || index >= set.getItems().size())
 			return;
 		DecomposedItem selectedItem = set.getItems().get(index);
@@ -64,10 +64,10 @@ public class CM_SELECT_DECOMPOSABLE extends AionClientPacket {
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_USE_ITEM(item.getL10n()));
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_UNCOMPRESS_COMPRESSED_ITEM_SUCCEEDED(item.getL10n()));
 		if (!player.getInventory().decreaseByObjectId(objectId, 1)) {
-			PacketSendUtility.sendPacket(player, new SM_SECONDARY_SHOW_DECOMPOSABLE(objectId, SM_SECONDARY_SHOW_DECOMPOSABLE.NOT_GRANTED));
+			PacketSendUtility.sendPacket(player, new SM_SELECT_DECOMPOSABLE_RESULT(objectId, SM_SELECT_DECOMPOSABLE_RESULT.NOT_GRANTED));
 			return;
 		}
-		PacketSendUtility.sendPacket(player, new SM_SECONDARY_SHOW_DECOMPOSABLE(objectId, SM_SECONDARY_SHOW_DECOMPOSABLE.GRANTED));
+		PacketSendUtility.sendPacket(player, new SM_SELECT_DECOMPOSABLE_RESULT(objectId, SM_SELECT_DECOMPOSABLE_RESULT.GRANTED));
 		ItemService.addItem(player, selectedItem.getItemId(), selectedItem.getCount(), true,
 			new ItemUpdatePredicate(ItemAddType.DECOMPOSABLE, ItemUpdateType.INC_ITEM_COLLECT));
 		player.startCooldown(item);
@@ -77,7 +77,7 @@ public class CM_SELECT_DECOMPOSABLE extends AionClientPacket {
 		PacketSendUtility.broadcastPacketAndReceive(player,
 			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), objectId, item.getItemId(), 0, ItemUseAnimation.USE_FAIL));
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANT_USE_ITEM(item.getL10n()));
-		PacketSendUtility.sendPacket(player, new SM_SECONDARY_SHOW_DECOMPOSABLE(objectId, SM_SECONDARY_SHOW_DECOMPOSABLE.NOT_GRANTED));
+		PacketSendUtility.sendPacket(player, new SM_SELECT_DECOMPOSABLE_RESULT(objectId, SM_SELECT_DECOMPOSABLE_RESULT.NOT_GRANTED));
 	}
 
 }

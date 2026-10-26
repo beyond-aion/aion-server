@@ -9,12 +9,12 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
 /**
  * @author xTz
  */
-public class SM_FIRST_SHOW_DECOMPOSABLE extends AionServerPacket {
+public class SM_SHOW_DECOMPOSABLE extends AionServerPacket {
 
-	private Collection<DecomposedItem> itemsCollections;
-	private int objectId;
+	private final Collection<DecomposedItem> itemsCollections;
+	private final int objectId;
 
-	public SM_FIRST_SHOW_DECOMPOSABLE(int objectId, Collection<DecomposedItem> itemsCollections) {
+	public SM_SHOW_DECOMPOSABLE(int objectId, Collection<DecomposedItem> itemsCollections) {
 		this.itemsCollections = itemsCollections;
 		this.objectId = objectId;
 	}

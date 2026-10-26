@@ -8,7 +8,7 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
  *
  * @author xTz
  */
-public class SM_SECONDARY_SHOW_DECOMPOSABLE extends AionServerPacket {
+public class SM_SELECT_DECOMPOSABLE_RESULT extends AionServerPacket {
 
 	/*
 	 * The client closes the window on both results. Retail never sends NOT_GRANTED, its picks always land in the cube, even past its size.
@@ -21,7 +21,7 @@ public class SM_SECONDARY_SHOW_DECOMPOSABLE extends AionServerPacket {
 	private final int objectId;
 	private final int result;
 
-	public SM_SECONDARY_SHOW_DECOMPOSABLE(int objectId, int result) {
+	public SM_SELECT_DECOMPOSABLE_RESULT(int objectId, int result) {
 		this.objectId = objectId;
 		this.result = result;
 	}

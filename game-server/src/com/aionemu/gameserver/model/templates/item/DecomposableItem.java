@@ -16,7 +16,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
  * @author antness
  */
 @XmlType(name = "DecomposableItem")
-public class DecomposableItemInfo {
+public class DecomposableItem {
 
 	@XmlAttribute(name = "item_id")
 	private int itemId;
