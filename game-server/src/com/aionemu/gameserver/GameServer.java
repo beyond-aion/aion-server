@@ -15,6 +15,7 @@ import com.aionemu.commons.configuration.transformers.PropertyTransformers;
 import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.commons.logging.Logging;
 import com.aionemu.commons.network.netty.NettyServer;
+import com.aionemu.commons.utils.concurrent.SequentialExecutor;
 import com.aionemu.commons.utils.concurrent.UncaughtExceptionHandler;
 import com.aionemu.commons.utils.info.StartupInfo;
 import com.aionemu.commons.utils.info.SystemInfo;
@@ -197,6 +198,8 @@ public class GameServer {
 	 * Starts servers for connection with aion client and login\chat server.
 	 */
 	private static NettyServer initNettyServer() {
+		if (NetworkConfig.PACKET_PROCESSOR_STUCK_WARN_SECONDS > 0)
+			SequentialExecutor.startWatchdog(Duration.ofSeconds(NetworkConfig.PACKET_PROCESSOR_STUCK_WARN_SECONDS));
 		NettyServer nettyServer = new NettyServer(NetworkConfig.TRANSPORT, NetworkConfig.IO_THREADS);
 		nettyServer.bind(NetworkConfig.CLIENT_SOCKET_ADDRESS, "Aion game clients", new AionChannelInitializer());
 		return nettyServer;

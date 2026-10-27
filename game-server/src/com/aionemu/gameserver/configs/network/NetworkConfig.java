@@ -81,6 +81,12 @@ public class NetworkConfig {
 	public static int PACKET_PROCESSOR_MAX_PENDING_PACKETS_PER_CONNECTION;
 
 	/**
+	 * Time in seconds after which a client packet that is still executing gets its stack trace logged. 0 disables the check.
+	 */
+	@Property(key = "gameserver.network.packet.processor.stuck_warn_seconds", defaultValue = "30")
+	public static int PACKET_PROCESSOR_STUCK_WARN_SECONDS;
+
+	/**
 	 * Maximum size in kilobytes of the server packets that may wait to be sent to one client. A client exceeding it gets disconnected.
 	 */
 	@Property(key = "gameserver.network.client.max_pending_send_kb", defaultValue = "4096")

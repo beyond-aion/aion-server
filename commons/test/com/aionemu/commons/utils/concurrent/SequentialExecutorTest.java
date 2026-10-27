@@ -2,6 +2,7 @@ package com.aionemu.commons.utils.concurrent;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
@@ -80,5 +81,43 @@ public class SequentialExecutorTest {
 		assertEquals(1, started.size());
 		started.getFirst().run();
 		assertEquals(List.of("accepted"), ran);
+	}
+
+	@Test
+	public void watchdogReportsAStuckTaskOnce() throws Exception {
+		try (ExecutorService threads = Executors.newVirtualThreadPerTaskExecutor()) {
+			SequentialExecutor executor = new SequentialExecutor(threads);
+			CountDownLatch started = new CountDownLatch(1), release = new CountDownLatch(1);
+			executor.execute(() -> {
+				started.countDown();
+				try {
+					release.await();
+				} catch (InterruptedException ignored) {
+				}
+			});
+			assertTrue(started.await(5, TimeUnit.SECONDS));
+			Duration threshold = Duration.ofSeconds(30);
+			long now = System.nanoTime();
+			assertEquals(0, SequentialExecutor.checkStuckTasks(now, threshold));
+			assertEquals(0, SequentialExecutor.checkStuckTasks(now + Duration.ofSeconds(29).toNanos(), threshold));
+			assertEquals(1, SequentialExecutor.checkStuckTasks(now + Duration.ofSeconds(31).toNanos(), threshold));
+			assertEquals(0, SequentialExecutor.checkStuckTasks(now + Duration.ofSeconds(60).toNanos(), threshold));
+			release.countDown();
+		}
+	}
+
+	@Test
+	public void watchdogIgnoresAnExecutorThatKeepsFinishingTasks() throws Exception {
+		try (ExecutorService threads = Executors.newVirtualThreadPerTaskExecutor()) {
+			SequentialExecutor executor = new SequentialExecutor(threads);
+			Duration threshold = Duration.ofSeconds(30);
+			long now = System.nanoTime();
+			for (int i = 0; i < 5; i++) {
+				CountDownLatch done = new CountDownLatch(1);
+				executor.execute(done::countDown);
+				assertTrue(done.await(5, TimeUnit.SECONDS));
+				assertEquals(0, SequentialExecutor.checkStuckTasks(now + Duration.ofSeconds(31L * i).toNanos(), threshold));
+			}
+		}
 	}
 }
