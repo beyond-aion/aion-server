@@ -200,14 +200,6 @@
 			<item id="168000177" chance="5.89" /><!-- Illusion Godstone: Meslamtaeda's Regret -->
 		</set>
 	</decomposable>
-	<decomposable item_id="188050714" override="true"><!-- Chocolate Candy Box -->
-		<set race="ELYOS">
-			<item id="160010109" count="3" /><!-- Enamored Tiger Form Candy -->
-		</set>
-		<set race="ASMODIANS">
-			<item id="160010110" count="3" /><!-- Enamored Tiger Form Candy -->
-		</set>
-	</decomposable>
 	<decomposable item_id="188051090" selectable="true" override="true"><!-- [Event] Cold Box -->
 		<set>
 			<item id="125045164" /><!-- Rattan Hat -->
@@ -334,32 +326,6 @@
 			<item id="166000195" chance="8.31" /><!-- Epsilon Enchantment Stone -->
 		</set>
 	</decomposable>
-	<decomposable item_id="188051326" override="true"><!-- [Event] Ornate Lockbox -->
-		<set>
-			<item id="186000199" count="80" /><!-- Legion Coin -->
-		</set>
-		<set>
-			<item id="186000051" count="3" /><!-- Major Ancient Crown -->
-		</set>
-		<set>
-			<item id="166000195" count="5" /><!-- Epsilon Enchantment Stone -->
-		</set>
-		<set>
-			<item id="169630007" /><!-- [Expand Card] Expand Cube Ticket (lvl 4) -->
-		</set>
-		<set>
-			<item id="169620072" /><!-- AP Boost Charm II - 30% -->
-		</set>
-		<set>
-			<item id="169620082" /><!-- Gathering Boost Charm II - 100% -->
-		</set>
-		<set>
-			<item id="169620094" /><!-- Crafting Boost Charm III - 100% -->
-		</set>
-		<set>
-			<item id="190020026" /><!-- Boxing King Kerub Egg -->
-		</set>
-	</decomposable>
 	<decomposable item_id="188051460" override="true"><!-- Box Blessed by Veille -->
 		<set chance="12">
 			<item id="166150014" chance="84" /><!-- Blessed Manastone Socketing Supplements (Fabled) -->
@@ -436,166 +402,6 @@
 			<item id="164000258" count="50" /><!-- Fine Spell Resist Scroll -->
 			<item id="164000255" count="100" /><!-- Fine Crit Strike Scroll -->
 			<item id="164000256" count="100" /><!-- Fine Crit Spell Scroll -->
-		</set>
-	</decomposable>
-	<decomposable item_id="188051523" override="true"><!-- Red Medicine Bundle -->
-		<set max_level="19">
-			<item id="162000052" count="5" chance="9.1" /><!-- Minor Life Elixir -->
-			<item id="162000052" count="6" chance="9.09" /><!-- Minor Life Elixir -->
-			<item id="162000052" count="7" chance="9.09" /><!-- Minor Life Elixir -->
-			<item id="162000052" count="8" chance="9.09" /><!-- Minor Life Elixir -->
-			<item id="162000052" count="9" chance="9.09" /><!-- Minor Life Elixir -->
-			<item id="162000052" count="10" chance="9.09" /><!-- Minor Life Elixir -->
-			<item id="162000052" count="11" chance="9.09" /><!-- Minor Life Elixir -->
-			<item id="162000052" count="12" chance="9.09" /><!-- Minor Life Elixir -->
-			<item id="162000052" count="13" chance="9.09" /><!-- Minor Life Elixir -->
-			<item id="162000052" count="14" chance="9.09" /><!-- Minor Life Elixir -->
-			<item id="162000052" count="15" chance="9.09" /><!-- Minor Life Elixir -->
-		</set>
-		<set min_level="20" max_level="29">
-			<item id="162000053" count="5" chance="9.1" /><!-- Lesser Life Elixir -->
-			<item id="162000053" count="6" chance="9.09" /><!-- Lesser Life Elixir -->
-			<item id="162000053" count="7" chance="9.09" /><!-- Lesser Life Elixir -->
-			<item id="162000053" count="8" chance="9.09" /><!-- Lesser Life Elixir -->
-			<item id="162000053" count="9" chance="9.09" /><!-- Lesser Life Elixir -->
-			<item id="162000053" count="10" chance="9.09" /><!-- Lesser Life Elixir -->
-			<item id="162000053" count="11" chance="9.09" /><!-- Lesser Life Elixir -->
-			<item id="162000053" count="12" chance="9.09" /><!-- Lesser Life Elixir -->
-			<item id="162000053" count="13" chance="9.09" /><!-- Lesser Life Elixir -->
-			<item id="162000053" count="14" chance="9.09" /><!-- Lesser Life Elixir -->
-			<item id="162000053" count="15" chance="9.09" /><!-- Lesser Life Elixir -->
-		</set>
-		<set min_level="30" max_level="39">
-			<item id="162000054" count="5" chance="9.1" /><!-- Regular Life Elixir -->
-			<item id="162000054" count="6" chance="9.09" /><!-- Regular Life Elixir -->
-			<item id="162000054" count="7" chance="9.09" /><!-- Regular Life Elixir -->
-			<item id="162000054" count="8" chance="9.09" /><!-- Regular Life Elixir -->
-			<item id="162000054" count="9" chance="9.09" /><!-- Regular Life Elixir -->
-			<item id="162000054" count="10" chance="9.09" /><!-- Regular Life Elixir -->
-			<item id="162000054" count="11" chance="9.09" /><!-- Regular Life Elixir -->
-			<item id="162000054" count="12" chance="9.09" /><!-- Regular Life Elixir -->
-			<item id="162000054" count="13" chance="9.09" /><!-- Regular Life Elixir -->
-			<item id="162000054" count="14" chance="9.09" /><!-- Regular Life Elixir -->
-			<item id="162000054" count="15" chance="9.09" /><!-- Regular Life Elixir -->
-		</set>
-		<set min_level="40" max_level="49">
-			<item id="162000055" count="5" chance="9.1" /><!-- Greater Life Elixir -->
-			<item id="162000055" count="6" chance="9.09" /><!-- Greater Life Elixir -->
-			<item id="162000055" count="7" chance="9.09" /><!-- Greater Life Elixir -->
-			<item id="162000055" count="8" chance="9.09" /><!-- Greater Life Elixir -->
-			<item id="162000055" count="9" chance="9.09" /><!-- Greater Life Elixir -->
-			<item id="162000055" count="10" chance="9.09" /><!-- Greater Life Elixir -->
-			<item id="162000055" count="11" chance="9.09" /><!-- Greater Life Elixir -->
-			<item id="162000055" count="12" chance="9.09" /><!-- Greater Life Elixir -->
-			<item id="162000055" count="13" chance="9.09" /><!-- Greater Life Elixir -->
-			<item id="162000055" count="14" chance="9.09" /><!-- Greater Life Elixir -->
-			<item id="162000055" count="15" chance="9.09" /><!-- Greater Life Elixir -->
-		</set>
-		<set min_level="50" max_level="55">
-			<item id="162000056" count="5" chance="9.1" /><!-- Major Life Elixir -->
-			<item id="162000056" count="6" chance="9.09" /><!-- Major Life Elixir -->
-			<item id="162000056" count="7" chance="9.09" /><!-- Major Life Elixir -->
-			<item id="162000056" count="8" chance="9.09" /><!-- Major Life Elixir -->
-			<item id="162000056" count="9" chance="9.09" /><!-- Major Life Elixir -->
-			<item id="162000056" count="10" chance="9.09" /><!-- Major Life Elixir -->
-			<item id="162000056" count="11" chance="9.09" /><!-- Major Life Elixir -->
-			<item id="162000056" count="12" chance="9.09" /><!-- Major Life Elixir -->
-			<item id="162000056" count="13" chance="9.09" /><!-- Major Life Elixir -->
-			<item id="162000056" count="14" chance="9.09" /><!-- Major Life Elixir -->
-			<item id="162000056" count="15" chance="9.09" /><!-- Major Life Elixir -->
-		</set>
-		<set min_level="56">
-			<item id="162000085" count="5" chance="9.1" /><!-- Fine Life Elixir -->
-			<item id="162000085" count="6" chance="9.09" /><!-- Fine Life Elixir -->
-			<item id="162000085" count="7" chance="9.09" /><!-- Fine Life Elixir -->
-			<item id="162000085" count="8" chance="9.09" /><!-- Fine Life Elixir -->
-			<item id="162000085" count="9" chance="9.09" /><!-- Fine Life Elixir -->
-			<item id="162000085" count="10" chance="9.09" /><!-- Fine Life Elixir -->
-			<item id="162000085" count="11" chance="9.09" /><!-- Fine Life Elixir -->
-			<item id="162000085" count="12" chance="9.09" /><!-- Fine Life Elixir -->
-			<item id="162000085" count="13" chance="9.09" /><!-- Fine Life Elixir -->
-			<item id="162000085" count="14" chance="9.09" /><!-- Fine Life Elixir -->
-			<item id="162000085" count="15" chance="9.09" /><!-- Fine Life Elixir -->
-		</set>
-	</decomposable>
-	<decomposable item_id="188051524" override="true"><!-- Blue Medicine Bundle -->
-		<set max_level="19">
-			<item id="162000057" count="5" chance="9.1" /><!-- Minor Mana Elixir -->
-			<item id="162000057" count="6" chance="9.09" /><!-- Minor Mana Elixir -->
-			<item id="162000057" count="7" chance="9.09" /><!-- Minor Mana Elixir -->
-			<item id="162000057" count="8" chance="9.09" /><!-- Minor Mana Elixir -->
-			<item id="162000057" count="9" chance="9.09" /><!-- Minor Mana Elixir -->
-			<item id="162000057" count="10" chance="9.09" /><!-- Minor Mana Elixir -->
-			<item id="162000057" count="11" chance="9.09" /><!-- Minor Mana Elixir -->
-			<item id="162000057" count="12" chance="9.09" /><!-- Minor Mana Elixir -->
-			<item id="162000057" count="13" chance="9.09" /><!-- Minor Mana Elixir -->
-			<item id="162000057" count="14" chance="9.09" /><!-- Minor Mana Elixir -->
-			<item id="162000057" count="15" chance="9.09" /><!-- Minor Mana Elixir -->
-		</set>
-		<set min_level="20" max_level="29">
-			<item id="162000058" count="5" chance="9.1" /><!-- Lesser Mana Elixir -->
-			<item id="162000058" count="6" chance="9.09" /><!-- Lesser Mana Elixir -->
-			<item id="162000058" count="7" chance="9.09" /><!-- Lesser Mana Elixir -->
-			<item id="162000058" count="8" chance="9.09" /><!-- Lesser Mana Elixir -->
-			<item id="162000058" count="9" chance="9.09" /><!-- Lesser Mana Elixir -->
-			<item id="162000058" count="10" chance="9.09" /><!-- Lesser Mana Elixir -->
-			<item id="162000058" count="11" chance="9.09" /><!-- Lesser Mana Elixir -->
-			<item id="162000058" count="12" chance="9.09" /><!-- Lesser Mana Elixir -->
-			<item id="162000058" count="13" chance="9.09" /><!-- Lesser Mana Elixir -->
-			<item id="162000058" count="14" chance="9.09" /><!-- Lesser Mana Elixir -->
-			<item id="162000058" count="15" chance="9.09" /><!-- Lesser Mana Elixir -->
-		</set>
-		<set min_level="30" max_level="39">
-			<item id="162000059" count="5" chance="9.1" /><!-- Regular Mana Elixir -->
-			<item id="162000059" count="6" chance="9.09" /><!-- Regular Mana Elixir -->
-			<item id="162000059" count="7" chance="9.09" /><!-- Regular Mana Elixir -->
-			<item id="162000059" count="8" chance="9.09" /><!-- Regular Mana Elixir -->
-			<item id="162000059" count="9" chance="9.09" /><!-- Regular Mana Elixir -->
-			<item id="162000059" count="10" chance="9.09" /><!-- Regular Mana Elixir -->
-			<item id="162000059" count="11" chance="9.09" /><!-- Regular Mana Elixir -->
-			<item id="162000059" count="12" chance="9.09" /><!-- Regular Mana Elixir -->
-			<item id="162000059" count="13" chance="9.09" /><!-- Regular Mana Elixir -->
-			<item id="162000059" count="14" chance="9.09" /><!-- Regular Mana Elixir -->
-			<item id="162000059" count="15" chance="9.09" /><!-- Regular Mana Elixir -->
-		</set>
-		<set min_level="40" max_level="49">
-			<item id="162000060" count="5" chance="9.1" /><!-- Greater Mana Elixir -->
-			<item id="162000060" count="6" chance="9.09" /><!-- Greater Mana Elixir -->
-			<item id="162000060" count="7" chance="9.09" /><!-- Greater Mana Elixir -->
-			<item id="162000060" count="8" chance="9.09" /><!-- Greater Mana Elixir -->
-			<item id="162000060" count="9" chance="9.09" /><!-- Greater Mana Elixir -->
-			<item id="162000060" count="10" chance="9.09" /><!-- Greater Mana Elixir -->
-			<item id="162000060" count="11" chance="9.09" /><!-- Greater Mana Elixir -->
-			<item id="162000060" count="12" chance="9.09" /><!-- Greater Mana Elixir -->
-			<item id="162000060" count="13" chance="9.09" /><!-- Greater Mana Elixir -->
-			<item id="162000060" count="14" chance="9.09" /><!-- Greater Mana Elixir -->
-			<item id="162000060" count="15" chance="9.09" /><!-- Greater Mana Elixir -->
-		</set>
-		<set min_level="50" max_level="55">
-			<item id="162000061" count="5" chance="9.1" /><!-- Major Mana Elixir -->
-			<item id="162000061" count="6" chance="9.09" /><!-- Major Mana Elixir -->
-			<item id="162000061" count="7" chance="9.09" /><!-- Major Mana Elixir -->
-			<item id="162000061" count="8" chance="9.09" /><!-- Major Mana Elixir -->
-			<item id="162000061" count="9" chance="9.09" /><!-- Major Mana Elixir -->
-			<item id="162000061" count="10" chance="9.09" /><!-- Major Mana Elixir -->
-			<item id="162000061" count="11" chance="9.09" /><!-- Major Mana Elixir -->
-			<item id="162000061" count="12" chance="9.09" /><!-- Major Mana Elixir -->
-			<item id="162000061" count="13" chance="9.09" /><!-- Major Mana Elixir -->
-			<item id="162000061" count="14" chance="9.09" /><!-- Major Mana Elixir -->
-			<item id="162000061" count="15" chance="9.09" /><!-- Major Mana Elixir -->
-		</set>
-		<set min_level="56">
-			<item id="162000086" count="5" chance="9.1" /><!-- Fine Mana Elixir -->
-			<item id="162000086" count="6" chance="9.09" /><!-- Fine Mana Elixir -->
-			<item id="162000086" count="7" chance="9.09" /><!-- Fine Mana Elixir -->
-			<item id="162000086" count="8" chance="9.09" /><!-- Fine Mana Elixir -->
-			<item id="162000086" count="9" chance="9.09" /><!-- Fine Mana Elixir -->
-			<item id="162000086" count="10" chance="9.09" /><!-- Fine Mana Elixir -->
-			<item id="162000086" count="11" chance="9.09" /><!-- Fine Mana Elixir -->
-			<item id="162000086" count="12" chance="9.09" /><!-- Fine Mana Elixir -->
-			<item id="162000086" count="13" chance="9.09" /><!-- Fine Mana Elixir -->
-			<item id="162000086" count="14" chance="9.09" /><!-- Fine Mana Elixir -->
-			<item id="162000086" count="15" chance="9.09" /><!-- Fine Mana Elixir -->
 		</set>
 	</decomposable>
 	<decomposable item_id="188051676" override="true"><!-- [Event] Noble Box of Life -->
@@ -2124,220 +1930,6 @@
 			<item id="167000714" count="2" chance="0.3" /><!-- Manastone: Magical Accuracy +14 / Resist Magic +7 -->
 		</set>
 	</decomposable>
-	<decomposable item_id="188053117" override="true"><!-- Ahserion's Glory Reward Box -->
-		<set>
-			<item id="188053109" /><!-- Ahserion's Equipment Box -->
-		</set>
-		<set>
-			<item id="188053112" /><!-- Ahserion's Flight Composite Manastone Bundle -->
-		</set>
-		<set>
-			<item id="188053113" /><!-- Ahserion's Flight Ancient Manastone Bundle -->
-		</set>
-		<set chance="10">
-			<item id="188053115" /><!-- Ahserion's Flight Godstone Bundle -->
-		</set>
-		<set>
-			<item id="188053090" /><!-- Ahserion's Flight Champion's Bundle -->
-		</set>
-		<set chance="10">
-			<item id="188053116" /><!-- Ahserion's Flight Recharger Bundle -->
-		</set>
-		<set>
-			<item id="188053110" /><!-- Ahserion's Flight Battlefield Material Bundle -->
-		</set>
-		<set>
-			<item id="186000242" count="4" /><!-- Ceramium Medal -->
-		</set>
-		<set>
-			<item id="169610148" /><!-- [Title] Ahserion Conqueror (3 days) -->
-		</set>
-	</decomposable>
-	<decomposable item_id="188053132" override="true"><!-- Altar of Avarice Fortress Siege Defense Reward Box -->
-		<set>
-			<item id="186000242" count="3" /><!-- Ceramium Medal -->
-		</set>
-	</decomposable>
-	<decomposable item_id="188053133" override="true"><!-- Temple of Scales Fortress Siege Defense Reward Box -->
-		<set>
-			<item id="186000242" count="3" /><!-- Ceramium Medal -->
-		</set>
-	</decomposable>
-	<decomposable item_id="188053134" override="true"><!-- Vorgaltem Citadel Fortress Siege Defense Reward Box -->
-		<set>
-			<item id="186000242" count="3" /><!-- Ceramium Medal -->
-		</set>
-	</decomposable>
-	<decomposable item_id="188053135" override="true"><!-- Crimson Temple Fortress Siege Defense Reward Box -->
-		<set>
-			<item id="186000242" count="3" /><!-- Ceramium Medal -->
-		</set>
-	</decomposable>
-	<decomposable item_id="188053140" override="true"><!-- Wealhtheow's Keep Assault Reward Box: Grade 1 -->
-		<set>
-			<item id="186000242" count="4" /><!-- Ceramium Medal -->
-		</set>
-		<set>
-			<item id="186000051" chance="30" /><!-- Major Ancient Crown -->
-			<item id="186000052" chance="25" /><!-- Greater Ancient Crown -->
-			<item id="186000053" chance="25" /><!-- Ancient Crown -->
-			<item id="186000054" chance="20" /><!-- Lesser Ancient Crown -->
-		</set>
-	</decomposable>
-	<decomposable item_id="188053141" override="true"><!-- Wealhtheow's Keep Assault Reward Box: Grade 2 -->
-		<set>
-			<item id="186000242" count="3" /><!-- Ceramium Medal -->
-		</set>
-		<set>
-			<item id="186000055" chance="30" /><!-- Major Ancient Goblet -->
-			<item id="186000056" chance="25" /><!-- Greater Ancient Goblet -->
-			<item id="186000057" chance="25" /><!-- Ancient Goblet -->
-			<item id="186000058" chance="20" /><!-- Lesser Ancient Goblet -->
-		</set>
-	</decomposable>
-	<decomposable item_id="188053142" override="true"><!-- Wealhtheow's Keep Assault Reward Box: Grade 3 -->
-		<set>
-			<item id="186000242" count="2" /><!-- Ceramium Medal -->
-		</set>
-		<set>
-			<item id="186000059" chance="30" /><!-- Major Ancient Seal -->
-			<item id="186000060" chance="25" /><!-- Greater Ancient Seal -->
-			<item id="186000061" chance="25" /><!-- Ancient Seal -->
-			<item id="186000062" chance="20" /><!-- Lesser Ancient Seal -->
-		</set>
-	</decomposable>
-	<decomposable item_id="188053159" override="true"><!-- Altar of Avarice Assault Reward Box: Grade 1 -->
-		<set>
-			<item id="186000242" count="3" /><!-- Ceramium Medal -->
-		</set>
-		<set race="ELYOS">
-			<item id="188100160" /><!-- Altar of Avarice Orb -->
-		</set>
-		<set race="ASMODIANS">
-			<item id="188100164" /><!-- Altar of Avarice Bead -->
-		</set>
-	</decomposable>
-	<decomposable item_id="188053161" override="true"><!-- Altar of Avarice Assault Reward Box: Grade 3 -->
-		<set>
-			<item id="186000242" /><!-- Ceramium Medal -->
-		</set>
-		<set>
-			<item id="186000059" chance="25" /><!-- Major Ancient Seal -->
-			<item id="186000060" chance="25" /><!-- Greater Ancient Seal -->
-			<item id="186000061" chance="25" /><!-- Ancient Seal -->
-			<item id="186000062" chance="25" /><!-- Lesser Ancient Seal -->
-		</set>
-	</decomposable>
-	<decomposable item_id="188053162" override="true"><!-- Altar of Avarice Assault Reward Box: Grade 4 -->
-		<set>
-			<item id="186000147" count="2" /><!-- Mithril Medal -->
-		</set>
-		<set>
-			<item id="186000063" chance="25" /><!-- Major Ancient Icon -->
-			<item id="186000064" chance="25" /><!-- Greater Ancient Icon -->
-			<item id="186000065" chance="25" /><!-- Ancient Icon -->
-			<item id="186000066" chance="25" /><!-- Lesser Ancient Icon -->
-		</set>
-	</decomposable>
-	<decomposable item_id="188053163" override="true"><!-- Temple of Scales Assault Reward Box: Grade 1 -->
-		<set>
-			<item id="186000242" count="3" /><!-- Ceramium Medal -->
-		</set>
-		<set race="ELYOS">
-			<item id="188100161" /><!-- Temple of Scales Orb -->
-		</set>
-		<set race="ASMODIANS">
-			<item id="188100165" /><!-- Temple of Scales Bead -->
-		</set>
-	</decomposable>
-	<decomposable item_id="188053165" override="true"><!-- Temple of Scales Assault Reward Box: Grade 3 -->
-		<set>
-			<item id="186000242" /><!-- Ceramium Medal -->
-		</set>
-		<set>
-			<item id="186000059" chance="25" /><!-- Major Ancient Seal -->
-			<item id="186000060" chance="25" /><!-- Greater Ancient Seal -->
-			<item id="186000061" chance="25" /><!-- Ancient Seal -->
-			<item id="186000062" chance="25" /><!-- Lesser Ancient Seal -->
-		</set>
-	</decomposable>
-	<decomposable item_id="188053166" override="true"><!-- Temple of Scales Assault Reward Box: Grade 4 -->
-		<set>
-			<item id="186000147" count="2" /><!-- Mithril Medal -->
-		</set>
-		<set>
-			<item id="186000063" chance="25" /><!-- Major Ancient Icon -->
-			<item id="186000064" chance="25" /><!-- Greater Ancient Icon -->
-			<item id="186000065" chance="25" /><!-- Ancient Icon -->
-			<item id="186000066" chance="25" /><!-- Lesser Ancient Icon -->
-		</set>
-	</decomposable>
-	<decomposable item_id="188053167" override="true"><!-- Crimson Temple Assault Reward Box: Grade 1 -->
-		<set>
-			<item id="186000242" count="3" /><!-- Ceramium Medal -->
-		</set>
-		<set race="ELYOS">
-			<item id="188100162" /><!-- Crimson Temple Orb -->
-		</set>
-		<set race="ASMODIANS">
-			<item id="188100166" /><!-- Crimson Temple Bead -->
-		</set>
-	</decomposable>
-	<decomposable item_id="188053169" override="true"><!-- Crimson Temple Assault Reward Box: Grade 3 -->
-		<set>
-			<item id="186000242" /><!-- Ceramium Medal -->
-		</set>
-		<set>
-			<item id="186000059" chance="25" /><!-- Major Ancient Seal -->
-			<item id="186000060" chance="25" /><!-- Greater Ancient Seal -->
-			<item id="186000061" chance="25" /><!-- Ancient Seal -->
-			<item id="186000062" chance="25" /><!-- Lesser Ancient Seal -->
-		</set>
-	</decomposable>
-	<decomposable item_id="188053170" override="true"><!-- Crimson Temple Assault Reward Box: Grade 4 -->
-		<set>
-			<item id="186000147" count="2" /><!-- Mithril Medal -->
-		</set>
-		<set>
-			<item id="186000063" chance="25" /><!-- Major Ancient Icon -->
-			<item id="186000064" chance="25" /><!-- Greater Ancient Icon -->
-			<item id="186000065" chance="25" /><!-- Ancient Icon -->
-			<item id="186000066" chance="25" /><!-- Lesser Ancient Icon -->
-		</set>
-	</decomposable>
-	<decomposable item_id="188053171" override="true"><!-- Vorgaltem Citadel Assault Reward Box: Grade 1 -->
-		<set>
-			<item id="186000242" count="3" /><!-- Ceramium Medal -->
-		</set>
-		<set race="ELYOS">
-			<item id="188100163" /><!-- Vorgaltem Citadel Orb -->
-		</set>
-		<set race="ASMODIANS">
-			<item id="188100167" /><!-- Vorgaltem Citadel Bead -->
-		</set>
-	</decomposable>
-	<decomposable item_id="188053173" override="true"><!-- Vorgaltem Citadel Assault Reward Box: Grade 3 -->
-		<set>
-			<item id="186000242" /><!-- Ceramium Medal -->
-		</set>
-		<set>
-			<item id="186000059" chance="25" /><!-- Major Ancient Seal -->
-			<item id="186000060" chance="25" /><!-- Greater Ancient Seal -->
-			<item id="186000061" chance="25" /><!-- Ancient Seal -->
-			<item id="186000062" chance="25" /><!-- Lesser Ancient Seal -->
-		</set>
-	</decomposable>
-	<decomposable item_id="188053174" override="true"><!-- Vorgaltem Citadel Assault Reward Box: Grade 4 -->
-		<set>
-			<item id="186000147" count="2" /><!-- Mithril Medal -->
-		</set>
-		<set>
-			<item id="186000063" chance="25" /><!-- Major Ancient Icon -->
-			<item id="186000064" chance="25" /><!-- Greater Ancient Icon -->
-			<item id="186000065" chance="25" /><!-- Ancient Icon -->
-			<item id="186000066" chance="25" /><!-- Lesser Ancient Icon -->
-		</set>
-	</decomposable>
 	<decomposable item_id="188053185" override="true"><!-- [Event] Wishing Soup -->
 		<set>
 			<item id="162000124" count="10" chance="13.74" /><!-- Superior Recovery Serum -->
@@ -2363,23 +1955,6 @@
 			<item id="188053206" chance="0.35" /><!-- [Event] Stormwing's Eternal Armor Chest -->
 			<item id="165020015" chance="0.02" /><!-- Armor Wrapping Scroll (Eternal/Lv. 65 and lower) -->
 			<item id="188950017" chance="0.05" /><!-- Special Courier Pass (Abyss Eternal/Lv. 61-65) -->
-		</set>
-	</decomposable>
-	<decomposable item_id="188053296" override="true"><!-- Divine Fortress Siege Defense Reward Box -->
-		<set>
-			<item id="162000143" /><!-- Brigade General's Liquid Courage -->
-		</set>
-		<set>
-			<item id="164000134" count="35" /><!-- Greater Awakening Scroll -->
-		</set>
-		<set>
-			<item id="164000073" count="35" /><!-- Greater Courage Scroll -->
-		</set>
-		<set>
-			<item id="164000076" count="70" /><!-- Greater Running Scroll -->
-		</set>
-		<set>
-			<item id="186000247" /><!-- Major Danuar Relic -->
 		</set>
 	</decomposable>
 	<decomposable item_id="188053300" override="true"><!-- Expeditionary Force Ceramium Medal Box -->
@@ -2408,11 +1983,6 @@
 			<item id="186000243" count="8" chance="6.25" /><!-- Fragmented Ceramium -->
 			<item id="186000243" count="9" chance="6.25" /><!-- Fragmented Ceramium -->
 			<item id="186000243" count="10" chance="6.25" /><!-- Fragmented Ceramium -->
-		</set>
-	</decomposable>
-	<decomposable item_id="188053309" override="true"><!-- Legion's Ceramium Medal Box -->
-		<set>
-			<item id="186000242" /><!-- Ceramium Medal -->
 		</set>
 	</decomposable>
 	<!-- Should be kept as selectables | dropped by rift guardians -->
@@ -2844,11 +2414,6 @@
 			<item id="169405396" chance="0.5" /><!-- Upgraded Distorted Staff of the Fierce Battle Prototype -->
 		</set>
 	</decomposable>
-	<decomposable item_id="188053686" override="true"><!-- Sand Wanderers Trader's Treasure Box -->
-		<set>
-			<item id="186000242" /><!-- Ceramium Medal -->
-		</set>
-	</decomposable>
 	<decomposable item_id="188053697" override="true"><!-- Bundle of Honor and Conquest -->
 		<set>
 			<item id="186000238" chance="10" /><!-- Conqueror's Mark -->
@@ -3005,16 +2570,6 @@
 			<item id="186000389" count="5" /><!-- Arcade Token -->
 		</set>
 	</decomposable>
-	<decomposable item_id="188053894" override="true"><!-- Territory Battle Contribution Bundle -->
-		<set>
-			<item id="186000242" /><!-- Ceramium Medal -->
-		</set>
-	</decomposable>
-	<decomposable item_id="188053909" override="true"><!-- Large Ascension Water Box -->
-		<set>
-			<item id="166030005" count="5" /><!-- Tempering Solution -->
-		</set>
-	</decomposable>
 	<decomposable item_id="188053916" override="true"><!-- Guestpetal Bundle -->
 		<set>
 			<item id="186000146" /><!-- Guestpetal -->
@@ -3114,14 +2669,6 @@
 			<item id="188053962" chance="25" /><!-- [Camping] Decorative Flooring -->
 		</set>
 	</decomposable>
-	<decomposable item_id="188053998" override="true"><!-- Ornate Enchantment Stone Bundle -->
-		<set>
-			<item id="166000191" count="5" chance="25" /><!-- Alpha Enchantment Stone -->
-			<item id="166000192" count="5" chance="25" /><!-- Beta Enchantment Stone -->
-			<item id="166000193" count="5" chance="25" /><!-- Gamma Enchantment Stone -->
-			<item id="166000194" count="5" chance="25" /><!-- Delta Enchantment Stone -->
-		</set>
-	</decomposable>
 	<decomposable item_id="188054028" override="true"><!-- [Event] Fountain Gift -->
 		<set>
 			<item id="125045568" chance="2.5" /><!-- Breezy Summer Hat -->
@@ -3153,38 +2700,6 @@
 			<item id="166020000" count="3" chance="12.5" /><!-- Omega Enchantment Stone -->
 			<item id="166500002" count="3" chance="12.5" /><!-- Amplification Stone -->
 			<item id="186000237" count="75" chance="12.5" /><!-- Ancient Coin -->
-		</set>
-	</decomposable>
-	<decomposable item_id="188054030" override="true"><!-- [Club] Decorative Furniture Bundle -->
-		<set>
-			<item id="170005024" chance="7.15" /><!-- Fancy Club Window -->
-			<item id="170005025" chance="7.15" /><!-- Club Restroom Door -->
-			<item id="170135045" chance="7.15" /><!-- Club Couch -->
-			<item id="170155003" chance="7.15" /><!-- Disco Ball Light Stand -->
-			<item id="170155004" chance="7.14" /><!-- Green Bottle Lighting -->
-			<item id="170155006" chance="7.14" /><!-- Blue Bottle Lighting -->
-			<item id="170160026" chance="7.14" /><!-- Club Partition -->
-			<item id="170205025" chance="7.14" /><!-- Vinyl Dancefloor -->
-			<item id="170205026" chance="7.14" /><!-- Illuminated Dancefloor -->
-			<item id="170415028" chance="7.14" /><!-- Fancy Stool -->
-			<item id="170425041" chance="7.14" /><!-- Stylish Club Table -->
-			<item id="170425042" chance="7.14" /><!-- Mini Bar -->
-			<item id="171130041" chance="7.14" /><!-- Club Ambience Wallpaper -->
-			<item id="171130043" chance="7.14" /><!-- Starry Club Floor -->
-		</set>
-	</decomposable>
-	<decomposable item_id="188054031" override="true"><!-- [Club] Functional Furniture Bundle -->
-		<set>
-			<item id="170100041" chance="25" /><!-- Club Speaker Cabinet -->
-			<item id="170195137" chance="25" /><!-- Illuminated Houseplant -->
-			<item id="170195138" chance="25" /><!-- Graceful Club Tree -->
-			<item id="170425040" chance="25" /><!-- Club Cocktail Table -->
-		</set>
-	</decomposable>
-	<decomposable item_id="188054035" override="true"><!-- [Club] Full Furniture Bundle -->
-		<set>
-			<item id="188054030" chance="50" /><!-- [Club] Decorative Furniture Bundle -->
-			<item id="188054031" chance="50" /><!-- [Club] Functional Furniture Bundle -->
 		</set>
 	</decomposable>
 	<decomposable item_id="188054036" override="true"><!-- [Event] Frozen Ice Festival Box -->
