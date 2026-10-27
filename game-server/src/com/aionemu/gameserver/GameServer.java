@@ -195,7 +195,7 @@ public class GameServer {
 	 * Starts servers for connection with aion client and login\chat server.
 	 */
 	private static NettyServer initNettyServer() {
-		NettyServer nettyServer = new NettyServer(NetworkConfig.TRANSPORT, NetworkConfig.NIO_READ_WRITE_THREADS);
+		NettyServer nettyServer = new NettyServer(NetworkConfig.TRANSPORT, NetworkConfig.IO_THREADS);
 		nettyServer.bind(NetworkConfig.CLIENT_SOCKET_ADDRESS, "Aion game clients", new AionChannelInitializer());
 		return nettyServer;
 	}

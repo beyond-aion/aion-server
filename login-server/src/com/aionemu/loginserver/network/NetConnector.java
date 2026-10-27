@@ -21,7 +21,7 @@ public class NetConnector {
 	private static EventExecutorGroup clientPacketExecutors;
 
 	public static void connect() {
-		nettyServer = new NettyServer(Config.TRANSPORT, Config.NIO_READ_WRITE_THREADS);
+		nettyServer = new NettyServer(Config.TRANSPORT, Config.IO_THREADS);
 		clientPacketExecutors = new DefaultEventExecutorGroup(8, new DefaultThreadFactory("PacketProcessor"));
 		nettyServer.bind(Config.CLIENT_SOCKET_ADDRESS, "Aion game clients", ch -> LoginConnection.initChannel(ch, clientPacketExecutors.next()));
 		nettyServer.bind(Config.GAMESERVER_SOCKET_ADDRESS, "game servers", ch -> NettyPipeline.init(ch, new GsConnection(ch), 0xFFFF));

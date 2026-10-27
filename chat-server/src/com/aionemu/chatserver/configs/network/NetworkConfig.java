@@ -41,8 +41,8 @@ public class NetworkConfig {
 	 * Number of threads dedicated to be doing io read & write. There is always 1 acceptor thread. If value is < 1 - acceptor thread will also handle
 	 * read & write. If value is > 0 - there will be given amount of read & write threads + 1 acceptor thread.
 	 */
-	@Property(key = "chatserver.network.nio.threads", defaultValue = "1")
-	public static int NIO_READ_WRITE_THREADS;
+	@Property(key = "chatserver.network.io_threads", defaultValue = "1")
+	public static int IO_THREADS;
 
 	/**
 	 * Time in seconds a client has to authenticate after connecting, before it gets disconnected.

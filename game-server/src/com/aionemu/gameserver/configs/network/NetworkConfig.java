@@ -71,8 +71,8 @@ public class NetworkConfig {
 	 * Number of threads dedicated to reading and writing network data. There is always 1 acceptor thread. If value is < 1, the acceptor thread also
 	 * handles read & write.
 	 */
-	@Property(key = "gameserver.network.nio.threads", defaultValue = "4")
-	public static int NIO_READ_WRITE_THREADS;
+	@Property(key = "gameserver.network.io_threads", defaultValue = "4")
+	public static int IO_THREADS;
 
 	/**
 	 * Maximum number of packets of one client that may wait for execution. A client exceeding it gets disconnected.
