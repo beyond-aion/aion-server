@@ -31,7 +31,7 @@ public class _2002WheresRae extends AbstractQuestHandler {
 
 	@Override
 	public void register() {
-		int[] npc_ids = { 203519, 203534, 203553, 700045, 203516, 203538, 790002 };
+		int[] npc_ids = { 203519, 203534, 203553, 700045, 203516, 203538, 790002, 205020 };
 		qe.registerOnQuestCompleted(questId);
 		qe.registerOnLevelChanged(questId);
 		qe.registerQuestNpc(210377).addOnKillEvent(questId);
