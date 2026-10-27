@@ -1,7 +1,9 @@
 package com.aionemu.commons.utils;
 
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.random.RandomGenerator;
+import java.util.random.RandomGeneratorFactory;
 import java.util.stream.DoubleStream;
 import java.util.stream.IntStream;
 import java.util.stream.LongStream;
@@ -13,14 +15,10 @@ import org.slf4j.LoggerFactory;
  */
 public final class Rnd {
 
-	// not thread-safe, only used to split off thread-local generators
-	private static final RandomGenerator.SplittableGenerator splittableGenerator = RandomGenerator.SplittableGenerator.of("L64X256MixRandom");
+	private static final RandomGeneratorFactory<RandomGenerator> factory = RandomGeneratorFactory.of("L64X256MixRandom");
 
-	private static final ThreadLocal<RandomGenerator> rnd = ThreadLocal.withInitial(() -> {
-		synchronized (splittableGenerator) {
-			return splittableGenerator.split();
-		}
-	});
+	// seeded without a shared lock, so short-lived virtual threads don't contend on their first call
+	private static final ThreadLocal<RandomGenerator> rnd = ThreadLocal.withInitial(() -> factory.create(ThreadLocalRandom.current().nextLong()));
 
 	/**
 	 * To compare this chance with a success rate, evaluate "{@code if (chance() < success rate)}" to determine a success or, alternatively
