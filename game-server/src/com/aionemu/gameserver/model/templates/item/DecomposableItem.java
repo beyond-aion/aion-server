@@ -34,6 +34,9 @@ public class DecomposableItem {
 			sets = Collections.emptyList();
 		if (isSelectable && sets.stream().anyMatch(set -> set.getRewards().stream().anyMatch(reward -> reward instanceof DecomposedBundle)))
 			throw new IllegalArgumentException("Selectable decomposable item " + itemId + " cannot offer bundles");
+		// the selection window lists the first applicable set as a whole and grants the picked item, nothing is rolled
+		if (isSelectable && sets.stream().anyMatch(set -> set.getChance() != 100 || set.getRewards().stream().anyMatch(reward -> reward.getChance() != 100)))
+			throw new IllegalArgumentException("Selectable decomposable item " + itemId + " cannot have chances");
 		if (isOnlyOne) // the rarest branch gets the first roll, so the likelier ones are only reached when the rarer ones miss
 			sets.sort(Comparator.comparing(DecomposableSet::getChance));
 	}

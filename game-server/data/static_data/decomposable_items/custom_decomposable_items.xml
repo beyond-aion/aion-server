@@ -2814,15 +2814,6 @@
 			<item id="188053786" chance="20" /><!-- Major Stigma Bundle -->
 		</set>
 	</decomposable>
-	<decomposable item_id="188054198" selectable="true" override="true"><!-- Greater Scroll Bundle -->
-		<set>
-			<item id="164002116" count="25" /><!-- [Event] Rx: Accelerox -->
-			<item id="164002117" count="25" /><!-- [Event] Rx: Blitzopan -->
-			<item id="164002118" count="25" /><!-- [Event] Rx: Castafodin -->
-			<item id="164002119" count="25" /><!-- [Event] Rx: Critozyne -->
-			<item id="164002120" count="25" /><!-- [Event] Rx: Mojocycline -->
-		</set>
-	</decomposable>
 	<decomposable item_id="188054260" selectable="true" override="true"><!-- Ride Box of Conquest -->
 		<set>
 			<item id="190100139" /><!-- Sleek Hovercycle -->
