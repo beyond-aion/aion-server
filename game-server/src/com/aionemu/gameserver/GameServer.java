@@ -16,6 +16,7 @@ import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.commons.logging.Logging;
 import com.aionemu.commons.network.netty.NettyServer;
 import com.aionemu.commons.utils.concurrent.UncaughtExceptionHandler;
+import com.aionemu.commons.utils.info.StartupInfo;
 import com.aionemu.commons.utils.info.SystemInfo;
 import com.aionemu.commons.utils.info.VersionInfo;
 import com.aionemu.gameserver.ai.AIEngine;
@@ -75,6 +76,7 @@ public class GameServer {
 
 	static {
 		Logging.init(); // must run before instantiating any logger
+		StartupInfo.logStarting(GameServer.class, "Game Server");
 	}
 	private static final Logger log = LoggerFactory.getLogger(GameServer.class);
 
@@ -184,7 +186,7 @@ public class GameServer {
 
 		nettyServer = initNettyServer();
 		Runtime.getRuntime().addShutdownHook(ShutdownHook.getInstance());
-		log.info("Game server started in {} seconds", System.currentTimeMillis() / 1000 - START_TIME_SECONDS);
+		StartupInfo.logStarted("Game Server");
 
 		LoginServer.getInstance().connect(nettyServer);
 		if (GSConfig.ENABLE_CHAT_SERVER)

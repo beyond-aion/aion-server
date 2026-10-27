@@ -28,6 +28,7 @@ public class Logging {
 	 */
 	public static void init() {
 		System.setProperty(ClassicConstants.CONFIG_FILE_PROPERTY, "config/logback.xml");
+		System.setProperty("PID", Long.toString(ProcessHandle.current().pid())); // used in the console pattern
 		archiveLogs();
 	}
 
