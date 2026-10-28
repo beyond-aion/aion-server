@@ -26091,7 +26091,6 @@
 	<decomposable item_id="188051761"><!-- Crafting Association Gift Bundle -->
 		<set>
 			<item id="164002059" count="10"/><!-- [Event] Running Scroll -->
-			<item id="164002059" count="10" chance="50"/><!-- [Event] Running Scroll -->
 		</set>
 	</decomposable>
 	<decomposable item_id="188051762"><!-- Black Cloud Enchantment Box -->
@@ -26315,7 +26314,6 @@
 	<decomposable item_id="188051777"><!-- Love Letter -->
 		<set>
 			<item id="164002059" count="10"/><!-- [Event] Running Scroll -->
-			<item id="164002059" count="10" chance="50"/><!-- [Event] Running Scroll -->
 		</set>
 	</decomposable>
 	<decomposable item_id="188051778"><!-- Sky Dragon Emperor's Ring Bundle -->
@@ -47256,11 +47254,11 @@
 			<item id="186000051" chance="20"/><!-- Major Ancient Crown -->
 		</set>
 		<set>
-			<item id="186000243" chance="20"/><!-- Fragmented Ceramium, no count in 4.6/5.8 retail data -->
-			<item id="186000243" chance="20"/><!-- Fragmented Ceramium, no count in 4.6/5.8 retail data -->
-			<item id="186000243" chance="20"/><!-- Fragmented Ceramium, no count in 4.6/5.8 retail data -->
-			<item id="186000243" chance="20"/><!-- Fragmented Ceramium, no count in 4.6/5.8 retail data -->
-			<item id="186000243" chance="20"/><!-- Fragmented Ceramium, no count in 4.6/5.8 retail data -->
+			<item id="186000243" count="5" chance="15"/><!-- Fragmented Ceramium, count from 5.8 Silver Medal x15 at 3:1 -->
+			<item id="186000243" count="4" chance="20"/><!-- Fragmented Ceramium, count from 5.8 Silver Medal x12 at 3:1 -->
+			<item id="186000243" count="3" chance="30"/><!-- Fragmented Ceramium, count from 5.8 Silver Medal x9 at 3:1 -->
+			<item id="186000243" count="2" chance="20"/><!-- Fragmented Ceramium, count from 5.8 Silver Medal x6 at 3:1 -->
+			<item id="186000243" count="10" chance="15"/><!-- Fragmented Ceramium, count from 5.8 Silver Medal x30 at 3:1 -->
 		</set>
 	</decomposable>
 	<decomposable item_id="188052954"><!-- Linkgate Foundry Crafting Material Bundle -->
@@ -55925,7 +55923,16 @@
 			<item id="166100011" count="35" chance="2"/><!-- Greater Supplements (Mythic) -->
 		</set>
 	</decomposable>
-	<decomposable item_id="188053300"/><!-- Expeditionary Force Ceramium Medal Box, no counts in 4.6/5.8 retail data, defined in custom_decomposable_items.xml -->
+	<decomposable item_id="188053300"><!-- Expeditionary Force Ceramium Medal Box -->
+		<set>
+			<item id="186000242" chance="5" /><!-- Ceramium Medal, count from 5.8 Silver Medal x21 at 21:1 -->
+			<item id="186000243" count="6" chance="10"/><!-- Fragmented Ceramium, estimated count from 5.8 Silver Medal x18 at 3:1 -->
+			<item id="186000243" count="5" chance="15"/><!-- Fragmented Ceramium, estimated count from 5.8 Silver Medal x15 at 3:1 -->
+			<item id="186000243" count="4" chance="30"/><!-- Fragmented Ceramium, estimated count from 5.8 Silver Medal x12 at 3:1 -->
+			<item id="186000243" count="3" chance="25"/><!-- Fragmented Ceramium, estimated count from 5.8 Silver Medal x9 at 3:1 -->
+			<item id="186000243" count="2" chance="15"/><!-- Fragmented Ceramium, estimated count from 5.8 Silver Medal x6 at 3:1 -->
+		</set>
+	</decomposable>
 	<decomposable item_id="188053301"><!-- Expeditionary Force Supply Box -->
 		<set>
 			<item id="188053302" chance="30"/><!-- Expeditionary Force Manastone Bundle -->
@@ -56020,7 +56027,16 @@
 			<item id="166100011" count="35" chance="2"/><!-- Greater Supplements (Mythic) -->
 		</set>
 	</decomposable>
-	<decomposable item_id="188053304"/><!-- Expeditionary Force Ceramium Medal Box, no counts in 4.6/5.8 retail data, defined in custom_decomposable_items.xml -->
+	<decomposable item_id="188053304"><!-- Expeditionary Force Ceramium Medal Box -->
+		<set>
+			<item id="186000242" chance="5" /><!-- Ceramium Medal, count from 5.8 Silver Medal x21 at 21:1 -->
+			<item id="186000243" count="6" chance="10"/><!-- Fragmented Ceramium, estimated count from 5.8 Silver Medal x18 at 3:1 -->
+			<item id="186000243" count="5" chance="15"/><!-- Fragmented Ceramium, estimated count from 5.8 Silver Medal x15 at 3:1 -->
+			<item id="186000243" count="4" chance="30"/><!-- Fragmented Ceramium, estimated count from 5.8 Silver Medal x12 at 3:1 -->
+			<item id="186000243" count="3" chance="25"/><!-- Fragmented Ceramium, estimated count from 5.8 Silver Medal x9 at 3:1 -->
+			<item id="186000243" count="2" chance="15"/><!-- Fragmented Ceramium, estimated count from 5.8 Silver Medal x6 at 3:1 -->
+		</set>
+	</decomposable>
 	<decomposable item_id="188053305"><!-- Ancient Goblet Bundle -->
 		<set>
 			<item id="186000055" chance="5"/><!-- Major Ancient Goblet -->
@@ -58674,7 +58690,18 @@
 			<item id="166100023" count="100" chance="5"/><!-- [Stamp] High Grade Enchanting Supplement (Mythic) -->
 		</set>
 	</decomposable>
-	<decomposable item_id="188053422"/><!-- [Stamp] Anniversary Consumables Box, no counts in 4.6/5.8 retail data -->
+	<decomposable item_id="188053422"><!-- [Stamp] Anniversary Consumables Box -->
+		<set>
+			<item id="188053415" chance="12.5"/><!-- [Stamp] Noble Illusion Godstone Box, no count in 4.6/5.8 retail data -->
+			<item id="188053417" chance="12.5"/><!-- [Stamp] Noble Ancient Manastone Box, no count in 4.6/5.8 retail data -->
+			<item id="188053419" chance="12.5"/><!-- [Stamp] Noble Composite Manastone Box, no count in 4.6/5.8 retail data -->
+			<item id="188053420" chance="12.5"/><!-- [Stamp] Noble Manastone Pouch, no count in 4.6/5.8 retail data -->
+			<item id="166030008" chance="12.5"/><!-- [Stamp] Tempering Solution (7 days), no count in 4.6/5.8 retail data -->
+			<item id="166150026" chance="12.5"/><!-- [Stamp] Greater Felicitous Socketing (Heroic), no count in 4.6/5.8 retail data -->
+			<item id="166150027" chance="12.5"/><!-- [Stamp] Greater Felicitous Socketing (Mythic), no count in 4.6/5.8 retail data -->
+			<item id="186000242" chance="12.5"/><!-- Ceramium Medal, no count in 4.6/5.8 retail data -->
+		</set>
+	</decomposable>
 	<decomposable item_id="188053423"><!-- [Stamp] Anniversary Gift Box -->
 		<set>
 			<item id="169610151"/><!-- [Stamp] Anniversary Celebrant (7 Days) -->
@@ -63978,7 +64005,7 @@
 		<set>
 			<item id="186000236" count="30" chance="40"/><!-- Blood Mark -->
 			<item id="186000237" count="50" chance="30"/><!-- Ancient Coin -->
-			<item id="186000243" chance="30"/><!-- Fragmented Ceramium, no count in 4.6/5.8 retail data -->
+			<item id="186000243" count="20" chance="30"/><!-- Fragmented Ceramium, count from 5.8 Silver Medal x60 at 3:1 -->
 		</set>
 		<set>
 			<item id="167020024" chance="4.09"/><!-- Ancient Manastone: HP +105 -->
@@ -64043,9 +64070,9 @@
 			<item id="186000242"/><!-- Ceramium Medal, count from 5.8 Silver Medal x21 at 21:1 -->
 		</set>
 		<set>
-			<item id="166000194" chance="33.33"/><!-- Delta Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000195" chance="33.33"/><!-- Epsilon Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166020000" chance="33.33"/><!-- Omega Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166000194" chance="50"/><!-- Delta Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166000195" chance="45"/><!-- Epsilon Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166020000" chance="5"/><!-- Omega Enchantment Stone, no count in 4.6/5.8 retail data -->
 		</set>
 		<set>
 			<item id="167000682" count="5" chance="2.36"/><!-- Manastone: Attack +5 / HP +47 -->
@@ -64184,7 +64211,15 @@
 			<item id="167020062" chance="7.5"/><!-- Ancient Manastone: Physical Defense +80 -->
 		</set>
 	</decomposable>
-	<decomposable item_id="188053720"/><!-- Operations Medal Box, no counts in 4.6/5.8 retail data, defined in custom_decomposable_items.xml -->
+	<decomposable item_id="188053720"><!-- Operations Medal Box -->
+		<set>
+			<item id="186000242" count="2" chance="20"/><!-- Ceramium Medal, count from 5.8 Silver Medal x42 at 21:1 -->
+			<item id="186000242" chance="20"/><!-- Ceramium Medal, count from 5.8 Silver Medal x21 at 21:1 -->
+			<item id="186000243" count="2" chance="20"/><!-- Fragmented Ceramium, count from 5.8 Silver Medal x6 at 3:1 -->
+			<item id="186000147" chance="20"/><!-- Mithril Medal, no count in 4.6/5.8 retail data -->
+			<item id="186000096" chance="20"/><!-- Platinum Medal, no count in 4.6/5.8 retail data -->
+		</set>
+	</decomposable>
 	<decomposable item_id="188053721"><!-- Illusion Godstone Bundle of Fortuneers Legion -->
 		<set>
 			<item id="168000161" chance="0.25"/><!-- Illusion Godstone: Meslamtaeda's Greed -->
@@ -64206,7 +64241,14 @@
 			<item id="168000169" chance="18"/><!-- Illusion Godstone: Fregion's Stratagem -->
 		</set>
 	</decomposable>
-	<decomposable item_id="188053722"/><!-- Special Enchantment Stone Bundle of Fortuneers Legion, no counts in 4.6/5.8 retail data, defined in custom_decomposable_items.xml -->
+	<decomposable item_id="188053722"><!-- Special Enchantment Stone Bundle of Fortuneers Legion -->
+		<set>
+			<item id="166000193" chance="82"/><!-- Gamma Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166000194" chance="10"/><!-- Delta Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166000195" chance="5"/><!-- Epsilon Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166020000" chance="3"/><!-- Omega Enchantment Stone, no count in 4.6/5.8 retail data -->
+		</set>
+	</decomposable>
 	<decomposable item_id="188053723"><!-- Guardian Composite Manastone Bundle -->
 		<set>
 			<item id="167000749" chance="0.84"/><!-- Manastone: Attack +5 / Crit Strike +8 -->
@@ -64285,7 +64327,15 @@
 			<item id="167020062" chance="7.5"/><!-- Ancient Manastone: Physical Defense +80 -->
 		</set>
 	</decomposable>
-	<decomposable item_id="188053725"/><!-- Headquarters Medal Box, no counts in 4.6/5.8 retail data, defined in custom_decomposable_items.xml -->
+	<decomposable item_id="188053725"><!-- Headquarters Medal Box -->
+		<set>
+			<item id="186000242" count="2" chance="20"/><!-- Ceramium Medal, count from 5.8 Silver Medal x42 at 21:1 -->
+			<item id="186000242" chance="20"/><!-- Ceramium Medal, count from 5.8 Silver Medal x21 at 21:1 -->
+			<item id="186000243" count="2" chance="20"/><!-- Fragmented Ceramium, count from 5.8 Silver Medal x6 at 3:1 -->
+			<item id="186000147" chance="20"/><!-- Mithril Medal, no count in 4.6/5.8 retail data -->
+			<item id="186000096" chance="20"/><!-- Platinum Medal, no count in 4.6/5.8 retail data -->
+		</set>
+	</decomposable>
 	<decomposable item_id="188053726"><!-- Illusion Godstone Bundle of Charlirunerk Inquiry Agency -->
 		<set>
 			<item id="168000161" chance="0.25"/><!-- Illusion Godstone: Meslamtaeda's Greed -->
@@ -64307,7 +64357,14 @@
 			<item id="168000169" chance="18"/><!-- Illusion Godstone: Fregion's Stratagem -->
 		</set>
 	</decomposable>
-	<decomposable item_id="188053727"/><!-- Special Enchantment Stone Bundle of Charlirunerk Inquiry Agency, no counts in 4.6/5.8 retail data, defined in custom_decomposable_items.xml -->
+	<decomposable item_id="188053727"><!-- Special Enchantment Stone Bundle of Charlirunerk Inquiry Agency -->
+		<set>
+			<item id="166000193" chance="82"/><!-- Gamma Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166000194" chance="10"/><!-- Delta Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166000195" chance="5"/><!-- Epsilon Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166020000" chance="3"/><!-- Omega Enchantment Stone, no count in 4.6/5.8 retail data -->
+		</set>
+	</decomposable>
 	<decomposable item_id="188053728"><!-- Beritra's Equipment Box -->
 		<set player_classes="TEMPLAR">
 			<item id="100001800" chance="9"/><!-- Dragonblood Sword -->
@@ -64787,7 +64844,12 @@
 			<item id="166050038" chance="12.5"/><!-- Esoteric Idian: Physical/Magical Defense -->
 		</set>
 	</decomposable>
-	<decomposable item_id="188053749"/><!-- Heavy Enchantment Stone Bundle, no counts in 4.6/5.8 retail data, defined in custom_decomposable_items.xml -->
+	<decomposable item_id="188053749"><!-- Heavy Enchantment Stone Bundle -->
+		<set>
+			<item id="166000194" chance="50"/><!-- Delta Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166000195" chance="50"/><!-- Epsilon Enchantment Stone, no count in 4.6/5.8 retail data -->
+		</set>
+	</decomposable>
 	<decomposable item_id="188053750"><!-- Gladiator Stigma Bundle -->
 		<set>
 			<item id="140001109" chance="11.12"/><!-- Crippling Cut -->
@@ -65889,14 +65951,19 @@
 			<item id="167020083" chance="15"/><!-- Ancient Manastone: Healing Boost +6 -->
 		</set>
 	</decomposable>
-	<decomposable item_id="188053798"/><!-- Shining Enchantment Stone Bundle, no counts in 4.6/5.8 retail data, defined in custom_decomposable_items.xml -->
+	<decomposable item_id="188053798"><!-- Shining Enchantment Stone Bundle -->
+		<set>
+			<item id="166000194" chance="50"/><!-- Delta Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166000195" chance="50"/><!-- Epsilon Enchantment Stone, no count in 4.6/5.8 retail data -->
+		</set>
+	</decomposable>
 	<decomposable item_id="188053799"><!-- Stonespear Siege Reward Chest -->
 		<set>
-			<item id="166000191" chance="20"/><!-- Alpha Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000192" chance="20"/><!-- Beta Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000193" chance="20"/><!-- Gamma Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000194" chance="20"/><!-- Delta Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000195" chance="20"/><!-- Epsilon Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166000191" chance="10"/><!-- Alpha Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166000192" chance="25"/><!-- Beta Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166000193" chance="30"/><!-- Gamma Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166000194" chance="25"/><!-- Delta Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166000195" chance="10"/><!-- Epsilon Enchantment Stone, no count in 4.6/5.8 retail data -->
 		</set>
 		<set>
 			<item id="167020072" chance="0.33"/><!-- Ancient Manastone: Accuracy +35 -->
@@ -65925,11 +65992,11 @@
 	</decomposable>
 	<decomposable item_id="188053800"><!-- Stonespear Siege Runner-Up Reward Chest -->
 		<set>
-			<item id="166000191" chance="20"/><!-- Alpha Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000192" chance="20"/><!-- Beta Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000193" chance="20"/><!-- Gamma Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000194" chance="20"/><!-- Delta Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000195" chance="20"/><!-- Epsilon Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166000191" chance="10"/><!-- Alpha Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166000192" chance="25"/><!-- Beta Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166000193" chance="30"/><!-- Gamma Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166000194" chance="25"/><!-- Delta Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166000195" chance="10"/><!-- Epsilon Enchantment Stone, no count in 4.6/5.8 retail data -->
 		</set>
 		<set>
 			<item id="167020072" chance="0.33"/><!-- Ancient Manastone: Accuracy +35 -->
@@ -66032,12 +66099,12 @@
 	</decomposable>
 	<decomposable item_id="188053801"><!-- Stonespear Siege Champion Reward Chest -->
 		<set>
-			<item id="166000191" chance="16.66"/><!-- Alpha Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000192" chance="16.66"/><!-- Beta Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000193" chance="16.66"/><!-- Gamma Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000194" chance="16.66"/><!-- Delta Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000195" chance="16.66"/><!-- Epsilon Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166020000" chance="16.66"/><!-- Omega Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166000191" chance="5"/><!-- Alpha Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166000192" chance="25"/><!-- Beta Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166000193" chance="30"/><!-- Gamma Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166000194" chance="25"/><!-- Delta Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166000195" chance="10"/><!-- Epsilon Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166020000" chance="5"/><!-- Omega Enchantment Stone, no count in 4.6/5.8 retail data -->
 		</set>
 		<set>
 			<item id="167020072" chance="0.33"/><!-- Ancient Manastone: Accuracy +35 -->
@@ -66805,9 +66872,8 @@
 	</decomposable>
 	<decomposable item_id="188053874"><!-- Bona fide Enchantment Stone Bundle -->
 		<set>
-			<item id="166020000" chance="33.33"/><!-- Omega Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000195" chance="33.33"/><!-- Epsilon Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000195" chance="33.33"/><!-- Epsilon Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166020000" chance="10"/><!-- Omega Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166000195" chance="90"/><!-- Epsilon Enchantment Stone, no count in 4.6/5.8 retail data -->
 		</set>
 	</decomposable>
 	<decomposable item_id="188053875"><!-- Bona fide Manastone Box -->
@@ -68054,14 +68120,14 @@
 	</decomposable>
 	<decomposable item_id="188053912"><!-- Noble Enchantment Stone Bundle -->
 		<set>
-			<item id="166000194" chance="50"/><!-- Delta Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000195" chance="50"/><!-- Epsilon Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166000194" chance="60"/><!-- Delta Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166000195" chance="40"/><!-- Epsilon Enchantment Stone, no count in 4.6/5.8 retail data -->
 		</set>
 	</decomposable>
 	<decomposable item_id="188053913"><!-- Noble Enchantment Stone Bundle -->
 		<set>
-			<item id="166000194" chance="50"/><!-- Delta Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000195" chance="50"/><!-- Epsilon Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166000194" chance="60"/><!-- Delta Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166000195" chance="40"/><!-- Epsilon Enchantment Stone, no count in 4.6/5.8 retail data -->
 		</set>
 	</decomposable>
 	<decomposable item_id="188053914"><!-- Bountiful Stigma Bundle -->

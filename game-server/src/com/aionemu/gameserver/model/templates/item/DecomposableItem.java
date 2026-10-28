@@ -37,6 +37,8 @@ public class DecomposableItem {
 		// the selection window lists the first applicable set as a whole and grants the picked item, nothing is rolled
 		if (isSelectable && sets.stream().anyMatch(set -> set.getChance() != 100 || set.getRewards().stream().anyMatch(reward -> reward.getChance() != 100)))
 			throw new IllegalArgumentException("Selectable decomposable item " + itemId + " cannot have chances");
+		if (!isSelectable && isOverride && sets.stream().anyMatch(set -> set.getRewards().stream().mapToDouble(DecomposedReward::getChance).sum() >= 100.1))
+			throw new IllegalArgumentException("The sum of chances in a set must not exceed 100 % (decomposable item " + itemId + ")");
 		if (isOnlyOne) // the rarest branch gets the first roll, so the likelier ones are only reached when the rarer ones miss
 			sets.sort(Comparator.comparing(DecomposableSet::getChance));
 	}

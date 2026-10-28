@@ -1957,34 +1957,6 @@
 			<item id="188950017" chance="0.05" /><!-- Special Courier Pass (Abyss Eternal/Lv. 61-65) -->
 		</set>
 	</decomposable>
-	<decomposable item_id="188053300" override="true"><!-- Expeditionary Force Ceramium Medal Box -->
-		<set>
-			<item id="186000242" chance="25" /><!-- Ceramium Medal -->
-			<item id="186000242" count="2" chance="25" /><!-- Ceramium Medal -->
-			<item id="186000243" count="3" chance="6.25" /><!-- Fragmented Ceramium -->
-			<item id="186000243" count="4" chance="6.25" /><!-- Fragmented Ceramium -->
-			<item id="186000243" count="5" chance="6.25" /><!-- Fragmented Ceramium -->
-			<item id="186000243" count="6" chance="6.25" /><!-- Fragmented Ceramium -->
-			<item id="186000243" count="7" chance="6.25" /><!-- Fragmented Ceramium -->
-			<item id="186000243" count="8" chance="6.25" /><!-- Fragmented Ceramium -->
-			<item id="186000243" count="9" chance="6.25" /><!-- Fragmented Ceramium -->
-			<item id="186000243" count="10" chance="6.25" /><!-- Fragmented Ceramium -->
-		</set>
-	</decomposable>
-	<decomposable item_id="188053304" override="true"><!-- Expeditionary Force Ceramium Medal Box -->
-		<set>
-			<item id="186000242" chance="25" /><!-- Ceramium Medal -->
-			<item id="186000242" count="2" chance="25" /><!-- Ceramium Medal -->
-			<item id="186000243" count="3" chance="6.25" /><!-- Fragmented Ceramium -->
-			<item id="186000243" count="4" chance="6.25" /><!-- Fragmented Ceramium -->
-			<item id="186000243" count="5" chance="6.25" /><!-- Fragmented Ceramium -->
-			<item id="186000243" count="6" chance="6.25" /><!-- Fragmented Ceramium -->
-			<item id="186000243" count="7" chance="6.25" /><!-- Fragmented Ceramium -->
-			<item id="186000243" count="8" chance="6.25" /><!-- Fragmented Ceramium -->
-			<item id="186000243" count="9" chance="6.25" /><!-- Fragmented Ceramium -->
-			<item id="186000243" count="10" chance="6.25" /><!-- Fragmented Ceramium -->
-		</set>
-	</decomposable>
 	<!-- Should be kept as selectables | dropped by rift guardians -->
 	<decomposable item_id="188053367" selectable="true" override="true"><!-- Guardian Tactician Plate Set -->
 		<set>
@@ -2525,38 +2497,6 @@
 		</set>
 		<set race="ASMODIANS">
 			<item id="182215751" /><!-- Elyos Guardian General Token -->
-		</set>
-	</decomposable>
-	<decomposable item_id="188053720" override="true"><!-- Operations Medal Box -->
-		<set>
-			<item id="186000242" chance="25" /><!-- Ceramium Medal -->
-			<item id="186000243" chance="25" /><!-- Fragmented Ceramium -->
-			<item id="186000147" chance="25" /><!-- Mithril Medal -->
-			<item id="186000096" chance="25" /><!-- Platinum Medal -->
-		</set>
-	</decomposable>
-	<decomposable item_id="188053722" override="true"><!-- Special Enchantment Stone Bundle of Fortuneers Legion -->
-		<set>
-			<item id="166020000" /><!-- Omega Enchantment Stone -->
-		</set>
-	</decomposable>
-	<decomposable item_id="188053725" override="true"><!-- Headquarters Medal Box -->
-		<set>
-			<item id="186000242" chance="25" /><!-- Ceramium Medal -->
-			<item id="186000243" chance="25" /><!-- Fragmented Ceramium -->
-			<item id="186000147" chance="25" /><!-- Mithril Medal -->
-			<item id="186000096" chance="25" /><!-- Platinum Medal -->
-		</set>
-	</decomposable>
-	<decomposable item_id="188053727" override="true"><!-- Special Enchantment Stone Bundle of Charlirunerk Inquiry Agency -->
-		<set>
-			<item id="166020000" /><!-- Omega Enchantment Stone -->
-		</set>
-	</decomposable>
-	<decomposable item_id="188053749" override="true"><!-- Heavy Enchantment Stone Bundle -->
-		<set>
-			<item id="166000194" count="3" chance="50" /><!-- Delta Enchantment Stone -->
-			<item id="166000195" count="3" chance="50" /><!-- Epsilon Enchantment Stone -->
 		</set>
 	</decomposable>
 	<decomposable item_id="188053798" override="true"><!-- Shining Enchantment Stone Bundle -->
