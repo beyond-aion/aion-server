@@ -25,6 +25,7 @@ public class _2443TaisanMessage extends AbstractQuestHandler {
 	@Override
 	public void register() {
 		qe.registerQuestNpc(204403).addOnQuestStart(questId);
+		qe.registerQuestNpc(204403).addOnTalkEvent(questId);
 		qe.registerQuestNpc(790016).addOnTalkEvent(questId);
 	}
 
