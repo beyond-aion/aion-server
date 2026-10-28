@@ -28,8 +28,7 @@ public class SM_SELECT_DECOMPOSABLE_RESULT extends AionServerPacket {
 
 	@Override
 	protected void writeImpl(AionConnection con) {
-		writeD(objectId);
-		writeD(0); // the object id is a 64 bit field, ours never fill the upper half
+		writeQ(objectId); // 64 bit object id
 		writeC(result);
 	}
 

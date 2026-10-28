@@ -21,8 +21,7 @@ public class SM_SHOW_DECOMPOSABLE extends AionServerPacket {
 
 	@Override
 	protected void writeImpl(AionConnection con) {
-		writeD(objectId);
-		writeD(0); // the object id is a 64 bit field, ours never fill the upper half
+		writeQ(objectId); // 64 bit object id
 		writeC(itemsCollections.size());
 		int index = 0;
 		for (DecomposedItem item : itemsCollections) {

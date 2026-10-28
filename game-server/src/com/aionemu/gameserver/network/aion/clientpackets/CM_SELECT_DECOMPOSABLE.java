@@ -35,8 +35,7 @@ public class CM_SELECT_DECOMPOSABLE extends AionClientPacket {
 
 	@Override
 	protected void readImpl() {
-		objectId = readD();
-		readD(); // the object id is a 64 bit field, ours never fill the upper half
+		objectId = (int) readQ(); // 64 bit object id
 		index = readUC();
 	}
 
