@@ -23774,7 +23774,7 @@
 	<decomposable item_id="188051626"><!-- [Event] Sweet Chocolate Basket -->
 		<set>
 			<item id="186000347" chance="15"/><!-- [Event] Major Ancient Crown -->
-			<item id="166000194" chance="15"/><!-- Delta Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166000194" chance="15"/><!-- Delta Enchantment Stone, count from 5.8 enchantment dust x556 at 556:1 -->
 			<item id="186000345" chance="5"/><!-- [Event] Major Ancient Goblet -->
 			<item id="186000147" chance="5"/><!-- Mithril Medal -->
 			<item id="188051769" chance="3"/><!-- [Event] Sweet Couples' Box -->
@@ -47272,21 +47272,21 @@
 	</decomposable>
 	<decomposable item_id="188052955"><!-- Linkgate Foundry Enchanting Material Bundle -->
 		<set>
-			<item id="166000081" chance="6"/><!-- L81 Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000082" chance="6"/><!-- L82 Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000083" chance="6"/><!-- L83 Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000084" chance="6"/><!-- L84 Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000085" chance="6"/><!-- L85 Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000086" chance="6"/><!-- L86 Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000087" chance="6"/><!-- L87 Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000088" chance="6"/><!-- L88 Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000089" chance="6"/><!-- L89 Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000090" chance="6"/><!-- L90 Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000091" chance="6"/><!-- L91 Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000092" chance="6"/><!-- L92 Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000093" chance="6"/><!-- L93 Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000094" chance="6"/><!-- L94 Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000095" chance="6"/><!-- L95 Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166000081" chance="6"/><!-- L81 Enchantment Stone, count from 5.8 enchantment dust x428 at 428:1 -->
+			<item id="166000082" chance="6"/><!-- L82 Enchantment Stone, count from 5.8 enchantment dust x441 at 441:1 -->
+			<item id="166000083" chance="6"/><!-- L83 Enchantment Stone, count from 5.8 enchantment dust x455 at 455:1 -->
+			<item id="166000084" chance="6"/><!-- L84 Enchantment Stone, count from 5.8 enchantment dust x469 at 469:1 -->
+			<item id="166000085" chance="6"/><!-- L85 Enchantment Stone, count from 5.8 enchantment dust x483 at 483:1 -->
+			<item id="166000086" chance="6"/><!-- L86 Enchantment Stone, count from 5.8 enchantment dust x497 at 497:1 -->
+			<item id="166000087" chance="6"/><!-- L87 Enchantment Stone, count from 5.8 enchantment dust x512 at 512:1 -->
+			<item id="166000088" chance="6"/><!-- L88 Enchantment Stone, count from 5.8 enchantment dust x526 at 526:1 -->
+			<item id="166000089" chance="6"/><!-- L89 Enchantment Stone, count from 5.8 enchantment dust x541 at 541:1 -->
+			<item id="166000090" chance="6"/><!-- L90 Enchantment Stone, count from 5.8 enchantment dust x556 at 556:1 -->
+			<item id="166000091" chance="6"/><!-- L91 Enchantment Stone, count from 5.8 enchantment dust x572 at 572:1 -->
+			<item id="166000092" chance="6"/><!-- L92 Enchantment Stone, count from 5.8 enchantment dust x587 at 587:1 -->
+			<item id="166000093" chance="6"/><!-- L93 Enchantment Stone, count from 5.8 enchantment dust x603 at 603:1 -->
+			<item id="166000094" chance="6"/><!-- L94 Enchantment Stone, count from 5.8 enchantment dust x619 at 619:1 -->
+			<item id="166000095" chance="6"/><!-- L95 Enchantment Stone, count from 5.8 enchantment dust x635 at 635:1 -->
 			<item id="167020024" chance="0.57"/><!-- Ancient Manastone: HP +105 -->
 			<item id="167020025" chance="0.57"/><!-- Ancient Manastone: MP +120 -->
 			<item id="167020026" chance="0.06"/><!-- Ancient Manastone: Accuracy +31 -->
@@ -48873,64 +48873,64 @@
 	</decomposable>
 	<decomposable item_id="188053057"><!-- Suspicious Green Sack -->
 		<set>
-			<item id="166000091" chance="10"/><!-- L91 Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000092" chance="10"/><!-- L92 Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000093" chance="10"/><!-- L93 Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000094" chance="10"/><!-- L94 Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000095" chance="10"/><!-- L95 Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000096" chance="10"/><!-- L96 Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000097" chance="10"/><!-- L97 Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000098" chance="10"/><!-- L98 Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000099" chance="10"/><!-- L99 Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000100" chance="10"/><!-- L100 Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166000091" chance="10"/><!-- L91 Enchantment Stone, count from 5.8 enchantment dust x572 at 572:1 -->
+			<item id="166000092" chance="10"/><!-- L92 Enchantment Stone, count from 5.8 enchantment dust x587 at 587:1 -->
+			<item id="166000093" chance="10"/><!-- L93 Enchantment Stone, count from 5.8 enchantment dust x603 at 603:1 -->
+			<item id="166000094" chance="10"/><!-- L94 Enchantment Stone, count from 5.8 enchantment dust x619 at 619:1 -->
+			<item id="166000095" chance="10"/><!-- L95 Enchantment Stone, count from 5.8 enchantment dust x635 at 635:1 -->
+			<item id="166000096" chance="10"/><!-- L96 Enchantment Stone, count from 5.8 enchantment dust x652 at 652:1 -->
+			<item id="166000097" chance="10"/><!-- L97 Enchantment Stone, count from 5.8 enchantment dust x668 at 668:1 -->
+			<item id="166000098" chance="10"/><!-- L98 Enchantment Stone, count from 5.8 enchantment dust x685 at 685:1 -->
+			<item id="166000099" chance="10"/><!-- L99 Enchantment Stone, count from 5.8 enchantment dust x702 at 702:1 -->
+			<item id="166000100" chance="10"/><!-- L100 Enchantment Stone, count from 5.8 enchantment dust x719 at 719:1 -->
 		</set>
 		<set>
-			<item id="166000091" chance="10"/><!-- L91 Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000092" chance="10"/><!-- L92 Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000093" chance="10"/><!-- L93 Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000094" chance="10"/><!-- L94 Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000095" chance="10"/><!-- L95 Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000096" chance="10"/><!-- L96 Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000097" chance="10"/><!-- L97 Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000098" chance="10"/><!-- L98 Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000099" chance="10"/><!-- L99 Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000100" chance="10"/><!-- L100 Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166000091" chance="10"/><!-- L91 Enchantment Stone, count from 5.8 enchantment dust x572 at 572:1 -->
+			<item id="166000092" chance="10"/><!-- L92 Enchantment Stone, count from 5.8 enchantment dust x587 at 587:1 -->
+			<item id="166000093" chance="10"/><!-- L93 Enchantment Stone, count from 5.8 enchantment dust x603 at 603:1 -->
+			<item id="166000094" chance="10"/><!-- L94 Enchantment Stone, count from 5.8 enchantment dust x619 at 619:1 -->
+			<item id="166000095" chance="10"/><!-- L95 Enchantment Stone, count from 5.8 enchantment dust x635 at 635:1 -->
+			<item id="166000096" chance="10"/><!-- L96 Enchantment Stone, count from 5.8 enchantment dust x652 at 652:1 -->
+			<item id="166000097" chance="10"/><!-- L97 Enchantment Stone, count from 5.8 enchantment dust x668 at 668:1 -->
+			<item id="166000098" chance="10"/><!-- L98 Enchantment Stone, count from 5.8 enchantment dust x685 at 685:1 -->
+			<item id="166000099" chance="10"/><!-- L99 Enchantment Stone, count from 5.8 enchantment dust x702 at 702:1 -->
+			<item id="166000100" chance="10"/><!-- L100 Enchantment Stone, count from 5.8 enchantment dust x719 at 719:1 -->
 		</set>
 		<set>
-			<item id="166000091" chance="10"/><!-- L91 Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000092" chance="10"/><!-- L92 Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000093" chance="10"/><!-- L93 Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000094" chance="10"/><!-- L94 Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000095" chance="10"/><!-- L95 Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000096" chance="10"/><!-- L96 Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000097" chance="10"/><!-- L97 Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000098" chance="10"/><!-- L98 Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000099" chance="10"/><!-- L99 Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000100" chance="10"/><!-- L100 Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166000091" chance="10"/><!-- L91 Enchantment Stone, count from 5.8 enchantment dust x572 at 572:1 -->
+			<item id="166000092" chance="10"/><!-- L92 Enchantment Stone, count from 5.8 enchantment dust x587 at 587:1 -->
+			<item id="166000093" chance="10"/><!-- L93 Enchantment Stone, count from 5.8 enchantment dust x603 at 603:1 -->
+			<item id="166000094" chance="10"/><!-- L94 Enchantment Stone, count from 5.8 enchantment dust x619 at 619:1 -->
+			<item id="166000095" chance="10"/><!-- L95 Enchantment Stone, count from 5.8 enchantment dust x635 at 635:1 -->
+			<item id="166000096" chance="10"/><!-- L96 Enchantment Stone, count from 5.8 enchantment dust x652 at 652:1 -->
+			<item id="166000097" chance="10"/><!-- L97 Enchantment Stone, count from 5.8 enchantment dust x668 at 668:1 -->
+			<item id="166000098" chance="10"/><!-- L98 Enchantment Stone, count from 5.8 enchantment dust x685 at 685:1 -->
+			<item id="166000099" chance="10"/><!-- L99 Enchantment Stone, count from 5.8 enchantment dust x702 at 702:1 -->
+			<item id="166000100" chance="10"/><!-- L100 Enchantment Stone, count from 5.8 enchantment dust x719 at 719:1 -->
 		</set>
 		<set>
-			<item id="166000091" chance="10"/><!-- L91 Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000092" chance="10"/><!-- L92 Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000093" chance="10"/><!-- L93 Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000094" chance="10"/><!-- L94 Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000095" chance="10"/><!-- L95 Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000096" chance="10"/><!-- L96 Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000097" chance="10"/><!-- L97 Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000098" chance="10"/><!-- L98 Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000099" chance="10"/><!-- L99 Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000100" chance="10"/><!-- L100 Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166000091" chance="10"/><!-- L91 Enchantment Stone, count from 5.8 enchantment dust x572 at 572:1 -->
+			<item id="166000092" chance="10"/><!-- L92 Enchantment Stone, count from 5.8 enchantment dust x587 at 587:1 -->
+			<item id="166000093" chance="10"/><!-- L93 Enchantment Stone, count from 5.8 enchantment dust x603 at 603:1 -->
+			<item id="166000094" chance="10"/><!-- L94 Enchantment Stone, count from 5.8 enchantment dust x619 at 619:1 -->
+			<item id="166000095" chance="10"/><!-- L95 Enchantment Stone, count from 5.8 enchantment dust x635 at 635:1 -->
+			<item id="166000096" chance="10"/><!-- L96 Enchantment Stone, count from 5.8 enchantment dust x652 at 652:1 -->
+			<item id="166000097" chance="10"/><!-- L97 Enchantment Stone, count from 5.8 enchantment dust x668 at 668:1 -->
+			<item id="166000098" chance="10"/><!-- L98 Enchantment Stone, count from 5.8 enchantment dust x685 at 685:1 -->
+			<item id="166000099" chance="10"/><!-- L99 Enchantment Stone, count from 5.8 enchantment dust x702 at 702:1 -->
+			<item id="166000100" chance="10"/><!-- L100 Enchantment Stone, count from 5.8 enchantment dust x719 at 719:1 -->
 		</set>
 		<set>
-			<item id="166000091" chance="10"/><!-- L91 Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000092" chance="10"/><!-- L92 Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000093" chance="10"/><!-- L93 Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000094" chance="10"/><!-- L94 Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000095" chance="10"/><!-- L95 Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000096" chance="10"/><!-- L96 Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000097" chance="10"/><!-- L97 Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000098" chance="10"/><!-- L98 Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000099" chance="10"/><!-- L99 Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000100" chance="10"/><!-- L100 Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166000091" chance="10"/><!-- L91 Enchantment Stone, count from 5.8 enchantment dust x572 at 572:1 -->
+			<item id="166000092" chance="10"/><!-- L92 Enchantment Stone, count from 5.8 enchantment dust x587 at 587:1 -->
+			<item id="166000093" chance="10"/><!-- L93 Enchantment Stone, count from 5.8 enchantment dust x603 at 603:1 -->
+			<item id="166000094" chance="10"/><!-- L94 Enchantment Stone, count from 5.8 enchantment dust x619 at 619:1 -->
+			<item id="166000095" chance="10"/><!-- L95 Enchantment Stone, count from 5.8 enchantment dust x635 at 635:1 -->
+			<item id="166000096" chance="10"/><!-- L96 Enchantment Stone, count from 5.8 enchantment dust x652 at 652:1 -->
+			<item id="166000097" chance="10"/><!-- L97 Enchantment Stone, count from 5.8 enchantment dust x668 at 668:1 -->
+			<item id="166000098" chance="10"/><!-- L98 Enchantment Stone, count from 5.8 enchantment dust x685 at 685:1 -->
+			<item id="166000099" chance="10"/><!-- L99 Enchantment Stone, count from 5.8 enchantment dust x702 at 702:1 -->
+			<item id="166000100" chance="10"/><!-- L100 Enchantment Stone, count from 5.8 enchantment dust x719 at 719:1 -->
 		</set>
 	</decomposable>
 	<decomposable item_id="188053058" selectable="true"><!-- Mysterious Red Sack -->
@@ -54154,7 +54154,7 @@
 		<set>
 			<item id="188053219" chance="0.4"/><!-- [Event] Sauro Commander's Accessory Box -->
 			<item id="188053212" chance="0.4"/><!-- [Event] Dragon Lord's Mythic Weapon Chest -->
-			<item id="166030005" chance="2"/><!-- Tempering Solution, no count in 4.6/5.8 retail data -->
+			<item id="166030005" chance="2"/><!-- Tempering Solution, count from 5.8 Silver Medal x1 at 1:1 -->
 			<item id="190020020" chance="2"/><!-- Shugo Lad Egg -->
 			<item id="188053207" chance="7"/><!-- [Event] Ancient Spirit's Eternal Armor Chest -->
 			<item id="188053206" chance="8.5"/><!-- [Event] Stormwing's Eternal Armor Chest -->
@@ -54860,7 +54860,7 @@
 			<item id="188052638" chance="2"/><!-- [Event] Fabled Godstone Bundle -->
 			<item id="166200013" chance="10"/><!-- Enduring Mythic Weapon Tuning Scroll -->
 			<item id="188053068" chance="10"/><!-- Elite Greater Composite Manastone Chest -->
-			<item id="166030005" chance="3"/><!-- Tempering Solution, no count in 4.6/5.8 retail data -->
+			<item id="166030005" chance="3"/><!-- Tempering Solution, count from 5.8 Silver Medal x1 at 1:1 -->
 			<item id="188053226" chance="15"/><!-- [Event] Sharptooth Repulser Box -->
 			<item id="188052496" chance="40"/><!-- Large Greater Supplements Bag (Mythic) -->
 			<item id="188600261" chance="4"/><!-- [Event] Infinity Shard Bonus Entry Scroll -->
@@ -55926,11 +55926,11 @@
 	<decomposable item_id="188053300"><!-- Expeditionary Force Ceramium Medal Box -->
 		<set>
 			<item id="186000242" chance="5" /><!-- Ceramium Medal, count from 5.8 Silver Medal x21 at 21:1 -->
-			<item id="186000243" count="6" chance="10"/><!-- Fragmented Ceramium, estimated count from 5.8 Silver Medal x18 at 3:1 -->
-			<item id="186000243" count="5" chance="15"/><!-- Fragmented Ceramium, estimated count from 5.8 Silver Medal x15 at 3:1 -->
-			<item id="186000243" count="4" chance="30"/><!-- Fragmented Ceramium, estimated count from 5.8 Silver Medal x12 at 3:1 -->
-			<item id="186000243" count="3" chance="25"/><!-- Fragmented Ceramium, estimated count from 5.8 Silver Medal x9 at 3:1 -->
-			<item id="186000243" count="2" chance="15"/><!-- Fragmented Ceramium, estimated count from 5.8 Silver Medal x6 at 3:1 -->
+			<item id="186000243" count="6" chance="10"/><!-- Fragmented Ceramium, count from 5.8 Silver Medal x18 at 3:1 -->
+			<item id="186000243" count="5" chance="15"/><!-- Fragmented Ceramium, count from 5.8 Silver Medal x15 at 3:1 -->
+			<item id="186000243" count="4" chance="30"/><!-- Fragmented Ceramium, count from 5.8 Silver Medal x12 at 3:1 -->
+			<item id="186000243" count="3" chance="25"/><!-- Fragmented Ceramium, count from 5.8 Silver Medal x9 at 3:1 -->
+			<item id="186000243" count="2" chance="15"/><!-- Fragmented Ceramium, count from 5.8 Silver Medal x6 at 3:1 -->
 		</set>
 	</decomposable>
 	<decomposable item_id="188053301"><!-- Expeditionary Force Supply Box -->
@@ -56030,11 +56030,11 @@
 	<decomposable item_id="188053304"><!-- Expeditionary Force Ceramium Medal Box -->
 		<set>
 			<item id="186000242" chance="5" /><!-- Ceramium Medal, count from 5.8 Silver Medal x21 at 21:1 -->
-			<item id="186000243" count="6" chance="10"/><!-- Fragmented Ceramium, estimated count from 5.8 Silver Medal x18 at 3:1 -->
-			<item id="186000243" count="5" chance="15"/><!-- Fragmented Ceramium, estimated count from 5.8 Silver Medal x15 at 3:1 -->
-			<item id="186000243" count="4" chance="30"/><!-- Fragmented Ceramium, estimated count from 5.8 Silver Medal x12 at 3:1 -->
-			<item id="186000243" count="3" chance="25"/><!-- Fragmented Ceramium, estimated count from 5.8 Silver Medal x9 at 3:1 -->
-			<item id="186000243" count="2" chance="15"/><!-- Fragmented Ceramium, estimated count from 5.8 Silver Medal x6 at 3:1 -->
+			<item id="186000243" count="6" chance="10"/><!-- Fragmented Ceramium, count from 5.8 Silver Medal x18 at 3:1 -->
+			<item id="186000243" count="5" chance="15"/><!-- Fragmented Ceramium, count from 5.8 Silver Medal x15 at 3:1 -->
+			<item id="186000243" count="4" chance="30"/><!-- Fragmented Ceramium, count from 5.8 Silver Medal x12 at 3:1 -->
+			<item id="186000243" count="3" chance="25"/><!-- Fragmented Ceramium, count from 5.8 Silver Medal x9 at 3:1 -->
+			<item id="186000243" count="2" chance="15"/><!-- Fragmented Ceramium, count from 5.8 Silver Medal x6 at 3:1 -->
 		</set>
 	</decomposable>
 	<decomposable item_id="188053305"><!-- Ancient Goblet Bundle -->
@@ -57217,7 +57217,7 @@
 			<item id="188053352"/><!-- [Event] Sharptooth Audron Box (60 Days) -->
 		</set>
 		<set>
-			<item id="166030007"/><!-- [Event] Tempering Solution, no count in 4.6/5.8 retail data -->
+			<item id="166030007" count="3"/><!-- [Event] Tempering Solution, count from 5.8 Silver Medal x3 at 1:1 -->
 		</set>
 	</decomposable>
 	<decomposable item_id="188053341"><!-- Honorable General's Renown Box -->
@@ -57228,7 +57228,7 @@
 			<item id="188053352"/><!-- [Event] Sharptooth Audron Box (60 Days) -->
 		</set>
 		<set>
-			<item id="166030007"/><!-- [Event] Tempering Solution, no count in 4.6/5.8 retail data -->
+			<item id="166030007" count="2"/><!-- [Event] Tempering Solution, count from 5.8 Silver Medal x2 at 1:1 -->
 		</set>
 	</decomposable>
 	<decomposable item_id="188053342"><!-- Honorable Officer's Renown Box -->
@@ -57239,7 +57239,7 @@
 			<item id="188053352"/><!-- [Event] Sharptooth Audron Box (60 Days) -->
 		</set>
 		<set>
-			<item id="166030007"/><!-- [Event] Tempering Solution, no count in 4.6/5.8 retail data -->
+			<item id="166030007"/><!-- [Event] Tempering Solution, count from 5.8 Silver Medal x1 at 1:1 -->
 		</set>
 	</decomposable>
 	<decomposable item_id="188053343"><!-- [Event] Germination Box -->
@@ -60742,7 +60742,7 @@
 		<set>
 			<item id="188053219" chance="0.4"/><!-- [Event] Sauro Commander's Accessory Box -->
 			<item id="188053212" chance="0.4"/><!-- [Event] Dragon Lord's Mythic Weapon Chest -->
-			<item id="166030005" chance="2"/><!-- Tempering Solution, no count in 4.6/5.8 retail data -->
+			<item id="166030005" chance="2"/><!-- Tempering Solution, count from 5.8 Silver Medal x1 at 1:1 -->
 			<item id="190020020" chance="2"/><!-- Shugo Lad Egg -->
 			<item id="188053207" chance="7"/><!-- [Event] Ancient Spirit's Eternal Armor Chest -->
 			<item id="188053206" chance="8.5"/><!-- [Event] Stormwing's Eternal Armor Chest -->
@@ -60785,7 +60785,7 @@
 	</decomposable>
 	<decomposable item_id="188053546"><!-- Seven Fortune Pouch -->
 		<set>
-			<item id="166030005" chance="15"/><!-- Tempering Solution, no count in 4.6/5.8 retail data -->
+			<item id="166030005" chance="15"/><!-- Tempering Solution, count from 5.8 Silver Medal x1 at 1:1 -->
 			<item id="167000749" chance="5"/><!-- Manastone: Attack +5 / Crit Strike +8 -->
 			<item id="167000713" chance="15"/><!-- Manastone: Magical Accuracy +14 / Crit Strike +8 -->
 			<item id="167000691" chance="5"/><!-- Manastone: Crit Strike +17 / Accuracy +13 -->
@@ -60962,7 +60962,7 @@
 	</decomposable>
 	<decomposable item_id="188053554"><!-- Test_EnchantmentStone_Bundle_06 -->
 		<set>
-			<item id="166020000"/><!-- Omega Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166020000"/><!-- Omega Enchantment Stone, count from 5.8 Silver Medal x1 at 1:1 -->
 		</set>
 	</decomposable>
 	<decomposable item_id="188053555"><!-- [Abbey] Stigma Shard Bundle -->
@@ -62985,7 +62985,7 @@
 			<item id="165020008" chance="8"/><!-- Weapon Wrapping Scroll (Eternal/Lv. 60 and lower) -->
 			<item id="166200010" chance="8"/><!-- Mythic Armor Tuning Scroll -->
 			<item id="166200009" chance="5"/><!-- Mythic Weapon Tuning Scroll -->
-			<item id="166000194" chance="10"/><!-- Delta Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166000194" chance="10"/><!-- Delta Enchantment Stone, count from 5.8 enchantment dust x556 at 556:1 -->
 			<item id="188053511" chance="10"/><!-- [Event] Bonus Entry Scroll Bundle -->
 			<item id="188052709" chance="10"/><!-- [Event] Fleeting Chromanimbus Container(15 days) -->
 			<item id="188052647" chance="10"/><!-- Daevic Fortune Cookie -->
@@ -62994,11 +62994,11 @@
 	</decomposable>
 	<decomposable item_id="188053669"><!-- [Event] Ascension Supply Box -->
 		<set>
-			<item id="166030007" chance="20"/><!-- [Event] Tempering Solution, no count in 4.6/5.8 retail data -->
-			<item id="166030007" chance="20"/><!-- [Event] Tempering Solution, no count in 4.6/5.8 retail data -->
-			<item id="166030007" chance="20"/><!-- [Event] Tempering Solution, no count in 4.6/5.8 retail data -->
-			<item id="166030007" chance="20"/><!-- [Event] Tempering Solution, no count in 4.6/5.8 retail data -->
-			<item id="166030007" chance="20"/><!-- [Event] Tempering Solution, no count in 4.6/5.8 retail data -->
+			<item id="166030007" chance="85"/><!-- [Event] Tempering Solution, count from 5.8 Silver Medal x1 at 1:1 -->
+			<item id="166030007" count="2" chance="11"/><!-- [Event] Tempering Solution, count from 5.8 Silver Medal x2 at 1:1 -->
+			<item id="166030007" count="5" chance="2.5"/><!-- [Event] Tempering Solution, count from 5.8 Silver Medal x5 at 1:1 -->
+			<item id="166030007" count="10" chance="1.49"/><!-- [Event] Tempering Solution, count from 5.8 Silver Medal x10 at 1:1 -->
+			<item id="166030007" count="100" chance="0.01"/><!-- [Event] Tempering Solution, count from 5.8 Silver Medal x100 at 1:1 -->
 		</set>
 	</decomposable>
 	<decomposable item_id="188053670" selectable="true"><!-- [Event] Weapon Box of the Distorted Balaur Lord -->
@@ -63805,8 +63805,8 @@
 	</decomposable>
 	<decomposable item_id="188053706"><!-- Rentus Base Supplies -->
 		<set>
-			<item id="166000194" chance="50"/><!-- Delta Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000195" chance="50"/><!-- Epsilon Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166000194" chance="50"/><!-- Delta Enchantment Stone, count from 5.8 enchantment dust x556 at 556:1 -->
+			<item id="166000195" chance="50"/><!-- Epsilon Enchantment Stone, count from 5.8 enchantment dust x808 at 808:1 -->
 		</set>
 		<set>
 			<item id="152012601" chance="17"/><!-- Conviction Crystal -->
@@ -64070,9 +64070,9 @@
 			<item id="186000242"/><!-- Ceramium Medal, count from 5.8 Silver Medal x21 at 21:1 -->
 		</set>
 		<set>
-			<item id="166000194" chance="50"/><!-- Delta Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000195" chance="45"/><!-- Epsilon Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166020000" chance="5"/><!-- Omega Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166000194" chance="50"/><!-- Delta Enchantment Stone, count from 5.8 enchantment dust x556 at 556:1 -->
+			<item id="166000195" chance="45"/><!-- Epsilon Enchantment Stone, count from 5.8 enchantment dust x808 at 808:1 -->
+			<item id="166020000" chance="5"/><!-- Omega Enchantment Stone, count from 5.8 Silver Medal x1 at 1:1 -->
 		</set>
 		<set>
 			<item id="167000682" count="5" chance="2.36"/><!-- Manastone: Attack +5 / HP +47 -->
@@ -64243,10 +64243,10 @@
 	</decomposable>
 	<decomposable item_id="188053722"><!-- Special Enchantment Stone Bundle of Fortuneers Legion -->
 		<set>
-			<item id="166000193" chance="82"/><!-- Gamma Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000194" chance="10"/><!-- Delta Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000195" chance="5"/><!-- Epsilon Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166020000" chance="3"/><!-- Omega Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166000193" chance="82"/><!-- Gamma Enchantment Stone, count from 5.8 enchantment dust x352 at 352:1 -->
+			<item id="166000194" chance="10"/><!-- Delta Enchantment Stone, count from 5.8 enchantment dust x556 at 556:1 -->
+			<item id="166000195" chance="5"/><!-- Epsilon Enchantment Stone, count from 5.8 enchantment dust x808 at 808:1 -->
+			<item id="166020000" chance="3"/><!-- Omega Enchantment Stone, count from 5.8 Silver Medal x1 at 1:1 -->
 		</set>
 	</decomposable>
 	<decomposable item_id="188053723"><!-- Guardian Composite Manastone Bundle -->
@@ -64359,10 +64359,10 @@
 	</decomposable>
 	<decomposable item_id="188053727"><!-- Special Enchantment Stone Bundle of Charlirunerk Inquiry Agency -->
 		<set>
-			<item id="166000193" chance="82"/><!-- Gamma Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000194" chance="10"/><!-- Delta Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000195" chance="5"/><!-- Epsilon Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166020000" chance="3"/><!-- Omega Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166000193" chance="82"/><!-- Gamma Enchantment Stone, count from 5.8 enchantment dust x352 at 352:1 -->
+			<item id="166000194" chance="10"/><!-- Delta Enchantment Stone, count from 5.8 enchantment dust x556 at 556:1 -->
+			<item id="166000195" chance="5"/><!-- Epsilon Enchantment Stone, count from 5.8 enchantment dust x808 at 808:1 -->
+			<item id="166020000" chance="3"/><!-- Omega Enchantment Stone, count from 5.8 Silver Medal x1 at 1:1 -->
 		</set>
 	</decomposable>
 	<decomposable item_id="188053728"><!-- Beritra's Equipment Box -->
@@ -64846,8 +64846,8 @@
 	</decomposable>
 	<decomposable item_id="188053749"><!-- Heavy Enchantment Stone Bundle -->
 		<set>
-			<item id="166000194" chance="50"/><!-- Delta Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000195" chance="50"/><!-- Epsilon Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166000194" chance="50"/><!-- Delta Enchantment Stone, count from 5.8 enchantment dust x556 at 556:1 -->
+			<item id="166000195" chance="50"/><!-- Epsilon Enchantment Stone, count from 5.8 enchantment dust x808 at 808:1 -->
 		</set>
 	</decomposable>
 	<decomposable item_id="188053750"><!-- Gladiator Stigma Bundle -->
@@ -65953,17 +65953,17 @@
 	</decomposable>
 	<decomposable item_id="188053798"><!-- Shining Enchantment Stone Bundle -->
 		<set>
-			<item id="166000194" chance="50"/><!-- Delta Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000195" chance="50"/><!-- Epsilon Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166000194" chance="50"/><!-- Delta Enchantment Stone, count from 5.8 enchantment dust x556 at 556:1 -->
+			<item id="166000195" chance="50"/><!-- Epsilon Enchantment Stone, count from 5.8 enchantment dust x808 at 808:1 -->
 		</set>
 	</decomposable>
 	<decomposable item_id="188053799"><!-- Stonespear Siege Reward Chest -->
 		<set>
-			<item id="166000191" chance="10"/><!-- Alpha Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000192" chance="25"/><!-- Beta Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000193" chance="30"/><!-- Gamma Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000194" chance="25"/><!-- Delta Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000195" chance="10"/><!-- Epsilon Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166000191" chance="10"/><!-- Alpha Enchantment Stone, count from 5.8 enchantment dust x23 at 23:1 -->
+			<item id="166000192" chance="25"/><!-- Beta Enchantment Stone, count from 5.8 enchantment dust x123 at 123:1 -->
+			<item id="166000193" chance="30"/><!-- Gamma Enchantment Stone, count from 5.8 enchantment dust x352 at 352:1 -->
+			<item id="166000194" chance="25"/><!-- Delta Enchantment Stone, count from 5.8 enchantment dust x556 at 556:1 -->
+			<item id="166000195" chance="10"/><!-- Epsilon Enchantment Stone, count from 5.8 enchantment dust x808 at 808:1 -->
 		</set>
 		<set>
 			<item id="167020072" chance="0.33"/><!-- Ancient Manastone: Accuracy +35 -->
@@ -65992,11 +65992,11 @@
 	</decomposable>
 	<decomposable item_id="188053800"><!-- Stonespear Siege Runner-Up Reward Chest -->
 		<set>
-			<item id="166000191" chance="10"/><!-- Alpha Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000192" chance="25"/><!-- Beta Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000193" chance="30"/><!-- Gamma Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000194" chance="25"/><!-- Delta Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000195" chance="10"/><!-- Epsilon Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166000191" chance="10"/><!-- Alpha Enchantment Stone, count from 5.8 enchantment dust x23 at 23:1 -->
+			<item id="166000192" chance="25"/><!-- Beta Enchantment Stone, count from 5.8 enchantment dust x123 at 123:1 -->
+			<item id="166000193" chance="30"/><!-- Gamma Enchantment Stone, count from 5.8 enchantment dust x352 at 352:1 -->
+			<item id="166000194" chance="25"/><!-- Delta Enchantment Stone, count from 5.8 enchantment dust x556 at 556:1 -->
+			<item id="166000195" chance="10"/><!-- Epsilon Enchantment Stone, count from 5.8 enchantment dust x808 at 808:1 -->
 		</set>
 		<set>
 			<item id="167020072" chance="0.33"/><!-- Ancient Manastone: Accuracy +35 -->
@@ -66099,12 +66099,12 @@
 	</decomposable>
 	<decomposable item_id="188053801"><!-- Stonespear Siege Champion Reward Chest -->
 		<set>
-			<item id="166000191" chance="5"/><!-- Alpha Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000192" chance="25"/><!-- Beta Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000193" chance="30"/><!-- Gamma Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000194" chance="25"/><!-- Delta Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000195" chance="10"/><!-- Epsilon Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166020000" chance="5"/><!-- Omega Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166000191" chance="5"/><!-- Alpha Enchantment Stone, count from 5.8 enchantment dust x23 at 23:1 -->
+			<item id="166000192" chance="25"/><!-- Beta Enchantment Stone, count from 5.8 enchantment dust x123 at 123:1 -->
+			<item id="166000193" chance="30"/><!-- Gamma Enchantment Stone, count from 5.8 enchantment dust x352 at 352:1 -->
+			<item id="166000194" chance="25"/><!-- Delta Enchantment Stone, count from 5.8 enchantment dust x556 at 556:1 -->
+			<item id="166000195" chance="10"/><!-- Epsilon Enchantment Stone, count from 5.8 enchantment dust x808 at 808:1 -->
+			<item id="166020000" chance="5"/><!-- Omega Enchantment Stone, count from 5.8 Silver Medal x1 at 1:1 -->
 		</set>
 		<set>
 			<item id="167020072" chance="0.33"/><!-- Ancient Manastone: Accuracy +35 -->
@@ -66872,8 +66872,9 @@
 	</decomposable>
 	<decomposable item_id="188053874"><!-- Bona fide Enchantment Stone Bundle -->
 		<set>
-			<item id="166020000" chance="10"/><!-- Omega Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000195" chance="90"/><!-- Epsilon Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166020000" chance="10"/><!-- Omega Enchantment Stone, count from 5.8 Silver Medal x1 at 1:1 -->
+			<item id="166000195" count="2" chance="50"/><!-- Epsilon Enchantment Stone, count from 5.8 enchantment dust x1616 at 808:1 -->
+			<item id="166000195" chance="40"/><!-- Epsilon Enchantment Stone, count from 5.8 enchantment dust x808 at 808:1 -->
 		</set>
 	</decomposable>
 	<decomposable item_id="188053875"><!-- Bona fide Manastone Box -->
@@ -66888,16 +66889,16 @@
 	</decomposable>
 	<decomposable item_id="188053876"><!-- Bona fide Lucky Box -->
 		<set>
-			<item id="166020000" chance="60"/><!-- Omega Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166020000" chance="60"/><!-- Omega Enchantment Stone, count from 5.8 Silver Medal x1 at 1:1 -->
 			<item id="166500002" chance="40"/><!-- Amplification Stone -->
 		</set>
 	</decomposable>
 	<decomposable item_id="188053877"><!-- Bona fide Enchantment Stone Box -->
 		<set>
-			<item id="166000195"/><!-- Epsilon Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166000195" count="10"/><!-- Epsilon Enchantment Stone, count from 5.8 enchantment dust x8080 at 808:1 -->
 		</set>
 		<set>
-			<item id="166020000"/><!-- Omega Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166020000" count="2"/><!-- Omega Enchantment Stone, count from 5.8 Silver Medal x2 at 1:1 -->
 		</set>
 		<set>
 			<item id="188053895"/><!-- Lucky Box -->
@@ -67457,8 +67458,8 @@
 	</decomposable>
 	<decomposable item_id="188053895"><!-- Lucky Box -->
 		<set>
-			<item id="166020000" chance="50"/><!-- Omega Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000195" chance="49"/><!-- Epsilon Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166020000" chance="50"/><!-- Omega Enchantment Stone, count from 5.8 Silver Medal x1 at 1:1 -->
+			<item id="166000195" chance="49"/><!-- Epsilon Enchantment Stone, count from 5.8 enchantment dust x808 at 808:1 -->
 			<item id="166500002" chance="1"/><!-- Amplification Stone -->
 		</set>
 	</decomposable>
@@ -68120,14 +68121,14 @@
 	</decomposable>
 	<decomposable item_id="188053912"><!-- Noble Enchantment Stone Bundle -->
 		<set>
-			<item id="166000194" chance="60"/><!-- Delta Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000195" chance="40"/><!-- Epsilon Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166000194" chance="55"/><!-- Delta Enchantment Stone, count from 5.8 enchantment dust x556 at 556:1 -->
+			<item id="166000195" chance="45"/><!-- Epsilon Enchantment Stone, count from 5.8 enchantment dust x808 at 808:1 -->
 		</set>
 	</decomposable>
 	<decomposable item_id="188053913"><!-- Noble Enchantment Stone Bundle -->
 		<set>
-			<item id="166000194" chance="60"/><!-- Delta Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000195" chance="40"/><!-- Epsilon Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166000194" chance="60"/><!-- Delta Enchantment Stone, count from 5.8 enchantment dust x556 at 556:1 -->
+			<item id="166000195" chance="40"/><!-- Epsilon Enchantment Stone, count from 5.8 enchantment dust x808 at 808:1 -->
 		</set>
 	</decomposable>
 	<decomposable item_id="188053914"><!-- Bountiful Stigma Bundle -->
@@ -68286,8 +68287,8 @@
 	</decomposable>
 	<decomposable item_id="188053917"><!-- Gentle Shugo Enchantment Stone Box -->
 		<set>
-			<item id="166000194" chance="50"/><!-- Delta Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166000195" chance="50"/><!-- Epsilon Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166000194" chance="50"/><!-- Delta Enchantment Stone, count from 5.8 enchantment dust x556 at 556:1 -->
+			<item id="166000195" chance="50"/><!-- Epsilon Enchantment Stone, count from 5.8 enchantment dust x808 at 808:1 -->
 		</set>
 	</decomposable>
 	<decomposable item_id="188053918"><!-- Illusion Godstone Box -->
@@ -68516,7 +68517,7 @@
 			<item id="166150018"/><!-- Assured Greater Felicitous Socketing (Eternal) -->
 		</set>
 		<set>
-			<item id="166030005"/><!-- Tempering Solution, no count in 4.6/5.8 retail data -->
+			<item id="166030005" count="5"/><!-- Tempering Solution, count from 5.8 Silver Medal x5 at 1:1 -->
 		</set>
 		<set>
 			<item id="188052934" count="7"/><!-- Greater Scroll Bundle -->
@@ -70337,8 +70338,8 @@
 			<item id="162000131" chance="0.61"/><!-- Fine Bracing Water -->
 			<item id="188053005" chance="0.61"/><!-- [Event] Hyperion's Wing Chest -->
 			<item id="188054026" chance="0.61"/><!-- [Event] Honorable Armor Box of Conquest -->
-			<item id="166020000" chance="0.51"/><!-- Omega Enchantment Stone, no count in 4.6/5.8 retail data -->
-			<item id="166030007" chance="0.51"/><!-- [Event] Tempering Solution, no count in 4.6/5.8 retail data -->
+			<item id="166020000" chance="0.51"/><!-- Omega Enchantment Stone, count from 5.8 Silver Medal x1 at 1:1 -->
+			<item id="166030007" chance="0.51"/><!-- [Event] Tempering Solution, count from 5.8 Silver Medal x1 at 1:1 -->
 			<item id="188053784" chance="0.51"/><!-- Stigma Bundle -->
 			<item id="188053785" chance="0.41"/><!-- Greater Stigma Bundle -->
 			<item id="188054027" chance="0.31"/><!-- [Event] Honorable Weapon Box of Conquest -->
@@ -70717,11 +70718,11 @@
 	</decomposable>
 	<decomposable item_id="188054099"><!-- Respite Benefit Package -->
 		<set>
-			<item id="166030005" chance="2.4"/><!-- Tempering Solution, no count in 4.6/5.8 retail data -->
-			<item id="166020000" chance="4.6"/><!-- Omega Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166030005" chance="2.4"/><!-- Tempering Solution, count from 5.8 Silver Medal x1 at 1:1 -->
+			<item id="166020000" chance="4.6"/><!-- Omega Enchantment Stone, count from 5.8 Silver Medal x1 at 1:1 -->
 			<item id="169610144" chance="8.6"/><!-- [Title] Dreamstrider Title (7 days) -->
 			<item id="190020222" chance="10.6"/><!-- Shu-Ghost's Egg (30 days) -->
-			<item id="166000195" chance="20.6"/><!-- Epsilon Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166000195" count="2" chance="20.6"/><!-- Epsilon Enchantment Stone, count from 5.8 enchantment dust x1616 at 808:1 -->
 			<item id="188053610" chance="15.6"/><!-- [Event] Level 70 Composite Manastone Bundle -->
 			<item id="190100153" chance="5.6"/><!-- Shugo Gyrocopter (30 Days) -->
 			<item id="187060161" chance="1.4"/><!-- Blitzbolt Wings -->
@@ -70731,11 +70732,11 @@
 			<item id="168310018" count="3" chance="5"/><!-- Major Blessed Augment: Level 2 -->
 		</set>
 		<set>
-			<item id="166030005" chance="2.4"/><!-- Tempering Solution, no count in 4.6/5.8 retail data -->
-			<item id="166020000" chance="4.6"/><!-- Omega Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166030005" chance="2.4"/><!-- Tempering Solution, count from 5.8 Silver Medal x1 at 1:1 -->
+			<item id="166020000" chance="4.6"/><!-- Omega Enchantment Stone, count from 5.8 Silver Medal x1 at 1:1 -->
 			<item id="169610144" chance="8.6"/><!-- [Title] Dreamstrider Title (7 days) -->
 			<item id="190020222" chance="10.6"/><!-- Shu-Ghost's Egg (30 days) -->
-			<item id="166000195" chance="20.6"/><!-- Epsilon Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166000195" count="2" chance="20.6"/><!-- Epsilon Enchantment Stone, count from 5.8 enchantment dust x1616 at 808:1 -->
 			<item id="188053610" chance="15.6"/><!-- [Event] Level 70 Composite Manastone Bundle -->
 			<item id="190100153" chance="5.6"/><!-- Shugo Gyrocopter (30 Days) -->
 			<item id="187060161" chance="1.4"/><!-- Blitzbolt Wings -->
@@ -70912,11 +70913,11 @@
 			<item id="167000519" chance="5"/><!-- Manastone: Magic Boost +25 -->
 			<item id="167000518" chance="5"/><!-- Manastone: Attack +5 -->
 			<item id="167000522" chance="5"/><!-- Manastone: Crit Strike +15 -->
-			<item id="166000193" chance="8"/><!-- Gamma Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166000193" chance="8"/><!-- Gamma Enchantment Stone, count from 5.8 enchantment dust x352 at 352:1 -->
 			<item id="167000487" chance="16"/><!-- Manastone: Magic Boost +23 -->
 			<item id="167000454" chance="16"/><!-- Manastone: Attack +4 -->
 			<item id="167000491" chance="16"/><!-- Manastone: Crit Strike +13 -->
-			<item id="166000192" chance="20"/><!-- Beta Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166000192" chance="20"/><!-- Beta Enchantment Stone, count from 5.8 enchantment dust x123 at 123:1 -->
 		</set>
 	</decomposable>
 	<decomposable item_id="188054196" selectable="true"><!-- Enhanced Modor's Weapon Box -->
@@ -71395,7 +71396,7 @@
 	</decomposable>
 	<decomposable item_id="188054289"><!-- Lucky Enchanter Box -->
 		<set>
-			<item id="166000194" chance="1"/><!-- Delta Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166000194" chance="1"/><!-- Delta Enchantment Stone, count from 5.8 enchantment dust x556 at 556:1 -->
 			<item id="168000216" chance="1"/><!-- Illusion Godstone: Vidar's Nobility -->
 			<item id="168000213" chance="1"/><!-- Illusion Godstone: Fasimedes' Authority -->
 			<item id="167000522" chance="8"/><!-- Manastone: Crit Strike +15 -->
@@ -71548,13 +71549,13 @@
 	</decomposable>
 	<decomposable item_id="188054382"><!-- Lucky Magic Box -->
 		<set>
-			<item id="166000194" chance="2"/><!-- Delta Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166000194" chance="2"/><!-- Delta Enchantment Stone, count from 5.8 enchantment dust x556 at 556:1 -->
 			<item id="168000228" chance="2"/><!-- Illusion Godstone: Khrudgelmir's Silence -->
 			<item id="168000223" chance="2"/><!-- Illusion Godstone: Bollvig's Grief -->
 			<item id="167000522" chance="8.5"/><!-- Manastone: Crit Strike +15 -->
 			<item id="167000519" chance="8.5"/><!-- Manastone: Magic Boost +25 -->
 			<item id="167000518" chance="8.5"/><!-- Manastone: Attack +5 -->
-			<item id="166000193" chance="8.5"/><!-- Gamma Enchantment Stone, no count in 4.6/5.8 retail data -->
+			<item id="166000193" chance="8.5"/><!-- Gamma Enchantment Stone, count from 5.8 enchantment dust x352 at 352:1 -->
 			<item id="167000487" chance="15"/><!-- Manastone: Magic Boost +23 -->
 			<item id="167000454" chance="15"/><!-- Manastone: Attack +4 -->
 			<item id="167000491" chance="15"/><!-- Manastone: Crit Strike +13 -->
