@@ -18,10 +18,9 @@
 		<xs:attribute name="override" type="xs:boolean" default="false" />
 	</xs:complexType>
 	<xs:complexType name="DecomposableSet">
-		<xs:choice maxOccurs="unbounded">
-			<xs:element name="item" type="DecomposedItem" />
-			<xs:element name="bundle" type="DecomposedBundle" />
-		</xs:choice>
+		<xs:sequence>
+			<xs:element name="item" type="DecomposedItem" maxOccurs="unbounded" />
+		</xs:sequence>
 		<xs:attribute name="chance" type="xs:float" default="100" />
 		<xs:attribute name="min_level" type="xs:int" default="1" />
 		<xs:attribute name="max_level" type="xs:int" default="80" />
@@ -32,16 +31,6 @@
 		<xs:attribute name="id" type="itemId" use="required" />
 		<xs:attribute name="count" type="xs:int" default="1" />
 		<xs:attribute name="chance" type="xs:float" default="100" />
-	</xs:complexType>
-	<xs:complexType name="DecomposedBundle">
-		<xs:sequence>
-			<xs:element name="item" type="BundledItem" maxOccurs="unbounded" />
-		</xs:sequence>
-		<xs:attribute name="chance" type="xs:float" default="100" />
-	</xs:complexType>
-	<xs:complexType name="BundledItem">
-		<xs:attribute name="id" type="itemId" use="required" />
-		<xs:attribute name="count" type="xs:int" default="1" />
 	</xs:complexType>
 	<xs:simpleType name="ListPlayerClass">
 		<xs:list itemType="playerClass" />

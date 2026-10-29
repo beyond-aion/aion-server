@@ -32,12 +32,10 @@ public class DecomposableItem {
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		if (sets == null)
 			sets = Collections.emptyList();
-		if (isSelectable && sets.stream().anyMatch(set -> set.getRewards().stream().anyMatch(reward -> reward instanceof DecomposedBundle)))
-			throw new IllegalArgumentException("Selectable decomposable item " + itemId + " cannot offer bundles");
 		// the selection window lists the first applicable set as a whole and grants the picked item, nothing is rolled
-		if (isSelectable && sets.stream().anyMatch(set -> set.getChance() != 100 || set.getRewards().stream().anyMatch(reward -> reward.getChance() != 100)))
+		if (isSelectable && sets.stream().anyMatch(set -> set.getChance() != 100 || set.getItems().stream().anyMatch(reward -> reward.getChance() != 100)))
 			throw new IllegalArgumentException("Selectable decomposable item " + itemId + " cannot have chances");
-		if (!isSelectable && isOverride && sets.stream().anyMatch(set -> set.getRewards().stream().mapToDouble(DecomposedReward::getChance).sum() >= 100.1))
+		if (!isSelectable && isOverride && sets.stream().anyMatch(set -> set.getItems().stream().mapToDouble(DecomposedItem::getChance).sum() >= 100.1))
 			throw new IllegalArgumentException("The sum of chances in a set must not exceed 100 % (decomposable item " + itemId + ")");
 		if (isOnlyOne) // the rarest branch gets the first roll, so the likelier ones are only reached when the rarer ones miss
 			sets.sort(Comparator.comparing(DecomposableSet::getChance));
@@ -61,7 +59,7 @@ public class DecomposableItem {
 
 	public DecomposableSet getSelectableSet(Player player) {
 		for (DecomposableSet set : sets) {
-			if (set.isApplicableTo(player) && !set.getRewards().isEmpty())
+			if (set.isApplicableTo(player) && !set.getItems().isEmpty())
 				return set;
 		}
 		return null;
@@ -71,16 +69,16 @@ public class DecomposableItem {
 	 * Rolls every applicable branch. Unless the item only ever yields one reward, every branch that fires contributes a reward.
 	 */
 	public List<DecomposedItem> decompose(Player player) {
-		List<DecomposedItem> rewards = new ArrayList<>();
+		List<DecomposedItem> items = new ArrayList<>();
 		for (DecomposableSet set : sets) {
 			if (!set.isApplicableTo(player) || !set.roll())
 				continue;
-			DecomposedReward reward = set.selectReward();
-			if (reward != null)
-				rewards.addAll(reward.getItems());
+			DecomposedItem item = set.selectItem();
+			if (item != null)
+				items.add(item);
 			if (isOnlyOne)
 				break;
 		}
-		return rewards;
+		return items;
 	}
 }

@@ -3,7 +3,10 @@ package com.aionemu.gameserver.model.templates.item;
 import java.util.Collections;
 import java.util.List;
 
-import jakarta.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlList;
+import jakarta.xml.bind.annotation.XmlType;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.model.PlayerClass;
@@ -28,22 +31,15 @@ public class DecomposableSet {
 	@XmlList
 	@XmlAttribute(name = "player_classes")
 	private List<PlayerClass> playerClasses;
-	@XmlElements({ @XmlElement(name = "item", type = DecomposedItem.class), @XmlElement(name = "bundle", type = DecomposedBundle.class) })
-	private List<DecomposedReward> rewards;
+	@XmlElement(name = "item")
+	private List<DecomposedItem> items;
 
 	public float getChance() {
 		return chance;
 	}
 
-	public List<DecomposedReward> getRewards() {
-		return rewards != null ? rewards : Collections.emptyList();
-	}
-
-	/**
-	 * @return The alternatives as single items, which is all a selection window can list.
-	 */
 	public List<DecomposedItem> getItems() {
-		return getRewards().stream().map(DecomposedItem.class::cast).toList();
+		return items != null ? items : Collections.emptyList();
 	}
 
 	public boolean isApplicableTo(Player player) {
@@ -58,13 +54,13 @@ public class DecomposableSet {
 	/**
 	 * @return The one alternative this branch yields, or null if the alternatives don't cover the whole roll.
 	 */
-	public DecomposedReward selectReward() {
+	public DecomposedItem selectItem() {
 		int roll = Rnd.get(1, 10000);
 		int sum = 0;
-		for (DecomposedReward reward : getRewards()) {
-			sum += Math.round(reward.getChance() * 100);
+		for (DecomposedItem item : getItems()) {
+			sum += Math.round(item.getChance() * 100);
 			if (roll <= sum)
-				return reward;
+				return item;
 		}
 		return null;
 	}

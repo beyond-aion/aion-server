@@ -16,7 +16,10 @@ import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.storage.StorageType;
-import com.aionemu.gameserver.model.templates.item.*;
+import com.aionemu.gameserver.model.templates.item.DecomposableItem;
+import com.aionemu.gameserver.model.templates.item.DecomposableSet;
+import com.aionemu.gameserver.model.templates.item.DecomposedItem;
+import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SHOW_DECOMPOSABLE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -148,11 +151,9 @@ public class DecomposeAction extends AbstractItemAction {
 		for (DecomposableSet set : decomposableItem.getSets()) {
 			if (!set.isApplicableTo(player))
 				continue;
-			for (DecomposedReward reward : set.getRewards()) {
-				for (DecomposedItem item : reward.getItems()) {
-					if (DataManager.ITEM_DATA.getItemTemplate(item.getItemId()).getExtraInventoryId() > 0)
-						return true;
-				}
+			for (DecomposedItem item : set.getItems()) {
+				if (DataManager.ITEM_DATA.getItemTemplate(item.getItemId()).getExtraInventoryId() > 0)
+					return true;
 			}
 		}
 		return false;

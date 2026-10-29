@@ -293,14 +293,12 @@
 	</decomposable>
 	<decomposable item_id="188051105" override="true"><!-- [Event] Pumpkin Pouch -->
 		<set>
-			<bundle chance="25.02">
-				<item id="164000073" count="3" /><!-- Greater Courage Scroll -->
-				<item id="164000076" count="3" /><!-- Greater Running Scroll -->
-				<item id="164000118" count="3" /><!-- Major Crit Strike Scroll -->
-				<item id="164000122" count="3" /><!-- Major Crit Spell Scroll -->
-				<item id="164000079" count="3" /><!-- Greater Raging Wind Scroll -->
-				<item id="164000134" count="3" /><!-- Greater Awakening Scroll -->
-			</bundle>
+			<item id="164000073" count="3" chance="4.17" /><!-- Greater Courage Scroll -->
+			<item id="164000076" count="3" chance="4.17" /><!-- Greater Running Scroll -->
+			<item id="164000118" count="3" chance="4.17" /><!-- Major Crit Strike Scroll -->
+			<item id="164000122" count="3" chance="4.17" /><!-- Major Crit Spell Scroll -->
+			<item id="164000079" count="3" chance="4.17" /><!-- Greater Raging Wind Scroll -->
+			<item id="164000134" count="3" chance="4.17" /><!-- Greater Awakening Scroll -->
 			<item id="167000518" chance="2.09" /><!-- Manastone: Attack +5 -->
 			<item id="167000563" chance="2.09" /><!-- Manastone: Healing Boost +3 -->
 			<item id="167000766" chance="2.09" /><!-- Manastone: HP +100 -->
@@ -313,14 +311,12 @@
 			<item id="167000775" chance="2.08" /><!-- Manastone: Magical Accuracy +16 -->
 			<item id="167000776" chance="2.08" /><!-- Manastone: Resist Magic +16 -->
 			<item id="167000777" chance="2.08" /><!-- Manastone: Crit Spell +5 -->
-			<bundle chance="25.02">
-				<item id="162000075" count="3" /><!-- Fine Life Potion -->
-				<item id="162000076" count="3" /><!-- Fine Mana Potion -->
-				<item id="162000077" count="3" /><!-- Fine Life Serum -->
-				<item id="162000078" count="3" /><!-- Fine Mana Serum -->
-				<item id="162000080" count="3" /><!-- Fine Recovery Serum -->
-				<item id="162000081" count="3" /><!-- Fine Recovery Potion -->
-			</bundle>
+			<item id="162000075" count="3" chance="4.17" /><!-- Fine Life Potion -->
+			<item id="162000076" count="3" chance="4.17" /><!-- Fine Mana Potion -->
+			<item id="162000077" count="3" chance="4.17" /><!-- Fine Life Serum -->
+			<item id="162000078" count="3" chance="4.17" /><!-- Fine Mana Serum -->
+			<item id="162000080" count="3" chance="4.17" /><!-- Fine Recovery Serum -->
+			<item id="162000081" count="3" chance="4.17" /><!-- Fine Recovery Potion -->
 			<item id="166000193" chance="8.31" /><!-- Gamma Enchantment Stone -->
 			<item id="166000194" chance="8.31" /><!-- Delta Enchantment Stone -->
 			<item id="166000195" chance="8.31" /><!-- Epsilon Enchantment Stone -->
@@ -503,10 +499,8 @@
 	</decomposable>
 	<decomposable item_id="188051720" override="true"><!-- [Event] Unidentifiable Solorius Box -->
 		<set race="ELYOS">
-			<bundle chance="25">
-				<item id="160010201" count="5" /><!-- [Event] Solorius Cookie -->
-				<item id="160010202" count="5" /><!-- [Event] Solorius Wine -->
-			</bundle>
+			<item id="160010201" count="5" chance="12.5" /><!-- [Event] Solorius Cookie -->
+			<item id="160010202" count="5" chance="12.5" /><!-- [Event] Solorius Wine -->
 			<item id="170030045" chance="10" /><!-- Solorius Wreath -->
 			<item id="170110014" chance="10" /><!-- Solorius Mantelpiece -->
 			<item id="170170086" chance="10" /><!-- Desktop Solorius Tree -->
@@ -515,10 +509,8 @@
 			<item id="188051687" chance="15" /><!-- [Event] Ripe Enchantment Fruit Bundle -->
 		</set>
 		<set race="ASMODIANS">
-			<bundle chance="25">
-				<item id="160010201" count="5" /><!-- [Event] Solorius Cookie -->
-				<item id="160010202" count="5" /><!-- [Event] Solorius Wine -->
-			</bundle>
+			<item id="160010201" count="5" chance="12.5" /><!-- [Event] Solorius Cookie -->
+			<item id="160010202" count="5" chance="12.5" /><!-- [Event] Solorius Wine -->
 			<item id="170035001" chance="10" /><!-- Solorius Wreath -->
 			<item id="170115014" chance="10" /><!-- Solorius Mantelpiece -->
 			<item id="170175063" chance="10" /><!-- Desktop Solorius Tree -->
@@ -1385,69 +1377,28 @@
 			<item id="188052987" chance="90" /><!-- +2 Snowball -->
 			<item id="188052988" chance="5" /><!-- +3 Snowball -->
 			<item id="188052989" chance="1" /><!-- +4 Snowball -->
-			<item id="182007148" chance="1" /><!-- [Event] Snowflake Crystal -->
-			<bundle chance="0.43">
-				<item id="186000236" count="5" /><!-- Blood Mark -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
-			<bundle chance="0.43">
-				<item id="164000130" count="5" /><!-- Major Spell Resist Scroll -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
-			<bundle chance="0.43">
-				<item id="164000126" count="5" /><!-- Major Strike Resist Scroll -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
-			<bundle chance="0.43">
-				<item id="160010101" count="2" /><!-- Summer-Loving Inquin Form Candy -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
-			<bundle chance="0.43">
-				<item id="186000147" /><!-- Mithril Medal -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
-			<bundle chance="0.43">
-				<item id="162002030" count="10" /><!-- [Event] Premium Restoration Serum -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
-			<bundle chance="0.42">
-				<item id="186000130" count="250" /><!-- Crucible Insignia -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
+			<item id="186000236" count="5" chance="0.43" /><!-- Blood Mark -->
+			<item id="164000130" count="5" chance="0.43" /><!-- Major Spell Resist Scroll -->
+			<item id="164000126" count="5" chance="0.43" /><!-- Major Strike Resist Scroll -->
+			<item id="160010101" count="2" chance="0.43" /><!-- Summer-Loving Inquin Form Candy -->
+			<item id="186000147" chance="0.43" /><!-- Mithril Medal -->
+			<item id="162002030" count="10" chance="0.43" /><!-- [Event] Premium Restoration Serum -->
+			<item id="186000130" count="250" chance="0.42" /><!-- Crucible Insignia -->
 		</set>
 		<set race="ASMODIANS">
 			<item id="188052987" chance="90" /><!-- +2 Snowball -->
 			<item id="188052988" chance="5" /><!-- +3 Snowball -->
 			<item id="188052989" chance="1" /><!-- +4 Snowball -->
-			<item id="182007148" chance="1" /><!-- [Event] Snowflake Crystal -->
-			<bundle chance="0.43">
-				<item id="186000236" count="5" /><!-- Blood Mark -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
-			<bundle chance="0.43">
-				<item id="164000130" count="5" /><!-- Major Spell Resist Scroll -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
-			<bundle chance="0.43">
-				<item id="164000126" count="5" /><!-- Major Strike Resist Scroll -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
-			<bundle chance="0.43">
-				<item id="160010102" count="2" /><!-- Summer-Loving Inquin Form Candy -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
-			<bundle chance="0.43">
-				<item id="186000147" /><!-- Mithril Medal -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
-			<bundle chance="0.43">
-				<item id="162002030" count="10" /><!-- [Event] Premium Restoration Serum -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
-			<bundle chance="0.42">
-				<item id="186000130" count="250" /><!-- Crucible Insignia -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
+			<item id="186000236" count="5" chance="0.43" /><!-- Blood Mark -->
+			<item id="164000130" count="5" chance="0.43" /><!-- Major Spell Resist Scroll -->
+			<item id="164000126" count="5" chance="0.43" /><!-- Major Strike Resist Scroll -->
+			<item id="160010102" count="2" chance="0.43" /><!-- Summer-Loving Inquin Form Candy -->
+			<item id="186000147" chance="0.43" /><!-- Mithril Medal -->
+			<item id="162002030" count="10" chance="0.43" /><!-- [Event] Premium Restoration Serum -->
+			<item id="186000130" count="250" chance="0.42" /><!-- Crucible Insignia -->
+		</set>
+		<set>
+			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</set>
 	</decomposable>
 	<decomposable item_id="188052987" override="true"><!-- +2 Snowball -->
@@ -1455,69 +1406,28 @@
 			<item id="188052988" chance="83" /><!-- +3 Snowball -->
 			<item id="188052989" chance="5" /><!-- +4 Snowball -->
 			<item id="188052990" chance="1" /><!-- +5 Snowball -->
-			<item id="182007148" chance="2.75" /><!-- [Event] Snowflake Crystal -->
-			<bundle chance="1.18">
-				<item id="186000236" count="5" /><!-- Blood Mark -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
-			<bundle chance="1.18">
-				<item id="164000130" count="5" /><!-- Major Spell Resist Scroll -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
-			<bundle chance="1.18">
-				<item id="164000126" count="5" /><!-- Major Strike Resist Scroll -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
-			<bundle chance="1.18">
-				<item id="160010101" count="2" /><!-- Summer-Loving Inquin Form Candy -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
-			<bundle chance="1.18">
-				<item id="186000147" /><!-- Mithril Medal -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
-			<bundle chance="1.18">
-				<item id="162002030" count="10" /><!-- [Event] Premium Restoration Serum -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
-			<bundle chance="1.17">
-				<item id="186000130" count="250" /><!-- Crucible Insignia -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
+			<item id="186000236" count="5" chance="1.18" /><!-- Blood Mark -->
+			<item id="164000130" count="5" chance="1.18" /><!-- Major Spell Resist Scroll -->
+			<item id="164000126" count="5" chance="1.18" /><!-- Major Strike Resist Scroll -->
+			<item id="160010101" count="2" chance="1.18" /><!-- Summer-Loving Inquin Form Candy -->
+			<item id="186000147" chance="1.18" /><!-- Mithril Medal -->
+			<item id="162002030" count="10" chance="1.18" /><!-- [Event] Premium Restoration Serum -->
+			<item id="186000130" count="250" chance="1.17" /><!-- Crucible Insignia -->
 		</set>
 		<set race="ASMODIANS">
 			<item id="188052988" chance="83" /><!-- +3 Snowball -->
 			<item id="188052989" chance="5" /><!-- +4 Snowball -->
 			<item id="188052990" chance="1" /><!-- +5 Snowball -->
-			<item id="182007148" chance="2.75" /><!-- [Event] Snowflake Crystal -->
-			<bundle chance="1.18">
-				<item id="186000236" count="5" /><!-- Blood Mark -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
-			<bundle chance="1.18">
-				<item id="164000130" count="5" /><!-- Major Spell Resist Scroll -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
-			<bundle chance="1.18">
-				<item id="164000126" count="5" /><!-- Major Strike Resist Scroll -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
-			<bundle chance="1.18">
-				<item id="160010102" count="2" /><!-- Summer-Loving Inquin Form Candy -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
-			<bundle chance="1.18">
-				<item id="186000147" /><!-- Mithril Medal -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
-			<bundle chance="1.18">
-				<item id="162002030" count="10" /><!-- [Event] Premium Restoration Serum -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
-			<bundle chance="1.17">
-				<item id="186000130" count="250" /><!-- Crucible Insignia -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
+			<item id="186000236" count="5" chance="1.18" /><!-- Blood Mark -->
+			<item id="164000130" count="5" chance="1.18" /><!-- Major Spell Resist Scroll -->
+			<item id="164000126" count="5" chance="1.18" /><!-- Major Strike Resist Scroll -->
+			<item id="160010102" count="2" chance="1.18" /><!-- Summer-Loving Inquin Form Candy -->
+			<item id="186000147" chance="1.18" /><!-- Mithril Medal -->
+			<item id="162002030" count="10" chance="1.18" /><!-- [Event] Premium Restoration Serum -->
+			<item id="186000130" count="250" chance="1.17" /><!-- Crucible Insignia -->
+		</set>
+		<set>
+			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</set>
 	</decomposable>
 	<decomposable item_id="188052988" override="true"><!-- +3 Snowball -->
@@ -1525,69 +1435,28 @@
 			<item id="188052989" chance="76" /><!-- +4 Snowball -->
 			<item id="188052990" chance="5" /><!-- +5 Snowball -->
 			<item id="188052991" chance="1" /><!-- +6 Snowball -->
-			<item id="182007148" chance="4.5" /><!-- [Event] Snowflake Crystal -->
-			<bundle chance="1.93">
-				<item id="186000236" count="5" /><!-- Blood Mark -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
-			<bundle chance="1.93">
-				<item id="164000130" count="5" /><!-- Major Spell Resist Scroll -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
-			<bundle chance="1.93">
-				<item id="164000126" count="5" /><!-- Major Strike Resist Scroll -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
-			<bundle chance="1.93">
-				<item id="160010101" count="2" /><!-- Summer-Loving Inquin Form Candy -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
-			<bundle chance="1.93">
-				<item id="186000147" /><!-- Mithril Medal -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
-			<bundle chance="1.93">
-				<item id="162002030" count="10" /><!-- [Event] Premium Restoration Serum -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
-			<bundle chance="1.92">
-				<item id="186000130" count="250" /><!-- Crucible Insignia -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
+			<item id="186000236" count="5" chance="1.93" /><!-- Blood Mark -->
+			<item id="164000130" count="5" chance="1.93" /><!-- Major Spell Resist Scroll -->
+			<item id="164000126" count="5" chance="1.93" /><!-- Major Strike Resist Scroll -->
+			<item id="160010101" count="2" chance="1.93" /><!-- Summer-Loving Inquin Form Candy -->
+			<item id="186000147" chance="1.93" /><!-- Mithril Medal -->
+			<item id="162002030" count="10" chance="1.93" /><!-- [Event] Premium Restoration Serum -->
+			<item id="186000130" count="250" chance="1.92" /><!-- Crucible Insignia -->
 		</set>
 		<set race="ASMODIANS">
 			<item id="188052989" chance="76" /><!-- +4 Snowball -->
 			<item id="188052990" chance="5" /><!-- +5 Snowball -->
 			<item id="188052991" chance="1" /><!-- +6 Snowball -->
-			<item id="182007148" chance="4.5" /><!-- [Event] Snowflake Crystal -->
-			<bundle chance="1.93">
-				<item id="186000236" count="5" /><!-- Blood Mark -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
-			<bundle chance="1.93">
-				<item id="164000130" count="5" /><!-- Major Spell Resist Scroll -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
-			<bundle chance="1.93">
-				<item id="164000126" count="5" /><!-- Major Strike Resist Scroll -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
-			<bundle chance="1.93">
-				<item id="160010102" count="2" /><!-- Summer-Loving Inquin Form Candy -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
-			<bundle chance="1.93">
-				<item id="186000147" /><!-- Mithril Medal -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
-			<bundle chance="1.93">
-				<item id="162002030" count="10" /><!-- [Event] Premium Restoration Serum -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
-			<bundle chance="1.92">
-				<item id="186000130" count="250" /><!-- Crucible Insignia -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
+			<item id="186000236" count="5" chance="1.93" /><!-- Blood Mark -->
+			<item id="164000130" count="5" chance="1.93" /><!-- Major Spell Resist Scroll -->
+			<item id="164000126" count="5" chance="1.93" /><!-- Major Strike Resist Scroll -->
+			<item id="160010102" count="2" chance="1.93" /><!-- Summer-Loving Inquin Form Candy -->
+			<item id="186000147" chance="1.93" /><!-- Mithril Medal -->
+			<item id="162002030" count="10" chance="1.93" /><!-- [Event] Premium Restoration Serum -->
+			<item id="186000130" count="250" chance="1.92" /><!-- Crucible Insignia -->
+		</set>
+		<set>
+			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</set>
 	</decomposable>
 	<decomposable item_id="188052989" override="true"><!-- +4 Snowball -->
@@ -1595,69 +1464,28 @@
 			<item id="188052990" chance="69" /><!-- +5 Snowball -->
 			<item id="188052991" chance="5" /><!-- +6 Snowball -->
 			<item id="188052992" chance="1" /><!-- +7 Snowball -->
-			<item id="182007148" chance="6.25" /><!-- [Event] Snowflake Crystal -->
-			<bundle chance="2.68">
-				<item id="186000236" count="5" /><!-- Blood Mark -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
-			<bundle chance="2.68">
-				<item id="164000130" count="5" /><!-- Major Spell Resist Scroll -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
-			<bundle chance="2.68">
-				<item id="164000126" count="5" /><!-- Major Strike Resist Scroll -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
-			<bundle chance="2.68">
-				<item id="160010101" count="2" /><!-- Summer-Loving Inquin Form Candy -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
-			<bundle chance="2.68">
-				<item id="186000147" /><!-- Mithril Medal -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
-			<bundle chance="2.68">
-				<item id="162002030" count="10" /><!-- [Event] Premium Restoration Serum -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
-			<bundle chance="2.67">
-				<item id="186000130" count="250" /><!-- Crucible Insignia -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
+			<item id="186000236" count="5" chance="2.68" /><!-- Blood Mark -->
+			<item id="164000130" count="5" chance="2.68" /><!-- Major Spell Resist Scroll -->
+			<item id="164000126" count="5" chance="2.68" /><!-- Major Strike Resist Scroll -->
+			<item id="160010101" count="2" chance="2.68" /><!-- Summer-Loving Inquin Form Candy -->
+			<item id="186000147" chance="2.68" /><!-- Mithril Medal -->
+			<item id="162002030" count="10" chance="2.68" /><!-- [Event] Premium Restoration Serum -->
+			<item id="186000130" count="250" chance="2.67" /><!-- Crucible Insignia -->
 		</set>
 		<set race="ASMODIANS">
 			<item id="188052990" chance="69" /><!-- +5 Snowball -->
 			<item id="188052991" chance="5" /><!-- +6 Snowball -->
 			<item id="188052992" chance="1" /><!-- +7 Snowball -->
-			<item id="182007148" chance="6.25" /><!-- [Event] Snowflake Crystal -->
-			<bundle chance="2.68">
-				<item id="186000236" count="5" /><!-- Blood Mark -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
-			<bundle chance="2.68">
-				<item id="164000130" count="5" /><!-- Major Spell Resist Scroll -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
-			<bundle chance="2.68">
-				<item id="164000126" count="5" /><!-- Major Strike Resist Scroll -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
-			<bundle chance="2.68">
-				<item id="160010102" count="2" /><!-- Summer-Loving Inquin Form Candy -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
-			<bundle chance="2.68">
-				<item id="186000147" /><!-- Mithril Medal -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
-			<bundle chance="2.68">
-				<item id="162002030" count="10" /><!-- [Event] Premium Restoration Serum -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
-			<bundle chance="2.67">
-				<item id="186000130" count="250" /><!-- Crucible Insignia -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
+			<item id="186000236" count="5" chance="2.68" /><!-- Blood Mark -->
+			<item id="164000130" count="5" chance="2.68" /><!-- Major Spell Resist Scroll -->
+			<item id="164000126" count="5" chance="2.68" /><!-- Major Strike Resist Scroll -->
+			<item id="160010102" count="2" chance="2.68" /><!-- Summer-Loving Inquin Form Candy -->
+			<item id="186000147" chance="2.68" /><!-- Mithril Medal -->
+			<item id="162002030" count="10" chance="2.68" /><!-- [Event] Premium Restoration Serum -->
+			<item id="186000130" count="250" chance="2.67" /><!-- Crucible Insignia -->
+		</set>
+		<set>
+			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</set>
 	</decomposable>
 	<decomposable item_id="188052990" override="true"><!-- +5 Snowball -->
@@ -1665,69 +1493,28 @@
 			<item id="188052991" chance="62" /><!-- +6 Snowball -->
 			<item id="188052992" chance="5" /><!-- +7 Snowball -->
 			<item id="188052993" chance="1" /><!-- +8 Snowball -->
-			<item id="182007148" chance="8" /><!-- [Event] Snowflake Crystal -->
-			<bundle chance="3.43">
-				<item id="186000236" count="5" /><!-- Blood Mark -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
-			<bundle chance="3.43">
-				<item id="164000130" count="5" /><!-- Major Spell Resist Scroll -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
-			<bundle chance="3.43">
-				<item id="164000126" count="5" /><!-- Major Strike Resist Scroll -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
-			<bundle chance="3.43">
-				<item id="160010101" count="2" /><!-- Summer-Loving Inquin Form Candy -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
-			<bundle chance="3.43">
-				<item id="186000147" /><!-- Mithril Medal -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
-			<bundle chance="3.43">
-				<item id="162002030" count="10" /><!-- [Event] Premium Restoration Serum -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
-			<bundle chance="3.42">
-				<item id="186000130" count="250" /><!-- Crucible Insignia -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
+			<item id="186000236" count="5" chance="3.43" /><!-- Blood Mark -->
+			<item id="164000130" count="5" chance="3.43" /><!-- Major Spell Resist Scroll -->
+			<item id="164000126" count="5" chance="3.43" /><!-- Major Strike Resist Scroll -->
+			<item id="160010101" count="2" chance="3.43" /><!-- Summer-Loving Inquin Form Candy -->
+			<item id="186000147" chance="3.43" /><!-- Mithril Medal -->
+			<item id="162002030" count="10" chance="3.43" /><!-- [Event] Premium Restoration Serum -->
+			<item id="186000130" count="250" chance="3.42" /><!-- Crucible Insignia -->
 		</set>
 		<set race="ASMODIANS">
 			<item id="188052991" chance="62" /><!-- +6 Snowball -->
 			<item id="188052992" chance="5" /><!-- +7 Snowball -->
 			<item id="188052993" chance="1" /><!-- +8 Snowball -->
-			<item id="182007148" chance="8" /><!-- [Event] Snowflake Crystal -->
-			<bundle chance="3.43">
-				<item id="186000236" count="5" /><!-- Blood Mark -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
-			<bundle chance="3.43">
-				<item id="164000130" count="5" /><!-- Major Spell Resist Scroll -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
-			<bundle chance="3.43">
-				<item id="164000126" count="5" /><!-- Major Strike Resist Scroll -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
-			<bundle chance="3.43">
-				<item id="160010102" count="2" /><!-- Summer-Loving Inquin Form Candy -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
-			<bundle chance="3.43">
-				<item id="186000147" /><!-- Mithril Medal -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
-			<bundle chance="3.43">
-				<item id="162002030" count="10" /><!-- [Event] Premium Restoration Serum -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
-			<bundle chance="3.42">
-				<item id="186000130" count="250" /><!-- Crucible Insignia -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
+			<item id="186000236" count="5" chance="3.43" /><!-- Blood Mark -->
+			<item id="164000130" count="5" chance="3.43" /><!-- Major Spell Resist Scroll -->
+			<item id="164000126" count="5" chance="3.43" /><!-- Major Strike Resist Scroll -->
+			<item id="160010102" count="2" chance="3.43" /><!-- Summer-Loving Inquin Form Candy -->
+			<item id="186000147" chance="3.43" /><!-- Mithril Medal -->
+			<item id="162002030" count="10" chance="3.43" /><!-- [Event] Premium Restoration Serum -->
+			<item id="186000130" count="250" chance="3.42" /><!-- Crucible Insignia -->
+		</set>
+		<set>
+			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</set>
 	</decomposable>
 	<decomposable item_id="188052991" override="true"><!-- +6 Snowball -->
@@ -1735,10 +1522,7 @@
 			<item id="188052992" chance="55" /><!-- +7 Snowball -->
 			<item id="188052993" chance="5" /><!-- +8 Snowball -->
 			<item id="188052994" chance="1" /><!-- +9 Snowball -->
-			<bundle chance="29.25">
-				<item id="188052996" /><!-- [Event] Broken Snow Bundle -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
+			<item id="188052996" chance="29.25" /><!-- [Event] Broken Snow Bundle -->
 			<item id="182007148" chance="9.75" /><!-- [Event] Snowflake Crystal -->
 		</set>
 	</decomposable>
@@ -1747,10 +1531,7 @@
 			<item id="188052993" chance="48" /><!-- +8 Snowball -->
 			<item id="188052994" chance="5" /><!-- +9 Snowball -->
 			<item id="188052994" chance="1" /><!-- +9 Snowball -->
-			<bundle chance="34.5">
-				<item id="188052996" /><!-- [Event] Broken Snow Bundle -->
-				<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-			</bundle>
+			<item id="188052996" chance="34.5" /><!-- [Event] Broken Snow Bundle -->
 			<item id="182007148" chance="11.5" /><!-- [Event] Snowflake Crystal -->
 		</set>
 	</decomposable>
@@ -1774,6 +1555,9 @@
 			<item id="166000194" count="3" chance="20" /><!-- Delta Enchantment Stone -->
 			<item id="166100020" count="250" chance="20" /><!-- [Stamp] High Grade Enchanting Supplement (Eternal) -->
 			<item id="166100023" count="250" chance="20" /><!-- [Stamp] High Grade Enchanting Supplement (Mythic) -->
+		</set>
+		<set>
+			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</set>
 	</decomposable>
 	<decomposable item_id="188052997" override="true"><!-- [Event] Crushed Snow Bundle -->
@@ -1839,16 +1623,11 @@
 	</decomposable>
 	<decomposable item_id="188053030" override="true"><!-- Idgel Dome Reward Box -->
 		<set>
-			<item id="152012598" count="2" chance="34" /><!-- Heart of Destruction -->
-			<item id="152012599" count="2" chance="46" /><!-- Heart of Protection -->
-			<bundle chance="10">
-				<item id="152012598" count="2" /><!-- Heart of Destruction -->
-				<item id="188950017" /><!-- Special Courier Pass (Abyss Eternal/Lv. 61-65) -->
-			</bundle>
-			<bundle chance="10">
-				<item id="152012599" count="2" /><!-- Heart of Protection -->
-				<item id="188950017" /><!-- Special Courier Pass (Abyss Eternal/Lv. 61-65) -->
-			</bundle>
+			<item id="152012598" count="2" chance="44" /><!-- Heart of Destruction -->
+			<item id="152012599" count="2" chance="56" /><!-- Heart of Protection -->
+		</set>
+		<set>
+			<item id="188950017" chance="20" /><!-- Special Courier Pass (Abyss Eternal/Lv. 61-65) -->
 		</set>
 	</decomposable>
 	<decomposable item_id="188053031" override="true"><!-- Idgel Dome Consolation Prize -->
@@ -2644,102 +2423,33 @@
 	</decomposable>
 	<decomposable item_id="188054036" override="true"><!-- [Event] Frozen Ice Festival Box -->
 		<set>
-			<bundle chance="4.17">
-				<item id="188053212" /><!-- [Event] Dragon Lord's Mythic Weapon Chest -->
-				<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
-			</bundle>
-			<bundle chance="4.17">
-				<item id="169650003" /><!-- [Special] Plastic Surgery Ticket -->
-				<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
-			</bundle>
-			<bundle chance="4.17">
-				<item id="188052319" /><!-- [Event] Dragon Lord's Wing Box -->
-				<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
-			</bundle>
-			<bundle chance="4.17">
-				<item id="166500002" /><!-- Amplification Stone -->
-				<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
-			</bundle>
-			<bundle chance="4.17">
-				<item id="188052560" /><!-- Assured Greater Felicitous Socketing Box (Mythic) -->
-				<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
-			</bundle>
-			<bundle chance="4.17">
-				<item id="188052559" /><!-- Assured Greater Felicitous Socketing Box (Eternal) -->
-				<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
-			</bundle>
-			<bundle chance="4.17">
-				<item id="188052073" /><!-- [Event] Ancient Spirit's Wing Box -->
-				<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
-			</bundle>
-			<bundle chance="4.17">
-				<item id="188053786" /><!-- Major Stigma Bundle -->
-				<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
-			</bundle>
-			<bundle chance="4.17">
-				<item id="187060091" /><!-- Shining Light's Wings -->
-				<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
-			</bundle>
-			<bundle chance="4.17">
-				<item id="187060094" /><!-- Splendid Light's Wings -->
-				<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
-			</bundle>
-			<bundle chance="4.17">
-				<item id="188053785" /><!-- Greater Stigma Bundle -->
-				<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
-			</bundle>
-			<bundle chance="4.17">
-				<item id="188054038" /><!-- Wave Song Armor Box -->
-				<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
-			</bundle>
-			<bundle chance="4.17">
-				<item id="188054039" /><!-- Sea Feast Armor Box -->
-				<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
-			</bundle>
-			<bundle chance="4.17">
-				<item id="188053206" /><!-- [Event] Stormwing's Eternal Armor Chest -->
-				<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
-			</bundle>
-			<bundle chance="4.17">
-				<item id="188053784" /><!-- Stigma Bundle -->
-				<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
-			</bundle>
-			<bundle chance="4.17">
-				<item id="188053208" /><!-- [Event] Tiamat Guard's Eternal Armor Chest -->
-				<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
-			</bundle>
-			<bundle chance="4.16">
-				<item id="188053324" /><!-- Levinshor Alliance Noble Ancient Manastone Box -->
-				<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
-			</bundle>
-			<bundle chance="4.16">
-				<item id="169405339" /><!-- Pallasite Crystal -->
-				<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
-			</bundle>
-			<bundle chance="4.16">
-				<item id="188053295" /><!-- Empyrean Plume Chest -->
-				<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
-			</bundle>
-			<bundle chance="4.16">
-				<item id="188052693" /><!-- [Event] Saam King's Herbs Bundle -->
-				<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
-			</bundle>
-			<bundle chance="4.16">
-				<item id="188052716" /><!-- [Event] Lucky Scroll Pouch -->
-				<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
-			</bundle>
-			<bundle chance="4.16">
-				<item id="188053663" /><!-- [Event] Blood Mark Box -->
-				<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
-			</bundle>
-			<bundle chance="4.16">
-				<item id="188053644" /><!-- [Event] Small Ancient Coin Bundle -->
-				<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
-			</bundle>
-			<bundle chance="4.16">
-				<item id="161000003" /><!-- Reviving Elemental Stone -->
-				<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
-			</bundle>
+			<item id="188053212" chance="4.17" /><!-- [Event] Dragon Lord's Mythic Weapon Chest -->
+			<item id="169650003" chance="4.17" /><!-- [Special] Plastic Surgery Ticket -->
+			<item id="188052319" chance="4.17" /><!-- [Event] Dragon Lord's Wing Box -->
+			<item id="166500002" chance="4.17" /><!-- Amplification Stone -->
+			<item id="188052560" chance="4.17" /><!-- Assured Greater Felicitous Socketing Box (Mythic) -->
+			<item id="188052559" chance="4.17" /><!-- Assured Greater Felicitous Socketing Box (Eternal) -->
+			<item id="188052073" chance="4.17" /><!-- [Event] Ancient Spirit's Wing Box -->
+			<item id="188053786" chance="4.17" /><!-- Major Stigma Bundle -->
+			<item id="187060091" chance="4.17" /><!-- Shining Light's Wings -->
+			<item id="187060094" chance="4.17" /><!-- Splendid Light's Wings -->
+			<item id="188053785" chance="4.17" /><!-- Greater Stigma Bundle -->
+			<item id="188054038" chance="4.17" /><!-- Wave Song Armor Box -->
+			<item id="188054039" chance="4.17" /><!-- Sea Feast Armor Box -->
+			<item id="188053206" chance="4.17" /><!-- [Event] Stormwing's Eternal Armor Chest -->
+			<item id="188053784" chance="4.17" /><!-- Stigma Bundle -->
+			<item id="188053208" chance="4.17" /><!-- [Event] Tiamat Guard's Eternal Armor Chest -->
+			<item id="188053324" chance="4.16" /><!-- Levinshor Alliance Noble Ancient Manastone Box -->
+			<item id="169405339" chance="4.16" /><!-- Pallasite Crystal -->
+			<item id="188053295" chance="4.16" /><!-- Empyrean Plume Chest -->
+			<item id="188052693" chance="4.16" /><!-- [Event] Saam King's Herbs Bundle -->
+			<item id="188052716" chance="4.16" /><!-- [Event] Lucky Scroll Pouch -->
+			<item id="188053663" chance="4.16" /><!-- [Event] Blood Mark Box -->
+			<item id="188053644" chance="4.16" /><!-- [Event] Small Ancient Coin Bundle -->
+			<item id="161000003" chance="4.16" /><!-- Reviving Elemental Stone -->
+		</set>
+		<set>
+			<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
 		</set>
 	</decomposable>
 	<decomposable item_id="188054037" override="true"><!-- [Event] Engraved Ice Festival Box -->
