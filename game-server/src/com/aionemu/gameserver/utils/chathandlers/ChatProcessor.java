@@ -116,8 +116,13 @@ public class ChatProcessor implements GameEngine {
 		return command != null && command.validateAccess(executor);
 	}
 
+	/**
+	 * @return true if a command with this alias exists. Admin commands are registered with their {@code //} prefix, so the bare alias
+	 *         is accepted as well; stored command accesses are kept under the bare alias.
+	 */
 	public boolean isCommandExists(String alias) {
-		return commandHandlers.containsKey(alias.toLowerCase());
+		String name = alias.toLowerCase();
+		return commandHandlers.containsKey(name) || commandHandlers.containsKey(AdminCommand.PREFIX + name);
 	}
 
 	public static ChatProcessor getInstance() {
