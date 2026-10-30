@@ -231,7 +231,7 @@ public class NpcFactions {
 				faction.setTime(getNextTime());
 				faction.setState(ENpcFactionQuestState.NOTING);
 			}
-			PacketSendUtility.sendPacket(owner, new SM_QUEST_ACTION(questId));
+			PacketSendUtility.sendPacket(owner, SM_QUEST_ACTION.npcFactionQuestOffered(questId));
 		}
 	}
 
