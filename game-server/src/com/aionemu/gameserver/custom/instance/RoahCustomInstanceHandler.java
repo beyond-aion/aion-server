@@ -381,7 +381,7 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 
 	@Override
 	public boolean onReviveEvent(Player player) {
-		PacketSendUtility.sendPacket(player, SM_QUEST_ACTION.instanceTimer(instance.getInstanceId(), TIME_LIMIT * 1000 - getElapsedTimeMillis()));
+		PacketSendUtility.sendPacket(player, SM_QUEST_ACTION.instanceTimer(instance.getInstanceId(), TIME_LIMIT - getElapsedTimeMillis() / 1000));
 		return super.onReviveEvent(player);
 	}
 
