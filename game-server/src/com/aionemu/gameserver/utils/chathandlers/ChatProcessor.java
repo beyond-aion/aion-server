@@ -90,8 +90,18 @@ public class ChatProcessor implements GameEngine {
 		return params.trim().split(" +(?=[^\\]]*(\\[|$))");
 	}
 
+	/**
+	 * Command keys are registered with their prefix ({@code //} for admin, {@code .} for player commands, none for console), while
+	 * configs and stored accesses use the bare alias, so an alias without prefix also resolves to its command.
+	 */
 	private ChatCommand getCommand(String alias) {
-		return commandHandlers.get(alias.toLowerCase());
+		ChatCommand command = commandHandlers.get(alias.toLowerCase());
+		if (command != null)
+			return command;
+		for (ChatCommand candidate : commandHandlers.values())
+			if (candidate.getAlias().equalsIgnoreCase(alias))
+				return candidate;
+		return null;
 	}
 
 	/**
@@ -117,25 +127,18 @@ public class ChatProcessor implements GameEngine {
 	}
 
 	/**
-	 * @return true if a command with this alias exists. Admin commands are registered with their {@code //} prefix, so the bare alias
-	 *         is accepted as well; stored command accesses are kept under the bare alias.
+	 * @return true if a command with this alias exists, with or without its prefix
 	 */
 	public boolean isCommandExists(String alias) {
-		return getCommandOrNull(alias) != null;
+		return getCommand(alias) != null;
 	}
 
 	/**
 	 * @return the access level required by the command with this alias, or {@code -1} if there is no such command
 	 */
 	public int getCommandLevel(String alias) {
-		ChatCommand command = getCommandOrNull(alias);
+		ChatCommand command = getCommand(alias);
 		return command == null ? -1 : command.getLevel();
-	}
-
-	private ChatCommand getCommandOrNull(String alias) {
-		String name = alias.toLowerCase();
-		ChatCommand command = commandHandlers.get(name);
-		return command != null ? command : commandHandlers.get(AdminCommand.PREFIX + name);
 	}
 
 	public static ChatProcessor getInstance() {
