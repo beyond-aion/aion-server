@@ -853,7 +853,11 @@ public final class QuestService {
 
 	/**
 	 * Starts a timer which shows the player how much time is left. There is one such slot per player, so it fails while another quest occupies it,
-	 * and the player is told to finish that quest first.
+	 * and the player is told to finish that quest first. Starting it again for the same quest restarts it.
+	 * <p>
+	 * Unlike retail: there, starting it again only takes the timer off the display, while it keeps running and still ends the step later, so the
+	 * player loses sight of a timer that's still on. We restart it because that's what the quest asks for. Should a quest turn out to rely on the
+	 * retail behavior, keep the old timer running and only send its removal to the player.
 	 */
 	public static boolean questTimerStart(QuestEnv env, int timeInSeconds) {
 		Player player = env.getPlayer();
