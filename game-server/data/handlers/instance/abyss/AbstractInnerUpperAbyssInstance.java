@@ -129,7 +129,7 @@ public abstract class AbstractInnerUpperAbyssInstance extends GeneralInstanceHan
 			}, 300000, 30000);
 
 			PacketSendUtility.broadcastToMap(instance, STR_MSG_INSTANCE_START_IDABRE());
-			PacketSendUtility.broadcastToMap(instance, new SM_QUEST_ACTION(0, 600));
+			PacketSendUtility.broadcastToMap(instance, SM_QUEST_ACTION.instanceTimer(instance.getInstanceId(), 600));
 			detector.getController().delete();
 		}
 	}

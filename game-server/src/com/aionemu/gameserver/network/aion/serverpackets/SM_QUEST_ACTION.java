@@ -16,6 +16,8 @@ public class SM_QUEST_ACTION extends AionServerPacket {
 
 	private static final int NPC_FACTION_QUEST_OFFERED = 1;
 	private static final int NPC_FACTION_QUEST_REMOVED = 2;
+	private static final int INSTANCE_TIMER_ID_BIT = 1 << 31; // keeps instance timer ids apart from quest ids
+	public static final int INSTANCE_TIMER_STYLE = 5;
 
 	private final ActionType actionType;
 	private final int questId;
@@ -23,14 +25,20 @@ public class SM_QUEST_ACTION extends AionServerPacket {
 	private final int progress;
 	private final int value; // seconds for TIMER, sharer's object id for SHARE, offered or removed for NPC_FACTION_QUEST
 	private final boolean flag; // select in the journal for ADD, shared within an alliance for SHARE
+	private final int timerStyle;
 
 	private SM_QUEST_ACTION(ActionType actionType, int questId, int status, int progress, int value, boolean flag) {
+		this(actionType, questId, status, progress, value, flag, 0);
+	}
+
+	private SM_QUEST_ACTION(ActionType actionType, int questId, int status, int progress, int value, boolean flag, int timerStyle) {
 		this.actionType = actionType;
 		this.questId = questId;
 		this.status = status;
 		this.progress = progress;
 		this.value = value;
 		this.flag = flag;
+		this.timerStyle = timerStyle;
 	}
 
 	/**
@@ -56,7 +64,23 @@ public class SM_QUEST_ACTION extends AionServerPacket {
 	 * Shows the quest timer, or removes it if the time is 0.
 	 */
 	public SM_QUEST_ACTION(int questId, int timeInSeconds) {
-		this(ActionType.TIMER, questId, 0, 0, timeInSeconds, false);
+		this(ActionType.TIMER, questId, 0, 0, timeInSeconds, false, timeInSeconds > 0 ? 1 : 0);
+	}
+
+	/**
+	 * Shows the time limit of an instance, or removes it if the time is 0. The client shows one timer at a time and only accepts changes to the
+	 * one it shows, so removing it needs the same instance id.
+	 */
+	public static SM_QUEST_ACTION instanceTimer(int instanceId, int timeInSeconds) {
+		return instanceTimer(instanceId, timeInSeconds, INSTANCE_TIMER_STYLE);
+	}
+
+	/**
+	 * @param style
+	 *          how the client draws the timer, {@link #INSTANCE_TIMER_STYLE} for most instances
+	 */
+	public static SM_QUEST_ACTION instanceTimer(int instanceId, int timeInSeconds, int style) {
+		return new SM_QUEST_ACTION(ActionType.TIMER, INSTANCE_TIMER_ID_BIT | instanceId, 0, 0, timeInSeconds, false, style);
 	}
 
 	/**
@@ -104,7 +128,7 @@ public class SM_QUEST_ACTION extends AionServerPacket {
 				break;
 			case TIMER:
 				writeD(value);
-				writeC(value > 0 ? 1 : 0);
+				writeC(timerStyle);
 				break;
 			case SHARE:
 				writeD(value);

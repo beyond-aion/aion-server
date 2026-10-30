@@ -74,7 +74,7 @@ public class BeshmundirInstance extends GeneralInstanceHandler {
 				} else {
 					spawn(216245, 981.015015f, 134.373001f, 241.755005f, (byte) 30); // weakest macunbello
 				}
-				sendPacket(new SM_QUEST_ACTION(0, 0));
+				sendPacket(SM_QUEST_ACTION.instanceTimer(instance.getInstanceId(), 0, 3));
 				instance.setDoorState(467, true);
 				break;
 			case 799342:
