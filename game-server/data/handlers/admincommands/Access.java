@@ -9,6 +9,7 @@ import com.aionemu.gameserver.services.CommandsAccessService;
 import com.aionemu.gameserver.services.player.PlayerService;
 import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
+import com.aionemu.gameserver.utils.chathandlers.ChatProcessor;
 
 /**
  * @author ViAl, Neon
@@ -22,8 +23,8 @@ public class Access extends AdminCommand {
 			add <player name> <command name> - Grants the player access to the given chat command.
 			remove <player name> <command name> - Removes the player's access to the given chat command.
 			removeall <player name> - Removes all granted accesses.
-			level <number> - Temporarily sets your accesslevel to a given lower value (for test purposes).
-			level reset - Resets your accesslevel to the original value.
+			level <number> - Temporarily sets your access level to a given lower value (for test purposes).
+			level reset - Resets your access level to the original value.
 			""");
 	}
 
@@ -48,9 +49,13 @@ public class Access extends AdminCommand {
 					sendInfo(admin, "Player with name " + playerName + " doesn't exists!");
 					return;
 				}
-				if (cmd.equals("add"))
+				if (cmd.equals("add")) {
+					if (!ChatProcessor.getInstance().isCommandAllowed(admin, commandName)) {
+						sendInfo(admin, "You cannot grant access to a command that you do not have access to yourself.");
+						return;
+					}
 					CommandsAccessService.giveAccess(admin, pcd.getPlayerObjId(), commandName);
-				else
+				} else
 					CommandsAccessService.removeAccess(admin, pcd.getPlayerObjId(), commandName);
 				break;
 			}

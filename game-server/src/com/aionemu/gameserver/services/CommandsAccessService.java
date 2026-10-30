@@ -8,6 +8,7 @@ import java.util.Set;
 import com.aionemu.gameserver.dao.CommandsAccessDAO;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.utils.chathandlers.ChatProcessor;
 
 /**
@@ -33,6 +34,7 @@ public class CommandsAccessService {
 	}
 
 	private static void giveAccess(Player admin, int playerId, String command, boolean isTemporary) {
+		command = toAlias(command);
 		if (hasAccess(playerId, command)) {
 			PacketSendUtility.sendMessage(admin, "This player already has access on command " + command);
 			return;
@@ -41,10 +43,11 @@ public class CommandsAccessService {
 			PacketSendUtility.sendMessage(admin, "There is no such admin command as \"" + command + "\"");
 			return;
 		}
+		final String alias = command;
 		commandAccesses.compute(playerId, (key, commands) -> {
 			if (commands == null)
 				commands = new HashSet<>();
-			commands.add(command);
+			commands.add(alias);
 			return commands;
 		});
 		if (!isTemporary)
@@ -53,6 +56,7 @@ public class CommandsAccessService {
 	}
 
 	public static void removeAccess(Player admin, int playerId, String command) {
+		command = toAlias(command);
 		if (!hasAccess(playerId, command)) {
 			PacketSendUtility.sendMessage(admin, "This player has no access on command " + command);
 			return;
@@ -61,6 +65,15 @@ public class CommandsAccessService {
 		commands.remove(command);
 		CommandsAccessDAO.removeAccess(playerId, command);
 		PacketSendUtility.sendMessage(admin, "Command access was removed successfully");
+	}
+
+	/**
+	 * The access of a command is stored and checked without the {@code //} prefix of admin commands, so the alias has to be
+	 * normalized before it is compared with a grant.
+	 */
+	private static String toAlias(String command) {
+		String alias = command.startsWith(AdminCommand.PREFIX) ? command.substring(AdminCommand.PREFIX.length()) : command;
+		return alias.toLowerCase();
 	}
 
 	public static boolean removeAllAccesses(int playerId) {
