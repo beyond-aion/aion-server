@@ -22,7 +22,7 @@ public class SM_QUEST_ACTION extends AionServerPacket {
 	private final int status;
 	private final int progress;
 	private final int value; // seconds for TIMER, sharer's object id for SHARE, offered or removed for NPC_FACTION_QUEST
-	private final boolean flag; // shared within an alliance for SHARE
+	private final boolean flag; // select in the journal for ADD, shared within an alliance for SHARE
 
 	private SM_QUEST_ACTION(ActionType actionType, int questId, int status, int progress, int value, boolean flag) {
 		this.actionType = actionType;
@@ -40,7 +40,16 @@ public class SM_QUEST_ACTION extends AionServerPacket {
 	 *          {@link ActionType#ADD ADD}, {@link ActionType#UPDATE UPDATE} or {@link ActionType#ABANDON ABANDON}
 	 */
 	public SM_QUEST_ACTION(ActionType actionType, QuestState qs) {
-		this(actionType, qs.getQuestId(), qs.getStatus().value(), qs.getQuestVars().getQuestVars(), 0, false);
+		this(actionType, qs, false);
+	}
+
+	/**
+	 * @param selectInJournal
+	 *          for {@link ActionType#ADD ADD}: whether the client selects the new quest in its journal, as it does for missions the server hands
+	 *          out by itself
+	 */
+	public SM_QUEST_ACTION(ActionType actionType, QuestState qs, boolean selectInJournal) {
+		this(actionType, qs.getQuestId(), qs.getStatus().value(), qs.getQuestVars().getQuestVars(), 0, selectInJournal);
 	}
 
 	/**
@@ -83,7 +92,7 @@ public class SM_QUEST_ACTION extends AionServerPacket {
 				writeH(status);
 				writeD(progress); // all six quest vars
 				writeH(0); // quest branch, which we don't have
-				writeC(0); // 1 makes the client select the quest in its journal
+				writeC(flag ? 1 : 0); // select the quest in the journal
 				break;
 			case UPDATE:
 				writeH(status);

@@ -481,7 +481,8 @@ public final class QuestService {
 	}
 
 	/**
-	 * Adds the quest to the players quest list.
+	 * Adds the quest to the players quest list. A mission added this way is selected in the client's journal, since the server hands it out by
+	 * itself.
 	 */
 	public static void addOrUpdateQuest(Player player, int questId, QuestStatus status) {
 		ActionType actionType;
@@ -498,7 +499,7 @@ public final class QuestService {
 			if (status == QuestStatus.COMPLETE)
 				qs.setQuestVar(0);
 		}
-		PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(actionType, qs));
+		PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(actionType, qs, DataManager.QUEST_DATA.getQuestById(questId).isMission()));
 	}
 
 	/**
