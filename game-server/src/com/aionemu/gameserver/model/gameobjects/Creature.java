@@ -24,6 +24,7 @@ import com.aionemu.gameserver.model.stats.container.CreatureGameStats;
 import com.aionemu.gameserver.model.stats.container.CreatureLifeStats;
 import com.aionemu.gameserver.model.templates.item.ItemAttackType;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
+import com.aionemu.gameserver.model.templates.zone.ZoneClassName;
 import com.aionemu.gameserver.model.templates.zone.ZoneType;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.skillengine.model.Skill;
@@ -521,7 +522,29 @@ public abstract class Creature extends VisibleObject {
 	public boolean isInsideFlyZone() {
 		if (isInsideZoneType(ZoneType.NO_FLY))
 			return false;
-		return isInsideZoneType(ZoneType.FLY) || getWorldMapInstance().getTemplate().hasAttribute(ZoneAttributes.FLY);
+		return isInsideZoneType(ZoneType.FLY) || isWholeMapFlyable();
+	}
+
+	/**
+	 * Coordinate based counterpart of {@link #isInsideFlyZone()} that does not depend on the periodic zone update. Used for the
+	 * position of a move packet that was received before the zone update task ran.
+	 */
+	public boolean isInsideFlyZone(float x, float y, float z) {
+		MapRegion region = getPosition().getMapRegion();
+		if (region != null) {
+			if (region.isInsideZone(ZoneClassName.NO_FLY, x, y, z))
+				return false;
+			if (region.isInsideZone(ZoneClassName.FLY, x, y, z))
+				return true;
+		}
+		return isWholeMapFlyable();
+	}
+
+	/**
+	 * @return true if the world itself is a flight area, without needing a fly zone at the position
+	 */
+	private boolean isWholeMapFlyable() {
+		return getWorldMapInstance().getTemplate().hasAttribute(ZoneAttributes.FLY);
 	}
 
 	public boolean isInsidePvPZone() {
