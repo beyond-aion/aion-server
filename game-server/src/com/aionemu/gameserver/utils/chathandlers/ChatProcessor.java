@@ -133,14 +133,6 @@ public class ChatProcessor implements GameEngine {
 		return getCommand(alias) != null;
 	}
 
-	/**
-	 * @return the access level required by the command with this alias, or {@code -1} if there is no such command
-	 */
-	public int getCommandLevel(String alias) {
-		ChatCommand command = getCommand(alias);
-		return command == null ? -1 : command.getLevel();
-	}
-
 	public static ChatProcessor getInstance() {
 		return SingletonHolder.instance;
 	}

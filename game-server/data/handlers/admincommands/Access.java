@@ -23,8 +23,8 @@ public class Access extends AdminCommand {
 			add <player name> <command name> - Grants the player access to the given chat command.
 			remove <player name> <command name> - Removes the player's access to the given chat command.
 			removeall <player name> - Removes all granted accesses.
-			level <number> - Temporarily sets your accesslevel to a given lower value (for test purposes).
-			level reset - Resets your accesslevel to the original value.
+			level <number> - Temporarily sets your access level to a given lower value (for test purposes).
+			level reset - Resets your access level to the original value.
 			""");
 	}
 
@@ -50,9 +50,8 @@ public class Access extends AdminCommand {
 					return;
 				}
 				if (cmd.equals("add")) {
-					int requiredLevel = ChatProcessor.getInstance().getCommandLevel(commandName);
-					if (requiredLevel > 0 && !admin.hasAccess((byte) requiredLevel)) {
-						sendInfo(admin, "You cannot grant access to a command above your own access level.");
+					if (!ChatProcessor.getInstance().isCommandAllowed(admin, commandName)) {
+						sendInfo(admin, "You cannot grant access to a command that you do not have access to yourself.");
 						return;
 					}
 					CommandsAccessService.giveAccess(admin, pcd.getPlayerObjId(), commandName);
