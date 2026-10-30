@@ -69,7 +69,7 @@ public class DragonLordsRefugeInstance extends GeneralInstanceHandler {
 					break;
 				case 219362: // Tiamat Weakened Dragon
 					sendMsg(SM_SYSTEM_MESSAGE.IDTIAMAT_TIAMAT_COUNTDOWN_START(), 2000);
-					PacketSendUtility.broadcastToMap(instance, new SM_QUEST_ACTION(0, 1800));
+					PacketSendUtility.broadcastToMap(instance, SM_QUEST_ACTION.instanceTimer(instance.getInstanceId(), 1800));
 					failTask = ThreadPoolManager.getInstance().schedule(() -> {
 						Npc tiamat = getNpc(219362);
 						if (tiamat != null && !tiamat.isDead()) {
@@ -190,7 +190,7 @@ public class DragonLordsRefugeInstance extends GeneralInstanceHandler {
 				break;
 			case 219362:
 				failTask.cancel(true);
-				PacketSendUtility.broadcastToMap(instance, new SM_QUEST_ACTION(0, 0));
+				PacketSendUtility.broadcastToMap(instance, SM_QUEST_ACTION.instanceTimer(instance.getInstanceId(), 0));
 				// TODO: play movie
 				endInstance(Arrays.asList(219490, 219493, 219362, 730625, 730633, 730634, 730635, 730636));
 				spawn(701542, 480f, 514f, 417.405f, (byte) 0); // Treasure Chest

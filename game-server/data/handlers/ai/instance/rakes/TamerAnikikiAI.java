@@ -50,7 +50,7 @@ public class TamerAnikikiAI extends GeneralNpcAI {
 				spawn(700553, 657, 482, 936, (byte) 60);
 				spawn(700553, 626, 540, 936, (byte) 1);
 				spawn(700553, 645, 534, 936, (byte) 75);
-				PacketSendUtility.sendPacket((Player) creature, new SM_QUEST_ACTION(0, 180));
+				PacketSendUtility.sendPacket((Player) creature, SM_QUEST_ACTION.instanceTimer(getOwner().getInstanceId(), 180));
 				PacketSendUtility.broadcastToMap(getOwner(), 1400262);
 			}
 		}

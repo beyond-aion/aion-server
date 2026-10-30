@@ -107,7 +107,7 @@ public class TheHexwayInstance extends GeneralInstanceHandler {
 						playerStageMapping.put(player.getObjectId(), bossIndex);
 						// send quest timer to player
 						int remainingTimeSeconds = bossTimeLimitSeconds - elapsedTimeMillis / 1000;
-						PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(0, remainingTimeSeconds));
+						PacketSendUtility.sendPacket(player, SM_QUEST_ACTION.instanceTimer(instance.getInstanceId(), remainingTimeSeconds));
 					}
 				}
 			}
@@ -119,7 +119,7 @@ public class TheHexwayInstance extends GeneralInstanceHandler {
 	public void onLeaveInstance(Player player) {
 		super.onLeaveInstance(player);
 		playerStageMapping.remove(player.getObjectId());
-		PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(0, 0));
+		PacketSendUtility.sendPacket(player, SM_QUEST_ACTION.instanceTimer(instance.getInstanceId(), 0));
 	}
 
 	@Override
@@ -162,7 +162,7 @@ public class TheHexwayInstance extends GeneralInstanceHandler {
 								playerStageMapping.remove(playerObjId);
 								Player player = instance.getPlayer(playerObjId);
 								if (player != null)
-									PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(0, 0));
+									PacketSendUtility.sendPacket(player, SM_QUEST_ACTION.instanceTimer(instance.getInstanceId(), 0));
 							}
 						}
 						// spawn bonus loot chest if all 6 boss npc are killed in the given time limits

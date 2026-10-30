@@ -42,7 +42,7 @@ public class PlegetonAI extends NpcAI {
 								Npc npc = getPosition().getWorldMapInstance().getNpc(216586);
 								if (npc != null && !npc.isDead()) {
 									npc.getController().delete();
-									PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(0, 0));
+									PacketSendUtility.sendPacket(player, SM_QUEST_ACTION.instanceTimer(getOwner().getInstanceId(), 0, 3));
 									getPosition().getWorldMapInstance().setDoorState(467, true);
 								}
 							}
@@ -69,7 +69,7 @@ public class PlegetonAI extends NpcAI {
 	}
 
 	private void sendTimer() {
-		PacketSendUtility.broadcastToMap(getOwner(), new SM_QUEST_ACTION(0, 420));
+		PacketSendUtility.broadcastToMap(getOwner(), SM_QUEST_ACTION.instanceTimer(getOwner().getInstanceId(), 420, 3));
 	}
 
 	@Override

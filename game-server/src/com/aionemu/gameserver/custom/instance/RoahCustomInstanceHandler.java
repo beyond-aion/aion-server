@@ -99,7 +99,7 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 				adaptNPC(artifact, rank);
 
 			PacketSendUtility.broadcastToMap(instance, STR_MSG_INSTANCE_START_IDABRE());
-			PacketSendUtility.broadcastToMap(instance, new SM_QUEST_ACTION(0, TIME_LIMIT));
+			PacketSendUtility.broadcastToMap(instance, SM_QUEST_ACTION.instanceTimer(instance.getInstanceId(), TIME_LIMIT));
 			PacketSendUtility.broadcastToMap(instance, new SM_MESSAGE(0, null,
 				"You have 15 minutes to demolish the central Aether Stone. Beware for its protectors!", ChatType.BRIGHT_YELLOW_CENTER));
 
@@ -190,7 +190,7 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 				deleteAliveNpcs(TRASH_MOB_ID, BULKY_MOB_ID, DOMINATOR_MOB_ID);
 				PacketSendUtility.broadcastToMap(instance,
 					new SM_MESSAGE(0, null, "You feel a shadowy presence from the throne room.", ChatType.BRIGHT_YELLOW_CENTER));
-				PacketSendUtility.broadcastToMap(instance, new SM_QUEST_ACTION(0, 0));
+				PacketSendUtility.broadcastToMap(instance, SM_QUEST_ACTION.instanceTimer(instance.getInstanceId(), 0));
 				int bossID = BOSS_MOB_AT_ID;
 				if (pcd.getPlayerClass() != PlayerClass.RIDER) {
 					switch (pcd.getRace()) {
@@ -211,7 +211,7 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 			case BOSS_MOB_A_M_ID, BOSS_MOB_A_F_ID, BOSS_MOB_E_M_ID, BOSS_MOB_E_F_ID, BOSS_MOB_AT_ID -> {
 				calcBossDrop(npc.getObjectId());
 				setResult(true);
-				PacketSendUtility.broadcastToMap(instance, new SM_QUEST_ACTION(0, 0));
+				PacketSendUtility.broadcastToMap(instance, SM_QUEST_ACTION.instanceTimer(instance.getInstanceId(), 0));
 			}
 		}
 	}
@@ -381,7 +381,7 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 
 	@Override
 	public boolean onReviveEvent(Player player) {
-		PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(0, TIME_LIMIT * 1000 - getElapsedTimeMillis()));
+		PacketSendUtility.sendPacket(player, SM_QUEST_ACTION.instanceTimer(instance.getInstanceId(), TIME_LIMIT * 1000 - getElapsedTimeMillis()));
 		return super.onReviveEvent(player);
 	}
 

@@ -40,7 +40,7 @@ public class AsteriaInstance extends GeneralInstanceHandler {
 		if (flyingRing.equals("ASTERIA_WING_1")) {
 			if (startTime.compareAndSet(0, System.currentTimeMillis())) {
 				PacketSendUtility.sendPacket(player, STR_MSG_INSTANCE_START_IDABRE());
-				PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(0, 900));
+				PacketSendUtility.sendPacket(player, SM_QUEST_ACTION.instanceTimer(instance.getInstanceId(), 900));
 				ThreadPoolManager.getInstance().schedule(() -> deleteAliveNpcs(700475, 700476, 700477, 701483, 701488), 900000);
 			}
 		}
@@ -53,7 +53,7 @@ public class AsteriaInstance extends GeneralInstanceHandler {
 		if (start > 0) {
 			long time = System.currentTimeMillis() - start;
 			if (time < 900000) {
-				PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(0, 900 - (int) time / 1000));
+				PacketSendUtility.sendPacket(player, SM_QUEST_ACTION.instanceTimer(instance.getInstanceId(), 900 - (int) time / 1000));
 			}
 		}
 

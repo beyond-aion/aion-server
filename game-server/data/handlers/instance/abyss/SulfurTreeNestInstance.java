@@ -40,7 +40,7 @@ public class SulfurTreeNestInstance extends GeneralInstanceHandler {
 		if (flyingRing.equals("SULFUR_1")) {
 			if (startTime.compareAndSet(0, System.currentTimeMillis())) {
 				PacketSendUtility.sendPacket(player, STR_MSG_INSTANCE_START_IDABRE());
-				PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(0, 900));
+				PacketSendUtility.sendPacket(player, SM_QUEST_ACTION.instanceTimer(instance.getInstanceId(), 900));
 				ThreadPoolManager.getInstance().schedule(() -> deleteAliveNpcs(214804, 700463, 700462, 700464, 701485, 701480), 900000);
 			}
 		}
@@ -53,7 +53,7 @@ public class SulfurTreeNestInstance extends GeneralInstanceHandler {
 		if (start > 0) {
 			long time = System.currentTimeMillis() - start;
 			if (time < 900000) {
-				PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(0, 900 - (int) time / 1000));
+				PacketSendUtility.sendPacket(player, SM_QUEST_ACTION.instanceTimer(instance.getInstanceId(), 900 - (int) time / 1000));
 			}
 		}
 
