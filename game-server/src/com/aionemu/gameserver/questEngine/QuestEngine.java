@@ -513,14 +513,15 @@ public class QuestEngine implements GameEngine {
 		}
 	}
 
+	/**
+	 * Notifies the quest whose timer expired.
+	 */
 	public void onQuestTimerEnd(QuestEnv env) {
 		try {
-			for (int questId : questOnTimerEnd) {
-				AbstractQuestHandler questHandler = getQuestHandlerByQuestId(questId);
-				if (questHandler != null) {
-					env.setQuestId(questId);
+			if (questOnTimerEnd.contains(env.getQuestId())) {
+				AbstractQuestHandler questHandler = getQuestHandlerByQuestId(env.getQuestId());
+				if (questHandler != null)
 					questHandler.onQuestTimerEndEvent(env);
-				}
 			}
 		} catch (Exception ex) {
 			log.error("QE: exception in onQuestTimerEnd", ex);
