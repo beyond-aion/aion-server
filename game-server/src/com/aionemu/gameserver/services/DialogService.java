@@ -275,6 +275,8 @@ public class DialogService {
 			env.setExtendedRewardIndex(extendedRewardIndex);
 			if (QuestEngine.getInstance().onDialog(env))
 				return;
+			if (dialogActionId == QUEST_ACCEPT || dialogActionId == QUEST_ACCEPT_1 || dialogActionId == QUEST_ACCEPT_SIMPLE)
+				return; // the quest couldn't be started and the player was told why, so the dialog stays as it is (there's no page for these actions)
 			if (dialogActionId == QUEST_SELECT) {
 				QuestState qs = player.getQuestStateList().getQuestState(questId);
 				if (qs != null && qs.getStatus() == QuestStatus.START) {
