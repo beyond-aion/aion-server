@@ -1,5 +1,6 @@
 package consolecommands;
 
+import com.aionemu.gameserver.model.gameobjects.player.CustomPlayerState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.utils.chathandlers.ConsoleCommand;
 
@@ -23,8 +24,12 @@ public class Freefly extends ConsoleCommand {
 			sendInfo(player);
 			return;
 		}
-		boolean enabled = value.equals("1");
-		player.setAlwaysFreeFlying(enabled);
-		sendInfo(player, "alwaysfreefly " + (enabled ? "enabled" : "disabled"));
+		if (value.equals("1")) {
+			player.setCustomState(CustomPlayerState.FREE_FLY_MODE);
+			sendInfo(player, "Free fly has been enabled.");
+		} else {
+			player.unsetCustomState(CustomPlayerState.FREE_FLY_MODE);
+			sendInfo(player, "Free fly has been disabled.");
+		}
 	}
 }

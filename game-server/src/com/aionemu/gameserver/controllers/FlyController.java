@@ -2,10 +2,10 @@ package com.aionemu.gameserver.controllers;
 
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.actions.PlayerMode;
+import com.aionemu.gameserver.model.gameobjects.player.CustomPlayerState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.gameobjects.state.FlyState;
-import com.aionemu.gameserver.model.templates.zone.ZoneType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
@@ -56,7 +56,7 @@ public class FlyController {
 	 * flight areas of the world instead of waiting for a zone update.
 	 */
 	public void onGlideMove() {
-		if (player.isInFlyingState() && player.isInGlidingState() && !player.isAlwaysFreeFlying()
+		if (player.isInFlyingState() && player.isInGlidingState() && !player.isInCustomState(CustomPlayerState.FREE_FLY_MODE)
 			&& !player.isInsideFlyZone(player.getX(), player.getY(), player.getZ()))
 			gotoNormalGlide();
 	}
@@ -117,7 +117,7 @@ public class FlyController {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GLIDE_ONLY_DEVA_CAN());
 			return false;
 		}
-		if (!player.isAlwaysFreeFlying() && !player.isInsideFlyZone()) {
+		if (!player.isInCustomState(CustomPlayerState.FREE_FLY_MODE) && !player.isInsideFlyZone()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FLYING_FORBIDDEN_HERE());
 			return false;
 		}

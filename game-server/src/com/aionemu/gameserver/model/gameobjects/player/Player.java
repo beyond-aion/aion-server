@@ -126,7 +126,6 @@ public class Player extends Creature {
 	private boolean isResByPlayer = false;
 	private int resurrectionSkill = 0;
 	private boolean isFlyingBeforeDeath = false;
-	private boolean alwaysFreeFlying;
 	private Npc postman = null;
 	private StorageManager storageManager;
 	private boolean isInResurrectPosState = false;
@@ -1075,23 +1074,6 @@ public class Player extends Creature {
 
 	public boolean getIsFlyingBeforeDeath() {
 		return isFlyingBeforeDeath;
-	}
-
-	/**
-	 * Stores the free flight switch of the client's {@code g_freefly} cvar, which the client reports with its {@code freefly} builder
-	 * command whenever a GM toggles it in the GM panel. Only the client knows the cvar, and it defaults to off, so the server treats
-	 * players as not free flying until the client says otherwise. Without this, a flying player whose client refuses to land outside
-	 * of flight areas drops the character at the world's flight restriction zone coordinates instead.
-	 */
-	public void setAlwaysFreeFlying(boolean alwaysFreeFlying) {
-		this.alwaysFreeFlying = alwaysFreeFlying;
-	}
-
-	/**
-	 * @return whether this player may fly outside of flight areas, as reported by the client's {@code g_freefly} cvar
-	 */
-	public boolean isAlwaysFreeFlying() {
-		return alwaysFreeFlying;
 	}
 
 	public PlayerAlliance getPlayerAlliance() {

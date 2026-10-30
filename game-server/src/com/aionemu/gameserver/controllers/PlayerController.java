@@ -26,6 +26,7 @@ import com.aionemu.gameserver.model.actions.PlayerMode;
 import com.aionemu.gameserver.model.animations.ActionAnimation;
 import com.aionemu.gameserver.model.animations.ObjectDeleteAnimation;
 import com.aionemu.gameserver.model.gameobjects.*;
+import com.aionemu.gameserver.model.gameobjects.player.CustomPlayerState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureVisualState;
@@ -209,7 +210,7 @@ public class PlayerController extends CreatureController<Player> {
 	 */
 	public void onLeaveFlyArea() {
 		Player player = getOwner();
-		if (player.isAlwaysFreeFlying())
+		if (player.isInCustomState(CustomPlayerState.FREE_FLY_MODE))
 			return;
 		if (player.isInFlyingState()) {
 			if (player.isInGlidingState()) {
