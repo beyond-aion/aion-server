@@ -64,7 +64,7 @@ public class RemoveCd extends AdminCommand {
 	}
 
 	public static void removeSkillCooldowns(Player player) {
-		if (player.getSkillCoolDowns() == null)
+		if (player.getSkillCoolDowns() == null || player.getSkillCoolDowns().isEmpty())
 			return;
 		long nowMillis = System.currentTimeMillis();
 		List<Integer> cooldownIds = player.getSkillCoolDowns().entrySet().stream().filter(e -> e.getValue() > nowMillis).map(Entry::getKey).toList();
@@ -73,6 +73,8 @@ public class RemoveCd extends AdminCommand {
 	}
 
 	public static void removeItemCooldowns(Player player) {
+		if (player.getItemCoolDowns().isEmpty())
+			return;
 		Map<Integer, ItemCooldown> dummyCds = new HashMap<>(); // 4.8 client ignores reuseTime <= currentTime, but sending old cds + useDelay 0 works
 		for (Entry<Integer, ItemCooldown> en : player.getItemCoolDowns().entrySet()) {
 			dummyCds.put(en.getKey(), new ItemCooldown(en.getValue().getReuseTime(), 0));
