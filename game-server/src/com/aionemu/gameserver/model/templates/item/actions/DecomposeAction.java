@@ -64,7 +64,7 @@ public class DecomposeAction extends AbstractItemAction {
 				PacketSendUtility.sendPacket(player, new SM_SHOW_DECOMPOSABLE(parentItem.getObjectId(), set.getItems()));
 			return;
 		}
-		int castingDelay = parentItem.getItemTemplate().getCastingDelay();
+		int castingDelay = player.getItemUseDelay(parentItem.getItemTemplate().getCastingDelay());
 		if (castingDelay <= 0) {
 			finishUse(player, parentItem, targetItem, decomposableItem);
 			return;

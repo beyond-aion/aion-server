@@ -373,8 +373,9 @@ public class StigmaService {
 
 		final int parentItemId = stigma.getItemId();
 		final int parentObjectId = stigma.getObjectId();
+		int useDelay = player.getItemUseDelay(5000);
 		PacketSendUtility.broadcastPacket(player,
-			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentObjectId, chargeStone.getObjectId(), parentItemId, 5000, USE_START), true);
+			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentObjectId, chargeStone.getObjectId(), parentItemId, useDelay, USE_START), true);
 		ItemUseObserver observer = new ItemUseObserver(player) {
 
 			@Override
@@ -418,7 +419,7 @@ public class StigmaService {
 				}
 			}
 
-		}, 5000));
+		}, useDelay));
 	}
 
 	private static void addStigmaSkills(Player player, Stigma stigma, int stigmaLevel) {

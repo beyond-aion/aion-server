@@ -88,7 +88,7 @@ public class ServerPacketsOpcodes {
 		addPacketOpcode(70, SM_ACTION_ANIMATION.class); // [S_EFFECT]
 		addPacketOpcode(71, SM_QUEST_LIST.class); // [S_LOAD_WORKINGQUEST]
 		addPacketOpcode(72, SM_KEY.class); // [S_KEY]
-		addPacketOpcode(73, SM_SUMMON_PANEL_REMOVE.class); // [S_RESET_SKILL_COOLING_TIME]
+		addPacketOpcode(73, SM_RESET_SKILL_COOLDOWN.class); // [S_RESET_SKILL_COOLING_TIME]
 		addPacketOpcode(74, SM_EXCHANGE_REQUEST.class); // [S_XCHG_START]
 		addPacketOpcode(75, SM_EXCHANGE_ADD_ITEM.class); // [S_ADD_XCHG]
 		// addPacketOpcode(76, ); // [S_REMOVE_XCHG]

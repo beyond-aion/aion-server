@@ -47,8 +47,9 @@ public class PolishAction extends AbstractItemAction {
 
 	@Override
 	public void act(Player player, Item parentItem, Item targetItem, Object... params) {
+		int useDelay = player.getItemUseDelay(5000);
 		PacketSendUtility.broadcastPacket(player,
-			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 5000, USE_START), true);
+			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), useDelay, USE_START), true);
 		ItemUseObserver observer = new ItemUseObserver(player) {
 
 			@Override
@@ -96,7 +97,7 @@ public class PolishAction extends AbstractItemAction {
 				idianStone.onEquip(player, targetItem.getEquipmentSlot());
 			}
 			PacketSendUtility.sendPacket(player, new SM_INVENTORY_UPDATE_ITEM(player, targetItem));
-		}, 5000));
+		}, useDelay));
 
 	}
 

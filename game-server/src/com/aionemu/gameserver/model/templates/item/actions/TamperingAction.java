@@ -42,10 +42,11 @@ public class TamperingAction extends AbstractItemAction {
 
 	@Override
 	public void act(final Player player, final Item parentItem, final Item targetItem, Object... params) {
+		int useDelay = player.getItemUseDelay(5000);
 		final int parentItemId = parentItem.getItemId();
 		final int parntObjectId = parentItem.getObjectId();
 		PacketSendUtility.broadcastPacket(player,
-			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItemId, 5000, USE_START), true);
+			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItemId, useDelay, USE_START), true);
 		ItemUseObserver observer = new ItemUseObserver(player) {
 
 			@Override
@@ -123,7 +124,7 @@ public class TamperingAction extends AbstractItemAction {
 				}
 			}
 
-		}, 5000));
+		}, useDelay));
 	}
 
 	public static void setTemperingLevel(Item item, Player player, int temperingLevel) {
