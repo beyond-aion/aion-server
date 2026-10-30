@@ -13,7 +13,7 @@ public class Remove_skill_delay_all extends ConsoleCommand {
 
 	public Remove_skill_delay_all() {
 		super("remove_skill_delay_all", "Enables/disables your skill cooldowns.", """
-			1 - Enables your skill cooldowns.
+			1 - Enables your skill and item cooldowns.
 			0 - Removes and disables your skill cooldowns.
 			""");
 	}
@@ -27,6 +27,9 @@ public class Remove_skill_delay_all extends ConsoleCommand {
 		if (params[0].equals("1")) {
 			player.unsetCustomState(CustomPlayerState.NO_SKILL_COOLDOWN_MODE);
 			sendInfo(player, "Cooldown times of all skills have been recovered.");
+			// ideally, the itemcooltime command should handle it but the 'On' GM panel button only sends this command
+			player.unsetCustomState(CustomPlayerState.NO_ITEM_COOLDOWN_MODE);
+			sendInfo(player, "Cooldown times of all items have been recovered.");
 		} else if (params[0].equals("0")) {
 			RemoveCd.removeSkillCooldowns(player);
 			player.setCustomState(CustomPlayerState.NO_SKILL_COOLDOWN_MODE);
