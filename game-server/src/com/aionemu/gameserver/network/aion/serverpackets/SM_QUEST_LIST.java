@@ -21,8 +21,8 @@ public class SM_QUEST_LIST extends AionServerPacket {
 		for (QuestState qs : questStates) {
 			writeD(qs.getQuestId());
 			writeC(qs.getStatus().value());
-			writeD(qs.getQuestVars().getQuestVars() | (qs.getFlags() << 24));
-			writeC(Math.min(qs.getCompleteCount(), 255));
+			writeD(qs.getQuestVars().getQuestVars()); // the whole progress, all six quest vars
+			writeC(0); // quest branch, which we don't have (the complete count goes with SM_QUEST_COMPLETED_LIST)
 		}
 	}
 }

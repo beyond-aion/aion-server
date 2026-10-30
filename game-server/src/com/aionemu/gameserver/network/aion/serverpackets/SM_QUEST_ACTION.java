@@ -16,7 +16,6 @@ public class SM_QUEST_ACTION extends AionServerPacket {
 	private int questId;
 	private int status;
 	private int step;
-	private int flags;
 	private int timer;
 	private int sharerId;
 	private boolean shareInAlliance;
@@ -34,7 +33,6 @@ public class SM_QUEST_ACTION extends AionServerPacket {
 		this.questId = qs.getQuestId();
 		this.status = qs.getStatus().value();
 		this.step = qs.getQuestVars().getQuestVars();
-		this.flags = qs.getFlags();
 	}
 
 	public SM_QUEST_ACTION(int questId) {
@@ -73,17 +71,15 @@ public class SM_QUEST_ACTION extends AionServerPacket {
 		writeD(questId);
 		switch (actionType) {
 			case ADD:
-				writeC(status);// quest status goes by ENUM value
-				writeC(0x0);
-				writeD(step | flags << 24);// current quest step
-				writeH(0);
+				writeH(status); // quest status goes by ENUM value
+				writeD(step); // the whole progress, all six quest vars
+				writeH(0); // quest branch, which we don't have
 				writeC(0); // seen sometimes 1 for campaign quests
 				break;
 			case UPDATE:
-				writeC(status);// quest status goes by ENUM value
-				writeC(0x0);
-				writeD(step | flags << 24);// current quest step
-				writeH(0); // seen sometimes 1 when status == COMPLETED
+				writeH(status); // quest status goes by ENUM value
+				writeD(step); // the whole progress, all six quest vars
+				writeH(0); // quest branch, which we don't have
 				break;
 			case ABANDON:
 				writeD(0);
