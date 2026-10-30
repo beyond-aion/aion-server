@@ -9,6 +9,7 @@ import com.aionemu.gameserver.services.CommandsAccessService;
 import com.aionemu.gameserver.services.player.PlayerService;
 import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
+import com.aionemu.gameserver.utils.chathandlers.ChatProcessor;
 
 /**
  * @author ViAl, Neon
@@ -48,9 +49,14 @@ public class Access extends AdminCommand {
 					sendInfo(admin, "Player with name " + playerName + " doesn't exists!");
 					return;
 				}
-				if (cmd.equals("add"))
+				if (cmd.equals("add")) {
+					int requiredLevel = ChatProcessor.getInstance().getCommandLevel(commandName);
+					if (requiredLevel > 0 && !admin.hasAccess((byte) requiredLevel)) {
+						sendInfo(admin, "You cannot grant access to a command above your own access level.");
+						return;
+					}
 					CommandsAccessService.giveAccess(admin, pcd.getPlayerObjId(), commandName);
-				else
+				} else
 					CommandsAccessService.removeAccess(admin, pcd.getPlayerObjId(), commandName);
 				break;
 			}

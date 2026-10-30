@@ -121,8 +121,21 @@ public class ChatProcessor implements GameEngine {
 	 *         is accepted as well; stored command accesses are kept under the bare alias.
 	 */
 	public boolean isCommandExists(String alias) {
+		return getCommandOrNull(alias) != null;
+	}
+
+	/**
+	 * @return the access level required by the command with this alias, or {@code -1} if there is no such command
+	 */
+	public int getCommandLevel(String alias) {
+		ChatCommand command = getCommandOrNull(alias);
+		return command == null ? -1 : command.getLevel();
+	}
+
+	private ChatCommand getCommandOrNull(String alias) {
 		String name = alias.toLowerCase();
-		return commandHandlers.containsKey(name) || commandHandlers.containsKey(AdminCommand.PREFIX + name);
+		ChatCommand command = commandHandlers.get(name);
+		return command != null ? command : commandHandlers.get(AdminCommand.PREFIX + name);
 	}
 
 	public static ChatProcessor getInstance() {
