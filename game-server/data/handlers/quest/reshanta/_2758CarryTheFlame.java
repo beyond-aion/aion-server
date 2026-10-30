@@ -22,6 +22,7 @@ public class _2758CarryTheFlame extends AbstractQuestHandler {
 	@Override
 	public void register() {
 		qe.registerQuestNpc(279000).addOnQuestStart(questId);
+		qe.registerQuestNpc(279000).addOnTalkEvent(questId);
 		qe.registerQuestNpc(790016).addOnTalkEvent(questId);
 	}
 

@@ -120,7 +120,7 @@ public class _2008Ascension extends AbstractQuestHandler {
 							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 0));
 							// Create instance
 							WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(WorldMapType.ATAXIAR_B.getId(), player);
-							TeleportService.teleportTo(player, newInstance, 457.65f, 426.8f, 230.4f);
+							TeleportService.teleportTo(player, newInstance, 458.68f, 426.5f, 230.3f, (byte) 75, TeleportAnimation.FADE_OUT_BEAM);
 							return true;
 						}
 						return false;

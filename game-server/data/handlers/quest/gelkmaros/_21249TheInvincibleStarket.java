@@ -21,6 +21,7 @@ public class _21249TheInvincibleStarket extends AbstractQuestHandler {
 	@Override
 	public void register() {
 		qe.registerQuestNpc(799416).addOnQuestStart(questId);
+		qe.registerQuestNpc(799416).addOnTalkEvent(questId);
 		qe.registerQuestNpc(799529).addOnTalkEvent(questId);
 		qe.registerQuestNpc(799417).addOnTalkEvent(questId);
 	}

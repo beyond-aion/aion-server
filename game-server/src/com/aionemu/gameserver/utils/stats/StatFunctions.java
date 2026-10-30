@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Set;
 
 import com.aionemu.commons.utils.Rnd;
-import com.aionemu.gameserver.configs.main.FallDamageConfig;
 import com.aionemu.gameserver.configs.main.RatesConfig;
 import com.aionemu.gameserver.controllers.attack.AttackResult;
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
@@ -594,15 +593,11 @@ public class StatFunctions {
 		return (int) limit(StatEnum.MAGICAL_RESIST, resistRate);
 	}
 
-	public static int calculateFallDamage(Player player, float distance) {
-		int fallDamage = 0;
-		if (distance >= FallDamageConfig.MAXIMUM_DISTANCE_DAMAGE) {
-			fallDamage = player.getLifeStats().getCurrentHp();
-		} else if (distance >= FallDamageConfig.MINIMUM_DISTANCE_DAMAGE) {
-			float dmgPerMeter = player.getLifeStats().getMaxHp() * FallDamageConfig.FALL_DAMAGE_PERCENTAGE / 100f;
-			fallDamage = (int) (distance * dmgPerMeter);
-		}
-		return fallDamage;
+	/**
+	 * @return Damage of a non-lethal fall: 1% of max HP plus 4 per meter.
+	 */
+	public static int calculateFallDamage(Player player, float height) {
+		return (int) (player.getLifeStats().getMaxHp() * height * 0.01f + height * 4);
 	}
 
 	/**
