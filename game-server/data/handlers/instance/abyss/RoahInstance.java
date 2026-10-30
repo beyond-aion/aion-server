@@ -11,7 +11,6 @@ import com.aionemu.gameserver.model.flyring.FlyRing;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.geometry.Point3D;
 import com.aionemu.gameserver.model.templates.flyring.FlyRingTemplate;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
@@ -40,7 +39,7 @@ public class RoahInstance extends GeneralInstanceHandler {
 		if (flyingRing.equals("ROAH_WING_1")) {
 			if (startTime.compareAndSet(0, System.currentTimeMillis())) {
 				PacketSendUtility.sendPacket(player, STR_MSG_INSTANCE_START_IDABRE());
-				PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(0, 900));
+				instance.startTimeLimit(900);
 				ThreadPoolManager.getInstance().schedule(() -> deleteAliveNpcs(700472, 700473, 700474, 701489, 701484), 900000);
 			}
 		}
@@ -49,14 +48,6 @@ public class RoahInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void onEnterInstance(Player player) {
-		long start = startTime.get();
-		if (start > 0) {
-			long time = System.currentTimeMillis() - start;
-			if (time < 900000) {
-				PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(0, 900 - (int) time / 1000));
-			}
-		}
-
 		if (instanceRace == null) {
 			instanceRace = player.getRace();
 			spawnGoldChest();

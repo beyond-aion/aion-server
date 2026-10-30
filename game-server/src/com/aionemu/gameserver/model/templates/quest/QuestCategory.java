@@ -22,4 +22,14 @@ public enum QuestCategory {
 	PUBLIC,
 	LEGION,
 	PRIMARY;
+
+	/**
+	 * @return True if quests of this category count towards the basic quest limit (mission, task, faction, event, non_count and public don't).
+	 */
+	public boolean countsTowardsQuestLimit() {
+		return switch (this) {
+			case QUEST, SEEN_MARKER, IMPORTANT, SIGNIFICANT, CHALLENGE_TASK, LEGION -> true;
+			default -> false;
+		};
+	}
 }

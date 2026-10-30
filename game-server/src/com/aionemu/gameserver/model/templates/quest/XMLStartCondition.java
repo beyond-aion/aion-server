@@ -104,19 +104,14 @@ public class XMLStartCondition {
 		return true;
 	}
 
-	private boolean checkEquippedItems(Player player, boolean warn) {
-		if (!warn)
-			return true;
-		if (equipped != null && equipped.size() > 0) {
+	private int getMissingEquippedItem(Player player) {
+		if (equipped != null) {
 			for (int itemId : equipped) {
-				if (!player.getEquipment().getEquippedItemIds().contains(itemId)) {
-					String requiredItem = DataManager.ITEM_DATA.getItemTemplate(itemId).getL10n();
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_EQUIP_ITEM(requiredItem));
-					return false;
-				}
+				if (!player.getEquipment().getEquippedItemIds().contains(itemId))
+					return itemId;
 			}
 		}
-		return true;
+		return 0;
 	}
 
 	private boolean isRequiredTitleDisplayed(Player player) {
@@ -126,13 +121,57 @@ public class XMLStartCondition {
 	}
 
 	/** Check all conditions */
-	public boolean check(Player player, boolean warn) {
+	public boolean check(Player player) {
 		QuestStateList qsl = player.getQuestStateList();
 		return checkFinishedQuests(qsl) && checkUnfinishedQuests(qsl) && checkAcquiredQuests(qsl) && checkNoAcquiredQuests(qsl)
-			&& checkEquippedItems(player, warn) && isRequiredTitleDisplayed(player);
+			&& getMissingEquippedItem(player) == 0 && isRequiredTitleDisplayed(player);
+	}
+
+	/** Tells the player why {@link #check} failed. The conditions linking quests to each other are answered with a generic message. */
+	public void sendFailureMessage(Player player) {
+		int missingItemId = getMissingEquippedItem(player);
+		if (missingItemId != 0)
+			PacketSendUtility.sendPacket(player,
+				SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_EQUIP_ITEM(DataManager.ITEM_DATA.getItemTemplate(missingItemId).getL10n()));
+		else if (!isRequiredTitleDisplayed(player))
+			PacketSendUtility.sendPacket(player,
+				SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_TITLE(DataManager.TITLE_DATA.getTitleTemplate(requiredTitle).getL10n()));
+		else
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_DEFAULT());
 	}
 
 	public List<FinishedQuestCond> getFinishedPreconditions() {
 		return finished;
+	}
+
+	/** Names the sub condition which made {@link #check} fail, for diagnostics. */
+	public String getFailureDescription(Player player) {
+		QuestStateList qsl = player.getQuestStateList();
+		if (!checkFinishedQuests(qsl)) {
+			StringBuilder sb = new StringBuilder("finished");
+			for (FinishedQuestCond fqc : finished) {
+				QuestState qs = qsl.getQuestState(fqc.getQuestId());
+				sb.append(" q").append(fqc.getQuestId()).append('=')
+					.append(qs == null ? "never acquired" : qs.getStatus() + ", completeCount " + qs.getCompleteCount() + ", rewardGroup " + qs.getRewardGroup());
+				if (fqc.getReward() >= 0)
+					sb.append(" (required rewardGroup ").append(fqc.getReward()).append(')');
+				QuestTemplate template = DataManager.QUEST_DATA.getQuestById(fqc.getQuestId());
+				if (template != null && template.isRepeatable() && template.getMaxRepeatCount() != 255)
+					sb.append(" (must be completed ").append(template.getMaxRepeatCount()).append(" times)");
+			}
+			return sb.toString();
+		}
+		if (!checkUnfinishedQuests(qsl))
+			return "unfinished " + unfinished;
+		if (!checkAcquiredQuests(qsl))
+			return "acquired " + acquired;
+		if (!checkNoAcquiredQuests(qsl))
+			return "noacquired " + noacquired;
+		int missingEquippedItem = getMissingEquippedItem(player);
+		if (missingEquippedItem != 0)
+			return "equipped " + equipped + " (missing " + missingEquippedItem + ")";
+		if (!isRequiredTitleDisplayed(player))
+			return "required_title " + requiredTitle + " (player has " + player.getCommonData().getTitleId() + ")";
+		return "none";
 	}
 }

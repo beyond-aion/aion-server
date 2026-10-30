@@ -20,7 +20,9 @@ import com.aionemu.gameserver.model.geometry.RectangleArea;
 import com.aionemu.gameserver.model.team.GeneralTeam;
 import com.aionemu.gameserver.model.templates.quest.QuestNpc;
 import com.aionemu.gameserver.model.templates.world.WorldMapTemplate;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
 import com.aionemu.gameserver.questEngine.QuestEngine;
+import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.collections.CollectionUtil;
 import com.aionemu.gameserver.world.exceptions.DuplicateAionObjectException;
@@ -50,6 +52,8 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 	private long lastPlayerLeaveTime;
 	private GeneralTeam<?, ?> registeredTeam;
 	private Future<?> emptyInstanceTask, updateNearbyQuestsTask;
+	private volatile long timeLimitEndMillis; // 0 while no time limit was started
+	private volatile int timeLimitStyle;
 
 	public WorldMapInstance(WorldMap parent, int instanceId, int maxPlayers, Function<WorldMapInstance, InstanceHandler> instanceHandlerSupplier) {
 		this.parent = parent;
@@ -275,6 +279,58 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 
 	public long getLastPlayerLeaveTime() {
 		return lastPlayerLeaveTime;
+	}
+
+	/**
+	 * Shows a time limit to everyone inside. Players who enter later see the time that is left, players who leave lose the timer.
+	 */
+	public void startTimeLimit(int seconds) {
+		startTimeLimit(seconds, SM_QUEST_ACTION.INSTANCE_TIMER_STYLE);
+	}
+
+	/**
+	 * @param style
+	 *          how the client draws the timer, see {@link SM_QUEST_ACTION#instanceTimer(int, int, int)}
+	 */
+	public void startTimeLimit(int seconds, int style) {
+		timeLimitStyle = style;
+		timeLimitEndMillis = System.currentTimeMillis() + seconds * 1000L;
+		forEachPlayer(player -> PacketSendUtility.sendPacket(player, SM_QUEST_ACTION.instanceTimer(instanceId, seconds, style)));
+	}
+
+	/**
+	 * Removes the time limit for everyone inside, e.g. when they made it in time.
+	 */
+	public void stopTimeLimit() {
+		if (getTimeLimitRemainingSeconds() == 0)
+			return;
+		timeLimitEndMillis = 0;
+		forEachPlayer(player -> PacketSendUtility.sendPacket(player, SM_QUEST_ACTION.instanceTimer(instanceId, 0, timeLimitStyle)));
+	}
+
+	/**
+	 * @return The seconds left until the time limit ends, 0 if there is none.
+	 */
+	public int getTimeLimitRemainingSeconds() {
+		long end = timeLimitEndMillis;
+		return end == 0 ? 0 : (int) Math.max(0, (end - System.currentTimeMillis()) / 1000);
+	}
+
+	/**
+	 * Shows the time that is left to a player who entered.
+	 */
+	public void showTimeLimit(Player player) {
+		int remainingSeconds = getTimeLimitRemainingSeconds();
+		if (remainingSeconds > 0)
+			PacketSendUtility.sendPacket(player, SM_QUEST_ACTION.instanceTimer(instanceId, remainingSeconds, timeLimitStyle));
+	}
+
+	/**
+	 * Takes the timer away from a player who leaves.
+	 */
+	public void hideTimeLimit(Player player) {
+		if (getTimeLimitRemainingSeconds() > 0)
+			PacketSendUtility.sendPacket(player, SM_QUEST_ACTION.instanceTimer(instanceId, 0, timeLimitStyle));
 	}
 
 	public void setDoorState(int staticId, boolean open) {

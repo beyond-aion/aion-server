@@ -8,60 +8,100 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 
 /**
+ * Changes one quest on the client. The first byte says what happens to it, the quest id always follows.
+ *
  * @author VladimirZ
  */
 public class SM_QUEST_ACTION extends AionServerPacket {
 
-	private ActionType actionType;
-	private int questId;
-	private int status;
-	private int step;
-	private int flags;
-	private int timer;
-	private int sharerId;
-	private boolean shareInAlliance;
+	private static final int NPC_FACTION_QUEST_OFFERED = 1;
+	private static final int NPC_FACTION_QUEST_REMOVED = 2;
+	private static final int INSTANCE_TIMER_ID_BIT = 1 << 31; // keeps instance timer ids apart from quest ids
+	public static final int INSTANCE_TIMER_STYLE = 5;
+
+	private final ActionType actionType;
+	private final int questId;
+	private final int status;
+	private final int progress;
+	private final int value; // seconds for TIMER, sharer's object id for SHARE, offered or removed for NPC_FACTION_QUEST
+	private final boolean flag; // select in the journal for ADD, shared within an alliance for SHARE
+	private final int timerStyle;
+
+	private SM_QUEST_ACTION(ActionType actionType, int questId, int status, int progress, int value, boolean flag) {
+		this(actionType, questId, status, progress, value, flag, 0);
+	}
+
+	private SM_QUEST_ACTION(ActionType actionType, int questId, int status, int progress, int value, boolean flag, int timerStyle) {
+		this.actionType = actionType;
+		this.questId = questId;
+		this.status = status;
+		this.progress = progress;
+		this.value = value;
+		this.flag = flag;
+		this.timerStyle = timerStyle;
+	}
 
 	/**
-	 * Use this constructor to notify the client about a new/abandoned quest or quest state updates.
-	 * 
+	 * Notifies the client about a new or abandoned quest, or a change of its state.
+	 *
 	 * @param actionType
-	 *          - {@link ActionType#ADD ADD}, {@link ActionType#UPDATE UPDATE} or {@link ActionType#ABANDON ABANDON}
-	 * @param qs
-	 *          - concerned quest
+	 *          {@link ActionType#ADD ADD}, {@link ActionType#UPDATE UPDATE} or {@link ActionType#ABANDON ABANDON}
 	 */
 	public SM_QUEST_ACTION(ActionType actionType, QuestState qs) {
-		this.actionType = actionType;
-		this.questId = qs.getQuestId();
-		this.status = qs.getStatus().value();
-		this.step = qs.getQuestVars().getQuestVars();
-		this.flags = qs.getFlags();
-	}
-
-	public SM_QUEST_ACTION(int questId) {
-		this.actionType = ActionType.UNK;
-		this.questId = questId;
+		this(actionType, qs, false);
 	}
 
 	/**
-	 * Display Timer
-	 * 
-	 * @param questId
-	 * @param timer
+	 * @param selectInJournal
+	 *          for {@link ActionType#ADD ADD}: whether the client selects the new quest in its journal, as it does for missions the server hands
+	 *          out by itself
 	 */
-	public SM_QUEST_ACTION(int questId, int timer) {
-		this.actionType = ActionType.TIMER;
-		this.questId = questId;
-		this.timer = timer;
+	public SM_QUEST_ACTION(ActionType actionType, QuestState qs, boolean selectInJournal) {
+		this(actionType, qs.getQuestId(), qs.getStatus().value(), qs.getQuestVars().getQuestVars(), 0, selectInJournal);
+	}
+
+	/**
+	 * Shows the quest timer, or removes it if the time is 0.
+	 */
+	public SM_QUEST_ACTION(int questId, int timeInSeconds) {
+		this(ActionType.TIMER, questId, 0, 0, timeInSeconds, false, timeInSeconds > 0 ? 1 : 0);
+	}
+
+	/**
+	 * Shows the time limit of an instance, or removes it if the time is 0. The client shows one timer at a time and only accepts changes to the
+	 * one it shows, so removing it needs the same instance id.
+	 */
+	public static SM_QUEST_ACTION instanceTimer(int instanceId, int timeInSeconds) {
+		return instanceTimer(instanceId, timeInSeconds, INSTANCE_TIMER_STYLE);
+	}
+
+	/**
+	 * @param style
+	 *          how the client draws the timer, {@link #INSTANCE_TIMER_STYLE} for most instances
+	 */
+	public static SM_QUEST_ACTION instanceTimer(int instanceId, int timeInSeconds, int style) {
+		return new SM_QUEST_ACTION(ActionType.TIMER, INSTANCE_TIMER_ID_BIT | instanceId, 0, 0, timeInSeconds, false, style);
 	}
 
 	/**
 	 * Shows a question window that asks to share the quest with the packet receiver.
 	 */
 	public SM_QUEST_ACTION(int questId, int sharerId, boolean shareInAlliance) {
-		this.actionType = ActionType.SHARE;
-		this.questId = questId;
-		this.sharerId = sharerId;
-		this.shareInAlliance = shareInAlliance;
+		this(ActionType.SHARE, questId, 0, 0, sharerId, shareInAlliance);
+	}
+
+	/**
+	 * Adds the quest to the npc faction quests the client lists.
+	 */
+	public static SM_QUEST_ACTION npcFactionQuestOffered(int questId) {
+		return new SM_QUEST_ACTION(ActionType.NPC_FACTION_QUEST, questId, 0, 0, NPC_FACTION_QUEST_OFFERED, false);
+	}
+
+	/**
+	 * Removes the quest from the npc faction quests the client lists, when the player leaves the faction.
+	 */
+	public static SM_QUEST_ACTION npcFactionQuestRemoved(int questId) {
+		return new SM_QUEST_ACTION(ActionType.NPC_FACTION_QUEST, questId, 0, 0, NPC_FACTION_QUEST_REMOVED, false);
 	}
 
 	@Override
@@ -73,32 +113,29 @@ public class SM_QUEST_ACTION extends AionServerPacket {
 		writeD(questId);
 		switch (actionType) {
 			case ADD:
-				writeC(status);// quest status goes by ENUM value
-				writeC(0x0);
-				writeD(step | flags << 24);// current quest step
-				writeH(0);
-				writeC(0); // seen sometimes 1 for campaign quests
+				writeH(status);
+				writeD(progress); // all six quest vars
+				writeH(0); // quest branch, which we don't have
+				writeC(flag ? 1 : 0); // select the quest in the journal
 				break;
 			case UPDATE:
-				writeC(status);// quest status goes by ENUM value
-				writeC(0x0);
-				writeD(step | flags << 24);// current quest step
-				writeH(0); // seen sometimes 1 when status == COMPLETED
+				writeH(status);
+				writeD(progress); // all six quest vars
+				writeH(0); // quest branch, which we don't have
 				break;
 			case ABANDON:
-				writeD(0);
+				writeD(0); // reason, 0 for giving up
 				break;
 			case TIMER:
-				writeD(timer);// sets client timer ie 84030000 is 900 seconds/15 mins
-				writeC(timer > 0 ? 1 : 0);
+				writeD(value);
+				writeC(timerStyle);
 				break;
 			case SHARE:
-				writeD(sharerId);
-				writeD(shareInAlliance ? 1 : 0); // 0: group, 1: alliance
+				writeD(value);
+				writeD(flag ? 1 : 0); // 0: group, 1: alliance
 				break;
-			case UNK:
-				writeH(0x01);// ???
-				writeH(0x0);
+			case NPC_FACTION_QUEST:
+				writeD(value);
 				break;
 		}
 	}
@@ -109,7 +146,7 @@ public class SM_QUEST_ACTION extends AionServerPacket {
 		ABANDON(3),
 		TIMER(4),
 		SHARE(5),
-		UNK(6);
+		NPC_FACTION_QUEST(6);
 
 		private final int id;
 
