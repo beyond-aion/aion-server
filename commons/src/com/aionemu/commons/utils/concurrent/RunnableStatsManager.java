@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.NumberFormat;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,55 +17,29 @@ import org.slf4j.LoggerFactory;
 public final class RunnableStatsManager {
 
 	private static final Logger log = LoggerFactory.getLogger(RunnableStatsManager.class);
-	private static final Map<Class<?>, ClassStat> classStats = new HashMap<>();
+	/**
+	 * Stats are recorded by any thread (packet execution, the network threads, thread pools), so both levels are concurrent maps.
+	 */
+	private static final Map<Class<?>, ClassStat> classStats = new ConcurrentHashMap<>();
 
 	private static final class ClassStat {
 
 		private final String className;
 		private final MethodStat runnableStat;
-
-		private String[] methodNames = new String[0];
-		private MethodStat[] methodStats = new MethodStat[0];
+		private final Map<String, MethodStat> methodStats = new ConcurrentHashMap<>();
 
 		private ClassStat(Class<?> clazz) {
 			className = clazz.getName().replace("com.aionemu.gameserver.", "");
 			runnableStat = new MethodStat(className, "run()");
-
-			methodNames = new String[] { "run()" };
-			methodStats = new MethodStat[] { runnableStat };
-
-			classStats.put(clazz, this);
+			methodStats.put("run()", runnableStat);
 		}
 
 		private MethodStat getRunnableStat() {
 			return runnableStat;
 		}
 
-		private MethodStat getMethodStat(String methodName, boolean synchronizedAlready) {
-			// method names will be interned automatically because of compiling, so this gonna work
-			if ("run()".equals(methodName))
-				return runnableStat;
-
-			for (int i = 0; i < methodNames.length; i++)
-				if (methodNames[i].equals(methodName))
-					return methodStats[i];
-
-			if (!synchronizedAlready) {
-				synchronized (this) {
-					return getMethodStat(methodName, true);
-				}
-			}
-
-			methodName = methodName.intern();
-
-			final MethodStat methodStat = new MethodStat(className, methodName);
-
-			methodNames = Arrays.copyOf(methodNames, methodNames.length + 1);
-			methodNames[methodNames.length - 1] = methodName;
-			methodStats = Arrays.copyOf(methodStats, methodStats.length + 1);
-			methodStats[methodNames.length - 1] = methodStat;
-
-			return methodStat;
+		private MethodStat getMethodStat(String methodName) {
+			return methodStats.computeIfAbsent(methodName, name -> new MethodStat(className, name));
 		}
 	}
 
@@ -91,27 +66,16 @@ public final class RunnableStatsManager {
 		}
 	}
 
-	private static ClassStat getClassStat(Class<?> clazz, boolean synchronizedAlready) {
-		ClassStat classStat = classStats.get(clazz);
-
-		if (classStat != null)
-			return classStat;
-
-		if (!synchronizedAlready) {
-			synchronized (RunnableStatsManager.class) {
-				return getClassStat(clazz, true);
-			}
-		}
-
-		return new ClassStat(clazz);
+	private static ClassStat getClassStat(Class<?> clazz) {
+		return classStats.computeIfAbsent(clazz, ClassStat::new);
 	}
 
 	public static void handleStats(Class<? extends Runnable> clazz, long runTime) {
-		getClassStat(clazz, false).getRunnableStat().handleStats(runTime);
+		getClassStat(clazz).getRunnableStat().handleStats(runTime);
 	}
 
 	public static void handleStats(Class<?> clazz, String methodName, long runTime) {
-		getClassStat(clazz, false).getMethodStat(methodName, false).handleStats(runTime);
+		getClassStat(clazz).getMethodStat(methodName).handleStats(runTime);
 	}
 
 	public static enum SortBy {
@@ -205,12 +169,10 @@ public final class RunnableStatsManager {
 	public static void dumpClassStats(final SortBy sortBy) {
 		final List<MethodStat> methodStats = new ArrayList<>();
 
-		synchronized (RunnableStatsManager.class) {
-			for (ClassStat classStat : classStats.values())
-				for (MethodStat methodStat : classStat.methodStats)
-					if (methodStat.count > 0)
-						methodStats.add(methodStat);
-		}
+		for (ClassStat classStat : classStats.values())
+			for (MethodStat methodStat : classStat.methodStats.values())
+				if (methodStat.count > 0)
+					methodStats.add(methodStat);
 
 		if (sortBy != null)
 			Collections.sort(methodStats, sortBy.comparator);

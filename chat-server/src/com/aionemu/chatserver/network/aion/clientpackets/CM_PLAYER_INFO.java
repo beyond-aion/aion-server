@@ -1,9 +1,9 @@
 package com.aionemu.chatserver.network.aion.clientpackets;
 
-import java.nio.ByteBuffer;
-
 import com.aionemu.chatserver.network.aion.AbstractClientPacket;
 import com.aionemu.chatserver.network.aion.AionConnection;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * @author Neon
@@ -18,16 +18,14 @@ public class CM_PLAYER_INFO extends AbstractClientPacket {
 	/**
 	 * Client sends this after authentication and after each teleport.
 	 */
-	public CM_PLAYER_INFO(ByteBuffer buf, AionConnection connection, int opCode) {
+	public CM_PLAYER_INFO(ByteBuf buf, AionConnection connection, int opCode) {
 		super(buf, connection, opCode);
 	}
 
 	@Override
 	protected void readImpl() {
+		classId = readD();
 		readC(); // 0
-		readH(); // 0
-		classId = readUC();
-		readD(); // 0
 		level = readD();
 		unk = readB(135);
 	}

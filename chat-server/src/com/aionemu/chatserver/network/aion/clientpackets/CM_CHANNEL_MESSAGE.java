@@ -1,6 +1,5 @@
 package com.aionemu.chatserver.network.aion.clientpackets;
 
-import java.nio.ByteBuffer;
 import java.util.Arrays;
 
 import org.slf4j.LoggerFactory;
@@ -16,6 +15,8 @@ import com.aionemu.chatserver.network.aion.AionConnection;
 import com.aionemu.chatserver.network.aion.serverpackets.SM_CHANNEL_MESSAGE;
 import com.aionemu.chatserver.service.BroadcastService;
 
+import io.netty.buffer.ByteBuf;
+
 /**
  * @author ATracer
  */
@@ -24,20 +25,15 @@ public class CM_CHANNEL_MESSAGE extends AbstractClientPacket {
 	private int channelId;
 	private byte[] content;
 
-	public CM_CHANNEL_MESSAGE(ByteBuffer buf, AionConnection connection, int opCode) {
+	public CM_CHANNEL_MESSAGE(ByteBuf buf, AionConnection connection, int opCode) {
 		super(buf, connection, opCode);
 	}
 
 	@Override
 	protected void readImpl() {
-		readH();
-		readC();
-		readD();
-		readD();
-		readD();
-		readD();
+		readB(16); // user ID
 		channelId = readD();
-		readC();
+		readC(); // message type
 		int contentLength = readUH() * 2;
 		content = readB(contentLength);
 	}

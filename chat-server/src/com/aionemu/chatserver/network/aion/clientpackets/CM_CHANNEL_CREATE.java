@@ -1,9 +1,9 @@
 package com.aionemu.chatserver.network.aion.clientpackets;
 
-import java.nio.ByteBuffer;
-
 import com.aionemu.chatserver.network.aion.AbstractClientPacket;
 import com.aionemu.chatserver.network.aion.AionConnection;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * Request to create a private channel
@@ -17,19 +17,20 @@ public class CM_CHANNEL_CREATE extends AbstractClientPacket {
 	@SuppressWarnings("unused")
 	private byte[] channelIdentifier, password;
 
-	public CM_CHANNEL_CREATE(ByteBuffer buf, AionConnection connection, int opCode) {
+	public CM_CHANNEL_CREATE(ByteBuf buf, AionConnection connection, int opCode) {
 		super(buf, connection, opCode);
 	}
 
 	@Override
 	protected void readImpl() {
-		readC(); // 0x40 = @
-		readH(); // 0
 		channelRequestId = readD();
-		readB(16); // 0
+		readB(16); // user ID, 0
 		int identifierLength = readUH() * 2;
 		channelIdentifier = readB(identifierLength); // encoded in UTF_16LE
-		readB(7); // 0
+		readC();
+		readC();
+		readC();
+		readD(); // server ID of the channel, 0
 		int passwordLength = readUH() * 2;
 		password = readB(passwordLength); // encoded in UTF_16LE
 		readH(); // -1

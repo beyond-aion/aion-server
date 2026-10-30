@@ -1,11 +1,12 @@
 package com.aionemu.gameserver.network.aion.iteminfo;
 
-import java.nio.ByteBuffer;
 import java.util.List;
 
 import com.aionemu.gameserver.model.templates.item.Stigma;
 import com.aionemu.gameserver.network.aion.iteminfo.ItemInfoBlob.ItemBlobType;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * This blob contains stigma info.
@@ -19,7 +20,7 @@ public class StigmaInfoBlobEntry extends ItemBlobEntry {
 	}
 
 	@Override
-	public void writeThisBlob(ByteBuffer buf) {
+	public void writeThisBlob(ByteBuf buf) {
 		Stigma stigma = ownerItem.getItemTemplate().getStigma();
 		List<SkillTemplate> firstGroupSkills = stigma.getGainSkillsByGroup(1);
 		List<SkillTemplate> secondGroupSkills = stigma.getGainSkillsByGroup(2);

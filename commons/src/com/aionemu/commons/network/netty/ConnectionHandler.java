@@ -1,7 +1,6 @@
 package com.aionemu.commons.network.netty;
 
 import java.io.IOException;
-import java.nio.ByteOrder;
 import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
@@ -30,7 +29,7 @@ class ConnectionHandler extends SimpleChannelInboundHandler<ByteBuf> {
 
 	@Override
 	public void channelActive(ChannelHandlerContext ctx) throws Exception {
-		connection.onConnect();
+		connection.onChannelActive();
 		long authTimeoutMillis = connection.getAuthTimeoutMillis();
 		if (authTimeoutMillis > 0) {
 			ctx.executor().schedule(() -> {
@@ -50,11 +49,12 @@ class ConnectionHandler extends SimpleChannelInboundHandler<ByteBuf> {
 			ctx.close();
 			return;
 		}
-		BaseClientPacket<?> packet = connection.createPacket(frame.nioBuffer().order(ByteOrder.LITTLE_ENDIAN));
+		BaseClientPacket<?> packet = connection.createPacket(frame);
 		if (packet == null)
 			return;
 		if (!packet.read()) {
-			ctx.close();
+			if (connection.isReadFailureFatal())
+				ctx.close();
 			return;
 		}
 		if (!connection.execute(packet)) {

@@ -1,25 +1,23 @@
 package com.aionemu.gameserver.network.chatserver;
 
-import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.nio.channels.SocketChannel;
-import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.Queue;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.network.AConnection;
-import com.aionemu.commons.network.Dispatcher;
+import com.aionemu.commons.network.netty.NettyConnection;
+import com.aionemu.commons.network.packet.BaseClientPacket;
 import com.aionemu.gameserver.GameServer;
 import com.aionemu.gameserver.network.chatserver.serverpackets.SM_CS_AUTH;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
+import io.netty.buffer.ByteBuf;
+import io.netty.channel.Channel;
+
 /**
+ * Connection to the chat server. Its packets are executed concurrently.
+ *
  * @author ATracer, Neon
  */
-public class ChatServerConnection extends AConnection<CsServerPacket> {
+public class ChatServerConnection extends NettyConnection<CsServerPacket> {
 
 	private static final Logger log = LoggerFactory.getLogger(ChatServerConnection.class);
 
@@ -38,52 +36,38 @@ public class ChatServerConnection extends AConnection<CsServerPacket> {
 	}
 
 	/**
-	 * Server Packet "to send" Queue
-	 */
-	private final Deque<CsServerPacket> sendMsgQueue = new ArrayDeque<>();
-
-	/**
 	 * Current state of this connection
 	 */
-	private State state;
+	private volatile State state = State.CONNECTED;
 
-	public ChatServerConnection(SocketChannel sc, Dispatcher d) throws IOException {
-		super(sc, d, 8192 * 2, 8192 * 2);
-		this.state = State.CONNECTED;
+	public ChatServerConnection(Channel channel) {
+		super(channel, ThreadPoolManager.getInstance());
 	}
 
 	@Override
-	protected void initialized() {
+	protected void onConnect() {
 		log.info("Connected to chat server");
 		sendPacket(new SM_CS_AUTH());
 	}
 
 	@Override
-	protected final Queue<CsServerPacket> getSendMsgQueue() {
-		return sendMsgQueue;
+	protected BaseClientPacket<?> createPacket(ByteBuf data) {
+		return CsClientPacketFactory.tryCreatePacket(data, this);
 	}
 
 	@Override
-	public boolean processData(ByteBuffer data) {
-		CsClientPacket pck = CsClientPacketFactory.tryCreatePacket(data, this);
-
-		// Execute packet only if packet exist (!= null) and read was ok.
-		if (pck != null && pck.read())
-			ThreadPoolManager.getInstance().execute(pck);
-
-		return true;
+	protected void writePacket(CsServerPacket packet, ByteBuf buffer) {
+		packet.write(this, buffer);
 	}
 
 	@Override
-	protected final boolean writeData(ByteBuffer data) {
-		synchronized (guard) {
-			CsServerPacket packet = sendMsgQueue.pollFirst();
-			if (packet == null)
-				return false;
+	protected boolean isReadFailureFatal() {
+		return false;
+	}
 
-			packet.write(this, data);
-			return true;
-		}
+	@Override
+	protected int getMaxPendingPackets() {
+		return 10_000;
 	}
 
 	@Override
@@ -92,11 +76,6 @@ public class ChatServerConnection extends AConnection<CsServerPacket> {
 			return;
 		log.warn("Lost connection with chat server");
 		ChatServer.getInstance().reconnect();
-	}
-
-	@Override
-	protected final void onServerClose() {
-		ChatServer.getInstance().disconnect();
 	}
 
 	public State getState() {

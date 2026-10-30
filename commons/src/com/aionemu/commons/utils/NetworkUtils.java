@@ -3,9 +3,10 @@ package com.aionemu.commons.utils;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
-import java.nio.ByteBuffer;
 
 import org.slf4j.LoggerFactory;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * @author KID, -Nemesiss-
@@ -71,32 +72,32 @@ public class NetworkUtils {
 	}
 
 	/**
-	 * @return Formatted hex string of the buffers data.
+	 * @return Formatted hex string of the buffer's data from index 0 to its writer index.
 	 */
-	public static String toHex(ByteBuffer buffer) {
-		return toHex(buffer, 0, Math.min(buffer.limit(), buffer.capacity()));
+	public static String toHex(ByteBuf buffer) {
+		return toHex(buffer, 0, buffer.writerIndex());
 	}
 
 	/**
 	 * @param buffer
-	 * @param start position to start read from
-	 * @param end end position (exclusive)
+	 * @param start index to start read from
+	 * @param end end index (exclusive)
 	 * @return Formatted hex string of the buffers data.
 	 */
-	public static String toHex(ByteBuffer buffer, int start, int end) {
+	public static String toHex(ByteBuf buffer, int start, int end) {
 		StringBuilder result = new StringBuilder();
 		for (int i = start, bytes = 0; i < end; bytes++) {
 			if (bytes % 16 == 0) {
 				if (result.length() > 0)
-					result.append("\n");
+					result.append('\n');
 				result.append(String.format("%04X: ", bytes));
 			}
 
-			int b = buffer.get(i) & 0xff;
+			int b = buffer.getUnsignedByte(i);
 			result.append(String.format("%02X ", b));
 
 			int bytesInRow = (bytes % 16) + 1;
-			if (++i == buffer.capacity() || bytesInRow == 16) {
+			if (++i == end || bytesInRow == 16) {
 				for (int j = bytesInRow; j <= 16; j++)
 					result.append("   ");
 				toText(buffer, result, i - bytesInRow, i);
@@ -117,9 +118,9 @@ public class NetworkUtils {
 	 * @param startIndex
 	 * @param endIndex exclusive
 	 */
-	private static void toText(ByteBuffer buffer, StringBuilder result, int startIndex, int endIndex) {
+	private static void toText(ByteBuf buffer, StringBuilder result, int startIndex, int endIndex) {
 		for (int charPos = startIndex; charPos < endIndex; charPos++) {
-			int c = buffer.get(charPos) & 0xFF; // unsigned byte
+			int c = buffer.getUnsignedByte(charPos);
 			if (c > 0x1f && c < 0x80)
 				result.append((char) c);
 			else

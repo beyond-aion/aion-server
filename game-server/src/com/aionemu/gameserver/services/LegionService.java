@@ -1,7 +1,7 @@
 package com.aionemu.gameserver.services;
 
-import java.nio.ByteBuffer;
 import java.sql.Timestamp;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -48,6 +48,8 @@ public class LegionService {
 	private final Map<Integer, Legion> legionsById = new ConcurrentHashMap<>();
 	private final Map<Integer, LegionMember> legionMemberById = new ConcurrentHashMap<>();
 	private static final int MAX_LEGION_LEVEL = 8;
+	// the chunk size the client uploads emblems with, any size up to the packet limit is accepted
+	private static final int EMBLEM_DATA_CHUNK_SIZE = 7993;
 
 	private LegionRestrictions legionRestrictions = new LegionRestrictions();
 
@@ -598,36 +600,12 @@ public class LegionService {
 	}
 
 	public void sendEmblemData(Player player, LegionEmblem legionEmblem, int legionId, String legionName) {
-		int dataLength = legionEmblem.getCustomEmblemData() == null ? 0 : legionEmblem.getCustomEmblemData().length;
+		byte[] data = legionEmblem.getCustomEmblemData();
+		int dataLength = data == null ? 0 : data.length;
 		PacketSendUtility.sendPacket(player, new SM_LEGION_SEND_EMBLEM(legionId, legionEmblem, dataLength, legionName));
-		if (dataLength > 0) {
-			ByteBuffer buf = ByteBuffer.allocate(dataLength);
-			buf.put(legionEmblem.getCustomEmblemData()).position(0);
-			log.debug("legionEmblem size: {} bytes", buf.capacity());
-			int maxSize = 7993;
-			int currentSize;
-			byte[] bytes;
-			do {
-				log.debug("legionEmblem data position: {}", buf.position());
-				currentSize = buf.capacity() - buf.position();
-				log.debug("legionEmblem data remaining capacity: {} bytes", currentSize);
-
-				if (currentSize >= maxSize) {
-					bytes = new byte[maxSize];
-					for (int i = 0; i < maxSize; i++) {
-						bytes[i] = buf.get();
-					}
-					log.debug("legionEmblem data send size: {} bytes", bytes.length);
-					PacketSendUtility.sendPacket(player, new SM_LEGION_SEND_EMBLEM_DATA(maxSize, bytes));
-				} else {
-					bytes = new byte[currentSize];
-					for (int i = 0; i < currentSize; i++) {
-						bytes[i] = buf.get();
-					}
-					log.debug("legionEmblem data send size: {} bytes", bytes.length);
-					PacketSendUtility.sendPacket(player, new SM_LEGION_SEND_EMBLEM_DATA(currentSize, bytes));
-				}
-			} while (buf.capacity() != buf.position());
+		for (int offset = 0; offset < dataLength; offset += EMBLEM_DATA_CHUNK_SIZE) {
+			byte[] chunk = Arrays.copyOfRange(data, offset, Math.min(offset + EMBLEM_DATA_CHUNK_SIZE, dataLength));
+			PacketSendUtility.sendPacket(player, new SM_LEGION_SEND_EMBLEM_DATA(chunk.length, chunk));
 		}
 	}
 

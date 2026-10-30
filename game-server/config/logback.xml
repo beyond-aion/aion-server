@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 	<statusListener class="com.aionemu.commons.logging.OnConsoleWarningStatusListener" />
+	<conversionRule conversionWord="clr" class="com.aionemu.commons.logging.ColorConverter" />
 	<property file="config/main/gameserver.properties" />
 	<property file="config/main/logging.properties" />
 	<property file="config/mygs.properties" />
 	<property name="logFolder" value="log" />
-	<property name="consoleTime" value="%date{HH:mm:ss,${gameserver.timezone}}" />
-	<property name="date" value="%date{&quot;yyyy-MM-dd'T'HH:mm:ss,SSSXXX&quot;,${gameserver.timezone}}" />
+	<property name="date" value="%date{yyyy-MM-dd'T'HH:mm:ss.SSSXXX,${gameserver.timezone}}" />
 	<appender name="out_console" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder>
 			<charset>${consoleEncoding:-UTF-8}</charset>
-			<Pattern>${consoleTime} %highlight(%-5level) %gray([%thread]) - %message%n</Pattern>
+			<Pattern>%clr(${date}){faint} %clr(%5level) %clr(${PID}){magenta} %clr(--- [%15.15thread]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %message%n</Pattern>
 		</encoder>
 	</appender>
 	<appender name="app_console" class="ch.qos.logback.core.rolling.RollingFileAppender">
