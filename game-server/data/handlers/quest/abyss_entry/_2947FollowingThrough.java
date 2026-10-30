@@ -225,8 +225,7 @@ public class _2947FollowingThrough extends AbstractQuestHandler {
 					updateQuestStatus(env);
 					return true;
 				} else {
-					playQuestMovie(env, 167);
-					QuestService.questTimerStart(env, 240);
+					playQuestMovie(env, 167); // the timer starts when the movie ends
 					return true;
 				}
 			}
