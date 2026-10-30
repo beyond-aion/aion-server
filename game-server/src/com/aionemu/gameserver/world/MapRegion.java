@@ -190,10 +190,6 @@ public class MapRegion {
 		return anyZoneContains(zone -> zone.matches(zoneName), x, y, z);
 	}
 
-	/**
-	 * Same as {@link #isInsideZone(String, float, float, float)} for a zone class. Unlike the zone counters of a creature this
-	 * always reflects the given coordinates, so it can be used before the periodic zone update ran.
-	 */
 	public boolean isInsideZone(ZoneClassName zoneType, float x, float y, float z) {
 		return anyZoneContains(zone -> zone.getZoneTemplate().getZoneType() == zoneType, x, y, z);
 	}
