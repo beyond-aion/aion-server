@@ -862,9 +862,10 @@ public final class QuestService {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ANOTHER_SINGLE_STEP_NOT_COMPLETED());
 			return false;
 		}
+		int questId = env.getQuestId();
 		Future<?> task = ThreadPoolManager.getInstance().schedule(() -> {
 			player.getController().setQuestTimerQuestId(0);
-			QuestEngine.getInstance().onQuestTimerEnd(new QuestEnv(null, player, 0));
+			QuestEngine.getInstance().onQuestTimerEnd(new QuestEnv(null, player, questId));
 		}, timeInSeconds * 1000L);
 		player.getController().addTask(TaskId.QUEST_TIMER, task); // so it's cancelled when the player leaves the world
 		player.getController().setQuestTimerQuestId(env.getQuestId());
