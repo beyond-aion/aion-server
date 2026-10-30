@@ -19,10 +19,12 @@ public class Set_disable_itemuse_gauge extends ConsoleCommand {
 			sendInfo(player);
 			return;
 		}
-		if (params[0].equals("1"))
+		if (params[0].equals("1")) {
 			player.setCustomState(CustomPlayerState.NO_ITEM_USE_GAUGE_MODE);
-		else
+			sendInfo(player, "Item usage animations have been disabled.");
+		} else {
 			player.unsetCustomState(CustomPlayerState.NO_ITEM_USE_GAUGE_MODE);
-		sendInfo(player, "Disable item use gauge: [" + (params[0].equals("1") ? "On" : "Off") + "]");
+			sendInfo(player, "Item usage animations have been enabled.");
+		}
 	}
 }

@@ -20,19 +20,17 @@ public class Remove_skill_delay_all extends ConsoleCommand {
 
 	@Override
 	public void execute(Player player, String... params) {
-		if (params.length == 0) {
+		if (params.length == 0 || !params[0].equals("0") && !params[0].equals("1")) {
 			sendInfo(player);
 			return;
 		}
-		if (params[0].equals("1") && player.isInCustomState(CustomPlayerState.NO_SKILL_COOLDOWN_MODE)) {
-			sendInfo(player, "Cooldown times of all skills have been recovered.");
+		if (params[0].equals("1")) {
 			player.unsetCustomState(CustomPlayerState.NO_SKILL_COOLDOWN_MODE);
+			sendInfo(player, "Cooldown times of all skills have been recovered.");
 		} else if (params[0].equals("0")) {
 			RemoveCd.removeSkillCooldowns(player);
-			if (!player.isInCustomState(CustomPlayerState.NO_SKILL_COOLDOWN_MODE)) {
-				sendInfo(player, "Cooldown times of all skills have been disabled.");
-				player.setCustomState(CustomPlayerState.NO_SKILL_COOLDOWN_MODE);
-			}
+			player.setCustomState(CustomPlayerState.NO_SKILL_COOLDOWN_MODE);
+			sendInfo(player, "Cooldown times of all skills have been disabled.");
 		}
 	}
 }

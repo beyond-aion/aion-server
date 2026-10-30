@@ -28,5 +28,6 @@ public class Itemcooltime extends ConsoleCommand {
 		}
 		RemoveCd.removeItemCooldowns(player);
 		player.setCustomState(CustomPlayerState.NO_ITEM_COOLDOWN_MODE);
+		sendInfo(player, "Cooldown times of all items have been disabled.");
 	}
 }
