@@ -29,7 +29,6 @@ import com.aionemu.gameserver.model.stats.calc.functions.StatSetFunction;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.flyring.FlyRingTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MESSAGE;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
 import com.aionemu.gameserver.services.drop.DropRegistrationService;
 import com.aionemu.gameserver.services.event.EventService;
 import com.aionemu.gameserver.services.item.ItemService;
@@ -99,7 +98,7 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 				adaptNPC(artifact, rank);
 
 			PacketSendUtility.broadcastToMap(instance, STR_MSG_INSTANCE_START_IDABRE());
-			PacketSendUtility.broadcastToMap(instance, SM_QUEST_ACTION.instanceTimer(instance.getInstanceId(), TIME_LIMIT));
+			instance.startTimeLimit(TIME_LIMIT);
 			PacketSendUtility.broadcastToMap(instance, new SM_MESSAGE(0, null,
 				"You have 15 minutes to demolish the central Aether Stone. Beware for its protectors!", ChatType.BRIGHT_YELLOW_CENTER));
 
@@ -190,7 +189,7 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 				deleteAliveNpcs(TRASH_MOB_ID, BULKY_MOB_ID, DOMINATOR_MOB_ID);
 				PacketSendUtility.broadcastToMap(instance,
 					new SM_MESSAGE(0, null, "You feel a shadowy presence from the throne room.", ChatType.BRIGHT_YELLOW_CENTER));
-				PacketSendUtility.broadcastToMap(instance, SM_QUEST_ACTION.instanceTimer(instance.getInstanceId(), 0));
+				instance.stopTimeLimit();
 				int bossID = BOSS_MOB_AT_ID;
 				if (pcd.getPlayerClass() != PlayerClass.RIDER) {
 					switch (pcd.getRace()) {
@@ -211,7 +210,7 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 			case BOSS_MOB_A_M_ID, BOSS_MOB_A_F_ID, BOSS_MOB_E_M_ID, BOSS_MOB_E_F_ID, BOSS_MOB_AT_ID -> {
 				calcBossDrop(npc.getObjectId());
 				setResult(true);
-				PacketSendUtility.broadcastToMap(instance, SM_QUEST_ACTION.instanceTimer(instance.getInstanceId(), 0));
+				instance.stopTimeLimit();
 			}
 		}
 	}
@@ -381,7 +380,7 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 
 	@Override
 	public boolean onReviveEvent(Player player) {
-		PacketSendUtility.sendPacket(player, SM_QUEST_ACTION.instanceTimer(instance.getInstanceId(), TIME_LIMIT - getElapsedTimeMillis() / 1000));
+		instance.showTimeLimit(player);
 		return super.onReviveEvent(player);
 	}
 
