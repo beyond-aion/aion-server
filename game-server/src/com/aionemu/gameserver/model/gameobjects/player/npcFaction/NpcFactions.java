@@ -99,6 +99,8 @@ public class NpcFactions {
 			QuestService.abandonQuest(owner, npcFaction.getQuestId());
 			npcFaction.setState(ENpcFactionQuestState.NOTING);
 		}
+		if (npcFaction.getQuestId() != 0)
+			PacketSendUtility.sendPacket(owner, SM_QUEST_ACTION.npcFactionQuestRemoved(npcFaction.getQuestId()));
 	}
 
 	public void enterGuild(Npc npc) {
