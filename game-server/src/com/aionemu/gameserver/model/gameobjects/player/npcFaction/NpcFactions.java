@@ -248,6 +248,8 @@ public class NpcFactions {
 				activeNpcFaction[i] = null;
 				if (faction.getState() == ENpcFactionQuestState.START)
 					QuestService.abandonQuest(owner, faction.getQuestId());
+				if (faction.getQuestId() != 0)
+					PacketSendUtility.sendPacket(owner, SM_QUEST_ACTION.npcFactionQuestRemoved(faction.getQuestId()));
 				PacketSendUtility.sendPacket(owner, SM_SYSTEM_MESSAGE.STR_FACTION_LEAVE_BY_LEVEL_LIMIT(npcFactionTemplate.getL10n()));
 				faction.setState(ENpcFactionQuestState.NOTING);
 			}
