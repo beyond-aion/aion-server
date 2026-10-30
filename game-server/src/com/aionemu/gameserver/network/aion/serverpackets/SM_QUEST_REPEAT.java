@@ -6,11 +6,13 @@ import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
+ * Tells the client which completed quests can be taken again, after their repeat limit was reset.
+ *
  * @author Rolandas, Neon
  */
 public class SM_QUEST_REPEAT extends AionServerPacket {
 
-	List<Integer> repeatableQuests;
+	private final List<Integer> repeatableQuests;
 
 	public SM_QUEST_REPEAT(List<Integer> repeatableQuests) {
 		this.repeatableQuests = repeatableQuests;
