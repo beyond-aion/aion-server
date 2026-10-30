@@ -23,6 +23,7 @@ public class _2916ManInTheLongBlackRobe extends AbstractQuestHandler {
 		qe.registerQuestNpc(204141).addOnTalkEvent(questId);
 		qe.registerQuestNpc(204152).addOnTalkEvent(questId);
 		qe.registerQuestNpc(204150).addOnTalkEvent(questId);
+		qe.registerQuestNpc(204151).addOnTalkEvent(questId);
 		qe.registerQuestNpc(798033).addOnTalkEvent(questId);
 		qe.registerQuestNpc(203673).addOnTalkEvent(questId);
 		qe.registerQuestNpc(700211).addOnTalkEvent(questId);

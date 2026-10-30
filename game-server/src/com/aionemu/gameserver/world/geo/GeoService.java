@@ -69,6 +69,14 @@ public class GeoService implements GameEngine {
 		return geoMaps.get(worldId).getZ(x, y, zMax, zMin, instanceId);
 	}
 
+	/**
+	 * @return The surface Z coordinate at the objects position, nearest to the given zMax value, or {@link Float#NaN} if not found / less than zMin /
+	 *         too steep to stand on.
+	 */
+	public float getWalkableZ(VisibleObject object, float zMax, float zMin) {
+		return geoMaps.get(object.getWorldId()).getZ(object.getX(), object.getY(), zMax, zMin, object.getInstanceId(), true);
+	}
+
 	public CollisionResults getCollisions(VisibleObject object, float x, float y, float z, byte intentions, IgnoreProperties ignoreProperties) {
 		return geoMaps.get(object.getWorldId()).getCollisions(object.getX(), object.getY(), object.getZ() + getSeeCheckOffset(object), x, y, z,
 			object.getInstanceId(), intentions, ignoreProperties);

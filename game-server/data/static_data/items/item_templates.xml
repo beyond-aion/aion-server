@@ -926413,6 +926413,18 @@
 			<decompose/>
 		</actions>
 	</item_template>
+	<item_template id="188054343" name="Vasharti Legionnaire's Weapon Box" level="1" cName="world_wrap_idyunh_weapon" casting_delay="1000" mask="12410" quality="MYTHIC" price="5" desc="843895" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<decompose/>
+		</actions>
+		<uselimits usedelay="1000" usedelayid="85"/>
+	</item_template>
+	<item_template id="188054344" name="Vasharti Brigade General's Armor Box" level="1" cName="world_wrap_idyunh_armor" casting_delay="1000" mask="12410" quality="MYTHIC" price="5" desc="843897" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<decompose/>
+		</actions>
+		<uselimits usedelay="1000" usedelayid="85"/>
+	</item_template>
 	<item_template id="188054381" name="Lucky Platinum Box Piece" level="1" cName="world_wrap_cash_jp_gacha_06" casting_delay="1000" mask="12410" max_stack_count="1000" quality="UNIQUE" price="5" desc="848024" activate_target="STANDALONE" activate_count="1">
 		<actions>
 			<decompose/>

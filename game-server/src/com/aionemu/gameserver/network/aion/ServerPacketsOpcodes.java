@@ -299,9 +299,9 @@ public class ServerPacketsOpcodes {
 		// addPacketOpcode(281, ); // [S_MGSERVER_CONNECT_INFO]
 		// addPacketOpcode(282, ); // [S_USER_EXPERIENCE_LV] shows buff icon + symbols next to players name //fsc 282 dd playerObjId iconId (2 = Reward for new user, 3 = reward for returning user, 10 benefits for special user)
 		// addPacketOpcode(283, SM_DISPUTE_LAND.class); // [S_SPVP_STATUS]
-		addPacketOpcode(284, SM_FIRST_SHOW_DECOMPOSABLE.class); // [S_DISASSEMBLY_ITEMLIST]
+		addPacketOpcode(284, SM_SHOW_DECOMPOSABLE.class); // [S_DISASSEMBLY_ITEMLIST]
 		addPacketOpcode(285, SM_MEGAPHONE.class); // [S_MEGAPHONE]
-		addPacketOpcode(286, SM_SECONDARY_SHOW_DECOMPOSABLE.class); // [S_SELECT_DISASSEMBLY_ITEM_RESULT]
+		addPacketOpcode(286, SM_SELECT_DECOMPOSABLE_RESULT.class); // [S_SELECT_DISASSEMBLY_ITEM_RESULT]
 		// addPacketOpcode(287, ); // [S_RUN_EVENT_MC_MACRO]
 		addPacketOpcode(288, SM_TUNE_RESULT.class); // [S_REIDENTIFY_PREVIEW]
 		addPacketOpcode(289, SM_UNWRAP_ITEM.class); // [S_UNPACK_ITEM]

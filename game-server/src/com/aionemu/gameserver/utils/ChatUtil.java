@@ -33,6 +33,7 @@ public class ChatUtil {
 	private static final DecimalFormat DF = (DecimalFormat) DecimalFormat.getInstance(Locale.US);
 	private static final char ASMO_NAME_PREFIX = '\uE053';
 	private static final char ELYOS_NAME_PREFIX = '\uE052';
+	private static final char CONTINUATION_MARK = '\u200B'; // zero-width space, which our client mod detects to skip the chat time prefix
 
 	static {
 		DF.applyPattern(".##");
@@ -359,7 +360,10 @@ public class ChatUtil {
 		List<String> parts = new ArrayList<>();
 		for (int start = 0, length = chatMessage.length(); start < length; ) {
 			int splitIndex = findSplitIndex(chatMessage, start, length);
-			parts.add(chatMessage.substring(start, splitIndex));
+			String messagePart = chatMessage.substring(start, splitIndex);
+			if (start > 0)
+				messagePart = CONTINUATION_MARK + messagePart;
+			parts.add(messagePart);
 			start = splitIndex;
 			if (start < length) {
 				char splitChar = chatMessage.charAt(start);
@@ -371,7 +375,8 @@ public class ChatUtil {
 	}
 
 	private static int findSplitIndex(String chatMessage, int startIndex, int endIndex) {
-		int estimatedDisplayLength = 0;
+		// account for the length of the CONTINUATION_MARK if this is a subsequent part (start > 0)
+		int estimatedDisplayLength = startIndex > 0 ? 1 : 0;
 		int lastNewLineIndex = -1;
 		int lastSpaceIndex = -1;
 		for (int i = startIndex; i < endIndex; i++) {

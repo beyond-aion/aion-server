@@ -12,23 +12,6 @@ import com.aionemu.gameserver.model.templates.npcshout.ShoutGroup;
 import com.aionemu.gameserver.model.templates.npcshout.ShoutList;
 
 /**
- * <p>
- * Java class for anonymous complex type.
- * <p>
- * The following schema fragment specifies the expected content contained within this class.
- * 
- * <pre>
- * &lt;complexType>
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="shout_group" type="{}ShoutGroup" maxOccurs="unbounded" minOccurs="0"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
- * 
  * @author Rolandas
  */
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -51,31 +34,14 @@ public class NpcShoutData {
 				ShoutList shoutList = group.getShoutNpcs().get(i);
 				int worldId = shoutList.getRestrictWorld();
 
-				Map<Integer, List<NpcShout>> worldShouts = shoutsByWorldNpcs.get(worldId);
-				if (worldShouts == null) {
-					worldShouts = new LinkedHashMap<>();
-					this.shoutsByWorldNpcs.put(worldId, worldShouts);
-				}
-
+				Map<Integer, List<NpcShout>> worldShouts = shoutsByWorldNpcs.computeIfAbsent(worldId, _ -> new LinkedHashMap<>());
 				this.count += shoutList.getNpcShouts().size();
 				for (int j = shoutList.getNpcIds().size() - 1; j >= 0; j--) {
 					int npcId = shoutList.getNpcIds().get(j);
-					List<NpcShout> shouts = new ArrayList<>();
-					shouts.addAll(shoutList.getNpcShouts());
-					if (worldShouts.get(npcId) == null) {
-						worldShouts.put(npcId, shouts);
-					} else {
-						worldShouts.get(npcId).addAll(shouts);
-					}
-					shoutList.getNpcIds().remove(j);
+					worldShouts.computeIfAbsent(npcId, _ -> new ArrayList<>()).addAll(shoutList.getNpcShouts());
 				}
-				shoutList.getNpcShouts().clear();
-				shoutList.makeNull();
-				group.getShoutNpcs().remove(i);
 			}
-			group.makeNull();
 		}
-		this.shoutGroups.clear();
 		this.shoutGroups = null;
 	}
 

@@ -113,6 +113,14 @@ public class WorldPosition {
 	}
 
 	/**
+	 * @return The world id the client knows this map instance by: the map id plus the channel (instance id - 1), negated on personal maps.
+	 */
+	public int getClientWorldId() {
+		int worldId = mapId + getInstanceId() - 1;
+		return WorldMapType.getWorld(mapId).isPersonal() ? -worldId : worldId;
+	}
+
+	/**
 	 * @return
 	 */
 	public boolean isInstanceMap() {

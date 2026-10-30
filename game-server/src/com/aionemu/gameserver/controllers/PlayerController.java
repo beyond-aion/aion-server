@@ -678,6 +678,7 @@ public class PlayerController extends CreatureController<Player> {
 	 */
 	public void onFlyTeleportEnd() {
 		Player player = getOwner();
+		FlightPath flightPath = player.getFlightPath();
 		if (player.isUsingFlightPath(FlightPath.Type.WINDSTREAM)) {
 			player.unsetState(CreatureState.FLYING);
 			player.unsetFlyState(FlyState.FLYING);
@@ -687,7 +688,6 @@ public class PlayerController extends CreatureController<Player> {
 			player.getLifeStats().triggerFpReduce();
 			player.getGameStats().updateStatsAndSpeedVisually();
 		} else if (player.isUsingFlightPath(FlightPath.Type.FLIGHT_TRANSPORTER)) {
-			FlightPath flightPath = player.getFlightPath();
 			FlyPathEntry path = player.getFlightPathTemplate();
 			if (path == null) {
 				log.warn("Missing flypath_location in flypath_template.xml for teleport id {}, landing of {} is not validated", flightPath.getId(), player);
@@ -699,7 +699,7 @@ public class PlayerController extends CreatureController<Player> {
 					return;
 				}
 				// Stricter than retail, which doesn't check the flight time: a landing before the flight time is over is delayed until then, so a
-				// client can't arrive early. The client lands 5-10 ms after the flight time. Land right away to fall back to retail.
+				// client can't arrive early. The client lands 5-10 ms after the path's sequence ends. Land right away to fall back to retail.
 				long remainingTime = path.getTimeInMs() - flightPath.getElapsedTime() - FLIGHT_LANDING_TIME_TOLERANCE;
 				if (remainingTime > 0) {
 					AuditLogger.log(player, "tried to land from flight path #" + path.getId() + " " + remainingTime + "ms early");
@@ -716,7 +716,10 @@ public class PlayerController extends CreatureController<Player> {
 		} else {
 			return;
 		}
+		player.getMoveController().resetFalling();
 		player.setFlightPath(null);
+		if (flightPath.getType() == FlightPath.Type.FLIGHT_TRANSPORTER)
+			QuestEngine.getInstance().onFlightPathEnd(new QuestEnv(null, player, 0), flightPath.getId());
 	}
 
 	public void startStance(int skillId) {

@@ -100,16 +100,15 @@ public class _14030RetrievedMemory extends AbstractQuestHandler {
 							}
 							break;
 						case SETPRO5:
-							if (var == 4) {
+							if (changeQuestStep(env, 4, 5)) {
 								SkillEngine.getInstance().applyEffectDirectly(18563, player, player);
 								SkillEngine.getInstance().applyEffectDirectly(18564, player, player);
 								SkillEngine.getInstance().applyEffectDirectly(18565, player, player);
 								SkillEngine.getInstance().applyEffectDirectly(18566, player, player);
 								player.setState(CreatureState.FLYING);
 								player.unsetState(CreatureState.ACTIVE);
-								player.setFlightTeleportId(1001);
-								PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.START_FLYTELEPORT, 1001, 0));
-								changeQuestStep(env, 4, 5);
+								player.setFlightTeleportId(74001);
+								PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.START_FLYTELEPORT, 74001, 0));
 								return true;
 							}
 							break;

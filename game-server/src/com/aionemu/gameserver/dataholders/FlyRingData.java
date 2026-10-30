@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.dataholders;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
@@ -22,24 +20,10 @@ public class FlyRingData {
 	private List<FlyRingTemplate> flyRingTemplates;
 
 	public int size() {
-		if (flyRingTemplates == null) {
-			flyRingTemplates = new ArrayList<>();
-			return 0;
-		}
-		return flyRingTemplates.size();
+		return getFlyRingTemplates().size();
 	}
 
 	public List<FlyRingTemplate> getFlyRingTemplates() {
-		if (flyRingTemplates == null) {
-			return new ArrayList<>();
-		}
-		return flyRingTemplates;
-	}
-
-	public void addAll(Collection<FlyRingTemplate> templates) {
-		if (flyRingTemplates == null) {
-			flyRingTemplates = new ArrayList<>();
-		}
-		flyRingTemplates.addAll(templates);
+		return flyRingTemplates == null ? List.of() : flyRingTemplates;
 	}
 }

@@ -49,6 +49,7 @@ public class FlyController {
 		player.unsetState(CreatureState.FLYING);
 		player.unsetState(CreatureState.GLIDING);
 		player.unsetState(CreatureState.FLOATING_CORPSE);
+		player.getMoveController().restartFalling(player.getZ());
 		player.getGameStats().updateStatsAndSpeedVisually();
 
 		if (broadcastPacket && player.isSpawned())

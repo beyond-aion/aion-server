@@ -25807,6 +25807,13 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
+	 * You cannot acquire this item because you already have the limited possession item %0.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_CAN_NOT_DISASSEMBLE_LORE_ITEM(String value0) {
+		return new SM_SYSTEM_MESSAGE(1401466, value0);
+	}
+
+	/**
 	 * %0 is gone.
 	 */
 	public static SM_SYSTEM_MESSAGE STR_MSG_HOUSING_OBJECT_DELETE_USE_COUNT_FINAL(String value0) {
