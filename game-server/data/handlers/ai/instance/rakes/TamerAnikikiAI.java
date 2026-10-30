@@ -11,7 +11,6 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -50,7 +49,7 @@ public class TamerAnikikiAI extends GeneralNpcAI {
 				spawn(700553, 657, 482, 936, (byte) 60);
 				spawn(700553, 626, 540, 936, (byte) 1);
 				spawn(700553, 645, 534, 936, (byte) 75);
-				PacketSendUtility.sendPacket((Player) creature, SM_QUEST_ACTION.instanceTimer(getOwner().getInstanceId(), 180));
+				getPosition().getWorldMapInstance().startTimeLimit(180);
 				PacketSendUtility.broadcastToMap(getOwner(), 1400262);
 			}
 		}

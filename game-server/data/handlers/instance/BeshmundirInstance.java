@@ -11,7 +11,6 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAY_MOVIE;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -74,7 +73,7 @@ public class BeshmundirInstance extends GeneralInstanceHandler {
 				} else {
 					spawn(216245, 981.015015f, 134.373001f, 241.755005f, (byte) 30); // weakest macunbello
 				}
-				sendPacket(SM_QUEST_ACTION.instanceTimer(instance.getInstanceId(), 0, 3));
+				instance.stopTimeLimit();
 				instance.setDoorState(467, true);
 				break;
 			case 799342:

@@ -8,7 +8,6 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAY_MOVIE;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -42,7 +41,7 @@ public class PlegetonAI extends NpcAI {
 								Npc npc = getPosition().getWorldMapInstance().getNpc(216586);
 								if (npc != null && !npc.isDead()) {
 									npc.getController().delete();
-									PacketSendUtility.sendPacket(player, SM_QUEST_ACTION.instanceTimer(getOwner().getInstanceId(), 0, 3));
+									getPosition().getWorldMapInstance().stopTimeLimit();
 									getPosition().getWorldMapInstance().setDoorState(467, true);
 								}
 							}
@@ -69,7 +68,7 @@ public class PlegetonAI extends NpcAI {
 	}
 
 	private void sendTimer() {
-		PacketSendUtility.broadcastToMap(getOwner(), SM_QUEST_ACTION.instanceTimer(getOwner().getInstanceId(), 420, 3));
+		getPosition().getWorldMapInstance().startTimeLimit(420, 3);
 	}
 
 	@Override
