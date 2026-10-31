@@ -247,6 +247,9 @@ public class LegionService {
 
 				@Override
 				public void acceptRequest(Player requester, Player responder) {
+					// The invitation may be old: the player could have joined another legion or the inviter could have left this one since.
+					if (responder.isLegionMember() || requester.getLegion() != legion)
+						return;
 					addToLegion(legion, responder, requester);
 				}
 
