@@ -34,9 +34,10 @@ public class CM_BROKER_LIST extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
-		if (player.isTargetingNpcWithFunction(brokerObjId, DialogAction.OPEN_VENDOR))
-			BrokerService.getInstance().showRequestedItems(player, listMask, sortType, page, null);
-		else
-			AuditLogger.log(player, "tried to browse for broker items without targeting a broker");
+		if (!player.isTargetingNpcWithFunctionNearby(brokerObjId, DialogAction.OPEN_VENDOR)) {
+			AuditLogger.log(player, "tried to browse for broker items without targeting a broker in range");
+			return;
+		}
+		BrokerService.getInstance().showRequestedItems(player, listMask, sortType, page, null);
 	}
 }

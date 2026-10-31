@@ -28,9 +28,10 @@ public class CM_BROKER_SETTLE_ACCOUNT extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
-		if (player.isTargetingNpcWithFunction(brokerObjId, DialogAction.OPEN_VENDOR))
-			BrokerService.getInstance().settleAccount(player);
-		else
-			AuditLogger.log(player, "tried to get Kinah and unsold items from the broker without targeting a broker");
+		if (!player.isTargetingNpcWithFunctionNearby(brokerObjId, DialogAction.OPEN_VENDOR)) {
+			AuditLogger.log(player, "tried to get Kinah and unsold items from the broker without targeting a broker in range");
+			return;
+		}
+		BrokerService.getInstance().settleAccount(player);
 	}
 }
