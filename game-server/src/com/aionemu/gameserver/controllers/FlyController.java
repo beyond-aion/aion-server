@@ -18,7 +18,7 @@ import com.aionemu.gameserver.utils.audit.AuditLogger;
 public class FlyController {
 
 	private static final long FLY_REUSE_TIME = 10000;
-	private Player player;
+	private final Player player;
 
 	public FlyController(Player player) {
 		this.player = player;
@@ -39,26 +39,26 @@ public class FlyController {
 	}
 
 	/**
-	 * Ends free flight but keeps the glide. Retail does this as soon as a gliding player leaves a flight area, even when the player
-	 * keeps gliding for a long time afterwards. Our client treats the landing that follows as a landing in free flight, which is not
-	 * allowed outside of flight areas, so it refuses it by moving the character to the world's flight restriction zone coordinates
-	 * (FRZ_X/FRZ_Y, the map corner) - the teleport this is meant to prevent.
-	 */
-	public void gotoNormalGlide() {
-		player.unsetFlyState(FlyState.FLYING);
-		player.unsetState(CreatureState.FLYING);
-		player.getGameStats().updateStatsAndSpeedVisually();
-		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.STOP_FLY), true);
-	}
-
-	/**
 	 * Called for every move of a gliding player, before the move takes effect. Retail validates each of these moves against the
 	 * flight areas of the world instead of waiting for a zone update.
 	 */
 	public void onGlideMove() {
 		if (player.isInFlyingState() && player.isInGlidingState() && !player.isInCustomState(CustomPlayerState.FREE_FLY_MODE)
 			&& !player.isInsideFlyZone(player.getX(), player.getY(), player.getZ()))
-			gotoNormalGlide();
+			switchToNormalGlide();
+	}
+
+	/**
+	 * Ends free flight but keeps the glide. Retail does this as soon as a gliding player leaves a flight area, even when the player
+	 * keeps gliding for a long time afterwards. Our client treats the landing that follows as a landing in free flight, which is not
+	 * allowed outside of flight areas, so it refuses it by moving the character to the world's flight restriction zone coordinates
+	 * (FRZ_X/FRZ_Y, the map corner) - the teleport this is meant to prevent.
+	 */
+	public void switchToNormalGlide() {
+		player.unsetFlyState(FlyState.FLYING);
+		player.unsetState(CreatureState.FLYING);
+		player.getGameStats().updateStatsAndSpeedVisually();
+		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.STOP_FLY), true);
 	}
 
 	/**

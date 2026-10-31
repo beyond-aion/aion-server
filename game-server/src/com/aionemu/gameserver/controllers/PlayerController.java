@@ -210,18 +210,13 @@ public class PlayerController extends CreatureController<Player> {
 	 */
 	public void onLeaveFlyArea() {
 		Player player = getOwner();
-		if (player.isInCustomState(CustomPlayerState.FREE_FLY_MODE))
-			return;
-		if (player.isInFlyingState()) {
-			if (player.isInGlidingState()) {
-				player.getFlyController().onGlideMove();
-			} else {
-				player.getFlyController().endFly(true);
-				if (player.isSpawned() && !player.isInsideZoneType(ZoneType.FLY)) // not spawned means leaving by teleporter
-					AuditLogger.log(player, "left fly zone in fly state at " + player.getPosition());
-			}
-		} else if (player.isInGlidingState()) {
-			player.getLifeStats().triggerFpReduce();
+		player.getLifeStats().triggerFpReduce();
+		if (player.isInGlidingState()) {
+			player.getFlyController().onGlideMove();
+		} else if (player.isInFlyingState() && !player.isInCustomState(CustomPlayerState.FREE_FLY_MODE)) {
+			player.getFlyController().endFly(true);
+			if (player.isSpawned() && !player.isInsideZoneType(ZoneType.FLY)) // not spawned means leaving by teleporter
+				AuditLogger.log(player, "left fly zone in fly state at " + player.getPosition());
 		}
 	}
 
