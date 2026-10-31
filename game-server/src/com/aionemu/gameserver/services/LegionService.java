@@ -247,7 +247,8 @@ public class LegionService {
 
 				@Override
 				public void acceptRequest(Player requester, Player responder) {
-					addToLegion(legion, responder, requester);
+					if (!responder.isLegionMember())
+						addToLegion(legion, responder, requester);
 				}
 
 				@Override
