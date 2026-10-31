@@ -4,6 +4,7 @@ import java.util.Set;
 
 import com.aionemu.gameserver.model.gameobjects.player.Friend;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_FRIEND_LIST;
@@ -32,6 +33,8 @@ public class CM_SET_NOTE extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
+		if (note.length() > PlayerCommonData.MAX_NOTE_LENGTH) // retail refuses the packet instead of truncating a longer note
+			return;
 		if (note.equals(player.getCommonData().getNote()))
 			return;
 		player.getCommonData().setNote(note);
