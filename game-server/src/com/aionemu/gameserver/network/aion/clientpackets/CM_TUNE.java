@@ -2,6 +2,7 @@ package com.aionemu.gameserver.network.aion.clientpackets;
 
 import java.util.Set;
 
+import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.item.actions.TuningAction;
@@ -38,6 +39,9 @@ public class CM_TUNE extends AionClientPacket {
 			return;
 
 		if (!item.isIdentified()) {
+			// A second identify cancels the task of the first one, and that task is the only place that removes its observer.
+			if (player.getController().hasTask(TaskId.ITEM_USE))
+				return;
 			ItemActionService.identifyItem(player, item);
 		} else if (tuningScrollObjectId != 0) {
 			Item tuningScroll = player.getInventory().getItemByObjId(tuningScrollObjectId);
