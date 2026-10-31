@@ -215,7 +215,8 @@ public class ExchangeService {
 		}
 	}
 
-	public void confirmExchange(Player activePlayer) {
+	// Both clients can answer in the same moment and the partner check below is not atomic, so the trade must stay serialized.
+	public synchronized void confirmExchange(Player activePlayer) {
 		if (activePlayer == null || !activePlayer.isOnline())
 			return;
 
