@@ -241,6 +241,8 @@ public class PrivateStoreService {
 	}
 
 	public static void openPrivateStore(Player activePlayer, String name) {
+		if (name != null && name.length() > PrivateStore.MAX_STORE_MESSAGE_LENGTH) // retail refuses longer messages instead of truncating them
+			return;
 		activePlayer.getStore().setStoreMessage(name);
 		PacketSendUtility.broadcastPacket(activePlayer, new SM_PRIVATE_STORE_NAME(activePlayer), true);
 	}
