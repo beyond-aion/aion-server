@@ -97,6 +97,7 @@ public class TeleportService {
 		if (!checkKinahForTransportation(location, player, fortress != null && fortress.isVulnerable()))
 			return;
 
+		endDuel(player);
 		if (location.getType().equals(TeleportType.FLIGHT)) {
 			abortPlayerActions(player);
 			player.setState(CreatureState.FLYING);
@@ -159,6 +160,7 @@ public class TeleportService {
 	}
 
 	private static void sendLoc(Player player, int worldId, int instanceId, float x, float y, float z, byte h, TeleportAnimation animation) {
+		endDuel(player);
 		abortPlayerActions(player);
 		player.unblockQuitting();
 		// despawn from world and send animation to others (also ends flying)
@@ -188,6 +190,11 @@ public class TeleportService {
 		}
 	}
 
+	private static void endDuel(Player player) {
+		if (DuelService.getInstance().isDueling(player))
+			DuelService.getInstance().loseDuel(player);
+	}
+
 	private static void spawnOnSameMap(Player player) {
 		PacketSendUtility.sendPacket(player, new SM_CHANNEL_INFO(player.getPosition()));
 		PacketSendUtility.sendPacket(player, new SM_PLAYER_INFO(player));
@@ -202,6 +209,7 @@ public class TeleportService {
 	}
 
 	public static void teleportTo(Player player, WorldPosition pos) {
+		endDuel(player);
 		if (player.getWorldId() == pos.getMapId()) {
 			abortPlayerActions(player);
 			World.getInstance().setPosition(player.getPet(), pos.getMapId(), pos.getInstanceId(), pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
@@ -263,11 +271,9 @@ public class TeleportService {
 
 	public static void teleportTo(final Player player, final int worldId, final int instanceId, final float x, final float y, final float z,
 		final byte heading, TeleportAnimation animation) {
-		if (player.isDead()) {
+		if (player.isDead())
 			PlayerReviveService.revive(player, 20, 20, true, 0);
-		} else if (DuelService.getInstance().isDueling(player)) {
-			DuelService.getInstance().loseDuel(player);
-		}
+		endDuel(player);
 		sendLoc(player, worldId, instanceId, x, y, z, heading, animation);
 	}
 
@@ -407,6 +413,7 @@ public class TeleportService {
 	}
 
 	public static void changeChannel(Player player, int channel) {
+		endDuel(player);
 		World.getInstance().setPosition(player, player.getWorldId(), channel + 1, player.getX(), player.getY(), player.getZ(), player.getHeading());
 		player.getController().startProtectionActiveTask();
 		PacketSendUtility.sendPacket(player, new SM_CHANNEL_INFO(player.getPosition()));

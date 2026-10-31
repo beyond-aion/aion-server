@@ -19,6 +19,7 @@ import com.aionemu.gameserver.services.player.PlayerService;
 import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.skillengine.model.SkillTargetSlot;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.zone.ZoneAttributes;
@@ -30,8 +31,11 @@ import com.aionemu.gameserver.world.zone.ZoneInstance;
 public class DuelService {
 
 	private static final Logger log = LoggerFactory.getLogger(DuelService.class);
+	private static final int DUEL_START_DELAY_SECONDS = 3; // client countdown between accepting and the start of the fight
+	private static final int DUEL_DURATION_SECONDS = 300;
+	private static final float MAX_DUEL_DISTANCE = 25f;
 	private final ConcurrentHashMap<Integer, Integer> duels = new ConcurrentHashMap<>();
-	private final ConcurrentHashMap<Integer, Future<?>> drawTasks = new ConcurrentHashMap<>();
+	private final ConcurrentHashMap<Integer, Future<?>> duelTasks = new ConcurrentHashMap<>();
 
 	public static DuelService getInstance() {
 		return SingletonHolder.instance;
@@ -88,8 +92,20 @@ public class DuelService {
 
 			@Override
 			public void acceptRequest(Player requester, Player responder) {
-				if (!isDueling(requester))
-					startDuel(requester, responder);
+				if (isDueling(requester)) {
+					closeWithdrawQuestion(requester);
+					PacketSendUtility.sendPacket(responder, SM_SYSTEM_MESSAGE.STR_DUEL_PARTNER_IN_DUEL_ALREADY(requester.getName()));
+					return;
+				}
+				if (isDueling(responder))
+					return;
+				if (!PositionUtil.isInRange(requester, responder, MAX_DUEL_DISTANCE)) {
+					closeWithdrawQuestion(requester);
+					PacketSendUtility.sendPacket(requester, SM_SYSTEM_MESSAGE.STR_DUEL_PARTNER_TOO_FAR_FOR_START(responder.getName()));
+					PacketSendUtility.sendPacket(responder, SM_SYSTEM_MESSAGE.STR_DUEL_PARTNER_TOO_FAR_FOR_START(requester.getName()));
+					return;
+				}
+				startDuel(requester, responder);
 			}
 		};
 		if (targetPlayer.getResponseRequester().putRequest(SM_QUESTION_WINDOW.STR_DUEL_DO_YOU_ACCEPT_REQUEST, rrh)) {
@@ -168,12 +184,16 @@ public class DuelService {
 	 *          the other player
 	 */
 	private void startDuel(Player requester, Player responder) {
+		closeWithdrawQuestion(requester);
+		PacketSendUtility.sendPacket(requester, SM_DUEL.duelStarted(responder.getObjectId()));
+		PacketSendUtility.sendPacket(responder, SM_DUEL.duelStarted(requester.getObjectId()));
+		registerDuel(requester.getObjectId(), responder.getObjectId());
+		scheduleDuelStart(requester, responder);
+	}
+
+	private void closeWithdrawQuestion(Player requester) {
 		if (requester.getResponseRequester().remove(SM_QUESTION_WINDOW.STR_DUEL_DO_YOU_WITHDRAW_REQUEST))
 			PacketSendUtility.sendPacket(requester, SM_CLOSE_QUESTION_WINDOW.CLOSE_QUESTION_WINDOW());
-		PacketSendUtility.sendPacket(requester, SM_DUEL.SM_DUEL_STARTED(responder.getObjectId()));
-		PacketSendUtility.sendPacket(responder, SM_DUEL.SM_DUEL_STARTED(requester.getObjectId()));
-		registerDuel(requester.getObjectId(), responder.getObjectId());
-		createTask(requester, responder);
 	}
 
 	/**
@@ -207,7 +227,18 @@ public class DuelService {
 		});
 	}
 
-	private void createTask(Player requester, Player responder) {
+	private void scheduleDuelStart(Player requester, Player responder) {
+		// the client shows a three second countdown before the fight, so the five minute limit starts afterwards
+		Future<?> task = ThreadPoolManager.getInstance().schedule(() -> {
+			if (isDueling(requester, responder))
+				createDrawTask(requester, responder);
+		}, DUEL_START_DELAY_SECONDS, TimeUnit.SECONDS);
+
+		duelTasks.put(requester.getObjectId(), task);
+		duelTasks.put(responder.getObjectId(), task);
+	}
+
+	private void createDrawTask(Player requester, Player responder) {
 		// Schedule for draw
 		Future<?> task = ThreadPoolManager.getInstance().schedule(() -> {
 			if (isDueling(requester, responder)) {
@@ -215,10 +246,10 @@ public class DuelService {
 				onDuelEnd(DuelResult.DUEL_DRAW, responder, requester.getObjectId());
 				removeDuel(requester);
 			}
-		}, 5, TimeUnit.MINUTES); // 5 minutes battle retail like
+		}, DUEL_DURATION_SECONDS, TimeUnit.SECONDS); // 5 minutes battle
 
-		drawTasks.put(requester.getObjectId(), task);
-		drawTasks.put(responder.getObjectId(), task);
+		duelTasks.put(requester.getObjectId(), task);
+		duelTasks.put(responder.getObjectId(), task);
 	}
 
 	private void onDuelEnd(DuelResult duelResult, Player player, int opponentId) {
@@ -230,7 +261,7 @@ public class DuelService {
 			.map(AggroInfo::getAttacker)
 			.filter(attacker -> attacker.getMaster().getObjectId() == opponentId)
 			.forEach(attacker -> player.getAggroList().remove(attacker, false));
-		PacketSendUtility.sendPacket(player, SM_DUEL.SM_DUEL_RESULT(duelResult, PlayerService.getPlayerName(opponentId)));
+		PacketSendUtility.sendPacket(player, SM_DUEL.duelResult(duelResult, PlayerService.getPlayerName(opponentId)));
 	}
 
 	public Integer getOpponentId(Player player) {
@@ -268,7 +299,7 @@ public class DuelService {
 	}
 
 	private void removeAndEndTask(int playerId) {
-		Future<?> task = drawTasks.remove(playerId);
+		Future<?> task = duelTasks.remove(playerId);
 		if (task != null)
 			task.cancel(false);
 	}
