@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.storage.IStorage;
+import com.aionemu.gameserver.model.items.storage.Storage;
 import com.aionemu.gameserver.model.items.storage.StorageType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_CUBE_UPDATE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -75,7 +76,10 @@ public class ItemSplitService {
 		}
 
 		if (targetItem == null) {
-			if (destStorage.isFull()) {
+			// Items of a special cube must be checked against that cube, not against the regular one.
+			int specialCube = sourceItem.getItemTemplate().getExtraInventoryId();
+			boolean destStorageFull = destStorage instanceof Storage storage ? storage.isFull(specialCube) : destStorage.isFull();
+			if (destStorageFull) {
 				PacketSendUtility.sendPacket(player, destStorage.getStorageIsFullMessage());
 				return;
 			}
