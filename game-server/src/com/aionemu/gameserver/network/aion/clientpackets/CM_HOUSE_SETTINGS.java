@@ -42,7 +42,7 @@ public class CM_HOUSE_SETTINGS extends AionClientPacket {
 			return;
 
 		if (signNotice.length() > SIGN_NOTICE_MAX_LENGTH) { // client limits sign notices to 64 chars but technically it supports more
-			AuditLogger.log(player, "sent string with more than 64 chars for house notice: " + signNotice);
+			AuditLogger.log(player, "sent a house notice of " + signNotice.length() + " chars"); // do not log the text itself, it is client input
 			signNotice = signNotice.substring(0, SIGN_NOTICE_MAX_LENGTH);
 		}
 		HouseDoorState doorState = HouseDoorState.get(this.doorState);

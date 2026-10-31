@@ -35,6 +35,7 @@ public class PlayerChatService {
 
 	private static void logMessage(Player sender, ChatType type, String message, Player receiver) {
 		Logger log = playerLog;
+		message = message.replaceAll("[\\p{Cntrl}]", " "); // line breaks would forge entries in the chat log
 
 		// log whisper to adminaudit.log, if GM is involved (ignores private chat logging settings)
 		if (type == ChatType.WHISPER && (sender.isStaff() || (receiver != null && receiver.isStaff())) && LoggingConfig.LOG_GMAUDIT)
