@@ -54,7 +54,7 @@ public class FlyController {
 	 * allowed outside of flight areas, so it refuses it by moving the character to the world's flight restriction zone coordinates
 	 * (FRZ_X/FRZ_Y, the map corner) - the teleport this is meant to prevent.
 	 */
-	public void switchToNormalGlide() {
+	private void switchToNormalGlide() {
 		player.unsetFlyState(FlyState.FLYING);
 		player.unsetState(CreatureState.FLYING);
 		player.getGameStats().updateStatsAndSpeedVisually();
