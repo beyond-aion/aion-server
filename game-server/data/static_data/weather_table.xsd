@@ -9,26 +9,52 @@
 	</xs:element>
 	<xs:complexType name="WeatherTable">
 		<xs:sequence>
-			<xs:element minOccurs="0" maxOccurs="unbounded" name="table" type="WeatherEntry" />
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="weather" type="WeatherEntry" />
 		</xs:sequence>
-		<xs:attribute name="weather_count" type="xs:int" use="required" />
 		<xs:attribute name="zone_count" type="xs:int" use="required" />
 		<xs:attribute name="id" type="xs:int" use="required" />
 	</xs:complexType>
 	<xs:complexType name="WeatherEntry">
-		<xs:attribute name="after" type="xs:boolean" default="false" />
-		<xs:attribute name="before" type="xs:boolean" default="false" />
-		<xs:attribute name="name" type="xs:string" />
+		<xs:sequence>
+			<xs:element minOccurs="0" name="sign" type="WeatherPhase" />
+			<xs:element minOccurs="0" name="remain" type="WeatherPhase" />
+			<xs:element minOccurs="0" maxOccurs="4" name="sub" type="WeatherPhase" />
+		</xs:sequence>
 		<xs:attribute name="code" type="xs:int" use="required" />
-		<xs:attribute name="rank" type="xs:int" use="required" />
-		<xs:attribute name="zone_id" type="xs:int" use="required" />
+		<xs:attribute name="name" type="xs:string" use="required" />
+		<xs:attribute name="zone" type="xs:int" use="required" />
+		<xs:attribute name="priority" type="xs:int" use="required" />
+		<xs:attribute name="months" type="xs:string" />
+		<xs:attribute name="hours" type="xs:string" />
+		<xs:attribute name="occur_prob" type="xs:int" use="required" />
+		<xs:attribute name="occur_delay" type="xs:int" />
+		<xs:attribute name="duration" type="xs:int" use="required" />
+		<xs:attribute name="duration_ex" type="xs:int" />
+		<xs:attribute name="attribute" type="WeatherAttribute" />
+		<xs:attribute name="att_ranking" type="xs:int" />
 		<xs:attribute name="state" type="WeatherState" />
+	</xs:complexType>
+	<xs:complexType name="WeatherPhase">
+		<xs:attribute name="name" type="xs:string" use="required" />
+		<xs:attribute name="probability" type="xs:int" />
+		<xs:attribute name="duration" type="xs:int" />
+		<xs:attribute name="duration_ex" type="xs:int" />
 	</xs:complexType>
 	<xs:simpleType name="WeatherState">
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="RAIN" />
 			<xs:enumeration value="SNOW" />
 			<xs:enumeration value="WIND" />
+			<xs:enumeration value="EARTHQUAKE" />
+			<xs:enumeration value="HEATHAZE" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="WeatherAttribute">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="water" />
+			<xs:enumeration value="air" />
+			<xs:enumeration value="earth" />
+			<xs:enumeration value="fire" />
 		</xs:restriction>
 	</xs:simpleType>
 </xs:schema>

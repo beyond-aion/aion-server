@@ -14,7 +14,6 @@ public class GameTime implements Cloneable {
 	private static final int MINUTES_IN_DAY = MINUTES_IN_HOUR * 24;
 	private static final int MINUTES_IN_YEAR = Month.getDaysOfYear() * MINUTES_IN_DAY;
 	private int gameTime;
-	private DayTime dayTime;
 
 	private enum Month {
 		JANUARY(31),
@@ -58,7 +57,6 @@ public class GameTime implements Cloneable {
 		if (time != null && time < 0)
 			throw new IllegalArgumentException("Time must be >= 0");
 		gameTime = time == null ? 0 : time;
-		dayTime = calculateDayTime();
 	}
 
 	/**
@@ -74,23 +72,10 @@ public class GameTime implements Cloneable {
 	public void addMinutes(int minutes) {
 		if (minutes != 0) {
 			gameTime += minutes;
+			WeatherService.getInstance().onGameMinutes(this);
 			if (getMinute() == 0)
-				onHourChange(minutes == 1);
+				onHourChange();
 		}
-	}
-
-	public DayTime getDayTime() {
-		return dayTime;
-	}
-
-	/**
-	 * @return True if the daytime changed
-	 */
-	public boolean setDayTime(DayTime dayTime) {
-		if (this.dayTime == dayTime)
-			return false;
-		this.dayTime = dayTime;
-		return true;
 	}
 
 	/**
@@ -147,25 +132,8 @@ public class GameTime implements Cloneable {
 		return gameTime % MINUTES_IN_HOUR;
 	}
 
-	private void onHourChange(boolean changedByClock) {
+	private void onHourChange() {
 		TemporarySpawnEngine.onHourChange();
-		if (setDayTime(calculateDayTime()) && changedByClock) // don't change weather if time was changed by admin
-			WeatherService.getInstance().checkWeathersTime();
-	}
-
-	/**
-	 * @return The calculated day time based on the current game hour.
-	 */
-	private DayTime calculateDayTime() {
-		int hour = getHour();
-		if (hour > 21 || hour < 4)
-			return DayTime.NIGHT;
-		else if (hour > 16)
-			return DayTime.EVENING;
-		else if (hour > 8)
-			return DayTime.AFTERNOON;
-		else
-			return DayTime.MORNING;
 	}
 
 	public GameTime minus(GameTime gt) {

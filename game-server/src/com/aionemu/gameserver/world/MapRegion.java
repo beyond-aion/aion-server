@@ -193,6 +193,17 @@ public class MapRegion {
 		return false;
 	}
 
+	/**
+	 * @return The zone of the given type the coordinates are inside of, null when there is none.
+	 */
+	public ZoneInstance findZone(ZoneClassName zoneType, float x, float y, float z) {
+		for (ZoneInstance zone : zonesSortedByTypeAndPriority) {
+			if (zone.getZoneTemplate().getZoneType() == zoneType && zone.isInsideCoordinate(x, y, z))
+				return zone;
+		}
+		return null;
+	}
+
 	public boolean isInsideZone(String zoneName, Creature creature) {
 		for (ZoneInstance zone : zonesSortedByTypeAndPriority) {
 			if (zone.matches(zoneName))
