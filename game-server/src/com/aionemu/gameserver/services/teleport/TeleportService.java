@@ -47,6 +47,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.world.World;
+import com.aionemu.gameserver.world.WorldMap;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldMapType;
 import com.aionemu.gameserver.world.WorldPosition;
@@ -407,6 +408,12 @@ public class TeleportService {
 	}
 
 	public static void changeChannel(Player player, int channel) {
+		WorldMap map = World.getInstance().getWorldMap(player.getWorldId());
+		// Channels exist only in open worlds; on instance maps the number would select another group's instance.
+		if (map == null || map.isInstanceType() || channel < 0 || channel >= map.getInstanceCount()) {
+			AuditLogger.log(player, "tried to change to invalid channel " + channel + " of map " + player.getWorldId() + " at " + player.getPosition());
+			return;
+		}
 		World.getInstance().setPosition(player, player.getWorldId(), channel + 1, player.getX(), player.getY(), player.getZ(), player.getHeading());
 		player.getController().startProtectionActiveTask();
 		PacketSendUtility.sendPacket(player, new SM_CHANNEL_INFO(player.getPosition()));
