@@ -249,6 +249,16 @@ public class SkillTemplate implements L10n {
 		return activationAttribute == ActivationAttribute.CHARGE;
 	}
 
+	/**
+	 * @return True if the client may cast this skill; retail allows only the activation types 1, 2, 4 and 32 (toggle, active, maintain, charge).
+	 */
+	public boolean isCastableByClient() {
+		return switch (activationAttribute) {
+			case TOGGLE, ACTIVE, MAINTAIN, CHARGE -> true;
+			default -> false;
+		};
+	}
+
 	public EffectTemplate getEffectTemplate(int position) {
 		return effects != null && effects.getEffects().size() >= position ? effects.getEffects().get(position - 1) : null;
 
