@@ -6,13 +6,18 @@ import static java.util.stream.Collectors.*;
 import java.awt.Color;
 import java.util.*;
 
+import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.templates.spawns.SpawnGroup;
+import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
+import com.aionemu.gameserver.model.templates.world.WorldMapTemplate;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.World;
+import com.aionemu.gameserver.world.WorldMap;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldMapType;
 
@@ -27,6 +32,7 @@ public class GoTo extends AdminCommand {
 		super("goto", "Teleports you to regions by name.", """
 			 - Shows a list of locations to teleport to.
 			<location name> - Teleports you to the given location.
+			<map id | map name> - Teleports you to the first known point of that map, f.e. //goto 300450000.
 			""");
 		addLocations();
 	}
@@ -44,17 +50,32 @@ public class GoTo extends AdminCommand {
 			Map<String, Location> matches = findPossibleMatch(destination);
 			if (isSingleSureMatch(matches, destination)) {
 				location = matches.values().iterator().next();
-			} else {
-				StringBuilder msg = new StringBuilder("Could not find the specified destination.");
-				if (!matches.isEmpty()) {
-					msg.append(" Possible matches:");
-					matches.forEach((match, loc) -> msg.append("\n\t- ").append(ChatUtil.color(match, Color.WHITE)).append(" (")
-						.append(worldName(loc.mapType.getId())).append(")"));
+			} else if (matches.isEmpty()) {
+				List<WorldMapTemplate> maps = findMaps(destination);
+				if (maps.size() == 1) {
+					WorldMapTemplate map = maps.get(0);
+					location = mapLocation(map);
+					if (location == null) {
+						sendInfo(player, "Map " + describeMap(map) + " has no known teleport point. Use a location name instead; houses are entered with //house tp <address>.");
+						return;
+					}
+				} else if (maps.isEmpty()) {
+					sendInfo(player, "Could not find the specified destination.");
+					return;
+				} else {
+					StringBuilder msg = new StringBuilder("Several maps match:");
+					for (WorldMapTemplate map : maps)
+						msg.append("\n\t- ").append(ChatUtil.color(describeMap(map), Color.WHITE));
+					sendInfo(player, msg.toString());
+					return;
 				}
+			} else {
+				StringBuilder msg = new StringBuilder("Several locations match:");
+				matches.forEach((match, loc) -> msg.append("\n\t- ").append(ChatUtil.color(match, Color.WHITE)).append(" (")
+					.append(worldName(loc.mapId)).append(")"));
 				sendInfo(player, msg.toString());
-			}
-			if (location == null)
 				return;
+			}
 		}
 
 		goTo(player, location);
@@ -79,29 +100,83 @@ public class GoTo extends AdminCommand {
 		return possibleMatches;
 	}
 
+	/**
+	 * @return Maps whose name, cName or id contains the query, an exact match alone if there is one.
+	 */
+	private static List<WorldMapTemplate> findMaps(String query) {
+		List<WorldMapTemplate> exact = new ArrayList<>();
+		List<WorldMapTemplate> partial = new ArrayList<>();
+		for (WorldMapTemplate template : DataManager.WORLD_MAPS_DATA) {
+			if (!query.isEmpty() && String.valueOf(template.getMapId()).equals(query))
+				exact.add(template);
+			else if (template.getCName() != null && template.getCName().equalsIgnoreCase(query)
+				|| template.getName() != null && template.getName().equalsIgnoreCase(query))
+				exact.add(template);
+			else if (query.length() >= 3 && (template.getCName() != null && template.getCName().toLowerCase().contains(query)
+				|| template.getName() != null && template.getName().toLowerCase().contains(query)))
+				partial.add(template);
+		}
+		return exact.isEmpty() ? partial : exact;
+	}
+
+	private static String describeMap(WorldMapTemplate map) {
+		return worldName(map.getMapId()) + " (" + map.getMapId() + ")";
+	}
+
+	/**
+	 * @return A registered location of the map, else the first spawn point of the map, else the start position of its
+	 *         main instance, null when there is nothing to teleport to.
+	 */
+	private Location mapLocation(WorldMapTemplate map) {
+		for (Location location : locations.values())
+			if (location.mapId == map.getMapId())
+				return location;
+		List<SpawnGroup> spawns = DataManager.SPAWNS_DATA.getSpawnsByWorldId(map.getMapId());
+		if (spawns != null) {
+			for (SpawnGroup spawn : spawns) {
+				List<SpawnTemplate> spots = spawn.getSpawnTemplates();
+				if (!spots.isEmpty()) {
+					SpawnTemplate spot = spots.get(0);
+					return new Location(map.getMapId(), spot.getX(), spot.getY(), spot.getZ(), (byte) 0, List.of(describeMap(map)));
+				}
+			}
+		}
+		WorldMap worldMap = World.getInstance().getWorldMap(map.getMapId());
+		if (worldMap != null) {
+			WorldMapInstance instance = worldMap.getMainWorldMapInstance();
+			if (instance != null && instance.getStartPos() != null)
+				return new Location(map.getMapId(), instance.getStartPos().getX(), instance.getStartPos().getY(), instance.getStartPos().getZ(),
+					(byte) 0, List.of(describeMap(map)));
+		}
+		return null;
+	}
+
 	private static void goTo(Player player, Location location) {
 		WorldMapInstance instance;
-		if (player.getWorldId() == location.mapType.getId())
+		if (player.getWorldId() == location.mapId)
 			instance = player.getPosition().getWorldMapInstance();
-		else if (World.getInstance().getWorldMap(location.mapType.getId()).isInstanceType())
-			instance = InstanceService.getOrRegisterInstance(location.mapType.getId(), player);
+		else if (World.getInstance().getWorldMap(location.mapId).isInstanceType())
+			instance = InstanceService.getOrRegisterInstance(location.mapId, player);
 		else
-			instance = World.getInstance().getWorldMap(location.mapType.getId()).getMainWorldMapInstance();
+			instance = World.getInstance().getWorldMap(location.mapId).getMainWorldMapInstance();
 		TeleportService.teleportTo(player, instance, location.x, location.y, location.z, location.h != 0 ? location.h : player.getHeading(),
 			TeleportAnimation.NONE);
 	}
 
 	private void listLocations(Player player) {
-		Map<WorldMapType, Collection<Location>> locsByWorld = locations.entrySet().stream()
-			.collect(groupingBy(e -> e.getValue().mapType, LinkedHashMap::new, mapping(Map.Entry::getValue, toCollection(LinkedHashSet::new))));
+		Map<Integer, Collection<Location>> locsByWorld = locations.entrySet().stream()
+			.collect(groupingBy(e -> e.getValue().mapId, LinkedHashMap::new, mapping(Map.Entry::getValue, toCollection(LinkedHashSet::new))));
 		StringBuilder sb = new StringBuilder("Available locations:");
-		locsByWorld.forEach((worldMapType, locs) -> appendLocationsForMap(sb, worldMapType, locs));
-		sb.append("\nType " + ChatUtil.color(getAliasWithPrefix() + " <location name>", Color.WHITE) + " to teleport to a location. Location names can be abbreviated.");
+		locsByWorld.forEach((mapId, locs) -> appendLocationsForMap(sb, mapId, locs));
+		sb.append("\nType " + ChatUtil.color(getAliasWithPrefix() + " <location name>", Color.WHITE)
+			+ " to teleport to a location. Location names can be abbreviated.");
+		sb.append("\nAny map can be addressed by its id or name, f.e. ").append(ChatUtil.color(getAliasWithPrefix() + " 300450000", Color.WHITE))
+			.append("; it lands on the first spawn point of the map.");
 		sendInfo(player, sb.toString());
 	}
 
-	private void appendLocationsForMap(StringBuilder sb, WorldMapType worldMapType, Collection<Location> locs) {
-		sb.append('\n').append(worldName(worldMapType.getId())).append(':');
+	private void appendLocationsForMap(StringBuilder sb, int mapId, Collection<Location> locs) {
+		sb.append('\n').append(worldName(mapId)).append(':');
 		for (Location loc : locs) {
 			if (locs.size() > 1)
 				sb.append('\n');
@@ -414,7 +489,7 @@ public class GoTo extends AdminCommand {
 	}
 
 	private void addLocation(WorldMapType mapType, float x, float y, float z, byte h, String... identifiers) {
-		Location location = new Location(mapType, x, y, z, h, Arrays.asList(identifiers));
+		Location location = new Location(mapType.getId(), x, y, z, h, Arrays.asList(identifiers));
 		for (String identifier : identifiers) {
 			if (locations.put(identifier.toLowerCase(), location) != null)
 				throw new IllegalArgumentException("Duplicate location identifier: " + identifier);
@@ -423,13 +498,13 @@ public class GoTo extends AdminCommand {
 
 	private static class Location {
 
-		private final WorldMapType mapType;
+		private final int mapId;
 		private final float x, y, z;
 		private final byte h;
 		private final List<String> identifiers;
 
-		public Location(WorldMapType mapType, float x, float y, float z, byte h, List<String> identifiers) {
-			this.mapType = mapType;
+		public Location(int mapId, float x, float y, float z, byte h, List<String> identifiers) {
+			this.mapId = mapId;
 			this.x = x;
 			this.y = y;
 			this.z = z;
