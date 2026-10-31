@@ -132,49 +132,64 @@ public class PrivateStoreService {
 		if (store == null)
 			return;
 
-		List<TradePSItem> boughtItems = getBoughtItems(seller, store, tradeList);
-		if (boughtItems == null || boughtItems.isEmpty())
-			return; // Invalid items found or store was empty
+		long refund = 0;
+		synchronized (store) { // buyers must not take the same stack twice: the store count is the only limit
+			List<TradePSItem> boughtItems = getBoughtItems(seller, store, tradeList);
+			if (boughtItems == null || boughtItems.isEmpty())
+				return; // Invalid items found or store was empty
 
-		if (buyer.getInventory().getFreeSlots() < boughtItems.size()) {
-			PacketSendUtility.sendPacket(buyer, SM_SYSTEM_MESSAGE.STR_MSG_DICE_INVEN_ERROR());
-			return;
+			if (buyer.getInventory().getFreeSlots() < boughtItems.size()) {
+				PacketSendUtility.sendPacket(buyer, SM_SYSTEM_MESSAGE.STR_MSG_DICE_INVEN_ERROR());
+				return;
+			}
+
+			long price = 0;
+			try {
+				for (TradePSItem boughtItem : boughtItems)
+					price = Math.addExact(price, Math.multiplyExact(boughtItem.getPrice(), boughtItem.getCount()));
+			} catch (ArithmeticException e) {
+				AuditLogger.log(buyer, "tried to buy items for more than " + Long.MAX_VALUE + " kinah from private store of " + seller);
+				return;
+			}
+
+			if (price < 0) { // Kinah dupe
+				AuditLogger.log(buyer, "tried to buy item with negative kinah price from private store");
+				return;
+			}
+
+			for (TradePSItem boughtItem : boughtItems) { // the stack may be gone since the snapshot
+				Item item = seller.getInventory().getItemByObjId(boughtItem.getItemObjId());
+				if (item == null || item.getItemCount() < boughtItem.getCount())
+					return;
+			}
+
+			if (!buyer.getInventory().tryDecreaseKinah(price))
+				return;
+
+			for (TradePSItem boughtItem : boughtItems) {
+				Item item = seller.getInventory().getItemByObjId(boughtItem.getItemObjId());
+				long soldCount = item == null ? 0 : decreaseItemFromPlayer(seller, store, item, boughtItem);
+				if (soldCount < boughtItem.getCount())
+					refund += boughtItem.getPrice() * (boughtItem.getCount() - soldCount);
+				if (soldCount == 0)
+					continue;
+				// unpack
+				if (item.getPackCount() > 0)
+					item.setPackCount(item.getPackCount() - 1);
+
+				ItemService.addItem(buyer, item, soldCount);
+
+				if (soldCount == 1)
+					PacketSendUtility.sendPacket(seller, SM_SYSTEM_MESSAGE.STR_MSG_PERSONAL_SHOP_SELL_ITEM(item.getL10n()));
+				else
+					PacketSendUtility.sendPacket(seller, SM_SYSTEM_MESSAGE.STR_MSG_PERSONAL_SHOP_SELL_ITEM_MULTI(soldCount, item.getL10n()));
+				log.info("[PRIVATE STORE] > [Seller: {}] sold [Item: {}][Amount: {}] to [Buyer: {}] for [Price: {}]", seller.getName(),
+					item.getItemId(), soldCount, buyer.getName(), boughtItem.getPrice() * soldCount);
+			}
+			if (refund > 0)
+				buyer.getInventory().increaseKinah(refund);
+			seller.getInventory().increaseKinah(price - refund);
 		}
-
-		long price = 0;
-		try {
-			for (TradePSItem boughtItem : boughtItems)
-				price = Math.addExact(price, Math.multiplyExact(boughtItem.getPrice(), boughtItem.getCount()));
-		} catch (ArithmeticException e) {
-			AuditLogger.log(buyer, "tried to buy items for more than " + Long.MAX_VALUE + " kinah from private store of " + seller);
-			return;
-		}
-
-		if (price < 0) { // Kinah dupe
-			AuditLogger.log(buyer, "tried to buy item with negative kinah price from private store");
-			return;
-		}
-
-		if (!buyer.getInventory().tryDecreaseKinah(price))
-			return;
-
-		for (TradePSItem boughtItem : boughtItems) {
-			Item item = seller.getInventory().getItemByObjId(boughtItem.getItemObjId());
-			decreaseItemFromPlayer(seller, store, item, boughtItem);
-			// unpack
-			if (item.getPackCount() > 0)
-				item.setPackCount(item.getPackCount() - 1);
-
-			ItemService.addItem(buyer, item, boughtItem.getCount());
-
-			if (boughtItem.getCount() == 1)
-				PacketSendUtility.sendPacket(seller, SM_SYSTEM_MESSAGE.STR_MSG_PERSONAL_SHOP_SELL_ITEM(item.getL10n()));
-			else
-				PacketSendUtility.sendPacket(seller, SM_SYSTEM_MESSAGE.STR_MSG_PERSONAL_SHOP_SELL_ITEM_MULTI(boughtItem.getCount(), item.getL10n()));
-			log.info("[PRIVATE STORE] > [Seller: {}] sold [Item: {}][Amount: {}] to [Buyer: {}] for [Price: {}]", seller.getName(),
-				item.getItemId(), boughtItem.getCount(), buyer.getName(), boughtItem.getPrice() * boughtItem.getCount());
-		}
-		seller.getInventory().increaseKinah(price);
 
 		if (store.getSoldItems().isEmpty())
 			closePrivateStore(seller);
@@ -182,13 +197,18 @@ public class PrivateStoreService {
 
 	/**
 	 * Decrease item count and update inventory
+	 * 
+	 * @return the removed amount, which may be less than requested
 	 */
-	private static void decreaseItemFromPlayer(Player seller, PrivateStore store, Item item, TradePSItem boughtItem) {
-		seller.getInventory().decreaseItemCount(item, boughtItem.getCount());
+	private static long decreaseItemFromPlayer(Player seller, PrivateStore store, Item item, TradePSItem boughtItem) {
+		long soldCount = boughtItem.getCount() - seller.getInventory().decreaseItemCount(item, boughtItem.getCount());
+		if (soldCount <= 0)
+			return 0;
 		TradePSItem storeItem = store.getTradeItemByObjId(item.getObjectId());
-		storeItem.decreaseCount(boughtItem.getCount());
+		storeItem.decreaseCount(soldCount);
 		if (storeItem.getCount() == 0)
 			store.removeItem(item.getObjectId());
+		return soldCount;
 	}
 
 	/**
