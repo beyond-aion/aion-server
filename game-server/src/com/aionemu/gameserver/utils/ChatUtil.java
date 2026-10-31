@@ -417,4 +417,11 @@ public class ChatUtil {
 		}
 		return endIndex;
 	}
+
+	/**
+	 * @return True for control characters (e.g. \n or DEL), which the client cannot send via chat or other input fields.
+	 */
+	public static boolean isInvalidCharacter(int codePoint) {
+		return codePoint < 32 && codePoint != '\t' || codePoint == 127;
+	}
 }

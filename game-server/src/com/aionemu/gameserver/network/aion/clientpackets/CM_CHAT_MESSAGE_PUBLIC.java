@@ -10,7 +10,9 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_MESSAGE;
 import com.aionemu.gameserver.restrictions.PlayerRestrictions;
 import com.aionemu.gameserver.services.NameRestrictionService;
 import com.aionemu.gameserver.services.player.PlayerChatService;
+import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.utils.chathandlers.ChatProcessor;
 import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
 
@@ -44,6 +46,11 @@ public class CM_CHAT_MESSAGE_PUBLIC extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		final Player player = getConnection().getActivePlayer();
+
+		if (message.chars().anyMatch(ChatUtil::isInvalidCharacter)) {
+			AuditLogger.log(player, "sent chat message containing control characters: " + message);
+			return;
+		}
 
 		if (ChatProcessor.getInstance().handleChatCommand(player, message))
 			return;
