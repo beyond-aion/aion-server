@@ -141,6 +141,10 @@ public class CM_MOVE extends AionClientPacket {
 			player.getController().stopProtectionActiveTask();
 		player.getMoveController().setIsJumping(jumping);
 		World.getInstance().updatePosition(player, x, y, z, heading);
+		if ((type & MovementMask.GLIDE) == MovementMask.GLIDE && (type & (MovementMask.POSITION | MovementMask.FALL)) != 0) {
+			// retail checks every gliding move against the flight areas of the world before it takes effect, not on a later zone update
+			player.getFlyController().onGlideMove();
+		}
 		m.onMoveFromClient();
 		notifyControllers(player, oldMask);
 

@@ -17,10 +17,11 @@ public enum CustomPlayerState {
 	NEUTRAL_TO_ALL_PLAYERS(1 << 9),
 	NO_ITEM_COOLDOWN_MODE(1 << 10),
 	NO_ITEM_USE_GAUGE_MODE(1 << 11),
+	FREE_FLY_MODE(1 << 12),
 	ENEMY_OF_EVERYONE(ENEMY_OF_ALL_NPCS.getMask() | ENEMY_OF_ALL_PLAYERS.getMask()),
 	NEUTRAL_TO_EVERYONE(NEUTRAL_TO_ALL_NPCS.getMask() | NEUTRAL_TO_ALL_PLAYERS.getMask());
 
-	int bitMask;
+	private final int bitMask;
 
 	CustomPlayerState(int bitMask) {
 		this.bitMask = bitMask;

@@ -14,7 +14,6 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.gameserver.GameServer;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.handler.ShoutEventHandler;
-import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.configs.main.*;
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
 import com.aionemu.gameserver.controllers.observer.StanceObserver;
@@ -27,6 +26,7 @@ import com.aionemu.gameserver.model.actions.PlayerMode;
 import com.aionemu.gameserver.model.animations.ActionAnimation;
 import com.aionemu.gameserver.model.animations.ObjectDeleteAnimation;
 import com.aionemu.gameserver.model.gameobjects.*;
+import com.aionemu.gameserver.model.gameobjects.player.CustomPlayerState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureVisualState;
@@ -210,22 +210,13 @@ public class PlayerController extends CreatureController<Player> {
 	 */
 	public void onLeaveFlyArea() {
 		Player player = getOwner();
-		if (!player.hasAccess(AdminConfig.FREE_FLIGHT)) {
-			if (player.isInFlyingState()) {
-				if (player.isInGlidingState()) {
-					player.unsetFlyState(FlyState.FLYING);
-					player.unsetState(CreatureState.FLYING);
-					player.getLifeStats().triggerFpReduce();
-					player.getGameStats().updateStatsAndSpeedVisually();
-					PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.STOP_FLY), true);
-				} else {
-					player.getFlyController().endFly(true);
-					if (player.isSpawned() && !player.isInsideZoneType(ZoneType.FLY)) // not spawned means leaving by teleporter
-						AuditLogger.log(player, "left fly zone in fly state at " + player.getPosition());
-				}
-			} else if (player.isInGlidingState()) {
-				player.getLifeStats().triggerFpReduce();
-			}
+		player.getLifeStats().triggerFpReduce();
+		if (player.isInGlidingState()) {
+			player.getFlyController().onGlideMove();
+		} else if (player.isInFlyingState() && !player.isInCustomState(CustomPlayerState.FREE_FLY_MODE)) {
+			player.getFlyController().endFly(true);
+			if (player.isSpawned() && !player.isInsideZoneType(ZoneType.FLY)) // not spawned means leaving by teleporter
+				AuditLogger.log(player, "left fly zone in fly state at " + player.getPosition());
 		}
 	}
 

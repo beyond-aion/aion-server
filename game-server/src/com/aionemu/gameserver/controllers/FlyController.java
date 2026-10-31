@@ -1,12 +1,11 @@
 package com.aionemu.gameserver.controllers;
 
-import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.actions.PlayerMode;
+import com.aionemu.gameserver.model.gameobjects.player.CustomPlayerState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.gameobjects.state.FlyState;
-import com.aionemu.gameserver.model.templates.zone.ZoneType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
@@ -19,7 +18,7 @@ import com.aionemu.gameserver.utils.audit.AuditLogger;
 public class FlyController {
 
 	private static final long FLY_REUSE_TIME = 10000;
-	private Player player;
+	private final Player player;
 
 	public FlyController(Player player) {
 		this.player = player;
@@ -37,6 +36,29 @@ public class FlyController {
 			}
 			player.getGameStats().updateStatsAndSpeedVisually();
 		}
+	}
+
+	/**
+	 * Called for every move of a gliding player, before the move takes effect. Retail validates each of these moves against the
+	 * flight areas of the world instead of waiting for a zone update.
+	 */
+	public void onGlideMove() {
+		if (player.isInFlyingState() && player.isInGlidingState() && !player.isInCustomState(CustomPlayerState.FREE_FLY_MODE)
+			&& !player.isInsideFlyZone(player.getX(), player.getY(), player.getZ()))
+			switchToNormalGlide();
+	}
+
+	/**
+	 * Ends free flight but keeps the glide. Retail does this as soon as a gliding player leaves a flight area, even when the player
+	 * keeps gliding for a long time afterwards. Our client treats the landing that follows as a landing in free flight, which is not
+	 * allowed outside of flight areas, so it refuses it by moving the character to the world's flight restriction zone coordinates
+	 * (FRZ_X/FRZ_Y, the map corner) - the teleport this is meant to prevent.
+	 */
+	private void switchToNormalGlide() {
+		player.unsetFlyState(FlyState.FLYING);
+		player.unsetState(CreatureState.FLYING);
+		player.getGameStats().updateStatsAndSpeedVisually();
+		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.STOP_FLY), true);
 	}
 
 	/**
@@ -95,7 +117,7 @@ public class FlyController {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GLIDE_ONLY_DEVA_CAN());
 			return false;
 		}
-		if (!player.hasAccess(AdminConfig.FREE_FLIGHT) && !player.isInsideFlyZone()) {
+		if (!player.isInCustomState(CustomPlayerState.FREE_FLY_MODE) && !player.isInsideFlyZone()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FLYING_FORBIDDEN_HERE());
 			return false;
 		}
