@@ -1,5 +1,6 @@
 package admincommands;
 
+import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.TemporaryPlayerTeam;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -23,6 +24,14 @@ public class MoveToMe extends AdminCommand {
 
 	@Override
 	public void execute(Player admin, String... params) {
+		execute(admin, TeleportAnimation.NONE, false, params);
+	}
+
+	/**
+	 * Same as {@link #execute(Player, String...)}, but with an explicit port animation and with the option to leave the executing
+	 * player behind. Used by the commands that wrap this one and must not move the player who triggered them.
+	 */
+	public void execute(Player admin, TeleportAnimation animation, boolean skipAdmin, String... params) {
 		if (params.length < 1) {
 			sendInfo(admin);
 			return;
@@ -54,14 +63,19 @@ public class MoveToMe extends AdminCommand {
 				sendInfo(admin, name(playerToMove) + " currently has no team.");
 				return;
 			}
-			teamToMove.getOnlineMembers().forEach(p -> teleportPlayer(p, admin));
-		} else {
-			teleportPlayer(playerToMove, admin);
+			TeleportService.teleportTeamTo(teamToMove, admin.getPosition(), skipAdmin ? admin : null, animation)
+				.forEach(p -> announce(p, admin));
+		} else if (!(skipAdmin && playerToMove.equals(admin))) {
+			teleportPlayer(playerToMove, admin, animation);
 		}
 	}
 
-	private void teleportPlayer(Player playerToMove, Player admin) {
-		TeleportService.teleportTo(playerToMove, admin.getPosition());
+	private void teleportPlayer(Player playerToMove, Player admin, TeleportAnimation animation) {
+		TeleportService.teleportTo(playerToMove, admin.getPosition(), animation);
+		announce(playerToMove, admin);
+	}
+
+	private void announce(Player playerToMove, Player admin) {
 		sendInfo(admin, "Teleported " + name(playerToMove) + " to your location.");
 		sendInfo(playerToMove, "You have been teleported by " + name(admin) + ".");
 	}

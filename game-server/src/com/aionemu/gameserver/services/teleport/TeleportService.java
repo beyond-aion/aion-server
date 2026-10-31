@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.services.teleport;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.FutureTask;
 
 import org.slf4j.Logger;
@@ -34,6 +36,7 @@ import com.aionemu.gameserver.model.templates.teleport.TelelocationTemplate;
 import com.aionemu.gameserver.model.templates.teleport.TeleportLocation;
 import com.aionemu.gameserver.model.templates.teleport.TeleportType;
 import com.aionemu.gameserver.model.templates.teleport.TeleporterTemplate;
+import com.aionemu.gameserver.model.team.TemporaryPlayerTeam;
 import com.aionemu.gameserver.network.aion.serverpackets.*;
 import com.aionemu.gameserver.services.*;
 import com.aionemu.gameserver.services.RecallService.CancelReason;
@@ -212,6 +215,35 @@ public class TeleportService {
 		} else {
 			teleportTo(player, pos.getMapId(), pos.getInstanceId(), pos.getX(), pos.getY(), pos.getZ(), pos.getHeading(), TeleportAnimation.NONE);
 		}
+	}
+
+	/**
+	 * Same as {@link #teleportTo(Player, WorldPosition)}, but with the given port animation. {@link TeleportAnimation#NONE} keeps the
+	 * instant variant, any other animation makes the client play the teleport and report back before the player is moved.
+	 */
+	public static void teleportTo(Player player, WorldPosition pos, TeleportAnimation animation) {
+		if (animation == TeleportAnimation.NONE)
+			teleportTo(player, pos);
+		else
+			teleportTo(player, pos.getMapId(), pos.getInstanceId(), pos.getX(), pos.getY(), pos.getZ(), pos.getHeading(), animation);
+	}
+
+	/**
+	 * Teleports every online member of the given team to the destination. The excluded player (usually the one who issued the
+	 * teleport) stays where he is.
+	 *
+	 * @return the players that were teleported
+	 */
+	public static List<Player> teleportTeamTo(TemporaryPlayerTeam<?> team, WorldPosition destination, Player excluded,
+		TeleportAnimation animation) {
+		List<Player> teleported = new ArrayList<>();
+		for (Player member : team.getOnlineMembers()) {
+			if (member.equals(excluded))
+				continue;
+			teleportTo(member, destination, animation);
+			teleported.add(member);
+		}
+		return teleported;
 	}
 
 	public static void teleportDeadTo(Player player, int worldId, int instanceId, float x, float y, float z, byte heading) {
