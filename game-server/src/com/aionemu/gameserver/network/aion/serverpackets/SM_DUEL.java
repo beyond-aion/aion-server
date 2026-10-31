@@ -5,61 +5,58 @@ import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
+ * S_DUEL. Type 0 names the opponent and starts the client side countdown, type 1 reports how the duel ended.
+ *
  * @author xavier
  */
 public class SM_DUEL extends AionServerPacket {
 
-	private String playerName;
-	private DuelResult result;
-	private int requesterObjId;
-	private int type;
+	private final Type type;
+	private final int opponentObjId;
+	private final DuelResult duelResult;
+	private final String playerName;
 
-	private SM_DUEL(int type) {
+	private SM_DUEL(Type type, int opponentObjId, DuelResult duelResult, String playerName) {
 		this.type = type;
-	}
-
-	public static SM_DUEL SM_DUEL_STARTED(int requesterObjId) {
-		SM_DUEL packet = new SM_DUEL(0x00);
-		packet.setRequesterObjId(requesterObjId);
-		return packet;
-	}
-
-	private void setRequesterObjId(int requesterObjId) {
-		this.requesterObjId = requesterObjId;
-	}
-
-	public static SM_DUEL SM_DUEL_RESULT(DuelResult result, String playerName) {
-		SM_DUEL packet = new SM_DUEL(0x01);
-		packet.setPlayerName(playerName);
-		packet.setResult(result);
-		return packet;
-	}
-
-	private void setPlayerName(String playerName) {
+		this.opponentObjId = opponentObjId;
+		this.duelResult = duelResult;
 		this.playerName = playerName;
 	}
 
-	private void setResult(DuelResult result) {
-		this.result = result;
+	public static SM_DUEL duelStarted(int opponentObjId) {
+		return new SM_DUEL(Type.STARTED, opponentObjId, null, null);
+	}
+
+	public static SM_DUEL duelResult(DuelResult result, String playerName) {
+		return new SM_DUEL(Type.RESULT, 0, result, playerName);
 	}
 
 	@Override
 	protected void writeImpl(AionConnection con) {
-		writeC(type);
+		writeC(type.getId());
 
 		switch (type) {
-			case 0x00:
-				writeD(requesterObjId);
-				break;
-			case 0x01:
-				writeC(result.getResultId()); // unknown
-				writeD(result.getMsgId());
+			case STARTED -> writeD(opponentObjId);
+			case RESULT -> {
+				writeC(duelResult.getResultCode());
+				writeD(duelResult.getMsgId());
 				writeS(playerName);
-				break;
-			case 0xE0:
-				break;
-			default:
-				throw new IllegalArgumentException("invalid SM_DUEL packet type " + type);
+			}
+		}
+	}
+
+	private enum Type {
+		STARTED(0),
+		RESULT(1);
+
+		private final int id;
+
+		Type(int id) {
+			this.id = id;
+		}
+
+		private int getId() {
+			return id;
 		}
 	}
 }

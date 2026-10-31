@@ -5,7 +5,10 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
  * Opens a yes/no question window on the client. Question based on the code given, defined in client_strings.xml
- * 
+ * <p>
+ * The body ends with {@code D reserved; C flags; D senderObjId; D rangeOrCooldownSeconds}. The client ignores the
+ * reserved dword and reads the last one as a range or cooldown when flags is 1.
+ *
  * @author Ben, avol, Lyahim, Neon
  */
 public class SM_QUESTION_WINDOW extends AionServerPacket {
@@ -276,7 +279,7 @@ public class SM_QUESTION_WINDOW extends AionServerPacket {
 	private static final int MAX_PARAM_COUNT = 3;
 
 	private final int code;
-	private final int senderId;
+	private final int senderObjId;
 	private final int rangeOrCooldownSeconds;
 	private final Object[] params;
 
@@ -285,16 +288,16 @@ public class SM_QUESTION_WINDOW extends AionServerPacket {
 	 * 
 	 * @param code
 	 *          - code The string code to display, found in client_strings.xml
-	 * @param senderId
-	 *          - sender Object id
+	 * @param senderObjId
+	 *          - object id the client checks the range against, 0 if no range is used
 	 * @param rangeOrCooldownSeconds
-	 *          - the valid range for this dialog (relative to the senderId) or the stone cooldown time for artifact or door repair windows
+	 *          - range for this dialog or cooldown for artifact and door repair windows
 	 * @param params
 	 *          - params The parameters for the string, if any
 	 */
-	public SM_QUESTION_WINDOW(int code, int senderId, int rangeOrCooldownSeconds, Object... params) {
+	public SM_QUESTION_WINDOW(int code, int senderObjId, int rangeOrCooldownSeconds, Object... params) {
 		this.code = code;
-		this.senderId = senderId;
+		this.senderObjId = senderObjId;
 		this.rangeOrCooldownSeconds = rangeOrCooldownSeconds;
 		if (params.length > MAX_PARAM_COUNT)
 			throw new IllegalArgumentException("More than " + MAX_PARAM_COUNT + " message parameters are not supported");
@@ -306,9 +309,9 @@ public class SM_QUESTION_WINDOW extends AionServerPacket {
 		writeD(code);
 		for (int i = 0; i < MAX_PARAM_COUNT; i++) // client always wants content here, even if there is none
 			writeS(i < params.length ? String.valueOf(params[i]) : null);
-		writeD(0x00);// unk
-		writeC(rangeOrCooldownSeconds > 0 ? 1 : 0); // 1 = check for range (client will auto decline) / display cooldown time
-		writeD(senderId);
-		writeD(rangeOrCooldownSeconds); // range within the question is valid or artifact/repair stone cooldown to display
+		writeD(0); // reserved
+		writeC(rangeOrCooldownSeconds > 0);
+		writeD(senderObjId);
+		writeD(rangeOrCooldownSeconds);
 	}
 }

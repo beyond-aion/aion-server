@@ -81,6 +81,15 @@ public abstract class BaseServerPacket extends BasePacket {
 	}
 
 	/**
+	 * Write boolean as byte: 1 for true, 0 for false.
+	 *
+	 * @param value
+	 */
+	protected final void writeC(boolean value) {
+		buf.put((byte) (value ? 1 : 0));
+	}
+
+	/**
 	 * Write double to buffer.
 	 * 
 	 * @param buf
