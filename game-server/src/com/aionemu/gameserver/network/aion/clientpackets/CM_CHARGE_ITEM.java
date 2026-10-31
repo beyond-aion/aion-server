@@ -5,10 +5,12 @@ import java.util.List;
 import java.util.Set;
 
 import com.aionemu.gameserver.model.gameobjects.Item;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.services.item.ItemChargeService;
+import com.aionemu.gameserver.utils.PositionUtil;
 
 /**
  * @author ATracer
@@ -36,7 +38,7 @@ public class CM_CHARGE_ITEM extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
-		if (!player.isTargeting(targetNpcObjectId)) {
+		if (!player.isTargeting(targetNpcObjectId) || !(player.getTarget() instanceof Npc npc) || !PositionUtil.isInTalkRange(player, npc)) {
 			return; // TODO audit?
 		}
 

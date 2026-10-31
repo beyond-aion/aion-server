@@ -72,6 +72,7 @@ import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.skillengine.task.AbstractInteractionTask;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.world.WorldMapType;
 import com.aionemu.gameserver.world.WorldPosition;
 
@@ -1375,8 +1376,9 @@ public class Player extends Creature {
 	}
 
 	public boolean isTargetingNpcWithFunction(int objectId, int dialogActionId) {
-		VisibleObject target = getTarget();
-		return target instanceof Npc && target.getObjectId() == objectId && ((Npc) target).getObjectTemplate().supportsAction(dialogActionId);
+		// Being in the known list is not enough: NPC services require talking distance, as with the warehouses and the mailbox.
+		return getTarget() instanceof Npc npc && npc.getObjectId() == objectId && npc.getObjectTemplate().supportsAction(dialogActionId)
+			&& PositionUtil.isInTalkRange(this, npc);
 	}
 
 	/**
