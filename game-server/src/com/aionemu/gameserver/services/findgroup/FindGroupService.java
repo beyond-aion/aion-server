@@ -29,11 +29,20 @@ import com.aionemu.gameserver.world.World;
  */
 public class FindGroupService {
 
+	/**
+	 * The message is sent to every player who opens the group finder, so it must not be able to grow the packet beyond what the client reads.
+	 */
+	private static final int MAX_MESSAGE_LENGTH = 255;
+
 	private final Map<Integer, GroupRecruitment> recruitments = new ConcurrentHashMap<>(); // Recruit Group Members tab
 	private final Map<Integer, GroupApplication> applications = new ConcurrentHashMap<>(); // Apply for Group tab
 	private final Map<Integer, ServerWideGroup> instanceGroups = new ConcurrentHashMap<>(); // Instance Groups tab
 
 	private FindGroupService() {
+	}
+
+	private static String clampMessage(String message) {
+		return message == null || message.length() <= MAX_MESSAGE_LENGTH ? message : message.substring(0, MAX_MESSAGE_LENGTH);
 	}
 
 	public void showRecruitments(Player player) {
@@ -72,14 +81,14 @@ public class FindGroupService {
 		AionObject playerOrTeam = player.getCurrentTeam();
 		if (playerOrTeam == null)
 			playerOrTeam = player;
-		GroupRecruitment recruitment = new GroupRecruitment(playerOrTeam, message, groupType);
+		GroupRecruitment recruitment = new GroupRecruitment(playerOrTeam, clampMessage(message), groupType);
 		recruitments.put(playerOrTeam.getObjectId(), recruitment);
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_MATCH_OFFER_PARTY_POSTED());
 		showRecruitments(player); // necessary if player switched tabs before adding this entry (client bug)
 	}
 
 	public void addApplication(Player player, String message, int groupType, int classId, int level) {
-		GroupApplication application = new GroupApplication(player, message, groupType, classId, level);
+		GroupApplication application = new GroupApplication(player, clampMessage(message), groupType, classId, level);
 		applications.put(player.getObjectId(), application);
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_MATCH_SEEK_PARTY_POSTED());
 		showApplications(player); // necessary if player switched tabs before adding this entry (client bug)
@@ -89,7 +98,7 @@ public class FindGroupService {
 		int teamId = player.getCurrentTeamId();
 		GroupRecruitment recruitment = recruitments.get(teamId == 0 ? player.getObjectId() : teamId);
 		if (recruitment != null) {
-			recruitment.setMessage(message);
+			recruitment.setMessage(clampMessage(message));
 			recruitment.setGroupType(groupType);
 			recruitment.updateLastUpdate();
 		}
@@ -98,7 +107,7 @@ public class FindGroupService {
 	public void updateApplication(Player player, String message, int groupType, int classId, int level) {
 		GroupApplication application = applications.get(player.getObjectId());
 		if (application != null) {
-			application.setMessage(message);
+			application.setMessage(clampMessage(message));
 			application.setGroupType(groupType);
 			application.setClassId(classId);
 			application.setLevel(level);
@@ -128,7 +137,7 @@ public class FindGroupService {
 	}
 
 	public void registerInstanceGroup(Player player, int instanceMaskId, String message, int minMembers) {
-		ServerWideGroup instanceGroup = new ServerWideGroup(player, instanceMaskId, minMembers, message);
+		ServerWideGroup instanceGroup = new ServerWideGroup(player, instanceMaskId, minMembers, clampMessage(message));
 		instanceGroups.put(player.getObjectId(), instanceGroup);
 		PacketSendUtility.sendPacket(player, new SM_FIND_GROUP(14, List.of(instanceGroup)));
 	}
@@ -136,7 +145,7 @@ public class FindGroupService {
 	public void updateInstanceGroup(Player player, String message) {
 		ServerWideGroup instanceGroup = instanceGroups.get(player.getObjectId());
 		if (instanceGroup != null) {
-			instanceGroup.setMessage(message);
+			instanceGroup.setMessage(clampMessage(message));
 			instanceGroup.setLastUpdate();
 			showInstanceGroups(player, true);
 		}
