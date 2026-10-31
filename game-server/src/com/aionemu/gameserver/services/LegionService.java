@@ -556,7 +556,10 @@ public class LegionService {
 	}
 
 	public void uploadEmblemInfo(Player activePlayer, int totalSize, int color_a, int color_r, int color_g, int color_b, LegionEmblemType emblemType) {
-		LegionEmblem legionEmblem = activePlayer.getLegion().getLegionEmblem();
+		Legion legion = activePlayer.getLegion();
+		if (legion == null)
+			return;
+		LegionEmblem legionEmblem = legion.getLegionEmblem();
 		if (totalSize <= 0 || totalSize > LegionEmblem.MAX_CUSTOM_EMBLEM_SIZE) {
 			AuditLogger.log(activePlayer, "tried to upload a legion emblem of " + totalSize + " bytes");
 			legionEmblem.resetUploadSettings();
@@ -573,7 +576,10 @@ public class LegionService {
 	}
 
 	public void uploadEmblemData(Player activePlayer, byte[] data) {
-		LegionEmblem legionEmblem = activePlayer.getLegion().getLegionEmblem();
+		Legion legion = activePlayer.getLegion();
+		if (legion == null)
+			return;
+		LegionEmblem legionEmblem = legion.getLegionEmblem();
 		if (legionRestrictions.canUploadEmblem(activePlayer, false)) {
 			if (!legionEmblem.addUploadData(data)) {
 				PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_GUILD_WARN_CORRUPT_EMBLEM_FILE());
