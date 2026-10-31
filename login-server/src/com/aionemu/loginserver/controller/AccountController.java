@@ -57,6 +57,7 @@ public class AccountController {
 	 */
 	public static void removeAccountOnLS(Account account) {
 		accountsOnLS.remove(account.getId());
+		removeGSCharacterCounts(account.getId());
 	}
 
 	/**
@@ -68,6 +69,7 @@ public class AccountController {
 		if (con != null && con.getSessionKey().checkSessionKey(key)) {
 			// account is successful logged in on gs remove it from here
 			accountsOnLS.remove(key.accountId);
+			removeGSCharacterCounts(key.accountId);
 
 			GameServerInfo gsi = gsConnection.getGameServerInfo();
 			Account acc = con.getAccount();
@@ -281,6 +283,10 @@ public class AccountController {
 			return account;
 		}
 		return null;
+	}
+
+	public static synchronized void removeGSCharacterCounts(int accountId) {
+		accountsGSCharacterCounts.remove(accountId);
 	}
 
 	public static synchronized void loadGSCharactersCount(int accountId) {
