@@ -135,7 +135,8 @@ public class InstanceService {
 	}
 
 	private static WorldMapInstance getOrCreatePersonalInstance(int worldId, int ownerId) {
-		if (ownerId == 0 || !WorldMapType.getWorld(worldId).isPersonal())
+		WorldMapType worldMapType = WorldMapType.getWorld(worldId);
+		if (ownerId == 0 || worldMapType == null || !worldMapType.isPersonal())
 			return null;
 
 		for (WorldMapInstance instance : World.getInstance().getWorldMap(worldId)) {
