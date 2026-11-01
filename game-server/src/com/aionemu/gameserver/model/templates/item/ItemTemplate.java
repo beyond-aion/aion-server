@@ -139,6 +139,10 @@ public class ItemTemplate extends VisibleObjectTemplate {
 	private boolean dopingPetUsable;
 	@XmlAttribute(name = "stigma_type")
 	private StigmaType stigmaType = StigmaType.NORMAL;
+	@XmlAttribute(name = "cannot_matter_option")
+	private boolean cannotMatterOption;
+	@XmlAttribute(name = "cannot_extraction")
+	private boolean cannotExtraction;
 
 	private static final WeaponStats emptyWeaponStats = new WeaponStats();
 	private static final ItemUseLimits emptyUseLimits = new ItemUseLimits();
@@ -582,6 +586,14 @@ public class ItemTemplate extends VisibleObjectTemplate {
 
 	public StigmaType getStigmaType() {
 		return stigmaType;
+	}
+
+	public boolean isCannotMatterOption() {
+		return cannotMatterOption;
+	}
+
+	public boolean isCannotExtraction() {
+		return cannotExtraction;
 	}
 
 }

@@ -78,7 +78,7 @@ public class CM_MANASTONE extends AionClientPacket {
 						sendPacket(SM_SYSTEM_MESSAGE.STR_ITEM_IS_NOT_USABLE());
 						return;
 					}
-					if (enchantAction.canAct(player, stone, targetItem)) {
+					if (enchantAction.canAct(player, stone, targetItem, targetFusedSlot)) {
 						Item supplement = null;
 						if (supplementUniqueId != 0) {
 							supplement = player.getInventory().getItemByObjId(supplementUniqueId);

@@ -23,13 +23,24 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 @XmlType(name = "ExtractAction")
 public class ExtractAction extends AbstractItemAction {
 
+	private static final int MAX_EXTRACTABLE_LEVEL = 80;
+
 	@Override
 	public boolean canAct(Player player, Item parentItem, Item targetItem, Object... params) {
 		if (targetItem == null) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_NO_TARGET_ITEM());
 			return false;
 		}
-		if (!targetItem.getItemTemplate().isArmor() && !targetItem.getItemTemplate().isWeapon()) {
+		int itemId = targetItem.getItemId();
+		if (!isExtractableItemId(itemId)) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_IT_CAN_NOT_BE_DECOMPOSED(targetItem.getL10n()));
+			return false;
+		}
+		if (targetItem.getItemTemplate().isCannotExtraction()) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_IT_CAN_NOT_BE_DECOMPOSED(targetItem.getL10n()));
+			return false;
+		}
+		if (targetItem.getItemTemplate().getLevel() > MAX_EXTRACTABLE_LEVEL) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_IT_CAN_NOT_BE_DECOMPOSED(targetItem.getL10n()));
 			return false;
 		}
@@ -39,6 +50,10 @@ public class ExtractAction extends AbstractItemAction {
 		}
 
 		return true;
+	}
+
+	private static boolean isExtractableItemId(int itemId) {
+		return (itemId >= 100000000 && itemId <= 102999999) || (itemId >= 110000000 && itemId <= 118999999);
 	}
 
 	@Override

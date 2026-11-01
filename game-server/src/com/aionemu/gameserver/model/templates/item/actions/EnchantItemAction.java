@@ -73,11 +73,38 @@ public class EnchantItemAction extends AbstractItemAction {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EXCEED_CANNOT_02(parentItem.getItemTemplate().getL10n()));
 				return false;
 			}
+			return true;
 		}
-		int msID = parentItem.getItemTemplate().getTemplateId() / 1000000;
-		int tID = targetItem.getItemTemplate().getTemplateId() / 1000000;
-		return (msID == 167 || msID == 166) && tID < 120;
+
+		if (!isManastone(parentItem) || !isSocketable(targetItem))
+			return false;
+
+		// only the part whose sockets receive the stone counts: the main weapon or the fused one (params[0] is the target slot, 1 = main)
+		boolean fusedPart = params.length > 0 && params[0] instanceof Integer targetWeapon && targetWeapon != 1;
+		ItemTemplate socketTemplate = fusedPart ? targetItem.getFusionedItemTemplate() : targetItem.getItemTemplate();
+		if (socketTemplate != null && socketTemplate.isCannotMatterOption()) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_OPTION_IT_CAN_NOT_BE_GIVEN_OPTION(targetItem.getItemTemplate().getL10n(),
+				parentItem.getItemTemplate().getL10n()));
+			return false;
+		}
+		return true;
 	}
+
+	/**
+	 * Normal manastones are item ids 166.1xxxxx, special ones 167.02xxxx. Enchantment stones (166.0xxxxx) are handled above.
+	 */
+	private static boolean isManastone(Item parentItem) {
+		ItemGroup group = parentItem.getItemTemplate().getItemGroup();
+		return group == ItemGroup.MANASTONE || group == ItemGroup.SPECIAL_MANASTONE;
+	}
+
+	/**
+	 * Manastones are socketed into weapons (100xxxxxx) and armor (110xxxxxx-118xxxxxx); accessories start at 120xxxxxx.
+	 */
+	private static boolean isSocketable(Item targetItem) {
+		return targetItem.getItemId() < 120_000_000;
+	}
+
 
 	@Override
 	public void act(final Player player, final Item parentItem, final Item targetItem, Object... params) {

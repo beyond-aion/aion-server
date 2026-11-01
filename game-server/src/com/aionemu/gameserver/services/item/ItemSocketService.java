@@ -114,6 +114,11 @@ public class ItemSocketService {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REMOVE_ITEM_OPTION_NO_OPTION_TO_REMOVE(item.getL10n()));
 			return;
 		}
+		ItemTemplate socketTemplate = isFusionSocket ? item.getFusionedItemTemplate() : item.getItemTemplate();
+		if (socketTemplate != null && socketTemplate.isCannotMatterOption()) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REMOVE_ITEM_OPTION_IT_CAN_NOT_BE_GIVEN_OPTION(item.getL10n()));
+			return;
+		}
 
 		Set<ManaStone> itemStones = isFusionSocket ? item.getFusionStones() : item.getItemStones();
 		ManaStone manaStoneToRemove = itemStones.stream().filter(ms -> ms.getSlot() == slotNum).findFirst().orElse(null);
