@@ -5,6 +5,9 @@ import java.util.concurrent.FutureTask;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.aionemu.gameserver.configs.main.GeoDataConfig;
+import com.aionemu.gameserver.configs.main.GeoDataConfig.Mode;
+import com.aionemu.gameserver.controllers.movement.MovementMask;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.dataholders.PlayerInitialData;
 import com.aionemu.gameserver.model.CreatureType;
@@ -411,6 +414,10 @@ public class TeleportService {
 			AuditLogger.log(player, "tried to change to invalid channel " + channel + " of map " + player.getWorldId() + " at " + player.getPosition());
 			return;
 		}
+		if (!canChangeChannelNow(player, map)) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANT_CHANGE_CHANNEL_NOW());
+			return;
+		}
 		// the cooldown counts from the end of any teleport, including the previous channel change
 		int cooldownSeconds = map.getTemplate().getChannelChangeCooldownSeconds();
 		int remainingSeconds = (int) (cooldownSeconds - (System.currentTimeMillis() - player.getLastTeleportMillis()) / 1000);
@@ -424,6 +431,20 @@ public class TeleportService {
 		PacketSendUtility.sendPacket(player, new SM_CHANNEL_INFO(player.getPosition()));
 		PacketSendUtility.sendPacket(player, new SM_PLAYER_SPAWN(player));
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_TELEPORT_ZONECHANNEL(channel));
+	}
+
+	private static boolean canChangeChannelNow(Player player, WorldMap map) {
+		if (player.isDead() || !player.isSpawned() || player.hasStore() || player.isTrading() || player.isLooting())
+			return false;
+		if (player.isFlying() || player.isUsingFlightTransporterOrWindstream() || player.isInPlayerMode(PlayerMode.RIDE))
+			return false;
+		if (player.isInState(CreatureState.RESTING) || player.isInState(CreatureState.CHAIR))
+			return false;
+		if ((player.getMoveController().getMovementMask() & MovementMask.VEHICLE) != 0 || player.getController().hasTask(TaskId.TELEPORT))
+			return false;
+		if (map.getInstanceCount() <= 1 || player.getInteractionTask() != null) // gathering or crafting
+			return false;
+		return GeoDataConfig.MODE != Mode.ON || !Float.isNaN(GeoService.getInstance().getZ(player, player.getZ() + 0.3f, player.getZ() - 0.3f));
 	}
 
 	public static void setEventPos(WorldPosition pos, Race race) {
