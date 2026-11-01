@@ -26346,6 +26346,13 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
+	 * By using %0%, you have received %num1 XP.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_ADDEXP_POINT_USE(String item, long exp) {
+		return new SM_SYSTEM_MESSAGE(1401524, item, exp);
+	}
+
+	/**
 	 * By using %0, you have lost %num1 XP, but received %2.
 	 */
 	public static SM_SYSTEM_MESSAGE STR_MSG_EXP_EXTRACTION_USE(String extractionItem, long exp, String rewardItem) {

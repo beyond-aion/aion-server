@@ -28,7 +28,11 @@ public class ItemActions {
 		@XmlElement(name = "polish", type = PolishAction.class),
 		@XmlElement(name = "tuning", type = TuningAction.class), @XmlElement(name = "megaphone", type = MegaphoneAction.class),
 		@XmlElement(name = "pack", type = PackAction.class), @XmlElement(name = "tampering", type = TamperingAction.class),
-		@XmlElement(name = "multireturn", type = MultiReturnAction.class), @XmlElement(name = "composition", type = CompositionAction.class) })
+		@XmlElement(name = "multireturn", type = MultiReturnAction.class), @XmlElement(name = "composition", type = CompositionAction.class),
+		@XmlElement(name = "expadd", type = ExpAddAction.class), @XmlElement(name = "charbm", type = CharBmAction.class),
+		@XmlElement(name = "f2ppack", type = F2pPackAction.class), @XmlElement(name = "seal", type = SealAction.class),
+		@XmlElement(name = "unseal", type = UnsealAction.class), @XmlElement(name = "temperingreset", type = TemperingResetAction.class),
+		@XmlElement(name = "optionextend", type = OptionExtendAction.class) })
 	private List<AbstractItemAction> itemActions;
 
 	/**
