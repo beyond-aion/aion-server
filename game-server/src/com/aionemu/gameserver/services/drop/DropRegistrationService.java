@@ -100,6 +100,16 @@ public class DropRegistrationService {
 		npc.getPosition().getWorldMapInstance().getInstanceHandler().onDropRegistered(npc, winnerObj);
 		npc.getAi().onGeneralEvent(AIEventType.DROP_REGISTERED);
 
+		// drops flagged no_loot_public are only shown to the looters, not to everyone nearby
+		for (DropItem dropItem : droppedItems) {
+			if (dropItem.isNoLootPublic() && dropItem.getPlayerObjIds().isEmpty()) {
+				for (Player allowedLooter : allowedLooters)
+					dropItem.setPlayerObjId(allowedLooter.getObjectId());
+				if (dropItem.getPlayerObjIds().isEmpty() && looter != null)
+					dropItem.setPlayerObjId(looter.getObjectId());
+			}
+		}
+
 		for (Player p : allowedLooters) {
 			PacketSendUtility.sendPacket(p, new SM_LOOT_STATUS(npcObjId, Status.LOOT_ENABLE));
 		}

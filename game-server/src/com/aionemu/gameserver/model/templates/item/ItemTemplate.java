@@ -145,6 +145,8 @@ public class ItemTemplate extends VisibleObjectTemplate {
 	private boolean cannotExtraction;
 	@XmlAttribute(name = "bonus_apply")
 	private BonusApply bonusApply = BonusApply.EQUIP;
+	@XmlAttribute(name = "no_loot_public")
+	private boolean noLootPublic;
 
 	private static final WeaponStats emptyWeaponStats = new WeaponStats();
 	private static final ItemUseLimits emptyUseLimits = new ItemUseLimits();
@@ -600,6 +602,10 @@ public class ItemTemplate extends VisibleObjectTemplate {
 
 	public BonusApply getBonusApply() {
 		return bonusApply;
+	}
+
+	public boolean isNoLootPublic() {
+		return noLootPublic;
 	}
 
 }

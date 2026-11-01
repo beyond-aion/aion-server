@@ -47,9 +47,11 @@ public class SM_LOOT_ITEMLIST extends AionServerPacket {
 			writeD(drop.getItemId());
 			writeD((int) dropItem.getCount());
 			writeC(dropItem.getOptionalSocket());
-			writeC(0);
-			writeC(0); // 3.5
 			ItemTemplate template = DataManager.ITEM_DATA.getItemTemplate(drop.getItemId());
+			// Amplification state of the drop instance is unknown before the item is created,
+			// so only the template's amplification capability is sent.
+			writeC(0); // item is amplified
+			writeC(template.getItemSlot() != 0 && template.getMaxEnchantBonus() != 0 ? 0xff : 0); // template allows amplification
 			boolean showLootConfirmation = !template.isTradeable();
 			if (dropItem.isOnlyPossibleLooter(activePlayer) || !teamMembersNearby)
 				showLootConfirmation = false;

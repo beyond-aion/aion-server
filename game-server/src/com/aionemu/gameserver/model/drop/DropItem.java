@@ -83,7 +83,13 @@ public class DropItem {
 	}
 
 	public boolean canViewDropItem(int objId) {
-		return playerObjIds.isEmpty() || playerObjIds.contains(objId);
+		if (playerObjIds.isEmpty())
+			return !isNoLootPublic();
+		return playerObjIds.contains(objId);
+	}
+
+	public boolean isNoLootPublic() {
+		return DataManager.ITEM_DATA.getItemTemplate(dropTemplate.getItemId()).isNoLootPublic();
 	}
 
 	/**
