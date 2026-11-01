@@ -406,7 +406,7 @@ public class TeleportService {
 	public static void changeChannel(Player player, int channel) {
 		WorldMap map = player.getWorldMapInstance().getParent();
 		// Channels exist only in open worlds; on instance maps the number would select another group's instance.
-		if (map.isInstanceType() || map.getWorldMapInstance(channel + 1) == null) {
+		if (map.isInstanceType() || channel < 0 || map.getWorldMapInstance(channel + 1) == null) {
 			AuditLogger.log(player, "tried to change to invalid channel " + channel + " of map " + player.getWorldId() + " at " + player.getPosition());
 			return;
 		}
