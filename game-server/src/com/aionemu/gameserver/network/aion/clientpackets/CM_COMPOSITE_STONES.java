@@ -66,11 +66,10 @@ public class CM_COMPOSITE_STONES extends AionClientPacket {
 		if (!PlayerRestrictions.canUseItem(player, tools))
 			return;
 
-		CompositionAction action = new CompositionAction();
-
-		if (!action.canAct(player, tools, first, second))
+		CompositionAction action = tools.getItemTemplate().getActions() == null ? null : tools.getItemTemplate().getActions().getCompositionAction();
+		if (action == null || !action.canCompose(player, first, second))
 			return;
 
-		action.act(player, tools, first, second);
+		action.compose(player, tools, first, second);
 	}
 }

@@ -26325,6 +26325,27 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
+	 * A combination with Enchantment Stones above Level %0 is not possible.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_COMPOUND_ENCHANTSTONE_CANT_LEVEL(int maxLevel) {
+		return new SM_SYSTEM_MESSAGE(1401506, maxLevel);
+	}
+
+	/**
+	 * %0 and %1 have been combined.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_COMPOUND_ENCHANTSTONE_COMPLETE(String first, String second) {
+		return new SM_SYSTEM_MESSAGE(1401507, first, second);
+	}
+
+	/**
+	 * It is not possible to combine Enchantment Stones that are more than 20 levels apart.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_COMPOUND2_ENCHANTSTONE_CANT_LEVEL() {
+		return new SM_SYSTEM_MESSAGE(1402422);
+	}
+
+	/**
 	 * By using %0, you have lost %num1 XP, but received %2.
 	 */
 	public static SM_SYSTEM_MESSAGE STR_MSG_EXP_EXTRACTION_USE(String extractionItem, long exp, String rewardItem) {

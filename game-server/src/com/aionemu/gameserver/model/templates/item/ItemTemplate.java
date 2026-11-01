@@ -533,10 +533,6 @@ public class ItemTemplate extends VisibleObjectTemplate {
 		return idianAction;
 	}
 
-	public boolean isCombinationItem() {
-		return getItemGroup() == ItemGroup.COMBINATION;
-	}
-
 	public boolean isEnchantmentStone() {
 		return getItemGroup() == ItemGroup.ENCHANTMENT;
 	}

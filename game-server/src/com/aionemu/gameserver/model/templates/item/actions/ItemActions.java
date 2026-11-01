@@ -28,7 +28,7 @@ public class ItemActions {
 		@XmlElement(name = "polish", type = PolishAction.class),
 		@XmlElement(name = "tuning", type = TuningAction.class), @XmlElement(name = "megaphone", type = MegaphoneAction.class),
 		@XmlElement(name = "pack", type = PackAction.class), @XmlElement(name = "tampering", type = TamperingAction.class),
-		@XmlElement(name = "multireturn", type = MultiReturnAction.class) })
+		@XmlElement(name = "multireturn", type = MultiReturnAction.class), @XmlElement(name = "composition", type = CompositionAction.class) })
 	private List<AbstractItemAction> itemActions;
 
 	/**
@@ -45,6 +45,16 @@ public class ItemActions {
 		for (AbstractItemAction action : itemActions) {
 			if (action instanceof EnchantItemAction)
 				return (EnchantItemAction) action;
+		}
+		return null;
+	}
+
+	public CompositionAction getCompositionAction() {
+		if (itemActions == null)
+			return null;
+		for (AbstractItemAction action : itemActions) {
+			if (action instanceof CompositionAction compositionAction)
+				return compositionAction;
 		}
 		return null;
 	}

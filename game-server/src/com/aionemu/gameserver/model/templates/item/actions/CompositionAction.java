@@ -1,5 +1,10 @@
 package com.aionemu.gameserver.model.templates.item.actions;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlType;
+
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -8,53 +13,100 @@ import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- * Handles combining two enchantment stones into one via {@code CM_COMPOSITE_STONES}. Not part of the regular
- * item-use flow (retail has no server-side marker for this on the combination tool item, the client alone knows to
- * send this packet for it), so unlike other item actions this isn't XML-bound and isn't invoked through
- * {@link AbstractItemAction}.
+ * Combines two enchantment stones into one. The client opens the combination window by itself and sends {@code CM_COMPOSITE_STONES}, so
+ * using the tool directly does nothing; the element only marks the item as a combination tool.
  */
-public class CompositionAction {
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "CompositionAction")
+public class CompositionAction extends AbstractItemAction {
 
-	public boolean canAct(Player player, Item tools, Item first, Item second) {
+	private static final int MAX_STONE_LEVEL = 95;
+	private static final int MAX_CASH_LEVEL_DIFFERENCE = 20;
+	private static final int MAX_RESULT_LEVEL = 125;
+	// compound_enchant_stone.xml
+	private static final int PROBABILITY_SETTING = 500, MIN_LEVEL_SETTING = 400, MAX_LEVEL_SETTING = 300, RANGE_SETTING = 29, KINAH_SETTING = 1;
 
-		if (!tools.getItemTemplate().isCombinationItem())
+	/**
+	 * Cash tools pick from a range above the higher stone but refuse stones too far apart.
+	 */
+	@XmlAttribute
+	private boolean cash;
+
+	@Override
+	public boolean canAct(Player player, Item parentItem, Item targetItem, Object... params) {
+		return false;
+	}
+
+	@Override
+	public void act(Player player, Item parentItem, Item targetItem, Object... params) {
+	}
+
+	public boolean canCompose(Player player, Item first, Item second) {
+		if (!first.getItemTemplate().isEnchantmentStone() || !second.getItemTemplate().isEnchantmentStone())
 			return false;
-
-		if (!first.getItemTemplate().isEnchantmentStone())
-			return false;
-
-		if (!second.getItemTemplate().isEnchantmentStone())
-			return false;
-
 		if (first.getItemCount() < 1 || second.getItemCount() < 1)
 			return false;
-
-		return first.getItemTemplate().getLevel() <= 95 && second.getItemTemplate().getLevel() <= 95;
-	}
-
-	public void act(final Player player, final Item tools, final Item first, final Item second) {
-		boolean result = player.getInventory().decreaseByItemId(tools.getItemId(), 1);
-		boolean result1 = player.getInventory().decreaseByItemId(first.getItemId(), 1);
-		boolean result2 = player.getInventory().decreaseByItemId(second.getItemId(), 1);
-		if (result && result1 && result2) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMPOUND_SUCCESS(second.getL10n(), first.getL10n()));
-			ItemService.addItem(player, getItemId(calcLevel(first.getItemTemplate().getLevel(), second.getItemTemplate().getLevel())), 1);
+		int firstLevel = first.getItemTemplate().getLevel(), secondLevel = second.getItemTemplate().getLevel();
+		if (firstLevel > MAX_STONE_LEVEL || secondLevel > MAX_STONE_LEVEL) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_COMPOUND_ENCHANTSTONE_CANT_LEVEL(MAX_STONE_LEVEL));
+			return false;
 		}
-	}
-
-	private int calcLevel(int first, int second) {
-		int value = ((first + second) / 2);
-		if (value < 11) {
-			value = Rnd.get(1, 20);
-		} else {
-			int random = Rnd.get(1, 10);
-			int bit = Rnd.get(0, 1);
-			value = (bit == 0 ? value - random : value + random);
+		if (cash && Math.abs(firstLevel - secondLevel) > MAX_CASH_LEVEL_DIFFERENCE) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_COMPOUND2_ENCHANTSTONE_CANT_LEVEL());
+			return false;
 		}
-		return value;
+		if (player.getInventory().isFull()) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_WAREHOUSE_FULL_INVENTORY());
+			return false;
+		}
+		return true;
 	}
 
-	public int getItemId(int value) {
-		return 166000000 + value;
+	public void compose(Player player, Item tool, Item first, Item second) {
+		int firstLevel = first.getItemTemplate().getLevel(), secondLevel = second.getItemTemplate().getLevel();
+		if (!player.getInventory().decreaseByObjectId(tool.getObjectId(), 1))
+			return;
+		if (!player.getInventory().decreaseByObjectId(first.getObjectId(), 1))
+			return;
+		if (!player.getInventory().decreaseByObjectId(second.getObjectId(), 1))
+			return;
+		int level = cash ? calculateCashLevel(firstLevel, secondLevel) : calculateLevel(firstLevel, secondLevel);
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_COMPOUND_ENCHANTSTONE_COMPLETE(first.getL10n(), second.getL10n()));
+		ItemService.addItem(player, getEnchantmentStoneId(level), 1);
+	}
+
+	static int calculateLevel(int firstLevel, int secondLevel) {
+		int low = Math.min(firstLevel, secondLevel), high = Math.max(firstLevel, secondLevel);
+		int top = (int) (low * PROBABILITY_SETTING / 1000.0 + MAX_RESULT_LEVEL);
+		int bottom = (int) (high - high * MIN_LEVEL_SETTING / 1000.0);
+		int offset = rollOffset(top - (int) (low * MAX_LEVEL_SETTING / 1000.0 + high), top - bottom);
+		return Math.clamp(Math.max(top - offset, bottom), 1, MAX_RESULT_LEVEL);
+	}
+
+	static int calculateCashLevel(int firstLevel, int secondLevel) {
+		int low = Math.min(firstLevel, secondLevel), high = Math.max(firstLevel, secondLevel);
+		int top = RANGE_SETTING + KINAH_SETTING + high;
+		int start = (int) ((100.0 - (high - low) * 4.0) / 100.0 * low + MAX_STONE_LEVEL + RANGE_SETTING + KINAH_SETTING);
+		int offset = rollOffset(start - top, start - (KINAH_SETTING + high));
+		return Math.clamp(Math.max(start - offset, KINAH_SETTING + high), 1, top);
+	}
+
+	/**
+	 * Picks an offset from [from, to], each value weighted by itself, so bigger offsets (lower results) are likelier.
+	 */
+	private static int rollOffset(int from, int to) {
+		double threshold = Rnd.get(0, 10000) * ((double) to * (to + 1) * 0.5 - (double) from * (from - 1) * 0.5) / 10000;
+		double sum = 0;
+		int offset = from;
+		for (; offset <= to; offset++) {
+			sum += offset;
+			if (sum > threshold)
+				break;
+		}
+		return offset;
+	}
+
+	private static int getEnchantmentStoneId(int level) {
+		return 166000000 + level;
 	}
 }
