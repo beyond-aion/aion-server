@@ -436,6 +436,9 @@ public class TeleportService {
 	private static boolean canChangeChannelNow(Player player, WorldMap map) {
 		if (player.isDead() || !player.isSpawned() || player.hasStore() || player.isTrading() || player.isLooting())
 			return false;
+		// retail does not check combat, but then a forged packet would let players escape a fight
+		if (player.getController().isInCombat())
+			return false;
 		if (player.isFlying() || player.isUsingFlightTransporterOrWindstream() || player.isInPlayerMode(PlayerMode.RIDE))
 			return false;
 		if (player.isInState(CreatureState.RESTING) || player.isInState(CreatureState.CHAIR))
