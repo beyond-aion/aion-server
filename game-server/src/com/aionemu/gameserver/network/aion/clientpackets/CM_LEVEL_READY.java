@@ -62,6 +62,7 @@ public class CM_LEVEL_READY extends AionClientPacket {
 
 		// Spawn player into the world.
 		World.getInstance().spawn(activePlayer);
+		activePlayer.setLastTeleportMillis(System.currentTimeMillis());
 
 		if (activePlayer.isInFlyState(FlyState.FLYING)) // notify client if we are still flying (client always ends flying after teleport)
 			activePlayer.getFlyController().startFly(true, true);

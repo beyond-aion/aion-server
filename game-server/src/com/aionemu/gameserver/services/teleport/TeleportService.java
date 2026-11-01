@@ -193,6 +193,7 @@ public class TeleportService {
 		player.getController().startProtectionActiveTask(); // before spawning, so others never see the player unprotected
 		World.getInstance().spawn(player);
 		World.getInstance().spawn(player.getPet());
+		player.setLastTeleportMillis(System.currentTimeMillis());
 		player.getEffectController().updatePlayerEffectIcons(null);
 		player.getController().updateZone();
 		player.setPortAnimation(ArrivalAnimation.NONE);
@@ -408,6 +409,14 @@ public class TeleportService {
 		// Channels exist only in open worlds; on instance maps the number would select another group's instance.
 		if (map.isInstanceType() || channel < 0 || map.getWorldMapInstance(channel + 1) == null) {
 			AuditLogger.log(player, "tried to change to invalid channel " + channel + " of map " + player.getWorldId() + " at " + player.getPosition());
+			return;
+		}
+		// the cooldown counts from the end of any teleport, including the previous channel change
+		int cooldownSeconds = map.getTemplate().getChannelChangeCooldownSeconds();
+		int remainingSeconds = (int) (cooldownSeconds - (System.currentTimeMillis() - player.getLastTeleportMillis()) / 1000);
+		if (remainingSeconds > 0) {
+			PacketSendUtility.sendPacket(player,
+				SM_SYSTEM_MESSAGE.STR_MSG_REMAIN_CHANGE_CHANNEL_COOLTIME(Integer.toString(cooldownSeconds), Integer.toString(remainingSeconds)));
 			return;
 		}
 		World.getInstance().setPosition(player, player.getWorldId(), channel + 1, player.getX(), player.getY(), player.getZ(), player.getHeading());

@@ -38,6 +38,9 @@ public class WorldMapTemplate implements L10n {
 	@XmlAttribute(name = "max_user")
 	private int maxUser;
 
+	@XmlAttribute(name = "cool_time")
+	private int channelChangeCooldownSeconds;
+
 	@XmlAttribute(name = "prison")
 	private boolean prison = false;
 
@@ -105,6 +108,10 @@ public class WorldMapTemplate implements L10n {
 
 	public int getMaxUser() {
 		return maxUser;
+	}
+
+	public int getChannelChangeCooldownSeconds() {
+		return channelChangeCooldownSeconds;
 	}
 
 	public boolean isPrison() {

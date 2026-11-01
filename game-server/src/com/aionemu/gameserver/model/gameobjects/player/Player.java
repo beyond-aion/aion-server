@@ -149,6 +149,7 @@ public class Player extends Creature {
 	private long prisonEndTimeMillis = 0;
 	private long gatherRestrictionMillis;
 	private long quitCountdownStartMillis;
+	private long lastTeleportMillis;
 	private long quitBlockedUntilMillis;
 	private String captchaWord;
 	private byte[] captchaImage;
@@ -328,6 +329,14 @@ public class Player extends Creature {
 
 	public boolean isInAttackMode() {
 		return isInState(CreatureState.WEAPON_EQUIPPED);
+	}
+
+	public long getLastTeleportMillis() {
+		return lastTeleportMillis;
+	}
+
+	public void setLastTeleportMillis(long lastTeleportMillis) {
+		this.lastTeleportMillis = lastTeleportMillis;
 	}
 
 	public boolean isGatherRestricted() {

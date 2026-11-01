@@ -15,6 +15,7 @@
             <xs:attribute name="twin_count" type="xs:int" />
 			<xs:attribute name="beginner_twin_count" type="xs:int" />
             <xs:attribute name="max_user" type="xs:int" />
+            <xs:attribute name="cool_time" type="xs:int" />
             <xs:attribute name="prison" type="xs:boolean" />
             <xs:attribute name="instance" type="xs:boolean" />
             <xs:attribute name="water_level" type="xs:int" use="required" />
