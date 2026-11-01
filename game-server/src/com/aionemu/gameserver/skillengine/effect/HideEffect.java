@@ -65,21 +65,18 @@ public class HideEffect extends BufEffect {
 		// for player adding: Remove Hide when using any item action . when requesting dialog to any npc . when being attacked . when attacking
 		if (effected instanceof Player) {
 
+			HideCounter counter = new HideCounter(buffCount);
 			// Remove Hide when use skill / item skill
 			effect.addObserver(effected, new ActionObserver(ObserverType.STARTSKILLCAST) {
 
-				private int buffNumber = 0;
-
 				@Override
 				public void startSkillCast(Skill skill) {
-					// TODO find better way
-					if (skill.getSkillMethod() == SkillMethod.ITEM) {
-						if (skill.getItemTemplate().isPotion() || skill.getSkillTemplate().getDuration() > 0)
-							effect.endEffect();
-						return;
-					}
+					if (skill.getSkillMethod() == SkillMethod.ITEM)
+						return; // items are counted once, on use (see ITEMUSE below)
 					boolean isShapeChange = skill.getSkillTemplate().getEffects().hasAnyEffectType(EffectType.SHAPECHANGE);
-					if (isShapeChange || !skill.isSelfBuff() || ++buffNumber >= buffCount)
+					// TODO logic: retail spends the skill's own hide_decrease_count here (0 = breaks), like items do; until skill templates
+					// carry it, every self buff spends 1
+					if (isShapeChange || !skill.isSelfBuff() || !counter.spend(1))
 						effect.endEffect();
 				}
 			});
@@ -94,12 +91,9 @@ public class HideEffect extends BufEffect {
 
 				@Override
 				public void itemused(Item item) {
-					// [4.5] Buff items do not affect Hide II. Hide I is cancelled.
 					ItemActions actions = item.getItemTemplate().getActions();
-					if (actions != null) {
-						if (buffCount == 0 || actions.getSkillUseAction() == null)
-							effect.endEffect();
-					}
+					if (actions != null && !counter.spend(item.getItemTemplate().getHideDecreaseCount()))
+						effect.endEffect();
 				}
 			});
 
@@ -130,6 +124,32 @@ public class HideEffect extends BufEffect {
 
 				});
 			}
+		}
+	}
+
+	/**
+	 * Hide counter shared by skills and items: a counter of 0 breaks on anything, a
+	 * decrease of 255 never spends, a decrease of 0 breaks, otherwise the counter goes down and breaks once it reaches 0.
+	 */
+	static final class HideCounter {
+
+		static final int NEVER_SPENDS = 255;
+		private int remaining;
+
+		HideCounter(int remaining) {
+			this.remaining = remaining;
+		}
+
+		/**
+		 * @return true if hide holds
+		 */
+		synchronized boolean spend(int decrease) {
+			if (remaining <= 0 || decrease == 0)
+				return false;
+			if (decrease == NEVER_SPENDS)
+				return true;
+			remaining -= decrease;
+			return remaining > 0;
 		}
 	}
 }

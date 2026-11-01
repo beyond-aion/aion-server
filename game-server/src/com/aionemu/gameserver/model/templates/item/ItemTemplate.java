@@ -147,6 +147,8 @@ public class ItemTemplate extends VisibleObjectTemplate {
 	private BonusApply bonusApply = BonusApply.EQUIP;
 	@XmlAttribute(name = "no_loot_public")
 	private boolean noLootPublic;
+	@XmlAttribute(name = "hide_decrease_count")
+	private int hideDecreaseCount;
 
 	private static final WeaponStats emptyWeaponStats = new WeaponStats();
 	private static final ItemUseLimits emptyUseLimits = new ItemUseLimits();
@@ -606,6 +608,13 @@ public class ItemTemplate extends VisibleObjectTemplate {
 
 	public boolean isNoLootPublic() {
 		return noLootPublic;
+	}
+
+	/**
+	 * @return how much one use of this item spends of the user's hide counter: 0 breaks hide, 255 never spends
+	 */
+	public int getHideDecreaseCount() {
+		return hideDecreaseCount;
 	}
 
 }
