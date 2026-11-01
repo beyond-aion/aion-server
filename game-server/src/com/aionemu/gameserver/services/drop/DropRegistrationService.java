@@ -80,7 +80,9 @@ public class DropRegistrationService {
 		// Updating current dropMap
 		currentDropMap.put(npcObjId, droppedItems);
 
+		int questDropsStart = index;
 		index = QuestService.getQuestDrop(droppedItems, index, npc, groupMembers, looter);
+		int questDropsEnd = index;
 
 		// if npc ai == quest_use_item it will be always excluded from global drops
 		boolean isNpcQuest = npc.getAi().getName().equals("quest_use_item");
@@ -96,6 +98,8 @@ public class DropRegistrationService {
 				addGlobalDrops(index, dropModifiers, looter, npc, isAllowedDefaultGlobalDropNpc, EventService.getInstance().getActiveEventDropRules(),
 					droppedItems, groupMembers, winnerObj);
 		}
+
+		dropForEachMember(npcObjId, droppedItems, questDropsStart, questDropsEnd, groupMembers, allowedLooters);
 
 		npc.getPosition().getWorldMapInstance().getInstanceHandler().onDropRegistered(npc, winnerObj);
 		npc.getAi().onGeneralEvent(AIEventType.DROP_REGISTERED);
@@ -115,6 +119,37 @@ public class DropRegistrationService {
 		}
 
 		DropService.getInstance().scheduleFreeForAll(npcObjId);
+	}
+
+	/**
+	 * Items flagged drop_each_member drop once per group member instead of once for the whole group; each copy is only visible to its
+	 * member. Quest drops decide this themselves (see {@link QuestService#getQuestDrop}).
+	 */
+	private void dropForEachMember(int npcObjId, Set<DropItem> droppedItems, int questDropsStart, int questDropsEnd, Collection<Player> groupMembers,
+		List<Player> allowedLooters) {
+		if (groupMembers == null || groupMembers.size() < 2)
+			return;
+		DropNpc dropNpc = dropRegistrationMap.get(npcObjId);
+		int index = droppedItems.stream().mapToInt(DropItem::getIndex).max().orElse(0) + 1;
+		for (DropItem dropItem : new ArrayList<>(droppedItems)) {
+			boolean isQuestDrop = dropItem.getIndex() >= questDropsStart && dropItem.getIndex() < questDropsEnd;
+			if (isQuestDrop || !dropItem.getPlayerObjIds().isEmpty())
+				continue;
+			if (!DataManager.ITEM_DATA.getItemTemplate(dropItem.getDropTemplate().getItemId()).isDropEachMember())
+				continue;
+			droppedItems.remove(dropItem);
+			for (Player member : groupMembers) {
+				DropItem copy = new DropItem(dropItem.getDropTemplate());
+				copy.setCount(dropItem.getCount());
+				copy.setIndex(index++);
+				copy.setPlayerObjId(member.getObjectId());
+				droppedItems.add(copy);
+				if (dropNpc != null)
+					dropNpc.setAllowedLooter(member);
+				if (!allowedLooters.contains(member))
+					allowedLooters.add(member);
+			}
+		}
 	}
 
 	public DropModifiers createDropModifiers(Npc npc, Player player, int highestLevel) {

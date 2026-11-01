@@ -153,6 +153,8 @@ public class ItemTemplate extends VisibleObjectTemplate {
 	private boolean acquireQuest;
 	@XmlAttribute(name = "authorize_revision")
 	private int authorizeRevision;
+	@XmlAttribute(name = "drop_each_member")
+	private boolean dropEachMember;
 
 	private static final WeaponStats emptyWeaponStats = new WeaponStats();
 	private static final ItemUseLimits emptyUseLimits = new ItemUseLimits();
@@ -633,6 +635,13 @@ public class ItemTemplate extends VisibleObjectTemplate {
 	 */
 	public int getAuthorizeRevision() {
 		return authorizeRevision;
+	}
+
+	/**
+	 * @return true if a group gets one drop of this item per member instead of one for all
+	 */
+	public boolean isDropEachMember() {
+		return dropEachMember;
 	}
 
 }
