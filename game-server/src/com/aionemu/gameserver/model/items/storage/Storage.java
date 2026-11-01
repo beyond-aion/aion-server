@@ -11,6 +11,7 @@ import com.aionemu.gameserver.configs.main.LoggingConfig;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.ItemId;
+import com.aionemu.gameserver.model.stats.listeners.ItemEquipmentListener;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.item.ItemFactory;
@@ -181,6 +182,8 @@ public abstract class Storage implements IStorage {
 			if (storageType == StorageType.CUBE)
 				QuestEngine.getInstance().onItemGet(actor, item.getItemId());
 		}
+		if (storageType == StorageType.CUBE && actor != null)
+			ItemEquipmentListener.refreshInventoryBonus(actor, item);
 		return item;
 	}
 
@@ -211,6 +214,8 @@ public abstract class Storage implements IStorage {
 		item.setItemLocation(storageType.getId());
 		setPersistentState(PersistentState.UPDATE_REQUIRED);
 		ItemPacketService.sendItemUpdatePacket(actor, storageType, item, ItemUpdateType.EQUIP_UNEQUIP);
+		if (storageType == StorageType.CUBE)
+			ItemEquipmentListener.refreshInventoryBonus(actor, item);
 		return item;
 	}
 
@@ -234,6 +239,8 @@ public abstract class Storage implements IStorage {
 	 */
 	Item delete(Item item, ItemDeleteType deleteType, Player actor) {
 		if (remove(item) != null) {
+			if (storageType == StorageType.CUBE && actor != null)
+				ItemEquipmentListener.clearInventoryBonus(actor, item);
 			item.setPersistentState(PersistentState.DELETED);
 			deletedItems.add(item);
 			setPersistentState(PersistentState.UPDATE_REQUIRED);

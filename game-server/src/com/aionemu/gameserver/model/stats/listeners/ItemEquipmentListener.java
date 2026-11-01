@@ -18,6 +18,7 @@ import com.aionemu.gameserver.model.stats.calc.functions.StatAddFunction;
 import com.aionemu.gameserver.model.stats.calc.functions.StatFunction;
 import com.aionemu.gameserver.model.stats.container.CreatureGameStats;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
+import com.aionemu.gameserver.model.templates.item.BonusApply;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.model.templates.item.WeaponStats;
 import com.aionemu.gameserver.model.templates.item.enums.ItemGroup;
@@ -37,6 +38,7 @@ public class ItemEquipmentListener {
 
 	public static void onItemEquipment(Item item, Player owner) {
 		owner.getController().cancelUseItem();
+		clearInventoryBonus(owner, item);
 		ItemTemplate itemTemplate = item.getItemTemplate();
 
 		addWeaponStats(item, owner.getGameStats());
@@ -118,6 +120,31 @@ public class ItemEquipmentListener {
 		if (item.getBuffSkill() != 0)
 			SkillLearnService.removeSkill(owner, item.getBuffSkill());
 		owner.getGameStats().updateArmorMasteryStats(owner.getEquipment().getEquippedItems());
+		refreshInventoryBonus(owner, item);
+	}
+
+	/**
+	 * Applies the bonus attributes of an item that grants them while it is carried in the inventory, or removes them.
+	 */
+	public static void refreshInventoryBonus(Player player, Item item) {
+		if (item.isEquipped())
+			return;
+		clearInventoryBonus(player, item);
+		if (item.getItemTemplate().getBonusApply() != BonusApply.INVENTORY || item.getItemTemplate().getItemSlot() == 0)
+			return;
+		List<StatFunction> modifiers = item.getItemTemplate().getModifiers();
+		if (modifiers != null && !modifiers.isEmpty())
+			player.getGameStats().addEffect(item, modifiers);
+		RandomBonusEffect bonusStats = item.getBonusStatsEffect();
+		if (bonusStats != null)
+			bonusStats.applyEffect(player);
+	}
+
+	public static void clearInventoryBonus(Player player, Item item) {
+		player.getGameStats().endEffect(item);
+		RandomBonusEffect bonusStats = item.getBonusStatsEffect();
+		if (bonusStats != null)
+			bonusStats.endEffect(player);
 	}
 
 	private static void addWeaponStats(Item item, CreatureGameStats<?> cgs) {

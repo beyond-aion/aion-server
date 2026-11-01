@@ -496,6 +496,8 @@ public class Equipment implements Persistable {
 				}
 			}
 		}
+		for (Item item : owner.getInventory().getItems())
+			ItemEquipmentListener.refreshInventoryBonus(owner, item);
 	}
 
 	/**

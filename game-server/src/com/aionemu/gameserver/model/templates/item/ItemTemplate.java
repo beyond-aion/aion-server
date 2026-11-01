@@ -143,6 +143,8 @@ public class ItemTemplate extends VisibleObjectTemplate {
 	private boolean cannotMatterOption;
 	@XmlAttribute(name = "cannot_extraction")
 	private boolean cannotExtraction;
+	@XmlAttribute(name = "bonus_apply")
+	private BonusApply bonusApply = BonusApply.EQUIP;
 
 	private static final WeaponStats emptyWeaponStats = new WeaponStats();
 	private static final ItemUseLimits emptyUseLimits = new ItemUseLimits();
@@ -594,6 +596,10 @@ public class ItemTemplate extends VisibleObjectTemplate {
 
 	public boolean isCannotExtraction() {
 		return cannotExtraction;
+	}
+
+	public BonusApply getBonusApply() {
+		return bonusApply;
 	}
 
 }
