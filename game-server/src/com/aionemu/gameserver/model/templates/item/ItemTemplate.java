@@ -151,6 +151,8 @@ public class ItemTemplate extends VisibleObjectTemplate {
 	private int hideDecreaseCount;
 	@XmlAttribute(name = "acquire_quest")
 	private boolean acquireQuest;
+	@XmlAttribute(name = "authorize_revision")
+	private int authorizeRevision;
 
 	private static final WeaponStats emptyWeaponStats = new WeaponStats();
 	private static final ItemUseLimits emptyUseLimits = new ItemUseLimits();
@@ -624,6 +626,13 @@ public class ItemTemplate extends VisibleObjectTemplate {
 	 */
 	public boolean isAcquireQuest() {
 		return acquireQuest;
+	}
+
+	/**
+	 * @return correction of this item's tempering success chance, in tenths of a percent
+	 */
+	public int getAuthorizeRevision() {
+		return authorizeRevision;
 	}
 
 }
