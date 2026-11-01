@@ -13,6 +13,7 @@ import com.aionemu.gameserver.model.items.storage.IStorage;
 import com.aionemu.gameserver.model.items.storage.StorageType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.LegionService;
+import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -75,6 +76,8 @@ public class ItemMoveService {
 		sendItemDeletePacket(player, sourceStorage.getStorageType(), item, ItemDeleteType.MOVE);
 		item.setEquipmentSlot(slot);
 		targetStorage.add(item);
+		if (sourceStorage.getStorageType() == StorageType.CUBE)
+			QuestService.onAcquireConditionItemChanged(player, item);
 	}
 
 	private static void moveInSameStorage(IStorage storage, Item item, short slot) {

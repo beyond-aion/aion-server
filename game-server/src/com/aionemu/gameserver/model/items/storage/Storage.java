@@ -14,6 +14,7 @@ import com.aionemu.gameserver.model.items.ItemId;
 import com.aionemu.gameserver.model.stats.listeners.ItemEquipmentListener;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
+import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.item.ItemFactory;
 import com.aionemu.gameserver.services.item.ItemPacketService;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemAddType;
@@ -182,8 +183,10 @@ public abstract class Storage implements IStorage {
 			if (storageType == StorageType.CUBE)
 				QuestEngine.getInstance().onItemGet(actor, item.getItemId());
 		}
-		if (storageType == StorageType.CUBE && actor != null)
+		if (storageType == StorageType.CUBE && actor != null) {
 			ItemEquipmentListener.refreshInventoryBonus(actor, item);
+			QuestService.onAcquireConditionItemChanged(actor, item);
+		}
 		return item;
 	}
 
@@ -250,6 +253,8 @@ public abstract class Storage implements IStorage {
 				log.info("Deleted {} {} from {} (count: {}) (deletion type: {})", item.getItemId(), name, actor, item.getItemCount(), deleteType);
 			}
 			QuestEngine.getInstance().onItemRemoved(actor, item.getItemId());
+			if (storageType == StorageType.CUBE)
+				QuestService.onAcquireConditionItemChanged(actor, item);
 			return item;
 		}
 		return null;

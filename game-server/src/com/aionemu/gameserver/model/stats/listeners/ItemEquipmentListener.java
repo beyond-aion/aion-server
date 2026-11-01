@@ -27,6 +27,7 @@ import com.aionemu.gameserver.model.templates.itemset.ItemSetTemplate;
 import com.aionemu.gameserver.model.templates.itemset.PartBonus;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SKILL_COOLDOWN;
 import com.aionemu.gameserver.services.EnchantService;
+import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.SkillLearnService;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -77,6 +78,7 @@ public class ItemEquipmentListener {
 		if (item.getTempering() > 0)
 			TemperingEffect.apply(owner, item);
 		owner.getGameStats().updateArmorMasteryStats(owner.getEquipment().getEquippedItems());
+		QuestService.onAcquireConditionItemChanged(owner, item);
 	}
 
 	private static void forEachBonusStats(Consumer<RandomBonusEffect> action, RandomBonusEffect... bonusStatsEffects) {
@@ -121,6 +123,7 @@ public class ItemEquipmentListener {
 			SkillLearnService.removeSkill(owner, item.getBuffSkill());
 		owner.getGameStats().updateArmorMasteryStats(owner.getEquipment().getEquippedItems());
 		refreshInventoryBonus(owner, item);
+		QuestService.onAcquireConditionItemChanged(owner, item);
 	}
 
 	/**

@@ -149,6 +149,8 @@ public class ItemTemplate extends VisibleObjectTemplate {
 	private boolean noLootPublic;
 	@XmlAttribute(name = "hide_decrease_count")
 	private int hideDecreaseCount;
+	@XmlAttribute(name = "acquire_quest")
+	private boolean acquireQuest;
 
 	private static final WeaponStats emptyWeaponStats = new WeaponStats();
 	private static final ItemUseLimits emptyUseLimits = new ItemUseLimits();
@@ -615,6 +617,13 @@ public class ItemTemplate extends VisibleObjectTemplate {
 	 */
 	public int getHideDecreaseCount() {
 		return hideDecreaseCount;
+	}
+
+	/**
+	 * @return true if gaining, losing, equipping or unequipping this item can change which quests the player may start
+	 */
+	public boolean isAcquireQuest() {
+		return acquireQuest;
 	}
 
 }

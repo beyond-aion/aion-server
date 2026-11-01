@@ -24,6 +24,7 @@ import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.drop.Drop;
 import com.aionemu.gameserver.model.drop.DropItem;
 import com.aionemu.gameserver.model.gameobjects.DropNpc;
+import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.QuestStateList;
@@ -270,6 +271,14 @@ public final class QuestService {
 				return resetDay;
 		}
 		return resetDaysSorted.get(0);
+	}
+
+	/**
+	 * Refreshes the quests offered nearby after an item that is part of quest start conditions was gained, lost, equipped or unequipped.
+	 */
+	public static void onAcquireConditionItemChanged(Player player, Item item) {
+		if (player != null && player.isSpawned() && item.getItemTemplate().isAcquireQuest())
+			player.getController().updateNearbyQuests();
 	}
 
 	/**
