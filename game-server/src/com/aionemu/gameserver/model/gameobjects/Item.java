@@ -226,10 +226,6 @@ public class Item extends AionObject implements Expirable, StatOwner, Persistabl
 		this.enchantBonus = enchantBonus;
 	}
 
-	public boolean isStigmaChargeable() {
-		return itemTemplate.getStigma() != null && itemTemplate.getStigma().isChargeable();
-	}
-
 	/**
 	 * @return the itemTemplate
 	 */

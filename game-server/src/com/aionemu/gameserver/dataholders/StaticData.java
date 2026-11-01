@@ -262,6 +262,9 @@ public class StaticData {
 	@XmlElement(name = "skill_charge")
 	public SkillChargeData skillChargeData;
 
+	@XmlElement(name = "stigma_hidden_skills")
+	public StigmaHiddenSkillData stigmaHiddenSkillData;
+
 	@XmlElement(name = "walker_versions")
 	public WalkerVersionsData walkerVersionsData;
 
@@ -344,6 +347,7 @@ public class StaticData {
 		log.info("Loaded {} teleport locations", teleLocationData.size());
 		log.info("Loaded {} skill templates", skillData.size());
 		log.info("Loaded {} skill charge entries", skillChargeData.size());
+		log.info("Loaded {} stigma hidden skills", stigmaHiddenSkillData.size());
 		log.info("Loaded {} motion times", motionData.size());
 		log.info("Loaded {} skill learn entries", skillTreeData.size());
 		log.info("Loaded {} cube expand entries", cubeExpandData.size());

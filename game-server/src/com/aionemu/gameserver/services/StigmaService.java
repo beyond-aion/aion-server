@@ -3,7 +3,11 @@ package com.aionemu.gameserver.services;
 import static com.aionemu.gameserver.model.items.ItemUseAnimation.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,8 +23,8 @@ import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.ItemSlot;
 import com.aionemu.gameserver.model.skill.PlayerSkillEntry;
-import com.aionemu.gameserver.model.templates.item.ItemQuality;
 import com.aionemu.gameserver.model.templates.item.Stigma;
+import com.aionemu.gameserver.model.templates.item.StigmaType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INVENTORY_UPDATE_ITEM;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -44,6 +48,10 @@ public class StigmaService {
 	public static boolean notifyEquipAction(Player player, Item resultItem, long slot) {
 		if (resultItem.getItemTemplate().isStigma()) {
 			Stigma stigmaInfo = resultItem.getItemTemplate().getStigma();
+			if (!fitsStigmaSlot(resultItem.getItemTemplate().getStigmaType(), slot)) {
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_STIGMA_TOO_HIGH_STONE_RANK_FOR_SLOT(resultItem.getL10n()));
+				return false;
+			}
 			int stigmaLevel = resultItem.getEnchantLevel();
 			String stigmaName = resultItem.getItemName().replace(" ", "").toUpperCase();
 			boolean replace = false;
@@ -68,15 +76,15 @@ public class StigmaService {
 				}
 			}
 
-			long kinahcount = 25000;
+			long kinahcount = switch (resultItem.getItemTemplate().getStigmaType()) {
+				case MAJOR -> 100000;
+				case GREATER -> 50000;
+				default -> 25000;
+			};
 			// Sets the price for equipping stigma during mission in Space of Destiny [ID: 320070000] and Sliver of darkness [ID: 310070000]
 			if ((player.getRace() == Race.ASMODIANS && player.getWorldId() == 320070000)
 				|| (player.getRace() == Race.ELYOS && player.getWorldId() == 310070000))
 				kinahcount = 1000;
-			else if (resultItem.getItemTemplate().getItemQuality().equals(ItemQuality.LEGEND))
-				kinahcount = 50000;
-			else if (resultItem.getItemTemplate().getItemQuality().equals(ItemQuality.UNIQUE))
-				kinahcount = 100000;
 
 			if (!player.getInventory().tryDecreaseKinah(PricesService.getPriceForService(kinahcount, player.getRace()))) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_STIGMA_NOT_ENOUGH_MONEY());
@@ -167,15 +175,11 @@ public class StigmaService {
 
 	public static void addLinkedStigmaSkills(Player player) {
 		List<Item> stigmas = player.getEquipment().getEquippedItemsAllStigma();
-		if (stigmas.size() < 6)
+		// all six must be enhanceable stigmas; a single restricted (no_enchant) one blocks the hidden skill
+		if (stigmas.size() < 6 || stigmas.stream().anyMatch(stigma -> stigma.getItemTemplate().isNoEnchant()))
 			return;
 
-		for (Item stigma : stigmas) {
-			if (!stigma.isStigmaChargeable())
-				return;
-		}
-
-		int skillId = getLinkedStigmaLearnSkill(player);
+		int skillId = getLinkedStigmaLearnSkill(player, stigmas);
 		if (skillId > 0) {
 			// linked stigma level is the lowest enchant level of all equipped stigmas
 			int linkedStigmaSkillLevel = stigmas.stream().min((i1, i2) -> i1.getEnchantLevel() - i2.getEnchantLevel()).get().getEnchantLevel() + 1;
@@ -185,92 +189,10 @@ public class StigmaService {
 		}
 	}
 
-	private static int getLinkedStigmaLearnSkill(Player player) {
-		// references: http://aion.mouseclic.com/beta/stigma.php
-		boolean isEly = player.getRace() == Race.ELYOS;
-		switch (player.getPlayerClass()) {
-			case GLADIATOR:
-				if (isEquipped(player, 140001118) && isEquipped(player, 2, 140001103, 140001104, 140001105))
-					return 731; // Wind Lance
-				if (isEquipped(player, 140001119) && isEquipped(player, 2, 140001106, 140001107, 140001108))
-					return 643; // Unraveling Assault
-				return !isEly ? 661 : 662; // Battle Banner
-			case TEMPLAR:
-				if (isEquipped(player, 140001134) && isEquipped(player, 2, 140001120, 140001122, 140001125))
-					return 2921; // Invigorating Strike
-				if (isEquipped(player, 140001135) && isEquipped(player, 2, 140001121, 140001123, 140001124))
-					return 2918; // Shield of Vengeance
-				return 2917; // Eternal Denial
-			case ASSASSIN:
-				if (isEquipped(player, 140001151) && isEquipped(player, 2, 140001136, 140001137, 140001140))
-					return 3241; // Fangdrop Stab
-				if (isEquipped(player, 140001152) && isEquipped(player, 2, 140001138, 140001139, 140001141))
-					return 3238; // Shimmerbomb
-				return 3244; // Explosive Rebranding
-			case RANGER:
-				if (isEquipped(player, 140001172) && isEquipped(player, 2, 140001153, 140001155, 140001157))
-					return 1008; // Ripthread Shot
-				if (isEquipped(player, 140001173) && isEquipped(player, 2, 140001154, 140001156, 140001158))
-					return 938; // Night Haze
-				return isEly ? 1065 : 1064; // Staggering Trap
-			case SORCERER:
-				if (isEquipped(player, 140001191) && isEquipped(player, 2, 140001174, 140001178, 140001181))
-					return 1342; // Slumberswept Wind
-				if (isEquipped(player, 140001192) && isEquipped(player, 2, 140001176, 140001177, isEly ? 140001184 : 140001185))
-					return 1542; // Aetherblaze
-				return 1420; // Repulsion Field
-			case SPIRIT_MASTER:
-				if (isEquipped(player, 140001209) && isEquipped(player, 2, 140001193, 140001194, 140001195))
-					return 3543; // Spirit's Empowerment
-				if (isEquipped(player, 140001210) && isEquipped(player, 2, 140001196, isEly ? 140001197 : 140001198, 140001199))
-					return 3549; // Command: Absorb Wounds
-				return 3851; // Blood Funnel
-			case CLERIC:
-				if (isEquipped(player, 140001245) && isEquipped(player, 2, 140001228, 140001229, isEly ? 140001230 : 140001231))
-					return 4169; // Judge's Edict
-				if (isEquipped(player, 140001246) && isEquipped(player, 2, 140001232, 140001233, isEly ? 140001234 : 140001235))
-					return 3934; // Restoration Relief
-				return isEly ? 3906 : 3911; // Summon Vexing Energy
-			case CHANTER:
-				if (isEquipped(player, 140001226) && isEquipped(player, 2, 140001211, 140001212, 140001213))
-					return 1909; // Word of Instigation
-				if (isEquipped(player, 140001227) && isEquipped(player, 2, 140001214, 140001215, 140001216))
-					return 1903; // Resonant Strike
-				return 1906; // Debilitating Incantation
-			case RIDER:
-				if (isEquipped(player, 140001279) && isEquipped(player, 2, 140001264, 140001265, 140001269))
-					return 2858; // Explosive Exhaust
-				if (isEquipped(player, 140001280) && isEquipped(player, 2, 140001266, 140001267, 140001268))
-					return 2863; // Powerspike Trigger
-				return 2851; // Nerve Pulse
-			case GUNNER:
-				if (isEquipped(player, 140001262) && isEquipped(player, 2, 140001247, 140001248, 140001249))
-					return 2370; // Pursuit Stance
-				if (isEquipped(player, 140001263) && isEquipped(player, 2, 140001250, 140001251, 140001252))
-					return 2377; // Sequential Fire
-				return 2382; // Pulverizer Cannon
-			case BARD:
-				if (isEquipped(player, 140001296) && isEquipped(player, 2, 140001281, 140001282, 140001284))
-					return 4480; // Blazing Requiem
-				if (isEquipped(player, 140001297) && isEquipped(player, 2, 140001283, 140001285, 140001286))
-					return 4483; // Purging Paean
-				return 4566; // Delusional Dirge
-		}
-		return 0;
-	}
-
-	public static boolean isEquipped(Player player, int itemId) {
-		if (player.getEquipment().getEquippedItemsByItemId(itemId) != null)
-			return player.getEquipment().getEquippedItemsByItemId(itemId).size() > 0;
-		return false;
-	}
-
-	public static boolean isEquipped(Player player, int neededCount, int... itemIds) {
-		int equippedCount = 0;
-		for (int itemId : itemIds)
-			if (isEquipped(player, itemId))
-				equippedCount += 1;
-		return equippedCount == neededCount;
+	private static int getLinkedStigmaLearnSkill(Player player, List<Item> stigmas) {
+		Set<String> skillGroups = stigmas.stream().map(stigma -> stigma.getItemTemplate().getStigma()).filter(Objects::nonNull)
+			.flatMap(stigma -> Arrays.stream(stigma.getGainSkillGroups())).collect(Collectors.toSet());
+		return DataManager.STIGMA_HIDDEN_SKILL_DATA.findHiddenSkill(player.getPlayerClass(), player.getRace(), skillGroups);
 	}
 
 	private static int getPossibleStigmaCount(Player player) {
@@ -330,6 +252,8 @@ public class StigmaService {
 			return false;
 
 		long itemSlotToEquip = item.getEquipmentSlot();
+		if (!fitsStigmaSlot(item.getItemTemplate().getStigmaType(), itemSlotToEquip))
+			return false;
 
 		// Stigma
 		if (ItemSlot.isRegularStigma(itemSlotToEquip)) {
@@ -362,11 +286,18 @@ public class StigmaService {
 		return false;
 	}
 
+	private static boolean fitsStigmaSlot(StigmaType stigmaType, long slot) {
+		return switch (stigmaType) {
+			case GREATER -> ItemSlot.isAdvancedStigma(slot);
+			case MAJOR -> slot == ItemSlot.ADV_STIGMA3.getSlotIdMask();
+			default -> true;
+		};
+	}
+
 	public static void chargeStigma(Player player, Item stigma, Item chargeStone) {
 		Stigma stigmaInfo = stigma.getItemTemplate().getStigma();
-		if (stigma.getItemId() != chargeStone.getItemId() || chargeStone.getEnchantLevel() > 0 || stigma.getEnchantLevel() >= 10)
-			return;
-		if (!stigma.isStigmaChargeable())
+		if (stigma.getItemTemplate().isNoEnchant() || stigma.getItemId() != chargeStone.getItemId() || chargeStone.getEnchantLevel() > 0
+			|| stigma.getEnchantLevel() >= 10)
 			return;
 
 		final boolean isSuccess = Rnd.chance() < Math.max(25, 100 - (stigma.getEnchantLevel() * 10));

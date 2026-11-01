@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<stigma_hidden_skills xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="stigma_hidden_skills.xsd">
+	<class name="GLADIATOR">
+		<hidden_skill id="731" key="FI_DRAINSWORD" two_of="FI_BURSERKLANCE FI_SHARPNESSHIT FI_TECHNICALCOUNTER"/><!-- Wind Lance -->
+		<hidden_skill id="643" key="FI_JUMPATTACK" two_of="FI_CHARGINGSHOCK FI_KNEECRASH FI_WHIRLDRAIN"/><!-- Unraveling Assault -->
+		<hidden_skill id="662" race="ELYOS"/><!-- Battle Banner -->
+		<hidden_skill id="661" race="ASMODIANS"/><!-- Battle Banner -->
+	</class>
+	<class name="TEMPLAR">
+		<hidden_skill id="2921" key="KN_INVINSIBLEPROTECT" two_of="KN_INVINSIBLESHIELD KN_RECOVER KN_SENTINEL"/><!-- Invigorating Strike -->
+		<hidden_skill id="2918" key="KN_DESTRUCTSHIELD" two_of="KN_BRAINSTORM KN_FORTITUDEWAVE KN_POWERSINK"/><!-- Shield of Vengeance -->
+		<hidden_skill id="2917"/><!-- Eternal Denial -->
+	</class>
+	<class name="ASSASSIN">
+		<hidden_skill id="3241" key="AS_VENOMSLASH" two_of="AS_ASSAULTSLASH AS_CHAINSIGNETBURST AS_EXPLOSIONPOISON"/><!-- Fangdrop Stab -->
+		<hidden_skill id="3238" key="AS_BACKFOCUS" two_of="AS_FLASHSLASH AS_RUNNERSSTANCE AS_SENSEBOOST"/><!-- Shimmerbomb -->
+		<hidden_skill id="3244"/><!-- Explosive Rebranding -->
+	</class>
+	<class name="RANGER">
+		<hidden_skill id="1008" key="RA_PAINARROW" two_of="RA_EXPLOSIONARROW RA_HUNTERMIND RA_MASSEXPLOSIONARROW"/><!-- Ripthread Shot -->
+		<hidden_skill id="938" key="RA_LIGHTNINGSHOT" two_of="RA_MOVINGSHOT RA_SHADOWARROW RA_TRACKERMIND"/><!-- Night Haze -->
+		<hidden_skill id="1065" race="ELYOS"/><!-- Staggering Trap -->
+		<hidden_skill id="1064" race="ASMODIANS"/><!-- Staggering Trap -->
+	</class>
+	<class name="SORCERER">
+		<hidden_skill id="1342" key="WI_ICYSHIELD" two_of="WI_ILLUSIONSTORM WI_SLEEPINGSTORM WI_WINDCUTTER"/><!-- Slumberswept Wind -->
+		<hidden_skill id="1542" key="WI_ZEROPOINT" two_of="WI_FLAMESTRIKE WI_ROCKFALL WI_SUMMONTORNADO"/><!-- Aetherblaze -->
+		<hidden_skill id="1420"/><!-- Repulsion Field -->
+	</class>
+	<class name="SPIRIT_MASTER">
+		<hidden_skill id="3543" key="EL_HELLCURSE" two_of="EL_ENFEEBLEMENT EL_HELLPAIN EL_MANAREVERSE"/><!-- Spirit's Empowerment -->
+		<hidden_skill id="3549" key="EL_ENCHANTARMOR" two_of="EL_ELEMENTALCHARGE EL_SLAVE_STORMSERVENT EL_STIGMA_ORDER_DESTRUCTIMPACT"/><!-- Command: Absorb Wounds -->
+		<hidden_skill id="3851"/><!-- Blood Funnel -->
+	</class>
+	<class name="CLERIC">
+		<hidden_skill id="4169" key="PR_CALLLIGHTNING" two_of="PR_ETERNALSERVENT PR_PAINLINKS PR_SUFFERMEMORY"/><!-- Judge's Edict -->
+		<hidden_skill id="3934" key="PR_HEALERSHAND" two_of="PR_HEALINGSERVENT PR_REGENERAITIONSHINE PR_TRANQUILITY"/><!-- Restoration Relief -->
+		<hidden_skill id="3906" race="ELYOS"/><!-- Summon Vexing Energy -->
+		<hidden_skill id="3911" race="ASMODIANS"/><!-- Summon Vexing Energy -->
+	</class>
+	<class name="CHANTER">
+		<hidden_skill id="1909" key="CH_IMPROVEDBODY" two_of="CH_BLESSPROTECT CH_IMPROVEDALLDEFEND CH_SURPERIORHEAL"/><!-- Word of Instigation -->
+		<hidden_skill id="1903" key="CH_SLOWCRASH" two_of="CH_IMBUEPOWER CH_MOUNTAINCRASH CH_SHOCKWAVE"/><!-- Resonant Strike -->
+		<hidden_skill id="1906"/><!-- Debilitating Incantation -->
+	</class>
+	<class name="RIDER">
+		<hidden_skill id="2858" key="RI_POWERSLAM" two_of="RI_BINDINGSLAM RI_OVERCHARGE RI_RAPIDATTACK"/><!-- Explosive Exhaust -->
+		<hidden_skill id="2863" key="RI_EATHIUMWALL" two_of="RI_MAGNETICFIELD RI_SPEEDOVERDRIVE RI_WEAPONSMASH"/><!-- Powerspike Trigger -->
+		<hidden_skill id="2851"/><!-- Nerve Pulse -->
+	</class>
+	<class name="GUNNER">
+		<hidden_skill id="2370" key="GU_SUNNINGSHOT" two_of="GU_EMPOWERAMMO GU_FIRECHAINREFRESH GU_VEINSNIPE"/><!-- Pursuit Stance -->
+		<hidden_skill id="2377" key="GU_MENTALICCANNON" two_of="GU_ANTIGRAVITYCANNON GU_ARMORBREAK GU_EMPOWERMAGIC"/><!-- Sequential Fire -->
+		<hidden_skill id="2382"/><!-- Pulverizer Cannon -->
+	</class>
+	<class name="BARD">
+		<hidden_skill id="4480" key="BA_SONGOFGALE" two_of="BA_DELAYPARALYZE BA_PLAYINGSTYLESCHANGEB BA_SONGOFPAIN"/><!-- Blazing Requiem -->
+		<hidden_skill id="4483" key="BA_SONGOFBLESS" two_of="BA_PLAYINGSTYLESCHANGEA BA_SONGOFMASSHEAL BA_SONGOFWARMTH"/><!-- Purging Paean -->
+		<hidden_skill id="4566"/><!-- Delusional Dirge -->
+	</class>
+</stigma_hidden_skills>

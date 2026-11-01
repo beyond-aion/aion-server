@@ -137,6 +137,8 @@ public class ItemTemplate extends VisibleObjectTemplate {
 	private ExceedEnchantSkillSetType exceedEnchantSkill;
 	@XmlAttribute(name = "doping_pet_usable")
 	private boolean dopingPetUsable;
+	@XmlAttribute(name = "stigma_type")
+	private StigmaType stigmaType = StigmaType.NORMAL;
 
 	private static final WeaponStats emptyWeaponStats = new WeaponStats();
 	private static final ItemUseLimits emptyUseLimits = new ItemUseLimits();
@@ -576,6 +578,10 @@ public class ItemTemplate extends VisibleObjectTemplate {
 	 */
 	public boolean isDopingPetUsable() {
 		return dopingPetUsable;
+	}
+
+	public StigmaType getStigmaType() {
+		return stigmaType;
 	}
 
 }

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:include schemaLocation="../global_types.xsd"/>
+	<xs:element name="stigma_hidden_skills">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="class" type="StigmaHiddenSkillClass" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="StigmaHiddenSkillClass">
+		<xs:sequence>
+			<xs:element name="hidden_skill" type="StigmaHiddenSkill" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="name" type="playerClass" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="StigmaHiddenSkill">
+		<xs:attribute name="id" type="xs:int" use="required"/>
+		<xs:attribute name="race" type="Race"/>
+		<xs:attribute name="key" type="xs:string"/>
+		<xs:attribute name="two_of" type="StringListType"/>
+	</xs:complexType>
+</xs:schema>

@@ -25,9 +25,6 @@ public class Stigma {
 	@XmlAttribute(name = "gain_skill_group2")
 	private String gainSkillGroup2;
 
-	@XmlAttribute(name = "chargeable")
-	private boolean chargeable;
-
 	@XmlTransient
 	private String[] gainSkillGroups;
 
@@ -47,9 +44,5 @@ public class Stigma {
 			return DataManager.SKILL_DATA.getSkillTemplatesByGroup(gainSkillGroups[groupNo - 1]);
 		else
 			return null;
-	}
-
-	public boolean isChargeable() {
-		return chargeable;
 	}
 }

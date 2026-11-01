@@ -132,6 +132,7 @@
 	<import file="siege/siege_locations.xml" />
 	<import file="skills/motion_times.xml" />
 	<import file="skills/skill_charge.xml" />
+	<import file="skills/stigma_hidden_skills.xml" />
 	<import file="skills/skill_templates.xml" />
 	<import file="skill_tree" singleRootTag="true" />
 	<import file="spawns" singleRootTag="true" />
