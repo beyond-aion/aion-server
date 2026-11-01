@@ -21,7 +21,6 @@
 	<xs:complexType name="Stigma">
 		<xs:attribute name="gain_skill_group1" type="xs:string"/>
 		<xs:attribute name="gain_skill_group2" type="xs:string"/>
-		<xs:attribute name="chargeable" type="xs:boolean"/>
 	</xs:complexType>
 	<xs:complexType name="WeaponStats">
 		<xs:attribute name="min_damage" type="xs:int"/>
@@ -87,6 +86,19 @@
 	<xs:complexType name="AssembledItem">
 		<xs:attribute name="id" type="xs:int" use="required"/>
 	</xs:complexType>
+	<xs:simpleType name="stigmaType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="normal"/>
+			<xs:enumeration value="greater"/>
+			<xs:enumeration value="major"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="bonusApply">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="equip"/>
+			<xs:enumeration value="inventory"/>
+		</xs:restriction>
+	</xs:simpleType>
 	<xs:complexType name="ItemTemplate">
 		<xs:sequence>
 			<xs:element name="modifiers" type="Modifiers" minOccurs="0" maxOccurs="1"/>
@@ -132,6 +144,7 @@
 		<xs:attribute name="item_type" type="itemType" default="NORMAL"/>
 		<xs:attribute name="max_stack_count" type="xs:int" default="1"/>
 		<xs:attribute name="item_group" type="ItemGroup" default="NONE"/>
+		<xs:attribute name="armor_type" type="ItemSubType"/>
 		<xs:attribute name="mask" type="xs:int"/>
 		<xs:attribute name="level" type="xs:int"/>
 		<xs:attribute name="id" type="itemId" use="required"/>
@@ -145,6 +158,22 @@
 		<xs:attribute name="exceed_enchant_skill" type="ExceedEnchantSkillSet"/>
 		<xs:attribute name="enchant_type" type="xs:int"/>
 		<xs:attribute name="doping_pet_usable" type="xs:boolean"/>
+		<xs:attribute name="stigma_type" type="stigmaType"/>
+		<xs:attribute name="bonus_apply" type="bonusApply"/>
+		<xs:attribute name="cannot_matter_option" type="xs:boolean"/>
+		<xs:attribute name="cannot_extraction" type="xs:boolean"/>
+		<xs:attribute name="no_loot_public" type="xs:boolean"/>
+		<xs:attribute name="acquire_quest" type="xs:boolean"/>
+		<xs:attribute name="hide_decrease_count" type="xs:int"/>
+		<xs:attribute name="authorize_revision" type="xs:int"/>
+		<xs:attribute name="drop_each_member" type="xs:boolean"/>
+		<!-- TODO logic: retail fields imported ahead of the systems that consume them -->
+		<xs:attribute name="default_prohibit" type="xs:boolean"/>
+		<xs:attribute name="flavor_id" type="IntListType"/>
+		<xs:attribute name="tool_adj" type="xs:int"/>
+		<xs:attribute name="disassembly_type" type="xs:int"/>
+		<xs:attribute name="gather_success" type="xs:int"/>
+		<xs:attribute name="gather_failure" type="xs:int"/>
 	</xs:complexType>
 	<xs:complexType name="AbstractItemAction" abstract="true"/>
 	<xs:complexType name="ItemActions">
@@ -153,6 +182,7 @@
 			<xs:element name="skilluse" type="SkillUseAction" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="enchant" type="EnchantItemAction" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="queststart" type="QuestStartAction" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="questuse" type="QuestUseAction" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="dye" type="DyeAction" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="craftlearn" type="CraftLearnAction" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="extract" type="ExtractAction" minOccurs="0" maxOccurs="1"/>
@@ -181,6 +211,14 @@
 			<xs:element name="pack" type="PackAction" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="tampering" type="TamperingAction" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="multireturn" type="MultiReturnAction" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="composition" type="CompositionAction" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="expadd" type="ExpAddAction" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="charbm" type="CharBmAction" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="f2ppack" type="F2pPackAction" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="seal" type="SealAction" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="unseal" type="UnsealAction" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="temperingreset" type="TemperingResetAction" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="optionextend" type="OptionExtendAction" minOccurs="0" maxOccurs="1"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="RideAction">
@@ -286,6 +324,11 @@
 			<xs:extension base="AbstractItemAction">
 				<xs:attribute name="questid" type="xs:int"/>
 			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="QuestUseAction">
+		<xs:complexContent>
+			<xs:extension base="AbstractItemAction"/>
 		</xs:complexContent>
 	</xs:complexType>
 	<xs:complexType name="CraftLearnAction">
@@ -401,6 +444,60 @@
 			<xs:extension base="AbstractItemAction">
 				<xs:attribute name="id" type="xs:int"/>
 			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CompositionAction">
+		<xs:complexContent>
+			<xs:extension base="AbstractItemAction">
+				<xs:attribute name="cash" type="xs:boolean"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ExpAddAction">
+		<xs:complexContent>
+			<xs:extension base="AbstractItemAction">
+				<xs:attribute name="points" type="xs:long"/>
+				<xs:attribute name="percent" type="xs:int"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CharBmAction">
+		<xs:complexContent>
+			<xs:extension base="AbstractItemAction">
+				<xs:attribute name="name" type="xs:string"/>
+				<xs:attribute name="minutes" type="xs:int"/>
+				<xs:attribute name="value" type="xs:int"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="F2pPackAction">
+		<xs:complexContent>
+			<xs:extension base="AbstractItemAction">
+				<xs:attribute name="name" type="xs:string"/>
+				<xs:attribute name="minutes" type="xs:int"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SealAction">
+		<xs:complexContent>
+			<xs:extension base="AbstractItemAction"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="UnsealAction">
+		<xs:complexContent>
+			<xs:extension base="AbstractItemAction">
+				<xs:attribute name="special" type="xs:boolean"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="TemperingResetAction">
+		<xs:complexContent>
+			<xs:extension base="AbstractItemAction"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="OptionExtendAction">
+		<xs:complexContent>
+			<xs:extension base="AbstractItemAction"/>
 		</xs:complexContent>
 	</xs:complexType>
 	<xs:complexType name="MegaphoneAction">

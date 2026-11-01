@@ -16,6 +16,7 @@
 	<xs:complexType name="Modifier">
 		<xs:attribute name="name" type="modifiersenum"/>
 		<xs:attribute name="bonus" type="xs:boolean" default="false" use="optional"/>
+		<xs:attribute name="hidden" type="xs:boolean" default="false" use="optional"/>
 	</xs:complexType>
 	<xs:complexType name="SimpleModifier">
 		<xs:complexContent>
