@@ -84,7 +84,7 @@ public class SM_GROUP_MEMBER_INFO extends AionServerPacket {
 
 		writeC(event.getId()); // something events
 		writeC(1); // unk, always 0x01 since removal of Sarpan & Tiamarana
-		writeC(player.getFlyState()); // isFly
+		writeC(player.getClientFlyState()); // isFly
 		writeC(player.isMentor() ? 0x01 : 0x00);
 
 		switch (event) {

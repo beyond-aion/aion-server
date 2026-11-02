@@ -210,6 +210,8 @@ public class PlayerController extends CreatureController<Player> {
 	 */
 	public void onLeaveFlyArea() {
 		Player player = getOwner();
+		if (player.isUsingFlightTransporterOrWindstream()) // path flight follows its own route and is not limited by flight areas
+			return;
 		player.getLifeStats().triggerFpReduce();
 		if (player.isInGlidingState()) {
 			player.getFlyController().onGlideMove();

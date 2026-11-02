@@ -43,7 +43,7 @@ public class FlyController {
 	 * flight areas of the world instead of waiting for a zone update.
 	 */
 	public void onGlideMove() {
-		if (player.isInFlyingState() && player.isInGlidingState() && !player.isInCustomState(CustomPlayerState.FREE_FLY_MODE)
+		if (player.isInGlidingState() && player.isFreeFlying() && !player.isInCustomState(CustomPlayerState.FREE_FLY_MODE)
 			&& !player.isInsideFlyZone(player.getX(), player.getY(), player.getZ()))
 			switchToNormalGlide();
 	}

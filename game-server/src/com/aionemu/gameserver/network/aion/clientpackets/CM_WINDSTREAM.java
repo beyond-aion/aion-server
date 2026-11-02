@@ -85,6 +85,9 @@ public class CM_WINDSTREAM extends AionClientPacket {
 			case ENTERED -> {
 				if (player.isUsingFlightPath(FlightPath.Type.WINDSTREAM)) {
 					PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.WINDSTREAM, teleportId, progress), true);
+					// Following the path ends free flight. The client only learns that from the fly state in its status packet, not from
+					// the action above, and keeps its wings out otherwise.
+					player.getGameStats().updateStatsVisually();
 					QuestEngine.getInstance().onEnterWindStream(new QuestEnv(null, player, 0), teleportId);
 				}
 				return; // don't send SM_WINDSTREAM

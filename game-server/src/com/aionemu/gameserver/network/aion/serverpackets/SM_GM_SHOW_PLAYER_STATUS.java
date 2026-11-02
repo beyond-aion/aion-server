@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
+import com.aionemu.gameserver.controllers.movement.MovementMask;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 import com.aionemu.gameserver.model.stats.container.PlayerGameStats;
@@ -86,8 +87,8 @@ public class SM_GM_SHOW_PLAYER_STATUS extends AionServerPacket {
 		writeD(pgs.getFlyTime().getCurrent());// [max fly time]
 		writeD(pls.getCurrentFp());// [current fly time]
 
-		writeC(player.getFlyState());// [fly state]
-		writeC(player.getMoveController().getMovementMask());// [movementMask]
+		writeC(player.getClientFlyState());// [fly state]
+		writeC(player.isUsingFlightTransporterOrWindstream() ? MovementMask.PATH_FLY : player.getMoveController().getMovementMask());// [movementMask]
 
 		writeH(pgs.getMainHandPAttack(CalculationType.DISPLAY).getCurrent());// [current main hand attack]
 		writeH(pgs.getOffHandPAttack(CalculationType.DISPLAY).getCurrent());// [off hand attack]

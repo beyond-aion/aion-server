@@ -768,6 +768,21 @@ public class Player extends Creature {
 		return isInFlyState(FlyState.GLIDING);
 	}
 
+	/**
+	 * @return True while the player is in free flight, i.e. is flying on his own rather than following a windstream.
+	 */
+	public boolean isFreeFlying() {
+		return isInFlyState(FlyState.FLYING) && !isUsingFlightPath(FlightPath.Type.WINDSTREAM);
+	}
+
+	/**
+	 * The fly state as the client displays it: bit 0 for free flight, bit 1 for gliding. A windstream is neither, since following
+	 * the path ends free flight and the client only shows the path flight itself.
+	 */
+	public int getClientFlyState() {
+		return (isFreeFlying() ? FlyState.FLYING.getId() : 0) | (isInGlidingState() ? FlyState.GLIDING.getId() : 0);
+	}
+
 	public boolean isTrading() {
 		return ExchangeService.getInstance().isPlayerInExchange(this);
 	}
