@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
-import com.aionemu.gameserver.ai.AIState;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.SummonedObject;
@@ -14,6 +13,7 @@ import com.aionemu.gameserver.model.geometry.Area;
 import com.aionemu.gameserver.model.templates.zone.ZoneClassName;
 import com.aionemu.gameserver.model.templates.zone.ZoneInfo;
 import com.aionemu.gameserver.model.templates.zone.ZoneTemplate;
+import com.aionemu.gameserver.questEngine.task.checker.ZoneChecker;
 import com.aionemu.gameserver.utils.collections.CollectionUtil;
 import com.aionemu.gameserver.world.zone.handler.AdvancedZoneHandler;
 import com.aionemu.gameserver.world.zone.handler.ZoneHandler;
@@ -60,8 +60,7 @@ public class ZoneInstance {
 	 */
 	public boolean isIgnored(Creature creature) {
 		return ignoreRegularNpcs && creature instanceof Npc npc && !(npc instanceof SummonedObject<?>)
-		// allow NPCs following players to check zones (such as for quests to bring an NPC to a zone)
-			&& !npc.getAi().isInState(AIState.FOLLOWING);
+			&& !npc.getAi().getName().equals(ZoneChecker.FOLLOWING_AI_NAME);
 	}
 
 	public synchronized boolean onEnter(Creature creature) {
