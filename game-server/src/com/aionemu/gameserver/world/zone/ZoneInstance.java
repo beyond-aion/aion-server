@@ -59,6 +59,9 @@ public class ZoneInstance {
 	 */
 	public boolean isIgnored(Creature creature) {
 		return ignoreRegularNpcs && creature instanceof Npc npc && !(npc instanceof SummonedObject<?>);
+		return ignoreRegularNpcs && creature instanceof Npc npc && !(npc instanceof SummonedObject<?>)
+		// allow NPCs following players to check zones (such as for quests to bring an NPC to a zone)
+			&& !npc.getAi().isInState(AIState.FOLLOWING);
 	}
 
 	public synchronized boolean onEnter(Creature creature) {
