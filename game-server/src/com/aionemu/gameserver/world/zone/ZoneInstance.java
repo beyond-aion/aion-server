@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
+import com.aionemu.gameserver.ai.AIState;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.SummonedObject;
@@ -58,7 +59,6 @@ public class ZoneInstance {
 	 * @return true if this zone is irrelevant to the creature, meaning that it should not be tracked by it
 	 */
 	public boolean isIgnored(Creature creature) {
-		return ignoreRegularNpcs && creature instanceof Npc npc && !(npc instanceof SummonedObject<?>);
 		return ignoreRegularNpcs && creature instanceof Npc npc && !(npc instanceof SummonedObject<?>)
 		// allow NPCs following players to check zones (such as for quests to bring an NPC to a zone)
 			&& !npc.getAi().isInState(AIState.FOLLOWING);
