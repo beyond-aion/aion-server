@@ -7,6 +7,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.task.checker.DestinationChecker;
+import com.aionemu.gameserver.questEngine.task.checker.ZoneChecker;
 import com.aionemu.gameserver.utils.PositionUtil;
 
 /**
@@ -17,11 +18,6 @@ public class FollowingNpcCheckTask implements Runnable {
 	private final QuestEnv env;
 	private final DestinationChecker destinationChecker;
 
-	/**
-	 * @param player
-	 * @param npc
-	 * @param destinationChecker
-	 */
 	FollowingNpcCheckTask(QuestEnv env, DestinationChecker destinationChecker) {
 		this.env = env;
 		this.destinationChecker = destinationChecker;
@@ -46,7 +42,7 @@ public class FollowingNpcCheckTask implements Runnable {
 	/**
 	 * Following task succeeded, proceed with quest
 	 */
-	private final void onSuccess(QuestEnv env) {
+	private void onSuccess(QuestEnv env) {
 		stopFollowing(env);
 		QuestEngine.getInstance().onNpcReachTarget(env);
 	}
@@ -59,12 +55,12 @@ public class FollowingNpcCheckTask implements Runnable {
 		QuestEngine.getInstance().onNpcLostTarget(env);
 	}
 
-	private final void stopFollowing(QuestEnv env) {
+	private void stopFollowing(QuestEnv env) {
 		Player player = env.getPlayer();
 		Npc npc = (Npc) destinationChecker.getFollower();
 		player.getController().cancelTask(TaskId.QUEST_FOLLOW);
 		npc.getAi().onCreatureEvent(AIEventType.STOP_FOLLOW_ME, player);
-		if (!npc.getAi().getName().equals("following"))
+		if (!npc.getAi().getName().equals(ZoneChecker.FOLLOWING_AI_NAME))
 			npc.getController().delete();
 	}
 }
