@@ -32,9 +32,10 @@ public class CM_FUSION_WEAPONS extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
-		if (player.isTargetingNpcWithFunction(npcObjId, DialogAction.COMPOUND_WEAPON))
-			ArmsfusionService.fusionWeapons(getConnection().getActivePlayer(), mainWeaponObjId, fuseWeaponObjId);
-		else
-			AuditLogger.log(player, "tried to fuse weapons without targeting an armsfusion officer");
+		if (!player.isTargetingNpcWithFunctionNearby(npcObjId, DialogAction.COMPOUND_WEAPON)) {
+			AuditLogger.log(player, "tried to fuse weapons without targeting an armsfusion officer in range");
+			return;
+		}
+		ArmsfusionService.fusionWeapons(player, mainWeaponObjId, fuseWeaponObjId);
 	}
 }

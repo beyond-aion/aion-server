@@ -28,9 +28,10 @@ public class CM_BROKER_REGISTERED extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
-		if (player.isTargetingNpcWithFunction(brokerObjId, DialogAction.OPEN_VENDOR))
-			BrokerService.getInstance().showRegisteredItems(player);
-		else
-			AuditLogger.log(player, "tried to view his registered broker items without targeting a broker");
+		if (!player.isTargetingNpcWithFunctionNearby(brokerObjId, DialogAction.OPEN_VENDOR)) {
+			AuditLogger.log(player, "tried to view his registered broker items without targeting a broker in range");
+			return;
+		}
+		BrokerService.getInstance().showRegisteredItems(player);
 	}
 }

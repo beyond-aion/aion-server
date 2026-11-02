@@ -7,13 +7,13 @@ import com.aionemu.gameserver.model.team.legion.LegionEmblemType;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.services.LegionService;
+import com.aionemu.gameserver.utils.audit.AuditLogger;
 
 /**
  * @author Simple, cura
  */
 public class CM_LEGION_UPLOAD_INFO extends AionClientPacket {
 
-	/** Emblem related information **/
 	private int totalSize;
 	private int alpha;
 	private int red;
@@ -35,7 +35,11 @@ public class CM_LEGION_UPLOAD_INFO extends AionClientPacket {
 
 	@Override
 	protected void runImpl() {
-		final Player activePlayer = getConnection().getActivePlayer();
-		LegionService.getInstance().uploadEmblemInfo(activePlayer, totalSize, alpha, red, green, blue, LegionEmblemType.CUSTOM);
+		Player player = getConnection().getActivePlayer();
+		if (!player.isLegionMember()) {
+			AuditLogger.log(player, "sent legion emblem info without being member of a legion");
+			return;
+		}
+		LegionService.getInstance().uploadEmblemInfo(player, totalSize, alpha, red, green, blue, LegionEmblemType.CUSTOM);
 	}
 }

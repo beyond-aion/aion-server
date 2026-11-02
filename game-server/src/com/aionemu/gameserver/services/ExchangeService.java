@@ -215,13 +215,11 @@ public class ExchangeService {
 		}
 	}
 
-	public void confirmExchange(Player activePlayer) {
+	public synchronized void confirmExchange(Player activePlayer) {
 		if (activePlayer == null || !activePlayer.isOnline())
 			return;
 
 		Exchange currentExchange = getCurrentExchange(activePlayer);
-
-		// TODO: Why is exchange null =/
 		if (currentExchange == null)
 			return;
 		currentExchange.confirm();

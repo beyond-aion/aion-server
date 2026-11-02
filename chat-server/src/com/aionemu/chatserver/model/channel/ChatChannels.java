@@ -10,11 +10,21 @@ import com.aionemu.chatserver.configs.main.LoggingConfig;
 import com.aionemu.chatserver.model.ChannelType;
 import com.aionemu.chatserver.model.ChatClient;
 import com.aionemu.chatserver.model.Race;
+import com.aionemu.chatserver.service.GameServerService;
 
 /**
  * @author ATracer
  */
 public class ChatChannels {
+
+	/**
+	 * A channel name is a map, class or language name, so 64 characters is generous.
+	 */
+	private static final int MAX_META_LENGTH = 64;
+	/**
+	 * Every distinct name the client sends stays forever, and a real server needs a few dozen.
+	 */
+	private static final int MAX_CHANNELS = 256;
 
 	private static final Logger log = LoggerFactory.getLogger(ChatChannels.class);
 	private static final Map<Integer, Channel> channels = new ConcurrentHashMap<>();
@@ -58,12 +68,44 @@ public class ChatChannels {
 			return null;
 
 		String[] channelType = parts[1].split("_", 2); // { trade, Housing_barrack }
-		String[] channelRestrictions = parts[2].split("\\."); // { 1, 0, AION, KOR }
+		if (channelType.length != 2) {
+			log.warn("{} requested a channel without name: {}", client, identifier);
+			return null;
+		}
 
 		ChannelType ct = ChannelType.getByIdentifier(channelType[0]);
+		if (ct == null) {
+			log.warn("{} requested a channel of an unknown type: {}", client, identifier);
+			return null;
+		}
 		String channelMeta = channelType[1];
-		int gameServerId = Integer.parseInt(channelRestrictions[0]);
-		Race race = Race.getById(Integer.parseInt(channelRestrictions[1]));
+		if (channelMeta.length() > MAX_META_LENGTH) {
+			log.warn("{} requested a channel with a too long name: {}", client, identifier);
+			return null;
+		}
+
+		String[] channelRestrictions = parts[2].split("\\."); // { 1, 0, AION, KOR }
+		if (channelRestrictions.length < 2) {
+			log.warn("{} requested a channel with malformed restrictions: {}", client, parts[2]);
+			return null;
+		}
+		int gameServerId;
+		Race race;
+		try {
+			gameServerId = Integer.parseInt(channelRestrictions[0]);
+			race = Race.getById(Integer.parseInt(channelRestrictions[1]));
+		} catch (NumberFormatException e) {
+			log.warn("{} requested a channel with malformed restrictions: {}", client, parts[2]);
+			return null;
+		}
+		if (gameServerId == 99 || gameServerId != GameServerService.GAMESERVER_ID) { // retail: 99 is forbidden and it must be this session's server
+			log.warn("{} requested a channel of game server {}: {}", client, gameServerId, identifier);
+			return null;
+		}
+		if (race == null) {
+			log.warn("{} requested a channel of an unknown race: {}", client, identifier);
+			return null;
+		}
 		if (client.getRace() != race && client.getAccessLevel() == 0) {
 			log.warn("{} requested channel of race: {}", client, race);
 			return null;
@@ -72,6 +114,10 @@ public class ChatChannels {
 		for (Channel channel : channels.values()) {
 			if (channel.matches(ct, gameServerId, race, channelMeta))
 				return channel;
+		}
+		if (channels.size() >= MAX_CHANNELS) {
+			log.warn("{} requested a new channel, but {} already exist: {}", client, channels.size(), identifier);
+			return null;
 		}
 		Channel channel = addChannel(ct, gameServerId, race, channelMeta);
 		if (channel instanceof JobChannel jobChannel && !jobChannel.hasAliases()) {

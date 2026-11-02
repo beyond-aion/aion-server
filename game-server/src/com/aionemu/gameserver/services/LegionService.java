@@ -235,6 +235,7 @@ public class LegionService {
 			addHistory(legion, invited.getName(), LegionHistoryAction.JOIN);
 			return true;
 		}
+		PacketSendUtility.sendPacket(invited, SM_SYSTEM_MESSAGE.STR_GUILD_INVITE_CAN_NOT_JOIN_TO_GUILD_BY_SIZE_LIMIT());
 		PacketSendUtility.sendPacket(inviter, SM_SYSTEM_MESSAGE.STR_GUILD_INVITE_CAN_NOT_ADD_MEMBER_ANY_MORE());
 		return false;
 	}
@@ -247,7 +248,8 @@ public class LegionService {
 
 				@Override
 				public void acceptRequest(Player requester, Player responder) {
-					addToLegion(legion, responder, requester);
+					if (legionRestrictions.canAcceptInvitation(legion, requester, responder))
+						addToLegion(legion, responder, requester);
 				}
 
 				@Override
@@ -828,6 +830,27 @@ public class LegionService {
 			return true;
 		}
 
+		private boolean canAcceptInvitation(Legion legion, Player inviter, Player invited) {
+			if (!inviter.isOnline()) {
+				PacketSendUtility.sendPacket(invited, SM_SYSTEM_MESSAGE.STR_GUILD_INVITE_CAN_NOT_JOIN_TO_GUILD());
+				return false;
+			} else if (inviter.isDead()) {
+				PacketSendUtility.sendPacket(invited, SM_SYSTEM_MESSAGE.STR_GUILD_INVITE_CAN_NOT_JOIN_TO_GUILD_INVITOR_IS_DEAD());
+				return false;
+			} else if (inviter.getLegion() != legion) {
+				PacketSendUtility.sendPacket(invited, SM_SYSTEM_MESSAGE.STR_GUILD_INVITE_CAN_NOT_JOIN_TO_GUILD_INVITOR_IS_LEFT());
+				return false;
+			} else if (invited.isLegionMember()) {
+				PacketSendUtility.sendPacket(invited, SM_SYSTEM_MESSAGE.STR_GUILD_INVITE_YOU_ARE_ALREADY_BELONGS_TO_GUILD());
+				PacketSendUtility.sendPacket(inviter, SM_SYSTEM_MESSAGE.STR_GUILD_INVITE_HE_IS_OTHER_GUILD_MEMBER(invited.getName()));
+				return false;
+			} else if (!inviter.getLegionMember().hasRights(LegionPermissionsMask.INVITE)) {
+				PacketSendUtility.sendPacket(invited, SM_SYSTEM_MESSAGE.STR_GUILD_INVITE_CAN_NOT_JOIN_TO_GUILD());
+				return false;
+			}
+			return true;
+		}
+
 		private boolean canInvitePlayer(Player activePlayer, Player targetPlayer) {
 			Legion legion = activePlayer.getLegion();
 			if (targetPlayer == null) {
@@ -851,6 +874,9 @@ public class LegionService {
 				return false;
 			} else if (!activePlayer.getLegionMember().hasRights(LegionPermissionsMask.INVITE)) {
 				PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_GUILD_INVITE_DONT_HAVE_RIGHT_TO_INVITE());
+				return false;
+			} else if (!legion.canAddMember()) {
+				PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_GUILD_INVITE_CAN_NOT_ADD_MEMBER_ANY_MORE());
 				return false;
 			} else if (activePlayer.getRace() != targetPlayer.getRace() && !LegionConfig.LEGION_INVITEOTHERFACTION) {
 				PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_GUILD_INVITE_CAN_NOT_INVITE_OTHER_RACE());
