@@ -780,7 +780,7 @@ public class Player extends Creature {
 	 * the path ends free flight and the client only shows the path flight itself.
 	 */
 	public int getClientFlyState() {
-		return (isFreeFlying() ? FlyState.FLYING.getId() : 0) | (isInGlidingState() ? FlyState.GLIDING.getId() : 0);
+		return isUsingFlightPath(FlightPath.Type.WINDSTREAM) ? 0 : flyState;
 	}
 
 	public boolean isTrading() {
