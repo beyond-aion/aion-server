@@ -361,9 +361,10 @@ public class BrokerService {
 			return;
 		}
 
-		// Check Trade Hack
-		if (itemToRegister.getPackCount() <= 0 && !itemToRegister.isTradeable())
+		if (itemToRegister.getPackCount() <= 0 && !itemToRegister.isTradeable()) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANNOT_EXCHANGE());
 			return;
+		}
 
 		if (!AdminService.getInstance().canOperate(player, null, itemToRegister, "broker"))
 			return;

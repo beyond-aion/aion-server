@@ -107,8 +107,10 @@ public class ExchangeService {
 		if (partner == null)
 			return;
 		if (item.getPackCount() <= 0 && !item.isTradeable() && !TemporaryTradeTimeTask.getInstance().canTrade(item, partner.getObjectId())) {
-			if (!item.isLegionTradeable() || activePlayer.getLegion() == null || !activePlayer.getLegion().equals(partner.getLegion()))
+			if (!item.isLegionTradeable() || activePlayer.getLegion() == null || !activePlayer.getLegion().equals(partner.getLegion())) {
+				PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_EXCHANGE_ITEM_CAN_NOT_BE_EXCHANGED());
 				return;
+			}
 		}
 
 		if (itemCount < 1)
