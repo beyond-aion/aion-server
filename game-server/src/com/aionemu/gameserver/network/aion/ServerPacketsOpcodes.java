@@ -36,7 +36,7 @@ public class ServerPacketsOpcodes {
 		// addPacketOpcode(18, ); // [S_PUT_VEHICLE]
 		addPacketOpcode(19, SM_GM_SEARCH.class); // [S_BUILDER_RESULT]
 		addPacketOpcode(20, SM_TELEPORT_LOC.class); // [S_REQUEST_TELEPORT]
-		addPacketOpcode(21, SM_POSITION_SELF.class); // [S_BLINK]
+		addPacketOpcode(21, SM_BLINK.class); // [S_BLINK]
 		addPacketOpcode(22, SM_DELETE.class); // [S_REMOVE_OBJECT]
 		addPacketOpcode(23, SM_LOGIN_QUEUE.class); // [S_WAIT_LIST]
 		addPacketOpcode(24, SM_MESSAGE.class); // [S_MESSAGE]

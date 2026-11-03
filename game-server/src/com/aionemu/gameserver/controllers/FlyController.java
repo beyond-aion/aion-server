@@ -6,8 +6,9 @@ import com.aionemu.gameserver.model.gameobjects.player.CustomPlayerState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.gameobjects.state.FlyState;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_BLINK;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_BLINK.BlinkReason;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_POSITION_SELF;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -63,7 +64,8 @@ public class FlyController {
 	 */
 	public void blinkIntoFlightArea() {
 		endFly(true);
-		PacketSendUtility.sendPacket(player, new SM_POSITION_SELF(player.getX(), player.getY(), player.getZ(), player.getHeading(), (byte) 8));
+		PacketSendUtility.sendPacket(player,
+			new SM_BLINK(player.getX(), player.getY(), player.getZ(), player.getHeading(), BlinkReason.FLY_ON_NO_FLY_AREA));
 	}
 
 	/**
