@@ -238,10 +238,11 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 
 	private void setAverageDpsByPlayerClass(PlayerClass playerClass) {
 		avgClassDps = switch (playerClass) {
-			case TEMPLAR, CHANTER -> 2500;
-			case GUNNER -> 4500;
+			case TEMPLAR, RANGER -> 2500;
+			case GLADIATOR, CHANTER -> 3000;
+			case CLERIC -> 4500;
 			case SORCERER, ASSASSIN -> 5000;
-			case SPIRIT_MASTER -> 6000;
+			case SPIRIT_MASTER -> 5500;
 			default -> 4000;
 		};
 	}
