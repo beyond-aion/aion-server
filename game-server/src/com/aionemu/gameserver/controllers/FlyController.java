@@ -41,10 +41,11 @@ public class FlyController {
 	}
 
 	/**
-	 * Called for every move of a gliding player, before the move takes effect. Retail validates each of these moves against the
+	 * Called for every move of the player once the position was taken over, not just for glide moves: a gliding player can cross the border of
+	 * a flight area on any packet, and the client expects the free flight to end at that moment. Retail checks each gliding move against the
 	 * flight areas of the world instead of waiting for a zone update.
 	 */
-	public void onGlideMove() {
+	public void onMove() {
 		if (player.isInGlidingState() && player.isFreeFlying() && !player.isInCustomState(CustomPlayerState.FREE_FLY_MODE)
 			&& !player.isInsideFlyZone(player.getX(), player.getY(), player.getZ()))
 			switchToNormalGlide();
@@ -58,12 +59,14 @@ public class FlyController {
 	}
 
 	/**
-	 * Puts a flying player back to the position the server has and ends his flight, the way retail handles a move that reports him outside the
-	 * flight areas: the client gets S_BLINK with reason 8 (FlyOnNoFlyArea) and lands. Without it the client keeps flying where it may not, or
-	 * refuses the landing by moving the character to the world's flight restriction zone (FRZ_X/FRZ_Y, the map corner).
+	 * Puts a flying player back to the position the server has when a move packet reports him outside the flight areas of the world, and lets him
+	 * keep flying there. A refused move is not a landing: the client stays on its wings, it only cannot move past the border. The flight only
+	 * ends when the position to go back to is outside as well - otherwise the player would be pinned to it, since every move away from that
+	 * point is outside of the areas too.
 	 */
 	public void blinkIntoFlightArea() {
-		endFly(true);
+		if (!player.isInsideFlyZone(player.getX(), player.getY(), player.getZ()))
+			endFly(true);
 		PacketSendUtility.sendPacket(player,
 			new SM_BLINK(player.getX(), player.getY(), player.getZ(), player.getHeading(), BlinkReason.FLY_ON_NO_FLY_AREA));
 	}

@@ -143,10 +143,8 @@ public class CM_MOVE extends AionClientPacket {
 			player.getController().stopProtectionActiveTask();
 		player.getMoveController().setIsJumping(jumping);
 		World.getInstance().updatePosition(player, x, y, z, heading);
-		if ((type & MovementMask.GLIDE) == MovementMask.GLIDE && (type & (MovementMask.POSITION | MovementMask.FALL)) != 0) {
-			// retail checks every gliding move against the flight areas of the world before it takes effect, not on a later zone update
-			player.getFlyController().onGlideMove();
-		}
+		// retail checks every move against the flight areas of the world before it takes effect, not on a later zone update
+		player.getFlyController().onMove();
 		m.onMoveFromClient();
 		notifyControllers(player, oldMask);
 
@@ -167,9 +165,9 @@ public class CM_MOVE extends AionClientPacket {
 	}
 
 	/**
-	 * Retail puts a flying player back to his server position as soon as a move packet reports him outside the flight areas of the world, and ends
-	 * his flight. Glide moves are handled separately by {@link FlyController#onGlideMove()} further down: the player keeps gliding there, only the
-	 * free flight ends.
+	 * Retail refuses a move that reports a flying player outside the flight areas of the world and puts him back to the position the server has,
+	 * without ending his flight. Glide moves are handled separately by {@link FlyController#onGlideMove()} further down: the player keeps gliding
+	 * there, only the free flight ends.
 	 *
 	 * @return True if the move was refused and the player was put back.
 	 */

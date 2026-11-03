@@ -214,7 +214,7 @@ public class PlayerController extends CreatureController<Player> {
 			return;
 		player.getLifeStats().triggerFpReduce();
 		if (player.isInGlidingState()) {
-			player.getFlyController().onGlideMove();
+			player.getFlyController().onMove();
 		} else if (player.isInFlyingState() && !player.isInCustomState(CustomPlayerState.FREE_FLY_MODE)) {
 			player.getFlyController().endFly(true);
 			if (player.isSpawned() && !player.isInsideZoneType(ZoneType.FLY)) // not spawned means leaving by teleporter
