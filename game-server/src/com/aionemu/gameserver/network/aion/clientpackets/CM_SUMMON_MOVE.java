@@ -25,7 +25,7 @@ public class CM_SUMMON_MOVE extends AionClientPacket {
 	private byte heading;
 	private float x, y, z, x2, y2, z2, vehicleX, vehicleY, vehicleZ;
 	private byte glideFlag;
-	private int unk1, unk2;
+	private int vehicleId, vehiclePartId;
 
 	public CM_SUMMON_MOVE(int opcode, Set<State> validStates) {
 		super(opcode, validStates);
@@ -53,8 +53,8 @@ public class CM_SUMMON_MOVE extends AionClientPacket {
 			glideFlag = readC();
 		}
 		if ((type & MovementMask.VEHICLE) == MovementMask.VEHICLE) {
-			unk1 = readD();
-			unk2 = readD();
+			vehicleId = readD();
+			vehiclePartId = readD();
 			vehicleX = readF();
 			vehicleY = readF();
 			vehicleZ = readF();
@@ -88,8 +88,8 @@ public class CM_SUMMON_MOVE extends AionClientPacket {
 			summonOrMercenary.getController().onMove();
 
 		if (m instanceof SummonMoveController smc && (type & MovementMask.VEHICLE) == MovementMask.VEHICLE) {
-			smc.unk1 = unk1;
-			smc.unk2 = unk2;
+			smc.vehicleId = vehicleId;
+			smc.vehiclePartId = vehiclePartId;
 			smc.vehicleX = vehicleX;
 			smc.vehicleY = vehicleY;
 			smc.vehicleZ = vehicleZ;
