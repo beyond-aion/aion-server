@@ -80,6 +80,8 @@ public class CM_MOVE extends AionClientPacket {
 			return;
 		if (handleBogusPacket(player))
 			return;
+		if (leavesFlightArea(player))
+			return;
 
 		PlayerMoveController m = player.getMoveController();
 		boolean jumping = false;
@@ -162,6 +164,22 @@ public class CM_MOVE extends AionClientPacket {
 		} else {
 			m.stopFalling(z);
 		}
+	}
+
+	/**
+	 * Retail puts a flying player back to his server position as soon as a move packet reports him outside the flight areas of the world, and ends
+	 * his flight. Glide moves are handled separately by {@link FlyController#onGlideMove()} further down: the player keeps gliding there, only the
+	 * free flight ends.
+	 *
+	 * @return True if the move was refused and the player was put back.
+	 */
+	private boolean leavesFlightArea(Player player) {
+		boolean gliding = (type & MovementMask.GLIDE) == MovementMask.GLIDE && (type & (MovementMask.POSITION | MovementMask.FALL)) != 0;
+		if (gliding || !player.getFlyController().isFlyingOutOfArea(x, y, z))
+			return false;
+		player.getMoveController().setIsJumping(false);
+		player.getFlyController().blinkIntoFlightArea();
+		return true;
 	}
 
 	private boolean handleBogusPacket(Player player) {

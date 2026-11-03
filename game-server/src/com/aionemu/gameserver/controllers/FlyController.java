@@ -7,6 +7,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.gameobjects.state.FlyState;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_POSITION_SELF;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -46,6 +47,23 @@ public class FlyController {
 		if (player.isInGlidingState() && player.isFreeFlying() && !player.isInCustomState(CustomPlayerState.FREE_FLY_MODE)
 			&& !player.isInsideFlyZone(player.getX(), player.getY(), player.getZ()))
 			switchToNormalGlide();
+	}
+
+	/**
+	 * @return True if the player is in free flight and the given position is outside the flight areas of the world.
+	 */
+	public boolean isFlyingOutOfArea(float x, float y, float z) {
+		return player.isFreeFlying() && !player.isInCustomState(CustomPlayerState.FREE_FLY_MODE) && !player.isInsideFlyZone(x, y, z);
+	}
+
+	/**
+	 * Puts a flying player back to the position the server has and ends his flight, the way retail handles a move that reports him outside the
+	 * flight areas: the client gets S_BLINK with reason 8 (FlyOnNoFlyArea) and lands. Without it the client keeps flying where it may not, or
+	 * refuses the landing by moving the character to the world's flight restriction zone (FRZ_X/FRZ_Y, the map corner).
+	 */
+	public void blinkIntoFlightArea() {
+		endFly(true);
+		PacketSendUtility.sendPacket(player, new SM_POSITION_SELF(player.getX(), player.getY(), player.getZ(), player.getHeading(), (byte) 8));
 	}
 
 	/**
