@@ -8,11 +8,17 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.services.findgroup.FindGroupService;
+import com.aionemu.gameserver.utils.audit.AuditLogger;
 
 /**
  * @author cura, MrPoke
  */
 public class CM_FIND_GROUP extends AionClientPacket {
+
+	/**
+	 * The message is sent to every player who opens the group finder, so it must not be able to grow the packet beyond what the client reads.
+	 */
+	private static final int MAX_MESSAGE_LENGTH = 255;
 
 	private int action;
 	private int playerOrTeamId;
@@ -121,6 +127,10 @@ public class CM_FIND_GROUP extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
+		if (message != null && message.length() > MAX_MESSAGE_LENGTH) {
+			AuditLogger.log(player, "sent group recruitment or application message exceeding " + MAX_MESSAGE_LENGTH + " characters: " + message);
+			message = message.substring(0, MAX_MESSAGE_LENGTH);
+		}
 		switch (action) {
 			case 0 -> FindGroupService.getInstance().showRecruitments(player);
 			case 1 -> FindGroupService.getInstance().removeRecruitment(player, serverId, unk1, unk2, unk3);

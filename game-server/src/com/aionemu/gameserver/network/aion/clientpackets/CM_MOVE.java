@@ -153,8 +153,12 @@ public class CM_MOVE extends AionClientPacket {
 			PacketSendUtility.broadcastToSightedPlayers(player, new SM_MOVE(player));
 
 		if ((type & MovementMask.FALL) == MovementMask.FALL) {
-			player.getFlyController().onStopGliding();
-			m.updateFalling(z);
+			if ((type & MovementMask.VEHICLE) == MovementMask.VEHICLE) {
+				m.restartFalling(z);
+			} else {
+				player.getFlyController().onStopGliding();
+				m.updateFalling(z);
+			}
 		} else {
 			m.stopFalling(z);
 		}

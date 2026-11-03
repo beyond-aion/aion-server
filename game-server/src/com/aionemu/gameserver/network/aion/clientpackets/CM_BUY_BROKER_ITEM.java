@@ -34,9 +34,10 @@ public class CM_BUY_BROKER_ITEM extends AionClientPacket {
 		Player player = getConnection().getActivePlayer();
 		if (itemCount < 1)
 			return;
-		if (player.isTargetingNpcWithFunction(brokerObjId, DialogAction.OPEN_VENDOR))
-			BrokerService.getInstance().buyBrokerItem(player, itemUniqueId, itemCount);
-		else
-			AuditLogger.log(player, "tried to buy an item from broker without targeting a broker");
+		if (!player.isTargetingNpcWithFunctionNearby(brokerObjId, DialogAction.OPEN_VENDOR)) {
+			AuditLogger.log(player, "tried to buy an item from broker without targeting a broker in range");
+			return;
+		}
+		BrokerService.getInstance().buyBrokerItem(player, itemUniqueId, itemCount);
 	}
 }

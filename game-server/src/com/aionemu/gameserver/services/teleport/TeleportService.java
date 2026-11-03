@@ -46,10 +46,7 @@ import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
-import com.aionemu.gameserver.world.World;
-import com.aionemu.gameserver.world.WorldMapInstance;
-import com.aionemu.gameserver.world.WorldMapType;
-import com.aionemu.gameserver.world.WorldPosition;
+import com.aionemu.gameserver.world.*;
 import com.aionemu.gameserver.world.geo.GeoService;
 
 /**
@@ -407,6 +404,12 @@ public class TeleportService {
 	}
 
 	public static void changeChannel(Player player, int channel) {
+		WorldMap map = player.getWorldMapInstance().getParent();
+		// Channels exist only in open worlds; on instance maps the number would select another group's instance.
+		if (map.isInstanceType() || channel < 0 || map.getWorldMapInstance(channel + 1) == null) {
+			AuditLogger.log(player, "tried to change to invalid channel " + channel + " of map " + player.getWorldId() + " at " + player.getPosition());
+			return;
+		}
 		World.getInstance().setPosition(player, player.getWorldId(), channel + 1, player.getX(), player.getY(), player.getZ(), player.getHeading());
 		player.getController().startProtectionActiveTask();
 		PacketSendUtility.sendPacket(player, new SM_CHANNEL_INFO(player.getPosition()));

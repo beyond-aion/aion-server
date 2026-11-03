@@ -23,13 +23,14 @@ public class CM_LEGION_HISTORY extends AionClientPacket {
 	@Override
 	protected void readImpl() {
 		page = readD();
-		type = Type.values()[readUC()];
+		int typeId = readUC();
+		type = typeId < Type.values().length ? Type.values()[typeId] : null;
 	}
 
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
-		if (player.getLegion() == null)
+		if (player.getLegion() == null || type == null)
 			return;
 		if (type == Type.REWARD && !player.getLegionMember().isBrigadeGeneral())
 			return;
