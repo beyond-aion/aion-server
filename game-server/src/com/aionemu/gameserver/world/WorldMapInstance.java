@@ -72,18 +72,7 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 	}
 
 	/**
-	 * Returns MapRegion that contains coordinates of VisibleObject. If the region doesn't exist, it's created.
-	 * 
-	 * @return a MapRegion
-	 */
-	MapRegion getRegion(VisibleObject object) {
-		return getRegion(object.getX(), object.getY(), object.getZ());
-	}
-
-	/**
-	 * Returns MapRegion that contains given x,y coordinates. If the region doesn't exist, it's created.
-	 * 
-	 * @return a MapRegion
+	 * @return MapRegion that contains the given coordinates.
 	 */
 	public abstract MapRegion getRegion(float x, float y, float z);
 

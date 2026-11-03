@@ -20,6 +20,9 @@ public class WorldMap3DInstance extends WorldMapInstance {
 
 	@Override
 	public MapRegion getRegion(float x, float y, float z) {
+		x = Math.clamp(x, 0, getParent().getWorldSize());
+		y = Math.clamp(y, 0, getParent().getWorldSize());
+		z = Math.clamp(z, 0, getParent().getWorldSize());
 		int regionId = RegionUtil.get3dRegionId(x, y, z);
 		return regions.get(regionId);
 	}
