@@ -11,8 +11,8 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.gameobjects.state.FlyState;
 import com.aionemu.gameserver.model.geometry.Point3D;
-import com.aionemu.gameserver.model.templates.flypath.FlyPathEntry;
 import com.aionemu.gameserver.model.templates.flypath.FlightPath;
+import com.aionemu.gameserver.model.templates.flypath.FlyPathEntry;
 import com.aionemu.gameserver.model.templates.flypath.WindstreamState;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
@@ -107,8 +107,10 @@ public class CM_WINDSTREAM extends AionClientPacket {
 				player.getMoveController().restartFalling(player.getZ());
 				if (state == WindstreamState.LEAVE_GLIDING)
 					player.getFlyController().switchToGliding(true);
-				else
+				else {
+					player.setFlyReuseTime(0);
 					player.getGameStats().updateStatsAndSpeedVisually();
+				}
 				player.setFlightPath(null);
 				PacketSendUtility.broadcastPacket(player,
 					new SM_EMOTION(player, state == WindstreamState.LEAVE_GLIDING ? EmotionType.WINDSTREAM_END : EmotionType.WINDSTREAM_EXIT), true);
