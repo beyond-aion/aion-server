@@ -254,7 +254,7 @@ public final class PlayerEnterWorldService {
 
 		sendItemInfos(client, player);
 
-		client.sendPacket(new SM_CHANNEL_INFO(player.getPosition()));
+		client.sendPacket(new SM_CHANNEL_INFO(player));
 
 		KiskService.getInstance().onLogin(player);
 		PvpExpLimitService.getInstance().onEnterWorld(player);

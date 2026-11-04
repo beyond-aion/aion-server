@@ -283,13 +283,13 @@ public class World {
 	public void spawn(VisibleObject object) throws AlreadySpawnedException {
 		if (object == null)
 			return;
-		WorldPosition position = object.getPosition();
-		if (position.isSpawned())
+		if (object.isSpawned())
 			throw new AlreadySpawnedException(object);
 
 		object.getController().onBeforeSpawn();
-		position.setIsSpawned(true);
+		object.setIsSpawned(true);
 
+		WorldPosition position = object.getPosition();
 		position.getMapRegion().getParent().addObject(object);
 		position.getMapRegion().add(object);
 		object.getController().onAfterSpawn();
@@ -315,7 +315,7 @@ public class World {
 			object.getController().onDespawn();
 		} finally {
 			MapRegion oldMapRegion = position.getMapRegion();
-			position.setIsSpawned(false);
+			object.setIsSpawned(false);
 			if (oldMapRegion != null) { // can be null if an instance gets deleted?
 				oldMapRegion.getParent().removeObject(object);
 				oldMapRegion.remove(object);

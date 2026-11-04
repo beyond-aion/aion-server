@@ -77,13 +77,13 @@ public class KinquidAI extends AggressiveNpcAI {
 	}
 
 	private void runSkillTask() {
-		if (isDead() || !getPosition().isSpawned()) {
+		if (isDead() || !getOwner().isSpawned()) {
 			cancelSkillTask();
 			return;
 		}
 		SkillEngine.getInstance().getSkill(getOwner(), 19233, 60, getOwner()).useNoAnimationSkill();
 		ThreadPoolManager.getInstance().schedule(() -> {
-			if (!isDead() && getPosition().isSpawned())
+			if (!isDead() && getOwner().isSpawned())
 				SkillEngine.getInstance().getSkill(getOwner(), 19234, 60, getOwner()).useNoAnimationSkill();
 		}, 3500);
 	}
@@ -99,7 +99,7 @@ public class KinquidAI extends AggressiveNpcAI {
 
 	private void respawnDestroyer() {
 		despawnDestroyer();
-		if (getPosition().isSpawned() && !isDead() && !isHome.get()) {
+		if (getOwner().isSpawned() && !isDead() && !isHome.get()) {
 			int spawnId = Rnd.nextBoolean() ? 282008 : 282009;
 			switch (Rnd.get(1, 3)) {
 				case 1 -> spawn(spawnId, 266.70685f, 680.6733f, 1167.2369f, (byte) 0);

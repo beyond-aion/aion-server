@@ -189,14 +189,13 @@ public class TeleportService {
 	}
 
 	private static void spawnOnSameMap(Player player) {
-		PacketSendUtility.sendPacket(player, new SM_CHANNEL_INFO(player.getPosition()));
+		PacketSendUtility.sendPacket(player, new SM_CHANNEL_INFO(player));
 		PacketSendUtility.sendPacket(player, new SM_PLAYER_INFO(player));
 		PacketSendUtility.sendPacket(player, new SM_STATS_INFO(player));
 		PacketSendUtility.sendPacket(player, SM_MOTION.playerMotions(player));
 		player.getController().startProtectionActiveTask(); // before spawning, so others never see the player unprotected
 		World.getInstance().spawn(player);
 		World.getInstance().spawn(player.getPet());
-		player.setLastTeleportMillis(System.currentTimeMillis());
 		player.getEffectController().updatePlayerEffectIcons(null);
 		player.getController().updateZone();
 		player.setPortAnimation(ArrivalAnimation.NONE);
@@ -221,7 +220,7 @@ public class TeleportService {
 			InstanceService.onLeaveInstance(player);
 		}
 		World.getInstance().setPosition(player, worldId, instanceId, x, y, z, heading);
-		PacketSendUtility.sendPacket(player, new SM_CHANNEL_INFO(player.getPosition()));
+		PacketSendUtility.sendPacket(player, new SM_CHANNEL_INFO(player));
 		PacketSendUtility.sendPacket(player, new SM_PLAYER_SPAWN(player));
 		player.setPortAnimation(ArrivalAnimation.LANDING);
 		PacketSendUtility.sendPacket(player, new SM_PLAYER_INFO(player));
@@ -420,7 +419,7 @@ public class TeleportService {
 		}
 		// the cooldown counts from the end of any teleport, including the previous channel change
 		int cooldownSeconds = map.getTemplate().getChannelChangeCooldownSeconds();
-		int remainingSeconds = (int) (cooldownSeconds - (System.currentTimeMillis() - player.getLastTeleportMillis()) / 1000);
+		int remainingSeconds = (int) (cooldownSeconds - player.getMillisSinceSpawn() / 1000);
 		if (remainingSeconds > 0) {
 			PacketSendUtility.sendPacket(player,
 				SM_SYSTEM_MESSAGE.STR_MSG_REMAIN_CHANGE_CHANNEL_COOLTIME(Integer.toString(cooldownSeconds), Integer.toString(remainingSeconds)));
@@ -428,7 +427,7 @@ public class TeleportService {
 		}
 		World.getInstance().setPosition(player, player.getWorldId(), channel + 1, player.getX(), player.getY(), player.getZ(), player.getHeading());
 		player.getController().startProtectionActiveTask();
-		PacketSendUtility.sendPacket(player, new SM_CHANNEL_INFO(player.getPosition()));
+		PacketSendUtility.sendPacket(player, new SM_CHANNEL_INFO(player));
 		PacketSendUtility.sendPacket(player, new SM_PLAYER_SPAWN(player));
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_TELEPORT_ZONECHANNEL(channel + 1));
 	}
@@ -545,7 +544,7 @@ public class TeleportService {
 				spawnOnSameMap(player);
 			} else {
 				// teleport with full map reloading, player will spawn via CM_LEVEL_READY
-				PacketSendUtility.sendPacket(player, new SM_CHANNEL_INFO(player.getPosition()));
+				PacketSendUtility.sendPacket(player, new SM_CHANNEL_INFO(player));
 				PacketSendUtility.sendPacket(player, new SM_PLAYER_SPAWN(player));
 				if (DataManager.WORLD_MAPS_DATA.getTemplate(worldId).isInstance() && !WorldMapType.getWorld(worldId).isPersonal())
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_DUNGEON_OPENED_FOR_SELF(worldId));

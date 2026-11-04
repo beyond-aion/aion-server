@@ -39,7 +39,7 @@ public class ManadarAI extends AggressiveNpcAI implements HpPhases.PhaseHandler 
 	}
 
 	private void trySpawnTraps() {
-		if (getPosition().isSpawned() && !isDead() && hpPhases.getCurrentPhase() > 0) {
+		if (getOwner().isSpawned() && !isDead() && hpPhases.getCurrentPhase() > 0) {
 			for (int i = 0; i < 5; i++) {
 				rndSpawnInRange(Rnd.nextBoolean() ? 281545 : 281756, 4, 11);
 			}

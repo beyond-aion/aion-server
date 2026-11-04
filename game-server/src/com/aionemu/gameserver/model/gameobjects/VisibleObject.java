@@ -26,6 +26,11 @@ public abstract class VisibleObject extends AionObject {
 	protected WorldPosition position;
 
 	/**
+	 * Time of spawn, 0 when not spawned.
+	 */
+	private volatile long spawnTimeMillis;
+
+	/**
 	 * KnownList of this VisibleObject.
 	 */
 	private KnownList knownlist;
@@ -134,7 +139,18 @@ public abstract class VisibleObject extends AionObject {
 	 * @return true if object is spawned.
 	 */
 	public boolean isSpawned() {
-		return getPosition().isSpawned();
+		return spawnTimeMillis != 0;
+	}
+
+	public void setIsSpawned(boolean isSpawned) {
+		spawnTimeMillis = isSpawned ? System.currentTimeMillis() : 0;
+	}
+
+	/**
+	 * @return The milliseconds since the last spawn event, -1 if currently not spawned.
+	 */
+	public long getMillisSinceSpawn() {
+		return spawnTimeMillis == 0 ? -1 : System.currentTimeMillis() - spawnTimeMillis;
 	}
 
 	/**

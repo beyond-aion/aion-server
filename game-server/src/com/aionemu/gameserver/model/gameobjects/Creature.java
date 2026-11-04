@@ -56,7 +56,6 @@ public abstract class Creature extends VisibleObject {
 	private final byte[] zoneTypes = new byte[ZoneType.values().length];
 	private int skillNumber;
 	private int attackedCount;
-	private long spawnTime = System.currentTimeMillis();
 
 	public Creature(int objId, CreatureController<? extends Creature> controller, SpawnTemplate spawnTemplate, CreatureTemplate objectTemplate,
 		WorldPosition position, boolean autoReleaseObjectId) {
@@ -536,10 +535,6 @@ public abstract class Creature extends VisibleObject {
 
 	public int getSkillCooldown(SkillTemplate template) {
 		return template.getCooldown();
-	}
-
-	public long getMillisSinceSpawn() {
-		return System.currentTimeMillis() - spawnTime;
 	}
 
 	public boolean isNewSpawn() {

@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
 import com.aionemu.gameserver.configs.main.WorldConfig;
+import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.templates.world.WorldMapTemplate;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
@@ -14,8 +15,9 @@ public class SM_CHANNEL_INFO extends AionServerPacket {
 	int instanceCount = 0;
 	int currentChannel = 0;
 
-	public SM_CHANNEL_INFO(WorldPosition position) {
-		if (position == null || !position.isSpawned()) {
+	public SM_CHANNEL_INFO(VisibleObject object) {
+		WorldPosition position = object.getPosition();
+		if (position == null || !object.isSpawned()) {
 			instanceCount = 1;
 			currentChannel = 1;
 		} else {
