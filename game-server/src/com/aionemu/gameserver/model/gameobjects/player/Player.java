@@ -767,7 +767,7 @@ public class Player extends Creature {
 	}
 
 	/**
-	 * The fly state as the client displays it: bit 0 for free flight, bit 1 for gliding.
+	 * The fly state as the client displays it, one bit per state: 1 for free flight, 2 for gliding and 3 for a glide out of free flight.
 	 */
 	public int getClientFlyState() {
 		return flyState;
