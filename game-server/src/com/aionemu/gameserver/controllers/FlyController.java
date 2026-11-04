@@ -144,34 +144,36 @@ public class FlyController {
 	 * - start fp reduce + emotions/stats if from fly to glide - only emotions/stats
 	 */
 	public boolean switchToGliding() {
+		return switchToGliding(false);
+	}
+
+	/**
+	 * @param skipChecks
+	 *          - for a player the server puts into a glide itself, e.g. on the glide exit of a windstream: he was carried along the path a
+	 *          moment ago, so neither the glide checks nor its cooldown apply there
+	 */
+	public boolean switchToGliding(boolean skipChecks) {
 		if (player.isInGlidingState() || !player.canPerformMove())
 			return false;
-		if (player.isUsingFlightTransporterOrWindstream())
-			return false;
-		if (!canGlide(player))
-			return false;
-		if (!player.isFlying() && player.getFlyReuseTime() > System.currentTimeMillis()) {
-			PacketSendUtility.broadcastToSightedPlayers(player, new SM_EMOTION(player, EmotionType.STOP_GLIDE), true);
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FLYING_TIME_NOT_READY());
-			return false;
+		if (!skipChecks) {
+			if (player.isUsingFlightTransporterOrWindstream())
+				return false;
+			if (!canGlide(player))
+				return false;
+			if (!player.isFlying()) { // a glide started on the ground blocks flying for a while, one started in free flight does not
+				if (player.getFlyReuseTime() > System.currentTimeMillis()) {
+					PacketSendUtility.broadcastToSightedPlayers(player, new SM_EMOTION(player, EmotionType.STOP_GLIDE), true);
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FLYING_TIME_NOT_READY());
+					return false;
+				}
+				player.setFlyReuseTime(System.currentTimeMillis() + FLY_REUSE_TIME);
+			}
 		}
-		player.setFlyReuseTime(System.currentTimeMillis() + FLY_REUSE_TIME);
 		player.setFlyState(FlyState.GLIDING);
 		player.setState(CreatureState.GLIDING);
 		player.getLifeStats().triggerFpReduce();
 		player.getGameStats().updateStatsAndSpeedVisually();
 		return true;
-	}
-
-	/**
-	 * Puts a player who leaves a windstream on its glide exit straight into a glide. He was carried along the path a moment ago, so the glide
-	 * checks and its cooldown do not apply here: the exit leaves him in the air wherever it is and gliding is all he can do.
-	 */
-	public void glideAfterWindstream() {
-		player.setFlyState(FlyState.GLIDING);
-		player.setState(CreatureState.GLIDING);
-		player.getLifeStats().triggerFpReduce();
-		player.getGameStats().updateStatsAndSpeedVisually();
 	}
 
 	private static boolean canGlide(Player player) {

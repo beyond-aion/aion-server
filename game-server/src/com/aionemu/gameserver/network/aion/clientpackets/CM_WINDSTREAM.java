@@ -106,7 +106,7 @@ public class CM_WINDSTREAM extends AionClientPacket {
 				player.unsetFlyState(FlyState.GLIDING);
 				player.getMoveController().restartFalling(player.getZ());
 				if (state == WindstreamState.LEAVE_GLIDING)
-					player.getFlyController().glideAfterWindstream();
+					player.getFlyController().switchToGliding(true);
 				else
 					player.getGameStats().updateStatsAndSpeedVisually();
 				player.setFlightPath(null);
