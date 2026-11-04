@@ -100,7 +100,8 @@ public class CM_MOVE extends AionClientPacket {
 				m.glideFlag = glideFlag;
 				m.windBoxId = windBoxId;
 				player.getFlyController().switchToGliding();
-			}
+			} else // a move without the glide flag ends a running glide
+				player.getFlyController().onStopGliding();
 
 			if ((type & MovementMask.POSITION) == MovementMask.POSITION && (type & MovementMask.MANUAL) == MovementMask.MANUAL) { // start move or change direction
 				m.setNewDirection(x2, y2, z2, heading);

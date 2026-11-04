@@ -79,7 +79,7 @@ public class CM_WINDSTREAM extends AionClientPacket {
 				player.unsetState(CreatureState.GLIDING);
 				player.setState(CreatureState.FLYING);
 				player.unsetFlyState(FlyState.GLIDING);
-				player.setFlyState(FlyState.FLYING);
+				player.unsetFlyState(FlyState.FLYING);
 				player.getLifeStats().triggerFpRestore();
 			}
 			case ENTERED -> {

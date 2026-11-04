@@ -30,7 +30,7 @@ public class FlyController {
 			player.unsetState(CreatureState.GLIDING);
 			if (!player.isInFlyState(FlyState.FLYING)) {
 				player.getLifeStats().triggerFpRestore();
-				PacketSendUtility.broadcastToSightedPlayers(player, new SM_EMOTION(player, EmotionType.STOP_GLIDE), true);
+				PacketSendUtility.broadcastToSightedPlayers(player, new SM_EMOTION(player, EmotionType.STOP_GLIDE), false);
 			} else {
 				player.getLifeStats().triggerFpReduce();
 			}
@@ -43,7 +43,7 @@ public class FlyController {
 	 * a flight area on any packet, and the client expects the free flight to end at that moment.
 	 */
 	public void onMove() {
-		if (player.isInGlidingState() && player.isFreeFlying() && !player.isInCustomState(CustomPlayerState.FREE_FLY_MODE)
+		if (player.isInGlidingState() && player.isInFlyingState() && !player.isInCustomState(CustomPlayerState.FREE_FLY_MODE)
 			&& !player.getWorldMapInstance().isInsideFlyZone(player.getX(), player.getY(), player.getZ()))
 			switchToNormalGlide();
 	}
@@ -52,7 +52,7 @@ public class FlyController {
 	 * @return True if the player is in free flight and the given position is outside the flight areas of the world.
 	 */
 	public boolean isFlyingOutOfFlyZone(float x, float y, float z) {
-		return player.isFreeFlying() && !player.isInCustomState(CustomPlayerState.FREE_FLY_MODE) && !player.getWorldMapInstance().isInsideFlyZone(x, y, z);
+		return player.isInFlyingState() && !player.isInCustomState(CustomPlayerState.FREE_FLY_MODE) && !player.getWorldMapInstance().isInsideFlyZone(x, y, z);
 	}
 
 	/**
@@ -76,6 +76,8 @@ public class FlyController {
 		player.unsetState(CreatureState.FLYING);
 		player.unsetState(CreatureState.GLIDING);
 		player.unsetState(CreatureState.FLOATING_CORPSE);
+		if (player.getFlightPath() != null)
+			player.setFlightPath(null);
 		player.getMoveController().restartFalling(player.getZ());
 		player.getGameStats().updateStatsAndSpeedVisually();
 
@@ -118,6 +120,8 @@ public class FlyController {
 	}
 
 	private static boolean canFly(Player player) {
+		if (player.isUsingFlightTransporterOrWindstream()) // a path already carries him
+			return false;
 		if (!player.getCommonData().isDaeva()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GLIDE_ONLY_DEVA_CAN());
 			return false;
