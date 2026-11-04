@@ -56,10 +56,8 @@ public class FlyController {
 	}
 
 	/**
-	 * Ends free flight but keeps the glide. Retail does this as soon as a gliding player leaves a flight area, even when the player
-	 * keeps gliding for a long time afterwards. Our client treats the landing that follows as a landing in free flight, which is not
-	 * allowed outside of flight areas, so it refuses it by moving the character to the world's flight restriction zone coordinates
-	 * (FRZ_X/FRZ_Y, the map corner) - the teleport this is meant to prevent.
+	 * Ends free flight but keeps the glide, the way a gliding player who leaves a flight area is handled: the client gets S_ACTION 48 and the
+	 * stats update, keeps gliding and can finish the landing anywhere.
 	 */
 	private void switchToNormalGlide() {
 		player.unsetFlyState(FlyState.FLYING);
