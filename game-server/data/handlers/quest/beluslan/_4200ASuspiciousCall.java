@@ -1,12 +1,10 @@
 package quest.beluslan;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
-import static com.aionemu.gameserver.model.items.ItemUseAnimation.*;
 
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
 import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -14,7 +12,6 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldMapType;
@@ -122,7 +119,6 @@ public class _4200ASuspiciousCall extends AbstractQuestHandler {
 	public HandlerResult onItemUseEvent(final QuestEnv env, Item item) {
 		final Player player = env.getPlayer();
 		final int id = item.getItemTemplate().getTemplateId();
-		final int itemObjId = item.getObjectId();
 		final QuestState qs = player.getQuestStateList().getQuestState(questId);
 
 		if (id != 182209097 || qs == null)
@@ -131,19 +127,11 @@ public class _4200ASuspiciousCall extends AbstractQuestHandler {
 		if (qs.getQuestVarById(0) != 2)
 			return HandlerResult.FAILED;
 
-		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 3000, USE_START), true);
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0, USE_SUCCESS), true);
-				removeQuestItem(env, 182209097, 1);
-				// teleport location(BlackCloudIsland): 400010000 3419.16 2445.43 2766.54 57
-				TeleportService.teleportTo(player, 400010000, 3419.16f, 2445.43f, 2766.54f, (byte) 57);
-				qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
-				updateQuestStatus(env);
-			}
-		}, 3000);
+		removeQuestItem(env, 182209097, 1);
+		// teleport location(BlackCloudIsland): 400010000 3419.16 2445.43 2766.54 57
+		TeleportService.teleportTo(player, 400010000, 3419.16f, 2445.43f, 2766.54f, (byte) 57);
+		qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
+		updateQuestStatus(env);
 		return HandlerResult.SUCCESS;
 	}
 }

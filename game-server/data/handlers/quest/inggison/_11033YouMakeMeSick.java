@@ -1,12 +1,10 @@
 package quest.inggison;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
-import static com.aionemu.gameserver.model.items.ItemUseAnimation.*;
 
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
 import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -14,7 +12,6 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * @author VladimirZ
@@ -96,21 +93,12 @@ public class _11033YouMakeMeSick extends AbstractQuestHandler {
 		final Player player = env.getPlayer();
 		final QuestState qs = player.getQuestStateList().getQuestState(questId);
 		final int id = item.getItemTemplate().getTemplateId();
-		final int itemObjId = item.getObjectId();
 
 		if (id != 182206728)
 			return HandlerResult.UNKNOWN;
-		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 1000, USE_START), true);
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0, USE_SUCCESS), true);
-				removeQuestItem(env, 182206728, 1);
-				qs.setStatus(QuestStatus.REWARD);
-				updateQuestStatus(env);
-			}
-		}, 1000);
+		removeQuestItem(env, 182206728, 1);
+		qs.setStatus(QuestStatus.REWARD);
+		updateQuestStatus(env);
 		return HandlerResult.SUCCESS;
 	}
 }

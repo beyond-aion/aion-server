@@ -1,18 +1,14 @@
 package quest.gelkmaros;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
-import static com.aionemu.gameserver.model.items.ItemUseAnimation.*;
 
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
 import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * @Author Majka
@@ -108,7 +104,6 @@ public class _20033DranaSolution extends AbstractQuestHandler {
 	public HandlerResult onItemUseEvent(final QuestEnv env, Item item) {
 		final Player player = env.getPlayer();
 		final int id = item.getItemTemplate().getTemplateId();
-		final int itemObjId = item.getObjectId();
 		final QuestState qs = player.getQuestStateList().getQuestState(questId);
 
 		if (qs == null || qs.getStatus() != QuestStatus.START || id != 182215594) {
@@ -119,19 +114,11 @@ public class _20033DranaSolution extends AbstractQuestHandler {
 		if (var != 3)
 			return HandlerResult.UNKNOWN;
 
-		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 3000, USE_START), true);
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0, USE_SUCCESS), true);
-				playQuestMovie(env, 553);
-				removeQuestItem(env, 182215594, 1);
-				qs.setQuestVar(4);
-				qs.setStatus(QuestStatus.REWARD);
-				updateQuestStatus(env);
-			}
-		}, 3000);
+		playQuestMovie(env, 553);
+		removeQuestItem(env, 182215594, 1);
+		qs.setQuestVar(4);
+		qs.setStatus(QuestStatus.REWARD);
+		updateQuestStatus(env);
 
 		return HandlerResult.SUCCESS;
 	}

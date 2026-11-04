@@ -1,13 +1,11 @@
 package quest.inggison;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
-import static com.aionemu.gameserver.model.items.ItemUseAnimation.*;
 
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
 import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -70,12 +68,10 @@ public class _11046BoxPickedUpInTheForest extends AbstractQuestHandler {
 	public HandlerResult onItemUseEvent(QuestEnv env, Item item) {
 		final Player player = env.getPlayer();
 		final int id = item.getItemTemplate().getTemplateId();
-		final int itemObjId = item.getObjectId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 
 		if (id != 182206745)
 			return HandlerResult.UNKNOWN;
-		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 20, USE_SUCCESS), true);
 		if (qs == null || qs.isStartable())
 			sendQuestDialog(env, 4);
 		return HandlerResult.SUCCESS;

@@ -1,18 +1,14 @@
 package quest.cygnea;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
-import static com.aionemu.gameserver.model.items.ItemUseAnimation.*;
 
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
 import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * @Author Majka
@@ -130,23 +126,14 @@ public class _10501ResearchtheRuins extends AbstractQuestHandler {
 		if (id != workItemId)
 			return HandlerResult.UNKNOWN;
 
-		final int itemObjId = item.getObjectId();
-		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 1000, USE_START), true);
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0, USE_SUCCESS), true);
-				int var = qs.getQuestVarById(0);
-				// Step 1: Use the Ruins Location Map to find the first location
-				// Step 3: Use the Ruins Location Map to find the second location
-				// Step 5: Use the Ruins Location Map to find the third location
-				if (var == 1 || var == 3 || var == 5) {
-					qs.setQuestVar(var + 1);
-					updateQuestStatus(env);
-				}
-			}
-		}, 1000);
+		int var = qs.getQuestVarById(0);
+		// Step 1: Use the Ruins Location Map to find the first location
+		// Step 3: Use the Ruins Location Map to find the second location
+		// Step 5: Use the Ruins Location Map to find the third location
+		if (var == 1 || var == 3 || var == 5) {
+			qs.setQuestVar(var + 1);
+			updateQuestStatus(env);
+		}
 		return HandlerResult.SUCCESS;
 	}
 

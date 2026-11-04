@@ -1,18 +1,14 @@
 package quest.beluslan;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
-import static com.aionemu.gameserver.model.items.ItemUseAnimation.*;
 
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
 import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * @author Ritsu, Majka
@@ -93,7 +89,6 @@ public class _24052AFrozenCity extends AbstractQuestHandler {
 	public HandlerResult onItemUseEvent(final QuestEnv env, Item item) {
 		final Player player = env.getPlayer();
 		final int id = item.getItemTemplate().getTemplateId();
-		final int itemObjId = item.getObjectId();
 
 		final QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (!player.isInsideItemUseZone("DF3_ITEMUSEAREA_Q2056"))
@@ -103,30 +98,22 @@ public class _24052AFrozenCity extends AbstractQuestHandler {
 			|| id != 182215380 && qs.getQuestVarById(0) == 3)
 			return HandlerResult.UNKNOWN;
 
-		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 2000, USE_START), true);
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0, USE_SUCCESS), true);
-				if (qs.getQuestVarById(0) == 1) {
-					playQuestMovie(env, 243);
-					removeQuestItem(env, id, 1);
-					changeQuestStep(env, 1, 2); // 2
-					giveQuestItem(env, 182215379, 1);
-				} else if (qs.getQuestVarById(0) == 2) {
-					playQuestMovie(env, 244);
-					removeQuestItem(env, id, 1);
-					changeQuestStep(env, 2, 3); // 3
-					giveQuestItem(env, 182215380, 1);
-				} else if (qs.getQuestVarById(0) == 3 && qs.getStatus() != QuestStatus.COMPLETE) {
-					removeQuestItem(env, id, 1);
-					playQuestMovie(env, 245);
-					qs.setQuestVar(4);
-					changeQuestStep(env, 4, 4, true); // reward
-				}
-			}
-		}, 2000);
+		if (qs.getQuestVarById(0) == 1) {
+			playQuestMovie(env, 243);
+			removeQuestItem(env, id, 1);
+			changeQuestStep(env, 1, 2); // 2
+			giveQuestItem(env, 182215379, 1);
+		} else if (qs.getQuestVarById(0) == 2) {
+			playQuestMovie(env, 244);
+			removeQuestItem(env, id, 1);
+			changeQuestStep(env, 2, 3); // 3
+			giveQuestItem(env, 182215380, 1);
+		} else if (qs.getQuestVarById(0) == 3 && qs.getStatus() != QuestStatus.COMPLETE) {
+			removeQuestItem(env, id, 1);
+			playQuestMovie(env, 245);
+			qs.setQuestVar(4);
+			changeQuestStep(env, 4, 4, true); // reward
+		}
 		return HandlerResult.SUCCESS;
 	}
 }

@@ -1,14 +1,12 @@
 package quest.reshanta;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
-import static com.aionemu.gameserver.model.items.ItemUseAnimation.*;
 
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
 import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -181,7 +179,6 @@ public class _14043DrawlingBalaur extends AbstractQuestHandler {
 	public HandlerResult onItemUseEvent(QuestEnv env, Item item) {
 		final Player player = env.getPlayer();
 		final int id = item.getItemTemplate().getTemplateId();
-		final int itemObjId = item.getObjectId();
 
 		if (id != 182215351)
 			return HandlerResult.UNKNOWN;
@@ -189,7 +186,6 @@ public class _14043DrawlingBalaur extends AbstractQuestHandler {
 		if (qs == null)
 			return HandlerResult.FAILED;
 
-		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 1, USE_SUCCESS), true);
 		removeQuestItem(env, 182215351, 1);
 		qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 		updateQuestStatus(env);

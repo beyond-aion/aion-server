@@ -1,19 +1,15 @@
 package quest.cygnea;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
-import static com.aionemu.gameserver.model.items.ItemUseAnimation.*;
 
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
 import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
-import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * @Author Majka
@@ -141,22 +137,13 @@ public class _10505SneezeAttack extends AbstractQuestHandler {
 		if (id != workItemId)
 			return HandlerResult.UNKNOWN;
 
-		final int itemObjId = item.getObjectId();
-		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 1000, USE_START), true);
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0, USE_SUCCESS), true);
-				int var = qs.getQuestVarById(0);
-				if (var == 4) { // Step 4: Read the Deciphered Balaur Document and find out what it says.
-					playQuestMovie(env, 992);
-					qs.setQuestVar(var + 1);
-					qs.setStatus(QuestStatus.REWARD);
-					updateQuestStatus(env);
-				}
-			}
-		}, 1000);
+		int var = qs.getQuestVarById(0);
+		if (var == 4) { // Step 4: Read the Deciphered Balaur Document and find out what it says.
+			playQuestMovie(env, 992);
+			qs.setQuestVar(var + 1);
+			qs.setStatus(QuestStatus.REWARD);
+			updateQuestStatus(env);
+		}
 		return HandlerResult.SUCCESS;
 	}
 
