@@ -159,12 +159,17 @@ public class TeleportService {
 	}
 
 	private static void sendLoc(Player player, int worldId, int instanceId, float x, float y, float z, byte h, TeleportAnimation animation) {
+		sendLoc(player, worldId, instanceId, x, y, z, h, animation, null);
+	}
+
+	private static void sendLoc(Player player, int worldId, int instanceId, float x, float y, float z, byte h,
+		TeleportAnimation animation, Runnable onArrive) {
 		abortPlayerActions(player);
 		player.unblockQuitting();
 		// despawn from world and send animation to others (also ends flying)
 		World.getInstance().despawn(player, animation.getDefaultObjectDeleteAnimation());
 
-		SpawnTask spawnTask = new SpawnTask(player, worldId, instanceId, x, y, z, h, animation);
+		SpawnTask spawnTask = new SpawnTask(player, worldId, instanceId, x, y, z, h, animation, onArrive);
 		if (animation == TeleportAnimation.NONE) // instant teleport (don't wait for player fade-out)
 			spawnTask.run();
 		else {
@@ -425,10 +430,10 @@ public class TeleportService {
 				SM_SYSTEM_MESSAGE.STR_MSG_REMAIN_CHANGE_CHANNEL_COOLTIME(Integer.toString(cooldownSeconds), Integer.toString(remainingSeconds)));
 			return;
 		}
-		// another twin of the same map, so the client reloads the level after the fade like it does for any other teleport
+		// retail sends the teleport request with the beam and only after the animation the channel message and the new world
 		sendLoc(player, player.getWorldId(), channel + 1, player.getX(), player.getY(), player.getZ(), player.getHeading(),
-			TeleportAnimation.FADE_OUT_BEAM);
-		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_TELEPORT_ZONECHANNEL(channel + 1));
+			TeleportAnimation.FADE_OUT_BEAM,
+			() -> PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_TELEPORT_ZONECHANNEL(channel + 1)));
 	}
 
 	private static boolean canChangeChannelNow(Player player, WorldMap map) {
@@ -502,8 +507,10 @@ public class TeleportService {
 		private final float x, y, z;
 		private final byte h;
 		private final TeleportAnimation animation;
+		private final Runnable onArrive;
 
-		public SpawnTask(Player player, int worldId, int instanceId, float x, float y, float z, byte h, TeleportAnimation animation) {
+		public SpawnTask(Player player, int worldId, int instanceId, float x, float y, float z, byte h, TeleportAnimation animation,
+			Runnable onArrive) {
 			this.player = player;
 			this.worldId = worldId;
 			this.instanceId = instanceId;
@@ -512,6 +519,7 @@ public class TeleportService {
 			this.z = z;
 			this.h = h;
 			this.animation = animation;
+			this.onArrive = onArrive;
 		}
 
 		@Override
@@ -538,6 +546,8 @@ public class TeleportService {
 			World.getInstance().setPosition(player.getPet(), worldId, instanceId, x, y, z, h);
 
 			player.setPortAnimation(animation.getDefaultArrivalAnimation());
+			if (onArrive != null)
+				onArrive.run();
 			if (currentWorldId == worldId && currentInstance == instanceId) {
 				// instant teleport when map is the same
 				spawnOnSameMap(player);
