@@ -425,10 +425,9 @@ public class TeleportService {
 				SM_SYSTEM_MESSAGE.STR_MSG_REMAIN_CHANGE_CHANNEL_COOLTIME(Integer.toString(cooldownSeconds), Integer.toString(remainingSeconds)));
 			return;
 		}
-		World.getInstance().setPosition(player, player.getWorldId(), channel + 1, player.getX(), player.getY(), player.getZ(), player.getHeading());
-		player.getController().startProtectionActiveTask();
-		PacketSendUtility.sendPacket(player, new SM_CHANNEL_INFO(player));
-		PacketSendUtility.sendPacket(player, new SM_PLAYER_SPAWN(player));
+		// another twin of the same map, so the client reloads the level after the fade like it does for any other teleport
+		sendLoc(player, player.getWorldId(), channel + 1, player.getX(), player.getY(), player.getZ(), player.getHeading(),
+			TeleportAnimation.FADE_OUT_BEAM);
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_TELEPORT_ZONECHANNEL(channel + 1));
 	}
 

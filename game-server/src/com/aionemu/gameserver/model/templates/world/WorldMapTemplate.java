@@ -30,7 +30,7 @@ public class WorldMapTemplate implements L10n {
 	private int nameId;
 
 	@XmlAttribute(name = "twin_count")
-	private int twinCount;
+	private int twinCount = 1;
 
 	@XmlAttribute(name = "beginner_twin_count")
 	private int beginnerTwinCount;
@@ -92,10 +92,14 @@ public class WorldMapTemplate implements L10n {
 		return nameId;
 	}
 
+	/**
+	 * @return The number of channels the client lists for this map.
+	 */
 	public int getTwinCount() {
+		int channelCount = Math.max(1, twinCount);
 		if (WorldConfig.WORLD_MAX_TWINS_USUAL == 0)
-			return twinCount;
-		return Math.min(WorldConfig.WORLD_MAX_TWINS_USUAL, twinCount);
+			return channelCount;
+		return Math.min(WorldConfig.WORLD_MAX_TWINS_USUAL, channelCount);
 	}
 
 	public int getBeginnerTwinCount() {
