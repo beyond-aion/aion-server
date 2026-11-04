@@ -143,7 +143,6 @@ public class CM_MOVE extends AionClientPacket {
 			player.getController().stopProtectionActiveTask();
 		player.getMoveController().setIsJumping(jumping);
 		World.getInstance().updatePosition(player, x, y, z, heading);
-		// retail checks every move against the flight areas of the world before it takes effect, not on a later zone update
 		player.getFlyController().onMove();
 		m.onMoveFromClient();
 		notifyControllers(player, oldMask);

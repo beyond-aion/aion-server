@@ -42,8 +42,7 @@ public class FlyController {
 
 	/**
 	 * Called for every move of the player once the position was taken over, not just for glide moves: a gliding player can cross the border of
-	 * a flight area on any packet, and the client expects the free flight to end at that moment. Retail checks each gliding move against the
-	 * flight areas of the world instead of waiting for a zone update.
+	 * a flight area on any packet, and the client expects the free flight to end at that moment.
 	 */
 	public void onMove() {
 		if (player.isInGlidingState() && player.isFreeFlying() && !player.isInCustomState(CustomPlayerState.FREE_FLY_MODE)
