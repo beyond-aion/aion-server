@@ -62,7 +62,7 @@ public class FlyController {
 		player.unsetFlyState(FlyState.FLYING);
 		player.unsetState(CreatureState.FLYING);
 		player.getGameStats().updateStatsAndSpeedVisually();
-		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.STOP_FLY), true);
+		PacketSendUtility.broadcastToSightedPlayers(player, new SM_EMOTION(player, EmotionType.STOP_FLY), true);
 	}
 
 	/**
@@ -150,13 +150,12 @@ public class FlyController {
 			return false;
 		if (!canGlide(player))
 			return false;
-		if (player.getFlyState() == 0) {
-			// fly reuse time only if gliding from walking
-			if (player.getFlyReuseTime() > System.currentTimeMillis()) {
-				return false;
-			}
-			player.setFlyReuseTime(System.currentTimeMillis() + FLY_REUSE_TIME);
+		if (!player.isFlying() && player.getFlyReuseTime() > System.currentTimeMillis()) {
+			PacketSendUtility.broadcastToSightedPlayers(player, new SM_EMOTION(player, EmotionType.STOP_GLIDE), true);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FLYING_TIME_NOT_READY());
+			return false;
 		}
+		player.setFlyReuseTime(System.currentTimeMillis() + FLY_REUSE_TIME);
 		player.setFlyState(FlyState.GLIDING);
 		player.setState(CreatureState.GLIDING);
 		player.getLifeStats().triggerFpReduce();
