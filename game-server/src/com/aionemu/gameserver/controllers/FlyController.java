@@ -75,8 +75,7 @@ public class FlyController {
 		player.unsetState(CreatureState.FLYING);
 		player.unsetState(CreatureState.GLIDING);
 		player.unsetState(CreatureState.FLOATING_CORPSE);
-		if (player.getFlightPath() != null)
-			player.setFlightPath(null);
+		player.setFlightPath(null);
 		player.getMoveController().restartFalling(player.getZ());
 		player.getGameStats().updateStatsAndSpeedVisually();
 
