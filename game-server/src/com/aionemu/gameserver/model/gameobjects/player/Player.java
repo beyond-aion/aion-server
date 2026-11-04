@@ -766,13 +766,6 @@ public class Player extends Creature {
 		return isInFlyState(FlyState.GLIDING);
 	}
 
-	/**
-	 * The fly state as the client displays it, one bit per state: 1 for free flight, 2 for gliding and 3 for a glide out of free flight.
-	 */
-	public int getClientFlyState() {
-		return flyState;
-	}
-
 	public boolean isTrading() {
 		return ExchangeService.getInstance().isPlayerInExchange(this);
 	}

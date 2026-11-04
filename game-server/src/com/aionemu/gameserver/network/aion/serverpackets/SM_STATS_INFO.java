@@ -74,7 +74,7 @@ public class SM_STATS_INFO extends AionServerPacket {
 		writeD(pgs.getFlyTime().getCurrent());// [max fly time]
 		writeD(pls.getCurrentFp());// [current fly time]
 
-		writeC(player.getClientFlyState());// [fly state]
+		writeC(player.getFlyState());// [fly state]
 		writeC(player.isUsingFlightTransporterOrWindstream() ? MovementMask.PATH_FLY : player.getMoveController().getMovementMask());// [movementMask]
 
 		writeH(pgs.getMainHandPAttack(CalculationType.DISPLAY).getCurrent());// [current main hand attack]
