@@ -25,9 +25,14 @@ public abstract class PlayableMoveController<T extends Creature> extends Creatur
 	public float vectorY;
 	public float vectorZ;
 	public byte glideFlag;
-	public int unk1;
-	public int unk2;
-	public int geyserLocationId; // locationId from windstreams.xml
+	// TODO remember where the player stepped on, block item use and crafting while aboard, and save that point on logout
+	/** The moving object the creature stands on, zero when there is none. The id is the one the clients know it by, the server never resolves it. */
+	public int vehicleId;
+	/** The part of that object which vehicleX, vehicleY and vehicleZ are relative to. */
+	public int vehiclePartId;
+	// TODO reject the move when the client claims this wind box but the player is outside it (needs the wind box shapes)
+	/** The wind box the creature is lifted by while gliding, set with the wind box flag. Its id is the location id of a WIND_BOX fly path in windstreams.xml. */
+	public int windBoxId;
 
 	public PlayableMoveController(T owner) {
 		super(owner);

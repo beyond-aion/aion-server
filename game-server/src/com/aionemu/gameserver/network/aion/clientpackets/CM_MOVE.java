@@ -29,8 +29,8 @@ public class CM_MOVE extends AionClientPacket {
 	private byte heading;
 	private float x, y, z, x2, y2, z2, vehicleX, vehicleY, vehicleZ, vectorX, vectorY, vectorZ;
 	private byte glideFlag;
-	private int unk1, unk2;
-	private int geyserLocationId;
+	private int vehicleId, vehiclePartId;
+	private int windBoxId;
 
 	public CM_MOVE(int opcode, Set<State> validStates) {
 		super(opcode, validStates);
@@ -60,13 +60,13 @@ public class CM_MOVE extends AionClientPacket {
 			}
 		}
 		if ((type & MovementMask.GLIDE) == MovementMask.GLIDE) {
-			glideFlag = readC();
-			if (glideFlag == GlideFlag.GEYSER)
-				geyserLocationId = readUC(); // locationId from windstreams.xml
+			int first = readUC(); // the flag in the upper half, with a wind box the top four bits of its twelve bit id in the lower half
+			glideFlag = (byte) (first & 0xF0);
+			windBoxId = (glideFlag & GlideFlag.WIND_BOX) == 0 ? 0 : (first & 0x0F) << 8 | readUC();
 		}
 		if ((type & MovementMask.VEHICLE) == MovementMask.VEHICLE) {
-			unk1 = readD();
-			unk2 = readD();
+			vehicleId = readD();
+			vehiclePartId = readD();
 			vehicleX = readF();
 			vehicleY = readF();
 			vehicleZ = readF();
@@ -96,7 +96,7 @@ public class CM_MOVE extends AionClientPacket {
 					&& (type & MovementMask.VEHICLE) != MovementMask.VEHICLE && z2 > z;
 			if ((type & MovementMask.GLIDE) == MovementMask.GLIDE) {
 				m.glideFlag = glideFlag;
-				m.geyserLocationId = geyserLocationId;
+				m.windBoxId = windBoxId;
 				player.getFlyController().switchToGliding();
 			}
 
@@ -124,8 +124,8 @@ public class CM_MOVE extends AionClientPacket {
 			}
 
 			if ((type & MovementMask.VEHICLE) == MovementMask.VEHICLE) {
-				m.unk1 = unk1;
-				m.unk2 = unk2;
+				m.vehicleId = vehicleId;
+				m.vehiclePartId = vehiclePartId;
 				m.vehicleX = vehicleX;
 				m.vehicleY = vehicleY;
 				m.vehicleZ = vehicleZ;
@@ -147,8 +147,7 @@ public class CM_MOVE extends AionClientPacket {
 		m.onMoveFromClient();
 		notifyControllers(player, oldMask);
 
-		if ((type & MovementMask.POSITION) == MovementMask.POSITION && (type & MovementMask.MANUAL) == MovementMask.MANUAL
-			|| type == MovementMask.IMMEDIATE)
+		if (isSeenByOthers())
 			PacketSendUtility.broadcastToSightedPlayers(player, new SM_MOVE(player));
 
 		if ((type & MovementMask.FALL) == MovementMask.FALL) {
@@ -164,9 +163,8 @@ public class CM_MOVE extends AionClientPacket {
 	}
 
 	/**
-	 * Retail refuses a move that reports a flying player outside the flight areas of the world and puts him back to the position the server has,
-	 * without ending his flight. Glide moves are handled separately by {@link FlyController#onGlideMove()} further down: the player keeps gliding
-	 * there, only the free flight ends.
+	 * Puts a flying player back to the position the server has when a move reports him outside the flight areas of the world, without ending
+	 * his flight. Glide moves are handled by {@link FlyController#onMove()}: the player keeps gliding there, only the free flight ends.
 	 *
 	 * @return True if the move was refused and the player was put back.
 	 */
@@ -177,6 +175,16 @@ public class CM_MOVE extends AionClientPacket {
 		player.getMoveController().setIsJumping(false);
 		player.getFlyController().blinkIntoFlightArea();
 		return true;
+	}
+
+	/**
+	 * While running or falling the client keeps reporting its position on its own. Those reports are not passed on, every other move is: a
+	 * start or turn (position and manual flags together), a stop, also on a vehicle, and a glide change.
+	 */
+	private boolean isSeenByOthers() {
+		boolean startOrTurn = (type & (MovementMask.POSITION | MovementMask.MANUAL)) == (MovementMask.POSITION | MovementMask.MANUAL);
+		boolean runningOrFalling = (type & (MovementMask.POSITION | MovementMask.FALL)) != 0;
+		return startOrTurn || !runningOrFalling;
 	}
 
 	private boolean handleBogusPacket(Player player) {
@@ -227,6 +235,6 @@ public class CM_MOVE extends AionClientPacket {
 	public String toString() {
 		return "CM_MOVE [type=" + (type & 0xFF) + ", heading=" + heading + ", x=" + x + ", y=" + y + ", z=" + z + ", x2=" + x2 + ", y2=" + y2 + ", z2="
 			+ z2 + ", vehicleX=" + vehicleX + ", vehicleY=" + vehicleY + ", vehicleZ=" + vehicleZ + ", vectorX=" + vectorX + ", vectorY=" + vectorY
-			+ ", vectorZ=" + vectorZ + ", glideFlag=" + glideFlag + ", unk1=" + unk1 + ", unk2=" + unk2 + "]";
+			+ ", vectorZ=" + vectorZ + ", glideFlag=" + glideFlag + ", vehicleId=" + vehicleId + ", vehiclePartId=" + vehiclePartId + "]";
 	}
 }

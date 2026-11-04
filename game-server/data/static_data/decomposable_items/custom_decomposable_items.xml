@@ -1312,6 +1312,19 @@
 			<item id="187050021" /><!-- [Event] Dramata Wings -->
 		</set>
 	</decomposable>
+	<decomposable item_id="188052761" selectable="true" override="true"><!-- [Event] Bonus Entry Scroll Bundle -->
+		<set>
+			<item id="188600260" /><!-- [Event] Danuar Reliquary Bonus Entry Scroll -->
+			<item id="188600261" /><!-- [Event] Infinity Shard Bonus Entry Scroll -->
+			<item id="188600262" /><!-- [Event] Danuar Sanctuary Bonus Entry Scroll -->
+			<item id="188600263" /><!-- [Event] Ophidan Bridge Bonus Entry Scroll -->
+			<item id="188600264" /><!-- [Event] The Eternal Bastion Bonus Entry Scroll -->
+			<item id="188600265" /><!-- [Event] Sauro Supply Base Bonus Entry Scroll -->
+			<item id="188600140" /><!-- [Event] Tiamat Stronghold Bonus Entry Scroll -->
+			<item id="188600337" /><!-- Anguished Dragon Lord's Refuge Bonus Entry Scroll -->
+			<item id="188600331" /><!-- Occupied Rentus Base Bonus Entry Scroll -->
+		</set>
+	</decomposable>
 	<decomposable item_id="188052936" override="true"><!-- Shugo Icebox -->
 		<set player_classes="ARTIST ENGINEER MAGE PRIEST SCOUT WARRIOR">
 			<item id="166200009" chance="45" /><!-- Mythic Weapon Tuning Scroll -->
