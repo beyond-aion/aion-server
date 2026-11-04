@@ -163,6 +163,17 @@ public class FlyController {
 		return true;
 	}
 
+	/**
+	 * Puts a player who leaves a windstream on its glide exit straight into a glide. He was carried along the path a moment ago, so the glide
+	 * checks and its cooldown do not apply here: the exit leaves him in the air wherever it is and gliding is all he can do.
+	 */
+	public void glideAfterWindstream() {
+		player.setFlyState(FlyState.GLIDING);
+		player.setState(CreatureState.GLIDING);
+		player.getLifeStats().triggerFpReduce();
+		player.getGameStats().updateStatsAndSpeedVisually();
+	}
+
 	private static boolean canGlide(Player player) {
 		if (!player.getCommonData().isDaeva()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GLIDE_ONLY_DEVA_CAN());
