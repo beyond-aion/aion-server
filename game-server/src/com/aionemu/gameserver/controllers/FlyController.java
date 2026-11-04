@@ -30,7 +30,6 @@ public class FlyController {
 			player.unsetState(CreatureState.GLIDING);
 			if (!player.isInFlyState(FlyState.FLYING)) {
 				player.getLifeStats().triggerFpRestore();
-				PacketSendUtility.broadcastToSightedPlayers(player, new SM_EMOTION(player, EmotionType.STOP_GLIDE), false);
 			} else {
 				player.getLifeStats().triggerFpReduce();
 			}
