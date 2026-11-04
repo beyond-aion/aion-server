@@ -6,8 +6,6 @@ import com.aionemu.gameserver.model.gameobjects.player.CustomPlayerState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.gameobjects.state.FlyState;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_BLINK;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_BLINK.BlinkReason;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
@@ -55,19 +53,6 @@ public class FlyController {
 	 */
 	public boolean isFlyingOutOfArea(float x, float y, float z) {
 		return player.isFreeFlying() && !player.isInCustomState(CustomPlayerState.FREE_FLY_MODE) && !player.isInsideFlyZone(x, y, z);
-	}
-
-	/**
-	 * Puts a flying player back to the position the server has when a move packet reports him outside the flight areas of the world, and lets him
-	 * keep flying there. A refused move is not a landing: the client stays on its wings, it only cannot move past the border. The flight only
-	 * ends when the position to go back to is outside as well - otherwise the player would be pinned to it, since every move away from that
-	 * point is outside of the areas too.
-	 */
-	public void blinkIntoFlightArea() {
-		if (!player.isInsideFlyZone(player.getX(), player.getY(), player.getZ()))
-			endFly(true);
-		PacketSendUtility.sendPacket(player,
-			new SM_BLINK(player.getX(), player.getY(), player.getZ(), player.getHeading(), BlinkReason.FLY_ON_NO_FLY_AREA));
 	}
 
 	/**

@@ -2,6 +2,7 @@ package com.aionemu.gameserver.network.aion.clientpackets;
 
 import java.util.Set;
 
+import com.aionemu.gameserver.controllers.FlyController;
 import com.aionemu.gameserver.controllers.movement.GlideFlag;
 import com.aionemu.gameserver.controllers.movement.MovementMask;
 import com.aionemu.gameserver.controllers.movement.PlayerMoveController;
@@ -10,6 +11,7 @@ import com.aionemu.gameserver.model.gameobjects.player.CustomPlayerState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_BLINK;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_FORCED_MOVE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MOVE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_POSITION;
@@ -80,7 +82,7 @@ public class CM_MOVE extends AionClientPacket {
 			return;
 		if (handleBogusPacket(player))
 			return;
-		if (leavesFlightArea(player))
+		if (handleFlyingOutOfFlyZone(player))
 			return;
 
 		PlayerMoveController m = player.getMoveController();
@@ -163,17 +165,21 @@ public class CM_MOVE extends AionClientPacket {
 	}
 
 	/**
-	 * Puts a flying player back to the position the server has when a move reports him outside the flight areas of the world, without ending
-	 * his flight. Glide moves are handled by {@link FlyController#onMove()}: the player keeps gliding there, only the free flight ends.
+	 * Puts a flying player back to the position the server has when a move reports him outside a flight area. Clients can legitimately send such moves
+	 * when touching the ground on the border of a fly zone or when the GM free flight mode was disabled during flight outside a fly zone.<br>
+	 * Glide moves are handled by {@link FlyController#onMove()}: the player keeps gliding there, only the free flight ends.
 	 *
 	 * @return True if the move was refused and the player was put back.
 	 */
-	private boolean leavesFlightArea(Player player) {
+	private boolean handleFlyingOutOfFlyZone(Player player) {
 		boolean gliding = (type & MovementMask.GLIDE) == MovementMask.GLIDE && (type & (MovementMask.POSITION | MovementMask.FALL)) != 0;
 		if (gliding || !player.getFlyController().isFlyingOutOfArea(x, y, z))
 			return false;
 		player.getMoveController().setIsJumping(false);
-		player.getFlyController().blinkIntoFlightArea();
+		if (!player.isInsideFlyZone(player.getX(), player.getY(), player.getZ())) // the player was flying there in free flight mode before
+			player.getFlyController().endFly(true);
+		PacketSendUtility.sendPacket(player,
+			new SM_BLINK(player.getX(), player.getY(), player.getZ(), player.getHeading(), SM_BLINK.BlinkReason.FLY_ON_NO_FLY_AREA));
 		return true;
 	}
 
