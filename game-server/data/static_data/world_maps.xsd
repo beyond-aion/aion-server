@@ -12,9 +12,8 @@
             <xs:attribute name="cName" type="xs:string" use="required" />
             <xs:attribute name="name" type="xs:string" />
             <xs:attribute name="name_id" type="xs:int" />
-            <xs:attribute name="twin_count" type="xs:int" /><!-- retail: twin_count + hidden_twin_count, the client lists both as channels -->
-			<xs:attribute name="beginner_twin_count" type="xs:int" />
-            <xs:attribute name="max_user" type="xs:int" />
+            <xs:attribute name="twin_count" type="xs:int" default="1" /><!-- retail: twin_count + hidden_twin_count, the client lists both as channels -->
+			<xs:attribute name="max_user" type="xs:int" />
             <xs:attribute name="cool_time" type="xs:int" />
             <xs:attribute name="prison" type="xs:boolean" />
             <xs:attribute name="instance" type="xs:boolean" />

@@ -32,9 +32,6 @@ public class WorldMapTemplate implements L10n {
 	@XmlAttribute(name = "twin_count")
 	private int twinCount = 1;
 
-	@XmlAttribute(name = "beginner_twin_count")
-	private int beginnerTwinCount;
-
 	@XmlAttribute(name = "max_user")
 	private int maxUser;
 
@@ -100,14 +97,6 @@ public class WorldMapTemplate implements L10n {
 		if (WorldConfig.WORLD_MAX_TWINS_USUAL == 0)
 			return channelCount;
 		return Math.min(WorldConfig.WORLD_MAX_TWINS_USUAL, channelCount);
-	}
-
-	public int getBeginnerTwinCount() {
-		if (WorldConfig.WORLD_MAX_TWINS_BEGINNER == 0)
-			return beginnerTwinCount;
-		else if (WorldConfig.WORLD_MAX_TWINS_BEGINNER == -1) // disabled
-			return 0;
-		return Math.min(WorldConfig.WORLD_MAX_TWINS_BEGINNER, beginnerTwinCount);
 	}
 
 	public int getMaxUser() {
