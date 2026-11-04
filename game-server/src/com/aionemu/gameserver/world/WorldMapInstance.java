@@ -11,19 +11,18 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.configs.main.WorldConfig;
 import com.aionemu.gameserver.instance.handlers.InstanceHandler;
-import com.aionemu.gameserver.model.gameobjects.AionObject;
-import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.StaticDoor;
-import com.aionemu.gameserver.model.gameobjects.VisibleObject;
+import com.aionemu.gameserver.model.gameobjects.*;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.geometry.RectangleArea;
 import com.aionemu.gameserver.model.team.GeneralTeam;
 import com.aionemu.gameserver.model.templates.quest.QuestNpc;
 import com.aionemu.gameserver.model.templates.world.WorldMapTemplate;
+import com.aionemu.gameserver.model.templates.zone.ZoneClassName;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.collections.CollectionUtil;
 import com.aionemu.gameserver.world.exceptions.DuplicateAionObjectException;
+import com.aionemu.gameserver.world.zone.ZoneAttributes;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
@@ -274,6 +273,17 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 			}
 		}
 		log.warn("Door (ID: {}) doesn't exist", staticId, new RuntimeException());
+	}
+
+	/**
+	 * @return True if the given coordinates are inside a fly zone. Coordinate based counterpart of {@link Creature#isInsideFlyZone()} that does not
+	 * depend on the periodic zone update.
+	 */
+	public boolean isInsideFlyZone(float x, float y, float z) {
+		MapRegion region = getRegion(x, y, z);
+		if (region != null && region.isInsideZone(ZoneClassName.NO_FLY, x, y, z))
+			return false;
+		return getTemplate().hasAttribute(ZoneAttributes.FLY) || region != null && region.isInsideZone(ZoneClassName.FLY, x, y, z);
 	}
 
 	public Iterator<VisibleObject> iterator() {

@@ -44,15 +44,15 @@ public class FlyController {
 	 */
 	public void onMove() {
 		if (player.isInGlidingState() && player.isFreeFlying() && !player.isInCustomState(CustomPlayerState.FREE_FLY_MODE)
-			&& !player.isInsideFlyZone(player.getX(), player.getY(), player.getZ()))
+			&& !player.getWorldMapInstance().isInsideFlyZone(player.getX(), player.getY(), player.getZ()))
 			switchToNormalGlide();
 	}
 
 	/**
 	 * @return True if the player is in free flight and the given position is outside the flight areas of the world.
 	 */
-	public boolean isFlyingOutOfArea(float x, float y, float z) {
-		return player.isFreeFlying() && !player.isInCustomState(CustomPlayerState.FREE_FLY_MODE) && !player.isInsideFlyZone(x, y, z);
+	public boolean isFlyingOutOfFlyZone(float x, float y, float z) {
+		return player.isFreeFlying() && !player.isInCustomState(CustomPlayerState.FREE_FLY_MODE) && !player.getWorldMapInstance().isInsideFlyZone(x, y, z);
 	}
 
 	/**
