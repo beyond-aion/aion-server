@@ -160,15 +160,15 @@ public class FlyController {
 				return false;
 			if (!canGlide(player))
 				return false;
-			if (!player.isFlying()) { // a glide started on the ground blocks flying for a while, one started in free flight does not
-				if (player.getFlyReuseTime() > System.currentTimeMillis()) {
-					PacketSendUtility.broadcastToSightedPlayers(player, new SM_EMOTION(player, EmotionType.STOP_GLIDE), true);
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FLYING_TIME_NOT_READY());
-					return false;
-				}
-				player.setFlyReuseTime(System.currentTimeMillis() + FLY_REUSE_TIME);
+			if (!player.isFlying() && player.getFlyReuseTime() > System.currentTimeMillis()) {
+				PacketSendUtility.broadcastToSightedPlayers(player, new SM_EMOTION(player, EmotionType.STOP_GLIDE), true);
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FLYING_TIME_NOT_READY());
+				return false;
 			}
 		}
+		// Server side counterpart of the cooldown the client restarts on every glide: without it a client that does not respect its own
+		// cooldown could drop the wings and take off or glide again at once.
+		player.setFlyReuseTime(System.currentTimeMillis() + FLY_REUSE_TIME);
 		player.setFlyState(FlyState.GLIDING);
 		player.setState(CreatureState.GLIDING);
 		player.getLifeStats().triggerFpReduce();
