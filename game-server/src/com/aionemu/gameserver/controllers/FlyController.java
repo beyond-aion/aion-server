@@ -102,7 +102,7 @@ public class FlyController {
 				AuditLogger.log(player, "possibly using fly cooldown hack. Left cooldown time: " + ((player.getFlyReuseTime() - System.currentTimeMillis()) / 1000) + "s");
 				return false;
 			}
-			player.setFlyReuseTime(System.currentTimeMillis() + FLY_REUSE_TIME - 100);
+			startFlightCooldown();
 		}
 		player.setFlyState(FlyState.FLYING);
 		player.setState(CreatureState.FLYING);
@@ -115,6 +115,10 @@ public class FlyController {
 		if (broadcastPacket)
 			PacketSendUtility.broadcastToSightedPlayers(player, new SM_EMOTION(player, EmotionType.FLY), true);
 		return true;
+	}
+
+	private void startFlightCooldown() {
+		player.setFlyReuseTime(System.currentTimeMillis() + FLY_REUSE_TIME - 100);
 	}
 
 	private static boolean canFly(Player player) {
@@ -152,7 +156,7 @@ public class FlyController {
 			return false;
 		if (!canGlide(player, ignoreCooldown))
 			return false;
-		player.setFlyReuseTime(System.currentTimeMillis() + FLY_REUSE_TIME);
+		startFlightCooldown();
 		player.setFlyState(FlyState.GLIDING);
 		player.setState(CreatureState.GLIDING);
 		player.getLifeStats().triggerFpReduce();
