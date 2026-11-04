@@ -118,7 +118,7 @@ public class FlyController {
 	}
 
 	private static boolean canFly(Player player) {
-		if (player.isUsingFlightTransporterOrWindstream()) // a path already carries him
+		if (player.isUsingFlightTransporterOrWindstream())
 			return false;
 		if (!player.getCommonData().isDaeva()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GLIDE_ONLY_DEVA_CAN());
@@ -147,27 +147,11 @@ public class FlyController {
 		return switchToGliding(false);
 	}
 
-	/**
-	 * @param skipChecks
-	 *          - for a player the server puts into a glide itself, e.g. on the glide exit of a windstream: he was carried along the path a
-	 *          moment ago, so neither the glide checks nor its cooldown apply there
-	 */
-	public boolean switchToGliding(boolean skipChecks) {
-		if (player.isInGlidingState() || !player.canPerformMove())
+	public boolean switchToGliding(boolean ignoreCooldown) {
+		if (player.isInGlidingState() || player.isUsingFlightTransporterOrWindstream())
 			return false;
-		if (!skipChecks) {
-			if (player.isUsingFlightTransporterOrWindstream())
-				return false;
-			if (!canGlide(player))
-				return false;
-			if (!player.isFlying() && player.getFlyReuseTime() > System.currentTimeMillis()) {
-				PacketSendUtility.broadcastToSightedPlayers(player, new SM_EMOTION(player, EmotionType.STOP_GLIDE), true);
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FLYING_TIME_NOT_READY());
-				return false;
-			}
-		}
-		// Server side counterpart of the cooldown the client restarts on every glide: without it a client that does not respect its own
-		// cooldown could drop the wings and take off or glide again at once.
+		if (!canGlide(player, ignoreCooldown))
+			return false;
 		player.setFlyReuseTime(System.currentTimeMillis() + FLY_REUSE_TIME);
 		player.setFlyState(FlyState.GLIDING);
 		player.setState(CreatureState.GLIDING);
@@ -176,13 +160,22 @@ public class FlyController {
 		return true;
 	}
 
-	private static boolean canGlide(Player player) {
+	private static boolean canGlide(Player player, boolean ignoreCooldown) {
 		if (!player.getCommonData().isDaeva()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GLIDE_ONLY_DEVA_CAN());
 			return false;
 		}
 		if (player.getTransformModel().cantFly()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GLIDE_CANNOT_GLIDE_POLYMORPH_STATUS());
+			return false;
+		}
+		if (!player.canPerformMove()) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GLIDE_CANNOT_GLIDE_ABNORMAL_STATUS());
+			return false;
+		}
+		if (!ignoreCooldown && !player.isFlying() && player.getFlyReuseTime() > System.currentTimeMillis()) {
+			PacketSendUtility.broadcastToSightedPlayers(player, new SM_EMOTION(player, EmotionType.STOP_GLIDE), true);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FLYING_TIME_NOT_READY());
 			return false;
 		}
 		return true;
