@@ -26,7 +26,7 @@ public class DyeAction extends AbstractItemAction {
 	@XmlAttribute(name = "color")
 	protected String color;
 	@XmlAttribute
-	private Integer minutes;
+	private int minutes;
 
 	@Override
 	public boolean canAct(Player player, Item parentItem, Item targetItem, Object... params) {
@@ -63,7 +63,7 @@ public class DyeAction extends AbstractItemAction {
 		if (!player.getInventory().decreaseByObjectId(parentItem.getObjectId(), 1))
 			return;
 		targetItem.setItemColor(getColor());
-		if (minutes != null)
+		if (minutes > 0)
 			targetItem.setColorExpireTime((int) (System.currentTimeMillis() / 1000 + minutes * 60));
 		else
 			targetItem.setColorExpireTime(0);
@@ -94,7 +94,7 @@ public class DyeAction extends AbstractItemAction {
 		if (!player.getInventory().decreaseByObjectId(dyeItem.getObjectId(), 1))
 			return;
 		houseObject.setColor(getColor());
-		houseObject.setColorExpireEnd(minutes == null ? 0 : (int) (System.currentTimeMillis() / 1000 + minutes * 60));
+		houseObject.setColorExpireEnd(minutes > 0 ? (int) (System.currentTimeMillis() / 1000 + minutes * 60) : 0);
 		float x = houseObject.getX();
 		float y = houseObject.getY();
 		float z = houseObject.getZ();

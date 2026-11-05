@@ -37,7 +37,7 @@ public class AnimationAddAction extends AbstractItemAction {
 	@XmlAttribute
 	protected Integer shop;
 	@XmlAttribute
-	protected Integer minutes;
+	protected int minutes;
 
 	/**
 	 * @return The animations this item teaches, by the slot each one replaces.
@@ -128,7 +128,7 @@ public class AnimationAddAction extends AbstractItemAction {
 	}
 
 	private void addMotion(Player player, int motionId) {
-		Motion motion = new Motion(motionId, minutes == null ? 0 : (int) (System.currentTimeMillis() / 1000) + minutes * 60, true);
+		Motion motion = new Motion(motionId, minutes > 0 ? (int) (System.currentTimeMillis() / 1000) + minutes * 60 : 0, true);
 		player.getMotions().add(motion, true);
 		PacketSendUtility.sendPacket(player, SM_MOTION.add(motion));
 	}
