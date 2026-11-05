@@ -38,7 +38,7 @@ public class MultiReturnAction extends AbstractItemAction {
 
 	@Override
 	public void act(final Player player, final Item item, final Item targetItem, Object... params) {
-		int castingDelay = item.getItemTemplate().getCastingDelay();
+		int castingDelay = player.getItemUseDelay(item.getItemTemplate().getCastingDelay());
 		ReturnLocList loc = getReturnLoc((int) params[0]);
 		if (castingDelay <= 0) {
 			finishUse(player, item, loc);

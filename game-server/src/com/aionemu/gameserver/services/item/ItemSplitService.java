@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.storage.IStorage;
+import com.aionemu.gameserver.model.items.storage.Storage;
 import com.aionemu.gameserver.model.items.storage.StorageType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_CUBE_UPDATE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -37,8 +38,8 @@ public class ItemSplitService {
 			return;
 		}
 
-		IStorage sourceStorage = player.getStorage(sourceStorageType);
-		IStorage destStorage = player.getStorage(destinationStorageType);
+		Storage sourceStorage = player.getStorage(sourceStorageType);
+		Storage destStorage = player.getStorage(destinationStorageType);
 		if (sourceStorage == null || destStorage == null) {
 			log.warn(String.format("storage null playerName sourceStorage destStorage %s %d %d", player.getName(), sourceStorageType,
 				destinationStorageType));
@@ -75,7 +76,7 @@ public class ItemSplitService {
 		}
 
 		if (targetItem == null) {
-			if (destStorage.isFull()) {
+			if (destStorage.isFull(sourceItem.getItemTemplate().getExtraInventoryId())) {
 				PacketSendUtility.sendPacket(player, destStorage.getStorageIsFullMessage());
 				return;
 			}

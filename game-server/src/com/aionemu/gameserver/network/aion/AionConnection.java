@@ -164,10 +164,9 @@ public class AionConnection extends NettyConnection<AionServerPacket> {
 					long diff = lastClientMessageTime - last;
 					if (diff < msBetweenPackets) {
 						log.warn("{} is flooding {} (last diff: {} ms)", this, pck.getClass().getSimpleName(), diff);
-						if (PffConfig.PFF_MODE == 2) { // disconnect
+						if (PffConfig.PFF_MODE == 2) // disconnect
 							getChannel().close();
-							return null;
-						}
+						return null; // dropped in both modes, only the disconnecting one differs
 					}
 				}
 			}

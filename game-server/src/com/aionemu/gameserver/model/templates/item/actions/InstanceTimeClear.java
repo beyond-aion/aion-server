@@ -44,7 +44,7 @@ public class InstanceTimeClear extends AbstractItemAction {
 
 	@Override
 	public void act(final Player player, final Item parentItem, Item targetItem, Object... params) {
-		int castingDelay = parentItem.getItemTemplate().getCastingDelay();
+		int castingDelay = player.getItemUseDelay(parentItem.getItemTemplate().getCastingDelay());
 		int syncId = (int) params[0];
 		if (castingDelay <= 0) {
 			finishUse(player, parentItem, syncId);

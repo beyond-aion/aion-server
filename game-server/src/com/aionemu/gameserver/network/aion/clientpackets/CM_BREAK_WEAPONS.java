@@ -30,9 +30,10 @@ public class CM_BREAK_WEAPONS extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
-		if (player.isTargetingNpcWithFunction(npcObjId, DialogAction.DECOMPOUND_WEAPON))
-			ArmsfusionService.breakWeapons(player, weaponObjId);
-		else
-			AuditLogger.log(player, "tried to defuse a weapon without targeting an armsfusion officer");
+		if (!player.isTargetingNpcWithFunctionNearby(npcObjId, DialogAction.DECOMPOUND_WEAPON)) {
+			AuditLogger.log(player, "tried to defuse a weapon without targeting an armsfusion officer in range");
+			return;
+		}
+		ArmsfusionService.breakWeapons(player, weaponObjId);
 	}
 }

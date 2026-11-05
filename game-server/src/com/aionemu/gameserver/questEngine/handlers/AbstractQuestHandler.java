@@ -960,7 +960,8 @@ public abstract class AbstractQuestHandler {
 		final int objectId = item.getObjectId();
 
 		if (qs.getQuestVarById(varNum) == step) {
-			PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), objectId, itemId, 3000, USE_START), true);
+			int useDelay = player.getItemUseDelay(3000);
+			PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), objectId, itemId, useDelay, USE_START), true);
 			ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 				@Override
@@ -978,7 +979,7 @@ public abstract class AbstractQuestHandler {
 					}
 					changeQuestStep(env, step, nextStep, reward, varNum);
 				}
-			}, 3000);
+			}, useDelay);
 			return true;
 		}
 		return false;

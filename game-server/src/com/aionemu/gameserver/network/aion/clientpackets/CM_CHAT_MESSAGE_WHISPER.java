@@ -15,6 +15,7 @@ import com.aionemu.gameserver.services.NameRestrictionService;
 import com.aionemu.gameserver.services.player.PlayerChatService;
 import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.world.World;
 
 /**
@@ -56,6 +57,12 @@ public class CM_CHAT_MESSAGE_WHISPER extends AionClientPacket {
 	protected void runImpl() {
 		String realName = ChatUtil.getRealCharName(name);
 		Player sender = getConnection().getActivePlayer();
+
+		if (message.chars().anyMatch(ChatUtil::isInvalidCharacter)) {
+			AuditLogger.log(sender, "sent whisper message containing control characters: " + message);
+			return;
+		}
+
 		Player receiver = World.getInstance().getPlayer(realName);
 
 		if (receiver == null) {

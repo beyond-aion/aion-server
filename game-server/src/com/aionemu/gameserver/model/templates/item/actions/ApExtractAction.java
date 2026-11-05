@@ -128,8 +128,9 @@ public class ApExtractAction extends AbstractItemAction {
 
 	@Override
 	public void act(Player player, Item parentItem, Item targetItem, Object... params) {
+		int castingDelay = player.getItemUseDelay(CASTING_DELAY);
 		PacketSendUtility.broadcastPacket(player,
-			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), CASTING_DELAY, USE_START), true);
+			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), castingDelay, USE_START), true);
 
 		ItemUseObserver observer = new ItemUseObserver(player) {
 
@@ -146,7 +147,7 @@ public class ApExtractAction extends AbstractItemAction {
 		player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(() -> {
 			player.getObserveController().removeObserver(observer);
 			finishUse(player, parentItem, targetItem);
-		}, CASTING_DELAY));
+		}, castingDelay));
 	}
 
 	private void finishUse(Player player, Item parentItem, Item targetItem) {

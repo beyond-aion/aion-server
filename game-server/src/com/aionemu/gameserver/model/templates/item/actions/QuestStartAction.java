@@ -41,7 +41,7 @@ public class QuestStartAction extends AbstractItemAction {
 
 	@Override
 	public void act(Player player, Item parentItem, Item targetItem, Object... params) {
-		int castingDelay = parentItem.getItemTemplate().getCastingDelay();
+		int castingDelay = player.getItemUseDelay(parentItem.getItemTemplate().getCastingDelay());
 		if (castingDelay <= 0) {
 			finishUse(player, parentItem);
 			return;

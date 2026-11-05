@@ -15,11 +15,7 @@ import com.aionemu.gameserver.dao.BlockListDAO;
 import com.aionemu.gameserver.dao.InventoryDAO;
 import com.aionemu.gameserver.dao.ItemStoneListDAO;
 import com.aionemu.gameserver.dao.MailDAO;
-import com.aionemu.gameserver.model.gameobjects.HouseObject;
-import com.aionemu.gameserver.model.gameobjects.Item;
-import com.aionemu.gameserver.model.gameobjects.Letter;
-import com.aionemu.gameserver.model.gameobjects.LetterType;
-import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.*;
 import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.BlockList;
 import com.aionemu.gameserver.model.gameobjects.player.Mailbox;
@@ -124,8 +120,10 @@ public class MailService {
 			// Check Mailing untradables with Cash items (Special courier passes)
 			if (senderItem.getPackCount() <= 0 && !senderItem.isTradeable()) {
 				Disposition dispo = senderItem.getItemTemplate().getDisposition();
-				if (dispo == null || dispo.getId() == 0 || dispo.getCount() == 0) // can not be traded, hack
+				if (dispo == null || dispo.getId() == 0 || dispo.getCount() == 0) {
+					PacketSendUtility.sendPacket(sender, SM_SYSTEM_MESSAGE.STR_MAIL_SEND_ITEM_CAN_NOT_BE_EXCHANGED());
 					return;
+				}
 
 				if (senderInventory.getItemCountByItemId(dispo.getId()) >= dispo.getCount()) {
 					senderInventory.decreaseByItemId(dispo.getId(), dispo.getCount());

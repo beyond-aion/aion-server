@@ -10,6 +10,8 @@ import com.aionemu.gameserver.model.trade.TradePSItem;
  */
 public class PrivateStore {
 
+	public static final int MAX_STORE_MESSAGE_LENGTH = 255;
+
 	private final Player owner;
 	private Map<Integer, TradePSItem> items;
 	private String storeMessage;
@@ -47,7 +49,9 @@ public class PrivateStore {
 	}
 
 	public void setStoreMessage(String storeMessage) {
-		this.storeMessage = storeMessage;
+		// Part of SM_PLAYER_INFO and SM_PRIVATE_STORE, which must stay below the client's 8192 byte limit.
+		this.storeMessage = storeMessage == null || storeMessage.length() <= MAX_STORE_MESSAGE_LENGTH ? storeMessage
+			: storeMessage.substring(0, MAX_STORE_MESSAGE_LENGTH);
 	}
 
 	public String getStoreMessage() {

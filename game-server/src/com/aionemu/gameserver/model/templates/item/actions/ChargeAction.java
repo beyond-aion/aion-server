@@ -69,7 +69,7 @@ public class ChargeAction extends AbstractItemAction {
 	@Override
 	public void act(final Player player, Item parentItem, final Item targetItem, Object... params) {
 		int chargeWay = parentItem.getImprovement().getChargeWay();
-		int castingDelay = parentItem.getItemTemplate().getCastingDelay();
+		int castingDelay = player.getItemUseDelay(parentItem.getItemTemplate().getCastingDelay());
 		if (castingDelay <= 0) {
 			finishUse(player, parentItem, targetItem);
 			return;

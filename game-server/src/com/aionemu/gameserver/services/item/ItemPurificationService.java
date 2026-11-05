@@ -74,6 +74,12 @@ public class ItemPurificationService {
 		Map<Integer, PurificationResult> resultItemMap = DataManager.ITEM_PURIFICATION_DATA.getResultItemMap(baseItem.getItemId());
 
 		PurificationResult purificationResult = resultItemMap.get(resultItemId);
+		if (purificationResult == null)
+			return false;
+
+		// Take the fee first: spent materials cannot be returned.
+		if (purificationResult.getNecessaryKinah() > 0 && !player.getInventory().tryDecreaseKinah(purificationResult.getNecessaryKinah()))
+			return false;
 
 		for (RequiredMaterial reqMaterial : purificationResult.getRequiredMaterials()) {
 			if (!player.getInventory().decreaseByItemId(reqMaterial.getItemId(), reqMaterial.getItemCount())) {
@@ -85,9 +91,6 @@ public class ItemPurificationService {
 
 		if (purificationResult.getNecessaryAbyssPoints() > 0)
 			AbyssPointsService.addAp(player, -purificationResult.getNecessaryAbyssPoints());
-
-		if (purificationResult.getNecessaryKinah() > 0)
-			player.getInventory().decreaseKinah(-purificationResult.getNecessaryKinah());
 
 		player.getInventory().decreaseByObjectId(baseItem.getObjectId(), 1);
 
