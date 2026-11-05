@@ -158,6 +158,13 @@ public class World {
 		return worldMaps.get(id);
 	}
 
+	public boolean isValidTwinId(int worldId, int instanceId) {
+		if (instanceId < 1)
+			return false;
+		WorldMap map = getWorldMap(worldId);
+		return map != null && map.getInstanceCount() >= instanceId;
+	}
+
 	/**
 	 * Update position of VisibleObject [used when object is moving on one map instance]. Check if active map region changed and do all needed updates.
 	 */

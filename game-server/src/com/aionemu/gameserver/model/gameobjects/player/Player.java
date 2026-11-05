@@ -1603,6 +1603,7 @@ public class Player extends Creature {
 		getMoveController().resetLastPositionFromClient(); // if we don't reset it, material collision handlers (such as shields) affect you on teleport
 		getMoveController().resetFalling();
 		getCommonData().setMapId(position.getMapId());
+		getCommonData().setInstanceId(position.getInstanceId());
 		getCommonData().setXYZH(position.getX(), position.getY(), position.getZ(), position.getHeading());
 		getCommonData().setWorldOwnerId(position.getMapRegion() == null ? 0 : position.getWorldMapInstance().getOwnerId());
 	}
