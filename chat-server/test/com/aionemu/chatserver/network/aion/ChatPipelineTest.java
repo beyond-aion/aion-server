@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import com.aionemu.chatserver.model.ChatClient;
 import com.aionemu.chatserver.model.Race;
 import com.aionemu.chatserver.service.ChatService;
+import com.aionemu.chatserver.service.GameServerService;
 import com.aionemu.commons.network.netty.NettyPipeline;
 
 import io.netty.buffer.ByteBuf;
@@ -36,6 +37,7 @@ public class ChatPipelineTest {
 
 	@BeforeEach
 	public void connect() throws Exception {
+		GameServerService.GAMESERVER_ID = 1; // the channel below belongs to the game server this session is connected to
 		InetSocketAddress client = new InetSocketAddress("127.0.0.1", 50000);
 		channel = new EmbeddedChannel(false, false) {
 
