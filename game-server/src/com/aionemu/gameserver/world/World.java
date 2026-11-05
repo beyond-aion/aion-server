@@ -12,17 +12,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.dataholders.PlayerInitialData.LocationData;
 import com.aionemu.gameserver.model.animations.ObjectDeleteAnimation;
 import com.aionemu.gameserver.model.gameobjects.AionObject;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
-import com.aionemu.gameserver.model.gameobjects.player.BindPointPosition;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.ShieldService;
-import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.utils.collections.CollectionUtil;
 import com.aionemu.gameserver.world.container.PlayerContainer;
 import com.aionemu.gameserver.world.exceptions.AlreadySpawnedException;
@@ -177,15 +174,9 @@ public class World {
 		WorldPosition position = object.getPosition();
 		MapRegion oldRegion = position.getMapRegion();
 		if (oldRegion == null) {
-			if (object instanceof Player player) {
-				if (!player.isStaff()) {
-					AuditLogger.log(player, "is outside valid regions: " + position);
-					// he will be sent to bind point in PlayerLeaveWorldService
-					player.getClientConnection().close(SM_SYSTEM_MESSAGE.STR_KICK_CHARACTER());
-				}
-			} else {
-				log.warn("Old MapRegion was null when trying to update position of {}", object, new Throwable());
-			}
+			if (object instanceof Player player) // the player will be sent to their bind point in PlayerLeaveWorldService
+				player.getClientConnection().close(SM_SYSTEM_MESSAGE.STR_KICK_CHARACTER());
+			log.warn("Old MapRegion was null when trying to update position of {}", object, new Throwable());
 			return;
 		}
 
@@ -195,27 +186,8 @@ public class World {
 				new Throwable());
 			if (object instanceof Creature creature)
 				creature.getMoveController().abortMove();
-			if (object instanceof Player player) {
-				float x, y, z;
-				int worldId;
-				byte h = 0;
-
-				if (player.getBindPoint() != null) {
-					BindPointPosition bplist = player.getBindPoint();
-					worldId = bplist.getMapId();
-					x = bplist.getX();
-					y = bplist.getY();
-					z = bplist.getZ();
-					h = bplist.getHeading();
-				} else {
-					LocationData locationData = DataManager.PLAYER_INITIAL_DATA.getSpawnLocation(player.getCommonData().getRace());
-					worldId = locationData.getMapId();
-					x = locationData.getX();
-					y = locationData.getY();
-					z = locationData.getZ();
-				}
-				setPosition(object, worldId, x, y, z, h);
-			}
+			if (object instanceof Player player)
+				player.getClientConnection().close(SM_SYSTEM_MESSAGE.STR_KICK_CHARACTER());
 			return;
 		}
 

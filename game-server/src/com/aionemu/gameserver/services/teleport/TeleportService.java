@@ -181,6 +181,8 @@ public class TeleportService {
 	}
 
 	private static void abortPlayerActions(Player player) {
+		if (DuelService.getInstance().isDueling(player))
+			DuelService.getInstance().loseDuel(player);
 		if (player.hasStore())
 			PrivateStoreService.closePrivateStore(player);
 		RecallService.getInstance().cancel(player, CancelReason.CANCELLED);
@@ -268,11 +270,8 @@ public class TeleportService {
 
 	public static void teleportTo(final Player player, final int worldId, final int instanceId, final float x, final float y, final float z,
 		final byte heading, TeleportAnimation animation) {
-		if (player.isDead()) {
+		if (player.isDead())
 			PlayerReviveService.revive(player, 20, 20, true, 0);
-		} else if (DuelService.getInstance().isDueling(player)) {
-			DuelService.getInstance().loseDuel(player);
-		}
 		sendLoc(player, worldId, instanceId, x, y, z, heading, animation);
 	}
 
