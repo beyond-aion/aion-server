@@ -321,7 +321,8 @@ public class Equipment implements Persistable {
 	}
 
 	private boolean checkAvailableEquipSkills(Item item) {
-		Set<Integer> masterySkills = DataManager.SKILL_DATA.getMasterySkills(item.getItemTemplate().getItemGroup());
+		ItemTemplate itemTemplate = item.getItemTemplate();
+		Set<Integer> masterySkills = DataManager.SKILL_DATA.getMasterySkills(itemTemplate.getItemGroup(), itemTemplate.getArmorType());
 		if (masterySkills.isEmpty())
 			return true;
 

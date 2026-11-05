@@ -47,6 +47,8 @@ public class ItemTemplate extends VisibleObjectTemplate {
 	private int maxStackCount = 1;
 	@XmlAttribute(name = "item_group")
 	private ItemGroup itemGroup = ItemGroup.NONE;
+	@XmlAttribute(name = "armor_type")
+	private ItemSubType armorType;
 	@XmlAttribute(name = "pack_count")
 	private int packCount;
 	@XmlAttribute(name = "level")
@@ -224,6 +226,16 @@ public class ItemTemplate extends VisibleObjectTemplate {
 
 	public ItemSubType getItemSubType() {
 		return itemGroup.getItemSubType();
+	}
+
+	/**
+	 * The generic TORSO..SHOES groups only say "any armour type fits here"; the items themselves carry the type they are
+	 * worn with in the data. Other groups name the type themselves.
+	 *
+	 * @return the armour type from the item data, or null when the item has none
+	 */
+	public ItemSubType getArmorType() {
+		return armorType;
 	}
 
 	public EquipType getEquipmentType() {
@@ -522,7 +534,7 @@ public class ItemTemplate extends VisibleObjectTemplate {
 
 	public boolean isCloth() {
 		// not sure about LT_HEAD and CL_HEAD, check in retail
-		return isArmor() && (itemGroup.getArmorType() != ArmorType.ACCESSORY && getItemGroup() != ItemGroup.BELT || itemGroup == ItemGroup.HEAD);
+		return isArmor() && (itemGroup.getArmorCategory() != ArmorType.ACCESSORY && getItemGroup() != ItemGroup.BELT || itemGroup == ItemGroup.HEAD);
 	}
 
 	public boolean isPotion() {

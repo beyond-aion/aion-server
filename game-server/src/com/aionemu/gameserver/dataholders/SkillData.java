@@ -87,16 +87,20 @@ public class SkillData {
 	}
 
 	/**
-	 * @return The skills that allow equipping items of this group, empty if the group needs no mastery skill.
+	 * @param armorType
+	 *          the armour type taken from the item data; null for items whose data names none
+	 * @return The skills that allow equipping items of this group, empty if no mastery skill applies.
 	 */
-	public Set<Integer> getMasterySkills(ItemGroup itemGroup) {
-		if (itemGroup == null || !itemGroup.requiresMastery())
+	public Set<Integer> getMasterySkills(ItemGroup itemGroup, ItemSubType armorType) {
+		if (itemGroup == null)
 			return Set.of();
 		if (itemGroup == ItemGroup.SHIELD)
 			return shieldMasterySkills;
 		if (itemGroup.getEquipType() == EquipType.WEAPON)
 			return masterySkillsByWeapon.getOrDefault(itemGroup, Set.of());
-		return masterySkillsByArmor.getOrDefault(itemGroup.getItemSubType(), Set.of());
+		if (itemGroup.getEquipType() != EquipType.ARMOR || armorType == null)
+			return Set.of();
+		return masterySkillsByArmor.getOrDefault(armorType, Set.of());
 	}
 
 	public SkillTemplate getSkillTemplate(int skillId) {

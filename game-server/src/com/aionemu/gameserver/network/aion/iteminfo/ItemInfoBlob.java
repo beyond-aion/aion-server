@@ -75,7 +75,7 @@ public class ItemInfoBlob extends PacketWriteHelper {
 			} else if (itemTemplate.getItemGroup() == ItemGroup.PLUME) {
 				blob.addBlobEntry(ItemBlobType.PLUME_INFO);
 			} else if (itemTemplate.isArmor()) {
-				if (itemTemplate.getItemGroup().getArmorType() == ArmorType.ACCESSORY)
+				if (itemTemplate.getItemGroup().getArmorCategory() == ArmorType.ACCESSORY)
 					blob.addBlobEntry(ItemBlobType.SLOTS_ACCESSORY); // power shards, helmets, earrings, rings, belts
 				else
 					blob.addBlobEntry(ItemBlobType.SLOTS_ARMOR);
