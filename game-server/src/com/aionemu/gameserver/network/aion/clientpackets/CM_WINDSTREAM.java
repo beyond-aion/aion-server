@@ -100,20 +100,12 @@ public class CM_WINDSTREAM extends AionClientPacket {
 					sendPacket(new SM_WINDSTREAM(state, false));
 					return;
 				}
-				player.unsetState(CreatureState.FLYING);
-				player.setState(CreatureState.ACTIVE);
-				player.unsetFlyState(FlyState.FLYING);
-				player.unsetFlyState(FlyState.GLIDING);
-				player.getMoveController().restartFalling(player.getZ());
-				if (state == WindstreamState.LEAVE_GLIDING)
-					player.getFlyController().switchToGliding(true);
-				else {
-					player.setFlyReuseTime(0);
-					player.getGameStats().updateStatsAndSpeedVisually();
-				}
-				player.setFlightPath(null);
-				PacketSendUtility.broadcastPacket(player,
-					new SM_EMOTION(player, state == WindstreamState.LEAVE_GLIDING ? EmotionType.WINDSTREAM_END : EmotionType.WINDSTREAM_EXIT), true);
+				boolean glideExit = state == WindstreamState.LEAVE_GLIDING;
+				boolean gliding = player.getFlyController().leaveWindstream(glideExit);
+				PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, gliding ? EmotionType.WINDSTREAM_END : EmotionType.WINDSTREAM_EXIT), true);
+				if (glideExit && !gliding)
+					// the client force starts a glide on this exit, so the wings have to be closed or it keeps gliding while the server drops him
+					player.getFlyController().endFly(true);
 				if (player.isTransformed()) // send sm_transform if player is transformed
 					PacketSendUtility.broadcastPacketAndReceive(player, new SM_TRANSFORM(player));
 			}

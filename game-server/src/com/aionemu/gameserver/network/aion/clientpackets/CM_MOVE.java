@@ -9,6 +9,7 @@ import com.aionemu.gameserver.controllers.movement.PlayerMoveController;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.CustomPlayerState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.templates.flypath.FlightPath;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_BLINK;
@@ -84,6 +85,10 @@ public class CM_MOVE extends AionClientPacket {
 			return;
 		if (handleFlyingOutOfFlyZone(player))
 			return;
+		if (player.isUsingFlightPath(FlightPath.Type.WINDSTREAM)) {
+			// a wind path ends at its last point without a leave packet, so the first ordinary move means the path is over
+			player.getFlyController().leaveWindstream(false);
+		}
 
 		PlayerMoveController m = player.getMoveController();
 		boolean jumping = false;

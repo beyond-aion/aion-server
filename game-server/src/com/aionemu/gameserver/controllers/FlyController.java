@@ -148,14 +148,14 @@ public class FlyController {
 	 * - start fp reduce + emotions/stats if from fly to glide - only emotions/stats
 	 */
 	public boolean switchToGliding() {
-		return switchToGliding(false);
-	}
-
-	public boolean switchToGliding(boolean ignoreCooldown) {
 		if (player.isInGlidingState() || player.isUsingFlightTransporterOrWindstream())
 			return false;
-		if (!canGlide(player, ignoreCooldown))
+		if (!canGlide(player)) {
+			// the client starts a glide on its own when it cannot fly, so close the wings instead of only refusing
+			if (!canFlyAtAll(player) && player.isFlying())
+				endFly(true);
 			return false;
+		}
 		startFlightCooldown();
 		player.setFlyState(FlyState.GLIDING);
 		player.setState(CreatureState.GLIDING);
@@ -164,20 +164,55 @@ public class FlyController {
 		return true;
 	}
 
-	private static boolean canGlide(Player player, boolean ignoreCooldown) {
+	/**
+	 * Ends the wind path the player was carried along: the glide exit keeps him gliding, a fall exit or a player who cannot fly drops him. The
+	 * cooldown is started on the glide exit because the client shows a fresh one there. Stricter than retail, which glides even a player who cannot fly
+	 * and lets its client force the glide; such a player falls here, so the caller closes his wings.
+	 *
+	 * @return true if he keeps gliding
+	 */
+	public boolean leaveWindstream(boolean glideExit) {
+		boolean gliding = glideExit && canFlyAtAll(player);
+		player.unsetState(CreatureState.FLYING);
+		player.unsetFlyState(FlyState.FLYING);
+		player.unsetFlyState(FlyState.GLIDING);
+		player.setState(CreatureState.ACTIVE);
+		player.setFlightPath(null);
+		player.getMoveController().restartFalling(player.getZ());
+		if (gliding) {
+			startFlightCooldown();
+			player.setFlyState(FlyState.GLIDING);
+			player.setState(CreatureState.GLIDING);
+			player.getLifeStats().triggerFpReduce();
+		} else
+			// nothing restarts a cooldown on a fall, so the one left from the takeoff that led into the path must not block him either
+			player.setFlyReuseTime(0);
+		player.getGameStats().updateStatsAndSpeedVisually();
+		return gliding;
+	}
+
+	/**
+	 * @return false if the player cannot fly at all: a form that cannot fly or a NOFLY effect
+	 */
+	private static boolean canFlyAtAll(Player player) {
+		return !player.getTransformModel().cantFly() && !player.getEffectController().isAbnormalSet(AbnormalState.NOFLY);
+	}
+
+	private static boolean canGlide(Player player) {
 		if (!player.getCommonData().isDaeva()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GLIDE_ONLY_DEVA_CAN());
 			return false;
 		}
-		if (player.getTransformModel().cantFly()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GLIDE_CANNOT_GLIDE_POLYMORPH_STATUS());
+		if (!canFlyAtAll(player)) {
+			PacketSendUtility.sendPacket(player, player.getTransformModel().cantFly() ? SM_SYSTEM_MESSAGE.STR_GLIDE_CANNOT_GLIDE_POLYMORPH_STATUS()
+				: SM_SYSTEM_MESSAGE.STR_GLIDE_CANNOT_GLIDE_ABNORMAL_STATUS());
 			return false;
 		}
 		if (!player.canPerformMove()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GLIDE_CANNOT_GLIDE_ABNORMAL_STATUS());
 			return false;
 		}
-		if (!ignoreCooldown && !player.isFlying() && player.getFlyReuseTime() > System.currentTimeMillis()) {
+		if (!player.isFlying() && player.getFlyReuseTime() > System.currentTimeMillis()) {
 			PacketSendUtility.broadcastToSightedPlayers(player, new SM_EMOTION(player, EmotionType.STOP_GLIDE), true);
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FLYING_TIME_NOT_READY());
 			return false;
