@@ -40,6 +40,11 @@ public class StatFunctionProxy implements IStatFunction, Comparable<IStatFunctio
 	}
 
 	@Override
+	public boolean isHidden() {
+		return proxiedFunction.isHidden();
+	}
+
+	@Override
 	public int getPriority() {
 		return proxiedFunction.getPriority();
 	}

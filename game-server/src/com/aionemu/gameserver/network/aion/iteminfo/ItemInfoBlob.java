@@ -98,7 +98,7 @@ public class ItemInfoBlob extends PacketWriteHelper {
 			List<StatFunction> allModifiers = itemTemplate.getModifiers();
 			if (allModifiers != null) {
 				for (IStatFunction modifier : allModifiers) {
-					if (modifier.isBonus() && !modifier.hasConditions()) {
+					if (modifier.isBonus() && !modifier.isHidden() && !modifier.hasConditions()) {
 						blob.addBonusBlobEntry(modifier);
 					}
 				}

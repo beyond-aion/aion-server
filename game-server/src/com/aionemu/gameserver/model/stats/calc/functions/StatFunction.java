@@ -22,6 +22,8 @@ public class StatFunction implements IStatFunction {
 	@XmlAttribute
 	private boolean bonus;
 	@XmlAttribute
+	private boolean hidden;
+	@XmlAttribute
 	protected int value;
 	@XmlElement(name = "conditions")
 	private Conditions conditions;
@@ -48,6 +50,11 @@ public class StatFunction implements IStatFunction {
 	@Override
 	public final boolean isBonus() {
 		return bonus;
+	}
+
+	@Override
+	public final boolean isHidden() {
+		return hidden;
 	}
 
 	/**

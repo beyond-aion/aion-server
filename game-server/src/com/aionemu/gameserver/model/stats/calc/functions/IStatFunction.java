@@ -16,6 +16,8 @@ public interface IStatFunction extends Comparable<IStatFunction> {
 
 	boolean isBonus();
 
+	boolean isHidden();
+
 	int getPriority();
 
 	int getValue();
