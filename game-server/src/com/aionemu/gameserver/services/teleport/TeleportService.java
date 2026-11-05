@@ -94,7 +94,6 @@ public class TeleportService {
 		if (!checkKinahForTransportation(location, player, fortress != null && fortress.isVulnerable()))
 			return;
 
-		endDuel(player);
 		if (location.getType().equals(TeleportType.FLIGHT)) {
 			abortPlayerActions(player);
 			player.setState(CreatureState.FLYING);
@@ -157,7 +156,6 @@ public class TeleportService {
 	}
 
 	private static void sendLoc(Player player, int worldId, int instanceId, float x, float y, float z, byte h, TeleportAnimation animation) {
-		endDuel(player);
 		abortPlayerActions(player);
 		player.unblockQuitting();
 		// despawn from world and send animation to others (also ends flying)
@@ -175,6 +173,8 @@ public class TeleportService {
 	}
 
 	private static void abortPlayerActions(Player player) {
+		if (DuelService.getInstance().isDueling(player))
+			DuelService.getInstance().loseDuel(player);
 		if (player.hasStore())
 			PrivateStoreService.closePrivateStore(player);
 		RecallService.getInstance().cancel(player, CancelReason.CANCELLED);
@@ -185,11 +185,6 @@ public class TeleportService {
 			player.setFlightPath(null);
 			player.getFlyController().endFly(false);
 		}
-	}
-
-	private static void endDuel(Player player) {
-		if (DuelService.getInstance().isDueling(player))
-			DuelService.getInstance().loseDuel(player);
 	}
 
 	private static void spawnOnSameMap(Player player) {
@@ -206,7 +201,6 @@ public class TeleportService {
 	}
 
 	public static void teleportTo(Player player, WorldPosition pos) {
-		endDuel(player);
 		if (player.getWorldId() == pos.getMapId()) {
 			abortPlayerActions(player);
 			World.getInstance().setPosition(player.getPet(), pos.getMapId(), pos.getInstanceId(), pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
@@ -270,7 +264,6 @@ public class TeleportService {
 		final byte heading, TeleportAnimation animation) {
 		if (player.isDead())
 			PlayerReviveService.revive(player, 20, 20, true, 0);
-		endDuel(player);
 		sendLoc(player, worldId, instanceId, x, y, z, heading, animation);
 	}
 
@@ -416,7 +409,7 @@ public class TeleportService {
 			AuditLogger.log(player, "tried to change to invalid channel " + channel + " of map " + player.getWorldId() + " at " + player.getPosition());
 			return;
 		}
-		endDuel(player);
+		abortPlayerActions(player);
 		World.getInstance().setPosition(player, player.getWorldId(), channel + 1, player.getX(), player.getY(), player.getZ(), player.getHeading());
 		player.getController().startProtectionActiveTask();
 		PacketSendUtility.sendPacket(player, new SM_CHANNEL_INFO(player.getPosition()));
