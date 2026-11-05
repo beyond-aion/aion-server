@@ -30,8 +30,8 @@ public class SM_PLAYER_SPAWN extends AionServerPacket {
 		writeC(player.getHeading());
 		writeD(0); // todo: the server-wide scene status (the builder's show/set_global_scene_status), the emulator has none
 		writeD(0); // todo: world+0x183CC in retail, 100000 in some worlds
-		writeD(0); // todo: a world property from its vtable, a time attack world value
-		writeC(0); // fasttrack server, not implemented in emulator
+		writeD(0); // todo: a world property from its vtable, a time attack world value (values 1-12 display different buff icons) 
+		writeC(0); // 1 on Fast-Track server, not implemented in emulator
 		writeD(0); // todo: a world property from its vtable, a time attack world value
 		writeC(0); // todo: World::GetTribeConflict, not implemented
 	}

@@ -42,9 +42,6 @@ public class PlayerCommonData extends CreatureTemplate {
 	private boolean online;
 	private String note;
 	private int mapId;
-	/**
-	 * Channel the character was in, restored from the stored world id. The map id alone is what everything else uses.
-	 */
 	private int instanceId = 1;
 	private float x, y, z;
 	private byte heading;
