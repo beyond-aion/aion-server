@@ -15,7 +15,7 @@ public class WorldConfig {
 	@Property(key = "gameserver.world.region.size", defaultValue = "128")
 	public static int WORLD_REGION_SIZE;
 
-	@Property(key = "gameserver.world.max.twincount.usual")
+	@Property(key = "gameserver.world.max.twincount.usual", defaultValue = "1")
 	public static int WORLD_MAX_TWINS_USUAL;
 
 	/**
