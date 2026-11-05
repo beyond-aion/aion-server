@@ -89,7 +89,7 @@ public class CM_CASTSPELL extends AionClientPacket {
 		}
 
 		SkillTemplate template = DataManager.SKILL_DATA.getSkillTemplate(spellid);
-		if (template == null || template.isPassive())
+		if (template == null || !template.isCastableByClient())
 			return;
 
 		if (player.isProtectionActive())

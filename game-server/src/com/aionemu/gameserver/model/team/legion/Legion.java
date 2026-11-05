@@ -221,7 +221,7 @@ public class Legion extends AionObject {
 	 *
 	 * @return
 	 */
-	private boolean canAddMember() {
+	public boolean canAddMember() {
 		int memberSize = getMemberIds().size();
 		switch (getLegionLevel()) {
 			case 1:

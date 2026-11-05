@@ -83,11 +83,6 @@ public class WorldMap implements Iterable<WorldMapInstance> {
 		// instanceId is a count, some code still uses 0 for the default instance
 		if (instanceId == 0)
 			instanceId = 1;
-		if (!isInstanceType()) {
-			if (instanceId > getInstanceCount()) {
-				throw new IllegalArgumentException("WorldMapInstance " + getMapId() + " has lower instances count than " + instanceId);
-			}
-		}
 		return instances.get(instanceId);
 	}
 

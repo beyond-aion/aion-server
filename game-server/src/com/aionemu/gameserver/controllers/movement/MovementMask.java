@@ -11,6 +11,11 @@ public class MovementMask {
 	public static final byte IMMEDIATE = (byte) 0x00;
 
 	/**
+	 * When the creature is thrown in an arc, e.g. by a jump trigger. Clients replay a move with this flag as a ballistic curve.
+	 */
+	public static final byte ARC = (byte) 0x02; // 2
+
+	/**
 	 * When gliding
 	 */
 	public static final byte GLIDE = (byte) 0x04; // 4
