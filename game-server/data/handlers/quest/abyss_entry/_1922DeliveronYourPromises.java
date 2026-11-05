@@ -171,8 +171,7 @@ public class _1922DeliveronYourPromises extends AbstractQuestHandler {
 					updateQuestStatus(env);
 					return true;
 				} else {
-					playQuestMovie(env, 165);
-					QuestService.questTimerStart(env, 240);
+					playQuestMovie(env, 165); // the timer starts when the movie ends
 					return true;
 				}
 			}

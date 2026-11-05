@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Future;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -89,6 +91,42 @@ public class PlayerController extends CreatureController<Player> {
 	private long lastAttackedMillis = 0;
 	private long lastAutoAttackMillis = 0;
 	private StanceObserver stanceObserver;
+	private int questTimerQuestId; // only one visible quest timer can run at a time, this is the quest it belongs to
+	private final Map<Integer, Future<?>> invisibleQuestTimers = new ConcurrentHashMap<>();
+
+	public int getQuestTimerQuestId() {
+		return questTimerQuestId;
+	}
+
+	public void setQuestTimerQuestId(int questId) {
+		questTimerQuestId = questId;
+	}
+
+	/**
+	 * Invisible quest timers are independent of the visible one, so every quest can have its own.
+	 */
+	public void addInvisibleQuestTimer(int questId, Future<?> task) {
+		Future<?> runningTimer = invisibleQuestTimers.put(questId, task);
+		if (runningTimer != null)
+			runningTimer.cancel(false);
+	}
+
+	public boolean hasInvisibleQuestTimer(int questId) {
+		return invisibleQuestTimers.containsKey(questId);
+	}
+
+	public void cancelInvisibleQuestTimer(int questId) {
+		Future<?> task = invisibleQuestTimers.remove(questId);
+		if (task != null)
+			task.cancel(false);
+	}
+
+	@Override
+	public void onDelete() {
+		invisibleQuestTimers.values().forEach(task -> task.cancel(false));
+		invisibleQuestTimers.clear();
+		super.onDelete();
+	}
 
 	@Override
 	public void see(VisibleObject object) {
