@@ -32,11 +32,11 @@ public class WorldMapTemplate implements L10n {
 	@XmlAttribute(name = "twin_count")
 	private int twinCount = 1;
 
-	@XmlAttribute(name = "max_user")
-	private int maxUser;
-
 	@XmlAttribute(name = "cool_time")
 	private int channelChangeCooldownSeconds;
+
+	@XmlAttribute(name = "max_user")
+	private int maxUser;
 
 	@XmlAttribute(name = "prison")
 	private boolean prison = false;
