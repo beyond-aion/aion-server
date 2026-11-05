@@ -5,8 +5,6 @@ import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
- * S_DUEL. Type 0 names the opponent and starts the client side countdown, type 1 reports how the duel ended.
- *
  * @author xavier
  */
 public class SM_DUEL extends AionServerPacket {
