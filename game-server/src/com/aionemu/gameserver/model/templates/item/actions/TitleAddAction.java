@@ -21,8 +21,11 @@ public class TitleAddAction extends AbstractItemAction {
 
 	@XmlAttribute
 	protected int titleid;
+	/**
+	 * 0 grants the title forever, a negative value ties it to the scroll's own expiry, a positive one is minutes from now.
+	 */
 	@XmlAttribute
-	protected Integer minutes;
+	protected int minutes;
 
 	@Override
 	public boolean canAct(Player player, Item parentItem, Item targetItem, Object... params) {
@@ -43,7 +46,13 @@ public class TitleAddAction extends AbstractItemAction {
 		PacketSendUtility.broadcastPacket(player,
 			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), itemTemplate.getTemplateId()), true);
 
-		if (player.getTitleList().addTitle(titleid, false, minutes == null ? 0 : ((int) (System.currentTimeMillis() / 1000)) + minutes * 60)) {
+		int expireTime = 0;
+		if (minutes < 0)
+			expireTime = parentItem.getExpireTime();
+		else if (minutes > 0)
+			expireTime = (int) (System.currentTimeMillis() / 1000) + minutes * 60;
+
+		if (player.getTitleList().addTitle(titleid, false, expireTime)) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_USE_ITEM(parentItem.getL10n()));
 			Item item = player.getInventory().getItemByObjId(parentItem.getObjectId());
 			player.getInventory().delete(item);

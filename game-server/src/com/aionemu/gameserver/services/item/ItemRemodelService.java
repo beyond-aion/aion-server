@@ -113,6 +113,8 @@ public class ItemRemodelService {
 
 		// REMODEL ITEM
 		keepItem.setItemSkinTemplate(skin);
+		// TODO: the remodeled appearance never expires. The skin's minutes (cash_available_minute) are not
+		// applied because Item has no persisted skin expiry; add one and clear the skin when it runs out.
 
 		// Transfer Dye
 		keepItem.setItemColor(extractItem.getItemColor());

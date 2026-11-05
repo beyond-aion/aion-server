@@ -43,7 +43,15 @@ public class EmotionLearnAction extends AbstractItemAction {
 		PacketSendUtility.broadcastPacket(player,
 			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), itemTemplate.getTemplateId()), true);
 
-		player.getEmotions().add(emotionId, minutes == 0 ? 0 : (int) (System.currentTimeMillis() / 1000) + minutes * 60, true);
+		int expireTime = 0;
+		if (minutes != 0) {
+			int now = (int) (System.currentTimeMillis() / 1000);
+			expireTime = now + minutes * 60;
+			// An already elapsed duration still grants the emotion, but only for a minute.
+			if (expireTime <= now)
+				expireTime = now + 60;
+		}
+		player.getEmotions().add(emotionId, expireTime, true);
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_USE_ITEM(parentItem.getL10n()));
 		player.getInventory().delete(parentItem);
 
