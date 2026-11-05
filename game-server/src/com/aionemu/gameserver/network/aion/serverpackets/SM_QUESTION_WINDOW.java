@@ -5,10 +5,7 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
  * Opens a yes/no question window on the client. Question based on the code given, defined in client_strings.xml
- * <p>
- * The body ends with {@code D reserved; C flags; D senderObjId; D rangeOrCooldownSeconds}. The client ignores the
- * reserved dword and reads the last one as a range or cooldown when flags is 1.
- *
+ * 
  * @author Ben, avol, Lyahim, Neon
  */
 public class SM_QUESTION_WINDOW extends AionServerPacket {
@@ -310,7 +307,7 @@ public class SM_QUESTION_WINDOW extends AionServerPacket {
 		for (int i = 0; i < MAX_PARAM_COUNT; i++) // client always wants content here, even if there is none
 			writeS(i < params.length ? String.valueOf(params[i]) : null);
 		writeD(0); // reserved
-		writeC(rangeOrCooldownSeconds > 0);
+		writeC(rangeOrCooldownSeconds > 0 ? 1 : 0); // 1 = check for range (client will auto decline) / display cooldown time
 		writeD(senderObjId);
 		writeD(rangeOrCooldownSeconds);
 	}
