@@ -8,19 +8,19 @@ public enum DuelResult {
 	DUEL_LOST(1300099, (byte) 0),
 	DUEL_DRAW(1300100, (byte) 1);
 
-	private int msgId;
-	private byte resultId;
+	private final int msgId;
+	private final byte resultCode;
 
-	private DuelResult(int msgId, byte resultId) {
+	DuelResult(int msgId, byte resultCode) {
 		this.msgId = msgId;
-		this.resultId = resultId;
+		this.resultCode = resultCode;
 	}
 
 	public int getMsgId() {
 		return msgId;
 	}
 
-	public byte getResultId() {
-		return resultId;
+	public byte getResultCode() {
+		return resultCode;
 	}
 }
