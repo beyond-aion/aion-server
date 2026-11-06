@@ -43,27 +43,33 @@ public class Addquest extends ConsoleCommand {
 		else
 			id = Integer.parseInt(params[0]);
 
+		QuestTemplate template = DataManager.QUEST_DATA.getQuestById(id);
+		if (template == null) {
+			sendInfo(admin, "There is no quest with ID " + id + ".");
+			return;
+		}
+
 		QuestEnv env = new QuestEnv(null, player, id);
 
 		if (QuestService.startQuest(env)) {
 			PacketSendUtility.sendMessage(admin, "Quest started.");
 		} else {
-			QuestTemplate template = DataManager.QUEST_DATA.getQuestById(id);
 			List<XMLStartCondition> preconditions = template.getXMLStartConditions();
 			if (preconditions != null && preconditions.size() > 0) {
 				for (XMLStartCondition condition : preconditions) {
 					List<FinishedQuestCond> finisheds = condition.getFinishedPreconditions();
 					if (finisheds != null && finisheds.size() > 0) {
 						for (FinishedQuestCond fcondition : finisheds) {
-							QuestState qs1 = admin.getQuestStateList().getQuestState(fcondition.getQuestId());
+							QuestState qs1 = player.getQuestStateList().getQuestState(fcondition.getQuestId());
 							if (qs1 == null || qs1.getStatus() != QuestStatus.COMPLETE) {
-								PacketSendUtility.sendMessage(admin, "You have to finish " + fcondition.getQuestId() + " first!");
+								PacketSendUtility.sendMessage(admin,
+									player.getName() + " has to finish [quest:" + fcondition.getQuestId() + "] first.");
 							}
 						}
 					}
 				}
 			}
-			PacketSendUtility.sendMessage(admin, "Quest not started. Some preconditions failed");
+			PacketSendUtility.sendMessage(admin, "Quest not started, some preconditions failed.");
 		}
 	}
 

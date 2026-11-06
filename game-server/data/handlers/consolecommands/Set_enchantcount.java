@@ -38,7 +38,9 @@ public class Set_enchantcount extends ConsoleCommand {
 			int maxEnchant = item.getItemTemplate().getMaxEnchantLevel();
 			maxEnchant += item.getItemTemplate().getMaxEnchantBonus();
 
-			if (curEnchant + enchant <= maxEnchant) {
+			if (curEnchant + enchant < 0) {
+				PacketSendUtility.sendMessage(admin, "The enchant level cannot go below 0, it is " + curEnchant + ".");
+			} else if (curEnchant + enchant <= maxEnchant) {
 				curEnchant += enchant;
 				item.setEnchantLevel(Math.min(curEnchant, maxEnchant));
 				if (item.isEquipped())
@@ -60,10 +62,10 @@ public class Set_enchantcount extends ConsoleCommand {
 
 				PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_MSG_ENCHANT_ITEM_SUCCEED_NEW(item.getL10n(), enchant));
 			} else {
-				PacketSendUtility.sendMessage(admin, "Max Enchat for this item is: " + maxEnchant);
+				PacketSendUtility.sendMessage(admin, "The max enchant level of this item is " + maxEnchant);
 			}
 		} else {
-			PacketSendUtility.sendMessage(admin, "Invalid item.");
+			PacketSendUtility.sendMessage(admin, "There is no item with this object ID in your inventory or equipment.");
 			return;
 		}
 	}

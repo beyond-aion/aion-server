@@ -67,8 +67,8 @@ public class DelSkill extends AdminCommand {
 	}
 
 	private static boolean check(Player admin, Player player, int skillId) {
-		if (skillId != 0 && !player.getSkillList().isSkillPresent(skillId)) {
-			PacketSendUtility.sendMessage(admin, "Player dont have this skill.");
+		if (!player.getSkillList().isSkillPresent(skillId)) {
+			PacketSendUtility.sendMessage(admin, "The player doesn't have this skill.");
 			return false;
 		}
 		if (player.getSkillList().getSkillEntry(skillId).isStigmaSkill()) {
@@ -89,7 +89,7 @@ public class DelSkill extends AdminCommand {
 				}
 			}
 
-			PacketSendUtility.sendMessage(admin, "You have success delete All skills.");
+			PacketSendUtility.sendMessage(admin, "You have successfully deleted all skills (except stigma skills).");
 		}
 
 	}

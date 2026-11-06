@@ -28,10 +28,14 @@ public class Html extends AdminCommand {
 		if (params[0].equals("reload")) {
 			HTMLCache.getInstance().reload(true);
 			PacketSendUtility.sendMessage(player, HTMLCache.getInstance().toString());
-		} else if (params[0].equals("show"))
-			if (params.length >= 2)
-				HTMLService.showHTML(player, HTMLCache.getInstance().getHTML(params[1] + ".xhtml"));
+		} else if (params[0].equals("show") && params.length >= 2) {
+			String html = HTMLCache.getInstance().getHTML(params[1] + ".xhtml");
+			if (html == null)
+				sendInfo(player, "There is no HTML page " + params[1] + ".xhtml.");
 			else
-				sendInfo(player);
+				HTMLService.showHTML(player, html);
+		} else {
+			sendInfo(player);
+		}
 	}
 }

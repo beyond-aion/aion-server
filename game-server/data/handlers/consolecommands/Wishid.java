@@ -30,6 +30,10 @@ public class Wishid extends ConsoleCommand {
 
 		long itemCount = Long.parseLong(params[0]);
 		int itemId = Integer.parseInt(params[1]);
+		if (itemCount < 1) {
+			sendInfo(admin, "The count must be at least 1.");
+			return;
+		}
 
 		if (DataManager.ITEM_DATA.getItemTemplate(itemId) == null) {
 			PacketSendUtility.sendMessage(admin, "Item id is incorrect: " + itemId);

@@ -38,10 +38,14 @@ public class Addskill extends ConsoleCommand {
 		if (skillTemplate != null)
 			skillId = skillTemplate.getSkillId();
 
-		if (skillId > 0) {
-			player.getSkillList().addSkill(player, skillId, 1);
-			PacketSendUtility.sendMessage(admin, "You have success add skill");
+		if (skillId <= 0) {
+			sendInfo(admin, "There is no skill named " + skillName + ".");
+			return;
 		}
+		if (player.getSkillList().addSkill(player, skillId, 1))
+			PacketSendUtility.sendMessage(admin, "The skill was added successfully.");
+		else
+			PacketSendUtility.sendMessage(admin, "The player already has this skill.");
 	}
 
 	@XmlRootElement(name = "skill")

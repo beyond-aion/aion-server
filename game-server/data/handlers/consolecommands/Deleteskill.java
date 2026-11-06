@@ -44,13 +44,17 @@ public class Deleteskill extends ConsoleCommand {
 		if (skillTemplate != null)
 			skillId = skillTemplate.getTemplateId();
 
-		if (skillId > 0 && check(admin, player, skillId))
+		if (skillId <= 0) {
+			sendInfo(admin, "There is no skill named " + skillName + ".");
+			return;
+		}
+		if (check(admin, player, skillId))
 			apply(admin, player, skillId);
 	}
 
 	private static boolean check(Player admin, Player player, int skillId) {
 		if (skillId != 0 && !player.getSkillList().isSkillPresent(skillId)) {
-			PacketSendUtility.sendMessage(admin, "Player dont have this skill.");
+			PacketSendUtility.sendMessage(admin, "The player doesn't have this skill.");
 			return false;
 		}
 		if (player.getSkillList().getSkillEntry(skillId).isStigmaSkill()) {

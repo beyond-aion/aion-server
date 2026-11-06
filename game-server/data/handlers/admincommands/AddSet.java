@@ -29,31 +29,15 @@ public class AddSet extends AdminCommand {
 			return;
 		}
 
-		int itemSetId = 0;
-		Player receiver = null;
-
-		try {
-			itemSetId = Integer.parseInt(params[0]);
-			receiver = player;
-		} catch (NumberFormatException e) {
+		Player receiver = player;
+		if (params.length == 2) {
 			receiver = World.getInstance().getPlayer(Util.convertName(params[0]));
-
 			if (receiver == null) {
-				PacketSendUtility.sendMessage(player, "Could not find a player by that name.");
-				return;
-			}
-
-			try {
-				itemSetId = Integer.parseInt(params[1]);
-			} catch (NumberFormatException ex) {
-
-				PacketSendUtility.sendMessage(player, "You must give number to itemset ID.");
-				return;
-			} catch (Exception ex2) {
-				PacketSendUtility.sendMessage(player, "Occurs an error.");
+				sendInfo(player, "Player " + Util.convertName(params[0]) + " is not online.");
 				return;
 			}
 		}
+		int itemSetId = Integer.parseInt(params[params.length - 1]);
 
 		ItemSetTemplate itemSet = DataManager.ITEM_SET_DATA.getItemSetTemplate(itemSetId);
 		if (itemSet == null) {
@@ -75,8 +59,9 @@ public class AddSet extends AdminCommand {
 			}
 		}
 
-		PacketSendUtility.sendMessage(player, "Item Set added successfully");
-		PacketSendUtility.sendMessage(receiver, "admin gives you an item set");
+		PacketSendUtility.sendMessage(player, "Item set added successfully.");
+		if (receiver != player)
+			PacketSendUtility.sendMessage(receiver, "An admin gave you an item set.");
 	}
 
 }

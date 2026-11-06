@@ -11,16 +11,11 @@ import com.aionemu.gameserver.utils.chathandlers.ConsoleCommand;
 public class Setinventorygrowth extends ConsoleCommand {
 
 	public Setinventorygrowth() {
-		super("setinventorygrowth", "Expands a cube.", "<value> - Adds 9 cube slots to your target (or yourself), the value is ignored.");
+		super("setinventorygrowth", "Expands a cube.", "[value] - Adds 9 cube slots to your target (or yourself), the value is ignored.");
 	}
 
 	@Override
 	public void execute(Player admin, String... params) {
-		if (params.length < 1) {
-			sendInfo(admin);
-			return;
-		}
-
 		final Player player = admin.getTarget() instanceof Player target ? target : admin;
 
 		if (CubeExpandService.canExpand(player)) {

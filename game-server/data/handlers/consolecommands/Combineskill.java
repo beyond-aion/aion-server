@@ -32,6 +32,10 @@ public class Combineskill extends ConsoleCommand {
 		String skillName = params[0];
 		int skillId = 0;
 		int skillLvl = Integer.parseInt(params[1]);
+		if (skillLvl < 1) {
+			sendInfo(admin, "The skill level must be at least 1.");
+			return;
+		}
 
 		File xml = new File("./data/handlers/consolecommands/data/skills.xml");
 		SkillData data = JAXBUtil.deserialize(xml, SkillData.class);
@@ -40,10 +44,14 @@ public class Combineskill extends ConsoleCommand {
 		if (skillTemplate != null)
 			skillId = skillTemplate.getTemplateId();
 
-		if (skillId > 0) {
-			player.getSkillList().addSkill(player, skillId, skillLvl);
-			PacketSendUtility.sendMessage(admin, "You have success add skill");
+		if (skillId <= 0) {
+			sendInfo(admin, "There is no skill named " + skillName + ".");
+			return;
 		}
+		if (player.getSkillList().addSkill(player, skillId, skillLvl))
+			PacketSendUtility.sendMessage(admin, "The skill was added successfully.");
+		else
+			PacketSendUtility.sendMessage(admin, "The player already has this skill at the same or a higher level.");
 	}
 
 	@XmlAccessorType(XmlAccessType.NONE)

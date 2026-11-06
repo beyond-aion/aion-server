@@ -34,10 +34,12 @@ public class Teleport_to_named extends ConsoleCommand {
 		NpcData data = JAXBUtil.deserialize(xml, NpcData.class);
 		NpcTemplate npcTemplate = data.getNpcTemplate(npcName);
 
-		if (npcTemplate != null) {
-			PacketSendUtility.sendMessage(admin, "Teleporting to Npc: " + npcTemplate.getTemplateId());
-			TeleportService.teleportToNpc(admin, npcTemplate.getTemplateId());
+		if (npcTemplate == null) {
+			sendInfo(admin, "There is no NPC named " + npcName + ".");
+			return;
 		}
+		PacketSendUtility.sendMessage(admin, "Teleporting to NPC " + npcTemplate.getTemplateId() + ".");
+		TeleportService.teleportToNpc(admin, npcTemplate.getTemplateId());
 	}
 
 	@XmlAccessorType(XmlAccessType.NONE)

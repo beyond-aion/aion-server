@@ -1,5 +1,6 @@
 package consolecommands;
 
+import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -23,24 +24,28 @@ public class Givetitle extends ConsoleCommand {
 		}
 
 		if (!ChatProcessor.getInstance().isCommandAllowed(admin, "set")) {
-			PacketSendUtility.sendMessage(admin, "You dont have enough rights to execute this command");
+			PacketSendUtility.sendMessage(admin, "You don't have enough rights to execute this command.");
 			return;
 		}
 
 		final Player player = admin.getTarget() instanceof Player target ? target : admin;
 
 		int titleId = Integer.parseInt(params[0]);
-		if (titleId <= 263)
-			setTitle(player, titleId);
-		PacketSendUtility.sendMessage(admin, "Added " + titleId + " to" + player.getCommonData().getName());
-	}
-
-	private void setTitle(Player player, int value) {
-
-		if (player.getTitleList().contains(value)) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_TOOLTIP_LEARNED_TITLE());
+		if (DataManager.TITLE_DATA.getTitleTemplate(titleId) == null) {
+			sendInfo(admin, "There is no title with ID " + titleId + ".");
 			return;
 		}
-		player.getTitleList().addTitle(value, false, 0);
+		if (setTitle(player, titleId))
+			PacketSendUtility.sendMessage(admin, "Added title " + titleId + " to " + player.getName() + ".");
+		else
+			PacketSendUtility.sendMessage(admin, player.getName() + " already has title " + titleId + ".");
+	}
+
+	private boolean setTitle(Player player, int value) {
+		if (player.getTitleList().contains(value)) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_TOOLTIP_LEARNED_TITLE());
+			return false;
+		}
+		return player.getTitleList().addTitle(value, false, 0);
 	}
 }

@@ -30,25 +30,27 @@ public class SecurityToken extends AdminCommand {
 		if (params[0].equals("show")) {
 			receiver = World.getInstance().getPlayer(Util.convertName(params[1]));
 			if (receiver == null) {
-				PacketSendUtility.sendMessage(player, "Can't find this player, maybe he's not online");
+				sendInfo(player, "Player " + Util.convertName(params[1]) + " is not online.");
 				return;
 			}
 
 			if (!"".equals(receiver.getAccount().getSecurityToken())) {
-				PacketSendUtility.sendMessage(player, "The Security Token of this player is: " + receiver.getAccount().getSecurityToken());
+				PacketSendUtility.sendMessage(player,
+					"The security token of " + receiver.getName() + " is: " + receiver.getAccount().getSecurityToken());
 			} else {
-				PacketSendUtility.sendMessage(player, "This player haven't an Security Token!");
+				PacketSendUtility.sendMessage(player, "Player " + receiver.getName() + " has no security token.");
 			}
 
 		} else {
 			receiver = World.getInstance().getPlayer(Util.convertName(params[0]));
 
 			if (receiver == null) {
-				PacketSendUtility.sendMessage(player, "Can't find this player, maybe he's not online");
+				sendInfo(player, "Player " + Util.convertName(params[0]) + " is not online.");
 				return;
 			}
 
 			SecurityTokenService.generateToken(receiver.getAccount());
+			PacketSendUtility.sendMessage(player, "A new security token was generated for " + receiver.getName() + ".");
 		}
 
 	}

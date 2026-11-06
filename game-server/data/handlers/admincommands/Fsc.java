@@ -36,6 +36,16 @@ public class Fsc extends AdminCommand {
 
 		int id = Integer.decode(params[0]);
 		String format = params[1];
+		if (params.length != format.length() + 2) {
+			sendInfo(player, "The format has " + format.length() + " codes, but " + (params.length - 2) + " values were given.");
+			return;
+		}
+		for (char c : format.toCharArray()) {
+			if (PacketElementType.getByCode(c) == null) {
+				sendInfo(player, "Unknown format code: " + c);
+				return;
+			}
+		}
 
 		SM_CUSTOM_PACKET packet = new SM_CUSTOM_PACKET(id);
 

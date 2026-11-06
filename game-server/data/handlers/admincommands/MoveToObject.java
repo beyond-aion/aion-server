@@ -3,7 +3,6 @@ package admincommands;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.teleport.TeleportService;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.World;
 
@@ -13,7 +12,7 @@ import com.aionemu.gameserver.world.World;
 public class MoveToObject extends AdminCommand {
 
 	public MoveToObject() {
-		super("movetoobj", "Teleports you to an object.", "<object id> - Teleports you to the spawn position of the object.");
+		super("movetoobj", "Teleports you to an object.", "<object id> - Teleports you to the current position of the object.");
 	}
 
 	@Override
@@ -27,13 +26,11 @@ public class MoveToObject extends AdminCommand {
 
 		VisibleObject object = World.getInstance().findVisibleObject(objectId);
 		if (object == null) {
-			PacketSendUtility.sendMessage(admin, "Cannot find object for spawn #" + objectId);
+			sendInfo(admin, "There is no object with ID " + objectId + ".");
 			return;
 		}
 
-		VisibleObject spawn = object;
-
-		TeleportService.teleportTo(admin, spawn.getWorldId(), spawn.getSpawn().getX(), spawn.getSpawn().getY(), spawn.getSpawn().getZ());
+		TeleportService.teleportTo(admin, object.getPosition());
 	}
 
 }
