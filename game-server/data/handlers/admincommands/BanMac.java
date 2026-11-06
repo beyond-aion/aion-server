@@ -1,5 +1,7 @@
 package admincommands;
 
+import java.util.concurrent.TimeUnit;
+
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.BannedMacManager;
@@ -26,6 +28,10 @@ public class BanMac extends AdminCommand {
 		String targetName = "direct_type";
 
 		time = Integer.parseInt(params[0]);
+		if (time < 0) {
+			sendInfo(player, "The time must not be negative.");
+			return;
+		}
 		if (time == 0) // 0 is 10 years since system don't allow infinte banns without rework - it's pseudo infinity
 			time = 60 * 24 * 365 * 10;
 
@@ -50,7 +56,7 @@ public class BanMac extends AdminCommand {
 			}
 		}
 
-		BannedMacManager.getInstance().banAddress(address, System.currentTimeMillis() + time * 60 * 1000,
+		BannedMacManager.getInstance().banAddress(address, System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(time),
 			"author=" + player.getName() + ", " + player.getObjectId() + "; target=" + targetName);
 	}
 

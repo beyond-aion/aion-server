@@ -61,11 +61,10 @@ public class Ban extends AdminCommand {
 			}
 		}
 
-		int time = 0; // Default: infinity
-		if (params.length > 2)
-			time = Integer.parseInt(params[2]);
-		if (time == 0) {
-			time = 60 * 24 * 365 * 10; // pseudo infinity. TODO: rework
+		int time = params.length > 2 ? Integer.parseInt(params[2]) : 0; // 0 is permanent, the login server treats negative values as an unban
+		if (time < 0) {
+			sendInfo(admin, "The time must not be negative.");
+			return;
 		}
 
 		LoginServer.getInstance().sendBanPacket(type, accountId, accountIp, time, admin.getObjectId());

@@ -25,8 +25,8 @@ public class UnBanMac extends AdminCommand {
 		boolean result = BannedMacManager.getInstance().unbanAddress(address,
 			"uban;mac=" + address + ", " + player.getObjectId() + "; admin=" + player.getName());
 		if (result)
-			PacketSendUtility.sendMessage(player, "mac " + address + " has unbanned");
+			PacketSendUtility.sendMessage(player, "MAC " + address + " has been unbanned.");
 		else
-			PacketSendUtility.sendMessage(player, "mac " + address + " is not banned");
+			PacketSendUtility.sendMessage(player, "MAC " + address + " is not banned.");
 	}
 }

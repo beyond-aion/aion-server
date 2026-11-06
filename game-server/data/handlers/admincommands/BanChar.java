@@ -56,7 +56,8 @@ public class BanChar extends AdminCommand {
 		for (int itr = 3; itr < params.length; itr++)
 			reason += " " + params[itr];
 
-		PacketSendUtility.sendMessage(admin, "Char " + playerName + " is now banned for the next " + dayCount + " days!");
+		PacketSendUtility.sendMessage(admin,
+			"Character " + playerName + " is now banned " + (dayCount == 0 ? "permanently." : "for the next " + dayCount + " days."));
 
 		PunishmentService.banChar(playerId, dayCount, reason);
 	}

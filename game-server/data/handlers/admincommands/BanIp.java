@@ -22,11 +22,10 @@ public class BanIp extends AdminCommand {
 
 		String mask = params[0];
 
-		int time = 0; // Default: infinity
-		if (params.length > 1)
-			time = Integer.parseInt(params[1]);
-		if (time == 0) {
-			time = 60 * 24 * 365 * 10;// pseudo infinity
+		int time = params.length > 1 ? Integer.parseInt(params[1]) : 0; // 0 is permanent, the login server treats negative values as an unban
+		if (time < 0) {
+			sendInfo(player, "The time must not be negative.");
+			return;
 		}
 
 		LoginServer.getInstance().sendBanPacket((byte) 2, 0, mask, time, player.getObjectId());

@@ -31,7 +31,7 @@ public class UnBanChar extends AdminCommand {
 			return;
 		}
 
-		PacketSendUtility.sendMessage(admin, "Character " + name + " is not longer banned!");
+		PacketSendUtility.sendMessage(admin, "Character " + name + " is no longer banned.");
 
 		PunishmentService.unbanChar(playerId);
 	}
