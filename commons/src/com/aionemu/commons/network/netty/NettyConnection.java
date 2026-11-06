@@ -93,12 +93,17 @@ public abstract class NettyConnection<S extends BaseServerPacket> {
 		return closing.get() || !channel.isActive();
 	}
 
+	/**
+	 * @return The IP of the remote side, or "unconnected" for an outgoing connection that isn't established yet.
+	 */
 	public final String getIP() {
-		return remoteAddress.getAddress().getHostAddress();
+		InetSocketAddress address = remoteAddress;
+		return address == null ? "unconnected" : address.getAddress().getHostAddress();
 	}
 
 	public final boolean isFromLoopback() {
-		return remoteAddress.getAddress().isLoopbackAddress();
+		InetSocketAddress address = remoteAddress;
+		return address != null && address.getAddress().isLoopbackAddress();
 	}
 
 	/**
