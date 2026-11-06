@@ -32,6 +32,10 @@ public class ExchangeService {
 
 	private static final Logger log = LoggerFactory.getLogger("EXCHANGE_LOG");
 
+	/**
+	 * Both participants of an exchange execute their client packets on their own threads, while an exchange touches the items and kinah of both, so
+	 * every operation that changes one is synchronized on this service.
+	 */
 	private final Map<Integer, Exchange> exchanges = new ConcurrentHashMap<>();
 
 	public static ExchangeService getInstance() {
@@ -41,7 +45,7 @@ public class ExchangeService {
 	private ExchangeService() {
 	}
 
-	public void registerExchange(Player player1, Player player2) {
+	public synchronized void registerExchange(Player player1, Player player2) {
 		if (!validateParticipants(player1, player2))
 			return;
 
@@ -74,7 +78,7 @@ public class ExchangeService {
 		return getCurrentExchange(player) != null;
 	}
 
-	public void addKinah(Player activePlayer, long itemCount) {
+	public synchronized void addKinah(Player activePlayer, long itemCount) {
 		Exchange currentExchange = getCurrentExchange(activePlayer);
 		if (currentExchange == null || currentExchange.isLocked())
 			return;
@@ -98,7 +102,7 @@ public class ExchangeService {
 		}
 	}
 
-	public void addItem(Player activePlayer, int itemObjId, long itemCount) {
+	public synchronized void addItem(Player activePlayer, int itemObjId, long itemCount) {
 		Item item = activePlayer.getInventory().getItemByObjId(itemObjId);
 		if (item == null)
 			return;
@@ -174,7 +178,7 @@ public class ExchangeService {
 		PacketSendUtility.sendPacket(partner, new SM_EXCHANGE_ADD_ITEM(1, exchangeItem.getItem(), partner));
 	}
 
-	public void lockExchange(Player activePlayer) {
+	public synchronized void lockExchange(Player activePlayer) {
 		Exchange exchange = getCurrentExchange(activePlayer);
 		if (exchange != null) {
 			exchange.lock();
@@ -183,7 +187,7 @@ public class ExchangeService {
 		}
 	}
 
-	public void cancelExchange(Player activePlayer) {
+	public synchronized void cancelExchange(Player activePlayer) {
 		Player currentPartner = getCurrentParter(activePlayer);
 		returnItems(activePlayer);
 

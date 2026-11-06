@@ -278,15 +278,20 @@ public class DropService {
 	}
 
 	public void requestDropItem(Player player, int npcObjectId, int itemIndex, boolean autoLoot) {
-
 		Set<DropItem> dropItems = DropRegistrationService.getInstance().getCurrentDropMap().get(npcObjectId);
 		DropNpc dropNpc = DropRegistrationService.getInstance().getDropRegistrationMap().get(npcObjectId);
-		DropItem requestedItem = null;
 		// drop was unregistered
-		if (dropItems == null || dropNpc == null) {
+		if (dropItems == null || dropNpc == null)
 			return;
+		// The item's count and winner are shared by all looters of this corpse, whose packets run on their own threads: two of them taking the same item
+		// at the same time would both get it, since each takes what it read from the count.
+		synchronized (dropNpc) {
+			requestDropItem(player, npcObjectId, itemIndex, autoLoot, dropItems, dropNpc);
 		}
+	}
 
+	private void requestDropItem(Player player, int npcObjectId, int itemIndex, boolean autoLoot, Set<DropItem> dropItems, DropNpc dropNpc) {
+		DropItem requestedItem = null;
 		synchronized (dropItems) {
 			for (DropItem dropItem : dropItems)
 				if (dropItem.getIndex() == itemIndex) {

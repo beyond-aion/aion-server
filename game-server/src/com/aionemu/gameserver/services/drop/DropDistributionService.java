@@ -32,27 +32,32 @@ public class DropDistributionService {
 		DropNpc dropNpc = DropRegistrationService.getInstance().getDropRegistrationMap().get(npcObjId);
 		if (dropNpc == null)
 			return;
-		if (!dropNpc.containsPlayerStatus(player)) // only players the item was offered to may roll or bid (also covers a repeated roll)
-			return;
 		Set<DropItem> dropItems = DropRegistrationService.getInstance().getCurrentDropMap().get(npcObjId);
 		if (dropItems == null)
 			return;
-		DropItem requestedItem = null;
-		synchronized (dropItems) {
-			for (DropItem dropItem : dropItems)
-				if (dropItem.getIndex() == dropNpc.getCurrentIndex()) {
-					requestedItem = dropItem;
-					break;
-				}
+		// The players left to roll, the item's highest value and its winner are shared by all looters of this corpse, whose packets run on their own
+		// threads: a roll and a bid at the same time could overwrite each other and hand the item out twice.
+		synchronized (dropNpc) {
+			if (!dropNpc.containsPlayerStatus(player)) // only players the item was offered to may roll or bid (also covers a repeated roll)
+				return;
+			DropItem requestedItem = null;
+			synchronized (dropItems) {
+				for (DropItem dropItem : dropItems)
+					if (dropItem.getIndex() == dropNpc.getCurrentIndex()) {
+						requestedItem = dropItem;
+						break;
+					}
+			}
+			if (requestedItem == null)
+				return;
+			if (mode == 2)
+				handleRoll(player, roll, itemId, requestedItem, dropNpc);
+			else if (mode == 3)
+				handleBid(player, bid, itemId, requestedItem, dropNpc);
+			else
+				log.warn("{} requested invalid distributionMode {} for dropItem[itemId={}, index={}, npcObjId={}]", player, mode, itemId, index,
+					npcObjId);
 		}
-		if (requestedItem == null)
-			return;
-		if (mode == 2)
-			handleRoll(player, roll, itemId, requestedItem, dropNpc);
-		else if (mode == 3)
-			handleBid(player, bid, itemId, requestedItem, dropNpc);
-		else
-			log.warn("{} requested invalid distributionMode {} for dropItem[itemId={}, index={}, npcObjId={}]", player, mode, itemId, index, npcObjId);
 	}
 
 	private void handleRoll(Player player, int roll, int itemId, DropItem requestedItem, DropNpc dropNpc) {
