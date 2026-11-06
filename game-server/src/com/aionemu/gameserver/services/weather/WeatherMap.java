@@ -7,11 +7,13 @@ import com.aionemu.gameserver.model.templates.world.WeatherTable;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_WEATHER;
 
 /**
- * Weather of one world instance: index 0 is the weather of the whole map, indexes 1..zone_count are the map's weather
- * zones. Every channel of a map gets its own set, since a channel is a world of its own.
+ * Weather of one world instance
  */
 public class WeatherMap {
 
+	/**
+	 * Index 0 is the weather of the whole map, indexes 1..zone_count are the map's weather zones.
+	 */
 	private final WeatherZone[] zones;
 
 	public WeatherMap(WeatherTable table) {
@@ -79,9 +81,9 @@ public class WeatherMap {
 	}
 
 	public SM_WEATHER buildPacket() {
-		int[] codes = new int[zones.length];
-		for (int zoneId = 0; zoneId < zones.length; zoneId++)
-			codes[zoneId] = zones[zoneId].getCode();
-		return new SM_WEATHER(codes);
+		int[] zoneCodes = new int[zones.length - 1];
+		for (int zoneId = 1; zoneId < zones.length; zoneId++)
+			zoneCodes[zoneId - 1] = zones[zoneId].getCode();
+		return new SM_WEATHER(zones[0].getCode(), zoneCodes);
 	}
 }
