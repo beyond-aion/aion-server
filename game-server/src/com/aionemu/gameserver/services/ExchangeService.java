@@ -3,6 +3,7 @@ package com.aionemu.gameserver.services;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Consumer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,7 +35,8 @@ public class ExchangeService {
 
 	/**
 	 * Both participants of an exchange execute their client packets on their own threads, while an exchange touches the items and kinah of both, so
-	 * every operation that changes one is synchronized on this service.
+	 * every operation on an exchange is synchronized on the monitor that the two {@link Exchange}s of a pair share. Exchanges of different pairs
+	 * don't wait for each other. Only the registration is synchronized on this service, so that nobody joins two exchanges at once.
 	 */
 	private final Map<Integer, Exchange> exchanges = new ConcurrentHashMap<>();
 
@@ -49,8 +51,9 @@ public class ExchangeService {
 		if (!validateParticipants(player1, player2))
 			return;
 
-		exchanges.put(player1.getObjectId(), new Exchange(player1, player2));
-		exchanges.put(player2.getObjectId(), new Exchange(player2, player1));
+		Object monitor = new Object();
+		exchanges.put(player1.getObjectId(), new Exchange(player1, player2, monitor));
+		exchanges.put(player2.getObjectId(), new Exchange(player2, player1, monitor));
 
 		PacketSendUtility.sendPacket(player2, new SM_EXCHANGE_REQUEST(player1.getName()));
 		PacketSendUtility.sendPacket(player1, new SM_EXCHANGE_REQUEST(player2.getName()));
@@ -78,9 +81,55 @@ public class ExchangeService {
 		return getCurrentExchange(player) != null;
 	}
 
-	public synchronized void addKinah(Player activePlayer, long itemCount) {
-		Exchange currentExchange = getCurrentExchange(activePlayer);
-		if (currentExchange == null || currentExchange.isLocked())
+	/**
+	 * Runs the action on the player's exchange under the monitor of its pair, unless the exchange was completed or canceled in the meantime.
+	 */
+	private void inExchange(Player player, Consumer<Exchange> action) {
+		Exchange exchange = getCurrentExchange(player);
+		if (exchange == null)
+			return;
+		synchronized (exchange.getMonitor()) {
+			if (getCurrentExchange(player) == exchange)
+				action.accept(exchange);
+		}
+	}
+
+	public void addKinah(Player activePlayer, long itemCount) {
+		inExchange(activePlayer, exchange -> addKinah(activePlayer, exchange, itemCount));
+	}
+
+	public void addItem(Player activePlayer, int itemObjId, long itemCount) {
+		inExchange(activePlayer, exchange -> addItem(activePlayer, exchange, itemObjId, itemCount));
+	}
+
+	public void lockExchange(Player activePlayer) {
+		inExchange(activePlayer, exchange -> {
+			exchange.lock();
+			PacketSendUtility.sendPacket(exchange.getTargetPlayer(), new SM_EXCHANGE_CONFIRMATION(Action.PARTNER_LOCKED));
+		});
+	}
+
+	public void cancelExchange(Player activePlayer) {
+		inExchange(activePlayer, exchange -> cancel(activePlayer));
+	}
+
+	public void confirmExchange(Player activePlayer) {
+		if (activePlayer == null || !activePlayer.isOnline())
+			return;
+		Player[] tradedWith = new Player[1];
+		inExchange(activePlayer, exchange -> {
+			if (confirm(activePlayer, exchange))
+				tradedWith[0] = exchange.getTargetPlayer();
+		});
+		if (tradedWith[0] != null) {
+			// saved after leaving the monitor: the trade is complete in memory, and a slow database must not hold up the packets of both players
+			InventoryDAO.store(activePlayer);
+			InventoryDAO.store(tradedWith[0]);
+		}
+	}
+
+	private void addKinah(Player activePlayer, Exchange currentExchange, long itemCount) {
+		if (currentExchange.isLocked())
 			return;
 
 		if (itemCount < 1)
@@ -102,7 +151,7 @@ public class ExchangeService {
 		}
 	}
 
-	public synchronized void addItem(Player activePlayer, int itemObjId, long itemCount) {
+	private void addItem(Player activePlayer, Exchange currentExchange, int itemObjId, long itemCount) {
 		Item item = activePlayer.getInventory().getItemByObjId(itemObjId);
 		if (item == null)
 			return;
@@ -121,11 +170,6 @@ public class ExchangeService {
 			return;
 
 		if (itemCount > item.getItemCount())
-			return;
-
-		Exchange currentExchange = getCurrentExchange(activePlayer);
-
-		if (currentExchange == null)
 			return;
 
 		if (currentExchange.isLocked())
@@ -178,16 +222,7 @@ public class ExchangeService {
 		PacketSendUtility.sendPacket(partner, new SM_EXCHANGE_ADD_ITEM(1, exchangeItem.getItem(), partner));
 	}
 
-	public synchronized void lockExchange(Player activePlayer) {
-		Exchange exchange = getCurrentExchange(activePlayer);
-		if (exchange != null) {
-			exchange.lock();
-			Player currentParter = getCurrentParter(activePlayer);
-			PacketSendUtility.sendPacket(currentParter, new SM_EXCHANGE_CONFIRMATION(Action.PARTNER_LOCKED));
-		}
-	}
-
-	public synchronized void cancelExchange(Player activePlayer) {
+	private void cancel(Player activePlayer) {
 		Player currentPartner = getCurrentParter(activePlayer);
 		returnItems(activePlayer);
 
@@ -221,27 +256,22 @@ public class ExchangeService {
 		}
 	}
 
-	public synchronized void confirmExchange(Player activePlayer) {
-		if (activePlayer == null || !activePlayer.isOnline())
-			return;
-
-		Exchange currentExchange = getCurrentExchange(activePlayer);
-		if (currentExchange == null)
-			return;
+	/**
+	 * @return True if both sides confirmed and the items and kinah changed hands.
+	 */
+	private boolean confirm(Player activePlayer, Exchange currentExchange) {
 		currentExchange.confirm();
 
-		Player currentPartner = getCurrentParter(activePlayer);
-		Exchange partnerExchange = currentPartner == null ? null : getCurrentExchange(currentPartner);
+		Player currentPartner = currentExchange.getTargetPlayer();
+		Exchange partnerExchange = getCurrentExchange(currentPartner);
 		if (partnerExchange == null)
-			return;
+			return false;
 		PacketSendUtility.sendPacket(currentPartner, new SM_EXCHANGE_CONFIRMATION(Action.PARTNER_CONFIRMED));
 
-		if (partnerExchange.isConfirmed()) {
-			performTrade(activePlayer, currentPartner);
-		}
+		return partnerExchange.isConfirmed() && performTrade(activePlayer, currentPartner);
 	}
 
-	private void performTrade(Player activePlayer, Player currentPartner) {
+	private boolean performTrade(Player activePlayer, Player currentPartner) {
 		Exchange exchange1 = getCurrentExchange(activePlayer);
 		Exchange exchange2 = getCurrentExchange(currentPartner);
 
@@ -251,19 +281,19 @@ public class ExchangeService {
 			else
 				PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_PARTNER_TOO_HEAVY_TO_EXCHANGE());
 			cleanUpExchanges(true, activePlayer, currentPartner);
-			return;
+			return false;
 		}
 
 		if (!canGive(activePlayer, exchange1) || !canGive(currentPartner, exchange2)) {
 			PacketSendUtility.sendPacket(activePlayer, new SM_EXCHANGE_CONFIRMATION(Action.CANCELED));
-			cancelExchange(activePlayer);
-			return;
+			cancel(activePlayer);
+			return false;
 		}
 
 		if (!removeItemsFromInventory(activePlayer, exchange1) || !removeItemsFromInventory(currentPartner, exchange2)) {
 			cleanUpExchanges(true, activePlayer, currentPartner);
 			AuditLogger.log(activePlayer, "tried to exploit kinah exchange with partner: " + currentPartner);
-			return;
+			return false;
 		}
 
 		PacketSendUtility.sendPacket(activePlayer, new SM_EXCHANGE_CONFIRMATION(Action.COMPLETED));
@@ -271,10 +301,9 @@ public class ExchangeService {
 
 		putItemToInventory(activePlayer, currentPartner, exchange1, exchange2);
 		putItemToInventory(currentPartner, activePlayer, exchange2, exchange1);
-		InventoryDAO.store(exchange1.getActiveplayer());
-		InventoryDAO.store(exchange2.getActiveplayer());
 
 		cleanUpExchanges(false, activePlayer, currentPartner);
+		return true;
 	}
 
 	private void cleanUpExchanges(boolean releaseIds, Player... players) {
