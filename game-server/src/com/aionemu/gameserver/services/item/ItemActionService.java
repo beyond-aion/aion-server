@@ -24,7 +24,7 @@ public class ItemActionService {
 
 	public static void identifyItem(Player player, Item item) {
 		// A second identify cancels the task of the first one, and that task is the only place that removes its observer.
-		if (player.getController().hasTask(TaskId.ITEM_USE))
+		if (player.getController().hasScheduledTask(TaskId.ITEM_USE))
 			return;
 		int itemId = item.getItemId();
 		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), item.getObjectId(), itemId, 5000, IDENTIFY_START),
