@@ -9,6 +9,7 @@ import java.util.*;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnGroup;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.templates.world.WorldMapTemplate;
@@ -32,7 +33,7 @@ public class GoTo extends AdminCommand {
 		super("goto", "Teleports you to regions by name.", """
 			 - Shows a list of locations to teleport to.
 			<location name> - Teleports you to the given location.
-			<map id | map name> - Teleports you to the first known point of that map, f.e. //goto 300450000.
+			<map id | map name> - Teleports you to a start, resurrection or portal point of that map, f.e. //goto 300450000.
 			""");
 		addLocations();
 	}
@@ -124,23 +125,13 @@ public class GoTo extends AdminCommand {
 	}
 
 	/**
-	 * @return A registered location of the map, else the first spawn point of the map, else the start position of its
-	 *         main instance, null when there is nothing to teleport to.
+	 * @return A registered location of the map, else the start position of its main instance, else the spot of a resurrection
+	 *         or portal NPC, else the first spawn point of the map, null when there is nothing to teleport to.
 	 */
 	private Location mapLocation(WorldMapTemplate map) {
 		for (Location location : locations.values())
 			if (location.mapId == map.getMapId())
 				return location;
-		List<SpawnGroup> spawns = DataManager.SPAWNS_DATA.getSpawnsByWorldId(map.getMapId());
-		if (spawns != null) {
-			for (SpawnGroup spawn : spawns) {
-				List<SpawnTemplate> spots = spawn.getSpawnTemplates();
-				if (!spots.isEmpty()) {
-					SpawnTemplate spot = spots.get(0);
-					return new Location(map.getMapId(), spot.getX(), spot.getY(), spot.getZ(), (byte) 0, List.of(describeMap(map)));
-				}
-			}
-		}
 		WorldMap worldMap = World.getInstance().getWorldMap(map.getMapId());
 		if (worldMap != null) {
 			WorldMapInstance instance = worldMap.getMainWorldMapInstance();
@@ -148,7 +139,32 @@ public class GoTo extends AdminCommand {
 				return new Location(map.getMapId(), instance.getStartPos().getX(), instance.getStartPos().getY(), instance.getStartPos().getZ(),
 					(byte) 0, List.of(describeMap(map)));
 		}
-		return null;
+		List<SpawnGroup> spawns = DataManager.SPAWNS_DATA.getSpawnsByWorldId(map.getMapId());
+		if (spawns == null)
+			return null;
+		SpawnTemplate firstSpot = null;
+		for (SpawnGroup spawn : spawns) {
+			for (SpawnTemplate spot : spawn.getSpawnTemplates()) {
+				if (isResurrectOrPortal(spot))
+					return spotLocation(map, spot);
+				if (firstSpot == null)
+					firstSpot = spot;
+			}
+		}
+		return firstSpot == null ? null : spotLocation(map, firstSpot);
+	}
+
+	private static boolean isResurrectOrPortal(SpawnTemplate spot) {
+		String aiName = spot.getAiName();
+		if (aiName == null) {
+			NpcTemplate npc = DataManager.NPC_DATA.getNpcTemplate(spot.getNpcId());
+			aiName = npc == null ? null : npc.getAiName();
+		}
+		return "resurrect".equals(aiName) || "portal".equals(aiName);
+	}
+
+	private static Location spotLocation(WorldMapTemplate map, SpawnTemplate spot) {
+		return new Location(map.getMapId(), spot.getX(), spot.getY(), spot.getZ(), (byte) 0, List.of(describeMap(map)));
 	}
 
 	private static void goTo(Player player, Location location) {
@@ -171,7 +187,7 @@ public class GoTo extends AdminCommand {
 		sb.append("\nType " + ChatUtil.color(getAliasWithPrefix() + " <location name>", Color.WHITE)
 			+ " to teleport to a location. Location names can be abbreviated.");
 		sb.append("\nAny map can be addressed by its id or name, f.e. ").append(ChatUtil.color(getAliasWithPrefix() + " 300450000", Color.WHITE))
-			.append("; it lands on the first spawn point of the map.");
+			.append("; it lands on a start, resurrection or portal point of the map.");
 		sendInfo(player, sb.toString());
 	}
 
