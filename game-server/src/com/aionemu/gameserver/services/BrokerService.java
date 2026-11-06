@@ -484,12 +484,14 @@ public class BrokerService {
 				return;
 			}
 			synchronized (this) {
-				player.getInventory().add(brokerItem.getItem(), ItemPacketService.ItemAddType.BROKER_RETURN);
-				brokerItem.setPersistentState(PersistentState.DELETED);
-				saveManager.add(new BrokerOpSaveTask(brokerItem));
-				brokerItem.setIsCanceled(true);
-				brokerItems.remove(brokerItemId);
-				PacketSendUtility.sendPacket(player, new SM_BROKER_SERVICE((byte) 0, brokerItemId));
+				// a buyer or the expiry may have taken the item since it was looked up, then it is no longer the seller's to take back
+				if (brokerItems.remove(brokerItemId, brokerItem)) {
+					player.getInventory().add(brokerItem.getItem(), ItemPacketService.ItemAddType.BROKER_RETURN);
+					brokerItem.setPersistentState(PersistentState.DELETED);
+					saveManager.add(new BrokerOpSaveTask(brokerItem));
+					brokerItem.setIsCanceled(true);
+					PacketSendUtility.sendPacket(player, new SM_BROKER_SERVICE((byte) 0, brokerItemId));
+				}
 			}
 		}
 		showRegisteredItems(player);
@@ -599,8 +601,8 @@ public class BrokerService {
 			for (BrokerItem item : brokerItems.values()) {
 				if (item != null && item.getExpireTime().getTime() <= now) {
 					synchronized (this) {
-						putToSettled(race, item, false);
-						brokerItems.remove(item.getItemUniqueId());
+						if (brokerItems.remove(item.getItemUniqueId(), item)) // not bought or canceled in the meantime
+							putToSettled(race, item, false);
 					}
 				}
 			}
