@@ -32,16 +32,16 @@ class WeatherZoneTest {
 	@Test
 	void playsSignBodyRemainInsideTheHourWindow() throws Exception {
 		WeatherZone zone = new WeatherZone(load("""
-			<weather>
+			<weather_maps>
 				<map id="1" zone_count="0">
 					<weather code="1" name="Rain" zone="0" priority="1" hours="13" occur_prob="100" duration="40" state="RAIN">
 						<sign name="RainBefore" probability="100" duration="10"/>
 						<remain name="RainAfter" probability="100" duration="10"/>
 					</weather>
-					<weather code="2" name="RainBefore" zone="0" priority="1" hours="0-23" occur_prob="0" duration="10"/>
-					<weather code="3" name="RainAfter" zone="0" priority="1" hours="0-23" occur_prob="0" duration="10" state="RAIN"/>
+					<weather code="2" name="RainBefore" zone="0" priority="1" occur_prob="0" duration="10"/>
+					<weather code="3" name="RainAfter" zone="0" priority="1" occur_prob="0" duration="10" state="RAIN"/>
 				</map>
-			</weather>
+			</weather_maps>
 			""").getEntriesForZone(0));
 
 		List<String> changes = new ArrayList<>();
@@ -54,14 +54,14 @@ class WeatherZoneTest {
 	@Test
 	void playsSubWeatherAfterTheBody() throws Exception {
 		WeatherZone zone = new WeatherZone(load("""
-			<weather>
+			<weather_maps>
 				<map id="1" zone_count="0">
 					<weather code="1" name="Storm" zone="0" priority="1" hours="0" occur_prob="100" duration="10">
 						<sub name="StormTail" probability="100"/>
 					</weather>
-					<weather code="2" name="StormTail" zone="0" priority="1" hours="0-23" occur_prob="0" duration="20"/>
+					<weather code="2" name="StormTail" zone="0" priority="1" occur_prob="0" duration="20"/>
 				</map>
-			</weather>
+			</weather_maps>
 			""").getEntriesForZone(0));
 
 		List<String> changes = new ArrayList<>();
@@ -73,11 +73,11 @@ class WeatherZoneTest {
 	@Test
 	void startsOnlyInTheMonthsOfTheRecord() throws Exception {
 		WeatherZone zone = new WeatherZone(load("""
-			<weather>
+			<weather_maps>
 				<map id="1" zone_count="0">
 					<weather code="1" name="Rain" zone="0" priority="1" months="6" hours="0-23" occur_prob="100" duration="10" state="RAIN"/>
 				</map>
-			</weather>
+			</weather_maps>
 			""").getEntriesForZone(0));
 
 		List<String> changes = new ArrayList<>();
@@ -93,11 +93,27 @@ class WeatherZoneTest {
 	@Test
 	void neverStartsWithAnEmptyMonthList() throws Exception {
 		WeatherZone zone = new WeatherZone(load("""
-			<weather>
+			<weather_maps>
 				<map id="1" zone_count="0">
 					<weather code="1" name="Rain" zone="0" priority="1" months="" hours="0-23" occur_prob="100" duration="10" state="RAIN"/>
 				</map>
-			</weather>
+			</weather_maps>
+			""").getEntriesForZone(0));
+
+		List<String> changes = new ArrayList<>();
+		run(zone, 0, 12 * 44640, changes);
+
+		assertEquals(List.of(), changes);
+	}
+
+	@Test
+	void neverStartsWithoutHours() throws Exception {
+		WeatherZone zone = new WeatherZone(load("""
+			<weather_maps>
+				<map id="1" zone_count="0">
+					<weather code="1" name="Rain" zone="0" priority="1" occur_prob="100" duration="10" state="RAIN"/>
+				</map>
+			</weather_maps>
 			""").getEntriesForZone(0));
 
 		List<String> changes = new ArrayList<>();
@@ -112,11 +128,11 @@ class WeatherZoneTest {
 	@Test
 	void keepsTheRestOfARunningWeatherWhenTheClockGoesBack() throws Exception {
 		WeatherZone zone = new WeatherZone(load("""
-			<weather>
+			<weather_maps>
 				<map id="1" zone_count="0">
 					<weather code="1" name="Rain" zone="0" priority="1" hours="5" occur_prob="100" duration="60" state="RAIN"/>
 				</map>
-			</weather>
+			</weather_maps>
 			""").getEntriesForZone(0));
 		Random random = new Random(1);
 

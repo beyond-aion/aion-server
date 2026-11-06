@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-	<xs:element name="weather">
+	<xs:element name="weather_maps">
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element maxOccurs="unbounded" name="map" type="WeatherTable" />
