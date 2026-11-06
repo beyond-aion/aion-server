@@ -31,20 +31,17 @@ public class PasskeyReset extends AdminCommand {
 			return;
 		}
 
-		try {
-			Integer.parseInt(params[1]);
-		} catch (NumberFormatException e) {
-			PacketSendUtility.sendMessage(player, "parameters should be number!");
-			return;
-		}
-
 		String newPasskey = params[1];
-		if (!(newPasskey.length() > 5 && newPasskey.length() < 9)) {
-			PacketSendUtility.sendMessage(player, "passkey is 6~8 digits!");
+		if (!newPasskey.matches("\\d{6,8}")) {
+			sendInfo(player, "The passkey must consist of 6 to 8 digits.");
 			return;
 		}
 
-		PlayerPasskeyDAO.updateForcePlayerPasskey(accountId, newPasskey);
-		LoginServer.getInstance().sendBanPacket((byte) 2, accountId, "", -1, player.getObjectId());
+		if (!PlayerPasskeyDAO.updateForcePlayerPasskey(accountId, newPasskey)) {
+			sendInfo(player, "The account of " + name + " has no passkey to reset.");
+			return;
+		}
+		LoginServer.getInstance().kickAccount(accountId, false);
+		PacketSendUtility.sendMessage(player, "The passkey of " + name + "'s account was reset.");
 	}
 }
