@@ -228,6 +228,10 @@ public class BrokerService {
 		if (!PlayerRestrictions.canTrade(player))
 			return;
 
+		// purchases of all players wait for this lock, so nothing in it may wait for the database: names of offline sellers are looked up afterwards
+		Item boughtItem;
+		int sellerId;
+		long price;
 		synchronized (this) {
 			BrokerItem buyingItem = getRaceBrokerItems(playerRace).get(itemUniqueId);
 			if (buyingItem == null)
@@ -240,10 +244,9 @@ public class BrokerService {
 
 			if (buyingItem.isSold() || buyingItem.isCanceled()) {
 				LoggerFactory.getLogger(BrokerService.class).warn(
-					"Player {} tried to buy the following item[id={}, objId={}, sellerId={}, sellerName={}, sold={}, canceled={}, settled={}, expireTime={}] which is already sold or canceled",
-					player.getName(), buyingItem.getItemId(), buyingItem.getItemUniqueId(), buyingItem.getSellerId(),
-					PlayerService.getPlayerName(buyingItem.getSellerId()), buyingItem.isSold(), buyingItem.isCanceled(), buyingItem.isSettled(),
-					buyingItem.getExpireTime());
+					"Player {} tried to buy the following item[id={}, objId={}, sellerId={}, sold={}, canceled={}, settled={}, expireTime={}] which is already sold or canceled",
+					player.getName(), buyingItem.getItemId(), buyingItem.getItemUniqueId(), buyingItem.getSellerId(), buyingItem.isSold(),
+					buyingItem.isCanceled(), buyingItem.isSettled(), buyingItem.getExpireTime());
 				PacketSendUtility.sendMessage(player, "Sorry, but this item already sold");
 				return;
 			}
@@ -255,7 +258,7 @@ public class BrokerService {
 			}
 
 			Item item = buyingItem.getItem();
-			long price = buyingItem.getPrice() * itemCount;
+			price = buyingItem.getPrice() * itemCount;
 			if (player.getInventory().isFull(item.getItemTemplate().getExtraInventoryId())) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_FULL_INVENTORY());
 				return;
@@ -292,16 +295,16 @@ public class BrokerService {
 			if (item.getPackCount() > 0) {
 				item.setPackCount(item.getPackCount() * -1);
 			}
-			Item boughtItem = player.getInventory().add(item, ItemPacketService.ItemAddType.BROKER_BUY);
-
-			if (LoggingConfig.LOG_BROKER_EXCHANGE)
-				log.info("Player: {} bought item {} [{}] (count: {}) from player: {} (total price: {})", player.getName(), boughtItem.getItemId(),
-					boughtItem.getItemName(), itemCount, PlayerService.getPlayerName(buyingItem.getSellerId()), price);
+			boughtItem = player.getInventory().add(item, ItemPacketService.ItemAddType.BROKER_BUY);
+			sellerId = buyingItem.getSellerId();
 
 			// create save task
 			BrokerOpSaveTask bost = new BrokerOpSaveTask(buyingItem, boughtItem, player.getInventory().getKinahItem(), player.getObjectId());
 			saveManager.add(bost);
 		}
+		if (LoggingConfig.LOG_BROKER_EXCHANGE)
+			log.info("Player: {} bought item {} [{}] (count: {}) from player: {} (total price: {})", player.getName(), boughtItem.getItemId(),
+				boughtItem.getItemName(), itemCount, PlayerService.getPlayerName(sellerId), price);
 		showRequestedItems(player, getPlayerCache(player).getBrokerMaskCache(), getPlayerCache(player).getBrokerSortTypeCache(),
 			getPlayerCache(player).getBrokerStartPageCache(), getPlayerCache(player).getSearchItemList());
 
