@@ -13,23 +13,17 @@ import com.aionemu.gameserver.world.World;
 public class MoveToObject extends AdminCommand {
 
 	public MoveToObject() {
-		super("movetoobj");
+		super("movetoobj", "Teleports you to an object.", "<object id> - Teleports you to the spawn position of the object.");
 	}
 
 	@Override
 	public void execute(Player admin, String... params) {
 		if (params == null || params.length != 1) {
-			PacketSendUtility.sendMessage(admin, "Syntax : //movetoobj <object id>");
+			sendInfo(admin);
 			return;
 		}
 
-		int objectId = 0;
-
-		try {
-			objectId = Integer.valueOf(params[0]);
-		} catch (NumberFormatException e) {
-			PacketSendUtility.sendMessage(admin, "Only numbers please!!!");
-		}
+		int objectId = Integer.parseInt(params[0]);
 
 		VisibleObject object = World.getInstance().findVisibleObject(objectId);
 		if (object == null) {
@@ -40,11 +34,6 @@ public class MoveToObject extends AdminCommand {
 		VisibleObject spawn = object;
 
 		TeleportService.teleportTo(admin, spawn.getWorldId(), spawn.getSpawn().getX(), spawn.getSpawn().getY(), spawn.getSpawn().getZ());
-	}
-
-	@Override
-	public void info(Player player, String message) {
-		PacketSendUtility.sendMessage(player, "Syntax : //movetoobj <object id>");
 	}
 
 }

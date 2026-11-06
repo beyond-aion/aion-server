@@ -16,26 +16,18 @@ import com.aionemu.gameserver.utils.chathandlers.ConsoleCommand;
 public class Set_enchantcount extends ConsoleCommand {
 
 	public Set_enchantcount() {
-		super("set_enchantcount");
+		super("set_enchantcount", "Enchants an item.", "<item object id> <levels> - Adds enchant levels to the item in your inventory or equipment.");
 	}
 
 	@Override
 	public void execute(Player admin, String... params) {
 		if (params.length < 2) {
-			info(admin, null);
+			sendInfo(admin);
 			return;
 		}
 
-		int objId;
-		int enchant;
-
-		try {
-			objId = Integer.parseInt(params[0]);
-			enchant = Integer.parseInt(params[1]);
-		} catch (NumberFormatException e) {
-			PacketSendUtility.sendMessage(admin, "Invalid params.");
-			return;
-		}
+		int objId = Integer.parseInt(params[0]);
+		int enchant = Integer.parseInt(params[1]);
 
 		Item item = admin.getInventory().getItemByObjId(objId);
 		if (item == null)
@@ -74,10 +66,5 @@ public class Set_enchantcount extends ConsoleCommand {
 			PacketSendUtility.sendMessage(admin, "Invalid item.");
 			return;
 		}
-	}
-
-	@Override
-	public void info(Player admin, String message) {
-		PacketSendUtility.sendMessage(admin, "syntax ///set_enchantcount <item Id> <enchantcount> <unk>");
 	}
 }

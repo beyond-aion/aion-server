@@ -10,13 +10,13 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 public class AddSkill extends AdminCommand {
 
 	public AddSkill() {
-		super("addskill");
+		super("addskill", "Adds a skill to a player.", "<skillId> <skillLevel> - Adds the skill to your target (or yourself).");
 	}
 
 	@Override
 	public void execute(Player player, String... params) {
 		if (params.length != 2) {
-			PacketSendUtility.sendMessage(player, "syntax //addskill <skillId> <skillLevel>");
+			sendInfo(player);
 			return;
 		}
 
@@ -37,10 +37,5 @@ public class AddSkill extends AdminCommand {
 		PacketSendUtility.sendMessage(player, "You have success add skill");
 		if (!target.equals(player))
 			PacketSendUtility.sendMessage(target, "You have acquire a new skill");
-	}
-
-	@Override
-	public void info(Player player, String message) {
-		PacketSendUtility.sendMessage(player, "syntax //addskill <skillId> <skillLevel>");
 	}
 }

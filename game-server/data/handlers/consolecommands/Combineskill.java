@@ -17,13 +17,13 @@ import com.aionemu.gameserver.utils.xml.JAXBUtil;
 public class Combineskill extends ConsoleCommand {
 
 	public Combineskill() {
-		super("combineskill");
+		super("combineskill", "Adds a skill.", "<skill name> <level> - Adds the skill with the level to your target (or yourself).");
 	}
 
 	@Override
 	public void execute(Player admin, String... params) {
 		if (params.length < 2) {
-			info(admin, null);
+			sendInfo(admin);
 			return;
 		}
 
@@ -31,14 +31,7 @@ public class Combineskill extends ConsoleCommand {
 
 		String skillName = params[0];
 		int skillId = 0;
-		int skillLvl = 1;
-
-		try {
-			skillLvl = Integer.parseInt(params[1]);
-		} catch (NumberFormatException e) {
-			PacketSendUtility.sendMessage(admin, "Parameters need to be an integer.");
-			return;
-		}
+		int skillLvl = Integer.parseInt(params[1]);
 
 		File xml = new File("./data/handlers/consolecommands/data/skills.xml");
 		SkillData data = JAXBUtil.deserialize(xml, SkillData.class);
@@ -51,11 +44,6 @@ public class Combineskill extends ConsoleCommand {
 			player.getSkillList().addSkill(player, skillId, skillLvl);
 			PacketSendUtility.sendMessage(admin, "You have success add skill");
 		}
-	}
-
-	@Override
-	public void info(Player admin, String message) {
-		PacketSendUtility.sendMessage(admin, "syntax ///addcskill <skill name>");
 	}
 
 	@XmlAccessorType(XmlAccessType.NONE)

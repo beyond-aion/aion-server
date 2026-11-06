@@ -11,13 +11,18 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 public class EnergyBuff extends AdminCommand {
 
 	public EnergyBuff() {
-		super("energy");
+		super("energy", "Manages repose and salvation energy of your target (or yourself).", """
+			<repose|salvation> info - Shows the current energy.
+			<repose|salvation> add <points> - Adds energy points.
+			<repose|salvation> reset - Resets the energy.
+			refresh - Resends the stats info packet.
+			""");
 	}
 
 	@Override
 	public void execute(Player player, String... params) {
 		if (params == null || params.length < 1) {
-			info(player, null);
+			sendInfo(player);
 			return;
 		}
 
@@ -28,7 +33,7 @@ public class EnergyBuff extends AdminCommand {
 		}
 
 		if (params.length < 2 || (params[1].equals("add") && params.length < 3)) {
-			info(player, null);
+			sendInfo(player);
 			return;
 		}
 
@@ -48,12 +53,6 @@ public class EnergyBuff extends AdminCommand {
 			else if (params[1].equals("reset"))
 				targetPlayer.getCommonData().resetSalvationPoints();
 		}
-	}
-
-	@Override
-	public void info(Player player, String message) {
-		String syntax = "//energy repose|salvation|refresh info|reset|add [points]";
-		PacketSendUtility.sendMessage(player, syntax);
 	}
 
 }

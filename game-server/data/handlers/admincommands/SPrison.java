@@ -13,12 +13,12 @@ import com.aionemu.gameserver.world.World;
 public class SPrison extends AdminCommand {
 
 	public SPrison() {
-		super("sprison");
+		super("sprison", "Sends a player to prison.", "<player> <minutes> <reason> - Sends the online player to prison for the given time.");
 	}
 
 	@Override
 	public void execute(Player admin, String... params) {
-		if (params.length < 2) {
+		if (params.length < 3) {
 			sendInfo(admin);
 			return;
 		}
@@ -39,14 +39,5 @@ public class SPrison extends AdminCommand {
 			sendInfo(admin);
 		}
 
-	}
-
-	@Override
-	public void info(Player player, String message) {
-		sendInfo(player);
-	}
-
-	private void sendInfo(Player player) {
-		PacketSendUtility.sendMessage(player, "syntax //sprison <player> <delay> <reason>");
 	}
 }

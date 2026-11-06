@@ -15,13 +15,13 @@ import com.aionemu.gameserver.world.World;
 public class RPrison extends AdminCommand {
 
 	public RPrison() {
-		super("rprison");
+		super("rprison", "Releases a player from prison.", "<player> - Releases the player from prison.");
 	}
 
 	@Override
 	public void execute(Player admin, String... params) {
 		if (params.length == 0 || params.length > 2) {
-			PacketSendUtility.sendMessage(admin, "syntax //rprison <player>");
+			sendInfo(admin);
 			return;
 		}
 
@@ -33,14 +33,9 @@ public class RPrison extends AdminCommand {
 				PacketSendUtility.sendMessage(admin, "Player " + playerFromPrison.getName() + " removed from prison.");
 			}
 		} catch (NoSuchElementException nsee) {
-			PacketSendUtility.sendMessage(admin, "Usage: //rprison <player>");
+			sendInfo(admin);
 		} catch (Exception e) {
-			PacketSendUtility.sendMessage(admin, "Usage: //rprison <player>");
+			sendInfo(admin);
 		}
-	}
-
-	@Override
-	public void info(Player player, String message) {
-		PacketSendUtility.sendMessage(player, "syntax //rprison <player>");
 	}
 }

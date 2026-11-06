@@ -14,21 +14,20 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 public class PasskeyReset extends AdminCommand {
 
 	public PasskeyReset() {
-		super("passkeyreset");
+		super("passkeyreset", "Resets an account passkey.", "<player> <passkey> - Sets a new 6-8 digit passkey for the account of the player.");
 	}
 
 	@Override
 	public void execute(Player player, String... params) {
 		if (params.length < 2) {
-			PacketSendUtility.sendMessage(player, "syntax: //passkeyreset <player> <passkey>");
+			sendInfo(player);
 			return;
 		}
 
 		String name = Util.convertName(params[0]);
 		int accountId = PlayerDAO.getAccountIdByName(name);
 		if (accountId == 0) {
-			PacketSendUtility.sendMessage(player, "player " + name + " can't find!");
-			PacketSendUtility.sendMessage(player, "syntax: //passkeyreset <player> <passkey>");
+			sendInfo(player, "Player " + name + " was not found!");
 			return;
 		}
 
@@ -47,10 +46,5 @@ public class PasskeyReset extends AdminCommand {
 
 		PlayerPasskeyDAO.updateForcePlayerPasskey(accountId, newPasskey);
 		LoginServer.getInstance().sendBanPacket((byte) 2, accountId, "", -1, player.getObjectId());
-	}
-
-	@Override
-	public void info(Player player, String message) {
-		PacketSendUtility.sendMessage(player, "syntax: //passkeyreset <player> <passkey>");
 	}
 }

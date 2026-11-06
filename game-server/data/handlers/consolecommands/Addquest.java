@@ -22,31 +22,26 @@ import com.aionemu.gameserver.utils.chathandlers.ConsoleCommand;
 public class Addquest extends ConsoleCommand {
 
 	public Addquest() {
-		super("addquest");
+		super("addquest", "Starts a quest.", "<quest id> - Starts the quest for your target (or yourself), a quest link works too.");
 	}
 
 	@Override
 	public void execute(Player admin, String... params) {
 		if (params.length < 1) {
-			info(admin, null);
+			sendInfo(admin);
 			return;
 		}
 
 		final Player player = admin.getTarget() instanceof Player target ? target : admin;
 
 		int id;
-		try {
-			String quest = params[0];
-			Pattern questId = Pattern.compile("\\[quest:([^%]+)]");
-			Matcher result = questId.matcher(quest);
-			if (result.find())
-				id = Integer.parseInt(result.group(1));
-			else
-				id = Integer.parseInt(params[0]);
-		} catch (NumberFormatException e) {
-			info(admin, null);
-			return;
-		}
+		String quest = params[0];
+		Pattern questId = Pattern.compile("\\[quest:([^%]+)]");
+		Matcher result = questId.matcher(quest);
+		if (result.find())
+			id = Integer.parseInt(result.group(1));
+		else
+			id = Integer.parseInt(params[0]);
 
 		QuestEnv env = new QuestEnv(null, player, id);
 
@@ -70,11 +65,6 @@ public class Addquest extends ConsoleCommand {
 			}
 			PacketSendUtility.sendMessage(admin, "Quest not started. Some preconditions failed");
 		}
-	}
-
-	@Override
-	public void info(Player player, String message) {
-		PacketSendUtility.sendMessage(player, "syntax ///addquest <id quest>");
 	}
 
 }

@@ -13,13 +13,16 @@ import com.aionemu.gameserver.world.World;
 public class SecurityToken extends AdminCommand {
 
 	public SecurityToken() {
-		super("stoken");
+		super("stoken", "Manages security tokens.", """
+			<player> - Generates a new security token for the online player.
+			show <player> - Shows the security token of the online player.
+			""");
 	}
 
 	@Override
 	public void execute(Player player, String... params) {
 		if (params.length < 1 || (params[0].equals("show") && params.length < 2)) {
-			PacketSendUtility.sendMessage(player, "Syntax: //stoken <playername> || //stoken show <playername>");
+			sendInfo(player);
 			return;
 		}
 		Player receiver = null;
@@ -48,11 +51,6 @@ public class SecurityToken extends AdminCommand {
 			SecurityTokenService.generateToken(receiver.getAccount());
 		}
 
-	}
-
-	@Override
-	public void info(Player admin, String message) {
-		PacketSendUtility.sendMessage(admin, "Syntax: //stoken <playername> || //stoken show <playername>");
 	}
 
 }
