@@ -23,13 +23,13 @@ import com.aionemu.gameserver.utils.xml.JAXBUtil;
 public class Deleteskill extends ConsoleCommand {
 
 	public Deleteskill() {
-		super("deleteskill");
+		super("deleteskill", "Removes a skill (except stigma skills).", "<skill name> - Removes the skill from your target (or yourself).");
 	}
 
 	@Override
 	public void execute(Player admin, String... params) {
 		if (params.length < 1) {
-			info(admin, null);
+			sendInfo(admin);
 			return;
 		}
 
@@ -44,13 +44,17 @@ public class Deleteskill extends ConsoleCommand {
 		if (skillTemplate != null)
 			skillId = skillTemplate.getTemplateId();
 
-		if (skillId > 0 && check(admin, player, skillId))
+		if (skillId <= 0) {
+			sendInfo(admin, "There is no skill named " + skillName + ".");
+			return;
+		}
+		if (check(admin, player, skillId))
 			apply(admin, player, skillId);
 	}
 
 	private static boolean check(Player admin, Player player, int skillId) {
 		if (skillId != 0 && !player.getSkillList().isSkillPresent(skillId)) {
-			PacketSendUtility.sendMessage(admin, "Player dont have this skill.");
+			PacketSendUtility.sendMessage(admin, "The player doesn't have this skill.");
 			return false;
 		}
 		if (player.getSkillList().getSkillEntry(skillId).isStigmaSkill()) {
@@ -65,11 +69,6 @@ public class Deleteskill extends ConsoleCommand {
 			SkillLearnService.removeSkill(player, skillId);
 			PacketSendUtility.sendMessage(admin, "You have successfully deleted the specified skill.");
 		}
-	}
-
-	@Override
-	public void info(Player admin, String message) {
-		PacketSendUtility.sendMessage(admin, "syntax ///deleteskill <skill name>");
 	}
 
 	@XmlAccessorType(XmlAccessType.NONE)

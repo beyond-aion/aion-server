@@ -13,13 +13,16 @@ import com.aionemu.gameserver.world.World;
 public class SecurityToken extends AdminCommand {
 
 	public SecurityToken() {
-		super("stoken");
+		super("stoken", "Manages security tokens.", """
+			<player> - Generates a new security token for the online player.
+			show <player> - Shows the security token of the online player.
+			""");
 	}
 
 	@Override
 	public void execute(Player player, String... params) {
 		if (params.length < 1 || (params[0].equals("show") && params.length < 2)) {
-			PacketSendUtility.sendMessage(player, "Syntax: //stoken <playername> || //stoken show <playername>");
+			sendInfo(player);
 			return;
 		}
 		Player receiver = null;
@@ -27,32 +30,29 @@ public class SecurityToken extends AdminCommand {
 		if (params[0].equals("show")) {
 			receiver = World.getInstance().getPlayer(Util.convertName(params[1]));
 			if (receiver == null) {
-				PacketSendUtility.sendMessage(player, "Can't find this player, maybe he's not online");
+				sendInfo(player, "Player " + Util.convertName(params[1]) + " is not online.");
 				return;
 			}
 
 			if (!"".equals(receiver.getAccount().getSecurityToken())) {
-				PacketSendUtility.sendMessage(player, "The Security Token of this player is: " + receiver.getAccount().getSecurityToken());
+				PacketSendUtility.sendMessage(player,
+					"The security token of " + receiver.getName() + " is: " + receiver.getAccount().getSecurityToken());
 			} else {
-				PacketSendUtility.sendMessage(player, "This player haven't an Security Token!");
+				PacketSendUtility.sendMessage(player, "Player " + receiver.getName() + " has no security token.");
 			}
 
 		} else {
 			receiver = World.getInstance().getPlayer(Util.convertName(params[0]));
 
 			if (receiver == null) {
-				PacketSendUtility.sendMessage(player, "Can't find this player, maybe he's not online");
+				sendInfo(player, "Player " + Util.convertName(params[0]) + " is not online.");
 				return;
 			}
 
 			SecurityTokenService.generateToken(receiver.getAccount());
+			PacketSendUtility.sendMessage(player, "A new security token was generated for " + receiver.getName() + ".");
 		}
 
-	}
-
-	@Override
-	public void info(Player admin, String message) {
-		PacketSendUtility.sendMessage(admin, "Syntax: //stoken <playername> || //stoken show <playername>");
 	}
 
 }

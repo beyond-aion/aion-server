@@ -1,7 +1,6 @@
 package consolecommands;
 
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.AdminService;
 import com.aionemu.gameserver.services.item.ItemService;
@@ -14,13 +13,13 @@ import com.aionemu.gameserver.utils.chathandlers.ConsoleCommand;
 public class Wishid extends ConsoleCommand {
 
 	public Wishid() {
-		super("wishid");
+		super("wishid", "Adds items.", "<count> <item id> - Adds the items to your target (or yourself).");
 	}
 
 	@Override
 	public void execute(Player admin, String... params) {
 		if (params.length < 2) {
-			info(admin, null);
+			sendInfo(admin);
 			return;
 		}
 
@@ -29,14 +28,10 @@ public class Wishid extends ConsoleCommand {
 			target = player;
 		}
 
-		long itemCount;
-		int itemId;
-
-		try {
-			itemCount = Long.parseLong(params[0]);
-			itemId = Integer.parseInt(params[1]);
-		} catch (NumberFormatException e) {
-			info(admin, null);
+		long itemCount = Long.parseLong(params[0]);
+		int itemId = Integer.parseInt(params[1]);
+		if (itemCount < 1) {
+			sendInfo(admin, "The count must be at least 1.");
 			return;
 		}
 
@@ -59,11 +54,6 @@ public class Wishid extends ConsoleCommand {
 		} else {
 			PacketSendUtility.sendMessage(admin, "Item couldn't be added");
 		}
-	}
-
-	@Override
-	public void info(Player admin, String message) {
-		PacketSendUtility.sendMessage(admin, "syntax ///wishid <Quantity> <item Id>");
 	}
 
 }

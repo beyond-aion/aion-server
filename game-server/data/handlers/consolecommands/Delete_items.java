@@ -13,42 +13,31 @@ import com.aionemu.gameserver.utils.chathandlers.ConsoleCommand;
 public class Delete_items extends ConsoleCommand {
 
 	public Delete_items() {
-		super("delete_items");
+		super("delete_items", "Deletes inventory items.",
+			"<item quality> - Deletes items up to the quality ID from your target's (or your) inventory.");
 	}
 
 	@Override
 	public void execute(Player admin, String... params) {
 		if (params.length < 1) {
-			info(admin, null);
+			sendInfo(admin);
 			return;
 		}
 
 		final Player player = admin.getTarget() instanceof Player target ? target : admin;
 
-		int quality;
-
-		try {
-			quality = Integer.parseInt(params[0]);
-		} catch (NumberFormatException e) {
-			PacketSendUtility.sendMessage(admin, "Parameters need to be an integer.");
-			return;
-		}
+		int quality = Integer.parseInt(params[0]);
 
 		if (quality < 0 || quality >= ItemQuality.values().length) {
-			PacketSendUtility.sendMessage(admin, "Invalid QualityId.");
+			PacketSendUtility.sendMessage(admin, "The quality ID must be between 0 and " + (ItemQuality.values().length - 1) + ".");
 			return;
 		}
 
 		for (Item item : player.getInventory().getItems()) {
-			if (item.getItemTemplate().getItemQuality().getQualityId() <= quality) {
+			if (!item.getItemTemplate().isKinah() && item.getItemTemplate().getItemQuality().getQualityId() <= quality) {
 				player.getInventory().delete(item, ItemDeleteType.DISCARD);
 			}
 		}
-	}
-
-	@Override
-	public void info(Player player, String message) {
-		PacketSendUtility.sendMessage(player, "syntax ///delete_items <item quality>");
 	}
 
 }

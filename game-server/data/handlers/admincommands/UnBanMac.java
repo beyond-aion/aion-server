@@ -11,13 +11,13 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 public class UnBanMac extends AdminCommand {
 
 	public UnBanMac() {
-		super("unbanmac");
+		super("unbanmac", "Removes a MAC ban.", "<mac> - Unbans the MAC address.");
 	}
 
 	@Override
 	public void execute(Player player, String... params) {
 		if (params == null || params.length < 1) {
-			info(player, null);
+			sendInfo(player);
 			return;
 		}
 
@@ -25,13 +25,8 @@ public class UnBanMac extends AdminCommand {
 		boolean result = BannedMacManager.getInstance().unbanAddress(address,
 			"uban;mac=" + address + ", " + player.getObjectId() + "; admin=" + player.getName());
 		if (result)
-			PacketSendUtility.sendMessage(player, "mac " + address + " has unbanned");
+			PacketSendUtility.sendMessage(player, "MAC " + address + " has been unbanned.");
 		else
-			PacketSendUtility.sendMessage(player, "mac " + address + " is not banned");
-	}
-
-	@Override
-	public void info(Player player, String message) {
-		PacketSendUtility.sendMessage(player, "Syntax: //unbanmac <mac>");
+			PacketSendUtility.sendMessage(player, "MAC " + address + " is not banned.");
 	}
 }

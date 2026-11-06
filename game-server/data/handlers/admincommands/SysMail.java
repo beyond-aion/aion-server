@@ -22,7 +22,14 @@ import com.aionemu.gameserver.world.World;
 public class SysMail extends AdminCommand {
 
 	public SysMail() {
-		super("sysmail");
+		super("sysmail", "Sends a system mail.", """
+			[%|$$<sender>] <recipient> <type> <item> <count> <kinah> [|title|] [|message|] - Sends the mail.
+			The sender name must start with % or $$ and can be omitted.
+			The recipient is a player name, or @all, @elyos or @asmodians for everyone online.
+			Mail types: 0 is regular, 1 is express (online players only), 2 is black cloud.
+			An item or count of 0 sends no item, kinah 0 sends no kinah.
+			The optional title and message must be enclosed in pipe chars.
+			""");
 	}
 
 	enum RecipientType {
@@ -49,7 +56,7 @@ public class SysMail extends AdminCommand {
 	@Override
 	public void execute(Player admin, String... params) {
 		if (params.length < 5) {
-			info(admin, null);
+			sendInfo(admin);
 			return;
 		}
 
@@ -62,7 +69,7 @@ public class SysMail extends AdminCommand {
 
 		if (paramValues[0].startsWith("$$") || paramValues[0].startsWith("%")) {
 			if (params.length < 6) {
-				info(admin, null);
+				sendInfo(admin);
 				return;
 			}
 			sender = paramValues[0];
@@ -91,21 +98,15 @@ public class SysMail extends AdminCommand {
 		int item = 0, count = 0, kinah = 0;
 		LetterType letterType;
 
-		try {
-			item = Integer.parseInt(paramValues[2]);
-			count = Integer.parseInt(paramValues[3]);
-			kinah = Integer.parseInt(paramValues[4]);
-			letterType = LetterType.getLetterTypeById(Integer.parseInt(paramValues[1]));
-		} catch (NumberFormatException e) {
-			PacketSendUtility.sendMessage(admin, "<Regular|Blackcloud|Express> <Item|Count|Kinah> value must be an integer.");
-			return;
-		}
+		item = Integer.parseInt(paramValues[2]);
+		count = Integer.parseInt(paramValues[3]);
+		kinah = Integer.parseInt(paramValues[4]);
+		letterType = LetterType.getLetterTypeById(Integer.parseInt(paramValues[1]));
 
 		if (letterType == LetterType.BLACKCLOUD)
 			sender = "$$CASH_ITEM_MAIL";
 
-		boolean express = checkExpress(admin, item, count, kinah, recipient, recipientType, letterType);
-		if (!express)
+		if (!validate(admin, item, count, kinah, recipient, recipientType, letterType))
 			return;
 
 		if (item <= 0)
@@ -149,11 +150,11 @@ public class SysMail extends AdminCommand {
 		}
 
 		if (item != 0) {
-			PacketSendUtility.sendMessage(admin, "You send to " + recipientType + (recipientType == RecipientType.PLAYER ? " " + recipient : "") + "\n"
-				+ "[item:" + item + "] Count:" + count + " Kinah:" + kinah + "\n" + "Letter send successfully.");
+			PacketSendUtility.sendMessage(admin, "Sent to " + recipientType + (recipientType == RecipientType.PLAYER ? " " + recipient : "") + "\n"
+				+ "[item:" + item + "] Count:" + count + " Kinah:" + kinah + "\n" + "Mail sent successfully.");
 		} else if (kinah > 0) {
-			PacketSendUtility.sendMessage(admin, "You send to " + recipientType + (recipientType == RecipientType.PLAYER ? " " + recipient : "") + "\n"
-				+ " Kinah:" + kinah + "\n" + "Letter send successfully.");
+			PacketSendUtility.sendMessage(admin, "Sent to " + recipientType + (recipientType == RecipientType.PLAYER ? " " + recipient : "") + "\n"
+				+ " Kinah:" + kinah + "\n" + "Mail sent successfully.");
 		}
 	}
 
@@ -189,45 +190,32 @@ public class SysMail extends AdminCommand {
 		return wordCount;
 	}
 
-	private static boolean checkExpress(Player admin, int item, int count, int kinah, String recipient, RecipientType recipientType,
+	private static boolean validate(Player admin, int item, int count, int kinah, String recipient, RecipientType recipientType,
 		LetterType letterType) {
-		boolean shouldExpress = false;
-
-		if (recipientType == null) {
-			PacketSendUtility.sendMessage(admin, "Please insert Recipient Type.\n" + "Recipient = player, @all, @elyos or @asmodians");
-			return false;
-		} else if (recipientType == RecipientType.PLAYER) {
-			if (letterType == LetterType.NORMAL) {
-				if (!PlayerDAO.isNameUsed(recipient)) {
-					PacketSendUtility.sendMessage(admin, "Could not find a Recipient by that name.");
-					return false;
-				}
-				shouldExpress = true;
-			} else if (letterType == LetterType.EXPRESS) {
+		if (recipientType == RecipientType.PLAYER) {
+			if (letterType == LetterType.EXPRESS) {
 				if (World.getInstance().getPlayer(recipient) == null) {
-					PacketSendUtility.sendMessage(admin, "This Recipient is offline.");
+					PacketSendUtility.sendMessage(admin, "Express mail can only be sent to online players.");
 					return false;
 				}
-				shouldExpress = true;
-			} else { // Black cloud
-				shouldExpress = World.getInstance().getPlayer(recipient) != null;
+			} else if (!PlayerDAO.isNameUsed(recipient)) {
+				PacketSendUtility.sendMessage(admin, "Could not find a recipient by that name.");
+				return false;
 			}
-		} else {
-			shouldExpress = letterType != LetterType.NORMAL;
 		}
 
 		if (item == 0 && count != 0) {
-			PacketSendUtility.sendMessage(admin, "Please insert Item Id..");
+			PacketSendUtility.sendMessage(admin, "Please insert an item ID.");
 			return false;
 		}
 
 		if (count == 0 && item != 0) {
-			PacketSendUtility.sendMessage(admin, "Please insert Item Count.");
+			PacketSendUtility.sendMessage(admin, "Please insert an item count.");
 			return false;
 		}
 
 		if (count <= 0 && item <= 0 && kinah <= 0) {
-			PacketSendUtility.sendMessage(admin, "Parameters <Item> <Count> <Kinah> are icorrect.");
+			PacketSendUtility.sendMessage(admin, "Nothing to send: item, count and kinah are all 0.");
 			return false;
 		}
 
@@ -239,7 +227,7 @@ public class SysMail extends AdminCommand {
 			}
 			long maxStackCount = itemTemplate.getMaxStackCount();
 			if (count > maxStackCount && maxStackCount != 0) {
-				PacketSendUtility.sendMessage(admin, "Please insert correct Item Count.");
+				PacketSendUtility.sendMessage(admin, "The item count exceeds the max stack count of " + maxStackCount + ".");
 				return false;
 			}
 		}
@@ -248,19 +236,10 @@ public class SysMail extends AdminCommand {
 			PacketSendUtility.sendMessage(admin, "Kinah value must be >= 0.");
 			return false;
 		} else if (kinah > 0 && letterType == LetterType.BLACKCLOUD) {
-			PacketSendUtility.sendMessage(admin, "Kinah attachment are not for black cloud letters!");
+			PacketSendUtility.sendMessage(admin, "Black cloud mail cannot contain kinah.");
 			return false;
 		}
-		return shouldExpress;
-	}
-
-	@Override
-	public void info(Player player, String message) {
-		PacketSendUtility.sendMessage(player, "No parameters detected.\n"
-			+ "Please use //sysmail [%|$$<Sender>] <Recipient> <Regular|Blackcloud|Express> <Item> <Count> <Kinah> [|Title|] [|Message|]\n"
-			+ "Sender name must start with % or $$. Can be ommitted.\n" + "Regular mail type is 0, Express mail type is 1, Blackcloud type is 2.\n"
-			+ "If parameters (Item, Count) = 0 than the item will not be send\n" + "If parameters (Kinah) = 0 not send Kinah\n"
-			+ "Recipient = Player name, @all, @elyos or @asmodians\n" + "Optional Title and Message must be enclosed within pipe chars");
+		return true;
 	}
 
 }

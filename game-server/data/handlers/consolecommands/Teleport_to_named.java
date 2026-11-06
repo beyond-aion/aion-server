@@ -18,13 +18,13 @@ import com.aionemu.gameserver.utils.xml.JAXBUtil;
 public class Teleport_to_named extends ConsoleCommand {
 
 	public Teleport_to_named() {
-		super("teleport_to_named");
+		super("teleport_to_named", "Teleports you to an NPC.", "<npc name> - Teleports you to the NPC with the name.");
 	}
 
 	@Override
 	public void execute(Player admin, String... params) {
 		if (params.length < 1) {
-			info(admin, null);
+			sendInfo(admin);
 			return;
 		}
 
@@ -34,15 +34,12 @@ public class Teleport_to_named extends ConsoleCommand {
 		NpcData data = JAXBUtil.deserialize(xml, NpcData.class);
 		NpcTemplate npcTemplate = data.getNpcTemplate(npcName);
 
-		if (npcTemplate != null) {
-			PacketSendUtility.sendMessage(admin, "Teleporting to Npc: " + npcTemplate.getTemplateId());
-			TeleportService.teleportToNpc(admin, npcTemplate.getTemplateId());
+		if (npcTemplate == null) {
+			sendInfo(admin, "There is no NPC named " + npcName + ".");
+			return;
 		}
-	}
-
-	@Override
-	public void info(Player admin, String message) {
-		PacketSendUtility.sendMessage(admin, "syntax ///teleport_to_named <named name>");
+		PacketSendUtility.sendMessage(admin, "Teleporting to NPC " + npcTemplate.getTemplateId() + ".");
+		TeleportService.teleportToNpc(admin, npcTemplate.getTemplateId());
 	}
 
 	@XmlAccessorType(XmlAccessType.NONE)

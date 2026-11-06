@@ -16,41 +16,28 @@ import com.aionemu.gameserver.world.World;
 public class AddSet extends AdminCommand {
 
 	public AddSet() {
-		super("addset");
+		super("addset", "Adds an item set.", """
+			<itemset ID> - Adds all items of the set to yourself.
+			<player> <itemset ID> - Adds all items of the set to the online player.
+			""");
 	}
 
 	@Override
 	public void execute(Player player, String... params) {
 		if (params.length == 0 || params.length > 2) {
-			info(player, null);
+			sendInfo(player);
 			return;
 		}
 
-		int itemSetId = 0;
-		Player receiver = null;
-
-		try {
-			itemSetId = Integer.parseInt(params[0]);
-			receiver = player;
-		} catch (NumberFormatException e) {
+		Player receiver = player;
+		if (params.length == 2) {
 			receiver = World.getInstance().getPlayer(Util.convertName(params[0]));
-
 			if (receiver == null) {
-				PacketSendUtility.sendMessage(player, "Could not find a player by that name.");
-				return;
-			}
-
-			try {
-				itemSetId = Integer.parseInt(params[1]);
-			} catch (NumberFormatException ex) {
-
-				PacketSendUtility.sendMessage(player, "You must give number to itemset ID.");
-				return;
-			} catch (Exception ex2) {
-				PacketSendUtility.sendMessage(player, "Occurs an error.");
+				sendInfo(player, "Player " + Util.convertName(params[0]) + " is not online.");
 				return;
 			}
 		}
+		int itemSetId = Integer.parseInt(params[params.length - 1]);
 
 		ItemSetTemplate itemSet = DataManager.ITEM_SET_DATA.getItemSetTemplate(itemSetId);
 		if (itemSet == null) {
@@ -72,14 +59,9 @@ public class AddSet extends AdminCommand {
 			}
 		}
 
-		PacketSendUtility.sendMessage(player, "Item Set added successfully");
-		PacketSendUtility.sendMessage(receiver, "admin gives you an item set");
-	}
-
-	@Override
-	public void info(Player player, String message) {
-		PacketSendUtility.sendMessage(player, "syntax //addset <player> <itemset ID>");
-		PacketSendUtility.sendMessage(player, "syntax //addset <itemset ID>");
+		PacketSendUtility.sendMessage(player, "Item set added successfully.");
+		if (receiver != player)
+			PacketSendUtility.sendMessage(receiver, "An admin gave you an item set.");
 	}
 
 }

@@ -235,14 +235,4 @@ public abstract class ChatCommand {
 			return String.valueOf(worldId);
 		return template.getL10nId() != 0 ? template.getL10n() : template.getName();
 	}
-
-	/**
-	 * Please use {@link #sendInfo(Player, String...)}.
-	 * Old commands still override this method to show syntax info and should be ported eventually.
-	 * TODO: remove this method when all commands are updated
-	 */
-	@Deprecated
-	protected void info(Player player, String message) {
-		throw new UnsupportedOperationException("Please don't call me and don't override me! Use sendInfo() instead. Syntax info can be initialized in constructor.");
-	}
 }
