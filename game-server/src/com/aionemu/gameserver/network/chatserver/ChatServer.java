@@ -39,6 +39,8 @@ public class ChatServer {
 	}
 
 	public void connect(NettyServer nettyServer) {
+		if (nettyServer.isShuttingDown()) // a retry that came due after the network was shut down
+			return;
 		if (csCon != null)
 			throw new IllegalStateException("Chat server is already connected.");
 

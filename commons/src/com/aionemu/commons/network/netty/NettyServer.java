@@ -93,6 +93,13 @@ public class NettyServer {
 	}
 
 	/**
+	 * @return True once {@link #shutdown()} has begun to stop the network threads, after which no connection can be made anymore.
+	 */
+	public boolean isShuttingDown() {
+		return ioGroup.isShuttingDown();
+	}
+
+	/**
 	 * Stops accepting connections, closes all connections after sending their pending data (or after a timeout), and stops the network threads.
 	 * Afterwards, every connection has queued its {@link NettyConnection#onDisconnect()} on its packet executor, unless a channel or a network
 	 * thread didn't stop in time. Every step waits a limited time only, because this runs in the shutdown hook, and the JVM can't exit while it

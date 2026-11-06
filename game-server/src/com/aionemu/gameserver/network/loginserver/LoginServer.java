@@ -57,6 +57,8 @@ public class LoginServer {
 	}
 
 	public void connect(NettyServer nettyServer) {
+		if (nettyServer.isShuttingDown()) // a retry that came due after the network was shut down
+			return;
 		if (lsCon != null)
 			throw new IllegalStateException("Login server is already connected.");
 
