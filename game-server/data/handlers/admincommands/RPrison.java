@@ -1,7 +1,5 @@
 package admincommands;
 
-import java.util.NoSuchElementException;
-
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.PunishmentService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -20,22 +18,21 @@ public class RPrison extends AdminCommand {
 
 	@Override
 	public void execute(Player admin, String... params) {
-		if (params.length == 0 || params.length > 2) {
+		if (params.length != 1) {
 			sendInfo(admin);
 			return;
 		}
 
-		try {
-			Player playerFromPrison = World.getInstance().getPlayer(Util.convertName(params[0]));
-
-			if (playerFromPrison != null) {
-				PunishmentService.setIsInPrison(playerFromPrison, false, 0, "");
-				PacketSendUtility.sendMessage(admin, "Player " + playerFromPrison.getName() + " removed from prison.");
-			}
-		} catch (NoSuchElementException nsee) {
-			sendInfo(admin);
-		} catch (Exception e) {
-			sendInfo(admin);
+		Player playerFromPrison = World.getInstance().getPlayer(Util.convertName(params[0]));
+		if (playerFromPrison == null) {
+			sendInfo(admin, "Player " + Util.convertName(params[0]) + " is not online.");
+			return;
 		}
+		if (!playerFromPrison.isInPrison()) {
+			sendInfo(admin, "Player " + playerFromPrison.getName() + " is not in prison.");
+			return;
+		}
+		PunishmentService.setIsInPrison(playerFromPrison, false, 0, "");
+		PacketSendUtility.sendMessage(admin, "Player " + playerFromPrison.getName() + " was released from prison.");
 	}
 }
