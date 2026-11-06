@@ -60,12 +60,6 @@ public class WeatherEntry {
 	@XmlElement(name = "sub")
 	private List<WeatherPhase> subWeathers;
 
-	@XmlAttribute(name = "attribute")
-	private WeatherAttribute attribute;
-
-	@XmlAttribute(name = "att_ranking")
-	private int attributeRanking;
-
 	@XmlAttribute(name = "state")
 	private WeatherState state;
 
@@ -167,14 +161,6 @@ public class WeatherEntry {
 	 */
 	public List<WeatherPhase> getSubWeathers() {
 		return subWeathers == null ? List.of() : subWeathers;
-	}
-
-	public WeatherAttribute getAttribute() {
-		return attribute;
-	}
-
-	public int getAttributeRanking() {
-		return attributeRanking;
 	}
 
 	/**

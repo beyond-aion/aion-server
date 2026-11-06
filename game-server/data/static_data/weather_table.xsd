@@ -30,9 +30,8 @@
 		<xs:attribute name="occur_delay" type="xs:int" />
 		<xs:attribute name="duration" type="xs:int" use="required" />
 		<xs:attribute name="duration_ex" type="xs:int" />
-		<xs:attribute name="attribute" type="WeatherAttribute" />
-		<xs:attribute name="att_ranking" type="xs:int" />
 		<xs:attribute name="state" type="WeatherState" />
+		<!-- Not imported: attribute (water/air/earth/fire) and att_ranking. They are only exposed to NPC scripts, and no script reads them. -->
 	</xs:complexType>
 	<xs:complexType name="WeatherPhase">
 		<xs:attribute name="name" type="xs:string" use="required" />
@@ -47,14 +46,6 @@
 			<xs:enumeration value="WIND" />
 			<xs:enumeration value="EARTHQUAKE" />
 			<xs:enumeration value="HEATHAZE" />
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="WeatherAttribute">
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="water" />
-			<xs:enumeration value="air" />
-			<xs:enumeration value="earth" />
-			<xs:enumeration value="fire" />
 		</xs:restriction>
 	</xs:simpleType>
 </xs:schema>
