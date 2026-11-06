@@ -15,11 +15,12 @@ import jakarta.xml.bind.annotation.XmlTransient;
 import jakarta.xml.bind.annotation.XmlType;
 
 /**
- * Weather of one world. Zone 0 is the weather of the whole map, zones 1..zone_count are the weather zones of the
- * map; a weather code is the position of its entry here, starting at 1.
+ * Weathers of one map. Zone 0 is the whole map, zones 1..zone_count are the weather zones of the map.
+ *
+ * @author Rolandas
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "WeatherTable", propOrder = { "entries" })
+@XmlType(name = "WeatherTable")
 public class WeatherTable {
 
 	@XmlElement(name = "weather")
@@ -75,9 +76,6 @@ public class WeatherTable {
 		return zoneCount;
 	}
 
-	/**
-	 * @return The weather with the given name, null if this world has none.
-	 */
 	public WeatherEntry getEntry(String name) {
 		return entriesByName == null ? null : entriesByName.get(name);
 	}

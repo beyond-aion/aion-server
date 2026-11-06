@@ -11,12 +11,12 @@ import jakarta.xml.bind.annotation.XmlTransient;
 import jakarta.xml.bind.annotation.XmlType;
 
 /**
- * One weather of a world: when it may start on its own, how long it and its phases last, and which weathers may
- * precede and follow it. A weather that only exists as a phase of another one has {@code occur_prob} 0 and is never
- * picked by the hourly roll.
+ * One weather of a map: when it may start, how long it and its phases last, and which weathers may precede and follow it.
+ *
+ * @author Rolandas
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "WeatherEntry", propOrder = { "sign", "remain", "subWeathers" })
+@XmlType(name = "WeatherEntry")
 public class WeatherEntry {
 
 	private static final int ALL_MONTHS = (1 << 12) - 1;
