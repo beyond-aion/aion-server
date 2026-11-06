@@ -84,7 +84,7 @@ public class GameServer {
 	public static final int START_TIME_SECONDS = (int) (ManagementFactory.getRuntimeMXBean().getStartTime() / 1000);
 	public static final VersionInfo versionInfo = new VersionInfo(GameServer.class);
 
-	private static NettyServer nettyServer;
+	private static volatile NettyServer nettyServer;
 
 	// TODO remove all this shit
 	private static int ELYOS_COUNT = 0;
@@ -246,8 +246,12 @@ public class GameServer {
 		}
 	}
 
+	/**
+	 * @return The open client connections, none once the network was shut down (admin commands may still run during the shutdown).
+	 */
 	public static Stream<AionConnection> findClientConnections() {
-		return nettyServer.findConnections(AionConnection.class);
+		NettyServer server = nettyServer;
+		return server == null ? Stream.empty() : server.findConnections(AionConnection.class);
 	}
 
 	private static boolean forceStaffClientsToServerSelectionScreen() {
