@@ -63,7 +63,7 @@
 	</appender>
 	<appender name="app_status_discord" class="com.aionemu.commons.logging.DiscordChannelAppender">
 		<encoder>
-			<pattern>%logger{0} [%thread]|${loginserver.log.status.discord.avatar_url}|%msg%replace(%n```qml%n%ex```){\r?\n```qml\r?\n```, ''}%nopex</pattern>
+			<pattern>%logger{0} [%thread]|${loginserver.log.status.discord.avatar_url}|%msg%replace(%n```yml%n%ex```){\r?\n```yml\r?\n```, ''}%nopex</pattern>
 		</encoder>
 		<webhookUrl>${loginserver.log.status.discord.webhook_url}</webhookUrl>
 		<userName_avatarUrl_msg_separator>\|</userName_avatarUrl_msg_separator>
