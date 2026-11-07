@@ -42,6 +42,7 @@ public class PlayerCommonData extends CreatureTemplate {
 	private boolean online;
 	private String note;
 	private int mapId;
+	private int instanceId = 1;
 	private float x, y, z;
 	private byte heading;
 	private int questExpands = 0;
@@ -368,6 +369,14 @@ public class PlayerCommonData extends CreatureTemplate {
 
 	public void setMapId(int mapId) {
 		this.mapId = mapId;
+	}
+
+	public int getInstanceId() {
+		return instanceId;
+	}
+
+	public void setInstanceId(int instanceId) {
+		this.instanceId = instanceId;
 	}
 
 	public float getX() {

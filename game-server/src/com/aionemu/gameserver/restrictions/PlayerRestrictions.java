@@ -47,6 +47,13 @@ public class PlayerRestrictions {
 		return true;
 	}
 
+	/**
+	 * @return true while the player glides or rides a flight path, the two stances in which the client greys out most actions
+	 */
+	public static boolean isGlidingOrUsingFlightPath(Player player) {
+		return player.isInGlidingState() || player.isUsingFlightTransporterOrWindstream();
+	}
+
 	public static boolean canUseSkill(Player player, Skill skill) {
 		if (player.isInPrison()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ACCUSE_TARGET_IS_NOT_VALID());
@@ -54,6 +61,11 @@ public class PlayerRestrictions {
 		}
 		VisibleObject target = player.getTarget();
 		SkillTemplate template = skill.getSkillTemplate();
+
+		if (player.isInGlidingState()) { // a cast does not start on a glide
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FLYING_DISABLE_2());
+			return false;
+		}
 
 		if (!checkFly(player) || player.getLifeStats().isAboutToDie() || player.isDead()) {
 			return false;
@@ -284,6 +296,12 @@ public class PlayerRestrictions {
 
 		if (player.getLifeStats().isAboutToDie() || player.isDead())
 			return false;
+
+		// gliding and riding a windstream or a flight transporter are the two states in which the client does not allow using items
+		if (isGlidingOrUsingFlightPath(player)) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FLYING_DISABLE_1());
+			return false;
+		}
 
 		if (player.getEffectController().isInAnyAbnormalState(AbnormalState.CANT_ATTACK_STATE)) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CAN_NOT_USE_ITEM_WHILE_IN_ABNORMAL_STATE());

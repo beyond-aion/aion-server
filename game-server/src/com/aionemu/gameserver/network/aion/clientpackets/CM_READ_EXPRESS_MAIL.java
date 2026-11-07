@@ -48,7 +48,7 @@ public class CM_READ_EXPRESS_MAIL extends AionClientPacket {
 				boolean haveUnreadBlackcloud = player.getMailbox().haveUnreadByType(LetterType.BLACKCLOUD);
 				if (player.getPostman() != null) {
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_POSTMAN_ALREADY_SUMMONED());
-				} else if (player.isFlying()) {
+				} else if (player.isFlying() || player.isUsingFlightTransporterOrWindstream()) {
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_POSTMAN_UNABLE_IN_FLIGHT());
 				} else if (!haveUnreadExpress && !haveUnreadBlackcloud) {
 					return;

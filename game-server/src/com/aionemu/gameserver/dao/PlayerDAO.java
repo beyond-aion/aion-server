@@ -21,6 +21,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Mailbox;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 import com.aionemu.gameserver.model.team.legion.LegionRank;
+import com.aionemu.gameserver.world.World;
 
 /**
  * Class that is responsible for storing/loading player data
@@ -44,6 +45,25 @@ public class PlayerDAO {
 		}
 	}
 
+	/**
+	 * An open world twin is stored as a world id of its own, so that the player returns to the same channel after a relog.
+	 */
+	private static int toStoredWorldId(Player player) {
+		int worldId = player.getWorldId();
+		if (!World.getInstance().isValidTwinId(worldId, player.getInstanceId()))
+			return worldId;
+		return worldId + player.getInstanceId() - 1;
+	}
+
+	/**
+	 * Splits the stored world id back into the map id and the channel. Everything else in the server only knows the map id.
+	 */
+	private static void applyStoredWorldId(PlayerCommonData cd, int storedWorldId) {
+		int channel = storedWorldId % 100;
+		cd.setMapId(storedWorldId - channel);
+		cd.setInstanceId(channel + 1);
+	}
+
 	public static void storePlayer(Player player) {
 		try (Connection con = DatabaseFactory.getConnection();
 				 PreparedStatement stmt = con.prepareStatement(
@@ -56,7 +76,7 @@ public class PlayerDAO {
 			stmt.setFloat(5, player.getY());
 			stmt.setFloat(6, player.getZ());
 			stmt.setInt(7, player.getHeading());
-			stmt.setInt(8, player.getWorldId());
+			stmt.setInt(8, toStoredWorldId(player));
 			stmt.setString(9, pcd.getGender().toString());
 			stmt.setString(10, pcd.getRace().toString());
 			stmt.setString(11, pcd.getPlayerClass().toString());
@@ -164,7 +184,7 @@ public class PlayerDAO {
 					cd.setY(resultSet.getFloat("y"));
 					cd.setZ(resultSet.getFloat("z"));
 					cd.setHeading(resultSet.getByte("heading"));
-					cd.setMapId(resultSet.getInt("world_id"));
+					applyStoredWorldId(cd, resultSet.getInt("world_id"));
 					cd.setWorldOwnerId(resultSet.getInt("world_owner"));
 					cd.setMentorFlagTime(resultSet.getInt("mentor_flag_time"));
 					cd.setLastTransferTime(resultSet.getLong("last_transfer_time"));

@@ -1,6 +1,9 @@
 package com.aionemu.gameserver.model.gameobjects;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.Objects;
+import java.util.Set;
+import java.util.TreeSet;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +19,6 @@ import com.aionemu.gameserver.model.items.storage.IStorage;
 import com.aionemu.gameserver.model.items.storage.ItemStorage;
 import com.aionemu.gameserver.model.items.storage.StorageType;
 import com.aionemu.gameserver.model.stats.calc.StatOwner;
-import com.aionemu.gameserver.model.stats.calc.functions.StatFunction;
 import com.aionemu.gameserver.model.templates.L10n;
 import com.aionemu.gameserver.model.templates.item.GodstoneInfo;
 import com.aionemu.gameserver.model.templates.item.Improvement;
@@ -61,7 +63,6 @@ public class Item extends AionObject implements Expirable, StatOwner, Persistabl
 	private long repurchasePrice;
 	private int activationCount = 0;
 	private ChargeInfo conditioningInfo;
-	private List<StatFunction> currentModifiers;
 	private int tuneCount = 0;
 	private RandomBonusEffect bonusStatsEffect;
 	private RandomBonusEffect fusionedItemBonusStatsEffect;
@@ -807,16 +808,6 @@ public class Item extends AionObject implements Expirable, StatOwner, Persistabl
 		return null;
 	}
 
-	public List<StatFunction> getCurrentModifiers() {
-		if (currentModifiers == null)
-			currentModifiers = new ArrayList<>();
-		return currentModifiers;
-	}
-
-	public void setCurrentModifiers(List<StatFunction> currentModifiers) {
-		getCurrentModifiers().clear();
-		getCurrentModifiers().addAll(currentModifiers);
-	}
 
 	public IdianStone getIdianStone() {
 		return idianStone;

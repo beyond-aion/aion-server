@@ -84,7 +84,7 @@ public class EngineerLahulahuAI extends AggressiveNpcAI implements HpPhases.Phas
 	}
 
 	private void useSkills() {
-		if (getPosition().isSpawned() && !isDead() && hpPhases.getCurrentPhase() > 0) {
+		if (getOwner().isSpawned() && !isDead() && hpPhases.getCurrentPhase() > 0) {
 			int rnd = Rnd.get(1, 8);
 			switch (rnd) {
 				case 1:

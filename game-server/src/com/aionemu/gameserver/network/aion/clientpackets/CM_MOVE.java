@@ -2,14 +2,17 @@ package com.aionemu.gameserver.network.aion.clientpackets;
 
 import java.util.Set;
 
+import com.aionemu.gameserver.controllers.FlyController;
 import com.aionemu.gameserver.controllers.movement.GlideFlag;
 import com.aionemu.gameserver.controllers.movement.MovementMask;
 import com.aionemu.gameserver.controllers.movement.PlayerMoveController;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.CustomPlayerState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.templates.flypath.FlightPath;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_BLINK;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_FORCED_MOVE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MOVE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_POSITION;
@@ -80,6 +83,12 @@ public class CM_MOVE extends AionClientPacket {
 			return;
 		if (handleBogusPacket(player))
 			return;
+		if (handleFlyingOutOfFlyZone(player))
+			return;
+		if (player.isUsingFlightPath(FlightPath.Type.WINDSTREAM)) {
+			// a wind path ends at its last point without a leave packet, so the first ordinary move means the path is over
+			player.getFlyController().leaveWindstream(false);
+		}
 
 		PlayerMoveController m = player.getMoveController();
 		boolean jumping = false;
@@ -96,7 +105,8 @@ public class CM_MOVE extends AionClientPacket {
 				m.glideFlag = glideFlag;
 				m.windBoxId = windBoxId;
 				player.getFlyController().switchToGliding();
-			}
+			} else // a move without the glide flag ends a running glide
+				player.getFlyController().onStopGliding();
 
 			if ((type & MovementMask.POSITION) == MovementMask.POSITION && (type & MovementMask.MANUAL) == MovementMask.MANUAL) { // start move or change direction
 				m.setNewDirection(x2, y2, z2, heading);
@@ -141,6 +151,7 @@ public class CM_MOVE extends AionClientPacket {
 			player.getController().stopProtectionActiveTask();
 		player.getMoveController().setIsJumping(jumping);
 		World.getInstance().updatePosition(player, x, y, z, heading);
+		player.getFlyController().onMove();
 		m.onMoveFromClient();
 		notifyControllers(player, oldMask);
 
@@ -157,6 +168,25 @@ public class CM_MOVE extends AionClientPacket {
 		} else {
 			m.stopFalling(z);
 		}
+	}
+
+	/**
+	 * Puts a flying player back to the position the server has when a move reports him outside a flight area. Clients can legitimately send such moves
+	 * when touching the ground on the border of a fly zone or when the GM free flight mode was disabled during flight outside a fly zone.<br>
+	 * Glide moves are handled by {@link FlyController#onMove()}: the player keeps gliding there, only the free flight ends.
+	 *
+	 * @return True if the move was refused and the player was put back.
+	 */
+	private boolean handleFlyingOutOfFlyZone(Player player) {
+		boolean gliding = (type & MovementMask.GLIDE) == MovementMask.GLIDE && (type & (MovementMask.POSITION | MovementMask.FALL)) != 0;
+		if (gliding || player.isInCustomState(CustomPlayerState.FREE_FLY_MODE) || !player.getFlyController().isFlyingOutOfFlyZone(x, y, z))
+			return false;
+		player.getMoveController().setIsJumping(false);
+		if (!player.getWorldMapInstance().isInsideFlyZone(player.getX(), player.getY(), player.getZ())) // the player was flying there in free flight mode before
+			player.getFlyController().endFly(true);
+		PacketSendUtility.sendPacket(player,
+			new SM_BLINK(player.getX(), player.getY(), player.getZ(), player.getHeading(), SM_BLINK.BlinkReason.FLY_ON_NO_FLY_AREA));
+		return true;
 	}
 
 	/**

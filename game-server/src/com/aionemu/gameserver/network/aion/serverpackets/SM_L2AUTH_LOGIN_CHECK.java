@@ -56,7 +56,7 @@ public class SM_L2AUTH_LOGIN_CHECK extends AionServerPacket {
 		writeH(DataManager.WORLD_MAPS_DATA.size());
 		for (WorldMapTemplate template : DataManager.WORLD_MAPS_DATA) {
 			writeD(template.getMapId());
-			writeH(template.isInstance() ? 0 : template.getTwinCount()); // for Fast-Track Server it's getBeginnerTwinCount()
+			writeH(template.isInstance() ? 0 : template.getTwinCount());
 		}
 		writeS(accountName);
 	}
