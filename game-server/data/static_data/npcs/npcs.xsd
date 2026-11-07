@@ -27,7 +27,6 @@
 		<xs:attribute name="title_id" type="xs:int" default="0"/>
 		<xs:attribute name="name" type="xs:string" default=""/>
 		<xs:attribute name="group_drop" type="GroupDropType" default="NONE"/>
-		<xs:attribute name="height" type="xs:float" default="0"/>
 		<xs:attribute name="ammo_speed" type="xs:int"/>
 		<xs:attribute name="rating" type="NpcRating"/>
 		<xs:attribute name="rank" type="NpcRank"/>
