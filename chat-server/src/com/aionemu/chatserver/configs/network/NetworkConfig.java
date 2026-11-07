@@ -3,6 +3,7 @@ package com.aionemu.chatserver.configs.network;
 import java.net.InetSocketAddress;
 
 import com.aionemu.commons.configuration.Property;
+import com.aionemu.commons.network.netty.Transport;
 
 public class NetworkConfig {
 
@@ -31,11 +32,17 @@ public class NetworkConfig {
 	public static String GAMESERVER_PASSWORD;
 
 	/**
+	 * Socket transport of the network threads. AUTO uses epoll on Linux and NIO elsewhere, any other value uses only that transport.
+	 */
+	@Property(key = "chatserver.network.transport", defaultValue = "AUTO")
+	public static Transport TRANSPORT;
+
+	/**
 	 * Number of threads dedicated to be doing io read & write. There is always 1 acceptor thread. If value is < 1 - acceptor thread will also handle
 	 * read & write. If value is > 0 - there will be given amount of read & write threads + 1 acceptor thread.
 	 */
-	@Property(key = "chatserver.network.nio.threads", defaultValue = "1")
-	public static int NIO_READ_WRITE_THREADS;
+	@Property(key = "chatserver.network.io_threads", defaultValue = "1")
+	public static int IO_THREADS;
 
 	/**
 	 * Time in seconds a client has to authenticate after connecting, before it gets disconnected.

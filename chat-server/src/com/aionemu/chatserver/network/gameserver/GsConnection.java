@@ -1,7 +1,5 @@
 package com.aionemu.chatserver.network.gameserver;
 
-import java.nio.ByteBuffer;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -10,6 +8,7 @@ import com.aionemu.chatserver.service.GameServerService;
 import com.aionemu.commons.network.netty.NettyConnection;
 import com.aionemu.commons.network.packet.BaseClientPacket;
 
+import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
 import io.netty.util.concurrent.EventExecutor;
 
@@ -32,12 +31,12 @@ public class GsConnection extends NettyConnection<GsServerPacket> {
 	}
 
 	@Override
-	protected BaseClientPacket<?> createPacket(ByteBuffer data) {
+	protected BaseClientPacket<?> createPacket(ByteBuf data) {
 		return GsPacketHandlerFactory.handle(data, this);
 	}
 
 	@Override
-	protected void writePacket(GsServerPacket packet, ByteBuffer buffer) {
+	protected void writePacket(GsServerPacket packet, ByteBuf buffer) {
 		packet.write(this, buffer);
 	}
 

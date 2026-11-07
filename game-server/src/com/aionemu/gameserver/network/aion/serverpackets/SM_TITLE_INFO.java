@@ -1,8 +1,10 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.title.Title;
-import com.aionemu.gameserver.model.gameobjects.player.title.TitleList;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
@@ -11,7 +13,8 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
  */
 public class SM_TITLE_INFO extends AionServerPacket {
 
-	private TitleList titleList;
+	// snapshot of the owner's titles, since the list is written on an I/O thread and may be changed by then
+	private List<Title> titles;
 	private int action; // 0: list, 1: self set, 3: broad set
 	private int titleId;
 	private int bonusTitleId;
@@ -19,7 +22,7 @@ public class SM_TITLE_INFO extends AionServerPacket {
 
 	public SM_TITLE_INFO(Player player) {
 		this.action = 0;
-		this.titleList = player.getTitleList();
+		this.titles = new ArrayList<>(player.getTitleList().getTitles());
 	}
 
 	public SM_TITLE_INFO(int titleId) {
@@ -55,8 +58,8 @@ public class SM_TITLE_INFO extends AionServerPacket {
 		switch (action) {
 			case 0:
 				writeC(0x00);
-				writeH(titleList.size());
-				for (Title title : titleList.getTitles()) {
+				writeH(titles.size());
+				for (Title title : titles) {
 					writeD(title.getId());
 					writeD(title.secondsUntilExpiration());
 				}

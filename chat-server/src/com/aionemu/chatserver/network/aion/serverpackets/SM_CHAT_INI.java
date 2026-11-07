@@ -8,15 +8,16 @@ import com.aionemu.chatserver.network.aion.AionConnection;
  */
 public class SM_CHAT_INI extends AbstractServerPacket {
 
-	public SM_CHAT_INI() {
-		super(0x31);
+	private final int msgIndex;
+
+	public SM_CHAT_INI(int msgIndex) {
+		super(0x4031);
+		this.msgIndex = msgIndex;
 	}
 
 	@Override
 	protected void writeImpl(AionConnection connection) {
-		writeC(getOpCode());
-		writeC(0x40);
-		writeD(0x02);
-		writeH(0x00);
+		writeD(msgIndex);
+		writeH(0); // result: 0 = ok, 3 = unsupported version
 	}
 }

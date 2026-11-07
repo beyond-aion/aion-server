@@ -14,6 +14,7 @@ import com.aionemu.commons.configs.CommonsConfig;
 import com.aionemu.commons.configs.DatabaseConfig;
 import com.aionemu.commons.configuration.ConfigurableProcessor;
 import com.aionemu.commons.configuration.Property;
+import com.aionemu.commons.network.netty.Transport;
 import com.aionemu.commons.utils.PropertiesUtils;
 
 import ch.qos.logback.classic.ClassicConstants;
@@ -48,11 +49,17 @@ public class Config {
 	public static int WRONG_LOGIN_BAN_TIME;
 
 	/**
+	 * Socket transport of the network threads. AUTO uses epoll on Linux and NIO elsewhere, any other value uses only that transport.
+	 */
+	@Property(key = "loginserver.network.transport", defaultValue = "AUTO")
+	public static Transport TRANSPORT;
+
+	/**
 	 * Number of threads dedicated to be doing io read & write. There is always 1 acceptor thread. If value is < 1 - acceptor thread will also handle
 	 * read & write. If value is > 0 - there will be given amount of read & write threads + 1 acceptor thread.
 	 */
-	@Property(key = "loginserver.network.nio.threads", defaultValue = "0")
-	public static int NIO_READ_WRITE_THREADS;
+	@Property(key = "loginserver.network.io_threads", defaultValue = "0")
+	public static int IO_THREADS;
 
 	/**
 	 * Time in seconds a client has to log in after connecting, before it gets disconnected.

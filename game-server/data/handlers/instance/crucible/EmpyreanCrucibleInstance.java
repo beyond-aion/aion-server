@@ -1,6 +1,5 @@
 package instance.crucible;
 
-import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -37,6 +36,8 @@ import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * @author xTz, Luzien, w4terbomb
@@ -1395,7 +1396,7 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 		}
 
 		@Override
-		public void writeMe(ByteBuffer buf) {
+		public void writeMe(ByteBuf buf) {
 			int playerCount = 0;
 			for (CruciblePlayerReward reward : instanceScore.getPlayerRewards()) {
 				if (playerCount == 6 || !present.contains(reward.getOwnerId()))

@@ -107,7 +107,11 @@ public class HousingBidService {
 		return houseBids;
 	}
 
-	public HouseBids.Bid bid(Player player, int listIndex, long bidOffer) {
+	/**
+	 * Bids of different players arrive on their own threads. Without the lock, two of them read the same highest bid and refund its owner twice, while
+	 * the bid that came in between is never refunded.
+	 */
+	public synchronized HouseBids.Bid bid(Player player, int listIndex, long bidOffer) {
 		HouseBids houseBids = bids.values().stream().filter(b -> b.getListIndex() == listIndex).findAny().orElse(null);
 		if (!isAllowedToBid(player, houseBids, bidOffer))
 			return null; // bid too low or bidding not allowed

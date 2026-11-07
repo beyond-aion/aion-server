@@ -1,12 +1,12 @@
 package com.aionemu.gameserver.network;
 
-import java.nio.ByteBuffer;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_VERSION_CHECK;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * Crypt will encrypt server packet and decrypt client packet.
@@ -55,25 +55,25 @@ public class Crypt {
 	}
 
 	/**
-	 * Decrypt client packet from this ByteBuffer.
+	 * Decrypt the client packet data between the buffer's reader and writer index.
 	 * 
 	 * @return true if decryption was successful.
 	 */
-	public final boolean decrypt(ByteBuffer buf) {
+	public final boolean decrypt(ByteBuf buf) {
 		return packetKey.decrypt(buf);
 	}
 
 	/**
-	 * Encrypt server packet from this ByteBuffer.
+	 * Encrypt the server packet data from the buffer's index (inclusive) to its writer index.
 	 */
-	public final void encrypt(ByteBuffer buf) {
+	public final void encrypt(ByteBuf buf, int index) {
 		if (!isEnabled) {
 			// first server packet (SM_KEY) is not encrypted because it sends the enciphered crypt key
 			isEnabled = true;
 			return;
 		}
 
-		packetKey.encrypt(buf);
+		packetKey.encrypt(buf, index);
 	}
 
 	/**

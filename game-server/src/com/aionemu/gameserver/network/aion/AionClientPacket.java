@@ -20,7 +20,7 @@ public abstract class AionClientPacket extends BaseClientPacket<AionConnection> 
 	private final Set<State> validStates;
 
 	/**
-	 * Constructs new client packet instance. ByteBuffer and ClientConnection should be later set manually, after using this constructor.
+	 * Constructs new client packet instance. The buffer and the connection should be set later, after using this constructor.
 	 * 
 	 * @param opcode
 	 *          packet id

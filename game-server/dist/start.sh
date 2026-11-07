@@ -8,7 +8,7 @@
 
 loop() {
   while true; do
-    java -Xms1024m -Xmx2560m -XX:+UseNUMA -XX:+UseCompactObjectHeaders $@ -cp "libs/*" com.aionemu.gameserver.GameServer
+    java -Xms1024m -Xmx2560m -XX:+UseNUMA -XX:+UseCompactObjectHeaders --enable-native-access=ALL-UNNAMED $@ -cp "libs/*" com.aionemu.gameserver.GameServer
     err=$?
     case $err in
       0) # regular shutdown

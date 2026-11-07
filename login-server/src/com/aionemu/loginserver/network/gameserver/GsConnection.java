@@ -1,6 +1,5 @@
 package com.aionemu.loginserver.network.gameserver;
 
-import java.nio.ByteBuffer;
 import java.util.concurrent.*;
 
 import org.slf4j.Logger;
@@ -13,6 +12,7 @@ import com.aionemu.loginserver.PingPongTask;
 import com.aionemu.loginserver.controller.AccountController;
 import com.aionemu.loginserver.network.factories.GsPacketHandlerFactory;
 
+import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
 
 /**
@@ -67,12 +67,12 @@ public class GsConnection extends NettyConnection<GsServerPacket> {
 	}
 
 	@Override
-	protected BaseClientPacket<?> createPacket(ByteBuffer data) {
+	protected BaseClientPacket<?> createPacket(ByteBuf data) {
 		return GsPacketHandlerFactory.handle(data, this);
 	}
 
 	@Override
-	protected void writePacket(GsServerPacket packet, ByteBuffer buffer) {
+	protected void writePacket(GsServerPacket packet, ByteBuf buffer) {
 		packet.write(this, buffer);
 	}
 

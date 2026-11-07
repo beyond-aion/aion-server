@@ -1,11 +1,11 @@
 package com.aionemu.gameserver.network.aion.instanceinfo;
 
-import java.nio.ByteBuffer;
-
 import com.aionemu.gameserver.model.instance.instancescore.PvPArenaScore;
 import com.aionemu.gameserver.model.instance.playerreward.PvPArenaPlayerReward;
 import com.aionemu.gameserver.model.templates.rewards.ArenaRewardItem;
 import com.aionemu.gameserver.model.templates.rewards.RewardItem;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * @author Neonm, Estrayl
@@ -22,7 +22,7 @@ public class ArenaScoreWriter extends InstanceScoreWriter<PvPArenaScore> {
 	}
 
 	@Override
-	public void writeMe(ByteBuffer buf) {
+	public void writeMe(ByteBuf buf) {
 		writePlayerScores(buf);
 		writeOwnerRewards(buf);
 		writeD(buf, 0); // Another instance buff id, possibly 'stageend_buff'
@@ -33,7 +33,7 @@ public class ArenaScoreWriter extends InstanceScoreWriter<PvPArenaScore> {
 		writeD(buf, rewardTable ? 1 : 0); // possible reward table
 	}
 
-	protected void writePlayerScores(ByteBuffer buf) {
+	protected void writePlayerScores(ByteBuf buf) {
 		int playerCount = 0;
 		for (PvPArenaPlayerReward apr : instanceScore.getPlayerRewards()) {
 			writeD(buf, apr.getOwnerId());
@@ -56,7 +56,7 @@ public class ArenaScoreWriter extends InstanceScoreWriter<PvPArenaScore> {
 			writeB(buf, new byte[92 * (12 - playerCount)]); // spaces
 	}
 
-	private void writeOwnerRewards(ByteBuffer buf) {
+	private void writeOwnerRewards(ByteBuf buf) {
 		PvPArenaPlayerReward arenaReward = instanceScore.getPlayerReward(ownerObjectId);
 		if (instanceScore.isRewarded() && instanceScore.canReward() && arenaReward != null) {
 			writeReward(buf, arenaReward.getAp());
@@ -70,7 +70,7 @@ public class ArenaScoreWriter extends InstanceScoreWriter<PvPArenaScore> {
 		}
 	}
 
-	private void writeReward(ByteBuffer buf, ArenaRewardItem rewardItem) {
+	private void writeReward(ByteBuf buf, ArenaRewardItem rewardItem) {
 		if (rewardItem.itemId() != 0)
 			writeD(buf, rewardItem.itemId());
 		writeD(buf, rewardItem.baseCount());
@@ -78,7 +78,7 @@ public class ArenaScoreWriter extends InstanceScoreWriter<PvPArenaScore> {
 		writeD(buf, rewardItem.rankingCount());
 	}
 
-	private void writeSimpleReward(ByteBuffer buf, RewardItem rewardItem) {
+	private void writeSimpleReward(ByteBuf buf, RewardItem rewardItem) {
 		if (rewardItem != null) {
 			writeD(buf, rewardItem.getId());
 			writeD(buf, (int) rewardItem.getCount());

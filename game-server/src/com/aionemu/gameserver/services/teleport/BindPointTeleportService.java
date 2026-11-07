@@ -1,7 +1,7 @@
 package com.aionemu.gameserver.services.teleport;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.slf4j.LoggerFactory;
 
@@ -27,7 +27,7 @@ public class BindPointTeleportService {
 	/**
 	 * player id - cooldown
 	 */
-	private static final Map<Integer, Cooldown> cooldowns = new HashMap<>();
+	private static final Map<Integer, Cooldown> cooldowns = new ConcurrentHashMap<>();
 
 	public static void onLogin(Player player) {
 		Cooldown cooldown = getCooldown(player);

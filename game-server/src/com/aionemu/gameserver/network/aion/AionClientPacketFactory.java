@@ -2,7 +2,6 @@ package com.aionemu.gameserver.network.aion;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.nio.ByteBuffer;
 import java.util.EnumSet;
 import java.util.Set;
 
@@ -14,6 +13,8 @@ import com.aionemu.gameserver.configs.network.NetworkConfig;
 import com.aionemu.gameserver.network.Crypt;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.clientpackets.*;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * @author Neon
@@ -280,10 +281,10 @@ public class AionClientPacketFactory {
 		}
 	}
 
-	public static AionClientPacket tryCreatePacket(ByteBuffer data, AionConnection client) {
+	public static AionClientPacket tryCreatePacket(ByteBuf data, AionConnection client) {
 		State state = client.getState();
-		int opcode = Crypt.decodeClientPacketOpcode(data.getShort() & 0xffff);
-		data.position(data.position() + 3); // skip static code (short) and secondary opcode (byte)
+		int opcode = Crypt.decodeClientPacketOpcode(data.readUnsignedShortLE());
+		data.skipBytes(3); // skip static code (short) and secondary opcode (byte)
 		PacketInfo<? extends AionClientPacket> packetInfo = opcode < 0 || opcode >= packets.length ? null : packets[opcode];
 		if (packetInfo == null) {
 			client.sendUnknownClientPacketInfo(opcode);
@@ -314,7 +315,7 @@ public class AionClientPacketFactory {
 			return validStates.contains(state);
 		}
 
-		private T newPacket(int opCode, ByteBuffer buffer, AionConnection con) {
+		private T newPacket(int opCode, ByteBuf buffer, AionConnection con) {
 			try {
 				T packet = packetConstructor.newInstance(opCode, validStates);
 				packet.setBuffer(buffer);

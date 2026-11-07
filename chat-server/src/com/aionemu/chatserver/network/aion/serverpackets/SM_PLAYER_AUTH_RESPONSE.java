@@ -8,16 +8,17 @@ import com.aionemu.chatserver.network.aion.AionConnection;
  */
 public class SM_PLAYER_AUTH_RESPONSE extends AbstractServerPacket {
 
-	public SM_PLAYER_AUTH_RESPONSE() {
-		super(0x02);
+	private final int msgIndex;
+
+	public SM_PLAYER_AUTH_RESPONSE(int msgIndex) {
+		super(0x4002);
+		this.msgIndex = msgIndex;
 	}
 
 	@Override
 	protected void writeImpl(AionConnection connection) {
-		writeC(getOpCode());
-		writeC(0x40); // ?
-		writeH(0x01); // ?
-		writeD(0x00); // ?
-		writeH(0x0822); // ?
+		writeD(msgIndex);
+		writeH(0); // result
+		writeH(0x0822); // start value of the client's packet sequence numbers
 	}
 }

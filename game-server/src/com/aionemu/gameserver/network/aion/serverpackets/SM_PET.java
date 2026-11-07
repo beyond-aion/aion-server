@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -73,7 +74,8 @@ public class SM_PET extends AionServerPacket {
 	 */
 	public SM_PET(Collection<PetCommonData> pets) {
 		this.action = PetAction.LOAD_PETS;
-		this.pets = pets;
+		// snapshot, the owner's pet list is written on an I/O thread and may be changed by then
+		this.pets = new ArrayList<>(pets);
 	}
 
 	public SM_PET(PetSpecialFunction specialFunction, boolean active) {

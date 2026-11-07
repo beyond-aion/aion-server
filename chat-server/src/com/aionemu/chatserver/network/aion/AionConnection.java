@@ -1,7 +1,5 @@
 package com.aionemu.chatserver.network.aion;
 
-import java.nio.ByteBuffer;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -10,6 +8,7 @@ import com.aionemu.chatserver.model.ChatClient;
 import com.aionemu.commons.network.netty.NettyConnection;
 import com.aionemu.commons.network.packet.BaseClientPacket;
 
+import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
 import io.netty.util.concurrent.EventExecutor;
 
@@ -33,12 +32,12 @@ public class AionConnection extends NettyConnection<AbstractServerPacket> {
 	}
 
 	@Override
-	protected BaseClientPacket<?> createPacket(ByteBuffer data) {
+	protected BaseClientPacket<?> createPacket(ByteBuf data) {
 		return ClientPacketHandler.handle(data, this);
 	}
 
 	@Override
-	protected void writePacket(AbstractServerPacket packet, ByteBuffer buffer) {
+	protected void writePacket(AbstractServerPacket packet, ByteBuf buffer) {
 		packet.write(this, buffer);
 	}
 

@@ -1,9 +1,9 @@
 package com.aionemu.gameserver.network.aion.iteminfo;
 
-import java.nio.ByteBuffer;
-
 import com.aionemu.gameserver.model.items.ItemSlot;
 import com.aionemu.gameserver.network.aion.iteminfo.ItemInfoBlob.ItemBlobType;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * This blob is sent for armors. It keeps info about slots that armor can be equipped to.
@@ -17,7 +17,7 @@ public class ArmorInfoBlobEntry extends ItemBlobEntry {
 	}
 
 	@Override
-	public void writeThisBlob(ByteBuffer buf) {
+	public void writeThisBlob(ByteBuf buf) {
 		writeQ(buf, ItemSlot.getSlotFor(ownerItem.getItemTemplate().getItemSlot()).getSlotIdMask());
 		writeQ(buf, 0); // TODO! secondary slot?
 		writeDyeInfo(buf, ownerItem.getItemColor()); // 4 bytes

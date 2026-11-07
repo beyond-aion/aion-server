@@ -163,12 +163,15 @@ public class DropService {
 		Set<DropItem> dropItems = DropRegistrationService.getInstance().getCurrentDropMap().get(npcObjectId);
 
 		Npc npc = (Npc) World.getInstance().findVisibleObject(npcObjectId);
-		if (npc != null) {
-			if (dropItems == null || dropItems.isEmpty()) {
-				npc.getController().delete();
-				return;
-			}
+		if (npc == null)
+			return;
+		if (dropItems == null || dropItems.isEmpty()) {
+			npc.getController().delete();
+			return;
+		}
 
+		// Who may loot from now on and which drops belong to everyone is changed by this player's thread while another one may already take an item
+		synchronized (dropNpc) {
 			RespawnService.scheduleDecayTask(npc, dropNpc.getRemaingDecayTime());
 
 			LootGroupRules lootGroupRules = dropNpc.getLootGroupRules();
@@ -185,8 +188,8 @@ public class DropService {
 					}
 				}
 			}
-			PacketSendUtility.broadcastPacket(npc, new SM_LOOT_STATUS(npcObjectId, Status.LOOT_ENABLE), dropNpc::isAllowedToLoot);
 		}
+		PacketSendUtility.broadcastPacket(npc, new SM_LOOT_STATUS(npcObjectId, Status.LOOT_ENABLE), dropNpc::isAllowedToLoot);
 	}
 
 	public boolean canDistribute(Player player, DropItem requestedItem) {
@@ -278,15 +281,20 @@ public class DropService {
 	}
 
 	public void requestDropItem(Player player, int npcObjectId, int itemIndex, boolean autoLoot) {
-
 		Set<DropItem> dropItems = DropRegistrationService.getInstance().getCurrentDropMap().get(npcObjectId);
 		DropNpc dropNpc = DropRegistrationService.getInstance().getDropRegistrationMap().get(npcObjectId);
-		DropItem requestedItem = null;
 		// drop was unregistered
-		if (dropItems == null || dropNpc == null) {
+		if (dropItems == null || dropNpc == null)
 			return;
+		// The item's count and winner are shared by all looters of this corpse, whose packets run on their own threads: two of them taking the same item
+		// at the same time would both get it, since each takes what it read from the count.
+		synchronized (dropNpc) {
+			requestDropItem(player, npcObjectId, itemIndex, autoLoot, dropItems, dropNpc);
 		}
+	}
 
+	private void requestDropItem(Player player, int npcObjectId, int itemIndex, boolean autoLoot, Set<DropItem> dropItems, DropNpc dropNpc) {
+		DropItem requestedItem = null;
 		synchronized (dropItems) {
 			for (DropItem dropItem : dropItems)
 				if (dropItem.getIndex() == itemIndex) {

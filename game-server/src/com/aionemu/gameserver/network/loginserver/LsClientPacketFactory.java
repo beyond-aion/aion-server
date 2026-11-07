@@ -2,7 +2,6 @@ package com.aionemu.gameserver.network.loginserver;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.nio.ByteBuffer;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,6 +13,8 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.commons.utils.NetworkUtils;
 import com.aionemu.gameserver.network.loginserver.LoginServerConnection.State;
 import com.aionemu.gameserver.network.loginserver.clientpackets.*;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * @author Neon
@@ -41,9 +42,9 @@ public class LsClientPacketFactory {
 		}
 	}
 
-	public static LsClientPacket tryCreatePacket(ByteBuffer data, LoginServerConnection client) {
+	public static LsClientPacket tryCreatePacket(ByteBuf data, LoginServerConnection client) {
 		State state = client.getState();
-		int opCode = data.get() & 0xff;
+		int opCode = data.readUnsignedByte();
 		PacketInfo<? extends LsClientPacket> packetInfo = packets.get(opCode);
 		if (packetInfo == null) {
 			log.warn("{} sent data with unknown opcode: 0x{}, state={}\n{}", client, "%02X".formatted(opCode), state, NetworkUtils.toHex(data));
@@ -71,7 +72,7 @@ public class LsClientPacketFactory {
 			return validStates.contains(state);
 		}
 
-		private T newPacket(int opCode, ByteBuffer buffer, LoginServerConnection con) {
+		private T newPacket(int opCode, ByteBuf buffer, LoginServerConnection con) {
 			try {
 				T packet = packetConstructor.newInstance(opCode);
 				packet.setBuffer(buffer);
