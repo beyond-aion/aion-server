@@ -1,12 +1,11 @@
 package com.aionemu.gameserver.utils;
 
 import java.awt.Color;
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -34,13 +33,6 @@ public class ChatUtil {
 	private static final char ASMO_NAME_PREFIX = '\uE053';
 	private static final char ELYOS_NAME_PREFIX = '\uE052';
 	private static final char CONTINUATION_MARK = '\u200B'; // zero-width space, which our client mod detects to skip the chat time prefix
-
-	/**
-	 * @return The value with at most two decimals. DecimalFormat isn't thread-safe, so every call creates its own.
-	 */
-	private static String format(float value) {
-		return new DecimalFormat(".##", DecimalFormatSymbols.getInstance(Locale.US)).format(value);
-	}
 
 	/**
 	 * @see #color(String, int, int, int)
@@ -426,5 +418,9 @@ public class ChatUtil {
 	 */
 	public static boolean isInvalidCharacter(int codePoint) {
 		return codePoint < 32 && codePoint != '\t' || codePoint == 127;
+	}
+
+	private static String format(float number) {
+		return BigDecimal.valueOf(number).setScale(2, RoundingMode.HALF_UP).stripTrailingZeros().toPlainString();
 	}
 }
