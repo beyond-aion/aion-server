@@ -179,7 +179,7 @@ public class CM_MOVE extends AionClientPacket {
 	 */
 	private boolean handleFlyingOutOfFlyZone(Player player) {
 		boolean gliding = (type & MovementMask.GLIDE) == MovementMask.GLIDE && (type & (MovementMask.POSITION | MovementMask.FALL)) != 0;
-		if (gliding || !player.getFlyController().isFlyingOutOfFlyZone(x, y, z))
+		if (gliding || player.isInCustomState(CustomPlayerState.FREE_FLY_MODE) || !player.getFlyController().isFlyingOutOfFlyZone(x, y, z))
 			return false;
 		player.getMoveController().setIsJumping(false);
 		if (!player.getWorldMapInstance().isInsideFlyZone(player.getX(), player.getY(), player.getZ())) // the player was flying there in free flight mode before

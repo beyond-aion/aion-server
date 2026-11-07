@@ -14,7 +14,10 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.gameserver.GameServer;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.handler.ShoutEventHandler;
-import com.aionemu.gameserver.configs.main.*;
+import com.aionemu.gameserver.configs.main.CustomConfig;
+import com.aionemu.gameserver.configs.main.GSConfig;
+import com.aionemu.gameserver.configs.main.HTMLConfig;
+import com.aionemu.gameserver.configs.main.MembershipConfig;
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
 import com.aionemu.gameserver.controllers.observer.StanceObserver;
 import com.aionemu.gameserver.custom.pvpmap.PvpMapService;
@@ -635,7 +638,7 @@ public class PlayerController extends CreatureController<Player> {
 		Player player = getOwner();
 		FlightPath flightPath = player.getFlightPath();
 		if (player.isUsingFlightPath(FlightPath.Type.WINDSTREAM)) {
-			// the last point of a wind path is a fall, not a glide: the client reports it with the land action and drops there
+			// the last point of a wind path is a fall, not a glide, but the client immediately sends a CM_MOVE glide packet and keeps the player gliding
 			player.getFlyController().leaveWindstream(false);
 			return;
 		}

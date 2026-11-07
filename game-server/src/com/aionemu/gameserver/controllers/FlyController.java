@@ -51,7 +51,7 @@ public class FlyController {
 	 * @return True if the player is in free flight and the given position is outside the flight areas of the world.
 	 */
 	public boolean isFlyingOutOfFlyZone(float x, float y, float z) {
-		return player.isInFlyingState() && !player.isInCustomState(CustomPlayerState.FREE_FLY_MODE) && !player.getWorldMapInstance().isInsideFlyZone(x, y, z);
+		return player.isInFlyingState() && !player.getWorldMapInstance().isInsideFlyZone(x, y, z);
 	}
 
 	/**
@@ -184,8 +184,7 @@ public class FlyController {
 			player.setFlyState(FlyState.GLIDING);
 			player.setState(CreatureState.GLIDING);
 			player.getLifeStats().triggerFpReduce();
-		} else
-			// nothing restarts a cooldown on a fall, so the one left from the takeoff that led into the path must not block him either
+		} else // the client clears the cooldown when falling out of the windstream path (e.g. by closing wings)
 			player.setFlyReuseTime(0);
 		player.getGameStats().updateStatsAndSpeedVisually();
 		return gliding;

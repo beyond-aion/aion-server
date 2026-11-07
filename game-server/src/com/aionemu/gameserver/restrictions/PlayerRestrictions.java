@@ -297,8 +297,7 @@ public class PlayerRestrictions {
 		if (player.getLifeStats().isAboutToDie() || player.isDead())
 			return false;
 
-		// gliding and riding a windstream or a flight transporter are the two states in which the client greys the inventory out;
-		// free flight keeps it usable
+		// gliding and riding a windstream or a flight transporter are the two states in which the client does not allow using items
 		if (isGlidingOrUsingFlightPath(player)) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FLYING_DISABLE_1());
 			return false;
