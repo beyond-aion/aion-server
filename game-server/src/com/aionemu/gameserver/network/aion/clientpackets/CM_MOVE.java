@@ -2,14 +2,17 @@ package com.aionemu.gameserver.network.aion.clientpackets;
 
 import java.util.Set;
 
+import com.aionemu.gameserver.controllers.FlyController;
 import com.aionemu.gameserver.controllers.movement.GlideFlag;
 import com.aionemu.gameserver.controllers.movement.MovementMask;
 import com.aionemu.gameserver.controllers.movement.PlayerMoveController;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.CustomPlayerState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.templates.flypath.FlightPath;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_BLINK;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_FORCED_MOVE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MOVE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_POSITION;
@@ -29,8 +32,8 @@ public class CM_MOVE extends AionClientPacket {
 	private byte heading;
 	private float x, y, z, x2, y2, z2, vehicleX, vehicleY, vehicleZ, vectorX, vectorY, vectorZ;
 	private byte glideFlag;
-	private int unk1, unk2;
-	private int geyserLocationId;
+	private int vehicleId, vehiclePartId;
+	private int windBoxId;
 
 	public CM_MOVE(int opcode, Set<State> validStates) {
 		super(opcode, validStates);
@@ -60,13 +63,13 @@ public class CM_MOVE extends AionClientPacket {
 			}
 		}
 		if ((type & MovementMask.GLIDE) == MovementMask.GLIDE) {
-			glideFlag = readC();
-			if (glideFlag == GlideFlag.GEYSER)
-				geyserLocationId = readUC(); // locationId from windstreams.xml
+			int first = readUC(); // the flag in the upper half, with a wind box the top four bits of its twelve bit id in the lower half
+			glideFlag = (byte) (first & 0xF0);
+			windBoxId = (glideFlag & GlideFlag.WIND_BOX) == 0 ? 0 : (first & 0x0F) << 8 | readUC();
 		}
 		if ((type & MovementMask.VEHICLE) == MovementMask.VEHICLE) {
-			unk1 = readD();
-			unk2 = readD();
+			vehicleId = readD();
+			vehiclePartId = readD();
 			vehicleX = readF();
 			vehicleY = readF();
 			vehicleZ = readF();
@@ -80,6 +83,12 @@ public class CM_MOVE extends AionClientPacket {
 			return;
 		if (handleBogusPacket(player))
 			return;
+		if (handleFlyingOutOfFlyZone(player))
+			return;
+		if (player.isUsingFlightPath(FlightPath.Type.WINDSTREAM)) {
+			// a wind path ends at its last point without a leave packet, so the first ordinary move means the path is over
+			player.getFlyController().leaveWindstream(false);
+		}
 
 		PlayerMoveController m = player.getMoveController();
 		boolean jumping = false;
@@ -94,9 +103,10 @@ public class CM_MOVE extends AionClientPacket {
 					&& (type & MovementMask.VEHICLE) != MovementMask.VEHICLE && z2 > z;
 			if ((type & MovementMask.GLIDE) == MovementMask.GLIDE) {
 				m.glideFlag = glideFlag;
-				m.geyserLocationId = geyserLocationId;
+				m.windBoxId = windBoxId;
 				player.getFlyController().switchToGliding();
-			}
+			} else // a move without the glide flag ends a running glide
+				player.getFlyController().onStopGliding();
 
 			if ((type & MovementMask.POSITION) == MovementMask.POSITION && (type & MovementMask.MANUAL) == MovementMask.MANUAL) { // start move or change direction
 				m.setNewDirection(x2, y2, z2, heading);
@@ -122,8 +132,8 @@ public class CM_MOVE extends AionClientPacket {
 			}
 
 			if ((type & MovementMask.VEHICLE) == MovementMask.VEHICLE) {
-				m.unk1 = unk1;
-				m.unk2 = unk2;
+				m.vehicleId = vehicleId;
+				m.vehiclePartId = vehiclePartId;
 				m.vehicleX = vehicleX;
 				m.vehicleY = vehicleY;
 				m.vehicleZ = vehicleZ;
@@ -141,19 +151,52 @@ public class CM_MOVE extends AionClientPacket {
 			player.getController().stopProtectionActiveTask();
 		player.getMoveController().setIsJumping(jumping);
 		World.getInstance().updatePosition(player, x, y, z, heading);
+		player.getFlyController().onMove();
 		m.onMoveFromClient();
 		notifyControllers(player, oldMask);
 
-		if ((type & MovementMask.POSITION) == MovementMask.POSITION && (type & MovementMask.MANUAL) == MovementMask.MANUAL
-			|| type == MovementMask.IMMEDIATE)
+		if (isSeenByOthers())
 			PacketSendUtility.broadcastToSightedPlayers(player, new SM_MOVE(player));
 
 		if ((type & MovementMask.FALL) == MovementMask.FALL) {
-			player.getFlyController().onStopGliding();
-			m.updateFalling(z);
+			if ((type & MovementMask.VEHICLE) == MovementMask.VEHICLE) {
+				m.restartFalling(z);
+			} else {
+				player.getFlyController().onStopGliding();
+				m.updateFalling(z);
+			}
 		} else {
 			m.stopFalling(z);
 		}
+	}
+
+	/**
+	 * Puts a flying player back to the position the server has when a move reports him outside a flight area. Clients can legitimately send such moves
+	 * when touching the ground on the border of a fly zone or when the GM free flight mode was disabled during flight outside a fly zone.<br>
+	 * Glide moves are handled by {@link FlyController#onMove()}: the player keeps gliding there, only the free flight ends.
+	 *
+	 * @return True if the move was refused and the player was put back.
+	 */
+	private boolean handleFlyingOutOfFlyZone(Player player) {
+		boolean gliding = (type & MovementMask.GLIDE) == MovementMask.GLIDE && (type & (MovementMask.POSITION | MovementMask.FALL)) != 0;
+		if (gliding || player.isInCustomState(CustomPlayerState.FREE_FLY_MODE) || !player.getFlyController().isFlyingOutOfFlyZone(x, y, z))
+			return false;
+		player.getMoveController().setIsJumping(false);
+		if (!player.getWorldMapInstance().isInsideFlyZone(player.getX(), player.getY(), player.getZ())) // the player was flying there in free flight mode before
+			player.getFlyController().endFly(true);
+		PacketSendUtility.sendPacket(player,
+			new SM_BLINK(player.getX(), player.getY(), player.getZ(), player.getHeading(), SM_BLINK.BlinkReason.FLY_ON_NO_FLY_AREA));
+		return true;
+	}
+
+	/**
+	 * While running or falling the client keeps reporting its position on its own. Those reports are not passed on, every other move is: a
+	 * start or turn (position and manual flags together), a stop, also on a vehicle, and a glide change.
+	 */
+	private boolean isSeenByOthers() {
+		boolean startOrTurn = (type & (MovementMask.POSITION | MovementMask.MANUAL)) == (MovementMask.POSITION | MovementMask.MANUAL);
+		boolean runningOrFalling = (type & (MovementMask.POSITION | MovementMask.FALL)) != 0;
+		return startOrTurn || !runningOrFalling;
 	}
 
 	private boolean handleBogusPacket(Player player) {
@@ -204,6 +247,6 @@ public class CM_MOVE extends AionClientPacket {
 	public String toString() {
 		return "CM_MOVE [type=" + (type & 0xFF) + ", heading=" + heading + ", x=" + x + ", y=" + y + ", z=" + z + ", x2=" + x2 + ", y2=" + y2 + ", z2="
 			+ z2 + ", vehicleX=" + vehicleX + ", vehicleY=" + vehicleY + ", vehicleZ=" + vehicleZ + ", vectorX=" + vectorX + ", vectorY=" + vectorY
-			+ ", vectorZ=" + vectorZ + ", glideFlag=" + glideFlag + ", unk1=" + unk1 + ", unk2=" + unk2 + "]";
+			+ ", vectorZ=" + vectorZ + ", glideFlag=" + glideFlag + ", vehicleId=" + vehicleId + ", vehiclePartId=" + vehiclePartId + "]";
 	}
 }

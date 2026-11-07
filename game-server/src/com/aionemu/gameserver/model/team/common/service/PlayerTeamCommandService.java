@@ -24,15 +24,27 @@ public class PlayerTeamCommandService {
 		if (team == null) // team might have been disbanded or player can have been kicked out of his team by the time the packet arrived 
 			return;
 		switch (command) {
-			case GROUP_BAN_MEMBER:
+			case GROUP_BAN_MEMBER: {
+				if (!team.isLeader(player))
+					return;
 				PlayerGroupService.banPlayer(findMember(team, player, memberObjId), player);
 				break;
-			case GROUP_SET_LEADER:
-				PlayerGroupService.changeLeader(findMember(team, player, memberObjId));
+			}
+			case GROUP_SET_LEADER: {
+				if (!team.isLeader(player))
+					return;
+				Player newLeader = findMember(team, player, memberObjId);
+				if (!team.isLeader(newLeader))
+					PlayerGroupService.changeLeader(newLeader);
 				break;
-			case GROUP_REMOVE_MEMBER:
+			}
+			case GROUP_REMOVE_MEMBER: {
+				// This is the client's "leave group"; kicking another member is GROUP_BAN_MEMBER.
+				if (memberObjId != 0 && memberObjId != player.getObjectId())
+					return;
 				PlayerGroupService.removePlayer(findMember(team, player, memberObjId));
 				break;
+			}
 			case GROUP_START_MENTORING:
 				PlayerGroupService.startMentoring(player);
 				break;
@@ -42,12 +54,18 @@ public class PlayerTeamCommandService {
 			case ALLIANCE_LEAVE:
 				PlayerAllianceService.removePlayer(player);
 				break;
-			case ALLIANCE_BAN_MEMBER:
+			case ALLIANCE_BAN_MEMBER: {
 				PlayerAllianceService.banPlayer(findMember(team, player, memberObjId), player);
 				break;
-			case ALLIANCE_SET_CAPTAIN:
-				PlayerAllianceService.changeLeader(findMember(team, player, memberObjId));
+			}
+			case ALLIANCE_SET_CAPTAIN: {
+				if (!team.isLeader(player))
+					return;
+				Player newCaptain = findMember(team, player, memberObjId);
+				if (!team.isLeader(newCaptain))
+					PlayerAllianceService.changeLeader(newCaptain);
 				break;
+			}
 			case ALLIANCE_CHECKREADY_CANCEL:
 			case ALLIANCE_CHECKREADY_START:
 			case ALLIANCE_CHECKREADY_AUTOCANCEL:
@@ -56,21 +74,32 @@ public class PlayerTeamCommandService {
 				PlayerAllianceService.checkReady(player, command);
 				break;
 			case ALLIANCE_SET_VICECAPTAIN:
-				PlayerAllianceService.changeViceCaptain(findMember(team, player, memberObjId), AssignType.PROMOTE);
+			case ALLIANCE_UNSET_VICECAPTAIN: {
+				if (!team.isLeader(player))
+					return;
+				PlayerAllianceService.changeViceCaptain(findMember(team, player, memberObjId),
+					command == TeamCommand.ALLIANCE_SET_VICECAPTAIN ? AssignType.PROMOTE : AssignType.DEMOTE);
 				break;
-			case ALLIANCE_UNSET_VICECAPTAIN:
-				PlayerAllianceService.changeViceCaptain(findMember(team, player, memberObjId), AssignType.DEMOTE);
+			}
+			case LEAGUE_LEAVE: {
+				// Only the leader of the alliance may take it out of the league.
+				PlayerAlliance alliance = player.getPlayerAlliance();
+				if (!team.isLeader(player) || alliance == null || alliance.getLeague() == null)
+					return;
+				LeagueService.removeAlliance(alliance);
 				break;
-			case LEAGUE_LEAVE:
-				LeagueService.removeAlliance(player.getPlayerAlliance());
-				break;
+			}
 			case LEAGUE_EXPEL:
 				LeagueService.expelAlliance(findLeagueAlliance(team, player, memberObjId), player);
 				break;
-			case LEAGUE_SET_LEADER:
+			case LEAGUE_SET_LEADER: {
+				PlayerAlliance ownAlliance = player.getPlayerAlliance();
+				if (ownAlliance == null || ownAlliance.getLeague() == null || !ownAlliance.getLeague().isLeader(ownAlliance))
+					return;
 				PlayerAlliance leagueAlliance = findLeagueAlliance(team, player, memberObjId).getObject();
 				LeagueService.setLeader(player, leagueAlliance.getLeaderObject());
 				break;
+			}
 		}
 	}
 

@@ -40,9 +40,10 @@ public class CM_REGISTER_BROKER_ITEM extends AionClientPacket {
 		if (player.isTrading() || itemCount <= 0)
 			return;
 
-		if (player.isTargetingNpcWithFunction(brokerObjId, DialogAction.OPEN_VENDOR))
-			BrokerService.getInstance().registerItem(player, itemUniqueId, itemCount, price, splittingAvailable);
-		else
-			AuditLogger.log(player, "tried to register a broker item without targeting a broker");
+		if (!player.isTargetingNpcWithFunctionNearby(brokerObjId, DialogAction.OPEN_VENDOR)) {
+			AuditLogger.log(player, "tried to register a broker item without targeting a broker in range");
+			return;
+		}
+		BrokerService.getInstance().registerItem(player, itemUniqueId, itemCount, price, splittingAvailable);
 	}
 }

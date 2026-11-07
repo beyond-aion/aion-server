@@ -6,11 +6,12 @@ import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.ai.handler.FollowEventHandler;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.questEngine.task.checker.ZoneChecker;
 
 /**
  * @author ATracer
  */
-@AIName("following")
+@AIName(ZoneChecker.FOLLOWING_AI_NAME)
 public class FollowingNpcAI extends GeneralNpcAI {
 
 	public FollowingNpcAI(Npc owner) {

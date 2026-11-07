@@ -3,69 +3,69 @@
 	<!-- From Sniff -->
 	<windstream mapid="900030000">
 		<locations>
-			<location id="76" state="1" fly_path="ONE_WAY"/>
+			<location id="76" state="1" fly_path="WIND_PATH"/>
 		</locations>
 	</windstream>
 	<windstream mapid="210050000">
 		<locations>
-			<location id="100" state="1" fly_path="GEYSER"/>
-			<location id="101" state="1" fly_path="GEYSER"/>
-			<location id="102" state="0" fly_path="GEYSER"/>
-			<location id="110" state="1" fly_path="GEYSER"/>
-			<location id="120" state="1" fly_path="GEYSER"/>
-			<location id="130" state="1" fly_path="GEYSER"/>
-			<location id="150" state="1" fly_path="GEYSER"/>
-			<location id="200" state="1" fly_path="GEYSER"/>
-			<location id="201" state="1" fly_path="GEYSER"/>
-			<location id="77" state="1" fly_path="ONE_WAY"/>
-			<location id="78" state="1" fly_path="ONE_WAY"/>
-			<location id="80" state="1" fly_path="ONE_WAY"/>
-			<location id="81" state="1" fly_path="ONE_WAY"/>
-			<location id="89" state="1" fly_path="ONE_WAY"/>
-			<location id="90" state="1" fly_path="ONE_WAY"/>
-			<location id="92" state="1" fly_path="ONE_WAY"/>
-			<location id="93" state="1" fly_path="ONE_WAY"/>
-			<location id="94" state="1" fly_path="ONE_WAY"/>
-			<location id="95" state="1" fly_path="ONE_WAY"/>
-			<location id="146" state="1" fly_path="ONE_WAY"/>
-			<location id="152" state="1" fly_path="ONE_WAY"/>
-			<location id="153" state="1" fly_path="ONE_WAY"/>
-			<location id="154" state="1" fly_path="ONE_WAY"/>
+			<location id="100" state="1" fly_path="WIND_BOX"/>
+			<location id="101" state="1" fly_path="WIND_BOX"/>
+			<location id="102" state="0" fly_path="WIND_BOX"/>
+			<location id="110" state="1" fly_path="WIND_BOX"/>
+			<location id="120" state="1" fly_path="WIND_BOX"/>
+			<location id="130" state="1" fly_path="WIND_BOX"/>
+			<location id="150" state="1" fly_path="WIND_BOX"/>
+			<location id="200" state="1" fly_path="WIND_BOX"/>
+			<location id="201" state="1" fly_path="WIND_BOX"/>
+			<location id="77" state="1" fly_path="WIND_PATH"/>
+			<location id="78" state="1" fly_path="WIND_PATH"/>
+			<location id="80" state="1" fly_path="WIND_PATH"/>
+			<location id="81" state="1" fly_path="WIND_PATH"/>
+			<location id="89" state="1" fly_path="WIND_PATH"/>
+			<location id="90" state="1" fly_path="WIND_PATH"/>
+			<location id="92" state="1" fly_path="WIND_PATH"/>
+			<location id="93" state="1" fly_path="WIND_PATH"/>
+			<location id="94" state="1" fly_path="WIND_PATH"/>
+			<location id="95" state="1" fly_path="WIND_PATH"/>
+			<location id="146" state="1" fly_path="WIND_PATH"/>
+			<location id="152" state="1" fly_path="WIND_PATH"/>
+			<location id="153" state="1" fly_path="WIND_PATH"/>
+			<location id="154" state="1" fly_path="WIND_PATH"/>
 		</locations>
 	</windstream>
 	<windstream mapid="220070000">
 		<locations>
-			<location id="1" state="1" fly_path="TWO_WAY"/>
-			<location id="31" state="1" fly_path="TWO_WAY"/>
-			<location id="2" state="1" fly_path="GEYSER"/>
-			<location id="3" state="1" fly_path="GEYSER"/>
-			<location id="4" state="1" fly_path="GEYSER"/>
-			<location id="79" state="1" fly_path="ONE_WAY"/>
-			<location id="82" state="1" fly_path="ONE_WAY"/>
-			<location id="83" state="1" fly_path="ONE_WAY"/>
-			<location id="84" state="1" fly_path="ONE_WAY"/>
-			<location id="91" state="1" fly_path="ONE_WAY"/>
-			<location id="147" state="1" fly_path="ONE_WAY"/>
-			<location id="148" state="1" fly_path="ONE_WAY"/>
-			<location id="149" state="1" fly_path="ONE_WAY"/>
-			<location id="150" state="1" fly_path="ONE_WAY"/>
-			<location id="151" state="1" fly_path="ONE_WAY"/>
-			<location id="155" state="1" fly_path="ONE_WAY"/>
-			<location id="156" state="1" fly_path="ONE_WAY"/>
-			<location id="157" state="1" fly_path="ONE_WAY"/>
+			<location id="1" state="1" fly_path="MOVING_COLLISION"/>
+			<location id="31" state="1" fly_path="MOVING_COLLISION"/>
+			<location id="2" state="1" fly_path="WIND_BOX"/>
+			<location id="3" state="1" fly_path="WIND_BOX"/>
+			<location id="4" state="1" fly_path="WIND_BOX"/>
+			<location id="79" state="1" fly_path="WIND_PATH"/>
+			<location id="82" state="1" fly_path="WIND_PATH"/>
+			<location id="83" state="1" fly_path="WIND_PATH"/>
+			<location id="84" state="1" fly_path="WIND_PATH"/>
+			<location id="91" state="1" fly_path="WIND_PATH"/>
+			<location id="147" state="1" fly_path="WIND_PATH"/>
+			<location id="148" state="1" fly_path="WIND_PATH"/>
+			<location id="149" state="1" fly_path="WIND_PATH"/>
+			<location id="150" state="1" fly_path="WIND_PATH"/>
+			<location id="151" state="1" fly_path="WIND_PATH"/>
+			<location id="155" state="1" fly_path="WIND_PATH"/>
+			<location id="156" state="1" fly_path="WIND_PATH"/>
+			<location id="157" state="1" fly_path="WIND_PATH"/>
 		</locations>
 	</windstream>
 	<windstream mapid="300020000">
 		<locations>
-			<location id="158" state="1" fly_path="ONE_WAY"/>
+			<location id="158" state="1" fly_path="WIND_PATH"/>
 		</locations>
 	</windstream>
 	<windstream mapid="300250000">
 		<locations>
-			<location id="159" state="1" fly_path="ONE_WAY"/>
-			<location id="160" state="1" fly_path="ONE_WAY"/>
-			<location id="161" state="0" fly_path="ONE_WAY"/>
-			<location id="162" state="1" fly_path="ONE_WAY"/>
+			<location id="159" state="1" fly_path="WIND_PATH"/>
+			<location id="160" state="1" fly_path="WIND_PATH"/>
+			<location id="161" state="0" fly_path="WIND_PATH"/>
+			<location id="162" state="1" fly_path="WIND_PATH"/>
 		</locations>
 	</windstream>
 </windstreams>

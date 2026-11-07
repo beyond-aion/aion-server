@@ -29,9 +29,10 @@ public class CM_BROKER_SETTLE_LIST extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
-		if (player.isTargetingNpcWithFunction(brokerObjId, DialogAction.OPEN_VENDOR))
-			BrokerService.getInstance().showSettledItems(player, startPageIndex);
-		else
-			AuditLogger.log(player, "tried to open the broker sold item list without targeting a broker");
+		if (!player.isTargetingNpcWithFunctionNearby(brokerObjId, DialogAction.OPEN_VENDOR)) {
+			AuditLogger.log(player, "tried to open the broker sold item list without targeting a broker in range");
+			return;
+		}
+		BrokerService.getInstance().showSettledItems(player, startPageIndex);
 	}
 }

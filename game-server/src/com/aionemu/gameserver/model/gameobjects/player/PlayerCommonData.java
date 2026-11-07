@@ -27,6 +27,8 @@ import com.aionemu.gameserver.world.World;
  */
 public class PlayerCommonData extends CreatureTemplate {
 
+	public static final int MAX_NOTE_LENGTH = 64;
+
 	private final int playerObjId;
 	private Race race;
 	private String name;
@@ -441,7 +443,8 @@ public class PlayerCommonData extends CreatureTemplate {
 	}
 
 	public void setNote(String note) {
-		this.note = note;
+		// The note is inlined into SM_PLAYER_INFO and other packets, which the client reads only up to 8192 bytes.
+		this.note = note == null || note.length() <= MAX_NOTE_LENGTH ? note : note.substring(0, MAX_NOTE_LENGTH);
 	}
 
 	public int getTitleId() {

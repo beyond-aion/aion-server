@@ -54,11 +54,9 @@ public class SkillEngine {
 	 * @return
 	 */
 	public Skill getSkillFor(Player player, SkillTemplate template, VisibleObject firstTarget) {
-		// player doesn't have such skill and ist not provoked
-		if (template.getActivationAttribute() != ActivationAttribute.PROVOKED) {
-			if (!player.getSkillList().isSkillPresent(template.getSkillId()))
-				return null;
-		}
+		// Only learned skills may be cast by the client; item, NPC and provoked skills are created with getSkill(...).
+		if (!player.getSkillList().isSkillPresent(template.getSkillId()))
+			return null;
 
 		Creature target = null;
 		if (firstTarget instanceof Creature)
