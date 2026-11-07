@@ -183,22 +183,6 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 		return instanceId;
 	}
 
-	public final boolean isBeginnerInstance() {
-		if (parent == null)
-			return false;
-
-		if (parent.getTemplate().isInstance()) {
-			// TODO: check Karamatis and Ataxiar for exception in FastTrack ?
-			// return parent.getTemplate().getBeginnerTwinCount() > 0;
-			return false;
-		}
-
-		int twinCount = parent.getTemplate().getTwinCount();
-		if (twinCount == 0)
-			twinCount = 1;
-		return getInstanceId() > twinCount;
-	}
-
 	public void registerTeam(GeneralTeam<?, ?> team) {
 		if (registeredTeam != null)
 			throw new IllegalStateException("A team for instance " + instanceId + " of map " + getMapId() + " is already registered");

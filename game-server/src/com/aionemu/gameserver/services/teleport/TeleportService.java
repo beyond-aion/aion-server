@@ -5,6 +5,9 @@ import java.util.concurrent.FutureTask;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.aionemu.gameserver.configs.main.GeoDataConfig;
+import com.aionemu.gameserver.configs.main.GeoDataConfig.Mode;
+import com.aionemu.gameserver.controllers.movement.MovementMask;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.dataholders.PlayerInitialData;
 import com.aionemu.gameserver.model.CreatureType;
@@ -156,12 +159,17 @@ public class TeleportService {
 	}
 
 	private static void sendLoc(Player player, int worldId, int instanceId, float x, float y, float z, byte h, TeleportAnimation animation) {
+		sendLoc(player, worldId, instanceId, x, y, z, h, animation, null);
+	}
+
+	private static void sendLoc(Player player, int worldId, int instanceId, float x, float y, float z, byte h,
+		TeleportAnimation animation, Runnable onArrive) {
 		abortPlayerActions(player);
 		player.unblockQuitting();
 		// despawn from world and send animation to others (also ends flying)
 		World.getInstance().despawn(player, animation.getDefaultObjectDeleteAnimation());
 
-		SpawnTask spawnTask = new SpawnTask(player, worldId, instanceId, x, y, z, h, animation);
+		SpawnTask spawnTask = new SpawnTask(player, worldId, instanceId, x, y, z, h, animation, onArrive);
 		if (animation == TeleportAnimation.NONE) // instant teleport (don't wait for player fade-out)
 			spawnTask.run();
 		else {
@@ -186,7 +194,7 @@ public class TeleportService {
 	}
 
 	private static void spawnOnSameMap(Player player) {
-		PacketSendUtility.sendPacket(player, new SM_CHANNEL_INFO(player.getPosition()));
+		PacketSendUtility.sendPacket(player, new SM_CHANNEL_INFO(player));
 		PacketSendUtility.sendPacket(player, new SM_PLAYER_INFO(player));
 		PacketSendUtility.sendPacket(player, new SM_STATS_INFO(player));
 		PacketSendUtility.sendPacket(player, SM_MOTION.playerMotions(player));
@@ -217,7 +225,7 @@ public class TeleportService {
 			InstanceService.onLeaveInstance(player);
 		}
 		World.getInstance().setPosition(player, worldId, instanceId, x, y, z, heading);
-		PacketSendUtility.sendPacket(player, new SM_CHANNEL_INFO(player.getPosition()));
+		PacketSendUtility.sendPacket(player, new SM_CHANNEL_INFO(player));
 		PacketSendUtility.sendPacket(player, new SM_PLAYER_SPAWN(player));
 		player.setPortAnimation(ArrivalAnimation.LANDING);
 		PacketSendUtility.sendPacket(player, new SM_PLAYER_INFO(player));
@@ -407,12 +415,39 @@ public class TeleportService {
 			AuditLogger.log(player, "tried to change to invalid channel " + channel + " of map " + player.getWorldId() + " at " + player.getPosition());
 			return;
 		}
-		abortPlayerActions(player);
-		World.getInstance().setPosition(player, player.getWorldId(), channel + 1, player.getX(), player.getY(), player.getZ(), player.getHeading());
-		player.getController().startProtectionActiveTask();
-		PacketSendUtility.sendPacket(player, new SM_CHANNEL_INFO(player.getPosition()));
-		PacketSendUtility.sendPacket(player, new SM_PLAYER_SPAWN(player));
-		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_TELEPORT_ZONECHANNEL(channel));
+		if (!canChangeChannelNow(player, map)) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANT_CHANGE_CHANNEL_NOW());
+			return;
+		}
+		// the cooldown counts from the end of any teleport, including the previous channel change
+		int cooldownSeconds = map.getTemplate().getChannelChangeCooldownSeconds();
+		int remainingSeconds = (int) (cooldownSeconds - player.getMillisSinceSpawn() / 1000);
+		if (remainingSeconds > 0) {
+			PacketSendUtility.sendPacket(player,
+				SM_SYSTEM_MESSAGE.STR_MSG_REMAIN_CHANGE_CHANNEL_COOLTIME(Integer.toString(cooldownSeconds), Integer.toString(remainingSeconds)));
+			return;
+		}
+		// retail sends the teleport request with the beam and only after the animation the channel message and the new world
+		sendLoc(player, player.getWorldId(), channel + 1, player.getX(), player.getY(), player.getZ(), player.getHeading(),
+			TeleportAnimation.FADE_OUT_BEAM,
+			() -> PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_TELEPORT_ZONECHANNEL(channel + 1)));
+	}
+
+	private static boolean canChangeChannelNow(Player player, WorldMap map) {
+		if (player.isDead() || !player.isSpawned() || player.hasStore() || player.isTrading() || player.isLooting())
+			return false;
+		// retail does not check combat, but then a forged packet would let players escape a fight
+		if (player.getController().isInCombat())
+			return false;
+		if (player.isFlying() || player.isUsingFlightTransporterOrWindstream() || player.isInPlayerMode(PlayerMode.RIDE))
+			return false;
+		if (player.isInState(CreatureState.RESTING) || player.isInState(CreatureState.CHAIR))
+			return false;
+		if ((player.getMoveController().getMovementMask() & MovementMask.VEHICLE) != 0 || player.getController().hasTask(TaskId.TELEPORT))
+			return false;
+		if (map.getInstanceCount() <= 1 || player.getInteractionTask() != null) // gathering or crafting
+			return false;
+		return GeoDataConfig.MODE != Mode.ON || !Float.isNaN(GeoService.getInstance().getZ(player, player.getZ() + 0.3f, player.getZ() - 0.3f));
 	}
 
 	public static void setEventPos(WorldPosition pos, Race race) {
@@ -469,8 +504,10 @@ public class TeleportService {
 		private final float x, y, z;
 		private final byte h;
 		private final TeleportAnimation animation;
+		private final Runnable onArrive;
 
-		public SpawnTask(Player player, int worldId, int instanceId, float x, float y, float z, byte h, TeleportAnimation animation) {
+		public SpawnTask(Player player, int worldId, int instanceId, float x, float y, float z, byte h, TeleportAnimation animation,
+			Runnable onArrive) {
 			this.player = player;
 			this.worldId = worldId;
 			this.instanceId = instanceId;
@@ -479,6 +516,7 @@ public class TeleportService {
 			this.z = z;
 			this.h = h;
 			this.animation = animation;
+			this.onArrive = onArrive;
 		}
 
 		@Override
@@ -505,12 +543,14 @@ public class TeleportService {
 			World.getInstance().setPosition(player.getPet(), worldId, instanceId, x, y, z, h);
 
 			player.setPortAnimation(animation.getDefaultArrivalAnimation());
+			if (onArrive != null)
+				onArrive.run();
 			if (currentWorldId == worldId && currentInstance == instanceId) {
 				// instant teleport when map is the same
 				spawnOnSameMap(player);
 			} else {
 				// teleport with full map reloading, player will spawn via CM_LEVEL_READY
-				PacketSendUtility.sendPacket(player, new SM_CHANNEL_INFO(player.getPosition()));
+				PacketSendUtility.sendPacket(player, new SM_CHANNEL_INFO(player));
 				PacketSendUtility.sendPacket(player, new SM_PLAYER_SPAWN(player));
 				if (DataManager.WORLD_MAPS_DATA.getTemplate(worldId).isInstance() && !WorldMapType.getWorld(worldId).isPersonal())
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_DUNGEON_OPENED_FOR_SELF(worldId));
