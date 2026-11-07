@@ -390,8 +390,8 @@ public class ChatUtil {
 						lengthToAdd += 15; // conservative estimate for the character count of a resolved localized string on the client side
 					}
 				}
-				case '[' -> { // check for any link type, such as [quest:1006], [item:182400001], etc.
-					if (i + 3 < endIndex && Character.isLowerCase(chatMessage.charAt(i + 1))) {
+				case '[' -> { // check for any link type, such as [quest:1006], [item:182400001], etc., except color tags which must use their raw length
+					if (i + 3 < endIndex && Character.isLowerCase(chatMessage.charAt(i + 1)) && !chatMessage.startsWith("[color:", i)) {
 						int linkEndIndex = chatMessage.indexOf(']', i + 2, Math.min(i + 40, endIndex));
 						if (linkEndIndex == -1)
 							break;
