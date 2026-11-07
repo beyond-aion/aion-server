@@ -6,8 +6,13 @@ import static java.util.stream.Collectors.*;
 import java.awt.Color;
 import java.util.*;
 
+import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
+import com.aionemu.gameserver.model.templates.spawns.SpawnGroup;
+import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
+import com.aionemu.gameserver.model.templates.world.WorldMapTemplate;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.ChatUtil;
@@ -15,6 +20,7 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldMapType;
+import com.aionemu.gameserver.world.geo.GeoService;
 
 /**
  * @author Dwarfpicker, Imaginary, Neon
@@ -27,6 +33,7 @@ public class GoTo extends AdminCommand {
 		super("goto", "Teleports you to regions by name.", """
 			 - Shows a list of locations to teleport to.
 			<location name> - Teleports you to the given location.
+			<map ID | map name> - Teleports you to a spawn point of that map, or the center of an empty map.
 			""");
 		addLocations();
 	}
@@ -44,17 +51,27 @@ public class GoTo extends AdminCommand {
 			Map<String, Location> matches = findPossibleMatch(destination);
 			if (isSingleSureMatch(matches, destination)) {
 				location = matches.values().iterator().next();
-			} else {
-				StringBuilder msg = new StringBuilder("Could not find the specified destination.");
-				if (!matches.isEmpty()) {
-					msg.append(" Possible matches:");
-					matches.forEach((match, loc) -> msg.append("\n\t- ").append(ChatUtil.color(match, Color.WHITE)).append(" (")
-						.append(worldName(loc.mapType.getId())).append(")"));
+			} else if (matches.isEmpty()) {
+				List<WorldMapTemplate> maps = findMaps(destination);
+				if (maps.size() == 1) {
+					location = findLocation(maps.getFirst());
+				} else if (maps.isEmpty()) {
+					sendInfo(player, "Could not find the specified destination.");
+					return;
+				} else {
+					StringBuilder msg = new StringBuilder("Several maps match:");
+					for (WorldMapTemplate map : maps)
+						msg.append("\n\t- ").append(ChatUtil.color(describeMap(map), Color.WHITE));
+					sendInfo(player, msg.toString());
+					return;
 				}
+			} else {
+				StringBuilder msg = new StringBuilder("Several locations match:");
+				matches.forEach((match, loc) -> msg.append("\n\t- ").append(ChatUtil.color(match, Color.WHITE)).append(" (")
+					.append(worldName(loc.mapId)).append(")"));
 				sendInfo(player, msg.toString());
-			}
-			if (location == null)
 				return;
+			}
 		}
 
 		goTo(player, location);
@@ -79,29 +96,93 @@ public class GoTo extends AdminCommand {
 		return possibleMatches;
 	}
 
+	/**
+	 * @return Maps whose name, cName or id contains the query, an exact match alone if there is one.
+	 */
+	private static List<WorldMapTemplate> findMaps(String query) {
+		List<WorldMapTemplate> exact = new ArrayList<>();
+		List<WorldMapTemplate> partial = new ArrayList<>();
+		for (WorldMapTemplate template : DataManager.WORLD_MAPS_DATA) {
+			if (!query.isEmpty() && String.valueOf(template.getMapId()).equals(query))
+				exact.add(template);
+			else if (template.getCName() != null && template.getCName().equalsIgnoreCase(query)
+				|| template.getName() != null && template.getName().equalsIgnoreCase(query))
+				exact.add(template);
+			else if (query.length() >= 3 && (template.getCName() != null && template.getCName().toLowerCase().contains(query)
+				|| template.getName() != null && template.getName().toLowerCase().contains(query)))
+				partial.add(template);
+		}
+		return exact.isEmpty() ? partial : exact;
+	}
+
+	private static String describeMap(WorldMapTemplate map) {
+		return worldName(map.getMapId()) + " (" + map.getMapId() + ")";
+	}
+
+	private Location findLocation(WorldMapTemplate map) {
+		for (Location location : locations.values())
+			if (location.mapId == map.getMapId())
+				return location;
+		SpawnTemplate firstSpot = null;
+		for (SpawnGroup spawn : DataManager.SPAWNS_DATA.getSpawnsByWorldId(map.getMapId())) {
+			for (SpawnTemplate spot : spawn.getSpawnTemplates()) {
+				if (isObeliskOrPortal(spot))
+					return spotLocation(map, spot);
+				if (firstSpot == null)
+					firstSpot = spot;
+			}
+		}
+		return firstSpot == null ? centerLocation(map) : spotLocation(map, firstSpot);
+	}
+
+	private static boolean isObeliskOrPortal(SpawnTemplate spot) {
+		String aiName = spot.getAiName();
+		if (aiName == null) {
+			NpcTemplate npc = DataManager.NPC_DATA.getNpcTemplate(spot.getNpcId());
+			aiName = npc == null ? null : npc.getAiName();
+		}
+		return "resurrect".equals(aiName) || "portal".equals(aiName);
+	}
+
+	private Location centerLocation(WorldMapTemplate map) {
+		int size = map.getWorldSize();
+		float x = size / 2f;
+		float y = size / 2f;
+		float z = GeoService.getInstance().getZ(map.getMapId(), x, y, 4000f, 0f, 1);
+		if (Float.isNaN(z))
+			z = size / 2f;
+		return new Location(map.getMapId(), x, y, z, (byte) 0, List.of(describeMap(map)));
+	}
+
+	private static Location spotLocation(WorldMapTemplate map, SpawnTemplate spot) {
+		return new Location(map.getMapId(), spot.getX(), spot.getY(), spot.getZ(), (byte) 0, List.of(describeMap(map)));
+	}
+
 	private static void goTo(Player player, Location location) {
 		WorldMapInstance instance;
-		if (player.getWorldId() == location.mapType.getId())
+		if (player.getWorldId() == location.mapId)
 			instance = player.getPosition().getWorldMapInstance();
-		else if (World.getInstance().getWorldMap(location.mapType.getId()).isInstanceType())
-			instance = InstanceService.getOrRegisterInstance(location.mapType.getId(), player);
+		else if (World.getInstance().getWorldMap(location.mapId).isInstanceType())
+			instance = InstanceService.getOrRegisterInstance(location.mapId, player);
 		else
-			instance = World.getInstance().getWorldMap(location.mapType.getId()).getMainWorldMapInstance();
+			instance = World.getInstance().getWorldMap(location.mapId).getMainWorldMapInstance();
 		TeleportService.teleportTo(player, instance, location.x, location.y, location.z, location.h != 0 ? location.h : player.getHeading(),
 			TeleportAnimation.NONE);
 	}
 
 	private void listLocations(Player player) {
-		Map<WorldMapType, Collection<Location>> locsByWorld = locations.entrySet().stream()
-			.collect(groupingBy(e -> e.getValue().mapType, LinkedHashMap::new, mapping(Map.Entry::getValue, toCollection(LinkedHashSet::new))));
+		Map<Integer, Collection<Location>> locsByWorld = locations.entrySet().stream()
+			.collect(groupingBy(e -> e.getValue().mapId, LinkedHashMap::new, mapping(Map.Entry::getValue, toCollection(LinkedHashSet::new))));
 		StringBuilder sb = new StringBuilder("Available locations:");
-		locsByWorld.forEach((worldMapType, locs) -> appendLocationsForMap(sb, worldMapType, locs));
-		sb.append("\nType " + ChatUtil.color(getAliasWithPrefix() + " <location name>", Color.WHITE) + " to teleport to a location. Location names can be abbreviated.");
+		locsByWorld.forEach((mapId, locs) -> appendLocationsForMap(sb, mapId, locs));
+		sb.append("\nType ").append(ChatUtil.color(getAliasWithPrefix() + " <location name>", Color.WHITE))
+			.append(" to teleport to a location. Location names can be abbreviated.");
+		sb.append("\nAny map can also be addressed by its ID or name, f.e. ").append(ChatUtil.color(getAliasWithPrefix() + " 900180000", Color.WHITE));
 		sendInfo(player, sb.toString());
 	}
 
-	private void appendLocationsForMap(StringBuilder sb, WorldMapType worldMapType, Collection<Location> locs) {
-		sb.append('\n').append(worldName(worldMapType.getId())).append(':');
+	private void appendLocationsForMap(StringBuilder sb, int mapId, Collection<Location> locs) {
+		sb.append('\n').append(worldName(mapId)).append(':');
 		for (Location loc : locs) {
 			if (locs.size() > 1)
 				sb.append('\n');
@@ -414,27 +495,12 @@ public class GoTo extends AdminCommand {
 	}
 
 	private void addLocation(WorldMapType mapType, float x, float y, float z, byte h, String... identifiers) {
-		Location location = new Location(mapType, x, y, z, h, Arrays.asList(identifiers));
+		Location location = new Location(mapType.getId(), x, y, z, h, Arrays.asList(identifiers));
 		for (String identifier : identifiers) {
 			if (locations.put(identifier.toLowerCase(), location) != null)
 				throw new IllegalArgumentException("Duplicate location identifier: " + identifier);
 		}
 	}
 
-	private static class Location {
-
-		private final WorldMapType mapType;
-		private final float x, y, z;
-		private final byte h;
-		private final List<String> identifiers;
-
-		public Location(WorldMapType mapType, float x, float y, float z, byte h, List<String> identifiers) {
-			this.mapType = mapType;
-			this.x = x;
-			this.y = y;
-			this.z = z;
-			this.h = h;
-			this.identifiers = identifiers;
-		}
-	}
+	private record Location(int mapId, float x, float y, float z, byte h, List<String> identifiers) {}
 }

@@ -28,7 +28,7 @@ public class StaticData {
 	@XmlElement(name = "world_maps")
 	public WorldMapsData worldMapsData;
 
-	@XmlElement(name = "weather")
+	@XmlElement(name = "weather_maps")
 	public MapWeatherData mapWeatherData;
 
 	@XmlElement(name = "npc_trade_list")

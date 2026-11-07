@@ -68,7 +68,8 @@ public class WorldPosition {
 	 */
 	public int getClientWorldId() {
 		int worldId = mapId + getInstanceId() - 1;
-		return WorldMapType.getWorld(mapId).isPersonal() ? -worldId : worldId;
+		WorldMapType worldMapType = WorldMapType.getWorld(mapId);
+		return worldMapType != null && worldMapType.isPersonal() ? -worldId : worldId;
 	}
 
 	public boolean isInstanceMap() {

@@ -14,7 +14,7 @@ import com.aionemu.gameserver.model.templates.world.WeatherTable;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = { "weatherData" })
-@XmlRootElement(name = "weather")
+@XmlRootElement(name = "weather_maps")
 public class MapWeatherData {
 
 	@XmlElement(name = "map", required = true)
