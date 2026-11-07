@@ -183,8 +183,8 @@ public class WeatherService {
 	}
 
 	/**
-	 * Weather at the position: the weather of the zone it is in, and when that one has no state (a lead-in, fog,
-	 * clouds) the weather of the whole map, so a phase without particles never hides the weather behind it.
+	 * Weather the client shows at the position: the weather of the zone it is in, or the weather of the whole map when
+	 * the position is outside of every weather zone or nothing runs in its zone.
 	 *
 	 * @return The weather or null for clear sky.
 	 */
@@ -199,30 +199,43 @@ public class WeatherService {
 		WeatherMap weatherMap = weatherMaps.get(instance);
 		if (weatherMap == null)
 			return null;
-		MapRegion region = instance.getRegion(x, y, z);
-		ZoneInstance zone = region == null ? null : region.findZone(ZoneClassName.WEATHER, x, y, z);
-		if (zone != null) {
-			WeatherZone weatherZone = weatherMap.getZone(DataManager.ZONE_DATA.getWeatherZoneId(zone.getZoneTemplate()));
-			WeatherEntry entry = weatherZone == null ? null : weatherZone.getCurrent();
-			if (entry != null && entry.getState() != null)
-				return entry;
-		}
+		WeatherEntry zoneWeather = getZoneWeatherAt(weatherMap, instance, x, y, z);
+		if (zoneWeather != null)
+			return zoneWeather;
 		WeatherZone world = weatherMap.getZone(0);
 		return world == null ? null : world.getCurrent();
+	}
+
+	/**
+	 * The weather of the weather zone the position is in. A weather without state (a lead-in, fog, clouds) is still the
+	 * weather the client shows there, so it is not replaced by the weather of the map.
+	 */
+	private WeatherEntry getZoneWeatherAt(WeatherMap weatherMap, WorldMapInstance instance, float x, float y, float z) {
+		ZoneInstance zone = findWeatherZone(instance, x, y, z);
+		if (zone == null)
+			return null;
+		WeatherZone weatherZone = weatherMap.getZone(DataManager.ZONE_DATA.getWeatherZoneId(zone.getZoneTemplate()));
+		return weatherZone == null ? null : weatherZone.getCurrent();
+	}
+
+	private static ZoneInstance findWeatherZone(WorldMapInstance instance, float x, float y, float z) {
+		MapRegion region = instance.getRegion(x, y, z);
+		return region == null ? null : region.findZone(ZoneClassName.WEATHER, x, y, z);
 	}
 
 	/**
 	 * @return Weather zone the creature stands in, 0 when it is outside of every zone of the map.
 	 */
 	public int getWeatherZoneIdAt(Creature creature) {
-		for (ZoneInstance regionZone : creature.findZones()) {
-			if (regionZone.getZoneTemplate().getZoneType() != ZoneClassName.WEATHER)
-				continue;
-			int zoneId = DataManager.ZONE_DATA.getWeatherZoneId(regionZone.getZoneTemplate());
-			if (zoneId > 0)
-				return zoneId;
-		}
-		return 0;
+		return getWeatherZoneIdAt(creature.getWorldMapInstance(), creature.getX(), creature.getY(), creature.getZ());
+	}
+
+	/**
+	 * @see #getWeatherZoneIdAt(Creature)
+	 */
+	public int getWeatherZoneIdAt(WorldMapInstance instance, float x, float y, float z) {
+		ZoneInstance zone = findWeatherZone(instance, x, y, z);
+		return zone == null ? 0 : DataManager.ZONE_DATA.getWeatherZoneId(zone.getZoneTemplate());
 	}
 
 	/**
@@ -248,12 +261,27 @@ public class WeatherService {
 				if (hour >= 7 && hour < 20)
 					return false;
 			} else if (condition == MaterialActCondition.SUNNY) {
-				WeatherEntry weather = getWeatherAt(creature);
-				if (weather != null && (weather.getState() == WeatherState.RAIN || weather.getState() == WeatherState.SNOW))
+				if (isRainingAt(creature))
 					return false;
 			}
 		}
 		return true;
+	}
+
+	/**
+	 * A weather without state (a lead-in, fog, clouds) does not hide the rain or snow of the whole map.
+	 */
+	private boolean isRainingAt(Creature creature) {
+		WorldMapInstance instance = creature.getWorldMapInstance();
+		WeatherMap weatherMap = weatherMaps.get(instance);
+		if (weatherMap == null)
+			return false;
+		WeatherEntry weather = getZoneWeatherAt(weatherMap, instance, creature.getX(), creature.getY(), creature.getZ());
+		if (weather == null || weather.getState() == null) {
+			WeatherZone world = weatherMap.getZone(0);
+			weather = world == null ? null : world.getCurrent();
+		}
+		return weather != null && (weather.getState() == WeatherState.RAIN || weather.getState() == WeatherState.SNOW);
 	}
 
 	private static class SingletonHolder {
