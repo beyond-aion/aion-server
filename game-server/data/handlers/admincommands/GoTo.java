@@ -18,9 +18,9 @@ import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.World;
-import com.aionemu.gameserver.world.WorldMap;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldMapType;
+import com.aionemu.gameserver.world.geo.GeoService;
 
 /**
  * @author Dwarfpicker, Imaginary, Neon
@@ -33,7 +33,7 @@ public class GoTo extends AdminCommand {
 		super("goto", "Teleports you to regions by name.", """
 			 - Shows a list of locations to teleport to.
 			<location name> - Teleports you to the given location.
-			<map id | map name> - Teleports you to a start, resurrection or portal point of that map, f.e. //goto 300450000.
+			<map ID | map name> - Teleports you to a spawn point of that map, or the center of an empty map.
 			""");
 		addLocations();
 	}
@@ -54,12 +54,7 @@ public class GoTo extends AdminCommand {
 			} else if (matches.isEmpty()) {
 				List<WorldMapTemplate> maps = findMaps(destination);
 				if (maps.size() == 1) {
-					WorldMapTemplate map = maps.get(0);
-					location = mapLocation(map);
-					if (location == null) {
-						sendInfo(player, "Map " + describeMap(map) + " has no known teleport point. Use a location name instead; houses are entered with //house tp <address>.");
-						return;
-					}
+					location = findLocation(maps.getFirst());
 				} else if (maps.isEmpty()) {
 					sendInfo(player, "Could not find the specified destination.");
 					return;
@@ -124,43 +119,39 @@ public class GoTo extends AdminCommand {
 		return worldName(map.getMapId()) + " (" + map.getMapId() + ")";
 	}
 
-	/**
-	 * @return A registered location of the map, else the start position of its main instance, else the spot of a resurrection
-	 *         or portal NPC, else the first spawn point of the map, null when there is nothing to teleport to.
-	 */
-	private Location mapLocation(WorldMapTemplate map) {
+	private Location findLocation(WorldMapTemplate map) {
 		for (Location location : locations.values())
 			if (location.mapId == map.getMapId())
 				return location;
-		WorldMap worldMap = World.getInstance().getWorldMap(map.getMapId());
-		if (worldMap != null) {
-			WorldMapInstance instance = worldMap.getMainWorldMapInstance();
-			if (instance != null && instance.getStartPos() != null)
-				return new Location(map.getMapId(), instance.getStartPos().getX(), instance.getStartPos().getY(), instance.getStartPos().getZ(),
-					(byte) 0, List.of(describeMap(map)));
-		}
-		List<SpawnGroup> spawns = DataManager.SPAWNS_DATA.getSpawnsByWorldId(map.getMapId());
-		if (spawns == null)
-			return null;
 		SpawnTemplate firstSpot = null;
-		for (SpawnGroup spawn : spawns) {
+		for (SpawnGroup spawn : DataManager.SPAWNS_DATA.getSpawnsByWorldId(map.getMapId())) {
 			for (SpawnTemplate spot : spawn.getSpawnTemplates()) {
-				if (isResurrectOrPortal(spot))
+				if (isObeliskOrPortal(spot))
 					return spotLocation(map, spot);
 				if (firstSpot == null)
 					firstSpot = spot;
 			}
 		}
-		return firstSpot == null ? null : spotLocation(map, firstSpot);
+		return firstSpot == null ? centerLocation(map) : spotLocation(map, firstSpot);
 	}
 
-	private static boolean isResurrectOrPortal(SpawnTemplate spot) {
+	private static boolean isObeliskOrPortal(SpawnTemplate spot) {
 		String aiName = spot.getAiName();
 		if (aiName == null) {
 			NpcTemplate npc = DataManager.NPC_DATA.getNpcTemplate(spot.getNpcId());
 			aiName = npc == null ? null : npc.getAiName();
 		}
 		return "resurrect".equals(aiName) || "portal".equals(aiName);
+	}
+
+	private Location centerLocation(WorldMapTemplate map) {
+		int size = map.getWorldSize();
+		float x = size / 2f;
+		float y = size / 2f;
+		float z = GeoService.getInstance().getZ(map.getMapId(), x, y, 4000f, 0f, 1);
+		if (Float.isNaN(z))
+			z = size / 2f;
+		return new Location(map.getMapId(), x, y, z, (byte) 0, List.of(describeMap(map)));
 	}
 
 	private static Location spotLocation(WorldMapTemplate map, SpawnTemplate spot) {
@@ -184,10 +175,9 @@ public class GoTo extends AdminCommand {
 			.collect(groupingBy(e -> e.getValue().mapId, LinkedHashMap::new, mapping(Map.Entry::getValue, toCollection(LinkedHashSet::new))));
 		StringBuilder sb = new StringBuilder("Available locations:");
 		locsByWorld.forEach((mapId, locs) -> appendLocationsForMap(sb, mapId, locs));
-		sb.append("\nType " + ChatUtil.color(getAliasWithPrefix() + " <location name>", Color.WHITE)
-			+ " to teleport to a location. Location names can be abbreviated.");
-		sb.append("\nAny map can be addressed by its id or name, f.e. ").append(ChatUtil.color(getAliasWithPrefix() + " 300450000", Color.WHITE))
-			.append("; it lands on a start, resurrection or portal point of the map.");
+		sb.append("\nType ").append(ChatUtil.color(getAliasWithPrefix() + " <location name>", Color.WHITE))
+			.append(" to teleport to a location. Location names can be abbreviated.");
+		sb.append("\nAny map can also be addressed by its ID or name, f.e. ").append(ChatUtil.color(getAliasWithPrefix() + " 900180000", Color.WHITE));
 		sendInfo(player, sb.toString());
 	}
 
@@ -512,20 +502,5 @@ public class GoTo extends AdminCommand {
 		}
 	}
 
-	private static class Location {
-
-		private final int mapId;
-		private final float x, y, z;
-		private final byte h;
-		private final List<String> identifiers;
-
-		public Location(int mapId, float x, float y, float z, byte h, List<String> identifiers) {
-			this.mapId = mapId;
-			this.x = x;
-			this.y = y;
-			this.z = z;
-			this.h = h;
-			this.identifiers = identifiers;
-		}
-	}
+	private record Location(int mapId, float x, float y, float z, byte h, List<String> identifiers) {}
 }
