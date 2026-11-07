@@ -6,6 +6,9 @@ import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlType;
 
 /**
+ * Collision cylinder as the client receives it: {@code front} and {@code side} are radii, {@code upper} is the full
+ * height. NPC templates already carry the model scale. Code that needs a full horizontal extent multiplies by 2.
+ *
  * @author ATracer
  */
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -45,6 +48,10 @@ public class BoundRadius {
 
 	public float getUpper() {
 		return upper;
+	}
+
+	public boolean isZero() {
+		return front == 0 && side == 0 && upper == 0;
 	}
 
 }
