@@ -11,8 +11,8 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.gameobjects.state.FlyState;
 import com.aionemu.gameserver.model.geometry.Point3D;
-import com.aionemu.gameserver.model.templates.flypath.FlyPathEntry;
 import com.aionemu.gameserver.model.templates.flypath.FlightPath;
+import com.aionemu.gameserver.model.templates.flypath.FlyPathEntry;
 import com.aionemu.gameserver.model.templates.flypath.WindstreamState;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
@@ -79,12 +79,15 @@ public class CM_WINDSTREAM extends AionClientPacket {
 				player.unsetState(CreatureState.GLIDING);
 				player.setState(CreatureState.FLYING);
 				player.unsetFlyState(FlyState.GLIDING);
-				player.setFlyState(FlyState.FLYING);
+				player.unsetFlyState(FlyState.FLYING);
 				player.getLifeStats().triggerFpRestore();
 			}
 			case ENTERED -> {
 				if (player.isUsingFlightPath(FlightPath.Type.WINDSTREAM)) {
 					PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.WINDSTREAM, teleportId, progress), true);
+					// Following the path ends free flight. The client only learns that from the fly state in its status packet, not from
+					// the action above, and keeps its wings out otherwise.
+					player.getGameStats().updateStatsVisually();
 					QuestEngine.getInstance().onEnterWindStream(new QuestEnv(null, player, 0), teleportId);
 				}
 				return; // don't send SM_WINDSTREAM
@@ -97,18 +100,12 @@ public class CM_WINDSTREAM extends AionClientPacket {
 					sendPacket(new SM_WINDSTREAM(state, false));
 					return;
 				}
-				player.unsetState(CreatureState.FLYING);
-				player.setState(CreatureState.ACTIVE);
-				player.unsetFlyState(FlyState.FLYING);
-				player.unsetFlyState(FlyState.GLIDING);
-				player.getMoveController().restartFalling(player.getZ());
-				if (state == WindstreamState.LEAVE_GLIDING)
-					player.getFlyController().switchToGliding();
-				else
-					player.getGameStats().updateStatsAndSpeedVisually();
-				player.setFlightPath(null);
-				PacketSendUtility.broadcastPacket(player,
-					new SM_EMOTION(player, state == WindstreamState.LEAVE_GLIDING ? EmotionType.WINDSTREAM_END : EmotionType.WINDSTREAM_EXIT), true);
+				boolean glideExit = state == WindstreamState.LEAVE_GLIDING;
+				boolean gliding = player.getFlyController().leaveWindstream(glideExit);
+				PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, gliding ? EmotionType.WINDSTREAM_END : EmotionType.WINDSTREAM_EXIT), true);
+				if (glideExit && !gliding)
+					// the client force starts a glide on this exit, so the wings have to be closed or it keeps gliding while the server drops him
+					player.getFlyController().endFly(true);
 				if (player.isTransformed()) // send sm_transform if player is transformed
 					PacketSendUtility.broadcastPacketAndReceive(player, new SM_TRANSFORM(player));
 			}

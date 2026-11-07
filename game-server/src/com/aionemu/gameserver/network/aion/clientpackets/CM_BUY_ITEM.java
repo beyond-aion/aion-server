@@ -15,6 +15,7 @@ import com.aionemu.gameserver.model.trade.RepurchaseList;
 import com.aionemu.gameserver.model.trade.TradeList;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
+import com.aionemu.gameserver.restrictions.PlayerRestrictions;
 import com.aionemu.gameserver.services.DialogService;
 import com.aionemu.gameserver.services.PrivateStoreService;
 import com.aionemu.gameserver.services.RepurchaseService;
@@ -116,6 +117,8 @@ public class CM_BUY_ITEM extends AionClientPacket {
 			AuditLogger.log(player, "might be abusing CM_BUY_ITEM: no right trading with " + npc);
 			return;
 		}
+		if (PlayerRestrictions.isGlidingOrUsingFlightPath(player)) // the client greys the shop out there, and retail answers neither with a trade nor with a message
+			return;
 		switch (tradeAction) {
 			case SHOP_SELL -> {
 				if (npc.canBuy() || npc.canPurchase()) {

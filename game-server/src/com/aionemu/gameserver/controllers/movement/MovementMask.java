@@ -45,6 +45,12 @@ public class MovementMask {
 	 */
 	public static final byte POSITION = (byte) 0x80; // 128
 
+	/**
+	 * Movement type reported while following a flight path. The client keeps sending normal move packets along the path, but its
+	 * state packet names the path flight as a position update with the arc flag instead.
+	 */
+	public static final byte PATH_FLY = (byte) (POSITION | ARC); // 130
+
 	public static final byte NPC_WALK_SLOW = (byte) 0xEA;
 	public static final byte NPC_WALK_FAST = (byte) 0xE8;
 	public static final byte NPC_RUN_SLOW = (byte) 0xE4;

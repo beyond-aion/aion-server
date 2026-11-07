@@ -113,7 +113,7 @@ public class RecallService {
 	 * @return True, if the cast may start
 	 */
 	public static boolean validateCast(Player caster, VisibleObject target) {
-		if (caster.isFlying()) {
+		if (caster.isFlying() || caster.isUsingFlightTransporterOrWindstream()) {
 			PacketSendUtility.sendPacket(caster, SM_SYSTEM_MESSAGE.STR_SKILL_RESTRICTION_NO_FLY());
 			return false;
 		}

@@ -50,7 +50,7 @@ public class PrivateStoreService {
 	}
 
 	private static boolean canOpenPrivateStore(Player player) {
-		if (player.isFlying()) {
+		if (player.isFlying() || player.isUsingFlightTransporterOrWindstream()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PERSONAL_SHOP_DISABLED_IN_FLY_MODE());
 			return false;
 		}
