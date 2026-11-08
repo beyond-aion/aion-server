@@ -79,7 +79,34 @@ public class DropService {
 	public void unregisterDrop(Npc npc) {
 		int npcObjId = npc.getObjectId();
 		DropRegistrationService.getInstance().getCurrentDropMap().remove(npcObjId);
-		DropRegistrationService.getInstance().getDropRegistrationMap().remove(npcObjId);
+		DropNpc dropNpc = DropRegistrationService.getInstance().getDropRegistrationMap().remove(npcObjId);
+		if (dropNpc != null && dropNpc.getLootGroupRules() != null)
+			removeFromDistribution(dropNpc, dropNpc.getLootGroupRules());
+	}
+
+	/**
+	 * Removes the items of a corpse that is gone from its team's queue of items to roll or bid for. Only the first item of the queue is distributed,
+	 * and only a roll or bid on it starts the next one, so the team could never roll again once a corpse decayed with its item in the queue.
+	 */
+	private void removeFromDistribution(DropNpc dropNpc, LootGroupRules lootGroupRules) {
+		int npcObjId = dropNpc.getObjectId();
+		DropItem first;
+		synchronized (dropNpc) { // see DropDistributionService.handleRollOrBid
+			first = lootGroupRules.getItemsToBeDistributed().peekFirst();
+			if (!lootGroupRules.getItemsToBeDistributed().removeIf(item -> item.getNpcObj() == npcObjId))
+				return;
+			for (Player player : dropNpc.getInRangePlayers()) {
+				InRoll inRoll = player.inRoll;
+				if (player.isInPlayerMode(PlayerMode.IN_ROLL) && inRoll != null && inRoll.getNpcId() == npcObjId)
+					player.unsetPlayerMode(PlayerMode.IN_ROLL);
+			}
+		}
+		DropItem next = lootGroupRules.getItemsToBeDistributed().peekFirst();
+		if (next != null && next != first) {
+			DropNpc nextDropNpc = DropRegistrationService.getInstance().getDropRegistrationMap().get(next.getNpcObj());
+			if (nextDropNpc != null)
+				nextDropNpc.getInRangePlayers().stream().filter(Player::isOnline).findFirst().ifPresent(player -> canDistribute(player, next));
+		}
 	}
 
 	/**
