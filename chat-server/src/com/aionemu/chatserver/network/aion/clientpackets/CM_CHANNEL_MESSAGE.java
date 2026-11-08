@@ -48,11 +48,6 @@ public class CM_CHANNEL_MESSAGE extends AbstractClientPacket {
 	@Override
 	protected void runImpl() {
 		ChatClient client = getConnection().getChatClient();
-		if (content.length > MAX_TEXT_LENGTH * 2) {
-			log.warn("{} sent a message of {} characters, the client allows {}, disconnecting", client, content.length / 2, MAX_TEXT_LENGTH);
-			getConnection().close();
-			return;
-		}
 		Channel channel = ChatChannels.getChannelById(channelId);
 		if (channel == null)
 			return;
@@ -70,6 +65,13 @@ public class CM_CHANNEL_MESSAGE extends AbstractClientPacket {
 			return;
 		}
 		client.updateLastMessageTime(channel.getChannelType());
+		// Checked after the flood protection, so a modified client can't log faster than it may chat. The message is dropped without a hint and
+		// the connection stays open: disconnecting would only tell the sender what was detected, and the client reconnects anyway.
+		if (content.length > MAX_TEXT_LENGTH * 2) {
+			log.warn("{} sent a message of {} characters in {} (the client allows {}, modified client), dropped it", client, content.length / 2,
+				channel.name(), MAX_TEXT_LENGTH);
+			return;
+		}
 		BroadcastService.getInstance().broadcastMessage(message);
 
 		if (LoggingConfig.LOG_CHAT)
