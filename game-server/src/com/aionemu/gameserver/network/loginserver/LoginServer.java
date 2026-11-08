@@ -139,11 +139,10 @@ public class LoginServer {
 				waitingRequests.remove(loginRequest.accountId());
 			// a request that the login server is checking stays, its answer has to be handled (see accountAuthenticationResponse)
 		}
+		// a client that was replaced by a newer login of the same account must not log out the newer one
 		Account account = connection.getAccount();
-		if (account != null) {
-			loggedInAccounts.remove(account.getId());
+		if (account != null && loggedInAccounts.remove(account.getId(), connection))
 			sendPacket(new SM_ACCOUNT_DISCONNECTED(account.getId()));
-		}
 	}
 
 	public void setGameServerCount(int gameServerCount) {
@@ -233,7 +232,10 @@ public class LoginServer {
 			sendPacket(new SM_CHANGE_ALLOWED_HDD_SERIAL(account));
 		}
 		kickOnlineCharacters(account);
-		loggedInAccounts.put(accountId, client);
+		// a client of the same account that is still connected, e.g. at the character selection while the login server link was down
+		AionConnection previousClient = loggedInAccounts.put(accountId, client);
+		if (previousClient != null)
+			previousClient.close(SM_SYSTEM_MESSAGE.STR_KICK_ANOTHER_USER_TRY_LOGIN());
 		client.setAccount(account);
 		client.setState(AionConnection.State.AUTHED);
 		log.info("{} authed with MAC: {} and HDD serial: {}", account, client.getMacAddress(), client.getHddSerial());
