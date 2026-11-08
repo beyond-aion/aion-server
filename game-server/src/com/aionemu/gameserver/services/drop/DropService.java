@@ -38,6 +38,7 @@ import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.world.World;
 
 /**
@@ -395,10 +396,9 @@ public class DropService {
 
 			requestedItem.setCount(ItemService.addItem(requestedItem.getWinningPlayer(), itemId, requestedItem.getCount(), false, new TempTradeDropPredicate(dropNpc)));
 
-			switch (dropNpc.getDistributionId()) {
-				case 2 -> winningRollActions(requestedItem.getWinningPlayer(), itemId, npcObjectId);
-				case 3 -> winningBidActions(requestedItem.getWinningPlayer(), npcObjectId, requestedItem.getHighestValue());
-			}
+			if (dropNpc.getDistributionId() == 2)
+				winningRollActions(requestedItem.getWinningPlayer(), itemId, npcObjectId);
+			// the winner of a bid paid when the bids ended, see payWinningBid
 		}
 
 		if (requestedItem.getCount() <= 0) {
@@ -464,11 +464,18 @@ public class DropService {
 		}
 	}
 
-	private void winningBidActions(Player player, int npcObjectId, long highestValue) {
-		DropNpc dropNpc = DropRegistrationService.getInstance().getDropRegistrationMap().get(npcObjectId);
+	/**
+	 * Takes the bid from the winner as soon as the bids end and shares it among the other members, so the item is paid for before it can be picked
+	 * up. Paying on pickup let a winner who had spent the kinah in the meantime keep the item for free, and charged again for each part of a stack
+	 * that didn't fit into the inventory at once.
+	 *
+	 * @return False if the winner doesn't have the kinah anymore.
+	 */
+	boolean payWinningBid(Player player, DropNpc dropNpc, long highestValue) {
 		if (highestValue > 0) {
 			if (!player.getInventory().tryDecreaseKinah(highestValue)) {
-				return;
+				AuditLogger.log(player, "won a bid of " + highestValue + " kinah without having it anymore");
+				return false;
 			}
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PAY_ACCOUNT_ME(highestValue));
 		}
@@ -480,6 +487,7 @@ public class DropService {
 			member.getInventory().increaseKinah(distributeKinah);
 			PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_MSG_PAY_DISTRIBUTE(highestValue, onlineMembers.size(), distributeKinah));
 		}
+		return true;
 	}
 
 	private void winningNormalActions(Player player, DropNpc dropNpc, DropItem requestedItem) {

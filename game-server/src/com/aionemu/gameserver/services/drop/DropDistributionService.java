@@ -117,6 +117,9 @@ public class DropDistributionService {
 
 		if (!dropNpc.getPlayerStatus().isEmpty())
 			return;
+		if (dropNpc.getDistributionId() == 3 && requestedItem.getWinningPlayer() != null
+			&& !DropService.getInstance().payWinningBid(requestedItem.getWinningPlayer(), dropNpc, requestedItem.getHighestValue()))
+			requestedItem.setWinningPlayer(null); // a winner without the kinah forfeits, the item is handled as if everyone had passed
 
 		for (Player member : dropNpc.getInRangePlayers()) {
 			if (member == null) {
