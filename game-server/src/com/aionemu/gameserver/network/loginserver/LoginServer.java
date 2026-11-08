@@ -42,6 +42,11 @@ import io.netty.channel.ChannelFuture;
 public class LoginServer {
 
 	private static final Logger log = LoggerFactory.getLogger(LoginServer.class);
+	/**
+	 * Size of the HDD serial columns of the login server's database. Real serials are at most 20 characters, 82 in the hexadecimal form of
+	 * {@code CM_MAC_ADDRESS}.
+	 */
+	private static final int MAX_HDD_SERIAL_LENGTH = 100;
 
 	/**
 	 * The login request of each client that hasn't been authenticated yet. All login request fields are guarded by this instance.
@@ -246,6 +251,10 @@ public class LoginServer {
 	private boolean validateMacAndHddSerial(AionConnection client, String allowedHddSerial) {
 		if (!client.getMacAddress().matches("^([0-9A-F]{2}-){5}[0-9A-F]{2}$")) {
 			log.warn("{} sent an invalid MAC address (modified client or hack): {}", client, client.getMacAddress());
+			return false;
+		} else if (client.getHddSerial().length() > MAX_HDD_SERIAL_LENGTH) {
+			log.warn("{} sent an HDD serial of {} characters (modified client or hack): {}…", client, client.getHddSerial().length(),
+				client.getHddSerial().substring(0, MAX_HDD_SERIAL_LENGTH));
 			return false;
 		} else if (BannedMacManager.getInstance().isBanned(client.getMacAddress())) {
 			log.info("{} was kicked due to mac ban", client);
