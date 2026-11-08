@@ -1,6 +1,7 @@
 package com.aionemu.commons.network.netty;
 
 import java.io.IOException;
+import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
@@ -22,6 +23,11 @@ class ConnectionHandler extends SimpleChannelInboundHandler<ByteBuf> {
 
 	private final NettyConnection<?> connection;
 	private int writabilityChanges;
+	/**
+	 * Timers of this channel, cancelled when it closes: a pending timer keeps the channel and its connection in memory until it runs, and the
+	 * authentication timeout runs for a minute, so a client logging in a few hundred times per second filled the 48 MB of the login server.
+	 */
+	private ScheduledFuture<?> authTimeout, sendStallTimeout;
 
 	ConnectionHandler(NettyConnection<?> connection) {
 		this.connection = connection;
@@ -32,7 +38,7 @@ class ConnectionHandler extends SimpleChannelInboundHandler<ByteBuf> {
 		connection.onChannelActive();
 		long authTimeoutMillis = connection.getAuthTimeoutMillis();
 		if (authTimeoutMillis > 0) {
-			ctx.executor().schedule(() -> {
+			authTimeout = ctx.executor().schedule(() -> {
 				if (ctx.channel().isActive() && !connection.isAuthenticated()) {
 					log.info("{} didn't authenticate within {} ms, disconnecting", connection, authTimeoutMillis);
 					ctx.close();
@@ -68,7 +74,8 @@ class ConnectionHandler extends SimpleChannelInboundHandler<ByteBuf> {
 		int change = ++writabilityChanges;
 		long stallMillis = connection.getMaxSendStallMillis();
 		if (stallMillis > 0 && !ctx.channel().isWritable()) {
-			ctx.executor().schedule(() -> {
+			cancel(sendStallTimeout);
+			sendStallTimeout = ctx.executor().schedule(() -> {
 				if (change == writabilityChanges && ctx.channel().isActive() && !ctx.channel().isWritable()) {
 					log.warn("{} hasn't received data for {} ms while its send buffer is full, disconnecting", connection, stallMillis);
 					ctx.close();
@@ -80,8 +87,15 @@ class ConnectionHandler extends SimpleChannelInboundHandler<ByteBuf> {
 
 	@Override
 	public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+		cancel(authTimeout);
+		cancel(sendStallTimeout);
 		connection.executeAfterPendingPackets(connection::onDisconnect);
 		super.channelInactive(ctx);
+	}
+
+	private static void cancel(ScheduledFuture<?> timer) {
+		if (timer != null)
+			timer.cancel(false);
 	}
 
 	@Override
