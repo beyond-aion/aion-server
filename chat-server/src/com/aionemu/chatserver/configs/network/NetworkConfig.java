@@ -51,6 +51,12 @@ public class NetworkConfig {
 	public static int CLIENT_AUTH_TIMEOUT_SECONDS;
 
 	/**
+	 * Client connections that may be open at the same time, 0 for no limit. Each one takes about 1.6 KB of the heap.
+	 */
+	@Property(key = "chatserver.network.client.max_connections", defaultValue = "20000")
+	public static int MAX_CONNECTIONS;
+
+	/**
 	 * Connections an IP may have open at the same time, 0 for no limit.
 	 */
 	@Property(key = "chatserver.network.client.max_connections_per_ip", defaultValue = "200")

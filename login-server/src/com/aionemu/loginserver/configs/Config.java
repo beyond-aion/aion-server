@@ -68,6 +68,12 @@ public class Config {
 	public static int CLIENT_AUTH_TIMEOUT_SECONDS;
 
 	/**
+	 * Client connections that may be open at the same time, 0 for no limit. Each one takes about 6 KB of the heap.
+	 */
+	@Property(key = "loginserver.network.client.max_connections", defaultValue = "3000")
+	public static int MAX_CONNECTIONS;
+
+	/**
 	 * Connections an IP may have open at the same time, 0 for no limit.
 	 */
 	@Property(key = "loginserver.network.client.max_connections_per_ip", defaultValue = "30")

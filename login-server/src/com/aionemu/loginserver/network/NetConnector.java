@@ -24,7 +24,7 @@ public class NetConnector {
 	public static void connect() {
 		nettyServer = new NettyServer(Config.TRANSPORT, Config.IO_THREADS);
 		clientPacketExecutors = new DefaultEventExecutorGroup(8, new DefaultThreadFactory("PacketProcessor"));
-		ConnectionLimiter limiter = new ConnectionLimiter(Config.MAX_CONNECTIONS_PER_IP, Config.CONNECTIONS_PER_SECOND_PER_IP,
+		ConnectionLimiter limiter = new ConnectionLimiter(Config.MAX_CONNECTIONS, Config.MAX_CONNECTIONS_PER_IP, Config.CONNECTIONS_PER_SECOND_PER_IP,
 			Config.CONNECTION_BURST_PER_IP);
 		nettyServer.bind(Config.CLIENT_SOCKET_ADDRESS, "Aion game clients",
 			limiter.wrap(ch -> LoginConnection.initChannel(ch, clientPacketExecutors.next())));
