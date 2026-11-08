@@ -1,5 +1,6 @@
 package com.aionemu.loginserver.network.gameserver.serverpackets;
 
+import com.aionemu.loginserver.model.Account;
 import com.aionemu.loginserver.model.AccountTime;
 import com.aionemu.loginserver.network.gameserver.GsConnection;
 import com.aionemu.loginserver.network.gameserver.GsServerPacket;
@@ -13,31 +14,29 @@ import com.aionemu.loginserver.network.gameserver.GsServerPacket;
 public class SM_ACCOUNT_AUTH_RESPONSE extends GsServerPacket {
 
 	private final int accountId;
-
-	/**
-	 * True if account is authenticated.
-	 */
 	private final boolean ok;
-
 	private final String accountName;
-
-	/**
-	 * Time of account creation, measured in milliseconds since 1.1.1970 UTC
-	 */
 	private final long creationDate;
-
+	private final long accumulatedOnlineTime, accumulatedRestTime;
 	private final byte accessLevel, membership;
 	private final String allowedHddSerial;
 
-	public SM_ACCOUNT_AUTH_RESPONSE(int accountId, boolean ok, String accountName, long creationDate, byte accessLevel, byte membership,
-		String allowedHddSerial) {
+	/**
+	 * @param account
+	 *          The authenticated account, or null if the authentication failed. Its data is copied here, since the packet is written later on a
+	 *          network thread, when the account may already have left the game server again.
+	 */
+	public SM_ACCOUNT_AUTH_RESPONSE(int accountId, Account account) {
 		this.accountId = accountId;
-		this.ok = ok;
-		this.accountName = accountName;
-		this.creationDate = creationDate;
-		this.accessLevel = accessLevel;
-		this.membership = membership;
-		this.allowedHddSerial = allowedHddSerial;
+		this.ok = account != null;
+		this.accountName = ok ? account.getName() : null;
+		this.creationDate = ok ? account.getCreationDate().getTime() : 0;
+		AccountTime accountTime = ok ? account.getAccountTime() : null;
+		this.accumulatedOnlineTime = ok ? accountTime.getAccumulatedOnlineTime() : 0;
+		this.accumulatedRestTime = ok ? accountTime.getAccumulatedRestTime() : 0;
+		this.accessLevel = ok ? account.getAccessLevel() : 0;
+		this.membership = ok ? account.getMembership() : 0;
+		this.allowedHddSerial = ok ? account.getAllowedHddSerial() : null;
 	}
 
 	@Override
@@ -45,13 +44,11 @@ public class SM_ACCOUNT_AUTH_RESPONSE extends GsServerPacket {
 		writeC(1);
 		writeD(accountId);
 		writeC(ok ? 1 : 0);
-
 		if (ok) {
 			writeS(accountName);
 			writeQ(creationDate);
-			AccountTime accountTime = con.getGameServerInfo().getAccountFromGameServer(accountId).getAccountTime();
-			writeQ(accountTime.getAccumulatedOnlineTime());
-			writeQ(accountTime.getAccumulatedRestTime());
+			writeQ(accumulatedOnlineTime);
+			writeQ(accumulatedRestTime);
 			writeC(accessLevel);
 			writeC(membership);
 			writeS(allowedHddSerial);

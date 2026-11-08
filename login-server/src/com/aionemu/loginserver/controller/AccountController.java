@@ -81,9 +81,9 @@ public class AccountController {
 			AccountDAO.updateLastServer(acc.getId(), acc.getLastServer());
 
 			// Send response to GameServer
-			gsConnection.sendPacket(new SM_ACCOUNT_AUTH_RESPONSE(key.accountId, true, acc.getName(), acc.getCreationDate().getTime(), acc.getAccessLevel(), acc.getMembership(), acc.getAllowedHddSerial()));
+			gsConnection.sendPacket(new SM_ACCOUNT_AUTH_RESPONSE(key.accountId, acc));
 		} else {
-			gsConnection.sendPacket(new SM_ACCOUNT_AUTH_RESPONSE(key.accountId, false, null, 0, (byte) 0, (byte) 0, null));
+			gsConnection.sendPacket(new SM_ACCOUNT_AUTH_RESPONSE(key.accountId, null));
 		}
 	}
 

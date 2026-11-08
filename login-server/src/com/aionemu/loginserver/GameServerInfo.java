@@ -1,7 +1,7 @@
 package com.aionemu.loginserver;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.aionemu.loginserver.model.Account;
 import com.aionemu.loginserver.network.gameserver.GsConnection;
@@ -57,7 +57,7 @@ public class GameServerInfo {
 	/**
 	 * Map<AccId,Account> of accounts logged in on this GameServer.
 	 */
-	private final Map<Integer, Account> accountsOnGameServer = new HashMap<>();
+	private final Map<Integer, Account> accountsOnGameServer = new ConcurrentHashMap<>(); // changed by packets of game servers, which run concurrently
 
 	/**
 	 * Constructor.
