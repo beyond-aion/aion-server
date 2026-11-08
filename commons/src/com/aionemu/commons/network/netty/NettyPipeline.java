@@ -1,11 +1,8 @@
 package com.aionemu.commons.network.netty;
 
-import java.nio.ByteOrder;
-
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelPipeline;
-import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 import io.netty.util.AttributeKey;
 
 public class NettyPipeline {
@@ -34,7 +31,7 @@ public class NettyPipeline {
 		ChannelHandler cryptHandler) {
 		channel.attr(CONNECTION).set(connection);
 		ChannelPipeline pipeline = channel.pipeline();
-		pipeline.addLast("frameDecoder", new LengthFieldBasedFrameDecoder(ByteOrder.LITTLE_ENDIAN, maxReceivedPacketSize, 0, 2, -2, 2, true));
+		pipeline.addLast("frameDecoder", new FrameDecoder(maxReceivedPacketSize));
 		if (cryptHandler != null)
 			pipeline.addLast("crypt", cryptHandler);
 		pipeline.addLast("packetEncoder", new PacketEncoder(connection, maxSentPacketSize));

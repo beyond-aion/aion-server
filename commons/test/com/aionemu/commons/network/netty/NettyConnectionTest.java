@@ -91,6 +91,7 @@ public class NettyConnectionTest {
 		private final List<Integer> executed = new ArrayList<>();
 		private boolean readFailureFatal = true;
 		private boolean disconnected;
+		private int createdPackets;
 
 		TestConnection(EmbeddedChannel channel, Queue<Runnable> tasks) {
 			super(channel, tasks::add);
@@ -104,6 +105,7 @@ public class NettyConnectionTest {
 
 		@Override
 		protected BaseClientPacket<?> createPacket(ByteBuf data) {
+			createdPackets++;
 			TestClientPacket packet = new TestClientPacket(data);
 			packet.setConnection(this);
 			return packet;
@@ -191,6 +193,16 @@ public class NettyConnectionTest {
 		connection.runTasks();
 		assertEquals(List.of(0, 1, 2), connection.executed);
 		assertTrue(connection.disconnected, "onDisconnect must run after the pending packets");
+	}
+
+	@Test
+	public void ignoresThePacketsThatFollowInTheSameDataAfterClosing() {
+		ByteBuf data = Unpooled.buffer();
+		for (int i = 0; i < 100; i++)
+			data.writeShortLE(6).writeIntLE(i);
+		channel.writeInbound(data);
+		assertFalse(channel.isOpen());
+		assertEquals(4, connection.createdPackets, "the fourth packet exceeds the limit of waiting packets and closes the channel");
 	}
 
 	@Test
