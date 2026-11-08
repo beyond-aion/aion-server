@@ -49,4 +49,22 @@ public class NetworkConfig {
 	 */
 	@Property(key = "chatserver.network.client.auth_timeout_seconds", defaultValue = "60")
 	public static int CLIENT_AUTH_TIMEOUT_SECONDS;
+
+	/**
+	 * Connections an IP may have open at the same time, 0 for no limit.
+	 */
+	@Property(key = "chatserver.network.client.max_connections_per_ip", defaultValue = "200")
+	public static int MAX_CONNECTIONS_PER_IP;
+
+	/**
+	 * New connections an IP may open per second on average, after a burst of {@link #CONNECTION_BURST_PER_IP}, 0 for no limit.
+	 */
+	@Property(key = "chatserver.network.client.connections_per_second_per_ip", defaultValue = "5")
+	public static double CONNECTIONS_PER_SECOND_PER_IP;
+
+	/**
+	 * New connections an IP may open at once before {@link #CONNECTIONS_PER_SECOND_PER_IP} applies.
+	 */
+	@Property(key = "chatserver.network.client.connection_burst_per_ip", defaultValue = "30")
+	public static int CONNECTION_BURST_PER_IP;
 }

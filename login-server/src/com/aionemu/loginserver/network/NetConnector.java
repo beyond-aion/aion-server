@@ -2,6 +2,7 @@ package com.aionemu.loginserver.network;
 
 import java.util.concurrent.TimeUnit;
 
+import com.aionemu.commons.network.netty.ConnectionLimiter;
 import com.aionemu.commons.network.netty.NettyPipeline;
 import com.aionemu.commons.network.netty.NettyServer;
 import com.aionemu.loginserver.configs.Config;
@@ -23,7 +24,10 @@ public class NetConnector {
 	public static void connect() {
 		nettyServer = new NettyServer(Config.TRANSPORT, Config.IO_THREADS);
 		clientPacketExecutors = new DefaultEventExecutorGroup(8, new DefaultThreadFactory("PacketProcessor"));
-		nettyServer.bind(Config.CLIENT_SOCKET_ADDRESS, "Aion game clients", ch -> LoginConnection.initChannel(ch, clientPacketExecutors.next()));
+		ConnectionLimiter limiter = new ConnectionLimiter(Config.MAX_CONNECTIONS_PER_IP, Config.CONNECTIONS_PER_SECOND_PER_IP,
+			Config.CONNECTION_BURST_PER_IP);
+		nettyServer.bind(Config.CLIENT_SOCKET_ADDRESS, "Aion game clients",
+			limiter.wrap(ch -> LoginConnection.initChannel(ch, clientPacketExecutors.next())));
 		nettyServer.bind(Config.GAMESERVER_SOCKET_ADDRESS, "game servers", ch -> NettyPipeline.init(ch, new GsConnection(ch), 0xFFFF));
 	}
 
