@@ -7,6 +7,7 @@ import java.util.Deque;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,6 +58,12 @@ public class LoginServer {
 	 * request per account at the login server, and the answer goes to the client that sent it.
 	 */
 	private final Map<Integer, LoginRequest> checkedRequests = new HashMap<>();
+	/**
+	 * When the requests in {@link #checkedRequests} were sent. The login server answers within milliseconds, a request without answer after
+	 * {@link #CHECK_TIMEOUT_NANOS} was lost (e.g. the login server failed to write the answer) and must not keep the account blocked.
+	 */
+	private final Map<Integer, Long> checkStartNanos = new HashMap<>();
+	private static final long CHECK_TIMEOUT_NANOS = TimeUnit.SECONDS.toNanos(20);
 	/**
 	 * Requests for an account whose previous request is still being checked, in the order they came in.
 	 */
@@ -115,6 +122,7 @@ public class LoginServer {
 				client.close();
 			loginRequests.clear();
 			checkedRequests.clear();
+			checkStartNanos.clear();
 			waitingRequests.clear();
 		}
 	}
@@ -180,14 +188,33 @@ public class LoginServer {
 		if (!isUp()) {
 			loginRequests.remove(client);
 			client.close(new SM_L2AUTH_LOGIN_CHECK(false, null)); // disconnect this client since authentication will not happen
-		} else if (checkedRequests.containsKey(loginRequest.accountId())) {
+		} else if (checkedRequests.containsKey(loginRequest.accountId()) && !isCheckLost(loginRequest.accountId())) {
 			Deque<LoginRequest> waiting = waitingRequests.computeIfAbsent(loginRequest.accountId(), _ -> new ArrayDeque<>());
 			if (!waiting.contains(loginRequest))
 				waiting.add(loginRequest);
 		} else {
-			checkedRequests.put(loginRequest.accountId(), loginRequest);
-			lsCon.sendPacket(loginRequest.lsAuthRequest());
+			startCheck(loginRequest);
 		}
+	}
+
+	private void startCheck(LoginRequest loginRequest) {
+		checkedRequests.put(loginRequest.accountId(), loginRequest);
+		checkStartNanos.put(loginRequest.accountId(), System.nanoTime());
+		lsCon.sendPacket(loginRequest.lsAuthRequest());
+	}
+
+	/**
+	 * @return True if the login server didn't answer the request of the account in time. Its client is closed then.
+	 */
+	private boolean isCheckLost(int accountId) {
+		if (System.nanoTime() - checkStartNanos.get(accountId) < CHECK_TIMEOUT_NANOS)
+			return false;
+		LoginRequest lost = checkedRequests.remove(accountId);
+		checkStartNanos.remove(accountId);
+		loginRequests.remove(lost.connection());
+		log.warn("The login server didn't answer the login check of account {} for {}", accountId, lost.connection());
+		lost.connection().close(new SM_L2AUTH_LOGIN_CHECK(false, null));
+		return true;
 	}
 
 	/**
@@ -203,8 +230,7 @@ public class LoginServer {
 		if (next == null)
 			return;
 		if (isUp()) {
-			checkedRequests.put(accountId, next);
-			lsCon.sendPacket(next.lsAuthRequest());
+			startCheck(next);
 		} else {
 			loginRequests.remove(next.connection());
 			next.connection().close(new SM_L2AUTH_LOGIN_CHECK(false, null));
@@ -220,6 +246,7 @@ public class LoginServer {
 		LoginRequest loginRequest = checkedRequests.remove(accountId);
 		if (loginRequest == null)
 			return;
+		checkStartNanos.remove(accountId);
 		AionConnection client = loginRequest.connection();
 		loginRequests.remove(client);
 		checkNextRequest(accountId);
