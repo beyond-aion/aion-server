@@ -1,7 +1,10 @@
 package com.aionemu.gameserver.network.loginserver;
 
 import java.net.SocketException;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -40,7 +43,19 @@ public class LoginServer {
 
 	private static final Logger log = LoggerFactory.getLogger(LoginServer.class);
 
-	private final Map<Integer, LoginRequest> loginRequests = new ConcurrentHashMap<>();
+	/**
+	 * The login request of each client that hasn't been authenticated yet. All login request fields are guarded by this instance.
+	 */
+	private final Map<AionConnection, LoginRequest> loginRequests = new HashMap<>();
+	/**
+	 * The request of each account that the login server is checking right now. Its answer only names the account, so there is never more than one
+	 * request per account at the login server, and the answer goes to the client that sent it.
+	 */
+	private final Map<Integer, LoginRequest> checkedRequests = new HashMap<>();
+	/**
+	 * Requests for an account whose previous request is still being checked, in the order they came in.
+	 */
+	private final Map<Integer, Deque<LoginRequest>> waitingRequests = new HashMap<>();
 	private final Map<Integer, AionConnection> loggedInAccounts = new ConcurrentHashMap<>();
 	private volatile LoginServerConnection lsCon = null;
 	private NettyServer nettyServer = null;
@@ -90,9 +105,13 @@ public class LoginServer {
 			lsCon.close();
 			lsCon = null;
 		}
-		for (LoginRequest loginRequest : loginRequests.values())
-			loginRequest.connection.close();
-		loginRequests.clear();
+		synchronized (this) {
+			for (AionConnection client : loginRequests.keySet())
+				client.close();
+			loginRequests.clear();
+			checkedRequests.clear();
+			waitingRequests.clear();
+		}
 	}
 
 	public void reconnect() {
@@ -112,11 +131,18 @@ public class LoginServer {
 	 * Notify that client is disconnected - we must clear waiting request to LoginServer if any to prevent leaks. Also notify LoginServer that this
 	 * account is no longer on GameServer side.
 	 */
-	public void onDisconnect(AionConnection connection) {
-		loginRequests.values().removeIf(r -> r.connection == connection);
-		if (connection.getAccount() != null) {
-			loggedInAccounts.remove(connection.getAccount().getId());
-			sendPacket(new SM_ACCOUNT_DISCONNECTED(connection.getAccount().getId()));
+	public synchronized void onDisconnect(AionConnection connection) {
+		LoginRequest loginRequest = loginRequests.remove(connection);
+		if (loginRequest != null) {
+			Deque<LoginRequest> waiting = waitingRequests.get(loginRequest.accountId());
+			if (waiting != null && waiting.remove(loginRequest) && waiting.isEmpty())
+				waitingRequests.remove(loginRequest.accountId());
+			// a request that the login server is checking stays, its answer has to be handled (see accountAuthenticationResponse)
+		}
+		Account account = connection.getAccount();
+		if (account != null) {
+			loggedInAccounts.remove(account.getId());
+			sendPacket(new SM_ACCOUNT_DISCONNECTED(account.getId()));
 		}
 	}
 
@@ -128,33 +154,77 @@ public class LoginServer {
 		return gameServerCount;
 	}
 
-	public void registerLoginRequest(int accountId, AionConnection client, int loginOk, int playOk1, int playOk2) {
-		loginRequests.putIfAbsent(accountId, new LoginRequest(client, new SM_ACCOUNT_AUTH(accountId, loginOk, playOk1, playOk2)));
+	/**
+	 * Remembers the account and session key the client wants to log in with. A client can ask for one account only.
+	 */
+	public synchronized void registerLoginRequest(int accountId, AionConnection client, int loginOk, int playOk1, int playOk2) {
+		if (client.isClosing())
+			return;
+		if (loginRequests.putIfAbsent(client, new LoginRequest(accountId, client, new SM_ACCOUNT_AUTH(accountId, loginOk, playOk1, playOk2))) != null) {
+			log.warn("{} sent a second login request (modified client), disconnecting", client);
+			client.close(new SM_L2AUTH_LOGIN_CHECK(false, null));
+		}
 	}
 
 	/**
 	 * Starts authentication procedure of this client - LoginServer will send response with information about account name if authentication is ok.
 	 */
-	public void authenticateClient(AionConnection client) {
-		if (isUp())
-			loginRequests.values().stream().filter(r -> r.connection == client).findAny().ifPresent(r -> lsCon.sendPacket(r.lsAuthResponse));
-		else
+	public synchronized void authenticateClient(AionConnection client) {
+		LoginRequest loginRequest = loginRequests.get(client);
+		if (loginRequest == null || checkedRequests.get(loginRequest.accountId()) == loginRequest)
+			return;
+		if (!isUp()) {
+			loginRequests.remove(client);
 			client.close(new SM_L2AUTH_LOGIN_CHECK(false, null)); // disconnect this client since authentication will not happen
+		} else if (checkedRequests.containsKey(loginRequest.accountId())) {
+			Deque<LoginRequest> waiting = waitingRequests.computeIfAbsent(loginRequest.accountId(), _ -> new ArrayDeque<>());
+			if (!waiting.contains(loginRequest))
+				waiting.add(loginRequest);
+		} else {
+			checkedRequests.put(loginRequest.accountId(), loginRequest);
+			lsCon.sendPacket(loginRequest.lsAuthRequest());
+		}
+	}
+
+	/**
+	 * Sends the next request waiting for the given account to the login server, if there is one.
+	 */
+	private void checkNextRequest(int accountId) {
+		Deque<LoginRequest> waiting = waitingRequests.get(accountId);
+		if (waiting == null)
+			return;
+		LoginRequest next = waiting.poll();
+		if (waiting.isEmpty())
+			waitingRequests.remove(accountId);
+		if (next == null)
+			return;
+		if (isUp()) {
+			checkedRequests.put(accountId, next);
+			lsCon.sendPacket(next.lsAuthRequest());
+		} else {
+			loginRequests.remove(next.connection());
+			next.connection().close(new SM_L2AUTH_LOGIN_CHECK(false, null));
+			checkNextRequest(accountId);
+		}
 	}
 
 	/**
 	 * This method is called by CM_ACCOUNT_AUTH_RESPONSE LoginServer packets to notify GameServer about results of client authentication.
 	 */
-	public void accountAuthenticationResponse(int accountId, String accountName, boolean result, long creationDate, AccountTime accountTime,
-		byte accessLevel, byte membership, String allowedHddSerial) {
-		LoginRequest loginRequest = loginRequests.remove(accountId);
+	public synchronized void accountAuthenticationResponse(int accountId, String accountName, boolean result, long creationDate,
+		AccountTime accountTime, byte accessLevel, byte membership, String allowedHddSerial) {
+		LoginRequest loginRequest = checkedRequests.remove(accountId);
 		if (loginRequest == null)
 			return;
-
-		AionConnection client = loginRequest.connection;
-		if (!result || !validateMacAndHddSerial(client, allowedHddSerial)) {
+		AionConnection client = loginRequest.connection();
+		loginRequests.remove(client);
+		checkNextRequest(accountId);
+		if (!result || client.isClosing() || !validateMacAndHddSerial(client, allowedHddSerial)) {
 			client.close(new SM_L2AUTH_LOGIN_CHECK(false, accountName)); // LS sends no accName when result is false
-			sendPacket(new SM_ACCOUNT_DISCONNECTED(accountId)); // disconnect manually from login server because account isn't attached to connection yet
+			// The login server has moved the account to this game server only if it accepted the session key. Telling it otherwise about an account it
+			// didn't accept would log out whoever plays on that account right now.
+			if (result)
+				sendPacket(new SM_ACCOUNT_DISCONNECTED(accountId));
 			return;
 		}
 		Account account = AccountService.getAccount(accountId, accountName, creationDate, accountTime, accessLevel, membership, allowedHddSerial);
@@ -163,9 +233,9 @@ public class LoginServer {
 			sendPacket(new SM_CHANGE_ALLOWED_HDD_SERIAL(account));
 		}
 		kickOnlineCharacters(account);
+		loggedInAccounts.put(accountId, client);
 		client.setAccount(account);
 		client.setState(AionConnection.State.AUTHED);
-		loggedInAccounts.put(accountId, client);
 		log.info("{} authed with MAC: {} and HDD serial: {}", account, client.getMacAddress(), client.getHddSerial());
 		client.sendPacket(new SM_L2AUTH_LOGIN_CHECK(true, accountName));
 		sendPacket(new SM_ACCOUNT_CONNECTION_INFO(account.getId(), System.currentTimeMillis(), client.getIP(), client.getMacAddress(), client.getHddSerial()));
@@ -270,5 +340,5 @@ public class LoginServer {
 		protected static final LoginServer instance = new LoginServer();
 	}
 
-	private record LoginRequest(AionConnection connection, SM_ACCOUNT_AUTH lsAuthResponse) {}
+	private record LoginRequest(int accountId, AionConnection connection, SM_ACCOUNT_AUTH lsAuthRequest) {}
 }
