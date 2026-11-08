@@ -146,4 +146,12 @@ public class ChatPipelineTest {
 		assertNull(channel.readOutbound());
 		assertTrue(channel.isOpen());
 	}
+
+	@Test
+	public void acceptsTheKeepaliveButClosesOnOtherPacketsBeforeTheLogin() {
+		send(0x00FF, Unpooled.buffer().writeZero(16));
+		assertTrue(channel.isOpen());
+		send(0x0018, Unpooled.buffer().writeZero(16).writeIntLE(1).writeByte(0).writeShortLE(0));
+		assertFalse(channel.isOpen());
+	}
 }

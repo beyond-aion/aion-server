@@ -33,7 +33,10 @@ public class AionConnection extends NettyConnection<AbstractServerPacket> {
 
 	@Override
 	protected BaseClientPacket<?> createPacket(ByteBuf data) {
-		return ClientPacketHandler.handle(data, this);
+		BaseClientPacket<?> packet = ClientPacketHandler.handle(data, this);
+		if (packet == null && state == State.CONNECTED) // like retail, which answers anything else before the login with "Unauthorized Request"
+			getChannel().close();
+		return packet;
 	}
 
 	@Override

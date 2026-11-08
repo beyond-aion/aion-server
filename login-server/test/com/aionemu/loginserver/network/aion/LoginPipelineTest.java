@@ -139,4 +139,16 @@ public class LoginPipelineTest {
 		assertFalse(channel.isOpen());
 		channel.finishAndReleaseAll();
 	}
+
+	@Test
+	public void closesOnAnUnknownPacketBeforeTheLogin() throws Exception {
+		EmbeddedChannel channel = channel();
+		ByteBuf init = readServerPacket(channel, STATIC_KEY, true);
+		byte[] sessionKey = Arrays.copyOfRange(init.array(), 1 + 4 + 4 + 128 + 16, 1 + 4 + 4 + 128 + 16 + 16);
+
+		channel.writeInbound(clientPacket(new byte[] { 0x55, 1, 2, 3 }, sessionKey, false));
+		assertNull(channel.readOutbound());
+		assertFalse(channel.isOpen());
+		channel.finishAndReleaseAll();
+	}
 }

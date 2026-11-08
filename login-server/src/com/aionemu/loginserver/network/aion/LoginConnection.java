@@ -110,7 +110,10 @@ public class LoginConnection extends NettyConnection<AionServerPacket> {
 	 */
 	@Override
 	protected BaseClientPacket<?> createPacket(ByteBuf data) {
-		return AionPacketHandlerFactory.handle(data, this);
+		BaseClientPacket<?> packet = AionPacketHandlerFactory.handle(data, this);
+		if (packet == null && state != State.AUTHED_LOGIN) // the client sends nothing else before the login, so it's not a client
+			getChannel().close();
+		return packet;
 	}
 
 	@Override

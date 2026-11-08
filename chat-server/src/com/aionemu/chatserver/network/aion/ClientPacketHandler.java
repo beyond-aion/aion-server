@@ -1,13 +1,16 @@
 package com.aionemu.chatserver.network.aion;
 
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.chatserver.network.aion.AionConnection.State;
 import com.aionemu.chatserver.network.aion.clientpackets.*;
-import com.aionemu.commons.utils.NetworkUtils;
 
 import io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBufUtil;
 
 /**
  * @author ATracer
@@ -15,6 +18,7 @@ import io.netty.buffer.ByteBuf;
 public class ClientPacketHandler {
 
 	private static final Logger log = LoggerFactory.getLogger(ClientPacketHandler.class);
+	private static final Set<Integer> loggedUnknownPackets = ConcurrentHashMap.newKeySet();
 
 	public static AbstractClientPacket handle(ByteBuf buf, AionConnection connection) {
 		/*
@@ -96,6 +100,7 @@ public class ClientPacketHandler {
 				switch (opCode) {
 					case 0x4030 -> clientPacket = new CM_CHAT_INI(buf, connection, opCode);
 					case 0x4005 -> clientPacket = new CM_PLAYER_AUTH(buf, connection, opCode);
+					case 0x00FF -> clientPacket = new CM_PING(buf, connection, opCode); // retail accepts the keepalive before the login too
 					default -> logUnknownPacket(opCode, state, buf);
 				}
 				break;
@@ -115,8 +120,13 @@ public class ClientPacketHandler {
 		return clientPacket;
 	}
 
+	/**
+	 * Logs the first unknown packet of each opcode and state, so a client sending many of them can't fill the log.
+	 */
 	private static void logUnknownPacket(int opCode, State state, ByteBuf buf) {
-		log.warn("Unknown packet received from client: opCode=0x{} state={} length={} data=[{}]", "%04X".formatted(opCode), state, buf.readableBytes(),
-			NetworkUtils.toHex(buf));
+		if (loggedUnknownPackets.size() < 1000 && loggedUnknownPackets.add(state.ordinal() << 16 | opCode))
+			log.warn("Unknown packet received from client: opCode=0x{} state={} length={} data=[{}]", "%04X".formatted(opCode), state, buf.readableBytes(),
+				ByteBufUtil.hexDump(buf, buf.readerIndex(), Math.min(buf.readableBytes(), 64)));
+		buf.skipBytes(buf.readableBytes());
 	}
 }
