@@ -2,6 +2,7 @@ package com.aionemu.chatserver.network.aion.clientpackets;
 
 import java.util.Arrays;
 
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.chatserver.configs.main.LoggingConfig;
@@ -22,6 +23,12 @@ import io.netty.buffer.ByteBuf;
  */
 public class CM_CHANNEL_MESSAGE extends AbstractClientPacket {
 
+	private static final Logger log = LoggerFactory.getLogger(CM_CHANNEL_MESSAGE.class);
+	/**
+	 * The 4.8 client sends at most 400 characters ({@code ccChannelChat} rejects longer texts).
+	 */
+	private static final int MAX_TEXT_LENGTH = 400;
+
 	private int channelId;
 	private byte[] content;
 
@@ -40,10 +47,15 @@ public class CM_CHANNEL_MESSAGE extends AbstractClientPacket {
 
 	@Override
 	protected void runImpl() {
+		ChatClient client = getConnection().getChatClient();
+		if (content.length > MAX_TEXT_LENGTH * 2) {
+			log.warn("{} sent a message of {} characters, the client allows {}, disconnecting", client, content.length / 2, MAX_TEXT_LENGTH);
+			getConnection().close();
+			return;
+		}
 		Channel channel = ChatChannels.getChannelById(channelId);
 		if (channel == null)
 			return;
-		ChatClient client = getConnection().getChatClient();
 		Message message = new Message(channel, content, client);
 		if (client.isGagged()) {
 			long gagTimeMin = (client.getGagTime() - System.currentTimeMillis()) / 1000 / 60;

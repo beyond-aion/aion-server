@@ -154,4 +154,16 @@ public class ChatPipelineTest {
 		send(0x0018, Unpooled.buffer().writeZero(16).writeIntLE(1).writeByte(0).writeShortLE(0));
 		assertFalse(channel.isOpen());
 	}
+
+	@Test
+	public void closesOnAMessageLongerThanTheClientAllows() throws Exception {
+		login();
+		int channelId = joinChannel(5);
+		ByteBuf body = Unpooled.buffer().writeZero(16).writeIntLE(channelId).writeByte(0);
+		writeS(body, "x".repeat(401));
+		send(0x0018, body);
+		for (ByteBuf out; (out = channel.readOutbound()) != null;)
+			assertFalse(out.isReadable(), "the message must not be sent to the channel");
+		assertFalse(channel.isOpen());
+	}
 }
