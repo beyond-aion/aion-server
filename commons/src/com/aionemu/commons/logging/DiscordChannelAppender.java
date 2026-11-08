@@ -7,6 +7,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
@@ -186,7 +187,15 @@ public class DiscordChannelAppender<E> extends AppenderBase<E> {
 		if (isRateLimited())
 			return;
 		try {
-			byte[] json = JSON.toJSONBytes(Map.of("content", msg, "username", username, "avatar_url", avatarUrl));
+			Map<String, Object> body = new HashMap<>();
+			body.put("content", msg);
+			if (username != null)
+				body.put("username", username);
+			if (avatarUrl != null)
+				body.put("avatar_url", avatarUrl);
+			// messages contain text of players and of anyone who connects, so mentions like @everyone or <@&role> must not ping anyone
+			body.put("allowed_mentions", Map.of("parse", List.of()));
+			byte[] json = JSON.toJSONBytes(body);
 			HttpRequest httpRequest = HttpRequest.newBuilder(webhookUri)
 					.headers("User-Agent", "DiscordChannelAppender/1.0")
 					.headers("Content-Type", "application/json")
