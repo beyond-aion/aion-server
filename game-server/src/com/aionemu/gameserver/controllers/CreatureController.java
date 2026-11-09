@@ -309,7 +309,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	public void attackTarget(Creature target, int time, boolean skipChecks) {
 		boolean addAttackObservers = true;
 		if (!skipChecks
-			&& (target == null || getOwner().isDead() || getOwner().getLifeStats().isAboutToDie() || !getOwner().canAttack() || !getOwner().isSpawned())) {
+			&& (target == null || getOwner().isDeadOrDoomed() || !getOwner().canAttack() || !getOwner().isSpawned())) {
 			return;
 		}
 		if (getOwner() instanceof Player player)

@@ -68,7 +68,7 @@ public class GaleCycloneAI extends NpcAI {
 		@Override
 		public void moved() {
 			double newRange = PositionUtil.getDistance(player, creature);
-			if (creature.isDead() || creature.getLifeStats().isAboutToDie() || !creature.getKnownList().sees(player)) {
+			if (creature.isDeadOrDoomed() || !creature.getKnownList().sees(player)) {
 				remove();
 				return;
 			}

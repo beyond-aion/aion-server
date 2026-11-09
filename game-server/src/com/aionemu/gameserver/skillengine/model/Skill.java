@@ -259,7 +259,7 @@ public class Skill {
 			}
 		}
 
-		if (target.getLifeStats().isAboutToDie() && !isNonTargetAOE())
+		if (target.getLifeStats().isDoomed() && !isNonTargetAOE())
 			return false;
 
 		if (target.isDead() && !getSkillTemplate().hasResurrectEffect() && !isNonTargetAOE()) {

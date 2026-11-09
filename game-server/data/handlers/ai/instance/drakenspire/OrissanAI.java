@@ -78,7 +78,7 @@ public class OrissanAI extends AggressiveNoLootNpcAI {
 	}
 
 	private void attackIcingCrystal() {
-		VisibleObject servant = getKnownList().findObject(o -> o.get() instanceof Npc npc && npc.getNpcId() == 855700 && !npc.isDead() && !npc.getLifeStats().isAboutToDie());
+		VisibleObject servant = getKnownList().findObject(o -> o.get() instanceof Npc npc && npc.getNpcId() == 855700 && !npc.isDeadOrDoomed());
 		if (servant != null) {
 			getOwner().setTarget(servant);
 			SkillEngine.getInstance().getSkill(getOwner(), 21637, 67, servant).useSkill();

@@ -81,7 +81,7 @@ public class SummonController extends CreatureController<Summon> {
 
 	@Override
 	public void attackTarget(Creature target, int time, boolean skipChecks) {
-		if (target.isDead() || target.getLifeStats().isAboutToDie()) {
+		if (target.isDeadOrDoomed()) {
 			PacketSendUtility.sendPacket(getMaster(), SM_SYSTEM_MESSAGE.STR_INVALID_TARGET());
 			return;
 		}

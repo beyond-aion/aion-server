@@ -113,7 +113,7 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 			bulkyMobSpawnTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
 				Npc bulky = null;
 				for (Npc n : instance.getNpcs(BULKY_MOB_ID)) {
-					if (!n.isDead() && !n.getLifeStats().isAboutToDie()) {
+					if (!n.isDeadOrDoomed()) {
 						bulky = n;
 						break;
 					}
@@ -152,7 +152,7 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 				dominatorMobSpawnTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
 					Npc dominator = null;
 					for (Npc n : instance.getNpcs(DOMINATOR_MOB_ID)) {
-						if (!n.isDead() && !n.getLifeStats().isAboutToDie()) {
+						if (!n.isDeadOrDoomed()) {
 							dominator = n;
 							break;
 						}

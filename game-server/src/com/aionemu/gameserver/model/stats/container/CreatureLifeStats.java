@@ -3,6 +3,7 @@ package com.aionemu.gameserver.model.stats.container;
 import java.util.Objects;
 import java.util.concurrent.Future;
 
+import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
@@ -21,7 +22,11 @@ public abstract class CreatureLifeStats<T extends Creature> {
 	private int cachedMaxHp;
 	private int currentMp;
 	private int cachedMaxMp;
-	private int killingBlow; // for long animation skills that will kill - last damage
+	/**
+	 * Damage of a hit that is already in flight and will kill this creature if it lands. It is a damage value rather than a flag so that healing
+	 * above it clears {@link #isDoomed()}.
+	 */
+	private int killingBlow;
 	protected final T owner;
 	protected final Object restoreLock = new Object();
 	protected Future<?> lifeRestoreTask;
@@ -56,15 +61,26 @@ public abstract class CreatureLifeStats<T extends Creature> {
 		return currentHp == 0;
 	}
 
-	public boolean isAboutToDie() {
-		return killingBlow != 0;
+	/**
+	 * @return True if the creature is dead or a lethal hit is already on its way. Such a creature must neither act nor be targeted normally.
+	 */
+	public boolean isDeadOrDoomed() {
+		return isDead() || isDoomed();
+	}
+
+	/**
+	 * @return True if an in-flight hit is lethal and this creature is treated as dead before the hit lands.
+	 *         Always false when {@link CustomConfig#DEATH_AT_HITTIME} is enabled.
+	 */
+	public boolean isDoomed() {
+		return !CustomConfig.DEATH_AT_HITTIME && killingBlow != 0;
 	}
 
 	public void setKillingBlow(int killingBlow) {
 		this.killingBlow = killingBlow;
 	}
 
-	private void unsetIsAboutToDie() {
+	private void unsetDoomedState() {
 		this.killingBlow = 0;
 	}
 
@@ -90,7 +106,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 	public int reduceHp(TYPE type, int value, int skillId, LOG log, Creature attacker, boolean criticalHit) {
 		Objects.requireNonNull(attacker, "attacker");
 		if (getOwner().isInvulnerable()) {
-			unsetIsAboutToDie();
+			unsetDoomedState();
 			return currentHp;
 		}
 
@@ -104,7 +120,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 			currentHp = newHp = Math.clamp(currentHp - value, minHp, currentHp);
 			if (isDead()) {
 				currentMp = 0;
-				unsetIsAboutToDie();
+				unsetDoomedState();
 			}
 		}
 
@@ -186,7 +202,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 			previousHp = currentHp;
 			currentHp = newHp = Math.min(currentHp + value, getMaxHp());
 			if (killingBlow != 0 && newHp > killingBlow)
-				unsetIsAboutToDie();
+				unsetDoomedState();
 		}
 
 		if (newHp != previousHp || skillId != 0)
@@ -366,7 +382,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 				cachedMaxMp = getMaxMp();
 			}
 			if (killingBlow != 0 && (newHp == 0 || newHp > killingBlow))
-				unsetIsAboutToDie();
+				unsetDoomedState();
 		}
 		if (newHp != previousHp) {
 			// broadcast current hp percentage to others
