@@ -599,7 +599,7 @@ public class Effect implements StatOwner {
 		Creature effected = getEffected();
 		try {
 			for (EffectTemplate template : successEffects.values()) {
-				if (!shouldApplyFurtherEffects(effected))
+				if (!shouldApplyFurtherEffects(effected, template))
 					break;
 				template.applyEffect(this);
 				if (!shouldApplyFurtherEffects(effected))
@@ -633,10 +633,14 @@ public class Effect implements StatOwner {
 	}
 
 	private boolean shouldApplyFurtherEffects(Creature effected) {
+		return shouldApplyFurtherEffects(effected, null);
+	}
+
+	private boolean shouldApplyFurtherEffects(Creature effected, EffectTemplate template) {
 		if (effected != null) {
 			if (!effected.isSpawned() && !skillTemplate.isPassive()) // only allow on despawned if it's a passive skill (players get them during enterWorld)
 				return false;
-			if (effected.isDead() && !skillTemplate.hasResurrectEffect())
+			if (effected.isDead() && !skillTemplate.hasResurrectEffect() && (template == null || !template.appliesWhenEffectedIsDead()))
 				return false;
 		}
 		return true;
