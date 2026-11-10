@@ -17,6 +17,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import com.aionemu.loginserver.controller.AccountController;
 import com.aionemu.loginserver.model.Account;
 import com.aionemu.loginserver.network.gameserver.GsAuthResponse;
 import com.aionemu.loginserver.network.gameserver.GsConnection;
@@ -96,5 +97,16 @@ public class GameServerTableTest {
 		server.addAccountToGameServer(account(42));
 		server.setConnection(null); // the state between the two steps of the disconnect of a game server
 		assertFalse(GameServerTable.kickAccountFromGameServer(42, true));
+	}
+
+	@Test
+	public void theCharacterCountsOfAnAccountAreACopy() {
+		assertTrue(AccountController.getGSCharacterCountsFor(42).isEmpty());
+		AccountController.addGSCharacterCountFor(42, SERVER_ID, 3);
+		Map<Byte, Integer> counts = AccountController.getGSCharacterCountsFor(42);
+		AccountController.addGSCharacterCountFor(42, (byte) 2, 5);
+		assertEquals(Map.of(SERVER_ID, 3), counts);
+		AccountController.removeGSCharacterCounts(42);
+		assertTrue(AccountController.getGSCharacterCountsFor(42).isEmpty());
 	}
 }

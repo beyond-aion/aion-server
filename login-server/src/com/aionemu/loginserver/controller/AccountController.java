@@ -329,8 +329,9 @@ public class AccountController {
 	 * @param accountId
 	 * @return
 	 */
-	public static Map<Byte, Integer> getGSCharacterCountsFor(int accountId) {
-		return accountsGSCharacterCounts.get(accountId);
+	public static synchronized Map<Byte, Integer> getGSCharacterCountsFor(int accountId) {
+		Map<Byte, Integer> characterCounts = accountsGSCharacterCounts.get(accountId);
+		return characterCounts == null ? Map.of() : Map.copyOf(characterCounts); // a copy, the caller reads it while game servers report their counts
 	}
 
 	/**
