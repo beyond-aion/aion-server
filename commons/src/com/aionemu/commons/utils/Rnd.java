@@ -1,7 +1,6 @@
 package com.aionemu.commons.utils;
 
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.random.RandomGenerator;
 import java.util.random.RandomGeneratorFactory;
 import java.util.stream.DoubleStream;
@@ -17,8 +16,9 @@ public final class Rnd {
 
 	private static final RandomGeneratorFactory<RandomGenerator> factory = RandomGeneratorFactory.of("L64X128MixRandom");
 
-	// seeded without a shared lock, so short-lived virtual threads don't contend on their first call
-	private static final ThreadLocal<RandomGenerator> rnd = ThreadLocal.withInitial(() -> factory.create(ThreadLocalRandom.current().nextLong()));
+	// no shared generator: the no-arg constructor seeds each instance from the algorithm's own counter, so short-lived virtual
+	// threads can't park on a monitor during their first call
+	private static final ThreadLocal<RandomGenerator> rnd = ThreadLocal.withInitial(factory::create);
 
 	/**
 	 * To compare this chance with a success rate, evaluate "{@code if (chance() < success rate)}" to determine a success or, alternatively
