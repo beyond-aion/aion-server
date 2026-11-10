@@ -50,14 +50,24 @@ public class AccountController {
 	private static final Map<Integer, Map<Byte, Integer>> accountsGSCharacterCounts = new HashMap<>();
 
 	/**
-	 * Removes account from list of connections
-	 * 
-	 * @param account
-	 *          account
+	 * Forgets the account of the connection, unless a newer connection has logged in with it meanwhile.
+	 *
+	 * @return True if the account was still registered for this connection.
 	 */
-	public static void removeAccountOnLS(Account account) {
-		accountsOnLS.remove(account.getId());
+	public static boolean removeAccountOnLS(LoginConnection connection) {
+		Account account = connection.getAccount();
+		if (account == null || !accountsOnLS.remove(account.getId(), connection))
+			return false;
 		removeGSCharacterCounts(account.getId());
+		return true;
+	}
+
+	/**
+	 * @return True if the account of the connection is registered for it, so not yet taken over by a game server or by a newer connection.
+	 */
+	public static boolean isRegisteredOnLS(LoginConnection connection) {
+		Account account = connection.getAccount();
+		return account != null && accountsOnLS.get(account.getId()) == connection;
 	}
 
 	/**
@@ -65,11 +75,13 @@ public class AccountController {
 	 */
 	public static void checkAuth(SessionKey key, GsConnection gsConnection) {
 		LoginConnection con = accountsOnLS.get(key.accountId);
+		SessionKey sessionKey = con == null ? null : con.getSessionKey(); // null while the client is still logging in
 
-		if (con != null && con.getSessionKey().checkSessionKey(key)) {
+		if (sessionKey != null && sessionKey.checkSessionKey(key)) {
 			// account is successful logged in on gs remove it from here
 			accountsOnLS.remove(key.accountId);
 			removeGSCharacterCounts(key.accountId);
+			con.cancelJoinTimeout();
 
 			GameServerInfo gsi = gsConnection.getGameServerInfo();
 			Account acc = con.getAccount();
@@ -191,20 +203,9 @@ public class AccountController {
 			return AionAuthResponse.STR_L2AUTH_S_BLOCKED_IP;
 		}
 
-		// Do not allow to login two times with same account
-		synchronized (AccountController.class) {
-			if (GameServerTable.kickAccountFromGameServer(account.getId(), true))
-				return AionAuthResponse.STR_L2AUTH_S_ALREADY_LOGIN;
-
-			// If someone is at loginserver, he should be disconnected
-			LoginConnection con = accountsOnLS.remove(account.getId());
-			if (con != null) {
-				con.close(new SM_ACCOUNT_KICK(AionAuthResponse.STR_L2AUTH_S_KICKED_DOUBLE_LOGIN));
-				return AionAuthResponse.STR_L2AUTH_S_ALREADY_LOGIN;
-			}
-			connection.setAccount(account);
-			accountsOnLS.put(account.getId(), connection);
-		}
+		AionAuthResponse response = registerOnLS(account, connection);
+		if (response != AionAuthResponse.STR_L2AUTH_S_ALL_OK)
+			return response;
 
 		AccountTimeController.updateOnLogin(account);
 
@@ -213,6 +214,29 @@ public class AccountController {
 		// last mac is updated after receiving packet from gameserver
 		AccountDAO.updateMembership(account.getId());
 
+		return AionAuthResponse.STR_L2AUTH_S_ALL_OK;
+	}
+
+	/**
+	 * Registers the connection for the account, unless the account is logged in already: whoever is logged in gets kicked then, and this login is
+	 * refused.
+	 */
+	public static AionAuthResponse registerOnLS(Account account, LoginConnection connection) {
+		synchronized (AccountController.class) {
+			if (GameServerTable.kickAccountFromGameServer(account.getId(), true))
+				return AionAuthResponse.STR_L2AUTH_S_ALREADY_LOGIN;
+
+			// If someone is at loginserver, he should be disconnected
+			LoginConnection con = accountsOnLS.remove(account.getId());
+			// A closed connection is still registered if its client chose a game server and never arrived there (the client or the game server
+			// crashed in between). Nobody is logged in then, so it must not cost the player a refused login.
+			if (con != null && !con.isClosing()) {
+				con.close(new SM_ACCOUNT_KICK(AionAuthResponse.STR_L2AUTH_S_KICKED_DOUBLE_LOGIN));
+				return AionAuthResponse.STR_L2AUTH_S_ALREADY_LOGIN;
+			}
+			connection.setAccount(account);
+			accountsOnLS.put(account.getId(), connection);
+		}
 		return AionAuthResponse.STR_L2AUTH_S_ALL_OK;
 	}
 

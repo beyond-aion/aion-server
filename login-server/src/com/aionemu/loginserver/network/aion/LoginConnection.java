@@ -2,6 +2,8 @@ package com.aionemu.loginserver.network.aion;
 
 import java.security.interfaces.RSAPrivateKey;
 import java.util.concurrent.Executor;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 
 import javax.crypto.SecretKey;
 
@@ -23,6 +25,7 @@ import com.aionemu.loginserver.network.ncrypt.KeyGen;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
+import io.netty.util.concurrent.GlobalEventExecutor;
 
 /**
  * Object representing connection between LoginServer and Aion Client.
@@ -37,6 +40,11 @@ public class LoginConnection extends NettyConnection<AionServerPacket> {
 	private static final Logger log = LoggerFactory.getLogger(LoginConnection.class);
 
 	private static final int MAX_PACKET_SIZE = 8192 * 2;
+	/**
+	 * Time a client that chose a game server has to log in there after leaving the login server. Afterwards its session key is no longer accepted.
+	 */
+	static volatile long joinTimeoutMillis = 60_000;
+	private volatile ScheduledFuture<?> joinTimeout;
 
 	/**
 	 * Unique Session Id of this connection
@@ -123,10 +131,23 @@ public class LoginConnection extends NettyConnection<AionServerPacket> {
 
 	@Override
 	protected final void onDisconnect() {
-		// Remove account only if not joined GameServer yet.
-		if (account != null && !joinedGs) {
-			AccountController.removeAccountOnLS(account);
+		Account account = this.account;
+		if (account == null)
+			return;
+		if (!joinedGs) {
+			AccountController.removeAccountOnLS(this);
 			AccountTimeController.updateOnLogout(account);
+		} else if (AccountController.isRegisteredOnLS(this)) {
+			// The account stays registered for the game server, which asks for its session key when the client arrives there and takes the account
+			// over. A client that never arrives (it crashed, or the game server did) would otherwise stay registered with a valid session key
+			// until someone logs in with the account again.
+			long timeoutMillis = joinTimeoutMillis;
+			joinTimeout = GlobalEventExecutor.INSTANCE.schedule(() -> {
+				if (AccountController.removeAccountOnLS(this))
+					log.info("{} chose a game server but didn't log in there within {} seconds", this, timeoutMillis / 1000);
+			}, timeoutMillis, TimeUnit.MILLISECONDS);
+			if (!AccountController.isRegisteredOnLS(this)) // the game server took the account over just now, before the timer was set
+				cancelJoinTimeout();
 		}
 	}
 
@@ -153,6 +174,15 @@ public class LoginConnection extends NettyConnection<AionServerPacket> {
 	@Override
 	protected long getMaxSendStallMillis() {
 		return 60_000;
+	}
+
+	/**
+	 * Called when a game server has taken the account over. The pending timer would keep this connection in memory until it runs.
+	 */
+	public void cancelJoinTimeout() {
+		ScheduledFuture<?> joinTimeout = this.joinTimeout;
+		if (joinTimeout != null)
+			joinTimeout.cancel(false);
 	}
 
 	/**
