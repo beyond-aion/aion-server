@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
  */
 public final class Rnd {
 
-	private static final RandomGeneratorFactory<RandomGenerator> factory = RandomGeneratorFactory.of("L64X256MixRandom");
+	private static final RandomGeneratorFactory<RandomGenerator> factory = RandomGeneratorFactory.of("L64X128MixRandom");
 
 	// seeded without a shared lock, so short-lived virtual threads don't contend on their first call
 	private static final ThreadLocal<RandomGenerator> rnd = ThreadLocal.withInitial(() -> factory.create(ThreadLocalRandom.current().nextLong()));
