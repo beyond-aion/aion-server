@@ -21,7 +21,7 @@ import io.netty.channel.ChannelFutureListener;
 /**
  * Connection on top of a Netty channel. Received packets are executed on the connection's packet executor, outside the I/O threads: one after
  * another if the executor runs one task at a time (a Netty {@code EventExecutor} or a {@link com.aionemu.commons.utils.concurrent.SequentialExecutor}),
- * concurrently if it is a thread pool.
+ * concurrently if it is a thread pool. In both cases {@link #onDisconnect()} runs after the last of them.
  */
 public abstract class NettyConnection<S extends BaseServerPacket> {
 
@@ -37,6 +37,11 @@ public abstract class NettyConnection<S extends BaseServerPacket> {
 	private volatile InetSocketAddress remoteAddress;
 	private final AtomicInteger pendingPackets = new AtomicInteger();
 	private final AtomicBoolean closing = new AtomicBoolean();
+	/**
+	 * Set by the I/O thread once the channel is closed. No packet is queued for execution afterwards.
+	 */
+	private volatile boolean disconnected;
+	private final AtomicBoolean disconnectHandled = new AtomicBoolean();
 
 	protected NettyConnection(Channel channel, Executor packetExecutor) {
 		this.channel = channel;
@@ -144,21 +149,42 @@ public abstract class NettyConnection<S extends BaseServerPacket> {
 			pendingPackets.decrementAndGet();
 			return false;
 		}
-		packetExecutor.execute(() -> {
-			try {
-				runPacket(packet);
-			} finally {
-				pendingPackets.decrementAndGet();
-			}
-		});
+		try {
+			packetExecutor.execute(() -> {
+				try {
+					runPacket(packet);
+				} finally {
+					packetFinished();
+				}
+			});
+		} catch (RuntimeException | Error e) { // the executor didn't take the packet, e.g. because it was shut down
+			pendingPackets.decrementAndGet();
+			throw e;
+		}
 		return true;
 	}
 
+	private void packetFinished() {
+		// the I/O thread sets the flag before it reads the counter, and this thread does it the other way around, so at least one of them sees
+		// that the last packet of the closed connection has finished
+		if (pendingPackets.decrementAndGet() == 0 && disconnected)
+			handleDisconnect();
+	}
+
 	/**
-	 * Runs the task after all packets of this connection, which are already queued for execution, if the packet executor runs one task at a time.
+	 * Called by the I/O thread when the channel was closed. {@link #onDisconnect()} follows the last packet that is still queued or running, also
+	 * if the packet executor runs the packets concurrently: the packets of a connection must not find its state cleaned up under them, and must
+	 * not add to it what the cleanup has already removed.
 	 */
-	final void executeAfterPendingPackets(Runnable task) {
-		packetExecutor.execute(task);
+	final void onChannelInactive() {
+		disconnected = true;
+		if (pendingPackets.get() == 0)
+			packetExecutor.execute(this::handleDisconnect);
+	}
+
+	private void handleDisconnect() {
+		if (disconnectHandled.compareAndSet(false, true))
+			onDisconnect();
 	}
 
 	/**

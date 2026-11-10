@@ -89,7 +89,7 @@ class ConnectionHandler extends SimpleChannelInboundHandler<ByteBuf> {
 	public void channelInactive(ChannelHandlerContext ctx) throws Exception {
 		cancel(authTimeout);
 		cancel(sendStallTimeout);
-		connection.executeAfterPendingPackets(connection::onDisconnect);
+		connection.onChannelInactive();
 		super.channelInactive(ctx);
 	}
 

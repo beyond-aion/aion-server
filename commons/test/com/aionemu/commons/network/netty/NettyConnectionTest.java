@@ -8,10 +8,15 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Queue;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.IntConsumer;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -76,6 +81,7 @@ public class NettyConnectionTest {
 
 		@Override
 		protected void runImpl() {
+			getConnection().packetAction.accept(value);
 			getConnection().executed.add(value);
 		}
 
@@ -88,14 +94,23 @@ public class NettyConnectionTest {
 	private static class TestConnection extends NettyConnection<TestServerPacket> {
 
 		private final Queue<Runnable> tasks;
-		private final List<Integer> executed = new ArrayList<>();
+		private final List<Integer> executed = new CopyOnWriteArrayList<>();
+		private final AtomicInteger disconnects = new AtomicInteger();
+		private final CountDownLatch disconnectLatch = new CountDownLatch(1);
+		private volatile IntConsumer packetAction = _ -> {};
+		private volatile List<Integer> executedBeforeDisconnect;
 		private boolean readFailureFatal = true;
-		private boolean disconnected;
+		private volatile boolean disconnected;
 		private int createdPackets;
 
 		TestConnection(EmbeddedChannel channel, Queue<Runnable> tasks) {
 			super(channel, tasks::add);
 			this.tasks = tasks;
+		}
+
+		TestConnection(EmbeddedChannel channel, Executor packetExecutor) {
+			super(channel, packetExecutor);
+			this.tasks = null;
 		}
 
 		void runTasks() {
@@ -132,23 +147,41 @@ public class NettyConnectionTest {
 
 		@Override
 		protected void onDisconnect() {
+			executedBeforeDisconnect = List.copyOf(executed);
 			disconnected = true;
+			disconnects.incrementAndGet();
+			disconnectLatch.countDown();
 		}
 	}
 
 	@BeforeEach
 	public void connect() throws Exception {
+		channel = newChannel();
+		connection = new TestConnection(channel, new ArrayDeque<>());
+		NettyPipeline.init(channel, connection, MAX_PACKET_SIZE);
+		channel.register();
+	}
+
+	private static EmbeddedChannel newChannel() {
 		InetSocketAddress client = new InetSocketAddress("127.0.0.1", 50000);
-		channel = new EmbeddedChannel(false, false) {
+		return new EmbeddedChannel(false, false) {
 
 			@Override
 			protected SocketAddress remoteAddress0() {
 				return client;
 			}
 		};
-		connection = new TestConnection(channel, new ArrayDeque<>());
+	}
+
+	/**
+	 * @return A connection whose packets are executed concurrently, like those of the connections between the servers.
+	 */
+	private static TestConnection connectWithConcurrentPackets(Executor packetExecutor) throws Exception {
+		EmbeddedChannel channel = newChannel();
+		TestConnection connection = new TestConnection(channel, packetExecutor);
 		NettyPipeline.init(channel, connection, MAX_PACKET_SIZE);
 		channel.register();
+		return connection;
 	}
 
 	@AfterEach
@@ -193,6 +226,69 @@ public class NettyConnectionTest {
 		connection.runTasks();
 		assertEquals(List.of(0, 1, 2), connection.executed);
 		assertTrue(connection.disconnected, "onDisconnect must run after the pending packets");
+	}
+
+	@Test
+	public void disconnectsAConnectionWithoutPendingPackets() {
+		channel.close();
+		assertFalse(connection.disconnected, "onDisconnect must run on the packet executor");
+		connection.runTasks();
+		assertEquals(1, connection.disconnects.get());
+	}
+
+	@Test
+	public void disconnectsAfterThePacketsThatAreStillRunningConcurrently() throws Exception {
+		try (ExecutorService threads = Executors.newCachedThreadPool()) {
+			TestConnection connection = connectWithConcurrentPackets(threads);
+			CountDownLatch running = new CountDownLatch(2);
+			CountDownLatch finish = new CountDownLatch(1);
+			connection.packetAction = _ -> {
+				running.countDown();
+				try {
+					finish.await();
+				} catch (InterruptedException e) {
+					throw new IllegalStateException(e);
+				}
+			};
+			EmbeddedChannel channel = (EmbeddedChannel) connection.getChannel();
+			try {
+				channel.writeInbound(clientPacket(1));
+				channel.writeInbound(clientPacket(2));
+				assertTrue(running.await(5, TimeUnit.SECONDS));
+				channel.close();
+				// an idle thread of the pool would run onDisconnect right away, if it was just queued behind the packets
+				assertFalse(connection.disconnectLatch.await(200, TimeUnit.MILLISECONDS), "onDisconnect ran while packets were still running");
+			} finally {
+				finish.countDown(); // also if the test fails, or the packet threads would never end
+			}
+			assertTrue(connection.disconnectLatch.await(5, TimeUnit.SECONDS));
+			assertEquals(2, connection.executedBeforeDisconnect.size());
+			assertEquals(1, connection.disconnects.get());
+			channel.finishAndReleaseAll();
+		}
+	}
+
+	@Test
+	public void disconnectsOnceWhenTheLastPacketFinishesWhileTheChannelCloses() throws Exception {
+		List<TestConnection> connections = new ArrayList<>();
+		try (ExecutorService threads = Executors.newFixedThreadPool(4)) {
+			for (int i = 0; i < 3000; i++) {
+				TestConnection connection = connectWithConcurrentPackets(threads);
+				connections.add(connection);
+				EmbeddedChannel channel = (EmbeddedChannel) connection.getChannel();
+				int packets = 1 + i % 3;
+				for (int value = 0; value < packets; value++)
+					channel.writeInbound(clientPacket(value));
+				if (i % 2 == 0)
+					Thread.yield();
+				channel.close(); // races with the end of the packets
+				assertTrue(connection.disconnectLatch.await(5, TimeUnit.SECONDS), "onDisconnect didn't run");
+				assertEquals(packets, connection.executedBeforeDisconnect.size(), "onDisconnect ran before all packets were executed");
+				channel.finishAndReleaseAll();
+			}
+		}
+		for (TestConnection connection : connections) // all packet threads have finished, so a second onDisconnect would have happened by now
+			assertEquals(1, connection.disconnects.get());
 	}
 
 	@Test
