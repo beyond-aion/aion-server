@@ -598,13 +598,13 @@ public class Effect implements StatOwner {
 
 		Creature effected = getEffected();
 		try {
+			// a target killed by an earlier effect skips the following ones, except those which still apply to a dead target (drains)
 			for (EffectTemplate template : successEffects.values()) {
 				if (!shouldApplyFurtherEffects(effected, template))
-					break;
+					continue;
 				template.applyEffect(this);
-				if (!shouldApplyFurtherEffects(effected))
-					break;
-				template.startSubEffect(this);
+				if (shouldApplyFurtherEffects(effected))
+					template.startSubEffect(this);
 			}
 			if (applyCriticalProcEffect && subEffect != null)
 				subEffect.applyEffect();

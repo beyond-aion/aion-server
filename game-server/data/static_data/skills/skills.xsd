@@ -1036,6 +1036,8 @@
 			<xs:extension base="DamageEffect">
 				<xs:attribute name="hp_percent" type="xs:int" />
 				<xs:attribute name="mp_percent" type="xs:int" />
+				<xs:attribute name="prob" type="xs:int" default="100" />
+				<xs:attribute name="prob_delta" type="xs:int" default="0" />
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
