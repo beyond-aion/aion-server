@@ -50,6 +50,14 @@ public class GsConnection extends NettyConnection<GsServerPacket> {
 		log.info("Game server connected: {}", getIP());
 	}
 
+	/**
+	 * A packet that hangs must not keep the game server registered, so it could not register again.
+	 */
+	@Override
+	protected long getDisconnectTimeoutMillis() {
+		return 30_000;
+	}
+
 	@Override
 	protected void onDisconnect() {
 		if (state == GameServerConnectionState.AUTHED)

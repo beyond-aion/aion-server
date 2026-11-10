@@ -81,6 +81,14 @@ public class GsConnection extends NettyConnection<GsServerPacket> {
 		return 10_000;
 	}
 
+	/**
+	 * A packet that hangs must not keep the ID of the game server taken, so it could not register again.
+	 */
+	@Override
+	protected long getDisconnectTimeoutMillis() {
+		return 30_000;
+	}
+
 	@Override
 	protected final void onDisconnect() {
 		pingPongTask.stop();

@@ -70,6 +70,14 @@ public class ChatServerConnection extends NettyConnection<CsServerPacket> {
 		return 10_000;
 	}
 
+	/**
+	 * A packet that hangs must not keep the game server from reconnecting to the chat server.
+	 */
+	@Override
+	protected long getDisconnectTimeoutMillis() {
+		return 30_000;
+	}
+
 	@Override
 	protected final void onDisconnect() {
 		if (GameServer.isShutdownScheduled())

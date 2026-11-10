@@ -70,6 +70,14 @@ public class LoginServerConnection extends NettyConnection<LsServerPacket> {
 		return 10_000;
 	}
 
+	/**
+	 * A packet that hangs must not keep the game server from reconnecting to the login server.
+	 */
+	@Override
+	protected long getDisconnectTimeoutMillis() {
+		return 30_000;
+	}
+
 	@Override
 	protected final void onDisconnect() {
 		if (GameServer.isShutdownScheduled())

@@ -18,7 +18,7 @@ public class GameServerService {
 	private static final GameServerService instance = new GameServerService();
 	public static byte GAMESERVER_ID;
 
-	private boolean isOnline = false;
+	private volatile boolean isOnline = false; // reset by the disconnect handling, which may run on another thread than the packets
 
 	public static GameServerService getInstance() {
 		return instance;

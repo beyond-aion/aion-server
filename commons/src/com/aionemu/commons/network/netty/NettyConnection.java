@@ -17,6 +17,7 @@ import io.netty.buffer.Unpooled;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
+import io.netty.util.concurrent.GlobalEventExecutor;
 
 /**
  * Connection on top of a Netty channel. Received packets are executed on the connection's packet executor, outside the I/O threads: one after
@@ -178,8 +179,27 @@ public abstract class NettyConnection<S extends BaseServerPacket> {
 	 */
 	final void onChannelInactive() {
 		disconnected = true;
-		if (pendingPackets.get() == 0)
+		if (pendingPackets.get() == 0) {
 			packetExecutor.execute(this::handleDisconnect);
+			return;
+		}
+		long timeoutMillis = getDisconnectTimeoutMillis();
+		if (timeoutMillis > 0) {
+			// The timer is not one of the channel's event loop, which doesn't run its timers anymore once the network is shut down. The disconnect
+			// is handled on a thread of its own: the packet executor may be the one that hangs, and the handling may block.
+			GlobalEventExecutor.INSTANCE.schedule(() -> {
+				if (!disconnectHandled.get())
+					Thread.ofPlatform().daemon().name("DisconnectTimeout").start(this::handleDisconnectAfterTimeout);
+			}, timeoutMillis, TimeUnit.MILLISECONDS);
+		}
+	}
+
+	private void handleDisconnectAfterTimeout() {
+		if (disconnectHandled.compareAndSet(false, true)) {
+			log.warn("{} still executes {} packet(s) {} ms after it was closed, handling the disconnect anyway", this, pendingPackets.get(),
+				getDisconnectTimeoutMillis());
+			onDisconnect();
+		}
 	}
 
 	private void handleDisconnect() {
@@ -246,10 +266,20 @@ public abstract class NettyConnection<S extends BaseServerPacket> {
 		return 0;
 	}
 
+	/**
+	 * @return The time in milliseconds {@link #onDisconnect()} waits for the packets that are still queued or running when the connection closes,
+	 *         before it runs regardless of them on a thread of its own, or 0 to wait for them without limit. A connection whose disconnect
+	 *         handling must not depend on a packet that hangs (it reconnects, or frees what others wait for) sets a limit.
+	 */
+	protected long getDisconnectTimeoutMillis() {
+		return 0;
+	}
+
 	protected abstract void onConnect();
 
 	/**
-	 * Called once after the connection was closed and all of its pending packets were executed.
+	 * Called once after the connection was closed and all of its pending packets were executed, or {@link #getDisconnectTimeoutMillis()} after
+	 * it was closed if they take longer.
 	 */
 	protected abstract void onDisconnect();
 }

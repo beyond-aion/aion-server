@@ -101,6 +101,7 @@ public class NettyConnectionTest {
 		private volatile List<Integer> executedBeforeDisconnect;
 		private boolean readFailureFatal = true;
 		private volatile boolean disconnected;
+		private volatile long disconnectTimeoutMillis;
 		private int createdPackets;
 
 		TestConnection(EmbeddedChannel channel, Queue<Runnable> tasks) {
@@ -139,6 +140,11 @@ public class NettyConnectionTest {
 		@Override
 		protected int getMaxPendingPackets() {
 			return 3;
+		}
+
+		@Override
+		protected long getDisconnectTimeoutMillis() {
+			return disconnectTimeoutMillis;
 		}
 
 		@Override
@@ -263,6 +269,70 @@ public class NettyConnectionTest {
 			}
 			assertTrue(connection.disconnectLatch.await(5, TimeUnit.SECONDS));
 			assertEquals(2, connection.executedBeforeDisconnect.size());
+			assertEquals(1, connection.disconnects.get());
+			channel.finishAndReleaseAll();
+		}
+	}
+
+	@Test
+	public void disconnectsAfterItsTimeoutWhileAPacketHangs() throws Exception {
+		try (ExecutorService thread = Executors.newSingleThreadExecutor()) { // the hanging packet blocks the whole packet executor
+			TestConnection connection = connectWithConcurrentPackets(thread);
+			connection.disconnectTimeoutMillis = 100;
+			CountDownLatch running = new CountDownLatch(1);
+			CountDownLatch finish = new CountDownLatch(1);
+			connection.packetAction = _ -> {
+				running.countDown();
+				try {
+					finish.await();
+				} catch (InterruptedException e) {
+					throw new IllegalStateException(e);
+				}
+			};
+			EmbeddedChannel channel = (EmbeddedChannel) connection.getChannel();
+			try {
+				channel.writeInbound(clientPacket(1));
+				assertTrue(running.await(5, TimeUnit.SECONDS));
+				long closed = System.nanoTime();
+				channel.close();
+				assertTrue(connection.disconnectLatch.await(5, TimeUnit.SECONDS), "onDisconnect waits for the hanging packet");
+				assertTrue(System.nanoTime() - closed >= TimeUnit.MILLISECONDS.toNanos(100), "onDisconnect ran before the timeout");
+				assertEquals(List.of(), connection.executedBeforeDisconnect);
+			} finally {
+				finish.countDown();
+			}
+			thread.submit(() -> {}).get(); // the packet has finished
+			assertEquals(1, connection.disconnects.get(), "the end of the packet must not handle the disconnect again");
+			channel.finishAndReleaseAll();
+		}
+	}
+
+	@Test
+	public void theTimeoutDoesNotDisconnectAgainAfterThePacketsHaveFinished() throws Exception {
+		try (ExecutorService threads = Executors.newCachedThreadPool()) {
+			TestConnection connection = connectWithConcurrentPackets(threads);
+			connection.disconnectTimeoutMillis = 100;
+			CountDownLatch running = new CountDownLatch(1);
+			CountDownLatch finish = new CountDownLatch(1);
+			connection.packetAction = _ -> {
+				running.countDown();
+				try {
+					finish.await();
+				} catch (InterruptedException e) {
+					throw new IllegalStateException(e);
+				}
+			};
+			EmbeddedChannel channel = (EmbeddedChannel) connection.getChannel();
+			try {
+				channel.writeInbound(clientPacket(1));
+				assertTrue(running.await(5, TimeUnit.SECONDS));
+				channel.close(); // starts the timeout, a packet is still running
+			} finally {
+				finish.countDown();
+			}
+			assertTrue(connection.disconnectLatch.await(5, TimeUnit.SECONDS));
+			assertEquals(List.of(1), connection.executedBeforeDisconnect);
+			Thread.sleep(300);
 			assertEquals(1, connection.disconnects.get());
 			channel.finishAndReleaseAll();
 		}
