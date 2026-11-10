@@ -79,10 +79,6 @@ public class NpcTemplate extends CreatureTemplate {
 	@XmlAttribute(name = "war_flag")
 	private int warFlagGroupId;
 
-	/*
-	 * @XmlAttribute(name = "item_upgrade") private int itemUpgrade;
-	 */
-
 	@XmlAttribute(name = "hpgauge")
 	private int hpGauge;
 
@@ -117,6 +113,8 @@ public class NpcTemplate extends CreatureTemplate {
 	private MassiveLoot massiveLoot;
 
 	protected void afterUnmarshal(Unmarshaller u, Object parent) {
+		if (boundRadius != null && boundRadius.isZero())
+			throw new IllegalArgumentException("bound_radius must not be zero");
 		if (level > 1 && !"noaction".equals(ai) && getAbyssNpcType().equals(AbyssNpcType.TELEPORTER)) // TODO: reparse npc_template
 			ai = "siege_teleporter";
 		if (ai != null)
@@ -227,10 +225,6 @@ public class NpcTemplate extends CreatureTemplate {
 		return warFlagGroupId;
 	}
 
-	/*
-	 * public int getItemUpgrade() { return itemUpgrade; }
-	 */
-
 	public int getHpGauge() {
 		return hpGauge;
 	}
@@ -246,9 +240,7 @@ public class NpcTemplate extends CreatureTemplate {
 	@Override
 	public BoundRadius getBoundRadius() {
 		// A few NPCs have no bounds in the data; the client expects the player-sized cylinder instead of a zero one.
-		if (boundRadius == null || boundRadius.isZero())
-			return BoundRadius.PLAYER;
-		return boundRadius;
+		return boundRadius == null ? BoundRadius.PLAYER : boundRadius;
 	}
 
 	public NpcTemplateType getNpcTemplateType() {

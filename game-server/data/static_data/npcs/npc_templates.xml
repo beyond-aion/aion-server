@@ -516382,7 +516382,7 @@
 		<bound_radius front="0.25" side="0.35" upper="2" />
 		<talk_info distance="5" is_dialog="true" func_dialogs="2" can_talk_invisible="false" />
 	</npc_template>
-	<npc_template npc_id="804188" level="65" name="teleios" name_id="464892" title_id="464912" group_drop="LIGHT" rank="DISCIPLINED" rating="NORMAL" race="ELYOS" tribe="GENERAL" type="GENERAL" ai="general" srange="20" arange="2" attack_speed="2000" hpgauge="3" item_upgrade="1">
+	<npc_template npc_id="804188" level="65" name="teleios" name_id="464892" title_id="464912" group_drop="LIGHT" rank="DISCIPLINED" rating="NORMAL" race="ELYOS" tribe="GENERAL" type="GENERAL" ai="general" srange="20" arange="2" attack_speed="2000" hpgauge="3">
 		<stats maxHp="26116">
 			<speeds walk="1.3" group_walk="1.3" run="6" run_fight="4.2" group_run_fight="4.2" />
 		</stats>
@@ -516522,7 +516522,7 @@
 		<bound_radius front="0.25" side="0.35" upper="2" />
 		<talk_info distance="5" is_dialog="true" func_dialogs="2" can_talk_invisible="false" />
 	</npc_template>
-	<npc_template npc_id="804198" level="65" name="karantania" name_id="464902" title_id="464912" group_drop="DARK" rank="DISCIPLINED" rating="NORMAL" race="ASMODIANS" tribe="GENERAL_DARK" type="GENERAL" ai="general" srange="20" arange="2" attack_speed="2000" hpgauge="3" item_upgrade="1">
+	<npc_template npc_id="804198" level="65" name="karantania" name_id="464902" title_id="464912" group_drop="DARK" rank="DISCIPLINED" rating="NORMAL" race="ASMODIANS" tribe="GENERAL_DARK" type="GENERAL" ai="general" srange="20" arange="2" attack_speed="2000" hpgauge="3">
 		<stats maxHp="26116">
 			<speeds walk="1.3" group_walk="1.3" run="6" run_fight="4.2" group_run_fight="4.2" />
 		</stats>

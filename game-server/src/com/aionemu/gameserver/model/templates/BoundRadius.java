@@ -7,7 +7,7 @@ import jakarta.xml.bind.annotation.XmlType;
 
 /**
  * Collision cylinder as the client receives it: {@code front} and {@code side} are radii, {@code upper} is the full
- * height. NPC templates already carry the model scale. Code that needs a full horizontal extent multiplies by 2.
+ * height.
  *
  * @author ATracer
  */
