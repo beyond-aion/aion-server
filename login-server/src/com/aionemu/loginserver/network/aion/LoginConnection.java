@@ -46,7 +46,7 @@ public class LoginConnection extends NettyConnection<AionServerPacket> {
 	/**
 	 * Account object for this connection. if state = AUTHED_LOGIN account cant be null.
 	 */
-	private Account account;
+	private volatile Account account;
 
 	/**
 	 * Crypt to encrypt/decrypt packets. Only used by the I/O thread of the channel.
@@ -56,7 +56,7 @@ public class LoginConnection extends NettyConnection<AionServerPacket> {
 	/**
 	 * True if this user is connecting to GS.
 	 */
-	private boolean joinedGs;
+	private volatile boolean joinedGs; // set by a packet of the game server, read when this connection closes
 
 	/**
 	 * Scrambled key pair for RSA
@@ -66,7 +66,7 @@ public class LoginConnection extends NettyConnection<AionServerPacket> {
 	/**
 	 * Session Key for this connection.
 	 */
-	private SessionKey sessionKey;
+	private volatile SessionKey sessionKey;
 
 	/**
 	 * Current state of this connection
@@ -252,6 +252,7 @@ public class LoginConnection extends NettyConnection<AionServerPacket> {
 	 */
 	@Override
 	public String toString() {
+		Account account = this.account;
 		return (account == null ? "Client " : account + " ") + getIP();
 	}
 

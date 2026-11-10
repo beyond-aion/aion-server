@@ -58,7 +58,7 @@ public class GsConnection extends NettyConnection<GsServerPacket> {
 	/**
 	 * GameServerInfo for this GsConnection.
 	 */
-	private GameServerInfo gameServerInfo = null;
+	private volatile GameServerInfo gameServerInfo = null;
 
 	private final PingPongTask pingPongTask = new PingPongTask(this);
 
@@ -85,10 +85,11 @@ public class GsConnection extends NettyConnection<GsServerPacket> {
 	protected final void onDisconnect() {
 		pingPongTask.stop();
 		log.info("{} disconnected", this);
+		GameServerInfo gameServerInfo = this.gameServerInfo;
 		if (gameServerInfo != null) {
+			gameServerInfo.clearAccountsOnGameServer(); // before the server can register again
 			gameServerInfo.setConnection(null);
-			gameServerInfo.clearAccountsOnGameServer();
-			gameServerInfo = null;
+			this.gameServerInfo = null;
 		}
 		AccountController.updateServerListForAllLoggedInPlayers();
 	}
@@ -149,6 +150,7 @@ public class GsConnection extends NettyConnection<GsServerPacket> {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder("Game server");
+		GameServerInfo gameServerInfo = this.gameServerInfo;
 		if (gameServerInfo != null)
 			sb.append(" #").append(gameServerInfo.getId());
 		sb.append(" ").append(getIP());

@@ -42,7 +42,7 @@ public class GameServerInfo {
 	/**
 	 * gsConnection - if GameServer is connected to LoginServer.
 	 */
-	private GsConnection gscHandler;
+	private volatile GsConnection gscHandler; // set by the packets of the game server, read by those of the clients
 
 	/**
 	 * minimum access level to be able to connect to this game server
@@ -186,6 +186,7 @@ public class GameServerInfo {
 	 * @return true if GameServer is Online.
 	 */
 	public final boolean isOnline() {
+		GsConnection gscHandler = this.gscHandler;
 		return gscHandler != null && gscHandler.getState() == State.AUTHED;
 	}
 
