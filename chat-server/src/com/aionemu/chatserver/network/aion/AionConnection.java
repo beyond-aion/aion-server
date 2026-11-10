@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.chatserver.configs.network.NetworkConfig;
 import com.aionemu.chatserver.model.ChatClient;
+import com.aionemu.chatserver.service.BroadcastService;
 import com.aionemu.commons.network.netty.NettyConnection;
 import com.aionemu.commons.network.packet.BaseClientPacket;
 
@@ -77,6 +78,13 @@ public class AionConnection extends NettyConnection<AbstractServerPacket> {
 	@Override
 	protected void onDisconnect() {
 		log.info("Client disconnected: {}", this);
+		ChatClient chatClient = this.chatClient;
+		if (chatClient != null) {
+			synchronized (chatClient) { // see ChatService.registerPlayerConnection
+				if (chatClient.getConnection() == this) // unless the character has logged in again with a newer connection
+					BroadcastService.getInstance().removeClient(chatClient);
+			}
+		}
 	}
 
 	public State getState() {

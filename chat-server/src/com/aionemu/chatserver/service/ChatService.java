@@ -74,12 +74,22 @@ public class ChatService {
 		else if (!chatClient.getName().equals(name))
 			log.warn("Client tried to connect with character name: {} (expected: {})", name, chatClient.getName());
 		else {
-			chatClient.setIdentifier(identifier);
-			chatClient.setConnection(connection);
-			connection.sendPacket(new SM_PLAYER_AUTH_RESPONSE(msgIndex));
-			connection.setState(State.AUTHED);
-			connection.setChatClient(chatClient);
-			BroadcastService.getInstance().addClient(chatClient);
+			AionConnection previousConnection;
+			synchronized (chatClient) { // a connection of the character that closes right now must not take it out of the broadcasts afterwards
+				previousConnection = chatClient.getConnection();
+				chatClient.setIdentifier(identifier);
+				chatClient.setConnection(connection);
+				connection.sendPacket(new SM_PLAYER_AUTH_RESPONSE(msgIndex));
+				connection.setState(State.AUTHED);
+				connection.setChatClient(chatClient);
+				BroadcastService.getInstance().addClient(chatClient);
+			}
+			// The character has one connection, like it has one in the game. The previous one stayed authenticated, and could keep writing to the
+			// channels in the character's name.
+			if (previousConnection != null && previousConnection != connection) {
+				log.info("{} logged in again, closing its previous connection from {}", chatClient, previousConnection.getIP());
+				previousConnection.close();
+			}
 		}
 	}
 

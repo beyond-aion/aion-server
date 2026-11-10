@@ -2,9 +2,11 @@ package com.aionemu.chatserver.network.aion;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.lang.reflect.Field;
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 import java.nio.charset.StandardCharsets;
+import java.util.Map;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,6 +14,7 @@ import org.junit.jupiter.api.Test;
 
 import com.aionemu.chatserver.model.ChatClient;
 import com.aionemu.chatserver.model.Race;
+import com.aionemu.chatserver.service.BroadcastService;
 import com.aionemu.chatserver.service.ChatService;
 import com.aionemu.chatserver.service.GameServerService;
 import com.aionemu.commons.network.netty.NettyPipeline;
@@ -37,6 +40,7 @@ public class ChatPipelineTest {
 
 	@BeforeEach
 	public void connect() throws Exception {
+		sequence = 0;
 		GameServerService.GAMESERVER_ID = 1; // the channel below belongs to the game server this session is connected to
 		InetSocketAddress client = new InetSocketAddress("127.0.0.1", 50000);
 		channel = new EmbeddedChannel(false, false) {
@@ -79,7 +83,13 @@ public class ChatPipelineTest {
 	}
 
 	private void login() throws Exception {
-		ChatClient chatClient = ChatService.getInstance().registerPlayer(PLAYER_ID, ACCOUNT, NAME, Race.ELYOS, (byte) 0);
+		login(ChatService.getInstance().registerPlayer(PLAYER_ID, ACCOUNT, NAME, Race.ELYOS, (byte) 0));
+	}
+
+	/**
+	 * Logs in over the current channel as the character the game server has announced.
+	 */
+	private void login(ChatClient chatClient) throws Exception {
 		ByteBuf body = Unpooled.buffer().writeIntLE(1); // msgIndex
 		writeS(body, "AION");
 		body.writeIntLE(27).writeLongLE(1).writeLongLE(PLAYER_ID).writeLongLE(0);
@@ -164,5 +174,51 @@ public class ChatPipelineTest {
 		send(0x0018, body);
 		assertNull(channel.readOutbound(), "the message must not be sent to the channel");
 		assertTrue(channel.isOpen());
+	}
+
+	private void chat(int channelId, String text) {
+		ByteBuf body = Unpooled.buffer().writeZero(16).writeIntLE(channelId).writeByte(0);
+		writeS(body, text);
+		send(0x0018, body);
+	}
+
+	@SuppressWarnings("unchecked")
+	private static boolean receivesBroadcasts(ChatClient chatClient) throws Exception {
+		Field field = BroadcastService.class.getDeclaredField("clients");
+		field.setAccessible(true);
+		return ((Map<Integer, ChatClient>) field.get(BroadcastService.getInstance())).containsValue(chatClient);
+	}
+
+	@Test
+	public void aSecondLoginOfTheCharacterClosesItsFirstConnection() throws Exception {
+		ChatClient chatClient = ChatService.getInstance().registerPlayer(PLAYER_ID, ACCOUNT, NAME, Race.ELYOS, (byte) 0);
+		login(chatClient);
+		int channelId = joinChannel(5);
+		EmbeddedChannel first = channel;
+		try {
+			connect();
+			login(chatClient);
+			first.runPendingTasks();
+			assertFalse(first.isOpen(), "the first connection stayed open");
+			assertTrue(channel.isOpen());
+			assertTrue(receivesBroadcasts(chatClient), "the first connection took the character out of the broadcasts when it closed");
+			chat(channelId, "hello");
+			receive(0x001A).release(); // arrives over the second connection
+		} finally {
+			first.finishAndReleaseAll();
+		}
+	}
+
+	@Test
+	public void stopsBroadcastingToACharacterWhoseConnectionClosed() throws Exception {
+		ChatClient chatClient = ChatService.getInstance().registerPlayer(PLAYER_ID, ACCOUNT, NAME, Race.ELYOS, (byte) 0);
+		login(chatClient);
+		assertTrue(receivesBroadcasts(chatClient));
+		channel.close();
+		channel.runPendingTasks();
+		assertFalse(receivesBroadcasts(chatClient));
+		connect(); // the game server still has the character online, so its client may come back
+		login(chatClient);
+		assertTrue(receivesBroadcasts(chatClient));
 	}
 }
