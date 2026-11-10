@@ -291,7 +291,7 @@ public class CustomConfig {
 	/**
 	 * Death and damage of a hit still happen at the hit time (the moment the client shows the impact). True keeps a creature that will die from a hit
 	 * already in flight fully controllable until the hit lands; false keeps the retail behavior, where it is treated as dead for actions and
-	 * targeting from the end of the cast.
+	 * targeting from the end of the cast and cannot be healed until the hit lands.
 	 */
 	@Property(key = "gameserver.combat.death_at_hittime", defaultValue = "false")
 	public static boolean DEATH_AT_HITTIME;

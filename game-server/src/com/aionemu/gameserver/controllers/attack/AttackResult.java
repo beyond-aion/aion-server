@@ -1,5 +1,9 @@
 package com.aionemu.gameserver.controllers.attack;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import com.aionemu.gameserver.skillengine.model.HitType;
 
 /**
@@ -19,6 +23,7 @@ public class AttackResult {
 	private int shieldType;
 	private int reflectedDamage = 0;
 	private int reflectedSkillId = 0;
+	private List<ShieldDamage> shieldDamages;
 	private int protectedSkillId = 0;
 	private int protectedDamage = 0;
 	private int protectorId = 0;
@@ -79,6 +84,19 @@ public class AttackResult {
 
 	public void setReflectedDamage(int reflectedDamage) {
 		this.reflectedDamage = reflectedDamage;
+	}
+
+	/**
+	 * @return Damage redirected by shields (reflected or protected), which must be dealt when the attack hits
+	 */
+	public List<ShieldDamage> getShieldDamages() {
+		return shieldDamages == null ? Collections.emptyList() : shieldDamages;
+	}
+
+	public void addShieldDamage(ShieldDamage shieldDamage) {
+		if (shieldDamages == null)
+			shieldDamages = new ArrayList<>(1);
+		shieldDamages.add(shieldDamage);
 	}
 
 	public int getReflectedSkillId() {

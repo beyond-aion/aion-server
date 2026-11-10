@@ -5,6 +5,7 @@ import java.util.concurrent.Future;
 
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
@@ -23,10 +24,10 @@ public abstract class CreatureLifeStats<T extends Creature> {
 	private int currentMp;
 	private int cachedMaxMp;
 	/**
-	 * Damage of a hit that is already in flight and will kill this creature if it lands. It is a damage value rather than a flag so that healing
-	 * above it clears {@link #isDoomed()}.
+	 * Number of hits in flight that were lethal when they were calculated. Every hit that raised it lowers it again when it lands or is dropped,
+	 * whatever the outcome.
 	 */
-	private int killingBlow;
+	private int pendingLethalHits;
 	protected final T owner;
 	protected final Object restoreLock = new Object();
 	protected Future<?> lifeRestoreTask;
@@ -69,19 +70,41 @@ public abstract class CreatureLifeStats<T extends Creature> {
 	}
 
 	/**
-	 * @return True if an in-flight hit is lethal and this creature is treated as dead before the hit lands.
-	 *         Always false when {@link CustomConfig#DEATH_AT_HITTIME} is enabled.
+	 * @return True if an in-flight hit is lethal and this creature is treated as dead before the hit lands. A doomed creature cannot act, cannot be
+	 *         targeted by single target skills and cannot be healed, so the hit is certain to kill it. Always false when
+	 *         {@link CustomConfig#DEATH_AT_HITTIME} is enabled.
 	 */
 	public boolean isDoomed() {
-		return !CustomConfig.DEATH_AT_HITTIME && killingBlow != 0;
+		return pendingLethalHits > 0;
 	}
 
-	public void setKillingBlow(int killingBlow) {
-		this.killingBlow = killingBlow;
+	/**
+	 * Marks this creature as doomed if the given damage will kill it. Must be called when the damage is calculated, and a successful call must be
+	 * paired with {@link #releaseLethalHit()} once the damage has landed or was dropped.
+	 *
+	 * @return True if the hit was latched and must be released later
+	 */
+	public boolean latchLethalHit(Creature attacker, int damage) {
+		if (CustomConfig.DEATH_AT_HITTIME || damage <= 0 || getOwner().isInvulnerable())
+			return false;
+		if (getOwner() instanceof Player player && player.isDueling(attacker)) // losing a duel is not death, the loser stays controllable
+			return false;
+		synchronized (this) {
+			if (isDead() || damage < currentHp)
+				return false;
+			pendingLethalHits++;
+			return true;
+		}
 	}
 
-	private void unsetDoomedState() {
-		this.killingBlow = 0;
+	/**
+	 * Releases a latch taken by {@link #latchLethalHit(Creature, int)}, after its damage was applied or dropped.
+	 */
+	public void releaseLethalHit() {
+		synchronized (this) {
+			if (pendingLethalHits > 0) // death resets the count, so hits which land on a dead creature find it at 0
+				pendingLethalHits--;
+		}
 	}
 
 	/**
@@ -105,10 +128,8 @@ public abstract class CreatureLifeStats<T extends Creature> {
 
 	public int reduceHp(TYPE type, int value, int skillId, LOG log, Creature attacker, boolean criticalHit) {
 		Objects.requireNonNull(attacker, "attacker");
-		if (getOwner().isInvulnerable()) {
-			unsetDoomedState();
+		if (getOwner().isInvulnerable())
 			return currentHp;
-		}
 
 		int previousHp, newHp;
 		synchronized (this) {
@@ -120,7 +141,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 			currentHp = newHp = Math.clamp(currentHp - value, minHp, currentHp);
 			if (isDead()) {
 				currentMp = 0;
-				unsetDoomedState();
+				pendingLethalHits = 0;
 			}
 		}
 
@@ -191,7 +212,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 		if (value < 0) // some skills reduce hp via a negative heal (e.g. 3732 Spirit Absorption)
 			return reduceHp(type, -value, skillId, log, effector);
 
-		if (getOwner().getEffectController().isAbnormalSet(AbnormalState.DISEASE))
+		if (getOwner().getEffectController().isAbnormalSet(AbnormalState.DISEASE) || isDoomed()) // a doomed creature cannot be healed
 			return currentHp;
 
 		int previousHp, newHp;
@@ -201,8 +222,6 @@ public abstract class CreatureLifeStats<T extends Creature> {
 
 			previousHp = currentHp;
 			currentHp = newHp = Math.min(currentHp + value, getMaxHp());
-			if (killingBlow != 0 && newHp > killingBlow)
-				unsetDoomedState();
 		}
 
 		if (newHp != previousHp || skillId != 0)
@@ -381,8 +400,8 @@ public abstract class CreatureLifeStats<T extends Creature> {
 				cachedMaxHp = maxHp;
 				cachedMaxMp = getMaxMp();
 			}
-			if (killingBlow != 0 && (newHp == 0 || newHp > killingBlow))
-				unsetDoomedState();
+			if (newHp == 0)
+				pendingLethalHits = 0;
 		}
 		if (newHp != previousHp) {
 			// broadcast current hp percentage to others
