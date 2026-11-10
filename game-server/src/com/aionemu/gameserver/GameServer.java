@@ -74,12 +74,13 @@ import com.aionemu.gameserver.world.zone.ZoneService;
  */
 public class GameServer {
 
+	private static final long START_TIME_NANOS = System.nanoTime();
+	public static final int START_TIME_SECONDS = (int) (ManagementFactory.getRuntimeMXBean().getStartTime() / 1000);
+
 	static {
 		Logging.init(); // must run before instantiating any logger
 	}
 	private static final Logger log = LoggerFactory.getLogger(GameServer.class);
-
-	public static final int START_TIME_SECONDS = (int) (ManagementFactory.getRuntimeMXBean().getStartTime() / 1000);
 	public static final VersionInfo versionInfo = new VersionInfo(GameServer.class);
 
 	private static NioServer nioServer;
@@ -185,7 +186,7 @@ public class GameServer {
 
 		nioServer = initNioServer();
 		Runtime.getRuntime().addShutdownHook(ShutdownHook.getInstance());
-		log.info("Game server started in {} seconds", System.currentTimeMillis() / 1000 - START_TIME_SECONDS);
+		log.info(Logging.formatStartupMessage("Game server", START_TIME_NANOS));
 
 		LoginServer.getInstance().connect(nioServer);
 		if (GSConfig.ENABLE_CHAT_SERVER)

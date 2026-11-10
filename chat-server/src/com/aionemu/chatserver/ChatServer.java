@@ -22,6 +22,7 @@ import ch.qos.logback.classic.LoggerContext;
 class ChatServer {
 
 	void main() {
+		long startTimeNanos = System.nanoTime();
 		Logging.init(); // must run before instantiating any logger
 		Thread.setDefaultUncaughtExceptionHandler(new UncaughtExceptionHandler());
 
@@ -37,6 +38,7 @@ class ChatServer {
 
 		NetConnector.connect();
 		Runtime.getRuntime().addShutdownHook(new ShutdownHook());
+		LoggerFactory.getLogger(ChatServer.class).info(Logging.formatStartupMessage("Chat server", startTimeNanos));
 	}
 
 	private static class ShutdownHook extends Thread {

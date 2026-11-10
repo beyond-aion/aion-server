@@ -2,10 +2,12 @@
 :: Run in Windows Terminal if available
 IF "%WT_SESSION%" == "" wt %0 2>nul && EXIT
 TITLE Aion Emu - Game Server
+CHCP 65001 >nul
+SET THREAD_LOG=%%(){}
 
 :START
 CLS
-JAVA -Xms1024m -Xmx2560m -XX:+UseNUMA -XX:+UseCompactObjectHeaders -DconsoleEncoding=CP850 -cp "libs/*" com.aionemu.gameserver.GameServer
+JAVA -Xms1024m -Xmx2560m -XX:+UseNUMA -XX:+UseCompactObjectHeaders -cp "libs/*" com.aionemu.gameserver.GameServer
 IF %ERRORLEVEL% EQU 0 GOTO END
 IF %ERRORLEVEL% EQU 2 GOTO START
 ECHO.

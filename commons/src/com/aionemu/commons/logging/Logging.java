@@ -9,26 +9,44 @@ import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.nio.file.attribute.FileTime;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.time.Duration;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.zip.Deflater;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+import com.aionemu.commons.Banner;
+
 import ch.qos.logback.classic.ClassicConstants;
 
 public class Logging {
+
+	private Logging() {
+	}
 
 	/**
 	 * This method must be called before instantiating any logger
 	 */
 	public static void init() {
 		System.setProperty(ClassicConstants.CONFIG_FILE_PROPERTY, "config/logback.xml");
+		LogLevelHighlightingCompositeConverter.register();
+		RealGrayCompositeConverter.register();
+		Banner.print();
 		archiveLogs();
+	}
+
+	public static String formatStartupMessage(String server, long startTimeNanos) {
+		DecimalFormat df = new DecimalFormat("0.0##", DecimalFormatSymbols.getInstance(Locale.US));
+		float startTime = Duration.ofNanos(System.nanoTime() - startTimeNanos).toMillis() / 1000f;
+		float processUptime = ManagementFactory.getRuntimeMXBean().getUptime() / 1000f;
+		return "%s started in %s seconds (process running for %s)".formatted(server, df.format(startTime), df.format(processUptime));
 	}
 
 	private static void archiveLogs() {

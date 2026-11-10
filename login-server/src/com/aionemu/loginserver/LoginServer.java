@@ -23,6 +23,7 @@ import ch.qos.logback.classic.LoggerContext;
 class LoginServer {
 
 	void main() {
+		long startTimeNanos = System.nanoTime();
 		Logging.init(); // must run before instantiating any logger
 		Thread.setDefaultUncaughtExceptionHandler(new UncaughtExceptionHandler());
 
@@ -42,6 +43,7 @@ class LoginServer {
 
 		NetConnector.connect();
 		Runtime.getRuntime().addShutdownHook(new ShutdownHook());
+		LoggerFactory.getLogger(LoginServer.class).info(Logging.formatStartupMessage("Login server", startTimeNanos));
 	}
 
 	private static class ShutdownHook extends Thread {
