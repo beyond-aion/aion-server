@@ -69,6 +69,10 @@ public class LoginServer {
 	 */
 	private final Map<Integer, Deque<LoginRequest>> waitingRequests = new HashMap<>();
 	private final Map<Integer, AionConnection> loggedInAccounts = new ConcurrentHashMap<>();
+	/**
+	 * Set to null by whichever thread notices that the link is gone, while packet threads send over it. So every use reads it once: reading it
+	 * again after a null check throws a NullPointerException now and then.
+	 */
 	private volatile LoginServerConnection lsCon = null;
 	private NettyServer nettyServer = null;
 	private int gameServerCount = 1;
@@ -113,9 +117,10 @@ public class LoginServer {
 	 * When disconnecting we have to close all pending login requests to notify their clients.
 	 */
 	public void disconnect() {
+		LoginServerConnection lsCon = this.lsCon;
 		if (lsCon != null) {
 			lsCon.close();
-			lsCon = null;
+			this.lsCon = null;
 		}
 		synchronized (this) {
 			for (AionConnection client : loginRequests.keySet())
@@ -128,6 +133,7 @@ public class LoginServer {
 	}
 
 	public void reconnect() {
+		LoginServerConnection lsCon = this.lsCon;
 		if (lsCon == null)
 			return;
 		int delay = lsCon.getState() == State.AUTHED ? 5 : 15;
@@ -137,6 +143,7 @@ public class LoginServer {
 	}
 
 	public boolean isUp() {
+		LoginServerConnection lsCon = this.lsCon;
 		return lsCon != null && lsCon.getState() == State.AUTHED;
 	}
 
@@ -200,7 +207,7 @@ public class LoginServer {
 	private void startCheck(LoginRequest loginRequest) {
 		checkedRequests.put(loginRequest.accountId(), loginRequest);
 		checkStartNanos.put(loginRequest.accountId(), System.nanoTime());
-		lsCon.sendPacket(loginRequest.lsAuthRequest());
+		sendPacket(loginRequest.lsAuthRequest()); // if the link broke just now, its reconnect closes the client
 	}
 
 	/**
@@ -312,9 +319,7 @@ public class LoginServer {
 	 * Starts reconnection to LoginServer procedure. LoginServer in response will send reconnection key.
 	 */
 	public void requestAuthReconnection(int accountId, AionConnection client) {
-		if (isUp() && client.equals(loggedInAccounts.get(accountId)))
-			lsCon.sendPacket(new SM_ACCOUNT_RECONNECT_KEY(client.getAccount().getId()));
-		else
+		if (!client.equals(loggedInAccounts.get(accountId)) || !sendPacket(new SM_ACCOUNT_RECONNECT_KEY(client.getAccount().getId())))
 			client.close(/* closePacket */);
 	}
 
@@ -365,12 +370,15 @@ public class LoginServer {
 		sendPacket(new SM_BAN(type, accountId, ip, time, adminObjId));
 	}
 
+	/**
+	 * @return False if the login server isn't connected and authenticated, so the packet was not sent.
+	 */
 	public boolean sendPacket(LsServerPacket pk) {
-		if (isUp()) {
-			lsCon.sendPacket(pk);
-			return true;
-		} else
+		LoginServerConnection lsCon = this.lsCon;
+		if (lsCon == null || lsCon.getState() != State.AUTHED)
 			return false;
+		lsCon.sendPacket(pk);
+		return true;
 	}
 
 	private static class SingletonHolder {

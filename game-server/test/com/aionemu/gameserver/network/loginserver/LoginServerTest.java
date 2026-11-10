@@ -7,6 +7,10 @@ import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -150,5 +154,41 @@ public class LoginServerTest {
 		answer(true);
 		assertTrue(sentToLoginServer().stream().anyMatch(SM_ACCOUNT_DISCONNECTED.class::isInstance),
 			"the login server moved the account to this game server, so it must learn that nobody plays it");
+	}
+
+	/**
+	 * The link is dropped by another thread than those that send over it, e.g. a client packet asks whether it's up while the lost connection is
+	 * being cleaned up.
+	 */
+	@Test
+	public void sendingWhileTheLinkIsDroppedAndRestoredThrowsNothing() throws Exception {
+		Field field = LoginServer.class.getDeclaredField("lsCon");
+		field.setAccessible(true);
+		LoginServerConnection lsCon = (LoginServerConnection) field.get(loginServer);
+		lsCon.close(); // packets sent to it are dropped from now on, so the channel is not written to by several threads
+		AtomicBoolean done = new AtomicBoolean();
+		try (ExecutorService threads = Executors.newFixedThreadPool(4)) {
+			List<Future<Integer>> senders = new ArrayList<>();
+			for (int i = 0; i < 3; i++) {
+				senders.add(threads.submit(() -> {
+					int sent = 0;
+					while (!done.get()) {
+						if (loginServer.isUp() && loginServer.sendPacket(new SM_ACCOUNT_DISCONNECTED(ACCOUNT_ID)))
+							sent++;
+					}
+					return sent;
+				}));
+			}
+			try {
+				for (int i = 0; i < 300_000; i++) {
+					field.set(loginServer, null);
+					field.set(loginServer, lsCon);
+				}
+			} finally {
+				done.set(true);
+			}
+			for (Future<Integer> sender : senders)
+				sender.get(); // rethrows what the sender ran into
+		}
 	}
 }

@@ -136,11 +136,12 @@ public class SM_VERSION_CHECK extends AionServerPacket {
 		writeD(1000); // incItemUpgradeQina (rate modifier, divide by 1000) (4.8)
 		writeC(0); // Augment disable or limit? 0/1 (4.8)
 		writeF(3.0f); // exp rate modifier? (4.8)
-		writeH(ChatServer.getInstance().getPublicIP().length > 0 ? 1 : 0); // ChatServersCount
-		if (ChatServer.getInstance().getPublicIP().length > 0) {
+		ChatServer.PublicAddress chatServer = ChatServer.getInstance().getPublicAddress(); // read once, the chat server may disconnect meanwhile
+		writeH(chatServer.ip().length > 0 ? 1 : 0); // ChatServersCount
+		if (chatServer.ip().length > 0) {
 			writeC(0); // spacer or maybe id
-			writeB(ChatServer.getInstance().getPublicIP());
-			writeH(ChatServer.getInstance().getPublicPort());
+			writeB(chatServer.ip());
+			writeH(chatServer.port());
 		}
 	}
 }

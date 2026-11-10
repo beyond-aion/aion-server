@@ -23,8 +23,11 @@ import io.netty.channel.ChannelFuture;
 public class ChatServer {
 
 	private static final Logger log = LoggerFactory.getLogger(ChatServer.class);
-	private byte[] publicIp = new byte[0];
-	private int publicPort = 0;
+	private volatile PublicAddress publicAddress = new PublicAddress(new byte[0], 0);
+	/**
+	 * Set to null by whichever thread notices that the link is gone, while packet threads send over it. So every use reads it once: reading it
+	 * again after a null check throws a NullPointerException now and then.
+	 */
 	private volatile ChatServerConnection csCon = null;
 	private NettyServer nettyServer = null;
 
@@ -65,14 +68,16 @@ public class ChatServer {
 	}
 
 	public void disconnect() {
+		ChatServerConnection csCon = this.csCon;
 		if (csCon != null) {
 			csCon.close();
-			csCon = null;
+			this.csCon = null;
 		}
 		setPublicAddress(new byte[0], 0);
 	}
 
 	public void reconnect() {
+		ChatServerConnection csCon = this.csCon;
 		if (csCon == null)
 			return;
 		int delay = csCon.getState() == State.AUTHED ? 5 : 15;
@@ -82,36 +87,44 @@ public class ChatServer {
 	}
 
 	public boolean isUp() {
+		ChatServerConnection csCon = this.csCon;
 		return csCon != null && csCon.getState() == State.AUTHED;
 	}
 
+	/**
+	 * Set by the packets of the chat server and read by those of the clients, as one value so they never see the IP of one address with the port
+	 * of another.
+	 */
 	public void setPublicAddress(byte[] ip, int port) {
-		this.publicIp = ip;
-		this.publicPort = port;
+		publicAddress = new PublicAddress(ip, port);
 	}
 
-	public byte[] getPublicIP() {
-		return publicIp;
-	}
-
-	public int getPublicPort() {
-		return publicPort;
+	/**
+	 * @return The address clients connect to the chat server at. Its IP is empty while the chat server is not connected.
+	 */
+	public PublicAddress getPublicAddress() {
+		return publicAddress;
 	}
 
 	public void sendPlayerLoginRequest(Player player) {
-		if (isUp())
-			csCon.sendPacket(new SM_CS_PLAYER_AUTH(player));
+		sendPacket(new SM_CS_PLAYER_AUTH(player));
 	}
 
 	public void sendPlayerLogout(Player player) {
-		if (isUp())
-			csCon.sendPacket(new SM_CS_PLAYER_LOGOUT(player.getObjectId()));
+		sendPacket(new SM_CS_PLAYER_LOGOUT(player.getObjectId()));
 	}
 
 	public void sendPlayerGagPacket(int playerObjId, long gagTime) {
-		if (isUp())
-			csCon.sendPacket(new SM_CS_PLAYER_GAG(playerObjId, gagTime));
+		sendPacket(new SM_CS_PLAYER_GAG(playerObjId, gagTime));
 	}
+
+	private void sendPacket(CsServerPacket packet) {
+		ChatServerConnection csCon = this.csCon;
+		if (csCon != null && csCon.getState() == State.AUTHED)
+			csCon.sendPacket(packet);
+	}
+
+	public record PublicAddress(byte[] ip, int port) {}
 
 	private static class SingletonHolder {
 
