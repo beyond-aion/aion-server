@@ -598,13 +598,13 @@ public class Effect implements StatOwner {
 
 		Creature effected = getEffected();
 		try {
+			// a target killed by an earlier effect skips the following ones, except those which still apply to a dead target (drains)
 			for (EffectTemplate template : successEffects.values()) {
-				if (!shouldApplyFurtherEffects(effected))
-					break;
+				if (!shouldApplyFurtherEffects(effected, template))
+					continue;
 				template.applyEffect(this);
-				if (!shouldApplyFurtherEffects(effected))
-					break;
-				template.startSubEffect(this);
+				if (shouldApplyFurtherEffects(effected))
+					template.startSubEffect(this);
 			}
 			if (applyCriticalProcEffect && subEffect != null)
 				subEffect.applyEffect();
@@ -633,10 +633,14 @@ public class Effect implements StatOwner {
 	}
 
 	private boolean shouldApplyFurtherEffects(Creature effected) {
+		return shouldApplyFurtherEffects(effected, null);
+	}
+
+	private boolean shouldApplyFurtherEffects(Creature effected, EffectTemplate template) {
 		if (effected != null) {
 			if (!effected.isSpawned() && !skillTemplate.isPassive()) // only allow on despawned if it's a passive skill (players get them during enterWorld)
 				return false;
-			if (effected.isDead() && !skillTemplate.hasResurrectEffect())
+			if (effected.isDead() && !skillTemplate.hasResurrectEffect() && (template == null || !template.appliesWhenEffectedIsDead()))
 				return false;
 		}
 		return true;

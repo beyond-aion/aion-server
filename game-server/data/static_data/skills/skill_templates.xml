@@ -10030,7 +10030,7 @@
 			<polishchargeweapon value="50" />
 		</endconditions>
 		<effects>
-			<skillatkdraininstant hp_percent="30" value="60" e="1" hoptype="DAMAGE" />
+			<skillatkdraininstant hp_percent="30" prob="80" value="60" e="1" hoptype="DAMAGE" />
 		</effects>
 		<motion name="whirltornado" />
 	</skill_template>
@@ -153568,7 +153568,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<skillatkdraininstant hp_percent="200" mode="PERCENT" value="182" e="1" element="WATER" hoptype="DAMAGE" />
+			<skillatkdraininstant hp_percent="200" prob="0" prob_delta="50" mode="PERCENT" value="182" e="1" hoptype="DAMAGE" />
 		</effects>
 		<motion name="poweratk" />
 	</skill_template>
@@ -160535,7 +160535,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<skillatkdraininstant hp_percent="50" mode="PERCENT" value="50" e="1" element="WATER" hoptype="DAMAGE" />
+			<skillatkdraininstant hp_percent="50" prob="0" prob_delta="50" mode="PERCENT" value="50" e="1" hoptype="DAMAGE" />
 		</effects>
 		<motion name="poweratk" />
 	</skill_template>
@@ -171725,7 +171725,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<skillatkdraininstant hp_percent="5" mode="PERCENT" value="200" e="1" element="FIRE" hoptype="DAMAGE" />
+			<skillatkdraininstant hp_percent="5" prob="0" prob_delta="100" mode="PERCENT" value="200" e="1" hoptype="DAMAGE" />
 		</effects>
 		<motion name="poweratk" />
 	</skill_template>
@@ -181489,7 +181489,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<skillatkdraininstant hp_percent="10" mp_percent="10" mode="PERCENT" shared="true" value="30" e="1" noresist="true" element="FIRE" />
+			<skillatkdraininstant hp_percent="10" mp_percent="10" prob="0" prob_delta="10" mode="PERCENT" shared="true" value="30" e="1" noresist="true" />
 		</effects>
 		<motion name="normalfire" />
 	</skill_template>
