@@ -543,7 +543,7 @@ public class PlayerCommonData extends CreatureTemplate {
 
 	@Override
 	public BoundRadius getBoundRadius() {
-		return BoundRadius.PLAYER;
+		return BoundRadius.DEFAULT;
 	}
 
 	public void setDeathCount(int count) {

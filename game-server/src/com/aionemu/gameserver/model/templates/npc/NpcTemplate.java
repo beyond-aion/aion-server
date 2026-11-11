@@ -113,8 +113,6 @@ public class NpcTemplate extends CreatureTemplate {
 	private MassiveLoot massiveLoot;
 
 	protected void afterUnmarshal(Unmarshaller u, Object parent) {
-		if (boundRadius != null && boundRadius.isZero())
-			throw new IllegalArgumentException("bound_radius must not be zero");
 		if (level > 1 && !"noaction".equals(ai) && getAbyssNpcType().equals(AbyssNpcType.TELEPORTER)) // TODO: reparse npc_template
 			ai = "siege_teleporter";
 		if (ai != null)
@@ -239,8 +237,8 @@ public class NpcTemplate extends CreatureTemplate {
 
 	@Override
 	public BoundRadius getBoundRadius() {
-		// A few NPCs have no bounds in the data; the client expects the player-sized cylinder instead of a zero one.
-		return boundRadius == null ? BoundRadius.PLAYER : boundRadius;
+		// A few NPCs have no bounds in the data; the client expects the default cylinder instead of a zero one.
+		return boundRadius != null ? boundRadius : BoundRadius.DEFAULT;
 	}
 
 	public NpcTemplateType getNpcTemplateType() {
