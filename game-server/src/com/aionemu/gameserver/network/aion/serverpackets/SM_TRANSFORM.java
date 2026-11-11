@@ -20,8 +20,8 @@ public class SM_TRANSFORM extends AionServerPacket {
 		writeD(creature.getObjectId());
 		writeD(creature.getTransformModel().getModelId());
 		writeH(creature.getState());
-		writeF(0.25f);
-		writeF(2.0f);
+		writeF(creature.getObjectTemplate().getBoundRadius().getMaxOfFrontAndSide());
+		writeF(creature.getObjectTemplate().getBoundRadius().getUpper());
 		writeC(creature.getTransformModel().cantUseSkills() ? 1 : 0);
 		writeD(creature.getTransformModel().getType().getId());
 		writeC(creature.getTransformModel().cantFly() ? 1 : 0);
