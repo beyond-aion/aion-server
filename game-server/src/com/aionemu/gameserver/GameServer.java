@@ -84,7 +84,7 @@ public class GameServer {
 	private static final Logger log = LoggerFactory.getLogger(GameServer.class);
 	public static final VersionInfo versionInfo = new VersionInfo(GameServer.class);
 
-	private static volatile NettyServer nettyServer;
+	private static NettyServer nettyServer;
 
 	// TODO remove all this shit
 	private static int ELYOS_COUNT = 0;
@@ -241,18 +241,13 @@ public class GameServer {
 			long clients = findClientConnections().count();
 			log.info("Shutting down the network{}", clients == 0 ? "" : ", closing " + clients + " client connection(s)");
 			nettyServer.shutdown();
-			nettyServer = null;
 			if (!AionConnection.shutdownPacketExecution(Duration.ofSeconds(10)))
 				log.warn("Client packets were still being executed after 10 seconds");
 		}
 	}
 
-	/**
-	 * @return The open client connections, none once the network was shut down (admin commands may still run during the shutdown).
-	 */
 	public static Stream<AionConnection> findClientConnections() {
-		NettyServer server = nettyServer;
-		return server == null ? Stream.empty() : server.findConnections(AionConnection.class);
+		return nettyServer.findConnections(AionConnection.class);
 	}
 
 	private static boolean forceStaffClientsToServerSelectionScreen() {
