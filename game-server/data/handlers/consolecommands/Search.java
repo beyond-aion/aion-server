@@ -12,7 +12,7 @@ import com.aionemu.gameserver.world.World;
 public class Search extends ConsoleCommand {
 
 	public Search() {
-		super("search");
+		super("search", "Searches a player from the GM Dialog.");
 	}
 
 	@Override
