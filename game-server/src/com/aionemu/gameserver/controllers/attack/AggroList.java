@@ -180,7 +180,7 @@ public class AggroList {
 
 	private Stream<AggroInfo> streamValidTargetInfo(float range) {
 		return stream()
-			.filter(ai -> ai.getHate() > 0 && !ai.getAttacker().isDead() && !ai.getAttacker().getLifeStats().isAboutToDie()
+			.filter(ai -> ai.getHate() > 0 && !ai.getAttacker().isDeadOrDoomed()
 				&& owner.getKnownList().sees(ai.getAttacker())
 				&& (range == Integer.MAX_VALUE || PositionUtil.isInRange(owner, ai.getAttacker(), range, false))
 				&& GeoService.getInstance().canSee(owner, ai.getAttacker()));

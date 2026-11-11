@@ -196,7 +196,7 @@ public class TheHexwayInstance extends GeneralInstanceHandler {
 							if (percentageToDrop > 0) {
 								int dmgToApply = (int) (bossNpc.getLifeStats().getMaxHp() * (percentageToDrop * 0.8 / 100));
 								ThreadPoolManager.getInstance().schedule(() -> {
-									if (bossNpc.isDead() || bossNpc.getLifeStats().isAboutToDie())
+									if (bossNpc.isDeadOrDoomed())
 										return;
 									bossNpc.getController().onAttack(bossNpc, dmgToApply, null);
 								}, 1000);

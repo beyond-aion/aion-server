@@ -17,6 +17,7 @@ import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.controllers.attack.AttackResult;
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
 import com.aionemu.gameserver.controllers.attack.AttackUtil;
+import com.aionemu.gameserver.controllers.attack.ShieldDamage;
 import com.aionemu.gameserver.controllers.observer.MaterialSkillUsage;
 import com.aionemu.gameserver.controllers.observer.TerrainZoneCollisionMaterialActor;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -309,7 +310,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	public void attackTarget(Creature target, int time, boolean skipChecks) {
 		boolean addAttackObservers = true;
 		if (!skipChecks
-			&& (target == null || getOwner().isDead() || getOwner().getLifeStats().isAboutToDie() || !getOwner().canAttack() || !getOwner().isSpawned())) {
+			&& (target == null || getOwner().isDeadOrDoomed() || !getOwner().canAttack() || !getOwner().isSpawned())) {
 			return;
 		}
 		if (getOwner() instanceof Player player)
@@ -359,10 +360,16 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 			getOwner().getObserveController().notifyAttackObservers(target, 0);
 		}
 
-		if (time == 0)
+		List<ShieldDamage> shieldDamages = attackResult.stream().flatMap(result -> result.getShieldDamages().stream()).toList();
+		if (time == 0) {
+			ShieldDamage.applyAll(shieldDamages, true);
 			target.getController().onAttack(getOwner(), damage, firstAttackStatus, criticalProcEffect);
-		else
-			ThreadPoolManager.getInstance().schedule(new DelayedOnAttack(target, getOwner(), damage, firstAttackStatus, criticalProcEffect), time);
+			ShieldDamage.applyAll(shieldDamages, false);
+		} else {
+			boolean lethalHitLatched = target.getLifeStats().latchLethalHit(getOwner(), damage);
+			ThreadPoolManager.getInstance().schedule(
+				new DelayedOnAttack(target, getOwner(), damage, firstAttackStatus, criticalProcEffect, shieldDamages, lethalHitLatched), time);
+		}
 	}
 
 	/**
@@ -575,21 +582,36 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 		private int finalDamage;
 		private AttackStatus attackStatus;
 		private Effect criticalProcEffect;
+		private final List<ShieldDamage> shieldDamages;
+		private final boolean lethalHitLatched;
 
-		private DelayedOnAttack(Creature target, Creature creature, int finalDamage, AttackStatus attackStatus, Effect criticalProcEffect) {
+		private DelayedOnAttack(Creature target, Creature creature, int finalDamage, AttackStatus attackStatus, Effect criticalProcEffect,
+			List<ShieldDamage> shieldDamages, boolean lethalHitLatched) {
 			this.target = target;
 			this.creature = creature;
 			this.finalDamage = finalDamage;
 			this.attackStatus = attackStatus;
 			this.criticalProcEffect = criticalProcEffect;
+			this.shieldDamages = shieldDamages;
+			this.lethalHitLatched = lethalHitLatched;
 		}
 
 		@Override
 		public void run() {
-			target.getController().onAttack(creature, finalDamage, attackStatus, criticalProcEffect);
-			target = null;
-			creature = null;
-			criticalProcEffect = null;
+			try {
+				ShieldDamage.applyAll(shieldDamages, true); // reflected damage hits the attacker before the hit itself lands
+				target.getController().onAttack(creature, finalDamage, attackStatus, criticalProcEffect);
+			} finally {
+				try {
+					ShieldDamage.applyAll(shieldDamages, false); // protected damage
+				} finally {
+					if (lethalHitLatched)
+						target.getLifeStats().releaseLethalHit();
+					target = null;
+					creature = null;
+					criticalProcEffect = null;
+				}
+			}
 		}
 
 	}

@@ -67,7 +67,7 @@ public class PlayerRestrictions {
 			return false;
 		}
 
-		if (!checkFly(player) || player.getLifeStats().isAboutToDie() || player.isDead()) {
+		if (!checkFly(player) || player.isDeadOrDoomed()) {
 			return false;
 		}
 
@@ -220,7 +220,7 @@ public class PlayerRestrictions {
 			return false;
 		}
 
-		if (!player.isSpawned() || player.getLifeStats().isAboutToDie() || player.isDead())
+		if (!player.isSpawned() || player.isDeadOrDoomed())
 			return false;
 
 		if (!checkFly(player))
@@ -235,7 +235,7 @@ public class PlayerRestrictions {
 			return false;
 		}
 
-		if (!(target instanceof Creature creature) || creature.isDead() || creature.getLifeStats().isAboutToDie() || !player.canTarget(creature)) {
+		if (!(target instanceof Creature creature) || creature.isDeadOrDoomed() || !player.canTarget(creature)) {
 			PacketSendUtility.sendPacket(player, SM_ATTACK_RESPONSE.STOP_INVALID_TARGET(player.getGameStats().getAttackCounter()));
 			return false;
 		}
@@ -294,7 +294,7 @@ public class PlayerRestrictions {
 			return false;
 		}
 
-		if (player.getLifeStats().isAboutToDie() || player.isDead())
+		if (player.isDeadOrDoomed())
 			return false;
 
 		// gliding and riding a windstream or a flight transporter are the two states in which the client does not allow using items

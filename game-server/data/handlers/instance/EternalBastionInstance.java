@@ -777,7 +777,7 @@ public class EternalBastionInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void onEndEffect(Effect effect) {
-		if (effect.getEffected()instanceof Player player && !player.isDead() && !player.getLifeStats().isAboutToDie()) {
+		if (effect.getEffected()instanceof Player player && !player.isDeadOrDoomed()) {
 			switch (effect.getSkillId()) {
 				case 21138, 21139 -> { // Cannons respawn if not killed
 					Point3D pos = new Point3D(player.getX(), player.getY(), player.getZ());

@@ -116,6 +116,13 @@ public abstract class Creature extends VisibleObject {
 	}
 
 	/**
+	 * @return True if the creature is dead or a lethal hit is already on its way. Such a creature must neither act nor be targeted normally.
+	 */
+	public boolean isDeadOrDoomed() {
+		return lifeStats.isDeadOrDoomed();
+	}
+
+	/**
 	 * @return True if the creature is a flag (symbol on map)
 	 */
 	public boolean isFlag() {
