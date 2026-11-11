@@ -49,7 +49,6 @@
 		<xs:attribute name="mobile_event" type="xs:int"/>
 		<xs:attribute name="flag_type" type="xs:int"/>
 		<xs:attribute name="war_flag" type="xs:int"/>
-		<xs:attribute name="item_upgrade" type="xs:int"/>
 	</xs:complexType>
 	<xs:complexType name="npcEquipmentList">
 		<xs:sequence>
