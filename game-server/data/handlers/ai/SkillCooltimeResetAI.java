@@ -60,7 +60,7 @@ public class SkillCooltimeResetAI extends NpcAI {
 	@Override
 	protected void handleDialogStart(Player player) {
 		playersInSight.values().removeIf(time -> System.currentTimeMillis() > time + 300000); // remove players if they are already 5 mins+ in the map
-		if (player.getLifeStats().isAboutToDie() || player.isDead())
+		if (player.isDeadOrDoomed())
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_USE_IN_DEAD_STATE());
 		else if (!PvpMapService.getInstance().isOnPvPMap(player) && player.getController().isInCombat())
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CANT_CAST_IN_COMBAT_STATE());
@@ -99,7 +99,7 @@ public class SkillCooltimeResetAI extends NpcAI {
 			public void acceptRequest(Creature requester, Player responder, int requestId) {
 				if (responder.getInventory().getKinah() < PRICE)
 					PacketSendUtility.sendPacket(responder, SM_SYSTEM_MESSAGE.STR_MSG_NOT_ENOUGH_KINA(PRICE));
-				else if (responder.getLifeStats().isAboutToDie() || responder.isDead())
+				else if (responder.isDeadOrDoomed())
 					PacketSendUtility.sendPacket(responder, SM_SYSTEM_MESSAGE.STR_CANNOT_USE_IN_DEAD_STATE());
 				else if (responder.getController().isInCombat())
 					PacketSendUtility.sendPacket(responder, SM_SYSTEM_MESSAGE.STR_SKILL_CANT_CAST_IN_COMBAT_STATE());

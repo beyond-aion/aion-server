@@ -23,6 +23,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_CRAFT_UPDATE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
+import com.aionemu.gameserver.restrictions.PlayerRestrictions;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemAddType;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
 import com.aionemu.gameserver.services.item.ItemService;
@@ -165,7 +166,7 @@ public class CraftService {
 			return false;
 		}
 
-		if (player.isInPlayerMode(PlayerMode.RIDE) || player.isInAnyHide()) {
+		if (player.isInPlayerMode(PlayerMode.RIDE) || player.isInAnyHide() || PlayerRestrictions.isGlidingOrUsingFlightPath(player)) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CAN_NOT_COMBINE_WHILE_IN_CURRENT_STANCE());
 			return false;
 		}

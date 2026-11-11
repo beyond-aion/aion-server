@@ -3,6 +3,7 @@ package com.aionemu.gameserver.world;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Predicate;
 
 import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -175,6 +176,29 @@ public class MapRegion {
 		return z;
 	}
 
+	/**
+	 * @return The zone of the given type at the given position, null when there is none.
+	 */
+	public ZoneInstance findZone(ZoneClassName zoneType, float x, float y, float z) {
+		return findZone(zone -> zone.getZoneTemplate().getZoneType() == zoneType, x, y, z);
+	}
+
+	private ZoneInstance findZone(Predicate<ZoneInstance> filter, float x, float y, float z) {
+		for (ZoneInstance zone : zonesSortedByTypeAndPriority) {
+			if (filter.test(zone) && zone.isInsideCoordinate(x, y, z))
+				return zone;
+		}
+		return null;
+	}
+
+	private ZoneInstance findZone(Predicate<ZoneInstance> filter, Creature creature) {
+		for (ZoneInstance zone : zonesSortedByTypeAndPriority) {
+			if (filter.test(zone) && zone.isInsideCreature(creature))
+				return zone;
+		}
+		return null;
+	}
+
 	public boolean onDie(Creature attacker, Creature target) {
 		for (ZoneInstance zone : zonesSortedByTypeAndPriority) {
 			if (zone.isInsideCreature(target)) {
@@ -186,19 +210,15 @@ public class MapRegion {
 	}
 
 	public boolean isInsideZone(String zoneName, float x, float y, float z) {
-		for (ZoneInstance zone : zonesSortedByTypeAndPriority) {
-			if (zone.matches(zoneName))
-				return zone.isInsideCoordinate(x, y, z);
-		}
-		return false;
+		return findZone(zone -> zone.matches(zoneName), x, y, z) != null;
+	}
+
+	public boolean isInsideZone(ZoneClassName zoneType, float x, float y, float z) {
+		return findZone(zoneType, x, y, z) != null;
 	}
 
 	public boolean isInsideZone(String zoneName, Creature creature) {
-		for (ZoneInstance zone : zonesSortedByTypeAndPriority) {
-			if (zone.matches(zoneName))
-				return zone.isInsideCreature(creature);
-		}
-		return false;
+		return findZone(zone -> zone.matches(zoneName), creature) != null;
 	}
 
 	/**
@@ -206,17 +226,7 @@ public class MapRegion {
 	 */
 	public boolean isInsideItemUseZone(String zoneName, Creature creature) {
 		boolean checkFortresses = "_ABYSS_CASTLE_AREA_".equals(zoneName); // some items have this special zonename in uselimits
-		for (ZoneInstance zone : zonesSortedByTypeAndPriority) {
-			if (checkFortresses) {
-				if (zone.getZoneTemplate().getZoneType() != ZoneClassName.FORT)
-					continue;
-			} else if (!zone.getZoneTemplate().getName().startsWith(zoneName)) {
-				continue;
-			}
-			if (zone.isInsideCreature(creature))
-				return true;
-		}
-		return false;
+		return findZone(zone -> checkFortresses ? zone.getZoneTemplate().getZoneType() == ZoneClassName.FORT : zone.getZoneTemplate().getName().startsWith(zoneName), creature) != null;
 	}
 
 	public int getZoneCount() {

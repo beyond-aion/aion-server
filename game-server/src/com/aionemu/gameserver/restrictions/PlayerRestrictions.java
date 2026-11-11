@@ -47,6 +47,13 @@ public class PlayerRestrictions {
 		return true;
 	}
 
+	/**
+	 * @return true while the player glides or rides a flight path, the two stances in which the client greys out most actions
+	 */
+	public static boolean isGlidingOrUsingFlightPath(Player player) {
+		return player.isInGlidingState() || player.isUsingFlightTransporterOrWindstream();
+	}
+
 	public static boolean canUseSkill(Player player, Skill skill) {
 		if (player.isInPrison()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ACCUSE_TARGET_IS_NOT_VALID());
@@ -55,7 +62,12 @@ public class PlayerRestrictions {
 		VisibleObject target = player.getTarget();
 		SkillTemplate template = skill.getSkillTemplate();
 
-		if (!checkFly(player) || player.getLifeStats().isAboutToDie() || player.isDead()) {
+		if (player.isInGlidingState()) { // a cast does not start on a glide
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FLYING_DISABLE_2());
+			return false;
+		}
+
+		if (!checkFly(player) || player.isDeadOrDoomed()) {
 			return false;
 		}
 
@@ -208,7 +220,7 @@ public class PlayerRestrictions {
 			return false;
 		}
 
-		if (!player.isSpawned() || player.getLifeStats().isAboutToDie() || player.isDead())
+		if (!player.isSpawned() || player.isDeadOrDoomed())
 			return false;
 
 		if (!checkFly(player))
@@ -223,7 +235,7 @@ public class PlayerRestrictions {
 			return false;
 		}
 
-		if (!(target instanceof Creature creature) || creature.isDead() || creature.getLifeStats().isAboutToDie() || !player.canTarget(creature)) {
+		if (!(target instanceof Creature creature) || creature.isDeadOrDoomed() || !player.canTarget(creature)) {
 			PacketSendUtility.sendPacket(player, SM_ATTACK_RESPONSE.STOP_INVALID_TARGET(player.getGameStats().getAttackCounter()));
 			return false;
 		}
@@ -282,8 +294,14 @@ public class PlayerRestrictions {
 			return false;
 		}
 
-		if (player.getLifeStats().isAboutToDie() || player.isDead())
+		if (player.isDeadOrDoomed())
 			return false;
+
+		// gliding and riding a windstream or a flight transporter are the two states in which the client does not allow using items
+		if (isGlidingOrUsingFlightPath(player)) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FLYING_DISABLE_1());
+			return false;
+		}
 
 		if (player.getEffectController().isInAnyAbnormalState(AbnormalState.CANT_ATTACK_STATE)) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CAN_NOT_USE_ITEM_WHILE_IN_ABNORMAL_STATE());

@@ -20,10 +20,10 @@ public abstract class VisibleObjectTemplate implements L10n {
 	public abstract String getName();
 
 	/**
-	 * @return
+	 * @return the cylinder of this object, or {@link BoundRadius#ZERO} if it has no size of its own
 	 */
 	public BoundRadius getBoundRadius() {
-		return BoundRadius.DEFAULT;
+		return BoundRadius.ZERO;
 	}
 
 }

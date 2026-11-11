@@ -61,11 +61,7 @@ public class WorldMap implements Iterable<WorldMapInstance> {
 	}
 
 	public int getInstanceCount() {
-		int twinCount = worldMapTemplate.getTwinCount();
-		if (twinCount == 0)
-			twinCount = 1;
-		twinCount += worldMapTemplate.getBeginnerTwinCount();
-		return twinCount;
+		return Math.max(1, worldMapTemplate.getTwinCount());
 	}
 
 	/**

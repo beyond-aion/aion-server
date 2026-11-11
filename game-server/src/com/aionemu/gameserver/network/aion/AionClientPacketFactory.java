@@ -42,7 +42,7 @@ public class AionClientPacketFactory {
 			packets[14] = new PacketInfo<>(CM_CAPTCHA.class, State.IN_GAME); // [C_CAPTCHA (ReceiveCaptchaAnswerPacket)]
 			packets[15] = new PacketInfo<>(CM_TELEPORT_ANIMATION_DONE.class, State.IN_GAME); // [C_ACCEPT_TELEPORT (AcceptTeleportPacket)]
 			packets[16] = new PacketInfo<>(CM_LEGION_SEND_EMBLEM_INFO.class, State.IN_GAME); // [C_REQUEST_GUILD_NAME (RequestGuildName)]
-			packets[17] = new PacketInfo<>(CM_POSITION_SELF.class, State.IN_GAME); // [C_BLINK (ReturnBlinkPacket)]
+			packets[17] = new PacketInfo<>(CM_BLINK.class, State.IN_GAME); // [C_BLINK (ReturnBlinkPacket)]
 			packets[18] = new PacketInfo<>(CM_TIME_CHECK.class, State.CONNECTED, State.AUTHED, State.IN_GAME); // [C_SYNC_TIME (SyncTimePacket)]
 			packets[19] = new PacketInfo<>(CM_GATHER.class, State.IN_GAME); // [C_GATHER (GatherPacket)]
 			// packets[20] = [C_MINIGAME (MinigamePacket)] likely tied to -minigame client start parameter

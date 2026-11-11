@@ -14,8 +14,10 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.gameserver.GameServer;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.handler.ShoutEventHandler;
-import com.aionemu.gameserver.configs.administration.AdminConfig;
-import com.aionemu.gameserver.configs.main.*;
+import com.aionemu.gameserver.configs.main.CustomConfig;
+import com.aionemu.gameserver.configs.main.GSConfig;
+import com.aionemu.gameserver.configs.main.HTMLConfig;
+import com.aionemu.gameserver.configs.main.MembershipConfig;
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
 import com.aionemu.gameserver.controllers.observer.StanceObserver;
 import com.aionemu.gameserver.custom.pvpmap.PvpMapService;
@@ -27,6 +29,7 @@ import com.aionemu.gameserver.model.actions.PlayerMode;
 import com.aionemu.gameserver.model.animations.ActionAnimation;
 import com.aionemu.gameserver.model.animations.ObjectDeleteAnimation;
 import com.aionemu.gameserver.model.gameobjects.*;
+import com.aionemu.gameserver.model.gameobjects.player.CustomPlayerState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureVisualState;
@@ -210,22 +213,15 @@ public class PlayerController extends CreatureController<Player> {
 	 */
 	public void onLeaveFlyArea() {
 		Player player = getOwner();
-		if (!player.hasAccess(AdminConfig.FREE_FLIGHT)) {
-			if (player.isInFlyingState()) {
-				if (player.isInGlidingState()) {
-					player.unsetFlyState(FlyState.FLYING);
-					player.unsetState(CreatureState.FLYING);
-					player.getLifeStats().triggerFpReduce();
-					player.getGameStats().updateStatsAndSpeedVisually();
-					PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.STOP_FLY), true);
-				} else {
-					player.getFlyController().endFly(true);
-					if (player.isSpawned() && !player.isInsideZoneType(ZoneType.FLY)) // not spawned means leaving by teleporter
-						AuditLogger.log(player, "left fly zone in fly state at " + player.getPosition());
-				}
-			} else if (player.isInGlidingState()) {
-				player.getLifeStats().triggerFpReduce();
-			}
+		if (player.isUsingFlightTransporterOrWindstream()) // path flight follows its own route and is not limited by flight areas
+			return;
+		player.getLifeStats().triggerFpReduce();
+		if (player.isInGlidingState()) {
+			player.getFlyController().onMove();
+		} else if (player.isInFlyingState() && !player.isInCustomState(CustomPlayerState.FREE_FLY_MODE)) {
+			player.getFlyController().endFly(true);
+			if (player.isSpawned() && !player.isInsideZoneType(ZoneType.FLY)) // not spawned means leaving by teleporter
+				AuditLogger.log(player, "left fly zone in fly state at " + player.getPosition());
 		}
 	}
 
@@ -636,52 +632,47 @@ public class PlayerController extends CreatureController<Player> {
 	}
 
 	/**
-	 * When player arrives at destination point of flying teleport
+	 * When a flight path reaches its destination: a wind path is let go with a fall, a flight transporter is validated and landed.
 	 */
 	public void onFlyTeleportEnd() {
 		Player player = getOwner();
 		FlightPath flightPath = player.getFlightPath();
 		if (player.isUsingFlightPath(FlightPath.Type.WINDSTREAM)) {
-			player.unsetState(CreatureState.FLYING);
-			player.unsetFlyState(FlyState.FLYING);
-			player.setFlyState(FlyState.GLIDING);
-			player.setState(CreatureState.ACTIVE);
-			player.setState(CreatureState.GLIDING);
-			player.getLifeStats().triggerFpReduce();
-			player.getGameStats().updateStatsAndSpeedVisually();
-		} else if (player.isUsingFlightPath(FlightPath.Type.FLIGHT_TRANSPORTER)) {
-			FlyPathEntry path = player.getFlightPathTemplate();
-			if (path == null) {
-				log.warn("Missing flypath_location in flypath_template.xml for teleport id {}, landing of {} is not validated", flightPath.getId(), player);
-			} else {
-				if (player.getWorldId() != path.getEndWorldId()
-					|| !PositionUtil.isInRange(player, path.getEndX(), path.getEndY(), path.getEndZ(), MAX_FLIGHT_LANDING_DISTANCE)) {
-					AuditLogger.log(player, "tried to land from flight path #" + path.getId() + " " + PositionUtil.getDistance(player, path.getEndX(),
-						path.getEndY(), path.getEndZ()) + "m away from its end" + (player.getWorldId() == path.getEndWorldId() ? "" : " on another map"));
-					return;
-				}
-				// Stricter than retail, which doesn't check the flight time: a landing before the flight time is over is delayed until then, so a
-				// client can't arrive early. The client lands 5-10 ms after the path's sequence ends. Land right away to fall back to retail.
-				long remainingTime = path.getTimeInMs() - flightPath.getElapsedTime() - FLIGHT_LANDING_TIME_TOLERANCE;
-				if (remainingTime > 0) {
-					AuditLogger.log(player, "tried to land from flight path #" + path.getId() + " " + remainingTime + "ms early");
-					ThreadPoolManager.getInstance().schedule(() -> {
-						if (player.isSpawned() && player.getFlightPath() == flightPath)
-							onFlyTeleportEnd();
-					}, remainingTime);
-					return;
-				}
-			}
-			player.unsetState(CreatureState.FLYING);
-			player.setState(CreatureState.ACTIVE);
-			updateZone();
-		} else {
+			// the last point of a wind path is a fall, not a glide, but the client immediately sends a CM_MOVE glide packet and keeps the player gliding
+			player.getFlyController().leaveWindstream(false);
 			return;
 		}
+		if (!player.isUsingFlightPath(FlightPath.Type.FLIGHT_TRANSPORTER))
+			return;
+
+		FlyPathEntry path = player.getFlightPathTemplate();
+		if (path == null) {
+			log.warn("Missing flypath_location in flypath_template.xml for teleport id {}, landing of {} is not validated", flightPath.getId(), player);
+		} else {
+			if (player.getWorldId() != path.getEndWorldId()
+				|| !PositionUtil.isInRange(player, path.getEndX(), path.getEndY(), path.getEndZ(), MAX_FLIGHT_LANDING_DISTANCE)) {
+				AuditLogger.log(player, "tried to land from flight path #" + path.getId() + " " + PositionUtil.getDistance(player, path.getEndX(),
+					path.getEndY(), path.getEndZ()) + "m away from its end" + (player.getWorldId() == path.getEndWorldId() ? "" : " on another map"));
+				return;
+			}
+			// Stricter than retail, which doesn't check the flight time: a landing before the flight time is over is delayed until then, so a
+			// client can't arrive early. The client lands 5-10 ms after the path's sequence ends. Land right away to fall back to retail.
+			long remainingTime = path.getTimeInMs() - flightPath.getElapsedTime() - FLIGHT_LANDING_TIME_TOLERANCE;
+			if (remainingTime > 0) {
+				AuditLogger.log(player, "tried to land from flight path #" + path.getId() + " " + remainingTime + "ms early");
+				ThreadPoolManager.getInstance().schedule(() -> {
+					if (player.isSpawned() && player.getFlightPath() == flightPath)
+						onFlyTeleportEnd();
+				}, remainingTime);
+				return;
+			}
+		}
+		player.unsetState(CreatureState.FLYING);
+		player.setState(CreatureState.ACTIVE);
+		updateZone();
 		player.getMoveController().resetFalling();
 		player.setFlightPath(null);
-		if (flightPath.getType() == FlightPath.Type.FLIGHT_TRANSPORTER)
-			QuestEngine.getInstance().onFlightPathEnd(new QuestEnv(null, player, 0), flightPath.getId());
+		QuestEngine.getInstance().onFlightPathEnd(new QuestEnv(null, player, 0), flightPath.getId());
 	}
 
 	public void startStance(int skillId) {

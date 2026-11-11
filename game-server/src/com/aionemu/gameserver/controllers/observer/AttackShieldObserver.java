@@ -5,6 +5,7 @@ import java.util.List;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.controllers.attack.AttackResult;
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
+import com.aionemu.gameserver.controllers.attack.ShieldDamage;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -141,8 +142,8 @@ public class AttackShieldObserver extends AttackCalcObserver {
 						attackerEffect.setForceType(ForceType.DEFAULT); // make sure it hits the effector (no checks needed at this point)
 						effect.endEffect(); // one skill reflection ends the shield effect
 						return;
-					} else { // apply reflect damage
-						attacker.getController().onAttack(effect.getEffected(), effect, TYPE.REGULAR, reflectedHit, false, LOG.REGULAR, null, null);
+					} else { // reflected damage is dealt when the attack hits
+						attackResult.addShieldDamage(ShieldDamage.reflected(attacker, effect, reflectedHit));
 					}
 				}
 				break;
@@ -175,8 +176,9 @@ public class AttackShieldObserver extends AttackCalcObserver {
 					attackResult.setProtectedSkillId(effect.getSkillId());
 					attackResult.setProtectedDamage(effectorDamage);
 					attackResult.setProtectorId(effect.getEffectorId());
-					effect.getEffector().getController().onAttack(attacker, attackerEffect, TYPE.PROTECTDMG, effectorDamage, false, LOG.REGULAR,
-						attackResult.getAttackStatus(), null);
+					// the protector takes the damage when the attack hits
+					attackResult.addShieldDamage(ShieldDamage.protectedDamage(effect.getEffector(), attacker, attackerEffect, effectorDamage,
+						attackResult.getAttackStatus()));
 					// dont launch subeffect if damage is fully absorbed
 					if (!isPunchShield(attackerEffect))
 						attackResult.setLaunchSubEffect(false);

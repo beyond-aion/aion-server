@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
-import com.aionemu.gameserver.model.templates.world.WeatherEntry;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
@@ -9,17 +8,23 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
  */
 public class SM_WEATHER extends AionServerPacket {
 
-	private WeatherEntry[] weatherEntries;
+	private final int mapWeatherCode;
+	private final int[] zoneWeatherCodes;
 
-	public SM_WEATHER(WeatherEntry[] weatherEntries) {
-		this.weatherEntries = weatherEntries;
+	/**
+	 * @param mapWeatherCode   Weather of the whole map.
+	 * @param zoneWeatherCodes Weathers of the weather zones 1..n.
+	 */
+	public SM_WEATHER(int mapWeatherCode, int[] zoneWeatherCodes) {
+		this.mapWeatherCode = mapWeatherCode;
+		this.zoneWeatherCodes = zoneWeatherCodes;
 	}
 
 	@Override
 	protected void writeImpl(AionConnection con) {
-		writeC(0x00);// unk
-		writeC(weatherEntries.length);
-		for (WeatherEntry entry : weatherEntries)
-			writeC(entry.getCode());
+		writeC(mapWeatherCode);
+		writeC(zoneWeatherCodes.length);
+		for (int code : zoneWeatherCodes)
+			writeC(code);
 	}
 }

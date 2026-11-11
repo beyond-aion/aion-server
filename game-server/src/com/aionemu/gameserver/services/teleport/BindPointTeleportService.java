@@ -63,7 +63,7 @@ public class BindPointTeleportService {
 				ThreadPoolManager.getInstance().schedule(new Runnable() {
 					@Override
 					public void run() {
-						if (!player.getLifeStats().isAboutToDie() && !player.isDead())
+						if (!player.isDeadOrDoomed())
 							TeleportService.teleportTo(player, hotspot.getWorldId(), hotspot.getX(), hotspot.getY(), hotspot.getZ());
 					}
 				}, 1000);

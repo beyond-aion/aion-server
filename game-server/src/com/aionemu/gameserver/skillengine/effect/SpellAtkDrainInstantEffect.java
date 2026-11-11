@@ -24,8 +24,14 @@ public class SpellAtkDrainInstantEffect extends DamageEffect {
 
 
 	@Override
+	public boolean appliesWhenEffectedIsDead() {
+		return true;
+	}
+
+	@Override
 	public void applyEffect(Effect effect) {
-		super.applyEffect(effect);
+		if (effect.getEffected() != null && !effect.getEffected().isDead()) // a dead target can no longer take the damage, but the caster keeps the drain that the client already displayed
+			super.applyEffect(effect);
 		ThreadPoolManager.getInstance().schedule(() -> {
 			if (hpPercent != 0) {
 				effect.getEffector().getLifeStats().increaseHp(TYPE.HP, effect.getReserveds(position).getValue() * hpPercent / 100, effect,
@@ -35,6 +41,6 @@ public class SpellAtkDrainInstantEffect extends DamageEffect {
 				effect.getEffector().getLifeStats().increaseMp(TYPE.ABSORBED_MP, effect.getReserveds(position).getValue() * mpPercent / 100,
 						effect.getSkillId(), LOG.SPELLATKDRAININSTANT);
 			}
-		}, 1000); // on retail the effect is applied about 1sec later (maybe based on animationTime/hitTime?)
+		}, 1000); // 1000 ms after the hit; the target's death must not cancel it (see appliesWhenEffectedIsDead)
 	}
 }

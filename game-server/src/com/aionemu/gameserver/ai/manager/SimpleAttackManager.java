@@ -81,7 +81,7 @@ public class SimpleAttackManager {
 				npcAI.onGeneralEvent(AIEventType.ATTACK_COMPLETE);
 			}
 		} else {
-			if (npc.isSpawned() && !npc.isDead() && !npc.getLifeStats().isAboutToDie() && npc.canAttack()) {
+			if (npc.isSpawned() && !npc.isDeadOrDoomed() && npc.canAttack()) {
 				npc.getPosition().setH(PositionUtil.getHeadingTowards(npc, target));
 				npc.getController().attackTarget(target, 0, true);
 			}

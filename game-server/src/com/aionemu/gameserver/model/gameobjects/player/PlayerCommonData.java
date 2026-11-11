@@ -42,6 +42,7 @@ public class PlayerCommonData extends CreatureTemplate {
 	private boolean online;
 	private String note;
 	private int mapId;
+	private int instanceId = 1;
 	private float x, y, z;
 	private byte heading;
 	private int questExpands = 0;
@@ -370,6 +371,14 @@ public class PlayerCommonData extends CreatureTemplate {
 		this.mapId = mapId;
 	}
 
+	public int getInstanceId() {
+		return instanceId;
+	}
+
+	public void setInstanceId(int instanceId) {
+		this.instanceId = instanceId;
+	}
+
 	public float getX() {
 		return x;
 	}
@@ -534,7 +543,7 @@ public class PlayerCommonData extends CreatureTemplate {
 
 	@Override
 	public BoundRadius getBoundRadius() {
-		return BoundRadius.PLAYER;
+		return BoundRadius.DEFAULT;
 	}
 
 	public void setDeathCount(int count) {

@@ -11,5 +11,7 @@ import jakarta.xml.bind.annotation.XmlType;
 public enum WeatherState {
 	RAIN,
 	SNOW,
-	WIND
+	WIND,
+	EARTHQUAKE,
+	HEATHAZE
 }

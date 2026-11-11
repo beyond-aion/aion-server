@@ -151,6 +151,9 @@ public class HousingService {
 			spawnStudio(instance.getMapId(), instance.getInstanceId(), registeredId);
 			return;
 		}
+		// a house is one object per address for the whole server, so a map's houses can only live in its first twin
+		if (instance.getInstanceId() > 1)
+			return;
 		int spawnedCounter = 0;
 		for (HouseAddress address : DataManager.HOUSE_DATA.getAddresses(instance.getMapId())) {
 			if (address.getLand().getDefaultBuilding().getType() == BuildingType.PERSONAL_INS)

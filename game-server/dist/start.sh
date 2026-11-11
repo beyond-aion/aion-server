@@ -8,7 +8,7 @@
 
 loop() {
   while true; do
-    java -Xms1024m -Xmx2560m -XX:+UseNUMA -XX:+UseCompactObjectHeaders $@ -cp "libs/*" com.aionemu.gameserver.GameServer
+    THREAD_LOG='' java -Xms1024m -Xmx2560m -XX:+UseNUMA -XX:+UseCompactObjectHeaders $@ -cp "libs/*" com.aionemu.gameserver.GameServer
     err=$?
     case $err in
       0) # regular shutdown
@@ -38,6 +38,17 @@ loop() {
   done
   exit $err
 }
+
+# Git Bash fixes for Windows
+if [[ -n $MSYSTEM ]]; then # MinGW (like Git Bash on Windows)
+  # fix UTF-8 logging
+  chcp.com 65001 >/dev/null
+  # increase window width to 120 characters if less than 120
+  cols=$(tput cols 2>/dev/null || echo 120)
+  if [ "$cols" -lt 120 ]; then
+    printf "\e[8;;120t"
+  fi
+fi
 
 pid=$(jps -l | grep com.aionemu.gameserver.GameServer | awk '{print $1}')
 if [[ -n $pid ]]; then

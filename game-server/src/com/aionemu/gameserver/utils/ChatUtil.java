@@ -1,11 +1,11 @@
 package com.aionemu.gameserver.utils;
 
 import java.awt.Color;
-import java.text.DecimalFormat;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,14 +30,9 @@ import com.aionemu.gameserver.world.geo.GeoService;
  */
 public class ChatUtil {
 
-	private static final DecimalFormat DF = (DecimalFormat) DecimalFormat.getInstance(Locale.US);
 	private static final char ASMO_NAME_PREFIX = '\uE053';
 	private static final char ELYOS_NAME_PREFIX = '\uE052';
 	private static final char CONTINUATION_MARK = '\u200B'; // zero-width space, which our client mod detects to skip the chat time prefix
-
-	static {
-		DF.applyPattern(".##");
-	}
 
 	/**
 	 * @see #color(String, int, int, int)
@@ -71,7 +66,7 @@ public class ChatUtil {
 	 * @return The color encoded message.
 	 */
 	public static String color(String message, int r, int g, int b) {
-		return "[color:%s;%s %s %s]".formatted(message, DF.format(r / 255f), DF.format(g / 255f), DF.format(b / 255f));
+		return "[color:%s;%s %s %s]".formatted(message, format(r / 255f), format(g / 255f), format(b / 255f));
 	}
 
 	/**
@@ -159,7 +154,7 @@ public class ChatUtil {
 			else
 				subId = 1; // lower
 		}
-		return "[pos:%s;%d %s %s %s %d]".formatted(label, worldId, DF.format(x), DF.format(y), DF.format(z), subId);
+		return "[pos:%s;%d %s %s %s %d]".formatted(label, worldId, format(x), format(y), format(z), subId);
 	}
 
 	/**
@@ -390,8 +385,8 @@ public class ChatUtil {
 						lengthToAdd += 15; // conservative estimate for the character count of a resolved localized string on the client side
 					}
 				}
-				case '[' -> { // check for any link type, such as [quest:1006], [item:182400001], etc.
-					if (i + 3 < endIndex && Character.isLowerCase(chatMessage.charAt(i + 1))) {
+				case '[' -> { // check for any link type, such as [quest:1006], [item:182400001], etc., except color tags which must use their raw length
+					if (i + 3 < endIndex && Character.isLowerCase(chatMessage.charAt(i + 1)) && !chatMessage.startsWith("[color:", i)) {
 						int linkEndIndex = chatMessage.indexOf(']', i + 2, Math.min(i + 40, endIndex));
 						if (linkEndIndex == -1)
 							break;
@@ -423,5 +418,9 @@ public class ChatUtil {
 	 */
 	public static boolean isInvalidCharacter(int codePoint) {
 		return codePoint < 32 && codePoint != '\t' || codePoint == 127;
+	}
+
+	private static String format(float number) {
+		return BigDecimal.valueOf(number).setScale(2, RoundingMode.HALF_UP).stripTrailingZeros().toPlainString();
 	}
 }

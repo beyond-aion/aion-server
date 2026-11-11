@@ -6,10 +6,10 @@
 	<property name="logFolder" value="log" />
 	<property name="consoleTime" value="%date{HH:mm:ss}" />
 	<property name="date" value="%date{&quot;yyyy-MM-dd'T'HH:mm:ss,SSSXXX&quot;}" />
+	<conversionRule conversionWord="threadAndLogger" class="com.aionemu.commons.logging.ThreadAndLoggerNameConverter" />
 	<appender name="out_console" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder>
-			<charset>${consoleEncoding:-UTF-8}</charset>
-			<Pattern>${consoleTime} %highlight(%-5level) %gray([%thread]) - %message%n</Pattern>
+			<Pattern>${consoleTime} %highlight(%-5level) ${THREAD_LOG:-%threadAndLogger %gray(-) }%message%n</Pattern>
 		</encoder>
 	</appender>
 	<appender name="app_console" class="ch.qos.logback.core.rolling.RollingFileAppender">
@@ -63,7 +63,7 @@
 	</appender>
 	<appender name="app_status_discord" class="com.aionemu.commons.logging.DiscordChannelAppender">
 		<encoder>
-			<pattern>%logger{0} [%thread]|${loginserver.log.status.discord.avatar_url}|%msg%replace(%n```qml%n%ex```){\r?\n```qml\r?\n```, ''}%nopex</pattern>
+			<pattern>%logger{0} [%thread]|${loginserver.log.status.discord.avatar_url}|%msg%replace(%n```yml%n%ex```){\r?\n```yml\r?\n```, ''}%nopex</pattern>
 		</encoder>
 		<webhookUrl>${loginserver.log.status.discord.webhook_url}</webhookUrl>
 		<userName_avatarUrl_msg_separator>\|</userName_avatarUrl_msg_separator>

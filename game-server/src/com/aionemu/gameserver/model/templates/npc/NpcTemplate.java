@@ -37,9 +37,6 @@ public class NpcTemplate extends CreatureTemplate {
 	@XmlAttribute(name = "group_drop")
 	private GroupDropType groupDrop;
 
-	@XmlAttribute(name = "height")
-	private float height = 1;
-
 	@XmlElement(name = "stats")
 	private StatsTemplate statsTemplate;
 
@@ -81,10 +78,6 @@ public class NpcTemplate extends CreatureTemplate {
 
 	@XmlAttribute(name = "war_flag")
 	private int warFlagGroupId;
-
-	/*
-	 * @XmlAttribute(name = "item_upgrade") private int itemUpgrade;
-	 */
 
 	@XmlAttribute(name = "hpgauge")
 	private int hpGauge;
@@ -143,10 +136,6 @@ public class NpcTemplate extends CreatureTemplate {
 	@Override
 	public String getName() {
 		return name;
-	}
-
-	public float getHeight() {
-		return height;
 	}
 
 	public NpcEquippedGear getEquipment() {
@@ -234,10 +223,6 @@ public class NpcTemplate extends CreatureTemplate {
 		return warFlagGroupId;
 	}
 
-	/*
-	 * public int getItemUpgrade() { return itemUpgrade; }
-	 */
-
 	public int getHpGauge() {
 		return hpGauge;
 	}
@@ -252,8 +237,8 @@ public class NpcTemplate extends CreatureTemplate {
 
 	@Override
 	public BoundRadius getBoundRadius() {
-		// TODO all npcs should have BR in xml
-		return boundRadius != null ? boundRadius : super.getBoundRadius();
+		// A few NPCs have no bounds in the data; the client expects the default cylinder instead of a zero one.
+		return boundRadius != null ? boundRadius : BoundRadius.DEFAULT;
 	}
 
 	public NpcTemplateType getNpcTemplateType() {
