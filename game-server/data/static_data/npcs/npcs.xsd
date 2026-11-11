@@ -63,9 +63,9 @@
 		<xs:attribute name="resurrects" type="xs:int" use="required"/>
 	</xs:complexType>
 	<xs:complexType name="BoundRadius">
-		<xs:attribute name="front" type="xs:float"/>
-		<xs:attribute name="side" type="xs:float"/>
-		<xs:attribute name="upper" type="xs:float"/>
+		<xs:attribute name="front" type="xs:float" default="0.25"/>
+		<xs:attribute name="side" type="xs:float" default="0.25"/>
+		<xs:attribute name="upper" type="xs:float" default="2"/>
 	</xs:complexType>
 	<xs:complexType name="TalkInfo">
 		<xs:attribute name="distance" type="xs:int"/>
