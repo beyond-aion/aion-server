@@ -11,7 +11,6 @@ import com.aionemu.chatserver.utils.IdFactory;
 import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.commons.logging.Logging;
 import com.aionemu.commons.utils.concurrent.UncaughtExceptionHandler;
-import com.aionemu.commons.utils.info.StartupInfo;
 import com.aionemu.commons.utils.info.SystemInfo;
 import com.aionemu.commons.utils.info.VersionInfo;
 
@@ -23,8 +22,8 @@ import ch.qos.logback.classic.LoggerContext;
 class ChatServer {
 
 	void main() {
+		long startTimeNanos = System.nanoTime();
 		Logging.init(); // must run before instantiating any logger
-		StartupInfo.logStarting(ChatServer.class, "Chat Server");
 		Thread.setDefaultUncaughtExceptionHandler(new UncaughtExceptionHandler());
 
 		Config.load();
@@ -39,7 +38,7 @@ class ChatServer {
 
 		NetConnector.connect();
 		Runtime.getRuntime().addShutdownHook(new ShutdownHook());
-		StartupInfo.logStarted("Chat Server");
+		LoggerFactory.getLogger(ChatServer.class).info(Logging.formatStartupMessage("Chat server", startTimeNanos));
 	}
 
 	private static class ShutdownHook extends Thread {

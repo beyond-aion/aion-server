@@ -17,7 +17,6 @@ import com.aionemu.commons.logging.Logging;
 import com.aionemu.commons.network.netty.NettyServer;
 import com.aionemu.commons.utils.concurrent.SequentialExecutor;
 import com.aionemu.commons.utils.concurrent.UncaughtExceptionHandler;
-import com.aionemu.commons.utils.info.StartupInfo;
 import com.aionemu.commons.utils.info.SystemInfo;
 import com.aionemu.commons.utils.info.VersionInfo;
 import com.aionemu.gameserver.ai.AIEngine;
@@ -36,8 +35,8 @@ import com.aionemu.gameserver.instance.InstanceEngine;
 import com.aionemu.gameserver.model.GameEngine;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.siege.Influence;
-import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionChannelInitializer;
+import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUIT_RESPONSE;
 import com.aionemu.gameserver.network.chatserver.ChatServer;
 import com.aionemu.gameserver.network.loginserver.LoginServer;
@@ -54,6 +53,7 @@ import com.aionemu.gameserver.services.instance.PeriodicInstanceManager;
 import com.aionemu.gameserver.services.player.PlayerLimitService;
 import com.aionemu.gameserver.services.transfers.PlayerTransferService;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
+import com.aionemu.gameserver.taskmanager.AbstractPeriodicTaskManager;
 import com.aionemu.gameserver.taskmanager.tasks.housing.AuctionAutoFillTask;
 import com.aionemu.gameserver.taskmanager.tasks.housing.AuctionEndTask;
 import com.aionemu.gameserver.taskmanager.tasks.housing.MaintenanceTask;
@@ -75,13 +75,13 @@ import com.aionemu.gameserver.world.zone.ZoneService;
  */
 public class GameServer {
 
+	private static final long START_TIME_NANOS = System.nanoTime();
+	public static final int START_TIME_SECONDS = (int) (ManagementFactory.getRuntimeMXBean().getStartTime() / 1000);
+
 	static {
 		Logging.init(); // must run before instantiating any logger
-		StartupInfo.logStarting(GameServer.class, "Game Server");
 	}
 	private static final Logger log = LoggerFactory.getLogger(GameServer.class);
-
-	public static final int START_TIME_SECONDS = (int) (ManagementFactory.getRuntimeMXBean().getStartTime() / 1000);
 	public static final VersionInfo versionInfo = new VersionInfo(GameServer.class);
 
 	private static volatile NettyServer nettyServer;
@@ -128,6 +128,7 @@ public class GameServer {
 		MaintenanceTask.getInstance();
 		ChallengeTaskService.getInstance();
 
+		AbstractPeriodicTaskManager.startAll();
 		SpawnEngine.spawnAll();
 		TownService.getInstance();
 		FlyRingService.getInstance();
@@ -187,7 +188,7 @@ public class GameServer {
 
 		nettyServer = initNettyServer();
 		Runtime.getRuntime().addShutdownHook(ShutdownHook.getInstance());
-		StartupInfo.logStarted("Game Server");
+		log.info(Logging.formatStartupMessage("Game server", START_TIME_NANOS));
 
 		LoginServer.getInstance().connect(nettyServer);
 		if (GSConfig.ENABLE_CHAT_SERVER)

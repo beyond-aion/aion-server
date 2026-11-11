@@ -163,8 +163,8 @@ public class SM_PLAYER_INFO extends AbstractPlayerInfoPacket {
 		writeC(playerAppearance.getVoice());
 
 		writeF(playerAppearance.getHeightScale());
-		writeF(0.25f); // scale
-		writeF(2.0f); // gravity or slide surface o_O
+		writeF(pcd.getBoundRadius().getMaxOfFrontAndSide());
+		writeF(pcd.getBoundRadius().getUpper());
 		float movementSpeed = player.getGameStats().getMovementSpeedFloat();
 		writeF(movementSpeed);
 

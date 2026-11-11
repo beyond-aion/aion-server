@@ -393,6 +393,7 @@ public class AttackUtil {
 			effected.getObserveController().checkShieldStatus(Collections.singletonList(attackResult), effect, effect.getEffector());
 			effect.setReflectedDamage(attackResult.getReflectedDamage());
 			effect.setReflectedSkillId(attackResult.getReflectedSkillId());
+			attackResult.getShieldDamages().forEach(effect::addShieldDamage);
 			effect.setMpAbsorbed(attackResult.getMpAbsorbed());
 			effect.setMpShieldSkillId(attackResult.getMpShieldSkillId());
 			effect.setProtectedDamage(attackResult.getProtectedDamage());

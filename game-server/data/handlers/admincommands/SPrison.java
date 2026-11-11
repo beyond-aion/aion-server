@@ -2,7 +2,6 @@ package admincommands;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.PunishmentService;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.World;
@@ -13,40 +12,31 @@ import com.aionemu.gameserver.world.World;
 public class SPrison extends AdminCommand {
 
 	public SPrison() {
-		super("sprison");
+		super("sprison", "Sends a player to prison.", """
+			<player> <minutes> <reason> - Sends the online player to prison for the given time.
+			""");
 	}
 
 	@Override
 	public void execute(Player admin, String... params) {
-		if (params.length < 2) {
+		if (params.length < 3) {
 			sendInfo(admin);
 			return;
 		}
 
-		try {
-			Player playerToPrison = World.getInstance().getPlayer(Util.convertName(params[0]));
-			int delay = Integer.parseInt(params[1]);
-
-			String reason = Util.convertName(params[2]);
-			for (int itr = 3; itr < params.length; itr++)
-				reason += " " + params[itr];
-
-			if (playerToPrison != null) {
-				PunishmentService.setIsInPrison(playerToPrison, true, delay, reason);
-				PacketSendUtility.sendMessage(admin, "Player " + playerToPrison.getName() + " sent to prison for " + delay + " because " + reason + ".");
-			}
-		} catch (Exception e) {
-			sendInfo(admin);
+		Player playerToPrison = World.getInstance().getPlayer(Util.convertName(params[0]));
+		if (playerToPrison == null) {
+			sendInfo(admin, "Player " + Util.convertName(params[0]) + " is not online.");
+			return;
 		}
-
-	}
-
-	@Override
-	public void info(Player player, String message) {
-		sendInfo(player);
-	}
-
-	private void sendInfo(Player player) {
-		PacketSendUtility.sendMessage(player, "syntax //sprison <player> <delay> <reason>");
+		int delay = Integer.parseInt(params[1]);
+		if (delay <= 0) {
+			sendInfo(admin, "The time must be at least one minute.");
+			return;
+		}
+		String reason = join(params, 2);
+		PunishmentService.setIsInPrison(playerToPrison, true, delay, reason);
+		sendInfo(admin,
+			"Player " + playerToPrison.getName() + " was sent to prison for " + delay + " minutes because " + reason + ".");
 	}
 }

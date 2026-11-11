@@ -187,7 +187,7 @@
 					<xs:element ref="tribe_relations" minOccurs="0" />
 					<xs:element ref="walker_versions" minOccurs="0" />
 					<xs:element ref="warehouse_expander" minOccurs="0" />
-					<xs:element ref="weather" minOccurs="0" />
+					<xs:element ref="weather_maps" minOccurs="0" />
 					<xs:element ref="windstreams" minOccurs="0" />
 					<xs:element ref="world_maps" minOccurs="0" />
 					<xs:element ref="world_raid_locations" minOccurs="0" />

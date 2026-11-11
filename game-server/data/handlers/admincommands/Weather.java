@@ -3,10 +3,9 @@ package admincommands;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.world.WeatherEntry;
-import com.aionemu.gameserver.model.templates.zone.ZoneClassName;
+import com.aionemu.gameserver.model.templates.world.WeatherTable;
 import com.aionemu.gameserver.services.WeatherService;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
-import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
  * @author Kwazar
@@ -15,9 +14,10 @@ public class Weather extends AdminCommand {
 
 	public Weather() {
 		super("weather", "Shows/changes the weather.", """
-			<info> - Shows info for the weather in the current zone.
-			<next> - Triggers a natural weather change on this map.
-			<set> <code> - Changes the weather on this map, according to the weather code between 0 (default) and 12.
+			info - Shows the weather at your position and when it changes.
+			list - Lists the weather codes of this map.
+			next - Ends the running weather and rolls a new one on this map.
+			set <code> - Sets the weather code on every channel of this map, 0 clears it.
 			""");
 	}
 
@@ -27,54 +27,66 @@ public class Weather extends AdminCommand {
 			sendInfo(admin);
 			return;
 		}
-
-		switch (params[0].toLowerCase()) {
-			case "info":
-				for (ZoneInstance regionZone : admin.findZones()) {
-					if (regionZone.getZoneTemplate().getZoneType() == ZoneClassName.WEATHER) {
-						int weatherZoneId = DataManager.ZONE_DATA.getWeatherZoneId(regionZone.getZoneTemplate());
-						WeatherEntry weatherEntry = WeatherService.getInstance().getWeatherEntry(admin.getWorldId(), weatherZoneId);
-						if (weatherEntry != null) {
-							String info = "Weather for region " + regionZone.getZoneTemplate().getName() + ":";
-							if (weatherEntry == WeatherEntry.NONE) {
-								info += "\n\tcode: " + weatherEntry.getCode() + " (no weather)";
-							} else {
-								if (weatherEntry.getZoneId() > 0)
-									info += "\n\tzone: " + weatherEntry.getZoneId();
-								if (weatherEntry.getWeatherName() != null)
-									info += "\n\tname: " + weatherEntry.getWeatherName();
-								info += "\n\tcode: " + weatherEntry.getCode();
-							}
-							sendInfo(admin, info);
-							return;
-						}
-					}
-				}
-				sendInfo(admin, "No weather found for this region.");
-				return;
-			case "set":
-			case "next":
-				int weatherCode;
-				if (params[0].equalsIgnoreCase("next")) {
-					if (params.length != 1) {
-						sendInfo(admin);
-						return;
-					}
-					weatherCode = -1;
-				} else {
-					weatherCode = params.length > 1 ? Integer.parseInt(params[1]) : -1;
-					if (weatherCode < 0 || weatherCode > 12) {
-						sendInfo(admin, "Weather code must be between 0 and 12.");
-						return;
-					}
-				}
-
-				if (WeatherService.getInstance().changeWeather(admin.getWorldId(), weatherCode)) {
-					String weatherName = WeatherService.getInstance().findWeatherEntry(admin).getWeatherName();
-					sendInfo(admin, "Changed the weather" + (weatherName == null ? "." : " to " + weatherName + "."));
-				} else {
-					sendInfo(admin, "This region has no weather defined.");
-				}
+		WeatherService weatherService = WeatherService.getInstance();
+		if (params[0].equalsIgnoreCase("info")) {
+			int zoneId = weatherService.getWeatherZoneIdAt(admin);
+			String zone = zoneId > 0 ? " in weather zone " + zoneId : " outside of weather zones";
+			sendInfo(admin, "Weather" + zone + ": " + describe(weatherService.getWeatherAt(admin)) + ".");
+			int minutes = weatherService.getMinutesUntilNextChange(admin);
+			if (minutes >= 0)
+				sendInfo(admin, "Next change in " + minutes + " game minutes.");
+			return;
 		}
+		if (params[0].equalsIgnoreCase("list")) {
+			WeatherTable table = DataManager.MAP_WEATHER_DATA.getWeather(admin.getWorldId());
+			if (table == null) {
+				sendInfo(admin, "This map has no weather defined.");
+				return;
+			}
+			StringBuilder sb = new StringBuilder("Weathers of this map:");
+			for (WeatherEntry entry : table.getEntries())
+				sb.append('\n').append(entry.getCode()).append(": ").append(entry.getName()).append(" (").append(describeZone(entry)).append(')');
+			sendInfo(admin, sb.toString());
+			return;
+		}
+		if (params[0].equalsIgnoreCase("next")) {
+			if (!weatherService.nextWeather(admin)) {
+				sendInfo(admin, "This map has no weather defined.");
+				return;
+			}
+			sendInfo(admin, "Changed the weather to " + describe(weatherService.getWeatherAt(admin)) + ".");
+			return;
+		}
+		if (params[0].equalsIgnoreCase("set") && params.length >= 2) {
+			int weatherCode = Integer.parseInt(params[1]);
+			WeatherTable table = DataManager.MAP_WEATHER_DATA.getWeather(admin.getWorldId());
+			WeatherEntry entry = weatherCode == 0 || table == null ? null : table.getEntry(weatherCode);
+			if (weatherCode != 0 && entry == null) {
+				sendInfo(admin, "This map has no weather with code " + weatherCode + ".");
+				return;
+			}
+			if (!weatherService.changeWeather(admin, weatherCode)) {
+				sendInfo(admin, "This map has no weather defined.");
+				return;
+			}
+			if (entry == null)
+				sendInfo(admin, "Changed the weather to clear on every channel of this map.");
+			else
+				sendInfo(admin, "Changed the weather to " + describe(entry) + " in " + describeZone(entry) + " on every channel of this map.");
+			sendInfo(admin, "At your position: " + describe(weatherService.getWeatherAt(admin)) + ".");
+			return;
+		}
+		sendInfo(admin);
+	}
+
+	/**
+	 * @return The weather name with its code, or "clear" for the absence of weather.
+	 */
+	private static String describe(WeatherEntry entry) {
+		return entry == null ? "clear" : entry.getName() + " (code " + entry.getCode() + ")";
+	}
+
+	private static String describeZone(WeatherEntry entry) {
+		return entry.getZoneId() == 0 ? "the whole map" : "weather zone " + entry.getZoneId();
 	}
 }

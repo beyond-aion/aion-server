@@ -1,10 +1,11 @@
 package admincommands;
 
 import java.sql.Timestamp;
+import java.time.Duration;
+import java.time.LocalDateTime;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.ban.HDDBanService;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 
 /**
@@ -12,24 +13,32 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
  */
 public class BanHdd extends AdminCommand {
 
-	private static String SYNTAX = "Syntax: //banhdd <hdd_serial> <time_in_minutes|0 - infinite>";
-
 	public BanHdd() {
-		super("banhdd");
+		super("banhdd", "Bans a HDD serial.", """
+			<serial> - Bans the HDD serial permanently.
+			<serial> <days> - Bans the HDD serial for the given amount of days.
+			""");
 	}
 
 	@Override
 	public void execute(Player player, String... params) {
-		try {
-			String hddSerial = params[0];
-			Integer timeMins = Integer.parseInt(params[1]);
-			if (timeMins == 0)
-				timeMins = 10 * 365 * 24 * 60;
-			Timestamp banTime = new Timestamp(System.currentTimeMillis() + timeMins * 60 * 1000);
-			HDDBanService.getInstance().addBan(hddSerial, banTime);
-		} catch (Exception e) {
-			PacketSendUtility.sendMessage(player, SYNTAX);
+		if (params.length < 1) {
+			sendInfo(player);
+			return;
 		}
+		String hddSerial = params[0];
+		Timestamp banTime;
+		String message = "Banned HDD serial \"" + hddSerial + "\" ";
+		if (params.length > 1) {
+			int timeInDays = Math.clamp(Integer.parseInt(params[1]), 1, 365 * 100);
+			banTime = new Timestamp(System.currentTimeMillis() + Duration.ofDays(timeInDays).toMillis());
+			message += "for " + (timeInDays == 1 ? 1 + "day." : timeInDays + " days.");
+		} else {
+			banTime = Timestamp.valueOf(LocalDateTime.of(2038, 1, 1, 0, 0, 0));
+			message += "until 2038.";
+		}
+		HDDBanService.getInstance().addBan(hddSerial, banTime);
+		sendInfo(player, message);
 	}
 
 }

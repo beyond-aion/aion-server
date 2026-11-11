@@ -7,7 +7,6 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
@@ -22,7 +21,6 @@ import com.alibaba.fastjson2.JSON;
 import ch.qos.logback.core.AppenderBase;
 import ch.qos.logback.core.CoreConstants;
 import ch.qos.logback.core.encoder.Encoder;
-import ch.qos.logback.core.status.StatusManager;
 
 /**
  * Sends messages via a webhook (see <a href="https://discord.com/developers/docs/resources/webhook#execute-webhook">API docs</a>).<br>
@@ -51,8 +49,6 @@ public class DiscordChannelAppender<E> extends AppenderBase<E> {
 		}
 		if (webhookUrl.isEmpty()) {
 			addInfo("<webhookUrl> is empty, appender will not be used");
-			StatusManager statusManager = context.getStatusManager();
-			statusManager.getCopyOfStatusListenerList().forEach(statusManager::remove);
 		} else {
 			webhookUri = URI.create(webhookUrl);
 			httpClient = HttpClient.newHttpClient();
@@ -79,6 +75,12 @@ public class DiscordChannelAppender<E> extends AppenderBase<E> {
 			httpClient = null;
 		}
 		super.stop();
+	}
+
+	@Override
+	public synchronized void doAppend(E eventObject) {
+		if (isStarted())
+			super.doAppend(eventObject);
 	}
 
 	@Override
@@ -187,14 +189,7 @@ public class DiscordChannelAppender<E> extends AppenderBase<E> {
 		if (isRateLimited())
 			return;
 		try {
-			Map<String, Object> body = new HashMap<>();
-			body.put("content", msg);
-			if (username != null)
-				body.put("username", username);
-			if (avatarUrl != null)
-				body.put("avatar_url", avatarUrl);
-			// messages contain text of players and of anyone who connects, so mentions like @everyone or <@&role> must not ping anyone
-			body.put("allowed_mentions", Map.of("parse", List.of()));
+			var body = Map.of("content", msg, "username", username, "avatar_url", avatarUrl, "allowed_mentions", Map.of("parse", List.of()));
 			byte[] json = JSON.toJSONBytes(body);
 			HttpRequest httpRequest = HttpRequest.newBuilder(webhookUri)
 					.headers("User-Agent", "DiscordChannelAppender/1.0")

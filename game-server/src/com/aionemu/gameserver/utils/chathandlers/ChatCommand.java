@@ -189,26 +189,14 @@ public abstract class ChatCommand {
 	}
 
 	/**
-	 * Sends an info message to the player.<br>
-	 * If no message parameter (or <tt>null</tt>) is specified, the default syntax info will be sent.
-	 * 
-	 * @param player
-	 *          player who will receive the message
-	 * @param message
-	 *          message text (insert newlines with \n or by passing comma separated strings)
+	 * Sends an info message to the player with the syntax info for this command.
 	 */
-	protected final void sendInfo(Player player, String... message) {
-		StringBuilder sb = new StringBuilder();
-		if (message.length > 1 || message.length == 1 && message[0] != null) {
-			for (int i = 0; i < message.length; i++) {
-				if (i > 0)
-					sb.append('\n');
-				sb.append(message[i]);
-			}
-		} else {
-			sb.append(getSyntaxInfo());
-		}
-		ChatUtil.split(sb.toString()).forEach(part -> PacketSendUtility.sendMessage(player, part));
+	protected final void sendInfo(Player player) {
+		sendInfo(player, getSyntaxInfo());
+	}
+
+	protected static void sendInfo(Player player, String message) {
+		ChatUtil.split(message).forEach(part -> PacketSendUtility.sendMessage(player, part));
 	}
 
 	protected static String join(String[] params, int startIndex) {
@@ -234,15 +222,5 @@ public abstract class ChatCommand {
 		if (template == null)
 			return String.valueOf(worldId);
 		return template.getL10nId() != 0 ? template.getL10n() : template.getName();
-	}
-
-	/**
-	 * Please use {@link #sendInfo(Player, String...)}.
-	 * Old commands still override this method to show syntax info and should be ported eventually.
-	 * TODO: remove this method when all commands are updated
-	 */
-	@Deprecated
-	protected void info(Player player, String message) {
-		throw new UnsupportedOperationException("Please don't call me and don't override me! Use sendInfo() instead. Syntax info can be initialized in constructor.");
 	}
 }

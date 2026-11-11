@@ -384,6 +384,14 @@ public abstract class EffectTemplate {
 	public abstract void applyEffect(Effect effect);
 
 	/**
+	 * @return True if this effect must still be applied when the target dies between the cast result and the hit. The client has already been told about
+	 *         the hit at the end of the cast, so effects that only benefit the effector (drains) must not be lost to that race.
+	 */
+	public boolean appliesWhenEffectedIsDead() {
+		return false;
+	}
+
+	/**
 	 * Start effect on effected
 	 * 
 	 * @param effect

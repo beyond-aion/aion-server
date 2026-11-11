@@ -6,7 +6,6 @@ import java.util.List;
 import jakarta.xml.bind.annotation.*;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.ConsoleCommand;
 import com.aionemu.gameserver.utils.xml.JAXBUtil;
 
@@ -16,13 +15,15 @@ import com.aionemu.gameserver.utils.xml.JAXBUtil;
 public class Addskill extends ConsoleCommand {
 
 	public Addskill() {
-		super("addskill");
+		super("addskill", "Adds a skill.", """
+			<skill name> - Adds the skill to your target (or yourself).
+			""");
 	}
 
 	@Override
 	public void execute(Player admin, String... params) {
 		if (params.length < 1) {
-			info(admin, null);
+			sendInfo(admin);
 			return;
 		}
 
@@ -38,15 +39,14 @@ public class Addskill extends ConsoleCommand {
 		if (skillTemplate != null)
 			skillId = skillTemplate.getSkillId();
 
-		if (skillId > 0) {
-			player.getSkillList().addSkill(player, skillId, 1);
-			PacketSendUtility.sendMessage(admin, "You have success add skill");
+		if (skillId <= 0) {
+			sendInfo(admin, "There is no skill named " + skillName + ".");
+			return;
 		}
-	}
-
-	@Override
-	public void info(Player admin, String message) {
-		PacketSendUtility.sendMessage(admin, "syntax ///addskill <skill name>");
+		if (player.getSkillList().addSkill(player, skillId, 1))
+			sendInfo(admin, "The skill was added successfully.");
+		else
+			sendInfo(admin, "The player already has this skill.");
 	}
 
 	@XmlRootElement(name = "skill")

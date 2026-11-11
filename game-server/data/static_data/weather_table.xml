@@ -1,161 +1,145 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<weather>
-    <map id="210010000" zone_count="2" weather_count="7">
-        <table zone_id="1" rank="2" code="1" name="RAIN" state="RAIN"/>
-        <table zone_id="1" rank="1" code="2" name="RAIN" before="true"/>
-        <table zone_id="1" rank="1" code="3" name="RAIN" state="RAIN" after="true"/>
-        <table zone_id="1" rank="2" code="4" name="RAIN2" state="RAIN"/>
-        <table zone_id="1" rank="1" code="5" name="RAIN2" before="true"/>
-        <table zone_id="1" rank="1" code="6" name="RAIN2" state="RAIN" after="true"/>
-        <table zone_id="1" rank="0" code="7" name="SNOW" state="SNOW"/>
-        <table zone_id="2" rank="-1" code="0"/>
+<weather_maps>
+    <map id="210010000" zone_count="2">
+        <weather code="1" name="Rain" zone="1" priority="1" months="6-8" hours="0-23" occur_prob="3" duration="60" state="RAIN">
+            <sign name="RainBefore" probability="100" duration="10"/>
+        </weather>
+        <weather code="2" name="RainBefore" zone="1" priority="1" occur_prob="0" duration="10"/>
+        <weather code="3" name="RainAfter" zone="1" priority="1" occur_prob="0" duration="10" state="RAIN"/>
+        <weather code="4" name="Rain2" zone="1" priority="1" hours="0-23" occur_prob="3" duration="160" state="RAIN">
+            <sign name="Rain2_Before" probability="100" duration="10"/>
+            <remain name="Rain2_After" probability="100" duration="10"/>
+        </weather>
+        <weather code="5" name="Rain2_Before" zone="1" priority="1" occur_prob="0" duration="10"/>
+        <weather code="6" name="Rain2_After" zone="1" priority="1" occur_prob="0" duration="10" state="RAIN"/>
+        <weather code="7" name="Snow" zone="1" priority="1" months="1-2,12" occur_prob="0" duration="60" state="SNOW"/>
     </map>
-    <map id="210020000" zone_count="2" weather_count="5">
-        <table zone_id="2" rank="2" code="1" name="SANDRAIN" state="WIND"/>
-        <table zone_id="2" rank="2" code="2" name="SANDRAIN" before="true"/>
-        <table zone_id="1" rank="2" code="4" name="RAIN" state="RAIN" before="true"/>
-        <table zone_id="1" rank="2" code="5" name="RAIN" state="RAIN" after="true"/>
-        <table zone_id="1" rank="2" code="3" name="RAIN"/>
+    <map id="210020000" zone_count="2">
+        <weather code="1" name="SandRain" zone="2" priority="1" hours="0-23" occur_prob="20" duration="110" state="WIND">
+            <sign name="SandRain_Before" probability="100" duration="10"/>
+        </weather>
+        <weather code="2" name="SandRain_Before" zone="2" priority="1" occur_prob="0" duration="10"/>
+        <weather code="3" name="Rain_Before" zone="1" priority="1" occur_prob="0" duration="10"/>
+        <weather code="4" name="Rain_After" zone="1" priority="1" occur_prob="0" duration="10" state="RAIN"/>
+        <weather code="5" name="Rain" zone="1" priority="1" hours="0-23" occur_prob="8" duration="160" state="RAIN">
+            <sign name="Rain_Before" probability="100" duration="10"/>
+            <remain name="Rain_After" probability="100" duration="10"/>
+        </weather>
     </map>
-    <map id="210030000" zone_count="1" weather_count="6">
-        <table zone_id="1" rank="2" code="1" name="RAIN" state="RAIN"/>
-        <table zone_id="1" rank="1" code="2" name="RAIN" before="true"/>
-        <table zone_id="1" rank="1" code="3" name="RAIN" state="RAIN" after="true"/>
-        <table zone_id="1" rank="2" code="4" name="RAIN2" state="RAIN"/>
-        <table zone_id="1" rank="1" code="5" name="RAIN2" before="true"/>
-        <table zone_id="1" rank="1" code="6" name="RAIN2" state="RAIN" after="true"/>
+    <map id="210030000" zone_count="1">
+        <weather code="1" name="Rain" zone="1" priority="1" hours="0-23" occur_prob="2" duration="60" state="RAIN">
+            <sign name="RainBefore" probability="100" duration="10"/>
+            <remain name="RainAfter" probability="100" duration="10"/>
+        </weather>
+        <weather code="2" name="RainBefore" zone="1" priority="1" occur_prob="0" duration="10"/>
+        <weather code="3" name="RainAfter" zone="1" priority="1" occur_prob="0" duration="10" state="RAIN"/>
+        <weather code="4" name="Rain2" zone="1" priority="1" occur_prob="0" duration="60" state="RAIN">
+            <sign name="Rain2_Before" probability="100" duration="10"/>
+            <remain name="Rain2_After" probability="100" duration="10"/>
+        </weather>
+        <weather code="5" name="Rain2_Before" zone="1" priority="1" occur_prob="0" duration="10"/>
+        <weather code="6" name="Rain2_After" zone="1" priority="1" occur_prob="0" duration="10" state="RAIN"/>
     </map>
-    <map id="210040000" zone_count="0" weather_count="3">
-        <table zone_id="0" rank="2" code="1" name="RAIN" state="RAIN"/>
-        <table zone_id="0" rank="1" code="2" name="RAIN" before="true"/>
-        <table zone_id="0" rank="1" code="3" name="RAIN" state="RAIN" after="true"/>
+    <map id="210040000" zone_count="0">
+        <weather code="1" name="Rain" zone="0" priority="1" hours="13" occur_prob="100" duration="40" state="RAIN">
+            <sign name="RainBefore" probability="100" duration="10"/>
+            <remain name="RainAfter" probability="100" duration="10"/>
+        </weather>
+        <weather code="2" name="RainBefore" zone="0" priority="1" occur_prob="0" duration="10"/>
+        <weather code="3" name="RainAfter" zone="0" priority="1" occur_prob="0" duration="10" state="RAIN"/>
     </map>
-    <map id="210050000" zone_count="2" weather_count="6">
-        <table zone_id="2" rank="2" code="1" name="RAIN" state="WIND"/>
-        <table zone_id="2" rank="1" code="2" name="RAIN" state="WIND" before="true"/>
-        <table zone_id="2" rank="1" code="3" name="RAIN" state="WIND" after="true"/>
-        <table zone_id="1" rank="2" code="4" name="RAIN2" state="WIND"/>
-        <table zone_id="1" rank="1" code="5" name="RAIN2" state="WIND" before="true"/>
-        <table zone_id="1" rank="1" code="6" name="RAIN2" state="WIND" after="true"/>
+    <map id="210050000" zone_count="2">
+        <weather code="1" name="Rain" zone="2" priority="1" hours="5-21" occur_prob="3" duration="120" state="WIND">
+            <sign name="RainBefore" probability="100" duration="10"/>
+            <remain name="RainAfter" probability="100" duration="10"/>
+        </weather>
+        <weather code="2" name="RainBefore" zone="2" priority="1" hours="5-21" occur_prob="0" duration="10" state="WIND"/>
+        <weather code="3" name="RainAfter" zone="2" priority="1" hours="5-21" occur_prob="0" duration="10" state="WIND"/>
+        <weather code="4" name="Rain2" zone="1" priority="1" hours="5-21" occur_prob="2" duration="120" state="WIND">
+            <sign name="Rain2_Before" probability="100" duration="10"/>
+            <remain name="Rain2_After" probability="100" duration="10"/>
+        </weather>
+        <weather code="5" name="Rain2_Before" zone="1" priority="1" hours="5-21" occur_prob="0" duration="10" state="WIND"/>
+        <weather code="6" name="Rain2_After" zone="1" priority="1" hours="5-21" occur_prob="0" duration="10" state="WIND"/>
     </map>
-    <map id="210060000" zone_count="1" weather_count="2">
-        <table zone_id="1" rank="2" code="1" name="SANDRAIN" state="WIND"/>
-        <table zone_id="1" rank="2" code="2" name="SANDRAIN" before="true"/>
+    <map id="210060000" zone_count="1">
+        <weather code="1" name="SandRain" zone="1" priority="1" hours="0-23" occur_prob="20" duration="110" state="WIND">
+            <sign name="SandRain_Before" probability="100" duration="10"/>
+        </weather>
+        <weather code="2" name="SandRain_Before" zone="1" priority="1" occur_prob="0" duration="10"/>
     </map>
-    <map id="220010000" zone_count="1" weather_count="2">
-        <table zone_id="1" rank="0" code="1" name="MYST"/>
-        <table zone_id="1" rank="0" code="2" name="SNOW" state="SNOW"/>
+    <map id="220010000" zone_count="1">
+        <weather code="1" name="Myst" zone="1" priority="1" occur_prob="0" duration="0"/>
+        <weather code="2" name="Snow" zone="1" priority="1" months="1-2,12" occur_prob="0" duration="60" state="SNOW"/>
     </map>
-    <map id="220020000" zone_count="2" weather_count="5">
-        <table zone_id="1" rank="2" code="1" name="RAIN" state="RAIN"/>
-        <table zone_id="1" rank="1" code="2" name="RAIN" before="true"/>
-        <table zone_id="1" rank="1" code="3" name="RAIN" state="RAIN" after="true"/>
-        <table zone_id="2" rank="2" code="4" name="SNOW" state="SNOW"/>
-        <table zone_id="2" rank="1" code="5" name="SNOW" state="SNOW" before="true"/>
+    <map id="220020000" zone_count="2">
+        <weather code="1" name="Rain" zone="1" priority="1" hours="0-23" occur_prob="10" duration="100" state="RAIN">
+            <sign name="Rain_Before" probability="100" duration="10"/>
+            <remain name="Rain_After" probability="100" duration="10"/>
+        </weather>
+        <weather code="2" name="Rain_Before" zone="1" priority="1" occur_prob="0" duration="10"/>
+        <weather code="3" name="Rain_After" zone="1" priority="1" occur_prob="0" duration="10" state="RAIN"/>
+        <weather code="4" name="snow" zone="2" priority="1" hours="0-23" occur_prob="10" duration="170" state="SNOW">
+            <sign name="snow_Before" probability="100" duration="10"/>
+        </weather>
+        <weather code="5" name="snow_Before" zone="2" priority="1" occur_prob="0" duration="10" state="SNOW"/>
     </map>
-    <map id="220030000" zone_count="2" weather_count="3">
-        <table zone_id="1" rank="0" code="2" name="ALTGARD_SNOW" state="SNOW" before="true"/>
-        <table zone_id="1" rank="0" code="1" name="ALTGARD_SNOW" state="SNOW"/>
-        <table zone_id="1" rank="0" code="3" name="MYST"/>
-        <table zone_id="2" rank="-1" code="0"/>
+    <map id="220030000" zone_count="2">
+        <weather code="1" name="Altgard_snow_Before" zone="1" priority="1" months="1-2,12" occur_prob="0" duration="10" state="SNOW"/>
+        <weather code="2" name="Altgard_snow" zone="1" priority="1" months="1-2,12" occur_prob="0" duration="170" state="SNOW">
+            <sign name="Altgard_snow_Before" probability="100" duration="10"/>
+        </weather>
+        <weather code="3" name="Myst" zone="1" priority="1" months="4-5" hours="9-14" occur_prob="2" duration="180"/>
     </map>
-    <map id="220040000" zone_count="4" weather_count="12">
-        <table zone_id="1" rank="2" code="1" name="SNOW_A_WZ02" state="SNOW"/>
-        <table zone_id="1" rank="2" code="2" name="SNOW_A_WZ02" state="SNOW" before="true"/>
-        <table zone_id="1" rank="2" code="3" name="SNOW_A_WZ02" state="SNOW" after="true"/>
-        <table zone_id="1" rank="2" code="4" name="SNOW_B_WZ02" state="SNOW"/>
-        <table zone_id="1" rank="2" code="5" name="SNOW_B_WZ02" state="SNOW" before="true"/>
-        <table zone_id="1" rank="2" code="6" name="SNOW_B_WZ02" state="SNOW" after="true"/>
-        <table zone_id="3" rank="2" code="7" name="SNOW_A_WZ01" state="SNOW"/>
-        <table zone_id="3" rank="2" code="8" name="SNOW_A_WZ01" state="SNOW" before="true"/>
-        <table zone_id="3" rank="2" code="9" name="SNOW_A_WZ01" state="SNOW" after="true"/>
-        <table zone_id="3" rank="2" code="10" name="SNOW_C_WZ01" state="SNOW"/>
-        <table zone_id="2" rank="0" code="11" name="SNOW_B_WZ03" state="SNOW"/>
-        <table zone_id="4" rank="0" code="12" name="SNOW_B_WZ04" state="SNOW"/>
+    <map id="220040000" zone_count="4">
+        <weather code="1" name="Snow_a_WZ02" zone="1" priority="1" hours="0-23" occur_prob="40" duration="160" state="SNOW">
+            <sign name="Snow_a_WZ02_Before" probability="100" duration="10"/>
+            <remain name="Snow_a_WZ02_after" probability="100" duration="10"/>
+        </weather>
+        <weather code="2" name="Snow_a_WZ02_Before" zone="1" priority="1" occur_prob="0" duration="10" state="SNOW"/>
+        <weather code="3" name="Snow_a_WZ02_after" zone="1" priority="1" occur_prob="0" duration="10" state="SNOW"/>
+        <weather code="4" name="Snow_b_WZ02" zone="1" priority="1" hours="0-23" occur_prob="20" duration="160" state="SNOW">
+            <sign name="Snow_b_WZ02_Before" probability="100" duration="10"/>
+            <remain name="Snow_b_WZ02_after" probability="100" duration="10"/>
+        </weather>
+        <weather code="5" name="Snow_b_WZ02_Before" zone="1" priority="1" occur_prob="0" duration="10" state="SNOW"/>
+        <weather code="6" name="Snow_b_WZ02_after" zone="1" priority="1" occur_prob="0" duration="10" state="SNOW"/>
+        <weather code="7" name="Snow_a_WZ01" zone="3" priority="1" hours="0-23" occur_prob="40" duration="160" state="SNOW">
+            <sign name="Snow_a_WZ01_Before" probability="100" duration="10"/>
+            <remain name="Snow_a_WZ01_after" probability="100" duration="10"/>
+        </weather>
+        <weather code="8" name="Snow_a_WZ01_Before" zone="3" priority="1" occur_prob="0" duration="10" state="SNOW"/>
+        <weather code="9" name="Snow_a_WZ01_after" zone="3" priority="1" occur_prob="0" duration="10" state="SNOW"/>
+        <weather code="10" name="Snow_c_WZ01" zone="3" priority="1" hours="0-23" occur_prob="40" duration="160" state="SNOW"/>
+        <weather code="11" name="Snow_b_WZ03" zone="2" priority="1" hours="0-23" occur_prob="100" duration="60" state="SNOW"/>
+        <weather code="12" name="Snow_b_WZ04" zone="4" priority="1" hours="0-23" occur_prob="100" duration="60" state="SNOW"/>
     </map>
-    <map id="220050000" zone_count="1" weather_count="3">
-        <table zone_id="1" rank="2" code="1" name="RAIN" state="RAIN"/>
-        <table zone_id="1" rank="1" code="2" name="RAIN" before="true"/>
-        <table zone_id="1" rank="1" code="3" name="RAIN" state="RAIN" after="true"/>
+    <map id="220050000" zone_count="1">
+        <weather code="1" name="Rain" zone="1" priority="1" hours="0-23" occur_prob="5" duration="160" state="RAIN">
+            <sign name="Rain_Before" probability="100" duration="10"/>
+            <remain name="Rain_After" probability="100" duration="10"/>
+        </weather>
+        <weather code="2" name="Rain_Before" zone="1" priority="1" occur_prob="0" duration="10"/>
+        <weather code="3" name="Rain_After" zone="1" priority="1" occur_prob="0" duration="10" state="RAIN"/>
     </map>
-    <map id="220070000" zone_count="2" weather_count="5">
-        <table zone_id="1" rank="2" code="1" name="SANDRAIN" state="WIND"/>
-        <table zone_id="1" rank="2" code="2" name="SANDRAIN" before="true"/>
-        <table zone_id="2" rank="2" code="4" name="RAIN" state="WIND" before="true"/>
-        <table zone_id="2" rank="2" code="5" name="RAIN" state="WIND" after="true"/>
-        <table zone_id="2" rank="2" code="3" name="RAIN"/>
+    <map id="220070000" zone_count="2">
+        <weather code="1" name="SandRain" zone="1" priority="1" hours="0-23" occur_prob="20" duration="110" state="WIND">
+            <sign name="SandRain_Before" probability="100" duration="10"/>
+        </weather>
+        <weather code="2" name="SandRain_Before" zone="1" priority="1" occur_prob="0" duration="10"/>
+        <weather code="3" name="Rain_Before" zone="2" priority="1" occur_prob="0" duration="10"/>
+        <weather code="4" name="Rain_After" zone="2" priority="1" occur_prob="0" duration="10" state="WIND"/>
+        <weather code="5" name="Rain" zone="2" priority="1" hours="0-23" occur_prob="8" duration="160" state="WIND">
+            <sign name="Rain_Before" probability="100" duration="10"/>
+            <remain name="Rain_After" probability="100" duration="10"/>
+        </weather>
     </map>
-    <map id="300300000" zone_count="1" weather_count="4">
-        <table zone_id="1" rank="2" code="1" name="TZ_07" state="SNOW"/>
-        <table zone_id="1" rank="2" code="2" name="TZ_07_DEFAULT" state="SNOW"/>
-        <table zone_id="1" rank="2" code="3" name="TZ_07_NAMED" state="SNOW"/>
-        <table zone_id="1" rank="2" code="4" name="TZ_07_DARK" state="SNOW"/>
+    <map id="600100000" zone_count="1">
+        <weather code="1" name="Rain2" zone="1" priority="1" hours="0-23" occur_prob="2" duration="160" state="RAIN">
+            <sign name="Rain2_Before" probability="100" duration="10"/>
+            <remain name="Rain2_After" probability="100" duration="10"/>
+        </weather>
+        <weather code="2" name="Rain2_Before" zone="1" priority="1" occur_prob="0" duration="10"/>
+        <weather code="3" name="Rain2_After" zone="1" priority="1" occur_prob="0" duration="10" state="RAIN"/>
     </map>
-    <map id="300450000" zone_count="1" weather_count="1">
-        <table zone_id="1" rank="1" code="1" name="RAIN" state="RAIN"/>
-    </map>
-    <map id="300480000" zone_count="1" weather_count="1">
-        <table zone_id="1" rank="2" code="1" name="SNOW_A_WZ02" state="SNOW"/>
-    </map>
-    <map id="300570000" zone_count="1" weather_count="1">
-        <table zone_id="1" rank="1" code="1" name="RAIN" state="RAIN"/>
-    </map>
-    <map id="301100000" zone_count="1" weather_count="1">
-        <table zone_id="1" rank="1" code="1" name="RAIN" state="RAIN"/>
-    </map>
-    <map id="310090000" zone_count="0" weather_count="1">
-        <table zone_id="0" rank="2" code="1" name="INDRATOO"/>
-    </map>
-    <map id="320120000" zone_count="1" weather_count="1">
-        <table zone_id="1" rank="0" code="1" name="FOG" state="WIND"/>
-    </map>
-    <map id="600100000" zone_count="1" weather_count="3">
-        <table zone_id="1" rank="2" code="1" name="RAIN2" state="RAIN"/>
-        <table zone_id="1" rank="1" code="2" name="RAIN2" before="true"/>
-        <table zone_id="1" rank="1" code="3" name="RAIN2" state="RAIN" after="true"/>
-    </map>
-    <map id="700010000" zone_count="2" weather_count="10">
-        <table zone_id="2" rank="2" code="1" name="RAIN" state="RAIN"/>
-        <table zone_id="2" rank="1" code="2" name="RAIN" before="true"/>
-        <table zone_id="2" rank="1" code="3" name="RAIN" state="RAIN" after="true"/>
-        <table zone_id="2" rank="2" code="4" name="SNOW" state="SNOW"/>
-        <table zone_id="1" rank="1" code="5" name="SNOW_BEACH" state="SNOW"/>
-        <table zone_id="2" rank="1" code="6" name="SNOW" state="SNOW" before="true"/>
-        <table zone_id="2" rank="0" code="6" name="SNOW" state="SNOW" after="true"/>
-        <table zone_id="1" rank="1" code="7" name="SNOW" state="SNOW" before="true"/>
-        <table zone_id="1" rank="0" code="7" name="SNOW" state="SNOW" after="true"/>
-        <table zone_id="1" rank="2" code="8" name="RAIN_BEACH" state="RAIN"/>
-        <table zone_id="1" rank="1" code="9" name="RAIN_BEACH" before="true"/>
-        <table zone_id="1" rank="1" code="10" name="RAIN_BEACH" state="RAIN" after="true"/>
-    </map>
-    <map id="710010000" zone_count="2" weather_count="10">
-        <table zone_id="1" rank="2" code="1" name="RAIN" state="RAIN"/>
-        <table zone_id="1" rank="1" code="2" name="RAIN" before="true"/>
-        <table zone_id="1" rank="1" code="3" name="RAIN" state="RAIN" after="true"/>
-        <table zone_id="1" rank="2" code="4" name="SNOW" state="SNOW"/>
-        <table zone_id="2" rank="1" code="5" name="SNOW_BEACH" state="SNOW"/>
-        <table zone_id="1" rank="1" code="6" name="SNOW" state="SNOW" before="true"/>
-        <table zone_id="1" rank="0" code="6" name="SNOW" state="SNOW" after="true"/>
-        <table zone_id="2" rank="1" code="7" name="SNOW" state="SNOW" before="true"/>
-        <table zone_id="2" rank="0" code="7" name="SNOW" state="SNOW" after="true"/>
-        <table zone_id="2" rank="2" code="8" name="RAIN_BEACH" state="RAIN"/>
-        <table zone_id="2" rank="1" code="9" name="RAIN_BEACH" before="true"/>
-        <table zone_id="2" rank="1" code="10" name="RAIN_BEACH" state="RAIN" after="true"/>
-    </map>
-    <map id="720010000" zone_count="1" weather_count="5">
-        <table zone_id="1" rank="2" code="1" name="RAIN" state="RAIN"/>
-        <table zone_id="1" rank="1" code="2" name="RAIN" before="true"/>
-        <table zone_id="1" rank="1" code="3" name="RAIN" state="RAIN" after="true"/>
-        <table zone_id="1" rank="2" code="4" name="SNOW" state="SNOW"/>
-        <table zone_id="1" rank="1" code="5" name="SNOW" state="SNOW" before="true"/>
-        <table zone_id="1" rank="0" code="5" name="SNOW" state="SNOW" after="true"/>
-    </map>
-    <map id="730010000" zone_count="1" weather_count="5">
-        <table zone_id="1" rank="2" code="1" name="RAIN" state="RAIN"/>
-        <table zone_id="1" rank="1" code="2" name="RAIN" before="true"/>
-        <table zone_id="1" rank="1" code="3" name="RAIN" state="RAIN" after="true"/>
-        <table zone_id="1" rank="2" code="4" name="SNOW" state="SNOW"/>
-        <table zone_id="1" rank="1" code="5" name="SNOW" state="SNOW" before="true"/>
-        <table zone_id="1" rank="0" code="5" name="SNOW" state="SNOW" after="true"/>
-    </map>
-</weather>
+</weather_maps>

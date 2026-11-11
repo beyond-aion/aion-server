@@ -9,6 +9,7 @@ import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.controllers.attack.AggroList;
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
+import com.aionemu.gameserver.controllers.attack.ShieldDamage;
 import com.aionemu.gameserver.controllers.effect.CumulativeResistType;
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.AttackCalcObserver;
@@ -65,6 +66,16 @@ public class Effect implements StatOwner {
 	private int shieldDefense;
 	private int reflectedDamage = 0;
 	private int reflectedSkillId = 0;
+	/**
+	 * Creatures this effect has latched as doomed (see {@link com.aionemu.gameserver.model.stats.container.CreatureLifeStats#latchLethalHit}), released once the effect is applied.
+	 */
+	private List<Creature> lethalHitLatches;
+	/**
+	 * Damage redirected by the effected's shields (reflected to the attacker or taken over by a protector), calculated with this effect and dealt
+	 * when this effect hits.
+	 */
+	private List<ShieldDamage> shieldDamages;
+	private boolean applied;
 	private int protectedSkillId = 0;
 	private int protectedDamage = 0;
 	private int protectorId = 0;
@@ -351,9 +362,8 @@ public class Effect implements StatOwner {
 			value += effected.getLifeStats().getCurrentHp();
 			if (value <= 0) {
 				value = 0;
-				// effected is about to die
-				if (!effected.isDead())
-					effected.getLifeStats().setKillingBlow(er.getValue());
+				if (er.isDamage())
+					latchLethalHit(effected, er.getValue());
 				effectedHp = 0;
 			} else {
 				effectedHp = Math.max(1, (int) (100f * value / effected.getLifeStats().getMaxHp()));
@@ -362,6 +372,58 @@ public class Effect implements StatOwner {
 		synchronized (reservedEffects) {
 			reservedEffects.add(er);
 		}
+	}
+
+	/**
+	 * Marks the effected as doomed until this effect hits, if the given damage will kill it.
+	 */
+	private void latchLethalHit(Creature effected, int damage) {
+		synchronized (reservedEffects) {
+			if (lethalHitLatches != null && lethalHitLatches.contains(effected))
+				return;
+			if (effected.getLifeStats().latchLethalHit(effector, damage)) {
+				if (lethalHitLatches == null)
+					lethalHitLatches = new ArrayList<>(1);
+				lethalHitLatches.add(effected);
+			}
+		}
+	}
+
+	private void releaseLethalHitLatches() {
+		List<Creature> latches;
+		synchronized (reservedEffects) {
+			latches = lethalHitLatches;
+			lethalHitLatches = null;
+		}
+		if (latches != null)
+			latches.forEach(creature -> creature.getLifeStats().releaseLethalHit());
+	}
+
+	public void addShieldDamage(ShieldDamage shieldDamage) {
+		synchronized (reservedEffects) {
+			if (shieldDamages == null)
+				shieldDamages = new ArrayList<>(1);
+			shieldDamages.add(shieldDamage);
+		}
+	}
+
+	/**
+	 * Deals the pending shield damage which must be dealt before the hit, or all of it.
+	 */
+	private void applyShieldDamages(boolean beforeHitOnly) {
+		List<ShieldDamage> toApply = new ArrayList<>();
+		synchronized (reservedEffects) {
+			if (shieldDamages == null)
+				return;
+			for (Iterator<ShieldDamage> iter = shieldDamages.iterator(); iter.hasNext();) {
+				ShieldDamage shieldDamage = iter.next();
+				if (!beforeHitOnly || shieldDamage.beforeHit()) {
+					toApply.add(shieldDamage);
+					iter.remove();
+				}
+			}
+		}
+		toApply.forEach(ShieldDamage::apply);
 	}
 
 	public Set<EffectReserved> getReservedEffectsToSend() {
@@ -591,6 +653,44 @@ public class Effect implements StatOwner {
 	 * Apply all effect templates
 	 */
 	public void applyEffect() {
+		synchronized (reservedEffects) {
+			applied = true;
+		}
+		try {
+			applyShieldDamages(true); // reflected damage hits the attacker before the hit itself lands
+			applyEffect0();
+		} finally {
+			try {
+				applyShieldDamages(false); // protected damage, and shield damage calculated while applying (damage which is calculated at hit time)
+			} finally {
+				releaseLethalHitLatches();
+				if (subEffect != null)
+					subEffect.discardIfNotApplied();
+			}
+		}
+	}
+
+	/**
+	 * Drops the latches and the shield damage of a sub effect which was calculated with its parent effect but not launched, since it will never
+	 * hit.
+	 */
+	private void discardIfNotApplied() {
+		List<ShieldDamage> dropped;
+		synchronized (reservedEffects) {
+			if (applied)
+				return;
+			applied = true;
+			dropped = shieldDamages;
+			shieldDamages = null;
+		}
+		if (dropped != null)
+			dropped.forEach(ShieldDamage::discard);
+		releaseLethalHitLatches();
+		if (subEffect != null)
+			subEffect.discardIfNotApplied();
+	}
+
+	private void applyEffect0() {
 		if (successEffects.isEmpty()) {
 			broadcastHate();
 			return;
@@ -598,13 +698,13 @@ public class Effect implements StatOwner {
 
 		Creature effected = getEffected();
 		try {
+			// a target killed by an earlier effect skips the following ones, except those which still apply to a dead target (drains)
 			for (EffectTemplate template : successEffects.values()) {
-				if (!shouldApplyFurtherEffects(effected))
-					break;
+				if (!shouldApplyFurtherEffects(effected, template))
+					continue;
 				template.applyEffect(this);
-				if (!shouldApplyFurtherEffects(effected))
-					break;
-				template.startSubEffect(this);
+				if (shouldApplyFurtherEffects(effected))
+					template.startSubEffect(this);
 			}
 			if (applyCriticalProcEffect && subEffect != null)
 				subEffect.applyEffect();
@@ -633,10 +733,14 @@ public class Effect implements StatOwner {
 	}
 
 	private boolean shouldApplyFurtherEffects(Creature effected) {
+		return shouldApplyFurtherEffects(effected, null);
+	}
+
+	private boolean shouldApplyFurtherEffects(Creature effected, EffectTemplate template) {
 		if (effected != null) {
 			if (!effected.isSpawned() && !skillTemplate.isPassive()) // only allow on despawned if it's a passive skill (players get them during enterWorld)
 				return false;
-			if (effected.isDead() && !skillTemplate.hasResurrectEffect())
+			if (effected.isDead() && !skillTemplate.hasResurrectEffect() && (template == null || !template.appliesWhenEffectedIsDead()))
 				return false;
 		}
 		return true;

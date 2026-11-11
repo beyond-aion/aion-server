@@ -15,11 +15,6 @@ public abstract class ConsoleCommand extends ChatCommand {
 	public final static String PREFIX = "";
 	static final Logger log = LoggerFactory.getLogger("ADMINAUDIT_LOG");
 
-	// only for backwards compatibility TODO: remove when all commands are updated
-	public ConsoleCommand(String alias) {
-		this(alias, "", "");
-	}
-
 	/**
 	 * @see ConsoleCommand(String, String, String)
 	 */
