@@ -16,7 +16,9 @@ import com.aionemu.gameserver.world.World;
 public class Skill extends ConsoleCommand {
 
 	public Skill() {
-		super("skill");
+		super("skill", "Shows the skills of a player.", """
+			<name> - Shows the skills of the given player.
+			""");
 	}
 
 	@Override

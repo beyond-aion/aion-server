@@ -26,6 +26,6 @@ public enum LetterType {
 			if (lt.id == id)
 				return lt;
 		}
-		throw new IllegalArgumentException("Unsupported revive type: " + id);
+		throw new IllegalArgumentException("Unsupported letter type: " + id);
 	}
 }

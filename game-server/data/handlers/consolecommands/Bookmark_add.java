@@ -15,7 +15,9 @@ public class Bookmark_add extends ConsoleCommand {
 	public static final String ALIAS = "Bookmark_add";
 
 	public Bookmark_add() {
-		super(ALIAS);
+		super(ALIAS, "Adds a teleportation bookmark for your current position in the GM Dialog.", """
+			<name> - Saves your current location as a bookmark with the given name.
+			""");
 	}
 
 	@Override

@@ -9,8 +9,11 @@ import com.aionemu.gameserver.utils.chathandlers.ConsoleCommand;
 public class Inventory extends ConsoleCommand {
 
 	public Inventory() {
-		super("inventory");
+		super("inventory", "Shows the inventory items of a player.", """
+			<name> - Shows the inventory items of the given player.
+			""");
 	}
+
 	@Override
 	protected void execute(Player player, String... params) {
 

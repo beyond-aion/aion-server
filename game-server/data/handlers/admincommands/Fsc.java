@@ -24,18 +24,30 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 public class Fsc extends AdminCommand {
 
 	public Fsc() {
-		super("fsc");
+		super("fsc", "Sends a custom packet to yourself.", """
+			<opcode> <format> <values...> - Sends the packet, one format code per value.
+			""");
 	}
 
 	@Override
 	public void execute(Player player, String... params) {
 		if (params.length < 3) {
-			PacketSendUtility.sendMessage(player, "Incorrent number of params in //fsc command");
+			sendInfo(player);
 			return;
 		}
 
 		int id = Integer.decode(params[0]);
 		String format = params[1];
+		if (params.length != format.length() + 2) {
+			sendInfo(player, "The format has " + format.length() + " codes, but " + (params.length - 2) + " values were given.");
+			return;
+		}
+		for (char c : format.toCharArray()) {
+			if (PacketElementType.getByCode(c) == null) {
+				sendInfo(player, "Unknown format code: " + c);
+				return;
+			}
+		}
 
 		SM_CUSTOM_PACKET packet = new SM_CUSTOM_PACKET(id);
 
@@ -45,10 +57,5 @@ public class Fsc extends AdminCommand {
 			i++;
 		}
 		PacketSendUtility.sendPacket(player, packet);
-	}
-
-	@Override
-	public void info(Player player, String message) {
-		PacketSendUtility.sendMessage(player, "Incorrent number of params in //fsc command");
 	}
 }

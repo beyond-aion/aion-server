@@ -3,7 +3,6 @@ package admincommands;
 import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.PunishmentService;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.World;
@@ -14,13 +13,16 @@ import com.aionemu.gameserver.world.World;
 public class BanChar extends AdminCommand {
 
 	public BanChar() {
-		super("banchar");
+		super("banchar", "Bans a character.", """
+			<player> <days> <reason> - Bans the character for the given days, 0 means permanent.
+			Note: The current day counts as a whole day, even if only a few hours are left.
+			""");
 	}
 
 	@Override
 	public void execute(Player admin, String... params) {
 		if (params == null || params.length < 3) {
-			sendInfo(admin, true);
+			sendInfo(admin);
 			return;
 		}
 
@@ -38,23 +40,14 @@ public class BanChar extends AdminCommand {
 
 		// Third, fail
 		if (playerId == 0) {
-			PacketSendUtility.sendMessage(admin, "Player " + playerName + " was not found!");
-			sendInfo(admin, true);
+			sendInfo(admin, "Player " + playerName + " was not found!");
 			return;
 		}
 
-		int dayCount = -1;
-		try {
-			dayCount = Integer.parseInt(params[1]);
-		} catch (NumberFormatException e) {
-			PacketSendUtility.sendMessage(admin, "Second parameter is not an int");
-			sendInfo(admin, true);
-			return;
-		}
+		int dayCount = Integer.parseInt(params[1]);
 
 		if (dayCount < 0) {
-			PacketSendUtility.sendMessage(admin, "Second parameter has to be a positive daycount or 0 for infinity");
-			sendInfo(admin, true);
+			sendInfo(admin, "Days must be positive, or 0 for a permanent ban.");
 			return;
 		}
 
@@ -62,19 +55,9 @@ public class BanChar extends AdminCommand {
 		for (int itr = 3; itr < params.length; itr++)
 			reason += " " + params[itr];
 
-		PacketSendUtility.sendMessage(admin, "Char " + playerName + " is now banned for the next " + dayCount + " days!");
+		sendInfo(admin,
+			"Character " + playerName + " is now banned " + (dayCount == 0 ? "permanently." : "for the next " + dayCount + " days."));
 
 		PunishmentService.banChar(playerId, dayCount, reason);
-	}
-
-	@Override
-	public void info(Player player, String message) {
-		sendInfo(player, false);
-	}
-
-	private void sendInfo(Player player, boolean withNote) {
-		PacketSendUtility.sendMessage(player, "Syntax: //banChar <playername> <days>/0 (for permanent) <reason>");
-		if (withNote)
-			PacketSendUtility.sendMessage(player, "Note: the current day is defined as a whole day even if it has just a few hours left!");
 	}
 }

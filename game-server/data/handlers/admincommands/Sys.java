@@ -40,14 +40,14 @@ public class Sys extends AdminCommand {
 			sendInfo(player, "System information at: " + ServerTime.now().format(DateTimeFormatter.ofPattern("H:mm:ss")));
 			sendInfo(player, VersionInfo.commons.toString(GSConfig.TIME_ZONE_ID));
 			sendInfo(player, GameServer.versionInfo.toString(GSConfig.TIME_ZONE_ID));
-			sendInfo(player, SystemInfo.getSystemInfo());
+			sendInfo(player, String.join("\n", SystemInfo.getSystemInfo()));
 		} else if ("memory".equalsIgnoreCase(params[0])) {
 			if (params.length > 1 && "gc".equalsIgnoreCase(params[1])) {
 				long time = System.currentTimeMillis();
 				System.gc();
 				sendInfo(player, "Garbage collection took " + (System.currentTimeMillis() - time) + " ms");
 			}
-			sendInfo(player, SystemInfo.getMemoryInfo());
+			sendInfo(player, String.join("\n", SystemInfo.getMemoryInfo()));
 		} else if ("threadpool".equalsIgnoreCase(params[0])) {
 			List<String> stats = ThreadPoolManager.getInstance().getStats();
 			for (String stat : stats) {
