@@ -13,7 +13,9 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 public class BanMac extends AdminCommand {
 
 	public BanMac() {
-		super("banmac", "Bans a MAC address.", "<minutes> [mac] - Bans the MAC (default: your target's, kicking it), 0 minutes is permanent.");
+		super("banmac", "Bans a MAC address.", """
+			<minutes> [mac] - Bans the MAC (default: your target's, kicking it), 0 minutes is permanent.
+			""");
 	}
 
 	@Override

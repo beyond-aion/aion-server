@@ -24,7 +24,9 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 public class Fsc extends AdminCommand {
 
 	public Fsc() {
-		super("fsc", "Sends a custom packet to yourself.", "<opcode> <format> <values...> - Sends the packet, one format code per value.");
+		super("fsc", "Sends a custom packet to yourself.", """
+			<opcode> <format> <values...> - Sends the packet, one format code per value.
+			""");
 	}
 
 	@Override

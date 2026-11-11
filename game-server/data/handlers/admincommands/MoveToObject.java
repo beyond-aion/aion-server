@@ -12,7 +12,9 @@ import com.aionemu.gameserver.world.World;
 public class MoveToObject extends AdminCommand {
 
 	public MoveToObject() {
-		super("movetoobj", "Teleports you to an object.", "<object id> - Teleports you to the current position of the object.");
+		super("movetoobj", "Teleports you to an object.", """
+			<object id> - Teleports you to the current position of the object.
+			""");
 	}
 
 	@Override

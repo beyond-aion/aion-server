@@ -38,7 +38,7 @@ public class Clearusercoolt extends ConsoleCommand {
 
 	public static void clearAllInstanceCooldowns(Player admin, Player player) {
 		if (player.getPortalCooldownList().getPortalCoolDowns() == null) {
-			PacketSendUtility.sendMessage(admin, (player.equals(admin) ? "You have" : name(player) + " has") + " no instance cooldowns to remove.");
+			sendInfo(admin, (player.equals(admin) ? "You have" : name(player) + " has") + " no instance cooldowns to remove.");
 			return;
 		}
 
@@ -47,10 +47,10 @@ public class Clearusercoolt extends ConsoleCommand {
 		worldIds.forEach(player.getPortalCooldownList()::sendEntryInfo);
 
 		if (player.equals(admin)) {
-			PacketSendUtility.sendMessage(admin, "Your instance cooldowns were removed.");
+			sendInfo(admin, "Your instance cooldowns were removed.");
 		} else {
-			PacketSendUtility.sendMessage(admin, "You have removed instance cooldowns of " + name(player) + '.');
-			PacketSendUtility.sendMessage(player, name(admin) + " removed your instance cooldowns.");
+			sendInfo(admin, "You have removed instance cooldowns of " + name(player) + '.');
+			sendInfo(player, name(admin) + " removed your instance cooldowns.");
 		}
 	}
 }

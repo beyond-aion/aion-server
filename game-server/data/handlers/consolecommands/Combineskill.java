@@ -7,7 +7,6 @@ import jakarta.xml.bind.Unmarshaller;
 import jakarta.xml.bind.annotation.*;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.ConsoleCommand;
 import com.aionemu.gameserver.utils.xml.JAXBUtil;
 
@@ -17,7 +16,9 @@ import com.aionemu.gameserver.utils.xml.JAXBUtil;
 public class Combineskill extends ConsoleCommand {
 
 	public Combineskill() {
-		super("combineskill", "Adds a skill.", "<skill name> <level> - Adds the skill with the level to your target (or yourself).");
+		super("combineskill", "Adds a skill.", """
+			<skill name> <level> - Adds the skill with the level to your target (or yourself).
+			""");
 	}
 
 	@Override
@@ -49,9 +50,9 @@ public class Combineskill extends ConsoleCommand {
 			return;
 		}
 		if (player.getSkillList().addSkill(player, skillId, skillLvl))
-			PacketSendUtility.sendMessage(admin, "The skill was added successfully.");
+			sendInfo(admin, "The skill was added successfully.");
 		else
-			PacketSendUtility.sendMessage(admin, "The player already has this skill at the same or a higher level.");
+			sendInfo(admin, "The player already has this skill at the same or a higher level.");
 	}
 
 	@XmlAccessorType(XmlAccessType.NONE)

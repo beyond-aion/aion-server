@@ -23,18 +23,18 @@ public class Res extends AdminCommand {
 	public void execute(Player admin, String... params) {
 		final VisibleObject target = admin.getTarget();
 		if (target == null) {
-			PacketSendUtility.sendMessage(admin, "No target selected.");
+			sendInfo(admin, "No target selected.");
 			return;
 		}
 
 		if (!(target instanceof Player)) {
-			PacketSendUtility.sendMessage(admin, "You can only resurrect other players.");
+			sendInfo(admin, "You can only resurrect other players.");
 			return;
 		}
 
 		final Player player = (Player) target;
 		if (!player.isDead()) {
-			PacketSendUtility.sendMessage(admin, "That player is already alive.");
+			sendInfo(admin, "That player is already alive.");
 			return;
 		}
 

@@ -16,7 +16,9 @@ import com.aionemu.gameserver.utils.chathandlers.ConsoleCommand;
 public class Set_enchantcount extends ConsoleCommand {
 
 	public Set_enchantcount() {
-		super("set_enchantcount", "Enchants an item.", "<item object id> <levels> - Adds enchant levels to the item in your inventory or equipment.");
+		super("set_enchantcount", "Enchants an item.", """
+			<item object id> <levels> - Adds enchant levels to the item in your inventory or equipment.
+			""");
 	}
 
 	@Override
@@ -39,7 +41,7 @@ public class Set_enchantcount extends ConsoleCommand {
 			maxEnchant += item.getItemTemplate().getMaxEnchantBonus();
 
 			if (curEnchant + enchant < 0) {
-				PacketSendUtility.sendMessage(admin, "The enchant level cannot go below 0, it is " + curEnchant + ".");
+				sendInfo(admin, "The enchant level cannot go below 0, it is " + curEnchant + ".");
 			} else if (curEnchant + enchant <= maxEnchant) {
 				curEnchant += enchant;
 				item.setEnchantLevel(Math.min(curEnchant, maxEnchant));
@@ -62,11 +64,10 @@ public class Set_enchantcount extends ConsoleCommand {
 
 				PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_MSG_ENCHANT_ITEM_SUCCEED_NEW(item.getL10n(), enchant));
 			} else {
-				PacketSendUtility.sendMessage(admin, "The max enchant level of this item is " + maxEnchant);
+				sendInfo(admin, "The max enchant level of this item is " + maxEnchant);
 			}
 		} else {
-			PacketSendUtility.sendMessage(admin, "There is no item with this object ID in your inventory or equipment.");
-			return;
+			sendInfo(admin, "There is no item with this object ID in your inventory or equipment.");
 		}
 	}
 }

@@ -5,7 +5,6 @@ import java.util.regex.Pattern;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.storage.Storage;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.World;
@@ -16,8 +15,9 @@ import com.aionemu.gameserver.world.World;
 public class Remove extends AdminCommand {
 
 	public Remove() {
-		super("remove", "Removes items from an inventory.",
-			"<player> <item ID|item link> [quantity] - Removes the items (default: 1) from the player's inventory.");
+		super("remove", "Removes items from an inventory.", """
+			<player> <item ID|item link> [quantity] - Removes the items (default: 1) from the player's inventory.
+			""");
 	}
 
 	@Override
@@ -62,9 +62,9 @@ public class Remove extends AdminCommand {
 				if (bagItemCount >= 1) {
 					if (itemCount <= bagItemCount) {
 						bag.decreaseByItemId(itemId, itemCount);
-						PacketSendUtility.sendMessage(admin, "Successfully removed " + itemCount + "x [item:" + itemId + "] from " + target.getName()
+						sendInfo(admin, "Successfully removed " + itemCount + "x [item:" + itemId + "] from " + target.getName()
 							+ "'s inventory.");
-						PacketSendUtility.sendMessage(target, "Admin removed " + itemCount + "x [item:" + itemId + "] from your inventory.");
+						sendInfo(target, "Admin removed " + itemCount + "x [item:" + itemId + "] from your inventory.");
 					} else {
 						sendInfo(admin, "Player only has " + bagItemCount + " of this item.");
 					}

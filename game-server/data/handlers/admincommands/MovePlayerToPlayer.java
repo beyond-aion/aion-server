@@ -2,7 +2,6 @@ package admincommands;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.teleport.TeleportService;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.World;
@@ -15,8 +14,9 @@ import com.aionemu.gameserver.world.World;
 public class MovePlayerToPlayer extends AdminCommand {
 
 	public MovePlayerToPlayer() {
-		super("moveplayertoplayer", "Teleports a player to another one.",
-			"<player> <destination player> - Teleports the first player to the second one.");
+		super("moveplayertoplayer", "Teleports a player to another one.", """
+			<player> <destination player> - Teleports the first player to the second one.
+			""");
 	}
 
 	@Override
@@ -28,26 +28,26 @@ public class MovePlayerToPlayer extends AdminCommand {
 
 		Player playerToMove = World.getInstance().getPlayer(Util.convertName(params[0]));
 		if (playerToMove == null) {
-			PacketSendUtility.sendMessage(admin, "The specified player is not online.");
+			sendInfo(admin, "The specified player is not online.");
 			return;
 		}
 
 		Player playerDestination = World.getInstance().getPlayer(Util.convertName(params[1]));
 		if (playerDestination == null) {
-			PacketSendUtility.sendMessage(admin, "The destination player is not online.");
+			sendInfo(admin, "The destination player is not online.");
 			return;
 		}
 
 		if (playerToMove.equals(playerDestination)) {
-			PacketSendUtility.sendMessage(admin, "Cannot move the specified player to their own position.");
+			sendInfo(admin, "Cannot move the specified player to their own position.");
 			return;
 		}
 
 		TeleportService.teleportTo(playerToMove, playerDestination.getWorldId(), playerDestination.getInstanceId(), playerDestination.getX(),
 			playerDestination.getY(), playerDestination.getZ(), playerDestination.getHeading());
 
-		PacketSendUtility.sendMessage(admin, "Teleported player " + playerToMove.getName() + " to the location of player " + playerDestination.getName()
+		sendInfo(admin, "Teleported player " + playerToMove.getName() + " to the location of player " + playerDestination.getName()
 			+ ".");
-		PacketSendUtility.sendMessage(playerToMove, "You have been teleported by an administrator.");
+		sendInfo(playerToMove, "You have been teleported by an administrator.");
 	}
 }

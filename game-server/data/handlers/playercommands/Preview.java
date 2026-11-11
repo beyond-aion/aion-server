@@ -219,7 +219,7 @@ public class Preview extends PlayerCommand {
 				PacketSendUtility.sendPacket(player, new SM_UPDATE_PLAYER_APPEARANCE(player.getObjectId(), player.getEquipment().getEquippedForAppearance()));
 				if (previewRobot && player.isInRobotMode())
 					updateRobotAppearance(player, player.getRobotId());
-				PacketSendUtility.sendMessage(player, "Preview time ended.");
+				sendInfo(player, "Preview time ended.");
 				PREVIEW_RESETS.remove(player.getObjectId());
 			}, duration * 1000L);
 			return resetTask;

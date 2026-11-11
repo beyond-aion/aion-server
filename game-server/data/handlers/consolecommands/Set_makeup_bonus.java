@@ -11,7 +11,9 @@ import com.aionemu.gameserver.utils.chathandlers.ConsoleCommand;
 public class Set_makeup_bonus extends ConsoleCommand {
 
 	public Set_makeup_bonus() {
-		super("set_makeup_bonus", "Sets repose energy.", "<value> - Sets the repose energy of your target (or yourself).");
+		super("set_makeup_bonus", "Sets repose energy.", """
+			<value> - Sets the repose energy of your target (or yourself).
+			""");
 	}
 
 	@Override
@@ -27,6 +29,6 @@ public class Set_makeup_bonus extends ConsoleCommand {
 
 		player.getCommonData().setCurrentReposeEnergy(value);
 		PacketSendUtility.sendPacket(player, new SM_STATS_INFO(player));
-		PacketSendUtility.sendMessage(admin, "Repose Energy set to: " + value);
+		sendInfo(admin, "Repose Energy set to: " + value);
 	}
 }

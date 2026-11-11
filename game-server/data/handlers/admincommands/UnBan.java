@@ -12,7 +12,9 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 public class UnBan extends AdminCommand {
 
 	public UnBan() {
-		super("unban", "Removes an account ban.", "<player> [account|ip|full] - Removes the ban of the player's account (default: full).");
+		super("unban", "Removes an account ban.", """
+			<player> [account|ip|full] - Removes the ban of the player's account (default: full).
+			""");
 	}
 
 	@Override

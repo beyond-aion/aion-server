@@ -19,7 +19,9 @@ import com.aionemu.gameserver.utils.idfactory.IDFactory;
 public class SpawnAssembledNpc extends AdminCommand {
 
 	public SpawnAssembledNpc() {
-		super("spawnAssembledNpc", "Spawns an assembled NPC.", "<spawnId> - Spawns the assembled NPC for everyone in the world.");
+		super("spawnAssembledNpc", "Spawns an assembled NPC.", """
+			<spawnId> - Spawns the assembled NPC for everyone in the world.
+			""");
 	}
 
 	@Override
@@ -32,7 +34,7 @@ public class SpawnAssembledNpc extends AdminCommand {
 
 		AssembledNpcTemplate template = DataManager.ASSEMBLED_NPC_DATA.getAssembledNpcTemplate(spawnId);
 		if (template == null) {
-			PacketSendUtility.sendMessage(player, "This spawnId is wrong.");
+			sendInfo(player, "This spawnId is wrong.");
 			return;
 		}
 		List<AssembledNpcPart> assembledParts = new ArrayList<>();

@@ -2,7 +2,6 @@ package admincommands;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.PunishmentService;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.World;
@@ -13,7 +12,9 @@ import com.aionemu.gameserver.world.World;
 public class RPrison extends AdminCommand {
 
 	public RPrison() {
-		super("rprison", "Releases a player from prison.", "<player> - Releases the player from prison.");
+		super("rprison", "Releases a player from prison.", """
+			<player> - Releases the player from prison.
+			""");
 	}
 
 	@Override
@@ -33,6 +34,6 @@ public class RPrison extends AdminCommand {
 			return;
 		}
 		PunishmentService.setIsInPrison(playerFromPrison, false, 0, "");
-		PacketSendUtility.sendMessage(admin, "Player " + playerFromPrison.getName() + " was released from prison.");
+		sendInfo(admin, "Player " + playerFromPrison.getName() + " was released from prison.");
 	}
 }

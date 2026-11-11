@@ -11,7 +11,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.services.mail.MailFormatter;
 import com.aionemu.gameserver.services.mail.SystemMailService;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.World;
@@ -87,7 +86,7 @@ public class SysMail extends AdminCommand {
 			else if ("@asmodians".startsWith(paramValues[0]))
 				recipientType = RecipientType.ASMO;
 			else {
-				PacketSendUtility.sendMessage(admin, "Recipient must be Player name, @all, @elyos or @asmodians.");
+				sendInfo(admin, "Recipient must be Player name, @all, @elyos or @asmodians.");
 				return;
 			}
 		} else {
@@ -150,10 +149,10 @@ public class SysMail extends AdminCommand {
 		}
 
 		if (item != 0) {
-			PacketSendUtility.sendMessage(admin, "Sent to " + recipientType + (recipientType == RecipientType.PLAYER ? " " + recipient : "") + "\n"
+			sendInfo(admin, "Sent to " + recipientType + (recipientType == RecipientType.PLAYER ? " " + recipient : "") + "\n"
 				+ "[item:" + item + "] Count:" + count + " Kinah:" + kinah + "\n" + "Mail sent successfully.");
 		} else if (kinah > 0) {
-			PacketSendUtility.sendMessage(admin, "Sent to " + recipientType + (recipientType == RecipientType.PLAYER ? " " + recipient : "") + "\n"
+			sendInfo(admin, "Sent to " + recipientType + (recipientType == RecipientType.PLAYER ? " " + recipient : "") + "\n"
 				+ " Kinah:" + kinah + "\n" + "Mail sent successfully.");
 		}
 	}
@@ -195,48 +194,48 @@ public class SysMail extends AdminCommand {
 		if (recipientType == RecipientType.PLAYER) {
 			if (letterType == LetterType.EXPRESS) {
 				if (World.getInstance().getPlayer(recipient) == null) {
-					PacketSendUtility.sendMessage(admin, "Express mail can only be sent to online players.");
+					sendInfo(admin, "Express mail can only be sent to online players.");
 					return false;
 				}
 			} else if (!PlayerDAO.isNameUsed(recipient)) {
-				PacketSendUtility.sendMessage(admin, "Could not find a recipient by that name.");
+				sendInfo(admin, "Could not find a recipient by that name.");
 				return false;
 			}
 		}
 
 		if (item == 0 && count != 0) {
-			PacketSendUtility.sendMessage(admin, "Please insert an item ID.");
+			sendInfo(admin, "Please insert an item ID.");
 			return false;
 		}
 
 		if (count == 0 && item != 0) {
-			PacketSendUtility.sendMessage(admin, "Please insert an item count.");
+			sendInfo(admin, "Please insert an item count.");
 			return false;
 		}
 
 		if (count <= 0 && item <= 0 && kinah <= 0) {
-			PacketSendUtility.sendMessage(admin, "Nothing to send: item, count and kinah are all 0.");
+			sendInfo(admin, "Nothing to send: item, count and kinah are all 0.");
 			return false;
 		}
 
 		ItemTemplate itemTemplate = DataManager.ITEM_DATA.getItemTemplate(item);
 		if (item != 0) {
 			if (itemTemplate == null) {
-				PacketSendUtility.sendMessage(admin, "Item id is incorrect: " + item);
+				sendInfo(admin, "Item id is incorrect: " + item);
 				return false;
 			}
 			long maxStackCount = itemTemplate.getMaxStackCount();
 			if (count > maxStackCount && maxStackCount != 0) {
-				PacketSendUtility.sendMessage(admin, "The item count exceeds the max stack count of " + maxStackCount + ".");
+				sendInfo(admin, "The item count exceeds the max stack count of " + maxStackCount + ".");
 				return false;
 			}
 		}
 
 		if (kinah < 0) {
-			PacketSendUtility.sendMessage(admin, "Kinah value must be >= 0.");
+			sendInfo(admin, "Kinah value must be >= 0.");
 			return false;
 		} else if (kinah > 0 && letterType == LetterType.BLACKCLOUD) {
-			PacketSendUtility.sendMessage(admin, "Black cloud mail cannot contain kinah.");
+			sendInfo(admin, "Black cloud mail cannot contain kinah.");
 			return false;
 		}
 		return true;

@@ -4,7 +4,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.skill.PlayerSkillEntry;
 import com.aionemu.gameserver.model.skill.PlayerSkillList;
 import com.aionemu.gameserver.services.SkillLearnService;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.World;
@@ -36,7 +35,7 @@ public class DelSkill extends AdminCommand {
 		if (params.length == 2) {
 			player = World.getInstance().getPlayer(recipient);
 			if (player == null) {
-				PacketSendUtility.sendMessage(admin, "The specified player is not online.");
+				sendInfo(admin, "The specified player is not online.");
 				return;
 			}
 
@@ -68,11 +67,11 @@ public class DelSkill extends AdminCommand {
 
 	private static boolean check(Player admin, Player player, int skillId) {
 		if (!player.getSkillList().isSkillPresent(skillId)) {
-			PacketSendUtility.sendMessage(admin, "The player doesn't have this skill.");
+			sendInfo(admin, "The player doesn't have this skill.");
 			return false;
 		}
 		if (player.getSkillList().getSkillEntry(skillId).isStigmaSkill()) {
-			PacketSendUtility.sendMessage(admin, "You can't remove stigma skill.");
+			sendInfo(admin, "You can't remove stigma skill.");
 			return false;
 		}
 		return true;
@@ -81,7 +80,7 @@ public class DelSkill extends AdminCommand {
 	public void apply(Player admin, Player player, int skillId, PlayerSkillList playerSkillList) {
 		if (skillId != 0) {
 			SkillLearnService.removeSkill(player, skillId);
-			PacketSendUtility.sendMessage(admin, "You have successfully deleted the specified skill.");
+			sendInfo(admin, "You have successfully deleted the specified skill.");
 		} else {
 			for (PlayerSkillEntry skillEntry : playerSkillList.getAllSkills()) {
 				if (!skillEntry.isStigmaSkill()) {
@@ -89,7 +88,7 @@ public class DelSkill extends AdminCommand {
 				}
 			}
 
-			PacketSendUtility.sendMessage(admin, "You have successfully deleted all skills (except stigma skills).");
+			sendInfo(admin, "You have successfully deleted all skills (except stigma skills).");
 		}
 
 	}

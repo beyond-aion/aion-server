@@ -11,7 +11,9 @@ import com.aionemu.gameserver.utils.chathandlers.ConsoleCommand;
 public class Set_vitalpoint extends ConsoleCommand {
 
 	public Set_vitalpoint() {
-		super("set_vitalpoint", "Sets salvation points.", "<value> - Sets the salvation points of your target (or yourself).");
+		super("set_vitalpoint", "Sets salvation points.", """
+			<value> - Sets the salvation points of your target (or yourself).
+			""");
 	}
 
 	@Override

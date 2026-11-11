@@ -8,7 +8,6 @@ import jakarta.xml.bind.annotation.*;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.SkillLearnService;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.ConsoleCommand;
 import com.aionemu.gameserver.utils.xml.JAXBUtil;
 
@@ -23,7 +22,9 @@ import com.aionemu.gameserver.utils.xml.JAXBUtil;
 public class Deleteskill extends ConsoleCommand {
 
 	public Deleteskill() {
-		super("deleteskill", "Removes a skill (except stigma skills).", "<skill name> - Removes the skill from your target (or yourself).");
+		super("deleteskill", "Removes a skill (except stigma skills).", """
+			<skill name> - Removes the skill from your target (or yourself).
+			""");
 	}
 
 	@Override
@@ -54,11 +55,11 @@ public class Deleteskill extends ConsoleCommand {
 
 	private static boolean check(Player admin, Player player, int skillId) {
 		if (skillId != 0 && !player.getSkillList().isSkillPresent(skillId)) {
-			PacketSendUtility.sendMessage(admin, "The player doesn't have this skill.");
+			sendInfo(admin, "The player doesn't have this skill.");
 			return false;
 		}
 		if (player.getSkillList().getSkillEntry(skillId).isStigmaSkill()) {
-			PacketSendUtility.sendMessage(admin, "You can't remove stigma skill.");
+			sendInfo(admin, "You can't remove stigma skill.");
 			return false;
 		}
 		return true;
@@ -67,7 +68,7 @@ public class Deleteskill extends ConsoleCommand {
 	public void apply(Player admin, Player player, int skillId) {
 		if (skillId != 0) {
 			SkillLearnService.removeSkill(player, skillId);
-			PacketSendUtility.sendMessage(admin, "You have successfully deleted the specified skill.");
+			sendInfo(admin, "You have successfully deleted the specified skill.");
 		}
 	}
 

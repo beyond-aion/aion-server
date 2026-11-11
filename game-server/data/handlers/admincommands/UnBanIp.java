@@ -10,7 +10,9 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 public class UnBanIp extends AdminCommand {
 
 	public UnBanIp() {
-		super("unbanip", "Removes an IP ban.", "<mask> - Unbans the IP mask.");
+		super("unbanip", "Removes an IP ban.", """
+			<mask> - Unbans the IP mask.
+			""");
 	}
 
 	@Override

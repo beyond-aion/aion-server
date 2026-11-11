@@ -39,7 +39,7 @@ public class EnergyBuff extends AdminCommand {
 
 		if (params[0].equals("repose")) {
 			if (params[1].equals("info"))
-				PacketSendUtility.sendMessage(player, "Current EoR: " + targetPlayer.getCommonData().getCurrentReposeEnergy() + "\n Max EoR: "
+				sendInfo(player, "Current EoR: " + targetPlayer.getCommonData().getCurrentReposeEnergy() + "\n Max EoR: "
 					+ targetPlayer.getCommonData().getMaxReposeEnergy());
 			else if (params[1].equals("add"))
 				targetPlayer.getCommonData().addReposeEnergy(Long.parseLong(params[2]));
@@ -49,7 +49,7 @@ public class EnergyBuff extends AdminCommand {
 				sendInfo(player);
 		} else if (params[0].equals("salvation")) {
 			if (params[1].equals("info"))
-				PacketSendUtility.sendMessage(player, "Current EoS: " + targetPlayer.getCommonData().getCurrentSalvationPercent());
+				sendInfo(player, "Current EoS: " + targetPlayer.getCommonData().getCurrentSalvationPercent());
 			else if (params[1].equals("add"))
 				targetPlayer.getCommonData().addSalvationPoints(Long.parseLong(params[2]));
 			else if (params[1].equals("reset"))

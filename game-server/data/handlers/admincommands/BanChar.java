@@ -3,7 +3,6 @@ package admincommands;
 import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.PunishmentService;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.World;
@@ -56,7 +55,7 @@ public class BanChar extends AdminCommand {
 		for (int itr = 3; itr < params.length; itr++)
 			reason += " " + params[itr];
 
-		PacketSendUtility.sendMessage(admin,
+		sendInfo(admin,
 			"Character " + playerName + " is now banned " + (dayCount == 0 ? "permanently." : "for the next " + dayCount + " days."));
 
 		PunishmentService.banChar(playerId, dayCount, reason);

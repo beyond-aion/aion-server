@@ -2,7 +2,6 @@ package admincommands;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.PunishmentService;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.World;
@@ -13,7 +12,9 @@ import com.aionemu.gameserver.world.World;
 public class SPrison extends AdminCommand {
 
 	public SPrison() {
-		super("sprison", "Sends a player to prison.", "<player> <minutes> <reason> - Sends the online player to prison for the given time.");
+		super("sprison", "Sends a player to prison.", """
+			<player> <minutes> <reason> - Sends the online player to prison for the given time.
+			""");
 	}
 
 	@Override
@@ -35,7 +36,7 @@ public class SPrison extends AdminCommand {
 		}
 		String reason = join(params, 2);
 		PunishmentService.setIsInPrison(playerToPrison, true, delay, reason);
-		PacketSendUtility.sendMessage(admin,
+		sendInfo(admin,
 			"Player " + playerToPrison.getName() + " was sent to prison for " + delay + " minutes because " + reason + ".");
 	}
 }

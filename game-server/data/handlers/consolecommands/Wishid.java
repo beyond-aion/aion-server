@@ -4,7 +4,6 @@ import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.AdminService;
 import com.aionemu.gameserver.services.item.ItemService;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.ConsoleCommand;
 
 /**
@@ -13,7 +12,9 @@ import com.aionemu.gameserver.utils.chathandlers.ConsoleCommand;
 public class Wishid extends ConsoleCommand {
 
 	public Wishid() {
-		super("wishid", "Adds items.", "<count> <item id> - Adds the items to your target (or yourself).");
+		super("wishid", "Adds items.", """
+			<count> <item id> - Adds the items to your target (or yourself).
+			""");
 	}
 
 	@Override
@@ -36,7 +37,7 @@ public class Wishid extends ConsoleCommand {
 		}
 
 		if (DataManager.ITEM_DATA.getItemTemplate(itemId) == null) {
-			PacketSendUtility.sendMessage(admin, "Item id is incorrect: " + itemId);
+			sendInfo(admin, "Item id is incorrect: " + itemId);
 			return;
 		}
 
@@ -47,12 +48,12 @@ public class Wishid extends ConsoleCommand {
 
 		if (count == 0) {
 			if (admin != target) {
-				PacketSendUtility.sendMessage(admin, "You successfully gave " + itemCount + " x [item:" + itemId + "] to " + target.getName() + ".");
-				PacketSendUtility.sendMessage(target, "You successfully received " + itemCount + " x [item:" + itemId + "] from " + admin.getName() + ".");
+				sendInfo(admin, "You successfully gave " + itemCount + " x [item:" + itemId + "] to " + target.getName() + ".");
+				sendInfo(target, "You successfully received " + itemCount + " x [item:" + itemId + "] from " + admin.getName() + ".");
 			} else
-				PacketSendUtility.sendMessage(admin, "You successfully received " + itemCount + " x [item:" + itemId + "]");
+				sendInfo(admin, "You successfully received " + itemCount + " x [item:" + itemId + "]");
 		} else {
-			PacketSendUtility.sendMessage(admin, "Item couldn't be added");
+			sendInfo(admin, "Item couldn't be added");
 		}
 	}
 

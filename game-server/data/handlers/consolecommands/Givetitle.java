@@ -13,7 +13,9 @@ import com.aionemu.gameserver.utils.chathandlers.ConsoleCommand;
 public class Givetitle extends ConsoleCommand {
 
 	public Givetitle() {
-		super("givetitle", "Adds a title.", "<title id> - Adds the title to your target (or yourself).");
+		super("givetitle", "Adds a title.", """
+			<title id> - Adds the title to your target (or yourself).
+			""");
 	}
 
 	@Override
@@ -24,7 +26,7 @@ public class Givetitle extends ConsoleCommand {
 		}
 
 		if (!ChatProcessor.getInstance().isCommandAllowed(admin, "set")) {
-			PacketSendUtility.sendMessage(admin, "You don't have enough rights to execute this command.");
+			sendInfo(admin, "You don't have enough rights to execute this command.");
 			return;
 		}
 
@@ -36,9 +38,9 @@ public class Givetitle extends ConsoleCommand {
 			return;
 		}
 		if (setTitle(player, titleId))
-			PacketSendUtility.sendMessage(admin, "Added title " + titleId + " to " + player.getName() + ".");
+			sendInfo(admin, "Added title " + titleId + " to " + player.getName() + ".");
 		else
-			PacketSendUtility.sendMessage(admin, player.getName() + " already has title " + titleId + ".");
+			sendInfo(admin, player.getName() + " already has title " + titleId + ".");
 	}
 
 	private boolean setTitle(Player player, int value) {

@@ -13,7 +13,9 @@ import com.aionemu.gameserver.world.World;
 public class Ban extends AdminCommand {
 
 	public Ban() {
-		super("ban", "Bans an account.", "<player> [account|ip|full] [minutes] - Bans the player's account (default: full, permanent).");
+		super("ban", "Bans an account.", """
+			<player> [account|ip|full] [minutes] - Bans the player's account (default: full, permanent).
+			""");
 	}
 
 	@Override

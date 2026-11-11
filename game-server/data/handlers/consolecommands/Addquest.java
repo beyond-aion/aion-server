@@ -13,7 +13,6 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.ConsoleCommand;
 
 /**
@@ -22,7 +21,9 @@ import com.aionemu.gameserver.utils.chathandlers.ConsoleCommand;
 public class Addquest extends ConsoleCommand {
 
 	public Addquest() {
-		super("addquest", "Starts a quest.", "<quest id> - Starts the quest for your target (or yourself), a quest link works too.");
+		super("addquest", "Starts a quest.", """
+			<quest id> - Starts the quest for your target (or yourself), a quest link works too.
+			""");
 	}
 
 	@Override
@@ -52,7 +53,7 @@ public class Addquest extends ConsoleCommand {
 		QuestEnv env = new QuestEnv(null, player, id);
 
 		if (QuestService.startQuest(env)) {
-			PacketSendUtility.sendMessage(admin, "Quest started.");
+			sendInfo(admin, "Quest started.");
 		} else {
 			List<XMLStartCondition> preconditions = template.getXMLStartConditions();
 			if (preconditions != null && preconditions.size() > 0) {
@@ -62,14 +63,14 @@ public class Addquest extends ConsoleCommand {
 						for (FinishedQuestCond fcondition : finisheds) {
 							QuestState qs1 = player.getQuestStateList().getQuestState(fcondition.getQuestId());
 							if (qs1 == null || qs1.getStatus() != QuestStatus.COMPLETE) {
-								PacketSendUtility.sendMessage(admin,
+								sendInfo(admin,
 									player.getName() + " has to finish [quest:" + fcondition.getQuestId() + "] first.");
 							}
 						}
 					}
 				}
 			}
-			PacketSendUtility.sendMessage(admin, "Quest not started, some preconditions failed.");
+			sendInfo(admin, "Quest not started, some preconditions failed.");
 		}
 	}
 

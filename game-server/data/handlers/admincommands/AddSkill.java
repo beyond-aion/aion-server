@@ -2,7 +2,6 @@ package admincommands;
 
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 
 /**
@@ -11,7 +10,9 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 public class AddSkill extends AdminCommand {
 
 	public AddSkill() {
-		super("addskill", "Adds a skill to a player.", "<skillId> <skillLevel> - Adds the skill to your target (or yourself).");
+		super("addskill", "Adds a skill to a player.", """
+			<skillId> <skillLevel> - Adds the skill to your target (or yourself).
+			""");
 	}
 
 	@Override
@@ -35,11 +36,11 @@ public class AddSkill extends AdminCommand {
 		}
 
 		if (!target.getSkillList().addSkill(target, skillId, skillLevel)) {
-			PacketSendUtility.sendMessage(player, "The player already has this skill at the same or a higher level.");
+			sendInfo(player, "The player already has this skill at the same or a higher level.");
 			return;
 		}
-		PacketSendUtility.sendMessage(player, "The skill was added successfully.");
+		sendInfo(player, "The skill was added successfully.");
 		if (!target.equals(player))
-			PacketSendUtility.sendMessage(target, "You have acquired a new skill.");
+			sendInfo(target, "You have acquired a new skill.");
 	}
 }

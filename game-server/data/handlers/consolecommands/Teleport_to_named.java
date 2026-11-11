@@ -8,7 +8,7 @@ import jakarta.xml.bind.annotation.*;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.teleport.TeleportService;
-import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.chathandlers.ConsoleCommand;
 import com.aionemu.gameserver.utils.xml.JAXBUtil;
 
@@ -18,7 +18,9 @@ import com.aionemu.gameserver.utils.xml.JAXBUtil;
 public class Teleport_to_named extends ConsoleCommand {
 
 	public Teleport_to_named() {
-		super("teleport_to_named", "Teleports you to an NPC.", "<npc name> - Teleports you to the NPC with the name.");
+		super("teleport_to_named", "Teleports you to an NPC.", """
+			<npc name> - Teleports you to the NPC with the name.
+			""");
 	}
 
 	@Override
@@ -38,7 +40,7 @@ public class Teleport_to_named extends ConsoleCommand {
 			sendInfo(admin, "There is no NPC named " + npcName + ".");
 			return;
 		}
-		PacketSendUtility.sendMessage(admin, "Teleporting to NPC " + npcTemplate.getTemplateId() + ".");
+		sendInfo(admin, "Teleported to " + ChatUtil.path(npcTemplate.getTemplateId(), true) + ".");
 		TeleportService.teleportToNpc(admin, npcTemplate.getTemplateId());
 	}
 

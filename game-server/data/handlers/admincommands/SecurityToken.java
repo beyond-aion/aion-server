@@ -2,7 +2,6 @@ package admincommands;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.player.SecurityTokenService;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.World;
@@ -35,10 +34,10 @@ public class SecurityToken extends AdminCommand {
 			}
 
 			if (!"".equals(receiver.getAccount().getSecurityToken())) {
-				PacketSendUtility.sendMessage(player,
+				sendInfo(player,
 					"The security token of " + receiver.getName() + " is: " + receiver.getAccount().getSecurityToken());
 			} else {
-				PacketSendUtility.sendMessage(player, "Player " + receiver.getName() + " has no security token.");
+				sendInfo(player, "Player " + receiver.getName() + " has no security token.");
 			}
 
 		} else {
@@ -50,7 +49,7 @@ public class SecurityToken extends AdminCommand {
 			}
 
 			SecurityTokenService.generateToken(receiver.getAccount());
-			PacketSendUtility.sendMessage(player, "A new security token was generated for " + receiver.getName() + ".");
+			sendInfo(player, "A new security token was generated for " + receiver.getName() + ".");
 		}
 
 	}

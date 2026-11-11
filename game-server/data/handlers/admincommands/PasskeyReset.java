@@ -4,7 +4,6 @@ import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.dao.PlayerPasskeyDAO;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.loginserver.LoginServer;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 
@@ -14,7 +13,9 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 public class PasskeyReset extends AdminCommand {
 
 	public PasskeyReset() {
-		super("passkeyreset", "Resets an account passkey.", "<player> <passkey> - Sets a new 6-8 digit passkey for the account of the player.");
+		super("passkeyreset", "Resets an account passkey.", """
+			<player> <passkey> - Sets a new 6-8 digit passkey for the account of the player.
+			""");
 	}
 
 	@Override
@@ -42,6 +43,6 @@ public class PasskeyReset extends AdminCommand {
 			return;
 		}
 		LoginServer.getInstance().kickAccount(accountId, false);
-		PacketSendUtility.sendMessage(player, "The passkey of " + name + "'s account was reset.");
+		sendInfo(player, "The passkey of " + name + "'s account was reset.");
 	}
 }

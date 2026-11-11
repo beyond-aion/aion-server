@@ -5,7 +5,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.itemset.ItemPart;
 import com.aionemu.gameserver.model.templates.itemset.ItemSetTemplate;
 import com.aionemu.gameserver.services.item.ItemService;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.World;
@@ -41,12 +40,12 @@ public class AddSet extends AdminCommand {
 
 		ItemSetTemplate itemSet = DataManager.ITEM_SET_DATA.getItemSetTemplate(itemSetId);
 		if (itemSet == null) {
-			PacketSendUtility.sendMessage(player, "ItemSet does not exist with id " + itemSetId);
+			sendInfo(player, "ItemSet does not exist with id " + itemSetId);
 			return;
 		}
 
 		if (receiver.getInventory().getFreeSlots() < itemSet.getItempart().size()) {
-			PacketSendUtility.sendMessage(player, "Inventory needs at least " + itemSet.getItempart().size() + " free slots.");
+			sendInfo(player, "Inventory needs at least " + itemSet.getItempart().size() + " free slots.");
 			return;
 		}
 
@@ -54,14 +53,14 @@ public class AddSet extends AdminCommand {
 			long count = ItemService.addItem(receiver, setPart.getItemId(), 1);
 
 			if (count != 0) {
-				PacketSendUtility.sendMessage(player, "Item " + setPart.getItemId() + " couldn't be added");
+				sendInfo(player, "Item " + setPart.getItemId() + " couldn't be added");
 				return;
 			}
 		}
 
-		PacketSendUtility.sendMessage(player, "Item set added successfully.");
+		sendInfo(player, "Item set added successfully.");
 		if (receiver != player)
-			PacketSendUtility.sendMessage(receiver, "An admin gave you an item set.");
+			sendInfo(receiver, "An admin gave you an item set.");
 	}
 
 }

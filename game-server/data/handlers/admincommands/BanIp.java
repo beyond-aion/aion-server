@@ -10,7 +10,9 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 public class BanIp extends AdminCommand {
 
 	public BanIp() {
-		super("banip", "Bans an IP mask.", "<mask> [minutes] - Bans the IP mask for the given time (default: permanent).");
+		super("banip", "Bans an IP mask.", """
+			<mask> [minutes] - Bans the IP mask for the given time (default: permanent).
+			""");
 	}
 
 	@Override
