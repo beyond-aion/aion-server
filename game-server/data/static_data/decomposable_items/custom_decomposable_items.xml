@@ -2300,6 +2300,16 @@
 			<item id="182215751" /><!-- Elyos Guardian General Token -->
 		</set>
 	</decomposable>
+	<decomposable item_id="188053722" override="true"><!-- Special Enchantment Stone Bundle of Fortuneers Legion -->
+		<set>
+			<item id="166020000" /><!-- Omega Enchantment Stone -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053727" override="true"><!-- Special Enchantment Stone Bundle of Charlirunerk Inquiry Agency -->
+		<set>
+			<item id="166020000" /><!-- Omega Enchantment Stone -->
+		</set>
+	</decomposable>
 	<decomposable item_id="188053798" override="true"><!-- Shining Enchantment Stone Bundle -->
 		<set>
 			<item id="166000194" count="3" chance="50" /><!-- Delta Enchantment Stone -->
