@@ -92,7 +92,7 @@
 			<property>gameserver.rates.crafting.combo_crit_chances = 50</property>
 		</config_properties>
 	</event>
-	<event name="Kill Collector" start="2026-11-15T00:00:00" end="2026-11-30T23:59:59">
+	<event name="Kill Collector" start="2026-11-14T00:00:00" end="2026-11-29T23:59:59">
 		<config_properties>
 			<property>gameserver.event.headhunting.enable = true</property>
 			<property>gameserver.event.headhunting.maps = 210050000, 220070000, 301220000, 400020000, 600090000, 600100000</property>
@@ -2964,7 +2964,7 @@
 			</gd_rule>
 		</event_drops>
 	</event>
-	<event name="Beritra's Grace" start="2026-11-15T00:00:00" end="2026-11-30T23:59:59">
+	<event name="Beritra's Grace" start="2026-11-14T00:00:00" end="2026-11-29T23:59:59">
 		<event_drops>
 			<gd_rule rule_name="Beritra Equipment Chest" chance="100" member_limit="12">
 				<gd_maps>
@@ -3175,7 +3175,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Beyond Aion Birthday Event" start="2026-11-15T00:00:00" end="2026-11-30T23:59:59">
+	<event name="Beyond Aion Birthday Event" start="2026-11-14T00:00:00" end="2026-11-29T23:59:59">
 		<event_drops>
 			<gd_rule rule_name="Birthday Coins" chance="100">
 				<gd_maps>
