@@ -48,7 +48,7 @@ public class SM_PLAYER_INFO extends AbstractPlayerInfoPacket {
 		writeF(player.getY());// y
 		writeF(player.getZ());// z
 		writeD(player.getObjectId());
-		writeD(pcd.getTemplateId()); // 0xA3 female asmodian, 0xA2 male asmodian, 0xA1 female elyos, 0xA0 male elyos
+		writeD(pcd.getTemplateId()); // player model id - computed from race+gender (PlayerCommonData: 100000 + raceId * 2 + genderId)
 		writeD(player.getRobotId());// RobotId
 		writeD(player.getTransformModel().getModelId()); // Transformed state: transformed model id, Regular state: player model id
 		writeC(0x00); // new 2.0 Packet --- probably pet info?
