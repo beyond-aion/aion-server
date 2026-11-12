@@ -1749,7 +1749,16 @@
 			<item id="188950017" chance="0.05" /><!-- Special Courier Pass (Abyss Eternal/Lv. 61-65) -->
 		</set>
 	</decomposable>
-	<!-- Should be kept as selectables | dropped by rift guardians -->
+	<decomposable item_id="188053295" selectable="true" override="true"><!-- Empyrean Plume Chest -->
+		<set race="ELYOS">
+			<item id="187100015"/><!-- Kaisinel's Plume: Attack -->
+			<item id="187100016"/><!-- Kaisinel's Plume: Magic Boost -->
+		</set>
+		<set race="ASMODIANS">
+			<item id="187100017"/><!-- Marchutan's Plume: Attack -->
+			<item id="187100018"/><!-- Marchutan's Plume: Magic Boost -->
+		</set>
+	</decomposable>
 	<decomposable item_id="188053367" selectable="true" override="true"><!-- Guardian Tactician Plate Set -->
 		<set>
 			<item id="110601511" /><!-- Resplendent Breastplate -->
