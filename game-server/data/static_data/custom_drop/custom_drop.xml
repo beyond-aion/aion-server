@@ -5478,7 +5478,6 @@
 			<drop item_id="166500002" chance="10" min_amount="2" /><!-- Amplification Stone -->
 			<drop item_id="188053610" chance="10" min_amount="3" /><!-- [Event] Level 70 Composite Manastone Bundle -->
 			<drop item_id="188053845" chance="10" /><!-- Summer-Loving Penguin Transformation Candy Box -->
-			<drop item_id="188053702" chance="10" /><!-- Vasharti's Equipment Box -->
 			<drop item_id="164002224" chance="10" /><!-- Administrator's Boon IV - 15-Day Pass -->
 		</drop_group>
 		<drop_group><!-- RARE -->
@@ -5490,11 +5489,11 @@
 			<drop item_id="168310018" chance="5" /><!-- Greater Blessed Augmentation: Level 2 -->
 		</drop_group>
 		<drop_group><!-- SUPER RARE -->
-			<drop item_id="188053007" chance="0.5" /><!-- [Event] Hyperion's Mythic Weapon Chest -->
-			<drop item_id="188053006" chance="0.5" /><!-- [Event] Hyperion's Mythic Armor Chest -->
+			<drop item_id="188053097" chance="0.5" /><!-- Modor's Mythic Weapon Box -->
+			<drop item_id="188053098" chance="0.5" /><!-- Modor's Mythic Armor Box -->
 			<drop item_id="188053728" chance="0.5" /><!-- Beritra's Equipment Box -->
 			<drop item_id="188052936" chance="0.5" /><!-- Shugo Icebox -->
-			<drop item_id="187000157" chance="0.5" /><!-- Beritra's Phantom Wings -->
+			<drop item_id="187000155" chance="0.5" /><!-- Brigade General Vasharti's Wings -->
 			<drop item_id="188950019" chance="0.5" /><!-- Special Courier Pass (Mythic/Lv. 61-65) -->
 		</drop_group>
 	</npc_drop>
@@ -5519,7 +5518,6 @@
 			<drop item_id="166500002" chance="20" min_amount="2" /><!-- Amplification Stone -->
 			<drop item_id="188053610" chance="20" min_amount="3" /><!-- [Event] Level 70 Composite Manastone Bundle -->
 			<drop item_id="188053845" chance="20" /><!-- Summer-Loving Penguin Transformation Candy Box -->
-			<drop item_id="188053702" chance="20" /><!-- Vasharti's Equipment Box -->
 			<drop item_id="164002224" chance="20" /><!-- Administrator's Boon IV - 15-Day Pass -->
 		</drop_group>
 		<drop_group><!-- RARE -->
@@ -5534,10 +5532,10 @@
 			<drop item_id="188052936" chance="7" /><!-- Shugo Icebox -->
 		</drop_group>
 		<drop_group><!-- SUPER RARE -->
-			<drop item_id="188053007" chance="1" /><!-- [Event] Hyperion's Mythic Weapon Chest -->
-			<drop item_id="188053006" chance="1" /><!-- [Event] Hyperion's Mythic Armor Chest -->
+			<drop item_id="188053097" chance="1" /><!-- Modor's Mythic Weapon Box -->
+			<drop item_id="188053098" chance="1" /><!-- Modor's Mythic Armor Box -->
 			<drop item_id="188053728" chance="1" /><!-- Beritra's Equipment Box -->
-			<drop item_id="187000157" chance="1" /><!-- Beritra's Phantom Wings -->
+			<drop item_id="187000155" chance="1" /><!-- Brigade General Vasharti's Wings -->
 			<drop item_id="188950019" chance="1" /><!-- Special Courier Pass (Mythic/Lv. 61-65) -->
 		</drop_group>
 	</npc_drop>
