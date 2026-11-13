@@ -137,10 +137,10 @@ public class PlayerReviveService {
 	}
 
 	public static void kiskRevive(Player player, int skillId) {
-		if (player.isInPrison())
-			TeleportService.teleportToPrison(player);
-		else if (player.isInCustomState(CustomPlayerState.EVENT_MODE))
-			TeleportService.teleportToEvent(player);
+		if (player.isInPrison() || player.isInCustomState(CustomPlayerState.EVENT_MODE)) { // a kisk must not take them out of prison or the event
+			bindRevive(player, skillId);
+			return;
+		}
 
 		Kisk kisk = player.getKisk();
 		if (kisk != null && kisk.isActive()) {
