@@ -32,7 +32,18 @@ public class JobChannel extends RaceChannel {
 
 	public JobChannel(int gameServerId, Race race, String classIdentifier) {
 		super(ChannelType.JOB, gameServerId, race);
-		this.classIdentifiers = withAliases(classIdentifier.split("\\[f:")[0]);
+		this.classIdentifiers = withAliases(baseName(classIdentifier));
+	}
+
+	/**
+	 * The client requests the channel with its localized class name as is. German, Spanish, French and Polish class names carry the female form
+	 * in the client's gender markup, e.g. {@code Kleriker[f:"Klerikerin"]}, which is the same for male and female characters.
+	 * 
+	 * @return The class name without the female form.
+	 */
+	private static String baseName(String classIdentifier) {
+		int femaleSuffix = classIdentifier.indexOf("[f:");
+		return femaleSuffix < 0 ? classIdentifier : classIdentifier.substring(0, femaleSuffix);
 	}
 
 	public boolean hasAliases() {
@@ -41,7 +52,7 @@ public class JobChannel extends RaceChannel {
 
 	@Override
 	public boolean matches(ChannelType channelType, int gameServerId, Race race, String classIdentifier) {
-		return super.matches(channelType, gameServerId, race, classIdentifier) && classIdentifiers.contains(classIdentifier);
+		return super.matches(channelType, gameServerId, race, classIdentifier) && classIdentifiers.contains(baseName(classIdentifier));
 	}
 
 	@Override
