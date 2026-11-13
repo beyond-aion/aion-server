@@ -8,6 +8,9 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 
 /**
+ * The quests the player has completed, with how often. Long lists are split over several packets, the first one replaces the client's list and
+ * the others add to it.
+ *
  * @author MrPoke, Neon
  */
 public class SM_QUEST_COMPLETED_LIST extends AionServerPacket {
@@ -20,7 +23,7 @@ public class SM_QUEST_COMPLETED_LIST extends AionServerPacket {
 
 	/**
 	 * @param updateMode
-	 *          0 = rewrite all entries, 1 = insert new entries
+	 *          0 = replace all entries, 1 = add the entries
 	 * @param questStates
 	 *          list of affected quests
 	 */
@@ -31,13 +34,14 @@ public class SM_QUEST_COMPLETED_LIST extends AionServerPacket {
 
 	@Override
 	protected void writeImpl(AionConnection con) {
-		writeC(1); // unk, always 1 (when 0, no entries change)
-		writeC(updateMode); // 0 = rewrite all entries, 1 = insert new entries
-		writeH(-questStates.size() & 0xFFFF);
+		writeC(1); // the player's own list, 0 would fill the list of quests a GM looks at
+		writeC(updateMode); // 0 = replace all entries, otherwise add them
+		writeH(-questStates.size() & 0xFFFF); // negative: the last part of the list
 		for (QuestState qs : questStates) {
 			writeD(qs.getQuestId());
 			writeC(Math.min(qs.getCompleteCount(), 255));
-			writeC(qs.canRepeat() ? 0 : 1); // wrong! most times equal to the complete count on retail (else 0), not clear what it is
+			// completions since the repeat limit was last reset; the client only reads it for the GM list, so 1 or 0 is close enough
+			writeC(qs.canRepeat() ? 0 : 1);
 		}
 	}
 }

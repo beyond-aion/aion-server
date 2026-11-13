@@ -25,6 +25,10 @@ public class QuestNpc {
 	@XmlAttribute(required = true)
 	protected int id;
 
+	public int getId() {
+		return id;
+	}
+
 	public boolean operate(QuestEnv env, QuestState qs) {
 		int npcId = -1;
 		if (env.getVisibleObject() instanceof Npc)
