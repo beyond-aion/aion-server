@@ -143,14 +143,16 @@ public class PlayerReviveService {
 		}
 
 		Kisk kisk = player.getKisk();
-		if (kisk != null && kisk.isActive()) {
-			kisk.resurrectionUsed();
-			revive(player, 30, 30, false, skillId);
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME());
-			player.getGameStats().updateStatsAndSpeedVisually();
-			player.unsetResPosState();
-			TeleportService.teleportTo(player, kisk.getPosition());
+		if (kisk == null || !kisk.isActive() || !player.getWorldMapInstance().getInstanceHandler().allowKiskRevive()) {
+			bindRevive(player, skillId); // the kisk expired or was destroyed while the death window was open
+			return;
 		}
+		kisk.resurrectionUsed();
+		revive(player, 30, 30, false, skillId);
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME());
+		player.getGameStats().updateStatsAndSpeedVisually();
+		player.unsetResPosState();
+		TeleportService.teleportTo(player, kisk.getPosition());
 	}
 
 	public static void instanceRevive(Player player) {
