@@ -3,6 +3,7 @@ package com.aionemu.gameserver.services.player;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.configs.administration.AdminConfig;
+import com.aionemu.gameserver.instance.handlers.InstanceHandler;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Item;
@@ -243,12 +244,20 @@ public class PlayerReviveService {
 
 	}
 
+	/**
+	 * Revives the player without showing the resurrection options, at the place the death window would offer first: the instance's resurrection point,
+	 * else an active kisk, else the bind point.
+	 */
 	public static void scheduleReviveAtBase(Player player, int delayMillis, int skillId) {
 		player.getController().addTask(TaskId.TELEPORT, ThreadPoolManager.getInstance().schedule(() -> {
 			player.getController().getAndRemoveTask(TaskId.TELEPORT); // remove manually as it won't get removed automatically
-			if (player.isInInstance())
+			if (!player.isDead()) // already revived, e.g. by an instance handler
+				return;
+			InstanceHandler instanceHandler = player.getWorldMapInstance().getInstanceHandler();
+			Kisk kisk = player.getKisk();
+			if (instanceHandler.allowInstanceRevive())
 				PlayerReviveService.instanceRevive(player, skillId);
-			else if (player.getKisk() != null)
+			else if (instanceHandler.allowKiskRevive() && kisk != null && kisk.isActive())
 				PlayerReviveService.kiskRevive(player, skillId);
 			else
 				PlayerReviveService.bindRevive(player, skillId);
