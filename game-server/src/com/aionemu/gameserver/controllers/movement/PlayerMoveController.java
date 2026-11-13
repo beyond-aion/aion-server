@@ -169,13 +169,15 @@ public class PlayerMoveController extends PlayableMoveController<Player> {
 	}
 
 	/**
-	 * A lethal fall shows no resurrection options: the player is revived a second later in the instance, at an active kisk or at the bind point.
+	 * A lethal fall shows no resurrection options, except in instances that ask for them: the player is revived a second later in the instance, at
+	 * an active kisk or at the bind point.
 	 */
 	private void dieFromFall() {
 		resetFalling();
 		if (owner.isDead())
 			return;
-		if (owner.getController().die(TYPE.FALL_DAMAGE, LOG.REGULAR, owner))
+		if (owner.getController().die(TYPE.FALL_DAMAGE, LOG.REGULAR, owner)
+			&& !owner.getWorldMapInstance().getInstanceHandler().showResurrectionOptionsAfterLethalFall())
 			PlayerReviveService.scheduleReviveAtBase(owner, 1000, 0);
 	}
 

@@ -127,6 +127,11 @@ public abstract class PvPArenaInstance extends GeneralInstanceHandler {
 	}
 
 	@Override
+	public boolean showResurrectionOptionsAfterLethalFall() {
+		return true;
+	}
+
+	@Override
 	public boolean onDie(Player victim, Creature lastAttacker) {
 		PvPArenaPlayerReward victimReward = getStatReward(victim);
 		PvPArenaPlayerReward winnerReward = null;
