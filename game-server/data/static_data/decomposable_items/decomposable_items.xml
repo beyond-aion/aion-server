@@ -7489,7 +7489,7 @@
 		<set>
 			<item id="167000450" chance="4.38"/><!-- Manastone: HP +65 -->
 			<item id="167000451" chance="4.37"/><!-- Manastone: MP +65 -->
-			<item id="167000454" chance="4.38"/><!-- Manastone: Attack +4 -->
+			<item id="167000454" chance="8.75"/><!-- Manastone: Attack +4 -->
 			<item id="167000455" chance="4.37"/><!-- Manastone: Magic Boost +21 -->
 			<item id="167000459" chance="4.38"/><!-- Manastone: Crit Strike +11 -->
 			<item id="167000537" chance="4.37"/><!-- Manastone: Magical Accuracy +8 -->
@@ -7523,7 +7523,7 @@
 		<set>
 			<item id="167000450" chance="4.04"/><!-- Manastone: HP +65 -->
 			<item id="167000451" chance="4.04"/><!-- Manastone: MP +65 -->
-			<item id="167000454" chance="4.05"/><!-- Manastone: Attack +4 -->
+			<item id="167000454" chance="8.09"/><!-- Manastone: Attack +4 -->
 			<item id="167000455" chance="4.04"/><!-- Manastone: Magic Boost +21 -->
 			<item id="167000459" chance="4.04"/><!-- Manastone: Crit Strike +11 -->
 			<item id="167000537" chance="4.04"/><!-- Manastone: Magical Accuracy +8 -->
@@ -7557,7 +7557,7 @@
 		<set>
 			<item id="167000450" chance="3.41"/><!-- Manastone: HP +65 -->
 			<item id="167000451" chance="3.4"/><!-- Manastone: MP +65 -->
-			<item id="167000454" chance="3.41"/><!-- Manastone: Attack +4 -->
+			<item id="167000454" chance="6.82"/><!-- Manastone: Attack +4 -->
 			<item id="167000455" chance="3.41"/><!-- Manastone: Magic Boost +21 -->
 			<item id="167000459" chance="3.41"/><!-- Manastone: Crit Strike +11 -->
 			<item id="167000537" chance="3.41"/><!-- Manastone: Magical Accuracy +8 -->
@@ -8557,7 +8557,7 @@
 		<set>
 			<item id="167000450" chance="4.38"/><!-- Manastone: HP +65 -->
 			<item id="167000451" chance="4.37"/><!-- Manastone: MP +65 -->
-			<item id="167000454" chance="4.38"/><!-- Manastone: Attack +4 -->
+			<item id="167000454" chance="8.75"/><!-- Manastone: Attack +4 -->
 			<item id="167000455" chance="4.37"/><!-- Manastone: Magic Boost +21 -->
 			<item id="167000459" chance="4.38"/><!-- Manastone: Crit Strike +11 -->
 			<item id="167000537" chance="4.37"/><!-- Manastone: Magical Accuracy +8 -->
@@ -8591,7 +8591,7 @@
 		<set>
 			<item id="167000450" chance="4.04"/><!-- Manastone: HP +65 -->
 			<item id="167000451" chance="4.04"/><!-- Manastone: MP +65 -->
-			<item id="167000454" chance="4.05"/><!-- Manastone: Attack +4 -->
+			<item id="167000454" chance="8.09"/><!-- Manastone: Attack +4 -->
 			<item id="167000455" chance="4.04"/><!-- Manastone: Magic Boost +21 -->
 			<item id="167000459" chance="4.04"/><!-- Manastone: Crit Strike +11 -->
 			<item id="167000537" chance="4.04"/><!-- Manastone: Magical Accuracy +8 -->
@@ -8625,7 +8625,7 @@
 		<set>
 			<item id="167000450" chance="3.41"/><!-- Manastone: HP +65 -->
 			<item id="167000451" chance="3.4"/><!-- Manastone: MP +65 -->
-			<item id="167000454" chance="3.41"/><!-- Manastone: Attack +4 -->
+			<item id="167000454" chance="6.82"/><!-- Manastone: Attack +4 -->
 			<item id="167000455" chance="3.41"/><!-- Manastone: Magic Boost +21 -->
 			<item id="167000459" chance="3.41"/><!-- Manastone: Crit Strike +11 -->
 			<item id="167000537" chance="3.41"/><!-- Manastone: Magical Accuracy +8 -->
@@ -8659,7 +8659,7 @@
 		<set>
 			<item id="167000450" chance="4.38"/><!-- Manastone: HP +65 -->
 			<item id="167000451" chance="4.37"/><!-- Manastone: MP +65 -->
-			<item id="167000454" chance="4.38"/><!-- Manastone: Attack +4 -->
+			<item id="167000454" chance="8.75"/><!-- Manastone: Attack +4 -->
 			<item id="167000455" chance="4.37"/><!-- Manastone: Magic Boost +21 -->
 			<item id="167000459" chance="4.38"/><!-- Manastone: Crit Strike +11 -->
 			<item id="167000537" chance="4.37"/><!-- Manastone: Magical Accuracy +8 -->
@@ -8693,7 +8693,7 @@
 		<set>
 			<item id="167000450" chance="4.04"/><!-- Manastone: HP +65 -->
 			<item id="167000451" chance="4.04"/><!-- Manastone: MP +65 -->
-			<item id="167000454" chance="4.05"/><!-- Manastone: Attack +4 -->
+			<item id="167000454" chance="8.09"/><!-- Manastone: Attack +4 -->
 			<item id="167000455" chance="4.04"/><!-- Manastone: Magic Boost +21 -->
 			<item id="167000459" chance="4.04"/><!-- Manastone: Crit Strike +11 -->
 			<item id="167000537" chance="4.04"/><!-- Manastone: Magical Accuracy +8 -->
@@ -8727,7 +8727,7 @@
 		<set>
 			<item id="167000450" chance="3.41"/><!-- Manastone: HP +65 -->
 			<item id="167000451" chance="3.4"/><!-- Manastone: MP +65 -->
-			<item id="167000454" chance="3.41"/><!-- Manastone: Attack +4 -->
+			<item id="167000454" chance="6.82"/><!-- Manastone: Attack +4 -->
 			<item id="167000455" chance="3.41"/><!-- Manastone: Magic Boost +21 -->
 			<item id="167000459" chance="3.41"/><!-- Manastone: Crit Strike +11 -->
 			<item id="167000537" chance="3.41"/><!-- Manastone: Magical Accuracy +8 -->
@@ -8761,7 +8761,7 @@
 		<set>
 			<item id="167000450" chance="4.38"/><!-- Manastone: HP +65 -->
 			<item id="167000451" chance="4.37"/><!-- Manastone: MP +65 -->
-			<item id="167000454" chance="4.38"/><!-- Manastone: Attack +4 -->
+			<item id="167000454" chance="8.75"/><!-- Manastone: Attack +4 -->
 			<item id="167000455" chance="4.37"/><!-- Manastone: Magic Boost +21 -->
 			<item id="167000459" chance="4.38"/><!-- Manastone: Crit Strike +11 -->
 			<item id="167000537" chance="4.37"/><!-- Manastone: Magical Accuracy +8 -->
@@ -8795,7 +8795,7 @@
 		<set>
 			<item id="167000450" chance="4.04"/><!-- Manastone: HP +65 -->
 			<item id="167000451" chance="4.04"/><!-- Manastone: MP +65 -->
-			<item id="167000454" chance="4.05"/><!-- Manastone: Attack +4 -->
+			<item id="167000454" chance="8.09"/><!-- Manastone: Attack +4 -->
 			<item id="167000455" chance="4.04"/><!-- Manastone: Magic Boost +21 -->
 			<item id="167000459" chance="4.04"/><!-- Manastone: Crit Strike +11 -->
 			<item id="167000537" chance="4.04"/><!-- Manastone: Magical Accuracy +8 -->
@@ -8829,7 +8829,7 @@
 		<set>
 			<item id="167000450" chance="3.41"/><!-- Manastone: HP +65 -->
 			<item id="167000451" chance="3.4"/><!-- Manastone: MP +65 -->
-			<item id="167000454" chance="3.41"/><!-- Manastone: Attack +4 -->
+			<item id="167000454" chance="6.82"/><!-- Manastone: Attack +4 -->
 			<item id="167000455" chance="3.41"/><!-- Manastone: Magic Boost +21 -->
 			<item id="167000459" chance="3.41"/><!-- Manastone: Crit Strike +11 -->
 			<item id="167000537" chance="3.41"/><!-- Manastone: Magical Accuracy +8 -->
@@ -9222,7 +9222,7 @@
 		<set>
 			<item id="167000450" chance="4.38"/><!-- Manastone: HP +65 -->
 			<item id="167000451" chance="4.37"/><!-- Manastone: MP +65 -->
-			<item id="167000454" chance="4.38"/><!-- Manastone: Attack +4 -->
+			<item id="167000454" chance="8.75"/><!-- Manastone: Attack +4 -->
 			<item id="167000455" chance="4.37"/><!-- Manastone: Magic Boost +21 -->
 			<item id="167000459" chance="4.38"/><!-- Manastone: Crit Strike +11 -->
 			<item id="167000537" chance="4.37"/><!-- Manastone: Magical Accuracy +8 -->
@@ -9256,7 +9256,7 @@
 		<set>
 			<item id="167000450" chance="4.04"/><!-- Manastone: HP +65 -->
 			<item id="167000451" chance="4.04"/><!-- Manastone: MP +65 -->
-			<item id="167000454" chance="4.05"/><!-- Manastone: Attack +4 -->
+			<item id="167000454" chance="8.09"/><!-- Manastone: Attack +4 -->
 			<item id="167000455" chance="4.04"/><!-- Manastone: Magic Boost +21 -->
 			<item id="167000459" chance="4.04"/><!-- Manastone: Crit Strike +11 -->
 			<item id="167000537" chance="4.04"/><!-- Manastone: Magical Accuracy +8 -->
@@ -9290,7 +9290,7 @@
 		<set>
 			<item id="167000450" chance="3.41"/><!-- Manastone: HP +65 -->
 			<item id="167000451" chance="3.4"/><!-- Manastone: MP +65 -->
-			<item id="167000454" chance="3.41"/><!-- Manastone: Attack +4 -->
+			<item id="167000454" chance="6.82"/><!-- Manastone: Attack +4 -->
 			<item id="167000455" chance="3.41"/><!-- Manastone: Magic Boost +21 -->
 			<item id="167000459" chance="3.41"/><!-- Manastone: Crit Strike +11 -->
 			<item id="167000537" chance="3.41"/><!-- Manastone: Magical Accuracy +8 -->
@@ -9656,7 +9656,7 @@
 		<set>
 			<item id="167000450" chance="4.38"/><!-- Manastone: HP +65 -->
 			<item id="167000451" chance="4.37"/><!-- Manastone: MP +65 -->
-			<item id="167000454" chance="4.38"/><!-- Manastone: Attack +4 -->
+			<item id="167000454" chance="8.75"/><!-- Manastone: Attack +4 -->
 			<item id="167000455" chance="4.37"/><!-- Manastone: Magic Boost +21 -->
 			<item id="167000459" chance="4.38"/><!-- Manastone: Crit Strike +11 -->
 			<item id="167000537" chance="4.37"/><!-- Manastone: Magical Accuracy +8 -->
@@ -9690,7 +9690,7 @@
 		<set>
 			<item id="167000450" chance="4.04"/><!-- Manastone: HP +65 -->
 			<item id="167000451" chance="4.04"/><!-- Manastone: MP +65 -->
-			<item id="167000454" chance="4.05"/><!-- Manastone: Attack +4 -->
+			<item id="167000454" chance="8.09"/><!-- Manastone: Attack +4 -->
 			<item id="167000455" chance="4.04"/><!-- Manastone: Magic Boost +21 -->
 			<item id="167000459" chance="4.04"/><!-- Manastone: Crit Strike +11 -->
 			<item id="167000537" chance="4.04"/><!-- Manastone: Magical Accuracy +8 -->
@@ -23115,21 +23115,24 @@
 	</decomposable>
 	<decomposable item_id="188051579"><!-- Heavy Hidden Bundle -->
 		<set>
-			<item id="152000207" chance="5.55"/><!-- Orichalcum Ore -->
-			<item id="152000207" chance="5.55"/><!-- Orichalcum Ore -->
-			<item id="152000207" chance="5.55"/><!-- Orichalcum Ore -->
-			<item id="152000207" chance="5.55"/><!-- Orichalcum Ore -->
-			<item id="152000107" chance="5.55"/><!-- Mithril Ore -->
-			<item id="152000107" chance="5.55"/><!-- Mithril Ore -->
-			<item id="152000107" chance="5.55"/><!-- Mithril Ore -->
-			<item id="152000107" chance="5.55"/><!-- Mithril Ore -->
-			<item id="152000313" chance="5.55"/><!-- Ruby Ore -->
-			<item id="152000313" chance="5.55"/><!-- Ruby Ore -->
-			<item id="152000315" chance="5.55"/><!-- Sapphire Ore -->
-			<item id="152000315" chance="5.55"/><!-- Sapphire Ore -->
-			<item id="152000317" chance="5.55"/><!-- Diamond Ore -->
-			<item id="152000317" chance="5.55"/><!-- Diamond Ore -->
-			<item id="152000907" chance="5.55"/><!-- Aether -->
+			<item id="152000207" chance="18.15"/><!-- Orichalcum Ore -->
+			<item id="152000207" chance="3.35"/><!-- Orichalcum Ore -->
+			<item id="152000207" chance="2.94"/><!-- Orichalcum Ore -->
+			<item id="152000207" chance="2.89"/><!-- Orichalcum Ore -->
+			<item id="152000107" chance="18.15"/><!-- Mithril Ore -->
+			<item id="152000107" chance="3.35"/><!-- Mithril Ore -->
+			<item id="152000107" chance="2.89"/><!-- Mithril Ore -->
+			<item id="152000107" chance="2.87"/><!-- Mithril Ore -->
+			<item id="152000313" chance="2.99"/><!-- Ruby Ore -->
+			<item id="152000313" chance="2.94"/><!-- Ruby Ore -->
+			<item id="152000315" chance="3.35"/><!-- Sapphire Ore -->
+			<item id="152000315" chance="2.93"/><!-- Sapphire Ore -->
+			<item id="152000317" chance="2.98"/><!-- Diamond Ore -->
+			<item id="152000317" chance="2.93"/><!-- Diamond Ore -->
+			<item id="152000907" chance="18.16"/><!-- Aether -->
+			<item id="152000907" chance="3.34"/><!-- Aether -->
+			<item id="152000907" chance="2.93"/><!-- Aether -->
+			<item id="152000907" chance="2.86"/><!-- Aether -->
 			<item id="152000907" chance="5.55"/><!-- Aether -->
 			<item id="152000907" chance="5.55"/><!-- Aether -->
 			<item id="152000907" chance="5.55"/><!-- Aether -->
@@ -23137,53 +23140,54 @@
 	</decomposable>
 	<decomposable item_id="188051580"><!-- Large Hidden Bundle -->
 		<set>
-			<item id="152011006" chance="4.34"/><!-- Fine Weapon Flux -->
-			<item id="152011006" chance="4.34"/><!-- Fine Weapon Flux -->
-			<item id="152011006" chance="4.34"/><!-- Fine Weapon Flux -->
-			<item id="152011008" chance="4.34"/><!-- Premium Weapon Flux -->
-			<item id="152011008" chance="4.34"/><!-- Premium Weapon Flux -->
-			<item id="152011008" chance="4.34"/><!-- Premium Weapon Flux -->
-			<item id="152011008" chance="4.34"/><!-- Premium Weapon Flux -->
-			<item id="152011008" chance="4.34"/><!-- Premium Weapon Flux -->
-			<item id="152011008" chance="4.34"/><!-- Premium Weapon Flux -->
-			<item id="152011008" chance="4.34"/><!-- Premium Weapon Flux -->
-			<item id="152011008" chance="4.34"/><!-- Premium Weapon Flux -->
-			<item id="152013002" chance="4.34"/><!-- Wrathful Will -->
-			<item id="152013002" chance="4.34"/><!-- Wrathful Will -->
-			<item id="152013008" chance="4.34"/><!-- Terrifying Will -->
-			<item id="152013008" chance="4.34"/><!-- Terrifying Will -->
-			<item id="152013014" chance="4.34"/><!-- Violent Will -->
-			<item id="152013014" chance="4.34"/><!-- Violent Will -->
-			<item id="152013003" chance="4.34"/><!-- Wrathful Ego -->
-			<item id="152013003" chance="4.34"/><!-- Wrathful Ego -->
-			<item id="152013009" chance="4.34"/><!-- Terrifying Ego -->
-			<item id="152013009" chance="4.34"/><!-- Terrifying Ego -->
-			<item id="152013015" chance="4.34"/><!-- Violent Ego -->
+			<item id="152011006" chance="1.46"/><!-- Fine Weapon Flux -->
+			<item id="152011006" chance="0.93"/><!-- Fine Weapon Flux -->
+			<item id="152011006" chance="0.72"/><!-- Fine Weapon Flux -->
+			<item id="152011008" chance="5.84"/><!-- Premium Weapon Flux -->
+			<item id="152011008" chance="1.47"/><!-- Premium Weapon Flux -->
+			<item id="152011008" chance="1.47"/><!-- Premium Weapon Flux -->
+			<item id="152011008" chance="1.47"/><!-- Premium Weapon Flux -->
+			<item id="152011008" chance="9.11"/><!-- Premium Weapon Flux -->
+			<item id="152011008" chance="9.11"/><!-- Premium Weapon Flux -->
+			<item id="152011008" chance="5.84"/><!-- Premium Weapon Flux -->
+			<item id="152011008" chance="1.47"/><!-- Premium Weapon Flux -->
+			<item id="152013002" chance="1.47"/><!-- Wrathful Will -->
+			<item id="152013002" chance="1.47"/><!-- Wrathful Will -->
+			<item id="152013008" chance="9.11"/><!-- Terrifying Will -->
+			<item id="152013008" chance="0.93"/><!-- Terrifying Will -->
+			<item id="152013014" chance="9.11"/><!-- Violent Will -->
+			<item id="152013014" chance="9.11"/><!-- Violent Will -->
+			<item id="152013003" chance="0.72"/><!-- Wrathful Ego -->
+			<item id="152013003" chance="0.93"/><!-- Wrathful Ego -->
+			<item id="152013009" chance="9.11"/><!-- Terrifying Ego -->
+			<item id="152013009" chance="0.93"/><!-- Terrifying Ego -->
+			<item id="152013015" chance="9.11"/><!-- Violent Ego -->
+			<item id="152013015" chance="9.11"/><!-- Violent Ego -->
 			<item id="152013015" chance="4.34"/><!-- Violent Ego -->
 		</set>
 	</decomposable>
 	<decomposable item_id="188051581"><!-- Hidden Bundle -->
 		<set>
-			<item id="152014006" chance="1.47"/><!-- Hard Balaur Horn -->
-			<item id="152014007" chance="1.47"/><!-- Hard Balaur Scale -->
-			<item id="152014008" chance="2.52"/><!-- Hard Balaur Skin -->
-			<item id="152014009" chance="3.14"/><!-- Hot Balaur Blood Stain -->
-			<item id="152014010" chance="6.29"/><!-- Tender Balaur Meat -->
-			<item id="152014011" chance="1.47"/><!-- Solid Balaur Horn -->
-			<item id="152014012" chance="2.52"/><!-- Solid Balaur Scale -->
-			<item id="152014013" chance="6.29"/><!-- Solid Balaur Skin -->
-			<item id="152014014" chance="6.29"/><!-- Boiling Balaur Blood Stain -->
-			<item id="152014015" chance="6.29"/><!-- Fresh Balaur Meat -->
-			<item id="152010310" chance="6.29"/><!-- Thin Rawhide -->
-			<item id="152010311" chance="6.29"/><!-- Thick Rawhide -->
-			<item id="152010312" chance="6.29"/><!-- Strong Rawhide -->
-			<item id="152010313" chance="6.29"/><!-- Tough Rawhide -->
-			<item id="152010318" chance="3.14"/><!-- Firm Rawhide -->
-			<item id="152010314" chance="6.29"/><!-- Lesser Elemental Stone -->
-			<item id="152010315" chance="6.29"/><!-- Elemental Stone -->
-			<item id="152010316" chance="6.29"/><!-- Greater Elemental Stone -->
-			<item id="152010317" chance="6.29"/><!-- Major Elemental Stone -->
-			<item id="152010319" chance="2.52"/><!-- Fine Elemental Stone -->
+			<item id="152014006" chance="1.79"/><!-- Hard Balaur Horn -->
+			<item id="152014007" chance="1.79"/><!-- Hard Balaur Scale -->
+			<item id="152014008" chance="2.84"/><!-- Hard Balaur Skin -->
+			<item id="152014009" chance="3.46"/><!-- Hot Balaur Blood Stain -->
+			<item id="152014010" chance="6.61"/><!-- Tender Balaur Meat -->
+			<item id="152014011" chance="1.79"/><!-- Solid Balaur Horn -->
+			<item id="152014012" chance="2.84"/><!-- Solid Balaur Scale -->
+			<item id="152014013" chance="6.6"/><!-- Solid Balaur Skin -->
+			<item id="152014014" chance="6.6"/><!-- Boiling Balaur Blood Stain -->
+			<item id="152014015" chance="6.6"/><!-- Fresh Balaur Meat -->
+			<item id="152010310" chance="6.6"/><!-- Thin Rawhide -->
+			<item id="152010311" chance="6.6"/><!-- Thick Rawhide -->
+			<item id="152010312" chance="6.6"/><!-- Strong Rawhide -->
+			<item id="152010313" chance="6.6"/><!-- Tough Rawhide -->
+			<item id="152010318" chance="3.45"/><!-- Firm Rawhide -->
+			<item id="152010314" chance="6.6"/><!-- Lesser Elemental Stone -->
+			<item id="152010315" chance="6.6"/><!-- Elemental Stone -->
+			<item id="152010316" chance="6.6"/><!-- Greater Elemental Stone -->
+			<item id="152010317" chance="6.6"/><!-- Major Elemental Stone -->
+			<item id="152010319" chance="2.83"/><!-- Fine Elemental Stone -->
 		</set>
 	</decomposable>
 	<decomposable item_id="188051582" only_one="true"><!-- Powerful Transformation OK Box -->
@@ -26413,6 +26417,15 @@
 	<decomposable item_id="188051787"><!-- [Event] Cat Weapon Bundle -->
 		<set>
 			<item id="100601089" chance="10"/><!-- Wild Kitter's Spellbook -->
+			<item id="101701061" chance="10"/><!-- Wild Kitter's Bow -->
+			<item id="100201186" chance="10"/><!-- Wild Kitter's Dagger -->
+			<item id="100101024" chance="10"/><!-- Wild Kitter's Mace -->
+			<item id="100501037" chance="10"/><!-- Wild Kitter's Jewel -->
+			<item id="101300980" chance="10"/><!-- Wild Kitter's Polearm -->
+			<item id="101501052" chance="10"/><!-- Wild Kitter's Staff -->
+			<item id="100001345" chance="10"/><!-- Wild Kitter's Sword -->
+			<item id="100901037" chance="10"/><!-- Wild Kitter's Greatsword -->
+			<item id="115001383" chance="10"/><!-- Wild Kitter's Shield -->
 		</set>
 	</decomposable>
 	<decomposable item_id="188051788"><!-- [Event] Chaos Gift Bundle -->
@@ -30499,32 +30512,32 @@
 	</decomposable>
 	<decomposable item_id="188052166"><!-- Token Pouch -->
 		<set race="ELYOS">
-			<item id="186000236" chance="3.34"/><!-- Blood Mark -->
-			<item id="186000236" count="2" chance="3.33"/><!-- Blood Mark -->
-			<item id="186000236" count="3" chance="3.33"/><!-- Blood Mark -->
-			<item id="186000238" chance="3.34"/><!-- Conqueror's Mark -->
-			<item id="186000238" count="2" chance="3.33"/><!-- Conqueror's Mark -->
-			<item id="186000238" count="3" chance="3.33"/><!-- Conqueror's Mark -->
-			<item id="186000146" chance="6.67"/><!-- Guestpetal -->
-			<item id="186000146" count="2" chance="6.67"/><!-- Guestpetal -->
-			<item id="186000146" count="3" chance="6.66"/><!-- Guestpetal -->
-			<item id="186000101" chance="3.34"/><!-- Radiant Token -->
-			<item id="186000101" count="2" chance="3.33"/><!-- Radiant Token -->
-			<item id="186000101" count="3" chance="3.33"/><!-- Radiant Token -->
+			<item id="186000236" chance="6.68"/><!-- Blood Mark -->
+			<item id="186000236" count="2" chance="6.66"/><!-- Blood Mark -->
+			<item id="186000236" count="3" chance="6.66"/><!-- Blood Mark -->
+			<item id="186000238" chance="6.68"/><!-- Conqueror's Mark -->
+			<item id="186000238" count="2" chance="6.66"/><!-- Conqueror's Mark -->
+			<item id="186000238" count="3" chance="6.66"/><!-- Conqueror's Mark -->
+			<item id="186000146" chance="13.34"/><!-- Guestpetal -->
+			<item id="186000146" count="2" chance="13.34"/><!-- Guestpetal -->
+			<item id="186000146" count="3" chance="13.32"/><!-- Guestpetal -->
+			<item id="186000101" chance="6.68"/><!-- Radiant Token -->
+			<item id="186000101" count="2" chance="6.66"/><!-- Radiant Token -->
+			<item id="186000101" count="3" chance="6.66"/><!-- Radiant Token -->
 		</set>
 		<set race="ASMODIANS">
-			<item id="186000236" chance="3.34"/><!-- Blood Mark -->
-			<item id="186000236" count="2" chance="3.33"/><!-- Blood Mark -->
-			<item id="186000236" count="3" chance="3.33"/><!-- Blood Mark -->
-			<item id="186000238" chance="3.34"/><!-- Conqueror's Mark -->
-			<item id="186000238" count="2" chance="3.33"/><!-- Conqueror's Mark -->
-			<item id="186000238" count="3" chance="3.33"/><!-- Conqueror's Mark -->
-			<item id="186000146" chance="6.67"/><!-- Guestpetal -->
-			<item id="186000146" count="2" chance="6.67"/><!-- Guestpetal -->
-			<item id="186000146" count="3" chance="6.66"/><!-- Guestpetal -->
-			<item id="186000104" chance="3.34"/><!-- Crusader Token -->
-			<item id="186000104" count="2" chance="3.33"/><!-- Crusader Token -->
-			<item id="186000104" count="3" chance="3.33"/><!-- Crusader Token -->
+			<item id="186000236" chance="6.68"/><!-- Blood Mark -->
+			<item id="186000236" count="2" chance="6.66"/><!-- Blood Mark -->
+			<item id="186000236" count="3" chance="6.66"/><!-- Blood Mark -->
+			<item id="186000238" chance="6.68"/><!-- Conqueror's Mark -->
+			<item id="186000238" count="2" chance="6.66"/><!-- Conqueror's Mark -->
+			<item id="186000238" count="3" chance="6.66"/><!-- Conqueror's Mark -->
+			<item id="186000146" chance="13.34"/><!-- Guestpetal -->
+			<item id="186000146" count="2" chance="13.34"/><!-- Guestpetal -->
+			<item id="186000146" count="3" chance="13.32"/><!-- Guestpetal -->
+			<item id="186000104" chance="6.68"/><!-- Crusader Token -->
+			<item id="186000104" count="2" chance="6.66"/><!-- Crusader Token -->
+			<item id="186000104" count="3" chance="6.66"/><!-- Crusader Token -->
 		</set>
 	</decomposable>
 	<decomposable item_id="188052167"><!-- Fairy Tail -->
@@ -49187,135 +49200,135 @@
 	</decomposable>
 	<decomposable item_id="188053033"><!-- Kunax's Equipment Box -->
 		<set player_classes="GLADIATOR">
-			<item id="100001683" chance="8"/><!-- Kunax's Sword -->
-			<item id="101301216" chance="8"/><!-- Kunax's Polearm -->
-			<item id="110601550" chance="12.44"/><!-- Kunax's Breastplate -->
-			<item id="113601496" chance="15.56"/><!-- Kunax's Greaves -->
-			<item id="112601495" chance="18.66"/><!-- Kunax's Shoulderplates -->
-			<item id="111601513" chance="18.66"/><!-- Kunax's Gauntlets -->
-			<item id="114601503" chance="6"/><!-- Kunax's Sabatons -->
-			<item id="125003999" chance="2.34"/><!-- Kunax's Helm -->
-			<item id="115001703" chance="2.34"/><!-- Kunax's Shield -->
-			<item id="121001373" chance="1.52"/><!-- Kunax's Opal Necklace -->
-			<item id="120001501" chance="1.92"/><!-- Kunax's Opal Earrings -->
-			<item id="122001642" chance="2.32"/><!-- Kunax's Opal Ring -->
+			<item id="100001683" chance="8.18"/><!-- Kunax's Sword -->
+			<item id="101301216" chance="8.18"/><!-- Kunax's Polearm -->
+			<item id="110601550" chance="12.73"/><!-- Kunax's Breastplate -->
+			<item id="113601496" chance="15.92"/><!-- Kunax's Greaves -->
+			<item id="112601495" chance="19.09"/><!-- Kunax's Shoulderplates -->
+			<item id="111601513" chance="19.09"/><!-- Kunax's Gauntlets -->
+			<item id="114601503" chance="6.14"/><!-- Kunax's Sabatons -->
+			<item id="125003999" chance="2.39"/><!-- Kunax's Helm -->
+			<item id="115001703" chance="2.39"/><!-- Kunax's Shield -->
+			<item id="121001373" chance="1.56"/><!-- Kunax's Opal Necklace -->
+			<item id="120001501" chance="1.96"/><!-- Kunax's Opal Earrings -->
+			<item id="122001642" chance="2.37"/><!-- Kunax's Opal Ring -->
 		</set>
 		<set player_classes="TEMPLAR">
-			<item id="100001683" chance="8"/><!-- Kunax's Sword -->
-			<item id="100901306" chance="8"/><!-- Kunax's Greatsword -->
-			<item id="110601550" chance="12.44"/><!-- Kunax's Breastplate -->
-			<item id="113601496" chance="15.56"/><!-- Kunax's Greaves -->
-			<item id="112601495" chance="18.66"/><!-- Kunax's Shoulderplates -->
-			<item id="111601513" chance="18.66"/><!-- Kunax's Gauntlets -->
-			<item id="114601503" chance="6"/><!-- Kunax's Sabatons -->
-			<item id="125003999" chance="2.34"/><!-- Kunax's Helm -->
-			<item id="115001703" chance="2.34"/><!-- Kunax's Shield -->
-			<item id="121001373" chance="1.52"/><!-- Kunax's Opal Necklace -->
-			<item id="120001501" chance="1.92"/><!-- Kunax's Opal Earrings -->
-			<item id="122001642" chance="2.32"/><!-- Kunax's Opal Ring -->
+			<item id="100001683" chance="8.18"/><!-- Kunax's Sword -->
+			<item id="100901306" chance="8.18"/><!-- Kunax's Greatsword -->
+			<item id="110601550" chance="12.73"/><!-- Kunax's Breastplate -->
+			<item id="113601496" chance="15.92"/><!-- Kunax's Greaves -->
+			<item id="112601495" chance="19.09"/><!-- Kunax's Shoulderplates -->
+			<item id="111601513" chance="19.09"/><!-- Kunax's Gauntlets -->
+			<item id="114601503" chance="6.14"/><!-- Kunax's Sabatons -->
+			<item id="125003999" chance="2.39"/><!-- Kunax's Helm -->
+			<item id="115001703" chance="2.39"/><!-- Kunax's Shield -->
+			<item id="121001373" chance="1.56"/><!-- Kunax's Opal Necklace -->
+			<item id="120001501" chance="1.96"/><!-- Kunax's Opal Earrings -->
+			<item id="122001642" chance="2.37"/><!-- Kunax's Opal Ring -->
 		</set>
 		<set player_classes="ASSASSIN">
-			<item id="100201456" chance="8"/><!-- Kunax's Dagger -->
-			<item id="100001683" chance="8"/><!-- Kunax's Sword -->
-			<item id="110301752" chance="12.44"/><!-- Kunax's Jerkin -->
-			<item id="113301721" chance="15.56"/><!-- Kunax's Breeches -->
-			<item id="112301629" chance="18.66"/><!-- Kunax's Shoulderguards -->
-			<item id="111301690" chance="18.66"/><!-- Kunax's Vambrace -->
-			<item id="114301758" chance="6"/><!-- Kunax's Boots -->
-			<item id="125004001" chance="4.68"/><!-- Kunax's Hat -->
-			<item id="121001373" chance="1.52"/><!-- Kunax's Opal Necklace -->
-			<item id="120001501" chance="1.92"/><!-- Kunax's Opal Earrings -->
-			<item id="122001642" chance="2.32"/><!-- Kunax's Opal Ring -->
+			<item id="100201456" chance="8.18"/><!-- Kunax's Dagger -->
+			<item id="100001683" chance="8.18"/><!-- Kunax's Sword -->
+			<item id="110301752" chance="12.73"/><!-- Kunax's Jerkin -->
+			<item id="113301721" chance="15.92"/><!-- Kunax's Breeches -->
+			<item id="112301629" chance="19.09"/><!-- Kunax's Shoulderguards -->
+			<item id="111301690" chance="19.09"/><!-- Kunax's Vambrace -->
+			<item id="114301758" chance="6.14"/><!-- Kunax's Boots -->
+			<item id="125004001" chance="4.79"/><!-- Kunax's Hat -->
+			<item id="121001373" chance="1.55"/><!-- Kunax's Opal Necklace -->
+			<item id="120001501" chance="1.96"/><!-- Kunax's Opal Earrings -->
+			<item id="122001642" chance="2.37"/><!-- Kunax's Opal Ring -->
 		</set>
 		<set player_classes="RANGER">
-			<item id="101701320" chance="8"/><!-- Kunax's Bow -->
-			<item id="110301752" chance="12.44"/><!-- Kunax's Jerkin -->
-			<item id="113301721" chance="15.56"/><!-- Kunax's Breeches -->
-			<item id="112301629" chance="18.66"/><!-- Kunax's Shoulderguards -->
-			<item id="111301690" chance="18.66"/><!-- Kunax's Vambrace -->
-			<item id="114301758" chance="6"/><!-- Kunax's Boots -->
-			<item id="125004001" chance="12.68"/><!-- Kunax's Hat -->
-			<item id="121001373" chance="1.52"/><!-- Kunax's Opal Necklace -->
-			<item id="120001501" chance="1.92"/><!-- Kunax's Opal Earrings -->
-			<item id="122001642" chance="2.32"/><!-- Kunax's Opal Ring -->
+			<item id="101701320" chance="8.18"/><!-- Kunax's Bow -->
+			<item id="110301752" chance="12.73"/><!-- Kunax's Jerkin -->
+			<item id="113301721" chance="15.92"/><!-- Kunax's Breeches -->
+			<item id="112301629" chance="19.09"/><!-- Kunax's Shoulderguards -->
+			<item id="111301690" chance="19.09"/><!-- Kunax's Vambrace -->
+			<item id="114301758" chance="6.14"/><!-- Kunax's Boots -->
+			<item id="125004001" chance="12.97"/><!-- Kunax's Hat -->
+			<item id="121001373" chance="1.55"/><!-- Kunax's Opal Necklace -->
+			<item id="120001501" chance="1.96"/><!-- Kunax's Opal Earrings -->
+			<item id="122001642" chance="2.37"/><!-- Kunax's Opal Ring -->
 		</set>
 		<set player_classes="GUNNER">
-			<item id="101801171" chance="8"/><!-- Kunax's Pistol -->
-			<item id="101901082" chance="8"/><!-- Kunax's Aethercannon -->
-			<item id="110301752" chance="12.44"/><!-- Kunax's Jerkin -->
-			<item id="113301721" chance="15.56"/><!-- Kunax's Breeches -->
-			<item id="112301629" chance="18.66"/><!-- Kunax's Shoulderguards -->
-			<item id="111301690" chance="18.66"/><!-- Kunax's Vambrace -->
-			<item id="114301758" chance="6"/><!-- Kunax's Boots -->
-			<item id="125004001" chance="4.68"/><!-- Kunax's Hat -->
-			<item id="121001374" chance="1.52"/><!-- Kunax's Nolan Necklace -->
-			<item id="120001502" chance="1.92"/><!-- Kunax's Nolan Earrings -->
-			<item id="122001643" chance="2.32"/><!-- Kunax's Nolan Ring -->
+			<item id="101801171" chance="8.18"/><!-- Kunax's Pistol -->
+			<item id="101901082" chance="8.18"/><!-- Kunax's Aethercannon -->
+			<item id="110301752" chance="12.73"/><!-- Kunax's Jerkin -->
+			<item id="113301721" chance="15.92"/><!-- Kunax's Breeches -->
+			<item id="112301629" chance="19.09"/><!-- Kunax's Shoulderguards -->
+			<item id="111301690" chance="19.09"/><!-- Kunax's Vambrace -->
+			<item id="114301758" chance="6.14"/><!-- Kunax's Boots -->
+			<item id="125004001" chance="4.79"/><!-- Kunax's Hat -->
+			<item id="121001374" chance="1.55"/><!-- Kunax's Nolan Necklace -->
+			<item id="120001502" chance="1.96"/><!-- Kunax's Nolan Earrings -->
+			<item id="122001643" chance="2.37"/><!-- Kunax's Nolan Ring -->
 		</set>
 		<set player_classes="CHANTER">
-			<item id="100101282" chance="8"/><!-- Kunax's Mace -->
-			<item id="101501305" chance="8"/><!-- Kunax's Staff -->
-			<item id="110551085" chance="12.44"/><!-- Kunax's Hauberk -->
-			<item id="113501662" chance="15.56"/><!-- Kunax's Chausses -->
-			<item id="112501583" chance="18.66"/><!-- Kunax's Spaulders -->
-			<item id="111501644" chance="18.66"/><!-- Kunax's Handguards -->
-			<item id="114501672" chance="6"/><!-- Kunax's Brogans -->
-			<item id="125004000" chance="2.34"/><!-- Kunax's Chain Helm -->
-			<item id="115001703" chance="2.34"/><!-- Kunax's Shield -->
-			<item id="121001373" chance="1.52"/><!-- Kunax's Opal Necklace -->
-			<item id="120001501" chance="1.92"/><!-- Kunax's Opal Earrings -->
-			<item id="122001642" chance="2.32"/><!-- Kunax's Opal Ring -->
+			<item id="100101282" chance="8.18"/><!-- Kunax's Mace -->
+			<item id="101501305" chance="8.18"/><!-- Kunax's Staff -->
+			<item id="110551085" chance="12.73"/><!-- Kunax's Hauberk -->
+			<item id="113501662" chance="15.92"/><!-- Kunax's Chausses -->
+			<item id="112501583" chance="19.09"/><!-- Kunax's Spaulders -->
+			<item id="111501644" chance="19.09"/><!-- Kunax's Handguards -->
+			<item id="114501672" chance="6.14"/><!-- Kunax's Brogans -->
+			<item id="125004000" chance="2.39"/><!-- Kunax's Chain Helm -->
+			<item id="115001703" chance="2.39"/><!-- Kunax's Shield -->
+			<item id="121001373" chance="1.56"/><!-- Kunax's Opal Necklace -->
+			<item id="120001501" chance="1.96"/><!-- Kunax's Opal Earrings -->
+			<item id="122001642" chance="2.37"/><!-- Kunax's Opal Ring -->
 		</set>
 		<set player_classes="CLERIC">
-			<item id="100101282" chance="8"/><!-- Kunax's Mace -->
-			<item id="101501305" chance="8"/><!-- Kunax's Staff -->
-			<item id="110551085" chance="12.44"/><!-- Kunax's Hauberk -->
-			<item id="113501662" chance="15.56"/><!-- Kunax's Chausses -->
-			<item id="112501583" chance="18.66"/><!-- Kunax's Spaulders -->
-			<item id="111501644" chance="18.66"/><!-- Kunax's Handguards -->
-			<item id="114501672" chance="6"/><!-- Kunax's Brogans -->
-			<item id="125004000" chance="2.34"/><!-- Kunax's Chain Helm -->
-			<item id="115001703" chance="2.34"/><!-- Kunax's Shield -->
-			<item id="121001374" chance="1.52"/><!-- Kunax's Nolan Necklace -->
-			<item id="120001502" chance="1.92"/><!-- Kunax's Nolan Earrings -->
-			<item id="122001643" chance="2.32"/><!-- Kunax's Nolan Ring -->
+			<item id="100101282" chance="8.18"/><!-- Kunax's Mace -->
+			<item id="101501305" chance="8.18"/><!-- Kunax's Staff -->
+			<item id="110551085" chance="12.73"/><!-- Kunax's Hauberk -->
+			<item id="113501662" chance="15.92"/><!-- Kunax's Chausses -->
+			<item id="112501583" chance="19.09"/><!-- Kunax's Spaulders -->
+			<item id="111501644" chance="19.09"/><!-- Kunax's Handguards -->
+			<item id="114501672" chance="6.14"/><!-- Kunax's Brogans -->
+			<item id="125004000" chance="2.39"/><!-- Kunax's Chain Helm -->
+			<item id="115001703" chance="2.39"/><!-- Kunax's Shield -->
+			<item id="121001374" chance="1.56"/><!-- Kunax's Nolan Necklace -->
+			<item id="120001502" chance="1.96"/><!-- Kunax's Nolan Earrings -->
+			<item id="122001643" chance="2.37"/><!-- Kunax's Nolan Ring -->
 		</set>
 		<set player_classes="RIDER">
-			<item id="102100970" chance="8"/><!-- Kunax's Cipher-Blade -->
-			<item id="110551085" chance="12.44"/><!-- Kunax's Hauberk -->
-			<item id="113501662" chance="15.56"/><!-- Kunax's Chausses -->
-			<item id="112501583" chance="18.66"/><!-- Kunax's Spaulders -->
-			<item id="111501644" chance="18.66"/><!-- Kunax's Handguards -->
-			<item id="114501672" chance="6"/><!-- Kunax's Brogans -->
-			<item id="125004000" chance="12.68"/><!-- Kunax's Chain Helm -->
-			<item id="121001374" chance="1.52"/><!-- Kunax's Nolan Necklace -->
-			<item id="120001502" chance="1.92"/><!-- Kunax's Nolan Earrings -->
-			<item id="122001643" chance="2.32"/><!-- Kunax's Nolan Ring -->
+			<item id="102100970" chance="8.18"/><!-- Kunax's Cipher-Blade -->
+			<item id="110551085" chance="12.73"/><!-- Kunax's Hauberk -->
+			<item id="113501662" chance="15.92"/><!-- Kunax's Chausses -->
+			<item id="112501583" chance="19.09"/><!-- Kunax's Spaulders -->
+			<item id="111501644" chance="19.09"/><!-- Kunax's Handguards -->
+			<item id="114501672" chance="6.14"/><!-- Kunax's Brogans -->
+			<item id="125004000" chance="12.97"/><!-- Kunax's Chain Helm -->
+			<item id="121001374" chance="1.55"/><!-- Kunax's Nolan Necklace -->
+			<item id="120001502" chance="1.96"/><!-- Kunax's Nolan Earrings -->
+			<item id="122001643" chance="2.37"/><!-- Kunax's Nolan Ring -->
 		</set>
 		<set player_classes="SORCERER SPIRIT_MASTER">
-			<item id="100601379" chance="8"/><!-- Kunax's Spellbook -->
-			<item id="100501269" chance="8"/><!-- Kunax's Orb -->
-			<item id="110101755" chance="12.44"/><!-- Kunax's Tunic -->
-			<item id="113101592" chance="15.56"/><!-- Kunax's Leggings -->
-			<item id="112101530" chance="18.66"/><!-- Kunax's Pauldrons -->
-			<item id="111101580" chance="18.66"/><!-- Kunax's Gloves -->
-			<item id="114101626" chance="6"/><!-- Kunax's Shoes -->
-			<item id="125004002" chance="4.68"/><!-- Kunax's Headband -->
-			<item id="121001374" chance="1.52"/><!-- Kunax's Nolan Necklace -->
-			<item id="120001502" chance="1.92"/><!-- Kunax's Nolan Earrings -->
-			<item id="122001643" chance="2.32"/><!-- Kunax's Nolan Ring -->
+			<item id="100601379" chance="8.18"/><!-- Kunax's Spellbook -->
+			<item id="100501269" chance="8.18"/><!-- Kunax's Orb -->
+			<item id="110101755" chance="12.73"/><!-- Kunax's Tunic -->
+			<item id="113101592" chance="15.92"/><!-- Kunax's Leggings -->
+			<item id="112101530" chance="19.09"/><!-- Kunax's Pauldrons -->
+			<item id="111101580" chance="19.09"/><!-- Kunax's Gloves -->
+			<item id="114101626" chance="6.14"/><!-- Kunax's Shoes -->
+			<item id="125004002" chance="4.79"/><!-- Kunax's Headband -->
+			<item id="121001374" chance="1.55"/><!-- Kunax's Nolan Necklace -->
+			<item id="120001502" chance="1.96"/><!-- Kunax's Nolan Earrings -->
+			<item id="122001643" chance="2.37"/><!-- Kunax's Nolan Ring -->
 		</set>
 		<set player_classes="BARD">
-			<item id="102001198" chance="8"/><!-- Kunax's Harp -->
-			<item id="110101755" chance="12.44"/><!-- Kunax's Tunic -->
-			<item id="113101592" chance="15.56"/><!-- Kunax's Leggings -->
-			<item id="112101530" chance="18.66"/><!-- Kunax's Pauldrons -->
-			<item id="111101580" chance="18.66"/><!-- Kunax's Gloves -->
-			<item id="114101626" chance="6"/><!-- Kunax's Shoes -->
-			<item id="125004002" chance="12.68"/><!-- Kunax's Headband -->
-			<item id="121001374" chance="1.52"/><!-- Kunax's Nolan Necklace -->
-			<item id="120001502" chance="1.92"/><!-- Kunax's Nolan Earrings -->
-			<item id="122001643" chance="2.32"/><!-- Kunax's Nolan Ring -->
+			<item id="102001198" chance="8.18"/><!-- Kunax's Harp -->
+			<item id="110101755" chance="12.73"/><!-- Kunax's Tunic -->
+			<item id="113101592" chance="15.92"/><!-- Kunax's Leggings -->
+			<item id="112101530" chance="19.09"/><!-- Kunax's Pauldrons -->
+			<item id="111101580" chance="19.09"/><!-- Kunax's Gloves -->
+			<item id="114101626" chance="6.14"/><!-- Kunax's Shoes -->
+			<item id="125004002" chance="12.97"/><!-- Kunax's Headband -->
+			<item id="121001374" chance="1.55"/><!-- Kunax's Nolan Necklace -->
+			<item id="120001502" chance="1.96"/><!-- Kunax's Nolan Earrings -->
+			<item id="122001643" chance="2.37"/><!-- Kunax's Nolan Ring -->
 		</set>
 	</decomposable>
 	<decomposable item_id="188053034" selectable="true"><!-- Spatalos' Armor Box -->
@@ -50031,7 +50044,7 @@
 	</decomposable>
 	<decomposable item_id="188053091"><!-- Modor's Curiosity Box -->
 		<set>
-			<item id="188053099" chance="70"/><!-- Pure Modor's Equipment Crux Box -->
+			<item id="188053099"/><!-- Pure Modor's Equipment Crux Box -->
 		</set>
 		<set chance="6.7" player_classes="TEMPLAR">
 			<item id="125004076"/><!-- Pure Lunatic Modor's Templar Helm -->
@@ -50109,7 +50122,7 @@
 	</decomposable>
 	<decomposable item_id="188053093"><!-- Dynatoum's Curiosity Box -->
 		<set>
-			<item id="188053100" chance="70"/><!-- Pure Dynatoum's Equipment Crux Box -->
+			<item id="188053100"/><!-- Pure Dynatoum's Equipment Crux Box -->
 		</set>
 		<set chance="6.7" player_classes="TEMPLAR">
 			<item id="125004085"/><!-- Pure Dynatoum's Radiant Helm -->
