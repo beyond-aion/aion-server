@@ -23116,54 +23116,50 @@
 	<decomposable item_id="188051579"><!-- Heavy Hidden Bundle -->
 		<set>
 			<item id="152000207" chance="18.15"/><!-- Orichalcum Ore -->
-			<item id="152000207" chance="3.35"/><!-- Orichalcum Ore -->
-			<item id="152000207" chance="2.94"/><!-- Orichalcum Ore -->
-			<item id="152000207" chance="2.89"/><!-- Orichalcum Ore -->
+			<item id="152000208" chance="3.35"/><!-- Greater Orichalcum Ore -->
+			<item id="152000209" chance="2.94"/><!-- Pure Orichalcum Ore -->
+			<item id="152000213" chance="2.89"/><!-- Brilliant Orichalcum Ore -->
 			<item id="152000107" chance="18.15"/><!-- Mithril Ore -->
-			<item id="152000107" chance="3.35"/><!-- Mithril Ore -->
-			<item id="152000107" chance="2.89"/><!-- Mithril Ore -->
-			<item id="152000107" chance="2.87"/><!-- Mithril Ore -->
+			<item id="152000108" chance="3.35"/><!-- Greater Mithril Ore -->
+			<item id="152000109" chance="2.89"/><!-- Pure Mithril Ore -->
+			<item id="152000112" chance="2.87"/><!-- Brilliant Mithril Ore -->
 			<item id="152000313" chance="2.99"/><!-- Ruby Ore -->
-			<item id="152000313" chance="2.94"/><!-- Ruby Ore -->
+			<item id="152000314" chance="2.94"/><!-- Big Ruby Ore -->
 			<item id="152000315" chance="3.35"/><!-- Sapphire Ore -->
-			<item id="152000315" chance="2.93"/><!-- Sapphire Ore -->
+			<item id="152000316" chance="2.93"/><!-- Big Sapphire Ore -->
 			<item id="152000317" chance="2.98"/><!-- Diamond Ore -->
-			<item id="152000317" chance="2.93"/><!-- Diamond Ore -->
+			<item id="152000318" chance="2.93"/><!-- Rich Diamond Ore -->
 			<item id="152000907" chance="18.16"/><!-- Aether -->
-			<item id="152000907" chance="3.34"/><!-- Aether -->
-			<item id="152000907" chance="2.93"/><!-- Aether -->
-			<item id="152000907" chance="2.86"/><!-- Aether -->
-			<item id="152000907" chance="5.55"/><!-- Aether -->
-			<item id="152000907" chance="5.55"/><!-- Aether -->
-			<item id="152000907" chance="5.55"/><!-- Aether -->
+			<item id="152000908" chance="3.34"/><!-- Greater Aether -->
+			<item id="152000909" chance="2.93"/><!-- Pure Aether -->
+			<item id="152000910" chance="2.86"/><!-- Brilliant Aether -->
 		</set>
 	</decomposable>
 	<decomposable item_id="188051580"><!-- Large Hidden Bundle -->
 		<set>
 			<item id="152011006" chance="1.46"/><!-- Fine Weapon Flux -->
-			<item id="152011006" chance="0.93"/><!-- Fine Weapon Flux -->
-			<item id="152011006" chance="0.72"/><!-- Fine Weapon Flux -->
-			<item id="152011008" chance="5.84"/><!-- Premium Weapon Flux -->
-			<item id="152011008" chance="1.47"/><!-- Premium Weapon Flux -->
-			<item id="152011008" chance="1.47"/><!-- Premium Weapon Flux -->
-			<item id="152011008" chance="1.47"/><!-- Premium Weapon Flux -->
+			<item id="152011012" chance="0.93"/><!-- Worthy Fine Weapon Flux -->
+			<item id="152011016" chance="0.72"/><!-- Expert Fine Weapon Flux -->
+			<item id="152011007" chance="5.84"/><!-- Superb Weapon Flux -->
+			<item id="152011013" chance="1.47"/><!-- Worthy Superb Weapon Flux -->
+			<item id="152011017" chance="1.47"/><!-- Expert Superb Weapon Flux -->
+			<item id="152011059" chance="1.47"/><!-- Master Superb Weapon Flux -->
 			<item id="152011008" chance="9.11"/><!-- Premium Weapon Flux -->
-			<item id="152011008" chance="9.11"/><!-- Premium Weapon Flux -->
-			<item id="152011008" chance="5.84"/><!-- Premium Weapon Flux -->
-			<item id="152011008" chance="1.47"/><!-- Premium Weapon Flux -->
+			<item id="152011014" chance="9.11"/><!-- Worthy Premium Weapon Flux -->
+			<item id="152011018" chance="5.84"/><!-- Expert Premium Weapon Flux -->
+			<item id="152011060" chance="1.47"/><!-- Master Premium Weapon Flux -->
 			<item id="152013002" chance="1.47"/><!-- Wrathful Will -->
-			<item id="152013002" chance="1.47"/><!-- Wrathful Will -->
+			<item id="152013005" chance="1.47"/><!-- Maddened Wrathful Will -->
 			<item id="152013008" chance="9.11"/><!-- Terrifying Will -->
-			<item id="152013008" chance="0.93"/><!-- Terrifying Will -->
+			<item id="152013011" chance="0.93"/><!-- Berserk Terrifying Will -->
 			<item id="152013014" chance="9.11"/><!-- Violent Will -->
-			<item id="152013014" chance="9.11"/><!-- Violent Will -->
+			<item id="152013017" chance="9.11"/><!-- Fatal Violent Will -->
 			<item id="152013003" chance="0.72"/><!-- Wrathful Ego -->
-			<item id="152013003" chance="0.93"/><!-- Wrathful Ego -->
+			<item id="152013006" chance="0.93"/><!-- Maddened Wrathful Ego -->
 			<item id="152013009" chance="9.11"/><!-- Terrifying Ego -->
-			<item id="152013009" chance="0.93"/><!-- Terrifying Ego -->
+			<item id="152013012" chance="0.93"/><!-- Berserk Terrifying Ego -->
 			<item id="152013015" chance="9.11"/><!-- Violent Ego -->
-			<item id="152013015" chance="9.11"/><!-- Violent Ego -->
-			<item id="152013015" chance="4.34"/><!-- Violent Ego -->
+			<item id="152013018" chance="9.11"/><!-- Fatal Violent Ego -->
 		</set>
 	</decomposable>
 	<decomposable item_id="188051581"><!-- Hidden Bundle -->
@@ -42529,9 +42525,9 @@
 			<item id="167000518" chance="5.5"/><!-- Manastone: Attack +5 -->
 			<item id="167000359" chance="11.5"/><!-- Manastone: Magic Boost +20 -->
 			<item id="167000519" chance="5.5"/><!-- Manastone: Magic Boost +25 -->
-			<item id="186000231" chance="7"/><!-- Ceramium Coin, no count in 4.6/5.8 retail data -->
-			<item id="186000231" chance="4"/><!-- Ceramium Coin, no count in 4.6/5.8 retail data -->
-			<item id="186000231" chance="3"/><!-- Ceramium Coin, no count in 4.6/5.8 retail data -->
+			<item id="186000231" count="3" chance="7"/><!-- Ceramium Coin -->
+			<item id="186000231" count="7" chance="4"/><!-- Ceramium Coin -->
+			<item id="186000231" count="10" chance="3"/><!-- Ceramium Coin -->
 			<item id="186000030" chance="6"/><!-- Gold Medal -->
 			<item id="162000006" count="5" chance="23"/><!-- Major Life Potion -->
 			<item id="162000011" count="5" chance="23"/><!-- Major Mana Potion -->
@@ -42580,9 +42576,9 @@
 			<item id="167000518" chance="5.5"/><!-- Manastone: Attack +5 -->
 			<item id="167000359" chance="11.5"/><!-- Manastone: Magic Boost +20 -->
 			<item id="167000519" chance="5.5"/><!-- Manastone: Magic Boost +25 -->
-			<item id="186000231" chance="7"/><!-- Ceramium Coin, no count in 4.6/5.8 retail data -->
-			<item id="186000231" chance="4"/><!-- Ceramium Coin, no count in 4.6/5.8 retail data -->
-			<item id="186000231" chance="3"/><!-- Ceramium Coin, no count in 4.6/5.8 retail data -->
+			<item id="186000231" count="3" chance="7"/><!-- Ceramium Coin -->
+			<item id="186000231" count="7" chance="4"/><!-- Ceramium Coin -->
+			<item id="186000231" count="10" chance="3"/><!-- Ceramium Coin -->
 			<item id="186000030" chance="6"/><!-- Gold Medal -->
 			<item id="162000006" count="5" chance="23"/><!-- Major Life Potion -->
 			<item id="162000011" count="5" chance="23"/><!-- Major Mana Potion -->
