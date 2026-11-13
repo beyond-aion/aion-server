@@ -85,6 +85,7 @@ public class IdianStone extends ItemStone {
 		} else {
 			polishCharge -= result;
 		}
+		setPersistentState(PersistentState.UPDATE_REQUIRED);
 		if (polishCharge <= 300000 && polishCharge + result > 300000) { // we just dropped to or below 300k
 			PacketSendUtility.sendPacket(player, new SM_INVENTORY_UPDATE_ITEM(player, item, ItemPacketService.ItemUpdateType.POLISH_CHARGE));
 		} else if (polishCharge < 0) {

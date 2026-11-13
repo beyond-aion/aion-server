@@ -23,6 +23,7 @@ import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.custom.instance.CustomInstanceService;
 import com.aionemu.gameserver.custom.pvpmap.PvpMapService;
+import com.aionemu.gameserver.dao.InventoryDAO;
 import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.dataholders.StaticData;
@@ -197,6 +198,7 @@ public class GameServer {
 
 	private static void initDatabase() {
 		DatabaseFactory.init();
+		InventoryDAO.deleteAllRepurchaseItems(); // no buy-back list survives a restart
 		PlayerDAO.setAllPlayersOffline();
 		if (CleaningConfig.CLEANING_ENABLE)
 			DatabaseCleaningService.deletePlayersOnInactiveAccounts();

@@ -12,6 +12,7 @@ import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Equipment;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.items.IdianStone;
 import com.aionemu.gameserver.model.items.ManaStone;
 import com.aionemu.gameserver.model.items.storage.Storage;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
@@ -149,7 +150,10 @@ public class ItemService {
 		newItem.setSoulBound(sourceItem.isSoulBound());
 		newItem.setTuneCount(sourceItem.getTuneCount());
 		newItem.setBonusStats(sourceItem.getBonusStatsId(), true);
-		newItem.setIdianStone(sourceItem.getIdianStone());
+		IdianStone idianStone = sourceItem.getIdianStone();
+		if (idianStone != null) // a new item has its own object id, so it needs its own database row and may not share the source stone
+			newItem.setIdianStone(new IdianStone(idianStone.getItemId(), PersistentState.NEW, newItem, idianStone.getPolishNumber(),
+				idianStone.getPolishCharge()));
 		newItem.setItemColor(sourceItem.getItemColor());
 		newItem.setEnchantBonus(sourceItem.getEnchantBonus());
 		newItem.setItemSkinTemplate(sourceItem.getItemSkinTemplate());

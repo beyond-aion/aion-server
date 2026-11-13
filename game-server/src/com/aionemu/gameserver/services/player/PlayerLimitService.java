@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.services.player;
 
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.LongPredicate;
 
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.model.SellLimit;
@@ -14,37 +15,29 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class PlayerLimitService {
 
-	private static ConcurrentHashMap<Integer, Long> sellLimit = new ConcurrentHashMap<>();
+	private static final ConcurrentHashMap<Integer, Long> sellLimit = new ConcurrentHashMap<>();
 
-	/**
-	 * @return The number of items that were subtracted from the sell limit or 0 if limit is reached and did not change.
-	 */
-	public static long updateSellLimit(Player player, final long itemPrice, final long itemCount) {
-		if (!CustomConfig.LIMITS_ENABLED || itemPrice == 0)
-			return itemCount;
-
-		int accountId = player.getAccount().getId();
-		Long limit = sellLimit.get(accountId);
-		if (limit == null) {
-			limit = SellLimit.getSellLimit(player);
-			sellLimit.putIfAbsent(accountId, limit);
-		}
-
+	public static boolean sellWithinLimit(Player player, long itemPrice, long itemCount, LongPredicate sell) {
 		if (itemPrice < 0 || itemCount <= 0)
-			return 0;
+			return false;
+		if (!CustomConfig.LIMITS_ENABLED || itemPrice == 0)
+			return sell.test(itemCount);
 
-		long possibleCount = Math.max(0, limit / itemPrice);
-		if (CustomConfig.LIMITS_ENABLE_DYNAMIC_CAP && possibleCount < itemCount)
-			possibleCount += 1;
-
-		if (possibleCount == 0 || limit == 0) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DAY_CANNOT_SELL_NPC(limit));
-			return 0;
-		} else {
+		synchronized (player.getAccount()) {
+			int accountId = player.getAccount().getId();
+			long limit = sellLimit.computeIfAbsent(accountId, id -> SellLimit.getSellLimit(player));
+			long possibleCount = Math.max(0, limit / itemPrice);
+			if (CustomConfig.LIMITS_ENABLE_DYNAMIC_CAP && possibleCount < itemCount)
+				possibleCount++;
+			if (possibleCount == 0 || limit == 0) {
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DAY_CANNOT_SELL_NPC(limit));
+				return false;
+			}
 			long useCount = Math.min(possibleCount, itemCount);
-			limit -= Math.min(limit, itemPrice * useCount);
-			sellLimit.put(accountId, limit);
-			return useCount;
+			if (!sell.test(useCount))
+				return false;
+			sellLimit.replace(accountId, limit, useCount > limit / itemPrice ? 0 : limit - itemPrice * useCount);
+			return true;
 		}
 	}
 

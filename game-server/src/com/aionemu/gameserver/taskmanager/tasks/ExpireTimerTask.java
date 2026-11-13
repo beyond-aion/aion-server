@@ -43,6 +43,10 @@ public class ExpireTimerTask extends AbstractPeriodicTaskManager {
 		expirables.values().removeIf(owner -> player.equals(owner));
 	}
 
+	public void unregisterExpirable(Expirable expirable, Player player) {
+		expirables.remove(expirable, player);
+	}
+
 	@Override
 	public void run() {
 		int timeNow = (int) (System.currentTimeMillis() / 1000);
@@ -53,7 +57,7 @@ public class ExpireTimerTask extends AbstractPeriodicTaskManager {
 			int remainingSeconds = expirable.getExpireTime() - timeNow;
 			if (remainingSeconds < 0 && expirable.canExpireNow()) {
 				expirable.onExpire(player);
-				i.remove();
+				unregisterExpirable(expirable, player);
 			} else {
 				switch (remainingSeconds) {
 					case 1800:
