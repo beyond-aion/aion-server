@@ -868295,37 +868295,37 @@
 	</item_template>
 	<item_template id="170195145" name="[Employment Contract] Spring Camp General Goods Merchant" level="1" cName="item_Housing_Camping_merchant_D_01" mask="20552" quality="COMMON" price="5" desc="846712" activate_target="STANDALONE" activate_count="1000">
 		<actions>
-			<houseobject id="3195143"/>
+			<houseobject id="3195127"/>
 		</actions>
 		<uselimits usedelayid="91"/>
 	</item_template>
 	<item_template id="170195146" name="[Employment Contract] Summer Camp General Goods Merchant" level="1" cName="item_Housing_Camping_merchant_D_02" mask="20552" quality="COMMON" price="5" desc="846713" activate_target="STANDALONE" activate_count="1000">
 		<actions>
-			<houseobject id="3195144"/>
+			<houseobject id="3195128"/>
 		</actions>
 		<uselimits usedelayid="91"/>
 	</item_template>
 	<item_template id="170195147" name="[Employment Contract] Fall Camp General Goods Merchant" level="1" cName="item_Housing_Camping_merchant_D_03" mask="20552" quality="COMMON" price="5" desc="846714" activate_target="STANDALONE" activate_count="1000">
 		<actions>
-			<houseobject id="3195145"/>
+			<houseobject id="3195129"/>
 		</actions>
 		<uselimits usedelayid="91"/>
 	</item_template>
 	<item_template id="170195148" name="[Employment Contract] Winter Camp General Goods Merchant" level="1" cName="item_Housing_Camping_merchant_D_04" mask="20552" quality="COMMON" price="5" desc="846715" activate_target="STANDALONE" activate_count="1000">
 		<actions>
-			<houseobject id="3195146"/>
+			<houseobject id="3195130"/>
 		</actions>
 		<uselimits usedelayid="91"/>
 	</item_template>
 	<item_template id="170195149" name="[Employment Contract] Dancing General Goods Merchant" level="1" cName="item_Housing_Nclub_merchant_D" mask="20552" quality="COMMON" price="5" desc="846864" activate_target="STANDALONE" activate_count="1000">
 		<actions>
-			<houseobject id="3195147"/>
+			<houseobject id="3195137"/>
 		</actions>
 		<uselimits usedelayid="91"/>
 	</item_template>
 	<item_template id="170195150" name="[Employment Contract] Friendly General Goods Merchant" level="1" cName="item_Housing_Nclub_merchant_D_01" mask="20552" quality="COMMON" price="5" desc="847596" activate_target="STANDALONE" activate_count="1000">
 		<actions>
-			<houseobject id="3195148"/>
+			<houseobject id="3195139"/>
 		</actions>
 		<uselimits usedelayid="91"/>
 	</item_template>

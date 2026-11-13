@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:include schemaLocation="global_types.xsd"/>
 	<xs:element name="npc_trade_list">
 		<xs:complexType>
 			<xs:sequence>
@@ -14,6 +15,7 @@
 			<xs:element name="tradelist" minOccurs="0" maxOccurs="unbounded">
 				<xs:complexType>
 					<xs:attribute name="id" type="xs:int"/>
+					<xs:attribute name="race" type="Race"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>

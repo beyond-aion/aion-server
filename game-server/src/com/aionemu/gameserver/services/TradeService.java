@@ -21,6 +21,7 @@ import com.aionemu.gameserver.model.templates.item.AcquisitionType;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.model.templates.item.TradeinItem;
 import com.aionemu.gameserver.model.templates.tradelist.TradeListTemplate;
+import com.aionemu.gameserver.model.templates.tradelist.TradeListTemplate.TradeTab;
 import com.aionemu.gameserver.model.templates.tradelist.TradeNpcType;
 import com.aionemu.gameserver.model.trade.TradeItem;
 import com.aionemu.gameserver.model.trade.TradeList;
@@ -47,14 +48,15 @@ public class TradeService {
 	private static final GoodsListData goodsListData = DataManager.GOODSLIST_DATA;
 
 	public static List<Integer> getTradeListTabIds(TradeListTemplate tradeListTemplate, Player player) {
-		List<Integer> tradeTabIds = tradeListTemplate.getTradeTabIds();
 		int legionLevel = player.getLegion() == null ? 0 : player.getLegion().getLegionLevel();
 		List<Integer> filteredTradeTabIds = new ArrayList<>();
-		for (Integer tradeTabId : tradeTabIds) {
-			GoodsList goodsList = goodsListData.getGoodsListById(tradeTabId);
+		for (TradeTab tradeTab : tradeListTemplate.getTradeTabs()) {
+			if (!tradeTab.isAvailableFor(player.getRace()))
+				continue;
+			GoodsList goodsList = goodsListData.getGoodsListById(tradeTab.getId());
 			if (goodsList == null || goodsList.getLegionLevel() > legionLevel)
 				continue;
-			filteredTradeTabIds.add(tradeTabId);
+			filteredTradeTabIds.add(tradeTab.getId());
 		}
 		return filteredTradeTabIds;
 	}
