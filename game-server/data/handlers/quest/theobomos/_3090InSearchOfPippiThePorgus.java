@@ -54,12 +54,16 @@ public class _3090InSearchOfPippiThePorgus extends AbstractQuestHandler {
 				} else if (dialogActionId == SETPRO1) {
 					return defaultCloseDialog(env, 0, 1);
 				} else if (dialogActionId == SETPRO3) {
-					if (player.getInventory().getKinah() >= 10000) {
-						giveQuestItem(env, 182208050, 1);
-						player.getInventory().decreaseKinah(10000);
+					if (qs.getQuestVarById(0) == 2) {
+						if (!player.getInventory().tryDecreaseKinah(10000))
+							return sendQuestDialog(env, 1779);
+						if (!giveQuestItem(env, 182208050, 1)) {
+							player.getInventory().increaseKinah(10000); // the item did not fit, give the fee back
+							return true;
+						}
 						return defaultCloseDialog(env, 2, 3);
-					} else
-						return sendQuestDialog(env, 1779);
+					}
+					return false;
 				} else if (dialogActionId == SELECT3_2) {
 					return sendQuestDialog(env, 1779);
 				}

@@ -51,11 +51,15 @@ public class _11057StanisSecretOrder extends AbstractQuestHandler {
 				} else if (dialogActionId == SELECT4) {
 					return sendQuestDialog(env, 2034);
 				} else if (dialogActionId == SELECT_QUEST_REWARD) {
-					if (player.getInventory().getKinah() >= 15000000) {
-						player.getInventory().decreaseKinah(15000000);
+					// the fee is the quest's kinah collect item: check it when the window opens, take it only when the reward is selected
+					if (QuestService.collectItemCheck(env, false))
 						return sendQuestDialog(env, 5);
-					} else
+					else
 						return sendQuestDialog(env, 3739);
+				} else if (dialogActionId >= SELECTED_QUEST_REWARD1 && dialogActionId <= SELECTED_QUEST_NOREWARD) {
+					if (!QuestService.collectItemCheck(env, true))
+						return sendQuestDialog(env, 3739);
+					return sendQuestEndDialog(env);
 				} else
 					return sendQuestEndDialog(env);
 			}
