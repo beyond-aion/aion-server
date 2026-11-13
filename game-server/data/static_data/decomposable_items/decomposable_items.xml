@@ -59970,16 +59970,16 @@
 			<item id="166100023" count="100" chance="5"/><!-- [Stamp] High Grade Enchanting Supplement (Mythic) -->
 		</set>
 	</decomposable>
-	<decomposable item_id="188053422"><!-- [Stamp] Anniversary Consumables Box -->
+	<decomposable item_id="188053422" selectable="true"><!-- [Stamp] Anniversary Consumables Box -->
 		<set>
-			<item id="188053415" chance="12.5"/><!-- [Stamp] Noble Illusion Godstone Box, no count in 4.6/5.8 retail data -->
-			<item id="188053417" chance="12.5"/><!-- [Stamp] Noble Ancient Manastone Box, no count in 4.6/5.8 retail data -->
-			<item id="188053419" chance="12.5"/><!-- [Stamp] Noble Composite Manastone Box, no count in 4.6/5.8 retail data -->
-			<item id="188053420" chance="12.5"/><!-- [Stamp] Noble Manastone Pouch, no count in 4.6/5.8 retail data -->
-			<item id="166030008" chance="12.5"/><!-- [Stamp] Tempering Solution (7 days), no count in 4.6/5.8 retail data -->
-			<item id="166150026" chance="12.5"/><!-- [Stamp] Greater Felicitous Socketing (Heroic), no count in 4.6/5.8 retail data -->
-			<item id="166150027" chance="12.5"/><!-- [Stamp] Greater Felicitous Socketing (Mythic), no count in 4.6/5.8 retail data -->
-			<item id="186000242" chance="12.5"/><!-- Ceramium Medal, no count in 4.6/5.8 retail data -->
+			<item id="188053415"/><!-- [Stamp] Noble Illusion Godstone Box, no count in 4.6/5.8 retail data -->
+			<item id="188053417"/><!-- [Stamp] Noble Ancient Manastone Box, no count in 4.6/5.8 retail data -->
+			<item id="188053419"/><!-- [Stamp] Noble Composite Manastone Box, no count in 4.6/5.8 retail data -->
+			<item id="188053420"/><!-- [Stamp] Noble Manastone Pouch, no count in 4.6/5.8 retail data -->
+			<item id="166030008"/><!-- [Stamp] Tempering Solution (7 days), no count in 4.6/5.8 retail data -->
+			<item id="166150026"/><!-- [Stamp] Greater Felicitous Socketing (Heroic), no count in 4.6/5.8 retail data -->
+			<item id="166150027"/><!-- [Stamp] Greater Felicitous Socketing (Mythic), no count in 4.6/5.8 retail data -->
+			<item id="186000242"/><!-- Ceramium Medal, no count in 4.6/5.8 retail data -->
 		</set>
 	</decomposable>
 	<decomposable item_id="188053423"><!-- [Stamp] Anniversary Gift Box -->
