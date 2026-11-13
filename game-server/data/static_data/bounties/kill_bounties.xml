@@ -41,6 +41,7 @@
 	</kill_bounty>
 	<kill_bounty type="SEASONAL_KILLS" kill_count="40">
 		<bounty item_id="166030005" count="5" /><!-- Tempering Solution -->
+		<bounty item_id="188053004" count="1" /><!-- [Event] Dragon Lord's Weapon Chest -->
 	</kill_bounty>
 	<kill_bounty type="SEASONAL_KILLS" kill_count="50">
 		<bounty item_id="186000051" count="3" /><!-- Major Ancient Crown -->
