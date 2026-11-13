@@ -39,10 +39,22 @@ public class Logging {
 	}
 
 	public static String formatStartupMessage(String server, long startTimeNanos) {
+		return formatStartupMessage(server, startTimeNanos, System.nanoTime(), ManagementFactory.getRuntimeMXBean().getUptime(), 0);
+	}
+
+	/**
+	 * @param startedNanos
+	 *          {@link System#nanoTime()} when the server was started
+	 * @param uptimeMillis
+	 *          process uptime when the server was started
+	 * @param gcMillis
+	 *          duration of an explicit GC after the start, which is not part of the start time
+	 */
+	public static String formatStartupMessage(String server, long startTimeNanos, long startedNanos, long uptimeMillis, long gcMillis) {
 		DecimalFormat df = new DecimalFormat("0.0##", DecimalFormatSymbols.getInstance(Locale.US));
-		float startTime = Duration.ofNanos(System.nanoTime() - startTimeNanos).toMillis() / 1000f;
-		float processUptime = ManagementFactory.getRuntimeMXBean().getUptime() / 1000f;
-		return "%s started in %s seconds (process running for %s)".formatted(server, df.format(startTime), df.format(processUptime));
+		float startTime = Duration.ofNanos(startedNanos - startTimeNanos).toMillis() / 1000f;
+		String gcTime = gcMillis > 0 ? "+" + gcMillis + " ms GC time, " : "";
+		return "%s started in %s seconds (%sprocess running for %s)".formatted(server, df.format(startTime), gcTime, df.format(uptimeMillis / 1000f));
 	}
 
 	private static void archiveLogs() {
