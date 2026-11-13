@@ -185,16 +185,20 @@ public class GameServer {
 		CustomInstanceService.getInstance();
 		DataManager.waitForValidationToFinishAndShutdownOnFail();
 
-		VersionInfo.logAll(versionInfo, GSConfig.TIME_ZONE_ID);
-		SystemInfo.logAll();
-
 		nioServer = initNioServer();
 		Runtime.getRuntime().addShutdownHook(ShutdownHook.getInstance());
-		log.info(Logging.formatStartupMessage("Game server", START_TIME_NANOS));
-
 		LoginServer.getInstance().connect(nioServer);
 		if (GSConfig.ENABLE_CHAT_SERVER)
 			ChatServer.getInstance().connect(nioServer);
+
+		long startedNanos = System.nanoTime();
+		long uptimeMillis = ManagementFactory.getRuntimeMXBean().getUptime();
+		System.gc(); // after opening the port, so players don't wait for it, but before logging the memory usage
+		long gcMillis = Duration.ofNanos(System.nanoTime() - startedNanos).toMillis();
+
+		VersionInfo.logAll(versionInfo, GSConfig.TIME_ZONE_ID);
+		SystemInfo.logAll();
+		log.info(Logging.formatStartupMessage("Game server", START_TIME_NANOS, startedNanos, uptimeMillis, gcMillis));
 	}
 
 	/**
