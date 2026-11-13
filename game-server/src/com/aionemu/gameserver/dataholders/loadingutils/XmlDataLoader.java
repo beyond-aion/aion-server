@@ -59,15 +59,13 @@ public class XmlDataLoader {
 		return ThreadPoolManager.getInstance().submitLongRunning(() -> {
 			log.info("Validating {} in background...", mergeResult.getFile());
 			try {
-				if (!mergeResult.waitUntilFileIsWritten()) {
-					throw new RuntimeException();
-				}
 				long time = System.currentTimeMillis();
-				try (Reader reader = mergeResult.newReader()) {
+				try (Reader reader = mergeResult.newReader()) { // the merged document is still in memory, so the validation does not have to wait for the cache file
 					XmlUtil.getSchema(XML_SCHEMA_FILE).newValidator().validate(new SAXSource(new InputSource(reader)));
 				}
 				log.info("Validated {} in {} ms", mergeResult.getFile(), System.currentTimeMillis() - time);
 			} catch (Throwable t) {
+				mergeResult.waitUntilFileIsWritten(); // do not let the running write task overwrite the invalidation below
 				mergeResult.getFile().setLastModified(0); // mark file as outdated so validation will run again on next start
 				throw new GameServerError("Error validating " + CACHE_XML_FILE, t);
 			}
