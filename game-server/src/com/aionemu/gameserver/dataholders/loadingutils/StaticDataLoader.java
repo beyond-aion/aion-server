@@ -23,6 +23,7 @@ import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamReader;
 
+import com.fasterxml.aalto.stax.InputFactoryImpl;
 import org.glassfish.jaxb.runtime.IDResolver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,7 +44,7 @@ public class StaticDataLoader {
 	private static final Logger log = LoggerFactory.getLogger(StaticDataLoader.class);
 
 	private static final int THREADS = Math.min(8, Runtime.getRuntime().availableProcessors());
-	private static final ThreadLocal<XMLInputFactory> XML_INPUT_FACTORY = ThreadLocal.withInitial(XMLInputFactory::newInstance);
+	private static final XMLInputFactory XML_INPUT_FACTORY = new InputFactoryImpl(); // Aalto, thread-safe and faster than the JDK parser
 	private static final Map<String, Field> FIELDS = fieldsByElementName();
 
 	private StaticDataLoader() {
@@ -141,7 +142,7 @@ public class StaticDataLoader {
 				Field field = element.field();
 				field.setAccessible(true);
 				InputStream in = new ByteArrayInputStream(data, element.start(), element.end() - element.start());
-				XMLStreamReader reader = XML_INPUT_FACTORY.get().createXMLStreamReader(in);
+				XMLStreamReader reader = XML_INPUT_FACTORY.createXMLStreamReader(in);
 				try {
 					Object value = unmarshaller.unmarshal(reader, field.getType());
 					if (value instanceof JAXBElement<?> jaxbElement)
@@ -161,7 +162,7 @@ public class StaticDataLoader {
 
 	private static String rootElementName(byte[] data, int offset, int length) throws Exception {
 		try (InputStream in = new ByteArrayInputStream(data, offset, length)) {
-			XMLStreamReader reader = XML_INPUT_FACTORY.get().createXMLStreamReader(in);
+			XMLStreamReader reader = XML_INPUT_FACTORY.createXMLStreamReader(in);
 			try {
 				while (reader.hasNext()) {
 					if (reader.next() == XMLStreamConstants.START_ELEMENT)

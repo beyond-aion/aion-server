@@ -20,6 +20,8 @@ import javax.xml.parsers.SAXParserFactory;
 import javax.xml.stream.*;
 import javax.xml.stream.events.XMLEvent;
 
+import com.fasterxml.aalto.stax.InputFactoryImpl;
+import com.fasterxml.aalto.stax.OutputFactoryImpl;
 import org.glassfish.jaxb.runtime.v2.util.ByteArrayOutputStreamEx;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -97,8 +99,8 @@ public class XmlMerger {
 	private final File destFile;
 	private final File metaDataFile;
 
-	private final XMLInputFactory inputFactory = XMLInputFactory.newInstance();
-	private final XMLOutputFactory outputFactory = XMLOutputFactory.newInstance();
+	private final XMLInputFactory inputFactory = new InputFactoryImpl();
+	private final XMLOutputFactory outputFactory = new OutputFactoryImpl();
 
 	public XmlMerger(File source, File target) {
 		this.sourceFile = source;
