@@ -316,7 +316,7 @@ public class StaticData {
 		unmarshaller.setListener(new StaticDataListener(this));
 	}
 
-	void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
+	public void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
 		Logger log = LoggerFactory.getLogger(StaticData.class);
 		log.info("Loaded {} maps", worldMapsData.size());
 		log.info("Loaded {} material ids", materiaData.size());
@@ -426,7 +426,7 @@ public class StaticData {
 		afterUnmarshalTasks.add(task);
 	}
 
-	void waitForAfterUnmarshalTasksToFinish() {
+	public void waitForAfterUnmarshalTasksToFinish() {
 		if (afterUnmarshalTasks == null)
 			return;
 		afterUnmarshalTasks.forEach(task -> {

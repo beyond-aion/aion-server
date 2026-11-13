@@ -26,9 +26,37 @@ import org.w3c.dom.Node;
 public class JAXBUtil {
 
 	private static final Map<Class<?>, Future<JAXBContext>> CONTEXTS = new ConcurrentHashMap<>();
+	private static final Map<Class<?>, JAXBContext> RESOLVED_CONTEXTS = new ConcurrentHashMap<>();
 
 	public static void preLoadContextAsync(Class<?> clazz) {
 		CONTEXTS.put(clazz, ForkJoinPool.commonPool().submit(() -> JAXBContext.newInstance(clazz)));
+	}
+
+	/**
+	 * Returns the cached context for the given class, creating it if it was not preloaded. Unlike {@link #newUnmarshaller(Class, Schema)}, the
+	 * context stays cached and can be reused for unmarshalling single elements in parallel.
+	 */
+	public static JAXBContext getContext(Class<?> clazz) {
+		return RESOLVED_CONTEXTS.computeIfAbsent(clazz, c -> {
+			Future<JAXBContext> contextTask = CONTEXTS.remove(c);
+			try {
+				return contextTask == null ? JAXBContext.newInstance(c) : contextTask.get();
+			} catch (InterruptedException | ExecutionException e) {
+				throw new RuntimeException(e instanceof ExecutionException ? e.getCause() : e);
+			} catch (JAXBException e) {
+				throw new RuntimeException("Failed to create JAXB context for " + c.getName(), e);
+			}
+		});
+	}
+
+	public static Unmarshaller newUnmarshaller(JAXBContext context) {
+		try {
+			Unmarshaller u = context.createUnmarshaller();
+			u.setEventHandler(new XmlValidationHandler());
+			return u;
+		} catch (JAXBException e) {
+			throw new RuntimeException("Failed to initialize unmarshaller", e);
+		}
 	}
 
 	public static String serialize(Object obj) {
@@ -111,22 +139,9 @@ public class JAXBUtil {
 	}
 
 	public static Unmarshaller newUnmarshaller(Class<?> clazz, Schema schema) {
-		Future<JAXBContext> contextTask = CONTEXTS.remove(clazz);
-		try {
-			JAXBContext jc = contextTask == null ? JAXBContext.newInstance(clazz) : contextTask.get();
-			Unmarshaller u = jc.createUnmarshaller();
-			u.setEventHandler(new XmlValidationHandler());
-			u.setSchema(schema);
-			return u;
-		} catch (InterruptedException | ExecutionException e) {
-			throw new RuntimeException(e instanceof ExecutionException ? e.getCause() : e);
-		} catch (JAXBException e) {
-			ByteArrayOutputStream os = new ByteArrayOutputStream();
-			try (PrintStream ps = new PrintStream(os)) {
-				e.printStackTrace(ps); // we need to do this, to get detailed information about what caused the issue
-				throw new RuntimeException("Failed to initialize unmarshaller for class " + clazz.getName() + "\n" + os);
-			}
-		}
+		Unmarshaller u = newUnmarshaller(getContext(clazz));
+		u.setSchema(schema);
+		return u;
 	}
 
 	public static String generateSchema(Class<?>... classes) {

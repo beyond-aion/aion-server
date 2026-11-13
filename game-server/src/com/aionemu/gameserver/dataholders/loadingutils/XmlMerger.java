@@ -3,8 +3,11 @@ package com.aionemu.gameserver.dataholders.loadingutils;
 import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
@@ -117,7 +120,7 @@ public class XmlMerger {
 			log.info("Modifications found. Updating...");
 		} else {
 			log.info("Cache file is up to date");
-			return new MergeResult(destFile, null, 0);
+			return new MergeResult(destFile, null, 0, Split.read(destFile));
 		}
 
 		return mergeAndWriteAsync();
@@ -153,10 +156,14 @@ public class XmlMerger {
 
 		try (FileReader fileReader = new FileReader(sourceFile)) {
 			ByteArrayOutputStreamEx outputStream = new ByteArrayOutputStreamEx(100 * 1024 * 1024);
-			writer = outputFactory.createXMLStreamWriter(new BufferedWriter(new OutputStreamWriter(outputStream)));
+			writer = outputFactory.createXMLStreamWriter(new BufferedWriter(new OutputStreamWriter(outputStream, StandardCharsets.UTF_8)));
 			reader = inputFactory.createXMLStreamReader(fileReader);
 
 			writer.writeStartDocument();
+
+			List<int[]> elementRanges = new ArrayList<>();
+			int depth = 0;
+			int tailStart = 0;
 			while (reader.hasNext()) {
 				switch (reader.next()) {
 					case XMLEvent.START_DOCUMENT:
@@ -166,29 +173,55 @@ public class XmlMerger {
 						continue;
 					case XMLEvent.START_ELEMENT:
 						if ("import".equals(reader.getLocalName())) { // import declared file
+							writer.flush();
+							int start = outputStream.size();
 							processImportElement(reader, writer, metadata);
+							writer.flush();
+							elementRanges.add(new int[] { start, outputStream.size() });
 							continue;
 						}
 						break;
 					case XMLEvent.END_ELEMENT: // skip closing import tag, since it's replaced by declared file contents
 						if ("import".equals(reader.getLocalName()))
 							continue;
+						if (depth == 1) { // closing the root element
+							writer.flush();
+							tailStart = outputStream.size();
+						}
+						break;
 				}
 
 				if (reader.isWhiteSpace())
 					continue;
 
 				write(reader, writer);
+				if (reader.isStartElement())
+					depth++;
+				else if (reader.isEndElement())
+					depth--;
 			}
 			writer.writeEndDocument();
 			writer.flush();
 
-			MergeResult mergeResult = new MergeResult(destFile, outputStream.getBuffer(), outputStream.size());
+			// the writer keeps the closing '>' of a start tag pending, so the first capture may point at it instead of at the next element
+			byte[] buffer = outputStream.getBuffer();
+			List<int[]> fixedRanges = new ArrayList<>(elementRanges.size());
+			for (int[] range : elementRanges) {
+				int elementStart = range[0];
+				while (elementStart < range[1] && buffer[elementStart] != '<')
+					elementStart++;
+				fixedRanges.add(new int[] { elementStart, range[1] });
+			}
+			int splitHeaderEnd = fixedRanges.isEmpty() ? 0 : fixedRanges.get(0)[0];
+
+			Split split = new Split(splitHeaderEnd, tailStart, outputStream.size(), fixedRanges);
+			MergeResult mergeResult = new MergeResult(destFile, outputStream.getBuffer(), outputStream.size(), split);
 			mergeResult.fileWriteTask = ThreadPoolManager.getInstance().submit(() -> {
 				destFile.getParentFile().mkdirs();
-				try (Reader mergeResultReader = mergeResult.newReader(); FileWriter fileWriter = new FileWriter(destFile)) {
+				try (Reader mergeResultReader = mergeResult.newReader(); Writer fileWriter = Files.newBufferedWriter(destFile.toPath(), StandardCharsets.UTF_8)) {
 					mergeResultReader.transferTo(fileWriter);
 					metadata.store(metaDataFile);
+					split.store(destFile);
 				} catch (IOException e) {
 					throw new RuntimeException(e);
 				}
@@ -407,10 +440,10 @@ public class XmlMerger {
 		private final Set<String> unchecked = new HashSet<>();
 
 		void add(File file) throws IOException {
-			properties.setProperty(file.getPath(), String.valueOf(hash(file)));
+			properties.setProperty(file.getPath(), file.length() + ":" + file.lastModified() + ":" + crc(file));
 		}
 
-		long hash(File file) throws IOException {
+		long crc(File file) throws IOException {
 			crc.reset();
 			buffer.clear();
 			try (FileChannel input = FileChannel.open(file.toPath())) {
@@ -426,7 +459,14 @@ public class XmlMerger {
 			String key = file.getPath();
 			String data = properties.getProperty(key);
 			unchecked.remove(key);
-			return data == null || !data.equals(String.valueOf(hash(file)));
+			if (data == null)
+				return true;
+			// fast path: the file is untouched, so there is no need to read and hash all imports on every start
+			if (data.startsWith(file.length() + ":" + file.lastModified() + ":"))
+				return false;
+			// metadata written by an older version, or only the modification time changed: compare the contents
+			String crcValue = String.valueOf(crc(file));
+			return !data.equals(crcValue) && !data.endsWith(":" + crcValue);
 		}
 
 		void load(File file) throws IOException {
@@ -444,17 +484,86 @@ public class XmlMerger {
 		}
 	}
 
+	/**
+	 * Byte ranges of the top-level elements inside the merged cache file, used to unmarshal them in parallel. The sidecar file is written
+	 * together with the cache and is only trusted when its size matches the cache file.
+	 */
+	public static class Split {
+
+		private static final String FILE_SUFFIX = ".ranges";
+
+		private final int headerEnd;
+		private final int tailStart;
+		private final int docEnd;
+		private final int[][] ranges;
+
+		public Split(int headerEnd, int tailStart, int docEnd, List<int[]> ranges) {
+			this.headerEnd = headerEnd;
+			this.tailStart = tailStart;
+			this.docEnd = docEnd;
+			this.ranges = ranges.toArray(new int[ranges.size()][]);
+		}
+
+		public int[][] getRanges() {
+			return ranges;
+		}
+
+		private void store(File destFile) throws IOException {
+			try (Writer writer = Files.newBufferedWriter(new File(destFile.getPath() + FILE_SUFFIX).toPath())) {
+				writer.write(headerEnd + " " + tailStart + " " + docEnd + "\n");
+				for (int[] range : ranges)
+					writer.write(range[0] + " " + range[1] + "\n");
+			}
+		}
+
+		static Split read(File destFile) {
+			File rangesFile = new File(destFile.getPath() + FILE_SUFFIX);
+			if (!rangesFile.isFile())
+				return null;
+			try {
+				List<String> lines = Files.readAllLines(rangesFile.toPath());
+				if (lines.isEmpty())
+					return null;
+				String[] header = lines.get(0).trim().split(" ");
+				if (header.length != 3)
+					return null;
+				int headerEnd = Integer.parseInt(header[0]);
+				int tailStart = Integer.parseInt(header[1]);
+				int docEnd = Integer.parseInt(header[2]);
+				if (Files.size(destFile.toPath()) != docEnd || headerEnd < 0 || headerEnd > tailStart || tailStart > docEnd)
+					return null;
+				List<int[]> ranges = new ArrayList<>(lines.size() - 1);
+				for (int i = 1; i < lines.size(); i++) {
+					String[] range = lines.get(i).trim().split(" ");
+					if (range.length != 2)
+						return null;
+					int start = Integer.parseInt(range[0]);
+					int end = Integer.parseInt(range[1]);
+					if (start < headerEnd || end > tailStart || start >= end)
+						return null;
+					ranges.add(new int[] { start, end });
+				}
+				return ranges.isEmpty() ? null : new Split(headerEnd, tailStart, docEnd, ranges);
+			} catch (IOException | NumberFormatException e) {
+				log.warn("Could not read {}: {}", rangesFile, e.toString());
+				return null;
+			}
+		}
+	}
+
 	public static class MergeResult {
 
 		private final File file;
 		private final byte[] buffer;
 		private final int size;
+		private final Split split;
 		private Future<?> fileWriteTask;
 
-		public MergeResult(File file, byte[] buffer, int size) {
+		public MergeResult(File file, byte[] buffer, int size, Split split) {
 			this.file = file;
 			this.buffer = buffer;
 			this.size = size;
+			this.split = split;
 		}
 
 		public File getFile() {
@@ -465,11 +574,22 @@ public class XmlMerger {
 			return buffer != null;
 		}
 
+		public Split getSplit() {
+			return split;
+		}
+
+		/**
+		 * @return the merged document held in memory after a merge, or null if the cache file was already up to date
+		 */
+		public byte[] getBuffer() {
+			return buffer;
+		}
+
 		public Reader newReader() throws IOException {
 			if (buffer == null) {
-				return Files.newBufferedReader(file.toPath());
+				return Files.newBufferedReader(file.toPath(), StandardCharsets.UTF_8);
 			} else {
-				return new InputStreamReader(new ByteArrayInputStream(buffer, 0, size));
+				return new InputStreamReader(new ByteArrayInputStream(buffer, 0, size), StandardCharsets.UTF_8);
 			}
 		}
 
