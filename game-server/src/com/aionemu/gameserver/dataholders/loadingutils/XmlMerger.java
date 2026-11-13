@@ -91,6 +91,8 @@ public class XmlMerger {
 
 	private static final Map<Integer, String> COUNTRY_REGION = Map.of(1, "usa", 2, "europe", 4, "japan", 5, "china", 6, "taiwan", 7, "russia");
 
+	private static final byte[] XML_DECLARATION = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>".getBytes(StandardCharsets.UTF_8);
+
 	private final File sourceFile;
 	private final File destFile;
 	private final File metaDataFile;
@@ -123,7 +125,20 @@ public class XmlMerger {
 			return new MergeResult(destFile, null, 0, Split.read(destFile));
 		}
 
-		return mergeAndWriteAsync();
+		return mergeAndWrite();
+	}
+
+	/**
+	 * Merges the cache without decoding and re-encoding the imported documents, which is several times faster than the token based merge. If
+	 * anything about the source files is unexpected (non UTF-8 files, unusual roots), the token based merge is used instead.
+	 */
+	private MergeResult mergeAndWrite() throws Exception {
+		try {
+			return mergeAndWriteBytes();
+		} catch (Exception e) {
+			log.warn("Byte-level merge failed, falling back to the token based merge", e);
+			return mergeAndWriteAsync();
+		}
 	}
 
 	/**
@@ -233,6 +248,223 @@ public class XmlMerger {
 			if (reader != null)
 				reader.close();
 		}
+	}
+
+	/**
+	 * Copies the imported documents into the cache without decoding them. The documents are UTF-8, so only the xml declaration, the root tags
+	 * and the root tags of files merged into a single root have to be handled.
+	 */
+	private MergeResult mergeAndWriteBytes() throws IOException, XMLStreamException {
+		Metadata metadata = new Metadata();
+		ByteArrayOutputStreamEx outputStream = new ByteArrayOutputStreamEx(100 * 1024 * 1024);
+		byte[] source = Files.readAllBytes(sourceFile.toPath());
+
+		int rootStart = findRootStart(source);
+		int rootTagEnd = findTagEnd(source, rootStart);
+		String rootName = elementName(source, rootStart);
+		outputStream.write(XML_DECLARATION);
+		outputStream.write(source, rootStart, rootTagEnd - rootStart + 1);
+		int headerEnd = outputStream.size();
+
+		List<int[]> ranges = new ArrayList<>();
+		XMLStreamReader reader = inputFactory.createXMLStreamReader(new ByteArrayInputStream(source));
+		try {
+			while (reader.hasNext()) {
+				if (reader.next() != XMLStreamConstants.START_ELEMENT || !"import".equals(reader.getLocalName()))
+					continue;
+				int start = outputStream.size();
+				writeImportBytes(reader, outputStream, metadata);
+				ranges.add(new int[] { start, outputStream.size() });
+			}
+		} finally {
+			reader.close();
+		}
+
+		int tailStart = outputStream.size();
+		outputStream.write(("</" + rootName + ">").getBytes(StandardCharsets.UTF_8));
+		int docEnd = outputStream.size();
+
+		Split split = new Split(headerEnd, tailStart, docEnd, ranges);
+		MergeResult mergeResult = new MergeResult(destFile, outputStream.getBuffer(), docEnd, split);
+		mergeResult.fileWriteTask = ThreadPoolManager.getInstance().submit(() -> {
+			try {
+				destFile.getParentFile().mkdirs();
+				try (OutputStream fileOut = Files.newOutputStream(destFile.toPath())) {
+					fileOut.write(mergeResult.getBuffer(), 0, docEnd);
+				}
+				metadata.store(metaDataFile);
+				split.store(destFile);
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+		});
+		return mergeResult;
+	}
+
+	private void writeImportBytes(XMLStreamReader reader, OutputStream out, Metadata metadata) throws IOException, XMLStreamException {
+		File file = new File(sourceFile.getParent(), getAttributeValue(reader, qNameFile, null));
+		file = applyCountryOverride(file);
+		if (!file.exists())
+			throw new FileNotFoundException("Missing file to import:" + file.getPath());
+
+		if (file.isFile()) {
+			writeElementBytes(file, true, true, out, metadata);
+			return;
+		}
+
+		boolean singleRootTag = Boolean.parseBoolean(getAttributeValue(reader, qNameSingleRootTag, "false"));
+		boolean recursive = Boolean.parseBoolean(getAttributeValue(reader, qNameRecursiveImport, "true"));
+		String rootName = null;
+		for (File childFile : XmlUtil.listFiles(file, recursive)) {
+			if (rootName == null)
+				rootName = writeElementBytes(childFile, true, !singleRootTag, out, metadata);
+			else
+				writeElementBytes(childFile, !singleRootTag, !singleRootTag, out, metadata);
+		}
+		if (singleRootTag) {
+			if (rootName == null)
+				throw new IOException("No files to import in " + file);
+			out.write(("</" + rootName + ">").getBytes(StandardCharsets.UTF_8));
+		}
+	}
+
+	private String writeElementBytes(File file, boolean writeStartTag, boolean writeEndTag, OutputStream out, Metadata metadata) throws IOException {
+		metadata.add(file);
+		byte[] bytes = Files.readAllBytes(file.toPath());
+		if (!isUtf8(bytes))
+			throw new UnsupportedEncodingException(file + " is not UTF-8");
+
+		int rootStart = findRootStart(bytes);
+		int rootTagEnd = findTagEnd(bytes, rootStart);
+		String name = elementName(bytes, rootStart);
+		if (isSelfClosing(bytes, rootStart, rootTagEnd)) {
+			if (writeStartTag)
+				out.write(bytes, rootStart, rootTagEnd - rootStart + 1);
+			return name;
+		}
+
+		int rootEndStart = findRootEnd(bytes, name);
+		if (writeStartTag)
+			out.write(bytes, rootStart, rootTagEnd - rootStart + 1);
+		out.write(bytes, rootTagEnd + 1, rootEndStart - rootTagEnd - 1);
+		if (writeEndTag) {
+			int rootEndTagEnd = findTagEnd(bytes, rootEndStart);
+			out.write(bytes, rootEndStart, rootEndTagEnd - rootEndStart + 1);
+		}
+		return name;
+	}
+
+	private static int findRootStart(byte[] bytes) {
+		int i = 0;
+		if (bytes.length >= 3 && (bytes[0] & 0xFF) == 0xEF && (bytes[1] & 0xFF) == 0xBB && (bytes[2] & 0xFF) == 0xBF)
+			i = 3;
+		while (i < bytes.length) {
+			byte b = bytes[i];
+			if (b == '<') {
+				if (i + 1 < bytes.length && (bytes[i + 1] == '?' || bytes[i + 1] == '!')) {
+					if (i + 3 < bytes.length && bytes[i + 1] == '!' && bytes[i + 2] == '-' && bytes[i + 3] == '-')
+						i = skipUntil(bytes, i + 4, "-->");
+					else
+						i = skipUntil(bytes, i + 2, ">");
+					continue;
+				}
+				if (i + 1 < bytes.length && bytes[i + 1] == '/')
+					throw new IllegalArgumentException("Unexpected closing tag before the root element");
+				return i;
+			}
+			if (!isWhitespace(b))
+				throw new IllegalArgumentException("Unexpected content before the root element");
+			i++;
+		}
+		throw new IllegalArgumentException("No root element found");
+	}
+
+	private static int findTagEnd(byte[] bytes, int tagStart) {
+		byte quote = 0;
+		for (int i = tagStart + 1; i < bytes.length; i++) {
+			byte b = bytes[i];
+			if (quote != 0) {
+				if (b == quote)
+					quote = 0;
+			} else if (b == '"' || b == '\'') {
+				quote = b;
+			} else if (b == '>') {
+				return i;
+			}
+		}
+		throw new IllegalArgumentException("Unterminated tag at offset " + tagStart);
+	}
+
+	private static String elementName(byte[] bytes, int tagStart) {
+		int i = tagStart + 1;
+		while (i < bytes.length && !isWhitespace(bytes[i]) && bytes[i] != '>' && bytes[i] != '/')
+			i++;
+		return new String(bytes, tagStart + 1, i - tagStart - 1, StandardCharsets.UTF_8);
+	}
+
+	private static boolean isSelfClosing(byte[] bytes, int tagStart, int tagEnd) {
+		for (int i = tagEnd - 1; i > tagStart; i--) {
+			if (!isWhitespace(bytes[i]))
+				return bytes[i] == '/';
+		}
+		return false;
+	}
+
+	private static int findRootEnd(byte[] bytes, String name) {
+		byte[] closing = ("</" + name).getBytes(StandardCharsets.UTF_8);
+		for (int i = bytes.length - closing.length - 1; i > 0; i--) {
+			if (matches(bytes, i, closing)) {
+				int next = i + closing.length;
+				if (next >= bytes.length || isWhitespace(bytes[next]) || bytes[next] == '>')
+					return i;
+			}
+		}
+		throw new IllegalArgumentException("No closing tag for root element " + name);
+	}
+
+	private static int skipUntil(byte[] bytes, int from, String token) {
+		byte[] bytesToken = token.getBytes(StandardCharsets.US_ASCII);
+		for (int i = from; i <= bytes.length - bytesToken.length; i++) {
+			if (matches(bytes, i, bytesToken))
+				return i + bytesToken.length;
+		}
+		throw new IllegalArgumentException("Unterminated " + token);
+	}
+
+	private static boolean matches(byte[] bytes, int offset, byte[] pattern) {
+		if (offset + pattern.length > bytes.length)
+			return false;
+		for (int i = 0; i < pattern.length; i++) {
+			if (bytes[offset + i] != pattern[i])
+				return false;
+		}
+		return true;
+	}
+
+	private static boolean isWhitespace(byte b) {
+		return b == ' ' || b == '\t' || b == '\r' || b == '\n';
+	}
+
+	private static boolean isUtf8(byte[] bytes) {
+		int limit = Math.min(bytes.length, 256);
+		String head = new String(bytes, 0, limit, StandardCharsets.ISO_8859_1); // the declaration is ASCII, so bytes map to chars one by one
+		int encoding = head.indexOf("encoding");
+		if (encoding < 0)
+			return true;
+		int equals = head.indexOf('=', encoding);
+		if (equals < 0)
+			return true;
+		int i = equals + 1;
+		while (i < head.length() && Character.isWhitespace(head.charAt(i)))
+			i++;
+		if (i >= head.length() || (head.charAt(i) != '"' && head.charAt(i) != '\''))
+			return true;
+		char quote = head.charAt(i++);
+		int end = head.indexOf(quote, i);
+		if (end < 0)
+			return true;
+		String value = head.substring(i, end).trim();
+		return value.isEmpty() || value.equalsIgnoreCase("UTF-8") || value.equalsIgnoreCase("UTF8");
 	}
 
 	/**
