@@ -7,7 +7,11 @@ SET THREAD_LOG=%%(){}
 
 :START
 CLS
-JAVA -Xms1024m -Xmx2560m -XX:+UseNUMA -XX:+UseCompactObjectHeaders -cp "libs/*" com.aionemu.gameserver.GameServer
+:: AOT cache for a faster start: created on the first shutdown, recreated after updates (see AotCacheGuard)
+SET AOT=cache\gs.aot
+IF EXIST %AOT%.outdated DEL /Q %AOT% %AOT%.outdated
+IF EXIST %AOT% (SET AOT_OPTION=-XX:AOTCache=%AOT%) ELSE (SET AOT_OPTION=-XX:AOTCacheOutput=%AOT%)
+JAVA -Xms1024m -Xmx2560m -XX:+UseNUMA -XX:+UseCompactObjectHeaders %AOT_OPTION% -cp "libs/*" com.aionemu.gameserver.GameServer
 IF %ERRORLEVEL% EQU 0 GOTO END
 IF %ERRORLEVEL% EQU 2 GOTO START
 ECHO.

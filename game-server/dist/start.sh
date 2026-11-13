@@ -8,7 +8,11 @@
 
 loop() {
   while true; do
-    THREAD_LOG='' java -Xms1024m -Xmx2560m -XX:+UseNUMA -XX:+UseCompactObjectHeaders $@ -cp "libs/*" com.aionemu.gameserver.GameServer
+    # AOT cache for a faster start: created on the first shutdown, recreated after updates (see AotCacheGuard)
+    aot=cache/gs.aot
+    [[ -f $aot.outdated ]] && rm -f $aot $aot.outdated
+    [[ -f $aot ]] && aot_option=-XX:AOTCache=$aot || aot_option=-XX:AOTCacheOutput=$aot
+    THREAD_LOG='' java -Xms1024m -Xmx2560m -XX:+UseNUMA -XX:+UseCompactObjectHeaders $aot_option $@ -cp "libs/*" com.aionemu.gameserver.GameServer
     err=$?
     case $err in
       0) # regular shutdown

@@ -59,6 +59,7 @@ import com.aionemu.gameserver.taskmanager.AbstractPeriodicTaskManager;
 import com.aionemu.gameserver.taskmanager.tasks.housing.AuctionAutoFillTask;
 import com.aionemu.gameserver.taskmanager.tasks.housing.AuctionEndTask;
 import com.aionemu.gameserver.taskmanager.tasks.housing.MaintenanceTask;
+import com.aionemu.gameserver.utils.AotCacheGuard;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.chathandlers.ChatProcessor;
@@ -99,6 +100,7 @@ public class GameServer {
 	}
 
 	static void main() {
+		AotCacheGuard.check();
 		JAXBUtil.preLoadContextAsync(StaticData.class); // do this early so DataManager doesn't need to wait as long
 		initUtilityServicesAndConfig();
 		CompletableFuture<Void> databaseInit = CompletableFuture.runAsync(GameServer::initDatabase); // connect to the database while static data is being loaded
