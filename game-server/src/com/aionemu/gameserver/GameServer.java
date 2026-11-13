@@ -4,6 +4,8 @@ import java.lang.management.ManagementFactory;
 import java.time.Duration;
 import java.util.List;
 import java.util.TimeZone;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionException;
 import java.util.concurrent.locks.LockSupport;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.Stream;
@@ -99,10 +101,12 @@ public class GameServer {
 	static void main() {
 		JAXBUtil.preLoadContextAsync(StaticData.class); // do this early so DataManager doesn't need to wait as long
 		initUtilityServicesAndConfig();
-
-		IDFactory.getInstance();
+		CompletableFuture<Void> databaseInit = CompletableFuture.runAsync(GameServer::initDatabase); // connect to the database while static data is being loaded
 
 		DataManager.getInstance();
+
+		awaitDatabaseInit(databaseInit);
+		IDFactory.getInstance();
 
 		Stream.of(QuestEngine.getInstance(), AIEngine.getInstance(), InstanceEngine.getInstance(), ChatProcessor.getInstance(), ZoneService.getInstance(),
 			GeoService.getInstance()).parallel().forEach(GameEngine::init);
@@ -181,8 +185,6 @@ public class GameServer {
 		CustomInstanceService.getInstance();
 		DataManager.waitForValidationToFinishAndShutdownOnFail();
 
-		System.gc();
-
 		VersionInfo.logAll(versionInfo, GSConfig.TIME_ZONE_ID);
 		SystemInfo.logAll();
 
@@ -210,11 +212,10 @@ public class GameServer {
 	/**
 	 * Initialize all helper services, that are not directly related to aion gs, which includes:
 	 * <ul>
-	 * <li>Database factory</li>
 	 * <li>Thread pool</li>
 	 * <li>Cron service</li>
 	 * </ul>
-	 * This method also initializes {@link Config}
+	 * This method also initializes {@link Config}. The database is initialized asynchronously, see {@link #initDatabase()}.
 	 */
 	private static void initUtilityServicesAndConfig() {
 		// Set default uncaught exception handler
@@ -222,17 +223,32 @@ public class GameServer {
 
 		PropertyTransformers.register(new CronExpressionTransformer());
 		Config.load();
-		// Second should be database factory
-		DatabaseFactory.init();
-		PlayerDAO.setAllPlayersOffline();
-		if (CleaningConfig.CLEANING_ENABLE)
-			DatabaseCleaningService.deletePlayersOnInactiveAccounts();
 
 		// Initialize thread pools
 		ThreadPoolManager.getInstance();
 
 		// Initialize cron service
 		CronService.initSingleton(ThreadPoolManagerRunnableRunner.class, TimeZone.getTimeZone(GSConfig.TIME_ZONE_ID));
+	}
+
+	/**
+	 * Connects to the database and resets the online state of all characters. Runs concurrently with the static data loading, so callers must
+	 * wait for it with {@link #awaitDatabaseInit(CompletableFuture)} before any character data is read.
+	 */
+	private static void initDatabase() {
+		DatabaseFactory.init();
+		PlayerDAO.setAllPlayersOffline();
+		if (CleaningConfig.CLEANING_ENABLE)
+			DatabaseCleaningService.deletePlayersOnInactiveAccounts();
+	}
+
+	private static void awaitDatabaseInit(CompletableFuture<Void> databaseInit) {
+		try {
+			databaseInit.join();
+		} catch (CompletionException e) {
+			Throwable cause = e.getCause();
+			throw cause instanceof Error error ? error : new GameServerError(cause);
+		}
 	}
 
 	public static void shutdownNioServer() {
