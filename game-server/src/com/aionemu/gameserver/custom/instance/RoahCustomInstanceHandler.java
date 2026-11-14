@@ -209,7 +209,7 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 				npc.getController().delete();
 			}
 			case BOSS_MOB_A_M_ID, BOSS_MOB_A_F_ID, BOSS_MOB_E_M_ID, BOSS_MOB_E_F_ID, BOSS_MOB_AT_ID -> {
-				calcBossDrop(npc.getObjectId());
+				calcBossDrop(npc);
 				setResult(true);
 				PacketSendUtility.broadcastToMap(instance, new SM_QUEST_ACTION(0, 0));
 			}
@@ -247,9 +247,19 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 		};
 	}
 
-	private void calcBossDrop(int npcObjId) {
+	private void calcBossDrop(Npc boss) {
+		int npcObjId = boss.getObjectId();
 		Set<DropItem> dropItems = DropRegistrationService.getInstance().getCurrentDropMap().get(npcObjId);
-		if (dropItems != null) { // dropItems can possibly be null if the player died right before the boss
+		if (dropItems == null && !isCompleted.get()) {
+			Player player = instance.getPlayer(playerObjId);
+			if (player != null) {
+				// Drop list can be empty, if the boss was killed too fast while casting any skill and being under SANCTUARY
+				// or if the aggro reset shortly before killing
+				DropRegistrationService.getInstance().registerDrop(boss, player, null);
+				dropItems = DropRegistrationService.getInstance().getCurrentDropMap().get(npcObjId);
+			}
+		}
+		if (dropItems != null) {
 			dropItems.clear();
 			dropItems.add(DropRegistrationService.getInstance().regDropItem(0, playerObjId, npcObjId, REWARD_COIN_ID, getRewardCoinAmount(rank)));
 
