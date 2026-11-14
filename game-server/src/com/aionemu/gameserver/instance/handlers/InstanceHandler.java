@@ -104,4 +104,9 @@ public interface InstanceHandler {
 	boolean allowSelfReviveByItem();
 	boolean allowKiskRevive();
 	boolean allowInstanceRevive();
+
+	/**
+	 * @return True if a lethal fall shows the resurrection options like any other death, false if the player is revived a second later without them.
+	 */
+	boolean showResurrectionOptionsAfterLethalFall();
 }
