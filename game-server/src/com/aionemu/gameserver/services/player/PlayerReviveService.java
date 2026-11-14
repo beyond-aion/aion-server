@@ -132,19 +132,14 @@ public class PlayerReviveService {
 		player.unsetResPosState();
 	}
 
-	public static void kiskRevive(Player player) {
-		kiskRevive(player, 0);
+	public static void kiskOrBindRevive(Player player) {
+		kiskOrBindRevive(player, 0);
 	}
 
-	public static void kiskRevive(Player player, int skillId) {
-		if (player.isInPrison() || player.isInCustomState(CustomPlayerState.EVENT_MODE)) { // a kisk must not take them out of prison or the event
+	public static void kiskOrBindRevive(Player player, int skillId) {
+		Kisk kisk = getAllowedKiskForRevive(player);
+		if (kisk == null) {
 			bindRevive(player, skillId);
-			return;
-		}
-
-		Kisk kisk = player.getKisk();
-		if (kisk == null || !kisk.isActive() || !player.getWorldMapInstance().getInstanceHandler().allowKiskRevive()) {
-			bindRevive(player, skillId); // the kisk expired or was destroyed while the death window was open
 			return;
 		}
 		kisk.resurrectionUsed();
@@ -153,6 +148,15 @@ public class PlayerReviveService {
 		player.getGameStats().updateStatsAndSpeedVisually();
 		player.unsetResPosState();
 		TeleportService.teleportTo(player, kisk.getPosition());
+	}
+
+	private static Kisk getAllowedKiskForRevive(Player player) {
+		Kisk kisk = player.getKisk();
+		if (kisk == null || !kisk.isActive() || !player.getWorldMapInstance().getInstanceHandler().allowKiskRevive())
+			return null;
+		if (player.isInPrison() || player.isInCustomState(CustomPlayerState.EVENT_MODE))
+			return null;
+		return kisk;
 	}
 
 	public static void instanceRevive(Player player) {
@@ -256,13 +260,10 @@ public class PlayerReviveService {
 			if (!player.isDead()) // already revived, e.g. by an instance handler
 				return;
 			InstanceHandler instanceHandler = player.getWorldMapInstance().getInstanceHandler();
-			Kisk kisk = player.getKisk();
 			if (instanceHandler.allowInstanceRevive())
 				PlayerReviveService.instanceRevive(player, skillId);
-			else if (instanceHandler.allowKiskRevive() && kisk != null && kisk.isActive())
-				PlayerReviveService.kiskRevive(player, skillId);
 			else
-				PlayerReviveService.bindRevive(player, skillId);
+				PlayerReviveService.kiskOrBindRevive(player, skillId);
 		}, delayMillis));
 	}
 }
