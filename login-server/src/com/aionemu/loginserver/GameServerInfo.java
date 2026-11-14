@@ -1,7 +1,7 @@
 package com.aionemu.loginserver;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.aionemu.loginserver.model.Account;
 import com.aionemu.loginserver.network.gameserver.GsConnection;
@@ -42,7 +42,7 @@ public class GameServerInfo {
 	/**
 	 * gsConnection - if GameServer is connected to LoginServer.
 	 */
-	private GsConnection gscHandler;
+	private volatile GsConnection gscHandler; // set by the packets of the game server, read by those of the clients
 
 	/**
 	 * minimum access level to be able to connect to this game server
@@ -57,7 +57,7 @@ public class GameServerInfo {
 	/**
 	 * Map<AccId,Account> of accounts logged in on this GameServer.
 	 */
-	private final Map<Integer, Account> accountsOnGameServer = new HashMap<>();
+	private final Map<Integer, Account> accountsOnGameServer = new ConcurrentHashMap<>(); // changed by packets of game servers, which run concurrently
 
 	/**
 	 * Constructor.
@@ -186,6 +186,7 @@ public class GameServerInfo {
 	 * @return true if GameServer is Online.
 	 */
 	public final boolean isOnline() {
+		GsConnection gscHandler = this.gscHandler;
 		return gscHandler != null && gscHandler.getState() == State.AUTHED;
 	}
 

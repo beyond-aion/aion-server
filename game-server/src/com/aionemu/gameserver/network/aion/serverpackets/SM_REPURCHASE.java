@@ -27,11 +27,14 @@ public class SM_REPURCHASE extends AionServerPacket {
 
 	@Override
 	protected void writeImpl(AionConnection con) {
+		int packetStart = getBuf().writerIndex() - 7; // size, opcode, static code and flipped opcode
 		writeD(targetObjectId);
 		writeD(1);
-		writeH(items.size());
-
+		int countIndex = getBuf().writerIndex();
+		writeH(0);
+		int count = 0;
 		for (Item item : items) {
+			int itemStart = getBuf().writerIndex();
 			ItemTemplate itemTemplate = item.getItemTemplate();
 
 			writeD(item.getObjectId());
@@ -42,6 +45,14 @@ public class SM_REPURCHASE extends AionServerPacket {
 			itemInfoBlob.writeMe(getBuf());
 
 			writeQ(item.getRepurchasePrice());
+			// The client has no limit on the number of items, but a packet larger than it can receive would not be sent at all. The items that don't
+			// fit can be bought back once others have been.
+			if (getBuf().writerIndex() - packetStart > MAX_CLIENT_SUPPORTED_PACKET_SIZE) {
+				getBuf().writerIndex(itemStart);
+				break;
+			}
+			count++;
 		}
+		getBuf().setShortLE(countIndex, count);
 	}
 }

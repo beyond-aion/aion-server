@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.network.aion.instanceinfo;
 
-import java.nio.ByteBuffer;
 import java.util.List;
 
 import com.aionemu.gameserver.model.Race;
@@ -8,6 +7,8 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.DredgionRoom;
 import com.aionemu.gameserver.model.instance.instancescore.PvpInstanceScore;
 import com.aionemu.gameserver.model.instance.playerreward.PvpInstancePlayerReward;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * @author xTz
@@ -24,7 +25,7 @@ public class DredgionScoreWriter extends InstanceScoreWriter<PvpInstanceScore<Pv
 	}
 
 	@Override
-	public void writeMe(ByteBuffer buf) {
+	public void writeMe(ByteBuf buf) {
 		fillTableWithGroup(buf, Race.ELYOS);
 		fillTableWithGroup(buf, Race.ASMODIANS);
 		int elyosScore = instanceScore.getElyosPoints();
@@ -35,7 +36,7 @@ public class DredgionScoreWriter extends InstanceScoreWriter<PvpInstanceScore<Pv
 		dredgionRooms.forEach(d -> writeC(buf, d.getState()));
 	}
 
-	private void fillTableWithGroup(ByteBuffer buf, Race race) {
+	private void fillTableWithGroup(ByteBuf buf, Race race) {
 		int count = 0;
 		for (Player player : players) {
 			if (race != player.getRace()) {

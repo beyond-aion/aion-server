@@ -22,6 +22,7 @@ public class PlayerLifeStatsDAO {
 	public static final String UPDATE_QUERY = "UPDATE player_life_stats set `hp`=?, `mp`=?, `fp`=? WHERE `player_id`=?";
 
 	public static void loadPlayerLifeStat(Player player) {
+		boolean found = false;
 		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
 			stmt.setInt(1, player.getObjectId());
 			try (ResultSet rset = stmt.executeQuery()) {
@@ -30,12 +31,15 @@ public class PlayerLifeStatsDAO {
 					lifeStats.setCurrentHp(rset.getInt("hp"));
 					lifeStats.setCurrentMp(rset.getInt("mp"));
 					lifeStats.setCurrentFp(rset.getInt("fp"));
-				} else
-					insertPlayerLifeStat(player);
+					found = true;
+				}
 			}
 		} catch (Exception e) {
 			log.error("Could not restore PlayerLifeStat data for playerObjId: {} from DB: {}", player.getObjectId(), e.getMessage(), e);
+			return;
 		}
+		if (!found) // after the connection above was returned, a thread must not wait for a second one while holding one
+			insertPlayerLifeStat(player);
 	}
 
 	public static void insertPlayerLifeStat(Player player) {

@@ -20,8 +20,8 @@ public class ChatClient {
 	private final Race race;
 	private final byte accessLevel;
 	private byte[] identifier;
-	private AionConnection connection;
-	private long gagTime;
+	private volatile AionConnection connection; // set by the packets of the client, read by those of everyone who writes to its channels
+	private volatile long gagTime; // set by a packet of the game server
 
 	/**
 	 * Map with all connected channels<br>

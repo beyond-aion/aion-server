@@ -2,7 +2,6 @@ package com.aionemu.gameserver.network.chatserver;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.nio.ByteBuffer;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,6 +14,8 @@ import com.aionemu.commons.utils.NetworkUtils;
 import com.aionemu.gameserver.network.chatserver.ChatServerConnection.State;
 import com.aionemu.gameserver.network.chatserver.clientpackets.CM_CS_AUTH_RESPONSE;
 import com.aionemu.gameserver.network.chatserver.clientpackets.CM_CS_PLAYER_AUTH_RESPONSE;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * @author Neon
@@ -33,9 +34,9 @@ public class CsClientPacketFactory {
 		}
 	}
 
-	public static CsClientPacket tryCreatePacket(ByteBuffer data, ChatServerConnection client) {
+	public static CsClientPacket tryCreatePacket(ByteBuf data, ChatServerConnection client) {
 		State state = client.getState();
-		int opCode = data.get() & 0xff;
+		int opCode = data.readUnsignedByte();
 		PacketInfo<? extends CsClientPacket> packetInfo = packets.get(opCode);
 		if (packetInfo == null) {
 			log.warn("{} sent data with unknown opcode: 0x{}, state={}\n{}", client, "%02X".formatted(opCode), state, NetworkUtils.toHex(data));
@@ -63,7 +64,7 @@ public class CsClientPacketFactory {
 			return validStates.contains(state);
 		}
 
-		private T newPacket(int opCode, ByteBuffer buffer, ChatServerConnection con) {
+		private T newPacket(int opCode, ByteBuf buffer, ChatServerConnection con) {
 			try {
 				T packet = packetConstructor.newInstance(opCode);
 				packet.setBuffer(buffer);

@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.network.aion.instanceinfo;
 
-import java.nio.ByteBuffer;
 import java.util.List;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -10,6 +9,8 @@ import com.aionemu.gameserver.model.instance.playerreward.HarmonyGroupReward;
 import com.aionemu.gameserver.model.instance.playerreward.PvPArenaPlayerReward;
 import com.aionemu.gameserver.model.templates.rewards.ArenaRewardItem;
 import com.aionemu.gameserver.model.templates.rewards.RewardItem;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * @author xTz
@@ -31,7 +32,7 @@ public class HarmonyScoreWriter extends InstanceScoreWriter<HarmonyArenaScore> {
 	}
 
 	@Override
-	public void writeMe(ByteBuffer buf) {
+	public void writeMe(ByteBuf buf) {
 		HarmonyGroupReward harmonyGroupReward = instanceScore.getGroupReward(playerObjId);
 		writeC(buf, type.getId());
 		switch (type) {
@@ -125,20 +126,20 @@ public class HarmonyScoreWriter extends InstanceScoreWriter<HarmonyArenaScore> {
 		}
 	}
 
-	private void writePoints(ByteBuffer buf, ArenaRewardItem rewardItem) {
+	private void writePoints(ByteBuf buf, ArenaRewardItem rewardItem) {
 		writeD(buf, rewardItem.baseCount());
 		writeD(buf, rewardItem.scoreCount());
 		writeD(buf, rewardItem.rankingCount());
 	}
 
-	private void writeReward(ByteBuffer buf, ArenaRewardItem rewardItem) {
+	private void writeReward(ByteBuf buf, ArenaRewardItem rewardItem) {
 		writeD(buf, rewardItem.itemId());
 		writeD(buf, rewardItem.baseCount());
 		writeD(buf, rewardItem.scoreCount());
 		writeD(buf, rewardItem.rankingCount());
 	}
 
-	private void writeSimpleReward(ByteBuffer buf, RewardItem rewardItem) {
+	private void writeSimpleReward(ByteBuf buf, RewardItem rewardItem) {
 		if (rewardItem != null) {
 			writeD(buf, rewardItem.getId());
 			writeD(buf, (int) rewardItem.getCount());

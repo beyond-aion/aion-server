@@ -1,8 +1,8 @@
 package com.aionemu.chatserver.network.aion.clientpackets;
 
-import java.nio.ByteBuffer;
 import java.util.Arrays;
 
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.chatserver.configs.main.LoggingConfig;
@@ -16,38 +16,41 @@ import com.aionemu.chatserver.network.aion.AionConnection;
 import com.aionemu.chatserver.network.aion.serverpackets.SM_CHANNEL_MESSAGE;
 import com.aionemu.chatserver.service.BroadcastService;
 
+import io.netty.buffer.ByteBuf;
+
 /**
  * @author ATracer
  */
 public class CM_CHANNEL_MESSAGE extends AbstractClientPacket {
 
+	private static final Logger log = LoggerFactory.getLogger(CM_CHANNEL_MESSAGE.class);
+	/**
+	 * The 4.8 client sends at most 400 characters ({@code ccChannelChat} rejects longer texts).
+	 */
+	private static final int MAX_TEXT_LENGTH = 400;
+
 	private int channelId;
 	private byte[] content;
 
-	public CM_CHANNEL_MESSAGE(ByteBuffer buf, AionConnection connection, int opCode) {
+	public CM_CHANNEL_MESSAGE(ByteBuf buf, AionConnection connection, int opCode) {
 		super(buf, connection, opCode);
 	}
 
 	@Override
 	protected void readImpl() {
-		readH();
-		readC();
-		readD();
-		readD();
-		readD();
-		readD();
+		readB(16); // user ID
 		channelId = readD();
-		readC();
+		readC(); // message type
 		int contentLength = readUH() * 2;
 		content = readB(contentLength);
 	}
 
 	@Override
 	protected void runImpl() {
+		ChatClient client = getConnection().getChatClient();
 		Channel channel = ChatChannels.getChannelById(channelId);
 		if (channel == null)
 			return;
-		ChatClient client = getConnection().getChatClient();
 		Message message = new Message(channel, content, client);
 		if (client.isGagged()) {
 			long gagTimeMin = (client.getGagTime() - System.currentTimeMillis()) / 1000 / 60;
@@ -62,6 +65,13 @@ public class CM_CHANNEL_MESSAGE extends AbstractClientPacket {
 			return;
 		}
 		client.updateLastMessageTime(channel.getChannelType());
+		// Checked after the flood protection, so a modified client can't log faster than it may chat. The message is dropped without a hint and
+		// the connection stays open: disconnecting would only tell the sender what was detected, and the client reconnects anyway.
+		if (content.length > MAX_TEXT_LENGTH * 2) {
+			log.warn("{} sent a message of {} characters in {} (the client allows {}, modified client), dropped it", client, content.length / 2,
+				channel.name(), MAX_TEXT_LENGTH);
+			return;
+		}
 		BroadcastService.getInstance().broadcastMessage(message);
 
 		if (LoggingConfig.LOG_CHAT)

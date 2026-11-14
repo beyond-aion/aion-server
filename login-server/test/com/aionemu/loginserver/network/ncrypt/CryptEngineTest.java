@@ -5,14 +5,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.nio.ByteBuffer;
 import java.util.HexFormat;
 
 import org.junit.jupiter.api.Test;
 
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
+
 /**
- * The expected bytes were produced by the former byte array implementation (the one used before the login server moved to Netty), so these tests
- * pin down that packets on the wire didn't change.
+ * The expected bytes were produced by the byte array implementation the login server used before it moved to Netty. Unlike a round trip through
+ * the client side of the cipher, they also catch a mistake that breaks encryption and decryption alike.
  */
 public class CryptEngineTest {
 
@@ -50,31 +52,31 @@ public class CryptEngineTest {
 	}
 
 	/** Puts the bytes at the offset of a buffer filled with garbage, like a reused or pooled buffer. */
-	private static ByteBuffer buffer(boolean direct, int offset, byte[] bytes, int capacity) {
-		ByteBuffer buf = direct ? ByteBuffer.allocateDirect(capacity) : ByteBuffer.allocate(capacity);
+	private static ByteBuf buffer(boolean direct, int offset, byte[] bytes, int capacity) {
+		ByteBuf buf = direct ? Unpooled.directBuffer(capacity, capacity) : Unpooled.buffer(capacity, capacity);
 		for (int i = 0; i < capacity; i++)
-			buf.put(i, (byte) 0x5A);
-		buf.put(offset, bytes);
+			buf.setByte(i, 0x5A);
+		buf.setBytes(offset, bytes);
 		return buf;
 	}
 
-	private static byte[] read(ByteBuffer buf, int offset, int length) {
+	private static byte[] read(ByteBuf buf, int offset, int length) {
 		byte[] bytes = new byte[length];
-		buf.get(offset, bytes);
+		buf.getBytes(offset, bytes);
 		return bytes;
 	}
 
 	@Test
-	public void encryptsLikeTheFormerImplementation() {
+	public void encryptsKnownVectors() {
 		for (boolean direct : new boolean[] { false, true }) {
 			for (int offset : new int[] { 0, 2, 7 }) {
 				CryptEngine engine = engine();
-				ByteBuffer first = buffer(direct, offset, firstPlain(), offset + 64);
+				ByteBuf first = buffer(direct, offset, firstPlain(), offset + 64);
 				int firstLength = engine.encrypt(first, offset, 40, XOR_KEY);
 				assertEquals(56, firstLength);
 				assertEquals(FIRST_PACKET, HexFormat.of().formatHex(read(first, offset, firstLength)));
 
-				ByteBuffer second = buffer(direct, offset, secondPlain(), offset + 32);
+				ByteBuf second = buffer(direct, offset, secondPlain(), offset + 32);
 				int secondLength = engine.encrypt(second, offset, 13, XOR_KEY);
 				assertEquals(24, secondLength);
 				assertEquals(SECOND_PACKET, HexFormat.of().formatHex(read(second, offset, secondLength)));
@@ -87,8 +89,8 @@ public class CryptEngineTest {
 		for (boolean direct : new boolean[] { false, true }) {
 			for (int offset : new int[] { 0, 2, 7 }) {
 				CryptEngine engine = engine();
-				engine.encrypt(ByteBuffer.allocate(64), 0, 40, XOR_KEY); // SM_INIT switches the engine to the session key
-				ByteBuffer packet = buffer(direct, offset, HexFormat.of().parseHex(CLIENT_CIPHER), offset + 16);
+				engine.encrypt(Unpooled.buffer(64, 64), 0, 40, XOR_KEY); // SM_INIT switches the engine to the session key
+				ByteBuf packet = buffer(direct, offset, HexFormat.of().parseHex(CLIENT_CIPHER), offset + 16);
 				assertTrue(engine.decrypt(packet, offset, 16));
 				assertArrayEquals(HexFormat.of().parseHex(CLIENT_PLAIN), read(packet, offset, 16));
 			}
@@ -98,9 +100,9 @@ public class CryptEngineTest {
 	@Test
 	public void rejectsACorruptedClientPacket() {
 		CryptEngine engine = engine();
-		engine.encrypt(ByteBuffer.allocate(64), 0, 40, XOR_KEY);
+		engine.encrypt(Unpooled.buffer(64, 64), 0, 40, XOR_KEY);
 		byte[] corrupted = HexFormat.of().parseHex(CLIENT_CIPHER);
 		corrupted[3] ^= 0x40;
-		assertFalse(engine.decrypt(ByteBuffer.wrap(corrupted), 0, 16));
+		assertFalse(engine.decrypt(Unpooled.wrappedBuffer(corrupted), 0, 16));
 	}
 }

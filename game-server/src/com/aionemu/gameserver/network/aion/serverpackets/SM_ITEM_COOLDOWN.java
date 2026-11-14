@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import com.aionemu.gameserver.model.items.ItemCooldown;
@@ -11,10 +12,11 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
  */
 public class SM_ITEM_COOLDOWN extends AionServerPacket {
 
-	private Map<Integer, ItemCooldown> cooldowns;
+	private final Map<Integer, ItemCooldown> cooldowns;
 
 	public SM_ITEM_COOLDOWN(Map<Integer, ItemCooldown> cooldowns) {
-		this.cooldowns = cooldowns;
+		// snapshot, the declared count and the entries written must match even if a cooldown is added while this packet waits for its I/O thread
+		this.cooldowns = new HashMap<>(cooldowns);
 	}
 
 	@Override

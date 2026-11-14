@@ -1,7 +1,5 @@
 package com.aionemu.loginserver.network.factories;
 
-import java.nio.ByteBuffer;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -9,6 +7,8 @@ import com.aionemu.loginserver.network.gameserver.GsClientPacket;
 import com.aionemu.loginserver.network.gameserver.GsConnection;
 import com.aionemu.loginserver.network.gameserver.GsConnection.State;
 import com.aionemu.loginserver.network.gameserver.clientpackets.*;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * @author -Nemesiss-
@@ -18,16 +18,16 @@ public class GsPacketHandlerFactory {
 	private static final Logger log = LoggerFactory.getLogger(GsPacketHandlerFactory.class);
 
 	/**
-	 * Reads one packet from given ByteBuffer
+	 * Reads one packet from given buffer
 	 * 
 	 * @param data
 	 * @param client
 	 * @return GsClientPacket object from binary data
 	 */
-	public static GsClientPacket handle(ByteBuffer data, GsConnection client) {
+	public static GsClientPacket handle(ByteBuf data, GsConnection client) {
 		GsClientPacket msg = null;
 		State state = client.getState();
-		int id = data.get() & 0xff;
+		int id = data.readUnsignedByte();
 
 		switch (state) {
 			case CONNECTED:

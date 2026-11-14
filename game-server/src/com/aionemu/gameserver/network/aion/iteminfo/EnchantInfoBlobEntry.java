@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.network.aion.iteminfo;
 
-import java.nio.ByteBuffer;
 import java.util.Collections;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -12,6 +11,8 @@ import com.aionemu.gameserver.model.items.ManaStone;
 import com.aionemu.gameserver.model.stats.container.PlumStatEnum;
 import com.aionemu.gameserver.model.templates.item.enums.ItemGroup;
 import com.aionemu.gameserver.network.aion.iteminfo.ItemInfoBlob.ItemBlobType;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * This blob sends info about enchantment, bonus attributes, mana stones, god stone etc.
@@ -27,15 +28,15 @@ public class EnchantInfoBlobEntry extends ItemBlobEntry {
 	}
 
 	@Override
-	public void writeThisBlob(ByteBuffer buf) {
+	public void writeThisBlob(ByteBuf buf) {
 		writeInfo(buf, ownerItem);
 	}
 
-	public static void writeInfo(ByteBuffer buf, Item item) {
+	public static void writeInfo(ByteBuf buf, Item item) {
 		writeInfo(buf, item, !item.isIdentified() ? -1 : item.getOptionalSockets(), !item.isIdentified() ? -1 : item.getEnchantBonus());
 	}
 
-	public static void writeInfo(ByteBuffer buf, Item item, int optionalManastoneSockets, int enchantBonus) {
+	public static void writeInfo(ByteBuf buf, Item item, int optionalManastoneSockets, int enchantBonus) {
 		writeC(buf, item.isSoulBound() ? 1 : 0);
 		writeC(buf, item.getEnchantLevel()); // enchant (1-15)
 		writeD(buf, item.getItemSkinTemplate().getTemplateId());

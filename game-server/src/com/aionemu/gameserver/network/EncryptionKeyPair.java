@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.network;
 
-import java.nio.ByteBuffer;
+import io.netty.buffer.ByteBuf;
 
 /**
  * @author cura
@@ -89,34 +89,35 @@ public class EncryptionKeyPair {
 	/**
 	 * Check if packet was correctly decoded, also check if packet was correctly coded by aion client
 	 */
-	private boolean validateClientPacket(ByteBuffer buf) {
-		return buf.limit() >= 5 && buf.getShort(0) == ~buf.getShort(3) && buf.get(2) == staticClientPacketCode;
+	private boolean validateClientPacket(ByteBuf buf) {
+		int start = buf.readerIndex();
+		return buf.readableBytes() >= 5 && buf.getShortLE(start) == ~buf.getShortLE(start + 3) && buf.getByte(start + 2) == staticClientPacketCode;
 	}
 
 	/**
-	 * Decrypt client packet from this ByteBuffer If decryption is successful, update client key
+	 * Decrypt the client packet data between the buffer's reader and writer index. If decryption is successful, update client key
 	 * 
 	 * @return true if decryption was successful
 	 */
 	@SuppressWarnings("lossy-conversions")
-	public boolean decrypt(ByteBuffer buf) {
-		final byte[] data = buf.array();
-		final int size = buf.remaining();
+	public boolean decrypt(ByteBuf buf) {
+		final int size = buf.readableBytes();
 		byte[] clientPacketKey = keys[CLIENT];
 
 		// index to byte that should be decrypted now
-		int arrayIndex = buf.arrayOffset() + buf.position();
+		int index = buf.readerIndex();
 
 		// prev encrypted byte
-		int prev = data[arrayIndex];
+		int prev = buf.getByte(index);
 
 		// decrypt first byte
-		data[arrayIndex++] ^= (clientPacketKey[0] & 0xff);
+		buf.setByte(index, prev ^ (clientPacketKey[0] & 0xff));
+		index++;
 
 		// decrypt loop
-		for (int i = 1; i < size; i++, arrayIndex++) {
-			int curr = data[arrayIndex] & 0xff;
-			data[arrayIndex] ^= (staticKey[i & 63] & 0xff) ^ (clientPacketKey[i & 7] & 0xff) ^ prev;
+		for (int i = 1; i < size; i++, index++) {
+			int curr = buf.getUnsignedByte(index);
+			buf.setByte(index, curr ^ (staticKey[i & 63] & 0xff) ^ (clientPacketKey[i & 7] & 0xff) ^ prev);
 			prev = curr;
 		}
 
@@ -144,27 +145,21 @@ public class EncryptionKeyPair {
 	}
 
 	/**
-	 * Encrypt server packet from this ByteBuffer
+	 * Encrypt the server packet data from the buffer's index (inclusive) to its writer index
 	 */
 	@SuppressWarnings("lossy-conversions")
-	public void encrypt(ByteBuffer buf) {
-		final byte[] data = buf.array();
-		final int size = buf.remaining();
+	public void encrypt(ByteBuf buf, int index) {
+		final int size = buf.writerIndex() - index;
 		byte[] serverPacketKey = keys[SERVER];
 
-		// index to byte that should be encrypted now
-		int arrayIndex = buf.arrayOffset() + buf.position();
-
 		// encrypt first byte
-		data[arrayIndex] ^= (serverPacketKey[0] & 0xff);
-
-		// prev encrypted byte
-		int prev = data[arrayIndex++];
+		int prev = buf.getByte(index) ^ (serverPacketKey[0] & 0xff);
+		buf.setByte(index++, prev);
 
 		// encrypt loop
-		for (int i = 1; i < size; i++, arrayIndex++) {
-			data[arrayIndex] ^= (staticKey[i & 63] & 0xff) ^ (serverPacketKey[i & 7] & 0xff) ^ prev;
-			prev = data[arrayIndex];
+		for (int i = 1; i < size; i++, index++) {
+			prev = buf.getByte(index) ^ (staticKey[i & 63] & 0xff) ^ (serverPacketKey[i & 7] & 0xff) ^ prev;
+			buf.setByte(index, prev);
 		}
 
 		// oldKey value as long

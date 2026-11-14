@@ -3,6 +3,7 @@ package com.aionemu.chatserver.service;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -18,7 +19,6 @@ import com.aionemu.chatserver.network.aion.AionConnection;
 import com.aionemu.chatserver.network.aion.AionConnection.State;
 import com.aionemu.chatserver.network.aion.serverpackets.SM_CHANNEL_RESPONSE;
 import com.aionemu.chatserver.network.aion.serverpackets.SM_PLAYER_AUTH_RESPONSE;
-import com.aionemu.commons.utils.Rnd;
 
 /**
  * @author ATracer
@@ -27,6 +27,7 @@ public class ChatService {
 
 	private static final Logger log = LoggerFactory.getLogger(ChatService.class);
 	private static final ChatService instance = new ChatService();
+	private static final SecureRandom secureRandom = new SecureRandom();
 	private final Map<Integer, ChatClient> players = new ConcurrentHashMap<>();
 
 	private ChatService() {
@@ -50,7 +51,7 @@ public class ChatService {
 
 	private byte[] generateToken(byte[] accountToken) {
 		byte[] dynamicToken = new byte[16];
-		Rnd.nextBytes(dynamicToken);
+		secureRandom.nextBytes(dynamicToken);
 		byte[] token = new byte[48];
 		for (int i = 0; i < token.length; i++) {
 			if (i < 16)
@@ -61,7 +62,7 @@ public class ChatService {
 		return token;
 	}
 
-	public void registerPlayerConnection(int playerId, byte[] token, byte[] identifier, String name, String accName,
+	public void registerPlayerConnection(int msgIndex, int playerId, byte[] token, byte[] identifier, String name, String accName,
 		AionConnection connection) {
 		ChatClient chatClient = players.get(playerId);
 		if (chatClient == null)
@@ -73,12 +74,22 @@ public class ChatService {
 		else if (!chatClient.getName().equals(name))
 			log.warn("Client tried to connect with character name: {} (expected: {})", name, chatClient.getName());
 		else {
-			chatClient.setIdentifier(identifier);
-			chatClient.setConnection(connection);
-			connection.sendPacket(new SM_PLAYER_AUTH_RESPONSE());
-			connection.setState(State.AUTHED);
-			connection.setChatClient(chatClient);
-			BroadcastService.getInstance().addClient(chatClient);
+			AionConnection previousConnection;
+			synchronized (chatClient) { // a connection of the character that closes right now must not take it out of the broadcasts afterwards
+				previousConnection = chatClient.getConnection();
+				chatClient.setIdentifier(identifier);
+				chatClient.setConnection(connection);
+				connection.sendPacket(new SM_PLAYER_AUTH_RESPONSE(msgIndex));
+				connection.setState(State.AUTHED);
+				connection.setChatClient(chatClient);
+				BroadcastService.getInstance().addClient(chatClient);
+			}
+			// The character has one connection, like it has one in the game. The previous one stayed authenticated, and could keep writing to the
+			// channels in the character's name.
+			if (previousConnection != null && previousConnection != connection) {
+				log.info("{} logged in again, closing its previous connection from {}", chatClient, previousConnection.getIP());
+				previousConnection.close();
+			}
 		}
 	}
 

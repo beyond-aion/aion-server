@@ -1,9 +1,9 @@
 package com.aionemu.gameserver.network.aion.instanceinfo;
 
-import java.nio.ByteBuffer;
-
 import com.aionemu.gameserver.model.instance.instancescore.InstanceScore;
 import com.aionemu.gameserver.model.instance.playerreward.CruciblePlayerReward;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * @author xTz
@@ -15,7 +15,7 @@ public class CrucibleScoreWriter extends InstanceScoreWriter<InstanceScore<Cruci
 	}
 
 	@Override
-	public void writeMe(ByteBuffer buf) {
+	public void writeMe(ByteBuf buf) {
 		int playerCount = 0;
 		for (CruciblePlayerReward playerReward : instanceScore.getPlayerRewards()) {
 			writeD(buf, playerReward.getOwnerId()); // obj

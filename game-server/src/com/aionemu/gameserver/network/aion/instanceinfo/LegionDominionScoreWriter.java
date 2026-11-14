@@ -1,8 +1,8 @@
 package com.aionemu.gameserver.network.aion.instanceinfo;
 
-import java.nio.ByteBuffer;
-
 import com.aionemu.gameserver.model.instance.instancescore.LegionDominionScore;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * @author Yeats
@@ -14,7 +14,7 @@ public class LegionDominionScoreWriter extends InstanceScoreWriter<LegionDominio
 	}
 
 	@Override
-	public void writeMe(ByteBuffer buf) {
+	public void writeMe(ByteBuf buf) {
 		writeD(buf, instanceScore.getPoints());
 		writeD(buf, 0); // unk
 		writeD(buf, 0); // unk

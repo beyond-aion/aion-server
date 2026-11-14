@@ -1,9 +1,9 @@
 package com.aionemu.gameserver.network.aion.iteminfo;
 
-import java.nio.ByteBuffer;
-
 import com.aionemu.gameserver.model.stats.calc.functions.StatRateFunction;
 import com.aionemu.gameserver.network.aion.iteminfo.ItemInfoBlob.ItemBlobType;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * @author Rolandas
@@ -15,7 +15,7 @@ public class BonusInfoBlobEntry extends ItemBlobEntry {
 	}
 
 	@Override
-	public void writeThisBlob(ByteBuffer buf) {
+	public void writeThisBlob(ByteBuf buf) {
 		writeH(buf, modifier.getName().getItemStoneMask());
 		writeD(buf, modifier.getValue() * modifier.getName().getSign());
 		writeC(buf, modifier instanceof StatRateFunction ? 1 : 0);

@@ -1,10 +1,11 @@
 package com.aionemu.gameserver.network.aion.skillinfo;
 
-import java.nio.ByteBuffer;
 import java.util.function.Function;
 
 import com.aionemu.gameserver.model.skill.PlayerSkillEntry;
 import com.aionemu.gameserver.network.PacketWriteHelper;
+
+import io.netty.buffer.ByteBuf;
 
 public class SkillEntryWriter extends PacketWriteHelper {
 
@@ -12,7 +13,7 @@ public class SkillEntryWriter extends PacketWriteHelper {
 
 	private final PlayerSkillEntry skillEntry;
 
-	public static void writeSkillEntry(PlayerSkillEntry skillEntry, ByteBuffer buffer) {
+	public static void writeSkillEntry(PlayerSkillEntry skillEntry, ByteBuf buffer) {
 		SkillEntryWriter entryWriter = new SkillEntryWriter(skillEntry);
 		entryWriter.writeMe(buffer);
 	}
@@ -22,7 +23,7 @@ public class SkillEntryWriter extends PacketWriteHelper {
 	}
 
 	@Override
-	protected void writeMe(ByteBuffer buf) {
+	protected void writeMe(ByteBuf buf) {
 		writeH(buf, skillEntry.getSkillId());
 		writeH(buf, skillEntry.getSkillLevel());
 		writeC(buf, 0x00);

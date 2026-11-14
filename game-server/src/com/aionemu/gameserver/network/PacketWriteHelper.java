@@ -1,135 +1,133 @@
 package com.aionemu.gameserver.network;
 
-import java.nio.ByteBuffer;
-
 import com.aionemu.gameserver.network.aion.AionServerPacket;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * @author -Nemesiss-
  */
 public abstract class PacketWriteHelper {
 
-	protected abstract void writeMe(ByteBuffer buf);
+	protected abstract void writeMe(ByteBuf buf);
 
 	/**
 	 * Write int to buffer.
-	 * 
+	 *
 	 * @param buf
 	 * @param value
 	 */
-	protected static void writeD(ByteBuffer buf, int value) {
-		buf.putInt(value);
+	protected static void writeD(ByteBuf buf, int value) {
+		buf.writeIntLE(value);
 	}
 
 	/**
 	 * Write short to buffer.
-	 * 
+	 *
 	 * @param buf
 	 * @param value
 	 */
-	protected static void writeH(ByteBuffer buf, int value) {
-		buf.putShort((short) value);
+	protected static void writeH(ByteBuf buf, int value) {
+		buf.writeShortLE(value);
 	}
 
 	/**
 	 * Write byte to buffer.
-	 * 
+	 *
 	 * @param buf
 	 * @param value
 	 */
-	protected static void writeC(ByteBuffer buf, int value) {
-		buf.put((byte) value);
+	protected static void writeC(ByteBuf buf, int value) {
+		buf.writeByte(value);
 	}
 
 	/**
 	 * Write double to buffer.
-	 * 
+	 *
 	 * @param buf
 	 * @param value
 	 */
-	protected static void writeDF(ByteBuffer buf, double value) {
-		buf.putDouble(value);
+	protected static void writeDF(ByteBuf buf, double value) {
+		buf.writeDoubleLE(value);
 	}
 
 	/**
 	 * Write float to buffer.
-	 * 
+	 *
 	 * @param buf
 	 * @param value
 	 */
-	protected static void writeF(ByteBuffer buf, float value) {
-		buf.putFloat(value);
+	protected static void writeF(ByteBuf buf, float value) {
+		buf.writeFloatLE(value);
 	}
 
 	/**
 	 * Write long to buffer.
-	 * 
+	 *
 	 * @param buf
 	 * @param value
 	 */
-	protected static void writeQ(ByteBuffer buf, long value) {
-		buf.putLong(value);
+	protected static void writeQ(ByteBuf buf, long value) {
+		buf.writeLongLE(value);
 	}
 
 	/**
 	 * Write String to buffer
-	 * 
+	 *
 	 * @param buf
 	 * @param text
 	 */
-	protected static void writeS(ByteBuffer buf, String text) {
-		if (text == null) {
-			buf.putChar('\000');
-		} else {
+	protected static void writeS(ByteBuf buf, String text) {
+		if (text != null) {
 			int len = text.length();
 			for (int i = 0; i < len; i++)
-				buf.putChar(text.charAt(i));
-			buf.putChar('\000');
+				buf.writeShortLE(text.charAt(i));
 		}
+		buf.writeShortLE(0);
 	}
 
 	/**
 	 * Write String to buffer
-	 * 
+	 *
 	 * @param buf
 	 * @param text
 	 * @param size
 	 */
-	protected static void writeS(ByteBuffer buf, String text, int size) {
+	protected static void writeS(ByteBuf buf, String text, int size) {
 		if (text == null) {
-			buf.put(new byte[size]);
+			buf.writeZero(size);
 		} else {
 			int len = text.length();
 			for (int i = 0; i < len; i++)
-				buf.putChar(text.charAt(i));
-			buf.put(new byte[size - (len * 2)]);
+				buf.writeShortLE(text.charAt(i));
+			buf.writeZero(size - (len * 2));
 		}
 	}
 
 	/**
 	 * Write byte array to buffer.
-	 * 
+	 *
 	 * @param buf
 	 * @param data
 	 */
-	protected static void writeB(ByteBuffer buf, byte[] data) {
-		buf.put(data);
+	protected static void writeB(ByteBuf buf, byte[] data) {
+		buf.writeBytes(data);
 	}
 
 	/**
 	 * Skip specified amount of bytes
-	 * 
+	 *
 	 * @param buf
 	 * @param bytes
 	 */
-	protected static void skip(ByteBuffer buf, int bytes) {
-		buf.put(new byte[bytes]);
+	protected static void skip(ByteBuf buf, int bytes) {
+		buf.writeZero(bytes);
 	}
 
 	/**
 	 * @see AionServerPacket#writeDyeInfo(Integer rgb)
 	 */
-	protected static void writeDyeInfo(ByteBuffer buf, Integer rgb) {
+	protected static void writeDyeInfo(ByteBuf buf, Integer rgb) {
 		if (rgb == null) {
 			skip(buf, 4);
 		} else {

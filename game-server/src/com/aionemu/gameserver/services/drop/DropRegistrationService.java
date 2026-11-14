@@ -71,7 +71,8 @@ public class DropRegistrationService {
 		}
 
 		int index = 1;
-		Set<DropItem> droppedItems = new HashSet<>();
+		// The set is read and changed by the threads of all players who may loot the corpse, and by instance scripts and respawn tasks
+		Set<DropItem> droppedItems = ConcurrentHashMap.newKeySet();
 		DropModifiers dropModifiers = createDropModifiers(npc, looter, highestLevel);
 
 		if (npcDrop != null) // add custom drops
