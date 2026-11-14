@@ -117,7 +117,7 @@ public class PlayerController extends CreatureController<Player> {
 		} else if (object instanceof Gatherable || object instanceof StaticObject) {
 			PacketSendUtility.sendPacket(getOwner(), new SM_GATHERABLE_INFO(object));
 		} else if (object instanceof Pet pet) {
-			PacketSendUtility.sendPacket(getOwner(), new SM_PET(pet));
+			PacketSendUtility.sendPacket(getOwner(), SM_FUNCTIONAL_PET.spawned(pet));
 			if (pet.getMaster().isInFlyingState())
 				PacketSendUtility.sendPacket(getOwner(), new SM_PET_EMOTE(pet, PetEmote.FLY_START));
 		} else if (object instanceof House) {
@@ -145,7 +145,7 @@ public class PlayerController extends CreatureController<Player> {
 		if (!getOwner().isSpawned()) // player is teleporting, no need to send deletion packets
 			return;
 		if (object instanceof Pet) {
-			PacketSendUtility.sendPacket(getOwner(), new SM_PET(object.getObjectId(), animation));
+			PacketSendUtility.sendPacket(getOwner(), SM_FUNCTIONAL_PET.dismissed(object.getObjectId()));
 		} else if (object instanceof House) {
 			PacketSendUtility.sendPacket(getOwner(), new SM_DELETE_HOUSE(((House) object).getAddress().getId()));
 		} else if (object instanceof HouseObject) {

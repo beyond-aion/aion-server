@@ -61,14 +61,17 @@ public class PlayerPetsDAO {
 	public static void insertPlayerPet(Player player, PetCommonData petCommonData) {
 		try (Connection con = DatabaseFactory.getConnection();
 				 PreparedStatement stmt = con.prepareStatement(
-					 "INSERT INTO player_pets(id, player_id, template_id, decoration, name, despawn_time, expire_time) VALUES(?, ?, ?, ?, ?, ?, ?)")) {
+					 "INSERT INTO player_pets(id, player_id, template_id, decoration, color, face, head, name, despawn_time, expire_time) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
 			stmt.setInt(1, petCommonData.getObjectId());
 			stmt.setInt(2, player.getObjectId());
 			stmt.setInt(3, petCommonData.getTemplateId());
 			stmt.setInt(4, petCommonData.getDecoration());
-			stmt.setString(5, petCommonData.getName());
-			stmt.setTimestamp(6, petCommonData.getDespawnTime());
-			stmt.setInt(7, petCommonData.getExpireTime());
+			stmt.setInt(5, petCommonData.getColor());
+			stmt.setInt(6, petCommonData.getFace());
+			stmt.setInt(7, petCommonData.getHead());
+			stmt.setString(8, petCommonData.getName());
+			stmt.setTimestamp(9, petCommonData.getDespawnTime());
+			stmt.setInt(10, petCommonData.getExpireTime());
 			stmt.execute();
 		} catch (Exception e) {
 			log.error("Error inserting new pet #{}, name: {}", petCommonData.getObjectId(), petCommonData.getName(), e);
@@ -95,6 +98,9 @@ public class PlayerPetsDAO {
 						rs.getInt("expire_time"));
 					petCommonData.setName(rs.getString("name"));
 					petCommonData.setDecoration(rs.getInt("decoration"));
+					petCommonData.setColor(rs.getInt("color"));
+					petCommonData.setFace(rs.getInt("face"));
+					petCommonData.setHead(rs.getInt("head"));
 					if (petCommonData.getFeedProgress() != null) {
 						petCommonData.getFeedProgress().setHungryLevel(PetHungryLevel.fromId(rs.getInt("hungry_level")));
 						petCommonData.getFeedProgress().setData(rs.getInt("feed_progress"));

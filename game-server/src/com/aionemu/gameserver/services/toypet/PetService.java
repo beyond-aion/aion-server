@@ -2,6 +2,7 @@ package com.aionemu.gameserver.services.toypet;
 
 import static com.aionemu.gameserver.model.items.ItemUseAnimation.*;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -14,6 +15,8 @@ import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Pet;
+import com.aionemu.gameserver.model.gameobjects.PetDopingAction;
+import com.aionemu.gameserver.model.gameobjects.PetFeedAction;
 import com.aionemu.gameserver.model.gameobjects.PetSpecialFunction;
 import com.aionemu.gameserver.model.gameobjects.player.PetCommonData;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -25,7 +28,7 @@ import com.aionemu.gameserver.model.templates.pet.*;
 import com.aionemu.gameserver.model.trade.TradeList;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_PET;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_FUNCTIONAL_PET;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.TradeService;
 import com.aionemu.gameserver.services.item.ItemPacketService;
@@ -52,30 +55,37 @@ public class PetService {
 	private PetService() {
 	}
 
-	public void renamePet(Player player, String name) {
+	public void renamePet(Player player, int petObjectId, String name) {
 		name = Util.convertName(name);
-		Pet pet = player.getPet();
-		if (pet != null) {
-			pet.getCommonData().setName(name);
-			PlayerPetsDAO.updatePetName(pet.getCommonData());
-			PacketSendUtility.broadcastPacket(player, new SM_PET(pet.getObjectId(), pet.getName()), true);
-		}
+		PetCommonData petCommonData = player.getPetList().getPets().stream().filter(pet -> pet.getObjectId() == petObjectId).findFirst()
+			.orElse(null);
+		if (petCommonData == null)
+			return;
+		petCommonData.setName(name);
+		PlayerPetsDAO.updatePetName(petCommonData);
+		PacketSendUtility.broadcastPacket(player, SM_FUNCTIONAL_PET.renamed(petObjectId, petCommonData.getName()), true);
 	}
 
 	public void onPlayerLogin(Player player) {
 		Collection<PetCommonData> playerPets = player.getPetList().getPets();
-		if (!playerPets.isEmpty())
-			PacketSendUtility.sendPacket(player, new SM_PET(playerPets));
+		if (playerPets.isEmpty())
+			return;
+		List<PetCommonData> pets = new ArrayList<>(playerPets);
+		for (int page = 0; page * SM_FUNCTIONAL_PET.MAX_ENTRIES_PER_PAGE < pets.size(); page++) {
+			int from = page * SM_FUNCTIONAL_PET.MAX_ENTRIES_PER_PAGE;
+			int to = Math.min(from + SM_FUNCTIONAL_PET.MAX_ENTRIES_PER_PAGE, pets.size());
+			PacketSendUtility.sendPacket(player, SM_FUNCTIONAL_PET.petList(pets.subList(from, to), page));
+		}
 	}
 
 	public void removeObject(int objectId, int count, Player player) {
+		Pet pet = player.getPet();
 		Item item = player.getInventory().getItemByObjId(objectId);
-		if (item == null || player.getPet() == null || count > item.getItemCount())
+		if (item == null || pet == null || pet.getCommonData().getFeedProgress() == null || count > item.getItemCount())
 			return;
 
-		Pet pet = player.getPet();
 		pet.getCommonData().setCancelFeed(false);
-		PacketSendUtility.sendPacket(player, new SM_PET(1, item.getObjectId(), count, pet));
+		PacketSendUtility.sendPacket(player, SM_FUNCTIONAL_PET.feeding(PetFeedAction.START, item.getObjectId(), count, pet));
 		PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.START_FEEDING, 0, player.getObjectId()));
 
 		schedule(pet, player, item, count);
@@ -103,7 +113,7 @@ public class PetService {
 			if (foodType == null) {
 				// non eatable item
 				ItemPacketService.sendItemUnlockPacket(player, item);
-				PacketSendUtility.sendPacket(player, new SM_PET(5, 0, 0, pet));
+				PacketSendUtility.sendPacket(player, SM_FUNCTIONAL_PET.feeding(PetFeedAction.REJECTED, item.getObjectId(), count, pet));
 				PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.END_FEEDING, 0, player.getObjectId()));
 				PacketSendUtility.sendPacket(player,
 					SM_SYSTEM_MESSAGE.STR_MSG_TOYPET_FEED_FOOD_NOT_LOVEFLAVOR(pet.getName(), item.getItemTemplate().getL10n()));
@@ -113,11 +123,11 @@ public class PetService {
 			PetFeedResult reward = flavour.processFeedResult(progress, foodType, item.getItemTemplate().getLevel(), player.getCommonData().getLevel());
 
 			if (progress.getHungryLevel() == PetHungryLevel.FULL && reward != null) {
-				PacketSendUtility.sendPacket(player, new SM_PET(2, item.getObjectId(), 0, pet));
-				PacketSendUtility.sendPacket(player, new SM_PET(6, reward.getItem(), 0, pet));
-				PacketSendUtility.sendPacket(player, new SM_PET(5, 0, 0, pet));
+				PacketSendUtility.sendPacket(player, SM_FUNCTIONAL_PET.feeding(PetFeedAction.EATEN, item.getObjectId(), 0, pet));
+				PacketSendUtility.sendPacket(player, SM_FUNCTIONAL_PET.feeding(PetFeedAction.GAVE_ITEM, reward.getItem(), 0, pet));
+				PacketSendUtility.sendPacket(player, SM_FUNCTIONAL_PET.feeding(PetFeedAction.FINISHED, 0, 0, pet));
 				PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.END_FEEDING, 0, player.getObjectId()));
-				PacketSendUtility.sendPacket(player, new SM_PET(7, 0, 0, pet)); // 2151591961
+				PacketSendUtility.sendPacket(player, SM_FUNCTIONAL_PET.feeding(PetFeedAction.REFEED, item.getObjectId(), 0, pet)); // 2151591961
 
 				ItemService.addItem(player, reward.getItem(), 1);
 				long delay = flavour.getCooldDown() * 60000;
@@ -127,57 +137,70 @@ public class PetService {
 				PlayerPetsDAO.setTime(pet.getObjectId(), refeedTime);
 				progress.reset();
 			} else {
-				PacketSendUtility.sendPacket(player, new SM_PET(2, item.getObjectId(), --count, pet));
+				PacketSendUtility.sendPacket(player, SM_FUNCTIONAL_PET.feeding(PetFeedAction.EATEN, item.getObjectId(), --count, pet));
 				if (count > 0)
 					schedule(pet, player, item, count);
 				else {
-					PacketSendUtility.sendPacket(player, new SM_PET(5, 0, 0, pet));
+					PacketSendUtility.sendPacket(player, SM_FUNCTIONAL_PET.feeding(PetFeedAction.FINISHED, 0, 0, pet));
 					PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.END_FEEDING, 0, player.getObjectId()));
 				}
 			}
 		}
 	}
 
-	public void useDoping(Pet pet, int action, int itemId, int slot, int slot2) {
-		if (pet.getCommonData().getDopingBag() == null)
-			return;
-
+	public void useDoping(Pet pet, PetDopingAction action, int itemId, int slot, int slot2) {
 		Player player = pet.getMaster();
-		if (action < 2) { // add, replace or delete item
-			if (!validateSetDopeItem(pet, itemId, slot))
+		if (pet.getCommonData().getDopingBag() == null) {
+			PacketSendUtility.sendPacket(player, SM_FUNCTIONAL_PET.dopingRejected(action));
+			return;
+		}
+
+		if (action == PetDopingAction.ADD || action == PetDopingAction.REMOVE) {
+			if (!validateSetDopeItem(pet, itemId, slot)) {
+				PacketSendUtility.sendPacket(player, SM_FUNCTIONAL_PET.dopingRejected(action));
 				return;
+			}
 			pet.getCommonData().getDopingBag().setItem(itemId, slot);
-			PacketSendUtility.sendPacket(player, new SM_PET(action, itemId, slot));
-		} else if (action == 2) {
+			PacketSendUtility.sendPacket(player, SM_FUNCTIONAL_PET.doping(action, itemId, slot));
+		} else if (action == PetDopingAction.SWITCH) {
+			if (slot < 2 || slot2 < 2 || slot >= PetDopingBag.MAX_ITEMS || slot2 >= PetDopingBag.MAX_ITEMS) {
+				AuditLogger.log(player, "tried to move pet buff items in slots " + slot + " and " + slot2);
+				PacketSendUtility.sendPacket(player, SM_FUNCTIONAL_PET.dopingRejected(action));
+				return;
+			}
 			pet.getCommonData().getDopingBag().switchItems(slot, slot2);
-			PacketSendUtility.sendPacket(pet.getMaster(), new SM_PET(action, slot2, slot));
-		} else if (action == 3) { // use item
-			if (!player.isSpawned()) { // player may be just despawned because of a pending teleport, schedule re-check
-				ThreadPoolManager.getInstance().schedule(() -> PacketSendUtility.sendPacket(player, new SM_PET(action, itemId, slot)), 5, TimeUnit.SECONDS);
+			PacketSendUtility.sendPacket(pet.getMaster(), SM_FUNCTIONAL_PET.doping(action, slot2, slot));
+		} else if (action == PetDopingAction.USE) { // use item
+			if (!player.isSpawned()) { // player is between maps, schedule re-check
+				ThreadPoolManager.getInstance().schedule(() -> PacketSendUtility.sendPacket(player, SM_FUNCTIONAL_PET.doping(action, itemId, slot)), 5, TimeUnit.SECONDS);
 				return;
 			}
 
 			int[] dopingItems = pet.getCommonData().getDopingBag().getItems();
 			if (slot < 0 || slot >= dopingItems.length || dopingItems[slot] != itemId) {
 				AuditLogger.log(player, "tried to use item " + itemId + " through pet buffing, but it's not in slot " + slot);
+				PacketSendUtility.sendPacket(player, SM_FUNCTIONAL_PET.dopingRejected(action));
 				return;
 			}
 			Item useItem = player.getInventory().getFirstItemByItemId(itemId);
-			if (useItem == null || !useItem.getItemTemplate().isDopingPetUsable())
+			if (useItem == null || !useItem.getItemTemplate().isDopingPetUsable()) {
+				PacketSendUtility.sendPacket(player, SM_FUNCTIONAL_PET.dopingRejected(action));
 				return;
+			}
 
 			if (!isPetItemUseAllowed(player, useItem)) { // pet currently is not allowed to buff, schedule re-check
-				ThreadPoolManager.getInstance().schedule(() -> PacketSendUtility.sendPacket(player, new SM_PET(action, itemId, slot)), 20, TimeUnit.SECONDS);
+				ThreadPoolManager.getInstance().schedule(() -> PacketSendUtility.sendPacket(player, SM_FUNCTIONAL_PET.doping(action, itemId, slot)), 20, TimeUnit.SECONDS);
 				return;
 			}
 
 			long now = System.currentTimeMillis();
 			long reuseTime = player.getItemReuseTime(useItem.getItemTemplate().getUseLimits().getDelayId());
 			if (reuseTime != 0 && reuseTime > now) { // player still has cooldown, schedule re-check
-				ThreadPoolManager.getInstance().schedule(() -> PacketSendUtility.sendPacket(player, new SM_PET(action, itemId, slot)), reuseTime - now);
+				ThreadPoolManager.getInstance().schedule(() -> PacketSendUtility.sendPacket(player, SM_FUNCTIONAL_PET.doping(action, itemId, slot)), reuseTime - now);
 				return;
 			}
 
+			boolean used = false;
 			for (AbstractItemAction itemAction : useItem.getItemTemplate().getActions().getItemActions()) {
 				if (itemAction instanceof SkillUseAction) {
 					PacketSendUtility.broadcastPacket(player,
@@ -188,10 +211,11 @@ public class PetService {
 					int useDelay = useItem.getItemTemplate().getUseLimits().getDelayTime();
 					player.addItemCoolDown(useItem.getItemTemplate().getUseLimits().getDelayId(), now + useDelay, useDelay / 1000);
 					player.getInventory().decreaseByItemId(itemId, 1);
+					used = true;
 				} else
 					log.warn("Pet attempt to use not skill use item");
 			}
-			PacketSendUtility.sendPacket(player, new SM_PET(action, itemId, slot));
+			PacketSendUtility.sendPacket(player, used ? SM_FUNCTIONAL_PET.doping(action, itemId, slot) : SM_FUNCTIONAL_PET.dopingRejected(action));
 		}
 	}
 
@@ -243,7 +267,7 @@ public class PetService {
 			PacketSendUtility.sendPacket(pet.getMaster(), SM_SYSTEM_MESSAGE.STR_MSG_LOOTING_PET_MESSAGE01());
 		}
 		pet.getCommonData().setIsLooting(activate);
-		PacketSendUtility.sendPacket(pet.getMaster(), new SM_PET(PetSpecialFunction.AUTOLOOT, activate));
+		PacketSendUtility.sendPacket(pet.getMaster(), SM_FUNCTIONAL_PET.specialFunction(PetSpecialFunction.AUTOLOOT, activate));
 	}
 
 	public void activateAutoSell(Pet pet, boolean activate) {
@@ -252,7 +276,7 @@ public class PetService {
 			return;
 		}
 		pet.getCommonData().setIsSelling(activate);
-		PacketSendUtility.sendPacket(pet.getMaster(), new SM_PET(PetSpecialFunction.AUTOSELL, activate));
+		PacketSendUtility.sendPacket(pet.getMaster(), SM_FUNCTIONAL_PET.specialFunction(PetSpecialFunction.AUTOSELL, activate));
 	}
 
 	public void sell(Pet pet, List<Item> items) {

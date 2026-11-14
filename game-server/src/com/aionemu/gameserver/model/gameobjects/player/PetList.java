@@ -64,12 +64,24 @@ public class PetList {
 	 * @return
 	 */
 	public PetCommonData addPet(Player player, int petId, int decorationId, String name, int expireTime) {
-		return addPet(player, petId, decorationId, System.currentTimeMillis(), name, expireTime);
+		return addPet(player, petId, decorationId, 0, 0, 0, System.currentTimeMillis(), name, expireTime);
 	}
 
 	public PetCommonData addPet(Player player, int petId, int decorationId, long birthday, String name, int expireTime) {
+		return addPet(player, petId, decorationId, 0, 0, 0, birthday, name, expireTime);
+	}
+
+	public PetCommonData addPet(Player player, int petId, int decorationId, int color, int face, int head, String name, int expireTime) {
+		return addPet(player, petId, decorationId, color, face, head, System.currentTimeMillis(), name, expireTime);
+	}
+
+	public PetCommonData addPet(Player player, int petId, int decorationId, int color, int face, int head, long birthday, String name,
+		int expireTime) {
 		PetCommonData petCommonData = new PetCommonData(IDFactory.getInstance().nextId(), petId, player.getObjectId(), expireTime);
 		petCommonData.setDecoration(decorationId);
+		petCommonData.setColor(color);
+		petCommonData.setFace(face);
+		petCommonData.setHead(head);
 		petCommonData.setName(name);
 		petCommonData.setBirthday(new Timestamp(birthday));
 		petCommonData.setDespawnTime(new Timestamp(System.currentTimeMillis()));
@@ -80,6 +92,10 @@ public class PetList {
 
 	public boolean hasPet(int templateId) {
 		return pets.containsKey(templateId);
+	}
+
+	public boolean hasSameName(String name) {
+		return pets.values().stream().anyMatch(pet -> pet.getName() != null && pet.getName().equalsIgnoreCase(name));
 	}
 
 	public PetCommonData deletePet(int templateId) {

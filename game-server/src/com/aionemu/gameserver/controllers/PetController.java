@@ -5,9 +5,10 @@ import java.sql.Timestamp;
 import com.aionemu.gameserver.dao.PlayerPetsDAO;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Pet;
+import com.aionemu.gameserver.model.gameobjects.PetMoodAction;
 import com.aionemu.gameserver.model.gameobjects.player.PetCommonData;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_PET;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_FUNCTIONAL_PET;
 import com.aionemu.gameserver.services.toypet.PetFeedProgress;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
@@ -57,30 +58,11 @@ public class PetController extends VisibleObjectController<Pet> {
 				if (pet == null)
 					throw new IllegalStateException("Pet is null");
 
-				int currentPoints = 0;
-				boolean saved = false;
-
-				if (pet.getCommonData().getMoodPoints(false) < 9000) {
-					if (System.currentTimeMillis() - startTime >= 60 * 1000) {
-						currentPoints = pet.getCommonData().getMoodPoints(false);
-						if (currentPoints == 9000) {
-							PacketSendUtility.sendPacket(player, new SM_PET(pet, 4, 0));
-						}
-
-						PlayerPetsDAO.savePetMoodData(pet.getCommonData());
-						saved = true;
-						startTime = System.currentTimeMillis();
-					}
+				if (System.currentTimeMillis() - startTime >= 60 * 1000) {
+					PlayerPetsDAO.savePetMoodData(pet.getCommonData());
+					startTime = System.currentTimeMillis();
 				}
-
-				if (currentPoints < 9000) {
-					PacketSendUtility.sendPacket(player, new SM_PET(pet, 4, 0));
-				} else {
-					PacketSendUtility.sendPacket(player, new SM_PET(pet, 3, 0));
-					// Save if it reaches 100% after player snuggles the pet, not by the scheduler itself
-					if (!saved)
-						PlayerPetsDAO.savePetMoodData(pet.getCommonData());
-				}
+				PacketSendUtility.sendPacket(player, SM_FUNCTIONAL_PET.mood(pet, PetMoodAction.UPDATE, 0));
 			} catch (Exception ex) {
 				player.getController().cancelTask(TaskId.PET_UPDATE);
 			}

@@ -14,7 +14,6 @@ import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.DialogPage;
 import com.aionemu.gameserver.model.autogroup.AutoGroupType;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.PetAction;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.RequestResponseHandler;
@@ -221,10 +220,10 @@ public class DialogService {
 					PacketSendUtility.sendPacket(player, new SM_REPURCHASE(player, npc.getObjectId()));
 					break;
 				case FUNC_PET_ADOPT: // adopt pet (2.5)
-					PacketSendUtility.sendPacket(player, new SM_PET(PetAction.TALK_WITH_MERCHANT));
+					PacketSendUtility.sendPacket(player, SM_FUNCTIONAL_PET.petAdoptDialog());
 					break;
 				case FUNC_PET_ABANDON: // surrender pet (2.5)
-					PacketSendUtility.sendPacket(player, new SM_PET(PetAction.TALK_WITH_MINDER));
+					PacketSendUtility.sendPacket(player, SM_FUNCTIONAL_PET.petAbandonDialog());
 					break;
 				case CHARGE_ITEM_MULTI: // condition all equiped items
 					ItemChargeService.startChargingEquippedItems(player, targetObjectId, 1);
@@ -247,10 +246,10 @@ public class DialogService {
 					RelinquishCraftStatus.relinquishMasterStatus(player, CraftSkillUpdateService.getInstance().getProfessionByNpc(npc));
 					break;
 				case FUNC_PET_H_ADOPT:
-					PacketSendUtility.sendPacket(player, new SM_PET(PetAction.H_ADOPT));
+					PacketSendUtility.sendPacket(player, SM_FUNCTIONAL_PET.petAdoptHyperlink());
 					break;
 				case FUNC_PET_H_ABANDON:
-					PacketSendUtility.sendPacket(player, new SM_PET(PetAction.H_ABANDON));
+					PacketSendUtility.sendPacket(player, SM_FUNCTIONAL_PET.petAbandonHyperlink());
 					break;
 				case CHARGE_ITEM_MULTI2: // augmenting all equipped items
 					ItemChargeService.startChargingEquippedItems(player, targetObjectId, 2);

@@ -2,7 +2,7 @@ package com.aionemu.gameserver.model.animations;
 
 /**
  * These IDs are for use with {@link com.aionemu.gameserver.network.aion.serverpackets.SM_DELETE SM_DELETE} and
- * {@link com.aionemu.gameserver.network.aion.serverpackets.SM_PET SM_PET}.
+ * {@link com.aionemu.gameserver.network.aion.serverpackets.SM_FUNCTIONAL_PET SM_FUNCTIONAL_PET}.
  * 
  * @author Neon
  */

@@ -116,7 +116,7 @@ public class ServerPacketsOpcodes {
 		addPacketOpcode(98, SM_QUIT_RESPONSE.class); // [S_ASK_QUIT_RESULT]
 		addPacketOpcode(99, SM_CHAT_WINDOW.class); // [S_ASK_INFO_RESULT] 2.1
 		// addPacketOpcode(100, ); // [S_FATIGUE_INFO]
-		addPacketOpcode(101, SM_PET.class); // [S_FUNCTIONAL_PET] 2.7
+		addPacketOpcode(101, SM_FUNCTIONAL_PET.class); // [S_FUNCTIONAL_PET] 2.7
 		// addPacketOpcode(102, ); // [S_QUERY_NUMBER]
 		addPacketOpcode(103, SM_ITEM_COOLDOWN.class); // [S_LOAD_ITEM_COOLTIME] 2.7
 		addPacketOpcode(104, SM_UPDATE_NOTE.class); // [S_TODAY_WORDS]

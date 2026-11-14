@@ -4,10 +4,11 @@ import com.aionemu.gameserver.configs.main.PeriodicSaveConfig;
 import com.aionemu.gameserver.controllers.PetController;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Pet;
+import com.aionemu.gameserver.model.gameobjects.PetMoodAction;
 import com.aionemu.gameserver.model.gameobjects.PetSpecialFunction;
 import com.aionemu.gameserver.model.gameobjects.player.PetCommonData;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_PET;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_FUNCTIONAL_PET;
 import com.aionemu.gameserver.spawnengine.VisibleObjectSpawner;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -54,9 +55,10 @@ public class PetSpawnService {
 			petCommonData.clearMoodStatistics();
 		player.getPetList().setLastUsedPetTemplateId(templateId);
 		if (petCommonData.isLooting())
-			PacketSendUtility.sendPacket(player, new SM_PET(PetSpecialFunction.AUTOLOOT, true));
+			PacketSendUtility.sendPacket(player, SM_FUNCTIONAL_PET.specialFunction(PetSpecialFunction.AUTOLOOT, true));
 		if (petCommonData.isSelling())
-			PacketSendUtility.sendPacket(player, new SM_PET(PetSpecialFunction.AUTOSELL, true));
+			PacketSendUtility.sendPacket(player, SM_FUNCTIONAL_PET.specialFunction(PetSpecialFunction.AUTOSELL, true));
+		PacketSendUtility.sendPacket(player, SM_FUNCTIONAL_PET.mood(pet, PetMoodAction.UPDATE, 0)); // initial mood state
 	}
 
 }

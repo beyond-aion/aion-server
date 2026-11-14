@@ -8,11 +8,9 @@ import com.aionemu.gameserver.model.Expirable;
 import com.aionemu.gameserver.model.templates.pet.PetDopingBag;
 import com.aionemu.gameserver.model.templates.pet.PetFunctionType;
 import com.aionemu.gameserver.model.templates.pet.PetTemplate;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.toypet.PetAdoptionService;
 import com.aionemu.gameserver.services.toypet.PetFeedProgress;
 import com.aionemu.gameserver.services.toypet.PetHungryLevel;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
@@ -24,6 +22,9 @@ public class PetCommonData implements Expirable {
 	private final int templateId;
 	private final int masterObjectId;
 	private int decoration;
+	private int color;
+	private int face;
+	private int head;
 	private String name;
 	private Timestamp birthday;
 	PetFeedProgress feedProgress = null;
@@ -32,7 +33,6 @@ public class PetCommonData implements Expirable {
 	private long refeedTime;
 	private long startMoodTime;
 	private int shuggleCounter;
-	private int lastSentPoints;
 	private long moodCdStarted;
 	private long giftCdStarted;
 	private int expireTime;
@@ -71,6 +71,30 @@ public class PetCommonData implements Expirable {
 
 	public void setDecoration(int decoration) {
 		this.decoration = decoration;
+	}
+
+	public int getColor() {
+		return color;
+	}
+
+	public void setColor(int color) {
+		this.color = color;
+	}
+
+	public int getFace() {
+		return face;
+	}
+
+	public void setFace(int face) {
+		this.face = face;
+	}
+
+	public int getHead() {
+		return head;
+	}
+
+	public void setHead(int head) {
+		this.head = head;
 	}
 
 	public String getName() {
@@ -158,14 +182,6 @@ public class PetCommonData implements Expirable {
 		if (forPacket && points > 9000)
 			return 9000;
 		return points;
-	}
-
-	public final int getLastSentPoints() {
-		return lastSentPoints;
-	}
-
-	public final void setLastSentPoints(int points) {
-		lastSentPoints = points;
 	}
 
 	public final boolean increaseShuggleCounter() {
@@ -284,8 +300,7 @@ public class PetCommonData implements Expirable {
 
 	@Override
 	public void onExpire(Player player) {
-		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PET_ABANDON_EXPIRE_TIME_COMPLETE(name));
-		PetAdoptionService.surrenderPet(player, templateId);
+		PetAdoptionService.surrenderPet(player, templateId, true);
 	}
 
 }

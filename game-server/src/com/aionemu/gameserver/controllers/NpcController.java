@@ -26,7 +26,7 @@ import com.aionemu.gameserver.model.team.common.service.PlayerTeamDistributionSe
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_LOOKATOBJECT;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_PET;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_FUNCTIONAL_PET;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -174,10 +174,10 @@ public class NpcController extends CreatureController<Npc> {
 			int npcObjId = owner.getObjectId();
 			Set<DropItem> drops = DropRegistrationService.getInstance().getCurrentDropMap().get(npcObjId);
 			if (drops != null && !drops.isEmpty()) {
-				PacketSendUtility.sendPacket(lootingPet.getMaster(), new SM_PET(PetSpecialFunction.AUTOLOOT, true, npcObjId));
+				PacketSendUtility.sendPacket(lootingPet.getMaster(), SM_FUNCTIONAL_PET.specialFunction(PetSpecialFunction.AUTOLOOT, true, npcObjId));
 				for (DropItem dropItem : drops.toArray(new DropItem[drops.size()])) // array copy since the drops get removed on retrieval
 					DropService.getInstance().requestDropItem(lootingPet.getMaster(), npcObjId, dropItem.getIndex(), true);
-				PacketSendUtility.sendPacket(lootingPet.getMaster(), new SM_PET(PetSpecialFunction.AUTOLOOT, false, npcObjId));
+				PacketSendUtility.sendPacket(lootingPet.getMaster(), SM_FUNCTIONAL_PET.specialFunction(PetSpecialFunction.AUTOLOOT, false, npcObjId));
 			}
 		}
 	}
