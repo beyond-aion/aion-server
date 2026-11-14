@@ -24,6 +24,7 @@ import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
+import com.aionemu.gameserver.world.WorldMapType;
 
 /**
  * @author Simple
@@ -50,6 +51,10 @@ public class PrivateStoreService {
 	}
 
 	private static boolean canOpenPrivateStore(Player player) {
+		if (player.getWorldId() == WorldMapType.LIFE_PARTY_CONCERT_HALL.getId()) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_OPEN_STORE_IN_THIS_ZONE());
+			return false;
+		}
 		if (player.isFlying() || player.isUsingFlightTransporterOrWindstream()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PERSONAL_SHOP_DISABLED_IN_FLY_MODE());
 			return false;
@@ -242,6 +247,8 @@ public class PrivateStoreService {
 
 	public static void openPrivateStore(Player activePlayer, String name) {
 		if (name != null && name.length() > PrivateStore.MAX_STORE_MESSAGE_LENGTH) // retail refuses longer messages instead of truncating them
+			return;
+		if (activePlayer.getStore() == null) // the store creation was rejected (for example, in the concert hall)
 			return;
 		activePlayer.getStore().setStoreMessage(name);
 		PacketSendUtility.broadcastPacket(activePlayer, new SM_PRIVATE_STORE_NAME(activePlayer), true);
