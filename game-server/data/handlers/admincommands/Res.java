@@ -13,25 +13,28 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 public class Res extends AdminCommand {
 
 	public Res() {
-		super("res");
+		super("res", "Resurrects your target.", """
+			[prompt] - Asks the targeted dead player to resurrect (default).
+			instant - Resurrects the targeted dead player instantly.
+			""");
 	}
 
 	@Override
 	public void execute(Player admin, String... params) {
 		final VisibleObject target = admin.getTarget();
 		if (target == null) {
-			PacketSendUtility.sendMessage(admin, "No target selected.");
+			sendInfo(admin, "No target selected.");
 			return;
 		}
 
 		if (!(target instanceof Player)) {
-			PacketSendUtility.sendMessage(admin, "You can only resurrect other players.");
+			sendInfo(admin, "You can only resurrect other players.");
 			return;
 		}
 
 		final Player player = (Player) target;
 		if (!player.isDead()) {
-			PacketSendUtility.sendMessage(admin, "That player is already alive.");
+			sendInfo(admin, "That player is already alive.");
 			return;
 		}
 
@@ -47,11 +50,6 @@ public class Res extends AdminCommand {
 			return;
 		}
 
-		PacketSendUtility.sendMessage(admin, "[Resurrect] Usage: target player and use //res <instant|prompt>");
-	}
-
-	@Override
-	public void info(Player player, String message) {
-		// TODO Auto-generated method stub
+		sendInfo(admin);
 	}
 }

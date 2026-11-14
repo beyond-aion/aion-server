@@ -19,6 +19,27 @@ public class AuditLogger {
 	private static final Logger log = LoggerFactory.getLogger("AUDIT_LOG");
 
 	/**
+	 * Replaces control characters so a client cannot forge log lines
+	 */
+	private static String sanitize(String message) {
+		if (message == null)
+			return "";
+		StringBuilder sb = new StringBuilder(message.length());
+		for (int i = 0; i < message.length(); i++) {
+			char c = message.charAt(i);
+			if (c == '\n')
+				sb.append("\\n");
+			else if (c == '\r')
+				sb.append("\\r");
+			else if (ChatUtil.isInvalidCharacter(c))
+				sb.append("\\u%04x".formatted((int) c));
+			else
+				sb.append(c);
+		}
+		return sb.toString();
+	}
+
+	/**
 	 * Logs message, if audit log is enabled.<br>
 	 * Notifies permitted online staff members.<br>
 	 * Automatically punishes player, if punishments are enabled.
@@ -32,6 +53,7 @@ public class AuditLogger {
 	 *          False for heuristics an honest client can trip, which must never punish
 	 */
 	public static void log(Player player, String message, boolean punish) {
+		message = sanitize(message);
 		if (punish && PunishmentConfig.PUNISHMENT_ENABLE)
 			AutoBan.punishment(player);
 

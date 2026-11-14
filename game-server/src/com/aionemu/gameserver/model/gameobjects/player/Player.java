@@ -1,10 +1,7 @@
 package com.aionemu.gameserver.model.gameobjects.player;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 import com.aionemu.gameserver.configs.administration.AdminConfig;
@@ -72,6 +69,7 @@ import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.skillengine.task.AbstractInteractionTask;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.audit.MotionAuditTrail;
 import com.aionemu.gameserver.world.WorldMapType;
 import com.aionemu.gameserver.world.WorldPosition;
@@ -1035,6 +1033,10 @@ public class Player extends Creature {
 		addItemCoolDown(limits.getDelayId(), System.currentTimeMillis() + limits.getDelayTime(), limits.getDelayTime() / 1000);
 	}
 
+	public int getItemUseDelay(int useDelayMillis) {
+		return isInCustomState(CustomPlayerState.NO_ITEM_USE_GAUGE_MODE) ? 0 : useDelayMillis;
+	}
+
 	public long getItemReuseTime(int delayId) {
 		ItemCooldown cd = itemCoolDowns.get(delayId);
 		return cd == null ? 0 : cd.getReuseTime();
@@ -1045,7 +1047,8 @@ public class Player extends Creature {
 	}
 
 	public void addItemCoolDown(int delayId, long time, int useDelay) {
-		itemCoolDowns.put(delayId, new ItemCooldown(time, useDelay));
+		if (!isInCustomState(CustomPlayerState.NO_ITEM_COOLDOWN_MODE))
+			itemCoolDowns.put(delayId, new ItemCooldown(time, useDelay));
 	}
 
 	public void removeItemCoolDown(int delayId) {
@@ -1407,9 +1410,9 @@ public class Player extends Creature {
 		return creature.getMaster() instanceof Player;
 	}
 
-	public boolean isTargetingNpcWithFunction(int objectId, int dialogActionId) {
-		VisibleObject target = getTarget();
-		return target instanceof Npc && target.getObjectId() == objectId && ((Npc) target).getObjectTemplate().supportsAction(dialogActionId);
+	public boolean isTargetingNpcWithFunctionNearby(int objectId, int... dialogActionIds) {
+		return getTarget() instanceof Npc npc && npc.getObjectId() == objectId && PositionUtil.isInTalkRange(this, npc)
+			&& Arrays.stream(dialogActionIds).anyMatch(id -> npc.getObjectTemplate().supportsAction(id));
 	}
 
 	/**
@@ -1636,7 +1639,9 @@ public class Player extends Creature {
 	public void setPosition(WorldPosition position) {
 		super.setPosition(position);
 		getMoveController().resetLastPositionFromClient(); // if we don't reset it, material collision handlers (such as shields) affect you on teleport
+		getMoveController().resetFalling();
 		getCommonData().setMapId(position.getMapId());
+		getCommonData().setInstanceId(position.getInstanceId());
 		getCommonData().setXYZH(position.getX(), position.getY(), position.getZ(), position.getHeading());
 		getCommonData().setWorldOwnerId(position.getMapRegion() == null ? 0 : position.getWorldMapInstance().getOwnerId());
 	}

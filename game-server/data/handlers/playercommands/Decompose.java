@@ -7,6 +7,7 @@ import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.templates.item.DecomposableItem;
 import com.aionemu.gameserver.model.templates.item.actions.DecomposeAction;
 import com.aionemu.gameserver.model.templates.item.actions.ItemActions;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -45,7 +46,8 @@ public class Decompose extends PlayerCommand {
 		ItemActions itemActions = item.getItemTemplate().getActions();
 		DecomposeAction decomposeAction = itemActions == null ? null
 			: itemActions.getItemActions().stream().filter(a -> a instanceof DecomposeAction).map(DecomposeAction.class::cast).findAny().orElse(null);
-		if (decomposeAction == null || DataManager.DECOMPOSABLE_ITEMS_DATA.getSelectableItems(item.getItemId()) != null) { // exclude selectable decomposables
+		DecomposableItem decomposableItem = DataManager.DECOMPOSABLE_ITEMS_DATA.get(item.getItemId());
+		if (decomposeAction == null || decomposableItem == null || decomposableItem.isSelectable()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_IT_CAN_NOT_BE_DECOMPOSED(item.getItemTemplate().getL10n()));
 			return;
 		}

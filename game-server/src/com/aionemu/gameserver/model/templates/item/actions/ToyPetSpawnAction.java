@@ -50,7 +50,7 @@ public class ToyPetSpawnAction extends AbstractItemAction {
 
 	@Override
 	public boolean canAct(Player player, Item parentItem, Item targetItem, Object... params) {
-		if (player.isFlying()) {
+		if (player.isFlying() || player.isUsingFlightTransporterOrWindstream()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_USE_BINDSTONE_ITEM_WHILE_FLYING());
 			return false;
 		}
@@ -72,7 +72,7 @@ public class ToyPetSpawnAction extends AbstractItemAction {
 	@Override
 	public void act(final Player player, final Item parentItem, Item targetItem, Object... params) {
 		// ShowAction
-		int castingDelay = parentItem.getItemTemplate().getCastingDelay();
+		int castingDelay = player.getItemUseDelay(parentItem.getItemTemplate().getCastingDelay());
 		if (castingDelay <= 0) {
 			finishUse(player, parentItem);
 			return;

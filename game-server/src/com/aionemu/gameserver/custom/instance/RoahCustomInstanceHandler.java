@@ -113,7 +113,7 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 			bulkyMobSpawnTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
 				Npc bulky = null;
 				for (Npc n : instance.getNpcs(BULKY_MOB_ID)) {
-					if (!n.isDead() && !n.getLifeStats().isAboutToDie()) {
+					if (!n.isDeadOrDoomed()) {
 						bulky = n;
 						break;
 					}
@@ -152,7 +152,7 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 				dominatorMobSpawnTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
 					Npc dominator = null;
 					for (Npc n : instance.getNpcs(DOMINATOR_MOB_ID)) {
-						if (!n.isDead() && !n.getLifeStats().isAboutToDie()) {
+						if (!n.isDeadOrDoomed()) {
 							dominator = n;
 							break;
 						}
@@ -238,10 +238,11 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 
 	private void setAverageDpsByPlayerClass(PlayerClass playerClass) {
 		avgClassDps = switch (playerClass) {
-			case TEMPLAR, CHANTER -> 2500;
-			case GUNNER -> 4500;
+			case TEMPLAR, RANGER -> 2500;
+			case GLADIATOR, CHANTER -> 3000;
+			case CLERIC -> 4500;
 			case SORCERER, ASSASSIN -> 5000;
-			case SPIRIT_MASTER -> 6000;
+			case SPIRIT_MASTER -> 5500;
 			default -> 4000;
 		};
 	}

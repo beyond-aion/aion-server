@@ -87,9 +87,6 @@
 	<xs:complexType name="AssembledItem">
 		<xs:attribute name="id" type="xs:int" use="required"/>
 	</xs:complexType>
-	<xs:complexType name="RequireSkill">
-		<xs:attribute name="skillIds" type="IntListType"/>
-	</xs:complexType>
 	<xs:complexType name="ItemTemplate">
 		<xs:sequence>
 			<xs:element name="modifiers" type="Modifiers" minOccurs="0" maxOccurs="1"/>

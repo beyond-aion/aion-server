@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.dataholders;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
@@ -22,24 +20,10 @@ public class RoadData {
 	private List<RoadTemplate> roadTemplates;
 
 	public int size() {
-		if (roadTemplates == null) {
-			roadTemplates = new ArrayList<>();
-			return 0;
-		}
-		return roadTemplates.size();
+		return getRoadTemplates().size();
 	}
 
 	public List<RoadTemplate> getRoadTemplates() {
-		if (roadTemplates == null) {
-			return new ArrayList<>();
-		}
-		return roadTemplates;
-	}
-
-	public void addAll(Collection<RoadTemplate> templates) {
-		if (roadTemplates == null) {
-			roadTemplates = new ArrayList<>();
-		}
-		roadTemplates.addAll(templates);
+		return roadTemplates == null ? List.of() : roadTemplates;
 	}
 }

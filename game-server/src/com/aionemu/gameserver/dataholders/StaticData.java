@@ -28,7 +28,7 @@ public class StaticData {
 	@XmlElement(name = "world_maps")
 	public WorldMapsData worldMapsData;
 
-	@XmlElement(name = "weather")
+	@XmlElement(name = "weather_maps")
 	public MapWeatherData mapWeatherData;
 
 	@XmlElement(name = "npc_trade_list")
@@ -373,7 +373,7 @@ public class StaticData {
 		log.info("Loaded {} guide entries", guideData.size());
 		log.info("Loaded {} road entries", roadData.size());
 		log.info("Loaded {} instance cooltime entries", instanceCooltimeData.size());
-		log.info("Loaded {} decomposable items entries", decomposableItemsData.size());
+		log.info("Loaded {} decomposable items entries ({} overridden)", decomposableItemsData.size(), decomposableItemsData.overrideCount());
 		log.info("Loaded {} ai templates", aiData.size());
 		log.info("Loaded {} flypath templates", flyPath.size());
 		log.info("Loaded {} windstream entries", windstreamsData.size());

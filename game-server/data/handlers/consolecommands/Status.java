@@ -12,7 +12,9 @@ import com.aionemu.gameserver.world.World;
 public class Status extends ConsoleCommand {
 
 	public Status() {
-		super("status");
+		super("status", "Shows a player's stats and location in the GM Dialog.", """
+			<name> - Loads the stats and location of the given player.
+			""");
 	}
 
 	@Override

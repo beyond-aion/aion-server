@@ -188,8 +188,9 @@ public class ItemSocketService {
 
 		player.getObserveController().addObserver(observer);
 
+		int useDelay = player.getItemUseDelay(2000);
 		PacketSendUtility.broadcastPacketAndReceive(player,
-			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), stoneId, itemTemplate.getTemplateId(), 2000, USE_START));
+			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), stoneId, itemTemplate.getTemplateId(), useDelay, USE_START));
 
 		player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(() -> {
 			player.getObserveController().removeObserver(observer);
@@ -204,6 +205,6 @@ public class ItemSocketService {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_PROC_ENCHANTED_TARGET_ITEM(weapon.getL10n()));
 
 			ItemPacketService.updateItemAfterInfoChange(player, weapon);
-		}, 2000));
+		}, useDelay));
 	}
 }

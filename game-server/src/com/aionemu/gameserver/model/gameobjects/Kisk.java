@@ -140,7 +140,7 @@ public class Kisk extends SummonedObject<Player> {
 	}
 
 	public int getRemainingLifetime() {
-		if (isDead())
+		if (isDead() || getMillisSinceSpawn() == -1)
 			return 0;
 		long timeElapsed = getMillisSinceSpawn() / 1000;
 		int timeRemaining = (int) (KISK_LIFETIME_IN_SEC - timeElapsed);

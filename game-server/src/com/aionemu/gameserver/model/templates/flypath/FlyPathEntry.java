@@ -38,6 +38,10 @@ public class FlyPathEntry {
 	@XmlAttribute(name = "eworld", required = true)
 	private int eworld;
 
+	/**
+	 * Flight time in seconds: the length of the path's sequence, after which the client lands. For some paths it's shorter than fly_time of the
+	 * client's fly_path.xml.
+	 */
 	@XmlAttribute(name = "time", required = true)
 	private float time;
 

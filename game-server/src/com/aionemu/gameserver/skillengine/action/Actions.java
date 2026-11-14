@@ -1,13 +1,8 @@
 package com.aionemu.gameserver.skillengine.action;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.xml.bind.annotation.XmlAccessType;
-import jakarta.xml.bind.annotation.XmlAccessorType;
-import jakarta.xml.bind.annotation.XmlElement;
-import jakarta.xml.bind.annotation.XmlElements;
-import jakarta.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.*;
 
 /**
  * @author ATracer
@@ -20,25 +15,7 @@ public class Actions {
 		@XmlElement(name = "hpuse", type = HpUseAction.class), @XmlElement(name = "dpuse", type = DpUseAction.class) })
 	protected List<Action> actions;
 
-	/**
-	 * Gets the value of the actions property.
-	 * <p>
-	 * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to the returned list will be
-	 * present inside the JAXB object. This is why there is not a <CODE>set</CODE> method for the actions property.
-	 * <p>
-	 * For example, to add a new item, do as follows:
-	 * 
-	 * <pre>
-	 * getActions().add(newItem);
-	 * </pre>
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list {@link ItemUseAction } {@link MpUseAction } {@link HpUseAction } {@link DpUseAction }
-	 */
 	public List<Action> getActions() {
-		if (actions == null) {
-			actions = new ArrayList<>();
-		}
-		return this.actions;
+		return actions == null ? List.of() : actions;
 	}
-
 }

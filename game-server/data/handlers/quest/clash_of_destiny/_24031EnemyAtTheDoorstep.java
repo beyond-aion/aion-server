@@ -2,6 +2,7 @@ package quest.clash_of_destiny;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
 
+import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
@@ -9,6 +10,7 @@ import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 
 /**
  * @author Enomine
@@ -21,7 +23,7 @@ public class _24031EnemyAtTheDoorstep extends AbstractQuestHandler {
 
 	@Override
 	public void register() {
-		int[] npc_ids = { 204052, 801224, 203550, 203654, 204369 };
+		int[] npc_ids = { 204052, 801224, 203550, 203654, 204369, 730888, 730898 };
 		qe.registerOnQuestCompleted(questId);
 		qe.registerOnLevelChanged(questId);
 		qe.registerOnEnterWorld(questId);
@@ -50,9 +52,7 @@ public class _24031EnemyAtTheDoorstep extends AbstractQuestHandler {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 1011);
 						case SETPRO1:
-							qs.setQuestVar(1);
-							updateQuestStatus(env);
-							return closeDialogWindow(env);
+							return defaultCloseDialog(env, 0, 1);
 					}
 					break;
 				case 801224:// Rapidfire Rita
@@ -60,9 +60,7 @@ public class _24031EnemyAtTheDoorstep extends AbstractQuestHandler {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 1352);
 						case SETPRO2:
-							qs.setQuestVar(2);
-							updateQuestStatus(env);
-							return closeDialogWindow(env);
+							return defaultCloseDialog(env, 1, 2);
 					}
 					break;
 				case 203550:// Munin
@@ -72,9 +70,7 @@ public class _24031EnemyAtTheDoorstep extends AbstractQuestHandler {
 						case SETPRO3:
 							if (!giveQuestItem(env, 182215394, 1))
 								return true;
-							qs.setQuestVar(3);
-							updateQuestStatus(env);
-							return closeDialogWindow(env);
+							return defaultCloseDialog(env, 2, 3);
 					}
 					break;
 				case 203654:// Aurtri
@@ -84,9 +80,7 @@ public class _24031EnemyAtTheDoorstep extends AbstractQuestHandler {
 						case SETPRO5:
 							if (!giveQuestItem(env, 182215395, 1))
 								return true;
-							qs.setQuestVar(5);
-							updateQuestStatus(env);
-							return closeDialogWindow(env);
+							return defaultCloseDialog(env, 4, 5);
 					}
 					break;
 				case 204369:// Tyr
@@ -102,31 +96,24 @@ public class _24031EnemyAtTheDoorstep extends AbstractQuestHandler {
 						case SETPRO7:
 							if (!giveQuestItem(env, 182215396, 1))
 								return true;
-							qs.setQuestVar(7);
-							updateQuestStatus(env);
-							return closeDialogWindow(env);
+							return defaultCloseDialog(env, 6, 7);
 						case SETPRO9:
-							qs.setQuestVar(9);
-							updateQuestStatus(env);
-							return closeDialogWindow(env);
+							TeleportService.teleportTo(player, player.getWorldMapInstance(), 3028.1926f, 873.0997f, 362.875f, (byte) 15, TeleportAnimation.FADE_OUT_BEAM);
+							return defaultCloseDialog(env, 8, 9);
 					}
 					break;
-				case 730888: // Teleporter Device
-					switch (dialogActionId) {
-						case QUEST_SELECT:
-							// TODO:play movie find movie ID
-							env.getVisibleObject().getController().delete();
-							qs.setQuestVar(11);
-							updateQuestStatus(env);
-							spawn(730898, player, (float) 262.9, (float) 224.5, (float) 212.2, (byte) 95); // Broken Teleporter Device
+				case 730888: // Large Teleporter
+					if (dialogActionId == QUEST_SELECT && changeQuestStep(env, 10, 11)) {
+						playQuestMovie(env, 888);
+						env.getVisibleObject().getController().delete();
+						spawn(730898, player, 257, 257, 226.35f, (byte) 95); // Broken Large Teleporter
+						return true;
 					}
 					break;
-				case 730898: // Broken Teleporter
-					switch (dialogActionId) {
-						case QUEST_SELECT:
-							env.getVisibleObject().getController().delete();
-							qs.setStatus(QuestStatus.REWARD);
-							updateQuestStatus(env);
+				case 730898: // Broken Large Teleporter
+					if (dialogActionId == QUEST_SELECT && defaultCloseDialog(env, 11, 11, true, false)) {
+						TeleportService.teleportTo(player, 120010000, 1275.37f, 1169.885f, 215.21492f, (byte) 90, TeleportAnimation.FADE_OUT_BEAM);
+						return true;
 					}
 					break;
 			}
@@ -175,15 +162,27 @@ public class _24031EnemyAtTheDoorstep extends AbstractQuestHandler {
 	@Override
 	public boolean onEnterWorldEvent(QuestEnv env) {
 		Player player = env.getPlayer();
+		if (player.getWorldId() != 320040000 || !player.getWorldMapInstance().getNpcs(730888, 730898).isEmpty())
+			return false;
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			int var = qs.getQuestVars().getQuestVars();
-			if (var == 9 && player.getWorldId() == 320040000) {
-				spawnForFiveMinutes(730888, player.getWorldMapInstance(), (float) 262.9, (float) 224.5, (float) 211.2, (byte) 95);// Shattered Large Teleporter
-				spawnForFiveMinutes(233879, player.getWorldMapInstance(), (float) 262.9, (float) 224.5, (float) 211.2, (byte) 95);// Captain Hagarkan
-			}
+		if (qs == null || qs.getStatus() != QuestStatus.START)
+			return false;
+		int var = qs.getQuestVars().getQuestVars();
+		if (var == 9 || var == 10)
+			spawn(730888, player, 257, 257, 226.35f, (byte) 95); // Large Teleporter
+		else if (var == 11)
+			spawn(730898, player, 257, 257, 226.35f, (byte) 95); // Broken Large Teleporter
+		if (var == 9) {
+			// Captain Hagarkan
+			spawn(233879, player, 262.9f, 224.5f, 211.2f, (byte) 95);
+			// 5x Baranath Sentinel
+			spawn(233886, player, 217.015f, 221.694f, 207.49455f, (byte) 97);
+			spawn(233886, player, 239.732f, 211.250f, 209.19f, (byte) 97);
+			spawn(233886, player, 257.065f, 204.49f, 209.094f, (byte) 97);
+			spawn(233886, player, 274.899f, 199.398f, 208.83487f, (byte) 97);
+			spawn(233886, player, 282.878f, 223.742f, 208.252f, (byte) 97);
 		}
-		return false;
+		return true;
 	}
 
 	@Override

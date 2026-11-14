@@ -64,7 +64,7 @@ public class SimpleAttackManager {
 				npc.getGameStats().scheduleAttackTask(() -> attackAction(npcAI), Math.max(1, npc.getGameStats().getNextAttackInterval()));
 				return;
 			}
-			if (npc.isSpawned() && !npc.isDead() && !npc.getLifeStats().isAboutToDie() && npc.canAttack()) {
+			if (npc.isSpawned() && !npc.isDeadOrDoomed() && npc.canAttack()) {
 				npc.getPosition().setH(PositionUtil.getHeadingTowards(npc, target));
 				int animation = DataManager.MOTION_DATA.chooseNpcAutoAttackAnimation(npc);
 				int hitTime = DataManager.MOTION_DATA.calculateNpcAutoAttackHitTime(npc, target, animation);

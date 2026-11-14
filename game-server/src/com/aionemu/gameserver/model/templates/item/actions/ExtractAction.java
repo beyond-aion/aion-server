@@ -43,8 +43,9 @@ public class ExtractAction extends AbstractItemAction {
 
 	@Override
 	public void act(Player player, Item parentItem, Item targetItem, Object... params) {
+		int useDelay = player.getItemUseDelay(5000);
 		PacketSendUtility.sendPacket(player,
-			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), 5000, USE_START));
+			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), useDelay, USE_START));
 		ItemUseObserver observer = new ItemUseObserver(player) {
 
 			@Override
@@ -65,7 +66,7 @@ public class ExtractAction extends AbstractItemAction {
 				player.startCooldown(parentItem);
 			PacketSendUtility.sendPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(),
 				parentItem.getItemTemplate().getTemplateId(), 0, result ? USE_SUCCESS : USE_FAIL));
-		}, 5000));
+		}, useDelay));
 	}
 
 }

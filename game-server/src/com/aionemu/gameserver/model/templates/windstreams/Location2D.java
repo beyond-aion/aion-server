@@ -36,9 +36,6 @@ public class Location2D {
 		this.state = state;
 	}
 
-	/**
-	 * @return the bidirectional
-	 */
 	public FlyPathType getFlyPathType() {
 		return flyPath;
 	}

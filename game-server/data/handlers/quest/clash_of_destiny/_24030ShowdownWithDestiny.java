@@ -124,8 +124,8 @@ public class _24030ShowdownWithDestiny extends AbstractQuestHandler {
 							SkillEngine.getInstance().applyEffectDirectly(18570, player, player);
 							player.setState(CreatureState.FLYING);
 							player.unsetState(CreatureState.ACTIVE);
-							player.setFlightTeleportId(1001);
-							PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.START_FLYTELEPORT, 1001, 0));
+							player.setFlightTeleportId(75001);
+							PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.START_FLYTELEPORT, 75001, 0));
 							return defaultCloseDialog(env, 5, 6);
 					}
 					break;

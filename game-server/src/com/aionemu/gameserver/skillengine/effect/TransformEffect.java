@@ -58,6 +58,8 @@ public abstract class TransformEffect extends EffectTemplate {
 	@Override
 	public void endEffect(Effect effect) {
 		final Creature effected = effect.getEffected();
+		if (cantFly)
+			effected.getEffectController().unsetAbnormal(AbnormalState.NOFLY);
 
 		TransformEffect temp = null;
 		for (Effect tmp : effected.getEffectController().getAbnormalEffects()) {
@@ -79,6 +81,10 @@ public abstract class TransformEffect extends EffectTemplate {
 	public void startEffect(Effect effect) {
 		effect.getEffected().getTransformModel().apply(getTransformId(), getTransformType(), getPanelId(), cantUseSkills(), cantMove(), cantRecall(),
 			cantJump(), cantAttack(), cantUseItems(), cantFly());
+		if (cantFly) {
+			effect.getEffected().getEffectController().setAbnormal(AbnormalState.NOFLY);
+			effect.setAbnormal(AbnormalState.NOFLY);
+		}
 	}
 
 	public TransformType getTransformType() {

@@ -6,21 +6,17 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
 /**
  * @author ATracer
  */
-public class SM_SUMMON_PANEL_REMOVE extends AionServerPacket {
+public class SM_RESET_SKILL_COOLDOWN extends AionServerPacket {
 
 	private int skillId;
 
-	public SM_SUMMON_PANEL_REMOVE(int skillId) {
+	public SM_RESET_SKILL_COOLDOWN(int skillId) {
 		this.skillId = skillId;
 	}
 
 	@Override
 	protected void writeImpl(AionConnection con) {
-
-		writeH(skillId); // skillId
-		if (skillId != 0)
-			writeC(1); // unk = 1
-		else
-			writeC(0); // unk
+		writeH(skillId);
+		writeC(skillId == 0 ? 0 : 1); // the client reads only the skill ID
 	}
 }

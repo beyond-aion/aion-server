@@ -20,6 +20,7 @@ public class _2448ChaomirkSendsForHelp extends AbstractQuestHandler {
 	@Override
 	public void register() {
 		qe.registerQuestNpc(798115).addOnQuestStart(questId);
+		qe.registerQuestNpc(798115).addOnTalkEvent(questId);
 		qe.registerQuestNpc(798080).addOnTalkEvent(questId);
 		qe.registerQuestNpc(798079).addOnTalkEvent(questId);
 	}

@@ -3,7 +3,6 @@ package admincommands;
 import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.loginserver.LoginServer;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 
@@ -13,13 +12,15 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 public class UnBan extends AdminCommand {
 
 	public UnBan() {
-		super("unban");
+		super("unban", "Removes an account ban.", """
+			<player> [account|ip|full] - Removes the ban of the player's account (default: full).
+			""");
 	}
 
 	@Override
 	public void execute(Player admin, String... params) {
 		if (params == null || params.length < 1) {
-			PacketSendUtility.sendMessage(admin, "Syntax: //unban <player> [account|ip|full]");
+			sendInfo(admin);
 			return;
 		}
 
@@ -27,8 +28,7 @@ public class UnBan extends AdminCommand {
 		String name = Util.convertName(params[0]);
 		int accountId = PlayerDAO.getAccountIdByName(name);
 		if (accountId == 0) {
-			PacketSendUtility.sendMessage(admin, "Player " + name + " was not found!");
-			PacketSendUtility.sendMessage(admin, "Syntax: //unban <player> [account|ip|full]");
+			sendInfo(admin, "Player " + name + " was not found!");
 			return;
 		}
 
@@ -43,17 +43,12 @@ public class UnBan extends AdminCommand {
 			else if (("full").startsWith(stype))
 				type = 3;
 			else {
-				PacketSendUtility.sendMessage(admin, "Syntax: //unban <player> [account|ip|full]");
+				sendInfo(admin);
 				return;
 			}
 		}
 
 		// Sends time -1 to unban
 		LoginServer.getInstance().sendBanPacket(type, accountId, "", -1, admin.getObjectId());
-	}
-
-	@Override
-	public void info(Player player, String message) {
-		PacketSendUtility.sendMessage(player, "Syntax: //unban <player> [account|ip|full]");
 	}
 }

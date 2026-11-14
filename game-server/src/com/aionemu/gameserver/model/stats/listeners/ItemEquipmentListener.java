@@ -153,7 +153,6 @@ public class ItemEquipmentListener {
 		} else {
 			modifiersToApply = mainWeaponModifiers;
 		}
-		item.setCurrentModifiers(modifiersToApply);
 		cgs.addEffect(item, modifiersToApply);
 	}
 

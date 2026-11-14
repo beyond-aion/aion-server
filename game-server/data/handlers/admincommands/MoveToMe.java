@@ -1,5 +1,6 @@
 package admincommands;
 
+import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.TemporaryPlayerTeam;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -60,8 +61,11 @@ public class MoveToMe extends AdminCommand {
 		}
 	}
 
-	private void teleportPlayer(Player playerToMove, Player admin) {
-		TeleportService.teleportTo(playerToMove, admin.getPosition());
+	public static void teleportPlayer(Player playerToMove, Player admin) {
+		if (playerToMove.equals(admin))
+			return;
+		TeleportService.teleportTo(playerToMove, admin.getWorldMapInstance(), admin.getX(), admin.getY(), admin.getZ(), admin.getHeading(),
+			TeleportAnimation.FADE_OUT_BEAM);
 		sendInfo(admin, "Teleported " + name(playerToMove) + " to your location.");
 		sendInfo(playerToMove, "You have been teleported by " + name(admin) + ".");
 	}

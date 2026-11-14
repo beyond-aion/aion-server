@@ -25,7 +25,6 @@ import com.aionemu.gameserver.services.reward.WebRewardService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldMapType;
 
@@ -53,6 +52,7 @@ public class _2008Ascension extends AbstractQuestHandler {
 		qe.registerQuestNpc(205041).addOnKillEvent(questId);
 		qe.registerOnEnterWorld(questId);
 		qe.registerOnDie(questId);
+		qe.registerOnFlightPathEnd(questId);
 	}
 
 	@Override
@@ -61,28 +61,19 @@ public class _2008Ascension extends AbstractQuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.getStatus() != QuestStatus.START)
 			return false;
-
-		int var = qs.getQuestVarById(0);
 		int targetId = env.getTargetId();
 		if (targetId == 205040) { // Guardian Assassin
 			env.getVisibleObject().getController().delete();
-			if (var >= 51 && var <= 53) {
-				qs.setQuestVar(qs.getQuestVars().getQuestVars() + 1);
-				updateQuestStatus(env);
-				return true;
-			} else if (var == 54) {
-				qs.setQuestVar(5);
-				updateQuestStatus(env);
+			if (changeQuestStep(env, 54, 5)) {
 				Npc mob = (Npc) spawn(205041, player, 301f, 259f, 205.5f, (byte) 0);
 				mob.getAggroList().addHate(player, 1000);
 				return true;
 			}
-		} else if (targetId == 205041 && var == 5) {
+			return defaultOnKillEvent(env, 205040, 51, 54);
+		} else if (targetId == 205041 && changeQuestStep(env, 5, 6)) {
 			playQuestMovie(env, 152);
 			player.getWorldMapInstance().forEachNpc(npc -> npc.getController().delete());
 			spawn(203550, player, 301.92999f, 274.26001f, 205.7f, (byte) 0);
-			qs.setQuestVar(6);
-			updateQuestStatus(env);
 			return true;
 		}
 		return false;
@@ -129,7 +120,7 @@ public class _2008Ascension extends AbstractQuestHandler {
 							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 0));
 							// Create instance
 							WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(WorldMapType.ATAXIAR_B.getId(), player);
-							TeleportService.teleportTo(player, newInstance, 457.65f, 426.8f, 230.4f);
+							TeleportService.teleportTo(player, newInstance, 458.68f, 426.5f, 230.3f, (byte) 75, TeleportAnimation.FADE_OUT_BEAM);
 							return true;
 						}
 						return false;
@@ -215,29 +206,14 @@ public class _2008Ascension extends AbstractQuestHandler {
 			} else if (targetId == 205020) {
 				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
-						if (var == 99) {
+						if (changeQuestStep(env, 99, 50)) {
 							SkillEngine.getInstance().applyEffectDirectly(257, player, player);
 							player.setState(CreatureState.FLYING);
 							player.unsetState(CreatureState.ACTIVE);
 							player.setFlightTeleportId(3001);
 							PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.START_FLYTELEPORT, 3001, 0));
-							qs.setQuestVar(50);
-							updateQuestStatus(env);
-							ThreadPoolManager.getInstance().schedule(() -> {
-								qs.setQuestVar(51);
-								updateQuestStatus(env);
-								List<Npc> mobs = new ArrayList<>();
-								mobs.add((Npc) spawn(205040, player, 294f, 277f, 207f, (byte) 0));
-								mobs.add((Npc) spawn(205040, player, 305f, 279f, 206.5f, (byte) 0));
-								mobs.add((Npc) spawn(205040, player, 298f, 253f, 205.7f, (byte) 0));
-								mobs.add((Npc) spawn(205040, player, 306f, 251f, 206f, (byte) 0));
-								for (Npc mob : mobs) {
-									mob.getAggroList().addHate(player, 1000);
-								}
-							}, 43000);
 							return true;
 						}
-						return false;
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
@@ -258,6 +234,21 @@ public class _2008Ascension extends AbstractQuestHandler {
 	@Override
 	public void onLevelChangedEvent(Player player) {
 		defaultOnLevelChangedEvent(player);
+	}
+
+	@Override
+	public boolean onFlightPathEndEvent(QuestEnv env, int teleportId) {
+		if (teleportId != 3001 || !changeQuestStep(env, 50, 51))
+			return false;
+		Player player = env.getPlayer();
+		List<Npc> mobs = new ArrayList<>();
+		mobs.add((Npc) spawn(205040, player, 294f, 277f, 207f, (byte) 0));
+		mobs.add((Npc) spawn(205040, player, 305f, 279f, 206.5f, (byte) 0));
+		mobs.add((Npc) spawn(205040, player, 298f, 253f, 205.7f, (byte) 0));
+		mobs.add((Npc) spawn(205040, player, 306f, 251f, 206f, (byte) 0));
+		for (Npc mob : mobs)
+			mob.getAggroList().addHate(player, 1000);
+		return true;
 	}
 
 	@Override

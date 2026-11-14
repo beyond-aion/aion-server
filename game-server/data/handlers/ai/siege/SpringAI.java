@@ -56,7 +56,7 @@ public class SpringAI extends NpcAI {
 	}
 
 	private void checkForHeal() {
-		if (isDead() || !getPosition().isSpawned())
+		if (isDead() || !getOwner().isSpawned())
 			return;
 		boolean targetNearby = getKnownList().stream()
 			.anyMatch(o -> o.get() instanceof Creature creature && getRace() == creature.getRace() && !creature.isDead() && !creature.getLifeStats().isFullyRestoredHp()

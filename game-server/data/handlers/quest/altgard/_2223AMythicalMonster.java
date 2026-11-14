@@ -21,6 +21,7 @@ public class _2223AMythicalMonster extends AbstractQuestHandler {
 	public void register() {
 		qe.registerQuestNpc(203616).addOnQuestStart(questId);
 		qe.registerQuestNpc(203616).addOnTalkEvent(questId);
+		qe.registerQuestNpc(203620).addOnTalkEvent(questId);
 		qe.registerQuestNpc(700134).addOnTalkEvent(questId);
 		qe.registerQuestNpc(211621).addOnKillEvent(questId);
 	}

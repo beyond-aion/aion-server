@@ -27,6 +27,8 @@ import com.aionemu.gameserver.world.World;
  */
 public class PlayerCommonData extends CreatureTemplate {
 
+	public static final int MAX_NOTE_LENGTH = 64;
+
 	private final int playerObjId;
 	private Race race;
 	private String name;
@@ -40,6 +42,7 @@ public class PlayerCommonData extends CreatureTemplate {
 	private boolean online;
 	private String note;
 	private int mapId;
+	private int instanceId = 1;
 	private float x, y, z;
 	private byte heading;
 	private int questExpands = 0;
@@ -368,6 +371,14 @@ public class PlayerCommonData extends CreatureTemplate {
 		this.mapId = mapId;
 	}
 
+	public int getInstanceId() {
+		return instanceId;
+	}
+
+	public void setInstanceId(int instanceId) {
+		this.instanceId = instanceId;
+	}
+
 	public float getX() {
 		return x;
 	}
@@ -441,7 +452,8 @@ public class PlayerCommonData extends CreatureTemplate {
 	}
 
 	public void setNote(String note) {
-		this.note = note;
+		// The note is inlined into SM_PLAYER_INFO and other packets, which the client reads only up to 8192 bytes.
+		this.note = note == null || note.length() <= MAX_NOTE_LENGTH ? note : note.substring(0, MAX_NOTE_LENGTH);
 	}
 
 	public int getTitleId() {
@@ -531,7 +543,7 @@ public class PlayerCommonData extends CreatureTemplate {
 
 	@Override
 	public BoundRadius getBoundRadius() {
-		return BoundRadius.PLAYER;
+		return BoundRadius.DEFAULT;
 	}
 
 	public void setDeathCount(int count) {

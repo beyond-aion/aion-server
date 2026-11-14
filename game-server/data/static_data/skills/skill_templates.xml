@@ -10030,7 +10030,7 @@
 			<polishchargeweapon value="50" />
 		</endconditions>
 		<effects>
-			<skillatkdraininstant hp_percent="30" value="60" e="1" hoptype="DAMAGE" />
+			<skillatkdraininstant hp_percent="30" prob="80" value="60" e="1" hoptype="DAMAGE" />
 		</effects>
 		<motion name="whirltornado" />
 	</skill_template>
@@ -152196,7 +152196,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<targetteleport distance="5" e="1" noresist="true" hoptype="DAMAGE" />
+			<targetteleport e="1" noresist="true" hoptype="DAMAGE" />
 			<snare duration2="5000" effectid="20007" e="2" noresist="true" element="FIRE" preeffect="1" hoptype="DAMAGE">
 				<change stat="SPEED" func="PERCENT" value="-90" />
 				<change stat="FLY_SPEED" func="PERCENT" value="-90" />
@@ -152213,7 +152213,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<targetteleport distance="5" e="1" noresist="true" hoptype="DAMAGE" />
+			<targetteleport e="1" noresist="true" hoptype="DAMAGE" />
 			<snare duration2="5000" effectid="20007" e="2" noresist="true" element="FIRE" preeffect="1" hoptype="DAMAGE">
 				<change stat="SPEED" func="PERCENT" value="-50" />
 				<change stat="FLY_SPEED" func="PERCENT" value="-50" />
@@ -153046,7 +153046,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<targetteleport distance="5" e="1" noresist="true" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<targetteleport e="1" noresist="true" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<stun duration2="5000" effectid="20000" e="2" noresist="true" element="WATER" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
 		</effects>
 		<motion name="poweratk" />
@@ -153526,7 +153526,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<targetteleport distance="5" e="1" noresist="true" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<targetteleport alias_location="test_teleport_001" e="1" noresist="true" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<stun duration2="5000" effectid="20000" e="2" noresist="true" element="WATER" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
 		</effects>
 		<motion name="poweratk" />
@@ -153568,7 +153568,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<skillatkdraininstant hp_percent="200" mode="PERCENT" value="182" e="1" element="WATER" hoptype="DAMAGE" />
+			<skillatkdraininstant hp_percent="200" prob="0" prob_delta="50" mode="PERCENT" value="182" e="1" hoptype="DAMAGE" />
 		</effects>
 		<motion name="poweratk" />
 	</skill_template>
@@ -156439,7 +156439,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<targetteleport distance="1" alias_location="IDTemple_Low_Furnace_01" e="1" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<targetteleport alias_location="IDTemple_Low_Furnace_01" e="1" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<stun duration2="3000" effectid="20000" e="2" noresist="true" element="FIRE" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
 		</effects>
 		<motion name="throw" />
@@ -158374,7 +158374,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<targetteleport distance="1" e="1" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<targetteleport alias_location="testmotion" e="1" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<stun duration2="3000" effectid="20000" e="2" noresist="true" element="FIRE" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60" />
 		</effects>
 		<motion name="handbind" />
@@ -160535,7 +160535,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<skillatkdraininstant hp_percent="50" mode="PERCENT" value="50" e="1" element="WATER" hoptype="DAMAGE" />
+			<skillatkdraininstant hp_percent="50" prob="0" prob_delta="50" mode="PERCENT" value="50" e="1" hoptype="DAMAGE" />
 		</effects>
 		<motion name="poweratk" />
 	</skill_template>
@@ -160816,7 +160816,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<targetteleport distance="10" e="1" noresist="true" hoptype="SKILLLV" hopb="60" hopa="60" />
+			<targetteleport e="1" noresist="true" hoptype="SKILLLV" hopb="60" hopa="60" />
 			<snare duration2="2000" effectid="20007" e="2" noresist="true" element="EARTH" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60">
 				<change stat="SPEED" func="PERCENT" value="-90" />
 				<change stat="FLY_SPEED" func="PERCENT" value="-90" />
@@ -164590,7 +164590,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<targetteleport distance="5" e="1" noresist="true" hoptype="DAMAGE" />
+			<targetteleport e="1" noresist="true" hoptype="DAMAGE" />
 			<snare duration2="12000" effectid="20007" e="2" noresist="true" element="FIRE" preeffect="1" hoptype="DAMAGE">
 				<change stat="SPEED" func="PERCENT" value="-90" />
 				<change stat="FLY_SPEED" func="PERCENT" value="-90" />
@@ -167025,7 +167025,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<targetteleport distance="5" e="1" noresist="true" hoptype="DAMAGE" />
+			<targetteleport e="1" noresist="true" hoptype="DAMAGE" />
 			<snare duration2="12000" effectid="20007" e="2" noresist="true" element="FIRE" preeffect="1" hoptype="DAMAGE">
 				<change stat="SPEED" func="PERCENT" value="-90" />
 				<change stat="FLY_SPEED" func="PERCENT" value="-90" />
@@ -171725,7 +171725,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<skillatkdraininstant hp_percent="5" mode="PERCENT" value="200" e="1" element="FIRE" hoptype="DAMAGE" />
+			<skillatkdraininstant hp_percent="5" prob="0" prob_delta="100" mode="PERCENT" value="200" e="1" hoptype="DAMAGE" />
 		</effects>
 		<motion name="poweratk" />
 	</skill_template>
@@ -175070,7 +175070,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<targetteleport distance="5" e="1" noresist="true" hoptype="DAMAGE" />
+			<targetteleport e="1" noresist="true" hoptype="DAMAGE" />
 			<snare duration2="5000" effectid="20007" e="2" noresist="true" element="FIRE" preeffect="1" hoptype="SKILLLV" hopb="60" hopa="60">
 				<change stat="SPEED" func="PERCENT" value="-50" />
 				<change stat="FLY_SPEED" func="PERCENT" value="-50" />
@@ -181489,7 +181489,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<skillatkdraininstant hp_percent="10" mp_percent="10" mode="PERCENT" shared="true" value="30" e="1" noresist="true" element="FIRE" />
+			<skillatkdraininstant hp_percent="10" mp_percent="10" prob="0" prob_delta="10" mode="PERCENT" shared="true" value="30" e="1" noresist="true" />
 		</effects>
 		<motion name="normalfire" />
 	</skill_template>
@@ -190819,7 +190819,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<targetteleport distance="10" alias_location="Alias_5" e="1" noresist="true" hoptype="DAMAGE" />
+			<targetteleport alias_location="Alias_5" e="1" noresist="true" hoptype="DAMAGE" />
 			<snare duration2="5000" effectid="20007" e="2" noresist="true" element="FIRE" preeffect="1" hoptype="DAMAGE">
 				<change stat="SPEED" func="PERCENT" value="-90" />
 				<change stat="FLY_SPEED" func="PERCENT" value="-90" />

@@ -89,7 +89,7 @@ public class SummonsService {
 				PacketSendUtility.sendPacket(master, SM_SYSTEM_MESSAGE.STR_SKILL_SUMMON_UNSUMMON_BY_TOO_DISTANCE());
 			else
 				PacketSendUtility.sendPacket(master, SM_SYSTEM_MESSAGE.STR_SKILL_SUMMON_UNSUMMONED(summon.getL10n()));
-			PacketSendUtility.sendPacket(master, new SM_SUMMON_PANEL_REMOVE(summon.getSummonedBySkillId()));
+			PacketSendUtility.sendPacket(master, new SM_RESET_SKILL_COOLDOWN(summon.getSummonedBySkillId()));
 			PacketSendUtility.sendPacket(master, new SM_SUMMON_OWNER_REMOVE(summon.getObjectId()));
 			if (!addedMasterHate)
 				scheduleAddMasterHate(summon);

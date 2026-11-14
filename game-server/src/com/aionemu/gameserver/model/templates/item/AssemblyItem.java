@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.model.templates.item;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
@@ -21,24 +20,10 @@ public class AssemblyItem {
 	protected int id;
 
 	public List<Integer> getParts() {
-		if (parts == null) {
-			parts = new ArrayList<>();
-		}
-		return this.parts;
+		return parts == null ? List.of() : parts;
 	}
 
-	/**
-	 * Gets the value of the id property.
-	 */
 	public int getId() {
 		return id;
 	}
-
-	/**
-	 * Sets the value of the id property.
-	 */
-	public void setId(int value) {
-		this.id = value;
-	}
-
 }

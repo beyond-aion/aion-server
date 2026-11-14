@@ -62,10 +62,11 @@ public class TuningAction extends AbstractItemAction {
 
 	@Override
 	public void act(Player player, Item parentItem, Item targetItem, Object... params) {
+		int useDelay = player.getItemUseDelay(5000);
 		int tuningScrollItemId = parentItem.getItemId();
 		int tuningScrollObjectId = parentItem.getObjectId();
 		PacketSendUtility.broadcastPacket(player,
-			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), tuningScrollObjectId, tuningScrollItemId, 5000, REIDENTIFY_START), true);
+			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), tuningScrollObjectId, tuningScrollItemId, useDelay, REIDENTIFY_START), true);
 		ItemUseObserver observer = new ItemUseObserver(player) {
 
 			@Override
@@ -106,7 +107,7 @@ public class TuningAction extends AbstractItemAction {
 			targetItem.setPendingTuneResult(result);
 			PacketSendUtility.sendPacket(player, new SM_TUNE_RESULT(targetItem, tuningScrollItemId, result));
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ITEM_REIDENTIFY_SUCCEED(targetItem.getL10n()));
-		}, 5000));
+		}, useDelay));
 	}
 
 	public static int getRandomStatBonusIdFor(Item item) {

@@ -36,9 +36,9 @@
 	
 	<xs:simpleType name="FlyPathType">
 		<xs:restriction base="xs:string">
-			<xs:enumeration value="GEYSER"/>
-			<xs:enumeration value="ONE_WAY"/>
-			<xs:enumeration value="TWO_WAY"/>
+			<xs:enumeration value="WIND_BOX"/>
+			<xs:enumeration value="WIND_PATH"/>
+			<xs:enumeration value="MOVING_COLLISION"/>
 		</xs:restriction>
 	</xs:simpleType>
 </xs:schema>

@@ -3,7 +3,6 @@ package admincommands;
 import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.loginserver.LoginServer;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.World;
@@ -14,13 +13,15 @@ import com.aionemu.gameserver.world.World;
 public class Ban extends AdminCommand {
 
 	public Ban() {
-		super("ban");
+		super("ban", "Bans an account.", """
+			<player> [account|ip|full] [minutes] - Bans the player's account (default: full, permanent).
+			""");
 	}
 
 	@Override
 	public void execute(Player admin, String... params) {
 		if (params == null || params.length < 1) {
-			PacketSendUtility.sendMessage(admin, "Syntax: //ban <player> [account|ip|full] [time in minutes]");
+			sendInfo(admin);
 			return;
 		}
 
@@ -42,8 +43,7 @@ public class Ban extends AdminCommand {
 
 		// Third, fail
 		if (accountId == 0) {
-			PacketSendUtility.sendMessage(admin, "Player " + name + " was not found!");
-			PacketSendUtility.sendMessage(admin, "Syntax: //ban <player> [account|ip|full] [time in minutes]");
+			sendInfo(admin, "Player " + name + " was not found!");
 			return;
 		}
 
@@ -58,29 +58,17 @@ public class Ban extends AdminCommand {
 			else if (("full").startsWith(stype))
 				type = 3;
 			else {
-				PacketSendUtility.sendMessage(admin, "Syntax: //ban <player> [account|ip|full] [time in minutes]");
+				sendInfo(admin);
 				return;
 			}
 		}
 
-		int time = 0; // Default: infinity
-		if (params.length > 2) {
-			try {
-				time = Integer.parseInt(params[2]);
-			} catch (NumberFormatException e) {
-				PacketSendUtility.sendMessage(admin, "Syntax: //ban <player> [account|ip|full] [time in minutes]");
-				return;
-			}
-		}
-		if (time == 0) {
-			time = 60 * 24 * 365 * 10; // pseudo infinity. TODO: rework
+		int time = params.length > 2 ? Integer.parseInt(params[2]) : 0; // 0 is permanent, the login server treats negative values as an unban
+		if (time < 0) {
+			sendInfo(admin, "The time must not be negative.");
+			return;
 		}
 
 		LoginServer.getInstance().sendBanPacket(type, accountId, accountIp, time, admin.getObjectId());
-	}
-
-	@Override
-	public void info(Player player, String message) {
-		PacketSendUtility.sendMessage(player, "Syntax: //ban <player> [account|ip|full] [time in minutes]");
 	}
 }

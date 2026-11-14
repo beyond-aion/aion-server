@@ -44,20 +44,20 @@ public class SM_PLAYER_INFO extends AbstractPlayerInfoPacket {
 		if (player.isInCustomState(CustomPlayerState.NEUTRAL_TO_ALL_PLAYERS) || activePlayer.isInCustomState(CustomPlayerState.NEUTRAL_TO_ALL_PLAYERS))
 			raceId = activePlayer.getRace().getRaceId();
 
-		writeF(player.getX());// x
-		writeF(player.getY());// y
-		writeF(player.getZ());// z
+		writeF(player.getX());
+		writeF(player.getY());
+		writeF(player.getZ());
 		writeD(player.getObjectId());
-		writeD(pcd.getTemplateId()); // 0xA3 female asmodian, 0xA2 male asmodian, 0xA1 female elyos, 0xA0 male elyos
-		writeD(player.getRobotId());// RobotId
-		writeD(player.getTransformModel().getModelId()); // Transformed state: transformed model id, Regular state: player model id
+		writeD(pcd.getTemplateId());
+		writeD(player.getRobotId());
+		writeD(player.getTransformModel().getModelId());
 		writeC(0x00); // new 2.0 Packet --- probably pet info?
 		writeD(player.getTransformModel().getType().getId());
 		writeC(enemy ? 0x00 : 0x26);
 
-		writeC(raceId); // race
+		writeC(raceId);
 		writeC(pcd.getPlayerClass().getClassId());
-		writeC(pcd.getGender().getGenderId()); // sex
+		writeC(pcd.getGender().getGenderId());
 		writeH(player.getState());
 
 		writeD(0);
@@ -88,7 +88,7 @@ public class SM_PLAYER_INFO extends AbstractPlayerInfoPacket {
 			writeB(new byte[12]);
 		}
 		writeC(player.getLifeStats().getHpPercentage());
-		writeH(pcd.getDp());// current dp
+		writeH(pcd.getDp());
 		writeC(0x00);// unk (0x00)
 
 		writeEquippedItems(player.getEquipment().getEquippedForAppearance());
@@ -135,7 +135,6 @@ public class SM_PLAYER_INFO extends AbstractPlayerInfoPacket {
 		writeC(playerAppearance.getCheekBones());
 		writeC(playerAppearance.getEarShape());
 		writeC(playerAppearance.getHeadSize());
-		// 1.5.x 0x00, shoulderSize, armLength, legLength (BYTE) after HeadSize
 
 		writeC(playerAppearance.getNeck());
 		writeC(playerAppearance.getNeckLength());
@@ -163,8 +162,8 @@ public class SM_PLAYER_INFO extends AbstractPlayerInfoPacket {
 		writeC(playerAppearance.getVoice());
 
 		writeF(playerAppearance.getHeightScale());
-		writeF(0.25f); // scale
-		writeF(2.0f); // gravity or slide surface o_O
+		writeF(pcd.getBoundRadius().getMaxOfFrontAndSide());
+		writeF(pcd.getBoundRadius().getUpper());
 		float movementSpeed = player.getGameStats().getMovementSpeedFloat();
 		writeF(movementSpeed);
 
@@ -173,7 +172,7 @@ public class SM_PLAYER_INFO extends AbstractPlayerInfoPacket {
 		writeH(attackSpeed.getCurrent());
 		writeC(player.getPortAnimationId()); // not visible to other players (they always see a simple fade in animation)
 
-		writeS(player.hasStore() ? player.getStore().getStoreMessage() : ""); // private store message
+		writeS(player.hasStore() ? player.getStore().getStoreMessage() : "");
 
 		PlayerMoveController pmc = player.getMoveController();
 		byte movementMask = pmc.getMovementMask();
@@ -199,13 +198,13 @@ public class SM_PLAYER_INFO extends AbstractPlayerInfoPacket {
 			writeD(player.getFlightPath().getId());
 			writeD(player.getFlightPath().getDistance());
 		}
-		writeC(player.getVisualState()); // visualState
+		writeC(player.getVisualState());
 		writeS(player.getCommonData().getNote()); // note show in right down windows if your target on player
 
-		writeH(player.getLevel()); // [level]
-		writeH(player.getPlayerSettings().getDisplay()); // unk - 0x04
-		writeH(player.getPlayerSettings().getDeny()); // unk - 0x00
-		writeH(player.getAbyssRank().getRank().getId()); // abyss rank
+		writeH(player.getLevel());
+		writeH(player.getPlayerSettings().getDisplay());
+		writeH(player.getPlayerSettings().getDeny());
+		writeH(player.getAbyssRank().getRank().getId());
 		writeH(0x00); // unk - 0x01
 		writeD(player.getTarget() == null ? 0 : player.getTarget().getObjectId());
 		writeC(0); // suspect id
@@ -221,8 +220,8 @@ public class SM_PLAYER_INFO extends AbstractPlayerInfoPacket {
 		writeC(3); // can be 3 or 5 on elyos side (3 is more common), not sure what it's for (TODO: check asmo side)
 
 		CPInfo cpInfo = ConquerorAndProtectorService.getInstance().getCPInfoForCurrentMap(player);
-		writeC(cpInfo != null && cpInfo.getType() == CPType.CONQUEROR ? cpInfo.getRank() : 0); // Conqueror rank
-		writeC(cpInfo != null && cpInfo.getType() == CPType.PROTECTOR ? cpInfo.getRank() : 0); // Protector rank
+		writeC(cpInfo != null && cpInfo.getType() == CPType.CONQUEROR ? cpInfo.getRank() : 0);
+		writeC(cpInfo != null && cpInfo.getType() == CPType.PROTECTOR ? cpInfo.getRank() : 0);
 
 		writeC(0); // Officer rank icon
 	}

@@ -102,7 +102,7 @@ public class SM_NPC_INFO extends AionServerPacket {
 			}
 		}
 		writeF(npcTemplate.getBoundRadius().getMaxOfFrontAndSide());
-		writeF(npcTemplate.getHeight());
+		writeF(npcTemplate.getBoundRadius().getUpper());
 		writeF(npc.getGameStats().getMovementSpeedFloat());// speed
 		writeH(npc.getGameStats().getAttackSpeed().getBase());
 		writeH(npc.getGameStats().getAttackSpeed().getCurrent());

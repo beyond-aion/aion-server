@@ -40,10 +40,6 @@ public class WorldMap implements Iterable<WorldMapInstance> {
 		return worldMapTemplate.getWaterLevel();
 	}
 
-	public int getDeathLevel() {
-		return worldMapTemplate.getDeathLevel();
-	}
-
 	public WorldType getWorldType() {
 		return worldMapTemplate.getWorldType();
 	}
@@ -65,11 +61,7 @@ public class WorldMap implements Iterable<WorldMapInstance> {
 	}
 
 	public int getInstanceCount() {
-		int twinCount = worldMapTemplate.getTwinCount();
-		if (twinCount == 0)
-			twinCount = 1;
-		twinCount += worldMapTemplate.getBeginnerTwinCount();
-		return twinCount;
+		return Math.max(1, worldMapTemplate.getTwinCount());
 	}
 
 	/**
@@ -87,11 +79,6 @@ public class WorldMap implements Iterable<WorldMapInstance> {
 		// instanceId is a count, some code still uses 0 for the default instance
 		if (instanceId == 0)
 			instanceId = 1;
-		if (!isInstanceType()) {
-			if (instanceId > getInstanceCount()) {
-				throw new IllegalArgumentException("WorldMapInstance " + getMapId() + " has lower instances count than " + instanceId);
-			}
-		}
 		return instances.get(instanceId);
 	}
 

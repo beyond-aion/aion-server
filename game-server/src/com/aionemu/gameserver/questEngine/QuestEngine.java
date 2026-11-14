@@ -76,6 +76,7 @@ public class QuestEngine implements GameEngine {
 	private final List<Integer> reachTarget = new ArrayList<>();
 	private final List<Integer> lostTarget = new ArrayList<>();
 	private final List<Integer> questOnEnterWindStream = new ArrayList<>();
+	private final List<Integer> questOnFlightPathEnd = new ArrayList<>();
 	private final List<Integer> questRideAction = new ArrayList<>();
 	private final Map<String, List<Integer>> questOnKillInZone = new HashMap<>();
 
@@ -145,6 +146,7 @@ public class QuestEngine implements GameEngine {
 		reachTarget.clear();
 		lostTarget.clear();
 		questOnEnterWindStream.clear();
+		questOnFlightPathEnd.clear();
 		questRideAction.clear();
 		questHandlers.clear();
 	}
@@ -690,6 +692,20 @@ public class QuestEngine implements GameEngine {
 		}
 	}
 
+	public void onFlightPathEnd(QuestEnv env, int teleportId) {
+		try {
+			for (int questId : questOnFlightPathEnd) {
+				AbstractQuestHandler questHandler = getQuestHandlerByQuestId(questId);
+				if (questHandler != null) {
+					env.setQuestId(questId);
+					questHandler.onFlightPathEndEvent(env, teleportId);
+				}
+			}
+		} catch (Exception ex) {
+			log.error("QE: exception in onFlightPathEnd", ex);
+		}
+	}
+
 	public void rideAction(QuestEnv env, int itemId) {
 		try {
 			for (int questId : questRideAction) {
@@ -865,6 +881,11 @@ public class QuestEngine implements GameEngine {
 	public void registerOnEnterWindStream(int questId) {
 		if (!questOnEnterWindStream.contains(questId))
 			questOnEnterWindStream.add(questId);
+	}
+
+	public void registerOnFlightPathEnd(int questId) {
+		if (!questOnFlightPathEnd.contains(questId))
+			questOnFlightPathEnd.add(questId);
 	}
 
 	public void registerOnRide(int questId) {

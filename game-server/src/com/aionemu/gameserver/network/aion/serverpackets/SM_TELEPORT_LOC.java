@@ -12,12 +12,12 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
  */
 public class SM_TELEPORT_LOC extends AionServerPacket {
 
-	private byte portAnimation;
-	private int mapId;
-	private int instanceId;
-	private float x, y, z;
-	private byte heading;
-	private boolean isInstance;
+	private final byte portAnimation;
+	private final int mapId;
+	private final int instanceId;
+	private final float x, y, z;
+	private final byte heading;
+	private final boolean isInstance;
 
 	public SM_TELEPORT_LOC(int mapId, int instanceId, float x, float y, float z, byte heading, TeleportAnimation portAnimation) {
 		this.isInstance = DataManager.WORLD_MAPS_DATA.getTemplate(mapId).isInstance();
@@ -33,8 +33,8 @@ public class SM_TELEPORT_LOC extends AionServerPacket {
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeC(portAnimation);
-		writeD(mapId);// new 4.3 NA -->old //writeH(mapId & 0xFFFF);
-		writeD(isInstance ? instanceId : mapId); // mapId | instanceId
+		writeD(mapId);
+		writeD(isInstance ? instanceId : mapId);
 		writeF(x);
 		writeF(y);
 		writeF(z);

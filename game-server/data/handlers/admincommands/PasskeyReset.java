@@ -4,7 +4,6 @@ import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.dao.PlayerPasskeyDAO;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.loginserver.LoginServer;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 
@@ -14,43 +13,36 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 public class PasskeyReset extends AdminCommand {
 
 	public PasskeyReset() {
-		super("passkeyreset");
+		super("passkeyreset", "Resets an account passkey.", """
+			<player> <passkey> - Sets a new 6-8 digit passkey for the account of the player.
+			""");
 	}
 
 	@Override
 	public void execute(Player player, String... params) {
 		if (params.length < 2) {
-			PacketSendUtility.sendMessage(player, "syntax: //passkeyreset <player> <passkey>");
+			sendInfo(player);
 			return;
 		}
 
 		String name = Util.convertName(params[0]);
 		int accountId = PlayerDAO.getAccountIdByName(name);
 		if (accountId == 0) {
-			PacketSendUtility.sendMessage(player, "player " + name + " can't find!");
-			PacketSendUtility.sendMessage(player, "syntax: //passkeyreset <player> <passkey>");
-			return;
-		}
-
-		try {
-			Integer.parseInt(params[1]);
-		} catch (NumberFormatException e) {
-			PacketSendUtility.sendMessage(player, "parameters should be number!");
+			sendInfo(player, "Player " + name + " was not found!");
 			return;
 		}
 
 		String newPasskey = params[1];
-		if (!(newPasskey.length() > 5 && newPasskey.length() < 9)) {
-			PacketSendUtility.sendMessage(player, "passkey is 6~8 digits!");
+		if (!newPasskey.matches("\\d{6,8}")) {
+			sendInfo(player, "The passkey must consist of 6 to 8 digits.");
 			return;
 		}
 
-		PlayerPasskeyDAO.updateForcePlayerPasskey(accountId, newPasskey);
-		LoginServer.getInstance().sendBanPacket((byte) 2, accountId, "", -1, player.getObjectId());
-	}
-
-	@Override
-	public void info(Player player, String message) {
-		PacketSendUtility.sendMessage(player, "syntax: //passkeyreset <player> <passkey>");
+		if (!PlayerPasskeyDAO.updateForcePlayerPasskey(accountId, newPasskey)) {
+			sendInfo(player, "The account of " + name + " has no passkey to reset.");
+			return;
+		}
+		LoginServer.getInstance().kickAccount(accountId, false);
+		sendInfo(player, "The passkey of " + name + "'s account was reset.");
 	}
 }

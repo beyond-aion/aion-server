@@ -81,7 +81,7 @@ public class SkillAttackManager {
 				NpcSkillTemplate temp = skill.getTemplate();
 				int range = template.getProperties().getFirstTargetRange() == 0 ? Integer.MAX_VALUE : template.getProperties().getFirstTargetRange();
 				VisibleObject newTarget = switch (temp.getTarget()) {
-					case FRIEND -> owner.getKnownList().findObject(o -> o.isVisible() && o.get() instanceof Npc npc && !npc.isDead() && !npc.getLifeStats().isAboutToDie() && !owner.isEnemy(npc)
+					case FRIEND -> owner.getKnownList().findObject(o -> o.isVisible() && o.get() instanceof Npc npc && !npc.isDeadOrDoomed() && !owner.isEnemy(npc)
 							&& PositionUtil.isInRange(owner, npc, range, false) && GeoService.getInstance().canSee(owner, npc));
 					case ME -> owner;
 					case MOST_HATED -> owner.getAggroList().getTarget(AggroTarget.MOST_HATED);
@@ -173,7 +173,7 @@ public class SkillAttackManager {
 
 	// check for bind/silence/fear/stun etc debuffs on npc
 	private static boolean isReady(Npc owner, NpcSkillEntry entry) {
-		if (owner.isDead() || owner.getLifeStats().isAboutToDie())
+		if (owner.isDeadOrDoomed())
 			return false;
 		if (cantUseSkill(entry, owner))
 			return false;

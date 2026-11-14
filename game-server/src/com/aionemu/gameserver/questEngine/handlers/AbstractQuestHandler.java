@@ -267,6 +267,13 @@ public abstract class AbstractQuestHandler {
 		return false;
 	}
 
+	/**
+	 * Called when the player lands at the end of a flight transporter path.
+	 */
+	public boolean onFlightPathEndEvent(QuestEnv env, int teleportId) {
+		return false;
+	}
+
 	public boolean rideAction(QuestEnv env, int rideItemId) {
 		return false;
 	}
@@ -953,7 +960,8 @@ public abstract class AbstractQuestHandler {
 		final int objectId = item.getObjectId();
 
 		if (qs.getQuestVarById(varNum) == step) {
-			PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), objectId, itemId, 3000, USE_START), true);
+			int useDelay = player.getItemUseDelay(3000);
+			PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), objectId, itemId, useDelay, USE_START), true);
 			ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 				@Override
@@ -971,7 +979,7 @@ public abstract class AbstractQuestHandler {
 					}
 					changeQuestStep(env, step, nextStep, reward, varNum);
 				}
-			}, 3000);
+			}, useDelay);
 			return true;
 		}
 		return false;

@@ -11,6 +11,11 @@ public class MovementMask {
 	public static final byte IMMEDIATE = (byte) 0x00;
 
 	/**
+	 * When the creature is thrown in an arc, e.g. by a jump trigger. Clients replay a move with this flag as a ballistic curve.
+	 */
+	public static final byte ARC = (byte) 0x02; // 2
+
+	/**
 	 * When gliding
 	 */
 	public static final byte GLIDE = (byte) 0x04; // 4
@@ -39,6 +44,12 @@ public class MovementMask {
 	 * When coords change, but not if heading updates
 	 */
 	public static final byte POSITION = (byte) 0x80; // 128
+
+	/**
+	 * Movement type reported while following a flight path. The client keeps sending normal move packets along the path, but its
+	 * state packet names the path flight as a position update with the arc flag instead.
+	 */
+	public static final byte PATH_FLY = (byte) (POSITION | ARC); // 130
 
 	public static final byte NPC_WALK_SLOW = (byte) 0xEA;
 	public static final byte NPC_WALK_FAST = (byte) 0xE8;

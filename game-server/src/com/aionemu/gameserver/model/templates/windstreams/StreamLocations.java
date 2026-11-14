@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.model.templates.windstreams;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
@@ -19,9 +18,6 @@ public class StreamLocations {
 	protected List<Location2D> location;
 
 	public List<Location2D> getLocation() {
-		if (location == null)
-			location = new ArrayList<>();
-
-		return this.location;
+		return location == null ? List.of() : location;
 	}
 }

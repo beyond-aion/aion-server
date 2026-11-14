@@ -4,7 +4,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.skill.PlayerSkillEntry;
 import com.aionemu.gameserver.model.skill.PlayerSkillList;
 import com.aionemu.gameserver.services.SkillLearnService;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.World;
@@ -15,14 +14,16 @@ import com.aionemu.gameserver.world.World;
 public class DelSkill extends AdminCommand {
 
 	public DelSkill() {
-		super("delskill");
+		super("delskill", "Removes skills (except stigma skills).", """
+			<all|skillId> - Removes all skills or the skill from your target (or yourself).
+			<player> <all|skillId> - Removes all skills or the skill from the online player.
+			""");
 	}
 
 	@Override
 	public void execute(Player admin, String... params) {
 		if (params.length < 1 || params.length > 2) {
-			PacketSendUtility.sendMessage(admin, "No parameters detected.\n" + "Please use //delskill <Player name> <all | skillId>\n"
-				+ "or use //delskill [target] <all | skillId>");
+			sendInfo(admin);
 			return;
 		}
 
@@ -34,19 +35,14 @@ public class DelSkill extends AdminCommand {
 		if (params.length == 2) {
 			player = World.getInstance().getPlayer(recipient);
 			if (player == null) {
-				PacketSendUtility.sendMessage(admin, "The specified player is not online.");
+				sendInfo(admin, "The specified player is not online.");
 				return;
 			}
 
 			if ("all".startsWith(params[1]))
 				playerSkillList = player.getSkillList();
 			else {
-				try {
-					skillId = Integer.parseInt(params[1]);
-				} catch (NumberFormatException e) {
-					PacketSendUtility.sendMessage(admin, "Param 1 must be an integer or <all>.");
-					return;
-				}
+				skillId = Integer.parseInt(params[1]);
 
 				if (!check(admin, player, skillId))
 					return;
@@ -60,12 +56,7 @@ public class DelSkill extends AdminCommand {
 			if ("all".startsWith(params[0]))
 				playerSkillList = player.getSkillList();
 			else {
-				try {
-					skillId = Integer.parseInt(params[0]);
-				} catch (NumberFormatException e) {
-					PacketSendUtility.sendMessage(admin, "Param 0 must be an integer or <all>.");
-					return;
-				}
+				skillId = Integer.parseInt(params[0]);
 
 				if (!check(admin, player, skillId))
 					return;
@@ -75,12 +66,12 @@ public class DelSkill extends AdminCommand {
 	}
 
 	private static boolean check(Player admin, Player player, int skillId) {
-		if (skillId != 0 && !player.getSkillList().isSkillPresent(skillId)) {
-			PacketSendUtility.sendMessage(admin, "Player dont have this skill.");
+		if (!player.getSkillList().isSkillPresent(skillId)) {
+			sendInfo(admin, "The player doesn't have this skill.");
 			return false;
 		}
 		if (player.getSkillList().getSkillEntry(skillId).isStigmaSkill()) {
-			PacketSendUtility.sendMessage(admin, "You can't remove stigma skill.");
+			sendInfo(admin, "You can't remove stigma skill.");
 			return false;
 		}
 		return true;
@@ -89,7 +80,7 @@ public class DelSkill extends AdminCommand {
 	public void apply(Player admin, Player player, int skillId, PlayerSkillList playerSkillList) {
 		if (skillId != 0) {
 			SkillLearnService.removeSkill(player, skillId);
-			PacketSendUtility.sendMessage(admin, "You have successfully deleted the specified skill.");
+			sendInfo(admin, "You have successfully deleted the specified skill.");
 		} else {
 			for (PlayerSkillEntry skillEntry : playerSkillList.getAllSkills()) {
 				if (!skillEntry.isStigmaSkill()) {
@@ -97,14 +88,8 @@ public class DelSkill extends AdminCommand {
 				}
 			}
 
-			PacketSendUtility.sendMessage(admin, "You have success delete All skills.");
+			sendInfo(admin, "You have successfully deleted all skills (except stigma skills).");
 		}
 
-	}
-
-	@Override
-	public void info(Player player, String message) {
-		PacketSendUtility.sendMessage(player, "No parameters detected.\n" + "Please use //delskill <Player name> <all | skillId>\n"
-			+ "or use //delskill [target] <all | skillId>");
 	}
 }

@@ -1,5 +1,6 @@
 package consolecommands;
 
+import com.aionemu.gameserver.model.gameobjects.player.CustomPlayerState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.utils.chathandlers.ConsoleCommand;
 
@@ -11,11 +12,13 @@ import admincommands.RemoveCd;
 public class Itemcooltime extends ConsoleCommand {
 
 	public Itemcooltime() {
-		super("itemcooltime", "Removes cooldowns of all items.");
+		super("itemcooltime", "Removes and disables cooldowns of all items.");
 	}
 
 	@Override
 	public void execute(Player player, String... params) {
 		RemoveCd.removeItemCooldowns(player);
+		player.setCustomState(CustomPlayerState.NO_ITEM_COOLDOWN_MODE); // remove_skill_delay_all 1 re-enables it because of how the GM panel buttons work
+		sendInfo(player, "Cooldown times of all items have been disabled.");
 	}
 }

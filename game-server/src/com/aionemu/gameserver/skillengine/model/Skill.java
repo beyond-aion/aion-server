@@ -264,7 +264,7 @@ public class Skill {
 			}
 		}
 
-		if (target.getLifeStats().isAboutToDie() && !isNonTargetAOE())
+		if (target.getLifeStats().isDoomed() && !isNonTargetAOE())
 			return false;
 
 		if (target.isDead() && !getSkillTemplate().hasResurrectEffect() && !isNonTargetAOE()) {
@@ -400,7 +400,7 @@ public class Skill {
 
 	private int calculateCastDuration() {
 		if (itemTemplate != null)
-			return itemTemplate.isCombatActivated() ? baseCastDuration : itemTemplate.getCastingDelay();
+			return itemTemplate.isCombatActivated() ? baseCastDuration : ((Player) effector).getItemUseDelay(itemTemplate.getCastingDelay());
 		//2nd+ time of multicast-skill activation
 		if (getMultiCastCount() > 0)
 			return 0;

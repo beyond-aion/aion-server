@@ -4,6 +4,8 @@ import com.aionemu.gameserver.model.gameobjects.player.CustomPlayerState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.utils.chathandlers.ConsoleCommand;
 
+import admincommands.RemoveCd;
+
 /**
  * @author Neon
  */
@@ -11,23 +13,27 @@ public class Remove_skill_delay_all extends ConsoleCommand {
 
 	public Remove_skill_delay_all() {
 		super("remove_skill_delay_all", "Enables/disables your skill cooldowns.", """
-			1 - Enables your skill cooldowns.
-			0 - Disables your skill cooldowns.
+			1 - Enables your skill and item cooldowns.
+			0 - Removes and disables your skill cooldowns.
 			""");
 	}
 
 	@Override
 	public void execute(Player player, String... params) {
-		if (params.length == 0) {
+		if (params.length == 0 || !params[0].equals("0") && !params[0].equals("1")) {
 			sendInfo(player);
 			return;
 		}
-		if (params[0].equals("1") && player.isInCustomState(CustomPlayerState.NO_SKILL_COOLDOWN_MODE)) {
-			sendInfo(player, "Cooldown times of all skills have been recovered.");
+		if (params[0].equals("1")) {
 			player.unsetCustomState(CustomPlayerState.NO_SKILL_COOLDOWN_MODE);
-		} else if (params[0].equals("0") && !player.isInCustomState(CustomPlayerState.NO_SKILL_COOLDOWN_MODE)) {
-			sendInfo(player, "Cooldown times of all skills have been disabled.");
+			sendInfo(player, "Cooldown times of all skills have been recovered.");
+			// ideally, the itemcooltime command should handle it but the 'On' GM panel button only sends this command
+			player.unsetCustomState(CustomPlayerState.NO_ITEM_COOLDOWN_MODE);
+			sendInfo(player, "Cooldown times of all items have been recovered.");
+		} else if (params[0].equals("0")) {
+			RemoveCd.removeSkillCooldowns(player);
 			player.setCustomState(CustomPlayerState.NO_SKILL_COOLDOWN_MODE);
+			sendInfo(player, "Cooldown times of all skills have been disabled.");
 		}
 	}
 }

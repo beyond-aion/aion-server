@@ -24,7 +24,7 @@ public class _18409GroupTiamatsPowerUnleashed extends AbstractQuestHandler {
 		qe.registerQuestNpc(799553).addOnQuestStart(questId);
 		qe.registerQuestNpc(799553).addOnTalkEvent(questId);
 		qe.registerQuestNpc(799552).addOnTalkEvent(questId);
-		qe.registerQuestNpc(730014).addOnTalkEvent(questId);
+		qe.registerQuestNpc(205232).addOnTalkEvent(questId);
 		qe.registerQuestNpc(215795).addOnKillEvent(questId);
 	}
 

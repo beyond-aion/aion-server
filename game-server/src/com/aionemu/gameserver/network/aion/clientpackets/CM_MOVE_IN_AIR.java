@@ -54,7 +54,7 @@ public class CM_MOVE_IN_AIR extends AionClientPacket {
 		Player player = getConnection().getActivePlayer();
 		if (!player.isSpawned())
 			return;
-		if (!player.isInState(CreatureState.FLYING) || worldId != player.getWorldId())
+		if (!player.isInState(CreatureState.FLYING) || worldId != player.getPosition().getClientWorldId())
 			return;
 
 		if (player.getFlightPath() != null) {

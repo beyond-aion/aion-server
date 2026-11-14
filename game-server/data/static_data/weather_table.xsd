@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-	<xs:element name="weather">
+	<xs:element name="weather_maps">
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element maxOccurs="unbounded" name="map" type="WeatherTable" />
@@ -9,26 +9,43 @@
 	</xs:element>
 	<xs:complexType name="WeatherTable">
 		<xs:sequence>
-			<xs:element minOccurs="0" maxOccurs="unbounded" name="table" type="WeatherEntry" />
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="weather" type="WeatherEntry" />
 		</xs:sequence>
-		<xs:attribute name="weather_count" type="xs:int" use="required" />
 		<xs:attribute name="zone_count" type="xs:int" use="required" />
 		<xs:attribute name="id" type="xs:int" use="required" />
 	</xs:complexType>
 	<xs:complexType name="WeatherEntry">
-		<xs:attribute name="after" type="xs:boolean" default="false" />
-		<xs:attribute name="before" type="xs:boolean" default="false" />
-		<xs:attribute name="name" type="xs:string" />
+		<xs:sequence>
+			<xs:element minOccurs="0" name="sign" type="WeatherPhase" />
+			<xs:element minOccurs="0" name="remain" type="WeatherPhase" />
+			<xs:element minOccurs="0" maxOccurs="4" name="sub" type="WeatherPhase" />
+		</xs:sequence>
 		<xs:attribute name="code" type="xs:int" use="required" />
-		<xs:attribute name="rank" type="xs:int" use="required" />
-		<xs:attribute name="zone_id" type="xs:int" use="required" />
+		<xs:attribute name="name" type="xs:string" use="required" />
+		<xs:attribute name="zone" type="xs:int" use="required" />
+		<xs:attribute name="priority" type="xs:int" use="required" />
+		<xs:attribute name="months" type="xs:string" />
+		<xs:attribute name="hours" type="xs:string" />
+		<xs:attribute name="occur_prob" type="xs:int" use="required" />
+		<xs:attribute name="occur_delay" type="xs:int" />
+		<xs:attribute name="duration" type="xs:int" use="required" />
+		<xs:attribute name="duration_ex" type="xs:int" />
 		<xs:attribute name="state" type="WeatherState" />
+		<!-- Not imported: attribute (water/air/earth/fire) and att_ranking. They are only exposed to NPC scripts, and no script reads them. -->
+	</xs:complexType>
+	<xs:complexType name="WeatherPhase">
+		<xs:attribute name="name" type="xs:string" use="required" />
+		<xs:attribute name="probability" type="xs:int" />
+		<xs:attribute name="duration" type="xs:int" />
+		<xs:attribute name="duration_ex" type="xs:int" />
 	</xs:complexType>
 	<xs:simpleType name="WeatherState">
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="RAIN" />
 			<xs:enumeration value="SNOW" />
 			<xs:enumeration value="WIND" />
+			<xs:enumeration value="EARTHQUAKE" />
+			<xs:enumeration value="HEATHAZE" />
 		</xs:restriction>
 	</xs:simpleType>
 </xs:schema>

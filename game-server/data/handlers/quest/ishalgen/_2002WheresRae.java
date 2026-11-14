@@ -31,11 +31,12 @@ public class _2002WheresRae extends AbstractQuestHandler {
 
 	@Override
 	public void register() {
-		int[] npc_ids = { 203519, 203534, 203553, 700045, 203516, 203538, 790002 };
+		int[] npc_ids = { 203519, 203534, 203553, 700045, 203516, 203538, 790002, 205020 };
 		qe.registerOnQuestCompleted(questId);
 		qe.registerOnLevelChanged(questId);
 		qe.registerQuestNpc(210377).addOnKillEvent(questId);
 		qe.registerQuestNpc(210378).addOnKillEvent(questId);
+		qe.registerOnFlightPathEnd(questId);
 		for (int npc_id : npc_ids)
 			qe.registerQuestNpc(npc_id).addOnTalkEvent(questId);
 		qe.registerOnEnterWorld(questId);
@@ -151,12 +152,8 @@ public class _2002WheresRae extends AbstractQuestHandler {
 							if (qs.getQuestVars().getQuestVars() == 99) {
 								player.setState(CreatureState.FLYING);
 								player.unsetState(CreatureState.ACTIVE);
-								player.setFlightTeleportId(3001);
-								PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.START_FLYTELEPORT, 3001, 0));
-								ThreadPoolManager.getInstance().schedule(() -> {
-									changeQuestStep(env, 99, 13);
-									TeleportService.teleportTo(player, 220010000, 940.15f, 2295.64f, 265.7f, (byte) 43);
-								}, 40000);
+								player.setFlightTeleportId(4001);
+								PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.START_FLYTELEPORT, 4001, 0));
 								return true;
 							}
 							return false;
@@ -189,28 +186,17 @@ public class _2002WheresRae extends AbstractQuestHandler {
 	}
 
 	@Override
+	public boolean onFlightPathEndEvent(QuestEnv env, int teleportId) {
+		if (teleportId != 4001 || !changeQuestStep(env, 99, 13))
+			return false;
+		TeleportService.teleportTo(env.getPlayer(), 220010000, 940.15f, 2295.64f, 265.7f, (byte) 43);
+		return true;
+	}
+
+	@Override
 	public boolean onKillEvent(QuestEnv env) {
-		Player player = env.getPlayer();
-		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs == null)
-			return false;
-
-		int var = qs.getQuestVarById(0);
-		int targetId = 0;
-		if (env.getVisibleObject() instanceof Npc)
-			targetId = ((Npc) env.getVisibleObject()).getNpcId();
-
-		if (qs.getStatus() != QuestStatus.START)
-			return false;
-		switch (targetId) {
-			case 210377:
-			case 210378:
-				if (var >= 3 && var < 10) {
-					changeQuestStep(env, var, Math.min(10, var + 1));
-					return true;
-				}
-		}
-		return false;
+		int[] npcIds = { 210377, 210378 };
+		return defaultOnKillEvent(env, npcIds, 3, 10);
 	}
 
 	@Override

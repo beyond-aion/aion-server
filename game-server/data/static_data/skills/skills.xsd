@@ -1036,6 +1036,8 @@
 			<xs:extension base="DamageEffect">
 				<xs:attribute name="hp_percent" type="xs:int" />
 				<xs:attribute name="mp_percent" type="xs:int" />
+				<xs:attribute name="prob" type="xs:int" default="100" />
+				<xs:attribute name="prob_delta" type="xs:int" default="0" />
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
@@ -1443,8 +1445,9 @@
 	<xs:complexType name="TargetTeleportEffect">
 		<xs:complexContent>
 			<xs:extension base="Effect">
-				<xs:attribute name="alias_location" type="xs:string"/>
-				<xs:attribute name="distance" type="xs:int" use="required" />
+				<!-- retail: reserved9 (0 = next to the caster, 1 = alias point) is not imported, it is 1 exactly when reserved10 is set -->
+				<xs:attribute name="alias_location" type="xs:string"/> <!-- retail: reserved10 -->
+				<!-- retail: reserved11 is not imported, retail parses it but never uses it -->
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>

@@ -1,13 +1,8 @@
 package com.aionemu.gameserver.model.templates.pet;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.xml.bind.annotation.XmlAccessType;
-import jakarta.xml.bind.annotation.XmlAccessorType;
-import jakarta.xml.bind.annotation.XmlAttribute;
-import jakarta.xml.bind.annotation.XmlElement;
-import jakarta.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.*;
 
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.services.toypet.PetFeedCalculator;
@@ -37,17 +32,9 @@ public class PetFlavour {
 	protected int cooldown = 0;
 
 	public List<PetRewards> getFood() {
-		if (food == null) {
-			food = new ArrayList<>();
-		}
-		return this.food;
+		return food == null ? List.of() : food;
 	}
 
-	/**
-	 * Returns a food group for the itemId. Null if doesn't match
-	 * 
-	 * @param itemId
-	 */
 	public FoodType getFoodType(int itemId) {
 		for (PetRewards rewards : getFood()) {
 			if (DataManager.ITEM_GROUPS_DATA.isFood(itemId, rewards.getType()))

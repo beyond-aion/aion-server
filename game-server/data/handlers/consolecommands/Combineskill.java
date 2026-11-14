@@ -7,7 +7,6 @@ import jakarta.xml.bind.Unmarshaller;
 import jakarta.xml.bind.annotation.*;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.ConsoleCommand;
 import com.aionemu.gameserver.utils.xml.JAXBUtil;
 
@@ -17,13 +16,15 @@ import com.aionemu.gameserver.utils.xml.JAXBUtil;
 public class Combineskill extends ConsoleCommand {
 
 	public Combineskill() {
-		super("combineskill");
+		super("combineskill", "Adds a skill.", """
+			<skill name> <level> - Adds the skill with the level to your target (or yourself).
+			""");
 	}
 
 	@Override
 	public void execute(Player admin, String... params) {
 		if (params.length < 2) {
-			info(admin, null);
+			sendInfo(admin);
 			return;
 		}
 
@@ -31,12 +32,9 @@ public class Combineskill extends ConsoleCommand {
 
 		String skillName = params[0];
 		int skillId = 0;
-		int skillLvl = 1;
-
-		try {
-			skillLvl = Integer.parseInt(params[1]);
-		} catch (NumberFormatException e) {
-			PacketSendUtility.sendMessage(admin, "Parameters need to be an integer.");
+		int skillLvl = Integer.parseInt(params[1]);
+		if (skillLvl < 1) {
+			sendInfo(admin, "The skill level must be at least 1.");
 			return;
 		}
 
@@ -47,15 +45,14 @@ public class Combineskill extends ConsoleCommand {
 		if (skillTemplate != null)
 			skillId = skillTemplate.getTemplateId();
 
-		if (skillId > 0) {
-			player.getSkillList().addSkill(player, skillId, skillLvl);
-			PacketSendUtility.sendMessage(admin, "You have success add skill");
+		if (skillId <= 0) {
+			sendInfo(admin, "There is no skill named " + skillName + ".");
+			return;
 		}
-	}
-
-	@Override
-	public void info(Player admin, String message) {
-		PacketSendUtility.sendMessage(admin, "syntax ///addcskill <skill name>");
+		if (player.getSkillList().addSkill(player, skillId, skillLvl))
+			sendInfo(admin, "The skill was added successfully.");
+		else
+			sendInfo(admin, "The player already has this skill at the same or a higher level.");
 	}
 
 	@XmlAccessorType(XmlAccessType.NONE)
