@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.controllers.movement;
 
+import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
@@ -168,12 +169,18 @@ public class PlayerMoveController extends PlayableMoveController<Player> {
 		return z < -2;
 	}
 
+	/**
+	 * A lethal fall shows no resurrection options, except in instances that ask for them: the player is revived a second later in the instance, at
+	 * an active kisk or at the bind point. A revive already scheduled on death, like the one of PvP zones, is kept.
+	 */
 	private void dieFromFall() {
 		resetFalling();
 		if (owner.isDead())
 			return;
-		if (owner.getController().die(TYPE.FALL_DAMAGE, LOG.REGULAR, owner))
-			PlayerReviveService.bindRevive(owner);
+		if (owner.getController().die(TYPE.FALL_DAMAGE, LOG.REGULAR, owner)
+			&& !owner.getWorldMapInstance().getInstanceHandler().showResurrectionOptionsAfterLethalFall()
+			&& !owner.getController().hasScheduledTask(TaskId.TELEPORT))
+			PlayerReviveService.scheduleReviveAtBase(owner, 1000, 0);
 	}
 
 	public void setHasMovedByRandomMoveLocEffect(Skill skill) {

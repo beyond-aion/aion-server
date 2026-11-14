@@ -53,7 +53,7 @@ public class CM_REVIVE extends AionClientPacket {
 				PlayerReviveService.skillRevive(activePlayer);
 				break;
 			case KISK_REVIVE:
-				PlayerReviveService.kiskRevive(activePlayer);
+				PlayerReviveService.kiskOrBindRevive(activePlayer);
 				break;
 			case INSTANCE_REVIVE:
 				PlayerReviveService.instanceRevive(activePlayer);
