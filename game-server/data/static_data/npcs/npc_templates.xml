@@ -222725,77 +222725,77 @@
 		<stats maxHp="2406988" msup="1335" />
 		<bound_radius front="3" side="2.5" upper="4" />
 	</npc_template>
-	<npc_template npc_id="257000" level="65" name="dux" name_id="319317" title_id="314389" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257000" level="65" name="dux" name_id="319317" title_id="314389" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000037</item>
 		</equipment>
 		<bound_radius front="3.92" side="1.4" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257001" level="65" name="dux" name_id="319318" title_id="314389" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257001" level="65" name="dux" name_id="319318" title_id="314389" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000037</item>
 		</equipment>
 		<bound_radius front="3.92" side="1.4" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257002" level="65" name="dux" name_id="319319" title_id="314389" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257002" level="65" name="dux" name_id="319319" title_id="314389" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000037</item>
 		</equipment>
 		<bound_radius front="3.92" side="1.4" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257003" level="65" name="dux" name_id="319320" title_id="314389" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257003" level="65" name="dux" name_id="319320" title_id="314389" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000037</item>
 		</equipment>
 		<bound_radius front="3.92" side="1.4" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257004" level="65" name="dux" name_id="319321" title_id="314389" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257004" level="65" name="dux" name_id="319321" title_id="314389" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000037</item>
 		</equipment>
 		<bound_radius front="3.92" side="1.4" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257005" level="65" name="stallari" name_id="319322" title_id="314389" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257005" level="65" name="stallari" name_id="319322" title_id="314389" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000038</item>
 		</equipment>
 		<bound_radius front="3.675" side="2.065" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257006" level="65" name="stallari" name_id="319323" title_id="314389" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257006" level="65" name="stallari" name_id="319323" title_id="314389" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000038</item>
 		</equipment>
 		<bound_radius front="3.675" side="2.065" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257007" level="65" name="stallari" name_id="319324" title_id="314389" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257007" level="65" name="stallari" name_id="319324" title_id="314389" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000038</item>
 		</equipment>
 		<bound_radius front="3.675" side="2.065" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257008" level="65" name="stallari" name_id="319325" title_id="314389" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257008" level="65" name="stallari" name_id="319325" title_id="314389" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000038</item>
 		</equipment>
 		<bound_radius front="3.675" side="2.065" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257009" level="65" name="stallari" name_id="319326" title_id="314389" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257009" level="65" name="stallari" name_id="319326" title_id="314389" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000038</item>
 		</equipment>
 		<bound_radius front="3.675" side="2.065" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257010" level="65" name="ulsaruk" name_id="319327" title_id="314389" group_drop="DRAKANGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="DRAKAN" tribe="F4GUARD_DRAGON" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257010" level="65" name="ulsaruk" name_id="319327" title_id="314389" group_drop="DRAKANGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="DRAKAN" tribe="F4GUARD_DRAGON" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="45990379" msup="1335" />
 		<equipment>
 			<item>100000039</item>
@@ -225328,77 +225328,77 @@
 		<stats maxHp="18756" />
 		<bound_radius front="0.6" side="1.728" upper="3" />
 	</npc_template>
-	<npc_template npc_id="257300" level="65" name="dux" name_id="319974" title_id="314390" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257300" level="65" name="dux" name_id="319974" title_id="314390" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000037</item>
 		</equipment>
 		<bound_radius front="3.92" side="1.4" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257301" level="1" name="dux" name_id="319975" title_id="314390" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257301" level="1" name="dux" name_id="319975" title_id="314390" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000037</item>
 		</equipment>
 		<bound_radius front="3.92" side="1.4" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257302" level="55" name="dux" name_id="319976" title_id="314390" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257302" level="55" name="dux" name_id="319976" title_id="314390" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000037</item>
 		</equipment>
 		<bound_radius front="3.92" side="1.4" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257303" level="1" name="dux" name_id="319977" title_id="314390" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257303" level="1" name="dux" name_id="319977" title_id="314390" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000037</item>
 		</equipment>
 		<bound_radius front="3.92" side="1.4" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257304" level="1" name="dux" name_id="319978" title_id="314390" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257304" level="1" name="dux" name_id="319978" title_id="314390" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000037</item>
 		</equipment>
 		<bound_radius front="3.92" side="1.4" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257305" level="65" name="stallari" name_id="319979" title_id="314390" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257305" level="65" name="stallari" name_id="319979" title_id="314390" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000038</item>
 		</equipment>
 		<bound_radius front="3.675" side="2.065" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257306" level="1" name="stallari" name_id="319980" title_id="314390" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257306" level="1" name="stallari" name_id="319980" title_id="314390" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000038</item>
 		</equipment>
 		<bound_radius front="3.675" side="2.065" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257307" level="55" name="stallari" name_id="319981" title_id="314390" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257307" level="55" name="stallari" name_id="319981" title_id="314390" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000038</item>
 		</equipment>
 		<bound_radius front="3.675" side="2.065" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257308" level="1" name="stallari" name_id="319982" title_id="314390" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257308" level="1" name="stallari" name_id="319982" title_id="314390" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000038</item>
 		</equipment>
 		<bound_radius front="3.675" side="2.065" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257309" level="1" name="stallari" name_id="319983" title_id="314390" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257309" level="1" name="stallari" name_id="319983" title_id="314390" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000038</item>
 		</equipment>
 		<bound_radius front="3.675" side="2.065" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257310" level="65" name="ulsaruk" name_id="319984" title_id="314390" group_drop="DRAKANGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="DRAKAN" tribe="F4GUARD_DRAGON" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257310" level="65" name="ulsaruk" name_id="319984" title_id="314390" group_drop="DRAKANGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="DRAKAN" tribe="F4GUARD_DRAGON" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="45990379" msup="1335" />
 		<equipment>
 			<item>100000039</item>
@@ -225412,7 +225412,7 @@
 		</equipment>
 		<bound_radius front="5.67" side="7.84" upper="15.4" />
 	</npc_template>
-	<npc_template npc_id="257312" level="55" name="ulsaruk" name_id="319986" title_id="314390" group_drop="DRAKANGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="DRAKAN" tribe="F4GUARD_DRAGON" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257312" level="55" name="ulsaruk" name_id="319986" title_id="314390" group_drop="DRAKANGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="DRAKAN" tribe="F4GUARD_DRAGON" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="45990379" msup="1335" />
 		<equipment>
 			<item>100000039</item>
@@ -227931,77 +227931,77 @@
 		<stats maxHp="18756" />
 		<bound_radius front="0.6" side="1.728" upper="3" />
 	</npc_template>
-	<npc_template npc_id="257600" level="65" name="dux" name_id="320778" title_id="314391" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257600" level="65" name="dux" name_id="320778" title_id="314391" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000037</item>
 		</equipment>
 		<bound_radius front="3.92" side="1.4" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257601" level="65" name="dux" name_id="320779" title_id="314391" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257601" level="65" name="dux" name_id="320779" title_id="314391" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000037</item>
 		</equipment>
 		<bound_radius front="3.92" side="1.4" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257602" level="65" name="dux" name_id="320780" title_id="314391" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257602" level="65" name="dux" name_id="320780" title_id="314391" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000037</item>
 		</equipment>
 		<bound_radius front="3.92" side="1.4" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257603" level="65" name="dux" name_id="320781" title_id="314391" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257603" level="65" name="dux" name_id="320781" title_id="314391" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000037</item>
 		</equipment>
 		<bound_radius front="3.92" side="1.4" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257604" level="65" name="dux" name_id="320782" title_id="314391" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257604" level="65" name="dux" name_id="320782" title_id="314391" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000037</item>
 		</equipment>
 		<bound_radius front="3.92" side="1.4" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257605" level="65" name="stallari" name_id="320783" title_id="314391" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257605" level="65" name="stallari" name_id="320783" title_id="314391" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000038</item>
 		</equipment>
 		<bound_radius front="3.675" side="2.065" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257606" level="65" name="stallari" name_id="320784" title_id="314391" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257606" level="65" name="stallari" name_id="320784" title_id="314391" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000038</item>
 		</equipment>
 		<bound_radius front="3.675" side="2.065" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257607" level="65" name="stallari" name_id="320785" title_id="314391" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257607" level="65" name="stallari" name_id="320785" title_id="314391" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000038</item>
 		</equipment>
 		<bound_radius front="3.675" side="2.065" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257608" level="65" name="stallari" name_id="320786" title_id="314391" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257608" level="65" name="stallari" name_id="320786" title_id="314391" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000038</item>
 		</equipment>
 		<bound_radius front="3.675" side="2.065" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257609" level="65" name="stallari" name_id="320787" title_id="314391" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257609" level="65" name="stallari" name_id="320787" title_id="314391" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000038</item>
 		</equipment>
 		<bound_radius front="3.675" side="2.065" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257610" level="65" name="ulsaruk" name_id="320788" title_id="314391" group_drop="DRAKANGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="DRAKAN" tribe="F4GUARD_DRAGON" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257610" level="65" name="ulsaruk" name_id="320788" title_id="314391" group_drop="DRAKANGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="DRAKAN" tribe="F4GUARD_DRAGON" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="45990379" msup="1335" />
 		<equipment>
 			<item>100000039</item>
@@ -228015,7 +228015,7 @@
 		</equipment>
 		<bound_radius front="5.67" side="7.84" upper="15.4" />
 	</npc_template>
-	<npc_template npc_id="257612" level="65" name="ulsaruk" name_id="320790" title_id="314391" group_drop="DRAKANGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="DRAKAN" tribe="F4GUARD_DRAGON" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257612" level="65" name="ulsaruk" name_id="320790" title_id="314391" group_drop="DRAKANGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="DRAKAN" tribe="F4GUARD_DRAGON" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="45990379" msup="1335" />
 		<equipment>
 			<item>100000039</item>
@@ -230531,77 +230531,77 @@
 		<stats maxHp="18756" />
 		<bound_radius front="0.6" side="1.728" upper="3" />
 	</npc_template>
-	<npc_template npc_id="257900" level="65" name="dux" name_id="321000" title_id="314392" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257900" level="65" name="dux" name_id="321000" title_id="314392" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000037</item>
 		</equipment>
 		<bound_radius front="3.92" side="1.4" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257901" level="65" name="dux" name_id="321001" title_id="314392" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257901" level="65" name="dux" name_id="321001" title_id="314392" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000037</item>
 		</equipment>
 		<bound_radius front="3.92" side="1.4" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257902" level="65" name="dux" name_id="321002" title_id="314392" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257902" level="65" name="dux" name_id="321002" title_id="314392" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000037</item>
 		</equipment>
 		<bound_radius front="3.92" side="1.4" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257903" level="65" name="dux" name_id="321003" title_id="314392" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257903" level="65" name="dux" name_id="321003" title_id="314392" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000037</item>
 		</equipment>
 		<bound_radius front="3.92" side="1.4" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257904" level="65" name="dux" name_id="321004" title_id="314392" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257904" level="65" name="dux" name_id="321004" title_id="314392" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000037</item>
 		</equipment>
 		<bound_radius front="3.92" side="1.4" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257905" level="65" name="stallari" name_id="321005" title_id="314392" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257905" level="65" name="stallari" name_id="321005" title_id="314392" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000038</item>
 		</equipment>
 		<bound_radius front="3.675" side="2.065" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257906" level="65" name="stallari" name_id="321006" title_id="314392" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257906" level="65" name="stallari" name_id="321006" title_id="314392" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000038</item>
 		</equipment>
 		<bound_radius front="3.675" side="2.065" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257907" level="65" name="stallari" name_id="321007" title_id="314392" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257907" level="65" name="stallari" name_id="321007" title_id="314392" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000038</item>
 		</equipment>
 		<bound_radius front="3.675" side="2.065" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257908" level="65" name="stallari" name_id="321008" title_id="314392" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257908" level="65" name="stallari" name_id="321008" title_id="314392" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000038</item>
 		</equipment>
 		<bound_radius front="3.675" side="2.065" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257909" level="65" name="stallari" name_id="321009" title_id="314392" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257909" level="65" name="stallari" name_id="321009" title_id="314392" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000038</item>
 		</equipment>
 		<bound_radius front="3.675" side="2.065" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257910" level="65" name="ulsaruk" name_id="321010" title_id="314392" group_drop="DRAKANGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="DRAKAN" tribe="F4GUARD_DRAGON" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257910" level="65" name="ulsaruk" name_id="321010" title_id="314392" group_drop="DRAKANGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="DRAKAN" tribe="F4GUARD_DRAGON" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="45990379" msup="1335" />
 		<equipment>
 			<item>100000039</item>
@@ -230615,7 +230615,7 @@
 		</equipment>
 		<bound_radius front="5.67" side="7.84" upper="15.4" />
 	</npc_template>
-	<npc_template npc_id="257912" level="65" name="ulsaruk" name_id="321012" title_id="314392" group_drop="DRAKANGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="DRAKAN" tribe="F4GUARD_DRAGON" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257912" level="65" name="ulsaruk" name_id="321012" title_id="314392" group_drop="DRAKANGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="DRAKAN" tribe="F4GUARD_DRAGON" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="45990379" msup="1335" />
 		<equipment>
 			<item>100000039</item>
