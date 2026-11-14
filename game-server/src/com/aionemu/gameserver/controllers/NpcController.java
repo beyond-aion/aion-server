@@ -317,11 +317,11 @@ public class NpcController extends CreatureController<Npc> {
 	}
 
 	@Override
-	public boolean useSkill(int skillId, int skillLevel) {
+	public boolean useSkill(int skillId, int skillLevel, Integer clientHitTime) {
 		SkillTemplate skillTemplate = DataManager.SKILL_DATA.getSkillTemplate(skillId);
 		if (!getOwner().isSkillDisabled(skillTemplate)) {
 			getOwner().getGameStats().renewLastSkillTime();
-			return super.useSkill(skillId, skillLevel);
+			return super.useSkill(skillId, skillLevel, clientHitTime);
 		}
 		return false;
 	}

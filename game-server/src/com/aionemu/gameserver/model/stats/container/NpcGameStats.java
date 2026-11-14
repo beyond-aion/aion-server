@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.model.stats.container;
 
 import java.util.Set;
+import java.util.concurrent.Future;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AILogger;
@@ -14,6 +15,7 @@ import com.aionemu.gameserver.model.templates.npc.AbyssNpcType;
 import com.aionemu.gameserver.model.templates.stats.StatsTemplate;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.PositionUtil;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.stats.CalculationType;
 
 /**
@@ -23,7 +25,10 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 
 	private long lastAttackTime = 0;
 	private long lastAttackedTime = 0;
-	private long nextAttackTime = 0;
+	private long firstAttackTime = 0;
+	private Future<?> attackTask;
+	private long animationEndTime = 0;
+	private long nextSkillTime = 0;
 	private long lastSkillTime = 0;
 	private int nextSkillDelay = 0;
 	private NpcSkillEntry lastSkill = null;
@@ -100,10 +105,6 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 		throw new IllegalStateException("No mp regen for NPC");
 	}
 
-	public int getCastSpeed() {
-		return owner.getObjectTemplate().getCastSpeed();
-	}
-
 	public int getLastAttackTimeDelta() {
 		return Math.round((System.currentTimeMillis() - lastAttackTime) / 1000f);
 	}
@@ -120,10 +121,6 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 		this.lastAttackedTime = System.currentTimeMillis();
 	}
 
-	public boolean isNextAttackScheduled() {
-		return nextAttackTime - System.currentTimeMillis() > 50;
-	}
-
 	public void setFightStartingTime() {
 		this.fightStartingTime = System.currentTimeMillis();
 	}
@@ -132,8 +129,29 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 		return this.fightStartingTime;
 	}
 
-	public void setNextAttackTime(long nextAttackTime) {
-		this.nextAttackTime = nextAttackTime;
+	/**
+	 * Replaces the pending attack decision of the NPC, so it never runs two attack loops at once.
+	 */
+	public synchronized void scheduleAttackTask(Runnable task, int delay) {
+		cancelAttackTask();
+		attackTask = ThreadPoolManager.getInstance().schedule(task, delay);
+	}
+
+	public synchronized void cancelAttackTask() {
+		if (attackTask != null) {
+			attackTask.cancel(false);
+			attackTask = null;
+		}
+	}
+
+	/**
+	 * @return True if the auto attack is due, which then counts as done, false if it is not
+	 */
+	public synchronized boolean tryStartAutoAttack() {
+		if (getNextAttackInterval() > 0)
+			return false;
+		lastAttackTime = System.currentTimeMillis();
+		return true;
 	}
 
 	/**
@@ -151,12 +169,41 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 		int nextAttack = 0;
 		if (lastAttackTime == 0 && !owner.getMoveController().isInMove() && owner.getTarget() instanceof Creature
 			&& PositionUtil.isInAttackRange(owner, (Creature) owner.getTarget(), getAttackRange().getCurrent() / 1000f)) {
-			nextAttack = 750;
+			if (firstAttackTime == 0)
+				firstAttackTime = System.currentTimeMillis() + 750;
+			nextAttack = (int) Math.max(0, firstAttackTime - System.currentTimeMillis());
 		}
 		if (attackDelay < attackSpeed) {
 			nextAttack = (int) (attackSpeed - attackDelay);
 		}
-		return nextAttack;
+		return (int) Math.max(nextAttack, animationEndTime - System.currentTimeMillis());
+	}
+
+	/**
+	 * Holds the next auto attack and the next skill with a cast time until the animation of the current action ends.
+	 */
+	public void setAnimationEndTime(long animationEndTime) {
+		this.animationEndTime = Math.max(this.animationEndTime, animationEndTime);
+	}
+
+	/**
+	 * Holds the next action until the animation of the skill that just ended is over, and the next skill at least for the attack delay.
+	 */
+	public void onSkillEnd(int recoveryMillis) {
+		long now = System.currentTimeMillis();
+		setAnimationEndTime(now + recoveryMillis);
+		int attackSpeed = getAttackSpeed().getCurrent();
+		nextSkillTime = Math.max(nextSkillTime, now + Math.max(recoveryMillis, attackSpeed == 0 ? 2000 : attackSpeed));
+	}
+
+	/**
+	 * @return Milliseconds until the NPC may use the skill: after the end of the previous skill. A skill from the NPC's skill list takes the place
+	 *         of the next auto attack, a skill queued by an AI script only waits for the end of the current animation.
+	 */
+	public int getNextSkillInterval(NpcSkillEntry skill) {
+		long now = System.currentTimeMillis();
+		int interval = (int) Math.max(0, nextSkillTime - now);
+		return Math.max(interval, skill.isQueued() ? (int) Math.max(0, animationEndTime - now) : getNextAttackInterval());
 	}
 
 	public void renewLastSkillTime() {
@@ -215,7 +262,10 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 		lastAttackedTime = 0;
 		lastChangeTarget = 0;
 		fightStartingTime = 0;
-		nextAttackTime = 0;
+		firstAttackTime = 0;
+		cancelAttackTask();
+		animationEndTime = 0;
+		nextSkillTime = 0;
 		lastSkillTime = 0;
 		nextSkillDelay = 0;
 	}

@@ -3,7 +3,7 @@ package com.aionemu.gameserver.network.aion.serverpackets;
 import java.util.List;
 
 import com.aionemu.gameserver.controllers.attack.AttackResult;
-import com.aionemu.gameserver.model.animations.AttackHandAnimation;
+import com.aionemu.gameserver.model.animations.AttackAnimation;
 import com.aionemu.gameserver.model.animations.AttackTypeAnimation;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -18,23 +18,23 @@ public class SM_ATTACK extends AionServerPacket {
 
 	private int attackno;
 	private int time;
-	private AttackHandAnimation attackHandAnimation;
+	private AttackAnimation attackAnimation;
 	private AttackTypeAnimation attackTypeAnimation;
 	private List<AttackResult> attackList;
 	private Creature attacker;
 	private Creature target;
 	private Effect criticalProcEffect;
 
-	public SM_ATTACK(Creature attacker, Creature target, int attackno, int time, AttackTypeAnimation attackTypeAnimation, AttackHandAnimation attackHandAnimation, List<AttackResult> attackList) {
-		this(attacker, target, attackno, time, attackTypeAnimation, attackHandAnimation, attackList, null);
+	public SM_ATTACK(Creature attacker, Creature target, int attackno, int time, AttackTypeAnimation attackTypeAnimation, AttackAnimation attackAnimation, List<AttackResult> attackList) {
+		this(attacker, target, attackno, time, attackTypeAnimation, attackAnimation, attackList, null);
 	}
 
-	public SM_ATTACK(Creature attacker, Creature target, int attackno, int time, AttackTypeAnimation attackTypeAnimation, AttackHandAnimation attackHandAnimation, List<AttackResult> attackList, Effect criticalProcEffect) {
+	public SM_ATTACK(Creature attacker, Creature target, int attackno, int time, AttackTypeAnimation attackTypeAnimation, AttackAnimation attackAnimation, List<AttackResult> attackList, Effect criticalProcEffect) {
 		this.attacker = attacker;
 		this.target = target;
 		this.attackno = attackno;// empty
 		this.time = time;// empty
-		this.attackHandAnimation = attackHandAnimation;
+		this.attackAnimation = attackAnimation;
 		this.attackTypeAnimation = attackTypeAnimation;
 		this.attackList = attackList;
 		this.criticalProcEffect = criticalProcEffect;
@@ -46,7 +46,7 @@ public class SM_ATTACK extends AionServerPacket {
 		writeC(attackno);
 		writeH(time);
 		writeC(attackTypeAnimation.getId());
-		writeC(attackHandAnimation.getId());
+		writeC(attackAnimation.getId());
 
 		writeD(target.getObjectId());
 

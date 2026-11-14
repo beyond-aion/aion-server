@@ -23,7 +23,6 @@ import com.aionemu.gameserver.skillengine.properties.FirstTargetAttribute;
 import com.aionemu.gameserver.skillengine.properties.Properties;
 import com.aionemu.gameserver.skillengine.properties.TargetRangeAttribute;
 import com.aionemu.gameserver.utils.PositionUtil;
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.geo.GeoService;
 
 /**
@@ -42,8 +41,9 @@ public class SkillAttackManager {
 		}
 		if (npcAI.setSubStateIfNot(AISubState.CAST)) {
 			if (delay > 0) {
-				ThreadPoolManager.getInstance().schedule(() -> skillAction(npcAI), delay);
+				npcAI.getOwner().getGameStats().scheduleAttackTask(() -> skillAction(npcAI), delay);
 			} else {
+				npcAI.getOwner().getGameStats().cancelAttackTask();
 				skillAction(npcAI);
 			}
 		}

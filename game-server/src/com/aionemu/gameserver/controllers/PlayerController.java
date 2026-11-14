@@ -19,6 +19,8 @@ import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.configs.main.HTMLConfig;
 import com.aionemu.gameserver.configs.main.MembershipConfig;
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
+import com.aionemu.gameserver.controllers.attack.AttackUtil;
+import com.aionemu.gameserver.controllers.attack.AutoAttackValidator;
 import com.aionemu.gameserver.controllers.observer.StanceObserver;
 import com.aionemu.gameserver.custom.pvpmap.PvpMapService;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -27,6 +29,7 @@ import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.actions.PlayerMode;
 import com.aionemu.gameserver.model.animations.ActionAnimation;
+import com.aionemu.gameserver.model.animations.AttackAnimation;
 import com.aionemu.gameserver.model.animations.ObjectDeleteAnimation;
 import com.aionemu.gameserver.model.gameobjects.*;
 import com.aionemu.gameserver.model.gameobjects.player.CustomPlayerState;
@@ -86,11 +89,11 @@ public class PlayerController extends CreatureController<Player> {
 
 	private static final Logger log = LoggerFactory.getLogger(PlayerController.class);
 	private static final int PROTECTION_TIME = 60000;
+	private final AutoAttackValidator autoAttackValidator = new AutoAttackValidator();
 	private static final float MAX_FLIGHT_LANDING_DISTANCE = 5;
 	private static final int FLIGHT_LANDING_TIME_TOLERANCE = 1000;
 	private long lastAttackMillis = 0;
 	private long lastAttackedMillis = 0;
-	private long lastAutoAttackMillis = 0;
 	private StanceObserver stanceObserver;
 
 	@Override
@@ -262,13 +265,13 @@ public class PlayerController extends CreatureController<Player> {
 			boolean killedByOpponent = player.isDueling(master);
 			DuelService.getInstance().loseDuel(player);
 			if (killedByOpponent) {
-				if (player.getLifeStats().getHpPercentage() < 33)
+				if (player.getLifeStats().getHpPercentage() <= 33)
 					player.getLifeStats().setCurrentHpPercent(33);
-				if (player.getLifeStats().getMpPercentage() < 33)
+				if (player.getLifeStats().getMpPercentage() <= 33)
 					player.getLifeStats().setCurrentMpPercent(33);
-				if (master.getLifeStats().getHpPercentage() < 33)
+				if (master.getLifeStats().getHpPercentage() <= 33)
 					master.getLifeStats().setCurrentHpPercent(33);
-				if (master.getLifeStats().getMpPercentage() < 33)
+				if (master.getLifeStats().getMpPercentage() <= 33)
 					master.getLifeStats().setCurrentMpPercent(33);
 				return;
 			}
@@ -374,12 +377,20 @@ public class PlayerController extends CreatureController<Player> {
 			getOwner().setState(CreatureState.ACTIVE);
 		}
 		getOwner().setHitTimeBoost(0, 0);
+		getOwner().setNextAttackUse(0);
+		autoAttackValidator.reset();
 		if (getOwner().getPanesterraFaction() != null && !WorldMapType.isPanesterraMap(getOwner().getWorldId()))
 			getOwner().setPanesterraFaction(null);
 	}
 
-	@Override
-	public void attackTarget(Creature target, int time, boolean skipChecks) {
+	/**
+	 * Handles an auto attack the client announced.
+	 *
+	 * @param type
+	 *          The type byte of CM_ATTACK: the number of the attack animation the client says it played in the lower seven bits, 0 if unknown, and
+	 *          a flag in the highest bit for an attack delay changed in the client's memory
+	 */
+	public void attackTarget(Creature target, int time, int type) {
 		if (!PlayerRestrictions.canAttack(getOwner(), target))
 			return;
 
@@ -403,19 +414,20 @@ public class PlayerController extends CreatureController<Player> {
 			QuestEngine.getInstance().onAttack(new QuestEnv(target, getOwner(), 0));
 		}
 
-		int attackSpeed = gameStats.getAttackSpeed().getCurrent();
-
-		long now = System.currentTimeMillis();
-		// network ping..
-		if (now - lastAutoAttackMillis + 300 < attackSpeed) {
-			// hack
-			PacketSendUtility.sendPacket(getOwner(), SM_ATTACK_RESPONSE.STOP_WITHOUT_MESSAGE(gameStats.getAttackCounter()));
+		if (!autoAttackValidator.isAllowed(getOwner(), target))
 			return;
-		}
-		lastAutoAttackMillis = now;
 		enterCombat(true);
 
-		super.attackTarget(target, time, true);
+		int reportedAnimation = type & 0x7F;
+		autoAttackValidator.checkAttackDelayFlag(getOwner(), (type & 0x80) != 0);
+		int hitTime = autoAttackValidator.validateHitTime(getOwner(), target, time, reportedAnimation);
+		// clients animate the attack from SM_ATTACK, so it must name the animation whose hit point the reported time belongs to
+		super.attackTarget(target, hitTime, null, AttackAnimation.getById(reportedAnimation), true);
+	}
+
+	@Override
+	public void attackTarget(Creature target, int time, boolean skipChecks) {
+		attackTarget(target, time, 0);
 	}
 
 	@Override

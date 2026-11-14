@@ -19,6 +19,8 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_POSITION;
 import com.aionemu.gameserver.services.antihack.AntiHackService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
+import com.aionemu.gameserver.utils.audit.MotionAudit;
+import com.aionemu.gameserver.utils.audit.MotionAuditTrail.Event;
 import com.aionemu.gameserver.world.World;
 
 /**
@@ -149,6 +151,8 @@ public class CM_MOVE extends AionClientPacket {
 			return;
 		if (player.isProtectionActive() && (player.getX() != x || player.getY() != y || player.getZ() > z + 0.5f))
 			player.getController().stopProtectionActiveTask();
+		if (jumping && !m.isJumping())
+			MotionAudit.recordMovement(player, Event.JUMP);
 		player.getMoveController().setIsJumping(jumping);
 		World.getInstance().updatePosition(player, x, y, z, heading);
 		player.getFlyController().onMove();
@@ -166,6 +170,8 @@ public class CM_MOVE extends AionClientPacket {
 				m.updateFalling(z);
 			}
 		} else {
+			if ((oldMask & MovementMask.FALL) == MovementMask.FALL)
+				MotionAudit.recordMovement(player, Event.LAND);
 			m.stopFalling(z);
 		}
 	}

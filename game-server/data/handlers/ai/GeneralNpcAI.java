@@ -119,6 +119,9 @@ public class GeneralNpcAI extends NpcAI {
 			if (mostHated == null)
 				return AttackIntention.FINISH_ATTACK;
 			onCreatureEvent(AIEventType.TARGET_CHANGED, mostHated);
+			// switching the target has already scheduled the next attack, choosing another one would attack twice
+			if (getTarget() == mostHated)
+				return AttackIntention.NONE;
 		}
 
 		if (chooseSkillAttack(getOwner().getObjectTemplate().getAttackRange() == 0))
