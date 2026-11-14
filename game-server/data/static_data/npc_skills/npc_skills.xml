@@ -28020,12 +28020,6 @@
 		<npc_skill id="19131" lv="2" prob="25" />
 		<npc_skill id="19130" lv="2" prob="25" />
 	</npc_skills>
-	<npc_skills npc_ids="216164">
-		<npc_skill id="19052" lv="22" prob="25" />
-		<npc_skill id="19053" lv="22" prob="25" />
-		<npc_skill id="19049" lv="1" prob="25" />
-		<npc_skill id="19054" lv="22" prob="25" max_hp="75" />
-	</npc_skills>
 	<npc_skills npc_ids="216165">
 		<npc_skill id="18602" lv="2" prob="20" />
 		<npc_skill id="18897" lv="10" prob="0" />
@@ -28274,40 +28268,6 @@
 	<npc_skills npc_ids="216205">
 		<npc_skill id="19067" lv="46" prob="25" />
 	</npc_skills>
-	<npc_skills npc_ids="216206">
-		<npc_skill id="19068" lv="46" prob="25" />
-		<npc_skill id="19069" lv="46" prob="25" />
-		<npc_skill id="19070" lv="46" prob="25" />
-	</npc_skills>
-	<npc_skills npc_ids="216207">
-		<npc_skill id="18760" lv="46" prob="25" />
-		<npc_skill id="19071" lv="46" prob="25" />
-	</npc_skills>
-	<npc_skills npc_ids="216208">
-		<npc_skill id="19072" lv="46" prob="25" />
-		<npc_skill id="19073" lv="46" prob="25" />
-	</npc_skills>
-	<npc_skills npc_ids="216209">
-		<npc_skill id="19074" lv="46" prob="25" />
-		<npc_skill id="19075" lv="46" prob="25" />
-	</npc_skills>
-	<npc_skills npc_ids="216210">
-		<npc_skill id="19068" lv="46" prob="25" />
-		<npc_skill id="19069" lv="46" prob="25" />
-		<npc_skill id="19076" lv="46" prob="25" />
-	</npc_skills>
-	<npc_skills npc_ids="216211">
-		<npc_skill id="19077" lv="46" prob="25" />
-		<npc_skill id="19078" lv="46" prob="25" />
-	</npc_skills>
-	<npc_skills npc_ids="216212">
-		<npc_skill id="19072" lv="46" prob="25" />
-		<npc_skill id="19079" lv="46" prob="25" />
-	</npc_skills>
-	<npc_skills npc_ids="216213">
-		<npc_skill id="19074" lv="46" prob="25" />
-		<npc_skill id="19080" lv="46" prob="25" />
-	</npc_skills>
 	<npc_skills npc_ids="216214">
 		<npc_skill id="16519" lv="41" prob="25" />
 		<npc_skill id="16608" lv="41" prob="25" />
@@ -28461,12 +28421,6 @@
 	<npc_skills npc_ids="216244">
 		<npc_skill id="19130" lv="1" prob="25" />
 		<npc_skill id="19131" lv="1" prob="25" />
-	</npc_skills>
-	<npc_skills npc_ids="216245">
-		<npc_skill id="19051" lv="1" prob="25" />
-		<npc_skill id="19052" lv="20" prob="25" />
-		<npc_skill id="19053" lv="20" prob="25" />
-		<npc_skill id="19054" lv="20" prob="25" />
 	</npc_skills>
 	<npc_skills npc_ids="216246">
 		<npc_skill id="18602" lv="2" prob="20" />
@@ -28723,40 +28677,6 @@
 	</npc_skills>
 	<npc_skills npc_ids="216286">
 		<npc_skill id="19067" lv="46" prob="25" />
-	</npc_skills>
-	<npc_skills npc_ids="216287">
-		<npc_skill id="19068" lv="46" prob="25" />
-		<npc_skill id="19069" lv="46" prob="25" />
-		<npc_skill id="19070" lv="46" prob="25" />
-	</npc_skills>
-	<npc_skills npc_ids="216288">
-		<npc_skill id="18760" lv="46" prob="25" />
-		<npc_skill id="19071" lv="46" prob="25" />
-	</npc_skills>
-	<npc_skills npc_ids="216289">
-		<npc_skill id="19072" lv="46" prob="25" />
-		<npc_skill id="19073" lv="46" prob="25" />
-	</npc_skills>
-	<npc_skills npc_ids="216290">
-		<npc_skill id="19074" lv="46" prob="25" />
-		<npc_skill id="19075" lv="46" prob="25" />
-	</npc_skills>
-	<npc_skills npc_ids="216291">
-		<npc_skill id="19068" lv="46" prob="25" />
-		<npc_skill id="19069" lv="46" prob="25" />
-		<npc_skill id="19076" lv="46" prob="25" />
-	</npc_skills>
-	<npc_skills npc_ids="216292">
-		<npc_skill id="19077" lv="46" prob="25" />
-		<npc_skill id="19078" lv="46" prob="25" />
-	</npc_skills>
-	<npc_skills npc_ids="216293">
-		<npc_skill id="19072" lv="46" prob="25" />
-		<npc_skill id="19079" lv="46" prob="25" />
-	</npc_skills>
-	<npc_skills npc_ids="216294">
-		<npc_skill id="19074" lv="46" prob="25" />
-		<npc_skill id="19080" lv="46" prob="25" />
 	</npc_skills>
 	<npc_skills npc_ids="216295">
 		<npc_skill id="16519" lv="41" prob="25" />
@@ -30875,43 +30795,6 @@
 		<npc_skill id="16542" lv="46" prob="25" />
 		<npc_skill id="16596" lv="46" prob="25" />
 		<npc_skill id="16784" lv="46" prob="25" />
-	</npc_skills>
-	<npc_skills npc_ids="216733">
-		<npc_skill id="19051" lv="1" prob="25" />
-		<npc_skill id="19052" lv="16" prob="25" />
-		<npc_skill id="19053" lv="16" prob="25" />
-		<npc_skill id="19054" lv="16" prob="25" />
-	</npc_skills>
-	<npc_skills npc_ids="216734">
-		<npc_skill id="19051" lv="1" prob="25" />
-		<npc_skill id="19052" lv="10" prob="25" />
-		<npc_skill id="19053" lv="10" prob="25" />
-		<npc_skill id="19054" lv="10" prob="25" />
-	</npc_skills>
-	<npc_skills npc_ids="216735">
-		<npc_skill id="19048" lv="40" prob="25" />
-		<npc_skill id="19051" lv="1" prob="25" />
-		<npc_skill id="19052" lv="5" prob="25" />
-		<npc_skill id="19053" lv="5" prob="25" />
-		<npc_skill id="19054" lv="5" prob="25" />
-	</npc_skills>
-	<npc_skills npc_ids="216736">
-		<npc_skill id="19051" lv="1" prob="25" />
-		<npc_skill id="19052" lv="15" prob="25" />
-		<npc_skill id="19053" lv="15" prob="25" />
-		<npc_skill id="19054" lv="15" prob="25" />
-	</npc_skills>
-	<npc_skills npc_ids="216737">
-		<npc_skill id="19052" lv="5" prob="25" />
-		<npc_skill id="19053" lv="5" prob="25" />
-		<npc_skill id="19054" lv="5" prob="25" />
-		<npc_skill id="19051" lv="1" prob="25" />
-	</npc_skills>
-	<npc_skills npc_ids="216738">
-		<npc_skill id="19052" lv="1" prob="25" />
-		<npc_skill id="19053" lv="1" prob="25" />
-		<npc_skill id="19054" lv="1" prob="25" />
-		<npc_skill id="19051" lv="1" prob="25" />
 	</npc_skills>
 	<npc_skills npc_ids="216749">
 		<npc_skill id="16570" lv="41" prob="25" />
@@ -57218,9 +57101,6 @@
 		<npc_skill id="19044" lv="46" prob="25" />
 		<npc_skill id="19045" lv="46" prob="25" />
 	</npc_skills>
-	<npc_skills npc_ids="281698">
-		<npc_skill id="19050" lv="20" prob="25" />
-	</npc_skills>
 	<npc_skills npc_ids="281756">
 		<npc_skill id="19093" lv="46" prob="25" />
 	</npc_skills>
@@ -57235,9 +57115,6 @@
 	</npc_skills>
 	<npc_skills npc_ids="281773">
 		<npc_skill id="19098" lv="46" prob="25" />
-	</npc_skills>
-	<npc_skills npc_ids="281775">
-		<npc_skill id="19050" lv="20" prob="25" />
 	</npc_skills>
 	<npc_skills npc_ids="281794">
 		<npc_skill id="18619" lv="1" prob="25" />

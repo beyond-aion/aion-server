@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<npc_skill_templates xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../npc_skills.xsd">
+	<!-- Macunbello (Normal) -->
+	<npc_skills npc_ids="216245">
+		<npc_skill id="19049" lv="1" prob="0" is_post_spawn="true" /><!-- Devour Soul (buff) -->
+		<npc_skill id="19053" lv="20" prob="100" cd="15000" /><!-- Tide of Darkness -->
+		<npc_skill id="19052" lv="20" prob="100" min_time="10000" cd="10000" /><!-- Shockwave -->
+	</npc_skills>
+	<!-- Macunbello (Normal, 12 souls) -->
+	<npc_skills npc_ids="216736">
+		<npc_skill id="19046" lv="40" prob="0" is_post_spawn="true" /><!-- Soul Starved I -->
+		<npc_skill id="19053" lv="15" prob="100" cd="15000" /><!-- Tide of Darkness -->
+		<npc_skill id="19052" lv="15" prob="100" min_time="10000" cd="10000" /><!-- Shockwave -->
+	</npc_skills>
+	<!-- Macunbello (Normal, 24 souls) -->
+	<npc_skills npc_ids="216737">
+		<npc_skill id="19047" lv="40" prob="0" is_post_spawn="true" /><!-- Soul Starved II -->
+		<npc_skill id="19053" lv="5" prob="100" cd="15000" /><!-- Tide of Darkness -->
+		<npc_skill id="19052" lv="5" prob="100" min_time="10000" cd="10000" /><!-- Shockwave -->
+	</npc_skills>
+	<!-- Macunbello (Normal, 36 souls) -->
+	<npc_skills npc_ids="216738">
+		<npc_skill id="19048" lv="40" prob="0" is_post_spawn="true" /><!-- Soul Starved III -->
+		<npc_skill id="19053" lv="1" prob="100" cd="15000" /><!-- Tide of Darkness -->
+		<npc_skill id="19052" lv="1" prob="100" min_time="10000" cd="10000" /><!-- Shockwave -->
+	</npc_skills>
+	<!-- Macunbello (Difficult) -->
+	<npc_skills npc_ids="216164">
+		<npc_skill id="19049" lv="1" prob="0" is_post_spawn="true" /><!-- Devour Soul (buff) -->
+		<npc_skill id="19053" lv="22" prob="100" cd="15000" /><!-- Tide of Darkness -->
+		<npc_skill id="19052" lv="22" prob="100" min_time="10000" cd="10000" /><!-- Shockwave -->
+	</npc_skills>
+	<!-- Macunbello (Difficult, 12 souls) -->
+	<npc_skills npc_ids="216733">
+		<npc_skill id="19046" lv="40" prob="0" is_post_spawn="true" /><!-- Soul Starved I -->
+		<npc_skill id="19053" lv="16" prob="100" cd="15000" /><!-- Tide of Darkness -->
+		<npc_skill id="19052" lv="16" prob="100" min_time="10000" cd="10000" /><!-- Shockwave -->
+	</npc_skills>
+	<!-- Macunbello (Difficult, 24 souls) -->
+	<npc_skills npc_ids="216734">
+		<npc_skill id="19047" lv="40" prob="0" is_post_spawn="true" /><!-- Soul Starved II -->
+		<npc_skill id="19053" lv="10" prob="100" cd="15000" /><!-- Tide of Darkness -->
+		<npc_skill id="19052" lv="10" prob="100" min_time="10000" cd="10000" /><!-- Shockwave -->
+	</npc_skills>
+	<!-- Macunbello (Difficult, 36 souls) -->
+	<npc_skills npc_ids="216735">
+		<npc_skill id="19048" lv="40" prob="0" is_post_spawn="true" /><!-- Soul Starved III -->
+		<npc_skill id="19053" lv="5" prob="100" cd="15000" /><!-- Tide of Darkness -->
+		<npc_skill id="19052" lv="5" prob="100" min_time="10000" cd="10000" /><!-- Shockwave -->
+	</npc_skills>
+	<!-- Macunbello's Right Hand (retail AI IDCT_SumLich) -->
+	<npc_skills npc_ids="281698 281775">
+		<npc_skill id="19050" lv="20" prob="100" min_time="5000" cd="12000" target="RANDOM" /><!-- Curse of Souls -->
+	</npc_skills>
+	<!-- Souls (retail AIs IDCT_Normal_* / IDCT_Hard_*) Every kill weakens Macunbello -->
+	<!-- Elyos Spiritblade -->
+	<npc_skills npc_ids="216206 216287">
+		<npc_skill id="19070" lv="46" prob="100" prio="1" cd="600000" target="ME" /><!-- Grudge Shield -->
+		<npc_skill id="19068" lv="46" prob="100" min_time="5000" cd="5000" /><!-- Grudge Cleave -->
+		<npc_skill id="19069" lv="46" prob="100" min_time="11000" cd="11000" target="RANDOM_EXCEPT_CURRENT_TARGET" /><!-- Grudge Slam -->
+	</npc_skills>
+	<!-- Asmodian Soulsword -->
+	<npc_skills npc_ids="216210 216291">
+		<npc_skill id="19068" lv="46" prob="100" min_time="5000" cd="5000" /><!-- Grudge Cleave -->
+		<npc_skill id="19069" lv="46" prob="100" min_time="11000" cd="11000" target="RANDOM_EXCEPT_CURRENT_TARGET" /><!-- Grudge Slam -->
+		<npc_skill id="19076" lv="46" prob="100" min_time="20000" cd="20000" /><!-- Vampiric Rage -->
+	</npc_skills>
+	<!-- Elyos Spiritmage (Difficult) -->
+	<npc_skills npc_ids="216207">
+		<npc_skill id="19071" lv="46" prob="100" cd="5000" target="RANDOM" /><!-- Spiteful Transformation -->
+		<npc_skill id="18760" lv="46" prob="100" min_time="3000" cd="3000" target="RANDOM" /><!-- Meteor Shower -->
+	</npc_skills>
+	<!-- Elyos Spiritmage (Normal) -->
+	<npc_skills npc_ids="216288">
+		<npc_skill id="18760" lv="46" prob="100" min_time="4000" cd="4000" target="RANDOM" /><!-- Meteor Shower -->
+		<npc_skill id="19071" lv="46" prob="100" min_time="10000" cd="10000" target="RANDOM" /><!-- Spiteful Transformation -->
+	</npc_skills>
+	<!-- Elyos Spiritbow -->
+	<npc_skills npc_ids="216208 216289">
+		<npc_skill id="19072" lv="46" prob="100" min_time="7000" cd="7000" target="ME" /><!-- Bind -->
+		<npc_skill id="19073" lv="46" prob="100" min_time="12000" cd="12000" target="RANDOM" /><!-- Aether Cannon -->
+	</npc_skills>
+	<!-- Asmodian Soulranger -->
+	<npc_skills npc_ids="216212 216293">
+		<npc_skill id="19072" lv="46" prob="100" min_time="7000" cd="7000" target="ME" /><!-- Bind -->
+		<npc_skill id="19079" lv="46" prob="100" min_time="12000" cd="12000" target="RANDOM" /><!-- Curse of Rage -->
+	</npc_skills>
+	<!-- Elyos Spiritsalve (Difficult) -->
+	<npc_skills npc_ids="216209">
+		<npc_skill id="19074" lv="46" prob="100" prio="1" cd="6000"><!-- Shadow Healing -->
+			<cond cond_type="HELP_FRIEND" hp_below="99" range="12" />
+		</npc_skill>
+		<npc_skill id="19074" lv="46" prob="100" min_time="6000" cd="6000" target="ME" /><!-- Shadow Healing -->
+		<npc_skill id="19075" lv="46" prob="100" min_time="2500" cd="4000" /><!-- Earthly Grudge -->
+	</npc_skills>
+	<!-- Elyos Spiritsalve (Normal) -->
+	<npc_skills npc_ids="216290">
+		<npc_skill id="19074" lv="46" prob="100" prio="1" max_hp="50" cd="600000" target="ME" /><!-- Shadow Healing -->
+		<npc_skill id="19075" lv="46" prob="100" min_time="3000" cd="3000" /><!-- Earthly Grudge -->
+	</npc_skills>
+	<!-- Asmodian Soulmedic (Difficult) -->
+	<npc_skills npc_ids="216213">
+		<npc_skill id="19074" lv="46" prob="100" prio="1" cd="6000"><!-- Shadow Healing -->
+			<cond cond_type="HELP_FRIEND" hp_below="99" range="12" />
+		</npc_skill>
+		<npc_skill id="19074" lv="46" prob="100" min_time="6000" cd="6000" target="ME" /><!-- Shadow Healing -->
+		<npc_skill id="19080" lv="46" prob="100" min_time="9000" cd="9000" /><!-- Terrifying Rage -->
+	</npc_skills>
+	<!-- Asmodian Soulmedic (Normal) -->
+	<npc_skills npc_ids="216294">
+		<npc_skill id="19074" lv="46" prob="100" prio="1" max_hp="50" cd="600000" target="ME" /><!-- Shadow Healing -->
+		<npc_skill id="19080" lv="46" prob="100" min_time="6000" cd="6000" /><!-- Terrifying Rage -->
+	</npc_skills>
+	<!-- Asmodian Soulspell (Difficult) -->
+	<npc_skills npc_ids="216211">
+		<npc_skill id="19078" lv="46" prob="100" min_time="2000" cd="2000" target="ME" /><!-- Ignite Cold -->
+		<npc_skill id="19077" lv="46" prob="100" min_time="7000" cd="7000" target="ME" /><!-- Vaporfrost -->
+	</npc_skills>
+	<!-- Asmodian Soulspell (Normal) -->
+	<npc_skills npc_ids="216292">
+		<npc_skill id="19077" lv="46" prob="100" prio="1" cd="600000" target="ME" /><!-- Vaporfrost -->
+		<npc_skill id="19078" lv="46" prob="100" min_time="10000" cd="10000" target="ME" /><!-- Ignite Cold -->
+	</npc_skills>
+</npc_skill_templates>
