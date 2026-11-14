@@ -9,10 +9,12 @@ import com.aionemu.gameserver.model.gameobjects.PetSpecialFunction;
 import com.aionemu.gameserver.model.gameobjects.player.PetCommonData;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_FUNCTIONAL_PET;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.spawnengine.VisibleObjectSpawner;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
+import com.aionemu.gameserver.world.WorldMapType;
 
 /**
  * @author ATracer
@@ -24,6 +26,14 @@ public class PetSpawnService {
 	 * @param petId
 	 */
 	public static void summonPet(Player player, int templateId) {
+		if (player.getWorldId() == WorldMapType.LIFE_PARTY_CONCERT_HALL.getId()) {
+			// the concert hall does not allow pets; an existing pet is dismissed and the client reports it
+			if (player.getPet() != null)
+				player.getPet().getController().delete();
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PET_CANT_SUMMON_HERE());
+			return;
+		}
+
 		PetCommonData lastPetCommonData;
 
 		if (player.getPet() != null) {

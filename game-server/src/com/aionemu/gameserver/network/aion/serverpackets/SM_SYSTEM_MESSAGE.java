@@ -26409,6 +26409,13 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
+	 * You cannot summon a pet here.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_PET_CANT_SUMMON_HERE() {
+		return new SM_SYSTEM_MESSAGE(1401809);
+	}
+
+	/**
 	 * The Pashid Legion's 1st Siege Troop is attacking the Bastion's gates.
 	 */
 	public static SM_SYSTEM_MESSAGE STR_MSG_IDLDF5b_TD_MainWave_01() {

@@ -246,7 +246,7 @@ public class TeleportService {
 		if (worldId == WorldMapType.LIFE_PARTY_CONCERT_HALL.getId()) {
 			// the concert hall does not allow pets; retail dismisses the pet and reports it to the player
 			pet.getController().delete();
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1401809));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PET_CANT_SUMMON_HERE());
 			return;
 		}
 		// the pet leaves the old instance before its master, so the instance cannot be destroyed under it;
