@@ -63,7 +63,9 @@ public class NpcEquippedGear implements Iterable<Entry<ItemSlot, ItemTemplate>> 
 	}
 
 	public ItemTemplate getItem(ItemSlot itemSlot) {
-		return items != null ? items.get(itemSlot) : null;
+		if (items == null)
+			init();
+		return items.get(itemSlot);
 	}
 
 }

@@ -50,7 +50,7 @@ public class CaptainMuruganAI extends AggressiveNpcAI {
 				} else {
 					PacketSendUtility.broadcastMessage(getOwner(), 1500194);
 					SkillEngine.getInstance().getSkill(getOwner(), 19325, 5, getOwner()).useNoAnimationSkill();
-					if (getLifeStats().getHpPercentage() < 50) {
+					if (getLifeStats().getHpPercentage() <= 50) {
 						specialSkillTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 							@Override
