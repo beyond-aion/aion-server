@@ -22,6 +22,23 @@ import com.aionemu.gameserver.utils.xml.CompressUtil;
 public class PlayerScripts {
 
 	public static final byte SCRIPT_LIMIT = 8; // max number of scripts a player can have
+	/**
+	 * The client refuses larger script blocks.
+	 */
+	public static final int MAX_SCRIPT_BLOCK_SIZE = 3072;
+	/**
+	 * Two size fields and the client's 8 trailing bytes.
+	 */
+	private static final int SCRIPT_BLOCK_OVERHEAD = 16;
+	private static final int MAX_COMPRESSED_SIZE = MAX_SCRIPT_BLOCK_SIZE - SCRIPT_BLOCK_OVERHEAD;
+	/**
+	 * The client's compressedSize still includes its 8 trailing bytes.
+	 */
+	private static final int MAX_CLIENT_CONTENT_SIZE = MAX_SCRIPT_BLOCK_SIZE - 8;
+	/**
+	 * Above the ~3.1 MB a 3072-byte deflate stream can produce; only rejects impossible or corrupted data.
+	 */
+	public static final int MAX_UNCOMPRESSED_SCRIPT_SIZE = 4 << 20;
 	private static final Logger log = LoggerFactory.getLogger(PlayerScripts.class);
 
 	private final int houseObjId;
@@ -44,10 +61,24 @@ public class PlayerScripts {
 	public boolean set(int id, byte[] compressedXML, int uncompressedSize, boolean storeInDb) {
 		if (isInvalidScriptId(id))
 			return false;
-		if (!isValid(compressedXML, uncompressedSize)) {
-			log.warn("Invalid housing script data for house {}: {} bytes declared to inflate to {} bytes", houseObjId,
-				compressedXML == null ? 0 : compressedXML.length, uncompressedSize);
-			return false;
+		if (compressedXML == null || compressedXML.length == 0) {
+			if (uncompressedSize != 0) {
+				logInvalid(compressedXML, uncompressedSize);
+				return false;
+			}
+		} else {
+			if (compressedXML.length > MAX_CLIENT_CONTENT_SIZE || uncompressedSize <= 0 || uncompressedSize > MAX_UNCOMPRESSED_SCRIPT_SIZE) {
+				logInvalid(compressedXML, uncompressedSize);
+				return false;
+			}
+			int streamLength = CompressUtil.zlibStreamLength(compressedXML, uncompressedSize);
+			if (streamLength < 0 || streamLength > MAX_COMPRESSED_SIZE) {
+				logInvalid(compressedXML, uncompressedSize);
+				return false;
+			}
+			// The client sends back the 8 trailing bytes of the block it received; keeping them would grow the block on every save.
+			if (streamLength < compressedXML.length)
+				compressedXML = Arrays.copyOf(compressedXML, streamLength);
 		}
 		if (storeInDb) {
 			House house = HousingService.getInstance().findHouseOrStudio(houseObjId);
@@ -81,10 +112,9 @@ public class PlayerScripts {
 		return scriptId < 0 || scriptId >= scripts.length;
 	}
 
-	private boolean isValid(byte[] compressedXML, int uncompressedSize) {
-		if (compressedXML == null || compressedXML.length == 0)
-			return uncompressedSize == 0;
-		return CompressUtil.inflatesTo(compressedXML, uncompressedSize);
+	private void logInvalid(byte[] compressedXML, int uncompressedSize) {
+		log.warn("Invalid housing script data for house {}: {} bytes declared to inflate to {} bytes", houseObjId,
+			compressedXML == null ? 0 : compressedXML.length, uncompressedSize);
 	}
 
 	public void sendToPlayer(Player player, int houseAddress) {
