@@ -876864,6 +876864,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182200007" name="Pernos's Potion Bottle" level="1" cName="quest_1006a" casting_delay="2000" mask="20481" item_group="QUEST" quality="COMMON" price="1" desc="1106013" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="15000" usedelayid="61" usearea="LF1_ITEMUSEAREA_Q1006"/>
 		<inventory id="2"/>
 	</item_template>
@@ -876880,6 +876883,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182200012" name="Odium Solvent" level="1" cName="quest_1014b" casting_delay="4000" mask="20481" item_group="QUEST" quality="COMMON" price="1" desc="1106023" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="15000" usedelayid="61" usearea="LF1A_SENSORY_AREA_Q1014"/>
 		<inventory id="2"/>
 	</item_template>
@@ -876930,6 +876936,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182200023" name="Flint" level="1" cName="quest_1019a" casting_delay="4000" mask="20481" item_group="QUEST" quality="COMMON" price="1" desc="1106045" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="15000" usedelayid="61" usearea="LF1A_USEITEMAREA_Q51"/>
 		<inventory id="2"/>
 	</item_template>
@@ -877030,6 +877039,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182200226" name="Namus's Diary" level="1" cName="quest_1114c" mask="20545" item_group="QUEST" quality="COMMON" price="1" desc="1106571" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="15000" usedelayid="61"/>
 		<inventory id="2"/>
 	</item_template>
@@ -877050,6 +877062,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182200505" name="Transformation Potion" level="1" cName="quest_1019b" casting_delay="5000" mask="20481" item_group="QUEST" quality="COMMON" price="1" desc="1105013" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="15000" usedelayid="61" usearea="LF1A_USEITEMAREA_Q80"/>
 		<inventory id="2"/>
 	</item_template>
@@ -877296,6 +877311,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182201001" name="Kerubian Bucket" level="1" cName="quest_1032a" casting_delay="2000" mask="20481" item_group="QUEST" quality="COMMON" price="1" desc="1106201" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61" usearea="LF2_ITEMUSEAREA_Q1032"/>
 		<inventory id="2"/>
 	</item_template>
@@ -877329,6 +877347,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182201009" name="Empty Water Bottle" level="1" cName="quest_1039a" casting_delay="2000" mask="20481" item_group="QUEST" quality="COMMON" price="1" desc="1106217" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61" usearea="LF2_ITEMUSEAREA_Q1039"/>
 		<inventory id="2"/>
 	</item_template>
@@ -877397,6 +877418,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182201026" name="Kalabar's Order" level="1" cName="quest_1042b" casting_delay="1000" mask="20545" item_group="QUEST" quality="COMMON" price="1" desc="1106251" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61"/>
 		<inventory id="2"/>
 	</item_template>
@@ -877469,6 +877493,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182201320" name="Tarnished Ring" level="1" cName="quest_1345a" casting_delay="2000" mask="20545" item_group="RING" quality="COMMON" price="1" desc="1106738" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61" usearea="LC1_ITEMUSEAREA_Q1345"/>
 		<inventory id="2"/>
 	</item_template>
@@ -877492,6 +877519,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182201326" name="Empty Bucket" level="1" cName="quest_1361a" casting_delay="3000" mask="20545" item_group="QUEST" quality="COMMON" price="1" desc="1106750" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61" usearea="LF2_ITEMUSEAREA_Q1361"/>
 		<inventory id="2"/>
 	</item_template>
@@ -877635,6 +877665,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182201372" name="Empty Flask" level="1" cName="quest_1373a" casting_delay="3000" mask="20545" item_group="QUEST" quality="COMMON" price="1" desc="1106840" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61" usearea="LF2_ITEMUSEAREA_Q1373"/>
 		<inventory id="2"/>
 	</item_template>
@@ -877679,6 +877712,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182201385" name="Aether Firecracker" level="1" cName="quest_1466a" casting_delay="3000" mask="20545" item_group="QUEST" quality="COMMON" price="1" desc="1106866" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="41" usearea="DF2_ITEMUSEAREA_Q2032"/>
 		<inventory id="2"/>
 	</item_template>
@@ -877911,6 +877947,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182201619" name="Ritual Incense" level="1" cName="quest_1059a" casting_delay="3000" mask="20481" item_group="QUEST" quality="COMMON" price="1" desc="1106337" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="15000" usedelayid="61" usearea="LF3_ITEMUSEAREA_Q1059"/>
 		<inventory id="2"/>
 	</item_template>
@@ -878228,6 +878267,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182201784" name="Contaminated Tree Mushroom" level="1" cName="quest_1573c" casting_delay="3000" mask="20545" item_group="QUEST" quality="COMMON" price="1" desc="1107167" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="15000" usedelayid="61" usearea="LF3_ITEMUSEAREA_Q1573"/>
 		<inventory id="2"/>
 	</item_template>
@@ -878346,6 +878388,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182201823" name="Mysterious Box" level="1" cName="quest_1559a" mask="20545" item_group="QUEST" quality="COMMON" price="1" desc="1107245" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="15000" usedelayid="61"/>
 		<inventory id="2"/>
 	</item_template>
@@ -878413,6 +878458,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182202001" name="Balaur Language Potion" level="1" cName="quest_1071a" mask="28673" max_stack_count="20" item_group="QUEST" quality="COMMON" price="1" desc="1107301" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61"/>
 		<inventory id="2"/>
 	</item_template>
@@ -878597,6 +878645,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182202156" name="Quartz of Virtue" level="1" cName="quest_1718a" mask="20545" item_group="QUEST" quality="COMMON" price="1" desc="1107511" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="41"/>
 		<inventory id="2"/>
 	</item_template>
@@ -878828,6 +878879,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182203019" name="Shania's Poison Potion" level="1" cName="quest_2016b" casting_delay="3000" mask="20481" item_group="QUEST" quality="COMMON" price="1" desc="1108537" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61" usearea="DF1A_ITEMUSEAREA_Q2016"/>
 		<inventory id="2"/>
 	</item_template>
@@ -878856,6 +878910,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182203102" name="Iron Axe" level="1" cName="quest_5012a" mask="20545" item_group="QUEST" quality="COMMON" price="1" desc="1105017" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="15000" usedelayid="61"/>
 		<inventory id="2"/>
 	</item_template>
@@ -878886,6 +878943,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182203110" name="Kaindal's Note" level="1" cName="doc_quest_2110a" mask="20545" quality="COMMON" price="1" desc="1109013" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="41"/>
 		<inventory id="2"/>
 	</item_template>
@@ -878991,6 +879051,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182203205" name="Mau Secret Remedy" level="10" cName="quest_2208a" casting_delay="2000" mask="28737" max_stack_count="20" item_group="QUEST" quality="COMMON" price="1" desc="1109109" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="15000" usedelayid="61"/>
 		<inventory id="2"/>
 	</item_template>
@@ -879033,6 +879096,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182203216" name="Manir's Letter" level="1" cName="doc_quest_2222a" mask="20545" quality="COMMON" price="1" desc="1109131" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="41"/>
 		<inventory id="2"/>
 	</item_template>
@@ -879230,6 +879296,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182204002" name="Essence of Elim" level="1" cName="quest_2031b" casting_delay="2000" mask="20481" item_group="QUEST" quality="COMMON" price="1" desc="1109303" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="15000" usedelayid="61" usearea="DF2_ITEMUSEAREA_Q2031"/>
 		<inventory id="2"/>
 	</item_template>
@@ -879240,6 +879309,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182204005" name="Tranquility Powder" level="1" cName="quest_2032c" casting_delay="2000" mask="20481" item_group="QUEST" quality="COMMON" price="1" desc="1109309" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="600000" usedelayid="61" usearea="DF2_ITEMUSEAREA_Q2032"/>
 		<inventory id="2"/>
 	</item_template>
@@ -879247,6 +879319,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182204007" name="Cursed Necklace" level="1" cName="quest_2033b" casting_delay="1000" mask="20481" item_group="QUEST" quality="COMMON" price="1" desc="1109313" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="15000" usedelayid="61" usearea="DF2_ITEMUSEAREA_Q2033"/>
 		<inventory id="2"/>
 	</item_template>
@@ -879411,6 +879486,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182204130" name="Big Bucket" level="1" cName="quest_2333a" casting_delay="2000" mask="20545" item_group="QUEST" quality="COMMON" price="1" desc="1109459" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61" usearea="DF2_ITEMUSEAREA_Q2333"/>
 		<inventory id="2"/>
 	</item_template>
@@ -879512,6 +879590,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182204162" name="Empty Flask" level="1" cName="quest_2393a" casting_delay="2000" mask="20545" item_group="QUEST" quality="COMMON" price="1" desc="1109523" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61" usearea="DF2_ITEMUSEAREA_Q2393"/>
 		<inventory id="2"/>
 	</item_template>
@@ -879589,14 +879670,23 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182204183" name="Undecided Read Item" level="1" cName="doc_quest_2441a" mask="20545" quality="COMMON" price="1" desc="1109565" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="41"/>
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182204184" name="Undecided Read Item" level="1" cName="doc_quest_2441b" mask="20545" quality="COMMON" price="1" desc="1109567" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="41"/>
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182204185" name="Undecided Read Item" level="1" cName="doc_quest_2441c" mask="20545" quality="COMMON" price="1" desc="1109569" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="41"/>
 		<inventory id="2"/>
 	</item_template>
@@ -879912,6 +880002,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182204304" name="Vanargand's Flute" level="1" cName="quest_2052b" casting_delay="2000" mask="20481" item_group="QUEST" quality="COMMON" price="1" desc="1109707" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61" usearea="DF3_ITEMUSEAREA_Q2052"/>
 		<inventory id="2"/>
 	</item_template>
@@ -879948,26 +880041,44 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182204313" name="Anoramas's Essence" level="1" cName="quest_2056a" casting_delay="2000" mask="20481" item_group="QUEST" quality="COMMON" price="1" desc="1109725" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61" usearea="DF3_ITEMUSEAREA_Q2056"/>
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182204314" name="Triminos's Essence" level="1" cName="quest_2056b" casting_delay="2000" mask="20481" item_group="QUEST" quality="COMMON" price="1" desc="1109727" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61" usearea="DF3_ITEMUSEAREA_Q2056"/>
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182204315" name="Etun's Essence" level="1" cName="quest_2056c" casting_delay="2000" mask="20481" item_group="QUEST" quality="COMMON" price="1" desc="1109729" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61" usearea="DF3_ITEMUSEAREA_Q2056"/>
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182204316" name="Flame Bomb" level="1" cName="quest_2057a" casting_delay="2000" mask="20481" item_group="QUEST" quality="COMMON" price="1" desc="1109731" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61" usearea="DF3_ITEMUSEAREA_Q2057"/>
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182204317" name="Signal Flare" level="1" cName="quest_2058a" casting_delay="2000" mask="20481" item_group="QUEST" quality="COMMON" price="1" desc="1109733" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61" usearea="DF3_ITEMUSEAREA_Q2058"/>
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182204318" name="Empty Glass Bottle" level="1" cName="quest_2060a" casting_delay="2000" mask="20481" item_group="QUEST" quality="COMMON" price="1" desc="1109735" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61" usearea="AB1_ITEMUSEAREA_Q2060"/>
 		<inventory id="2"/>
 	</item_template>
@@ -880075,6 +880186,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182204425" name="Empty Durable Potion Bottle" level="1" cName="quest_2533a" casting_delay="2000" mask="20545" item_group="QUEST" quality="COMMON" price="1" desc="1109849" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61" usearea="DF3_ITEMUSEAREA_Q2533"/>
 		<inventory id="2"/>
 	</item_template>
@@ -880339,6 +880453,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182204503" name="Betoni's Letter" level="1" cName="doc_quest_2647a" mask="20545" quality="COMMON" price="1" desc="1110001" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="41"/>
 		<inventory id="2"/>
 	</item_template>
@@ -880515,6 +880632,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182205502" name="The Shadow Summons" level="1" cName="doc_quest_2076a" mask="20481" quality="COMMON" price="1" desc="1107603" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="41"/>
 		<inventory id="2"/>
 	</item_template>
@@ -880914,6 +881034,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182206015" name="Manduri's Diary Restoration Item" level="1" cName="doc_quest_1919a" mask="20545" quality="COMMON" price="1" desc="1105531" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="41"/>
 		<inventory id="2"/>
 	</item_template>
@@ -880921,6 +881044,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182206017" name="Abyss Entry Authorization" level="1" cName="doc_quest_1920a" mask="20545" quality="COMMON" price="1" desc="1105535" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="41"/>
 		<inventory id="2"/>
 	</item_template>
@@ -881410,6 +881536,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182206300" name="Temple Access Card" level="1" cName="doc_quest_10000a" mask="20481" quality="COMMON" price="1" race="ELYOS" desc="1130000" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="41"/>
 		<inventory id="2"/>
 	</item_template>
@@ -881509,10 +881638,16 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182206623" name="Special Obelisk" level="1" cName="quest_10025a" casting_delay="2000" mask="20481" item_group="QUEST" quality="COMMON" price="1" race="ELYOS" desc="1130546" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61" usearea="LF4_ITEMUSEAREA_Q10025B"/>
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182206624" name="Stonecrafted Obelisk" level="1" cName="quest_10025b" casting_delay="2000" mask="20481" item_group="QUEST" quality="COMMON" price="1" race="ELYOS" desc="1130548" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61" usearea="LF4_ITEMUSEAREA_Q10025A"/>
 		<inventory id="2"/>
 	</item_template>
@@ -881520,6 +881655,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182206626" name="Generator Core" level="1" cName="quest_10025d" casting_delay="2000" mask="20481" item_group="QUEST" quality="COMMON" price="1" race="ELYOS" desc="1130552" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61" usearea="LF4_ITEMUSEAREA_Q10025C"/>
 		<inventory id="2"/>
 	</item_template>
@@ -881550,10 +881688,16 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182206704" name="Empty Glass Bottle" level="1" cName="quest_11006a" casting_delay="2000" mask="20545" item_group="QUEST" quality="COMMON" price="1" race="ELYOS" desc="1130562" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61" usearea="LF4_ITEMUSEAREA_Q11006A"/>
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182206705" name="Empty Glass Bottle" level="1" cName="quest_11006b" casting_delay="2000" mask="20545" item_group="QUEST" quality="COMMON" price="1" race="ELYOS" desc="1130564" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61" usearea="LF4_ITEMUSEAREA_Q11006B"/>
 		<inventory id="2"/>
 	</item_template>
@@ -881636,6 +881780,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182206728" name="Fin Porridge" level="1" cName="quest_11033b" casting_delay="2000" mask="20545" item_group="QUEST" quality="COMMON" price="1" race="ELYOS" desc="1130610" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61"/>
 		<inventory id="2"/>
 	</item_template>
@@ -881692,6 +881839,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182206745" name="Small Jewel Box" level="1" cName="quest_11046a" mask="20545" item_group="QUEST" quality="COMMON" price="1" race="ELYOS" desc="1130644" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="41"/>
 		<inventory id="2"/>
 	</item_template>
@@ -881859,6 +882009,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182206795" name="Glittering Glass Bottle" level="1" cName="quest_11118b" casting_delay="2000" mask="20545" item_group="QUEST" quality="COMMON" price="1" race="ELYOS" desc="1130692" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61" usearea="LF4_ITEMUSEAREA_Q11118A"/>
 		<inventory id="2"/>
 	</item_template>
@@ -881895,6 +882048,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182206805" name="Blessing of Concentration" level="1" cName="quest_11129a" casting_delay="2000" mask="20545" item_group="QUEST" quality="COMMON" price="1" race="ELYOS" desc="1130712" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61"/>
 		<inventory id="2"/>
 	</item_template>
@@ -881911,6 +882067,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182206810" name="Stone Sample for Measurement" level="1" cName="quest_11203b" casting_delay="2000" mask="20545" item_group="QUEST" quality="COMMON" price="1" race="ELYOS" desc="1130722" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61" usearea="LF4_ITEMUSEAREA_Q11203"/>
 		<inventory id="2"/>
 	</item_template>
@@ -882132,6 +882291,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182206866" name="Shulack Baby Basket" level="1" cName="quest_11143a" mask="20545" item_group="QUEST" quality="COMMON" price="1" race="ELYOS" desc="1130840" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61"/>
 		<inventory id="2"/>
 	</item_template>
@@ -882472,6 +882634,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182207033" name="doc_quest_2945a" level="1" cName="doc_quest_2945a" mask="20545" quality="COMMON" price="1" desc="1108065" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="41"/>
 		<inventory id="2"/>
 	</item_template>
@@ -882956,6 +883121,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182207600" name="Watching Eye" level="1" cName="quest_20020a" casting_delay="2000" mask="20481" item_group="QUEST" quality="COMMON" price="1" race="ASMODIANS" desc="1131500" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="41" usearea="DF4_ITEMUSEAREA_Q20020"/>
 		<inventory id="2"/>
 	</item_template>
@@ -882992,6 +883160,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182207609" name="Skira's Generator Generator" level="1" cName="quest_20022e" casting_delay="2000" mask="20481" item_group="QUEST" quality="COMMON" price="1" race="ASMODIANS" desc="1131518" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="41" usearea="DF4_ITEMUSEAREA_Q20022"/>
 		<inventory id="2"/>
 	</item_template>
@@ -883015,6 +883186,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182207615" name="Refined Klawtiar's Scentbag Liquid" level="1" cName="quest_20024b" casting_delay="2000" mask="20481" item_group="QUEST" quality="COMMON" price="1" race="ASMODIANS" desc="1131530" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="41" usearea="DF4_ITEMUSEAREA_Q20024"/>
 		<inventory id="2"/>
 	</item_template>
@@ -883028,10 +883202,16 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182207619" name="Mind Control Potion" level="1" cName="quest_20025c" casting_delay="2000" mask="20481" item_group="QUEST" quality="COMMON" price="1" race="ASMODIANS" desc="1131538" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="41" usearea="IDCATACOME_ITEMUSEAREA_Q20025"/>
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182207620" name="Klawtiar's Scentbag" level="1" cName="quest_20023d" casting_delay="2000" mask="20481" item_group="QUEST" quality="COMMON" price="1" race="ASMODIANS" desc="1131542" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="41"/>
 		<inventory id="2"/>
 	</item_template>
@@ -883042,6 +883222,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182207802" name="Balaur Armor" level="1" cName="quest_21003a" casting_delay="2000" mask="20545" item_group="QUEST" quality="COMMON" price="1" race="ASMODIANS" desc="1132004" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="41"/>
 		<inventory id="2"/>
 	</item_template>
@@ -883094,6 +883277,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182207819" name="Empty Water Bottle" level="1" cName="quest_21023a" casting_delay="2000" mask="20545" item_group="QUEST" quality="COMMON" price="1" race="ASMODIANS" desc="1132038" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="41"/>
 		<inventory id="2"/>
 	</item_template>
@@ -883101,6 +883287,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182207821" name="Empty Water Bottle" level="1" cName="quest_21023c" casting_delay="2000" mask="20545" item_group="QUEST" quality="COMMON" price="1" race="ASMODIANS" desc="1132042" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="41"/>
 		<inventory id="2"/>
 	</item_template>
@@ -883985,6 +884174,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182209014" name="Ribbit Essence" level="1" cName="quest_2094b" casting_delay="5000" mask="20481" item_group="QUEST" quality="COMMON" price="1" desc="1116034" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="15000" usedelayid="61" usearea="LF1A_USEITEMAREA_Q80"/>
 		<inventory id="2"/>
 	</item_template>
@@ -884224,6 +884416,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182209082" name="Teleport Scroll" level="1" cName="QUEST_3200A" mask="20544" item_group="QUEST" quality="COMMON" price="1" desc="1110500" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="41" usearea="IDSHULACK_ITEMUSEAREA_Q3200"/>
 		<inventory id="2"/>
 	</item_template>
@@ -884278,6 +884473,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182209097" name="Teleport Scroll" level="1" cName="QUEST_4200A" mask="20544" item_group="QUEST" quality="COMMON" price="1" desc="1110530" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="41" usearea="IDSHULACK_ITEMUSEAREA_Q3200"/>
 		<inventory id="2"/>
 	</item_template>
@@ -884339,10 +884537,16 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182209152" name="Temporary" level="1" cName="quest_30006a" mask="20545" item_group="QUEST" quality="COMMON" price="1" race="ELYOS" desc="1110603" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="300000" usedelayid="41" usearea="IDTEMPLE_ITEMUSEAREA_Q30006"/>
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182209153" name="Drakan Document" level="1" cName="quest_30007a" mask="20545" item_group="QUEST" quality="COMMON" price="1" race="ELYOS" desc="1110605" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="41"/>
 		<inventory id="2"/>
 	</item_template>
@@ -884378,10 +884582,16 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182209182" name="Temporary" level="1" cName="quest_30106a" mask="20545" item_group="QUEST" quality="COMMON" price="1" race="ASMODIANS" desc="1110659" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="300000" usedelayid="41" usearea="IDTEMPLE_ITEMUSEAREA_Q30006"/>
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182209183" name="Drakan Document" level="1" cName="quest_30107a" mask="20545" item_group="QUEST" quality="COMMON" price="1" race="ASMODIANS" desc="1110661" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="41"/>
 		<inventory id="2"/>
 	</item_template>
@@ -884516,6 +884726,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182209524" name="Hard Seed" level="1" cName="quest_11466a" mask="20545" item_group="QUEST" quality="COMMON" price="1" desc="1131048" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="41"/>
 		<inventory id="2"/>
 	</item_template>
@@ -884633,6 +884846,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182209632" name="Special Shulack Refiner" level="1" cName="quest_30235a" mask="20545" item_group="QUEST" quality="COMMON" price="1" race="ELYOS" desc="1110861" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61"/>
 		<inventory id="2"/>
 	</item_template>
@@ -884761,6 +884977,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182209732" name="Special Shulack Refiner" level="1" cName="quest_30335a" mask="20545" item_group="QUEST" quality="LEGEND" price="1" race="ASMODIANS" desc="1110961" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61"/>
 		<inventory id="2"/>
 	</item_template>
@@ -884932,6 +885151,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182210018" name="Flute 1" level="1" cName="quest_36501a" casting_delay="2000" mask="20545" item_group="QUEST" quality="COMMON" price="1" race="ELYOS" desc="1133036" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61"/>
 		<inventory id="2"/>
 	</item_template>
@@ -884942,6 +885164,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182210021" name="Flute 2" level="1" cName="quest_36507a" casting_delay="2000" mask="20545" item_group="QUEST" quality="COMMON" price="1" race="ELYOS" desc="1133042" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61"/>
 		<inventory id="2"/>
 	</item_template>
@@ -884952,6 +885177,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182210024" name="Flute 3" level="1" cName="quest_36513a" casting_delay="2000" mask="20545" item_group="QUEST" quality="COMMON" price="1" race="ELYOS" desc="1133048" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61"/>
 		<inventory id="2"/>
 	</item_template>
@@ -885067,6 +885295,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182211018" name="Flute 1" level="1" cName="quest_46501a" casting_delay="2000" mask="20545" item_group="QUEST" quality="COMMON" price="1" race="ASMODIANS" desc="1134036" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61"/>
 		<inventory id="2"/>
 	</item_template>
@@ -885077,6 +885308,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182211021" name="Flute 2" level="1" cName="quest_46507a" casting_delay="2000" mask="20545" item_group="QUEST" quality="COMMON" price="1" race="ASMODIANS" desc="1134042" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61"/>
 		<inventory id="2"/>
 	</item_template>
@@ -885087,6 +885321,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182211024" name="Flute 3" level="1" cName="quest_46513a" casting_delay="2000" mask="20545" item_group="QUEST" quality="COMMON" price="1" race="ASMODIANS" desc="1134048" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61"/>
 		<inventory id="2"/>
 	</item_template>
@@ -885295,6 +885532,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182212203" name="Abandoned Balaur Egg" level="1" cName="QUEST_18703b" casting_delay="2000" mask="20545" item_group="QUEST" quality="COMMON" price="1" race="ELYOS" desc="1125740" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61" usearea="IDRAKSHA_ITEMUSEAREA_Q28703"/>
 		<inventory id="2"/>
 	</item_template>
@@ -885325,6 +885565,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182212210" name="Abandoned Balaur Egg" level="1" cName="QUEST_28703b" casting_delay="2000" mask="20545" item_group="QUEST" quality="COMMON" price="1" race="ASMODIANS" desc="1125754" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usearea="IDRAKSHA_ITEMUSEAREA_Q28703"/>
 		<inventory id="2"/>
 	</item_template>
@@ -885361,21 +885604,39 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182212218" name="Strange Insignia" level="1" cName="QUEST_18212a" mask="20545" item_group="QUEST" quality="COMMON" price="1" desc="1129644" activate_target="STANDALONE">
+		<actions>
+			<questuse/>
+		</actions>
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182212219" name="Strange Insignia" level="1" cName="QUEST_18213a" mask="20545" item_group="QUEST" quality="COMMON" price="1" desc="1129646" activate_target="STANDALONE">
+		<actions>
+			<questuse/>
+		</actions>
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182212220" name="Strange Insignia" level="1" cName="QUEST_18213b" mask="20545" item_group="QUEST" quality="COMMON" price="1" desc="1129648" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182212221" name="Bloodied Insignia" level="1" cName="QUEST_28212a" mask="20545" item_group="QUEST" quality="COMMON" price="1" desc="1129650" activate_target="STANDALONE">
+		<actions>
+			<questuse/>
+		</actions>
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182212222" name="Bloodied Insignia" level="1" cName="QUEST_28213a" mask="20545" item_group="QUEST" quality="COMMON" price="1" desc="1129652" activate_target="STANDALONE">
+		<actions>
+			<questuse/>
+		</actions>
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182212223" name="Bloodied Insignia" level="1" cName="QUEST_28213b" mask="20545" item_group="QUEST" quality="COMMON" price="1" desc="1129654" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182212224" name="Undin's Recommendation" level="1" cName="doc_quest_19050a" mask="20545" quality="COMMON" price="1" desc="1130026" activate_target="STANDALONE" activate_count="1000">
@@ -885617,10 +885878,16 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182212514" name="Fine Gemstone" level="1" cName="quest_41502a" casting_delay="2000" mask="20545" item_group="QUEST" quality="COMMON" price="1" desc="1136323" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="41" usearea="LDF4B_ITEMUSEAREA_Q41502A"/>
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182212515" name="Aether Bomb" level="1" cName="quest_41503a" casting_delay="2000" mask="20545" item_group="QUEST" quality="COMMON" price="1" desc="1136325" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="41" usearea="LDF4B_ITEMUSEAREA_Q41503A"/>
 		<inventory id="2"/>
 	</item_template>
@@ -885628,6 +885895,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182212517" name="Groundbreaker Sword" level="1" cName="quest_41504b" casting_delay="2000" mask="20545" item_group="QUEST" quality="COMMON" price="1" desc="1136329" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="41" usearea="LDF4B_ITEMUSEAREA_Q41504A"/>
 		<inventory id="2"/>
 	</item_template>
@@ -885638,10 +885908,16 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182212520" name="Aether Landmine" level="1" cName="quest_41513a" casting_delay="2000" mask="20545" item_group="QUEST" quality="COMMON" price="1" desc="1136335" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="41" usearea="LDF4B_ITEMUSEAREA_Q41513A"/>
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182212521" name="Aether Crystal" level="1" cName="quest_41514a" casting_delay="2000" mask="20545" item_group="QUEST" quality="COMMON" price="1" desc="1136337" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="41" usearea="LDF4B_ITEMUSEAREA_Q41514A"/>
 		<inventory id="2"/>
 	</item_template>
@@ -885649,6 +885925,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182212523" name="Magic Flute" level="1" cName="quest_41519a" casting_delay="2000" mask="20545" item_group="QUEST" quality="COMMON" price="1" desc="1136341" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="41" usearea="LDF4B_ITEMUSEAREA_Q41519A"/>
 		<inventory id="2"/>
 	</item_template>
@@ -885656,14 +885935,23 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182212525" name="Marble of Transfiguration" level="1" cName="quest_41521a" mask="20545" item_group="QUEST" quality="COMMON" price="1" desc="1136345" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="41" usearea="LDF4B_ITEMUSEAREA_Q41521A"/>
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182212526" name="Marker Stone" level="1" cName="quest_41557a" casting_delay="2000" mask="20545" item_group="QUEST" quality="COMMON" price="1" desc="1136347" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="41" usearea="LDF4B_ITEMUSEAREA_Q41557A"/>
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182212527" name="Marker Stone" level="1" cName="quest_41558a" casting_delay="2000" mask="20545" item_group="QUEST" quality="COMMON" price="1" desc="1136349" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="41" usearea="LDF4B_ITEMUSEAREA_Q41558A"/>
 		<inventory id="2"/>
 	</item_template>
@@ -885705,6 +885993,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182212539" name="Powerful Aether Marble" level="1" cName="quest_41540a" casting_delay="2000" mask="20545" item_group="QUEST" quality="COMMON" price="1" desc="1136373" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="41" usearea="LDF4B_ITEMUSEAREA_Q41540A"/>
 		<inventory id="2"/>
 	</item_template>
@@ -885745,14 +886036,23 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182212548" name="Copper Necklace" level="1" cName="quest_41553a" casting_delay="2000" mask="20545" item_group="QUEST" quality="COMMON" price="1" desc="1136391" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="41" usearea="LDF4B_ITEMUSEAREA_Q41553A"/>
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182212549" name="Glittering Necklace" level="1" cName="quest_41553b" casting_delay="2000" mask="20545" item_group="QUEST" quality="COMMON" price="1" desc="1136393" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="41" usearea="LDF4B_ITEMUSEAREA_Q41553A"/>
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182212550" name="Beautifully Glittering Necklace" level="1" cName="quest_41553c" casting_delay="2000" mask="20545" item_group="QUEST" quality="COMMON" price="1" desc="1136395" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="41" usearea="LDF4B_ITEMUSEAREA_Q41553A"/>
 		<inventory id="2"/>
 	</item_template>
@@ -885766,10 +886066,16 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182212554" name="Kunati's Banner" level="1" cName="quest_41556b" casting_delay="2000" mask="20545" item_group="QUEST" quality="COMMON" price="1" desc="1136403" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="41" usearea="LDF4B_ITEMUSEAREA_Q41556A"/>
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182212555" name="Vigilance Core" level="1" cName="quest_10060a" casting_delay="2000" mask="20481" item_group="QUEST" quality="COMMON" price="1" race="ELYOS" desc="1136405" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usearea="LDF4B_ITEMUSEAREA_Q10060A"/>
 		<inventory id="2"/>
 	</item_template>
@@ -885783,6 +886089,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182212559" name="Vigilance Core" level="1" cName="quest_20062a" casting_delay="2000" mask="20481" item_group="QUEST" quality="COMMON" price="1" race="ASMODIANS" desc="1136413" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="41" usearea="LDF4B_ITEMUSEAREA_Q20062A"/>
 		<inventory id="2"/>
 	</item_template>
@@ -885897,6 +886206,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182212594" name="Sounding Gem" level="1" cName="quest_12031a" casting_delay="2000" mask="20545" item_group="QUEST" quality="COMMON" price="1" race="ELYOS" desc="1136861" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="41" usearea="TDOWN_ITEMUSEAREA_Q12031A"/>
 		<inventory id="2"/>
 	</item_template>
@@ -885923,6 +886235,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182212601" name="Sounding Gem" level="1" cName="quest_22031a" casting_delay="2000" mask="20545" item_group="QUEST" quality="COMMON" price="1" race="ASMODIANS" desc="1136888" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="41" usearea="TDOWN_ITEMUSEAREA_Q22031A"/>
 		<inventory id="2"/>
 	</item_template>
@@ -886258,14 +886573,23 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182213149" name="Hoof Tool" level="1" cName="quest_41177b" casting_delay="2000" mask="20544" item_group="QUEST" quality="COMMON" price="5" desc="1136570" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="10000" usedelayid="41" usearea="LDF4A_ITEMUSEAREA_Q41177"/>
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182213150" name="Hoof Tool" level="1" cName="quest_41222b" casting_delay="2000" mask="20544" item_group="QUEST" quality="COMMON" price="5" desc="1136572" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="10000" usedelayid="41" usearea="LDF4A_ITEMUSEAREA_Q41222"/>
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182213151" name="Hoof Tool" level="1" cName="quest_41259b" casting_delay="2000" mask="20544" item_group="QUEST" quality="COMMON" price="5" desc="1136574" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="10000" usedelayid="41" usearea="LDF4A_ITEMUSEAREA_Q41259"/>
 		<inventory id="2"/>
 	</item_template>
@@ -886273,6 +886597,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182213153" name="Pagati Reins" level="1" cName="quest_41300a" casting_delay="2000" mask="20544" item_group="QUEST" quality="COMMON" price="5" desc="1136578" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="10000" usedelayid="41"/>
 		<inventory id="2"/>
 	</item_template>
@@ -886348,10 +886675,16 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182213173" name="Strange Necklace" level="1" cName="quest_41577a" casting_delay="2000" mask="20544" item_group="QUEST" quality="COMMON" price="5" desc="1136693" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="10000" usedelayid="61" usearea="LDF4B_ITEMUSEAREA_Q41577A"/>
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182213174" name="Cracked Mirror" level="2" cName="quest_41579a" casting_delay="2000" mask="20545" item_group="QUEST" quality="COMMON" price="5" desc="1136695" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="10000" usedelayid="61"/>
 		<inventory id="2"/>
 	</item_template>
@@ -886363,6 +886696,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182213176" name="Crystal of Combustion" level="1" cName="quest_41581a" casting_delay="2000" mask="20544" item_group="QUEST" quality="COMMON" price="5" desc="1136699" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="10000" usedelayid="61" usearea="LDF4B_ITEMUSEAREA_Q41581A"/>
 		<inventory id="2"/>
 	</item_template>
@@ -886387,6 +886723,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182213181" name="Powerful Aether Crystal" level="1" cName="quest_41593a" casting_delay="2000" mask="20544" item_group="QUEST" quality="COMMON" price="5" desc="1136720" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="10000" usedelayid="61" usearea="LDF4B_ITEMUSEAREA_Q41593A"/>
 		<inventory id="2"/>
 	</item_template>
@@ -886740,6 +887079,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182213273" name="Lepharist's Mark" level="2" cName="quest_16904a" casting_delay="2000" mask="20545" item_group="QUEST" quality="COMMON" price="5" race="ELYOS" desc="1140676" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="10000" usedelayid="61"/>
 		<inventory id="2"/>
 	</item_template>
@@ -886751,6 +887093,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182213275" name="Lepharist's Mark" level="2" cName="quest_26904a" casting_delay="2000" mask="20545" item_group="QUEST" quality="COMMON" price="5" race="ASMODIANS" desc="1140680" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="10000" usedelayid="61"/>
 		<inventory id="2"/>
 	</item_template>
@@ -886876,6 +887221,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182213307" name="Heavy Drakan Sword" level="1" cName="quest_12509a" casting_delay="2000" mask="20544" item_group="QUEST" quality="COMMON" price="1" race="ELYOS" desc="1140828" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="10000" usedelayid="61" usearea="LDF5A_ITEMUSEAREA_Q12509"/>
 		<inventory id="2"/>
 	</item_template>
@@ -886895,10 +887243,16 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182213313" name="Staff of Purification" level="1" cName="quest_12525a" casting_delay="2000" mask="20544" item_group="QUEST" quality="COMMON" price="1" race="ELYOS" desc="1140840" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="10000" usedelayid="61" usearea="LDF5A_ITEMUSEAREA_Q12525"/>
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182213314" name="Drained Idgel Cube" level="1" cName="quest_12527a" casting_delay="2000" mask="20544" item_group="QUEST" quality="COMMON" price="1" race="ELYOS" desc="1140842" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="10000" usedelayid="61"/>
 		<inventory id="2"/>
 	</item_template>
@@ -886969,6 +887323,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182213335" name="Blue Rock Piece" level="1" cName="quest_12562a" casting_delay="2000" mask="20544" item_group="QUEST" quality="COMMON" price="1" race="ELYOS" desc="1140884" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="10000" usedelayid="61" usearea="LDF5A_ITEMUSEAREA_Q12562"/>
 		<inventory id="2"/>
 	</item_template>
@@ -886982,6 +887339,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182213338" name="Crude Drakan Sword" level="1" cName="quest_22509a" casting_delay="2000" mask="20544" item_group="QUEST" quality="COMMON" price="1" race="ASMODIANS" desc="1140890" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="10000" usedelayid="61"/>
 		<inventory id="2"/>
 	</item_template>
@@ -887001,10 +887361,16 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182213344" name="Cane of Purification" level="1" cName="quest_22525a" casting_delay="2000" mask="20544" item_group="QUEST" quality="COMMON" price="1" race="ASMODIANS" desc="1140902" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="10000" usedelayid="61" usearea="LDF5A_ITEMUSEAREA_Q22525"/>
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182213345" name="Used Idgel Cube" level="1" cName="quest_22527a" casting_delay="2000" mask="20544" item_group="QUEST" quality="COMMON" price="1" race="ASMODIANS" desc="1140904" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="10000" usedelayid="61"/>
 		<inventory id="2"/>
 	</item_template>
@@ -887063,6 +887429,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182213362" name="Blue Rock Fragment" level="1" cName="quest_22562a" casting_delay="2000" mask="20544" item_group="QUEST" quality="COMMON" price="1" race="ASMODIANS" desc="1140938" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="10000" usedelayid="61" usearea="LDF5A_ITEMUSEAREA_Q12562"/>
 		<inventory id="2"/>
 	</item_template>
@@ -887076,6 +887445,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182213365" name="Magic Ward Deactivation Scroll" level="1" cName="quest_22566a" casting_delay="2000" mask="20544" item_group="QUEST" quality="COMMON" price="1" race="ASMODIANS" desc="1140944" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="10000" usedelayid="61" usearea="LDF5A_ITEMUSEAREA_Q22566"/>
 		<inventory id="2"/>
 	</item_template>
@@ -887445,6 +887817,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182213478" name="Construction Management Document" level="1" cName="quest_23562a" mask="28736" item_group="QUEST" quality="COMMON" price="1" desc="1141326" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="41"/>
 		<inventory id="2"/>
 	</item_template>
@@ -887887,6 +888262,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182214024" name="Item Play Test Item" level="1" cName="quest_9623a" casting_delay="2000" mask="20544" item_group="QUEST" quality="COMMON" price="1" race="ELYOS" desc="1100547" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="41"/>
 		<inventory id="2"/>
 	</item_template>
@@ -888378,6 +888756,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215141" name="[Event] Mother's Letter" level="1" cName="doc_quest_80182a" mask="20545" quality="COMMON" price="1" race="ELYOS" desc="1185252" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61"/>
 		<inventory id="2"/>
 	</item_template>
@@ -888391,6 +888772,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215145" name="[Event] Mother's Letter" level="1" cName="doc_quest_80186a" mask="20545" quality="COMMON" price="1" race="ASMODIANS" desc="1185260" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61"/>
 		<inventory id="2"/>
 	</item_template>
@@ -888401,6 +888785,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215148" name="[Event] Father's Letter" level="1" cName="doc_quest_80172" mask="20545" quality="COMMON" price="1" race="ASMODIANS" desc="1185274" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61"/>
 		<inventory id="2"/>
 	</item_template>
@@ -888414,6 +888801,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215152" name="[Event] Father's Letter" level="1" cName="doc_quest_80176" mask="20545" quality="COMMON" price="1" race="ELYOS" desc="1185282" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61"/>
 		<inventory id="2"/>
 	</item_template>
@@ -888445,10 +888835,16 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215162" name="Wrights of Dawn Recommendation" level="1" cName="doc_quest_80188" mask="20545" quality="COMMON" price="1" race="ELYOS" desc="1199411" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61"/>
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215163" name="Shapers of Dusk Recommendation" level="1" cName="doc_quest_80192" mask="20545" quality="COMMON" price="1" race="ASMODIANS" desc="1199412" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61"/>
 		<inventory id="2"/>
 	</item_template>
@@ -888564,6 +888960,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215185" name="Dezigon's Letter" level="1" cName="doc_quest_80197" mask="20545" quality="COMMON" price="1" race="ELYOS" desc="1199463" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61"/>
 		<inventory id="2"/>
 	</item_template>
@@ -888571,6 +888970,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215187" name="Pachenon's Letter" level="1" cName="doc_quest_80201" mask="20545" quality="COMMON" price="1" race="ASMODIANS" desc="1199464" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61"/>
 		<inventory id="2"/>
 	</item_template>
@@ -888584,6 +888986,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215191" name="[Event] Stinky Shoes" level="1" cName="doc_quest_80207" mask="20545" quality="COMMON" price="1" race="ELYOS" desc="1185296" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61"/>
 		<inventory id="2"/>
 	</item_template>
@@ -888597,6 +889002,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215195" name="[Event] Water Drop Earrings" level="1" cName="doc_quest_80211" mask="20545" quality="COMMON" price="1" race="ASMODIANS" desc="1185304" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61"/>
 		<inventory id="2"/>
 	</item_template>
@@ -888627,42 +889035,72 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215202" name="[Event] Humble Cooking Ingredients" level="1" cName="quest_80257a" casting_delay="2000" mask="4160" item_group="QUEST" quality="COMMON" price="1" race="ELYOS" restrict="10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10" desc="1185377" activate_target="EVENT_TOWER_LIGHT" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="180000" usedelayid="41"/>
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215203" name="[Event] Simple Cooking Ingredients" level="1" cName="quest_80258a" casting_delay="2000" mask="4160" item_group="QUEST" quality="COMMON" price="1" race="ELYOS" restrict="20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20" desc="1185378" activate_target="EVENT_TOWER_LIGHT" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="180000" usedelayid="41"/>
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215204" name="[Event] Scrumptious Cooking Ingredients" level="1" cName="quest_80259a" casting_delay="2000" mask="4160" item_group="QUEST" quality="COMMON" price="1" race="ELYOS" restrict="30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30" desc="1185379" activate_target="EVENT_TOWER_LIGHT" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="180000" usedelayid="41"/>
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215205" name="[Event] Abundant Cooking Ingredients" level="1" cName="quest_80260a" casting_delay="2000" mask="4160" item_group="QUEST" quality="COMMON" price="1" race="ELYOS" restrict="40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40" desc="1185380" activate_target="EVENT_TOWER_LIGHT" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="180000" usedelayid="41"/>
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215206" name="[Event] Extravagant Cooking Ingredients" level="1" cName="quest_80261a" casting_delay="2000" mask="4160" item_group="QUEST" quality="COMMON" price="1" race="ELYOS" restrict="50 50 50 50 50 50 50 50 50 50 50 50 50 50 50 50 50" desc="1185381" activate_target="EVENT_TOWER_LIGHT" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="180000" usedelayid="41"/>
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215207" name="[Event] Humble Cooking Ingredients" level="1" cName="quest_80262a" casting_delay="2000" mask="4160" item_group="QUEST" quality="COMMON" price="1" race="ASMODIANS" restrict="10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10" desc="1185382" activate_target="EVENT_TOWER_DARK" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="180000" usedelayid="41"/>
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215208" name="[Event] Simple Cooking Ingredients" level="1" cName="quest_80263a" casting_delay="2000" mask="4160" item_group="QUEST" quality="COMMON" price="1" race="ASMODIANS" restrict="20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20" desc="1185383" activate_target="EVENT_TOWER_DARK" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="180000" usedelayid="41"/>
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215209" name="[Event] Scrumptious Cooking Ingredients" level="1" cName="quest_80264a" casting_delay="2000" mask="4160" item_group="QUEST" quality="COMMON" price="1" race="ASMODIANS" restrict="30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30" desc="1185384" activate_target="EVENT_TOWER_DARK" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="180000" usedelayid="41"/>
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215210" name="[Event] Abundant Cooking Ingredients" level="1" cName="quest_80265a" casting_delay="2000" mask="4160" item_group="QUEST" quality="COMMON" price="1" race="ASMODIANS" restrict="40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40 40" desc="1185385" activate_target="EVENT_TOWER_DARK" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="180000" usedelayid="41"/>
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215211" name="[Event] Extravagant Cooking Ingredients" level="1" cName="quest_80266a" casting_delay="2000" mask="4160" item_group="QUEST" quality="COMMON" price="1" race="ASMODIANS" restrict="50 50 50 50 50 50 50 50 50 50 50 50 50 50 50 50 50" desc="1185386" activate_target="EVENT_TOWER_DARK" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="180000" usedelayid="41"/>
 		<inventory id="2"/>
 	</item_template>
@@ -888732,6 +889170,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215228" name="Reian Accessory" level="1" cName="quest_10084c" mask="28737" item_group="QUEST" quality="COMMON" price="1" race="ELYOS" desc="1185443" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61"/>
 		<inventory id="2"/>
 	</item_template>
@@ -888774,6 +889215,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215238" name="Reian Bracelet" level="1" cName="quest_20084c" mask="28737" item_group="QUEST" quality="COMMON" price="1" race="ASMODIANS" desc="1185463" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61"/>
 		<inventory id="2"/>
 	</item_template>
@@ -888904,6 +889348,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215277" name="Pure Purification Powder" level="1" cName="quest_49713a" mask="28736" item_group="QUEST" quality="COMMON" price="1" race="ASMODIANS" desc="1130952" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="41" usearea="LDF5B_ITEMUSEAREA_Q39713"/>
 		<inventory id="2"/>
 	</item_template>
@@ -888929,6 +889376,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215285" name="Purification Powder" level="1" cName="quest_39713a" mask="28736" item_group="QUEST" quality="COMMON" price="1" race="ELYOS" desc="1130922" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="41" usearea="LDF5B_ITEMUSEAREA_Q39713"/>
 		<inventory id="2"/>
 	</item_template>
@@ -889033,6 +889483,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215310" name="GroupDropPropertyTestItem" level="1" cName="quest_each_drop_test" mask="28737" quality="COMMON" price="1" race="ELYOS" desc="1199953" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61"/>
 		<inventory id="2"/>
 	</item_template>
@@ -889046,6 +889499,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215314" name="The Plumis Transformation" level="1" cName="quest_14014a" casting_delay="5000" mask="20481" item_group="QUEST" quality="COMMON" price="1" race="ELYOS" desc="1130958" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="15000" usedelayid="61" usearea="LF1A_USEITEMAREA_Q80"/>
 		<inventory id="2"/>
 	</item_template>
@@ -889087,6 +889543,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215326" name="Cursed Necklace" level="1" cName="quest_4338b" casting_delay="1000" mask="20545" item_group="QUEST" quality="COMMON" price="1" desc="1141719" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="15000" usedelayid="61" usearea="DF2_ITEMUSEAREA_Q2033"/>
 		<inventory id="2"/>
 	</item_template>
@@ -889179,6 +889638,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215351" name="Balaur Language Potion" level="1" cName="quest_14043a" mask="28673" max_stack_count="20" item_group="QUEST" quality="COMMON" price="1" race="ELYOS" desc="1131066" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61"/>
 		<inventory id="2"/>
 	</item_template>
@@ -889204,6 +889666,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215359" name="Hunter's Poison" level="1" cName="quest_24013A" casting_delay="3000" mask="20481" item_group="QUEST" quality="COMMON" price="1" race="ASMODIANS" desc="1131082" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61" usearea="DF1A_ITEMUSEAREA_Q2016"/>
 		<inventory id="2"/>
 	</item_template>
@@ -889217,6 +889682,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215363" name="Herb of Repose" level="1" cName="quest_24021c" casting_delay="2000" mask="20481" item_group="QUEST" quality="COMMON" price="1" race="ASMODIANS" desc="1131090" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="600000" usedelayid="61" usearea="DF2_ITEMUSEAREA_Q2032"/>
 		<inventory id="2"/>
 	</item_template>
@@ -889271,14 +889739,23 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215378" name="Anoramas's Essence" level="1" cName="quest_24052a" casting_delay="2000" mask="20481" item_group="QUEST" quality="COMMON" price="1" race="ASMODIANS" desc="1131120" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61" usearea="DF3_ITEMUSEAREA_Q2056"/>
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215379" name="Triminos's Essence" level="1" cName="quest_24052b" casting_delay="2000" mask="20481" item_group="QUEST" quality="COMMON" price="1" race="ASMODIANS" desc="1131122" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61" usearea="DF3_ITEMUSEAREA_Q2056"/>
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215380" name="Etun's Essence" level="1" cName="quest_24052c" casting_delay="2000" mask="20481" item_group="QUEST" quality="COMMON" price="1" race="ASMODIANS" desc="1131124" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61" usearea="DF3_ITEMUSEAREA_Q2056"/>
 		<inventory id="2"/>
 	</item_template>
@@ -889312,14 +889789,23 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215388" name="Poeta Ide Detection Device" level="1" cName="quest_14031a" casting_delay="2000" mask="20481" item_group="QUEST" quality="COMMON" price="1" race="ELYOS" desc="1131132" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61" usearea="LF1_ITEMUSEAREA_Q14031"/>
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215389" name="Verteron Ide Detection Device" level="1" cName="quest_14031b" casting_delay="2000" mask="20481" item_group="QUEST" quality="COMMON" price="1" race="ELYOS" desc="1131134" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61" usearea="LF1A_ITEMUSEAREA_Q14031"/>
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215390" name="Eltnen Ide Detection Device" level="1" cName="quest_14031c" casting_delay="2000" mask="20481" item_group="QUEST" quality="COMMON" price="1" race="ELYOS" desc="1131136" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61" usearea="LF2_ITEMUSEAREA_Q14031"/>
 		<inventory id="2"/>
 	</item_template>
@@ -889333,14 +889819,23 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215394" name="Munin's Dimension Investigation Device" level="1" cName="quest_24031a" casting_delay="2000" mask="20481" item_group="QUEST" quality="COMMON" price="1" race="ASMODIANS" desc="1131144" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61" usearea="DF1_ITEMUSEAREA_Q24031"/>
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215395" name="Aurtri's Dimension Investigation Device" level="1" cName="quest_24031b" casting_delay="2000" mask="20481" item_group="QUEST" quality="COMMON" price="1" race="ASMODIANS" desc="1131146" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61" usearea="DF1A_ITEMUSEAREA_Q24031"/>
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215396" name="Tyr's Dimension Investigation Device" level="1" cName="quest_24031c" casting_delay="2000" mask="20481" item_group="QUEST" quality="COMMON" price="1" race="ASMODIANS" desc="1131148" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61" usearea="DF2_ITEMUSEAREA_Q24031"/>
 		<inventory id="2"/>
 	</item_template>
@@ -889351,6 +889846,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215399" name="Corrupted Idgel Cleanser" level="1" cName="quest_14071b" casting_delay="2000" mask="20481" item_group="QUEST" quality="COMMON" price="1" race="ELYOS" desc="1131154" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61" usearea="IDLDF4A_ITEMUSEAREA_Q14071"/>
 		<inventory id="2"/>
 	</item_template>
@@ -889361,6 +889859,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215402" name="Corrupted Idgel Cleanser" level="1" cName="quest_24071b" casting_delay="2000" mask="20481" item_group="QUEST" quality="COMMON" price="1" race="ASMODIANS" desc="1131160" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61" usearea="IDLDF4A_ITEMUSEAREA_Q14071"/>
 		<inventory id="2"/>
 	</item_template>
@@ -889368,6 +889869,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215404" name="Detector Core" level="1" cName="quest_14081a" casting_delay="2000" mask="20481" item_group="QUEST" quality="COMMON" price="1" race="ELYOS" desc="1131164" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="41" usearea="LDF4B_ITEMUSEAREA_Q10060A"/>
 		<inventory id="2"/>
 	</item_template>
@@ -889375,6 +889879,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215406" name="Ide Monitoring Device" level="1" cName="quest_24081a" casting_delay="2000" mask="20481" item_group="QUEST" quality="COMMON" price="1" race="ASMODIANS" desc="1131168" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="41" usearea="LDF4B_ITEMUSEAREA_Q20062A"/>
 		<inventory id="2"/>
 	</item_template>
@@ -889382,6 +889889,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215408" name="Riftsands" level="1" cName="quest_14090a" casting_delay="2000" mask="20481" item_group="QUEST" quality="COMMON" price="1" race="ELYOS" desc="1131172" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61" usearea="LDF4B_ITEMUSEAREA_Q14090"/>
 		<inventory id="2"/>
 	</item_template>
@@ -889395,6 +889905,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215412" name="Riftsands" level="1" cName="quest_24090a" casting_delay="2000" mask="20481" item_group="QUEST" quality="COMMON" price="1" race="ASMODIANS" desc="1131180" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61" usearea="LDF4B_ITEMUSEAREA_Q14090"/>
 		<inventory id="2"/>
 	</item_template>
@@ -889408,10 +889921,16 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215416" name="Riftsands" level="1" cName="quest_14095a" casting_delay="2000" mask="20481" item_group="QUEST" quality="COMMON" price="1" race="ELYOS" desc="1131188" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61" usearea="IDLDF4A_ITEMUSEAREA_Q14095"/>
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215417" name="Riftsands" level="1" cName="quest_24095a" casting_delay="2000" mask="20481" item_group="QUEST" quality="COMMON" price="1" race="ASMODIANS" desc="1131190" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61" usearea="IDLDF4A_ITEMUSEAREA_Q14095"/>
 		<inventory id="2"/>
 	</item_template>
@@ -889524,10 +890043,16 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215450" name="Ide Detector" level="1" cName="quest_10100b" casting_delay="2000" mask="20481" item_group="QUEST" quality="COMMON" price="1" race="ELYOS" desc="1131196" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61" usearea="LDF5_FORTRESS_ITEMUSEAREA_Q10100"/>
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215451" name="Ide Sensor" level="1" cName="quest_20100b" casting_delay="2000" mask="20481" item_group="QUEST" quality="COMMON" price="1" race="ASMODIANS" desc="1131198" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61" usearea="LDF5_FORTRESS_ITEMUSEAREA_Q20100"/>
 		<inventory id="2"/>
 	</item_template>
@@ -889569,6 +890094,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215459" name="Ritual Incense" level="1" cName="quest_14153a" casting_delay="3000" mask="20545" item_group="QUEST" quality="COMMON" price="1" desc="1131214" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="15000" usedelayid="61" usearea="LF3_ITEMUSEAREA_Q1059"/>
 		<inventory id="2"/>
 	</item_template>
@@ -889579,10 +890107,16 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215462" name="Flame Bomb" level="1" cName="quest_24153a" casting_delay="2000" mask="20545" item_group="QUEST" quality="COMMON" price="1" desc="1110318" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61" usearea="DF3_ITEMUSEAREA_Q2057"/>
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215463" name="Signal Flare" level="1" cName="quest_24154a" casting_delay="2000" mask="20545" item_group="QUEST" quality="COMMON" price="1" desc="1110320" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61" usearea="DF3_ITEMUSEAREA_Q2058"/>
 		<inventory id="2"/>
 	</item_template>
@@ -889596,6 +890130,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215467" name="Ribbit Essence" level="1" cName="quest_24203b" casting_delay="5000" mask="20545" item_group="QUEST" quality="COMMON" price="1" desc="1116168" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="15000" usedelayid="61" usearea="LF1A_USEITEMAREA_Q80"/>
 		<inventory id="2"/>
 	</item_template>
@@ -889806,6 +890343,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215527" name="Intrusion Mine" level="1" cName="quest_13704a" casting_delay="2000" mask="20544" item_group="QUEST" quality="COMMON" price="1" race="ELYOS" desc="1800072" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61" usearea="LDF4_ADVANCE_ITEMUSEAREA_Q13704"/>
 		<inventory id="2"/>
 	</item_template>
@@ -889813,6 +890353,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215529" name="Proximity Alarm" level="1" cName="quest_13708a" casting_delay="2000" mask="20544" item_group="QUEST" quality="COMMON" price="1" race="ELYOS" desc="1800082" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61" usearea="LDF4_ADVANCE_ITEMUSEAREA_Q13708"/>
 		<inventory id="2"/>
 	</item_template>
@@ -889826,6 +890369,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215533" name="Infiltration Mine" level="1" cName="quest_23704a" casting_delay="2000" mask="20544" item_group="QUEST" quality="COMMON" price="1" race="ASMODIANS" desc="1800084" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61" usearea="LDF4_ADVANCE_ITEMUSEAREA_Q23704"/>
 		<inventory id="2"/>
 	</item_template>
@@ -889833,6 +890379,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215535" name="Boundary Alarm" level="1" cName="quest_23708a" casting_delay="2000" mask="20544" item_group="QUEST" quality="COMMON" price="1" race="ASMODIANS" desc="1800094" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61" usearea="LDF4_ADVANCE_ITEMUSEAREA_Q23708"/>
 		<inventory id="2"/>
 	</item_template>
@@ -889843,14 +890392,23 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215538" name="Data Driven ItemPlay1" level="1" cName="quest_9667a" casting_delay="2000" mask="20544" item_group="QUEST" quality="COMMON" price="1" race="ELYOS" desc="1800134" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="41"/>
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215539" name="Data Driven ItemPlay2" level="1" cName="quest_9668a" casting_delay="2000" mask="20544" item_group="QUEST" quality="COMMON" price="1" race="ELYOS" desc="1800135" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="41"/>
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215540" name="Data Driven ItemPlay3" level="1" cName="quest_9669a" casting_delay="2000" mask="20544" item_group="QUEST" quality="COMMON" price="1" race="ELYOS" desc="1800136" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="41"/>
 		<inventory id="2"/>
 	</item_template>
@@ -889870,6 +890428,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215546" name="Unused - Activated Danuar Relics" level="1" cName="quest_13815b" mask="20544" item_group="QUEST" quality="COMMON" price="1" desc="1800180" activate_target="STANDALONE" activate_count="1000" expire_time="1440">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="300000" usedelayid="41"/>
 		<inventory id="2"/>
 	</item_template>
@@ -889978,6 +890539,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215579" name="Saam Root Map" level="1" cName="doc_quest_80611a" mask="20545" quality="COMMON" price="1" desc="1800282" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61"/>
 		<inventory id="2"/>
 	</item_template>
@@ -890022,6 +890586,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215590" name="Watching Eye" level="1" cName="quest_20031a" casting_delay="2000" mask="20481" item_group="QUEST" quality="COMMON" price="1" race="ASMODIANS" desc="1141824" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="41" usearea="DF4_ITEMUSEAREA_Q20031"/>
 		<inventory id="2"/>
 	</item_template>
@@ -890043,6 +890610,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215594" name="Artificial Aether Generation Device Summoning Stone" level="1" cName="quest_20033a" casting_delay="2000" mask="20481" item_group="QUEST" quality="COMMON" price="1" race="ASMODIANS" desc="1141832" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="41" usearea="DF4_ITEMUSEAREA_Q20033"/>
 		<inventory id="2"/>
 	</item_template>
@@ -890056,6 +890626,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215598" name="Ruins Location Map" level="1" cName="quest_10501a" casting_delay="2000" mask="20481" item_group="QUEST" quality="COMMON" price="1" race="ELYOS" desc="1800445" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61"/>
 		<inventory id="2"/>
 	</item_template>
@@ -890066,6 +890639,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215601" name="Rubbing Tool Bag" level="1" cName="quest_10502b" casting_delay="3000" mask="20481" item_group="QUEST" quality="COMMON" price="1" race="ELYOS" desc="1800451" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61" usearea="LF5_ITEMUSEAREA_Q10502"/>
 		<inventory id="2"/>
 	</item_template>
@@ -890077,10 +890653,16 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215604" name="Deciphered Balaur Document" level="1" cName="doc_quest_10503b" mask="20481" quality="COMMON" price="1" race="ELYOS" desc="1800457" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="41"/>
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215605" name="Wedge Stone Bomb (Unused)" level="1" cName="quest_10503c" casting_delay="5000" mask="20481" item_group="QUEST" quality="COMMON" price="1" race="ELYOS" desc="1800459" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="5000" usedelayid="61" usearea="LF5_ITEMUSEAREA_Q10503"/>
 		<inventory id="2"/>
 	</item_template>
@@ -890107,6 +890689,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215612" name="Restored Beritra's Plans" level="1" cName="quest_10505e" casting_delay="2000" mask="20481" item_group="QUEST" quality="COMMON" price="1" race="ELYOS" desc="1800473" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="41"/>
 		<inventory id="2"/>
 	</item_template>
@@ -890164,6 +890749,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215628" name="Mysterious Research Diary" level="1" cName="doc_quest_10034a" mask="20481" quality="COMMON" price="1" race="ELYOS" desc="1141873" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="41"/>
 		<inventory id="2"/>
 	</item_template>
@@ -890204,6 +890792,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215641" name="Ancient Crystal" level="1" cName="quest_20505a" casting_delay="2000" mask="20481" item_group="QUEST" quality="COMMON" price="1" race="ASMODIANS" desc="1800516" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215642" name="Weakened Ancient Crystal" level="1" cName="quest_20505b" mask="20481" item_group="QUEST" quality="COMMON" price="1" race="ASMODIANS" desc="1800518">
@@ -890276,6 +890867,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215662" name="Artificial Aether Generator Repair Tool" level="1" cName="quest_15000b" casting_delay="2000" mask="20545" item_group="QUEST" quality="COMMON" price="1" race="ELYOS" desc="1800868" activate_target="STANDALONE" activate_count="1">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="61" usearea="LF5_ITEMUSEAREA_Q15000"/>
 		<inventory id="2"/>
 	</item_template>
@@ -890304,6 +890898,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215671" name="Akula's Accessory (Quest Start Item)" level="1" cName="quest_15025a" casting_delay="2000" mask="20545" item_group="QUEST" quality="COMMON" price="1" race="ELYOS" desc="1800886" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="10000" usedelayid="61"/>
 		<inventory id="2"/>
 	</item_template>
@@ -890320,6 +890917,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215676" name="Moonsong Flute" level="1" cName="quest_15042a" casting_delay="2000" mask="20545" item_group="QUEST" quality="COMMON" price="1" race="ELYOS" desc="1800896" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="60000" usedelayid="61" usearea="LF5_ITEMUSEAREA_Q15042"/>
 		<inventory id="2"/>
 	</item_template>
@@ -890379,6 +890979,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215694" name="Drill Outcome Report" level="1" cName="doc_quest_18742a" mask="20545" quality="COMMON" price="1" race="ELYOS" desc="1800955" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="41"/>
 		<inventory id="2"/>
 	</item_template>
@@ -890389,6 +890992,9 @@
 		<inventory id="2"/>
 	</item_template>
 	<item_template id="182215697" name="Drill Performance Report" level="1" cName="doc_quest_28742a" mask="20545" quality="COMMON" price="1" race="ASMODIANS" desc="1800961" activate_target="STANDALONE" activate_count="1000">
+		<actions>
+			<questuse/>
+		</actions>
 		<uselimits usedelay="2000" usedelayid="41"/>
 		<inventory id="2"/>
 	</item_template>

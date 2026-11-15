@@ -203,6 +203,7 @@ public class InstanceService {
 	}
 
 	public static void onEnterInstance(Player player) {
+		player.getPosition().getWorldMapInstance().showTimeLimit(player);
 		player.getPosition().getWorldMapInstance().getInstanceHandler().onEnterInstance(player);
 		AutoGroupService.getInstance().onEnterInstance(player);
 		InstanceScaler.onEnterInstance(player);
@@ -210,6 +211,7 @@ public class InstanceService {
 
 	public static void onLeaveInstance(Player player) {
 		WorldMapInstance instance = player.getWorldMapInstance();
+		instance.hideTimeLimit(player);
 		instance.getInstanceHandler().onLeaveInstance(player);
 		if (instance.getRegisteredCount() > 0) {
 			if (instance.getMaxPlayers() == 1) // solo instance

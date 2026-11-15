@@ -11,6 +11,10 @@ import com.aionemu.gameserver.model.templates.QuestTemplate;
  */
 public class QuestState implements Persistable {
 
+	/** The flags hold a value in their low bits and the step group above it */
+	private static final int STEP_GROUP_SHIFT = 6;
+	private static final int FLAG_VALUE_MASK = (1 << STEP_GROUP_SHIFT) - 1;
+
 	private int questId;
 	private QuestVars questVars;
 	private int questFlags;
@@ -155,11 +159,16 @@ public class QuestState implements Persistable {
 
 	/**
 	 * Possibly it is the second set of quest vars, now are named as flags
-	 * 
+	 *
 	 * @return the questFlags
 	 */
 	public int getFlags() {
 		return questFlags;
+	}
+
+	/** @return The value stored in the flag bits, without the step group above them. */
+	public int getFlagValue() {
+		return questFlags & FLAG_VALUE_MASK;
 	}
 
 	/**
@@ -174,10 +183,10 @@ public class QuestState implements Persistable {
 	}
 
 	public int getStepGroup() {
-		return questFlags >> 6;
+		return questFlags >> STEP_GROUP_SHIFT;
 	}
 
 	public void setStepGroup(int groupNumber) {
-		setFlags(groupNumber << 6);
+		setFlags(groupNumber << STEP_GROUP_SHIFT);
 	}
 }

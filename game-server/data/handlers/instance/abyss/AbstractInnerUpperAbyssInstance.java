@@ -13,7 +13,6 @@ import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
 import com.aionemu.gameserver.services.abyss.AbyssPointsService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -129,7 +128,7 @@ public abstract class AbstractInnerUpperAbyssInstance extends GeneralInstanceHan
 			}, 300000, 30000);
 
 			PacketSendUtility.broadcastToMap(instance, STR_MSG_INSTANCE_START_IDABRE());
-			PacketSendUtility.broadcastToMap(instance, new SM_QUEST_ACTION(0, 600));
+			instance.startTimeLimit(600);
 			detector.getController().delete();
 		}
 	}
