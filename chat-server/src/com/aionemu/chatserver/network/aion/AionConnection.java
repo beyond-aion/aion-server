@@ -1,15 +1,15 @@
 package com.aionemu.chatserver.network.aion;
 
-import java.nio.ByteBuffer;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.chatserver.configs.network.NetworkConfig;
 import com.aionemu.chatserver.model.ChatClient;
+import com.aionemu.chatserver.service.BroadcastService;
 import com.aionemu.commons.network.netty.NettyConnection;
 import com.aionemu.commons.network.packet.BaseClientPacket;
 
+import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
 import io.netty.util.concurrent.EventExecutor;
 
@@ -33,12 +33,15 @@ public class AionConnection extends NettyConnection<AbstractServerPacket> {
 	}
 
 	@Override
-	protected BaseClientPacket<?> createPacket(ByteBuffer data) {
-		return ClientPacketHandler.handle(data, this);
+	protected BaseClientPacket<?> createPacket(ByteBuf data) {
+		BaseClientPacket<?> packet = ClientPacketHandler.handle(data, this);
+		if (packet == null && state == State.CONNECTED) // like retail, which answers anything else before the login with "Unauthorized Request"
+			getChannel().close();
+		return packet;
 	}
 
 	@Override
-	protected void writePacket(AbstractServerPacket packet, ByteBuffer buffer) {
+	protected void writePacket(AbstractServerPacket packet, ByteBuf buffer) {
 		packet.write(this, buffer);
 	}
 
@@ -75,6 +78,13 @@ public class AionConnection extends NettyConnection<AbstractServerPacket> {
 	@Override
 	protected void onDisconnect() {
 		log.info("Client disconnected: {}", this);
+		ChatClient chatClient = this.chatClient;
+		if (chatClient != null) {
+			synchronized (chatClient) { // see ChatService.registerPlayerConnection
+				if (chatClient.getConnection() == this) // unless the character has logged in again with a newer connection
+					BroadcastService.getInstance().removeClient(chatClient);
+			}
+		}
 	}
 
 	public State getState() {

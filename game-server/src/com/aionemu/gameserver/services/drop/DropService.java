@@ -38,6 +38,7 @@ import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.world.World;
 
 /**
@@ -78,7 +79,34 @@ public class DropService {
 	public void unregisterDrop(Npc npc) {
 		int npcObjId = npc.getObjectId();
 		DropRegistrationService.getInstance().getCurrentDropMap().remove(npcObjId);
-		DropRegistrationService.getInstance().getDropRegistrationMap().remove(npcObjId);
+		DropNpc dropNpc = DropRegistrationService.getInstance().getDropRegistrationMap().remove(npcObjId);
+		if (dropNpc != null && dropNpc.getLootGroupRules() != null)
+			removeFromDistribution(dropNpc, dropNpc.getLootGroupRules());
+	}
+
+	/**
+	 * Removes the items of a corpse that is gone from its team's queue of items to roll or bid for. Only the first item of the queue is distributed,
+	 * and only a roll or bid on it starts the next one, so the team could never roll again once a corpse decayed with its item in the queue.
+	 */
+	private void removeFromDistribution(DropNpc dropNpc, LootGroupRules lootGroupRules) {
+		int npcObjId = dropNpc.getObjectId();
+		DropItem first;
+		synchronized (dropNpc) { // see DropDistributionService.handleRollOrBid
+			first = lootGroupRules.getItemsToBeDistributed().peekFirst();
+			if (!lootGroupRules.getItemsToBeDistributed().removeIf(item -> item.getNpcObj() == npcObjId))
+				return;
+			for (Player player : dropNpc.getInRangePlayers()) {
+				InRoll inRoll = player.inRoll;
+				if (player.isInPlayerMode(PlayerMode.IN_ROLL) && inRoll != null && inRoll.getNpcId() == npcObjId)
+					player.unsetPlayerMode(PlayerMode.IN_ROLL);
+			}
+		}
+		DropItem next = lootGroupRules.getItemsToBeDistributed().peekFirst();
+		if (next != null && next != first) {
+			DropNpc nextDropNpc = DropRegistrationService.getInstance().getDropRegistrationMap().get(next.getNpcObj());
+			if (nextDropNpc != null)
+				nextDropNpc.getInRangePlayers().stream().filter(Player::isOnline).findFirst().ifPresent(player -> canDistribute(player, next));
+		}
 	}
 
 	/**
@@ -163,12 +191,15 @@ public class DropService {
 		Set<DropItem> dropItems = DropRegistrationService.getInstance().getCurrentDropMap().get(npcObjectId);
 
 		Npc npc = (Npc) World.getInstance().findVisibleObject(npcObjectId);
-		if (npc != null) {
-			if (dropItems == null || dropItems.isEmpty()) {
-				npc.getController().delete();
-				return;
-			}
+		if (npc == null)
+			return;
+		if (dropItems == null || dropItems.isEmpty()) {
+			npc.getController().delete();
+			return;
+		}
 
+		// Who may loot from now on and which drops belong to everyone is changed by this player's thread while another one may already take an item
+		synchronized (dropNpc) {
 			RespawnService.scheduleDecayTask(npc, dropNpc.getRemaingDecayTime());
 
 			LootGroupRules lootGroupRules = dropNpc.getLootGroupRules();
@@ -185,8 +216,8 @@ public class DropService {
 					}
 				}
 			}
-			PacketSendUtility.broadcastPacket(npc, new SM_LOOT_STATUS(npcObjectId, Status.LOOT_ENABLE), dropNpc::isAllowedToLoot);
 		}
+		PacketSendUtility.broadcastPacket(npc, new SM_LOOT_STATUS(npcObjectId, Status.LOOT_ENABLE), dropNpc::isAllowedToLoot);
 	}
 
 	public boolean canDistribute(Player player, DropItem requestedItem) {
@@ -278,15 +309,20 @@ public class DropService {
 	}
 
 	public void requestDropItem(Player player, int npcObjectId, int itemIndex, boolean autoLoot) {
-
 		Set<DropItem> dropItems = DropRegistrationService.getInstance().getCurrentDropMap().get(npcObjectId);
 		DropNpc dropNpc = DropRegistrationService.getInstance().getDropRegistrationMap().get(npcObjectId);
-		DropItem requestedItem = null;
 		// drop was unregistered
-		if (dropItems == null || dropNpc == null) {
+		if (dropItems == null || dropNpc == null)
 			return;
+		// The item's count and winner are shared by all looters of this corpse, whose packets run on their own threads: two of them taking the same item
+		// at the same time would both get it, since each takes what it read from the count.
+		synchronized (dropNpc) {
+			requestDropItem(player, npcObjectId, itemIndex, autoLoot, dropItems, dropNpc);
 		}
+	}
 
+	private void requestDropItem(Player player, int npcObjectId, int itemIndex, boolean autoLoot, Set<DropItem> dropItems, DropNpc dropNpc) {
+		DropItem requestedItem = null;
 		synchronized (dropItems) {
 			for (DropItem dropItem : dropItems)
 				if (dropItem.getIndex() == itemIndex) {
@@ -387,10 +423,9 @@ public class DropService {
 
 			requestedItem.setCount(ItemService.addItem(requestedItem.getWinningPlayer(), itemId, requestedItem.getCount(), false, new TempTradeDropPredicate(dropNpc)));
 
-			switch (dropNpc.getDistributionId()) {
-				case 2 -> winningRollActions(requestedItem.getWinningPlayer(), itemId, npcObjectId);
-				case 3 -> winningBidActions(requestedItem.getWinningPlayer(), npcObjectId, requestedItem.getHighestValue());
-			}
+			if (dropNpc.getDistributionId() == 2)
+				winningRollActions(requestedItem.getWinningPlayer(), itemId, npcObjectId);
+			// the winner of a bid paid when the bids ended, see payWinningBid
 		}
 
 		if (requestedItem.getCount() <= 0) {
@@ -456,11 +491,18 @@ public class DropService {
 		}
 	}
 
-	private void winningBidActions(Player player, int npcObjectId, long highestValue) {
-		DropNpc dropNpc = DropRegistrationService.getInstance().getDropRegistrationMap().get(npcObjectId);
+	/**
+	 * Takes the bid from the winner as soon as the bids end and shares it among the other members, so the item is paid for before it can be picked
+	 * up. Paying on pickup let a winner who had spent the kinah in the meantime keep the item for free, and charged again for each part of a stack
+	 * that didn't fit into the inventory at once.
+	 *
+	 * @return False if the winner doesn't have the kinah anymore.
+	 */
+	boolean payWinningBid(Player player, DropNpc dropNpc, long highestValue) {
 		if (highestValue > 0) {
 			if (!player.getInventory().tryDecreaseKinah(highestValue)) {
-				return;
+				AuditLogger.log(player, "won a bid of " + highestValue + " kinah without having it anymore");
+				return false;
 			}
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PAY_ACCOUNT_ME(highestValue));
 		}
@@ -472,6 +514,7 @@ public class DropService {
 			member.getInventory().increaseKinah(distributeKinah);
 			PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_MSG_PAY_DISTRIBUTE(highestValue, onlineMembers.size(), distributeKinah));
 		}
+		return true;
 	}
 
 	private void winningNormalActions(Player player, DropNpc dropNpc, DropItem requestedItem) {

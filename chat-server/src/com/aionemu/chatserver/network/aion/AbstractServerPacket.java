@@ -1,8 +1,8 @@
 package com.aionemu.chatserver.network.aion;
 
-import java.nio.ByteBuffer;
-
 import com.aionemu.commons.network.packet.BaseServerPacket;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * @author ATracer
@@ -13,13 +13,13 @@ public abstract class AbstractServerPacket extends BaseServerPacket {
 		super(opCode);
 	}
 
-	public final void write(AionConnection connection, ByteBuffer buffer) {
+	public final void write(AionConnection connection, ByteBuf buffer) {
 		setBuf(buffer);
-		buf.putShort((short) 0);
+		int start = buf.writerIndex();
+		buf.writeShortLE(0);
+		buf.writeShortLE(getOpCode());
 		writeImpl(connection);
-		buf.flip();
-		buf.putShort((short) buf.limit());
-		buf.position(0);
+		buf.setShortLE(start, buf.writerIndex() - start);
 	}
 
 	protected abstract void writeImpl(AionConnection connection);

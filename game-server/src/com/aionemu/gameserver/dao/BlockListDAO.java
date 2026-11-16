@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -56,28 +57,30 @@ public class BlockListDAO {
 	}
 
 	public static BlockList load(int playerObjId) {
-		Map<Integer, BlockedPlayer> list = new HashMap<>();
+		Map<Integer, String> reasonByBlockedId = new LinkedHashMap<>();
 
 		DB.select(LOAD_QUERY, new ParamReadStH() {
 
 			@Override
 			public void handleRead(ResultSet rset) throws SQLException {
-				while (rset.next()) {
-					int blockedOid = rset.getInt("blocked_player");
-					String name = PlayerService.getPlayerName(blockedOid);
-					if (name == null) {
-						log.error("Attempt to load block list for player {} tried to load a player which does not exist: {}", playerObjId, blockedOid);
-					} else {
-						list.put(blockedOid, new BlockedPlayer(blockedOid, name, rset.getString("reason")));
-					}
-				}
-
+				while (rset.next())
+					reasonByBlockedId.put(rset.getInt("blocked_player"), rset.getString("reason"));
 			}
 
 			@Override
 			public void setParams(PreparedStatement stmt) throws SQLException {
 				stmt.setInt(1, playerObjId);
 			}
+		});
+
+		// names are looked up after DB.select returned its connection, since a lookup may take another one
+		Map<Integer, BlockedPlayer> list = new HashMap<>();
+		reasonByBlockedId.forEach((blockedOid, reason) -> {
+			String name = PlayerService.getPlayerName(blockedOid);
+			if (name == null)
+				log.error("Attempt to load block list for player {} tried to load a player which does not exist: {}", playerObjId, blockedOid);
+			else
+				list.put(blockedOid, new BlockedPlayer(blockedOid, name, reason));
 		});
 		return new BlockList(list);
 	}

@@ -1,12 +1,12 @@
 package com.aionemu.gameserver.network.aion.iteminfo;
 
-import java.nio.ByteBuffer;
-
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.calc.functions.IStatFunction;
 import com.aionemu.gameserver.network.PacketWriteHelper;
 import com.aionemu.gameserver.network.aion.iteminfo.ItemInfoBlob.ItemBlobType;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * ItemInfo blob entry (contains detailed item info). Client does have blob tree as implemented, it contains sequence of blobs. Just blame Nemesiss
@@ -32,12 +32,12 @@ public abstract class ItemBlobEntry extends PacketWriteHelper {
 	}
 
 	@Override
-	protected void writeMe(ByteBuffer buf) {
+	protected void writeMe(ByteBuf buf) {
 		writeC(buf, type.getEntryId());
 		writeThisBlob(buf);
 	}
 
-	public abstract void writeThisBlob(ByteBuffer buf);
+	public abstract void writeThisBlob(ByteBuf buf);
 
 	public abstract int getSize();
 

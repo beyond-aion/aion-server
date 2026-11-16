@@ -1,8 +1,9 @@
 package com.aionemu.loginserver.network.aion;
 
-import java.nio.ByteBuffer;
 import java.security.interfaces.RSAPrivateKey;
 import java.util.concurrent.Executor;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 
 import javax.crypto.SecretKey;
 
@@ -10,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.network.netty.NettyConnection;
+import com.aionemu.commons.network.netty.NettyPipeline;
 import com.aionemu.commons.network.packet.BaseClientPacket;
 import com.aionemu.loginserver.configs.Config;
 import com.aionemu.loginserver.controller.AccountController;
@@ -21,7 +23,9 @@ import com.aionemu.loginserver.network.ncrypt.CryptEngine;
 import com.aionemu.loginserver.network.ncrypt.EncryptedRSAKeyPair;
 import com.aionemu.loginserver.network.ncrypt.KeyGen;
 
+import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
+import io.netty.util.concurrent.GlobalEventExecutor;
 
 /**
  * Object representing connection between LoginServer and Aion Client.
@@ -35,6 +39,13 @@ public class LoginConnection extends NettyConnection<AionServerPacket> {
 	 */
 	private static final Logger log = LoggerFactory.getLogger(LoginConnection.class);
 
+	private static final int MAX_PACKET_SIZE = 8192 * 2;
+	/**
+	 * Time a client that chose a game server has to log in there after leaving the login server. Afterwards its session key is no longer accepted.
+	 */
+	static volatile long joinTimeoutMillis = 60_000;
+	private volatile ScheduledFuture<?> joinTimeout;
+
 	/**
 	 * Unique Session Id of this connection
 	 */
@@ -43,17 +54,17 @@ public class LoginConnection extends NettyConnection<AionServerPacket> {
 	/**
 	 * Account object for this connection. if state = AUTHED_LOGIN account cant be null.
 	 */
-	private Account account;
+	private volatile Account account;
 
 	/**
-	 * Crypt to encrypt/decrypt packets
+	 * Crypt to encrypt/decrypt packets. Only used by the I/O thread of the channel.
 	 */
-	private CryptEngine cryptEngine;
+	private final CryptEngine cryptEngine = new CryptEngine();
 
 	/**
 	 * True if this user is connecting to GS.
 	 */
-	private boolean joinedGs;
+	private volatile boolean joinedGs; // set by a packet of the game server, read when this connection closes
 
 	/**
 	 * Scrambled key pair for RSA
@@ -63,7 +74,7 @@ public class LoginConnection extends NettyConnection<AionServerPacket> {
 	/**
 	 * Session Key for this connection.
 	 */
-	private SessionKey sessionKey;
+	private volatile SessionKey sessionKey;
 
 	/**
 	 * Current state of this connection
@@ -95,30 +106,48 @@ public class LoginConnection extends NettyConnection<AionServerPacket> {
 	}
 
 	/**
-	 * Decrypts the packet and creates it. A packet with a wrong checksum closes the connection.
+	 * Sets up the channel of an Aion game client.
+	 */
+	public static void initChannel(Channel channel, Executor packetExecutor) {
+		LoginConnection connection = new LoginConnection(channel, packetExecutor);
+		NettyPipeline.init(channel, connection, MAX_PACKET_SIZE, MAX_PACKET_SIZE, new LoginCryptHandler(connection, connection.cryptEngine));
+	}
+
+	/**
+	 * Creates the packet from the decrypted data, which the crypt handler has already verified.
 	 */
 	@Override
-	protected BaseClientPacket<?> createPacket(ByteBuffer data) {
-		if (!cryptEngine.decrypt(data, data.position(), data.remaining())) {
-			log.warn("Wrong checksum from {}", this);
-			close();
-			return null;
-		}
-		data.limit(data.limit() - 8); // the checksum word and the unused word after it
-		return AionPacketHandlerFactory.handle(data, this);
+	protected BaseClientPacket<?> createPacket(ByteBuf data) {
+		BaseClientPacket<?> packet = AionPacketHandlerFactory.handle(data, this);
+		if (packet == null && state != State.AUTHED_LOGIN) // the client sends nothing else before the login, so it's not a client
+			getChannel().close();
+		return packet;
 	}
 
 	@Override
-	protected void writePacket(AionServerPacket packet, ByteBuffer buffer) {
+	protected void writePacket(AionServerPacket packet, ByteBuf buffer) {
 		packet.write(this, buffer);
 	}
 
 	@Override
 	protected final void onDisconnect() {
-		// Remove account only if not joined GameServer yet.
-		if (account != null && !joinedGs) {
-			AccountController.removeAccountOnLS(account);
+		Account account = this.account;
+		if (account == null)
+			return;
+		if (!joinedGs) {
+			AccountController.removeAccountOnLS(this);
 			AccountTimeController.updateOnLogout(account);
+		} else if (AccountController.isRegisteredOnLS(this)) {
+			// The account stays registered for the game server, which asks for its session key when the client arrives there and takes the account
+			// over. A client that never arrives (it crashed, or the game server did) would otherwise stay registered with a valid session key
+			// until someone logs in with the account again.
+			long timeoutMillis = joinTimeoutMillis;
+			joinTimeout = GlobalEventExecutor.INSTANCE.schedule(() -> {
+				if (AccountController.removeAccountOnLS(this))
+					log.info("{} chose a game server but didn't log in there within {} seconds", this, timeoutMillis / 1000);
+			}, timeoutMillis, TimeUnit.MILLISECONDS);
+			if (!AccountController.isRegisteredOnLS(this)) // the game server took the account over just now, before the timer was set
+				cancelJoinTimeout();
 		}
 	}
 
@@ -148,17 +177,12 @@ public class LoginConnection extends NettyConnection<AionServerPacket> {
 	}
 
 	/**
-	 * Encrypt packet.
-	 * 
-	 * @param buf
-	 * @param offset
-	 *          absolute index of the packet data
-	 * @param length
-	 *          size of the packet data
-	 * @return encrypted packet size.
+	 * Called when a game server has taken the account over. The pending timer would keep this connection in memory until it runs.
 	 */
-	public final int encrypt(ByteBuffer buf, int offset, int length) {
-		return cryptEngine.encrypt(buf, offset, length);
+	public void cancelJoinTimeout() {
+		ScheduledFuture<?> joinTimeout = this.joinTimeout;
+		if (joinTimeout != null)
+			joinTimeout.cancel(false);
 	}
 
 	/**
@@ -258,6 +282,7 @@ public class LoginConnection extends NettyConnection<AionServerPacket> {
 	 */
 	@Override
 	public String toString() {
+		Account account = this.account;
 		return (account == null ? "Client " : account + " ") + getIP();
 	}
 
@@ -267,7 +292,6 @@ public class LoginConnection extends NettyConnection<AionServerPacket> {
 		encryptedRSAKeyPair = KeyGen.getEncryptedRSAKeyPair();
 		SecretKey blowfishKey = KeyGen.generateBlowfishKey();
 
-		cryptEngine = new CryptEngine();
 		cryptEngine.updateKey(blowfishKey.getEncoded());
 
 		sendPacket(new SM_INIT(this, blowfishKey));

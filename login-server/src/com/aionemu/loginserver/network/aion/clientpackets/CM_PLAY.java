@@ -1,7 +1,5 @@
 package com.aionemu.loginserver.network.aion.clientpackets;
 
-import java.nio.ByteBuffer;
-
 import com.aionemu.loginserver.GameServerInfo;
 import com.aionemu.loginserver.GameServerTable;
 import com.aionemu.loginserver.network.aion.AionAuthResponse;
@@ -11,6 +9,8 @@ import com.aionemu.loginserver.network.aion.SessionKey;
 import com.aionemu.loginserver.network.aion.serverpackets.SM_LOGIN_FAIL;
 import com.aionemu.loginserver.network.aion.serverpackets.SM_PLAY_FAIL;
 import com.aionemu.loginserver.network.aion.serverpackets.SM_PLAY_OK;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * @author -Nemesiss-
@@ -30,7 +30,7 @@ public class CM_PLAY extends AionClientPacket {
 	 */
 	private byte servId;
 
-	public CM_PLAY(ByteBuffer buf, LoginConnection client, int opCode) {
+	public CM_PLAY(ByteBuf buf, LoginConnection client, int opCode) {
 		super(buf, client, opCode);
 	}
 

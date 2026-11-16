@@ -1,13 +1,16 @@
 package com.aionemu.chatserver.network.aion;
 
-import java.nio.ByteBuffer;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.chatserver.network.aion.AionConnection.State;
 import com.aionemu.chatserver.network.aion.clientpackets.*;
-import com.aionemu.commons.utils.NetworkUtils;
+
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBufUtil;
 
 /**
  * @author ATracer
@@ -15,8 +18,9 @@ import com.aionemu.commons.utils.NetworkUtils;
 public class ClientPacketHandler {
 
 	private static final Logger log = LoggerFactory.getLogger(ClientPacketHandler.class);
+	private static final Set<Integer> loggedUnknownPackets = ConcurrentHashMap.newKeySet();
 
-	public static AbstractClientPacket handle(ByteBuffer buf, AionConnection connection) {
+	public static AbstractClientPacket handle(ByteBuf buf, AionConnection connection) {
 		/*
 			retail (KOR 8.2.22) client packet names for opcodes:
 			0x0012  (Leave channel)
@@ -86,27 +90,29 @@ public class ClientPacketHandler {
 			0x4917 ?   (H: pktsz(0x18)   H: opcode  D: taskID?(search in queue list for task with opcode 0x4916)   D: channelId  Q: userID D: ? )
 			0x4920 ? 
 		 */
-		byte opCode = buf.get();
+		int opCode = buf.readUnsignedShortLE();
+		buf.skipBytes(2); // sequence number, which the client counts from the start value in SM_PLAYER_AUTH_RESPONSE (not checked)
 		State state = connection.getState();
 		AbstractClientPacket clientPacket = null;
 
 		switch (state) {
 			case CONNECTED:
 				switch (opCode) {
-					case 0x30 -> clientPacket = new CM_CHAT_INI(buf, connection, opCode);
-					case 0x05 -> clientPacket = new CM_PLAYER_AUTH(buf, connection, opCode);
+					case 0x4030 -> clientPacket = new CM_CHAT_INI(buf, connection, opCode);
+					case 0x4005 -> clientPacket = new CM_PLAYER_AUTH(buf, connection, opCode);
+					case 0x00FF -> clientPacket = new CM_PING(buf, connection, opCode); // retail accepts the keepalive before the login too
 					default -> logUnknownPacket(opCode, state, buf);
 				}
 				break;
 			case AUTHED:
 				switch (opCode) {
-					case 0x0B -> clientPacket = new CM_CHANNEL_CREATE(buf, connection, opCode);
-					case 0x0D -> clientPacket = new CM_CHANNEL_JOIN(buf, connection, opCode);
-					case 0x10 -> clientPacket = new CM_CHANNEL_REQUEST(buf, connection, opCode);
-					case 0x12 -> clientPacket = new CM_CHANNEL_LEAVE(buf, connection, opCode);
-					case 0x18 -> clientPacket = new CM_CHANNEL_MESSAGE(buf, connection, opCode);
-					case 0x2C -> clientPacket = new CM_PLAYER_INFO(buf, connection, opCode);
-					case (byte) 0xFF -> clientPacket = new CM_PING(buf, connection, opCode);
+					case 0x400B -> clientPacket = new CM_CHANNEL_CREATE(buf, connection, opCode);
+					case 0x400D -> clientPacket = new CM_CHANNEL_JOIN(buf, connection, opCode);
+					case 0x4010 -> clientPacket = new CM_CHANNEL_REQUEST(buf, connection, opCode);
+					case 0x0012 -> clientPacket = new CM_CHANNEL_LEAVE(buf, connection, opCode);
+					case 0x0018 -> clientPacket = new CM_CHANNEL_MESSAGE(buf, connection, opCode);
+					case 0x002C -> clientPacket = new CM_PLAYER_INFO(buf, connection, opCode);
+					case 0x00FF -> clientPacket = new CM_PING(buf, connection, opCode);
 					default -> logUnknownPacket(opCode, state, buf);
 				}
 				break;
@@ -114,8 +120,13 @@ public class ClientPacketHandler {
 		return clientPacket;
 	}
 
-	private static void logUnknownPacket(byte opCode, State state, ByteBuffer buf) {
-		log.warn("Unknown packet received from client: opCode=0x{} state={} length={} data=[{}]", "%02X".formatted(opCode), state, buf.remaining(),
-			NetworkUtils.toHex(buf));
+	/**
+	 * Logs the first unknown packet of each opcode and state, so a client sending many of them can't fill the log.
+	 */
+	private static void logUnknownPacket(int opCode, State state, ByteBuf buf) {
+		if (loggedUnknownPackets.size() < 1000 && loggedUnknownPackets.add(state.ordinal() << 16 | opCode))
+			log.warn("Unknown packet received from client: opCode=0x{} state={} length={} data=[{}]", "%04X".formatted(opCode), state, buf.readableBytes(),
+				ByteBufUtil.hexDump(buf, buf.readerIndex(), Math.min(buf.readableBytes(), 64)));
+		buf.skipBytes(buf.readableBytes());
 	}
 }

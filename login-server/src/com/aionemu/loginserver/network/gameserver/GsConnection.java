@@ -1,6 +1,5 @@
 package com.aionemu.loginserver.network.gameserver;
 
-import java.nio.ByteBuffer;
 import java.util.concurrent.*;
 
 import org.slf4j.Logger;
@@ -13,6 +12,7 @@ import com.aionemu.loginserver.PingPongTask;
 import com.aionemu.loginserver.controller.AccountController;
 import com.aionemu.loginserver.network.factories.GsPacketHandlerFactory;
 
+import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
 
 /**
@@ -58,7 +58,7 @@ public class GsConnection extends NettyConnection<GsServerPacket> {
 	/**
 	 * GameServerInfo for this GsConnection.
 	 */
-	private GameServerInfo gameServerInfo = null;
+	private volatile GameServerInfo gameServerInfo = null;
 
 	private final PingPongTask pingPongTask = new PingPongTask(this);
 
@@ -67,12 +67,12 @@ public class GsConnection extends NettyConnection<GsServerPacket> {
 	}
 
 	@Override
-	protected BaseClientPacket<?> createPacket(ByteBuffer data) {
+	protected BaseClientPacket<?> createPacket(ByteBuf data) {
 		return GsPacketHandlerFactory.handle(data, this);
 	}
 
 	@Override
-	protected void writePacket(GsServerPacket packet, ByteBuffer buffer) {
+	protected void writePacket(GsServerPacket packet, ByteBuf buffer) {
 		packet.write(this, buffer);
 	}
 
@@ -81,14 +81,23 @@ public class GsConnection extends NettyConnection<GsServerPacket> {
 		return 10_000;
 	}
 
+	/**
+	 * A packet that hangs must not keep the ID of the game server taken, so it could not register again.
+	 */
+	@Override
+	protected long getDisconnectTimeoutMillis() {
+		return 30_000;
+	}
+
 	@Override
 	protected final void onDisconnect() {
 		pingPongTask.stop();
 		log.info("{} disconnected", this);
+		GameServerInfo gameServerInfo = this.gameServerInfo;
 		if (gameServerInfo != null) {
+			gameServerInfo.clearAccountsOnGameServer(); // before the server can register again
 			gameServerInfo.setConnection(null);
-			gameServerInfo.clearAccountsOnGameServer();
-			gameServerInfo = null;
+			this.gameServerInfo = null;
 		}
 		AccountController.updateServerListForAllLoggedInPlayers();
 	}
@@ -149,6 +158,7 @@ public class GsConnection extends NettyConnection<GsServerPacket> {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder("Game server");
+		GameServerInfo gameServerInfo = this.gameServerInfo;
 		if (gameServerInfo != null)
 			sb.append(" #").append(gameServerInfo.getId());
 		sb.append(" ").append(getIP());

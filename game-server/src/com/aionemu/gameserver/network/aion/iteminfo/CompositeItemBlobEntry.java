@@ -1,12 +1,13 @@
 package com.aionemu.gameserver.network.aion.iteminfo;
 
-import java.nio.ByteBuffer;
 import java.util.HashMap;
 import java.util.Set;
 
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.items.ManaStone;
 import com.aionemu.gameserver.network.aion.iteminfo.ItemInfoBlob.ItemBlobType;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * This blob is sending info about the item that were fused with current item.
@@ -20,14 +21,14 @@ public class CompositeItemBlobEntry extends ItemBlobEntry {
 	}
 
 	@Override
-	public void writeThisBlob(ByteBuffer buf) {
+	public void writeThisBlob(ByteBuf buf) {
 		writeD(buf, ownerItem.getFusionedItemId());
 		writeFusionStones(buf);
 		writeC(buf, ownerItem.getFusionedItemOptionalSockets()); // additional manastone sockets
 		writeC(buf, ownerItem.getFusionedItemBonusStatsId());
 	}
 
-	private void writeFusionStones(ByteBuffer buf) {
+	private void writeFusionStones(ByteBuf buf) {
 		if (ownerItem.hasFusionStones()) {
 			Set<ManaStone> itemStones = ownerItem.getFusionStones();
 			HashMap<Integer, ManaStone> stonesBySlot = new HashMap<>();

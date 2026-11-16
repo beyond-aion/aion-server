@@ -1,7 +1,5 @@
 package com.aionemu.chatserver.network.factories;
 
-import java.nio.ByteBuffer;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,6 +11,8 @@ import com.aionemu.chatserver.network.gameserver.clientpackets.CM_PLAYER_AUTH;
 import com.aionemu.chatserver.network.gameserver.clientpackets.CM_PLAYER_GAG;
 import com.aionemu.chatserver.network.gameserver.clientpackets.CM_PLAYER_LOGOUT;
 
+import io.netty.buffer.ByteBuf;
+
 /**
  * @author -Nemesiss-
  */
@@ -20,10 +20,10 @@ public class GsPacketHandlerFactory {
 
 	private static final Logger log = LoggerFactory.getLogger(GsPacketHandlerFactory.class);
 
-	public static GsClientPacket handle(ByteBuffer data, GsConnection client) {
+	public static GsClientPacket handle(ByteBuf data, GsConnection client) {
 		GsClientPacket msg = null;
 		GameServerConnectionState state = client.getState();
-		int id = data.get() & 0xff;
+		int id = data.readUnsignedByte();
 
 		switch (state) {
 			case CONNECTED:

@@ -1,6 +1,5 @@
 package com.aionemu.chatserver.network.gameserver.clientpackets;
 
-import java.nio.ByteBuffer;
 import java.security.NoSuchAlgorithmException;
 
 import org.slf4j.Logger;
@@ -12,6 +11,8 @@ import com.aionemu.chatserver.network.gameserver.GsClientPacket;
 import com.aionemu.chatserver.network.gameserver.GsConnection;
 import com.aionemu.chatserver.network.gameserver.serverpackets.SM_PLAYER_AUTH_RESPONSE;
 import com.aionemu.chatserver.service.ChatService;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * @author ATracer
@@ -25,7 +26,7 @@ public class CM_PLAYER_AUTH extends GsClientPacket {
 	private int raceId;
 	private byte accessLevel;
 
-	public CM_PLAYER_AUTH(ByteBuffer buf, GsConnection connection) {
+	public CM_PLAYER_AUTH(ByteBuf buf, GsConnection connection) {
 		super(buf, connection, 0x01);
 	}
 
