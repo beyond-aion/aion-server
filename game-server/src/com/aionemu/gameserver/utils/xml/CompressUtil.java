@@ -11,9 +11,9 @@ import java.util.zip.Inflater;
 public final class CompressUtil {
 
 	/**
-	 * @return True if the bytes are a complete zlib stream that inflates to exactly the given size. Nothing is kept of the inflated data.
+	 * @return Length of the zlib stream at the start of the bytes if it inflates to exactly {@code size}, otherwise -1.
 	 */
-	public static boolean inflatesTo(byte[] bytes, int size) {
+	public static int zlibStreamLength(byte[] bytes, int size) {
 		byte[] buffer = new byte[1024];
 		long inflatedSize = 0;
 		try (Inflater decompressor = new Inflater()) {
@@ -21,14 +21,14 @@ public final class CompressUtil {
 			while (!decompressor.finished()) {
 				int count = decompressor.inflate(buffer);
 				if (count == 0 && (decompressor.needsInput() || decompressor.needsDictionary()))
-					return false;
+					return -1;
 				inflatedSize += count;
 				if (inflatedSize > size)
-					return false;
+					return -1;
 			}
-			return inflatedSize == size && decompressor.getRemaining() == 0;
+			return inflatedSize == size ? bytes.length - decompressor.getRemaining() : -1;
 		} catch (DataFormatException e) {
-			return false;
+			return -1;
 		}
 	}
 
