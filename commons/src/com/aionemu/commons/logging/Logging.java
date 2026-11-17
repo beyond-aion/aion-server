@@ -66,7 +66,7 @@ public class Logging {
 	 * @param uptimeMillis
 	 *          process uptime when the server was started
 	 */
-	public static String formatStartupMessage(String server, long startTimeNanos, long startedNanos, long uptimeMillis) {
+	private static String formatStartupMessage(String server, long startTimeNanos, long startedNanos, long uptimeMillis) {
 		DecimalFormat df = new DecimalFormat("0.0##", DecimalFormatSymbols.getInstance(Locale.US));
 		float startTime = Duration.ofNanos(startedNanos - startTimeNanos).toMillis() / 1000f;
 		return "%s started in %s seconds (process running for %s)".formatted(server, df.format(startTime), df.format(uptimeMillis / 1000f));
