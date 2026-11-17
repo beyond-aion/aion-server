@@ -2,6 +2,8 @@ package com.aionemu.gameserver.dataholders.loadingutils;
 
 import jakarta.xml.bind.Unmarshaller;
 
+import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.dataholders.ItemData;
 import com.aionemu.gameserver.dataholders.StaticData;
 
 /**
@@ -18,7 +20,16 @@ public class StaticDataListener extends Unmarshaller.Listener {
 	}
 
 	public static StaticData get(Unmarshaller u) {
-		Unmarshaller.Listener listener = u.getListener();
-		return listener instanceof StaticDataListener ? ((StaticDataListener) listener).staticData : null;
+		return u.getListener() instanceof StaticDataListener staticDataListener ? staticDataListener.staticData : null;
+	}
+
+	public static ItemData getItemData(Unmarshaller u) {
+		StaticData staticData = get(u);
+		if (staticData != null) {
+			StaticDataLoader.waitForItemTemplates(u);
+			return staticData.itemData;
+		} else {
+			return DataManager.ITEM_DATA;
+		}
 	}
 }
