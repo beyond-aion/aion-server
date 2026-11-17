@@ -5,12 +5,7 @@ import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.zip.CRC32;
@@ -20,8 +15,6 @@ import javax.xml.parsers.SAXParserFactory;
 import javax.xml.stream.*;
 import javax.xml.stream.events.XMLEvent;
 
-import com.fasterxml.aalto.stax.InputFactoryImpl;
-import com.fasterxml.aalto.stax.OutputFactoryImpl;
 import org.glassfish.jaxb.runtime.v2.util.ByteArrayOutputStreamEx;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,6 +27,8 @@ import org.xml.sax.helpers.DefaultHandler;
 import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.xml.XmlUtil;
+import com.fasterxml.aalto.stax.InputFactoryImpl;
+import com.fasterxml.aalto.stax.OutputFactoryImpl;
 
 /**
  * <p>
@@ -116,15 +111,18 @@ public class XmlMerger {
 		if (!sourceFile.isFile())
 			throw new FileNotFoundException("Source file " + sourceFile.getPath() + " not found.");
 
+		Split split;
 		if (!destFile.isFile()) {
 			log.info("Cache file not found. Updating...");
 		} else if (!metaDataFile.isFile()) {
 			log.info("Metadata file not found. Updating...");
+		} else if ((split = Split.read(destFile)) == null) {
+			log.info("Byte range file is missing or outdated. Updating...");
 		} else if (checkFileModifications()) {
 			log.info("Modifications found. Updating...");
 		} else {
 			log.info("Cache file is up to date");
-			return new MergeResult(destFile, null, 0, Split.read(destFile));
+			return new MergeResult(destFile, null, 0, split);
 		}
 
 		return mergeAndWrite();
@@ -752,13 +750,13 @@ public class XmlMerger {
 
 		static Split read(File destFile) {
 			File rangesFile = new File(destFile.getPath() + FILE_SUFFIX);
-			if (!rangesFile.isFile())
+			if (!rangesFile.isFile() || destFile.lastModified() > rangesFile.lastModified())
 				return null;
 			try {
 				List<String> lines = Files.readAllLines(rangesFile.toPath());
 				if (lines.isEmpty())
 					return null;
-				String[] header = lines.get(0).trim().split(" ");
+				String[] header = lines.getFirst().trim().split(" ");
 				if (header.length != 3)
 					return null;
 				int headerEnd = Integer.parseInt(header[0]);

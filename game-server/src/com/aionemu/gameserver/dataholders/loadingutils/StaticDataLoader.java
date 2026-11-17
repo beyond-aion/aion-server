@@ -46,8 +46,7 @@ public class StaticDataLoader {
 	}
 
 	public static StaticData load(XmlMerger.MergeResult mergeResult) throws IOException {
-		XmlMerger.Split split = mergeResult.getSplit();
-		if (split == null || THREADS < 2)
+		if (THREADS < 2)
 			return JAXBUtil.deserialize(mergeResult.newReader(), StaticData.class);
 
 		byte[] data = mergeResult.getBuffer();
@@ -61,7 +60,7 @@ public class StaticDataLoader {
 		}
 
 		try {
-			return parse(data, split);
+			return parse(data, mergeResult.getSplit());
 		} catch (Exception e) {
 			log.warn("Parallel static data parsing failed, falling back to a single unmarshal", e);
 			return JAXBUtil.deserialize(mergeResult.newReader(), StaticData.class);
