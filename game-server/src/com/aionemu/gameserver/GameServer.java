@@ -19,7 +19,6 @@ import com.aionemu.commons.logging.Logging;
 import com.aionemu.commons.network.NioServer;
 import com.aionemu.commons.network.ServerCfg;
 import com.aionemu.commons.utils.concurrent.UncaughtExceptionHandler;
-import com.aionemu.commons.utils.info.SystemInfo;
 import com.aionemu.commons.utils.info.VersionInfo;
 import com.aionemu.gameserver.ai.AIEngine;
 import com.aionemu.gameserver.cache.HTMLCache;
@@ -87,7 +86,6 @@ public class GameServer {
 	public static final VersionInfo versionInfo = new VersionInfo(GameServer.class);
 
 	private static NioServer nioServer;
-	private static volatile boolean starting = true;
 
 	// TODO remove all this shit
 	private static int ELYOS_COUNT = 0;
@@ -103,9 +101,7 @@ public class GameServer {
 		JAXBUtil.preLoadContextAsync(StaticData.class); // do this early so DataManager doesn't need to wait as long
 		initUtilityServicesAndConfig();
 		CompletableFuture<Void> databaseInit = CompletableFuture.runAsync(GameServer::initDatabase); // connect to the database while static data is being loaded
-
 		DataManager.getInstance();
-
 		awaitDatabaseInit(databaseInit);
 
 		Stream.of(QuestEngine.getInstance(), AIEngine.getInstance(), InstanceEngine.getInstance(), ChatProcessor.getInstance(), ZoneService.getInstance(),
@@ -185,21 +181,12 @@ public class GameServer {
 		CustomInstanceService.getInstance();
 		DataManager.waitForValidationToFinishAndShutdownOnFail();
 
-		starting = false; // once the port is open, players can connect, so startup only work must not happen anymore
 		nioServer = initNioServer();
 		Runtime.getRuntime().addShutdownHook(ShutdownHook.getInstance());
 		LoginServer.getInstance().connect(nioServer);
 		if (GSConfig.ENABLE_CHAT_SERVER)
 			ChatServer.getInstance().connect(nioServer);
-
-		long startedNanos = System.nanoTime();
-		long uptimeMillis = ManagementFactory.getRuntimeMXBean().getUptime();
-		System.gc(); // after opening the port, so players don't wait for it, but before logging the memory usage
-		long gcMillis = Duration.ofNanos(System.nanoTime() - startedNanos).toMillis();
-
-		VersionInfo.logAll(versionInfo, GSConfig.TIME_ZONE_ID);
-		SystemInfo.logAll();
-		log.info(Logging.formatStartupMessage("Game server", START_TIME_NANOS, startedNanos, uptimeMillis, gcMillis));
+		Logging.logStartupStats(GameServer.class, START_TIME_NANOS, versionInfo, GSConfig.TIME_ZONE_ID);
 	}
 
 	/**
@@ -236,11 +223,6 @@ public class GameServer {
 		CronService.initSingleton(ThreadPoolManagerRunnableRunner.class, TimeZone.getTimeZone(GSConfig.TIME_ZONE_ID));
 	}
 
-	/**
-	 * Connects to the database, resets the online state of all characters and initializes the used ids. Runs concurrently with the static data
-	 * loading, so callers must wait for it with {@link #awaitDatabaseInit(CompletableFuture)} before any character data is read or any id is
-	 * allocated.
-	 */
 	private static void initDatabase() {
 		DatabaseFactory.init();
 		PlayerDAO.setAllPlayersOffline();
@@ -263,7 +245,6 @@ public class GameServer {
 			if (forceStaffClientsToServerSelectionScreen())
 				LockSupport.parkNanos(Duration.ofMillis(200).toNanos()); // wait for login server to accept reconnections
 			nioServer.shutdown();
-			nioServer = null;
 		}
 	}
 
@@ -291,7 +272,7 @@ public class GameServer {
 	 * @return true while the server is starting up and has not opened its port yet
 	 */
 	public static boolean isStarting() {
-		return starting;
+		return nioServer == null;
 	}
 
 	public static boolean isShuttingDownSoon() {
