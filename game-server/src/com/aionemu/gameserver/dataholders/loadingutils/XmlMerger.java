@@ -88,8 +88,6 @@ public class XmlMerger {
 
 	private static final Map<Integer, String> COUNTRY_REGION = Map.of(1, "usa", 2, "europe", 4, "japan", 5, "china", 6, "taiwan", 7, "russia");
 
-	private static final byte[] XML_DECLARATION = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>".getBytes(StandardCharsets.UTF_8);
-
 	private final File sourceFile;
 	private final File destFile;
 	private final File metaDataFile;
@@ -171,7 +169,7 @@ public class XmlMerger {
 
 		try (FileReader fileReader = new FileReader(sourceFile)) {
 			ByteArrayOutputStreamEx outputStream = new ByteArrayOutputStreamEx(100 * 1024 * 1024);
-			writer = outputFactory.createXMLStreamWriter(new BufferedWriter(new OutputStreamWriter(outputStream, StandardCharsets.UTF_8)));
+			writer = outputFactory.createXMLStreamWriter(new BufferedWriter(new OutputStreamWriter(outputStream)));
 			reader = inputFactory.createXMLStreamReader(fileReader);
 
 			writer.writeStartDocument();
@@ -233,7 +231,7 @@ public class XmlMerger {
 			MergeResult mergeResult = new MergeResult(destFile, outputStream.getBuffer(), outputStream.size(), split);
 			mergeResult.fileWriteTask = ThreadPoolManager.getInstance().submit(() -> {
 				destFile.getParentFile().mkdirs();
-				try (Reader mergeResultReader = mergeResult.newReader(); Writer fileWriter = Files.newBufferedWriter(destFile.toPath(), StandardCharsets.UTF_8)) {
+				try (Reader mergeResultReader = mergeResult.newReader(); Writer fileWriter = Files.newBufferedWriter(destFile.toPath())) {
 					mergeResultReader.transferTo(fileWriter);
 					metadata.store(metaDataFile);
 					split.store(destFile);
@@ -262,7 +260,7 @@ public class XmlMerger {
 		int rootStart = findRootStart(source);
 		int rootTagEnd = findTagEnd(source, rootStart);
 		String rootName = elementName(source, rootStart);
-		outputStream.write(XML_DECLARATION);
+		outputStream.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>".getBytes());
 		outputStream.write(source, rootStart, rootTagEnd - rootStart + 1);
 		int headerEnd = outputStream.size();
 
@@ -281,7 +279,7 @@ public class XmlMerger {
 		}
 
 		int tailStart = outputStream.size();
-		outputStream.write(("</" + rootName + ">").getBytes(StandardCharsets.UTF_8));
+		outputStream.write(("</" + rootName + ">").getBytes());
 		int docEnd = outputStream.size();
 
 		Split split = new Split(headerEnd, tailStart, docEnd, ranges);
@@ -324,7 +322,7 @@ public class XmlMerger {
 		if (singleRootTag) {
 			if (rootName == null)
 				throw new IOException("No files to import in " + file);
-			out.write(("</" + rootName + ">").getBytes(StandardCharsets.UTF_8));
+			out.write(("</" + rootName + ">").getBytes());
 		}
 	}
 
@@ -399,7 +397,7 @@ public class XmlMerger {
 		int i = tagStart + 1;
 		while (i < bytes.length && !isWhitespace(bytes[i]) && bytes[i] != '>' && bytes[i] != '/')
 			i++;
-		return new String(bytes, tagStart + 1, i - tagStart - 1, StandardCharsets.UTF_8);
+		return new String(bytes, tagStart + 1, i - tagStart - 1);
 	}
 
 	private static boolean isSelfClosing(byte[] bytes, int tagStart, int tagEnd) {
@@ -411,7 +409,7 @@ public class XmlMerger {
 	}
 
 	private static int findRootEnd(byte[] bytes, String name) {
-		byte[] closing = ("</" + name).getBytes(StandardCharsets.UTF_8);
+		byte[] closing = ("</" + name).getBytes();
 		for (int i = bytes.length - closing.length - 1; i > 0; i--) {
 			if (matches(bytes, i, closing)) {
 				int next = i + closing.length;
@@ -819,9 +817,9 @@ public class XmlMerger {
 
 		public Reader newReader() throws IOException {
 			if (buffer == null) {
-				return Files.newBufferedReader(file.toPath(), StandardCharsets.UTF_8);
+				return Files.newBufferedReader(file.toPath());
 			} else {
-				return new InputStreamReader(new ByteArrayInputStream(buffer, 0, size), StandardCharsets.UTF_8);
+				return new InputStreamReader(new ByteArrayInputStream(buffer, 0, size));
 			}
 		}
 
