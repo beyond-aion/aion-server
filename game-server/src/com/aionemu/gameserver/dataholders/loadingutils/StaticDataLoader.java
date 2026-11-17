@@ -50,19 +50,13 @@ public class StaticDataLoader {
 			return JAXBUtil.deserialize(mergeResult.newReader(), StaticData.class);
 
 		byte[] data = mergeResult.getBuffer();
-		if (data == null) {
-			try {
-				data = Files.readAllBytes(mergeResult.getFile().toPath());
-			} catch (IOException e) {
-				log.warn("Could not read {}, falling back to a single unmarshal", mergeResult.getFile(), e);
-				return JAXBUtil.deserialize(mergeResult.newReader(), StaticData.class);
-			}
-		}
+		if (data == null)
+			data = Files.readAllBytes(mergeResult.getFile().toPath());
 
 		try {
 			return parse(data, mergeResult.getSplit());
 		} catch (Exception e) {
-			log.warn("Parallel static data parsing failed, falling back to a single unmarshal", e);
+			log.error("Parallel static data parsing failed, falling back to a single unmarshal", e);
 			return JAXBUtil.deserialize(mergeResult.newReader(), StaticData.class);
 		}
 	}
