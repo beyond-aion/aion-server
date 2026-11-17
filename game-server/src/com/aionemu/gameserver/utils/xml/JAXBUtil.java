@@ -10,12 +10,13 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.Future;
 
+import javax.xml.transform.stream.StreamSource;
+import javax.xml.validation.Schema;
+
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Marshaller;
 import jakarta.xml.bind.Unmarshaller;
-import javax.xml.transform.stream.StreamSource;
-import javax.xml.validation.Schema;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -47,6 +48,11 @@ public class JAXBUtil {
 				throw new RuntimeException("Failed to create JAXB context for " + c.getName(), e);
 			}
 		});
+	}
+
+	public static void removeContext(Class<?> clazz) {
+		CONTEXTS.remove(clazz);
+		RESOLVED_CONTEXTS.remove(clazz);
 	}
 
 	public static Unmarshaller newUnmarshaller(JAXBContext context) {

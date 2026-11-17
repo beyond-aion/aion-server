@@ -9,21 +9,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+import java.util.concurrent.*;
+
+import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.XMLStreamConstants;
+import javax.xml.stream.XMLStreamReader;
 
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBElement;
 import jakarta.xml.bind.Unmarshaller;
 import jakarta.xml.bind.annotation.XmlElement;
-import javax.xml.stream.XMLInputFactory;
-import javax.xml.stream.XMLStreamConstants;
-import javax.xml.stream.XMLStreamReader;
 
-import com.fasterxml.aalto.stax.InputFactoryImpl;
 import org.glassfish.jaxb.runtime.IDResolver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,13 +27,12 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.gameserver.dataholders.StaticData;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.utils.xml.JAXBUtil;
+import com.fasterxml.aalto.stax.InputFactoryImpl;
 
 /**
  * Unmarshals the merged static data cache. The cache is a sequence of independent top-level elements, so instead of one large unmarshal the
  * element ranges recorded by {@link XmlMerger} are unmarshalled in parallel and the resulting objects are assigned to the fields of
  * {@link StaticData}. Falls back to a single unmarshal if the cache was not split or if anything goes wrong.
- *
- * @author Neon
  */
 public class StaticDataLoader {
 
@@ -216,9 +211,7 @@ public class StaticDataLoader {
 		}
 	}
 
-	private record Element(String name, Field field, int start, int end) {
-	}
+	private record Element(String name, Field field, int start, int end) {}
 
-	private record ElementTask(Element element, Future<?> future) {
-	}
+	private record ElementTask(Element element, Future<?> future) {}
 }

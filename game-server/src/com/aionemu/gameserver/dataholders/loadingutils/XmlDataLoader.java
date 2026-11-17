@@ -13,6 +13,7 @@ import org.xml.sax.InputSource;
 import com.aionemu.gameserver.GameServerError;
 import com.aionemu.gameserver.dataholders.StaticData;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+import com.aionemu.gameserver.utils.xml.JAXBUtil;
 import com.aionemu.gameserver.utils.xml.XmlUtil;
 
 /**
@@ -48,6 +49,7 @@ public class XmlDataLoader {
 			// schema validation by the unmarshaller slows down the server start, so we validate manually in another thread and don't let the server start on error
 			Future<?> validationTask = mergeResult.fileIsModified() ? validateAsync(mergeResult) : null;
 			StaticData staticData = StaticDataLoader.load(mergeResult);
+			JAXBUtil.removeContext(StaticData.class);
 			staticData.setValidationTask(validationTask);
 			return staticData;
 		} catch (Throwable e) {
