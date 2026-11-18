@@ -102,10 +102,6 @@ public class RentusBaseInstance extends GeneralInstanceHandler {
 	@Override
 	public void onAggro(Npc npc) {
 		switch (npc.getNpcId()) {
-			case 217311: // Kuhara
-				instance.setDoorState(43, true);
-				PacketSendUtility.broadcastMessage(npc, 1500393);
-				break;
 			case 217313: // Vasharti
 				instance.setDoorState(70, false);
 				break;

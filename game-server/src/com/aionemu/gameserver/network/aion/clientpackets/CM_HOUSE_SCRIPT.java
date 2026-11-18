@@ -17,10 +17,6 @@ import com.aionemu.gameserver.utils.audit.AuditLogger;
  */
 public class CM_HOUSE_SCRIPT extends AionClientPacket {
 
-	/**
-	 * Limit of the script block (both sizes and the compressed script), the client refuses to send larger ones.
-	 */
-	private static final int MAX_SCRIPT_BLOCK_SIZE = 3072;
 	private int address;
 	private int scriptId;
 	private int totalSize;
@@ -37,7 +33,7 @@ public class CM_HOUSE_SCRIPT extends AionClientPacket {
 		address = readD();
 		scriptId = readUC();
 		totalSize = readUH();
-		if (totalSize > 0 && totalSize <= MAX_SCRIPT_BLOCK_SIZE) {
+		if (totalSize > 0 && totalSize <= PlayerScripts.MAX_SCRIPT_BLOCK_SIZE) {
 			compressedSize = readD();
 			uncompressedSize = readD();
 			if (compressedSize >= 0 && compressedSize <= totalSize - 8)
@@ -48,7 +44,7 @@ public class CM_HOUSE_SCRIPT extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
-		if (totalSize > MAX_SCRIPT_BLOCK_SIZE) {
+		if (totalSize > PlayerScripts.MAX_SCRIPT_BLOCK_SIZE) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_SCRIPT_OVERFLOW());
 			return;
 		}

@@ -44,7 +44,9 @@ public class ChatService {
 		byte[] accountToken = md.digest();
 		byte[] token = generateToken(accountToken);
 		ChatClient chatClient = new ChatClient(playerId, token, accName, nick, race, accessLevel);
-		players.put(playerId, chatClient);
+		ChatClient oldClient = players.put(playerId, chatClient);
+		if (oldClient != null)
+			ChatChannels.leaveAll(oldClient);
 		return chatClient;
 	}
 
@@ -83,9 +85,8 @@ public class ChatService {
 	}
 
 	public void registerPlayerWithChannel(AionConnection connection, int channelRequestId, String identifier) {
-		Channel channel = ChatChannels.getOrCreate(connection.getChatClient(), identifier);
+		Channel channel = ChatChannels.join(connection.getChatClient(), identifier);
 		if (channel != null) {
-			connection.getChatClient().addChannel(channel);
 			connection.sendPacket(new SM_CHANNEL_RESPONSE(channel, channelRequestId));
 		}
 	}
@@ -94,6 +95,7 @@ public class ChatService {
 		ChatClient chatClient = players.remove(playerId);
 		if (chatClient != null) {
 			BroadcastService.getInstance().removeClient(chatClient);
+			ChatChannels.leaveAll(chatClient);
 			log.info("Player[id={}] logged out ", playerId);
 			if (chatClient.getConnection() != null)
 				chatClient.getConnection().close();

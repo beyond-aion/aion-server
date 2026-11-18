@@ -7489,7 +7489,7 @@
 		<set>
 			<item id="167000450" chance="4.38"/><!-- Manastone: HP +65 -->
 			<item id="167000451" chance="4.37"/><!-- Manastone: MP +65 -->
-			<item id="167000454" chance="4.38"/><!-- Manastone: Attack +4 -->
+			<item id="167000454" chance="8.75"/><!-- Manastone: Attack +4 -->
 			<item id="167000455" chance="4.37"/><!-- Manastone: Magic Boost +21 -->
 			<item id="167000459" chance="4.38"/><!-- Manastone: Crit Strike +11 -->
 			<item id="167000537" chance="4.37"/><!-- Manastone: Magical Accuracy +8 -->
@@ -7523,7 +7523,7 @@
 		<set>
 			<item id="167000450" chance="4.04"/><!-- Manastone: HP +65 -->
 			<item id="167000451" chance="4.04"/><!-- Manastone: MP +65 -->
-			<item id="167000454" chance="4.05"/><!-- Manastone: Attack +4 -->
+			<item id="167000454" chance="8.09"/><!-- Manastone: Attack +4 -->
 			<item id="167000455" chance="4.04"/><!-- Manastone: Magic Boost +21 -->
 			<item id="167000459" chance="4.04"/><!-- Manastone: Crit Strike +11 -->
 			<item id="167000537" chance="4.04"/><!-- Manastone: Magical Accuracy +8 -->
@@ -7557,7 +7557,7 @@
 		<set>
 			<item id="167000450" chance="3.41"/><!-- Manastone: HP +65 -->
 			<item id="167000451" chance="3.4"/><!-- Manastone: MP +65 -->
-			<item id="167000454" chance="3.41"/><!-- Manastone: Attack +4 -->
+			<item id="167000454" chance="6.82"/><!-- Manastone: Attack +4 -->
 			<item id="167000455" chance="3.41"/><!-- Manastone: Magic Boost +21 -->
 			<item id="167000459" chance="3.41"/><!-- Manastone: Crit Strike +11 -->
 			<item id="167000537" chance="3.41"/><!-- Manastone: Magical Accuracy +8 -->
@@ -8557,7 +8557,7 @@
 		<set>
 			<item id="167000450" chance="4.38"/><!-- Manastone: HP +65 -->
 			<item id="167000451" chance="4.37"/><!-- Manastone: MP +65 -->
-			<item id="167000454" chance="4.38"/><!-- Manastone: Attack +4 -->
+			<item id="167000454" chance="8.75"/><!-- Manastone: Attack +4 -->
 			<item id="167000455" chance="4.37"/><!-- Manastone: Magic Boost +21 -->
 			<item id="167000459" chance="4.38"/><!-- Manastone: Crit Strike +11 -->
 			<item id="167000537" chance="4.37"/><!-- Manastone: Magical Accuracy +8 -->
@@ -8591,7 +8591,7 @@
 		<set>
 			<item id="167000450" chance="4.04"/><!-- Manastone: HP +65 -->
 			<item id="167000451" chance="4.04"/><!-- Manastone: MP +65 -->
-			<item id="167000454" chance="4.05"/><!-- Manastone: Attack +4 -->
+			<item id="167000454" chance="8.09"/><!-- Manastone: Attack +4 -->
 			<item id="167000455" chance="4.04"/><!-- Manastone: Magic Boost +21 -->
 			<item id="167000459" chance="4.04"/><!-- Manastone: Crit Strike +11 -->
 			<item id="167000537" chance="4.04"/><!-- Manastone: Magical Accuracy +8 -->
@@ -8625,7 +8625,7 @@
 		<set>
 			<item id="167000450" chance="3.41"/><!-- Manastone: HP +65 -->
 			<item id="167000451" chance="3.4"/><!-- Manastone: MP +65 -->
-			<item id="167000454" chance="3.41"/><!-- Manastone: Attack +4 -->
+			<item id="167000454" chance="6.82"/><!-- Manastone: Attack +4 -->
 			<item id="167000455" chance="3.41"/><!-- Manastone: Magic Boost +21 -->
 			<item id="167000459" chance="3.41"/><!-- Manastone: Crit Strike +11 -->
 			<item id="167000537" chance="3.41"/><!-- Manastone: Magical Accuracy +8 -->
@@ -8659,7 +8659,7 @@
 		<set>
 			<item id="167000450" chance="4.38"/><!-- Manastone: HP +65 -->
 			<item id="167000451" chance="4.37"/><!-- Manastone: MP +65 -->
-			<item id="167000454" chance="4.38"/><!-- Manastone: Attack +4 -->
+			<item id="167000454" chance="8.75"/><!-- Manastone: Attack +4 -->
 			<item id="167000455" chance="4.37"/><!-- Manastone: Magic Boost +21 -->
 			<item id="167000459" chance="4.38"/><!-- Manastone: Crit Strike +11 -->
 			<item id="167000537" chance="4.37"/><!-- Manastone: Magical Accuracy +8 -->
@@ -8693,7 +8693,7 @@
 		<set>
 			<item id="167000450" chance="4.04"/><!-- Manastone: HP +65 -->
 			<item id="167000451" chance="4.04"/><!-- Manastone: MP +65 -->
-			<item id="167000454" chance="4.05"/><!-- Manastone: Attack +4 -->
+			<item id="167000454" chance="8.09"/><!-- Manastone: Attack +4 -->
 			<item id="167000455" chance="4.04"/><!-- Manastone: Magic Boost +21 -->
 			<item id="167000459" chance="4.04"/><!-- Manastone: Crit Strike +11 -->
 			<item id="167000537" chance="4.04"/><!-- Manastone: Magical Accuracy +8 -->
@@ -8727,7 +8727,7 @@
 		<set>
 			<item id="167000450" chance="3.41"/><!-- Manastone: HP +65 -->
 			<item id="167000451" chance="3.4"/><!-- Manastone: MP +65 -->
-			<item id="167000454" chance="3.41"/><!-- Manastone: Attack +4 -->
+			<item id="167000454" chance="6.82"/><!-- Manastone: Attack +4 -->
 			<item id="167000455" chance="3.41"/><!-- Manastone: Magic Boost +21 -->
 			<item id="167000459" chance="3.41"/><!-- Manastone: Crit Strike +11 -->
 			<item id="167000537" chance="3.41"/><!-- Manastone: Magical Accuracy +8 -->
@@ -8761,7 +8761,7 @@
 		<set>
 			<item id="167000450" chance="4.38"/><!-- Manastone: HP +65 -->
 			<item id="167000451" chance="4.37"/><!-- Manastone: MP +65 -->
-			<item id="167000454" chance="4.38"/><!-- Manastone: Attack +4 -->
+			<item id="167000454" chance="8.75"/><!-- Manastone: Attack +4 -->
 			<item id="167000455" chance="4.37"/><!-- Manastone: Magic Boost +21 -->
 			<item id="167000459" chance="4.38"/><!-- Manastone: Crit Strike +11 -->
 			<item id="167000537" chance="4.37"/><!-- Manastone: Magical Accuracy +8 -->
@@ -8795,7 +8795,7 @@
 		<set>
 			<item id="167000450" chance="4.04"/><!-- Manastone: HP +65 -->
 			<item id="167000451" chance="4.04"/><!-- Manastone: MP +65 -->
-			<item id="167000454" chance="4.05"/><!-- Manastone: Attack +4 -->
+			<item id="167000454" chance="8.09"/><!-- Manastone: Attack +4 -->
 			<item id="167000455" chance="4.04"/><!-- Manastone: Magic Boost +21 -->
 			<item id="167000459" chance="4.04"/><!-- Manastone: Crit Strike +11 -->
 			<item id="167000537" chance="4.04"/><!-- Manastone: Magical Accuracy +8 -->
@@ -8829,7 +8829,7 @@
 		<set>
 			<item id="167000450" chance="3.41"/><!-- Manastone: HP +65 -->
 			<item id="167000451" chance="3.4"/><!-- Manastone: MP +65 -->
-			<item id="167000454" chance="3.41"/><!-- Manastone: Attack +4 -->
+			<item id="167000454" chance="6.82"/><!-- Manastone: Attack +4 -->
 			<item id="167000455" chance="3.41"/><!-- Manastone: Magic Boost +21 -->
 			<item id="167000459" chance="3.41"/><!-- Manastone: Crit Strike +11 -->
 			<item id="167000537" chance="3.41"/><!-- Manastone: Magical Accuracy +8 -->
@@ -9222,7 +9222,7 @@
 		<set>
 			<item id="167000450" chance="4.38"/><!-- Manastone: HP +65 -->
 			<item id="167000451" chance="4.37"/><!-- Manastone: MP +65 -->
-			<item id="167000454" chance="4.38"/><!-- Manastone: Attack +4 -->
+			<item id="167000454" chance="8.75"/><!-- Manastone: Attack +4 -->
 			<item id="167000455" chance="4.37"/><!-- Manastone: Magic Boost +21 -->
 			<item id="167000459" chance="4.38"/><!-- Manastone: Crit Strike +11 -->
 			<item id="167000537" chance="4.37"/><!-- Manastone: Magical Accuracy +8 -->
@@ -9256,7 +9256,7 @@
 		<set>
 			<item id="167000450" chance="4.04"/><!-- Manastone: HP +65 -->
 			<item id="167000451" chance="4.04"/><!-- Manastone: MP +65 -->
-			<item id="167000454" chance="4.05"/><!-- Manastone: Attack +4 -->
+			<item id="167000454" chance="8.09"/><!-- Manastone: Attack +4 -->
 			<item id="167000455" chance="4.04"/><!-- Manastone: Magic Boost +21 -->
 			<item id="167000459" chance="4.04"/><!-- Manastone: Crit Strike +11 -->
 			<item id="167000537" chance="4.04"/><!-- Manastone: Magical Accuracy +8 -->
@@ -9290,7 +9290,7 @@
 		<set>
 			<item id="167000450" chance="3.41"/><!-- Manastone: HP +65 -->
 			<item id="167000451" chance="3.4"/><!-- Manastone: MP +65 -->
-			<item id="167000454" chance="3.41"/><!-- Manastone: Attack +4 -->
+			<item id="167000454" chance="6.82"/><!-- Manastone: Attack +4 -->
 			<item id="167000455" chance="3.41"/><!-- Manastone: Magic Boost +21 -->
 			<item id="167000459" chance="3.41"/><!-- Manastone: Crit Strike +11 -->
 			<item id="167000537" chance="3.41"/><!-- Manastone: Magical Accuracy +8 -->
@@ -9656,7 +9656,7 @@
 		<set>
 			<item id="167000450" chance="4.38"/><!-- Manastone: HP +65 -->
 			<item id="167000451" chance="4.37"/><!-- Manastone: MP +65 -->
-			<item id="167000454" chance="4.38"/><!-- Manastone: Attack +4 -->
+			<item id="167000454" chance="8.75"/><!-- Manastone: Attack +4 -->
 			<item id="167000455" chance="4.37"/><!-- Manastone: Magic Boost +21 -->
 			<item id="167000459" chance="4.38"/><!-- Manastone: Crit Strike +11 -->
 			<item id="167000537" chance="4.37"/><!-- Manastone: Magical Accuracy +8 -->
@@ -9690,7 +9690,7 @@
 		<set>
 			<item id="167000450" chance="4.04"/><!-- Manastone: HP +65 -->
 			<item id="167000451" chance="4.04"/><!-- Manastone: MP +65 -->
-			<item id="167000454" chance="4.05"/><!-- Manastone: Attack +4 -->
+			<item id="167000454" chance="8.09"/><!-- Manastone: Attack +4 -->
 			<item id="167000455" chance="4.04"/><!-- Manastone: Magic Boost +21 -->
 			<item id="167000459" chance="4.04"/><!-- Manastone: Crit Strike +11 -->
 			<item id="167000537" chance="4.04"/><!-- Manastone: Magical Accuracy +8 -->
@@ -23115,75 +23115,75 @@
 	</decomposable>
 	<decomposable item_id="188051579"><!-- Heavy Hidden Bundle -->
 		<set>
-			<item id="152000207" chance="5.55"/><!-- Orichalcum Ore -->
-			<item id="152000207" chance="5.55"/><!-- Orichalcum Ore -->
-			<item id="152000207" chance="5.55"/><!-- Orichalcum Ore -->
-			<item id="152000207" chance="5.55"/><!-- Orichalcum Ore -->
-			<item id="152000107" chance="5.55"/><!-- Mithril Ore -->
-			<item id="152000107" chance="5.55"/><!-- Mithril Ore -->
-			<item id="152000107" chance="5.55"/><!-- Mithril Ore -->
-			<item id="152000107" chance="5.55"/><!-- Mithril Ore -->
-			<item id="152000313" chance="5.55"/><!-- Ruby Ore -->
-			<item id="152000313" chance="5.55"/><!-- Ruby Ore -->
-			<item id="152000315" chance="5.55"/><!-- Sapphire Ore -->
-			<item id="152000315" chance="5.55"/><!-- Sapphire Ore -->
-			<item id="152000317" chance="5.55"/><!-- Diamond Ore -->
-			<item id="152000317" chance="5.55"/><!-- Diamond Ore -->
-			<item id="152000907" chance="5.55"/><!-- Aether -->
-			<item id="152000907" chance="5.55"/><!-- Aether -->
-			<item id="152000907" chance="5.55"/><!-- Aether -->
-			<item id="152000907" chance="5.55"/><!-- Aether -->
+			<item id="152000207" chance="18.15"/><!-- Orichalcum Ore -->
+			<item id="152000208" chance="3.35"/><!-- Greater Orichalcum Ore -->
+			<item id="152000209" chance="2.94"/><!-- Pure Orichalcum Ore -->
+			<item id="152000213" chance="2.89"/><!-- Brilliant Orichalcum Ore -->
+			<item id="152000107" chance="18.15"/><!-- Mithril Ore -->
+			<item id="152000108" chance="3.35"/><!-- Greater Mithril Ore -->
+			<item id="152000109" chance="2.89"/><!-- Pure Mithril Ore -->
+			<item id="152000112" chance="2.87"/><!-- Brilliant Mithril Ore -->
+			<item id="152000313" chance="2.99"/><!-- Ruby Ore -->
+			<item id="152000314" chance="2.94"/><!-- Big Ruby Ore -->
+			<item id="152000315" chance="3.35"/><!-- Sapphire Ore -->
+			<item id="152000316" chance="2.93"/><!-- Big Sapphire Ore -->
+			<item id="152000317" chance="2.98"/><!-- Diamond Ore -->
+			<item id="152000318" chance="2.93"/><!-- Rich Diamond Ore -->
+			<item id="152000907" chance="18.16"/><!-- Aether -->
+			<item id="152000908" chance="3.34"/><!-- Greater Aether -->
+			<item id="152000909" chance="2.93"/><!-- Pure Aether -->
+			<item id="152000910" chance="2.86"/><!-- Brilliant Aether -->
 		</set>
 	</decomposable>
 	<decomposable item_id="188051580"><!-- Large Hidden Bundle -->
 		<set>
-			<item id="152011006" chance="4.34"/><!-- Fine Weapon Flux -->
-			<item id="152011006" chance="4.34"/><!-- Fine Weapon Flux -->
-			<item id="152011006" chance="4.34"/><!-- Fine Weapon Flux -->
-			<item id="152011008" chance="4.34"/><!-- Premium Weapon Flux -->
-			<item id="152011008" chance="4.34"/><!-- Premium Weapon Flux -->
-			<item id="152011008" chance="4.34"/><!-- Premium Weapon Flux -->
-			<item id="152011008" chance="4.34"/><!-- Premium Weapon Flux -->
-			<item id="152011008" chance="4.34"/><!-- Premium Weapon Flux -->
-			<item id="152011008" chance="4.34"/><!-- Premium Weapon Flux -->
-			<item id="152011008" chance="4.34"/><!-- Premium Weapon Flux -->
-			<item id="152011008" chance="4.34"/><!-- Premium Weapon Flux -->
-			<item id="152013002" chance="4.34"/><!-- Wrathful Will -->
-			<item id="152013002" chance="4.34"/><!-- Wrathful Will -->
-			<item id="152013008" chance="4.34"/><!-- Terrifying Will -->
-			<item id="152013008" chance="4.34"/><!-- Terrifying Will -->
-			<item id="152013014" chance="4.34"/><!-- Violent Will -->
-			<item id="152013014" chance="4.34"/><!-- Violent Will -->
-			<item id="152013003" chance="4.34"/><!-- Wrathful Ego -->
-			<item id="152013003" chance="4.34"/><!-- Wrathful Ego -->
-			<item id="152013009" chance="4.34"/><!-- Terrifying Ego -->
-			<item id="152013009" chance="4.34"/><!-- Terrifying Ego -->
-			<item id="152013015" chance="4.34"/><!-- Violent Ego -->
-			<item id="152013015" chance="4.34"/><!-- Violent Ego -->
+			<item id="152011006" chance="1.46"/><!-- Fine Weapon Flux -->
+			<item id="152011012" chance="0.93"/><!-- Worthy Fine Weapon Flux -->
+			<item id="152011016" chance="0.72"/><!-- Expert Fine Weapon Flux -->
+			<item id="152011007" chance="5.84"/><!-- Superb Weapon Flux -->
+			<item id="152011013" chance="1.47"/><!-- Worthy Superb Weapon Flux -->
+			<item id="152011017" chance="1.47"/><!-- Expert Superb Weapon Flux -->
+			<item id="152011059" chance="1.47"/><!-- Master Superb Weapon Flux -->
+			<item id="152011008" chance="9.11"/><!-- Premium Weapon Flux -->
+			<item id="152011014" chance="9.11"/><!-- Worthy Premium Weapon Flux -->
+			<item id="152011018" chance="5.84"/><!-- Expert Premium Weapon Flux -->
+			<item id="152011060" chance="1.47"/><!-- Master Premium Weapon Flux -->
+			<item id="152013002" chance="1.47"/><!-- Wrathful Will -->
+			<item id="152013005" chance="1.47"/><!-- Maddened Wrathful Will -->
+			<item id="152013008" chance="9.11"/><!-- Terrifying Will -->
+			<item id="152013011" chance="0.93"/><!-- Berserk Terrifying Will -->
+			<item id="152013014" chance="9.11"/><!-- Violent Will -->
+			<item id="152013017" chance="9.11"/><!-- Fatal Violent Will -->
+			<item id="152013003" chance="0.72"/><!-- Wrathful Ego -->
+			<item id="152013006" chance="0.93"/><!-- Maddened Wrathful Ego -->
+			<item id="152013009" chance="9.11"/><!-- Terrifying Ego -->
+			<item id="152013012" chance="0.93"/><!-- Berserk Terrifying Ego -->
+			<item id="152013015" chance="9.11"/><!-- Violent Ego -->
+			<item id="152013018" chance="9.11"/><!-- Fatal Violent Ego -->
 		</set>
 	</decomposable>
 	<decomposable item_id="188051581"><!-- Hidden Bundle -->
 		<set>
-			<item id="152014006" chance="1.47"/><!-- Hard Balaur Horn -->
-			<item id="152014007" chance="1.47"/><!-- Hard Balaur Scale -->
-			<item id="152014008" chance="2.52"/><!-- Hard Balaur Skin -->
-			<item id="152014009" chance="3.14"/><!-- Hot Balaur Blood Stain -->
-			<item id="152014010" chance="6.29"/><!-- Tender Balaur Meat -->
-			<item id="152014011" chance="1.47"/><!-- Solid Balaur Horn -->
-			<item id="152014012" chance="2.52"/><!-- Solid Balaur Scale -->
-			<item id="152014013" chance="6.29"/><!-- Solid Balaur Skin -->
-			<item id="152014014" chance="6.29"/><!-- Boiling Balaur Blood Stain -->
-			<item id="152014015" chance="6.29"/><!-- Fresh Balaur Meat -->
-			<item id="152010310" chance="6.29"/><!-- Thin Rawhide -->
-			<item id="152010311" chance="6.29"/><!-- Thick Rawhide -->
-			<item id="152010312" chance="6.29"/><!-- Strong Rawhide -->
-			<item id="152010313" chance="6.29"/><!-- Tough Rawhide -->
-			<item id="152010318" chance="3.14"/><!-- Firm Rawhide -->
-			<item id="152010314" chance="6.29"/><!-- Lesser Elemental Stone -->
-			<item id="152010315" chance="6.29"/><!-- Elemental Stone -->
-			<item id="152010316" chance="6.29"/><!-- Greater Elemental Stone -->
-			<item id="152010317" chance="6.29"/><!-- Major Elemental Stone -->
-			<item id="152010319" chance="2.52"/><!-- Fine Elemental Stone -->
+			<item id="152014006" chance="1.79"/><!-- Hard Balaur Horn -->
+			<item id="152014007" chance="1.79"/><!-- Hard Balaur Scale -->
+			<item id="152014008" chance="2.84"/><!-- Hard Balaur Skin -->
+			<item id="152014009" chance="3.46"/><!-- Hot Balaur Blood Stain -->
+			<item id="152014010" chance="6.61"/><!-- Tender Balaur Meat -->
+			<item id="152014011" chance="1.79"/><!-- Solid Balaur Horn -->
+			<item id="152014012" chance="2.84"/><!-- Solid Balaur Scale -->
+			<item id="152014013" chance="6.6"/><!-- Solid Balaur Skin -->
+			<item id="152014014" chance="6.6"/><!-- Boiling Balaur Blood Stain -->
+			<item id="152014015" chance="6.6"/><!-- Fresh Balaur Meat -->
+			<item id="152010310" chance="6.6"/><!-- Thin Rawhide -->
+			<item id="152010311" chance="6.6"/><!-- Thick Rawhide -->
+			<item id="152010312" chance="6.6"/><!-- Strong Rawhide -->
+			<item id="152010313" chance="6.6"/><!-- Tough Rawhide -->
+			<item id="152010318" chance="3.45"/><!-- Firm Rawhide -->
+			<item id="152010314" chance="6.6"/><!-- Lesser Elemental Stone -->
+			<item id="152010315" chance="6.6"/><!-- Elemental Stone -->
+			<item id="152010316" chance="6.6"/><!-- Greater Elemental Stone -->
+			<item id="152010317" chance="6.6"/><!-- Major Elemental Stone -->
+			<item id="152010319" chance="2.83"/><!-- Fine Elemental Stone -->
 		</set>
 	</decomposable>
 	<decomposable item_id="188051582" only_one="true"><!-- Powerful Transformation OK Box -->
@@ -26413,6 +26413,15 @@
 	<decomposable item_id="188051787"><!-- [Event] Cat Weapon Bundle -->
 		<set>
 			<item id="100601089" chance="10"/><!-- Wild Kitter's Spellbook -->
+			<item id="101701061" chance="10"/><!-- Wild Kitter's Bow -->
+			<item id="100201186" chance="10"/><!-- Wild Kitter's Dagger -->
+			<item id="100101024" chance="10"/><!-- Wild Kitter's Mace -->
+			<item id="100501037" chance="10"/><!-- Wild Kitter's Jewel -->
+			<item id="101300980" chance="10"/><!-- Wild Kitter's Polearm -->
+			<item id="101501052" chance="10"/><!-- Wild Kitter's Staff -->
+			<item id="100001345" chance="10"/><!-- Wild Kitter's Sword -->
+			<item id="100901037" chance="10"/><!-- Wild Kitter's Greatsword -->
+			<item id="115001383" chance="10"/><!-- Wild Kitter's Shield -->
 		</set>
 	</decomposable>
 	<decomposable item_id="188051788"><!-- [Event] Chaos Gift Bundle -->
@@ -30499,32 +30508,32 @@
 	</decomposable>
 	<decomposable item_id="188052166"><!-- Token Pouch -->
 		<set race="ELYOS">
-			<item id="186000236" chance="3.34"/><!-- Blood Mark -->
-			<item id="186000236" count="2" chance="3.33"/><!-- Blood Mark -->
-			<item id="186000236" count="3" chance="3.33"/><!-- Blood Mark -->
-			<item id="186000238" chance="3.34"/><!-- Conqueror's Mark -->
-			<item id="186000238" count="2" chance="3.33"/><!-- Conqueror's Mark -->
-			<item id="186000238" count="3" chance="3.33"/><!-- Conqueror's Mark -->
-			<item id="186000146" chance="6.67"/><!-- Guestpetal -->
-			<item id="186000146" count="2" chance="6.67"/><!-- Guestpetal -->
-			<item id="186000146" count="3" chance="6.66"/><!-- Guestpetal -->
-			<item id="186000101" chance="3.34"/><!-- Radiant Token -->
-			<item id="186000101" count="2" chance="3.33"/><!-- Radiant Token -->
-			<item id="186000101" count="3" chance="3.33"/><!-- Radiant Token -->
+			<item id="186000236" chance="6.68"/><!-- Blood Mark -->
+			<item id="186000236" count="2" chance="6.66"/><!-- Blood Mark -->
+			<item id="186000236" count="3" chance="6.66"/><!-- Blood Mark -->
+			<item id="186000238" chance="6.68"/><!-- Conqueror's Mark -->
+			<item id="186000238" count="2" chance="6.66"/><!-- Conqueror's Mark -->
+			<item id="186000238" count="3" chance="6.66"/><!-- Conqueror's Mark -->
+			<item id="186000146" chance="13.34"/><!-- Guestpetal -->
+			<item id="186000146" count="2" chance="13.34"/><!-- Guestpetal -->
+			<item id="186000146" count="3" chance="13.32"/><!-- Guestpetal -->
+			<item id="186000101" chance="6.68"/><!-- Radiant Token -->
+			<item id="186000101" count="2" chance="6.66"/><!-- Radiant Token -->
+			<item id="186000101" count="3" chance="6.66"/><!-- Radiant Token -->
 		</set>
 		<set race="ASMODIANS">
-			<item id="186000236" chance="3.34"/><!-- Blood Mark -->
-			<item id="186000236" count="2" chance="3.33"/><!-- Blood Mark -->
-			<item id="186000236" count="3" chance="3.33"/><!-- Blood Mark -->
-			<item id="186000238" chance="3.34"/><!-- Conqueror's Mark -->
-			<item id="186000238" count="2" chance="3.33"/><!-- Conqueror's Mark -->
-			<item id="186000238" count="3" chance="3.33"/><!-- Conqueror's Mark -->
-			<item id="186000146" chance="6.67"/><!-- Guestpetal -->
-			<item id="186000146" count="2" chance="6.67"/><!-- Guestpetal -->
-			<item id="186000146" count="3" chance="6.66"/><!-- Guestpetal -->
-			<item id="186000104" chance="3.34"/><!-- Crusader Token -->
-			<item id="186000104" count="2" chance="3.33"/><!-- Crusader Token -->
-			<item id="186000104" count="3" chance="3.33"/><!-- Crusader Token -->
+			<item id="186000236" chance="6.68"/><!-- Blood Mark -->
+			<item id="186000236" count="2" chance="6.66"/><!-- Blood Mark -->
+			<item id="186000236" count="3" chance="6.66"/><!-- Blood Mark -->
+			<item id="186000238" chance="6.68"/><!-- Conqueror's Mark -->
+			<item id="186000238" count="2" chance="6.66"/><!-- Conqueror's Mark -->
+			<item id="186000238" count="3" chance="6.66"/><!-- Conqueror's Mark -->
+			<item id="186000146" chance="13.34"/><!-- Guestpetal -->
+			<item id="186000146" count="2" chance="13.34"/><!-- Guestpetal -->
+			<item id="186000146" count="3" chance="13.32"/><!-- Guestpetal -->
+			<item id="186000104" chance="6.68"/><!-- Crusader Token -->
+			<item id="186000104" count="2" chance="6.66"/><!-- Crusader Token -->
+			<item id="186000104" count="3" chance="6.66"/><!-- Crusader Token -->
 		</set>
 	</decomposable>
 	<decomposable item_id="188052167"><!-- Fairy Tail -->
@@ -40288,6 +40297,86 @@
 	</decomposable>
 	<decomposable item_id="188052671"><!-- Test Enchantment Stone Bundle -->
 		<set>
+			<item id="166000001" chance="0.62"/><!-- L1 Enchantment Stone -->
+			<item id="166000002" chance="0.62"/><!-- L2 Enchantment Stone -->
+			<item id="166000003" chance="0.62"/><!-- L3 Enchantment Stone -->
+			<item id="166000004" chance="0.62"/><!-- L4 Enchantment Stone -->
+			<item id="166000005" chance="0.62"/><!-- L5 Enchantment Stone -->
+			<item id="166000006" chance="0.62"/><!-- L6 Enchantment Stone -->
+			<item id="166000007" chance="0.62"/><!-- L7 Enchantment Stone -->
+			<item id="166000008" chance="0.62"/><!-- L8 Enchantment Stone -->
+			<item id="166000009" chance="0.62"/><!-- L9 Enchantment Stone -->
+			<item id="166000010" chance="0.62"/><!-- L10 Enchantment Stone -->
+			<item id="166000011" chance="0.62"/><!-- L11 Enchantment Stone -->
+			<item id="166000012" chance="0.62"/><!-- L12 Enchantment Stone -->
+			<item id="166000013" chance="0.62"/><!-- L13 Enchantment Stone -->
+			<item id="166000014" chance="0.62"/><!-- L14 Enchantment Stone -->
+			<item id="166000015" chance="0.62"/><!-- L15 Enchantment Stone -->
+			<item id="166000016" chance="0.62"/><!-- L16 Enchantment Stone -->
+			<item id="166000017" chance="0.62"/><!-- L17 Enchantment Stone -->
+			<item id="166000018" chance="0.62"/><!-- L18 Enchantment Stone -->
+			<item id="166000019" chance="0.62"/><!-- L19 Enchantment Stone -->
+			<item id="166000020" chance="0.62"/><!-- L20 Enchantment Stone -->
+			<item id="166000021" chance="0.62"/><!-- L21 Enchantment Stone -->
+			<item id="166000022" chance="0.62"/><!-- L22 Enchantment Stone -->
+			<item id="166000023" chance="0.62"/><!-- L23 Enchantment Stone -->
+			<item id="166000024" chance="0.62"/><!-- L24 Enchantment Stone -->
+			<item id="166000025" chance="0.62"/><!-- L25 Enchantment Stone -->
+			<item id="166000026" chance="0.62"/><!-- L26 Enchantment Stone -->
+			<item id="166000027" chance="0.62"/><!-- L27 Enchantment Stone -->
+			<item id="166000028" chance="0.62"/><!-- L28 Enchantment Stone -->
+			<item id="166000029" chance="0.62"/><!-- L29 Enchantment Stone -->
+			<item id="166000030" chance="0.62"/><!-- L30 Enchantment Stone -->
+			<item id="166000031" chance="0.62"/><!-- L31 Enchantment Stone -->
+			<item id="166000032" chance="0.62"/><!-- L32 Enchantment Stone -->
+			<item id="166000033" chance="0.62"/><!-- L33 Enchantment Stone -->
+			<item id="166000034" chance="0.62"/><!-- L34 Enchantment Stone -->
+			<item id="166000035" chance="0.62"/><!-- L35 Enchantment Stone -->
+			<item id="166000036" chance="0.62"/><!-- L36 Enchantment Stone -->
+			<item id="166000037" chance="0.62"/><!-- L37 Enchantment Stone -->
+			<item id="166000038" chance="0.62"/><!-- L38 Enchantment Stone -->
+			<item id="166000039" chance="0.62"/><!-- L39 Enchantment Stone -->
+			<item id="166000040" chance="0.62"/><!-- L40 Enchantment Stone -->
+			<item id="166000041" chance="0.62"/><!-- L41 Enchantment Stone -->
+			<item id="166000042" chance="0.62"/><!-- L42 Enchantment Stone -->
+			<item id="166000043" chance="0.62"/><!-- L43 Enchantment Stone -->
+			<item id="166000044" chance="0.62"/><!-- L44 Enchantment Stone -->
+			<item id="166000045" chance="0.62"/><!-- L45 Enchantment Stone -->
+			<item id="166000046" chance="0.62"/><!-- L46 Enchantment Stone -->
+			<item id="166000047" chance="0.62"/><!-- L47 Enchantment Stone -->
+			<item id="166000048" chance="0.62"/><!-- L48 Enchantment Stone -->
+			<item id="166000049" chance="0.62"/><!-- L49 Enchantment Stone -->
+			<item id="166000050" chance="0.62"/><!-- L50 Enchantment Stone -->
+			<item id="166000051" chance="0.62"/><!-- L51 Enchantment Stone -->
+			<item id="166000052" chance="0.62"/><!-- L52 Enchantment Stone -->
+			<item id="166000053" chance="0.62"/><!-- L53 Enchantment Stone -->
+			<item id="166000054" chance="0.62"/><!-- L54 Enchantment Stone -->
+			<item id="166000055" chance="0.62"/><!-- L55 Enchantment Stone -->
+			<item id="166000056" chance="0.62"/><!-- L56 Enchantment Stone -->
+			<item id="166000057" chance="0.62"/><!-- L57 Enchantment Stone -->
+			<item id="166000058" chance="0.62"/><!-- L58 Enchantment Stone -->
+			<item id="166000059" chance="0.62"/><!-- L59 Enchantment Stone -->
+			<item id="166000060" chance="0.62"/><!-- L60 Enchantment Stone -->
+			<item id="166000061" chance="0.62"/><!-- L61 Enchantment Stone -->
+			<item id="166000062" chance="0.62"/><!-- L62 Enchantment Stone -->
+			<item id="166000063" chance="0.62"/><!-- L63 Enchantment Stone -->
+			<item id="166000064" chance="0.62"/><!-- L64 Enchantment Stone -->
+			<item id="166000065" chance="0.62"/><!-- L65 Enchantment Stone -->
+			<item id="166000066" chance="0.62"/><!-- L66 Enchantment Stone -->
+			<item id="166000067" chance="0.62"/><!-- L67 Enchantment Stone -->
+			<item id="166000068" chance="0.62"/><!-- L68 Enchantment Stone -->
+			<item id="166000069" chance="0.62"/><!-- L69 Enchantment Stone -->
+			<item id="166000070" chance="0.62"/><!-- L70 Enchantment Stone -->
+			<item id="166000071" chance="0.62"/><!-- L71 Enchantment Stone -->
+			<item id="166000072" chance="0.62"/><!-- L72 Enchantment Stone -->
+			<item id="166000073" chance="0.62"/><!-- L73 Enchantment Stone -->
+			<item id="166000074" chance="0.62"/><!-- L74 Enchantment Stone -->
+			<item id="166000075" chance="0.62"/><!-- L75 Enchantment Stone -->
+			<item id="166000076" chance="0.62"/><!-- L76 Enchantment Stone -->
+			<item id="166000077" chance="0.62"/><!-- L77 Enchantment Stone -->
+			<item id="166000078" chance="0.62"/><!-- L78 Enchantment Stone -->
+			<item id="166000079" chance="0.62"/><!-- L79 Enchantment Stone -->
+			<item id="166000080" chance="0.62"/><!-- L80 Enchantment Stone -->
 			<item id="166000081" chance="0.63"/><!-- L81 Enchantment Stone -->
 			<item id="166000082" chance="0.63"/><!-- L82 Enchantment Stone -->
 			<item id="166000083" chance="0.63"/><!-- L83 Enchantment Stone -->
@@ -42436,9 +42525,9 @@
 			<item id="167000518" chance="5.5"/><!-- Manastone: Attack +5 -->
 			<item id="167000359" chance="11.5"/><!-- Manastone: Magic Boost +20 -->
 			<item id="167000519" chance="5.5"/><!-- Manastone: Magic Boost +25 -->
-			<item id="186000231" chance="7"/><!-- Ceramium Coin, no count in 4.6/5.8 retail data -->
-			<item id="186000231" chance="4"/><!-- Ceramium Coin, no count in 4.6/5.8 retail data -->
-			<item id="186000231" chance="3"/><!-- Ceramium Coin, no count in 4.6/5.8 retail data -->
+			<item id="186000231" count="3" chance="7"/><!-- Ceramium Coin -->
+			<item id="186000231" count="7" chance="4"/><!-- Ceramium Coin -->
+			<item id="186000231" count="10" chance="3"/><!-- Ceramium Coin -->
 			<item id="186000030" chance="6"/><!-- Gold Medal -->
 			<item id="162000006" count="5" chance="23"/><!-- Major Life Potion -->
 			<item id="162000011" count="5" chance="23"/><!-- Major Mana Potion -->
@@ -42487,9 +42576,9 @@
 			<item id="167000518" chance="5.5"/><!-- Manastone: Attack +5 -->
 			<item id="167000359" chance="11.5"/><!-- Manastone: Magic Boost +20 -->
 			<item id="167000519" chance="5.5"/><!-- Manastone: Magic Boost +25 -->
-			<item id="186000231" chance="7"/><!-- Ceramium Coin, no count in 4.6/5.8 retail data -->
-			<item id="186000231" chance="4"/><!-- Ceramium Coin, no count in 4.6/5.8 retail data -->
-			<item id="186000231" chance="3"/><!-- Ceramium Coin, no count in 4.6/5.8 retail data -->
+			<item id="186000231" count="3" chance="7"/><!-- Ceramium Coin -->
+			<item id="186000231" count="7" chance="4"/><!-- Ceramium Coin -->
+			<item id="186000231" count="10" chance="3"/><!-- Ceramium Coin -->
 			<item id="186000030" chance="6"/><!-- Gold Medal -->
 			<item id="162000006" count="5" chance="23"/><!-- Major Life Potion -->
 			<item id="162000011" count="5" chance="23"/><!-- Major Mana Potion -->
@@ -46019,12 +46108,172 @@
 	</decomposable>
 	<decomposable item_id="188052906"><!-- Test Item -->
 		<set>
+			<item id="167000766" chance="1.14"/><!-- Manastone: HP +100 -->
+			<item id="167000767" chance="1.14"/><!-- Manastone: MP +105 -->
+			<item id="167000769" chance="1.14"/><!-- Manastone: Evasion +19 -->
+			<item id="167000771" chance="1.14"/><!-- Manastone: Parry +29 -->
+			<item id="167000772" chance="1.14"/><!-- Manastone: Block +29 -->
+			<item id="167000776" chance="1.15"/><!-- Manastone: Resist Magic +16 -->
+			<item id="167000559" chance="1.15"/><!-- Manastone: Maximum Flight Time +7 -->
+			<item id="167000775" chance="2"/><!-- Manastone: Magical Accuracy +16 -->
+			<item id="167000770" chance="2"/><!-- Manastone: Magic Boost +28 -->
+			<item id="167000773" chance="2"/><!-- Manastone: Crit Strike +19 -->
+			<item id="167000777" chance="2"/><!-- Manastone: Crit Spell +5 -->
+			<item id="167000768" chance="2"/><!-- Manastone: Accuracy +29 -->
+			<item id="167000518" chance="2"/><!-- Manastone: Attack +5 -->
+			<item id="167000845" chance="0.58"/><!-- Manastone: HP +95 / MP +47 -->
+			<item id="167000847" chance="0.58"/><!-- Manastone: HP +95 / Evasion +13 -->
+			<item id="167000851" chance="0.58"/><!-- Manastone: HP +95 / Resist Magic+7 -->
+			<item id="167000852" chance="0.58"/><!-- Manastone: HP +95 / Magical Accuracy +7 -->
+			<item id="167000853" chance="0.58"/><!-- Manastone: MP +95 / HP +47 -->
+			<item id="167000854" chance="0.58"/><!-- Manastone: MP +95 / Accuracy +13 -->
+			<item id="167000855" chance="0.58"/><!-- Manastone: MP +95 / Evasion +13 -->
+			<item id="167000856" chance="0.58"/><!-- Manastone: MP +95 / Parry +13 -->
+			<item id="167000857" chance="0.58"/><!-- Manastone: MP +95 / Block +13 -->
+			<item id="167000858" chance="0.58"/><!-- Manastone: MP +95 / Crit Strike +8 -->
+			<item id="167000692" chance="0.58"/><!-- Manastone: Crit Strike +17 / Evasion +13 -->
+			<item id="167000693" chance="0.58"/><!-- Manastone: Crit Strike +17 / Parry +13 -->
+			<item id="167000694" chance="0.58"/><!-- Manastone: Crit Strike +17 / Block +13 -->
+			<item id="167000689" chance="0.58"/><!-- Manastone: Crit Strike +17 / MP +47 -->
+			<item id="167000683" chance="0.58"/><!-- Manastone: Attack +5 / MP +47 -->
+			<item id="167000685" chance="0.58"/><!-- Manastone: Attack +5 / Evasion +13 -->
+			<item id="167000861" chance="0.58"/><!-- Manastone: Evasion +17 / HP +47 -->
+			<item id="167000862" chance="0.58"/><!-- Manastone: Evasion +17 / MP +47 -->
+			<item id="167000863" chance="0.58"/><!-- Manastone: Evasion +17 / Accuracy +13 -->
+			<item id="167000864" chance="0.58"/><!-- Manastone: Evasion +17 / Parry +13 -->
+			<item id="167000865" chance="0.58"/><!-- Manastone: Evasion +17 / Block +13 -->
+			<item id="167000866" chance="0.58"/><!-- Manastone: Evasion +17 / Crit Strike +8 -->
+			<item id="167000867" chance="0.58"/><!-- Manastone: Evasion +17 / Resist Magic+7 -->
+			<item id="167000868" chance="0.58"/><!-- Manastone: Evasion +17 / Magical Accuracy +7 -->
+			<item id="167000872" chance="0.58"/><!-- Manastone: Parry +27 / Evasion +13 -->
+			<item id="167000870" chance="0.58"/><!-- Manastone: Parry +27 / MP +47 -->
+			<item id="167000697" chance="0.58"/><!-- Manastone: Magic Boost +27 / HP +47 -->
+			<item id="167000699" chance="0.58"/><!-- Manastone: Magic Boost +27 / Accuracy +13 -->
+			<item id="167000700" chance="0.58"/><!-- Manastone: Magic Boost +27 / Evasion +13 -->
+			<item id="167000701" chance="0.58"/><!-- Manastone: Magic Boost +27 / Parry +13 -->
+			<item id="167000702" chance="0.58"/><!-- Manastone: Magic Boost +27 / Block +13 -->
+			<item id="167000703" chance="0.58"/><!-- Manastone: Magic Boost +27 / Crit Strike +8 -->
+			<item id="167000706" chance="0.58"/><!-- Manastone: Magical Accuracy +14 / HP +47 -->
+			<item id="167000709" chance="0.58"/><!-- Manastone: Magical Accuracy +14 / Accuracy +13 -->
+			<item id="167000710" chance="0.57"/><!-- Manastone: Magical Accuracy +14 / Evasion +13 -->
+			<item id="167000711" chance="0.57"/><!-- Manastone: Magical Accuracy +14 / Parry +13 -->
+			<item id="167000712" chance="0.57"/><!-- Manastone: Magical Accuracy +14 / Block +13 -->
+			<item id="167000877" chance="0.57"/><!-- Manastone: Magical Accuracy +14 / Attack +2 -->
+			<item id="167000846" chance="1.81"/><!-- Manastone: HP +95 / Accuracy +13 -->
+			<item id="167000848" chance="1.81"/><!-- Manastone: HP +95 / Parry +13 -->
+			<item id="167000849" chance="1.81"/><!-- Manastone: HP +95 / Block +13 -->
+			<item id="167000850" chance="1.81"/><!-- Manastone: HP +95 / Crit Strike +8 -->
+			<item id="167000707" chance="1.81"/><!-- Manastone: Magical Accuracy +14 / MP +47 -->
+			<item id="167000859" chance="1.81"/><!-- Manastone: MP +95 / Resist Magic+7 -->
+			<item id="167000860" chance="1.81"/><!-- Manastone: MP +95 / Magical Accuracy +7 -->
+			<item id="167000869" chance="1.81"/><!-- Manastone: Parry +27 / HP +47 -->
+			<item id="167000873" chance="1.81"/><!-- Manastone: Parry +27 / Block +13 -->
+			<item id="167000874" chance="1.81"/><!-- Manastone: Parry +27 / Crit Strike +8 -->
+			<item id="167000875" chance="1.81"/><!-- Manastone: Parry +27 / Resist Magic+7 -->
+			<item id="167000876" chance="1.81"/><!-- Manastone: Parry +27 / Magical Accuracy +7 -->
+			<item id="167000871" chance="1.81"/><!-- Manastone: Parry +27 / Accuracy +13 -->
+			<item id="167000682" chance="1.81"/><!-- Manastone: Attack +5 / HP +47 -->
+			<item id="167000687" chance="1.81"/><!-- Manastone: Attack +5 / Block +13 -->
+			<item id="167000686" chance="1.81"/><!-- Manastone: Attack +5 / Parry +13 -->
+			<item id="167000750" chance="1.81"/><!-- Manastone: Attack +5 / Resist Magic +7 -->
+			<item id="167000688" chance="1.81"/><!-- Manastone: Crit Strike +17 / HP +47 -->
+			<item id="167000698" chance="1.81"/><!-- Manastone: Magic Boost +27 / MP +47 -->
+			<item id="167000704" chance="1.81"/><!-- Manastone: Magic Boost +27 / Resist Magic +7 -->
+			<item id="167000714" chance="1.8"/><!-- Manastone: Magical Accuracy +14 / Resist Magic +7 -->
+			<item id="167000751" chance="2.08"/><!-- Manastone: Attack +5 / Magical Accuracy +7 -->
+			<item id="167000684" chance="2.05"/><!-- Manastone: Attack +5 / Accuracy +13 -->
+			<item id="167000749" chance="1.99"/><!-- Manastone: Attack +5 / Crit Strike +8 -->
+			<item id="167000690" chance="2.13"/><!-- Manastone: Crit Strike +17 / Attack +2 -->
+			<item id="167000691" chance="1.76"/><!-- Manastone: Crit Strike +17 / Accuracy +13 -->
+			<item id="167000695" chance="2.02"/><!-- Manastone: Crit Strike +17 / Resist Magic +7 -->
+			<item id="167000696" chance="2.07"/><!-- Manastone: Crit Strike +17 / Magical Accuracy +7 -->
+			<item id="167000705" chance="1.69"/><!-- Manastone: Magic Boost +27 / Magical Accuracy +7 -->
 			<item id="167000708" chance="2.11"/><!-- Manastone: Magical Accuracy +14 / Magic Boost +13 -->
 			<item id="167000713" chance="2.1"/><!-- Manastone: Magical Accuracy +14 / Crit Strike +8 -->
 		</set>
 	</decomposable>
 	<decomposable item_id="188052907"><!-- Test Item -->
 		<set>
+			<item id="167000766" chance="1.14"/><!-- Manastone: HP +100 -->
+			<item id="167000767" chance="1.14"/><!-- Manastone: MP +105 -->
+			<item id="167000769" chance="1.14"/><!-- Manastone: Evasion +19 -->
+			<item id="167000771" chance="1.14"/><!-- Manastone: Parry +29 -->
+			<item id="167000772" chance="1.14"/><!-- Manastone: Block +29 -->
+			<item id="167000776" chance="1.15"/><!-- Manastone: Resist Magic +16 -->
+			<item id="167000559" chance="1.15"/><!-- Manastone: Maximum Flight Time +7 -->
+			<item id="167000775" chance="2"/><!-- Manastone: Magical Accuracy +16 -->
+			<item id="167000770" chance="2"/><!-- Manastone: Magic Boost +28 -->
+			<item id="167000773" chance="2"/><!-- Manastone: Crit Strike +19 -->
+			<item id="167000777" chance="2"/><!-- Manastone: Crit Spell +5 -->
+			<item id="167000768" chance="2"/><!-- Manastone: Accuracy +29 -->
+			<item id="167000518" chance="2"/><!-- Manastone: Attack +5 -->
+			<item id="167000845" chance="0.26"/><!-- Manastone: HP +95 / MP +47 -->
+			<item id="167000847" chance="0.26"/><!-- Manastone: HP +95 / Evasion +13 -->
+			<item id="167000851" chance="0.26"/><!-- Manastone: HP +95 / Resist Magic+7 -->
+			<item id="167000852" chance="0.26"/><!-- Manastone: HP +95 / Magical Accuracy +7 -->
+			<item id="167000853" chance="0.26"/><!-- Manastone: MP +95 / HP +47 -->
+			<item id="167000854" chance="0.26"/><!-- Manastone: MP +95 / Accuracy +13 -->
+			<item id="167000855" chance="0.26"/><!-- Manastone: MP +95 / Evasion +13 -->
+			<item id="167000856" chance="0.26"/><!-- Manastone: MP +95 / Parry +13 -->
+			<item id="167000857" chance="0.26"/><!-- Manastone: MP +95 / Block +13 -->
+			<item id="167000858" chance="0.26"/><!-- Manastone: MP +95 / Crit Strike +8 -->
+			<item id="167000692" chance="0.26"/><!-- Manastone: Crit Strike +17 / Evasion +13 -->
+			<item id="167000693" chance="0.26"/><!-- Manastone: Crit Strike +17 / Parry +13 -->
+			<item id="167000694" chance="0.26"/><!-- Manastone: Crit Strike +17 / Block +13 -->
+			<item id="167000689" chance="0.26"/><!-- Manastone: Crit Strike +17 / MP +47 -->
+			<item id="167000683" chance="0.26"/><!-- Manastone: Attack +5 / MP +47 -->
+			<item id="167000685" chance="0.26"/><!-- Manastone: Attack +5 / Evasion +13 -->
+			<item id="167000861" chance="0.26"/><!-- Manastone: Evasion +17 / HP +47 -->
+			<item id="167000862" chance="0.26"/><!-- Manastone: Evasion +17 / MP +47 -->
+			<item id="167000863" chance="0.26"/><!-- Manastone: Evasion +17 / Accuracy +13 -->
+			<item id="167000864" chance="0.26"/><!-- Manastone: Evasion +17 / Parry +13 -->
+			<item id="167000865" chance="0.26"/><!-- Manastone: Evasion +17 / Block +13 -->
+			<item id="167000866" chance="0.26"/><!-- Manastone: Evasion +17 / Crit Strike +8 -->
+			<item id="167000867" chance="0.26"/><!-- Manastone: Evasion +17 / Resist Magic+7 -->
+			<item id="167000868" chance="0.26"/><!-- Manastone: Evasion +17 / Magical Accuracy +7 -->
+			<item id="167000872" chance="0.26"/><!-- Manastone: Parry +27 / Evasion +13 -->
+			<item id="167000870" chance="0.26"/><!-- Manastone: Parry +27 / MP +47 -->
+			<item id="167000697" chance="0.27"/><!-- Manastone: Magic Boost +27 / HP +47 -->
+			<item id="167000699" chance="0.27"/><!-- Manastone: Magic Boost +27 / Accuracy +13 -->
+			<item id="167000700" chance="0.27"/><!-- Manastone: Magic Boost +27 / Evasion +13 -->
+			<item id="167000701" chance="0.27"/><!-- Manastone: Magic Boost +27 / Parry +13 -->
+			<item id="167000702" chance="0.27"/><!-- Manastone: Magic Boost +27 / Block +13 -->
+			<item id="167000703" chance="0.27"/><!-- Manastone: Magic Boost +27 / Crit Strike +8 -->
+			<item id="167000706" chance="0.27"/><!-- Manastone: Magical Accuracy +14 / HP +47 -->
+			<item id="167000709" chance="0.27"/><!-- Manastone: Magical Accuracy +14 / Accuracy +13 -->
+			<item id="167000710" chance="0.27"/><!-- Manastone: Magical Accuracy +14 / Evasion +13 -->
+			<item id="167000711" chance="0.27"/><!-- Manastone: Magical Accuracy +14 / Parry +13 -->
+			<item id="167000712" chance="0.27"/><!-- Manastone: Magical Accuracy +14 / Block +13 -->
+			<item id="167000877" chance="0.27"/><!-- Manastone: Magical Accuracy +14 / Attack +2 -->
+			<item id="167000846" chance="0.95"/><!-- Manastone: HP +95 / Accuracy +13 -->
+			<item id="167000848" chance="0.95"/><!-- Manastone: HP +95 / Parry +13 -->
+			<item id="167000849" chance="0.95"/><!-- Manastone: HP +95 / Block +13 -->
+			<item id="167000850" chance="0.95"/><!-- Manastone: HP +95 / Crit Strike +8 -->
+			<item id="167000707" chance="0.95"/><!-- Manastone: Magical Accuracy +14 / MP +47 -->
+			<item id="167000859" chance="0.95"/><!-- Manastone: MP +95 / Resist Magic+7 -->
+			<item id="167000860" chance="0.95"/><!-- Manastone: MP +95 / Magical Accuracy +7 -->
+			<item id="167000869" chance="0.95"/><!-- Manastone: Parry +27 / HP +47 -->
+			<item id="167000873" chance="0.95"/><!-- Manastone: Parry +27 / Block +13 -->
+			<item id="167000874" chance="0.95"/><!-- Manastone: Parry +27 / Crit Strike +8 -->
+			<item id="167000875" chance="0.95"/><!-- Manastone: Parry +27 / Resist Magic+7 -->
+			<item id="167000876" chance="0.95"/><!-- Manastone: Parry +27 / Magical Accuracy +7 -->
+			<item id="167000871" chance="0.95"/><!-- Manastone: Parry +27 / Accuracy +13 -->
+			<item id="167000682" chance="0.95"/><!-- Manastone: Attack +5 / HP +47 -->
+			<item id="167000687" chance="0.95"/><!-- Manastone: Attack +5 / Block +13 -->
+			<item id="167000686" chance="0.95"/><!-- Manastone: Attack +5 / Parry +13 -->
+			<item id="167000750" chance="0.96"/><!-- Manastone: Attack +5 / Resist Magic +7 -->
+			<item id="167000688" chance="0.96"/><!-- Manastone: Crit Strike +17 / HP +47 -->
+			<item id="167000698" chance="0.96"/><!-- Manastone: Magic Boost +27 / MP +47 -->
+			<item id="167000704" chance="0.96"/><!-- Manastone: Magic Boost +27 / Resist Magic +7 -->
+			<item id="167000714" chance="0.96"/><!-- Manastone: Magical Accuracy +14 / Resist Magic +7 -->
+			<item id="167000751" chance="2.08"/><!-- Manastone: Attack +5 / Magical Accuracy +7 -->
+			<item id="167000684" chance="2.05"/><!-- Manastone: Attack +5 / Accuracy +13 -->
+			<item id="167000749" chance="1.99"/><!-- Manastone: Attack +5 / Crit Strike +8 -->
+			<item id="167000690" chance="2.13"/><!-- Manastone: Crit Strike +17 / Attack +2 -->
+			<item id="167000691" chance="1.76"/><!-- Manastone: Crit Strike +17 / Accuracy +13 -->
+			<item id="167000695" chance="2.02"/><!-- Manastone: Crit Strike +17 / Resist Magic +7 -->
+			<item id="167000696" chance="2.07"/><!-- Manastone: Crit Strike +17 / Magical Accuracy +7 -->
+			<item id="167000705" chance="1.69"/><!-- Manastone: Magic Boost +27 / Magical Accuracy +7 -->
 			<item id="167000708" chance="2.11"/><!-- Manastone: Magical Accuracy +14 / Magic Boost +13 -->
 			<item id="167000713" chance="2.1"/><!-- Manastone: Magical Accuracy +14 / Crit Strike +8 -->
 			<item id="167020026" chance="0.41"/><!-- Ancient Manastone: Accuracy +31 -->
@@ -46069,6 +46318,86 @@
 	</decomposable>
 	<decomposable item_id="188052908"><!-- Test Item -->
 		<set>
+			<item id="167000766" chance="1.14"/><!-- Manastone: HP +100 -->
+			<item id="167000767" chance="1.14"/><!-- Manastone: MP +105 -->
+			<item id="167000769" chance="1.14"/><!-- Manastone: Evasion +19 -->
+			<item id="167000771" chance="1.14"/><!-- Manastone: Parry +29 -->
+			<item id="167000772" chance="1.14"/><!-- Manastone: Block +29 -->
+			<item id="167000776" chance="1.15"/><!-- Manastone: Resist Magic +16 -->
+			<item id="167000559" chance="1.15"/><!-- Manastone: Maximum Flight Time +7 -->
+			<item id="167000775" chance="2"/><!-- Manastone: Magical Accuracy +16 -->
+			<item id="167000770" chance="2"/><!-- Manastone: Magic Boost +28 -->
+			<item id="167000773" chance="2"/><!-- Manastone: Crit Strike +19 -->
+			<item id="167000777" chance="2"/><!-- Manastone: Crit Spell +5 -->
+			<item id="167000768" chance="2"/><!-- Manastone: Accuracy +29 -->
+			<item id="167000518" chance="2"/><!-- Manastone: Attack +5 -->
+			<item id="167000845" chance="0.32"/><!-- Manastone: HP +95 / MP +47 -->
+			<item id="167000847" chance="0.32"/><!-- Manastone: HP +95 / Evasion +13 -->
+			<item id="167000851" chance="0.32"/><!-- Manastone: HP +95 / Resist Magic+7 -->
+			<item id="167000852" chance="0.32"/><!-- Manastone: HP +95 / Magical Accuracy +7 -->
+			<item id="167000853" chance="0.32"/><!-- Manastone: MP +95 / HP +47 -->
+			<item id="167000854" chance="0.32"/><!-- Manastone: MP +95 / Accuracy +13 -->
+			<item id="167000855" chance="0.32"/><!-- Manastone: MP +95 / Evasion +13 -->
+			<item id="167000856" chance="0.32"/><!-- Manastone: MP +95 / Parry +13 -->
+			<item id="167000857" chance="0.32"/><!-- Manastone: MP +95 / Block +13 -->
+			<item id="167000858" chance="0.32"/><!-- Manastone: MP +95 / Crit Strike +8 -->
+			<item id="167000692" chance="0.32"/><!-- Manastone: Crit Strike +17 / Evasion +13 -->
+			<item id="167000693" chance="0.32"/><!-- Manastone: Crit Strike +17 / Parry +13 -->
+			<item id="167000694" chance="0.32"/><!-- Manastone: Crit Strike +17 / Block +13 -->
+			<item id="167000689" chance="0.32"/><!-- Manastone: Crit Strike +17 / MP +47 -->
+			<item id="167000683" chance="0.32"/><!-- Manastone: Attack +5 / MP +47 -->
+			<item id="167000685" chance="0.32"/><!-- Manastone: Attack +5 / Evasion +13 -->
+			<item id="167000861" chance="0.32"/><!-- Manastone: Evasion +17 / HP +47 -->
+			<item id="167000862" chance="0.32"/><!-- Manastone: Evasion +17 / MP +47 -->
+			<item id="167000863" chance="0.32"/><!-- Manastone: Evasion +17 / Accuracy +13 -->
+			<item id="167000864" chance="0.32"/><!-- Manastone: Evasion +17 / Parry +13 -->
+			<item id="167000865" chance="0.32"/><!-- Manastone: Evasion +17 / Block +13 -->
+			<item id="167000866" chance="0.32"/><!-- Manastone: Evasion +17 / Crit Strike +8 -->
+			<item id="167000867" chance="0.31"/><!-- Manastone: Evasion +17 / Resist Magic+7 -->
+			<item id="167000868" chance="0.31"/><!-- Manastone: Evasion +17 / Magical Accuracy +7 -->
+			<item id="167000872" chance="0.31"/><!-- Manastone: Parry +27 / Evasion +13 -->
+			<item id="167000870" chance="0.31"/><!-- Manastone: Parry +27 / MP +47 -->
+			<item id="167000697" chance="0.31"/><!-- Manastone: Magic Boost +27 / HP +47 -->
+			<item id="167000699" chance="0.31"/><!-- Manastone: Magic Boost +27 / Accuracy +13 -->
+			<item id="167000700" chance="0.31"/><!-- Manastone: Magic Boost +27 / Evasion +13 -->
+			<item id="167000701" chance="0.31"/><!-- Manastone: Magic Boost +27 / Parry +13 -->
+			<item id="167000702" chance="0.31"/><!-- Manastone: Magic Boost +27 / Block +13 -->
+			<item id="167000703" chance="0.31"/><!-- Manastone: Magic Boost +27 / Crit Strike +8 -->
+			<item id="167000706" chance="0.31"/><!-- Manastone: Magical Accuracy +14 / HP +47 -->
+			<item id="167000709" chance="0.31"/><!-- Manastone: Magical Accuracy +14 / Accuracy +13 -->
+			<item id="167000710" chance="0.31"/><!-- Manastone: Magical Accuracy +14 / Evasion +13 -->
+			<item id="167000711" chance="0.31"/><!-- Manastone: Magical Accuracy +14 / Parry +13 -->
+			<item id="167000712" chance="0.31"/><!-- Manastone: Magical Accuracy +14 / Block +13 -->
+			<item id="167000877" chance="0.31"/><!-- Manastone: Magical Accuracy +14 / Attack +2 -->
+			<item id="167000846" chance="1.1"/><!-- Manastone: HP +95 / Accuracy +13 -->
+			<item id="167000848" chance="1.1"/><!-- Manastone: HP +95 / Parry +13 -->
+			<item id="167000849" chance="1.1"/><!-- Manastone: HP +95 / Block +13 -->
+			<item id="167000850" chance="1.1"/><!-- Manastone: HP +95 / Crit Strike +8 -->
+			<item id="167000707" chance="1.1"/><!-- Manastone: Magical Accuracy +14 / MP +47 -->
+			<item id="167000859" chance="1.1"/><!-- Manastone: MP +95 / Resist Magic+7 -->
+			<item id="167000860" chance="1.1"/><!-- Manastone: MP +95 / Magical Accuracy +7 -->
+			<item id="167000869" chance="1.1"/><!-- Manastone: Parry +27 / HP +47 -->
+			<item id="167000873" chance="1.1"/><!-- Manastone: Parry +27 / Block +13 -->
+			<item id="167000874" chance="1.1"/><!-- Manastone: Parry +27 / Crit Strike +8 -->
+			<item id="167000875" chance="1.1"/><!-- Manastone: Parry +27 / Resist Magic+7 -->
+			<item id="167000876" chance="1.09"/><!-- Manastone: Parry +27 / Magical Accuracy +7 -->
+			<item id="167000871" chance="1.09"/><!-- Manastone: Parry +27 / Accuracy +13 -->
+			<item id="167000682" chance="1.09"/><!-- Manastone: Attack +5 / HP +47 -->
+			<item id="167000687" chance="1.09"/><!-- Manastone: Attack +5 / Block +13 -->
+			<item id="167000686" chance="1.09"/><!-- Manastone: Attack +5 / Parry +13 -->
+			<item id="167000750" chance="1.09"/><!-- Manastone: Attack +5 / Resist Magic +7 -->
+			<item id="167000688" chance="1.09"/><!-- Manastone: Crit Strike +17 / HP +47 -->
+			<item id="167000698" chance="1.09"/><!-- Manastone: Magic Boost +27 / MP +47 -->
+			<item id="167000704" chance="1.09"/><!-- Manastone: Magic Boost +27 / Resist Magic +7 -->
+			<item id="167000714" chance="1.09"/><!-- Manastone: Magical Accuracy +14 / Resist Magic +7 -->
+			<item id="167000751" chance="1.56"/><!-- Manastone: Attack +5 / Magical Accuracy +7 -->
+			<item id="167000684" chance="1.54"/><!-- Manastone: Attack +5 / Accuracy +13 -->
+			<item id="167000749" chance="1.49"/><!-- Manastone: Attack +5 / Crit Strike +8 -->
+			<item id="167000690" chance="1.6"/><!-- Manastone: Crit Strike +17 / Attack +2 -->
+			<item id="167000691" chance="1.32"/><!-- Manastone: Crit Strike +17 / Accuracy +13 -->
+			<item id="167000695" chance="1.52"/><!-- Manastone: Crit Strike +17 / Resist Magic +7 -->
+			<item id="167000696" chance="1.55"/><!-- Manastone: Crit Strike +17 / Magical Accuracy +7 -->
+			<item id="167000705" chance="1.27"/><!-- Manastone: Magic Boost +27 / Magical Accuracy +7 -->
 			<item id="167000708" chance="1.58"/><!-- Manastone: Magical Accuracy +14 / Magic Boost +13 -->
 			<item id="167000713" chance="1.57"/><!-- Manastone: Magical Accuracy +14 / Crit Strike +8 -->
 			<item id="167020026" chance="0.34"/><!-- Ancient Manastone: Accuracy +31 -->
@@ -46117,12 +46446,172 @@
 	</decomposable>
 	<decomposable item_id="188052909"><!-- Test Item -->
 		<set>
+			<item id="167000766" chance="7.14"/><!-- Manastone: HP +100 -->
+			<item id="167000767" chance="7.14"/><!-- Manastone: MP +105 -->
+			<item id="167000769" chance="7.14"/><!-- Manastone: Evasion +19 -->
+			<item id="167000771" chance="7.14"/><!-- Manastone: Parry +29 -->
+			<item id="167000772" chance="7.14"/><!-- Manastone: Block +29 -->
+			<item id="167000776" chance="7.15"/><!-- Manastone: Resist Magic +16 -->
+			<item id="167000559" chance="7.15"/><!-- Manastone: Maximum Flight Time +7 -->
+			<item id="167000775" chance="1.67"/><!-- Manastone: Magical Accuracy +16 -->
+			<item id="167000770" chance="1.67"/><!-- Manastone: Magic Boost +28 -->
+			<item id="167000773" chance="1.67"/><!-- Manastone: Crit Strike +19 -->
+			<item id="167000777" chance="1.67"/><!-- Manastone: Crit Spell +5 -->
+			<item id="167000768" chance="1.66"/><!-- Manastone: Accuracy +29 -->
+			<item id="167000518" chance="1.66"/><!-- Manastone: Attack +5 -->
+			<item id="167000845" chance="0.79"/><!-- Manastone: HP +95 / MP +47 -->
+			<item id="167000847" chance="0.79"/><!-- Manastone: HP +95 / Evasion +13 -->
+			<item id="167000851" chance="0.79"/><!-- Manastone: HP +95 / Resist Magic+7 -->
+			<item id="167000852" chance="0.79"/><!-- Manastone: HP +95 / Magical Accuracy +7 -->
+			<item id="167000853" chance="0.79"/><!-- Manastone: MP +95 / HP +47 -->
+			<item id="167000854" chance="0.79"/><!-- Manastone: MP +95 / Accuracy +13 -->
+			<item id="167000855" chance="0.79"/><!-- Manastone: MP +95 / Evasion +13 -->
+			<item id="167000856" chance="0.79"/><!-- Manastone: MP +95 / Parry +13 -->
+			<item id="167000857" chance="0.79"/><!-- Manastone: MP +95 / Block +13 -->
+			<item id="167000858" chance="0.79"/><!-- Manastone: MP +95 / Crit Strike +8 -->
+			<item id="167000692" chance="0.79"/><!-- Manastone: Crit Strike +17 / Evasion +13 -->
+			<item id="167000693" chance="0.79"/><!-- Manastone: Crit Strike +17 / Parry +13 -->
+			<item id="167000694" chance="0.79"/><!-- Manastone: Crit Strike +17 / Block +13 -->
+			<item id="167000689" chance="0.79"/><!-- Manastone: Crit Strike +17 / MP +47 -->
+			<item id="167000683" chance="0.79"/><!-- Manastone: Attack +5 / MP +47 -->
+			<item id="167000685" chance="0.79"/><!-- Manastone: Attack +5 / Evasion +13 -->
+			<item id="167000861" chance="0.79"/><!-- Manastone: Evasion +17 / HP +47 -->
+			<item id="167000862" chance="0.79"/><!-- Manastone: Evasion +17 / MP +47 -->
+			<item id="167000863" chance="0.79"/><!-- Manastone: Evasion +17 / Accuracy +13 -->
+			<item id="167000864" chance="0.79"/><!-- Manastone: Evasion +17 / Parry +13 -->
+			<item id="167000865" chance="0.79"/><!-- Manastone: Evasion +17 / Block +13 -->
+			<item id="167000866" chance="0.79"/><!-- Manastone: Evasion +17 / Crit Strike +8 -->
+			<item id="167000867" chance="0.79"/><!-- Manastone: Evasion +17 / Resist Magic+7 -->
+			<item id="167000868" chance="0.79"/><!-- Manastone: Evasion +17 / Magical Accuracy +7 -->
+			<item id="167000872" chance="0.79"/><!-- Manastone: Parry +27 / Evasion +13 -->
+			<item id="167000870" chance="0.79"/><!-- Manastone: Parry +27 / MP +47 -->
+			<item id="167000697" chance="0.79"/><!-- Manastone: Magic Boost +27 / HP +47 -->
+			<item id="167000699" chance="0.79"/><!-- Manastone: Magic Boost +27 / Accuracy +13 -->
+			<item id="167000700" chance="0.79"/><!-- Manastone: Magic Boost +27 / Evasion +13 -->
+			<item id="167000701" chance="0.79"/><!-- Manastone: Magic Boost +27 / Parry +13 -->
+			<item id="167000702" chance="0.79"/><!-- Manastone: Magic Boost +27 / Block +13 -->
+			<item id="167000703" chance="0.79"/><!-- Manastone: Magic Boost +27 / Crit Strike +8 -->
+			<item id="167000706" chance="0.79"/><!-- Manastone: Magical Accuracy +14 / HP +47 -->
+			<item id="167000709" chance="0.79"/><!-- Manastone: Magical Accuracy +14 / Accuracy +13 -->
+			<item id="167000710" chance="0.79"/><!-- Manastone: Magical Accuracy +14 / Evasion +13 -->
+			<item id="167000711" chance="0.79"/><!-- Manastone: Magical Accuracy +14 / Parry +13 -->
+			<item id="167000712" chance="0.78"/><!-- Manastone: Magical Accuracy +14 / Block +13 -->
+			<item id="167000877" chance="0.78"/><!-- Manastone: Magical Accuracy +14 / Attack +2 -->
+			<item id="167000846" chance="0.24"/><!-- Manastone: HP +95 / Accuracy +13 -->
+			<item id="167000848" chance="0.24"/><!-- Manastone: HP +95 / Parry +13 -->
+			<item id="167000849" chance="0.24"/><!-- Manastone: HP +95 / Block +13 -->
+			<item id="167000850" chance="0.24"/><!-- Manastone: HP +95 / Crit Strike +8 -->
+			<item id="167000707" chance="0.24"/><!-- Manastone: Magical Accuracy +14 / MP +47 -->
+			<item id="167000859" chance="0.24"/><!-- Manastone: MP +95 / Resist Magic+7 -->
+			<item id="167000860" chance="0.24"/><!-- Manastone: MP +95 / Magical Accuracy +7 -->
+			<item id="167000869" chance="0.24"/><!-- Manastone: Parry +27 / HP +47 -->
+			<item id="167000873" chance="0.24"/><!-- Manastone: Parry +27 / Block +13 -->
+			<item id="167000874" chance="0.24"/><!-- Manastone: Parry +27 / Crit Strike +8 -->
+			<item id="167000875" chance="0.24"/><!-- Manastone: Parry +27 / Resist Magic+7 -->
+			<item id="167000876" chance="0.24"/><!-- Manastone: Parry +27 / Magical Accuracy +7 -->
+			<item id="167000871" chance="0.24"/><!-- Manastone: Parry +27 / Accuracy +13 -->
+			<item id="167000682" chance="0.24"/><!-- Manastone: Attack +5 / HP +47 -->
+			<item id="167000687" chance="0.24"/><!-- Manastone: Attack +5 / Block +13 -->
+			<item id="167000686" chance="0.24"/><!-- Manastone: Attack +5 / Parry +13 -->
+			<item id="167000750" chance="0.24"/><!-- Manastone: Attack +5 / Resist Magic +7 -->
+			<item id="167000688" chance="0.23"/><!-- Manastone: Crit Strike +17 / HP +47 -->
+			<item id="167000698" chance="0.23"/><!-- Manastone: Magic Boost +27 / MP +47 -->
+			<item id="167000704" chance="0.23"/><!-- Manastone: Magic Boost +27 / Resist Magic +7 -->
+			<item id="167000714" chance="0.23"/><!-- Manastone: Magical Accuracy +14 / Resist Magic +7 -->
+			<item id="167000751" chance="0.52"/><!-- Manastone: Attack +5 / Magical Accuracy +7 -->
+			<item id="167000684" chance="0.51"/><!-- Manastone: Attack +5 / Accuracy +13 -->
+			<item id="167000749" chance="0.5"/><!-- Manastone: Attack +5 / Crit Strike +8 -->
+			<item id="167000690" chance="0.53"/><!-- Manastone: Crit Strike +17 / Attack +2 -->
+			<item id="167000691" chance="0.44"/><!-- Manastone: Crit Strike +17 / Accuracy +13 -->
+			<item id="167000695" chance="0.51"/><!-- Manastone: Crit Strike +17 / Resist Magic +7 -->
+			<item id="167000696" chance="0.52"/><!-- Manastone: Crit Strike +17 / Magical Accuracy +7 -->
+			<item id="167000705" chance="0.42"/><!-- Manastone: Magic Boost +27 / Magical Accuracy +7 -->
 			<item id="167000708" chance="0.53"/><!-- Manastone: Magical Accuracy +14 / Magic Boost +13 -->
 			<item id="167000713" chance="0.52"/><!-- Manastone: Magical Accuracy +14 / Crit Strike +8 -->
 		</set>
 	</decomposable>
 	<decomposable item_id="188052910"><!-- Test Item -->
 		<set>
+			<item id="167000766" chance="7.14"/><!-- Manastone: HP +100 -->
+			<item id="167000767" chance="7.14"/><!-- Manastone: MP +105 -->
+			<item id="167000769" chance="7.14"/><!-- Manastone: Evasion +19 -->
+			<item id="167000771" chance="7.14"/><!-- Manastone: Parry +29 -->
+			<item id="167000772" chance="7.14"/><!-- Manastone: Block +29 -->
+			<item id="167000776" chance="7.15"/><!-- Manastone: Resist Magic +16 -->
+			<item id="167000559" chance="7.15"/><!-- Manastone: Maximum Flight Time +7 -->
+			<item id="167000775" chance="1.67"/><!-- Manastone: Magical Accuracy +16 -->
+			<item id="167000770" chance="1.67"/><!-- Manastone: Magic Boost +28 -->
+			<item id="167000773" chance="1.67"/><!-- Manastone: Crit Strike +19 -->
+			<item id="167000777" chance="1.67"/><!-- Manastone: Crit Spell +5 -->
+			<item id="167000768" chance="1.66"/><!-- Manastone: Accuracy +29 -->
+			<item id="167000518" chance="1.66"/><!-- Manastone: Attack +5 -->
+			<item id="167000845" chance="0.58"/><!-- Manastone: HP +95 / MP +47 -->
+			<item id="167000847" chance="0.58"/><!-- Manastone: HP +95 / Evasion +13 -->
+			<item id="167000851" chance="0.58"/><!-- Manastone: HP +95 / Resist Magic+7 -->
+			<item id="167000852" chance="0.58"/><!-- Manastone: HP +95 / Magical Accuracy +7 -->
+			<item id="167000853" chance="0.58"/><!-- Manastone: MP +95 / HP +47 -->
+			<item id="167000854" chance="0.58"/><!-- Manastone: MP +95 / Accuracy +13 -->
+			<item id="167000855" chance="0.58"/><!-- Manastone: MP +95 / Evasion +13 -->
+			<item id="167000856" chance="0.58"/><!-- Manastone: MP +95 / Parry +13 -->
+			<item id="167000857" chance="0.58"/><!-- Manastone: MP +95 / Block +13 -->
+			<item id="167000858" chance="0.58"/><!-- Manastone: MP +95 / Crit Strike +8 -->
+			<item id="167000692" chance="0.58"/><!-- Manastone: Crit Strike +17 / Evasion +13 -->
+			<item id="167000693" chance="0.58"/><!-- Manastone: Crit Strike +17 / Parry +13 -->
+			<item id="167000694" chance="0.58"/><!-- Manastone: Crit Strike +17 / Block +13 -->
+			<item id="167000689" chance="0.58"/><!-- Manastone: Crit Strike +17 / MP +47 -->
+			<item id="167000683" chance="0.58"/><!-- Manastone: Attack +5 / MP +47 -->
+			<item id="167000685" chance="0.58"/><!-- Manastone: Attack +5 / Evasion +13 -->
+			<item id="167000861" chance="0.58"/><!-- Manastone: Evasion +17 / HP +47 -->
+			<item id="167000862" chance="0.58"/><!-- Manastone: Evasion +17 / MP +47 -->
+			<item id="167000863" chance="0.58"/><!-- Manastone: Evasion +17 / Accuracy +13 -->
+			<item id="167000864" chance="0.58"/><!-- Manastone: Evasion +17 / Parry +13 -->
+			<item id="167000865" chance="0.58"/><!-- Manastone: Evasion +17 / Block +13 -->
+			<item id="167000866" chance="0.58"/><!-- Manastone: Evasion +17 / Crit Strike +8 -->
+			<item id="167000867" chance="0.58"/><!-- Manastone: Evasion +17 / Resist Magic+7 -->
+			<item id="167000868" chance="0.58"/><!-- Manastone: Evasion +17 / Magical Accuracy +7 -->
+			<item id="167000872" chance="0.58"/><!-- Manastone: Parry +27 / Evasion +13 -->
+			<item id="167000870" chance="0.58"/><!-- Manastone: Parry +27 / MP +47 -->
+			<item id="167000697" chance="0.58"/><!-- Manastone: Magic Boost +27 / HP +47 -->
+			<item id="167000699" chance="0.58"/><!-- Manastone: Magic Boost +27 / Accuracy +13 -->
+			<item id="167000700" chance="0.58"/><!-- Manastone: Magic Boost +27 / Evasion +13 -->
+			<item id="167000701" chance="0.58"/><!-- Manastone: Magic Boost +27 / Parry +13 -->
+			<item id="167000702" chance="0.58"/><!-- Manastone: Magic Boost +27 / Block +13 -->
+			<item id="167000703" chance="0.58"/><!-- Manastone: Magic Boost +27 / Crit Strike +8 -->
+			<item id="167000706" chance="0.58"/><!-- Manastone: Magical Accuracy +14 / HP +47 -->
+			<item id="167000709" chance="0.58"/><!-- Manastone: Magical Accuracy +14 / Accuracy +13 -->
+			<item id="167000710" chance="0.57"/><!-- Manastone: Magical Accuracy +14 / Evasion +13 -->
+			<item id="167000711" chance="0.57"/><!-- Manastone: Magical Accuracy +14 / Parry +13 -->
+			<item id="167000712" chance="0.57"/><!-- Manastone: Magical Accuracy +14 / Block +13 -->
+			<item id="167000877" chance="0.57"/><!-- Manastone: Magical Accuracy +14 / Attack +2 -->
+			<item id="167000846" chance="0.14"/><!-- Manastone: HP +95 / Accuracy +13 -->
+			<item id="167000848" chance="0.14"/><!-- Manastone: HP +95 / Parry +13 -->
+			<item id="167000849" chance="0.14"/><!-- Manastone: HP +95 / Block +13 -->
+			<item id="167000850" chance="0.14"/><!-- Manastone: HP +95 / Crit Strike +8 -->
+			<item id="167000707" chance="0.14"/><!-- Manastone: Magical Accuracy +14 / MP +47 -->
+			<item id="167000859" chance="0.14"/><!-- Manastone: MP +95 / Resist Magic+7 -->
+			<item id="167000860" chance="0.14"/><!-- Manastone: MP +95 / Magical Accuracy +7 -->
+			<item id="167000869" chance="0.14"/><!-- Manastone: Parry +27 / HP +47 -->
+			<item id="167000873" chance="0.14"/><!-- Manastone: Parry +27 / Block +13 -->
+			<item id="167000874" chance="0.14"/><!-- Manastone: Parry +27 / Crit Strike +8 -->
+			<item id="167000875" chance="0.14"/><!-- Manastone: Parry +27 / Resist Magic+7 -->
+			<item id="167000876" chance="0.14"/><!-- Manastone: Parry +27 / Magical Accuracy +7 -->
+			<item id="167000871" chance="0.14"/><!-- Manastone: Parry +27 / Accuracy +13 -->
+			<item id="167000682" chance="0.14"/><!-- Manastone: Attack +5 / HP +47 -->
+			<item id="167000687" chance="0.14"/><!-- Manastone: Attack +5 / Block +13 -->
+			<item id="167000686" chance="0.15"/><!-- Manastone: Attack +5 / Parry +13 -->
+			<item id="167000750" chance="0.15"/><!-- Manastone: Attack +5 / Resist Magic +7 -->
+			<item id="167000688" chance="0.15"/><!-- Manastone: Crit Strike +17 / HP +47 -->
+			<item id="167000698" chance="0.15"/><!-- Manastone: Magic Boost +27 / MP +47 -->
+			<item id="167000704" chance="0.15"/><!-- Manastone: Magic Boost +27 / Resist Magic +7 -->
+			<item id="167000714" chance="0.15"/><!-- Manastone: Magical Accuracy +14 / Resist Magic +7 -->
+			<item id="167000751" chance="0.52"/><!-- Manastone: Attack +5 / Magical Accuracy +7 -->
+			<item id="167000684" chance="0.51"/><!-- Manastone: Attack +5 / Accuracy +13 -->
+			<item id="167000749" chance="0.5"/><!-- Manastone: Attack +5 / Crit Strike +8 -->
+			<item id="167000690" chance="0.53"/><!-- Manastone: Crit Strike +17 / Attack +2 -->
+			<item id="167000691" chance="0.44"/><!-- Manastone: Crit Strike +17 / Accuracy +13 -->
+			<item id="167000695" chance="0.51"/><!-- Manastone: Crit Strike +17 / Resist Magic +7 -->
+			<item id="167000696" chance="0.52"/><!-- Manastone: Crit Strike +17 / Magical Accuracy +7 -->
+			<item id="167000705" chance="0.42"/><!-- Manastone: Magic Boost +27 / Magical Accuracy +7 -->
 			<item id="167000708" chance="0.53"/><!-- Manastone: Magical Accuracy +14 / Magic Boost +13 -->
 			<item id="167000713" chance="0.52"/><!-- Manastone: Magical Accuracy +14 / Crit Strike +8 -->
 			<item id="167020026" chance="0.28"/><!-- Ancient Manastone: Accuracy +31 -->
@@ -46167,6 +46656,86 @@
 	</decomposable>
 	<decomposable item_id="188052911"><!-- Test Item -->
 		<set>
+			<item id="167000766" chance="7.14"/><!-- Manastone: HP +100 -->
+			<item id="167000767" chance="7.14"/><!-- Manastone: MP +105 -->
+			<item id="167000769" chance="7.14"/><!-- Manastone: Evasion +19 -->
+			<item id="167000771" chance="7.14"/><!-- Manastone: Parry +29 -->
+			<item id="167000772" chance="7.14"/><!-- Manastone: Block +29 -->
+			<item id="167000776" chance="7.15"/><!-- Manastone: Resist Magic +16 -->
+			<item id="167000559" chance="7.15"/><!-- Manastone: Maximum Flight Time +7 -->
+			<item id="167000775" chance="1.67"/><!-- Manastone: Magical Accuracy +16 -->
+			<item id="167000770" chance="1.67"/><!-- Manastone: Magic Boost +28 -->
+			<item id="167000773" chance="1.67"/><!-- Manastone: Crit Strike +19 -->
+			<item id="167000777" chance="1.67"/><!-- Manastone: Crit Spell +5 -->
+			<item id="167000768" chance="1.66"/><!-- Manastone: Accuracy +29 -->
+			<item id="167000518" chance="1.66"/><!-- Manastone: Attack +5 -->
+			<item id="167000845" chance="0.63"/><!-- Manastone: HP +95 / MP +47 -->
+			<item id="167000847" chance="0.63"/><!-- Manastone: HP +95 / Evasion +13 -->
+			<item id="167000851" chance="0.63"/><!-- Manastone: HP +95 / Resist Magic+7 -->
+			<item id="167000852" chance="0.63"/><!-- Manastone: HP +95 / Magical Accuracy +7 -->
+			<item id="167000853" chance="0.63"/><!-- Manastone: MP +95 / HP +47 -->
+			<item id="167000854" chance="0.63"/><!-- Manastone: MP +95 / Accuracy +13 -->
+			<item id="167000855" chance="0.63"/><!-- Manastone: MP +95 / Evasion +13 -->
+			<item id="167000856" chance="0.63"/><!-- Manastone: MP +95 / Parry +13 -->
+			<item id="167000857" chance="0.63"/><!-- Manastone: MP +95 / Block +13 -->
+			<item id="167000858" chance="0.63"/><!-- Manastone: MP +95 / Crit Strike +8 -->
+			<item id="167000692" chance="0.63"/><!-- Manastone: Crit Strike +17 / Evasion +13 -->
+			<item id="167000693" chance="0.63"/><!-- Manastone: Crit Strike +17 / Parry +13 -->
+			<item id="167000694" chance="0.63"/><!-- Manastone: Crit Strike +17 / Block +13 -->
+			<item id="167000689" chance="0.63"/><!-- Manastone: Crit Strike +17 / MP +47 -->
+			<item id="167000683" chance="0.63"/><!-- Manastone: Attack +5 / MP +47 -->
+			<item id="167000685" chance="0.63"/><!-- Manastone: Attack +5 / Evasion +13 -->
+			<item id="167000861" chance="0.63"/><!-- Manastone: Evasion +17 / HP +47 -->
+			<item id="167000862" chance="0.63"/><!-- Manastone: Evasion +17 / MP +47 -->
+			<item id="167000863" chance="0.63"/><!-- Manastone: Evasion +17 / Accuracy +13 -->
+			<item id="167000864" chance="0.63"/><!-- Manastone: Evasion +17 / Parry +13 -->
+			<item id="167000865" chance="0.63"/><!-- Manastone: Evasion +17 / Block +13 -->
+			<item id="167000866" chance="0.63"/><!-- Manastone: Evasion +17 / Crit Strike +8 -->
+			<item id="167000867" chance="0.63"/><!-- Manastone: Evasion +17 / Resist Magic+7 -->
+			<item id="167000868" chance="0.63"/><!-- Manastone: Evasion +17 / Magical Accuracy +7 -->
+			<item id="167000872" chance="0.63"/><!-- Manastone: Parry +27 / Evasion +13 -->
+			<item id="167000870" chance="0.63"/><!-- Manastone: Parry +27 / MP +47 -->
+			<item id="167000697" chance="0.63"/><!-- Manastone: Magic Boost +27 / HP +47 -->
+			<item id="167000699" chance="0.63"/><!-- Manastone: Magic Boost +27 / Accuracy +13 -->
+			<item id="167000700" chance="0.63"/><!-- Manastone: Magic Boost +27 / Evasion +13 -->
+			<item id="167000701" chance="0.63"/><!-- Manastone: Magic Boost +27 / Parry +13 -->
+			<item id="167000702" chance="0.63"/><!-- Manastone: Magic Boost +27 / Block +13 -->
+			<item id="167000703" chance="0.63"/><!-- Manastone: Magic Boost +27 / Crit Strike +8 -->
+			<item id="167000706" chance="0.64"/><!-- Manastone: Magical Accuracy +14 / HP +47 -->
+			<item id="167000709" chance="0.64"/><!-- Manastone: Magical Accuracy +14 / Accuracy +13 -->
+			<item id="167000710" chance="0.64"/><!-- Manastone: Magical Accuracy +14 / Evasion +13 -->
+			<item id="167000711" chance="0.64"/><!-- Manastone: Magical Accuracy +14 / Parry +13 -->
+			<item id="167000712" chance="0.64"/><!-- Manastone: Magical Accuracy +14 / Block +13 -->
+			<item id="167000877" chance="0.64"/><!-- Manastone: Magical Accuracy +14 / Attack +2 -->
+			<item id="167000846" chance="0.14"/><!-- Manastone: HP +95 / Accuracy +13 -->
+			<item id="167000848" chance="0.14"/><!-- Manastone: HP +95 / Parry +13 -->
+			<item id="167000849" chance="0.14"/><!-- Manastone: HP +95 / Block +13 -->
+			<item id="167000850" chance="0.14"/><!-- Manastone: HP +95 / Crit Strike +8 -->
+			<item id="167000707" chance="0.14"/><!-- Manastone: Magical Accuracy +14 / MP +47 -->
+			<item id="167000859" chance="0.14"/><!-- Manastone: MP +95 / Resist Magic+7 -->
+			<item id="167000860" chance="0.14"/><!-- Manastone: MP +95 / Magical Accuracy +7 -->
+			<item id="167000869" chance="0.14"/><!-- Manastone: Parry +27 / HP +47 -->
+			<item id="167000873" chance="0.14"/><!-- Manastone: Parry +27 / Block +13 -->
+			<item id="167000874" chance="0.14"/><!-- Manastone: Parry +27 / Crit Strike +8 -->
+			<item id="167000875" chance="0.14"/><!-- Manastone: Parry +27 / Resist Magic+7 -->
+			<item id="167000876" chance="0.14"/><!-- Manastone: Parry +27 / Magical Accuracy +7 -->
+			<item id="167000871" chance="0.14"/><!-- Manastone: Parry +27 / Accuracy +13 -->
+			<item id="167000682" chance="0.14"/><!-- Manastone: Attack +5 / HP +47 -->
+			<item id="167000687" chance="0.14"/><!-- Manastone: Attack +5 / Block +13 -->
+			<item id="167000686" chance="0.15"/><!-- Manastone: Attack +5 / Parry +13 -->
+			<item id="167000750" chance="0.15"/><!-- Manastone: Attack +5 / Resist Magic +7 -->
+			<item id="167000688" chance="0.15"/><!-- Manastone: Crit Strike +17 / HP +47 -->
+			<item id="167000698" chance="0.15"/><!-- Manastone: Magic Boost +27 / MP +47 -->
+			<item id="167000704" chance="0.15"/><!-- Manastone: Magic Boost +27 / Resist Magic +7 -->
+			<item id="167000714" chance="0.15"/><!-- Manastone: Magical Accuracy +14 / Resist Magic +7 -->
+			<item id="167000751" chance="0.31"/><!-- Manastone: Attack +5 / Magical Accuracy +7 -->
+			<item id="167000684" chance="0.31"/><!-- Manastone: Attack +5 / Accuracy +13 -->
+			<item id="167000749" chance="0.3"/><!-- Manastone: Attack +5 / Crit Strike +8 -->
+			<item id="167000690" chance="0.32"/><!-- Manastone: Crit Strike +17 / Attack +2 -->
+			<item id="167000691" chance="0.26"/><!-- Manastone: Crit Strike +17 / Accuracy +13 -->
+			<item id="167000695" chance="0.3"/><!-- Manastone: Crit Strike +17 / Resist Magic +7 -->
+			<item id="167000696" chance="0.31"/><!-- Manastone: Crit Strike +17 / Magical Accuracy +7 -->
+			<item id="167000705" chance="0.25"/><!-- Manastone: Magic Boost +27 / Magical Accuracy +7 -->
 			<item id="167000708" chance="0.32"/><!-- Manastone: Magical Accuracy +14 / Magic Boost +13 -->
 			<item id="167000713" chance="0.32"/><!-- Manastone: Magical Accuracy +14 / Crit Strike +8 -->
 			<item id="167020026" chance="0.21"/><!-- Ancient Manastone: Accuracy +31 -->
@@ -48317,6 +48886,86 @@
 	</decomposable>
 	<decomposable item_id="188053014"><!-- Linkgate Foundry Legion Bundle -->
 		<set>
+			<item id="167000651" chance="1.68"/><!-- Manastone: Attack +5 / Block +12 -->
+			<item id="167000652" chance="0.3"/><!-- Manastone: Attack +5 / Crit Strike +7 -->
+			<item id="167000653" chance="0.3"/><!-- Manastone: Attack +5 / Resist Magic +6 -->
+			<item id="167000654" chance="0.3"/><!-- Manastone: Attack +5 / Magical Accuracy +6 -->
+			<item id="167000646" chance="0.5"/><!-- Manastone: Attack +5 / HP +42 -->
+			<item id="167000647" chance="1.68"/><!-- Manastone: Attack +5 / MP +42 -->
+			<item id="167000648" chance="0.3"/><!-- Manastone: Attack +5 / Accuracy +12 -->
+			<item id="167000649" chance="1.68"/><!-- Manastone: Attack +5 / Evasion +12 -->
+			<item id="167000650" chance="1.68"/><!-- Manastone: Attack +5 / Parry +12 -->
+			<item id="167000660" chance="1.68"/><!-- Manastone: Crit Strike +15 / Parry +12 -->
+			<item id="167000661" chance="1.68"/><!-- Manastone: Crit Strike +15 / Block +12 -->
+			<item id="167000662" chance="0.3"/><!-- Manastone: Crit Strike +15 / Resist Magic +6 -->
+			<item id="167000663" chance="0.3"/><!-- Manastone: Crit Strike +15 / Magical Accuracy +6 -->
+			<item id="167000673" chance="0.5"/><!-- Manastone: Magical Accuracy +12 / HP +42 -->
+			<item id="167000674" chance="1.68"/><!-- Manastone: Magical Accuracy +12 / MP +42 -->
+			<item id="167000675" chance="0.3"/><!-- Manastone: Magical Accuracy +12 / Magic Boost +12 -->
+			<item id="167000676" chance="1.68"/><!-- Manastone: Magical Accuracy +12 / Accuracy +12 -->
+			<item id="167000677" chance="1.68"/><!-- Manastone: Magical Accuracy +12 / Evasion +12 -->
+			<item id="167000815" chance="1.68"/><!-- Manastone: HP +85 / Parry +12 -->
+			<item id="167000816" chance="1.68"/><!-- Manastone: HP +85 / Block +12 -->
+			<item id="167000823" chance="1.68"/><!-- Manastone: MP +85 / Parry +12 -->
+			<item id="167000824" chance="1.68"/><!-- Manastone: MP +85 / Block +12 -->
+			<item id="167000838" chance="1.68"/><!-- Manastone: Parry +25 / Accuracy +12 -->
+			<item id="167000841" chance="1.68"/><!-- Manastone: Parry +25 / Crit Strike +7 -->
+			<item id="167000834" chance="1.68"/><!-- Manastone: Evasion +15 / Resist Magic+6 -->
+			<item id="167000835" chance="1.68"/><!-- Manastone: Evasion +15 / Magical Accuracy +6 -->
+			<item id="167000844" chance="0.3"/><!-- Manastone: Magical Accuracy +12 / Attack +2 -->
+			<item id="167000750" chance="0.13"/><!-- Manastone: Attack +5 / Resist Magic +7 -->
+			<item id="167000751" chance="0.13"/><!-- Manastone: Attack +5 / Magical Accuracy +7 -->
+			<item id="167000684" chance="0.13"/><!-- Manastone: Attack +5 / Accuracy +13 -->
+			<item id="167000749" chance="0.13"/><!-- Manastone: Attack +5 / Crit Strike +8 -->
+			<item id="167000694" chance="0.92"/><!-- Manastone: Crit Strike +17 / Block +13 -->
+			<item id="167000695" chance="0.13"/><!-- Manastone: Crit Strike +17 / Resist Magic +7 -->
+			<item id="167000690" chance="0.13"/><!-- Manastone: Crit Strike +17 / Attack +2 -->
+			<item id="167000691" chance="0.13"/><!-- Manastone: Crit Strike +17 / Accuracy +13 -->
+			<item id="167000692" chance="0.92"/><!-- Manastone: Crit Strike +17 / Evasion +13 -->
+			<item id="167000693" chance="0.92"/><!-- Manastone: Crit Strike +17 / Parry +13 -->
+			<item id="167000702" chance="0.92"/><!-- Manastone: Magic Boost +27 / Block +13 -->
+			<item id="167000703" chance="0.92"/><!-- Manastone: Magic Boost +27 / Crit Strike +8 -->
+			<item id="167000704" chance="0.13"/><!-- Manastone: Magic Boost +27 / Resist Magic +7 -->
+			<item id="167000705" chance="0.13"/><!-- Manastone: Magic Boost +27 / Magical Accuracy +7 -->
+			<item id="167000711" chance="0.92"/><!-- Manastone: Magical Accuracy +14 / Parry +13 -->
+			<item id="167000708" chance="0.13"/><!-- Manastone: Magical Accuracy +14 / Magic Boost +13 -->
+			<item id="167000713" chance="0.13"/><!-- Manastone: Magical Accuracy +14 / Crit Strike +8 -->
+			<item id="167000714" chance="0.13"/><!-- Manastone: Magical Accuracy +14 / Resist Magic +7 -->
+			<item id="167000848" chance="0.93"/><!-- Manastone: HP +95 / Parry +13 -->
+			<item id="167000849" chance="0.93"/><!-- Manastone: HP +95 / Block +13 -->
+			<item id="167000853" chance="0.92"/><!-- Manastone: MP +95 / HP +47 -->
+			<item id="167000855" chance="0.92"/><!-- Manastone: MP +95 / Evasion +13 -->
+			<item id="167000867" chance="0.92"/><!-- Manastone: Evasion +17 / Resist Magic+7 -->
+			<item id="167000868" chance="0.92"/><!-- Manastone: Evasion +17 / Magical Accuracy +7 -->
+			<item id="167000871" chance="0.92"/><!-- Manastone: Parry +27 / Accuracy +13 -->
+			<item id="167000874" chance="0.92"/><!-- Manastone: Parry +27 / Crit Strike +8 -->
+			<item id="167000877" chance="0.13"/><!-- Manastone: Magical Accuracy +14 / Attack +2 -->
+			<item id="167000664" chance="0.5"/><!-- Manastone: Magic Boost +25 / HP +42 -->
+			<item id="167000665" chance="1.68"/><!-- Manastone: Magic Boost +25 / MP +42 -->
+			<item id="167000666" chance="1.68"/><!-- Manastone: Magic Boost +25 / Accuracy +12 -->
+			<item id="167000667" chance="1.68"/><!-- Manastone: Magic Boost +25 / Evasion +12 -->
+			<item id="167000668" chance="1.68"/><!-- Manastone: Magic Boost +25 / Parry +12 -->
+			<item id="167000655" chance="0.5"/><!-- Manastone: Crit Strike +15 / HP +42 -->
+			<item id="167000656" chance="1.68"/><!-- Manastone: Crit Strike +15 / MP +42 -->
+			<item id="167000657" chance="0.3"/><!-- Manastone: Crit Strike +15 / Attack +2 -->
+			<item id="167000658" chance="0.3"/><!-- Manastone: Crit Strike +15 / Accuracy +12 -->
+			<item id="167000659" chance="1.68"/><!-- Manastone: Crit Strike +15 / Evasion +12 -->
+			<item id="167000669" chance="1.68"/><!-- Manastone: Magic Boost +25 / Block +12 -->
+			<item id="167000670" chance="1.68"/><!-- Manastone: Magic Boost +25 / Crit Strike +7 -->
+			<item id="167000671" chance="0.3"/><!-- Manastone: Magic Boost +25 / Resist Magic +6 -->
+			<item id="167000672" chance="0.3"/><!-- Manastone: Magic Boost +25 / Magical Accuracy +6 -->
+			<item id="167000678" chance="1.68"/><!-- Manastone: Magical Accuracy +12 / Parry +12 -->
+			<item id="167000679" chance="1.68"/><!-- Manastone: Magical Accuracy +12 / Block +12 -->
+			<item id="167000680" chance="0.3"/><!-- Manastone: Magical Accuracy +12 / Crit Strike +7 -->
+			<item id="167000681" chance="0.3"/><!-- Manastone: Magical Accuracy +12 / Resist Magic +6 -->
+			<item id="167000812" chance="1.68"/><!-- Manastone: HP +85 / MP +42 -->
+			<item id="167000814" chance="1.68"/><!-- Manastone: HP +85 / Evasion +12 -->
+			<item id="167000820" chance="1.68"/><!-- Manastone: MP +85 / HP +42 -->
+			<item id="167000822" chance="1.68"/><!-- Manastone: MP +85 / Evasion +12 -->
+			<item id="167000830" chance="1.68"/><!-- Manastone: Evasion +15 / Accuracy +12 -->
+			<item id="167000833" chance="1.68"/><!-- Manastone: Evasion +15 / Crit Strike +7 -->
+			<item id="167000842" chance="1.68"/><!-- Manastone: Parry +25 / Resist Magic+6 -->
+			<item id="167000843" chance="1.68"/><!-- Manastone: Parry +25 / Magical Accuracy +6 -->
 			<item id="167000685" chance="0.92"/><!-- Manastone: Attack +5 / Evasion +13 -->
 			<item id="167000682" chance="0.24"/><!-- Manastone: Attack +5 / HP +47 -->
 			<item id="167000683" chance="0.92"/><!-- Manastone: Attack +5 / MP +47 -->
@@ -48547,135 +49196,135 @@
 	</decomposable>
 	<decomposable item_id="188053033"><!-- Kunax's Equipment Box -->
 		<set player_classes="GLADIATOR">
-			<item id="100001683" chance="8"/><!-- Kunax's Sword -->
-			<item id="101301216" chance="8"/><!-- Kunax's Polearm -->
-			<item id="110601550" chance="12.44"/><!-- Kunax's Breastplate -->
-			<item id="113601496" chance="15.56"/><!-- Kunax's Greaves -->
-			<item id="112601495" chance="18.66"/><!-- Kunax's Shoulderplates -->
-			<item id="111601513" chance="18.66"/><!-- Kunax's Gauntlets -->
-			<item id="114601503" chance="6"/><!-- Kunax's Sabatons -->
-			<item id="125003999" chance="2.34"/><!-- Kunax's Helm -->
-			<item id="115001703" chance="2.34"/><!-- Kunax's Shield -->
-			<item id="121001373" chance="1.52"/><!-- Kunax's Opal Necklace -->
-			<item id="120001501" chance="1.92"/><!-- Kunax's Opal Earrings -->
-			<item id="122001642" chance="2.32"/><!-- Kunax's Opal Ring -->
+			<item id="100001683" chance="8.18"/><!-- Kunax's Sword -->
+			<item id="101301216" chance="8.18"/><!-- Kunax's Polearm -->
+			<item id="110601550" chance="12.73"/><!-- Kunax's Breastplate -->
+			<item id="113601496" chance="15.92"/><!-- Kunax's Greaves -->
+			<item id="112601495" chance="19.09"/><!-- Kunax's Shoulderplates -->
+			<item id="111601513" chance="19.09"/><!-- Kunax's Gauntlets -->
+			<item id="114601503" chance="6.14"/><!-- Kunax's Sabatons -->
+			<item id="125003999" chance="2.39"/><!-- Kunax's Helm -->
+			<item id="115001703" chance="2.39"/><!-- Kunax's Shield -->
+			<item id="121001373" chance="1.56"/><!-- Kunax's Opal Necklace -->
+			<item id="120001501" chance="1.96"/><!-- Kunax's Opal Earrings -->
+			<item id="122001642" chance="2.37"/><!-- Kunax's Opal Ring -->
 		</set>
 		<set player_classes="TEMPLAR">
-			<item id="100001683" chance="8"/><!-- Kunax's Sword -->
-			<item id="100901306" chance="8"/><!-- Kunax's Greatsword -->
-			<item id="110601550" chance="12.44"/><!-- Kunax's Breastplate -->
-			<item id="113601496" chance="15.56"/><!-- Kunax's Greaves -->
-			<item id="112601495" chance="18.66"/><!-- Kunax's Shoulderplates -->
-			<item id="111601513" chance="18.66"/><!-- Kunax's Gauntlets -->
-			<item id="114601503" chance="6"/><!-- Kunax's Sabatons -->
-			<item id="125003999" chance="2.34"/><!-- Kunax's Helm -->
-			<item id="115001703" chance="2.34"/><!-- Kunax's Shield -->
-			<item id="121001373" chance="1.52"/><!-- Kunax's Opal Necklace -->
-			<item id="120001501" chance="1.92"/><!-- Kunax's Opal Earrings -->
-			<item id="122001642" chance="2.32"/><!-- Kunax's Opal Ring -->
+			<item id="100001683" chance="8.18"/><!-- Kunax's Sword -->
+			<item id="100901306" chance="8.18"/><!-- Kunax's Greatsword -->
+			<item id="110601550" chance="12.73"/><!-- Kunax's Breastplate -->
+			<item id="113601496" chance="15.92"/><!-- Kunax's Greaves -->
+			<item id="112601495" chance="19.09"/><!-- Kunax's Shoulderplates -->
+			<item id="111601513" chance="19.09"/><!-- Kunax's Gauntlets -->
+			<item id="114601503" chance="6.14"/><!-- Kunax's Sabatons -->
+			<item id="125003999" chance="2.39"/><!-- Kunax's Helm -->
+			<item id="115001703" chance="2.39"/><!-- Kunax's Shield -->
+			<item id="121001373" chance="1.56"/><!-- Kunax's Opal Necklace -->
+			<item id="120001501" chance="1.96"/><!-- Kunax's Opal Earrings -->
+			<item id="122001642" chance="2.37"/><!-- Kunax's Opal Ring -->
 		</set>
 		<set player_classes="ASSASSIN">
-			<item id="100201456" chance="8"/><!-- Kunax's Dagger -->
-			<item id="100001683" chance="8"/><!-- Kunax's Sword -->
-			<item id="110301752" chance="12.44"/><!-- Kunax's Jerkin -->
-			<item id="113301721" chance="15.56"/><!-- Kunax's Breeches -->
-			<item id="112301629" chance="18.66"/><!-- Kunax's Shoulderguards -->
-			<item id="111301690" chance="18.66"/><!-- Kunax's Vambrace -->
-			<item id="114301758" chance="6"/><!-- Kunax's Boots -->
-			<item id="125004001" chance="4.68"/><!-- Kunax's Hat -->
-			<item id="121001373" chance="1.52"/><!-- Kunax's Opal Necklace -->
-			<item id="120001501" chance="1.92"/><!-- Kunax's Opal Earrings -->
-			<item id="122001642" chance="2.32"/><!-- Kunax's Opal Ring -->
+			<item id="100201456" chance="8.18"/><!-- Kunax's Dagger -->
+			<item id="100001683" chance="8.18"/><!-- Kunax's Sword -->
+			<item id="110301752" chance="12.73"/><!-- Kunax's Jerkin -->
+			<item id="113301721" chance="15.92"/><!-- Kunax's Breeches -->
+			<item id="112301629" chance="19.09"/><!-- Kunax's Shoulderguards -->
+			<item id="111301690" chance="19.09"/><!-- Kunax's Vambrace -->
+			<item id="114301758" chance="6.14"/><!-- Kunax's Boots -->
+			<item id="125004001" chance="4.79"/><!-- Kunax's Hat -->
+			<item id="121001373" chance="1.55"/><!-- Kunax's Opal Necklace -->
+			<item id="120001501" chance="1.96"/><!-- Kunax's Opal Earrings -->
+			<item id="122001642" chance="2.37"/><!-- Kunax's Opal Ring -->
 		</set>
 		<set player_classes="RANGER">
-			<item id="101701320" chance="8"/><!-- Kunax's Bow -->
-			<item id="110301752" chance="12.44"/><!-- Kunax's Jerkin -->
-			<item id="113301721" chance="15.56"/><!-- Kunax's Breeches -->
-			<item id="112301629" chance="18.66"/><!-- Kunax's Shoulderguards -->
-			<item id="111301690" chance="18.66"/><!-- Kunax's Vambrace -->
-			<item id="114301758" chance="6"/><!-- Kunax's Boots -->
-			<item id="125004001" chance="12.68"/><!-- Kunax's Hat -->
-			<item id="121001373" chance="1.52"/><!-- Kunax's Opal Necklace -->
-			<item id="120001501" chance="1.92"/><!-- Kunax's Opal Earrings -->
-			<item id="122001642" chance="2.32"/><!-- Kunax's Opal Ring -->
+			<item id="101701320" chance="8.18"/><!-- Kunax's Bow -->
+			<item id="110301752" chance="12.73"/><!-- Kunax's Jerkin -->
+			<item id="113301721" chance="15.92"/><!-- Kunax's Breeches -->
+			<item id="112301629" chance="19.09"/><!-- Kunax's Shoulderguards -->
+			<item id="111301690" chance="19.09"/><!-- Kunax's Vambrace -->
+			<item id="114301758" chance="6.14"/><!-- Kunax's Boots -->
+			<item id="125004001" chance="12.97"/><!-- Kunax's Hat -->
+			<item id="121001373" chance="1.55"/><!-- Kunax's Opal Necklace -->
+			<item id="120001501" chance="1.96"/><!-- Kunax's Opal Earrings -->
+			<item id="122001642" chance="2.37"/><!-- Kunax's Opal Ring -->
 		</set>
 		<set player_classes="GUNNER">
-			<item id="101801171" chance="8"/><!-- Kunax's Pistol -->
-			<item id="101901082" chance="8"/><!-- Kunax's Aethercannon -->
-			<item id="110301752" chance="12.44"/><!-- Kunax's Jerkin -->
-			<item id="113301721" chance="15.56"/><!-- Kunax's Breeches -->
-			<item id="112301629" chance="18.66"/><!-- Kunax's Shoulderguards -->
-			<item id="111301690" chance="18.66"/><!-- Kunax's Vambrace -->
-			<item id="114301758" chance="6"/><!-- Kunax's Boots -->
-			<item id="125004001" chance="4.68"/><!-- Kunax's Hat -->
-			<item id="121001374" chance="1.52"/><!-- Kunax's Nolan Necklace -->
-			<item id="120001502" chance="1.92"/><!-- Kunax's Nolan Earrings -->
-			<item id="122001643" chance="2.32"/><!-- Kunax's Nolan Ring -->
+			<item id="101801171" chance="8.18"/><!-- Kunax's Pistol -->
+			<item id="101901082" chance="8.18"/><!-- Kunax's Aethercannon -->
+			<item id="110301752" chance="12.73"/><!-- Kunax's Jerkin -->
+			<item id="113301721" chance="15.92"/><!-- Kunax's Breeches -->
+			<item id="112301629" chance="19.09"/><!-- Kunax's Shoulderguards -->
+			<item id="111301690" chance="19.09"/><!-- Kunax's Vambrace -->
+			<item id="114301758" chance="6.14"/><!-- Kunax's Boots -->
+			<item id="125004001" chance="4.79"/><!-- Kunax's Hat -->
+			<item id="121001374" chance="1.55"/><!-- Kunax's Nolan Necklace -->
+			<item id="120001502" chance="1.96"/><!-- Kunax's Nolan Earrings -->
+			<item id="122001643" chance="2.37"/><!-- Kunax's Nolan Ring -->
 		</set>
 		<set player_classes="CHANTER">
-			<item id="100101282" chance="8"/><!-- Kunax's Mace -->
-			<item id="101501305" chance="8"/><!-- Kunax's Staff -->
-			<item id="110551085" chance="12.44"/><!-- Kunax's Hauberk -->
-			<item id="113501662" chance="15.56"/><!-- Kunax's Chausses -->
-			<item id="112501583" chance="18.66"/><!-- Kunax's Spaulders -->
-			<item id="111501644" chance="18.66"/><!-- Kunax's Handguards -->
-			<item id="114501672" chance="6"/><!-- Kunax's Brogans -->
-			<item id="125004000" chance="2.34"/><!-- Kunax's Chain Helm -->
-			<item id="115001703" chance="2.34"/><!-- Kunax's Shield -->
-			<item id="121001373" chance="1.52"/><!-- Kunax's Opal Necklace -->
-			<item id="120001501" chance="1.92"/><!-- Kunax's Opal Earrings -->
-			<item id="122001642" chance="2.32"/><!-- Kunax's Opal Ring -->
+			<item id="100101282" chance="8.18"/><!-- Kunax's Mace -->
+			<item id="101501305" chance="8.18"/><!-- Kunax's Staff -->
+			<item id="110551085" chance="12.73"/><!-- Kunax's Hauberk -->
+			<item id="113501662" chance="15.92"/><!-- Kunax's Chausses -->
+			<item id="112501583" chance="19.09"/><!-- Kunax's Spaulders -->
+			<item id="111501644" chance="19.09"/><!-- Kunax's Handguards -->
+			<item id="114501672" chance="6.14"/><!-- Kunax's Brogans -->
+			<item id="125004000" chance="2.39"/><!-- Kunax's Chain Helm -->
+			<item id="115001703" chance="2.39"/><!-- Kunax's Shield -->
+			<item id="121001373" chance="1.56"/><!-- Kunax's Opal Necklace -->
+			<item id="120001501" chance="1.96"/><!-- Kunax's Opal Earrings -->
+			<item id="122001642" chance="2.37"/><!-- Kunax's Opal Ring -->
 		</set>
 		<set player_classes="CLERIC">
-			<item id="100101282" chance="8"/><!-- Kunax's Mace -->
-			<item id="101501305" chance="8"/><!-- Kunax's Staff -->
-			<item id="110551085" chance="12.44"/><!-- Kunax's Hauberk -->
-			<item id="113501662" chance="15.56"/><!-- Kunax's Chausses -->
-			<item id="112501583" chance="18.66"/><!-- Kunax's Spaulders -->
-			<item id="111501644" chance="18.66"/><!-- Kunax's Handguards -->
-			<item id="114501672" chance="6"/><!-- Kunax's Brogans -->
-			<item id="125004000" chance="2.34"/><!-- Kunax's Chain Helm -->
-			<item id="115001703" chance="2.34"/><!-- Kunax's Shield -->
-			<item id="121001374" chance="1.52"/><!-- Kunax's Nolan Necklace -->
-			<item id="120001502" chance="1.92"/><!-- Kunax's Nolan Earrings -->
-			<item id="122001643" chance="2.32"/><!-- Kunax's Nolan Ring -->
+			<item id="100101282" chance="8.18"/><!-- Kunax's Mace -->
+			<item id="101501305" chance="8.18"/><!-- Kunax's Staff -->
+			<item id="110551085" chance="12.73"/><!-- Kunax's Hauberk -->
+			<item id="113501662" chance="15.92"/><!-- Kunax's Chausses -->
+			<item id="112501583" chance="19.09"/><!-- Kunax's Spaulders -->
+			<item id="111501644" chance="19.09"/><!-- Kunax's Handguards -->
+			<item id="114501672" chance="6.14"/><!-- Kunax's Brogans -->
+			<item id="125004000" chance="2.39"/><!-- Kunax's Chain Helm -->
+			<item id="115001703" chance="2.39"/><!-- Kunax's Shield -->
+			<item id="121001374" chance="1.56"/><!-- Kunax's Nolan Necklace -->
+			<item id="120001502" chance="1.96"/><!-- Kunax's Nolan Earrings -->
+			<item id="122001643" chance="2.37"/><!-- Kunax's Nolan Ring -->
 		</set>
 		<set player_classes="RIDER">
-			<item id="102100970" chance="8"/><!-- Kunax's Cipher-Blade -->
-			<item id="110551085" chance="12.44"/><!-- Kunax's Hauberk -->
-			<item id="113501662" chance="15.56"/><!-- Kunax's Chausses -->
-			<item id="112501583" chance="18.66"/><!-- Kunax's Spaulders -->
-			<item id="111501644" chance="18.66"/><!-- Kunax's Handguards -->
-			<item id="114501672" chance="6"/><!-- Kunax's Brogans -->
-			<item id="125004000" chance="12.68"/><!-- Kunax's Chain Helm -->
-			<item id="121001374" chance="1.52"/><!-- Kunax's Nolan Necklace -->
-			<item id="120001502" chance="1.92"/><!-- Kunax's Nolan Earrings -->
-			<item id="122001643" chance="2.32"/><!-- Kunax's Nolan Ring -->
+			<item id="102100970" chance="8.18"/><!-- Kunax's Cipher-Blade -->
+			<item id="110551085" chance="12.73"/><!-- Kunax's Hauberk -->
+			<item id="113501662" chance="15.92"/><!-- Kunax's Chausses -->
+			<item id="112501583" chance="19.09"/><!-- Kunax's Spaulders -->
+			<item id="111501644" chance="19.09"/><!-- Kunax's Handguards -->
+			<item id="114501672" chance="6.14"/><!-- Kunax's Brogans -->
+			<item id="125004000" chance="12.97"/><!-- Kunax's Chain Helm -->
+			<item id="121001374" chance="1.55"/><!-- Kunax's Nolan Necklace -->
+			<item id="120001502" chance="1.96"/><!-- Kunax's Nolan Earrings -->
+			<item id="122001643" chance="2.37"/><!-- Kunax's Nolan Ring -->
 		</set>
 		<set player_classes="SORCERER SPIRIT_MASTER">
-			<item id="100601379" chance="8"/><!-- Kunax's Spellbook -->
-			<item id="100501269" chance="8"/><!-- Kunax's Orb -->
-			<item id="110101755" chance="12.44"/><!-- Kunax's Tunic -->
-			<item id="113101592" chance="15.56"/><!-- Kunax's Leggings -->
-			<item id="112101530" chance="18.66"/><!-- Kunax's Pauldrons -->
-			<item id="111101580" chance="18.66"/><!-- Kunax's Gloves -->
-			<item id="114101626" chance="6"/><!-- Kunax's Shoes -->
-			<item id="125004002" chance="4.68"/><!-- Kunax's Headband -->
-			<item id="121001374" chance="1.52"/><!-- Kunax's Nolan Necklace -->
-			<item id="120001502" chance="1.92"/><!-- Kunax's Nolan Earrings -->
-			<item id="122001643" chance="2.32"/><!-- Kunax's Nolan Ring -->
+			<item id="100601379" chance="8.18"/><!-- Kunax's Spellbook -->
+			<item id="100501269" chance="8.18"/><!-- Kunax's Orb -->
+			<item id="110101755" chance="12.73"/><!-- Kunax's Tunic -->
+			<item id="113101592" chance="15.92"/><!-- Kunax's Leggings -->
+			<item id="112101530" chance="19.09"/><!-- Kunax's Pauldrons -->
+			<item id="111101580" chance="19.09"/><!-- Kunax's Gloves -->
+			<item id="114101626" chance="6.14"/><!-- Kunax's Shoes -->
+			<item id="125004002" chance="4.79"/><!-- Kunax's Headband -->
+			<item id="121001374" chance="1.55"/><!-- Kunax's Nolan Necklace -->
+			<item id="120001502" chance="1.96"/><!-- Kunax's Nolan Earrings -->
+			<item id="122001643" chance="2.37"/><!-- Kunax's Nolan Ring -->
 		</set>
 		<set player_classes="BARD">
-			<item id="102001198" chance="8"/><!-- Kunax's Harp -->
-			<item id="110101755" chance="12.44"/><!-- Kunax's Tunic -->
-			<item id="113101592" chance="15.56"/><!-- Kunax's Leggings -->
-			<item id="112101530" chance="18.66"/><!-- Kunax's Pauldrons -->
-			<item id="111101580" chance="18.66"/><!-- Kunax's Gloves -->
-			<item id="114101626" chance="6"/><!-- Kunax's Shoes -->
-			<item id="125004002" chance="12.68"/><!-- Kunax's Headband -->
-			<item id="121001374" chance="1.52"/><!-- Kunax's Nolan Necklace -->
-			<item id="120001502" chance="1.92"/><!-- Kunax's Nolan Earrings -->
-			<item id="122001643" chance="2.32"/><!-- Kunax's Nolan Ring -->
+			<item id="102001198" chance="8.18"/><!-- Kunax's Harp -->
+			<item id="110101755" chance="12.73"/><!-- Kunax's Tunic -->
+			<item id="113101592" chance="15.92"/><!-- Kunax's Leggings -->
+			<item id="112101530" chance="19.09"/><!-- Kunax's Pauldrons -->
+			<item id="111101580" chance="19.09"/><!-- Kunax's Gloves -->
+			<item id="114101626" chance="6.14"/><!-- Kunax's Shoes -->
+			<item id="125004002" chance="12.97"/><!-- Kunax's Headband -->
+			<item id="121001374" chance="1.55"/><!-- Kunax's Nolan Necklace -->
+			<item id="120001502" chance="1.96"/><!-- Kunax's Nolan Earrings -->
+			<item id="122001643" chance="2.37"/><!-- Kunax's Nolan Ring -->
 		</set>
 	</decomposable>
 	<decomposable item_id="188053034" selectable="true"><!-- Spatalos' Armor Box -->
@@ -49391,7 +50040,7 @@
 	</decomposable>
 	<decomposable item_id="188053091"><!-- Modor's Curiosity Box -->
 		<set>
-			<item id="188053099" chance="70"/><!-- Pure Modor's Equipment Crux Box -->
+			<item id="188053099"/><!-- Pure Modor's Equipment Crux Box -->
 		</set>
 		<set chance="6.7" player_classes="TEMPLAR">
 			<item id="125004076"/><!-- Pure Lunatic Modor's Templar Helm -->
@@ -49469,7 +50118,7 @@
 	</decomposable>
 	<decomposable item_id="188053093"><!-- Dynatoum's Curiosity Box -->
 		<set>
-			<item id="188053100" chance="70"/><!-- Pure Dynatoum's Equipment Crux Box -->
+			<item id="188053100"/><!-- Pure Dynatoum's Equipment Crux Box -->
 		</set>
 		<set chance="6.7" player_classes="TEMPLAR">
 			<item id="125004085"/><!-- Pure Dynatoum's Radiant Helm -->
@@ -52429,6 +53078,86 @@
 	</decomposable>
 	<decomposable item_id="188053156"><!-- [Event] Camaraderie Box -->
 		<set>
+			<item id="186000242" count="3" chance="1"/><!-- Ceramium Medal -->
+			<item id="188052070" chance="5"/><!-- [Event] Fabled Godstone Bundle -->
+			<item id="188051732" chance="5"/><!-- [Event] Heroic Godstone Bundle -->
+			<item id="188052324" chance="10"/><!-- [Event] Greater Composite Manastone Bundle -->
+			<item id="186000147" chance="8"/><!-- Mithril Medal -->
+			<item id="169610034" chance="8"/><!-- [Title Card] Daddy Long Legs – 30-day pass -->
+			<item id="188600201" count="3" chance="4"/><!-- Tiamat Stronghold Bonus Entry Scroll -->
+			<item id="188600203" count="3" chance="4"/><!-- Dragon Lord's Refuge Bonus Entry Scroll -->
+			<item id="188600236" count="3" chance="4"/><!-- Danuar Reliquary Bonus Entry Scroll -->
+			<item id="188600238" count="3" chance="4"/><!-- Infinity Shard Bonus Entry Scroll -->
+			<item id="188600251" count="3" chance="4"/><!-- Sauro Supply Base Bonus Entry Scroll -->
+			<item id="188052720" count="5" chance="20"/><!-- [Event] Aion's Gift Box -->
+			<item id="100001308" chance="0.4"/><!-- Enraged Mastarius' Sword -->
+			<item id="100100997" chance="0.4"/><!-- Enraged Mastarius' Mace -->
+			<item id="100201159" chance="0.4"/><!-- Enraged Mastarius' Dagger -->
+			<item id="100501013" chance="0.4"/><!-- Enraged Mastarius' Orb -->
+			<item id="100601066" chance="0.4"/><!-- Enraged Mastarius' Spellbook -->
+			<item id="100901002" chance="0.4"/><!-- Enraged Mastarius' Greatsword -->
+			<item id="101300956" chance="0.4"/><!-- Enraged Mastarius' Polearm -->
+			<item id="101501026" chance="0.4"/><!-- Enraged Mastarius' Staff -->
+			<item id="101701038" chance="0.4"/><!-- Enraged Mastarius' Bow -->
+			<item id="101800799" chance="0.4"/><!-- Enraged Mastarius' Pistol -->
+			<item id="101900803" chance="0.3"/><!-- Enraged Mastarius' Main Cannon -->
+			<item id="102000837" chance="0.4"/><!-- Enraged Mastarius' Harp -->
+			<item id="102100699" chance="0.3"/><!-- Enraged Mastarius' Cipher-Blade -->
+			<item id="115001360" chance="0.2"/><!-- Enraged Mastarius Scale Shield -->
+			<item id="115001358" chance="0.3"/><!-- Enraged Mastarius' Shield -->
+			<item id="110101395" chance="0.2"/><!-- Enraged Mastarius' Tunic -->
+			<item id="110301321" chance="0.2"/><!-- Enraged Mastarius' Jerkin -->
+			<item id="110501299" chance="0.2"/><!-- Enraged Mastarius' Hauberk -->
+			<item id="110601273" chance="0.2"/><!-- Enraged Mastarius' Breastplate -->
+			<item id="111101272" chance="0.3"/><!-- Enraged Mastarius' Gloves -->
+			<item id="111301266" chance="0.3"/><!-- Enraged Mastarius' Vambrace -->
+			<item id="111501260" chance="0.3"/><!-- Enraged Mastarius' Handguards -->
+			<item id="111601240" chance="0.3"/><!-- Enraged Mastarius' Gauntlets -->
+			<item id="112101228" chance="0.2"/><!-- Enraged Mastarius' Pauldrons -->
+			<item id="112301210" chance="0.2"/><!-- Enraged Mastarius' Shoulderguards -->
+			<item id="112501203" chance="0.2"/><!-- Enraged Mastarius' Spaulders -->
+			<item id="112601216" chance="0.2"/><!-- Enraged Mastarius' Shoulderplates -->
+			<item id="113101289" chance="0.3"/><!-- Enraged Mastarius' Leggings -->
+			<item id="113301290" chance="0.3"/><!-- Enraged Mastarius' Breeches -->
+			<item id="113501275" chance="0.3"/><!-- Enraged Mastarius' Chausses -->
+			<item id="113601229" chance="0.3"/><!-- Enraged Mastarius' Greaves -->
+			<item id="114101318" chance="0.2"/><!-- Enraged Mastarius' Shoes -->
+			<item id="114301323" chance="0.2"/><!-- Enraged Mastarius' Boots -->
+			<item id="114501281" chance="0.3"/><!-- Enraged Mastarius' Brogans -->
+			<item id="114601224" chance="0.3"/><!-- Enraged Mastarius' Sabatons -->
+			<item id="110551008" chance="0.2"/><!-- Enraged Mastarius' Magic Hauberk -->
+			<item id="111501566" chance="0.2"/><!-- Enraged Mastarius' Magic Handguards -->
+			<item id="112501508" chance="0.2"/><!-- Enraged Mastarius' Magic Spaulders -->
+			<item id="113501584" chance="0.2"/><!-- Enraged Mastarius' Magic Chausses -->
+			<item id="114501593" chance="0.2"/><!-- Enraged Mastarius' Magic Brogans -->
+			<item id="100001307" chance="0.4"/><!-- Enraged Veille's Sword -->
+			<item id="100100996" chance="0.4"/><!-- Enraged Veille's Warhammer -->
+			<item id="100201158" chance="0.4"/><!-- Enraged Veille's Dagger -->
+			<item id="100501012" chance="0.4"/><!-- Enraged Veille's Jewel -->
+			<item id="100601065" chance="0.4"/><!-- Enraged Veille's Tome -->
+			<item id="100901001" chance="0.4"/><!-- Enraged Veille's Greatsword -->
+			<item id="101300955" chance="0.4"/><!-- Enraged Veille's Spear -->
+			<item id="101501025" chance="0.4"/><!-- Enraged Veille's Staff -->
+			<item id="101701037" chance="0.4"/><!-- Enraged Veille's Longbow -->
+			<item id="101800798" chance="0.4"/><!-- Enraged Veille's Pistol -->
+			<item id="101900802" chance="0.3"/><!-- Enraged Veille's Aethercannon -->
+			<item id="102000836" chance="0.4"/><!-- Enraged Veille's Harp -->
+			<item id="102100698" chance="0.3"/><!-- Enraged Veille's Cipher-Blade -->
+			<item id="115001359" chance="0.2"/><!-- Enraged Veille's Scale Shield -->
+			<item id="115001357" chance="0.3"/><!-- Enraged Veille's Shield -->
+			<item id="110101394" chance="0.2"/><!-- Enraged Veille's Tunic -->
+			<item id="110301320" chance="0.2"/><!-- Enraged Veille's Jerkin -->
+			<item id="110501298" chance="0.2"/><!-- Enraged Veille's Hauberk -->
+			<item id="110601272" chance="0.2"/><!-- Enraged Veille's Breastplate -->
+			<item id="111101271" chance="0.3"/><!-- Enraged Veille's Gloves -->
+			<item id="111301265" chance="0.3"/><!-- Enraged Veille's Vambrace -->
+			<item id="111501259" chance="0.3"/><!-- Enraged Veille's Handguards -->
+			<item id="111601239" chance="0.3"/><!-- Enraged Veille's Gauntlets -->
+			<item id="112101227" chance="0.2"/><!-- Enraged Veille's Pauldrons -->
+			<item id="112301209" chance="0.2"/><!-- Enraged Veille's Shoulderguards -->
+			<item id="112501202" chance="0.2"/><!-- Enraged Veille's Spaulders -->
+			<item id="112601215" chance="0.2"/><!-- Enraged Veille's Shoulderplates -->
+			<item id="113101288" chance="0.3"/><!-- Enraged Veille's Leggings -->
 			<item id="113301289" chance="0.3"/><!-- Enraged Veille's Breeches -->
 			<item id="113501274" chance="0.3"/><!-- Enraged Veille's Chausses -->
 			<item id="113601228" chance="0.3"/><!-- Enraged Veille's Greaves -->
@@ -55837,6 +56566,86 @@
 	</decomposable>
 	<decomposable item_id="188053298"><!-- Expeditionary Force Manastone Bundle -->
 		<set>
+			<item id="167020041" chance="0.13"/><!-- Ancient Manastone: Accuracy +29 -->
+			<item id="167020042" chance="1.65"/><!-- Ancient Manastone: Evasion +19 -->
+			<item id="167020043" chance="1.65"/><!-- Ancient Manastone: Parry +29 -->
+			<item id="167020044" chance="1.65"/><!-- Ancient Manastone: Block +29 -->
+			<item id="167020045" chance="0.13"/><!-- Ancient Manastone: Crit Strike +18 -->
+			<item id="167020046" chance="0.24"/><!-- Ancient Manastone: Physical Critical Resistance +20 -->
+			<item id="167020047" chance="0.13"/><!-- Ancient Manastone: Crit Spell +6 -->
+			<item id="167020048" chance="0.24"/><!-- Ancient Manastone: Magical Critical Resistance +7 -->
+			<item id="167020049" chance="1.65"/><!-- Ancient Manastone: Physical Defense +60 -->
+			<item id="167020050" chance="0.24"/><!-- Ancient Manastone: Resist Magic +17 -->
+			<item id="167020051" chance="0.13"/><!-- Ancient Manastone: Attack +5 -->
+			<item id="167020052" chance="0.13"/><!-- Ancient Manastone: Magical Accuracy +16 -->
+			<item id="167020053" chance="0.13"/><!-- Ancient Manastone: Magic Boost +28 -->
+			<item id="167020054" chance="0.24"/><!-- Ancient Manastone: Magic Suppression +30 -->
+			<item id="167020055" chance="1.64"/><!-- Ancient Manastone: Healing Boost +4 -->
+			<item id="167020024" chance="4.24"/><!-- Ancient Manastone: HP +105 -->
+			<item id="167020025" chance="4.24"/><!-- Ancient Manastone: MP +120 -->
+			<item id="167020026" chance="0.41"/><!-- Ancient Manastone: Accuracy +31 -->
+			<item id="167020027" chance="4.24"/><!-- Ancient Manastone: Evasion +21 -->
+			<item id="167020028" chance="4.24"/><!-- Ancient Manastone: Parry +31 -->
+			<item id="167020029" chance="4.24"/><!-- Ancient Manastone: Block +31 -->
+			<item id="167020030" chance="0.41"/><!-- Ancient Manastone: Crit Strike +20 -->
+			<item id="167020031" chance="0.72"/><!-- Ancient Manastone: Strike Resist +21 -->
+			<item id="167020032" chance="0.41"/><!-- Ancient Manastone: Crit Spell +7 -->
+			<item id="167020033" chance="0.72"/><!-- Ancient Manastone: Magical Critical Resistance +8 -->
+			<item id="167020034" chance="4.24"/><!-- Ancient Manastone: Physical Defense +70 -->
+			<item id="167020035" chance="0.72"/><!-- Ancient Manastone: Resist Magic +19 -->
+			<item id="167020036" chance="0.41"/><!-- Ancient Manastone: Attack +6 -->
+			<item id="167020037" chance="0.41"/><!-- Ancient Manastone: Magical Accuracy +18 -->
+			<item id="167020038" chance="0.41"/><!-- Ancient Manastone: Magic Boost +30 -->
+			<item id="167020039" chance="0.72"/><!-- Ancient Manastone: Magic Suppression +40 -->
+			<item id="167020040" chance="4.24"/><!-- Ancient Manastone: Healing Boost +5 -->
+			<item id="167020056" chance="0.1"/><!-- Ancient Manastone: Accuracy +33 -->
+			<item id="167020057" chance="1.06"/><!-- Ancient Manastone: Evasion +23 -->
+			<item id="167020058" chance="1.06"/><!-- Ancient Manastone: Parry +33 -->
+			<item id="167020059" chance="1.06"/><!-- Ancient Manastone: Block +33 -->
+			<item id="167020060" chance="0.18"/><!-- Ancient Manastone: Physical Critical Resistance +22 -->
+			<item id="167020061" chance="0.18"/><!-- Ancient Manastone: Magical Critical Resistance +9 -->
+			<item id="167020062" chance="1.06"/><!-- Ancient Manastone: Physical Defense +80 -->
+			<item id="167020063" chance="0.1"/><!-- Ancient Manastone: Attack +7 -->
+			<item id="167020064" chance="0.1"/><!-- Ancient Manastone: Magical Accuracy +20 -->
+			<item id="167020065" chance="0.1"/><!-- Ancient Manastone: Magic Boost +32 -->
+			<item id="167000614" chance="0.12"/><!-- Manastone: Attack +4 / HP +37 -->
+			<item id="167000615" chance="0.43"/><!-- Manastone: Attack +4 / MP +37 -->
+			<item id="167000616" chance="0.08"/><!-- Manastone: Attack +4 / Crit Strike +6 -->
+			<item id="167000617" chance="0.08"/><!-- Manastone: Attack +4 / Resist Magic +5 -->
+			<item id="167000618" chance="0.08"/><!-- Manastone: Attack +4 / Magical Accuracy +5 -->
+			<item id="167000745" chance="0.08"/><!-- Manastone: Attack +4 / Accuracy +11 -->
+			<item id="167000746" chance="0.43"/><!-- Manastone: Attack +4 / Evasion +11 -->
+			<item id="167000747" chance="0.43"/><!-- Manastone: Attack +4 / Parry +11 -->
+			<item id="167000748" chance="0.43"/><!-- Manastone: Attack +4 / Block +11 -->
+			<item id="167000619" chance="0.13"/><!-- Manastone: Crit Strike +13 / HP +37 -->
+			<item id="167000620" chance="0.43"/><!-- Manastone: Crit Strike +13 / MP +37 -->
+			<item id="167000621" chance="0.08"/><!-- Manastone: Crit Strike +13 / Attack +2 -->
+			<item id="167000622" chance="0.08"/><!-- Manastone: Crit Strike +13 / Accuracy +11 -->
+			<item id="167000623" chance="0.43"/><!-- Manastone: Crit Strike +13 / Evasion +11 -->
+			<item id="167000624" chance="0.43"/><!-- Manastone: Crit Strike +13 / Parry +11 -->
+			<item id="167000625" chance="0.43"/><!-- Manastone: Crit Strike +13 / Block +11 -->
+			<item id="167000626" chance="0.08"/><!-- Manastone: Crit Strike +13 / Resist Magic +5 -->
+			<item id="167000627" chance="0.08"/><!-- Manastone: Crit Strike +13 / Magical Accuracy +5 -->
+			<item id="167000628" chance="0.13"/><!-- Manastone: Magic Boost +23 / HP +37 -->
+			<item id="167000629" chance="0.43"/><!-- Manastone: Magic Boost +23 / MP +37 -->
+			<item id="167000630" chance="0.43"/><!-- Manastone: Magic Boost +23 / Accuracy +11 -->
+			<item id="167000631" chance="0.43"/><!-- Manastone: Magic Boost +23 / Evasion +11 -->
+			<item id="167000632" chance="0.43"/><!-- Manastone: Magic Boost +23 / Parry +11 -->
+			<item id="167000633" chance="0.43"/><!-- Manastone: Magic Boost +23 / Block +11 -->
+			<item id="167000634" chance="0.43"/><!-- Manastone: Magic Boost +23 / Crit Strike +6 -->
+			<item id="167000635" chance="0.08"/><!-- Manastone: Magic Boost +23 / Resist Magic +5 -->
+			<item id="167000636" chance="0.08"/><!-- Manastone: Magic Boost +23 / Magical Accuracy +5 -->
+			<item id="167000637" chance="0.13"/><!-- Manastone: Magical Accuracy +10 / HP +37 -->
+			<item id="167000638" chance="0.43"/><!-- Manastone: Magical Accuracy +10 / MP +37 -->
+			<item id="167000639" chance="0.08"/><!-- Manastone: Magical Accuracy +10 / Magic Boost +11 -->
+			<item id="167000640" chance="0.43"/><!-- Manastone: Magical Accuracy +10 / Accuracy +11 -->
+			<item id="167000641" chance="0.43"/><!-- Manastone: Magical Accuracy +10 / Evasion +11 -->
+			<item id="167000642" chance="0.43"/><!-- Manastone: Magical Accuracy +10 / Parry +11 -->
+			<item id="167000643" chance="0.43"/><!-- Manastone: Magical Accuracy +10 / Block +11 -->
+			<item id="167000644" chance="0.08"/><!-- Manastone: Magical Accuracy +10 / Crit Strike +6 -->
+			<item id="167000645" chance="0.08"/><!-- Manastone: Magical Accuracy +10 / Resist Magic +5 -->
+			<item id="167000646" chance="0.39"/><!-- Manastone: Attack +5 / HP +42 -->
+			<item id="167000647" chance="1.59"/><!-- Manastone: Attack +5 / MP +42 -->
 			<item id="167000648" chance="0.24"/><!-- Manastone: Attack +5 / Accuracy +12 -->
 			<item id="167000649" chance="1.59"/><!-- Manastone: Attack +5 / Evasion +12 -->
 			<item id="167000650" chance="1.59"/><!-- Manastone: Attack +5 / Parry +12 -->
@@ -55941,6 +56750,86 @@
 	</decomposable>
 	<decomposable item_id="188053302"><!-- Expeditionary Force Manastone Bundle -->
 		<set>
+			<item id="167020041" chance="0.13"/><!-- Ancient Manastone: Accuracy +29 -->
+			<item id="167020042" chance="1.65"/><!-- Ancient Manastone: Evasion +19 -->
+			<item id="167020043" chance="1.65"/><!-- Ancient Manastone: Parry +29 -->
+			<item id="167020044" chance="1.65"/><!-- Ancient Manastone: Block +29 -->
+			<item id="167020045" chance="0.13"/><!-- Ancient Manastone: Crit Strike +18 -->
+			<item id="167020046" chance="0.24"/><!-- Ancient Manastone: Physical Critical Resistance +20 -->
+			<item id="167020047" chance="0.13"/><!-- Ancient Manastone: Crit Spell +6 -->
+			<item id="167020048" chance="0.24"/><!-- Ancient Manastone: Magical Critical Resistance +7 -->
+			<item id="167020049" chance="1.65"/><!-- Ancient Manastone: Physical Defense +60 -->
+			<item id="167020050" chance="0.24"/><!-- Ancient Manastone: Resist Magic +17 -->
+			<item id="167020051" chance="0.13"/><!-- Ancient Manastone: Attack +5 -->
+			<item id="167020052" chance="0.13"/><!-- Ancient Manastone: Magical Accuracy +16 -->
+			<item id="167020053" chance="0.13"/><!-- Ancient Manastone: Magic Boost +28 -->
+			<item id="167020054" chance="0.24"/><!-- Ancient Manastone: Magic Suppression +30 -->
+			<item id="167020055" chance="1.64"/><!-- Ancient Manastone: Healing Boost +4 -->
+			<item id="167020024" chance="4.24"/><!-- Ancient Manastone: HP +105 -->
+			<item id="167020025" chance="4.24"/><!-- Ancient Manastone: MP +120 -->
+			<item id="167020026" chance="0.41"/><!-- Ancient Manastone: Accuracy +31 -->
+			<item id="167020027" chance="4.24"/><!-- Ancient Manastone: Evasion +21 -->
+			<item id="167020028" chance="4.24"/><!-- Ancient Manastone: Parry +31 -->
+			<item id="167020029" chance="4.24"/><!-- Ancient Manastone: Block +31 -->
+			<item id="167020030" chance="0.41"/><!-- Ancient Manastone: Crit Strike +20 -->
+			<item id="167020031" chance="0.72"/><!-- Ancient Manastone: Strike Resist +21 -->
+			<item id="167020032" chance="0.41"/><!-- Ancient Manastone: Crit Spell +7 -->
+			<item id="167020033" chance="0.72"/><!-- Ancient Manastone: Magical Critical Resistance +8 -->
+			<item id="167020034" chance="4.24"/><!-- Ancient Manastone: Physical Defense +70 -->
+			<item id="167020035" chance="0.72"/><!-- Ancient Manastone: Resist Magic +19 -->
+			<item id="167020036" chance="0.41"/><!-- Ancient Manastone: Attack +6 -->
+			<item id="167020037" chance="0.41"/><!-- Ancient Manastone: Magical Accuracy +18 -->
+			<item id="167020038" chance="0.41"/><!-- Ancient Manastone: Magic Boost +30 -->
+			<item id="167020039" chance="0.72"/><!-- Ancient Manastone: Magic Suppression +40 -->
+			<item id="167020040" chance="4.24"/><!-- Ancient Manastone: Healing Boost +5 -->
+			<item id="167020056" chance="0.1"/><!-- Ancient Manastone: Accuracy +33 -->
+			<item id="167020057" chance="1.06"/><!-- Ancient Manastone: Evasion +23 -->
+			<item id="167020058" chance="1.06"/><!-- Ancient Manastone: Parry +33 -->
+			<item id="167020059" chance="1.06"/><!-- Ancient Manastone: Block +33 -->
+			<item id="167020060" chance="0.18"/><!-- Ancient Manastone: Physical Critical Resistance +22 -->
+			<item id="167020061" chance="0.18"/><!-- Ancient Manastone: Magical Critical Resistance +9 -->
+			<item id="167020062" chance="1.06"/><!-- Ancient Manastone: Physical Defense +80 -->
+			<item id="167020063" chance="0.1"/><!-- Ancient Manastone: Attack +7 -->
+			<item id="167020064" chance="0.1"/><!-- Ancient Manastone: Magical Accuracy +20 -->
+			<item id="167020065" chance="0.1"/><!-- Ancient Manastone: Magic Boost +32 -->
+			<item id="167000614" chance="0.12"/><!-- Manastone: Attack +4 / HP +37 -->
+			<item id="167000615" chance="0.43"/><!-- Manastone: Attack +4 / MP +37 -->
+			<item id="167000616" chance="0.08"/><!-- Manastone: Attack +4 / Crit Strike +6 -->
+			<item id="167000617" chance="0.08"/><!-- Manastone: Attack +4 / Resist Magic +5 -->
+			<item id="167000618" chance="0.08"/><!-- Manastone: Attack +4 / Magical Accuracy +5 -->
+			<item id="167000745" chance="0.08"/><!-- Manastone: Attack +4 / Accuracy +11 -->
+			<item id="167000746" chance="0.43"/><!-- Manastone: Attack +4 / Evasion +11 -->
+			<item id="167000747" chance="0.43"/><!-- Manastone: Attack +4 / Parry +11 -->
+			<item id="167000748" chance="0.43"/><!-- Manastone: Attack +4 / Block +11 -->
+			<item id="167000619" chance="0.13"/><!-- Manastone: Crit Strike +13 / HP +37 -->
+			<item id="167000620" chance="0.43"/><!-- Manastone: Crit Strike +13 / MP +37 -->
+			<item id="167000621" chance="0.08"/><!-- Manastone: Crit Strike +13 / Attack +2 -->
+			<item id="167000622" chance="0.08"/><!-- Manastone: Crit Strike +13 / Accuracy +11 -->
+			<item id="167000623" chance="0.43"/><!-- Manastone: Crit Strike +13 / Evasion +11 -->
+			<item id="167000624" chance="0.43"/><!-- Manastone: Crit Strike +13 / Parry +11 -->
+			<item id="167000625" chance="0.43"/><!-- Manastone: Crit Strike +13 / Block +11 -->
+			<item id="167000626" chance="0.08"/><!-- Manastone: Crit Strike +13 / Resist Magic +5 -->
+			<item id="167000627" chance="0.08"/><!-- Manastone: Crit Strike +13 / Magical Accuracy +5 -->
+			<item id="167000628" chance="0.13"/><!-- Manastone: Magic Boost +23 / HP +37 -->
+			<item id="167000629" chance="0.43"/><!-- Manastone: Magic Boost +23 / MP +37 -->
+			<item id="167000630" chance="0.43"/><!-- Manastone: Magic Boost +23 / Accuracy +11 -->
+			<item id="167000631" chance="0.43"/><!-- Manastone: Magic Boost +23 / Evasion +11 -->
+			<item id="167000632" chance="0.43"/><!-- Manastone: Magic Boost +23 / Parry +11 -->
+			<item id="167000633" chance="0.43"/><!-- Manastone: Magic Boost +23 / Block +11 -->
+			<item id="167000634" chance="0.43"/><!-- Manastone: Magic Boost +23 / Crit Strike +6 -->
+			<item id="167000635" chance="0.08"/><!-- Manastone: Magic Boost +23 / Resist Magic +5 -->
+			<item id="167000636" chance="0.08"/><!-- Manastone: Magic Boost +23 / Magical Accuracy +5 -->
+			<item id="167000637" chance="0.13"/><!-- Manastone: Magical Accuracy +10 / HP +37 -->
+			<item id="167000638" chance="0.43"/><!-- Manastone: Magical Accuracy +10 / MP +37 -->
+			<item id="167000639" chance="0.08"/><!-- Manastone: Magical Accuracy +10 / Magic Boost +11 -->
+			<item id="167000640" chance="0.43"/><!-- Manastone: Magical Accuracy +10 / Accuracy +11 -->
+			<item id="167000641" chance="0.43"/><!-- Manastone: Magical Accuracy +10 / Evasion +11 -->
+			<item id="167000642" chance="0.43"/><!-- Manastone: Magical Accuracy +10 / Parry +11 -->
+			<item id="167000643" chance="0.43"/><!-- Manastone: Magical Accuracy +10 / Block +11 -->
+			<item id="167000644" chance="0.08"/><!-- Manastone: Magical Accuracy +10 / Crit Strike +6 -->
+			<item id="167000645" chance="0.08"/><!-- Manastone: Magical Accuracy +10 / Resist Magic +5 -->
+			<item id="167000646" chance="0.39"/><!-- Manastone: Attack +5 / HP +42 -->
+			<item id="167000647" chance="1.59"/><!-- Manastone: Attack +5 / MP +42 -->
 			<item id="167000648" chance="0.24"/><!-- Manastone: Attack +5 / Accuracy +12 -->
 			<item id="167000649" chance="1.59"/><!-- Manastone: Attack +5 / Evasion +12 -->
 			<item id="167000650" chance="1.59"/><!-- Manastone: Attack +5 / Parry +12 -->
@@ -56594,6 +57483,86 @@
 	</decomposable>
 	<decomposable item_id="188053326"><!-- Levinshor Alliance Composite Manastone Box -->
 		<set>
+			<item id="167000614" chance="0.53"/><!-- Manastone: Attack +4 / HP +37 -->
+			<item id="167000615" chance="1.65"/><!-- Manastone: Attack +4 / MP +37 -->
+			<item id="167000745" chance="0.35"/><!-- Manastone: Attack +4 / Accuracy +11 -->
+			<item id="167000746" chance="1.66"/><!-- Manastone: Attack +4 / Evasion +11 -->
+			<item id="167000747" chance="1.66"/><!-- Manastone: Attack +4 / Parry +11 -->
+			<item id="167000748" chance="1.66"/><!-- Manastone: Attack +4 / Block +11 -->
+			<item id="167000616" chance="0.35"/><!-- Manastone: Attack +4 / Crit Strike +6 -->
+			<item id="167000617" chance="0.35"/><!-- Manastone: Attack +4 / Resist Magic +5 -->
+			<item id="167000618" chance="0.35"/><!-- Manastone: Attack +4 / Magical Accuracy +5 -->
+			<item id="167000619" chance="0.53"/><!-- Manastone: Crit Strike +13 / HP +37 -->
+			<item id="167000620" chance="1.66"/><!-- Manastone: Crit Strike +13 / MP +37 -->
+			<item id="167000621" chance="0.35"/><!-- Manastone: Crit Strike +13 / Attack +2 -->
+			<item id="167000622" chance="0.35"/><!-- Manastone: Crit Strike +13 / Accuracy +11 -->
+			<item id="167000623" chance="1.66"/><!-- Manastone: Crit Strike +13 / Evasion +11 -->
+			<item id="167000624" chance="1.66"/><!-- Manastone: Crit Strike +13 / Parry +11 -->
+			<item id="167000625" chance="1.66"/><!-- Manastone: Crit Strike +13 / Block +11 -->
+			<item id="167000626" chance="0.35"/><!-- Manastone: Crit Strike +13 / Resist Magic +5 -->
+			<item id="167000627" chance="0.35"/><!-- Manastone: Crit Strike +13 / Magical Accuracy +5 -->
+			<item id="167000628" chance="0.53"/><!-- Manastone: Magic Boost +23 / HP +37 -->
+			<item id="167000629" chance="1.66"/><!-- Manastone: Magic Boost +23 / MP +37 -->
+			<item id="167000630" chance="1.66"/><!-- Manastone: Magic Boost +23 / Accuracy +11 -->
+			<item id="167000631" chance="1.66"/><!-- Manastone: Magic Boost +23 / Evasion +11 -->
+			<item id="167000632" chance="1.66"/><!-- Manastone: Magic Boost +23 / Parry +11 -->
+			<item id="167000633" chance="1.66"/><!-- Manastone: Magic Boost +23 / Block +11 -->
+			<item id="167000634" chance="1.66"/><!-- Manastone: Magic Boost +23 / Crit Strike +6 -->
+			<item id="167000635" chance="0.35"/><!-- Manastone: Magic Boost +23 / Resist Magic +5 -->
+			<item id="167000636" chance="0.35"/><!-- Manastone: Magic Boost +23 / Magical Accuracy +5 -->
+			<item id="167000637" chance="0.53"/><!-- Manastone: Magical Accuracy +10 / HP +37 -->
+			<item id="167000638" chance="1.66"/><!-- Manastone: Magical Accuracy +10 / MP +37 -->
+			<item id="167000639" chance="0.35"/><!-- Manastone: Magical Accuracy +10 / Magic Boost +11 -->
+			<item id="167000640" chance="1.66"/><!-- Manastone: Magical Accuracy +10 / Accuracy +11 -->
+			<item id="167000641" chance="1.66"/><!-- Manastone: Magical Accuracy +10 / Evasion +11 -->
+			<item id="167000642" chance="1.66"/><!-- Manastone: Magical Accuracy +10 / Parry +11 -->
+			<item id="167000643" chance="1.66"/><!-- Manastone: Magical Accuracy +10 / Block +11 -->
+			<item id="167000644" chance="0.35"/><!-- Manastone: Magical Accuracy +10 / Crit Strike +6 -->
+			<item id="167000645" chance="0.35"/><!-- Manastone: Magical Accuracy +10 / Resist Magic +5 -->
+			<item id="167000811" chance="0.35"/><!-- Manastone: Magical Accuracy +10 / Attack +2 -->
+			<item id="167000779" chance="1.66"/><!-- Manastone: HP +75 / MP +37 -->
+			<item id="167000780" chance="0.53"/><!-- Manastone: HP +75 / Crit Strike +6 -->
+			<item id="167000781" chance="1.66"/><!-- Manastone: HP +75 / Resist Magic+5 -->
+			<item id="167000782" chance="1.66"/><!-- Manastone: HP +75 / Magical Accuracy +5 -->
+			<item id="167000783" chance="1.66"/><!-- Manastone: HP +75 / Accuracy +11 -->
+			<item id="167000784" chance="1.66"/><!-- Manastone: HP +75 / Evasion +11 -->
+			<item id="167000785" chance="1.66"/><!-- Manastone: HP +75 / Parry +11 -->
+			<item id="167000786" chance="1.66"/><!-- Manastone: HP +75 / Block +11 -->
+			<item id="167000787" chance="1.66"/><!-- Manastone: MP +75 / HP +37 -->
+			<item id="167000792" chance="1.66"/><!-- Manastone: MP +75 / Evasion +11 -->
+			<item id="167000795" chance="1.66"/><!-- Manastone: Evasion +13 / HP +37 -->
+			<item id="167000796" chance="1.66"/><!-- Manastone: Evasion +13 / MP +37 -->
+			<item id="167000803" chance="1.66"/><!-- Manastone: Parry +23 / HP +37 -->
+			<item id="167000646" chance="0.35"/><!-- Manastone: Attack +5 / HP +42 -->
+			<item id="167000647" chance="1.15"/><!-- Manastone: Attack +5 / MP +42 -->
+			<item id="167000648" chance="0.2"/><!-- Manastone: Attack +5 / Accuracy +12 -->
+			<item id="167000649" chance="1.15"/><!-- Manastone: Attack +5 / Evasion +12 -->
+			<item id="167000650" chance="1.15"/><!-- Manastone: Attack +5 / Parry +12 -->
+			<item id="167000651" chance="1.15"/><!-- Manastone: Attack +5 / Block +12 -->
+			<item id="167000652" chance="0.2"/><!-- Manastone: Attack +5 / Crit Strike +7 -->
+			<item id="167000653" chance="0.2"/><!-- Manastone: Attack +5 / Resist Magic +6 -->
+			<item id="167000654" chance="0.2"/><!-- Manastone: Attack +5 / Magical Accuracy +6 -->
+			<item id="167000655" chance="0.35"/><!-- Manastone: Crit Strike +15 / HP +42 -->
+			<item id="167000656" chance="1.15"/><!-- Manastone: Crit Strike +15 / MP +42 -->
+			<item id="167000657" chance="0.2"/><!-- Manastone: Crit Strike +15 / Attack +2 -->
+			<item id="167000658" chance="0.2"/><!-- Manastone: Crit Strike +15 / Accuracy +12 -->
+			<item id="167000659" chance="1.15"/><!-- Manastone: Crit Strike +15 / Evasion +12 -->
+			<item id="167000660" chance="1.15"/><!-- Manastone: Crit Strike +15 / Parry +12 -->
+			<item id="167000661" chance="1.15"/><!-- Manastone: Crit Strike +15 / Block +12 -->
+			<item id="167000662" chance="0.2"/><!-- Manastone: Crit Strike +15 / Resist Magic +6 -->
+			<item id="167000663" chance="0.2"/><!-- Manastone: Crit Strike +15 / Magical Accuracy +6 -->
+			<item id="167000664" chance="0.35"/><!-- Manastone: Magic Boost +25 / HP +42 -->
+			<item id="167000665" chance="1.15"/><!-- Manastone: Magic Boost +25 / MP +42 -->
+			<item id="167000666" chance="1.15"/><!-- Manastone: Magic Boost +25 / Accuracy +12 -->
+			<item id="167000667" chance="1.15"/><!-- Manastone: Magic Boost +25 / Evasion +12 -->
+			<item id="167000668" chance="1.15"/><!-- Manastone: Magic Boost +25 / Parry +12 -->
+			<item id="167000669" chance="1.15"/><!-- Manastone: Magic Boost +25 / Block +12 -->
+			<item id="167000670" chance="1.15"/><!-- Manastone: Magic Boost +25 / Crit Strike +7 -->
+			<item id="167000671" chance="0.2"/><!-- Manastone: Magic Boost +25 / Resist Magic +6 -->
+			<item id="167000672" chance="0.2"/><!-- Manastone: Magic Boost +25 / Magical Accuracy +6 -->
+			<item id="167000673" chance="1.15"/><!-- Manastone: Magical Accuracy +12 / HP +42 -->
+			<item id="167000674" chance="1.15"/><!-- Manastone: Magical Accuracy +12 / MP +42 -->
+			<item id="167000675" chance="0.2"/><!-- Manastone: Magical Accuracy +12 / Magic Boost +12 -->
 			<item id="167000676" chance="0.2"/><!-- Manastone: Magical Accuracy +12 / Accuracy +12 -->
 			<item id="167000677" chance="1.15"/><!-- Manastone: Magical Accuracy +12 / Evasion +12 -->
 			<item id="167000844" chance="1.15"/><!-- Manastone: Magical Accuracy +12 / Attack +2 -->
@@ -56618,6 +57587,86 @@
 	</decomposable>
 	<decomposable item_id="188053327"><!-- Levinshor Alliance Noble Composite Manastone Box -->
 		<set>
+			<item id="167000614" chance="0.41"/><!-- Manastone: Attack +4 / HP +37 -->
+			<item id="167000615" chance="1.28"/><!-- Manastone: Attack +4 / MP +37 -->
+			<item id="167000745" chance="0.27"/><!-- Manastone: Attack +4 / Accuracy +11 -->
+			<item id="167000746" chance="1.28"/><!-- Manastone: Attack +4 / Evasion +11 -->
+			<item id="167000747" chance="1.28"/><!-- Manastone: Attack +4 / Parry +11 -->
+			<item id="167000748" chance="1.28"/><!-- Manastone: Attack +4 / Block +11 -->
+			<item id="167000616" chance="0.27"/><!-- Manastone: Attack +4 / Crit Strike +6 -->
+			<item id="167000617" chance="0.27"/><!-- Manastone: Attack +4 / Resist Magic +5 -->
+			<item id="167000618" chance="0.27"/><!-- Manastone: Attack +4 / Magical Accuracy +5 -->
+			<item id="167000619" chance="0.41"/><!-- Manastone: Crit Strike +13 / HP +37 -->
+			<item id="167000620" chance="1.28"/><!-- Manastone: Crit Strike +13 / MP +37 -->
+			<item id="167000621" chance="0.27"/><!-- Manastone: Crit Strike +13 / Attack +2 -->
+			<item id="167000622" chance="0.27"/><!-- Manastone: Crit Strike +13 / Accuracy +11 -->
+			<item id="167000623" chance="1.28"/><!-- Manastone: Crit Strike +13 / Evasion +11 -->
+			<item id="167000624" chance="1.28"/><!-- Manastone: Crit Strike +13 / Parry +11 -->
+			<item id="167000625" chance="1.28"/><!-- Manastone: Crit Strike +13 / Block +11 -->
+			<item id="167000626" chance="0.27"/><!-- Manastone: Crit Strike +13 / Resist Magic +5 -->
+			<item id="167000627" chance="0.27"/><!-- Manastone: Crit Strike +13 / Magical Accuracy +5 -->
+			<item id="167000628" chance="0.4"/><!-- Manastone: Magic Boost +23 / HP +37 -->
+			<item id="167000629" chance="1.28"/><!-- Manastone: Magic Boost +23 / MP +37 -->
+			<item id="167000630" chance="1.28"/><!-- Manastone: Magic Boost +23 / Accuracy +11 -->
+			<item id="167000631" chance="1.28"/><!-- Manastone: Magic Boost +23 / Evasion +11 -->
+			<item id="167000632" chance="1.28"/><!-- Manastone: Magic Boost +23 / Parry +11 -->
+			<item id="167000633" chance="1.28"/><!-- Manastone: Magic Boost +23 / Block +11 -->
+			<item id="167000634" chance="1.28"/><!-- Manastone: Magic Boost +23 / Crit Strike +6 -->
+			<item id="167000635" chance="0.27"/><!-- Manastone: Magic Boost +23 / Resist Magic +5 -->
+			<item id="167000636" chance="0.27"/><!-- Manastone: Magic Boost +23 / Magical Accuracy +5 -->
+			<item id="167000637" chance="0.41"/><!-- Manastone: Magical Accuracy +10 / HP +37 -->
+			<item id="167000638" chance="1.28"/><!-- Manastone: Magical Accuracy +10 / MP +37 -->
+			<item id="167000639" chance="0.27"/><!-- Manastone: Magical Accuracy +10 / Magic Boost +11 -->
+			<item id="167000640" chance="1.28"/><!-- Manastone: Magical Accuracy +10 / Accuracy +11 -->
+			<item id="167000641" chance="1.28"/><!-- Manastone: Magical Accuracy +10 / Evasion +11 -->
+			<item id="167000642" chance="1.28"/><!-- Manastone: Magical Accuracy +10 / Parry +11 -->
+			<item id="167000643" chance="1.28"/><!-- Manastone: Magical Accuracy +10 / Block +11 -->
+			<item id="167000644" chance="0.27"/><!-- Manastone: Magical Accuracy +10 / Crit Strike +6 -->
+			<item id="167000645" chance="0.27"/><!-- Manastone: Magical Accuracy +10 / Resist Magic +5 -->
+			<item id="167000811" chance="0.27"/><!-- Manastone: Magical Accuracy +10 / Attack +2 -->
+			<item id="167000779" chance="1.28"/><!-- Manastone: HP +75 / MP +37 -->
+			<item id="167000780" chance="0.41"/><!-- Manastone: HP +75 / Crit Strike +6 -->
+			<item id="167000781" chance="1.28"/><!-- Manastone: HP +75 / Resist Magic+5 -->
+			<item id="167000782" chance="1.28"/><!-- Manastone: HP +75 / Magical Accuracy +5 -->
+			<item id="167000783" chance="1.28"/><!-- Manastone: HP +75 / Accuracy +11 -->
+			<item id="167000784" chance="1.28"/><!-- Manastone: HP +75 / Evasion +11 -->
+			<item id="167000785" chance="1.28"/><!-- Manastone: HP +75 / Parry +11 -->
+			<item id="167000786" chance="1.28"/><!-- Manastone: HP +75 / Block +11 -->
+			<item id="167000787" chance="1.28"/><!-- Manastone: MP +75 / HP +37 -->
+			<item id="167000792" chance="1.28"/><!-- Manastone: MP +75 / Evasion +11 -->
+			<item id="167000795" chance="1.28"/><!-- Manastone: Evasion +13 / HP +37 -->
+			<item id="167000796" chance="1.28"/><!-- Manastone: Evasion +13 / MP +37 -->
+			<item id="167000803" chance="1.28"/><!-- Manastone: Parry +23 / HP +37 -->
+			<item id="167000646" chance="0.25"/><!-- Manastone: Attack +5 / HP +42 -->
+			<item id="167000647" chance="0.92"/><!-- Manastone: Attack +5 / MP +42 -->
+			<item id="167000648" chance="0.16"/><!-- Manastone: Attack +5 / Accuracy +12 -->
+			<item id="167000649" chance="0.92"/><!-- Manastone: Attack +5 / Evasion +12 -->
+			<item id="167000650" chance="0.92"/><!-- Manastone: Attack +5 / Parry +12 -->
+			<item id="167000651" chance="0.92"/><!-- Manastone: Attack +5 / Block +12 -->
+			<item id="167000652" chance="0.16"/><!-- Manastone: Attack +5 / Crit Strike +7 -->
+			<item id="167000653" chance="0.16"/><!-- Manastone: Attack +5 / Resist Magic +6 -->
+			<item id="167000654" chance="0.16"/><!-- Manastone: Attack +5 / Magical Accuracy +6 -->
+			<item id="167000655" chance="0.25"/><!-- Manastone: Crit Strike +15 / HP +42 -->
+			<item id="167000656" chance="0.92"/><!-- Manastone: Crit Strike +15 / MP +42 -->
+			<item id="167000657" chance="0.16"/><!-- Manastone: Crit Strike +15 / Attack +2 -->
+			<item id="167000658" chance="0.16"/><!-- Manastone: Crit Strike +15 / Accuracy +12 -->
+			<item id="167000659" chance="0.92"/><!-- Manastone: Crit Strike +15 / Evasion +12 -->
+			<item id="167000660" chance="0.92"/><!-- Manastone: Crit Strike +15 / Parry +12 -->
+			<item id="167000661" chance="0.92"/><!-- Manastone: Crit Strike +15 / Block +12 -->
+			<item id="167000662" chance="0.16"/><!-- Manastone: Crit Strike +15 / Resist Magic +6 -->
+			<item id="167000663" chance="0.16"/><!-- Manastone: Crit Strike +15 / Magical Accuracy +6 -->
+			<item id="167000664" chance="0.24"/><!-- Manastone: Magic Boost +25 / HP +42 -->
+			<item id="167000665" chance="0.92"/><!-- Manastone: Magic Boost +25 / MP +42 -->
+			<item id="167000666" chance="0.92"/><!-- Manastone: Magic Boost +25 / Accuracy +12 -->
+			<item id="167000667" chance="0.92"/><!-- Manastone: Magic Boost +25 / Evasion +12 -->
+			<item id="167000668" chance="0.92"/><!-- Manastone: Magic Boost +25 / Parry +12 -->
+			<item id="167000669" chance="0.92"/><!-- Manastone: Magic Boost +25 / Block +12 -->
+			<item id="167000670" chance="0.92"/><!-- Manastone: Magic Boost +25 / Crit Strike +7 -->
+			<item id="167000671" chance="0.16"/><!-- Manastone: Magic Boost +25 / Resist Magic +6 -->
+			<item id="167000672" chance="0.16"/><!-- Manastone: Magic Boost +25 / Magical Accuracy +6 -->
+			<item id="167000673" chance="0.25"/><!-- Manastone: Magical Accuracy +12 / HP +42 -->
+			<item id="167000674" chance="0.92"/><!-- Manastone: Magical Accuracy +12 / MP +42 -->
+			<item id="167000675" chance="0.16"/><!-- Manastone: Magical Accuracy +12 / Magic Boost +12 -->
 			<item id="167000676" chance="0.92"/><!-- Manastone: Magical Accuracy +12 / Accuracy +12 -->
 			<item id="167000677" chance="0.92"/><!-- Manastone: Magical Accuracy +12 / Evasion +12 -->
 			<item id="167000844" chance="0.16"/><!-- Manastone: Magical Accuracy +12 / Attack +2 -->
@@ -56692,6 +57741,86 @@
 	</decomposable>
 	<decomposable item_id="188053328"><!-- Levinshor Alliance Heavy Composite Manastone Box -->
 		<set>
+			<item id="167000614" chance="0.48"/><!-- Manastone: Attack +4 / HP +37 -->
+			<item id="167000615" chance="1.4"/><!-- Manastone: Attack +4 / MP +37 -->
+			<item id="167000745" chance="0.3"/><!-- Manastone: Attack +4 / Accuracy +11 -->
+			<item id="167000746" chance="1.4"/><!-- Manastone: Attack +4 / Evasion +11 -->
+			<item id="167000747" chance="1.4"/><!-- Manastone: Attack +4 / Parry +11 -->
+			<item id="167000748" chance="1.4"/><!-- Manastone: Attack +4 / Block +11 -->
+			<item id="167000616" chance="0.3"/><!-- Manastone: Attack +4 / Crit Strike +6 -->
+			<item id="167000617" chance="0.3"/><!-- Manastone: Attack +4 / Resist Magic +5 -->
+			<item id="167000618" chance="0.3"/><!-- Manastone: Attack +4 / Magical Accuracy +5 -->
+			<item id="167000619" chance="0.48"/><!-- Manastone: Crit Strike +13 / HP +37 -->
+			<item id="167000620" chance="1.4"/><!-- Manastone: Crit Strike +13 / MP +37 -->
+			<item id="167000621" chance="0.3"/><!-- Manastone: Crit Strike +13 / Attack +2 -->
+			<item id="167000622" chance="0.3"/><!-- Manastone: Crit Strike +13 / Accuracy +11 -->
+			<item id="167000623" chance="1.4"/><!-- Manastone: Crit Strike +13 / Evasion +11 -->
+			<item id="167000624" chance="1.4"/><!-- Manastone: Crit Strike +13 / Parry +11 -->
+			<item id="167000625" chance="1.4"/><!-- Manastone: Crit Strike +13 / Block +11 -->
+			<item id="167000626" chance="0.3"/><!-- Manastone: Crit Strike +13 / Resist Magic +5 -->
+			<item id="167000627" chance="0.3"/><!-- Manastone: Crit Strike +13 / Magical Accuracy +5 -->
+			<item id="167000628" chance="0.48"/><!-- Manastone: Magic Boost +23 / HP +37 -->
+			<item id="167000629" chance="1.4"/><!-- Manastone: Magic Boost +23 / MP +37 -->
+			<item id="167000630" chance="1.4"/><!-- Manastone: Magic Boost +23 / Accuracy +11 -->
+			<item id="167000631" chance="1.4"/><!-- Manastone: Magic Boost +23 / Evasion +11 -->
+			<item id="167000632" chance="1.4"/><!-- Manastone: Magic Boost +23 / Parry +11 -->
+			<item id="167000633" chance="1.4"/><!-- Manastone: Magic Boost +23 / Block +11 -->
+			<item id="167000634" chance="1.4"/><!-- Manastone: Magic Boost +23 / Crit Strike +6 -->
+			<item id="167000635" chance="0.3"/><!-- Manastone: Magic Boost +23 / Resist Magic +5 -->
+			<item id="167000636" chance="0.3"/><!-- Manastone: Magic Boost +23 / Magical Accuracy +5 -->
+			<item id="167000637" chance="0.48"/><!-- Manastone: Magical Accuracy +10 / HP +37 -->
+			<item id="167000638" chance="1.4"/><!-- Manastone: Magical Accuracy +10 / MP +37 -->
+			<item id="167000639" chance="0.3"/><!-- Manastone: Magical Accuracy +10 / Magic Boost +11 -->
+			<item id="167000640" chance="1.4"/><!-- Manastone: Magical Accuracy +10 / Accuracy +11 -->
+			<item id="167000641" chance="1.4"/><!-- Manastone: Magical Accuracy +10 / Evasion +11 -->
+			<item id="167000642" chance="1.4"/><!-- Manastone: Magical Accuracy +10 / Parry +11 -->
+			<item id="167000643" chance="1.4"/><!-- Manastone: Magical Accuracy +10 / Block +11 -->
+			<item id="167000644" chance="0.3"/><!-- Manastone: Magical Accuracy +10 / Crit Strike +6 -->
+			<item id="167000645" chance="0.3"/><!-- Manastone: Magical Accuracy +10 / Resist Magic +5 -->
+			<item id="167000811" chance="0.3"/><!-- Manastone: Magical Accuracy +10 / Attack +2 -->
+			<item id="167000779" chance="1.4"/><!-- Manastone: HP +75 / MP +37 -->
+			<item id="167000780" chance="0.48"/><!-- Manastone: HP +75 / Crit Strike +6 -->
+			<item id="167000781" chance="1.4"/><!-- Manastone: HP +75 / Resist Magic+5 -->
+			<item id="167000782" chance="1.4"/><!-- Manastone: HP +75 / Magical Accuracy +5 -->
+			<item id="167000783" chance="1.4"/><!-- Manastone: HP +75 / Accuracy +11 -->
+			<item id="167000784" chance="1.4"/><!-- Manastone: HP +75 / Evasion +11 -->
+			<item id="167000785" chance="1.4"/><!-- Manastone: HP +75 / Parry +11 -->
+			<item id="167000786" chance="1.4"/><!-- Manastone: HP +75 / Block +11 -->
+			<item id="167000787" chance="1.4"/><!-- Manastone: MP +75 / HP +37 -->
+			<item id="167000792" chance="1.4"/><!-- Manastone: MP +75 / Evasion +11 -->
+			<item id="167000795" chance="1.4"/><!-- Manastone: Evasion +13 / HP +37 -->
+			<item id="167000796" chance="1.4"/><!-- Manastone: Evasion +13 / MP +37 -->
+			<item id="167000803" chance="1.4"/><!-- Manastone: Parry +23 / HP +37 -->
+			<item id="167000646" chance="0.33"/><!-- Manastone: Attack +5 / HP +42 -->
+			<item id="167000647" chance="1"/><!-- Manastone: Attack +5 / MP +42 -->
+			<item id="167000648" chance="0.17"/><!-- Manastone: Attack +5 / Accuracy +12 -->
+			<item id="167000649" chance="1"/><!-- Manastone: Attack +5 / Evasion +12 -->
+			<item id="167000650" chance="1"/><!-- Manastone: Attack +5 / Parry +12 -->
+			<item id="167000651" chance="1"/><!-- Manastone: Attack +5 / Block +12 -->
+			<item id="167000652" chance="0.17"/><!-- Manastone: Attack +5 / Crit Strike +7 -->
+			<item id="167000653" chance="0.17"/><!-- Manastone: Attack +5 / Resist Magic +6 -->
+			<item id="167000654" chance="0.17"/><!-- Manastone: Attack +5 / Magical Accuracy +6 -->
+			<item id="167000655" chance="0.33"/><!-- Manastone: Crit Strike +15 / HP +42 -->
+			<item id="167000656" chance="1"/><!-- Manastone: Crit Strike +15 / MP +42 -->
+			<item id="167000657" chance="0.17"/><!-- Manastone: Crit Strike +15 / Attack +2 -->
+			<item id="167000658" chance="0.17"/><!-- Manastone: Crit Strike +15 / Accuracy +12 -->
+			<item id="167000659" chance="1"/><!-- Manastone: Crit Strike +15 / Evasion +12 -->
+			<item id="167000660" chance="1"/><!-- Manastone: Crit Strike +15 / Parry +12 -->
+			<item id="167000661" chance="1"/><!-- Manastone: Crit Strike +15 / Block +12 -->
+			<item id="167000662" chance="0.17"/><!-- Manastone: Crit Strike +15 / Resist Magic +6 -->
+			<item id="167000663" chance="0.17"/><!-- Manastone: Crit Strike +15 / Magical Accuracy +6 -->
+			<item id="167000664" chance="0.32"/><!-- Manastone: Magic Boost +25 / HP +42 -->
+			<item id="167000665" chance="1"/><!-- Manastone: Magic Boost +25 / MP +42 -->
+			<item id="167000666" chance="1"/><!-- Manastone: Magic Boost +25 / Accuracy +12 -->
+			<item id="167000667" chance="1"/><!-- Manastone: Magic Boost +25 / Evasion +12 -->
+			<item id="167000668" chance="1"/><!-- Manastone: Magic Boost +25 / Parry +12 -->
+			<item id="167000669" chance="1"/><!-- Manastone: Magic Boost +25 / Block +12 -->
+			<item id="167000670" chance="1"/><!-- Manastone: Magic Boost +25 / Crit Strike +7 -->
+			<item id="167000671" chance="0.17"/><!-- Manastone: Magic Boost +25 / Resist Magic +6 -->
+			<item id="167000672" chance="0.17"/><!-- Manastone: Magic Boost +25 / Magical Accuracy +6 -->
+			<item id="167000673" chance="0.32"/><!-- Manastone: Magical Accuracy +12 / HP +42 -->
+			<item id="167000674" chance="1"/><!-- Manastone: Magical Accuracy +12 / MP +42 -->
+			<item id="167000675" chance="0.17"/><!-- Manastone: Magical Accuracy +12 / Magic Boost +12 -->
 			<item id="167000676" chance="1"/><!-- Manastone: Magical Accuracy +12 / Accuracy +12 -->
 			<item id="167000677" chance="1"/><!-- Manastone: Magical Accuracy +12 / Evasion +12 -->
 			<item id="167000844" chance="0.17"/><!-- Manastone: Magical Accuracy +12 / Attack +2 -->
@@ -56766,6 +57895,86 @@
 	</decomposable>
 	<decomposable item_id="188053329"><!-- Composite Manastone Box of Ancient Monster -->
 		<set>
+			<item id="167000614" chance="0.39"/><!-- Manastone: Attack +4 / HP +37 -->
+			<item id="167000615" chance="1.12"/><!-- Manastone: Attack +4 / MP +37 -->
+			<item id="167000745" chance="0.24"/><!-- Manastone: Attack +4 / Accuracy +11 -->
+			<item id="167000746" chance="1.12"/><!-- Manastone: Attack +4 / Evasion +11 -->
+			<item id="167000747" chance="1.12"/><!-- Manastone: Attack +4 / Parry +11 -->
+			<item id="167000748" chance="1.12"/><!-- Manastone: Attack +4 / Block +11 -->
+			<item id="167000616" chance="0.24"/><!-- Manastone: Attack +4 / Crit Strike +6 -->
+			<item id="167000617" chance="0.24"/><!-- Manastone: Attack +4 / Resist Magic +5 -->
+			<item id="167000618" chance="0.24"/><!-- Manastone: Attack +4 / Magical Accuracy +5 -->
+			<item id="167000619" chance="0.39"/><!-- Manastone: Crit Strike +13 / HP +37 -->
+			<item id="167000620" chance="1.12"/><!-- Manastone: Crit Strike +13 / MP +37 -->
+			<item id="167000621" chance="0.24"/><!-- Manastone: Crit Strike +13 / Attack +2 -->
+			<item id="167000622" chance="0.24"/><!-- Manastone: Crit Strike +13 / Accuracy +11 -->
+			<item id="167000623" chance="1.12"/><!-- Manastone: Crit Strike +13 / Evasion +11 -->
+			<item id="167000624" chance="1.12"/><!-- Manastone: Crit Strike +13 / Parry +11 -->
+			<item id="167000625" chance="1.12"/><!-- Manastone: Crit Strike +13 / Block +11 -->
+			<item id="167000626" chance="0.24"/><!-- Manastone: Crit Strike +13 / Resist Magic +5 -->
+			<item id="167000627" chance="0.24"/><!-- Manastone: Crit Strike +13 / Magical Accuracy +5 -->
+			<item id="167000628" chance="0.38"/><!-- Manastone: Magic Boost +23 / HP +37 -->
+			<item id="167000629" chance="1.12"/><!-- Manastone: Magic Boost +23 / MP +37 -->
+			<item id="167000630" chance="1.12"/><!-- Manastone: Magic Boost +23 / Accuracy +11 -->
+			<item id="167000631" chance="1.12"/><!-- Manastone: Magic Boost +23 / Evasion +11 -->
+			<item id="167000632" chance="1.12"/><!-- Manastone: Magic Boost +23 / Parry +11 -->
+			<item id="167000633" chance="1.12"/><!-- Manastone: Magic Boost +23 / Block +11 -->
+			<item id="167000634" chance="1.12"/><!-- Manastone: Magic Boost +23 / Crit Strike +6 -->
+			<item id="167000635" chance="0.24"/><!-- Manastone: Magic Boost +23 / Resist Magic +5 -->
+			<item id="167000636" chance="0.24"/><!-- Manastone: Magic Boost +23 / Magical Accuracy +5 -->
+			<item id="167000637" chance="0.38"/><!-- Manastone: Magical Accuracy +10 / HP +37 -->
+			<item id="167000638" chance="1.12"/><!-- Manastone: Magical Accuracy +10 / MP +37 -->
+			<item id="167000639" chance="0.24"/><!-- Manastone: Magical Accuracy +10 / Magic Boost +11 -->
+			<item id="167000640" chance="1.12"/><!-- Manastone: Magical Accuracy +10 / Accuracy +11 -->
+			<item id="167000641" chance="1.12"/><!-- Manastone: Magical Accuracy +10 / Evasion +11 -->
+			<item id="167000642" chance="1.12"/><!-- Manastone: Magical Accuracy +10 / Parry +11 -->
+			<item id="167000643" chance="1.12"/><!-- Manastone: Magical Accuracy +10 / Block +11 -->
+			<item id="167000644" chance="0.24"/><!-- Manastone: Magical Accuracy +10 / Crit Strike +6 -->
+			<item id="167000645" chance="0.24"/><!-- Manastone: Magical Accuracy +10 / Resist Magic +5 -->
+			<item id="167000811" chance="0.24"/><!-- Manastone: Magical Accuracy +10 / Attack +2 -->
+			<item id="167000779" chance="1.12"/><!-- Manastone: HP +75 / MP +37 -->
+			<item id="167000780" chance="0.38"/><!-- Manastone: HP +75 / Crit Strike +6 -->
+			<item id="167000781" chance="1.12"/><!-- Manastone: HP +75 / Resist Magic+5 -->
+			<item id="167000782" chance="1.12"/><!-- Manastone: HP +75 / Magical Accuracy +5 -->
+			<item id="167000783" chance="1.12"/><!-- Manastone: HP +75 / Accuracy +11 -->
+			<item id="167000784" chance="1.12"/><!-- Manastone: HP +75 / Evasion +11 -->
+			<item id="167000785" chance="1.12"/><!-- Manastone: HP +75 / Parry +11 -->
+			<item id="167000786" chance="1.12"/><!-- Manastone: HP +75 / Block +11 -->
+			<item id="167000787" chance="1.12"/><!-- Manastone: MP +75 / HP +37 -->
+			<item id="167000792" chance="1.12"/><!-- Manastone: MP +75 / Evasion +11 -->
+			<item id="167000795" chance="1.12"/><!-- Manastone: Evasion +13 / HP +37 -->
+			<item id="167000796" chance="1.12"/><!-- Manastone: Evasion +13 / MP +37 -->
+			<item id="167000803" chance="1.12"/><!-- Manastone: Parry +23 / HP +37 -->
+			<item id="167000646" chance="0.44"/><!-- Manastone: Attack +5 / HP +42 -->
+			<item id="167000647" chance="1.43"/><!-- Manastone: Attack +5 / MP +42 -->
+			<item id="167000648" chance="0.25"/><!-- Manastone: Attack +5 / Accuracy +12 -->
+			<item id="167000649" chance="1.43"/><!-- Manastone: Attack +5 / Evasion +12 -->
+			<item id="167000650" chance="1.43"/><!-- Manastone: Attack +5 / Parry +12 -->
+			<item id="167000651" chance="1.43"/><!-- Manastone: Attack +5 / Block +12 -->
+			<item id="167000652" chance="0.25"/><!-- Manastone: Attack +5 / Crit Strike +7 -->
+			<item id="167000653" chance="0.25"/><!-- Manastone: Attack +5 / Resist Magic +6 -->
+			<item id="167000654" chance="0.25"/><!-- Manastone: Attack +5 / Magical Accuracy +6 -->
+			<item id="167000655" chance="0.44"/><!-- Manastone: Crit Strike +15 / HP +42 -->
+			<item id="167000656" chance="1.43"/><!-- Manastone: Crit Strike +15 / MP +42 -->
+			<item id="167000657" chance="0.25"/><!-- Manastone: Crit Strike +15 / Attack +2 -->
+			<item id="167000658" chance="0.25"/><!-- Manastone: Crit Strike +15 / Accuracy +12 -->
+			<item id="167000659" chance="1.43"/><!-- Manastone: Crit Strike +15 / Evasion +12 -->
+			<item id="167000660" chance="1.43"/><!-- Manastone: Crit Strike +15 / Parry +12 -->
+			<item id="167000661" chance="1.43"/><!-- Manastone: Crit Strike +15 / Block +12 -->
+			<item id="167000662" chance="0.25"/><!-- Manastone: Crit Strike +15 / Resist Magic +6 -->
+			<item id="167000663" chance="0.25"/><!-- Manastone: Crit Strike +15 / Magical Accuracy +6 -->
+			<item id="167000664" chance="0.43"/><!-- Manastone: Magic Boost +25 / HP +42 -->
+			<item id="167000665" chance="1.43"/><!-- Manastone: Magic Boost +25 / MP +42 -->
+			<item id="167000666" chance="1.43"/><!-- Manastone: Magic Boost +25 / Accuracy +12 -->
+			<item id="167000667" chance="1.43"/><!-- Manastone: Magic Boost +25 / Evasion +12 -->
+			<item id="167000668" chance="1.43"/><!-- Manastone: Magic Boost +25 / Parry +12 -->
+			<item id="167000669" chance="1.43"/><!-- Manastone: Magic Boost +25 / Block +12 -->
+			<item id="167000670" chance="1.43"/><!-- Manastone: Magic Boost +25 / Crit Strike +7 -->
+			<item id="167000671" chance="0.25"/><!-- Manastone: Magic Boost +25 / Resist Magic +6 -->
+			<item id="167000672" chance="0.25"/><!-- Manastone: Magic Boost +25 / Magical Accuracy +6 -->
+			<item id="167000673" chance="0.43"/><!-- Manastone: Magical Accuracy +12 / HP +42 -->
+			<item id="167000674" chance="1.43"/><!-- Manastone: Magical Accuracy +12 / MP +42 -->
+			<item id="167000675" chance="0.25"/><!-- Manastone: Magical Accuracy +12 / Magic Boost +12 -->
 			<item id="167000676" chance="1.43"/><!-- Manastone: Magical Accuracy +12 / Accuracy +12 -->
 			<item id="167000677" chance="1.43"/><!-- Manastone: Magical Accuracy +12 / Evasion +12 -->
 			<item id="167000844" chance="0.25"/><!-- Manastone: Magical Accuracy +12 / Attack +2 -->
@@ -57137,6 +58346,86 @@
 			<item id="186000237" count="10"/><!-- Ancient Coin -->
 		</set>
 		<set>
+			<item id="167000614" chance="0.39"/><!-- Manastone: Attack +4 / HP +37 -->
+			<item id="167000615" chance="1.12"/><!-- Manastone: Attack +4 / MP +37 -->
+			<item id="167000745" chance="0.24"/><!-- Manastone: Attack +4 / Accuracy +11 -->
+			<item id="167000746" chance="1.12"/><!-- Manastone: Attack +4 / Evasion +11 -->
+			<item id="167000747" chance="1.12"/><!-- Manastone: Attack +4 / Parry +11 -->
+			<item id="167000748" chance="1.12"/><!-- Manastone: Attack +4 / Block +11 -->
+			<item id="167000616" chance="0.24"/><!-- Manastone: Attack +4 / Crit Strike +6 -->
+			<item id="167000617" chance="0.24"/><!-- Manastone: Attack +4 / Resist Magic +5 -->
+			<item id="167000618" chance="0.24"/><!-- Manastone: Attack +4 / Magical Accuracy +5 -->
+			<item id="167000619" chance="0.39"/><!-- Manastone: Crit Strike +13 / HP +37 -->
+			<item id="167000620" chance="1.12"/><!-- Manastone: Crit Strike +13 / MP +37 -->
+			<item id="167000621" chance="0.24"/><!-- Manastone: Crit Strike +13 / Attack +2 -->
+			<item id="167000622" chance="0.24"/><!-- Manastone: Crit Strike +13 / Accuracy +11 -->
+			<item id="167000623" chance="1.12"/><!-- Manastone: Crit Strike +13 / Evasion +11 -->
+			<item id="167000624" chance="1.12"/><!-- Manastone: Crit Strike +13 / Parry +11 -->
+			<item id="167000625" chance="1.12"/><!-- Manastone: Crit Strike +13 / Block +11 -->
+			<item id="167000626" chance="0.24"/><!-- Manastone: Crit Strike +13 / Resist Magic +5 -->
+			<item id="167000627" chance="0.24"/><!-- Manastone: Crit Strike +13 / Magical Accuracy +5 -->
+			<item id="167000628" chance="0.38"/><!-- Manastone: Magic Boost +23 / HP +37 -->
+			<item id="167000629" chance="1.12"/><!-- Manastone: Magic Boost +23 / MP +37 -->
+			<item id="167000630" chance="1.12"/><!-- Manastone: Magic Boost +23 / Accuracy +11 -->
+			<item id="167000631" chance="1.12"/><!-- Manastone: Magic Boost +23 / Evasion +11 -->
+			<item id="167000632" chance="1.12"/><!-- Manastone: Magic Boost +23 / Parry +11 -->
+			<item id="167000633" chance="1.12"/><!-- Manastone: Magic Boost +23 / Block +11 -->
+			<item id="167000634" chance="1.12"/><!-- Manastone: Magic Boost +23 / Crit Strike +6 -->
+			<item id="167000635" chance="0.24"/><!-- Manastone: Magic Boost +23 / Resist Magic +5 -->
+			<item id="167000636" chance="0.24"/><!-- Manastone: Magic Boost +23 / Magical Accuracy +5 -->
+			<item id="167000637" chance="0.38"/><!-- Manastone: Magical Accuracy +10 / HP +37 -->
+			<item id="167000638" chance="1.12"/><!-- Manastone: Magical Accuracy +10 / MP +37 -->
+			<item id="167000639" chance="0.24"/><!-- Manastone: Magical Accuracy +10 / Magic Boost +11 -->
+			<item id="167000640" chance="1.12"/><!-- Manastone: Magical Accuracy +10 / Accuracy +11 -->
+			<item id="167000641" chance="1.12"/><!-- Manastone: Magical Accuracy +10 / Evasion +11 -->
+			<item id="167000642" chance="1.12"/><!-- Manastone: Magical Accuracy +10 / Parry +11 -->
+			<item id="167000643" chance="1.12"/><!-- Manastone: Magical Accuracy +10 / Block +11 -->
+			<item id="167000644" chance="0.24"/><!-- Manastone: Magical Accuracy +10 / Crit Strike +6 -->
+			<item id="167000645" chance="0.24"/><!-- Manastone: Magical Accuracy +10 / Resist Magic +5 -->
+			<item id="167000811" chance="0.24"/><!-- Manastone: Magical Accuracy +10 / Attack +2 -->
+			<item id="167000779" chance="1.12"/><!-- Manastone: HP +75 / MP +37 -->
+			<item id="167000780" chance="0.38"/><!-- Manastone: HP +75 / Crit Strike +6 -->
+			<item id="167000781" chance="1.12"/><!-- Manastone: HP +75 / Resist Magic+5 -->
+			<item id="167000782" chance="1.12"/><!-- Manastone: HP +75 / Magical Accuracy +5 -->
+			<item id="167000783" chance="1.12"/><!-- Manastone: HP +75 / Accuracy +11 -->
+			<item id="167000784" chance="1.12"/><!-- Manastone: HP +75 / Evasion +11 -->
+			<item id="167000785" chance="1.12"/><!-- Manastone: HP +75 / Parry +11 -->
+			<item id="167000786" chance="1.12"/><!-- Manastone: HP +75 / Block +11 -->
+			<item id="167000787" chance="1.12"/><!-- Manastone: MP +75 / HP +37 -->
+			<item id="167000792" chance="1.12"/><!-- Manastone: MP +75 / Evasion +11 -->
+			<item id="167000795" chance="1.12"/><!-- Manastone: Evasion +13 / HP +37 -->
+			<item id="167000796" chance="1.12"/><!-- Manastone: Evasion +13 / MP +37 -->
+			<item id="167000803" chance="1.12"/><!-- Manastone: Parry +23 / HP +37 -->
+			<item id="167000646" chance="0.44"/><!-- Manastone: Attack +5 / HP +42 -->
+			<item id="167000647" chance="1.43"/><!-- Manastone: Attack +5 / MP +42 -->
+			<item id="167000648" chance="0.25"/><!-- Manastone: Attack +5 / Accuracy +12 -->
+			<item id="167000649" chance="1.43"/><!-- Manastone: Attack +5 / Evasion +12 -->
+			<item id="167000650" chance="1.43"/><!-- Manastone: Attack +5 / Parry +12 -->
+			<item id="167000651" chance="1.43"/><!-- Manastone: Attack +5 / Block +12 -->
+			<item id="167000652" chance="0.25"/><!-- Manastone: Attack +5 / Crit Strike +7 -->
+			<item id="167000653" chance="0.25"/><!-- Manastone: Attack +5 / Resist Magic +6 -->
+			<item id="167000654" chance="0.25"/><!-- Manastone: Attack +5 / Magical Accuracy +6 -->
+			<item id="167000655" chance="0.44"/><!-- Manastone: Crit Strike +15 / HP +42 -->
+			<item id="167000656" chance="1.43"/><!-- Manastone: Crit Strike +15 / MP +42 -->
+			<item id="167000657" chance="0.25"/><!-- Manastone: Crit Strike +15 / Attack +2 -->
+			<item id="167000658" chance="0.25"/><!-- Manastone: Crit Strike +15 / Accuracy +12 -->
+			<item id="167000659" chance="1.43"/><!-- Manastone: Crit Strike +15 / Evasion +12 -->
+			<item id="167000660" chance="1.43"/><!-- Manastone: Crit Strike +15 / Parry +12 -->
+			<item id="167000661" chance="1.43"/><!-- Manastone: Crit Strike +15 / Block +12 -->
+			<item id="167000662" chance="0.25"/><!-- Manastone: Crit Strike +15 / Resist Magic +6 -->
+			<item id="167000663" chance="0.25"/><!-- Manastone: Crit Strike +15 / Magical Accuracy +6 -->
+			<item id="167000664" chance="0.43"/><!-- Manastone: Magic Boost +25 / HP +42 -->
+			<item id="167000665" chance="1.43"/><!-- Manastone: Magic Boost +25 / MP +42 -->
+			<item id="167000666" chance="1.43"/><!-- Manastone: Magic Boost +25 / Accuracy +12 -->
+			<item id="167000667" chance="1.43"/><!-- Manastone: Magic Boost +25 / Evasion +12 -->
+			<item id="167000668" chance="1.43"/><!-- Manastone: Magic Boost +25 / Parry +12 -->
+			<item id="167000669" chance="1.43"/><!-- Manastone: Magic Boost +25 / Block +12 -->
+			<item id="167000670" chance="1.43"/><!-- Manastone: Magic Boost +25 / Crit Strike +7 -->
+			<item id="167000671" chance="0.25"/><!-- Manastone: Magic Boost +25 / Resist Magic +6 -->
+			<item id="167000672" chance="0.25"/><!-- Manastone: Magic Boost +25 / Magical Accuracy +6 -->
+			<item id="167000673" chance="0.43"/><!-- Manastone: Magical Accuracy +12 / HP +42 -->
+			<item id="167000674" chance="1.43"/><!-- Manastone: Magical Accuracy +12 / MP +42 -->
+			<item id="167000675" chance="0.25"/><!-- Manastone: Magical Accuracy +12 / Magic Boost +12 -->
 			<item id="167000676" chance="1.43"/><!-- Manastone: Magical Accuracy +12 / Accuracy +12 -->
 			<item id="167000677" chance="1.43"/><!-- Manastone: Magical Accuracy +12 / Evasion +12 -->
 			<item id="167000844" chance="0.25"/><!-- Manastone: Magical Accuracy +12 / Attack +2 -->
@@ -58690,16 +59979,16 @@
 			<item id="166100023" count="100" chance="5"/><!-- [Stamp] High Grade Enchanting Supplement (Mythic) -->
 		</set>
 	</decomposable>
-	<decomposable item_id="188053422"><!-- [Stamp] Anniversary Consumables Box -->
+	<decomposable item_id="188053422" selectable="true"><!-- [Stamp] Anniversary Consumables Box -->
 		<set>
-			<item id="188053415" chance="12.5"/><!-- [Stamp] Noble Illusion Godstone Box, no count in 4.6/5.8 retail data -->
-			<item id="188053417" chance="12.5"/><!-- [Stamp] Noble Ancient Manastone Box, no count in 4.6/5.8 retail data -->
-			<item id="188053419" chance="12.5"/><!-- [Stamp] Noble Composite Manastone Box, no count in 4.6/5.8 retail data -->
-			<item id="188053420" chance="12.5"/><!-- [Stamp] Noble Manastone Pouch, no count in 4.6/5.8 retail data -->
-			<item id="166030008" chance="12.5"/><!-- [Stamp] Tempering Solution (7 days), no count in 4.6/5.8 retail data -->
-			<item id="166150026" chance="12.5"/><!-- [Stamp] Greater Felicitous Socketing (Heroic), no count in 4.6/5.8 retail data -->
-			<item id="166150027" chance="12.5"/><!-- [Stamp] Greater Felicitous Socketing (Mythic), no count in 4.6/5.8 retail data -->
-			<item id="186000242" chance="12.5"/><!-- Ceramium Medal, no count in 4.6/5.8 retail data -->
+			<item id="188053415"/><!-- [Stamp] Noble Illusion Godstone Box, no count in 4.6/5.8 retail data -->
+			<item id="188053417"/><!-- [Stamp] Noble Ancient Manastone Box, no count in 4.6/5.8 retail data -->
+			<item id="188053419"/><!-- [Stamp] Noble Composite Manastone Box, no count in 4.6/5.8 retail data -->
+			<item id="188053420"/><!-- [Stamp] Noble Manastone Pouch, no count in 4.6/5.8 retail data -->
+			<item id="166030008"/><!-- [Stamp] Tempering Solution (7 days), no count in 4.6/5.8 retail data -->
+			<item id="166150026"/><!-- [Stamp] Greater Felicitous Socketing (Heroic), no count in 4.6/5.8 retail data -->
+			<item id="166150027"/><!-- [Stamp] Greater Felicitous Socketing (Mythic), no count in 4.6/5.8 retail data -->
+			<item id="186000242"/><!-- Ceramium Medal, no count in 4.6/5.8 retail data -->
 		</set>
 	</decomposable>
 	<decomposable item_id="188053423"><!-- [Stamp] Anniversary Gift Box -->
@@ -63287,6 +64576,86 @@
 	</decomposable>
 	<decomposable item_id="188053687"><!-- Test Item -->
 		<set race="ELYOS">
+			<item id="123000005" chance="0.8"/><!-- Guardian's Belt -->
+			<item id="123000450" chance="0.8"/><!-- Thin Leather Belt -->
+			<item id="123000478" chance="0.8"/><!-- Ruko Belt -->
+			<item id="123000456" chance="0.8"/><!-- Noble Thin Leather Belt -->
+			<item id="123000484" chance="0.8"/><!-- Noble Ruko Belt -->
+			<item id="123000416" chance="0.8"/><!-- Traveller's Leather Belt -->
+			<item id="123000417" chance="0.8"/><!-- Traveller's Sash -->
+			<item id="123000382" chance="0.8"/><!-- Elf's Leather Belt -->
+			<item id="123000383" chance="0.8"/><!-- Elf's Belt -->
+			<item id="123000009" chance="0.8"/><!-- Verteron Belt -->
+			<item id="123000583" chance="0.8"/><!-- Rank 8 Elyos Leather Belt -->
+			<item id="123000508" chance="0.8"/><!-- Treasure Hunter's Leather Belt -->
+			<item id="123000599" chance="0.8"/><!-- Rank 8 Elyos Belt -->
+			<item id="123000452" chance="0.8"/><!-- Thick Leather Belt -->
+			<item id="123000480" chance="0.8"/><!-- Fess Belt -->
+			<item id="123000468" chance="0.8"/><!-- Worthy Noble Thick Leather Belt -->
+			<item id="123000495" chance="0.8"/><!-- Worthy Noble Fess Belt -->
+			<item id="123000458" chance="0.8"/><!-- Noble Thick Leather Belt -->
+			<item id="123000462" chance="0.8"/><!-- Worthy Thick Leather Belt -->
+			<item id="123000486" chance="0.8"/><!-- Noble Fess Belt -->
+			<item id="123000490" chance="0.8"/><!-- Worthy Fess Belt -->
+			<item id="123000620" chance="0.8"/><!-- Angry Leather Belt -->
+			<item id="123000621" chance="0.8"/><!-- Angry Belt -->
+			<item id="123000420" chance="0.8"/><!-- Purgee's Leather Belt -->
+			<item id="123000421" chance="0.8"/><!-- Purgee's Belt -->
+			<item id="123000386" chance="0.8"/><!-- Oasis Leather Belt -->
+			<item id="123000387" chance="0.8"/><!-- Oasis Belt -->
+			<item id="123000652" chance="0.7"/><!-- Kamon's Leather Belt -->
+			<item id="123000653" chance="0.7"/><!-- Kamon's Belt -->
+			<item id="123000731" chance="0.7"/><!-- Fantastic Leather Belt -->
+			<item id="123000732" chance="0.7"/><!-- Fantastic Belt -->
+			<item id="123000510" chance="0.8"/><!-- Teotem's Belt -->
+			<item id="123000440" chance="0.8"/><!-- Fascination Leather Belt -->
+			<item id="123000441" chance="0.8"/><!-- Fascination Belt -->
+			<item id="123000013" chance="0.8"/><!-- Eltnen Belt -->
+			<item id="123000585" chance="0.8"/><!-- Rank 6 Elyos Leather Belt -->
+			<item id="123000601" chance="0.8"/><!-- Rank 6 Elyos Belt -->
+			<item id="123000644" chance="0.7"/><!-- Carved Leather Belt -->
+			<item id="123000645" chance="0.7"/><!-- Carved Belt -->
+			<item id="123000454" chance="0.8"/><!-- Strong Leather Belt -->
+			<item id="123000482" chance="0.8"/><!-- Sobi Belt -->
+			<item id="123000470" chance="0.8"/><!-- Worthy Noble Strong Leather Belt -->
+			<item id="123000474" chance="0.8"/><!-- Expert Strong Leather Belt -->
+			<item id="123000497" chance="0.8"/><!-- Worthy Noble Sobi Belt -->
+			<item id="123000500" chance="0.8"/><!-- Expert Sobi Belt -->
+			<item id="123000654" chance="0.7"/><!-- Ancestor Leather Belt -->
+			<item id="123000655" chance="0.7"/><!-- Ancestor Belt -->
+			<item id="123000460" chance="0.8"/><!-- Noble Strong Leather Belt -->
+			<item id="123000464" chance="0.8"/><!-- Worthy Strong Leather Belt -->
+			<item id="123000488" chance="0.8"/><!-- Noble Sobi Belt -->
+			<item id="123000492" chance="0.8"/><!-- Worthy Sobi Belt -->
+			<item id="123000476" chance="0.8"/><!-- Expert Noble Strong Leather Belt -->
+			<item id="123000503" chance="0.8"/><!-- Expert Noble Sobi Belt -->
+			<item id="123000624" chance="0.8"/><!-- Departed Soul's Leather Belt -->
+			<item id="123000625" chance="0.8"/><!-- Departed Soul's Belt -->
+			<item id="123000424" chance="0.8"/><!-- Blessed Leather Belt -->
+			<item id="123000425" chance="0.8"/><!-- Blessed Belt -->
+			<item id="123000512" chance="0.8"/><!-- Ancient God's Belt -->
+			<item id="123000390" chance="0.8"/><!-- Sunset Leather Belt -->
+			<item id="123000391" chance="0.8"/><!-- Sunset Belt -->
+			<item id="123000636" chance="0.7"/><!-- Bloody Leather Belt -->
+			<item id="123000637" chance="0.7"/><!-- Bloody Belt -->
+			<item id="123000783" chance="0.7"/><!-- Floel's Leather Belt -->
+			<item id="123000784" chance="0.7"/><!-- Floel's Belt -->
+			<item id="123000455" chance="0.8"/><!-- Strong Durable Leather Belt -->
+			<item id="123000483" chance="0.8"/><!-- Durable Sobi Belt -->
+			<item id="123000471" chance="0.8"/><!-- Worthy Noble Strong Durable Leather Belt -->
+			<item id="123000475" chance="0.8"/><!-- Expert Strong Durable Leather Belt -->
+			<item id="123000498" chance="0.8"/><!-- Worthy Noble Durable Sobi Belt -->
+			<item id="123000501" chance="0.8"/><!-- Expert Durable Sobi Belt -->
+			<item id="123000461" chance="0.8"/><!-- Noble Strong Durable Leather Belt -->
+			<item id="123000465" chance="0.8"/><!-- Worthy Strong Durable Leather Belt -->
+			<item id="123000489" chance="0.8"/><!-- Noble Durable Sobi Belt -->
+			<item id="123000493" chance="0.8"/><!-- Worthy Durable Sobi Belt -->
+			<item id="123000513" chance="0.8"/><!-- Rabbit Leather Belt -->
+			<item id="123000477" chance="0.8"/><!-- Expert Noble Strong Durable Leather Belt -->
+			<item id="123000504" chance="0.8"/><!-- Expert Noble Durable Sobi Belt -->
+			<item id="123000626" chance="0.8"/><!-- Restless Leather Belt -->
+			<item id="123000627" chance="0.8"/><!-- Restless Belt -->
+			<item id="123000426" chance="0.8"/><!-- Infinity Leather Belt -->
 			<item id="123000427" chance="0.8"/><!-- Infinity Belt -->
 			<item id="123000514" chance="0.8"/><!-- Mamaku's Leather Belt -->
 			<item id="123000392" chance="0.8"/><!-- Beggar's Leather Belt -->
@@ -63328,6 +64697,86 @@
 			<item id="123001472" chance="5"/><!-- Trillirunerk's Sash -->
 		</set>
 		<set race="ASMODIANS">
+			<item id="123000025" chance="0.8"/><!-- Archon Belt -->
+			<item id="123000515" chance="0.8"/><!-- Thin Leather Belt -->
+			<item id="123000545" chance="0.8"/><!-- Tikel Belt -->
+			<item id="123000618" chance="0.8"/><!-- Mohen's Belt -->
+			<item id="123000521" chance="0.8"/><!-- Noble Thin Leather Belt -->
+			<item id="123000551" chance="0.8"/><!-- Noble Tikel Belt -->
+			<item id="123000434" chance="0.8"/><!-- Raiders' Leather Belt -->
+			<item id="123000435" chance="0.8"/><!-- Raiders' Belt -->
+			<item id="123000400" chance="0.8"/><!-- Dwarf's Leather Belt -->
+			<item id="123000401" chance="0.8"/><!-- Dwarf's Belt -->
+			<item id="123000029" chance="0.8"/><!-- Altgard Belt -->
+			<item id="123000591" chance="0.8"/><!-- Rank 8 Asmodian Leather Belt -->
+			<item id="123000607" chance="0.8"/><!-- Rank 8 Asmodian Belt -->
+			<item id="123000517" chance="0.8"/><!-- Thick Leather Belt -->
+			<item id="123000547" chance="0.8"/><!-- Twisp Belt -->
+			<item id="123000535" chance="0.8"/><!-- Worthy Noble Thick Leather Belt -->
+			<item id="123000563" chance="0.8"/><!-- Worthy Noble Twisp Belt -->
+			<item id="123000523" chance="0.8"/><!-- Noble Thick Leather Belt -->
+			<item id="123000553" chance="0.8"/><!-- Noble Twisp Belt -->
+			<item id="123000528" chance="0.8"/><!-- Worthy Thick Leather Belt -->
+			<item id="123000557" chance="0.8"/><!-- Worthy Twisp Belt -->
+			<item id="123000438" chance="0.8"/><!-- Betrayer's Leather Belt -->
+			<item id="123000439" chance="0.8"/><!-- Betrayer's Belt -->
+			<item id="123000780" chance="0.7"/><!-- Aello's Leather Belt -->
+			<item id="123000781" chance="0.7"/><!-- Aello's Belt -->
+			<item id="123000404" chance="0.8"/><!-- Remorse Leather Belt -->
+			<item id="123000405" chance="0.8"/><!-- Remorse Belt -->
+			<item id="123000574" chance="0.8"/><!-- Sulfur Slime's Belt -->
+			<item id="123000743" chance="0.7"/><!-- Wisdom Leather Belt -->
+			<item id="123000744" chance="0.7"/><!-- Wisdom Belt -->
+			<item id="123000033" chance="0.8"/><!-- Morheim Belt -->
+			<item id="123000593" chance="0.8"/><!-- Rank 6 Asmodian Leather Belt -->
+			<item id="123000609" chance="0.8"/><!-- Rank 6 Asmodian Belt -->
+			<item id="123000519" chance="0.8"/><!-- Strong Leather Belt -->
+			<item id="123000549" chance="0.8"/><!-- Xilix Belt -->
+			<item id="123000537" chance="0.8"/><!-- Worthy Noble Strong Leather Belt -->
+			<item id="123000565" chance="0.8"/><!-- Worthy Noble Xilix Belt -->
+			<item id="123000541" chance="0.8"/><!-- Expert Strong Leather Belt -->
+			<item id="123000569" chance="0.8"/><!-- Expert Xilix Belt -->
+			<item id="123000525" chance="0.8"/><!-- Noble Strong Leather Belt -->
+			<item id="123000555" chance="0.8"/><!-- Noble Xilix Belt -->
+			<item id="123000753" chance="0.7"/><!-- Snowfur's Belt -->
+			<item id="123000530" chance="0.8"/><!-- Worthy Strong Leather Belt -->
+			<item id="123000559" chance="0.8"/><!-- Worthy Xilix Belt -->
+			<item id="123000543" chance="0.8"/><!-- Expert Noble Strong Leather Belt -->
+			<item id="123000571" chance="0.8"/><!-- Expert Noble Xilix Belt -->
+			<item id="123000442" chance="0.8"/><!-- Gentlewoman's Leather Belt -->
+			<item id="123000443" chance="0.8"/><!-- Gentlewoman's Belt -->
+			<item id="123000579" chance="0.8"/><!-- Sipus' Belt -->
+			<item id="123000408" chance="0.8"/><!-- Fossil Leather Belt -->
+			<item id="123000409" chance="0.8"/><!-- Fossil Belt -->
+			<item id="123000520" chance="0.8"/><!-- Strong Durable Leather Belt -->
+			<item id="123000550" chance="0.8"/><!-- Durable Xilix Belt -->
+			<item id="123000538" chance="0.8"/><!-- Worthy Noble Strong Durable Leather Belt -->
+			<item id="123000566" chance="0.8"/><!-- Worthy Noble Durable Xilix Belt -->
+			<item id="123000542" chance="0.8"/><!-- Expert Strong Durable Leather Belt -->
+			<item id="123000570" chance="0.8"/><!-- Expert Durable Xilix Belt -->
+			<item id="123000526" chance="0.8"/><!-- Noble Strong Durable Leather Belt -->
+			<item id="123000556" chance="0.8"/><!-- Noble Durable Xilix Belt -->
+			<item id="123000580" chance="0.8"/><!-- Tipolid's Belt -->
+			<item id="123000531" chance="0.8"/><!-- Worthy Strong Durable Leather Belt -->
+			<item id="123000560" chance="0.8"/><!-- Worthy Durable Xilix Belt -->
+			<item id="123000544" chance="0.8"/><!-- Expert Noble Strong Durable Leather Belt -->
+			<item id="123000572" chance="0.8"/><!-- Expert Noble Durable Xilix Belt -->
+			<item id="123000581" chance="0.8"/><!-- King's Leather Belt -->
+			<item id="123000820" chance="0.7"/><!-- Noble Black Dragon's Leather Belt -->
+			<item id="123000821" chance="0.7"/><!-- Noble Black Dragon's Belt -->
+			<item id="123000822" chance="0.7"/><!-- Black Dragon King's Leather Belt -->
+			<item id="123000823" chance="0.7"/><!-- Black Dragon King's Belt -->
+			<item id="123000800" chance="0.7"/><!-- Noble White Dragon's Leather Belt -->
+			<item id="123000801" chance="0.7"/><!-- Noble White Dragon's Belt -->
+			<item id="123000802" chance="0.7"/><!-- White Dragon King's Leather Belt -->
+			<item id="123000803" chance="0.7"/><!-- White Dragon King's Belt -->
+			<item id="123000756" chance="0.7"/><!-- Royd's Leather Belt -->
+			<item id="123000757" chance="0.7"/><!-- Royd's Belt -->
+			<item id="123000818" chance="0.7"/><!-- Black Dragon's Leather Belt -->
+			<item id="123000819" chance="0.7"/><!-- Black Dragon's Belt -->
+			<item id="123000444" chance="0.8"/><!-- Spiritual Leather Belt -->
+			<item id="123000445" chance="0.8"/><!-- Spiritual Belt -->
+			<item id="123000798" chance="0.7"/><!-- White Dragon's Leather Belt -->
 			<item id="123000799" chance="0.7"/><!-- White Dragon's Belt -->
 			<item id="123000824" chance="0.7"/><!-- Noble Black Dragon King's Leather Belt -->
 			<item id="123000804" chance="0.7"/><!-- Noble White Dragon King's Leather Belt -->
@@ -64037,6 +65486,86 @@
 			<item id="167020065" chance="1.25"/><!-- Ancient Manastone: Magic Boost +32 -->
 		</set>
 		<set>
+			<item id="167000655" chance="1.18"/><!-- Manastone: Crit Strike +15 / HP +42 -->
+			<item id="167000646" chance="1.18"/><!-- Manastone: Attack +5 / HP +42 -->
+			<item id="167000647" chance="1.18"/><!-- Manastone: Attack +5 / MP +42 -->
+			<item id="167000648" chance="1.18"/><!-- Manastone: Attack +5 / Accuracy +12 -->
+			<item id="167000649" chance="1.18"/><!-- Manastone: Attack +5 / Evasion +12 -->
+			<item id="167000650" chance="1.18"/><!-- Manastone: Attack +5 / Parry +12 -->
+			<item id="167000651" chance="1.18"/><!-- Manastone: Attack +5 / Block +12 -->
+			<item id="167000653" chance="1.18"/><!-- Manastone: Attack +5 / Resist Magic +6 -->
+			<item id="167000656" chance="1.18"/><!-- Manastone: Crit Strike +15 / MP +42 -->
+			<item id="167000660" chance="1.18"/><!-- Manastone: Crit Strike +15 / Parry +12 -->
+			<item id="167000664" chance="1.18"/><!-- Manastone: Magic Boost +25 / HP +42 -->
+			<item id="167000665" chance="1.18"/><!-- Manastone: Magic Boost +25 / MP +42 -->
+			<item id="167000666" chance="1.18"/><!-- Manastone: Magic Boost +25 / Accuracy +12 -->
+			<item id="167000667" chance="1.18"/><!-- Manastone: Magic Boost +25 / Evasion +12 -->
+			<item id="167000669" chance="1.18"/><!-- Manastone: Magic Boost +25 / Block +12 -->
+			<item id="167000670" chance="1.18"/><!-- Manastone: Magic Boost +25 / Crit Strike +7 -->
+			<item id="167000671" chance="1.18"/><!-- Manastone: Magic Boost +25 / Resist Magic +6 -->
+			<item id="167000673" chance="1.18"/><!-- Manastone: Magical Accuracy +12 / HP +42 -->
+			<item id="167000674" chance="1.18"/><!-- Manastone: Magical Accuracy +12 / MP +42 -->
+			<item id="167000676" chance="1.18"/><!-- Manastone: Magical Accuracy +12 / Accuracy +12 -->
+			<item id="167000677" chance="1.18"/><!-- Manastone: Magical Accuracy +12 / Evasion +12 -->
+			<item id="167000678" chance="1.18"/><!-- Manastone: Magical Accuracy +12 / Parry +12 -->
+			<item id="167000679" chance="1.19"/><!-- Manastone: Magical Accuracy +12 / Block +12 -->
+			<item id="167000681" chance="1.19"/><!-- Manastone: Magical Accuracy +12 / Resist Magic +6 -->
+			<item id="167000812" chance="1.19"/><!-- Manastone: HP +85 / MP +42 -->
+			<item id="167000813" chance="1.19"/><!-- Manastone: HP +85 / Accuracy +12 -->
+			<item id="167000814" chance="1.19"/><!-- Manastone: HP +85 / Evasion +12 -->
+			<item id="167000815" chance="1.19"/><!-- Manastone: HP +85 / Parry +12 -->
+			<item id="167000816" chance="1.19"/><!-- Manastone: HP +85 / Block +12 -->
+			<item id="167000817" chance="1.19"/><!-- Manastone: HP +85 / Crit Strike +7 -->
+			<item id="167000818" chance="1.19"/><!-- Manastone: HP +85 / Resist Magic+6 -->
+			<item id="167000819" chance="1.19"/><!-- Manastone: HP +85 / Magical Accuracy +6 -->
+			<item id="167000820" chance="1.19"/><!-- Manastone: MP +85 / HP +42 -->
+			<item id="167000825" chance="1.19"/><!-- Manastone: MP +85 / Crit Strike +7 -->
+			<item id="167000828" chance="1.19"/><!-- Manastone: Evasion +15 / HP +42 -->
+			<item id="167000829" chance="1.19"/><!-- Manastone: Evasion +15 / MP +42 -->
+			<item id="167000836" chance="1.19"/><!-- Manastone: Parry +25 / HP +42 -->
+			<item id="167000844" chance="1.19"/><!-- Manastone: Magical Accuracy +12 / Attack +2 -->
+			<item id="167000652" chance="0.41"/><!-- Manastone: Attack +5 / Crit Strike +7 -->
+			<item id="167000654" chance="0.41"/><!-- Manastone: Attack +5 / Magical Accuracy +6 -->
+			<item id="167000657" chance="0.41"/><!-- Manastone: Crit Strike +15 / Attack +2 -->
+			<item id="167000658" chance="0.41"/><!-- Manastone: Crit Strike +15 / Accuracy +12 -->
+			<item id="167000659" chance="0.42"/><!-- Manastone: Crit Strike +15 / Evasion +12 -->
+			<item id="167000661" chance="0.42"/><!-- Manastone: Crit Strike +15 / Block +12 -->
+			<item id="167000662" chance="0.42"/><!-- Manastone: Crit Strike +15 / Resist Magic +6 -->
+			<item id="167000663" chance="0.42"/><!-- Manastone: Crit Strike +15 / Magical Accuracy +6 -->
+			<item id="167000668" chance="0.42"/><!-- Manastone: Magic Boost +25 / Parry +12 -->
+			<item id="167000672" chance="0.42"/><!-- Manastone: Magic Boost +25 / Magical Accuracy +6 -->
+			<item id="167000675" chance="0.42"/><!-- Manastone: Magical Accuracy +12 / Magic Boost +12 -->
+			<item id="167000680" chance="0.42"/><!-- Manastone: Magical Accuracy +12 / Crit Strike +7 -->
+			<item id="167000682" chance="1.18"/><!-- Manastone: Attack +5 / HP +47 -->
+			<item id="167000683" chance="1.18"/><!-- Manastone: Attack +5 / MP +47 -->
+			<item id="167000684" chance="1.18"/><!-- Manastone: Attack +5 / Accuracy +13 -->
+			<item id="167000685" chance="1.18"/><!-- Manastone: Attack +5 / Evasion +13 -->
+			<item id="167000686" chance="1.18"/><!-- Manastone: Attack +5 / Parry +13 -->
+			<item id="167000687" chance="1.18"/><!-- Manastone: Attack +5 / Block +13 -->
+			<item id="167000688" chance="1.18"/><!-- Manastone: Crit Strike +17 / HP +47 -->
+			<item id="167000689" chance="1.18"/><!-- Manastone: Crit Strike +17 / MP +47 -->
+			<item id="167000693" chance="1.18"/><!-- Manastone: Crit Strike +17 / Parry +13 -->
+			<item id="167000697" chance="1.18"/><!-- Manastone: Magic Boost +27 / HP +47 -->
+			<item id="167000698" chance="1.18"/><!-- Manastone: Magic Boost +27 / MP +47 -->
+			<item id="167000699" chance="1.18"/><!-- Manastone: Magic Boost +27 / Accuracy +13 -->
+			<item id="167000700" chance="1.18"/><!-- Manastone: Magic Boost +27 / Evasion +13 -->
+			<item id="167000702" chance="1.18"/><!-- Manastone: Magic Boost +27 / Block +13 -->
+			<item id="167000703" chance="1.18"/><!-- Manastone: Magic Boost +27 / Crit Strike +8 -->
+			<item id="167000704" chance="1.18"/><!-- Manastone: Magic Boost +27 / Resist Magic +7 -->
+			<item id="167000706" chance="1.18"/><!-- Manastone: Magical Accuracy +14 / HP +47 -->
+			<item id="167000707" chance="1.18"/><!-- Manastone: Magical Accuracy +14 / MP +47 -->
+			<item id="167000709" chance="1.18"/><!-- Manastone: Magical Accuracy +14 / Accuracy +13 -->
+			<item id="167000710" chance="1.18"/><!-- Manastone: Magical Accuracy +14 / Evasion +13 -->
+			<item id="167000711" chance="1.18"/><!-- Manastone: Magical Accuracy +14 / Parry +13 -->
+			<item id="167000712" chance="1.18"/><!-- Manastone: Magical Accuracy +14 / Block +13 -->
+			<item id="167000714" chance="1.19"/><!-- Manastone: Magical Accuracy +14 / Resist Magic +7 -->
+			<item id="167000750" chance="1.19"/><!-- Manastone: Attack +5 / Resist Magic +7 -->
+			<item id="167000845" chance="1.19"/><!-- Manastone: HP +95 / MP +47 -->
+			<item id="167000846" chance="1.19"/><!-- Manastone: HP +95 / Accuracy +13 -->
+			<item id="167000847" chance="1.19"/><!-- Manastone: HP +95 / Evasion +13 -->
+			<item id="167000848" chance="1.19"/><!-- Manastone: HP +95 / Parry +13 -->
+			<item id="167000849" chance="1.19"/><!-- Manastone: HP +95 / Block +13 -->
+			<item id="167000850" chance="1.19"/><!-- Manastone: HP +95 / Crit Strike +8 -->
 			<item id="167000851" chance="1.19"/><!-- Manastone: HP +95 / Resist Magic+7 -->
 			<item id="167000852" chance="1.19"/><!-- Manastone: HP +95 / Magical Accuracy +7 -->
 			<item id="167000853" chance="1.19"/><!-- Manastone: MP +95 / HP +47 -->
@@ -65224,6 +66753,86 @@
 	</decomposable>
 	<decomposable item_id="188053784"><!-- Stigma Bundle -->
 		<set race="ELYOS">
+			<item id="140001109" chance="1.03"/><!-- Crippling Cut -->
+			<item id="140001110" chance="1.03"/><!-- Draining Blow -->
+			<item id="140001111" chance="1.03"/><!-- Earthquake Wave -->
+			<item id="140001112" chance="1.03"/><!-- Magical Defense -->
+			<item id="140001113" chance="1.02"/><!-- Ankle Snare -->
+			<item id="140001114" chance="1.02"/><!-- Siegebreaker -->
+			<item id="140001115" chance="1.02"/><!-- Lockdown -->
+			<item id="140001116" chance="1.02"/><!-- Dauntless Spirit -->
+			<item id="140001117" chance="1.02"/><!-- Howl -->
+			<item id="140001278" chance="1.02"/><!-- Aether Recharge -->
+			<item id="140001126" chance="1.02"/><!-- Barricade of Steel -->
+			<item id="140001127" chance="1.02"/><!-- Incite Rage -->
+			<item id="140001128" chance="1.02"/><!-- Divine Fury -->
+			<item id="140001129" chance="1.02"/><!-- Holy Shield -->
+			<item id="140001130" chance="1.02"/><!-- Punishing Thrust -->
+			<item id="140001131" chance="1.02"/><!-- Punishment -->
+			<item id="140001132" chance="1.02"/><!-- Aether Armor -->
+			<item id="140001133" chance="1.02"/><!-- Inquisitor's Blow -->
+			<item id="140001142" chance="1.02"/><!-- Deadly Abandon -->
+			<item id="140001143" chance="1.02"/><!-- Oath of Accuracy -->
+			<item id="140001144" chance="1.02"/><!-- Shadow Walk -->
+			<item id="140001145" chance="1.02"/><!-- Shadowfall -->
+			<item id="140001146" chance="1.02"/><!-- Sigil Strike -->
+			<item id="140001147" chance="1.02"/><!-- Venomous Strike -->
+			<item id="140001148" chance="1.02"/><!-- Eye of Wrath -->
+			<item id="140001149" chance="1.02"/><!-- Rune Knife -->
+			<item id="140001150" chance="1.02"/><!-- Searching Strike -->
+			<item id="140001159" chance="1.02"/><!-- Focused Shots -->
+			<item id="140001160" chance="1.02"/><!-- Trap of Slowing -->
+			<item id="140001162" chance="1.02"/><!-- Dilation Arrow -->
+			<item id="140001163" chance="1.02"/><!-- Skybound Trap -->
+			<item id="140001165" chance="1.02"/><!-- Blazing Trap -->
+			<item id="140001167" chance="1.02"/><!-- Nature's Resolve -->
+			<item id="140001168" chance="1.02"/><!-- Bow of Blessing -->
+			<item id="140001169" chance="1.02"/><!-- Trap of Clairvoyance -->
+			<item id="140001171" chance="1.02"/><!-- Arrow Deluge -->
+			<item id="140001180" chance="1.02"/><!-- Storm Strike -->
+			<item id="140001175" chance="1.02"/><!-- Arcane Thunderbolt -->
+			<item id="140001182" chance="1.02"/><!-- Ice Sheet -->
+			<item id="140001186" chance="1.02"/><!-- Boon of Quickness -->
+			<item id="140001179" chance="1.02"/><!-- Elemental Ward -->
+			<item id="140001188" chance="1.02"/><!-- Curse of Weakness -->
+			<item id="140001189" chance="1.02"/><!-- Ice Harpoon -->
+			<item id="140001190" chance="1.02"/><!-- Exchange Vitality -->
+			<item id="140001187" chance="1.02"/><!-- Freeze -->
+			<item id="140001200" chance="1.02"/><!-- Earthen Call -->
+			<item id="140001201" chance="1.02"/><!-- Magic's Freedom -->
+			<item id="140001202" chance="1.02"/><!-- Stone Scour -->
+			<item id="140001203" chance="1.02"/><!-- Spirit Burn-to-Ashes -->
+			<item id="140001204" chance="1.02"/><!-- Cyclone of Wrath -->
+			<item id="140001205" chance="1.02"/><!-- Withering Gloom -->
+			<item id="140001206" chance="1.02"/><!-- Spirit Wall of Protection -->
+			<item id="140001207" chance="1.02"/><!-- Cloaking Word -->
+			<item id="140001208" chance="1.02"/><!-- Enmity Swap -->
+			<item id="140001217" chance="1.02"/><!-- Word of Inspiration -->
+			<item id="140001218" chance="1.02"/><!-- Annihilation -->
+			<item id="140001219" chance="1.02"/><!-- Word of Life -->
+			<item id="140001220" chance="1.02"/><!-- Soul Lock -->
+			<item id="140001221" chance="1.02"/><!-- Splash Swing -->
+			<item id="140001222" chance="1.02"/><!-- Acceleration Cheer -->
+			<item id="140001223" chance="1.02"/><!-- Leaping Flash -->
+			<item id="140001224" chance="1.02"/><!-- Healing Conduit -->
+			<item id="140001225" chance="1.02"/><!-- Rise -->
+			<item id="140001236" chance="1.02"/><!-- Saving Grace -->
+			<item id="140001237" chance="1.02"/><!-- Sacrificial Power -->
+			<item id="140001238" chance="1.02"/><!-- Sympathetic Heal -->
+			<item id="140001239" chance="1.02"/><!-- Blinding Light -->
+			<item id="140001240" chance="1.02"/><!-- Retribution Lightning -->
+			<item id="140001241" chance="1.02"/><!-- Power Sprint -->
+			<item id="140001242" chance="1.02"/><!-- Reverse Condition -->
+			<item id="140001243" chance="1.02"/><!-- Festering Wound -->
+			<item id="140001244" chance="1.02"/><!-- Noble Grace -->
+			<item id="140001253" chance="1.02"/><!-- Steady Fire -->
+			<item id="140001254" chance="1.02"/><!-- Nature's Favor -->
+			<item id="140001255" chance="1.02"/><!-- Frozen Blitz -->
+			<item id="140001256" chance="1.02"/><!-- Sighting -->
+			<item id="140001257" chance="1.02"/><!-- Power Grab -->
+			<item id="140001258" chance="1.02"/><!-- Fiery Blast -->
+			<item id="140001259" chance="1.02"/><!-- Shock and Awe -->
+			<item id="140001260" chance="1.02"/><!-- Missile Guide -->
 			<item id="140001261" chance="1.02"/><!-- Blazing Bombardment -->
 			<item id="140001287" chance="1.02"/><!-- Mvt. 2: Summer -->
 			<item id="140001288" chance="1.02"/><!-- Stinging Note -->
@@ -65244,6 +66853,86 @@
 			<item id="140001277" chance="1.02"/><!-- Aimbot Assist -->
 		</set>
 		<set race="ASMODIANS">
+			<item id="140001175" chance="1.03"/><!-- Arcane Thunderbolt -->
+			<item id="140001187" chance="1.03"/><!-- Freeze -->
+			<item id="140001180" chance="1.03"/><!-- Storm Strike -->
+			<item id="140001189" chance="1.03"/><!-- Ice Harpoon -->
+			<item id="140001186" chance="1.02"/><!-- Boon of Quickness -->
+			<item id="140001183" chance="1.02"/><!-- Ice Sheet -->
+			<item id="140001188" chance="1.02"/><!-- Curse of Weakness -->
+			<item id="140001190" chance="1.02"/><!-- Exchange Vitality -->
+			<item id="140001179" chance="1.02"/><!-- Elemental Ward -->
+			<item id="140001200" chance="1.02"/><!-- Earthen Call -->
+			<item id="140001223" chance="1.02"/><!-- Leaping Flash -->
+			<item id="140001221" chance="1.02"/><!-- Splash Swing -->
+			<item id="140001218" chance="1.02"/><!-- Annihilation -->
+			<item id="140001222" chance="1.02"/><!-- Acceleration Cheer -->
+			<item id="140001220" chance="1.02"/><!-- Soul Lock -->
+			<item id="140001219" chance="1.02"/><!-- Word of Life -->
+			<item id="140001224" chance="1.02"/><!-- Healing Conduit -->
+			<item id="140001225" chance="1.02"/><!-- Rise -->
+			<item id="140001115" chance="1.02"/><!-- Lockdown -->
+			<item id="140001111" chance="1.02"/><!-- Earthquake Wave -->
+			<item id="140001113" chance="1.02"/><!-- Ankle Snare -->
+			<item id="140001112" chance="1.02"/><!-- Magical Defense -->
+			<item id="140001110" chance="1.02"/><!-- Draining Blow -->
+			<item id="140001116" chance="1.02"/><!-- Dauntless Spirit -->
+			<item id="140001117" chance="1.02"/><!-- Howl -->
+			<item id="140001114" chance="1.02"/><!-- Siegebreaker -->
+			<item id="140001109" chance="1.02"/><!-- Crippling Cut -->
+			<item id="140001259" chance="1.02"/><!-- Shock and Awe -->
+			<item id="140001257" chance="1.02"/><!-- Power Grab -->
+			<item id="140001260" chance="1.02"/><!-- Missile Guide -->
+			<item id="140001256" chance="1.02"/><!-- Sighting -->
+			<item id="140001254" chance="1.02"/><!-- Nature's Favor -->
+			<item id="140001258" chance="1.02"/><!-- Fiery Blast -->
+			<item id="140001253" chance="1.02"/><!-- Steady Fire -->
+			<item id="140001255" chance="1.02"/><!-- Frozen Blitz -->
+			<item id="140001261" chance="1.02"/><!-- Blazing Bombardment -->
+			<item id="140001271" chance="1.02"/><!-- Drillbore -->
+			<item id="140001272" chance="1.02"/><!-- Riplash -->
+			<item id="140001277" chance="1.02"/><!-- Aimbot Assist -->
+			<item id="140001278" chance="1.02"/><!-- Aether Recharge -->
+			<item id="140001276" chance="1.02"/><!-- Life Support Trigger -->
+			<item id="140001270" chance="1.02"/><!-- Particle Whip -->
+			<item id="140001275" chance="1.02"/><!-- Ravager Cannon -->
+			<item id="140001274" chance="1.02"/><!-- Leeching Steel -->
+			<item id="140001273" chance="1.02"/><!-- Steel Storm -->
+			<item id="140001161" chance="1.02"/><!-- Trap of Slowing -->
+			<item id="140001166" chance="1.02"/><!-- Blazing Trap -->
+			<item id="140001159" chance="1.02"/><!-- Focused Shots -->
+			<item id="140001168" chance="1.02"/><!-- Bow of Blessing -->
+			<item id="140001170" chance="1.02"/><!-- Trap of Clairvoyance -->
+			<item id="140001162" chance="1.02"/><!-- Dilation Arrow -->
+			<item id="140001167" chance="1.02"/><!-- Nature's Resolve -->
+			<item id="140001164" chance="1.02"/><!-- Skybound Trap -->
+			<item id="140001171" chance="1.02"/><!-- Arrow Deluge -->
+			<item id="140001144" chance="1.02"/><!-- Shadow Walk -->
+			<item id="140001150" chance="1.02"/><!-- Searching Strike -->
+			<item id="140001145" chance="1.02"/><!-- Shadowfall -->
+			<item id="140001147" chance="1.02"/><!-- Venomous Strike -->
+			<item id="140001148" chance="1.02"/><!-- Eye of Wrath -->
+			<item id="140001142" chance="1.02"/><!-- Deadly Abandon -->
+			<item id="140001143" chance="1.02"/><!-- Oath of Accuracy -->
+			<item id="140001149" chance="1.02"/><!-- Rune Knife -->
+			<item id="140001146" chance="1.02"/><!-- Sigil Strike -->
+			<item id="140001241" chance="1.02"/><!-- Power Sprint -->
+			<item id="140001240" chance="1.02"/><!-- Retribution Lightning -->
+			<item id="140001236" chance="1.02"/><!-- Saving Grace -->
+			<item id="140001237" chance="1.02"/><!-- Sacrificial Power -->
+			<item id="140001244" chance="1.02"/><!-- Noble Grace -->
+			<item id="140001243" chance="1.02"/><!-- Festering Wound -->
+			<item id="140001242" chance="1.02"/><!-- Reverse Condition -->
+			<item id="140001238" chance="1.02"/><!-- Sympathetic Heal -->
+			<item id="140001239" chance="1.02"/><!-- Blinding Light -->
+			<item id="140001206" chance="1.02"/><!-- Spirit Wall of Protection -->
+			<item id="140001204" chance="1.02"/><!-- Cyclone of Wrath -->
+			<item id="140001203" chance="1.02"/><!-- Spirit Burn-to-Ashes -->
+			<item id="140001201" chance="1.02"/><!-- Magic's Freedom -->
+			<item id="140001205" chance="1.02"/><!-- Withering Gloom -->
+			<item id="140001217" chance="1.02"/><!-- Word of Inspiration -->
+			<item id="140001207" chance="1.02"/><!-- Cloaking Word -->
+			<item id="140001208" chance="1.02"/><!-- Enmity Swap -->
 			<item id="140001202" chance="1.02"/><!-- Stone Scour -->
 			<item id="140001128" chance="1.02"/><!-- Divine Fury -->
 			<item id="140001129" chance="1.02"/><!-- Holy Shield -->

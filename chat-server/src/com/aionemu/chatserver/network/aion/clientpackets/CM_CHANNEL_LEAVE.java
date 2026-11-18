@@ -35,7 +35,7 @@ public class CM_CHANNEL_LEAVE extends AbstractClientPacket {
 	@Override
 	protected void runImpl() {
 		Channel channel = ChatChannels.getChannelById(channelId);
-		if (!getConnection().getChatClient().removeChannel(channel))
+		if (!ChatChannels.leave(getConnection().getChatClient(), channel))
 			log.warn("{}, couldn't leave channel: {} (id: {})", getConnection().getChatClient(), channel, channelId);
 	}
 }

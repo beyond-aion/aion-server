@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import com.aionemu.chatserver.model.channel.Channel;
+import com.aionemu.chatserver.model.channel.ChatChannels;
 import com.aionemu.chatserver.network.aion.AionConnection;
 
 /**
@@ -79,17 +80,40 @@ public class ChatClient {
 		this.connection = connection;
 	}
 
-	public void addChannel(Channel channel) {
+	/**
+	 * Only use via {@link ChatChannels}, which tracks channel members.
+	 * 
+	 * @return Channels the client left to join this one.
+	 */
+	public List<Channel> addChannel(Channel channel) {
+		List<Channel> left = List.of();
 		List<Channel> channelsOfType = channels.get(channel.getChannelType());
 		if (channelsOfType == null) {
 			channelsOfType = new ArrayList<>();
 			channels.put(channel.getChannelType(), channelsOfType);
 		} else if (channel.getChannelType() != ChannelType.JOB || channelsOfType.size() == 2) {
+			left = new ArrayList<>(channelsOfType);
 			channelsOfType.clear();
 		}
 		channelsOfType.add(channel);
+		return left;
 	}
 
+	/**
+	 * Only use via {@link ChatChannels}, which tracks channel members.
+	 * 
+	 * @return Channels the client left.
+	 */
+	public List<Channel> removeAllChannels() {
+		List<Channel> left = new ArrayList<>();
+		channels.values().forEach(left::addAll);
+		channels.clear();
+		return left;
+	}
+
+	/**
+	 * Only use via {@link ChatChannels}, which tracks channel members.
+	 */
 	public boolean removeChannel(Channel channel) {
 		if (channel != null) {
 			List<Channel> channelsOfType = channels.get(channel.getChannelType());
