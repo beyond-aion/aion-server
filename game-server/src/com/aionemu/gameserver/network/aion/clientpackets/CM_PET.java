@@ -3,12 +3,7 @@ package com.aionemu.gameserver.network.aion.clientpackets;
 import java.util.Set;
 
 import com.aionemu.gameserver.model.EmotionType;
-import com.aionemu.gameserver.model.gameobjects.Pet;
-import com.aionemu.gameserver.model.gameobjects.PetAction;
-import com.aionemu.gameserver.model.gameobjects.PetDopingAction;
-import com.aionemu.gameserver.model.gameobjects.PetFeedAction;
-import com.aionemu.gameserver.model.gameobjects.PetFunctionAction;
-import com.aionemu.gameserver.model.gameobjects.PetMoodRequest;
+import com.aionemu.gameserver.model.gameobjects.*;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
@@ -20,7 +15,6 @@ import com.aionemu.gameserver.services.toypet.PetAdoptionService;
 import com.aionemu.gameserver.services.toypet.PetMoodService;
 import com.aionemu.gameserver.services.toypet.PetService;
 import com.aionemu.gameserver.services.toypet.PetSpawnService;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author M@xx, xTz
@@ -115,15 +109,12 @@ public class CM_PET extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
-		if (player == null)
-			return;
-
 		Pet pet = player.getPet();
 		switch (action) {
 			case ADOPT:
 				int result = PetAdoptionService.adoptPet(player, eggObjId, templateId, petName, decorationId, color, face, head);
-				if (result != 0)
-					PacketSendUtility.sendPacket(player, SM_FUNCTIONAL_PET.adoptionResult(result));
+				if (result != SM_FUNCTIONAL_PET.ADOPTION_SUCCESS)
+					sendPacket(SM_FUNCTIONAL_PET.adoptionResult(result));
 				break;
 			case EXTEND_EXPIRATION:
 				// the item data does not carry the pet id and the extension time for these items
@@ -145,10 +136,10 @@ public class CM_PET extends AionClientPacket {
 					case FEEDING:
 						if (feedItemObjectId == 0) {
 							pet.getCommonData().setCancelFeed(true);
-							PacketSendUtility.sendPacket(player, SM_FUNCTIONAL_PET.feeding(PetFeedAction.CANCEL, 0, 0, pet));
-							PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.END_FEEDING, 0, player.getObjectId()));
+							sendPacket(SM_FUNCTIONAL_PET.feeding(PetFeedAction.CANCEL, 0, 0, pet));
+							sendPacket(new SM_EMOTION(player, EmotionType.END_FEEDING, 0, player.getObjectId()));
 						} else if (pet.getCommonData().getRefeedDelay() > 0) { // not hungry yet
-							PacketSendUtility.sendPacket(player, SM_FUNCTIONAL_PET.feeding(PetFeedAction.REJECTED, feedItemObjectId, count, pet));
+							sendPacket(SM_FUNCTIONAL_PET.feeding(PetFeedAction.REJECTED, feedItemObjectId, count, pet));
 						} else
 							PetService.getInstance().removeObject(feedItemObjectId, count, player);
 						break;
@@ -169,9 +160,9 @@ public class CM_PET extends AionClientPacket {
 				break;
 			case RENAME:
 				if (!NameRestrictionService.isValidPetName(petName) || NameRestrictionService.isForbidden(petName))
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PET_NOT_AVALIABE_NAME());
+					sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_PET_NOT_AVALIABE_NAME());
 				else if (player.getPetList().hasSameName(petName))
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_TOYPET_EXISTING_NAME());
+					sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_TOYPET_EXISTING_NAME());
 				else
 					PetService.getInstance().renamePet(player, petObjectId, petName);
 				break;

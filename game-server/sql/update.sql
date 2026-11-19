@@ -1,5 +1,5 @@
 /*
- * DB changes since 53363eea9 (11.11.2026)
+ * DB changes since 620fc69 (18.11.2026)
  */
 
 ALTER TABLE `player_pets`

@@ -56,17 +56,6 @@ public class PetList {
 		this.lastUsedPetTemplateId = lastUsedPetTemplateId;
 	}
 
-	/**
-	 * @param player
-	 * @param petId
-	 * @param decorationId
-	 * @param name
-	 * @return
-	 */
-	public PetCommonData addPet(Player player, int petId, int decorationId, String name, int expireTime) {
-		return addPet(player, petId, decorationId, 0, 0, 0, System.currentTimeMillis(), name, expireTime);
-	}
-
 	public PetCommonData addPet(Player player, int petId, int decorationId, long birthday, String name, int expireTime) {
 		return addPet(player, petId, decorationId, 0, 0, 0, birthday, name, expireTime);
 	}

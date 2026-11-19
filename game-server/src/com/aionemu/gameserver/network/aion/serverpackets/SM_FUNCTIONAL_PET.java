@@ -4,12 +4,7 @@ import java.util.Collection;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.gameobjects.Pet;
-import com.aionemu.gameserver.model.gameobjects.PetAction;
-import com.aionemu.gameserver.model.gameobjects.PetDopingAction;
-import com.aionemu.gameserver.model.gameobjects.PetFeedAction;
-import com.aionemu.gameserver.model.gameobjects.PetMoodAction;
-import com.aionemu.gameserver.model.gameobjects.PetSpecialFunction;
+import com.aionemu.gameserver.model.gameobjects.*;
 import com.aionemu.gameserver.model.gameobjects.player.PetCommonData;
 import com.aionemu.gameserver.model.templates.pet.PetDopingBag;
 import com.aionemu.gameserver.model.templates.pet.PetFunction;
@@ -24,6 +19,11 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
 public class SM_FUNCTIONAL_PET extends AionServerPacket {
 
 	public static final int MAX_ENTRIES_PER_PAGE = 50;
+	public static final int ADOPTION_SUCCESS = 0;
+	public static final int ADOPTION_INVALID_EGG = 1;
+	public static final int ADOPTION_EGG_NOT_CONSUMED = 2;
+	public static final int ADOPTION_INVALID_NAME = 3;
+	public static final int ADOPTION_NAME_ALREADY_USED = 4;
 	private static final int FEEDING_FUNCTION_LENGTH = 2 * Integer.BYTES; // feed data and refeed time
 
 	private PetAction action;

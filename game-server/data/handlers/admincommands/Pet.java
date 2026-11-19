@@ -56,7 +56,7 @@ public class Pet extends AdminCommand {
 					sendInfo(admin, "You must specify a name for the pet.");
 					return;
 				}
-				PetAdoptionService.addPet(admin, petId, params[2], 0, 0);
+				PetAdoptionService.addPet(admin, petId, params[2], 0, 0, 0, 0, 0);
 			} else if (action.equalsIgnoreCase("del")) {
 				PetAdoptionService.surrenderPet(admin, petId);
 			}
