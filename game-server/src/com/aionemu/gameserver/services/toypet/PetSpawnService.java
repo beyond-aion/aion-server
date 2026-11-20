@@ -23,7 +23,10 @@ public class PetSpawnService {
 
 	public static void summonPet(Player player, int templateId) {
 		if (player.getWorldId() == WorldMapType.LIVE_PARTY_CONCERT_HALL.getId()) {
-			dismissPetAndNotify(player);
+			Pet pet = player.getPet();
+			if (pet != null)
+				pet.getController().delete();
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PET_CANT_SUMMON_HERE());
 			return;
 		}
 
@@ -62,23 +65,6 @@ public class PetSpawnService {
 		if (petCommonData.isSelling())
 			PacketSendUtility.sendPacket(player, SM_FUNCTIONAL_PET.specialFunction(PetSpecialFunction.AUTOSELL, true));
 		PacketSendUtility.sendPacket(player, SM_FUNCTIONAL_PET.mood(pet, PetMoodAction.UPDATE, 0)); // initial mood state
-	}
-
-	public static void dismissPetForTeleport(Player player, int destinationWorldId) {
-		if (destinationWorldId == WorldMapType.LIVE_PARTY_CONCERT_HALL.getId() && player.getPet() != null)
-			dismissPetAndNotify(player);
-	}
-
-	private static void dismissPetAndNotify(Player player) {
-		Pet pet = player.getPet();
-		if (pet != null) {
-			// Despawn clears the known lists after clearing the spawned flag.
-			// Deletion only despawns a spawned pet, and notSee skips packets for a despawned player.
-			boolean willSendDismissOnDespawn = player.isSpawned() && pet.isSpawned() && player.getKnownList().sees(pet);
-			if (pet.getController().delete() && !willSendDismissOnDespawn)
-				PacketSendUtility.sendPacket(player, SM_FUNCTIONAL_PET.dismissed(pet.getObjectId()));
-		}
-		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PET_CANT_SUMMON_HERE());
 	}
 
 }

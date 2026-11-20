@@ -19,6 +19,7 @@ import com.aionemu.gameserver.model.animations.ArrivalAnimation;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.Pet;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.BindPointPosition;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -44,7 +45,6 @@ import com.aionemu.gameserver.services.conquerorAndProtectorSystem.ConquerorAndP
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
 import com.aionemu.gameserver.services.player.PlayerReviveService;
-import com.aionemu.gameserver.services.toypet.PetSpawnService;
 import com.aionemu.gameserver.services.trade.PricesService;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -197,6 +197,7 @@ public class TeleportService {
 		PacketSendUtility.sendPacket(player, new SM_PLAYER_INFO(player));
 		PacketSendUtility.sendPacket(player, new SM_STATS_INFO(player));
 		PacketSendUtility.sendPacket(player, SM_MOTION.playerMotions(player));
+		dismissPetOnArrival(player);
 		player.getController().startProtectionActiveTask(); // before spawning, so others never see the player unprotected
 		World.getInstance().spawn(player);
 		World.getInstance().spawn(player.getPet());
@@ -205,14 +206,36 @@ public class TeleportService {
 		player.setPortAnimation(ArrivalAnimation.NONE);
 	}
 
+	private static void sendWorldChange(Player player) {
+		PacketSendUtility.sendPacket(player, new SM_CHANNEL_INFO(player));
+		PacketSendUtility.sendPacket(player, new SM_PLAYER_SPAWN(player));
+		dismissPetOnArrival(player);
+	}
+
+	private static void movePet(Player player, int worldId, int instanceId, float x, float y, float z, byte heading) {
+		if (worldId != WorldMapType.LIVE_PARTY_CONCERT_HALL.getId())
+			World.getInstance().setPosition(player.getPet(), worldId, instanceId, x, y, z, heading);
+	}
+
+	private static void dismissPetOnArrival(Player player) {
+		if (player.getWorldId() != WorldMapType.LIVE_PARTY_CONCERT_HALL.getId())
+			return;
+
+		Pet pet = player.getPet();
+		if (pet != null && pet.getController().delete()) {
+			// The owner has already despawned and won't receive the visibility callback's packet.
+			PacketSendUtility.sendPacket(player, SM_FUNCTIONAL_PET.dismissed(pet.getObjectId()));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PET_CANT_SUMMON_HERE());
+		}
+	}
+
 	public static void teleportTo(Player player, WorldPosition pos) {
 		if (player.getWorldId() == pos.getMapId()) {
 			// instant move; a pending animated teleport must not fire its old destination afterwards
 			player.getController().cancelTask(TaskId.TELEPORT);
 			abortPlayerActions(player);
-			PetSpawnService.dismissPetForTeleport(player, pos.getMapId());
 			World.getInstance().setPosition(player, pos.getMapId(), pos.getInstanceId(), pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
-			World.getInstance().setPosition(player.getPet(), pos.getMapId(), pos.getInstanceId(), pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
+			movePet(player, pos.getMapId(), pos.getInstanceId(), pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
 			spawnOnSameMap(player);
 		} else if (player.isDead()) {
 			teleportDeadTo(player, pos.getMapId(), pos.getInstanceId(), pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
@@ -222,15 +245,13 @@ public class TeleportService {
 	}
 
 	public static void teleportDeadTo(Player player, int worldId, int instanceId, float x, float y, float z, byte heading) {
-		PetSpawnService.dismissPetForTeleport(player, worldId);
 		if (player.getWorldId() != worldId || player.getInstanceId() != instanceId) {
 			ConquerorAndProtectorService.getInstance().onLeaveMap(player);
 			InstanceService.onLeaveInstance(player);
 		}
-		World.getInstance().setPosition(player.getPet(), worldId, instanceId, x, y, z, heading);
+		movePet(player, worldId, instanceId, x, y, z, heading);
 		World.getInstance().setPosition(player, worldId, instanceId, x, y, z, heading);
-		PacketSendUtility.sendPacket(player, new SM_CHANNEL_INFO(player));
-		PacketSendUtility.sendPacket(player, new SM_PLAYER_SPAWN(player));
+		sendWorldChange(player);
 		player.setPortAnimation(ArrivalAnimation.LANDING);
 		PacketSendUtility.sendPacket(player, new SM_PLAYER_INFO(player));
 
@@ -510,7 +531,6 @@ public class TeleportService {
 				return; // the player was killed during the animation or the target instance is gone: he stays where he is
 
 			abortPlayerActions(player);
-			PetSpawnService.dismissPetForTeleport(player, worldId);
 			// the player only leaves the world now (for animated teleports), so observers see the removal at the actual teleport
 			if (player.isSpawned())
 				World.getInstance().despawn(player, animation.getDefaultObjectDeleteAnimation());
@@ -522,7 +542,7 @@ public class TeleportService {
 				InstanceService.onLeaveInstance(player);
 			}
 			World.getInstance().setPosition(player, worldId, instanceId, x, y, z, h);
-			World.getInstance().setPosition(player.getPet(), worldId, instanceId, x, y, z, h);
+			movePet(player, worldId, instanceId, x, y, z, h);
 
 			player.setPortAnimation(animation.getDefaultArrivalAnimation());
 			if (onArrive != null)
@@ -532,8 +552,7 @@ public class TeleportService {
 				spawnOnSameMap(player);
 			} else {
 				// teleport with full map reloading, player will spawn via CM_LEVEL_READY
-				PacketSendUtility.sendPacket(player, new SM_CHANNEL_INFO(player));
-				PacketSendUtility.sendPacket(player, new SM_PLAYER_SPAWN(player));
+				sendWorldChange(player);
 				if (DataManager.WORLD_MAPS_DATA.getTemplate(worldId).isInstance() && !WorldMapType.getWorld(worldId).isPersonal())
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_DUNGEON_OPENED_FOR_SELF(worldId));
 			}
