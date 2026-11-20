@@ -225,6 +225,13 @@ public class House extends VisibleObject implements Persistable {
 	 * @return The spawn position of the given house npc, which also exists while the npc is not spawned.
 	 */
 	public HouseSpawn getSpawnTemplate(SpawnType type) {
+		HouseSpawn spawn = findSpawnTemplate(type);
+		if (spawn == null)
+			throw new IllegalStateException("Missing " + type + " spawn for house " + address.getId());
+		return spawn;
+	}
+
+	public HouseSpawn findSpawnTemplate(SpawnType type) {
 		List<HouseSpawn> spawns = DataManager.HOUSE_NPCS_DATA.getSpawnsByAddress(address.getId());
 		if (spawns != null) {
 			for (HouseSpawn spawn : spawns) {
@@ -232,7 +239,7 @@ public class House extends VisibleObject implements Persistable {
 					return spawn;
 			}
 		}
-		throw new IllegalStateException("Missing " + type + " spawn for house " + address.getId());
+		return null;
 	}
 
 	private Npc getSpawn(SpawnType type) {

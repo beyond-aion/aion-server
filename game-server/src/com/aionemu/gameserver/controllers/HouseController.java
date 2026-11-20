@@ -68,11 +68,8 @@ public class HouseController extends VisibleObjectController<House> {
 			if (spawn.getType() == SpawnType.MANAGER || spawn.getType() == SpawnType.TELEPORT) {
 				npc = hasButlerAndCrystal() ? spawnButlerOrCrystal(spawn) : null;
 			} else if (spawn.getType() == SpawnType.SIGN) {
-				// Signs do not have master name displayed, but have creatorId
-				int creatorId = address.getId();
-				SpawnTemplate t = SpawnEngine.newSingleTimeSpawn(address.getMapId(), getCurrentSignNpcId(), spawn.getX(), spawn.getY(), spawn.getZ(),
-					spawn.getH(), creatorId);
-				npc = (Npc) SpawnEngine.spawnObject(t, getOwner().getInstanceId());
+				int signNpcId = getCurrentSignNpcId();
+				npc = signNpcId == 0 ? null : spawnSign(spawn, signNpcId);
 			} else {
 				log.warn("Unhandled spawn type {}", spawn.getType());
 				continue;
@@ -172,19 +169,27 @@ public class HouseController extends VisibleObjectController<House> {
 			getOwner().updateSpawn(type, spawned ? null : spawnButlerOrCrystal(getOwner().getSpawnTemplate(type)));
 	}
 
+	private Npc spawnSign(HouseSpawn spawn, int npcId) {
+		// Signs do not have master name displayed, but have creatorId
+		HouseAddress address = getOwner().getAddress();
+		SpawnTemplate t = SpawnEngine.newSingleTimeSpawn(address.getMapId(), npcId, spawn.getX(), spawn.getY(), spawn.getZ(), spawn.getH(), address.getId());
+		return (Npc) SpawnEngine.spawnObject(t, getOwner().getInstanceId());
+	}
+
 	/**
 	 * Updates the sign, butler and relationship crystal after the auction or activity state of the house changed.
 	 */
 	public void updateSign() {
-		if (getOwner().getCurrentSign() == null)
+		if (getOwner().getPosition() == null || !getOwner().isSpawned())
 			return;
 		updateButlerAndCrystal();
+		HouseSpawn signSpawn = getOwner().findSpawnTemplate(SpawnType.SIGN);
+		if (signSpawn == null)
+			return;
 		int newNpcId = getCurrentSignNpcId();
-		if (newNpcId != getOwner().getCurrentSign().getNpcId()) {
-			SpawnTemplate t = getOwner().getCurrentSign().getSpawn();
-			t = SpawnEngine.newSingleTimeSpawn(t.getWorldId(), newNpcId, t.getX(), t.getY(), t.getZ(), t.getHeading(), t.getCreatorId());
-			getOwner().updateSpawn(SpawnType.SIGN, (Npc) SpawnEngine.spawnObject(t, getOwner().getInstanceId()));
-		}
+		Npc sign = getOwner().getCurrentSign();
+		if (newNpcId != (sign == null ? 0 : sign.getNpcId()))
+			getOwner().updateSpawn(SpawnType.SIGN, newNpcId == 0 ? null : spawnSign(signSpawn, newNpcId));
 	}
 
 	public void updateHouseSpawns() {
@@ -200,7 +205,7 @@ public class HouseController extends VisibleObjectController<House> {
 		if (getOwner().getBids() != null)
 			return getOwner().getLand().getSaleSignNpcId();
 		if (getOwner().getOwnerId() == 0)
-			return getOwner().getLand().getNosaleSignNpcId(); // invisible npc
+			return 0; // retail spawns no npcs for an unowned house that is not on auction (state 2), not even the nosale sign
 		return getOwner().isInactive() ? getOwner().getLand().getWaitingSignNpcId() : getOwner().getLand().getHomeSignNpcId();
 	}
 }
