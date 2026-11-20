@@ -2,9 +2,11 @@ package com.aionemu.gameserver.dataholders;
 
 import java.util.*;
 
+import jakarta.xml.bind.Unmarshaller;
+import jakarta.xml.bind.annotation.*;
+
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.gameserver.dataholders.loadingutils.StaticDataListener;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.TribeClass;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -14,9 +16,6 @@ import com.aionemu.gameserver.model.templates.npc.NpcRank;
 import com.aionemu.gameserver.model.templates.npc.NpcRating;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 import com.aionemu.gameserver.model.templates.stats.StatsTemplate;
-
-import jakarta.xml.bind.Unmarshaller;
-import jakarta.xml.bind.annotation.*;
 
 /**
  * This is a container holding and serving all {@link NpcTemplate} instances.<br>
@@ -39,10 +38,6 @@ public class NpcData {
 	private final Set<Integer> functionDialogIds = new HashSet<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
-		StaticDataListener.registerForAsyncExecutionOrRun(u, this::init);
-	}
-
-	private void init() {
 		for (NpcTemplate npc : npcs) {
 			npcData.put(npc.getTemplateId(), npc);
 			if (npc.getFuncDialogIds() != null) {
