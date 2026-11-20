@@ -9,8 +9,6 @@ import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_FUNCTIONAL_PET;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.services.NameRestrictionService;
 import com.aionemu.gameserver.services.toypet.PetAdoptionService;
 import com.aionemu.gameserver.services.toypet.PetMoodService;
 import com.aionemu.gameserver.services.toypet.PetService;
@@ -92,7 +90,7 @@ public class CM_PET extends AionClientPacket {
 				}
 				break;
 			case RENAME:
-				petObjectId = readD();
+				templateId = readD();
 				petName = readS();
 				break;
 			case MOOD:
@@ -134,6 +132,8 @@ public class CM_PET extends AionClientPacket {
 					return;
 				switch (functionAction) {
 					case FEEDING:
+						if (pet.getCommonData().getFeedProgress() == null)
+							break;
 						if (feedItemObjectId == 0) {
 							pet.getCommonData().setCancelFeed(true);
 							sendPacket(SM_FUNCTIONAL_PET.feeding(PetFeedAction.CANCEL, 0, 0, pet));
@@ -159,12 +159,7 @@ public class CM_PET extends AionClientPacket {
 				}
 				break;
 			case RENAME:
-				if (!NameRestrictionService.isValidPetName(petName) || NameRestrictionService.isForbidden(petName))
-					sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_PET_NOT_AVALIABE_NAME());
-				else if (player.getPetList().hasSameName(petName))
-					sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_TOYPET_EXISTING_NAME());
-				else
-					PetService.getInstance().renamePet(player, petObjectId, petName);
+				PetService.getInstance().renamePet(player, templateId, petName);
 				break;
 			case MOOD:
 				if (pet != null && moodRequest != null)

@@ -16,6 +16,7 @@ import com.aionemu.gameserver.utils.idfactory.IDFactory;
 public class PetList {
 
 	private int lastUsedPetTemplateId;
+	private long renameCooldownEndTime;
 	private Map<Integer, PetCommonData> pets = new LinkedHashMap<>();
 
 	PetList(Player player) {
@@ -85,6 +86,14 @@ public class PetList {
 
 	public boolean hasSameName(String name) {
 		return pets.values().stream().anyMatch(pet -> pet.getName() != null && pet.getName().equalsIgnoreCase(name));
+	}
+
+	public long getRenameCooldownEndTime() {
+		return renameCooldownEndTime;
+	}
+
+	public void setRenameCooldownEndTime(long renameCooldownEndTime) {
+		this.renameCooldownEndTime = renameCooldownEndTime;
 	}
 
 	public PetCommonData deletePet(int templateId) {

@@ -61,8 +61,8 @@ public class PetMoodService {
 		}
 		pet.getCommonData().clearMoodStatistics();
 		pet.getCommonData().setGiftCdStarted(System.currentTimeMillis());
-		PacketSendUtility.sendPacket(pet.getMaster(), SM_FUNCTIONAL_PET.mood(pet, PetMoodAction.UPDATE, 0));
 		PacketSendUtility.sendPacket(pet.getMaster(), SM_FUNCTIONAL_PET.mood(pet, PetMoodAction.PRESENT, 0));
+		PacketSendUtility.sendPacket(pet.getMaster(), SM_FUNCTIONAL_PET.mood(pet, PetMoodAction.UPDATE, 0));
 	}
 
 	/**

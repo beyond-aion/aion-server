@@ -30,6 +30,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_FUNCTIONAL_PET;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.services.NameRestrictionService;
 import com.aionemu.gameserver.services.TradeService;
 import com.aionemu.gameserver.services.item.ItemPacketService;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
@@ -47,6 +48,7 @@ import com.aionemu.gameserver.utils.audit.AuditLogger;
 public class PetService {
 
 	private static final Logger log = LoggerFactory.getLogger(PetService.class);
+	private static final int RENAME_COOLDOWN_SECONDS = 30;
 
 	public static PetService getInstance() {
 		return SingletonHolder.instance;
@@ -55,15 +57,29 @@ public class PetService {
 	private PetService() {
 	}
 
-	public void renamePet(Player player, int petObjectId, String name) {
-		name = Util.convertName(name);
-		PetCommonData petCommonData = player.getPetList().getPets().stream().filter(pet -> pet.getObjectId() == petObjectId).findFirst()
-			.orElse(null);
+	public void renamePet(Player player, int templateId, String name) {
+		PetCommonData petCommonData = player.getPetList().getPet(templateId);
 		if (petCommonData == null)
 			return;
-		petCommonData.setName(name);
+		long now = System.currentTimeMillis();
+		long remainingMillis = player.getPetList().getRenameCooldownEndTime() - now;
+		if (remainingMillis > 0) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_TOYPET_NAME_CHANGE_DELAY(
+				Integer.toString(RENAME_COOLDOWN_SECONDS), Long.toString(Math.ceilDiv(remainingMillis, 1000))));
+			return;
+		}
+		if (!NameRestrictionService.isValidPetName(name) || NameRestrictionService.isForbidden(name)) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PET_NOT_AVALIABE_NAME());
+			return;
+		}
+		if (player.getPetList().hasSameName(name)) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_TOYPET_EXISTING_NAME());
+			return;
+		}
+		petCommonData.setName(Util.convertName(name));
 		PlayerPetsDAO.updatePetName(petCommonData);
-		PacketSendUtility.broadcastPacket(player, SM_FUNCTIONAL_PET.renamed(petObjectId, petCommonData.getName()), true);
+		player.getPetList().setRenameCooldownEndTime(now + RENAME_COOLDOWN_SECONDS * 1000L);
+		PacketSendUtility.broadcastPacket(player, SM_FUNCTIONAL_PET.renamed(petCommonData.getObjectId(), petCommonData.getName()), true);
 	}
 
 	public void onPlayerLogin(Player player) {
@@ -127,15 +143,14 @@ public class PetService {
 				PacketSendUtility.sendPacket(player, SM_FUNCTIONAL_PET.feeding(PetFeedAction.GAVE_ITEM, reward.getItem(), 0, pet));
 				PacketSendUtility.sendPacket(player, SM_FUNCTIONAL_PET.feeding(PetFeedAction.FINISHED, 0, 0, pet));
 				PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.END_FEEDING, 0, player.getObjectId()));
-				PacketSendUtility.sendPacket(player, SM_FUNCTIONAL_PET.feeding(PetFeedAction.REFEED, item.getObjectId(), 0, pet)); // 2151591961
-
-				ItemService.addItem(player, reward.getItem(), 1);
-				long delay = flavour.getCooldDown() * 60000;
-				commonData.scheduleRefeed(delay);
+				long delay = flavour.getCooldDown() * 60000L;
 				long refeedTime = System.currentTimeMillis() + delay;
-				commonData.setRefeedTime(refeedTime);
-				PlayerPetsDAO.setTime(pet.getObjectId(), refeedTime);
 				progress.reset();
+				commonData.setRefeedTime(refeedTime);
+				commonData.scheduleRefeed(delay);
+				PacketSendUtility.sendPacket(player, SM_FUNCTIONAL_PET.feeding(PetFeedAction.REFEED, item.getObjectId(), 0, pet));
+				ItemService.addItem(player, reward.getItem(), 1);
+				PlayerPetsDAO.setTime(pet.getObjectId(), refeedTime);
 			} else {
 				PacketSendUtility.sendPacket(player, SM_FUNCTIONAL_PET.feeding(PetFeedAction.EATEN, item.getObjectId(), --count, pet));
 				if (count > 0)

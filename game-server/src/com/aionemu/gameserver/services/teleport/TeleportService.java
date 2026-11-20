@@ -44,6 +44,7 @@ import com.aionemu.gameserver.services.conquerorAndProtectorSystem.ConquerorAndP
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
 import com.aionemu.gameserver.services.player.PlayerReviveService;
+import com.aionemu.gameserver.services.toypet.PetSpawnService;
 import com.aionemu.gameserver.services.trade.PricesService;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -209,6 +210,7 @@ public class TeleportService {
 			// instant move; a pending animated teleport must not fire its old destination afterwards
 			player.getController().cancelTask(TaskId.TELEPORT);
 			abortPlayerActions(player);
+			PetSpawnService.dismissPetForTeleport(player, pos.getMapId());
 			World.getInstance().setPosition(player, pos.getMapId(), pos.getInstanceId(), pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
 			World.getInstance().setPosition(player.getPet(), pos.getMapId(), pos.getInstanceId(), pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
 			spawnOnSameMap(player);
@@ -220,6 +222,7 @@ public class TeleportService {
 	}
 
 	public static void teleportDeadTo(Player player, int worldId, int instanceId, float x, float y, float z, byte heading) {
+		PetSpawnService.dismissPetForTeleport(player, worldId);
 		if (player.getWorldId() != worldId || player.getInstanceId() != instanceId) {
 			ConquerorAndProtectorService.getInstance().onLeaveMap(player);
 			InstanceService.onLeaveInstance(player);
@@ -507,6 +510,7 @@ public class TeleportService {
 				return; // the player was killed during the animation or the target instance is gone: he stays where he is
 
 			abortPlayerActions(player);
+			PetSpawnService.dismissPetForTeleport(player, worldId);
 			// the player only leaves the world now (for animated teleports), so observers see the removal at the actual teleport
 			if (player.isSpawned())
 				World.getInstance().despawn(player, animation.getDefaultObjectDeleteAnimation());

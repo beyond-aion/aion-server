@@ -22,7 +22,6 @@ import com.aionemu.gameserver.services.conquerorAndProtectorSystem.ConquerorAndP
 import com.aionemu.gameserver.services.event.EventService;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.rift.RiftInformer;
-import com.aionemu.gameserver.services.toypet.PetSpawnService;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
 
@@ -99,7 +98,7 @@ public class CM_LEVEL_READY extends AionClientPacket {
 		sendPacket(SM_CUBE_UPDATE.cubeSize(StorageType.CUBE, activePlayer));
 
 		Pet pet = activePlayer.getPet();
-		if (pet != null && PetSpawnService.validateSummonPet(activePlayer) && !pet.isSpawned())
+		if (pet != null && !pet.isSpawned())
 			World.getInstance().spawn(pet);
 		activePlayer.setPortAnimation(ArrivalAnimation.NONE);
 

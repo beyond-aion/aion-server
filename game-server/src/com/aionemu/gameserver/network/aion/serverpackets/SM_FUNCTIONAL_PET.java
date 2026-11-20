@@ -37,6 +37,8 @@ public class SM_FUNCTIONAL_PET extends AionServerPacket {
 	private int page;
 	private PetSpecialFunction specialFunction;
 	private PetFeedAction feedAction;
+	private int feedData;
+	private int refeedSeconds;
 	private PetMoodAction moodAction;
 	private int shuggleEmotion;
 	private boolean isActing;
@@ -122,7 +124,10 @@ public class SM_FUNCTIONAL_PET extends AionServerPacket {
 		packet.feedAction = action;
 		packet.itemObjectId = itemObjectId;
 		packet.count = count;
-		packet.commonData = pet.getCommonData();
+		PetCommonData commonData = pet.getCommonData();
+		// The packet may be written after the next feeding step changes the pet state.
+		packet.feedData = commonData.getFeedProgress().getDataForPacket();
+		packet.refeedSeconds = (int) (commonData.getRefeedDelay() / 1000);
 		return packet;
 	}
 
@@ -240,8 +245,8 @@ public class SM_FUNCTIONAL_PET extends AionServerPacket {
 				writeH(1); // one function block follows
 				writeC(1); // feeding function tag
 				writeC(feedAction.getId());
-				writeD(commonData.getFeedProgress().getDataForPacket());
-				writeD((int) commonData.getRefeedDelay() / 1000);
+				writeD(feedData);
+				writeD(refeedSeconds);
 				switch (feedAction) {
 					case START: // start feeding
 					case REFEED: // refeed timer started
