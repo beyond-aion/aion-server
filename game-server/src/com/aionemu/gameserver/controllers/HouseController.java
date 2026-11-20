@@ -65,7 +65,9 @@ public class HouseController extends VisibleObjectController<House> {
 		}
 		for (HouseSpawn spawn : templates) {
 			Npc npc;
-			if (spawn.getType() == SpawnType.MANAGER) {
+			if (getOwner().getOwnerId() == 0 && (spawn.getType() == SpawnType.MANAGER || spawn.getType() == SpawnType.TELEPORT)) {
+				npc = null; // retail spawns the butler and relationship crystal only for an owned house
+			} else if (spawn.getType() == SpawnType.MANAGER) {
 				SpawnTemplate t = SpawnEngine.newSingleTimeSpawn(address.getMapId(), address.getLand().getManagerNpcId(), spawn.getX(), spawn.getY(),
 					spawn.getZ(), spawn.getH());
 				npc = VisibleObjectSpawner.spawnHouseNpc(t, getOwner().getInstanceId(), getOwner());
@@ -137,9 +139,9 @@ public class HouseController extends VisibleObjectController<House> {
 
 	@SuppressWarnings("lossy-conversions")
 	public void teleportNearHouseDoor(Player player, boolean outsideHouse) {
-		SpawnTemplate butler = getOwner().getButler().getSpawn(), relationshipCrystal = getOwner().getRelationshipCrystal().getSpawn();
+		HouseSpawn butler = getOwner().getSpawnTemplate(SpawnType.MANAGER), relationshipCrystal = getOwner().getSpawnTemplate(SpawnType.TELEPORT);
 		float x, y, z; // midpoint between butler and relationship crystal, since we currently have no door coordinates in templates
-		byte h = PositionUtil.getHeadingTowards(getOwner().getRelationshipCrystal(), butler.getX(), butler.getY());
+		byte h = PositionUtil.getHeadingTowards(relationshipCrystal.getX(), relationshipCrystal.getY(), butler.getX(), butler.getY());
 		h -= 30; // this is the supposed heading towards the door (crystal is right from the door, so offset direction towards butler by 90 degrees)
 		x = (butler.getX() + relationshipCrystal.getX()) / 2;
 		y = (butler.getY() + relationshipCrystal.getY()) / 2;
