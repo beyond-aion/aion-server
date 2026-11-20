@@ -65,6 +65,9 @@ public class StaticData {
 	@XmlElement(name = "abysspoint_world_mods")
 	public AbyssPointWorldModTable abyssPointWorldModTable;
 
+	@XmlElement(name = "ap_level_restricts")
+	public ApLevelRestrictTable apLevelRestrictTable;
+
 	@XmlElement(name = "party_exp_mod_table")
 	public PartyExpModTable partyExpModTable;
 
@@ -339,6 +342,7 @@ public class StaticData {
 		log.info("Loaded {} pvp damage modifier entries", pvpModTable.size());
 		log.info("Loaded {} abyss rank entries", abyssRankTable.size());
 		log.info("Loaded {} abyss point world modifiers", abyssPointWorldModTable.size());
+		log.info("Loaded {} abyss point level caps", apLevelRestrictTable.size());
 		log.info("Loaded {} party experience modifier entries", partyExpModTable.size());
 		log.info("Loaded {} mentee experience limit entries", menteeExpLimitTable.size());
 		log.info("Loaded {} repose energy entries", reposeEnergyTable.size());

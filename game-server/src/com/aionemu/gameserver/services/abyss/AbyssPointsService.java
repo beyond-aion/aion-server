@@ -64,6 +64,12 @@ public class AbyssPointsService {
 	public static void addAp(Player player, int amount, IntFunction<SM_SYSTEM_MESSAGE> gainMessage) {
 		if (player == null)
 			return;
+		if (amount > 0) {
+			long belowLevelCap = DataManager.AP_LEVEL_RESTRICT_TABLE.getMaxAp(player.getLevel()) - player.getAbyssRank().getAp();
+			if (belowLevelCap <= 0)
+				return;
+			amount = (int) Math.min(amount, belowLevelCap);
+		}
 
 		int oldAp = player.getAbyssRank().getAp();
 		AbyssRankEnum oldAbyssRank = player.getAbyssRank().getRank();

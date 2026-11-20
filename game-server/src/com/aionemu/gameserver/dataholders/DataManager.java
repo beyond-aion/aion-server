@@ -86,6 +86,7 @@ public final class DataManager {
 	public static PvpModTable PVP_MOD_TABLE;
 	public static AbyssRankTable ABYSS_RANK_TABLE;
 	public static AbyssPointWorldModTable ABYSS_POINT_WORLD_MOD_TABLE;
+	public static ApLevelRestrictTable AP_LEVEL_RESTRICT_TABLE;
 	public static PartyExpModTable PARTY_EXP_MOD_TABLE;
 	public static MenteeExpLimitTable MENTEE_EXP_LIMIT_TABLE;
 	public static ReposeEnergyTable REPOSE_ENERGY_TABLE;
@@ -149,6 +150,7 @@ public final class DataManager {
 		PVP_MOD_TABLE = data.pvpModTable;
 		ABYSS_RANK_TABLE = data.abyssRankTable;
 		ABYSS_POINT_WORLD_MOD_TABLE = data.abyssPointWorldModTable;
+		AP_LEVEL_RESTRICT_TABLE = data.apLevelRestrictTable;
 		PARTY_EXP_MOD_TABLE = data.partyExpModTable;
 		MENTEE_EXP_LIMIT_TABLE = data.menteeExpLimitTable;
 		REPOSE_ENERGY_TABLE = data.reposeEnergyTable;

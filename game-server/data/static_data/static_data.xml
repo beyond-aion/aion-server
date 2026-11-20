@@ -118,6 +118,7 @@
 	<import file="exp_mod_table/pvp_mod_table.xml"/>
 	<import file="abyss/abyss_rank.xml"/>
 	<import file="abyss/abysspoint_world_mod.xml"/>
+	<import file="abyss/ap_level_restrict.xml"/>
 	<import file="exp_mod_table/party_exp_mod_table.xml"/>
 	<import file="exp_mod_table/mentee_exp_limit_table.xml"/>
 	<import file="exp_mod_table/repose_energy_table.xml"/>
