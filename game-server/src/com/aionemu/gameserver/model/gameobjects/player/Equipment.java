@@ -99,7 +99,7 @@ public class Equipment implements Persistable {
 
 		int requiredLevel = itemTemplate.getRequiredLevel(owner.getPlayerClass());
 		if (requiredLevel == -1 || requiredLevel > owner.getLevel()) {
-			PacketSendUtility.sendPacket(owner, STR_CANNOT_USE_ITEM_TOO_LOW_LEVEL_MUST_BE_THIS_LEVEL(item.getL10n(), requiredLevel));
+			PacketSendUtility.sendPacket(owner, STR_CANNOT_USE_ITEM_TOO_LOW_LEVEL_MUST_BE_THIS_LEVEL(requiredLevel, item.getL10n()));
 			return null;
 		}
 

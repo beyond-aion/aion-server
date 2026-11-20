@@ -354,7 +354,7 @@ public class PlayerRestrictions {
 
 		int requiredLevel = item.getItemTemplate().getRequiredLevel(player.getPlayerClass());
 		if (requiredLevel > player.getLevel()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_USE_ITEM_TOO_LOW_LEVEL_MUST_BE_THIS_LEVEL(item.getL10n(), requiredLevel));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_USE_ITEM_TOO_LOW_LEVEL_MUST_BE_THIS_LEVEL(requiredLevel, item.getL10n()));
 			return false;
 		}
 

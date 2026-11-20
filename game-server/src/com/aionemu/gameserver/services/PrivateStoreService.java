@@ -187,7 +187,7 @@ public class PrivateStoreService {
 				if (soldCount == 1)
 					PacketSendUtility.sendPacket(seller, SM_SYSTEM_MESSAGE.STR_MSG_PERSONAL_SHOP_SELL_ITEM(item.getL10n()));
 				else
-					PacketSendUtility.sendPacket(seller, SM_SYSTEM_MESSAGE.STR_MSG_PERSONAL_SHOP_SELL_ITEM_MULTI(soldCount, item.getL10n()));
+					PacketSendUtility.sendPacket(seller, SM_SYSTEM_MESSAGE.STR_MSG_PERSONAL_SHOP_SELL_ITEM_MULTI(item.getL10n(), soldCount));
 				log.info("[PRIVATE STORE] > [Seller: {}] sold [Item: {}][Amount: {}] to [Buyer: {}] for [Price: {}]", seller.getName(),
 					item.getItemId(), soldCount, buyer.getName(), boughtItem.getPrice() * soldCount);
 			}
