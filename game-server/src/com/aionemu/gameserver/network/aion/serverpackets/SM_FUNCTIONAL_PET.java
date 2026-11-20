@@ -44,8 +44,7 @@ public class SM_FUNCTIONAL_PET extends AionServerPacket {
 	private boolean isActing;
 	private int lootNpcObjId;
 	private PetDopingAction dopeAction;
-	private int dopeSlot;
-	private boolean dopingFailed;
+	private int[] dopeParams;
 	private int result;
 	private int remainingSeconds;
 
@@ -167,23 +166,38 @@ public class SM_FUNCTIONAL_PET extends AionServerPacket {
 		return packet;
 	}
 
+	/**
+	 * A successful doping action: add (item template id, slot), remove (slot) or use (item template id).
+	 */
 	public static SM_FUNCTIONAL_PET doping(PetDopingAction action, int itemId, int slot) {
-		SM_FUNCTIONAL_PET packet = new SM_FUNCTIONAL_PET(PetAction.SPECIAL_FUNCTION);
-		packet.specialFunction = PetSpecialFunction.DOPING;
-		packet.dopeAction = action;
-		packet.itemObjectId = itemId; // template id, or the second slot for the switch action
-		packet.dopeSlot = slot;
-		return packet;
+		return switch (action) {
+			case ADD -> dopingPacket(action, itemId, slot);
+			case REMOVE -> dopingPacket(action, slot);
+			case USE -> dopingPacket(action, itemId);
+			case SWITCH -> throw new IllegalArgumentException("Use dopingSwitched for the switch action");
+		};
+	}
+
+	public static SM_FUNCTIONAL_PET dopingSwitched(int slot1, int slot2) {
+		return dopingPacket(PetDopingAction.SWITCH, slot1, slot2);
 	}
 
 	/**
 	 * Rejection of a doping action; the client rolls its optimistic UI change back.
 	 */
 	public static SM_FUNCTIONAL_PET dopingRejected(PetDopingAction action) {
+		// the client reads two parameters for add and switch; -1 is the failure sentinel
+		return switch (action) {
+			case ADD, SWITCH -> dopingPacket(action, -1, -1);
+			case REMOVE, USE -> dopingPacket(action, -1);
+		};
+	}
+
+	private static SM_FUNCTIONAL_PET dopingPacket(PetDopingAction action, int... params) {
 		SM_FUNCTIONAL_PET packet = new SM_FUNCTIONAL_PET(PetAction.SPECIAL_FUNCTION);
 		packet.specialFunction = PetSpecialFunction.DOPING;
 		packet.dopeAction = action;
-		packet.dopingFailed = true;
+		packet.dopeParams = params;
 		return packet;
 	}
 
@@ -302,36 +316,8 @@ public class SM_FUNCTIONAL_PET extends AionServerPacket {
 				writeC(specialFunction.getId());
 				if (specialFunction == PetSpecialFunction.DOPING) {
 					writeC(dopeAction.getId());
-					if (dopingFailed) {
-						switch (dopeAction) {
-							case ADD:
-							case SWITCH:
-								// the client reads both parameters for these actions; -1 is the failure sentinel
-								writeD(-1);
-								writeD(-1);
-								break;
-							default: // REMOVE, USE
-								writeD(-1);
-								break;
-						}
-					} else {
-						switch (dopeAction) {
-							case ADD:
-								writeD(itemObjectId);
-								writeD(dopeSlot);
-								break;
-							case REMOVE:
-								writeD(dopeSlot);
-								break;
-							case SWITCH:
-								writeD(dopeSlot); // slot 1
-								writeD(itemObjectId); // slot 2
-								break;
-							case USE:
-								writeD(itemObjectId);
-								break;
-						}
-					}
+					for (int param : dopeParams)
+						writeD(param);
 				} else if (specialFunction == PetSpecialFunction.AUTOLOOT) {
 					if (lootNpcObjId > 0) {
 						writeC(isActing ? 1 : 2); // 0x02 display looted msg.
@@ -385,8 +371,10 @@ public class SM_FUNCTIONAL_PET extends AionServerPacket {
 			writeFunction(type, petCommonData);
 			writtenFunctions++;
 		}
-		for (; writtenFunctions < 2; writtenFunctions++)
-			writeFunction(PetFunctionType.WAREHOUSE, null); // empty slot: type 0 with no data
+		for (; writtenFunctions < 2; writtenFunctions++) { // empty slot
+			writeC(0); // type
+			writeC(0); // data length
+		}
 		writeAppearance(petCommonData);
 	}
 

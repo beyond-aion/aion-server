@@ -184,7 +184,7 @@ public class PetService {
 				return;
 			}
 			pet.getCommonData().getDopingBag().switchItems(slot, slot2);
-			PacketSendUtility.sendPacket(pet.getMaster(), SM_FUNCTIONAL_PET.doping(action, slot2, slot));
+			PacketSendUtility.sendPacket(pet.getMaster(), SM_FUNCTIONAL_PET.dopingSwitched(slot, slot2));
 		} else if (action == PetDopingAction.USE) { // use item
 			if (!player.isSpawned()) { // player is between maps, schedule re-check
 				ThreadPoolManager.getInstance().schedule(() -> PacketSendUtility.sendPacket(player, SM_FUNCTIONAL_PET.doping(action, itemId, slot)), 5, TimeUnit.SECONDS);
