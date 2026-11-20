@@ -45,7 +45,7 @@ public class CM_LEVEL_READY extends AionClientPacket {
 	}
 
 	/**
-	 * Retail (World::SeeHousingObjects) sends the own field house objects only on these maps, and the studio objects only to its owner inside it.
+	 * The own field house objects are only needed on maps with field houses, and the studio objects only by the owner inside the studio.
 	 */
 	private static boolean isOwnHouseObjectListSent(Player player, House activeHouse, WorldMapInstance instance) {
 		if (activeHouse.getBuilding().getType() == BuildingType.PERSONAL_INS)

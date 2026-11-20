@@ -144,7 +144,7 @@ public class PlayerController extends CreatureController<Player> {
 		synchronized (registeredHouses) {
 			if (!registeredHouses.add(house))
 				return;
-			if (house.getBuilding().getType() == BuildingType.PERSONAL_INS) // retail sends S_PUT_BUILDINGS for a studio, also to visitors
+			if (house.getBuilding().getType() == BuildingType.PERSONAL_INS) // a studio is announced with its building info, to visitors as well
 				PacketSendUtility.sendPacket(player, new SM_HOUSE_UPDATE(house));
 			else
 				PacketSendUtility.sendPacket(player, new SM_HOUSE_RENDER(house));
@@ -152,7 +152,7 @@ public class PlayerController extends CreatureController<Player> {
 	}
 
 	/**
-	 * Retail sends the script list right after the butler's spawn packet, and only for a butler of an owned house.
+	 * The script list follows the butler's spawn packet, and only the butler of an owned house hands it out.
 	 */
 	private void sendHouseScriptsIfButler(SummonedHouseNpc houseNpc) {
 		House house = houseNpc.getCreator();

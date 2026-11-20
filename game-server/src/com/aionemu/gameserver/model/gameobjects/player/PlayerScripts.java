@@ -91,7 +91,7 @@ public class PlayerScripts {
 	}
 
 	/**
-	 * Keeps the slot as an empty script like retail does, so the client is told to delete it instead of keeping what it cached.
+	 * Keeps the slot as an empty script instead of forgetting it, so later full lists tell clients to drop a cached copy.
 	 */
 	public void remove(int scriptId) {
 		set(scriptId, new byte[0], 0);

@@ -45,7 +45,7 @@ public class SM_HOUSE_SCRIPTS extends AionServerPacket {
 				writeB(scriptContent);
 				writeB(SCRIPT_PADDING);
 			} else {
-				writeH(script.isUnused() ? 0xFFFF : 0); // like retail: 0xFFFF marks a never used slot, 0 makes the client delete the slot
+				writeH(script.isUnused() ? 0xFFFF : 0); // 0xFFFF leaves the client's slot as it is, 0 makes the client delete it
 			}
 		}
 	}

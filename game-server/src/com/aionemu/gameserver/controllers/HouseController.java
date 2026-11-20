@@ -146,8 +146,8 @@ public class HouseController extends VisibleObjectController<House> {
 	}
 
 	/**
-	 * Retail (NPC server HousingDb::SetFieldHouse) spawns the butler and relationship crystal for a house on auction (state 3) and for an owned
-	 * house (state 5), but not for an unowned one (state 2) or one whose buyer still owns another house (state 4, our inactive house).
+	 * The butler and relationship crystal serve the owner and the visitors of an auction. An unowned house without an auction and an inactive house,
+	 * whose buyer still owns another one, have neither.
 	 */
 	private boolean hasButlerAndCrystal() {
 		House house = getOwner();
@@ -172,7 +172,8 @@ public class HouseController extends VisibleObjectController<House> {
 	private Npc spawnSign(HouseSpawn spawn, int npcId) {
 		// Signs do not have master name displayed, but have creatorId
 		HouseAddress address = getOwner().getAddress();
-		SpawnTemplate t = SpawnEngine.newSingleTimeSpawn(address.getMapId(), npcId, spawn.getX(), spawn.getY(), spawn.getZ(), spawn.getH(), address.getId());
+		SpawnTemplate t = SpawnEngine.newSingleTimeSpawn(address.getMapId(), npcId, spawn.getX(), spawn.getY(), spawn.getZ(), spawn.getH(),
+			address.getId());
 		return (Npc) SpawnEngine.spawnObject(t, getOwner().getInstanceId());
 	}
 
@@ -205,7 +206,7 @@ public class HouseController extends VisibleObjectController<House> {
 		if (getOwner().getBids() != null)
 			return getOwner().getLand().getSaleSignNpcId();
 		if (getOwner().getOwnerId() == 0)
-			return 0; // retail spawns no npcs for an unowned house that is not on auction (state 2), not even the nosale sign
+			return 0; // an unowned house without an auction has no npcs at all
 		return getOwner().isInactive() ? getOwner().getLand().getWaitingSignNpcId() : getOwner().getLand().getHomeSignNpcId();
 	}
 }
