@@ -19,7 +19,6 @@ import com.aionemu.gameserver.model.animations.ArrivalAnimation;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.Pet;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.BindPointPosition;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -234,29 +233,6 @@ public class TeleportService {
 
 		if (player.isLegionMember() && player.getLegionMember().getWorldId() != worldId)
 			LegionService.getInstance().updateMemberInfo(player);
-	}
-
-	/**
-	 * Moves the pet to the teleport destination before its master leaves the old world.
-	 */
-	private static void movePet(Player player, int worldId, int instanceId, float x, float y, float z, byte heading) {
-		Pet pet = player.getPet();
-		if (pet == null)
-			return;
-		if (worldId == WorldMapType.LIFE_PARTY_CONCERT_HALL.getId()) {
-			// the concert hall does not allow pets; retail dismisses the pet and reports it to the player
-			pet.getController().delete();
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PET_CANT_SUMMON_HERE());
-			return;
-		}
-		// the pet leaves the old instance before its master, so the instance cannot be destroyed under it;
-		// the owner's client drops it with the old scene and gets the pet back on arrival, without a dismiss message
-		player.getController().setPetDismissSuppressed(true);
-		try {
-			World.getInstance().setPosition(pet, worldId, instanceId, x, y, z, heading);
-		} finally {
-			player.getController().setPetDismissSuppressed(false);
-		}
 	}
 
 	public static void teleportTo(Player player, int worldId, float x, float y, float z) {
@@ -522,27 +498,8 @@ public class TeleportService {
 		return true;
 	}
 
-	private static class SpawnTask implements Runnable {
-
-		private final Player player;
-		private final int worldId, instanceId;
-		private final float x, y, z;
-		private final byte h;
-		private final TeleportAnimation animation;
-		private final Runnable onArrive;
-
-		public SpawnTask(Player player, int worldId, int instanceId, float x, float y, float z, byte h, TeleportAnimation animation,
-			Runnable onArrive) {
-			this.player = player;
-			this.worldId = worldId;
-			this.instanceId = instanceId;
-			this.x = x;
-			this.y = y;
-			this.z = z;
-			this.h = h;
-			this.animation = animation;
-			this.onArrive = onArrive;
-		}
+	private record SpawnTask(Player player, int worldId, int instanceId, float x, float y, float z, byte h, TeleportAnimation animation,
+	                         Runnable onArrive) implements Runnable {
 
 		@Override
 		public void run() {
@@ -550,7 +507,6 @@ public class TeleportService {
 				return; // the player was killed during the animation or the target instance is gone: he stays where he is
 
 			abortPlayerActions(player);
-			movePet(player, worldId, instanceId, x, y, z, h);
 			// the player only leaves the world now (for animated teleports), so observers see the removal at the actual teleport
 			if (player.isSpawned())
 				World.getInstance().despawn(player, animation.getDefaultObjectDeleteAnimation());
@@ -562,6 +518,7 @@ public class TeleportService {
 				InstanceService.onLeaveInstance(player);
 			}
 			World.getInstance().setPosition(player, worldId, instanceId, x, y, z, h);
+			World.getInstance().setPosition(player.getPet(), worldId, instanceId, x, y, z, h);
 
 			player.setPortAnimation(animation.getDefaultArrivalAnimation());
 			if (onArrive != null)

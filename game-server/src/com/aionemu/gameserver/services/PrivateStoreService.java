@@ -51,7 +51,7 @@ public class PrivateStoreService {
 	}
 
 	private static boolean canOpenPrivateStore(Player player) {
-		if (player.getWorldId() == WorldMapType.LIFE_PARTY_CONCERT_HALL.getId()) {
+		if (player.getWorldId() == WorldMapType.LIVE_PARTY_CONCERT_HALL.getId()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_OPEN_STORE_IN_THIS_ZONE());
 			return false;
 		}

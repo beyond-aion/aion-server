@@ -26,7 +26,7 @@ public class SM_FUNCTIONAL_PET extends AionServerPacket {
 	public static final int ADOPTION_NAME_ALREADY_USED = 4;
 	private static final int FEEDING_FUNCTION_LENGTH = 2 * Integer.BYTES; // feed data and refeed time
 
-	private PetAction action;
+	private final PetAction action;
 	private Pet pet;
 	private int petObjectId;
 	private PetCommonData commonData;

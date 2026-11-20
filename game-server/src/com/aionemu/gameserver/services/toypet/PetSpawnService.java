@@ -21,18 +21,9 @@ import com.aionemu.gameserver.world.WorldMapType;
  */
 public class PetSpawnService {
 
-	/**
-	 * @param player
-	 * @param petId
-	 */
 	public static void summonPet(Player player, int templateId) {
-		if (player.getWorldId() == WorldMapType.LIFE_PARTY_CONCERT_HALL.getId()) {
-			// the concert hall does not allow pets; an existing pet is dismissed and the client reports it
-			if (player.getPet() != null)
-				player.getPet().getController().delete();
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PET_CANT_SUMMON_HERE());
+		if (!validateSummonPet(player))
 			return;
-		}
 
 		PetCommonData lastPetCommonData;
 
@@ -69,6 +60,20 @@ public class PetSpawnService {
 		if (petCommonData.isSelling())
 			PacketSendUtility.sendPacket(player, SM_FUNCTIONAL_PET.specialFunction(PetSpecialFunction.AUTOSELL, true));
 		PacketSendUtility.sendPacket(player, SM_FUNCTIONAL_PET.mood(pet, PetMoodAction.UPDATE, 0)); // initial mood state
+	}
+
+	public static boolean validateSummonPet(Player player) {
+		if (player.getWorldId() == WorldMapType.LIVE_PARTY_CONCERT_HALL.getId()) {
+			// the concert hall does not allow pets; an existing pet is dismissed and the client reports it
+			Pet pet = player.getPet();
+			if (pet != null) {
+				pet.getController().delete();
+				PacketSendUtility.sendPacket(player, SM_FUNCTIONAL_PET.dismissed(pet.getObjectId()));
+			}
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PET_CANT_SUMMON_HERE());
+			return false;
+		}
+		return true;
 	}
 
 }

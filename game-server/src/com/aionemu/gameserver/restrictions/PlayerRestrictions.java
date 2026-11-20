@@ -300,7 +300,7 @@ public class PlayerRestrictions {
 			return false;
 
 		// TODO: exempt cash items when cash_item is imported into ItemTemplate
-		if (player.getWorldId() == WorldMapType.LIFE_PARTY_CONCERT_HALL.getId()
+		if (player.getWorldId() == WorldMapType.LIVE_PARTY_CONCERT_HALL.getId()
 			&& item.getItemTemplate().getItemType() == ItemType.NORMAL) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_IS_NOT_USABLE());
 			return false;

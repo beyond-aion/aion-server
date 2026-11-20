@@ -92,7 +92,6 @@ public class PlayerController extends CreatureController<Player> {
 	private long lastAttackedMillis = 0;
 	private long lastAutoAttackMillis = 0;
 	private StanceObserver stanceObserver;
-	private boolean petDismissSuppressed;
 
 	@Override
 	public void see(VisibleObject object) {
@@ -139,9 +138,6 @@ public class PlayerController extends CreatureController<Player> {
 	@Override
 	public void notSee(VisibleObject object, ObjectDeleteAnimation animation) {
 		super.notSee(object, animation);
-		// a teleporting player's client drops the old scene itself; a dismiss packet would only add a false "pet dismissed" message
-		if (object instanceof Pet && petDismissSuppressed)
-			return;
 		if (!getOwner().isSpawned()) // player is teleporting, no need to send deletion packets
 			return;
 		if (object instanceof Pet) {
@@ -155,13 +151,6 @@ public class PlayerController extends CreatureController<Player> {
 		} else {
 			PacketSendUtility.sendPacket(getOwner(), new SM_DELETE(object, animation));
 		}
-	}
-
-	/**
-	 * Suppresses the pet dismiss packet for the owner while the pet is moved out of the old world by a teleport.
-	 */
-	public void setPetDismissSuppressed(boolean petDismissSuppressed) {
-		this.petDismissSuppressed = petDismissSuppressed;
 	}
 
 	@Override
