@@ -7,9 +7,11 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.configs.main.RankingConfig;
 import com.aionemu.gameserver.dao.AbyssRankDAO;
-import com.aionemu.gameserver.dao.AbyssRankDAO.RankingListPlayerGp;
+import com.aionemu.gameserver.dao.AbyssRankDAO.AbyssRankEntry;
+import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.templates.abyss.AbyssRankTemplate;
 import com.aionemu.gameserver.services.cron.CronService;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
@@ -26,11 +28,16 @@ public class AbyssRankUpdateService {
 	}
 
 	public static void scheduleUpdate() {
-		log.info("Scheduling ranking update task based on cron expression: {}", RankingConfig.TOP_RANKING_UPDATE_RULE);
-		CronService.getInstance().schedule(AbyssRankUpdateService::performUpdate, RankingConfig.TOP_RANKING_UPDATE_RULE, true);
+		log.info("Scheduling the daily abyss rank update (GP loss and rank update) based on cron expression: {}", RankingConfig.TOP_RANKING_UPDATE_RULE);
+		CronService.getInstance().schedule(AbyssRankUpdateService::performDailyUpdate, RankingConfig.TOP_RANKING_UPDATE_RULE, true);
+	}
 
-		log.info("Scheduling daily GP loss task based on cron expression: {}", RankingConfig.TOP_RANKING_DAILY_GP_LOSS_TIME);
-		CronService.getInstance().schedule(AbyssRankUpdateService::updateDailyGpLoss, RankingConfig.TOP_RANKING_DAILY_GP_LOSS_TIME, true);
+	/**
+	 * Applies the daily GP loss and then refreshes the leaderboard and quota ranks, so the daily rank recalculation happens in one pass.
+	 */
+	public static void performDailyUpdate() {
+		updateDailyGpLoss();
+		performUpdate();
 	}
 
 	/**
@@ -47,19 +54,14 @@ public class AbyssRankUpdateService {
 				AbyssRankDAO.storeAbyssRank(player);
 			});
 
-			AbyssRankEnum minGpRank = Arrays.stream(AbyssRankEnum.values())
-					.filter(rank -> rank.getRequiredGP() > 0)
-					.min(Comparator.comparingInt(AbyssRankEnum::getId)).orElse(AbyssRankEnum.STAR1_OFFICER);
-			int playerLimit = Arrays.stream(AbyssRankEnum.values())
-					.filter(rank -> rank.getRequiredGP() > 0)
-					.mapToInt(AbyssRankEnum::getQuota)
-					.max().orElse(1000);
+			int playerLimit = Math.max(DataManager.ABYSS_RANK_TABLE.getMaxRequireOrder(Race.ELYOS),
+				DataManager.ABYSS_RANK_TABLE.getMaxRequireOrder(Race.ASMODIANS));
 
 			// update and store player & legion DB rank_pos entries (for ▼/▲/= trend in the ranking table)
 			AbyssRankDAO.updateRankingLists(RankingConfig.TOP_RANKING_MAX_OFFLINE_DAYS, playerLimit, RankingConfig.RANKING_LIST_LEGION_LIMIT);
 			// update and store GP ranks
-			updateQuotaRanksForRace(Race.ASMODIANS, minGpRank);
-			updateQuotaRanksForRace(Race.ELYOS, minGpRank);
+			updateRanksForRace(Race.ASMODIANS);
+			updateRanksForRace(Race.ELYOS);
 
 			// update ranking cache
 			AbyssRankingCache.getInstance().reloadRankings();
@@ -69,46 +71,19 @@ public class AbyssRankUpdateService {
 	}
 
 	/**
-	 * Update player ranks based on quota for all players (online/offline)
-	 *  @param race
-	 *          the race that will be updated
-	 * @param minRank
-	 *          the minimum rank that will be updated (all lower GP ranks are disabled)
+	 * Assigns the ranks of all players of the race from their AP, GP and new ranking position (see
+	 * {@link com.aionemu.gameserver.dataholders.AbyssRankTable#getRankForPointsAndPosition}). The positions are numbered by GP, so this equals filling
+	 * the rank quotas from the top. Online players also receive their new position.
 	 */
-	private static void updateQuotaRanksForRace(Race race, AbyssRankEnum minRank) {
-		List<RankingListPlayerGp> rankingListSorted = AbyssRankDAO.loadRankingListPlayersGp(race);
-		if (rankingListSorted == null)
+	private static void updateRanksForRace(Race race) {
+		List<AbyssRankEntry> entries = AbyssRankDAO.loadAbyssRankEntries(race);
+		if (entries == null)
 			return;
-
-		// calculate and set new GP ranks
-		int usedQuota = 0;
-		for (int i = AbyssRankEnum.SUPREME_COMMANDER.getId(); i >= minRank.getId(); i--)
-			usedQuota = selectAndUpdateQuotaRank(AbyssRankEnum.getRankById(i), rankingListSorted, usedQuota);
-
-		// set all players with an old GP rank to AP ranks if they hold no rank position anymore
-		Map<Integer, Integer> apByPlayerId = AbyssRankDAO.loadApOfPlayersNotInRankingList(race, minRank);
-		if (apByPlayerId != null)
-			updateToNoQuotaRank(apByPlayerId);
-	}
-
-	private static int selectAndUpdateQuotaRank(AbyssRankEnum rank, List<RankingListPlayerGp> rankingList, int usedQuota) {
-		for (Iterator<RankingListPlayerGp> iterator = rankingList.iterator(); iterator.hasNext();) {
-			RankingListPlayerGp rankingListEntry = iterator.next();
-			if (usedQuota >= rank.getQuota() || rankingListEntry.gp() < rank.getRequiredGP())
-				break;
-			// remove player and update its rank
-			iterator.remove();
-			updateRankTo(rank, rankingListEntry.playerId(), rankingListEntry.position());
-			usedQuota++;
+		for (AbyssRankEntry entry : entries) {
+			AbyssRankTemplate rank = DataManager.ABYSS_RANK_TABLE.getRankForPointsAndPosition(race, entry.ap(), entry.gp(), entry.rankPos());
+			if (rank != null && (rank.getRank() != entry.rank() || World.getInstance().getPlayer(entry.playerId()) != null))
+				updateRankTo(rank.getRankEnum(), entry.playerId(), entry.rankPos());
 		}
-		return usedQuota;
-	}
-
-	private static void updateToNoQuotaRank(Map<Integer, Integer> apByPlayerId) {
-		apByPlayerId.forEach((playerId, ap) -> {
-			AbyssRankEnum rank = AbyssRankEnum.getRankForPoints(ap, 0); // no GP -> no officer ranks
-			updateRankTo(rank, playerId, 0);
-		});
 	}
 
 	private static void updateRankTo(AbyssRankEnum newRank, int playerId, int rankingPosition) {
@@ -128,14 +103,17 @@ public class AbyssRankUpdateService {
 	}
 
 	private static void updateDailyGpLoss() {
-		for (AbyssRankEnum rank : AbyssRankEnum.values()) {
-			if (rank.getGpLossPerDay() > 0)
-				AbyssRankDAO.dailyUpdateGp(rank);
+		for (Race race : List.of(Race.ELYOS, Race.ASMODIANS)) {
+			for (AbyssRankEnum rank : AbyssRankEnum.values()) {
+				AbyssRankTemplate template = DataManager.ABYSS_RANK_TABLE.get(race, rank);
+				if (template.getDailyReduceGp() > 0)
+					AbyssRankDAO.dailyUpdateGp(race, rank.getId(), template.getDailyReduceGp());
+			}
 		}
 		for (Player p : World.getInstance().getAllPlayers()) {
-			if (p.getAbyssRank().getRank().getGpLossPerDay() > 0) {
-				GloryPointsService.addGp(p.getObjectId(), -p.getAbyssRank().getRank().getGpLossPerDay());
-			}
+			AbyssRankTemplate template = DataManager.ABYSS_RANK_TABLE.get(p.getRace(), p.getAbyssRank().getRank());
+			if (template != null && template.getDailyReduceGp() > 0)
+				GloryPointsService.addGp(p.getObjectId(), -template.getDailyReduceGp());
 		}
 	}
 }

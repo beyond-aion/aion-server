@@ -162,9 +162,10 @@ public class CustomConfig {
 	public static long PVP_DAY_DURATION;
 
 	/**
-	 * Allowed Kills in configuered time for full AP. Move to separate config when more pvp options.
+	 * Optional extra cap: kills of the same player within {@link #PVP_DAY_DURATION} before AP stops. 0 disables it; the per-victim and accumulated
+	 * AP limits are always applied.
 	 */
-	@Property(key = "gameserver.pvp.maxkills", defaultValue = "5")
+	@Property(key = "gameserver.pvp.maxkills", defaultValue = "0")
 	public static int MAX_DAILY_PVP_KILLS;
 
 	/**

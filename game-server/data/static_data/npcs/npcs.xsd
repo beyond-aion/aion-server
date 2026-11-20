@@ -49,6 +49,12 @@
 		<xs:attribute name="mobile_event" type="xs:int"/>
 		<xs:attribute name="flag_type" type="xs:int"/>
 		<xs:attribute name="war_flag" type="xs:int"/>
+		<xs:attribute name="exp" type="xs:long"/>
+		<xs:attribute name="dp" type="xs:int"/>
+		<xs:attribute name="abyss_point" type="xs:int"/>
+		<xs:attribute name="abyss_rank" type="xs:int"/>
+		<xs:attribute name="glory_point" type="xs:int"/>
+		<xs:attribute name="first_attack_split_rate" type="FirstAttackSplitRate"/>
 	</xs:complexType>
 	<xs:complexType name="npcEquipmentList">
 		<xs:sequence>
@@ -110,6 +116,15 @@
 			<xs:enumeration value="DOORREPAIR"/>
 			<xs:enumeration value="ARTIFACT"/>
 			<xs:enumeration value="NONE"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="FirstAttackSplitRate">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Split_None"/>
+			<xs:enumeration value="Split_Little"/>
+			<xs:enumeration value="Split_Default"/>
+			<xs:enumeration value="Split_Much"/>
+			<xs:enumeration value="Split_Extra"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="NpcRank">

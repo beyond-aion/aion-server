@@ -11,8 +11,8 @@ import com.aionemu.gameserver.utils.chathandlers.ConsoleCommand;
 public class Set_vitalpoint extends ConsoleCommand {
 
 	public Set_vitalpoint() {
-		super("set_vitalpoint", "Sets salvation points.", """
-			<value> - Sets the salvation points of your target (or yourself).
+		super("set_vitalpoint", "Sets repose energy.", """
+			<value> - Sets the repose energy of your target (or yourself).
 			""");
 	}
 
@@ -25,9 +25,10 @@ public class Set_vitalpoint extends ConsoleCommand {
 
 		final Player player = admin.getTarget() instanceof Player target ? target : admin;
 
-		int value = Integer.parseInt(params[0]);
+		long value = Long.parseLong(params[0]);
 
-		player.getCommonData().setCurrentSalvationPoints(value);
+		player.getCommonData().setCurrentReposeEnergy(value);
 		PacketSendUtility.sendPacket(player, new SM_STATS_INFO(player));
+		sendInfo(admin, "Repose Energy set to: " + value);
 	}
 }

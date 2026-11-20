@@ -11,8 +11,8 @@ import com.aionemu.gameserver.utils.chathandlers.ConsoleCommand;
 public class Set_makeup_bonus extends ConsoleCommand {
 
 	public Set_makeup_bonus() {
-		super("set_makeup_bonus", "Sets repose energy.", """
-			<value> - Sets the repose energy of your target (or yourself).
+		super("set_makeup_bonus", "Sets salvation energy.", """
+			<value> - Sets the salvation energy of your target (or yourself).
 			""");
 	}
 
@@ -27,8 +27,8 @@ public class Set_makeup_bonus extends ConsoleCommand {
 
 		long value = Long.parseLong(params[0]);
 
-		player.getCommonData().setCurrentReposeEnergy(value);
+		player.getCommonData().setCurrentSalvationPoints(value);
 		PacketSendUtility.sendPacket(player, new SM_STATS_INFO(player));
-		sendInfo(admin, "Repose Energy set to: " + value);
+		sendInfo(admin, "Salvation Energy set to: " + value);
 	}
 }

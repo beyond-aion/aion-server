@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="abysspoint_world_mods">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="world_mod" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:attribute name="map_id" type="xs:int" use="required"/>
+						<xs:attribute name="drop_point_light" type="xs:int" default="100"/>
+						<xs:attribute name="drop_point_dark" type="xs:int" default="100"/>
+						<xs:attribute name="death_penalty_light" type="xs:int" default="100"/>
+						<xs:attribute name="death_penalty_dark" type="xs:int" default="100"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

@@ -7,9 +7,9 @@
 					<xs:complexType>
 						<xs:attribute name="lvl" type="xs:int" use="required"/>
 						<xs:attribute name="exp" type="xs:int" use="required"/>
-						<xs:attribute name="get_max_from_all_user" type="xs:int" use="required"/>
-						<xs:attribute name="get_max_reduce_amount" type="xs:int" use="required"/>
-						<xs:attribute name="get_max_reduce_interval" type="xs:int" use="required"/>
+						<xs:attribute name="max_from_all_users" type="xs:int" use="required"/>
+						<xs:attribute name="max_reduce_amount" type="xs:int" use="required"/>
+						<xs:attribute name="max_reduce_interval" type="xs:int" use="required"/>
 						<xs:attribute name="delay_time" type="xs:int" use="required"/>
 					</xs:complexType>
 				</xs:element>

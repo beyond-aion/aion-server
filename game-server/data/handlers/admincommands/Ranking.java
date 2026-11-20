@@ -11,7 +11,8 @@ public class Ranking extends AdminCommand {
 
 	public Ranking() {
 		super("ranking", "Abyss rank control.", """
-			update - Runs the daily Abyss rank update task.
+			update - Runs the Abyss rank update task.
+			daily - Runs the daily GP loss and the Abyss rank update.
 			""");
 	}
 
@@ -19,7 +20,9 @@ public class Ranking extends AdminCommand {
 	public void execute(Player admin, String... params) {
 		if (params.length == 1 && "update".equalsIgnoreCase(params[0]))
 			AbyssRankUpdateService.performUpdate();
-		else 
+		else if (params.length == 1 && "daily".equalsIgnoreCase(params[0]))
+			AbyssRankUpdateService.performDailyUpdate();
+		else
 			sendInfo(admin);
 	}
 }

@@ -5,13 +5,13 @@ import java.util.List;
 import java.util.Set;
 
 import com.aionemu.commons.utils.Rnd;
-import com.aionemu.gameserver.configs.main.RatesConfig;
 import com.aionemu.gameserver.controllers.attack.AttackResult;
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
 import com.aionemu.gameserver.controllers.movement.MovementModifierDirection;
 import com.aionemu.gameserver.controllers.movement.MovementModifierState;
 import com.aionemu.gameserver.controllers.observer.AttackerCriticalStatus;
 import com.aionemu.gameserver.controllers.observer.OneTimeBoostSkillAttack;
+import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.SkillElement;
 import com.aionemu.gameserver.model.gameobjects.*;
 import com.aionemu.gameserver.model.gameobjects.player.Equipment;
@@ -23,7 +23,8 @@ import com.aionemu.gameserver.model.stats.calc.StatCapUtil;
 import com.aionemu.gameserver.model.stats.container.*;
 import com.aionemu.gameserver.model.templates.item.WeaponStats;
 import com.aionemu.gameserver.model.templates.item.enums.ItemSubType;
-import com.aionemu.gameserver.model.templates.npc.NpcRating;
+import com.aionemu.gameserver.model.templates.abyss.AbyssRankTemplate;
+import com.aionemu.gameserver.model.templates.npc.FirstAttackSplitRate;
 import com.aionemu.gameserver.skillengine.effect.EffectTemplate;
 import com.aionemu.gameserver.skillengine.effect.NoReduceSpellATKInstantEffect;
 import com.aionemu.gameserver.skillengine.model.HitType;
@@ -42,182 +43,201 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 public class StatFunctions {
 
 	/**
-	 * @param maxLevelInRange
-	 *          - level of the player who receives the reward (solo) or max player level in range (group)
-	 * @param target
-	 *          - the npc
-	 * @return XP reward from target
+	 * Base DP of a defeated player, the killer side value that is not part of the rank data.
 	 */
-	public static long calculateExperienceReward(int maxLevelInRange, Npc target) {
+	private static final int PVP_DP_BASE = 500;
+
+	/**
+	 * @return XP reward from target for a player of the given level, before it is split between the attackers
+	 */
+	public static long calculateExperienceReward(int playerLevel, Npc target) {
+		return calculateExperienceReward(playerLevel, target, 1, 1, true);
+	}
+
+	/**
+	 * @return XP reward from target for a player of the given level, reduced by the player's share in the kill
+	 */
+	public static long calculateExperienceReward(int playerLevel, Npc target, int damage, int totalDamage, boolean firstAttacker) {
+		long baseXP = calculateBaseExperienceReward(target, damage, totalDamage, firstAttacker);
+		return (long) (baseXP * DataManager.PC_EXP_MOD_TABLE.getMultiplier(playerLevel, target.getLevel()));
+	}
+
+	/**
+	 * @return XP reward from target before it is reduced by the level difference to the receiving player
+	 */
+	public static long calculateBaseExperienceReward(Npc target, int damage, int totalDamage, boolean firstAttacker) {
 		WorldMapInstance instance = target.getPosition().getWorldMapInstance();
-		int baseXP = calculateBaseExp(target);
-		float mapMulti = instance.getInstanceHandler().getExpMultiplier(); // map modifier to approach retail exp values
-		if (instance.getParent().isInstanceType() && instance.getMaxPlayers() >= 2 && instance.getMaxPlayers() <= 6) {
-			mapMulti *= instance.getMaxPlayers(); // on retail you get mob EP * max instance member count (only for group instances)
-			mapMulti /= RatesConfig.XP_SOLO_RATES[0]; // custom: divide by regular xp rates, so they will not affect the rewarded XP
-		}
-		int xpPercentage = XPRewardEnum.xpRewardFrom(target.getLevel() - maxLevelInRange);
-		long rewardXP = Math.round(baseXP * mapMulti * (xpPercentage / 100f));
-		return rewardXP;
+		long baseXP = calculateExpShare(target.getObjectTemplate().getExp(), target.getObjectTemplate().getFirstAttackSplitRate(), damage, totalDamage,
+			firstAttacker);
+		return Math.round(baseXP * instance.getInstanceHandler().getExpMultiplier());
 	}
 
 	/**
-	 * @return Experience value identical to the ones seen on aion databases (but seen retail exp rewards are always higher)
+	 * Part of a base XP reward that falls on one attacker or team: who dealt all damage gets the whole base, otherwise the first attacker keeps its
+	 * fixed share and the rest is split by damage, the base part in float and the damage share in double.
 	 */
-	private static int calculateBaseExp(Npc npc) {
-		int maxHp = npc.getGameStats().getMaxHp().getCurrent();
-		if (maxHp <= 0)
+	public static long calculateExpShare(long base, FirstAttackSplitRate firstAttackSplitRate, int damage, int totalDamage, boolean firstAttacker) {
+		if (damage == totalDamage)
+			return base;
+		float splitRate = firstAttackSplitRate.getRate();
+		long share = (long) ((1 - splitRate) * base * ((double) damage / Math.max(1, totalDamage)));
+		return firstAttacker ? share + (long) (base * splitRate) : share;
+	}
+
+	/**
+	 * Part of a base DP, AP or GP reward that falls on one attacker or team, in float: the damage part is multiplied by the
+	 * damage before it is divided by the total damage, the first attacker's part is truncated. The caller multiplies it by its modifiers and
+	 * truncates once; a team truncates it before sharing it, see {@link #calculateTeamPool}.
+	 */
+	public static float calculateRewardShare(long base, FirstAttackSplitRate firstAttackSplitRate, int damage, int totalDamage, boolean firstAttacker) {
+		float splitRate = firstAttackSplitRate.getRate();
+		float part = (1 - splitRate) * base * damage / Math.max(1, totalDamage);
+		if (firstAttacker)
+			part += (int) (base * splitRate);
+		return part;
+	}
+
+	/**
+	 * @return The reward share of a team, truncated as a whole; AP and DP never round down to nothing if there is a base.
+	 */
+	public static int calculateTeamPool(long base, FirstAttackSplitRate firstAttackSplitRate, int damage, int totalDamage, boolean firstAttacker,
+		boolean atLeastOne) {
+		if (base <= 0)
 			return 0;
-		float multiplier;
-		switch (npc.getRating()) {
-			case JUNK:
-				multiplier = 2f;
-				break;
-			case NORMAL:
-				multiplier = 2.2f;
-				break;
-			case ELITE:
-				multiplier = 4f;
-				break;
-			case HERO:
-				multiplier = 5.4f;
-				break;
-			case LEGENDARY:
-				multiplier = 6.4f;
-				break;
-			default:
-				throw new IllegalArgumentException("Could not calculate experience reward for " + npc + " due to unknown rating.");
-		}
-		multiplier += npc.getRank().ordinal() * 0.2f;
-		return Math.round(maxHp * multiplier);
+		int pool = (int) calculateRewardShare(base, firstAttackSplitRate, damage, totalDamage, firstAttacker);
+		return atLeastOne ? Math.max(1, pool) : pool;
 	}
 
 	/**
-	 * @return DP reward from target
+	 * @return XP of a team member, in the float order of the party distribution, before XP boosts and rates.
 	 */
-	public static int calculateDPReward(Player player, Creature target) {
-		int playerLevel = player.getCommonData().getLevel();
-		int targetLevel = target.getLevel();
-		NpcRating npcRating = ((Npc) target).getObjectTemplate().getRating();
-
-		// TODO: fix to see monster Rating level, NORMAL lvl 1, 2 | ELITE lvl 1, 2 etc..
-		// look at:
-		// http://www.aionsource.com/forum/mechanic-analysis/42597-character-stats-xp-dp-origin-gerbator-team-july-2009-a.html
-		int baseDP = targetLevel * calculateRatingMultiplier(npcRating);
-		int xpPercentage = XPRewardEnum.xpRewardFrom(targetLevel - playerLevel);
-		return Rates.DP_PVE.calcResult(player, (int) Math.floor(baseDP * xpPercentage / 100f));
+	public static long calculateTeamMemberXp(long teamXp, float teamShare, float levelMod) {
+		return (long) (100f * (teamShare * levelMod) / 100f * teamXp);
 	}
 
 	/**
-	 * @return AP reward
+	 * @param apMod
+	 *          The level difference modifier times the map AP multiplier.
+	 * @return AP of a team member, at least one, before the rank difference modifier, the limits and the rates.
 	 */
-	public static int calculatePvEApGained(Player player, Creature target) {
-		if (player.getCommonData().getLevel() - target.getLevel() > 10)
-			return 1;
-
-		float apNpcRate = getApNpcRating(((Npc) target).getObjectTemplate().getRating());
-
-		// TODO: find out why they give 1/4 AP base(normal NpcRate) (5 AP retail)
-		if (target.getName().equals("flame hoverstone"))
-			apNpcRate = 0.5f;
-
-		return Rates.AP_PVE.calcResult(player, (int) Math.floor(15 * apNpcRate));
+	public static int calculateTeamMemberAp(int teamAp, float teamShare, float apMod) {
+		return Math.max(1, (int) (teamShare * (teamAp * apMod)));
 	}
 
 	/**
-	 * @return Points Lost in PvP Death
+	 * @return DP of a team member, at least one.
 	 */
-	public static int calculatePvPApLost(Player defeated, Player winner) {
-		int pointsLost = defeated.getAbyssRank().getRank().getPointsLost();
-
-		// Level penalty calculation
-		int difference = winner.getLevel() - defeated.getLevel();
-
-		if (difference >= 5)
-			pointsLost = Math.round(pointsLost * 0.1f);
-		else if (difference == 4)
-			pointsLost = Math.round(pointsLost * 0.65f);
-		else if (difference == 3)
-			pointsLost = Math.round(pointsLost * 0.85f);
-
-		return Rates.AP_PVP_LOST.calcResult(defeated, pointsLost);
+	public static int calculateTeamMemberDp(int teamDp, float teamShare, float levelMod, int memberLevel) {
+		return Math.max(1, (int) (getDPLevelFactor(memberLevel) * levelMod * teamDp * teamShare));
 	}
 
 	/**
-	 * @return Points Gained in PvP Kill
+	 * @return GP of a team member, before rates.
 	 */
-	public static int calculatePvpApGained(Player defeated, int winnerAbyssRank, int maxLevel) {
-		int pointsGained = defeated.getAbyssRank().getRank().getPointsGained();
-
-		// Level penalty calculation
-		int difference = maxLevel - defeated.getLevel();
-
-		if (difference > 4) {
-			pointsGained = Math.round(pointsGained * 0.1f);
-		} else if (difference < -3) {
-			pointsGained = Math.round(pointsGained * 1.3f);
-		} else {
-			switch (difference) {
-				case 3:
-					pointsGained = Math.round(pointsGained * 0.85f);
-					break;
-				case 4:
-					pointsGained = Math.round(pointsGained * 0.65f);
-					break;
-				case -2:
-					pointsGained = Math.round(pointsGained * 1.1f);
-					break;
-				case -3:
-					pointsGained = Math.round(pointsGained * 1.2f);
-					break;
-			}
-		}
-
-		// Abyss rank penalty calculation
-		int defeatedAbyssRank = defeated.getAbyssRank().getRank().getId();
-		int abyssRankDifference = winnerAbyssRank - defeatedAbyssRank;
-
-		if (winnerAbyssRank <= 7 && abyssRankDifference > 0) {
-			float penaltyPercent = abyssRankDifference * 0.05f;
-
-			pointsGained -= Math.round(pointsGained * penaltyPercent);
-		}
-
-		return pointsGained;
+	public static int calculateTeamMemberGp(int teamGp, float teamShare, float levelMod) {
+		return (int) (teamShare * teamGp * levelMod);
 	}
 
-	public static int calculatePvpDpGained(Player defeated, int maxRank, int maxLevel) {
-		int pointsGained;
-
-		// base values
-		int baseDp = 1064;
-		int dpPerRank = 57;
-
-		// adjust by rank
-		pointsGained = (defeated.getAbyssRank().getRank().getId() - maxRank) * dpPerRank + baseDp;
-
-		// adjust by level
-		pointsGained = StatFunctions.adjustPvpDpGained(pointsGained, defeated.getLevel(), maxLevel);
-
-		return pointsGained;
+	/**
+	 * @return DP reward from target, split between the attackers the same way as experience
+	 */
+	public static int calculateDPReward(Player player, Npc target, int damage, int totalDamage, boolean firstAttacker) {
+		float part = calculateRewardShare(target.getObjectTemplate().getDp(), target.getObjectTemplate().getFirstAttackSplitRate(), damage, totalDamage,
+			firstAttacker);
+		float mod = DataManager.PC_EXP_MOD_TABLE.getMultiplier(player.getLevel(), target.getLevel());
+		return (int) (part * (mod * getDPLevelFactor(player.getLevel())));
 	}
 
-	@SuppressWarnings("lossy-conversions")
-	public static int adjustPvpDpGained(int points, int defeatedLvl, int killerLvl) {
-		int pointsGained = points;
+	/**
+	 * @return DP gain multiplier by the player level; players below level 10 get no DP at all
+	 */
+	public static float getDPLevelFactor(int playerLevel) {
+		return playerLevel >= 10 ? 1 + 0.02f * (playerLevel - 10) : 0;
+	}
 
-		int difference = killerLvl - defeatedLvl;
-		// adjust by level
-		if (difference >= 10)
-			pointsGained = 0;
-		else if (difference >= 0)
-			pointsGained -= pointsGained * difference * 0.1;
-		else if (difference <= -10)
-			pointsGained *= 1.1;
-		else
-			pointsGained += pointsGained * Math.abs(difference) * 0.01;
+	/**
+	 * @return AP reward from target, split between the attackers the same way as experience, before the rank difference modifier, the limits and the
+	 *         rates of {@link com.aionemu.gameserver.services.abyss.AbyssPointsService#addKillAp}
+	 */
+	public static int calculatePveApReward(Player player, Npc target, int damage, int totalDamage, boolean firstAttacker, float apMultiplier) {
+		float part = calculateRewardShare(target.getObjectTemplate().getAbyssPoint(), target.getObjectTemplate().getFirstAttackSplitRate(), damage,
+			totalDamage, firstAttacker);
+		float mod = DataManager.PC_EXP_MOD_TABLE.getMultiplier(player.getLevel(), target.getLevel());
+		return (int) (part * (mod * apMultiplier));
+	}
 
-		return pointsGained;
+	/**
+	 * The share is truncated before the level modifier here, unlike DP and AP.
+	 *
+	 * @return Glory points reward from target, split between the attackers the same way as experience
+	 */
+	public static int calculatePveGpReward(Player player, Npc target, int damage, int totalDamage, boolean firstAttacker) {
+		int part = (int) calculateRewardShare(target.getObjectTemplate().getGloryPoint(), target.getObjectTemplate().getFirstAttackSplitRate(), damage,
+			totalDamage, firstAttacker);
+		float mod = DataManager.PC_EXP_MOD_TABLE.getMultiplier(player.getLevel(), target.getLevel());
+		return Rates.GP.calcResult(player, (int) (part * mod));
+	}
+
+	/**
+	 * @param apMultiplier
+	 *          The multiplier of the killers' AP pool.
+	 * @return AP of a defeated player for the whole kill: the drop point of its rank with the map modifier.
+	 */
+	public static long calculatePvpApBase(Player victim, float apMultiplier) {
+		AbyssRankTemplate rank = getAbyssRank(victim);
+		if (rank == null)
+			return 0;
+		return (long) (rank.getDropPoint() * (DataManager.ABYSS_POINT_WORLD_MOD_TABLE.getDropPointMod(victim.getWorldId(), victim.getRace()) * apMultiplier));
+	}
+
+	/**
+	 * @param apPart
+	 *          The killer's part of the victim's AP, see {@link #calculateRewardShare}.
+	 * @return AP gained by one killer who is not in a team, before the rank difference modifier, the limits and the rates of
+	 *         {@link com.aionemu.gameserver.services.abyss.AbyssPointsService#addKillAp}.
+	 */
+	public static int calculatePvpApReward(Player killer, Player victim, float apPart) {
+		return (int) (apPart * DataManager.PVP_MOD_TABLE.getMultiplier(killer.getLevel(), victim.getLevel()));
+	}
+
+	/**
+	 * @return DP gained by one killer who is not in a team.
+	 */
+	public static int calculatePvpDpReward(Player killer, Player victim, float dpPart) {
+		float mod = DataManager.PVP_MOD_TABLE.getMultiplier(killer.getLevel(), victim.getLevel());
+		return (int) (dpPart * (mod * getDPLevelFactor(killer.getLevel())));
+	}
+
+	/**
+	 * @return The base DP of a defeated player.
+	 */
+	public static int getPvpDpBase() {
+		return PVP_DP_BASE;
+	}
+
+	/**
+	 * The loss follows what the killers earned relative to the full AP of the victim: the AP of all killers after the rank difference
+	 * modifier, but before the limits and their AP rates, divided by the AP one killer would get for the whole kill. Killers stopped by a limit
+	 * still cost the victim its AP.
+	 *
+	 * @param killersAp
+	 *          The sum of {@link com.aionemu.gameserver.services.abyss.AbyssPointsService#addKillAp} results of all killers.
+	 * @param apMultiplier
+	 *          The multiplier of the killers' AP pool.
+	 * @return AP lost by the defeated player.
+	 */
+	public static int calculatePvPApLoss(Player victim, int killersAp, float apMultiplier) {
+		AbyssRankTemplate rank = getAbyssRank(victim);
+		long fullAp = calculatePvpApBase(victim, apMultiplier);
+		if (rank == null || fullAp <= 0)
+			return 0;
+		long loss = killersAp * rank.getDeathPenaltyPoint() / fullAp;
+		float worldMod = DataManager.ABYSS_POINT_WORLD_MOD_TABLE.getDeathPenaltyMod(victim.getWorldId(), victim.getRace());
+		return Rates.AP_PVP_LOST.calcResult(victim, (int) (loss * worldMod));
+	}
+
+	private static AbyssRankTemplate getAbyssRank(Player player) {
+		return DataManager.ABYSS_RANK_TABLE.get(player.getRace(), player.getAbyssRank().getRank().getId());
 	}
 
 	/**
@@ -389,40 +409,6 @@ public class StatFunctions {
 		}
 
 		return Rnd.nextInt(1000) < limit(StatEnum.MAGICAL_CRITICAL, critical);
-	}
-
-	public static int calculateRatingMultiplier(NpcRating npcRating) {
-		// FIXME: to correct formula, have any reference?
-		switch (npcRating) {
-			case JUNK:
-			case NORMAL:
-				return 2;
-			case ELITE:
-				return 3;
-			case HERO:
-				return 4;
-			case LEGENDARY:
-				return 5;
-			default:
-				return 1;
-		}
-	}
-
-	public static int getApNpcRating(NpcRating npcRating) {
-		switch (npcRating) {
-			case JUNK:
-				return 1;
-			case NORMAL:
-				return 2;
-			case ELITE:
-				return 4;
-			case HERO:
-				return 35;// need check
-			case LEGENDARY:
-				return 2500;// need check
-			default:
-				return 1;
-		}
 	}
 
 	/**

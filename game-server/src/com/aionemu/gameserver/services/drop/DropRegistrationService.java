@@ -209,8 +209,7 @@ public class DropRegistrationService {
 
 		if (killer.getCommonData().getCurrentReposeEnergy() > 0) // EoR 5% Boost drop rate
 			boostDropRate += 5;
-		if (killer.getCommonData().getCurrentSalvationPercent() > 0) // EoS 5% Boost drop rate
-			boostDropRate += 5;
+		boostDropRate += killer.getCommonData().getSalvationDropBonus();
 		if (killer.getActiveHouse() != null && killer.getActiveHouse().getHouseType() == HouseType.PALACE) // Deed to Palace 5% Boost drop rate
 			boostDropRate += 5;
 

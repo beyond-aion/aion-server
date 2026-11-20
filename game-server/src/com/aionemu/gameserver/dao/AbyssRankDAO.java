@@ -5,9 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,18 +30,17 @@ public class AbyssRankDAO {
 	private static final String SELECT_QUERY = "SELECT daily_ap, weekly_ap, ap, daily_gp, weekly_gp, gp, `rank`, daily_kill, weekly_kill, all_kill, max_rank, last_kill, last_ap, last_gp, last_update FROM abyss_rank WHERE player_id = ?";
 	private static final String INSERT_QUERY = "INSERT INTO abyss_rank (player_id, daily_ap, weekly_ap, ap, `rank`, daily_kill, weekly_kill, all_kill, max_rank, last_kill, last_ap, last_update, daily_gp, weekly_gp, gp, last_gp) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String UPDATE_QUERY = "UPDATE abyss_rank SET  daily_ap = ?, weekly_ap = ?, ap = ?, `rank` = ?, daily_kill = ?, weekly_kill = ?, all_kill = ?, max_rank = ?, last_kill = ?, last_ap = ?, last_update = ?, daily_gp = ?, weekly_gp = ?, gp = ?, last_gp = ? WHERE player_id = ?";
-	private static final String DECREASE_GP_DAILY = "UPDATE abyss_rank SET gp = GREATEST(gp - ?, 0) WHERE `rank` = ?";
+	private static final String DECREASE_GP_DAILY = "UPDATE abyss_rank a JOIN players p ON a.player_id = p.id SET a.gp = GREATEST(a.gp - ?, 0) WHERE a.`rank` = ? AND p.race = ?";
 	private static final String INCREASE_GP_QUERY = "UPDATE abyss_rank SET gp = GREATEST(gp + ?, 0) WHERE player_id = ?";
 	private static final String INCREASE_GP_QUERY_WITH_STATS = "UPDATE abyss_rank SET gp = gp + ?, daily_gp = daily_gp + ?, weekly_gp = weekly_gp + ? WHERE player_id = ?";
 	private static final String UPDATE_RANK = "UPDATE abyss_rank SET `rank` = ? WHERE player_id = ?";
 	private static final String SELECT_RANKING_LIST_PLAYERS = "SELECT a.rank_pos, a.old_rank_pos, p.id, p.name, p.race, p.exp, a.rank, a.ap, a.gp, p.title_id, p.player_class, p.gender, l.name FROM abyss_rank a JOIN players p ON a.player_id = p.id LEFT JOIN legion_members lm ON lm.player_id = p.id LEFT JOIN legions l ON l.id = lm.legion_id WHERE a.rank_pos > 0";
 	private static final String SELECT_RANKING_LIST_LEGIONS = "SELECT l.rank_pos, l.old_rank_pos, l.id, l.name, p.race, l.level, l.contribution_points FROM legions l, legion_members lm, players p WHERE lm.rank = 'BRIGADE_GENERAL' AND lm.player_id = p.id AND lm.legion_id = l.id AND l.rank_pos > 0";
-	private static final String SELECT_RANKING_LIST_PLAYERS_GP = "SELECT a.rank_pos, a.player_id, a.gp FROM abyss_rank a, players p WHERE a.player_id = p.id AND p.race = ? AND a.rank_pos > 0 ORDER by a.rank_pos";
-	private static final String SELECT_UNRANKED_PLAYERS_AP = "SELECT a.player_id, a.ap FROM abyss_rank a, players p WHERE a.player_id = p.id AND p.race = ? AND a.rank_pos = 0 AND a.rank >= ?";
+	private static final String SELECT_ABYSS_RANK_ENTRIES = "SELECT a.player_id, a.ap, a.gp, a.rank, a.rank_pos FROM abyss_rank a JOIN players p ON a.player_id = p.id WHERE p.race = ?";
 	private static final String SELECT_LEGION_COUNT = "SELECT COUNT(player_id) as players FROM legion_members WHERE legion_id = ?";
 	private static final String RESET_RANKING_LIST_PLAYERS = "UPDATE abyss_rank a SET a.old_rank_pos = a.rank_pos, a.rank_pos = 0 WHERE a.rank_pos > 0";
 	private static final String RESET_RANKING_LIST_LEGIONS = "UPDATE legions l SET l.old_rank_pos = l.rank_pos, l.rank_pos = 0 WHERE l.rank_pos > 0";
-	private static final String UPDATE_RANKING_LIST_PLAYERS_POSITIONS = "UPDATE abyss_rank SET rank_pos = @a:=@a+1 WHERE gp > 0 AND player_id IN (SELECT id FROM players WHERE race = ? AND (@minLastOnline IS NULL OR last_online >= @minLastOnline)) ORDER BY gp DESC LIMIT ?";
+	private static final String UPDATE_RANKING_LIST_PLAYERS_POSITIONS = "UPDATE abyss_rank SET rank_pos = @a:=@a+1 WHERE gp > 0 AND player_id IN (SELECT id FROM players WHERE race = ? AND (@maxOfflineDays IS NULL OR DATEDIFF(CURDATE(), DATE(last_online)) < @maxOfflineDays)) ORDER BY gp DESC LIMIT ?";
 	private static final String UPDATE_RANKING_LIST_LEGIONS_POSITIONS = "UPDATE legions SET rank_pos = @a:=@a+1 WHERE id IN (SELECT legion_id FROM legion_members lm, players WHERE `rank` = 'BRIGADE_GENERAL' AND players.id = lm.player_id and players.race = ?) ORDER BY contribution_points DESC LIMIT ?";
 
 	public static AbyssRank loadAbyssRank(int playerId) {
@@ -155,14 +152,15 @@ public class AbyssRankDAO {
 		}
 	}
 
-	public static void dailyUpdateGp(AbyssRankEnum rank) {
+	public static void dailyUpdateGp(Race race, int rankId, int gpLoss) {
 		try (Connection con = DatabaseFactory.getConnection();
 				 PreparedStatement stmt = con.prepareStatement(DECREASE_GP_DAILY)) {
-			stmt.setInt(1, rank.getGpLossPerDay());
-			stmt.setInt(2, rank.getId());
+			stmt.setInt(1, gpLoss);
+			stmt.setInt(2, rankId);
+			stmt.setString(3, race.toString());
 			stmt.execute();
 		} catch (SQLException e) {
-			log.error("Couldn't decrease daily GP for rank {}", rank, e);
+			log.error("Couldn't decrease {} GP for rank {}", gpLoss, rankId, e);
 		}
 	}
 
@@ -246,37 +244,17 @@ public class AbyssRankDAO {
 		}
 	}
 
-	public static List<RankingListPlayerGp> loadRankingListPlayersGp(Race race) {
+	public static List<AbyssRankEntry> loadAbyssRankEntries(Race race) {
 		try (Connection con = DatabaseFactory.getConnection();
-				 PreparedStatement stmt = con.prepareStatement(SELECT_RANKING_LIST_PLAYERS_GP)) {
+				 PreparedStatement stmt = con.prepareStatement(SELECT_ABYSS_RANK_ENTRIES)) {
 			stmt.setString(1, race.toString());
 			ResultSet rs = stmt.executeQuery();
-			List<RankingListPlayerGp> rankingList = new ArrayList<>();
-			while (rs.next()) {
-				int rankPos = rs.getInt("rank_pos");
-				int playerId = rs.getInt("player_id");
-				int gp = rs.getInt("gp");
-				rankingList.add(new RankingListPlayerGp(rankPos, playerId, gp));
-			}
-			return rankingList;
-		} catch (SQLException e) {
-			log.error("Couldn't load top ranks for race {}", race, e);
-			return null;
-		}
-	}
-
-	public static Map<Integer, Integer> loadApOfPlayersNotInRankingList(Race race, AbyssRankEnum minRank) {
-		try (Connection con = DatabaseFactory.getConnection();
-				 PreparedStatement stmt = con.prepareStatement(SELECT_UNRANKED_PLAYERS_AP)) {
-			stmt.setString(1, race.toString());
-			stmt.setInt(2, minRank.getId());
-			ResultSet rs = stmt.executeQuery();
-			Map<Integer, Integer> apByPlayerId = new HashMap<>();
+			List<AbyssRankEntry> entries = new ArrayList<>();
 			while (rs.next())
-				apByPlayerId.put(rs.getInt("player_id"), rs.getInt("ap"));
-			return apByPlayerId;
+				entries.add(new AbyssRankEntry(rs.getInt("player_id"), rs.getInt("ap"), rs.getInt("gp"), rs.getInt("rank"), rs.getInt("rank_pos")));
+			return entries;
 		} catch (SQLException e) {
-			log.error("Couldn't load ranks for race {} (minRank {})", race, minRank, e);
+			log.error("Couldn't load abyss rank entries for race {}", race, e);
 			return null;
 		}
 	}
@@ -298,8 +276,7 @@ public class AbyssRankDAO {
 				stmt.executeUpdate();
 			}
 			try (PreparedStatement stmt = con.prepareStatement(UPDATE_RANKING_LIST_PLAYERS_POSITIONS)) {
-				if (maxOfflineDays > 0)
-					stmt.addBatch("SET @minLastOnline = CURDATE() - INTERVAL " + maxOfflineDays + " DAY;");
+				stmt.addBatch("SET @maxOfflineDays = " + (maxOfflineDays > 0 ? maxOfflineDays : "NULL") + ";");
 				stmt.addBatch("SET @a = 0;");
 				stmt.setString(1, "ELYOS");
 				stmt.setInt(2, playerLimit);
@@ -308,8 +285,6 @@ public class AbyssRankDAO {
 				stmt.setString(1, "ASMODIANS");
 				stmt.setInt(2, playerLimit);
 				stmt.addBatch();
-				if (maxOfflineDays > 0)
-					stmt.addBatch("SET @minLastOnline = NULL;");
 				stmt.executeBatch();
 			}
 			try (PreparedStatement stmt = con.prepareStatement(RESET_RANKING_LIST_LEGIONS)) {
@@ -331,7 +306,7 @@ public class AbyssRankDAO {
 		}
 	}
 
-	public record RankingListPlayerGp(int position, int playerId, int gp) {}
+	public record AbyssRankEntry(int playerId, int ap, int gp, int rank, int rankPos) {}
 
 	public record RankingListPlayer(int position, int oldPosition, int id, String name, Race race, int level, int abyssRank, int ap, int gp, int title,
 																	PlayerClass playerClass, Gender gender, String legionName) {}

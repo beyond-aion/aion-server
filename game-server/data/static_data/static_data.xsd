@@ -58,8 +58,15 @@
 	<xs:include schemaLocation="player_experience_table.xsd" />
 	<xs:include schemaLocation="exp_mod_table/pvp_exp_table.xsd"/>
 	<xs:include schemaLocation="exp_mod_table/pvp_exp_mod_table.xsd"/>
+	<xs:include schemaLocation="exp_mod_table/pcexp_mod_table.xsd"/>
+	<xs:include schemaLocation="exp_mod_table/pvp_mod_table.xsd"/>
+	<xs:include schemaLocation="abyss/abyss_rank.xsd"/>
+	<xs:include schemaLocation="abyss/abysspoint_world_mod.xsd"/>
+	<xs:include schemaLocation="abyss/ap_level_restrict.xsd"/>
 	<xs:include schemaLocation="exp_mod_table/party_exp_mod_table.xsd"/>
 	<xs:include schemaLocation="exp_mod_table/mentee_exp_limit_table.xsd"/>
+	<xs:include schemaLocation="exp_mod_table/repose_energy_table.xsd"/>
+	<xs:include schemaLocation="exp_mod_table/salvation_energy_table.xsd"/>
 	<xs:include schemaLocation="player_initial_data.xsd" />
 	<xs:include schemaLocation="player_titles.xsd" />
 	<xs:include schemaLocation="polymorph_panels/polymorph_panels.xsd" />
@@ -160,8 +167,15 @@
 					<xs:element ref="player_experience_table" minOccurs="0" />
 					<xs:element ref="pvp_exp_table" minOccurs="0"/>
 					<xs:element ref="pvp_exp_mod_table" minOccurs="0"/>
+					<xs:element ref="pcexp_mod_table" minOccurs="0"/>
+					<xs:element ref="pvp_mod_table" minOccurs="0"/>
+					<xs:element ref="abyss_ranks" minOccurs="0"/>
+					<xs:element ref="abysspoint_world_mods" minOccurs="0"/>
+					<xs:element ref="ap_level_restricts" minOccurs="0"/>
 					<xs:element ref="party_exp_mod_table" minOccurs="0"/>
 					<xs:element ref="mentee_exp_limit_table" minOccurs="0"/>
+					<xs:element ref="repose_energy_table" minOccurs="0"/>
+					<xs:element ref="salvation_energy_table" minOccurs="0"/>
 					<xs:element ref="player_initial_data" minOccurs="0" />
 					<xs:element ref="player_titles" minOccurs="0" />
 					<xs:element ref="polymorph_panels" minOccurs="0" />

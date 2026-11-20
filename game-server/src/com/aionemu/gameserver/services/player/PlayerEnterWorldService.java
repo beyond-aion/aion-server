@@ -38,6 +38,7 @@ import com.aionemu.gameserver.model.items.storage.Storage;
 import com.aionemu.gameserver.model.items.storage.StorageType;
 import com.aionemu.gameserver.model.siege.FortressLocation;
 import com.aionemu.gameserver.model.skill.PlayerSkillEntry;
+import com.aionemu.gameserver.model.templates.abyss.AbyssRankTemplate;
 import com.aionemu.gameserver.model.team.alliance.PlayerAllianceService;
 import com.aionemu.gameserver.model.team.group.PlayerGroupService;
 import com.aionemu.gameserver.model.templates.housing.HouseAddress;
@@ -50,6 +51,7 @@ import com.aionemu.gameserver.network.aion.skillinfo.SkillEntryWriter;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.services.*;
 import com.aionemu.gameserver.services.PunishmentService.PunishmentType;
+import com.aionemu.gameserver.services.abyss.AbyssPointsService;
 import com.aionemu.gameserver.services.abyss.AbyssSkillService;
 import com.aionemu.gameserver.services.craft.RelinquishCraftStatus;
 import com.aionemu.gameserver.services.event.EventService;
@@ -71,7 +73,6 @@ import com.aionemu.gameserver.utils.audit.GMService;
 import com.aionemu.gameserver.utils.collections.DynamicServerPacketBodySplitList;
 import com.aionemu.gameserver.utils.collections.FixedElementCountSplitList;
 import com.aionemu.gameserver.utils.collections.SplitList;
-import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
 import com.aionemu.gameserver.world.World;
 
 /**
@@ -82,6 +83,7 @@ public final class PlayerEnterWorldService {
 	private static final Logger log = LoggerFactory.getLogger("GAMECONNECTION_LOG");
 	private static final String VERSION_INFO = "Server " + GameServer.versionInfo.getBuildInfo(GSConfig.TIME_ZONE_ID);
 	private static final ConcurrentLinkedQueue<Integer> enteringWorld = new ConcurrentLinkedQueue<>();
+	private static final int REPOSE_ENERGY_TICK_SECONDS = 600;
 
 	public static void enterWorld(final AionConnection client, int objectId) {
 		Account account = client.getAccount();
@@ -202,7 +204,7 @@ public final class PlayerEnterWorldService {
 		// Energy of Repose must be calculated before sending SM_STATS_INFO
 		if (pcd.getLastOnline() != null) {
 			long secondsOffline = (System.currentTimeMillis() - pcd.getLastOnline().getTime()) / 1000;
-			if (secondsOffline > 10 * 60) // 10 mins offline = 0 salvation points
+			if (secondsOffline > SalvationEnergyService.RELOG_SECONDS)
 				pcd.resetSalvationPoints();
 
 			updateEnergyOfRepose(player, secondsOffline);
@@ -258,6 +260,8 @@ public final class PlayerEnterWorldService {
 
 		KiskService.getInstance().onLogin(player);
 		PvpExpLimitService.getInstance().onEnterWorld(player);
+		AbyssPointLimitService.getInstance().onEnterWorld(player);
+		SalvationEnergyService.onEnterWorld(player);
 		TeleportService.sendObeliskBindPoint(player);
 		TeleportService.sendKiskBindPoint(player);
 
@@ -284,6 +288,8 @@ public final class PlayerEnterWorldService {
 			AutoGroupService.getInstance().onPlayerLogin(player);
 		}
 		client.sendPacket(new SM_INSTANCE_INFO((byte) 2, player));
+		AbyssPointsService.applyDormantGloryPointLoss(player, pcd.getLastOnline());
+		AbyssPointsService.revalidateRank(player, true);
 		client.sendPacket(new SM_ABYSS_RANK(player));
 		client.sendPacket(new SM_STATS_INFO(player));
 		// ----------------------------- Retail sequence -----------------------------
@@ -319,9 +325,10 @@ public final class PlayerEnterWorldService {
 		GMService.getInstance().onPlayerLogin(player);
 		BookmarkDAO.loadBookmarks(player.getObjectId()).forEach(bookmark -> PacketSendUtility.sendPacket(player, new SM_GM_BOOKMARK_ADD(bookmark)));
 
-		if (player.getAbyssRank().getRank().getId() >= AbyssRankEnum.STAR1_OFFICER.getId()) {
+		AbyssRankTemplate rank = DataManager.ABYSS_RANK_TABLE.get(player.getRace(), player.getAbyssRank().getRank());
+		if (rank != null && rank.getDailyReduceGp() > 0) {
 			client.sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_GLORY_POINT_LOSE_COMMON());
-			client.sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_GLORY_POINT_LOSE_PERSONAL(player.getName(), player.getAbyssRank().getRank().getGpLossPerDay()));
+			client.sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_GLORY_POINT_LOSE_PERSONAL(player.getName(), rank.getDailyReduceGp()));
 		}
 
 		// Trigger restore services on login.
@@ -380,24 +387,23 @@ public final class PlayerEnterWorldService {
 		PvpMapService.getInstance().onLogin(player);
 	}
 
-	@SuppressWarnings("lossy-conversions")
 	private static void updateEnergyOfRepose(Player player, long secondsOffline) {
-		player.getCommonData().updateMaxRepose();
-		if (player.getCommonData().isReadyForReposeEnergy() && secondsOffline > 4 * 3600) { // more than 4 hours offline: start counting Repose Energy
-																																												// addition
-			double hours = secondsOffline / 3600d;
-			// 48 hours offline = 100% Repose Energy (~1% each 30mins source: http://forums.na.aiononline.com/na/showthread.php?t=105940)
-			long addReposeEnergy = Math.round((hours / 48) * player.getCommonData().getMaxReposeEnergy());
-			// Additional Energy of Repose bonus if inside house
-			House house = player.getActiveHouse();
-			if (house != null) {
-				HouseAddress hPos = house.getAddress();
-				if (player.getWorldId() == hPos.getMapId()
-					&& PositionUtil.isInRange(player.getX(), player.getY(), player.getZ(), hPos.getX(), hPos.getY(), hPos.getZ(), 7))
-					addReposeEnergy *= house.getHouseType() == HouseType.STUDIO ? 1.05f : 1.10f; // apartment = 5% bonus, other houses 10%
-			}
-			player.getCommonData().addReposeEnergy(addReposeEnergy);
+		PlayerCommonData pcd = player.getCommonData();
+		pcd.updateMaxRepose();
+		if (!pcd.isReadyForReposeEnergy())
+			return;
+		long ticks = secondsOffline / REPOSE_ENERGY_TICK_SECONDS;
+		long energyPerTick = DataManager.REPOSE_ENERGY_TABLE.getEnergyPerTick(pcd.getLevel());
+		long addReposeEnergy = ticks * energyPerTick;
+		// Additional Energy of Repose bonus if inside house
+		House house = player.getActiveHouse();
+		if (house != null) {
+			HouseAddress hPos = house.getAddress();
+			if (player.getWorldId() == hPos.getMapId()
+				&& PositionUtil.isInRange(player.getX(), player.getY(), player.getZ(), hPos.getX(), hPos.getY(), hPos.getZ(), 7))
+				addReposeEnergy += ticks * (energyPerTick * (house.getHouseType() == HouseType.STUDIO ? 5 : 10) / 100); // apartment = 5% bonus, other houses 10%
 		}
+		pcd.addReposeEnergy(addReposeEnergy);
 	}
 
 	private static void activatePassiveSkillEffects(Player player) {

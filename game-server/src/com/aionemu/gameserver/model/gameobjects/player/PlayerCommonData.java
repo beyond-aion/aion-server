@@ -59,7 +59,12 @@ public class PlayerCommonData extends CreatureTemplate {
 	private long reposeCurrent;
 	private long reposeMax;
 	private long pvpExp;
-	private long salvationPoint;
+	private long apFromUsers;
+	private long salvationEnergy;
+	private int salvationDropBonus;
+	private int playTime;
+	private long playTimeStart;
+	private int levelUpPlayTime;
 	private int mentorFlagTime;
 	private int worldOwnerId;
 	private boolean isDaeva;
@@ -167,32 +172,35 @@ public class PlayerCommonData extends CreatureTemplate {
 	}
 
 	public void addExp(long value, Rates rates, String name) {
-		if (noExp)
-			return;
-
-		long reward = value;
-		long repose = 0;
-		long salvation = 0;
 		Player player = getPlayer();
-		if (player != null && player.getWorldId() == 301200000) // nightmare circus
-			return;
-
 		if (player != null)
-			reward = rates.calcResult(player, value);
+			value = rates.applyXpBoost(player, value);
+		addExp(value, useReposeEnergy(value), rates, name);
+	}
 
-		if (reward > 0) {
-			if (getCurrentReposeEnergy() > 0) {
-				long allowedExp = Math.min(getCurrentReposeEnergy(), reward);
-				addReposeEnergy(-allowedExp);
-				repose = (long) ((allowedExp / 100f) * 40); // 40% bonus for the amount of used repose energy
-			}
+	/**
+	 * @param value
+	 *          The XP after {@link Rates#applyXpBoost(Player, long)}.
+	 * @param reposeBonus
+	 *          The Energy of Repose bonus for the given XP, taken by {@link #useReposeEnergy(long)}. It is given back if the player cannot gain XP.
+	 */
+	public void addExp(long value, long reposeBonus, Rates rates, String name) {
+		if (!canGainExp()) {
+			returnReposeEnergy(reposeBonus);
+			return;
+		}
 
-			if (isReadyForSalvationPoints() && getCurrentSalvationPercent() > 0) {
-				salvation = (long) ((reward / 100f) * getCurrentSalvationPercent());
-				// TODO! remove salvation points?
-			}
-
-			reward += repose + salvation;
+		long salvationBonus = useSalvationEnergy(value);
+		Player player = getPlayer();
+		long total = value + reposeBonus + salvationBonus + (player == null ? 0 : rates.getLegionBonus(player, value));
+		long reward = total;
+		long repose = reposeBonus;
+		long salvation = salvationBonus;
+		if (player != null && total > 0) {
+			reward = rates.calcResult(player, total);
+			// the bonuses are shown with rates, but not reduced by the limit of a single reward
+			repose = rates.calcXpWithoutLimit(player, reposeBonus);
+			salvation = rates.calcXpWithoutLimit(player, salvationBonus);
 		}
 
 		setExp(exp + reward);
@@ -223,6 +231,30 @@ public class PlayerCommonData extends CreatureTemplate {
 		}
 	}
 
+	private boolean canGainExp() {
+		if (noExp)
+			return false;
+		Player player = getPlayer();
+		return player == null || player.getWorldId() != 301200000; // nightmare circus
+	}
+
+	/**
+	 * Takes the Energy of Repose bonus for the given XP from the player's Energy of Repose.
+	 * 
+	 * @return The bonus XP, before rates.
+	 */
+	public long useReposeEnergy(long xp) {
+		if (xp <= 0 || reposeCurrent <= 0)
+			return 0;
+		long bonus = Math.min(reposeCurrent, xp * DataManager.REPOSE_ENERGY_TABLE.getUseRatio(level) / 100);
+		reposeCurrent -= bonus;
+		return bonus;
+	}
+
+	public void returnReposeEnergy(long bonus) {
+		reposeCurrent += bonus;
+	}
+
 	public boolean isInEditMode() {
 		return isInEditMode;
 	}
@@ -231,12 +263,81 @@ public class PlayerCommonData extends CreatureTemplate {
 		this.isInEditMode = isInEditMode;
 	}
 
-	public boolean isReadyForSalvationPoints() {
-		return getLevel() >= 15;
+	/**
+	 * Takes the Energy of Salvation bonus for the given XP from the player's Energy of Salvation.
+	 *
+	 * @return The bonus XP, before rates.
+	 */
+	private long useSalvationEnergy(long xp) {
+		if (xp <= 0 || salvationEnergy <= 0)
+			return 0;
+		long bonus = Math.min(salvationEnergy, xp * DataManager.SALVATION_ENERGY_TABLE.getUseRatio(level) / 100);
+		salvationEnergy -= bonus;
+		return bonus;
+	}
+
+	public long getSalvationEnergy() {
+		return salvationEnergy;
+	}
+
+	/**
+	 * @return The drop rate bonus in percent from Energy of Salvation. It stays from the last gain until a check fails, independent of the energy left.
+	 */
+	public int getSalvationDropBonus() {
+		return salvationDropBonus;
+	}
+
+	public void setSalvationDropBonus(int salvationDropBonus) {
+		this.salvationDropBonus = salvationDropBonus;
+	}
+
+	/**
+	 * @return The total play time in minutes.
+	 */
+	public int getPlayTime() {
+		return playTimeStart == 0 ? playTime : playTime + (int) ((System.currentTimeMillis() - playTimeStart) / 60000);
+	}
+
+	public void setPlayTime(int playTime) {
+		this.playTime = playTime;
+	}
+
+	/**
+	 * Sets the total play time of a player who is online, counting from now.
+	 */
+	public void resetPlayTime(int playTime) {
+		this.playTime = playTime;
+		if (playTimeStart != 0)
+			startPlayTime();
+	}
+
+	/**
+	 * The session starts at the beginning of the current minute, so a session counts every minute boundary it crosses and partial
+	 * minutes are not lost on average.
+	 */
+	public void startPlayTime() {
+		long now = System.currentTimeMillis();
+		playTimeStart = now - now % 60000;
+	}
+
+	public void stopPlayTime() {
+		playTime = getPlayTime();
+		playTimeStart = 0;
+	}
+
+	/**
+	 * @return The play time in minutes when the player reached the current level.
+	 */
+	public int getLevelUpPlayTime() {
+		return levelUpPlayTime;
+	}
+
+	public void setLevelUpPlayTime(int levelUpPlayTime) {
+		this.levelUpPlayTime = levelUpPlayTime;
 	}
 
 	public boolean isReadyForReposeEnergy() {
-		return getLevel() >= 10;
+		return DataManager.REPOSE_ENERGY_TABLE.getMaxEnergy(getLevel()) > 0;
 	}
 
 	public void addReposeEnergy(long add) {
@@ -252,7 +353,7 @@ public class PlayerCommonData extends CreatureTemplate {
 			reposeCurrent = 0;
 			reposeMax = 0;
 		} else {
-			reposeMax = (long) (getExpNeed() * 0.25f); // Retail 99%
+			reposeMax = DataManager.REPOSE_ENERGY_TABLE.getMaxEnergy(getLevel());
 			reposeCurrent = Math.min(reposeMax, reposeCurrent);
 		}
 	}
@@ -278,6 +379,17 @@ public class PlayerCommonData extends CreatureTemplate {
 
 	public void setPvpExp(long pvpExp) {
 		this.pvpExp = pvpExp;
+	}
+
+	/**
+	 * @return The accumulated AP gained from player kills that limits how much more AP the player can gain.
+	 */
+	public long getApFromUsers() {
+		return apFromUsers;
+	}
+
+	public void setApFromUsers(long apFromUsers) {
+		this.apFromUsers = apFromUsers;
 	}
 
 	/**
@@ -555,29 +667,22 @@ public class PlayerCommonData extends CreatureTemplate {
 	}
 
 	/**
-	 * Value returned here means % of exp bonus.
+	 * @return The percentage of gained XP that Energy of Salvation adds, or 0 if the player has none.
 	 */
 	public byte getCurrentSalvationPercent() {
-		if (salvationPoint <= 0)
-			return 0;
-
-		long per = salvationPoint / 1000;
-		if (per > 30)
-			return 30;
-
-		return (byte) per;
+		return salvationEnergy > 0 ? (byte) DataManager.SALVATION_ENERGY_TABLE.getUseRatio(level) : 0;
 	}
 
 	public void addSalvationPoints(long points) {
-		salvationPoint += points;
+		salvationEnergy += points;
 	}
 
 	public void setCurrentSalvationPoints(long points) {
-		salvationPoint = points;
+		salvationEnergy = points;
 	}
 
 	public void resetSalvationPoints() {
-		salvationPoint = 0;
+		salvationEnergy = 0;
 	}
 
 	public void setLastTransferTime(long value) {

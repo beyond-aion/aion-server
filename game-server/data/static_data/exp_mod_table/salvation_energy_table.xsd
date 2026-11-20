@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="salvation_energy_table">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="level" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:attribute name="lvl" type="xs:int" use="required"/>
+						<xs:attribute name="standard_playtime" type="xs:int" use="required"/>
+						<xs:attribute name="standard_exp_per_hour" type="xs:long" use="required"/>
+						<xs:attribute name="check_start_time" type="xs:int" use="required"/>
+						<xs:attribute name="check_interval" type="xs:int" use="required"/>
+						<xs:attribute name="bonus_point_per_min" type="xs:long" use="required"/>
+						<xs:attribute name="bonus_interval" type="xs:int" use="required"/>
+						<xs:attribute name="bonus_use_ratio" type="xs:int" use="required"/>
+						<xs:attribute name="drop_ratio" type="xs:int" use="required"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
