@@ -30,7 +30,7 @@ public class SM_HOUSE_SCRIPTS extends AionServerPacket {
 	}
 
 	/**
-	 * A complete script list. Empty slots are written as {@code 0xFFFF}, which the client treats as "no script".
+	 * A complete script list. Empty slots are written as {@code 0xFFFF} (never set), like retail does for a new house; {@code 0} would reset the slot's object script.
 	 */
 	public static SM_HOUSE_SCRIPTS fullList(int houseAddress, List<PlayerScript> scripts) {
 		return new SM_HOUSE_SCRIPTS(houseAddress, scripts, true);

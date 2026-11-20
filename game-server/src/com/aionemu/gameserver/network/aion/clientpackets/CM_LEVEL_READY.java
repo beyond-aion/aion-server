@@ -10,13 +10,13 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.FlyState;
 import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.model.items.storage.StorageType;
-import com.aionemu.gameserver.model.templates.housing.BuildingType;
 import com.aionemu.gameserver.model.templates.windstreams.Location2D;
 import com.aionemu.gameserver.model.templates.windstreams.WindstreamTemplate;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.*;
 import com.aionemu.gameserver.questEngine.QuestEngine;
+import com.aionemu.gameserver.services.HousingService;
 import com.aionemu.gameserver.services.SiegeService;
 import com.aionemu.gameserver.services.TownService;
 import com.aionemu.gameserver.services.WeatherService;
@@ -26,6 +26,7 @@ import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.rift.RiftInformer;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
+import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
  * Client is saying that level[map] is ready.
@@ -45,13 +46,15 @@ public class CM_LEVEL_READY extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		Player activePlayer = getConnection().getActivePlayer();
-		House activeHouse = activePlayer.getActiveHouse();
-		if (activeHouse != null) {
-			// The studio has to be registered before its objects, which are sent before the player spawns.
-			if (activeHouse.getBuilding().getType() == BuildingType.PERSONAL_INS && activeHouse.isInSameInstance(activePlayer))
-				activePlayer.getController().registerHouse(activeHouse);
-			sendPacket(new SM_HOUSE_OBJECTS(activeHouse.getRegistry().getSpawnedObjects()));
+		WorldMapInstance instance = activePlayer.getPosition().getWorldMapInstance();
+		if (instance.isPersonal()) { // the studio goes to every visitor before any of its objects
+			House studio = HousingService.getInstance().getPlayerStudio(instance.getOwnerId());
+			if (studio != null && studio.isInSameInstance(activePlayer))
+				activePlayer.getController().registerHouse(studio);
 		}
+		House activeHouse = activePlayer.getActiveHouse();
+		if (activeHouse != null)
+			sendPacket(new SM_HOUSE_OBJECTS(activeHouse.getRegistry().getSpawnedObjects()));
 		if (activePlayer.isInInstance()) {
 			sendPacket(new SM_INSTANCE_COUNT_INFO(activePlayer.getWorldId(), activePlayer.getInstanceId()));
 		}
