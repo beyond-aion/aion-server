@@ -72,9 +72,10 @@ public class PetSpawnService {
 	private static void dismissPetAndNotify(Player player) {
 		Pet pet = player.getPet();
 		if (pet != null) {
-			// Despawning already notifies owners who can see their pet.
-			boolean receivesDespawn = player.isSpawned() && pet.isSpawned() && player.getKnownList().sees(pet);
-			if (pet.getController().delete() && !receivesDespawn)
+			// Despawn clears the known lists after clearing the spawned flag.
+			// Deletion only despawns a spawned pet, and notSee skips packets for a despawned player.
+			boolean willSendDismissOnDespawn = player.isSpawned() && pet.isSpawned() && player.getKnownList().sees(pet);
+			if (pet.getController().delete() && !willSendDismissOnDespawn)
 				PacketSendUtility.sendPacket(player, SM_FUNCTIONAL_PET.dismissed(pet.getObjectId()));
 		}
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PET_CANT_SUMMON_HERE());
