@@ -103,6 +103,8 @@ public class PlayerController extends CreatureController<Player> {
 		if (object instanceof Creature creature) {
 			if (creature instanceof Npc npc) {
 				PacketSendUtility.sendPacket(getOwner(), new SM_NPC_INFO(npc, getOwner()));
+				if (npc instanceof SummonedHouseNpc houseNpc)
+					sendHouseScriptsIfButler(houseNpc);
 				if (npc instanceof Kisk) {
 					if (getOwner().getRace() == ((Kisk) npc).getOwnerRace())
 						PacketSendUtility.sendPacket(getOwner(), new SM_KISK_UPDATE((Kisk) npc));
@@ -147,6 +149,15 @@ public class PlayerController extends CreatureController<Player> {
 			else
 				PacketSendUtility.sendPacket(player, new SM_HOUSE_RENDER(house));
 		}
+	}
+
+	/**
+	 * Retail sends the script list right after the butler's spawn packet, and only for a butler of an owned house.
+	 */
+	private void sendHouseScriptsIfButler(SummonedHouseNpc houseNpc) {
+		House house = houseNpc.getCreator();
+		if (house.getOwnerId() != 0 && houseNpc.getNpcId() == house.getLand().getManagerNpcId())
+			house.sendScripts(getOwner());
 	}
 
 	private void sendPlayerInfoPackets(Player player) {
