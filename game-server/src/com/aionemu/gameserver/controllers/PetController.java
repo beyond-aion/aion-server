@@ -1,16 +1,12 @@
 package com.aionemu.gameserver.controllers;
 
-import java.sql.Timestamp;
-
 import com.aionemu.gameserver.dao.PlayerPetsDAO;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Pet;
-import com.aionemu.gameserver.model.gameobjects.PetMoodAction;
 import com.aionemu.gameserver.model.gameobjects.player.PetCommonData;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_FUNCTIONAL_PET;
 import com.aionemu.gameserver.services.toypet.PetFeedProgress;
-import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.services.toypet.PetMoodService;
 
 /**
  * @author ATracer
@@ -31,15 +27,16 @@ public class PetController extends VisibleObjectController<Pet> {
 			PlayerPetsDAO.saveDopingBag(getOwner().getObjectId(), commonData.getDopingBag());
 
 		getOwner().getMaster().getController().cancelTask(TaskId.PET_UPDATE);
-		commonData.setDespawnTime(new Timestamp(System.currentTimeMillis()));
-		PlayerPetsDAO.savePetMoodData(commonData);
+		PetMoodService.onDismiss(getOwner().getMaster(), commonData);
 		getOwner().getMaster().setPet(null);
 	}
 
+	/**
+	 * Runs once per minute while the pet is summoned and raises the pet's mood.
+	 */
 	public static class PetUpdateTask implements Runnable {
 
 		private final Player player;
-		private long startTime = 0;
 
 		public PetUpdateTask(Player player) {
 			this.player = player;
@@ -47,25 +44,12 @@ public class PetController extends VisibleObjectController<Pet> {
 
 		@Override
 		public void run() {
-			if (startTime == 0)
-				startTime = System.currentTimeMillis();
-
-			try {
-				if (!player.isSpawned())
-					return;
-
-				Pet pet = player.getPet();
-				if (pet == null)
-					throw new IllegalStateException("Pet is null");
-
-				if (System.currentTimeMillis() - startTime >= 60 * 1000) {
-					PlayerPetsDAO.savePetMoodData(pet.getCommonData());
-					startTime = System.currentTimeMillis();
-				}
-				PacketSendUtility.sendPacket(player, SM_FUNCTIONAL_PET.mood(pet, PetMoodAction.UPDATE, 0));
-			} catch (Exception ex) {
+			Pet pet = player.getPet();
+			if (pet == null) {
 				player.getController().cancelTask(TaskId.PET_UPDATE);
+				return;
 			}
+			PetMoodService.onMinutePassed(pet);
 		}
 	}
 

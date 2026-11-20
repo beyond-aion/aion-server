@@ -16,8 +16,8 @@ import com.aionemu.gameserver.utils.idfactory.IDFactory;
  */
 public class PetList {
 
-	private int lastUsedPetTemplateId;
 	private long renameCooldownEndTime;
+	private long lastSummonTime;
 	private Map<Integer, PetCommonData> pets = new LinkedHashMap<>();
 
 	PetList(Player player) {
@@ -26,16 +26,10 @@ public class PetList {
 
 	public void loadPets(Player player) {
 		List<PetCommonData> playerPets = PlayerPetsDAO.getPlayerPets(player);
-		PetCommonData lastUsedPet = null;
 		for (PetCommonData pet : playerPets) {
 			ExpireTimerTask.getInstance().registerExpirable(pet, player);
 			pets.put(pet.getTemplateId(), pet); // the client only sends template ids for spawn/dismiss, so we cannot support multiple same pets
-			if (lastUsedPet == null || pet.getDespawnTime().after(lastUsedPet.getDespawnTime()))
-				lastUsedPet = pet;
 		}
-
-		if (lastUsedPet != null)
-			lastUsedPetTemplateId = lastUsedPet.getObjectId();
 	}
 
 	public Collection<PetCommonData> getPets() {
@@ -48,14 +42,6 @@ public class PetList {
 	 */
 	public PetCommonData getPet(int petId) {
 		return pets.get(petId);
-	}
-
-	public PetCommonData getLastUsedPet() {
-		return getPet(lastUsedPetTemplateId);
-	}
-
-	public void setLastUsedPetTemplateId(int lastUsedPetTemplateId) {
-		this.lastUsedPetTemplateId = lastUsedPetTemplateId;
 	}
 
 	public PetCommonData addPet(Player player, int petId, int decorationId, long birthday, String name, int expireTime) {
@@ -75,7 +61,6 @@ public class PetList {
 		petCommonData.setHead(head);
 		petCommonData.setName(name);
 		petCommonData.setBirthday(new Timestamp(birthday));
-		petCommonData.setDespawnTime(new Timestamp(System.currentTimeMillis()));
 		PlayerPetsDAO.insertPlayerPet(player, petCommonData);
 		pets.put(petId, petCommonData);
 		return petCommonData;
@@ -91,6 +76,14 @@ public class PetList {
 	public boolean hasSameName(String name) {
 		String storedName = Util.convertName(name);
 		return pets.values().stream().anyMatch(pet -> storedName.equals(pet.getName()));
+	}
+
+	public long getLastSummonTime() {
+		return lastSummonTime;
+	}
+
+	public void setLastSummonTime(long lastSummonTime) {
+		this.lastSummonTime = lastSummonTime;
 	}
 
 	public long getRenameCooldownEndTime() {

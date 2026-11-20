@@ -2,7 +2,6 @@ package com.aionemu.gameserver.network.aion.serverpackets;
 
 import java.util.Collection;
 
-import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.*;
 import com.aionemu.gameserver.model.gameobjects.player.PetCommonData;
@@ -40,7 +39,7 @@ public class SM_FUNCTIONAL_PET extends AionServerPacket {
 	private int feedData;
 	private int refeedSeconds;
 	private PetMoodAction moodAction;
-	private int shuggleEmotion;
+	private int[] moodValues;
 	private boolean isActing;
 	private int lootNpcObjId;
 	private PetDopingAction dopeAction;
@@ -146,11 +145,38 @@ public class SM_FUNCTIONAL_PET extends AionServerPacket {
 		return packet;
 	}
 
-	public static SM_FUNCTIONAL_PET mood(Pet pet, PetMoodAction action, int shuggleEmotion) {
+	/**
+	 * Answer to a mood check; the client plays one of three idle animations (0-2).
+	 */
+	public static SM_FUNCTIONAL_PET moodStatus(int animation) {
+		return mood(PetMoodAction.STATUS, animation);
+	}
+
+	/**
+	 * The pet's reaction (0-8) to a social interaction and the resulting mood points.
+	 */
+	public static SM_FUNCTIONAL_PET moodSocial(int reaction, int moodPoints, int emotion) {
+		return mood(PetMoodAction.SOCIAL, reaction, moodPoints, emotion);
+	}
+
+	/**
+	 * The present item, or -1 if the pet has nothing to give.
+	 */
+	public static SM_FUNCTIONAL_PET moodPresent(int itemId) {
+		return mood(PetMoodAction.PRESENT, itemId);
+	}
+
+	/**
+	 * Mood bar and the remaining cooldowns of the mood check and the present, in seconds.
+	 */
+	public static SM_FUNCTIONAL_PET moodUpdate(PetCommonData pet) {
+		return mood(PetMoodAction.UPDATE, pet.getMoodPoints(), pet.getMoodCheckRemainingSeconds(), pet.getPresentRemainingSeconds());
+	}
+
+	private static SM_FUNCTIONAL_PET mood(PetMoodAction action, int... values) {
 		SM_FUNCTIONAL_PET packet = new SM_FUNCTIONAL_PET(PetAction.MOOD);
 		packet.moodAction = action;
-		packet.shuggleEmotion = shuggleEmotion;
-		packet.commonData = pet.getCommonData();
+		packet.moodValues = values;
 		return packet;
 	}
 
@@ -243,7 +269,7 @@ public class SM_FUNCTIONAL_PET extends AionServerPacket {
 				writeF(pet.getX());
 				writeF(pet.getY());
 				writeF(pet.getZ());
-				// the pet is spawned at its master's position, so the target is the position
+				// a summoned pet stands still, so its target is its own position
 				writeF(pet.getX());
 				writeF(pet.getY());
 				writeF(pet.getZ());
@@ -293,24 +319,8 @@ public class SM_FUNCTIONAL_PET extends AionServerPacket {
 				break;
 			case MOOD:
 				writeC(moodAction.getId());
-				switch (moodAction) {
-					case STATUS: // the client plays one of three idle animations
-						writeD(Rnd.get(0, 2));
-						break;
-					case SOCIAL:
-						writeD(Rnd.get(0, 8));
-						writeD(commonData.getMoodPoints(true));
-						writeD(shuggleEmotion);
-						break;
-					case PRESENT:
-						writeD(DataManager.PET_DATA.getPetTemplate(commonData.getTemplateId()).getConditionReward());
-						break;
-					case UPDATE:
-						writeD(commonData.getMoodPoints(true));
-						writeD(commonData.getMoodRemainingTime());
-						writeD(commonData.getGiftRemainingTime());
-						break;
-				}
+				for (int value : moodValues)
+					writeD(value);
 				break;
 			case SPECIAL_FUNCTION:
 				writeC(specialFunction.getId());

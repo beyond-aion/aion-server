@@ -31,12 +31,11 @@ public class PetCommonData implements Expirable {
 	PetDopingBag dopingBag = null;
 	private volatile boolean cancelFeed = false;
 	private long refeedTime;
-	private long startMoodTime;
-	private int shuggleCounter;
-	private long moodCdStarted;
-	private long giftCdStarted;
+	private int moodPoints;
+	private long moodCheckTime;
+	private long presentTime;
+	private boolean socialDone;
 	private int expireTime;
-	private Timestamp despawnTime;
 	private boolean isLooting = false;
 	private boolean isSelling = false;
 	private volatile Future<?> refeedTask;
@@ -163,107 +162,100 @@ public class PetCommonData implements Expirable {
 		return time;
 	}
 
-	public final long getMoodStartTime() {
-		return startMoodTime;
+	/**
+	 * Mood points are capped at this value; a full mood lets the player take the pet's present.
+	 */
+	public static final int MAX_MOOD_POINTS = 9000;
+	private static final long MOOD_CHECK_COOLDOWN_MILLIS = 600_000;
+	private static final long MOOD_SOCIAL_WINDOW_MILLIS = 30_000;
+	private static final long PRESENT_COOLDOWN_MILLIS = 3_600_000;
+
+	public synchronized int getMoodPoints() {
+		return moodPoints;
 	}
 
-	public final int getShuggleCounter() {
-		return shuggleCounter;
+	public synchronized void setMoodPoints(int moodPoints) {
+		this.moodPoints = Math.clamp(moodPoints, 0, MAX_MOOD_POINTS);
 	}
 
-	public final void setShuggleCounter(int shuggleCounter) {
-		this.shuggleCounter = shuggleCounter;
+	/**
+	 * @return True if the mood is full after adding the points.
+	 */
+	public synchronized boolean addMoodPoints(int points) {
+		setMoodPoints(moodPoints + points);
+		return moodPoints == MAX_MOOD_POINTS;
 	}
 
-	public final int getMoodPoints(boolean forPacket) {
-		if (startMoodTime == 0)
-			startMoodTime = System.currentTimeMillis();
-		int points = Math.round((System.currentTimeMillis() - startMoodTime) / 1000f) + shuggleCounter * 1000;
-		if (forPacket && points > 9000)
-			return 9000;
-		return points;
+	public synchronized long getMoodCheckTime() {
+		return moodCheckTime;
 	}
 
-	public final boolean increaseShuggleCounter() {
-		if (getMoodRemainingTime() > 0)
+	public synchronized void setMoodCheckTime(long moodCheckTime) {
+		this.moodCheckTime = moodCheckTime;
+	}
+
+	/**
+	 * Starts a mood check if the mood isn't full and the last check is at least 10 minutes old. The player can then socialize with the pet once,
+	 * within the next 30 seconds.
+	 */
+	public synchronized boolean startMoodCheck() {
+		long now = System.currentTimeMillis();
+		if (moodPoints >= MAX_MOOD_POINTS || now < moodCheckTime + MOOD_CHECK_COOLDOWN_MILLIS)
 			return false;
-		this.moodCdStarted = System.currentTimeMillis();
-		this.shuggleCounter++;
+		moodCheckTime = now;
+		socialDone = false;
 		return true;
 	}
 
-	public final void clearMoodStatistics() {
-		this.startMoodTime = 0;
-		this.shuggleCounter = 0;
-	}
-
-	public final void setStartMoodTime(long startMoodTime) {
-		this.startMoodTime = startMoodTime;
+	/**
+	 * Consumes the social interaction of the current mood check.
+	 */
+	public synchronized boolean useSocial() {
+		if (socialDone || System.currentTimeMillis() > moodCheckTime + MOOD_SOCIAL_WINDOW_MILLIS)
+			return false;
+		socialDone = true;
+		return true;
 	}
 
 	/**
-	 * @return moodCdStarted
+	 * The player cancelled the mood animation; the social interaction is lost until the next mood check.
 	 */
-	public long getMoodCdStarted() {
-		return moodCdStarted;
+	public synchronized void cancelSocial() {
+		socialDone = true;
+	}
+
+	public synchronized long getPresentTime() {
+		return presentTime;
+	}
+
+	public synchronized void setPresentTime(long presentTime) {
+		this.presentTime = presentTime;
+	}
+
+	public synchronized boolean isPresentOnCooldown() {
+		return System.currentTimeMillis() < presentTime + PRESENT_COOLDOWN_MILLIS;
 	}
 
 	/**
-	 * @param moodCdStarted
-	 *          the moodCdStarted to set
+	 * Resets the mood to an empty bar and clears the check and present cooldowns.
 	 */
-	public void setMoodCdStarted(long moodCdStarted) {
-		this.moodCdStarted = moodCdStarted;
+	public synchronized void resetMood() {
+		moodPoints = 0;
+		moodCheckTime = 0;
+		presentTime = 0;
+		socialDone = false;
 	}
 
-	public int getMoodRemainingTime() {
-		long stop = moodCdStarted + 600000;
-		long remains = stop - System.currentTimeMillis();
-		if (remains <= 0) {
-			setMoodCdStarted(0);
-			return 0;
-		}
-		return (int) (remains / 1000);
+	public synchronized int getMoodCheckRemainingSeconds() {
+		return remainingSeconds(moodCheckTime + MOOD_CHECK_COOLDOWN_MILLIS);
 	}
 
-	/**
-	 * @return the giftCdStarted
-	 */
-	public long getGiftCdStarted() {
-		return giftCdStarted;
+	public synchronized int getPresentRemainingSeconds() {
+		return remainingSeconds(presentTime + PRESENT_COOLDOWN_MILLIS);
 	}
 
-	/**
-	 * @param giftCdStarted
-	 *          the giftCdStarted to set
-	 */
-	public void setGiftCdStarted(long giftCdStarted) {
-		this.giftCdStarted = giftCdStarted;
-	}
-
-	public int getGiftRemainingTime() {
-		long stop = giftCdStarted + 3600 * 1000;
-		long remains = stop - System.currentTimeMillis();
-		if (remains <= 0) {
-			setGiftCdStarted(0);
-			return 0;
-		}
-		return (int) (remains / 1000);
-	}
-
-	/**
-	 * @return the despawnTime
-	 */
-	public Timestamp getDespawnTime() {
-		return despawnTime;
-	}
-
-	/**
-	 * @param despawnTime
-	 *          the despawnTime to set
-	 */
-	public void setDespawnTime(Timestamp despawnTime) {
-		this.despawnTime = despawnTime;
+	private static int remainingSeconds(long endMillis) {
+		return (int) Math.max(0, (endMillis - System.currentTimeMillis()) / 1000);
 	}
 
 	/**
