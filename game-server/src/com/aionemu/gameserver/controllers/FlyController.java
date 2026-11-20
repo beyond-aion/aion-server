@@ -147,12 +147,12 @@ public class FlyController {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FLYING_FORBIDDEN_HERE());
 			return false;
 		}
-		if (player.getEffectController().isAbnormalSet(AbnormalState.NOFLY)) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANT_FLY_NOW_DUE_TO_NOFLY());
-			return false;
-		}
 		if (player.getTransformModel().cantFly()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FLY_CANNOT_FLY_POLYMORPH_STATUS());
+			return false;
+		}
+		if (player.getEffectController().isAbnormalSet(AbnormalState.NOFLY)) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANT_FLY_NOW_DUE_TO_NOFLY());
 			return false;
 		}
 		return player.getStore() == null;
