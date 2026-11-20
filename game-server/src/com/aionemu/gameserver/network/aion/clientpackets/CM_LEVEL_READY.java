@@ -8,7 +8,9 @@ import com.aionemu.gameserver.model.animations.ArrivalAnimation;
 import com.aionemu.gameserver.model.gameobjects.Pet;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.FlyState;
+import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.model.items.storage.StorageType;
+import com.aionemu.gameserver.model.templates.housing.BuildingType;
 import com.aionemu.gameserver.model.templates.windstreams.Location2D;
 import com.aionemu.gameserver.model.templates.windstreams.WindstreamTemplate;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
@@ -43,9 +45,13 @@ public class CM_LEVEL_READY extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		Player activePlayer = getConnection().getActivePlayer();
-
-		if (activePlayer.getActiveHouse() != null)
-			sendPacket(new SM_HOUSE_OBJECTS(activePlayer.getActiveHouse().getRegistry().getSpawnedObjects()));
+		House activeHouse = activePlayer.getActiveHouse();
+		if (activeHouse != null) {
+			// The studio has to be registered before its objects, which are sent before the player spawns.
+			if (activeHouse.getBuilding().getType() == BuildingType.PERSONAL_INS && activeHouse.isInSameInstance(activePlayer))
+				activePlayer.getController().registerHouse(activeHouse);
+			sendPacket(new SM_HOUSE_OBJECTS(activeHouse.getRegistry().getSpawnedObjects()));
+		}
 		if (activePlayer.isInInstance()) {
 			sendPacket(new SM_INSTANCE_COUNT_INFO(activePlayer.getWorldId(), activePlayer.getInstanceId()));
 		}

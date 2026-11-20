@@ -21,15 +21,26 @@ public class SM_HOUSE_SCRIPTS extends AionServerPacket {
 
 	private final int houseAddress;
 	private final List<PlayerScript> scripts;
+	private final boolean fullList;
 
-	public SM_HOUSE_SCRIPTS(int houseAddress, PlayerScript script) {
-		this.houseAddress = houseAddress;
-		this.scripts = script == null ? Collections.emptyList() : Collections.singletonList(script);
-	}
-
-	public SM_HOUSE_SCRIPTS(int houseAddress, List<PlayerScript> scripts) {
+	private SM_HOUSE_SCRIPTS(int houseAddress, List<PlayerScript> scripts, boolean fullList) {
 		this.houseAddress = houseAddress;
 		this.scripts = scripts;
+		this.fullList = fullList;
+	}
+
+	/**
+	 * A complete script list. Empty slots are written as {@code 0xFFFF}, which the client treats as "no script".
+	 */
+	public static SM_HOUSE_SCRIPTS fullList(int houseAddress, List<PlayerScript> scripts) {
+		return new SM_HOUSE_SCRIPTS(houseAddress, scripts, true);
+	}
+
+	/**
+	 * A single script echo for a save or delete. An empty script is written as {@code 0}, which makes the client delete that slot.
+	 */
+	public static SM_HOUSE_SCRIPTS single(int houseAddress, PlayerScript script) {
+		return new SM_HOUSE_SCRIPTS(houseAddress, script == null ? Collections.emptyList() : Collections.singletonList(script), false);
 	}
 
 	@Override
@@ -46,7 +57,7 @@ public class SM_HOUSE_SCRIPTS extends AionServerPacket {
 				writeB(scriptContent);
 				writeB(SCRIPT_PADDING);
 			} else {
-				writeH(0); // removes script from the in-game list
+				writeH(fullList ? 0xFFFF : 0);
 			}
 		}
 	}

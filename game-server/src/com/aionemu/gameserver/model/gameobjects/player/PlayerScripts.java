@@ -122,7 +122,7 @@ public class PlayerScripts {
 			return;
 		SplitList<PlayerScript> scriptSplitList = new DynamicServerPacketBodySplitList<>(Arrays.asList(scripts), false, SM_HOUSE_SCRIPTS.STATIC_BODY_SIZE,
 			SM_HOUSE_SCRIPTS.DYNAMIC_BODY_PART_SIZE_CALCULATOR);
-		scriptSplitList.forEach(part -> PacketSendUtility.sendPacket(player, new SM_HOUSE_SCRIPTS(houseAddress, part)));
+		scriptSplitList.forEach(part -> PacketSendUtility.sendPacket(player, SM_HOUSE_SCRIPTS.fullList(houseAddress, part)));
 	}
 
 }

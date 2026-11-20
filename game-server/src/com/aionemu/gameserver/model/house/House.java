@@ -405,11 +405,14 @@ public class House extends VisibleObject implements Persistable {
 	 * @return True if the player stands on the land of this house, or inside this very studio.
 	 */
 	public boolean isOnLand(Player player) {
-		if (getPosition() == null || !isSpawned() || player.getWorldId() != address.getMapId())
-			return false;
-		if (address.getExitMapId() != null && player.getInstanceId() != getInstanceId()) // studios share one address
-			return false;
-		return isInsideLand(player.getX(), player.getY());
+		return isInSameInstance(player) && isInsideLand(player.getX(), player.getY());
+	}
+
+	public boolean isInSameInstance(Player player) {
+		var position = getPosition();
+		var playerPosition = player.getPosition();
+		return isSpawned() && position != null && position.getMapRegion() != null && playerPosition != null && playerPosition.getMapRegion() != null
+			&& position.getWorldMapInstance() == playerPosition.getWorldMapInstance();
 	}
 
 	public boolean isInsideLand(float x, float y) {
@@ -421,9 +424,7 @@ public class House extends VisibleObject implements Persistable {
 	}
 
 	public void sendScripts(Player player) {
-		if (playerScripts == null)
-			return;
-		playerScripts.sendToPlayer(player, address.getId());
+		getPlayerScripts().sendToPlayer(player, address.getId());
 	}
 
 }

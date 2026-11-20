@@ -40,8 +40,10 @@ import com.aionemu.gameserver.model.summons.UnsummonType;
 import com.aionemu.gameserver.model.templates.QuestTemplate;
 import com.aionemu.gameserver.model.templates.flypath.FlightPath;
 import com.aionemu.gameserver.model.templates.flypath.FlyPathEntry;
+import com.aionemu.gameserver.model.templates.housing.BuildingType;
 import com.aionemu.gameserver.model.templates.item.actions.RideAction;
 import com.aionemu.gameserver.model.templates.panels.SkillPanel;
+import com.aionemu.gameserver.model.templates.zone.ZoneClassName;
 import com.aionemu.gameserver.model.templates.zone.ZoneType;
 import com.aionemu.gameserver.network.aion.serverpackets.*;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
@@ -92,6 +94,7 @@ public class PlayerController extends CreatureController<Player> {
 	private long lastAttackedMillis = 0;
 	private long lastAutoAttackMillis = 0;
 	private StanceObserver stanceObserver;
+	private final Map<House, Boolean> registeredHouses = new HashMap<>();
 
 	@Override
 	public void see(VisibleObject object) {
@@ -119,11 +122,41 @@ public class PlayerController extends CreatureController<Player> {
 			PacketSendUtility.sendPacket(getOwner(), new SM_PET(pet));
 			if (pet.getMaster().isInFlyingState())
 				PacketSendUtility.sendPacket(getOwner(), new SM_PET_EMOTE(pet, PetEmote.FLY_START));
-		} else if (object instanceof House) {
-			PacketSendUtility.sendPacket(getOwner(), new SM_HOUSE_RENDER((House) object));
+		} else if (object instanceof House house) {
+			seeHouse(house);
 		} else if (object instanceof HouseObject) {
 			PacketSendUtility.sendPacket(getOwner(), new SM_HOUSE_OBJECT((HouseObject<?>) object));
 		}
+	}
+
+	private void seeHouse(House house) {
+		Player player = getOwner();
+		synchronized (registeredHouses) {
+			if (!player.isSpawned() || !house.isInSameInstance(player))
+				return;
+			registerHouse(house);
+			if (player.getPosition().getMapRegion().isInsideZone(house.getName(), player.getX(), player.getY(), player.getZ()))
+				sendHouseScripts(house);
+		}
+	}
+
+	public void registerHouse(House house) {
+		Player player = getOwner();
+		synchronized (registeredHouses) {
+			if (registeredHouses.containsKey(house))
+				return;
+			if (house.getBuilding().getType() == BuildingType.PERSONAL_INS && house.getOwnerId() == player.getObjectId())
+				PacketSendUtility.sendPacket(player, new SM_HOUSE_UPDATE(house));
+			else
+				PacketSendUtility.sendPacket(player, new SM_HOUSE_RENDER(house));
+			registeredHouses.put(house, false);
+		}
+	}
+
+	private void sendHouseScripts(House house) {
+		Player player = getOwner();
+		if (player.isSpawned() && house.isInSameInstance(player) && registeredHouses.replace(house, false, true))
+			house.sendScripts(player);
 	}
 
 	private void sendPlayerInfoPackets(Player player) {
@@ -138,12 +171,17 @@ public class PlayerController extends CreatureController<Player> {
 	@Override
 	public void notSee(VisibleObject object, ObjectDeleteAnimation animation) {
 		super.notSee(object, animation);
+		if (object instanceof House house) {
+			synchronized (registeredHouses) {
+				if (registeredHouses.remove(house) != null && getOwner().isSpawned())
+					PacketSendUtility.sendPacket(getOwner(), new SM_DELETE_HOUSE(house.getAddress().getId()));
+			}
+			return;
+		}
 		if (!getOwner().isSpawned()) // player is teleporting, no need to send deletion packets
 			return;
 		if (object instanceof Pet) {
 			PacketSendUtility.sendPacket(getOwner(), new SM_PET(object.getObjectId(), animation));
-		} else if (object instanceof House) {
-			PacketSendUtility.sendPacket(getOwner(), new SM_DELETE_HOUSE(((House) object).getAddress().getId()));
 		} else if (object instanceof HouseObject) {
 			PacketSendUtility.sendPacket(getOwner(), new SM_DELETE_HOUSE_OBJECT(object.getObjectId()));
 		} else if (object instanceof Npc && ((Npc) object).isFlag()) {
@@ -198,6 +236,7 @@ public class PlayerController extends CreatureController<Player> {
 		ConquerorAndProtectorService.getInstance().onEnterZone(player, zone);
 		InstanceService.onEnterZone(player, zone);
 		QuestEngine.getInstance().onEnterZone(new QuestEnv(null, player, 0), zone);
+		onHouseZoneChanged(zone, true);
 	}
 
 	@Override
@@ -206,6 +245,24 @@ public class PlayerController extends CreatureController<Player> {
 		ConquerorAndProtectorService.getInstance().onLeaveZone(player, zone);
 		InstanceService.onLeaveZone(player, zone);
 		QuestEngine.getInstance().onLeaveZone(new QuestEnv(null, player, 0), zone);
+		onHouseZoneChanged(zone, false);
+	}
+
+	private void onHouseZoneChanged(ZoneInstance zone, boolean entered) {
+		if (zone.getZoneTemplate().getZoneType() != ZoneClassName.HOUSE)
+			return;
+		// Zone changes can run before or concurrently with see(). Only send after the house packet has been queued.
+		synchronized (registeredHouses) {
+			for (House house : registeredHouses.keySet()) {
+				if (!house.getName().equals(zone.getZoneTemplate().getName()))
+					continue;
+				if (!entered)
+					registeredHouses.put(house, false);
+				else if (zone.revalidate(getOwner()))
+					sendHouseScripts(house);
+				break;
+			}
+		}
 	}
 
 	/**
@@ -335,6 +392,9 @@ public class PlayerController extends CreatureController<Player> {
 	public void onDespawn() {
 		if (getOwner().isLooting())
 			DropService.getInstance().closeDropList(getOwner(), getOwner().getLootingNpcOid());
+		synchronized (registeredHouses) {
+			registeredHouses.clear();
+		}
 		super.onDespawn();
 	}
 
