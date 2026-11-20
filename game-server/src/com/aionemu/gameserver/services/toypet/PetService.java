@@ -64,8 +64,10 @@ public class PetService {
 		long now = System.currentTimeMillis();
 		long remainingMillis = player.getPetList().getRenameCooldownEndTime() - now;
 		if (remainingMillis > 0) {
+			// Retail ignores the request silently. The client only knows the cooldown after renaming its summoned pet (and then doesn't send the
+			// request), but the server cooldown counts for all pets of the player, so a second rename of another pet would fail without feedback.
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_TOYPET_NAME_CHANGE_DELAY(
-				Integer.toString(RENAME_COOLDOWN_SECONDS), Long.toString(Math.ceilDiv(remainingMillis, 1000))));
+				Long.toString(Math.ceilDiv(remainingMillis, 1000)), Integer.toString(RENAME_COOLDOWN_SECONDS)));
 			return;
 		}
 		if (!NameRestrictionService.isValidPetName(name) || NameRestrictionService.isForbidden(name)) {
