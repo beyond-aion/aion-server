@@ -46,14 +46,17 @@ public abstract class AbstractHealEffect extends EffectTemplate implements HealE
 				else
 					effected.getLifeStats().increaseMp(TYPE.HEAL_MP, healValue, 0, LOG.REGULAR);
 				break;
-			case FP:
-				if (!(effected instanceof Player))
-					return;
-				((Player) effected).getLifeStats().increaseFp(TYPE.FP_RINGS, healValue, 0, LOG.REGULAR);
+			case FP: {
+				Player owner = getPlayerOrSummonMaster(effected);
+				if (owner != null)
+					owner.getLifeStats().increaseFp(TYPE.FP, healValue, 0, LOG.REGULAR);
 				break;
-			case DP:
-				((Player) effected).getCommonData().addDp(healValue);
+			}
+			case DP: {
+				if (effected instanceof Player player)
+					player.getCommonData().addDp(healValue);
 				break;
+			}
 		}
 	}
 

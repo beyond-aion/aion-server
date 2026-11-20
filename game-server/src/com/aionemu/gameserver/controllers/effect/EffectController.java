@@ -26,7 +26,8 @@ public class EffectController {
 	private final StampedLock lock = new StampedLock();
 	private volatile Map<String, Effect> passiveEffectMap = Collections.emptyMap();
 	private final Map<String, Effect> abnormalEffectMap = new LinkedHashMap<>();
-	private int abnormals;
+	private Set<Effect> noFlySources;
+	private volatile int abnormals;
 
 	public EffectController(Creature owner) {
 		this.owner = owner;
@@ -305,6 +306,13 @@ public class EffectController {
 		int slot = effect != null ? effect.getTargetSlot().getId() : SkillTargetSlot.FULLSLOTS;
 		List<Effect> effects = getAbnormalEffects();
 		PacketSendUtility.broadcastPacket(getOwner(), new SM_ABNORMAL_EFFECT(getOwner(), abnormals, effects, slot));
+	}
+
+	/**
+	 * Also clears the client's generic NOFLY icon, which belongs to the debuff row even when the effect is on a summon.
+	 */
+	public void refreshAbnormalStatus() {
+		broadCastEffects(null);
 	}
 
 	public void clearEffect(Effect effect, boolean broadCastEffects) {
@@ -705,7 +713,12 @@ public class EffectController {
 
 	public void setAbnormal(AbnormalState state) {
 		owner.getObserveController().notifyAbnormalSettedObservers(state);
-		abnormals |= state.getId();
+		long stamp = lock.writeLock();
+		try {
+			abnormals |= state.getId();
+		} finally {
+			lock.unlockWrite(stamp);
+		}
 
 		// TODO move to observer?
 		// if player is sitting when setting certain abnormal states, he is forcefully made to stand up
@@ -718,19 +731,48 @@ public class EffectController {
 	}
 
 	public void unsetAbnormal(AbnormalState state) {
-		int count = 0;
-		long stamp = lock.readLock();
+		long stamp = lock.writeLock();
 		try {
-			for (Effect effect : abnormalEffectMap.values()) {
-				if ((effect.getAbnormals() & state.getId()) == state.getId()) {
-					if (++count == 2)
-						return;
-				}
-			}
+			int count = 0;
+			for (Effect effect : abnormalEffectMap.values())
+				if ((effect.getAbnormals() & state.getId()) == state.getId() && ++count == 2)
+					return;
+			abnormals &= ~state.getId();
 		} finally {
-			lock.unlockRead(stamp);
+			lock.unlockWrite(stamp);
 		}
-		abnormals &= ~state.getId();
+	}
+
+	/**
+	 * NOFLY can come from the owner or its summon. Count both here since the effect lists are updated separately.
+	 */
+	public void addNoFlySource(Effect source) {
+		long stamp = lock.writeLock();
+		try {
+			if (noFlySources == null)
+				noFlySources = new HashSet<>();
+			if (!noFlySources.add(source))
+				return;
+			abnormals |= AbnormalState.NOFLY.getId();
+		} finally {
+			lock.unlockWrite(stamp);
+		}
+		owner.getObserveController().notifyAbnormalSettedObservers(AbnormalState.NOFLY);
+	}
+
+	public boolean removeNoFlySource(Effect source) {
+		long stamp = lock.writeLock();
+		try {
+			if (noFlySources == null || !noFlySources.remove(source))
+				return false;
+			if (noFlySources.isEmpty()) {
+				noFlySources = null;
+				abnormals &= ~AbnormalState.NOFLY.getId();
+			}
+			return true;
+		} finally {
+			lock.unlockWrite(stamp);
+		}
 	}
 
 	/**

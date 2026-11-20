@@ -20,35 +20,23 @@ public class DelayedFpAtkInstantEffect extends EffectTemplate {
 
 	@Override
 	public void calculate(Effect effect) {
-		// Only players have FP
-		if (effect.getEffected() instanceof Player)
+		if (getPlayerOrSummonMaster(effect.getEffected()) != null)
 			super.calculate(effect, null, null);
 	}
 
 	@Override
-	public void applyEffect(final Effect effect) {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				calculateAndApplyDamage(effect);
-			}
-		}, delay);
+	public void applyEffect(Effect effect) {
+		ThreadPoolManager.getInstance().schedule(() -> calculateAndApplyDamage(effect), delay);
 	}
 
 	private void calculateAndApplyDamage(Effect effect) {
 		if (!effect.getEffector().isEnemy(effect.getEffected()))
 			return;
-		int valueWithDelta = calculateBaseValue(effect);
-		Player player = (Player) effect.getEffected();
-		int maxFP = player.getLifeStats().getMaxFp();
-
-		int newValue = valueWithDelta;
-		// Support for values in percentage
-		if (percent)
-			newValue = (maxFP * valueWithDelta) / 100;
-
-		player.getLifeStats().reduceFp(TYPE.FP_DAMAGE, newValue, effect.getSkillId(), LOG.FPATTACK);
+		Player owner = getPlayerOrSummonMaster(effect.getEffected());
+		if (owner == null)
+			return;
+		int baseValue = calculateBaseValue(effect);
+		int amount = percent ? owner.getLifeStats().getMaxFp() * baseValue / 100 : baseValue;
+		owner.getLifeStats().reduceFp(TYPE.DELAYED_FP_DAMAGE, amount, effect.getSkillId(), LOG.FPATTACK);
 	}
-
 }

@@ -70,6 +70,17 @@ public class FlyController {
 	 * when FP is decreased to 0
 	 */
 	public void endFly(boolean broadcastPacket) {
+		endFlight(broadcastPacket, false);
+	}
+
+	public void forceEndFlight() {
+		boolean flying = player.isInFlyingState();
+		boolean gliding = player.isInGlidingState();
+		if (flying || gliding)
+			endFlight(flying, gliding);
+	}
+
+	private void endFlight(boolean sendLand, boolean sendStopGlide) {
 		player.unsetFlyState(FlyState.FLYING);
 		player.unsetFlyState(FlyState.GLIDING);
 		player.unsetState(CreatureState.FLYING);
@@ -79,8 +90,12 @@ public class FlyController {
 		player.getMoveController().restartFalling(player.getZ());
 		player.getGameStats().updateStatsAndSpeedVisually();
 
-		if (broadcastPacket && player.isSpawned())
-			PacketSendUtility.broadcastToSightedPlayers(player, new SM_EMOTION(player, EmotionType.LAND), true);
+		if (player.isSpawned()) {
+			if (sendLand)
+				PacketSendUtility.broadcastToSightedPlayers(player, new SM_EMOTION(player, EmotionType.LAND), true);
+			if (sendStopGlide)
+				PacketSendUtility.broadcastToSightedPlayers(player, new SM_EMOTION(player, EmotionType.STOP_GLIDE), true);
+		}
 		player.getLifeStats().triggerFpRestore();
 	}
 
@@ -132,12 +147,12 @@ public class FlyController {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FLYING_FORBIDDEN_HERE());
 			return false;
 		}
-		if (player.getEffectController().isAbnormalSet(AbnormalState.NOFLY)) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANT_FLY_NOW_DUE_TO_NOFLY());
-			return false;
-		}
 		if (player.getTransformModel().cantFly()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FLY_CANNOT_FLY_POLYMORPH_STATUS());
+			return false;
+		}
+		if (player.getEffectController().isAbnormalSet(AbnormalState.NOFLY)) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANT_FLY_NOW_DUE_TO_NOFLY());
 			return false;
 		}
 		return player.getStore() == null;
@@ -152,6 +167,7 @@ public class FlyController {
 			return false;
 		if (!canGlide(player)) {
 			// the client starts a glide on its own when it cannot fly, so close the wings instead of only refusing
+			PacketSendUtility.broadcastToSightedPlayers(player, new SM_EMOTION(player, EmotionType.STOP_GLIDE), true);
 			if (!canFlyAtAll(player) && player.isFlying())
 				endFly(true);
 			return false;
@@ -212,7 +228,6 @@ public class FlyController {
 			return false;
 		}
 		if (!player.isFlying() && player.getFlyReuseTime() > System.currentTimeMillis()) {
-			PacketSendUtility.broadcastToSightedPlayers(player, new SM_EMOTION(player, EmotionType.STOP_GLIDE), true);
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FLYING_TIME_NOT_READY());
 			return false;
 		}

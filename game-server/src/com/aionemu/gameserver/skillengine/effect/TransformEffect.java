@@ -6,6 +6,7 @@ import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.TransformType;
 
@@ -58,9 +59,6 @@ public abstract class TransformEffect extends EffectTemplate {
 	@Override
 	public void endEffect(Effect effect) {
 		final Creature effected = effect.getEffected();
-		if (cantFly)
-			effected.getEffectController().unsetAbnormal(AbnormalState.NOFLY);
-
 		TransformEffect temp = null;
 		for (Effect tmp : effected.getEffectController().getAbnormalEffects()) {
 			for (EffectTemplate template : tmp.getEffectTemplates()) {
@@ -79,12 +77,12 @@ public abstract class TransformEffect extends EffectTemplate {
 
 	@Override
 	public void startEffect(Effect effect) {
-		effect.getEffected().getTransformModel().apply(getTransformId(), getTransformType(), getPanelId(), cantUseSkills(), cantMove(), cantRecall(),
+		Creature effected = effect.getEffected();
+		effected.getTransformModel().apply(getTransformId(), getTransformType(), getPanelId(), cantUseSkills(), cantMove(), cantRecall(),
 			cantJump(), cantAttack(), cantUseItems(), cantFly());
-		if (cantFly) {
-			effect.getEffected().getEffectController().setAbnormal(AbnormalState.NOFLY);
-			effect.setAbnormal(AbnormalState.NOFLY);
-		}
+		// the client does not close the wings on its own when a form forbids flight, so the form ends the flight for it
+		if (cantFly && effected instanceof Player player)
+			player.getFlyController().forceEndFlight();
 	}
 
 	public TransformType getTransformType() {
