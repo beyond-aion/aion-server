@@ -65,16 +65,8 @@ public class HouseController extends VisibleObjectController<House> {
 		}
 		for (HouseSpawn spawn : templates) {
 			Npc npc;
-			if (getOwner().getOwnerId() == 0 && (spawn.getType() == SpawnType.MANAGER || spawn.getType() == SpawnType.TELEPORT)) {
-				npc = null; // retail spawns the butler and relationship crystal only for an owned house
-			} else if (spawn.getType() == SpawnType.MANAGER) {
-				SpawnTemplate t = SpawnEngine.newSingleTimeSpawn(address.getMapId(), address.getLand().getManagerNpcId(), spawn.getX(), spawn.getY(),
-					spawn.getZ(), spawn.getH());
-				npc = VisibleObjectSpawner.spawnHouseNpc(t, getOwner().getInstanceId(), getOwner());
-			} else if (spawn.getType() == SpawnType.TELEPORT) {
-				SpawnTemplate t = SpawnEngine.newSingleTimeSpawn(address.getMapId(), address.getLand().getTeleportNpcId(), spawn.getX(), spawn.getY(),
-					spawn.getZ(), spawn.getH());
-				npc = VisibleObjectSpawner.spawnHouseNpc(t, getOwner().getInstanceId(), getOwner());
+			if (spawn.getType() == SpawnType.MANAGER || spawn.getType() == SpawnType.TELEPORT) {
+				npc = hasButlerAndCrystal() ? spawnButlerOrCrystal(spawn) : null;
 			} else if (spawn.getType() == SpawnType.SIGN) {
 				// Signs do not have master name displayed, but have creatorId
 				int creatorId = address.getId();
@@ -156,9 +148,37 @@ public class HouseController extends VisibleObjectController<House> {
 		TeleportService.teleportTo(player, getOwner().getWorldId(), getOwner().getInstanceId(), x, y, z, h, TeleportAnimation.FADE_OUT_BEAM);
 	}
 
+	/**
+	 * Retail (NPC server HousingDb::SetFieldHouse) spawns the butler and relationship crystal for a house on auction (state 3) and for an owned
+	 * house (state 5), but not for an unowned one (state 2) or one whose buyer still owns another house (state 4, our inactive house).
+	 */
+	private boolean hasButlerAndCrystal() {
+		House house = getOwner();
+		return house.getBids() != null || house.getOwnerId() != 0 && !house.isInactive();
+	}
+
+	private Npc spawnButlerOrCrystal(HouseSpawn spawn) {
+		HouseAddress address = getOwner().getAddress();
+		int npcId = spawn.getType() == SpawnType.MANAGER ? address.getLand().getManagerNpcId() : address.getLand().getTeleportNpcId();
+		SpawnTemplate t = SpawnEngine.newSingleTimeSpawn(address.getMapId(), npcId, spawn.getX(), spawn.getY(), spawn.getZ(), spawn.getH());
+		return VisibleObjectSpawner.spawnHouseNpc(t, getOwner().getInstanceId(), getOwner());
+	}
+
+	private void updateButlerAndCrystal() {
+		boolean spawned = getOwner().getButler() != null;
+		if (spawned == hasButlerAndCrystal())
+			return;
+		for (SpawnType type : new SpawnType[] { SpawnType.MANAGER, SpawnType.TELEPORT })
+			getOwner().updateSpawn(type, spawned ? null : spawnButlerOrCrystal(getOwner().getSpawnTemplate(type)));
+	}
+
+	/**
+	 * Updates the sign, butler and relationship crystal after the auction or activity state of the house changed.
+	 */
 	public void updateSign() {
 		if (getOwner().getCurrentSign() == null)
 			return;
+		updateButlerAndCrystal();
 		int newNpcId = getCurrentSignNpcId();
 		if (newNpcId != getOwner().getCurrentSign().getNpcId()) {
 			SpawnTemplate t = getOwner().getCurrentSign().getSpawn();
