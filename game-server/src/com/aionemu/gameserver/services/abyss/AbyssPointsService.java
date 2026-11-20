@@ -31,8 +31,7 @@ public class AbyssPointsService {
 	private static final int DORMANT_GRACE_DAYS = 30;
 
 	/**
-	 * Adds the AP for a killed player or NPC like retail: the rank difference modifier, then the AP limits, then the rates, which include the AP
-	 * boost.
+	 * Adds the AP for a killed player or NPC: the rank difference modifier, then the AP limits, then the rates, which include the AP boost.
 	 *
 	 * @param victimRankId
 	 *          Abyss rank id of the victim, 0 if it has none.
@@ -44,7 +43,8 @@ public class AbyssPointsService {
 		AbyssRankTemplate rank = DataManager.ABYSS_RANK_TABLE.get(player.getRace(), player.getAbyssRank().getRank());
 		if (rank != null)
 			ap = rank.applyRankDiffMod(ap, victimRankId);
-		if (ap > 0 && AbyssPointLimitService.getInstance().canGainAp(player, victim.getObjectId(), victimRankId, ap))
+		AbyssPointLimitService limits = AbyssPointLimitService.getInstance();
+		if (ap > 0 && (victim instanceof Player victimPlayer ? limits.canGainAp(player, victimPlayer, ap) : limits.canGainAp(player, ap)))
 			addAp(player, victim, rates.calcResult(player, ap));
 		return ap;
 	}

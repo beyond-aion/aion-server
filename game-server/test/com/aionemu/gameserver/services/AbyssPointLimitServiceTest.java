@@ -44,14 +44,14 @@ class AbyssPointLimitServiceTest {
 
 	@Test
 	void capsTheSameVictimByTheVictimRank() {
-		// killer is STAR1 (give_max 5604), victim is GRADE2 (give_max 3114): retail stops after 1244 + 2 * 1037
+		// killer is STAR1 (give_max 5604), victim is GRADE2 (give_max 3114): AP stops after 1244 + 2 * 1037
 		Player killer = player(9_000_001, Race.ELYOS, 10);
 		Player victim = player(9_000_002, Race.ASMODIANS, 8);
 		AbyssPointLimitService service = AbyssPointLimitService.getInstance();
-		assertTrue(service.canGainAp(killer, victim.getObjectId(), victim.getAbyssRank().getRank().getId(), 1244));
-		assertTrue(service.canGainAp(killer, victim.getObjectId(), victim.getAbyssRank().getRank().getId(), 1037));
-		assertTrue(service.canGainAp(killer, victim.getObjectId(), victim.getAbyssRank().getRank().getId(), 1037));
-		assertFalse(service.canGainAp(killer, victim.getObjectId(), victim.getAbyssRank().getRank().getId(), 1037));
+		assertTrue(service.canGainAp(killer, victim, 1244));
+		assertTrue(service.canGainAp(killer, victim, 1037));
+		assertTrue(service.canGainAp(killer, victim, 1037));
+		assertFalse(service.canGainAp(killer, victim, 1037));
 	}
 
 	@Test
@@ -60,29 +60,18 @@ class AbyssPointLimitServiceTest {
 		Player killer = player(9_000_003, Race.ELYOS, 1);
 		Player victim = player(9_000_004, Race.ASMODIANS, 18);
 		AbyssPointLimitService service = AbyssPointLimitService.getInstance();
-		assertTrue(service.canGainAp(killer, victim.getObjectId(), victim.getAbyssRank().getRank().getId(), 14999));
-		assertTrue(service.canGainAp(killer, victim.getObjectId(), victim.getAbyssRank().getRank().getId(), 5000)); // the whole amount is added even above the cap
-		assertFalse(service.canGainAp(killer, victim.getObjectId(), victim.getAbyssRank().getRank().getId(), 1)); // 19999 is already above the killer cap
+		assertTrue(service.canGainAp(killer, victim, 14999));
+		assertTrue(service.canGainAp(killer, victim, 5000)); // the whole amount is added even above the cap
+		assertFalse(service.canGainAp(killer, victim, 1)); // 19999 is already above the killer cap
 	}
 
 	@Test
-	void skipsTheVictimCapForAnUnrankedNpc() {
-		// NPCs without an abyss rank only hit the accumulated cap
+	void limitsNpcKillsOnlyByTheAccumulatedCap() {
 		Player killer = player(9_000_005, Race.ELYOS, 10);
 		AbyssPointLimitService service = AbyssPointLimitService.getInstance();
-		assertTrue(service.canGainAp(killer, 8_000_001, 0, 15000));
-		assertTrue(service.canGainAp(killer, 8_000_001, 0, 15000));
-		assertFalse(service.canGainAp(killer, 8_000_001, 0, 1)); // 30000 is above the STAR1 cap of 20000
-	}
-
-	@Test
-	void capsTheSameNpcByItsAbyssRank() {
-		// an NPC of rank 1 (give_max 600) can be farmed for 600 AP per cooldown
-		Player killer = player(9_000_006, Race.ELYOS, 10);
-		AbyssPointLimitService service = AbyssPointLimitService.getInstance();
-		assertTrue(service.canGainAp(killer, 8_000_002, 1, 347));
-		assertTrue(service.canGainAp(killer, 8_000_002, 1, 347));
-		assertFalse(service.canGainAp(killer, 8_000_002, 1, 347)); // 694 >= 600
+		assertTrue(service.canGainAp(killer, 15000));
+		assertTrue(service.canGainAp(killer, 15000));
+		assertFalse(service.canGainAp(killer, 1)); // 30000 is above the STAR1 cap of 20000
 	}
 
 	private static Player player(int objectId, Race race, int rank) {

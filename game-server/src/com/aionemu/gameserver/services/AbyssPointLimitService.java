@@ -14,9 +14,9 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
 
 /**
- * Limits the AP a player can gain: from the same victim only a limited amount within a cooldown, and from all players only while the accumulated
- * AP is not above the rank cap. The accumulated cap and its decrease come from the killer's rank, the per-victim cap and cooldown from the victim's
- * rank, as in retail. The accumulated AP is stored with the player and decreases only while the player is online. Cooldowns are kept in memory and
+ * Limits the AP a player can gain: from the same player victim only a limited amount within a cooldown, and from all kills only while the
+ * accumulated AP is not above the rank cap. The accumulated cap and its decrease come from the killer's rank, the per-victim cap and cooldown from
+ * the victim's rank. The accumulated AP is stored with the player and decreases only while the player is online. Cooldowns are kept in memory and
  * survive a relog.
  */
 public class AbyssPointLimitService {
@@ -34,13 +34,25 @@ public class AbyssPointLimitService {
 	}
 
 	/**
-	 * Retail takes the accumulated cap from the killer's rank, but the per-victim cap and cooldown from the victim's rank. A victim without a rank
-	 * (rank 0) has no per-victim limit, only the accumulated one. The victim record is updated even if the accumulated AP blocks the gain, so the
-	 * cooldown restarts on every kill.
+	 * The victim record is updated even if the accumulated AP blocks the gain, so the cooldown restarts on every kill.
 	 *
 	 * @return True if the whole amount may be added.
 	 */
-	public boolean canGainAp(Player killer, int victimObjectId, int victimRankId, int ap) {
+	public boolean canGainAp(Player killer, Player victim, int ap) {
+		return canGainAp(killer, victim.getObjectId(), victim.getAbyssRank().getRank().getId(), ap);
+	}
+
+	/**
+	 * For an NPC victim only the accumulated cap applies. A per-victim record could never limit anything, because every spawn is a new victim, but
+	 * object IDs are reused, so it would wrongly limit a later NPC that got the same ID.
+	 *
+	 * @return True if the whole amount may be added.
+	 */
+	public boolean canGainAp(Player killer, int ap) {
+		return canGainAp(killer, 0, 0, ap);
+	}
+
+	private boolean canGainAp(Player killer, int victimObjectId, int victimRankId, int ap) {
 		AbyssRankTemplate killerRank = DataManager.ABYSS_RANK_TABLE.get(killer.getRace(), killer.getAbyssRank().getRank().getId());
 		if (killerRank == null)
 			return true;
