@@ -209,8 +209,8 @@ public class TeleportService {
 			// instant move; a pending animated teleport must not fire its old destination afterwards
 			player.getController().cancelTask(TaskId.TELEPORT);
 			abortPlayerActions(player);
-			World.getInstance().setPosition(player.getPet(), pos.getMapId(), pos.getInstanceId(), pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
 			World.getInstance().setPosition(player, pos.getMapId(), pos.getInstanceId(), pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
+			World.getInstance().setPosition(player.getPet(), pos.getMapId(), pos.getInstanceId(), pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
 			spawnOnSameMap(player);
 		} else if (player.isDead()) {
 			teleportDeadTo(player, pos.getMapId(), pos.getInstanceId(), pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
