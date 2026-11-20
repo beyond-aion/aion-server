@@ -45,7 +45,7 @@ public class AbyssRankingCache {
 	/**
 	 * The dormant GP loss and the ranking window must use the time of the last leaderboard update, not the time this server instance
 	 * started; otherwise every restart would silently extend the grace period. The value is persisted on the first start and then only
-	 * advanced by the leaderboard update, like the retail ranking table update time.
+	 * advanced by the leaderboard update.
 	 */
 	private static int loadLastUpdate() {
 		Long stored = ServerVariablesDAO.loadLong("abyssRankingUpdate");

@@ -340,7 +340,7 @@ public class Legion extends AionObject {
 	}
 
 	/**
-	 * The legion bonus needs a legion of level 3 or higher with ten members online, as in retail Guild::AddOnlineGuildMember.
+	 * The legion bonus needs a legion of level 3 or higher with ten members online.
 	 */
 	public void addBonus() {
 		List<Player> members = getOnlinePlayers();

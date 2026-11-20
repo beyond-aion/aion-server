@@ -15,7 +15,7 @@ import com.aionemu.gameserver.model.templates.abyss.AbyssRankTemplate;
 import jakarta.xml.bind.JAXBContext;
 
 /**
- * Pins the rank difference modifier that retail applies to every AP gain, including the NPC ones.
+ * Pins the rank difference modifier that applies to every AP gain, including the NPC ones.
  */
 class PveRankDiffModTest {
 
@@ -35,7 +35,7 @@ class PveRankDiffModTest {
 	}
 
 	@Test
-	void roundsHalfUpLikeRetail() {
+	void roundsHalfUp() {
 		assertEquals(5, killerRank.applyRankDiffMod(3, 10)); // 3 * 150% = 4.5
 		assertEquals(6, killerRank.applyRankDiffMod(5, 8)); // 5 * 110% = 5.5
 		assertEquals(4, killerRank.applyRankDiffMod(4, 8)); // 4 * 110% = 4.4

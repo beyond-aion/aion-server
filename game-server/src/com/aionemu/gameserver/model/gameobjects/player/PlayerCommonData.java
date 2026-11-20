@@ -312,7 +312,7 @@ public class PlayerCommonData extends CreatureTemplate {
 	}
 
 	/**
-	 * The session starts at the beginning of the current minute, as in retail, so a session counts every minute boundary it crosses and partial
+	 * The session starts at the beginning of the current minute, so a session counts every minute boundary it crosses and partial
 	 * minutes are not lost on average.
 	 */
 	public void startPlayTime() {

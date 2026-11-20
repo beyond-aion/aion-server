@@ -162,8 +162,8 @@ public class CustomConfig {
 	public static long PVP_DAY_DURATION;
 
 	/**
-	 * Optional extra cap: kills of the same player within {@link #PVP_DAY_DURATION} before AP stops. 0 disables it; the retail per-victim and
-	 * accumulated AP limits are always applied.
+	 * Optional extra cap: kills of the same player within {@link #PVP_DAY_DURATION} before AP stops. 0 disables it; the per-victim and accumulated
+	 * AP limits are always applied.
 	 */
 	@Property(key = "gameserver.pvp.maxkills", defaultValue = "0")
 	public static int MAX_DAILY_PVP_KILLS;

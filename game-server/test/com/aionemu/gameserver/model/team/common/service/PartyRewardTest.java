@@ -57,7 +57,7 @@ class PartyRewardTest {
 
 	@Test
 	void testLiveGroupOn58() {
-		// 284500 (dp 900, gp 600) killed by a 63 and a 65 with about 99.9% of the damage: retail truncates the team pools to 899 DP and 599 GP,
+		// 284500 (dp 900, gp 600) killed by a 63 and a 65 with about 99.9% of the damage: the team pools are truncated to 899 DP and 599 GP,
 		// the live values 971/987 DP and 314/313 GP only come out of whole pools (a pool of 900 would give 973 DP)
 		float share63 = 1825f / 3825f, share65 = 2000f / 3825f;
 		assertEquals(971, StatFunctions.calculateTeamMemberDp(899, share63, 1.1f, 63));

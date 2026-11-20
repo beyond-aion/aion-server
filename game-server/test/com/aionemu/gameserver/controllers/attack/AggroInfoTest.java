@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 /**
- * Pins the retail expiry of an attacker's damage (AttackerList::_ReduceDamageByTime).
+ * Pins the expiry of an attacker's damage.
  */
 class AggroInfoTest {
 

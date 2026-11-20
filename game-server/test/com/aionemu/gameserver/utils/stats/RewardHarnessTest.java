@@ -62,7 +62,7 @@ class RewardHarnessTest {
 		Player killer = player(1, "D", 64, Race.ELYOS, 9);
 		Player highVictim = player(3, "C2", 64, Race.ASMODIANS, 9);
 		assertEquals(1245, StatFunctions.calculatePvpApBase(highVictim, 1f));
-		// 0.9 * 1245 + (int) (0.1 * 1245) = 1120.5 + 124, the first-attacker part is truncated as retail does
+		// 0.9 * 1245 + (int) (0.1 * 1245) = 1120.5 + 124, the first-attacker part is truncated
 		float part = StatFunctions.calculateRewardShare(1245, FirstAttackSplitRate.Split_Default, 1, 1, true);
 		assertEquals(1244.5f, part, 0.001f);
 		assertEquals(1244, StatFunctions.calculatePvpApReward(killer, highVictim, part));

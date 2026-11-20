@@ -15,9 +15,9 @@ public enum Rates {
 	XP_HUNTING(StatEnum.BOOST_HUNTING_XP_RATE, true, true, () -> RatesConfig.XP_SOLO_RATES),
 	XP_GROUP_HUNTING(StatEnum.BOOST_GROUP_HUNTING_XP_RATE, true, true, () -> RatesConfig.XP_GROUP_RATES),
 	/**
-	 * XP boost effects do not apply to quests, as in retail.<br>
-	 * Not retail: the quest XP rates and the legion bonus apply to quests here. Retail gives quest XP (type 2 of User::GetExperience) without the
-	 * server XP multiplier and without the legion bonus. To match retail, use rates of 1 for rates.xp.quest and pass false for the legion bonus.
+	 * XP boost effects do not apply to quests.<br>
+	 * Not retail: the quest XP rates and the legion bonus apply to quests here. Retail gives quest XP without the server XP multiplier and without
+	 * the legion bonus. To match retail, use rates of 1 for rates.xp.quest and pass false for the legion bonus.
 	 */
 	XP_QUEST(null, false, true, () -> RatesConfig.XP_QUEST_RATES),
 	XP_GATHERING(StatEnum.BOOST_GATHERING_XP_RATE, true, true, () -> RatesConfig.XP_GATHERING_RATES),
@@ -154,8 +154,7 @@ public enum Rates {
 	}
 
 	/**
-	 * The legion bonus adds a share of the XP before Energy of Repose and Salvation, like the retail LegionBonusBuff of conditional_bonus_attr.xml.
-	 * Retail gives it for gathering, crafting, kills and PvP.<br>
+	 * The legion bonus adds a share of the XP before Energy of Repose and Salvation. Retail gives it for gathering, crafting, kills and PvP.<br>
 	 * Not retail: quests get it here too, see {@link #XP_QUEST}.
 	 *
 	 * @return The XP the legion bonus adds to the given XP, before rates.

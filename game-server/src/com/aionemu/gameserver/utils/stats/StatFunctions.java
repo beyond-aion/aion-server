@@ -73,8 +73,8 @@ public class StatFunctions {
 	}
 
 	/**
-	 * Part of a base XP reward that falls on one attacker or team, computed like the retail NPC server: who dealt all damage gets the whole base,
-	 * otherwise the first attacker keeps its fixed share and the rest is split by damage, the base part in float and the damage share in double.
+	 * Part of a base XP reward that falls on one attacker or team: who dealt all damage gets the whole base, otherwise the first attacker keeps its
+	 * fixed share and the rest is split by damage, the base part in float and the damage share in double.
 	 */
 	public static long calculateExpShare(long base, FirstAttackSplitRate firstAttackSplitRate, int damage, int totalDamage, boolean firstAttacker) {
 		if (damage == totalDamage)
@@ -85,7 +85,7 @@ public class StatFunctions {
 	}
 
 	/**
-	 * Part of a base DP, AP or GP reward that falls on one attacker or team, in float like the retail server: the damage part is multiplied by the
+	 * Part of a base DP, AP or GP reward that falls on one attacker or team, in float: the damage part is multiplied by the
 	 * damage before it is divided by the total damage, the first attacker's part is truncated. The caller multiplies it by its modifiers and
 	 * truncates once; a team truncates it before sharing it, see {@link #calculateTeamPool}.
 	 */
@@ -98,7 +98,7 @@ public class StatFunctions {
 	}
 
 	/**
-	 * @return The reward share of a team, truncated as retail hands it to the team; AP and DP never round down to nothing if there is a base.
+	 * @return The reward share of a team, truncated as a whole; AP and DP never round down to nothing if there is a base.
 	 */
 	public static int calculateTeamPool(long base, FirstAttackSplitRate firstAttackSplitRate, int damage, int totalDamage, boolean firstAttacker,
 		boolean atLeastOne) {
@@ -109,7 +109,7 @@ public class StatFunctions {
 	}
 
 	/**
-	 * @return XP of a team member, in the order of the retail party distribution, before XP boosts and rates.
+	 * @return XP of a team member, in the float order of the party distribution, before XP boosts and rates.
 	 */
 	public static long calculateTeamMemberXp(long teamXp, float teamShare, float levelMod) {
 		return (long) (100f * (teamShare * levelMod) / 100f * teamXp);
@@ -167,7 +167,7 @@ public class StatFunctions {
 	}
 
 	/**
-	 * Retail truncates the share before the level modifier here, unlike DP and AP.
+	 * The share is truncated before the level modifier here, unlike DP and AP.
 	 *
 	 * @return Glory points reward from target, split between the attackers the same way as experience
 	 */
@@ -216,7 +216,7 @@ public class StatFunctions {
 	}
 
 	/**
-	 * The loss follows what the killers earned relative to the full AP of the victim, as retail does: the AP of all killers after the rank difference
+	 * The loss follows what the killers earned relative to the full AP of the victim: the AP of all killers after the rank difference
 	 * modifier, but before the limits and their AP rates, divided by the AP one killer would get for the whole kill. Killers stopped by a limit
 	 * still cost the victim its AP.
 	 *

@@ -29,7 +29,7 @@ public class GloryPointsService {
 			SM_SYSTEM_MESSAGE msg = amount >= 0 ? SM_SYSTEM_MESSAGE.STR_MSG_GLORY_POINT_GAIN(added) : SM_SYSTEM_MESSAGE.STR_MSG_GLORY_POINT_LOSE(-added);
 			PacketSendUtility.sendPacket(player, msg);
 			if (added != 0) {
-				// Any GP change revalidates the rank immediately, as in retail.
+				// Any GP change revalidates the rank immediately.
 				boolean rankChanged = AbyssPointsService.revalidateRank(player, false);
 				AbyssPointsService.onRankChanged(player, true, rankChanged, null);
 			}

@@ -219,7 +219,7 @@ public class PvpService {
 	/**
 	 * A player alone gets its part of the victim's AP, DP and XP times its level difference modifier. A team gets the part truncated as a whole and
 	 * splits it by weights that decrease the further a member is below the team's highest level, then each member's part is reduced by its own level
-	 * difference to the victim. The order of the float operations follows retail.
+	 * difference to the victim. The order of the float operations matters for the rounding.
 	 *
 	 * @return AP of the team members after the rank difference modifier, see {@link AbyssPointsService#addKillAp}.
 	 */
@@ -253,7 +253,7 @@ public class PvpService {
 		for (Player member : players) {
 			float pvpMod = DataManager.PVP_MOD_TABLE.getMultiplier(member.getLevel(), victim.getLevel());
 			float xpMod = DataManager.PVP_EXP_MOD_TABLE.getMultiplier(member.getLevel(), victim.getLevel());
-			// The kill counter is an optional extra cap; the retail AP limits are applied to every gain.
+			// The kill counter is an optional extra cap; the AP limits are applied to every gain.
 			boolean killLimitReached = CustomConfig.MAX_DAILY_PVP_KILLS > 0
 				&& KillCounter.addKillFor(member.getObjectId(), victim.getObjectId()) >= CustomConfig.MAX_DAILY_PVP_KILLS;
 			if (!killLimitReached && apBase > 0) {
@@ -271,7 +271,7 @@ public class PvpService {
 			if (xpReward > 0) {
 				xpReward = (int) Rates.XP_PVP.applyXpBoost(member, xpReward);
 				long reposeBonus = member.getCommonData().useReposeEnergy(xpReward);
-				// Not retail: a blocked kill gives no XP at all. Retail (User::GetExperience type 5) zeroes the XP and refunds the repose energy, but then
+				// Not retail: a blocked kill gives no XP at all. Retail zeroes the XP and refunds the repose energy, but then
 				// still adds the salvation energy, the world bonus and the legion bonus, all computed from the XP before the limit.
 				if (PvpExpLimitService.getInstance().tryGainPvpExp(member, victim, xpReward + reposeBonus))
 					member.getCommonData().addExp(xpReward, reposeBonus, Rates.XP_PVP, victim.getName()); // rates are applied in addExp()

@@ -109,7 +109,7 @@ class AbyssRankTableTest {
 	}
 
 	@Test
-	void revalidatesLikeRetail() throws Exception {
+	void revalidatesRanks() throws Exception {
 		AbyssRankTable table = load();
 		// AP ranks follow the AP in both directions, GP alone never makes an officer
 		assertEquals(9, table.revalidate(Race.ELYOS, AbyssRankEnum.GRADE5_SOLDIER, 150_800, 5000).getRank());

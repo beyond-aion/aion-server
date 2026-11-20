@@ -200,8 +200,8 @@ public class AggroList {
 	}
 
 	/**
-	 * Damage of an attacker that has not hit for this time no longer counts for the rewards or the first attacker, as in retail
-	 * (AttackerList::_ReduceDamageByTime): two minutes on a player, three on an abyss boss, ten on other NPCs.
+	 * Damage of an attacker that has not hit for this time no longer counts for the rewards or the first attacker: two minutes on a
+	 * player, three on an abyss boss, ten on other NPCs.
 	 */
 	private long getDamageTimeoutMillis() {
 		if (owner instanceof Player)
