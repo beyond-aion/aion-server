@@ -180,8 +180,10 @@ public class _2002WheresRae extends AbstractQuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.getStatus() != QuestStatus.START)
 			return false;
-		if (player.getWorldId() == WorldMapType.ATAXIAR.getId())
+		if (player.getWorldId() == WorldMapType.ATAXIAR.getId()) {
+			player.setPlayMode(true);
 			return changeQuestStep(env, 12, 99);
+		}
 		return changeQuestStep(env, 99, 12);
 	}
 

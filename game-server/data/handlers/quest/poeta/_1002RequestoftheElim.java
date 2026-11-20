@@ -5,7 +5,6 @@ import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_ASCENSION_MORPH;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestActionType;
@@ -166,7 +165,7 @@ public class _1002RequestoftheElim extends AbstractQuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			if (player.getWorldId() == WorldMapType.KARAMATIS.getId()) {
-				PacketSendUtility.sendPacket(player, new SM_ASCENSION_MORPH(1));
+				player.setPlayMode(true);
 				return changeQuestStep(env, 13, 20);
 			}
 			return changeQuestStep(env, 20, 13);
