@@ -103,7 +103,7 @@ public class NettyServer {
 	 * Stops accepting connections, closes all connections after sending their pending data (or after a timeout), and stops the network threads.
 	 * Afterwards, every connection has queued its {@link NettyConnection#onDisconnect()} on its packet executor, unless a channel or a network
 	 * thread didn't stop in time. Every step waits a limited time only, because this runs in the shutdown hook, and the JVM can't exit while it
-	 * waits (a channel whose close never completes was seen with io_uring).
+	 * waits.
 	 */
 	public void shutdown() {
 		if (!channels.close(ServerChannel.class::isInstance).awaitUninterruptibly(3000))
