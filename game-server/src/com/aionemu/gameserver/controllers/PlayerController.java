@@ -302,7 +302,7 @@ public class PlayerController extends CreatureController<Player> {
 
 		// retail dismisses the pet on death and does not resummon it on revival
 		Pet pet = player.getPet();
-		if (pet != null)
+		if (pet != null && !CustomConfig.KEEP_PET_ON_DEATH)
 			pet.getController().delete();
 
 		scheduleShowResurrectionOptions();
