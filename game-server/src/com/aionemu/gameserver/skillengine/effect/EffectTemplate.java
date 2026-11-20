@@ -560,6 +560,24 @@ public abstract class EffectTemplate {
 	}
 
 	/**
+	 * @return The player whose stats or flight the effect changes. An effect on a summon stays on the summon even when it acts on its master.
+	 */
+	static Player getPlayerOrSummonMaster(Creature effected) {
+		if (effected instanceof Player player)
+			return player;
+		if (effected instanceof Summon summon)
+			return summon.getMaster();
+		return null;
+	}
+
+	static boolean hasInvulnerableWings(Creature effected) {
+		if (effected.getEffectController().isAbnormalSet(AbnormalState.INVULNERABLE_WING))
+			return true;
+		Player owner = getPlayerOrSummonMaster(effected);
+		return owner != null && owner != effected && owner.getEffectController().isAbnormalSet(AbnormalState.INVULNERABLE_WING);
+	}
+
+	/**
 	 * @return true = it's an altered state effect, false = it is Poison/Bleed dot (normal Dots have statEnum null here)
 	 */
 	private boolean isAlteredState(StatEnum stat) {

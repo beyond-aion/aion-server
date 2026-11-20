@@ -4,6 +4,7 @@ import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlType;
 
+import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.HealType;
 
@@ -26,12 +27,14 @@ public class ProcFPHealInstantEffect extends AbstractHealEffect {
 
 	@Override
 	public int getCurrentStatValue(Effect effect) {
-		return effect.getEffected().getLifeStats().getCurrentFp();
+		Player owner = getPlayerOrSummonMaster(effect.getEffected());
+		return owner == null ? 0 : owner.getLifeStats().getCurrentFp();
 	}
 
 	@Override
 	public int getMaxStatValue(Effect effect) {
-		return effect.getEffected().getLifeStats().getMaxFp();
+		Player owner = getPlayerOrSummonMaster(effect.getEffected());
+		return owner == null ? 0 : owner.getLifeStats().getMaxFp();
 	}
 
 }

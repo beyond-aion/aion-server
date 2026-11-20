@@ -4,7 +4,8 @@ import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlType;
 
-import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
 import com.aionemu.gameserver.skillengine.model.Effect;
 
 /**
@@ -18,12 +19,8 @@ public class MpAttackEffect extends AbstractOverTimeEffect {
 
 	@Override
 	public void onPeriodicAction(Effect effect) {
-		int maxMP = effect.getEffected().getLifeStats().getMaxMp();
-		int newValue = value;
-		// Support for values in percentage
-		if (percent)
-			newValue = (maxMP * value) / 100;
-		// sm_attack_status for type and log - 4.5 checked
-		effect.getEffected().getLifeStats().reduceMp(SM_ATTACK_STATUS.TYPE.DAMAGE_MP, newValue, effect.getSkillId(), SM_ATTACK_STATUS.LOG.MPATTACK);
+		int baseValue = calculateBaseValue(effect);
+		int amount = percent ? effect.getEffected().getLifeStats().getMaxMp() * baseValue / 100 : baseValue;
+		effect.getEffected().getLifeStats().reduceMp(TYPE.DAMAGE_MP, amount, effect.getSkillId(), LOG.MPATTACK);
 	}
 }

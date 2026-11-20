@@ -82,6 +82,12 @@ public class PlayerEffectController extends EffectController {
 		}
 	}
 
+	@Override
+	public void refreshAbnormalStatus() {
+		super.refreshAbnormalStatus();
+		updatePlayerIconsAndGroup(null);
+	}
+
 	public void updatePlayerEffectIcons(Effect effect) {
 		int slot = effect != null ? effect.getTargetSlot().getId() : SkillTargetSlot.FULLSLOTS;
 		Collection<Effect> effects = getAbnormalEffectsToShow();

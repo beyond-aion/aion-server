@@ -49,9 +49,11 @@ public class SM_ATTACK_STATUS extends AionServerPacket {
 		NATURAL_MP(22),
 		USED_MP(23), // when skill uses mp as cost parameter
 		FP_RINGS(24),
+		FP_DAMAGE_INSTANT(24),
 		FP(26),
 		FP_DAMAGE(26),
-		NATURAL_FP(27);
+		NATURAL_FP(27),
+		DELAYED_FP_DAMAGE(28);
 
 		private int value;
 
@@ -127,6 +129,8 @@ public class SM_ATTACK_STATUS extends AionServerPacket {
 			case DELAYDAMAGE:
 			case FALL_DAMAGE:
 			case FP_DAMAGE:
+			case FP_DAMAGE_INSTANT:
+			case DELAYED_FP_DAMAGE:
 			case MAGICCOUNTERATK:
 			case DISPELBUFFCOUNTERATK:
 			case USED_HP:
