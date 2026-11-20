@@ -10,6 +10,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.FlyState;
 import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.model.items.storage.StorageType;
+import com.aionemu.gameserver.model.templates.housing.BuildingType;
 import com.aionemu.gameserver.model.templates.windstreams.Location2D;
 import com.aionemu.gameserver.model.templates.windstreams.WindstreamTemplate;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
@@ -43,6 +44,17 @@ public class CM_LEVEL_READY extends AionClientPacket {
 	protected void readImpl() {
 	}
 
+	/**
+	 * Retail (World::SeeHousingObjects) sends the own field house objects only on these maps, and the studio objects only to its owner inside it.
+	 */
+	private static boolean isOwnHouseObjectListSent(Player player, House activeHouse, WorldMapInstance instance) {
+		if (activeHouse.getBuilding().getType() == BuildingType.PERSONAL_INS)
+			return instance.isPersonal() && instance.getOwnerId() == player.getObjectId();
+		int mapId = instance.getMapId();
+		return mapId / 10_000_000 == 70 || mapId / 10_000_000 == 71 || mapId == 210040000 || mapId == 210050000 || mapId == 900030000
+			|| mapId == 220040000 || mapId == 220070000;
+	}
+
 	@Override
 	protected void runImpl() {
 		Player activePlayer = getConnection().getActivePlayer();
@@ -53,7 +65,7 @@ public class CM_LEVEL_READY extends AionClientPacket {
 				activePlayer.getController().registerHouse(studio);
 		}
 		House activeHouse = activePlayer.getActiveHouse();
-		if (activeHouse != null)
+		if (activeHouse != null && isOwnHouseObjectListSent(activePlayer, activeHouse, instance))
 			sendPacket(new SM_HOUSE_OBJECTS(activeHouse.getRegistry().getSpawnedObjects()));
 		if (activePlayer.isInInstance()) {
 			sendPacket(new SM_INSTANCE_COUNT_INFO(activePlayer.getWorldId(), activePlayer.getInstanceId()));
