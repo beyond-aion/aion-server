@@ -64,6 +64,6 @@ public class CM_HOUSE_SCRIPT extends AionClientPacket {
 			scripts.remove(scriptId);
 		else
 			scripts.set(scriptId, scriptContent, uncompressedSize);
-		PacketSendUtility.broadcastPacket(player, SM_HOUSE_SCRIPTS.single(address, scripts.get(scriptId)));
+		PacketSendUtility.broadcastPacket(player, new SM_HOUSE_SCRIPTS(address, scripts.get(scriptId)));
 	}
 }

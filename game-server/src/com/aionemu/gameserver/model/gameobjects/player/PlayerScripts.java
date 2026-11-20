@@ -90,11 +90,11 @@ public class PlayerScripts {
 		return true;
 	}
 
+	/**
+	 * Keeps the slot as an empty script like retail does, so the client is told to delete it instead of keeping what it cached.
+	 */
 	public void remove(int scriptId) {
-		if (isInvalidScriptId(scriptId))
-			return;
-		HouseScriptsDAO.deleteScript(houseObjId, scriptId);
-		scripts[scriptId] = new PlayerScript(scriptId, null, 0);
+		set(scriptId, new byte[0], 0);
 	}
 
 	public void removeAll() {
@@ -122,7 +122,7 @@ public class PlayerScripts {
 			return;
 		SplitList<PlayerScript> scriptSplitList = new DynamicServerPacketBodySplitList<>(Arrays.asList(scripts), false, SM_HOUSE_SCRIPTS.STATIC_BODY_SIZE,
 			SM_HOUSE_SCRIPTS.DYNAMIC_BODY_PART_SIZE_CALCULATOR);
-		scriptSplitList.forEach(part -> PacketSendUtility.sendPacket(player, SM_HOUSE_SCRIPTS.fullList(houseAddress, part)));
+		scriptSplitList.forEach(part -> PacketSendUtility.sendPacket(player, new SM_HOUSE_SCRIPTS(houseAddress, part)));
 	}
 
 }
