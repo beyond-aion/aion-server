@@ -40,4 +40,11 @@ public record PlayerScript(int id, byte[] compressedBytes, int uncompressedSize)
 		return compressedBytes != null && compressedBytes.length > 0;
 	}
 
+	/**
+	 * @return True if the slot never held a script, false if it holds one or was deleted.
+	 */
+	public boolean isUnused() {
+		return compressedBytes == null;
+	}
+
 }

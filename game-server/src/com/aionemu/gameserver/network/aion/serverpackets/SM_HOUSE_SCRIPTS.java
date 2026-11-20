@@ -23,8 +23,7 @@ public class SM_HOUSE_SCRIPTS extends AionServerPacket {
 	private final List<PlayerScript> scripts;
 
 	public SM_HOUSE_SCRIPTS(int houseAddress, PlayerScript script) {
-		this.houseAddress = houseAddress;
-		this.scripts = script == null ? Collections.emptyList() : Collections.singletonList(script);
+		this(houseAddress, script == null ? Collections.emptyList() : Collections.singletonList(script));
 	}
 
 	public SM_HOUSE_SCRIPTS(int houseAddress, List<PlayerScript> scripts) {
@@ -46,7 +45,7 @@ public class SM_HOUSE_SCRIPTS extends AionServerPacket {
 				writeB(scriptContent);
 				writeB(SCRIPT_PADDING);
 			} else {
-				writeH(0); // removes script from the in-game list
+				writeH(script.isUnused() ? 0xFFFF : 0); // 0xFFFF leaves the client's slot as it is, 0 makes the client delete it
 			}
 		}
 	}

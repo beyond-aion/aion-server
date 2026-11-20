@@ -3,6 +3,7 @@ package com.aionemu.gameserver.model.house;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.EnumMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -22,6 +23,7 @@ import com.aionemu.gameserver.model.gameobjects.player.HouseOwnerState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerScripts;
 import com.aionemu.gameserver.model.templates.housing.*;
+import com.aionemu.gameserver.model.templates.spawns.HouseSpawn;
 import com.aionemu.gameserver.model.templates.spawns.SpawnType;
 import com.aionemu.gameserver.model.templates.zone.ZoneInfo;
 import com.aionemu.gameserver.services.TownService;
@@ -219,6 +221,27 @@ public class House extends VisibleObject implements Persistable {
 		return getSpawn(SpawnType.SIGN);
 	}
 
+	/**
+	 * @return The spawn position of the given house npc, which also exists while the npc is not spawned.
+	 */
+	public HouseSpawn getSpawnTemplate(SpawnType type) {
+		HouseSpawn spawn = findSpawnTemplate(type);
+		if (spawn == null)
+			throw new IllegalStateException("Missing " + type + " spawn for house " + address.getId());
+		return spawn;
+	}
+
+	public HouseSpawn findSpawnTemplate(SpawnType type) {
+		List<HouseSpawn> spawns = DataManager.HOUSE_NPCS_DATA.getSpawnsByAddress(address.getId());
+		if (spawns != null) {
+			for (HouseSpawn spawn : spawns) {
+				if (spawn.getType() == type)
+					return spawn;
+			}
+		}
+		return null;
+	}
+
 	private Npc getSpawn(SpawnType type) {
 		synchronized (spawns) {
 			return spawns.get(type);
@@ -363,7 +386,8 @@ public class House extends VisibleObject implements Persistable {
 	 * @return Calculated heading for a player inside looking towards the wall where butler, relationship crystal and the door are located.
 	 */
 	public byte getTeleportHeading() {
-		return PositionUtil.getHeadingTowards(getX(), getY(), getRelationshipCrystal().getSpawn().getX(), getRelationshipCrystal().getSpawn().getY());
+		HouseSpawn relationshipCrystal = getSpawnTemplate(SpawnType.TELEPORT);
+		return PositionUtil.getHeadingTowards(getX(), getY(), relationshipCrystal.getX(), relationshipCrystal.getY());
 	}
 
 	public int getTownLevel() {
@@ -405,11 +429,14 @@ public class House extends VisibleObject implements Persistable {
 	 * @return True if the player stands on the land of this house, or inside this very studio.
 	 */
 	public boolean isOnLand(Player player) {
-		if (getPosition() == null || !isSpawned() || player.getWorldId() != address.getMapId())
-			return false;
-		if (address.getExitMapId() != null && player.getInstanceId() != getInstanceId()) // studios share one address
-			return false;
-		return isInsideLand(player.getX(), player.getY());
+		return isInSameInstance(player) && isInsideLand(player.getX(), player.getY());
+	}
+
+	public boolean isInSameInstance(Player player) {
+		var position = getPosition();
+		var playerPosition = player.getPosition();
+		return isSpawned() && position != null && position.getMapRegion() != null && playerPosition != null && playerPosition.getMapRegion() != null
+			&& position.getWorldMapInstance() == playerPosition.getWorldMapInstance();
 	}
 
 	public boolean isInsideLand(float x, float y) {
@@ -421,9 +448,7 @@ public class House extends VisibleObject implements Persistable {
 	}
 
 	public void sendScripts(Player player) {
-		if (playerScripts == null)
-			return;
-		playerScripts.sendToPlayer(player, address.getId());
+		getPlayerScripts().sendToPlayer(player, address.getId());
 	}
 
 }

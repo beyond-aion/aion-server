@@ -8,13 +8,16 @@ import com.aionemu.gameserver.model.animations.ArrivalAnimation;
 import com.aionemu.gameserver.model.gameobjects.Pet;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.FlyState;
+import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.model.items.storage.StorageType;
+import com.aionemu.gameserver.model.templates.housing.BuildingType;
 import com.aionemu.gameserver.model.templates.windstreams.Location2D;
 import com.aionemu.gameserver.model.templates.windstreams.WindstreamTemplate;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.*;
 import com.aionemu.gameserver.questEngine.QuestEngine;
+import com.aionemu.gameserver.services.HousingService;
 import com.aionemu.gameserver.services.SiegeService;
 import com.aionemu.gameserver.services.TownService;
 import com.aionemu.gameserver.services.WeatherService;
@@ -24,6 +27,7 @@ import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.rift.RiftInformer;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
+import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
  * Client is saying that level[map] is ready.
@@ -40,12 +44,29 @@ public class CM_LEVEL_READY extends AionClientPacket {
 	protected void readImpl() {
 	}
 
+	/**
+	 * The own field house objects are only needed on maps with field houses, and the studio objects only by the owner inside the studio.
+	 */
+	private static boolean isOwnHouseObjectListSent(Player player, House activeHouse, WorldMapInstance instance) {
+		if (activeHouse.getBuilding().getType() == BuildingType.PERSONAL_INS)
+			return instance.isPersonal() && instance.getOwnerId() == player.getObjectId();
+		int mapId = instance.getMapId();
+		return mapId / 10_000_000 == 70 || mapId / 10_000_000 == 71 || mapId == 210040000 || mapId == 210050000 || mapId == 900030000
+			|| mapId == 220040000 || mapId == 220070000;
+	}
+
 	@Override
 	protected void runImpl() {
 		Player activePlayer = getConnection().getActivePlayer();
-
-		if (activePlayer.getActiveHouse() != null)
-			sendPacket(new SM_HOUSE_OBJECTS(activePlayer.getActiveHouse().getRegistry().getSpawnedObjects()));
+		WorldMapInstance instance = activePlayer.getPosition().getWorldMapInstance();
+		if (instance.isPersonal()) { // the studio goes to every visitor before any of its objects
+			House studio = HousingService.getInstance().getPlayerStudio(instance.getOwnerId());
+			if (studio != null && studio.isInSameInstance(activePlayer))
+				activePlayer.getController().registerHouse(studio);
+		}
+		House activeHouse = activePlayer.getActiveHouse();
+		if (activeHouse != null && isOwnHouseObjectListSent(activePlayer, activeHouse, instance))
+			sendPacket(new SM_HOUSE_OBJECTS(activeHouse.getRegistry().getSpawnedObjects()));
 		if (activePlayer.isInInstance()) {
 			sendPacket(new SM_INSTANCE_COUNT_INFO(activePlayer.getWorldId(), activePlayer.getInstanceId()));
 		}
