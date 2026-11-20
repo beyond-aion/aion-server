@@ -106,6 +106,24 @@ public class NpcTemplate extends CreatureTemplate {
 	@XmlAttribute(name = "abyss_type")
 	private AbyssNpcType abyssNpcType;
 
+	@XmlAttribute(name = "exp")
+	private long exp;
+
+	@XmlAttribute(name = "dp")
+	private int dp;
+
+	@XmlAttribute(name = "abyss_point")
+	private int abyssPoint;
+
+	@XmlAttribute(name = "abyss_rank")
+	private int abyssRank;
+
+	@XmlAttribute(name = "glory_point")
+	private int gloryPoint;
+
+	@XmlAttribute(name = "first_attack_split_rate")
+	private FirstAttackSplitRate firstAttackSplitRate = FirstAttackSplitRate.Split_None;
+
 	@XmlElement(name = "talk_info")
 	private TalkInfo talkInfo;
 
@@ -155,7 +173,8 @@ public class NpcTemplate extends CreatureTemplate {
 	}
 
 	public TribeClass getTribe() {
-		return tribe;
+		// Client-only showcase templates have no server data; a neutral tribe keeps them spawnable.
+		return tribe != null ? tribe : TribeClass.GENERAL;
 	}
 
 	@Override
@@ -249,6 +268,42 @@ public class NpcTemplate extends CreatureTemplate {
 		return abyssNpcType != null ? abyssNpcType : AbyssNpcType.NONE;
 	}
 
+	/**
+	 * @return Base experience granted for killing this NPC.
+	 */
+	public long getExp() {
+		return exp;
+	}
+
+	/**
+	 * @return Base DP granted for killing this NPC.
+	 */
+	public int getDp() {
+		return dp;
+	}
+
+	/**
+	 * @return Base abyss points granted for killing this NPC.
+	 */
+	public int getAbyssPoint() {
+		return abyssPoint;
+	}
+
+	/**
+	 * @return Abyss rank id of the NPC (0 if it has none), used for the AP rank difference and the per-victim limits.
+	 */
+	public int getAbyssRank() {
+		return abyssRank;
+	}
+
+	public int getGloryPoint() {
+		return gloryPoint;
+	}
+
+	public FirstAttackSplitRate getFirstAttackSplitRate() {
+		return firstAttackSplitRate;
+	}
+
 	public final int getTalkDistance() {
 		return talkInfo == null ? 2 : talkInfo.getDistance();
 	}
@@ -271,11 +326,11 @@ public class NpcTemplate extends CreatureTemplate {
 	}
 
 	public int getMassiveLootCount() {
-		return massiveLoot.getMLootCount();
+		return massiveLoot == null ? 0 : massiveLoot.getMLootCount();
 	}
 
 	public int getMassiveLootItem() {
-		return massiveLoot.getMLootItem();
+		return massiveLoot == null ? 0 : massiveLoot.getMLootItem();
 	}
 
 	public int getMassiveLootMinLevel() {

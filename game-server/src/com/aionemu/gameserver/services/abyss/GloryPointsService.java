@@ -2,7 +2,6 @@ package com.aionemu.gameserver.services.abyss;
 
 import com.aionemu.gameserver.dao.AbyssRankDAO;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_ABYSS_RANK;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
@@ -29,8 +28,11 @@ public class GloryPointsService {
 
 			SM_SYSTEM_MESSAGE msg = amount >= 0 ? SM_SYSTEM_MESSAGE.STR_MSG_GLORY_POINT_GAIN(added) : SM_SYSTEM_MESSAGE.STR_MSG_GLORY_POINT_LOSE(-added);
 			PacketSendUtility.sendPacket(player, msg);
-			if (added != 0)
-				PacketSendUtility.sendPacket(player, new SM_ABYSS_RANK(player));
+			if (added != 0) {
+				// Any GP change revalidates the rank immediately, as in retail.
+				boolean rankChanged = AbyssPointsService.revalidateRank(player, false);
+				AbyssPointsService.onRankChanged(player, true, rankChanged, null);
+			}
 		}
 	}
 }

@@ -58,11 +58,29 @@ public class StaticData {
 	@XmlElement(name = "pvp_exp_mod_table")
 	public PvpExpModTable pvpExpModTable;
 
+	@XmlElement(name = "pcexp_mod_table")
+	public PcExpModTable pcExpModTable;
+
+	@XmlElement(name = "pvp_mod_table")
+	public PvpModTable pvpModTable;
+
+	@XmlElement(name = "abyss_ranks")
+	public AbyssRankTable abyssRankTable;
+
+	@XmlElement(name = "abysspoint_world_mods")
+	public AbyssPointWorldModTable abyssPointWorldModTable;
+
 	@XmlElement(name = "party_exp_mod_table")
 	public PartyExpModTable partyExpModTable;
 
 	@XmlElement(name = "mentee_exp_limit_table")
 	public MenteeExpLimitTable menteeExpLimitTable;
+
+	@XmlElement(name = "repose_energy_table")
+	public ReposeEnergyTable reposeEnergyTable;
+
+	@XmlElement(name = "salvation_energy_table")
+	public SalvationEnergyTable salvationEnergyTable;
 
 	@XmlElement(name = "absolute_stats")
 	public AbsoluteStatsData absoluteStatsData;
@@ -324,8 +342,14 @@ public class StaticData {
 		log.info("Loaded {} player experience table entries", playerExperienceTable.getMaxLevel());
 		log.info("Loaded {} pvp experience table entries", pvpExpTable.getMaxLevel());
 		log.info("Loaded {} pvp experience modifier entries", pvpExpModTable.size());
+		log.info("Loaded {} pve experience modifier entries", pcExpModTable.size());
+		log.info("Loaded {} pvp damage modifier entries", pvpModTable.size());
+		log.info("Loaded {} abyss rank entries", abyssRankTable.size());
+		log.info("Loaded {} abyss point world modifiers", abyssPointWorldModTable.size());
 		log.info("Loaded {} party experience modifier entries", partyExpModTable.size());
 		log.info("Loaded {} mentee experience limit entries", menteeExpLimitTable.size());
+		log.info("Loaded {} repose energy entries", reposeEnergyTable.size());
+		log.info("Loaded {} salvation energy entries", salvationEnergyTable.size());
 		log.info("Loaded {} absolute stat templates", absoluteStatsData.size());
 		log.info("Loaded {} item cleanup entries", itemCleanup.size());
 		log.info("Loaded {} item templates", itemData.size());

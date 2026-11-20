@@ -94,9 +94,6 @@ public class AbyssRank implements Persistable {
 		if (currentAp < 0)
 			currentAp = 0;
 
-		AbyssRankEnum newRank = AbyssRankEnum.getRankForPoints(currentAp, currentGp);
-		if (newRank.getRequiredGP() == 0)
-			setRank(newRank);
 		setPersistentState(PersistentState.UPDATE_REQUIRED);
 	}
 

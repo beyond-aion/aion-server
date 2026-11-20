@@ -67,7 +67,7 @@ public class PlayerDAO {
 	public static void storePlayer(Player player) {
 		try (Connection con = DatabaseFactory.getConnection();
 				 PreparedStatement stmt = con.prepareStatement(
-					 "UPDATE players SET name=?, exp=?, recoverexp=?, x=?, y=?, z=?, heading=?, world_id=?, gender=?, race=?, player_class=?, quest_expands=?, npc_expands=?, item_expands=?, wh_npc_expands=?, wh_bonus_expands=?, note=?, title_id=?, bonus_title_id=?, dp=?, soul_sickness=?, mailbox_letters=?, reposte_energy=?, pvp_exp=?, mentor_flag_time=?, world_owner=? WHERE id=?")) {
+					 "UPDATE players SET name=?, exp=?, recoverexp=?, x=?, y=?, z=?, heading=?, world_id=?, gender=?, race=?, player_class=?, quest_expands=?, npc_expands=?, item_expands=?, wh_npc_expands=?, wh_bonus_expands=?, note=?, title_id=?, bonus_title_id=?, dp=?, soul_sickness=?, mailbox_letters=?, reposte_energy=?, pvp_exp=?, ap_from_users=?, salvation_energy=?, play_time=?, level_up_play_time=?, mentor_flag_time=?, world_owner=? WHERE id=?")) {
 			PlayerCommonData pcd = player.getCommonData();
 			stmt.setString(1, pcd.getName());
 			stmt.setLong(2, pcd.getExp());
@@ -95,9 +95,13 @@ public class PlayerDAO {
 			stmt.setInt(22, mails);
 			stmt.setLong(23, pcd.getCurrentReposeEnergy());
 			stmt.setLong(24, pcd.getPvpExp());
-			stmt.setInt(25, pcd.getMentorFlagTime());
-			stmt.setInt(26, pcd.getWorldOwnerId());
-			stmt.setInt(27, player.getObjectId());
+			stmt.setLong(25, pcd.getApFromUsers());
+			stmt.setLong(26, pcd.getSalvationEnergy());
+			stmt.setInt(27, pcd.getPlayTime());
+			stmt.setInt(28, pcd.getLevelUpPlayTime());
+			stmt.setInt(29, pcd.getMentorFlagTime());
+			stmt.setInt(30, pcd.getWorldOwnerId());
+			stmt.setInt(31, player.getObjectId());
 			stmt.execute();
 		} catch (Exception e) {
 			log.error("Error saving {}", player, e);
@@ -180,6 +184,10 @@ public class PlayerDAO {
 					cd.setDeathCount(resultSet.getInt("soul_sickness"));
 					cd.setCurrentReposeEnergy(resultSet.getLong("reposte_energy"));
 					cd.setPvpExp(resultSet.getLong("pvp_exp"));
+					cd.setApFromUsers(resultSet.getLong("ap_from_users"));
+					cd.setCurrentSalvationPoints(resultSet.getLong("salvation_energy"));
+					cd.setPlayTime(resultSet.getInt("play_time"));
+					cd.setLevelUpPlayTime(resultSet.getInt("level_up_play_time"));
 					cd.setX(resultSet.getFloat("x"));
 					cd.setY(resultSet.getFloat("y"));
 					cd.setZ(resultSet.getFloat("z"));

@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import com.aionemu.gameserver.dao.AbyssRankDAO;
 import com.aionemu.gameserver.dao.AbyssRankDAO.RankingListLegion;
 import com.aionemu.gameserver.dao.AbyssRankDAO.RankingListPlayer;
+import com.aionemu.gameserver.dao.ServerVariablesDAO;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.legion.Legion;
@@ -38,7 +39,25 @@ public class AbyssRankingCache {
 	private int lastUpdate;
 
 	private AbyssRankingCache() {
-		refreshCache();
+		refreshCache(loadLastUpdate());
+	}
+
+	/**
+	 * The dormant GP loss and the ranking window must use the time of the last leaderboard update, not the time this server instance
+	 * started; otherwise every restart would silently extend the grace period. The value is persisted on the first start and then only
+	 * advanced by the leaderboard update, like the retail ranking table update time.
+	 */
+	private static int loadLastUpdate() {
+		Long stored = ServerVariablesDAO.loadLong("abyssRankingUpdate");
+		int now = (int) (System.currentTimeMillis() / 1000);
+		int updateTime = resolveLastUpdate(stored, now);
+		if (stored == null || stored <= 0)
+			ServerVariablesDAO.store("abyssRankingUpdate", updateTime);
+		return updateTime;
+	}
+
+	static int resolveLastUpdate(Long stored, int now) {
+		return stored == null || stored <= 0 ? now : (int) (long) stored;
 	}
 
 	public static AbyssRankingCache getInstance() {
@@ -48,14 +67,12 @@ public class AbyssRankingCache {
 	/**
 	 * Loads ranking data from DB
 	 */
-	private void refreshCache() {
+	private void refreshCache(int updateTime) {
 		List<Race> races = Arrays.asList(Race.ASMODIANS, Race.ELYOS);
 		List<RankingListPlayer> rankingListPlayers = AbyssRankDAO.loadRankingListPlayers();
 		List<RankingListLegion> rankingListLegions = AbyssRankDAO.loadRankingListLegions();
 		Map<Race, List<SM_ABYSS_RANKING_PLAYERS>> newPlayerRankListPackets = new HashMap<>();
 		Map<Race, SM_ABYSS_RANKING_LEGIONS> newLegionRankListPackets = new HashMap<>();
-
-		int updateTime = (int) (System.currentTimeMillis() / 1000);
 
 		for (Race race : races) {
 			List<RankingListPlayer> players = rankingListPlayers.stream().filter(p -> p.race() == race).collect(Collectors.toList());
@@ -77,8 +94,10 @@ public class AbyssRankingCache {
 	 * Reloads player & legion rank data from DB and refreshes the in-game views
 	 */
 	public void reloadRankings() {
+		int updateTime = (int) (System.currentTimeMillis() / 1000);
+		ServerVariablesDAO.store("abyssRankingUpdate", updateTime);
 		// update cache
-		refreshCache();
+		refreshCache(updateTime);
 
 		World.getInstance().forEachPlayer(player -> {
 			player.resetAbyssRankListUpdated();

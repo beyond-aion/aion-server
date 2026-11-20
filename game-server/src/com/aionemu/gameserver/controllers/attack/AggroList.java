@@ -8,9 +8,11 @@ import java.util.stream.Stream;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.SummonedObject;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.templates.npc.AbyssNpcType;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.skillengine.model.HopType;
 import com.aionemu.gameserver.utils.PositionUtil;
@@ -67,7 +69,9 @@ public class AggroList {
 	private void addDamageAndHate(Creature creature, int damage, int hate) {
 		AggroInfo ai = aggroList.computeIfAbsent(creature.getObjectId(), _ -> new AggroInfo(creature));
 		boolean isNewInAggroList = ai.getHate() == 0;
-		ai.addDamage(damage);
+		long now = System.currentTimeMillis();
+		ai.expireDamage(now, getDamageTimeoutMillis());
+		ai.addDamage(damage, now);
 		ai.addHate(hate);
 		owner.getController().onAddHate(creature, isNewInAggroList);
 	}
@@ -121,7 +125,7 @@ public class AggroList {
 				masterAggroInfo = new AggroInfo(master);
 				masterAggroInfo.setHate(1);
 			}
-			masterAggroInfo.addDamage(aggroInfo.getDamage(), aggroInfo.getFirstDamageTime());
+			masterAggroInfo.addDamage(aggroInfo.getDamage(), aggroInfo.getFirstDamageTime(), aggroInfo.getLastDamageTime());
 			return masterAggroInfo;
 		});
 	}
@@ -192,7 +196,19 @@ public class AggroList {
 	 * @return list of DamageInfo with npc and player damages
 	 */
 	public DamageList getFinalDamageList() {
-		return new DamageList(aggroList.values(), owner);
+		return new DamageList(aggroList.values(), owner, System.currentTimeMillis(), getDamageTimeoutMillis());
+	}
+
+	/**
+	 * Damage of an attacker that has not hit for this time no longer counts for the rewards or the first attacker, as in retail
+	 * (AttackerList::_ReduceDamageByTime): two minutes on a player, three on an abyss boss, ten on other NPCs.
+	 */
+	private long getDamageTimeoutMillis() {
+		if (owner instanceof Player)
+			return 120_000;
+		if (owner instanceof Npc npc && npc.getObjectTemplate().getAbyssNpcType() == AbyssNpcType.BOSS)
+			return 180_000;
+		return 600_000;
 	}
 
 	protected boolean isAware(Creature creature) {

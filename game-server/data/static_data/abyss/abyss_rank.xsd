@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:include schemaLocation="../global_types.xsd" />
+	<xs:simpleType name="AbyssRankName">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="GRADE9_SOLDIER" />
+			<xs:enumeration value="GRADE8_SOLDIER" />
+			<xs:enumeration value="GRADE7_SOLDIER" />
+			<xs:enumeration value="GRADE6_SOLDIER" />
+			<xs:enumeration value="GRADE5_SOLDIER" />
+			<xs:enumeration value="GRADE4_SOLDIER" />
+			<xs:enumeration value="GRADE3_SOLDIER" />
+			<xs:enumeration value="GRADE2_SOLDIER" />
+			<xs:enumeration value="GRADE1_SOLDIER" />
+			<xs:enumeration value="STAR1_OFFICER" />
+			<xs:enumeration value="STAR2_OFFICER" />
+			<xs:enumeration value="STAR3_OFFICER" />
+			<xs:enumeration value="STAR4_OFFICER" />
+			<xs:enumeration value="STAR5_OFFICER" />
+			<xs:enumeration value="GENERAL" />
+			<xs:enumeration value="GREAT_GENERAL" />
+			<xs:enumeration value="COMMANDER" />
+			<xs:enumeration value="SUPREME_COMMANDER" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="abyss_ranks">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="abyss_rank" minOccurs="1" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:attribute name="race" type="Race" use="required"/>
+						<xs:attribute name="rank" type="AbyssRankName" use="required"/>
+						<xs:attribute name="drop_point" type="xs:long" use="required"/>
+						<xs:attribute name="death_penalty_point" type="xs:long" use="required"/>
+						<xs:attribute name="require_point" type="xs:long" default="0"/>
+						<xs:attribute name="require_point_gp" type="xs:int" default="0"/>
+						<xs:attribute name="require_order" type="xs:int" default="0"/>
+						<xs:attribute name="give_max_per_user" type="xs:long" default="0"/>
+						<xs:attribute name="delay_time" type="xs:int" default="0"/>
+						<xs:attribute name="max_from_all_users" type="xs:long" default="0"/>
+						<xs:attribute name="max_reduce_amount" type="xs:long" default="0"/>
+						<xs:attribute name="max_reduce_interval" type="xs:int" default="0"/>
+						<xs:attribute name="daily_reduce_gp" type="xs:int" default="0"/>
+						<xs:attribute name="notify_die" type="xs:boolean" default="false"/>
+						<xs:attribute name="rank_diff_mod" type="IntListType"/>
+						<xs:attribute name="ranker_skills" type="IntListType"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

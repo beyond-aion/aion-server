@@ -33,8 +33,8 @@ public class PvpExpTable {
 	/**
 	 * @return The accumulated PvP XP above which the player gains no more PvP XP.
 	 */
-	public int getMaxFromAllUser(int level) {
-		return getRow(level).maxFromAllUser;
+	public int getMaxFromAllUsers(int level) {
+		return getRow(level).maxFromAllUsers;
 	}
 
 	public int getReduceAmount(int level) {
@@ -70,13 +70,13 @@ public class PvpExpTable {
 		@XmlAttribute(name = "exp", required = true)
 		private int exp;
 
-		@XmlAttribute(name = "get_max_from_all_user", required = true)
-		private int maxFromAllUser;
+		@XmlAttribute(name = "max_from_all_users", required = true)
+		private int maxFromAllUsers;
 
-		@XmlAttribute(name = "get_max_reduce_amount", required = true)
+		@XmlAttribute(name = "max_reduce_amount", required = true)
 		private int reduceAmount;
 
-		@XmlAttribute(name = "get_max_reduce_interval", required = true)
+		@XmlAttribute(name = "max_reduce_interval", required = true)
 		private int reduceInterval;
 
 		@XmlAttribute(name = "delay_time", required = true)

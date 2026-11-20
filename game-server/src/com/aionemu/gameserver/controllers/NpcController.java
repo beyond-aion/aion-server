@@ -33,6 +33,7 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.services.DialogService;
 import com.aionemu.gameserver.services.RespawnService;
 import com.aionemu.gameserver.services.abyss.AbyssPointsService;
+import com.aionemu.gameserver.services.abyss.GloryPointsService;
 import com.aionemu.gameserver.services.drop.DropRegistrationService;
 import com.aionemu.gameserver.services.drop.DropService;
 import com.aionemu.gameserver.services.event.EventService;
@@ -207,23 +208,20 @@ public class NpcController extends CreatureController<Npc> {
 
 		InstanceHandler instanceHandler = getOwner().getPosition().getWorldMapInstance().getInstanceHandler();
 		float apMultiplier = instanceHandler.getApMultiplier();
+		DamageInfo<AionObject> firstDamage = finalList.getFirstDamage();
 		for (DamageInfo<AionObject> info : finalList.getCreatureOrTeamDamages()) {
 			AionObject attacker = info.getAttacker();
-			float percentage = info.getDamage() / (float) finalList.getTotalDamage();
+			int damage = info.getDamage(), totalDamage = finalList.getTotalDamage();
+			boolean firstAttacker = firstDamage != null && firstDamage.getAttacker().equals(attacker);
 			if (attacker instanceof TemporaryPlayerTeam<?> tmpPlayerTeam) {
-				PlayerTeamDistributionService.doReward(tmpPlayerTeam, percentage, getOwner(), winner, finalList);
+				PlayerTeamDistributionService.doReward(tmpPlayerTeam, damage, getOwner(), winner, finalList);
 			} else if (attacker instanceof Player player) {
 				if (!player.isDead()) {
 					// Reward init
-					long rewardXp = StatFunctions.calculateExperienceReward(player.getLevel(), getOwner());
-					int rewardDp = StatFunctions.calculateDPReward(player, getOwner());
-					float rewardAp = 1;
-
-					// Dmg percent correction
-					rewardXp *= percentage;
-					rewardDp *= percentage;
-					rewardAp *= percentage;
-					rewardAp *= apMultiplier;
+					long rewardXp = StatFunctions.calculateExperienceReward(player.getLevel(), getOwner(), damage, totalDamage, firstAttacker);
+					int rewardDp = StatFunctions.calculateDPReward(player, getOwner(), damage, totalDamage, firstAttacker);
+					int rewardAp = StatFunctions.calculatePveApReward(player, getOwner(), damage, totalDamage, firstAttacker, apMultiplier);
+					int rewardGp = StatFunctions.calculatePveGpReward(player, getOwner(), damage, totalDamage, firstAttacker);
 
 					boolean shouldNotifyQuestEngine = !(instanceHandler instanceof PvpMapHandler); // do not include pvp map
 					if (shouldNotifyQuestEngine)
@@ -231,13 +229,9 @@ public class NpcController extends CreatureController<Npc> {
 					EventService.getInstance().onPveKill(player, getOwner());
 					player.getCommonData().addExp(rewardXp, Rates.XP_HUNTING, getOwner().getObjectTemplate().getL10n());
 					player.getCommonData().addDp(rewardDp);
-					if (getOwner().getAi().ask(AIQuestion.REWARD_AP)) {
-						int calculatedAp = StatFunctions.calculatePvEApGained(player, getOwner());
-						rewardAp *= calculatedAp;
-						if (rewardAp >= 1) {
-							AbyssPointsService.addAp(player, getOwner(), (int) rewardAp);
-						}
-					}
+					AbyssPointsService.addKillAp(player, getOwner(), getOwner().getObjectTemplate().getAbyssRank(), rewardAp, Rates.AP_PVE);
+					if (rewardGp > 0)
+						GloryPointsService.addGp(player.getObjectId(), rewardGp);
 				}
 				if (attacker.equals(winner) && getOwner().getAi().ask(AIQuestion.REWARD_LOOT))
 					DropRegistrationService.getInstance().registerDrop(getOwner(), player, player.getLevel(), null);

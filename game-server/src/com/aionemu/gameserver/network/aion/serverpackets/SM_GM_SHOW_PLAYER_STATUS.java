@@ -141,7 +141,10 @@ public class SM_GM_SHOW_PLAYER_STATUS extends AionServerPacket {
 		writeH(0); // [unk 3.5]
 		writeQ(pcd.getCurrentReposeEnergy());
 		writeQ(pcd.getMaxReposeEnergy());
-		writeQ(pcd.getCurrentSalvationPercent());
+		writeC(pcd.getCurrentSalvationPercent());
+		writeC(0); // id of the active absolute stat template
+		writeH(0);
+		writeF(Math.clamp(1 + pgs.getStat(StatEnum.BOOST_CHARGE_TIME, 0).getCurrent() / 100f, 0.25f, 100f)); // charge speed
 
 		writeH(0); // 4.3 NA
 		writeH(0); // 4.3 NA

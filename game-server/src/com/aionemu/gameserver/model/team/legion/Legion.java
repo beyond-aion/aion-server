@@ -339,9 +339,12 @@ public class Legion extends AionObject {
 		}
 	}
 
+	/**
+	 * The legion bonus needs a legion of level 3 or higher with ten members online, as in retail Guild::AddOnlineGuildMember.
+	 */
 	public void addBonus() {
 		List<Player> members = getOnlinePlayers();
-		if (members.size() >= 10) {
+		if (getLegionLevel() >= 3 && members.size() >= 10) {
 			if (hasBonus.compareAndSet(false, true)) {
 				for (Player member : members) {
 					PacketSendUtility.sendPacket(member, new SM_ICON_INFO(1, true));

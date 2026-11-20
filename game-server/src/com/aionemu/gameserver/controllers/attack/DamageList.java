@@ -14,9 +14,9 @@ public class DamageList {
 
 	private final Map<Creature, DamageInfo<Creature>> damageByCreature = new HashMap<>();
 
-	DamageList(Collection<AggroInfo> aggroInfos, Creature owner) {
+	DamageList(Collection<AggroInfo> aggroInfos, Creature owner, long now, long damageTimeoutMillis) {
 		for (AggroInfo aggroInfo : aggroInfos) {
-			if (aggroInfo.getDamage() <= 0)
+			if (aggroInfo.getDamage() <= 0 || aggroInfo.isDamageExpired(now, damageTimeoutMillis))
 				continue;
 			Creature attackerMaster = aggroInfo.getAttacker().getMaster();
 			// Don't include damage from creatures outside the known list.

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<abysspoint_world_mods>
+	<world_mod map_id="210010000" drop_point_light="100" drop_point_dark="110" death_penalty_light="100" death_penalty_dark="110"/>
+	<world_mod map_id="210020000" drop_point_light="100" drop_point_dark="110" death_penalty_light="100" death_penalty_dark="110"/>
+	<world_mod map_id="210040000" drop_point_light="100" drop_point_dark="110" death_penalty_light="100" death_penalty_dark="110"/>
+	<world_mod map_id="220010000" drop_point_light="110" drop_point_dark="100" death_penalty_light="110" death_penalty_dark="100"/>
+	<world_mod map_id="220020000" drop_point_light="110" drop_point_dark="100" death_penalty_light="110" death_penalty_dark="100"/>
+	<world_mod map_id="220040000" drop_point_light="110" drop_point_dark="100" death_penalty_light="110" death_penalty_dark="100"/>
+</abysspoint_world_mods>

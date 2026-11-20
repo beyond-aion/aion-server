@@ -11,24 +11,18 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
  */
 public class SM_STATUPDATE_EXP extends AionServerPacket {
 
-	private long currentExp;
-	private long recoverableExp;
-	private long maxExp;
+	private final long currentExp;
+	private final long recoverableExp;
+	private final long maxExp;
+	private final long curBoostExp;
+	private final long maxBoostExp;
 
-	private long curBoostExp = 0;
-	private long maxBoostExp = 0;
-
-	/**
-	 * @param currentExp
-	 * @param recoverableExp
-	 * @param maxExp
-	 */
-	public SM_STATUPDATE_EXP(long currentExp, long recoverableExp, long maxExp, long rep1, long rep2) {
+	public SM_STATUPDATE_EXP(long currentExp, long recoverableExp, long maxExp, long curBoostExp, long maxBoostExp) {
 		this.currentExp = currentExp;
 		this.recoverableExp = recoverableExp;
 		this.maxExp = maxExp;
-		curBoostExp = rep1;
-		maxBoostExp = rep2;
+		this.curBoostExp = curBoostExp;
+		this.maxBoostExp = maxBoostExp;
 	}
 
 	@Override
@@ -38,6 +32,8 @@ public class SM_STATUPDATE_EXP extends AionServerPacket {
 		writeQ(maxExp);
 		writeQ(curBoostExp);
 		writeQ(maxBoostExp);
+		// TODO better: the golden apple exp pool is not implemented, the client shows its icon while it is above zero
+		writeQ(0);
 	}
 
 }

@@ -47,7 +47,7 @@ public class PvpExpLimitService {
 		PvpExpLimits limits = limitsByPlayer.computeIfAbsent(killer.getObjectId(), _ -> new PvpExpLimits(now));
 		synchronized (limits) {
 			reduceAccumulatedXp(killer, limits, now);
-			belowCap = pcd.getPvpExp() <= table.getMaxFromAllUser(killer.getLevel());
+			belowCap = pcd.getPvpExp() <= table.getMaxFromAllUsers(killer.getLevel());
 			if (belowCap)
 				pcd.setPvpExp(pcd.getPvpExp() + xp);
 			Long previousCooldownEnd = limits.cooldownEndByVictim.put(victim.getObjectId(), now + table.getDelayTimeMillis(killer.getLevel()));

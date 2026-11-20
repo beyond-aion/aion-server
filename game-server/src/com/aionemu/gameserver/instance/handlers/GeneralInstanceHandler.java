@@ -251,7 +251,7 @@ public class GeneralInstanceHandler implements InstanceHandler {
 
 	@Override
 	public float getExpMultiplier() {
-		return instance.getParent().isInstanceType() ? 1.5f : 1.25f; // on retail, instances reward more exp than regular world maps
+		return 1f;
 	}
 
 	@Override

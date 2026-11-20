@@ -14,6 +14,7 @@ public class AggroInfo {
 	private int hate;
 	private int damage;
 	private long firstDamageTime;
+	private long lastDamageTime;
 	private long lastInteractionTime = 0;
 	private int hateReduceCount = 1;
 
@@ -30,11 +31,31 @@ public class AggroInfo {
 	}
 
 	void addDamage(int damage, long time) {
+		addDamage(damage, time, time);
+	}
+
+	void addDamage(int damage, long firstTime, long lastTime) {
 		if (damage > 0) {
-			if (this.damage == 0 || time < firstDamageTime)
-				firstDamageTime = time;
+			if (this.damage == 0 || firstTime < firstDamageTime)
+				firstDamageTime = firstTime;
 			this.damage += damage;
+			lastDamageTime = Math.max(lastDamageTime, lastTime);
 		}
+	}
+
+	/**
+	 * @return True if the attacker has dealt damage, but not within the given time, so its damage no longer counts.
+	 */
+	boolean isDamageExpired(long now, long timeoutMillis) {
+		return damage > 0 && now - lastDamageTime >= timeoutMillis;
+	}
+
+	/**
+	 * Drops the damage of an attacker that stopped attacking; its next hit starts a new first damage time.
+	 */
+	void expireDamage(long now, long timeoutMillis) {
+		if (isDamageExpired(now, timeoutMillis))
+			damage = 0;
 	}
 
 	public void addHate(int hate) {
@@ -59,6 +80,10 @@ public class AggroInfo {
 
 	public long getFirstDamageTime() {
 		return firstDamageTime;
+	}
+
+	public long getLastDamageTime() {
+		return lastDamageTime;
 	}
 
 	public long getLastInteractionTime() {

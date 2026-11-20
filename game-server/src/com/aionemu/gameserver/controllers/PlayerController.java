@@ -567,6 +567,7 @@ public class PlayerController extends CreatureController<Player> {
 		player.getGameStats().updateStatsTemplate();
 		player.getCommonData().updateMaxRepose();
 		player.getCommonData().resetSalvationPoints();
+		player.getCommonData().setLevelUpPlayTime(player.getCommonData().getPlayTime());
 		upgradePlayer();
 		PacketSendUtility.broadcastPacket(player, new SM_ACTION_ANIMATION(player.getObjectId(), ActionAnimation.LEVEL_UP, newLevel), true);
 
