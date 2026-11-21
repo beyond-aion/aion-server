@@ -18,6 +18,8 @@ import com.aionemu.gameserver.utils.audit.AuditLogger;
 public class FlyController {
 
 	private static final long FLY_REUSE_TIME = 10000;
+	/** A glide needs more speed than this to start. */
+	private static final float MIN_GLIDE_SPEED = 5.999f;
 	private final Player player;
 
 	public FlyController(Player player) {
@@ -221,8 +223,12 @@ public class FlyController {
 				: SM_SYSTEM_MESSAGE.STR_GLIDE_CANNOT_GLIDE_ABNORMAL_STATUS());
 			return false;
 		}
-		if (!player.canPerformMove()) {
+		if (!player.canPerformMove() || player.getEffectController().isInAnyAbnormalState(AbnormalState.CANT_GLIDE)) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GLIDE_CANNOT_GLIDE_ABNORMAL_STATUS());
+			return false;
+		}
+		if (player.getGameStats().getMovementSpeedFloat() <= MIN_GLIDE_SPEED) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GLIDE_NOT_ENOUGH_SPEED_FOR_GLIDE());
 			return false;
 		}
 		if (!player.isFlying() && player.getFlyReuseTime() > System.currentTimeMillis()) {

@@ -717,6 +717,8 @@ public class EffectController {
 				player.unsetState(CreatureState.RESTING);
 				PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.STAND), true);
 			}
+			if ((state.getId() & AbnormalState.CANT_GLIDE.getId()) != 0)
+				player.getFlyController().stopGlidingByServer();
 			// the states which interrupt an item use leave him no control over himself, so the rest of what he was busy with ends as well
 			if ((state.getId() & AbnormalState.CANCEL_ITEM_USE.getId()) != 0) {
 				if (player.isProtectionActive())

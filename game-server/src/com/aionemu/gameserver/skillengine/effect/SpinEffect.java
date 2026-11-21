@@ -38,7 +38,6 @@ public class SpinEffect extends EffectTemplate {
 		final Creature effected = effect.getEffected();
 		effected.getController().cancelCurrentSkill(effect.getEffector());
 		if (effected instanceof Player player) {
-			player.getFlyController().stopGlidingByServer();
 			player.getMoveController().abortMove();
 		}
 		effect.getEffected().getEffectController().removeParalyzeEffects();

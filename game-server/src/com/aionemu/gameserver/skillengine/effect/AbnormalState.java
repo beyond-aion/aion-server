@@ -53,7 +53,10 @@ public enum AbnormalState {
 	CANCEL_ITEM_USE(ANY_STUN.id | PARALYZE.id | SLEEP.id | CHARM.id | FEAR.id | CONFUSE.id | PETRIFICATION.id | OPENAERIAL.id | PULLED.id),
 	// suspends server driven movement like fear or confuse, without ending it
 	CANT_BE_FORCE_MOVED(PARALYZE.id | SLEEP.id | ROOT.id | CHARM.id | STUN.id | PETRIFICATION.id | STUMBLE.id | STAGGER.id | OPENAERIAL.id | SPIN.id
-		| PULLED.id | SIMPLE_MOVE_BACK.id | STUNLIKE.id | CANT_MOVE_OR_ATTACK.id);
+		| PULLED.id | SIMPLE_MOVE_BACK.id | STUNLIKE.id | CANT_MOVE_OR_ATTACK.id),
+	// ends a glide and does not let one start
+	CANT_GLIDE(PARALYZE.id | SLEEP.id | ROOT.id | CHARM.id | FEAR.id | CONFUSE.id | STUN.id | PETRIFICATION.id | STUMBLE.id | STAGGER.id
+		| OPENAERIAL.id | SNARE.id | SPIN.id | PULLED.id | STUNLIKE.id | CANT_MOVE_OR_ATTACK.id);
 
 	private final int id;
 
