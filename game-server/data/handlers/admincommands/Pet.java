@@ -9,6 +9,7 @@ import com.aionemu.gameserver.model.templates.pet.PetFunction;
 import com.aionemu.gameserver.model.templates.pet.PetTemplate;
 import com.aionemu.gameserver.services.toypet.PetAdoptionService;
 import com.aionemu.gameserver.utils.ChatUtil;
+import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 
 /**
@@ -56,7 +57,8 @@ public class Pet extends AdminCommand {
 					sendInfo(admin, "You must specify a name for the pet.");
 					return;
 				}
-				PetAdoptionService.addPet(admin, petId, params[2], 0, 0, 0, 0, 0);
+				String name = Util.convertName(params[2]);
+				PetAdoptionService.addPet(admin, petId, name, 0, 0, 0, 0, 0);
 			} else if (action.equalsIgnoreCase("del")) {
 				PetAdoptionService.surrenderPet(admin, petId);
 			}

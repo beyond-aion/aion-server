@@ -13,6 +13,7 @@ import com.aionemu.gameserver.services.toypet.PetAdoptionService;
 import com.aionemu.gameserver.services.toypet.PetMoodService;
 import com.aionemu.gameserver.services.toypet.PetService;
 import com.aionemu.gameserver.services.toypet.PetSpawnService;
+import com.aionemu.gameserver.utils.Util;
 
 /**
  * @author M@xx, xTz
@@ -110,7 +111,7 @@ public class CM_PET extends AionClientPacket {
 		Pet pet = player.getPet();
 		switch (action) {
 			case ADOPT:
-				int result = PetAdoptionService.adoptPet(player, eggObjId, templateId, petName, decorationId, color, face, head);
+				int result = PetAdoptionService.adoptPet(player, eggObjId, templateId, Util.convertName(petName), decorationId, color, face, head);
 				if (result != SM_FUNCTIONAL_PET.ADOPTION_SUCCESS)
 					sendPacket(SM_FUNCTIONAL_PET.adoptionResult(result));
 				break;
@@ -159,7 +160,7 @@ public class CM_PET extends AionClientPacket {
 				}
 				break;
 			case RENAME:
-				PetService.getInstance().renamePet(player, templateId, petName);
+				PetService.getInstance().renamePet(player, templateId, Util.convertName(petName));
 				break;
 			case MOOD:
 				if (pet != null && moodRequest != null)

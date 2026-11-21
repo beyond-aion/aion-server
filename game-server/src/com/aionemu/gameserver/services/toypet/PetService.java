@@ -78,7 +78,7 @@ public class PetService {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_TOYPET_EXISTING_NAME());
 			return;
 		}
-		petCommonData.setName(Util.convertName(name));
+		petCommonData.setName(name);
 		PlayerPetsDAO.updatePetName(petCommonData);
 		player.getPetList().setRenameCooldownEndTime(now + RENAME_COOLDOWN_SECONDS * 1000L);
 		PacketSendUtility.broadcastPacket(player, SM_FUNCTIONAL_PET.renamed(petCommonData.getObjectId(), petCommonData.getName()), true);

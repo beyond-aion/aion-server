@@ -9,7 +9,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_FUNCTIONAL_PET;
 import com.aionemu.gameserver.services.NameRestrictionService;
 import com.aionemu.gameserver.taskmanager.tasks.ExpireTimerTask;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
 
@@ -44,7 +43,6 @@ public class PetAdoptionService {
 	}
 
 	public static void addPet(Player player, int petId, String name, int decorationId, int color, int face, int head, int expireTimeSeconds) {
-		name = Util.convertName(name);
 		PetCommonData petCommonData = player.getPetList().addPet(player, petId, decorationId, color, face, head, name, expireTimeSeconds);
 		PacketSendUtility.sendPacket(player, SM_FUNCTIONAL_PET.adopted(petCommonData));
 		ExpireTimerTask.getInstance().registerExpirable(petCommonData, player);

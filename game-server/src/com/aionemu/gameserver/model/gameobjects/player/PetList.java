@@ -8,7 +8,6 @@ import java.util.Map;
 
 import com.aionemu.gameserver.dao.PlayerPetsDAO;
 import com.aionemu.gameserver.taskmanager.tasks.ExpireTimerTask;
-import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
 
 /**
@@ -70,12 +69,8 @@ public class PetList {
 		return pets.containsKey(templateId);
 	}
 
-	/**
-	 * Case-sensitive like on retail, but on the name as it will be stored, so the pet being renamed counts too.
-	 */
 	public boolean hasSameName(String name) {
-		String storedName = Util.convertName(name);
-		return pets.values().stream().anyMatch(pet -> storedName.equals(pet.getName()));
+		return pets.values().stream().anyMatch(pet -> name.equals(pet.getName()));
 	}
 
 	public long getLastSummonTime() {
