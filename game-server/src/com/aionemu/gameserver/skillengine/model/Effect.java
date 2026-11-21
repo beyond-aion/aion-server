@@ -773,6 +773,9 @@ public class Effect implements StatOwner {
 				for (EffectTemplate template : successEffects.values())
 					template.startEffect(this);
 				addCancelOnDmgObserver();
+				// a slow can come with another effect of the skill than the abnormal state, so the speed is only looked at once all of them started
+				if (abnormals != 0 && effected instanceof Player player)
+					player.getFlyController().stopGlidingIfTooSlow();
 			}
 
 			broadcastHate();

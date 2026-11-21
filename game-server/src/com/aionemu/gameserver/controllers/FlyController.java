@@ -52,8 +52,7 @@ public class FlyController {
 	}
 
 	/**
-	 * Ends the glide if he became too slow for it. Looked at whenever an abnormal state is set on him, once the skill which set it is fully applied,
-	 * since its speed penalties may come with another of its effects.
+	 * Ends the glide if he became too slow for it. Looked at whenever an effect set an abnormal state on him.
 	 */
 	public void stopGlidingIfTooSlow() {
 		if (player.isInGlidingState() && player.getGameStats().getMovementSpeedFloat() <= MIN_GLIDE_SPEED)

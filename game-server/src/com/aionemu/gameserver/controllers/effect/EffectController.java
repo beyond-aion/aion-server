@@ -16,7 +16,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.skillengine.effect.*;
 import com.aionemu.gameserver.skillengine.model.*;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * @author ATracer, Wakizashi, Sippolo, Cheatkiller, Neon
@@ -720,8 +719,6 @@ public class EffectController {
 			}
 			if ((state.getId() & AbnormalState.CANT_GLIDE.getId()) != 0)
 				player.getFlyController().stopGlidingByServer();
-			else if (player.isInGlidingState())
-				ThreadPoolManager.getInstance().schedule(player.getFlyController()::stopGlidingIfTooSlow, 1);
 			// the states which interrupt an item use leave him no control over himself, so the rest of what he was busy with ends as well
 			if ((state.getId() & AbnormalState.CANCEL_ITEM_USE.getId()) != 0) {
 				if (player.isProtectionActive())
