@@ -52,8 +52,10 @@ public class ExchangeService {
 			return;
 
 		Object monitor = new Object();
-		exchanges.put(player1.getObjectId(), new Exchange(player1, player2, monitor));
-		exchanges.put(player2.getObjectId(), new Exchange(player2, player1, monitor));
+		synchronized (monitor) { // a cancel in between would find only the first half and leave the second one behind
+			exchanges.put(player1.getObjectId(), new Exchange(player1, player2, monitor));
+			exchanges.put(player2.getObjectId(), new Exchange(player2, player1, monitor));
+		}
 
 		PacketSendUtility.sendPacket(player2, new SM_EXCHANGE_REQUEST(player1.getName()));
 		PacketSendUtility.sendPacket(player1, new SM_EXCHANGE_REQUEST(player2.getName()));
