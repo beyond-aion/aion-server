@@ -76,6 +76,10 @@ public class ChatService {
 		else {
 			AionConnection previousConnection;
 			synchronized (chatClient) { // a connection of the character that closes right now must not take it out of the broadcasts afterwards
+				if (players.get(playerId) != chatClient) { // logged out since it was looked up, see playerLogout
+					connection.close();
+					return;
+				}
 				previousConnection = chatClient.getConnection();
 				chatClient.setIdentifier(identifier);
 				chatClient.setConnection(connection);
@@ -104,10 +108,15 @@ public class ChatService {
 	public void playerLogout(int playerId) {
 		ChatClient chatClient = players.remove(playerId);
 		if (chatClient != null) {
-			BroadcastService.getInstance().removeClient(chatClient);
+			AionConnection connection;
+			// a connection that authenticates right now either sees the character gone or is closed here
+			synchronized (chatClient) {
+				BroadcastService.getInstance().removeClient(chatClient);
+				connection = chatClient.getConnection();
+			}
 			log.info("Player[id={}] logged out ", playerId);
-			if (chatClient.getConnection() != null)
-				chatClient.getConnection().close();
+			if (connection != null)
+				connection.close();
 			else
 				log.warn("Received logout event without client authentication for player {}", playerId);
 		}
