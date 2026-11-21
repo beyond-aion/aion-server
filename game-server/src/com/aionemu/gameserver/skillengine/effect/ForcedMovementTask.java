@@ -5,6 +5,7 @@ import java.util.concurrent.ScheduledFuture;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.configs.main.GeoDataConfig;
 import com.aionemu.gameserver.controllers.movement.MovementMask;
+import com.aionemu.gameserver.controllers.movement.PlayableMoveController;
 import com.aionemu.gameserver.controllers.movement.PlayerMoveController;
 import com.aionemu.gameserver.geoEngine.collision.CollisionIntention;
 import com.aionemu.gameserver.geoEngine.collision.IgnoreProperties;
@@ -32,7 +33,8 @@ abstract class ForcedMovementTask implements Runnable {
 	private static final int STEP_INTERVAL = 1000;
 	/** Players are checked this often, since they may have to be dropped or slid smoothly. Everyone else only ever takes steps. */
 	private static final int PLAYER_TICK_INTERVAL = 50;
-	private static final int TICKS_PER_GROUND_CHECK = 200 / PLAYER_TICK_INTERVAL;
+	/** The slope takes eight lookups to measure, so on ground he stands on it is measured less often than the ground below him is looked for. */
+	private static final int TICKS_PER_SLOPE_CHECK = 200 / PLAYER_TICK_INTERVAL;
 	/** A fall changes the position on every tick, so the onlookers hear about it far more often than about a target which stays put. */
 	private static final int TICKS_PER_FALL_UPDATE = 200 / PLAYER_TICK_INTERVAL;
 	private static final float TICK_SECONDS = PLAYER_TICK_INTERVAL / 1000f;
@@ -40,20 +42,12 @@ abstract class ForcedMovementTask implements Runnable {
 	private static final float STEP_SECONDS = STEP_INTERVAL / 1000f;
 	/** A step which would climb or drop this much or more is discarded. */
 	private static final float MAX_STEP_HEIGHT_DIFFERENCE = 4;
-	/**
-	 * A player higher above the ground than this is airborne. The client already drops him a hundredth of a unit above it, this leaves room for our geo
-	 * data and for the straight line a step takes over uneven ground.
-	 */
-	private static final float MAX_GROUND_DISTANCE = 1.5f;
+	/** A player higher above the ground than this is airborne, a hundredth of the height of the collider the client puts around him. */
+	private static final float MAX_GROUND_DISTANCE = 0.006f;
 	/** Downward acceleration in units per second², the one a client applies to a character who fell on foot. */
 	private static final float GRAVITY = 9.81f;
 	/** The client drops a character who just left the air with this instead. */
 	private static final float DIVE_GRAVITY = 22;
-	/**
-	 * Ground steeper than 46° (its tangent) cannot be stood on: the client lets go of the character there, which then slides down without any friction.
-	 * Between 44° and 46° the client creeps down at about a tenth of a unit per second, which is not worth following.
-	 */
-	private static final float MIN_SLIDE_SLOPE = (float) Math.tan(Math.toRadians(46));
 	/** How far around himself the ground is sampled to find the way down. */
 	private static final float SLOPE_PROBE_DISTANCE = 1;
 	/** Ground which lies deeper than this next to him is a hole or an edge rather than a slope, and must not be slid onto. */
@@ -64,8 +58,8 @@ abstract class ForcedMovementTask implements Runnable {
 	protected final Creature effected;
 	private final int ticksPerStep;
 	private int ticksUntilNextStep;
-	private int ticksUntilGroundCheck = 1;
 	private int ticksUntilResync;
+	private int ticksUntilSlopeCheck = 1;
 	private boolean groundSettled;
 	private boolean falling;
 	private boolean sliding;
@@ -129,7 +123,7 @@ abstract class ForcedMovementTask implements Runnable {
 		boolean isStepDue = --ticksUntilNextStep <= 0;
 		if (isStepDue)
 			ticksUntilNextStep = ticksPerStep;
-		if (effected instanceof Player player && isGroundCheckDue() && isAirborneOrSliding(player)) { // none of the conditions below hold a fall back
+		if (effected instanceof Player player && isAirborneOrSliding(player)) { // none of the conditions below hold a fall back
 			if (--ticksUntilResync <= 0)
 				resync();
 			return;
@@ -209,19 +203,6 @@ abstract class ForcedMovementTask implements Runnable {
 	}
 
 	/**
-	 * @return True if the ground below the player must be looked for. While he is in the air or sliding this is the case on every tick, since his
-	 *         position changes with it, on the ground it is enough to look for it now and then.
-	 */
-	private boolean isGroundCheckDue() {
-		if (falling || sliding)
-			return true;
-		if (--ticksUntilGroundCheck > 0)
-			return false;
-		ticksUntilGroundCheck = TICKS_PER_GROUND_CHECK;
-		return true;
-	}
-
-	/**
 	 * Drops a player who is in the air towards the ground, or slides him down ground he cannot stand on.
 	 *
 	 * @return True if the player is still in the air or sliding, i.e. no step must be taken.
@@ -236,6 +217,9 @@ abstract class ForcedMovementTask implements Runnable {
 			float groundZ = geo.getZ(player, player.getZ() + 0.5f, player.getZ() - MAX_GROUND_DISTANCE);
 			if (!Float.isNaN(groundZ)) {
 				standOnGround(player);
+				if (!sliding && --ticksUntilSlopeCheck > 0)
+					return false;
+				ticksUntilSlopeCheck = TICKS_PER_SLOPE_CHECK;
 				return slide(player, groundZ);
 			}
 			// the server walked him here, and it walks on ground only: nothing below him at all is a crack in our data, his client stands on solid ground
@@ -286,7 +270,8 @@ abstract class ForcedMovementTask implements Runnable {
 			}
 		}
 		float slope = (groundZ - lowestZ) / SLOPE_PROBE_DISTANCE;
-		if (slope <= MIN_SLIDE_SLOPE)
+		// between 44° and 46° the client creeps down at about a tenth of a unit per second, which is not worth following
+		if (slope <= PlayableMoveController.MAX_STANDING_SLOPE)
 			return stopSliding(); // on ground he can stand on the client brakes him to a halt within a frame
 		if (!sliding) {
 			sliding = true;
