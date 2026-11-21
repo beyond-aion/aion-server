@@ -37,6 +37,7 @@ public class DropDistributionService {
 			return;
 		// The players left to roll, the item's highest value and its winner are shared by all looters of this corpse, whose packets run on their own
 		// threads: a roll and a bid at the same time could overwrite each other and hand the item out twice.
+		boolean distributed = false;
 		synchronized (dropNpc) {
 			if (!dropNpc.containsPlayerStatus(player)) // only players the item was offered to may roll or bid (also covers a repeated roll)
 				return;
@@ -51,16 +52,19 @@ public class DropDistributionService {
 			if (requestedItem == null)
 				return;
 			if (mode == 2)
-				handleRoll(player, roll, itemId, requestedItem, dropNpc);
+				distributed = handleRoll(player, roll, itemId, requestedItem, dropNpc);
 			else if (mode == 3)
-				handleBid(player, bid, itemId, requestedItem, dropNpc);
+				distributed = handleBid(player, bid, itemId, requestedItem, dropNpc);
 			else
 				log.warn("{} requested invalid distributionMode {} for dropItem[itemId={}, index={}, npcObjId={}]", player, mode, itemId, index,
 					npcObjId);
 		}
+		// outside the lock, since the next item may be of another corpse, which is locked to offer it
+		if (distributed)
+			DropService.getInstance().offerNextItem(player, dropNpc.getLootGroupRules());
 	}
 
-	private void handleRoll(Player player, int roll, int itemId, DropItem requestedItem, DropNpc dropNpc) {
+	private boolean handleRoll(Player player, int roll, int itemId, DropItem requestedItem, DropNpc dropNpc) {
 		int luck = 0;
 		if (roll == 0) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DICE_GIVEUP_ME());
@@ -83,10 +87,10 @@ public class DropDistributionService {
 				}
 			}
 		}
-		distributeLoot(player, luck, itemId, requestedItem, dropNpc);
+		return distributeLoot(player, luck, itemId, requestedItem, dropNpc);
 	}
 
-	private void handleBid(Player player, long bid, int itemId, DropItem requestedItem, DropNpc dropNpc) {
+	private boolean handleBid(Player player, long bid, int itemId, DropItem requestedItem, DropNpc dropNpc) {
 		if ((bid > 0 && player.getInventory().getKinah() < bid) || bid < 0 || bid > 999999999)
 			bid = 0;
 		PacketSendUtility.sendPacket(player, bid > 0 ? SM_SYSTEM_MESSAGE.STR_MSG_PAY_RESULT_ME() : SM_SYSTEM_MESSAGE.STR_MSG_PAY_GIVEUP_ME());
@@ -101,10 +105,13 @@ public class DropDistributionService {
 				}
 			}
 		}
-		distributeLoot(player, bid, itemId, requestedItem, dropNpc);
+		return distributeLoot(player, bid, itemId, requestedItem, dropNpc);
 	}
 
-	private void distributeLoot(Player player, long luckyPlayer, int itemId, DropItem requestedItem, DropNpc dropNpc) {
+	/**
+	 * @return True if everyone has rolled or bid, so the item is distributed and the next one in the team's queue can be offered.
+	 */
+	private boolean distributeLoot(Player player, long luckyPlayer, int itemId, DropItem requestedItem, DropNpc dropNpc) {
 		player.unsetPlayerMode(PlayerMode.IN_ROLL);
 		// Removes player from ARRAY once they have rolled or bid
 		if (dropNpc.containsPlayerStatus(player))
@@ -116,7 +123,7 @@ public class DropDistributionService {
 		}
 
 		if (!dropNpc.getPlayerStatus().isEmpty())
-			return;
+			return false;
 		if (dropNpc.getDistributionId() == 3 && requestedItem.getWinningPlayer() != null
 			&& !DropService.getInstance().payWinningBid(requestedItem.getWinningPlayer(), dropNpc, requestedItem.getHighestValue()))
 			requestedItem.setWinningPlayer(null); // a winner without the kinah forfeits, the item is handled as if everyone had passed
@@ -140,15 +147,12 @@ public class DropDistributionService {
 		// Check if there is a Winning Player registered if not all members must have passed...
 		if (requestedItem.getWinningPlayer() == null) {
 			requestedItem.isFreeForAll(true);
-			if (lgr != null && !lgr.getItemsToBeDistributed().isEmpty())
-				DropService.getInstance().canDistribute(player, lgr.getItemsToBeDistributed().getFirst());
-			return;
+			return true;
 		}
 
 		requestedItem.isDistributeItem(true);
 		DropService.getInstance().requestDropItem(player, dropNpc.getObjectId(), dropNpc.getCurrentIndex());
-		if (lgr != null && !lgr.getItemsToBeDistributed().isEmpty())
-			DropService.getInstance().canDistribute(player, lgr.getItemsToBeDistributed().getFirst());
+		return true;
 	}
 
 	private static class SingletonHolder {

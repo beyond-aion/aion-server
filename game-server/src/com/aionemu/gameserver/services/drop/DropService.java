@@ -220,17 +220,39 @@ public class DropService {
 		PacketSendUtility.broadcastPacket(npc, new SM_LOOT_STATUS(npcObjectId, Status.LOOT_ENABLE), dropNpc::isAllowedToLoot);
 	}
 
+	/**
+	 * Offers the first item of the team's queue, if there is one.
+	 */
+	void offerNextItem(Player player, LootGroupRules lootGroupRules) {
+		if (lootGroupRules == null)
+			return;
+		DropItem next = lootGroupRules.getItemsToBeDistributed().peekFirst(); // a corpse that decays meanwhile takes its items out of the queue
+		if (next != null)
+			canDistribute(player, next);
+	}
+
 	public boolean canDistribute(Player player, DropItem requestedItem) {
 		int npcId = requestedItem.getNpcObj();
 		final DropNpc dropNpc = DropRegistrationService.getInstance().getDropRegistrationMap().get(npcId);
 		if (dropNpc == null) {
 			return false;
 		}
+		// The players who are offered the item are added to the corpse's roll state one after another, while the first of them may answer already,
+		// on their own threads: an answer before the others were added would find nobody else left to roll and hand out the item.
+		synchronized (dropNpc) {
+			return canDistribute(player, requestedItem, npcId, dropNpc);
+		}
+	}
 
+	private boolean canDistribute(Player player, DropItem requestedItem, int npcId, DropNpc dropNpc) {
 		LootGroupRules lootGroupRules = dropNpc.getLootGroupRules();
 		if (lootGroupRules == null) {
 			return true;
 		}
+		// offered already: both a finished roll and a decayed corpse offer the next item of the queue
+		if (requestedItem.getIndex() == dropNpc.getCurrentIndex() && !dropNpc.getPlayerStatus().isEmpty()
+			&& lootGroupRules.containDropItem(requestedItem))
+			return false;
 
 		int itemId = requestedItem.getDropTemplate().getItemId();
 		if (itemId != ItemId.KINAH) {
