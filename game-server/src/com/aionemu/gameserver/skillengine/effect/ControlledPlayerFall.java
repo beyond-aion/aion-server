@@ -65,6 +65,25 @@ final class ControlledPlayerFall {
 		this.player = player;
 	}
 
+	/**
+	 * Puts him where the jump he is in has carried him by now. The client reports the start of a jump only, and drops the character from wherever the
+	 * jump has taken it when it loses control, so without this the fall would start back at the takeoff.
+	 */
+	void catchUpWithJump() {
+		Vector3f jump = player.getMoveController().getJumpPosition();
+		player.getMoveController().onJumpEnded();
+		if (jump == null || GeoDataConfig.MODE != GeoDataConfig.Mode.ON || player.isFlying())
+			return;
+		GeoService geo = GeoService.getInstance();
+		Vector3f reached = geo.getClosestCollision(player, jump.getX(), jump.getY(), jump.getZ(), false, CollisionIntention.DEFAULT_COLLISIONS.getId(),
+			IgnoreProperties.ANY_RACE);
+		// the arc may already have come down to the ground, or below it
+		float groundZ = geo.getZ(player.getWorldId(), reached.getX(), reached.getY(), Math.max(reached.getZ(), player.getZ()) + MAX_GROUND_ABOVE,
+			reached.getZ(), player.getInstanceId());
+		float z = Float.isNaN(groundZ) ? reached.getZ() : groundZ;
+		World.getInstance().updatePosition(player, reached.getX(), reached.getY(), z, player.getHeading());
+	}
+
 	boolean isFalling() {
 		return falling;
 	}

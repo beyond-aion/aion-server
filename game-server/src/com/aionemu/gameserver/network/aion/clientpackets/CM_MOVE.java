@@ -168,6 +168,10 @@ public class CM_MOVE extends AionClientPacket {
 		} else {
 			m.stopFalling(z);
 		}
+		if (jumping)
+			m.onJumpStarted(x, y, z, vectorX, vectorY, vectorZ);
+		else if ((type & MovementMask.FALL) == 0) // he is back on the ground or doing something else
+			m.onJumpEnded();
 	}
 
 	/**

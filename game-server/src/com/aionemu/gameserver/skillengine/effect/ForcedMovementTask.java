@@ -61,6 +61,8 @@ abstract class ForcedMovementTask implements Runnable {
 	 */
 	static void start(Effect effect, int position, ForcedMovementTask task) {
 		Creature effected = task.effected;
+		if (task.fall != null)
+			task.fall.catchUpWithJump(); // before the stop goes out, so that it already names where he is
 		takeOverMovement(effected);
 		if (!GeoDataConfig.FEAR_ENABLE || effected instanceof Summon)
 			return;
