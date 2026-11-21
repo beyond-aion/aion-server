@@ -40,18 +40,22 @@ abstract class ForcedMovementTask implements Runnable {
 	private static final float STEP_SECONDS = STEP_INTERVAL / 1000f;
 	/** A step which would climb or drop this much or more is discarded. */
 	private static final float MAX_STEP_HEIGHT_DIFFERENCE = 4;
-	/** A player higher above the ground than this is airborne. */
+	/**
+	 * A player higher above the ground than this is airborne. The client already drops him a hundredth of a unit above it, this leaves room for our geo
+	 * data and for the straight line a step takes over uneven ground.
+	 */
 	private static final float MAX_GROUND_DISTANCE = 1.5f;
 	/** Downward acceleration in units per second², the one a client applies to a character who fell on foot. */
-	private static final float GRAVITY = 9.8f;
+	private static final float GRAVITY = 9.81f;
 	/** The client drops a character who just left the air with this instead. */
 	private static final float DIVE_GRAVITY = 22;
-	/** Ground which drops more than this per unit of distance cannot be stood on, which is the 45° the geo engine refuses to walk up as well. */
-	private static final float MAX_WALKABLE_SLOPE = 1;
+	/**
+	 * Ground steeper than 46° (its tangent) cannot be stood on: the client lets go of the character there, which then slides down without any friction.
+	 * Between 44° and 46° the client creeps down at about a tenth of a unit per second, which is not worth following.
+	 */
+	private static final float MIN_SLIDE_SLOPE = (float) Math.tan(Math.toRadians(46));
 	/** How far around himself the ground is sampled to find the way down. */
 	private static final float SLOPE_PROBE_DISTANCE = 1;
-	/** Sliding does not get faster than this, no measurement behind it, just a limit so a long slope cannot launch anyone. */
-	private static final float MAX_SLIDE_SPEED = 20;
 	/** Ground which lies deeper than this next to him is a hole or an edge rather than a slope, and must not be slid onto. */
 	private static final float MAX_SLIDE_DROP = 8;
 	/** A drop with no ground at all this far below it is a crack in the geo data rather than a cliff, as long as the server is the one moving him. */
@@ -281,15 +285,18 @@ abstract class ForcedMovementTask implements Runnable {
 				downhillAngle = angle;
 			}
 		}
-		if (groundZ - lowestZ <= MAX_WALKABLE_SLOPE * SLOPE_PROBE_DISTANCE)
-			return stopSliding();
+		float slope = (groundZ - lowestZ) / SLOPE_PROBE_DISTANCE;
+		if (slope <= MIN_SLIDE_SLOPE)
+			return stopSliding(); // on ground he can stand on the client brakes him to a halt within a frame
 		if (!sliding) {
 			sliding = true;
 			slideSpeed = 0;
 			stopStep(player); // the step which is still running would fight the slide for the position
 		}
-		slideSpeed = Math.min(MAX_SLIDE_SPEED, slideSpeed + GRAVITY * TICK_SECONDS);
-		float distance = slideSpeed * TICK_SECONDS;
+		// frictionless along the slope: gravity accelerates him by g * sin, and of the speed along the slope cos is horizontal
+		double inclination = Math.atan(slope);
+		slideSpeed += GRAVITY * (float) Math.sin(inclination) * TICK_SECONDS;
+		float distance = slideSpeed * (float) Math.cos(inclination) * TICK_SECONDS;
 		float newX = player.getX() + (float) Math.cos(downhillAngle) * distance;
 		float newY = player.getY() + (float) Math.sin(downhillAngle) * distance;
 		Vector3f blocked = geo.getClosestCollision(player, newX, newY, player.getZ(), false, CollisionIntention.DEFAULT_COLLISIONS.getId(),
