@@ -224,6 +224,14 @@ public class PetCommonData implements Expirable {
 		socialDone = true;
 	}
 
+	public synchronized boolean isSocialDone() {
+		return socialDone;
+	}
+
+	public synchronized void setSocialDone(boolean socialDone) {
+		this.socialDone = socialDone;
+	}
+
 	public synchronized long getPresentTime() {
 		return presentTime;
 	}

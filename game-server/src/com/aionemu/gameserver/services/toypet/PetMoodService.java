@@ -37,7 +37,7 @@ public class PetMoodService {
 		ThreadPoolManager.getInstance().scheduleAtFixedRate(PetMoodService::removeExpiredMoods, CLEANUP_INTERVAL_MILLIS, CLEANUP_INTERVAL_MILLIS);
 	}
 
-	private record DismissedPetMood(int petTemplateId, int moodPoints, long moodCheckTime, long presentTime, long dismissTime) {
+	private record DismissedPetMood(int petTemplateId, int moodPoints, long moodCheckTime, boolean socialDone, long presentTime, long dismissTime) {
 
 		boolean isExpired(long now) {
 			return now - dismissTime >= KEEP_MOOD_MILLIS;
@@ -54,7 +54,7 @@ public class PetMoodService {
 	 */
 	public static void onDismiss(Player player, PetCommonData pet) {
 		dismissedPetMoods.put(player.getObjectId(), new DismissedPetMood(pet.getTemplateId(), pet.getMoodPoints(), pet.getMoodCheckTime(),
-			pet.getPresentTime(), System.currentTimeMillis()));
+			pet.isSocialDone(), pet.getPresentTime(), System.currentTimeMillis()));
 	}
 
 	/**
@@ -66,6 +66,8 @@ public class PetMoodService {
 		if (mood != null && mood.petTemplateId() == pet.getTemplateId() && !mood.isExpired(System.currentTimeMillis())) {
 			pet.setMoodPoints(mood.moodPoints());
 			pet.setMoodCheckTime(mood.moodCheckTime());
+			// a re-summon must not reopen the social interaction of the current mood check
+			pet.setSocialDone(mood.socialDone());
 			pet.setPresentTime(mood.presentTime());
 		}
 	}
