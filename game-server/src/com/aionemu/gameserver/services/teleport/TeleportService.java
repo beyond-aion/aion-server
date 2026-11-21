@@ -177,7 +177,7 @@ public class TeleportService {
 			// the player stays in the world until the client confirms the animation; dying in the meantime cancels the teleport
 			PacketSendUtility.sendPacket(player, new SM_TELEPORT_LOC(worldId, instanceId, x, y, z, h, animation));
 			// task will be triggered from CM_TELEPORT_ANIMATION_DONE
-			FutureTask<Void> teleportTask = new FutureTask<>(spawnTask, null);
+			PendingTeleport teleportTask = new PendingTeleport(spawnTask);
 			player.getController().addTask(TaskId.TELEPORT, teleportTask);
 			// Stricter than retail: it waits for the confirmation without a time limit, so a client that never confirms could keep the teleport in
 			// reserve and use it later, for example to leave a fight. Remove this timer to follow retail.
@@ -528,6 +528,30 @@ public class TeleportService {
 			return false;
 		PacketSendUtility.sendPacket(player, new SM_QUESTION_WINDOW(questionMsgId, 0, 0, DataManager.NPC_DATA.getNpcTemplate(npcId).getL10n()));
 		return true;
+	}
+
+	/**
+	 * Removes a teleport that still waits for the client's confirmation.
+	 * 
+	 * @return The destination of the removed teleport, or null if none was pending or its instance is gone.
+	 */
+	public static WorldPosition removePendingTeleport(Player player) {
+		if (player.getController().getAndRemoveTask(TaskId.TELEPORT) instanceof PendingTeleport pending && !pending.isDone()) {
+			SpawnTask t = pending.spawnTask;
+			if (InstanceService.instanceExists(t.worldId(), t.instanceId()))
+				return World.getInstance().createPosition(t.worldId(), t.x(), t.y(), t.z(), t.h(), t.instanceId());
+		}
+		return null;
+	}
+
+	private static final class PendingTeleport extends FutureTask<Void> {
+
+		private final SpawnTask spawnTask;
+
+		private PendingTeleport(SpawnTask spawnTask) {
+			super(spawnTask, null);
+			this.spawnTask = spawnTask;
+		}
 	}
 
 	private record SpawnTask(Player player, int worldId, int instanceId, float x, float y, float z, byte h, TeleportAnimation animation,

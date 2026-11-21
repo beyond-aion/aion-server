@@ -31,6 +31,7 @@ import com.aionemu.gameserver.services.conquerorAndProtectorSystem.ConquerorAndP
 import com.aionemu.gameserver.services.findgroup.FindGroupService;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.summons.SummonsService;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.taskmanager.tasks.ExpireTimerTask;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.audit.GMService;
@@ -139,6 +140,7 @@ public class PlayerLeaveWorldService {
 			player.getInteractionTask().abort();
 
 		QuestEngine.getInstance().onLogOut(new QuestEnv(null, player, 0));
+		WorldPosition teleportDestination = TeleportService.removePendingTeleport(player); // before delete() cancels the task
 		Timestamp lastOnline = new Timestamp(System.currentTimeMillis());
 		player.getController().delete();
 		player.getCommonData().setOnline(false);
@@ -146,7 +148,9 @@ public class PlayerLeaveWorldService {
 		if (player.isLegionMember()) // must be called after setOnline and setLastOnline
 			LegionService.getInstance().onLogout(player);
 		FlyPathEntry flightPath = player.getFlightPathTemplate();
-		if (flightPath != null)
+		if (teleportDestination != null) // the client didn't confirm the teleport animation yet, the player logs in at its destination
+			player.setPosition(teleportDestination);
+		else if (flightPath != null)
 			player.getPosition().setXYZH(flightPath.getEndX(), flightPath.getEndY(), flightPath.getEndZ(), (byte) 0);
 		player.getCommonData().setXYZH(player.getX(), player.getY(), player.getZ(), player.getHeading());
 
