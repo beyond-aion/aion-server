@@ -17,6 +17,7 @@ import io.netty.buffer.Unpooled;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
+import io.netty.util.concurrent.Future;
 import io.netty.util.concurrent.GlobalEventExecutor;
 
 /**
@@ -88,8 +89,10 @@ public abstract class NettyConnection<S extends BaseServerPacket> {
 			return;
 		ChannelFuture lastWrite = channel.writeAndFlush(lastMessage);
 		lastWrite.addListener(ChannelFutureListener.CLOSE);
-		if (!lastWrite.isDone()) // a client that doesn't read would otherwise keep the connection open forever
-			channel.eventLoop().schedule(() -> channel.close(), CLOSE_TIMEOUT_MILLIS, TimeUnit.MILLISECONDS);
+		if (!lastWrite.isDone()) { // a client that doesn't read would otherwise keep the connection open forever
+			Future<?> timeout = channel.eventLoop().schedule(() -> channel.close(), CLOSE_TIMEOUT_MILLIS, TimeUnit.MILLISECONDS);
+			channel.closeFuture().addListener(_ -> timeout.cancel(false)); // a pending timer would keep the closed connection in memory
+		}
 	}
 
 	/**
