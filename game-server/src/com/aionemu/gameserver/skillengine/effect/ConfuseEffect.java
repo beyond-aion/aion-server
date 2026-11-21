@@ -34,7 +34,7 @@ public class ConfuseEffect extends EffectTemplate {
 		effected.getEffectController().removeHideEffects();
 
 		if (effected instanceof Player && ((Player) effected).isInGlidingState()) {
-			((Player) effected).getFlyController().onStopGliding();
+			((Player) effected).getFlyController().stopGlidingByServer();
 		}
 		effect.addToEffectedController();
 	}

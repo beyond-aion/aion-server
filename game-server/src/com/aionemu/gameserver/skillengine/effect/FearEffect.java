@@ -36,7 +36,7 @@ public class FearEffect extends EffectTemplate {
 		effected.getEffectController().removeHideEffects();
 		// Fear stops gliding
 		if (effected instanceof Player && ((Player) effected).isInGlidingState()) {
-			((Player) effected).getFlyController().onStopGliding();
+			((Player) effected).getFlyController().stopGlidingByServer();
 		}
 		effect.addToEffectedController();
 	}

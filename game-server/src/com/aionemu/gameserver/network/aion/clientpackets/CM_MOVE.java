@@ -6,6 +6,7 @@ import com.aionemu.gameserver.controllers.FlyController;
 import com.aionemu.gameserver.controllers.movement.GlideFlag;
 import com.aionemu.gameserver.controllers.movement.MovementMask;
 import com.aionemu.gameserver.controllers.movement.PlayerMoveController;
+import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.CustomPlayerState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -13,6 +14,7 @@ import com.aionemu.gameserver.model.templates.flypath.FlightPath;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_BLINK;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_FORCED_MOVE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MOVE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_POSITION;
@@ -79,8 +81,13 @@ public class CM_MOVE extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
-		if (player.isDead() || player.getEffectController().isUnderFear() || player.getEffectController().isConfused()) // just in case of bad timing
+		if (player.isDead())
 			return;
+		if (player.getEffectController().isUnderFear() || player.getEffectController().isConfused()) { // just in case of bad timing
+			if ((type & MovementMask.GLIDE) == MovementMask.GLIDE) // his client started a glide just before the effect reached it
+				PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.STOP_GLIDE));
+			return;
+		}
 		if (handleBogusPacket(player))
 			return;
 		if (handleFlyingOutOfFlyZone(player))

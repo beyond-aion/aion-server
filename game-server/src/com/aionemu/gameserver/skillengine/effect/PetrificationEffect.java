@@ -33,7 +33,7 @@ public class PetrificationEffect extends EffectTemplate {
 		effected.getController().cancelCurrentSkill(effect.getEffector());
 		// removes glide
 		if (effected instanceof Player && ((Player) effected).isInGlidingState()) {
-			((Player) effected).getFlyController().onStopGliding();
+			((Player) effected).getFlyController().stopGlidingByServer();
 		}
 		effect.getEffected().getEffectController().setAbnormal(AbnormalState.PETRIFICATION);
 		effect.setAbnormal(AbnormalState.PETRIFICATION);

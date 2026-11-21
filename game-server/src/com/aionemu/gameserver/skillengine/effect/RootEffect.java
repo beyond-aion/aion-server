@@ -40,7 +40,7 @@ public class RootEffect extends EffectTemplate {
 		effect.setAbnormal(AbnormalState.ROOT);
 		// PacketSendUtility.broadcastPacketAndReceive(effected, new SM_POSITION(effected));
 		if (effected instanceof Player player) {
-			player.getFlyController().onStopGliding();
+			player.getFlyController().stopGlidingByServer();
 			player.getMoveController().abortMove();
 		}
 

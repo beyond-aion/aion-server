@@ -58,7 +58,7 @@ public class PulledEffect extends EffectTemplate {
 		if (!effect.isReflected()) {
 			effected.getController().cancelCurrentSkill(effect.getEffector());
 			if (effected instanceof Player player) {
-				player.getFlyController().onStopGliding();
+				player.getFlyController().stopGlidingByServer();
 				player.getController().onStopMove();
 			}
 		}

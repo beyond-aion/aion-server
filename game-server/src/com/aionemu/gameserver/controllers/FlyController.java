@@ -39,6 +39,17 @@ public class FlyController {
 	}
 
 	/**
+	 * Ends the glide on the server's own account, like when an effect takes control over him, and tells his client and everyone around: unlike a
+	 * glide his client ended itself, nobody would know otherwise.
+	 */
+	public void stopGlidingByServer() {
+		if (!player.isInGlidingState())
+			return;
+		onStopGliding();
+		PacketSendUtility.broadcastToSightedPlayers(player, new SM_EMOTION(player, EmotionType.STOP_GLIDE), true);
+	}
+
+	/**
 	 * Called for every move of the player once the position was taken over, not just for glide moves: a gliding player can cross the border of
 	 * a flight area on any packet, and the client expects the free flight to end at that moment.
 	 */
