@@ -51,6 +51,12 @@ public class MovementMask {
 	 */
 	public static final byte PATH_FLY = (byte) (POSITION | ARC); // 130
 
+	/**
+	 * A position with a movement vector which clients integrate as a ballistic curve, the one combination that makes them animate a drop rather than
+	 * walk the creature to a point.
+	 */
+	public static final byte ARC_MOVE = (byte) (POSITION | MANUAL | ARC); // 194
+
 	public static final byte NPC_WALK_SLOW = (byte) 0xEA;
 	public static final byte NPC_WALK_FAST = (byte) 0xE8;
 	public static final byte NPC_RUN_SLOW = (byte) 0xE4;

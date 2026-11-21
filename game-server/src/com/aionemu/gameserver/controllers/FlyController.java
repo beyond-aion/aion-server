@@ -29,6 +29,7 @@ public class FlyController {
 			player.unsetFlyState(FlyState.GLIDING);
 			player.unsetState(CreatureState.GLIDING);
 			if (!player.isInFlyState(FlyState.FLYING)) {
+				player.getMoveController().setDivingFromFlight(); // he is left in the air, where his client drops him just as fast as after a flight
 				player.getLifeStats().triggerFpRestore();
 			} else {
 				player.getLifeStats().triggerFpReduce();
@@ -70,6 +71,8 @@ public class FlyController {
 	 * when FP is decreased to 0
 	 */
 	public void endFly(boolean broadcastPacket) {
+		if (player.isFlying()) // his client drops him much faster than someone who fell on foot
+			player.getMoveController().setDivingFromFlight();
 		player.unsetFlyState(FlyState.FLYING);
 		player.unsetFlyState(FlyState.GLIDING);
 		player.unsetState(CreatureState.FLYING);

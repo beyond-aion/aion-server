@@ -27,6 +27,7 @@ public class PlayerMoveController extends PlayableMoveController<Player> {
 	private long lastPositionFromClientMillis;
 	private WorldPosition lastPositionFromClient;
 	private long lastRandomMoveLocEffectTimeMillis;
+	private boolean divingFromFlight;
 
 	public PlayerMoveController(Player owner) {
 		super(owner);
@@ -99,6 +100,18 @@ public class PlayerMoveController extends PlayableMoveController<Player> {
 	}
 
 	/**
+	 * Marks the player as left in the air after flying or gliding: his client drops him more than twice as fast as one who fell on foot, until he
+	 * lands.
+	 */
+	public void setDivingFromFlight() {
+		divingFromFlight = true;
+	}
+
+	public boolean isDivingFromFlight() {
+		return divingFromFlight;
+	}
+
+	/**
 	 * Called for move packets in which the player falls. A fall packet that already touches the ground counts as landing.
 	 */
 	public void updateFalling(float newZ) {
@@ -126,6 +139,7 @@ public class PlayerMoveController extends PlayableMoveController<Player> {
 	 * Called for all other move packets: the player stands on the ground, flies or glides.
 	 */
 	public void stopFalling(float newZ) {
+		divingFromFlight = false;
 		if (isBelowWorld(newZ)) {
 			dieFromFall();
 			return;
@@ -158,6 +172,7 @@ public class PlayerMoveController extends PlayableMoveController<Player> {
 	 * Forgets where the current fall started, so a teleport or a landing from a flight path doesn't count as one.
 	 */
 	public void resetFalling() {
+		divingFromFlight = false;
 		fallStartZ = Float.NaN;
 		lastZ = Float.NaN;
 	}
