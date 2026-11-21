@@ -271,12 +271,13 @@ public class LoginServer {
 			sendPacket(new SM_CHANGE_ALLOWED_HDD_SERIAL(account));
 		}
 		kickOnlineCharacters(account);
+		// before the client is published, since the readers of loggedInAccounts don't synchronize on this and use its account
+		client.setAccount(account);
+		client.setState(AionConnection.State.AUTHED);
 		// a client of the same account that is still connected, e.g. at the character selection while the login server link was down
 		AionConnection previousClient = loggedInAccounts.put(accountId, client);
 		if (previousClient != null)
 			previousClient.close(SM_SYSTEM_MESSAGE.STR_KICK_ANOTHER_USER_TRY_LOGIN());
-		client.setAccount(account);
-		client.setState(AionConnection.State.AUTHED);
 		log.info("{} authed with MAC: {} and HDD serial: {}", account, client.getMacAddress(), client.getHddSerial());
 		client.sendPacket(new SM_L2AUTH_LOGIN_CHECK(true, accountName));
 		sendPacket(new SM_ACCOUNT_CONNECTION_INFO(account.getId(), System.currentTimeMillis(), client.getIP(), client.getMacAddress(), client.getHddSerial()));
