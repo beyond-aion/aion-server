@@ -60,7 +60,7 @@ import com.aionemu.gameserver.world.geo.GeoService;
 public class TeleportService {
 
 	private static final Logger log = LoggerFactory.getLogger(TeleportService.class);
-	private static final long CONFIRMATION_TIMEOUT_MILLIS = 10_000;
+	private static final long CONFIRMATION_TIMEOUT_MILLIS = 5_000;
 	private static double[] eventPosAsmodians;
 	private static double[] eventPosElyos;
 
