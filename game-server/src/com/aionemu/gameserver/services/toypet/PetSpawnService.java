@@ -69,14 +69,16 @@ public class PetSpawnService {
 	private static boolean canSummonPet(Player player) {
 		if (System.currentTimeMillis() < player.getPetList().getLastSummonTime() + SUMMON_COOLDOWN_MILLIS)
 			return false;
+		if (player.isFlying() || player.isUsingFlightTransporterOrWindstream())
+			return false;
+		// TODO: retail also refuses in play mode, check player.isInPlayMode() once retail/play-mode is merged
+		if ((player.getEffectController().getAbnormals() & SUMMON_BLOCKING_ABNORMALS) != 0)
+			return false;
 		if (player.getWorldId() == WorldMapType.LIVE_PARTY_CONCERT_HALL.getId()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PET_CANT_SUMMON_HERE());
 			return false;
 		}
-		if (player.isFlying() || player.isUsingFlightTransporterOrWindstream())
-			return false;
-		// TODO: retail also refuses in play mode, check player.isInPlayMode() once retail/play-mode is merged
-		return (player.getEffectController().getAbnormals() & SUMMON_BLOCKING_ABNORMALS) == 0;
+		return true;
 	}
 
 }
