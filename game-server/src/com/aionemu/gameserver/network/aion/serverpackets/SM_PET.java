@@ -15,7 +15,7 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
 /**
  * @author M@xx, xTz, Rolandas
  */
-public class SM_FUNCTIONAL_PET extends AionServerPacket {
+public class SM_PET extends AionServerPacket {
 
 	public static final int MAX_ENTRIES_PER_PAGE = 50;
 	public static final int ADOPTION_SUCCESS = 0;
@@ -47,15 +47,15 @@ public class SM_FUNCTIONAL_PET extends AionServerPacket {
 	private int result;
 	private int remainingSeconds;
 
-	private SM_FUNCTIONAL_PET(PetAction action) {
+	private SM_PET(PetAction action) {
 		this.action = action;
 	}
 
 	/**
 	 * Pet list on login. The client resets its list on page 0 and appends the following pages.
 	 */
-	public static SM_FUNCTIONAL_PET petList(Collection<PetCommonData> pets, int page) {
-		SM_FUNCTIONAL_PET packet = new SM_FUNCTIONAL_PET(PetAction.LOAD_PETS);
+	public static SM_PET petList(Collection<PetCommonData> pets, int page) {
+		SM_PET packet = new SM_PET(PetAction.LOAD_PETS);
 		packet.pets = pets;
 		packet.page = page;
 		return packet;
@@ -64,8 +64,8 @@ public class SM_FUNCTIONAL_PET extends AionServerPacket {
 	/**
 	 * A newly adopted pet; the client adds it to the list.
 	 */
-	public static SM_FUNCTIONAL_PET adopted(PetCommonData pet) {
-		SM_FUNCTIONAL_PET packet = new SM_FUNCTIONAL_PET(PetAction.ADOPT);
+	public static SM_PET adopted(PetCommonData pet) {
+		SM_PET packet = new SM_PET(PetAction.ADOPT);
 		packet.commonData = pet;
 		return packet;
 	}
@@ -73,8 +73,8 @@ public class SM_FUNCTIONAL_PET extends AionServerPacket {
 	/**
 	 * A pet the player gave away.
 	 */
-	public static SM_FUNCTIONAL_PET surrendered(PetCommonData pet) {
-		SM_FUNCTIONAL_PET packet = new SM_FUNCTIONAL_PET(PetAction.SURRENDER);
+	public static SM_PET surrendered(PetCommonData pet) {
+		SM_PET packet = new SM_PET(PetAction.SURRENDER);
 		packet.commonData = pet;
 		return packet;
 	}
@@ -82,8 +82,8 @@ public class SM_FUNCTIONAL_PET extends AionServerPacket {
 	/**
 	 * A pet whose rental time ran out; the client shows the "time is up" message itself.
 	 */
-	public static SM_FUNCTIONAL_PET abandoned(PetCommonData pet) {
-		SM_FUNCTIONAL_PET packet = new SM_FUNCTIONAL_PET(PetAction.ABANDON);
+	public static SM_PET abandoned(PetCommonData pet) {
+		SM_PET packet = new SM_PET(PetAction.ABANDON);
 		packet.commonData = pet;
 		return packet;
 	}
@@ -91,8 +91,8 @@ public class SM_FUNCTIONAL_PET extends AionServerPacket {
 	/**
 	 * Remaining lifetime after the pet's rental time was extended by an item.
 	 */
-	public static SM_FUNCTIONAL_PET extended(PetCommonData pet, int remainingSeconds) {
-		SM_FUNCTIONAL_PET packet = new SM_FUNCTIONAL_PET(PetAction.EXTEND_EXPIRATION);
+	public static SM_PET extended(PetCommonData pet, int remainingSeconds) {
+		SM_PET packet = new SM_PET(PetAction.EXTEND_EXPIRATION);
 		packet.commonData = pet;
 		packet.remainingSeconds = remainingSeconds;
 		return packet;
@@ -101,8 +101,8 @@ public class SM_FUNCTIONAL_PET extends AionServerPacket {
 	/**
 	 * Appearance and position of a pet that enters the world.
 	 */
-	public static SM_FUNCTIONAL_PET spawned(Pet pet) {
-		SM_FUNCTIONAL_PET packet = new SM_FUNCTIONAL_PET(PetAction.SPAWN);
+	public static SM_PET spawned(Pet pet) {
+		SM_PET packet = new SM_PET(PetAction.SPAWN);
 		packet.pet = pet;
 		packet.commonData = pet.getCommonData();
 		return packet;
@@ -111,14 +111,14 @@ public class SM_FUNCTIONAL_PET extends AionServerPacket {
 	/**
 	 * A pet that leaves the world; the client only plays the fade out animation.
 	 */
-	public static SM_FUNCTIONAL_PET dismissed(int petObjectId) {
-		SM_FUNCTIONAL_PET packet = new SM_FUNCTIONAL_PET(PetAction.DISMISS);
+	public static SM_PET dismissed(int petObjectId) {
+		SM_PET packet = new SM_PET(PetAction.DISMISS);
 		packet.petObjectId = petObjectId;
 		return packet;
 	}
 
-	public static SM_FUNCTIONAL_PET feeding(PetFeedAction action, int itemObjectId, int count, Pet pet) {
-		SM_FUNCTIONAL_PET packet = new SM_FUNCTIONAL_PET(PetAction.FOOD);
+	public static SM_PET feeding(PetFeedAction action, int itemObjectId, int count, Pet pet) {
+		SM_PET packet = new SM_PET(PetAction.FOOD);
 		packet.feedAction = action;
 		packet.itemObjectId = itemObjectId;
 		packet.count = count;
@@ -129,8 +129,8 @@ public class SM_FUNCTIONAL_PET extends AionServerPacket {
 		return packet;
 	}
 
-	public static SM_FUNCTIONAL_PET renamed(int petObjectId, String name) {
-		SM_FUNCTIONAL_PET packet = new SM_FUNCTIONAL_PET(PetAction.RENAME);
+	public static SM_PET renamed(int petObjectId, String name) {
+		SM_PET packet = new SM_PET(PetAction.RENAME);
 		packet.petObjectId = petObjectId;
 		packet.petName = name;
 		return packet;
@@ -139,8 +139,8 @@ public class SM_FUNCTIONAL_PET extends AionServerPacket {
 	/**
 	 * Result of a pet adoption or extension attempt (0 = success is not sent, 3 = invalid name, 4 = name already used).
 	 */
-	public static SM_FUNCTIONAL_PET adoptionResult(int result) {
-		SM_FUNCTIONAL_PET packet = new SM_FUNCTIONAL_PET(PetAction.RESULT);
+	public static SM_PET adoptionResult(int result) {
+		SM_PET packet = new SM_PET(PetAction.RESULT);
 		packet.result = result;
 		return packet;
 	}
@@ -148,44 +148,44 @@ public class SM_FUNCTIONAL_PET extends AionServerPacket {
 	/**
 	 * Answer to a mood check; the client plays one of three idle animations (0-2).
 	 */
-	public static SM_FUNCTIONAL_PET moodStatus(int animation) {
+	public static SM_PET moodStatus(int animation) {
 		return mood(PetMoodAction.STATUS, animation);
 	}
 
 	/**
 	 * The pet's reaction (0-8) to a social interaction and the resulting mood points.
 	 */
-	public static SM_FUNCTIONAL_PET moodSocial(int reaction, int moodPoints, int emotion) {
+	public static SM_PET moodSocial(int reaction, int moodPoints, int emotion) {
 		return mood(PetMoodAction.SOCIAL, reaction, moodPoints, emotion);
 	}
 
 	/**
 	 * The present item, or -1 if the pet has nothing to give.
 	 */
-	public static SM_FUNCTIONAL_PET moodPresent(int itemId) {
+	public static SM_PET moodPresent(int itemId) {
 		return mood(PetMoodAction.PRESENT, itemId);
 	}
 
 	/**
 	 * Mood bar and the remaining cooldowns of the mood check and the present, in seconds.
 	 */
-	public static SM_FUNCTIONAL_PET moodUpdate(PetCommonData pet) {
+	public static SM_PET moodUpdate(PetCommonData pet) {
 		return mood(PetMoodAction.UPDATE, pet.getMoodPoints(), pet.getMoodCheckRemainingSeconds(), pet.getPresentRemainingSeconds());
 	}
 
-	private static SM_FUNCTIONAL_PET mood(PetMoodAction action, int... values) {
-		SM_FUNCTIONAL_PET packet = new SM_FUNCTIONAL_PET(PetAction.MOOD);
+	private static SM_PET mood(PetMoodAction action, int... values) {
+		SM_PET packet = new SM_PET(PetAction.MOOD);
 		packet.moodAction = action;
 		packet.moodValues = values;
 		return packet;
 	}
 
-	public static SM_FUNCTIONAL_PET specialFunction(PetSpecialFunction function, boolean active) {
+	public static SM_PET specialFunction(PetSpecialFunction function, boolean active) {
 		return specialFunction(function, active, 0);
 	}
 
-	public static SM_FUNCTIONAL_PET specialFunction(PetSpecialFunction function, boolean active, int npcObjId) {
-		SM_FUNCTIONAL_PET packet = new SM_FUNCTIONAL_PET(PetAction.SPECIAL_FUNCTION);
+	public static SM_PET specialFunction(PetSpecialFunction function, boolean active, int npcObjId) {
+		SM_PET packet = new SM_PET(PetAction.SPECIAL_FUNCTION);
 		packet.specialFunction = function;
 		packet.isActing = active;
 		packet.lootNpcObjId = npcObjId;
@@ -195,7 +195,7 @@ public class SM_FUNCTIONAL_PET extends AionServerPacket {
 	/**
 	 * A successful doping action: add (item template id, slot), remove (slot) or use (item template id).
 	 */
-	public static SM_FUNCTIONAL_PET doping(PetDopingAction action, int itemId, int slot) {
+	public static SM_PET doping(PetDopingAction action, int itemId, int slot) {
 		return switch (action) {
 			case ADD -> dopingPacket(action, itemId, slot);
 			case REMOVE -> dopingPacket(action, slot);
@@ -204,14 +204,14 @@ public class SM_FUNCTIONAL_PET extends AionServerPacket {
 		};
 	}
 
-	public static SM_FUNCTIONAL_PET dopingSwitched(int slot1, int slot2) {
+	public static SM_PET dopingSwitched(int slot1, int slot2) {
 		return dopingPacket(PetDopingAction.SWITCH, slot1, slot2);
 	}
 
 	/**
 	 * Rejection of a doping action; the client rolls its optimistic UI change back.
 	 */
-	public static SM_FUNCTIONAL_PET dopingRejected(PetDopingAction action) {
+	public static SM_PET dopingRejected(PetDopingAction action) {
 		// the client reads two parameters for add and switch; -1 is the failure sentinel
 		return switch (action) {
 			case ADD, SWITCH -> dopingPacket(action, -1, -1);
@@ -219,28 +219,28 @@ public class SM_FUNCTIONAL_PET extends AionServerPacket {
 		};
 	}
 
-	private static SM_FUNCTIONAL_PET dopingPacket(PetDopingAction action, int... params) {
-		SM_FUNCTIONAL_PET packet = new SM_FUNCTIONAL_PET(PetAction.SPECIAL_FUNCTION);
+	private static SM_PET dopingPacket(PetDopingAction action, int... params) {
+		SM_PET packet = new SM_PET(PetAction.SPECIAL_FUNCTION);
 		packet.specialFunction = PetSpecialFunction.DOPING;
 		packet.dopeAction = action;
 		packet.dopeParams = params;
 		return packet;
 	}
 
-	public static SM_FUNCTIONAL_PET petAdoptDialog() {
-		return new SM_FUNCTIONAL_PET(PetAction.TALK_WITH_MERCHANT);
+	public static SM_PET petAdoptDialog() {
+		return new SM_PET(PetAction.TALK_WITH_MERCHANT);
 	}
 
-	public static SM_FUNCTIONAL_PET petAbandonDialog() {
-		return new SM_FUNCTIONAL_PET(PetAction.TALK_WITH_MINDER);
+	public static SM_PET petAbandonDialog() {
+		return new SM_PET(PetAction.TALK_WITH_MINDER);
 	}
 
-	public static SM_FUNCTIONAL_PET petAdoptHyperlink() {
-		return new SM_FUNCTIONAL_PET(PetAction.H_ADOPT);
+	public static SM_PET petAdoptHyperlink() {
+		return new SM_PET(PetAction.H_ADOPT);
 	}
 
-	public static SM_FUNCTIONAL_PET petAbandonHyperlink() {
-		return new SM_FUNCTIONAL_PET(PetAction.H_ABANDON);
+	public static SM_PET petAbandonHyperlink() {
+		return new SM_PET(PetAction.H_ABANDON);
 	}
 
 	@Override

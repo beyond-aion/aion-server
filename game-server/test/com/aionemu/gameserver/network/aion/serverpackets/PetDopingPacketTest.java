@@ -9,25 +9,25 @@ import java.nio.ByteOrder;
 
 import org.junit.jupiter.api.Test;
 
-class FunctionalPetDopingPacketTest {
+class PetDopingPacketTest {
 
 	@Test
 	void serializesSuccessfulActions() {
-		assertDopingBody(SM_FUNCTIONAL_PET.doping(ADD, 123, 2), 0, 123, 2);
-		assertDopingBody(SM_FUNCTIONAL_PET.doping(REMOVE, 123, 2), 1, 2);
-		assertDopingBody(SM_FUNCTIONAL_PET.dopingSwitched(2, 3), 2, 2, 3);
-		assertDopingBody(SM_FUNCTIONAL_PET.doping(USE, 123, 2), 3, 123);
+		assertDopingBody(SM_PET.doping(ADD, 123, 2), 0, 123, 2);
+		assertDopingBody(SM_PET.doping(REMOVE, 123, 2), 1, 2);
+		assertDopingBody(SM_PET.dopingSwitched(2, 3), 2, 2, 3);
+		assertDopingBody(SM_PET.doping(USE, 123, 2), 3, 123);
 	}
 
 	@Test
 	void serializesRejectedActions() {
-		assertDopingBody(SM_FUNCTIONAL_PET.dopingRejected(ADD), 0, -1, -1);
-		assertDopingBody(SM_FUNCTIONAL_PET.dopingRejected(REMOVE), 1, -1);
-		assertDopingBody(SM_FUNCTIONAL_PET.dopingRejected(SWITCH), 2, -1, -1);
-		assertDopingBody(SM_FUNCTIONAL_PET.dopingRejected(USE), 3, -1);
+		assertDopingBody(SM_PET.dopingRejected(ADD), 0, -1, -1);
+		assertDopingBody(SM_PET.dopingRejected(REMOVE), 1, -1);
+		assertDopingBody(SM_PET.dopingRejected(SWITCH), 2, -1, -1);
+		assertDopingBody(SM_PET.dopingRejected(USE), 3, -1);
 	}
 
-	private static void assertDopingBody(SM_FUNCTIONAL_PET packet, int action, int... values) {
+	private static void assertDopingBody(SM_PET packet, int action, int... values) {
 		ByteBuffer buffer = ByteBuffer.allocate(12).order(ByteOrder.LITTLE_ENDIAN);
 		packet.setBuf(buffer);
 		packet.writeImpl(null);

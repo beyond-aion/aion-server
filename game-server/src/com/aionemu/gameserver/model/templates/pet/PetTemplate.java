@@ -89,7 +89,7 @@ public class PetTemplate extends VisibleObjectTemplate implements L10n {
 	}
 
 	/**
-	 * Used to write to SM_FUNCTIONAL_PET packet, so checks only needed ones
+	 * Used to write to SM_PET packet, so checks only needed ones
 	 */
 	public boolean containsFunction(PetFunctionType type) {
 		if (type.getId() < 0)

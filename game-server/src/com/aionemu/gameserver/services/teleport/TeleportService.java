@@ -223,7 +223,7 @@ public class TeleportService {
 		Pet pet = player.getPet();
 		if (pet != null && pet.getController().delete()) {
 			// The owner has already despawned and won't receive the visibility callback's packet.
-			PacketSendUtility.sendPacket(player, SM_FUNCTIONAL_PET.dismissed(pet.getObjectId()));
+			PacketSendUtility.sendPacket(player, SM_PET.dismissed(pet.getObjectId()));
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PET_CANT_SUMMON_HERE());
 		}
 	}

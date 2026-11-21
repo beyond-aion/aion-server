@@ -220,10 +220,10 @@ public class DialogService {
 					PacketSendUtility.sendPacket(player, new SM_REPURCHASE(player, npc.getObjectId()));
 					break;
 				case FUNC_PET_ADOPT: // adopt pet (2.5)
-					PacketSendUtility.sendPacket(player, SM_FUNCTIONAL_PET.petAdoptDialog());
+					PacketSendUtility.sendPacket(player, SM_PET.petAdoptDialog());
 					break;
 				case FUNC_PET_ABANDON: // surrender pet (2.5)
-					PacketSendUtility.sendPacket(player, SM_FUNCTIONAL_PET.petAbandonDialog());
+					PacketSendUtility.sendPacket(player, SM_PET.petAbandonDialog());
 					break;
 				case CHARGE_ITEM_MULTI: // condition all equiped items
 					ItemChargeService.startChargingEquippedItems(player, targetObjectId, 1);
@@ -246,10 +246,10 @@ public class DialogService {
 					RelinquishCraftStatus.relinquishMasterStatus(player, CraftSkillUpdateService.getInstance().getProfessionByNpc(npc));
 					break;
 				case FUNC_PET_H_ADOPT:
-					PacketSendUtility.sendPacket(player, SM_FUNCTIONAL_PET.petAdoptHyperlink());
+					PacketSendUtility.sendPacket(player, SM_PET.petAdoptHyperlink());
 					break;
 				case FUNC_PET_H_ABANDON:
-					PacketSendUtility.sendPacket(player, SM_FUNCTIONAL_PET.petAbandonHyperlink());
+					PacketSendUtility.sendPacket(player, SM_PET.petAbandonHyperlink());
 					break;
 				case CHARGE_ITEM_MULTI2: // augmenting all equipped items
 					ItemChargeService.startChargingEquippedItems(player, targetObjectId, 2);

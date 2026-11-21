@@ -8,7 +8,7 @@ import com.aionemu.gameserver.model.gameobjects.Pet;
 import com.aionemu.gameserver.model.gameobjects.PetMoodRequest;
 import com.aionemu.gameserver.model.gameobjects.player.PetCommonData;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_FUNCTIONAL_PET;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_PET;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -85,12 +85,12 @@ public class PetMoodService {
 	 */
 	public static void onMinutePassed(Pet pet) {
 		if (pet.getCommonData().addMoodPoints(POINTS_PER_MINUTE))
-			PacketSendUtility.sendPacket(pet.getMaster(), SM_FUNCTIONAL_PET.moodUpdate(pet.getCommonData()));
+			PacketSendUtility.sendPacket(pet.getMaster(), SM_PET.moodUpdate(pet.getCommonData()));
 	}
 
 	private static void startMoodCheck(Pet pet) {
 		if (pet.getCommonData().startMoodCheck())
-			PacketSendUtility.sendPacket(pet.getMaster(), SM_FUNCTIONAL_PET.moodStatus(Rnd.get(0, 2)));
+			PacketSendUtility.sendPacket(pet.getMaster(), SM_PET.moodStatus(Rnd.get(0, 2)));
 	}
 
 	private static void socialize(Pet pet, int emotion) {
@@ -99,7 +99,7 @@ public class PetMoodService {
 			return;
 		int reaction = Rnd.get(0, 8);
 		commonData.addMoodPoints(reaction == 8 ? 900 : reaction % 2 == 0 ? 300 : 600);
-		PacketSendUtility.sendPacket(pet.getMaster(), SM_FUNCTIONAL_PET.moodSocial(reaction, commonData.getMoodPoints(), emotion));
+		PacketSendUtility.sendPacket(pet.getMaster(), SM_PET.moodSocial(reaction, commonData.getMoodPoints(), emotion));
 	}
 
 	private static void requestPresent(Pet pet) {
@@ -120,10 +120,10 @@ public class PetMoodService {
 				presentItemId = itemId;
 			commonData.setMoodPoints(0);
 			commonData.setPresentTime(System.currentTimeMillis());
-			PacketSendUtility.sendPacket(player, SM_FUNCTIONAL_PET.moodUpdate(commonData));
+			PacketSendUtility.sendPacket(player, SM_PET.moodUpdate(commonData));
 		}
 		// -1 tells the client that the pet has nothing to give, because the mood isn't full yet
-		PacketSendUtility.sendPacket(player, SM_FUNCTIONAL_PET.moodPresent(presentItemId));
+		PacketSendUtility.sendPacket(player, SM_PET.moodPresent(presentItemId));
 	}
 
 }

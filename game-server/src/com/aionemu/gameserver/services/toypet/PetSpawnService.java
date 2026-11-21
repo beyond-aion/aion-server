@@ -8,7 +8,7 @@ import com.aionemu.gameserver.model.gameobjects.Pet;
 import com.aionemu.gameserver.model.gameobjects.PetSpecialFunction;
 import com.aionemu.gameserver.model.gameobjects.player.PetCommonData;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_FUNCTIONAL_PET;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_PET;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.spawnengine.VisibleObjectSpawner;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -56,10 +56,10 @@ public class PetSpawnService {
 		} else if (petCommonData.getFeedProgress() != null)
 			petCommonData.getFeedProgress().setHungryLevel(PetHungryLevel.HUNGRY);
 		if (petCommonData.isLooting())
-			PacketSendUtility.sendPacket(player, SM_FUNCTIONAL_PET.specialFunction(PetSpecialFunction.AUTOLOOT, true));
+			PacketSendUtility.sendPacket(player, SM_PET.specialFunction(PetSpecialFunction.AUTOLOOT, true));
 		if (petCommonData.isSelling())
-			PacketSendUtility.sendPacket(player, SM_FUNCTIONAL_PET.specialFunction(PetSpecialFunction.AUTOSELL, true));
-		PacketSendUtility.sendPacket(player, SM_FUNCTIONAL_PET.moodUpdate(petCommonData));
+			PacketSendUtility.sendPacket(player, SM_PET.specialFunction(PetSpecialFunction.AUTOSELL, true));
+		PacketSendUtility.sendPacket(player, SM_PET.moodUpdate(petCommonData));
 	}
 
 	/**
