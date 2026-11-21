@@ -18,7 +18,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.geo.GeoService;
 
 /**
- * Moves a creature whose movement is taken over by an effect, like fear or confuse: one step per second. A player is also dropped or slid down by
+ * Moves a creature whose movement is taken over by an effect, like fear or confuse, one step at a time. A player is also dropped or slid down by
  * {@link ControlledPlayerFall} between the steps.
  */
 abstract class ForcedMovementTask implements Runnable {
@@ -35,6 +35,9 @@ abstract class ForcedMovementTask implements Runnable {
 	protected final Creature effected;
 	/** Only a player can be left in the air or on a slope, the server walks everyone else along ground it found itself. */
 	private final ControlledPlayerFall fall;
+	private final int stepInterval;
+	/** A player is ticked often enough for a smooth fall, everyone else only when the next step is due. */
+	private final int tickInterval;
 	private final int ticksPerStep;
 	private int ticksUntilNextStep;
 	private int ticksUntilResync;
@@ -42,17 +45,11 @@ abstract class ForcedMovementTask implements Runnable {
 	protected ForcedMovementTask(Creature effected) {
 		this.effected = effected;
 		fall = effected instanceof Player player ? new ControlledPlayerFall(player) : null;
-		ticksPerStep = getStepInterval(effected) / getTickInterval(effected);
+		stepInterval = fall != null ? PLAYER_STEP_INTERVAL : NPC_STEP_INTERVAL;
+		tickInterval = fall != null ? ControlledPlayerFall.TICK_INTERVAL : NPC_STEP_INTERVAL;
+		ticksPerStep = stepInterval / tickInterval;
 		ticksUntilNextStep = ticksPerStep;
 		ticksUntilResync = ticksPerStep;
-	}
-
-	private static int getStepInterval(Creature effected) {
-		return effected instanceof Player ? PLAYER_STEP_INTERVAL : NPC_STEP_INTERVAL;
-	}
-
-	private static int getTickInterval(Creature effected) {
-		return effected instanceof Player ? ControlledPlayerFall.TICK_INTERVAL : NPC_STEP_INTERVAL;
 	}
 
 	/**
@@ -66,8 +63,7 @@ abstract class ForcedMovementTask implements Runnable {
 		takeOverMovement(effected);
 		if (!GeoDataConfig.FEAR_ENABLE || effected instanceof Summon)
 			return;
-		int tickInterval = getTickInterval(effected);
-		ScheduledFuture<?> future = ThreadPoolManager.getInstance().scheduleAtFixedRate(task, tickInterval, tickInterval);
+		ScheduledFuture<?> future = ThreadPoolManager.getInstance().scheduleAtFixedRate(task, task.tickInterval, task.tickInterval);
 		effect.setPeriodicTask(future, position);
 	}
 
@@ -120,7 +116,7 @@ abstract class ForcedMovementTask implements Runnable {
 			return;
 		if (effected.getEffectController().isInAnyAbnormalState(AbnormalState.CANT_BE_FORCE_MOVED))
 			return; // another effect is holding or throwing it around, and it knows better than us where it is
-		if (!act())
+		if (!act() && fall != null) // an npc is stopped by its own movement once it arrived
 			resync();
 	}
 
@@ -132,7 +128,7 @@ abstract class ForcedMovementTask implements Runnable {
 	 */
 	protected boolean step(byte baseHeading, byte[] deviations) {
 		// exactly one interval worth of running, so the creature arrives just as the next step is issued
-		float stepDistance = effected.getGameStats().getMovementSpeedFloat() * getStepInterval(effected) / 1000f;
+		float stepDistance = effected.getGameStats().getMovementSpeedFloat() * stepInterval / 1000f;
 		for (byte deviation : deviations) {
 			byte heading = (byte) ((baseHeading + Rnd.get(-deviation, deviation) + 120) % 120);
 			Vector3f destination = GeoService.getInstance().findMovementCollision(effected, PositionUtil.convertHeadingToAngle(heading), stepDistance);
@@ -155,7 +151,7 @@ abstract class ForcedMovementTask implements Runnable {
 	 * Retail sends nothing at all in these moments, which is what makes a target that got stuck impossible to hit for everyone else.
 	 */
 	private void resync() {
-		if (fall != null && fall.isFalling()) {
+		if (fall.isFalling()) {
 			ticksUntilResync = TICKS_PER_FALL_UPDATE;
 			fall.sendFallArc();
 			return;
