@@ -77,10 +77,10 @@ public abstract class NettyConnection<S extends BaseServerPacket> {
 	}
 
 	/**
-	 * Sends the packet and closes the connection afterwards. Packets sent afterwards are dropped.
+	 * Sends the packet and closes the connection afterwards. Packets sent afterwards are dropped. Without a packet (null), this is {@link #close()}.
 	 */
 	public final void close(S packet) {
-		closeAfter(packet);
+		closeAfter(packet == null ? Unpooled.EMPTY_BUFFER : packet);
 	}
 
 	private void closeAfter(Object lastMessage) {

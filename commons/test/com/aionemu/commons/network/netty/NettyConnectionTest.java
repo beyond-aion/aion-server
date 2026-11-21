@@ -421,6 +421,14 @@ public class NettyConnectionTest {
 	}
 
 	@Test
+	public void closesWithoutAPacket() {
+		connection.sendPacket(new TestServerPacket(1, false));
+		connection.close(null);
+		assertEquals(1, sentPackets().size());
+		assertFalse(channel.isOpen());
+	}
+
+	@Test
 	public void closesAfterATimeoutIfTheLastPacketCantBeSent() {
 		channel.pipeline().addFirst(new ChannelOutboundHandlerAdapter() {
 
