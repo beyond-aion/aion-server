@@ -162,8 +162,8 @@ public abstract class NpcAI extends AITemplate<Npc> {
 	@Override
 	public boolean isDestinationReached() {
 		return switch (getState()) {
-			case CONFUSE, FEAR -> PositionUtil.isInRange(getOwner(), getOwner().getMoveController().getTargetX2(),
-				getOwner().getMoveController().getTargetY2(), getOwner().getMoveController().getTargetZ2(), 1);
+			// the next step is issued as it arrives, stopping it a unit short would make it halt before every step
+			case CONFUSE, FEAR -> getOwner().getMoveController().isReachedPoint();
 			case FIGHT -> SimpleAttackManager.isTargetInAttackRange(getOwner());
 			case RETURNING -> {
 				SpawnTemplate spawn = getOwner().getSpawn();

@@ -23,11 +23,12 @@ import com.aionemu.gameserver.world.geo.GeoService;
  */
 abstract class ForcedMovementTask implements Runnable {
 
-	private static final int STEP_INTERVAL = 1000;
+	/** A player takes one step per second. */
+	private static final int PLAYER_STEP_INTERVAL = 1000;
+	/** An npc takes one step per two thirds of a second, so it arrives just as the next one is issued and never stops in between. */
+	private static final int NPC_STEP_INTERVAL = 667;
 	/** A fall changes the position on every tick, so the onlookers hear about it far more often than about a target which stays put. */
 	private static final int TICKS_PER_FALL_UPDATE = 200 / ControlledPlayerFall.TICK_INTERVAL;
-	/** Each step covers exactly one interval worth of running, so the target arrives just as the next one is issued. */
-	private static final float STEP_SECONDS = STEP_INTERVAL / 1000f;
 	/** A step which would climb or drop this much or more is discarded. */
 	private static final float MAX_STEP_HEIGHT_DIFFERENCE = 4;
 
@@ -41,13 +42,17 @@ abstract class ForcedMovementTask implements Runnable {
 	protected ForcedMovementTask(Creature effected) {
 		this.effected = effected;
 		fall = effected instanceof Player player ? new ControlledPlayerFall(player) : null;
-		ticksPerStep = STEP_INTERVAL / getTickInterval(effected);
+		ticksPerStep = getStepInterval(effected) / getTickInterval(effected);
 		ticksUntilNextStep = ticksPerStep;
 		ticksUntilResync = ticksPerStep;
 	}
 
+	private static int getStepInterval(Creature effected) {
+		return effected instanceof Player ? PLAYER_STEP_INTERVAL : NPC_STEP_INTERVAL;
+	}
+
 	private static int getTickInterval(Creature effected) {
-		return effected instanceof Player ? ControlledPlayerFall.TICK_INTERVAL : STEP_INTERVAL;
+		return effected instanceof Player ? ControlledPlayerFall.TICK_INTERVAL : NPC_STEP_INTERVAL;
 	}
 
 	/**
@@ -124,7 +129,8 @@ abstract class ForcedMovementTask implements Runnable {
 	 * @param deviations maximum deviation from it in heading units (3° each), one entry per attempt
 	 */
 	protected boolean step(byte baseHeading, byte[] deviations) {
-		float stepDistance = effected.getGameStats().getMovementSpeedFloat() * STEP_SECONDS;
+		// exactly one interval worth of running, so the creature arrives just as the next step is issued
+		float stepDistance = effected.getGameStats().getMovementSpeedFloat() * getStepInterval(effected) / 1000f;
 		for (byte deviation : deviations) {
 			byte heading = (byte) ((baseHeading + Rnd.get(-deviation, deviation) + 120) % 120);
 			Vector3f destination = GeoService.getInstance().findMovementCollision(effected, PositionUtil.convertHeadingToAngle(heading), stepDistance);
