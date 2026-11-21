@@ -391,6 +391,13 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 		return tasks.remove(taskId.ordinal());
 	}
 
+	/**
+	 * @return True if the given task was still registered under this id and has been removed.
+	 */
+	public boolean removeTask(TaskId taskId, Future<?> task) {
+		return tasks.remove(taskId.ordinal(), task);
+	}
+
 	public Future<?> cancelTask(TaskId taskId) {
 		Future<?> task = getAndRemoveTask(taskId);
 		if (task != null) {

@@ -49,6 +49,7 @@ import com.aionemu.gameserver.services.trade.PricesService;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.world.*;
 import com.aionemu.gameserver.world.geo.GeoService;
@@ -59,6 +60,7 @@ import com.aionemu.gameserver.world.geo.GeoService;
 public class TeleportService {
 
 	private static final Logger log = LoggerFactory.getLogger(TeleportService.class);
+	private static final long CONFIRMATION_TIMEOUT_MILLIS = 10_000;
 	private static double[] eventPosAsmodians;
 	private static double[] eventPosElyos;
 
@@ -175,7 +177,14 @@ public class TeleportService {
 			// the player stays in the world until the client confirms the animation; dying in the meantime cancels the teleport
 			PacketSendUtility.sendPacket(player, new SM_TELEPORT_LOC(worldId, instanceId, x, y, z, h, animation));
 			// task will be triggered from CM_TELEPORT_ANIMATION_DONE
-			player.getController().addTask(TaskId.TELEPORT, new FutureTask<Void>(spawnTask, null));
+			FutureTask<Void> teleportTask = new FutureTask<>(spawnTask, null);
+			player.getController().addTask(TaskId.TELEPORT, teleportTask);
+			// Stricter than retail: it waits for the confirmation without a time limit, so a client that never confirms could keep the teleport in
+			// reserve and use it later, for example to leave a fight. Remove this timer to follow retail.
+			ThreadPoolManager.getInstance().schedule(() -> {
+				if (player.getController().removeTask(TaskId.TELEPORT, teleportTask))
+					teleportTask.run();
+			}, CONFIRMATION_TIMEOUT_MILLIS);
 		}
 	}
 
