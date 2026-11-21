@@ -299,6 +299,10 @@ public class PlayerRestrictions {
 		if (player.isDeadOrDoomed())
 			return false;
 
+		// the client is in the teleport animation and stays in the world until it confirms the teleport
+		if (player.getController().hasTask(TaskId.TELEPORT))
+			return false;
+
 		// TODO: exempt cash items when cash_item is imported into ItemTemplate
 		if (player.getWorldId() == WorldMapType.LIVE_PARTY_CONCERT_HALL.getId()
 			&& item.getItemTemplate().getItemType() == ItemType.NORMAL) {
@@ -390,6 +394,8 @@ public class PlayerRestrictions {
 	}
 
 	public static boolean canChangeEquip(Player player) {
+		if (player.getController().hasTask(TaskId.TELEPORT)) // the client is in the teleport animation
+			return false;
 		if (player.isInPrison()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ACCUSE_TARGET_IS_NOT_VALID());
 			return false;
