@@ -1,7 +1,9 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.aionemu.gameserver.model.gameobjects.player.Friend;
-import com.aionemu.gameserver.model.gameobjects.player.FriendList;
 import com.aionemu.gameserver.model.gameobjects.player.FriendList.Status;
 import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.network.aion.AionConnection;
@@ -17,12 +19,14 @@ public class SM_FRIEND_LIST extends AionServerPacket {
 
 	@Override
 	protected void writeImpl(AionConnection con) {
-		FriendList list = con.getActivePlayer().getFriendList();
+		// the count must match the entries that follow, while other players add and remove themselves concurrently
+		List<Friend> friends = new ArrayList<>();
+		con.getActivePlayer().getFriendList().forEach(friends::add);
 
-		writeH(-list.getSize());
+		writeH(-friends.size());
 		writeC(0);// unk
 
-		for (Friend friend : list) {
+		for (Friend friend : friends) {
 			writeD(friend.getObjectId());
 			writeS(friend.getName());
 			writeD(friend.getLevel());

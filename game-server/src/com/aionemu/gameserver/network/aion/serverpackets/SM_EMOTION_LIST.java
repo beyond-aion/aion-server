@@ -29,7 +29,7 @@ public class SM_EMOTION_LIST extends AionServerPacket {
 
 	public SM_EMOTION_LIST(Action action, Collection<Emotion> emotions) {
 		this.action = action;
-		this.emotions = emotions == null ? List.of() : emotions;
+		this.emotions = emotions == null ? List.of() : List.copyOf(emotions); // the player's list changes while the packet waits to be written
 	}
 
 	@Override

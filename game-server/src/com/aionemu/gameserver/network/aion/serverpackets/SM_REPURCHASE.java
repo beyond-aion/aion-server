@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
-import java.util.Collection;
+import java.util.List;
 
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -17,12 +17,13 @@ public class SM_REPURCHASE extends AionServerPacket {
 
 	private Player player;
 	private final int targetObjectId;
-	private final Collection<Item> items;
+	private final List<Item> items;
 
 	public SM_REPURCHASE(Player player, int npcId) {
 		this.player = player;
 		this.targetObjectId = npcId;
-		items = RepurchaseService.getInstance().getRepurchaseItems(player.getObjectId());
+		// a copy, since the packet is written on a network thread, while buying back takes items out of the player's set
+		items = List.copyOf(RepurchaseService.getInstance().getRepurchaseItems(player.getObjectId()));
 	}
 
 	@Override
