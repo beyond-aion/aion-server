@@ -13,7 +13,6 @@ import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_ASCENSION_MORPH;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
@@ -257,11 +256,17 @@ public class _1006Ascension extends AbstractQuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVars().getQuestVars();
 			if (player.getWorldId() == 310020000)
-				PacketSendUtility.sendPacket(player, new SM_ASCENSION_MORPH(1));
+				player.setPlayMode(true);
 			else if (var > 3 && var != 5) // 5 is class selection, quest should not reset anymore after you killed orissan
 				changeQuestStep(env, var, 3);
 		}
 		return false;
+	}
+
+	@Override
+	public void onMovieEndEvent(QuestEnv env, int movieId) {
+		if (movieId == 151) // the morph ends with the ascension movie
+			env.getPlayer().setPlayMode(false);
 	}
 
 	@Override

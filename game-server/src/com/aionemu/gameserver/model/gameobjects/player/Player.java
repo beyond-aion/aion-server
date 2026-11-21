@@ -54,6 +54,7 @@ import com.aionemu.gameserver.model.templates.npc.NpcTemplateType;
 import com.aionemu.gameserver.model.templates.ride.RideInfo;
 import com.aionemu.gameserver.model.templates.zone.ZoneType;
 import com.aionemu.gameserver.network.aion.AionConnection;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAY_MODE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_STATS_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.model.QuestState;
@@ -173,6 +174,7 @@ public class Player extends Creature {
 
 	private byte portAnimation;
 	private boolean isInSprintMode;
+	private volatile boolean playMode;
 	private List<ActionObserver> rideObservers;
 
 	private int battleReturnMap;
@@ -1465,6 +1467,21 @@ public class Player extends Creature {
 			setResPosY(0);
 			setResPosZ(0);
 		}
+	}
+
+	/**
+	 * Play mode is active while the player is morphed in the intro and ascension quest instances. It blocks channel changes and matchmaker
+	 * registration, and other players see it in SM_PLAYER_INFO.
+	 */
+	public boolean isInPlayMode() {
+		return playMode;
+	}
+
+	public void setPlayMode(boolean playMode) {
+		if (this.playMode == playMode)
+			return;
+		this.playMode = playMode;
+		PacketSendUtility.sendPacket(this, new SM_PLAY_MODE(playMode));
 	}
 
 	public boolean isLooting() {
