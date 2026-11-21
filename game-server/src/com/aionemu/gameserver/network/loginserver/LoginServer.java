@@ -101,6 +101,8 @@ public class LoginServer {
 			if (future.isSuccess())
 				return;
 			lsCon = null;
+			if (nettyServer.isShuttingDown()) // the shutdown aborted the attempt
+				return;
 			int delay;
 			if (future.cause() instanceof SocketException) {
 				delay = 10;

@@ -55,6 +55,8 @@ public class ChatServer {
 			if (future.isSuccess())
 				return;
 			csCon = null;
+			if (nettyServer.isShuttingDown()) // the shutdown aborted the attempt
+				return;
 			int delay;
 			if (future.cause() instanceof SocketException) {
 				delay = 10;
