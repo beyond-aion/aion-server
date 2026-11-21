@@ -29,16 +29,15 @@ public class PetSpawnService {
 		if (!canSummonPet(player))
 			return;
 
-		if (player.getPet() != null) {
-			if (player.getPet().getObjectTemplate().getTemplateId() == templateId)
-				return;
-			player.getPet().getController().delete();
-		}
-
 		PetCommonData petCommonData = player.getPetList().getPet(templateId);
 		if (petCommonData == null) {
 			AuditLogger.log(player, "tried to spawn invalid pet with id " + templateId);
 			return;
+		}
+		if (player.getPet() != null) {
+			if (player.getPet().getObjectTemplate().getTemplateId() == templateId)
+				return;
+			player.getPet().getController().delete();
 		}
 		PetMoodService.onSummon(player, petCommonData);
 
@@ -67,6 +66,10 @@ public class PetSpawnService {
 	 *         send one or block the UI.
 	 */
 	private static boolean canSummonPet(Player player) {
+		// Stricter than retail: it doesn't check death here, but a pet summoned while dead or between maps would escape the dismissal on death
+		// and be spawned without its owner. Remove this check to follow retail.
+		if (player.isDead() || !player.isSpawned())
+			return false;
 		if (System.currentTimeMillis() < player.getPetList().getLastSummonTime() + SUMMON_COOLDOWN_MILLIS)
 			return false;
 		if (player.isFlying() || player.isUsingFlightTransporterOrWindstream())
