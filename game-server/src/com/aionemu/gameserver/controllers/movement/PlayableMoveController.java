@@ -41,11 +41,13 @@ public abstract class PlayableMoveController<T extends Creature> extends Creatur
 	@Override
 	public void startMovingToDestination() {
 		updateLastMove();
-		if (owner.canPerformMove()) {
-			if (isControlled() && started.compareAndSet(false, true)) {
+		if (owner.canPerformMove() && isControlled()) {
+			started.set(true);
+			// anything which stops his movement, like a knockback, unregisters him, and without registering him again every step he would never move
+			PlayerMoveTaskManager.getInstance().addPlayer(owner);
+			if (sendMovePacket) { // send a new direction right away, instead of letting the next scheduled position update send it
 				this.movementMask = MovementMask.NPC_STARTMOVE;
 				sendForcedMovePacket();
-				PlayerMoveTaskManager.getInstance().addPlayer(owner);
 			}
 		}
 	}
@@ -100,6 +102,8 @@ public abstract class PlayableMoveController<T extends Creature> extends Creatur
 		 */
 
 		World.getInstance().updatePosition(owner, newX, newY, newZ, heading, false);
+		if (isControlled()) // the client does not report where the server takes him, so nothing else would notice that he entered water or left a zone
+			owner.getController().updateZone();
 		updateLastMove();
 	}
 

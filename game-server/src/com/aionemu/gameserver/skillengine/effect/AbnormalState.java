@@ -50,7 +50,10 @@ public enum AbnormalState {
 	CANT_MOVE_STATE(ANY_STUN.id | PARALYZE.id | SLEEP.id | ROOT.id | OPENAERIAL.id | PULLED.id | SANCTUARY.id),
 	DISMOUNT_RIDE(ANY_STUN.id | PARALYZE.id | SLEEP.id | ROOT.id | OPENAERIAL.id | PULLED.id | FEAR.id | SNARE.id | DEFORM.id | CONFUSE.id),
 	AUTOMATICALLY_STANDUP(PARALYZE.id | SLEEP.id | FEAR.id | STUN.id | STAGGER.id | OPENAERIAL.id | SPIN.id | DEFORM.id | PULLED.id | CONFUSE.id),
-	CANCEL_ITEM_USE(ANY_STUN.id | PARALYZE.id | SLEEP.id | CHARM.id | FEAR.id | CONFUSE.id | PETRIFICATION.id | OPENAERIAL.id | PULLED.id);
+	CANCEL_ITEM_USE(ANY_STUN.id | PARALYZE.id | SLEEP.id | CHARM.id | FEAR.id | CONFUSE.id | PETRIFICATION.id | OPENAERIAL.id | PULLED.id),
+	// suspends server driven movement like fear or confuse, without ending it
+	CANT_BE_FORCE_MOVED(PARALYZE.id | SLEEP.id | ROOT.id | CHARM.id | STUN.id | PETRIFICATION.id | STUMBLE.id | STAGGER.id | OPENAERIAL.id | SPIN.id
+		| PULLED.id | SIMPLE_MOVE_BACK.id | STUNLIKE.id | CANT_MOVE_OR_ATTACK.id);
 
 	private final int id;
 

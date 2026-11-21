@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.skillengine.effect;
 
-import java.util.concurrent.ScheduledFuture;
-
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlAttribute;
@@ -11,23 +9,16 @@ import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIState;
 import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.ai.manager.EmoteManager;
-import com.aionemu.gameserver.configs.main.GeoDataConfig;
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.ObserverType;
-import com.aionemu.gameserver.geoEngine.math.Vector3f;
-import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_POSITION;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
-import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.world.geo.GeoService;
 
 /**
  * @author Sarynth, SVDNESS
@@ -62,18 +53,11 @@ public class FearEffect extends EffectTemplate {
 		effected.getController().cancelCurrentSkill(effector);
 		effect.setAbnormal(AbnormalState.FEAR);
 		effected.getEffectController().setAbnormal(AbnormalState.FEAR);
-		effected.getMoveController().abortMove();
 		if (effected instanceof Npc) {
 			EmoteManager.emoteStartAttacking((Npc) effected, effector); // set weapon_equipped for faster walk speed
 			effected.getAi().setStateIfNot(AIState.FEAR);
-		} else if (effected instanceof Player && effected.isInState(CreatureState.WALK_MODE)) {
-			effected.unsetState(CreatureState.WALK_MODE);
-			PacketSendUtility.broadcastPacket((Player) effected, new SM_EMOTION(effected, EmotionType.RUN), true);
 		}
-		if (GeoDataConfig.FEAR_ENABLE) {
-			ScheduledFuture<?> fearTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new FearTask(effector, effected), 0, 1000);
-			effect.setPeriodicTask(fearTask, position);
-		}
+		ForcedMovementTask.start(effect, position, new FearTask(effector, effected));
 		// resistchance of fear effect to damage, if value is lower than 100, fear can be interrupted bz damage
 		// example skillId: 540 Terrible howl
 		if (resistchance < 100) {
@@ -99,25 +83,40 @@ public class FearEffect extends EffectTemplate {
 		}
 	}
 
-	record FearTask(Creature effector, Creature effected) implements Runnable {
-		//The flee point is farther than the target travels per tick (1 sec):
-		//the target never reaches it between ticks and keeps running smoothly — same as retail behavior.
-		private static final float FLEE_SECONDS = 2.5f;
+	static final class FearTask extends ForcedMovementTask {
+
+		/** Maximum heading deviation from the direct escape route, in heading units (3° each), one entry per attempt. */
+		private static final byte[] PLAYER_HEADING_DEVIATIONS = { 6, 6, 6, 6 };
+		/** Npcs try harder to get away, so their deviation cone widens with each attempt. */
+		private static final byte[] NPC_HEADING_DEVIATIONS = { 6, 17, 28, 38, 49 };
+		/** No step is taken while the target is farther away from the source of its fear than this. */
+		private static final int LEASH_DISTANCE = 100;
+		/** Closer than this the direction away from the source is undefined, and the target runs where the source faces. */
+		private static final float MIN_ESCAPE_DISTANCE = 0.05f;
+
+		private final Creature effector;
+
+		FearTask(Creature effector, Creature effected) {
+			super(effected);
+			this.effector = effector;
+		}
 
 		@Override
-		public void run() {
-			if (effected.getEffectController().isUnderFear() && PositionUtil.isInRange(effected, effector, 40)) {
-				float angle = PositionUtil.calculateAngleFrom(effector, effected);
-				float maxDistance = effected.getGameStats().getMovementSpeedFloat() * FLEE_SECONDS;
-				Vector3f closestCollision = GeoService.getInstance().findMovementCollision(effected, angle, maxDistance);
-				if (effected instanceof Npc npc) {
-					npc.getMoveController().moveToPoint(closestCollision.getX(), closestCollision.getY(), closestCollision.getZ());
-				} else {
-					byte moveAwayHeading = PositionUtil.convertAngleToHeading(angle);
-					effected.getMoveController().setNewDirection(closestCollision.getX(), closestCollision.getY(), closestCollision.getZ(), moveAwayHeading);
-					effected.getMoveController().startMovingToDestination();
-				}
-			}
+		protected boolean isInControl() {
+			return effected.getEffectController().isUnderFear();
+		}
+
+		@Override
+		protected boolean act() {
+			if (!PositionUtil.isInRange(effected, effector, LEASH_DISTANCE))
+				return false;
+			return step(getEscapeHeading(), effected instanceof Npc ? NPC_HEADING_DEVIATIONS : PLAYER_HEADING_DEVIATIONS);
+		}
+
+		private byte getEscapeHeading() {
+			if (Math.abs(effected.getX() - effector.getX()) < MIN_ESCAPE_DISTANCE && Math.abs(effected.getY() - effector.getY()) < MIN_ESCAPE_DISTANCE)
+				return effector.getHeading();
+			return PositionUtil.convertAngleToHeading(PositionUtil.calculateAngleFrom(effector, effected));
 		}
 	}
 }
