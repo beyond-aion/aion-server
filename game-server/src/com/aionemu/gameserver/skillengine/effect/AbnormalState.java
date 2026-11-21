@@ -33,10 +33,10 @@ public enum AbnormalState {
 	PULLED(1 << 22),
 	NOFLY(1 << 23),
 	SIMPLE_MOVE_BACK(1 << 24),
-	STUNLIKE(1 << 25),
-	CANT_MOVE_OR_ATTACK(1 << 26),
-	UNK(1 << 27),
-	UNK_2(1 << 28),
+	BUFF_STUN(1 << 25),
+	BUFF_SLEEP(1 << 26),
+	BUFF_SILENCE(1 << 27),
+	BUFF_BIND(1 << 28),
 	HIDE(1 << 29),
 	INVULNERABLE_WING(1 << 30),
 	SANCTUARY(1 << 31),
@@ -53,10 +53,10 @@ public enum AbnormalState {
 	CANCEL_ITEM_USE(ANY_STUN.id | PARALYZE.id | SLEEP.id | CHARM.id | FEAR.id | CONFUSE.id | PETRIFICATION.id | OPENAERIAL.id | PULLED.id),
 	// suspends server driven movement like fear or confuse, without ending it
 	CANT_BE_FORCE_MOVED(PARALYZE.id | SLEEP.id | ROOT.id | CHARM.id | STUN.id | PETRIFICATION.id | STUMBLE.id | STAGGER.id | OPENAERIAL.id | SPIN.id
-		| PULLED.id | SIMPLE_MOVE_BACK.id | STUNLIKE.id | CANT_MOVE_OR_ATTACK.id),
+		| PULLED.id | SIMPLE_MOVE_BACK.id | BUFF_STUN.id | BUFF_SLEEP.id),
 	// ends a glide and does not let one start
 	CANT_GLIDE(PARALYZE.id | SLEEP.id | ROOT.id | CHARM.id | FEAR.id | CONFUSE.id | STUN.id | PETRIFICATION.id | STUMBLE.id | STAGGER.id
-		| OPENAERIAL.id | SNARE.id | SPIN.id | PULLED.id | STUNLIKE.id | CANT_MOVE_OR_ATTACK.id);
+		| OPENAERIAL.id | SNARE.id | SPIN.id | PULLED.id | BUFF_STUN.id | BUFF_SLEEP.id);
 
 	private final int id;
 
