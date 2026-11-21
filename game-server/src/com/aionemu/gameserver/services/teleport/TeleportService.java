@@ -535,8 +535,15 @@ public class TeleportService {
 
 		@Override
 		public void run() {
-			if (animation != TeleportAnimation.NONE && (player.isDead() || !InstanceService.instanceExists(worldId, instanceId)))
-				return; // the player was killed during the animation or the target instance is gone: he stays where he is
+			if (animation != TeleportAnimation.NONE) {
+				if (player.isDead()) // killed during the animation: he stays where he is
+					return;
+				if (!InstanceService.instanceExists(worldId, instanceId)) {
+					// the target instance was destroyed during the animation: he stays, and the client gets his character back after its fade out
+					PacketSendUtility.sendPacket(player, new SM_PLAYER_INFO(player));
+					return;
+				}
+			}
 
 			abortPlayerActions(player);
 			// the player only leaves the world now (for animated teleports), so observers see the removal at the actual teleport
