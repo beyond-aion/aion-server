@@ -380,23 +380,25 @@ public class PlayerController extends CreatureController<Player> {
 
 	@Override
 	public void attackTarget(Creature target, int time, boolean skipChecks) {
-		if (!PlayerRestrictions.canAttack(getOwner(), target))
-			return;
-
 		PlayerGameStats gameStats = getOwner().getGameStats();
-		// client allows attacking from +0.̅9 meters further away
-		float attackRange = 1 + gameStats.getAttackRange().getCurrent() / 1000f;
-		// client can send CM_ATTACK before in range (even before sending CM_MOVE). we only allow it on first hit to minimize exploit potential
-		if (!target.getAggroList().isHating(getOwner()))
-			attackRange += PositionUtil.calculateMaxCoveredDistance(getOwner(), 100);
-		if (!PositionUtil.isInAttackRange(getOwner(), target, attackRange)) {
-			PacketSendUtility.sendPacket(getOwner(), SM_ATTACK_RESPONSE.TARGET_TOO_FAR_AWAY(gameStats.getAttackCounter()));
-			return;
-		}
+		if (!skipChecks) { // all of these police what the client asked for, an attack the server itself orders (like a confused player does) skips them
+			if (!PlayerRestrictions.canAttack(getOwner(), target))
+				return;
 
-		if (!GeoService.getInstance().canSee(getOwner(), target)) {
-			PacketSendUtility.sendPacket(getOwner(), SM_ATTACK_RESPONSE.STOP_OBSTACLE_IN_THE_WAY(gameStats.getAttackCounter()));
-			return;
+			// client allows attacking from +0.̅9 meters further away
+			float attackRange = 1 + gameStats.getAttackRange().getCurrent() / 1000f;
+			// client can send CM_ATTACK before in range (even before sending CM_MOVE). we only allow it on first hit to minimize exploit potential
+			if (!target.getAggroList().isHating(getOwner()))
+				attackRange += PositionUtil.calculateMaxCoveredDistance(getOwner(), 100);
+			if (!PositionUtil.isInAttackRange(getOwner(), target, attackRange)) {
+				PacketSendUtility.sendPacket(getOwner(), SM_ATTACK_RESPONSE.TARGET_TOO_FAR_AWAY(gameStats.getAttackCounter()));
+				return;
+			}
+
+			if (!GeoService.getInstance().canSee(getOwner(), target)) {
+				PacketSendUtility.sendPacket(getOwner(), SM_ATTACK_RESPONSE.STOP_OBSTACLE_IN_THE_WAY(gameStats.getAttackCounter()));
+				return;
+			}
 		}
 
 		if (target instanceof Npc) {
@@ -409,7 +411,8 @@ public class PlayerController extends CreatureController<Player> {
 		// network ping..
 		if (now - lastAutoAttackMillis + 300 < attackSpeed) {
 			// hack
-			PacketSendUtility.sendPacket(getOwner(), SM_ATTACK_RESPONSE.STOP_WITHOUT_MESSAGE(gameStats.getAttackCounter()));
+			if (!skipChecks)
+				PacketSendUtility.sendPacket(getOwner(), SM_ATTACK_RESPONSE.STOP_WITHOUT_MESSAGE(gameStats.getAttackCounter()));
 			return;
 		}
 		lastAutoAttackMillis = now;

@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.skillengine.effect;
 
-import java.util.concurrent.ScheduledFuture;
+import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
@@ -10,20 +11,14 @@ import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIState;
 import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.ai.manager.EmoteManager;
-import com.aionemu.gameserver.configs.main.GeoDataConfig;
-import com.aionemu.gameserver.geoEngine.math.Vector3f;
-import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_POSITION;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.geo.GeoService;
 
 /**
@@ -56,18 +51,11 @@ public class ConfuseEffect extends EffectTemplate {
 		effected.getController().cancelCurrentSkill(effect.getEffector());
 		effected.getEffectController().setAbnormal(AbnormalState.CONFUSE);
 		effect.setAbnormal(AbnormalState.CONFUSE);
-		effected.getMoveController().abortMove();
 		if (effected instanceof Npc) {
 			EmoteManager.emoteStartAttacking((Npc) effected, effector);
 			effected.getAi().setStateIfNot(AIState.CONFUSE);
-		} else if (effected instanceof Player && effected.isInState(CreatureState.WALK_MODE)) {
-			effected.unsetState(CreatureState.WALK_MODE);
-			PacketSendUtility.broadcastPacket((Player) effected, new SM_EMOTION(effected, EmotionType.RUN), true);
 		}
-		if (GeoDataConfig.FEAR_ENABLE) {
-			ScheduledFuture<?> confuseTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new ConfuseTask(effected), 0, 1000);
-			effect.setPeriodicTask(confuseTask, position);
-		}
+		ForcedMovementTask.start(effect, position, new ConfuseTask(effected));
 	}
 
 	@Override
@@ -81,25 +69,53 @@ public class ConfuseEffect extends EffectTemplate {
 		}
 	}
 
-	record ConfuseTask(Creature effected) implements Runnable {
-		//The flee point is farther than the target travels per tick (1 sec):
-		//the target never reaches it between ticks and keeps running smoothly — same as retail behavior.
-		private static final float FLEE_SECONDS = 2.5f;
+	/**
+	 * Npcs are confused the same way as players. Retail only does this to players and leaves a confused npc alone, so it carries on with its fight as
+	 * if nothing happened, which looks like a hole rather than a design. To go back, start no task for npcs.
+	 */
+	static final class ConfuseTask extends ForcedMovementTask {
+
+		/** A confused creature stands still, staggers off in a random direction or attacks whatever is next to it, with about equal chances. */
+		private static final int STAND_CHANCE = 33;
+		private static final int MOVE_CHANCE = 34;
+		/** Maximum heading deviation from the direction the creature faces, in heading units (3° each), one entry per attempt. */
+		private static final byte[] HEADING_DEVIATIONS = { 30, 30, 30, 30 };
+
+		ConfuseTask(Creature effected) {
+			super(effected);
+		}
 
 		@Override
-		public void run() {
-			if (effected.getEffectController().isConfused()) {
-				float angle = Rnd.nextFloat(360f);
-				float maxDistance = effected.getGameStats().getMovementSpeedFloat() * FLEE_SECONDS;
-				Vector3f closestCollision = GeoService.getInstance().findMovementCollision(effected, angle, maxDistance);
-				if (effected instanceof Npc npc) {
-					npc.getMoveController().moveToPoint(closestCollision.getX(), closestCollision.getY(), closestCollision.getZ());
-				} else {
-					byte heading = PositionUtil.convertAngleToHeading(angle);
-					effected.getMoveController().setNewDirection(closestCollision.getX(), closestCollision.getY(), closestCollision.getZ(), heading);
-					effected.getMoveController().startMovingToDestination();
-				}
-			}
+		protected boolean isInControl() {
+			return effected.getEffectController().isConfused();
+		}
+
+		@Override
+		protected boolean act() {
+			int roll = Rnd.get(0, 100);
+			if (roll < STAND_CHANCE)
+				return false;
+			if (roll < STAND_CHANCE + MOVE_CHANCE)
+				return step(effected.getHeading(), HEADING_DEVIATIONS);
+			attackAnyoneInReach();
+			return false;
+		}
+
+		private void attackAnyoneInReach() {
+			if (effected.isDead() || effected.isCasting())
+				return;
+			float attackRange = effected.getGameStats().getAttackRange().getCurrent() / 1000f;
+			List<Creature> targets = new ArrayList<>();
+			effected.getKnownList().forEachObject(object -> {
+				if (object instanceof Creature creature && !creature.isDead() && effected.isEnemy(creature)
+					&& PositionUtil.isInAttackRange(effected, creature, attackRange) && GeoService.getInstance().canSee(effected, creature))
+					targets.add(creature);
+			});
+			if (targets.isEmpty())
+				return;
+			Creature target = Rnd.get(targets);
+			effected.setTarget(target);
+			effected.getController().attackTarget(target, 0, true);
 		}
 	}
 }
