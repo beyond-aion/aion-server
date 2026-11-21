@@ -175,8 +175,13 @@ public class PetService {
 			pet.getCommonData().getDopingBag().setItem(itemId, slot);
 			PacketSendUtility.sendPacket(player, SM_PET.doping(action, itemId, slot));
 		} else if (action == PetDopingAction.SWITCH) {
-			if (slot < 2 || slot2 < 2 || slot >= PetDopingBag.MAX_ITEMS || slot2 >= PetDopingBag.MAX_ITEMS) {
+			if (!isOpenScrollSlot(pet, slot) || !isOpenScrollSlot(pet, slot2)) {
 				AuditLogger.log(player, "tried to move pet buff items in slots " + slot + " and " + slot2);
+				PacketSendUtility.sendPacket(player, SM_PET.dopingRejected(action));
+				return;
+			}
+			int[] items = pet.getCommonData().getDopingBag().getItems();
+			if (slot >= items.length || slot2 >= items.length || items[slot] == 0 || items[slot2] == 0) { // only two scrolls can swap places
 				PacketSendUtility.sendPacket(player, SM_PET.dopingRejected(action));
 				return;
 			}
@@ -231,7 +236,18 @@ public class PetService {
 		}
 	}
 
+	private boolean isOpenScrollSlot(Pet pet, int slot) {
+		PetFunction petFunction = pet.getObjectTemplate().getPetFunction(PetFunctionType.DOPING);
+		if (petFunction == null || slot < 2 || slot >= PetDopingBag.MAX_ITEMS)
+			return false;
+		return slot - 1 <= DataManager.PET_DOPING_DATA.getDopingTemplate(petFunction.getId()).getScrollsUsed();
+	}
+
 	private boolean validateSetDopeItem(Pet pet, int itemId, int slot) {
+		if (slot < 0 || slot >= PetDopingBag.MAX_ITEMS) {
+			AuditLogger.log(pet.getMaster(), "tried to set buff item " + itemId + " in invalid pet buff slot " + slot);
+			return false;
+		}
 		PetFunction petFunction = pet.getObjectTemplate().getPetFunction(PetFunctionType.DOPING);
 		if (petFunction == null) {
 			AuditLogger.log(pet.getMaster(), "tried to set buff item " + itemId + " but " + pet + " doesn't support buffing");
