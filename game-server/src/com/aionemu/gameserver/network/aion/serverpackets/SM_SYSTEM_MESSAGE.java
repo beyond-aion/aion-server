@@ -22441,7 +22441,7 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You may change a pet's name once every %DURATIONTIME1 (Time remaining: %DURATIONTIME0).
 	 */
-	public static SM_SYSTEM_MESSAGE STR_MSG_TOYPET_NAME_CHANGE_DELAY(String durationtime0, String durationtime1) {
+	public static SM_SYSTEM_MESSAGE STR_MSG_TOYPET_NAME_CHANGE_DELAY(long durationtime0, int durationtime1) {
 		return new SM_SYSTEM_MESSAGE(1400692, durationtime0, durationtime1);
 	}
 

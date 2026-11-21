@@ -23,9 +23,7 @@ public class PetSpawnService {
 
 	private static final long SUMMON_COOLDOWN_MILLIS = 5000;
 	private static final long MOOD_TICK_MILLIS = 60_000;
-	private static final int SUMMON_BLOCKING_ABNORMALS = PARALYZE.getId() | SLEEP.getId() | CHARM.getId() | FEAR.getId() | CONFUSE.getId()
-		| STUN.getId() | PETRIFICATION.getId() | STUMBLE.getId() | STAGGER.getId() | OPENAERIAL.getId() | SPIN.getId() | PULLED.getId()
-		| STUNLIKE.getId() | CANT_MOVE_OR_ATTACK.getId();
+	private static final int SUMMON_BLOCKING_ABNORMALS = CANCEL_ITEM_USE.getId() | STUNLIKE.getId() | CANT_MOVE_OR_ATTACK.getId();
 
 	public static void summonPet(Player player, int templateId) {
 		if (!canSummonPet(player))

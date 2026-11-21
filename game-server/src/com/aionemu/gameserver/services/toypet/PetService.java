@@ -13,11 +13,7 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.gameserver.dao.PlayerPetsDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.EmotionType;
-import com.aionemu.gameserver.model.gameobjects.Item;
-import com.aionemu.gameserver.model.gameobjects.Pet;
-import com.aionemu.gameserver.model.gameobjects.PetDopingAction;
-import com.aionemu.gameserver.model.gameobjects.PetFeedAction;
-import com.aionemu.gameserver.model.gameobjects.PetSpecialFunction;
+import com.aionemu.gameserver.model.gameobjects.*;
 import com.aionemu.gameserver.model.gameobjects.player.PetCommonData;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.common.legacy.LootRuleType;
@@ -27,8 +23,8 @@ import com.aionemu.gameserver.model.templates.item.actions.SkillUseAction;
 import com.aionemu.gameserver.model.templates.pet.*;
 import com.aionemu.gameserver.model.trade.TradeList;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_FUNCTIONAL_PET;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.NameRestrictionService;
 import com.aionemu.gameserver.services.TradeService;
@@ -39,7 +35,6 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.model.Effect.ForceType;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 
 /**
@@ -66,8 +61,8 @@ public class PetService {
 		if (remainingMillis > 0) {
 			// Retail ignores the request silently. The client only knows the cooldown after renaming its summoned pet (and then doesn't send the
 			// request), but the server cooldown counts for all pets of the player, so a second rename of another pet would fail without feedback.
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_TOYPET_NAME_CHANGE_DELAY(
-				Long.toString(Math.ceilDiv(remainingMillis, 1000)), Integer.toString(RENAME_COOLDOWN_SECONDS)));
+			PacketSendUtility.sendPacket(player,
+				SM_SYSTEM_MESSAGE.STR_MSG_TOYPET_NAME_CHANGE_DELAY(Math.ceilDiv(remainingMillis, 1000), RENAME_COOLDOWN_SECONDS));
 			return;
 		}
 		if (!NameRestrictionService.isValidPetName(name) || NameRestrictionService.isForbidden(name)) {
