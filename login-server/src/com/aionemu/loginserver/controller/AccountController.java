@@ -74,21 +74,24 @@ public class AccountController {
 	 * This method is for answering GameServer question about account authentication on GameServer side.
 	 */
 	public static void checkAuth(SessionKey key, GsConnection gsConnection) {
-		LoginConnection con = accountsOnLS.get(key.accountId);
-		SessionKey sessionKey = con == null ? null : con.getSessionKey(); // null while the client is still logging in
+		GameServerInfo gsi = gsConnection.getGameServerInfo();
+		LoginConnection con;
+		// The account moves from the login server to the game server in one step, under the lock of registerOnLS: a login in between would find it
+		// on neither and be let in next to this one, and a newer login that replaced the connection would lose its registration.
+		synchronized (AccountController.class) {
+			con = accountsOnLS.get(key.accountId);
+			SessionKey sessionKey = con == null ? null : con.getSessionKey(); // null while the client is still logging in
+			if (sessionKey == null || !sessionKey.checkSessionKey(key) || !accountsOnLS.remove(key.accountId, con))
+				con = null;
+			else
+				gsi.addAccountToGameServer(con.getAccount());
+		}
 
-		if (sessionKey != null && sessionKey.checkSessionKey(key)) {
-			// account is successful logged in on gs remove it from here
-			accountsOnLS.remove(key.accountId);
+		if (con != null) {
 			removeGSCharacterCounts(key.accountId);
 			con.cancelJoinTimeout();
 
-			GameServerInfo gsi = gsConnection.getGameServerInfo();
 			Account acc = con.getAccount();
-
-			// Add account to accounts on GameServer list and update accounts last server
-			gsi.addAccountToGameServer(acc);
-
 			acc.setLastServer(gsi.getId());
 			AccountDAO.updateLastServer(acc.getId(), acc.getLastServer());
 
