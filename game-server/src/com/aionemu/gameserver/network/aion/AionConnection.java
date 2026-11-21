@@ -97,8 +97,6 @@ public class AionConnection extends NettyConnection<AionServerPacket> {
 	private String macAddress;
 	private String hddSerial;
 
-	private ScheduledFuture<?> connectionAliveChecker;
-
 	/** packet flood filter **/
 	private Map<Integer, Long> pffRequests;
 
@@ -123,8 +121,10 @@ public class AionConnection extends NettyConnection<AionServerPacket> {
 	@Override
 	protected void onConnect() {
 		log.debug("connection from: {}", getIP());
-		connectionAliveChecker = getChannel().eventLoop().scheduleAtFixedRate(this::closeIfHangedUp, CM_PING.CLIENT_PING_INTERVAL,
+		ScheduledFuture<?> connectionAliveChecker = getChannel().eventLoop().scheduleAtFixedRate(this::closeIfHangedUp, CM_PING.CLIENT_PING_INTERVAL,
 			CM_PING.CLIENT_PING_INTERVAL, TimeUnit.MILLISECONDS);
+		// not in onDisconnect, which waits for a packet that hangs: the timer would keep logging and closing the closed connection meanwhile
+		getChannel().closeFuture().addListener(_ -> connectionAliveChecker.cancel(false));
 		sendPacket(new SM_KEY());
 	}
 
@@ -216,8 +216,6 @@ public class AionConnection extends NettyConnection<AionServerPacket> {
 
 	@Override
 	protected final void onDisconnect() {
-		if (connectionAliveChecker != null)
-			connectionAliveChecker.cancel(false);
 		LoginServer.getInstance().onDisconnect(this);
 
 		String msg = getAccount() == null ? "" : " " + getAccount();
