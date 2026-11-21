@@ -90,6 +90,11 @@ public class ClientPacketHandler {
 			0x4917 ?   (H: pktsz(0x18)   H: opcode  D: taskID?(search in queue list for task with opcode 0x4916)   D: channelId  Q: userID D: ? )
 			0x4920 ? 
 		 */
+		if (buf.readableBytes() < 4) { // would fail on the header below and be logged as an error with its stack trace
+			log.warn("{} sent a packet of {} byte(s) without a complete header, disconnecting", connection, buf.readableBytes());
+			connection.close();
+			return null;
+		}
 		int opCode = buf.readUnsignedShortLE();
 		buf.skipBytes(2); // sequence number, which the client counts from the start value in SM_PLAYER_AUTH_RESPONSE (not checked)
 		State state = connection.getState();
