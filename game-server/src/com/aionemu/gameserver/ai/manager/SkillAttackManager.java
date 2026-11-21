@@ -103,7 +103,7 @@ public class SkillAttackManager {
 
 	public static boolean cantUseSkill(NpcSkillEntry skill, Creature owner) {
 		return owner.isTransformed() && owner.getTransformModel().cantUseSkills()
-			|| owner.getEffectController().isInAnyAbnormalState(AbnormalState.CANT_ATTACK_STATE)
+			|| owner.getEffectController().isInAnyAbnormalState(owner.getCantAttackState())
 			|| owner.getEffectController().isAbnormalSet(AbnormalState.SILENCE) && skill.getSkillTemplate().getType() == SkillType.MAGICAL
 			|| owner.getEffectController().isAbnormalSet(AbnormalState.BIND) && skill.getSkillTemplate().getType() == SkillType.PHYSICAL;
 	}

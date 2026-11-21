@@ -8,11 +8,8 @@ import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlType;
 
 import com.aionemu.commons.utils.Rnd;
-import com.aionemu.gameserver.ai.AIState;
-import com.aionemu.gameserver.ai.event.AIEventType;
-import com.aionemu.gameserver.ai.manager.EmoteManager;
 import com.aionemu.gameserver.model.gameobjects.Creature;
-import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_POSITION;
 import com.aionemu.gameserver.skillengine.model.Effect;
@@ -41,33 +38,24 @@ public class ConfuseEffect extends EffectTemplate {
 
 	@Override
 	public void startEffect(Effect effect) {
-		final Creature effector = effect.isReflected() ? effect.getOriginalEffected() : effect.getEffector();
 		final Creature effected = effect.getEffected();
 		effected.getController().cancelCurrentSkill(effect.getEffector());
 		effected.getEffectController().setAbnormal(AbnormalState.CONFUSE);
 		effect.setAbnormal(AbnormalState.CONFUSE);
-		if (effected instanceof Npc) {
-			EmoteManager.emoteStartAttacking((Npc) effected, effector);
-			effected.getAi().setStateIfNot(AIState.CONFUSE);
-		}
-		ForcedMovementTask.start(effect, position, new ConfuseTask(effected));
+		if (effected instanceof Player) // npcs carry on with their fight, nothing but the cast they were busy with ends
+			ForcedMovementTask.start(effect, position, new ConfuseTask(effected));
 	}
 
 	@Override
 	public void endEffect(Effect effect) {
-		effect.getEffected().getEffectController().unsetAbnormal(AbnormalState.CONFUSE);
-		effect.getEffected().getMoveController().abortMove();
-		PacketSendUtility.broadcastPacketAndReceive(effect.getEffected(), new SM_POSITION(effect.getEffected()));
-		if (effect.getEffected() instanceof Npc) {
-			effect.getEffected().getAi().setStateIfNot(AIState.IDLE);
-			effect.getEffected().getAi().onCreatureEvent(AIEventType.ATTACK, effect.getEffected());
+		Creature effected = effect.getEffected();
+		effected.getEffectController().unsetAbnormal(AbnormalState.CONFUSE);
+		if (effected instanceof Player) {
+			effected.getMoveController().abortMove();
+			PacketSendUtility.broadcastPacketAndReceive(effected, new SM_POSITION(effected));
 		}
 	}
 
-	/**
-	 * Npcs are confused the same way as players. Retail only does this to players and leaves a confused npc alone, so it carries on with its fight as
-	 * if nothing happened, which looks like a hole rather than a design. To go back, start no task for npcs.
-	 */
 	static final class ConfuseTask extends ForcedMovementTask {
 
 		/** A confused creature stands still, staggers off in a random direction or attacks whatever is next to it, with about equal chances. */

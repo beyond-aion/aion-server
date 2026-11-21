@@ -170,7 +170,7 @@ public class CustomInstanceBossAI extends GeneralNpcAI {
 			&& getOwner().getSkillCoolDown(1968) <= System.currentTimeMillis())
 			return 283;
 
-		if (getEffectController().isInAnyAbnormalState(AbnormalState.CANT_ATTACK_STATE))
+		if (getEffectController().isInAnyAbnormalState(getOwner().getCantAttackState()))
 			return -1;
 
 		// compute skill selection:

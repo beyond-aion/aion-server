@@ -28,6 +28,7 @@ import com.aionemu.gameserver.model.templates.npcskill.QueuedNpcSkillTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_CUSTOM_SETTINGS;
 import com.aionemu.gameserver.services.TribeRelationService;
+import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.skillengine.effect.SummonOwner;
 import com.aionemu.gameserver.spawnengine.WalkerGroup;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -59,6 +60,11 @@ public class Npc extends Creature {
 		moveController = new NpcMoveController(this);
 		skillList = DataManager.NPC_SKILL_DATA.getOrCreateNpcSkillList(getNpcId());
 		setupStatContainers();
+	}
+
+	@Override
+	public AbnormalState getCantAttackState() {
+		return AbnormalState.NPC_CANT_ATTACK_STATE;
 	}
 
 	@Override

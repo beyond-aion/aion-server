@@ -42,8 +42,7 @@ public class AttackEventHandler {
 			WalkManager.stopWalking(npcAI);
 		}
 		npcAI.getOwner().getGameStats().renewLastAttackedTime();
-		boolean allowFight = npcAI.getState() != AIState.FEAR && !npcAI.getOwner().getEffectController().isAbnormalSet(AbnormalState.FEAR)
-				&& npcAI.getState() != AIState.CONFUSE && !npcAI.getOwner().getEffectController().isAbnormalSet(AbnormalState.CONFUSE);
+		boolean allowFight = npcAI.getState() != AIState.FEAR && !npcAI.getOwner().getEffectController().isAbnormalSet(AbnormalState.FEAR);
 		if (allowFight && npcAI.setStateIfNot(AIState.FIGHT)) {
 			if (npcAI.isLogging())
 				AILogger.info(npcAI, "onAttack() -> startAttacking");
