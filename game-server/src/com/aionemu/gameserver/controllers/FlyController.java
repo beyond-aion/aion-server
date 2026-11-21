@@ -52,6 +52,15 @@ public class FlyController {
 	}
 
 	/**
+	 * Ends the glide if he became too slow for it. Looked at whenever an abnormal state is set on him, once the skill which set it is fully applied,
+	 * since its speed penalties may come with another of its effects.
+	 */
+	public void stopGlidingIfTooSlow() {
+		if (player.isInGlidingState() && player.getGameStats().getMovementSpeedFloat() <= MIN_GLIDE_SPEED)
+			stopGlidingByServer();
+	}
+
+	/**
 	 * Called for every move of the player once the position was taken over, not just for glide moves: a gliding player can cross the border of
 	 * a flight area on any packet, and the client expects the free flight to end at that moment.
 	 */
