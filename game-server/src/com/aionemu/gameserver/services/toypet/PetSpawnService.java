@@ -29,14 +29,6 @@ public class PetSpawnService {
 		if (!canSummonPet(player))
 			return;
 
-		if (player.getWorldId() == WorldMapType.LIVE_PARTY_CONCERT_HALL.getId()) {
-			Pet pet = player.getPet();
-			if (pet != null)
-				pet.getController().delete();
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PET_CANT_SUMMON_HERE());
-			return;
-		}
-
 		if (player.getPet() != null) {
 			if (player.getPet().getObjectTemplate().getTemplateId() == templateId)
 				return;
@@ -71,12 +63,16 @@ public class PetSpawnService {
 	}
 
 	/**
-	 * A pet can't be summoned within 5 seconds of the last summon, in the air (flying, gliding, windstreams and flight transporters) or under hard
-	 * crowd control. The request is ignored without a message.
+	 * @return True if the client allows spawning a pet right now and there are no map restrictions. A message is sent where the client does not already
+	 *         send one or block the UI.
 	 */
 	private static boolean canSummonPet(Player player) {
 		if (System.currentTimeMillis() < player.getPetList().getLastSummonTime() + SUMMON_COOLDOWN_MILLIS)
 			return false;
+		if (player.getWorldId() == WorldMapType.LIVE_PARTY_CONCERT_HALL.getId()) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PET_CANT_SUMMON_HERE());
+			return false;
+		}
 		if (player.isFlying() || player.isUsingFlightTransporterOrWindstream())
 			return false;
 		// TODO: retail also refuses in play mode, check player.isInPlayMode() once retail/play-mode is merged
