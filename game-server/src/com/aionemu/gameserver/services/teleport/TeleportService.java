@@ -212,7 +212,7 @@ public class TeleportService {
 		dismissPetOnArrival(player);
 	}
 
-	private static void movePet(Player player, int worldId, int instanceId, float x, float y, float z, byte heading) {
+	private static void movePetIfAllowed(Player player, int worldId, int instanceId, float x, float y, float z, byte heading) {
 		if (worldId != WorldMapType.LIVE_PARTY_CONCERT_HALL.getId())
 			World.getInstance().setPosition(player.getPet(), worldId, instanceId, x, y, z, heading);
 	}
@@ -235,7 +235,7 @@ public class TeleportService {
 			player.getController().cancelTask(TaskId.TELEPORT);
 			abortPlayerActions(player);
 			World.getInstance().setPosition(player, pos.getMapId(), pos.getInstanceId(), pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
-			movePet(player, pos.getMapId(), pos.getInstanceId(), pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
+			movePetIfAllowed(player, pos.getMapId(), pos.getInstanceId(), pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
 			spawnOnSameMap(player);
 		} else if (player.isDead()) {
 			teleportDeadTo(player, pos.getMapId(), pos.getInstanceId(), pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
@@ -249,8 +249,8 @@ public class TeleportService {
 			ConquerorAndProtectorService.getInstance().onLeaveMap(player);
 			InstanceService.onLeaveInstance(player);
 		}
-		movePet(player, worldId, instanceId, x, y, z, heading);
 		World.getInstance().setPosition(player, worldId, instanceId, x, y, z, heading);
+		movePetIfAllowed(player, worldId, instanceId, x, y, z, heading);
 		sendWorldChange(player);
 		player.setPortAnimation(ArrivalAnimation.LANDING);
 		PacketSendUtility.sendPacket(player, new SM_PLAYER_INFO(player));
@@ -542,7 +542,7 @@ public class TeleportService {
 				InstanceService.onLeaveInstance(player);
 			}
 			World.getInstance().setPosition(player, worldId, instanceId, x, y, z, h);
-			movePet(player, worldId, instanceId, x, y, z, h);
+			movePetIfAllowed(player, worldId, instanceId, x, y, z, h);
 
 			player.setPortAnimation(animation.getDefaultArrivalAnimation());
 			if (onArrive != null)
