@@ -19,6 +19,7 @@ import com.aionemu.gameserver.model.animations.ArrivalAnimation;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.Pet;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.BindPointPosition;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -48,6 +49,7 @@ import com.aionemu.gameserver.services.trade.PricesService;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.world.*;
 import com.aionemu.gameserver.world.geo.GeoService;
@@ -58,6 +60,7 @@ import com.aionemu.gameserver.world.geo.GeoService;
 public class TeleportService {
 
 	private static final Logger log = LoggerFactory.getLogger(TeleportService.class);
+	private static final long CONFIRMATION_TIMEOUT_MILLIS = 5_000;
 	private static double[] eventPosAsmodians;
 	private static double[] eventPosElyos;
 
@@ -164,19 +167,24 @@ public class TeleportService {
 
 	private static void sendLoc(Player player, int worldId, int instanceId, float x, float y, float z, byte h,
 		TeleportAnimation animation, Runnable onArrive) {
-		abortPlayerActions(player);
+		// a new teleport supersedes a pending one, including an instant move during another teleport's animation
+		player.getController().cancelTask(TaskId.TELEPORT);
 		player.unblockQuitting();
-		// despawn from world and send animation to others (also ends flying)
-		World.getInstance().despawn(player, animation.getDefaultObjectDeleteAnimation());
-
 		SpawnTask spawnTask = new SpawnTask(player, worldId, instanceId, x, y, z, h, animation, onArrive);
 		if (animation == TeleportAnimation.NONE) // instant teleport (don't wait for player fade-out)
 			spawnTask.run();
 		else {
-			// send teleport animation to player and trigger CM_TELEPORT_ANIMATION_DONE when the animation ended
+			// the player stays in the world until the client confirms the animation; dying in the meantime cancels the teleport
 			PacketSendUtility.sendPacket(player, new SM_TELEPORT_LOC(worldId, instanceId, x, y, z, h, animation));
 			// task will be triggered from CM_TELEPORT_ANIMATION_DONE
-			player.getController().addTask(TaskId.TELEPORT, new FutureTask<Void>(spawnTask, null));
+			PendingTeleport teleportTask = new PendingTeleport(spawnTask);
+			player.getController().addTask(TaskId.TELEPORT, teleportTask);
+			// Stricter than retail: it waits for the confirmation without a time limit, so a client that never confirms could keep the teleport in
+			// reserve and use it later, for example to leave a fight. Remove this timer to follow retail.
+			ThreadPoolManager.getInstance().schedule(() -> {
+				if (player.getController().removeTask(TaskId.TELEPORT, teleportTask))
+					teleportTask.run();
+			}, CONFIRMATION_TIMEOUT_MILLIS);
 		}
 	}
 
@@ -206,11 +214,36 @@ public class TeleportService {
 		player.setPortAnimation(ArrivalAnimation.NONE);
 	}
 
+	private static void sendWorldChange(Player player) {
+		PacketSendUtility.sendPacket(player, new SM_CHANNEL_INFO(player));
+		PacketSendUtility.sendPacket(player, new SM_PLAYER_SPAWN(player));
+		dismissPetOnArrival(player);
+	}
+
+	private static void movePetIfAllowed(Player player, int worldId, int instanceId, float x, float y, float z, byte heading) {
+		if (worldId != WorldMapType.LIVE_PARTY_CONCERT_HALL.getId())
+			World.getInstance().setPosition(player.getPet(), worldId, instanceId, x, y, z, heading);
+	}
+
+	private static void dismissPetOnArrival(Player player) {
+		if (player.getWorldId() != WorldMapType.LIVE_PARTY_CONCERT_HALL.getId())
+			return;
+
+		Pet pet = player.getPet();
+		if (pet != null && pet.getController().delete()) {
+			// The owner has already despawned and won't receive the visibility callback's packet.
+			PacketSendUtility.sendPacket(player, SM_PET.dismissed(pet.getObjectId()));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PET_CANT_SUMMON_HERE());
+		}
+	}
+
 	public static void teleportTo(Player player, WorldPosition pos) {
 		if (player.getWorldId() == pos.getMapId()) {
+			// instant move; a pending animated teleport must not fire its old destination afterwards
+			player.getController().cancelTask(TaskId.TELEPORT);
 			abortPlayerActions(player);
-			World.getInstance().setPosition(player.getPet(), pos.getMapId(), pos.getInstanceId(), pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
 			World.getInstance().setPosition(player, pos.getMapId(), pos.getInstanceId(), pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
+			movePetIfAllowed(player, pos.getMapId(), pos.getInstanceId(), pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
 			spawnOnSameMap(player);
 		} else if (player.isDead()) {
 			teleportDeadTo(player, pos.getMapId(), pos.getInstanceId(), pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
@@ -225,8 +258,8 @@ public class TeleportService {
 			InstanceService.onLeaveInstance(player);
 		}
 		World.getInstance().setPosition(player, worldId, instanceId, x, y, z, heading);
-		PacketSendUtility.sendPacket(player, new SM_CHANNEL_INFO(player));
-		PacketSendUtility.sendPacket(player, new SM_PLAYER_SPAWN(player));
+		movePetIfAllowed(player, worldId, instanceId, x, y, z, heading);
+		sendWorldChange(player);
 		player.setPortAnimation(ArrivalAnimation.LANDING);
 		PacketSendUtility.sendPacket(player, new SM_PLAYER_INFO(player));
 
@@ -497,41 +530,49 @@ public class TeleportService {
 		return true;
 	}
 
-	private static class SpawnTask implements Runnable {
-
-		private final Player player;
-		private final int worldId, instanceId;
-		private final float x, y, z;
-		private final byte h;
-		private final TeleportAnimation animation;
-		private final Runnable onArrive;
-
-		public SpawnTask(Player player, int worldId, int instanceId, float x, float y, float z, byte h, TeleportAnimation animation,
-			Runnable onArrive) {
-			this.player = player;
-			this.worldId = worldId;
-			this.instanceId = instanceId;
-			this.x = x;
-			this.y = y;
-			this.z = z;
-			this.h = h;
-			this.animation = animation;
-			this.onArrive = onArrive;
+	/**
+	 * Removes a teleport that still waits for the client's confirmation.
+	 * 
+	 * @return The destination of the removed teleport, or null if none was pending or its instance is gone.
+	 */
+	public static WorldPosition removePendingTeleport(Player player) {
+		if (player.getController().getAndRemoveTask(TaskId.TELEPORT) instanceof PendingTeleport pending && !pending.isDone()) {
+			SpawnTask t = pending.spawnTask;
+			if (InstanceService.instanceExists(t.worldId(), t.instanceId()))
+				return World.getInstance().createPosition(t.worldId(), t.x(), t.y(), t.z(), t.h(), t.instanceId());
 		}
+		return null;
+	}
+
+	private static final class PendingTeleport extends FutureTask<Void> {
+
+		private final SpawnTask spawnTask;
+
+		private PendingTeleport(SpawnTask spawnTask) {
+			super(spawnTask, null);
+			this.spawnTask = spawnTask;
+		}
+	}
+
+	private record SpawnTask(Player player, int worldId, int instanceId, float x, float y, float z, byte h, TeleportAnimation animation,
+	                         Runnable onArrive) implements Runnable {
 
 		@Override
 		public void run() {
-			if (player.isSpawned())
-				return;
-
-			if (animation != TeleportAnimation.NONE) { // this is a delayed teleport (triggered after animation end)
-				if (player.isDead() || !InstanceService.instanceExists(worldId, instanceId)) { // instance might be destroyed after animation end if unlucky
+			if (animation != TeleportAnimation.NONE) {
+				if (player.isDead()) // killed during the animation: he stays where he is
+					return;
+				if (!InstanceService.instanceExists(worldId, instanceId)) {
+					// the target instance was destroyed during the animation: he stays, and the client gets his character back after its fade out
 					PacketSendUtility.sendPacket(player, new SM_PLAYER_INFO(player));
-					World.getInstance().spawn(player);
 					return;
 				}
-				abortPlayerActions(player);
 			}
+
+			abortPlayerActions(player);
+			// the player only leaves the world now (for animated teleports), so observers see the removal at the actual teleport
+			if (player.isSpawned())
+				World.getInstance().despawn(player, animation.getDefaultObjectDeleteAnimation());
 
 			int currentWorldId = player.getWorldId();
 			int currentInstance = player.getInstanceId();
@@ -540,7 +581,7 @@ public class TeleportService {
 				InstanceService.onLeaveInstance(player);
 			}
 			World.getInstance().setPosition(player, worldId, instanceId, x, y, z, h);
-			World.getInstance().setPosition(player.getPet(), worldId, instanceId, x, y, z, h);
+			movePetIfAllowed(player, worldId, instanceId, x, y, z, h);
 
 			player.setPortAnimation(animation.getDefaultArrivalAnimation());
 			if (onArrive != null)
@@ -550,8 +591,7 @@ public class TeleportService {
 				spawnOnSameMap(player);
 			} else {
 				// teleport with full map reloading, player will spawn via CM_LEVEL_READY
-				PacketSendUtility.sendPacket(player, new SM_CHANNEL_INFO(player));
-				PacketSendUtility.sendPacket(player, new SM_PLAYER_SPAWN(player));
+				sendWorldChange(player);
 				if (DataManager.WORLD_MAPS_DATA.getTemplate(worldId).isInstance() && !WorldMapType.getWorld(worldId).isPersonal())
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_DUNGEON_OPENED_FOR_SELF(worldId));
 			}

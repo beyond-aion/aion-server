@@ -15,6 +15,7 @@ import com.aionemu.gameserver.model.team.TeamMember;
 import com.aionemu.gameserver.model.team.TemporaryPlayerTeam;
 import com.aionemu.gameserver.model.team.alliance.PlayerAlliance;
 import com.aionemu.gameserver.model.team.group.PlayerGroup;
+import com.aionemu.gameserver.model.templates.item.ItemType;
 import com.aionemu.gameserver.model.templates.item.ItemUseLimits;
 import com.aionemu.gameserver.model.templates.item.actions.ItemActions;
 import com.aionemu.gameserver.model.templates.panels.SkillPanel;
@@ -32,6 +33,7 @@ import com.aionemu.gameserver.skillengine.model.SkillType;
 import com.aionemu.gameserver.skillengine.model.TransformType;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
+import com.aionemu.gameserver.world.WorldMapType;
 
 /**
  * @author lord_rex, Sippolo
@@ -297,6 +299,17 @@ public class PlayerRestrictions {
 		if (player.isDeadOrDoomed())
 			return false;
 
+		// the client is in the teleport animation and stays in the world until it confirms the teleport
+		if (player.getController().hasTask(TaskId.TELEPORT))
+			return false;
+
+		// TODO: exempt cash items when cash_item is imported into ItemTemplate
+		if (player.getWorldId() == WorldMapType.LIVE_PARTY_CONCERT_HALL.getId()
+			&& item.getItemTemplate().getItemType() == ItemType.NORMAL) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_IS_NOT_USABLE());
+			return false;
+		}
+
 		// gliding and riding a windstream or a flight transporter are the two states in which the client does not allow using items
 		if (isGlidingOrUsingFlightPath(player)) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FLYING_DISABLE_1());
@@ -345,7 +358,7 @@ public class PlayerRestrictions {
 
 		int requiredLevel = item.getItemTemplate().getRequiredLevel(player.getPlayerClass());
 		if (requiredLevel > player.getLevel()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_USE_ITEM_TOO_LOW_LEVEL_MUST_BE_THIS_LEVEL(item.getL10n(), requiredLevel));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_USE_ITEM_TOO_LOW_LEVEL_MUST_BE_THIS_LEVEL(requiredLevel, item.getL10n()));
 			return false;
 		}
 
@@ -381,6 +394,8 @@ public class PlayerRestrictions {
 	}
 
 	public static boolean canChangeEquip(Player player) {
+		if (player.getController().hasTask(TaskId.TELEPORT)) // the client is in the teleport animation
+			return false;
 		if (player.isInPrison()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ACCUSE_TARGET_IS_NOT_VALID());
 			return false;

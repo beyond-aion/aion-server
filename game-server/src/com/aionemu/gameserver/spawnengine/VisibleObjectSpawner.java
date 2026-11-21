@@ -256,6 +256,8 @@ public class VisibleObjectSpawner {
 		return summon;
 	}
 
+	private static final float PET_SPAWN_RADIUS = 2;
+
 	public static Pet spawnPet(Player player, int templateId) {
 		PetCommonData petCommonData = player.getPetList().getPet(templateId);
 		if (petCommonData == null)
@@ -268,13 +270,15 @@ public class VisibleObjectSpawner {
 		Pet pet = new Pet(petTemplate, new PetController(), petCommonData, player);
 		pet.setKnownlist(new PlayerAwareKnownList(pet));
 
-		float x = player.getX();
-		float y = player.getY();
-		float z = player.getZ();
+		// a random reachable point up to 2m around the player
+		double angle = Math.random() * 2 * Math.PI;
+		double distance = Math.random() * PET_SPAWN_RADIUS;
+		Vector3f pos = GeoService.getInstance().getClosestCollision(player, player.getX() + (float) (Math.cos(angle) * distance),
+			player.getY() + (float) (Math.sin(angle) * distance), player.getZ());
 		byte heading = player.getHeading();
 		int worldId = player.getWorldId();
 		int instanceId = player.getInstanceId();
-		SpawnTemplate spawn = SpawnEngine.newSingleTimeSpawn(worldId, templateId, x, y, z, heading);
+		SpawnTemplate spawn = SpawnEngine.newSingleTimeSpawn(worldId, templateId, pos.getX(), pos.getY(), pos.getZ(), heading);
 		SpawnEngine.bringIntoWorld(pet, spawn, instanceId);
 		player.setPet(pet);
 		return pet;
