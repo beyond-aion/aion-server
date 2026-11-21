@@ -11,6 +11,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_FLY_TIME;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_STATUPDATE_HP;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_STATUPDATE_MP;
 import com.aionemu.gameserver.services.LifeStatsRestoreService;
+import com.aionemu.gameserver.services.drop.DropService;
 import com.aionemu.gameserver.taskmanager.tasks.TeamStatUpdater;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
@@ -39,7 +40,7 @@ public class PlayerLifeStats extends CreatureLifeStats<Player> {
 			sendHpPacketUpdate();
 			sendGroupPacketUpdate();
 			if (newHp < previousHp)
-				endProtectionOnDamage(type);
+				interruptOnDamage(type);
 			if (previousHp == 0 || newHp < previousHp)
 				triggerRestoreTask();
 			if (previousHp == 0)
@@ -55,20 +56,26 @@ public class PlayerLifeStats extends CreatureLifeStats<Player> {
 			sendMpPacketUpdate();
 			sendGroupPacketUpdate();
 			if (newMp < previousMp) {
-				endProtectionOnDamage(type);
+				interruptOnDamage(type);
 				triggerRestoreTask();
 			}
 		}
 	}
 
 	/**
-	 * Ends the spawn protection when HP or MP were lost to damage. Setting them directly (login, max stat changes, revive) and skill costs don't count.
+	 * Ends the spawn protection and whatever the player was busy with when HP or MP were lost to damage, no matter where it came from. Setting them
+	 * directly (login, max stat changes, revive) and skill costs don't count.
 	 */
-	private void endProtectionOnDamage(TYPE type) {
+	private void interruptOnDamage(TYPE type) {
 		if (type == TYPE.HP || type == TYPE.HEAL_MP || type == TYPE.USED_HP || type == TYPE.USED_MP)
 			return;
 		if (owner.isProtectionActive())
 			owner.getController().stopProtectionActiveTask();
+		owner.getController().cancelUseItem();
+		if (owner.getInteractionTask() != null)
+			owner.getInteractionTask().abort();
+		if (owner.isLooting())
+			DropService.getInstance().closeDropList(owner, owner.getLootingNpcOid());
 	}
 
 	private void sendGroupPacketUpdate() {

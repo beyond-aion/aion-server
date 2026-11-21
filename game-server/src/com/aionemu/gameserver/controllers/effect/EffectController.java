@@ -708,11 +708,21 @@ public class EffectController {
 		abnormals |= state.getId();
 
 		// TODO move to observer?
-		// if player is sitting when setting certain abnormal states, he is forcefully made to stand up
-		if (owner instanceof Player && owner.isInState(CreatureState.RESTING)) {
-			if (isInAnyAbnormalState(AbnormalState.AUTOMATICALLY_STANDUP)) {
-				owner.unsetState(CreatureState.RESTING);
-				PacketSendUtility.broadcastPacket((Player) owner, new SM_EMOTION(owner, EmotionType.STAND), true);
+		if (owner instanceof Player player) {
+			// if player is sitting when setting certain abnormal states, he is forcefully made to stand up. The looting, chair and dead states share the
+			// resting bit without being a rest, and unsetting it there would leave him in a state neither he nor his client can make sense of
+			boolean isResting = player.isInState(CreatureState.RESTING) && !player.isInState(CreatureState.FLYING)
+				&& !player.isInState(CreatureState.FLOATING_CORPSE);
+			if (isResting && isInAnyAbnormalState(AbnormalState.AUTOMATICALLY_STANDUP)) {
+				player.unsetState(CreatureState.RESTING);
+				PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.STAND), true);
+			}
+			// the states which interrupt an item use leave him no control over himself, so the rest of what he was busy with ends as well
+			if ((state.getId() & AbnormalState.CANCEL_ITEM_USE.getId()) != 0) {
+				if (player.isProtectionActive())
+					player.getController().stopProtectionActiveTask();
+				if (player.getInteractionTask() != null)
+					player.getInteractionTask().abort();
 			}
 		}
 	}
