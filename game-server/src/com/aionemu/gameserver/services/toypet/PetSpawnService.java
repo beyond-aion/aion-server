@@ -72,9 +72,8 @@ public class PetSpawnService {
 			return false;
 		if (System.currentTimeMillis() < player.getPetList().getLastSummonTime() + SUMMON_COOLDOWN_MILLIS)
 			return false;
-		if (player.isFlying() || player.isUsingFlightTransporterOrWindstream())
+		if (player.isFlying() || player.isUsingFlightTransporterOrWindstream() || player.isInPlayMode())
 			return false;
-		// TODO: retail also refuses in play mode, check player.isInPlayMode() once retail/play-mode is merged
 		if ((player.getEffectController().getAbnormals() & SUMMON_BLOCKING_ABNORMALS) != 0)
 			return false;
 		if (player.getWorldId() == WorldMapType.LIVE_PARTY_CONCERT_HALL.getId()) {
