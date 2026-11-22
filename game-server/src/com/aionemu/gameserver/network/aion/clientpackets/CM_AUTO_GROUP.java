@@ -7,7 +7,6 @@ import com.aionemu.gameserver.model.autogroup.EntryRequestType;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.AutoGroupService;
 import com.aionemu.gameserver.services.instance.PeriodicInstanceManager;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -43,10 +42,6 @@ public class CM_AUTO_GROUP extends AionClientPacket {
 			case 100:
 				EntryRequestType ert = EntryRequestType.getTypeById(entryRequestId);
 				if (ert == null) {
-					return;
-				}
-				if (player.isInPlayMode()) {
-					sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_CANT_INSTANCE_ENTER_STATE());
 					return;
 				}
 				AutoGroupService.getInstance().startLooking(player, instanceMaskId, ert);

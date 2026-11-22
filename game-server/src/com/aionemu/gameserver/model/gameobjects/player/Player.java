@@ -1470,8 +1470,9 @@ public class Player extends Creature {
 	}
 
 	/**
-	 * Play mode is active while the player is morphed in the intro and ascension quest instances. It blocks channel changes and matchmaker
-	 * registration, and other players see it in SM_PLAYER_INFO.
+	 * Play mode is active while the player is morphed in the intro and ascension quest instances. The client then shows the player in preset
+	 * equipment of their armor type, and other players get the flag in SM_PLAYER_INFO. Retail also refuses matchmaker registration, pet summoning
+	 * and other actions in play mode; we only block channel changes, the rest is unreachable for a low level player in these instances.
 	 */
 	public boolean isInPlayMode() {
 		return playMode;

@@ -72,7 +72,7 @@ public class PetSpawnService {
 			return false;
 		if (System.currentTimeMillis() < player.getPetList().getLastSummonTime() + SUMMON_COOLDOWN_MILLIS)
 			return false;
-		if (player.isFlying() || player.isUsingFlightTransporterOrWindstream() || player.isInPlayMode())
+		if (player.isFlying() || player.isUsingFlightTransporterOrWindstream())
 			return false;
 		if ((player.getEffectController().getAbnormals() & SUMMON_BLOCKING_ABNORMALS) != 0)
 			return false;
