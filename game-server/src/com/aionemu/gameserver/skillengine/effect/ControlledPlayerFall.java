@@ -32,7 +32,7 @@ final class ControlledPlayerFall {
 
 	static final int TICK_INTERVAL = 50;
 	private static final float TICK_SECONDS = TICK_INTERVAL / 1000f;
-	/** The slope takes eight lookups to measure, so on ground he stands on it is measured less often than the ground below him is looked for. */
+	/** The slope and an edge take several lookups to check, so they are checked less often than the ground below him is looked for. */
 	private static final int TICKS_PER_SLOPE_CHECK = 200 / TICK_INTERVAL;
 	/** A player higher above the ground than this is airborne, a hundredth of the height of the collider the client puts around him. */
 	private static final float MAX_GROUND_DISTANCE = 0.006f;
@@ -60,6 +60,15 @@ final class ControlledPlayerFall {
 	private static final float MAX_SLIDE_DROP = 8;
 	/** A drop with no ground at all this far below it is a crack in the geo data rather than a cliff, as long as the server is the one moving him. */
 	private static final float MIN_SUPPORTED_DROP = 30;
+	/** Radius of the cylinder the client puts around him. */
+	private static final float COLLIDER_RADIUS = 0.4f;
+	/**
+	 * How far above his feet the bottom of that cylinder is, which is also the highest ledge he walks up. Over an edge the cylinder sits down on it
+	 * with his feet this far below, and holds him there until his middle is farther out than the radius.
+	 */
+	private static final float COLLIDER_BOTTOM = 0.5f;
+	/** How far apart in height the edge and the bottom of the cylinder may be when checking whether he still hangs on it. */
+	private static final float LEDGE_TOLERANCE = 0.05f;
 	/** How long after his last own move packet his position counts as one the server walked him to. */
 	private static final long CLIENT_POSITION_MILLIS = 1000;
 
@@ -69,6 +78,11 @@ final class ControlledPlayerFall {
 	private boolean falling;
 	private boolean sliding;
 	private boolean creeping;
+	/** He hangs on an edge by the bottom of the cylinder, with nothing under his feet. */
+	private boolean hanging;
+	/** The fall started from a standstill, so he can come to rest on the edge he left, and where it started. */
+	private boolean mayHang;
+	private float fallTopZ;
 	/** Tangent of the ground under him and the horizontal unit vector pointing down it, as of the last check. */
 	private float slope, downhillX, downhillY;
 	private float slideSpeed;
@@ -115,6 +129,7 @@ final class ControlledPlayerFall {
 		GeoService geo = GeoService.getInstance();
 		float groundZ = geo.getZ(player, player.getZ() + MAX_GROUND_ABOVE, player.getZ() - MAX_GROUND_DISTANCE);
 		if (!Float.isNaN(groundZ)) {
+			hanging = false;
 			if (!sliding && !creeping && --ticksUntilSlopeCheck > 0) {
 				standOnGround();
 				return State.ON_GROUND;
@@ -132,11 +147,24 @@ final class ControlledPlayerFall {
 			creep(groundZ);
 			return State.ON_GROUND;
 		}
+		boolean stepping = player.getMoveController().isMovingToDestination();
+		if (hanging && !stepping) {
+			if (--ticksUntilSlopeCheck > 0)
+				return State.ON_GROUND;
+			ticksUntilSlopeCheck = TICKS_PER_SLOPE_CHECK;
+			float bottomZ = player.getZ() + COLLIDER_BOTTOM;
+			if (!Float.isNaN(findLedge(bottomZ + LEDGE_TOLERANCE, bottomZ - LEDGE_TOLERANCE))) {
+				standOnGround();
+				return State.ON_GROUND;
+			}
+		}
+		hanging = false;
 		// the server walked him here, and it walks on ground only: nothing below him at all is a crack in our data, his client stands on solid ground
 		boolean walkedByServer = System.currentTimeMillis() - player.getMoveController().getLastPositionFromClientMillis() > CLIENT_POSITION_MILLIS;
 		if (walkedByServer && Float.isNaN(geo.getZ(player, player.getZ(), player.getZ() - MIN_SUPPORTED_DROP)))
 			return State.ON_GROUND;
-		startFalling();
+		// one who runs off an edge flies on past it, one who stands still or creeps drops onto it with the cylinder
+		startFalling(!stepping);
 		State state = fall();
 		return state == State.MOVING ? State.FALL_STARTED : state;
 	}
@@ -154,6 +182,18 @@ final class ControlledPlayerFall {
 		fallSpeed += gravity * TICK_SECONDS;
 		float newZ = player.getZ() - fallDistance;
 		float groundZ = GeoService.getInstance().getZ(player.getWorldId(), player.getX(), player.getY(), player.getZ(), newZ, player.getInstanceId());
+		// below the edge he left, the cylinder has nothing left to sit down on
+		if (mayHang && fallTopZ - player.getZ() < 2 * COLLIDER_BOTTOM) {
+			float ledgeZ = findLedge(player.getZ() + COLLIDER_BOTTOM, newZ + COLLIDER_BOTTOM);
+			if (!Float.isNaN(ledgeZ) && (Float.isNaN(groundZ) || ledgeZ - COLLIDER_BOTTOM > groundZ)) {
+				float z = ledgeZ - COLLIDER_BOTTOM;
+				World.getInstance().updatePosition(player, player.getX(), player.getY(), z, player.getHeading());
+				hanging = true;
+				ticksUntilSlopeCheck = TICKS_PER_SLOPE_CHECK;
+				land(z);
+				return State.LANDED;
+			}
+		}
 		if (Float.isNaN(groundZ)) {
 			World.getInstance().updatePosition(player, player.getX(), player.getY(), newZ, player.getHeading());
 			player.getMoveController().updateFalling(newZ);
@@ -172,6 +212,27 @@ final class ControlledPlayerFall {
 		}
 		land(groundZ);
 		return State.LANDED;
+	}
+
+	/**
+	 * Looks for an edge the bottom of his cylinder rests on: ground within its radius, between the given heights.
+	 *
+	 * @return The height of the highest such ground, or {@link Float#NaN} if there is none.
+	 */
+	private float findLedge(float zMax, float zMin) {
+		GeoService geo = GeoService.getInstance();
+		float ledgeZ = Float.NaN;
+		for (float distance = COLLIDER_RADIUS / 2; distance <= COLLIDER_RADIUS; distance += COLLIDER_RADIUS / 2) {
+			for (int i = 0; i < 8; i++) {
+				double angle = i * Math.PI / 4;
+				float x = player.getX() + (float) Math.cos(angle) * distance;
+				float y = player.getY() + (float) Math.sin(angle) * distance;
+				float z = geo.getZ(player.getWorldId(), x, y, zMax, zMin, player.getInstanceId());
+				if (!Float.isNaN(z) && (Float.isNaN(ledgeZ) || z > ledgeZ))
+					ledgeZ = z;
+			}
+		}
+		return ledgeZ;
 	}
 
 	/**
@@ -241,6 +302,7 @@ final class ControlledPlayerFall {
 				fallSpeed = slideSpeed * (float) Math.sin(inclination);
 				stopSliding();
 				falling = true;
+				mayHang = false; // he slides off with speed, past the edge
 				gravity = GRAVITY;
 				sendFallArc();
 				return State.FALL_STARTED;
@@ -303,8 +365,10 @@ final class ControlledPlayerFall {
 		PacketSendUtility.sendPacket(player, new SM_MOVE(player));
 	}
 
-	private void startFalling() {
+	private void startFalling(boolean mayHang) {
 		falling = true;
+		this.mayHang = mayHang;
+		fallTopZ = player.getZ();
 		stopSliding();
 		stopStep(); // the step which is still running would fight the fall for the position
 		gravity = player.getMoveController().isDivingFromFlight() ? DIVE_GRAVITY : GRAVITY;
