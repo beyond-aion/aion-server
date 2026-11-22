@@ -1,11 +1,7 @@
 package com.aionemu.gameserver.network.loginserver;
 
 import java.net.SocketException;
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 
@@ -290,8 +286,7 @@ public class LoginServer {
 			log.warn("{} sent an invalid MAC address (modified client or hack): {}", client, client.getMacAddress());
 			return false;
 		} else if (client.getHddSerial().length() > MAX_HDD_SERIAL_LENGTH) {
-			log.warn("{} sent an HDD serial of {} characters (modified client or hack): {}…", client, client.getHddSerial().length(),
-				client.getHddSerial().substring(0, MAX_HDD_SERIAL_LENGTH));
+			log.warn("{} sent an HDD serial of {} characters (modified client or hack): {}", client, client.getHddSerial().length(), client.getHddSerial());
 			return false;
 		} else if (BannedMacManager.getInstance().isBanned(client.getMacAddress())) {
 			log.info("{} was kicked due to mac ban", client);
