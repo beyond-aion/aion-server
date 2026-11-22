@@ -1469,10 +1469,6 @@ public class Player extends Creature {
 		}
 	}
 
-	/**
-	 * The ascension morph is on while the player is morphed in the intro and ascension quest instances, see {@link SM_ASCENSION_MORPH}. Other
-	 * players get it in SM_PLAYER_INFO.
-	 */
 	public boolean isAscensionMorphed() {
 		return ascensionMorphed;
 	}
