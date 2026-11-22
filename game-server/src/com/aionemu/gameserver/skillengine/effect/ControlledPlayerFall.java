@@ -9,7 +9,6 @@ import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MOVE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.geo.GeoService;
 
@@ -43,8 +42,20 @@ final class ControlledPlayerFall {
 	private static final float GRAVITY = 9.81f;
 	/** The client drops a character who just left the air with this instead. */
 	private static final float DIVE_GRAVITY = 22;
-	/** How far around himself the ground is sampled to find the way down. */
-	private static final float SLOPE_PROBE_DISTANCE = 1;
+	/** Ground steeper than this (its tangent), 44°, no longer holds him still: the client lets him creep down it until it gets steeper than 46°. */
+	private static final float MIN_CREEP_SLOPE = (float) Math.tan(Math.toRadians(44));
+	/**
+	 * How strongly the client pulls a character on the ground towards the speed it wants, per second. Against gravity along the slope this leaves one
+	 * who wants to stand creeping down at g * sin / 46, about a tenth of a unit per second.
+	 */
+	private static final float GROUND_INERTIA = 46;
+	/**
+	 * How far from his feet the ground is sampled to tell how steep it is and which way it falls. The client takes the face he stands on, so the
+	 * samples stay close enough to land on it too.
+	 */
+	private static final float SLOPE_PROBE_DISTANCE = 0.1f;
+	/** A sample farther above or below him than this hit a ledge or a wall next to him rather than the ground under his feet. */
+	private static final float SLOPE_PROBE_HEIGHT = 0.5f;
 	/** Ground which lies deeper than this next to him is a hole or an edge rather than a slope, and must not be slid onto. */
 	private static final float MAX_SLIDE_DROP = 8;
 	/** A drop with no ground at all this far below it is a crack in the geo data rather than a cliff, as long as the server is the one moving him. */
@@ -57,6 +68,9 @@ final class ControlledPlayerFall {
 	private boolean groundSettled;
 	private boolean falling;
 	private boolean sliding;
+	private boolean creeping;
+	/** Tangent of the ground under him and the horizontal unit vector pointing down it, as of the last check. */
+	private float slope, downhillX, downhillY;
 	private float slideSpeed;
 	private float gravity;
 	private float fallSpeed;
@@ -102,10 +116,14 @@ final class ControlledPlayerFall {
 		float groundZ = geo.getZ(player, player.getZ() + MAX_GROUND_ABOVE, player.getZ() - MAX_GROUND_DISTANCE);
 		if (!Float.isNaN(groundZ)) {
 			standOnGround();
-			if (!sliding && --ticksUntilSlopeCheck > 0)
+			if (!sliding && !creeping && --ticksUntilSlopeCheck > 0)
 				return State.ON_GROUND;
 			ticksUntilSlopeCheck = TICKS_PER_SLOPE_CHECK;
-			return slide(groundZ) ? State.MOVING : State.ON_GROUND;
+			measureSlope(groundZ);
+			if (slide(groundZ))
+				return State.MOVING;
+			creep(groundZ);
+			return State.ON_GROUND;
 		}
 		// the server walked him here, and it walks on ground only: nothing below him at all is a crack in our data, his client stands on solid ground
 		boolean walkedByServer = System.currentTimeMillis() - player.getMoveController().getLastPositionFromClientMillis() > CLIENT_POSITION_MILLIS;
@@ -140,49 +158,94 @@ final class ControlledPlayerFall {
 	}
 
 	/**
+	 * Takes the slope of the ground under him from four samples around his feet. Where a sample finds no ground nearby, the one on the other side
+	 * stands in for it.
+	 */
+	private void measureSlope(float groundZ) {
+		float riseX = getRise(groundZ, 1, 0);
+		float riseY = getRise(groundZ, 0, 1);
+		slope = (float) Math.sqrt(riseX * riseX + riseY * riseY);
+		downhillX = slope == 0 ? 0 : -riseX / slope;
+		downhillY = slope == 0 ? 0 : -riseY / slope;
+	}
+
+	/**
+	 * @return How much the ground rises per unit along the given axis, 0 if no sample found ground.
+	 */
+	private float getRise(float groundZ, int axisX, int axisY) {
+		float ahead = getProbeZ(groundZ, axisX, axisY);
+		float behind = getProbeZ(groundZ, -axisX, -axisY);
+		if (!Float.isNaN(ahead) && !Float.isNaN(behind))
+			return (ahead - behind) / (2 * SLOPE_PROBE_DISTANCE);
+		if (!Float.isNaN(ahead))
+			return (ahead - groundZ) / SLOPE_PROBE_DISTANCE;
+		if (!Float.isNaN(behind))
+			return (groundZ - behind) / SLOPE_PROBE_DISTANCE;
+		return 0;
+	}
+
+	private float getProbeZ(float groundZ, int axisX, int axisY) {
+		float x = player.getX() + axisX * SLOPE_PROBE_DISTANCE;
+		float y = player.getY() + axisY * SLOPE_PROBE_DISTANCE;
+		return GeoService.getInstance().getZ(player.getWorldId(), x, y, groundZ + SLOPE_PROBE_HEIGHT, groundZ - SLOPE_PROBE_HEIGHT, player.getInstanceId());
+	}
+
+	/**
 	 * Slides him down ground he cannot stand on. The client does this on its own, and while it does, the server side position stays up on the slope,
 	 * which is the same desync as a target hanging in the air.
 	 *
 	 * @return True if he is sliding.
 	 */
 	private boolean slide(float groundZ) {
-		GeoService geo = GeoService.getInstance();
-		float lowestZ = groundZ;
-		double downhillAngle = 0;
-		for (byte heading = 0; heading < 120; heading += 15) { // eight directions around him, the way down is the lowest of them
-			double angle = Math.toRadians(PositionUtil.convertHeadingToAngle(heading));
-			float x = player.getX() + (float) Math.cos(angle) * SLOPE_PROBE_DISTANCE;
-			float y = player.getY() + (float) Math.sin(angle) * SLOPE_PROBE_DISTANCE;
-			float z = geo.getZ(player.getWorldId(), x, y, groundZ + 1, groundZ - MAX_SLIDE_DROP, player.getInstanceId());
-			if (!Float.isNaN(z) && z < lowestZ) {
-				lowestZ = z;
-				downhillAngle = angle;
-			}
-		}
-		float slope = (groundZ - lowestZ) / SLOPE_PROBE_DISTANCE;
-		// between 44° and 46° the client creeps down at about a tenth of a unit per second, which is not worth following
 		if (slope <= PlayableMoveController.MAX_STANDING_SLOPE)
 			return stopSliding(); // on ground he can stand on the client brakes him to a halt within a frame
 		if (!sliding) {
 			sliding = true;
+			creeping = false;
 			slideSpeed = 0;
-			stopStep(); // the step which is still running would fight the slide for the position
+			if (player.getMoveController().isMovingToDestination())
+				stopStep(); // the step which is still running would fight the slide for the position
 		}
 		// frictionless along the slope: gravity accelerates him by g * sin, and of the speed along the slope cos is horizontal
 		double inclination = Math.atan(slope);
 		slideSpeed += GRAVITY * (float) Math.sin(inclination) * TICK_SECONDS;
-		float distance = slideSpeed * (float) Math.cos(inclination) * TICK_SECONDS;
-		float newX = player.getX() + (float) Math.cos(downhillAngle) * distance;
-		float newY = player.getY() + (float) Math.sin(downhillAngle) * distance;
+		if (!moveDownhill(groundZ, slideSpeed * (float) Math.cos(inclination) * TICK_SECONDS))
+			return stopSliding(); // he ran into something, or the ground drops away and the fall takes over if there is nothing below him
+		player.getMoveController().restartFalling(player.getZ());
+		return true;
+	}
+
+	/**
+	 * Lets him creep down ground between 44° and 46° while no step moves him. The client does not hold a character still there: what it wants to stand
+	 * loses against gravity along the slope, so he creeps until the ground gets steep enough to slide down or flat enough to stand on.
+	 */
+	private void creep(float groundZ) {
+		if (slope <= MIN_CREEP_SLOPE || player.getMoveController().isMovingToDestination()) {
+			creeping = false;
+			return;
+		}
+		double inclination = Math.atan(slope);
+		float speed = GRAVITY * (float) Math.sin(inclination) / GROUND_INERTIA;
+		creeping = moveDownhill(groundZ, speed * (float) Math.cos(inclination) * TICK_SECONDS);
+	}
+
+	/**
+	 * Moves him the given horizontal distance down the slope and onto the ground there.
+	 *
+	 * @return False if something blocks the way or there is no ground to put him on.
+	 */
+	private boolean moveDownhill(float groundZ, float distance) {
+		GeoService geo = GeoService.getInstance();
+		float newX = player.getX() + downhillX * distance;
+		float newY = player.getY() + downhillY * distance;
 		Vector3f blocked = geo.getClosestCollision(player, newX, newY, player.getZ(), false, CollisionIntention.DEFAULT_COLLISIONS.getId(),
 			IgnoreProperties.ANY_RACE);
-		if (blocked.getX() != newX || blocked.getY() != newY) // ran into something on the way down, so it stops here
-			return stopSliding();
+		if (blocked.getX() != newX || blocked.getY() != newY)
+			return false;
 		float newZ = geo.getZ(player.getWorldId(), newX, newY, groundZ + 1, groundZ - MAX_SLIDE_DROP, player.getInstanceId());
-		if (Float.isNaN(newZ)) // the ground ends or drops away here, so he stops at the edge and the fall takes over if there is nothing below him
-			return stopSliding();
+		if (Float.isNaN(newZ))
+			return false;
 		World.getInstance().updatePosition(player, newX, newY, newZ, player.getHeading());
-		player.getMoveController().restartFalling(newZ);
 		player.getController().updateZone();
 		return true;
 	}

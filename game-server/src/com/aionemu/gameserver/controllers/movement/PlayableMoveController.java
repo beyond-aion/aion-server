@@ -132,6 +132,13 @@ public abstract class PlayableMoveController<T extends Creature> extends Creatur
 		return Float.isNaN(groundZ) ? z : groundZ;
 	}
 
+	/**
+	 * @return True while the server walks him to a destination, until something stops him, even after he arrived.
+	 */
+	public boolean isMovingToDestination() {
+		return started.get();
+	}
+
 	@Override
 	public void abortMove() {
 		started.set(false);
