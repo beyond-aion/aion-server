@@ -18,7 +18,11 @@ import java.util.zip.Deflater;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.commons.Banner;
+import com.aionemu.commons.utils.info.SystemInfo;
+import com.aionemu.commons.utils.info.VersionInfo;
 
 import ch.qos.logback.classic.ClassicConstants;
 
@@ -38,11 +42,34 @@ public class Logging {
 		archiveLogs();
 	}
 
-	public static String formatStartupMessage(String server, long startTimeNanos) {
+	public static void logStartupStats(Class<?> serverClass, long startTimeNanos) {
+		logStartupStats(serverClass, startTimeNanos, null, null);
+	}
+
+	public static void logStartupStats(Class<?> serverClass, long startTimeNanos, VersionInfo versionInfo, ZoneId timeZoneId) {
+		long startedNanos = System.nanoTime();
+		long uptimeMillis = ManagementFactory.getRuntimeMXBean().getUptime();
+		String serverName = serverClass.getSimpleName().replace("Server", " server");
+		String startupMessage = formatStartupMessage(serverName, startTimeNanos, startedNanos, uptimeMillis);
+		if (versionInfo == null)
+			VersionInfo.logAll(serverClass);
+		else
+			VersionInfo.logAll(versionInfo, timeZoneId);
+		System.gc();
+		SystemInfo.logAll();
+		LoggerFactory.getLogger(serverClass).info(startupMessage);
+	}
+
+	/**
+	 * @param startedNanos
+	 *          {@link System#nanoTime()} when the server was started
+	 * @param uptimeMillis
+	 *          process uptime when the server was started
+	 */
+	private static String formatStartupMessage(String server, long startTimeNanos, long startedNanos, long uptimeMillis) {
 		DecimalFormat df = new DecimalFormat("0.0##", DecimalFormatSymbols.getInstance(Locale.US));
-		float startTime = Duration.ofNanos(System.nanoTime() - startTimeNanos).toMillis() / 1000f;
-		float processUptime = ManagementFactory.getRuntimeMXBean().getUptime() / 1000f;
-		return "%s started in %s seconds (process running for %s)".formatted(server, df.format(startTime), df.format(processUptime));
+		float startTime = Duration.ofNanos(startedNanos - startTimeNanos).toMillis() / 1000f;
+		return "%s started in %s seconds (process running for %s)".formatted(server, df.format(startTime), df.format(uptimeMillis / 1000f));
 	}
 
 	private static void archiveLogs() {

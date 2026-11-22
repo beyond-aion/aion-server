@@ -8,8 +8,8 @@ public enum PetFunctionType {
 	FOOD(1),
 	DOPING(2),
 	LOOT(3),
-	BUFF(4),
-	MERCHANT(5),
+	MERCHANT(4),
+	BUFF(5),
 	NONE(6),
 
 	APPEARANCE(1, false),

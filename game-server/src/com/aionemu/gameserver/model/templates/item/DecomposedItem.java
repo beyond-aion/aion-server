@@ -4,9 +4,7 @@ import jakarta.xml.bind.Unmarshaller;
 import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlType;
 
-import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.dataholders.ItemData;
-import com.aionemu.gameserver.dataholders.StaticData;
 import com.aionemu.gameserver.dataholders.loadingutils.StaticDataListener;
 
 /**
@@ -23,8 +21,7 @@ public class DecomposedItem {
 	private float chance = 100;
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
-		StaticData staticData = StaticDataListener.get(u);
-		ItemData itemData = staticData != null ? staticData.itemData : DataManager.ITEM_DATA;
+		ItemData itemData = StaticDataListener.getItemData(u);
 		if (itemData.getItemTemplate(itemId) == null)
 			throw new IllegalArgumentException("Decomposable reward item ID is invalid: " + itemId);
 		if (count <= 0)

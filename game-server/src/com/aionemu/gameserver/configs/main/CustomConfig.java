@@ -295,4 +295,10 @@ public class CustomConfig {
 	 */
 	@Property(key = "gameserver.combat.death_at_hittime", defaultValue = "false")
 	public static boolean DEATH_AT_HITTIME;
+
+	/**
+	 * Don't despawn the pet on death
+	 */
+	@Property(key = "gameserver.pet.keep_on_death", defaultValue = "false")
+	public static boolean KEEP_PET_ON_DEATH;
 }
