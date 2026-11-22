@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.services.teleport;
 
+import java.util.concurrent.Future;
 import java.util.concurrent.FutureTask;
 
 import org.slf4j.Logger;
@@ -179,10 +180,9 @@ public class TeleportService {
 			// task will be triggered from CM_TELEPORT_ANIMATION_DONE
 			PendingTeleport teleportTask = new PendingTeleport(spawnTask);
 			player.getController().addTask(TaskId.TELEPORT, teleportTask);
-			// Stricter than retail: it waits for the confirmation without a time limit, so a client that never confirms could keep the teleport in
-			// reserve and use it later, for example to leave a fight. Remove this timer to follow retail.
+			// stricter than retail: prevents a client to keep the teleport in reserve and use it later, for example to leave a fight.
 			ThreadPoolManager.getInstance().schedule(() -> {
-				if (player.getController().removeTask(TaskId.TELEPORT, teleportTask))
+				if (player.getController().removeTask(TaskId.TELEPORT, teleportTask) && !teleportTask.isDone())
 					teleportTask.run();
 			}, CONFIRMATION_TIMEOUT_MILLIS);
 		}
@@ -531,15 +531,27 @@ public class TeleportService {
 	}
 
 	/**
-	 * Removes a teleport that still waits for the client's confirmation.
-	 * 
-	 * @return The destination of the removed teleport, or null if none was pending or its instance is gone.
+	 * Executes a teleport that still waits for the client's confirmation.
 	 */
-	public static WorldPosition removePendingTeleport(Player player) {
-		if (player.getController().getAndRemoveTask(TaskId.TELEPORT) instanceof PendingTeleport pending && !pending.isDone()) {
-			SpawnTask t = pending.spawnTask;
-			if (InstanceService.instanceExists(t.worldId(), t.instanceId()))
+	public static void executePendingTeleport(Player player) {
+		Future<?> task = player.getController().getTask(TaskId.TELEPORT);
+		if (task instanceof PendingTeleport pending && player.getController().removeTask(TaskId.TELEPORT, task) && !task.isDone())
+			pending.run();
+	}
+
+	/**
+	 * Cancels a scheduled teleport (PvPZone, PlayerReviveService) or one that still waits for the client's confirmation.
+	 * 
+	 * @return The destination of the removed teleport, or null if none was pending, the player died, or the target instance is gone.
+	 */
+	public static WorldPosition cancelPendingTeleport(Player player) {
+		Future<?> task = player.getController().getAndRemoveTask(TaskId.TELEPORT);
+		if (task != null && !task.isDone()) {
+			task.cancel(false);
+			if (task instanceof PendingTeleport pending && pending.spawnTask.canComplete()) {
+				SpawnTask t = pending.spawnTask;
 				return World.getInstance().createPosition(t.worldId(), t.x(), t.y(), t.z(), t.h(), t.instanceId());
+			}
 		}
 		return null;
 	}
@@ -552,23 +564,29 @@ public class TeleportService {
 			super(spawnTask, null);
 			this.spawnTask = spawnTask;
 		}
+
+		@Override
+		protected void setException(Throwable t) {
+			super.setException(t);
+			log.error("Error teleporting {}", spawnTask.player, t);
+			if (!spawnTask.restoreFadedOutPlayer())
+				spawnTask.player.getClientConnection().close();
+		}
 	}
 
 	private record SpawnTask(Player player, int worldId, int instanceId, float x, float y, float z, byte h, TeleportAnimation animation,
 	                         Runnable onArrive) implements Runnable {
 
+		private boolean canComplete() {
+			return !player.isDead() && InstanceService.instanceExists(worldId, instanceId);
+		}
+
 		@Override
 		public void run() {
-			if (animation != TeleportAnimation.NONE) {
-				if (player.isDead()) // killed during the animation: he stays where he is
-					return;
-				if (!InstanceService.instanceExists(worldId, instanceId)) {
-					// the target instance was destroyed during the animation: he stays, and the client gets his character back after its fade out
-					PacketSendUtility.sendPacket(player, new SM_PLAYER_INFO(player));
-					return;
-				}
+			if (!canComplete()) {
+				restoreFadedOutPlayer();
+				return;
 			}
-
 			abortPlayerActions(player);
 			// the player only leaves the world now (for animated teleports), so observers see the removal at the actual teleport
 			if (player.isSpawned())
@@ -597,6 +615,16 @@ public class TeleportService {
 			}
 			if (player.isLegionMember() && player.getLegionMember().getWorldId() != worldId)
 				LegionService.getInstance().updateMemberInfo(player);
+		}
+
+		/**
+		 * Restores the character who has faded out from the teleport animation
+		 */
+		private boolean restoreFadedOutPlayer() {
+			if (animation == TeleportAnimation.NONE || !player.isSpawned() || player.isDead())
+				return false;
+			player.getController().onChangedPlayerAttributes();
+			return true;
 		}
 
 	}

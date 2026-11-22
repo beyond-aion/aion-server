@@ -140,7 +140,7 @@ public class PlayerLeaveWorldService {
 			player.getInteractionTask().abort();
 
 		QuestEngine.getInstance().onLogOut(new QuestEnv(null, player, 0));
-		WorldPosition teleportDestination = TeleportService.removePendingTeleport(player); // before delete() cancels the task
+		WorldPosition teleportDestination = TeleportService.cancelPendingTeleport(player); // before delete() cancels the task
 		Timestamp lastOnline = new Timestamp(System.currentTimeMillis());
 		player.getController().delete();
 		player.getCommonData().setOnline(false);

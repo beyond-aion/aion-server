@@ -387,6 +387,10 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 		return task != null && !task.isDone();
 	}
 
+	public Future<?> getTask(TaskId taskId) {
+		return tasks.get(taskId.ordinal());
+	}
+
 	public Future<?> getAndRemoveTask(TaskId taskId) {
 		return tasks.remove(taskId.ordinal());
 	}
