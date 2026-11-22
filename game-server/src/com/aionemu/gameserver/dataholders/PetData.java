@@ -8,6 +8,9 @@ import java.util.Set;
 import jakarta.xml.bind.Unmarshaller;
 import jakarta.xml.bind.annotation.*;
 
+import com.aionemu.gameserver.dataholders.loadingutils.StaticDataListener;
+import com.aionemu.gameserver.model.templates.item.ItemTemplate;
+import com.aionemu.gameserver.model.templates.item.actions.AdoptPetAction;
 import com.aionemu.gameserver.model.templates.pet.PetTemplate;
 
 /**
@@ -30,6 +33,19 @@ public class PetData {
 			petData.put(pet.getTemplateId(), pet);
 		}
 		pets = null;
+		validatePetIds(StaticDataListener.getItemData(u));
+	}
+
+	private void validatePetIds(ItemData itemData) {
+		for (ItemTemplate item : itemData.getItemTemplates()) {
+			if (item.getActions() == null)
+				continue;
+			AdoptPetAction adoptPetAction = item.getActions().getAdoptPetAction();
+			if (adoptPetAction == null)
+				continue;
+			if (getPetTemplate(adoptPetAction.getPetId()) == null)
+				throw new IllegalArgumentException("Missing pet template " + adoptPetAction.getPetId() + " for item " + item.getTemplateId());
+		}
 	}
 
 	public int size() {
