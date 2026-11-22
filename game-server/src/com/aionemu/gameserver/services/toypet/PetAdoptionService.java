@@ -1,16 +1,15 @@
 package com.aionemu.gameserver.services.toypet;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.PetCommonData;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.templates.item.ItemTemplate;
+import com.aionemu.gameserver.model.templates.item.actions.AdoptPetAction;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PET;
+import com.aionemu.gameserver.services.NameRestrictionService;
 import com.aionemu.gameserver.taskmanager.tasks.ExpireTimerTask;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.utils.Util;
+import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
 
 /**
@@ -18,80 +17,69 @@ import com.aionemu.gameserver.utils.idfactory.IDFactory;
  */
 public class PetAdoptionService {
 
-	private static final Logger log = LoggerFactory.getLogger(PetAdoptionService.class);
-
 	/**
 	 * Create a pet for player (with validation)
 	 * 
-	 * @param player
-	 * @param eggObjId
-	 * @param petId
-	 * @param name
-	 * @param decorationId
+	 * @return The error code for {@link SM_PET#adoptionResult(int)}, or 0 on success.
 	 */
-	public static void adoptPet(Player player, int eggObjId, int petId, String name, int decorationId) {
-
-		int eggId = player.getInventory().getItemByObjId(eggObjId).getItemId();
-		ItemTemplate template = DataManager.ITEM_DATA.getItemTemplate(eggId);
-
-		if (!validateAdoption(player, template, petId))
-			return;
-
+	public static int adoptPet(Player player, int eggObjId, int petId, String name, int decorationId, int color, int face, int head) {
+		if (!NameRestrictionService.isValidPetName(name) || NameRestrictionService.isForbidden(name))
+			return SM_PET.ADOPTION_INVALID_NAME;
+		if (player.getPetList().hasSameName(name))
+			return SM_PET.ADOPTION_NAME_ALREADY_USED;
+		if (player.getPetList().hasPet(petId))
+			return SM_PET.ADOPTION_INVALID_EGG;
+		if (DataManager.PET_DATA.getPetTemplate(petId) == null)
+			return SM_PET.ADOPTION_INVALID_EGG;
+		AdoptPetAction adoptPetAction = getAdoptPetAction(player, eggObjId, petId);
+		if (adoptPetAction == null)
+			return SM_PET.ADOPTION_INVALID_EGG;
 		if (!player.getInventory().decreaseByObjectId(eggObjId, 1))
-			return;
-
-		int expireTime = template.getActions().getAdoptPetAction().getExpireMinutes() != 0
-			? (int) ((System.currentTimeMillis() / 1000) + template.getActions().getAdoptPetAction().getExpireMinutes() * 60) : 0;
-
-		addPet(player, petId, name, decorationId, expireTime);
+			return SM_PET.ADOPTION_EGG_NOT_CONSUMED;
+		int expireTimeSeconds =
+			adoptPetAction.getExpireMinutes() != 0 ? (int) ((System.currentTimeMillis() / 1000) + adoptPetAction.getExpireMinutes() * 60) : 0;
+		addPet(player, petId, name, decorationId, color, face, head, expireTimeSeconds);
+		return SM_PET.ADOPTION_SUCCESS;
 	}
 
-	/**
-	 * Add pet to player
-	 * 
-	 * @param player
-	 * @param petId
-	 * @param name
-	 * @param decorationId
-	 */
-	public static void addPet(Player player, int petId, String name, int decorationId, int expireTime) {
-		name = Util.convertName(name);
-		PetCommonData petCommonData = player.getPetList().addPet(player, petId, decorationId, name, expireTime);
-		if (petCommonData != null) {
-			PacketSendUtility.sendPacket(player, new SM_PET(petCommonData, true));
-			ExpireTimerTask.getInstance().registerExpirable(petCommonData, player);
-		}
+	public static void addPet(Player player, int petId, String name, int decorationId, int color, int face, int head, int expireTimeSeconds) {
+		PetCommonData petCommonData = player.getPetList().addPet(player, petId, decorationId, color, face, head, name, expireTimeSeconds);
+		PacketSendUtility.sendPacket(player, SM_PET.adopted(petCommonData));
+		ExpireTimerTask.getInstance().registerExpirable(petCommonData, player);
 	}
 
-	private static boolean validateAdoption(Player player, ItemTemplate template, int petId) {
-		if (template == null || template.getActions() == null || template.getActions().getAdoptPetAction() == null
-			|| template.getActions().getAdoptPetAction().getPetId() != petId) {
-			return false;
+	private static AdoptPetAction getAdoptPetAction(Player player, int eggObjId, int petId) {
+		Item egg = player.getInventory().getItemByObjId(eggObjId);
+		if (egg == null) {
+			AuditLogger.log(player, "tried to adopt pet " + petId + " with missing egg item " + eggObjId);
+			return null;
 		}
-		if (player.getPetList().hasPet(petId)) {
-			log.warn("Duplicate pet adoption {} (pet: {})", player, petId);
-			return false;
+		AdoptPetAction adoptPetAction = egg.getItemTemplate().getActions() == null ? null : egg.getItemTemplate().getActions().getAdoptPetAction();
+		if (adoptPetAction == null || adoptPetAction.getPetId() != petId) {
+			AuditLogger.log(player, "tried to adopt pet " + petId + " with invalid egg item " + eggObjId);
+			return null;
 		}
-		if (DataManager.PET_DATA.getPetTemplate(petId) == null) {
-			log.warn("Trying adopt pet without template. PetId:{}", petId);
-			return false;
-		}
-		return true;
+		return adoptPetAction;
 	}
 
 	/**
 	 * Delete pet
-	 * 
-	 * @param player
-	 * @param petId
 	 */
 	public static void surrenderPet(Player player, int petId) {
+		surrenderPet(player, petId, false);
+	}
+
+	/**
+	 * Delete pet. A pet that reached its expiration date is abandoned (form 14) instead of surrendered, so the client shows the
+	 * "time is up" message.
+	 */
+	public static void surrenderPet(Player player, int petId, boolean expired) {
 		PetCommonData petCommonData = player.getPetList().deletePet(petId);
 		if (petCommonData == null)
 			return;
 		if (player.getPet() != null && player.getPet().getObjectId() == petCommonData.getObjectId())
 			player.getPet().getController().delete();
-		PacketSendUtility.sendPacket(player, new SM_PET(petCommonData, false));
+		PacketSendUtility.sendPacket(player, expired ? SM_PET.abandoned(petCommonData) : SM_PET.surrendered(petCommonData));
 		IDFactory.getInstance().releaseId(petCommonData.getObjectId());
 	}
 

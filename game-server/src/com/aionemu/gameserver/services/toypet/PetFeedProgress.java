@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.services.toypet;
 
+import com.aionemu.commons.utils.Rnd;
+
 /**
  * @author Rolandas
  */
@@ -11,6 +13,7 @@ public final class PetFeedProgress {
 	private PetHungryLevel hungryLevel = PetHungryLevel.HUNGRY;
 	private short lovedFoodMax = 0;
 	private boolean lovedFeeded = false;
+	private int feedRateModifier = Rnd.get(0, 15); // random food rate modifier, part of the feed data
 
 	public PetFeedProgress(short lovedFoodLimit) {
 		lovedFoodMax = (short) (lovedFoodLimit & 0x3F);
@@ -84,12 +87,14 @@ public final class PetFeedProgress {
 		value |= totalPoints >> 2;
 		value <<= 6;
 		value |= lovedConsumed & 0x3F;
-		value <<= 4; // unk
+		value <<= 4; // food rate modifier
+		value |= feedRateModifier & 0xF;
 		return value;
 	}
 
 	public void setData(int savedData) {
-		savedData >>= 4; // drop unk
+		feedRateModifier = savedData & 0xF;
+		savedData >>= 4; // drop food rate modifier
 		lovedConsumed = (short) (savedData & 0x3F);
 		savedData >>= 6;
 		totalPoints = (savedData & 0x3FFF) << 2;
