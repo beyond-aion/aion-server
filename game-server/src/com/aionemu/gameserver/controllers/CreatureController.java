@@ -2,7 +2,6 @@ package com.aionemu.gameserver.controllers;
 
 import java.util.EnumSet;
 import java.util.List;
-import java.util.Map.Entry;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Future;
@@ -67,7 +66,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	private static final Logger log = LoggerFactory.getLogger(CreatureController.class);
 	private volatile TerrainZoneCollisionMaterialActor actor;
 	private MaterialSkillUsage materialSkillUsage;
-	private final ConcurrentHashMap<Integer, Future<?>> tasks = new ConcurrentHashMap<>();
+	private final ConcurrentHashMap<TaskId, Future<?>> tasks = new ConcurrentHashMap<>();
 
 	@Override
 	public void notSee(VisibleObject object, ObjectDeleteAnimation animation) {
@@ -267,7 +266,6 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 		applyGodStoneEffect(attacker, attacker.getEquipment().getOffHandWeapon(), false);
 	}
 
-	@SuppressWarnings("lossy-conversions")
 	private void applyGodStoneEffect(Player attacker, Item weapon, boolean isMainHandWeapon) {
 		if (weapon == null || !weapon.hasGodStone())
 			return;
@@ -379,27 +377,27 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	}
 
 	public boolean hasTask(TaskId taskId) {
-		return tasks.containsKey(taskId.ordinal());
+		return tasks.containsKey(taskId);
 	}
 
 	public boolean hasScheduledTask(TaskId taskId) {
-		Future<?> task = tasks.get(taskId.ordinal());
+		Future<?> task = tasks.get(taskId);
 		return task != null && !task.isDone();
 	}
 
 	public Future<?> getTask(TaskId taskId) {
-		return tasks.get(taskId.ordinal());
+		return tasks.get(taskId);
 	}
 
 	public Future<?> getAndRemoveTask(TaskId taskId) {
-		return tasks.remove(taskId.ordinal());
+		return tasks.remove(taskId);
 	}
 
 	/**
 	 * @return True if the given task was still registered under this id and has been removed.
 	 */
 	public boolean removeTask(TaskId taskId, Future<?> task) {
-		return tasks.remove(taskId.ordinal(), task);
+		return tasks.remove(taskId, task);
 	}
 
 	public Future<?> cancelTask(TaskId taskId) {
@@ -411,7 +409,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	}
 
 	public boolean cancelTaskIfPresent(TaskId taskId, Future<?> task) {
-		if (tasks.remove(taskId.ordinal(), task)) {
+		if (tasks.remove(taskId, task)) {
 			task.cancel(false);
 			return true;
 		}
@@ -422,7 +420,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	 * If task already exist - it will be canceled
 	 */
 	public void addTask(TaskId taskId, Future<?> task) {
-		tasks.compute(taskId.ordinal(), (k, oldTask) -> {
+		tasks.compute(taskId, (_, oldTask) -> {
 			if (oldTask != null) {
 				oldTask.cancel(false);
 				if (taskId == TaskId.DESPAWN) {
@@ -437,8 +435,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	 * Cancel all tasks associated with this controller
 	 */
 	public void cancelAllTasks() {
-		for (Entry<Integer, Future<?>> e : tasks.entrySet()) {
-			Future<?> task = e.getValue();
+		for (Future<?> task : tasks.values()) {
 			if (task != null)
 				task.cancel(false);
 		}
