@@ -117,7 +117,7 @@ abstract class ForcedMovementTask implements Runnable {
 		if (effected.getEffectController().isInAnyAbnormalState(AbnormalState.CANT_BE_FORCE_MOVED))
 			return; // another effect is holding or throwing it around, and it knows better than us where it is
 		if (!act() && fall != null) // an npc is stopped by its own movement once it arrived
-			resync();
+			holdPosition((Player) effected);
 	}
 
 	/**
@@ -158,6 +158,16 @@ abstract class ForcedMovementTask implements Runnable {
 		}
 		ticksUntilResync = ticksPerStep;
 		PacketSendUtility.broadcastToSightedPlayers(effected, new SM_MOVE(effected, MovementMask.IMMEDIATE));
+	}
+
+	/**
+	 * Ends the step he arrived at and tells everyone, himself included, where the server has him. While no step can be found, his own client gets no
+	 * position from anywhere else and may creep or slide away on its own, so it would show him somewhere else than everyone else sees him.
+	 */
+	private void holdPosition(Player player) {
+		ticksUntilResync = ticksPerStep;
+		player.getMoveController().abortMove(); // tells everyone else
+		PacketSendUtility.sendPacket(player, new SM_MOVE(player));
 	}
 
 	/**
