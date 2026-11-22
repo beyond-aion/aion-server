@@ -84,6 +84,13 @@ public class ConfuseEffect extends EffectTemplate {
 			return false;
 		}
 
+		/**
+		 * Attacks a random living enemy in attack range, the effector included.
+		 * <p>
+		 * Better than retail: retail takes the first enemy in its world cell order and checks line of sight only when the hit lands, so an
+		 * enemy behind a wall can be picked and the tick passes without a hit while a visible one stands next to it. Here only visible
+		 * enemies are candidates and one of them is picked at random. To go back, drop the canSee filter and take the first candidate.
+		 */
 		private void attackAnyoneInReach() {
 			if (effected.isDead() || effected.isCasting())
 				return;
