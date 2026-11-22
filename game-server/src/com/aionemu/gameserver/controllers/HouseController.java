@@ -121,13 +121,16 @@ public class HouseController extends VisibleObjectController<House> {
 		}
 	}
 
+	/**
+	 * Kicked visitors are moved without a teleport animation, so they can't stay inside by never confirming the teleport.
+	 */
 	private void moveOutside(Player player, boolean ownerChanged) {
 		if (getOwner().getAddress().getExitMapId() != null) {
 			HouseAddress address = getOwner().getAddress();
 			TeleportService.teleportTo(player, address.getExitMapId(), address.getExitX(), address.getExitY(), address.getExitZ(), (byte) 0,
-				TeleportAnimation.FADE_OUT_BEAM);
+				TeleportAnimation.NONE);
 		} else {
-			teleportNearHouseDoor(player, true);
+			teleportNearHouseDoor(player, true, TeleportAnimation.NONE);
 		}
 		if (ownerChanged)
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CHANGE_OWNER());
@@ -137,6 +140,10 @@ public class HouseController extends VisibleObjectController<House> {
 
 	@SuppressWarnings("lossy-conversions")
 	public void teleportNearHouseDoor(Player player, boolean outsideHouse) {
+		teleportNearHouseDoor(player, outsideHouse, TeleportAnimation.FADE_OUT_BEAM);
+	}
+
+	private void teleportNearHouseDoor(Player player, boolean outsideHouse, TeleportAnimation animation) {
 		SpawnTemplate butler = getOwner().getButler().getSpawn(), relationshipCrystal = getOwner().getRelationshipCrystal().getSpawn();
 		float x, y, z; // midpoint between butler and relationship crystal, since we currently have no door coordinates in templates
 		byte h = PositionUtil.getHeadingTowards(getOwner().getRelationshipCrystal(), butler.getX(), butler.getY());
@@ -151,7 +158,7 @@ public class HouseController extends VisibleObjectController<House> {
 		} else {
 			h += h < 60 ? 60 : -60; // opposite direction (player should look inside house)
 		}
-		TeleportService.teleportTo(player, getOwner().getWorldId(), getOwner().getInstanceId(), x, y, z, h, TeleportAnimation.FADE_OUT_BEAM);
+		TeleportService.teleportTo(player, getOwner().getWorldId(), getOwner().getInstanceId(), x, y, z, h, animation);
 	}
 
 	public void updateSign() {

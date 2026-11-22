@@ -54,6 +54,7 @@ import com.aionemu.gameserver.model.templates.npc.NpcTemplateType;
 import com.aionemu.gameserver.model.templates.ride.RideInfo;
 import com.aionemu.gameserver.model.templates.zone.ZoneType;
 import com.aionemu.gameserver.network.aion.AionConnection;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_ASCENSION_MORPH;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_STATS_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.model.QuestState;
@@ -173,6 +174,7 @@ public class Player extends Creature {
 
 	private byte portAnimation;
 	private boolean isInSprintMode;
+	private volatile boolean ascensionMorphed;
 	private List<ActionObserver> rideObservers;
 
 	private int battleReturnMap;
@@ -1465,6 +1467,17 @@ public class Player extends Creature {
 			setResPosY(0);
 			setResPosZ(0);
 		}
+	}
+
+	public boolean isAscensionMorphed() {
+		return ascensionMorphed;
+	}
+
+	public void setAscensionMorphed(boolean ascensionMorphed) {
+		if (this.ascensionMorphed == ascensionMorphed)
+			return;
+		this.ascensionMorphed = ascensionMorphed;
+		PacketSendUtility.sendPacket(this, new SM_ASCENSION_MORPH(ascensionMorphed));
 	}
 
 	public boolean isLooting() {

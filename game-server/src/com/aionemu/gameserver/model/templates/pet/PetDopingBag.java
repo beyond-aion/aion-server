@@ -63,8 +63,8 @@ public class PetDopingBag {
 	/**
 	 * Currently only scrolls can be relocated
 	 */
-	public void switchItems(int slot1, int slot2) {
-		if (slot1 < 2 || slot2 < 2)
+	public synchronized void switchItems(int slot1, int slot2) {
+		if (slot1 < 2 || slot2 < 2 || itemBag == null)
 			return;
 		int slot1Item = itemBag.length > slot1 ? itemBag[slot1] : 0;
 		int slot2Item = itemBag.length > slot2 ? itemBag[slot2] : 0;
