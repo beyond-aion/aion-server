@@ -12,7 +12,6 @@ import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_ASCENSION_MORPH;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
@@ -232,6 +231,12 @@ public class _2008Ascension extends AbstractQuestHandler {
 	}
 
 	@Override
+	public void onMovieEndEvent(QuestEnv env, int movieId) {
+		if (movieId == 152) // the morph ends with the ascension movie
+			env.getPlayer().setAscensionMorphed(false);
+	}
+
+	@Override
 	public void onLevelChangedEvent(Player player) {
 		defaultOnLevelChangedEvent(player);
 	}
@@ -258,7 +263,7 @@ public class _2008Ascension extends AbstractQuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVars().getQuestVars();
 			if (player.getWorldId() == 320020000)
-				PacketSendUtility.sendPacket(player, new SM_ASCENSION_MORPH(1));
+				player.setAscensionMorphed(true);
 			else if (var > 4 && var != 6) // 6 is class selection, quest should not reset anymore after you killed hellion
 				changeQuestStep(env, var, 4);
 		}
