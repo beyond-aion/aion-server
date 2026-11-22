@@ -106,10 +106,15 @@ abstract class ForcedMovementTask implements Runnable {
 				}
 				case MOVING -> {
 					if (--ticksUntilResync <= 0)
-						resync();
+						resync(false);
 					return;
 				}
 				case LANDED -> ticksUntilNextStep = 1; // he carries on right away, his client is done landing by the time the packet reaches it
+				case ON_GROUND -> {
+					// both clients creep him down on their own, his own included, and only the server can keep them together
+					if (fall.isCreeping() && --ticksUntilResync <= 0)
+						resync(true);
+				}
 			}
 		}
 		if (!isStepDue)
@@ -149,15 +154,17 @@ abstract class ForcedMovementTask implements Runnable {
 	/**
 	 * Sends the position to everyone around, so clients which extrapolated a slide or a fall of their own snap back onto what the server believes.
 	 * Retail sends nothing at all in these moments, which is what makes a target that got stuck impossible to hit for everyone else.
+	 *
+	 * @param toSelf whether his own client gets it too, which only makes sense where it moves him the same way as the server does
 	 */
-	private void resync() {
+	private void resync(boolean toSelf) {
 		if (fall.isFalling()) {
 			ticksUntilResync = TICKS_PER_FALL_UPDATE;
 			fall.sendFallArc();
 			return;
 		}
 		ticksUntilResync = ticksPerStep;
-		PacketSendUtility.broadcastToSightedPlayers(effected, new SM_MOVE(effected, MovementMask.IMMEDIATE));
+		PacketSendUtility.broadcastToSightedPlayers(effected, new SM_MOVE(effected, MovementMask.IMMEDIATE), toSelf);
 	}
 
 	/**

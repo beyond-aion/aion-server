@@ -116,6 +116,10 @@ final class ControlledPlayerFall {
 		return falling;
 	}
 
+	boolean isCreeping() {
+		return creeping;
+	}
+
 	/**
 	 * Moves him one tick further if he is in the air or on ground too steep to stand on.
 	 */
