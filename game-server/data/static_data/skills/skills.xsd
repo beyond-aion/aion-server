@@ -1776,7 +1776,6 @@
 	</xs:simpleType>
 	<xs:simpleType name="AbnormalState">
 		<xs:restriction base="xs:string">
-			<xs:enumeration value="BUFF" />
 			<xs:enumeration value="POISON" />
 			<xs:enumeration value="BLEED" />
 			<xs:enumeration value="PARALYZE" />
@@ -1801,13 +1800,13 @@
 			<xs:enumeration value="DEFORM" />
 			<xs:enumeration value="PULLED" />
 			<xs:enumeration value="NOFLY" />
-			<xs:enumeration value="KNOCKBACK" />
-			<xs:enumeration value="UNK_2" />
-			<xs:enumeration value="UNK_3" />
-			<xs:enumeration value="UNK_4" />
-			<xs:enumeration value="UNK_5" />
+			<xs:enumeration value="SIMPLE_MOVE_BACK" />
+			<xs:enumeration value="BUFF_STUN" />
+			<xs:enumeration value="BUFF_SLEEP" />
+			<xs:enumeration value="BUFF_SILENCE" />
+			<xs:enumeration value="BUFF_BIND" />
 			<xs:enumeration value="HIDE" />
-			<xs:enumeration value="UNK_6" />
+			<xs:enumeration value="INVULNERABLE_WING" />
 			<xs:enumeration value="SANCTUARY" />
 		</xs:restriction>
 	</xs:simpleType>
