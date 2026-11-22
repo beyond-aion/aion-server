@@ -233,7 +233,7 @@ public class _2008Ascension extends AbstractQuestHandler {
 	@Override
 	public void onMovieEndEvent(QuestEnv env, int movieId) {
 		if (movieId == 152) // the morph ends with the ascension movie
-			env.getPlayer().setPlayMode(false);
+			env.getPlayer().setAscensionMorphed(false);
 	}
 
 	@Override
@@ -263,7 +263,7 @@ public class _2008Ascension extends AbstractQuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVars().getQuestVars();
 			if (player.getWorldId() == 320020000)
-				player.setPlayMode(true);
+				player.setAscensionMorphed(true);
 			else if (var > 4 && var != 6) // 6 is class selection, quest should not reset anymore after you killed hellion
 				changeQuestStep(env, var, 4);
 		}

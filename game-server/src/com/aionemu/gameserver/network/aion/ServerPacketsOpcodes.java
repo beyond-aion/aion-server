@@ -197,7 +197,7 @@ public class ServerPacketsOpcodes {
 		// addPacketOpcode(179, SM_BROKER_REGISTERED_LIST.class); // [S_FATIGUE_KOREA]
 		addPacketOpcode(180, SM_CRAFT_ANIMATION.class); // [S_COMBINE_OTHER]
 		addPacketOpcode(181, SM_CRAFT_UPDATE.class); // [S_COMBINE]
-		addPacketOpcode(182, SM_PLAY_MODE.class); // [S_PLAY_MODE]
+		addPacketOpcode(182, SM_ASCENSION_MORPH.class); // [S_PLAY_MODE]
 		addPacketOpcode(183, SM_ITEM_USAGE_ANIMATION.class); // [S_USE_ITEM]
 		addPacketOpcode(184, SM_CUSTOM_SETTINGS.class); // [S_CHANGE_FLAG]
 		addPacketOpcode(185, SM_DUEL.class); // [S_DUEL]

@@ -165,7 +165,7 @@ public class _1002RequestoftheElim extends AbstractQuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			if (player.getWorldId() == WorldMapType.KARAMATIS.getId()) {
-				player.setPlayMode(true);
+				player.setAscensionMorphed(true);
 				return changeQuestStep(env, 13, 20);
 			}
 			return changeQuestStep(env, 20, 13);

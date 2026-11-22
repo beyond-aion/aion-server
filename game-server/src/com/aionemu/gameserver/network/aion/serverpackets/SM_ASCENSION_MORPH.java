@@ -4,15 +4,16 @@ import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
- * Switches the client into or out of play mode, which the intro and ascension quest instances use while the player is morphed.
+ * Switches the ascension morph of the intro and ascension quest instances on or off. While it is on, the client shows the player in the
+ * polymorph equipment of their armor type ("Tunic Form", "Breastplate Form" and so on) whenever it loads their equipment.
  * 
  * @author wylovech
  */
-public class SM_PLAY_MODE extends AionServerPacket {
+public class SM_ASCENSION_MORPH extends AionServerPacket {
 
 	private final boolean active;
 
-	public SM_PLAY_MODE(boolean active) {
+	public SM_ASCENSION_MORPH(boolean active) {
 		this.active = active;
 	}
 

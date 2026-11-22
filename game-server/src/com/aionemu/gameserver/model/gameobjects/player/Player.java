@@ -54,7 +54,7 @@ import com.aionemu.gameserver.model.templates.npc.NpcTemplateType;
 import com.aionemu.gameserver.model.templates.ride.RideInfo;
 import com.aionemu.gameserver.model.templates.zone.ZoneType;
 import com.aionemu.gameserver.network.aion.AionConnection;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAY_MODE;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_ASCENSION_MORPH;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_STATS_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.model.QuestState;
@@ -174,7 +174,7 @@ public class Player extends Creature {
 
 	private byte portAnimation;
 	private boolean isInSprintMode;
-	private volatile boolean playMode;
+	private volatile boolean ascensionMorphed;
 	private List<ActionObserver> rideObservers;
 
 	private int battleReturnMap;
@@ -1470,19 +1470,18 @@ public class Player extends Creature {
 	}
 
 	/**
-	 * Play mode is active while the player is morphed in the intro and ascension quest instances. The client then shows the player in preset
-	 * equipment of their armor type, and other players get the flag in SM_PLAYER_INFO. Retail also refuses matchmaker registration, pet summoning
-	 * and other actions in play mode; we only block channel changes, the rest is unreachable for a low level player in these instances.
+	 * The ascension morph is on while the player is morphed in the intro and ascension quest instances, see {@link SM_ASCENSION_MORPH}. Other
+	 * players get it in SM_PLAYER_INFO.
 	 */
-	public boolean isInPlayMode() {
-		return playMode;
+	public boolean isAscensionMorphed() {
+		return ascensionMorphed;
 	}
 
-	public void setPlayMode(boolean playMode) {
-		if (this.playMode == playMode)
+	public void setAscensionMorphed(boolean ascensionMorphed) {
+		if (this.ascensionMorphed == ascensionMorphed)
 			return;
-		this.playMode = playMode;
-		PacketSendUtility.sendPacket(this, new SM_PLAY_MODE(playMode));
+		this.ascensionMorphed = ascensionMorphed;
+		PacketSendUtility.sendPacket(this, new SM_ASCENSION_MORPH(ascensionMorphed));
 	}
 
 	public boolean isLooting() {

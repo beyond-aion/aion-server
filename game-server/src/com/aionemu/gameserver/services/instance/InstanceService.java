@@ -206,8 +206,8 @@ public class InstanceService {
 	}
 
 	public static void onLeaveInstance(Player player) {
-		// play mode only exists in the quest instances that turn it on
-		player.setPlayMode(false);
+		// the ascension morph only exists in the quest instances that turn it on
+		player.setAscensionMorphed(false);
 		WorldMapInstance instance = player.getWorldMapInstance();
 		instance.getInstanceHandler().onLeaveInstance(player);
 		if (instance.getRegisteredCount() > 0) {

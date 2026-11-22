@@ -202,7 +202,7 @@ public class SM_PLAYER_INFO extends AbstractPlayerInfoPacket {
 		writeS(player.getCommonData().getNote()); // note show in right down windows if your target on player
 
 		writeC(player.getLevel());
-		writeC(player.isInPlayMode() ? 1 : 0);
+		writeC(player.isAscensionMorphed() ? 1 : 0);
 		writeH(player.getPlayerSettings().getDisplay());
 		writeH(player.getPlayerSettings().getDeny());
 		writeH(player.getAbyssRank().getRank().getId());

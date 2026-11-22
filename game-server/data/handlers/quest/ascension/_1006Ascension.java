@@ -256,7 +256,7 @@ public class _1006Ascension extends AbstractQuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVars().getQuestVars();
 			if (player.getWorldId() == 310020000)
-				player.setPlayMode(true);
+				player.setAscensionMorphed(true);
 			else if (var > 3 && var != 5) // 5 is class selection, quest should not reset anymore after you killed orissan
 				changeQuestStep(env, var, 3);
 		}
@@ -266,7 +266,7 @@ public class _1006Ascension extends AbstractQuestHandler {
 	@Override
 	public void onMovieEndEvent(QuestEnv env, int movieId) {
 		if (movieId == 151) // the morph ends with the ascension movie
-			env.getPlayer().setPlayMode(false);
+			env.getPlayer().setAscensionMorphed(false);
 	}
 
 	@Override
