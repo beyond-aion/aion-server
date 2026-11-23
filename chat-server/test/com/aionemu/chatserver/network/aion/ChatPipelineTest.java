@@ -221,4 +221,28 @@ public class ChatPipelineTest {
 		login(chatClient);
 		assertTrue(receivesBroadcasts(chatClient));
 	}
+
+	@Test
+	public void aNewRegistrationClosesThePreviousConnectionAndKeepsTheNewOneInBroadcasts() throws Exception {
+		ChatClient firstClient = ChatService.getInstance().registerPlayer(PLAYER_ID, ACCOUNT, NAME, Race.ELYOS, (byte) 0);
+		login(firstClient);
+		EmbeddedChannel first = channel;
+		try {
+			ChatClient secondClient = ChatService.getInstance().registerPlayer(PLAYER_ID, ACCOUNT, NAME, Race.ELYOS, (byte) 0);
+			first.runPendingTasks();
+			assertFalse(first.isOpen(), "the previous registration's connection stayed open");
+			assertFalse(receivesBroadcasts(firstClient));
+
+			connect();
+			login(secondClient);
+			int channelId = joinChannel(5);
+			// simulate a delayed disconnect of the old ChatClient after the new one authenticated
+			BroadcastService.getInstance().removeClient(firstClient);
+			assertTrue(receivesBroadcasts(secondClient), "closing the old client evicted the new one from broadcasts");
+			chat(channelId, "hello");
+			receive(0x001A).release();
+		} finally {
+			first.finishAndReleaseAll();
+		}
+	}
 }

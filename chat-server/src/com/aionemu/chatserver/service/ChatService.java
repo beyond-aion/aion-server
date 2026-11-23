@@ -45,7 +45,16 @@ public class ChatService {
 		byte[] accountToken = md.digest();
 		byte[] token = generateToken(accountToken);
 		ChatClient chatClient = new ChatClient(playerId, token, accName, nick, race, accessLevel);
-		players.put(playerId, chatClient);
+		ChatClient previous = players.put(playerId, chatClient);
+		if (previous != null) {
+			AionConnection previousConnection;
+			synchronized (previous) {
+				BroadcastService.getInstance().removeClient(previous);
+				previousConnection = previous.getConnection();
+			}
+			if (previousConnection != null)
+				previousConnection.close();
+		}
 		return chatClient;
 	}
 
