@@ -71,13 +71,15 @@ public class ChatService {
 		return token;
 	}
 
-	public void registerPlayerConnection(int msgIndex, int playerId, byte[] token, byte[] identifier, String name, String accName,
-		AionConnection connection) {
+	public void registerPlayerConnection(int msgIndex, int playerId, byte[] token, byte[] identifier, String accName, AionConnection connection) {
+		String nameIdentifier = new String(identifier, StandardCharsets.UTF_16LE); // Name@identifier
+		int endIndex = nameIdentifier.lastIndexOf('@');
+		String name = endIndex == -1 ? nameIdentifier : nameIdentifier.substring(0, endIndex);
 		ChatClient chatClient = players.get(playerId);
 		if (chatClient == null)
-			log.warn("Client tried to connect but was not yet registered from game server side");
+			log.warn("Client tried to connect but was not yet registered from game server side with player ID {} (name ID: {})", playerId, nameIdentifier);
 		else if (!Arrays.equals(chatClient.getToken(), token))
-			log.warn("Client tried to connect but given token doesn't match");
+			log.warn("Client tried to connect but given token doesn't match (account: {})", chatClient.getAccountName());
 		else if (!chatClient.getAccountName().equalsIgnoreCase(accName)) // client sends accName lowercase
 			log.warn("Client tried to connect with account name: {} (expected: {})", accName, chatClient.getAccountName());
 		else if (!chatClient.getName().equals(name))

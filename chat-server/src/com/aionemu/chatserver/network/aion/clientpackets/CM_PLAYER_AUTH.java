@@ -30,8 +30,7 @@ public class CM_PLAYER_AUTH extends AbstractClientPacket {
 		readB(gameNameLength); // AION
 		readD(); // 27
 		readQ(); // first half of the user ID, 1 or 3
-		playerId = readD(); // second half of the user ID (Q), the game user ID
-		readD();
+		playerId = (int) readQ(); // second half of the user ID, the game user ID
 		readQ(); // 0
 		int length = readUH() * 2;
 		identifier = readB(length); // name@server
@@ -43,8 +42,6 @@ public class CM_PLAYER_AUTH extends AbstractClientPacket {
 
 	@Override
 	protected void runImpl() {
-		String nameIdentifier = new String(identifier, StandardCharsets.UTF_16LE); // Name@identifier
-		String charName = nameIdentifier.substring(0, nameIdentifier.lastIndexOf('@'));
-		ChatService.getInstance().registerPlayerConnection(msgIndex, playerId, token, identifier, charName, accountName, getConnection());
+		ChatService.getInstance().registerPlayerConnection(msgIndex, playerId, token, identifier, accountName, getConnection());
 	}
 }
