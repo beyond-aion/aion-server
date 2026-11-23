@@ -160,7 +160,7 @@ public class LoginServer {
 		// a client that was replaced by a newer login of the same account must not log out the newer one
 		Account account = connection.getAccount();
 		if (account != null && loggedInAccounts.remove(account.getId(), connection))
-			sendPacket(new SM_ACCOUNT_DISCONNECTED(account.getId()));
+			notifyAboutAccountDisconnection(account.getId());
 	}
 
 	public void setGameServerCount(int gameServerCount) {
@@ -225,7 +225,7 @@ public class LoginServer {
 	/**
 	 * Sends the next request waiting for the given account to the login server, if there is one.
 	 */
-	private void checkNextRequest(int accountId) {
+	private synchronized void checkNextRequest(int accountId) {
 		Deque<LoginRequest> waiting = waitingRequests.get(accountId);
 		if (waiting == null)
 			return;
@@ -246,39 +246,58 @@ public class LoginServer {
 	/**
 	 * This method is called by CM_ACCOUNT_AUTH_RESPONSE LoginServer packets to notify GameServer about results of client authentication.
 	 */
-	public synchronized void accountAuthenticationResponse(int accountId, String accountName, boolean result, long creationDate,
+	public void accountAuthenticationResponse(int accountId, String accountName, boolean result, long creationDate,
 		AccountTime accountTime, byte accessLevel, byte membership, String allowedHddSerial) {
-		LoginRequest loginRequest = checkedRequests.remove(accountId);
-		if (loginRequest == null)
-			return;
-		checkStartNanos.remove(accountId);
-		AionConnection client = loginRequest.connection();
-		loginRequests.remove(client);
-		checkNextRequest(accountId);
-		if (!result || client.isClosing() || !validateMacAndHddSerial(client, allowedHddSerial)) {
-			client.close(new SM_L2AUTH_LOGIN_CHECK(false, accountName)); // LS sends no accName when result is false
+		AionConnection client = removeLoginRequest(accountId);
+		if (!result || client == null || client.isClosing() || !validateMacAndHddSerial(client, allowedHddSerial)) {
+			if (client != null)
+				client.close(new SM_L2AUTH_LOGIN_CHECK(false, accountName)); // LS sends no accName when result is false
 			// The login server has moved the account to this game server only if it accepted the session key. Telling it otherwise about an account it
 			// didn't accept would log out whoever plays on that account right now.
 			if (result)
-				sendPacket(new SM_ACCOUNT_DISCONNECTED(accountId));
+				notifyAboutAccountDisconnection(accountId);
 			return;
 		}
 		Account account = AccountService.getAccount(accountId, accountName, creationDate, accountTime, accessLevel, membership, allowedHddSerial);
-		if (SecurityConfig.HDD_SERIAL_LOCK_UNLOCKED_ACCOUNTS && account.getAllowedHddSerial().isEmpty() && !client.getHddSerial().isEmpty()) {
-			account.setAllowedHddSerial(client.getHddSerial());
-			sendPacket(new SM_CHANGE_ALLOWED_HDD_SERIAL(account));
+		boolean lockHddSerial = SecurityConfig.HDD_SERIAL_LOCK_UNLOCKED_ACCOUNTS && account.getAllowedHddSerial().isEmpty()
+			&& !client.getHddSerial().isEmpty();
+		AionConnection previousClient;
+		synchronized (this) {
+			if (client.isClosing()) { // closed while the account was loaded from the database
+				notifyAboutAccountDisconnection(accountId);
+				return;
+			}
+			if (lockHddSerial)
+				account.setAllowedHddSerial(client.getHddSerial());
+			// before the client is published, since the readers of loggedInAccounts don't synchronize on this and use its account
+			client.setAccount(account);
+			client.setState(AionConnection.State.AUTHED);
+			// a client of the same account that is still connected, e.g. at the character selection while the login server link was down
+			previousClient = loggedInAccounts.put(accountId, client);
 		}
+		if (lockHddSerial)
+			sendPacket(new SM_CHANGE_ALLOWED_HDD_SERIAL(account));
 		kickOnlineCharacters(account);
-		// before the client is published, since the readers of loggedInAccounts don't synchronize on this and use its account
-		client.setAccount(account);
-		client.setState(AionConnection.State.AUTHED);
-		// a client of the same account that is still connected, e.g. at the character selection while the login server link was down
-		AionConnection previousClient = loggedInAccounts.put(accountId, client);
 		if (previousClient != null)
 			previousClient.close(SM_SYSTEM_MESSAGE.STR_KICK_ANOTHER_USER_TRY_LOGIN());
 		log.info("{} authed with MAC: {} and HDD serial: {}", account, client.getMacAddress(), client.getHddSerial());
 		client.sendPacket(new SM_L2AUTH_LOGIN_CHECK(true, accountName));
 		sendPacket(new SM_ACCOUNT_CONNECTION_INFO(account.getId(), System.currentTimeMillis(), client.getIP(), client.getMacAddress(), client.getHddSerial()));
+	}
+
+	private synchronized AionConnection removeLoginRequest(int accountId) {
+		LoginRequest loginRequest = checkedRequests.remove(accountId);
+		if (loginRequest == null)
+			return null;
+		checkStartNanos.remove(accountId);
+		loginRequests.remove(loginRequest.connection);
+		checkNextRequest(accountId);
+		return loginRequest.connection;
+	}
+
+	private void notifyAboutAccountDisconnection(int accountId) {
+		if (!loggedInAccounts.containsKey(accountId))
+			sendPacket(new SM_ACCOUNT_DISCONNECTED(accountId));
 	}
 
 	private boolean validateMacAndHddSerial(AionConnection client, String allowedHddSerial) {
