@@ -68,12 +68,6 @@ class AionCryptHandler extends ChannelDuplexHandler {
 			return;
 		}
 		decryptedAny = true;
-		if (frame.readableBytes() < 5) { // op + static code + op == 5 bytes
-			frame.release();
-			log.warn("Received fake packet from {}, disconnecting", connection);
-			ctx.close();
-			return;
-		}
 		ctx.fireChannelRead(frame);
 	}
 

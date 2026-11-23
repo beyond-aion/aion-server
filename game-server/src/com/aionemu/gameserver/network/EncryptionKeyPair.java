@@ -91,6 +91,7 @@ public class EncryptionKeyPair {
 	 */
 	private boolean validateClientPacket(ByteBuf buf) {
 		int start = buf.readerIndex();
+		// op + static code + op == 5 bytes
 		return buf.readableBytes() >= 5 && buf.getShortLE(start) == ~buf.getShortLE(start + 3) && buf.getByte(start + 2) == staticClientPacketCode;
 	}
 
