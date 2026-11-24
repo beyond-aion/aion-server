@@ -13,7 +13,7 @@ public class PrivateStore {
 	public static final int MAX_STORE_MESSAGE_LENGTH = 255;
 
 	private final Player owner;
-	private Map<Integer, TradePSItem> items;
+	private volatile Map<Integer, TradePSItem> items; // replaced on sales, read by the packets of the buyers
 	private String storeMessage;
 
 	public PrivateStore(Player owner) {
