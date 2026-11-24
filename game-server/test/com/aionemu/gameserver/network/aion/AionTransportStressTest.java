@@ -3,19 +3,15 @@ package com.aionemu.gameserver.network.aion;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.net.InetSocketAddress;
+import java.net.ServerSocket;
 import java.nio.ByteOrder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReference;
-
-import java.net.ServerSocket;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Assumptions;
@@ -30,22 +26,16 @@ import com.aionemu.gameserver.configs.network.NetworkConfig;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufUtil;
-import io.netty.channel.Channel;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInitializer;
-import io.netty.channel.ChannelOption;
-import io.netty.channel.EventLoopGroup;
-import io.netty.channel.MultiThreadIoEventLoopGroup;
-import io.netty.channel.SimpleChannelInboundHandler;
+import io.netty.channel.*;
 import io.netty.channel.epoll.Epoll;
 import io.netty.channel.nio.NioIoHandler;
+import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.channel.uring.IoUring;
-import io.netty.channel.socket.SocketChannel;
 import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 
 /**
- * The real game client pipeline ({@link AionChannelInitializer}, {@link AionConnection}, {@link AionCryptHandler}) on real sockets of each
+ * The real game client pipeline ({@link AionConnection}, {@link AionCryptHandler}) on real sockets of each
  * transport: many threads broadcast shared packet instances to all connections at once, as PacketSendUtility does, and every client decrypts and
  * checks every packet. A packet written by two I/O threads at the same time would come out mixed up and fail the checks.
  */
@@ -83,66 +73,67 @@ public class AionTransportStressTest {
 		}
 		NettyServer server = new NettyServer(transport, ioThreads);
 		List<AionConnection> connections = new ArrayList<>();
-		server.bind(new InetSocketAddress("127.0.0.1", port), "stress test clients", channel -> {
-			AionConnection connection = new AionConnection(channel);
-			AionChannelInitializer.init(channel, connection);
-			synchronized (connections) {
-				connections.add(connection);
-			}
-		});
-		EventLoopGroup clientGroup = new MultiThreadIoEventLoopGroup(4, NioIoHandler.newFactory());
 		int expected = SENDERS * BROADCASTS_PER_SENDER;
 		CountDownLatch keyed = new CountDownLatch(CONNECTIONS), done = new CountDownLatch(CONNECTIONS);
 		AtomicInteger disconnects = new AtomicInteger();
 		AtomicReference<String> firstError = new AtomicReference<>();
 		AtomicLong bytes = new AtomicLong();
-		try {
-			Bootstrap bootstrap = new Bootstrap().group(clientGroup).channel(NioSocketChannel.class).option(ChannelOption.TCP_NODELAY, true)
-				.handler(new ChannelInitializer<SocketChannel>() {
-
-					@Override
-					protected void initChannel(SocketChannel ch) {
-						ch.pipeline().addLast(new LengthFieldBasedFrameDecoder(ByteOrder.LITTLE_ENDIAN, 8192, 0, 2, -2, 2, true))
-							.addLast(new Client(expected, keyed, done, disconnects, firstError, bytes));
+		try (ExecutorService packetThreads = Executors.newVirtualThreadPerTaskExecutor()) {
+			EventLoopGroup clientGroup = new MultiThreadIoEventLoopGroup(4, NioIoHandler.newFactory());
+			try {
+				server.bind(new InetSocketAddress("127.0.0.1", port), "stress test clients", channel -> {
+					AionConnection connection = AionConnection.initChannel(channel, packetThreads);
+					synchronized (connections) {
+						connections.add(connection);
 					}
 				});
-			List<Channel> clients = new ArrayList<>();
-			for (int i = 0; i < CONNECTIONS; i++)
-				clients.add(bootstrap.connect("127.0.0.1", port).syncUninterruptibly().channel());
-			assertTrue(keyed.await(30, TimeUnit.SECONDS), "not every client got SM_KEY");
-			assertEquals(CONNECTIONS, connections.size());
+				Bootstrap bootstrap = new Bootstrap().group(clientGroup).channel(NioSocketChannel.class).option(ChannelOption.TCP_NODELAY, true).handler(
+					new ChannelInitializer<SocketChannel>() {
 
-			long start = System.nanoTime();
-			try (ExecutorService senders = Executors.newVirtualThreadPerTaskExecutor()) {
-				for (int s = 0; s < SENDERS; s++) {
-					int sender = s;
-					senders.execute(() -> {
-						for (int seq = 0; seq < BROADCASTS_PER_SENDER; seq++) {
-							StressPacket packet = new StressPacket(sender, seq);
-							for (AionConnection c : connections)
-								c.sendPacket(packet);
+						@Override
+						protected void initChannel(SocketChannel ch) {
+							ch.pipeline().addLast(new LengthFieldBasedFrameDecoder(ByteOrder.LITTLE_ENDIAN, 8192, 0, 2, -2, 2, true)).addLast(
+								new Client(expected, keyed, done, disconnects, firstError, bytes));
 						}
 					});
+				List<Channel> clients = new ArrayList<>();
+				for (int i = 0; i < CONNECTIONS; i++)
+					clients.add(bootstrap.connect("127.0.0.1", port).syncUninterruptibly().channel());
+				assertTrue(keyed.await(30, TimeUnit.SECONDS), "not every client got SM_KEY");
+				assertEquals(CONNECTIONS, connections.size());
+
+				long start = System.nanoTime();
+				try (ExecutorService senders = Executors.newVirtualThreadPerTaskExecutor()) {
+					for (int s = 0; s < SENDERS; s++) {
+						int sender = s;
+						senders.execute(() -> {
+							for (int seq = 0; seq < BROADCASTS_PER_SENDER; seq++) {
+								StressPacket packet = new StressPacket(sender, seq);
+								for (AionConnection c : connections)
+									c.sendPacket(packet);
+							}
+						});
+					}
 				}
-			}
-			boolean finished = done.await(Integer.getInteger("stress.wait_seconds", 120), TimeUnit.SECONDS);
-			double seconds = (System.nanoTime() - start) / 1e9;
-			System.out.printf("%s, %d I/O thread(s): %d connections x %d packets in %.1f s, %.0f MB, first error: %s%n", transport, ioThreads,
-				CONNECTIONS, expected, seconds, bytes.get() / 1e6, firstError.get());
-			assertNull(firstError.get());
-			assertEquals(0, disconnects.get(), "connections were closed");
-			assertTrue(finished, "not every client got every packet within 120 s");
-			for (Channel ch : clients)
-				ch.close();
-		} finally {
-			clientGroup.shutdownGracefully(0, 1, TimeUnit.SECONDS).syncUninterruptibly();
-			long start = System.nanoTime();
-			java.util.concurrent.CompletableFuture<Void> shutdown = java.util.concurrent.CompletableFuture.runAsync(server::shutdown);
-			try {
-				shutdown.get(30, TimeUnit.SECONDS);
-				System.out.printf("%s, %d I/O thread(s): shutdown took %.1f s%n", transport, ioThreads, (System.nanoTime() - start) / 1e9);
-			} catch (java.util.concurrent.TimeoutException e) {
-				System.out.printf("%s, %d I/O thread(s): SHUTDOWN HUNG%n", transport, ioThreads);
+				boolean finished = done.await(Integer.getInteger("stress.wait_seconds", 120), TimeUnit.SECONDS);
+				double seconds = (System.nanoTime() - start) / 1e9;
+				System.out.printf("%s, %d I/O thread(s): %d connections x %d packets in %.1f s, %.0f MB, first error: %s%n", transport, ioThreads,
+					CONNECTIONS, expected, seconds, bytes.get() / 1e6, firstError.get());
+				assertNull(firstError.get());
+				assertEquals(0, disconnects.get(), "connections were closed");
+				assertTrue(finished, "not every client got every packet within 120 s");
+				for (Channel ch : clients)
+					ch.close();
+			} finally {
+				clientGroup.shutdownGracefully(0, 1, TimeUnit.SECONDS).syncUninterruptibly();
+				long start = System.nanoTime();
+				CompletableFuture<Void> shutdown = CompletableFuture.runAsync(server::shutdown);
+				try {
+					shutdown.get(30, TimeUnit.SECONDS);
+					System.out.printf("%s, %d I/O thread(s): shutdown took %.1f s%n", transport, ioThreads, (System.nanoTime() - start) / 1e9);
+				} catch (TimeoutException e) {
+					System.out.printf("%s, %d I/O thread(s): SHUTDOWN HUNG%n", transport, ioThreads);
+				}
 			}
 		}
 	}

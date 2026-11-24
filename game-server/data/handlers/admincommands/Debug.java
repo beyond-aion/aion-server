@@ -7,8 +7,8 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import com.aionemu.gameserver.GameServer;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.network.NetConnector;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.services.player.PlayerService;
 import com.aionemu.gameserver.utils.ChatUtil;
@@ -34,7 +34,7 @@ public class Debug extends AdminCommand {
 			return;
 		}
 		if ("connections".equalsIgnoreCase(params[0])) {
-			Stream<AionConnection> connections = GameServer.findClientConnections();
+			Stream<AionConnection> connections = NetConnector.findClientConnections();
 			sendInfo(admin, "Online clients:\n\t" + connections.map(AionConnection::toString).collect(Collectors.joining("\n\t")));
 		} else if ("connectedPlayers".equalsIgnoreCase(params[0])) {
 			List<Player> connectedPlayers = findConnectedPlayers();
@@ -68,7 +68,7 @@ public class Debug extends AdminCommand {
 	}
 
 	private List<Player> findConnectedPlayers() {
-		Stream<AionConnection> connections = GameServer.findClientConnections();
+		Stream<AionConnection> connections = NetConnector.findClientConnections();
 		return connections.map(AionConnection::getActivePlayer).filter(Objects::nonNull).sorted(Comparator.comparing(Player::getName)).toList();
 	}
 }

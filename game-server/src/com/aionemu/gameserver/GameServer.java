@@ -1,10 +1,7 @@
 package com.aionemu.gameserver;
 
 import java.lang.management.ManagementFactory;
-import java.time.Duration;
-import java.util.List;
 import java.util.TimeZone;
-import java.util.concurrent.locks.LockSupport;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.Stream;
 
@@ -14,8 +11,6 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.commons.configuration.transformers.PropertyTransformers;
 import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.commons.logging.Logging;
-import com.aionemu.commons.network.netty.NettyServer;
-import com.aionemu.commons.utils.concurrent.SequentialExecutor;
 import com.aionemu.commons.utils.concurrent.UncaughtExceptionHandler;
 import com.aionemu.commons.utils.info.SystemInfo;
 import com.aionemu.commons.utils.info.VersionInfo;
@@ -25,7 +20,6 @@ import com.aionemu.gameserver.configs.Config;
 import com.aionemu.gameserver.configs.main.CleaningConfig;
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.configs.main.GSConfig;
-import com.aionemu.gameserver.configs.network.NetworkConfig;
 import com.aionemu.gameserver.custom.instance.CustomInstanceService;
 import com.aionemu.gameserver.custom.pvpmap.PvpMapService;
 import com.aionemu.gameserver.dao.PlayerDAO;
@@ -35,11 +29,7 @@ import com.aionemu.gameserver.instance.InstanceEngine;
 import com.aionemu.gameserver.model.GameEngine;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.siege.Influence;
-import com.aionemu.gameserver.network.aion.AionChannelInitializer;
-import com.aionemu.gameserver.network.aion.AionConnection;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_QUIT_RESPONSE;
-import com.aionemu.gameserver.network.chatserver.ChatServer;
-import com.aionemu.gameserver.network.loginserver.LoginServer;
+import com.aionemu.gameserver.network.NetConnector;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.services.*;
 import com.aionemu.gameserver.services.abyss.AbyssRankUpdateService;
@@ -57,7 +47,6 @@ import com.aionemu.gameserver.taskmanager.AbstractPeriodicTaskManager;
 import com.aionemu.gameserver.taskmanager.tasks.housing.AuctionAutoFillTask;
 import com.aionemu.gameserver.taskmanager.tasks.housing.AuctionEndTask;
 import com.aionemu.gameserver.taskmanager.tasks.housing.MaintenanceTask;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.chathandlers.ChatProcessor;
 import com.aionemu.gameserver.utils.cron.ThreadPoolManagerRunnableRunner;
@@ -83,8 +72,6 @@ public class GameServer {
 	}
 	private static final Logger log = LoggerFactory.getLogger(GameServer.class);
 	public static final VersionInfo versionInfo = new VersionInfo(GameServer.class);
-
-	private static NettyServer nettyServer;
 
 	// TODO remove all this shit
 	private static int ELYOS_COUNT = 0;
@@ -186,24 +173,9 @@ public class GameServer {
 		VersionInfo.logAll(versionInfo, GSConfig.TIME_ZONE_ID);
 		SystemInfo.logAll();
 
-		nettyServer = initNettyServer();
+		NetConnector.connect();
 		Runtime.getRuntime().addShutdownHook(ShutdownHook.getInstance());
 		log.info(Logging.formatStartupMessage("Game server", START_TIME_NANOS));
-
-		LoginServer.getInstance().connect(nettyServer);
-		if (GSConfig.ENABLE_CHAT_SERVER)
-			ChatServer.getInstance().connect(nettyServer);
-	}
-
-	/**
-	 * Starts servers for connection with aion client and login\chat server.
-	 */
-	private static NettyServer initNettyServer() {
-		if (NetworkConfig.PACKET_PROCESSOR_STUCK_WARN_SECONDS > 0)
-			SequentialExecutor.startWatchdog(Duration.ofSeconds(NetworkConfig.PACKET_PROCESSOR_STUCK_WARN_SECONDS));
-		NettyServer nettyServer = new NettyServer(NetworkConfig.TRANSPORT, NetworkConfig.IO_THREADS);
-		nettyServer.bind(NetworkConfig.CLIENT_SOCKET_ADDRESS, "Aion game clients", new AionChannelInitializer());
-		return nettyServer;
 	}
 
 	/**
@@ -232,34 +204,6 @@ public class GameServer {
 
 		// Initialize cron service
 		CronService.initSingleton(ThreadPoolManagerRunnableRunner.class, TimeZone.getTimeZone(GSConfig.TIME_ZONE_ID));
-	}
-
-	public static void shutdownNettyServer() {
-		if (nettyServer != null) {
-			if (forceStaffClientsToServerSelectionScreen())
-				LockSupport.parkNanos(Duration.ofMillis(200).toNanos()); // wait for login server to accept reconnections
-			long clients = findClientConnections().count();
-			log.info("Shutting down the network{}", clients == 0 ? "" : ", closing " + clients + " client connection(s)");
-			nettyServer.shutdown();
-			if (!AionConnection.shutdownPacketExecution(Duration.ofSeconds(10)))
-				log.warn("Client packets were still being executed after 10 seconds");
-		}
-	}
-
-	public static Stream<AionConnection> findClientConnections() {
-		return nettyServer.findConnections(AionConnection.class);
-	}
-
-	private static boolean forceStaffClientsToServerSelectionScreen() {
-		List<AionConnection> staffClients = findClientConnections().filter(c -> c.getAccount() != null && c.getAccount().getAccessLevel() > 0).toList();
-		if (staffClients.isEmpty())
-			return false;
-		staffClients.forEach(c -> {
-			if (c.getState() == AionConnection.State.IN_GAME)
-				PacketSendUtility.sendPacket(c.getActivePlayer(), SM_QUIT_RESPONSE.quitToEditScreen());
-			LoginServer.getInstance().requestAuthReconnection(c.getAccount().getId(), c);
-		});
-		return true;
 	}
 
 	public static boolean isShutdownScheduled() {

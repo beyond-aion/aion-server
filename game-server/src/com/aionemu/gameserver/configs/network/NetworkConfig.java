@@ -116,27 +116,27 @@ public class NetworkConfig {
 	@Property(key = "gameserver.network.logging.ignored_packets", defaultValue = "false")
 	public static boolean LOG_IGNORED_PACKETS;
 
-	@Property(key = "gameserver.network.flood.connections", defaultValue = "true")
-	public static boolean ENABLE_FLOOD_CONNECTIONS;
+	/**
+	 * Client connections that may be open at the same time, 0 for no limit.
+	 */
+	@Property(key = "gameserver.network.client.max_connections", defaultValue = "20000")
+	public static int MAX_CONNECTIONS;
 
-	@Property(key = "gameserver.network.flood.tick", defaultValue = "1000")
-	public static int Flood_Tick;
+	/**
+	 * Connections an IP may have open at the same time, 0 for no limit.
+	 */
+	@Property(key = "gameserver.network.client.max_connections_per_ip", defaultValue = "200")
+	public static int MAX_CONNECTIONS_PER_IP;
 
-	@Property(key = "gameserver.network.flood.short.warn", defaultValue = "10")
-	public static int Flood_SWARN;
+	/**
+	 * New connections an IP may open per second on average, after a burst of {@link #CONNECTION_BURST_PER_IP}, 0 for no limit.
+	 */
+	@Property(key = "gameserver.network.client.connections_per_second_per_ip", defaultValue = "5")
+	public static double CONNECTIONS_PER_SECOND_PER_IP;
 
-	@Property(key = "gameserver.network.flood.short.reject", defaultValue = "20")
-	public static int Flood_SReject;
-
-	@Property(key = "gameserver.network.flood.short.tick", defaultValue = "10")
-	public static int Flood_STick;
-
-	@Property(key = "gameserver.network.flood.long.warn", defaultValue = "30")
-	public static int Flood_LWARN;
-
-	@Property(key = "gameserver.network.flood.long.reject", defaultValue = "60")
-	public static int Flood_LReject;
-
-	@Property(key = "gameserver.network.flood.long.tick", defaultValue = "60")
-	public static int Flood_LTick;
+	/**
+	 * New connections an IP may open at once before {@link #CONNECTIONS_PER_SECOND_PER_IP} applies.
+	 */
+	@Property(key = "gameserver.network.client.connection_burst_per_ip", defaultValue = "30")
+	public static int CONNECTION_BURST_PER_IP;
 }

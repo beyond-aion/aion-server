@@ -67,7 +67,7 @@ public class LoginServerTest {
 	private AionConnection client() {
 		EmbeddedChannel channel = embeddedChannel();
 		clientChannels.add(channel);
-		return new AionConnection(channel);
+		return new AionConnection(channel, Runnable::run);
 	}
 
 	private static EmbeddedChannel channel(AionConnection client) throws Exception {

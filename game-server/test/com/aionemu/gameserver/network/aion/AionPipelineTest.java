@@ -57,8 +57,7 @@ public class AionPipelineTest {
 				return client;
 			}
 		};
-		connection = new AionConnection(channel, packetTasks::add);
-		AionChannelInitializer.init(channel, connection);
+		connection = AionConnection.initChannel(channel, packetTasks::add);
 		channel.register();
 		channel.runPendingTasks();
 
@@ -264,7 +263,7 @@ public class AionPipelineTest {
 
 	@Test
 	public void closesOnAPacketLargerThanTheLimitBeforeReceivingIt() {
-		channel.writeInbound(Unpooled.buffer().writeShortLE(AionChannelInitializer.MAX_RECEIVED_PACKET_SIZE + 1).writeZero(16));
+		channel.writeInbound(Unpooled.buffer().writeShortLE(AionConnection.MAX_PACKET_SIZE + 1).writeZero(16));
 		assertFalse(channel.isOpen());
 	}
 

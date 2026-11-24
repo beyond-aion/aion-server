@@ -7,11 +7,7 @@ import java.net.ServerSocket;
 import java.nio.ByteOrder;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
+import java.util.concurrent.*;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Assumptions;
@@ -24,17 +20,12 @@ import com.aionemu.commons.network.netty.Transport;
 import com.aionemu.gameserver.configs.network.NetworkConfig;
 
 import io.netty.bootstrap.Bootstrap;
-import io.netty.channel.Channel;
-import io.netty.channel.ChannelInboundHandlerAdapter;
-import io.netty.channel.ChannelInitializer;
-import io.netty.channel.ChannelOption;
-import io.netty.channel.EventLoopGroup;
-import io.netty.channel.MultiThreadIoEventLoopGroup;
+import io.netty.channel.*;
 import io.netty.channel.epoll.Epoll;
 import io.netty.channel.nio.NioIoHandler;
+import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.channel.uring.IoUring;
-import io.netty.channel.socket.SocketChannel;
 import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 import io.netty.util.ReferenceCountUtil;
 
@@ -69,26 +60,26 @@ public class AionShutdownStressTest {
 			port = s.getLocalPort();
 		}
 		NettyServer server = new NettyServer(transport, ioThreads);
-		List<AionConnection> connections = new ArrayList<>();
-		server.bind(new InetSocketAddress("127.0.0.1", port), "shutdown test clients", channel -> {
-			AionConnection connection = new AionConnection(channel);
-			AionChannelInitializer.init(channel, connection);
-			synchronized (connections) {
-				connections.add(connection);
-			}
-		});
-		EventLoopGroup clientGroup = new MultiThreadIoEventLoopGroup(4, NioIoHandler.newFactory());
-		try {
-			List<Channel> clients = new ArrayList<>();
-			for (int i = 0; i < CLIENTS; i++) {
-				boolean reads = i % 3 == 0;
-				Bootstrap bootstrap = new Bootstrap().group(clientGroup).channel(NioSocketChannel.class).option(ChannelOption.AUTO_READ, reads)
-					.option(ChannelOption.SO_RCVBUF, 16 * 1024).handler(new ChannelInitializer<SocketChannel>() {
+		try (ExecutorService packetThreads = Executors.newVirtualThreadPerTaskExecutor()) {
+			EventLoopGroup clientGroup = new MultiThreadIoEventLoopGroup(4, NioIoHandler.newFactory());
+			try {
+				List<AionConnection> connections = new ArrayList<>();
+				server.bind(new InetSocketAddress("127.0.0.1", port), "shutdown test clients", channel -> {
+					AionConnection connection = AionConnection.initChannel(channel, packetThreads);
+					synchronized (connections) {
+						connections.add(connection);
+					}
+				});
+				List<Channel> clients = new ArrayList<>();
+				for (int i = 0; i < CLIENTS; i++) {
+					boolean reads = i % 3 == 0;
+					Bootstrap bootstrap = new Bootstrap().group(clientGroup).channel(NioSocketChannel.class).option(ChannelOption.AUTO_READ, reads).option(
+						ChannelOption.SO_RCVBUF, 16 * 1024).handler(new ChannelInitializer<SocketChannel>() {
 
 						@Override
 						protected void initChannel(SocketChannel ch) {
-							ch.pipeline().addLast(new LengthFieldBasedFrameDecoder(ByteOrder.LITTLE_ENDIAN, 8192, 0, 2, -2, 2, true))
-								.addLast(new ChannelInboundHandlerAdapter() {
+							ch.pipeline().addLast(new LengthFieldBasedFrameDecoder(ByteOrder.LITTLE_ENDIAN, 8192, 0, 2, -2, 2, true)).addLast(
+								new ChannelInboundHandlerAdapter() {
 
 									@Override
 									public void channelRead(io.netty.channel.ChannelHandlerContext ctx, Object msg) {
@@ -97,46 +88,49 @@ public class AionShutdownStressTest {
 								});
 						}
 					});
-				clients.add(bootstrap.connect("127.0.0.1", port).syncUninterruptibly().channel());
-			}
-			long deadline = System.nanoTime() + TimeUnit.SECONDS.toNanos(10);
-			while (connections.size() < CLIENTS && System.nanoTime() < deadline)
-				Thread.sleep(10);
-			assertEquals(CLIENTS, connections.size());
-
-			try (ExecutorService senders = Executors.newVirtualThreadPerTaskExecutor()) {
-				for (int s = 0; s < 4; s++) {
-					senders.execute(() -> {
-						for (int p = 0; p < PACKETS / 4; p++) {
-							AionTransportStressTest.StressPacket packet = new AionTransportStressTest.StressPacket(0, p) {
-
-								@Override
-								protected void writeImpl(AionConnection con) {
-									writeB(new byte[4000]);
-								}
-							};
-							for (AionConnection c : connections)
-								c.sendPacket(packet);
-						}
-					});
+					clients.add(bootstrap.connect("127.0.0.1", port).syncUninterruptibly().channel());
 				}
-				Thread.sleep(50); // writes are in flight now
-				for (int i = 2; i < CLIENTS; i += 3) { // reset while the server writes
-					Channel ch = clients.get(i);
-					ch.config().setOption(ChannelOption.SO_LINGER, 0);
-					ch.close();
+				long deadline = System.nanoTime() + TimeUnit.SECONDS.toNanos(10);
+				while (connections.size() < CLIENTS && System.nanoTime() < deadline)
+					Thread.sleep(10);
+				assertEquals(CLIENTS, connections.size());
+
+				try (ExecutorService senders = Executors.newVirtualThreadPerTaskExecutor()) {
+					for (int s = 0; s < 4; s++) {
+						senders.execute(() -> {
+							for (int p = 0; p < PACKETS / 4; p++) {
+								AionTransportStressTest.StressPacket packet = new AionTransportStressTest.StressPacket(0, p) {
+
+									@Override
+									protected void writeImpl(AionConnection con) {
+										writeB(new byte[4000]);
+									}
+								};
+								for (AionConnection c : connections)
+									c.sendPacket(packet);
+							}
+						});
+					}
+					Thread.sleep(50); // writes are in flight now
+					for (int i = 2; i < CLIENTS; i += 3) { // reset while the server writes
+						Channel ch = clients.get(i);
+						ch.config().setOption(ChannelOption.SO_LINGER, 0);
+						ch.close();
+					}
 				}
+				long start = System.nanoTime();
+				CompletableFuture<Void> shutdown = CompletableFuture.runAsync(server::shutdown);
+				try {
+					shutdown.get(20, TimeUnit.SECONDS);
+				} catch (TimeoutException e) {
+					fail(transport + ", " + ioThreads + " I/O thread(s): shutdown didn't return within 20 s");
+				}
+				System.out.printf("%s, %d I/O thread(s): shutdown took %.1f s%n", transport, ioThreads, (System.nanoTime() - start) / 1e9);
+			} finally {
+				clientGroup.shutdownGracefully(0, 1, TimeUnit.SECONDS).syncUninterruptibly();
+				if (!server.isShuttingDown())
+					server.shutdown();
 			}
-			long start = System.nanoTime();
-			CompletableFuture<Void> shutdown = CompletableFuture.runAsync(server::shutdown);
-			try {
-				shutdown.get(20, TimeUnit.SECONDS);
-			} catch (TimeoutException e) {
-				fail(transport + ", " + ioThreads + " I/O thread(s): shutdown didn't return within 20 s");
-			}
-			System.out.printf("%s, %d I/O thread(s): shutdown took %.1f s%n", transport, ioThreads, (System.nanoTime() - start) / 1e9);
-		} finally {
-			clientGroup.shutdownGracefully(0, 1, TimeUnit.SECONDS).syncUninterruptibly();
 		}
 	}
 }

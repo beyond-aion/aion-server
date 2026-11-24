@@ -1,12 +1,9 @@
 package com.aionemu.gameserver.network.aion;
 
-import java.time.Duration;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
@@ -16,6 +13,7 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.configs.CommonsConfig;
 import com.aionemu.commons.network.netty.NettyConnection;
+import com.aionemu.commons.network.netty.NettyPipeline;
 import com.aionemu.commons.network.packet.BaseClientPacket;
 import com.aionemu.commons.network.packet.BasePacket;
 import com.aionemu.commons.utils.concurrent.ExecuteWrapper;
@@ -36,6 +34,7 @@ import com.aionemu.gameserver.services.player.PlayerLeaveWorldService;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
+import io.netty.handler.flush.FlushConsolidationHandler;
 
 /**
  * Object representing connection between GameServer and Aion Client.
@@ -46,11 +45,7 @@ public class AionConnection extends NettyConnection<AionServerPacket> {
 
 	private static final Logger log = LoggerFactory.getLogger(AionConnection.class);
 
-	/**
-	 * Client packets run on virtual threads, so a packet that waits (e.g. for the database) doesn't hold up the packets of other clients. Each
-	 * connection executes its packets one after another.
-	 */
-	private static final ExecutorService packetThreads = Executors.newThreadPerTaskExecutor(Thread.ofVirtual().name("PacketProcessor-", 0).factory());
+	static final int MAX_PACKET_SIZE = 8192 * 4;
 
 	/**
 	 * Possible states of AionConnection
@@ -100,11 +95,7 @@ public class AionConnection extends NettyConnection<AionServerPacket> {
 	/** packet flood filter **/
 	private Map<Integer, Long> pffRequests;
 
-	public AionConnection(Channel channel) {
-		this(channel, new SequentialExecutor(packetThreads));
-	}
-
-	AionConnection(Channel channel, Executor packetExecutor) {
+	public AionConnection(Channel channel, Executor packetExecutor) {
 		super(channel, packetExecutor);
 
 		state = State.CONNECTED;
@@ -112,6 +103,15 @@ public class AionConnection extends NettyConnection<AionServerPacket> {
 
 		if (PffConfig.PFF_MODE > 0 && PffConfig.THRESHOLD_MILLIS_BY_PACKET_OPCODE != null)
 			pffRequests = new ConcurrentHashMap<>();
+	}
+
+	public static AionConnection initChannel(Channel channel, Executor packetExecutor) {
+		AionConnection connection = new AionConnection(channel, new SequentialExecutor(packetExecutor));
+		NettyPipeline.init(channel, connection, MAX_PACKET_SIZE, AionServerPacket.MAX_CLIENT_SUPPORTED_PACKET_SIZE,
+			new AionCryptHandler(connection, connection.getCrypt()));
+		// broadcasts write many packets in a row, this flushes them together
+		channel.pipeline().addFirst("flushConsolidation", new FlushConsolidationHandler(FlushConsolidationHandler.DEFAULT_EXPLICIT_FLUSH_AFTER_FLUSHES, true));
+		return connection;
 	}
 
 	Crypt getCrypt() {
@@ -255,20 +255,6 @@ public class AionConnection extends NettyConnection<AionServerPacket> {
 	@Override
 	protected long getMaxSendStallMillis() {
 		return NetworkConfig.MAX_SEND_STALL_SECONDS * 1000L;
-	}
-
-	/**
-	 * Waits for the client packets and disconnect handlers that are still queued or running. Call after the network threads were stopped.
-	 *
-	 * @return True if all of them finished within the timeout.
-	 */
-	public static boolean shutdownPacketExecution(Duration timeout) {
-		packetThreads.shutdown();
-		try {
-			return packetThreads.awaitTermination(timeout.toMillis(), TimeUnit.MILLISECONDS);
-		} catch (InterruptedException e) {
-			return false;
-		}
 	}
 
 	/**

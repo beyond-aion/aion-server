@@ -11,6 +11,7 @@ import com.aionemu.commons.utils.concurrent.RunnableStatsManager;
 import com.aionemu.commons.utils.concurrent.RunnableStatsManager.SortBy;
 import com.aionemu.gameserver.configs.main.ShutdownConfig;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.network.NetConnector;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.GameTimeService;
 import com.aionemu.gameserver.services.PeriodicSaveService;
@@ -73,7 +74,7 @@ public class ShutdownHook extends Thread {
 			}
 		}
 
-		GameServer.shutdownNettyServer(); // shuts down network, disconnects cs/ls/all players and schedules leaveWorld
+		NetConnector.shutdown(); // shuts down network, disconnects cs/ls/all players and schedules leaveWorld
 		PlayerLeaveWorldService.processPendingLeaveWorldTasks();
 
 		RunnableStatsManager.dumpClassStats(SortBy.AVG);
