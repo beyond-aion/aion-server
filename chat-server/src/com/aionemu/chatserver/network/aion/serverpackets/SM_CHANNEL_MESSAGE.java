@@ -22,8 +22,9 @@ public class SM_CHANNEL_MESSAGE extends AbstractServerPacket {
 		writeD(message.getChannel().getChannelId());
 		writeQ(Integer.toUnsignedLong(message.getSender().getClientId()));
 		writeC(0); // user type
-		writeH(message.getSender().getIdentifier().length / 2);
-		writeB(message.getSender().getIdentifier());
+		byte[] senderIdentifier = message.getSender().getIdentifier(); // read once, the sender may log in again meanwhile
+		writeH(senderIdentifier.length / 2);
+		writeB(senderIdentifier);
 		writeH(message.size() / 2);
 		writeB(message.getText());
 	}
