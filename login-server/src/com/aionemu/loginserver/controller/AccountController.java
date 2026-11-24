@@ -237,6 +237,8 @@ public class AccountController {
 				con.close(new SM_ACCOUNT_KICK(AionAuthResponse.STR_L2AUTH_S_KICKED_DOUBLE_LOGIN));
 				return AionAuthResponse.STR_L2AUTH_S_ALREADY_LOGIN;
 			}
+			if (con != null)
+				con.cancelJoinTimeout();
 			connection.setAccount(account);
 			accountsOnLS.put(account.getId(), connection);
 		}
