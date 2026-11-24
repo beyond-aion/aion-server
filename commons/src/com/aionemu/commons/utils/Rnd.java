@@ -36,10 +36,12 @@ public final class Rnd {
 	 */
 	public static int get(int minInclusive, int maxInclusive) {
 		if (maxInclusive < minInclusive) {
-			LoggerFactory.getLogger(Rnd.class).warn("", new IllegalArgumentException("max < min"));
+			LoggerFactory.getLogger(Rnd.class).warn("maxInclusive ({}) < minInclusive ({})", maxInclusive, minInclusive, new IllegalArgumentException());
 			maxInclusive = minInclusive;
 		}
-		return minInclusive == maxInclusive ? minInclusive : (int) nextLong(minInclusive, maxInclusive + 1L);
+		if (minInclusive == maxInclusive)
+			return minInclusive;
+		return maxInclusive < Integer.MAX_VALUE ? nextInt(minInclusive, maxInclusive + 1) : (int) nextLong(minInclusive, maxInclusive + 1L);
 	}
 
 	/**
