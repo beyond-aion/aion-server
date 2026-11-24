@@ -53,8 +53,7 @@ class AionCryptHandler extends ChannelDuplexHandler {
 			// with the old key (e.g. after a server restart and reconnecting from the server list). They come before the version check and the time
 			// sync, which the client builds right after receiving SM_KEY, with the new key. Counting them as decryption failures disconnected the
 			// client in the middle of the login, so they are dropped, up to what the client's send buffer can hold. Nothing waits for an answer to
-			// them: they belong to the session the client already left for the server list. Not tested with a real client yet; if clients hang
-			// after reconnecting, remove this branch to disconnect them again.
+			// them: they belong to the session the client already left for the server list.
 			if (!decryptedAny && (leftoverBytes += frameSize) <= MAX_LEFTOVER_BYTES) {
 				log.debug("Dropped a packet of {} that the client encrypted for its previous connection", connection);
 				return;
