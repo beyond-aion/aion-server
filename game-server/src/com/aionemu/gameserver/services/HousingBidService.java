@@ -26,6 +26,7 @@ import com.aionemu.gameserver.services.mail.MailFormatter;
 import com.aionemu.gameserver.services.player.PlayerService;
 import com.aionemu.gameserver.taskmanager.tasks.housing.AuctionEndTask;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.utils.time.ServerTime;
 import com.aionemu.gameserver.world.World;
 
@@ -213,8 +214,8 @@ public class HousingBidService {
 			sendAuctionEnded(player);
 			return false;
 		}
-		long currentBid = highestBid.getKinah();
-		if (bidOffer - currentBid >= currentBid * HousingConfig.AUCTION_BID_STEP_LIMIT / 100f) {
+		if (bidOffer > 99_999_999_999L) {
+			AuditLogger.log(player, "tried to bid more kinah on " + bidHouse + " than the client allows: " + bidOffer);
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_BID_EXCESS_ACCOUNT());
 			return false;
 		}
