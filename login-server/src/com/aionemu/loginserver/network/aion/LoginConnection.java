@@ -110,7 +110,9 @@ public class LoginConnection extends NettyConnection<AionServerPacket> {
 	 */
 	public static void initChannel(Channel channel, Executor packetExecutor) {
 		LoginConnection connection = new LoginConnection(channel, packetExecutor);
-		NettyPipeline.init(channel, connection, MAX_PACKET_SIZE, MAX_PACKET_SIZE, new LoginCryptHandler(connection, connection.cryptEngine));
+		// the encryption appends to the packet after its size was checked
+		NettyPipeline.init(channel, connection, MAX_PACKET_SIZE, MAX_PACKET_SIZE - LoginCryptHandler.MAX_ENCRYPTION_OVERHEAD,
+			new LoginCryptHandler(connection, connection.cryptEngine));
 	}
 
 	/**

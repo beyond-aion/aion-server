@@ -22,7 +22,7 @@ class LoginCryptHandler extends ChannelDuplexHandler {
 	/**
 	 * The checksum and the padding to whole Blowfish blocks that the encryption appends at most.
 	 */
-	private static final int MAX_ENCRYPTION_OVERHEAD = 16;
+	static final int MAX_ENCRYPTION_OVERHEAD = 16;
 
 	private final LoginConnection connection;
 	private final CryptEngine cryptEngine;
