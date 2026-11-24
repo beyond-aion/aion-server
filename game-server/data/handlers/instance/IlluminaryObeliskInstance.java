@@ -370,7 +370,7 @@ public class IlluminaryObeliskInstance extends GeneralInstanceHandler {
 
 	@Override
 	public boolean onReviveEvent(Player player) {
-		PlayerReviveService.revive(player, 25, 25, true, 0);
+		PlayerReviveService.revive(player, 100, 100, false, 0);
 		player.getGameStats().updateStatsAndSpeedVisually();
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME());
 		TeleportService.teleportTo(player, instance, 271.1714f, 271.4455f, 276.67294f, (byte) 75);

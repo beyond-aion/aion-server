@@ -31,7 +31,6 @@ public class ChatService {
 	private final Map<Integer, ChatClient> players = new ConcurrentHashMap<>();
 
 	private ChatService() {
-
 	}
 
 	public static ChatService getInstance() {
@@ -50,6 +49,7 @@ public class ChatService {
 			AionConnection previousConnection;
 			synchronized (previous) {
 				BroadcastService.getInstance().removeClient(previous);
+				ChatChannels.leaveAll(previous);
 				previousConnection = previous.getConnection();
 			}
 			if (previousConnection != null)
@@ -109,11 +109,15 @@ public class ChatService {
 	}
 
 	public void registerPlayerWithChannel(AionConnection connection, int channelRequestId, String identifier) {
-		Channel channel = ChatChannels.getOrCreate(connection.getChatClient(), identifier);
-		if (channel != null) {
-			connection.getChatClient().addChannel(channel);
-			connection.sendPacket(new SM_CHANNEL_RESPONSE(channel, channelRequestId));
+		ChatClient chatClient = connection.getChatClient();
+		Channel channel;
+		synchronized (chatClient) { // a concurrent logout or re-registration must not leave this client in a channel after leaveAll
+			if (players.get(chatClient.getClientId()) != chatClient || chatClient.getConnection() != connection)
+				return;
+			channel = ChatChannels.join(chatClient, identifier);
 		}
+		if (channel != null)
+			connection.sendPacket(new SM_CHANNEL_RESPONSE(channel, channelRequestId));
 	}
 
 	public void playerLogout(int playerId) {
@@ -123,6 +127,7 @@ public class ChatService {
 			// a connection that authenticates right now either sees the character gone or is closed here
 			synchronized (chatClient) {
 				BroadcastService.getInstance().removeClient(chatClient);
+				ChatChannels.leaveAll(chatClient);
 				connection = chatClient.getConnection();
 			}
 			log.info("Player[id={}] logged out ", playerId);

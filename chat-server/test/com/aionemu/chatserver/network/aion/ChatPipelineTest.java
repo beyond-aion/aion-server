@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 
 import com.aionemu.chatserver.model.ChatClient;
 import com.aionemu.chatserver.model.Race;
+import com.aionemu.chatserver.model.channel.ChatChannels;
 import com.aionemu.chatserver.service.BroadcastService;
 import com.aionemu.chatserver.service.ChatService;
 import com.aionemu.chatserver.service.GameServerService;
@@ -244,5 +245,22 @@ public class ChatPipelineTest {
 		} finally {
 			first.finishAndReleaseAll();
 		}
+	}
+
+	@Test
+	public void aLoggedOutOrReplacedClientCannotJoinChannelsAfterLeaveAll() throws Exception {
+		ChatClient firstClient = ChatService.getInstance().registerPlayer(PLAYER_ID, ACCOUNT, NAME, Race.ELYOS, (byte) 0);
+		login(firstClient);
+		AionConnection firstConnection = firstClient.getConnection();
+		int channelId = joinChannel(5);
+		ChatService.getInstance().playerLogout(PLAYER_ID);
+		channel.runPendingTasks();
+		channel.outboundMessages().clear(); // discard the empty flush buffer written by close()
+		assertNull(ChatChannels.getChannelById(channelId), "logout should remove the now-empty channel");
+
+		// simulate a queued CM_CHANNEL_REQUEST running after playerLogout left all channels
+		ChatService.getInstance().registerPlayerWithChannel(firstConnection, 6, CHANNEL);
+		assertNull(channel.readOutbound(), "a logged-out client must not join a channel");
+		assertTrue(firstClient.removeAllChannels().isEmpty(), "a logged-out client must not retain channel membership");
 	}
 }

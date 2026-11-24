@@ -7,7 +7,6 @@ import jakarta.xml.bind.annotation.*;
 
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.gameserver.dataholders.loadingutils.StaticDataListener;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.TribeClass;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -39,10 +38,6 @@ public class NpcData {
 	private final Set<Integer> functionDialogIds = new HashSet<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
-		StaticDataListener.registerForAsyncExecutionOrRun(u, this::init);
-	}
-
-	private void init() {
 		for (NpcTemplate npc : npcs) {
 			npcData.put(npc.getTemplateId(), npc);
 			if (npc.getFuncDialogIds() != null) {

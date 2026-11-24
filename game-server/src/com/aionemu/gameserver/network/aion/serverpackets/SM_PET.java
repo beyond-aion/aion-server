@@ -1,15 +1,12 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.animations.ObjectDeleteAnimation;
-import com.aionemu.gameserver.model.gameobjects.Pet;
-import com.aionemu.gameserver.model.gameobjects.PetAction;
-import com.aionemu.gameserver.model.gameobjects.PetSpecialFunction;
+import com.aionemu.gameserver.model.gameobjects.*;
 import com.aionemu.gameserver.model.gameobjects.player.PetCommonData;
 import com.aionemu.gameserver.model.templates.pet.PetDopingBag;
+import com.aionemu.gameserver.model.templates.pet.PetFunction;
 import com.aionemu.gameserver.model.templates.pet.PetFunctionType;
 import com.aionemu.gameserver.model.templates.pet.PetTemplate;
 import com.aionemu.gameserver.network.aion.AionConnection;
@@ -20,7 +17,15 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
  */
 public class SM_PET extends AionServerPacket {
 
-	private PetAction action;
+	public static final int MAX_ENTRIES_PER_PAGE = 50;
+	public static final int ADOPTION_SUCCESS = 0;
+	public static final int ADOPTION_INVALID_EGG = 1;
+	public static final int ADOPTION_EGG_NOT_CONSUMED = 2;
+	public static final int ADOPTION_INVALID_NAME = 3;
+	public static final int ADOPTION_NAME_ALREADY_USED = 4;
+	private static final int FEEDING_FUNCTION_LENGTH = 2 * Integer.BYTES; // feed data and refeed time
+
+	private final PetAction action;
 	private Pet pet;
 	private int petObjectId;
 	private PetCommonData commonData;
@@ -28,180 +33,280 @@ public class SM_PET extends AionServerPacket {
 	private int itemObjectId;
 	private Collection<PetCommonData> pets;
 	private int count;
-	private int subType;
-	private int shuggleEmotion;
+	private int page;
+	private PetSpecialFunction specialFunction;
+	private PetFeedAction feedAction;
+	private int feedData;
+	private int refeedSeconds;
+	private PetMoodAction moodAction;
+	private int[] moodValues;
 	private boolean isActing;
 	private int lootNpcObjId;
-	private int dopeAction;
-	private int dopeSlot;
-	private byte animationId;
+	private PetDopingAction dopeAction;
+	private int[] dopeParams;
+	private int result;
+	private int remainingSeconds;
 
-	public SM_PET(int subType, int itemObjectId, int count, Pet pet) {
-		this.action = PetAction.FOOD;
-		this.subType = subType;
-		this.count = count;
-		this.itemObjectId = itemObjectId;
-		this.commonData = pet.getCommonData();
-	}
-
-	public SM_PET(PetAction action) {
+	private SM_PET(PetAction action) {
 		this.action = action;
 	}
 
-	public SM_PET(int petObjectId, String petName) {
-		this.action = PetAction.RENAME;
-		this.petObjectId = petObjectId;
-		this.petName = petName;
-	}
-
-	public SM_PET(Pet pet) {
-		this.action = PetAction.SPAWN;
-		this.pet = pet;
-	}
-
-	public SM_PET(PetCommonData commonData, boolean isAdopt) {
-		this.action = isAdopt ? PetAction.ADOPT : PetAction.SURRENDER;
-		this.commonData = commonData;
-	}
-
-	public SM_PET(int petId, int petObjectId) {
-		this.action = PetAction.SURRENDER;
-		this.petObjectId = petObjectId;
+	/**
+	 * Pet list on login. The client resets its list on page 0 and appends the following pages.
+	 */
+	public static SM_PET petList(Collection<PetCommonData> pets, int page) {
+		SM_PET packet = new SM_PET(PetAction.LOAD_PETS);
+		packet.pets = pets;
+		packet.page = page;
+		return packet;
 	}
 
 	/**
-	 * For listing all pets on this character
+	 * A newly adopted pet; the client adds it to the list.
 	 */
-	public SM_PET(Collection<PetCommonData> pets) {
-		this.action = PetAction.LOAD_PETS;
-		// snapshot, the owner's pet list is written on an I/O thread and may be changed by then
-		this.pets = new ArrayList<>(pets);
-	}
-
-	public SM_PET(PetSpecialFunction specialFunction, boolean active) {
-		this(specialFunction, active, 0);
-	}
-
-	public SM_PET(PetSpecialFunction specialFunction, boolean active, int npcObjId) {
-		this.action = PetAction.SPECIAL_FUNCTION;
-		this.isActing = active;
-		this.subType = specialFunction.getId();
-		this.lootNpcObjId = npcObjId;
-	}
-
-	public SM_PET(int dopeAction, int itemId, int slot) {
-		this.action = PetAction.SPECIAL_FUNCTION;
-		this.dopeAction = dopeAction;
-		this.subType = PetSpecialFunction.DOPING.getId();
-		itemObjectId = itemId; // it's template ID, not objectId though. also it's misused as slot2 for slot switch action (dopeAction 2)
-		dopeSlot = slot;
+	public static SM_PET adopted(PetCommonData pet) {
+		SM_PET packet = new SM_PET(PetAction.ADOPT);
+		packet.commonData = pet;
+		return packet;
 	}
 
 	/**
-	 * For mood only
-	 * 
-	 * @param actionId
-	 * @param pet
-	 * @param shuggleEmotion
+	 * A pet the player gave away.
 	 */
-	public SM_PET(Pet pet, int subType, int shuggleEmotion) {
-		this.action = PetAction.MOOD;
-		this.shuggleEmotion = shuggleEmotion;
-		this.subType = subType;
-		this.commonData = pet.getCommonData();
+	public static SM_PET surrendered(PetCommonData pet) {
+		SM_PET packet = new SM_PET(PetAction.SURRENDER);
+		packet.commonData = pet;
+		return packet;
 	}
 
 	/**
-	 * For deleting pet visually.
+	 * A pet whose rental time ran out; the client shows the "time is up" message itself.
 	 */
-	public SM_PET(int petObjectId, ObjectDeleteAnimation animation) {
-		this.action = PetAction.DISMISS;
-		this.petObjectId = petObjectId;
-		this.animationId = animation.getId();
+	public static SM_PET abandoned(PetCommonData pet) {
+		SM_PET packet = new SM_PET(PetAction.ABANDON);
+		packet.commonData = pet;
+		return packet;
+	}
+
+	/**
+	 * Remaining lifetime after the pet's rental time was extended by an item.
+	 */
+	public static SM_PET extended(PetCommonData pet, int remainingSeconds) {
+		SM_PET packet = new SM_PET(PetAction.EXTEND_EXPIRATION);
+		packet.commonData = pet;
+		packet.remainingSeconds = remainingSeconds;
+		return packet;
+	}
+
+	/**
+	 * Appearance and position of a pet that enters the world.
+	 */
+	public static SM_PET spawned(Pet pet) {
+		SM_PET packet = new SM_PET(PetAction.SPAWN);
+		packet.pet = pet;
+		packet.commonData = pet.getCommonData();
+		return packet;
+	}
+
+	/**
+	 * A pet that leaves the world; the client only plays the fade out animation.
+	 */
+	public static SM_PET dismissed(int petObjectId) {
+		SM_PET packet = new SM_PET(PetAction.DISMISS);
+		packet.petObjectId = petObjectId;
+		return packet;
+	}
+
+	public static SM_PET feeding(PetFeedAction action, int itemObjectId, int count, Pet pet) {
+		SM_PET packet = new SM_PET(PetAction.FOOD);
+		packet.feedAction = action;
+		packet.itemObjectId = itemObjectId;
+		packet.count = count;
+		PetCommonData commonData = pet.getCommonData();
+		// The packet may be written after the next feeding step changes the pet state.
+		packet.feedData = commonData.getFeedProgress().getDataForPacket();
+		packet.refeedSeconds = (int) (commonData.getRefeedDelay() / 1000);
+		return packet;
+	}
+
+	public static SM_PET renamed(int petObjectId, String name) {
+		SM_PET packet = new SM_PET(PetAction.RENAME);
+		packet.petObjectId = petObjectId;
+		packet.petName = name;
+		return packet;
+	}
+
+	/**
+	 * Result of a pet adoption or extension attempt (0 = success is not sent, 3 = invalid name, 4 = name already used).
+	 */
+	public static SM_PET adoptionResult(int result) {
+		SM_PET packet = new SM_PET(PetAction.RESULT);
+		packet.result = result;
+		return packet;
+	}
+
+	/**
+	 * Answer to a mood check; the client plays one of three idle animations (0-2).
+	 */
+	public static SM_PET moodStatus(int animation) {
+		return mood(PetMoodAction.STATUS, animation);
+	}
+
+	/**
+	 * The pet's reaction (0-8) to a social interaction and the resulting mood points.
+	 */
+	public static SM_PET moodSocial(int reaction, int moodPoints, int emotion) {
+		return mood(PetMoodAction.SOCIAL, reaction, moodPoints, emotion);
+	}
+
+	/**
+	 * The present item, or -1 if the pet has nothing to give.
+	 */
+	public static SM_PET moodPresent(int itemId) {
+		return mood(PetMoodAction.PRESENT, itemId);
+	}
+
+	/**
+	 * Mood bar and the remaining cooldowns of the mood check and the present, in seconds.
+	 */
+	public static SM_PET moodUpdate(PetCommonData pet) {
+		return mood(PetMoodAction.UPDATE, pet.getMoodPoints(), pet.getMoodCheckRemainingSeconds(), pet.getPresentRemainingSeconds());
+	}
+
+	private static SM_PET mood(PetMoodAction action, int... values) {
+		SM_PET packet = new SM_PET(PetAction.MOOD);
+		packet.moodAction = action;
+		packet.moodValues = values;
+		return packet;
+	}
+
+	public static SM_PET specialFunction(PetSpecialFunction function, boolean active) {
+		return specialFunction(function, active, 0);
+	}
+
+	public static SM_PET specialFunction(PetSpecialFunction function, boolean active, int npcObjId) {
+		SM_PET packet = new SM_PET(PetAction.SPECIAL_FUNCTION);
+		packet.specialFunction = function;
+		packet.isActing = active;
+		packet.lootNpcObjId = npcObjId;
+		return packet;
+	}
+
+	/**
+	 * A successful doping action: add (item template id, slot), remove (slot) or use (item template id).
+	 */
+	public static SM_PET doping(PetDopingAction action, int itemId, int slot) {
+		return switch (action) {
+			case ADD -> dopingPacket(action, itemId, slot);
+			case REMOVE -> dopingPacket(action, slot);
+			case USE -> dopingPacket(action, itemId);
+			case SWITCH -> throw new IllegalArgumentException("Use dopingSwitched for the switch action");
+		};
+	}
+
+	public static SM_PET dopingSwitched(int slot1, int slot2) {
+		return dopingPacket(PetDopingAction.SWITCH, slot1, slot2);
+	}
+
+	/**
+	 * Rejection of a doping action; the client rolls its optimistic UI change back.
+	 */
+	public static SM_PET dopingRejected(PetDopingAction action) {
+		// the client reads two parameters for add and switch; -1 is the failure sentinel
+		return switch (action) {
+			case ADD, SWITCH -> dopingPacket(action, -1, -1);
+			case REMOVE, USE -> dopingPacket(action, -1);
+		};
+	}
+
+	private static SM_PET dopingPacket(PetDopingAction action, int... params) {
+		SM_PET packet = new SM_PET(PetAction.SPECIAL_FUNCTION);
+		packet.specialFunction = PetSpecialFunction.DOPING;
+		packet.dopeAction = action;
+		packet.dopeParams = params;
+		return packet;
+	}
+
+	public static SM_PET petAdoptDialog() {
+		return new SM_PET(PetAction.TALK_WITH_MERCHANT);
+	}
+
+	public static SM_PET petAbandonDialog() {
+		return new SM_PET(PetAction.TALK_WITH_MINDER);
+	}
+
+	public static SM_PET petAdoptHyperlink() {
+		return new SM_PET(PetAction.H_ADOPT);
+	}
+
+	public static SM_PET petAbandonHyperlink() {
+		return new SM_PET(PetAction.H_ABANDON);
 	}
 
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeH(action.getActionId());
 		switch (action) {
-			case LOAD_PETS: // load list on login
-				writeC(0); // unk
+			case LOAD_PETS: // load list on login, several pages if the player owns many pets
+				writeC(page);
 				writeH(pets.size());
-				for (PetCommonData commonData : pets) {
-					writePetData(commonData);
-				}
+				for (PetCommonData commonData : pets)
+					writePetEntry(commonData);
 				break;
 			case ADOPT:
-				writePetData(commonData);
+				writePetEntry(commonData);
 				break;
-			case SURRENDER:
+			case SURRENDER: // forms 2 and 14 share their body
+			case ABANDON:
 				writeD(commonData.getTemplateId());
 				writeD(commonData.getObjectId());
-				writeD(0); // unk
-				writeD(0); // unk
+				writeQ(0); // unused by the client, always 0
 				break;
 			case SPAWN:
 				writeS(pet.getName());
 				writeD(pet.getObjectTemplate().getTemplateId());
 				writeD(pet.getObjectId());
-
-				writeF(pet.getPosition().getX());
-				writeF(pet.getPosition().getY());
-				writeF(pet.getPosition().getZ());
-				writeF(pet.getMoveController().getTargetX2());
-				writeF(pet.getMoveController().getTargetY2());
-				writeF(pet.getMoveController().getTargetZ2());
-				writeC(pet.getHeading());
-
+				writeF(pet.getX());
+				writeF(pet.getY());
+				writeF(pet.getZ());
+				// a summoned pet stands still, so its target is its own position
+				writeF(pet.getX());
+				writeF(pet.getY());
+				writeF(pet.getZ());
+				writeC(pet.getMaster().getHeading());
 				writeD(pet.getMaster().getObjectId());
-
-				writeAppearance(pet.getCommonData());
+				writeAppearance(commonData);
 				break;
 			case DISMISS:
 				writeD(petObjectId);
-				writeC(animationId);
+				writeC(1); // fade out
 				break;
 			case FOOD:
-				writeH(1);
-				writeC(1);
-				writeC(subType);
-				switch (subType) {
-					case 1: // eat
-						writeD(commonData.getFeedProgress().getDataForPacket());
-						writeD(0);
+				writeH(1); // one function block follows
+				writeC(1); // feeding function tag
+				writeC(feedAction.getId());
+				writeD(feedData);
+				writeD(refeedSeconds);
+				switch (feedAction) {
+					case START: // start feeding
+					case REFEED: // refeed timer started
+					case REJECTED: // food rejected or not hungry
 						writeD(itemObjectId);
 						writeD(count);
 						break;
-					case 2: // eating successful
-						writeD(commonData.getFeedProgress().getDataForPacket());
-						writeD(0);
+					case EATEN: // one item was eaten
 						writeD(itemObjectId);
 						writeD(count);
+						writeC(1); // the food matched the pet's flavour
+						break;
+					case STOPPED: // feeding stopped by the server
 						writeC(0);
 						break;
-					case 3: // not hungry
-					case 4: // cancel feed
-					case 5: // clean feed task
-						writeD(commonData.getFeedProgress().getDataForPacket());
-						writeD((int) commonData.getRefeedDelay() / 1000);
-						break;
-					case 6: // give item
-						writeD(commonData.getFeedProgress().getDataForPacket());
-						writeD(0);
+					case GAVE_ITEM: // the pet gave an item back
 						writeD(itemObjectId);
-						writeC(0);
+						writeC(1); // the food matched the pet's flavour
 						break;
-					case 7: // present notification
-						writeD(commonData.getFeedProgress().getDataForPacket());
-						writeD((int) commonData.getRefeedDelay() / 1000); // time
-						writeD(itemObjectId);
-						writeD(0);
-						break;
-					case 8: // is full
-						writeD(commonData.getFeedProgress().getDataForPacket());
-						writeD((int) commonData.getRefeedDelay() / 1000);
-						writeD(itemObjectId);
-						writeD(count);
+					default: // CANCEL, FINISHED: no extra data
 						break;
 				}
 				break;
@@ -209,62 +314,21 @@ public class SM_PET extends AionServerPacket {
 				writeD(petObjectId);
 				writeS(petName);
 				break;
+			case RESULT:
+				writeC(result);
+				break;
 			case MOOD:
-				switch (subType) {
-					case 0: // check pet status
-						writeC(subType);
-						// desynced feedback data, need to send delta in percents
-						if (commonData.getLastSentPoints() < commonData.getMoodPoints(true))
-							writeD(commonData.getMoodPoints(true) - commonData.getLastSentPoints());
-						else {
-							writeD(0);
-							commonData.setLastSentPoints(commonData.getMoodPoints(true));
-						}
-						break;
-					case 2: // emotion sent
-						writeC(subType);
-						writeD(0);
-						writeD(commonData.getMoodPoints(true));
-						writeD(shuggleEmotion);
-						commonData.setLastSentPoints(commonData.getMoodPoints(true));
-						commonData.setMoodCdStarted(System.currentTimeMillis());
-						break;
-					case 3: // give gift
-						writeC(subType);
-						writeD(DataManager.PET_DATA.getPetTemplate(commonData.getTemplateId()).getConditionReward());
-						commonData.setGiftCdStarted(System.currentTimeMillis());
-						break;
-					case 4: // periodic update
-						writeC(subType);
-						writeD(commonData.getMoodPoints(true));
-						writeD(commonData.getMoodRemainingTime());
-						writeD(commonData.getGiftRemainingTime());
-						commonData.setLastSentPoints(commonData.getMoodPoints(true));
-						break;
-				}
+				writeC(moodAction.getId());
+				for (int value : moodValues)
+					writeD(value);
 				break;
 			case SPECIAL_FUNCTION:
-				writeC(subType);
-				if (subType == 2) {
-					writeC(dopeAction);
-					switch (dopeAction) {
-						case 0: // add item
-							writeD(itemObjectId);
-							writeD(dopeSlot);
-							break;
-						case 1: // remove item
-							writeD(dopeSlot);
-							break;
-						case 2: // move item from one slot to other
-							writeD(dopeSlot); // slot 1
-							writeD(itemObjectId); // slot 2
-							break;
-						case 3: // use item
-							writeD(itemObjectId);
-							break;
-					}
-				} else if (subType == 3) {
-					// looting NPC
+				writeC(specialFunction.getId());
+				if (specialFunction == PetSpecialFunction.DOPING) {
+					writeC(dopeAction.getId());
+					for (int param : dopeParams)
+						writeD(param);
+				} else if (specialFunction == PetSpecialFunction.AUTOLOOT) {
 					if (lootNpcObjId > 0) {
 						writeC(isActing ? 1 : 2); // 0x02 display looted msg.
 						writeD(lootNpcObjId);
@@ -273,71 +337,90 @@ public class SM_PET extends AionServerPacket {
 						writeC(0);
 						writeC(isActing ? 1 : 0);
 					}
-				} else if (subType == 4) {
+				} else if (specialFunction == PetSpecialFunction.AUTOSELL) {
 					writeC(0);
 					writeC(isActing ? 1 : 0);
 				}
 				break;
+			case EXTEND_EXPIRATION:
+				writeD(commonData.getTemplateId());
+				writeD(commonData.getObjectId());
+				writeD(remainingSeconds);
+				break;
+			case TALK_WITH_MERCHANT:
+			case TALK_WITH_MINDER:
+			case H_ADOPT:
+			case H_ABANDON:
+				// actions without a body
+				break;
+			default:
+				break;
 		}
 	}
 
-	private void writePetData(PetCommonData petCommonData) {
+	private void writePetEntry(PetCommonData petCommonData) {
 		PetTemplate petTemplate = DataManager.PET_DATA.getPetTemplate(petCommonData.getTemplateId());
 		writeS(petCommonData.getName());
 		writeD(petCommonData.getTemplateId());
 		writeD(petCommonData.getObjectId());
 		writeD(petCommonData.getMasterObjectId());
-		writeD(0);
-		writeD(0);
+		writeD(0); // always 0
+		writeD(0); // always 0
 		writeD(petCommonData.getBirthday());
-		writeD(petCommonData.secondsUntilExpiration()); // accompanying time
+		int expiration = petCommonData.secondsUntilExpiration();
+		writeD(Math.max(expiration, 0)); // 0 for pets without (or past) expiration
 
-		int specialtyCount = 0;
-		if (petTemplate.containsFunction(PetFunctionType.WAREHOUSE)) {
-			writeC(PetFunctionType.WAREHOUSE.getId());
-			writeC(0); // length of following bytes
-			specialtyCount++;
+		// a pet has at most two player functions, written in template order; missing slots are empty
+		int writtenFunctions = 0;
+		for (PetFunction function : petTemplate.getPetFunctions()) {
+			if (writtenFunctions == 2)
+				break;
+			PetFunctionType type = function.getPetFunctionType();
+			if (!type.isPlayerFunction() || type == PetFunctionType.NONE)
+				continue;
+			writeFunction(type, petCommonData);
+			writtenFunctions++;
 		}
-		if (petTemplate.containsFunction(PetFunctionType.LOOT)) {
-			writeC(PetFunctionType.LOOT.getId());
-			writeC(1); // length of following bytes
-			writeC(0);
-			specialtyCount++;
+		for (; writtenFunctions < 2; writtenFunctions++) { // empty slot
+			writeC(0); // type
+			writeC(0); // data length
 		}
-		if (petTemplate.containsFunction(PetFunctionType.DOPING)) {
-			writeC(PetFunctionType.DOPING.getId());
-			writeC(PetDopingBag.MAX_ITEMS * 4); // length of following bytes (always write MAX_ITEMS, otherwise some pets show items of other pets) 
-			int[] items = petCommonData.getDopingBag().getItems();
-			for (int i = 0; i < PetDopingBag.MAX_ITEMS; i++)
-				writeD(i < items.length ? items[i] : 0);
-			specialtyCount++;
-		}
-		if (petTemplate.containsFunction(PetFunctionType.FOOD)) {
-			writeC(PetFunctionType.FOOD.getId());
-			writeC(8); // length of following bytes
-			writeD(petCommonData.getFeedProgress().getDataForPacket());
-			writeD((int) (petCommonData.getRefeedDelay() / 1000));
-			specialtyCount++;
-		}
-
-		// Pets have only 2 functions max. If absent filled with NONE
-		if (specialtyCount == 0) {
-			writeH(PetFunctionType.NONE.getId());
-			writeH(PetFunctionType.NONE.getId());
-		} else if (specialtyCount == 1) {
-			writeH(PetFunctionType.NONE.getId());
-		}
-
 		writeAppearance(petCommonData);
 	}
 
+	private void writeFunction(PetFunctionType type, PetCommonData petCommonData) {
+		writeC(type.getId());
+		switch (type) {
+			case LOOT:
+				writeC(1);
+				writeC(petCommonData.isLooting() ? 1 : 0);
+				break;
+			case DOPING:
+				writeC(PetDopingBag.MAX_ITEMS * Integer.BYTES);
+				int[] items = petCommonData.getDopingBag().getItems();
+				for (int i = 0; i < PetDopingBag.MAX_ITEMS; i++)
+					writeD(i < items.length ? items[i] : 0);
+				break;
+			case FOOD:
+				writeC(FEEDING_FUNCTION_LENGTH);
+				writeD(petCommonData.getFeedProgress().getDataForPacket());
+				writeD((int) (petCommonData.getRefeedDelay() / 1000));
+				break;
+			default: // warehouse, merchant and buff carry no data
+				writeC(0);
+				break;
+		}
+	}
+
+	/**
+	 * The 17 byte appearance block: block type, color, decoration and the two attachment item ids, as sent by the client at
+	 * adoption.
+	 */
 	private void writeAppearance(PetCommonData petCommonData) {
-		writeH(PetFunctionType.APPEARANCE.getId());
-		writeC(0); // not implemented color R ?
-		writeC(0); // not implemented color G ?
-		writeC(0); // not implemented color B ?
+		writeC(PetFunctionType.APPEARANCE.getId()); // block type
+		writeD(petCommonData.getColor());
 		writeD(petCommonData.getDecoration());
-		writeD(0); // wings ID if customize_attach = 1
-		writeD(0); // unk
+		writeD(petCommonData.getFace());
+		writeD(petCommonData.getHead());
 	}
 }

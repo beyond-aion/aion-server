@@ -3,6 +3,7 @@ package com.aionemu.gameserver.services.player;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.configs.administration.AdminConfig;
+import com.aionemu.gameserver.instance.handlers.InstanceHandler;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Item;
@@ -131,25 +132,31 @@ public class PlayerReviveService {
 		player.unsetResPosState();
 	}
 
-	public static void kiskRevive(Player player) {
-		kiskRevive(player, 0);
+	public static void kiskOrBindRevive(Player player) {
+		kiskOrBindRevive(player, 0);
 	}
 
-	public static void kiskRevive(Player player, int skillId) {
-		if (player.isInPrison())
-			TeleportService.teleportToPrison(player);
-		else if (player.isInCustomState(CustomPlayerState.EVENT_MODE))
-			TeleportService.teleportToEvent(player);
-
-		Kisk kisk = player.getKisk();
-		if (kisk != null && kisk.isActive()) {
-			kisk.resurrectionUsed();
-			revive(player, 30, 30, false, skillId);
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME());
-			player.getGameStats().updateStatsAndSpeedVisually();
-			player.unsetResPosState();
-			TeleportService.teleportTo(player, kisk.getPosition());
+	public static void kiskOrBindRevive(Player player, int skillId) {
+		Kisk kisk = getAllowedKiskForRevive(player);
+		if (kisk == null) {
+			bindRevive(player, skillId);
+			return;
 		}
+		kisk.resurrectionUsed();
+		revive(player, 30, 30, false, skillId);
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME());
+		player.getGameStats().updateStatsAndSpeedVisually();
+		player.unsetResPosState();
+		TeleportService.teleportTo(player, kisk.getPosition());
+	}
+
+	private static Kisk getAllowedKiskForRevive(Player player) {
+		Kisk kisk = player.getKisk();
+		if (kisk == null || !kisk.isActive() || !player.getWorldMapInstance().getInstanceHandler().allowKiskRevive())
+			return null;
+		if (player.isInPrison() || player.isInCustomState(CustomPlayerState.EVENT_MODE))
+			return null;
+		return kisk;
 	}
 
 	public static void instanceRevive(Player player) {
@@ -243,15 +250,20 @@ public class PlayerReviveService {
 
 	}
 
+	/**
+	 * Revives the player without showing the resurrection options, at the place the death window would offer first: the instance's resurrection point,
+	 * else an active kisk, else the bind point.
+	 */
 	public static void scheduleReviveAtBase(Player player, int delayMillis, int skillId) {
 		player.getController().addTask(TaskId.TELEPORT, ThreadPoolManager.getInstance().schedule(() -> {
 			player.getController().getAndRemoveTask(TaskId.TELEPORT); // remove manually as it won't get removed automatically
-			if (player.isInInstance())
+			if (!player.isDead()) // already revived, e.g. by an instance handler
+				return;
+			InstanceHandler instanceHandler = player.getWorldMapInstance().getInstanceHandler();
+			if (instanceHandler.allowInstanceRevive())
 				PlayerReviveService.instanceRevive(player, skillId);
-			else if (player.getKisk() != null)
-				PlayerReviveService.kiskRevive(player, skillId);
 			else
-				PlayerReviveService.bindRevive(player, skillId);
+				PlayerReviveService.kiskOrBindRevive(player, skillId);
 		}, delayMillis));
 	}
 }

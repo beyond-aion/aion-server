@@ -1278,32 +1278,32 @@
 	</decomposable>
 	<decomposable item_id="188052721" override="true"><!-- [Event] Manastones of Grace -->
 		<set>
-			<item id="167000682" chance="3.23" /><!-- Manastone: Attack +5 / HP +47 -->
-			<item id="167000684" chance="3.24" /><!-- Manastone: Attack +5 / Accuracy +13 -->
-			<item id="167000687" chance="3.24" /><!-- Manastone: Attack +5 / Block +13 -->
-			<item id="167000688" chance="3.23" /><!-- Manastone: Crit Strike +17 / HP +47 -->
-			<item id="167000690" chance="1.58" /><!-- Manastone: Crit Strike +17 / Attack +2 -->
-			<item id="167000691" chance="3.24" /><!-- Manastone: Crit Strike +17 / Accuracy +13 -->
-			<item id="167000692" chance="3.24" /><!-- Manastone: Crit Strike +17 / Evasion +13 -->
-			<item id="167000693" chance="3.24" /><!-- Manastone: Crit Strike +17 / Parry +13 -->
-			<item id="167000694" chance="3.24" /><!-- Manastone: Crit Strike +17 / Block +13 -->
-			<item id="167000695" chance="1.58" /><!-- Manastone: Crit Strike +17 / Resist Magic +7 -->
-			<item id="167000696" chance="1.58" /><!-- Manastone: Crit Strike +17 / Magical Accuracy +7 -->
-			<item id="167000697" chance="3.23" /><!-- Manastone: Magic Boost +27 / HP +47 -->
-			<item id="167000699" chance="3.24" /><!-- Manastone: Magic Boost +27 / Accuracy +13 -->
-			<item id="167000702" chance="3.24" /><!-- Manastone: Magic Boost +27 / Block +13 -->
-			<item id="167000703" chance="3.24" /><!-- Manastone: Magic Boost +27 / Crit Strike +8 -->
-			<item id="167000704" chance="1.58" /><!-- Manastone: Magic Boost +27 / Resist Magic +7 -->
-			<item id="167000705" chance="1.58" /><!-- Manastone: Magic Boost +27 / Magical Accuracy +7 -->
-			<item id="167000706" chance="3.23" /><!-- Manastone: Magical Accuracy +14 / HP +47 -->
-			<item id="167000708" chance="1.58" /><!-- Manastone: Magical Accuracy +14 / Magic Boost +13 -->
-			<item id="167000709" chance="3.24" /><!-- Manastone: Magical Accuracy +14 / Accuracy +13 -->
-			<item id="167000712" chance="3.24" /><!-- Manastone: Magical Accuracy +14 / Block +13 -->
-			<item id="167000713" chance="3.24" /><!-- Manastone: Magical Accuracy +14 / Crit Strike +8 -->
-			<item id="167000714" chance="1.58" /><!-- Manastone: Magical Accuracy +14 / Resist Magic +7 -->
-			<item id="167000749" chance="1.58" /><!-- Manastone: Attack +5 / Crit Strike +8 -->
-			<item id="167000750" chance="1.58" /><!-- Manastone: Attack +5 / Resist Magic +7 -->
-			<item id="167000751" chance="1.58" /><!-- Manastone: Attack +5 / Magical Accuracy +7 -->
+			<item id="167000682" chance="3.85" /><!-- Manastone: Attack +5 / HP +47 -->
+			<item id="167000684" chance="3.85" /><!-- Manastone: Attack +5 / Accuracy +13 -->
+			<item id="167000687" chance="3.85" /><!-- Manastone: Attack +5 / Block +13 -->
+			<item id="167000688" chance="3.85" /><!-- Manastone: Crit Strike +17 / HP +47 -->
+			<item id="167000690" chance="3.85" /><!-- Manastone: Crit Strike +17 / Attack +2 -->
+			<item id="167000691" chance="3.85" /><!-- Manastone: Crit Strike +17 / Accuracy +13 -->
+			<item id="167000692" chance="3.85" /><!-- Manastone: Crit Strike +17 / Evasion +13 -->
+			<item id="167000693" chance="3.85" /><!-- Manastone: Crit Strike +17 / Parry +13 -->
+			<item id="167000694" chance="3.85" /><!-- Manastone: Crit Strike +17 / Block +13 -->
+			<item id="167000695" chance="3.84" /><!-- Manastone: Crit Strike +17 / Resist Magic +7 -->
+			<item id="167000696" chance="3.84" /><!-- Manastone: Crit Strike +17 / Magical Accuracy +7 -->
+			<item id="167000697" chance="3.85" /><!-- Manastone: Magic Boost +27 / HP +47 -->
+			<item id="167000699" chance="3.85" /><!-- Manastone: Magic Boost +27 / Accuracy +13 -->
+			<item id="167000702" chance="3.85" /><!-- Manastone: Magic Boost +27 / Block +13 -->
+			<item id="167000703" chance="3.85" /><!-- Manastone: Magic Boost +27 / Crit Strike +8 -->
+			<item id="167000704" chance="3.84" /><!-- Manastone: Magic Boost +27 / Resist Magic +7 -->
+			<item id="167000705" chance="3.84" /><!-- Manastone: Magic Boost +27 / Magical Accuracy +7 -->
+			<item id="167000706" chance="3.85" /><!-- Manastone: Magical Accuracy +14 / HP +47 -->
+			<item id="167000708" chance="3.85" /><!-- Manastone: Magical Accuracy +14 / Magic Boost +13 -->
+			<item id="167000709" chance="3.85" /><!-- Manastone: Magical Accuracy +14 / Accuracy +13 -->
+			<item id="167000712" chance="3.84" /><!-- Manastone: Magical Accuracy +14 / Block +13 -->
+			<item id="167000713" chance="3.84" /><!-- Manastone: Magical Accuracy +14 / Crit Strike +8 -->
+			<item id="167000714" chance="3.84" /><!-- Manastone: Magical Accuracy +14 / Resist Magic +7 -->
+			<item id="167000749" chance="3.84" /><!-- Manastone: Attack +5 / Crit Strike +8 -->
+			<item id="167000750" chance="3.84" /><!-- Manastone: Attack +5 / Resist Magic +7 -->
+			<item id="167000751" chance="3.84" /><!-- Manastone: Attack +5 / Magical Accuracy +7 -->
 		</set>
 	</decomposable>
 	<decomposable item_id="188052728" selectable="true" override="true"><!-- [Event] Dramata Wing Chest -->
@@ -1691,35 +1691,102 @@
 	</decomposable>
 	<decomposable item_id="188053112" override="true"><!-- Ahserion's Flight Composite Manastone Bundle -->
 		<set>
-			<item id="167000682" count="2" chance="0.53" /><!-- Manastone: Attack +5 / HP +47 -->
-			<item id="167000684" count="2" chance="0.3" /><!-- Manastone: Attack +5 / Accuracy +13 -->
-			<item id="167000685" count="2" chance="2.33" /><!-- Manastone: Attack +5 / Evasion +13 -->
-			<item id="167000686" count="2" chance="2.33" /><!-- Manastone: Attack +5 / Parry +13 -->
-			<item id="167000687" count="2" chance="2.33" /><!-- Manastone: Attack +5 / Block +13 -->
-			<item id="167000688" count="2" chance="0.53" /><!-- Manastone: Crit Strike +17 / HP +47 -->
-			<item id="167000690" count="2" chance="0.3" /><!-- Manastone: Crit Strike +17 / Attack +2 -->
-			<item id="167000691" count="2" chance="0.3" /><!-- Manastone: Crit Strike +17 / Accuracy +13 -->
-			<item id="167000692" count="2" chance="2.33" /><!-- Manastone: Crit Strike +17 / Evasion +13 -->
-			<item id="167000693" count="2" chance="2.33" /><!-- Manastone: Crit Strike +17 / Parry +13 -->
-			<item id="167000694" count="2" chance="2.33" /><!-- Manastone: Crit Strike +17 / Block +13 -->
-			<item id="167000695" count="2" chance="0.3" /><!-- Manastone: Crit Strike +17 / Resist Magic +7 -->
-			<item id="167000696" count="2" chance="0.3" /><!-- Manastone: Crit Strike +17 / Magical Accuracy +7 -->
-			<item id="167000697" count="2" chance="0.53" /><!-- Manastone: Magic Boost +27 / HP +47 -->
-			<item id="167000699" count="2" chance="2.33" /><!-- Manastone: Magic Boost +27 / Accuracy +13 -->
-			<item id="167000700" count="2" chance="2.33" /><!-- Manastone: Magic Boost +27 / Evasion +13 -->
-			<item id="167000701" count="2" chance="2.33" /><!-- Manastone: Magic Boost +27 / Parry +13 -->
-			<item id="167000702" count="2" chance="2.33" /><!-- Manastone: Magic Boost +27 / Block +13 -->
-			<item id="167000703" count="2" chance="2.33" /><!-- Manastone: Magic Boost +27 / Crit Strike +8 -->
-			<item id="167000704" count="2" chance="0.3" /><!-- Manastone: Magic Boost +27 / Resist Magic +7 -->
-			<item id="167000705" count="2" chance="0.3" /><!-- Manastone: Magic Boost +27 / Magical Accuracy +7 -->
-			<item id="167000706" count="2" chance="0.53" /><!-- Manastone: Magical Accuracy +14 / HP +47 -->
-			<item id="167000708" count="2" chance="0.3" /><!-- Manastone: Magical Accuracy +14 / Magic Boost +13 -->
-			<item id="167000709" count="2" chance="2.33" /><!-- Manastone: Magical Accuracy +14 / Accuracy +13 -->
-			<item id="167000710" count="2" chance="2.33" /><!-- Manastone: Magical Accuracy +14 / Evasion +13 -->
-			<item id="167000711" count="2" chance="2.33" /><!-- Manastone: Magical Accuracy +14 / Parry +13 -->
-			<item id="167000712" count="2" chance="2.33" /><!-- Manastone: Magical Accuracy +14 / Block +13 -->
-			<item id="167000713" count="2" chance="0.3" /><!-- Manastone: Magical Accuracy +14 / Crit Strike +8 -->
-			<item id="167000714" count="2" chance="0.3" /><!-- Manastone: Magical Accuracy +14 / Resist Magic +7 -->
+			<item id="167000682" count="2" chance="1.88" /><!-- Manastone: Attack +5 / HP +47 -->
+			<item id="167000684" count="2" chance="1.88" /><!-- Manastone: Attack +5 / Accuracy +13 -->
+			<item id="167000685" count="2" chance="1.88" /><!-- Manastone: Attack +5 / Evasion +13 -->
+			<item id="167000686" count="2" chance="1.88" /><!-- Manastone: Attack +5 / Parry +13 -->
+			<item id="167000687" count="2" chance="1.88" /><!-- Manastone: Attack +5 / Block +13 -->
+			<item id="167000749" count="2" chance="1.88" /><!-- Manastone: Attack +5 / Crit Strike +8 -->
+			<item id="167000750" count="2" chance="1.88" /><!-- Manastone: Attack +5 / Resist Magic +7 -->
+			<item id="167000751" count="2" chance="1.88" /><!-- Manastone: Attack +5 / Magical Accuracy +7 -->
+			<item id="167000688" count="2" chance="1.88" /><!-- Manastone: Crit Strike +17 / HP +47 -->
+			<item id="167000690" count="2" chance="1.88" /><!-- Manastone: Crit Strike +17 / Attack +2 -->
+			<item id="167000691" count="2" chance="1.88" /><!-- Manastone: Crit Strike +17 / Accuracy +13 -->
+			<item id="167000692" count="2" chance="1.88" /><!-- Manastone: Crit Strike +17 / Evasion +13 -->
+			<item id="167000693" count="2" chance="1.88" /><!-- Manastone: Crit Strike +17 / Parry +13 -->
+			<item id="167000694" count="2" chance="1.88" /><!-- Manastone: Crit Strike +17 / Block +13 -->
+			<item id="167000695" count="2" chance="1.88" /><!-- Manastone: Crit Strike +17 / Resist Magic +7 -->
+			<item id="167000696" count="2" chance="1.88" /><!-- Manastone: Crit Strike +17 / Magical Accuracy +7 -->
+			<item id="167000697" count="2" chance="1.88" /><!-- Manastone: Magic Boost +27 / HP +47 -->
+			<item id="167000699" count="2" chance="1.88" /><!-- Manastone: Magic Boost +27 / Accuracy +13 -->
+			<item id="167000700" count="2" chance="1.88" /><!-- Manastone: Magic Boost +27 / Evasion +13 -->
+			<item id="167000701" count="2" chance="1.88" /><!-- Manastone: Magic Boost +27 / Parry +13 -->
+			<item id="167000702" count="2" chance="1.88" /><!-- Manastone: Magic Boost +27 / Block +13 -->
+			<item id="167000703" count="2" chance="1.88" /><!-- Manastone: Magic Boost +27 / Crit Strike +8 -->
+			<item id="167000704" count="2" chance="1.88" /><!-- Manastone: Magic Boost +27 / Resist Magic +7 -->
+			<item id="167000705" count="2" chance="1.88" /><!-- Manastone: Magic Boost +27 / Magical Accuracy +7 -->
+			<item id="167000706" count="2" chance="1.87" /><!-- Manastone: Magical Accuracy +14 / HP +47 -->
+			<item id="167000708" count="2" chance="1.87" /><!-- Manastone: Magical Accuracy +14 / Magic Boost +13 -->
+			<item id="167000709" count="2" chance="1.87" /><!-- Manastone: Magical Accuracy +14 / Accuracy +13 -->
+			<item id="167000710" count="2" chance="1.87" /><!-- Manastone: Magical Accuracy +14 / Evasion +13 -->
+			<item id="167000711" count="2" chance="1.87" /><!-- Manastone: Magical Accuracy +14 / Parry +13 -->
+			<item id="167000712" count="2" chance="1.87" /><!-- Manastone: Magical Accuracy +14 / Block +13 -->
+			<item id="167000713" count="2" chance="1.87" /><!-- Manastone: Magical Accuracy +14 / Crit Strike +8 -->
+			<item id="167000714" count="2" chance="1.87" /><!-- Manastone: Magical Accuracy +14 / Resist Magic +7 -->
+			<item id="167010184" count="2" chance="0.67" /><!-- Manastone: Attack +5 / HP +55 -->
+			<item id="167000752" count="2" chance="0.67" /><!-- Manastone: Attack +5 / HP +50 -->
+			<item id="167010186" count="2" chance="0.67" /><!-- Manastone: Attack +5 / Accuracy +16 -->
+			<item id="167000754" count="2" chance="0.67" /><!-- Manastone: Attack +5 / Accuracy +14 -->
+			<item id="167010187" count="2" chance="0.67" /><!-- Manastone: Attack +5 / Dodge +16 -->
+			<item id="167000755" count="2" chance="0.67" /><!-- Manastone: Attack +5 / Evasion +14 -->
+			<item id="167010188" count="2" chance="0.67" /><!-- Manastone: Attack +5 / Parry +16 -->
+			<item id="167000756" count="2" chance="0.67" /><!-- Manastone: Attack +5 / Parry +14 -->
+			<item id="167010189" count="2" chance="0.67" /><!-- Manastone: Attack +5 / Block +16 -->
+			<item id="167000757" count="2" chance="0.67" /><!-- Manastone: Attack +5 / Block +14 -->
+			<item id="167010181" count="2" chance="0.67" /><!-- Manastone: Attack +5 / Crit Strike +10 -->
+			<item id="167010182" count="2" chance="0.67" /><!-- Manastone: Attack +5 / Crit Strike +9 -->
+			<item id="167010183" count="2" chance="0.67" /><!-- Manastone: Attack +5 / Magical Accuracy +9 -->
+			<item id="167000717" count="2" chance="0.67" /><!-- Manastone: Attack +5 / Magical Accuracy +8 -->
+			<item id="167000716" count="2" chance="0.67" /><!-- Manastone: Attack +5 / Resist Magic +8 -->
+			<item id="167010190" count="2" chance="0.62" /><!-- Manastone: Crit Strike +19 / HP +55 -->
+			<item id="167000718" count="2" chance="0.62" /><!-- Manastone: Crit Strike +19 / HP +50 -->
+			<item id="167010192" count="2" chance="0.62" /><!-- Manastone: Crit Strike +19 / Attack +3 -->
+			<item id="167000720" count="2" chance="0.62" /><!-- Manastone: Crit Strike +19 / Attack +2 -->
+			<item id="167010193" count="2" chance="0.62" /><!-- Manastone: Crit Strike +19 / Accuracy +16 -->
+			<item id="167000721" count="2" chance="0.62" /><!-- Manastone: Crit Strike +19 / Accuracy +14 -->
+			<item id="167010194" count="2" chance="0.62" /><!-- Manastone: Crit Strike +19 / Dodge +16 -->
+			<item id="167000722" count="2" chance="0.62" /><!-- Manastone: Crit Strike +19 / Evasion +14 -->
+			<item id="167010195" count="2" chance="0.62" /><!-- Manastone: Crit Strike +19 / Parry +16 -->
+			<item id="167000723" count="2" chance="0.62" /><!-- Manastone: Crit Strike +19 / Parry +14 -->
+			<item id="167010196" count="2" chance="0.62" /><!-- Manastone: Crit Strike +19 / Block +16 -->
+			<item id="167000724" count="2" chance="0.62" /><!-- Manastone: Crit Strike +19 / Block +14 -->
+			<item id="167010197" count="2" chance="0.62" /><!-- Manastone: Crit Strike +19 / Crit Strike +9 -->
+			<item id="167000725" count="2" chance="0.62" /><!-- Manastone: Crit Strike +19 / Resist Magic +8 -->
+			<item id="167010198" count="2" chance="0.62" /><!-- Manastone: Crit Strike +19 / Magical Accuracy +9 -->
+			<item id="167000726" count="2" chance="0.62" /><!-- Manastone: Crit Strike +19 / Magical Accuracy +8 -->
+			<item id="167010208" count="2" chance="0.59" /><!-- Manastone: Magical Accuracy +16 / HP +55 -->
+			<item id="167000736" count="2" chance="0.59" /><!-- Manastone: Magical Accuracy +16 / HP +50 -->
+			<item id="167010210" count="2" chance="0.59" /><!-- Manastone: Magical Accuracy +16 / Magic Boost +16 -->
+			<item id="167000738" count="2" chance="0.59" /><!-- Manastone: Magical Accuracy +16 / Magic Boost +14 -->
+			<item id="167010211" count="2" chance="0.59" /><!-- Manastone: Magical Accuracy +16 / Accuracy +16 -->
+			<item id="167000739" count="2" chance="0.59" /><!-- Manastone: Magical Accuracy +16 / Accuracy +14 -->
+			<item id="167010212" count="2" chance="0.59" /><!-- Manastone: Magical Accuracy +16 / Dodge +16 -->
+			<item id="167000740" count="2" chance="0.59" /><!-- Manastone: Magical Accuracy +16 / Evasion +14 -->
+			<item id="167010213" count="2" chance="0.59" /><!-- Manastone: Magical Accuracy +16 / Parry +16 -->
+			<item id="167000741" count="2" chance="0.59" /><!-- Manastone: Magical Accuracy +16 / Parry +14 -->
+			<item id="167010214" count="2" chance="0.59" /><!-- Manastone: Magical Accuracy +16 / Block +16 -->
+			<item id="167000742" count="2" chance="0.59" /><!-- Manastone: Magical Accuracy +16 / Block +14 -->
+			<item id="167010215" count="2" chance="0.59" /><!-- Manastone: Magical Accuracy +16 / Crit Strike +10 -->
+			<item id="167010216" count="2" chance="0.59" /><!-- Manastone: Magical Accuracy +16 / Crit Strike +9 -->
+			<item id="167010217" count="2" chance="0.59" /><!-- Manastone: Magical Accuracy +16 / Attack +3 -->
+			<item id="167000743" count="2" chance="0.59" /><!-- Manastone: Magical Accuracy +16 / Crit Strike +9 -->
+			<item id="167000744" count="2" chance="0.59" /><!-- Manastone: Magical Accuracy +16 / Resist Magic +8 -->
+			<item id="167010199" count="2" chance="0.62" /><!-- Manastone: Magic Boost +27 / HP +55 -->
+			<item id="167000727" count="2" chance="0.62" /><!-- Manastone: Magic Boost +27 / HP +50 -->
+			<item id="167010201" count="2" chance="0.62" /><!-- Manastone: Magic Boost +27 / Accuracy +16 -->
+			<item id="167000729" count="2" chance="0.62" /><!-- Manastone: Magic Boost +27 / Accuracy +14 -->
+			<item id="167010202" count="2" chance="0.62" /><!-- Manastone: Magic Boost +27 / Dodge +16 -->
+			<item id="167000730" count="2" chance="0.62" /><!-- Manastone: Magic Boost +27 / Evasion +14 -->
+			<item id="167010203" count="2" chance="0.62" /><!-- Manastone: Magic Boost +27 / Parry +16 -->
+			<item id="167000731" count="2" chance="0.62" /><!-- Manastone: Magic Boost +27 / Parry +14 -->
+			<item id="167010204" count="2" chance="0.62" /><!-- Manastone: Magic Boost +27 / Block +16 -->
+			<item id="167000732" count="2" chance="0.62" /><!-- Manastone: Magic Boost +27 / Block +14 -->
+			<item id="167010205" count="2" chance="0.62" /><!-- Manastone: Magic Boost +27 / Crit Strike +10 -->
+			<item id="167010206" count="2" chance="0.62" /><!-- Manastone: Magic Boost +27 / Crit Strike +9 -->
+			<item id="167010207" count="2" chance="0.62" /><!-- Manastone: Magic Boost +27 / Magical Accuracy +9 -->
+			<item id="167000735" count="2" chance="0.62" /><!-- Manastone: Magic Boost +27 / Magical Accuracy +8 -->
+			<item id="167000733" count="2" chance="0.62" /><!-- Manastone: Magic Boost +27 / Crit Strike +9 -->
+			<item id="167000734" count="2" chance="0.62" /><!-- Manastone: Magic Boost +27 / Resist Magic +8 -->
 		</set>
 	</decomposable>
 	<decomposable item_id="188053185" override="true"><!-- [Event] Wishing Soup -->
@@ -1749,7 +1816,16 @@
 			<item id="188950017" chance="0.05" /><!-- Special Courier Pass (Abyss Eternal/Lv. 61-65) -->
 		</set>
 	</decomposable>
-	<!-- Should be kept as selectables | dropped by rift guardians -->
+	<decomposable item_id="188053295" selectable="true" override="true"><!-- Empyrean Plume Chest -->
+		<set race="ELYOS">
+			<item id="187100015"/><!-- Kaisinel's Plume: Attack -->
+			<item id="187100016"/><!-- Kaisinel's Plume: Magic Boost -->
+		</set>
+		<set race="ASMODIANS">
+			<item id="187100017"/><!-- Marchutan's Plume: Attack -->
+			<item id="187100018"/><!-- Marchutan's Plume: Magic Boost -->
+		</set>
+	</decomposable>
 	<decomposable item_id="188053367" selectable="true" override="true"><!-- Guardian Tactician Plate Set -->
 		<set>
 			<item id="110601511" /><!-- Resplendent Breastplate -->
@@ -2289,6 +2365,16 @@
 		</set>
 		<set race="ASMODIANS">
 			<item id="182215751" /><!-- Elyos Guardian General Token -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053722" override="true"><!-- Special Enchantment Stone Bundle of Fortuneers Legion -->
+		<set>
+			<item id="166020000" /><!-- Omega Enchantment Stone -->
+		</set>
+	</decomposable>
+	<decomposable item_id="188053727" override="true"><!-- Special Enchantment Stone Bundle of Charlirunerk Inquiry Agency -->
+		<set>
+			<item id="166020000" /><!-- Omega Enchantment Stone -->
 		</set>
 	</decomposable>
 	<decomposable item_id="188053798" override="true"><!-- Shining Enchantment Stone Bundle -->

@@ -70,13 +70,11 @@ public class Decompose extends PlayerCommand {
 		};
 		player.getController().addTask(TaskId.SKILL_USE, ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
 			Item item = player.getInventory().getFirstItemByItemId(itemId);
-			if (item != null && player.hasCooldown(item)) // the previous decompose started it, wait for it instead of aborting
-				return;
 			if (processedCount.incrementAndGet() >= count || item == null || item.getItemCount() <= 0) {
 				cancelTask(player, observer, "Decomposing finished: Processed " + processedCount + "x " + ChatUtil.item(itemId) + ".");
 				return;
 			}
-			if (!PlayerRestrictions.canUseItem(player, item) || !decomposeAction.canAct(player, item, item)) {
+			if (!decomposeAction.canAct(player, item, item)) {
 				observer.abort();
 				return;
 			}

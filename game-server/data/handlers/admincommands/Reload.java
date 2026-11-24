@@ -95,8 +95,9 @@ public class Reload extends AdminCommand {
 			long rewards = DataManager.UPGRADE_ARCADE_DATA.getRewards().stream().mapToLong(l -> l.getArcadeRewardItems().size()).sum();
 			sendInfo(admin, rewards + " upgrade arcade rewards loaded.");
 		} else if (params[0].equalsIgnoreCase("decomposables")) {
-			File xml = new File("./data/static_data/decomposable_items/decomposable_items.xml");
-			DataManager.DECOMPOSABLE_ITEMS_DATA = JAXBUtil.deserialize(xml, DecomposableItemsData.class, "./data/static_data/decomposable_items/decomposable_items.xsd");
+			Collection<File> files = XmlUtil.listFiles("./data/static_data/decomposable_items", true);
+			DataManager.DECOMPOSABLE_ITEMS_DATA.setData(
+				JAXBUtil.deserialize(files, DecomposableItemsData.class, "./data/static_data/decomposable_items/decomposable_items.xsd"));
 			sendInfo(admin, DataManager.DECOMPOSABLE_ITEMS_DATA.size() + " item bundles reloaded.");
 		} else
 			sendInfo(admin);

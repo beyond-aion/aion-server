@@ -17,6 +17,7 @@ import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.dataholders.PlayerExperienceTable;
 import com.aionemu.gameserver.model.team.legion.LegionHistoryAction;
 import com.aionemu.gameserver.model.team.legion.LegionRank;
+import com.aionemu.gameserver.network.NetConnector;
 import com.aionemu.gameserver.services.player.PlayerService;
 import com.aionemu.gameserver.utils.xml.JAXBUtil;
 
@@ -33,8 +34,8 @@ public class DatabaseCleaningService {
 	}
 
 	public static void deletePlayersOnInactiveAccounts() {
-		if (Thread.currentThread().threadId() != 1)
-			throw new IllegalStateException("DatabaseCleaningService can only be run from the main thread on server startup");
+		if (NetConnector.isInitialized())
+			throw new IllegalStateException("DatabaseCleaningService can only be run on server startup");
 
 		if (CleaningConfig.MIN_ACCOUNT_INACTIVITY_DAYS <= 30)
 			throw new IllegalArgumentException("The configured days for database cleaning is too low. For safety reasons the service will only execute with periods over 30 days");

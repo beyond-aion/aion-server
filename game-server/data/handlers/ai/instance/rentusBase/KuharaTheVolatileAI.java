@@ -26,8 +26,8 @@ import ai.AggressiveNpcAI;
 @AIName("kuhara_the_volatile")
 public class KuharaTheVolatileAI extends AggressiveNpcAI {
 
+	private final AtomicBoolean isStarted = new AtomicBoolean();
 	private Future<?> activeEventTask, barrelEventTask, bombEventTask;
-	private AtomicBoolean isStarted = new AtomicBoolean();
 	private boolean canThink = true;
 
 	public KuharaTheVolatileAI(Npc owner) {
@@ -42,7 +42,19 @@ public class KuharaTheVolatileAI extends AggressiveNpcAI {
 	@Override
 	public void handleAttack(Creature creature) {
 		super.handleAttack(creature);
+		startEncounter();
+	}
+
+	@Override
+	protected void handleCreatureAggro(Creature creature) {
+		super.handleCreatureAggro(creature);
+		startEncounter();
+	}
+	
+	private void startEncounter() {
 		if (isStarted.compareAndSet(false, true)) {
+			getPosition().getWorldMapInstance().setDoorState(43, true);
+			PacketSendUtility.broadcastMessage(getOwner(), 1500393);
 			startActiveEvent();
 			startBarrelEvent();
 		}
@@ -55,6 +67,7 @@ public class KuharaTheVolatileAI extends AggressiveNpcAI {
 
 	private void startBarrelEvent() {
 		barrelEventTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
+			deleteNpcs(getPosition().getWorldMapInstance().getNpcs(282396)); // Bombs
 			switch (Rnd.get(1, 4)) {
 				case 1:
 					rndSpawn(282394, 126.53f, 274.49f, 209.819f);
@@ -82,6 +95,7 @@ public class KuharaTheVolatileAI extends AggressiveNpcAI {
 			if (!isDead()) {
 				PacketSendUtility.broadcastMessage(getOwner(), 1500394);
 				canThink = false;
+				getMoveController().abortMove();
 				EmoteManager.emoteStopAttacking(getOwner());
 				setStateIfNot(AIState.WALKING);
 				SkillEngine.getInstance().getSkill(getOwner(), 19703, 60, getOwner()).useNoAnimationSkill();
@@ -105,7 +119,6 @@ public class KuharaTheVolatileAI extends AggressiveNpcAI {
 							SkillEngine.getInstance().getSkill(getOwner(), 19375, 60, getOwner()).useNoAnimationSkill();
 						}
 						deleteNpcs(getPosition().getWorldMapInstance().getNpcs(282394));
-						deleteNpcs(getPosition().getWorldMapInstance().getNpcs(282396));
 					}
 				}, 11000);
 			}
@@ -175,6 +188,9 @@ public class KuharaTheVolatileAI extends AggressiveNpcAI {
 		cancelTask(activeEventTask);
 		cancelTask(barrelEventTask);
 		cancelTask(bombEventTask);
+		deleteNpcs(getPosition().getWorldMapInstance().getNpcs(282394));
+		deleteNpcs(getPosition().getWorldMapInstance().getNpcs(282396));
+		getPosition().getWorldMapInstance().setDoorState(43, false); // reopen the gate after a wipe
 		super.handleBackHome();
 	}
 

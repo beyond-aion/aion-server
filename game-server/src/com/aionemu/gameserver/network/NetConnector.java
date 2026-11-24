@@ -46,8 +46,12 @@ public class NetConnector {
 			ChatServer.getInstance().connect(nettyServer);
 	}
 
+	public static boolean isInitialized() {
+		return nettyServer != null;
+	}
+
 	public static void shutdown() {
-		if (nettyServer == null)
+		if (!isInitialized())
 			return;
 		if (forceStaffClientsToServerSelectionScreen())
 			LockSupport.parkNanos(Duration.ofMillis(200).toNanos()); // wait for login server to accept reconnections
