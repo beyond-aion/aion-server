@@ -67,6 +67,19 @@ public class HouseBidsDAO {
 		return true;
 	}
 
+	public static boolean deleteBid(HouseBids.Bid bid) {
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(DELETE_SINGLE_BID_QUERY)) {
+			stmt.setInt(1, bid.getPlayerObjectId());
+			stmt.setInt(2, bid.getHouseObjectId());
+			stmt.setLong(3, bid.getKinah());
+			stmt.execute();
+			return true;
+		} catch (Exception e) {
+			log.error("Cannot delete house bid", e);
+			return false;
+		}
+	}
+
 	public static boolean deleteOrDisableBids(int playerObjectId, List<HouseBids.Bid> bidsToDelete) {
 		try (Connection con = DatabaseFactory.getConnection()) {
 			if (!bidsToDelete.isEmpty()) {
