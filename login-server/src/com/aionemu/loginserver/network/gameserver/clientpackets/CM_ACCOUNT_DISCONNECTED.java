@@ -1,5 +1,6 @@
 package com.aionemu.loginserver.network.gameserver.clientpackets;
 
+import com.aionemu.loginserver.GameServerInfo;
 import com.aionemu.loginserver.controller.AccountTimeController;
 import com.aionemu.loginserver.model.Account;
 import com.aionemu.loginserver.network.gameserver.GsClientPacket;
@@ -23,7 +24,10 @@ public class CM_ACCOUNT_DISCONNECTED extends GsClientPacket {
 
 	@Override
 	protected void runImpl() {
-		Account account = getConnection().getGameServerInfo().removeAccountFromGameServer(accountId);
+		GameServerInfo gsi = getConnection().getGameServerInfo();
+		if (gsi == null) // the link was closed while this packet waited, its accounts are gone already
+			return;
+		Account account = gsi.removeAccountFromGameServer(accountId);
 
 		/**
 		 * account can be null if a player logged out from gs {@link CM_ACCOUNT_RECONNECT_KEY}

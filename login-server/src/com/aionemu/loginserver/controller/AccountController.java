@@ -75,6 +75,8 @@ public class AccountController {
 	 */
 	public static void checkAuth(SessionKey key, GsConnection gsConnection) {
 		GameServerInfo gsi = gsConnection.getGameServerInfo();
+		if (gsi == null) // the link was closed while this packet waited, see GsConnection.getDisconnectTimeoutMillis
+			return;
 		LoginConnection con;
 		// The account moves from the login server to the game server in one step, under the lock of registerOnLS: a login in between would find it
 		// on neither and be let in next to this one, and a newer login that replaced the connection would lose its registration.
