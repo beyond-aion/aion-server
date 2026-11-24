@@ -83,7 +83,7 @@ import com.aionemu.gameserver.world.WorldPosition;
 public class Player extends Creature {
 
 	public volatile RideInfo ride;
-	public volatile InRoll inRoll;
+
 	private final PlayerAccountData playerAccountData;
 	private final Account playerAccount;
 	private LegionMember legionMember;

@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.services.drop;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -15,10 +16,8 @@ import com.aionemu.gameserver.configs.main.GroupConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.TaskId;
-import com.aionemu.gameserver.model.actions.PlayerMode;
 import com.aionemu.gameserver.model.drop.DropItem;
 import com.aionemu.gameserver.model.gameobjects.*;
-import com.aionemu.gameserver.model.gameobjects.player.InRoll;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.items.ItemId;
@@ -38,7 +37,6 @@ import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.world.World;
 
 /**
@@ -47,6 +45,9 @@ import com.aionemu.gameserver.world.World;
 public class DropService {
 
 	private static final Logger log = LoggerFactory.getLogger(DropService.class);
+
+	private static final int ROLL_TIMEOUT_MILLIS = 20000;
+	private static final int BID_TIMEOUT_MILLIS = 35000;
 
 	public static DropService getInstance() {
 		return SingletonHolder.instance;
@@ -95,11 +96,6 @@ public class DropService {
 			first = lootGroupRules.getItemsToBeDistributed().peekFirst();
 			if (!lootGroupRules.getItemsToBeDistributed().removeIf(item -> item.getNpcObj() == npcObjId))
 				return;
-			for (Player player : dropNpc.getInRangePlayers()) {
-				InRoll inRoll = player.inRoll;
-				if (player.isInPlayerMode(PlayerMode.IN_ROLL) && inRoll != null && inRoll.getNpcId() == npcObjId)
-					player.unsetPlayerMode(PlayerMode.IN_ROLL);
-			}
 		}
 		DropItem next = lootGroupRules.getItemsToBeDistributed().peekFirst();
 		if (next != null && next != first) {
@@ -265,18 +261,21 @@ public class DropService {
 			if (dropNpc.getDistributionId() > 1 && dropNpc.getDistributionType()) {
 				boolean containDropItem = lootGroupRules.containDropItem(requestedItem);
 				if (lootGroupRules.getItemsToBeDistributed().isEmpty() || containDropItem) {
+					int distributionId = dropNpc.getDistributionId();
 					dropNpc.setCurrentIndex(requestedItem.getIndex());
+					List<Integer> offeredTo = new ArrayList<>();
 					for (Player member : dropNpc.getInRangePlayers()) {
 						Player finalPlayer = World.getInstance().getPlayer(member.getObjectId());
 						if (finalPlayer != null && finalPlayer.isOnline()) {
+							offeredTo.add(finalPlayer.getObjectId());
 							dropNpc.addPlayerStatus(finalPlayer);
-							finalPlayer.setPlayerMode(PlayerMode.IN_ROLL, new InRoll(npcId, itemId, requestedItem.getIndex(), dropNpc.getDistributionId()));
 							PacketSendUtility.sendPacket(finalPlayer, new SM_GROUP_LOOT(dropNpc.getLootingTeamId(), 0, itemId, (int) requestedItem.getCount(),
-								npcId, dropNpc.getDistributionId(), 1, requestedItem.getIndex()));
+								npcId, distributionId, 1, requestedItem.getIndex()));
 						}
 					}
-					lootGroupRules.setPlayersInRoll(dropNpc.getInRangePlayers(), dropNpc.getDistributionId() == 2 ? 17000 : 32000, requestedItem.getIndex(),
-						npcId);
+					requestedItem.offerTo(offeredTo);
+					lootGroupRules.scheduleRollTimeout(dropNpc.getInRangePlayers(), distributionId == 2 ? ROLL_TIMEOUT_MILLIS : BID_TIMEOUT_MILLIS,
+						requestedItem.getIndex(), npcId, distributionId);
 				} else {
 					PacketSendUtility.sendPacket(player,
 						SM_SYSTEM_MESSAGE.STR_MSG_LOOT_ALREADY_DISTRIBUTING_ITEM(DataManager.ITEM_DATA.getItemTemplate(itemId).getL10n()));
@@ -520,21 +519,27 @@ public class DropService {
 	 *
 	 * @return False if the winner doesn't have the kinah anymore.
 	 */
-	boolean payWinningBid(Player player, DropNpc dropNpc, long highestValue) {
-		if (highestValue > 0) {
-			if (!player.getInventory().tryDecreaseKinah(highestValue)) {
-				AuditLogger.log(player, "won a bid of " + highestValue + " kinah without having it anymore");
-				return false;
-			}
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PAY_ACCOUNT_ME(highestValue));
+	boolean payWinningBid(Player player, DropItem item, long highestValue) {
+		if (player.getInventory().getKinah() < highestValue) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PAY_NOT_ENOUGH_MONEY());
+			return false;
 		}
-
-		List<Player> onlineMembers = dropNpc.getInRangePlayers().stream().filter(p -> p.isOnline() && !p.equals(player)).toList();
-		for (Player member : onlineMembers) {
+		// shared by everyone the item was offered to, also those who passed, not by who stands nearby now
+		List<Player> members = item.getOfferedTo().stream().filter(id -> id != player.getObjectId()).map(id -> World.getInstance().getPlayer(id))
+			.filter(p -> p != null && p.isOnline()).toList();
+		if (members.isEmpty()) // nobody to pay, so the item is free
+			return true;
+		if (!player.getInventory().tryDecreaseKinah(highestValue)) { // spent since the bid, the next bidder gets the item
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PAY_NOT_ENOUGH_MONEY());
+			return false;
+		}
+		long share = highestValue / members.size();
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PAY_ACCOUNT_ME(highestValue));
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_SPLIT_ME_TO_B(highestValue, members.size(), share));
+		for (Player member : members) {
 			PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_MSG_PAY_ACCOUNT_OTHER(player.getName(), highestValue));
-			long distributeKinah = highestValue / onlineMembers.size();
-			member.getInventory().increaseKinah(distributeKinah);
-			PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_MSG_PAY_DISTRIBUTE(highestValue, onlineMembers.size(), distributeKinah));
+			PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_MSG_SPLIT_B_TO_ME(player.getName(), highestValue, members.size(), share));
+			member.getInventory().increaseKinah(share);
 		}
 		return true;
 	}

@@ -4,9 +4,7 @@ import java.util.Collection;
 import java.util.Deque;
 import java.util.concurrent.ConcurrentLinkedDeque;
 
-import com.aionemu.gameserver.model.actions.PlayerMode;
 import com.aionemu.gameserver.model.drop.DropItem;
-import com.aionemu.gameserver.model.gameobjects.player.InRoll;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.item.ItemQuality;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -133,16 +131,14 @@ public class LootGroupRules {
 		this.junkRecipientIndex = junkRecipientIndex;
 	}
 
-	public void setPlayersInRoll(final Collection<Player> players, int time, final int index, final int npcId) {
+	/**
+	 * Ends the roll or bid for everyone the corpse still waits for. The mode comes from the offer, so the timer doesn't depend on the corpse's
+	 * current distribution.
+	 */
+	public void scheduleRollTimeout(Collection<Player> players, int time, int index, int npcId, int mode) {
 		ThreadPoolManager.getInstance().schedule(() -> {
-			for (Player player : players) {
-				if (player.isInPlayerMode(PlayerMode.IN_ROLL)) {
-					InRoll inRoll = player.inRoll;
-					if (inRoll.getIndex() == index && inRoll.getNpcId() == npcId)
-						DropDistributionService.getInstance().handleRollOrBid(player, inRoll.getRollType(), 0, 0, inRoll.getItemId(), inRoll.getNpcId(),
-							inRoll.getIndex());
-				}
-			}
+			for (Player player : players) // handleRollOrBid ignores a gone corpse, a finished item and players that already answered
+				DropDistributionService.getInstance().handleRollOrBid(player, mode, 0, 0, 0, npcId, index);
 		}, time);
 	}
 

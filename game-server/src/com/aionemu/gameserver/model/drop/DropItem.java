@@ -1,7 +1,9 @@
 package com.aionemu.gameserver.model.drop;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -24,6 +26,9 @@ public class DropItem {
 	private boolean isDistributeItem = false;
 	private int npcObj;
 	private int optionalSocket = 0;
+	// Guarded by the corpse's monitor, like its other loot state (see DropDistributionService.handleRollOrBid); insertion order breaks equal values
+	private List<Integer> offeredTo = List.of();
+	private final Map<Integer, Long> answers = new LinkedHashMap<>();
 
 	public DropItem(Drop dropTemplate) {
 		this.dropTemplate = dropTemplate;
@@ -132,6 +137,36 @@ public class DropItem {
 	public void setWinningPlayer(Player winningPlayer) {
 		this.winningPlayer = winningPlayer;
 
+	}
+
+	/**
+	 * Starts a roll or bid for the given players, who all get its messages until the item is distributed.
+	 */
+	public void offerTo(List<Integer> playerObjectIds) {
+		offeredTo = List.copyOf(playerObjectIds);
+		answers.clear();
+	}
+
+	public List<Integer> getOfferedTo() {
+		return offeredTo;
+	}
+
+	/**
+	 * Remembers a player's roll or bid for this item. 0 means the player gave up.
+	 */
+	public void setAnswer(int playerObjectId, long value) {
+		answers.put(playerObjectId, value);
+	}
+
+	public long getAnswer(int playerObjectId) {
+		return answers.getOrDefault(playerObjectId, 0L);
+	}
+
+	/**
+	 * @return All rolls or bids for this item, highest first; equal values keep the order they were made in.
+	 */
+	public List<Map.Entry<Integer, Long>> getAnswers() {
+		return answers.entrySet().stream().sorted(Map.Entry.<Integer, Long>comparingByValue().reversed()).toList();
 	}
 
 	/**
