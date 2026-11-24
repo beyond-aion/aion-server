@@ -196,7 +196,9 @@ public class DropService {
 
 		// Who may loot from now on and which drops belong to everyone is changed by this player's thread while another one may already take an item
 		synchronized (dropNpc) {
-			RespawnService.scheduleDecayTask(npc, dropNpc.getRemaingDecayTime());
+			// another player may have opened the corpse since the lock was released above, and an open loot window keeps it from decaying
+			if (!dropNpc.isBeingLooted())
+				RespawnService.scheduleDecayTask(npc, dropNpc.getRemaingDecayTime());
 
 			LootGroupRules lootGroupRules = dropNpc.getLootGroupRules();
 			if (lootGroupRules != null && dropNpc.getInRangePlayers().size() > 1 && dropNpc.getAllowedLooters().size() == 1) {
