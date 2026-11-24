@@ -64,7 +64,7 @@ public class HouseBids {
 	}
 
 	public synchronized Bid getHighestBid() {
-		return bids.get(bids.size() - 1);
+		return bids.getLast();
 	}
 
 	public synchronized Bid getLatestBid(Player player) {
@@ -85,7 +85,7 @@ public class HouseBids {
 	}
 
 	public synchronized Bid getInitialOffer() {
-		return bids.get(0);
+		return bids.getFirst();
 	}
 
 	public synchronized boolean removeBid(Bid bid) {

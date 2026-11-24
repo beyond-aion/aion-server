@@ -195,7 +195,12 @@ public class HousingBidService {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_BID_MY_HOUSE());
 			return false;
 		}
-		if (bids.values().stream().anyMatch(b -> b.isHighestBidder(player))) { // also the leading bid on this house
+		HouseBids.Bid highestBid = houseBids.getHighestBid();
+		if (highestBid.getPlayerObjectId() == player.getObjectId()) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_BID_SUCC_BID_HOUSE());
+			return false;
+		}
+		if (bids.values().stream().anyMatch(b -> b.isHighestBidder(player))) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_BID_OTHER_HOUSE());
 			return false;
 		}
@@ -208,7 +213,7 @@ public class HousingBidService {
 			sendAuctionEnded(player);
 			return false;
 		}
-		long currentBid = houseBids.getHighestBid().getKinah();
+		long currentBid = highestBid.getKinah();
 		if (bidOffer - currentBid >= currentBid * HousingConfig.AUCTION_BID_STEP_LIMIT / 100f) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_BID_EXCESS_ACCOUNT());
 			return false;
