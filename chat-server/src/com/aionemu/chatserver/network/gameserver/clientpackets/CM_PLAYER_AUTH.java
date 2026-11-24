@@ -26,8 +26,8 @@ public class CM_PLAYER_AUTH extends GsClientPacket {
 	private int raceId;
 	private byte accessLevel;
 
-	public CM_PLAYER_AUTH(ByteBuf buf, GsConnection connection) {
-		super(buf, connection, 0x01);
+	public CM_PLAYER_AUTH(ByteBuf buf, GsConnection connection, int opCode) {
+		super(buf, connection, opCode);
 	}
 
 	@Override

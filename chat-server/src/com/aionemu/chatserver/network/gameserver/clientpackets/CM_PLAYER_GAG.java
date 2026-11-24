@@ -14,8 +14,8 @@ public class CM_PLAYER_GAG extends GsClientPacket {
 	private int playerId;
 	private long gagTimeMillis;
 
-	public CM_PLAYER_GAG(ByteBuf buf, GsConnection connection) {
-		super(buf, connection, 0x03);
+	public CM_PLAYER_GAG(ByteBuf buf, GsConnection connection, int opCode) {
+		super(buf, connection, opCode);
 	}
 
 	@Override

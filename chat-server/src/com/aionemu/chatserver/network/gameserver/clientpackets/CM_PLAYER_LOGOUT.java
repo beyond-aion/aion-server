@@ -13,8 +13,8 @@ public class CM_PLAYER_LOGOUT extends GsClientPacket {
 
 	private int playerId;
 
-	public CM_PLAYER_LOGOUT(ByteBuf buf, GsConnection connection) {
-		super(buf, connection, 0x02);
+	public CM_PLAYER_LOGOUT(ByteBuf buf, GsConnection connection, int opCode) {
+		super(buf, connection, opCode);
 	}
 
 	@Override

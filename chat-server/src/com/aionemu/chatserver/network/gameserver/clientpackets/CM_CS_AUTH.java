@@ -21,8 +21,8 @@ public class CM_CS_AUTH extends GsClientPacket {
 	private String password;
 	private byte gameServerId;
 
-	public CM_CS_AUTH(ByteBuf buf, GsConnection connection) {
-		super(buf, connection, 0x00);
+	public CM_CS_AUTH(ByteBuf buf, GsConnection connection, int opCode) {
+		super(buf, connection, opCode);
 	}
 
 	@Override
