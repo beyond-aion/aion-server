@@ -44,6 +44,7 @@ public abstract class NettyConnection<S extends BaseServerPacket> {
 	 */
 	private volatile boolean disconnected;
 	private final AtomicBoolean disconnectHandled = new AtomicBoolean();
+	private volatile Future<?> disconnectTimeout;
 
 	protected NettyConnection(Channel channel, Executor packetExecutor) {
 		this.channel = channel;
@@ -193,10 +194,12 @@ public abstract class NettyConnection<S extends BaseServerPacket> {
 		if (timeoutMillis > 0) {
 			// The timer is not one of the channel's event loop, which doesn't run its timers anymore once the network is shut down. The disconnect
 			// is handled on a thread of its own: the packet executor may be the one that hangs, and the handling may block.
-			GlobalEventExecutor.INSTANCE.schedule(() -> {
+			disconnectTimeout = GlobalEventExecutor.INSTANCE.schedule(() -> {
 				if (!disconnectHandled.get())
 					Thread.ofPlatform().daemon().name("DisconnectTimeout").start(this::handleDisconnectAfterTimeout);
 			}, timeoutMillis, TimeUnit.MILLISECONDS);
+			if (disconnectHandled.get()) // the last packet finished before the timer was stored
+				disconnectTimeout.cancel(false);
 		}
 	}
 
@@ -209,8 +212,12 @@ public abstract class NettyConnection<S extends BaseServerPacket> {
 	}
 
 	private void handleDisconnect() {
-		if (disconnectHandled.compareAndSet(false, true))
+		if (disconnectHandled.compareAndSet(false, true)) {
+			Future<?> disconnectTimeout = this.disconnectTimeout;
+			if (disconnectTimeout != null)
+				disconnectTimeout.cancel(false);
 			onDisconnect();
+		}
 	}
 
 	/**
