@@ -1,7 +1,5 @@
 package com.aionemu.commons.utils.concurrent;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
