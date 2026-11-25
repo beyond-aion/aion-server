@@ -184,7 +184,7 @@ public class InventoryDAO {
 
 		// Another thread may save the same player at the same time (a trade partner, the auto save, the logout): both would insert the same new item
 		// or release the id of the same deleted one.
-		synchronized (player.getInventory()) {
+		synchronized (player.getItemSaveLock()) { // not the inventory's monitor, which its changes take: the save waits for the database
 			List<Item> allPlayerItems = player.getDirtyItemsToUpdate();
 			return store(allPlayerItems, playerId, accountId, legionId);
 		}

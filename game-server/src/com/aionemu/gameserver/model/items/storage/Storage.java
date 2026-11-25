@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.model.items.storage;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -47,12 +48,12 @@ public abstract class Storage implements IStorage {
 	}
 
 	@Override
-	public long getKinah() {
+	public synchronized long getKinah() {
 		return kinahItem == null ? 0 : kinahItem.getItemCount();
 	}
 
 	@Override
-	public Item getKinahItem() {
+	public synchronized Item getKinahItem() {
 		return kinahItem;
 	}
 
@@ -61,17 +62,32 @@ public abstract class Storage implements IStorage {
 		return storageType;
 	}
 
+	/*
+	 * Other players' threads change this storage too (trade partners, loot winners, private store buyers), so its state changes under this
+	 * instance's monitor, one operation at a time. Packets, logs and quest events follow after the monitor was released: they may reach other
+	 * storages, whose monitors must never be taken while holding this one.
+	 */
+
 	void increaseKinah(long amount, Player actor) {
 		increaseKinah(amount, ItemUpdateType.INC_KINAH_COLLECT, actor);
 	}
 
 	void increaseKinah(long amount, ItemUpdateType updateType, Player actor) {
-		if (kinahItem == null) {
-			add(ItemFactory.newItem(ItemId.KINAH, 0), actor);
+		Item createdKinahItem = null;
+		Item kinah;
+		synchronized (this) {
+			if (kinahItem == null) {
+				createdKinahItem = ItemFactory.newItem(ItemId.KINAH, 0);
+				putLocked(createdKinahItem);
+			}
+			kinah = kinahItem;
+			if (amount > 0)
+				increaseItemCountLocked(kinah, amount);
 		}
-		if (amount > 0) {
-			increaseItemCount(kinahItem, amount, updateType, actor);
-		}
+		if (createdKinahItem != null)
+			onAdded(createdKinahItem, ItemService.DEFAULT_UPDATE_PREDICATE.getAddType(), actor);
+		if (amount > 0 && actor != null)
+			ItemPacketService.sendItemPacket(actor, storageType, kinah, updateType);
 	}
 
 	/**
@@ -80,19 +96,21 @@ public abstract class Storage implements IStorage {
 	 * @return true if decrease was successful
 	 */
 	boolean tryDecreaseKinah(long amount, Player actor) {
-		if (getKinah() >= amount) {
-			decreaseKinah(amount, actor);
-			return true;
-		}
-		return false;
+		return tryDecreaseKinah(amount, ItemUpdateType.DEC_KINAH_BUY, actor);
 	}
 
 	boolean tryDecreaseKinah(long amount, ItemUpdateType updateType, Player actor) {
-		if (getKinah() >= amount) {
-			decreaseKinah(amount, updateType, actor);
-			return true;
+		Item kinah;
+		synchronized (this) {
+			if (getKinah() < amount)
+				return false;
+			kinah = kinahItem;
+			if (amount > 0)
+				decreaseItemCountLocked(kinah, amount);
 		}
-		return false;
+		if (amount > 0)
+			ItemPacketService.sendItemPacket(actor, storageType, kinah, updateType);
+		return true;
 	}
 
 	/**
@@ -103,9 +121,8 @@ public abstract class Storage implements IStorage {
 	}
 
 	void decreaseKinah(long amount, ItemUpdateType updateType, Player actor) {
-		if (amount > 0) {
-			decreaseItemCount(kinahItem, amount, updateType, actor);
-		}
+		if (amount > 0)
+			decreaseItemCount(getKinahItem(), amount, updateType, actor);
 	}
 
 	long increaseItemCount(Item item, long count, Player actor) {
@@ -116,9 +133,17 @@ public abstract class Storage implements IStorage {
 	 * increase item count and return left count
 	 */
 	long increaseItemCount(Item item, long count, ItemUpdateType updateType, Player actor) {
-		long leftCount = item.increaseItemCount(count);
+		long leftCount;
+		synchronized (this) {
+			leftCount = increaseItemCountLocked(item, count);
+		}
 		if (actor != null)
 			ItemPacketService.sendItemPacket(actor, storageType, item, updateType);
+		return leftCount;
+	}
+
+	private long increaseItemCountLocked(Item item, long count) {
+		long leftCount = item.increaseItemCount(count);
 		setPersistentState(PersistentState.UPDATE_REQUIRED);
 		return leftCount;
 	}
@@ -139,13 +164,23 @@ public abstract class Storage implements IStorage {
 			return 0;
 
 		ItemDeleteType deleteType = questStatus != null ? ItemDeleteType.fromQuestStatus(questStatus) : ItemDeleteType.fromUpdateType(updateType);
-		long leftCount = item.decreaseItemCount(count);
-		boolean isKinah = item.getItemTemplate().isKinah();
-		if (item.getItemCount() <= 0 && !isKinah)
-			delete(item, deleteType, actor);
-		else
+		long leftCount;
+		boolean used, deleted = false;
+		synchronized (this) {
+			leftCount = decreaseItemCountLocked(item, count);
+			used = item.getItemCount() <= 0 && !item.getItemTemplate().isKinah();
+			if (used)
+				deleted = deleteLocked(item);
+		}
+		if (deleted)
+			onDeleted(item, deleteType, actor);
+		else if (!used)
 			ItemPacketService.sendItemPacket(actor, storageType, item, updateType);
+		return leftCount;
+	}
 
+	private long decreaseItemCountLocked(Item item, long count) {
+		long leftCount = item.decreaseItemCount(count);
 		setPersistentState(PersistentState.UPDATE_REQUIRED);
 		return leftCount;
 	}
@@ -157,7 +192,7 @@ public abstract class Storage implements IStorage {
 	 * @param item
 	 */
 	@Override
-	public void onLoadHandler(Item item) {
+	public synchronized void onLoadHandler(Item item) {
 		if (item.getItemTemplate().isKinah())
 			kinahItem = item;
 		else
@@ -169,19 +204,31 @@ public abstract class Storage implements IStorage {
 	}
 
 	Item add(Item item, ItemAddType addType, Player actor) {
+		synchronized (this) {
+			if (!putLocked(item))
+				return null;
+		}
+		onAdded(item, addType, actor);
+		return item;
+	}
+
+	private boolean putLocked(Item item) {
 		if (item.getItemTemplate().isKinah()) {
 			this.kinahItem = item;
 		} else if (!itemStorage.putItem(item)) {
-			return null;
+			return false;
 		}
 		item.setItemLocation(storageType.getId());
 		setPersistentState(PersistentState.UPDATE_REQUIRED);
+		return true;
+	}
+
+	private void onAdded(Item item, ItemAddType addType, Player actor) {
 		if (actor != null) {
 			ItemPacketService.sendStorageUpdatePacket(actor, storageType, item, addType);
 			if (storageType == StorageType.CUBE)
 				QuestEngine.getInstance().onItemGet(actor, item.getItemId());
 		}
-		return item;
 	}
 
 	/**
@@ -192,24 +239,18 @@ public abstract class Storage implements IStorage {
 	 * @param actor
 	 * @return
 	 */
-	public Item add_CharacterTransfer(Item item) {
-		if (item.getItemTemplate().isKinah()) {
-			this.kinahItem = item;
-		} else if (!itemStorage.putItem(item)) {
-			return null;
-		}
-		item.setItemLocation(storageType.getId());
-		setPersistentState(PersistentState.UPDATE_REQUIRED);
-		return item;
+	public synchronized Item add_CharacterTransfer(Item item) {
+		return putLocked(item) ? item : null;
 	}
 
 	// a bit misleading name - but looks like its used only for equipment
 	Item put(Item item, Player actor) {
-		if (!itemStorage.putItem(item)) {
-			return null;
+		synchronized (this) {
+			if (!itemStorage.putItem(item))
+				return null;
+			item.setItemLocation(storageType.getId());
+			setPersistentState(PersistentState.UPDATE_REQUIRED);
 		}
-		item.setItemLocation(storageType.getId());
-		setPersistentState(PersistentState.UPDATE_REQUIRED);
 		ItemPacketService.sendItemUpdatePacket(actor, storageType, item, ItemUpdateType.EQUIP_UNEQUIP);
 		return item;
 	}
@@ -233,19 +274,32 @@ public abstract class Storage implements IStorage {
 	 * Delete item from storage and mark for DB update
 	 */
 	Item delete(Item item, ItemDeleteType deleteType, Player actor) {
-		if (remove(item) != null) {
-			item.setPersistentState(PersistentState.DELETED);
-			deletedItems.add(item);
-			setPersistentState(PersistentState.UPDATE_REQUIRED);
-			ItemPacketService.sendItemDeletePacket(actor, StorageType.getStorageTypeById(item.getItemLocation()), item, deleteType);
-			if (LoggingConfig.LOG_ITEM && !item.getItemTemplate().isKinah() && item.getItemCount() > 0) {
-				String name = (item.getEnchantLevel() > 0 ? "+" + item.getEnchantLevel() + " " : "") + item.getItemName();
-				log.info("Deleted {} {} from {} (count: {}) (deletion type: {})", item.getItemId(), name, actor, item.getItemCount(), deleteType);
-			}
-			QuestEngine.getInstance().onItemRemoved(actor, item.getItemId());
-			return item;
+		boolean deleted;
+		synchronized (this) {
+			deleted = deleteLocked(item);
 		}
-		return null;
+		if (!deleted)
+			return null;
+		onDeleted(item, deleteType, actor);
+		return item;
+	}
+
+	private boolean deleteLocked(Item item) {
+		if (remove(item) == null)
+			return false;
+		item.setPersistentState(PersistentState.DELETED);
+		deletedItems.add(item);
+		setPersistentState(PersistentState.UPDATE_REQUIRED);
+		return true;
+	}
+
+	private void onDeleted(Item item, ItemDeleteType deleteType, Player actor) {
+		ItemPacketService.sendItemDeletePacket(actor, StorageType.getStorageTypeById(item.getItemLocation()), item, deleteType);
+		if (LoggingConfig.LOG_ITEM && !item.getItemTemplate().isKinah() && item.getItemCount() > 0) {
+			String name = (item.getEnchantLevel() > 0 ? "+" + item.getEnchantLevel() + " " : "") + item.getItemName();
+			log.info("Deleted {} {} from {} (count: {}) (deletion type: {})", item.getItemId(), name, actor, item.getItemCount(), deleteType);
+		}
+		QuestEngine.getInstance().onItemRemoved(actor, item.getItemId());
 	}
 
 	boolean decreaseByItemId(int itemId, long count, Player actor) {
@@ -253,17 +307,25 @@ public abstract class Storage implements IStorage {
 	}
 
 	boolean decreaseByItemId(int itemId, long count, QuestStatus questStatus, Player actor) {
-		List<Item> items = itemStorage.getItemsById(itemId);
-		if (items.size() == 0)
-			return false;
-
-		for (Item item : items) {
-			if (count == 0) {
-				break;
+		ItemDeleteType deleteType = questStatus != null ? ItemDeleteType.fromQuestStatus(questStatus) : ItemDeleteType.USE;
+		List<Item> changedItems = new ArrayList<>();
+		List<Item> removedItems = new ArrayList<>();
+		synchronized (this) { // all stacks at once, so another thread can't take from them in between
+			List<Item> items = itemStorage.getItemsById(itemId);
+			if (items.isEmpty())
+				return false;
+			for (Item item : items) {
+				if (count == 0)
+					break;
+				count = decreaseItemCountLocked(item, count);
+				if (item.getItemCount() > 0 || item.getItemTemplate().isKinah())
+					changedItems.add(item);
+				else if (deleteLocked(item))
+					removedItems.add(item);
 			}
-			count = decreaseItemCount(item, count, ItemUpdateType.DEC_ITEM_USE, questStatus, actor);
 		}
-
+		changedItems.forEach(item -> ItemPacketService.sendItemPacket(actor, storageType, item, ItemUpdateType.DEC_ITEM_USE));
+		removedItems.forEach(item -> onDeleted(item, deleteType, actor));
 		return count == 0;
 	}
 
@@ -272,19 +334,31 @@ public abstract class Storage implements IStorage {
 	}
 
 	boolean decreaseByObjectId(int itemObjId, long count, QuestStatus questStatus, Player actor) {
-		Item item = itemStorage.getItemByObjId(itemObjId);
-		if (item == null || item.getItemCount() < count)
-			return false;
-
-		return decreaseItemCount(item, count, ItemUpdateType.DEC_ITEM_USE, questStatus, actor) == 0;
+		return decreaseByObjectId(itemObjId, count, ItemUpdateType.DEC_ITEM_USE, questStatus, actor);
 	}
 
 	boolean decreaseByObjectId(int itemObjId, long count, ItemUpdateType updateType, Player actor) {
-		Item item = itemStorage.getItemByObjId(itemObjId);
-		if (item == null || item.getItemCount() < count)
-			return false;
+		return decreaseByObjectId(itemObjId, count, updateType, null, actor);
+	}
 
-		return decreaseItemCount(item, count, updateType, actor) == 0;
+	private boolean decreaseByObjectId(int itemObjId, long count, ItemUpdateType updateType, QuestStatus questStatus, Player actor) {
+		ItemDeleteType deleteType = questStatus != null ? ItemDeleteType.fromQuestStatus(questStatus) : ItemDeleteType.fromUpdateType(updateType);
+		Item item;
+		boolean used, deleted = false;
+		synchronized (this) { // the check and the decrease at once, or two threads could both take the last of the stack
+			item = itemStorage.getItemByObjId(itemObjId);
+			if (item == null || item.getItemCount() < count)
+				return false;
+			decreaseItemCountLocked(item, count);
+			used = item.getItemCount() <= 0 && !item.getItemTemplate().isKinah();
+			if (used)
+				deleted = deleteLocked(item);
+		}
+		if (deleted)
+			onDeleted(item, deleteType, actor);
+		else if (!used)
+			ItemPacketService.sendItemPacket(actor, storageType, item, updateType);
+		return true;
 	}
 
 	@Override

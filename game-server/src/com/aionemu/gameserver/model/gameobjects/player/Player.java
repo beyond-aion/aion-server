@@ -86,6 +86,7 @@ public class Player extends Creature {
 
 	private final PlayerAccountData playerAccountData;
 	private final Account playerAccount;
+	private final Object itemSaveLock = new Object();
 	private LegionMember legionMember;
 
 	private Macros macros;
@@ -553,6 +554,13 @@ public class Player extends Creature {
 
 	public Storage[] getCabinets() {
 		return cabinets;
+	}
+
+	/**
+	 * @return The lock that saves of this player's items take one after another, see InventoryDAO.store(Player).
+	 */
+	public Object getItemSaveLock() {
+		return itemSaveLock;
 	}
 
 	/**
