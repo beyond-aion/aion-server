@@ -33,8 +33,7 @@ public class CM_CS_AUTH extends GsClientPacket {
 
 	@Override
 	protected void runImpl() {
-		GsAuthResponse resp = GameServerService.getInstance().registerGameServer(getConnection(), gameServerId, password,
-			getConnection().isFromLoopback());
+		GsAuthResponse resp = GameServerService.getInstance().registerGameServer(getConnection(), gameServerId, password);
 		switch (resp) {
 			case AUTHED -> {
 				getConnection().setState(GameServerConnectionState.AUTHED);

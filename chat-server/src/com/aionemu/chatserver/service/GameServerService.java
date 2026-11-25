@@ -26,10 +26,10 @@ public class GameServerService {
 		return instance;
 	}
 
-	public synchronized GsAuthResponse registerGameServer(GsConnection connection, byte gameServerId, String password, boolean fromLoopback) {
+	public synchronized GsAuthResponse registerGameServer(GsConnection connection, byte gameServerId, String password) {
 		if (registeredConnection != null)
 			return GsAuthResponse.ALREADY_REGISTERED;
-		if (NetworkConfig.GAMESERVER_PASSWORD.isEmpty() && !fromLoopback) {
+		if (NetworkConfig.GAMESERVER_PASSWORD.isEmpty() && !connection.isFromLoopback()) {
 			log.warn("Rejected game server #{} from a remote address: chatserver.network.gameserver.password is not set", gameServerId);
 			return GsAuthResponse.NOT_AUTHED;
 		}
