@@ -592,6 +592,18 @@ public class Player extends Creature {
 		return dirtyItems;
 	}
 
+	public void markItemsForSave() {
+		for (StorageType st : StorageType.values()) {
+			Storage storage = getStorage(st.getId());
+			if (storage == null)
+				continue;
+			synchronized (storage) {
+				storage.setPersistentState(PersistentState.UPDATE_REQUIRED);
+			}
+		}
+		equipment.setPersistentState(PersistentState.UPDATE_REQUIRED);
+	}
+
 	public List<Item> getAllItems() {
 		List<Item> items = new ArrayList<>();
 		items.addAll(inventory.getItemsWithKinah());

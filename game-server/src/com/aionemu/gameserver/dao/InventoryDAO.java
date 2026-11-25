@@ -185,7 +185,10 @@ public class InventoryDAO {
 		// or release the id of the same deleted one. Not the inventory's monitor, which would stall its changes while the save waits for the database.
 		synchronized (player.getItemSaveLock()) {
 			List<Item> allPlayerItems = player.getDirtyItemsToUpdate();
-			return store(allPlayerItems, playerId, accountId, legionId);
+			if (store(allPlayerItems, playerId, accountId, legionId))
+				return true;
+			player.markItemsForSave(); // collecting them marked their storages as saved, the items that failed would be skipped until the next change
+			return false;
 		}
 	}
 
