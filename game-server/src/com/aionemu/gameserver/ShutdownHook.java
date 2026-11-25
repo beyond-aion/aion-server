@@ -13,6 +13,7 @@ import com.aionemu.gameserver.configs.main.ShutdownConfig;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.NetConnector;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.services.BrokerService;
 import com.aionemu.gameserver.services.GameTimeService;
 import com.aionemu.gameserver.services.PeriodicSaveService;
 import com.aionemu.gameserver.services.cron.CronService;
@@ -79,6 +80,7 @@ public class ShutdownHook extends Thread {
 
 		RunnableStatsManager.dumpClassStats(SortBy.AVG);
 		PeriodicSaveService.getInstance().onShutdown();
+		BrokerService.getInstance().onShutdown();
 
 		GameTimeService.getInstance().saveGameTime();
 		CronService.getInstance().shutdown();

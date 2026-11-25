@@ -664,6 +664,13 @@ public class BrokerService {
 		}
 	}
 
+	/**
+	 * Runs the queued saves, which the thread pool drops when it shuts down. Called after the players left.
+	 */
+	public void onShutdown() {
+		saveManager.run();
+	}
+
 	public void onPlayerLogin(Player player) {
 		List<BrokerItem> settledItemsForPlayer = getSettledItemsForPlayer(player.getRace(), player.getObjectId());
 		if (!settledItemsForPlayer.isEmpty())
