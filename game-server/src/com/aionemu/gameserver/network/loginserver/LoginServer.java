@@ -377,9 +377,12 @@ public class LoginServer {
 	 * This method is called by CM_REQUEST_KICK_ACCOUNT LoginServer packets to request GameServer to disconnect client with given account id.
 	 */
 	public void kickAccount(int accountId, boolean notifyDoubleLogin) {
-		AionConnection client = loggedInAccounts.get(accountId);
-		if (client == null)
-			client = loadingAccounts.get(accountId); // gives up logging in when it sees the client closing
+		AionConnection client;
+		synchronized (this) {
+			client = loggedInAccounts.get(accountId);
+			if (client == null)
+				client = loadingAccounts.get(accountId); // gives up logging in when it sees the client closing
+		}
 		if (client != null) {
 			log.info("Kicking account ID {} by LS request", accountId);
 			client.close(notifyDoubleLogin ? SM_SYSTEM_MESSAGE.STR_KICK_ANOTHER_USER_TRY_LOGIN() : null);
