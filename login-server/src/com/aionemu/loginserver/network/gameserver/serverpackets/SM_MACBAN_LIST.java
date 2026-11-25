@@ -1,6 +1,6 @@
 package com.aionemu.loginserver.network.gameserver.serverpackets;
 
-import java.util.Map;
+import java.util.List;
 
 import com.aionemu.loginserver.controller.BannedMacManager;
 import com.aionemu.loginserver.model.base.BannedMacEntry;
@@ -12,10 +12,10 @@ import com.aionemu.loginserver.network.gameserver.GsServerPacket;
  */
 public class SM_MACBAN_LIST extends GsServerPacket {
 
-	private Map<String, BannedMacEntry> bannedList;
+	private final List<BannedMacEntry> bannedList;
 
 	public SM_MACBAN_LIST() {
-		this.bannedList = BannedMacManager.getInstance().getMap();
+		bannedList = List.copyOf(BannedMacManager.getInstance().getMap().values()); // the count must match the entries written on the I/O thread
 	}
 
 	@Override
@@ -23,7 +23,7 @@ public class SM_MACBAN_LIST extends GsServerPacket {
 		writeC(9);
 		writeD(bannedList.size());
 
-		for (BannedMacEntry entry : bannedList.values()) {
+		for (BannedMacEntry entry : bannedList) {
 			writeS(entry.getMac());
 			writeQ(entry.getTime().getTime());
 			writeS(entry.getDetails());
