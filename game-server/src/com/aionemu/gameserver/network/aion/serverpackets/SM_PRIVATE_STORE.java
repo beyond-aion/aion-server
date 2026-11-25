@@ -32,12 +32,17 @@ public class SM_PRIVATE_STORE extends AionServerPacket {
 		}
 		Player seller = store.getOwner();
 		sellerObjectId = seller.getObjectId();
-		for (TradePSItem tradeItem : store.getSoldItems().values()) {
-			Item item = seller.getInventory().getItemByObjId(tradeItem.getItemObjId());
-			if (item != null) { // sold in the meantime, the item of this entry is gone
-				soldItems.add(tradeItem);
-				soldItemInstances.add(item);
+		List<Integer> shownItemObjIds = new ArrayList<>();
+		synchronized (store) { // see PrivateStoreService.sellStoreItem, a sale changes the counts and the items
+			for (TradePSItem tradeItem : store.getSoldItems().values()) {
+				Item item = seller.getInventory().getItemByObjId(tradeItem.getItemObjId());
+				if (item != null) { // sold in the meantime, the item of this entry is gone
+					soldItems.add(new TradePSItem(tradeItem.getItemObjId(), tradeItem.getItemId(), tradeItem.getCount(), tradeItem.getPrice()));
+					soldItemInstances.add(item);
+					shownItemObjIds.add(tradeItem.getItemObjId());
+				}
 			}
+			store.setShownItems(player, shownItemObjIds);
 		}
 	}
 
