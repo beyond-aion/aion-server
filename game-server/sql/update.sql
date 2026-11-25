@@ -13,3 +13,6 @@ ALTER TABLE `player_pets`
 	DROP COLUMN `mood_cd_started`,
 	DROP COLUMN `gift_cd_started`,
 	DROP COLUMN `despawn_time`;
+
+ALTER TABLE `house_bids`
+	ADD COLUMN `step` bigint NOT NULL DEFAULT '100000' AFTER `bid`;

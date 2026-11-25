@@ -22,8 +22,8 @@ public class HouseBidsDAO {
 
 	private static final Logger log = LoggerFactory.getLogger(HouseBidsDAO.class);
 
-	public static final String LOAD_QUERY = "SELECT b.*, IF(b.player_id = p.id, 1, 0) playerExists FROM `house_bids` b LEFT JOIN `players` p ON p.id = b.player_id ORDER BY `bid`, `bid_time`";
-	public static final String INSERT_QUERY = "INSERT INTO `house_bids` (`player_id`, `house_id`, `bid`, `bid_time`) VALUES (?, ?, ?, ?)";
+	public static final String LOAD_QUERY = "SELECT b.*, IF(b.player_id = p.id, 1, 0) playerExists FROM `house_bids` b LEFT JOIN `players` p ON p.id = b.player_id ORDER BY b.bid, b.bid_time, b.player_id";
+	public static final String INSERT_QUERY = "INSERT INTO `house_bids` (`player_id`, `house_id`, `bid`, `step`, `bid_time`) VALUES (?, ?, ?, ?, ?)";
 	public static final String DELETE_QUERY = "DELETE FROM `house_bids` WHERE `house_id` = ?";
 	public static final String DELETE_SINGLE_BID_QUERY = "DELETE FROM `house_bids` WHERE `player_id` = ? AND `house_id` = ? AND `bid` = ?";
 	public static final String DISABLE_QUERY = "UPDATE `house_bids` SET `player_id` = 0 WHERE `player_id` = ?";
@@ -39,9 +39,9 @@ public class HouseBidsDAO {
 					Timestamp time = rset.getTimestamp("bid_time");
 					HouseBids houseBids = bidsById.get(houseId);
 					if (houseBids == null)
-						bidsById.put(houseId, new HouseBids(houseId, bidOffer, time.getTime()));
+						bidsById.put(houseId, new HouseBids(houseId, bidOffer, rset.getLong("step"), time.getTime()));
 					else {
-						houseBids.bid(playerId, bidOffer, time.getTime());
+						houseBids.restoreBid(playerId, bidOffer, time.getTime());
 						if (playerId != 0 && !rset.getBoolean("playerExists"))
 							deletedPlayerIds.add(playerId);
 					}
@@ -58,7 +58,8 @@ public class HouseBidsDAO {
 			stmt.setInt(1, bid.getPlayerObjectId());
 			stmt.setInt(2, bid.getHouseObjectId());
 			stmt.setLong(3, bid.getKinah());
-			stmt.setTimestamp(4, new Timestamp(bid.getTime()));
+			stmt.setLong(4, bid.getMinimumRaise());
+			stmt.setTimestamp(5, new Timestamp(bid.getTime()));
 			stmt.execute();
 		} catch (Exception e) {
 			log.error("Cannot insert house bid", e);

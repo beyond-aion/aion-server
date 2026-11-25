@@ -71,7 +71,13 @@ public class HousingBidService {
 	}
 
 	public boolean auction(House house, long initialPrice) {
-		HouseBids houseBids = new HouseBids(house.getObjectId(), initialPrice);
+		return auction(house, initialPrice, HouseBids.DEFAULT_MINIMUM_RAISE);
+	}
+
+	public boolean auction(House house, long initialPrice, long minimumRaise) {
+		if (!HouseBids.isValidAuctionAmount(initialPrice) || !HouseBids.isValidAuctionAmount(minimumRaise))
+			return false;
+		HouseBids houseBids = new HouseBids(house.getObjectId(), initialPrice, minimumRaise);
 		HouseBids.Bid bid = houseBids.getHighestBid();
 		if (bids.putIfAbsent(house.getObjectId(), houseBids) != null)
 			return false;
@@ -214,8 +220,8 @@ public class HousingBidService {
 			sendAuctionEnded(player);
 			return false;
 		}
-		if (bidOffer > 99_999_999_999L) {
-			AuditLogger.log(player, "tried to bid more kinah on " + bidHouse + " than the client allows: " + bidOffer);
+		if (bidOffer > HouseBids.MAXIMUM_BID) {
+			AuditLogger.log(player, "tried to bid " + bidOffer + " kinah on " + bidHouse + ", above the sanity cap of " + HouseBids.MAXIMUM_BID);
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_BID_EXCESS_ACCOUNT());
 			return false;
 		}
