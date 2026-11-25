@@ -301,6 +301,7 @@ public class DropService {
 				return false;
 			}
 		}
+		lootGroupRules.removeItemToBeDistributed(requestedItem);
 		return true;
 	}
 

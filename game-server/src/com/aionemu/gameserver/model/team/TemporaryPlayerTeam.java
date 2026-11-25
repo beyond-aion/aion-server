@@ -20,7 +20,7 @@ import com.aionemu.gameserver.utils.collections.Predicates;
  */
 public abstract class TemporaryPlayerTeam<TM extends TeamMember<Player>> extends GeneralTeam<Player, TM> {
 
-	private LootGroupRules lootGroupRules = new LootGroupRules();
+	private volatile LootGroupRules lootGroupRules = new LootGroupRules();
 	protected final Map<Integer, Integer> targetIdsByBrandId = new ConcurrentHashMap<>();
 
 	public TemporaryPlayerTeam(int objId, boolean autoReleaseObjectId) {
