@@ -182,8 +182,12 @@ public class InventoryDAO {
 		Integer accountId = player.getAccount() != null ? player.getAccount().getId() : null;
 		Integer legionId = player.getLegion() != null ? player.getLegion().getLegionId() : null;
 
-		List<Item> allPlayerItems = player.getDirtyItemsToUpdate();
-		return store(allPlayerItems, playerId, accountId, legionId);
+		// Another thread may save the same player at the same time (a trade partner, the auto save, the logout): both would insert the same new item
+		// or release the id of the same deleted one.
+		synchronized (player.getInventory()) {
+			List<Item> allPlayerItems = player.getDirtyItemsToUpdate();
+			return store(allPlayerItems, playerId, accountId, legionId);
+		}
 	}
 
 	public static boolean store(Item item, Player player) {
@@ -216,6 +220,7 @@ public class InventoryDAO {
 	}
 
 	public static boolean store(List<Item> items, Integer playerId, Integer accountId, Integer legionId) {
+		int[] changeCounts = items.stream().mapToInt(Item::getChangeCount).toArray(); // read before the states, see Item.setSaved
 		Collection<Item> itemsToUpdate = items.stream().filter(Persistable.CHANGED).collect(Collectors.toList());
 		Collection<Item> itemsToInsert = items.stream().filter(Persistable.NEW).collect(Collectors.toList());
 		Collection<Item> itemsToDelete = items.stream().filter(Persistable.DELETED).collect(Collectors.toList());
@@ -233,9 +238,8 @@ public class InventoryDAO {
 			log.error("Can't save inventory for player: {}", playerId, e);
 		}
 
-		for (Item item : items) {
-			item.setPersistentState(PersistentState.UPDATED);
-		}
+		for (int i = 0; i < items.size(); i++)
+			items.get(i).setSaved(changeCounts[i]);
 
 		if (deleteResult)
 			IDFactory.getInstance().releaseObjectIds(itemsToDelete);

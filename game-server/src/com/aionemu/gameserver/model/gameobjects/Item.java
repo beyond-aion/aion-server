@@ -47,6 +47,8 @@ public class Item extends AionObject implements Expirable, StatOwner, Persistabl
 	private boolean isEquipped = false;
 	private long equipmentSlot = ItemStorage.FIRST_AVAILABLE_SLOT;
 	private PersistentState persistentState;
+	// Counts changes, so that a save marks the item saved only if no thread changed it while the save ran (see InventoryDAO.store)
+	private int changeCount;
 	private Set<ManaStone> manaStones;
 	private Set<ManaStone> fusionStones;
 	private int optionalSockets;
@@ -508,7 +510,7 @@ public class Item extends AionObject implements Expirable, StatOwner, Persistabl
 	 * @return the persistentState
 	 */
 	@Override
-	public PersistentState getPersistentState() {
+	public synchronized PersistentState getPersistentState() {
 		return persistentState;
 	}
 
@@ -521,7 +523,9 @@ public class Item extends AionObject implements Expirable, StatOwner, Persistabl
 	 */
 	@Override
 	@SuppressWarnings("fallthrough")
-	public void setPersistentState(PersistentState persistentState) {
+	public synchronized void setPersistentState(PersistentState persistentState) {
+		if (persistentState != PersistentState.UPDATED)
+			changeCount++;
 		switch (persistentState) {
 			case DELETED:
 				if (this.persistentState == PersistentState.NEW)
@@ -535,6 +539,21 @@ public class Item extends AionObject implements Expirable, StatOwner, Persistabl
 			default:
 				this.persistentState = persistentState;
 		}
+	}
+
+	/**
+	 * @return A number that changes whenever the item needs saving, to be passed to {@link #setSaved(int)} after the save.
+	 */
+	public synchronized int getChangeCount() {
+		return changeCount;
+	}
+
+	/**
+	 * Marks the item as saved, unless it was changed again after the given change count was read: that change is saved next time.
+	 */
+	public synchronized void setSaved(int changeCount) {
+		if (this.changeCount == changeCount)
+			persistentState = PersistentState.UPDATED;
 	}
 
 	public void setItemLocation(int storageType) {
