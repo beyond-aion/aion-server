@@ -137,12 +137,12 @@ public class DropDistributionService {
 		}
 
 		requestedItem.isDistributeItem(true);
-		// a winner nearby gets the item right away, anyone else has to come and pick it up
+		// Only the winner may pick it up, also what is left when a winner nearby can't take all of it (full cube, a lore item they have already):
+		// anyone else picking it up would put it into the winner's cube without the checks.
+		requestedItem.isItemWonNotCollected(true);
 		VisibleObject corpse = World.getInstance().findVisibleObject(dropNpc.getObjectId());
 		if (winner.isOnline() && corpse != null && PositionUtil.isInRange(winner, corpse, GroupConfig.GROUP_MAX_DISTANCE))
 			DropService.getInstance().requestDropItem(winner, dropNpc.getObjectId(), requestedItem.getIndex());
-		else
-			requestedItem.isItemWonNotCollected(true);
 		return true;
 	}
 
