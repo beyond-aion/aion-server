@@ -101,7 +101,7 @@ public class CM_BAN extends GsClientPacket {
 				}
 				if (time >= 0) // Ban
 				{
-					Timestamp newTime = time != 0 ? new Timestamp(System.currentTimeMillis() + time * 60000) : null;
+					Timestamp newTime = time != 0 ? new Timestamp(System.currentTimeMillis() + time * 60000L) : null;
 					result = BannedIpController.banIp(ip, newTime);
 				}
 			}
