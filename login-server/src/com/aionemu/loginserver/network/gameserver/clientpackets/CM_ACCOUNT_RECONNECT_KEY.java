@@ -3,6 +3,7 @@ package com.aionemu.loginserver.network.gameserver.clientpackets;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.utils.Rnd;
+import com.aionemu.loginserver.GameServerInfo;
 import com.aionemu.loginserver.controller.AccountController;
 import com.aionemu.loginserver.model.Account;
 import com.aionemu.loginserver.model.ReconnectingAccount;
@@ -28,8 +29,11 @@ public class CM_ACCOUNT_RECONNECT_KEY extends GsClientPacket {
 
 	@Override
 	protected void runImpl() {
+		GameServerInfo gsi = getConnection().getGameServerInfo();
+		if (gsi == null) // the link was closed while this packet waited, its accounts are gone already
+			return;
 		int reconectKey = Rnd.nextInt();
-		Account acc = getConnection().getGameServerInfo().removeAccountFromGameServer(accountId);
+		Account acc = gsi.removeAccountFromGameServer(accountId);
 		if (acc == null)
 			LoggerFactory.getLogger(CM_ACCOUNT_RECONNECT_KEY.class).warn("{} requested reconnection for account {}, but account is not registered on game server",
 				getConnection(), accountId);

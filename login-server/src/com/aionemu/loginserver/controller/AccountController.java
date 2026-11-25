@@ -81,6 +81,8 @@ public class AccountController {
 		// The account moves from the login server to the game server in one step, under the lock of registerOnLS: a login in between would find it
 		// on neither and be let in next to this one, and a newer login that replaced the connection would lose its registration.
 		synchronized (AccountController.class) {
+			if (gsConnection.getGameServerInfo() == null) // disconnected since the check above, its accounts were cleared
+				return;
 			con = accountsOnLS.get(key.accountId);
 			SessionKey sessionKey = con == null ? null : con.getSessionKey(); // null while the client is still logging in
 			if (sessionKey == null || !sessionKey.checkSessionKey(key) || !accountsOnLS.remove(key.accountId, con))

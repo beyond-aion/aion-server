@@ -93,11 +93,14 @@ public class GsConnection extends NettyConnection<GsServerPacket> {
 	protected final void onDisconnect() {
 		pingPongTask.stop();
 		log.info("{} disconnected", this);
-		GameServerInfo gameServerInfo = this.gameServerInfo;
-		if (gameServerInfo != null) {
-			gameServerInfo.clearAccountsOnGameServer(); // before the server can register again
-			gameServerInfo.setConnection(null);
-			this.gameServerInfo = null;
+		// under the lock that accounts are added with, so that a packet of this connection that is still running can't add one after the clearing
+		synchronized (AccountController.class) {
+			GameServerInfo gameServerInfo = this.gameServerInfo;
+			if (gameServerInfo != null) {
+				gameServerInfo.clearAccountsOnGameServer(); // before the server can register again
+				gameServerInfo.setConnection(null);
+				this.gameServerInfo = null;
+			}
 		}
 		AccountController.updateServerListForAllLoggedInPlayers();
 	}

@@ -3,6 +3,7 @@ package com.aionemu.loginserver.network.gameserver.clientpackets;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.aionemu.loginserver.GameServerInfo;
 import com.aionemu.loginserver.configs.Config;
 import com.aionemu.loginserver.dao.AccountDAO;
 import com.aionemu.loginserver.dao.AccountsLogDAO;
@@ -33,7 +34,8 @@ public class CM_ACCOUNT_CONNECTION_INFO extends GsClientPacket {
 			log.warn("Couldn't update account_data.last_mac for accountId {}", accountId);
 		if (!AccountDAO.updateLastHDDSerial(accountId, hddSerial))
 			log.warn("Couldn't update account_data.last_hdd_serial for accountId {}", accountId);
-		if (Config.LOG_LOGINS)
-			AccountsLogDAO.addRecord(accountId, getConnection().getGameServerInfo().getId(), time, ip, mac, hddSerial);
+		GameServerInfo gsi = getConnection().getGameServerInfo();
+		if (Config.LOG_LOGINS && gsi != null) // null if the link was closed while this packet waited
+			AccountsLogDAO.addRecord(accountId, gsi.getId(), time, ip, mac, hddSerial);
 	}
 }
