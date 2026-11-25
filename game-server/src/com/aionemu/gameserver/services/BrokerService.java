@@ -157,6 +157,8 @@ public class BrokerService {
 				counter++;
 			}
 		}
+		if (counter == 0) // the last one was bought, canceled or expired since the search, which doesn't hold the lock of the listings
+			return 0;
 		average = sum / counter;
 		return average;
 	}
