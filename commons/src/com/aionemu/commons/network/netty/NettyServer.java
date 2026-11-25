@@ -85,9 +85,6 @@ public class NettyServer {
 		};
 	}
 
-	/**
-	 * @return The connections of the given type that are currently open.
-	 */
 	public <T extends NettyConnection<?>> Stream<T> findConnections(Class<T> type) {
 		return channels.stream().map(NettyPipeline::getConnection).filter(type::isInstance).map(type::cast);
 	}

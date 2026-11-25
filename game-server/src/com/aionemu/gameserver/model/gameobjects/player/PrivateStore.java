@@ -48,9 +48,6 @@ public class PrivateStore {
 		}
 	}
 
-	/**
-	 * Remembers the items the buyer was shown, in their order.
-	 */
 	public void setShownItems(Player buyer, List<Integer> itemObjIds) {
 		shownItemObjIds.put(buyer.getObjectId(), List.copyOf(itemObjIds));
 	}

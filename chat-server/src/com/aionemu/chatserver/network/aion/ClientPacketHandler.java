@@ -105,7 +105,7 @@ public class ClientPacketHandler {
 				switch (opCode) {
 					case 0x4030 -> clientPacket = new CM_CHAT_INI(buf, connection, opCode);
 					case 0x4005 -> clientPacket = new CM_PLAYER_AUTH(buf, connection, opCode);
-					case 0x00FF -> clientPacket = new CM_PING(buf, connection, opCode); // retail accepts the keepalive before the login too
+					case 0x00FF -> clientPacket = new CM_PING(buf, connection, opCode); // the keepalive may come before the login
 					default -> logUnknownPacket(opCode, state, buf);
 				}
 				break;

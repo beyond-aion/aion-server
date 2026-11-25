@@ -99,9 +99,6 @@ public abstract class NettyConnection<S extends BaseServerPacket> {
 		}
 	}
 
-	/**
-	 * @return True if the connection is closed or is being closed.
-	 */
 	public final boolean isClosing() {
 		return closing.get() || !channel.isActive();
 	}

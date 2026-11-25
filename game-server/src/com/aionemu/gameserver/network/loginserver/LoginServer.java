@@ -229,9 +229,6 @@ public class LoginServer {
 		return true;
 	}
 
-	/**
-	 * Sends the next request waiting for the given account to the login server, if there is one.
-	 */
 	private synchronized void checkNextRequest(int accountId) {
 		Deque<LoginRequest> waiting = waitingRequests.get(accountId);
 		if (waiting == null)

@@ -35,7 +35,7 @@ public class AionConnection extends NettyConnection<AbstractServerPacket> {
 	@Override
 	protected BaseClientPacket<?> createPacket(ByteBuf data) {
 		BaseClientPacket<?> packet = ClientPacketHandler.handle(data, this);
-		if (packet == null && state == State.CONNECTED) // like retail, which answers anything else before the login with "Unauthorized Request"
+		if (packet == null && state == State.CONNECTED) // the chat client sends nothing else before the login, so it's not one
 			getChannel().close();
 		return packet;
 	}
