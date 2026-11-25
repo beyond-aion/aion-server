@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.dao;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.database.DB;
+import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.commons.database.IUStH;
 import com.aionemu.commons.database.ReadStH;
 import com.aionemu.gameserver.model.broker.BrokerRace;
@@ -51,6 +53,9 @@ public class BrokerDAO {
 						for (Item brItem : items) {
 							if (itemPointer == brItem.getObjectId()) {
 								item = brItem;
+								// A partial purchase updates the listing count without saving a detached inventory item.
+								if (item.getItemCount() != itemCount)
+									item.setItemCount(itemCount);
 								break;
 							}
 						}
@@ -74,9 +79,12 @@ public class BrokerDAO {
 
 		switch (item.getPersistentState()) {
 			case NEW:
-				result = insertBrokerItem(item);
-				if (item.getItem() != null)
-					InventoryDAO.store(item.getItem(), item.getSellerId());
+				try (Connection con = DatabaseFactory.getConnection()) {
+					insertBrokerItem(con, item);
+					result = true;
+				} catch (SQLException e) {
+					log.error("Could not insert broker listing {}", item.getItemUniqueId(), e);
+				}
 				break;
 
 			case DELETED:
@@ -94,29 +102,29 @@ public class BrokerDAO {
 		return result;
 	}
 
-	private static boolean insertBrokerItem(BrokerItem item) {
-		boolean result = DB.insertUpdate(
-			"INSERT INTO `broker` (`item_pointer`, `item_id`, `item_count`, `item_creator`, `price`, `broker_race`, `expire_time`, `seller_id`, `is_sold`, `is_settled`, `splitting_available`) VALUES (?,?,?,?,?,?,?,?,?,?,?)",
-			new IUStH() {
+	public static boolean register(BrokerItem listing, List<Item> items) {
+		if (!InventoryDAO.storeBrokerRegistration(listing, items))
+			return false;
+		listing.setPersistentState(PersistentState.UPDATED);
+		return true;
+	}
 
-				@Override
-				public void handleInsertUpdate(PreparedStatement stmt) throws SQLException {
-					stmt.setInt(1, item.getItemUniqueId());
-					stmt.setInt(2, item.getItemId());
-					stmt.setLong(3, item.getItemCount());
-					stmt.setString(4, item.getItemCreator());
-					stmt.setLong(5, item.getPrice());
-					stmt.setString(6, String.valueOf(item.getItemBrokerRace()));
-					stmt.setTimestamp(7, item.getExpireTime());
-					stmt.setInt(8, item.getSellerId());
-					stmt.setBoolean(9, item.isSold());
-					stmt.setBoolean(10, item.isSettled());
-					stmt.setBoolean(11, item.isSplittingAvailable());
-					stmt.execute();
-				}
-			});
-
-		return result;
+	static void insertBrokerItem(Connection con, BrokerItem item) throws SQLException {
+		try (PreparedStatement stmt = con.prepareStatement(
+			"INSERT INTO `broker` (`item_pointer`, `item_id`, `item_count`, `item_creator`, `price`, `broker_race`, `expire_time`, `seller_id`, `is_sold`, `is_settled`, `splitting_available`) VALUES (?,?,?,?,?,?,?,?,?,?,?)")) {
+			stmt.setInt(1, item.getItemUniqueId());
+			stmt.setInt(2, item.getItemId());
+			stmt.setLong(3, item.getItemCount());
+			stmt.setString(4, item.getItemCreator());
+			stmt.setLong(5, item.getPrice());
+			stmt.setString(6, String.valueOf(item.getItemBrokerRace()));
+			stmt.setTimestamp(7, item.getExpireTime());
+			stmt.setInt(8, item.getSellerId());
+			stmt.setBoolean(9, item.isSold());
+			stmt.setBoolean(10, item.isSettled());
+			stmt.setBoolean(11, item.isSplittingAvailable());
+			stmt.executeUpdate();
+		}
 	}
 
 	private static boolean deleteBrokerItem(BrokerItem item) {

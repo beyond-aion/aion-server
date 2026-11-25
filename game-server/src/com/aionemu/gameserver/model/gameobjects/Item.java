@@ -542,18 +542,22 @@ public class Item extends AionObject implements Expirable, StatOwner, Persistabl
 	}
 
 	/**
-	 * @return A number that changes whenever the item needs saving, to be passed to {@link #setSaved(int)} after the save.
+	 * @return A number that changes whenever the item needs saving.
 	 */
 	public synchronized int getChangeCount() {
 		return changeCount;
 	}
 
-	/**
-	 * Marks the item as saved, unless it was changed again after the given change count was read: that change is saved next time.
-	 */
-	public synchronized void setSaved(int changeCount) {
-		if (this.changeCount == changeCount)
+	public synchronized void setSaved(int changeCount, PersistentState savedState) {
+		if (this.changeCount == changeCount || savedState == PersistentState.DELETED && persistentState == PersistentState.DELETED) {
 			persistentState = PersistentState.UPDATED;
+		} else if (savedState == PersistentState.NEW) {
+			// The row now exists even if the item changed or was discarded while its insert was in progress.
+			if (persistentState == PersistentState.NEW)
+				persistentState = PersistentState.UPDATE_REQUIRED;
+			else if (persistentState == PersistentState.NOACTION)
+				persistentState = PersistentState.DELETED;
+		}
 	}
 
 	public void setItemLocation(int storageType) {

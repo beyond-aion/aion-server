@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.function.Consumer;
-import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,8 +13,8 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.commons.utils.GenericValidator;
 import com.aionemu.gameserver.model.account.PlayerAccountData;
+import com.aionemu.gameserver.model.gameobjects.BrokerItem;
 import com.aionemu.gameserver.model.gameobjects.Item;
-import com.aionemu.gameserver.model.gameobjects.Persistable;
 import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.ItemSlot;
@@ -220,28 +219,70 @@ public class InventoryDAO {
 	}
 
 	public static boolean store(List<Item> items, Integer playerId, Integer accountId, Integer legionId) {
-		int[] changeCounts = items.stream().mapToInt(Item::getChangeCount).toArray(); // read before the states, see Item.setSaved
-		Collection<Item> itemsToUpdate = items.stream().filter(Persistable.CHANGED).collect(Collectors.toList());
-		Collection<Item> itemsToInsert = items.stream().filter(Persistable.NEW).collect(Collectors.toList());
-		Collection<Item> itemsToDelete = items.stream().filter(Persistable.DELETED).collect(Collectors.toList());
+		return store(items, playerId, accountId, legionId, null);
+	}
+
+	static boolean storeBrokerRegistration(BrokerItem listing, List<Item> items) {
+		return store(items, listing.getSellerId(), null, null, listing);
+	}
+
+	private static boolean store(List<Item> items, Integer playerId, Integer accountId, Integer legionId, BrokerItem listing) {
+		int[] changeCounts = new int[items.size()];
+		PersistentState[] savedStates = new PersistentState[items.size()];
+		List<Item> itemsToUpdate = new ArrayList<>();
+		List<Item> itemsToInsert = new ArrayList<>();
+		List<Item> itemsToDelete = new ArrayList<>();
+		for (int i = 0; i < items.size(); i++) {
+			Item item = items.get(i);
+			// A deletion classified with an older version would remain pending after its ID was released.
+			synchronized (item) {
+				changeCounts[i] = item.getChangeCount();
+				savedStates[i] = item.getPersistentState();
+			}
+			switch (savedStates[i]) {
+				case NEW -> itemsToInsert.add(item);
+				case UPDATE_REQUIRED -> itemsToUpdate.add(item);
+				case DELETED -> itemsToDelete.add(item);
+			}
+		}
 
 		boolean deleteResult = false;
 		boolean insertResult = false;
 		boolean updateResult = false;
 
+		if (listing != null && !itemsToDelete.isEmpty())
+			return false;
 		try (Connection con = DatabaseFactory.getConnection()) {
 			con.setAutoCommit(false);
 			deleteResult = deleteItems(con, itemsToDelete);
-			insertResult = insertItems(con, itemsToInsert, playerId, accountId, legionId);
-			updateResult = updateItems(con, itemsToUpdate, playerId, accountId, legionId);
+			insertResult = insertItems(con, itemsToInsert, playerId, accountId, legionId, listing == null);
+			updateResult = updateItems(con, itemsToUpdate, playerId, accountId, legionId, listing == null);
+			if (listing != null) {
+				if (!insertResult || !updateResult)
+					return false;
+				BrokerDAO.insertBrokerItem(con, listing);
+				con.commit();
+			}
 		} catch (SQLException e) {
 			log.error("Can't save inventory for player: {}", playerId, e);
+			if (listing != null)
+				return false;
 		}
 
-		for (int i = 0; i < items.size(); i++)
-			items.get(i).setSaved(changeCounts[i]);
+		for (int i = 0; i < items.size(); i++) {
+			PersistentState savedState = savedStates[i];
+			boolean saved = switch (savedState) {
+				case NEW -> insertResult;
+				case UPDATE_REQUIRED -> updateResult;
+				case DELETED -> deleteResult;
+				case NOACTION -> true;
+				case UPDATED -> false;
+			};
+			if (saved)
+				items.get(i).setSaved(changeCounts[i], savedState);
+		}
 
-		if (deleteResult)
+		if (deleteResult && !itemsToDelete.isEmpty())
 			IDFactory.getInstance().releaseObjectIds(itemsToDelete);
 
 		return deleteResult && insertResult && updateResult;
@@ -259,7 +300,7 @@ public class InventoryDAO {
 		return playerId;
 	}
 
-	private static boolean insertItems(Connection con, Collection<Item> items, Integer playerId, Integer accountId, Integer legionId) {
+	private static boolean insertItems(Connection con, Collection<Item> items, Integer playerId, Integer accountId, Integer legionId, boolean commit) {
 
 		if (GenericValidator.isBlankOrNull(items)) {
 			return true;
@@ -300,7 +341,8 @@ public class InventoryDAO {
 			}
 
 			stmt.executeBatch();
-			con.commit();
+			if (commit)
+				con.commit();
 		} catch (Exception e) {
 			log.error("Failed to execute insert batch", e);
 			return false;
@@ -308,7 +350,7 @@ public class InventoryDAO {
 		return true;
 	}
 
-	private static boolean updateItems(Connection con, Collection<Item> items, Integer playerId, Integer accountId, Integer legionId) {
+	private static boolean updateItems(Connection con, Collection<Item> items, Integer playerId, Integer accountId, Integer legionId, boolean commit) {
 
 		if (GenericValidator.isBlankOrNull(items)) {
 			return true;
@@ -348,7 +390,8 @@ public class InventoryDAO {
 			}
 
 			stmt.executeBatch();
-			con.commit();
+			if (commit)
+				con.commit();
 		} catch (Exception e) {
 			log.error("Failed to execute update batch", e);
 			return false;

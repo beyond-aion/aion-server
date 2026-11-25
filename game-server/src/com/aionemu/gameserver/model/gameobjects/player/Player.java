@@ -572,11 +572,15 @@ public class Player extends Creature {
 		List<Item> dirtyItems = new ArrayList<>();
 
 		for (StorageType st : StorageType.values()) {
-			IStorage storage = getStorage(st.getId());
-			if (storage != null && storage.getPersistentState() == PersistentState.UPDATE_REQUIRED) {
-				dirtyItems.addAll(storage.getItemsWithKinah());
-				dirtyItems.addAll(storage.getDeletedItems());
-				storage.setPersistentState(PersistentState.UPDATED);
+			Storage storage = getStorage(st.getId());
+			if (storage == null)
+				continue;
+			synchronized (storage) {
+				if (storage.getPersistentState() == PersistentState.UPDATE_REQUIRED) {
+					dirtyItems.addAll(storage.getItemsWithKinah());
+					dirtyItems.addAll(storage.getDeletedItems());
+					storage.setPersistentState(PersistentState.UPDATED);
+				}
 			}
 		}
 
