@@ -57,7 +57,7 @@ public class DropService {
 		ThreadPoolManager.getInstance().schedule(() -> {
 			DropNpc dropNpc = DropRegistrationService.getInstance().getDropRegistrationMap().get(npcUniqueId);
 			if (dropNpc != null) {
-				DropRegistrationService.getInstance().getDropRegistrationMap().get(npcUniqueId).startFreeForAll();
+				dropNpc.startFreeForAll();
 				VisibleObject visibleObject = World.getInstance().findVisibleObject(npcUniqueId);
 				if (visibleObject != null && visibleObject.isSpawned()) {
 					// fix for elyos/asmodians being able to loot elyos/asmodian npcs
