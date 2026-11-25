@@ -148,7 +148,7 @@ public class LoginServer {
 
 	public boolean isUp() {
 		LoginServerConnection lsCon = this.lsCon;
-		return lsCon != null && lsCon.getState() == State.AUTHED;
+		return lsCon != null && lsCon.getState() == State.AUTHED && !lsCon.isClosing();
 	}
 
 	/**
@@ -419,7 +419,9 @@ public class LoginServer {
 	 */
 	public boolean sendPacket(LsServerPacket pk) {
 		LoginServerConnection lsCon = this.lsCon;
-		if (lsCon == null || lsCon.getState() != State.AUTHED)
+		// A closing link drops the packet but stays authenticated until its last packet ran, which can take a while. A client waiting for the answer
+		// would wait forever.
+		if (lsCon == null || lsCon.getState() != State.AUTHED || lsCon.isClosing())
 			return false;
 		lsCon.sendPacket(pk);
 		return true;

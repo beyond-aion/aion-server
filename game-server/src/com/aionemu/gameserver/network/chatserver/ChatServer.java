@@ -90,7 +90,7 @@ public class ChatServer {
 
 	public boolean isUp() {
 		ChatServerConnection csCon = this.csCon;
-		return csCon != null && csCon.getState() == State.AUTHED;
+		return csCon != null && csCon.getState() == State.AUTHED && !csCon.isClosing();
 	}
 
 	/**
