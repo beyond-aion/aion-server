@@ -194,7 +194,9 @@ public class InventoryDAO {
 		int accountId = player.getAccount().getId();
 		Integer legionId = player.getLegion() != null ? player.getLegion().getLegionId() : null;
 
-		return store(item, playerId, accountId, legionId);
+		synchronized (player.getItemSaveLock()) { // see store(Player)
+			return store(item, playerId, accountId, legionId);
+		}
 	}
 
 	public static boolean store(List<Item> items, int playerId) {
