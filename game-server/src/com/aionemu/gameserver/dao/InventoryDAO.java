@@ -222,11 +222,14 @@ public class InventoryDAO {
 		return store(items, playerId, accountId, legionId, null);
 	}
 
-	static boolean storeBrokerRegistration(BrokerItem listing, List<Item> items) {
-		return store(items, listing.getSellerId(), null, null, listing);
+	/**
+	 * Saves the items together with the broker listings in one transaction.
+	 */
+	static boolean storeWithBrokerItems(List<Item> items, int playerId, List<BrokerItem> listings) {
+		return store(items, playerId, null, null, listings);
 	}
 
-	private static boolean store(List<Item> items, Integer playerId, Integer accountId, Integer legionId, BrokerItem listing) {
+	private static boolean store(List<Item> items, Integer playerId, Integer accountId, Integer legionId, List<BrokerItem> listings) {
 		int[] changeCounts = new int[items.size()];
 		PersistentState[] savedStates = new PersistentState[items.size()];
 		List<Item> itemsToUpdate = new ArrayList<>();
@@ -250,22 +253,23 @@ public class InventoryDAO {
 		boolean insertResult = false;
 		boolean updateResult = false;
 
-		if (listing != null && !itemsToDelete.isEmpty())
+		if (listings != null && !itemsToDelete.isEmpty())
 			return false;
 		try (Connection con = DatabaseFactory.getConnection()) {
 			con.setAutoCommit(false);
 			deleteResult = deleteItems(con, itemsToDelete);
-			insertResult = insertItems(con, itemsToInsert, playerId, accountId, legionId, listing == null);
-			updateResult = updateItems(con, itemsToUpdate, playerId, accountId, legionId, listing == null);
-			if (listing != null) {
+			insertResult = insertItems(con, itemsToInsert, playerId, accountId, legionId, listings == null);
+			updateResult = updateItems(con, itemsToUpdate, playerId, accountId, legionId, listings == null);
+			if (listings != null) {
 				if (!insertResult || !updateResult)
 					return false;
-				BrokerDAO.insertBrokerItem(con, listing);
+				for (BrokerItem listing : listings)
+					BrokerDAO.write(con, listing);
 				con.commit();
 			}
 		} catch (SQLException e) {
 			log.error("Can't save inventory for player: {}", playerId, e);
-			if (listing != null)
+			if (listings != null)
 				return false;
 		}
 

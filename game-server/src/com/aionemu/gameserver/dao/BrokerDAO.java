@@ -13,7 +13,6 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.database.DB;
 import com.aionemu.commons.database.DatabaseFactory;
-import com.aionemu.commons.database.IUStH;
 import com.aionemu.commons.database.ReadStH;
 import com.aionemu.gameserver.model.broker.BrokerRace;
 import com.aionemu.gameserver.model.gameobjects.BrokerItem;
@@ -70,30 +69,17 @@ public class BrokerDAO {
 	}
 
 	public static boolean store(BrokerItem item) {
-		boolean result = false;
-
 		if (item == null) {
 			log.warn("Null broker item on save");
-			return result;
+			return false;
 		}
 
-		switch (item.getPersistentState()) {
-			case NEW:
-				try (Connection con = DatabaseFactory.getConnection()) {
-					insertBrokerItem(con, item);
-					result = true;
-				} catch (SQLException e) {
-					log.error("Could not insert broker listing {}", item.getItemUniqueId(), e);
-				}
-				break;
-
-			case DELETED:
-				result = deleteBrokerItem(item);
-				break;
-
-			case UPDATE_REQUIRED:
-				result = updateBrokerItem(item);
-				break;
+		boolean result;
+		try (Connection con = DatabaseFactory.getConnection()) {
+			result = write(con, item);
+		} catch (SQLException e) {
+			log.error("Could not save broker listing {}", item.getItemUniqueId(), e);
+			return false;
 		}
 
 		if (result)
@@ -103,13 +89,39 @@ public class BrokerDAO {
 	}
 
 	public static boolean register(BrokerItem listing, List<Item> items) {
-		if (!InventoryDAO.storeBrokerRegistration(listing, items))
+		if (!InventoryDAO.storeWithBrokerItems(items, listing.getSellerId(), List.of(listing)))
 			return false;
 		listing.setPersistentState(PersistentState.UPDATED);
 		return true;
 	}
 
-	static void insertBrokerItem(Connection con, BrokerItem item) throws SQLException {
+	/**
+	 * Saves the buyer's items and the listings of a purchase in one transaction. The caller marks the listings as saved.
+	 */
+	public static boolean storePurchase(List<BrokerItem> listings, List<Item> items, int buyerId) {
+		return InventoryDAO.storeWithBrokerItems(items, buyerId, listings);
+	}
+
+	/**
+	 * @return False if the state of the listing needs no write.
+	 */
+	static boolean write(Connection con, BrokerItem item) throws SQLException {
+		switch (item.getPersistentState()) {
+			case NEW:
+				insertBrokerItem(con, item);
+				return true;
+			case DELETED:
+				deleteBrokerItem(con, item);
+				return true;
+			case UPDATE_REQUIRED:
+				updateBrokerItem(con, item);
+				return true;
+			default:
+				return false;
+		}
+	}
+
+	private static void insertBrokerItem(Connection con, BrokerItem item) throws SQLException {
 		try (PreparedStatement stmt = con.prepareStatement(
 			"INSERT INTO `broker` (`item_pointer`, `item_id`, `item_count`, `item_creator`, `price`, `broker_race`, `expire_time`, `seller_id`, `is_sold`, `is_settled`, `splitting_available`) VALUES (?,?,?,?,?,?,?,?,?,?,?)")) {
 			stmt.setInt(1, item.getItemUniqueId());
@@ -127,40 +139,27 @@ public class BrokerDAO {
 		}
 	}
 
-	private static boolean deleteBrokerItem(BrokerItem item) {
-		boolean result = DB.insertUpdate("DELETE FROM `broker` WHERE `item_pointer` = ? AND `seller_id` = ? AND `expire_time` = ?", new IUStH() {
-
-			@Override
-			public void handleInsertUpdate(PreparedStatement stmt) throws SQLException {
-				stmt.setInt(1, item.getItemUniqueId());
-				stmt.setInt(2, item.getSellerId());
-				stmt.setTimestamp(3, item.getExpireTime());
-				stmt.execute();
-			}
-		});
-
-		return result;
+	private static void deleteBrokerItem(Connection con, BrokerItem item) throws SQLException {
+		try (PreparedStatement stmt = con.prepareStatement("DELETE FROM `broker` WHERE `item_pointer` = ? AND `seller_id` = ? AND `expire_time` = ?")) {
+			stmt.setInt(1, item.getItemUniqueId());
+			stmt.setInt(2, item.getSellerId());
+			stmt.setTimestamp(3, item.getExpireTime());
+			stmt.execute();
+		}
 	}
 
-	private static boolean updateBrokerItem(BrokerItem item) {
-		boolean result = DB.insertUpdate(
-			"UPDATE broker SET `is_sold` = ?, `is_settled` = ?, `settle_time` = ?, `item_count` = ? WHERE `item_pointer` = ? AND `expire_time` = ? AND `seller_id` = ? AND `is_settled` = 0",
-			new IUStH() {
-
-				@Override
-				public void handleInsertUpdate(PreparedStatement stmt) throws SQLException {
-					stmt.setBoolean(1, item.isSold());
-					stmt.setBoolean(2, item.isSettled());
-					stmt.setTimestamp(3, item.getSettleTime());
-					stmt.setLong(4, item.getItemCount());
-					stmt.setInt(5, item.getItemUniqueId());
-					stmt.setTimestamp(6, item.getExpireTime());
-					stmt.setInt(7, item.getSellerId());
-					stmt.execute();
-				}
-			});
-
-		return result;
+	private static void updateBrokerItem(Connection con, BrokerItem item) throws SQLException {
+		try (PreparedStatement stmt = con.prepareStatement("UPDATE broker SET `is_sold` = ?, `is_settled` = ?, `settle_time` = ?, `item_count` = ?"
+			+ " WHERE `item_pointer` = ? AND `expire_time` = ? AND `seller_id` = ? AND `is_settled` = 0")) {
+			stmt.setBoolean(1, item.isSold());
+			stmt.setBoolean(2, item.isSettled());
+			stmt.setTimestamp(3, item.getSettleTime());
+			stmt.setLong(4, item.getItemCount());
+			stmt.setInt(5, item.getItemUniqueId());
+			stmt.setTimestamp(6, item.getExpireTime());
+			stmt.setInt(7, item.getSellerId());
+			stmt.execute();
+		}
 	}
 
 }
