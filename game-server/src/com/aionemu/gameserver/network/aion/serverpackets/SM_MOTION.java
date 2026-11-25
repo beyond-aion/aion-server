@@ -1,6 +1,8 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
 import java.util.Collection;
+import java.util.EnumMap;
+import java.util.List;
 import java.util.Map;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -43,8 +45,14 @@ public class SM_MOTION extends AionServerPacket {
 		this.remainingTime = remainingTime;
 		this.type = type;
 		this.playerId = playerId;
-		this.activeMotions = activeMotions;
-		this.motions = motions;
+		// the player's motions change while the packet waits to be written
+		if (activeMotions == null) {
+			this.activeMotions = null;
+		} else {
+			this.activeMotions = new EnumMap<>(MotionType.class);
+			this.activeMotions.putAll(activeMotions);
+		}
+		this.motions = motions == null ? null : List.copyOf(motions);
 	}
 
 	/**
