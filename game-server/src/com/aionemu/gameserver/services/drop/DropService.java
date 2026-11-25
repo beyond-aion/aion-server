@@ -275,7 +275,7 @@ public class DropService {
 								npcId, distributionId, 1, requestedItem.getIndex()));
 						}
 					}
-					requestedItem.offerTo(offeredTo);
+					requestedItem.offerTo(offeredTo, distributionId);
 					lootGroupRules.scheduleRollTimeout(dropNpc.getInRangePlayers(), distributionId == 2 ? ROLL_TIMEOUT_MILLIS : BID_TIMEOUT_MILLIS,
 						requestedItem.getIndex(), npcId, distributionId);
 				} else {
@@ -446,7 +446,7 @@ public class DropService {
 
 			requestedItem.setCount(ItemService.addItem(requestedItem.getWinningPlayer(), itemId, requestedItem.getCount(), false, new TempTradeDropPredicate(dropNpc)));
 
-			if (dropNpc.getDistributionId() == 2)
+			if (requestedItem.getDistributionId() == 2)
 				winningRollActions(requestedItem.getWinningPlayer(), itemId, npcObjectId);
 			// the winner of a bid paid when the bids ended, see payWinningBid
 		}

@@ -28,6 +28,7 @@ public class DropItem {
 	private int optionalSocket = 0;
 	// Guarded by the corpse's monitor, like its other loot state (see DropDistributionService.handleRollOrBid); insertion order breaks equal values
 	private List<Integer> offeredTo = List.of();
+	private int distributionId;
 	private final Map<Integer, Long> answers = new LinkedHashMap<>();
 
 	public DropItem(Drop dropTemplate) {
@@ -140,15 +141,24 @@ public class DropItem {
 	}
 
 	/**
-	 * Starts a roll or bid for the given players, who all get its messages until the item is distributed.
+	 * Starts a roll (distribution id 2) or bid (3) for the given players, who all get its messages until the item is distributed.
 	 */
-	public void offerTo(List<Integer> playerObjectIds) {
+	public void offerTo(List<Integer> playerObjectIds, int distributionId) {
 		offeredTo = List.copyOf(playerObjectIds);
+		this.distributionId = distributionId;
 		answers.clear();
 	}
 
 	public List<Integer> getOfferedTo() {
 		return offeredTo;
+	}
+
+	/**
+	 * @return 2 if the item was offered for a roll, 3 for a bid. The corpse's distribution changes with the next item or the loot rules, while this
+	 *         one stays until the item is distributed.
+	 */
+	public int getDistributionId() {
+		return distributionId;
 	}
 
 	/**

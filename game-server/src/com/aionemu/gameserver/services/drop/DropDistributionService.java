@@ -4,9 +4,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.configs.main.GroupConfig;
 import com.aionemu.gameserver.model.drop.DropItem;
@@ -18,14 +15,13 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_GROUP_LOOT;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
+import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.world.World;
 
 /**
  * @author xTz, Sykra
  */
 public class DropDistributionService {
-
-	private static final Logger log = LoggerFactory.getLogger(DropDistributionService.class);
 
 	public static DropDistributionService getInstance() {
 		return SingletonHolder.instance;
@@ -59,13 +55,15 @@ public class DropDistributionService {
 			if (requestedItem == null)
 				return;
 			itemId = requestedItem.getDropTemplate().getItemId(); // the packet's id may not match the item the server keeps at this index
+			// a bid on an item offered for a roll would count as the highest roll and win it without paying
+			if (mode != requestedItem.getDistributionId()) {
+				AuditLogger.log(player, "sent distribution mode " + mode + " for item " + itemId + " offered with mode " + requestedItem.getDistributionId());
+				return;
+			}
 			if (mode == 2)
 				distributed = handleRoll(player, roll, itemId, requestedItem, dropNpc);
-			else if (mode == 3)
-				distributed = handleBid(player, bid, itemId, requestedItem, dropNpc);
 			else
-				log.warn("{} requested invalid distributionMode {} for dropItem[itemId={}, index={}, npcObjId={}]", player, mode, itemId, index,
-					npcObjId);
+				distributed = handleBid(player, bid, itemId, requestedItem, dropNpc);
 		}
 		// outside the lock, since the next item may be of another corpse, which is locked to offer it
 		if (distributed)
@@ -77,7 +75,7 @@ public class DropDistributionService {
 		requestedItem.setAnswer(player.getObjectId(), luck);
 		for (Player member : offeredPlayers(requestedItem)) {
 			PacketSendUtility.sendPacket(member, new SM_GROUP_LOOT(dropNpc.getLootingTeamId(), player.getObjectId(), itemId, (int) requestedItem.getCount(),
-				dropNpc.getObjectId(), dropNpc.getDistributionId(), luck, requestedItem.getIndex()));
+				dropNpc.getObjectId(), requestedItem.getDistributionId(), luck, requestedItem.getIndex()));
 			if (member.equals(player))
 				PacketSendUtility.sendPacket(member,
 					luck == 0 ? SM_SYSTEM_MESSAGE.STR_MSG_DICE_GIVEUP_ME() : SM_SYSTEM_MESSAGE.STR_MSG_DICE_RESULT_ME(luck, dropNpc.getMaxRoll()));
@@ -94,7 +92,7 @@ public class DropDistributionService {
 		requestedItem.setAnswer(player.getObjectId(), bid);
 		for (Player member : offeredPlayers(requestedItem)) {
 			PacketSendUtility.sendPacket(member, new SM_GROUP_LOOT(dropNpc.getLootingTeamId(), player.getObjectId(), itemId, (int) requestedItem.getCount(),
-				dropNpc.getObjectId(), dropNpc.getDistributionId(), bid, requestedItem.getIndex()));
+				dropNpc.getObjectId(), requestedItem.getDistributionId(), bid, requestedItem.getIndex()));
 			if (member.equals(player))
 				PacketSendUtility.sendPacket(member, bid > 0 ? SM_SYSTEM_MESSAGE.STR_MSG_PAY_RESULT_ME() : SM_SYSTEM_MESSAGE.STR_MSG_PAY_GIVEUP_ME());
 			else
@@ -111,7 +109,7 @@ public class DropDistributionService {
 		if (dropNpc.containsPlayerStatus(player))
 			dropNpc.delPlayerStatus(player);
 
-		if (dropNpc.getDistributionId() != 3 && value > requestedItem.getHighestValue()) {
+		if (requestedItem.getDistributionId() != 3 && value > requestedItem.getHighestValue()) {
 			requestedItem.setHighestValue(value);
 			requestedItem.setWinningPlayer(player);
 		}
@@ -119,7 +117,7 @@ public class DropDistributionService {
 		if (!dropNpc.getPlayerStatus().isEmpty())
 			return false;
 		List<Player> offeredPlayers = offeredPlayers(requestedItem);
-		if (dropNpc.getDistributionId() == 3)
+		if (requestedItem.getDistributionId() == 3)
 			settleBids(requestedItem, offeredPlayers);
 		else
 			announceRollWinner(requestedItem, offeredPlayers);
@@ -127,7 +125,7 @@ public class DropDistributionService {
 		Player winner = requestedItem.getWinningPlayer();
 		for (Player member : offeredPlayers)
 			PacketSendUtility.sendPacket(member, new SM_GROUP_LOOT(dropNpc.getLootingTeamId(), winner != null ? winner.getObjectId() : 1, itemId,
-				(int) requestedItem.getCount(), dropNpc.getObjectId(), dropNpc.getDistributionId(), 0xFFFFFFFF, requestedItem.getIndex()));
+				(int) requestedItem.getCount(), dropNpc.getObjectId(), requestedItem.getDistributionId(), 0xFFFFFFFF, requestedItem.getIndex()));
 
 		LootGroupRules lgr = dropNpc.getLootGroupRules();
 		if (lgr != null)
