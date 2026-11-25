@@ -64,6 +64,18 @@ public final class RunnableStatsManager {
 			min = Math.min(min, runTime);
 			max = Math.max(max, runTime);
 		}
+
+		/**
+		 * @return A copy that tasks don't update, so sorting sees the same values on each comparison.
+		 */
+		private synchronized MethodStat snapshot() {
+			MethodStat copy = new MethodStat(className, methodName);
+			copy.count = count;
+			copy.total = total;
+			copy.min = min;
+			copy.max = max;
+			return copy;
+		}
 	}
 
 	private static ClassStat getClassStat(Class<?> clazz) {
@@ -170,9 +182,11 @@ public final class RunnableStatsManager {
 		final List<MethodStat> methodStats = new ArrayList<>();
 
 		for (ClassStat classStat : classStats.values())
-			for (MethodStat methodStat : classStat.methodStats.values())
-				if (methodStat.count > 0)
-					methodStats.add(methodStat);
+			for (MethodStat methodStat : classStat.methodStats.values()) {
+				MethodStat snapshot = methodStat.snapshot();
+				if (snapshot.count > 0)
+					methodStats.add(snapshot);
+			}
 
 		if (sortBy != null)
 			Collections.sort(methodStats, sortBy.comparator);
