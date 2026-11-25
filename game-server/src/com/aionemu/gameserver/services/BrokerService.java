@@ -539,7 +539,11 @@ public class BrokerService {
 			synchronized (this) {
 				// a buyer or the expiry may have taken the item since it was looked up, then it is no longer the seller's to take back
 				if (brokerItems.remove(brokerItemId, brokerItem)) {
-					player.getInventory().add(brokerItem.getItem(), ItemPacketService.ItemAddType.BROKER_RETURN);
+					if (player.getInventory().add(brokerItem.getItem(), ItemPacketService.ItemAddType.BROKER_RETURN) == null) { // filled since the check
+						brokerItems.put(brokerItemId, brokerItem);
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_EXCHANGE_FULL_INVENTORY());
+						return;
+					}
 					brokerItem.setPersistentState(PersistentState.DELETED);
 					saveManager.add(new BrokerOpSaveTask(brokerItem));
 					brokerItem.setIsCanceled(true);
