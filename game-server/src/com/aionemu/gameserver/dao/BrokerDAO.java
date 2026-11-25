@@ -17,7 +17,6 @@ import com.aionemu.commons.database.ReadStH;
 import com.aionemu.gameserver.model.broker.BrokerRace;
 import com.aionemu.gameserver.model.gameobjects.BrokerItem;
 import com.aionemu.gameserver.model.gameobjects.Item;
-import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
 
 public class BrokerDAO {
 
@@ -74,29 +73,27 @@ public class BrokerDAO {
 			return false;
 		}
 
+		BrokerItem.SaveSnapshot snapshot = item.snapshotForSave();
 		boolean result;
 		try (Connection con = DatabaseFactory.getConnection()) {
-			result = write(con, item);
+			result = write(con, item, snapshot);
 		} catch (SQLException e) {
 			log.error("Could not save broker listing {}", item.getItemUniqueId(), e);
 			return false;
 		}
 
 		if (result)
-			item.setPersistentState(PersistentState.UPDATED);
+			item.setSaved(snapshot.changeCount(), snapshot.state());
 
 		return result;
 	}
 
 	public static boolean register(BrokerItem listing, List<Item> items) {
-		if (!InventoryDAO.storeWithBrokerItems(items, listing.getSellerId(), List.of(listing)))
-			return false;
-		listing.setPersistentState(PersistentState.UPDATED);
-		return true;
+		return InventoryDAO.storeWithBrokerItems(items, listing.getSellerId(), List.of(listing));
 	}
 
 	/**
-	 * Saves the buyer's items and the listings of a purchase in one transaction. The caller marks the listings as saved.
+	 * Saves the buyer's items and the listings of a purchase in one transaction.
 	 */
 	public static boolean storePurchase(List<BrokerItem> listings, List<Item> items, int buyerId) {
 		return InventoryDAO.storeWithBrokerItems(items, buyerId, listings);
@@ -105,35 +102,35 @@ public class BrokerDAO {
 	/**
 	 * @return False if the state of the listing needs no write.
 	 */
-	static boolean write(Connection con, BrokerItem item) throws SQLException {
-		switch (item.getPersistentState()) {
+	static boolean write(Connection con, BrokerItem item, BrokerItem.SaveSnapshot snapshot) throws SQLException {
+		switch (snapshot.state()) {
 			case NEW:
-				insertBrokerItem(con, item);
+				insertBrokerItem(con, item, snapshot);
 				return true;
 			case DELETED:
 				deleteBrokerItem(con, item);
 				return true;
 			case UPDATE_REQUIRED:
-				updateBrokerItem(con, item);
+				updateBrokerItem(con, item, snapshot);
 				return true;
 			default:
 				return false;
 		}
 	}
 
-	private static void insertBrokerItem(Connection con, BrokerItem item) throws SQLException {
+	private static void insertBrokerItem(Connection con, BrokerItem item, BrokerItem.SaveSnapshot snapshot) throws SQLException {
 		try (PreparedStatement stmt = con.prepareStatement(
 			"INSERT INTO `broker` (`item_pointer`, `item_id`, `item_count`, `item_creator`, `price`, `broker_race`, `expire_time`, `seller_id`, `is_sold`, `is_settled`, `splitting_available`) VALUES (?,?,?,?,?,?,?,?,?,?,?)")) {
 			stmt.setInt(1, item.getItemUniqueId());
 			stmt.setInt(2, item.getItemId());
-			stmt.setLong(3, item.getItemCount());
+			stmt.setLong(3, snapshot.itemCount());
 			stmt.setString(4, item.getItemCreator());
 			stmt.setLong(5, item.getPrice());
 			stmt.setString(6, String.valueOf(item.getItemBrokerRace()));
 			stmt.setTimestamp(7, item.getExpireTime());
 			stmt.setInt(8, item.getSellerId());
-			stmt.setBoolean(9, item.isSold());
-			stmt.setBoolean(10, item.isSettled());
+			stmt.setBoolean(9, snapshot.sold());
+			stmt.setBoolean(10, snapshot.settled());
 			stmt.setBoolean(11, item.isSplittingAvailable());
 			stmt.executeUpdate();
 		}
@@ -148,13 +145,13 @@ public class BrokerDAO {
 		}
 	}
 
-	private static void updateBrokerItem(Connection con, BrokerItem item) throws SQLException {
+	private static void updateBrokerItem(Connection con, BrokerItem item, BrokerItem.SaveSnapshot snapshot) throws SQLException {
 		try (PreparedStatement stmt = con.prepareStatement("UPDATE broker SET `is_sold` = ?, `is_settled` = ?, `settle_time` = ?, `item_count` = ?"
 			+ " WHERE `item_pointer` = ? AND `expire_time` = ? AND `seller_id` = ? AND `is_settled` = 0")) {
-			stmt.setBoolean(1, item.isSold());
-			stmt.setBoolean(2, item.isSettled());
-			stmt.setTimestamp(3, item.getSettleTime());
-			stmt.setLong(4, item.getItemCount());
+			stmt.setBoolean(1, snapshot.sold());
+			stmt.setBoolean(2, snapshot.settled());
+			stmt.setTimestamp(3, snapshot.settleTime());
+			stmt.setLong(4, snapshot.itemCount());
 			stmt.setInt(5, item.getItemUniqueId());
 			stmt.setTimestamp(6, item.getExpireTime());
 			stmt.setInt(7, item.getSellerId());

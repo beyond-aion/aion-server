@@ -314,18 +314,12 @@ public class BrokerService {
 		// Without the broker's lock, and before the buyer's next packet can move the item again.
 		synchronized (player.getItemSaveLock()) {
 			Storage inventory = player.getInventory();
-			PersistentState[] states = listings.stream().map(BrokerItem::getPersistentState).toArray(PersistentState[]::new);
 			boolean saved;
 			synchronized (saveManager) { // writes the count of a listing in order with the other purchases and the queued saves
 				saved = BrokerDAO.storePurchase(listings, List.of(boughtItem, inventory.getKinahItem()), player.getObjectId());
 			}
 			if (saved) {
 				ItemStoneListDAO.save(List.of(boughtItem));
-				synchronized (this) { // a cancel, purchase or expiry in the meantime has its own save
-					for (int i = 0; i < states.length; i++)
-						if (listings.get(i).getPersistentState() == states[i])
-							listings.get(i).setPersistentState(PersistentState.UPDATED);
-				}
 			} else {
 				listings.forEach(listing -> saveManager.add(new BrokerOpSaveTask(listing)));
 				synchronized (inventory) {

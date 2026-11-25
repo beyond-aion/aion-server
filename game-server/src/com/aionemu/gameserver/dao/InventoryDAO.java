@@ -260,6 +260,8 @@ public class InventoryDAO {
 
 		if (listings != null && !itemsToDelete.isEmpty())
 			return false;
+		BrokerItem.SaveSnapshot[] listingSnapshots = null;
+		boolean[] listingWritten = null;
 		try (Connection con = DatabaseFactory.getConnection()) {
 			con.setAutoCommit(false);
 			deleteResult = deleteItems(con, itemsToDelete);
@@ -268,14 +270,25 @@ public class InventoryDAO {
 			if (listings != null) {
 				if (!insertResult || !updateResult)
 					return false;
-				for (BrokerItem listing : listings)
-					BrokerDAO.write(con, listing);
+				listingSnapshots = new BrokerItem.SaveSnapshot[listings.size()];
+				listingWritten = new boolean[listings.size()];
+				for (int i = 0; i < listings.size(); i++) {
+					BrokerItem listing = listings.get(i);
+					listingSnapshots[i] = listing.snapshotForSave();
+					listingWritten[i] = BrokerDAO.write(con, listing, listingSnapshots[i]);
+				}
 				con.commit();
 			}
 		} catch (SQLException e) {
 			log.error("Can't save inventory for player: {}", playerId, e);
 			if (listings != null)
 				return false;
+		}
+
+		if (listingSnapshots != null) {
+			for (int i = 0; i < listings.size(); i++)
+				if (listingWritten[i])
+					listings.get(i).setSaved(listingSnapshots[i].changeCount(), listingSnapshots[i].state());
 		}
 
 		for (int i = 0; i < items.size(); i++) {
