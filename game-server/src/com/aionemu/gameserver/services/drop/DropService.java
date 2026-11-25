@@ -93,9 +93,11 @@ public class DropService {
 		int npcObjId = dropNpc.getObjectId();
 		DropItem first;
 		synchronized (dropNpc) { // see DropDistributionService.handleRollOrBid
-			first = lootGroupRules.getItemsToBeDistributed().peekFirst();
-			if (!lootGroupRules.getItemsToBeDistributed().removeIf(item -> item.getNpcObj() == npcObjId))
-				return;
+			synchronized (lootGroupRules.getItemsToBeDistributed()) {
+				first = lootGroupRules.getItemsToBeDistributed().peekFirst();
+				if (!lootGroupRules.getItemsToBeDistributed().removeIf(item -> item.getNpcObj() == npcObjId))
+					return;
+			}
 		}
 		DropItem next = lootGroupRules.getItemsToBeDistributed().peekFirst();
 		if (next != null && next != first) {
@@ -238,15 +240,18 @@ public class DropService {
 		// The players who are offered the item are added to the corpse's roll state one after another, while the first of them may answer already,
 		// on their own threads: an answer before the others were added would find nobody else left to roll and hand out the item.
 		synchronized (dropNpc) {
-			return canDistribute(player, requestedItem, npcId, dropNpc);
+			LootGroupRules lootGroupRules = dropNpc.getLootGroupRules();
+			if (lootGroupRules == null)
+				return true;
+			// The queue is the team's: two items of different corpses could both find it empty and start two rolls at once, or one could be queued
+			// right after the roll before it ended and found nothing to offer next, so it would never be offered.
+			synchronized (lootGroupRules.getItemsToBeDistributed()) {
+				return canDistribute(player, requestedItem, npcId, dropNpc, lootGroupRules);
+			}
 		}
 	}
 
-	private boolean canDistribute(Player player, DropItem requestedItem, int npcId, DropNpc dropNpc) {
-		LootGroupRules lootGroupRules = dropNpc.getLootGroupRules();
-		if (lootGroupRules == null) {
-			return true;
-		}
+	private boolean canDistribute(Player player, DropItem requestedItem, int npcId, DropNpc dropNpc, LootGroupRules lootGroupRules) {
 		// offered already: both a finished roll and a decayed corpse offer the next item of the queue
 		if (requestedItem.getIndex() == dropNpc.getCurrentIndex() && !dropNpc.getPlayerStatus().isEmpty()
 			&& lootGroupRules.containDropItem(requestedItem))

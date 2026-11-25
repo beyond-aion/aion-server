@@ -31,7 +31,8 @@ public class LootGroupRules {
 	private final int mythicItemAbove;
 	private int junkRecipientIndex;
 	private int nrRoundRobin;
-	private final Deque<DropItem> itemsToBeDistributed = new ConcurrentLinkedDeque<>();
+	// Shared by all corpses of the team, each locked on its own: whoever checks the queue and then changes it must hold the queue's monitor
+	private Deque<DropItem> itemsToBeDistributed = new ConcurrentLinkedDeque<>();
 
 	public LootGroupRules() {
 		lootRule = LootRuleType.ROUNDROBIN;
@@ -150,6 +151,15 @@ public class LootGroupRules {
 		this.nrRoundRobin = nrRoundRobin;
 	}
 
+	/**
+	 * Keeps the items that wait for a roll or bid when the team changes its rules. They are offered one after another, so a new empty queue would
+	 * start the next roll while the one offered under the previous rules still runs.
+	 */
+	public void takeOverItemsToBeDistributed(LootGroupRules previousRules) {
+		if (previousRules != null && previousRules != this)
+			itemsToBeDistributed = previousRules.itemsToBeDistributed;
+	}
+
 	public void addItemToBeDistributed(DropItem dropItem) {
 		itemsToBeDistributed.add(dropItem);
 	}
@@ -159,7 +169,9 @@ public class LootGroupRules {
 	}
 
 	public void removeItemToBeDistributed(DropItem dropItem) {
-		itemsToBeDistributed.remove(dropItem);
+		synchronized (itemsToBeDistributed) {
+			itemsToBeDistributed.remove(dropItem);
+		}
 	}
 
 	public Deque<DropItem> getItemsToBeDistributed() {

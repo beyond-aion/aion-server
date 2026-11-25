@@ -77,6 +77,8 @@ public abstract class TemporaryPlayerTeam<TM extends TeamMember<Player>> extends
 	}
 
 	public void setLootGroupRules(LootGroupRules lootGroupRules) {
+		if (lootGroupRules != null)
+			lootGroupRules.takeOverItemsToBeDistributed(this.lootGroupRules);
 		this.lootGroupRules = lootGroupRules;
 		if (lootGroupRules != null && lootGroupRules.getLootRule() == LootRuleType.FREEFORALL)
 			sendPacket(Predicates.Players.WITH_LOOT_PET, SM_SYSTEM_MESSAGE.STR_MSG_LOOTING_PET_MESSAGE03());

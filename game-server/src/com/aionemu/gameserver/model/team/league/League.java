@@ -81,6 +81,8 @@ public class League extends GeneralTeam<PlayerAlliance, LeagueMember> {
 	}
 
 	public void setLootGroupRules(LootGroupRules lootGroupRules) {
+		if (lootGroupRules != null)
+			lootGroupRules.takeOverItemsToBeDistributed(this.lootGroupRules);
 		this.lootGroupRules = lootGroupRules;
 	}
 
