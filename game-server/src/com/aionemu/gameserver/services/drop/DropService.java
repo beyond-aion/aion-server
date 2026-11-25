@@ -100,11 +100,8 @@ public class DropService {
 			}
 		}
 		DropItem next = lootGroupRules.getItemsToBeDistributed().peekFirst();
-		if (next != null && next != first) {
-			DropNpc nextDropNpc = DropRegistrationService.getInstance().getDropRegistrationMap().get(next.getNpcObj());
-			if (nextDropNpc != null)
-				nextDropNpc.getInRangePlayers().stream().filter(Player::isOnline).findFirst().ifPresent(player -> canDistribute(player, next));
-		}
+		if (next != null && next != first)
+			offerNextItem(null, lootGroupRules);
 	}
 
 	/**
@@ -221,14 +218,21 @@ public class DropService {
 	}
 
 	/**
-	 * Offers the first item of the team's queue, if there is one.
+	 * Offers the first item of the team's queue, if there is one. An item that nobody near its corpse is online for leaves the queue instead, and the
+	 * one behind it is offered.
+	 *
+	 * @param player
+	 *          The player whose answer ended the previous roll, or null.
 	 */
 	void offerNextItem(Player player, LootGroupRules lootGroupRules) {
 		if (lootGroupRules == null)
 			return;
-		DropItem next = lootGroupRules.getItemsToBeDistributed().peekFirst(); // a corpse that decays meanwhile takes its items out of the queue
-		if (next != null)
+		DropItem next;
+		while ((next = lootGroupRules.getItemsToBeDistributed().peekFirst()) != null) { // a corpse that decays meanwhile takes its items out of the queue
 			canDistribute(player, next);
+			if (lootGroupRules.getItemsToBeDistributed().peekFirst() == next) // offered, or its corpse is gone and takes it out when it decays
+				break;
+		}
 	}
 
 	public boolean canDistribute(Player player, DropItem requestedItem) {
@@ -280,10 +284,14 @@ public class DropService {
 								npcId, distributionId, 1, requestedItem.getIndex()));
 						}
 					}
+					if (offeredTo.isEmpty()) { // nobody would answer, so the roll would never end and the team's queue would wait for it
+						lootGroupRules.removeItemToBeDistributed(requestedItem);
+						return false;
+					}
 					requestedItem.offerTo(offeredTo, distributionId);
 					lootGroupRules.scheduleRollTimeout(dropNpc.getInRangePlayers(), distributionId == 2 ? ROLL_TIMEOUT_MILLIS : BID_TIMEOUT_MILLIS,
 						requestedItem.getIndex(), npcId, distributionId);
-				} else {
+				} else if (player != null) {
 					PacketSendUtility.sendPacket(player,
 						SM_SYSTEM_MESSAGE.STR_MSG_LOOT_ALREADY_DISTRIBUTING_ITEM(DataManager.ITEM_DATA.getItemTemplate(itemId).getL10n()));
 				}
