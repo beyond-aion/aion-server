@@ -259,7 +259,7 @@ public abstract class Storage implements IStorage {
 	 * Remove item from storage without changing its state
 	 */
 	@Override
-	public Item remove(Item item) {
+	public synchronized Item remove(Item item) {
 		return itemStorage.removeItem(item.getObjectId());
 	}
 
