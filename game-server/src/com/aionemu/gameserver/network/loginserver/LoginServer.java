@@ -66,6 +66,11 @@ public class LoginServer {
 	private final Map<Integer, Deque<LoginRequest>> waitingRequests = new HashMap<>();
 	private final Map<Integer, AionConnection> loggedInAccounts = new ConcurrentHashMap<>();
 	/**
+	 * Clients whose account the login server accepted and that is being loaded from the database. A kick or a lost link has to reach them too, and the
+	 * next request of the account waits until they are logged in or given up.
+	 */
+	private final Map<Integer, AionConnection> loadingAccounts = new ConcurrentHashMap<>();
+	/**
 	 * Set to null by whichever thread notices that the link is gone, while packet threads send over it. So every use reads it once: reading it
 	 * again after a null check throws a NullPointerException now and then.
 	 */
@@ -123,6 +128,7 @@ public class LoginServer {
 		synchronized (this) {
 			for (AionConnection client : loginRequests.keySet())
 				client.close();
+			loadingAccounts.values().forEach(AionConnection::close); // the login server forgets them, so they must not log in after loading
 			loginRequests.clear();
 			checkedRequests.clear();
 			checkStartNanos.clear();
@@ -193,7 +199,8 @@ public class LoginServer {
 		if (!isUp()) {
 			loginRequests.remove(client);
 			client.close(new SM_L2AUTH_LOGIN_CHECK(false, null)); // disconnect this client since authentication will not happen
-		} else if (checkedRequests.containsKey(loginRequest.accountId()) && !isCheckLost(loginRequest.accountId())) {
+		} else if (loadingAccounts.containsKey(loginRequest.accountId())
+			|| checkedRequests.containsKey(loginRequest.accountId()) && !isCheckLost(loginRequest.accountId())) {
 			Deque<LoginRequest> waiting = waitingRequests.computeIfAbsent(loginRequest.accountId(), _ -> new ArrayDeque<>());
 			if (!waiting.contains(loginRequest))
 				waiting.add(loginRequest);
@@ -249,6 +256,16 @@ public class LoginServer {
 	public void accountAuthenticationResponse(int accountId, String accountName, boolean result, long creationDate,
 		AccountTime accountTime, byte accessLevel, byte membership, String allowedHddSerial) {
 		AionConnection client = removeLoginRequest(accountId);
+		try {
+			authenticate(client, accountId, accountName, result, creationDate, accountTime, accessLevel, membership, allowedHddSerial);
+		} finally {
+			if (client != null)
+				finishLoading(accountId, client);
+		}
+	}
+
+	private void authenticate(AionConnection client, int accountId, String accountName, boolean result, long creationDate, AccountTime accountTime,
+		byte accessLevel, byte membership, String allowedHddSerial) {
 		if (!result || client == null || client.isClosing() || !validateMacAndHddSerial(client, allowedHddSerial)) {
 			if (client != null)
 				client.close(new SM_L2AUTH_LOGIN_CHECK(false, accountName)); // LS sends no accName when result is false
@@ -291,8 +308,16 @@ public class LoginServer {
 			return null;
 		checkStartNanos.remove(accountId);
 		loginRequests.remove(loginRequest.connection);
-		checkNextRequest(accountId);
+		loadingAccounts.put(accountId, loginRequest.connection);
 		return loginRequest.connection;
+	}
+
+	/**
+	 * Ends loading the account after its client was either added to loggedInAccounts or given up, so a kick in between finds it in one of the two.
+	 */
+	private synchronized void finishLoading(int accountId, AionConnection client) {
+		loadingAccounts.remove(accountId, client);
+		checkNextRequest(accountId);
 	}
 
 	private void notifyAboutAccountDisconnection(int accountId) {
@@ -356,6 +381,8 @@ public class LoginServer {
 	 */
 	public void kickAccount(int accountId, boolean notifyDoubleLogin) {
 		AionConnection client = loggedInAccounts.get(accountId);
+		if (client == null)
+			client = loadingAccounts.get(accountId); // gives up logging in when it sees the client closing
 		if (client != null) {
 			log.info("Kicking account ID {} by LS request", accountId);
 			client.close(notifyDoubleLogin ? SM_SYSTEM_MESSAGE.STR_KICK_ANOTHER_USER_TRY_LOGIN() : null);
