@@ -20,8 +20,9 @@ import io.netty.buffer.ByteBuf;
 public abstract class BaseClientPacket<T> extends BasePacket implements Runnable {
 
 	private static final Logger log = LoggerFactory.getLogger(BaseClientPacket.class);
-	private static final Set<Integer> partiallyReadPackets = ConcurrentHashMap.newKeySet();
-	private static final Set<Integer> tooShortPackets = ConcurrentHashMap.newKeySet();
+	// by class, since the servers' protocols share opcodes: a warning about one packet must not silence those of another
+	private static final Set<Class<?>> partiallyReadPackets = ConcurrentHashMap.newKeySet();
+	private static final Set<Class<?>> tooShortPackets = ConcurrentHashMap.newKeySet();
 	/**
 	 * Owner of this packet.
 	 */
@@ -82,14 +83,14 @@ public abstract class BaseClientPacket<T> extends BasePacket implements Runnable
 		try {
 			readImpl();
 
-			if (getRemainingBytes() > 0 && partiallyReadPackets.add(getOpCode()))
+			if (getRemainingBytes() > 0 && partiallyReadPackets.add(getClass()))
 				log.warn("{} was not fully read! Last {} bytes were not read from buffer:\n{}", this, getRemainingBytes(),
 					NetworkUtils.toHex(buf, startPos, buf.writerIndex()));
 
 			return true;
 		} catch (Exception ex) {
 			if (ex.getClass() == IndexOutOfBoundsException.class) { // the buffer throws exactly this type when reading past the end of the packet
-				if (tooShortPackets.add(getOpCode()))
+				if (tooShortPackets.add(getClass()))
 					log.warn("{} from {} is shorter than expected:\n{}", this, client, NetworkUtils.toHex(buf, startPos, buf.writerIndex()));
 				return false;
 			}
