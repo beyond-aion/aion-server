@@ -416,6 +416,8 @@ public class BrokerService {
 		itemToRegister.setItemLocation(StorageType.BROKER.getId());
 
 		BrokerItem newBrokerItem = new BrokerItem(itemToRegister, price, player.getObjectId(), splittingAvailable, brRace);
+		// queued before the item can be found and bought, so the buyer's save of it can't run before this one and give it back to the seller
+		saveManager.add(new BrokerOpSaveTask(newBrokerItem, itemToRegister, player.getInventory().getKinahItem(), player.getObjectId()));
 
 		switch (brRace) {
 			case ASMODIAN:
@@ -426,9 +428,6 @@ public class BrokerService {
 				elyosBrokerItems.put(newBrokerItem.getItemUniqueId(), newBrokerItem);
 				break;
 		}
-
-		BrokerOpSaveTask bost = new BrokerOpSaveTask(newBrokerItem, itemToRegister, player.getInventory().getKinahItem(), player.getObjectId());
-		saveManager.add(bost);
 
 		PacketSendUtility.sendPacket(player, new SM_BROKER_SERVICE(newBrokerItem, 0, registeredItemsCount));
 	}
