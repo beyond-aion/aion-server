@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.configs.main.LoggingConfig;
 import com.aionemu.gameserver.dao.BrokerDAO;
-import com.aionemu.gameserver.dao.InventoryDAO;
 import com.aionemu.gameserver.dao.ItemStoneListDAO;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.broker.BrokerItemMask;
@@ -437,24 +436,18 @@ public class BrokerService {
 			}
 			boolean split = itemToRegister.getItemTemplate().isStackable() && count < itemToRegister.getItemCount();
 			// taken out before the save, so it can't be used or lost while the listing is written and then be both listed and gone
-			if (!split && inventory.remove(itemToRegister) == null) {
+			boolean removed = split ? inventory.decreaseByObjectId(itemToRegister.getObjectId(), count) : inventory.remove(itemToRegister) != null;
+			if (!removed) {
 				inventory.increaseKinah(registrationCommition);
 				return;
 			}
 			Item listedItem = split ? ItemFactory.newItem(itemToRegister.getItemId(), count) : itemToRegister;
-			if (split)
-				inventory.decreaseItemCount(itemToRegister, count);
 			listedItem.setItemLocation(StorageType.BROKER.getId());
 			newBrokerItem = new BrokerItem(listedItem, price, player.getObjectId(), splittingAvailable, brRace);
 			Item kinahItem = inventory.getKinahItem();
 			List<Item> items = split ? List.of(listedItem, itemToRegister, kinahItem) : List.of(listedItem, kinahItem);
 			if (!BrokerDAO.register(newBrokerItem, items)) {
-				if (split) {
-					inventory.increaseItemCount(itemToRegister, count);
-					IDFactory.getInstance().releaseId(listedItem.getObjectId());
-				} else if (inventory.add(itemToRegister) == null) {
-					log.error("Could not give item {} back to player {} after its broker registration failed", itemToRegister.getObjectId(), player.getName());
-				}
+				returnItemToInventory(itemToRegister, listedItem, player, inventory);
 				inventory.increaseKinah(registrationCommition);
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_VENDOR_CAN_NOT_REGISTER_ITEM());
 				return;
@@ -475,6 +468,20 @@ public class BrokerService {
 		}
 
 		PacketSendUtility.sendPacket(player, new SM_BROKER_SERVICE(newBrokerItem, 0, registeredItemsCount));
+	}
+
+	private static void returnItemToInventory(Item itemToRegister, Item listedItem, Player player, Storage inventory) {
+		if (itemToRegister != listedItem) {
+			if (inventory.getItemByObjId(itemToRegister.getObjectId()) != null) {
+				inventory.increaseItemCount(itemToRegister, listedItem.getItemCount());
+				IDFactory.getInstance().releaseId(listedItem.getObjectId());
+			} else {
+				inventory.add(listedItem);
+			}
+		} else {
+			PacketSendUtility.sendPacket(player, new SM_DELETE_ITEM(itemToRegister.getObjectId()));
+			inventory.add(itemToRegister);
+		}
 	}
 
 	public void showSellWindow(Player player, int itemUniqueId) {

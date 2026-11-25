@@ -67,7 +67,6 @@ public abstract class Storage implements IStorage {
 	 * instance's monitor, one operation at a time. Packets, logs and quest events follow after the monitor was released: they may reach other
 	 * storages, whose monitors must never be taken while holding this one.
 	 */
-
 	void increaseKinah(long amount, Player actor) {
 		increaseKinah(amount, ItemUpdateType.INC_KINAH_COLLECT, actor);
 	}
