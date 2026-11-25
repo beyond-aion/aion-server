@@ -535,6 +535,8 @@ public class BrokerService {
 	}
 
 	public void settleAccount(Player player) {
+		if (!PlayerRestrictions.canTrade(player)) // a trade partner's thread puts the traded items into the inventory, which isn't thread safe
+			return;
 		Race playerRace = player.getRace();
 		Map<Integer, BrokerItem> brokerSettledItems = getRaceBrokerSettledItems(playerRace);
 		List<BrokerItem> collectedItems = new ArrayList<>();
