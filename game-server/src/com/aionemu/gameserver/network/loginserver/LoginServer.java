@@ -378,14 +378,18 @@ public class LoginServer {
 	 */
 	public void kickAccount(int accountId, boolean notifyDoubleLogin) {
 		AionConnection client;
+		AionConnection loadingClient;
 		synchronized (this) {
 			client = loggedInAccounts.get(accountId);
-			if (client == null)
-				client = loadingAccounts.get(accountId); // gives up logging in when it sees the client closing
+			loadingClient = loadingAccounts.get(accountId); // gives up logging in when it sees the client closing
 		}
 		if (client != null) {
 			log.info("Kicking account ID {} by LS request", accountId);
 			client.close(notifyDoubleLogin ? SM_SYSTEM_MESSAGE.STR_KICK_ANOTHER_USER_TRY_LOGIN() : null);
+		}
+		if (loadingClient != null && loadingClient != client) {
+			log.info("Kicking account ID {} while loading by LS request", accountId);
+			loadingClient.close(notifyDoubleLogin ? SM_SYSTEM_MESSAGE.STR_KICK_ANOTHER_USER_TRY_LOGIN() : null);
 		}
 	}
 
