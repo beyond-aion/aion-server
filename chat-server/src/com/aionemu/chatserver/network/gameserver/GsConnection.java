@@ -61,7 +61,7 @@ public class GsConnection extends NettyConnection<GsServerPacket> {
 	@Override
 	protected void onDisconnect() {
 		if (state == GameServerConnectionState.AUTHED)
-			GameServerService.getInstance().setOffline();
+			GameServerService.getInstance().setOffline(this);
 	}
 
 	@Override
