@@ -91,12 +91,16 @@ public class ChatService {
 					connection.close();
 					return;
 				}
+				if (connection.isClosing()) // closed while the packet waited, it must not replace a connection that is still open
+					return;
 				previousConnection = chatClient.getConnection();
 				chatClient.setIdentifier(identifier);
-				chatClient.setConnection(connection);
-				connection.sendPacket(new SM_PLAYER_AUTH_RESPONSE(msgIndex));
-				connection.setState(State.AUTHED);
+				// Broadcasts read the client's connection without this lock and write the client's id from the connection, so the connection must be set
+				// up before it is published, and the auth response must be the first packet on it.
 				connection.setChatClient(chatClient);
+				connection.setState(State.AUTHED);
+				connection.sendPacket(new SM_PLAYER_AUTH_RESPONSE(msgIndex));
+				chatClient.setConnection(connection);
 				BroadcastService.getInstance().addClient(chatClient);
 			}
 			// The character has one connection, like it has one in the game. The previous one stayed authenticated, and could keep writing to the
