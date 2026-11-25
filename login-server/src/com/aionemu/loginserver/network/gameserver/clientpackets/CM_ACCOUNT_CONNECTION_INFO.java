@@ -8,6 +8,9 @@ import com.aionemu.loginserver.configs.Config;
 import com.aionemu.loginserver.dao.AccountDAO;
 import com.aionemu.loginserver.dao.AccountsLogDAO;
 import com.aionemu.loginserver.network.gameserver.GsClientPacket;
+import com.aionemu.loginserver.network.gameserver.GsConnection;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * @author ViAl, Neon
@@ -20,6 +23,10 @@ public class CM_ACCOUNT_CONNECTION_INFO extends GsClientPacket {
 	private String ip;
 	private String mac;
 	private String hddSerial;
+
+	public CM_ACCOUNT_CONNECTION_INFO(ByteBuf buf, GsConnection connection, int opCode) {
+		super(buf, connection, opCode);
+	}
 
 	protected void readImpl() {
 		accountId = readD();

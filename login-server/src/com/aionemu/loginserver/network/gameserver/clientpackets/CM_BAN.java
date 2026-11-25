@@ -11,7 +11,10 @@ import com.aionemu.loginserver.dao.AccountTimeDAO;
 import com.aionemu.loginserver.model.Account;
 import com.aionemu.loginserver.model.AccountTime;
 import com.aionemu.loginserver.network.gameserver.GsClientPacket;
+import com.aionemu.loginserver.network.gameserver.GsConnection;
 import com.aionemu.loginserver.network.gameserver.serverpackets.SM_BAN_RESPONSE;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * The universal packet for account/IP bans
@@ -44,6 +47,10 @@ public class CM_BAN extends GsClientPacket {
 	 * Object ID of Admin, who request the ban
 	 */
 	private int adminObjId;
+
+	public CM_BAN(ByteBuf buf, GsConnection connection, int opCode) {
+		super(buf, connection, opCode);
+	}
 
 	@Override
 	protected void readImpl() {

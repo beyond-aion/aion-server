@@ -1,7 +1,10 @@
 package com.aionemu.loginserver.network.gameserver.clientpackets;
 
 import com.aionemu.loginserver.network.gameserver.GsClientPacket;
+import com.aionemu.loginserver.network.gameserver.GsConnection;
 import com.aionemu.loginserver.service.PlayerTransferService;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * @author KID
@@ -9,6 +12,10 @@ import com.aionemu.loginserver.service.PlayerTransferService;
 public class CM_PTRANSFER_CONTROL extends GsClientPacket {
 
 	private byte actionId;
+
+	public CM_PTRANSFER_CONTROL(ByteBuf buf, GsConnection connection, int opCode) {
+		super(buf, connection, opCode);
+	}
 
 	@Override
 	protected void readImpl() {

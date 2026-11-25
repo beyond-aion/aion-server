@@ -8,7 +8,10 @@ import com.aionemu.loginserver.controller.AccountController;
 import com.aionemu.loginserver.model.Account;
 import com.aionemu.loginserver.model.ReconnectingAccount;
 import com.aionemu.loginserver.network.gameserver.GsClientPacket;
+import com.aionemu.loginserver.network.gameserver.GsConnection;
 import com.aionemu.loginserver.network.gameserver.serverpackets.SM_ACCOUNT_RECONNECT_KEY;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * This packet is sent by GameServer when player is requesting fast reconnect to login server. LoginServer in response will send reconectKey.
@@ -21,6 +24,10 @@ public class CM_ACCOUNT_RECONNECT_KEY extends GsClientPacket {
 	 * accountId of account that will be reconnecting.
 	 */
 	private int accountId;
+
+	public CM_ACCOUNT_RECONNECT_KEY(ByteBuf buf, GsConnection connection, int opCode) {
+		super(buf, connection, opCode);
+	}
 
 	@Override
 	protected void readImpl() {

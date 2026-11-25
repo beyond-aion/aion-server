@@ -3,6 +3,9 @@ package com.aionemu.loginserver.network.gameserver.clientpackets;
 import com.aionemu.loginserver.controller.AccountController;
 import com.aionemu.loginserver.network.aion.SessionKey;
 import com.aionemu.loginserver.network.gameserver.GsClientPacket;
+import com.aionemu.loginserver.network.gameserver.GsConnection;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * In this packet Gameserver is asking if given account sessionKey is valid at Loginserver side. [if user that is authenticating on Gameserver is
@@ -16,6 +19,10 @@ public class CM_ACCOUNT_AUTH extends GsClientPacket {
 	 * SessionKey that GameServer needs to check if is valid at Loginserver side.
 	 */
 	private SessionKey sessionKey;
+
+	public CM_ACCOUNT_AUTH(ByteBuf buf, GsConnection connection, int opCode) {
+		super(buf, connection, opCode);
+	}
 
 	@Override
 	protected void readImpl() {
