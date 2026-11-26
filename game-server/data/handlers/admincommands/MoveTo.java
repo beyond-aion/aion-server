@@ -1,5 +1,6 @@
 package admincommands;
 
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -26,6 +27,8 @@ import com.aionemu.gameserver.world.WorldPosition;
  */
 public class MoveTo extends AdminCommand {
 
+	private static final Pattern HEADING_PARAM = Pattern.compile("h(\\d{1,3})", Pattern.CASE_INSENSITIVE);
+
 	public MoveTo() {
 		super("moveto", "Moves you to any location.", """
 			<x> <y> [z] - Moves you to the specified coordinates on the current map (also supports pasted xml attributes like x="1422.7744" y="1250.0612" z="569.47").
@@ -34,6 +37,7 @@ public class MoveTo extends AdminCommand {
 			<player name> - Moves you to the player.
 			<npc name|ID> - Moves you to a spawn spot of the NPC.
 			forward <distance> - Moves you forward by the specified distance, ignoring any obstacles in between.
+			Coordinates and position links accept a trailing h<0-119> to set your heading after the move (degrees / 3, e.g. h30 = 90°).
 			""");
 	}
 
@@ -48,9 +52,20 @@ public class MoveTo extends AdminCommand {
 			moveForward(admin, Float.parseFloat(params[1]));
 			return;
 		}
+		byte heading = admin.getHeading();
+		Matcher headingParam = HEADING_PARAM.matcher(params[params.length - 1]);
+		if (params.length > 1 && headingParam.matches()) {
+			int h = Integer.parseInt(headingParam.group(1));
+			if (h >= 120) {
+				sendInfo(admin, "Heading must be between 0 and 119.");
+				return;
+			}
+			heading = (byte) h;
+			params = Arrays.copyOf(params, params.length - 1);
+		}
 		WorldPosition pos = params.length == 1 ? ChatUtil.getPosition(params[0]) : parseWorldPosition(admin, params);
 		if (pos != null) {
-			pos.setH(admin.getHeading());
+			pos.setH(heading);
 			moveTo(admin, pos, "Teleported to " + worldName(pos.getMapId()) + "\nX:" + pos.getX() + " Y:" + pos.getY() + " Z:" + pos.getZ());
 			return;
 		} else if (params.length > 1 || params[0].startsWith("[pos:"))
