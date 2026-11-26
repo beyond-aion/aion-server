@@ -90,11 +90,11 @@ public class PlayerScripts {
 		return true;
 	}
 
+	/**
+	 * Keeps the slot as an empty script instead of forgetting it, so later full lists tell clients to drop a cached copy.
+	 */
 	public void remove(int scriptId) {
-		if (isInvalidScriptId(scriptId))
-			return;
-		HouseScriptsDAO.deleteScript(houseObjId, scriptId);
-		scripts[scriptId] = new PlayerScript(scriptId, null, 0);
+		set(scriptId, new byte[0], 0);
 	}
 
 	public void removeAll() {

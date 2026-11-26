@@ -5,8 +5,10 @@ import static com.aionemu.gameserver.model.items.ItemUseAnimation.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,6 +42,7 @@ import com.aionemu.gameserver.model.summons.UnsummonType;
 import com.aionemu.gameserver.model.templates.QuestTemplate;
 import com.aionemu.gameserver.model.templates.flypath.FlightPath;
 import com.aionemu.gameserver.model.templates.flypath.FlyPathEntry;
+import com.aionemu.gameserver.model.templates.housing.BuildingType;
 import com.aionemu.gameserver.model.templates.item.actions.RideAction;
 import com.aionemu.gameserver.model.templates.panels.SkillPanel;
 import com.aionemu.gameserver.model.templates.zone.ZoneType;
@@ -92,6 +95,7 @@ public class PlayerController extends CreatureController<Player> {
 	private long lastAttackedMillis = 0;
 	private long lastAutoAttackMillis = 0;
 	private StanceObserver stanceObserver;
+	private final Set<House> registeredHouses = new HashSet<>();
 
 	@Override
 	public void see(VisibleObject object) {
@@ -99,6 +103,8 @@ public class PlayerController extends CreatureController<Player> {
 		if (object instanceof Creature creature) {
 			if (creature instanceof Npc npc) {
 				PacketSendUtility.sendPacket(getOwner(), new SM_NPC_INFO(npc, getOwner()));
+				if (npc instanceof SummonedHouseNpc houseNpc)
+					sendHouseScriptsIfButler(houseNpc);
 				if (npc instanceof Kisk) {
 					if (getOwner().getRace() == ((Kisk) npc).getOwnerRace())
 						PacketSendUtility.sendPacket(getOwner(), new SM_KISK_UPDATE((Kisk) npc));
@@ -119,11 +125,39 @@ public class PlayerController extends CreatureController<Player> {
 			PacketSendUtility.sendPacket(getOwner(), SM_PET.spawned(pet));
 			if (pet.getMaster().isInFlyingState())
 				PacketSendUtility.sendPacket(getOwner(), new SM_PET_EMOTE(pet, PetEmote.FLY_START));
-		} else if (object instanceof House) {
-			PacketSendUtility.sendPacket(getOwner(), new SM_HOUSE_RENDER((House) object));
+		} else if (object instanceof House house) {
+			seeHouse(house);
 		} else if (object instanceof HouseObject) {
 			PacketSendUtility.sendPacket(getOwner(), new SM_HOUSE_OBJECT((HouseObject<?>) object));
 		}
+	}
+
+	private void seeHouse(House house) {
+		synchronized (registeredHouses) {
+			if (getOwner().isSpawned() && house.isInSameInstance(getOwner()))
+				registerHouse(house);
+		}
+	}
+
+	public void registerHouse(House house) {
+		Player player = getOwner();
+		synchronized (registeredHouses) {
+			if (!registeredHouses.add(house))
+				return;
+			if (house.getBuilding().getType() == BuildingType.PERSONAL_INS) // a studio is announced with its building info, to visitors as well
+				PacketSendUtility.sendPacket(player, new SM_HOUSE_UPDATE(house));
+			else
+				PacketSendUtility.sendPacket(player, new SM_HOUSE_RENDER(house));
+		}
+	}
+
+	/**
+	 * The script list follows the butler's spawn packet, and only the butler of an owned house hands it out.
+	 */
+	private void sendHouseScriptsIfButler(SummonedHouseNpc houseNpc) {
+		House house = houseNpc.getCreator();
+		if (house.getOwnerId() != 0 && houseNpc.getNpcId() == house.getLand().getManagerNpcId())
+			house.sendScripts(getOwner());
 	}
 
 	private void sendPlayerInfoPackets(Player player) {
@@ -138,12 +172,17 @@ public class PlayerController extends CreatureController<Player> {
 	@Override
 	public void notSee(VisibleObject object, ObjectDeleteAnimation animation) {
 		super.notSee(object, animation);
+		if (object instanceof House house) {
+			synchronized (registeredHouses) {
+				if (registeredHouses.remove(house) && getOwner().isSpawned())
+					PacketSendUtility.sendPacket(getOwner(), new SM_DELETE_HOUSE(house.getAddress().getId()));
+			}
+			return;
+		}
 		if (!getOwner().isSpawned()) // player is teleporting, no need to send deletion packets
 			return;
 		if (object instanceof Pet) {
 			PacketSendUtility.sendPacket(getOwner(), SM_PET.dismissed(object.getObjectId()));
-		} else if (object instanceof House) {
-			PacketSendUtility.sendPacket(getOwner(), new SM_DELETE_HOUSE(((House) object).getAddress().getId()));
 		} else if (object instanceof HouseObject) {
 			PacketSendUtility.sendPacket(getOwner(), new SM_DELETE_HOUSE_OBJECT(object.getObjectId()));
 		} else if (object instanceof Npc && ((Npc) object).isFlag()) {
@@ -343,6 +382,9 @@ public class PlayerController extends CreatureController<Player> {
 	public void onDespawn() {
 		if (getOwner().isLooting())
 			DropService.getInstance().closeDropList(getOwner(), getOwner().getLootingNpcOid());
+		synchronized (registeredHouses) {
+			registeredHouses.clear();
+		}
 		super.onDespawn();
 	}
 

@@ -2,6 +2,7 @@ package admincommands;
 
 import java.awt.Color;
 import java.util.*;
+import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -11,6 +12,7 @@ import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.model.templates.housing.HouseType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.HousingService;
+import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.player.PlayerService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.ChatUtil;
@@ -34,20 +36,26 @@ public class HouseCommand extends AdminCommand {
 
 	@Override
 	public void execute(Player admin, String... params) {
-		if (params.length >= 1 && "list".equalsIgnoreCase(params[0])) {
+		String action = params.length == 0 ? "" : params[0].toLowerCase(Locale.ROOT);
+		if (action.equals("list")) {
 			listHouses(admin);
-		} else if (params.length >= 2 && "own".equalsIgnoreCase(params[0])) {
-			acquireHouse(admin, getHouse(params[1]));
-		} else if (params.length >= 2 && "revoke".equalsIgnoreCase(params[0])) {
-			revokeOwnership(admin, getHouse(params[1]));
-		} else if (params.length >= 2 && "tp".equalsIgnoreCase(params[0])) {
-			House house = getHouse(params[1]);
-			TeleportService.teleportTo(admin, house.getWorldMapInstance(), house.getX(), house.getY(), house.getZ(), house.getTeleportHeading());
-		} else if (params.length >= 2 && "reloadscripts".equalsIgnoreCase(params[0])) {
-			reloadPlayerScripts(admin, getHouse(params[1]));
-		} else {
-			sendInfo(admin);
+			return;
 		}
+		BiConsumer<Player, House> operation = switch (action) {
+			case "own" -> this::acquireHouse;
+			case "revoke" -> this::revokeOwnership;
+			case "tp" -> this::teleportToHouse;
+			case "reloadscripts" -> this::reloadPlayerScripts;
+			default -> null;
+		};
+		if (operation == null || params.length < 2) {
+			sendInfo(admin);
+			return;
+		}
+
+		House house = getHouse(admin, params[1], action.equals("tp") || action.equals("reloadscripts"));
+		if (house != null)
+			operation.accept(admin, house);
 	}
 
 	private void listHouses(Player admin) {
@@ -89,9 +97,25 @@ public class HouseCommand extends AdminCommand {
 			.collect(Collectors.groupingBy(House::getHouseType, LinkedHashMap::new, Collectors.toList()));
 	}
 
-	private House getHouse(String param) {
-		int address = Integer.parseInt(param);
-		return Objects.requireNonNull(HousingService.getInstance().getHouseByAddress(address), "Invalid address.");
+	private House getHouse(Player admin, String param, boolean allowOwnStudio) {
+		int address;
+		try {
+			address = Integer.parseInt(param);
+		} catch (NumberFormatException e) {
+			sendInfo(admin, "Invalid address.");
+			return null;
+		}
+		HousingService housing = HousingService.getInstance();
+		House house = housing.getHouseByAddress(address);
+		if (house != null)
+			return house;
+		if (allowOwnStudio) {
+			House studio = housing.getPlayerStudio(admin.getObjectId());
+			if (studio != null && studio.getAddress().getId() == address)
+				return studio;
+		}
+		sendInfo(admin, "No " + (allowOwnStudio ? "house or own studio" : "field house") + " with address " + address + ".");
+		return null;
 	}
 
 	private void acquireHouse(Player admin, House house) {
@@ -124,6 +148,11 @@ public class HouseCommand extends AdminCommand {
 		}
 		HousingService.getInstance().changeOwner(house, 0);
 		sendInfo(admin, "Ownership of house " + house.getAddress().getId() + " was revoked from " + PlayerService.getPlayerName(ownerId));
+	}
+
+	private void teleportToHouse(Player admin, House house) {
+		TeleportService.teleportTo(admin, InstanceService.getOrCreateHouseInstance(house), house.getX(), house.getY(), house.getZ(),
+			house.getTeleportHeading());
 	}
 
 	private void reloadPlayerScripts(Player admin, House house) {
