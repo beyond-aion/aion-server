@@ -13,10 +13,10 @@ import com.aionemu.loginserver.network.gameserver.GsServerPacket;
  */
 public class SM_HDDBAN_LIST extends GsServerPacket {
 
-	private Map<String, Timestamp> bannedList;
+	private final Map<String, Timestamp> bannedList;
 
 	public SM_HDDBAN_LIST() {
-		this.bannedList = BannedHDDController.getInstance().getMap();
+		bannedList = Map.copyOf(BannedHDDController.getInstance().getMap()); // the count must match the entries written on the I/O thread
 	}
 
 	@Override

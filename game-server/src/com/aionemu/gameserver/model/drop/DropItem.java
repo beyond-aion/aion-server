@@ -1,7 +1,9 @@
 package com.aionemu.gameserver.model.drop;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -24,6 +26,10 @@ public class DropItem {
 	private boolean isDistributeItem = false;
 	private int npcObj;
 	private int optionalSocket = 0;
+	// Guarded by the corpse's monitor, like its other loot state (see DropDistributionService.handleRollOrBid); insertion order breaks equal values
+	private List<Integer> offeredTo = List.of();
+	private int distributionId;
+	private final Map<Integer, Long> answers = new LinkedHashMap<>();
 
 	public DropItem(Drop dropTemplate) {
 		this.dropTemplate = dropTemplate;
@@ -132,6 +138,45 @@ public class DropItem {
 	public void setWinningPlayer(Player winningPlayer) {
 		this.winningPlayer = winningPlayer;
 
+	}
+
+	/**
+	 * Starts a roll (distribution id 2) or bid (3) for the given players, who all get its messages until the item is distributed.
+	 */
+	public void offerTo(List<Integer> playerObjectIds, int distributionId) {
+		offeredTo = List.copyOf(playerObjectIds);
+		this.distributionId = distributionId;
+		answers.clear();
+	}
+
+	public List<Integer> getOfferedTo() {
+		return offeredTo;
+	}
+
+	/**
+	 * @return 2 if the item was offered for a roll, 3 for a bid. The corpse's distribution changes with the next item or the loot rules, while this
+	 *         one stays until the item is distributed.
+	 */
+	public int getDistributionId() {
+		return distributionId;
+	}
+
+	/**
+	 * Remembers a player's roll or bid for this item. 0 means the player gave up.
+	 */
+	public void setAnswer(int playerObjectId, long value) {
+		answers.put(playerObjectId, value);
+	}
+
+	public long getAnswer(int playerObjectId) {
+		return answers.getOrDefault(playerObjectId, 0L);
+	}
+
+	/**
+	 * @return All rolls or bids for this item, highest first; equal values keep the order they were made in.
+	 */
+	public List<Map.Entry<Integer, Long>> getAnswers() {
+		return answers.entrySet().stream().sorted(Map.Entry.<Integer, Long>comparingByValue().reversed()).toList();
 	}
 
 	/**

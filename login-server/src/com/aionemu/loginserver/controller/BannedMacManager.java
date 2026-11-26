@@ -2,6 +2,7 @@ package com.aionemu.loginserver.controller;
 
 import java.sql.Timestamp;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.aionemu.loginserver.dao.BannedMacDAO;
 import com.aionemu.loginserver.model.base.BannedMacEntry;
@@ -20,7 +21,7 @@ public class BannedMacManager {
 	}
 
 	private BannedMacManager() {
-		bannedList = BannedMacDAO.load();
+		bannedList = new ConcurrentHashMap<>(BannedMacDAO.load()); // changed by the packets of all game servers
 	}
 
 	public void unban(String address, String details) {

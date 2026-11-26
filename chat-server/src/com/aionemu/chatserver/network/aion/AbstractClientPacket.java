@@ -1,11 +1,11 @@
 package com.aionemu.chatserver.network.aion;
 
-import java.nio.ByteBuffer;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.network.packet.BaseClientPacket;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * @author ATracer
@@ -14,9 +14,8 @@ public abstract class AbstractClientPacket extends BaseClientPacket<AionConnecti
 
 	private static final Logger log = LoggerFactory.getLogger(AbstractClientPacket.class);
 
-	public AbstractClientPacket(ByteBuffer buf, AionConnection connection, int opCode) {
-		super(buf, opCode);
-		setConnection(connection);
+	public AbstractClientPacket(ByteBuf buf, AionConnection connection, int opcode) {
+		super(opcode, buf, connection);
 	}
 
 	@Override

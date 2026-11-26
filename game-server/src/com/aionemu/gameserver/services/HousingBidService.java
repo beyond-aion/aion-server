@@ -26,7 +26,9 @@ import com.aionemu.gameserver.services.mail.MailFormatter;
 import com.aionemu.gameserver.services.player.PlayerService;
 import com.aionemu.gameserver.taskmanager.tasks.housing.AuctionEndTask;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.utils.time.ServerTime;
+import com.aionemu.gameserver.world.World;
 
 /**
  * @author Rolandas, Neon
@@ -107,7 +109,16 @@ public class HousingBidService {
 		return houseBids;
 	}
 
-	public HouseBids.Bid bid(Player player, int listIndex, long bidOffer) {
+	/**
+	 * Bids of different players arrive on their own threads. Without the lock, two of them read the same highest bid and refund its owner twice, while
+	 * the bid that came in between is never refunded. Ending or cancelling an auction and disabling bids take the same lock, so a bid can't refund the
+	 * winner of an auction that is closing at that moment.
+	 */
+	public synchronized HouseBids.Bid bid(Player player, int listIndex, long bidOffer) {
+		if (player.isTrading()) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_EXCHANGE_YOU_ARE_ALREADY_EXCHANGING());
+			return null;
+		}
 		HouseBids houseBids = bids.values().stream().filter(b -> b.getListIndex() == listIndex).findAny().orElse(null);
 		if (!isAllowedToBid(player, houseBids, bidOffer))
 			return null; // bid too low or bidding not allowed
@@ -118,9 +129,28 @@ public class HousingBidService {
 			PacketSendUtility.sendPacket(player, new SM_RECEIVE_BIDS(0));
 			return null;
 		}
-		if (AuctionEndTask.getInstance().tryProlongAuction(bid.getHouseObjectId()))
-			HouseBidsDAO.addBid(bid); // no need to save the bid if prolongation failed (the auction just ended)
-		player.getInventory().decreaseKinah(bid.getKinah());
+		// An auction that just ended cannot be extended: withdraw the bid instead of taking kinah for a bid that is never saved
+		if (!AuctionEndTask.getInstance().tryProlongAuction(houseBids.getHouseObjectId())) {
+			houseBids.removeBid(bid);
+			sendAuctionEnded(player);
+			PacketSendUtility.sendPacket(player, new SM_RECEIVE_BIDS(0));
+			return null;
+		}
+		if (!HouseBidsDAO.addBid(bid)) {
+			houseBids.removeBid(bid);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_BID_FAIL());
+			PacketSendUtility.sendPacket(player, new SM_RECEIVE_BIDS(0));
+			return null;
+		}
+		// The kinah check is not under this lock, so another thread may have spent the money in the meantime; a bid nobody can pay must not be
+		// left in memory or in the database
+		if (!player.getInventory().tryDecreaseKinah(bid.getKinah())) {
+			houseBids.removeBid(bid);
+			HouseBidsDAO.deleteBid(bid);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_BID_NOT_ENOUGH_MONEY(bid.getKinah()));
+			PacketSendUtility.sendPacket(player, new SM_RECEIVE_BIDS(0));
+			return null;
+		}
 		House bidHouse = HousingService.getInstance().findHouse(bid.getHouseObjectId());
 		if (previousBid != houseBids.getInitialOffer() && previousBid.getPlayerObjectId() != 0) {
 			PlayerCommonData prevPcd = PlayerService.getOrLoadPlayerCommonData(previousBid.getPlayerObjectId());
@@ -131,28 +161,21 @@ public class HousingBidService {
 			MailFormatter.sendHouseAuctionMail(bidHouse, prevPcd, AuctionResult.FAILED_BID, bid.getTime(), previousBid.getKinah());
 		}
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_BID_SUCCESS(bidHouse.getAddress().getId()));
-		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_PRICE_CHANGE(bidOffer));
+		for (int bidderId : houseBids.getBidderIds()) { // everyone whose latest bid is on this house
+			Player bidder = World.getInstance().getPlayer(bidderId);
+			HouseBids.Bid lastBid = bidder == null ? null : findLastBid(bidder);
+			if (lastBid != null && lastBid.getHouseObjectId() == houseBids.getHouseObjectId())
+				PacketSendUtility.sendPacket(bidder, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_PRICE_CHANGE(bidOffer));
+		}
 		PacketSendUtility.sendPacket(player, new SM_RECEIVE_BIDS(0));
 		return bid;
 	}
 
 	private boolean isAllowedToBid(Player player, HouseBids houseBids, long bidOffer) {
-		if (!HousingService.getInstance().canOwnHouse(player, true))
-			return false;
-		if (houseBids == null) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_BID_FAIL());
+		if (player.getInventory().getKinah() < bidOffer) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_BID_NOT_ENOUGH_MONEY(bidOffer));
 			return false;
 		}
-		if (!isAuctionOpen(houseBids.getHouseObjectId())) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_BID_TIMEOUT());
-			return false;
-		}
-		House bidHouse = HousingService.getInstance().findHouse(houseBids.getHouseObjectId());
-		if (player.getObjectId() == bidHouse.getOwnerId()) { // client usually already checks this, but we want to make sure
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_BID_MY_HOUSE());
-			return false;
-		}
-
 		if (HousingService.getInstance().findInactiveHouse(player.getObjectId()) != null) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_BID_GRACE_HOUSE());
 			return false;
@@ -162,9 +185,15 @@ public class HousingBidService {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_BID_OVERDUE());
 			return false;
 		}
-		int minBidLevel = getMinBidLevel(bidHouse);
-		if (player.getLevel() < minBidLevel) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_BID_LOW_LEVEL(minBidLevel));
+		if (!HousingService.getInstance().canOwnHouse(player, true))
+			return false;
+		if (houseBids == null) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_BID_FAIL());
+			return false;
+		}
+		House bidHouse = HousingService.getInstance().findHouse(houseBids.getHouseObjectId());
+		if (player.getObjectId() == bidHouse.getOwnerId()) { // client usually already checks this, but we want to make sure
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_BID_MY_HOUSE());
 			return false;
 		}
 		HouseBids.Bid highestBid = houseBids.getHighestBid();
@@ -176,16 +205,26 @@ public class HousingBidService {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_BID_OTHER_HOUSE());
 			return false;
 		}
-		if (player.getInventory().getKinah() < bidOffer) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_BID_NOT_ENOUGH_MONEY(bidOffer));
+		int minBidLevel = getMinBidLevel(bidHouse);
+		if (player.getLevel() < minBidLevel) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_BID_LOW_LEVEL(minBidLevel));
 			return false;
 		}
-		long currentBid = highestBid.getKinah();
-		if (bidOffer - currentBid >= currentBid * HousingConfig.AUCTION_BID_STEP_LIMIT / 100f) {
+		if (!isAuctionOpen(houseBids.getHouseObjectId())) {
+			sendAuctionEnded(player);
+			return false;
+		}
+		if (bidOffer > 99_999_999_999L) {
+			AuditLogger.log(player, "tried to bid more kinah on " + bidHouse + " than the client allows: " + bidOffer);
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_BID_EXCESS_ACCOUNT());
 			return false;
 		}
 		return true;
+	}
+
+	private void sendAuctionEnded(Player player) {
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_BID_TIMEOUT());
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_BID_FAIL());
 	}
 
 	public void endAuctions() {
@@ -196,7 +235,7 @@ public class HousingBidService {
 		impoundAndAuctionOldPlayerHouses();
 	}
 
-	public boolean endAuction(int houseObjectId) {
+	public synchronized boolean endAuction(int houseObjectId) {
 		AuctionEndTask.getInstance().onAuctionEnd(houseObjectId);
 		HouseBids bids;
 		if (!HouseBidsDAO.deleteHouseBids(houseObjectId) || (bids = this.bids.remove(houseObjectId)) == null)
@@ -323,7 +362,7 @@ public class HousingBidService {
 		return house.getLand().getSaleOptions().getMinLevel();
 	}
 
-	public void disableBids(int playerObjId) {
+	public synchronized void disableBids(int playerObjId) {
 		List<HouseBids.Bid> deletedBids = new ArrayList<>();
 		bids.values().forEach(b -> deletedBids.addAll(b.deleteOrDisableBids(playerObjId)));
 		HouseBidsDAO.deleteOrDisableBids(playerObjId, deletedBids);
@@ -342,7 +381,7 @@ public class HousingBidService {
 		return null;
 	}
 
-	public boolean cancelAuction(House house) {
+	public synchronized boolean cancelAuction(House house) {
 		HouseBids bids = this.bids.remove(house.getObjectId());
 		if (bids == null)
 			return false;

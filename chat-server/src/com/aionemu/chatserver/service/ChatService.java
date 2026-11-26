@@ -3,6 +3,7 @@ package com.aionemu.chatserver.service;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -18,7 +19,6 @@ import com.aionemu.chatserver.network.aion.AionConnection;
 import com.aionemu.chatserver.network.aion.AionConnection.State;
 import com.aionemu.chatserver.network.aion.serverpackets.SM_CHANNEL_RESPONSE;
 import com.aionemu.chatserver.network.aion.serverpackets.SM_PLAYER_AUTH_RESPONSE;
-import com.aionemu.commons.utils.Rnd;
 
 /**
  * @author ATracer
@@ -27,10 +27,10 @@ public class ChatService {
 
 	private static final Logger log = LoggerFactory.getLogger(ChatService.class);
 	private static final ChatService instance = new ChatService();
+	private static final SecureRandom secureRandom = new SecureRandom();
 	private final Map<Integer, ChatClient> players = new ConcurrentHashMap<>();
 
 	private ChatService() {
-
 	}
 
 	public static ChatService getInstance() {
@@ -44,15 +44,23 @@ public class ChatService {
 		byte[] accountToken = md.digest();
 		byte[] token = generateToken(accountToken);
 		ChatClient chatClient = new ChatClient(playerId, token, accName, nick, race, accessLevel);
-		ChatClient oldClient = players.put(playerId, chatClient);
-		if (oldClient != null)
-			ChatChannels.leaveAll(oldClient);
+		ChatClient previous = players.put(playerId, chatClient);
+		if (previous != null) {
+			AionConnection previousConnection;
+			synchronized (previous) {
+				BroadcastService.getInstance().removeClient(previous);
+				ChatChannels.leaveAll(previous);
+				previousConnection = previous.getConnection();
+			}
+			if (previousConnection != null)
+				previousConnection.close();
+		}
 		return chatClient;
 	}
 
 	private byte[] generateToken(byte[] accountToken) {
 		byte[] dynamicToken = new byte[16];
-		Rnd.nextBytes(dynamicToken);
+		secureRandom.nextBytes(dynamicToken);
 		byte[] token = new byte[48];
 		for (int i = 0; i < token.length; i++) {
 			if (i < 16)
@@ -63,42 +71,72 @@ public class ChatService {
 		return token;
 	}
 
-	public void registerPlayerConnection(int playerId, byte[] token, byte[] identifier, String name, String accName,
-		AionConnection connection) {
+	public void registerPlayerConnection(int msgIndex, int playerId, byte[] token, byte[] identifier, String accName, AionConnection connection) {
+		String nameIdentifier = new String(identifier, StandardCharsets.UTF_16LE); // Name@identifier
+		int endIndex = nameIdentifier.lastIndexOf('@');
+		String name = endIndex == -1 ? nameIdentifier : nameIdentifier.substring(0, endIndex);
 		ChatClient chatClient = players.get(playerId);
 		if (chatClient == null)
-			log.warn("Client tried to connect but was not yet registered from game server side");
+			log.warn("Client tried to connect but was not yet registered from game server side with player ID {} (name ID: {})", playerId, nameIdentifier);
 		else if (!Arrays.equals(chatClient.getToken(), token))
-			log.warn("Client tried to connect but given token doesn't match");
+			log.warn("Client tried to connect but given token doesn't match (account: {})", chatClient.getAccountName());
 		else if (!chatClient.getAccountName().equalsIgnoreCase(accName)) // client sends accName lowercase
 			log.warn("Client tried to connect with account name: {} (expected: {})", accName, chatClient.getAccountName());
 		else if (!chatClient.getName().equals(name))
 			log.warn("Client tried to connect with character name: {} (expected: {})", name, chatClient.getName());
 		else {
-			chatClient.setIdentifier(identifier);
-			chatClient.setConnection(connection);
-			connection.sendPacket(new SM_PLAYER_AUTH_RESPONSE());
-			connection.setState(State.AUTHED);
-			connection.setChatClient(chatClient);
-			BroadcastService.getInstance().addClient(chatClient);
+			AionConnection previousConnection;
+			synchronized (chatClient) { // a connection of the character that closes right now must not take it out of the broadcasts afterwards
+				if (players.get(playerId) != chatClient) { // logged out since it was looked up, see playerLogout
+					connection.close();
+					return;
+				}
+				if (connection.isClosing()) // closed while the packet waited, it must not replace a connection that is still open
+					return;
+				previousConnection = chatClient.getConnection();
+				chatClient.setIdentifier(identifier);
+				// Broadcasts read the client's connection without this lock and write the client's id from the connection, so the connection must be set
+				// up before it is published, and the auth response must be the first packet on it.
+				connection.setChatClient(chatClient);
+				connection.setState(State.AUTHED);
+				connection.sendPacket(new SM_PLAYER_AUTH_RESPONSE(msgIndex));
+				chatClient.setConnection(connection);
+				BroadcastService.getInstance().addClient(chatClient);
+			}
+			// The character has one connection, like it has one in the game. The previous one stayed authenticated, and could keep writing to the
+			// channels in the character's name.
+			if (previousConnection != null && previousConnection != connection) {
+				log.info("{} logged in again, closing its previous connection from {}", chatClient, previousConnection.getIP());
+				previousConnection.close();
+			}
 		}
 	}
 
 	public void registerPlayerWithChannel(AionConnection connection, int channelRequestId, String identifier) {
-		Channel channel = ChatChannels.join(connection.getChatClient(), identifier);
-		if (channel != null) {
-			connection.sendPacket(new SM_CHANNEL_RESPONSE(channel, channelRequestId));
+		ChatClient chatClient = connection.getChatClient();
+		Channel channel;
+		synchronized (chatClient) { // a concurrent logout or re-registration must not leave this client in a channel after leaveAll
+			if (players.get(chatClient.getClientId()) != chatClient || chatClient.getConnection() != connection)
+				return;
+			channel = ChatChannels.join(chatClient, identifier);
 		}
+		if (channel != null)
+			connection.sendPacket(new SM_CHANNEL_RESPONSE(channel, channelRequestId));
 	}
 
 	public void playerLogout(int playerId) {
 		ChatClient chatClient = players.remove(playerId);
 		if (chatClient != null) {
-			BroadcastService.getInstance().removeClient(chatClient);
-			ChatChannels.leaveAll(chatClient);
+			AionConnection connection;
+			// a connection that authenticates right now either sees the character gone or is closed here
+			synchronized (chatClient) {
+				BroadcastService.getInstance().removeClient(chatClient);
+				ChatChannels.leaveAll(chatClient);
+				connection = chatClient.getConnection();
+			}
 			log.info("Player[id={}] logged out ", playerId);
-			if (chatClient.getConnection() != null)
-				chatClient.getConnection().close();
+			if (connection != null)
+				connection.close();
 			else
 				log.warn("Received logout event without client authentication for player {}", playerId);
 		}

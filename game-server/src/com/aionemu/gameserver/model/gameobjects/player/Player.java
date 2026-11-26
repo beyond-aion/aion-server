@@ -3,6 +3,7 @@ package com.aionemu.gameserver.model.gameobjects.player;
 import java.sql.Timestamp;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.configs.main.SecurityConfig;
@@ -25,7 +26,6 @@ import com.aionemu.gameserver.model.actions.PlayerActions;
 import com.aionemu.gameserver.model.actions.PlayerMode;
 import com.aionemu.gameserver.model.animations.ArrivalAnimation;
 import com.aionemu.gameserver.model.gameobjects.*;
-import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.AbyssRank.AbyssRankUpdateType;
 import com.aionemu.gameserver.model.gameobjects.player.emotion.EmotionList;
 import com.aionemu.gameserver.model.gameobjects.player.motion.MotionList;
@@ -35,7 +35,10 @@ import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.gameobjects.state.FlyState;
 import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.model.items.ItemCooldown;
-import com.aionemu.gameserver.model.items.storage.*;
+import com.aionemu.gameserver.model.items.storage.LegionStorageProxy;
+import com.aionemu.gameserver.model.items.storage.PlayerStorage;
+import com.aionemu.gameserver.model.items.storage.Storage;
+import com.aionemu.gameserver.model.items.storage.StorageType;
 import com.aionemu.gameserver.model.skill.PlayerSkillList;
 import com.aionemu.gameserver.model.stats.container.PlayerGameStats;
 import com.aionemu.gameserver.model.stats.container.PlayerLifeStats;
@@ -82,9 +85,10 @@ import com.aionemu.gameserver.world.WorldPosition;
 public class Player extends Creature {
 
 	public volatile RideInfo ride;
-	public volatile InRoll inRoll;
+
 	private final PlayerAccountData playerAccountData;
 	private final Account playerAccount;
+	private final Object itemSaveLock = new Object();
 	private LegionMember legionMember;
 
 	private Macros macros;
@@ -181,7 +185,7 @@ public class Player extends Creature {
 	private float[] battleReturnCoords;
 	private int robotId;
 	private boolean isInFfaTeamMode;
-	private int customStates;
+	private final AtomicInteger customStates = new AtomicInteger();
 	private PanesterraFaction panesterraFaction;
 
 	public Player(PlayerAccountData playerAccountData, Account account) {
@@ -555,28 +559,10 @@ public class Player extends Creature {
 	}
 
 	/**
-	 * Items from UPDATE_REQUIRED storages and equipment
-	 * 
-	 * @return
+	 * @return The lock that saves of this player's items take one after another, see InventoryDAO.store(Player).
 	 */
-	public List<Item> getDirtyItemsToUpdate() {
-		List<Item> dirtyItems = new ArrayList<>();
-
-		for (StorageType st : StorageType.values()) {
-			IStorage storage = getStorage(st.getId());
-			if (storage != null && storage.getPersistentState() == PersistentState.UPDATE_REQUIRED) {
-				dirtyItems.addAll(storage.getItemsWithKinah());
-				dirtyItems.addAll(storage.getDeletedItems());
-				storage.setPersistentState(PersistentState.UPDATED);
-			}
-		}
-
-		if (equipment.getPersistentState() == PersistentState.UPDATE_REQUIRED) {
-			dirtyItems.addAll(equipment.getEquippedItems());
-			equipment.setPersistentState(PersistentState.UPDATED);
-		}
-
-		return dirtyItems;
+	public Object getItemSaveLock() {
+		return itemSaveLock;
 	}
 
 	public List<Item> getAllItems() {
@@ -1648,15 +1634,15 @@ public class Player extends Creature {
 	}
 
 	public void setCustomState(CustomPlayerState state) {
-		customStates |= state.getMask();
+		customStates.getAndUpdate(states -> states | state.getMask());
 	}
 
 	public void unsetCustomState(CustomPlayerState state) {
-		customStates &= ~state.getMask();
+		customStates.getAndUpdate(states -> states & ~state.getMask());
 	}
 
 	public boolean isInCustomState(CustomPlayerState state) {
-		return (customStates & state.getMask()) == state.getMask();
+		return (customStates.get() & state.getMask()) == state.getMask();
 	}
 
 	public PanesterraFaction getPanesterraFaction() {

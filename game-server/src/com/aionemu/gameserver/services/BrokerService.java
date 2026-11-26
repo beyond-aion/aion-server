@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.configs.main.LoggingConfig;
 import com.aionemu.gameserver.dao.BrokerDAO;
-import com.aionemu.gameserver.dao.InventoryDAO;
 import com.aionemu.gameserver.dao.ItemStoneListDAO;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.broker.BrokerItemMask;
@@ -21,6 +20,7 @@ import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
+import com.aionemu.gameserver.model.items.storage.Storage;
 import com.aionemu.gameserver.model.items.storage.StorageType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_BROKER_SERVICE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DELETE_ITEM;
@@ -37,6 +37,7 @@ import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.utils.collections.DynamicServerPacketBodySplitList;
 import com.aionemu.gameserver.utils.collections.ListPart;
 import com.aionemu.gameserver.utils.collections.SplitList;
+import com.aionemu.gameserver.utils.idfactory.IDFactory;
 import com.aionemu.gameserver.world.World;
 
 /**
@@ -157,6 +158,8 @@ public class BrokerService {
 				counter++;
 			}
 		}
+		if (counter == 0) // the last one was bought, canceled or expired since the search, which doesn't hold the lock of the listings
+			return 0;
 		average = sum / counter;
 		return average;
 	}
@@ -228,6 +231,12 @@ public class BrokerService {
 		if (!PlayerRestrictions.canTrade(player))
 			return;
 
+		// purchases of all players wait for this lock, so nothing in it may wait for the database: names of offline sellers are looked up afterwards
+		Item boughtItem;
+		int sellerId;
+		long price;
+		BrokerItem soldItem;
+		List<BrokerItem> listings;
 		synchronized (this) {
 			BrokerItem buyingItem = getRaceBrokerItems(playerRace).get(itemUniqueId);
 			if (buyingItem == null)
@@ -240,10 +249,9 @@ public class BrokerService {
 
 			if (buyingItem.isSold() || buyingItem.isCanceled()) {
 				LoggerFactory.getLogger(BrokerService.class).warn(
-					"Player {} tried to buy the following item[id={}, objId={}, sellerId={}, sellerName={}, sold={}, canceled={}, settled={}, expireTime={}] which is already sold or canceled",
-					player.getName(), buyingItem.getItemId(), buyingItem.getItemUniqueId(), buyingItem.getSellerId(),
-					PlayerService.getPlayerName(buyingItem.getSellerId()), buyingItem.isSold(), buyingItem.isCanceled(), buyingItem.isSettled(),
-					buyingItem.getExpireTime());
+					"Player {} tried to buy the following item[id={}, objId={}, sellerId={}, sold={}, canceled={}, settled={}, expireTime={}] which is already sold or canceled",
+					player.getName(), buyingItem.getItemId(), buyingItem.getItemUniqueId(), buyingItem.getSellerId(), buyingItem.isSold(),
+					buyingItem.isCanceled(), buyingItem.isSettled(), buyingItem.getExpireTime());
 				PacketSendUtility.sendMessage(player, "Sorry, but this item already sold");
 				return;
 			}
@@ -255,66 +263,86 @@ public class BrokerService {
 			}
 
 			Item item = buyingItem.getItem();
-			long price = buyingItem.getPrice() * itemCount;
+			price = buyingItem.getPrice() * itemCount;
 			if (player.getInventory().isFull(item.getItemTemplate().getExtraInventoryId())) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_FULL_INVENTORY());
 				return;
 			}
 
-			if (player.getInventory().getKinah() < price)
+			Storage inventory = player.getInventory();
+			if (!inventory.tryDecreaseKinah(price))
 				return;
 
-			if (buyingItem.getItemCount() > itemCount && buyingItem.isSplittingAvailable()) {
+			boolean split = buyingItem.getItemCount() > itemCount;
+			Item purchased = split ? ItemFactory.newItem(buyingItem.getItemId(), itemCount) : item;
+			if (split)
+				purchased.setExpireTime(item.getExpireTime());
+			int packCount = purchased.getPackCount();
+			if (packCount > 0)
+				purchased.setPackCount(-packCount);
+			boughtItem = inventory.add(purchased, ItemPacketService.ItemAddType.BROKER_BUY);
+			if (boughtItem == null) {
+				if (split)
+					IDFactory.getInstance().releaseId(purchased.getObjectId());
+				else if (packCount > 0)
+					purchased.setPackCount(packCount);
+				inventory.increaseKinah(price);
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_FULL_INVENTORY());
+				return;
+			}
+			if (split) {
 				buyingItem.decreaseItemCount(itemCount);
 				buyingItem.setPersistentState(PersistentState.UPDATE_REQUIRED);
-				// storing old broker item with rest items to sell
-				BrokerOpSaveTask bost = new BrokerOpSaveTask(buyingItem, buyingItem.getItem(), player.getInventory().getKinahItem(), player.getObjectId());
-				saveManager.add(bost);
-				// creating new broker item which will be settled
-				Item soldPart = ItemFactory.newItem(buyingItem.getItemId(), itemCount);
-				soldPart.setExpireTime(item.getExpireTime());
-				BrokerItem soldItem = new BrokerItem(soldPart, buyingItem.getPrice(), buyingItem.getSellerId(), buyingItem.isSplittingAvailable(),
+				soldItem = new BrokerItem(boughtItem, buyingItem.getPrice(), buyingItem.getSellerId(), buyingItem.isSplittingAvailable(),
 					buyingItem.getItemBrokerRace());
-				buyingItem = soldItem;
-				item = buyingItem.getItem();
-				BrokerOpSaveTask bost2 = new BrokerOpSaveTask(buyingItem, buyingItem.getItem(), player.getInventory().getKinahItem(), player.getObjectId());
-				saveManager.add(bost2);
+				listings = List.of(buyingItem, soldItem);
 			} else {
 				getRaceBrokerItems(playerRace).remove(itemUniqueId);
+				soldItem = buyingItem;
+				listings = List.of(soldItem);
 			}
+			// the seller sees it only after the save, so they can't collect the earnings of a sale that a crash would undo
+			soldItem.removeItem();
+			soldItem.setPersistentState(PersistentState.UPDATE_REQUIRED);
 
-			putToSettled(playerRace, buyingItem, true);
+			getPlayerCache(player).removeFromCache(soldItem);
 
-			getPlayerCache(player).removeFromCache(buyingItem);
-
-			player.getInventory().decreaseKinah(price);
-			// unpack
-			if (item.getPackCount() > 0) {
-				item.setPackCount(item.getPackCount() * -1);
-			}
-			Item boughtItem = player.getInventory().add(item, ItemPacketService.ItemAddType.BROKER_BUY);
-
-			if (LoggingConfig.LOG_BROKER_EXCHANGE)
-				log.info("Player: {} bought item {} [{}] (count: {}) from player: {} (total price: {})", player.getName(), boughtItem.getItemId(),
-					boughtItem.getItemName(), itemCount, PlayerService.getPlayerName(buyingItem.getSellerId()), price);
-
-			// create save task
-			BrokerOpSaveTask bost = new BrokerOpSaveTask(buyingItem, boughtItem, player.getInventory().getKinahItem(), player.getObjectId());
-			saveManager.add(bost);
+			sellerId = soldItem.getSellerId();
 		}
+		// Listings and buyer's items in one transaction, or a crash before the broker's next save leaves the item with both seller and buyer.
+		// Without the broker's lock, and before the buyer's next packet can move the item again.
+		synchronized (player.getItemSaveLock()) {
+			Storage inventory = player.getInventory();
+			boolean saved;
+			synchronized (saveManager) { // writes the count of a listing in order with the other purchases and the queued saves
+				saved = BrokerDAO.storePurchase(listings, List.of(boughtItem, inventory.getKinahItem()), player.getObjectId());
+			}
+			if (saved) {
+				ItemStoneListDAO.save(List.of(boughtItem));
+			} else {
+				listings.forEach(listing -> saveManager.add(new BrokerOpSaveTask(listing)));
+				synchronized (inventory) {
+					inventory.setPersistentState(PersistentState.UPDATE_REQUIRED);
+				}
+			}
+		}
+		addSettled(playerRace, soldItem);
+		if (LoggingConfig.LOG_BROKER_EXCHANGE)
+			log.info("Player: {} bought item {} [{}] (count: {}) from player: {} (total price: {})", player.getName(), boughtItem.getItemId(),
+				boughtItem.getItemName(), itemCount, PlayerService.getPlayerName(sellerId), price);
 		showRequestedItems(player, getPlayerCache(player).getBrokerMaskCache(), getPlayerCache(player).getBrokerSortTypeCache(),
 			getPlayerCache(player).getBrokerStartPageCache(), getPlayerCache(player).getSearchItemList());
 
 	}
 
-	private void putToSettled(Race race, BrokerItem brokerItem, boolean isSold) {
-		if (isSold)
-			brokerItem.removeItem();
-		else
-			brokerItem.setSettled();
-
+	private void putToSettled(Race race, BrokerItem brokerItem) {
+		brokerItem.setSettled();
 		brokerItem.setPersistentState(PersistentState.UPDATE_REQUIRED);
+		addSettled(race, brokerItem);
+		saveManager.add(new BrokerOpSaveTask(brokerItem));
+	}
 
+	private void addSettled(Race race, BrokerItem brokerItem) {
 		switch (race) {
 			case ASMODIANS:
 				asmodianSettledItems.put(brokerItem.getItemUniqueId(), brokerItem);
@@ -324,7 +352,6 @@ public class BrokerService {
 				elyosSettledItems.put(brokerItem.getItemUniqueId(), brokerItem);
 				break;
 		}
-		saveManager.add(new BrokerOpSaveTask(brokerItem));
 		Player seller = World.getInstance().getPlayer(brokerItem.getSellerId());
 		if (seller != null) {
 			PacketSendUtility.sendPacket(seller, new SM_BROKER_SERVICE(true, getEarnedKinahFromSoldItems(seller.getRace(), seller.getObjectId())));
@@ -400,19 +427,35 @@ public class BrokerService {
 		if (!itemToRegister.getItemTemplate().isStackable())
 			splittingAvailable = false;
 
-		player.getInventory().decreaseKinah(registrationCommition);
-		if (itemToRegister.getItemTemplate().isStackable() && count < itemToRegister.getItemCount()) {
-			int itemId = itemToRegister.getItemId();
-			player.getInventory().decreaseItemCount(itemToRegister, count);
-			itemToRegister = ItemFactory.newItem(itemId, count);
-		} else {
-			player.getInventory().remove(itemToRegister);
-			PacketSendUtility.sendPacket(player, new SM_DELETE_ITEM(itemToRegister.getObjectId()));
+		BrokerItem newBrokerItem;
+		synchronized (player.getItemSaveLock()) {
+			Storage inventory = player.getInventory();
+			if (!inventory.tryDecreaseKinah(registrationCommition)) {
+				PacketSendUtility.sendPacket(player, new SM_BROKER_SERVICE(BrokerMessages.NO_ENOUGHT_KINAH.getId()));
+				return;
+			}
+			boolean split = itemToRegister.getItemTemplate().isStackable() && count < itemToRegister.getItemCount();
+			// taken out before the save, so it can't be used or lost while the listing is written and then be both listed and gone
+			boolean removed = split ? inventory.decreaseByObjectId(itemToRegister.getObjectId(), count) : inventory.remove(itemToRegister) != null;
+			if (!removed) {
+				inventory.increaseKinah(registrationCommition);
+				return;
+			}
+			Item listedItem = split ? ItemFactory.newItem(itemToRegister.getItemId(), count) : itemToRegister;
+			listedItem.setItemLocation(StorageType.BROKER.getId());
+			newBrokerItem = new BrokerItem(listedItem, price, player.getObjectId(), splittingAvailable, brRace);
+			Item kinahItem = inventory.getKinahItem();
+			List<Item> items = split ? List.of(listedItem, itemToRegister, kinahItem) : List.of(listedItem, kinahItem);
+			if (!BrokerDAO.register(newBrokerItem, items)) {
+				returnItemToInventory(itemToRegister, listedItem, player, inventory);
+				inventory.increaseKinah(registrationCommition);
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_VENDOR_CAN_NOT_REGISTER_ITEM());
+				return;
+			}
+			ItemStoneListDAO.save(List.of(listedItem));
+			if (!split)
+				PacketSendUtility.sendPacket(player, new SM_DELETE_ITEM(itemToRegister.getObjectId()));
 		}
-
-		itemToRegister.setItemLocation(StorageType.BROKER.getId());
-
-		BrokerItem newBrokerItem = new BrokerItem(itemToRegister, price, player.getObjectId(), splittingAvailable, brRace);
 
 		switch (brRace) {
 			case ASMODIAN:
@@ -424,10 +467,21 @@ public class BrokerService {
 				break;
 		}
 
-		BrokerOpSaveTask bost = new BrokerOpSaveTask(newBrokerItem, itemToRegister, player.getInventory().getKinahItem(), player.getObjectId());
-		saveManager.add(bost);
-
 		PacketSendUtility.sendPacket(player, new SM_BROKER_SERVICE(newBrokerItem, 0, registeredItemsCount));
+	}
+
+	private static void returnItemToInventory(Item itemToRegister, Item listedItem, Player player, Storage inventory) {
+		if (itemToRegister != listedItem) {
+			if (inventory.getItemByObjId(itemToRegister.getObjectId()) != null) {
+				inventory.increaseItemCount(itemToRegister, listedItem.getItemCount());
+				IDFactory.getInstance().releaseId(listedItem.getObjectId());
+			} else {
+				inventory.add(listedItem);
+			}
+		} else {
+			PacketSendUtility.sendPacket(player, new SM_DELETE_ITEM(itemToRegister.getObjectId()));
+			inventory.add(itemToRegister);
+		}
 	}
 
 	public void showSellWindow(Player player, int itemUniqueId) {
@@ -484,12 +538,18 @@ public class BrokerService {
 				return;
 			}
 			synchronized (this) {
-				player.getInventory().add(brokerItem.getItem(), ItemPacketService.ItemAddType.BROKER_RETURN);
-				brokerItem.setPersistentState(PersistentState.DELETED);
-				saveManager.add(new BrokerOpSaveTask(brokerItem));
-				brokerItem.setIsCanceled(true);
-				brokerItems.remove(brokerItemId);
-				PacketSendUtility.sendPacket(player, new SM_BROKER_SERVICE((byte) 0, brokerItemId));
+				// a buyer or the expiry may have taken the item since it was looked up, then it is no longer the seller's to take back
+				if (brokerItems.remove(brokerItemId, brokerItem)) {
+					if (player.getInventory().add(brokerItem.getItem(), ItemPacketService.ItemAddType.BROKER_RETURN) == null) { // filled since the check
+						brokerItems.put(brokerItemId, brokerItem);
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_EXCHANGE_FULL_INVENTORY());
+						return;
+					}
+					brokerItem.setPersistentState(PersistentState.DELETED);
+					saveManager.add(new BrokerOpSaveTask(brokerItem));
+					brokerItem.setIsCanceled(true);
+					PacketSendUtility.sendPacket(player, new SM_BROKER_SERVICE((byte) 0, brokerItemId));
+				}
 			}
 		}
 		showRegisteredItems(player);
@@ -529,6 +589,8 @@ public class BrokerService {
 	}
 
 	public void settleAccount(Player player) {
+		if (!PlayerRestrictions.canTrade(player)) // a trade partner's thread puts the traded items into the inventory, which isn't thread safe
+			return;
 		Race playerRace = player.getRace();
 		Map<Integer, BrokerItem> brokerSettledItems = getRaceBrokerSettledItems(playerRace);
 		List<BrokerItem> collectedItems = new ArrayList<>();
@@ -599,12 +661,19 @@ public class BrokerService {
 			for (BrokerItem item : brokerItems.values()) {
 				if (item != null && item.getExpireTime().getTime() <= now) {
 					synchronized (this) {
-						putToSettled(race, item, false);
-						brokerItems.remove(item.getItemUniqueId());
+						if (brokerItems.remove(item.getItemUniqueId(), item)) // not bought or canceled in the meantime
+							putToSettled(race, item);
 					}
 				}
 			}
 		}
+	}
+
+	/**
+	 * Runs the queued saves, which the thread pool drops when it shuts down. Called after the players left.
+	 */
+	public void onShutdown() {
+		saveManager.run();
 	}
 
 	public void onPlayerLogin(Player player) {
@@ -677,35 +746,11 @@ public class BrokerService {
 	/**
 	 * This class is used for storing all items in one shot after any broker operation
 	 */
-	public static final class BrokerOpSaveTask implements Runnable {
-
-		private BrokerItem brokerItem;
-		private Item item;
-		private Item kinahItem;
-		private int playerId;
-
-		private BrokerOpSaveTask(BrokerItem brokerItem, Item item, Item kinahItem, int playerId) {
-			this.brokerItem = brokerItem;
-			this.item = item;
-			this.kinahItem = kinahItem;
-			this.playerId = playerId;
-		}
-
-		public BrokerOpSaveTask(BrokerItem brokerItem) {
-			this.brokerItem = brokerItem;
-		}
+	public record BrokerOpSaveTask(BrokerItem brokerItem) implements Runnable {
 
 		@Override
 		public void run() {
-			// first save item for FK consistency
-			if (item != null) {
-				InventoryDAO.store(item, playerId);
-				ItemStoneListDAO.save(List.of(item));
-			}
-			if (brokerItem != null)
-				BrokerDAO.store(brokerItem);
-			if (kinahItem != null)
-				InventoryDAO.store(kinahItem, playerId);
+			BrokerDAO.store(brokerItem);
 		}
 
 	}

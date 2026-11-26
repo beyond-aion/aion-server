@@ -1,13 +1,12 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
 import static com.aionemu.gameserver.model.gameobjects.PetDopingAction.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
+
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
 
 class PetDopingPacketTest {
 
@@ -28,16 +27,19 @@ class PetDopingPacketTest {
 	}
 
 	private static void assertDopingBody(SM_PET packet, int action, int... values) {
-		ByteBuffer buffer = ByteBuffer.allocate(12).order(ByteOrder.LITTLE_ENDIAN);
-		packet.setBuf(buffer);
-		packet.writeImpl(null);
-		buffer.flip();
+		ByteBuf buffer = Unpooled.buffer(12);
+		try {
+			packet.setBuf(buffer);
+			packet.writeImpl(null);
 
-		assertEquals(13, buffer.getShort());
-		assertEquals(2, buffer.get());
-		assertEquals(action, buffer.get());
-		for (int value : values)
-			assertEquals(value, buffer.getInt());
-		assertFalse(buffer.hasRemaining());
+			assertEquals(13, buffer.readShortLE());
+			assertEquals(2, buffer.readByte());
+			assertEquals(action, buffer.readByte());
+			for (int value : values)
+				assertEquals(value, buffer.readIntLE());
+			assertFalse(buffer.isReadable());
+		} finally {
+			buffer.release();
+		}
 	}
 }

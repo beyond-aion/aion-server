@@ -1,8 +1,8 @@
 package com.aionemu.gameserver.network.aion.iteminfo;
 
-import java.nio.ByteBuffer;
-
 import com.aionemu.gameserver.network.aion.iteminfo.ItemInfoBlob.ItemBlobType;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * @author Rolandas
@@ -14,7 +14,7 @@ public class StigmaShardInfoBlobEntry extends ItemBlobEntry {
 	}
 
 	@Override
-	public void writeThisBlob(ByteBuffer buf) {
+	public void writeThisBlob(ByteBuf buf) {
 		writeD(buf, 0);
 	}
 

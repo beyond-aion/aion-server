@@ -28,7 +28,7 @@ public class BroadcastService {
 	}
 
 	public void removeClient(ChatClient client) {
-		clients.remove(client.getClientId());
+		clients.remove(client.getClientId(), client);
 	}
 
 	public void broadcastMessage(Message message) {

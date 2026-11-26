@@ -1,11 +1,11 @@
 package com.aionemu.chatserver.network.gameserver;
 
-import java.nio.ByteBuffer;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.network.packet.BaseClientPacket;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * @author KID
@@ -14,8 +14,8 @@ public abstract class GsClientPacket extends BaseClientPacket<GsConnection> {
 
 	private static final Logger log = LoggerFactory.getLogger(GsClientPacket.class);
 
-	public GsClientPacket(ByteBuffer buffer, GsConnection connection, int opCode) {
-		super(opCode);
+	public GsClientPacket(ByteBuf buf, GsConnection connection, int opcode) {
+		super(opcode, buf, connection);
 	}
 
 	@Override

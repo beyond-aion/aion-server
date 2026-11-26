@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.network.aion.instanceinfo;
 
-import java.nio.ByteBuffer;
 import java.util.List;
 
 import com.aionemu.gameserver.model.Race;
@@ -9,6 +8,8 @@ import com.aionemu.gameserver.model.instance.InstanceProgressionType;
 import com.aionemu.gameserver.model.instance.InstanceScoreType;
 import com.aionemu.gameserver.model.instance.instancescore.PvpInstanceScore;
 import com.aionemu.gameserver.model.instance.playerreward.PvpInstancePlayerReward;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * @author Estrayl
@@ -47,7 +48,7 @@ public class PvpInstanceScoreWriter extends InstanceScoreWriter<PvpInstanceScore
 	}
 
 	@Override
-	public void writeMe(ByteBuffer buf) {
+	public void writeMe(ByteBuf buf) {
 		writeC(buf, instanceScoreType.getId());
 		switch (instanceScoreType) {
 			case UPDATE_INSTANCE_PROGRESS -> writeD(buf, instanceScore.getInstanceProgressionType() == InstanceProgressionType.START_PROGRESS ? 0 : 2);
@@ -76,7 +77,7 @@ public class PvpInstanceScoreWriter extends InstanceScoreWriter<PvpInstanceScore
 		}
 	}
 
-	private void writeShowReward(ByteBuffer buf) {
+	private void writeShowReward(ByteBuf buf) {
 		PvpInstancePlayerReward reward = instanceScore.getPlayerReward(objectId);
 		writeD(buf, 100); // Participation
 		writeD(buf, reward.getBaseAp());
@@ -98,7 +99,7 @@ public class PvpInstanceScoreWriter extends InstanceScoreWriter<PvpInstanceScore
 		writeC(buf, reward.getBonusRewardItemId() > 0 ? 1 : 0); // showBonusReward flag
 	}
 
-	private void writeUpdateScoreToBuffer(ByteBuffer buf) {
+	private void writeUpdateScoreToBuffer(ByteBuf buf) {
 		writeD(buf, 100); // Should be differentiated between asmos and elyos
 		writePlayerBuffInfo(buf, participants.stream().filter(p -> p.getRace() == Race.ELYOS).toList());
 		writePlayerBuffInfo(buf, participants.stream().filter(p -> p.getRace() == Race.ASMODIANS).toList());
@@ -114,12 +115,12 @@ public class PvpInstanceScoreWriter extends InstanceScoreWriter<PvpInstanceScore
 		writeD(buf, instanceScore.getRaceWithHighestPoints().getRaceId());
 	}
 
-	private void writePlayerFullData(ByteBuffer buf) {
+	private void writePlayerFullData(ByteBuf buf) {
 		writePlayerFullData(buf, participants.stream().filter(p -> p.getRace() == Race.ELYOS).toList());
 		writePlayerFullData(buf, participants.stream().filter(p -> p.getRace() == Race.ASMODIANS).toList());
 	}
 
-	private void writePlayerFullData(ByteBuffer buf, List<Player> players) {
+	private void writePlayerFullData(ByteBuf buf, List<Player> players) {
 		for (Player player : players) { // 69 bytes per player
 			PvpInstancePlayerReward reward = instanceScore.getPlayerReward(player.getObjectId());
 			if (reward == null)
@@ -136,7 +137,7 @@ public class PvpInstanceScoreWriter extends InstanceScoreWriter<PvpInstanceScore
 		writeEmptyDataToBuffer(buf, 69, MAXIMUM_PLAYER_COUNT_PER_FACTION - players.size());
 	}
 
-	private void writePlayerBuffInfo(ByteBuffer buf, List<Player> players) {
+	private void writePlayerBuffInfo(ByteBuf buf, List<Player> players) {
 		for (Player player : players) {
 			writeD(buf, 0); // should be instance buff ID
 			writeD(buf, player.isDead() ? 60 : 0); // was previously used for remaining instance buff time
@@ -145,7 +146,7 @@ public class PvpInstanceScoreWriter extends InstanceScoreWriter<PvpInstanceScore
 		writeEmptyDataToBuffer(buf, 12, MAXIMUM_PLAYER_COUNT_PER_FACTION - players.size());
 	}
 
-	private void writeEmptyDataToBuffer(ByteBuffer buf, int dataSize, int missingPlayerCount) {
+	private void writeEmptyDataToBuffer(ByteBuf buf, int dataSize, int missingPlayerCount) {
 		writeB(buf, new byte[dataSize * missingPlayerCount]);
 	}
 }

@@ -61,9 +61,6 @@ public class HousingConfig {
 	@Property(key = "gameserver.housing.auction.grace_end_refund", defaultValue = "0.5")
 	public static float AUCTION_GRACE_END_REFUND_PERCENT;
 
-	@Property(key = "gameserver.housing.auction.steplimit", defaultValue = "100")
-	public static float AUCTION_BID_STEP_LIMIT;
-
 	@Property(key = "gameserver.housing.auction.auto_fill.time", defaultValue = "0 0 0 ? * MON")
 	public static CronExpression AUCTION_AUTO_FILL_TIME;
 	@Properties(keyPattern = "^gameserver\\.housing\\.auction\\.auto_fill\\.limit\\.(.+)")

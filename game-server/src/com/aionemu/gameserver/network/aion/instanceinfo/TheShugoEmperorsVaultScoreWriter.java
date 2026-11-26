@@ -1,8 +1,8 @@
 package com.aionemu.gameserver.network.aion.instanceinfo;
 
-import java.nio.ByteBuffer;
-
 import com.aionemu.gameserver.model.instance.instancescore.NormalScore;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * Created by Yeats on 01.05.2016.
@@ -14,7 +14,7 @@ public class TheShugoEmperorsVaultScoreWriter extends InstanceScoreWriter<Normal
 	}
 
 	@Override
-	public void writeMe(ByteBuffer buf) {
+	public void writeMe(ByteBuf buf) {
 		writeD(buf, instanceScore.getPoints());
 		writeD(buf, instanceScore.getBasicAp());
 		writeD(buf, 0);

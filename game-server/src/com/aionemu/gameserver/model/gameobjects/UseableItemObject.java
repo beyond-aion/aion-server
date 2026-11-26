@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.model.gameobjects;
 
-import java.nio.ByteBuffer;
 import java.time.LocalTime;
 
 import org.slf4j.LoggerFactory;
@@ -20,6 +19,8 @@ import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.time.ServerTime;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * @author Rolandas, Neon
@@ -46,7 +47,7 @@ public class UseableItemObject extends UseableHouseObject<HousingUseableItem> {
 		}
 
 		@Override
-		protected void writeMe(ByteBuffer buffer) {
+		protected void writeMe(ByteBuf buffer) {
 			writeD(buffer, obj.getObjectTemplate().getUseCount() == null ? 0 : obj.getOwnerUsedCount() + obj.getVisitorUsedCount());
 			UseItemAction action = obj.getObjectTemplate().getAction();
 			writeC(buffer, action == null || action.getCheckType() == null ? 0 : action.getCheckType());
@@ -209,7 +210,7 @@ public class UseableItemObject extends UseableHouseObject<HousingUseableItem> {
 		return !mustGiveLastReward && !isOccupied();
 	}
 
-	public void writeUsageData(ByteBuffer buffer) {
+	public void writeUsageData(ByteBuf buffer) {
 		entryWriter.writeMe(buffer);
 	}
 

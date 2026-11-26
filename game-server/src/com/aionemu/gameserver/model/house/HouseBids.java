@@ -1,7 +1,9 @@
 package com.aionemu.gameserver.model.house;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import com.aionemu.gameserver.configs.main.HousingConfig;
@@ -62,7 +64,7 @@ public class HouseBids {
 	}
 
 	public synchronized Bid getHighestBid() {
-		return bids.get(bids.size() - 1);
+		return bids.getLast();
 	}
 
 	public synchronized Bid getLatestBid(Player player) {
@@ -74,8 +76,20 @@ public class HouseBids {
 		return null;
 	}
 
+	public synchronized Set<Integer> getBidderIds() {
+		Set<Integer> bidderIds = new HashSet<>();
+		for (int i = 1; i < bids.size(); i++)
+			bidderIds.add(bids.get(i).getPlayerObjectId());
+		bidderIds.remove(0);
+		return bidderIds;
+	}
+
 	public synchronized Bid getInitialOffer() {
-		return bids.get(0);
+		return bids.getFirst();
+	}
+
+	public synchronized boolean removeBid(Bid bid) {
+		return bids.remove(bid);
 	}
 
 	public synchronized int getBidCount() {

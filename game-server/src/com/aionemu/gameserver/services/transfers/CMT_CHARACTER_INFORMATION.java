@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.services.transfers;
 
-import java.nio.ByteBuffer;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,13 +43,15 @@ import com.aionemu.gameserver.utils.idfactory.IDFactory;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldPosition;
 
+import io.netty.buffer.ByteBuf;
+
 /**
  * @author KID
  */
 public class CMT_CHARACTER_INFORMATION extends BaseClientPacket<AionConnection> {
 
-	protected CMT_CHARACTER_INFORMATION(ByteBuffer byteBuffer) {
-		super(byteBuffer, 0);
+	protected CMT_CHARACTER_INFORMATION(ByteBuf byteBuffer) {
+		super(0, byteBuffer, null);
 	}
 
 	@Override

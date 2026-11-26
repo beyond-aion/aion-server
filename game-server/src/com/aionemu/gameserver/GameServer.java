@@ -1,12 +1,9 @@
 package com.aionemu.gameserver;
 
 import java.lang.management.ManagementFactory;
-import java.time.Duration;
-import java.util.List;
 import java.util.TimeZone;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionException;
-import java.util.concurrent.locks.LockSupport;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.Stream;
 
@@ -16,8 +13,6 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.commons.configuration.transformers.PropertyTransformers;
 import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.commons.logging.Logging;
-import com.aionemu.commons.network.NioServer;
-import com.aionemu.commons.network.ServerCfg;
 import com.aionemu.commons.utils.concurrent.UncaughtExceptionHandler;
 import com.aionemu.commons.utils.info.VersionInfo;
 import com.aionemu.gameserver.ai.AIEngine;
@@ -26,7 +21,6 @@ import com.aionemu.gameserver.configs.Config;
 import com.aionemu.gameserver.configs.main.CleaningConfig;
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.configs.main.GSConfig;
-import com.aionemu.gameserver.configs.network.NetworkConfig;
 import com.aionemu.gameserver.custom.instance.CustomInstanceService;
 import com.aionemu.gameserver.custom.pvpmap.PvpMapService;
 import com.aionemu.gameserver.dao.PlayerDAO;
@@ -36,11 +30,7 @@ import com.aionemu.gameserver.instance.InstanceEngine;
 import com.aionemu.gameserver.model.GameEngine;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.siege.Influence;
-import com.aionemu.gameserver.network.aion.AionConnection;
-import com.aionemu.gameserver.network.aion.GameConnectionFactoryImpl;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_QUIT_RESPONSE;
-import com.aionemu.gameserver.network.chatserver.ChatServer;
-import com.aionemu.gameserver.network.loginserver.LoginServer;
+import com.aionemu.gameserver.network.NetConnector;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.services.*;
 import com.aionemu.gameserver.services.abyss.AbyssRankUpdateService;
@@ -58,7 +48,6 @@ import com.aionemu.gameserver.taskmanager.AbstractPeriodicTaskManager;
 import com.aionemu.gameserver.taskmanager.tasks.housing.AuctionAutoFillTask;
 import com.aionemu.gameserver.taskmanager.tasks.housing.AuctionEndTask;
 import com.aionemu.gameserver.taskmanager.tasks.housing.MaintenanceTask;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.chathandlers.ChatProcessor;
 import com.aionemu.gameserver.utils.cron.ThreadPoolManagerRunnableRunner;
@@ -84,8 +73,6 @@ public class GameServer {
 	}
 	private static final Logger log = LoggerFactory.getLogger(GameServer.class);
 	public static final VersionInfo versionInfo = new VersionInfo(GameServer.class);
-
-	private static NioServer nioServer;
 
 	// TODO remove all this shit
 	private static int ELYOS_COUNT = 0;
@@ -181,24 +168,9 @@ public class GameServer {
 		CustomInstanceService.getInstance();
 		DataManager.waitForValidationToFinishAndShutdownOnFail();
 
-		nioServer = initNioServer();
+		NetConnector.connect();
 		Runtime.getRuntime().addShutdownHook(ShutdownHook.getInstance());
-		LoginServer.getInstance().connect(nioServer);
-		if (GSConfig.ENABLE_CHAT_SERVER)
-			ChatServer.getInstance().connect(nioServer);
 		Logging.logStartupStats(GameServer.class, START_TIME_NANOS, versionInfo, GSConfig.TIME_ZONE_ID);
-	}
-
-	/**
-	 * Starts servers for connection with aion client and login\chat server.
-	 */
-	private static NioServer initNioServer() {
-		if (NetworkConfig.NIO_READ_WRITE_THREADS > 1 && !NetworkConfig.NIO_READ_WRITE_THREADS_UNSAFE_ALLOW)
-			throw new Error("gameserver.network.nio.threads must not exceed 1 (the game server is not thread-safe)");
-		NioServer nioServer = new NioServer(NetworkConfig.NIO_READ_WRITE_THREADS,
-			new ServerCfg(NetworkConfig.CLIENT_SOCKET_ADDRESS, "Aion game clients", new GameConnectionFactoryImpl()));
-		nioServer.connect(ThreadPoolManager.getInstance());
-		return nioServer;
 	}
 
 	/**
@@ -240,39 +212,8 @@ public class GameServer {
 		}
 	}
 
-	public static void shutdownNioServer() {
-		if (nioServer != null) {
-			if (forceStaffClientsToServerSelectionScreen())
-				LockSupport.parkNanos(Duration.ofMillis(200).toNanos()); // wait for login server to accept reconnections
-			nioServer.shutdown();
-		}
-	}
-
-	public static Stream<AionConnection> findClientConnections() {
-		return nioServer.findAllConnections().stream().filter(c -> c instanceof AionConnection).map(c -> (AionConnection) c);
-	}
-
-	private static boolean forceStaffClientsToServerSelectionScreen() {
-		List<AionConnection> staffClients = findClientConnections().filter(c -> c.getAccount() != null && c.getAccount().getAccessLevel() > 0).toList();
-		if (staffClients.isEmpty())
-			return false;
-		staffClients.forEach(c -> {
-			if (c.getState() == AionConnection.State.IN_GAME)
-				PacketSendUtility.sendPacket(c.getActivePlayer(), SM_QUIT_RESPONSE.quitToEditScreen());
-			LoginServer.getInstance().requestAuthReconnection(c.getAccount().getId(), c);
-		});
-		return true;
-	}
-
 	public static boolean isShutdownScheduled() {
 		return ShutdownHook.getInstance().isRunning();
-	}
-
-	/**
-	 * @return true while the server is starting up and has not opened its port yet
-	 */
-	public static boolean isStarting() {
-		return nioServer == null;
 	}
 
 	public static boolean isShuttingDownSoon() {

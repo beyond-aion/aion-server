@@ -10,7 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.database.DatabaseFactory;
-import com.aionemu.gameserver.GameServer;
 import com.aionemu.gameserver.configs.main.CleaningConfig;
 import com.aionemu.gameserver.dao.LegionDAO;
 import com.aionemu.gameserver.dao.LegionMemberDAO;
@@ -18,6 +17,7 @@ import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.dataholders.PlayerExperienceTable;
 import com.aionemu.gameserver.model.team.legion.LegionHistoryAction;
 import com.aionemu.gameserver.model.team.legion.LegionRank;
+import com.aionemu.gameserver.network.NetConnector;
 import com.aionemu.gameserver.services.player.PlayerService;
 import com.aionemu.gameserver.utils.xml.JAXBUtil;
 
@@ -34,7 +34,7 @@ public class DatabaseCleaningService {
 	}
 
 	public static void deletePlayersOnInactiveAccounts() {
-		if (!GameServer.isStarting())
+		if (NetConnector.isInitialized())
 			throw new IllegalStateException("DatabaseCleaningService can only be run on server startup");
 
 		if (CleaningConfig.MIN_ACCOUNT_INACTIVITY_DAYS <= 30)

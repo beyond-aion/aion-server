@@ -1,7 +1,5 @@
 package com.aionemu.chatserver.network.gameserver.clientpackets;
 
-import java.nio.ByteBuffer;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,6 +10,8 @@ import com.aionemu.chatserver.network.gameserver.GsConnection.GameServerConnecti
 import com.aionemu.chatserver.network.gameserver.serverpackets.SM_GS_AUTH_RESPONSE;
 import com.aionemu.chatserver.service.GameServerService;
 
+import io.netty.buffer.ByteBuf;
+
 /**
  * @author ATracer
  */
@@ -21,8 +21,8 @@ public class CM_CS_AUTH extends GsClientPacket {
 	private String password;
 	private byte gameServerId;
 
-	public CM_CS_AUTH(ByteBuffer buf, GsConnection connection) {
-		super(buf, connection, 0x00);
+	public CM_CS_AUTH(ByteBuf buf, GsConnection connection, int opCode) {
+		super(buf, connection, opCode);
 	}
 
 	@Override
@@ -33,7 +33,7 @@ public class CM_CS_AUTH extends GsClientPacket {
 
 	@Override
 	protected void runImpl() {
-		GsAuthResponse resp = GameServerService.getInstance().registerGameServer(gameServerId, password, getConnection().isFromLoopback());
+		GsAuthResponse resp = GameServerService.getInstance().registerGameServer(getConnection(), gameServerId, password);
 		switch (resp) {
 			case AUTHED -> {
 				getConnection().setState(GameServerConnectionState.AUTHED);

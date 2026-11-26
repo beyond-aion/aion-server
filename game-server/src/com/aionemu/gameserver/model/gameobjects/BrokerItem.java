@@ -27,7 +27,10 @@ public class BrokerItem implements Comparable<BrokerItem>, Persistable {
 	private final boolean splittingAvailable;
 	private long averagePrice;
 
-	PersistentState state;
+	private PersistentState state;
+	private int changeCount;
+
+	public record SaveSnapshot(int changeCount, PersistentState state, long itemCount, boolean sold, boolean settled, Timestamp settleTime) {}
 
 	public BrokerItem(Item item, long price, int sellerId, boolean splittingAvailable, BrokerRace itemBrokerRace) {
 		this.item = item;
@@ -85,7 +88,7 @@ public class BrokerItem implements Comparable<BrokerItem>, Persistable {
 		this.isCanceled = isCanceled;
 	}
 
-	public void removeItem() {
+	public synchronized void removeItem() {
 		// this.item = null;
 		this.isSold = true;
 		this.isSettled = true;
@@ -121,13 +124,15 @@ public class BrokerItem implements Comparable<BrokerItem>, Persistable {
 	/**
 	 * @return
 	 */
-	public boolean isSold() {
+	public synchronized boolean isSold() {
 		return this.isSold;
 	}
 
 	@Override
 	@SuppressWarnings("fallthrough")
-	public void setPersistentState(PersistentState persistentState) {
+	public synchronized void setPersistentState(PersistentState persistentState) {
+		if (persistentState != PersistentState.UPDATED)
+			changeCount++;
 		switch (persistentState) {
 			case DELETED:
 				if (this.state == PersistentState.NEW)
@@ -141,19 +146,33 @@ public class BrokerItem implements Comparable<BrokerItem>, Persistable {
 			default:
 				this.state = persistentState;
 		}
-
 	}
 
 	@Override
-	public PersistentState getPersistentState() {
+	public synchronized PersistentState getPersistentState() {
 		return state;
 	}
 
-	public boolean isSettled() {
+	public synchronized SaveSnapshot snapshotForSave() {
+		return new SaveSnapshot(changeCount, state, itemCount, isSold, isSettled, settleTime);
+	}
+
+	public synchronized void setSaved(int changeCount, PersistentState savedState) {
+		if (this.changeCount == changeCount || savedState == PersistentState.DELETED && state == PersistentState.DELETED) {
+			state = PersistentState.UPDATED;
+		} else if (savedState == PersistentState.NEW) {
+			if (state == PersistentState.NEW)
+				state = PersistentState.UPDATE_REQUIRED;
+			else if (state == PersistentState.NOACTION)
+				state = PersistentState.DELETED;
+		}
+	}
+
+	public synchronized boolean isSettled() {
 		return isSettled;
 	}
 
-	public void setSettled() {
+	public synchronized void setSettled() {
 		this.isSettled = true;
 		this.settleTime = new Timestamp(System.currentTimeMillis());
 	}
@@ -162,15 +181,15 @@ public class BrokerItem implements Comparable<BrokerItem>, Persistable {
 		return expireTime;
 	}
 
-	public Timestamp getSettleTime() {
+	public synchronized Timestamp getSettleTime() {
 		return settleTime;
 	}
 
-	public long getItemCount() {
+	public synchronized long getItemCount() {
 		return itemCount;
 	}
 
-	public void decreaseItemCount(long value) {
+	public synchronized void decreaseItemCount(long value) {
 		this.itemCount -= value;
 		this.item.decreaseItemCount(value);
 	}

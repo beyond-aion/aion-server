@@ -1,6 +1,7 @@
 package com.aionemu.commons.utils;
 
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.random.RandomGenerator;
 import java.util.stream.DoubleStream;
 import java.util.stream.IntStream;
@@ -13,14 +14,8 @@ import org.slf4j.LoggerFactory;
  */
 public final class Rnd {
 
-	// not thread-safe, only used to split off thread-local generators
-	private static final RandomGenerator.SplittableGenerator splittableGenerator = RandomGenerator.SplittableGenerator.of("L64X256MixRandom");
-
-	private static final ThreadLocal<RandomGenerator> rnd = ThreadLocal.withInitial(() -> {
-		synchronized (splittableGenerator) {
-			return splittableGenerator.split();
-		}
-	});
+	private Rnd() {
+	}
 
 	/**
 	 * To compare this chance with a success rate, evaluate "{@code if (chance() < success rate)}" to determine a success or, alternatively
@@ -38,10 +33,12 @@ public final class Rnd {
 	 */
 	public static int get(int minInclusive, int maxInclusive) {
 		if (maxInclusive < minInclusive) {
-			LoggerFactory.getLogger(Rnd.class).warn("", new IllegalArgumentException("max < min"));
+			LoggerFactory.getLogger(Rnd.class).warn("maxInclusive ({}) < minInclusive ({})", maxInclusive, minInclusive, new IllegalArgumentException());
 			maxInclusive = minInclusive;
 		}
-		return minInclusive == maxInclusive ? minInclusive : (int) nextLong(minInclusive, maxInclusive + 1L);
+		if (minInclusive == maxInclusive)
+			return minInclusive;
+		return maxInclusive < Integer.MAX_VALUE ? nextInt(minInclusive, maxInclusive + 1) : (int) nextLong(minInclusive, maxInclusive + 1L);
 	}
 
 	/**
@@ -71,139 +68,139 @@ public final class Rnd {
 	 * @see RandomGenerator#doubles()
 	 */
 	public static DoubleStream doubles() {
-		return rnd.get().doubles();
+		return ThreadLocalRandom.current().doubles();
 	}
 
 	/**
 	 * @see RandomGenerator#doubles(double, double)
 	 */
 	public static DoubleStream doubles(double randomNumberOrigin, double randomNumberBound) {
-		return rnd.get().doubles(randomNumberOrigin, randomNumberBound);
+		return ThreadLocalRandom.current().doubles(randomNumberOrigin, randomNumberBound);
 	}
 
 	/**
 	 * @see RandomGenerator#ints()
 	 */
 	public static IntStream ints() {
-		return rnd.get().ints();
+		return ThreadLocalRandom.current().ints();
 	}
 
 	/**
 	 * @see RandomGenerator#ints(int, int)
 	 */
 	public static IntStream ints(int randomNumberOrigin, int randomNumberBound) {
-		return rnd.get().ints(randomNumberOrigin, randomNumberBound);
+		return ThreadLocalRandom.current().ints(randomNumberOrigin, randomNumberBound);
 	}
 
 	/**
 	 * @see RandomGenerator#longs()
 	 */
 	public static LongStream longs() {
-		return rnd.get().longs();
+		return ThreadLocalRandom.current().longs();
 	}
 
 	/**
 	 * @see RandomGenerator#longs(long, long)
 	 */
 	public static LongStream longs(long randomNumberOrigin, long randomNumberBound) {
-		return rnd.get().longs(randomNumberOrigin, randomNumberBound);
+		return ThreadLocalRandom.current().longs(randomNumberOrigin, randomNumberBound);
 	}
 
 	/**
 	 * @see RandomGenerator#nextBytes(byte[])
 	 */
 	public static void nextBytes(byte[] bytes) {
-		rnd.get().nextBytes(bytes);
+		ThreadLocalRandom.current().nextBytes(bytes);
 	}
 
 	/**
 	 * @see RandomGenerator#nextInt()
 	 */
 	public static int nextInt() {
-		return rnd.get().nextInt();
+		return ThreadLocalRandom.current().nextInt();
 	}
 
 	/**
 	 * @see RandomGenerator#nextInt(int)
 	 */
 	public static int nextInt(int bound) {
-		return rnd.get().nextInt(bound);
+		return ThreadLocalRandom.current().nextInt(bound);
 	}
 
 	/**
 	 * @see RandomGenerator#nextInt(int, int)
 	 */
 	public static int nextInt(int origin, int bound) {
-		return rnd.get().nextInt(origin, bound);
+		return ThreadLocalRandom.current().nextInt(origin, bound);
 	}
 
 	/**
 	 * @see RandomGenerator#nextLong()
 	 */
 	public static long nextLong() {
-		return rnd.get().nextLong();
+		return ThreadLocalRandom.current().nextLong();
 	}
 
 	/**
 	 * @see RandomGenerator#nextLong(long)
 	 */
 	public static long nextLong(long bound) {
-		return rnd.get().nextLong(bound);
+		return ThreadLocalRandom.current().nextLong(bound);
 	}
 
 	/**
 	 * @see RandomGenerator#nextLong(long, long)
 	 */
 	public static long nextLong(long origin, long bound) {
-		return rnd.get().nextLong(origin, bound);
+		return ThreadLocalRandom.current().nextLong(origin, bound);
 	}
 
 	/**
 	 * @see RandomGenerator#nextFloat()
 	 */
 	public static float nextFloat() {
-		return rnd.get().nextFloat();
+		return ThreadLocalRandom.current().nextFloat();
 	}
 
 	/**
 	 * @see RandomGenerator#nextFloat(float)
 	 */
 	public static float nextFloat(float bound) {
-		return rnd.get().nextFloat(bound);
+		return ThreadLocalRandom.current().nextFloat(bound);
 	}
 
 	/**
 	 * @see RandomGenerator#nextFloat(float, float)
 	 */
 	public static float nextFloat(float origin, float bound) {
-		return rnd.get().nextFloat(origin, bound);
+		return ThreadLocalRandom.current().nextFloat(origin, bound);
 	}
 
 	/**
 	 * @see RandomGenerator#nextDouble()
 	 */
 	public static double nextDouble() {
-		return rnd.get().nextDouble();
+		return ThreadLocalRandom.current().nextDouble();
 	}
 
 	/**
 	 * @see RandomGenerator#nextDouble(double)
 	 */
 	public static double nextDouble(double bound) {
-		return rnd.get().nextDouble(bound);
+		return ThreadLocalRandom.current().nextDouble(bound);
 	}
 
 	/**
 	 * @see RandomGenerator#nextDouble(double, double)
 	 */
 	public static double nextDouble(double origin, double bound) {
-		return rnd.get().nextDouble(origin, bound);
+		return ThreadLocalRandom.current().nextDouble(origin, bound);
 	}
 
 	/**
 	 * @see RandomGenerator#nextBoolean()
 	 */
 	public static boolean nextBoolean() {
-		return rnd.get().nextBoolean();
+		return ThreadLocalRandom.current().nextBoolean();
 	}
 }
