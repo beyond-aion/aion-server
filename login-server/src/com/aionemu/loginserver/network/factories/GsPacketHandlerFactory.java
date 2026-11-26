@@ -19,46 +19,34 @@ public class GsPacketHandlerFactory {
 
 	/**
 	 * Reads one packet from given buffer
-	 * 
-	 * @param data
-	 * @param client
-	 * @return GsClientPacket object from binary data
 	 */
 	public static GsClientPacket handle(ByteBuf data, GsConnection client) {
-		GsClientPacket msg = null;
 		State state = client.getState();
-		int id = data.readUnsignedByte();
-
-		switch (state) {
-			case CONNECTED:
-				msg = switch (id) {
-					case 0 -> new CM_GS_AUTH(data, client, id);
-					default -> null;
-				};
-				break;
-			case AUTHED:
-				msg = switch (id) {
-					case 1 -> new CM_ACCOUNT_AUTH(data, client, id);
-					case 2 -> new CM_ACCOUNT_RECONNECT_KEY(data, client, id);
-					case 3 -> new CM_ACCOUNT_DISCONNECTED(data, client, id);
-					case 4 -> new CM_ACCOUNT_LIST(data, client, id);
-					case 5 -> new CM_LS_CONTROL(data, client, id);
-					case 6 -> new CM_BAN(data, client, id);
-					case 7 -> new CM_ACCOUNT_CONNECTION_INFO(data, client, id);
-					case 8 -> new CM_GS_CHARACTER(data, client, id);
-					case 9 -> new CM_MACBAN_CONTROL(data, client, id);
-					case 10 -> new CM_HDDBAN_CONTROL(data, client, id);
-					case 11 -> new CM_CHANGE_ALLOWED_HDD_SERIAL(data, client, id);
-					case 12 -> new CM_GS_PONG(data, client, id);
-					case 13 -> new CM_PTRANSFER_CONTROL(data, client, id);
-					default -> null;
-				};
-				break;
-		}
-
-		if (msg == null)
-			log.warn(String.format("Unknown packet received from Game Server: 0x%02X state=%s", id, state));
-
-		return msg;
+		int opcode = data.readUnsignedByte();
+		GsClientPacket packet = switch (state) {
+			case CONNECTED -> switch (opcode) {
+				case 0 -> new CM_GS_AUTH(data, client, opcode);
+				default -> null;
+			};
+			case AUTHED -> switch (opcode) {
+				case 1 -> new CM_ACCOUNT_AUTH(data, client, opcode);
+				case 2 -> new CM_ACCOUNT_RECONNECT_KEY(data, client, opcode);
+				case 3 -> new CM_ACCOUNT_DISCONNECTED(data, client, opcode);
+				case 4 -> new CM_ACCOUNT_LIST(data, client, opcode);
+				case 5 -> new CM_LS_CONTROL(data, client, opcode);
+				case 6 -> new CM_BAN(data, client, opcode);
+				case 7 -> new CM_ACCOUNT_CONNECTION_INFO(data, client, opcode);
+				case 8 -> new CM_GS_CHARACTER(data, client, opcode);
+				case 9 -> new CM_MACBAN_CONTROL(data, client, opcode);
+				case 10 -> new CM_HDDBAN_CONTROL(data, client, opcode);
+				case 11 -> new CM_CHANGE_ALLOWED_HDD_SERIAL(data, client, opcode);
+				case 12 -> new CM_GS_PONG(data, client, opcode);
+				case 13 -> new CM_PTRANSFER_CONTROL(data, client, opcode);
+				default -> null;
+			};
+		};
+		if (packet == null)
+			log.warn("Unknown packet received from Game Server: {} state {}", "0x%02X".formatted(opcode), state);
+		return packet;
 	}
 }

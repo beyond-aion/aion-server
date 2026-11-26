@@ -22,21 +22,21 @@ public class GsPacketHandlerFactory {
 
 	public static GsClientPacket handle(ByteBuf data, GsConnection client) {
 		GameServerConnectionState state = client.getState();
-		int opCode = data.readUnsignedByte();
+		int opcode = data.readUnsignedByte();
 		GsClientPacket packet = switch (state) {
-			case CONNECTED -> switch (opCode) {
-				case 0x00 -> new CM_CS_AUTH(data, client, opCode);
+			case CONNECTED -> switch (opcode) {
+				case 0x00 -> new CM_CS_AUTH(data, client, opcode);
 				default -> null;
 			};
-			case AUTHED -> switch (opCode) {
-				case 0x01 -> new CM_PLAYER_AUTH(data, client, opCode);
-				case 0x02 -> new CM_PLAYER_LOGOUT(data, client, opCode);
-				case 0x03 -> new CM_PLAYER_GAG(data, client, opCode);
+			case AUTHED -> switch (opcode) {
+				case 0x01 -> new CM_PLAYER_AUTH(data, client, opcode);
+				case 0x02 -> new CM_PLAYER_LOGOUT(data, client, opcode);
+				case 0x03 -> new CM_PLAYER_GAG(data, client, opcode);
 				default -> null;
 			};
 		};
 		if (packet == null)
-			log.warn("Unknown packet received from Game Server: {} state {}", "0x%02X".formatted(opCode), state);
+			log.warn("Unknown packet received from Game Server: {} state {}", "0x%02X".formatted(opcode), state);
 		return packet;
 	}
 }
