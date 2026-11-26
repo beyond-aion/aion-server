@@ -184,12 +184,48 @@ public class InventoryDAO {
 		// Another thread may save the same player at the same time (a trade partner, the auto save, the logout): both would insert the same new item
 		// or release the id of the same deleted one. Not the inventory's monitor, which would stall its changes while the save waits for the database.
 		synchronized (player.getItemSaveLock()) {
-			List<Item> allPlayerItems = player.getDirtyItemsToUpdate();
+			List<Item> allPlayerItems = getDirtyItemsToUpdate(player);
 			if (store(allPlayerItems, playerId, accountId, legionId))
 				return true;
-			player.markItemsForSave(); // collecting them marked their storages as saved, the items that failed would be skipped until the next change
+			markItemsForSave(player); // collecting them marked their storages as saved, the items that failed would be skipped until the next change
 			return false;
 		}
+	}
+
+	private static List<Item> getDirtyItemsToUpdate(Player player) {
+		List<Item> dirtyItems = new ArrayList<>();
+
+		for (StorageType st : StorageType.values()) {
+			Storage storage = player.getStorage(st.getId());
+			if (storage == null)
+				continue;
+			synchronized (storage) {
+				if (storage.getPersistentState() == PersistentState.UPDATE_REQUIRED) {
+					dirtyItems.addAll(storage.getItemsWithKinah());
+					dirtyItems.addAll(storage.getDeletedItems());
+					storage.setPersistentState(PersistentState.UPDATED);
+				}
+			}
+		}
+
+		if (player.getEquipment().getPersistentState() == PersistentState.UPDATE_REQUIRED) {
+			dirtyItems.addAll(player.getEquipment().getEquippedItems());
+			player.getEquipment().setPersistentState(PersistentState.UPDATED);
+		}
+
+		return dirtyItems;
+	}
+
+	private static void markItemsForSave(Player player) {
+		for (StorageType st : StorageType.values()) {
+			Storage storage = player.getStorage(st.getId());
+			if (storage == null)
+				continue;
+			synchronized (storage) {
+				storage.setPersistentState(PersistentState.UPDATE_REQUIRED);
+			}
+		}
+		player.getEquipment().setPersistentState(PersistentState.UPDATE_REQUIRED);
 	}
 
 	public static boolean store(Item item, Player player) {

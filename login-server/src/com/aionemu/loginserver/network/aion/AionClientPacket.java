@@ -31,8 +31,7 @@ public abstract class AionClientPacket extends BaseClientPacket<LoginConnection>
 	 *          packet id
 	 */
 	protected AionClientPacket(ByteBuf buf, LoginConnection client, int opcode) {
-		super(buf, opcode);
-		setConnection(client);
+		super(opcode, buf, client);
 	}
 
 	/**

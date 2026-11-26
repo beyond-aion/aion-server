@@ -26,7 +26,6 @@ import com.aionemu.gameserver.model.actions.PlayerActions;
 import com.aionemu.gameserver.model.actions.PlayerMode;
 import com.aionemu.gameserver.model.animations.ArrivalAnimation;
 import com.aionemu.gameserver.model.gameobjects.*;
-import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.AbyssRank.AbyssRankUpdateType;
 import com.aionemu.gameserver.model.gameobjects.player.emotion.EmotionList;
 import com.aionemu.gameserver.model.gameobjects.player.motion.MotionList;
@@ -36,7 +35,10 @@ import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.gameobjects.state.FlyState;
 import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.model.items.ItemCooldown;
-import com.aionemu.gameserver.model.items.storage.*;
+import com.aionemu.gameserver.model.items.storage.LegionStorageProxy;
+import com.aionemu.gameserver.model.items.storage.PlayerStorage;
+import com.aionemu.gameserver.model.items.storage.Storage;
+import com.aionemu.gameserver.model.items.storage.StorageType;
 import com.aionemu.gameserver.model.skill.PlayerSkillList;
 import com.aionemu.gameserver.model.stats.container.PlayerGameStats;
 import com.aionemu.gameserver.model.stats.container.PlayerLifeStats;
@@ -561,47 +563,6 @@ public class Player extends Creature {
 	 */
 	public Object getItemSaveLock() {
 		return itemSaveLock;
-	}
-
-	/**
-	 * Items from UPDATE_REQUIRED storages and equipment
-	 * 
-	 * @return
-	 */
-	public List<Item> getDirtyItemsToUpdate() {
-		List<Item> dirtyItems = new ArrayList<>();
-
-		for (StorageType st : StorageType.values()) {
-			Storage storage = getStorage(st.getId());
-			if (storage == null)
-				continue;
-			synchronized (storage) {
-				if (storage.getPersistentState() == PersistentState.UPDATE_REQUIRED) {
-					dirtyItems.addAll(storage.getItemsWithKinah());
-					dirtyItems.addAll(storage.getDeletedItems());
-					storage.setPersistentState(PersistentState.UPDATED);
-				}
-			}
-		}
-
-		if (equipment.getPersistentState() == PersistentState.UPDATE_REQUIRED) {
-			dirtyItems.addAll(equipment.getEquippedItems());
-			equipment.setPersistentState(PersistentState.UPDATED);
-		}
-
-		return dirtyItems;
-	}
-
-	public void markItemsForSave() {
-		for (StorageType st : StorageType.values()) {
-			Storage storage = getStorage(st.getId());
-			if (storage == null)
-				continue;
-			synchronized (storage) {
-				storage.setPersistentState(PersistentState.UPDATE_REQUIRED);
-			}
-		}
-		equipment.setPersistentState(PersistentState.UPDATE_REQUIRED);
 	}
 
 	public List<Item> getAllItems() {

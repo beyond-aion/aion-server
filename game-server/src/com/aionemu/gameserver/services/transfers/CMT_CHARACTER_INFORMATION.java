@@ -51,7 +51,7 @@ import io.netty.buffer.ByteBuf;
 public class CMT_CHARACTER_INFORMATION extends BaseClientPacket<AionConnection> {
 
 	protected CMT_CHARACTER_INFORMATION(ByteBuf byteBuffer) {
-		super(byteBuffer, 0);
+		super(0, byteBuffer, null);
 	}
 
 	@Override

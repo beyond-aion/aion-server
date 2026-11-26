@@ -14,9 +14,8 @@ public abstract class AbstractClientPacket extends BaseClientPacket<AionConnecti
 
 	private static final Logger log = LoggerFactory.getLogger(AbstractClientPacket.class);
 
-	public AbstractClientPacket(ByteBuf buf, AionConnection connection, int opCode) {
-		super(buf, opCode);
-		setConnection(connection);
+	public AbstractClientPacket(ByteBuf buf, AionConnection connection, int opcode) {
+		super(opcode, buf, connection);
 	}
 
 	@Override

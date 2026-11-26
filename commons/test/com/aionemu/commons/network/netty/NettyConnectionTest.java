@@ -64,8 +64,8 @@ public class NettyConnectionTest {
 
 		private int value;
 
-		TestClientPacket(ByteBuf buf) {
-			super(buf, 1);
+		TestClientPacket(ByteBuf buf, TestConnection testConnection) {
+			super(1, buf, testConnection);
 		}
 
 		@Override
@@ -116,9 +116,7 @@ public class NettyConnectionTest {
 		@Override
 		protected BaseClientPacket<?> createPacket(ByteBuf data) {
 			createdPackets++;
-			TestClientPacket packet = new TestClientPacket(data);
-			packet.setConnection(this);
-			return packet;
+			return new TestClientPacket(data, this);
 		}
 
 		@Override

@@ -40,7 +40,7 @@ public class PacketCodingTest {
 		private final Consumer<ClientPacket> reader;
 
 		ClientPacket(byte[] data, Consumer<ClientPacket> reader) {
-			super(Unpooled.wrappedBuffer(data), 1);
+			super(1, Unpooled.wrappedBuffer(data), null);
 			this.reader = reader;
 		}
 

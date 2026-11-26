@@ -39,20 +39,13 @@ public abstract class BaseClientPacket<T> extends BasePacket implements Runnable
 	 *          packet opcode.
 	 */
 	public BaseClientPacket(int opcode) {
-		this(null, opcode);
+		this(opcode, null, null);
 	}
 
-	/**
-	 * Constructs a new client packet with specified id and data buffer.
-	 *
-	 * @param buf
-	 *          packet data container.
-	 * @param opcode
-	 *          packet opcode.
-	 */
-	public BaseClientPacket(ByteBuf buf, int opcode) {
+	public BaseClientPacket(int opcode, ByteBuf buf, T connection) {
 		super(opcode);
 		this.buf = buf;
+		this.client = connection;
 	}
 
 	/**
