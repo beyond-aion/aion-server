@@ -156,6 +156,17 @@ public enum ItemGroup {
 		return requiresMastery;
 	}
 
+	/**
+	 * @return Meters per second an auto attack of this weapon needs to reach its target, zero for weapons whose attack lands instantly
+	 */
+	public int getAmmoSpeed() {
+		return switch (this) {
+			case BOW, GUN, CANNON -> 35;
+			case SPELLBOOK, HARP -> 18;
+			default -> 0;
+		};
+	}
+
 	public EquipType getEquipType() {
 		if (armorType != null)
 			return EquipType.ARMOR;

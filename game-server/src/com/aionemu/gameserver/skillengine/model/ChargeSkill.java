@@ -37,7 +37,7 @@ public class ChargeSkill extends Skill {
 		effector.setCasting(this);
 		effector.getObserveController().attach(moveListener);
 		// motion boost state from the charge starting time must not get lost
-		if (effector instanceof Player player && player.isHitTimeBoosted(getCastStartTime()))
+		if (effector instanceof Player player && player.isHitTimeBoostedOnClient(getCastStartTime()))
 			player.setHitTimeBoost(System.currentTimeMillis() + 100, player.getHitTimeBoostCastSpeed());
 		updateHitTime(SecurityConfig.CHECK_ANIMATIONS);
 		endCast();
