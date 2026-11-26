@@ -226,7 +226,6 @@ public final class DataManager {
 		SKILL_ALIAS_LOCATION_DATA = data.skillAliasLocationData;
 		SIGNET_DATA_TEMPLATES = data.signetDataTemplates;
 		xmlValidationTask = data.getValidationTask();
-		data.waitForAfterUnmarshalTasksToFinish();
 
 		// subsequent data processing (must be called after initializing DataManager fields)
 		ITEM_DATA.cleanup();

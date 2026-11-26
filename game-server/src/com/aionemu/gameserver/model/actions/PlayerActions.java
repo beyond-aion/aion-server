@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.model.EmotionType;
-import com.aionemu.gameserver.model.gameobjects.player.InRoll;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.templates.ride.RideInfo;
@@ -20,8 +19,6 @@ public class PlayerActions {
 		switch (mode) {
 			case RIDE:
 				return player.ride != null;
-			case IN_ROLL:
-				return player.inRoll != null;
 		}
 		return false;
 	}
@@ -30,9 +27,6 @@ public class PlayerActions {
 		switch (mode) {
 			case RIDE:
 				player.ride = (RideInfo) obj;
-				break;
-			case IN_ROLL:
-				player.inRoll = (InRoll) obj;
 				break;
 		}
 	}
@@ -65,11 +59,6 @@ public class PlayerActions {
 					}
 					rideObservers.clear();
 				}
-				return true;
-			case IN_ROLL:
-				if (player.inRoll == null)
-					return false;
-				player.inRoll = null;
 				return true;
 			default:
 				return false;

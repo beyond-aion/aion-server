@@ -73,7 +73,7 @@ public class GameServerTable {
 	 *          server password that is specified configs, used to check if gs can auth on ls
 	 * @return GsAuthResponse
 	 */
-	public static GsAuthResponse registerGameServer(GsConnection gsConnection, byte requestedId, String password, byte[] ip, int port,
+	public static synchronized GsAuthResponse registerGameServer(GsConnection gsConnection, byte requestedId, String password, byte[] ip, int port,
 		byte minAccessLevel, int maxPlayers) {
 		GameServerInfo gsi = gameservers.get(requestedId);
 
@@ -143,7 +143,10 @@ public class GameServerTable {
 		GameServerInfo gsi = GameServerTable.findLoggedInAccountGs(accountId);
 		if (gsi == null)
 			return false;
-		gsi.getConnection().sendPacket(new SM_REQUEST_KICK_ACCOUNT(accountId, notifyDoubleLogin));
+		GsConnection connection = gsi.getConnection();
+		if (connection == null) // the game server disconnected just now, which logs out its accounts
+			return false;
+		connection.sendPacket(new SM_REQUEST_KICK_ACCOUNT(accountId, notifyDoubleLogin));
 		return true;
 	}
 }

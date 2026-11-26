@@ -1,13 +1,13 @@
 package com.aionemu.loginserver.network.aion.clientpackets;
 
-import java.nio.ByteBuffer;
-
 import com.aionemu.loginserver.network.aion.AionAuthResponse;
 import com.aionemu.loginserver.network.aion.AionClientPacket;
 import com.aionemu.loginserver.network.aion.LoginConnection;
 import com.aionemu.loginserver.network.aion.LoginConnection.State;
 import com.aionemu.loginserver.network.aion.serverpackets.SM_AUTH_GG;
 import com.aionemu.loginserver.network.aion.serverpackets.SM_LOGIN_FAIL;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * @author -Nemesiss-
@@ -25,7 +25,7 @@ public class CM_AUTH_GG extends AionClientPacket {
 	 * @param buf
 	 * @param client
 	 */
-	public CM_AUTH_GG(ByteBuffer buf, LoginConnection client, int opCode) {
+	public CM_AUTH_GG(ByteBuf buf, LoginConnection client, int opCode) {
 		super(buf, client, opCode);
 	}
 

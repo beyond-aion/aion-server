@@ -13,7 +13,6 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAY_MOVIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
@@ -28,6 +27,8 @@ public class BeshmundirInstance extends GeneralInstanceHandler {
 	private final AtomicInteger macunbello = new AtomicInteger();
 	private final AtomicInteger kills = new AtomicInteger();
 	private Race instanceRace;
+	private Npc macunbelloNpc;
+	private boolean isHardMode;
 
 	public BeshmundirInstance(WorldMapInstance instance) {
 		super(instance);
@@ -61,19 +62,7 @@ public class BeshmundirInstance extends GeneralInstanceHandler {
 				break;
 			case 216586: // Temadaro (Difficult)
 			case 216590: // Temadaro (Normal)
-				int killedCount = macunbello.getAndSet(0);
-				if (killedCount < 12) {
-					Npc npcMacunbello = (Npc) spawn(216735, 981.015015f, 134.373001f, 241.755005f, (byte) 30); // strongest macunbello
-					SkillEngine.getInstance().applyEffectDirectly(19046, npcMacunbello, npcMacunbello);
-				} else if (killedCount < 14) {
-					Npc npcMacunbello = (Npc) spawn(216734, 981.015015f, 134.373001f, 241.755005f, (byte) 30); // 2nd strongest macunbello
-					SkillEngine.getInstance().applyEffectDirectly(19047, npcMacunbello, npcMacunbello);
-				} else if (killedCount < 21) {
-					Npc npcMacunbello = (Npc) spawn(216737, 981.015015f, 134.373001f, 241.755005f, (byte) 30); // 2nd weakest macunbello
-					SkillEngine.getInstance().applyEffectDirectly(19048, npcMacunbello, npcMacunbello);
-				} else {
-					spawn(216245, 981.015015f, 134.373001f, 241.755005f, (byte) 30); // weakest macunbello
-				}
+				spawnMacunbello(npc.getNpcId() == 216586);
 				sendPacket(new SM_QUEST_ACTION(0, 0));
 				instance.setDoorState(467, true);
 				break;
@@ -130,13 +119,70 @@ public class BeshmundirInstance extends GeneralInstanceHandler {
 			case 216211:
 			case 216212:
 			case 216213:
-				switch (macunbello.incrementAndGet()) {
+			case 216287: // souls (Normal)
+			case 216288:
+			case 216289:
+			case 216290:
+			case 216291:
+			case 216292:
+			case 216293:
+			case 216294:
+				int killedSouls = macunbello.incrementAndGet();
+				switch (killedSouls) {
 					case 12 -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDCatacombs_NmdLich_weakness1());
-					case 14 -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDCatacombs_NmdLich_weakness2());
-					case 21 -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDCatacombs_NmdLich_weakness3());
+					case 24 -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDCatacombs_NmdLich_weakness2());
+					case 36 -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDCatacombs_NmdLich_weakness3());
 				}
+				if (killedSouls == 12 || killedSouls == 24 || killedSouls == 36)
+					weakenMacunbello();
+				break;
+			case 216164: // Macunbello (Difficult)
+			case 216733:
+			case 216734:
+			case 216735:
+			case 216245: // Macunbello (Normal)
+			case 216736:
+			case 216737:
+			case 216738:
+				despawnSouls();
 				break;
 		}
+	}
+
+	/**
+	 * Retail spawns a weaker Macunbello for every 12 killed souls (condition spawn variable "debufflich" >= 1/12/24/36)
+	 */
+	private synchronized void spawnMacunbello(boolean hardMode) {
+		isHardMode = hardMode;
+		int stage = Math.min(macunbello.get() / 12, 3);
+		int npcId = switch (stage) {
+			case 0 -> hardMode ? 216164 : 216245;
+			case 1 -> hardMode ? 216733 : 216736;
+			case 2 -> hardMode ? 216734 : 216737;
+			default -> hardMode ? 216735 : 216738;
+		};
+		macunbelloNpc = (Npc) spawn(npcId, 981.015015f, 134.373001f, 241.755005f, (byte) 30);
+	}
+
+	/**
+	 * Retail BIDCT_NPC_DebuffLich(_2/_3) despawns the current Macunbello (message 6981), so the condition spawn replaces it with the next weaker one.
+	 */
+	private synchronized void weakenMacunbello() {
+		if (macunbelloNpc == null || macunbelloNpc.isDead() || !macunbelloNpc.isSpawned())
+			return;
+		macunbelloNpc.getController().delete();
+		spawnMacunbello(isHardMode);
+	}
+
+	/**
+	 * Retail spawns BIDTP_NoShowNPC at the soul camps on Macunbello's death, which despawns all remaining souls (message 6981).
+	 */
+	private void despawnSouls() {
+		instance.getNpcs().stream().filter(n -> !n.isDead() && isSoul(n.getNpcId())).forEach(n -> n.getController().delete());
+	}
+
+	private boolean isSoul(int npcId) {
+		return npcId >= 216206 && npcId <= 216213 || npcId >= 216287 && npcId <= 216294;
 	}
 
 	private void sendPacket(AionServerPacket packet) {

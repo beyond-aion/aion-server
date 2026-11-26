@@ -1,12 +1,12 @@
 package com.aionemu.loginserver.network.ncrypt;
 
-import java.nio.ByteBuffer;
-
 import com.aionemu.commons.utils.Rnd;
 
+import io.netty.buffer.ByteBuf;
+
 /**
- * Crypto engine for ecnrypting/decrypting packets, error handling and verifying checksum. Works on any {@link ByteBuffer} (heap or direct) by
- * absolute index; the buffer's position, limit and byte order are not used.
+ * Crypto engine for ecnrypting/decrypting packets, error handling and verifying checksum. Works on any {@link ByteBuf} (heap or direct) by
+ * absolute index; the buffer's reader and writer index are not used.
  *
  * @author EvilSpirit
  */
@@ -54,7 +54,7 @@ public class CryptEngine {
 	 *          number of bytes
 	 * @return true, if decrypted packet has valid checksum, false overwise
 	 */
-	public boolean decrypt(ByteBuffer data, int offset, int length) {
+	public boolean decrypt(ByteBuf data, int offset, int length) {
 		cipher.decipher(data, offset, length);
 
 		return verifyChecksum(data, offset, length);
@@ -72,7 +72,7 @@ public class CryptEngine {
 	 *          number of bytes
 	 * @return length of the encrypted packet
 	 */
-	public int encrypt(ByteBuffer data, int offset, int length) {
+	public int encrypt(ByteBuf data, int offset, int length) {
 		return encrypt(data, offset, length, Rnd.nextInt());
 	}
 
@@ -80,7 +80,7 @@ public class CryptEngine {
 	 * @param xorKey
 	 *          key of the extra XOR pass over the first packet
 	 */
-	int encrypt(ByteBuffer data, int offset, int length, int xorKey) {
+	int encrypt(ByteBuf data, int offset, int length, int xorKey) {
 		int dataLength = length;
 		length += 4;
 
@@ -107,9 +107,9 @@ public class CryptEngine {
 	/**
 	 * Fills the space for the checksum and the padding with zeros, instead of leaving whatever the buffer held there before.
 	 */
-	private void clear(ByteBuffer data, int from, int count) {
+	private void clear(ByteBuf data, int from, int count) {
 		for (int i = 0; i < count; i++)
-			data.put(from + i, (byte) 0);
+			data.setByte(from + i, 0);
 	}
 
 	/**
@@ -124,7 +124,7 @@ public class CryptEngine {
 	 *          number of bytes
 	 * @return true, if checksum is ok, false overwise
 	 */
-	private boolean verifyChecksum(ByteBuffer data, int offset, int length) {
+	private boolean verifyChecksum(ByteBuf data, int offset, int length) {
 		if ((length & 3) != 0 || (length <= 4)) {
 			return false;
 		}
@@ -146,7 +146,7 @@ public class CryptEngine {
 	 * @param length
 	 *          number of bytes, including the checksum
 	 */
-	private void appendChecksum(ByteBuffer raw, int offset, int length) {
+	private void appendChecksum(ByteBuf raw, int offset, int length) {
 		int chksum = 0;
 		int count = length - 4;
 
@@ -168,7 +168,7 @@ public class CryptEngine {
 	 * @param key
 	 *          integer value as key
 	 */
-	private void encXORPass(ByteBuffer data, int offset, int length, int key) {
+	private void encXORPass(ByteBuf data, int offset, int length, int key) {
 		int stop = offset + length - 8;
 		int pos = 4 + offset;
 		int edx;

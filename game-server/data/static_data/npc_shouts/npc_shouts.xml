@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<npc_shouts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<npc_shouts>
 	<shout_group client_ai="">
 		<shout_npcs npc_ids="210308 210309 210310 210311 210312 210314 210315 210603 210604 210605 210606 210607 210630 210697 210751 214568">
 			<shout string_id="340662" when="SEE"/>
@@ -1847,14 +1847,6 @@
 		<shout_npcs npc_ids="216264 281768" restrict_world="300170000">
 			<shout string_id="342105" when="ATTACK_BEGIN"/>
 			<shout string_id="342106" when="ATTACK_BEGIN"/>
-		</shout_npcs>
-	</shout_group>
-	<shout_group client_ai="IDCTH_Boss_Lichking">
-		<shout_npcs npc_ids="216164" restrict_world="300170000">
-			<shout string_id="1500060" when="START" skill_no="1"/>
-			<shout string_id="1500061" when="ATTACK_K" skill_no="1"/>
-			<shout string_id="1500062" when="ATTACK_K" skill_no="2"/>
-			<shout string_id="1500063" when="DIED"/>
 		</shout_npcs>
 	</shout_group>
 	<shout_group client_ai="IDCTH_Boss_Slime">

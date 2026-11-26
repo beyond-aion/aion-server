@@ -1,8 +1,8 @@
 package com.aionemu.gameserver.network.loginserver;
 
-import java.nio.ByteBuffer;
-
 import com.aionemu.commons.network.packet.BaseServerPacket;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * Base class for every GameServer -> Login Server Packet.
@@ -22,19 +22,18 @@ public abstract class LsServerPacket extends BaseServerPacket {
 	}
 
 	/**
-	 * Write this packet data for given connection, to given buffer.
+	 * Write this packet data for given connection to the end of the buffer.
 	 * 
 	 * @param con
 	 * @param buf
 	 */
-	public final void write(LoginServerConnection con, ByteBuffer buffer) {
+	public final void write(LoginServerConnection con, ByteBuf buffer) {
 		setBuf(buffer);
-		buf.putShort((short) 0);
-		buf.put((byte) this.getOpCode());
+		int start = buf.writerIndex();
+		buf.writeShortLE(0);
+		buf.writeByte(getOpCode());
 		writeImpl(con);
-		buf.flip();
-		buf.putShort((short) buf.limit());
-		buf.position(0);
+		buf.setShortLE(start, buf.writerIndex() - start);
 	}
 
 	/**

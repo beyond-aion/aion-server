@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.services;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -24,6 +23,7 @@ import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
+import com.aionemu.gameserver.world.WorldMapType;
 
 /**
  * @author Simple
@@ -50,6 +50,10 @@ public class PrivateStoreService {
 	}
 
 	private static boolean canOpenPrivateStore(Player player) {
+		if (player.getWorldId() == WorldMapType.LIVE_PARTY_CONCERT_HALL.getId()) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_OPEN_STORE_IN_THIS_ZONE());
+			return false;
+		}
 		if (player.isFlying() || player.isUsingFlightTransporterOrWindstream()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PERSONAL_SHOP_DISABLED_IN_FLY_MODE());
 			return false;
@@ -134,7 +138,7 @@ public class PrivateStoreService {
 
 		long refund = 0;
 		synchronized (store) { // buyers must not take the same stack twice: the store count is the only limit
-			List<TradePSItem> boughtItems = getBoughtItems(seller, store, tradeList);
+			List<TradePSItem> boughtItems = getBoughtItems(seller, buyer, store, tradeList);
 			if (boughtItems == null || boughtItems.isEmpty())
 				return; // Invalid items found or store was empty
 
@@ -182,7 +186,7 @@ public class PrivateStoreService {
 				if (soldCount == 1)
 					PacketSendUtility.sendPacket(seller, SM_SYSTEM_MESSAGE.STR_MSG_PERSONAL_SHOP_SELL_ITEM(item.getL10n()));
 				else
-					PacketSendUtility.sendPacket(seller, SM_SYSTEM_MESSAGE.STR_MSG_PERSONAL_SHOP_SELL_ITEM_MULTI(soldCount, item.getL10n()));
+					PacketSendUtility.sendPacket(seller, SM_SYSTEM_MESSAGE.STR_MSG_PERSONAL_SHOP_SELL_ITEM_MULTI(item.getL10n(), soldCount));
 				log.info("[PRIVATE STORE] > [Seller: {}] sold [Item: {}][Amount: {}] to [Buyer: {}] for [Price: {}]", seller.getName(),
 					item.getItemId(), soldCount, buyer.getName(), boughtItem.getPrice() * soldCount);
 			}
@@ -213,20 +217,21 @@ public class PrivateStoreService {
 
 	/**
 	 * @param tradeList
-	 *          entries with the seller's store indices, each index at most once
+	 *          entries with the indices of the store list the buyer was shown, each index at most once
 	 */
-	private static List<TradePSItem> getBoughtItems(Player seller, PrivateStore store, TradeList tradeList) {
-		Collection<TradePSItem> storeList = store.getSoldItems().values();
-		// we need index based access since tradeList holds index values (this will work since underlying LinkedHashMap preserves insertion order)
-		TradePSItem[] storeItems = storeList.toArray(new TradePSItem[storeList.size()]);
+	private static List<TradePSItem> getBoughtItems(Player seller, Player buyer, PrivateStore store, TradeList tradeList) {
 		List<TradePSItem> boughtItems = new ArrayList<>();
 		for (TradeItem tradeItem : tradeList.getTradeItems()) {
 			int index = tradeItem.getItemId(); // itemId is index! blame the one who implemented this
-			if (index < 0 || index >= storeItems.length) {
+			// The store's own order shifts when an item sells out or leaves the inventory: the same index would buy another item at its price.
+			int itemObjId = store.getShownItemObjId(buyer, index);
+			if (itemObjId == 0) {
 				log.warn("[Private Store] Attempt to buy item with invalid index: {}", index);
 				return null;
 			}
-			TradePSItem storeItem = storeItems[index];
+			TradePSItem storeItem = store.getTradeItemByObjId(itemObjId);
+			if (storeItem == null) // sold out since the buyer opened the store
+				return null;
 			long count = tradeItem.getCount();
 			if (count > storeItem.getCount()) {
 				log.warn("[Private Store] Attempt to buy more than for sale: {} vs. {}", count, storeItem.getCount());
@@ -242,6 +247,8 @@ public class PrivateStoreService {
 
 	public static void openPrivateStore(Player activePlayer, String name) {
 		if (name != null && name.length() > PrivateStore.MAX_STORE_MESSAGE_LENGTH) // retail refuses longer messages instead of truncating them
+			return;
+		if (activePlayer.getStore() == null) // the store creation was rejected (for example, in the concert hall)
 			return;
 		activePlayer.getStore().setStoreMessage(name);
 		PacketSendUtility.broadcastPacket(activePlayer, new SM_PRIVATE_STORE_NAME(activePlayer), true);

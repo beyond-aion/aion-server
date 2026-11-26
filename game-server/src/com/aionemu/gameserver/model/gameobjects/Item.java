@@ -47,6 +47,8 @@ public class Item extends AionObject implements Expirable, StatOwner, Persistabl
 	private boolean isEquipped = false;
 	private long equipmentSlot = ItemStorage.FIRST_AVAILABLE_SLOT;
 	private PersistentState persistentState;
+	// Counts changes, so that a save marks the item saved only if no thread changed it while the save ran (see InventoryDAO.store)
+	private int changeCount;
 	private Set<ManaStone> manaStones;
 	private Set<ManaStone> fusionStones;
 	private int optionalSockets;
@@ -508,7 +510,7 @@ public class Item extends AionObject implements Expirable, StatOwner, Persistabl
 	 * @return the persistentState
 	 */
 	@Override
-	public PersistentState getPersistentState() {
+	public synchronized PersistentState getPersistentState() {
 		return persistentState;
 	}
 
@@ -521,7 +523,9 @@ public class Item extends AionObject implements Expirable, StatOwner, Persistabl
 	 */
 	@Override
 	@SuppressWarnings("fallthrough")
-	public void setPersistentState(PersistentState persistentState) {
+	public synchronized void setPersistentState(PersistentState persistentState) {
+		if (persistentState != PersistentState.UPDATED)
+			changeCount++;
 		switch (persistentState) {
 			case DELETED:
 				if (this.persistentState == PersistentState.NEW)
@@ -534,6 +538,25 @@ public class Item extends AionObject implements Expirable, StatOwner, Persistabl
 					break;
 			default:
 				this.persistentState = persistentState;
+		}
+	}
+
+	/**
+	 * @return A number that changes whenever the item needs saving.
+	 */
+	public synchronized int getChangeCount() {
+		return changeCount;
+	}
+
+	public synchronized void setSaved(int changeCount, PersistentState savedState) {
+		if (this.changeCount == changeCount || savedState == PersistentState.DELETED && persistentState == PersistentState.DELETED) {
+			persistentState = PersistentState.UPDATED;
+		} else if (savedState == PersistentState.NEW) {
+			// The row now exists even if the item changed or was discarded while its insert was in progress.
+			if (persistentState == PersistentState.NEW)
+				persistentState = PersistentState.UPDATE_REQUIRED;
+			else if (persistentState == PersistentState.NOACTION)
+				persistentState = PersistentState.DELETED;
 		}
 	}
 

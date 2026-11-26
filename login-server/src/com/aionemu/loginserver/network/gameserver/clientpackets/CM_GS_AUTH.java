@@ -10,6 +10,8 @@ import com.aionemu.loginserver.network.gameserver.GsConnection;
 import com.aionemu.loginserver.network.gameserver.GsConnection.State;
 import com.aionemu.loginserver.network.gameserver.serverpackets.SM_GS_AUTH_RESPONSE;
 
+import io.netty.buffer.ByteBuf;
+
 /**
  * This is authentication packet that gs will send to login server for registration.
  * 
@@ -44,6 +46,10 @@ public class CM_GS_AUTH extends GsClientPacket {
 	 * Default address for server
 	 */
 	private byte[] ip;
+
+	public CM_GS_AUTH(ByteBuf buf, GsConnection connection, int opCode) {
+		super(buf, connection, opCode);
+	}
 
 	@Override
 	protected void readImpl() {

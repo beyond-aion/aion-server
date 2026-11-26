@@ -2,6 +2,7 @@ package com.aionemu.loginserver.controller;
 
 import java.sql.Timestamp;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.aionemu.loginserver.dao.BannedHddDAO;
 
@@ -19,7 +20,7 @@ public class BannedHDDController {
 	}
 
 	private BannedHDDController() {
-		bannedList = BannedHddDAO.load();
+		bannedList = new ConcurrentHashMap<>(BannedHddDAO.load()); // changed by the packets of all game servers
 	}
 
 	public void unban(String serial) {

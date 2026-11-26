@@ -5,8 +5,6 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.commons.logging.Logging;
 import com.aionemu.commons.utils.concurrent.UncaughtExceptionHandler;
-import com.aionemu.commons.utils.info.SystemInfo;
-import com.aionemu.commons.utils.info.VersionInfo;
 import com.aionemu.loginserver.configs.Config;
 import com.aionemu.loginserver.controller.BannedIpController;
 import com.aionemu.loginserver.dao.BannedHddDAO;
@@ -38,12 +36,9 @@ class LoginServer {
 
 		PlayerTransferService.getInstance();
 
-		VersionInfo.logAll(LoginServer.class);
-		SystemInfo.logAll();
-
 		NetConnector.connect();
 		Runtime.getRuntime().addShutdownHook(new ShutdownHook());
-		LoggerFactory.getLogger(LoginServer.class).info(Logging.formatStartupMessage("Login server", startTimeNanos));
+		Logging.logStartupStats(LoginServer.class, startTimeNanos);
 	}
 
 	private static class ShutdownHook extends Thread {

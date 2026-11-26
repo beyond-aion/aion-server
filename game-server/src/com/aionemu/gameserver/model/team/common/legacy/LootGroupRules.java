@@ -4,9 +4,7 @@ import java.util.Collection;
 import java.util.Deque;
 import java.util.concurrent.ConcurrentLinkedDeque;
 
-import com.aionemu.gameserver.model.actions.PlayerMode;
 import com.aionemu.gameserver.model.drop.DropItem;
-import com.aionemu.gameserver.model.gameobjects.player.InRoll;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.item.ItemQuality;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -33,7 +31,8 @@ public class LootGroupRules {
 	private final int mythicItemAbove;
 	private int junkRecipientIndex;
 	private int nrRoundRobin;
-	private final Deque<DropItem> itemsToBeDistributed = new ConcurrentLinkedDeque<>();
+	// Shared by all corpses of the team, each locked on its own: whoever checks the queue and then changes it must hold the queue's monitor
+	private Deque<DropItem> itemsToBeDistributed = new ConcurrentLinkedDeque<>();
 
 	public LootGroupRules() {
 		lootRule = LootRuleType.ROUNDROBIN;
@@ -133,16 +132,14 @@ public class LootGroupRules {
 		this.junkRecipientIndex = junkRecipientIndex;
 	}
 
-	public void setPlayersInRoll(final Collection<Player> players, int time, final int index, final int npcId) {
+	/**
+	 * Ends the roll or bid for everyone the corpse still waits for. The mode comes from the offer, so the timer doesn't depend on the corpse's
+	 * current distribution.
+	 */
+	public void scheduleRollTimeout(Collection<Player> players, int time, int index, int npcId, int mode) {
 		ThreadPoolManager.getInstance().schedule(() -> {
-			for (Player player : players) {
-				if (player.isInPlayerMode(PlayerMode.IN_ROLL)) {
-					InRoll inRoll = player.inRoll;
-					if (inRoll.getIndex() == index && inRoll.getNpcId() == npcId)
-						DropDistributionService.getInstance().handleRollOrBid(player, inRoll.getRollType(), 0, 0, inRoll.getItemId(), inRoll.getNpcId(),
-							inRoll.getIndex());
-				}
-			}
+			for (Player player : players) // handleRollOrBid ignores a gone corpse, a finished item and players that already answered
+				DropDistributionService.getInstance().handleRollOrBid(player, mode, 0, 0, 0, npcId, index);
 		}, time);
 	}
 
@@ -154,6 +151,15 @@ public class LootGroupRules {
 		this.nrRoundRobin = nrRoundRobin;
 	}
 
+	/**
+	 * Keeps the items that wait for a roll or bid when the team changes its rules. They are offered one after another, so a new empty queue would
+	 * start the next roll while the one offered under the previous rules still runs.
+	 */
+	public void takeOverItemsToBeDistributed(LootGroupRules previousRules) {
+		if (previousRules != null && previousRules != this)
+			itemsToBeDistributed = previousRules.itemsToBeDistributed;
+	}
+
 	public void addItemToBeDistributed(DropItem dropItem) {
 		itemsToBeDistributed.add(dropItem);
 	}
@@ -163,7 +169,9 @@ public class LootGroupRules {
 	}
 
 	public void removeItemToBeDistributed(DropItem dropItem) {
-		itemsToBeDistributed.remove(dropItem);
+		synchronized (itemsToBeDistributed) {
+			itemsToBeDistributed.remove(dropItem);
+		}
 	}
 
 	public Deque<DropItem> getItemsToBeDistributed() {

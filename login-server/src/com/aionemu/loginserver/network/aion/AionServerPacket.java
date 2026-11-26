@@ -1,8 +1,8 @@
 package com.aionemu.loginserver.network.aion;
 
-import java.nio.ByteBuffer;
-
 import com.aionemu.commons.network.packet.BaseServerPacket;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * Base class for every LS -> Aion Server Packet.
@@ -22,20 +22,18 @@ public abstract class AionServerPacket extends BaseServerPacket {
 	}
 
 	/**
-	 * Write and encrypt this packet data for given connection, to given buffer. The buffer needs room for the checksum and the padding that the
-	 * encryption appends to the packet. Leaves the buffer's position at 0 and its limit at the end of the packet.
+	 * Write this packet data for given connection to the end of the buffer. The encryption happens afterwards, in the channel pipeline.
 	 * 
 	 * @param con
 	 * @param buffer
 	 */
-	public final void write(LoginConnection con, ByteBuffer buffer) {
+	public final void write(LoginConnection con, ByteBuf buffer) {
 		setBuf(buffer);
-		buf.putShort((short) 0);
-		buf.put((byte) getOpCode());
+		int start = buf.writerIndex();
+		buf.writeShortLE(0);
+		buf.writeByte(getOpCode());
 		writeImpl(con);
-		int size = con.encrypt(buf, 2, buf.position() - 2) + 2;
-		buf.putShort(0, (short) size);
-		buf.position(0).limit(size);
+		buf.setShortLE(start, buf.writerIndex() - start);
 	}
 
 	/**

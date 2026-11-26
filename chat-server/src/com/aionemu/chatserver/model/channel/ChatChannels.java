@@ -1,5 +1,6 @@
 package com.aionemu.chatserver.model.channel;
 
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -22,9 +23,13 @@ public class ChatChannels {
 	 */
 	private static final int MAX_META_LENGTH = 64;
 	/**
-	 * Every distinct name the client sends stays forever, and a real server needs a few dozen.
+	 * Channels without members are removed, and a real server needs a few dozen at once.
 	 */
 	private static final int MAX_CHANNELS = 256;
+	/**
+	 * Guards channel creation and removal together with membership, so a channel can't be removed while someone is joining it.
+	 */
+	private static final Object membershipLock = new Object();
 
 	private static final Logger log = LoggerFactory.getLogger(ChatChannels.class);
 	private static final Map<Integer, Channel> channels = new ConcurrentHashMap<>();
@@ -54,12 +59,57 @@ public class ChatChannels {
 	}
 
 	/**
+	 * Adds the client to the requested channel, creating the channel if needed. Channels the client leaves this way (the old region
+	 * channel on map change) are removed once they have no members.
+	 * 
+	 * @return The joined channel or null if no channel with this identifier exists and a new channel was not created.
+	 * @see #getOrCreate(ChatClient, String)
+	 */
+	public static Channel join(ChatClient client, String identifier) {
+		synchronized (membershipLock) {
+			Channel channel = getOrCreate(client, identifier);
+			if (channel != null && !client.isInChannel(channel)) {
+				channel.memberCount++;
+				release(client.addChannel(channel));
+			}
+			return channel;
+		}
+	}
+
+	/**
+	 * @return True if the client was in this channel.
+	 */
+	public static boolean leave(ChatClient client, Channel channel) {
+		if (channel == null)
+			return false;
+		synchronized (membershipLock) {
+			if (!client.removeChannel(channel))
+				return false;
+			release(List.of(channel));
+			return true;
+		}
+	}
+
+	public static void leaveAll(ChatClient client) {
+		synchronized (membershipLock) {
+			release(client.removeAllChannels());
+		}
+	}
+
+	private static void release(List<Channel> leftChannels) {
+		for (Channel channel : leftChannels) {
+			if (--channel.memberCount <= 0 && channels.remove(channel.getChannelId()) != null && LoggingConfig.LOG_CHANNEL_REQUEST)
+				log.info("Removed empty channel {} (id: {})", channel.name(), channel.getChannelId());
+		}
+	}
+
+	/**
 	 * @param identifier
 	 *          - the identifier of the requested channel, e.g. @trade_Housing_barrack1.0.AION.KOR
 	 * @return Channel with this identifier or creates and returns a new channel if no channel with such identifier exists.<br>
 	 *         Null if no channel with this identifier exists and a new channel was not created.
 	 */
-	public static Channel getOrCreate(ChatClient client, String identifier) {
+	private static Channel getOrCreate(ChatClient client, String identifier) {
 		if (LoggingConfig.LOG_CHANNEL_REQUEST)
 			log.info("{} requested channel: {}", client, identifier);
 

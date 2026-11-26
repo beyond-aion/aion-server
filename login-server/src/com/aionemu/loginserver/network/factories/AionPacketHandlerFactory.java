@@ -1,6 +1,7 @@
 package com.aionemu.loginserver.network.factories;
 
-import java.nio.ByteBuffer;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,21 +11,25 @@ import com.aionemu.loginserver.network.aion.LoginConnection;
 import com.aionemu.loginserver.network.aion.LoginConnection.State;
 import com.aionemu.loginserver.network.aion.clientpackets.*;
 
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBufUtil;
+
 /**
  * @author -Nemesiss-
  */
 public class AionPacketHandlerFactory {
 
 	private static final Logger log = LoggerFactory.getLogger(AionPacketHandlerFactory.class);
+	private static final Set<Integer> loggedUnknownPackets = ConcurrentHashMap.newKeySet();
 
 	/**
-	 * Reads one packet from given ByteBuffer
+	 * Reads one packet from given buffer
 	 * 
 	 * @param data
 	 * @param client
 	 * @return AionClientPacket object from binary data
 	 */
-	public static AionClientPacket handle(ByteBuffer data, LoginConnection client) {
+	public static AionClientPacket handle(ByteBuf data, LoginConnection client) {
 		/*
 			retail (KOR 8.2.22) client packet names for opcodes:
 			0 AQ_LOGIN
@@ -64,7 +69,7 @@ public class AionPacketHandlerFactory {
 		 */
 		AionClientPacket msg = null;
 		State state = client.getState();
-		int opCode = data.get() & 0xFF;
+		int opCode = data.readUnsignedByte();
 
 		switch (state) {
 			case CONNECTED:
@@ -106,13 +111,12 @@ public class AionPacketHandlerFactory {
 	}
 
 	/**
-	 * Logs an unknown packet
+	 * Logs the first unknown packet of each opcode and state, so a client sending many of them can't fill the log.
 	 */
-	private static void unknownPacket(int opCode, State state, ByteBuffer buf) {
-		int length = buf.remaining();
-		StringBuilder sb = new StringBuilder(length * 3);
-		while (buf.hasRemaining())
-			sb.append(String.format("%02X ", buf.get()));
-		log.warn(String.format("Unknown packet received from client: opCode=0x%02X state=%s length=%d data=[%s]", opCode, state, length, sb.toString().trim()));
+	private static void unknownPacket(int opCode, State state, ByteBuf buf) {
+		if (loggedUnknownPackets.add(state.ordinal() << 8 | opCode))
+			log.warn("Unknown packet received from client: opCode=0x{} state={} length={} data=[{}]", "%02X".formatted(opCode), state,
+				buf.readableBytes(), ByteBufUtil.hexDump(buf, buf.readerIndex(), Math.min(buf.readableBytes(), 64)));
+		buf.skipBytes(buf.readableBytes());
 	}
 }

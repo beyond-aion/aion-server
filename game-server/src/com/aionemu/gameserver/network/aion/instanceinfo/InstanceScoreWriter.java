@@ -1,9 +1,9 @@
 package com.aionemu.gameserver.network.aion.instanceinfo;
 
-import java.nio.ByteBuffer;
-
 import com.aionemu.gameserver.model.instance.instancescore.InstanceScore;
 import com.aionemu.gameserver.network.PacketWriteHelper;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * @author xTz
@@ -21,7 +21,7 @@ public abstract class InstanceScoreWriter<T extends InstanceScore<?>> extends Pa
 	}
 
 	@Override
-	public void writeMe(ByteBuffer buf) {
+	public void writeMe(ByteBuf buf) {
 	}
 
 }

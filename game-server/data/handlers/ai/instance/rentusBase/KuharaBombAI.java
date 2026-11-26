@@ -6,6 +6,7 @@ import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.AIState;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.skillengine.SkillEngine;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 import ai.GeneralNpcAI;
 
@@ -26,7 +27,8 @@ public class KuharaBombAI extends GeneralNpcAI {
 	protected void handleSpawned() {
 		super.handleSpawned();
 		this.setStateIfNot(AIState.FOLLOWING);
-		boss = getPosition().getWorldMapInstance().getNpc(217311);
+		if (getCreator() instanceof Npc creator) // Kuhara 217311 (Rentus Base) or 236298 (Occupied Rentus Base)
+			boss = creator;
 	}
 
 	@Override
@@ -35,6 +37,7 @@ public class KuharaBombAI extends GeneralNpcAI {
 			if (boss != null && !boss.isDead()) {
 				SkillEngine.getInstance().getSkill(getOwner(), 19659, 60, boss).useNoAnimationSkill();
 			}
+			ThreadPoolManager.getInstance().schedule(() -> getOwner().getController().delete(), 1500);
 		}
 	}
 }
