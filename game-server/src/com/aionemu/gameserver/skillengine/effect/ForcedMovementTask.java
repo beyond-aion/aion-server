@@ -10,6 +10,7 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.templates.BoundRadius;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MOVE;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -23,7 +24,6 @@ import com.aionemu.gameserver.world.geo.GeoService;
  */
 abstract class ForcedMovementTask implements Runnable {
 
-	/** A player takes one step per second. */
 	private static final int PLAYER_STEP_INTERVAL = 1000;
 	/** An npc takes one step per two thirds of a second, so it arrives just as the next one is issued and never stops in between. */
 	private static final int NPC_STEP_INTERVAL = 667;
@@ -31,6 +31,10 @@ abstract class ForcedMovementTask implements Runnable {
 	private static final int TICKS_PER_FALL_UPDATE = 200 / ControlledPlayerFall.TICK_INTERVAL;
 	/** A step which would climb or drop this much or more is discarded. */
 	private static final float MAX_STEP_HEIGHT_DIFFERENCE = 4;
+	/** How much higher than the previous point of a track the next one may be. */
+	private static final float MAX_WALK_CLIMB = 1.5f;
+	/** How deep below the top of the walk rays the ground is looked for: a real track descends far less, deeper than that is a hole in the data. */
+	private static final float WALK_RAY_DEPTH = 32;
 
 	protected final Creature effected;
 	/** Only a player can be left in the air or on a slope, the server walks everyone else along ground it found itself. */
@@ -126,7 +130,8 @@ abstract class ForcedMovementTask implements Runnable {
 	}
 
 	/**
-	 * Moves the creature one interval worth of running, retrying with a fresh deviation whenever it cannot get anywhere.
+	 * Moves the creature one interval worth of running, retrying with a fresh deviation whenever it cannot get anywhere. A flying creature gives up the
+	 * step as soon as a direction leaves the flight area, so it stays at the edge of the area rather than flying out of it.
 	 *
 	 * @param baseHeading the direction to move into, before any deviation
 	 * @param deviations maximum deviation from it in heading units (3° each), one entry per attempt
@@ -136,8 +141,13 @@ abstract class ForcedMovementTask implements Runnable {
 		float stepDistance = effected.getGameStats().getMovementSpeedFloat() * stepInterval / 1000f;
 		for (byte deviation : deviations) {
 			byte heading = (byte) ((baseHeading + Rnd.get(-deviation, deviation) + 120) % 120);
-			Vector3f destination = GeoService.getInstance().findMovementCollision(effected, PositionUtil.convertHeadingToAngle(heading), stepDistance);
-			if (!isValidStep(destination, stepDistance))
+			double radians = Math.toRadians(PositionUtil.convertHeadingToAngle(heading));
+			float x = effected.getX() + (float) Math.cos(radians) * stepDistance;
+			float y = effected.getY() + (float) Math.sin(radians) * stepDistance;
+			if (effected.isFlying() && !effected.getWorldMapInstance().isInsideFlyZone(x, y, effected.getZ()))
+				return false;
+			Vector3f destination = findStepDestination(x, y);
+			if (destination == null)
 				continue;
 			if (effected instanceof Npc npc) {
 				npc.getMoveController().moveToPoint(destination.getX(), destination.getY(), destination.getZ());
@@ -149,6 +159,84 @@ abstract class ForcedMovementTask implements Runnable {
 			return true;
 		}
 		return false;
+	}
+
+	/**
+	 * @return Where a step to the given point goes, or null when it must be discarded and another direction tried. A flight step keeps the height.
+	 */
+	private Vector3f findStepDestination(float x, float y) {
+		if (effected.isFlying()) {
+			Vector3f destination = new Vector3f(x, y, effected.getZ());
+			return isBodySegmentBlocked(effected.getX(), effected.getY(), effected.getZ(), destination) ? null : destination;
+		}
+		if (GeoDataConfig.MODE != GeoDataConfig.Mode.ON)
+			return new Vector3f(x, y, effected.getZ());
+		// the ground under the target is looked for from 3 units above his feet and compared with his feet. Retail compares it with the top of that ray
+		// instead, so it never lets a target drop more than 1 unit in a step and could not flee downhill at all
+		float groundZ = GeoService.getInstance().getZ(effected.getWorldId(), x, y, effected.getZ() + 3, effected.getZ() - MAX_STEP_HEIGHT_DIFFERENCE,
+			effected.getInstanceId());
+		if (Float.isNaN(groundZ) || Math.abs(groundZ - effected.getZ()) >= MAX_STEP_HEIGHT_DIFFERENCE)
+			return null;
+		Vector3f destination = new Vector3f(x, y, groundZ);
+		return isTrackClear(destination) && isCapsuleClear(destination) ? destination : null;
+	}
+
+	/**
+	 * Walks the track to the target in steps of the creature's width: ground under every step point, a climb of no more than 1.5 units per step, and
+	 * every part of the way clear at body height. A step blocked anywhere along the way is discarded, so the target stops short of an obstacle instead
+	 * of running into it.
+	 */
+	private boolean isTrackClear(Vector3f target) {
+		GeoService geo = GeoService.getInstance();
+		float fromX = effected.getX(), fromY = effected.getY(), fromZ = effected.getZ();
+		float distance = (float) PositionUtil.getDistance(fromX, fromY, fromZ, target.getX(), target.getY(), target.getZ());
+		if (distance <= 0.001f)
+			return true;
+		float width = getBodyWidth();
+		float incX = (target.getX() - fromX) * width / distance;
+		float incY = (target.getY() - fromY) * width / distance;
+		float rayTop = Math.max(fromZ, target.getZ()) + 1;
+		Vector3f prev = new Vector3f(fromX, fromY, fromZ);
+		for (float walked = width; walked < distance; walked += width) {
+			float nextX = prev.getX() + incX, nextY = prev.getY() + incY;
+			float groundZ = geo.getZ(effected.getWorldId(), nextX, nextY, rayTop, rayTop - WALK_RAY_DEPTH, effected.getInstanceId());
+			if (Float.isNaN(groundZ) || groundZ > prev.getZ() + MAX_WALK_CLIMB)
+				return false;
+			Vector3f next = new Vector3f(nextX, nextY, groundZ);
+			if (isBodySegmentBlocked(prev.getX(), prev.getY(), prev.getZ(), next))
+				return false;
+			prev = next;
+		}
+		return target.getZ() <= prev.getZ() + MAX_WALK_CLIMB && !isBodySegmentBlocked(prev.getX(), prev.getY(), prev.getZ(), target);
+	}
+
+	/**
+	 * Casts one more straight segment at half his height, from where he stands to the target: obstacles only as tall as his chest, which the casts at
+	 * body height pass over, still block the step.
+	 */
+	private boolean isCapsuleClear(Vector3f target) {
+		float halfHeight = getBodyHeight() / 2;
+		return !GeoService.getInstance().isSegmentBlocked(effected, effected.getX(), effected.getY(), effected.getZ() + halfHeight, target.getX(),
+			target.getY(), target.getZ() + halfHeight, 0);
+	}
+
+	/**
+	 * @return True if a cast at body height from the given point to the target is blocked: both ends are raised by his height, but at least 1.5 units,
+	 *         and the cast runs on past the target by his width, so a wall right behind the target blocks too.
+	 */
+	private boolean isBodySegmentBlocked(float x, float y, float z, Vector3f target) {
+		float raise = Math.max(getBodyHeight(), 1.5f);
+		return GeoService.getInstance().isSegmentBlocked(effected, x, y, z + raise, target.getX(), target.getY(), target.getZ() + raise, getBodyWidth());
+	}
+
+	private float getBodyWidth() {
+		float width = 2 * effected.getObjectTemplate().getBoundRadius().getMaxOfFrontAndSide();
+		return width > 0 ? width : 2 * BoundRadius.DEFAULT.getMaxOfFrontAndSide(); // the track would never get anywhere in steps of zero
+	}
+
+	private float getBodyHeight() {
+		float height = effected.getObjectTemplate().getBoundRadius().getUpper();
+		return height > 0 ? height : BoundRadius.DEFAULT.getUpper();
 	}
 
 	/**
@@ -175,20 +263,5 @@ abstract class ForcedMovementTask implements Runnable {
 		ticksUntilResync = ticksPerStep;
 		player.getMoveController().abortMove(); // tells everyone else
 		PacketSendUtility.sendPacket(player, new SM_MOVE(player));
-	}
-
-	/**
-	 * @return True if the creature can actually get to the given point, i.e. it is not blocked right in front of it and the point is not too far above
-	 *         or below its current position.
-	 */
-	private boolean isValidStep(Vector3f destination, float stepDistance) {
-		if (!effected.isFlying() && Math.abs(destination.getZ() - effected.getZ()) >= MAX_STEP_HEIGHT_DIFFERENCE)
-			return false;
-		double distance = PositionUtil.getDistance(effected.getX(), effected.getY(), destination.getX(), destination.getY());
-		// Retail discards a step that is blocked anywhere along the way and tries another direction, so the target stops short of an obstacle
-		// instead of running into it. Our geo walk stops on every small ledge and on noise in the data, which would freeze targets on rough ground
-		// where retail lets them run, so only a step blocked right away is discarded. With retail geo data, require the full step instead:
-		// distance >= stepDistance - 0.01f
-		return distance >= Math.min(1, stepDistance);
 	}
 }

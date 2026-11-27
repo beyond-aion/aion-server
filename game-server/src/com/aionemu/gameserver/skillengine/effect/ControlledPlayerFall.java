@@ -163,9 +163,11 @@ final class ControlledPlayerFall {
 			}
 		}
 		hanging = false;
-		// the server walked him here, and it walks on ground only: nothing below him at all is a crack in our data, his client stands on solid ground
+		// the server walked him here, and on the ground only: nothing below him at all is a crack in our data, his client stands on solid ground. A
+		// flight that just ended under us leaves him genuinely airborne, and there he drops like his client does
 		boolean walkedByServer = System.currentTimeMillis() - player.getMoveController().getLastPositionFromClientMillis() > CLIENT_POSITION_MILLIS;
-		if (walkedByServer && Float.isNaN(geo.getZ(player, player.getZ(), player.getZ() - MIN_SUPPORTED_DROP)))
+		if (walkedByServer && !player.getMoveController().isDivingFromFlight()
+			&& Float.isNaN(geo.getZ(player, player.getZ(), player.getZ() - MIN_SUPPORTED_DROP)))
 			return State.ON_GROUND;
 		// one who runs off an edge flies on past it, one who stands still or creeps drops onto it with the cylinder
 		startFalling(!stepping);

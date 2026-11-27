@@ -103,7 +103,7 @@ public class FearEffect extends EffectTemplate {
 
 		@Override
 		protected boolean act() {
-			if (!PositionUtil.isInRange(effected, effector, LEASH_DISTANCE))
+			if (!PositionUtil.isInRangeLimited(effected, effector, 0, LEASH_DISTANCE))
 				return false;
 			return step(getEscapeHeading(), effected instanceof Npc ? NPC_HEADING_DEVIATIONS : PLAYER_HEADING_DEVIATIONS);
 		}

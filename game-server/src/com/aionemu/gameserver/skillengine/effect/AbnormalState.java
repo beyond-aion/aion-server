@@ -59,7 +59,7 @@ public enum AbnormalState {
 	// suspends server driven movement like fear or confuse, without ending it
 	CANT_BE_FORCE_MOVED(HARD_CC.id | SIMPLE_MOVE_BACK.id),
 	// ends a glide and does not let one start
-	CANT_GLIDE(HARD_CC.id | FEAR.id | CONFUSE.id | SNARE.id);
+	CANT_GLIDE(HARD_CC.id | SIMPLE_MOVE_BACK.id | FEAR.id | CONFUSE.id | SNARE.id);
 
 	private final int id;
 
