@@ -1,8 +1,8 @@
 package com.aionemu.gameserver.network.aion.iteminfo;
 
-import java.nio.ByteBuffer;
-
 import com.aionemu.gameserver.network.aion.iteminfo.ItemInfoBlob.ItemBlobType;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * This blob sends info about conditioning.
@@ -16,7 +16,7 @@ public class ConditioningInfoBlobEntry extends ItemBlobEntry {
 	}
 
 	@Override
-	public void writeThisBlob(ByteBuffer buf) {
+	public void writeThisBlob(ByteBuf buf) {
 		writeD(buf, ownerItem.getChargePoints());
 	}
 

@@ -1,15 +1,12 @@
 package com.aionemu.gameserver.controllers;
 
-import java.sql.Timestamp;
-
 import com.aionemu.gameserver.dao.PlayerPetsDAO;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Pet;
 import com.aionemu.gameserver.model.gameobjects.player.PetCommonData;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_PET;
 import com.aionemu.gameserver.services.toypet.PetFeedProgress;
-import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.services.toypet.PetMoodService;
 
 /**
  * @author ATracer
@@ -30,15 +27,16 @@ public class PetController extends VisibleObjectController<Pet> {
 			PlayerPetsDAO.saveDopingBag(getOwner().getObjectId(), commonData.getDopingBag());
 
 		getOwner().getMaster().getController().cancelTask(TaskId.PET_UPDATE);
-		commonData.setDespawnTime(new Timestamp(System.currentTimeMillis()));
-		PlayerPetsDAO.savePetMoodData(commonData);
+		PetMoodService.onDismiss(getOwner().getMaster(), commonData);
 		getOwner().getMaster().setPet(null);
 	}
 
+	/**
+	 * Runs once per minute while the pet is summoned and raises the pet's mood.
+	 */
 	public static class PetUpdateTask implements Runnable {
 
 		private final Player player;
-		private long startTime = 0;
 
 		public PetUpdateTask(Player player) {
 			this.player = player;
@@ -46,44 +44,12 @@ public class PetController extends VisibleObjectController<Pet> {
 
 		@Override
 		public void run() {
-			if (startTime == 0)
-				startTime = System.currentTimeMillis();
-
-			try {
-				if (!player.isSpawned())
-					return;
-
-				Pet pet = player.getPet();
-				if (pet == null)
-					throw new IllegalStateException("Pet is null");
-
-				int currentPoints = 0;
-				boolean saved = false;
-
-				if (pet.getCommonData().getMoodPoints(false) < 9000) {
-					if (System.currentTimeMillis() - startTime >= 60 * 1000) {
-						currentPoints = pet.getCommonData().getMoodPoints(false);
-						if (currentPoints == 9000) {
-							PacketSendUtility.sendPacket(player, new SM_PET(pet, 4, 0));
-						}
-
-						PlayerPetsDAO.savePetMoodData(pet.getCommonData());
-						saved = true;
-						startTime = System.currentTimeMillis();
-					}
-				}
-
-				if (currentPoints < 9000) {
-					PacketSendUtility.sendPacket(player, new SM_PET(pet, 4, 0));
-				} else {
-					PacketSendUtility.sendPacket(player, new SM_PET(pet, 3, 0));
-					// Save if it reaches 100% after player snuggles the pet, not by the scheduler itself
-					if (!saved)
-						PlayerPetsDAO.savePetMoodData(pet.getCommonData());
-				}
-			} catch (Exception ex) {
+			Pet pet = player.getPet();
+			if (pet == null) {
 				player.getController().cancelTask(TaskId.PET_UPDATE);
+				return;
 			}
+			PetMoodService.onMinutePassed(pet);
 		}
 	}
 

@@ -5,6 +5,8 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.network.packet.BaseClientPacket;
 
+import io.netty.buffer.ByteBuf;
+
 /**
  * Base class for every GameServer -> LS Client Packet
  * 
@@ -12,8 +14,8 @@ import com.aionemu.commons.network.packet.BaseClientPacket;
  */
 public abstract class GsClientPacket extends BaseClientPacket<GsConnection> {
 
-	public GsClientPacket() {
-		super(0);
+	public GsClientPacket(ByteBuf buf, GsConnection connection, int opcode) {
+		super(opcode, buf, connection);
 	}
 
 	/**

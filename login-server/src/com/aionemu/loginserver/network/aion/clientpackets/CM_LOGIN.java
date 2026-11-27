@@ -23,6 +23,8 @@ import com.aionemu.loginserver.network.aion.serverpackets.SM_LOGIN_FAIL;
 import com.aionemu.loginserver.network.aion.serverpackets.SM_LOGIN_OK;
 import com.aionemu.loginserver.utils.BruteForceProtector;
 
+import io.netty.buffer.ByteBuf;
+
 /**
  * @author -Nemesiss-, KID, Lyahim, Rolandas, Neon
  */
@@ -85,7 +87,7 @@ public class CM_LOGIN extends AionClientPacket {
 	 */
 	private static final int FIELDS_AFTER_CREDENTIALS = 43;
 
-	public CM_LOGIN(ByteBuffer buf, LoginConnection client, int opCode) {
+	public CM_LOGIN(ByteBuf buf, LoginConnection client, int opCode) {
 		super(buf, client, opCode);
 	}
 

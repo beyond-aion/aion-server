@@ -4,10 +4,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import jakarta.xml.bind.JAXBElement;
 import jakarta.xml.bind.Unmarshaller;
 import jakarta.xml.bind.annotation.*;
 
+import com.aionemu.gameserver.dataholders.loadingutils.StaticDataListener;
 import com.aionemu.gameserver.model.templates.item.DecomposableItem;
 
 /**
@@ -27,7 +27,7 @@ public class DecomposableItemsData {
 
 	synchronized void afterUnmarshal(Unmarshaller u, Object parent) {
 		// JAXBUtil.deserialize should skip the preprocessing when called from Reload.java for example
-		if (parent instanceof JAXBElement<?>)
+		if (u != null && StaticDataListener.get(u) == null)
 			return;
 		Map<Integer, DecomposableItem> decomposableItemById = new HashMap<>();
 		Map<Integer, DecomposableItem> overrides = new HashMap<>();

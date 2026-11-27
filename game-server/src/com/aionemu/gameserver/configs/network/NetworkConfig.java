@@ -3,6 +3,7 @@ package com.aionemu.gameserver.configs.network;
 import java.net.InetSocketAddress;
 
 import com.aionemu.commons.configuration.Property;
+import com.aionemu.commons.network.netty.Transport;
 
 public class NetworkConfig {
 
@@ -61,41 +62,17 @@ public class NetworkConfig {
 	public static int MAX_ONLINE_PLAYERS;
 
 	/**
-	 * Number of Threads dedicated to be doing io read & write. There is always 1 acceptor thread. If value is < 1 - acceptor thread will also handle
-	 * read & write. If value is > 0 - there will be given amount of read & write threads + 1 acceptor thread.
+	 * Socket transport of the network threads. AUTO uses epoll on Linux and NIO elsewhere, any other value uses only that transport.
 	 */
-	@Property(key = "gameserver.network.nio.threads", defaultValue = "1")
-	public static int NIO_READ_WRITE_THREADS;
+	@Property(key = "gameserver.network.transport", defaultValue = "AUTO")
+	public static Transport TRANSPORT;
 
 	/**
-	 * Allows values > 1 for nio.threads. Only for development/debugging - the game server is not thread-safe!
+	 * Number of threads dedicated to reading and writing network data. There is always 1 acceptor thread. If value is < 1, the acceptor thread also
+	 * handles read & write.
 	 */
-	@Property(key = "gameserver.network.nio.threads.unsafe.allow", defaultValue = "false")
-	public static boolean NIO_READ_WRITE_THREADS_UNSAFE_ALLOW;
-
-	/**
-	 * Number of minimum threads that will be used to execute aion client packets.
-	 */
-	@Property(key = "gameserver.network.packet.processor.threads.min", defaultValue = "4")
-	public static int PACKET_PROCESSOR_MIN_THREADS;
-
-	/**
-	 * Number of maximum threads that will be used to execute aion client packets.
-	 */
-	@Property(key = "gameserver.network.packet.processor.threads.max", defaultValue = "4")
-	public static int PACKET_PROCESSOR_MAX_THREADS;
-
-	/**
-	 * Threshold that will be used to decide when extra threads are not needed. (it doesn't have any effect if min threads == max threads)
-	 */
-	@Property(key = "gameserver.network.packet.processor.threshold.kill", defaultValue = "3")
-	public static int PACKET_PROCESSOR_THREAD_KILL_THRESHOLD;
-
-	/**
-	 * Threshold that will be used to decide when extra threads should be spawned. (it doesn't have any effect if min threads == max threads)
-	 */
-	@Property(key = "gameserver.network.packet.processor.threshold.spawn", defaultValue = "50")
-	public static int PACKET_PROCESSOR_THREAD_SPAWN_THRESHOLD;
+	@Property(key = "gameserver.network.io_threads", defaultValue = "4")
+	public static int IO_THREADS;
 
 	/**
 	 * Maximum number of packets of one client that may wait for execution. A client exceeding it gets disconnected.
@@ -104,13 +81,19 @@ public class NetworkConfig {
 	public static int PACKET_PROCESSOR_MAX_PENDING_PACKETS_PER_CONNECTION;
 
 	/**
-	 * Maximum number of server packets that may wait to be sent to one client. A client exceeding it gets disconnected.
+	 * Time in seconds after which a client packet that is still executing gets its stack trace logged. 0 disables the check.
 	 */
-	@Property(key = "gameserver.network.client.max_pending_server_packets", defaultValue = "20000")
-	public static int MAX_PENDING_SERVER_PACKETS;
+	@Property(key = "gameserver.network.packet.processor.stuck_warn_seconds", defaultValue = "30")
+	public static int PACKET_PROCESSOR_STUCK_WARN_SECONDS;
 
 	/**
-	 * Time in seconds a client may not receive any data while server packets are waiting to be sent to it, before it gets disconnected.
+	 * Maximum size in kilobytes of the server packets that may wait to be sent to one client. A client exceeding it gets disconnected.
+	 */
+	@Property(key = "gameserver.network.client.max_pending_send_kb", defaultValue = "4096")
+	public static int MAX_PENDING_SEND_KILOBYTES;
+
+	/**
+	 * Time in seconds a client may not receive any data while its send buffer is full, before it gets disconnected.
 	 */
 	@Property(key = "gameserver.network.client.max_send_stall_seconds", defaultValue = "60")
 	public static int MAX_SEND_STALL_SECONDS;
@@ -133,27 +116,27 @@ public class NetworkConfig {
 	@Property(key = "gameserver.network.logging.ignored_packets", defaultValue = "false")
 	public static boolean LOG_IGNORED_PACKETS;
 
-	@Property(key = "gameserver.network.flood.connections", defaultValue = "true")
-	public static boolean ENABLE_FLOOD_CONNECTIONS;
+	/**
+	 * Client connections that may be open at the same time, 0 for no limit.
+	 */
+	@Property(key = "gameserver.network.client.max_connections", defaultValue = "20000")
+	public static int MAX_CONNECTIONS;
 
-	@Property(key = "gameserver.network.flood.tick", defaultValue = "1000")
-	public static int Flood_Tick;
+	/**
+	 * Connections an IP may have open at the same time, 0 for no limit.
+	 */
+	@Property(key = "gameserver.network.client.max_connections_per_ip", defaultValue = "200")
+	public static int MAX_CONNECTIONS_PER_IP;
 
-	@Property(key = "gameserver.network.flood.short.warn", defaultValue = "10")
-	public static int Flood_SWARN;
+	/**
+	 * New connections an IP may open per second on average, after a burst of {@link #CONNECTION_BURST_PER_IP}, 0 for no limit.
+	 */
+	@Property(key = "gameserver.network.client.connections_per_second_per_ip", defaultValue = "5")
+	public static double CONNECTIONS_PER_SECOND_PER_IP;
 
-	@Property(key = "gameserver.network.flood.short.reject", defaultValue = "20")
-	public static int Flood_SReject;
-
-	@Property(key = "gameserver.network.flood.short.tick", defaultValue = "10")
-	public static int Flood_STick;
-
-	@Property(key = "gameserver.network.flood.long.warn", defaultValue = "30")
-	public static int Flood_LWARN;
-
-	@Property(key = "gameserver.network.flood.long.reject", defaultValue = "60")
-	public static int Flood_LReject;
-
-	@Property(key = "gameserver.network.flood.long.tick", defaultValue = "60")
-	public static int Flood_LTick;
+	/**
+	 * New connections an IP may open at once before {@link #CONNECTIONS_PER_SECOND_PER_IP} applies.
+	 */
+	@Property(key = "gameserver.network.client.connection_burst_per_ip", defaultValue = "30")
+	public static int CONNECTION_BURST_PER_IP;
 }

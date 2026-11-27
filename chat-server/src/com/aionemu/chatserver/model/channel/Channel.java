@@ -12,6 +12,10 @@ public abstract class Channel {
 	private final ChannelType channelType;
 	private final int gameServerId;
 	private final int channelId;
+	/**
+	 * Number of clients in this channel, guarded by {@link ChatChannels}.
+	 */
+	int memberCount;
 
 	public Channel(ChannelType channelType, int gameServerId) {
 		this.channelType = channelType;

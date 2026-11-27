@@ -18,16 +18,13 @@ public class SM_CHANNEL_MESSAGE extends AbstractServerPacket {
 
 	@Override
 	protected void writeImpl(AionConnection connection) {
-		writeC(getOpCode());
-		writeC(0x00);
-		writeD(0x00);
-		writeD(0x00);
+		writeQ(Integer.toUnsignedLong(connection.getChatClient().getClientId())); // recipient
 		writeD(message.getChannel().getChannelId());
-		writeD(message.getSender().getClientId());
-		writeD(0x00);
-		writeC(0x00);
-		writeH(message.getSender().getIdentifier().length / 2);
-		writeB(message.getSender().getIdentifier());
+		writeQ(Integer.toUnsignedLong(message.getSender().getClientId()));
+		writeC(0); // user type
+		byte[] senderIdentifier = message.getSender().getIdentifier(); // read once, the sender may log in again meanwhile
+		writeH(senderIdentifier.length / 2);
+		writeB(senderIdentifier);
 		writeH(message.size() / 2);
 		writeB(message.getText());
 	}

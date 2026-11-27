@@ -17,43 +17,43 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You inflicted %num1 damage on %0.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_MSG_COMBAT_MY_ATTACK(int num1, String value0) {
-		return new SM_SYSTEM_MESSAGE(1200000, num1, value0);
+	public static SM_SYSTEM_MESSAGE STR_MSG_COMBAT_MY_ATTACK(String value0, int num1) {
+		return new SM_SYSTEM_MESSAGE(1200000, value0, num1);
 	}
 
 	/**
 	 * Critical Hit! You inflicted %num1 critical damage on %0.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_MSG_COMBAT_MY_CRITICAL(int num1, String value0) {
-		return new SM_SYSTEM_MESSAGE(1200001, num1, value0);
+	public static SM_SYSTEM_MESSAGE STR_MSG_COMBAT_MY_CRITICAL(String value0, int num1) {
+		return new SM_SYSTEM_MESSAGE(1200001, value0, num1);
 	}
 
 	/**
 	 * %0 inflicted %num2 damage on %1.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_MSG_COMBAT_MY_SUMMONED_ATTACK(String value0, int num2, String value1) {
-		return new SM_SYSTEM_MESSAGE(1200002, value0, num2, value1);
+	public static SM_SYSTEM_MESSAGE STR_MSG_COMBAT_MY_SUMMONED_ATTACK(String value0, String value1, int num2) {
+		return new SM_SYSTEM_MESSAGE(1200002, value0, value1, num2);
 	}
 
 	/**
 	 * Critical Hit! %0 inflicted %num2 critical damage on %1.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_MSG_COMBAT_MY_SUMMONED_CRITICAL(String value0, int num2, String value1) {
-		return new SM_SYSTEM_MESSAGE(1200003, value0, num2, value1);
+	public static SM_SYSTEM_MESSAGE STR_MSG_COMBAT_MY_SUMMONED_CRITICAL(String value0, String value1, int num2) {
+		return new SM_SYSTEM_MESSAGE(1200003, value0, value1, num2);
 	}
 
 	/**
 	 * %1 received %num2 damage from %0.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_MSG_COMBAT_MY_SUMMONED_ENEMY_ATTACK(String value1, int num2, String value0) {
-		return new SM_SYSTEM_MESSAGE(1200004, value1, num2, value0);
+	public static SM_SYSTEM_MESSAGE STR_MSG_COMBAT_MY_SUMMONED_ENEMY_ATTACK(String value0, String value1, int num2) {
+		return new SM_SYSTEM_MESSAGE(1200004, value0, value1, num2);
 	}
 
 	/**
 	 * Critical Hit! %0 inflicted %num2 critical damage on %1.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_MSG_COMBAT_MY_SUMMONED_ENEMY_CRITICAL(String value0, int num2, String value1) {
-		return new SM_SYSTEM_MESSAGE(1200005, value0, num2, value1);
+	public static SM_SYSTEM_MESSAGE STR_MSG_COMBAT_MY_SUMMONED_ENEMY_CRITICAL(String value0, String value1, int num2) {
+		return new SM_SYSTEM_MESSAGE(1200005, value0, value1, num2);
 	}
 
 	/**
@@ -7462,15 +7462,15 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You received %num1 damage from %0.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_MSG_COMBAT_ENEMY_ATTACK(int num1, String value0) {
-		return new SM_SYSTEM_MESSAGE(1210006, num1, value0);
+	public static SM_SYSTEM_MESSAGE STR_MSG_COMBAT_ENEMY_ATTACK(String value0, int num1) {
+		return new SM_SYSTEM_MESSAGE(1210006, value0, num1);
 	}
 
 	/**
 	 * Critical Hit! You received %num1 damage from %0.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_MSG_COMBAT_ENEMY_CRITICAL(int num1, String value0) {
-		return new SM_SYSTEM_MESSAGE(1210007, num1, value0);
+	public static SM_SYSTEM_MESSAGE STR_MSG_COMBAT_ENEMY_CRITICAL(String value0, int num1) {
+		return new SM_SYSTEM_MESSAGE(1210007, value0, num1);
 	}
 
 	/**
@@ -7518,15 +7518,15 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * %0 inflicted %num2 damage on %1.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_MSG_COMBAT_PARTY_ATTACK(String value0, int num2, String value1) {
-		return new SM_SYSTEM_MESSAGE(1220000, value0, num2, value1);
+	public static SM_SYSTEM_MESSAGE STR_MSG_COMBAT_PARTY_ATTACK(String value0, String value1, int num2) {
+		return new SM_SYSTEM_MESSAGE(1220000, value0, value1, num2);
 	}
 
 	/**
 	 * Critical Hit! %0 inflicted %num2 critical damage on %1.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_MSG_COMBAT_PARTY_CRITICAL(String value0, int num2, String value1) {
-		return new SM_SYSTEM_MESSAGE(1220001, value0, num2, value1);
+	public static SM_SYSTEM_MESSAGE STR_MSG_COMBAT_PARTY_CRITICAL(String value0, String value1, int num2) {
+		return new SM_SYSTEM_MESSAGE(1220001, value0, value1, num2);
 	}
 
 	/**
@@ -7574,15 +7574,15 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * %1 received %num2 damage from %0.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_MSG_COMBAT_PARTY_ENEMY_ATTACK(String value1, int num2, String value0) {
-		return new SM_SYSTEM_MESSAGE(1230000, value1, num2, value0);
+	public static SM_SYSTEM_MESSAGE STR_MSG_COMBAT_PARTY_ENEMY_ATTACK(String value0, String value1, int num2) {
+		return new SM_SYSTEM_MESSAGE(1230000, value0, value1, num2);
 	}
 
 	/**
 	 * Critical Hit! %1 received %num2 critical damage from %0.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_MSG_COMBAT_PARTY_ENEMY_CRITICAL(String value1, int num2, String value0) {
-		return new SM_SYSTEM_MESSAGE(1230001, value1, num2, value0);
+	public static SM_SYSTEM_MESSAGE STR_MSG_COMBAT_PARTY_ENEMY_CRITICAL(String value0, String value1, int num2) {
+		return new SM_SYSTEM_MESSAGE(1230001, value0, value1, num2);
 	}
 
 	/**
@@ -7630,15 +7630,15 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * %0 inflicted %num2 damage on %1.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_MSG_COMBAT_OTHER_FRIENDLY_ATTACK(String value0, int num2, String value1) {
-		return new SM_SYSTEM_MESSAGE(1240000, value0, num2, value1);
+	public static SM_SYSTEM_MESSAGE STR_MSG_COMBAT_OTHER_FRIENDLY_ATTACK(String value0, String value1, int num2) {
+		return new SM_SYSTEM_MESSAGE(1240000, value0, value1, num2);
 	}
 
 	/**
 	 * Critical Hit! %0 inflicted %num2 critical damage on %1.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_MSG_COMBAT_OTHER_FRIENDLY_CRITICAL(String value0, int num2, String value1) {
-		return new SM_SYSTEM_MESSAGE(1240001, value0, num2, value1);
+	public static SM_SYSTEM_MESSAGE STR_MSG_COMBAT_OTHER_FRIENDLY_CRITICAL(String value0, String value1, int num2) {
+		return new SM_SYSTEM_MESSAGE(1240001, value0, value1, num2);
 	}
 
 	/**
@@ -7686,15 +7686,15 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * %0 inflicted %num2 damage on %1.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_MSG_COMBAT_OTHER_HOSTILE_ATTACK(String value0, int num2, String value1) {
-		return new SM_SYSTEM_MESSAGE(1250000, value0, num2, value1);
+	public static SM_SYSTEM_MESSAGE STR_MSG_COMBAT_OTHER_HOSTILE_ATTACK(String value0, String value1, int num2) {
+		return new SM_SYSTEM_MESSAGE(1250000, value0, value1, num2);
 	}
 
 	/**
 	 * Critical Hit! %0 inflicted %num2 critical damage on %1.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_MSG_COMBAT_OTHER_HOSTILE_CRITICAL(String value0, int num2, String value1) {
-		return new SM_SYSTEM_MESSAGE(1250001, value0, num2, value1);
+	public static SM_SYSTEM_MESSAGE STR_MSG_COMBAT_OTHER_HOSTILE_CRITICAL(String value0, String value1, int num2) {
+		return new SM_SYSTEM_MESSAGE(1250001, value0, value1, num2);
 	}
 
 	/**
@@ -7742,15 +7742,15 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * %0 inflicted %num2 damage on %1.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_MSG_COMBAT_OTHER_NPC_ATTACK(String value0, int num2, String value1) {
-		return new SM_SYSTEM_MESSAGE(1260000, value0, num2, value1);
+	public static SM_SYSTEM_MESSAGE STR_MSG_COMBAT_OTHER_NPC_ATTACK(String value0, String value1, int num2) {
+		return new SM_SYSTEM_MESSAGE(1260000, value0, value1, num2);
 	}
 
 	/**
 	 * Critical Hit! %0 inflicted %num2 critical damage on %1.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_MSG_COMBAT_OTHER_NPC_CRITICAL(String value0, int num2, String value1) {
-		return new SM_SYSTEM_MESSAGE(1260001, value0, num2, value1);
+	public static SM_SYSTEM_MESSAGE STR_MSG_COMBAT_OTHER_NPC_CRITICAL(String value0, String value1, int num2) {
+		return new SM_SYSTEM_MESSAGE(1260001, value0, value1, num2);
 	}
 
 	/**
@@ -10402,7 +10402,7 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You cannot use %1 until you reach level %0.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_CANNOT_USE_ITEM_TOO_LOW_LEVEL_MUST_BE_THIS_LEVEL(String value1, int value0) {
+	public static SM_SYSTEM_MESSAGE STR_CANNOT_USE_ITEM_TOO_LOW_LEVEL_MUST_BE_THIS_LEVEL(int value0, String value1) {
 		return new SM_SYSTEM_MESSAGE(1300372, value0, value1);
 	}
 
@@ -11929,8 +11929,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You can only accept this quest when you have level %1 %0 skill.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_QUEST_ACQUIRE_ERROR_SKILL_LEVEL(String value1, String value0) {
-		return new SM_SYSTEM_MESSAGE(1300590, value1, value0);
+	public static SM_SYSTEM_MESSAGE STR_QUEST_ACQUIRE_ERROR_SKILL_LEVEL(String value0, String value1) {
+		return new SM_SYSTEM_MESSAGE(1300590, value0, value1);
 	}
 
 	/**
@@ -12020,8 +12020,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You cannot receive the quest reward as you do not have %1 %0.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_QUEST_GET_REWARD_ERROR_NO_QUEST_ITEM_MULTIPLE(String value1, String value0) {
-		return new SM_SYSTEM_MESSAGE(1300603, value1, value0);
+	public static SM_SYSTEM_MESSAGE STR_QUEST_GET_REWARD_ERROR_NO_QUEST_ITEM_MULTIPLE(String value0, String value1) {
+		return new SM_SYSTEM_MESSAGE(1300603, value0, value1);
 	}
 
 	/**
@@ -13727,8 +13727,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You have joined the private channel %1 at Channel %0. Confirm if you selected the channel in the chatting tab option.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_CAHT_ROOM_JOIN_SUCCESS(String value1, String value0) {
-		return new SM_SYSTEM_MESSAGE(1300850, value1, value0);
+	public static SM_SYSTEM_MESSAGE STR_CAHT_ROOM_JOIN_SUCCESS(String value0, String value1) {
+		return new SM_SYSTEM_MESSAGE(1300850, value0, value1);
 	}
 
 	/**
@@ -13777,8 +13777,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You have joined the private channel %1 at Channel %0. Confirm if you selected the channel in the chatting tab option.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_CHAT_ROOM_JOIN_NOTIFY_SELF(String value1, String value0) {
-		return new SM_SYSTEM_MESSAGE(1300857, value1, value0);
+	public static SM_SYSTEM_MESSAGE STR_CHAT_ROOM_JOIN_NOTIFY_SELF(String value0, String value1) {
+		return new SM_SYSTEM_MESSAGE(1300857, value0, value1);
 	}
 
 	/**
@@ -14385,8 +14385,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You received %num1 %0 items as reward for the survey.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_MSG_GET_POLL_REWARD_ITEM_MULTI(long num1, String value0) {
-		return new SM_SYSTEM_MESSAGE(1300946, num1, value0);
+	public static SM_SYSTEM_MESSAGE STR_MSG_GET_POLL_REWARD_ITEM_MULTI(String value0, long num1) {
+		return new SM_SYSTEM_MESSAGE(1300946, value0, num1);
 	}
 
 	/**
@@ -15092,15 +15092,15 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * %1 of the %0 killed the Aetheric Field Generator.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_ABYSS_SHIELD_BROKEN(String value1, String value0) {
-		return new SM_SYSTEM_MESSAGE(1301048, value1, value0);
+	public static SM_SYSTEM_MESSAGE STR_ABYSS_SHIELD_BROKEN(String value0, String value1) {
+		return new SM_SYSTEM_MESSAGE(1301048, value0, value1);
 	}
 
 	/**
 	 * %1 of the %0 destroyed the Castle Gate.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_ABYSS_DOOR_BROKEN(String value1, String value0) {
-		return new SM_SYSTEM_MESSAGE(1301049, value1, value0);
+	public static SM_SYSTEM_MESSAGE STR_ABYSS_DOOR_BROKEN(String value0, String value1) {
+		return new SM_SYSTEM_MESSAGE(1301049, value0, value1);
 	}
 
 	/**
@@ -15134,8 +15134,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * %1 of the %0 destroyed the Gate Guardian Stone.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_ABYSS_REPAIR_BROKEN(String value1, String value0) {
-		return new SM_SYSTEM_MESSAGE(1301054, value1, value0);
+	public static SM_SYSTEM_MESSAGE STR_ABYSS_REPAIR_BROKEN(String value0, String value1) {
+		return new SM_SYSTEM_MESSAGE(1301054, value0, value1);
 	}
 
 	/**
@@ -16017,7 +16017,7 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You cannot craft as you do not have %num1 %0.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_COMBINE_NO_COMPONENT_ITEM_MULTIPLE(int num1, String value0) {
+	public static SM_SYSTEM_MESSAGE STR_COMBINE_NO_COMPONENT_ITEM_MULTIPLE(String value0, int num1) {
 		return new SM_SYSTEM_MESSAGE(1330047, value0, num1);
 	}
 
@@ -16381,8 +16381,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You distributed %1 Kinah each to %0 members.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_PARTY_DISTRIBUTE_GOLD(String value1, String value0) {
-		return new SM_SYSTEM_MESSAGE(1380000, value1, value0);
+	public static SM_SYSTEM_MESSAGE STR_PARTY_DISTRIBUTE_GOLD(String value0, String value1) {
+		return new SM_SYSTEM_MESSAGE(1380000, value0, value1);
 	}
 
 	/**
@@ -16633,8 +16633,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * %1 resisted %0's attack.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_MSG_COMBAT_RESISTED_A_TO_B(String value1, String value0) {
-		return new SM_SYSTEM_MESSAGE(1390133, value1, value0);
+	public static SM_SYSTEM_MESSAGE STR_MSG_COMBAT_RESISTED_A_TO_B(String value0, String value1) {
+		return new SM_SYSTEM_MESSAGE(1390133, value0, value1);
 	}
 
 	/**
@@ -17067,17 +17067,17 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
-	 * %1 of the %0 killed the Guardian General.
+	 * %1 of the %0 killed %2.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_ABYSS_BOSS_KILLED(String value1, String value0) {
-		return new SM_SYSTEM_MESSAGE(1390195, value1, value0);
+	public static SM_SYSTEM_MESSAGE STR_ABYSS_BOSS_KILLED(String value0, String value1, String value2) {
+		return new SM_SYSTEM_MESSAGE(1390195, value0, value1, value2);
 	}
 
 	/**
 	 * %1 of the %0 has destroyed the Balaur Battleship Dredgion.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_ABYSS_CARRIER_KILLED(String value1, String value0) {
-		return new SM_SYSTEM_MESSAGE(1390196, value1, value0);
+	public static SM_SYSTEM_MESSAGE STR_ABYSS_CARRIER_KILLED(String value0, String value1) {
+		return new SM_SYSTEM_MESSAGE(1390196, value0, value1);
 	}
 
 	/**
@@ -17146,8 +17146,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * %1 of the %0 has destroyed the Balaur Battleship Dredgion.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_ABYSS_GUILD_CARRIER_KILLED(String value1, String value0) {
-		return new SM_SYSTEM_MESSAGE(1390206, value1, value0);
+	public static SM_SYSTEM_MESSAGE STR_ABYSS_GUILD_CARRIER_KILLED(String value0, String value1) {
+		return new SM_SYSTEM_MESSAGE(1390206, value0, value1);
 	}
 
 	/**
@@ -17160,8 +17160,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * %1 of %0 has captured the %2 Artifact.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_ARTIFACT_WIN_FORT(String value1, String value0, String value2) {
-		return new SM_SYSTEM_MESSAGE(1390208, value1, value0, value2);
+	public static SM_SYSTEM_MESSAGE STR_ARTIFACT_WIN_FORT(String value0, String value1, String value2) {
+		return new SM_SYSTEM_MESSAGE(1390208, value0, value1, value2);
 	}
 
 	/**
@@ -17570,15 +17570,15 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * %0 rolled the highest (%0 rolled %1, while you rolled %2).
 	 */
-	public static SM_SYSTEM_MESSAGE STR_MSG_GET_ITEM_PARTYNOTICE_DICE(String value0, String value3, String value1, String value2) {
-		return new SM_SYSTEM_MESSAGE(1390266, value0, value3, value1, value2);
+	public static SM_SYSTEM_MESSAGE STR_MSG_GET_ITEM_PARTYNOTICE_DICE(String value0, String value1, String value2) {
+		return new SM_SYSTEM_MESSAGE(1390266, value0, value1, value2);
 	}
 
 	/**
 	 * %0 rolled the highest (%0 rolled %1, while you passed).
 	 */
-	public static SM_SYSTEM_MESSAGE STR_MSG_GET_ITEM_PARTYNOTICE_DICE_GIVEUP_ROLL(String value0, String value2, String value1) {
-		return new SM_SYSTEM_MESSAGE(1390267, value0, value2, value1);
+	public static SM_SYSTEM_MESSAGE STR_MSG_GET_ITEM_PARTYNOTICE_DICE_GIVEUP_ROLL(String value0, String value1) {
+		return new SM_SYSTEM_MESSAGE(1390267, value0, value1);
 	}
 
 	/**
@@ -17675,8 +17675,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You Whisper to %1: %0
 	 */
-	public static SM_SYSTEM_MESSAGE STR_CMD_WHISHPER_INPUT(String value1, String value0) {
-		return new SM_SYSTEM_MESSAGE(1400008, value1, value0);
+	public static SM_SYSTEM_MESSAGE STR_CMD_WHISHPER_INPUT(String value0, String value1) {
+		return new SM_SYSTEM_MESSAGE(1400008, value0, value1);
 	}
 
 	/**
@@ -17795,8 +17795,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You cannot continue the battle as you have insufficient Abyss Points. You will be resurrected at %1 if nothing is entered within %0 minutes.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_CANNOT_RESURRECT_HERE_BY_ABYSS_POINT_ZERO(String value1, String value0) {
-		return new SM_SYSTEM_MESSAGE(1400024, value1, value0);
+	public static SM_SYSTEM_MESSAGE STR_CANNOT_RESURRECT_HERE_BY_ABYSS_POINT_ZERO(String value0, String value1) {
+		return new SM_SYSTEM_MESSAGE(1400024, value0, value1);
 	}
 
 	/**
@@ -18583,7 +18583,7 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You have sold %num1 %0s.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_MSG_PERSONAL_SHOP_SELL_ITEM_MULTI(long num1, String value0) {
+	public static SM_SYSTEM_MESSAGE STR_MSG_PERSONAL_SHOP_SELL_ITEM_MULTI(String value0, long num1) {
 		return new SM_SYSTEM_MESSAGE(1400135, value0, num1);
 	}
 
@@ -18884,8 +18884,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You may reenter %WORLDNAME1 after %DURATIONTIME0 has passed.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_MSG_CANT_INSTANCE_COOL_TIME_REMAIN(String worldname1, String durationtime0) {
-		return new SM_SYSTEM_MESSAGE(1400178, worldname1, durationtime0);
+	public static SM_SYSTEM_MESSAGE STR_MSG_CANT_INSTANCE_COOL_TIME_REMAIN(String durationtime0, String worldname1) {
+		return new SM_SYSTEM_MESSAGE(1400178, durationtime0, worldname1);
 	}
 
 	/**
@@ -19696,8 +19696,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * %1 of the %0 killed the Guardian General.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_FIELDABYSS_BOSS_KILLED(String value1, String value0) {
-		return new SM_SYSTEM_MESSAGE(1400295, value1, value0);
+	public static SM_SYSTEM_MESSAGE STR_FIELDABYSS_BOSS_KILLED(String value0, String value1) {
+		return new SM_SYSTEM_MESSAGE(1400295, value0, value1);
 	}
 
 	/**
@@ -19738,15 +19738,15 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * %1 of %0 obtained the Artifact %2.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_GUILD_EVENT_WIN_FIELDARTIFACT(String value1, String value0, String value2) {
-		return new SM_SYSTEM_MESSAGE(1400301, value1, value0, value2);
+	public static SM_SYSTEM_MESSAGE STR_GUILD_EVENT_WIN_FIELDARTIFACT(String value0, String value1, String value2) {
+		return new SM_SYSTEM_MESSAGE(1400301, value0, value1, value2);
 	}
 
 	/**
 	 * %1 lost the Artifact %0.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_GUILD_EVENT_LOSE_FIELDARTIFACT(String value1, String value0) {
-		return new SM_SYSTEM_MESSAGE(1400302, value1, value0);
+	public static SM_SYSTEM_MESSAGE STR_GUILD_EVENT_LOSE_FIELDARTIFACT(String value0, String value1) {
+		return new SM_SYSTEM_MESSAGE(1400302, value0, value1);
 	}
 
 	/**
@@ -19766,8 +19766,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * %1 of the %0 destroyed the Castle Gate.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_FIELDABYSS_DOOR_BROKEN(String value1, String value0) {
-		return new SM_SYSTEM_MESSAGE(1400305, value1, value0);
+	public static SM_SYSTEM_MESSAGE STR_FIELDABYSS_DOOR_BROKEN(String value0, String value1) {
+		return new SM_SYSTEM_MESSAGE(1400305, value0, value1);
 	}
 
 	/**
@@ -19787,8 +19787,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * %1 of the %0 destroyed the Gate Guardian Stone.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_FIELDABYSS_REPAIR_BROKEN(String value1, String value0) {
-		return new SM_SYSTEM_MESSAGE(1400308, value1, value0);
+	public static SM_SYSTEM_MESSAGE STR_FIELDABYSS_REPAIR_BROKEN(String value0, String value1) {
+		return new SM_SYSTEM_MESSAGE(1400308, value0, value1);
 	}
 
 	/**
@@ -19822,29 +19822,29 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * %1 of %0 is activating the Artifact %2.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_FIELDARTIFACT_CASTING(String value1, String value0, String value2) {
-		return new SM_SYSTEM_MESSAGE(1400313, value1, value0, value2);
+	public static SM_SYSTEM_MESSAGE STR_FIELDARTIFACT_CASTING(String value0, String value1, String value2) {
+		return new SM_SYSTEM_MESSAGE(1400313, value0, value1, value2);
 	}
 
 	/**
 	 * The Artifact %1 core of %0 has been ejected.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_FIELDARTIFACT_CORE_CASTING(String value1, String value0) {
-		return new SM_SYSTEM_MESSAGE(1400314, value1, value0);
+	public static SM_SYSTEM_MESSAGE STR_FIELDARTIFACT_CORE_CASTING(String value0, String value1) {
+		return new SM_SYSTEM_MESSAGE(1400314, value0, value1);
 	}
 
 	/**
 	 * The activation of the Artifact %1 of %0 was canceled.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_FIELDARTIFACT_CANCELED(String value1, String value0) {
-		return new SM_SYSTEM_MESSAGE(1400315, value1, value0);
+	public static SM_SYSTEM_MESSAGE STR_FIELDARTIFACT_CANCELED(String value0, String value1) {
+		return new SM_SYSTEM_MESSAGE(1400315, value0, value1);
 	}
 
 	/**
 	 * %1 of %0 has activated the Artifact %2.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_FIELDARTIFACT_FIRE(String value1, String value0, String value2) {
-		return new SM_SYSTEM_MESSAGE(1400316, value1, value0, value2);
+	public static SM_SYSTEM_MESSAGE STR_FIELDARTIFACT_FIRE(String value0, String value1, String value2) {
+		return new SM_SYSTEM_MESSAGE(1400316, value0, value1, value2);
 	}
 
 	/**
@@ -19920,8 +19920,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * %1 of %0 has destroyed %SUBZONE2.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_FIELDABYSS_BARRIER_BROKEN(String value1, String value0, String subzone2) {
-		return new SM_SYSTEM_MESSAGE(1400327, value1, value0, subzone2);
+	public static SM_SYSTEM_MESSAGE STR_FIELDABYSS_BARRIER_BROKEN(String value0, String value1, String subzone2) {
+		return new SM_SYSTEM_MESSAGE(1400327, value0, value1, subzone2);
 	}
 
 	/**
@@ -20130,29 +20130,29 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * %WORLDNAME1 (difficulty: %2) with a %num0 player limit has opened.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_MSG_INSTANCE_DUNGEON_WITH_DIFFICULTY_OPENED(String worldname1, String value2, int num0) {
-		return new SM_SYSTEM_MESSAGE(1400357, worldname1, value2, num0);
+	public static SM_SYSTEM_MESSAGE STR_MSG_INSTANCE_DUNGEON_WITH_DIFFICULTY_OPENED(int num0, String worldname1, String value2) {
+		return new SM_SYSTEM_MESSAGE(1400357, num0, worldname1, value2);
 	}
 
 	/**
 	 * %WORLDNAME1 with a %num0 player limit has opened.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_MSG_INSTANCE_DUNGEON_OPENED(String worldname1, int num0) {
-		return new SM_SYSTEM_MESSAGE(1400358, worldname1, num0);
+	public static SM_SYSTEM_MESSAGE STR_MSG_INSTANCE_DUNGEON_OPENED(int num0, String worldname1) {
+		return new SM_SYSTEM_MESSAGE(1400358, num0, worldname1);
 	}
 
 	/**
 	 * %WORLDNAME1 (difficulty: %2) with a %num0 player limit is currently open.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_MSG_INSTANCE_DUNGEON_WITH_DIFFICULTY_OPENED_INFO(String worldname1, String value2, int num0) {
-		return new SM_SYSTEM_MESSAGE(1400359, worldname1, value2, num0);
+	public static SM_SYSTEM_MESSAGE STR_MSG_INSTANCE_DUNGEON_WITH_DIFFICULTY_OPENED_INFO(int num0, String worldname1, String value2) {
+		return new SM_SYSTEM_MESSAGE(1400359, num0, worldname1, value2);
 	}
 
 	/**
 	 * %WORLDNAME1 with a %num0 player limit is currently open.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_MSG_INSTANCE_DUNGEON_OPENED_INFO(String worldname1, int num0) {
-		return new SM_SYSTEM_MESSAGE(1400360, worldname1, num0);
+	public static SM_SYSTEM_MESSAGE STR_MSG_INSTANCE_DUNGEON_OPENED_INFO(int num0, String worldname1) {
+		return new SM_SYSTEM_MESSAGE(1400360, num0, worldname1);
 	}
 
 	/**
@@ -20928,8 +20928,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * %1 of %0 destroyed the castle gate.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_FIELDABYSS_SHIELD_BROKEN(String value1, String value0) {
-		return new SM_SYSTEM_MESSAGE(1400473, value1, value0);
+	public static SM_SYSTEM_MESSAGE STR_FIELDABYSS_SHIELD_BROKEN(String value0, String value1) {
+		return new SM_SYSTEM_MESSAGE(1400473, value0, value1);
 	}
 
 	/**
@@ -20991,8 +20991,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * %1 remains on the appearance change time of %0.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_MSG_SKIN_CHANGE_TIME_LEFT(String value1, String value0) {
-		return new SM_SYSTEM_MESSAGE(1400482, value1, value0);
+	public static SM_SYSTEM_MESSAGE STR_MSG_SKIN_CHANGE_TIME_LEFT(String value0, String value1) {
+		return new SM_SYSTEM_MESSAGE(1400482, value0, value1);
 	}
 
 	/**
@@ -21446,8 +21446,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * Cannot find the path to %0. %0 is located at %1.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_FIND_POS_TOO_FAR_FROM_SUBZONE_DEV(String value0, String value2, String value1) {
-		return new SM_SYSTEM_MESSAGE(1400547, value0, value2, value1);
+	public static SM_SYSTEM_MESSAGE STR_FIND_POS_TOO_FAR_FROM_SUBZONE_DEV(String value0, String value1) {
+		return new SM_SYSTEM_MESSAGE(1400547, value0, value1);
 	}
 
 	/**
@@ -21460,15 +21460,15 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * Cannot find the path to %0. %0 is located at %1.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_FIND_POS_TOO_FAR_FROM_NPC_DEV(String value0, String value2, String value1) {
-		return new SM_SYSTEM_MESSAGE(1400549, value0, value2, value1);
+	public static SM_SYSTEM_MESSAGE STR_FIND_POS_TOO_FAR_FROM_NPC_DEV(String value0, String value1) {
+		return new SM_SYSTEM_MESSAGE(1400549, value0, value1);
 	}
 
 	/**
 	 * %0 is located at %2 in %1.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_FIND_POS_NPC_FOUND_IN_OTHER_WORLD_DEV(String value0, String value2, String value1) {
-		return new SM_SYSTEM_MESSAGE(1400550, value0, value2, value1);
+	public static SM_SYSTEM_MESSAGE STR_FIND_POS_NPC_FOUND_IN_OTHER_WORLD_DEV(String value0, String value1, String value2) {
+		return new SM_SYSTEM_MESSAGE(1400550, value0, value1, value2);
 	}
 
 	/**
@@ -21915,8 +21915,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * Stop feeding %1 to %0.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_MSG_TOYPET_FEED_STOP_EATING(String value1, String value0) {
-		return new SM_SYSTEM_MESSAGE(1400617, value1, value0);
+	public static SM_SYSTEM_MESSAGE STR_MSG_TOYPET_FEED_STOP_EATING(String value0, String value1) {
+		return new SM_SYSTEM_MESSAGE(1400617, value0, value1);
 	}
 
 	/**
@@ -22441,8 +22441,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You may change a pet's name once every %DURATIONTIME1 (Time remaining: %DURATIONTIME0).
 	 */
-	public static SM_SYSTEM_MESSAGE STR_MSG_TOYPET_NAME_CHANGE_DELAY(String durationtime1, String durationtime0) {
-		return new SM_SYSTEM_MESSAGE(1400692, durationtime1, durationtime0);
+	public static SM_SYSTEM_MESSAGE STR_MSG_TOYPET_NAME_CHANGE_DELAY(long durationtime0, int durationtime1) {
+		return new SM_SYSTEM_MESSAGE(1400692, durationtime0, durationtime1);
 	}
 
 	/**
@@ -23965,15 +23965,15 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You cannot use %1 in %0.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_MSG_SKILL_ITEM_RESTRICTED_AREA(String value1, String value0) {
-		return new SM_SYSTEM_MESSAGE(1400905, value1, value0);
+	public static SM_SYSTEM_MESSAGE STR_MSG_SKILL_ITEM_RESTRICTED_AREA(String value0, String value1) {
+		return new SM_SYSTEM_MESSAGE(1400905, value0, value1);
 	}
 
 	/**
 	 * You cannot use %1 until you reach level %0.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_CANNOT_USE_ITEM_TOO_LOW_GUILD_LEVEL(String value1, String value0) {
-		return new SM_SYSTEM_MESSAGE(1400906, value1, value0);
+	public static SM_SYSTEM_MESSAGE STR_CANNOT_USE_ITEM_TOO_LOW_GUILD_LEVEL(String value0, String value1) {
+		return new SM_SYSTEM_MESSAGE(1400906, value0, value1);
 	}
 
 	/**
@@ -26413,6 +26413,13 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	 */
 	public static SM_SYSTEM_MESSAGE STR_MSG_IDRUNEWP_BROKENPROTECTIONALL() {
 		return new SM_SYSTEM_MESSAGE(1401796);
+	}
+
+	/**
+	 * You cannot summon a pet here.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_PET_CANT_SUMMON_HERE() {
+		return new SM_SYSTEM_MESSAGE(1401809);
 	}
 
 	/**

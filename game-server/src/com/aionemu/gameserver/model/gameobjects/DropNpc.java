@@ -3,8 +3,8 @@ package com.aionemu.gameserver.model.gameobjects;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.TeamMember;
@@ -18,8 +18,10 @@ import com.aionemu.gameserver.model.team.common.legacy.LootGroupRules;
 public class DropNpc {
 
 	private final int objectIdId;
-	private Set<Integer> allowedLooters = new HashSet<>();
+	// Added by whoever registers the drop and by the looting player's thread, read by the threads of all other nearby players and by respawn tasks
+	private Set<Integer> allowedLooters = ConcurrentHashMap.newKeySet();
 	private Collection<Player> inRangePlayers = new ArrayList<>();
+	// Guarded by this instance's monitor, like the item count and winner of its drops (see DropService and DropDistributionService)
 	private Collection<Player> playerStatus = new ArrayList<>();
 	private Player lootingPlayer = null;
 	private int distributionId = 0;
@@ -37,7 +39,8 @@ public class DropNpc {
 	}
 
 	public void setAllowedLooters(Set<Integer> allowedLooters) {
-		this.allowedLooters = allowedLooters;
+		this.allowedLooters.clear();
+		this.allowedLooters.addAll(allowedLooters);
 	}
 
 	public void setAllowedLooter(Player player) {

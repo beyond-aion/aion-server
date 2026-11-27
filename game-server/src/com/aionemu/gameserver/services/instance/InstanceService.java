@@ -178,17 +178,14 @@ public class InstanceService {
 		private boolean canDestroyInstance() {
 			if (!worldMapInstance.getPlayersInside().isEmpty())
 				return false;
-			return worldMapInstance.isPersonal() || isRegisteredTeamDisbanded() || System.currentTimeMillis() > calculateDestroyTime() - 1000;
-		}
-
-		private boolean isRegisteredTeamDisbanded() {
-			GeneralTeam<?, ?> registeredTeam = worldMapInstance.getRegisteredTeam();
-			return registeredTeam != null && registeredTeam.isDisbanded();
+			return System.currentTimeMillis() > calculateDestroyTime() - 1000;
 		}
 
 		private long calculateDestroyTime() {
 			long lastActivity = Math.max(taskStartTime, worldMapInstance.getLastPlayerLeaveTime());
-			return lastActivity + getDestroyDelaySeconds(worldMapInstance) * 1000;
+			// the delay must be at least a few seconds to account for players teleporting within the instance (despawn removes them temporarily from it)
+			int delaySeconds = Math.max(10, getDestroyDelaySeconds(worldMapInstance));
+			return lastActivity + delaySeconds * 1000L;
 		}
 
 		@Override
@@ -210,6 +207,8 @@ public class InstanceService {
 	}
 
 	public static void onLeaveInstance(Player player) {
+		// the ascension morph only exists in the quest instances that turn it on
+		player.setAscensionMorphed(false);
 		WorldMapInstance instance = player.getWorldMapInstance();
 		instance.hideTimeLimit(player);
 		instance.getInstanceHandler().onLeaveInstance(player);
@@ -239,6 +238,13 @@ public class InstanceService {
 	}
 
 	public static int getDestroyDelaySeconds(WorldMapInstance worldMapInstance) {
+		if (worldMapInstance.isPersonal() || isRegisteredTeamDisbanded(worldMapInstance))
+			return 0;
 		return worldMapInstance.getMaxPlayers() == 1 ? InstanceConfig.SOLO_INSTANCE_DESTROY_DELAY_SECONDS : InstanceConfig.INSTANCE_DESTROY_DELAY_SECONDS;
+	}
+
+	private static boolean isRegisteredTeamDisbanded(WorldMapInstance worldMapInstance) {
+		GeneralTeam<?, ?> registeredTeam = worldMapInstance.getRegisteredTeam();
+		return registeredTeam != null && registeredTeam.isDisbanded();
 	}
 }

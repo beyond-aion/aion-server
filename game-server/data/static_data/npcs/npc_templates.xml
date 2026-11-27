@@ -35155,7 +35155,7 @@
 		<bound_radius front="1" side="0.25" upper="2" />
 	</npc_template>
 	<npc_template npc_id="206109" level="1" name="str_sen_idcatacome_sensoryarea_q20025" name_id="352809" group_drop="NONE" rank="DISCIPLINED" rating="NORMAL" tribe="USEALL" type="GENERAL" ai="noaction" srange="10" attack_speed="2000" hpgauge="3">
-		<stats maxHp="143">
+		<stats maxHp="172">
 			<speeds walk="0.5" group_walk="0.5" run="6" run_fight="6" group_run_fight="6" />
 		</stats>
 		<bound_radius front="1" side="0.25" upper="2" />
@@ -101025,13 +101025,13 @@
 		<bound_radius front="1.4" side="1.05" upper="4.2" />
 	</npc_template>
 	<npc_template npc_id="216158" level="55" name="ahbana the wicked" name_id="320445" group_drop="SPECTRE" rank="MASTER" rating="HERO" race="UNDEAD" tribe="AGGRESSIVESINGLEMONSTER" type="MONSTER" ai="aggressive" srange="8" arange="4" attack_speed="2300" hpgauge="22" cancel_level="0">
-		<stats maxHp="1631698">
+		<stats maxHp="917830">
 			<speeds walk="3" group_walk="3" run="8" run_fight="10" group_run_fight="10" />
 		</stats>
 		<bound_radius front="1.125" side="1.5" upper="3.6" />
 	</npc_template>
 	<npc_template npc_id="216159" level="55" name="the soulcaller" name_id="320446" title_id="314408" group_drop="DRAKANCLERIC" rank="VETERAN" rating="HERO" race="DRAKAN" tribe="XDRAKAN" type="MONSTER" ai="aggressive" srange="15" arange="20" attack_speed="2040" hpgauge="21" cancel_level="0">
-		<stats maxHp="807566">
+		<stats maxHp="403783">
 			<speeds walk="1.07" group_walk="1.38" run="8" run_fight="10" group_run_fight="10" />
 		</stats>
 		<equipment>
@@ -101040,7 +101040,7 @@
 		<bound_radius front="1.4" side="1.05" upper="4.9" />
 	</npc_template>
 	<npc_template npc_id="216160" level="55" name="manadar" name_id="320447" group_drop="DRAKANSCOUT" rank="VETERAN" rating="HERO" race="DRAKAN" tribe="XDRAKAN" type="MONSTER" ai="manadar" srange="15" arange="27" attack_speed="2260" hpgauge="21" cancel_level="0">
-		<stats maxHp="702582">
+		<stats maxHp="351291">
 			<speeds walk="1.07" group_walk="1.38" run="8" run_fight="10" group_run_fight="10" />
 		</stats>
 		<equipment>
@@ -101050,7 +101050,7 @@
 		<bound_radius front="1.54" side="1.96" upper="5.11" />
 	</npc_template>
 	<npc_template npc_id="216161" level="55" name="vehala the cursed" name_id="320448" group_drop="DRAKANFIGHTER" rank="VETERAN" rating="HERO" race="UNDEAD" tribe="XDRAKAN" type="MONSTER" ai="aggressive" srange="15" arange="3" attack_speed="2100" hpgauge="21" cancel_level="0">
-		<stats maxHp="888322">
+		<stats maxHp="444161">
 			<speeds walk="1.07" group_walk="1.38" run="6" run_fight="8" group_run_fight="8" />
 		</stats>
 		<equipment>
@@ -101059,7 +101059,7 @@
 		<bound_radius front="1.54" side="1.96" upper="5.11" />
 	</npc_template>
 	<npc_template npc_id="216162" level="55" name="vehala the cursed" name_id="320449" group_drop="DRAKANFIGHTER" rank="VETERAN" rating="HERO" race="DRAKAN" tribe="XDRAKAN" type="MONSTER" ai="aggressive" srange="15" arange="3" attack_speed="2100" hpgauge="21" cancel_level="0">
-		<stats maxHp="951774">
+		<stats maxHp="444161">
 			<speeds walk="1.07" group_walk="1.38" run="6" run_fight="8" group_run_fight="8" />
 		</stats>
 		<equipment>
@@ -101068,13 +101068,13 @@
 		<bound_radius front="1.5" side="1.125" upper="4.5" />
 	</npc_template>
 	<npc_template npc_id="216163" level="55" name="the plaguebearer" name_id="320450" group_drop="SLIME" rank="VETERAN" rating="HERO" race="MAGICALMONSTER" tribe="AGGRESSIVESUPPORTMONSTER" type="MONSTER" ai="aggressive" srange="15" arange="37" attack_speed="2415" hpgauge="21" floatcorpse="true" cancel_level="0">
-		<stats maxHp="653744">
+		<stats maxHp="326872">
 			<speeds walk="0.6" group_walk="0.6" run="7" run_fight="5" group_run_fight="7" />
 		</stats>
 		<bound_radius front="1" side="1.48" upper="1.1" />
 	</npc_template>
-	<npc_template npc_id="216164" level="55" name="macunbello" name_id="320451" group_drop="LICH" rank="VETERAN" rating="HERO" race="UNDEAD" tribe="AGGRESSIVESUPPORTMONSTER" type="MONSTER" ai="aggressive" srange="15" arange="37" attack_speed="2530" hpgauge="21" cancel_level="0">
-		<stats maxHp="875467" />
+	<npc_template npc_id="216164" level="55" name="macunbello" name_id="320451" group_drop="LICH" rank="VETERAN" rating="HERO" race="UNDEAD" tribe="AGGRESSIVESUPPORTMONSTER" type="MONSTER" ai="macunbello" srange="15" arange="37" attack_speed="2530" hpgauge="21" cancel_level="0">
+		<stats maxHp="492450" />
 		<bound_radius front="0.861" side="1.5680001" upper="3.724" />
 	</npc_template>
 	<npc_template npc_id="216165" level="55" name="the great virhana" name_id="320452" group_drop="DRAKANFIGHTER" rank="VETERAN" rating="HERO" race="CONSTRUCT" tribe="XDRAKAN" type="MONSTER" ai="virhana" srange="15" arange="3" attack_speed="1900" hpgauge="21" cancel_level="0">
@@ -101099,11 +101099,11 @@
 		<bound_radius front="0.6825" side="0.455" upper="2.86" />
 	</npc_template>
 	<npc_template npc_id="216168" level="55" name="flarestorm" name_id="320455" group_drop="ELEMENTALFIRE4" rank="MASTER" rating="HERO" race="ELEMENTAL" tribe="AGGRESSIVESINGLEMONSTER" type="MONSTER" ai="aggressive" srange="15" arange="45" attack_speed="2300" hpgauge="22" floatcorpse="true" cancel_level="0">
-		<stats maxHp="1392514" />
+		<stats maxHp="696257" />
 		<bound_radius front="1.5" side="1" upper="6.1" />
 	</npc_template>
 	<npc_template npc_id="216169" level="55" name="dorakiki the bold" name_id="320456" group_drop="SHULACKASSASSIN" rank="VETERAN" rating="HERO" race="SHULACK" tribe="SHULACK" type="MONSTER" ai="dorakiki_the_bold" srange="8" arange="2" attack_speed="2100" hpgauge="21" cancel_level="0">
-		<stats maxHp="888322">
+		<stats maxHp="444161">
 			<speeds walk="1.875" group_walk="1.875" run="8" run_fight="10" group_run_fight="10" />
 		</stats>
 		<equipment>
@@ -101113,7 +101113,7 @@
 		<bound_radius front="0.9" side="0.4" upper="1.66" />
 	</npc_template>
 	<npc_template npc_id="216170" level="55" name="gatekeeper darfall" name_id="320457" title_id="314408" group_drop="DRAKANFIGHTER" rank="VETERAN" rating="ELITE" race="DRAKAN" tribe="AGGRESSIVESUPPORTMONSTER" type="MONSTER" ai="aggressive" srange="12" arange="4" attack_speed="2040" hpgauge="14" cancel_level="20">
-		<stats maxHp="66446">
+		<stats maxHp="36545">
 			<speeds walk="1.07" group_walk="1.38" run="6" run_fight="8" group_run_fight="8" />
 		</stats>
 		<equipment>
@@ -101122,7 +101122,7 @@
 		<bound_radius front="1.6" side="1.2" upper="4.8" />
 	</npc_template>
 	<npc_template npc_id="216171" level="55" name="gatekeeper kutarrun" name_id="320458" title_id="314408" group_drop="DRAKANFIGHTER" rank="VETERAN" rating="ELITE" race="DRAKAN" tribe="AGGRESSIVESUPPORTMONSTER" type="MONSTER" ai="aggressive" srange="12" arange="4" attack_speed="2040" hpgauge="14" cancel_level="20">
-		<stats maxHp="66446">
+		<stats maxHp="36545">
 			<speeds walk="1.07" group_walk="1.38" run="6" run_fight="8" group_run_fight="8" />
 		</stats>
 		<equipment>
@@ -101131,7 +101131,7 @@
 		<bound_radius front="1.6" side="1.2" upper="4.8" />
 	</npc_template>
 	<npc_template npc_id="216172" level="55" name="gatekeeper samarrn" name_id="320459" title_id="314408" group_drop="DRAKANFIGHTER" rank="VETERAN" rating="ELITE" race="DRAKAN" tribe="AGGRESSIVESUPPORTMONSTER" type="MONSTER" ai="aggressive" srange="12" arange="4" attack_speed="2040" hpgauge="14" cancel_level="20">
-		<stats maxHp="66446">
+		<stats maxHp="36545">
 			<speeds walk="1.07" group_walk="1.38" run="6" run_fight="8" group_run_fight="8" />
 		</stats>
 		<equipment>
@@ -101140,7 +101140,7 @@
 		<bound_radius front="1.6" side="1.2" upper="4.8" />
 	</npc_template>
 	<npc_template npc_id="216173" level="55" name="gatekeeper rhapsharr" name_id="320460" title_id="314408" group_drop="DRAKANFIGHTER" rank="VETERAN" rating="ELITE" race="DRAKAN" tribe="AGGRESSIVESUPPORTMONSTER" type="MONSTER" ai="aggressive" srange="12" arange="4" attack_speed="2040" hpgauge="14" cancel_level="20">
-		<stats maxHp="66446">
+		<stats maxHp="36545">
 			<speeds walk="1.07" group_walk="1.38" run="6" run_fight="8" group_run_fight="8" />
 		</stats>
 		<equipment>
@@ -101149,7 +101149,7 @@
 		<bound_radius front="1.6" side="1.2" upper="4.8" />
 	</npc_template>
 	<npc_template npc_id="216174" level="55" name="protector pahraza" name_id="320461" title_id="314412" group_drop="DRAKANCLERIC" rank="VETERAN" rating="ELITE" race="DRAKAN" tribe="XDRAKAN_PRIEST" type="MONSTER" ai="xdrakanpriest" srange="10" sangle="240" arange="2" attack_speed="2040" hpgauge="14" cancel_level="20">
-		<stats maxHp="5526">
+		<stats maxHp="36545">
 			<speeds walk="1.07" group_walk="1.38" run="6" run_fight="8" group_run_fight="8" />
 		</stats>
 		<equipment>
@@ -101158,7 +101158,7 @@
 		<bound_radius front="1.5" side="1.125" upper="5.25" />
 	</npc_template>
 	<npc_template npc_id="216175" level="55" name="protector pahraza" name_id="320462" title_id="314412" group_drop="DRAKANCLERIC" rank="DISCIPLINED" rating="ELITE" race="DRAKAN" tribe="XDRAKAN_PRIEST" type="MONSTER" ai="xdrakanpriest" srange="10" sangle="240" arange="2" attack_speed="2040" hpgauge="11" cancel_level="40">
-		<stats maxHp="33103">
+		<stats maxHp="18207">
 			<speeds walk="1.07" group_walk="1.38" run="6" run_fight="8" group_run_fight="8" />
 		</stats>
 		<equipment>
@@ -101167,7 +101167,7 @@
 		<bound_radius front="1.5" side="1.125" upper="5.25" />
 	</npc_template>
 	<npc_template npc_id="216176" level="55" name="protector dinata" name_id="320463" title_id="314412" group_drop="DRAKANCLERIC" rank="VETERAN" rating="ELITE" race="DRAKAN" tribe="XDRAKAN_PRIEST" type="MONSTER" ai="xdrakanpriest" srange="10" sangle="240" arange="2" attack_speed="2040" hpgauge="14" cancel_level="20">
-		<stats maxHp="5526">
+		<stats maxHp="36545">
 			<speeds walk="1.07" group_walk="1.38" run="6" run_fight="8" group_run_fight="8" />
 		</stats>
 		<equipment>
@@ -101176,7 +101176,7 @@
 		<bound_radius front="1.5" side="1.125" upper="5.25" />
 	</npc_template>
 	<npc_template npc_id="216177" level="55" name="protector dinata" name_id="320464" title_id="314412" group_drop="DRAKANCLERIC" rank="DISCIPLINED" rating="ELITE" race="DRAKAN" tribe="XDRAKAN_PRIEST" type="MONSTER" ai="xdrakanpriest" srange="10" sangle="240" arange="2" attack_speed="2040" hpgauge="11" cancel_level="40">
-		<stats maxHp="33103">
+		<stats maxHp="18207">
 			<speeds walk="1.07" group_walk="1.38" run="6" run_fight="8" group_run_fight="8" />
 		</stats>
 		<equipment>
@@ -101185,7 +101185,7 @@
 		<bound_radius front="1.5" side="1.125" upper="5.25" />
 	</npc_template>
 	<npc_template npc_id="216178" level="55" name="protector narma" name_id="320465" title_id="314412" group_drop="DRAKANCLERIC" rank="VETERAN" rating="ELITE" race="DRAKAN" tribe="XDRAKAN_PRIEST" type="MONSTER" ai="xdrakanpriest" srange="10" sangle="240" arange="2" attack_speed="2040" hpgauge="14" cancel_level="20">
-		<stats maxHp="5526">
+		<stats maxHp="36545">
 			<speeds walk="1.07" group_walk="1.38" run="6" run_fight="8" group_run_fight="8" />
 		</stats>
 		<equipment>
@@ -101194,7 +101194,7 @@
 		<bound_radius front="1.5" side="1.125" upper="5.25" />
 	</npc_template>
 	<npc_template npc_id="216179" level="55" name="protector narma" name_id="320466" title_id="314412" group_drop="DRAKANCLERIC" rank="DISCIPLINED" rating="ELITE" race="DRAKAN" tribe="XDRAKAN_PRIEST" type="MONSTER" ai="xdrakanpriest" srange="10" sangle="240" arange="2" attack_speed="2040" hpgauge="11" cancel_level="40">
-		<stats maxHp="33103">
+		<stats maxHp="18207">
 			<speeds walk="1.07" group_walk="1.38" run="6" run_fight="8" group_run_fight="8" />
 		</stats>
 		<equipment>
@@ -101203,7 +101203,7 @@
 		<bound_radius front="1.5" side="1.125" upper="5.25" />
 	</npc_template>
 	<npc_template npc_id="216180" level="55" name="judge kramaka" name_id="320467" title_id="314412" group_drop="DRAKANCLERIC" rank="VETERAN" rating="ELITE" race="DRAKAN" tribe="XDRAKAN_PRIEST" type="MONSTER" ai="xdrakanpriest" srange="10" sangle="240" arange="2" attack_speed="2040" hpgauge="14" cancel_level="20">
-		<stats maxHp="5526">
+		<stats maxHp="36545">
 			<speeds walk="1.07" group_walk="1.38" run="6" run_fight="8" group_run_fight="8" />
 		</stats>
 		<equipment>
@@ -101212,7 +101212,7 @@
 		<bound_radius front="1.5" side="1.125" upper="5.25" />
 	</npc_template>
 	<npc_template npc_id="216181" level="55" name="judge kramaka" name_id="320468" title_id="314412" group_drop="DRAKANCLERIC" rank="DISCIPLINED" rating="ELITE" race="DRAKAN" tribe="XDRAKAN_PRIEST" type="MONSTER" ai="xdrakanpriest" srange="10" sangle="240" arange="2" attack_speed="2040" hpgauge="11" cancel_level="40">
-		<stats maxHp="33103">
+		<stats maxHp="18207">
 			<speeds walk="1.07" group_walk="1.38" run="6" run_fight="8" group_run_fight="8" />
 		</stats>
 		<equipment>
@@ -101305,13 +101305,13 @@
 		<bound_radius front="3.56" side="3.56" upper="2.508" />
 	</npc_template>
 	<npc_template npc_id="216193" level="55" name="dark bloodwing" name_id="320480" group_drop="BAT" rank="VETERAN" rating="ELITE" race="BEAST" tribe="MONSTER" type="MONSTER" ai="aggressive" srange="8" sangle="270" arange="2" attack_speed="2090" hpgauge="14" floatcorpse="true" cancel_level="20">
-		<stats maxHp="78786">
+		<stats maxHp="13131">
 			<speeds walk="2.8" group_walk="2.8" run="7" run_fight="5.5" group_run_fight="7" />
 		</stats>
 		<bound_radius front="1.2425" side="0.42" upper="1.6925" />
 	</npc_template>
 	<npc_template npc_id="216194" level="55" name="terrible bloodwing" name_id="320481" group_drop="BAT" rank="VETERAN" rating="ELITE" race="BEAST" tribe="MONSTER" type="MONSTER" ai="aggressive" srange="8" sangle="270" arange="2" attack_speed="2090" hpgauge="14" floatcorpse="true" cancel_level="20">
-		<stats maxHp="78786">
+		<stats maxHp="13131">
 			<speeds walk="2.8" group_walk="2.8" run="7" run_fight="5.5" group_run_fight="7" />
 		</stats>
 		<bound_radius front="1.2425" side="0.42" upper="1.6925" />
@@ -101383,7 +101383,7 @@
 		<bound_radius front="1.1" side="1.4" upper="3.65" />
 	</npc_template>
 	<npc_template npc_id="216202" level="55" name="vehala eidolon" name_id="320489" title_id="314410" group_drop="DRAKANSCOUT" rank="VETERAN" rating="ELITE" race="DRAKAN" tribe="XDRAKAN" type="MONSTER" ai="aggressive" srange="6" arange="37" attack_speed="2260" hpgauge="14" cancel_level="20">
-		<stats maxHp="20681">
+		<stats maxHp="21678">
 			<speeds walk="1.07" group_walk="1.38" run="6" run_fight="8" group_run_fight="8" />
 		</stats>
 		<equipment>
@@ -101432,7 +101432,7 @@
 		<bound_radius front="0.3" side="0.3" upper="1.69" />
 	</npc_template>
 	<npc_template npc_id="216208" level="55" name="elyos spiritbow" name_id="320495" group_drop="UNDEADLIGHT_RA" rank="EXPERT" rating="NORMAL" race="UNDEAD" tribe="MONSTER" type="MONSTER" ai="aggressive" srange="10" sangle="240" arange="15" attack_speed="2486" hpgauge="5" cancel_level="80">
-		<stats maxHp="4158">
+		<stats maxHp="4185">
 			<speeds walk="1.457" group_walk="1.457" run="6" run_fight="6" group_run_fight="6" />
 		</stats>
 		<equipment>
@@ -101507,14 +101507,14 @@
 		<bound_radius front="1.1" side="0.75" upper="5.2" />
 	</npc_template>
 	<npc_template npc_id="216216" level="55" name="balaur statue" name_id="320503" group_drop="DRAKANFIGHTER" rank="VETERAN" rating="ELITE" race="DRAKAN" tribe="AGGRESSIVESINGLEMONSTER" type="MONSTER" ai="aggressive" srange="10" sangle="240" arange="2" attack_speed="2100" hpgauge="14" cancel_level="20">
-		<stats maxHp="155317" />
+		<stats maxHp="40200" />
 		<equipment>
 			<item>100000998</item>
 		</equipment>
 		<bound_radius front="1.1" side="0.75" upper="5.2" />
 	</npc_template>
 	<npc_template npc_id="216217" level="55" name="balaur monument" name_id="320504" group_drop="DRAKANSCOUT" rank="VETERAN" rating="ELITE" race="DRAKAN" tribe="AGGRESSIVESINGLEMONSTER" type="MONSTER" ai="aggressive" srange="10" sangle="240" arange="2" attack_speed="2260" hpgauge="14" cancel_level="20">
-		<stats maxHp="122842" />
+		<stats maxHp="31794" />
 		<equipment>
 			<item>100200888</item>
 			<item>100200889</item>
@@ -101528,7 +101528,7 @@
 		<bound_radius front="1.1025" side="0.8775" upper="2.5695" />
 	</npc_template>
 	<npc_template npc_id="216219" level="55" name="malicious obscura" name_id="320506" group_drop="SHADOWSTALKER" rank="VETERAN" rating="ELITE" race="UNDEAD" tribe="AGGRESSIVESINGLEMONSTER" type="MONSTER" ai="aggressive" srange="10" sangle="240" arange="2" attack_speed="2530" hpgauge="14" floatcorpse="true" cancel_level="20">
-		<stats maxHp="32827">
+		<stats maxHp="10505">
 			<speeds walk="1.5" group_walk="1.5" run="7" run_fight="5.5" group_run_fight="7" />
 		</stats>
 		<bound_radius front="1.1025" side="0.8775" upper="2.5695" />
@@ -101682,7 +101682,7 @@
 		<bound_radius front="1.4" side="1.05" upper="4.2" />
 	</npc_template>
 	<npc_template npc_id="216239" level="55" name="ahbana the wicked" name_id="320526" group_drop="SPECTRE" rank="MASTER" rating="HERO" race="UNDEAD" tribe="AGGRESSIVESINGLEMONSTER" type="MONSTER" ai="aggressive" srange="8" arange="4" attack_speed="2300" hpgauge="22" cancel_level="0">
-		<stats maxHp="917830">
+		<stats maxHp="591491">
 			<speeds walk="3" group_walk="3" run="8" run_fight="10" group_run_fight="10" />
 		</stats>
 		<bound_radius front="1.125" side="1.5" upper="3.6" />
@@ -101730,8 +101730,8 @@
 		</stats>
 		<bound_radius front="1" side="1.48" upper="1.1" />
 	</npc_template>
-	<npc_template npc_id="216245" level="55" name="macunbello" name_id="320532" group_drop="LICH" rank="VETERAN" rating="HERO" race="UNDEAD" tribe="AGGRESSIVESUPPORTMONSTER" type="MONSTER" ai="aggressive" srange="15" arange="37" attack_speed="2530" hpgauge="21" cancel_level="0">
-		<stats maxHp="875467" />
+	<npc_template npc_id="216245" level="55" name="macunbello" name_id="320532" group_drop="LICH" rank="VETERAN" rating="HERO" race="UNDEAD" tribe="AGGRESSIVESUPPORTMONSTER" type="MONSTER" ai="macunbello" srange="15" arange="37" attack_speed="2530" hpgauge="21" cancel_level="0">
+		<stats maxHp="383017" />
 		<bound_radius front="0.861" side="1.5680001" upper="3.724" />
 	</npc_template>
 	<npc_template npc_id="216246" level="55" name="the great virhana" name_id="320533" group_drop="DRAKANFIGHTER" rank="VETERAN" rating="HERO" race="CONSTRUCT" tribe="XDRAKAN" type="MONSTER" ai="virhana" srange="15" arange="3" attack_speed="1900" hpgauge="21" cancel_level="0">
@@ -101806,7 +101806,7 @@
 		<bound_radius front="1.6" side="1.2" upper="4.8" />
 	</npc_template>
 	<npc_template npc_id="216255" level="55" name="protector pahraza" name_id="320542" title_id="314412" group_drop="DRAKANCLERIC" rank="VETERAN" rating="ELITE" race="DRAKAN" tribe="XDRAKAN_PRIEST" type="MONSTER" ai="xdrakanpriest" srange="10" sangle="240" arange="2" attack_speed="2040" hpgauge="14" cancel_level="20">
-		<stats maxHp="5546">
+		<stats maxHp="36545">
 			<speeds walk="1.07" group_walk="1.38" run="6" run_fight="8" group_run_fight="8" />
 		</stats>
 		<equipment>
@@ -101824,7 +101824,7 @@
 		<bound_radius front="1.5" side="1.125" upper="5.25" />
 	</npc_template>
 	<npc_template npc_id="216257" level="55" name="protector dinata" name_id="320544" title_id="314412" group_drop="DRAKANCLERIC" rank="VETERAN" rating="ELITE" race="DRAKAN" tribe="XDRAKAN_PRIEST" type="MONSTER" ai="xdrakanpriest" srange="10" sangle="240" arange="2" attack_speed="2040" hpgauge="14" cancel_level="20">
-		<stats maxHp="5546">
+		<stats maxHp="36545">
 			<speeds walk="1.07" group_walk="1.38" run="6" run_fight="8" group_run_fight="8" />
 		</stats>
 		<equipment>
@@ -101842,7 +101842,7 @@
 		<bound_radius front="1.5" side="1.125" upper="5.25" />
 	</npc_template>
 	<npc_template npc_id="216259" level="55" name="protector narma" name_id="320546" title_id="314412" group_drop="DRAKANCLERIC" rank="VETERAN" rating="ELITE" race="DRAKAN" tribe="XDRAKAN_PRIEST" type="MONSTER" ai="xdrakanpriest" srange="10" sangle="240" arange="2" attack_speed="2040" hpgauge="14" cancel_level="20">
-		<stats maxHp="5546">
+		<stats maxHp="36545">
 			<speeds walk="1.07" group_walk="1.38" run="6" run_fight="8" group_run_fight="8" />
 		</stats>
 		<equipment>
@@ -101860,7 +101860,7 @@
 		<bound_radius front="1.5" side="1.125" upper="5.25" />
 	</npc_template>
 	<npc_template npc_id="216261" level="55" name="judge kramaka" name_id="320548" title_id="314412" group_drop="DRAKANCLERIC" rank="VETERAN" rating="ELITE" race="DRAKAN" tribe="XDRAKAN_PRIEST" type="MONSTER" ai="xdrakanpriest" srange="10" sangle="240" arange="2" attack_speed="2040" hpgauge="14" cancel_level="20">
-		<stats maxHp="5546">
+		<stats maxHp="36545">
 			<speeds walk="1.07" group_walk="1.38" run="6" run_fight="8" group_run_fight="8" />
 		</stats>
 		<equipment>
@@ -101962,13 +101962,13 @@
 		<bound_radius front="3.56" side="3.56" upper="2.508" />
 	</npc_template>
 	<npc_template npc_id="216274" level="55" name="dark bloodwing" name_id="320561" group_drop="BAT" rank="VETERAN" rating="ELITE" race="BEAST" tribe="MONSTER" type="MONSTER" ai="aggressive" srange="8" sangle="270" arange="2" attack_speed="2090" hpgauge="14" floatcorpse="true" cancel_level="20">
-		<stats maxHp="64080">
+		<stats maxHp="13131">
 			<speeds walk="2.8" group_walk="2.8" run="7" run_fight="5.5" group_run_fight="7" />
 		</stats>
 		<bound_radius front="1.2425" side="0.42" upper="1.6925" />
 	</npc_template>
 	<npc_template npc_id="216275" level="55" name="terrible bloodwing" name_id="320562" group_drop="BAT" rank="VETERAN" rating="ELITE" race="BEAST" tribe="MONSTER" type="MONSTER" ai="aggressive" srange="8" sangle="270" arange="2" attack_speed="2090" hpgauge="14" floatcorpse="true" cancel_level="20">
-		<stats maxHp="64080">
+		<stats maxHp="13131">
 			<speeds walk="2.8" group_walk="2.8" run="7" run_fight="5.5" group_run_fight="7" />
 		</stats>
 		<bound_radius front="1.2425" side="0.42" upper="1.6925" />
@@ -101992,7 +101992,7 @@
 		<bound_radius front="0.935" side="0.55" upper="2.97" />
 	</npc_template>
 	<npc_template npc_id="216278" level="55" name="manadar trapper" name_id="320565" title_id="314409" group_drop="DRAKANSCOUT" rank="VETERAN" rating="ELITE" race="DRAKAN" tribe="XDRAKAN" type="MONSTER" ai="aggressive" srange="5" arange="2" attack_speed="1900" hpgauge="14" cancel_level="20">
-		<stats maxHp="23398">
+		<stats maxHp="22323">
 			<speeds walk="0.9" group_walk="0.9" run="7.05" run_fight="8" group_run_fight="7.05" />
 		</stats>
 		<equipment>
@@ -102012,7 +102012,7 @@
 		<bound_radius front="0.85" side="0.5" upper="3.4" />
 	</npc_template>
 	<npc_template npc_id="216280" level="55" name="vehala ghost" name_id="320567" title_id="314410" group_drop="DRAKANFIGHTER" rank="VETERAN" rating="ELITE" race="DRAKAN" tribe="XDRAKAN" type="MONSTER" ai="aggressive" srange="5" arange="4" attack_speed="2100" hpgauge="14" cancel_level="20">
-		<stats maxHp="26140">
+		<stats maxHp="26104">
 			<speeds walk="1.07" group_walk="1.38" run="6" run_fight="8" group_run_fight="8" />
 		</stats>
 		<equipment>
@@ -102071,7 +102071,7 @@
 		<bound_radius front="1" side="1.859" upper="1.1" />
 	</npc_template>
 	<npc_template npc_id="216287" level="55" name="elyos spiritblade" name_id="320574" group_drop="UNDEADLIGHT_FI" rank="EXPERT" rating="NORMAL" race="UNDEAD" tribe="MONSTER" type="MONSTER" ai="aggressive" srange="10" sangle="240" arange="2" attack_speed="2310" hpgauge="5" cancel_level="80">
-		<stats maxHp="9621">
+		<stats maxHp="5292">
 			<speeds walk="1.457" group_walk="1.457" run="6" run_fight="6" group_run_fight="6" />
 		</stats>
 		<equipment>
@@ -102080,7 +102080,7 @@
 		<bound_radius front="0.35" side="0.35" upper="1.87" />
 	</npc_template>
 	<npc_template npc_id="216288" level="55" name="elyos spiritmage" name_id="320575" group_drop="UNDEADLIGHT_WI" rank="EXPERT" rating="NORMAL" race="UNDEAD" tribe="MONSTER" type="MONSTER" ai="aggressive" srange="10" sangle="240" arange="15" attack_speed="2530" hpgauge="5" cancel_level="80">
-		<stats maxHp="7260">
+		<stats maxHp="3993">
 			<speeds walk="1.419" group_walk="1.419" run="6" run_fight="6" group_run_fight="6" />
 		</stats>
 		<equipment>
@@ -102089,7 +102089,7 @@
 		<bound_radius front="0.3" side="0.3" upper="1.69" />
 	</npc_template>
 	<npc_template npc_id="216289" level="55" name="elyos spiritbow" name_id="320576" group_drop="UNDEADLIGHT_RA" rank="EXPERT" rating="NORMAL" race="UNDEAD" tribe="MONSTER" type="MONSTER" ai="aggressive" srange="10" sangle="240" arange="15" attack_speed="2486" hpgauge="5" cancel_level="80">
-		<stats maxHp="7610">
+		<stats maxHp="4185">
 			<speeds walk="1.457" group_walk="1.457" run="6" run_fight="6" group_run_fight="6" />
 		</stats>
 		<equipment>
@@ -102099,7 +102099,7 @@
 		<bound_radius front="0.35" side="0.35" upper="1.86" />
 	</npc_template>
 	<npc_template npc_id="216290" level="55" name="elyos spiritsalve" name_id="320577" group_drop="UNDEADLIGHT_PR" rank="EXPERT" rating="NORMAL" race="UNDEAD" tribe="MONSTER" type="MONSTER" ai="aggressive" srange="10" sangle="240" arange="2" attack_speed="2244" hpgauge="5" floatcorpse="true" cancel_level="80">
-		<stats maxHp="8747">
+		<stats maxHp="4811">
 			<speeds walk="1.419" group_walk="1.419" run="6" run_fight="6" group_run_fight="6" />
 		</stats>
 		<equipment>
@@ -102108,7 +102108,7 @@
 		<bound_radius front="0.3" side="0.3" upper="1.69" />
 	</npc_template>
 	<npc_template npc_id="216291" level="55" name="asmodian soulsword" name_id="320578" group_drop="UNDEADDARK_FI" rank="EXPERT" rating="NORMAL" race="UNDEAD" tribe="MONSTER" type="MONSTER" ai="aggressive" srange="10" sangle="240" arange="2" attack_speed="2310" hpgauge="5" cancel_level="80">
-		<stats maxHp="9621">
+		<stats maxHp="5292">
 			<speeds walk="1.457" group_walk="1.457" run="6" run_fight="6" group_run_fight="6" />
 		</stats>
 		<equipment>
@@ -102117,7 +102117,7 @@
 		<bound_radius front="0.4" side="0.4" upper="1.87" />
 	</npc_template>
 	<npc_template npc_id="216292" level="55" name="asmodian soulspell" name_id="320579" group_drop="UNDEADDARK_WI" rank="EXPERT" rating="NORMAL" race="UNDEAD" tribe="MONSTER" type="MONSTER" ai="aggressive" srange="10" sangle="240" arange="15" attack_speed="2530" hpgauge="5" cancel_level="80">
-		<stats maxHp="7260">
+		<stats maxHp="3993">
 			<speeds walk="1.419" group_walk="1.419" run="6" run_fight="6" group_run_fight="6" />
 		</stats>
 		<equipment>
@@ -102126,7 +102126,7 @@
 		<bound_radius front="0.3" side="0.3" upper="1.69" />
 	</npc_template>
 	<npc_template npc_id="216293" level="55" name="asmodian soulranger" name_id="320580" group_drop="UNDEADDARK_RA" rank="EXPERT" rating="NORMAL" race="UNDEAD" tribe="MONSTER" type="MONSTER" ai="aggressive" srange="10" sangle="240" arange="15" attack_speed="2090" hpgauge="5" cancel_level="80">
-		<stats maxHp="7260">
+		<stats maxHp="3993">
 			<speeds walk="1.457" group_walk="1.457" run="6" run_fight="6" group_run_fight="6" />
 		</stats>
 		<equipment>
@@ -102136,7 +102136,7 @@
 		<bound_radius front="0.35" side="0.35" upper="1.86" />
 	</npc_template>
 	<npc_template npc_id="216294" level="55" name="asmodian soulmedic" name_id="320581" group_drop="UNDEADDARK_PR" rank="EXPERT" rating="NORMAL" race="UNDEAD" tribe="MONSTER" type="MONSTER" ai="aggressive" srange="10" sangle="240" arange="2" attack_speed="2244" hpgauge="5" cancel_level="80">
-		<stats maxHp="8747">
+		<stats maxHp="4811">
 			<speeds walk="1.419" group_walk="1.419" run="6" run_fight="6" group_run_fight="6" />
 		</stats>
 		<equipment>
@@ -102145,7 +102145,7 @@
 		<bound_radius front="0.3" side="0.3" upper="1.69" />
 	</npc_template>
 	<npc_template npc_id="216295" level="55" name="monolithic gladiator" name_id="320582" group_drop="DRAKANFIGHTER" rank="VETERAN" rating="ELITE" race="DRAKAN" tribe="XDRAKAN" type="MONSTER" ai="aggressive" srange="10" sangle="240" arange="2" attack_speed="2100" hpgauge="14" cancel_level="20">
-		<stats maxHp="41794">
+		<stats maxHp="40200">
 			<speeds walk="2.23" group_walk="1.457" run="7" run_fight="9.2" group_run_fight="6" />
 		</stats>
 		<equipment>
@@ -102164,7 +102164,7 @@
 		<bound_radius front="1.1" side="0.75" upper="5.2" />
 	</npc_template>
 	<npc_template npc_id="216297" level="55" name="balaur statue" name_id="320584" group_drop="DRAKANFIGHTER" rank="VETERAN" rating="ELITE" race="DRAKAN" tribe="AGGRESSIVESINGLEMONSTER" type="MONSTER" ai="aggressive" srange="10" sangle="240" arange="2" attack_speed="2100" hpgauge="14" cancel_level="20">
-		<stats maxHp="31794" />
+		<stats maxHp="40200" />
 		<equipment>
 			<item>100000998</item>
 		</equipment>
@@ -102179,25 +102179,25 @@
 		<bound_radius front="1.1" side="0.75" upper="5.2" />
 	</npc_template>
 	<npc_template npc_id="216299" level="55" name="roving obscura" name_id="320586" group_drop="SHADOWSTALKER" rank="VETERAN" rating="ELITE" race="UNDEAD" tribe="AGGRESSIVESINGLEMONSTER" type="MONSTER" ai="aggressive" srange="10" sangle="240" arange="2" attack_speed="2310" hpgauge="14" floatcorpse="true" cancel_level="20">
-		<stats maxHp="31325">
+		<stats maxHp="13922">
 			<speeds walk="1.5" group_walk="1.5" run="7" run_fight="5.5" group_run_fight="7" />
 		</stats>
 		<bound_radius front="1.1025" side="0.8775" upper="2.5695" />
 	</npc_template>
 	<npc_template npc_id="216300" level="55" name="malicious obscura" name_id="320587" group_drop="SHADOWSTALKER" rank="VETERAN" rating="ELITE" race="UNDEAD" tribe="AGGRESSIVESINGLEMONSTER" type="MONSTER" ai="aggressive" srange="10" sangle="240" arange="2" attack_speed="2530" hpgauge="14" floatcorpse="true" cancel_level="20">
-		<stats maxHp="23636">
+		<stats maxHp="10505">
 			<speeds walk="1.5" group_walk="1.5" run="7" run_fight="5.5" group_run_fight="7" />
 		</stats>
 		<bound_radius front="1.1025" side="0.8775" upper="2.5695" />
 	</npc_template>
 	<npc_template npc_id="216301" level="55" name="hate obscura" name_id="320588" group_drop="SHADOWSTALKER" rank="VETERAN" rating="ELITE" race="UNDEAD" tribe="AGGRESSIVESINGLEMONSTER" type="MONSTER" ai="aggressive" srange="10" sangle="240" arange="2" attack_speed="2090" hpgauge="14" floatcorpse="true" cancel_level="20">
-		<stats maxHp="23636">
+		<stats maxHp="10505">
 			<speeds walk="1.5" group_walk="1.5" run="7" run_fight="5.5" group_run_fight="7" />
 		</stats>
 		<bound_radius front="1.1025" side="0.8775" upper="2.5695" />
 	</npc_template>
 	<npc_template npc_id="216302" level="55" name="misguiding obscura" name_id="320589" group_drop="SHADOWSTALKER" rank="VETERAN" rating="ELITE" race="UNDEAD" tribe="AGGRESSIVESINGLEMONSTER" type="MONSTER" ai="aggressive" srange="10" sangle="240" arange="15" attack_speed="2244" hpgauge="14" floatcorpse="true" cancel_level="20">
-		<stats maxHp="28477">
+		<stats maxHp="12656">
 			<speeds walk="1.5" group_walk="1.5" run="7" run_fight="5.5" group_run_fight="7" />
 		</stats>
 		<bound_radius front="1.1025" side="0.8775" upper="2.5695" />
@@ -102254,7 +102254,7 @@
 		<bound_radius front="0.9" side="0.4" upper="1.83" />
 	</npc_template>
 	<npc_template npc_id="216311" level="55" name="nightshade scout" name_id="320598" title_id="314388" group_drop="SHULACKASSASSIN" rank="VETERAN" rating="ELITE" race="SHULACK" tribe="SHULACK" type="MONSTER" ai="aggressive" srange="10" sangle="240" arange="2" attack_speed="1900" hpgauge="14" cancel_level="20">
-		<stats maxHp="34469">
+		<stats maxHp="11030">
 			<speeds walk="1.875" group_walk="1.875" run="7" run_fight="7" group_run_fight="7" />
 		</stats>
 		<equipment>
@@ -102292,7 +102292,7 @@
 		<bound_radius front="1.4" side="1.05" upper="4.2" />
 	</npc_template>
 	<npc_template npc_id="216315" level="55" name="laksyaka agent" name_id="320602" title_id="314408" group_drop="DRAKANMAGE" rank="VETERAN" rating="ELITE" race="DRAKAN" tribe="XDRAKAN" type="MONSTER" ai="aggressive" srange="10" sangle="240" arange="16" attack_speed="2300" hpgauge="14" cancel_level="20">
-		<stats maxHp="55150">
+		<stats maxHp="30333">
 			<speeds walk="1.07" group_walk="1.38" run="6" run_fight="8" group_run_fight="8" />
 		</stats>
 		<equipment>
@@ -104459,7 +104459,7 @@
 		<talk_info distance="5" is_dialog="true" func_dialogs="2 3" can_talk_invisible="false" />
 	</npc_template>
 	<npc_template npc_id="216528" level="1" name="taros pureblood" name_id="314051" group_drop="UNDEADLIGHT_FI" rank="DISCIPLINED" rating="NORMAL" race="ELYOS" tribe="USEALL" type="GENERAL" ai="general" srange="20" sangle="300" attack_speed="2000" hpgauge="3">
-		<stats maxHp="21360">
+		<stats maxHp="18756">
 			<speeds walk="1.5" group_walk="1.5" run="6" run_fight="4.2" group_run_fight="4.2" />
 		</stats>
 		<equipment>
@@ -104487,7 +104487,7 @@
 		<bound_radius front="3.6" side="2.125" upper="7.5" />
 	</npc_template>
 	<npc_template npc_id="216532" level="55" name="awoken wardstone protector" name_id="321753" group_drop="DRAKANFIGHTER" rank="NOVICE" rating="ELITE" race="DRAKAN" tribe="AGGRESSIVESUPPORTMONSTER" ai="aggressive" srange="20" arange="4" attack_speed="2100" hpgauge="10" cancel_level="50">
-		<stats maxHp="155317">
+		<stats maxHp="6093">
 			<speeds walk="1.07" group_walk="1.38" run="6" run_fight="12" group_run_fight="8" />
 		</stats>
 		<equipment>
@@ -104866,25 +104866,25 @@
 		<bound_radius front="1.05" side="1.05" upper="0.96" />
 	</npc_template>
 	<npc_template npc_id="216583" level="55" name="brutal soulwatcher" name_id="321803" group_drop="LICH" rank="VETERAN" rating="ELITE" race="UNDEAD" tribe="AGGRESSIVESUPPORTMONSTER" type="MONSTER" ai="aggressive" srange="8" sangle="240" arange="16" attack_speed="2530" hpgauge="14" cancel_level="20">
-		<stats maxHp="65655">
+		<stats maxHp="31514">
 			<speeds walk="1.13" group_walk="1.13" run="6" run_fight="6" group_run_fight="6" />
 		</stats>
 		<bound_radius front="0.73800004" side="1.344" upper="3.192" />
 	</npc_template>
 	<npc_template npc_id="216584" level="55" name="brutal soulwatcher" name_id="321804" group_drop="LICH" rank="VETERAN" rating="ELITE" race="UNDEAD" tribe="AGGRESSIVESUPPORTMONSTER" type="MONSTER" ai="aggressive" srange="8" sangle="240" arange="16" attack_speed="2530" hpgauge="14" cancel_level="20">
-		<stats maxHp="65655">
+		<stats maxHp="31514">
 			<speeds walk="1.13" group_walk="1.13" run="6" run_fight="6" group_run_fight="6" />
 		</stats>
 		<bound_radius front="0.73800004" side="1.344" upper="3.192" />
 	</npc_template>
 	<npc_template npc_id="216585" level="55" name="brutal soulwatcher" name_id="321805" group_drop="LICH" rank="VETERAN" rating="ELITE" race="UNDEAD" tribe="AGGRESSIVESUPPORTMONSTER" type="MONSTER" ai="aggressive" srange="8" sangle="240" arange="16" attack_speed="2530" hpgauge="14" cancel_level="20">
-		<stats maxHp="65655">
+		<stats maxHp="31514">
 			<speeds walk="1.13" group_walk="1.13" run="6" run_fight="6" group_run_fight="6" />
 		</stats>
 		<bound_radius front="0.73800004" side="1.344" upper="3.192" />
 	</npc_template>
 	<npc_template npc_id="216586" level="55" name="temadaro" name_id="321806" group_drop="LICH" rank="VETERAN" rating="ELITE" race="UNDEAD" tribe="AGGRESSIVESUPPORTMONSTER" type="MONSTER" ai="aggressive" srange="8" sangle="240" arange="16" attack_speed="2530" hpgauge="14" cancel_level="20">
-		<stats maxHp="111613">
+		<stats maxHp="31514">
 			<speeds walk="1.13" group_walk="1.13" run="6" run_fight="6" group_run_fight="6" />
 		</stats>
 		<bound_radius front="0.73800004" side="1.344" upper="3.192" />
@@ -104908,7 +104908,7 @@
 		<bound_radius front="0.73800004" side="1.344" upper="3.192" />
 	</npc_template>
 	<npc_template npc_id="216590" level="55" name="temadaro" name_id="321810" group_drop="LICH" rank="VETERAN" rating="ELITE" race="UNDEAD" tribe="AGGRESSIVESUPPORTMONSTER" type="MONSTER" ai="aggressive" srange="8" sangle="240" arange="16" attack_speed="2530" hpgauge="14" cancel_level="20">
-		<stats maxHp="52524">
+		<stats maxHp="28888">
 			<speeds walk="1.13" group_walk="1.13" run="6" run_fight="6" group_run_fight="6" />
 		</stats>
 		<bound_radius front="0.73800004" side="1.344" upper="3.192" />
@@ -106187,28 +106187,28 @@
 		</stats>
 		<bound_radius front="2.475" side="0.855" upper="3.924" />
 	</npc_template>
-	<npc_template npc_id="216733" level="55" name="macunbello" name_id="320451" group_drop="LICH" rank="VETERAN" rating="HERO" race="UNDEAD" tribe="AGGRESSIVESUPPORTMONSTER" ai="aggressive" srange="10" arange="37" attack_speed="2530" hpgauge="21" cancel_level="0">
-		<stats maxHp="875467" />
+	<npc_template npc_id="216733" level="55" name="macunbello" name_id="320451" group_drop="LICH" rank="VETERAN" rating="HERO" race="UNDEAD" tribe="AGGRESSIVESUPPORTMONSTER" ai="macunbello" srange="10" arange="37" attack_speed="2530" hpgauge="21" cancel_level="0">
+		<stats maxHp="492450" />
 		<bound_radius front="0.79950005" side="1.4560001" upper="3.458" />
 	</npc_template>
-	<npc_template npc_id="216734" level="55" name="macunbello" name_id="320451" group_drop="LICH" rank="VETERAN" rating="HERO" race="UNDEAD" tribe="AGGRESSIVESUPPORTMONSTER" ai="aggressive" srange="10" arange="37" attack_speed="2530" hpgauge="21" cancel_level="0">
-		<stats maxHp="984900" />
+	<npc_template npc_id="216734" level="55" name="macunbello" name_id="320451" group_drop="LICH" rank="VETERAN" rating="HERO" race="UNDEAD" tribe="AGGRESSIVESUPPORTMONSTER" ai="macunbello" srange="10" arange="37" attack_speed="2530" hpgauge="21" cancel_level="0">
+		<stats maxHp="492450" />
 		<bound_radius front="0.73800004" side="1.344" upper="3.192" />
 	</npc_template>
-	<npc_template npc_id="216735" level="55" name="macunbello" name_id="320451" group_drop="LICH" rank="VETERAN" rating="HERO" race="UNDEAD" tribe="AGGRESSIVESUPPORTMONSTER" ai="aggressive" srange="10" arange="37" attack_speed="2530" hpgauge="21" cancel_level="0">
+	<npc_template npc_id="216735" level="55" name="macunbello" name_id="320451" group_drop="LICH" rank="VETERAN" rating="HERO" race="UNDEAD" tribe="AGGRESSIVESUPPORTMONSTER" ai="macunbello" srange="10" arange="37" attack_speed="2530" hpgauge="21" cancel_level="0">
 		<stats maxHp="492450" />
 		<bound_radius front="0.5535" side="1.008" upper="2.394" />
 	</npc_template>
-	<npc_template npc_id="216736" level="55" name="macunbello" name_id="320532" group_drop="LICH" rank="VETERAN" rating="HERO" race="UNDEAD" tribe="AGGRESSIVESUPPORTMONSTER" ai="aggressive" srange="12" arange="37" attack_speed="2530" hpgauge="21" cancel_level="0">
-		<stats maxHp="787921" />
+	<npc_template npc_id="216736" level="55" name="macunbello" name_id="320532" group_drop="LICH" rank="VETERAN" rating="HERO" race="UNDEAD" tribe="AGGRESSIVESUPPORTMONSTER" ai="macunbello" srange="12" arange="37" attack_speed="2530" hpgauge="21" cancel_level="0">
+		<stats maxHp="383017" />
 		<bound_radius front="0.79950005" side="1.4560001" upper="3.458" />
 	</npc_template>
-	<npc_template npc_id="216737" level="55" name="macunbello" name_id="320532" group_drop="LICH" rank="VETERAN" rating="HERO" race="UNDEAD" tribe="AGGRESSIVESUPPORTMONSTER" ai="aggressive" srange="12" arange="37" attack_speed="2530" hpgauge="21" cancel_level="0">
-		<stats maxHp="875467" />
+	<npc_template npc_id="216737" level="55" name="macunbello" name_id="320532" group_drop="LICH" rank="VETERAN" rating="HERO" race="UNDEAD" tribe="AGGRESSIVESUPPORTMONSTER" ai="macunbello" srange="12" arange="37" attack_speed="2530" hpgauge="21" cancel_level="0">
+		<stats maxHp="383017" />
 		<bound_radius front="0.73800004" side="1.344" upper="3.192" />
 	</npc_template>
-	<npc_template npc_id="216738" level="55" name="macunbello" name_id="320532" group_drop="LICH" rank="VETERAN" rating="HERO" race="UNDEAD" tribe="AGGRESSIVESUPPORTMONSTER" ai="aggressive" srange="12" arange="37" attack_speed="2530" hpgauge="21" cancel_level="0">
-		<stats maxHp="437734" />
+	<npc_template npc_id="216738" level="55" name="macunbello" name_id="320532" group_drop="LICH" rank="VETERAN" rating="HERO" race="UNDEAD" tribe="AGGRESSIVESUPPORTMONSTER" ai="macunbello" srange="12" arange="37" attack_speed="2530" hpgauge="21" cancel_level="0">
+		<stats maxHp="383017" />
 		<bound_radius front="0.5535" side="1.008" upper="2.394" />
 	</npc_template>
 	<npc_template npc_id="216739" level="1" name="warrior monument" name_id="322318" group_drop="NONE" rank="DISCIPLINED" rating="NORMAL" tribe="MONSTER" type="GENERAL" ai="onedmg_passive" sangle="0" attack_speed="2000" hpgauge="3">
@@ -222725,77 +222725,77 @@
 		<stats maxHp="2406988" msup="1335" />
 		<bound_radius front="3" side="2.5" upper="4" />
 	</npc_template>
-	<npc_template npc_id="257000" level="65" name="dux" name_id="319317" title_id="314389" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257000" level="65" name="dux" name_id="319317" title_id="314389" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000037</item>
 		</equipment>
 		<bound_radius front="3.92" side="1.4" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257001" level="65" name="dux" name_id="319318" title_id="314389" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257001" level="65" name="dux" name_id="319318" title_id="314389" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000037</item>
 		</equipment>
 		<bound_radius front="3.92" side="1.4" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257002" level="65" name="dux" name_id="319319" title_id="314389" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257002" level="65" name="dux" name_id="319319" title_id="314389" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000037</item>
 		</equipment>
 		<bound_radius front="3.92" side="1.4" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257003" level="65" name="dux" name_id="319320" title_id="314389" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257003" level="65" name="dux" name_id="319320" title_id="314389" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000037</item>
 		</equipment>
 		<bound_radius front="3.92" side="1.4" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257004" level="65" name="dux" name_id="319321" title_id="314389" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257004" level="65" name="dux" name_id="319321" title_id="314389" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000037</item>
 		</equipment>
 		<bound_radius front="3.92" side="1.4" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257005" level="65" name="stallari" name_id="319322" title_id="314389" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257005" level="65" name="stallari" name_id="319322" title_id="314389" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000038</item>
 		</equipment>
 		<bound_radius front="3.675" side="2.065" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257006" level="65" name="stallari" name_id="319323" title_id="314389" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257006" level="65" name="stallari" name_id="319323" title_id="314389" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000038</item>
 		</equipment>
 		<bound_radius front="3.675" side="2.065" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257007" level="65" name="stallari" name_id="319324" title_id="314389" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257007" level="65" name="stallari" name_id="319324" title_id="314389" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000038</item>
 		</equipment>
 		<bound_radius front="3.675" side="2.065" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257008" level="65" name="stallari" name_id="319325" title_id="314389" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257008" level="65" name="stallari" name_id="319325" title_id="314389" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000038</item>
 		</equipment>
 		<bound_radius front="3.675" side="2.065" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257009" level="65" name="stallari" name_id="319326" title_id="314389" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257009" level="65" name="stallari" name_id="319326" title_id="314389" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000038</item>
 		</equipment>
 		<bound_radius front="3.675" side="2.065" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257010" level="65" name="ulsaruk" name_id="319327" title_id="314389" group_drop="DRAKANGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="DRAKAN" tribe="F4GUARD_DRAGON" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257010" level="65" name="ulsaruk" name_id="319327" title_id="314389" group_drop="DRAKANGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="DRAKAN" tribe="F4GUARD_DRAGON" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="45990379" msup="1335" />
 		<equipment>
 			<item>100000039</item>
@@ -225328,77 +225328,77 @@
 		<stats maxHp="18756" />
 		<bound_radius front="0.6" side="1.728" upper="3" />
 	</npc_template>
-	<npc_template npc_id="257300" level="65" name="dux" name_id="319974" title_id="314390" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257300" level="65" name="dux" name_id="319974" title_id="314390" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000037</item>
 		</equipment>
 		<bound_radius front="3.92" side="1.4" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257301" level="1" name="dux" name_id="319975" title_id="314390" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257301" level="1" name="dux" name_id="319975" title_id="314390" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000037</item>
 		</equipment>
 		<bound_radius front="3.92" side="1.4" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257302" level="55" name="dux" name_id="319976" title_id="314390" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257302" level="55" name="dux" name_id="319976" title_id="314390" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000037</item>
 		</equipment>
 		<bound_radius front="3.92" side="1.4" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257303" level="1" name="dux" name_id="319977" title_id="314390" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257303" level="1" name="dux" name_id="319977" title_id="314390" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000037</item>
 		</equipment>
 		<bound_radius front="3.92" side="1.4" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257304" level="1" name="dux" name_id="319978" title_id="314390" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257304" level="1" name="dux" name_id="319978" title_id="314390" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000037</item>
 		</equipment>
 		<bound_radius front="3.92" side="1.4" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257305" level="65" name="stallari" name_id="319979" title_id="314390" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257305" level="65" name="stallari" name_id="319979" title_id="314390" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000038</item>
 		</equipment>
 		<bound_radius front="3.675" side="2.065" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257306" level="1" name="stallari" name_id="319980" title_id="314390" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257306" level="1" name="stallari" name_id="319980" title_id="314390" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000038</item>
 		</equipment>
 		<bound_radius front="3.675" side="2.065" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257307" level="55" name="stallari" name_id="319981" title_id="314390" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257307" level="55" name="stallari" name_id="319981" title_id="314390" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000038</item>
 		</equipment>
 		<bound_radius front="3.675" side="2.065" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257308" level="1" name="stallari" name_id="319982" title_id="314390" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257308" level="1" name="stallari" name_id="319982" title_id="314390" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000038</item>
 		</equipment>
 		<bound_radius front="3.675" side="2.065" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257309" level="1" name="stallari" name_id="319983" title_id="314390" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257309" level="1" name="stallari" name_id="319983" title_id="314390" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000038</item>
 		</equipment>
 		<bound_radius front="3.675" side="2.065" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257310" level="65" name="ulsaruk" name_id="319984" title_id="314390" group_drop="DRAKANGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="DRAKAN" tribe="F4GUARD_DRAGON" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257310" level="65" name="ulsaruk" name_id="319984" title_id="314390" group_drop="DRAKANGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="DRAKAN" tribe="F4GUARD_DRAGON" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="45990379" msup="1335" />
 		<equipment>
 			<item>100000039</item>
@@ -225412,7 +225412,7 @@
 		</equipment>
 		<bound_radius front="5.67" side="7.84" upper="15.4" />
 	</npc_template>
-	<npc_template npc_id="257312" level="55" name="ulsaruk" name_id="319986" title_id="314390" group_drop="DRAKANGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="DRAKAN" tribe="F4GUARD_DRAGON" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257312" level="55" name="ulsaruk" name_id="319986" title_id="314390" group_drop="DRAKANGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="DRAKAN" tribe="F4GUARD_DRAGON" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="45990379" msup="1335" />
 		<equipment>
 			<item>100000039</item>
@@ -227931,77 +227931,77 @@
 		<stats maxHp="18756" />
 		<bound_radius front="0.6" side="1.728" upper="3" />
 	</npc_template>
-	<npc_template npc_id="257600" level="65" name="dux" name_id="320778" title_id="314391" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257600" level="65" name="dux" name_id="320778" title_id="314391" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000037</item>
 		</equipment>
 		<bound_radius front="3.92" side="1.4" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257601" level="65" name="dux" name_id="320779" title_id="314391" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257601" level="65" name="dux" name_id="320779" title_id="314391" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000037</item>
 		</equipment>
 		<bound_radius front="3.92" side="1.4" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257602" level="65" name="dux" name_id="320780" title_id="314391" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257602" level="65" name="dux" name_id="320780" title_id="314391" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000037</item>
 		</equipment>
 		<bound_radius front="3.92" side="1.4" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257603" level="65" name="dux" name_id="320781" title_id="314391" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257603" level="65" name="dux" name_id="320781" title_id="314391" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000037</item>
 		</equipment>
 		<bound_radius front="3.92" side="1.4" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257604" level="65" name="dux" name_id="320782" title_id="314391" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257604" level="65" name="dux" name_id="320782" title_id="314391" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000037</item>
 		</equipment>
 		<bound_radius front="3.92" side="1.4" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257605" level="65" name="stallari" name_id="320783" title_id="314391" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257605" level="65" name="stallari" name_id="320783" title_id="314391" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000038</item>
 		</equipment>
 		<bound_radius front="3.675" side="2.065" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257606" level="65" name="stallari" name_id="320784" title_id="314391" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257606" level="65" name="stallari" name_id="320784" title_id="314391" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000038</item>
 		</equipment>
 		<bound_radius front="3.675" side="2.065" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257607" level="65" name="stallari" name_id="320785" title_id="314391" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257607" level="65" name="stallari" name_id="320785" title_id="314391" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000038</item>
 		</equipment>
 		<bound_radius front="3.675" side="2.065" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257608" level="65" name="stallari" name_id="320786" title_id="314391" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257608" level="65" name="stallari" name_id="320786" title_id="314391" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000038</item>
 		</equipment>
 		<bound_radius front="3.675" side="2.065" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257609" level="65" name="stallari" name_id="320787" title_id="314391" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257609" level="65" name="stallari" name_id="320787" title_id="314391" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000038</item>
 		</equipment>
 		<bound_radius front="3.675" side="2.065" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257610" level="65" name="ulsaruk" name_id="320788" title_id="314391" group_drop="DRAKANGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="DRAKAN" tribe="F4GUARD_DRAGON" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257610" level="65" name="ulsaruk" name_id="320788" title_id="314391" group_drop="DRAKANGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="DRAKAN" tribe="F4GUARD_DRAGON" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="45990379" msup="1335" />
 		<equipment>
 			<item>100000039</item>
@@ -228015,7 +228015,7 @@
 		</equipment>
 		<bound_radius front="5.67" side="7.84" upper="15.4" />
 	</npc_template>
-	<npc_template npc_id="257612" level="65" name="ulsaruk" name_id="320790" title_id="314391" group_drop="DRAKANGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="DRAKAN" tribe="F4GUARD_DRAGON" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257612" level="65" name="ulsaruk" name_id="320790" title_id="314391" group_drop="DRAKANGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="DRAKAN" tribe="F4GUARD_DRAGON" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="45990379" msup="1335" />
 		<equipment>
 			<item>100000039</item>
@@ -230531,77 +230531,77 @@
 		<stats maxHp="18756" />
 		<bound_radius front="0.6" side="1.728" upper="3" />
 	</npc_template>
-	<npc_template npc_id="257900" level="65" name="dux" name_id="321000" title_id="314392" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257900" level="65" name="dux" name_id="321000" title_id="314392" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000037</item>
 		</equipment>
 		<bound_radius front="3.92" side="1.4" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257901" level="65" name="dux" name_id="321001" title_id="314392" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257901" level="65" name="dux" name_id="321001" title_id="314392" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000037</item>
 		</equipment>
 		<bound_radius front="3.92" side="1.4" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257902" level="65" name="dux" name_id="321002" title_id="314392" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257902" level="65" name="dux" name_id="321002" title_id="314392" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000037</item>
 		</equipment>
 		<bound_radius front="3.92" side="1.4" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257903" level="65" name="dux" name_id="321003" title_id="314392" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257903" level="65" name="dux" name_id="321003" title_id="314392" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000037</item>
 		</equipment>
 		<bound_radius front="3.92" side="1.4" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257904" level="65" name="dux" name_id="321004" title_id="314392" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257904" level="65" name="dux" name_id="321004" title_id="314392" group_drop="LGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_LIGHT" tribe="F4GUARD_LIGHT" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000037</item>
 		</equipment>
 		<bound_radius front="3.92" side="1.4" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257905" level="65" name="stallari" name_id="321005" title_id="314392" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257905" level="65" name="stallari" name_id="321005" title_id="314392" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000038</item>
 		</equipment>
 		<bound_radius front="3.675" side="2.065" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257906" level="65" name="stallari" name_id="321006" title_id="314392" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257906" level="65" name="stallari" name_id="321006" title_id="314392" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000038</item>
 		</equipment>
 		<bound_radius front="3.675" side="2.065" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257907" level="65" name="stallari" name_id="321007" title_id="314392" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257907" level="65" name="stallari" name_id="321007" title_id="314392" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000038</item>
 		</equipment>
 		<bound_radius front="3.675" side="2.065" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257908" level="65" name="stallari" name_id="321008" title_id="314392" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257908" level="65" name="stallari" name_id="321008" title_id="314392" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000038</item>
 		</equipment>
 		<bound_radius front="3.675" side="2.065" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257909" level="65" name="stallari" name_id="321009" title_id="314392" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257909" level="65" name="stallari" name_id="321009" title_id="314392" group_drop="DGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="GCHIEF_DARK" tribe="F4GUARD_DARK" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="34612964" msup="1335" />
 		<equipment>
 			<item>100000038</item>
 		</equipment>
 		<bound_radius front="3.675" side="2.065" upper="10.5" />
 	</npc_template>
-	<npc_template npc_id="257910" level="65" name="ulsaruk" name_id="321010" title_id="314392" group_drop="DRAKANGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="DRAKAN" tribe="F4GUARD_DRAGON" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257910" level="65" name="ulsaruk" name_id="321010" title_id="314392" group_drop="DRAKANGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="DRAKAN" tribe="F4GUARD_DRAGON" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="45990379" msup="1335" />
 		<equipment>
 			<item>100000039</item>
@@ -230615,7 +230615,7 @@
 		</equipment>
 		<bound_radius front="5.67" side="7.84" upper="15.4" />
 	</npc_template>
-	<npc_template npc_id="257912" level="65" name="ulsaruk" name_id="321012" title_id="314392" group_drop="DRAKANGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="DRAKAN" tribe="F4GUARD_DRAGON" type="ABYSS_GUARD" abyss_type="BOSS" ai="fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
+	<npc_template npc_id="257912" level="65" name="ulsaruk" name_id="321012" title_id="314392" group_drop="DRAKANGUARDIANCHIEF" rank="VETERAN" rating="LEGENDARY" race="DRAKAN" tribe="F4GUARD_DRAGON" type="ABYSS_GUARD" abyss_type="BOSS" ai="balaurea_fortress_protector" srange="20" arange="37" attack_speed="2100" hpgauge="27" cancel_level="0">
 		<stats maxHp="45990379" msup="1335" />
 		<equipment>
 			<item>100000039</item>
@@ -362379,7 +362379,7 @@
 		<bound_radius front="1.4" side="1.4" upper="2.4" />
 	</npc_template>
 	<npc_template npc_id="281392" level="55" name="burial chamber of the hero" name_id="319312" group_drop="NONE" rank="EXPERT" rating="ELITE" tribe="AGGRESSIVESINGLEMONSTER" type="MONSTER" ai="aggressive" srange="35" sangle="200" attack_speed="2100" hpgauge="13" cancel_level="20">
-		<stats maxHp="327176" />
+		<stats maxHp="138545" />
 		<bound_radius front="0.6" side="1.728" upper="3" />
 	</npc_template>
 	<npc_template npc_id="281393" level="1" name="bidct_stonestatueroom_stonestatuea" name_id="319313" group_drop="STATUE_F" rank="EXPERT" rating="NORMAL" tribe="MONSTER" type="MONSTER" ai="aggressive" srange="10" sangle="180" arange="2" attack_speed="2645" hpgauge="5" cancel_level="80">
@@ -364383,7 +364383,7 @@
 		<stats maxHp="23691" />
 		<bound_radius front="0.6" side="1.728" upper="3" />
 	</npc_template>
-	<npc_template npc_id="281698" level="55" name="macunbello's right hand" name_id="321689" group_drop="LICH" rank="NOVICE" rating="ELITE" tribe="AGGRESSIVESUPPORTMONSTER" ai="aggressive" srange="20" arange="37" attack_speed="2300" hpgauge="10" cancel_level="50">
+	<npc_template npc_id="281698" level="55" name="macunbello's right hand" name_id="321689" group_drop="LICH" rank="NOVICE" rating="ELITE" tribe="AGGRESSIVESUPPORTMONSTER" ai="macunbellos_right_hand" srange="20" arange="37" attack_speed="2300" hpgauge="10" cancel_level="50">
 		<stats maxHp="11494">
 			<speeds walk="1.13" group_walk="1.13" run="6" run_fight="4.5" group_run_fight="6" />
 		</stats>
@@ -364885,7 +364885,7 @@
 		</stats>
 		<bound_radius front="0.615" side="1.12" upper="2.66" />
 	</npc_template>
-	<npc_template npc_id="281775" level="55" name="macunbello's right hand" name_id="321689" group_drop="LICH" rank="DISCIPLINED" rating="ELITE" tribe="AGGRESSIVESUPPORTMONSTER" ai="aggressive" srange="20" arange="37" attack_speed="2300" hpgauge="11" cancel_level="40">
+	<npc_template npc_id="281775" level="55" name="macunbello's right hand" name_id="321689" group_drop="LICH" rank="DISCIPLINED" rating="ELITE" tribe="AGGRESSIVESUPPORTMONSTER" ai="macunbellos_right_hand" srange="20" arange="37" attack_speed="2300" hpgauge="11" cancel_level="40">
 		<stats maxHp="17172">
 			<speeds walk="1.13" group_walk="1.13" run="6" run_fight="4.5" group_run_fight="6" />
 		</stats>
@@ -365060,7 +365060,7 @@
 		<bound_radius front="2.45" side="2.45" upper="5.25" />
 	</npc_template>
 	<npc_template npc_id="281795" level="55" name="root twister" name_id="322233" group_drop="SHADOWSTALKER" rank="VETERAN" rating="ELITE" tribe="FUNGY" type="MONSTER" ai="aggressive" srange="1" arange="2" attack_speed="1900" hpgauge="14" floatcorpse="true" cancel_level="20">
-		<stats maxHp="131310">
+		<stats maxHp="157572">
 			<speeds walk="6" group_walk="1.5" run="7" run_fight="6" group_run_fight="7" />
 		</stats>
 		<bound_radius front="2.45" side="2.45" upper="5.25" />
@@ -365072,7 +365072,7 @@
 		<bound_radius front="2.45" side="2.45" upper="5.25" />
 	</npc_template>
 	<npc_template npc_id="281797" level="55" name="sharp twister" name_id="322234" group_drop="SHADOWSTALKER" rank="VETERAN" rating="ELITE" tribe="FUNGY" type="MONSTER" ai="aggressive" srange="1" arange="2" attack_speed="1900" hpgauge="14" floatcorpse="true" cancel_level="20">
-		<stats maxHp="131310">
+		<stats maxHp="157572">
 			<speeds walk="6" group_walk="1.5" run="7" run_fight="6" group_run_fight="7" />
 		</stats>
 		<bound_radius front="2.45" side="2.45" upper="5.25" />
@@ -365144,7 +365144,7 @@
 		<bound_radius front="1" side="1.859" upper="1.1" />
 	</npc_template>
 	<npc_template npc_id="281809" level="55" name="plaguebearer fragment" name_id="322277" group_drop="SLIME" rank="SEASONED" rating="ELITE" tribe="AGGRESSIVESUPPORTMONSTER" ai="aggressive" srange="20" arange="2" attack_speed="2415" hpgauge="12" cancel_level="30">
-		<stats maxHp="26764">
+		<stats maxHp="7650">
 			<speeds walk="0.6" group_walk="0.6" run="7" run_fight="5.5" group_run_fight="7" />
 		</stats>
 		<bound_radius front="1" side="1.859" upper="1.1" />

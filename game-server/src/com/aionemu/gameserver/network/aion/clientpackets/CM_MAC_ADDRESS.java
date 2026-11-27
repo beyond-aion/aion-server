@@ -4,6 +4,9 @@ import java.nio.charset.StandardCharsets;
 import java.util.HexFormat;
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
@@ -15,6 +18,8 @@ import com.aionemu.gameserver.network.loginserver.LoginServer;
  * @author -Nemesiss-, KID, ViAl, Neon
  */
 public class CM_MAC_ADDRESS extends AionClientPacket {
+
+	private static final Logger log = LoggerFactory.getLogger(CM_MAC_ADDRESS.class);
 
 	private String macAddress, hddSerial;
 
@@ -36,6 +41,11 @@ public class CM_MAC_ADDRESS extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		AionConnection con = getConnection();
+		// The client sends it once. A second one would change the values while the answer of the login server is checked and stored on its thread.
+		if (con.getMacAddress() != null) {
+			log.warn("{} sent its MAC address and HDD serial again (modified client)", con);
+			return;
+		}
 		con.setMacAddress(macAddress);
 		con.setHddSerial(hddSerial);
 		LoginServer.getInstance().authenticateClient(con);

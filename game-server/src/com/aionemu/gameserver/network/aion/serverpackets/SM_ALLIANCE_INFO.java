@@ -1,8 +1,6 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Comparator;
 import java.util.List;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -19,7 +17,9 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
 public class SM_ALLIANCE_INFO extends AionServerPacket {
 
 	private LootGroupRules lootRules, lootLeagueRules;
-	private PlayerAlliance alliance;
+	// the alliance changes while the packet waits to be written, and the counts must match the entries that follow them
+	private final List<Integer> viceCaptainIds;
+	private final List<Integer> groupTeamIds;
 	private int leaderid;
 	private int groupid;
 	private int type;
@@ -101,7 +101,8 @@ public class SM_ALLIANCE_INFO extends AionServerPacket {
 	}
 
 	public SM_ALLIANCE_INFO(PlayerAlliance alliance, int messageId, String message, PlayerAlliance skipped) {
-		this.alliance = alliance;
+		viceCaptainIds = alliance.getViceCaptainIds().stream().limit(4).toList();
+		groupTeamIds = alliance.getGroups().stream().map(PlayerAllianceGroup::getTeamId).sorted().toList();
 		groupid = alliance.getObjectId();
 		leaderid = alliance.getLeader().getObjectId();
 		lootRules = alliance.getLootGroupRules();
@@ -133,15 +134,14 @@ public class SM_ALLIANCE_INFO extends AionServerPacket {
 	@Override
 	protected void writeImpl(AionConnection con) {
 		Player player = con.getActivePlayer();
-		writeH(alliance.groupSize());
+		writeH(groupTeamIds.size());
 		writeD(groupid);
 		writeD(leaderid);
 		writeD(player == null || player.getPosition() == null ? 0 : player.getWorldId());// mapId
-		Collection<Integer> ids = alliance.getViceCaptainIds();
-		for (Integer id : ids) {
+		for (Integer id : viceCaptainIds) {
 			writeD(id);
 		}
-		for (int i = 0; i < 4 - ids.size(); i++) {
+		for (int i = 0; i < 4 - viceCaptainIds.size(); i++) {
 			writeD(0);
 		}
 		writeD(lootRules.getLootRule().getId());
@@ -158,9 +158,9 @@ public class SM_ALLIANCE_INFO extends AionServerPacket {
 		writeD(subType); // 3.5
 		writeD(leagueId);
 		int groupNumber = 0;
-		for (PlayerAllianceGroup group : alliance.getGroups().stream().sorted(Comparator.comparingInt(PlayerAllianceGroup::getTeamId)).toList()) {
+		for (int groupTeamId : groupTeamIds) {
 			writeD(groupNumber++);
-			writeD(group.getTeamId());
+			writeD(groupTeamId);
 		}
 		writeD(messageId); // System message ID
 		writeS(messageId != 0 ? message : ""); // System message

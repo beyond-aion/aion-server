@@ -5,7 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,22 +34,23 @@ public class FriendListDAO {
 	public static final String SET_MEMO_QUERY = "UPDATE friends SET memo=? WHERE player=? AND friend=?";
 
 	public static FriendList load(Player player) {
-		List<Friend> friends = new ArrayList<>();
+		Map<Integer, String> memoByFriendId = new LinkedHashMap<>();
 		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(LOAD_QUERY)) {
 			stmt.setInt(1, player.getObjectId());
 			ResultSet rset = stmt.executeQuery();
-			while (rset.next()) {
-				int objId = rset.getInt("friend");
-				PlayerCommonData pcd = PlayerService.getOrLoadPlayerCommonData(objId);
-				if (pcd != null) {
-					Friend friend = new Friend(pcd, rset.getString("memo"));
-					friends.add(friend);
-				}
-			}
+			while (rset.next())
+				memoByFriendId.put(rset.getInt("friend"), rset.getString("memo"));
 		} catch (Exception e) {
 			log.error("Could not restore FriendList data for player: {} from DB: {}", player.getObjectId(), e.getMessage(), e);
 		}
 
+		// loaded after the connection above was returned, since loading a friend's data takes another one
+		List<Friend> friends = new ArrayList<>();
+		memoByFriendId.forEach((objId, memo) -> {
+			PlayerCommonData pcd = PlayerService.getOrLoadPlayerCommonData(objId);
+			if (pcd != null)
+				friends.add(new Friend(pcd, memo));
+		});
 		return new FriendList(player, friends);
 	}
 

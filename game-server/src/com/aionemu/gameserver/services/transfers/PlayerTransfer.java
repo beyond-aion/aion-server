@@ -1,7 +1,7 @@
 package com.aionemu.gameserver.services.transfers;
 
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
 
 /**
  * @author xTz
@@ -83,18 +83,8 @@ public class PlayerTransfer {
 		this.data = data;
 	}
 
-	public ByteBuffer getDB() {
-		ByteBuffer buffer = ByteBuffer.allocate(getCommonData().length + getItemsData().length + getData().length + getSkillData().length
-			+ getRecipeData().length + getQuestData().length);
-		buffer.order(ByteOrder.LITTLE_ENDIAN);
-		buffer.put(getCommonData());
-		buffer.put(getItemsData());
-		buffer.put(getData());
-		buffer.put(getSkillData());
-		buffer.put(getRecipeData());
-		buffer.put(getQuestData());
-		buffer.flip();
-		return buffer;
+	public ByteBuf getDB() {
+		return Unpooled.wrappedBuffer(getCommonData(), getItemsData(), getData(), getSkillData(), getRecipeData(), getQuestData());
 	}
 
 }

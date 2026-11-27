@@ -24,10 +24,4 @@ public class PeriodicSaveConfig {
 	 */
 	@Property(key = "gameserver.periodicsave.legion.items", defaultValue = "1200")
 	public static int LEGION_ITEMS;
-
-	/**
-	 * Time in seconds for updating and saving pet mood data
-	 */
-	@Property(key = "gameserver.periodicsave.player.pets", defaultValue = "10")
-	public static int PLAYER_PETS;
 }

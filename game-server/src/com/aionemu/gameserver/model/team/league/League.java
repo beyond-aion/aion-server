@@ -23,7 +23,7 @@ import com.aionemu.gameserver.utils.idfactory.IDFactory;
  */
 public class League extends GeneralTeam<PlayerAlliance, LeagueMember> {
 
-	private LootGroupRules lootGroupRules = new LootGroupRules();
+	private volatile LootGroupRules lootGroupRules = new LootGroupRules();
 
 	public League(LeagueMember leader) {
 		super(IDFactory.getInstance().nextId(), true);
@@ -81,6 +81,8 @@ public class League extends GeneralTeam<PlayerAlliance, LeagueMember> {
 	}
 
 	public void setLootGroupRules(LootGroupRules lootGroupRules) {
+		if (lootGroupRules != null)
+			lootGroupRules.takeOverItemsToBeDistributed(this.lootGroupRules);
 		this.lootGroupRules = lootGroupRules;
 	}
 
