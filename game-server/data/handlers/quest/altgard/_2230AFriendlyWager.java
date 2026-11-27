@@ -2,7 +2,6 @@ package quest.altgard;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
 
-import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -27,7 +26,6 @@ public class _2230AFriendlyWager extends AbstractQuestHandler {
 	public void register() {
 		qe.registerQuestNpc(questStartNpcId).addOnQuestStart(questId);
 		qe.registerQuestNpc(questStartNpcId).addOnTalkEvent(questId);
-		qe.registerOnQuestTimerEnd(questId);
 		qe.registerOnLogOut(questId);
 	}
 
@@ -59,13 +57,13 @@ public class _2230AFriendlyWager extends AbstractQuestHandler {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 2375);
 					case SETPRO1:
-						if (!player.getController().hasTask(TaskId.QUEST_TIMER)) { // A new chance starts
+						if (player.getController().getQuestTimers().getVisibleQuestId() != questId) { // A new chance starts
 							QuestService.questTimerStart(env, questDurationTime);
 						}
 						return sendQuestSelectionDialog(env);
 					case CHECK_USER_HAS_QUEST_ITEM:
 						// Still time left; check collected items: reward if right number otherwise dialogue to continue
-						if (player.getController().hasTask(TaskId.QUEST_TIMER)) {
+						if (player.getController().getQuestTimers().getVisibleQuestId() == questId) {
 							if (QuestService.collectItemCheck(env, true)) {
 								qs.setStatus(QuestStatus.REWARD);
 								updateQuestStatus(env);
@@ -83,19 +81,6 @@ public class _2230AFriendlyWager extends AbstractQuestHandler {
 			} else if (qs.getStatus() == QuestStatus.REWARD) {
 				return sendQuestEndDialog(env);
 			}
-		}
-		return false;
-	}
-
-	// On time end if not in reward status delete timer task
-	@Override
-	public boolean onQuestTimerEndEvent(QuestEnv env) {
-		Player player = env.getPlayer();
-		QuestState qs = player.getQuestStateList().getQuestState(questId);
-
-		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			player.getController().cancelTask(TaskId.QUEST_TIMER);
-			return true;
 		}
 		return false;
 	}

@@ -7,7 +7,6 @@ import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.time.ZonedDateTime;
 import java.util.*;
-import java.util.concurrent.Future;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
@@ -50,6 +49,7 @@ import com.aionemu.gameserver.questEngine.handlers.models.XMLQuest;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
+import com.aionemu.gameserver.questEngine.model.QuestTimers;
 import com.aionemu.gameserver.services.abyss.AbyssPointsService;
 import com.aionemu.gameserver.services.abyss.GloryPointsService;
 import com.aionemu.gameserver.services.drop.DropRegistrationService;
@@ -59,7 +59,6 @@ import com.aionemu.gameserver.services.reward.BonusService;
 import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
 import com.aionemu.gameserver.utils.time.ServerTime;
@@ -862,20 +861,16 @@ public final class QuestService {
 	 */
 	public static boolean questTimerStart(QuestEnv env, int timeInSeconds) {
 		Player player = env.getPlayer();
-		int runningTimerQuestId = player.getController().getQuestTimerQuestId();
-		if (runningTimerQuestId != 0 && runningTimerQuestId != env.getQuestId()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ANOTHER_SINGLE_STEP_NOT_COMPLETED());
-			return false;
-		}
 		int questId = env.getQuestId();
-		Future<?> task = ThreadPoolManager.getInstance().schedule(() -> {
-			player.getController().setQuestTimerQuestId(0);
-			QuestEngine.getInstance().onQuestTimerEnd(new QuestEnv(null, player, questId));
-		}, timeInSeconds * 1000L);
-		player.getController().addTask(TaskId.QUEST_TIMER, task); // so it's cancelled when the player leaves the world
-		player.getController().setQuestTimerQuestId(env.getQuestId());
-		PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(env.getQuestId(), timeInSeconds));
-		return true;
+		QuestTimers timers = player.getController().getQuestTimers();
+		synchronized (timers) {
+			if (!timers.start(questId, true, timeInSeconds, () -> QuestEngine.getInstance().onQuestTimerEnd(new QuestEnv(null, player, questId)))) {
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ANOTHER_SINGLE_STEP_NOT_COMPLETED());
+				return false;
+			}
+			PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(questId, timeInSeconds));
+			return true;
+		}
 	}
 
 	/**
@@ -885,26 +880,23 @@ public final class QuestService {
 	public static boolean invisibleTimerStart(QuestEnv env, int timeInSeconds) {
 		Player player = env.getPlayer();
 		int questId = env.getQuestId();
-		Future<?> task = ThreadPoolManager.getInstance().schedule(() -> {
-			player.getController().cancelInvisibleQuestTimer(questId);
-			QuestEngine.getInstance().onInvisibleTimerEnd(new QuestEnv(null, player, questId));
-		}, timeInSeconds * 1000L);
-		player.getController().addInvisibleQuestTimer(questId, task);
-		return true;
+		return player.getController().getQuestTimers().start(questId, false, timeInSeconds,
+			() -> QuestEngine.getInstance().onInvisibleTimerEnd(new QuestEnv(null, player, questId)));
 	}
 
 	/**
 	 * Ends the running quest timer, if it belongs to the quest of the given env.
 	 */
 	public static boolean questTimerEnd(QuestEnv env) {
-		final Player player = env.getPlayer();
-
-		if (player.getController().getQuestTimerQuestId() != env.getQuestId())
-			return false; // the timer belongs to another quest
-		player.getController().setQuestTimerQuestId(0);
-		player.getController().cancelTask(TaskId.QUEST_TIMER);
-		PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(env.getQuestId(), 0));
-		return true;
+		Player player = env.getPlayer();
+		int questId = env.getQuestId();
+		QuestTimers timers = player.getController().getQuestTimers();
+		synchronized (timers) {
+			if (!timers.cancelVisible(questId))
+				return false;
+			PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(questId, 0));
+			return true;
+		}
 	}
 
 	public static boolean abandonQuest(Player player, int questId) {
@@ -937,9 +929,8 @@ public final class QuestService {
 				player.getRecipeList().deleteRecipe(player, ((WorkOrdersData) xmlQuest).getRecipeId());
 		}
 
-		if (player.getController().hasTask(TaskId.QUEST_TIMER))
-			questTimerEnd(new QuestEnv(null, player, questId));
-		player.getController().cancelInvisibleQuestTimer(questId);
+		questTimerEnd(new QuestEnv(null, player, questId));
+		player.getController().getQuestTimers().cancelInvisible(questId);
 
 		PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(ActionType.ABANDON, qs));
 		player.getController().updateNearbyQuests();

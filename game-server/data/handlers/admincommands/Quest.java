@@ -208,7 +208,7 @@ public class Quest extends AdminCommand {
 			sb.append("\n\tQuest flags: " + qs.getFlagValue() + ", step group: " + qs.getStepGroup());
 			sb.append(", encoded [" + qs.getFlags() + "]");
 			sb.append("\n\tComplete count: " + qs.getCompleteCount() + ", reward group: " + qs.getRewardGroup());
-			int timerQuestId = target.getController().getQuestTimerQuestId();
+			int timerQuestId = target.getController().getQuestTimers().getVisibleQuestId();
 			sb.append("\n\tQuest timer: " + (timerQuestId == 0 ? "none" : "running for " + ChatUtil.quest(timerQuestId)));
 		}
 		sendInfo(admin, sb.toString());
