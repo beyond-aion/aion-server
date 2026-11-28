@@ -41,8 +41,10 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.action.Action;
 import com.aionemu.gameserver.skillengine.action.Actions;
 import com.aionemu.gameserver.skillengine.condition.ChainCondition;
+import com.aionemu.gameserver.skillengine.condition.Condition;
 import com.aionemu.gameserver.skillengine.condition.Conditions;
 import com.aionemu.gameserver.skillengine.condition.SkillChargeCondition;
+import com.aionemu.gameserver.skillengine.condition.TargetFlyingCondition;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.skillengine.properties.FirstTargetAttribute;
 import com.aionemu.gameserver.skillengine.properties.Properties;
@@ -147,7 +149,7 @@ public class Skill {
 			return false;
 		}
 
-		if (!preCastCheck())
+		if (!preCastCheck(castState))
 			return false;
 
 		if (castState == CastState.CAST_START && isInvalidRecall())
@@ -869,9 +871,14 @@ public class Skill {
 	/**
 	 * Check all conditions before starting cast
 	 */
-	private boolean preCastCheck() {
-		Conditions skillConditions = skillTemplate.getStartconditions();
-		return skillConditions == null || skillConditions.validate(this);
+	private boolean preCastCheck(CastState castState) {
+		Conditions conditions = skillTemplate.getStartconditions();
+		if (conditions == null)
+			return true;
+		Condition failedCondition = conditions.findFailedCondition(this);
+		if (castState == CastState.CAST_START && failedCondition instanceof TargetFlyingCondition && effector instanceof Player player)
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_INVALID_TARGET());
+		return failedCondition == null;
 	}
 
 	/**

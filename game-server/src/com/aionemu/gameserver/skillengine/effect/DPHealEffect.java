@@ -27,11 +27,11 @@ public class DPHealEffect extends HealOverTimeEffect {
 
 	@Override
 	public int getCurrentStatValue(Effect effect) {
-		return ((Player) effect.getEffected()).getCommonData().getDp();
+		return effect.getEffected() instanceof Player player ? player.getCommonData().getDp() : 0;
 	}
 
 	@Override
 	public int getMaxStatValue(Effect effect) {
-		return ((Player) effect.getEffected()).getGameStats().getMaxDp().getCurrent();
+		return effect.getEffected() instanceof Player player ? player.getGameStats().getMaxDp().getCurrent() : 0;
 	}
 }

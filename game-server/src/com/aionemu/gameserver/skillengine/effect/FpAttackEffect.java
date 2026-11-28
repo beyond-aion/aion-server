@@ -18,19 +18,17 @@ public class FpAttackEffect extends AbstractOverTimeEffect {
 
 	@Override
 	public void calculate(Effect effect) {
-		// Only players have FP
-		if (effect.getEffected() instanceof Player)
+		if (getPlayerOrSummonMaster(effect.getEffected()) != null)
 			super.calculate(effect, null, null);
 	}
 
 	@Override
 	public void onPeriodicAction(Effect effect) {
-		Player effected = (Player) effect.getEffected();
-		int maxFP = effected.getLifeStats().getMaxFp();
-		int newValue = value;
-		// Support for values in percentage
-		if (percent)
-			newValue = (maxFP * value) / 100;
-		effected.getLifeStats().reduceFp(TYPE.FP_DAMAGE, newValue, effect.getSkillId(), LOG.FPATTACK);
+		Player owner = getPlayerOrSummonMaster(effect.getEffected());
+		if (owner == null)
+			return;
+		int baseValue = calculateBaseValue(effect);
+		int amount = percent ? owner.getLifeStats().getMaxFp() * baseValue / 100 : baseValue;
+		owner.getLifeStats().reduceFp(TYPE.FP_DAMAGE, amount, effect.getSkillId(), LOG.FPATTACK);
 	}
 }

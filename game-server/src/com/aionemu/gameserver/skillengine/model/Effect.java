@@ -430,8 +430,12 @@ public class Effect implements StatOwner {
 		Set<EffectReserved> toSend = new TreeSet<>();
 		synchronized (reservedEffects) {
 			for (EffectReserved er : reservedEffects) {
-				if (er.isSend() && er.getValue() != 0)
-					toSend.add(er);
+				if (!er.isSend() || er.getValue() == 0)
+					continue;
+				// A later resist can remove an earlier FP or MP attack from the successful effects.
+				if (er.isDamage() && (er.getType() == ResourceType.FP || er.getType() == ResourceType.MP) && !isInSuccessEffects(er.getPosition()))
+					continue;
+				toSend.add(er);
 			}
 		}
 		if (toSend.isEmpty()) // effects without a sent value (like damage over time) can still show their attack status

@@ -39,12 +39,14 @@ public class Conditions {
 	}
 
 	public boolean validate(Skill skill) {
-		for (Condition condition : getConditions()) {
-			if (!condition.validate(skill)) {
-				return false;
-			}
-		}
-		return true;
+		return findFailedCondition(skill) == null;
+	}
+
+	public Condition findFailedCondition(Skill skill) {
+		for (Condition condition : getConditions())
+			if (!condition.validate(skill))
+				return condition;
+		return null;
 	}
 
 	public boolean canValidate(Skill skill) {

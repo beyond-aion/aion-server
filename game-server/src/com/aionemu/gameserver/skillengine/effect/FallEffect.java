@@ -17,16 +17,13 @@ public class FallEffect extends EffectTemplate {
 
 	@Override
 	protected boolean isDodgedOrResisted(Effect effect, StatEnum statEnum) {
-		if (effect.getEffected().getEffectController().isInAnyAbnormalState(AbnormalState.INVULNERABLE_WING)) {
-			return true;
-		}
-		return super.isDodgedOrResisted(effect, statEnum);
+		return hasInvulnerableWings(effect.getEffected()) || super.isDodgedOrResisted(effect, statEnum);
 	}
 
 	@Override
 	public void applyEffect(Effect effect) {
-		if (effect.getEffected() instanceof Player player) {
-			player.getFlyController().endFly(true);
-		}
+		Player player = getPlayerOrSummonMaster(effect.getEffected());
+		if (player != null)
+			player.getFlyController().forceEndFlight();
 	}
 }
