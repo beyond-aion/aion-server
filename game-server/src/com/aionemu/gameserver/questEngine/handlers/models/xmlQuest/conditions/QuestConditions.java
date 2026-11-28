@@ -21,7 +21,8 @@ public class QuestConditions {
 
 	@XmlElements({ @XmlElement(name = "quest_status", type = QuestStatusCondition.class), @XmlElement(name = "npc_id", type = NpcIdCondition.class),
 		@XmlElement(name = "pc_inventory", type = PcInventoryCondition.class), @XmlElement(name = "quest_var", type = QuestVarCondition.class),
-		@XmlElement(name = "dialog_id", type = DialogIdCondition.class) })
+		@XmlElement(name = "dialog_id", type = DialogIdCondition.class),
+		@XmlElement(name = "quest_timer", type = QuestTimerCondition.class) })
 	protected List<QuestCondition> conditions;
 	@XmlAttribute(required = true)
 	protected ConditionUnionType operate;

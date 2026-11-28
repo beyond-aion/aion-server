@@ -24,6 +24,17 @@ public class QuestVar {
 	@XmlAttribute(required = true)
 	protected int value;
 
+	/** @return True if this branch is the current one and holds a dialog for the given npc. */
+	public boolean isCurrentAndHandles(QuestState qs, int npcId) {
+		if ((qs == null ? -1 : qs.getQuestVars().getQuestVars()) != value)
+			return false;
+		for (QuestNpc questNpc : npc) {
+			if (questNpc.getId() == npcId)
+				return true;
+		}
+		return false;
+	}
+
 	public boolean operate(QuestEnv env, QuestState qs) {
 		int var = -1;
 		if (qs != null)

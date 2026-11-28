@@ -48,6 +48,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
+import com.aionemu.gameserver.questEngine.model.QuestTimers;
 import com.aionemu.gameserver.restrictions.PlayerRestrictions;
 import com.aionemu.gameserver.services.*;
 import com.aionemu.gameserver.services.RecallService.CancelReason;
@@ -92,6 +93,17 @@ public class PlayerController extends CreatureController<Player> {
 	private long lastAttackedMillis = 0;
 	private long lastAutoAttackMillis = 0;
 	private StanceObserver stanceObserver;
+	private final QuestTimers questTimers = new QuestTimers();
+
+	public QuestTimers getQuestTimers() {
+		return questTimers;
+	}
+
+	@Override
+	public void cancelAllTasks() {
+		questTimers.cancelAll();
+		super.cancelAllTasks();
+	}
 
 	@Override
 	public void see(VisibleObject object) {

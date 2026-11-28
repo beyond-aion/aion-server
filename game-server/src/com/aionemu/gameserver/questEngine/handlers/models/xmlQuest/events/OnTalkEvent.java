@@ -21,6 +21,18 @@ public class OnTalkEvent extends QuestEvent {
 	@XmlElement(name = "var")
 	protected List<QuestVar> var;
 
+	/** @return True if the quest expects the player to talk to the given npc in its current state. */
+	public boolean isWaitingFor(QuestEnv env, int npcId) {
+		if (conditions != null && !conditions.checkConditionOfSet(env))
+			return false;
+		QuestState qs = env.getPlayer().getQuestStateList().getQuestState(env.getQuestId());
+		for (QuestVar questVar : var) {
+			if (questVar.isCurrentAndHandles(qs, npcId))
+				return true;
+		}
+		return false;
+	}
+
 	@Override
 	public boolean operate(QuestEnv env) {
 		if (conditions == null || conditions.checkConditionOfSet(env)) {

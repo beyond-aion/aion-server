@@ -11,7 +11,6 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAY_MOVIE;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
@@ -63,7 +62,7 @@ public class BeshmundirInstance extends GeneralInstanceHandler {
 			case 216586: // Temadaro (Difficult)
 			case 216590: // Temadaro (Normal)
 				spawnMacunbello(npc.getNpcId() == 216586);
-				sendPacket(new SM_QUEST_ACTION(0, 0));
+				instance.stopTimeLimit();
 				instance.setDoorState(467, true);
 				break;
 			case 799342:

@@ -10,7 +10,6 @@ public enum TaskId {
 	PROTECTION_ACTIVE,
 	DROWN,
 	DESPAWN, // npc despawn task / player leaveWorld task after dc/sendlog error
-	QUEST_TIMER, // Quest task with timer
 	QUEST_FOLLOW, // Follow task checker
 	PLAYER_UPDATE,
 	INVENTORY_UPDATE,
