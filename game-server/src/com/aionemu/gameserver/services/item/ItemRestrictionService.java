@@ -1,7 +1,8 @@
 package com.aionemu.gameserver.services.item;
 
+import java.util.List;
+
 import com.aionemu.gameserver.configs.main.LegionConfig;
-import com.aionemu.gameserver.model.gameobjects.HouseObject;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.StorageObject;
@@ -96,16 +97,24 @@ public class ItemRestrictionService {
 
 	private static boolean isCabinetOpen(Player player, StorageType storageType) {
 		House house = player.getActiveHouse();
+		boolean hasCabinet = false;
+		boolean isAnyCabinetOccupied = false;
 		if (house != null) {
 			int warehouseId = storageType.getId() - StorageType.HOUSE_WH_MIN + 1;
-			for (HouseObject<?> object : house.getRegistry().getSpawnedObjects()) {
-				if (object instanceof StorageObject cabinet && cabinet.getObjectTemplate().getWarehouseId() == warehouseId && cabinet.isOccupiedBy(player)
-					&& PositionUtil.isInTalkRange(player, cabinet))
-					return true;
-			}
+			List<StorageObject> cabinets = house.getRegistry().getSpawnedObjects().stream().filter(o -> o instanceof StorageObject).map(
+				StorageObject.class::cast).toList();
+			hasCabinet = cabinets.stream().anyMatch(c -> c.getObjectTemplate().getWarehouseId() == warehouseId);
+			isAnyCabinetOccupied = cabinets.stream().anyMatch(c -> c.isOccupiedBy(player) && PositionUtil.isInTalkRange(player, c));
 		}
-		AuditLogger.log(player, "tried to use " + storageType + " without using the cabinet");
-		return false;
+		if (!hasCabinet) {
+			AuditLogger.log(player, "tried to use " + storageType + " without owning a matching cabinet");
+			return false;
+		}
+		if (!isAnyCabinetOccupied) {
+			AuditLogger.log(player, "tried to use " + storageType + " without using a cabinet");
+			return false;
+		}
+		return true;
 	}
 
 	private static boolean isPetBagOpen(Player player, StorageType storageType) {
