@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.controllers.movement;
 
+import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
@@ -20,6 +21,10 @@ public class PlayerMoveController extends PlayableMoveController<Player> {
 	 * the third, or the fourth in fly zones.
 	 */
 	private static final float MIN_FALL_DAMAGE_HEIGHT = 10, LETHAL_FALL_HEIGHT = 50, MAX_MIDAIR_FALL_HEIGHT = 50, MAX_MIDAIR_FALL_HEIGHT_IN_FLY_ZONE = 100;
+	/** The client flies a jump with twice the gravity of a fall on foot. */
+	private static final float JUMP_GRAVITY = 19.62f;
+	/** No jump lasts longer than this, a jump which seems to is one whose landing went unreported. */
+	private static final float MAX_JUMP_SECONDS = 3;
 
 	private float fallStartZ = Float.NaN;
 	private float lastZ = Float.NaN;
@@ -27,6 +32,9 @@ public class PlayerMoveController extends PlayableMoveController<Player> {
 	private long lastPositionFromClientMillis;
 	private WorldPosition lastPositionFromClient;
 	private long lastRandomMoveLocEffectTimeMillis;
+	private boolean divingFromFlight;
+	private long jumpStartMillis;
+	private float jumpStartX, jumpStartY, jumpStartZ, jumpVelocityX, jumpVelocityY, jumpVelocityZ;
 
 	public PlayerMoveController(Player owner) {
 		super(owner);
@@ -99,6 +107,18 @@ public class PlayerMoveController extends PlayableMoveController<Player> {
 	}
 
 	/**
+	 * Marks the player as left in the air after flying or gliding: his client drops him more than twice as fast as one who fell on foot, until he
+	 * lands.
+	 */
+	public void setDivingFromFlight() {
+		divingFromFlight = true;
+	}
+
+	public boolean isDivingFromFlight() {
+		return divingFromFlight;
+	}
+
+	/**
 	 * Called for move packets in which the player falls. A fall packet that already touches the ground counts as landing.
 	 */
 	public void updateFalling(float newZ) {
@@ -126,6 +146,7 @@ public class PlayerMoveController extends PlayableMoveController<Player> {
 	 * Called for all other move packets: the player stands on the ground, flies or glides.
 	 */
 	public void stopFalling(float newZ) {
+		divingFromFlight = false;
 		if (isBelowWorld(newZ)) {
 			dieFromFall();
 			return;
@@ -155,9 +176,41 @@ public class PlayerMoveController extends PlayableMoveController<Player> {
 	}
 
 	/**
+	 * Remembers where and how fast a jump started: the client reports no position until it comes down again.
+	 */
+	public void onJumpStarted(float x, float y, float z, float velocityX, float velocityY, float velocityZ) {
+		jumpStartMillis = System.currentTimeMillis();
+		jumpStartX = x;
+		jumpStartY = y;
+		jumpStartZ = z;
+		jumpVelocityX = velocityX;
+		jumpVelocityY = velocityY;
+		jumpVelocityZ = velocityZ;
+	}
+
+	public void onJumpEnded() {
+		jumpStartMillis = 0;
+	}
+
+	/**
+	 * @return Where the jump he started last has carried him by now, ignoring whatever it ran into, or null if he is not jumping.
+	 */
+	public Vector3f getJumpPosition() {
+		if (jumpStartMillis == 0)
+			return null;
+		float seconds = (System.currentTimeMillis() - jumpStartMillis) / 1000f;
+		if (seconds > MAX_JUMP_SECONDS)
+			return null;
+		return new Vector3f(jumpStartX + jumpVelocityX * seconds, jumpStartY + jumpVelocityY * seconds,
+			jumpStartZ + jumpVelocityZ * seconds - JUMP_GRAVITY * seconds * seconds / 2);
+	}
+
+	/**
 	 * Forgets where the current fall started, so a teleport or a landing from a flight path doesn't count as one.
 	 */
 	public void resetFalling() {
+		onJumpEnded();
+		divingFromFlight = false;
 		fallStartZ = Float.NaN;
 		lastZ = Float.NaN;
 	}

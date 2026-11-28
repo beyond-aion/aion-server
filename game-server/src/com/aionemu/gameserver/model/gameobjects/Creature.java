@@ -204,8 +204,15 @@ public abstract class Creature extends VisibleObject {
 	 * All abnormal effects are checked that disable attack
 	 */
 	public boolean canAttack() {
-		return (!getEffectController().isInAnyAbnormalState(AbnormalState.CANT_ATTACK_STATE) && !isCasting() && !isInState(CreatureState.RESTING)
+		return (!getEffectController().isInAnyAbnormalState(getCantAttackState()) && !isCasting() && !isInState(CreatureState.RESTING)
 			&& !isInState(CreatureState.PRIVATE_SHOP));
+	}
+
+	/**
+	 * @return The abnormal states which keep this creature from attacking and using skills.
+	 */
+	public AbnormalState getCantAttackState() {
+		return AbnormalState.CANT_ATTACK_STATE;
 	}
 
 	public int getState() {

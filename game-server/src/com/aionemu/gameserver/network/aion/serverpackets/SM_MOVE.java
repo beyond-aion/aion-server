@@ -4,6 +4,7 @@ import com.aionemu.gameserver.controllers.movement.CreatureMoveController;
 import com.aionemu.gameserver.controllers.movement.GlideFlag;
 import com.aionemu.gameserver.controllers.movement.MovementMask;
 import com.aionemu.gameserver.controllers.movement.PlayableMoveController;
+import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
@@ -31,11 +32,17 @@ public class SM_MOVE extends AionServerPacket {
 		this(creature, creature.getMoveController().getMovementMask());
 	}
 
+	public SM_MOVE(Creature creature, byte movementMask) {
+		this(creature, movementMask, null);
+	}
+
 	/**
 	 * Takes the position and movement state at construction, so a packet still in the send queue is not overwritten by the next move of the
 	 * same creature.
+	 *
+	 * @param vector the movement vector of a move the server drives itself, or null for the one the client reported last
 	 */
-	public SM_MOVE(Creature creature, byte movementMask) {
+	public SM_MOVE(Creature creature, byte movementMask, Vector3f vector) {
 		CreatureMoveController<?> mc = creature.getMoveController();
 		PlayableMoveController<?> pmc = mc instanceof PlayableMoveController ? (PlayableMoveController<?>) mc : null;
 		this.objectId = creature.getObjectId();
@@ -48,9 +55,19 @@ public class SM_MOVE extends AionServerPacket {
 		this.targetX = mc.getTargetX2();
 		this.targetY = mc.getTargetY2();
 		this.targetZ = mc.getTargetZ2();
-		this.vectorX = pmc == null ? 0 : pmc.vectorX;
-		this.vectorY = pmc == null ? 0 : pmc.vectorY;
-		this.vectorZ = pmc == null ? 0 : pmc.vectorZ;
+		if (vector != null) {
+			this.vectorX = vector.getX();
+			this.vectorY = vector.getY();
+			this.vectorZ = vector.getZ();
+		} else if (pmc != null) {
+			this.vectorX = pmc.vectorX;
+			this.vectorY = pmc.vectorY;
+			this.vectorZ = pmc.vectorZ;
+		} else {
+			this.vectorX = 0;
+			this.vectorY = 0;
+			this.vectorZ = 0;
+		}
 		this.glideFlag = pmc == null ? 0 : pmc.glideFlag;
 		this.windBoxId = pmc == null ? 0 : pmc.windBoxId;
 		this.vehicleId = pmc == null ? 0 : pmc.vehicleId;

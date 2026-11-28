@@ -18,6 +18,8 @@ import com.aionemu.gameserver.utils.audit.AuditLogger;
 public class FlyController {
 
 	private static final long FLY_REUSE_TIME = 10000;
+	/** A glide needs more speed than this to start. */
+	private static final float MIN_GLIDE_SPEED = 5.999f;
 	private final Player player;
 
 	public FlyController(Player player) {
@@ -29,12 +31,32 @@ public class FlyController {
 			player.unsetFlyState(FlyState.GLIDING);
 			player.unsetState(CreatureState.GLIDING);
 			if (!player.isInFlyState(FlyState.FLYING)) {
+				player.getMoveController().setDivingFromFlight(); // he is left in the air, where his client drops him just as fast as after a flight
 				player.getLifeStats().triggerFpRestore();
 			} else {
 				player.getLifeStats().triggerFpReduce();
 			}
 			player.getGameStats().updateStatsAndSpeedVisually();
 		}
+	}
+
+	/**
+	 * Ends the glide on the server's own account, like when an effect takes control over him, and tells his client and everyone around: unlike a
+	 * glide his client ended itself, nobody would know otherwise.
+	 */
+	public void stopGlidingByServer() {
+		if (!player.isInGlidingState())
+			return;
+		onStopGliding();
+		PacketSendUtility.broadcastToSightedPlayers(player, new SM_EMOTION(player, EmotionType.STOP_GLIDE), true);
+	}
+
+	/**
+	 * Ends the glide if he became too slow for it. Looked at whenever an effect set an abnormal state on him.
+	 */
+	public void stopGlidingIfTooSlow() {
+		if (player.isInGlidingState() && player.getGameStats().getMovementSpeedFloat() <= MIN_GLIDE_SPEED)
+			stopGlidingByServer();
 	}
 
 	/**
@@ -70,6 +92,8 @@ public class FlyController {
 	 * when FP is decreased to 0
 	 */
 	public void endFly(boolean broadcastPacket) {
+		if (player.isFlying()) // his client drops him much faster than someone who fell on foot
+			player.getMoveController().setDivingFromFlight();
 		player.unsetFlyState(FlyState.FLYING);
 		player.unsetFlyState(FlyState.GLIDING);
 		player.unsetState(CreatureState.FLYING);
@@ -207,8 +231,12 @@ public class FlyController {
 				: SM_SYSTEM_MESSAGE.STR_GLIDE_CANNOT_GLIDE_ABNORMAL_STATUS());
 			return false;
 		}
-		if (!player.canPerformMove()) {
+		if (!player.canPerformMove() || player.getEffectController().isInAnyAbnormalState(AbnormalState.CANT_GLIDE)) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GLIDE_CANNOT_GLIDE_ABNORMAL_STATUS());
+			return false;
+		}
+		if (player.getGameStats().getMovementSpeedFloat() <= MIN_GLIDE_SPEED) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GLIDE_NOT_ENOUGH_SPEED_FOR_GLIDE());
 			return false;
 		}
 		if (!player.isFlying() && player.getFlyReuseTime() > System.currentTimeMillis()) {

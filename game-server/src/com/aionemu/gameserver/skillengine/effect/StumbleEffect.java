@@ -36,7 +36,6 @@ public class StumbleEffect extends EffectTemplate {
 		effected.getEffectController().removeParalyzeEffects();
 		effected.getEffectController().removeStunEffects();
 		if (effected instanceof Player player) {
-			player.getFlyController().onStopGliding();
 			player.getController().onStopMove();
 		}
 		World.getInstance().updatePosition(effected, effect.getTargetX(), effect.getTargetY(), effect.getTargetZ(), effected.getHeading());

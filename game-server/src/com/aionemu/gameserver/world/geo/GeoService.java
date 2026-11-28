@@ -163,6 +163,24 @@ public class GeoService implements GameEngine {
 		return map.findMovementCollision(startPos, startPos.getX() + x1, startPos.getY() + y1, creature.getInstanceId());
 	}
 
+	/**
+	 * @return True if anything blocks the straight segment between the two points. The cast runs on past the target by the given distance, so a wall
+	 *         touching its edge blocks too.
+	 */
+	public boolean isSegmentBlocked(Creature creature, float x, float y, float z, float targetX, float targetY, float targetZ, float extension) {
+		if (extension != 0) {
+			Vector3f direction = new Vector3f(targetX - x, targetY - y, targetZ - z);
+			if (direction.length() > 0.001f) {
+				direction.normalizeLocal().multLocal(extension);
+				targetX += direction.getX();
+				targetY += direction.getY();
+				targetZ += direction.getZ();
+			}
+		}
+		return geoMaps.get(creature.getWorldId()).getCollisions(x, y, z, targetX, targetY, targetZ, creature.getInstanceId(),
+			CollisionIntention.DEFAULT_COLLISIONS.getId(), IgnoreProperties.ANY_RACE).getClosestCollision() != null;
+	}
+
 	private Vector3f calculateCurrentGeoPosition(Player player) {
 		WorldPosition approximatePos = player.getPosition();
 		WorldPosition lastPos = player.getMoveController().getLastPositionFromClient();

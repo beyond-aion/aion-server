@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.controllers.movement;
 
+import com.aionemu.gameserver.configs.main.GeoDataConfig;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MOVE;
@@ -8,11 +9,17 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.stats.StatFunctions;
 import com.aionemu.gameserver.world.World;
+import com.aionemu.gameserver.world.geo.GeoService;
 
 /**
  * @author ATracer base class for summon & player move controller
  */
 public abstract class PlayableMoveController<T extends Creature> extends CreatureMoveController<T> {
+
+	/** The steepest ground (its tangent) a client stands and walks on, 46°. Anything steeper it lets the character slide down. */
+	public static final float MAX_STANDING_SLOPE = (float) Math.tan(Math.toRadians(46));
+	/** How high a ledge the client walks up without jumping. */
+	private static final float STEP_HEIGHT = 0.5f;
 
 	private boolean sendMovePacket = true;
 	private final MovementModifierState movementModifierState = new MovementModifierState();
@@ -41,11 +48,13 @@ public abstract class PlayableMoveController<T extends Creature> extends Creatur
 	@Override
 	public void startMovingToDestination() {
 		updateLastMove();
-		if (owner.canPerformMove()) {
-			if (isControlled() && started.compareAndSet(false, true)) {
+		if (owner.canPerformMove() && isControlled()) {
+			started.set(true);
+			// anything which stops his movement, like a knockback, unregisters him, and without registering him again every step he would never move
+			PlayerMoveTaskManager.getInstance().addPlayer(owner);
+			if (sendMovePacket) { // send a new direction right away, instead of letting the next scheduled position update send it
 				this.movementMask = MovementMask.NPC_STARTMOVE;
 				sendForcedMovePacket();
-				PlayerMoveTaskManager.getInstance().addPlayer(owner);
 			}
 		}
 	}
@@ -94,13 +103,40 @@ public abstract class PlayableMoveController<T extends Creature> extends Creatur
 		float newX = (targetDestX - x) * distXYFraction + x;
 		float newY = (targetDestY - y) * distXYFraction + y;
 		float newZ = (targetDestZ - z) * distZFraction + z;
+		if (isControlled() && !owner.isFlying())
+			newZ = followGround(newX, newY, z, futureXYDistPassed);
 
 		/*
 		 * if ((movementMask & MovementMask.MOUSE) == 0) { targetDestX = newX + vectorX; targetDestY = newY + vectorY; targetDestZ = newZ + vectorZ; }
 		 */
 
 		World.getInstance().updatePosition(owner, newX, newY, newZ, heading, false);
+		if (isControlled()) // the client does not report where the server takes him, so nothing else would notice that he entered water or left a zone
+			owner.getController().updateZone();
 		updateLastMove();
+	}
+
+	/**
+	 * The client walks a character it lost control over along the ground towards its destination, not along the straight line to it, so neither
+	 * does the server. Ground that lies deeper than walking down the steepest slope would bring him is an edge he walks off, and he keeps his height
+	 * there for the fall to take over.
+	 *
+	 * @return The height of the ground he walks onto, or his current height if he walked off an edge.
+	 */
+	private float followGround(float x, float y, float z, float xyDistance) {
+		if (GeoDataConfig.MODE != GeoDataConfig.Mode.ON)
+			return z;
+		float maxSlopeHeight = xyDistance * MAX_STANDING_SLOPE;
+		float groundZ = GeoService.getInstance().getZ(owner.getWorldId(), x, y, z + maxSlopeHeight + STEP_HEIGHT, z - maxSlopeHeight,
+			owner.getInstanceId());
+		return Float.isNaN(groundZ) ? z : groundZ;
+	}
+
+	/**
+	 * @return True while the server walks him to a destination, until something stops him, even after he arrived.
+	 */
+	public boolean isMovingToDestination() {
+		return started.get();
 	}
 
 	@Override

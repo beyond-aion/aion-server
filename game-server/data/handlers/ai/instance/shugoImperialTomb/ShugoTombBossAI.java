@@ -13,7 +13,6 @@ import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.skill.NpcSkillEntry;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.skillengine.SkillEngine;
-import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -39,7 +38,7 @@ public class ShugoTombBossAI extends ShugoTombAttackerAI {
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
-		if (getOwner().getEffectController().isInAnyAbnormalState(AbnormalState.CANT_ATTACK_STATE) || usedSkills.get() >= getSkillList().size())
+		if (getOwner().getEffectController().isInAnyAbnormalState(getOwner().getCantAttackState()) || usedSkills.get() >= getSkillList().size())
 			return;
 
 		NpcSkillEntry entry = getSkillList().getSkillOnPosition(usedSkills.get());

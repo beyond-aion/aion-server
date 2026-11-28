@@ -35,7 +35,6 @@ public class StaggerEffect extends EffectTemplate {
 		effected.getController().cancelCurrentSkill(effect.getEffector());
 		effected.getEffectController().removeParalyzeEffects();
 		if (effected instanceof Player player) {
-			player.getFlyController().onStopGliding();
 			player.getController().onStopMove();
 		}
 		World.getInstance().updatePosition(effected, effect.getTargetX(), effect.getTargetY(), effect.getTargetZ(), effected.getHeading());

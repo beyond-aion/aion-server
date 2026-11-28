@@ -5,7 +5,6 @@ import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.model.gameobjects.Creature;
-import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.skillengine.model.Effect;
 
@@ -31,10 +30,6 @@ public class PetrificationEffect extends EffectTemplate {
 		Creature effected = effect.getEffected();
 		effected.getMoveController().abortMove();
 		effected.getController().cancelCurrentSkill(effect.getEffector());
-		// removes glide
-		if (effected instanceof Player && ((Player) effected).isInGlidingState()) {
-			((Player) effected).getFlyController().onStopGliding();
-		}
 		effect.getEffected().getEffectController().setAbnormal(AbnormalState.PETRIFICATION);
 		effect.setAbnormal(AbnormalState.PETRIFICATION);
 	}
