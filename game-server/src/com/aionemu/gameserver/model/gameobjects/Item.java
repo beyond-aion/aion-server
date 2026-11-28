@@ -744,8 +744,7 @@ public class Item extends AionObject implements Expirable, StatOwner, Persistabl
 				continue;
 			IStorage storage = player.getStorage(i.getId());
 
-			if (storage != null && storage.getItemByObjId(getObjectId()) != null) {
-				storage.delete(this);
+			if (storage != null && storage.getItemByObjId(getObjectId()) == this && storage.delete(this) != null) {
 				switch (i) {
 					case CUBE:
 						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DELETE_CASH_ITEM_BY_TIMEOUT(getL10n()));

@@ -295,6 +295,7 @@ CREATE TABLE `house_bids` (
   `player_id` int NOT NULL,
   `house_id` int NOT NULL,
   `bid` bigint NOT NULL,
+  `step` bigint NOT NULL DEFAULT '100000',
   `bid_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`player_id`,`house_id`,`bid`),
   KEY `house_id_ibfk_1` (`house_id`),

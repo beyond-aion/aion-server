@@ -581,14 +581,18 @@ public final class QuestService {
 			return true;
 		}
 
-		for (CollectItem collectItem : collectItems.getCollectItem()) {
+		List<CollectItem> costs = collectItems.getCollectItem();
+		if (removeItem && costs.size() == 1 && costs.getFirst().getItemId() == ItemId.KINAH)
+			return player.getInventory().tryDecreaseKinah(costs.getFirst().getCount());
+
+		for (CollectItem collectItem : costs) {
 			int itemId = collectItem.getItemId();
 			long count = itemId == ItemId.KINAH ? player.getInventory().getKinah() : player.getInventory().getItemCountByItemId(itemId);
 			if (collectItem.getCount() > count)
 				return false;
 		}
 		if (removeItem) {
-			for (CollectItem collectItem : collectItems.getCollectItem()) {
+			for (CollectItem collectItem : costs) {
 				if (collectItem.getItemId() == ItemId.KINAH)
 					player.getInventory().decreaseKinah(collectItem.getCount());
 				else {

@@ -53,7 +53,6 @@ public class _29057MasterConstructorsPotential extends AbstractQuestHandler {
 			int var = qs.getQuestVarById(0);
 			switch (targetId) {
 				case 798453:
-					long kinah = player.getInventory().getKinah();
 					switch (dialogActionId) {
 						case QUEST_SELECT:
 							switch (var) {
@@ -63,28 +62,21 @@ public class _29057MasterConstructorsPotential extends AbstractQuestHandler {
 									return sendQuestDialog(env, 4080);
 							}
 							return false;
-						case SETPRO10:
-							if (kinah >= 167500) { // Need check how many kinah decrased
-								if (!giveQuestItem(env, 152208541, 1))
-									return true;
-								player.getInventory().decreaseKinah(167500);
-								qs.setQuestVarById(0, 1);
-								updateQuestStatus(env);
-								PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-								return true;
-							} else
+						case SETPRO10, SETPRO20:
+							if (var != 0 && var != 2)
+								return false;
+							int fee = dialogActionId == SETPRO10 ? 167500 : 223000;
+							int recipe = dialogActionId == SETPRO10 ? 152208541 : 152208542;
+							if (!player.getInventory().tryDecreaseKinah(fee))
 								return sendQuestDialog(env, 4400);
-						case SETPRO20:
-							if (kinah >= 223000) {
-								if (!giveQuestItem(env, 152208542, 1))
-									return true;
-								player.getInventory().decreaseKinah(223000);
-								qs.setQuestVarById(0, 1);
-								updateQuestStatus(env);
-								PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
+							if (!giveQuestItem(env, recipe, 1)) {
+								player.getInventory().increaseKinah(fee);
 								return true;
-							} else
-								return sendQuestDialog(env, 4400);
+							}
+							qs.setQuestVarById(0, 1);
+							updateQuestStatus(env);
+							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
+							return true;
 					}
 					return false;
 				case 798452:

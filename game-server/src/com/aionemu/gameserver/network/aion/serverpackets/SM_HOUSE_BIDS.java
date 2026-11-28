@@ -53,7 +53,7 @@ public class SM_HOUSE_BIDS extends AionServerPacket {
 			writeD(house.getBuilding().getId());
 			writeD(house.getHouseType().getId()); // client seems to ignore this
 			writeQ(bids.getHighestBid().getKinah());
-			writeQ(100000); // what's this? the same static value is sent in CM_REGISTER_HOUSE
+			writeQ(bids.getMinimumRaise());
 			writeD(bids.getBidCount());
 			writeD(AuctionEndTask.getInstance().getRemainingAuctionSeconds(bids.getHouseObjectId()));
 		}

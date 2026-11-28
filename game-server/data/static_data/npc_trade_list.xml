@@ -7537,34 +7537,52 @@
 		<tradelist id="1545" />
 	</tradelist_template>
 	<tradelist_template npc_id="810045" buy_price_rate="200">
-		<tradelist id="394" />
-		<tradelist id="1492" />
-		<tradelist id="1544" />
+		<tradelist id="394" race="ELYOS" />
+		<tradelist id="1492" race="ELYOS" />
+		<tradelist id="1544" race="ELYOS" />
+		<tradelist id="398" race="ASMODIANS" />
+		<tradelist id="1477" race="ASMODIANS" />
+		<tradelist id="1545" race="ASMODIANS" />
 	</tradelist_template>
 	<tradelist_template npc_id="810046" buy_price_rate="200">
-		<tradelist id="394" />
-		<tradelist id="1492" />
-		<tradelist id="1544" />
+		<tradelist id="394" race="ELYOS" />
+		<tradelist id="1492" race="ELYOS" />
+		<tradelist id="1544" race="ELYOS" />
+		<tradelist id="398" race="ASMODIANS" />
+		<tradelist id="1477" race="ASMODIANS" />
+		<tradelist id="1545" race="ASMODIANS" />
 	</tradelist_template>
 	<tradelist_template npc_id="810047" buy_price_rate="200">
-		<tradelist id="394" />
-		<tradelist id="1492" />
-		<tradelist id="1544" />
+		<tradelist id="394" race="ELYOS" />
+		<tradelist id="1492" race="ELYOS" />
+		<tradelist id="1544" race="ELYOS" />
+		<tradelist id="398" race="ASMODIANS" />
+		<tradelist id="1477" race="ASMODIANS" />
+		<tradelist id="1545" race="ASMODIANS" />
 	</tradelist_template>
 	<tradelist_template npc_id="810048" buy_price_rate="200">
-		<tradelist id="394" />
-		<tradelist id="1492" />
-		<tradelist id="1544" />
+		<tradelist id="394" race="ELYOS" />
+		<tradelist id="1492" race="ELYOS" />
+		<tradelist id="1544" race="ELYOS" />
+		<tradelist id="398" race="ASMODIANS" />
+		<tradelist id="1477" race="ASMODIANS" />
+		<tradelist id="1545" race="ASMODIANS" />
 	</tradelist_template>
 	<tradelist_template npc_id="810053" buy_price_rate="200">
-		<tradelist id="394" />
-		<tradelist id="1492" />
-		<tradelist id="1544" />
+		<tradelist id="394" race="ELYOS" />
+		<tradelist id="1492" race="ELYOS" />
+		<tradelist id="1544" race="ELYOS" />
+		<tradelist id="398" race="ASMODIANS" />
+		<tradelist id="1477" race="ASMODIANS" />
+		<tradelist id="1545" race="ASMODIANS" />
 	</tradelist_template>
 	<tradelist_template npc_id="810055" buy_price_rate="200">
-		<tradelist id="394" />
-		<tradelist id="1492" />
-		<tradelist id="1544" />
+		<tradelist id="394" race="ELYOS" />
+		<tradelist id="1492" race="ELYOS" />
+		<tradelist id="1544" race="ELYOS" />
+		<tradelist id="398" race="ASMODIANS" />
+		<tradelist id="1477" race="ASMODIANS" />
+		<tradelist id="1545" race="ASMODIANS" />
 	</tradelist_template>
 	<tradelist_template npc_id="830034" buy_price_rate="200">
 		<tradelist id="1365" />

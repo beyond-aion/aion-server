@@ -14,6 +14,8 @@ import com.aionemu.gameserver.services.craft.CraftSkillUpdateService;
  */
 public class _19038MasterCooksPotential extends AbstractQuestHandler {
 
+	private static final int MATERIAL_FEE = 6500;
+
 	public _19038MasterCooksPotential() {
 		super(19038);
 	}
@@ -55,7 +57,7 @@ public class _19038MasterCooksPotential extends AbstractQuestHandler {
 					long kinah = player.getInventory().getKinah();
 					switch (dialogActionId) {
 						case QUEST_SELECT:
-							if (kinah >= 6500) {
+							if (kinah >= MATERIAL_FEE) {
 								switch (var) {
 									case 0: {
 										return sendQuestDialog(env, 1011);
@@ -98,37 +100,13 @@ public class _19038MasterCooksPotential extends AbstractQuestHandler {
 								return sendQuestDialog(env, 4400);
 							}
 						case SETPRO10:
-							player.getInventory().decreaseKinah(6500);
-							if (var == 0) {
-								return defaultCloseDialog(env, 0, 2, 152202200, 1, 0, 0); // 2
-							} else if (var == 1) {
-								return defaultCloseDialog(env, 1, 2, 152202200, 1, 0, 0); // 2
-							}
-							return false;
+							return buyMaterial(env, var, 0, 2, 152202200);
 						case SETPRO20:
-							player.getInventory().decreaseKinah(6500);
-							if (var == 3) {
-								return defaultCloseDialog(env, 3, 5, 152202201, 1, 0, 0); // 5
-							} else if (var == 4) {
-								return defaultCloseDialog(env, 4, 5, 152202201, 1, 0, 0); // 5
-							}
-							return false;
+							return buyMaterial(env, var, 3, 5, 152202201);
 						case SETPRO30:
-							player.getInventory().decreaseKinah(6500);
-							if (var == 6) {
-								return defaultCloseDialog(env, 6, 8, 152202202, 1, 0, 0); // 8
-							} else if (var == 7) {
-								return defaultCloseDialog(env, 7, 8, 152202202, 1, 0, 0); // 8
-							}
-							return false;
+							return buyMaterial(env, var, 6, 8, 152202202);
 						case SETPRO40:
-							player.getInventory().decreaseKinah(6500);
-							if (var == 9) {
-								return defaultCloseDialog(env, 9, 11, 152202203, 1, 0, 0); // 11
-							} else if (var == 10) {
-								return defaultCloseDialog(env, 10, 11, 152202203, 1, 0, 0); // 11
-							}
-							return false;
+							return buyMaterial(env, var, 9, 11, 152202203);
 						case FINISH_DIALOG:
 							return sendQuestSelectionDialog(env);
 					}
@@ -191,6 +169,18 @@ public class _19038MasterCooksPotential extends AbstractQuestHandler {
 					return true;
 			}
 		}
+		return false;
+	}
+
+	private boolean buyMaterial(QuestEnv env, int var, int step, int nextStep, int itemId) {
+		if (var != step && var != step + 1)
+			return false;
+		Player player = env.getPlayer();
+		if (!player.getInventory().tryDecreaseKinah(MATERIAL_FEE))
+			return sendQuestDialog(env, 4400);
+		if (defaultCloseDialog(env, var, nextStep, itemId, 1, 0, 0))
+			return true;
+		player.getInventory().increaseKinah(MATERIAL_FEE);
 		return false;
 	}
 }

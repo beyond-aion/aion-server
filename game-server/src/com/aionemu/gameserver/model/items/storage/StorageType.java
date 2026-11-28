@@ -41,7 +41,8 @@ public enum StorageType {
 	HOUSE_STORAGE_19(78, 27, 9), // Strong 3-Drawer Cabinet
 	HOUSE_STORAGE_20(79, 27, 9), // Firm 3-Drawer Cabinet
 	BROKER(126),
-	MAILBOX(127);
+	MAILBOX(127),
+	REPURCHASE(120); // items sold to a merchant; they stay in inventory until bought back or the player logs out
 
 	public static final int PET_BAG_MIN = 32;
 	public static final int PET_BAG_MAX = 43;

@@ -21,15 +21,14 @@ import com.aionemu.gameserver.model.templates.item.AcquisitionType;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.model.templates.item.TradeinItem;
 import com.aionemu.gameserver.model.templates.tradelist.TradeListTemplate;
+import com.aionemu.gameserver.model.templates.tradelist.TradeListTemplate.TradeTab;
 import com.aionemu.gameserver.model.templates.tradelist.TradeNpcType;
 import com.aionemu.gameserver.model.trade.TradeItem;
 import com.aionemu.gameserver.model.trade.TradeList;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.restrictions.PlayerRestrictions;
 import com.aionemu.gameserver.services.abyss.AbyssPointsService;
-import com.aionemu.gameserver.services.item.ItemFactory;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemAddType;
-import com.aionemu.gameserver.services.item.ItemPacketService.ItemDeleteType;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.item.ItemService.ItemUpdatePredicate;
@@ -49,14 +48,15 @@ public class TradeService {
 	private static final GoodsListData goodsListData = DataManager.GOODSLIST_DATA;
 
 	public static List<Integer> getTradeListTabIds(TradeListTemplate tradeListTemplate, Player player) {
-		List<Integer> tradeTabIds = tradeListTemplate.getTradeTabIds();
 		int legionLevel = player.getLegion() == null ? 0 : player.getLegion().getLegionLevel();
 		List<Integer> filteredTradeTabIds = new ArrayList<>();
-		for (Integer tradeTabId : tradeTabIds) {
-			GoodsList goodsList = goodsListData.getGoodsListById(tradeTabId);
+		for (TradeTab tradeTab : tradeListTemplate.getTradeTabs()) {
+			if (!tradeTab.isAvailableFor(player.getRace()))
+				continue;
+			GoodsList goodsList = goodsListData.getGoodsListById(tradeTab.getId());
 			if (goodsList == null || goodsList.getLegionLevel() > legionLevel)
 				continue;
-			filteredTradeTabIds.add(tradeTabId);
+			filteredTradeTabIds.add(tradeTab.getId());
 		}
 		return filteredTradeTabIds;
 	}
@@ -238,31 +238,20 @@ public class TradeService {
 			sales.add(new Sale(item, count, sellReward));
 		}
 
-		long kinahReward = 0;
-		List<Item> items = new ArrayList<>();
-		for (Sale sale : sales) {
-			Item item = sale.item();
-			long count = PlayerLimitService.updateSellLimit(player, sale.sellReward(), sale.count());
-			if (count == 0)
-				break;
-
-			long realReward = sale.sellReward() * count;
-			Item repurchaseItem;
-			if (item.getItemCount() == count) {
-				inventory.delete(item, ItemDeleteType.SELL);
-				repurchaseItem = item;
-			} else {
-				repurchaseItem = ItemFactory.newItem(item.getItemId(), count);
-				repurchaseItem.setExpireTime(item.getExpireTime());
-				inventory.decreaseItemCount(item, count);
+		synchronized (player.getItemSaveLock()) {
+			List<Item> items = new ArrayList<>();
+			for (Sale sale : sales) {
+				if (!PlayerLimitService.sellWithinLimit(player, sale.sellReward(), sale.count(), count -> {
+					if (sale.sellReward() > Long.MAX_VALUE / count)
+						return false;
+					Item sold = inventory.sellForRepurchase(player, sale.item(), count, sale.sellReward() * count);
+					return sold != null && items.add(sold);
+				}))
+					break;
 			}
-
-			kinahReward += realReward;
-			repurchaseItem.setRepurchasePrice(realReward);
-			items.add(repurchaseItem);
+			if (!items.isEmpty())
+				RepurchaseService.getInstance().addRepurchaseItems(player, items);
 		}
-		RepurchaseService.getInstance().addRepurchaseItems(player, items);
-		inventory.increaseKinah(kinahReward, ItemUpdateType.INC_KINAH_SELL);
 
 		return true;
 	}

@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
+import com.aionemu.gameserver.configs.main.GroupConfig;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.alliance.PlayerAlliance;
 import com.aionemu.gameserver.model.team.common.legacy.LootGroupRules;
@@ -51,6 +52,9 @@ public class LeagueService {
 		} else if (!invited.isOnline()) {
 			// The player you invited to the Alliance League is currently offline.
 			PacketSendUtility.sendPacket(inviter, SM_SYSTEM_MESSAGE.STR_UNION_OFFLINE_MEMBER());
+			return false;
+		} else if (invited.getRace() != inviter.getRace() && !GroupConfig.ALLIANCE_INVITEOTHERFACTION) {
+			PacketSendUtility.sendPacket(inviter, SM_SYSTEM_MESSAGE.STR_PARTY_CANT_INVITE_OTHER_RACE());
 			return false;
 		} else if (invited.getPlayerAlliance() == null) {
 			// Currently, %0 cannot accept your invitation to join the alliance.

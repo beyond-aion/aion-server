@@ -48,37 +48,11 @@ public class _2430SecretInformation extends AbstractQuestHandler {
 					case FINISH_DIALOG:
 						return sendQuestSelectionDialog(env);
 					case SETPRO1:
-						if (player.getInventory().getKinah() >= 500) {
-							if (QuestService.startQuest(env)) {
-								player.getInventory().decreaseKinah(500);
-								changeQuestStep(env, 0, 1); // 1
-								return sendQuestDialog(env, 1352);
-							}
-						} else {
-							return sendQuestDialog(env, 1267);
-						}
-						return false;
+						return startForFee(env, 500, 1, 1352);
 					case SETPRO3:
-						if (player.getInventory().getKinah() >= 5000) {
-							if (QuestService.startQuest(env)) {
-								player.getInventory().decreaseKinah(5000);
-								changeQuestStep(env, 0, 3); // 3
-								return sendQuestDialog(env, 2034);
-							}
-						} else {
-							return sendQuestDialog(env, 1267);
-						}
-						return false;
+						return startForFee(env, 5000, 3, 2034);
 					case SETPRO7:
-						if (player.getInventory().getKinah() >= 50000) {
-							if (QuestService.startQuest(env)) {
-								player.getInventory().decreaseKinah(50000);
-								changeQuestStep(env, 0, 7); // 7
-								return sendQuestDialog(env, 3398);
-							}
-						} else {
-							return sendQuestDialog(env, 1267);
-						}
+						return startForFee(env, 50000, 7, 3398);
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
@@ -194,5 +168,20 @@ public class _2430SecretInformation extends AbstractQuestHandler {
 			}
 		}
 		return false;
+	}
+
+	/**
+	 * Takes the fee first and gives it back if the quest could not be started, so the quest never starts unpaid.
+	 */
+	private boolean startForFee(QuestEnv env, long fee, int step, int dialogId) {
+		Player player = env.getPlayer();
+		if (!player.getInventory().tryDecreaseKinah(fee))
+			return sendQuestDialog(env, 1267);
+		if (!QuestService.startQuest(env)) {
+			player.getInventory().increaseKinah(fee);
+			return false;
+		}
+		changeQuestStep(env, 0, step); // the quest has just started at step 0
+		return sendQuestDialog(env, dialogId);
 	}
 }

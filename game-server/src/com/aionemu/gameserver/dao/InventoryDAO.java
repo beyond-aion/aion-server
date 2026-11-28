@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.ToIntFunction;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,6 +41,7 @@ public class InventoryDAO {
 	public static final String SELECT_ACCOUNT_QUERY = "SELECT `account_id` FROM `players` WHERE `id`=?";
 	public static final String SELECT_LEGION_QUERY = "SELECT `legion_id` FROM `legion_members` WHERE `player_id`=?";
 	public static final String DELETE_ACCOUNT_WH = "DELETE FROM inventory WHERE item_owner=? AND item_location=2";
+	public static final String DELETE_ALL_REPURCHASE_QUERY = "DELETE FROM inventory WHERE item_location=?";
 
 	public static void loadStorage(int ownerId, Storage storage) {
 		loadItems(ownerId, storage.getStorageType(), storage::onLoadHandler);
@@ -260,17 +262,27 @@ public class InventoryDAO {
 	}
 
 	public static boolean store(List<Item> items, Integer playerId, Integer accountId, Integer legionId) {
-		return store(items, playerId, accountId, legionId, null);
+		return store(items, playerId, item -> getItemOwnerId(item, playerId, accountId, legionId), false, null);
+	}
+
+	public static boolean storeAtomically(List<Item> items, int playerId) {
+		return store(items, playerId, item -> playerId, true, null);
+	}
+
+	public static boolean storePrivateStoreSale(List<Item> buyerItems, int buyerId, List<Item> sellerItems, int sellerId) {
+		List<Item> items = new ArrayList<>(buyerItems);
+		items.addAll(sellerItems);
+		return store(items, buyerId, item -> sellerItems.contains(item) ? sellerId : buyerId, true, null);
 	}
 
 	/**
 	 * Saves the items together with the broker listings in one transaction.
 	 */
 	static boolean storeWithBrokerItems(List<Item> items, int playerId, List<BrokerItem> listings) {
-		return store(items, playerId, null, null, listings);
+		return store(items, playerId, item -> getItemOwnerId(item, playerId, null, null), true, listings);
 	}
 
-	private static boolean store(List<Item> items, Integer playerId, Integer accountId, Integer legionId, List<BrokerItem> listings) {
+	private static boolean store(List<Item> items, Integer playerId, ToIntFunction<Item> ownerId, boolean atomic, List<BrokerItem> listings) {
 		int[] changeCounts = new int[items.size()];
 		PersistentState[] savedStates = new PersistentState[items.size()];
 		List<Item> itemsToUpdate = new ArrayList<>();
@@ -300,12 +312,14 @@ public class InventoryDAO {
 		boolean[] listingWritten = null;
 		try (Connection con = DatabaseFactory.getConnection()) {
 			con.setAutoCommit(false);
-			deleteResult = deleteItems(con, itemsToDelete);
-			insertResult = insertItems(con, itemsToInsert, playerId, accountId, legionId, listings == null);
-			updateResult = updateItems(con, itemsToUpdate, playerId, accountId, legionId, listings == null);
+			deleteResult = deleteItems(con, itemsToDelete, !atomic);
+			insertResult = insertItems(con, itemsToInsert, ownerId, !atomic);
+			updateResult = updateItems(con, itemsToUpdate, ownerId, !atomic);
+			if (atomic && (!deleteResult || !insertResult || !updateResult)) {
+				con.rollback();
+				return false;
+			}
 			if (listings != null) {
-				if (!insertResult || !updateResult)
-					return false;
 				listingSnapshots = new BrokerItem.SaveSnapshot[listings.size()];
 				listingWritten = new boolean[listings.size()];
 				for (int i = 0; i < listings.size(); i++) {
@@ -313,11 +327,12 @@ public class InventoryDAO {
 					listingSnapshots[i] = listing.snapshotForSave();
 					listingWritten[i] = BrokerDAO.write(con, listing, listingSnapshots[i]);
 				}
-				con.commit();
 			}
+			if (atomic)
+				con.commit();
 		} catch (SQLException e) {
 			log.error("Can't save inventory for player: {}", playerId, e);
-			if (listings != null)
+			if (atomic)
 				return false;
 		}
 
@@ -358,7 +373,7 @@ public class InventoryDAO {
 		return playerId;
 	}
 
-	private static boolean insertItems(Connection con, Collection<Item> items, Integer playerId, Integer accountId, Integer legionId, boolean commit) {
+	private static boolean insertItems(Connection con, Collection<Item> items, ToIntFunction<Item> ownerId, boolean commit) {
 
 		if (GenericValidator.isBlankOrNull(items)) {
 			return true;
@@ -374,7 +389,7 @@ public class InventoryDAO {
 				stmt.setString(6, item.getItemCreator());
 				stmt.setInt(7, item.getExpireTime());
 				stmt.setInt(8, item.getActivationCount());
-				stmt.setInt(9, getItemOwnerId(item, playerId, accountId, legionId));
+				stmt.setInt(9, ownerId.applyAsInt(item));
 				stmt.setBoolean(10, item.isEquipped());
 				stmt.setInt(11, item.isSoulBound() ? 1 : 0);
 				stmt.setLong(12, item.getEquipmentSlot());
@@ -408,7 +423,7 @@ public class InventoryDAO {
 		return true;
 	}
 
-	private static boolean updateItems(Connection con, Collection<Item> items, Integer playerId, Integer accountId, Integer legionId, boolean commit) {
+	private static boolean updateItems(Connection con, Collection<Item> items, ToIntFunction<Item> ownerId, boolean commit) {
 
 		if (GenericValidator.isBlankOrNull(items)) {
 			return true;
@@ -422,7 +437,7 @@ public class InventoryDAO {
 				stmt.setString(4, item.getItemCreator());
 				stmt.setInt(5, item.getExpireTime());
 				stmt.setInt(6, item.getActivationCount());
-				stmt.setInt(7, getItemOwnerId(item, playerId, accountId, legionId));
+				stmt.setInt(7, ownerId.applyAsInt(item));
 				stmt.setBoolean(8, item.isEquipped());
 				stmt.setInt(9, item.isSoulBound() ? 1 : 0);
 				stmt.setLong(10, item.getEquipmentSlot());
@@ -457,7 +472,7 @@ public class InventoryDAO {
 		return true;
 	}
 
-	private static boolean deleteItems(Connection con, Collection<Item> items) {
+	private static boolean deleteItems(Connection con, Collection<Item> items, boolean commit) {
 
 		if (GenericValidator.isBlankOrNull(items)) {
 			return true;
@@ -470,7 +485,8 @@ public class InventoryDAO {
 			}
 
 			stmt.executeBatch();
-			con.commit();
+			if (commit)
+				con.commit();
 		} catch (Exception e) {
 			log.error("Failed to execute delete batch", e);
 			return false;
@@ -490,6 +506,18 @@ public class InventoryDAO {
 			return false;
 		}
 		return true;
+	}
+
+	/**
+	 * Removes all items left in the repurchase stock of the previous server run.
+	 */
+	public static void deleteAllRepurchaseItems() {
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(DELETE_ALL_REPURCHASE_QUERY)) {
+			stmt.setInt(1, StorageType.REPURCHASE.getId());
+			stmt.execute();
+		} catch (Exception e) {
+			log.error("Error deleting all repurchase items", e);
+		}
 	}
 
 	public static void deleteAccountWH(int accountId) {

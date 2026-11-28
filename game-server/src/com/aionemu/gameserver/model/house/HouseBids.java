@@ -14,20 +14,31 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
  */
 public class HouseBids {
 
+	/**
+	 * The minimum raise the client sends when a player registers a house, and the one of auctions the server starts.
+	 */
+	public static final long DEFAULT_MINIMUM_RAISE = 100_000;
+	/**
+	 * Sanity cap for amounts a (modified) client may send: retail checks no maximum bid at all, neither server nor client side. The cap keeps every
+	 * raise, fee, refund and kinah credit below inside a safe long range.
+	 */
+	public static final long MAXIMUM_BID = 9_999_999_999L;
 	private static final AtomicInteger counter = new AtomicInteger();
 	private final int listIndex;
 	private final int houseObjectId;
 	private final long registrationFee;
+	private final long minimumRaise;
 	private final List<Bid> bids = new ArrayList<>();
 
-	public HouseBids(int houseObjectId, long initialPrice) {
-		this(houseObjectId, initialPrice, System.currentTimeMillis());
+	public HouseBids(int houseObjectId, long initialPrice, long minimumRaise) {
+		this(houseObjectId, initialPrice, minimumRaise, System.currentTimeMillis());
 	}
 
-	public HouseBids(int houseObjectId, long initialPrice, long time) {
+	public HouseBids(int houseObjectId, long initialPrice, long minimumRaise, long time) {
 		this.listIndex = counter.incrementAndGet();
 		this.houseObjectId = houseObjectId;
 		this.registrationFee = (long) (initialPrice * HousingConfig.AUCTION_REGISTRATION_FEE_PERCENT);
+		this.minimumRaise = minimumRaise;
 		bids.add(new Bid(0, initialPrice, time));
 	}
 
@@ -39,24 +50,41 @@ public class HouseBids {
 		return houseObjectId;
 	}
 
+	public long getMinimumRaise() {
+		return minimumRaise;
+	}
+
 	/**
-	 * @return Players bid if bidding was successful, meaning he is the highest bidder.
+	 * @return The least a bid must offer: the starting price for the first bid, then the highest bid plus the minimum raise.
 	 */
-	public Bid bid(Player player, long bidKinah) {
-		return bid(player.getObjectId(), bidKinah, System.currentTimeMillis());
+	public synchronized long getMinimumBid() {
+		Bid highestBid = getHighestBid();
+		long highest = highestBid.getKinah();
+		if (highestBid == getInitialOffer())
+			return highest;
+		return minimumRaise > MAXIMUM_BID - highest ? MAXIMUM_BID + 1 : highest + minimumRaise;
 	}
 
 	/**
 	 * @return Players bid if bidding was successful, meaning he is the highest bidder.
 	 */
-	public synchronized Bid bid(int playerObjectId, long bidKinah, long time) {
-		Bid highestBid = getHighestBid();
-		if (highestBid.getKinah() < bidKinah || highestBid == getInitialOffer() && highestBid.getKinah() == bidKinah) {
-			Bid bid = new Bid(playerObjectId, bidKinah, time);
-			bids.add(bid);
-			return bid;
-		}
-		return null;
+	public synchronized Bid bid(Player player, long bidKinah) {
+		if (!isValidAuctionAmount(bidKinah) || bidKinah < getMinimumBid())
+			return null;
+		return restoreBid(player.getObjectId(), bidKinah, System.currentTimeMillis());
+	}
+
+	public static boolean isValidAuctionAmount(long amount) {
+		return amount > 0 && amount <= MAXIMUM_BID;
+	}
+
+	/**
+	 * Adds a bid that was accepted before, in the order they were made.
+	 */
+	public synchronized Bid restoreBid(int playerObjectId, long bidKinah, long time) {
+		Bid bid = new Bid(playerObjectId, bidKinah, time);
+		bids.add(bid);
+		return bid;
 	}
 
 	public boolean isHighestBidder(Player player) {
@@ -148,6 +176,10 @@ public class HouseBids {
 
 		public long getTime() {
 			return time;
+		}
+
+		public long getMinimumRaise() {
+			return minimumRaise;
 		}
 
 		public long calculateSalesCommission() {

@@ -5,6 +5,7 @@ import java.util.Set;
 import com.aionemu.gameserver.configs.main.HousingConfig;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.house.House;
+import com.aionemu.gameserver.model.house.HouseBids;
 import com.aionemu.gameserver.model.templates.housing.HouseType;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
@@ -27,13 +28,13 @@ public class CM_REGISTER_HOUSE extends AionClientPacket {
 	@Override
 	protected void readImpl() {
 		bidKinah = readQ();
-		readQ(); // minimum raise of each later bid, the client always sends 100000
+		readQ(); // minimum raise of each later bid, ignored: the client always sends HouseBids.DEFAULT_MINIMUM_RAISE
 	}
 
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
-		if (bidKinah <= 0) {
+		if (!HouseBids.isValidAuctionAmount(bidKinah)) {
 			AuditLogger.log(player, "tried to auction their house for " + bidKinah + " kinah");
 			return;
 		}

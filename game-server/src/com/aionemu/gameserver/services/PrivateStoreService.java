@@ -12,6 +12,7 @@ import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PrivateStore;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
+import com.aionemu.gameserver.model.items.storage.Storage;
 import com.aionemu.gameserver.model.trade.TradeItem;
 import com.aionemu.gameserver.model.trade.TradeList;
 import com.aionemu.gameserver.model.trade.TradePSItem;
@@ -19,7 +20,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PRIVATE_STORE_NAME;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.RecallService.CancelReason;
-import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
@@ -129,15 +129,16 @@ public class PrivateStoreService {
 	 * This method will move the item to the new player and move kinah to item owner
 	 */
 	public static void sellStoreItem(Player seller, Player buyer, TradeList tradeList) {
-		if (!seller.isOnline() || !buyer.isOnline() || seller.getRace() != buyer.getRace())
+		if (seller == buyer || !seller.isOnline() || !buyer.isOnline() || seller.getRace() != buyer.getRace())
 			return;
 
 		PrivateStore store = seller.getStore();
 		if (store == null)
 			return;
 
-		long refund = 0;
 		synchronized (store) { // buyers must not take the same stack twice: the store count is the only limit
+			if (seller.getStore() != store)
+				return;
 			List<TradePSItem> boughtItems = getBoughtItems(seller, buyer, store, tradeList);
 			if (boughtItems == null || boughtItems.isEmpty())
 				return; // Invalid items found or store was empty
@@ -167,52 +168,32 @@ public class PrivateStoreService {
 					return;
 			}
 
-			if (!buyer.getInventory().tryDecreaseKinah(price))
+			if (buyer.getInventory().getKinah() < price)
 				return;
 
 			for (TradePSItem boughtItem : boughtItems) {
 				Item item = seller.getInventory().getItemByObjId(boughtItem.getItemObjId());
-				long soldCount = item == null ? 0 : decreaseItemFromPlayer(seller, store, item, boughtItem);
-				if (soldCount < boughtItem.getCount())
-					refund += boughtItem.getPrice() * (boughtItem.getCount() - soldCount);
-				if (soldCount == 0)
+				if (item == null)
 					continue;
-				// unpack
-				if (item.getPackCount() > 0)
-					item.setPackCount(item.getPackCount() - 1);
-
-				ItemService.addItem(buyer, item, soldCount);
+				long soldCount = boughtItem.getCount();
+				long itemPrice = boughtItem.getPrice() * soldCount;
+				if (!Storage.sellPrivateStoreItem(seller, buyer, item, soldCount, itemPrice))
+					continue;
+				TradePSItem storeItem = store.getTradeItemByObjId(item.getObjectId());
+				storeItem.decreaseCount(soldCount);
+				if (storeItem.getCount() == 0)
+					store.removeItem(item.getObjectId());
 
 				if (soldCount == 1)
 					PacketSendUtility.sendPacket(seller, SM_SYSTEM_MESSAGE.STR_MSG_PERSONAL_SHOP_SELL_ITEM(item.getL10n()));
 				else
 					PacketSendUtility.sendPacket(seller, SM_SYSTEM_MESSAGE.STR_MSG_PERSONAL_SHOP_SELL_ITEM_MULTI(item.getL10n(), soldCount));
 				log.info("[PRIVATE STORE] > [Seller: {}] sold [Item: {}][Amount: {}] to [Buyer: {}] for [Price: {}]", seller.getName(),
-					item.getItemId(), soldCount, buyer.getName(), boughtItem.getPrice() * soldCount);
+					item.getItemId(), soldCount, buyer.getName(), itemPrice);
 			}
-			if (refund > 0)
-				buyer.getInventory().increaseKinah(refund);
-			seller.getInventory().increaseKinah(price - refund);
+			if (store.getSoldItems().isEmpty() && seller.getStore() == store)
+				closePrivateStore(seller);
 		}
-
-		if (store.getSoldItems().isEmpty())
-			closePrivateStore(seller);
-	}
-
-	/**
-	 * Decrease item count and update inventory
-	 * 
-	 * @return the removed amount, which may be less than requested
-	 */
-	private static long decreaseItemFromPlayer(Player seller, PrivateStore store, Item item, TradePSItem boughtItem) {
-		long soldCount = boughtItem.getCount() - seller.getInventory().decreaseItemCount(item, boughtItem.getCount());
-		if (soldCount <= 0)
-			return 0;
-		TradePSItem storeItem = store.getTradeItemByObjId(item.getObjectId());
-		storeItem.decreaseCount(soldCount);
-		if (storeItem.getCount() == 0)
-			store.removeItem(item.getObjectId());
-		return soldCount;
 	}
 
 	/**

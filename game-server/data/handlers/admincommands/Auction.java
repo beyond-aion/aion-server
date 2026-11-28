@@ -10,6 +10,7 @@ import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.house.House;
+import com.aionemu.gameserver.model.house.HouseBids;
 import com.aionemu.gameserver.model.templates.housing.HouseType;
 import com.aionemu.gameserver.services.HousingBidService;
 import com.aionemu.gameserver.services.HousingService;
@@ -23,14 +24,15 @@ public class Auction extends AdminCommand {
 
 	public Auction() {
 		super("auction", "Adds or removes houses to/from auction.", """
-			<address> [starting price] - Auctions the given house.
-			<zone> <house type> <count> [starting price] - Auctions free houses of given type that are in the specified zone.
-			<asmo|ely> <house type> <count> [starting price] - Auctions free asmodian or elysean houses of given type.
+			<address> [starting price] [minimum raise] - Auctions the given house.
+			add <zone> <house type> <count> [starting price] [minimum raise] - Auctions free houses of given type that are in the specified zone.
+			add <asmo|ely> <house type> <count> [starting price] [minimum raise] - Auctions free asmodian or elysean houses of given type.
 			end <address|zone> - Ends the auction for given house(s), transferring ownership to the highest bidder.
 			cancel <address|zone> - Cancels the auction for given house(s).
 			Zone: Zone name from zones xml files
 			House type: house, mansion, estate, palace
 			If no starting price is given, default will be taken from templates.
+			Each bid after the first has to raise the highest bid by at least the minimum raise (default: 100000).
 			""");
 	}
 
@@ -84,14 +86,17 @@ public class Auction extends AdminCommand {
 				return;
 			}
 			long price = params.length < 2 ? house.getDefaultAuctionPrice() : Long.parseLong(params[1]);
-			if (price <= 0) {
-				sendInfo(admin, "Starting price must be positive.");
+			long minimumRaise = params.length < 3 ? HouseBids.DEFAULT_MINIMUM_RAISE : Long.parseLong(params[2]);
+			if (!HouseBids.isValidAuctionAmount(price) || !HouseBids.isValidAuctionAmount(minimumRaise)) {
+				sendInfo(admin, "Starting price and minimum raise must be between 1 and " + HouseBids.MAXIMUM_BID + ".");
 				return;
 			}
-			HousingBidService.getInstance().auction(house, price);
-			sendInfo(admin, "Address " + address + " was auctioned successfully.");
+			if (HousingBidService.getInstance().auction(house, price, minimumRaise))
+				sendInfo(admin, "Address " + address + " was auctioned successfully.");
+			else
+				sendInfo(admin, "Could not auction address " + address + ".");
 		} else if ("add".equals(params[0])) {
-			if (params.length < 4 || params.length > 5) {
+			if (params.length < 4 || params.length > 6) {
 				sendInfo(admin);
 				return;
 			}
@@ -119,15 +124,16 @@ public class Auction extends AdminCommand {
 				return;
 			}
 			long price = params.length < 5 ? houses.getFirst().getDefaultAuctionPrice() : Long.parseLong(params[4]);
-			if (price <= 0) {
-				sendInfo(admin, "Starting price must be positive.");
+			long minimumRaise = params.length < 6 ? HouseBids.DEFAULT_MINIMUM_RAISE : Long.parseLong(params[5]);
+			if (!HouseBids.isValidAuctionAmount(price) || !HouseBids.isValidAuctionAmount(minimumRaise)) {
+				sendInfo(admin, "Starting price and minimum raise must be between 1 and " + HouseBids.MAXIMUM_BID + ".");
 				return;
 			}
 
 			int counter = 0;
 			Collections.shuffle(houses);
 			for (House house : houses) {
-				if (HousingBidService.getInstance().auction(house, price) && ++counter > maxCount)
+				if (HousingBidService.getInstance().auction(house, price, minimumRaise) && ++counter >= maxCount)
 					break;
 			}
 
