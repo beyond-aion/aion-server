@@ -501,10 +501,15 @@ public class SiegeService {
 		}
 	}
 
+	private boolean isForSiegeLocation(final SpawnTemplate spawnTemplate, final int siegeLocationId) {
+		return spawnTemplate instanceof SiegeSpawnTemplate spawn && spawn.getSiegeId() == siegeLocationId;
+	}
+
 	public void deSpawnNpcs(int siegeLocationId) {
 		// iterate over an array copy, since onDelete directly modifies the underlying collection
 		for (Object siegeNpc : World.getInstance().getLocalSiegeNpcs(siegeLocationId).toArray())
 			((SiegeNpc) siegeNpc).getController().delete();
+		RespawnService.cancelRespawns(spawnTemplate -> isForSiegeLocation(spawnTemplate, siegeLocationId));
 	}
 
 	public boolean isRespawnAllowed(Npc npc) {
